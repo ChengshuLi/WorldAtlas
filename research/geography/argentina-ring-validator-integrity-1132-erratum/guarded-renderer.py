@@ -16,6 +16,7 @@ import json
 import os
 from pathlib import Path
 import platform
+import re
 import subprocess
 import sys
 import tempfile
@@ -46,6 +47,8 @@ PINNED_PRODUCT_PATHS = {
     "reproduction-report.json": "data/regional-review/argentina-ring-classification-953-20261006/output/reproduction-report.json",
     "reproducibility.json": "data/regional-review/argentina-ring-classification-953-20261006/output/reproducibility.json",
 }
+SOURCE_REGISTER = "data/regional-review/argentina-adm2-source-revalidation-443/source-register.json"
+SOURCE_METADATA = "data/regional-review/argentina-adm2-source-revalidation-443/source/geoBoundaries-2020/geoBoundaries-ARG-ADM2-metaData.json"
 
 
 def digest(raw: bytes) -> str:
@@ -224,6 +227,17 @@ def main(argv=None) -> int:
         if run_one[product] != baseline.pinned_bytes(source_path):
             raise ValueError("Actual output differs from its exact prior corrected-output pin: " + product)
     summary = inspect_products(run_one, ids, baseline.pinned_bytes(REQUIRED_INPUTS["table"]))
+    register = json.loads(baseline.pinned_bytes(SOURCE_REGISTER))
+    source_rows = [row for row in register["sources"] if row.get("id") == "geoboundaries-arg-adm2-2020-scoped-214"]
+    if len(source_rows) != 1 or not isinstance(source_rows[0].get("original_full_object", {}).get("feature_count"), int):
+        raise ValueError("Pinned #443 source register lacks its unique full-object feature-count record")
+    prior_full_count = source_rows[0]["original_full_object"]["feature_count"]
+    metadata = json.loads(baseline.pinned_bytes(SOURCE_METADATA))
+    declared_count = metadata.get("admUnitCount")
+    if isinstance(declared_count, str) and re.fullmatch(r"(?:0|[1-9][0-9]*)", declared_count):
+        declared_count = int(declared_count)
+    if not isinstance(declared_count, int) or isinstance(declared_count, bool):
+        raise ValueError("Pinned geoBoundaries metadata lacks a numeric ADM2 declared count")
     product_hashes = {name: digest(raw) for name, raw in sorted(run_one.items())}
     consumed = {
         "version": 1,
@@ -247,7 +261,10 @@ def main(argv=None) -> int:
                        "all_four_pinned_products_match": True}
     outputs = dict(run_one)
     outputs["consumed-inputs.json"] = (json.dumps(consumed, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode()
-    outputs["run-summary.json"] = (json.dumps({"issue": 1351, "scope": "Argentina ADM2 exact 214 subjects", **summary,
+    outputs["run-summary.json"] = (json.dumps({"issue": 1351, "scope": "Argentina ADM2 exact 214 subjects",
+        "prior_full_source_register_feature_count": prior_full_count,
+        "source_metadata_admUnitCount": declared_count,
+        **summary,
         "geographic_limits": ["2020 retained source vintage only; no current legal-boundary adjudication.",
         "The pinned #443 source register records 525 features for the restored full object, while its pinned metadata declares 526 ADM2 units; the mismatch remains unresolved.",
         "Interior-ring presence does not determine physical or legal meaning; no regional approval, import or publication is claimed."]}, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode()

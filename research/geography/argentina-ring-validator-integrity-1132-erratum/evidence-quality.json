@@ -1138,12 +1138,56 @@
       "status": "added"
     },
     {
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/consumed-inputs.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/corrected-findings.csv",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/guarded-reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/regression-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/reproduction-report.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/ring-measurements.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/run-summary.json",
+      "status": "added"
+    },
+    {
       "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/evidence-quality.json",
       "status": "added"
     }
   ],
   "commands": [
-    "python3 research/geography/argentina-ring-validator-integrity-1132-erratum/guarded-renderer.py --vintage argentina-ring-integrity-20261008-final",
+    "python3 research/geography/argentina-ring-validator-integrity-1132-erratum/guarded-renderer.py --vintage argentina-ring-integrity-20261008-final2",
     "python3 -m unittest discover -s research/geography/argentina-ring-validator-integrity-1132-erratum -p test_guarded_renderer.py"
   ],
   "conclusions": [
@@ -1161,7 +1205,7 @@
         "geoboundaries-metadata-schema"
       ],
       "status": "unresolved",
-      "text": "National completeness remains unresolved: the prior pinned #443 source register records 525 full-object features while the pinned metadata declares 526 ADM2 units; this 214-subject correction identifies no missing national feature."
+      "text": "National completeness remains unresolved: the prior pinned #443 source register records 525 full-object features while pinned metadata declares 526 ADM2 units; this 214-subject correction identifies no missing national feature."
     },
     {
       "source_ids": [
@@ -1196,67 +1240,39 @@
   ],
   "metric_bindings": [
     {
-      "input_file": {
-        "commit": "0f08ca8c451e71bb3b06cb5fb82988e92d3048ab",
-        "path": "data/regional-review/argentina-ring-classification-953-20261006/scope.json"
-      },
-      "input_sha256": "c19e6484a89031544b2658ea3804a97e6ee616233ec5821f6e71e91aa3673a08",
+      "json_pointer": "/subjects",
       "metric_id": "argentina-adm2-scope-subjects",
-      "role": "Reproduction/source record directly bound to numeric result"
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/run-summary.json"
     },
     {
-      "input_file": {
-        "commit": "candidate",
-        "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final/ring-measurements.json"
-      },
-      "input_sha256": "23a9a5c84acd1cabf7fd49b399d97126599e712544289c45b4563c8d634edcd9",
+      "json_pointer": "/zero_ring_subjects",
       "metric_id": "argentina-2020-zero-ring-subjects",
-      "role": "Reproduction/source record directly bound to numeric result"
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/run-summary.json"
     },
     {
-      "input_file": {
-        "commit": "candidate",
-        "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final/ring-measurements.json"
-      },
-      "input_sha256": "23a9a5c84acd1cabf7fd49b399d97126599e712544289c45b4563c8d634edcd9",
+      "json_pointer": "/positive_ring_subjects",
       "metric_id": "argentina-2020-positive-ring-subjects",
-      "role": "Reproduction/source record directly bound to numeric result"
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/run-summary.json"
     },
     {
-      "input_file": {
-        "commit": "candidate",
-        "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final/ring-measurements.json"
-      },
-      "input_sha256": "23a9a5c84acd1cabf7fd49b399d97126599e712544289c45b4563c8d634edcd9",
+      "json_pointer": "/total_interior_rings",
       "metric_id": "argentina-2020-interior-rings-total",
-      "role": "Reproduction/source record directly bound to numeric result"
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/run-summary.json"
     },
     {
-      "input_file": {
-        "commit": "candidate",
-        "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final/run-summary.json"
-      },
-      "input_sha256": "2f0369d01d475b2fb0c19bfd3a31261bad4ea441b660126aaeba098180ae6d6a",
+      "json_pointer": "/changed_false_flag_count",
       "metric_id": "argentina-ring-false-flags-corrected",
-      "role": "Reproduction/source record directly bound to numeric result"
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/run-summary.json"
     },
     {
-      "input_file": {
-        "commit": "0f08ca8c451e71bb3b06cb5fb82988e92d3048ab",
-        "path": "data/regional-review/argentina-adm2-source-revalidation-443/source-register.json"
-      },
-      "input_sha256": "45fe185ca1d4ef69c391723295bd134840df99c7eb8d4be44eb6ed59cd90fb22",
+      "json_pointer": "/prior_full_source_register_feature_count",
       "metric_id": "argentina-443-source-register-recorded-feature-count",
-      "role": "Reproduction/source record directly bound to numeric result"
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/run-summary.json"
     },
     {
-      "input_file": {
-        "commit": "0f08ca8c451e71bb3b06cb5fb82988e92d3048ab",
-        "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/geoBoundaries-2020/geoBoundaries-ARG-ADM2-metaData.json"
-      },
-      "input_sha256": "17452b82df4498c1b29a4489bd78709cef922b453579b1a47010dfd2524a7ce2",
+      "json_pointer": "/source_metadata_admUnitCount",
       "metric_id": "argentina-source-metadata-declared-adm2",
-      "role": "Reproduction/source record directly bound to numeric result"
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/run-summary.json"
     }
   ],
   "metrics": [
@@ -1277,7 +1293,7 @@
       "id": "argentina-2020-zero-ring-subjects",
       "input_file": {
         "commit": "candidate",
-        "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final/ring-measurements.json"
+        "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/ring-measurements.json"
       },
       "input_sha256": "23a9a5c84acd1cabf7fd49b399d97126599e712544289c45b4563c8d634edcd9",
       "unit": "subjects",
@@ -1289,7 +1305,7 @@
       "id": "argentina-2020-positive-ring-subjects",
       "input_file": {
         "commit": "candidate",
-        "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final/ring-measurements.json"
+        "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/ring-measurements.json"
       },
       "input_sha256": "23a9a5c84acd1cabf7fd49b399d97126599e712544289c45b4563c8d634edcd9",
       "unit": "subjects",
@@ -1301,7 +1317,7 @@
       "id": "argentina-2020-interior-rings-total",
       "input_file": {
         "commit": "candidate",
-        "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final/ring-measurements.json"
+        "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/ring-measurements.json"
       },
       "input_sha256": "23a9a5c84acd1cabf7fd49b399d97126599e712544289c45b4563c8d634edcd9",
       "unit": "rings",
@@ -1313,9 +1329,9 @@
       "id": "argentina-ring-false-flags-corrected",
       "input_file": {
         "commit": "candidate",
-        "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final/run-summary.json"
+        "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/run-summary.json"
       },
-      "input_sha256": "2f0369d01d475b2fb0c19bfd3a31261bad4ea441b660126aaeba098180ae6d6a",
+      "input_sha256": "656f696707051c275b863cde1b9fd6c9ff6cdc96cfe4b728fe99c360cffea69b",
       "unit": "detail rows",
       "value": 213,
       "vintage": "baseline"
@@ -1347,16 +1363,16 @@
   ],
   "outputs": [
     {
-      "bytes": 4180,
+      "bytes": 4355,
       "hash_kind": "file-bytes",
       "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/README.md",
-      "sha256": "013fa50062eaa39cfc32aa2def87236dab2de21292eef2bba657f29d47a1aa82"
+      "sha256": "fe9c6adb6f44ed9bf855810f2f7eee4d9abdd2534b851d65626d26de1a34d518"
     },
     {
-      "bytes": 16620,
+      "bytes": 17927,
       "hash_kind": "file-bytes",
       "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/guarded-renderer.py",
-      "sha256": "ce30ad4386966bbfe5c1163a995bdd0b1e3ed0303024f6038f73b7aec1e8a7d1"
+      "sha256": "481f8e919fa40d68342d4682523b7b0de4c9788baf1f011449785c05d996d3b4"
     },
     {
       "bytes": 14273,
@@ -1435,6 +1451,72 @@
       "hash_kind": "file-bytes",
       "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final/run-summary.json",
       "sha256": "2f0369d01d475b2fb0c19bfd3a31261bad4ea441b660126aaeba098180ae6d6a"
+    },
+    {
+      "bytes": 3996,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/consumed-inputs.json",
+      "sha256": "144dad7ae6c0063b26492032643dcef62d4f8da412930a86e774a1438214f999"
+    },
+    {
+      "bytes": 366396,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/corrected-findings.csv",
+      "sha256": "9467d89ea9ba608526ef17e59079b0bc92f6da1c5825a42d99f6bbdbb394fdf8"
+    },
+    {
+      "bytes": 896,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/guarded-reproducibility.json",
+      "sha256": "261e50a71da4aed6647d359742ba25ecfa8b3d0a65a01d3d55975bb34e3b2d70"
+    },
+    {
+      "bytes": 220,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/negative-control.json",
+      "sha256": "bc5171806421010ca5fdcaf66fda9ed1e4f1fc2064ab6a13d3f8190247601d80"
+    },
+    {
+      "bytes": 218,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/positive-control.json",
+      "sha256": "56082831c98be9c5ee6cedb1fb30c99be1951775cf62e39186f86609692f5806"
+    },
+    {
+      "bytes": 2691,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/publication.json",
+      "sha256": "6fc2204951bfeff06993d384af37d3db63032b1a67fbba111d662b70c2944235"
+    },
+    {
+      "bytes": 332,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/regression-control.json",
+      "sha256": "dea267c0c93a268a7120de0861f0230f8b084ef548fd6295ee388562795dfc8a"
+    },
+    {
+      "bytes": 902,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/reproducibility.json",
+      "sha256": "7227bc68e5640ee825f48f542f094c5a251585bfed81a6c2eba4c7577ffe0946"
+    },
+    {
+      "bytes": 10205,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/reproduction-report.json",
+      "sha256": "ad34e12397ea819e8644eceda142bcfc4e9b336837ee23ee30c705e1b4419e0b"
+    },
+    {
+      "bytes": 46662,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/ring-measurements.json",
+      "sha256": "23a9a5c84acd1cabf7fd49b399d97126599e712544289c45b4563c8d634edcd9"
+    },
+    {
+      "bytes": 904,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/run-summary.json",
+      "sha256": "656f696707051c275b863cde1b9fd6c9ff6cdc96cfe4b728fe99c360cffea69b"
     }
   ],
   "rendered_tables": [
@@ -1447,7 +1529,7 @@
         "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/scoped-2020-to-current-georef-overlay.csv"
       },
       "key_field": "atlas_id",
-      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final/corrected-findings.csv",
+      "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/vintages/argentina-ring-integrity-20261008-final2/corrected-findings.csv",
       "subject_count": 214
     }
   ],
@@ -1475,7 +1557,7 @@
         "terms": "Exact pinned upstream metadata declares CC BY 3.0 IGO; this records that declaration, not a separate license audit."
       },
       "limit": "This scoped extract has 214 exact subjects and cannot establish national completeness. The prior pinned #443 source register records 525 full-object features versus 526 declared units; the discrepancy and legal/current boundaries remain unresolved.",
-      "restoration": "Read pinned data/regional-review/argentina-adm2-source-revalidation-443/source/geoBoundaries-2020-scoped-214.geojson and its companion metadata data/regional-review/argentina-adm2-source-revalidation-443/source/geoBoundaries-2020/geoBoundaries-ARG-ADM2-metaData.json at 0f08ca8c451e71bb3b06cb5fb82988e92d3048ab; the #443 source register retains full-object hashes and restoration instructions.",
+      "restoration": "Read pinned data/regional-review/argentina-adm2-source-revalidation-443/source/geoBoundaries-2020-scoped-214.geojson and companion metadata at 0f08ca8c451e71bb3b06cb5fb82988e92d3048ab; the #443 source register retains full-object hashes/restoration instructions.",
       "retention": "restoration-only",
       "retrieved_at": "2026-10-05",
       "role": "2020 Argentina ADM2 coordinates for exact-subject interior-ring counts; metadata supplies named agencies, source vintage, declared license and unit count.",
@@ -1490,11 +1572,11 @@
         "status": "redistributable",
         "terms": "Datos Argentina lists CC BY 4.0; prior source register describes IGN-based territorial source context."
       },
-      "limit": "Official statistical comparison is not a legal determination or a validation of the 2020 geometry; the prior 214-subject overlay has mixed granularity and overlaps.",
+      "limit": "Official statistical comparison is not a legal determination or a validation of the 2020 geometry; prior 214-subject overlay has mixed granularity and overlaps.",
       "restoration": "Consult the official dataset record and pinned #443 source register / Georef geometry files in the baseline.",
       "retention": "restoration-only",
       "retrieved_at": "2026-10-05",
-      "role": "Official statistical/normalization comparison-source context from the prior #443 packet; not used for ring counts or legal-boundary adjudication.",
+      "role": "Official statistical/normalization comparison-source context from prior #443 packet; not used for ring counts or legal-boundary adjudication.",
       "temporal_status": "reference",
       "url": "https://datos.gob.ar/dataset/jgm-servicio-normalizacion-datos-geograficos",
       "verification": "verified",
