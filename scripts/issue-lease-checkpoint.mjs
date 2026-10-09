@@ -32,7 +32,7 @@ export function openLeaseCheckpoint(output) {
  try{
   last=readTarget();
   const stored=last===null?null:JSON.parse(last);
-  if(stored&&stored.status!=='pending')throw Error('Existing completed or unrelated receipt must be preserved; use a fresh --out');
+  if(last!==null&&(!stored||typeof stored!=='object'||Array.isArray(stored)||stored.status!=='pending'))throw Error('Existing completed or unrelated receipt must be preserved; use a fresh --out');
   return {stored,close,write(value){
    if(closed||readTarget()!==last)throw Error('Checkpoint changed outside this request');
    const raw=JSON.stringify(value,null,2)+'\n';if(Buffer.byteLength(raw)>65536)throw Error('Checkpoint exceeds local receipt budget');

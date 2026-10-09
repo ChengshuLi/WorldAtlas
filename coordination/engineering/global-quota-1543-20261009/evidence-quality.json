@@ -82,14 +82,14 @@
     },
     {
       "path": "coordination/engineering/global-quota-1543-20261009/HANDOFF.md",
-      "bytes": 3851,
-      "sha256": "2b22bcc618504a971dcad196cbc4ff33444c2310d9c85b7813972c8441e8bcef",
+      "bytes": 4751,
+      "sha256": "4c857a15180812a789716ba676703407c81856c00e33a15f852c7a0bfc54c9e8",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/global-quota-1543-20261009/aggregate-demand.mjs",
-      "bytes": 5494,
-      "sha256": "749b399810a2504a7016c61e6feac64b606d627a2eadf19167148e751938cc01",
+      "bytes": 8063,
+      "sha256": "5a79cb96492cd6acaa3a147e607b69029ffdfe0310f9f6bad426ce98c5c3f6d7",
       "hash_kind": "file-bytes"
     },
     {
@@ -99,7 +99,7 @@
       "hash_kind": "file-bytes"
     },
     {
-      "path": "coordination/engineering/global-quota-1543-20261009/day-claims.py",
+      "path": "coordination/engineering/global-quota-1543-20261009/day-claims.py.txt",
       "bytes": 2135,
       "sha256": "207e9b2602e2db6cb7149bfb144c1e7052c344b46c77f0380edcca4559d08a72",
       "hash_kind": "file-bytes"
@@ -111,7 +111,7 @@
       "hash_kind": "file-bytes"
     },
     {
-      "path": "coordination/engineering/global-quota-1543-20261009/day-demand.py",
+      "path": "coordination/engineering/global-quota-1543-20261009/day-demand.py.txt",
       "bytes": 2835,
       "sha256": "b901d47706cd68b299e8b1d749d9d45fddd2f59940dc2524c0616bfdb4a22c49",
       "hash_kind": "file-bytes"
@@ -123,7 +123,7 @@
       "hash_kind": "file-bytes"
     },
     {
-      "path": "coordination/engineering/global-quota-1543-20261009/day-evidence-demand.py",
+      "path": "coordination/engineering/global-quota-1543-20261009/day-evidence-demand.py.txt",
       "bytes": 2481,
       "sha256": "6ba58fa8931e6a7b032fd0570994dfcfa158d42ab2b0a551630555a99768bcac",
       "hash_kind": "file-bytes"
@@ -135,7 +135,7 @@
       "hash_kind": "file-bytes"
     },
     {
-      "path": "coordination/engineering/global-quota-1543-20261009/day-inventory.py",
+      "path": "coordination/engineering/global-quota-1543-20261009/day-inventory.py.txt",
       "bytes": 1635,
       "sha256": "e1584e05e8f98be422b52334847d517e6bb57cc6754deeca4490635fb4f61644",
       "hash_kind": "file-bytes"
@@ -171,9 +171,63 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/global-quota-1543-20261009/repro-final-20261009/demand-summary.json",
+      "bytes": 432,
+      "sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/repro-final-20261009/negative-control.json",
+      "bytes": 505,
+      "sha256": "617e9846b35fecfdc85727f73e09c4e0d73f0e75d3f8e9421d75341b2ca697c7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/repro-final-20261009/positive-control.json",
+      "bytes": 344,
+      "sha256": "e1371863b80d16c64c4b3dd97e4c730d4b224dc8f3f7596ae88270e8fe9074b8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/repro-final-20261009/run-receipt.json",
+      "bytes": 124,
+      "sha256": "1a4d8b84c84ae4eb0e95e76cf00149d3587061bed5ee40fb2e0896bbf1ee68f5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/repro-review-20261009/demand-summary.json",
+      "bytes": 432,
+      "sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/repro-review-20261009/negative-control.json",
+      "bytes": 446,
+      "sha256": "c783b6f76a37806fb7a8704d1ac0412164a072e95717739cf34a9a661f87bcdf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/repro-review-20261009/positive-control.json",
+      "bytes": 344,
+      "sha256": "e1371863b80d16c64c4b3dd97e4c730d4b224dc8f3f7596ae88270e8fe9074b8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/repro-review-20261009/run-receipt.json",
+      "bytes": 124,
+      "sha256": "1a4d8b84c84ae4eb0e95e76cf00149d3587061bed5ee40fb2e0896bbf1ee68f5",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/global-quota-1543-20261009/review-amended-controls.log",
       "bytes": 23614,
       "sha256": "a0f765895cc3694e5f1da2dde1ccf2ac0cd0c8f21784e902b25c1c5c3dc82a18",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/review-final-controls.log",
+      "bytes": 24206,
+      "sha256": "3d6e9c2d794667fb6545114b1e3c79836bb33984c7a10d68f17d3746a97f3f20",
       "hash_kind": "file-bytes"
     },
     {
@@ -233,8 +287,8 @@
     },
     {
       "path": "scripts/issue-lease-checkpoint.mjs",
-      "bytes": 3212,
-      "sha256": "9e83f574ab25327b7e8c6b4a110af250e59df4c1ca861d07b3685801a85042ba",
+      "bytes": 3277,
+      "sha256": "d14198cc0d054c1aec9965418943f88a957d7e95d7686692c3e77e12aa8540f7",
       "hash_kind": "file-bytes"
     },
     {
@@ -293,8 +347,8 @@
     },
     {
       "path": "test/issue-lease-checkpoint.test.mjs",
-      "bytes": 2393,
-      "sha256": "93dd8e4399451f00fbe24fd42bdc6748d72a5094bcbbce55eb9ac85c730cfc32",
+      "bytes": 2725,
+      "sha256": "ff99dce4cc6f80559f9c58399c505b7c795a8c369aec8d55091d32b11390d457",
       "hash_kind": "file-bytes"
     },
     {
@@ -316,6 +370,12 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "test/quota-demand-evidence.test.mjs",
+      "bytes": 2961,
+      "sha256": "ee38b55e13dfe91573451d5c91e4b2e4e5f16b521f64800b8813f412cc118777",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "test/trusted-workflow-checkouts.test.mjs",
       "bytes": 4329,
       "sha256": "d6eb617f1329042aea61b5492838bc7e377fc0c4c7c041665235380aca5593fd",
@@ -334,7 +394,7 @@
       "id": "demand-aggregation",
       "kind": "measurement",
       "description": "Aggregate retained complete created-run inventory and per-run receipt categories; distinguish measured HTTP attempts from code-derived evidence/claim lower bounds. Extraction does not reproduce every original hosted log independently.",
-      "software": "Node 24, retained Python3 extraction scripts and GitHub Actions public logs",
+      "software": "Node 24; archived Python3 extraction provenance and GitHub Actions public logs; archived scripts are not safe reproduction commands",
       "units": "HTTP attempts, inferred request lower bounds, workflow runs, branch/head pairs"
     }
   ],
@@ -344,7 +404,7 @@
       "value": 1243,
       "unit": "workflow-runs",
       "vintage": "baseline",
-      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "input_sha256": "7b44517c5e25f3823e55e2fa9de15e4e36f7afc47e83b15b6ceeb3add7c80d32",
       "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
     },
     {
@@ -352,7 +412,7 @@
       "value": 21454,
       "unit": "inferred-request-lower-bound",
       "vintage": "baseline",
-      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "input_sha256": "fee81fc10da61ad7af85538d91514bdcdd12b35fc6ea410dc0a29a68e0ed1d99",
       "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
     },
     {
@@ -360,7 +420,7 @@
       "value": 13987,
       "unit": "HTTP-attempts",
       "vintage": "baseline",
-      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "input_sha256": "7bf843fc59cdf3a0f740a2127538b7614b51db7f184ba6b23c8f917e65d78e0f",
       "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
     },
     {
@@ -368,7 +428,7 @@
       "value": 1873,
       "unit": "HTTP-attempts",
       "vintage": "baseline",
-      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "input_sha256": "7bf843fc59cdf3a0f740a2127538b7614b51db7f184ba6b23c8f917e65d78e0f",
       "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
     },
     {
@@ -376,7 +436,7 @@
       "value": 1515,
       "unit": "inferred-request-lower-bound",
       "vintage": "baseline",
-      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "input_sha256": "21d8dd593b31c2035560ff14c03a96ce3fa79ee1d3a8975c5be5f4777b4187c4",
       "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
     },
     {
@@ -384,7 +444,7 @@
       "value": 4532,
       "unit": "HTTP-attempts",
       "vintage": "baseline",
-      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "input_sha256": "7bf843fc59cdf3a0f740a2127538b7614b51db7f184ba6b23c8f917e65d78e0f",
       "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
     },
     {
@@ -392,7 +452,7 @@
       "value": 9455,
       "unit": "HTTP-attempts",
       "vintage": "baseline",
-      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "input_sha256": "7bf843fc59cdf3a0f740a2127538b7614b51db7f184ba6b23c8f917e65d78e0f",
       "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
     },
     {
@@ -400,7 +460,7 @@
       "value": 15144,
       "unit": "HTTP-attempts",
       "vintage": "baseline",
-      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "input_sha256": "7bf843fc59cdf3a0f740a2127538b7614b51db7f184ba6b23c8f917e65d78e0f",
       "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
     },
     {
@@ -408,7 +468,7 @@
       "value": 716,
       "unit": "HTTP-attempts",
       "vintage": "baseline",
-      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "input_sha256": "7bf843fc59cdf3a0f740a2127538b7614b51db7f184ba6b23c8f917e65d78e0f",
       "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
     },
     {
@@ -416,7 +476,7 @@
       "value": 698,
       "unit": "workflow-runs",
       "vintage": "baseline",
-      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "input_sha256": "7b44517c5e25f3823e55e2fa9de15e4e36f7afc47e83b15b6ceeb3add7c80d32",
       "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
     },
     {
@@ -424,7 +484,7 @@
       "value": 212,
       "unit": "branch-head-pairs",
       "vintage": "baseline",
-      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "input_sha256": "7b44517c5e25f3823e55e2fa9de15e4e36f7afc47e83b15b6ceeb3add7c80d32",
       "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
     },
     {
@@ -432,7 +492,7 @@
       "value": 141,
       "unit": "workflow-runs",
       "vintage": "baseline",
-      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "input_sha256": "7b44517c5e25f3823e55e2fa9de15e4e36f7afc47e83b15b6ceeb3add7c80d32",
       "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
     },
     {
@@ -440,7 +500,7 @@
       "value": 38,
       "unit": "branch-head-pairs",
       "vintage": "baseline",
-      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "input_sha256": "7b44517c5e25f3823e55e2fa9de15e4e36f7afc47e83b15b6ceeb3add7c80d32",
       "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
     },
     {
@@ -448,7 +508,7 @@
       "value": 3,
       "unit": "workflow-runs",
       "vintage": "baseline",
-      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "input_sha256": "7b44517c5e25f3823e55e2fa9de15e4e36f7afc47e83b15b6ceeb3add7c80d32",
       "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
     },
     {
@@ -456,7 +516,7 @@
       "value": 1,
       "unit": "branch-head-pairs",
       "vintage": "baseline",
-      "input_sha256": "d8d996df87943b90e4703cf5ba5f7bfef110f0d7b2ff73e1963ce92d2f8b1df6",
+      "input_sha256": "7b44517c5e25f3823e55e2fa9de15e4e36f7afc47e83b15b6ceeb3add7c80d32",
       "evaluation_commit": "777b082b0a3447c39205255312ec69f453e85e7a"
     }
   ],
@@ -552,7 +612,7 @@
   "commands": [
     "node --test test/github-admission.test.mjs test/github-snapshots.test.mjs test/github-quota.test.mjs test/geographic-report-artifact.test.mjs test/deployment-budget-scope.test.mjs test/trusted-workflow-checkouts.test.mjs test/pr-gates.test.mjs test/merge-integration.test.mjs test/final-capacity.test.mjs test/issue-lease-cli.test.mjs test/issue-lease-client.test.mjs test/git-blob-transport.test.mjs test/integration-proof.test.mjs test/job-deadline.test.mjs",
     "node scripts/evidence-quality.mjs coordination/engineering/global-quota-1543-20261009/evidence-quality.json .",
-    "node coordination/engineering/global-quota-1543-20261009/aggregate-demand.mjs"
+    "node coordination/engineering/global-quota-1543-20261009/aggregate-demand.mjs --out coordination/engineering/global-quota-1543-20261009/fresh-run-replace-with-unique-id"
   ],
   "change_receipts": [
     {
@@ -589,7 +649,7 @@
       "status": "added"
     },
     {
-      "path": "coordination/engineering/global-quota-1543-20261009/day-claims.py",
+      "path": "coordination/engineering/global-quota-1543-20261009/day-claims.py.txt",
       "status": "added"
     },
     {
@@ -597,7 +657,7 @@
       "status": "added"
     },
     {
-      "path": "coordination/engineering/global-quota-1543-20261009/day-demand.py",
+      "path": "coordination/engineering/global-quota-1543-20261009/day-demand.py.txt",
       "status": "added"
     },
     {
@@ -605,7 +665,7 @@
       "status": "added"
     },
     {
-      "path": "coordination/engineering/global-quota-1543-20261009/day-evidence-demand.py",
+      "path": "coordination/engineering/global-quota-1543-20261009/day-evidence-demand.py.txt",
       "status": "added"
     },
     {
@@ -613,7 +673,7 @@
       "status": "added"
     },
     {
-      "path": "coordination/engineering/global-quota-1543-20261009/day-inventory.py",
+      "path": "coordination/engineering/global-quota-1543-20261009/day-inventory.py.txt",
       "status": "added"
     },
     {
@@ -641,7 +701,43 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/global-quota-1543-20261009/repro-final-20261009/demand-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/repro-final-20261009/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/repro-final-20261009/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/repro-final-20261009/run-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/repro-review-20261009/demand-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/repro-review-20261009/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/repro-review-20261009/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/repro-review-20261009/run-receipt.json",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/global-quota-1543-20261009/review-amended-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-quota-1543-20261009/review-final-controls.log",
       "status": "added"
     },
     {
@@ -747,6 +843,10 @@
     },
     {
       "path": "test/pr-gates.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/quota-demand-evidence.test.mjs",
       "status": "added"
     },
     {
@@ -880,13 +980,13 @@
       "method_id": "demand-aggregation",
       "kind": "positive-control",
       "outcome": "passed",
-      "evidence_path": "coordination/engineering/global-quota-1543-20261009/positive-control.json"
+      "evidence_path": "coordination/engineering/global-quota-1543-20261009/repro-final-20261009/positive-control.json"
     },
     {
       "method_id": "demand-aggregation",
       "kind": "negative-control",
       "outcome": "passed",
-      "evidence_path": "coordination/engineering/global-quota-1543-20261009/negative-control.json"
+      "evidence_path": "coordination/engineering/global-quota-1543-20261009/repro-final-20261009/negative-control.json"
     }
   ]
 }

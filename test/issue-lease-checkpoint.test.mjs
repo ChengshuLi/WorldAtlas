@@ -21,3 +21,7 @@ test('dead owner lock permits resume while retaining original pending identity',
 test('symlink output and invalid collisions preserve existing bytes without leaking lock',()=>fixture(file=>{
  const sentinel=file+'.source';fs.writeFileSync(sentinel,'retained');fs.symlinkSync(sentinel,file);assert.throws(()=>openLeaseCheckpoint(file),/ordinary/);assert.equal(fs.readFileSync(sentinel,'utf8'),'retained');assert(!fs.existsSync(file+'.lock'));
 }));
+
+for(const value of [null,false,0,'',[],{}])test(`nonpending JSON ${JSON.stringify(value)} is preserved`,()=>fixture(file=>{
+ const raw=JSON.stringify(value);fs.writeFileSync(file,raw);assert.throws(()=>openLeaseCheckpoint(file),/preserved/);assert.equal(fs.readFileSync(file,'utf8'),raw);assert(!fs.existsSync(file+'.lock'));
+}));

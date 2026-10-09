@@ -22,6 +22,10 @@ node --test test/github-admission.test.mjs test/github-snapshots.test.mjs test/g
 
 ## Independent-review amendments
 
-The retained per-run inventories and classified accounting records are included with their original extraction scripts. Run `node coordination/engineering/global-quota-1543-20261009/aggregate-demand.mjs` to reproduce the summary and execute duplicate/inconsistent-accounting controls. These records authenticate the retained investigation, not new independent retrieval of every original hosted log.
+The retained per-run inventories and classified accounting records are included with their original extraction scripts. Run `node coordination/engineering/global-quota-1543-20261009/aggregate-demand.mjs --out coordination/engineering/global-quota-1543-20261009/NEW-RUN-NAME` (replace the name with a fresh lowercase run ID) to reproduce the summary and execute duplicate/inconsistent-accounting controls. These records authenticate the retained investigation, not new independent retrieval of every original hosted log.
 
 Mutating claim CLI actions now require a durable output path and exclusively own that local receipt. Atomic synced publication retains the last complete checkpoint on interruption; pending observation resumes the original identity. Missing output, unrelated/completed collisions and symlink outputs are rejected before HTTP. A dead local process lock can be released without treating the provider operation as failed. This is local request ownership, not an API queue or scheduling delay.
+
+The four `day-*.py.txt` files are archived extraction provenance only. They preserve the historical extraction logic and paths, have no safe output admission, and are not reproduction commands. Use the bounded fresh-destination aggregator for reproduction of retained records; independent refetching of original logs is a separate investigation.
+
+The renewed control run (`repro-final-20261009/`) uses the admitted fresh destination and binds all retained consumer records to the authoritative workflow inventory, including exact selected rosters. Wrong consumer joins and missing receipts reject before any output. Falsey/nonpending JSON receipts are preserved. The latest complete local regression log records 258 passing controls; earlier logs remain historical observations.

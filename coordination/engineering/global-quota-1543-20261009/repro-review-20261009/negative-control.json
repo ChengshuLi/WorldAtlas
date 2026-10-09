@@ -1,0 +1,15 @@
+{
+  "method_id": "demand-aggregation",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "checks": [
+    "duplicate inventory",
+    "duplicate receipt",
+    "inconsistent actual accounting",
+    "inconsistent evidence inference",
+    "inconsistent claim inference"
+  ],
+  "limits": [
+    "Historical log extraction remains a separate provenance step. Inferred floors are not actual request telemetry; missing traffic remains unknown."
+  ]
+}
