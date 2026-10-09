@@ -1,0 +1,2403 @@
+[
+  {
+    "admin_status_counts": {
+      "positive-source-coverage-mixed-partial-or-subject-unresolved": 1
+    },
+    "boundary_length_limit": "Boundary metres are unknown; complete positive-length neighbor IDs/counts are retained.",
+    "boundary_length_m": null,
+    "collision_prerequisites": [
+      386
+    ],
+    "compatible_original_admin_component_ids": [],
+    "complete_component_ids": [
+      "physical-component:a68af90226372a2ffe141464812466f3ce7c4cb2d82332b73736e879e9cfa4e0"
+    ],
+    "complete_positive_length_neighbor_ids": [
+      "gb:PNG:ADM3:22992897B14707934293556"
+    ],
+    "component_count": 1,
+    "components_with_unmeasured_fragments": 0,
+    "components_without_existing_area": 0,
+    "dispatch_ready": false,
+    "exact_existing_fragment_area_sum_m2": {
+      "denominator": "549755813888",
+      "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+      "numerator": "6805295806704937"
+    },
+    "exact_existing_support_area_sums_m2": {
+      "contradictory_land_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "extra_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_inland_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_land_support": {
+        "denominator": "549755813888",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "6805295806704937"
+      },
+      "missing_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "outside_mapped_L1_context": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      }
+    },
+    "exclusive_next_prerequisite_area_sums_m2": {
+      "land-with-admin-partial-or-unbound-source-fitness-review": 12378.760960391332
+    },
+    "exclusive_next_prerequisite_counts": {
+      "land-with-admin-partial-or-unbound-source-fitness-review": 1
+    },
+    "fine_family_count": 1,
+    "hierarchy_unknown_component_count": 0,
+    "hierarchy_unknown_component_ids": [],
+    "id": "gap-source-batch:04eef248efadb0d1523527f0",
+    "invalid_original_source_component_count": 0,
+    "measured_fragment_area_sum_m2": 12378.760960391332,
+    "mismatched_admin_component_ids": [],
+    "missing_admin_component_count": 0,
+    "missing_admin_component_ids": [],
+    "native_invalid_component_ids": [],
+    "numeric_closure_component_count": 0,
+    "numeric_closure_component_ids": [],
+    "operational_batch": "gap-operational-batch:241e2ce0cd7b6be8a234558b",
+    "original_fine_family": {
+      "aggregate_extent_lonlat": [
+        150.85695471574326,
+        -2.775708366559472,
+        150.86223385825036,
+        -2.7747295713055147
+      ],
+      "best_rank": {
+        "coordination_complexity": 33650,
+        "measured_impact": 71953,
+        "source_locator_readiness": 58442
+      },
+      "cause_status": "unknown",
+      "component_count": 1,
+      "component_ids": [
+        "physical-component:a68af90226372a2ffe141464812466f3ce7c4cb2d82332b73736e879e9cfa4e0"
+      ],
+      "component_ids_sha256": "a4cf6c237b16c3aee68c84ff3518dfed027b48fd5ec0507e00adf7f397bdc7c5",
+      "contact_ids": [
+        "gb:PNG:ADM3:22992897B14707934293556"
+      ],
+      "dispatch_status": "complete current triage backlog; canonical scope and live claim required",
+      "edge_neighbor_ids": [
+        "gb:PNG:ADM3:22992897B14707934293556"
+      ],
+      "existing_related_issues": [
+        386
+      ],
+      "grouping": {
+        "observed_scope_bucket": "outside-owned-centre-component-unchecked:other-contact-context",
+        "recorded_parent_ids": [
+          "framework:province:kavieng-district:9610d70c5207"
+        ],
+        "source_families": [
+          "553025240b5337db1364776d1a56075be5306e092392006b2da3d8a358307c34"
+        ],
+        "subcontinents": [
+          "framework:subcontinent:melanesia:17c129c50772"
+        ],
+        "work_kind": "source-authority-and-water-reference-research"
+      },
+      "id": "gap-source-batch:04eef248efadb0d1523527f0",
+      "original_member_extent_references": {
+        "family": "selected-current-native-delta",
+        "field": "original_extent_lonlat",
+        "missing_extent_component_ids": []
+      },
+      "responsible_role": "GEO-source-research",
+      "source_families": [
+        {
+          "kind": "source-authority-and-product-comparison",
+          "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "recipe": "scripts/administrative.py",
+          "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PNG/ADM3/geoBoundaries-PNG-ADM3.geojson",
+          "reference_year": "2019",
+          "source_id": "gb:PNG:ADM3",
+          "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+        }
+      ]
+    },
+    "physical_authority": "unapproved",
+    "physical_reason_incidence_counts": {},
+    "physical_status_counts": {
+      "mapped-land-support": 1
+    },
+    "positive_length_neighbor_count": 1,
+    "source_fitness": "unapproved-for-all-components",
+    "source_fitness_required_compatible_land_component_ids": [],
+    "support_area_sums_m2": {
+      "contradictory_land_water_support": 0.0,
+      "extra_reconstruction": 0.0,
+      "mapped_inland_water_support": 0.0,
+      "mapped_land_support": 12378.760960391332,
+      "missing_reconstruction": 0.0,
+      "outside_mapped_L1_context": 0.0
+    },
+    "unmeasured_components": []
+  },
+  {
+    "admin_status_counts": {
+      "positive-source-coverage-mixed-partial-or-subject-unresolved": 1
+    },
+    "boundary_length_limit": "Boundary metres are unknown; complete positive-length neighbor IDs/counts are retained.",
+    "boundary_length_m": null,
+    "collision_prerequisites": [
+      386
+    ],
+    "compatible_original_admin_component_ids": [],
+    "complete_component_ids": [
+      "physical-component:b680fa0be6bb8caf76ed123e423cbc7e7de33d87865cb48bc5d11d416156f45d"
+    ],
+    "complete_positive_length_neighbor_ids": [
+      "gb:IDN:ADM2:22746128B65756496772256"
+    ],
+    "component_count": 1,
+    "components_with_unmeasured_fragments": 0,
+    "components_without_existing_area": 0,
+    "dispatch_ready": false,
+    "exact_existing_fragment_area_sum_m2": {
+      "denominator": "68719476736",
+      "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+      "numerator": "3460137356273981"
+    },
+    "exact_existing_support_area_sums_m2": {
+      "contradictory_land_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "extra_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_inland_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_land_support": {
+        "denominator": "68719476736",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "3460137356273981"
+      },
+      "missing_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "outside_mapped_L1_context": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      }
+    },
+    "exclusive_next_prerequisite_area_sums_m2": {
+      "land-with-admin-partial-or-unbound-source-fitness-review": 50351.62548700436
+    },
+    "exclusive_next_prerequisite_counts": {
+      "land-with-admin-partial-or-unbound-source-fitness-review": 1
+    },
+    "fine_family_count": 1,
+    "hierarchy_unknown_component_count": 0,
+    "hierarchy_unknown_component_ids": [],
+    "id": "gap-source-batch:093ddc8044075402ff658a06",
+    "invalid_original_source_component_count": 0,
+    "measured_fragment_area_sum_m2": 50351.62548700436,
+    "mismatched_admin_component_ids": [],
+    "missing_admin_component_count": 0,
+    "missing_admin_component_ids": [],
+    "native_invalid_component_ids": [],
+    "numeric_closure_component_count": 0,
+    "numeric_closure_component_ids": [],
+    "operational_batch": "gap-operational-batch:241e2ce0cd7b6be8a234558b",
+    "original_fine_family": {
+      "aggregate_extent_lonlat": [
+        140.91334849699402,
+        -6.818491762767704,
+        140.9171,
+        -6.811732464929909
+      ],
+      "best_rank": {
+        "coordination_complexity": 68989,
+        "measured_impact": 63653,
+        "source_locator_readiness": 64049
+      },
+      "cause_status": "unknown",
+      "component_count": 1,
+      "component_ids": [
+        "physical-component:b680fa0be6bb8caf76ed123e423cbc7e7de33d87865cb48bc5d11d416156f45d"
+      ],
+      "component_ids_sha256": "8a549e710fe1973ef9415171d0a8aedd3464b771f374b2a79977d5408723ae4e",
+      "contact_ids": [
+        "gb:IDN:ADM2:22746128B65756496772256",
+        "gb:PNG:ADM3:22992897B97542007702415"
+      ],
+      "dispatch_status": "complete current triage backlog; canonical scope and live claim required",
+      "edge_neighbor_ids": [
+        "gb:IDN:ADM2:22746128B65756496772256"
+      ],
+      "existing_related_issues": [
+        386
+      ],
+      "grouping": {
+        "observed_scope_bucket": "outside-owned-centre-component-unchecked:other-contact-context",
+        "recorded_parent_ids": [
+          "framework:province:middle-fly-district:db865ab83af9",
+          "framework:province:papua:856ef2fb442b"
+        ],
+        "source_families": [
+          "553025240b5337db1364776d1a56075be5306e092392006b2da3d8a358307c34",
+          "64b6ecfe62756026d4accdcd9ba9b491e00c691867c86f8a45765fe1086afa20"
+        ],
+        "subcontinents": [
+          "framework:subcontinent:melanesia:17c129c50772"
+        ],
+        "work_kind": "source-authority-and-water-reference-research"
+      },
+      "id": "gap-source-batch:093ddc8044075402ff658a06",
+      "original_member_extent_references": {
+        "family": "selected-current-native-delta",
+        "field": "original_extent_lonlat",
+        "missing_extent_component_ids": []
+      },
+      "responsible_role": "GEO-source-research",
+      "source_families": [
+        {
+          "kind": "source-authority-and-product-comparison",
+          "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "recipe": "scripts/administrative.py",
+          "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PNG/ADM3/geoBoundaries-PNG-ADM3.geojson",
+          "reference_year": "2019",
+          "source_id": "gb:PNG:ADM3",
+          "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+        },
+        {
+          "kind": "source-authority-and-product-comparison",
+          "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "recipe": "scripts/administrative.py",
+          "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.geojson",
+          "reference_year": "2020",
+          "source_id": "gb:IDN:ADM2",
+          "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+        }
+      ]
+    },
+    "physical_authority": "unapproved",
+    "physical_reason_incidence_counts": {},
+    "physical_status_counts": {
+      "mapped-land-support": 1
+    },
+    "positive_length_neighbor_count": 1,
+    "source_fitness": "unapproved-for-all-components",
+    "source_fitness_required_compatible_land_component_ids": [],
+    "support_area_sums_m2": {
+      "contradictory_land_water_support": 0.0,
+      "extra_reconstruction": 0.0,
+      "mapped_inland_water_support": 0.0,
+      "mapped_land_support": 50351.62548700436,
+      "missing_reconstruction": 0.0,
+      "outside_mapped_L1_context": 0.0
+    },
+    "unmeasured_components": []
+  },
+  {
+    "admin_status_counts": {
+      "one-compatible-recorded-subject-uniquely-covers-component": 2
+    },
+    "boundary_length_limit": "Boundary metres are unknown; complete positive-length neighbor IDs/counts are retained.",
+    "boundary_length_m": null,
+    "collision_prerequisites": [
+      387
+    ],
+    "compatible_original_admin_component_ids": [
+      "physical-component:2b39965dae96675fca4577dd52a5bfe9cc7e430f79dfa7089c919bd4ed616af8",
+      "physical-component:7deb1a01865ea8f87256a5442ca03a55613d4187137d49c1342fdfe33573cb15"
+    ],
+    "complete_component_ids": [
+      "physical-component:2b39965dae96675fca4577dd52a5bfe9cc7e430f79dfa7089c919bd4ed616af8",
+      "physical-component:7deb1a01865ea8f87256a5442ca03a55613d4187137d49c1342fdfe33573cb15"
+    ],
+    "complete_positive_length_neighbor_ids": [
+      "gb:SLB:ADM1:17018030B36628097040544"
+    ],
+    "component_count": 2,
+    "components_with_unmeasured_fragments": 0,
+    "components_without_existing_area": 0,
+    "dispatch_ready": false,
+    "exact_existing_fragment_area_sum_m2": {
+      "denominator": "1125899906842624",
+      "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+      "numerator": "5966587803944790303"
+    },
+    "exact_existing_support_area_sums_m2": {
+      "contradictory_land_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "extra_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_inland_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_land_support": {
+        "denominator": "1125899906842624",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "5930780674100532511"
+      },
+      "missing_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "outside_mapped_L1_context": {
+        "denominator": "140737488355328",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "4475891288758243"
+      }
+    },
+    "exclusive_next_prerequisite_area_sums_m2": {
+      "land-plus-compatible-original-processing-reproduction-candidate": 6.841506418841418,
+      "mixed-support-retain-whole-source-fitness-review": 5292.553020290883
+    },
+    "exclusive_next_prerequisite_counts": {
+      "land-plus-compatible-original-processing-reproduction-candidate": 1,
+      "mixed-support-retain-whole-source-fitness-review": 1
+    },
+    "fine_family_count": 1,
+    "hierarchy_unknown_component_count": 0,
+    "hierarchy_unknown_component_ids": [],
+    "id": "gap-source-batch:0c1cdaad9f40381ff5391a6e",
+    "invalid_original_source_component_count": 0,
+    "measured_fragment_area_sum_m2": 5299.394526709724,
+    "mismatched_admin_component_ids": [],
+    "missing_admin_component_count": 0,
+    "missing_admin_component_ids": [],
+    "native_invalid_component_ids": [],
+    "numeric_closure_component_count": 0,
+    "numeric_closure_component_ids": [],
+    "operational_batch": "gap-operational-batch:241e2ce0cd7b6be8a234558b",
+    "original_fine_family": {
+      "aggregate_extent_lonlat": [
+        159.08585482783747,
+        -8.089524064186277,
+        159.2716627890526,
+        -7.95498531332966
+      ],
+      "best_rank": {
+        "coordination_complexity": 8863,
+        "measured_impact": 75652,
+        "source_locator_readiness": 15337
+      },
+      "cause_status": "unknown",
+      "component_count": 2,
+      "component_ids": [
+        "physical-component:2b39965dae96675fca4577dd52a5bfe9cc7e430f79dfa7089c919bd4ed616af8",
+        "physical-component:7deb1a01865ea8f87256a5442ca03a55613d4187137d49c1342fdfe33573cb15"
+      ],
+      "component_ids_sha256": "576edd5a36f82e574f6f17f69935bc2d8cb30d8e1b6b1279c3294f079c07011e",
+      "contact_ids": [
+        "gb:SLB:ADM1:17018030B36628097040544"
+      ],
+      "dispatch_status": "complete current triage backlog; canonical scope and live claim required",
+      "edge_neighbor_ids": [
+        "gb:SLB:ADM1:17018030B36628097040544"
+      ],
+      "existing_related_issues": [
+        387
+      ],
+      "grouping": {
+        "observed_scope_bucket": "outside-owned-centre-component-unchecked:other-contact-context",
+        "recorded_parent_ids": [
+          "framework:province:isabel:c4cd1477b41f"
+        ],
+        "source_families": [
+          "65d342920eca9a5a376b0880d8c83d4fb1ea5b5e0defcdcb62edc43deb048219"
+        ],
+        "subcontinents": [
+          "framework:subcontinent:melanesia:17c129c50772"
+        ],
+        "work_kind": "source-authority-and-water-reference-research"
+      },
+      "id": "gap-source-batch:0c1cdaad9f40381ff5391a6e",
+      "original_member_extent_references": {
+        "family": "selected-current-native-delta",
+        "field": "original_extent_lonlat",
+        "missing_extent_component_ids": []
+      },
+      "responsible_role": "GEO-source-research",
+      "source_families": [
+        {
+          "kind": "source-authority-and-product-comparison",
+          "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "recipe": "scripts/administrative.py",
+          "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLB/ADM1/geoBoundaries-SLB-ADM1.geojson",
+          "reference_year": "2021",
+          "source_id": "gb:SLB:ADM1",
+          "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+        }
+      ]
+    },
+    "physical_authority": "unapproved",
+    "physical_reason_incidence_counts": {},
+    "physical_status_counts": {
+      "mapped-land-support": 1,
+      "mixed-source-support": 1
+    },
+    "positive_length_neighbor_count": 1,
+    "source_fitness": "unapproved-for-all-components",
+    "source_fitness_required_compatible_land_component_ids": [
+      "physical-component:2b39965dae96675fca4577dd52a5bfe9cc7e430f79dfa7089c919bd4ed616af8"
+    ],
+    "support_area_sums_m2": {
+      "contradictory_land_water_support": 0.0,
+      "extra_reconstruction": 0.0,
+      "mapped_inland_water_support": 0.0,
+      "mapped_land_support": 5267.591406710654,
+      "missing_reconstruction": 0.0,
+      "outside_mapped_L1_context": 31.803120412790825
+    },
+    "unmeasured_components": []
+  },
+  {
+    "admin_status_counts": {
+      "positive-source-coverage-mixed-partial-or-subject-unresolved": 1
+    },
+    "boundary_length_limit": "Boundary metres are unknown; complete positive-length neighbor IDs/counts are retained.",
+    "boundary_length_m": null,
+    "collision_prerequisites": [
+      386
+    ],
+    "compatible_original_admin_component_ids": [],
+    "complete_component_ids": [
+      "physical-component:b53c0913a174ea07e07accae42dfcdfe5e9e67810dfaa598398401a8cbd6b890"
+    ],
+    "complete_positive_length_neighbor_ids": [],
+    "component_count": 1,
+    "components_with_unmeasured_fragments": 0,
+    "components_without_existing_area": 0,
+    "dispatch_ready": false,
+    "exact_existing_fragment_area_sum_m2": {
+      "denominator": "549755813888",
+      "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+      "numerator": "6005342862899885"
+    },
+    "exact_existing_support_area_sums_m2": {
+      "contradictory_land_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "extra_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_inland_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_land_support": {
+        "denominator": "549755813888",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "6005342862899885"
+      },
+      "missing_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "outside_mapped_L1_context": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      }
+    },
+    "exclusive_next_prerequisite_area_sums_m2": {
+      "land-with-admin-partial-or-unbound-source-fitness-review": 10923.655032274628
+    },
+    "exclusive_next_prerequisite_counts": {
+      "land-with-admin-partial-or-unbound-source-fitness-review": 1
+    },
+    "fine_family_count": 1,
+    "hierarchy_unknown_component_count": 0,
+    "hierarchy_unknown_component_ids": [],
+    "id": "gap-source-batch:2bd9460c6b28ba8680ad0753",
+    "invalid_original_source_component_count": 0,
+    "measured_fragment_area_sum_m2": 10923.655032274628,
+    "mismatched_admin_component_ids": [],
+    "missing_admin_component_count": 0,
+    "missing_admin_component_ids": [],
+    "native_invalid_component_ids": [],
+    "numeric_closure_component_count": 0,
+    "numeric_closure_component_ids": [],
+    "operational_batch": "gap-operational-batch:241e2ce0cd7b6be8a234558b",
+    "original_fine_family": {
+      "aggregate_extent_lonlat": [
+        134.29724010233247,
+        -6.322073998971158,
+        134.29867319334616,
+        -6.318610512240697
+      ],
+      "best_rank": {
+        "coordination_complexity": 36652,
+        "measured_impact": 72571,
+        "source_locator_readiness": 63628
+      },
+      "cause_status": "unknown",
+      "component_count": 1,
+      "component_ids": [
+        "physical-component:b53c0913a174ea07e07accae42dfcdfe5e9e67810dfaa598398401a8cbd6b890"
+      ],
+      "component_ids_sha256": "78b18943425185419d25ea366d54df5cfd5e4e9d5962873868bf809a70e94dae",
+      "contact_ids": [
+        "gb:IDN:ADM2:22746128B17511076551422"
+      ],
+      "dispatch_status": "complete current triage backlog; canonical scope and live claim required",
+      "edge_neighbor_ids": [],
+      "existing_related_issues": [
+        386
+      ],
+      "grouping": {
+        "observed_scope_bucket": "outside-owned-centre-component-unchecked:other-contact-context",
+        "recorded_parent_ids": [
+          "atlas:macro-foundation:province:maluku-aru"
+        ],
+        "source_families": [
+          "64b6ecfe62756026d4accdcd9ba9b491e00c691867c86f8a45765fe1086afa20"
+        ],
+        "subcontinents": [
+          "framework:subcontinent:melanesia:17c129c50772"
+        ],
+        "work_kind": "source-authority-and-water-reference-research"
+      },
+      "id": "gap-source-batch:2bd9460c6b28ba8680ad0753",
+      "original_member_extent_references": {
+        "family": "selected-current-native-delta",
+        "field": "original_extent_lonlat",
+        "missing_extent_component_ids": []
+      },
+      "responsible_role": "GEO-source-research",
+      "source_families": [
+        {
+          "kind": "source-authority-and-product-comparison",
+          "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "recipe": "scripts/administrative.py",
+          "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.geojson",
+          "reference_year": "2020",
+          "source_id": "gb:IDN:ADM2",
+          "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+        }
+      ]
+    },
+    "physical_authority": "unapproved",
+    "physical_reason_incidence_counts": {},
+    "physical_status_counts": {
+      "mapped-land-support": 1
+    },
+    "positive_length_neighbor_count": 0,
+    "source_fitness": "unapproved-for-all-components",
+    "source_fitness_required_compatible_land_component_ids": [],
+    "support_area_sums_m2": {
+      "contradictory_land_water_support": 0.0,
+      "extra_reconstruction": 0.0,
+      "mapped_inland_water_support": 0.0,
+      "mapped_land_support": 10923.655032274628,
+      "missing_reconstruction": 0.0,
+      "outside_mapped_L1_context": 0.0
+    },
+    "unmeasured_components": []
+  },
+  {
+    "admin_status_counts": {
+      "positive-source-coverage-mixed-partial-or-subject-unresolved": 1
+    },
+    "boundary_length_limit": "Boundary metres are unknown; complete positive-length neighbor IDs/counts are retained.",
+    "boundary_length_m": null,
+    "collision_prerequisites": [
+      386
+    ],
+    "compatible_original_admin_component_ids": [],
+    "complete_component_ids": [
+      "physical-component:9ef68049be5faeccccd1b62178bfd939de8c3226ddbb591070b41b0041a988b8"
+    ],
+    "complete_positive_length_neighbor_ids": [
+      "gb:PNG:ADM3:22992897B67281958124083"
+    ],
+    "component_count": 1,
+    "components_with_unmeasured_fragments": 0,
+    "components_without_existing_area": 0,
+    "dispatch_ready": false,
+    "exact_existing_fragment_area_sum_m2": {
+      "denominator": "35184372088832",
+      "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+      "numerator": "2535072022273265"
+    },
+    "exact_existing_support_area_sums_m2": {
+      "contradictory_land_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "extra_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_inland_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_land_support": {
+        "denominator": "35184372088832",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "2535072022273265"
+      },
+      "missing_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "outside_mapped_L1_context": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      }
+    },
+    "exclusive_next_prerequisite_area_sums_m2": {
+      "land-with-admin-partial-or-unbound-source-fitness-review": 72.05108040219741
+    },
+    "exclusive_next_prerequisite_counts": {
+      "land-with-admin-partial-or-unbound-source-fitness-review": 1
+    },
+    "fine_family_count": 1,
+    "hierarchy_unknown_component_count": 0,
+    "hierarchy_unknown_component_ids": [],
+    "id": "gap-source-batch:33bc01adc687d269652b7883",
+    "invalid_original_source_component_count": 0,
+    "measured_fragment_area_sum_m2": 72.05108040219741,
+    "mismatched_admin_component_ids": [],
+    "missing_admin_component_count": 0,
+    "missing_admin_component_ids": [],
+    "native_invalid_component_ids": [],
+    "numeric_closure_component_count": 0,
+    "numeric_closure_component_ids": [],
+    "operational_batch": "gap-operational-batch:241e2ce0cd7b6be8a234558b",
+    "original_fine_family": {
+      "aggregate_extent_lonlat": [
+        144.3103,
+        -7.49945441676622,
+        144.31033945215552,
+        -7.499126580500271
+      ],
+      "best_rank": {
+        "coordination_complexity": 32053,
+        "measured_impact": 82808,
+        "source_locator_readiness": 55698
+      },
+      "cause_status": "unknown",
+      "component_count": 1,
+      "component_ids": [
+        "physical-component:9ef68049be5faeccccd1b62178bfd939de8c3226ddbb591070b41b0041a988b8"
+      ],
+      "component_ids_sha256": "cbc468cafdb5915b625c08010711dcbe122a24d1719be975a88565ef8644f7b8",
+      "contact_ids": [
+        "gb:PNG:ADM3:22992897B67281958124083"
+      ],
+      "dispatch_status": "complete current triage backlog; canonical scope and live claim required",
+      "edge_neighbor_ids": [
+        "gb:PNG:ADM3:22992897B67281958124083"
+      ],
+      "existing_related_issues": [
+        386
+      ],
+      "grouping": {
+        "observed_scope_bucket": "outside-owned-centre-component-unchecked:other-contact-context",
+        "recorded_parent_ids": [
+          "framework:province:kikori-district:58821a341f44"
+        ],
+        "source_families": [
+          "553025240b5337db1364776d1a56075be5306e092392006b2da3d8a358307c34"
+        ],
+        "subcontinents": [
+          "framework:subcontinent:melanesia:17c129c50772"
+        ],
+        "work_kind": "source-authority-and-water-reference-research"
+      },
+      "id": "gap-source-batch:33bc01adc687d269652b7883",
+      "original_member_extent_references": {
+        "family": "selected-current-native-delta",
+        "field": "original_extent_lonlat",
+        "missing_extent_component_ids": []
+      },
+      "responsible_role": "GEO-source-research",
+      "source_families": [
+        {
+          "kind": "source-authority-and-product-comparison",
+          "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "recipe": "scripts/administrative.py",
+          "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PNG/ADM3/geoBoundaries-PNG-ADM3.geojson",
+          "reference_year": "2019",
+          "source_id": "gb:PNG:ADM3",
+          "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+        }
+      ]
+    },
+    "physical_authority": "unapproved",
+    "physical_reason_incidence_counts": {},
+    "physical_status_counts": {
+      "mapped-land-support": 1
+    },
+    "positive_length_neighbor_count": 1,
+    "source_fitness": "unapproved-for-all-components",
+    "source_fitness_required_compatible_land_component_ids": [],
+    "support_area_sums_m2": {
+      "contradictory_land_water_support": 0.0,
+      "extra_reconstruction": 0.0,
+      "mapped_inland_water_support": 0.0,
+      "mapped_land_support": 72.05108040219741,
+      "missing_reconstruction": 0.0,
+      "outside_mapped_L1_context": 0.0
+    },
+    "unmeasured_components": []
+  },
+  {
+    "admin_status_counts": {
+      "positive-source-coverage-mixed-partial-or-subject-unresolved": 1
+    },
+    "boundary_length_limit": "Boundary metres are unknown; complete positive-length neighbor IDs/counts are retained.",
+    "boundary_length_m": null,
+    "collision_prerequisites": [
+      387
+    ],
+    "compatible_original_admin_component_ids": [],
+    "complete_component_ids": [
+      "physical-component:91794cfc8c91cd5beafb07cb141172995d941c93eb46c7de72885de9025edfcd"
+    ],
+    "complete_positive_length_neighbor_ids": [
+      "gb:PNG:ADM3:22992897B82912780578891"
+    ],
+    "component_count": 1,
+    "components_with_unmeasured_fragments": 0,
+    "components_without_existing_area": 0,
+    "dispatch_ready": false,
+    "exact_existing_fragment_area_sum_m2": {
+      "denominator": "274877906944",
+      "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+      "numerator": "7399252052598625"
+    },
+    "exact_existing_support_area_sums_m2": {
+      "contradictory_land_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "extra_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_inland_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_land_support": {
+        "denominator": "274877906944",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "4119419173321139"
+      },
+      "missing_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "outside_mapped_L1_context": {
+        "denominator": "274877906944",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "3279832879277487"
+      }
+    },
+    "exclusive_next_prerequisite_area_sums_m2": {
+      "mixed-support-retain-whole-source-fitness-review": 26918.322155683654
+    },
+    "exclusive_next_prerequisite_counts": {
+      "mixed-support-retain-whole-source-fitness-review": 1
+    },
+    "fine_family_count": 1,
+    "hierarchy_unknown_component_count": 0,
+    "hierarchy_unknown_component_ids": [],
+    "id": "gap-source-batch:3fc5b77baa35d1b2ab55e883",
+    "invalid_original_source_component_count": 0,
+    "measured_fragment_area_sum_m2": 26918.322155683654,
+    "mismatched_admin_component_ids": [],
+    "missing_admin_component_count": 0,
+    "missing_admin_component_ids": [],
+    "native_invalid_component_ids": [],
+    "numeric_closure_component_count": 0,
+    "numeric_closure_component_ids": [],
+    "operational_batch": "gap-operational-batch:241e2ce0cd7b6be8a234558b",
+    "original_fine_family": {
+      "aggregate_extent_lonlat": [
+        152.39836887761967,
+        -10.68591670949533,
+        152.40384736052684,
+        -10.681815480331833
+      ],
+      "best_rank": {
+        "coordination_complexity": 29360,
+        "measured_impact": 67766,
+        "source_locator_readiness": 51019
+      },
+      "cause_status": "unknown",
+      "component_count": 1,
+      "component_ids": [
+        "physical-component:91794cfc8c91cd5beafb07cb141172995d941c93eb46c7de72885de9025edfcd"
+      ],
+      "component_ids_sha256": "76edcf0bec7779dd0010aeca672922026fbba2cb9dfa894b8346fdab1429f30a",
+      "contact_ids": [
+        "gb:PNG:ADM3:22992897B82912780578891"
+      ],
+      "dispatch_status": "complete current triage backlog; canonical scope and live claim required",
+      "edge_neighbor_ids": [
+        "gb:PNG:ADM3:22992897B82912780578891"
+      ],
+      "existing_related_issues": [
+        387
+      ],
+      "grouping": {
+        "observed_scope_bucket": "outside-owned-centre-component-unchecked:other-contact-context",
+        "recorded_parent_ids": [
+          "framework:province:samarai-murua-district:4edaaa3fd7e3"
+        ],
+        "source_families": [
+          "553025240b5337db1364776d1a56075be5306e092392006b2da3d8a358307c34"
+        ],
+        "subcontinents": [
+          "framework:subcontinent:melanesia:17c129c50772"
+        ],
+        "work_kind": "source-authority-and-water-reference-research"
+      },
+      "id": "gap-source-batch:3fc5b77baa35d1b2ab55e883",
+      "original_member_extent_references": {
+        "family": "selected-current-native-delta",
+        "field": "original_extent_lonlat",
+        "missing_extent_component_ids": []
+      },
+      "responsible_role": "GEO-source-research",
+      "source_families": [
+        {
+          "kind": "source-authority-and-product-comparison",
+          "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "recipe": "scripts/administrative.py",
+          "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PNG/ADM3/geoBoundaries-PNG-ADM3.geojson",
+          "reference_year": "2019",
+          "source_id": "gb:PNG:ADM3",
+          "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+        }
+      ]
+    },
+    "physical_authority": "unapproved",
+    "physical_reason_incidence_counts": {},
+    "physical_status_counts": {
+      "mixed-source-support": 1
+    },
+    "positive_length_neighbor_count": 1,
+    "source_fitness": "unapproved-for-all-components",
+    "source_fitness_required_compatible_land_component_ids": [],
+    "support_area_sums_m2": {
+      "contradictory_land_water_support": 0.0,
+      "extra_reconstruction": 0.0,
+      "mapped_inland_water_support": 0.0,
+      "mapped_land_support": 14986.359650069568,
+      "missing_reconstruction": 0.0,
+      "outside_mapped_L1_context": 11931.96250561409
+    },
+    "unmeasured_components": []
+  },
+  {
+    "admin_status_counts": {
+      "no-source-intersection-in-literal-domain": 1,
+      "positive-source-coverage-mixed-partial-or-subject-unresolved": 4
+    },
+    "boundary_length_limit": "Boundary metres are unknown; complete positive-length neighbor IDs/counts are retained.",
+    "boundary_length_m": null,
+    "collision_prerequisites": [
+      386
+    ],
+    "compatible_original_admin_component_ids": [],
+    "complete_component_ids": [
+      "physical-component:56489c721bac1766a590d84e12f293bf574fc3d33180dceeb87a09100632e11e",
+      "physical-component:76f7f6996c0990c4de8bbb3ec27f8a151316532801d32a49d89c603c5f12fe1a",
+      "physical-component:7b36dfaf63316a134de006b09d006d21fb57632d7359bb0e5b34572738897829",
+      "physical-component:b45afebcdd32d0f95edb57e8136f432d323c19483ca63fb861b288a959c214d3",
+      "physical-component:e5eefaf8efe7bce6215613325f8a1173ccbb8ee73f4f0e223c6a7ce4d4ef6abe"
+    ],
+    "complete_positive_length_neighbor_ids": [
+      "gb:IDN:ADM2:22746128B25112391877259",
+      "gb:IDN:ADM2:22746128B93097528927367"
+    ],
+    "component_count": 5,
+    "components_with_unmeasured_fragments": 0,
+    "components_without_existing_area": 0,
+    "dispatch_ready": false,
+    "exact_existing_fragment_area_sum_m2": {
+      "denominator": "1099511627776",
+      "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+      "numerator": "390431146437810793"
+    },
+    "exact_existing_support_area_sums_m2": {
+      "contradictory_land_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "extra_reconstruction": {
+        "denominator": "4722366482869645213696",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "4177242378667765"
+      },
+      "mapped_inland_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_land_support": {
+        "denominator": "17592186044416",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "3259382847399226031"
+      },
+      "missing_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "outside_mapped_L1_context": {
+        "denominator": "4398046511104",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "746878873910518247"
+      }
+    },
+    "exclusive_next_prerequisite_area_sums_m2": {
+      "engineering-numeric-closure-first": 26811.05727029056,
+      "mixed-support-retain-whole-source-fitness-review": 193169.01933738106,
+      "outside-source-domain-unclassified": 135114.98248464757
+    },
+    "exclusive_next_prerequisite_counts": {
+      "engineering-numeric-closure-first": 2,
+      "mixed-support-retain-whole-source-fitness-review": 1,
+      "outside-source-domain-unclassified": 2
+    },
+    "fine_family_count": 1,
+    "hierarchy_unknown_component_count": 0,
+    "hierarchy_unknown_component_ids": [],
+    "id": "gap-source-batch:5ddacca4d2ebbebb632dcba7",
+    "invalid_original_source_component_count": 0,
+    "measured_fragment_area_sum_m2": 355095.0590923192,
+    "mismatched_admin_component_ids": [],
+    "missing_admin_component_count": 0,
+    "missing_admin_component_ids": [],
+    "native_invalid_component_ids": [],
+    "numeric_closure_component_count": 2,
+    "numeric_closure_component_ids": [
+      "physical-component:7b36dfaf63316a134de006b09d006d21fb57632d7359bb0e5b34572738897829",
+      "physical-component:e5eefaf8efe7bce6215613325f8a1173ccbb8ee73f4f0e223c6a7ce4d4ef6abe"
+    ],
+    "operational_batch": "gap-operational-batch:241e2ce0cd7b6be8a234558b",
+    "original_fine_family": {
+      "aggregate_extent_lonlat": [
+        131.16164961394534,
+        -3.9308427462588496,
+        134.8846086447405,
+        -0.8014423863488105
+      ],
+      "best_rank": {
+        "coordination_complexity": 17498,
+        "measured_impact": 53287,
+        "source_locator_readiness": 30355
+      },
+      "cause_status": "unknown",
+      "component_count": 5,
+      "component_ids": [
+        "physical-component:56489c721bac1766a590d84e12f293bf574fc3d33180dceeb87a09100632e11e",
+        "physical-component:76f7f6996c0990c4de8bbb3ec27f8a151316532801d32a49d89c603c5f12fe1a",
+        "physical-component:7b36dfaf63316a134de006b09d006d21fb57632d7359bb0e5b34572738897829",
+        "physical-component:b45afebcdd32d0f95edb57e8136f432d323c19483ca63fb861b288a959c214d3",
+        "physical-component:e5eefaf8efe7bce6215613325f8a1173ccbb8ee73f4f0e223c6a7ce4d4ef6abe"
+      ],
+      "component_ids_sha256": "e8b13c1f964065c1a291dbade35db58c52ca365a0d478e8df999fdcec527e84c",
+      "contact_ids": [
+        "gb:IDN:ADM2:22746128B11366688050704",
+        "gb:IDN:ADM2:22746128B11480476919105",
+        "gb:IDN:ADM2:22746128B25112391877259",
+        "gb:IDN:ADM2:22746128B93097528927367"
+      ],
+      "dispatch_status": "complete current triage backlog; canonical scope and live claim required",
+      "edge_neighbor_ids": [
+        "gb:IDN:ADM2:22746128B25112391877259",
+        "gb:IDN:ADM2:22746128B93097528927367"
+      ],
+      "existing_related_issues": [
+        386
+      ],
+      "grouping": {
+        "observed_scope_bucket": "outside-owned-centre-component-unchecked:other-contact-context",
+        "recorded_parent_ids": [
+          "framework:province:west-papua:8b60f6de353b"
+        ],
+        "source_families": [
+          "64b6ecfe62756026d4accdcd9ba9b491e00c691867c86f8a45765fe1086afa20"
+        ],
+        "subcontinents": [
+          "framework:subcontinent:melanesia:17c129c50772"
+        ],
+        "work_kind": "source-authority-and-water-reference-research"
+      },
+      "id": "gap-source-batch:5ddacca4d2ebbebb632dcba7",
+      "original_member_extent_references": {
+        "family": "selected-current-native-delta",
+        "field": "original_extent_lonlat",
+        "missing_extent_component_ids": []
+      },
+      "responsible_role": "GEO-source-research",
+      "source_families": [
+        {
+          "kind": "source-authority-and-product-comparison",
+          "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "recipe": "scripts/administrative.py",
+          "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.geojson",
+          "reference_year": "2020",
+          "source_id": "gb:IDN:ADM2",
+          "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+        }
+      ]
+    },
+    "physical_authority": "unapproved",
+    "physical_reason_incidence_counts": {
+      "nonempty-support-closure-disagreement": 2
+    },
+    "physical_status_counts": {
+      "mixed-source-support": 1,
+      "outside-mapped-L1-context": 2,
+      "unknown": 2
+    },
+    "positive_length_neighbor_count": 2,
+    "source_fitness": "unapproved-for-all-components",
+    "source_fitness_required_compatible_land_component_ids": [],
+    "support_area_sums_m2": {
+      "contradictory_land_water_support": 0.0,
+      "extra_reconstruction": 8.845654808496303e-07,
+      "mapped_inland_water_support": 0.0,
+      "mapped_land_support": 185274.4644224473,
+      "missing_reconstruction": 0.0,
+      "outside_mapped_L1_context": 169820.59467193682
+    },
+    "unmeasured_components": []
+  },
+  {
+    "admin_status_counts": {},
+    "boundary_length_limit": "Boundary metres are unknown; complete positive-length neighbor IDs/counts are retained.",
+    "boundary_length_m": null,
+    "collision_prerequisites": [
+      454,
+      911,
+      1107
+    ],
+    "compatible_original_admin_component_ids": [],
+    "complete_component_ids": [
+      "physical-component:1c0757a8b6119db62215af58de5bf454137c634b347fe48a6a09d44a153fdb94",
+      "physical-component:f81af9bb2943222d5554fb978efb394f4c24e1bfec12cb4e022c2b58d49fe6d3"
+    ],
+    "complete_positive_length_neighbor_ids": [
+      "NCL-1259"
+    ],
+    "component_count": 2,
+    "components_with_unmeasured_fragments": 0,
+    "components_without_existing_area": 0,
+    "dispatch_ready": false,
+    "exact_existing_fragment_area_sum_m2": {
+      "denominator": "2251799813685248",
+      "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+      "numerator": "124804237421067239"
+    },
+    "exact_existing_support_area_sums_m2": {
+      "contradictory_land_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "extra_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_inland_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_land_support": {
+        "denominator": "2251799813685248",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "124804237421067239"
+      },
+      "missing_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "outside_mapped_L1_context": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      }
+    },
+    "exclusive_next_prerequisite_area_sums_m2": {
+      "land-without-admin-comparison-source-or-processing-custody": 55.424215182261364
+    },
+    "exclusive_next_prerequisite_counts": {
+      "land-without-admin-comparison-source-or-processing-custody": 2
+    },
+    "fine_family_count": 1,
+    "hierarchy_unknown_component_count": 0,
+    "hierarchy_unknown_component_ids": [],
+    "id": "gap-source-batch:72eb9ee2b20a1889cac1928e",
+    "invalid_original_source_component_count": 0,
+    "measured_fragment_area_sum_m2": 55.424215182261364,
+    "mismatched_admin_component_ids": [],
+    "missing_admin_component_count": 2,
+    "missing_admin_component_ids": [
+      "physical-component:1c0757a8b6119db62215af58de5bf454137c634b347fe48a6a09d44a153fdb94",
+      "physical-component:f81af9bb2943222d5554fb978efb394f4c24e1bfec12cb4e022c2b58d49fe6d3"
+    ],
+    "native_invalid_component_ids": [],
+    "numeric_closure_component_count": 0,
+    "numeric_closure_component_ids": [],
+    "operational_batch": "gap-operational-batch:241e2ce0cd7b6be8a234558b",
+    "original_fine_family": {
+      "aggregate_extent_lonlat": [
+        166.3678712205082,
+        -22.250895415971673,
+        166.5657,
+        -22.202097908965474
+      ],
+      "best_rank": {
+        "coordination_complexity": 5754,
+        "measured_impact": 82985,
+        "source_locator_readiness": 9893
+      },
+      "cause_status": "unknown",
+      "component_count": 2,
+      "component_ids": [
+        "physical-component:1c0757a8b6119db62215af58de5bf454137c634b347fe48a6a09d44a153fdb94",
+        "physical-component:f81af9bb2943222d5554fb978efb394f4c24e1bfec12cb4e022c2b58d49fe6d3"
+      ],
+      "component_ids_sha256": "5d93af7127c74ad205a12bcbfe5e104edd33e23cd7c97a81c61300599e3def6c",
+      "contact_ids": [
+        "NCL-1259"
+      ],
+      "dispatch_status": "complete current triage backlog; canonical scope and live claim required",
+      "edge_neighbor_ids": [
+        "NCL-1259"
+      ],
+      "existing_related_issues": [
+        454,
+        911,
+        1107
+      ],
+      "grouping": {
+        "observed_scope_bucket": "outside-owned-centre-component-unchecked:other-contact-context",
+        "recorded_parent_ids": [
+          "framework:province:sud:bc594d611e94"
+        ],
+        "source_families": [
+          "14ae5adc5c3e776adc51edd59624e4bb243d77a368ee520a1ffbbec605e899ef"
+        ],
+        "subcontinents": [
+          "framework:subcontinent:melanesia:17c129c50772"
+        ],
+        "work_kind": "source-authority-and-water-reference-research"
+      },
+      "id": "gap-source-batch:72eb9ee2b20a1889cac1928e",
+      "original_member_extent_references": {
+        "family": "selected-current-native-delta",
+        "field": "original_extent_lonlat",
+        "missing_extent_component_ids": []
+      },
+      "responsible_role": "GEO-source-research",
+      "source_families": [
+        {
+          "kind": "source-authority-and-product-comparison",
+          "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "recipe": "scripts/administrative.py",
+          "recorded_source_url": "https://www.naturalearthdata.com/",
+          "reference_year": "Undated modern reference",
+          "source_id": "natural-earth",
+          "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+        }
+      ]
+    },
+    "physical_authority": "unapproved",
+    "physical_reason_incidence_counts": {},
+    "physical_status_counts": {
+      "mapped-land-support": 2
+    },
+    "positive_length_neighbor_count": 1,
+    "source_fitness": "unapproved-for-all-components",
+    "source_fitness_required_compatible_land_component_ids": [],
+    "support_area_sums_m2": {
+      "contradictory_land_water_support": 0.0,
+      "extra_reconstruction": 0.0,
+      "mapped_inland_water_support": 0.0,
+      "mapped_land_support": 55.424215182261364,
+      "missing_reconstruction": 0.0,
+      "outside_mapped_L1_context": 0.0
+    },
+    "unmeasured_components": []
+  },
+  {
+    "admin_status_counts": {},
+    "boundary_length_limit": "Boundary metres are unknown; complete positive-length neighbor IDs/counts are retained.",
+    "boundary_length_m": null,
+    "collision_prerequisites": [
+      454,
+      911,
+      1107
+    ],
+    "compatible_original_admin_component_ids": [],
+    "complete_component_ids": [
+      "physical-component:d4b45985f5e76f82c8f4317b6b0453941c4ae25c72a999cdd20d8ec7ce6e3b23"
+    ],
+    "complete_positive_length_neighbor_ids": [],
+    "component_count": 1,
+    "components_with_unmeasured_fragments": 0,
+    "components_without_existing_area": 0,
+    "dispatch_ready": false,
+    "exact_existing_fragment_area_sum_m2": {
+      "denominator": "4398046511104",
+      "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+      "numerator": "2381660339173001"
+    },
+    "exact_existing_support_area_sums_m2": {
+      "contradictory_land_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "extra_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_inland_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_land_support": {
+        "denominator": "17592186044416",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "5194970332141891"
+      },
+      "missing_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "outside_mapped_L1_context": {
+        "denominator": "2199023255552",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "541458878068761"
+      }
+    },
+    "exclusive_next_prerequisite_area_sums_m2": {
+      "mixed-support-retain-whole-source-fitness-review": 541.5268649751399
+    },
+    "exclusive_next_prerequisite_counts": {
+      "mixed-support-retain-whole-source-fitness-review": 1
+    },
+    "fine_family_count": 1,
+    "hierarchy_unknown_component_count": 0,
+    "hierarchy_unknown_component_ids": [],
+    "id": "gap-source-batch:8832e431f92b0740bb714434",
+    "invalid_original_source_component_count": 0,
+    "measured_fragment_area_sum_m2": 541.5268649751399,
+    "mismatched_admin_component_ids": [],
+    "missing_admin_component_count": 1,
+    "missing_admin_component_ids": [
+      "physical-component:d4b45985f5e76f82c8f4317b6b0453941c4ae25c72a999cdd20d8ec7ce6e3b23"
+    ],
+    "native_invalid_component_ids": [],
+    "numeric_closure_component_count": 0,
+    "numeric_closure_component_ids": [],
+    "operational_batch": "gap-operational-batch:241e2ce0cd7b6be8a234558b",
+    "original_fine_family": {
+      "aggregate_extent_lonlat": [
+        167.18117051752876,
+        -20.829832714768756,
+        167.18462171070186,
+        -20.82281547712402
+      ],
+      "best_rank": {
+        "coordination_complexity": 43149,
+        "measured_impact": 81082,
+        "source_locator_readiness": 74779
+      },
+      "cause_status": "unknown",
+      "component_count": 1,
+      "component_ids": [
+        "physical-component:d4b45985f5e76f82c8f4317b6b0453941c4ae25c72a999cdd20d8ec7ce6e3b23"
+      ],
+      "component_ids_sha256": "d62e3c3ad4b78af15bb87672ce95e45de792661c6fba0d008a2902c2e1fa0dce",
+      "contact_ids": [
+        "NCL-1258"
+      ],
+      "dispatch_status": "complete current triage backlog; canonical scope and live claim required",
+      "edge_neighbor_ids": [],
+      "existing_related_issues": [
+        454,
+        911,
+        1107
+      ],
+      "grouping": {
+        "observed_scope_bucket": "outside-owned-centre-component-unchecked:other-contact-context",
+        "recorded_parent_ids": [
+          "framework:province:iles-loyaute:e5b43b46af0a"
+        ],
+        "source_families": [
+          "14ae5adc5c3e776adc51edd59624e4bb243d77a368ee520a1ffbbec605e899ef"
+        ],
+        "subcontinents": [
+          "framework:subcontinent:melanesia:17c129c50772"
+        ],
+        "work_kind": "source-authority-and-water-reference-research"
+      },
+      "id": "gap-source-batch:8832e431f92b0740bb714434",
+      "original_member_extent_references": {
+        "family": "selected-current-native-delta",
+        "field": "original_extent_lonlat",
+        "missing_extent_component_ids": []
+      },
+      "responsible_role": "GEO-source-research",
+      "source_families": [
+        {
+          "kind": "source-authority-and-product-comparison",
+          "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "recipe": "scripts/administrative.py",
+          "recorded_source_url": "https://www.naturalearthdata.com/",
+          "reference_year": "Undated modern reference",
+          "source_id": "natural-earth",
+          "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+        }
+      ]
+    },
+    "physical_authority": "unapproved",
+    "physical_reason_incidence_counts": {},
+    "physical_status_counts": {
+      "mixed-source-support": 1
+    },
+    "positive_length_neighbor_count": 0,
+    "source_fitness": "unapproved-for-all-components",
+    "source_fitness_required_compatible_land_component_ids": [],
+    "support_area_sums_m2": {
+      "contradictory_land_water_support": 0.0,
+      "extra_reconstruction": 0.0,
+      "mapped_inland_water_support": 0.0,
+      "mapped_land_support": 295.29987455941244,
+      "missing_reconstruction": 0.0,
+      "outside_mapped_L1_context": 246.22699041572605
+    },
+    "unmeasured_components": []
+  },
+  {
+    "admin_status_counts": {
+      "positive-source-coverage-mixed-partial-or-subject-unresolved": 2
+    },
+    "boundary_length_limit": "Boundary metres are unknown; complete positive-length neighbor IDs/counts are retained.",
+    "boundary_length_m": null,
+    "collision_prerequisites": [
+      386
+    ],
+    "compatible_original_admin_component_ids": [],
+    "complete_component_ids": [
+      "physical-component:47375cf5710ddd0ab39b65b283b919cc9a2244d5d9e294fa8f305442c1a67435",
+      "physical-component:7fd5b82562720e9d1c4e9786704f5467b6883759c94beda5bd0fd77854592550"
+    ],
+    "complete_positive_length_neighbor_ids": [
+      "gb:IDN:ADM2:22746128B96094928872069"
+    ],
+    "component_count": 2,
+    "components_with_unmeasured_fragments": 0,
+    "components_without_existing_area": 0,
+    "dispatch_ready": false,
+    "exact_existing_fragment_area_sum_m2": {
+      "denominator": "17592186044416",
+      "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+      "numerator": "4656869510572248393"
+    },
+    "exact_existing_support_area_sums_m2": {
+      "contradictory_land_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "extra_reconstruction": {
+        "denominator": "288230376151711744",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "494098200327"
+      },
+      "mapped_inland_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_land_support": {
+        "denominator": "17592186044416",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "2114184167839030089"
+      },
+      "missing_reconstruction": {
+        "denominator": "9007199254740992",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "1627871099"
+      },
+      "outside_mapped_L1_context": {
+        "denominator": "17179869184",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "2483091155016525"
+      }
+    },
+    "exclusive_next_prerequisite_area_sums_m2": {
+      "engineering-numeric-closure-first": 264416.7193366855,
+      "land-with-admin-partial-or-unbound-source-fitness-review": 295.6648328988418
+    },
+    "exclusive_next_prerequisite_counts": {
+      "engineering-numeric-closure-first": 1,
+      "land-with-admin-partial-or-unbound-source-fitness-review": 1
+    },
+    "fine_family_count": 1,
+    "hierarchy_unknown_component_count": 0,
+    "hierarchy_unknown_component_ids": [],
+    "id": "gap-source-batch:ab0c260ec581184085ade0e3",
+    "invalid_original_source_component_count": 0,
+    "measured_fragment_area_sum_m2": 264712.3841695843,
+    "mismatched_admin_component_ids": [],
+    "missing_admin_component_count": 0,
+    "missing_admin_component_ids": [],
+    "native_invalid_component_ids": [],
+    "numeric_closure_component_count": 1,
+    "numeric_closure_component_ids": [
+      "physical-component:7fd5b82562720e9d1c4e9786704f5467b6883759c94beda5bd0fd77854592550"
+    ],
+    "operational_batch": "gap-operational-batch:241e2ce0cd7b6be8a234558b",
+    "original_fine_family": {
+      "aggregate_extent_lonlat": [
+        134.8419037142379,
+        -1.8720619743528117,
+        136.21384447737728,
+        -1.0867815570424884
+      ],
+      "best_rank": {
+        "coordination_complexity": 14507,
+        "measured_impact": 50295,
+        "source_locator_readiness": 25111
+      },
+      "cause_status": "unknown",
+      "component_count": 2,
+      "component_ids": [
+        "physical-component:47375cf5710ddd0ab39b65b283b919cc9a2244d5d9e294fa8f305442c1a67435",
+        "physical-component:7fd5b82562720e9d1c4e9786704f5467b6883759c94beda5bd0fd77854592550"
+      ],
+      "component_ids_sha256": "a7cb00b168d9e6e2bbaec81ed572619f7ab3daf1fae26115885c5f83d6bf5ad3",
+      "contact_ids": [
+        "gb:IDN:ADM2:22746128B19254678251292",
+        "gb:IDN:ADM2:22746128B96094928872069"
+      ],
+      "dispatch_status": "complete current triage backlog; canonical scope and live claim required",
+      "edge_neighbor_ids": [
+        "gb:IDN:ADM2:22746128B96094928872069"
+      ],
+      "existing_related_issues": [
+        386
+      ],
+      "grouping": {
+        "observed_scope_bucket": "outside-owned-centre-component-unchecked:other-contact-context",
+        "recorded_parent_ids": [
+          "framework:province:papua:856ef2fb442b"
+        ],
+        "source_families": [
+          "64b6ecfe62756026d4accdcd9ba9b491e00c691867c86f8a45765fe1086afa20"
+        ],
+        "subcontinents": [
+          "framework:subcontinent:melanesia:17c129c50772"
+        ],
+        "work_kind": "source-authority-and-water-reference-research"
+      },
+      "id": "gap-source-batch:ab0c260ec581184085ade0e3",
+      "original_member_extent_references": {
+        "family": "selected-current-native-delta",
+        "field": "original_extent_lonlat",
+        "missing_extent_component_ids": []
+      },
+      "responsible_role": "GEO-source-research",
+      "source_families": [
+        {
+          "kind": "source-authority-and-product-comparison",
+          "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "recipe": "scripts/administrative.py",
+          "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.geojson",
+          "reference_year": "2020",
+          "source_id": "gb:IDN:ADM2",
+          "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+        }
+      ]
+    },
+    "physical_authority": "unapproved",
+    "physical_reason_incidence_counts": {
+      "nonempty-support-closure-disagreement": 2
+    },
+    "physical_status_counts": {
+      "mapped-land-support": 1,
+      "unknown": 1
+    },
+    "positive_length_neighbor_count": 1,
+    "source_fitness": "unapproved-for-all-components",
+    "source_fitness_required_compatible_land_component_ids": [],
+    "support_area_sums_m2": {
+      "contradictory_land_water_support": 0.0,
+      "extra_reconstruction": 1.7142474950902764e-06,
+      "mapped_inland_water_support": 0.0,
+      "mapped_land_support": 120177.45620136282,
+      "missing_reconstruction": 1.8072999752316576e-07,
+      "outside_mapped_L1_context": 144534.92796843202
+    },
+    "unmeasured_components": []
+  },
+  {
+    "admin_status_counts": {
+      "no-source-intersection-in-literal-domain": 2
+    },
+    "boundary_length_limit": "Boundary metres are unknown; complete positive-length neighbor IDs/counts are retained.",
+    "boundary_length_m": null,
+    "collision_prerequisites": [
+      386
+    ],
+    "compatible_original_admin_component_ids": [],
+    "complete_component_ids": [
+      "physical-component:b152ead109470c412b34e7eabbd9a56db95b0c8dc3bc027413bf7952c75740f5",
+      "physical-component:f2e4208cce53c8a178c2a4d457f9dad9a085261cb01e32dbb0c8ac99070bd285"
+    ],
+    "complete_positive_length_neighbor_ids": [
+      "gb:IDN:ADM2:22746128B21273779065212"
+    ],
+    "component_count": 2,
+    "components_with_unmeasured_fragments": 0,
+    "components_without_existing_area": 0,
+    "dispatch_ready": false,
+    "exact_existing_fragment_area_sum_m2": {
+      "denominator": "4398046511104",
+      "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+      "numerator": "8211054525246933"
+    },
+    "exact_existing_support_area_sums_m2": {
+      "contradictory_land_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "extra_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_inland_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_land_support": {
+        "denominator": "4398046511104",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "8211054525246933"
+      },
+      "missing_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "outside_mapped_L1_context": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      }
+    },
+    "exclusive_next_prerequisite_area_sums_m2": {
+      "land-with-admin-partial-or-unbound-source-fitness-review": 1866.977646670178
+    },
+    "exclusive_next_prerequisite_counts": {
+      "land-with-admin-partial-or-unbound-source-fitness-review": 2
+    },
+    "fine_family_count": 1,
+    "hierarchy_unknown_component_count": 0,
+    "hierarchy_unknown_component_ids": [],
+    "id": "gap-source-batch:ad587c7ba9c8057eaf69ae28",
+    "invalid_original_source_component_count": 0,
+    "measured_fragment_area_sum_m2": 1866.977646670178,
+    "mismatched_admin_component_ids": [],
+    "missing_admin_component_count": 0,
+    "missing_admin_component_ids": [],
+    "native_invalid_component_ids": [],
+    "numeric_closure_component_count": 0,
+    "numeric_closure_component_ids": [],
+    "operational_batch": "gap-operational-batch:241e2ce0cd7b6be8a234558b",
+    "original_fine_family": {
+      "aggregate_extent_lonlat": [
+        140.9076974587606,
+        -6.584037895675409,
+        140.9218401746725,
+        -6.460678114842897
+      ],
+      "best_rank": {
+        "coordination_complexity": 68521,
+        "measured_impact": 79319,
+        "source_locator_readiness": 62284
+      },
+      "cause_status": "unknown",
+      "component_count": 2,
+      "component_ids": [
+        "physical-component:b152ead109470c412b34e7eabbd9a56db95b0c8dc3bc027413bf7952c75740f5",
+        "physical-component:f2e4208cce53c8a178c2a4d457f9dad9a085261cb01e32dbb0c8ac99070bd285"
+      ],
+      "component_ids_sha256": "828a922c1208a7261cb3c38ee2768145f86ebf3ed62376ebe19c077a5f57817e",
+      "contact_ids": [
+        "gb:IDN:ADM2:22746128B21273779065212",
+        "gb:PNG:ADM3:22992897B56162521888322"
+      ],
+      "dispatch_status": "complete current triage backlog; canonical scope and live claim required",
+      "edge_neighbor_ids": [
+        "gb:IDN:ADM2:22746128B21273779065212"
+      ],
+      "existing_related_issues": [
+        386
+      ],
+      "grouping": {
+        "observed_scope_bucket": "outside-owned-centre-component-unchecked:other-contact-context",
+        "recorded_parent_ids": [
+          "framework:province:north-fly-district:f58446b65b27",
+          "framework:province:papua:856ef2fb442b"
+        ],
+        "source_families": [
+          "553025240b5337db1364776d1a56075be5306e092392006b2da3d8a358307c34",
+          "64b6ecfe62756026d4accdcd9ba9b491e00c691867c86f8a45765fe1086afa20"
+        ],
+        "subcontinents": [
+          "framework:subcontinent:melanesia:17c129c50772"
+        ],
+        "work_kind": "source-authority-and-water-reference-research"
+      },
+      "id": "gap-source-batch:ad587c7ba9c8057eaf69ae28",
+      "original_member_extent_references": {
+        "family": "selected-current-native-delta",
+        "field": "original_extent_lonlat",
+        "missing_extent_component_ids": []
+      },
+      "responsible_role": "GEO-source-research",
+      "source_families": [
+        {
+          "kind": "source-authority-and-product-comparison",
+          "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "recipe": "scripts/administrative.py",
+          "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PNG/ADM3/geoBoundaries-PNG-ADM3.geojson",
+          "reference_year": "2019",
+          "source_id": "gb:PNG:ADM3",
+          "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+        },
+        {
+          "kind": "source-authority-and-product-comparison",
+          "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "recipe": "scripts/administrative.py",
+          "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.geojson",
+          "reference_year": "2020",
+          "source_id": "gb:IDN:ADM2",
+          "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+        }
+      ]
+    },
+    "physical_authority": "unapproved",
+    "physical_reason_incidence_counts": {},
+    "physical_status_counts": {
+      "mapped-land-support": 2
+    },
+    "positive_length_neighbor_count": 1,
+    "source_fitness": "unapproved-for-all-components",
+    "source_fitness_required_compatible_land_component_ids": [],
+    "support_area_sums_m2": {
+      "contradictory_land_water_support": 0.0,
+      "extra_reconstruction": 0.0,
+      "mapped_inland_water_support": 0.0,
+      "mapped_land_support": 1866.977646670178,
+      "missing_reconstruction": 0.0,
+      "outside_mapped_L1_context": 0.0
+    },
+    "unmeasured_components": []
+  },
+  {
+    "admin_status_counts": {
+      "one-compatible-recorded-subject-uniquely-covers-component": 1
+    },
+    "boundary_length_limit": "Boundary metres are unknown; complete positive-length neighbor IDs/counts are retained.",
+    "boundary_length_m": null,
+    "collision_prerequisites": [
+      387
+    ],
+    "compatible_original_admin_component_ids": [
+      "physical-component:10f89b3868b4e895d2339368b755f073a626d439640301111352521c9bc24b4b"
+    ],
+    "complete_component_ids": [
+      "physical-component:10f89b3868b4e895d2339368b755f073a626d439640301111352521c9bc24b4b"
+    ],
+    "complete_positive_length_neighbor_ids": [
+      "gb:SLB:ADM1:17018030B68013150931387"
+    ],
+    "component_count": 1,
+    "components_with_unmeasured_fragments": 0,
+    "components_without_existing_area": 0,
+    "dispatch_ready": false,
+    "exact_existing_fragment_area_sum_m2": {
+      "denominator": "35184372088832",
+      "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+      "numerator": "2623538912804813"
+    },
+    "exact_existing_support_area_sums_m2": {
+      "contradictory_land_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "extra_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_inland_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_land_support": {
+        "denominator": "35184372088832",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "2623538912804813"
+      },
+      "missing_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "outside_mapped_L1_context": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      }
+    },
+    "exclusive_next_prerequisite_area_sums_m2": {
+      "land-plus-compatible-original-processing-reproduction-candidate": 74.56546065909643
+    },
+    "exclusive_next_prerequisite_counts": {
+      "land-plus-compatible-original-processing-reproduction-candidate": 1
+    },
+    "fine_family_count": 1,
+    "hierarchy_unknown_component_count": 0,
+    "hierarchy_unknown_component_ids": [],
+    "id": "gap-source-batch:cda72270fe02057af7bc959e",
+    "invalid_original_source_component_count": 0,
+    "measured_fragment_area_sum_m2": 74.56546065909643,
+    "mismatched_admin_component_ids": [],
+    "missing_admin_component_count": 0,
+    "missing_admin_component_ids": [],
+    "native_invalid_component_ids": [],
+    "numeric_closure_component_count": 0,
+    "numeric_closure_component_ids": [],
+    "operational_batch": "gap-operational-batch:241e2ce0cd7b6be8a234558b",
+    "original_fine_family": {
+      "aggregate_extent_lonlat": [
+        157.3081462236779,
+        -7.339848988089598,
+        157.30840405432065,
+        -7.3396
+      ],
+      "best_rank": {
+        "coordination_complexity": 3479,
+        "measured_impact": 82780,
+        "source_locator_readiness": 5954
+      },
+      "cause_status": "unknown",
+      "component_count": 1,
+      "component_ids": [
+        "physical-component:10f89b3868b4e895d2339368b755f073a626d439640301111352521c9bc24b4b"
+      ],
+      "component_ids_sha256": "8f4d1cbf915c101454cf07f281cd77c2ee4beff92a797cf9146362ef5831d24d",
+      "contact_ids": [
+        "gb:SLB:ADM1:17018030B68013150931387"
+      ],
+      "dispatch_status": "complete current triage backlog; canonical scope and live claim required",
+      "edge_neighbor_ids": [
+        "gb:SLB:ADM1:17018030B68013150931387"
+      ],
+      "existing_related_issues": [
+        387
+      ],
+      "grouping": {
+        "observed_scope_bucket": "outside-owned-centre-component-unchecked:other-contact-context",
+        "recorded_parent_ids": [
+          "framework:province:choiseul:ab27d1cd77eb"
+        ],
+        "source_families": [
+          "65d342920eca9a5a376b0880d8c83d4fb1ea5b5e0defcdcb62edc43deb048219"
+        ],
+        "subcontinents": [
+          "framework:subcontinent:melanesia:17c129c50772"
+        ],
+        "work_kind": "source-authority-and-water-reference-research"
+      },
+      "id": "gap-source-batch:cda72270fe02057af7bc959e",
+      "original_member_extent_references": {
+        "family": "selected-current-native-delta",
+        "field": "original_extent_lonlat",
+        "missing_extent_component_ids": []
+      },
+      "responsible_role": "GEO-source-research",
+      "source_families": [
+        {
+          "kind": "source-authority-and-product-comparison",
+          "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "recipe": "scripts/administrative.py",
+          "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLB/ADM1/geoBoundaries-SLB-ADM1.geojson",
+          "reference_year": "2021",
+          "source_id": "gb:SLB:ADM1",
+          "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+        }
+      ]
+    },
+    "physical_authority": "unapproved",
+    "physical_reason_incidence_counts": {},
+    "physical_status_counts": {
+      "mapped-land-support": 1
+    },
+    "positive_length_neighbor_count": 1,
+    "source_fitness": "unapproved-for-all-components",
+    "source_fitness_required_compatible_land_component_ids": [
+      "physical-component:10f89b3868b4e895d2339368b755f073a626d439640301111352521c9bc24b4b"
+    ],
+    "support_area_sums_m2": {
+      "contradictory_land_water_support": 0.0,
+      "extra_reconstruction": 0.0,
+      "mapped_inland_water_support": 0.0,
+      "mapped_land_support": 74.56546065909643,
+      "missing_reconstruction": 0.0,
+      "outside_mapped_L1_context": 0.0
+    },
+    "unmeasured_components": []
+  },
+  {
+    "admin_status_counts": {
+      "one-compatible-recorded-subject-uniquely-covers-component": 2
+    },
+    "boundary_length_limit": "Boundary metres are unknown; complete positive-length neighbor IDs/counts are retained.",
+    "boundary_length_m": null,
+    "collision_prerequisites": [
+      387
+    ],
+    "compatible_original_admin_component_ids": [
+      "physical-component:721838ee1e1d6c3acde27742d49376d80aeea2a3818aff8ef006e4d407827ebb",
+      "physical-component:854f216abedb0bc31b01c6cfa93a441c7aed86924b3331c0b61c72c2936733d3"
+    ],
+    "complete_component_ids": [
+      "physical-component:721838ee1e1d6c3acde27742d49376d80aeea2a3818aff8ef006e4d407827ebb",
+      "physical-component:854f216abedb0bc31b01c6cfa93a441c7aed86924b3331c0b61c72c2936733d3"
+    ],
+    "complete_positive_length_neighbor_ids": [],
+    "component_count": 2,
+    "components_with_unmeasured_fragments": 0,
+    "components_without_existing_area": 0,
+    "dispatch_ready": false,
+    "exact_existing_fragment_area_sum_m2": {
+      "denominator": "281474976710656",
+      "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+      "numerator": "25225761733167741"
+    },
+    "exact_existing_support_area_sums_m2": {
+      "contradictory_land_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "extra_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_inland_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_land_support": {
+        "denominator": "281474976710656",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "25225761733167741"
+      },
+      "missing_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "outside_mapped_L1_context": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      }
+    },
+    "exclusive_next_prerequisite_area_sums_m2": {
+      "land-plus-compatible-original-processing-reproduction-candidate": 89.61990876758726
+    },
+    "exclusive_next_prerequisite_counts": {
+      "land-plus-compatible-original-processing-reproduction-candidate": 2
+    },
+    "fine_family_count": 1,
+    "hierarchy_unknown_component_count": 0,
+    "hierarchy_unknown_component_ids": [],
+    "id": "gap-source-batch:da01a18537aad7221b48c471",
+    "invalid_original_source_component_count": 0,
+    "measured_fragment_area_sum_m2": 89.61990876758726,
+    "mismatched_admin_component_ids": [],
+    "missing_admin_component_count": 0,
+    "missing_admin_component_ids": [],
+    "native_invalid_component_ids": [],
+    "numeric_closure_component_count": 0,
+    "numeric_closure_component_ids": [],
+    "operational_batch": "gap-operational-batch:241e2ce0cd7b6be8a234558b",
+    "original_fine_family": {
+      "aggregate_extent_lonlat": [
+        156.0637,
+        -8.467520586473892,
+        157.8861580471067,
+        -6.859271527975375
+      ],
+      "best_rank": {
+        "coordination_complexity": 22990,
+        "measured_impact": 82730,
+        "source_locator_readiness": 39986
+      },
+      "cause_status": "unknown",
+      "component_count": 2,
+      "component_ids": [
+        "physical-component:721838ee1e1d6c3acde27742d49376d80aeea2a3818aff8ef006e4d407827ebb",
+        "physical-component:854f216abedb0bc31b01c6cfa93a441c7aed86924b3331c0b61c72c2936733d3"
+      ],
+      "component_ids_sha256": "922e8674578a09faf0d224da6da162617efb5b3aa29aa69cbc66748ce810b5ba",
+      "contact_ids": [
+        "gb:SLB:ADM1:17018030B8659224027401"
+      ],
+      "dispatch_status": "complete current triage backlog; canonical scope and live claim required",
+      "edge_neighbor_ids": [],
+      "existing_related_issues": [
+        387
+      ],
+      "grouping": {
+        "observed_scope_bucket": "outside-owned-centre-component-unchecked:other-contact-context",
+        "recorded_parent_ids": [
+          "framework:province:western:1ad96796acf3"
+        ],
+        "source_families": [
+          "65d342920eca9a5a376b0880d8c83d4fb1ea5b5e0defcdcb62edc43deb048219"
+        ],
+        "subcontinents": [
+          "framework:subcontinent:melanesia:17c129c50772"
+        ],
+        "work_kind": "source-authority-and-water-reference-research"
+      },
+      "id": "gap-source-batch:da01a18537aad7221b48c471",
+      "original_member_extent_references": {
+        "family": "selected-current-native-delta",
+        "field": "original_extent_lonlat",
+        "missing_extent_component_ids": []
+      },
+      "responsible_role": "GEO-source-research",
+      "source_families": [
+        {
+          "kind": "source-authority-and-product-comparison",
+          "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "recipe": "scripts/administrative.py",
+          "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLB/ADM1/geoBoundaries-SLB-ADM1.geojson",
+          "reference_year": "2021",
+          "source_id": "gb:SLB:ADM1",
+          "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+        }
+      ]
+    },
+    "physical_authority": "unapproved",
+    "physical_reason_incidence_counts": {},
+    "physical_status_counts": {
+      "mapped-land-support": 2
+    },
+    "positive_length_neighbor_count": 0,
+    "source_fitness": "unapproved-for-all-components",
+    "source_fitness_required_compatible_land_component_ids": [
+      "physical-component:721838ee1e1d6c3acde27742d49376d80aeea2a3818aff8ef006e4d407827ebb",
+      "physical-component:854f216abedb0bc31b01c6cfa93a441c7aed86924b3331c0b61c72c2936733d3"
+    ],
+    "support_area_sums_m2": {
+      "contradictory_land_water_support": 0.0,
+      "extra_reconstruction": 0.0,
+      "mapped_inland_water_support": 0.0,
+      "mapped_land_support": 89.61990876758726,
+      "missing_reconstruction": 0.0,
+      "outside_mapped_L1_context": 0.0
+    },
+    "unmeasured_components": []
+  },
+  {
+    "admin_status_counts": {
+      "one-compatible-recorded-subject-uniquely-covers-component": 1
+    },
+    "boundary_length_limit": "Boundary metres are unknown; complete positive-length neighbor IDs/counts are retained.",
+    "boundary_length_m": null,
+    "collision_prerequisites": [
+      387
+    ],
+    "compatible_original_admin_component_ids": [
+      "physical-component:8bce0affeeb72b155c7df58ba9138fd9cb40ed5134eb25332ef4fcb6c0335d78"
+    ],
+    "complete_component_ids": [
+      "physical-component:8bce0affeeb72b155c7df58ba9138fd9cb40ed5134eb25332ef4fcb6c0335d78"
+    ],
+    "complete_positive_length_neighbor_ids": [
+      "gb:SLB:ADM1:17018030B21762340724861"
+    ],
+    "component_count": 1,
+    "components_with_unmeasured_fragments": 0,
+    "components_without_existing_area": 0,
+    "dispatch_ready": false,
+    "exact_existing_fragment_area_sum_m2": {
+      "denominator": "9007199254740992",
+      "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+      "numerator": "3931402033218257"
+    },
+    "exact_existing_support_area_sums_m2": {
+      "contradictory_land_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "extra_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_inland_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_land_support": {
+        "denominator": "9007199254740992",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "3931402033218257"
+      },
+      "missing_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "outside_mapped_L1_context": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      }
+    },
+    "exclusive_next_prerequisite_area_sums_m2": {
+      "land-plus-compatible-original-processing-reproduction-candidate": 0.43647330563370634
+    },
+    "exclusive_next_prerequisite_counts": {
+      "land-plus-compatible-original-processing-reproduction-candidate": 1
+    },
+    "fine_family_count": 1,
+    "hierarchy_unknown_component_count": 0,
+    "hierarchy_unknown_component_ids": [],
+    "id": "gap-source-batch:e31c6e10338c57623af2d97d",
+    "invalid_original_source_component_count": 0,
+    "measured_fragment_area_sum_m2": 0.43647330563370634,
+    "mismatched_admin_component_ids": [],
+    "missing_admin_component_count": 0,
+    "missing_admin_component_ids": [],
+    "native_invalid_component_ids": [],
+    "numeric_closure_component_count": 0,
+    "numeric_closure_component_ids": [],
+    "operational_batch": "gap-operational-batch:241e2ce0cd7b6be8a234558b",
+    "original_fine_family": {
+      "aggregate_extent_lonlat": [
+        160.2765842479564,
+        -9.147907700999092,
+        160.2766080039378,
+        -9.147891528299597
+      ],
+      "best_rank": {
+        "coordination_complexity": 28218,
+        "measured_impact": 86690,
+        "source_locator_readiness": 49086
+      },
+      "cause_status": "unknown",
+      "component_count": 1,
+      "component_ids": [
+        "physical-component:8bce0affeeb72b155c7df58ba9138fd9cb40ed5134eb25332ef4fcb6c0335d78"
+      ],
+      "component_ids_sha256": "e2988391f75cf5198397a9712069816e0aeb7baa047edb01e121f210d3bc0076",
+      "contact_ids": [
+        "gb:SLB:ADM1:17018030B21762340724861"
+      ],
+      "dispatch_status": "complete current triage backlog; canonical scope and live claim required",
+      "edge_neighbor_ids": [
+        "gb:SLB:ADM1:17018030B21762340724861"
+      ],
+      "existing_related_issues": [
+        387
+      ],
+      "grouping": {
+        "observed_scope_bucket": "outside-owned-centre-component-unchecked:other-contact-context",
+        "recorded_parent_ids": [
+          "framework:province:central:491f0ed3831a"
+        ],
+        "source_families": [
+          "65d342920eca9a5a376b0880d8c83d4fb1ea5b5e0defcdcb62edc43deb048219"
+        ],
+        "subcontinents": [
+          "framework:subcontinent:melanesia:17c129c50772"
+        ],
+        "work_kind": "source-authority-and-water-reference-research"
+      },
+      "id": "gap-source-batch:e31c6e10338c57623af2d97d",
+      "original_member_extent_references": {
+        "family": "selected-current-native-delta",
+        "field": "original_extent_lonlat",
+        "missing_extent_component_ids": []
+      },
+      "responsible_role": "GEO-source-research",
+      "source_families": [
+        {
+          "kind": "source-authority-and-product-comparison",
+          "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "recipe": "scripts/administrative.py",
+          "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLB/ADM1/geoBoundaries-SLB-ADM1.geojson",
+          "reference_year": "2021",
+          "source_id": "gb:SLB:ADM1",
+          "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+        }
+      ]
+    },
+    "physical_authority": "unapproved",
+    "physical_reason_incidence_counts": {},
+    "physical_status_counts": {
+      "mapped-land-support": 1
+    },
+    "positive_length_neighbor_count": 1,
+    "source_fitness": "unapproved-for-all-components",
+    "source_fitness_required_compatible_land_component_ids": [
+      "physical-component:8bce0affeeb72b155c7df58ba9138fd9cb40ed5134eb25332ef4fcb6c0335d78"
+    ],
+    "support_area_sums_m2": {
+      "contradictory_land_water_support": 0.0,
+      "extra_reconstruction": 0.0,
+      "mapped_inland_water_support": 0.0,
+      "mapped_land_support": 0.43647330563370634,
+      "missing_reconstruction": 0.0,
+      "outside_mapped_L1_context": 0.0
+    },
+    "unmeasured_components": []
+  },
+  {
+    "admin_status_counts": {
+      "one-compatible-recorded-subject-uniquely-covers-component": 2
+    },
+    "boundary_length_limit": "Boundary metres are unknown; complete positive-length neighbor IDs/counts are retained.",
+    "boundary_length_m": null,
+    "collision_prerequisites": [
+      387
+    ],
+    "compatible_original_admin_component_ids": [
+      "physical-component:959db9b804312cdfcb293ce59f411d2cb1a279c8e200934290f3937c540a2c85",
+      "physical-component:a4fddec8ce3ce8a75de023b0b23b966be9de4c9d02f68c579a25e60dda89c68f"
+    ],
+    "complete_component_ids": [
+      "physical-component:959db9b804312cdfcb293ce59f411d2cb1a279c8e200934290f3937c540a2c85",
+      "physical-component:a4fddec8ce3ce8a75de023b0b23b966be9de4c9d02f68c579a25e60dda89c68f"
+    ],
+    "complete_positive_length_neighbor_ids": [
+      "gb:SLB:ADM1:17018030B28135645457785"
+    ],
+    "component_count": 2,
+    "components_with_unmeasured_fragments": 0,
+    "components_without_existing_area": 0,
+    "dispatch_ready": false,
+    "exact_existing_fragment_area_sum_m2": {
+      "denominator": "70368744177664",
+      "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+      "numerator": "2366403213766269"
+    },
+    "exact_existing_support_area_sums_m2": {
+      "contradictory_land_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "extra_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_inland_water_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "mapped_land_support": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "missing_reconstruction": {
+        "denominator": "1",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "0"
+      },
+      "outside_mapped_L1_context": {
+        "denominator": "70368744177664",
+        "interpretation": "Exact sum of original emitted binary64 measurements; not a new geometric measurement.",
+        "numerator": "2366403213766269"
+      }
+    },
+    "exclusive_next_prerequisite_area_sums_m2": {
+      "outside-source-domain-unclassified": 33.62861226841956
+    },
+    "exclusive_next_prerequisite_counts": {
+      "outside-source-domain-unclassified": 2
+    },
+    "fine_family_count": 1,
+    "hierarchy_unknown_component_count": 0,
+    "hierarchy_unknown_component_ids": [],
+    "id": "gap-source-batch:eb2aee0f9a9f5491b481c546",
+    "invalid_original_source_component_count": 0,
+    "measured_fragment_area_sum_m2": 33.62861226841956,
+    "mismatched_admin_component_ids": [],
+    "missing_admin_component_count": 0,
+    "missing_admin_component_ids": [],
+    "native_invalid_component_ids": [],
+    "numeric_closure_component_count": 0,
+    "numeric_closure_component_ids": [],
+    "operational_batch": "gap-operational-batch:241e2ce0cd7b6be8a234558b",
+    "original_fine_family": {
+      "aggregate_extent_lonlat": [
+        161.06702383842276,
+        -9.205418750825542,
+        161.24432537410803,
+        -8.90342492644528
+      ],
+      "best_rank": {
+        "coordination_complexity": 30151,
+        "measured_impact": 83305,
+        "source_locator_readiness": 52412
+      },
+      "cause_status": "unknown",
+      "component_count": 2,
+      "component_ids": [
+        "physical-component:959db9b804312cdfcb293ce59f411d2cb1a279c8e200934290f3937c540a2c85",
+        "physical-component:a4fddec8ce3ce8a75de023b0b23b966be9de4c9d02f68c579a25e60dda89c68f"
+      ],
+      "component_ids_sha256": "86f4b511c25bccde68cce8d573081554b82b129b420691f7834af346522450b4",
+      "contact_ids": [
+        "gb:SLB:ADM1:17018030B28135645457785"
+      ],
+      "dispatch_status": "complete current triage backlog; canonical scope and live claim required",
+      "edge_neighbor_ids": [
+        "gb:SLB:ADM1:17018030B28135645457785"
+      ],
+      "existing_related_issues": [
+        387
+      ],
+      "grouping": {
+        "observed_scope_bucket": "outside-owned-centre-component-unchecked:other-contact-context",
+        "recorded_parent_ids": [
+          "framework:province:malaita:c00d02ab0758"
+        ],
+        "source_families": [
+          "65d342920eca9a5a376b0880d8c83d4fb1ea5b5e0defcdcb62edc43deb048219"
+        ],
+        "subcontinents": [
+          "framework:subcontinent:melanesia:17c129c50772"
+        ],
+        "work_kind": "source-authority-and-water-reference-research"
+      },
+      "id": "gap-source-batch:eb2aee0f9a9f5491b481c546",
+      "original_member_extent_references": {
+        "family": "selected-current-native-delta",
+        "field": "original_extent_lonlat",
+        "missing_extent_component_ids": []
+      },
+      "responsible_role": "GEO-source-research",
+      "source_families": [
+        {
+          "kind": "source-authority-and-product-comparison",
+          "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "recipe": "scripts/administrative.py",
+          "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLB/ADM1/geoBoundaries-SLB-ADM1.geojson",
+          "reference_year": "2021",
+          "source_id": "gb:SLB:ADM1",
+          "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+        }
+      ]
+    },
+    "physical_authority": "unapproved",
+    "physical_reason_incidence_counts": {},
+    "physical_status_counts": {
+      "outside-mapped-L1-context": 2
+    },
+    "positive_length_neighbor_count": 1,
+    "source_fitness": "unapproved-for-all-components",
+    "source_fitness_required_compatible_land_component_ids": [],
+    "support_area_sums_m2": {
+      "contradictory_land_water_support": 0.0,
+      "extra_reconstruction": 0.0,
+      "mapped_inland_water_support": 0.0,
+      "mapped_land_support": 0.0,
+      "missing_reconstruction": 0.0,
+      "outside_mapped_L1_context": 33.62861226841956
+    },
+    "unmeasured_components": []
+  }
+]
