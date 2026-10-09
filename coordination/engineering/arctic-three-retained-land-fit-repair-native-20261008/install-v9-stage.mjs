@@ -32,14 +32,25 @@ export function authenticateReleaseProducts(root, registry, products) {
  for(const pin of pins)body(root,pin);
  return pins;
 }
+export function authenticateSelectedGeometry(root,pin) {
+ assert.equal(pin.logical_path,'data/geography/part-29.json');
+ assert(Number.isSafeInteger(pin.decoded_bytes)&&pin.decoded_bytes>0&&pin.decoded_bytes<=32*1024*1024);
+ assert(/^[a-f0-9]{64}$/.test(pin.decoded_sha256));
+ const raw=body(root,pin),geometry=gunzipSync(raw,{maxOutputLength:pin.decoded_bytes});
+ assert.equal(geometry.length,pin.decoded_bytes);assert.equal(sha(geometry),pin.decoded_sha256);
+ return geometry;
+}
 export async function installV9Stage({root,stage,context}){
- assert.equal(process.env.WORLDATLAS_PACKAGE_STAGE,root);assert.equal(fs.realpathSync(root),root);assert.notEqual(root,fs.realpathSync(process.env.WORLDATLAS_PACKAGE_SOURCE_ROOT));
+ assert.equal(fs.realpathSync(root),root);
  const artifact=context.kind==='authenticated-qualified-artifact-consumption-v1';
  const success=artifact?requireConsumedArcticArtifacts(context):requireArcticContinuation(context);assert.equal(success.manifest_sha256,stage.nativeManifest.sha256);assert.equal(success.release_id,stage.release_id);
+ if(artifact&&success.currentExecution.kind==='model-reader-checkout-execution')assert.equal(success.currentExecution.stage_root,root);
+ else{assert.equal(process.env.WORLDATLAS_PACKAGE_STAGE,root);assert.notEqual(root,fs.realpathSync(process.env.WORLDATLAS_PACKAGE_SOURCE_ROOT));}
  const manifestRaw=body(root,stage.nativeManifest),manifest=JSON.parse(manifestRaw),indexPin=manifest.native_asset_transport.index;
  const indexRaw=body(root,indexPin),index=JSON.parse(indexRaw);assert.equal(index.files.length,56);assert.equal(index.whole_bytes,47604645);
  const pixelPin={path:N+'/pixel-audit-v9.json',bytes:14325660,sha256:'fb87c4b48428579bb039337c3bd70180844ad6c5d0f14e03d57048215e99deda'};
- const proposed={path:'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29.json.gz',bytes:3399520,sha256:'5f76a01a2c43eeccb3a202507faf593f56157fe38bd89f541be3b64145bdb1a8'};
+ const proposed=artifact?success.selectedGeometry:{path:N+'/selected-geography/part-29.json.gz',bytes:3399520,sha256:'5f76a01a2c43eeccb3a202507faf593f56157fe38bd89f541be3b64145bdb1a8',decoded_bytes:12932723,decoded_sha256:'4eca02f85d5e3a0974a96a38d59e46b0b71b41d2513dcf20ab27eb17fd5a0b4c'};
+ if(artifact)assert.equal(proposed.logical_path,'data/geography/part-29.json');
  const oldPins=[{path:'data/pixel-audit.json',bytes:14323438,sha256:'a49773818f963c15c27b52a0cad7be6dabcb6dddf9523bdbc253118e177c9cd8'},{path:'data/geography/part-29.json',bytes:12932407,sha256:'c34114912dc620dce0821e251877470b5a83385ab3bf1284408f077b78bbdec8'},{path:'data/granularity-audit.json',bytes:10365238,sha256:'dec8c12a40a8f6d59ba5924cf52262c6831151f741f73863d3118bf5f9ff19c5'}];
  // Actual normal-package union: no invented scientific aggregate limit. All
  // ordinary members retain32MiB cap; input/decode/output costs are reported.
@@ -58,7 +69,8 @@ export async function installV9Stage({root,stage,context}){
  // All original temporal gzip bodies are authenticated before any replacement.
  for(const bucket of runtime.buckets)body(root,{path:'data/ownership-runtime/'+bucket.path,bytes:bucket.compressed_bytes,sha256:bucket.sha256});
  const old=oldPins.map(p=>body(root,p));const audit=JSON.parse(old[2]);assert.equal(audit.input_sha256['geography/part-29.json'],oldPins[1].sha256);assert.equal(audit.issues.length,0);
- const pixel=body(root,pixelPin),compressed=body(root,proposed);const geometry=gunzipSync(compressed,{maxOutputLength:12932723});assert.equal(geometry.length,12932723);assert.equal(sha(geometry),'4eca02f85d5e3a0974a96a38d59e46b0b71b41d2513dcf20ab27eb17fd5a0b4c');
+ const pixel=body(root,pixelPin);
+ const geometry=artifact?authenticateSelectedGeometry(root,proposed):gunzipSync(body(root,proposed),{maxOutputLength:proposed.decoded_bytes});assert.equal(geometry.length,proposed.decoded_bytes);assert.equal(sha(geometry),proposed.decoded_sha256);
  const registry=JSON.parse(gunzipSync(body(root,stage.registry),{maxOutputLength:stage.registry.decoded_bytes}));
  const releases=registry.batches.slice(-343);assert.equal(releases.length,343);
  // Historical V3 live-installer draft remains unqualified for this actual

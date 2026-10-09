@@ -10,6 +10,7 @@ import {restoreWholeImage} from '../eastern-two-gap-repair-native-20261007/whole
 import {restoredContextMember} from '../eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs';
 import {validateNativeSelectionReceipt} from '../../../scripts/native-ownership/require-verified-selection.mjs';
 import {requireCurrentExecution} from '../eastern-two-gap-repair-native-20261007/current-execution.mjs';
+import {requireCheckoutExecution} from './artifact-checkout-execution.mjs';
 import {validateRetainedAssociation} from './qualified-artifact-association.mjs';
 
 const N2 = 'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008';
@@ -19,6 +20,10 @@ const AFTER = '2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9'
 const MANIFEST = 'd9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba';
 const SUBJECTS = ['atlas:physical:CAN-15:NWT', 'atlas:physical:CAN-25:NUN'];
 const consumed = new WeakMap();
+function requireApplicationExecution(record) {
+  return record?.kind === 'model-reader-checkout-execution'
+    ? requireCheckoutExecution(record) : requireCurrentExecution(record);
+}
 const sha = raw => createHash('sha256').update(raw).digest('hex');
 const fingerprint = value => sha(JSON.stringify(value));
 const authorityFingerprint = context => {
@@ -95,7 +100,7 @@ function reader(root, ledger, defaultSpace = 'root') {
 export function requireConsumedArcticArtifacts(context) {
   const saved = consumed.get(context);
   assert(saved, 'Actual completed immutable artifact consumption required');
-  requireCurrentExecution(saved.currentExecution);
+  requireApplicationExecution(saved.currentExecution);
   assert.equal(authorityFingerprint(context), saved.fingerprint, 'Artifact consumption result changed');
   return saved;
 }
@@ -253,9 +258,14 @@ function requireReview(certificate, certificatePin, snapshot) {
 }
 
 export async function consumeQualifiedArcticArtifacts({root, stage, selection, restoredReceipt, currentExecution}) {
-  assert.equal(process.env.WORLDATLAS_PACKAGE_STAGE, root);
+  const issued = requireApplicationExecution(currentExecution);
   assert.equal(fs.realpathSync(root), root);
-  assert.notEqual(root, fs.realpathSync(process.env.WORLDATLAS_PACKAGE_SOURCE_ROOT));
+  if (issued.kind === 'model-reader-checkout-execution') {
+    assert.equal(issued.source_root, root);
+  } else {
+    assert.equal(process.env.WORLDATLAS_PACKAGE_STAGE, root);
+    assert.notEqual(root, fs.realpathSync(process.env.WORLDATLAS_PACKAGE_SOURCE_ROOT));
+  }
   assert.equal(stage.version, 4);
   assert.equal(stage.kind, 'arctic-qualified-artifact-application-consumption-v1');
   assert.equal(stage.issue, 1520);
@@ -271,7 +281,6 @@ export async function consumeQualifiedArcticArtifacts({root, stage, selection, r
   assert.equal(originalPixel.pin.sha256, 'a49773818f963c15c27b52a0cad7be6dabcb6dddf9523bdbc253118e177c9cd8');
   assert.equal(restoredReceipt.canonical_index_sha256, originalPixel.original_index_sha256);
   assert.equal(restoredReceipt.prior_index_sha256, 'ca1ab5fc3ef24470bcb79412f1d47a88281c6df0931461c5eb356079b75986fe');
-  const issued = requireCurrentExecution(currentExecution);
   assert.equal(issued.stage_root, root);
   const ledger = {members: new Map(), consumed: new Set(), encoded_read_bytes: 0, decoded_read_bytes: 0};
   const read = reader(root, ledger);
@@ -310,8 +319,11 @@ export async function consumeQualifiedArcticArtifacts({root, stage, selection, r
   const consumerCode = JSON.parse(read(certificate.application_consumer_code));
   assert.equal(consumerCode.kind, 'qualified-artifact-application-code-closure-v1');
   assert(consumerCode.critical_files.length > 0);
-  const critical = new Map(consumerCode.critical_files.map(pin => [pin.path, pin]));
-  assert.equal(critical.size, consumerCode.critical_files.length);
+  const entryCritical=consumerCode.entry_critical_files?.[issued.entry_point]??[];
+  assert(Array.isArray(entryCritical));
+  const criticalPins=[...consumerCode.critical_files,...entryCritical];
+  const critical = new Map(criticalPins.map(pin => [pin.path, pin]));
+  assert.equal(critical.size, criticalPins.length);
   const wrapperPaths = Object.values(consumerCode.entry_roles[issued.entry_point]).flat();
   assert(wrapperPaths.every(name => typeof name === 'string'));
   assert.equal(new Set(wrapperPaths).size, wrapperPaths.length);
@@ -474,6 +486,18 @@ export async function consumeQualifiedArcticArtifacts({root, stage, selection, r
   assert.deepEqual([...geography.unchanged_files.map(pin => pin.path), override.logical_path].sort(), world.parts.map(name => 'data/' + name).sort());
   for (const pin of geography.unchanged_files) read(pin);
   read(override);
+  // Independent certificate acceptance binds the qualified scientific values
+  // to this application representation. Consumption authenticates all whole
+  // proof bodies; it does not rerun the serializer or scientific operators.
+  const representation=certificate.geometry_application_representation;
+  assert.equal(representation.kind,'qualified-geometry-application-serialization');
+  assert.deepEqual(representation.application,override);
+  assert.equal(representation.unchanged_literal_full_records,1498);
+  assert.deepEqual(representation.changed_ids,geography.changed_ids);
+  assert.equal(representation.original_application_sha256,'c34114912dc620dce0821e251877470b5a83385ab3bf1284408f077b78bbdec8');
+  assert.equal(representation.scientific.decoded_sha256,'4eca02f85d5e3a0974a96a38d59e46b0b71b41d2513dcf20ab27eb17fd5a0b4c');
+  read(representation.scientific);
+  for(const pin of representation.proof_bodies)read(pin);
   // The single complete changed containing file is authenticated by the actual
   // selected map and installer; no unselected proposal substitutes for it.
   const comparison = JSON.parse(read(certificate.native_comparison));
@@ -524,10 +548,10 @@ export async function consumeQualifiedArcticArtifacts({root, stage, selection, r
         full_code_closure: issued.files, critical_consumer_code_sha256: certificate.application_consumer_code.sha256},
       consumed_input_bytes: {encoded: ledger.encoded_read_bytes, decoded: ledger.decoded_read_bytes},
       qualification_inventory_sha256: certificate.qualification_inventory.sha256},
-    releaseProducts, predecessorRelease: steps.at(-1).predecessor,
+    releaseProducts, selectedGeometry:override, predecessorRelease: steps.at(-1).predecessor,
     sourceAssociations: steps.slice(1).map(step => ({release: step.release, changed_ids: step.receipt.changed_ids}))};
   consumed.set(context, {currentExecution: issued, fingerprint: authorityFingerprint(context), nativeImage: image,
-    releaseProducts, manifest_sha256: MANIFEST, release_id: manifest.geographic_release,
+    releaseProducts, selectedGeometry:override, manifest_sha256: MANIFEST, release_id: manifest.geographic_release,
     certificate_sha256: certificatePin.sha256});
   return context;
 }
