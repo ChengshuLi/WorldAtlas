@@ -518,14 +518,14 @@
   "outputs": [
     {
       "path": "research/geography/ghana-togo-selection-provenance-1405/README.md",
-      "bytes": 6075,
-      "sha256": "b0330199d0fbee33051f4c2a8d9ceb0e3ee5ebdcd11c7f4dcd1c657eab670a02",
+      "bytes": 6476,
+      "sha256": "ef8fe7c697c0d2c8804b0583848f8ff1934e2f0d5e2f00706b9c77e0a2495326",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/ghana-togo-selection-provenance-1405/rank_reproduction.py",
-      "bytes": 32054,
-      "sha256": "45d1b413459b08bce445bf3bb5ab0bc82d2671cab2bdf051c3748b238ee52916",
+      "bytes": 31937,
+      "sha256": "fb5b71f4bff5446745927f4ee443690f943abaff38a604091f07c6ec4bf54d02",
       "hash_kind": "file-bytes"
     },
     {
@@ -635,6 +635,42 @@
       "bytes": 15318,
       "sha256": "c7bc765e86fdb7c3763140ce60cf3717e6626d8f8503d0cc9318aacaedf001fd",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-one/adverse-controls.json",
+      "bytes": 1073,
+      "sha256": "17af904c4c10981c76a3421607a76b6d5086bf8096264894f8caba7f2fe1dbd6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-one/publication.json",
+      "bytes": 501,
+      "sha256": "9d3f7254957a66266ed4065f69a7fac269531cfdc874b8b2e08733542c139947",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-one/selection-reproduction.json",
+      "bytes": 15318,
+      "sha256": "2e87296f4853431d73f05a93ec6845107f54b366219a0f26aa68fda40ddf2b42",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-two/adverse-controls.json",
+      "bytes": 1073,
+      "sha256": "17af904c4c10981c76a3421607a76b6d5086bf8096264894f8caba7f2fe1dbd6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-two/publication.json",
+      "bytes": 501,
+      "sha256": "ca71bf2ce4d04577ecb02e774eec512e6b69ff25210887bd08d1a223af140df7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-two/selection-reproduction.json",
+      "bytes": 15318,
+      "sha256": "2e87296f4853431d73f05a93ec6845107f54b366219a0f26aa68fda40ddf2b42",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
@@ -665,7 +701,7 @@
         "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
       },
       "evaluation_commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
-      "output_vintage": "rank-v3-one"
+      "output_vintage": "rank-v4-one"
     },
     {
       "id": "eligible_families",
@@ -678,7 +714,7 @@
         "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
       },
       "evaluation_commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
-      "output_vintage": "rank-v3-one"
+      "output_vintage": "rank-v4-one"
     },
     {
       "id": "native_rank_components",
@@ -691,7 +727,7 @@
         "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
       },
       "evaluation_commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
-      "output_vintage": "rank-v3-one"
+      "output_vintage": "rank-v4-one"
     },
     {
       "id": "selected_readiness_rank",
@@ -704,7 +740,7 @@
         "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
       },
       "evaluation_commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
-      "output_vintage": "rank-v3-one"
+      "output_vintage": "rank-v4-one"
     },
     {
       "id": "selected_current_impact_rank",
@@ -717,7 +753,7 @@
         "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
       },
       "evaluation_commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
-      "output_vintage": "rank-v3-one"
+      "output_vintage": "rank-v4-one"
     },
     {
       "id": "selected_complexity_rank",
@@ -730,7 +766,7 @@
         "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
       },
       "evaluation_commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
-      "output_vintage": "rank-v3-one"
+      "output_vintage": "rank-v4-one"
     },
     {
       "id": "family_position_one_based",
@@ -743,7 +779,7 @@
         "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
       },
       "evaluation_commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
-      "output_vintage": "rank-v3-one"
+      "output_vintage": "rank-v4-one"
     },
     {
       "id": "original_reported_impact_rank",
@@ -756,7 +792,7 @@
         "commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f"
       },
       "evaluation_commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
-      "output_vintage": "rank-v3-one"
+      "output_vintage": "rank-v4-one"
     },
     {
       "id": "original_family_best_readiness",
@@ -769,7 +805,7 @@
         "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
       },
       "evaluation_commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
-      "output_vintage": "rank-v3-one"
+      "output_vintage": "rank-v4-one"
     },
     {
       "id": "original_family_best_impact",
@@ -782,7 +818,7 @@
         "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
       },
       "evaluation_commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
-      "output_vintage": "rank-v3-one"
+      "output_vintage": "rank-v4-one"
     },
     {
       "id": "original_family_best_complexity",
@@ -795,7 +831,7 @@
         "commit": "d51c43e878c797d215ba5bd8285571fa14add443"
       },
       "evaluation_commit": "4a78e95a96a3a12f3baca85f948eb67a5f924b1f",
-      "output_vintage": "rank-v3-one"
+      "output_vintage": "rank-v4-one"
     }
   ],
   "summaries": [
@@ -884,8 +920,8 @@
     "geographic_approval": "unapproved"
   },
   "commands": [
-    "PYTHONDONTWRITEBYTECODE=1 /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/ghana-togo-selection-provenance-1405/rank_reproduction.py --repo . --vintage rank-v3-one",
-    "PYTHONDONTWRITEBYTECODE=1 /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/ghana-togo-selection-provenance-1405/rank_reproduction.py --repo . --vintage rank-v3-two",
+    "PYTHONDONTWRITEBYTECODE=1 /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/ghana-togo-selection-provenance-1405/rank_reproduction.py --repo . --vintage rank-v4-one",
+    "PYTHONDONTWRITEBYTECODE=1 /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/ghana-togo-selection-provenance-1405/rank_reproduction.py --repo . --vintage rank-v4-two",
     "node scripts/evidence-quality.mjs research/geography/ghana-togo-selection-provenance-1405/evidence-quality.json"
   ],
   "change_receipts": [
@@ -970,6 +1006,30 @@
       "status": "added"
     },
     {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-one/adverse-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-one/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-one/selection-reproduction.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-two/adverse-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-two/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-two/selection-reproduction.json",
+      "status": "added"
+    },
+    {
       "path": "research/geography/ghana-togo-selection-provenance-1405/evidence-quality.json",
       "status": "added"
     }
@@ -977,57 +1037,57 @@
   "metric_bindings": [
     {
       "metric_id": "eligible_rows",
-      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-one/selection-reproduction.json",
       "json_pointer": "/ranking/eligible_row_count"
     },
     {
       "metric_id": "eligible_families",
-      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-one/selection-reproduction.json",
       "json_pointer": "/ranking/eligible_family_count"
     },
     {
       "metric_id": "native_rank_components",
-      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-one/selection-reproduction.json",
       "json_pointer": "/ranking/native_rank_component_count"
     },
     {
       "metric_id": "selected_readiness_rank",
-      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-one/selection-reproduction.json",
       "json_pointer": "/ranking/selected/rank_tuple/0"
     },
     {
       "metric_id": "selected_current_impact_rank",
-      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-one/selection-reproduction.json",
       "json_pointer": "/ranking/selected/rank_tuple/1"
     },
     {
       "metric_id": "selected_complexity_rank",
-      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-one/selection-reproduction.json",
       "json_pointer": "/ranking/selected/rank_tuple/2"
     },
     {
       "metric_id": "family_position_one_based",
-      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-one/selection-reproduction.json",
       "json_pointer": "/ranking/selected/family_position_one_based"
     },
     {
       "metric_id": "original_reported_impact_rank",
-      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-one/selection-reproduction.json",
       "json_pointer": "/original_selection_audit/previous_eligible_tuple/1"
     },
     {
       "metric_id": "original_family_best_readiness",
-      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-one/selection-reproduction.json",
       "json_pointer": "/original_selection_audit/broader_original_family_best_rank/source_locator_readiness"
     },
     {
       "metric_id": "original_family_best_impact",
-      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-one/selection-reproduction.json",
       "json_pointer": "/original_selection_audit/broader_original_family_best_rank/measured_impact"
     },
     {
       "metric_id": "original_family_best_complexity",
-      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v3-one/selection-reproduction.json",
+      "path": "research/geography/ghana-togo-selection-provenance-1405/vintages/rank-v4-one/selection-reproduction.json",
       "json_pointer": "/original_selection_audit/broader_original_family_best_rank/coordination_complexity"
     }
   ]

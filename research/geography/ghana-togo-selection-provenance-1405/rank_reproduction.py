@@ -252,11 +252,11 @@ def run(repo: Path, vintage: str) -> list[dict]:
     # The project helper is loaded from exact current-base bytes, then its pinned copy
     # is used for every immutable reader and exclusive output publication.
     helper_file = repo / HELPER_PATH
-    code_bytes = helper_file.read_bytes()
-    code_commit = subprocess.check_output(['git', '-C', str(repo), 'rev-parse', 'HEAD^{commit}'], text=True).strip()
-    committed_helper = subprocess.check_output(['git', '-C', str(repo), 'show', f'{code_commit}:{HELPER_PATH}'])
-    if code_commit != HELPER_CODE or code_bytes != committed_helper or sha(code_bytes) != 'a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46':
-        raise ValueError('Execution helper differs from the pinned current-main implementation')
+    code_commit = HELPER_CODE
+    code_bytes = subprocess.check_output(['git', '-C', str(repo), 'show', f'{code_commit}:{HELPER_PATH}'])
+    working_helper = helper_file.read_bytes()
+    if working_helper != code_bytes or sha(code_bytes) != 'a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46':
+        raise ValueError('Working execution helper differs from the exact pinned base helper bytes')
     sys.path.insert(0, str(repo))
     bootstrap = importlib.import_module('scripts.evidence.immutable')
     helper_descriptor = {'path': HELPER_PATH, 'bytes': len(code_bytes), 'sha256': sha(code_bytes), 'hash_kind': 'file-bytes'}
