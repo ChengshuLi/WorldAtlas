@@ -104,6 +104,24 @@
         "sha256": "9e21c69da2d4eb68ff66a586c3efa716a71224ce9344338fb2c9da1b2d62989c",
         "hash_kind": "file-bytes",
         "role": "original-source"
+      },
+      {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 19446,
+        "sha256": "e36c2f9b54a92e8ab7d926b2601bdc823d8ffab93d159fa422ae93986afc47c4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/pr-gates.test.mjs",
+        "bytes": 17308,
+        "sha256": "1e14acd61d4c7553a052fe2f1493b2f6de8ff76459e7f8560c09a9b9826b9ed3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/MERGE_QUEUE_CLIENT.md",
+        "bytes": 4813,
+        "sha256": "5a0092e9ee71f317441bf1e67c4656f016b5eeda44f2811e06132801f437d758",
+        "hash_kind": "file-bytes"
       }
     ],
     "pins": {},
@@ -120,8 +138,8 @@
     },
     {
       "path": "coordination/engineering/setup-1543-20261009/README.md",
-      "bytes": 5163,
-      "sha256": "1761da770b10609c01d40281d965f1b8ef20fc666f575c0d190abe949711130a",
+      "bytes": 6038,
+      "sha256": "13b9b3c4751bd8f9fd7c75ad97b6136b9885de3de16855f2864f243a1ac11378",
       "hash_kind": "file-bytes"
     },
     {
@@ -456,14 +474,14 @@
     },
     {
       "path": "coordination/engineering/setup-1543-20261009/positive-control.json",
-      "bytes": 879,
-      "sha256": "b172154ca8bb0662fdddaceebc3dc7de69a1ed79d46a87dbb3599ffa6f937a1e",
+      "bytes": 1323,
+      "sha256": "b07330a321f86832ce14e85728220d022e2844b454b70d008251319a9a8b95b3",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/setup-1543-20261009/negative-control.json",
-      "bytes": 1282,
-      "sha256": "c995cc76e990510b4b4af17153c4a78d7696fb6d9d80cb11a0d90ea61b913b00",
+      "bytes": 1726,
+      "sha256": "bf40eb07afe1080f1759ac7264887cc1d6a3d67c291269e0889f732afd7f6d30",
       "hash_kind": "file-bytes"
     },
     {
@@ -482,6 +500,30 @@
       "path": "coordination/engineering/setup-1543-20261009/review-collision-controls-complete.log",
       "bytes": 4239,
       "sha256": "735bfdd20ed8c7db4910f5d919e3988174279fdb16a6058e8df7e41cdf4c65b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "bytes": 19633,
+      "sha256": "1a073b4d919b24c34f4d0ab210554c5c4ef8d3a2f1af104a712402f9b40b648e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/pr-gates.test.mjs",
+      "bytes": 19296,
+      "sha256": "ec96aad46e31eb6b4de867164c6031a5c8ebce645cded9627a52a19aed40fb74",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/MERGE_QUEUE_CLIENT.md",
+      "bytes": 5271,
+      "sha256": "a6f6c561cdfb96a801ba17b780c9dc9cbc36f4592c81465abb418e841e6b8cbd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/metadata-event-controls-final.log",
+      "bytes": 6031,
+      "sha256": "6ac4d8c6b3404b3bb775d5c32d19835c91d3d506650c1b09082aa63f36d9c225",
       "hash_kind": "file-bytes"
     }
   ],
@@ -744,6 +786,25 @@
     },
     {
       "path": "coordination/engineering/setup-1543-20261009/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "status": "modified",
+      "original_sha256": "e36c2f9b54a92e8ab7d926b2601bdc823d8ffab93d159fa422ae93986afc47c4"
+    },
+    {
+      "path": "test/pr-gates.test.mjs",
+      "status": "modified",
+      "original_sha256": "1e14acd61d4c7553a052fe2f1493b2f6de8ff76459e7f8560c09a9b9826b9ed3"
+    },
+    {
+      "path": "docs/MERGE_QUEUE_CLIENT.md",
+      "status": "modified",
+      "original_sha256": "5a0092e9ee71f317441bf1e67c4656f016b5eeda44f2811e06132801f437d758"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/metadata-event-controls-final.log",
       "status": "added"
     }
   ],

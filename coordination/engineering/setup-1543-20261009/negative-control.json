@@ -14,11 +14,16 @@
     {
       "path": "coordination/engineering/setup-1543-20261009/review-collision-controls-complete.log",
       "sha256": "735bfdd20ed8c7db4910f5d919e3988174279fdb16a6058e8df7e41cdf4c65b2"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/metadata-event-controls-final.log",
+      "sha256": "6ac4d8c6b3404b3bb775d5c32d19835c91d3d506650c1b09082aa63f36d9c225"
     }
   ],
   "checks": [
     "Wrong encoded/decoded/whole/member hashes, omitted and duplicate inventories, traversal, linked sources, destination collisions, accessors and loader mutation are rejected; incomplete adjudication fetch grants no authority.",
-    "Dangling image destination and profiler result/checkpoint/lease links reject before missing source reads, leaving only the original symlink and no new output."
+    "Dangling image destination and profiler result/checkpoint/lease links reject before missing source reads, leaving only the original symlink and no new output.",
+    "Actual workflow event predicates preserve code runs for opened/synchronize/reopened, separate readiness/edited cancellation, and always refresh profile/evidence/scope; original integration proof rejects absent, wrong or unsuccessful validation."
   ],
   "limits": [
     "Local controls do not establish hosted current-head full regression, scientific approval, publication or global quota margin."

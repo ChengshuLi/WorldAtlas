@@ -10,10 +10,15 @@
     {
       "path": "coordination/engineering/setup-1543-20261009/actual-adjudication-controls-final-corrected.log",
       "sha256": "3998262f8aa956b001d2b66e4b0f97c2c94232171af7f63b1fd543031b1a88ae"
+    },
+    {
+      "path": "coordination/engineering/setup-1543-20261009/metadata-event-controls-final.log",
+      "sha256": "6ac4d8c6b3404b3bb775d5c32d19835c91d3d506650c1b09082aa63f36d9c225"
     }
   ],
   "checks": [
-    "Complete cross-part restoration agrees with immutable original producer; all current/prior identities agree in full profiles; real adjudication preserves authority and dossier values."
+    "Complete cross-part restoration agrees with immutable original producer; all current/prior identities agree in full profiles; real adjudication preserves authority and dossier values.",
+    "Actual workflow event predicates preserve code runs for opened/synchronize/reopened, separate readiness/edited cancellation, and always refresh profile/evidence/scope; original integration proof rejects absent, wrong or unsuccessful validation."
   ],
   "limits": [
     "Local controls do not establish hosted current-head full regression, scientific approval, publication or global quota margin."
