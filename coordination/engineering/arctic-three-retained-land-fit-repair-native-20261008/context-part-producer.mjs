@@ -5,7 +5,7 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {gunzipSync, gzipSync} from 'node:zlib';
 import {admitPhase, authenticateAdmittedBody, readAdmittedBody} from './phase-admission.mjs';
-import {continueContextPart} from './context-part-continuation.mjs';
+import {continueContextPart, continueContextIndex} from './context-part-continuation.mjs';
 const sha = body => createHash('sha256').update(body).digest('hex');
 const MAX = 32 * 1024 * 1024;
 const ORIGINAL = 'c67345546a24479e29ff9e2872098c78b256209a';
@@ -35,7 +35,7 @@ export function produceContextPart(plan, outputValue) {
     metadataBytes: plan.metadata_bytes});
   assert(admission.descriptors + 1 <= 512);
   for (const snapshot of admission.snapshots) authenticateAdmittedBody(admission, snapshot.pin.path);
-  const callables = [produceContextPart, continueContextPart, admitPhase, authenticateAdmittedBody,
+  const callables = [produceContextPart, continueContextPart, continueContextIndex, admitPhase, authenticateAdmittedBody,
     readAdmittedBody, execFileSync, gunzipSync, gzipSync];
   const fingerprints = callables.map(fn => fn.toString());
   const git = args => execFileSync(plan.git.path, ['-C', root, ...args], {maxBuffer: MAX + 1, env: process.env});
@@ -63,7 +63,7 @@ export function produceContextPart(plan, outputValue) {
   assert(currentEncoded.length + currentDecoded.length + 131072 <= plan.output_reserve);
   const current = {...index.parts[4], bytes: currentEncoded.length, sha256: sha(currentEncoded),
     decoded_bytes: currentDecoded.length, decoded_sha256: sha(currentDecoded)};
-  const currentIndex = {...index, parts: index.parts.map((part, ordinal) => ordinal === 4 ? current : part)};
+  const currentIndex = continueContextIndex(index, current, footprints);
   assert.deepEqual(currentIndex.parts.filter((_, ordinal) => ordinal !== 4), index.parts.filter((_, ordinal) => ordinal !== 4));
   const report = {version: 1, kind: plan.kind, source_head: plan.source_head, original_commit: ORIGINAL,
     original_part: pin, current_part: current, complete_owner_order_preserved: true, original_owners: 1500,

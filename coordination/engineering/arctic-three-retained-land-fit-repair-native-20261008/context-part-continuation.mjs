@@ -25,3 +25,23 @@ export function continueContextPart(before, changedRows, {firstOwner, owners}) {
   return {after, changed_ids: changed, unchanged_full_rows: owners - 2,
     complete_owner_order_preserved: true};
 }
+
+export function continueContextIndex(index, currentPart, footprints) {
+  assert.equal(index.version, 1); assert.equal(index.locations, 49625);
+  assert.equal(index.owner_sha256, '90facdfa2c74a935e7e64fe2b2467de3b09f3b816eb96ba350f4f5bacb2227c2');
+  assert.equal(index.footprints_sha256, footprints.original_footprints_sha256);
+  assert.equal(footprints.original_footprints_sha256, 'b9a3c8bf375217dba3a50d1a022ec7e4ac6c6f1cdedff22845da953c805b7433');
+  assert.equal(footprints.current_footprints_sha256, '2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9');
+  assert.equal(index.parts.length, 34);
+  assert.equal(currentPart.path, index.parts[4].path);
+  assert.equal(currentPart.first_owner, index.parts[4].first_owner);
+  assert.equal(currentPart.owners, index.parts[4].owners);
+  let nextOwner = 1;
+  for (const part of index.parts) { assert.equal(part.first_owner, nextOwner); nextOwner += part.owners; }
+  assert.equal(nextOwner, index.locations + 1);
+  const after = {...index, footprints_sha256: footprints.current_footprints_sha256,
+    parts: index.parts.map((part, ordinal) => ordinal === 4 ? currentPart : part)};
+  assert.equal(after.locations, index.locations); assert.equal(after.owner_sha256, index.owner_sha256);
+  for (let ordinal = 0; ordinal < 34; ordinal++) if (ordinal !== 4) assert.equal(after.parts[ordinal], index.parts[ordinal]);
+  return after;
+}
