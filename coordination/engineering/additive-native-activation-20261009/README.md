@@ -44,28 +44,36 @@ the pilot/Alaska policy. A zero native gap is distinct from water and repair;
 positive cases need the demonstrated missing source-policy binding before any
 activation and do not block supported pilot/Alaska delivery.
 
-Current controls cover the real literal operator on small grids, private
-snapshot/projection refusal, consequential input mutations, publication
-boundary refusal and complete original metadata conservation. They do not
-qualify a final selected-v9 cold run or a selected release. All earlier logs
-remain preserved under the author cache.
+The final current-bank qualification is retained in `current-v9-qualification-final/`.
+It executed the exact 28-code closure at `9ec080a4688fc2a2a1a88b6332c3ac4cf900f3fb`
+after the independently accepted certificate self-pin correction. It accepted all
+12 supported components and 141 new cells, authenticated 72 affected rows and
+60 complete Arctic predecessor rows, and retained all 141 Arctic gains. The eight
+original exceptions remain unresolved/rejected. The maximum acquisition was
+216,571,055 bytes under the issued 234,734,255-byte payload bound; the complete
+external operating union was 268,435,456 bytes. Actual lifetime RSS was
+326,025,216 bytes, sampled peak 326,090,752 bytes, elapsed time 9.253 seconds,
+with no guard or surviving owned process. RSS is distinct from admitted payload.
 
-Final execution waits for actual #1627 and #1593 delivery, then fresh whole
-current code/runtime/input admission. Authenticate all affected rows plus the
-60-row/141-cell Arctic predecessor; retain every old assignment. One genuinely
-qualified current-bank result and ordinary output custody precede sidecar and
-selection changes, followed by actual normal consumer/regression and queue
-delivery. There is no activation or integrated repair claim yet.
+`release-final/` contains the privately verified V2 ledger, sparse patch, original
+authority registry, complete owner roster and literal v9 base manifest. The exact
+committed sidecar selects these four assets through the existing runtime contract.
+Earlier qualifications, failed package attempts and their original execution
+bindings remain separate historical vintages. Repeats occurred only after the
+demonstrated independent-consumer lifetime bug and duplicate certificate-pin bug;
+unchanged pilot/Alaska source science and historical repeatability were reused.
 
-The qualifier now uses one native base identity consistently and requires the
-privately consumed prior additive view and its complete component/authority set
-to be conserved. Forged-view refusals have passed; a genuine selected prior
-positive remains part of the final consumer qualification. No new policy class
-or certificate version is implied.
+The independent consumer releases duplicate complete asset graphs in a completed
+frame and admits its own acquisition under the unchanged 256 MiB ceiling. It still
+checks historical producer facts against their original issued 234,734,255-byte
+bound. It preserves genuine prior additive component policies and exceptions.
+A production draw/pick check covers the complete 132 affected/predecessor row view:
+141 new cells and 14,187,692 old assigned cells agree, including all 60 Arctic rows.
+That is a bounded row view, not a new global-world scientific audit.
 
-The static package bridge is a draft: it consumes the existing private selected
-reader, publishes the four exact envelope assets, and emits the effective
-reference through the existing runtime contract. Default-route and refusal
-controls do not qualify an activated package. Its final V4 package execution
-interface, inherited restoration metadata contribution, declared package input
-roster and current executing closure must be bound after the Arctic merge.
+The static bridge obtains genuine privately authenticated V4 package execution,
+reads only declared whole assets, and publishes the four bound runtime assets.
+Ordinary package output and final normal-gate delivery remain pending until their
+actual completion. These source-relative repairs do not establish contemporary
+physical authority, water status, historical borders or new source-policy classes.
+Choiseul and future administrative source classes remain separate work.
