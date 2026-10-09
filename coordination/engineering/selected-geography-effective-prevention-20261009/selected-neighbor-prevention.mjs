@@ -442,6 +442,28 @@ export function conserveCurrentNativeRows({originalPatches,currentRows,size}) {
 }
 
 const rebindKeys=(v,w,m)=>demand(v&&Object.keys(v).sort().join(',')===w.split(',').sort().join(','),m);
+export function nativeBaseSelection(selection) {
+ demand(selection&&typeof selection==='object'&&!Array.isArray(selection),'Missing complete selected native identity');
+ const {additive_release,...base}=selection;
+ return base;
+}
+
+// Only the actual checker-consumed prior view can establish earlier additions.
+// Conservation covers complete authority entries, primitives and exceptions;
+// a caller-supplied prior ledger or an asserted qualified flag is insufficient.
+export function requirePriorAdditiveConservation(snapshot,registry,ledger) {
+ if(snapshot.selection.additive_release===undefined)return {prior_components:0,prior_authorities:0};
+ const prior=snapshot.additive;
+ demand(prior&&selectedAdditions.get(prior)?.snapshot===snapshot,
+  'Require actual privately consumed prior additive selection');
+ const proof=compareVersionedRepairLedgers(prior.ledger,ledger,{beforeRegistry:prior.registry,afterRegistry:registry});
+ const byId=new Map(ledger.rows.map(row=>[row.component_id,row]));
+ const literal=row=>{if(prior.ledger.version!==1)return row;const {authority_sha256,rule_sha256,...body}=row;return body;};
+ for(const row of prior.ledger.rows)demand(byId.has(row.component_id)&&same(literal(byId.get(row.component_id)),literal(row)),
+  'Previously selected complete row or exception changed');
+ return {prior_components:proof.preserved_components,prior_authorities:proof.preserved_authorities};
+}
+
 export const CURRENT_REBIND_CODE=Object.freeze([
  'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs',
  'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs',
@@ -585,7 +607,7 @@ export function acquireCurrentRebindOperands(snapshot,registry,originalRows,orig
  demand(Number.isSafeInteger(carriedMetadataBytes)&&carriedMetadataBytes>=0&&carriedMetadataBytes<=PHASE,'Incomplete retained rebind reader metadata');
  // The private snapshot authenticates the selected base and optional additive
  // hook. Acquisition reads only its base manifest/source roster, never a delta.
- const {additive_release,...baseSelection}=snapshot.selection;
+ const baseSelection=nativeBaseSelection(snapshot.selection);
  const targets=new Map();for(const row of originalRows){demand(['assigned','zero-cell'].includes(row.disposition),'Unsupported original rebind row');const owner=snapshot.owners[row.pixelIndex-1];demand(owner?.id===row.target_id,'Current rebind target owner differs');targets.set(row.target_id,owner);}
  const phases=[],sourceInputs=[],nativeInputs=[],currentTargets=[];let predecessorRows=[];
  const bodyIdentity=({commit,...p})=>p;
@@ -708,7 +730,7 @@ export function readSelectedAdditive(snapshot) {
  const descriptor=reader.descriptor(hook.path);demand(descriptor.bytes===hook.bytes,'Committed additive sidecar whole length differs');
  const sidecar=reader.json(hook.path,{expected:hook.sha256});
  demand(sidecar?.version===2&&sidecar.kind==='retained-native-additive-selection-v2'&&Object.keys(sidecar).sort().join(',')==='authority_registry,base_selection,kind,logical_asset_map,runtime_envelope,version','Unsupported committed additive sidecar');
- const {additive_release,...baseSelection}=selection;
+ const baseSelection=nativeBaseSelection(selection);
  demand(same(sidecar.base_selection,baseSelection),'Stale/foreign actual native base selection');
  const whole=p=>{
   pinCheck(p);let version=p.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
