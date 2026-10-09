@@ -1,0 +1,1568 @@
+{
+  "baseline_commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8",
+  "scope": "Complete file/workflow inventory; test files retain their own assertions and TAP case timings. No sampled test substitution.",
+  "tests": [
+    {
+      "path": "test/attributes.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/audit-grid-intervals.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/boundary-version-hash.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/build-context-continuation.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/build-context-validation-vintage.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/category-palette.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/category-presentation.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/claim-readiness-races.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/cloudflare-access.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/cloudflare-republish.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/color-perception.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/compact-context-inputs.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/compact-map-client.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/compact-membership-production.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/compact-membership-profile.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/compact-membership-storage.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/compact-ownership.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/compact-recovery-profile.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/content-backend.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/context-input-stage.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/coverage-browser.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/coverage-classification.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/coverage-product.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/coverage-scope.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/coverage-source-policy.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/credential-envelope.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/current-postgres-recovery.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/deployment-budget-scope.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/deployment-budget.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/environment-classification-db.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/environment-classifications.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/evidence-family-record-binding.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/evidence-partition-review.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/evidence-partitions.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/evidence-prevention.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/evidence-quality.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": true,
+      "handoff_controls": true
+    },
+    {
+      "path": "test/evidence-revalidation-chain.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/evidence-suppression.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/exact-source-predicates.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/final-capacity.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/footprint-versions.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/full-regression-shards.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/geographic-adjudication-api.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/geographic-adjudication.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/geographic-archive.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/geographic-bootstrap.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/geographic-components.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/geographic-gaps.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/geographic-grid.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/geographic-proof-chronology.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/geographic-regression.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/geographic-release-admission.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/geographic-release-manifest.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/geographic-releases.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/geographic-report-artifact.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/geographic-water.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/geography-bootstrap.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/geography-import-pin-verifier.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/geography-subject-binding.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/geography-worker-lane.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": true,
+      "handoff_controls": true
+    },
+    {
+      "path": "test/git-blob-transport.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/github-quota.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/handoff-scope.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": true,
+      "handoff_controls": true
+    },
+    {
+      "path": "test/historical-evidence.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": true
+    },
+    {
+      "path": "test/hosted-catalog.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/hosted-evidence-availability.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/hosted-migration-transport.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/hosted-records.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/hosted-temporal-client.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/hosted-temporal-geography.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/immutable-git-blobs.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/import-records.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/install-macro-reference.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/install-reviewed-geography.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/integration-profile-restoration.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/integration-proof.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": true,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/integration-streaming.test.mjs",
+      "baseline_shard": -1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/issue-claims.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 2,
+      "focused_integration": true,
+      "handoff_controls": true
+    },
+    {
+      "path": "test/issue-readiness.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/job-deadline-independent.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/job-deadline.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/land-creations.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/live-membership-api-functions.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/local-workspace.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/lossless-audit-inputs.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/macro-foundation-contract.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/macro-policy-provenance.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/macro-reference-split.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/macro-restoration-proofs.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/macro-review-projection.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/map-color-neighbors.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/map-snapshots.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/marcus-restoration.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/media-provenance.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/membership-storage-benchmark.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/merge-integration-client.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 0,
+      "focused_integration": true,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/merge-integration-entrypoint.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 1,
+      "focused_integration": true,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 2,
+      "focused_integration": true,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/merge-scheduler.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/migration-hashes.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/model-hierarchy-migration.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/model-semantic-migration.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/model-topology-migration.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/model.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/native-context-client.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/native-dated-browser.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/native-grid.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/native-latitudes.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/native-location-context.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/native-materialization-gate.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/native-ownership-compilation.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/native-preparation.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/native-regression-inputs.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/native-renderer.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/native-source-digest.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/native-startup.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/native-year-selection.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/neon-capacity.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/neon-forward-migrations.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/neon-storage-migration.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/neon-table-storage.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/neon-verification.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/oceania-land-restoration.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/ownership-assets.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/ownership-delivery.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/package-build.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/package-inputs.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/package-startup-ownership.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/palette-intervals.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/parent-indexes.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/physical-audit-evidence.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/physical-audit-ledger.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/physical-component-controls-runner.test.mjs",
+      "baseline_shard": -1,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/physical-component-custody.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/physical-component-evidence-controls.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/physical-component-evidence.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/physical-component-fixture.test.mjs",
+      "baseline_shard": -1,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/physical-component-structure.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/physical-gap-audit.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/physical-gap-crosswalk.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/physical-gap-priority-controls.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/physical-gap-priority-evidence-controls.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/physical-gap-priority-evidence.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/physical-gap-successor.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/pinned-native-package-inputs.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/pixel-grid.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/pixel-metadata.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/pixel-ownership.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/postgres-adapter.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/postgres-contract.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/postgres-restore.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/postgres-runtime-role.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/premerge-evidence.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": true,
+      "handoff_controls": true
+    },
+    {
+      "path": "test/prepared-evidence.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/prepared-parity.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/publication-cloudflare.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/publication-plan.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/queue-readiness-audit.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/r2-migration.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/read-prepared-evidence-bundle.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/rebind-coverage-manifest.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/recovery-backup-envelope.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/reference-archive.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/reference-bundle.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/reference-context.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/reference-hierarchy-release.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/reference-macro-binding.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/regional-research-gate.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": true,
+      "handoff_controls": true
+    },
+    {
+      "path": "test/research-bundle.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/research-catalog.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/research-media-upload.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/retained-object-recovery.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/runtime-ownership.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/select-build-ownership.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/semantic-followup.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/site-r2-export.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/source-policy-corrections.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/stage-site-migrations.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/storage-checkpoint.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/storage-export-v2.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/storage-export-v3.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/storage-export.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/supplement-source-hints.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/temporal-geography-worker.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/temporal-geography.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/temporal.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/trusted-geography-check.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/trusted-workflow-checkouts.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": true,
+      "handoff_controls": true
+    },
+    {
+      "path": "test/typed-client-deadline.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/typed-integration.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/typed-observations.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/unresolved-attributes.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/unsettled-rank.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/wheel-measurement.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/wheel-zoom.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/worker-identity.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/worker-result.test.mjs",
+      "baseline_shard": 0,
+      "candidate_shard": 0,
+      "focused_integration": true,
+      "handoff_controls": true
+    },
+    {
+      "path": "test/worldwide-gap-inventory.test.mjs",
+      "baseline_shard": 1,
+      "candidate_shard": 1,
+      "focused_integration": false,
+      "handoff_controls": false
+    },
+    {
+      "path": "test/worldwide-gap-successor.test.mjs",
+      "baseline_shard": 2,
+      "candidate_shard": 2,
+      "focused_integration": false,
+      "handoff_controls": false
+    }
+  ],
+  "test_support_and_standalone": [
+    "test/border-map-check.mjs",
+    "test/browser.mjs",
+    "test/compact-ownership-benchmark.mjs",
+    "test/content-independence.mjs",
+    "test/coverage-browser.mjs",
+    "test/coverage-classification.py",
+    "test/coverage-source-policy.browser.mjs",
+    "test/dated-membership-browser.mjs",
+    "test/ellipsoidal-area.py",
+    "test/europe-source-policy-corrections.py",
+    "test/evidence-geography.py",
+    "test/evidence-prevention.py",
+    "test/exact-source-predicates.py",
+    "test/external-source-quality.py",
+    "test/fixtures/cloudflare-publication.mjs",
+    "test/fixtures/deadline/independent-boundaries.mjs",
+    "test/fixtures/deadline/independent-native-http.mjs",
+    "test/fixtures/geographic-admission/independent-boundaries.mjs",
+    "test/fixtures/historical-evidence-1381.json",
+    "test/fixtures/typed-observation-contract-v1.json",
+    "test/geographic-adjudication-pipeline.py",
+    "test/geographic-adjudication.py",
+    "test/geographic-components.py",
+    "test/geographic-decisions.py",
+    "test/geographic-gaps.py",
+    "test/geographic-grid.py",
+    "test/geographic-regression.py",
+    "test/geographic-release-preparation.mjs",
+    "test/geographic-water.py",
+    "test/geography.py",
+    "test/global-macro-geography.py",
+    "test/global-semantic-closure.py",
+    "test/historical-map-check.mjs",
+    "test/import-records-ui.mjs",
+    "test/lossless-audit-inputs.py",
+    "test/macro-boundaries.py",
+    "test/macro-boundary-migration.py",
+    "test/macro-envelopes.py",
+    "test/majority-cached.py",
+    "test/majority.py",
+    "test/namibia-repair.py",
+    "test/namibia-source-annotations.py",
+    "test/native-build-binding.mjs",
+    "test/native-dated-browser.mjs",
+    "test/native-renderer.mjs",
+    "test/native-world-context.mjs",
+    "test/ownership-incremental.py",
+    "test/ownership-runtime-validation.py",
+    "test/ownership-transport-benchmark.mjs",
+    "test/physical-audit-ledger.py",
+    "test/physical-component-custody.py",
+    "test/physical-component-evidence-controls.py",
+    "test/physical-component-structure.py",
+    "test/physical-gap-audit.py",
+    "test/physical-gap-crosswalk.py",
+    "test/physical-gap-priority-controls.py",
+    "test/physical-gap-priority-evidence-controls.py",
+    "test/physical-gap-successor.py",
+    "test/reference-hierarchy-rebase.py",
+    "test/reference-incremental.py",
+    "test/review-framework-report-only.py",
+    "test/reviewed-geography-restoration.py",
+    "test/source-territory-repairs.py",
+    "test/static-rendering.mjs",
+    "test/supplement-source-hints.py",
+    "test/test_macro_boundary_archive_replay.py",
+    "test/test_macro_install_proof.py",
+    "test/test_macro_restoration_validation.py",
+    "test/three-island-restoration.test.py",
+    "test/trusted-geography-check.py",
+    "test/wheel-browser.mjs",
+    "test/worldwide-contexts-1184.py",
+    "test/worldwide-current-native-controls.py",
+    "test/worldwide-gap-inventory.py",
+    "test/worldwide-gap-successor.py",
+    "test/worldwide-native-batches-controls.py"
+  ],
+  "entry_points": {
+    "npm_test": "node --test --test-concurrency=2 test/*.test.mjs",
+    "npm_test_ui": "node --test test/browser.mjs",
+    "npm_test_static": "node test/static-rendering.mjs",
+    "pr_and_queue": "node scripts/run-integration-tests.mjs",
+    "handoff_scope": [
+      "test/handoff-scope.test.mjs",
+      "test/issue-claims.test.mjs",
+      "test/worker-result.test.mjs",
+      "test/regional-research-gate.test.mjs",
+      "test/geography-worker-lane.test.mjs",
+      "test/evidence-quality.test.mjs",
+      "test/historical-evidence.test.mjs",
+      "test/premerge-evidence.test.mjs",
+      "test/trusted-workflow-checkouts.test.mjs"
+    ],
+    "package": [
+      "test/deployment-budget.test.mjs",
+      "test/deployment-budget-scope.test.mjs",
+      "test/package-inputs.test.mjs",
+      "test/package-build.test.mjs"
+    ]
+  },
+  "workflows": [
+    {
+      "path": ".github/workflows/compact-membership-production.yml",
+      "purpose": "Operator production operation; no live performance experiment authorized"
+    },
+    {
+      "path": ".github/workflows/current-postgres-recovery.yml",
+      "purpose": "Operator database recovery; no live performance experiment authorized"
+    },
+    {
+      "path": ".github/workflows/deployment-budget.yml",
+      "purpose": "PR/main push: trusted declared-input classification; conditional package tests/build"
+    },
+    {
+      "path": ".github/workflows/handoff-scope.yml",
+      "purpose": "PR: trusted ownership/evidence plus bounded candidate coordination controls"
+    },
+    {
+      "path": ".github/workflows/issue-claims.yml",
+      "purpose": "Explicit issue reservation, renewal/release/recovery; not per-PR regression"
+    },
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "purpose": "PR: trusted classification/geography and credential-free selected regression"
+    },
+    {
+      "path": ".github/workflows/merge-scheduler.yml",
+      "purpose": "Registration/completion/five-minute recovery: FIFO admission; no scientific regression"
+    },
+    {
+      "path": ".github/workflows/native-recovery-fixture.yml",
+      "purpose": "Explicit restoration fixture investigation; not per-PR regression"
+    },
+    {
+      "path": ".github/workflows/neon-forward-migrations.yml",
+      "purpose": "Operator database migration; no live performance experiment authorized"
+    },
+    {
+      "path": ".github/workflows/neon-sql-verify.yml",
+      "purpose": "Operator SQL verification; not per-PR regression"
+    },
+    {
+      "path": ".github/workflows/neon-storage-migration.yml",
+      "purpose": "Operator storage migration; no live performance experiment authorized"
+    },
+    {
+      "path": ".github/workflows/neon-table-storage.yml",
+      "purpose": "Operator storage observation; not per-PR regression"
+    },
+    {
+      "path": ".github/workflows/neon-verify.yml",
+      "purpose": "Operator Neon verification; not per-PR regression"
+    },
+    {
+      "path": ".github/workflows/queue-readiness-audit.yml",
+      "purpose": "Explicit read-only readiness investigation; hourly schedule disabled"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "purpose": "Registered request: trusted preparation/geography, isolated combined-tree regression, final FIFO authority/merge"
+    }
+  ],
+  "selection": "Existing integration-profile and package-input contracts unchanged. Unknown paths, rename origins and invalid ownership do not gain exclusions.",
+  "limits": [
+    "Provider workflows inventoried without executing operations.",
+    "Hosted timing comparison pending.",
+    "A filenames inventory does not reproduce each historical Auditor finding."
+  ]
+}

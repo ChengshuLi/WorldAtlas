@@ -1,0 +1,473 @@
+{
+  "version": 1,
+  "issue": 1520,
+  "source_commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+  "complete_world_count": 49625,
+  "world_index": {
+    "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+    "path": "data/world-index.json",
+    "mode": "100644",
+    "git_blob_oid": "d4ca1f07f7f504484461007919f90af5c5732b61",
+    "bytes": 944,
+    "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+  },
+  "current_world_inputs": [
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-0.json",
+      "mode": "100644",
+      "git_blob_oid": "85bdc3171a740db0bc756460dab5a50c6c54518d",
+      "bytes": 8539839,
+      "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-1.json",
+      "mode": "100644",
+      "git_blob_oid": "471e45dcd13904489bc434ae5115105fadba7ab9",
+      "bytes": 8060108,
+      "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-2.json",
+      "mode": "100644",
+      "git_blob_oid": "389e463dd5e44894fd221f53db584f55fff330d1",
+      "bytes": 6259307,
+      "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-3.json",
+      "mode": "100644",
+      "git_blob_oid": "e41c8f549f1cb2162f5adb30029bf4800e86c848",
+      "bytes": 5153118,
+      "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-4.json",
+      "mode": "100644",
+      "git_blob_oid": "ccdefbb55c62b317f11e6078cd9291dae5339693",
+      "bytes": 4835479,
+      "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-5.json",
+      "mode": "100644",
+      "git_blob_oid": "cf59e69b02ab2c9ad7344ddbf309a221a8be587b",
+      "bytes": 5226173,
+      "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-6.json",
+      "mode": "100644",
+      "git_blob_oid": "4be02d1d055a66c4e1606bab4f23ecda90350f34",
+      "bytes": 4607953,
+      "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-7.json",
+      "mode": "100644",
+      "git_blob_oid": "c88539c7899a0c257c48fc1a555895904832f0cc",
+      "bytes": 4257402,
+      "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-8.json",
+      "mode": "100644",
+      "git_blob_oid": "eec7163a536245c0249d1821fe81590aba2a1ded",
+      "bytes": 5097739,
+      "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-9.json",
+      "mode": "100644",
+      "git_blob_oid": "79a4f0cd17ca9f7007916be8419c2fa986fe7a61",
+      "bytes": 5729632,
+      "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-10.json",
+      "mode": "100644",
+      "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+      "bytes": 5144571,
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-11.json",
+      "mode": "100644",
+      "git_blob_oid": "fd7d6f9f564a4b9b0ae7a56a2d7eb27e920017d8",
+      "bytes": 5133018,
+      "sha256": "d1b2fb15c9427497de740eb33a529ef382b58cb319028f2aa38f5878de4c9b02",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-12.json",
+      "mode": "100644",
+      "git_blob_oid": "e8360aa55a8398d0fa841b5331febcabdc8588a2",
+      "bytes": 4489493,
+      "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-13.json",
+      "mode": "100644",
+      "git_blob_oid": "44f886df47aa3e313f0c2ce98faea045e2eba8ed",
+      "bytes": 5709487,
+      "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-14.json",
+      "mode": "100644",
+      "git_blob_oid": "2cd05a870d730c598eb463ac8be2300ca5be6e66",
+      "bytes": 4355198,
+      "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-15.json",
+      "mode": "100644",
+      "git_blob_oid": "4ef51307797f81b8cf7a647495f037a089f8b368",
+      "bytes": 5180426,
+      "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-16.json",
+      "mode": "100644",
+      "git_blob_oid": "02d53ca01dc014a3c9481eb1017a89487fc2bd89",
+      "bytes": 5213846,
+      "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-17.json",
+      "mode": "100644",
+      "git_blob_oid": "a2dc24c477fb10da8ebd5a1cff4765a8f34bd22a",
+      "bytes": 4948066,
+      "sha256": "1ae1a9ef25c1f71b66084aadf57933132383d4271b888ab38866905da5678af3",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-18.json",
+      "mode": "100644",
+      "git_blob_oid": "59012653b56da5a394e7692209b257e27883eab8",
+      "bytes": 4909063,
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-19.json",
+      "mode": "100644",
+      "git_blob_oid": "306125db7012a9ac927bb4a169dea5166ef126e7",
+      "bytes": 4583022,
+      "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-20.json",
+      "mode": "100644",
+      "git_blob_oid": "efda4099740c3ef131ef631cdc6b6ecf345f226a",
+      "bytes": 6570767,
+      "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-21.json",
+      "mode": "100644",
+      "git_blob_oid": "28619c3c39b5808aae4b3f459b97c39de8b073b2",
+      "bytes": 6737781,
+      "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-22.json",
+      "mode": "100644",
+      "git_blob_oid": "b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f",
+      "bytes": 4746385,
+      "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-23.json",
+      "mode": "100644",
+      "git_blob_oid": "371e95033d9c542bbf07c42afe7111074e35f246",
+      "bytes": 4962410,
+      "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-24.json",
+      "mode": "100644",
+      "git_blob_oid": "4110c75d7d0f5282e0a2bd263b430e8c1e78f0eb",
+      "bytes": 4816899,
+      "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-25.json",
+      "mode": "100644",
+      "git_blob_oid": "16ba4f38251d1bd99ac85f0ae7cca2f0424470f8",
+      "bytes": 4525239,
+      "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-26.json",
+      "mode": "100644",
+      "git_blob_oid": "5d61478ece9042cbd0791eabd2536e1054e26341",
+      "bytes": 4608983,
+      "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-27.json",
+      "mode": "100644",
+      "git_blob_oid": "a6a359c8c566462b280a461b4a5e1591e1f486c4",
+      "bytes": 4863162,
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-28.json",
+      "mode": "100644",
+      "git_blob_oid": "a9e03cb07194a73f643af85d1e6db94abe3b5fc9",
+      "bytes": 6613963,
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-29.json",
+      "mode": "100644",
+      "git_blob_oid": "f51745ec7fce354070b991d9f192febc622ea4ba",
+      "bytes": 12932167,
+      "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+      "role": "historical-tracked-body-only"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-30.json",
+      "mode": "100644",
+      "git_blob_oid": "0deb9748357a854c5e7e6179f42d77a47a09ca9a",
+      "bytes": 11979437,
+      "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-31.json",
+      "mode": "100644",
+      "git_blob_oid": "1b89d7aef660ba0536acdb9b9f7a574b028ea01a",
+      "bytes": 10086485,
+      "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-32.json",
+      "mode": "100644",
+      "git_blob_oid": "6cf41fabbeddb18bbe426038251b86171c715ef7",
+      "bytes": 10211739,
+      "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-33.json",
+      "mode": "100644",
+      "git_blob_oid": "e8a8a8e8015cfc31005e85daa49fc2552ef1df9e",
+      "bytes": 607984,
+      "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/source-restoration-additions.json",
+      "mode": "100644",
+      "git_blob_oid": "18989f4f6b2789057a00eeda6c5c7e51f06e3caf",
+      "bytes": 1573576,
+      "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9",
+      "role": "current-v8-unchanged-source-body"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/macro-loose-ends-v5-additions.json",
+      "mode": "100644",
+      "git_blob_oid": "8f0e144d92e52ea473eecc7c2358c3464c648009",
+      "bytes": 11393,
+      "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1",
+      "role": "current-v8-unchanged-source-body"
+    }
+  ],
+  "current_part29": {
+    "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+    "path": "coordination/engineering/eastern-two-gap-repair-20261007/run-two/proposed-part-29.json.gz",
+    "mode": "100644",
+    "git_blob_oid": "f306c7e21e3c6154fc348adf71f6c346e899ec8a",
+    "bytes": 3400273,
+    "sha256": "fa286f44f47494cacab793e4109eb18db3e6016dc7103d930b9dff2dbf3573fb",
+    "decoded_bytes": 12932407,
+    "decoded_sha256": "c34114912dc620dce0821e251877470b5a83385ab3bf1284408f077b78bbdec8",
+    "logical_path": "data/geography/part-29.json",
+    "role": "actual-current-v8-full-body-alias",
+    "original_scientific_execution": "976c0c9a2bca8cd0bba30fe314061e22a69688e3"
+  },
+  "current_part29_local_alias": "current-v8-part29.json.gz",
+  "source_decisions": {
+    "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+    "path": "research/geography/arctic-seven-source-fit-20261008/candidate-decisions.json",
+    "mode": "100644",
+    "git_blob_oid": "3c5183c35ba96ae54940edf7f2c233f798dbd69a",
+    "bytes": 271571,
+    "sha256": "0f29f229f94c48a2ba4a520b8cbb078116d82344302f773b2171716caedac9b6"
+  },
+  "approved_components": [
+    {
+      "component_id": "physical-component:12c9ec9813490ce8602fb26ee2e54225b99c28bbd29794a7f8ac9ee60f109e8a",
+      "target_id": "atlas:physical:CAN-15:NWT",
+      "candidate_geometry": {
+        "coordinates": [
+          [
+            [
+              -119.685048,
+              74.165717
+            ],
+            [
+              -119.6905246764263,
+              74.16318735102924
+            ],
+            [
+              -119.6721,
+              74.1799
+            ],
+            [
+              -119.65993307864464,
+              74.18542257423222
+            ],
+            [
+              -119.685048,
+              74.165717
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "source_fit_vintage": "ffa32416fd946ac89da621d02b554ca27733e688"
+    },
+    {
+      "component_id": "physical-component:add031b7195352292c8529323c8b99dd75002af629116b229e84be981893ca8d",
+      "target_id": "atlas:physical:CAN-25:NUN",
+      "candidate_geometry": {
+        "coordinates": [
+          [
+            [
+              -75.310048,
+              68.696438
+            ],
+            [
+              -75.30569086751127,
+              68.69883242108646
+            ],
+            [
+              -75.3057,
+              68.6987
+            ],
+            [
+              -75.311575165785,
+              68.69365604738073
+            ],
+            [
+              -75.310048,
+              68.696438
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "source_fit_vintage": "ffa32416fd946ac89da621d02b554ca27733e688"
+    },
+    {
+      "component_id": "physical-component:17bb5b7f043b0fb2b447b8ccef216e530fed4595da1aec0feb1dea235bed0dbd",
+      "target_id": "atlas:physical:CAN-25:NUN",
+      "candidate_geometry": {
+        "coordinates": [
+          [
+            [
+              -76.22353615454084,
+              68.30324599696335
+            ],
+            [
+              -76.2245,
+              68.3032
+            ],
+            [
+              -76.22610286859776,
+              68.303588387391
+            ],
+            [
+              -76.22353615454084,
+              68.30324599696335
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "source_fit_vintage": "ffa32416fd946ac89da621d02b554ca27733e688"
+    }
+  ],
+  "unresolved_components": [
+    "physical-component:52452c5923a0ed15767ebdf150727924778349b7d9ba4370b616d1d70c0ccddd",
+    "physical-component:2aca267603c8eace3a6d0a52d4e3f0b70a47506b94d2ea9e1d500e43aab4632c",
+    "physical-component:265c983a61231e3a5c2cf4bb2f7b97896d47afefe925a9eb85934101a78515a8",
+    "physical-component:54dc96cd3d0edd92ff9d9399d8364e17735d12f11407f707d57912f9f6a66475"
+  ],
+  "pre_edit_review_url": "https://github.com/ChengshuLi/WorldAtlas/issues/1520#issuecomment-6069239768",
+  "limitations": "Source-relative AAFC named-envelope fit and retained GSHHG mapped-land support only. Water/ice, observation date, legal/history and publication authority remain unresolved. Preserve all four unapproved source cases.",
+  "source_decisions_local_alias": "source-fit-seven-cases.json",
+  "applicability_receipt": {
+    "local_path": "applicability-comment.json",
+    "mode": "100644",
+    "bytes": 25750,
+    "sha256": "d47365b657c7e370cd15a858c01817dffa7b68f2f7f9a2abeef03e51ed42e047",
+    "comment_id": 6069239768,
+    "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1520#issuecomment-6069239768"
+  }
+}

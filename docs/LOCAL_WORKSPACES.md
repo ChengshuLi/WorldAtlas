@@ -46,14 +46,15 @@ Use `--profile full` only when the actual build/test needs it, with an adequate
 ## Storage admission and ongoing checks
 
 Allocation is serialized across this repository by an exclusive local directory
-lock. It requires at least **10 GiB free after the new reservation**, and at most
-**50 GiB total checkout usage/reservations**. Usage includes all registered legacy
-worktrees, even outside the managed root. The primary checkout's Git store is
-included conservatively. Each managed slot counts the greater of measured usage
-and its reserved future size; allocation reserves at least the selected Git input
-size and defaults to 1 GiB. Reserve for dependencies, downloads, decompression,
-generated data and build output before starting, rather than estimating source
-size alone. Missing paths or unknown measurements block allocation.
+lock. It requires at least **10 GiB free after the new reservation**. There is no
+fixed cap on combined checkout usage or on an individual reservation. Reservations
+must be positive, finite and represent safe integer byte counts. Usage reporting
+still includes all registered legacy worktrees, even outside the managed root,
+and the primary checkout's Git store. Each managed slot counts the greater of
+measured usage and its reserved future size; allocation reserves at least the
+selected Git input size and defaults to 1 GiB. Reserve for dependencies, downloads,
+decompression, generated data and build output before starting, rather than
+estimating source size alone. Missing paths or unknown measurements block allocation.
 
 Run `check` before downloads, installations, reproductions/builds and at work
 milestones. A failure means stop new generation/installation and inspect `report`;
@@ -65,8 +66,8 @@ datasets for baseline experiments: use pinned Git inputs and small derived outpu
 These are cooperative admission/milestone gates, **not filesystem quotas**. A
 running generator, another application or a worker bypassing the tool can exceed
 the budget between checks. No daemon kills processes or deletes files under disk
-pressure. Disk free space accounts for other repositories/apps; the checkout
-budget inventories this repository only. Unregistered historical archives must
+pressure. Disk free space accounts for other repositories/apps; the usage
+report inventories this repository only. Unregistered historical archives must
 be inspected during migration; the helper does not infer their ownership.
 
 Reuse existing package download caches and browser binaries; install dependencies

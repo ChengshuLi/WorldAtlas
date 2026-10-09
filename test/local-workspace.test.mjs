@@ -23,7 +23,7 @@ function fixture(t, overrides = {}) {
   }
   git('add', '.'); git('commit', '-m', 'fixture'); git('remote', 'add', 'origin', repo);
   const head = git('rev-parse', 'HEAD').trim();
-  const manager = workspaceManager(repo, {freeBytes: () => 100 * GiB, limits: {minimumFree: 10 * GiB, maximumCheckouts: 50 * GiB}, ...overrides});
+  const manager = workspaceManager(repo, {freeBytes: () => 100 * GiB, limits: {minimumFree: 10 * GiB}, ...overrides});
   return {repo, git, manager, head, temporary};
 }
 
@@ -49,14 +49,47 @@ test('sparse work is isolated and contains required directories and individual i
   assert.throws(() => manager.release({worker: 'worker-one', token: entry.token}), /ownership/);
 });
 
-test('low disk and existing legacy checkouts prevent allocation without creating a branch', t => {
-  const {manager, git, repo} = fixture(t, {freeBytes: () => 10 * GiB});
+test('low disk prevents allocation without creating a branch or reservation', t => {
+  const {manager, git} = fixture(t, {freeBytes: () => 10 * GiB});
   assert.throws(() => manager.allocate({worker: 'one', branch: 'engineering/no-space'}), /headroom/);
   assert.throws(() => git('rev-parse', '--verify', 'engineering/no-space'));
-  const capped = workspaceManager(repo, {freeBytes: () => 100 * GiB, limits: {minimumFree: 10 * GiB, maximumCheckouts: 1}});
-  assert.ok(capped.report().worktrees.some(row => row.path === fs.realpathSync(repo) && !row.managed));
-  assert.throws(() => capped.allocate({worker: 'one', branch: 'engineering/over-budget'}), /budget/);
-  assert.throws(() => capped.check(), /breached/);
+  assert.deepEqual(manager.report().entries, []);
+});
+
+test('reservations and combined usage above 50 GiB are admitted with sufficient headroom', t => {
+  const {manager, repo} = fixture(t);
+  const first = manager.allocate({worker: 'one', branch: 'engineering/large-reservation', reserveGiB: 51});
+  assert.equal(first.reservation, 51 * GiB);
+  const second = manager.allocate({worker: 'two', branch: 'engineering/another-reservation', reserveGiB: 2});
+  const report = manager.check();
+  assert.ok(report.checkoutBytes >= 53 * GiB);
+  assert.ok(report.worktrees.some(row => row.path === fs.realpathSync(repo) && !row.managed));
+  manager.release({worker: 'two', token: second.token});
+  manager.release({worker: 'one', token: first.token});
+});
+
+test('exactly 10 GiB after reservation is allowed, one byte less is refused', t => {
+  let available = 11 * GiB;
+  const {manager, git} = fixture(t, {freeBytes: () => available});
+  const entry = manager.allocate({worker: 'one', branch: 'engineering/exact-headroom'});
+  manager.release({worker: 'one', token: entry.token});
+  available -= 1;
+  assert.throws(() => manager.allocate({worker: 'one', branch: 'engineering/short-headroom'}), /headroom/);
+  assert.throws(() => git('rev-parse', '--verify', 'engineering/short-headroom'));
+  assert.deepEqual(manager.report().entries, []);
+  available = 10 * GiB;
+  assert.equal(manager.check().freeBytes, available);
+  available -= 1;
+  assert.throws(() => manager.check(), /breached/);
+});
+
+test('invalid or unsafe reservation sizes fail before branch or slot creation', t => {
+  const {manager, git} = fixture(t);
+  for (const reserveGiB of [0, -1, NaN, Infinity, 1e20]) {
+    assert.throws(() => manager.allocate({worker: 'one', branch: 'engineering/invalid-reserve', reserveGiB}), /Reserve/);
+    assert.throws(() => git('rev-parse', '--verify', 'engineering/invalid-reserve'));
+    assert.deepEqual(manager.report().entries, []);
+  }
 });
 
 test('dirty tracked, untracked and ignored work cannot be discarded', t => {

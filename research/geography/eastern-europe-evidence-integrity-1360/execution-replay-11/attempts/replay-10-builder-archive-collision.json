@@ -1,0 +1,7 @@
+{
+  "correction": "Archive names now use the intermediate manifest SHA-256 suffix when the default name already exists.",
+  "intermediate_manifest_sha256": "a8b67a4c04b88899180bca312b2885f7f127e29345c9b0c05ad67ea3b02da5a2",
+  "reason": "The first manifest-builder pass completed, but the orchestration rejected the attempt archive because its destination already existed. The candidate intermediate manifest is preserved beside this record.",
+  "status": "rejected-intermediate",
+  "workspace": "execution-replay-10"
+}

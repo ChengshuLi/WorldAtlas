@@ -53,9 +53,9 @@ node scripts/issue-lease.mjs claim --issue 22 --worker YOUR-UNIQUE-WORKER --bran
 node scripts/issue-lease.mjs inspect --issue 22
 ```
 
-Replace placeholders. Begin only after the command exits successfully and its result says `accepted: true`. Retain the receipt, claim ID and workflow link in your owned execution artifacts. A `status:claimed` label is visible convenience; the canonical bot-authored comment is authority. Public ownership nonces prevent accidental collisions, not impersonation by someone with repository write access.
+Replace placeholders. Begin only after the command exits successfully and its result says `accepted: true`. Retain the receipt, claim ID and workflow link in your owned execution artifacts. Mutating claim actions require `--out`: use a fresh path for each new action; reuse a pending path only with its original inputs to resume observation. Completed receipts and unrelated files are preserved. The client durably publishes checkpoints before dispatch, rejects symlink outputs, and allows only one local process to own a receipt. A `status:claimed` label is visible convenience; the canonical bot-authored comment is authority. Public ownership nonces prevent accidental collisions, not impersonation by someone with repository write access.
 
-Per-issue GitHub Actions concurrency serializes claim/renew/release/recover on **main**. Different issues may reserve concurrently. GitHub allows one running and one pending run per group; later requests may cancel pending requests. The client retries canceled runs boundedly with jitter and never treats cancellation, timeout or missing confirmation as success. Lack of Actions dispatch/read permissions is a blocker; do not fall back to an uncoordinated comment-only claim.
+Per-issue GitHub Actions concurrency serializes claim/renew/release/recover on **main**. Different issues may reserve concurrently. GitHub allows one running and one pending run per group; later requests may cancel pending requests. The client dispatches once and retains its request ID and pending checkpoint. It discovers the execution through a complete bounded inventory, then observes that exact execution and its durable result. Cancellation, timeout or missing confirmation is never success or permission to redispatch blindly. Resume observation with the original request/checkpoint; reconcile terminal or ambiguous results before deciding on a new request. Lack of Actions dispatch/read permissions is a blocker; do not fall back to an uncoordinated comment-only claim.
 
 ## Keep, rotate and release a reservation
 
@@ -384,3 +384,48 @@ Scheduler admission checks out the executing `github.workflow_sha`, binds its
 commit and workflow path/ref to GitHub’s current job environment, and reads the
 timeout from that immutable Git blob. A newer main commit cannot extend an
 already-running job’s timeout; mixed-vintage checkouts refuse before API work.
+
+### Shared Actions quota: reduce work and recover from actual evidence
+
+The Actions installation token and a worker's local GitHub credential can have
+separate quotas. A healthy local `/rate_limit` is not evidence that an Actions job
+has recovered. The premerge evidence entry point uses the same bounded,
+exact-tree-bound Git blob transport as the merge queue, rather than one REST
+request per evidence file. It still verifies complete bytes and every declared
+binding; mutable issue, claim, PR, tree, ancestry and review authority stay fresh.
+Read-only handoff, PR regression and PR package workflows cancel superseded
+runs for the same PR; main package push observations remain separate. This does
+not cancel the merge scheduler, claim mutations or publication.
+
+Premerge evidence, linked-issue checks, profile selection, deployment classification,
+claims and the existing
+queue/scheduler emit actual categorized HTTP attempt counts. Their existing
+responses supply allowlisted numeric repository-core observations when available;
+no extra quota poll is added. These observations describe that credential and
+window, are not reserved capacity, and cannot attribute other concurrent jobs'
+consumption. Missing headers remain unknown. A lower request count in one path
+cannot guarantee that the whole installation never exhausts its finite quota.
+
+On a proven quota refusal, retain the original status, numeric reset/retry-after,
+request ID and retry time. Do not immediately dispatch another workflow for the
+same failure or rerun a long regression simply to retry a refused API operation.
+Wait until the recorded condition can change, then inspect the current canonical
+claim/request/head and retry only the required bounded operation. Permission
+errors and unknown transport outcomes are different; do not guess a reset or
+blindly replay writes. Existing queue capacity and job-deadline safeguards remain
+mandatory; no check or authority is waived by waiting.
+
+Claim jobs retain `claim-result.json` even when a notification cannot be posted.
+A known quota refusal defers that doomed notification. `mutation_attempted` and
+`reconcile_required` distinguish pre-write refusal from a possible partial/lost
+write. A worker must inspect the canonical reservation and exact request before
+resuming or redispatching; an artifact alone never confers ownership. Preserve
+active work and checkpoints while waiting. Refresh this guidance before the next
+job; no new chat monitor or provider credential is introduced.
+
+A proven quota refusal during deployment classification retains its blocked
+decision and retry evidence; the required package job fails before checkout or
+dependency/build work. It never reports package success or a source-only skip.
+Unknown non-quota inventories retain the conservative full-build fallback.
+Concurrent read batches finish their existing bounded requests before receipts
+are finalized, so a fast rejection cannot hide other already-started attempts.

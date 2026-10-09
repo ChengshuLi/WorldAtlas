@@ -1,0 +1,95 @@
+{
+  "baseline_commit": "0f08ca8c451e71bb3b06cb5fb82988e92d3048ab",
+  "execution": "Two fresh subprocess CLI executions of the captured corrected-renderer.py bytes; each legacy execution performs its own two complete internal builds.",
+  "guarded_entry_point": {
+    "bytes": 17927,
+    "hash_kind": "file-bytes",
+    "note": "Entry-point source identity; independent review is bound to the exact committed PR head.",
+    "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/guarded-renderer.py",
+    "sha256": "481f8e919fa40d68342d4682523b7b0de4c9788baf1f011449785c05d996d3b4"
+  },
+  "inputs": [
+    {
+      "bytes": 9427,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-ring-classification-953-20261006/scope.json",
+      "sha256": "c19e6484a89031544b2658ea3804a97e6ee616233ec5821f6e71e91aa3673a08"
+    },
+    {
+      "bytes": 366609,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/scoped-2020-to-current-georef-overlay.csv",
+      "sha256": "0d9c8c89cd5131bce1c712b66e6f0caf4b1a083fd73b7e257eb484d6b7ff47d2"
+    },
+    {
+      "bytes": 21210311,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/geoBoundaries-2020-scoped-214.geojson",
+      "sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305"
+    },
+    {
+      "bytes": 15859,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/categorize-tabular-findings.py",
+      "sha256": "1d07c2bb5202d095f64dc0bf05749338cd49eb40d27cd527316d6da535b58bcc"
+    }
+  ],
+  "pin_contract": {
+    "bytes": 14273,
+    "hash_kind": "file-bytes",
+    "path": "research/geography/argentina-ring-validator-integrity-1132-erratum/input-pins.json",
+    "sha256": "d35256e62ce2af7d7337178232605d4b41ce1a5c191a25a86483daa081942cac"
+  },
+  "renderer": {
+    "bytes": 12767,
+    "hash_kind": "file-bytes",
+    "path": "data/regional-review/argentina-ring-classification-953-20261006/corrected-renderer.py",
+    "sha256": "b1198cb4c1b044e617db5e7848ed30ee3f7d722b3fc170ff44615a7ec317cb6c"
+  },
+  "runtime": {
+    "python_executable": "python3.7",
+    "python_version": "3.7.3",
+    "standard_library_only": true
+  },
+  "subject_count": 214,
+  "subject_ids_sha256": "d1bc2104602f18ee013e25d795d0e5235147cde36e9e88a0e0f174a6683613d4",
+  "verified_context_files": [
+    {
+      "bytes": 8539839,
+      "hash_kind": "file-bytes",
+      "path": "data/geography/part-0.json",
+      "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3"
+    },
+    {
+      "bytes": 14390,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/README.md",
+      "sha256": "4851aa3f8a177a26d594e3189aba8e43b14e97818111ca8df506044886a00cdf"
+    },
+    {
+      "bytes": 14147,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/source-register.json",
+      "sha256": "45fe185ca1d4ef69c391723295bd134840df99c7eb8d4be44eb6ed59cd90fb22"
+    },
+    {
+      "bytes": 958,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/geoBoundaries-2020/geoBoundaries-ARG-ADM2-metaData.json",
+      "sha256": "17452b82df4498c1b29a4489bd78709cef922b453579b1a47010dfd2524a7ce2"
+    },
+    {
+      "bytes": 1193417,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/Georef-current/departamentos.geojson",
+      "sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92"
+    },
+    {
+      "bytes": 614706,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/Georef-current/provincias.geojson",
+      "sha256": "b086852064c26813d9f607c82c91b4e74e18ea83fd21993ddedd473cf8495af5"
+    }
+  ],
+  "version": 1
+}

@@ -1,0 +1,2028 @@
+{
+  "audit_reports": [
+    {
+      "bytes": 491886,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/report.json",
+      "sha256": "6b8549a4e7782dc6bc87b38120273992a6c14944b087140aa738eabd712936f1"
+    },
+    {
+      "bytes": 492083,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/report.json",
+      "sha256": "eba9bc4ca9a5e28eda7e547571508b881576daa7025d3aee13df5314eec69355"
+    },
+    {
+      "bytes": 492083,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/report.json",
+      "sha256": "2e229c4215e8a1e15b60b106e8e455f21409e30d14be400cdb9c1c75dd882074"
+    },
+    {
+      "bytes": 492083,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json",
+      "sha256": "230a49dbb3feab482d2946a7a4c75b9b8069acd841fc2609f2251cf6d2d58330"
+    },
+    {
+      "bytes": 492083,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/report.json",
+      "sha256": "db65a27a5c1830ac7d6aab05283be1ba4e4a3c693a71637d94932e428d6955da"
+    }
+  ],
+  "baseline": {
+    "commit": "548c5f89f00271050823076a84695bb41e1b8454",
+    "files": [
+      {
+        "bytes": 10164089,
+        "hash_kind": "file-bytes",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      {
+        "bytes": 271171,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/manifest.json",
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6"
+      }
+    ],
+    "pin_files": {
+      "canonical_grid": "data/canonical-grid/manifest.json",
+      "hierarchy": "data/hierarchy.json"
+    },
+    "pins": {
+      "canonical_grid": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    }
+  },
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/artifact-gate-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/controls-v1.tap.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-000.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-001.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-002.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-003.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-004.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-005.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-006.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-007.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-008.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-009.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-010.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-011.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-012.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-013.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-014.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-015.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-016.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/residues-000.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-000.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-001.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-002.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-003.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-004.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-005.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-006.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-007.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-008.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-009.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-010.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-011.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-012.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-013.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-014.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-015.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-016.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/residues-000.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-000.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-001.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-002.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-003.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-004.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-005.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-006.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-007.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-008.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-009.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-010.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-011.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-012.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-013.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-014.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-015.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-016.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/residues-000.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-000.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-001.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-002.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-003.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-004.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-005.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-006.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-007.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-008.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-009.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-010.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-011.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-012.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-013.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-014.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-015.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-016.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/residues-000.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-000.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-001.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-002.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-003.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-004.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-005.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-006.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-007.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-008.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-009.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-010.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-011.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-012.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-013.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-014.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-015.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-016.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/residues-000.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/execution-code-v1/2df5573cafde91e5cb51c47e98a036fa21925c7e10fbf1f49aa61592a2857513.bin",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/execution-code-v1/4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12.bin",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/execution-code-v1/7656263b33f222942f709c3b9671c344dd5350cafd2726423c6632b38a667f07.bin",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/execution-code-v1/944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305.bin",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/execution-code-v1/b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd.bin",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/execution-code-v1/bda4d915654736af8dca980bf7310dedc6371a67467631ddd50538c7b791c3cd.bin",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/execution-code-v1/d0854276b311354160cc8b4ceaae052857bb102f4dd2e61ddaa2de0f8482819d.bin",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/execution-code-v1/d2e55a63d6c7a94cb25030c6378968de2c5dce7a3d4fae1420a837c1511387ae.bin",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/execution-code-v1/manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/final-two-run-comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/geometry-controls-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-000.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-001.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-002.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-003.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-004.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-005.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-006.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-007.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-008.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-009.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-010.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-011.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-012.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-013.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-014.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-015.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-016.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-017.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-018.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-019.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-020.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-021.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-022.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-023.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-024.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-025.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-026.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-027.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-028.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-029.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-030.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-031.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-032.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-033.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-034.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-035.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-036.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-037.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-038.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-039.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-040.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-041.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-042.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-043.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-044.bytes.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/readback-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/intermediate-two-run-comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/physical-discovery-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/physical-discovery-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/physical-discovery-reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/source-edge-area-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/source-edge-area-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "scripts/audit-physical-gaps.py",
+      "status": "added"
+    },
+    {
+      "path": "scripts/lossless_audit_inputs.py",
+      "status": "added"
+    },
+    {
+      "path": "scripts/physical_gap_audit.py",
+      "status": "added"
+    },
+    {
+      "path": "scripts/retain-physical-audit-code.py",
+      "status": "added"
+    },
+    {
+      "original_sha256": "2689963b076ee1d9911f784042a9f9a7ef19070aff3935c3cb3c87d7a2354e7a",
+      "path": "scripts/run-integration-tests.mjs",
+      "status": "modified"
+    },
+    {
+      "path": "scripts/validate-physical-audit-evidence.py",
+      "status": "added"
+    },
+    {
+      "path": "test/lossless-audit-inputs.py",
+      "status": "added"
+    },
+    {
+      "path": "test/lossless-audit-inputs.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/physical-audit-evidence.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/physical-audit-ledger.py",
+      "status": "added"
+    },
+    {
+      "path": "test/physical-audit-ledger.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/physical-gap-audit.py",
+      "status": "added"
+    },
+    {
+      "path": "test/physical-gap-audit.test.mjs",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "node --test test/physical-gap-audit.test.mjs test/lossless-audit-inputs.test.mjs test/physical-audit-ledger.test.mjs test/physical-audit-evidence.test.mjs"
+  ],
+  "conclusions": [
+    {
+      "source_ids": [
+        "retained-original-inputs"
+      ],
+      "status": "unresolved",
+      "text": "Global component crosswalks, priority partitions, source-backed repairs and delivery remain incomplete."
+    }
+  ],
+  "execution_code_manifest": "coordination/engineering/physical-gap-audit-1005-20261005-local18/execution-code-v1/manifest.json",
+  "issue": 1005,
+  "lane": "engineering",
+  "mandatory_input_stage": {
+    "envelope_manifest": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/manifest.json",
+    "envelope_sha256": "27302928643da5a05e20b2030e7296bd37ec3e6afafa65dc6d7cff689f01b354",
+    "evidence_manifest": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/evidence-quality.json",
+    "evidence_sha256": "6da9489d4b7034641aeddafd13c3652caae8f1bcd0a08710fc00f3aa4eceb046",
+    "kind": "lossless-original-audit-byte-envelope-v1",
+    "regression": "test/physical-audit-evidence.test.mjs",
+    "scope": "Complete original byte closure, not an extract or geographic approval. Both upstream and root are independently bounded by existing policy.",
+    "validator": "scripts/validate-physical-audit-evidence.py"
+  },
+  "methods": [
+    {
+      "description": "Immutable original physical land minus original native locations before water; all positive planar fragments and point/line/clipping remnants retained; diagnostic amendments preserved with exact execution-code closure.",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "id": "physical-discovery",
+      "kind": "generator",
+      "software": "Python 3.12.14; Shapely 2.1.2; GEOS 3.13.1; NumPy 2.3.5; pyproj 3.7.2",
+      "units": "fragments; tiles; source bytes"
+    },
+    {
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "description": "Original source-edge area helper; all positive planar shapes survive invalid or nonpositive geodesic measurements as explicit unknowns.",
+      "distance_method": "WGS84 inverse geodesic",
+      "helper_version": "worldatlas-evidence-geometry-v1",
+      "id": "source-edge-area",
+      "kind": "geography",
+      "software": "pyproj 3.7.2; worldatlas evidence geometry v1",
+      "units": "m2"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "json_pointer": "/candidate_fragments",
+      "metric_id": "candidate_fragments",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json"
+    },
+    {
+      "json_pointer": "/residues",
+      "metric_id": "residues",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json"
+    },
+    {
+      "json_pointer": "/tiles_checked",
+      "metric_id": "tiles_checked",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json"
+    },
+    {
+      "json_pointer": "/tiles_unchecked",
+      "metric_id": "tiles_unchecked",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json"
+    }
+  ],
+  "metrics": [
+    {
+      "evaluation_commit": "b6e0d0d21cfd6dde68c3c292c9513d3a24896a11",
+      "id": "candidate_fragments",
+      "input_sha256": "230a49dbb3feab482d2946a7a4c75b9b8069acd841fc2609f2251cf6d2d58330",
+      "unit": "fragments",
+      "value": 96963,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "b6e0d0d21cfd6dde68c3c292c9513d3a24896a11",
+      "id": "residues",
+      "input_sha256": "230a49dbb3feab482d2946a7a4c75b9b8069acd841fc2609f2251cf6d2d58330",
+      "unit": "remnants",
+      "value": 343,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "b6e0d0d21cfd6dde68c3c292c9513d3a24896a11",
+      "id": "tiles_checked",
+      "input_sha256": "230a49dbb3feab482d2946a7a4c75b9b8069acd841fc2609f2251cf6d2d58330",
+      "unit": "tiles",
+      "value": 2160,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "b6e0d0d21cfd6dde68c3c292c9513d3a24896a11",
+      "id": "tiles_unchecked",
+      "input_sha256": "230a49dbb3feab482d2946a7a4c75b9b8069acd841fc2609f2251cf6d2d58330",
+      "unit": "tiles",
+      "value": 0,
+      "vintage": "archived"
+    }
+  ],
+  "outputs": [
+    {
+      "bytes": 6332,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/README.md",
+      "sha256": "671e42e5f695604477c1fb7019ba80b9f62a47c99ffed5d1707851e3b10e05dc"
+    },
+    {
+      "bytes": 557,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/artifact-gate-v1.json",
+      "sha256": "d01d8020e01ec68bd237f3fc66dec6d39af5ad91a8238eaa38bdf47b5fe6ced6"
+    },
+    {
+      "bytes": 1237,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/controls-v1.tap.json",
+      "sha256": "a07c044d50d9032d61dabeabd0b00921ee4cce14d08b400f4e9c20fcbe721d11"
+    },
+    {
+      "bytes": 1131547,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-000.geojson.gz",
+      "sha256": "82021e76644a5a8b7e314df651802f8b0e7be7121df7f2cf7616ba0bb28ca66b"
+    },
+    {
+      "bytes": 945171,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-001.geojson.gz",
+      "sha256": "1db68fd78b5c45971f2c49744d236fd06773d8af7acdeb4c3f110846a76c1e57"
+    },
+    {
+      "bytes": 1030525,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-002.geojson.gz",
+      "sha256": "27fd26511ad6c928bd9988cd69d4063f7ac3405676c09076a8c3868d483aeedc"
+    },
+    {
+      "bytes": 1164442,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-003.geojson.gz",
+      "sha256": "a85f18eae9a30ac8f8b0add7f75430ef7a33fb95c9b1ab3c96de371ff46b793e"
+    },
+    {
+      "bytes": 1126016,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-004.geojson.gz",
+      "sha256": "9342f503fdac75a90223b0ffd607144bb78fa5d30423d4d1390a55ec35e7fbb6"
+    },
+    {
+      "bytes": 1137361,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-005.geojson.gz",
+      "sha256": "3e5763f5742f5d4e6ae99642ab148e05cb7de69c4801704b473b6990a211605f"
+    },
+    {
+      "bytes": 1130906,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-006.geojson.gz",
+      "sha256": "84ca5ca02c77ed04e8fbce3d64870972fc2c6fbb58f64037dd57e71278c7909e"
+    },
+    {
+      "bytes": 1120843,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-007.geojson.gz",
+      "sha256": "ff497d1127d47e9df308d118e89a4c3e893a0ed4078da82aaab82326cc9919c7"
+    },
+    {
+      "bytes": 1161752,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-008.geojson.gz",
+      "sha256": "20ecf84ad85b3fb74514e4633c5b0c0d94d59b20e0a4ef2829348fb1e9f75f77"
+    },
+    {
+      "bytes": 1196442,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-009.geojson.gz",
+      "sha256": "1a6ddb8db2116f6570bf695897f17aa592684280d93458248ce1ea5fa66ec78d"
+    },
+    {
+      "bytes": 1155467,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-010.geojson.gz",
+      "sha256": "399e7af4f3bf2850745efcc9bea14371ffed187ac3f7983ad860eaf5ab3c284f"
+    },
+    {
+      "bytes": 1098101,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-011.geojson.gz",
+      "sha256": "5228e4344b42adf8445f95d67f3eec5ff107a4632840cac86c10b31246d82fa5"
+    },
+    {
+      "bytes": 1137180,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-012.geojson.gz",
+      "sha256": "52a1f9104dd4045ba05e9a07769df81477f4e915afb636c508dec15dbe2b88d8"
+    },
+    {
+      "bytes": 1214905,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-013.geojson.gz",
+      "sha256": "518fe9bf7f869670af7529dd235391b7dfc4794500984e47173249d2da997dab"
+    },
+    {
+      "bytes": 1298893,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-014.geojson.gz",
+      "sha256": "67de02fbf8d8a973b3cd32612e164e11a6a291cb2b8d283e41e2b6a0443da32e"
+    },
+    {
+      "bytes": 1290795,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-015.geojson.gz",
+      "sha256": "9df543092cc7ba3fd4a91e764b984972578fb1beed01e4f775024f723bf82ede"
+    },
+    {
+      "bytes": 670977,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/candidates-016.geojson.gz",
+      "sha256": "b72027a958379e676b8e4809f7ab445e697b574b104d3f9552c836798973decf"
+    },
+    {
+      "bytes": 491886,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/report.json",
+      "sha256": "6b8549a4e7782dc6bc87b38120273992a6c14944b087140aa738eabd712936f1"
+    },
+    {
+      "bytes": 6131,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v1/residues-000.geojson.gz",
+      "sha256": "a0215a69bfe511d69939768c5c345f327bebbc6002996034632b73237b375c17"
+    },
+    {
+      "bytes": 1131547,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-000.geojson.gz",
+      "sha256": "82021e76644a5a8b7e314df651802f8b0e7be7121df7f2cf7616ba0bb28ca66b"
+    },
+    {
+      "bytes": 945171,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-001.geojson.gz",
+      "sha256": "1db68fd78b5c45971f2c49744d236fd06773d8af7acdeb4c3f110846a76c1e57"
+    },
+    {
+      "bytes": 1030525,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-002.geojson.gz",
+      "sha256": "27fd26511ad6c928bd9988cd69d4063f7ac3405676c09076a8c3868d483aeedc"
+    },
+    {
+      "bytes": 1164442,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-003.geojson.gz",
+      "sha256": "a85f18eae9a30ac8f8b0add7f75430ef7a33fb95c9b1ab3c96de371ff46b793e"
+    },
+    {
+      "bytes": 1126016,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-004.geojson.gz",
+      "sha256": "9342f503fdac75a90223b0ffd607144bb78fa5d30423d4d1390a55ec35e7fbb6"
+    },
+    {
+      "bytes": 1137361,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-005.geojson.gz",
+      "sha256": "3e5763f5742f5d4e6ae99642ab148e05cb7de69c4801704b473b6990a211605f"
+    },
+    {
+      "bytes": 1130906,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-006.geojson.gz",
+      "sha256": "84ca5ca02c77ed04e8fbce3d64870972fc2c6fbb58f64037dd57e71278c7909e"
+    },
+    {
+      "bytes": 1120843,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-007.geojson.gz",
+      "sha256": "ff497d1127d47e9df308d118e89a4c3e893a0ed4078da82aaab82326cc9919c7"
+    },
+    {
+      "bytes": 1161752,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-008.geojson.gz",
+      "sha256": "20ecf84ad85b3fb74514e4633c5b0c0d94d59b20e0a4ef2829348fb1e9f75f77"
+    },
+    {
+      "bytes": 1196442,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-009.geojson.gz",
+      "sha256": "1a6ddb8db2116f6570bf695897f17aa592684280d93458248ce1ea5fa66ec78d"
+    },
+    {
+      "bytes": 1155467,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-010.geojson.gz",
+      "sha256": "399e7af4f3bf2850745efcc9bea14371ffed187ac3f7983ad860eaf5ab3c284f"
+    },
+    {
+      "bytes": 1098101,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-011.geojson.gz",
+      "sha256": "5228e4344b42adf8445f95d67f3eec5ff107a4632840cac86c10b31246d82fa5"
+    },
+    {
+      "bytes": 1137180,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-012.geojson.gz",
+      "sha256": "52a1f9104dd4045ba05e9a07769df81477f4e915afb636c508dec15dbe2b88d8"
+    },
+    {
+      "bytes": 1214905,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-013.geojson.gz",
+      "sha256": "518fe9bf7f869670af7529dd235391b7dfc4794500984e47173249d2da997dab"
+    },
+    {
+      "bytes": 1298884,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-014.geojson.gz",
+      "sha256": "936da384bb662363a6c45bfed043d009b7c3bdebe08f52c87f5ad22c77574ef1"
+    },
+    {
+      "bytes": 1290795,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-015.geojson.gz",
+      "sha256": "9df543092cc7ba3fd4a91e764b984972578fb1beed01e4f775024f723bf82ede"
+    },
+    {
+      "bytes": 670977,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/candidates-016.geojson.gz",
+      "sha256": "b72027a958379e676b8e4809f7ab445e697b574b104d3f9552c836798973decf"
+    },
+    {
+      "bytes": 492083,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/report.json",
+      "sha256": "eba9bc4ca9a5e28eda7e547571508b881576daa7025d3aee13df5314eec69355"
+    },
+    {
+      "bytes": 12003,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v2/residues-000.geojson.gz",
+      "sha256": "2a4e37ba9e317332a5132681d1c178f0c0a271109f9967a30a8d068b4ce65a7d"
+    },
+    {
+      "bytes": 1131547,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-000.geojson.gz",
+      "sha256": "82021e76644a5a8b7e314df651802f8b0e7be7121df7f2cf7616ba0bb28ca66b"
+    },
+    {
+      "bytes": 945171,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-001.geojson.gz",
+      "sha256": "1db68fd78b5c45971f2c49744d236fd06773d8af7acdeb4c3f110846a76c1e57"
+    },
+    {
+      "bytes": 1030525,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-002.geojson.gz",
+      "sha256": "27fd26511ad6c928bd9988cd69d4063f7ac3405676c09076a8c3868d483aeedc"
+    },
+    {
+      "bytes": 1164442,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-003.geojson.gz",
+      "sha256": "a85f18eae9a30ac8f8b0add7f75430ef7a33fb95c9b1ab3c96de371ff46b793e"
+    },
+    {
+      "bytes": 1126016,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-004.geojson.gz",
+      "sha256": "9342f503fdac75a90223b0ffd607144bb78fa5d30423d4d1390a55ec35e7fbb6"
+    },
+    {
+      "bytes": 1137361,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-005.geojson.gz",
+      "sha256": "3e5763f5742f5d4e6ae99642ab148e05cb7de69c4801704b473b6990a211605f"
+    },
+    {
+      "bytes": 1130906,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-006.geojson.gz",
+      "sha256": "84ca5ca02c77ed04e8fbce3d64870972fc2c6fbb58f64037dd57e71278c7909e"
+    },
+    {
+      "bytes": 1120843,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-007.geojson.gz",
+      "sha256": "ff497d1127d47e9df308d118e89a4c3e893a0ed4078da82aaab82326cc9919c7"
+    },
+    {
+      "bytes": 1161752,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-008.geojson.gz",
+      "sha256": "20ecf84ad85b3fb74514e4633c5b0c0d94d59b20e0a4ef2829348fb1e9f75f77"
+    },
+    {
+      "bytes": 1196442,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-009.geojson.gz",
+      "sha256": "1a6ddb8db2116f6570bf695897f17aa592684280d93458248ce1ea5fa66ec78d"
+    },
+    {
+      "bytes": 1155467,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-010.geojson.gz",
+      "sha256": "399e7af4f3bf2850745efcc9bea14371ffed187ac3f7983ad860eaf5ab3c284f"
+    },
+    {
+      "bytes": 1098101,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-011.geojson.gz",
+      "sha256": "5228e4344b42adf8445f95d67f3eec5ff107a4632840cac86c10b31246d82fa5"
+    },
+    {
+      "bytes": 1137180,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-012.geojson.gz",
+      "sha256": "52a1f9104dd4045ba05e9a07769df81477f4e915afb636c508dec15dbe2b88d8"
+    },
+    {
+      "bytes": 1214905,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-013.geojson.gz",
+      "sha256": "518fe9bf7f869670af7529dd235391b7dfc4794500984e47173249d2da997dab"
+    },
+    {
+      "bytes": 1298884,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-014.geojson.gz",
+      "sha256": "936da384bb662363a6c45bfed043d009b7c3bdebe08f52c87f5ad22c77574ef1"
+    },
+    {
+      "bytes": 1290795,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-015.geojson.gz",
+      "sha256": "9df543092cc7ba3fd4a91e764b984972578fb1beed01e4f775024f723bf82ede"
+    },
+    {
+      "bytes": 670977,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/candidates-016.geojson.gz",
+      "sha256": "b72027a958379e676b8e4809f7ab445e697b574b104d3f9552c836798973decf"
+    },
+    {
+      "bytes": 492083,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/report.json",
+      "sha256": "2e229c4215e8a1e15b60b106e8e455f21409e30d14be400cdb9c1c75dd882074"
+    },
+    {
+      "bytes": 12003,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v3/residues-000.geojson.gz",
+      "sha256": "2a4e37ba9e317332a5132681d1c178f0c0a271109f9967a30a8d068b4ce65a7d"
+    },
+    {
+      "bytes": 1131547,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-000.geojson.gz",
+      "sha256": "82021e76644a5a8b7e314df651802f8b0e7be7121df7f2cf7616ba0bb28ca66b"
+    },
+    {
+      "bytes": 945171,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-001.geojson.gz",
+      "sha256": "1db68fd78b5c45971f2c49744d236fd06773d8af7acdeb4c3f110846a76c1e57"
+    },
+    {
+      "bytes": 1030525,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-002.geojson.gz",
+      "sha256": "27fd26511ad6c928bd9988cd69d4063f7ac3405676c09076a8c3868d483aeedc"
+    },
+    {
+      "bytes": 1164442,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-003.geojson.gz",
+      "sha256": "a85f18eae9a30ac8f8b0add7f75430ef7a33fb95c9b1ab3c96de371ff46b793e"
+    },
+    {
+      "bytes": 1126016,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-004.geojson.gz",
+      "sha256": "9342f503fdac75a90223b0ffd607144bb78fa5d30423d4d1390a55ec35e7fbb6"
+    },
+    {
+      "bytes": 1137361,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-005.geojson.gz",
+      "sha256": "3e5763f5742f5d4e6ae99642ab148e05cb7de69c4801704b473b6990a211605f"
+    },
+    {
+      "bytes": 1130906,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-006.geojson.gz",
+      "sha256": "84ca5ca02c77ed04e8fbce3d64870972fc2c6fbb58f64037dd57e71278c7909e"
+    },
+    {
+      "bytes": 1120843,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-007.geojson.gz",
+      "sha256": "ff497d1127d47e9df308d118e89a4c3e893a0ed4078da82aaab82326cc9919c7"
+    },
+    {
+      "bytes": 1161752,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-008.geojson.gz",
+      "sha256": "20ecf84ad85b3fb74514e4633c5b0c0d94d59b20e0a4ef2829348fb1e9f75f77"
+    },
+    {
+      "bytes": 1196442,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-009.geojson.gz",
+      "sha256": "1a6ddb8db2116f6570bf695897f17aa592684280d93458248ce1ea5fa66ec78d"
+    },
+    {
+      "bytes": 1155467,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-010.geojson.gz",
+      "sha256": "399e7af4f3bf2850745efcc9bea14371ffed187ac3f7983ad860eaf5ab3c284f"
+    },
+    {
+      "bytes": 1098101,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-011.geojson.gz",
+      "sha256": "5228e4344b42adf8445f95d67f3eec5ff107a4632840cac86c10b31246d82fa5"
+    },
+    {
+      "bytes": 1137180,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-012.geojson.gz",
+      "sha256": "52a1f9104dd4045ba05e9a07769df81477f4e915afb636c508dec15dbe2b88d8"
+    },
+    {
+      "bytes": 1214905,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-013.geojson.gz",
+      "sha256": "518fe9bf7f869670af7529dd235391b7dfc4794500984e47173249d2da997dab"
+    },
+    {
+      "bytes": 1298884,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-014.geojson.gz",
+      "sha256": "936da384bb662363a6c45bfed043d009b7c3bdebe08f52c87f5ad22c77574ef1"
+    },
+    {
+      "bytes": 1290795,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-015.geojson.gz",
+      "sha256": "9df543092cc7ba3fd4a91e764b984972578fb1beed01e4f775024f723bf82ede"
+    },
+    {
+      "bytes": 670977,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-016.geojson.gz",
+      "sha256": "b72027a958379e676b8e4809f7ab445e697b574b104d3f9552c836798973decf"
+    },
+    {
+      "bytes": 492083,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json",
+      "sha256": "230a49dbb3feab482d2946a7a4c75b9b8069acd841fc2609f2251cf6d2d58330"
+    },
+    {
+      "bytes": 12003,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/residues-000.geojson.gz",
+      "sha256": "2a4e37ba9e317332a5132681d1c178f0c0a271109f9967a30a8d068b4ce65a7d"
+    },
+    {
+      "bytes": 1131547,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-000.geojson.gz",
+      "sha256": "82021e76644a5a8b7e314df651802f8b0e7be7121df7f2cf7616ba0bb28ca66b"
+    },
+    {
+      "bytes": 945171,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-001.geojson.gz",
+      "sha256": "1db68fd78b5c45971f2c49744d236fd06773d8af7acdeb4c3f110846a76c1e57"
+    },
+    {
+      "bytes": 1030525,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-002.geojson.gz",
+      "sha256": "27fd26511ad6c928bd9988cd69d4063f7ac3405676c09076a8c3868d483aeedc"
+    },
+    {
+      "bytes": 1164442,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-003.geojson.gz",
+      "sha256": "a85f18eae9a30ac8f8b0add7f75430ef7a33fb95c9b1ab3c96de371ff46b793e"
+    },
+    {
+      "bytes": 1126016,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-004.geojson.gz",
+      "sha256": "9342f503fdac75a90223b0ffd607144bb78fa5d30423d4d1390a55ec35e7fbb6"
+    },
+    {
+      "bytes": 1137361,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-005.geojson.gz",
+      "sha256": "3e5763f5742f5d4e6ae99642ab148e05cb7de69c4801704b473b6990a211605f"
+    },
+    {
+      "bytes": 1130906,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-006.geojson.gz",
+      "sha256": "84ca5ca02c77ed04e8fbce3d64870972fc2c6fbb58f64037dd57e71278c7909e"
+    },
+    {
+      "bytes": 1120843,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-007.geojson.gz",
+      "sha256": "ff497d1127d47e9df308d118e89a4c3e893a0ed4078da82aaab82326cc9919c7"
+    },
+    {
+      "bytes": 1161752,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-008.geojson.gz",
+      "sha256": "20ecf84ad85b3fb74514e4633c5b0c0d94d59b20e0a4ef2829348fb1e9f75f77"
+    },
+    {
+      "bytes": 1196442,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-009.geojson.gz",
+      "sha256": "1a6ddb8db2116f6570bf695897f17aa592684280d93458248ce1ea5fa66ec78d"
+    },
+    {
+      "bytes": 1155467,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-010.geojson.gz",
+      "sha256": "399e7af4f3bf2850745efcc9bea14371ffed187ac3f7983ad860eaf5ab3c284f"
+    },
+    {
+      "bytes": 1098101,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-011.geojson.gz",
+      "sha256": "5228e4344b42adf8445f95d67f3eec5ff107a4632840cac86c10b31246d82fa5"
+    },
+    {
+      "bytes": 1137180,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-012.geojson.gz",
+      "sha256": "52a1f9104dd4045ba05e9a07769df81477f4e915afb636c508dec15dbe2b88d8"
+    },
+    {
+      "bytes": 1214905,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-013.geojson.gz",
+      "sha256": "518fe9bf7f869670af7529dd235391b7dfc4794500984e47173249d2da997dab"
+    },
+    {
+      "bytes": 1298884,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-014.geojson.gz",
+      "sha256": "936da384bb662363a6c45bfed043d009b7c3bdebe08f52c87f5ad22c77574ef1"
+    },
+    {
+      "bytes": 1290795,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-015.geojson.gz",
+      "sha256": "9df543092cc7ba3fd4a91e764b984972578fb1beed01e4f775024f723bf82ede"
+    },
+    {
+      "bytes": 670977,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/candidates-016.geojson.gz",
+      "sha256": "b72027a958379e676b8e4809f7ab445e697b574b104d3f9552c836798973decf"
+    },
+    {
+      "bytes": 492083,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/report.json",
+      "sha256": "db65a27a5c1830ac7d6aab05283be1ba4e4a3c693a71637d94932e428d6955da"
+    },
+    {
+      "bytes": 12003,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v5/residues-000.geojson.gz",
+      "sha256": "2a4e37ba9e317332a5132681d1c178f0c0a271109f9967a30a8d068b4ce65a7d"
+    },
+    {
+      "bytes": 10631,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/execution-code-v1/2df5573cafde91e5cb51c47e98a036fa21925c7e10fbf1f49aa61592a2857513.bin",
+      "sha256": "2df5573cafde91e5cb51c47e98a036fa21925c7e10fbf1f49aa61592a2857513"
+    },
+    {
+      "bytes": 1953,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/execution-code-v1/4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12.bin",
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12"
+    },
+    {
+      "bytes": 9773,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/execution-code-v1/7656263b33f222942f709c3b9671c344dd5350cafd2726423c6632b38a667f07.bin",
+      "sha256": "7656263b33f222942f709c3b9671c344dd5350cafd2726423c6632b38a667f07"
+    },
+    {
+      "bytes": 5264,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/execution-code-v1/944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305.bin",
+      "sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305"
+    },
+    {
+      "bytes": 7090,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/execution-code-v1/b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd.bin",
+      "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+    },
+    {
+      "bytes": 8952,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/execution-code-v1/bda4d915654736af8dca980bf7310dedc6371a67467631ddd50538c7b791c3cd.bin",
+      "sha256": "bda4d915654736af8dca980bf7310dedc6371a67467631ddd50538c7b791c3cd"
+    },
+    {
+      "bytes": 11971,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/execution-code-v1/d0854276b311354160cc8b4ceaae052857bb102f4dd2e61ddaa2de0f8482819d.bin",
+      "sha256": "d0854276b311354160cc8b4ceaae052857bb102f4dd2e61ddaa2de0f8482819d"
+    },
+    {
+      "bytes": 11601,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/execution-code-v1/d2e55a63d6c7a94cb25030c6378968de2c5dce7a3d4fae1420a837c1511387ae.bin",
+      "sha256": "d2e55a63d6c7a94cb25030c6378968de2c5dce7a3d4fae1420a837c1511387ae"
+    },
+    {
+      "bytes": 10425,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/execution-code-v1/manifest.json",
+      "sha256": "5383465860860d28b7d2933d7321cd68c3d433c8c39f549bc6737b77befb52d3"
+    },
+    {
+      "bytes": 4150,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/final-two-run-comparison.json",
+      "sha256": "c1eac94ddfce35257dd271b8e5aa5c9b483474292eb6e7ca5d74872dc88c5406"
+    },
+    {
+      "bytes": 335,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/geometry-controls-v1.json",
+      "sha256": "1734164625343658759d2d7e533216229046ab7f39abd514bebc48c6c61fecf9"
+    },
+    {
+      "bytes": 31202,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/evidence-quality.json",
+      "sha256": "6da9489d4b7034641aeddafd13c3652caae8f1bcd0a08710fc00f3aa4eceb046"
+    },
+    {
+      "bytes": 25212,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/manifest.json",
+      "sha256": "27302928643da5a05e20b2030e7296bd37ec3e6afafa65dc6d7cff689f01b354"
+    },
+    {
+      "bytes": 84441,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-000.bytes.gz",
+      "sha256": "48740ba9a934daacedcae4214566bb27cfb90853c2daa8b33dfc9395a56c394c"
+    },
+    {
+      "bytes": 174,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-001.bytes.gz",
+      "sha256": "d2bd3bff618b55fcf45355e635e6162f65a689db4b16993b606350c46a9e295e"
+    },
+    {
+      "bytes": 168778,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-002.bytes.gz",
+      "sha256": "245af9df92a445dd89bd026bfa4d84790111ed870d3d69adb7fe392fed959996"
+    },
+    {
+      "bytes": 3489,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-003.bytes.gz",
+      "sha256": "730abd1ce028a2996b235d633c32bede32bd47e9599a179d4cbd19e2bba260ed"
+    },
+    {
+      "bytes": 1763736,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-004.bytes.gz",
+      "sha256": "bd5301f48cde58f03591e8b7c271f7529a6f7ae97dde3440ac042ee03a408c68"
+    },
+    {
+      "bytes": 1496086,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-005.bytes.gz",
+      "sha256": "83a27fd2412c9f87b1a0ae3eeb1629d0f428d44b70b4af41221bf576882e6b29"
+    },
+    {
+      "bytes": 712073,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-006.bytes.gz",
+      "sha256": "779216c953e6f54f130b236399a6fccec4a91b9a4c8ba6cc448e8b56b01f011b"
+    },
+    {
+      "bytes": 752471,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-007.bytes.gz",
+      "sha256": "04e746ffce5df833810b2b0576854a61949b127149514793a89cc4fa2b3ed4bb"
+    },
+    {
+      "bytes": 498281,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-008.bytes.gz",
+      "sha256": "a12342a5e0aed6eb9fea1e5341a1e6b52bfc75ffe79ce176c513c885aaba29fc"
+    },
+    {
+      "bytes": 874837,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-009.bytes.gz",
+      "sha256": "4308334c1b666704d9096874971c4dcde71fc10d469fbda535437e02dcf960cf"
+    },
+    {
+      "bytes": 424054,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-010.bytes.gz",
+      "sha256": "438e36ee23f4f3cd5832e7a53f33f948cdf6e0c41bed47714ccbcf1865540586"
+    },
+    {
+      "bytes": 747413,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-011.bytes.gz",
+      "sha256": "3b51b6344d624e3fc5a65a9b4ca61a98fc7389b5daa4a97d57bfe97a635159ec"
+    },
+    {
+      "bytes": 769666,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-012.bytes.gz",
+      "sha256": "6e82570e5dbcf0984058a18cbb93318a9864440904b8ec03219793eb37eac764"
+    },
+    {
+      "bytes": 643149,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-013.bytes.gz",
+      "sha256": "df1764c00503601e30495bbe1bb787fa94d6731a628f5927c35d2f4bff899504"
+    },
+    {
+      "bytes": 691563,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-014.bytes.gz",
+      "sha256": "346d8c2f998181e4697bbfe0b185fe2912cb45de56b33ecc4c1e4aace50fff33"
+    },
+    {
+      "bytes": 525680,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-015.bytes.gz",
+      "sha256": "1233d305b9f31f98e7338ccca3c6db664d26dc89ce89fa614d6e5c5ecec411d5"
+    },
+    {
+      "bytes": 1072562,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-016.bytes.gz",
+      "sha256": "2fa7e62a01bc00de5be34c9fdc9131ccdc97ccf75aaf2809bd769a45a0ac1565"
+    },
+    {
+      "bytes": 1320331,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-017.bytes.gz",
+      "sha256": "ad2718182d3873d342faebb4baa311b09fff1bbea33ffce6a352ed5d0aa11cdd"
+    },
+    {
+      "bytes": 1366624,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-018.bytes.gz",
+      "sha256": "dbd854c873953032a2393abd013d8339960c917b423a2d1b4eebf54c6658119d"
+    },
+    {
+      "bytes": 583076,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-019.bytes.gz",
+      "sha256": "65f004c4e2847caf06e230f9befce7393dc7f1833bd4e6d53f75721d90d2dd43"
+    },
+    {
+      "bytes": 697387,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-020.bytes.gz",
+      "sha256": "781f5a9acb0b5f7360187d070a5a1fb3b3d1caedd67beccebbdc5255755cd609"
+    },
+    {
+      "bytes": 628297,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-021.bytes.gz",
+      "sha256": "06ac5f796da313a69dc91e69199d50880f0f48f4c47c2df0f16585b85b4da23d"
+    },
+    {
+      "bytes": 544083,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-022.bytes.gz",
+      "sha256": "c32f9679b2b2d70e2afc3b3d596d5b739ffca421ebcc06e09f2407fdab0c546e"
+    },
+    {
+      "bytes": 607156,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-023.bytes.gz",
+      "sha256": "96611c98a6c481e1edfd70e28ddc8d91a811b033eec6a393a526673af9933d33"
+    },
+    {
+      "bytes": 675022,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-024.bytes.gz",
+      "sha256": "136a4b8e87f447b5913657fa33f17cdf5cab00bc6c59ee4540a579cdd962d435"
+    },
+    {
+      "bytes": 1249169,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-025.bytes.gz",
+      "sha256": "f918f4ff484bf4184cbff11c6baf88473ea58b187c939b925263be79d293beea"
+    },
+    {
+      "bytes": 3400149,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-026.bytes.gz",
+      "sha256": "7f3b041570ff703b353dc5d8940c95dbf54b9610fc0fce0831940a1c0fe28e91"
+    },
+    {
+      "bytes": 746003,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-027.bytes.gz",
+      "sha256": "12e88551e6bbb2da829867275f2b3b23a51fbd3fb1e82cdef51bc44ef37cf5f7"
+    },
+    {
+      "bytes": 3445252,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-028.bytes.gz",
+      "sha256": "9a3853ebbd9bb90e0469bb68f0ddf1afd1342631389ab4b12c655eac19c98d46"
+    },
+    {
+      "bytes": 3287318,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-029.bytes.gz",
+      "sha256": "6ba6cd683c9701f78cdb94c15b090b86c18966fac1f4e5a9a35889e32207f8bc"
+    },
+    {
+      "bytes": 3336091,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-030.bytes.gz",
+      "sha256": "1219ae2f8acb59793df14e17963784e7ee26d6311d86c55ce6723698871ade1e"
+    },
+    {
+      "bytes": 199876,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-031.bytes.gz",
+      "sha256": "d935987e747ebdde5755ba4a9aef7ad49af38049a3f878bd11841ed24659119a"
+    },
+    {
+      "bytes": 649710,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-032.bytes.gz",
+      "sha256": "da997994b0a26f0ef36e000c51621ad4a4e7e5c06c60d8f837f204becf546dd4"
+    },
+    {
+      "bytes": 758321,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-033.bytes.gz",
+      "sha256": "644d09b362737afefe91e83e9fb9869b383e8ab3f618ddb8fa9048afdbbfdefa"
+    },
+    {
+      "bytes": 528230,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-034.bytes.gz",
+      "sha256": "20da85b307b5873bfb358692828db256ac35e9870b6be5a07bca7a06c52331b0"
+    },
+    {
+      "bytes": 438842,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-035.bytes.gz",
+      "sha256": "17141188aa14dc7507a1aef044f78bc6f1fe129c650bd47073e1efa2cf76e190"
+    },
+    {
+      "bytes": 729761,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-036.bytes.gz",
+      "sha256": "a7fe234925269403c2fadf098457d2b006cf3a9ca3ac5275d064254221a06063"
+    },
+    {
+      "bytes": 969564,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-037.bytes.gz",
+      "sha256": "5edc4891c723f5592bad52beddfac02eec235a8f5f4844643317c4c7d66bb66c"
+    },
+    {
+      "bytes": 462615,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-038.bytes.gz",
+      "sha256": "c8c1d239141a46fa23d8767c6905a3eebe3d19ffcd0f1b88f74d4de03a478875"
+    },
+    {
+      "bytes": 1009011,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-039.bytes.gz",
+      "sha256": "6d4aa6da80fa631e099c93bc000da24a6f02b471f0e4ff4e8724d54d2d5fc396"
+    },
+    {
+      "bytes": 3264,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-040.bytes.gz",
+      "sha256": "23e232b96f4fb4c1f905f31d03bddc91c5e31ae51962f4956052c8bd28fdc52d"
+    },
+    {
+      "bytes": 3571538,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-041.bytes.gz",
+      "sha256": "accf1f463cde7d6c5b1c53bc00a11aeb677bc141507bcde7f079cccadebf5913"
+    },
+    {
+      "bytes": 180,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-042.bytes.gz",
+      "sha256": "750f489351f1ed9981792a8b653371e8c7df4030d6f78eb4df517e30d8321966"
+    },
+    {
+      "bytes": 1565659,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-043.bytes.gz",
+      "sha256": "575a37c712548339867c61a837d430839a90cf9b6d0fff41e7930afab05df303"
+    },
+    {
+      "bytes": 432,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-044.bytes.gz",
+      "sha256": "6341d3e325a7513bb06953e6b56145498760cc94c0ad87cd6946e985f7f8a9cf"
+    },
+    {
+      "bytes": 579,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/readback-v1.json",
+      "sha256": "33875cce53288ee169290191e596922b7c1034b71469a54b2bd17935adc0a72e"
+    },
+    {
+      "bytes": 3704,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/intermediate-two-run-comparison.json",
+      "sha256": "3af466244851ea1fe1ddbb24a3e4b3d70c2d68994c408ac705f65328f4da93c4"
+    },
+    {
+      "bytes": 630,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/physical-discovery-negative-control.json",
+      "sha256": "8a1fc83577d0d16682b7ac48d94f8885518d3ace181ce554a54480d5dfc08a3e"
+    },
+    {
+      "bytes": 630,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/physical-discovery-positive-control.json",
+      "sha256": "118db84ecb6c66680cc340b52518ea83a310c3127445b6276a06e45a7c55fe5b"
+    },
+    {
+      "bytes": 880,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/physical-discovery-reproducibility.json",
+      "sha256": "cace97e6cccf3c8f1b28dc2f99a0e14ad81e5ae5f12c6f5a016a8fe1706940bb"
+    },
+    {
+      "bytes": 628,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/source-edge-area-negative-control.json",
+      "sha256": "700e54e086f98322e9a3ba475f45c794ceba281ff8ef524f54f4a022763a4e34"
+    },
+    {
+      "bytes": 628,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/source-edge-area-positive-control.json",
+      "sha256": "2ec69fd70d7b78132270bf5c2710a944dfde3b363c31f7ef2cbbc80cc348b3a9"
+    },
+    {
+      "bytes": 9773,
+      "hash_kind": "file-bytes",
+      "path": "scripts/audit-physical-gaps.py",
+      "sha256": "7656263b33f222942f709c3b9671c344dd5350cafd2726423c6632b38a667f07"
+    },
+    {
+      "bytes": 8952,
+      "hash_kind": "file-bytes",
+      "path": "scripts/lossless_audit_inputs.py",
+      "sha256": "bda4d915654736af8dca980bf7310dedc6371a67467631ddd50538c7b791c3cd"
+    },
+    {
+      "bytes": 11971,
+      "hash_kind": "file-bytes",
+      "path": "scripts/physical_gap_audit.py",
+      "sha256": "d0854276b311354160cc8b4ceaae052857bb102f4dd2e61ddaa2de0f8482819d"
+    },
+    {
+      "bytes": 2927,
+      "hash_kind": "file-bytes",
+      "path": "scripts/retain-physical-audit-code.py",
+      "sha256": "be86a40744c182adf26a5d75f45f54bea2c963d1174b101fd9511e023cc83917"
+    },
+    {
+      "bytes": 6049,
+      "hash_kind": "file-bytes",
+      "path": "scripts/run-integration-tests.mjs",
+      "sha256": "1a23076e6e31c40649ba43ba96059618c0491839a8f297f132461966a11d1a69"
+    },
+    {
+      "bytes": 17576,
+      "hash_kind": "file-bytes",
+      "path": "scripts/validate-physical-audit-evidence.py",
+      "sha256": "11d501770684b30ca114fda8cb560de8a8d936bb9bef2c402b19a090fd608eee"
+    },
+    {
+      "bytes": 3784,
+      "hash_kind": "file-bytes",
+      "path": "test/lossless-audit-inputs.py",
+      "sha256": "8e95f02d6a4d1e12c9cb51c0393885f6ecc941e19f6dd2de9268b2ee25aca9e5"
+    },
+    {
+      "bytes": 501,
+      "hash_kind": "file-bytes",
+      "path": "test/lossless-audit-inputs.test.mjs",
+      "sha256": "5822111fd4c8b24ddbf3027c1861903a854f955e4864b329f2aa0d5a27566fe5"
+    },
+    {
+      "bytes": 1799,
+      "hash_kind": "file-bytes",
+      "path": "test/physical-audit-evidence.test.mjs",
+      "sha256": "4351368a0313a0ae2f30414b75fa777ea27aa3085dd95b038f32366d66f6c749"
+    },
+    {
+      "bytes": 8322,
+      "hash_kind": "file-bytes",
+      "path": "test/physical-audit-ledger.py",
+      "sha256": "4fc5bfc39597eb4be528388c00a85883374f291ae9efd3d6d7b19088671a9d8d"
+    },
+    {
+      "bytes": 504,
+      "hash_kind": "file-bytes",
+      "path": "test/physical-audit-ledger.test.mjs",
+      "sha256": "e740c9a16719ff3148ab79a225bd9361212eb229c8956afbde95b45491f0b0e6"
+    },
+    {
+      "bytes": 6563,
+      "hash_kind": "file-bytes",
+      "path": "test/physical-gap-audit.py",
+      "sha256": "97b09c1fdef725d7b4034ff6f0aa2cad1903ef5d526cedff421a87ffe7c7b466"
+    },
+    {
+      "bytes": 496,
+      "hash_kind": "file-bytes",
+      "path": "test/physical-gap-audit.test.mjs",
+      "sha256": "4841723822ea3b564ad2b2683e2580cea607da15520cc0a0fa10218a787442ca"
+    }
+  ],
+  "sources": [
+    {
+      "id": "retained-original-inputs",
+      "license": {
+        "status": "unknown",
+        "terms": "Native source terms are heterogeneous and not independently reapproved by this diagnostic stage."
+      },
+      "limit": "Byte restoration does not certify source truth, geography approval, a complete island inventory or fine shoreline.",
+      "restoration": "Restore each whole original file from its pinned Git commit or input-envelope-v1; validate SHA256 and original Git blob identity. No extract replaces an original.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "Complete original native polygons, independent physical-land reference and original release history; byte custody only",
+      "temporal_status": "reference",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/548c5f89f00271050823076a84695bb41e1b8454",
+      "verification": "unverified",
+      "vintage": "548c5f89f00271050823076a84695bb41e1b8454"
+    },
+    {
+      "id": "natural-earth-water",
+      "license": {
+        "status": "redistributable",
+        "terms": "Natural Earth public domain; original retained receipt preserved."
+      },
+      "limit": "Modern reference overlap is not dated water truth or administrative assignment.",
+      "restoration": "Mandatory input-envelope-v1 manifest verifies both complete original water files at the pinned water commit.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "Original modern lake reference retained as uncertain diagnostics; invalid lake originals remain intact",
+      "temporal_status": "reference",
+      "url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "verification": "unverified",
+      "vintage": "ff566eab31ef072084c548f67dee8ee727ab3d47"
+    }
+  ],
+  "stages": {
+    "geographic_approval": "unapproved",
+    "implementation": "implemented",
+    "research": "partial"
+  },
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "summaries": [
+    {
+      "metric_id": "candidate_fragments",
+      "unit": "fragments",
+      "value": 96963
+    },
+    {
+      "metric_id": "residues",
+      "unit": "remnants",
+      "value": 343
+    },
+    {
+      "metric_id": "tiles_checked",
+      "unit": "tiles",
+      "value": 2160
+    },
+    {
+      "metric_id": "tiles_unchecked",
+      "unit": "tiles",
+      "value": 0
+    }
+  ],
+  "validation": [
+    {
+      "evidence_path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/physical-discovery-positive-control.json",
+      "kind": "positive-control",
+      "method_id": "physical-discovery",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/physical-discovery-negative-control.json",
+      "kind": "negative-control",
+      "method_id": "physical-discovery",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/source-edge-area-positive-control.json",
+      "kind": "positive-control",
+      "method_id": "source-edge-area",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/source-edge-area-negative-control.json",
+      "kind": "negative-control",
+      "method_id": "source-edge-area",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/physical-discovery-reproducibility.json",
+      "kind": "reproducibility",
+      "method_id": "physical-discovery",
+      "outcome": "passed"
+    }
+  ],
+  "version": 1,
+  "worker_id": "01a10893-2a57-72e0-aa08-5c36088d5206"
+}

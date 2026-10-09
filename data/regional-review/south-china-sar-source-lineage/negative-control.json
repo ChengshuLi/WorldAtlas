@@ -1,0 +1,19 @@
+{
+  "method_id": "sar-source-identity-reproduction",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "cases": [
+    {
+      "id": "HKG absent member sentinel",
+      "expected": 0,
+      "actual": 17,
+      "rejected": true
+    },
+    {
+      "id": "MAC absent ShapeID sentinel",
+      "expected": 0,
+      "actual": 0,
+      "rejected": true
+    }
+  ]
+}

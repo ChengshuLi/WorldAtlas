@@ -27,10 +27,11 @@ async function runCase(drift){
    else if(route.endsWith('/timeline'))payload=drift==='budget'&&timelineReads++?[{source:{issue:{number:3,body:'Refs #1',pull_request:{url:'pr'}}}}]:[];
    else if(route.endsWith('/pulls/3'))payload={number:3,state:'closed',body:'Refs #1',merged_at:'now'};
    else throw Error('Unexpected mock route '+route);
-   return new Response(JSON.stringify(payload),{status:200,headers:{'Content-Type':'application/json'}});
+   return new Response(JSON.stringify(payload),{status:200,headers:{'Content-Type':'application/json','x-ratelimit-resource':'core','x-ratelimit-limit':'5000','x-ratelimit-remaining':'4900','x-ratelimit-reset':String(Math.floor(Date.now()/1000)+3600)}});
   };
-  await import(runner.href+'?race='+caseNumber++);
-  return {result:JSON.parse(fs.readFileSync('claim-result.json')),writes};
+  const {runIssueClaim}=await import(runner.href+'?race='+caseNumber++);
+  const result=await runIssueClaim({event:JSON.parse(fs.readFileSync('event.json'))});
+  return {result,writes};
  }finally{
   globalThis.fetch=fetchBefore;process.chdir(cwd);
   for(const k of keys)if(before[k]===undefined)delete process.env[k];else process.env[k]=before[k];

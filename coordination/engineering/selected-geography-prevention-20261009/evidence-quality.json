@@ -1,0 +1,958 @@
+{
+  "version": 1,
+  "issue": 1569,
+  "lane": "engineering",
+  "worker_id": "01a11935-1ccd-7fa3-a01f-563ff29045ee",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "version": 2,
+    "commit": "2faa55d11a30350023cac803345e21d6f13e65eb",
+    "files": [
+      {
+        "path": "data/ownership-selection.json",
+        "bytes": 298,
+        "sha256": "e00f6a6e02661e60085688ff336c91001f3c691bf2694dd336fa7a18e357a876",
+        "hash_kind": "file-bytes",
+        "commit": "2faa55d11a30350023cac803345e21d6f13e65eb"
+      },
+      {
+        "path": "data/canonical-grid/eastern-v8/manifest.json",
+        "bytes": 251732,
+        "sha256": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885",
+        "hash_kind": "file-bytes",
+        "commit": "2faa55d11a30350023cac803345e21d6f13e65eb"
+      },
+      {
+        "path": "data/canonical-grid/bounds.json.gz",
+        "bytes": 2663523,
+        "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+        "hash_kind": "file-bytes",
+        "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+        "compression": "gzip",
+        "uncompressed_bytes": 11096191,
+        "uncompressed_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+      },
+      {
+        "path": "scripts/native-ownership/verified-candidates.json",
+        "bytes": 1362,
+        "sha256": "d04a08074fad869f0dd618a6ba46cbad6e07d023f8acaedeec0ece4a9a9621b7",
+        "hash_kind": "file-bytes",
+        "commit": "2faa55d11a30350023cac803345e21d6f13e65eb"
+      },
+      {
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/native-selection-receipt.json",
+        "bytes": 13848,
+        "sha256": "3e5d3a3f06d7e5340fea11b90deb8acc97d9e0c38f067e455e81359602b0aa28",
+        "hash_kind": "file-bytes",
+        "commit": "2faa55d11a30350023cac803345e21d6f13e65eb"
+      },
+      {
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/index.json",
+        "bytes": 71758,
+        "sha256": "b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7876",
+        "hash_kind": "file-bytes",
+        "commit": "2faa55d11a30350023cac803345e21d6f13e65eb"
+      },
+      {
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-000.bin.gz",
+        "bytes": 16024224,
+        "sha256": "7ba43916183cc22035b3209840da3451f27df40097817c30653a14bb4ff44ef9",
+        "hash_kind": "file-bytes",
+        "commit": "2faa55d11a30350023cac803345e21d6f13e65eb",
+        "compression": "gzip",
+        "uncompressed_bytes": 16777216,
+        "uncompressed_sha256": "39acc14d53c3dd69a683cd107c3e3a8a28529fcececa7686a5aef4d65b14a43a"
+      },
+      {
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/part-003.bin.gz",
+        "bytes": 13768388,
+        "sha256": "3e6ea62e7e3473d27e1af02eb6be5cf09b8bac0559ce54751163864d0ab7ad0a",
+        "hash_kind": "file-bytes",
+        "commit": "2faa55d11a30350023cac803345e21d6f13e65eb",
+        "compression": "gzip",
+        "uncompressed_bytes": 16777216,
+        "uncompressed_sha256": "9d2dbbf3ecdfa0d2603975b4ad9ed501baa5301dcdbd6756a4bbb62a751f68c9"
+      },
+      {
+        "path": "coordination/engineering/prepared-geography-dateline-domain-20261007/diagnosis/complete-three-counterexamples.json",
+        "bytes": 185643,
+        "sha256": "85428524348da2863931664f873d5ade1e305e1f0f680055c7251459a513583b",
+        "hash_kind": "file-bytes",
+        "commit": "2faa55d11a30350023cac803345e21d6f13e65eb"
+      },
+      {
+        "path": "coordination/engineering/prepared-geography-dateline-domain-20261007/diagnosis/complete-source-predecessor-lineage.json",
+        "bytes": 170117,
+        "sha256": "ca570a975b5be297edf62fa69f70b2d7a74a5e550230c3395f8c6c3949a0faa3",
+        "hash_kind": "file-bytes",
+        "commit": "2faa55d11a30350023cac803345e21d6f13e65eb"
+      }
+    ],
+    "pins": {
+      "selected_native_manifest": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885"
+    },
+    "pin_files": {
+      "selected_native_manifest": {
+        "commit": "2faa55d11a30350023cac803345e21d6f13e65eb",
+        "path": "data/canonical-grid/eastern-v8/manifest.json"
+      }
+    },
+    "subject_files": {}
+  },
+  "sources": [
+    {
+      "id": "selected-native-custody",
+      "url": "https://github.com/ChengshuLi/WorldAtlas",
+      "role": "Immutable existing selected native assignments and original owner identity custody; not physical source approval",
+      "vintage": "2faa55d11a30350023cac803345e21d6f13e65eb",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Original geographic source rights/authority are not reapproved by this code extension."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Read exact baseline Git bodies, fixed original canonical bank whole fragment/member inverses, and retained original registered two-run receipt; no candidate code execution.",
+      "limit": "First partial prevention delivery only: no geographic approval, activation, subcell-gap prevention, effective-neighbor certificate, or active additive selection hook. Complete existing stock v8 readback and tiny synthetic controls do not constitute changed-world science.",
+      "temporal_status": "unknown"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/REPRODUCTION.md",
+      "bytes": 2287,
+      "sha256": "73ee3956b4e1761234c6ad4b9d906d40e9eb52277abadd9e567ef6e414cd38cc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/actual-selected-v8-readback-one.json",
+      "bytes": 11550,
+      "sha256": "835afacbbb32f55366e6cbd53661e86ead3d0367fb234323cae6ef51a083f2c7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/actual-selected-v8-readback-one.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-controls-one.log",
+      "bytes": 719,
+      "sha256": "7c655d3ea57416b0c19f99a0d9c34c63dc5dc57c04b3d46f549fdfc5a16aef41",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-controls-one/fixture-0.json.gz",
+      "bytes": 57975,
+      "sha256": "910cb17a0829a546028555e244a73c86f2c3c6440f5e22eb9e3b702b6d7b3309",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 161939,
+      "uncompressed_sha256": "91b50efdb4851de5a98deddd456fa2e475ba732d59530df08ec397d3f6ec45d9"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-controls-one/fixture-1.json.gz",
+      "bytes": 54028,
+      "sha256": "43d7c592060f0cccf1e6effd3b8547f1a69395cb9984b8473afff40925a4928e",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 147353,
+      "uncompressed_sha256": "4bdeac152668f6ee2e15e5347c71279f759d222e516bd2fa089ed2e57664f32c"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-controls-one/fixture-2.json.gz",
+      "bytes": 49594,
+      "sha256": "242909975dc71fbe68d3b086478afeaa51f93f3397977af81e7853ecc11fe50f",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 133820,
+      "uncompressed_sha256": "bfef407866ef518e62984f8bb29844312af6653fec4f99bc40ead1da5541e800"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-controls-two.log",
+      "bytes": 715,
+      "sha256": "3ff3a373621a6e1c71365617eea7bfe6be80ad564c1a6a8c9986a1f084b9fe8c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-controls-two/fixture-0.json.gz",
+      "bytes": 57996,
+      "sha256": "52a896f4cf55a51a119e9dcf281ba830d679425d385b6bb4c9f716692f843f45",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 161939,
+      "uncompressed_sha256": "2f9b78ef900b201aa6acf6a39edf7206f0e29936e9fd42fdb018f9845a6ea921"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-controls-two/fixture-1.json.gz",
+      "bytes": 54072,
+      "sha256": "655a0dcaf8f600fbab37b8df3baf570b155b641f2eca6dbd0c1187706b5da795",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 147353,
+      "uncompressed_sha256": "6142bf69c99f0d279a955cdab791a9de02f5b52f7eac774501c9ce72db631aba"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-controls-two/fixture-2.json.gz",
+      "bytes": 49427,
+      "sha256": "b8db5458fd04841e39dd1ba54926be2d13f580b19ccb66f55b86622d4097aa19",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 133820,
+      "uncompressed_sha256": "a7b5a140e5645b9ed2791b0c84426e0ed6e28ab19a31969a6b723f0be41afad2"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-legacy-controls.log",
+      "bytes": 140,
+      "sha256": "281f531d2e55575f24757466cb1e7eb452a3b7de24f3c65e38668bf716cbb746",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-selected-v8-one.json",
+      "bytes": 11794,
+      "sha256": "eb2b1c53087fe5ff7cc9a22a63e62d9aa3cb78f0442eea5248d24508840593b5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-selected-v8-one.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-selected-v8-two.json",
+      "bytes": 11794,
+      "sha256": "eb2b1c53087fe5ff7cc9a22a63e62d9aa3cb78f0442eea5248d24508840593b5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-selected-v8-two.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-controls-one.log",
+      "bytes": 812,
+      "sha256": "1ec09ba563c1daf36b00c23b9a2f89886cf153a19a1063a23ff8a3513f5045e5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-controls-one/fixture-0.json.gz",
+      "bytes": 59490,
+      "sha256": "eb9da7c86fb405befebb4e37f947279e281d83818d8220e959b77a41a39a66e1",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 165547,
+      "uncompressed_sha256": "2e7ca0a1d525df5e1e61da8cda579530ea4c5eba3c0bbe53bb6eb153d7a1103b"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-controls-one/fixture-1.json.gz",
+      "bytes": 55438,
+      "sha256": "5ae939e3cbed2262db5e596785381e2357a36f7ed9ae3e19f0c39cbb0d286a6f",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 150961,
+      "uncompressed_sha256": "3ad9b4c595b4403683757272478d991afafbce80f6561bffc4d79ade869c9185"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-controls-one/fixture-2.json.gz",
+      "bytes": 50588,
+      "sha256": "83660e784b62bf9d96bc20fc84dd6ac78427fde2f669939626e084bd20cd2fe1",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 137428,
+      "uncompressed_sha256": "984a152d05c843b24a38ee11693c9a19f12042c1f3d57816b416adca7a29dffb"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-controls-two.log",
+      "bytes": 807,
+      "sha256": "125037ee7861346bbfcc900a03784e2a1295c4058ee8f537298f066f559df1ce",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-controls-two/fixture-0.json.gz",
+      "bytes": 59450,
+      "sha256": "98ede74ef6caeccc32964ea167f1433251c57d6f5f73b5edb98252e10d612c56",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 165547,
+      "uncompressed_sha256": "6688d2d0691af3a1e64af21f5393fd1657b2b944a9719aff3fbb532dec099fc4"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-controls-two/fixture-1.json.gz",
+      "bytes": 55418,
+      "sha256": "6ec8ce94bcab837dd69daf91596404f433ac85ee06b09c81df9b89a91843a7a1",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 150961,
+      "uncompressed_sha256": "24a64e50eba8eaef1239d8572b570eea6d23e2624d2810b321377bb7fcb09054"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-controls-two/fixture-2.json.gz",
+      "bytes": 50597,
+      "sha256": "d9c4686b12697f64a495e2e7242dc30f55cb168a5819e6a2077aa7a41cbbe096",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 137428,
+      "uncompressed_sha256": "8860f58fc9db03546b5725d6252d15483f965cb3a0a7575f70601375a249abee"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-fixture-custody-readback.json",
+      "bytes": 204,
+      "sha256": "d947d062d48efd12c55c0b6cce655a6250b1acfc955defd1be061d4bf4185bcd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-legacy-controls.log",
+      "bytes": 140,
+      "sha256": "1194bd4f55624dec58c40f48f206905d9d17b7ea7335f5870cf8ab6364b74f9b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-selected-v8-one.json",
+      "bytes": 13787,
+      "sha256": "f02527f508b8807fcff1ec84fb7ca9c4b9c482741e768716565bde87dba53ec6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-selected-v8-two.json",
+      "bytes": 13787,
+      "sha256": "f02527f508b8807fcff1ec84fb7ca9c4b9c482741e768716565bde87dba53ec6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/correction-initial-controls.log",
+      "bytes": 2290,
+      "sha256": "50ba3df52c4e496813d3313a7fc95e683bd98b77ec3d3fcae90f0539ffbed9d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-controls-one.log",
+      "bytes": 912,
+      "sha256": "6b6cb59e88cb81bc724912a0c713471c425b4260e6a3822da96d329081adade7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-controls-one/fixture-0.json.gz",
+      "bytes": 59808,
+      "sha256": "23f3f3ba180433aefde29ca24c3b4f5f1bc2ba9f75d2687f5d542584b0abd663",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 166491,
+      "uncompressed_sha256": "711a6a75f5c9039752945a40ae1bf5a6e18f065fc2c83885ac8c3bce66ebc8e0"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-controls-one/fixture-1.json.gz",
+      "bytes": 55752,
+      "sha256": "96936ffc9665efd71a718bb05851fe1c03591ab2638f688c41a8e3721e865f13",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 151905,
+      "uncompressed_sha256": "ac0acd8119273a7f6abdd327d0cc1800d09ef4ea82e1a9fab36959b4991d0340"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-controls-one/fixture-2.json.gz",
+      "bytes": 51208,
+      "sha256": "d5cdd6e80cb9f7e33fd7c6bddb9d7e1d35860d9d1cd23278a5e310bbea2fb9fd",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 138372,
+      "uncompressed_sha256": "e594ca6de024865371b52a18cd7eb8021ba250dba1e528960003b8e3c5b44758"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-controls-one/fixture-3.json.gz",
+      "bytes": 51275,
+      "sha256": "bb5fa89c80599b2c8ca74662ce8d12adc411338c5a8b42e720e0cd9c8ebb5912",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 139895,
+      "uncompressed_sha256": "c0dc17a6761d4c1c5e2df642cb01108c7dfe76902806cae1f85225c5e9bcd52f"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-controls-two.log",
+      "bytes": 911,
+      "sha256": "3c68eaa64b87d3d03a832fc5bf4a21d54afe3c282460d26990a256edec04fa5f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-controls-two/fixture-0.json.gz",
+      "bytes": 59775,
+      "sha256": "18d8bcfa32245cff04f106934d3d944745369e99ad5d17395014988222ea4399",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 166491,
+      "uncompressed_sha256": "71b51fe4612f88dcd87acbea40e7a3e6d85951fd6161c0a627107e1721417c7e"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-controls-two/fixture-1.json.gz",
+      "bytes": 55725,
+      "sha256": "b13769a3f7f711851c5954c0942697f31c5c42a6fd5f33036cabe1c1b55ccc86",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 151905,
+      "uncompressed_sha256": "60963e6cb1de85b4cd8c455acd7924f21d79e634788c2a946f9ff7c4b9465fb6"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-controls-two/fixture-2.json.gz",
+      "bytes": 50904,
+      "sha256": "06b608d3cf3cda3f6fb32884ab07fb566f8df3e11d2c6ad6a8eb012d38d2fa29",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 138372,
+      "uncompressed_sha256": "38fa89ddbcbb4485596b66b8eea34a1a4a690f173f1fe41d5aa39964b9fbfb37"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-controls-two/fixture-3.json.gz",
+      "bytes": 51552,
+      "sha256": "2c541c31299b7e641ef7c262442bc0585debac9d9a87babb009cdd3f65e4ff30",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 139895,
+      "uncompressed_sha256": "62cf386ba002b460d84ff8b521ccda9a71958d58297fc82e1f320c41894dc5e5"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-fixture-readback.json",
+      "bytes": 204,
+      "sha256": "22a37ac428116c8a4cfe4de4daea0b7b5116c3bb9879370adf0b2e4725554278",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-selected-v8-one.json",
+      "bytes": 15126,
+      "sha256": "2fb7a9c3d261d94a1ea5f6744dd1fd7d8442a1b37f98a531f20855ff6e2b80db",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-selected-v8-two.json",
+      "bytes": 15126,
+      "sha256": "2fb7a9c3d261d94a1ea5f6744dd1fd7d8442a1b37f98a531f20855ff6e2b80db",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/design.md",
+      "bytes": 8859,
+      "sha256": "07f64c88cfd6ca9ca7fbbe74f1e49c55e95de685a6d1770b7a630832b54abaa8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/execution-code-custody-corrected.json",
+      "bytes": 249118,
+      "sha256": "1d7432806b5d04710039c01b39bc6b992d251f466b7c7184fe08920521cbf14f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/execution-code-custody-final.json",
+      "bytes": 251330,
+      "sha256": "5980040b2d2683918a8dc1c36db1f639a67799109de9ac411e217c5cd7280fe9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/execution-code-custody.json",
+      "bytes": 243910,
+      "sha256": "d72e2d81da36ca8f0aef7848e5de4c4e4595531aeeeb74346a8f79b3fe5f48c7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/failed-controls.json",
+      "bytes": 667,
+      "sha256": "296971797308d0015d403be01fe09d9fbdd77626f898c01779b87e2a2d39e861",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/fixture-custody-readback-v2.json",
+      "bytes": 204,
+      "sha256": "6aabefa9ddf224ea99608d3bc8f4c662c8699cbebf2301ebe955290825a19d7d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/fixture-custody-readback.json",
+      "bytes": 171,
+      "sha256": "afc44d1068c19e2af66493c1433ca24cab00bb5ad1f1bed7bd257a7924b2f2d5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/frozen-controls-one.log",
+      "bytes": 716,
+      "sha256": "2333519af68470e3677d7335114f57f09d64509c147db5ad54ad1111c530ba12",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/frozen-controls-one/fixture-0.json.gz",
+      "bytes": 57601,
+      "sha256": "f008053de9a9d310117c941158643f176366ced044d9c536fe2345b84703d7f6",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 160467,
+      "uncompressed_sha256": "effd6540f977cbbcc27a9fbb94a65b4867387d9c393177ca1f220d8f806c31ca"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/frozen-controls-one/fixture-1.json.gz",
+      "bytes": 53550,
+      "sha256": "dc7b920990cfd2d41810ab631c5c10ecff58b2533992caedffbb8652fc08a040",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 145881,
+      "uncompressed_sha256": "268801dce97b6083e87d3d3ee0d2d419b3f41e8d84067a171fb67089e3ffde52"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/frozen-controls-one/fixture-2.json.gz",
+      "bytes": 48992,
+      "sha256": "c022fba2e0fa85d14948618b7e546ee1beef6df6569d06c748e8c27201a48f47",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 132348,
+      "uncompressed_sha256": "96302ae17a585e99986b87a56ee483bef18b1ebff0e457a3ce4e413a57261fbc"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/frozen-controls-two.log",
+      "bytes": 720,
+      "sha256": "a7451d9e12207049f2d9b8843aa230532a56ef7e21a5fadfc7fca9c4e391d3a5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/frozen-controls-two/fixture-0.json.gz",
+      "bytes": 57579,
+      "sha256": "8d651671d70c41b3cf5b4425a82c34a0f314115bb7a442b11b3384ecaa9e777a",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 160467,
+      "uncompressed_sha256": "e1e2c9246a6876a86f4c65173670194b3c30b2bca31839d3042448065e2c9293"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/frozen-controls-two/fixture-1.json.gz",
+      "bytes": 53558,
+      "sha256": "9bc2b2be61ac1be1958539abd58e40cd9a6d6fde0429ded1dfe8019108acd720",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 145881,
+      "uncompressed_sha256": "294590fba1458ed3e7fc449a0f1a5b3b2bd56ed6fb546e4356e31d41eacb3d83"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/frozen-controls-two/fixture-2.json.gz",
+      "bytes": 49089,
+      "sha256": "85b9cb1ec7846c1cad7baf05f31e170d978fe45ff578c555bc082db19f264fee",
+      "hash_kind": "file-bytes",
+      "compression": "gzip",
+      "uncompressed_bytes": 132348,
+      "uncompressed_sha256": "046fae86accdc989d53dfe30d59ad7a0887c2f2b22bcc083a38305dc54fc380e"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/inspect-fixtures.mjs",
+      "bytes": 3818,
+      "sha256": "9813354908285f997939d63cf46ecc12525467ee4bd41989c246742193b3bb39",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/validation-results-corrected.json",
+      "bytes": 1062,
+      "sha256": "d57a5492b40be8753215aa63294787ecddc043f9af3f8d18f4aa438cc02de423",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/validation-results-final.json",
+      "bytes": 1135,
+      "sha256": "56c44343573face94095a877374f90c01a5e0a9dce35c7df61c8cf0fe8818c41",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/validation-results.json",
+      "bytes": 1062,
+      "sha256": "540f05b37817b0e6c32f2f65e9eee69dd58e68106b64464bc074781cb84f1e4f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/GEOGRAPHIC_REGRESSION.md",
+      "bytes": 10038,
+      "sha256": "3424a5a5ab94b392dab7aefdefe48dbee0c252527e43d520f4d426b16c97cc12",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "bytes": 26971,
+      "sha256": "9d012779cf1315049a36e379a120e7867559c16fdf32a85294bc6265561f553e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-geographic-check.py",
+      "bytes": 13491,
+      "sha256": "c098238670c1f1520887babd46964957c6ae8b2a55edd164432d8fd274e68208",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/effective-geographic-regression.test.mjs",
+      "bytes": 13874,
+      "sha256": "28aba0240aac1b45c363cc09b50bf8d7ee417595aef8c3cc4d00d0077153dc15",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "native-conservation",
+      "kind": "code",
+      "description": "Trusted whole selected ownership row/part and stable-owner comparison before raw polygon gate, plus fail-closed selector/asset, complete repair-ledger, real preload-sentinel and zero-open bootstrap controls.",
+      "software": "Node v24.19.0; Python 3.12 installed identity recorded; legacy tests Shapely 2.1.2 / GEOS 3.13.1.",
+      "units": "native cells, intervals and exact whole bytes"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "focused_controls_each_run",
+      "value": 8,
+      "unit": "tests",
+      "vintage": "archived",
+      "evaluation_commit": "303e5e37fdbe2d9a28cb0a9d65aeb44e59a2a07a",
+      "input_sha256": "5980040b2d2683918a8dc1c36db1f639a67799109de9ac411e217c5cd7280fe9",
+      "input_file": {
+        "path": "coordination/engineering/selected-geography-prevention-20261009/execution-code-custody-final.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "legacy_controls",
+      "value": 40,
+      "unit": "tests",
+      "vintage": "archived",
+      "evaluation_commit": "f316e2145dc2a041575aed0982b33b7adbc46469",
+      "input_sha256": "1d7432806b5d04710039c01b39bc6b992d251f466b7c7184fe08920521cbf14f",
+      "input_file": {
+        "path": "coordination/engineering/selected-geography-prevention-20261009/execution-code-custody-corrected.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "fixture_objects",
+      "value": 614,
+      "unit": "objects",
+      "vintage": "archived",
+      "evaluation_commit": "303e5e37fdbe2d9a28cb0a9d65aeb44e59a2a07a",
+      "input_sha256": "5980040b2d2683918a8dc1c36db1f639a67799109de9ac411e217c5cd7280fe9",
+      "input_file": {
+        "path": "coordination/engineering/selected-geography-prevention-20261009/execution-code-custody-final.json",
+        "commit": "candidate"
+      }
+    },
+    {
+      "id": "actual_selected_bank_lost_cells",
+      "value": 0,
+      "unit": "cells",
+      "vintage": "archived",
+      "evaluation_commit": "303e5e37fdbe2d9a28cb0a9d65aeb44e59a2a07a",
+      "input_sha256": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885",
+      "input_file": {
+        "path": "data/canonical-grid/eastern-v8/manifest.json",
+        "commit": "2faa55d11a30350023cac803345e21d6f13e65eb"
+      }
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "focused_controls_each_run",
+      "path": "coordination/engineering/selected-geography-prevention-20261009/validation-results-final.json",
+      "json_pointer": "/focused_controls_each_run"
+    },
+    {
+      "metric_id": "legacy_controls",
+      "path": "coordination/engineering/selected-geography-prevention-20261009/validation-results-final.json",
+      "json_pointer": "/legacy_controls"
+    },
+    {
+      "metric_id": "fixture_objects",
+      "path": "coordination/engineering/selected-geography-prevention-20261009/validation-results-final.json",
+      "json_pointer": "/fixture_objects"
+    },
+    {
+      "metric_id": "actual_selected_bank_lost_cells",
+      "path": "coordination/engineering/selected-geography-prevention-20261009/validation-results-final.json",
+      "json_pointer": "/actual_selected_bank_lost_cells"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "Selected native loss and reassignment are rejected through the existing trusted entry; active additive applicability and continuous affected-neighbor protection remain unfinished.",
+      "status": "unresolved",
+      "source_ids": [
+        "selected-native-custody"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "See REPRODUCTION.md; no packet code is executed by evidence validation."
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/REPRODUCTION.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/actual-selected-v8-readback-one.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/actual-selected-v8-readback-one.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-controls-one.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-controls-one/fixture-0.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-controls-one/fixture-1.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-controls-one/fixture-2.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-controls-two.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-controls-two/fixture-0.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-controls-two/fixture-1.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-controls-two/fixture-2.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-legacy-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-selected-v8-one.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-selected-v8-one.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-selected-v8-two.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/complete-selected-v8-two.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-controls-one.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-controls-one/fixture-0.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-controls-one/fixture-1.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-controls-one/fixture-2.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-controls-two.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-controls-two/fixture-0.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-controls-two/fixture-1.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-controls-two/fixture-2.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-fixture-custody-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-legacy-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-selected-v8-one.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/corrected-selected-v8-two.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/correction-initial-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-controls-one.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-controls-one/fixture-0.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-controls-one/fixture-1.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-controls-one/fixture-2.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-controls-one/fixture-3.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-controls-two.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-controls-two/fixture-0.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-controls-two/fixture-1.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-controls-two/fixture-2.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-controls-two/fixture-3.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-fixture-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-selected-v8-one.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/custody-selected-v8-two.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/design.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/execution-code-custody-corrected.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/execution-code-custody-final.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/execution-code-custody.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/failed-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/fixture-custody-readback-v2.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/fixture-custody-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/frozen-controls-one.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/frozen-controls-one/fixture-0.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/frozen-controls-one/fixture-1.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/frozen-controls-one/fixture-2.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/frozen-controls-two.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/frozen-controls-two/fixture-0.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/frozen-controls-two/fixture-1.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/frozen-controls-two/fixture-2.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/inspect-fixtures.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/validation-results-corrected.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/validation-results-final.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/validation-results.json",
+      "status": "added"
+    },
+    {
+      "path": "docs/GEOGRAPHIC_REGRESSION.md",
+      "status": "modified",
+      "original_sha256": "d091496929262007d94eb412e4d174399dfe3081f7bf64444f61bd78a1d3d829"
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/run-geographic-check.py",
+      "status": "modified",
+      "original_sha256": "ed9ac2ba3ee15f966a6d1aa1a8f9af8d965ef66b6d6156d5a897aa9af684e7d6"
+    },
+    {
+      "path": "test/effective-geographic-regression.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-prevention-20261009/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

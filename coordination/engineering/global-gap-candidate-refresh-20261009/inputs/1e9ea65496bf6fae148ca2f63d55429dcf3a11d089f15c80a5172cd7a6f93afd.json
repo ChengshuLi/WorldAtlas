@@ -1,0 +1,24 @@
+{
+  "status": "accepted-with-limits-for-preexecution",
+  "head": "043af92647438f21e1464c1dccc8b7aaf8a2ea35",
+  "producer_sha256": "05da67b7f068a1cb75142f7ba9cd8dc8db0a5fedec3d5c0146307dd59b7c7e68",
+  "supervisor_sha256": "16fbe542f9e239fcfe557abca469b0acfae045f96a4ad7a412fdde5a76e2d1b7",
+  "owned_group_sha256": "9ac8aeca9c721968bf33e69e219dbfb103875263b994dff1bd2e94402d0750ce",
+  "independent_producer_negatives": 11,
+  "independent_owned_group_controls": 5,
+  "source_code_bodies_checked": 8,
+  "phase_bytes": 266328511,
+  "descriptors": 352,
+  "scope": {
+    "constructed_components": 2,
+    "source_eligible": 3,
+    "source_rule_failed": 4,
+    "required_world_rows": 49625
+  },
+  "limits": [
+    "No full repair/world/geography replay executed by reviewer.",
+    "Input-only authenticates runtime/code/world index and prospective source plan, not all source geometry bodies.",
+    "Two full qualified runs, exact whole outputs, complete neighbors/conservation and final PR review/CI/queue/readback remain required.",
+    "No published/installed physical correction approval; current pointers remain false."
+  ]
+}

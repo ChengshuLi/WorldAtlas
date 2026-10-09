@@ -1,12 +1,14 @@
+import {effectiveFootprintValue, effectiveNativeRuntimeIndex} from './effective-footprint.js';
 import {nativePolygonIntervals, NATIVE_GRID_METHOD} from './native-grid.js';
-import {nativeRuntimeIndex} from './native-runtime.js';
 import {coverageRow} from '../scripts/audit-grid-intervals.mjs';
 import {LATITUDE_DIGEST} from './ownership-method.js';
 import {nativeSourceDigest} from './native-source-digest.js';
 
 const digest = async bytes => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)),
   byte => byte.toString(16).padStart(2, '0')).join('');
-const geometryKey = geometry => JSON.stringify({type: geometry?.type, coordinates: geometry?.coordinates});
+const geometryKey = feature => JSON.stringify(effectiveFootprintValue(feature));
+const sameFootprint = (a,b) => a && b && (a.geometry === b.geometry && a.additiveFootprint === b.additiveFootprint
+  || geometryKey(a) === geometryKey(b));
 const yieldTask = () => new Promise(resolve => setTimeout(resolve, 0));
 
 // Display owners are local dense indices, explicitly mapped to immutable IDs.
@@ -53,7 +55,7 @@ export async function compileNativeLocationContext({referenceFeatures, features,
   const raw = new Uint8Array(latitudes.length * 8), tableView = new DataView(raw.buffer);
   latitudes.forEach((value, y) => tableView.setFloat64(y * 8, value, true));
   if (await digest(raw) !== LATITUDE_DIGEST) throw Error('Native context latitude rule changed');
-  const sourceDigest = await nativeSourceDigest(referenceFeatures, {signal, onProgress});
+  const sourceDigest = await nativeSourceDigest(referenceFeatures, {signal, onProgress,additiveBaseReference:base.additive_base_reference});
   if (sourceDigest.sha256 !== base.footprints_sha256)
     throw Error('Native context reference source bytes changed');
   const referenceOwners = referenceFeatures.map(f => [f.pixelIndex, f.id]).sort((a, b) => a[0] - b[0]);
@@ -61,14 +63,14 @@ export async function compileNativeLocationContext({referenceFeatures, features,
     throw Error('Native context reference owner identity mapping changed');
   const context = nativeDisplayContext(referenceFeatures, features);
   if (context.features.length > 67108863) throw Error('Native display owner capacity exceeded');
-  const original = nativeRuntimeIndex(referenceFeatures), originalById = new Map(referenceFeatures.map(f => [f.id, f]));
+  const original = effectiveNativeRuntimeIndex(referenceFeatures), originalById = new Map(referenceFeatures.map(f => [f.id, f]));
   const originalInput = new Map(original.map(item => [item.index, item]));
   const originalBounds = new Map(original.map(item => [item.index, latitudeBounds(item)]));
   const changedInputs=[];
   const contextual=context.features.map((feature,i)=>{
     const old=originalById.get(feature.id);
-    if(old?.geometry===feature.geometry)return {...originalInput.get(old.pixelIndex),index:i+1};
-    const input=nativeRuntimeIndex([{...feature,pixelIndex:i+1}])[0];
+    if(sameFootprint(old,feature))return {...originalInput.get(old.pixelIndex),index:i+1};
+    const input=effectiveNativeRuntimeIndex([{...feature,pixelIndex:i+1}])[0];
     changedInputs.push(input);return input;
   });
   const contextualBounds = contextual.map(item => ({...item, ...latitudeBounds(item)}));
@@ -79,12 +81,12 @@ export async function compileNativeLocationContext({referenceFeatures, features,
   const currentById = new Map(features.map(f => [f.id, f]));
   for (const old of referenceFeatures) {
     const next = currentById.get(old.id);
-    if (!next || old.geometry !== next.geometry && geometryKey(old.geometry) !== geometryKey(next.geometry))
+    if (!sameFootprint(old,next))
       changedRanges.push(originalBounds.get(old.pixelIndex));
   }
   for (const item of contextualBounds) {
     const next = context.features[item.index - 1], old = originalById.get(next.id);
-    if (!old || old.geometry !== next.geometry && geometryKey(old.geometry) !== geometryKey(next.geometry)) changedRanges.push(item);
+    if (!sameFootprint(old,next)) changedRanges.push(item);
   }
   const affected = new Uint8Array(base.size), changedRows = new Map();
   for (const {min, max} of changedRanges) for (let y = 0; y < base.size; y++)
@@ -156,7 +158,9 @@ export async function compileNativeLocationContext({referenceFeatures, features,
     });
     if (y % 4096 === 0) await yieldTask();
   }
-  return {grid: {version: 2, coordinateBits: 19, size: base.size, method: NATIVE_GRID_METHOD, rows, runs},
+  const effectiveDigest=context.features.some(feature=>Object.hasOwn(feature,'additiveFootprint'))
+    ?(await nativeSourceDigest(context.features,{signal,onProgress})).sha256:undefined;
+  return {grid: {...(effectiveDigest?{context_footprints_sha256:effectiveDigest,context_footprint_domain:'worldatlas-display-context-footprints:v1',reference_footprints_sha256:sourceDigest.sha256}:{}),version: 2, coordinateBits: 19, size: base.size, method: NATIVE_GRID_METHOD, rows, runs},
     context, accounting: {rows: base.size, recomputedRows, reusedRows: base.size - recomputedRows,
       sourceDigest, ownerMapping: context.owners, rule: 'exact-native-affected-rows-and-stable-reference-reuse-v1'}};
 }

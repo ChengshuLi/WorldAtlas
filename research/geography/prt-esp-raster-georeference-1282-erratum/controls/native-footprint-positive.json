@@ -1,0 +1,66 @@
+{
+  "audit_runs": [
+    {
+      "run": "run-1",
+      "sha256": "101390e3521ccefd6937efadbb528add17fb35f91f87c17ad054ac77e704b09b"
+    },
+    {
+      "run": "run-2",
+      "sha256": "101390e3521ccefd6937efadbb528add17fb35f91f87c17ad054ac77e704b09b"
+    }
+  ],
+  "authenticated_native_headers": {
+    "count": 24,
+    "crs": "EPSG:4326",
+    "native_north_edges_degrees": [
+      30,
+      40
+    ]
+  },
+  "interpretation": "Positive controls confirm native metadata, pixel row/column values, and the bounded footprint measurement; they do not classify water or whole components.",
+  "kind": "positive-control",
+  "measurement_summary": {
+    "components_with_full_native_tile_coverage": 22,
+    "components_with_native_tile_coverage": 23,
+    "components_with_no_native_tile_coverage": 47,
+    "components_with_partial_native_tile_coverage": 1
+  },
+  "method_id": "native-geotiff-coverage-and-pixel-controls",
+  "native_pixel_controls": [
+    {
+      "claimed_center_inside_component": true,
+      "column": 11154,
+      "native_center_inside_component": false,
+      "native_center_lonlat": [
+        -7.211374999999887,
+        29.683624999999964
+      ],
+      "row": 1265,
+      "value": 2
+    },
+    {
+      "claimed_center_inside_component": true,
+      "column": 12287,
+      "native_center_inside_component": false,
+      "native_center_lonlat": [
+        -6.928124999999886,
+        29.951374999999963
+      ],
+      "row": 194,
+      "value": 1
+    },
+    {
+      "claimed_center_inside_component": true,
+      "column": 11964,
+      "native_center_inside_component": false,
+      "native_center_lonlat": [
+        -7.008874999999886,
+        29.826874999999966
+      ],
+      "row": 692,
+      "value": 0
+    }
+  ],
+  "outcome": "passed",
+  "schema": "worldatlas-measurement-control-v1"
+}

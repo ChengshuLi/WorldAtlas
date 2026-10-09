@@ -1,0 +1,3349 @@
+{
+  "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49",
+  "scope": "Complete file inventory with direct source imports and representative declared failure protection; categorized assessment, not a fresh reproduction of every historic defect. Per-case hosted timing remains in the identified run logs.",
+  "tests": [
+    {
+      "path": "test/attributes.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "attributes resolve independently with direct evidence ahead of spatial derivations and examples",
+      "direct_imports": [
+        "../database.mjs",
+        "../src/attributes.js",
+        "../src/environment-classifications.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/audit-grid-intervals.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "sparse intervals match actual rasterizer and compiler, preserving deterministic first-owner priority",
+      "direct_imports": [
+        "../scripts/audit-grid-intervals.mjs",
+        "../src/pixel-grid.js",
+        "../src/pixel-ownership.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/boundary-version-hash.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "dated non-example footprint fingerprints change with geometry/date and ignore examples",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/build-context-continuation.test.mjs",
+      "protection_family": "prepared asset/build/server and packaging consistency",
+      "first_declared_test": "build context dispatch preserves original realm and exact two-target continuation",
+      "direct_imports": [
+        "../coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs",
+        "../scripts/check-prepared.mjs",
+        "../scripts/prepare-geographic-release.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:fs/promises",
+        "node:os",
+        "node:path",
+        "node:test",
+        "node:vm"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/build-context-validation-vintage.test.mjs",
+      "protection_family": "prepared asset/build/server and packaging consistency",
+      "first_declared_test": "complete literal original validator imports authenticate and execute their own realm",
+      "direct_imports": [
+        "../coordination/engineering/subject-descriptor-decode-20261007/context-vintage-dispatch.mjs",
+        "../scripts/check-prepared.mjs",
+        "../scripts/native-ownership/validate-context-migration.mjs",
+        "../scripts/package-inputs.mjs",
+        "../scripts/prepare-geographic-release.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs/promises",
+        "node:path",
+        "node:test",
+        "node:url"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/category-palette.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "fixed graph assignment is independent of input ordering and meets a dense categorical control",
+      "direct_imports": [
+        "../scripts/build-category-palette.mjs",
+        "../src/color-perception.js",
+        "../src/model.js",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/category-presentation.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "map and legend presentation keys preserve source identities and distinguish concurrent names",
+      "direct_imports": [
+        "../src/category-presentation.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/claim-readiness-races.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "actual claim runner rejects blocker, dependency, budget and ownership drift without writing a reservation",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/cloudflare-access.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "all static and API paths fail closed before the app can access data",
+      "direct_imports": [
+        ", jwt, ",
+        ", undefined, method), publicEnv, ",
+        "../hosted/cloudflare-access.js",
+        "../hosted/worker.js",
+        "../scripts/build-cloudflare.mjs",
+        "jose",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/cloudflare-republish.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "real publisher entry point repeats the registry immediately before one exact-version provider deployment",
+      "direct_imports": [
+        ")).map(r=>r.method),[",
+        "))return new Response(",
+        ",preload,new URL(",
+        "../hosted/storage-export-v4-contract.js",
+        "../scripts/cloudflare-republish.mjs",
+        "../scripts/issue-claim-contract.mjs",
+        "./fixtures/cloudflare-publication.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:crypto",
+        "node:fs",
+        "node:fs/promises",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/color-perception.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "published OKLab reference controls include white, black and red",
+      "direct_imports": [
+        "../src/color-perception.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/compact-context-inputs.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "compact derivative preserves exact native geometry type, coordinates and original owner/parent mapping",
+      "direct_imports": [
+        "../scripts/native-ownership/compact-context-inputs.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/compact-map-client.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "reference presentation context is reused within one loaded generation and rebuilt on reload",
+      "direct_imports": [
+        "${new URL(path,file).href}",
+        "(\\.\\/[^",
+        ",retryable:true},{status:409});if(attempt===2)return Response.json(validPage({id:",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/compact-membership-production.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "bounded publisher maintenance accepts only complete current main/claim/scope/recipient window",
+      "direct_imports": [
+        "../scripts/current-postgres-recovery.mjs",
+        "../scripts/run-compact-membership-production.mjs",
+        "../scripts/verify-postgres-schema.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/compact-membership-profile.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "compact V4 preserves every raw collection and restricted runtime over frozen V",
+      "direct_imports": [
+        ",options,{ATLAS_READ_ONLY:",
+        "../hosted/geographic-releases.js",
+        "../hosted/membership-storage-profile.js",
+        "../hosted/postgres-adapter.js",
+        "../hosted/records.js",
+        "../hosted/storage-export-v2-contract.js",
+        "../hosted/storage-export-v2.js",
+        "../hosted/storage-export-v3-contract.js",
+        "../hosted/storage-export-v3.js",
+        "../hosted/storage-export-v4.js",
+        "../hosted/typed-observations.js",
+        "../scripts/compact-membership-storage.mjs",
+        "../scripts/neon-forward-migrations.mjs",
+        "../scripts/provision-postgres-runtime-role.mjs",
+        "../scripts/verify-compact-membership-runtime.mjs",
+        "../scripts/verify-postgres-schema.mjs",
+        "node:assert/strict",
+        "node:fs",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/compact-membership-storage.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "compact contract preserves original guards, published byte retries and new service publication",
+      "direct_imports": [
+        "../hosted/geographic-releases.js",
+        "../hosted/records.js",
+        "../scripts/compact-membership-storage.mjs",
+        "../scripts/verify-postgres-schema.mjs",
+        "node:assert/strict",
+        "node:fs",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/compact-ownership.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "every published canonical run survives compact packing, including its boundary cells and gaps",
+      "direct_imports": [
+        "../src/ownership-assets.js",
+        "../src/ownership-codec.js",
+        "../src/ownership-method.js",
+        "../src/pixel-ownership.js",
+        "@playwright/test",
+        "node:assert/strict",
+        "node:fs",
+        "node:test",
+        "node:zlib",
+        "vite"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/compact-recovery-profile.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "only reviewed compact-only base2 marker is accepted",
+      "direct_imports": [
+        "../hosted/membership-storage-pins.js",
+        "../hosted/storage-export-v2-contract.js",
+        "../hosted/storage-export-v4-contract.js",
+        "../scripts/compact-recovery-profile.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/content-backend.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "backend cutover is explicit and cannot expose credentials or silently return D1",
+      "direct_imports": [
+        ",",
+        "../hosted/content-backend.js",
+        "../hosted/postgres-adapter.js",
+        "../hosted/research-catalog.js",
+        "../hosted/worker.js",
+        "@electric-sql/pglite",
+        "node:assert/strict",
+        "node:fs",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/context-input-stage.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "complete native context stage verifies original bytes, compact derivative and both immutable inventories",
+      "direct_imports": [
+        "../scripts/evidence-quality.mjs",
+        "../scripts/native-ownership/validate-context-input-stage.mjs",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/coverage-browser.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "GPU and Canvas explain and render physical coverage without changing ownership",
+      "direct_imports": [
+        "@playwright/test",
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/coverage-classification.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "physical classes preserve land, water and unknown holes without creating location IDs",
+      "direct_imports": [
+        "../src/coverage-classification.js",
+        "../src/ownership-codec.js",
+        "../src/pixel-ownership.js",
+        "node:assert/strict",
+        "node:child_process",
+        "node:crypto",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/coverage-product.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "prepared physical reference is pinned and preserves reported gaps, lake, ocean and blocked uncertainty",
+      "direct_imports": [
+        "../scripts/read-geographic-release-manifest.mjs",
+        "../src/coverage-classification.js",
+        "../src/pixel-grid.js",
+        "../src/pixel-ownership.js",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs/promises",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/coverage-scope.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "continent filters follow location membership for overseas and transcontinental reference owners",
+      "direct_imports": [
+        "../src/coverage-scope.js",
+        "node:assert/strict",
+        "node:fs",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/coverage-source-policy.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "bounded source-policy projection is exact, reproducible, and small enough to deploy",
+      "direct_imports": [
+        "../src/coverage-scope.js",
+        "../src/source-policy-corrections.js",
+        "node:assert/strict",
+        "node:child_process",
+        "node:crypto",
+        "node:fs",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/credential-envelope.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "standard envelope roundtrip uses fresh randomness, authenticated context and no plaintext fields",
+      "direct_imports": [
+        "../scripts/credential-envelope.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/current-postgres-recovery.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "accepts only pinned live publisher read window",
+      "direct_imports": [
+        "../hosted/storage-export-v2-contract.js",
+        "../scripts/current-postgres-recovery.mjs",
+        "../scripts/recovery-backup-envelope.mjs",
+        "./fixtures/cloudflare-publication.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/deployment-budget-scope.test.mjs",
+      "protection_family": "prepared asset/build/server and packaging consistency",
+      "first_declared_test": "package applicability comes only from the enforced declaration",
+      "direct_imports": [
+        "../scripts/classify-deployment-budget.mjs",
+        "../scripts/package-inputs.mjs",
+        "./scripts/classify-deployment-budget.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/deployment-budget.test.mjs",
+      "protection_family": "prepared asset/build/server and packaging consistency",
+      "first_declared_test": "exact upload archive accounting includes transport/config and preserves excluded sources",
+      "direct_imports": [
+        "../scripts/deployment-budget.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:crypto",
+        "node:fs/promises",
+        "node:os",
+        "node:path",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/environment-classification-db.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "fixed environmental database guards reproduce exactly from the shared registry",
+      "direct_imports": [
+        "../database.mjs",
+        "../scripts/compile-environment-classification-guards.mjs",
+        "../src/environment-classifications.js",
+        "node:assert/strict",
+        "node:fs",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/environment-classifications.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "fixed environmental classifications have unique stable identities and cover every existing reference value",
+      "direct_imports": [
+        "../database.mjs",
+        "../hosted/records.js",
+        "../hosted/worker.js",
+        "../src/attributes.js",
+        "../src/environment-classifications.js",
+        "../src/import-records.js",
+        "../src/model.js",
+        "node:assert/strict",
+        "node:fs",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/evidence-family-record-binding.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "whole original family records retain scope and explicit identity-only limits",
+      "direct_imports": [
+        ",preload,script,destination,commit],{encoding:",
+        "../scripts/evidence-quality.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:fs",
+        "node:module",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/evidence-partition-review.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "PR evidence inventory preserves author renames and excludes a disjoint main advance",
+      "direct_imports": [
+        "../scripts/evidence-quality.mjs",
+        "../scripts/premerge-evidence.mjs",
+        "../scripts/validate-evidence-partition-review.mjs",
+        "../scripts/validate-evidence-partitions.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/evidence-partitions.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "bounded root and child evidence verify complete changed-file union and baseline inventory",
+      "direct_imports": [
+        "../scripts/evidence-quality.mjs",
+        "../scripts/validate-evidence-partitions.mjs",
+        "node:assert/strict",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/evidence-prevention.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "shared evidence execution/admission regressions run without provider credentials or large datasets",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/evidence-quality.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "verifies bytes without claiming factual correctness",
+      "direct_imports": [
+        "../scripts/evidence-quality.mjs",
+        "node:assert/strict",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "focused audited roster and full",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/evidence-revalidation-chain.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "exact predecessor bytes retain original claims and append migration chronology",
+      "direct_imports": [
+        "../scripts/validate-evidence-revalidation-chain.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/evidence-suppression.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "unverified withdrawals suppress every attribute source and modern owner fallback without modifying content",
+      "direct_imports": [
+        "../src/attributes.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/exact-source-predicates.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "exact original source predicates retain closure, uncertainty and export failures",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/final-capacity.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "observed reset and early capacity progress without swapping token or accepting timing",
+      "direct_imports": [
+        "../scripts/evidence-quality.mjs",
+        "../scripts/final-capacity.mjs",
+        "../scripts/geographic-report-artifact.mjs",
+        "../scripts/immutable-git-blobs.mjs",
+        "../scripts/issue-claim-contract.mjs",
+        "../scripts/merge-integration.mjs",
+        "../scripts/merge-scheduler.mjs",
+        "../scripts/premerge-evidence.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/footprint-versions.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "maintainer gate publishes complete signed, byte-verified products on both databases",
+      "direct_imports": [
+        "../hosted/footprint-versions.js",
+        "../hosted/geographic-releases.js",
+        "../hosted/records.js",
+        "../scripts/verify-postgres-schema.mjs",
+        "../src/pixel-ownership.js",
+        "node:assert/strict",
+        "node:fs",
+        "node:sqlite",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/full-regression-shards.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "every real full-suite file runs once, with heavy migration tests separate from packaged parity",
+      "direct_imports": [
+        "../scripts/integration-profile.mjs",
+        "../scripts/run-integration-tests.mjs",
+        "node:assert/strict",
+        "node:fs",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/geographic-adjudication-api.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "source bindings match the actual shared Python canonical protocol",
+      "direct_imports": [
+        "../scripts/evidence-policy.mjs",
+        "../scripts/evidence-quality.mjs",
+        "../scripts/geographic-adjudication-api.mjs",
+        "../scripts/issue-claim-contract.mjs",
+        "../scripts/merge-integration.mjs",
+        "../scripts/premerge-evidence.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:crypto",
+        "node:fs",
+        "node:path",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/geographic-adjudication.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "whole-loss source support retains actual native water and explicit uncertainty controls",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/geographic-archive.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "a reference correction retains exact claim bytes, original coordinates and the complete original chain",
+      "direct_imports": [
+        "../database.mjs",
+        "../geographic-archive.mjs",
+        "node:assert/strict",
+        "node:fs",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/geographic-bootstrap.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "bounded import concurrency defaults to six and accepts only one through eight",
+      "direct_imports": [
+        ",sha256:createHash(",
+        "../hosted/geographic-releases.js",
+        "../hosted/records.js",
+        "../scripts/bootstrap-geographic-release.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/geographic-components.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "exact gap components preserve tiles, dateline, holes and ambiguous contacts",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/geographic-gaps.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "geographic gap audit preserves seam/island/water and tile controls",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/geographic-grid.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "native geographic grid reads and shape comparisons preserve exact packing and uncertainty",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/geographic-proof-chronology.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "four retained metadata predecessors replay before a late creation and a future second addition",
+      "direct_imports": [
+        "../scripts/prepare-geographic-release.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/geographic-regression.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "differential geography checks preserve neighbor, water, dateline and immutable-input controls",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/geographic-release-admission.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "independent combined-row and UTF8 fixtures split with complete raw preservation",
+      "direct_imports": [
+        "),descriptor(bytes,path,",
+        "),descriptor(definition,",
+        ",sha256:createHash(",
+        ",{sources:[{id:release.source_id,name:",
+        "../hosted/geographic-releases.js",
+        "../scripts/bootstrap-geographic-release.mjs",
+        "../scripts/geographic-release-admission.mjs",
+        "./fixtures/geographic-admission/independent-boundaries.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:crypto",
+        "node:module",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/geographic-release-manifest.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "legacy index remains unchanged; verified extension resolves new release",
+      "direct_imports": [
+        "../scripts/read-geographic-release-manifest.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test",
+        "node:zlib",
+        "}],new_entities:0,total_memberships:2,changes:0,sources_batches:[",
+        "}],sources_batches:["
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/geographic-releases.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "staging is invisible; publication requires complete pinned membership and preserves original registry",
+      "direct_imports": [
+        "../hosted/geographic-releases.js",
+        "../hosted/records.js",
+        "node:assert/strict",
+        "node:fs",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/geographic-report-artifact.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "different valid report bytes cannot impersonate trusted job output",
+      "direct_imports": [
+        "../scripts/geographic-report-artifact.mjs",
+        "node:assert/strict",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/geographic-water.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "native monthly water diagnostics retain missing observations and spatial uncertainty",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/geography-bootstrap.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "only named no-data activation branch can report bootstrap absence",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:fs",
+        "node:path",
+        "node:test",
+        "node:url"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/geography-import-pin-verifier.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "live geography concurrency verifier refuses production, shared sessions and missing interactive drivers before writes",
+      "direct_imports": [
+        "../scripts/verify-geography-import-pin.mjs",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/geography-subject-binding.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "canonical contact IDs bind to the exact pinned source rows by declared properties",
+      "direct_imports": [
+        "../scripts/evidence-quality.mjs",
+        "../scripts/premerge-evidence.mjs",
+        "node:assert/strict",
+        "node:fs",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/geography-worker-lane.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "geography has its own branch and exactly one matching type",
+      "direct_imports": [
+        "../scripts/check-handoff-scope.mjs",
+        "../scripts/check-linked-github-issue.mjs",
+        "../scripts/issue-claim-contract.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "focused audited roster and full",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/git-blob-transport.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "one exact-OID batch replaces blob REST reads while mutable authority remains fresh",
+      "direct_imports": [
+        "../scripts/git-blob-transport.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/github-quota.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "quota retry only retries an explicit read rejection, and accounts every attempt",
+      "direct_imports": [
+        "../scripts/final-capacity.mjs",
+        "../scripts/github-quota.mjs",
+        "../scripts/issue-claim-contract.mjs",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/handoff-scope.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "lane IDs must be explicit and safe",
+      "direct_imports": [
+        "../scripts/check-handoff-scope.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "focused audited roster and full",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/historical-evidence.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "historical bytes and metric evaluation use distinct authenticated vintages",
+      "direct_imports": [
+        "../scripts/evidence-quality.mjs",
+        "../scripts/premerge-evidence.mjs",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/hosted-catalog.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "hosted catalog keeps active ancestor closure and categories as undated identities without ancient source coverage",
+      "direct_imports": [
+        "../database.mjs",
+        "../hosted/records.js",
+        "../scripts/prepare-hosted-catalog.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:sqlite",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/hosted-evidence-availability.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "a failed evidence stream cannot mix live claims with an absent retirement snapshot",
+      "direct_imports": [
+        "${new URL(path,file).href}",
+        "(\\.\\/[^",
+        "node:assert/strict",
+        "node:fs",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/hosted-migration-transport.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "transport compiler changes exactly the pinned 21 guards and preserves all other raw SQL and metadata",
+      "direct_imports": [
+        "../scripts/compile-hosted-migrations.mjs",
+        "miniflare",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/hosted-records.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "geographic pin guards the write transaction and retains exact original replay context",
+      "direct_imports": [
+        ",",
+        "../hosted/geographic-releases.js",
+        "../hosted/records.js",
+        "node:assert/strict",
+        "node:fs",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/hosted-temporal-client.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "both sparse streams complete under fixed pins/revision before legacy history becomes authoritative",
+      "direct_imports": [
+        "../src/hosted-temporal-client.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/hosted-temporal-geography.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "dated parent bridge preserves stable identity, source support and effective complete chains",
+      "direct_imports": [
+        "../src/hosted-temporal-geography.js",
+        "../src/temporal.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/immutable-git-blobs.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "root-format 1479 blob requests become 474 verified immutable fetches across three authority passes",
+      "direct_imports": [
+        ",mock,",
+        "../scripts/immutable-git-blobs.mjs",
+        "../scripts/issue-claim-contract.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/import-records.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "import preview rejects invalid dates, scalar values and unsupported source intervals before upload",
+      "direct_imports": [
+        ");assert.equal(sent.options.method,",
+        "../src/import-records.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/install-macro-reference.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "JSON projection retains original nested formatting and appends bounded one-line entries",
+      "direct_imports": [
+        "../scripts/install-macro-reference.mjs",
+        "../src/prepared-evidence.js",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/install-reviewed-geography.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "dry run validates a whole generation without changing any live bytes",
+      "direct_imports": [
+        "../scripts/check-prepared.mjs",
+        "../scripts/install-reviewed-geography.mjs",
+        "../scripts/stage-land-creations.mjs",
+        "../src/ownership-codec.js",
+        "../src/pixel-ownership.js",
+        "node:assert/strict",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/integration-profile-restoration.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "actual selected test",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:fs",
+        "node:path",
+        "node:test",
+        "node:url"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/integration-proof.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "successful full and focused workflows prove exact tree and pinned current attempt",
+      "direct_imports": [
+        "../scripts/check-integration-profile.mjs",
+        "../scripts/integration-profile.mjs",
+        "../scripts/integration-proof.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:test"
+      ],
+      "selection": "focused audited roster and full",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/integration-streaming.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "stdout and stderr arrive while the child is still waiting, with chunked zero-skips summary",
+      "direct_imports": [
+        "../scripts/run-integration-tests.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:fs",
+        "node:path",
+        "node:stream",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/issue-claims.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "serialized contenders on one issue have exactly one holder even under the same GitHub account",
+      "direct_imports": [
+        "../scripts/issue-claim-contract.mjs",
+        "../scripts/research-import-gate.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "focused audited roster and full",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/issue-readiness.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "readiness and claiming reject the same invalid contracts, dependencies, budgets and evidence",
+      "direct_imports": [
+        "../scripts/issue-claim-contract.mjs",
+        "../scripts/review-issue-readiness.mjs",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/job-deadline-independent.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "dynamic tests; original source retains their assertions",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/job-deadline.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "actual workflow binds distinct five/ten minute budgets, with explicit finalization and attempt margins",
+      "direct_imports": [
+        ", path.join(directory, ",
+        "../scripts/issue-claim-contract.mjs",
+        "../scripts/job-deadline.mjs",
+        "../scripts/merge-scheduler.mjs",
+        "../scripts/run-merge-scheduler.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:fs",
+        "node:path",
+        "node:perf_hooks",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/land-creations.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "pure source-backed creation has a null predecessor and retains every original geometry",
+      "direct_imports": [
+        "../hosted/geographic-releases.js",
+        "../hosted/records.js",
+        "../scripts/check-prepared.mjs",
+        "../scripts/prepare-geographic-release.mjs",
+        "../scripts/stage-land-creations.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:sqlite",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/live-membership-api-functions.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "live function proof covers original cursor/parent/archived/profile responses and rejects changed output or privileges",
+      "direct_imports": [
+        "../hosted/geographic-releases.js",
+        "../hosted/records.js",
+        "../scripts/compact-membership-storage.mjs",
+        "../scripts/verify-live-membership-api-functions.mjs",
+        "../scripts/verify-postgres-schema.mjs",
+        "node:assert/strict",
+        "node:fs",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/local-workspace.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "sparse work is isolated and contains required directories and individual inputs only",
+      "direct_imports": [
+        "../scripts/local-workspace.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/lossless-audit-inputs.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "lossless audit input envelopes preserve complete originals and reject tampering",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/macro-foundation-contract.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "macro partition checks separate member coherence from source completeness and descendant approval",
+      "direct_imports": [
+        "../scripts/check-macro-foundation.mjs",
+        "../scripts/check-prepared.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/macro-policy-provenance.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "retained original mismatch is resolved additively, with no semantic approval",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/macro-reference-split.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "large source collections retain a bounded reference to the exact archived receipt",
+      "direct_imports": [
+        "../scripts/check-prepared.mjs",
+        "../scripts/prepare-geographic-release.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/macro-restoration-proofs.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "retained replacements archive all six exact originals without predecessor transfer",
+      "direct_imports": [
+        "../scripts/prepare-macro-restoration-proofs.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test",
+        "node:url"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/macro-review-projection.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "owner-profile reuse rejects stale hierarchy, catalog and footprint pins",
+      "direct_imports": [
+        "../scripts/check-prepared.mjs",
+        "../scripts/prepare-macro-review-projection.mjs",
+        "../scripts/stage-land-creations.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/map-color-neighbors.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "raster presentation graph includes true horizontal and vertical shared cells",
+      "direct_imports": [
+        "../scripts/map-color-neighbors.mjs",
+        "../src/pixel-ownership.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/map-snapshots.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "evidence-only pages omit empty identities but retain withdrawal-only subjects and complete claims",
+      "direct_imports": [
+        "../hosted/map-snapshots.js",
+        "../hosted/records.js",
+        "../src/attributes.js",
+        "../src/prepared-evidence.js",
+        "../src/temporal.js",
+        "node:assert/strict",
+        "node:fs",
+        "node:perf_hooks",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/marcus-restoration.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "finite Marcus routing is independent of sovereignty and retains provisional lower-tier roles",
+      "direct_imports": [
+        "../data/macro-improvements/marcus-restoration/check.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test",
+        "node:url"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/media-provenance.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "media bytes and sourced provenance survive upload, metadata-only reads and identical retries",
+      "direct_imports": [
+        "../hosted/records.js",
+        "../hosted/worker.js",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/membership-storage-benchmark.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "evidence dictionary retains whitespace, key order and duplicate JSON keys byte exactly",
+      "direct_imports": [
+        "../scripts/benchmark-membership-storage.mjs",
+        "@electric-sql/pglite",
+        "node:assert/strict",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/merge-integration-client.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "an hour waiting on a durable request uses only result reads after initial identity check",
+      "direct_imports": [
+        ", clock, path.resolve(import.meta.dirname, ",
+        "../scripts/merge-queue-client.mjs",
+        "../scripts/merge-scheduler.mjs",
+        "../scripts/worker-result.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "focused audited roster and full",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/merge-integration-entrypoint.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "actual trusted entry point preserves the original rejection before a denied comment",
+      "direct_imports": [
+        ",path.join(directory,",
+        "../scripts/issue-claim-contract.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "focused audited roster and full",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "only staging-test shards prepare the immutable migration derivative",
+      "direct_imports": [
+        "../scripts/integration-proof.mjs",
+        "../scripts/issue-claim-contract.mjs",
+        "../scripts/merge-integration.mjs",
+        "../scripts/run-integration-tests.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "focused audited roster and full",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/merge-scheduler.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "long request holds main admission amid arbitrarily many short arrivals and FIFO progresses",
+      "direct_imports": [
+        "../scripts/merge-scheduler.mjs",
+        "../scripts/worker-result.mjs",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/migration-hashes.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "frozen migration SQL and snapshots retain their published identities",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/model-hierarchy-migration.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "legacy hierarchy migration preserves historical records and repairs skipped parents",
+      "direct_imports": [
+        "../database.mjs",
+        "../hierarchy.mjs",
+        "node:assert/strict",
+        "node:fs",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/model-semantic-migration.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "semantic replacements preserve source history and custom locations without transferring their values",
+      "direct_imports": [
+        "../database.mjs",
+        "node:assert/strict",
+        "node:fs",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/model-topology-migration.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "topology migration retires duplicate coverage while preserving its imported history",
+      "direct_imports": [
+        "../database.mjs",
+        "node:assert/strict",
+        "node:fs",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/model.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "new source land retains unknown owners and its original source metadata",
+      "direct_imports": [
+        "../database.mjs",
+        "../hierarchy.mjs",
+        "../src/model.js",
+        "node:assert/strict",
+        "node:fs",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/native-context-client.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "native selection waits for matching worker result and terminates after ready",
+      "direct_imports": [
+        "../src/native-context-client.js",
+        "../src/ownership-method.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/native-dated-browser.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "actual main year selection joins native browser worker to GPU/Canvas and rejects stale contexts",
+      "direct_imports": [
+        "@playwright/test",
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/native-grid.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "actual projected collinear-border gap disappears under unchanged native membership",
+      "direct_imports": [
+        "../scripts/audit-grid-intervals.mjs",
+        "../src/native-grid.js",
+        "../src/pixel-grid.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/native-latitudes.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "exact pinned latitude table survives packaging and both compressed and host-decoded transport",
+      "direct_imports": [
+        "../scripts/package-native-latitudes.mjs",
+        "../src/native-latitudes.js",
+        "../src/ownership-method.js",
+        "node:assert/strict",
+        "node:fs/promises",
+        "node:path",
+        "node:test",
+        "node:url",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/native-location-context.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "dated removal, replacement, holes and additions equal complete native compilation over every canonical row/run",
+      "direct_imports": [
+        "../src/native-location-context.js",
+        "../src/native-runtime.js",
+        "../src/pixel-grid.js",
+        "../src/pixel-ownership.js",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/native-materialization-gate.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "selected native candidate binds its full-domain, two-run asset proof to immutable reviewed receipt",
+      "direct_imports": [
+        "../scripts/native-ownership/require-verified-selection.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/native-ownership-compilation.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "streamed candidate round-trips actual codecs and every cell matches independent native oracle",
+      "direct_imports": [
+        "../scripts/native-ownership/compile-native-ownership.mjs",
+        "../src/native-grid.js",
+        "../src/ownership-assets.js",
+        "../src/ownership-codec.js",
+        "../src/pixel-ownership.js",
+        "node:assert/strict",
+        "node:crypto",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/native-preparation.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "actual committed CLI fixture produces two identical complete offline candidates",
+      "direct_imports": [
+        "../scripts/native-ownership/compile-native-ownership.mjs",
+        "../scripts/native-ownership/native-only-inputs.mjs",
+        "../scripts/native-ownership/native-preparation-guards.mjs",
+        "../scripts/native-ownership/native-topology-binding.mjs",
+        "../src/ownership-assets.js",
+        "../src/ownership-codec.js",
+        "../src/pixel-ownership.js",
+        "node:assert/strict",
+        "node:child_process",
+        "node:crypto",
+        "node:fs",
+        "node:path",
+        "node:test",
+        "node:url",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/native-regression-inputs.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "shallow PR and queue regressions obtain only missing immutable vintages and verify availability",
+      "direct_imports": [
+        "../scripts/run-integration-tests.mjs",
+        "node:assert/strict",
+        "node:fs",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/native-renderer.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "Native grid has actual GPU/Canvas fill, picking, gap classification and GPU recovery",
+      "direct_imports": [
+        "@playwright/test",
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/native-source-digest.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "streamed source digest equals original whole JSON bytes including Unicode, ordering and numeric edge cases",
+      "direct_imports": [
+        "../src/native-source-digest.js",
+        "node:assert/strict",
+        "node:crypto",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/native-startup.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "startup transport retains native rule and exact GPU words; legacy assets keep their original namespace",
+      "direct_imports": [
+        "../scripts/package-startup-ownership.mjs",
+        "../src/ownership-assets.js",
+        "../src/ownership-codec.js",
+        "../src/ownership-method.js",
+        "../src/pixel-ownership.js",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs/promises",
+        "node:path",
+        "node:test",
+        "node:url",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/native-year-selection.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "actual year-selection code retains coherent old date until changed native grid is ready",
+      "direct_imports": [
+        "../src/native-location-context.js",
+        "../src/ownership-method.js",
+        "../src/pixel-metadata.js",
+        "node:assert/strict",
+        "node:fs",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/neon-capacity.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "account proof and configured quotas/compute remain typed, scoped and free of arbitrary private fields",
+      "direct_imports": [
+        "../scripts/verify-neon-capacity.mjs",
+        "../scripts/verify-neon-project.mjs",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/neon-forward-migrations.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "actual PostgreSQL forward DDL preserves every baseline byte and sequence, grants minimum runtime access, and retries idempotently",
+      "direct_imports": [
+        "../hosted/records.js",
+        "../hosted/storage-export.js",
+        "../scripts/neon-forward-migrations.mjs",
+        "../scripts/provision-postgres-runtime-role.mjs",
+        "../scripts/restore-postgres-storage.mjs",
+        "../scripts/verify-postgres-schema.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/neon-storage-migration.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "full rehearsal restores every original table byte, authenticates restricted read-only services, and deletes only its child",
+      "direct_imports": [
+        "../hosted/geographic-releases.js",
+        "../hosted/postgres-adapter.js",
+        "../hosted/records.js",
+        "../hosted/storage-export.js",
+        "../scripts/credential-envelope.mjs",
+        "../scripts/export-hosted-storage.mjs",
+        "../scripts/neon-storage-migration.mjs",
+        "../scripts/restore-postgres-storage.mjs",
+        "../scripts/storage-checkpoint.mjs",
+        "../scripts/verify-neon-project.mjs",
+        "../scripts/verify-neon-sql.mjs",
+        "../scripts/verify-postgres-schema.mjs",
+        "@electric-sql/pglite",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:sqlite",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/neon-table-storage.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "fixed target, GET-only credential acquisition and sanitized separate size metrics",
+      "direct_imports": [
+        "../scripts/measure-neon-storage.mjs",
+        "@electric-sql/pglite",
+        "node:assert/strict",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/neon-verification.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "Neon metadata verification authenticates read-only requests, follows pagination, and omits secret response fields",
+      "direct_imports": [
+        "../hosted/postgres-adapter.js",
+        "../scripts/verify-neon-project.mjs",
+        "../scripts/verify-neon-sql.mjs",
+        "../scripts/verify-postgres-schema.mjs",
+        "@electric-sql/pglite",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/oceania-land-restoration.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "canonical screen reports actual source-land cells for a compact territorial polygon",
+      "direct_imports": [
+        "../scripts/prepare-oceania-land-restoration.mjs",
+        "../src/pixel-grid.js",
+        "node:assert/strict",
+        "node:child_process",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/ownership-assets.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "ownership assets reconstruct out-of-order compressed chunks and reject truncation",
+      "direct_imports": [
+        "../src/ownership-assets.js",
+        "node:assert/strict",
+        "node:crypto",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/ownership-delivery.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "hosted omission accounts for all prior bytes and preserves every current/source file exactly",
+      "direct_imports": [
+        "../scripts/package-ownership-history.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs/promises",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/package-build.test.mjs",
+      "protection_family": "prepared asset/build/server and packaging consistency",
+      "first_declared_test": "current-execution real plain-child package positives and hostile boundaries",
+      "direct_imports": [
+        "../scripts/package-build.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:fs",
+        "node:fs/promises",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/package-inputs.test.mjs",
+      "protection_family": "prepared asset/build/server and packaging consistency",
+      "first_declared_test": "declaration uses literal paths, precise directory membership and approved outputs",
+      "direct_imports": [
+        "../scripts/package-inputs.mjs",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/package-startup-ownership.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "startup ownership packaging preserves original GPU words and source files",
+      "direct_imports": [
+        "../scripts/package-startup-ownership.mjs",
+        "../src/ownership-assets.js",
+        "../src/ownership-codec.js",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs/promises",
+        "node:os",
+        "node:path",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/palette-intervals.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "contrast constraints use actual half-open interval overlap, never range envelopes",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/parent-indexes.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "parent lookups and unused-unit foreign-key checks use local parent indexes",
+      "direct_imports": [
+        "../database.mjs",
+        "node:assert/strict",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/physical-audit-evidence.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "retained worldwide physical audit restores every original and verifies all five complete vintages",
+      "direct_imports": [
+        "../scripts/evidence-quality.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:fs",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/physical-audit-ledger.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "complete physical audit ledger rejects omissions, changed bytes and lost unknowns",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/physical-component-controls-runner.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "actual control wrapper rejects failure even when a producer prints the expected test count",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:fs",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/physical-component-custody.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "component custody preserves whole runs and rejects missing, duplicate and redirected aliases",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/physical-component-evidence-controls.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "complete world component evidence rejects rehashed identity, uncertainty and relationship omissions",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/physical-component-evidence.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "whole-world physical components retain every original shape, relationship and unknown",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/physical-component-fixture.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "control fixture retains actual shared-output custody and refuses unchanged bad descriptors",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:fs",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/physical-component-structure.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "component reconstruction permits representation order and rejects coordinate or identity changes",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/physical-gap-audit.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "before-water audit retains gaps, unknown water, tiny shapes and all residues",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/physical-gap-crosswalk.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "physical gap crosswalk preserves split/merged, tiny, unknown and dateline identities",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/physical-gap-priority-controls.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "worldwide gap priorities preserve source uncertainty and exhaustive accounting",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/physical-gap-priority-evidence-controls.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "retained priority evidence rejects semantic changes even after byte rehashing",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/physical-gap-priority-evidence.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "complete worldwide priority inventory matches original source ledgers and exhaustive ranks",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/physical-gap-successor.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "immutable physical-gap successor reuse rejects stale, incomplete and unknown inputs",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/pinned-native-package-inputs.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "declared ordinary package snapshots authenticate complete native source stage and transport without any Git repository",
+      "direct_imports": [
+        "../scripts/evidence-quality.mjs",
+        "../scripts/native-ownership/read-pinned-build-file.mjs",
+        "../scripts/native-ownership/validate-context-input-stage.mjs",
+        "../scripts/package-native-latitudes.mjs",
+        "../scripts/select-build-ownership.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:fs",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/pixel-grid.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "pixel ownership is exclusive and adjacent locations tile without a seam",
+      "direct_imports": [
+        "../src/pixel-grid.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/pixel-metadata.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "dated membership changes province lookup and picking records while retaining exact grid cells and geometry",
+      "direct_imports": [
+        "../src/pixel-grid.js",
+        "../src/pixel-metadata.js",
+        "../src/pixel-ownership.js",
+        "../src/temporal.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/pixel-ownership.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "compiled ownership preserves holes, shared edges, overlaps and water at every detail level",
+      "direct_imports": [
+        "../src/pixel-grid.js",
+        "../src/pixel-ownership.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/postgres-adapter.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "placeholder translation preserves quoted values, dollar bodies and nested comments exactly",
+      "direct_imports": [
+        "../hosted/postgres-adapter.js",
+        "@electric-sql/pglite",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/postgres-contract.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "PostgreSQL evidence-only map pages retain retirement-only subjects without enumerating empty geography",
+      "direct_imports": [
+        "../hosted/geographic-releases.js",
+        "../hosted/map-snapshots.js",
+        "../hosted/records.js",
+        "../hosted/research-catalog.js",
+        "../scripts/verify-postgres-schema.mjs",
+        "../src/attributes.js",
+        "node:assert/strict",
+        "node:fs",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/postgres-restore.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "verified owner restore copies all fourteen original tables, legacy bytes, archives, examples, releases and rowids",
+      "direct_imports": [
+        "../hosted/geographic-releases.js",
+        "../hosted/records.js",
+        "../hosted/storage-export.js",
+        "../scripts/export-hosted-storage.mjs",
+        "../scripts/restore-postgres-storage.mjs",
+        "../scripts/verify-postgres-schema.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/postgres-runtime-role.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "actual restricted LOGIN runs hosted imports, corrections, idempotent retries and selected-year readers",
+      "direct_imports": [
+        "../hosted/geographic-releases.js",
+        "../hosted/map-snapshots.js",
+        "../hosted/records.js",
+        "../hosted/research-catalog.js",
+        "../scripts/provision-postgres-runtime-role.mjs",
+        "../scripts/verify-postgres-schema.mjs",
+        "node:assert/strict",
+        "node:fs",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/premerge-evidence.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "independent record bindings reject coherent wrong joins, incomplete and vacuous coverage",
+      "direct_imports": [
+        "../scripts/evidence-policy.mjs",
+        "../scripts/evidence-quality.mjs",
+        "../scripts/immutable-git-blobs.mjs",
+        "../scripts/premerge-evidence.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:test"
+      ],
+      "selection": "focused audited roster and full",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/prepared-evidence.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "browser/server adapters agree, use only matching source intervals, and preserve complete provenance",
+      "direct_imports": [
+        "${new URL(p,new URL(",
+        "(\\.\\/[^",
+        ",",
+        "../hosted/records.js",
+        "../prepared-evidence.mjs",
+        "../scripts/prepare-evidence-bundle.mjs",
+        "../scripts/revalidate-prepared-evidence.mjs",
+        "../src/attributes.js",
+        "../src/prepared-evidence.js",
+        "../src/temporal.js",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:sqlite",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/prepared-parity.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "ownership codecs preserve identity, dated labels, competing evidence and the BC/AD edge",
+      "direct_imports": [
+        "../database.mjs",
+        "../derived.mjs",
+        "../src/attributes.js",
+        "../src/derived-records.js",
+        "../src/reference-records.js",
+        "../src/runtime-ownership.js",
+        "../src/temporal.js",
+        "../temporal.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:path",
+        "node:sqlite",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/publication-cloudflare.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "actual Cloudflare primary/provider/package delivery without Site identity",
+      "direct_imports": [
+        "../scripts/publication-cloudflare.mjs",
+        "../scripts/publication-plan.mjs",
+        "./fixtures/cloudflare-publication.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/publication-plan.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "pins main once, discovers merged and closed original issues plus label-only blocked operation",
+      "direct_imports": [
+        "../scripts/publication-plan.mjs",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/queue-readiness-audit.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "missing readiness is a review candidate, not permission",
+      "direct_imports": [
+        "../scripts/issue-claim-contract.mjs",
+        "../scripts/queue-readiness-audit.mjs",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/r2-migration.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "actual HTTP wrappers and CLI run preserve binary unregistered originals, existing objects and metadata twice",
+      "direct_imports": [
+        "../hosted/r2-migration-destination.js",
+        "../hosted/site-r2-export.js",
+        "../scripts/migrate-site-r2.mjs",
+        "../scripts/r2-reconcile.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs/promises",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/read-prepared-evidence-bundle.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "grid-only build verifies every retained evidence part and import without rewriting any source bytes",
+      "direct_imports": [
+        "../scripts/read-prepared-evidence-bundle.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs/promises",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/rebind-coverage-manifest.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "native ownership binding retains all original physical bytes, sources, domain and uncertainties",
+      "direct_imports": [
+        "../scripts/check-prepared.mjs",
+        "../scripts/prepare-geographic-release.mjs",
+        "../scripts/rebind-coverage-manifest.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs/promises",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/recovery-backup-envelope.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "private backup round trips exact bytes with pinned recipient and no plaintext envelope",
+      "direct_imports": [
+        "../scripts/recovery-backup-envelope.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/reference-archive.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "reference restoration preserves archived IDs, source context and exact original records idempotently",
+      "direct_imports": [
+        "../database.mjs",
+        "../reference-archive.mjs",
+        "node:assert/strict",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/reference-bundle.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "bundle preserves complete records, supported intervals, source context and original bytes",
+      "direct_imports": [
+        "../scripts/package-reference-bundle.mjs",
+        "../src/reference-bundle.js",
+        "../src/reference-records.js",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs/promises",
+        "node:os",
+        "node:path",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/reference-context.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "prepared context preserves full output across dates, uncertainty and unavailable evidence",
+      "direct_imports": [
+        "../src/attributes.js",
+        "../src/model.js",
+        "../src/reference-context.js",
+        "../src/reference-records.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/reference-hierarchy-release.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "explicit metadata parent merge conserves full descendant identities and exact relationship provenance",
+      "direct_imports": [
+        "../scripts/prepare-geographic-release.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/reference-macro-binding.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "candidate certificate cannot inherit successful readback or publication from its predecessor",
+      "direct_imports": [
+        "../scripts/prepare-reference-macro-binding.mjs",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/regional-research-gate.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "current manifest is closed and no region can claim invented approvals",
+      "direct_imports": [
+        "../scripts/issue-claim-contract.mjs",
+        "../scripts/research-import-gate.mjs",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "focused audited roster and full",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/research-bundle.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "research compiler produces deterministic bounded batches and preserves exact input/source bytes",
+      "direct_imports": [
+        "../hosted/records.js",
+        "../scripts/import-research-bundle.mjs",
+        "../scripts/prepare-research-bundle.mjs",
+        ";fs.writeFileSync(path.join(f.output,",
+        "node:assert/strict",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/research-catalog.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "discovery preserves identity/source metadata and pages every result with bounded filters",
+      "direct_imports": [
+        "../hosted/records.js",
+        "../hosted/research-catalog.js",
+        "node:assert/strict",
+        "node:fs",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/research-media-upload.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "media campaign dry run validates original bytes and rights without network or receipts",
+      "direct_imports": [
+        "../hosted/records.js",
+        "../hosted/worker.js",
+        "../scripts/upload-research-media.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/retained-object-recovery.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "full original hash, copied bytes, local readback and unchanged source marker; no maintenance or range claims",
+      "direct_imports": [
+        "../hosted/storage-export-v2-contract.js",
+        "../scripts/verify-retained-object-recovery.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/runtime-ownership.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "century transport preserves exact intervals, dated identities and contested provenance with deterministic assets",
+      "direct_imports": [
+        "../src/derived-records.js",
+        "../src/runtime-ownership.js",
+        "node:assert/strict",
+        "node:child_process",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/select-build-ownership.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "explicit reviewed candidate preserves metadata and retrieves immutable original bounds",
+      "direct_imports": [
+        "../scripts/select-build-ownership.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs/promises",
+        "node:path",
+        "node:test",
+        "node:url"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/semantic-followup.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "six schema variants partition all IDs and preserve explicit semantic openness",
+      "direct_imports": [
+        "../scripts/validate-semantic-followup.mjs",
+        "node:assert/strict",
+        "node:fs/promises",
+        "node:os",
+        "node:path",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/site-r2-export.test.mjs",
+      "protection_family": "prepared asset/build/server and packaging consistency",
+      "first_declared_test": "real wrapper rejects missing/wrong/expired auth before any storage call",
+      "direct_imports": [
+        "../hosted/site-r2-export.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/source-policy-corrections.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "sourced policy overlay changes exactly the three proven roles without mutating original source policy",
+      "direct_imports": [
+        "../src/source-policy-corrections.js",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/stage-site-migrations.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "explicit legacy staging retains every original migration and metadata byte and deploys exactly 0000\u20130007",
+      "direct_imports": [
+        "../scripts/compile-hosted-migrations.mjs",
+        "../scripts/stage-site-migrations.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/storage-checkpoint.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "checkpoint packing deterministically preserves all fourteen exported tables and every original byte",
+      "direct_imports": [
+        "../hosted/geographic-releases.js",
+        "../hosted/records.js",
+        "../hosted/storage-export.js",
+        "../scripts/export-hosted-storage.mjs",
+        "../scripts/restore-postgres-storage.mjs",
+        "../scripts/storage-checkpoint.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:sqlite",
+        "node:test",
+        "node:zlib"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/storage-export-v2.test.mjs",
+      "protection_family": "prepared asset/build/server and packaging consistency",
+      "first_declared_test": "v2 inventories all twenty-three tables and pins every reviewed D1/PostgreSQL migration",
+      "direct_imports": [
+        "../hosted/footprint-versions.js",
+        "../hosted/geographic-releases.js",
+        "../hosted/records.js",
+        "../hosted/storage-export-v2-contract.js",
+        "../hosted/storage-export-v2.js",
+        "../hosted/storage-export.js",
+        "../hosted/temporal-geography.js",
+        "../scripts/export-hosted-storage-v2.mjs",
+        "../scripts/export-hosted-storage.mjs",
+        "../scripts/restore-postgres-storage-v2.mjs",
+        "../scripts/restore-postgres-storage.mjs",
+        "../scripts/verify-postgres-schema.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/storage-export-v3.test.mjs",
+      "protection_family": "prepared asset/build/server and packaging consistency",
+      "first_declared_test": "v3 inventories all twenty-six tables and pins every reviewed D1/PostgreSQL migration",
+      "direct_imports": [
+        "../hosted/footprint-versions.js",
+        "../hosted/geographic-releases.js",
+        "../hosted/records.js",
+        "../hosted/storage-export-v3-contract.js",
+        "../hosted/storage-export-v3.js",
+        "../hosted/storage-export.js",
+        "../hosted/temporal-geography.js",
+        "../scripts/export-hosted-storage-v3.mjs",
+        "../scripts/export-hosted-storage.mjs",
+        "../scripts/restore-postgres-storage-v3.mjs",
+        "../scripts/restore-postgres-storage.mjs",
+        "../scripts/verify-postgres-schema.mjs",
+        ":1000,",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/storage-export.test.mjs",
+      "protection_family": "prepared asset/build/server and packaging consistency",
+      "first_declared_test": "complete export marker works under managed D1 compound-SELECT limits",
+      "direct_imports": [
+        ")&&!changed){const all=statement.all;statement.all=async()=>{const result=await all();changed=true;await importBatch(db,{sources:[source(",
+        "../hosted/geographic-releases.js",
+        "../hosted/records.js",
+        "../hosted/storage-export.js",
+        "../scripts/export-hosted-storage.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/supplement-source-hints.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "stale body, state, candidate bytes and active worker/PR prevent writes",
+      "direct_imports": [
+        "../scripts/apply-supplement-source-hints.mjs",
+        "node:assert/strict",
+        "node:crypto",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/temporal-geography-worker.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "dynamic tests; original source retains their assertions",
+      "direct_imports": [
+        ",{method:",
+        "../hosted/geographic-releases.js",
+        "../hosted/records.js",
+        "../hosted/worker.js",
+        "../scripts/verify-postgres-schema.mjs",
+        "node:assert/strict",
+        "node:fs",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/temporal-geography.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "opt-in inline temporal pages retain exact standalone claims, permanent withdrawals, source and release pins",
+      "direct_imports": [
+        "../hosted/geographic-releases.js",
+        "../hosted/map-snapshots.js",
+        "../hosted/records.js",
+        "../hosted/temporal-geography.js",
+        "../scripts/verify-postgres-schema.mjs",
+        "../src/hosted-temporal-geography.js",
+        "node:assert/strict",
+        "node:fs",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/temporal.test.mjs",
+      "protection_family": "content identity, intervals, migration and database consistency",
+      "first_declared_test": "direct dated names precede reference attestations in any language, with stable ties and examples last",
+      "direct_imports": [
+        "../database.mjs",
+        "../src/temporal.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/trusted-geography-check.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "trusted geography controls reject candidate scripts, import shadows and conflicting integrations",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/trusted-workflow-checkouts.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "negative control: old scripts-only tree cannot load relocated regional gate",
+      "direct_imports": [
+        "../scripts/check-handoff-scope.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test"
+      ],
+      "selection": "focused audited roster and full",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/typed-client-deadline.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "prepared and hosted typed loads terminate stalled fetches and cancel stalled bodies without accepting partial evidence",
+      "direct_imports": [
+        "../src/typed-client.js",
+        "node:assert/strict",
+        "node:crypto",
+        "node:fs",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/typed-integration.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "typed imports preserve raw zero/false/unknown, exact retries and BC/AD shared snapshot semantics on actual SQLite/PostgreSQL",
+      "direct_imports": [
+        ",{method:",
+        "../hosted/geographic-releases.js",
+        "../hosted/records.js",
+        "../hosted/storage-export-v3.js",
+        "../hosted/typed-observations.js",
+        "../scripts/verify-postgres-schema.mjs",
+        "../src/observation-modules.js",
+        "../src/typed-snapshot.js",
+        "node:assert/strict",
+        "node:fs",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/typed-observations.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "registration is additive, versioned, immutable and JSON-only; conflicts fail closed",
+      "direct_imports": [
+        "../src/attributes.js",
+        "../src/evidence-priority.js",
+        "../src/observation-registry.js",
+        "../src/typed-observations.js",
+        "node:assert/strict",
+        "node:fs",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/unresolved-attributes.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "malformed unresolved evidence resolves to the unknown fill for every attribute, including category IDs",
+      "direct_imports": [
+        "../database.mjs",
+        "../hosted/records.js",
+        "../src/attributes.js",
+        "../src/import-records.js",
+        "../src/model.js",
+        "node:assert/strict",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/unsettled-rank.test.mjs",
+      "protection_family": "application and coordination contracts, evidence, selection, resource/authority controls",
+      "first_declared_test": "explicit no-inhabitant evidence produces unsettled with its supported interval and source record provenance",
+      "direct_imports": [
+        "../database.mjs",
+        "../hosted/records.js",
+        "../src/attributes.js",
+        "node:assert/strict",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:sqlite",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/wheel-measurement.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "timing uses the last frame before input, including a known delayed change",
+      "direct_imports": [
+        "../scripts/wheel-measurement.mjs",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/wheel-zoom.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "wheel units normalize pixels, lines and pages without quantizing small input",
+      "direct_imports": [
+        "../src/wheel-zoom.js",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/worker-identity.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "author identity accepts its chat, rejects copied identity, and documents unavailable identity",
+      "direct_imports": [
+        "../scripts/worker-identity.mjs",
+        "node:assert/strict",
+        "node:child_process",
+        "node:fs",
+        "node:os",
+        "node:path",
+        "node:test",
+        "node:url"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/worker-result.test.mjs",
+      "protection_family": "browser/native rendering, ownership, packed data and runtime equivalence",
+      "first_declared_test": "results are bound to the bot, request and issue, including denial",
+      "direct_imports": [
+        "../scripts/issue-claim-contract.mjs",
+        "../scripts/worker-result.mjs",
+        "node:assert/strict",
+        "node:test"
+      ],
+      "selection": "focused audited roster and full",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/worldwide-gap-inventory.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "worldwide inventory rejects mutable pins, changed bytes/order and lost membership",
+      "direct_imports": [
+        "node:assert/strict",
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    },
+    {
+      "path": "test/worldwide-gap-successor.test.mjs",
+      "protection_family": "scientific/source identity, custody, geography and complete-world relationships",
+      "first_declared_test": "actual worldwide successor custody, coordinates, deltas and lineage controls",
+      "direct_imports": [
+        "node:child_process",
+        "node:test"
+      ],
+      "selection": "full unless separate declared package/handoff gate applies",
+      "assessment": "Retain actual assertions. No measured justification for omission or sampled substitution; shared-helper/unknown/rename changes require sufficient full coverage."
+    }
+  ],
+  "support_and_workflows": [
+    "test/border-map-check.mjs",
+    "test/browser.mjs",
+    "test/compact-ownership-benchmark.mjs",
+    "test/content-independence.mjs",
+    "test/coverage-browser.mjs",
+    "test/coverage-classification.py",
+    "test/coverage-source-policy.browser.mjs",
+    "test/dated-membership-browser.mjs",
+    "test/ellipsoidal-area.py",
+    "test/europe-source-policy-corrections.py",
+    "test/evidence-geography.py",
+    "test/evidence-prevention.py",
+    "test/exact-source-predicates.py",
+    "test/external-source-quality.py",
+    "test/fixtures/cloudflare-publication.mjs",
+    "test/fixtures/deadline/independent-boundaries.mjs",
+    "test/fixtures/deadline/independent-native-http.mjs",
+    "test/fixtures/geographic-admission/independent-boundaries.mjs",
+    "test/fixtures/historical-evidence-1381.json",
+    "test/fixtures/typed-observation-contract-v1.json",
+    "test/geographic-adjudication-pipeline.py",
+    "test/geographic-adjudication.py",
+    "test/geographic-components.py",
+    "test/geographic-decisions.py",
+    "test/geographic-gaps.py",
+    "test/geographic-grid.py",
+    "test/geographic-regression.py",
+    "test/geographic-release-preparation.mjs",
+    "test/geographic-water.py",
+    "test/geography.py",
+    "test/global-macro-geography.py",
+    "test/global-semantic-closure.py",
+    "test/historical-map-check.mjs",
+    "test/import-records-ui.mjs",
+    "test/lossless-audit-inputs.py",
+    "test/macro-boundaries.py",
+    "test/macro-boundary-migration.py",
+    "test/macro-envelopes.py",
+    "test/majority-cached.py",
+    "test/majority.py",
+    "test/namibia-repair.py",
+    "test/namibia-source-annotations.py",
+    "test/native-build-binding.mjs",
+    "test/native-dated-browser.mjs",
+    "test/native-renderer.mjs",
+    "test/native-world-context.mjs",
+    "test/ownership-incremental.py",
+    "test/ownership-runtime-validation.py",
+    "test/ownership-transport-benchmark.mjs",
+    "test/physical-audit-ledger.py",
+    "test/physical-component-custody.py",
+    "test/physical-component-evidence-controls.py",
+    "test/physical-component-structure.py",
+    "test/physical-gap-audit.py",
+    "test/physical-gap-crosswalk.py",
+    "test/physical-gap-priority-controls.py",
+    "test/physical-gap-priority-evidence-controls.py",
+    "test/physical-gap-successor.py",
+    "test/reference-hierarchy-rebase.py",
+    "test/reference-incremental.py",
+    "test/review-framework-report-only.py",
+    "test/reviewed-geography-restoration.py",
+    "test/source-territory-repairs.py",
+    "test/static-rendering.mjs",
+    "test/supplement-source-hints.py",
+    "test/test_macro_boundary_archive_replay.py",
+    "test/test_macro_install_proof.py",
+    "test/test_macro_restoration_validation.py",
+    "test/three-island-restoration.test.py",
+    "test/trusted-geography-check.py",
+    "test/wheel-browser.mjs",
+    "test/worldwide-contexts-1184.py",
+    "test/worldwide-current-native-controls.py",
+    "test/worldwide-gap-inventory.py",
+    "test/worldwide-gap-successor.py",
+    "test/worldwide-native-batches-controls.py"
+  ],
+  "workflows": [
+    {
+      "path": ".github/workflows/compact-membership-production.yml",
+      "purpose": "Operator production operation; no live performance experiment authorized"
+    },
+    {
+      "path": ".github/workflows/current-postgres-recovery.yml",
+      "purpose": "Operator database recovery; no live performance experiment authorized"
+    },
+    {
+      "path": ".github/workflows/deployment-budget.yml",
+      "purpose": "PR/main push: trusted declared-input classification; conditional package tests/build"
+    },
+    {
+      "path": ".github/workflows/handoff-scope.yml",
+      "purpose": "PR: trusted ownership/evidence plus bounded candidate coordination controls"
+    },
+    {
+      "path": ".github/workflows/issue-claims.yml",
+      "purpose": "Explicit issue reservation, renewal/release/recovery; not per-PR regression"
+    },
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "purpose": "PR: trusted classification/geography and credential-free selected regression"
+    },
+    {
+      "path": ".github/workflows/merge-scheduler.yml",
+      "purpose": "Registration/completion/five-minute recovery: FIFO admission; no scientific regression"
+    },
+    {
+      "path": ".github/workflows/native-recovery-fixture.yml",
+      "purpose": "Explicit restoration fixture investigation; not per-PR regression"
+    },
+    {
+      "path": ".github/workflows/neon-forward-migrations.yml",
+      "purpose": "Operator database migration; no live performance experiment authorized"
+    },
+    {
+      "path": ".github/workflows/neon-sql-verify.yml",
+      "purpose": "Operator SQL verification; not per-PR regression"
+    },
+    {
+      "path": ".github/workflows/neon-storage-migration.yml",
+      "purpose": "Operator storage migration; no live performance experiment authorized"
+    },
+    {
+      "path": ".github/workflows/neon-table-storage.yml",
+      "purpose": "Operator storage observation; not per-PR regression"
+    },
+    {
+      "path": ".github/workflows/neon-verify.yml",
+      "purpose": "Operator Neon verification; not per-PR regression"
+    },
+    {
+      "path": ".github/workflows/queue-readiness-audit.yml",
+      "purpose": "Explicit read-only readiness investigation; hourly schedule disabled"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "purpose": "Registered request: trusted preparation/geography, isolated combined-tree regression, final FIFO authority/merge"
+    }
+  ],
+  "lane_decisions": {
+    "geography": "Exact owned source paths keep the audited evidence roster; trusted facts/evidence/ownership gates retained. No further exclusion justified by measured source jobs.",
+    "history": "Campaign namespace uses same focused roster; controls reject foreign paths/rename origins; no invented campaign benchmark.",
+    "documentation_and_coordination": "Owned packet/docs use focused roster; sensitive scripts/workflows/unknowns retain full coverage.",
+    "application_browser_build": "Actual browser/server/package equivalence retained; shard0 build only where asset tests need it. Setup opportunity #1543.",
+    "database_migration": "Actual semantics/source history/staging controls retained; no live provider operation benchmark.",
+    "scientific_evidence": "All seven rehashed semantic negative controls and uncached whole-world positive retained; bounded cache probes supplement them. Kernel opportunity #1544.",
+    "queue_classification_and_authority": "SHA-bound FIFO/main/head/evidence guards unchanged. Waiting and API work are not test execution."
+  }
+}

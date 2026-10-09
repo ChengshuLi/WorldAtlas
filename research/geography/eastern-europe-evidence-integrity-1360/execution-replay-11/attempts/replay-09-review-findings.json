@@ -1,0 +1,8 @@
+{
+  "correction": "Replay-10 builder invocation receipts now carry safe_workflow.py before/after identity alongside build_manifest.py before/after identity. The final manifest validates both against the exact final source blobs.",
+  "finding": "The root build_manifest.py was invoked by a wrapper, but its invocation receipt did not also bind the outer workflow wrapper hash to that builder invocation. The reviewer withheld acceptance pending exact executed-code closure.",
+  "prior_head": "d8782b7b31d4d1c41eb3a8fc41a9548c4954020b",
+  "prior_manifest_sha256": "a6eaadad002222057f1c60a2b2d5f8d8269104826f56f254f7b674ad7a65fcbc",
+  "replacement_workspace": "execution-replay-10",
+  "review_receipt_posted": false
+}

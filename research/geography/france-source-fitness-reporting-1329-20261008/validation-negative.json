@@ -1,0 +1,29 @@
+{
+  "method_id": "report-integrity-generator",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "checks": [
+    "original-full-positive",
+    "corrected-false-control-rejected",
+    "corrected-count-mismatch-rejected",
+    "corrected-omitted-candidate-rejected",
+    "corrected-duplicate-candidate-rejected",
+    "corrected-foreign-candidate-rejected",
+    "corrected-relation-count-drift-rejected",
+    "corrected-run-mismatch-rejected",
+    "issue-contract-drift-rejected",
+    "baseline-input-pin-drift-rejected",
+    "producer-code-drift-rejected",
+    "ordinary-destination-collision-rejected",
+    "live-symlink-ancestor-rejected",
+    "dangling-symlink-ancestor-rejected",
+    "rerun-refused-preserves-whole-output",
+    "partial-publication-failure-not-accepted"
+  ],
+  "original_defects_reproduced": [
+    "original-false-control",
+    "original-static-counts",
+    "original-symlink-output"
+  ],
+  "full_controls_path": "research/geography/france-source-fitness-reporting-1329-20261008/vintages/controls-run-03/control-results.json"
+}

@@ -1,0 +1,7 @@
+# Legacy digest boundary correction
+
+Hosted regression run 37862582945/job113601633564 at source head81bba21f failed two unchanged native-source-digest serialization tests. The source digest is a byte-hash helper: historical null, undefined and empty geometry values must keep their exact JSON serialization semantics. Requiring polygon validation in that legacy branch was an integration defect, not a source geometry finding.
+
+The mapper now uses the literal original `feature.geometry` for non-additive rows. Actual additive records still invoke complete strict effective-footprint validation; the explicit selected-base/effective-domain branch remains unchanged. Polygon/scientific validation belongs to the existing actual consumer boundaries and is not weakened. The unchanged original test/native-source-digest.test.mjs was materialized from its exact Git body in the sparse author checkout, not modified.
+
+Twenty-three actual focused tests pass with zero skips, including both original serialization/cancellation tests, normal native loader/render/picker/source controls and a new adjacent control rejecting malformed additive base, absent additive descriptor, invalid rule and incomplete primitive pointsets. Full hosted normal CI must qualify the corrected head. Existing qualified source/pilot outputs, all480 inventory file inverses and original scientific methods retain their genuine original execution vintages; none was rerun or relabelled for this caller-only correction.

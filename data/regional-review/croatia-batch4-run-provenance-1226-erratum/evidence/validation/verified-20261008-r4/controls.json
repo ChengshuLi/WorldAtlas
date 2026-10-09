@@ -1,0 +1,3073 @@
+{
+  "complete_phase_admission": {
+    "admitted_total_bytes": 244246525,
+    "decoded_xlsx_member_bytes": 242002,
+    "existing_candidate_file_bytes": 3883332,
+    "limit_bytes": 268435456,
+    "reserved_manifest_and_receipt_bytes": 2097152,
+    "unique_original_bytes": 238024039
+  },
+  "control_runner": {
+    "bytes": 27807,
+    "commit": "492bcacfe1d82379cccf22b6a1f868f9f756b71c",
+    "git_blob": "2c5c866236ce15fa47948d46f408f643bb03fca2",
+    "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/controls.py",
+    "sha256": "5c945458bbedfa8a59e119ae65c5a3011ca84588be628d43502ab01fbabd09a8"
+  },
+  "first_fresh_run_snapshot_read_count": 1,
+  "historical_output_comparison": {
+    "assessment-summary.json": {
+      "bytes": 10913,
+      "matches_fresh_run_1": true,
+      "matches_fresh_run_2": true,
+      "matches_retained_historical_run_1": true,
+      "matches_retained_historical_run_2": true,
+      "sha256": "c5118a9046d10babfeab755e4f3dfbc09d9f5a35269a006820d3b27082c1a467"
+    },
+    "province-completeness.csv": {
+      "bytes": 1448,
+      "matches_fresh_run_1": true,
+      "matches_fresh_run_2": true,
+      "matches_retained_historical_run_1": true,
+      "matches_retained_historical_run_2": true,
+      "sha256": "7a46977bafc709cab611f2b0b21fe890c3e8ffdcd067c494f7465424c1abba37"
+    },
+    "scoped-location-assessments.csv": {
+      "bytes": 167059,
+      "matches_fresh_run_1": true,
+      "matches_fresh_run_2": true,
+      "matches_retained_historical_run_1": true,
+      "matches_retained_historical_run_2": true,
+      "sha256": "91d12e56fa600e4cbeebdc7d12c82f131aded59a8a38a3d87eb8ed8f64429420"
+    }
+  },
+  "issue": 1396,
+  "kind": "positive-control",
+  "limits": [
+    "The complete issue snapshot mutation is a synthetic integrity fixture, not a geographic correction.",
+    "Fresh reports are mechanical reproductions of previously reviewed Croatia results; they add no independent territorial finding.",
+    "DZS/DGU/legal authority, municipality-to-county parentage, census-date polygons, islands/coast completeness, four name candidates, seven roster gaps and geoBoundaries file-specific grant remain unresolved."
+  ],
+  "malformed_receipt_controls": [
+    {
+      "fixture_sha256": "9b5256295ea64fea2dfd7ef007fbf9ad9bed6294105fe6a36c7b65e8809dd487",
+      "id": "empty-outputs",
+      "outcome": "passed",
+      "rejection": "run receipt must bind the exact complete report output set"
+    },
+    {
+      "fixture_sha256": "53e482adebcf8dc044e68b6cbd3e00607f9c977c6c94bdddee43a7de852794fe",
+      "id": "empty-inputs",
+      "outcome": "passed",
+      "rejection": "run receipt does not declare the complete consumed input list"
+    },
+    {
+      "fixture_sha256": "9eda12d819ee914c82a0f6c14f55072eb4a791429443774de85e9fd1a16dc0eb",
+      "id": "zero-subjects",
+      "outcome": "passed",
+      "rejection": "run receipt has the wrong issue or exact subject count"
+    },
+    {
+      "fixture_sha256": "79d30cfbb459f06a4fe5ea7e14532b27da32ff5ab65d38adf53ad6d7376058b3",
+      "id": "missing-pin-coverage",
+      "outcome": "passed",
+      "rejection": "run receipt omits complete issue or historical pin coverage"
+    },
+    {
+      "fixture_sha256": "f4e4fa4848c02950f4196dee2a65d29aa29591c0ddb36fb3363ccbf63f9f9f58",
+      "id": "mislabelled-snapshot-time",
+      "outcome": "passed",
+      "rejection": "run receipt mislabels issue update time"
+    },
+    {
+      "fixture_sha256": "c4487bf5c1049fa1b5664d933a19b0d996deed356ee3c6b3972b08e934c90d99",
+      "id": "missing-source-inventory",
+      "outcome": "passed",
+      "rejection": "run receipt omits the 80 issue descriptors or 62 historical path/commit bindings"
+    }
+  ],
+  "manifest_scope": "exactly the 224 Croatia #1199 subjects; mechanical provenance only",
+  "method_id": "croatia-run-provenance-controls",
+  "outcome": "passed",
+  "path_and_writer_controls": {
+    "broken_symlink_parent_rejected": true,
+    "escaping_symlink_parent_rejected": true,
+    "existing_output_preserved": true,
+    "ordinary_file_parent_rejected": true,
+    "ordinary_file_sha256": "3b2a43e3a5b13459006960eac2534b6a71bf7170ea998dc49b1990f23508a6d6",
+    "outcome": "passed",
+    "partial_failure_preserved": true,
+    "partial_output_sha256": "afdcb49c553dcb0865273309ecc4c1148446b9f5818d8fa267f6d2457a9ad174",
+    "retry_refused": true,
+    "sentinel_sha256": "59a9127d9e251beef54e8570b9ea3073921ae70b9b3cdabdff91227b88d2a908",
+    "symlink_parent_rejected": true,
+    "unsafe_paths_rejected": [
+      "evidence/../outside",
+      "evidence//empty",
+      "/tmp/outside",
+      "evidence/a\\b"
+    ]
+  },
+  "positive_runs": [
+    {
+      "actually_consumed_xlsx_members": [
+        {
+          "bytes": 1545,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/_rels/workbook.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "8d6e95b712b94e84d21fbfefa3db0534dede0378bc22bdc191cb75b2189dffc9"
+        },
+        {
+          "bytes": 15998,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/sharedStrings.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "496be853b3379b609b9c24218992b77d56c040aeef8129aecdbfb3ed55f0c6c5"
+        },
+        {
+          "bytes": 2419,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/workbook.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "a0397efaa77521417a259a2db8a773c40927a3bad55e815161cd92cf72c1bc9a"
+        },
+        {
+          "bytes": 11244,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/sheet3.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "494325ebff119cabb5636acfb5ec1103dc37e8627a801f1e5a485ba57f5fcc61"
+        }
+      ],
+      "decoded_xlsx_bytes": 242002,
+      "decoded_xlsx_members": [
+        {
+          "bytes": 2990,
+          "hash_kind": "decoded-member-bytes",
+          "member": "[Content_Types].xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "25352786fdc1fc70029208c4513c36add4d743e2ec460636e44ca7c64d7c8d3c"
+        },
+        {
+          "bytes": 588,
+          "hash_kind": "decoded-member-bytes",
+          "member": "_rels/.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "73e5a29f48d5ab979eeda062493bc7e679265c1344ef936978b8becec5549497"
+        },
+        {
+          "bytes": 1545,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/_rels/workbook.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "8d6e95b712b94e84d21fbfefa3db0534dede0378bc22bdc191cb75b2189dffc9"
+        },
+        {
+          "bytes": 2419,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/workbook.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "a0397efaa77521417a259a2db8a773c40927a3bad55e815161cd92cf72c1bc9a"
+        },
+        {
+          "bytes": 17417,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/sheet4.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "7c503312d979b69098b5e024aba85f2c5dcd6c24369cd9b0560d8e7e789707e1"
+        },
+        {
+          "bytes": 464,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/_rels/sheet4.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "0e4234a048389e815857e6948c0be3fbfbc311a3dc02cb05873eeab07ad14ee9"
+        },
+        {
+          "bytes": 464,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/_rels/sheet3.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "0da1aa08a01d65db9c1263a1f68d65f90733a64ce020af4f113388737df272b4"
+        },
+        {
+          "bytes": 464,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/_rels/sheet2.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "b080444923aed7a5612898d96f615efb7a847fda5c099575e1681eb2e702c04a"
+        },
+        {
+          "bytes": 464,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/_rels/sheet1.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "046f319d2b01bf9529da901ae33cb1cf8c7c7d06395167875fa0c4add6bf34c3"
+        },
+        {
+          "bytes": 4341,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/sheet2.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "b36f54aa27b5a4267c713aaeda830473fa38a9d89d1bcab68fdec46e18050eb6"
+        },
+        {
+          "bytes": 11244,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/sheet3.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "494325ebff119cabb5636acfb5ec1103dc37e8627a801f1e5a485ba57f5fcc61"
+        },
+        {
+          "bytes": 1289,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/drawing7.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "1f7148dd1a11fb79f1043b87b7dd75f7b58444d3bc3ed627a7f5974590c19aad"
+        },
+        {
+          "bytes": 464,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/_rels/sheet5.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "0f314a236d9ba70b527c32f78c136816b054126a8ce47c702a54a1117ec678ce"
+        },
+        {
+          "bytes": 464,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/_rels/sheet6.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "2cda89da0483ad6b89b3f5ccd9d655df4f5b990e531ed5a7ebd4304d555fcaaf"
+        },
+        {
+          "bytes": 464,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/_rels/sheet7.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "f95f13b43c04936d87a8d56c55002f66f6229913f371a13306f8ca19fee9d0fa"
+        },
+        {
+          "bytes": 292,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/_rels/drawing7.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "15a140b2ab9e3d49a7b49f824413744cc4959bc34c427cf50f7d6016697293c0"
+        },
+        {
+          "bytes": 292,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/_rels/drawing6.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "58ae268bff59ae0b296505741bdf87a3cf9a4ff8f2caca0d9d08202aeb37e16b"
+        },
+        {
+          "bytes": 292,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/_rels/drawing5.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "58ae268bff59ae0b296505741bdf87a3cf9a4ff8f2caca0d9d08202aeb37e16b"
+        },
+        {
+          "bytes": 292,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/_rels/drawing4.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "58ae268bff59ae0b296505741bdf87a3cf9a4ff8f2caca0d9d08202aeb37e16b"
+        },
+        {
+          "bytes": 292,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/_rels/drawing3.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "58ae268bff59ae0b296505741bdf87a3cf9a4ff8f2caca0d9d08202aeb37e16b"
+        },
+        {
+          "bytes": 292,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/_rels/drawing2.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "58ae268bff59ae0b296505741bdf87a3cf9a4ff8f2caca0d9d08202aeb37e16b"
+        },
+        {
+          "bytes": 292,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/_rels/drawing1.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "15a140b2ab9e3d49a7b49f824413744cc4959bc34c427cf50f7d6016697293c0"
+        },
+        {
+          "bytes": 7718,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/sheet1.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "9816458ed805c8886307206e928ddf1d1e3217163b77c94ba446733d19ef0abd"
+        },
+        {
+          "bytes": 1201,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/drawing6.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "da3471d213155bc4b5cff7dda13960129e163b8c88522ff3f4a02ae5e74c17d5"
+        },
+        {
+          "bytes": 1201,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/drawing5.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "9e455a7987f0d49969179a1f14f2686b75b907327e877b864c96fd3e71862a17"
+        },
+        {
+          "bytes": 1390,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/drawing1.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "a3b9b86238ddd2fa670b9df8238db1c43f273610f4029411cdec527dfcdfa9a5"
+        },
+        {
+          "bytes": 15998,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/sharedStrings.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "496be853b3379b609b9c24218992b77d56c040aeef8129aecdbfb3ed55f0c6c5"
+        },
+        {
+          "bytes": 48593,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/styles.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "dc675fee88e6eface803ccda7094da68803ab2b4fdf4db1b018ae65bd3fbd3e4"
+        },
+        {
+          "bytes": 6796,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/theme/theme1.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "e6029ab4958414b8bb862b17ffed3a708d1513e61a07d88e966071cca31d1bd4"
+        },
+        {
+          "bytes": 7875,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/sheet7.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "67d0b198c05603903b8676c69cb0ae24c5f2492a882b35165d1c2f3c030d18b0"
+        },
+        {
+          "bytes": 17977,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/sheet6.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "48dfc4610e28a3b85eb4a02cca041a9f43e27cf59bae9fcfc96bf1c723b6348a"
+        },
+        {
+          "bytes": 18047,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/sheet5.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "81e19d80bc4a0bc6c0e989ce1e1e429e8c9dd5e572a0def04e09135b036787fc"
+        },
+        {
+          "bytes": 3798,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/media/image1.png",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "7cdaa9c7a127a096504cac900129d6f28fd55c1f1c3a5e5627bcd97d9174bbf1"
+        },
+        {
+          "bytes": 1194,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/drawing2.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "dd9225cdb02a8c6a5a64ae954a994bd747c0d428c9aadd277986cc5554d42593"
+        },
+        {
+          "bytes": 6448,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/media/image2.png",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "c352592eb587fcf351aae643da95518a04af4112ec6a2e45a81c108c22b50e2c"
+        },
+        {
+          "bytes": 1201,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/drawing4.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "d30f307dbcb75e660b4727fe72be87c164784a135292f64f120382f94d5efecf"
+        },
+        {
+          "bytes": 1201,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/drawing3.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "e67195ee5238f086ba8a02b528a5fdeaa5a0e6d88eef947e5173ecd4da87828f"
+        },
+        {
+          "bytes": 11260,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/printerSettings/printerSettings7.bin",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "6bb19be5584830466c514f17463bf1b58cd083a33500c7984ab09f91d3d75403"
+        },
+        {
+          "bytes": 677,
+          "hash_kind": "decoded-member-bytes",
+          "member": "docProps/core.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "6c34c6142f6b0ca26d5156a13ce3b03280472cf045dde26d9703a1ae6a4bd8ec"
+        },
+        {
+          "bytes": 4664,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/printerSettings/printerSettings6.bin",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "d939f31e44032bb68993ebdb66dfb1294b24e40bcf0492d824e6a8b99b1b5a40"
+        },
+        {
+          "bytes": 4664,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/printerSettings/printerSettings5.bin",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "d939f31e44032bb68993ebdb66dfb1294b24e40bcf0492d824e6a8b99b1b5a40"
+        },
+        {
+          "bytes": 4664,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/printerSettings/printerSettings4.bin",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "d939f31e44032bb68993ebdb66dfb1294b24e40bcf0492d824e6a8b99b1b5a40"
+        },
+        {
+          "bytes": 11260,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/printerSettings/printerSettings1.bin",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "9e3bca4325600eae475d3e4e9f898749f3f6ab228d4bea94885f818ce2c2e24f"
+        },
+        {
+          "bytes": 4664,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/printerSettings/printerSettings3.bin",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "d939f31e44032bb68993ebdb66dfb1294b24e40bcf0492d824e6a8b99b1b5a40"
+        },
+        {
+          "bytes": 11260,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/printerSettings/printerSettings2.bin",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "361e7f3e229efbe3713e7763b890cbed91a7980559e66366a5474a11c6077fe9"
+        },
+        {
+          "bytes": 1126,
+          "hash_kind": "decoded-member-bytes",
+          "member": "docProps/app.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "62cb783670061de49ad7efa14ceadd10f0d9a160460a2e41ff69f82489f3e958"
+        }
+      ],
+      "execution_admission": {
+        "additional_artifact_allowance_bytes": 28311552,
+        "admitted_total_bytes": 266577593,
+        "decoded_xlsx_member_bytes": 242002,
+        "limit_bytes": 268435456,
+        "unique_original_bytes": 238024039
+      },
+      "factual_limit": "This is a byte/read-boundary reproduction correction; it establishes no new territorial, parent, boundary, completeness, legal or licensing finding.",
+      "historical_baseline": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+      "historical_pin_count": 62,
+      "inputs": [
+        {
+          "bytes": 13943,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/scope.json",
+          "read_boundary": "verified bytes copied into private build packet",
+          "sha256": "ba8a10ae3b8a67410bba8b687e256c44d01828c199b2d30961a678e4f5c3a635"
+        },
+        {
+          "bytes": 24044,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/issue-419-api-snapshot.json",
+          "read_boundary": "verified bytes copied into private build packet",
+          "sha256": "fad09b6e1744ef65fa88ca0d402f4cd591fded1c5c5a1de4f84fada6750f7403"
+        },
+        {
+          "bytes": 19967,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/build_assessment.py",
+          "read_boundary": "verified bytes copied into private build packet",
+          "sha256": "f920c23477f5c98a7adc454ac58673ba24a75d64ee8828b7dc93a8a4b306920b"
+        },
+        {
+          "bytes": 20788018,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-c64d17e99f61d668/source/geoboundaries-9469f09/HRV/ADM2/geoBoundaries-HRV-ADM2.geojson",
+          "read_boundary": "verified bytes copied into private build packet",
+          "sha256": "68a317129a0c295fd8baf7acc0f31ffefdf65ff2f1f62f8ed90a765cc57cf01e"
+        },
+        {
+          "bytes": 35680,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-detail-extract.csv",
+          "read_boundary": "verified bytes copied into private build packet",
+          "sha256": "225021e29f4ec2eeeffda3801031f4c0587241e91eed984394c9d2d56b09785c"
+        },
+        {
+          "bytes": 63196,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "read_boundary": "verified bytes copied into private build packet",
+          "sha256": "99feecc93627db02509aee7d625b391c33a69f201f377464ac15c2fd7c16f20f"
+        },
+        {
+          "bytes": 7090,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "scripts/evidence/immutable.py",
+          "read_boundary": "compiled from immutable Git blob",
+          "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+        }
+      ],
+      "issue": 1209,
+      "issue_pin_count": 66,
+      "issue_retrieved_at": "2026-10-06T20:57:57Z",
+      "issue_snapshot": {
+        "bytes": 30923,
+        "path": "data/regional-review/croatia-batch4-read-boundary-guard/source/issue-1209-api-snapshot.json",
+        "sha256": "f694f98d653042bffe067c698dd6ec20f8673416dc94d8370937b83e2977694b",
+        "updated_at": "2026-10-06T20:55:33Z"
+      },
+      "issue_snapshot_retrieval": {
+        "bytes": 393,
+        "path": "data/regional-review/croatia-batch4-read-boundary-guard/source/issue-snapshot-retrieval.json",
+        "retrieved_at": "2026-10-06T20:57:57Z",
+        "sha256": "ed3aa34354e53b6b74ff227569e64fd684a9060b8ad8fc0a268ac5dfe7267c8b"
+      },
+      "issue_updated_at": "2026-10-06T20:55:33Z",
+      "job_snapshot": {
+        "bytes": 48385,
+        "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/source/issue-1396-api-snapshot.json",
+        "sha256": "0cd76e4014929f705b025bcfd32571541ee11581994577de05aba8c5c5a173a1",
+        "updated_at": "2026-10-08T23:27:10Z"
+      },
+      "job_snapshot_retrieval": {
+        "bytes": 385,
+        "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/source/issue-1396-snapshot-retrieval.json",
+        "retrieved_at": "2026-10-08T23:32:23Z",
+        "sha256": "d15b3c30c392e046b63ff472c92b26adffefe881bc1651733ca2b1a9634fed60"
+      },
+      "outputs": {
+        "assessment-summary.json": "c5118a9046d10babfeab755e4f3dfbc09d9f5a35269a006820d3b27082c1a467",
+        "province-completeness.csv": "7a46977bafc709cab611f2b0b21fe890c3e8ffdcd067c494f7465424c1abba37",
+        "scoped-location-assessments.csv": "91d12e56fa600e4cbeebdc7d12c82f131aded59a8a38a3d87eb8ed8f64429420"
+      },
+      "pinned_commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+      "runner": {
+        "bytes": 28328,
+        "commit": "492bcacfe1d82379cccf22b6a1f868f9f756b71c",
+        "git_blob": "35049c67938d6c2f935cfdb7a8722fb808f84909",
+        "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/reproduce.py",
+        "sha256": "c1bc3618b8f93165c9dc879748f3a9bdb35ec20851899a6916a55f5de03bd515"
+      },
+      "subject_count": 224,
+      "subject_ids_sha256": "c5816fc5587099904fd5c5cff51801676ec361606153cb39c70e9fb19ef0f116",
+      "unique_original_bytes": 238024039,
+      "verified_source_count": 142,
+      "verified_sources": [
+        {
+          "bytes": 11393,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/macro-loose-ends-v5-additions.json",
+          "role": "historical-source-or-result",
+          "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1"
+        },
+        {
+          "bytes": 8539839,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-0.json",
+          "role": "historical-source-or-result",
+          "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3"
+        },
+        {
+          "bytes": 8060108,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-1.json",
+          "role": "historical-source-or-result",
+          "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7"
+        },
+        {
+          "bytes": 5144571,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-10.json",
+          "role": "historical-source-or-result",
+          "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+        },
+        {
+          "bytes": 5131824,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-11.json",
+          "role": "historical-source-or-result",
+          "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f"
+        },
+        {
+          "bytes": 4489493,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-12.json",
+          "role": "historical-source-or-result",
+          "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7"
+        },
+        {
+          "bytes": 5709487,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-13.json",
+          "role": "historical-source-or-result",
+          "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1"
+        },
+        {
+          "bytes": 4355198,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-14.json",
+          "role": "historical-source-or-result",
+          "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0"
+        },
+        {
+          "bytes": 5180426,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-15.json",
+          "role": "historical-source-or-result",
+          "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+        },
+        {
+          "bytes": 5213846,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-16.json",
+          "role": "historical-source-or-result",
+          "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797"
+        },
+        {
+          "bytes": 4945828,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-17.json",
+          "role": "historical-source-or-result",
+          "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db"
+        },
+        {
+          "bytes": 4909063,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-18.json",
+          "role": "historical-source-or-result",
+          "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+        },
+        {
+          "bytes": 4583022,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-19.json",
+          "role": "historical-source-or-result",
+          "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+        },
+        {
+          "bytes": 6259307,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-2.json",
+          "role": "historical-source-or-result",
+          "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+        },
+        {
+          "bytes": 6570767,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-20.json",
+          "role": "historical-source-or-result",
+          "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f"
+        },
+        {
+          "bytes": 6737781,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-21.json",
+          "role": "historical-source-or-result",
+          "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7"
+        },
+        {
+          "bytes": 4746385,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-22.json",
+          "role": "historical-source-or-result",
+          "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+        },
+        {
+          "bytes": 4962410,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-23.json",
+          "role": "historical-source-or-result",
+          "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2"
+        },
+        {
+          "bytes": 4816899,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-24.json",
+          "role": "historical-source-or-result",
+          "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c"
+        },
+        {
+          "bytes": 4525239,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-25.json",
+          "role": "historical-source-or-result",
+          "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+        },
+        {
+          "bytes": 4608983,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-26.json",
+          "role": "historical-source-or-result",
+          "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+        },
+        {
+          "bytes": 4863162,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-27.json",
+          "role": "historical-source-or-result",
+          "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+        },
+        {
+          "bytes": 6613963,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-28.json",
+          "role": "historical-source-or-result",
+          "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+        },
+        {
+          "bytes": 12932167,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-29.json",
+          "role": "historical-source-or-result",
+          "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+        },
+        {
+          "bytes": 5153118,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-3.json",
+          "role": "historical-source-or-result",
+          "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617"
+        },
+        {
+          "bytes": 11979437,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-30.json",
+          "role": "historical-source-or-result",
+          "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a"
+        },
+        {
+          "bytes": 10086485,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-31.json",
+          "role": "historical-source-or-result",
+          "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e"
+        },
+        {
+          "bytes": 10211739,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-32.json",
+          "role": "historical-source-or-result",
+          "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64"
+        },
+        {
+          "bytes": 607984,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-33.json",
+          "role": "historical-source-or-result",
+          "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe"
+        },
+        {
+          "bytes": 4835479,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-4.json",
+          "role": "historical-source-or-result",
+          "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c"
+        },
+        {
+          "bytes": 5226173,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-5.json",
+          "role": "historical-source-or-result",
+          "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc"
+        },
+        {
+          "bytes": 4607953,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-6.json",
+          "role": "historical-source-or-result",
+          "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a"
+        },
+        {
+          "bytes": 4257402,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-7.json",
+          "role": "historical-source-or-result",
+          "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387"
+        },
+        {
+          "bytes": 5097739,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-8.json",
+          "role": "historical-source-or-result",
+          "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+        },
+        {
+          "bytes": 5729632,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-9.json",
+          "role": "historical-source-or-result",
+          "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6"
+        },
+        {
+          "bytes": 1573576,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/source-restoration-additions.json",
+          "role": "historical-source-or-result",
+          "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9"
+        },
+        {
+          "bytes": 10164089,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/hierarchy.json",
+          "role": "historical-source-or-result",
+          "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+        },
+        {
+          "bytes": 2404397,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/macro-foundation/current-membership-inventory.json.gz",
+          "role": "historical-source-or-result",
+          "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab"
+        },
+        {
+          "bytes": 71286,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/macro-foundation/regional-handoffs.json.gz",
+          "role": "historical-source-or-result",
+          "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a"
+        },
+        {
+          "bytes": 944,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/world-index.json",
+          "role": "historical-source-or-result",
+          "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+        },
+        {
+          "bytes": 20788018,
+          "commit": "96f2a6d201236ba62f471535db240b123de60c09",
+          "path": "data/regional-review/regional-review-c64d17e99f61d668/source/geoboundaries-9469f09/HRV/ADM2/geoBoundaries-HRV-ADM2.geojson",
+          "role": "historical-source-or-result",
+          "sha256": "68a317129a0c295fd8baf7acc0f31ffefdf65ff2f1f62f8ed90a765cc57cf01e"
+        },
+        {
+          "bytes": 8223,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/RESEARCH.md",
+          "role": "issue-pinned-input",
+          "sha256": "d4d820a238781b0b886498f478a3ba1c2bd2adf0c9f25ddf12c2884d2a5deef9"
+        },
+        {
+          "bytes": 13180,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/controls.py",
+          "role": "issue-pinned-input",
+          "sha256": "f7612302a00cdde71c9b5494aac6094abb7e766288c900cd9c8b778ca3ed741e"
+        },
+        {
+          "bytes": 614664,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/evidence-quality.json",
+          "role": "issue-pinned-input",
+          "sha256": "a351d4a3f45402914e93f8beecdfd49742b430939c71655cfe817b2d4638e5a3"
+        },
+        {
+          "bytes": 3896,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/evidence/runs/2026-10-06/run-1/run-record.json",
+          "role": "issue-pinned-input",
+          "sha256": "dbf1f682ca8d26dda0dfcf85a0d9faa92b84b4d0b43c1bd31bef98fd2bf473f8"
+        },
+        {
+          "bytes": 17180,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/evidence/validation/2026-10-06-final/controls.json",
+          "role": "issue-pinned-input",
+          "sha256": "091e9dd29fa23d3a2b275995600980e9061573fde0ffeb6fdb4d4bc2021addc3"
+        },
+        {
+          "bytes": 165,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/evidence/validation/2026-10-06-final/negative-control.json",
+          "role": "issue-pinned-input",
+          "sha256": "8070e685098fca6c2dcb97189714a07e8166d620fffa582b9ad8cb3b5428d9e9"
+        },
+        {
+          "bytes": 172,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/evidence/validation/2026-10-06-final/positive-control.json",
+          "role": "issue-pinned-input",
+          "sha256": "daaf4e4f53b26804c79ed2bf6eea7a3e1306c4a4356d5687a991f0b308e4e195"
+        },
+        {
+          "bytes": 63074,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/evidence/validation/2026-10-06-final/rendered-table-ledger.json",
+          "role": "issue-pinned-input",
+          "sha256": "e36b1cdd4774e5638c9405cce63ce0e5daf6bf4a729649e778d6e5be6f700a30"
+        },
+        {
+          "bytes": 276,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/evidence/validation/2026-10-06-final/reproducibility.json",
+          "role": "issue-pinned-input",
+          "sha256": "ff63fb0d9d7e5752e11aa5d754c687bef513f54c0b264cdae0a590ee5d653097"
+        },
+        {
+          "bytes": 17082,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/evidence/validation/controls.json",
+          "role": "issue-pinned-input",
+          "sha256": "3445498952e8e39fc0698a9fce874ce9eb6753401a0c8db9d0110acdc5475db7"
+        },
+        {
+          "bytes": 17640,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/reproduce.py",
+          "role": "issue-pinned-input",
+          "sha256": "9ca5739464e5793eda149f74079f9d07545a71f10aeff8ccd45c96e4f6478d74"
+        },
+        {
+          "bytes": 30923,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/source/issue-1209-api-snapshot.json",
+          "role": "issue-pinned-input",
+          "sha256": "f694f98d653042bffe067c698dd6ec20f8673416dc94d8370937b83e2977694b"
+        },
+        {
+          "bytes": 393,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/source/issue-snapshot-retrieval.json",
+          "role": "issue-pinned-input",
+          "sha256": "ed3aa34354e53b6b74ff227569e64fd684a9060b8ad8fc0a268ac5dfe7267c8b"
+        },
+        {
+          "bytes": 10359,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/SOURCES.md",
+          "role": "historical-source-or-result",
+          "sha256": "ac03ddb6e690ac7475a85c298ea4da0ae35b9770d310cf60fb5f6e10ecad78fb"
+        },
+        {
+          "bytes": 19967,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/build_assessment.py",
+          "role": "historical-source-or-result",
+          "sha256": "f920c23477f5c98a7adc454ac58673ba24a75d64ee8828b7dc93a8a4b306920b"
+        },
+        {
+          "bytes": 1794,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/extract_dzs_roster.py",
+          "role": "historical-source-or-result",
+          "sha256": "6c8af159a6685d712062c10ca873905332aba1ded0594502efe8cfd138cc5965"
+        },
+        {
+          "bytes": 3432,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/findings/engineering-handoff.md",
+          "role": "historical-source-or-result",
+          "sha256": "6f303e1476676cd721fffdf61ecf4b015d7a71c9697c43ca1dd7f0113bed48a4"
+        },
+        {
+          "bytes": 3989,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/findings/review-coverage.md",
+          "role": "historical-source-or-result",
+          "sha256": "66e536ed9b6bda83c77d9921f44989c59f58b91e1f79bf4395106dd0167699ee"
+        },
+        {
+          "bytes": 13943,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/scope.json",
+          "role": "historical-source-or-result",
+          "sha256": "ba8a10ae3b8a67410bba8b687e256c44d01828c199b2d30961a678e4f5c3a635"
+        },
+        {
+          "bytes": 2162,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dgu-inspire-au-atom-en.xml",
+          "role": "historical-source-or-result",
+          "sha256": "625fab1c27ca853ff24ecbcf41ae768ec422e593f82e1bf77ca85b21a3990178"
+        },
+        {
+          "bytes": 2149,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dgu-inspire-au-atom.xml",
+          "role": "historical-source-or-result",
+          "sha256": "1231571f5a59464dbccda7eafaed3099131d899b4ebf142fde55a43a852bdff7"
+        },
+        {
+          "bytes": 35680,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-detail-extract.csv",
+          "role": "historical-source-or-result",
+          "sha256": "225021e29f4ec2eeeffda3801031f4c0587241e91eed984394c9d2d56b09785c"
+        },
+        {
+          "bytes": 63196,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "role": "historical-source-or-result",
+          "sha256": "99feecc93627db02509aee7d625b391c33a69f201f377464ac15c2fd7c16f20f"
+        },
+        {
+          "bytes": 4316,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/geoBoundaries-CITATION-AND-USE-content.txt",
+          "role": "historical-source-or-result",
+          "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+        },
+        {
+          "bytes": 129,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/geoBoundaries-CITATION-AND-USE.txt",
+          "role": "historical-source-or-result",
+          "sha256": "1036efd533332c7eed31d4b26c176a559f9742ef849cffd4488b5cd75fa5dbbb"
+        },
+        {
+          "bytes": 985,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/geoBoundaries-HRV-ADM2-metaData-content.txt",
+          "role": "historical-source-or-result",
+          "sha256": "e2b5d837084f3a2360a16b51e198d35799903c4b99687dd547f1b73a11847790"
+        },
+        {
+          "bytes": 128,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/geoBoundaries-HRV-ADM2-metaData.txt",
+          "role": "historical-source-or-result",
+          "sha256": "545991f9a147b33b2ac77cef62b95179576d66296f0c35b0e2fda3c915cf74c6"
+        },
+        {
+          "bytes": 5495,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/geoboundaries-hrv-adm2-response-headers.txt",
+          "role": "historical-source-or-result",
+          "sha256": "9b7a7974a4a912a1e1a24be3a3b8c8ec7a4e0cfddddf4ebc7865f2417953e3b8"
+        },
+        {
+          "bytes": 24044,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/issue-419-api-snapshot.json",
+          "role": "historical-source-or-result",
+          "sha256": "fad09b6e1744ef65fa88ca0d402f4cd591fded1c5c5a1de4f84fada6750f7403"
+        },
+        {
+          "bytes": 5280,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/source-inventory.csv",
+          "role": "historical-source-or-result",
+          "sha256": "1043ba585bf98501084cb87d00b04f06f0c0ba77d876012ea06abad99624c0be"
+        },
+        {
+          "bytes": 10913,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/vintages/2026-10-05/assessment-summary.json",
+          "role": "historical-source-or-result",
+          "sha256": "c5118a9046d10babfeab755e4f3dfbc09d9f5a35269a006820d3b27082c1a467"
+        },
+        {
+          "bytes": 1448,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/vintages/2026-10-05/province-completeness.csv",
+          "role": "historical-source-or-result",
+          "sha256": "7a46977bafc709cab611f2b0b21fe890c3e8ffdcd067c494f7465424c1abba37"
+        },
+        {
+          "bytes": 1256,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/vintages/2026-10-05/reproduction.json",
+          "role": "historical-source-or-result",
+          "sha256": "ba6c949225db7378c3dda6184d79d6242417684e9861f36481df3aab8363babc"
+        },
+        {
+          "bytes": 167059,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/vintages/2026-10-05/scoped-location-assessments.csv",
+          "role": "historical-source-or-result",
+          "sha256": "91d12e56fa600e4cbeebdc7d12c82f131aded59a8a38a3d87eb8ed8f64429420"
+        },
+        {
+          "bytes": 11393,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/macro-loose-ends-v5-additions.json",
+          "role": "issue-pinned-input",
+          "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1"
+        },
+        {
+          "bytes": 8539839,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-0.json",
+          "role": "issue-pinned-input",
+          "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3"
+        },
+        {
+          "bytes": 8060108,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-1.json",
+          "role": "issue-pinned-input",
+          "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7"
+        },
+        {
+          "bytes": 5144571,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-10.json",
+          "role": "issue-pinned-input",
+          "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+        },
+        {
+          "bytes": 5131824,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-11.json",
+          "role": "issue-pinned-input",
+          "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f"
+        },
+        {
+          "bytes": 4489493,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-12.json",
+          "role": "issue-pinned-input",
+          "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7"
+        },
+        {
+          "bytes": 5709487,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-13.json",
+          "role": "issue-pinned-input",
+          "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1"
+        },
+        {
+          "bytes": 4355198,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-14.json",
+          "role": "issue-pinned-input",
+          "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0"
+        },
+        {
+          "bytes": 5180426,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-15.json",
+          "role": "issue-pinned-input",
+          "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+        },
+        {
+          "bytes": 5213846,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-16.json",
+          "role": "issue-pinned-input",
+          "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797"
+        },
+        {
+          "bytes": 4945828,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-17.json",
+          "role": "issue-pinned-input",
+          "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db"
+        },
+        {
+          "bytes": 4909063,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-18.json",
+          "role": "issue-pinned-input",
+          "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+        },
+        {
+          "bytes": 4583022,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-19.json",
+          "role": "issue-pinned-input",
+          "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+        },
+        {
+          "bytes": 6259307,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-2.json",
+          "role": "issue-pinned-input",
+          "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+        },
+        {
+          "bytes": 6570767,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-20.json",
+          "role": "issue-pinned-input",
+          "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f"
+        },
+        {
+          "bytes": 6737781,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-21.json",
+          "role": "issue-pinned-input",
+          "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7"
+        },
+        {
+          "bytes": 4746385,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-22.json",
+          "role": "issue-pinned-input",
+          "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+        },
+        {
+          "bytes": 4962410,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-23.json",
+          "role": "issue-pinned-input",
+          "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2"
+        },
+        {
+          "bytes": 4816899,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-24.json",
+          "role": "issue-pinned-input",
+          "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c"
+        },
+        {
+          "bytes": 4525239,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-25.json",
+          "role": "issue-pinned-input",
+          "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+        },
+        {
+          "bytes": 4608983,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-26.json",
+          "role": "issue-pinned-input",
+          "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+        },
+        {
+          "bytes": 4863162,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-27.json",
+          "role": "issue-pinned-input",
+          "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+        },
+        {
+          "bytes": 6613963,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-28.json",
+          "role": "issue-pinned-input",
+          "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+        },
+        {
+          "bytes": 12932167,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-29.json",
+          "role": "issue-pinned-input",
+          "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+        },
+        {
+          "bytes": 5153118,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-3.json",
+          "role": "issue-pinned-input",
+          "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617"
+        },
+        {
+          "bytes": 11979437,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-30.json",
+          "role": "issue-pinned-input",
+          "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a"
+        },
+        {
+          "bytes": 10086485,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-31.json",
+          "role": "issue-pinned-input",
+          "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e"
+        },
+        {
+          "bytes": 10211739,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-32.json",
+          "role": "issue-pinned-input",
+          "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64"
+        },
+        {
+          "bytes": 607984,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-33.json",
+          "role": "issue-pinned-input",
+          "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe"
+        },
+        {
+          "bytes": 4835479,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-4.json",
+          "role": "issue-pinned-input",
+          "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c"
+        },
+        {
+          "bytes": 5226173,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-5.json",
+          "role": "issue-pinned-input",
+          "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc"
+        },
+        {
+          "bytes": 4607953,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-6.json",
+          "role": "issue-pinned-input",
+          "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a"
+        },
+        {
+          "bytes": 4257402,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-7.json",
+          "role": "issue-pinned-input",
+          "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387"
+        },
+        {
+          "bytes": 5097739,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-8.json",
+          "role": "issue-pinned-input",
+          "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+        },
+        {
+          "bytes": 5729632,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-9.json",
+          "role": "issue-pinned-input",
+          "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6"
+        },
+        {
+          "bytes": 1573576,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/source-restoration-additions.json",
+          "role": "issue-pinned-input",
+          "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9"
+        },
+        {
+          "bytes": 10164089,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/hierarchy.json",
+          "role": "issue-pinned-input",
+          "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+        },
+        {
+          "bytes": 2404397,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/macro-foundation/current-membership-inventory.json.gz",
+          "role": "issue-pinned-input",
+          "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab"
+        },
+        {
+          "bytes": 71286,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/macro-foundation/regional-handoffs.json.gz",
+          "role": "issue-pinned-input",
+          "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a"
+        },
+        {
+          "bytes": 87964,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence-quality.json",
+          "role": "issue-pinned-input",
+          "sha256": "1c80a1d11624ac62660ef8694aa93a23fc161327a78178d8b5e10806d03b2072"
+        },
+        {
+          "bytes": 5898,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/reproduce.py",
+          "role": "issue-pinned-input",
+          "sha256": "7d218ec616982692c604ff6d30740db36d443a206aaf99dd950141839eab9602"
+        },
+        {
+          "bytes": 31689,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/source/issue-1194-api-snapshot.json",
+          "role": "issue-pinned-input",
+          "sha256": "5863aa5a0f5845dbb9939a8fb841ceeeff6d1c87bc3bdee9f6e6936313389439"
+        },
+        {
+          "bytes": 20194,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/source/issue-evidence-scope.json",
+          "role": "issue-pinned-input",
+          "sha256": "0f082390fe2f9c7bd3e627489b4f5160616d9b85e4cc15503ed1521c050e3cb8"
+        },
+        {
+          "bytes": 20788018,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-c64d17e99f61d668/source/geoboundaries-9469f09/HRV/ADM2/geoBoundaries-HRV-ADM2.geojson",
+          "role": "issue-pinned-input",
+          "sha256": "68a317129a0c295fd8baf7acc0f31ffefdf65ff2f1f62f8ed90a765cc57cf01e"
+        },
+        {
+          "bytes": 10359,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/SOURCES.md",
+          "role": "issue-pinned-input",
+          "sha256": "ac03ddb6e690ac7475a85c298ea4da0ae35b9770d310cf60fb5f6e10ecad78fb"
+        },
+        {
+          "bytes": 19967,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/build_assessment.py",
+          "role": "issue-pinned-input",
+          "sha256": "f920c23477f5c98a7adc454ac58673ba24a75d64ee8828b7dc93a8a4b306920b"
+        },
+        {
+          "bytes": 1794,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/extract_dzs_roster.py",
+          "role": "issue-pinned-input",
+          "sha256": "6c8af159a6685d712062c10ca873905332aba1ded0594502efe8cfd138cc5965"
+        },
+        {
+          "bytes": 3432,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/findings/engineering-handoff.md",
+          "role": "issue-pinned-input",
+          "sha256": "6f303e1476676cd721fffdf61ecf4b015d7a71c9697c43ca1dd7f0113bed48a4"
+        },
+        {
+          "bytes": 3989,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/findings/review-coverage.md",
+          "role": "issue-pinned-input",
+          "sha256": "66e536ed9b6bda83c77d9921f44989c59f58b91e1f79bf4395106dd0167699ee"
+        },
+        {
+          "bytes": 13943,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/scope.json",
+          "role": "issue-pinned-input",
+          "sha256": "ba8a10ae3b8a67410bba8b687e256c44d01828c199b2d30961a678e4f5c3a635"
+        },
+        {
+          "bytes": 2162,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dgu-inspire-au-atom-en.xml",
+          "role": "issue-pinned-input",
+          "sha256": "625fab1c27ca853ff24ecbcf41ae768ec422e593f82e1bf77ca85b21a3990178"
+        },
+        {
+          "bytes": 2149,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dgu-inspire-au-atom.xml",
+          "role": "issue-pinned-input",
+          "sha256": "1231571f5a59464dbccda7eafaed3099131d899b4ebf142fde55a43a852bdff7"
+        },
+        {
+          "bytes": 35680,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-detail-extract.csv",
+          "role": "issue-pinned-input",
+          "sha256": "225021e29f4ec2eeeffda3801031f4c0587241e91eed984394c9d2d56b09785c"
+        },
+        {
+          "bytes": 63196,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "role": "issue-pinned-input",
+          "sha256": "99feecc93627db02509aee7d625b391c33a69f201f377464ac15c2fd7c16f20f"
+        },
+        {
+          "bytes": 4316,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/geoBoundaries-CITATION-AND-USE-content.txt",
+          "role": "issue-pinned-input",
+          "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+        },
+        {
+          "bytes": 129,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/geoBoundaries-CITATION-AND-USE.txt",
+          "role": "issue-pinned-input",
+          "sha256": "1036efd533332c7eed31d4b26c176a559f9742ef849cffd4488b5cd75fa5dbbb"
+        },
+        {
+          "bytes": 985,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/geoBoundaries-HRV-ADM2-metaData-content.txt",
+          "role": "issue-pinned-input",
+          "sha256": "e2b5d837084f3a2360a16b51e198d35799903c4b99687dd547f1b73a11847790"
+        },
+        {
+          "bytes": 128,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/geoBoundaries-HRV-ADM2-metaData.txt",
+          "role": "issue-pinned-input",
+          "sha256": "545991f9a147b33b2ac77cef62b95179576d66296f0c35b0e2fda3c915cf74c6"
+        },
+        {
+          "bytes": 5495,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/geoboundaries-hrv-adm2-response-headers.txt",
+          "role": "issue-pinned-input",
+          "sha256": "9b7a7974a4a912a1e1a24be3a3b8c8ec7a4e0cfddddf4ebc7865f2417953e3b8"
+        },
+        {
+          "bytes": 24044,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/issue-419-api-snapshot.json",
+          "role": "issue-pinned-input",
+          "sha256": "fad09b6e1744ef65fa88ca0d402f4cd591fded1c5c5a1de4f84fada6750f7403"
+        },
+        {
+          "bytes": 5280,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/source-inventory.csv",
+          "role": "issue-pinned-input",
+          "sha256": "1043ba585bf98501084cb87d00b04f06f0c0ba77d876012ea06abad99624c0be"
+        },
+        {
+          "bytes": 10913,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/vintages/2026-10-05/assessment-summary.json",
+          "role": "issue-pinned-input",
+          "sha256": "c5118a9046d10babfeab755e4f3dfbc09d9f5a35269a006820d3b27082c1a467"
+        },
+        {
+          "bytes": 1448,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/vintages/2026-10-05/province-completeness.csv",
+          "role": "issue-pinned-input",
+          "sha256": "7a46977bafc709cab611f2b0b21fe890c3e8ffdcd067c494f7465424c1abba37"
+        },
+        {
+          "bytes": 1256,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/vintages/2026-10-05/reproduction.json",
+          "role": "issue-pinned-input",
+          "sha256": "ba6c949225db7378c3dda6184d79d6242417684e9861f36481df3aab8363babc"
+        },
+        {
+          "bytes": 167059,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/vintages/2026-10-05/scoped-location-assessments.csv",
+          "role": "issue-pinned-input",
+          "sha256": "91d12e56fa600e4cbeebdc7d12c82f131aded59a8a38a3d87eb8ed8f64429420"
+        },
+        {
+          "bytes": 944,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/world-index.json",
+          "role": "issue-pinned-input",
+          "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+        },
+        {
+          "bytes": 7090,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "scripts/evidence/immutable.py",
+          "role": "issue-pinned-input",
+          "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+        }
+      ]
+    },
+    {
+      "actually_consumed_xlsx_members": [
+        {
+          "bytes": 1545,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/_rels/workbook.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "8d6e95b712b94e84d21fbfefa3db0534dede0378bc22bdc191cb75b2189dffc9"
+        },
+        {
+          "bytes": 15998,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/sharedStrings.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "496be853b3379b609b9c24218992b77d56c040aeef8129aecdbfb3ed55f0c6c5"
+        },
+        {
+          "bytes": 2419,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/workbook.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "a0397efaa77521417a259a2db8a773c40927a3bad55e815161cd92cf72c1bc9a"
+        },
+        {
+          "bytes": 11244,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/sheet3.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "494325ebff119cabb5636acfb5ec1103dc37e8627a801f1e5a485ba57f5fcc61"
+        }
+      ],
+      "decoded_xlsx_bytes": 242002,
+      "decoded_xlsx_members": [
+        {
+          "bytes": 2990,
+          "hash_kind": "decoded-member-bytes",
+          "member": "[Content_Types].xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "25352786fdc1fc70029208c4513c36add4d743e2ec460636e44ca7c64d7c8d3c"
+        },
+        {
+          "bytes": 588,
+          "hash_kind": "decoded-member-bytes",
+          "member": "_rels/.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "73e5a29f48d5ab979eeda062493bc7e679265c1344ef936978b8becec5549497"
+        },
+        {
+          "bytes": 1545,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/_rels/workbook.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "8d6e95b712b94e84d21fbfefa3db0534dede0378bc22bdc191cb75b2189dffc9"
+        },
+        {
+          "bytes": 2419,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/workbook.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "a0397efaa77521417a259a2db8a773c40927a3bad55e815161cd92cf72c1bc9a"
+        },
+        {
+          "bytes": 17417,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/sheet4.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "7c503312d979b69098b5e024aba85f2c5dcd6c24369cd9b0560d8e7e789707e1"
+        },
+        {
+          "bytes": 464,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/_rels/sheet4.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "0e4234a048389e815857e6948c0be3fbfbc311a3dc02cb05873eeab07ad14ee9"
+        },
+        {
+          "bytes": 464,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/_rels/sheet3.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "0da1aa08a01d65db9c1263a1f68d65f90733a64ce020af4f113388737df272b4"
+        },
+        {
+          "bytes": 464,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/_rels/sheet2.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "b080444923aed7a5612898d96f615efb7a847fda5c099575e1681eb2e702c04a"
+        },
+        {
+          "bytes": 464,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/_rels/sheet1.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "046f319d2b01bf9529da901ae33cb1cf8c7c7d06395167875fa0c4add6bf34c3"
+        },
+        {
+          "bytes": 4341,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/sheet2.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "b36f54aa27b5a4267c713aaeda830473fa38a9d89d1bcab68fdec46e18050eb6"
+        },
+        {
+          "bytes": 11244,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/sheet3.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "494325ebff119cabb5636acfb5ec1103dc37e8627a801f1e5a485ba57f5fcc61"
+        },
+        {
+          "bytes": 1289,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/drawing7.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "1f7148dd1a11fb79f1043b87b7dd75f7b58444d3bc3ed627a7f5974590c19aad"
+        },
+        {
+          "bytes": 464,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/_rels/sheet5.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "0f314a236d9ba70b527c32f78c136816b054126a8ce47c702a54a1117ec678ce"
+        },
+        {
+          "bytes": 464,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/_rels/sheet6.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "2cda89da0483ad6b89b3f5ccd9d655df4f5b990e531ed5a7ebd4304d555fcaaf"
+        },
+        {
+          "bytes": 464,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/_rels/sheet7.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "f95f13b43c04936d87a8d56c55002f66f6229913f371a13306f8ca19fee9d0fa"
+        },
+        {
+          "bytes": 292,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/_rels/drawing7.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "15a140b2ab9e3d49a7b49f824413744cc4959bc34c427cf50f7d6016697293c0"
+        },
+        {
+          "bytes": 292,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/_rels/drawing6.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "58ae268bff59ae0b296505741bdf87a3cf9a4ff8f2caca0d9d08202aeb37e16b"
+        },
+        {
+          "bytes": 292,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/_rels/drawing5.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "58ae268bff59ae0b296505741bdf87a3cf9a4ff8f2caca0d9d08202aeb37e16b"
+        },
+        {
+          "bytes": 292,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/_rels/drawing4.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "58ae268bff59ae0b296505741bdf87a3cf9a4ff8f2caca0d9d08202aeb37e16b"
+        },
+        {
+          "bytes": 292,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/_rels/drawing3.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "58ae268bff59ae0b296505741bdf87a3cf9a4ff8f2caca0d9d08202aeb37e16b"
+        },
+        {
+          "bytes": 292,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/_rels/drawing2.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "58ae268bff59ae0b296505741bdf87a3cf9a4ff8f2caca0d9d08202aeb37e16b"
+        },
+        {
+          "bytes": 292,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/_rels/drawing1.xml.rels",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "15a140b2ab9e3d49a7b49f824413744cc4959bc34c427cf50f7d6016697293c0"
+        },
+        {
+          "bytes": 7718,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/sheet1.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "9816458ed805c8886307206e928ddf1d1e3217163b77c94ba446733d19ef0abd"
+        },
+        {
+          "bytes": 1201,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/drawing6.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "da3471d213155bc4b5cff7dda13960129e163b8c88522ff3f4a02ae5e74c17d5"
+        },
+        {
+          "bytes": 1201,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/drawing5.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "9e455a7987f0d49969179a1f14f2686b75b907327e877b864c96fd3e71862a17"
+        },
+        {
+          "bytes": 1390,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/drawing1.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "a3b9b86238ddd2fa670b9df8238db1c43f273610f4029411cdec527dfcdfa9a5"
+        },
+        {
+          "bytes": 15998,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/sharedStrings.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "496be853b3379b609b9c24218992b77d56c040aeef8129aecdbfb3ed55f0c6c5"
+        },
+        {
+          "bytes": 48593,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/styles.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "dc675fee88e6eface803ccda7094da68803ab2b4fdf4db1b018ae65bd3fbd3e4"
+        },
+        {
+          "bytes": 6796,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/theme/theme1.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "e6029ab4958414b8bb862b17ffed3a708d1513e61a07d88e966071cca31d1bd4"
+        },
+        {
+          "bytes": 7875,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/sheet7.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "67d0b198c05603903b8676c69cb0ae24c5f2492a882b35165d1c2f3c030d18b0"
+        },
+        {
+          "bytes": 17977,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/sheet6.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "48dfc4610e28a3b85eb4a02cca041a9f43e27cf59bae9fcfc96bf1c723b6348a"
+        },
+        {
+          "bytes": 18047,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/worksheets/sheet5.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "81e19d80bc4a0bc6c0e989ce1e1e429e8c9dd5e572a0def04e09135b036787fc"
+        },
+        {
+          "bytes": 3798,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/media/image1.png",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "7cdaa9c7a127a096504cac900129d6f28fd55c1f1c3a5e5627bcd97d9174bbf1"
+        },
+        {
+          "bytes": 1194,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/drawing2.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "dd9225cdb02a8c6a5a64ae954a994bd747c0d428c9aadd277986cc5554d42593"
+        },
+        {
+          "bytes": 6448,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/media/image2.png",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "c352592eb587fcf351aae643da95518a04af4112ec6a2e45a81c108c22b50e2c"
+        },
+        {
+          "bytes": 1201,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/drawing4.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "d30f307dbcb75e660b4727fe72be87c164784a135292f64f120382f94d5efecf"
+        },
+        {
+          "bytes": 1201,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/drawings/drawing3.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "e67195ee5238f086ba8a02b528a5fdeaa5a0e6d88eef947e5173ecd4da87828f"
+        },
+        {
+          "bytes": 11260,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/printerSettings/printerSettings7.bin",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "6bb19be5584830466c514f17463bf1b58cd083a33500c7984ab09f91d3d75403"
+        },
+        {
+          "bytes": 677,
+          "hash_kind": "decoded-member-bytes",
+          "member": "docProps/core.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "6c34c6142f6b0ca26d5156a13ce3b03280472cf045dde26d9703a1ae6a4bd8ec"
+        },
+        {
+          "bytes": 4664,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/printerSettings/printerSettings6.bin",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "d939f31e44032bb68993ebdb66dfb1294b24e40bcf0492d824e6a8b99b1b5a40"
+        },
+        {
+          "bytes": 4664,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/printerSettings/printerSettings5.bin",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "d939f31e44032bb68993ebdb66dfb1294b24e40bcf0492d824e6a8b99b1b5a40"
+        },
+        {
+          "bytes": 4664,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/printerSettings/printerSettings4.bin",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "d939f31e44032bb68993ebdb66dfb1294b24e40bcf0492d824e6a8b99b1b5a40"
+        },
+        {
+          "bytes": 11260,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/printerSettings/printerSettings1.bin",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "9e3bca4325600eae475d3e4e9f898749f3f6ab228d4bea94885f818ce2c2e24f"
+        },
+        {
+          "bytes": 4664,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/printerSettings/printerSettings3.bin",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "d939f31e44032bb68993ebdb66dfb1294b24e40bcf0492d824e6a8b99b1b5a40"
+        },
+        {
+          "bytes": 11260,
+          "hash_kind": "decoded-member-bytes",
+          "member": "xl/printerSettings/printerSettings2.bin",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "361e7f3e229efbe3713e7763b890cbed91a7980559e66366a5474a11c6077fe9"
+        },
+        {
+          "bytes": 1126,
+          "hash_kind": "decoded-member-bytes",
+          "member": "docProps/app.xml",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "sha256": "62cb783670061de49ad7efa14ceadd10f0d9a160460a2e41ff69f82489f3e958"
+        }
+      ],
+      "execution_admission": {
+        "additional_artifact_allowance_bytes": 28311552,
+        "admitted_total_bytes": 266577593,
+        "decoded_xlsx_member_bytes": 242002,
+        "limit_bytes": 268435456,
+        "unique_original_bytes": 238024039
+      },
+      "factual_limit": "This is a byte/read-boundary reproduction correction; it establishes no new territorial, parent, boundary, completeness, legal or licensing finding.",
+      "historical_baseline": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+      "historical_pin_count": 62,
+      "inputs": [
+        {
+          "bytes": 13943,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/scope.json",
+          "read_boundary": "verified bytes copied into private build packet",
+          "sha256": "ba8a10ae3b8a67410bba8b687e256c44d01828c199b2d30961a678e4f5c3a635"
+        },
+        {
+          "bytes": 24044,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/issue-419-api-snapshot.json",
+          "read_boundary": "verified bytes copied into private build packet",
+          "sha256": "fad09b6e1744ef65fa88ca0d402f4cd591fded1c5c5a1de4f84fada6750f7403"
+        },
+        {
+          "bytes": 19967,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/build_assessment.py",
+          "read_boundary": "verified bytes copied into private build packet",
+          "sha256": "f920c23477f5c98a7adc454ac58673ba24a75d64ee8828b7dc93a8a4b306920b"
+        },
+        {
+          "bytes": 20788018,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-c64d17e99f61d668/source/geoboundaries-9469f09/HRV/ADM2/geoBoundaries-HRV-ADM2.geojson",
+          "read_boundary": "verified bytes copied into private build packet",
+          "sha256": "68a317129a0c295fd8baf7acc0f31ffefdf65ff2f1f62f8ed90a765cc57cf01e"
+        },
+        {
+          "bytes": 35680,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-detail-extract.csv",
+          "read_boundary": "verified bytes copied into private build packet",
+          "sha256": "225021e29f4ec2eeeffda3801031f4c0587241e91eed984394c9d2d56b09785c"
+        },
+        {
+          "bytes": 63196,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "read_boundary": "verified bytes copied into private build packet",
+          "sha256": "99feecc93627db02509aee7d625b391c33a69f201f377464ac15c2fd7c16f20f"
+        },
+        {
+          "bytes": 7090,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "scripts/evidence/immutable.py",
+          "read_boundary": "compiled from immutable Git blob",
+          "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+        }
+      ],
+      "issue": 1209,
+      "issue_pin_count": 66,
+      "issue_retrieved_at": "2026-10-06T20:57:57Z",
+      "issue_snapshot": {
+        "bytes": 30923,
+        "path": "data/regional-review/croatia-batch4-read-boundary-guard/source/issue-1209-api-snapshot.json",
+        "sha256": "f694f98d653042bffe067c698dd6ec20f8673416dc94d8370937b83e2977694b",
+        "updated_at": "2026-10-06T20:55:33Z"
+      },
+      "issue_snapshot_retrieval": {
+        "bytes": 393,
+        "path": "data/regional-review/croatia-batch4-read-boundary-guard/source/issue-snapshot-retrieval.json",
+        "retrieved_at": "2026-10-06T20:57:57Z",
+        "sha256": "ed3aa34354e53b6b74ff227569e64fd684a9060b8ad8fc0a268ac5dfe7267c8b"
+      },
+      "issue_updated_at": "2026-10-06T20:55:33Z",
+      "job_snapshot": {
+        "bytes": 48385,
+        "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/source/issue-1396-api-snapshot.json",
+        "sha256": "0cd76e4014929f705b025bcfd32571541ee11581994577de05aba8c5c5a173a1",
+        "updated_at": "2026-10-08T23:27:10Z"
+      },
+      "job_snapshot_retrieval": {
+        "bytes": 385,
+        "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/source/issue-1396-snapshot-retrieval.json",
+        "retrieved_at": "2026-10-08T23:32:23Z",
+        "sha256": "d15b3c30c392e046b63ff472c92b26adffefe881bc1651733ca2b1a9634fed60"
+      },
+      "outputs": {
+        "assessment-summary.json": "c5118a9046d10babfeab755e4f3dfbc09d9f5a35269a006820d3b27082c1a467",
+        "province-completeness.csv": "7a46977bafc709cab611f2b0b21fe890c3e8ffdcd067c494f7465424c1abba37",
+        "scoped-location-assessments.csv": "91d12e56fa600e4cbeebdc7d12c82f131aded59a8a38a3d87eb8ed8f64429420"
+      },
+      "pinned_commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+      "runner": {
+        "bytes": 28328,
+        "commit": "492bcacfe1d82379cccf22b6a1f868f9f756b71c",
+        "git_blob": "35049c67938d6c2f935cfdb7a8722fb808f84909",
+        "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/reproduce.py",
+        "sha256": "c1bc3618b8f93165c9dc879748f3a9bdb35ec20851899a6916a55f5de03bd515"
+      },
+      "subject_count": 224,
+      "subject_ids_sha256": "c5816fc5587099904fd5c5cff51801676ec361606153cb39c70e9fb19ef0f116",
+      "unique_original_bytes": 238024039,
+      "verified_source_count": 142,
+      "verified_sources": [
+        {
+          "bytes": 11393,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/macro-loose-ends-v5-additions.json",
+          "role": "historical-source-or-result",
+          "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1"
+        },
+        {
+          "bytes": 8539839,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-0.json",
+          "role": "historical-source-or-result",
+          "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3"
+        },
+        {
+          "bytes": 8060108,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-1.json",
+          "role": "historical-source-or-result",
+          "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7"
+        },
+        {
+          "bytes": 5144571,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-10.json",
+          "role": "historical-source-or-result",
+          "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+        },
+        {
+          "bytes": 5131824,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-11.json",
+          "role": "historical-source-or-result",
+          "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f"
+        },
+        {
+          "bytes": 4489493,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-12.json",
+          "role": "historical-source-or-result",
+          "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7"
+        },
+        {
+          "bytes": 5709487,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-13.json",
+          "role": "historical-source-or-result",
+          "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1"
+        },
+        {
+          "bytes": 4355198,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-14.json",
+          "role": "historical-source-or-result",
+          "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0"
+        },
+        {
+          "bytes": 5180426,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-15.json",
+          "role": "historical-source-or-result",
+          "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+        },
+        {
+          "bytes": 5213846,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-16.json",
+          "role": "historical-source-or-result",
+          "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797"
+        },
+        {
+          "bytes": 4945828,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-17.json",
+          "role": "historical-source-or-result",
+          "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db"
+        },
+        {
+          "bytes": 4909063,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-18.json",
+          "role": "historical-source-or-result",
+          "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+        },
+        {
+          "bytes": 4583022,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-19.json",
+          "role": "historical-source-or-result",
+          "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+        },
+        {
+          "bytes": 6259307,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-2.json",
+          "role": "historical-source-or-result",
+          "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+        },
+        {
+          "bytes": 6570767,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-20.json",
+          "role": "historical-source-or-result",
+          "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f"
+        },
+        {
+          "bytes": 6737781,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-21.json",
+          "role": "historical-source-or-result",
+          "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7"
+        },
+        {
+          "bytes": 4746385,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-22.json",
+          "role": "historical-source-or-result",
+          "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+        },
+        {
+          "bytes": 4962410,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-23.json",
+          "role": "historical-source-or-result",
+          "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2"
+        },
+        {
+          "bytes": 4816899,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-24.json",
+          "role": "historical-source-or-result",
+          "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c"
+        },
+        {
+          "bytes": 4525239,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-25.json",
+          "role": "historical-source-or-result",
+          "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+        },
+        {
+          "bytes": 4608983,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-26.json",
+          "role": "historical-source-or-result",
+          "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+        },
+        {
+          "bytes": 4863162,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-27.json",
+          "role": "historical-source-or-result",
+          "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+        },
+        {
+          "bytes": 6613963,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-28.json",
+          "role": "historical-source-or-result",
+          "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+        },
+        {
+          "bytes": 12932167,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-29.json",
+          "role": "historical-source-or-result",
+          "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+        },
+        {
+          "bytes": 5153118,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-3.json",
+          "role": "historical-source-or-result",
+          "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617"
+        },
+        {
+          "bytes": 11979437,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-30.json",
+          "role": "historical-source-or-result",
+          "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a"
+        },
+        {
+          "bytes": 10086485,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-31.json",
+          "role": "historical-source-or-result",
+          "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e"
+        },
+        {
+          "bytes": 10211739,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-32.json",
+          "role": "historical-source-or-result",
+          "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64"
+        },
+        {
+          "bytes": 607984,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-33.json",
+          "role": "historical-source-or-result",
+          "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe"
+        },
+        {
+          "bytes": 4835479,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-4.json",
+          "role": "historical-source-or-result",
+          "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c"
+        },
+        {
+          "bytes": 5226173,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-5.json",
+          "role": "historical-source-or-result",
+          "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc"
+        },
+        {
+          "bytes": 4607953,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-6.json",
+          "role": "historical-source-or-result",
+          "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a"
+        },
+        {
+          "bytes": 4257402,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-7.json",
+          "role": "historical-source-or-result",
+          "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387"
+        },
+        {
+          "bytes": 5097739,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-8.json",
+          "role": "historical-source-or-result",
+          "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+        },
+        {
+          "bytes": 5729632,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/part-9.json",
+          "role": "historical-source-or-result",
+          "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6"
+        },
+        {
+          "bytes": 1573576,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/geography/source-restoration-additions.json",
+          "role": "historical-source-or-result",
+          "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9"
+        },
+        {
+          "bytes": 10164089,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/hierarchy.json",
+          "role": "historical-source-or-result",
+          "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+        },
+        {
+          "bytes": 2404397,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/macro-foundation/current-membership-inventory.json.gz",
+          "role": "historical-source-or-result",
+          "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab"
+        },
+        {
+          "bytes": 71286,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/macro-foundation/regional-handoffs.json.gz",
+          "role": "historical-source-or-result",
+          "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a"
+        },
+        {
+          "bytes": 944,
+          "commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+          "path": "data/world-index.json",
+          "role": "historical-source-or-result",
+          "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+        },
+        {
+          "bytes": 20788018,
+          "commit": "96f2a6d201236ba62f471535db240b123de60c09",
+          "path": "data/regional-review/regional-review-c64d17e99f61d668/source/geoboundaries-9469f09/HRV/ADM2/geoBoundaries-HRV-ADM2.geojson",
+          "role": "historical-source-or-result",
+          "sha256": "68a317129a0c295fd8baf7acc0f31ffefdf65ff2f1f62f8ed90a765cc57cf01e"
+        },
+        {
+          "bytes": 8223,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/RESEARCH.md",
+          "role": "issue-pinned-input",
+          "sha256": "d4d820a238781b0b886498f478a3ba1c2bd2adf0c9f25ddf12c2884d2a5deef9"
+        },
+        {
+          "bytes": 13180,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/controls.py",
+          "role": "issue-pinned-input",
+          "sha256": "f7612302a00cdde71c9b5494aac6094abb7e766288c900cd9c8b778ca3ed741e"
+        },
+        {
+          "bytes": 614664,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/evidence-quality.json",
+          "role": "issue-pinned-input",
+          "sha256": "a351d4a3f45402914e93f8beecdfd49742b430939c71655cfe817b2d4638e5a3"
+        },
+        {
+          "bytes": 3896,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/evidence/runs/2026-10-06/run-1/run-record.json",
+          "role": "issue-pinned-input",
+          "sha256": "dbf1f682ca8d26dda0dfcf85a0d9faa92b84b4d0b43c1bd31bef98fd2bf473f8"
+        },
+        {
+          "bytes": 17180,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/evidence/validation/2026-10-06-final/controls.json",
+          "role": "issue-pinned-input",
+          "sha256": "091e9dd29fa23d3a2b275995600980e9061573fde0ffeb6fdb4d4bc2021addc3"
+        },
+        {
+          "bytes": 165,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/evidence/validation/2026-10-06-final/negative-control.json",
+          "role": "issue-pinned-input",
+          "sha256": "8070e685098fca6c2dcb97189714a07e8166d620fffa582b9ad8cb3b5428d9e9"
+        },
+        {
+          "bytes": 172,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/evidence/validation/2026-10-06-final/positive-control.json",
+          "role": "issue-pinned-input",
+          "sha256": "daaf4e4f53b26804c79ed2bf6eea7a3e1306c4a4356d5687a991f0b308e4e195"
+        },
+        {
+          "bytes": 63074,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/evidence/validation/2026-10-06-final/rendered-table-ledger.json",
+          "role": "issue-pinned-input",
+          "sha256": "e36b1cdd4774e5638c9405cce63ce0e5daf6bf4a729649e778d6e5be6f700a30"
+        },
+        {
+          "bytes": 276,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/evidence/validation/2026-10-06-final/reproducibility.json",
+          "role": "issue-pinned-input",
+          "sha256": "ff63fb0d9d7e5752e11aa5d754c687bef513f54c0b264cdae0a590ee5d653097"
+        },
+        {
+          "bytes": 17082,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/evidence/validation/controls.json",
+          "role": "issue-pinned-input",
+          "sha256": "3445498952e8e39fc0698a9fce874ce9eb6753401a0c8db9d0110acdc5475db7"
+        },
+        {
+          "bytes": 17640,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/reproduce.py",
+          "role": "issue-pinned-input",
+          "sha256": "9ca5739464e5793eda149f74079f9d07545a71f10aeff8ccd45c96e4f6478d74"
+        },
+        {
+          "bytes": 30923,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/source/issue-1209-api-snapshot.json",
+          "role": "issue-pinned-input",
+          "sha256": "f694f98d653042bffe067c698dd6ec20f8673416dc94d8370937b83e2977694b"
+        },
+        {
+          "bytes": 393,
+          "commit": "9ec87025b8d7355a893924fb26c8152a205f0be2",
+          "path": "data/regional-review/croatia-batch4-read-boundary-guard/source/issue-snapshot-retrieval.json",
+          "role": "issue-pinned-input",
+          "sha256": "ed3aa34354e53b6b74ff227569e64fd684a9060b8ad8fc0a268ac5dfe7267c8b"
+        },
+        {
+          "bytes": 10359,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/SOURCES.md",
+          "role": "historical-source-or-result",
+          "sha256": "ac03ddb6e690ac7475a85c298ea4da0ae35b9770d310cf60fb5f6e10ecad78fb"
+        },
+        {
+          "bytes": 19967,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/build_assessment.py",
+          "role": "historical-source-or-result",
+          "sha256": "f920c23477f5c98a7adc454ac58673ba24a75d64ee8828b7dc93a8a4b306920b"
+        },
+        {
+          "bytes": 1794,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/extract_dzs_roster.py",
+          "role": "historical-source-or-result",
+          "sha256": "6c8af159a6685d712062c10ca873905332aba1ded0594502efe8cfd138cc5965"
+        },
+        {
+          "bytes": 3432,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/findings/engineering-handoff.md",
+          "role": "historical-source-or-result",
+          "sha256": "6f303e1476676cd721fffdf61ecf4b015d7a71c9697c43ca1dd7f0113bed48a4"
+        },
+        {
+          "bytes": 3989,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/findings/review-coverage.md",
+          "role": "historical-source-or-result",
+          "sha256": "66e536ed9b6bda83c77d9921f44989c59f58b91e1f79bf4395106dd0167699ee"
+        },
+        {
+          "bytes": 13943,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/scope.json",
+          "role": "historical-source-or-result",
+          "sha256": "ba8a10ae3b8a67410bba8b687e256c44d01828c199b2d30961a678e4f5c3a635"
+        },
+        {
+          "bytes": 2162,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dgu-inspire-au-atom-en.xml",
+          "role": "historical-source-or-result",
+          "sha256": "625fab1c27ca853ff24ecbcf41ae768ec422e593f82e1bf77ca85b21a3990178"
+        },
+        {
+          "bytes": 2149,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dgu-inspire-au-atom.xml",
+          "role": "historical-source-or-result",
+          "sha256": "1231571f5a59464dbccda7eafaed3099131d899b4ebf142fde55a43a852bdff7"
+        },
+        {
+          "bytes": 35680,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-detail-extract.csv",
+          "role": "historical-source-or-result",
+          "sha256": "225021e29f4ec2eeeffda3801031f4c0587241e91eed984394c9d2d56b09785c"
+        },
+        {
+          "bytes": 63196,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "role": "historical-source-or-result",
+          "sha256": "99feecc93627db02509aee7d625b391c33a69f201f377464ac15c2fd7c16f20f"
+        },
+        {
+          "bytes": 4316,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/geoBoundaries-CITATION-AND-USE-content.txt",
+          "role": "historical-source-or-result",
+          "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+        },
+        {
+          "bytes": 129,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/geoBoundaries-CITATION-AND-USE.txt",
+          "role": "historical-source-or-result",
+          "sha256": "1036efd533332c7eed31d4b26c176a559f9742ef849cffd4488b5cd75fa5dbbb"
+        },
+        {
+          "bytes": 985,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/geoBoundaries-HRV-ADM2-metaData-content.txt",
+          "role": "historical-source-or-result",
+          "sha256": "e2b5d837084f3a2360a16b51e198d35799903c4b99687dd547f1b73a11847790"
+        },
+        {
+          "bytes": 128,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/geoBoundaries-HRV-ADM2-metaData.txt",
+          "role": "historical-source-or-result",
+          "sha256": "545991f9a147b33b2ac77cef62b95179576d66296f0c35b0e2fda3c915cf74c6"
+        },
+        {
+          "bytes": 5495,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/geoboundaries-hrv-adm2-response-headers.txt",
+          "role": "historical-source-or-result",
+          "sha256": "9b7a7974a4a912a1e1a24be3a3b8c8ec7a4e0cfddddf4ebc7865f2417953e3b8"
+        },
+        {
+          "bytes": 24044,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/issue-419-api-snapshot.json",
+          "role": "historical-source-or-result",
+          "sha256": "fad09b6e1744ef65fa88ca0d402f4cd591fded1c5c5a1de4f84fada6750f7403"
+        },
+        {
+          "bytes": 5280,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/source-inventory.csv",
+          "role": "historical-source-or-result",
+          "sha256": "1043ba585bf98501084cb87d00b04f06f0c0ba77d876012ea06abad99624c0be"
+        },
+        {
+          "bytes": 10913,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/vintages/2026-10-05/assessment-summary.json",
+          "role": "historical-source-or-result",
+          "sha256": "c5118a9046d10babfeab755e4f3dfbc09d9f5a35269a006820d3b27082c1a467"
+        },
+        {
+          "bytes": 1448,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/vintages/2026-10-05/province-completeness.csv",
+          "role": "historical-source-or-result",
+          "sha256": "7a46977bafc709cab611f2b0b21fe890c3e8ffdcd067c494f7465424c1abba37"
+        },
+        {
+          "bytes": 1256,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/vintages/2026-10-05/reproduction.json",
+          "role": "historical-source-or-result",
+          "sha256": "ba6c949225db7378c3dda6184d79d6242417684e9861f36481df3aab8363babc"
+        },
+        {
+          "bytes": 167059,
+          "commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/vintages/2026-10-05/scoped-location-assessments.csv",
+          "role": "historical-source-or-result",
+          "sha256": "91d12e56fa600e4cbeebdc7d12c82f131aded59a8a38a3d87eb8ed8f64429420"
+        },
+        {
+          "bytes": 11393,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/macro-loose-ends-v5-additions.json",
+          "role": "issue-pinned-input",
+          "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1"
+        },
+        {
+          "bytes": 8539839,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-0.json",
+          "role": "issue-pinned-input",
+          "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3"
+        },
+        {
+          "bytes": 8060108,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-1.json",
+          "role": "issue-pinned-input",
+          "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7"
+        },
+        {
+          "bytes": 5144571,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-10.json",
+          "role": "issue-pinned-input",
+          "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+        },
+        {
+          "bytes": 5131824,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-11.json",
+          "role": "issue-pinned-input",
+          "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f"
+        },
+        {
+          "bytes": 4489493,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-12.json",
+          "role": "issue-pinned-input",
+          "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7"
+        },
+        {
+          "bytes": 5709487,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-13.json",
+          "role": "issue-pinned-input",
+          "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1"
+        },
+        {
+          "bytes": 4355198,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-14.json",
+          "role": "issue-pinned-input",
+          "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0"
+        },
+        {
+          "bytes": 5180426,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-15.json",
+          "role": "issue-pinned-input",
+          "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+        },
+        {
+          "bytes": 5213846,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-16.json",
+          "role": "issue-pinned-input",
+          "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797"
+        },
+        {
+          "bytes": 4945828,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-17.json",
+          "role": "issue-pinned-input",
+          "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db"
+        },
+        {
+          "bytes": 4909063,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-18.json",
+          "role": "issue-pinned-input",
+          "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+        },
+        {
+          "bytes": 4583022,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-19.json",
+          "role": "issue-pinned-input",
+          "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+        },
+        {
+          "bytes": 6259307,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-2.json",
+          "role": "issue-pinned-input",
+          "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+        },
+        {
+          "bytes": 6570767,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-20.json",
+          "role": "issue-pinned-input",
+          "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f"
+        },
+        {
+          "bytes": 6737781,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-21.json",
+          "role": "issue-pinned-input",
+          "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7"
+        },
+        {
+          "bytes": 4746385,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-22.json",
+          "role": "issue-pinned-input",
+          "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+        },
+        {
+          "bytes": 4962410,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-23.json",
+          "role": "issue-pinned-input",
+          "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2"
+        },
+        {
+          "bytes": 4816899,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-24.json",
+          "role": "issue-pinned-input",
+          "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c"
+        },
+        {
+          "bytes": 4525239,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-25.json",
+          "role": "issue-pinned-input",
+          "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+        },
+        {
+          "bytes": 4608983,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-26.json",
+          "role": "issue-pinned-input",
+          "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+        },
+        {
+          "bytes": 4863162,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-27.json",
+          "role": "issue-pinned-input",
+          "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+        },
+        {
+          "bytes": 6613963,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-28.json",
+          "role": "issue-pinned-input",
+          "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+        },
+        {
+          "bytes": 12932167,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-29.json",
+          "role": "issue-pinned-input",
+          "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+        },
+        {
+          "bytes": 5153118,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-3.json",
+          "role": "issue-pinned-input",
+          "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617"
+        },
+        {
+          "bytes": 11979437,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-30.json",
+          "role": "issue-pinned-input",
+          "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a"
+        },
+        {
+          "bytes": 10086485,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-31.json",
+          "role": "issue-pinned-input",
+          "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e"
+        },
+        {
+          "bytes": 10211739,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-32.json",
+          "role": "issue-pinned-input",
+          "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64"
+        },
+        {
+          "bytes": 607984,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-33.json",
+          "role": "issue-pinned-input",
+          "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe"
+        },
+        {
+          "bytes": 4835479,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-4.json",
+          "role": "issue-pinned-input",
+          "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c"
+        },
+        {
+          "bytes": 5226173,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-5.json",
+          "role": "issue-pinned-input",
+          "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc"
+        },
+        {
+          "bytes": 4607953,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-6.json",
+          "role": "issue-pinned-input",
+          "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a"
+        },
+        {
+          "bytes": 4257402,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-7.json",
+          "role": "issue-pinned-input",
+          "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387"
+        },
+        {
+          "bytes": 5097739,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-8.json",
+          "role": "issue-pinned-input",
+          "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+        },
+        {
+          "bytes": 5729632,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/part-9.json",
+          "role": "issue-pinned-input",
+          "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6"
+        },
+        {
+          "bytes": 1573576,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/geography/source-restoration-additions.json",
+          "role": "issue-pinned-input",
+          "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9"
+        },
+        {
+          "bytes": 10164089,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/hierarchy.json",
+          "role": "issue-pinned-input",
+          "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+        },
+        {
+          "bytes": 2404397,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/macro-foundation/current-membership-inventory.json.gz",
+          "role": "issue-pinned-input",
+          "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab"
+        },
+        {
+          "bytes": 71286,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/macro-foundation/regional-handoffs.json.gz",
+          "role": "issue-pinned-input",
+          "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a"
+        },
+        {
+          "bytes": 87964,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence-quality.json",
+          "role": "issue-pinned-input",
+          "sha256": "1c80a1d11624ac62660ef8694aa93a23fc161327a78178d8b5e10806d03b2072"
+        },
+        {
+          "bytes": 5898,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/reproduce.py",
+          "role": "issue-pinned-input",
+          "sha256": "7d218ec616982692c604ff6d30740db36d443a206aaf99dd950141839eab9602"
+        },
+        {
+          "bytes": 31689,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/source/issue-1194-api-snapshot.json",
+          "role": "issue-pinned-input",
+          "sha256": "5863aa5a0f5845dbb9939a8fb841ceeeff6d1c87bc3bdee9f6e6936313389439"
+        },
+        {
+          "bytes": 20194,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/source/issue-evidence-scope.json",
+          "role": "issue-pinned-input",
+          "sha256": "0f082390fe2f9c7bd3e627489b4f5160616d9b85e4cc15503ed1521c050e3cb8"
+        },
+        {
+          "bytes": 20788018,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-c64d17e99f61d668/source/geoboundaries-9469f09/HRV/ADM2/geoBoundaries-HRV-ADM2.geojson",
+          "role": "issue-pinned-input",
+          "sha256": "68a317129a0c295fd8baf7acc0f31ffefdf65ff2f1f62f8ed90a765cc57cf01e"
+        },
+        {
+          "bytes": 10359,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/SOURCES.md",
+          "role": "issue-pinned-input",
+          "sha256": "ac03ddb6e690ac7475a85c298ea4da0ae35b9770d310cf60fb5f6e10ecad78fb"
+        },
+        {
+          "bytes": 19967,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/build_assessment.py",
+          "role": "issue-pinned-input",
+          "sha256": "f920c23477f5c98a7adc454ac58673ba24a75d64ee8828b7dc93a8a4b306920b"
+        },
+        {
+          "bytes": 1794,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/extract_dzs_roster.py",
+          "role": "issue-pinned-input",
+          "sha256": "6c8af159a6685d712062c10ca873905332aba1ded0594502efe8cfd138cc5965"
+        },
+        {
+          "bytes": 3432,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/findings/engineering-handoff.md",
+          "role": "issue-pinned-input",
+          "sha256": "6f303e1476676cd721fffdf61ecf4b015d7a71c9697c43ca1dd7f0113bed48a4"
+        },
+        {
+          "bytes": 3989,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/findings/review-coverage.md",
+          "role": "issue-pinned-input",
+          "sha256": "66e536ed9b6bda83c77d9921f44989c59f58b91e1f79bf4395106dd0167699ee"
+        },
+        {
+          "bytes": 13943,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/scope.json",
+          "role": "issue-pinned-input",
+          "sha256": "ba8a10ae3b8a67410bba8b687e256c44d01828c199b2d30961a678e4f5c3a635"
+        },
+        {
+          "bytes": 2162,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dgu-inspire-au-atom-en.xml",
+          "role": "issue-pinned-input",
+          "sha256": "625fab1c27ca853ff24ecbcf41ae768ec422e593f82e1bf77ca85b21a3990178"
+        },
+        {
+          "bytes": 2149,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dgu-inspire-au-atom.xml",
+          "role": "issue-pinned-input",
+          "sha256": "1231571f5a59464dbccda7eafaed3099131d899b4ebf142fde55a43a852bdff7"
+        },
+        {
+          "bytes": 35680,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-detail-extract.csv",
+          "role": "issue-pinned-input",
+          "sha256": "225021e29f4ec2eeeffda3801031f4c0587241e91eed984394c9d2d56b09785c"
+        },
+        {
+          "bytes": 63196,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+          "role": "issue-pinned-input",
+          "sha256": "99feecc93627db02509aee7d625b391c33a69f201f377464ac15c2fd7c16f20f"
+        },
+        {
+          "bytes": 4316,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/geoBoundaries-CITATION-AND-USE-content.txt",
+          "role": "issue-pinned-input",
+          "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+        },
+        {
+          "bytes": 129,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/geoBoundaries-CITATION-AND-USE.txt",
+          "role": "issue-pinned-input",
+          "sha256": "1036efd533332c7eed31d4b26c176a559f9742ef849cffd4488b5cd75fa5dbbb"
+        },
+        {
+          "bytes": 985,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/geoBoundaries-HRV-ADM2-metaData-content.txt",
+          "role": "issue-pinned-input",
+          "sha256": "e2b5d837084f3a2360a16b51e198d35799903c4b99687dd547f1b73a11847790"
+        },
+        {
+          "bytes": 128,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/geoBoundaries-HRV-ADM2-metaData.txt",
+          "role": "issue-pinned-input",
+          "sha256": "545991f9a147b33b2ac77cef62b95179576d66296f0c35b0e2fda3c915cf74c6"
+        },
+        {
+          "bytes": 5495,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/geoboundaries-hrv-adm2-response-headers.txt",
+          "role": "issue-pinned-input",
+          "sha256": "9b7a7974a4a912a1e1a24be3a3b8c8ec7a4e0cfddddf4ebc7865f2417953e3b8"
+        },
+        {
+          "bytes": 24044,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/issue-419-api-snapshot.json",
+          "role": "issue-pinned-input",
+          "sha256": "fad09b6e1744ef65fa88ca0d402f4cd591fded1c5c5a1de4f84fada6750f7403"
+        },
+        {
+          "bytes": 5280,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/source/source-inventory.csv",
+          "role": "issue-pinned-input",
+          "sha256": "1043ba585bf98501084cb87d00b04f06f0c0ba77d876012ea06abad99624c0be"
+        },
+        {
+          "bytes": 10913,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/vintages/2026-10-05/assessment-summary.json",
+          "role": "issue-pinned-input",
+          "sha256": "c5118a9046d10babfeab755e4f3dfbc09d9f5a35269a006820d3b27082c1a467"
+        },
+        {
+          "bytes": 1448,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/vintages/2026-10-05/province-completeness.csv",
+          "role": "issue-pinned-input",
+          "sha256": "7a46977bafc709cab611f2b0b21fe890c3e8ffdcd067c494f7465424c1abba37"
+        },
+        {
+          "bytes": 1256,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/vintages/2026-10-05/reproduction.json",
+          "role": "issue-pinned-input",
+          "sha256": "ba6c949225db7378c3dda6184d79d6242417684e9861f36481df3aab8363babc"
+        },
+        {
+          "bytes": 167059,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/regional-review/regional-review-ce7798317652c0c2/vintages/2026-10-05/scoped-location-assessments.csv",
+          "role": "issue-pinned-input",
+          "sha256": "91d12e56fa600e4cbeebdc7d12c82f131aded59a8a38a3d87eb8ed8f64429420"
+        },
+        {
+          "bytes": 944,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "data/world-index.json",
+          "role": "issue-pinned-input",
+          "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+        },
+        {
+          "bytes": 7090,
+          "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+          "path": "scripts/evidence/immutable.py",
+          "role": "issue-pinned-input",
+          "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+        }
+      ]
+    }
+  ],
+  "prior_metric_inventory": {
+    "evaluation_vintage": "retained #1199/#1209 result values; baseline, not a new geographic finding",
+    "metric_count": 232,
+    "rendered_table_rows": 1160
+  },
+  "rendered_table_ledger": {
+    "bytes": 333083,
+    "path": "data/regional-review/croatia-batch4-run-provenance-1226-erratum/evidence/validation/verified-20261008-r4/rendered-table-ledger.json",
+    "sha256": "7d05eb7c869bced294ab0efdd98845d5b4615343270e41808c4da2afd76f744b"
+  },
+  "run_id": "verified-20261008-r4",
+  "runner_head": "492bcacfe1d82379cccf22b6a1f868f9f756b71c",
+  "snapshot_mutation_control": {
+    "fixture_bytes": 30923,
+    "fixture_sha256": "d5367f44571a5f0775b17507b98155522e39b63e9cb392fe1bf4aa6c47428df0",
+    "id": "single-captured-snapshot-authentication",
+    "outcome": "passed",
+    "output_created": false,
+    "read_count": 1,
+    "rejection": "captured issue #1209 API snapshot hash mismatch"
+  },
+  "subject_scope_mutation_controls": [
+    {
+      "fixture_sha256": "8c699616e613eb82d4eb05a3d1f4482981f2907a9134c73e40b1b47a52a19dba",
+      "id": "duplicate-subject",
+      "outcome": "passed",
+      "rejection": "generated output contains duplicate issue subjects"
+    },
+    {
+      "fixture_sha256": "685fdc6cb615f2d132a42694aaaa2a3a95bbde93f0429fb13aa3859c6797c8c8",
+      "id": "missing-subject",
+      "outcome": "passed",
+      "rejection": "generated output has a missing or extra issue subject"
+    },
+    {
+      "fixture_sha256": "928ec58753406022c8a7ee8db7c9a3d648d5f1bec3bea294f40544afbd307be7",
+      "id": "fabricated-output-subject",
+      "outcome": "passed",
+      "rejection": "generated output contains a missing or fabricated issue subject"
+    }
+  ],
+  "version": 1
+}

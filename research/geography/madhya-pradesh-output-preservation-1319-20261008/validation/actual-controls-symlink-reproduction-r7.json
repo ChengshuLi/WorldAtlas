@@ -1,0 +1,217 @@
+{
+  "version": 1,
+  "method": "Unchanged archived validate_controls.py and integrity_guards.py copied byte-for-byte with the complete retained control input tree into a private issue-owned mirror. No source, predicate, or subprocess was mocked.",
+  "evaluation_commit": "cbb829672d18801e4310c30896a7ddb13a79b451",
+  "input_tree_relative_to_repo": "data/regional-review/regional-review-0968ad79c26518d2",
+  "input_file_count": 34,
+  "input_files": [
+    {
+      "path": "README.md",
+      "bytes": 8374,
+      "sha256": "21c9b42bb9e4b689350dee87cfca857d10c9b7c2a10d7bda46e68484194f874f"
+    },
+    {
+      "path": "assessments.json",
+      "bytes": 374015,
+      "sha256": "9c5a0cbc869918466c5162aead971a5ccedd72fe42cba007c2660bf120da21ad"
+    },
+    {
+      "path": "claim-receipt-1308.json",
+      "bytes": 920,
+      "sha256": "8b637f9766c197279d33e63badbbca0fff7634b56335f26e3efa0eb9df938553"
+    },
+    {
+      "path": "issue-scope.json",
+      "bytes": 34448,
+      "sha256": "5c44c27f9660023628042db7f45edc5e68d72097d54290c42a0632c63f4563ef"
+    },
+    {
+      "path": "reproduce.py",
+      "bytes": 15126,
+      "sha256": "df3d42670fe70adc40f8578ef4ee84fb5b64a0769c589c69301bbb2f7fd92097"
+    },
+    {
+      "path": "sources/current-admin-rosters.json",
+      "bytes": 19133,
+      "sha256": "eba926c4d14c12649f4dd95dcb505b8644d63c7bbee4beed73e9fdc693aacf7e"
+    },
+    {
+      "path": "sources/sibling-scope-input.json",
+      "bytes": 84318,
+      "sha256": "58a8fcb6246b8ed54ea4f3bddfde1c1f758de2b9d6cd234e154c12743f4783a1"
+    },
+    {
+      "path": "sources/source-inventory.json",
+      "bytes": 25151,
+      "sha256": "65e5a086e59c2db619bb3eac3a6248fc439225e2448c222bba6516ae0927904b"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/README.md",
+      "bytes": 3966,
+      "sha256": "141cfc0f1d0b2a113e8ef3d0ca29f39ccde1d25a0173b5628de818b6401a9995"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/controls/negative-control.json",
+      "bytes": 322,
+      "sha256": "5f9e6097e270d49774bf2afaa1ab6954411f930a5373cee268d676b1e579ee4b"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/controls/positive-control.json",
+      "bytes": 269,
+      "sha256": "aef71110b57d3a4a6dc28034f4e601c893ea06b48952233320b0645b7c7911c5"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/controls/reproducibility.json",
+      "bytes": 552,
+      "sha256": "ec369ea3e1b8c8615bc02b11b95b0475761a3ba77411efc94835ec1c86dfb650"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/controls/run-replay-check-2026-10-07/negative-control.json",
+      "bytes": 322,
+      "sha256": "5f9e6097e270d49774bf2afaa1ab6954411f930a5373cee268d676b1e579ee4b"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/controls/run-replay-check-2026-10-07/positive-control.json",
+      "bytes": 269,
+      "sha256": "aef71110b57d3a4a6dc28034f4e601c893ea06b48952233320b0645b7c7911c5"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/controls/run-replay-check-2026-10-07/reproducibility.json",
+      "bytes": 552,
+      "sha256": "ec369ea3e1b8c8615bc02b11b95b0475761a3ba77411efc94835ec1c86dfb650"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/controls/verified-run-2/negative-control.json",
+      "bytes": 322,
+      "sha256": "5f9e6097e270d49774bf2afaa1ab6954411f930a5373cee268d676b1e579ee4b"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/controls/verified-run-2/positive-control.json",
+      "bytes": 269,
+      "sha256": "aef71110b57d3a4a6dc28034f4e601c893ea06b48952233320b0645b7c7911c5"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/controls/verified-run-2/reproducibility.json",
+      "bytes": 552,
+      "sha256": "ec369ea3e1b8c8615bc02b11b95b0475761a3ba77411efc94835ec1c86dfb650"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/correction-ledger-replay-check-2026-10-07.json",
+      "bytes": 4574,
+      "sha256": "78f81f2f16bed9e7c82c613920e333487ec5fe54ce1f96497317bc89d5e3db84"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/correction-ledger-v2.json",
+      "bytes": 4574,
+      "sha256": "78f81f2f16bed9e7c82c613920e333487ec5fe54ce1f96497317bc89d5e3db84"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/correction-ledger.json",
+      "bytes": 4574,
+      "sha256": "78f81f2f16bed9e7c82c613920e333487ec5fe54ce1f96497317bc89d5e3db84"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/erratum-summary-replay-check-2026-10-07.json",
+      "bytes": 334,
+      "sha256": "3c87e6d7e63150485bc98029d1a15ee37ec0d2aad95679deeffaa3333f565da6"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/erratum-summary-v2.json",
+      "bytes": 334,
+      "sha256": "3c87e6d7e63150485bc98029d1a15ee37ec0d2aad95679deeffaa3333f565da6"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/erratum-summary.json",
+      "bytes": 334,
+      "sha256": "3c87e6d7e63150485bc98029d1a15ee37ec0d2aad95679deeffaa3333f565da6"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/evaluation-inputs.json",
+      "bytes": 3401,
+      "sha256": "e2f9c442883ea10768dd8ae4946061c9681cb3b9e15e4c1ff442f80c04e3a098"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/evidence-quality.json",
+      "bytes": 56243,
+      "sha256": "b9f3367eabbbec250412e466af14bfc572af64985fc114d04c4ccef96e01c99f"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/integrity_guards.py",
+      "bytes": 852,
+      "sha256": "36358f235c6fa28e636217a3f0376f0fbca8729462f8c75d0700b4fa1784c5ef"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/issue-1308-contract.json",
+      "bytes": 18273,
+      "sha256": "31a0d734fabd7a917fc72f26499bda3c77a69058a77e6bd3b7a1515e8031891c"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/methods/ellipsoidal_area.py",
+      "bytes": 1953,
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/methods/geometry.py",
+      "bytes": 5264,
+      "sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/reproduce_integrity_erratum.py",
+      "bytes": 16427,
+      "sha256": "a257f09860ca4db277cbc155e78c937a5a59953f9f3213d9e4c56d868e59e24f"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/runs/2026-10-07/run-1/assessments.json.gz",
+      "bytes": 26667,
+      "sha256": "0a268b15caf1878f7dde4c3478cc1c34ec5a4e7aee76dd173fa2184c8ea63be1"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/runs/2026-10-07/run-2/assessments.json.gz",
+      "bytes": 26667,
+      "sha256": "0a268b15caf1878f7dde4c3478cc1c34ec5a4e7aee76dd173fa2184c8ea63be1"
+    },
+    {
+      "path": "vintages/generator-integrity-erratum/validate_controls.py",
+      "bytes": 6130,
+      "sha256": "a547f321341b1a00382fa44c33c63935f7e7520066dc67948e385c1b3a322aae"
+    }
+  ],
+  "results": [
+    {
+      "case": "dangling-summary",
+      "exit_code": 0,
+      "stdout": "{\n  \"positive\": \"passed\",\n  \"negative\": \"passed\",\n  \"reproducibility\": \"passed\",\n  \"field_updates\": 16,\n  \"original_sha256\": \"9c5a0cbc869918466c5162aead971a5ccedd72fe42cba007c2660bf120da21ad\"\n}\n",
+      "stderr": "",
+      "entrypoint_sha256": "a547f321341b1a00382fa44c33c63935f7e7520066dc67948e385c1b3a322aae",
+      "guard_sha256": "36358f235c6fa28e636217a3f0376f0fbca8729462f8c75d0700b4fa1784c5ef",
+      "link_was_dangling_before": true,
+      "link_still_symlink_after_write": true,
+      "target_created": true,
+      "target_sha256": "3c87e6d7e63150485bc98029d1a15ee37ec0d2aad95679deeffaa3333f565da6",
+      "target_bytes": 334
+    },
+    {
+      "case": "dangling-ledger",
+      "exit_code": 0,
+      "stdout": "{\n  \"positive\": \"passed\",\n  \"negative\": \"passed\",\n  \"reproducibility\": \"passed\",\n  \"field_updates\": 16,\n  \"original_sha256\": \"9c5a0cbc869918466c5162aead971a5ccedd72fe42cba007c2660bf120da21ad\"\n}\n",
+      "stderr": "",
+      "entrypoint_sha256": "a547f321341b1a00382fa44c33c63935f7e7520066dc67948e385c1b3a322aae",
+      "guard_sha256": "36358f235c6fa28e636217a3f0376f0fbca8729462f8c75d0700b4fa1784c5ef",
+      "link_was_dangling_before": true,
+      "link_still_symlink_after_write": true,
+      "target_created": true,
+      "target_sha256": "78f81f2f16bed9e7c82c613920e333487ec5fe54ce1f96497317bc89d5e3db84",
+      "target_bytes": 4574
+    },
+    {
+      "case": "ordinary-existing-summary",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/research/geography/madhya-pradesh-output-preservation-1319-20261008/negative-fixtures/actual-controls-r7/repo/data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/validate_controls.py\", line 20, in <module>\n    require_new_output(destination)\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/research/geography/madhya-pradesh-output-preservation-1319-20261008/negative-fixtures/actual-controls-r7/repo/data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/integrity_guards.py\", line 19, in require_new_output\n    raise FileExistsError(f'Immutable erratum output already exists: {path}')\nFileExistsError: Immutable erratum output already exists: /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/research/geography/madhya-pradesh-output-preservation-1319-20261008/negative-fixtures/actual-controls-r7/repo/data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/erratum-summary-actual-existing-sentinel-r7.json\n",
+      "entrypoint_sha256": "a547f321341b1a00382fa44c33c63935f7e7520066dc67948e385c1b3a322aae",
+      "sentinel_preserved": true,
+      "output_directory_absent": true
+    }
+  ],
+  "scope": "Output-path behavior only; no geographic or legal conclusion."
+}

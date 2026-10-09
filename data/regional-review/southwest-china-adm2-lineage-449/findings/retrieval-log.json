@@ -1,0 +1,476 @@
+{
+  "issue": 917,
+  "retrieval_date": "2026-10-09",
+  "timezone": "UTC",
+  "scope": "Original current administrative rosters and legally authoritative polygon evidence for the issue's exact 228 Chongqing, Guizhou and Sichuan county-level subjects; current boundary-source custodians and public-map suitability leads",
+  "result": "Historical lineage and transformation observations are reproducible. First-party current roster sources and a likely Chongqing boundary-data custodian are identified. This turn retrieved Chongqing standard-map catalog and current map-image originals with exact hashes, approval/date markers and an explicit non-demarcation limitation; no current roster crosswalk or legally authoritative polygon comparison was completed, and no map reuse license was established. A Guangyuan Municipal Civil Affairs Bureau listing and HTTP 302 now identify the exact Sichuan provincial year-end roster URL; following its HTTP Location timed out, and a separate HTTPS retry of the provincial path also timed out, so no table bytes or row comparison were obtained. An official 2025 Sichuan place-name mapping standard was located through the official search index; it identifies the approved standard-map, boundary-adjustment and demarcation materials needed for review, but the original PDF was not retrieved and it supplies no row-level geometry. A bounded location-range comparison for one Chongqing-parented subject found its 2017 source geometry extent is disjoint from the official indexed location extent of Sichuan Dazhu County but overlaps the indexed reported location extent of Chongqing Dazu District. This is a candidate source-name/identity discrepancy only; official source originals and Chinese identity code/name are not retained, so no correction is proposed.",
+  "direct_access_retry": {
+    "attempted_at": "2026-10-09 UTC",
+    "method": "curl via direct HTTPS; connect timeout 5 seconds; total timeout 15 seconds",
+    "results": [
+      {
+        "url": "https://mzj.cq.gov.cn/zwgk_218/zfxxgkml/tzgg/202601/t20260119_15332641.html",
+        "curl_exit": 28,
+        "http_status": "000",
+        "bytes_received": 0,
+        "source_sha256": null
+      },
+      {
+        "url": "https://mzt.guizhou.gov.cn/xwzx/tzgg/202601/t20260128_89347775.html",
+        "curl_exit": 28,
+        "http_status": "000",
+        "bytes_received": 0,
+        "source_sha256": null
+      },
+      {
+        "url": "https://mzt.sc.gov.cn/scmzt/mzxx/article_list_2.shtml",
+        "curl_exit": 28,
+        "http_status": "000",
+        "bytes_received": 0,
+        "source_sha256": null
+      }
+    ],
+    "interpretation": "Connection timeout before response; no roster or source bytes were retrieved or hashable."
+  },
+  "attempts": [
+    {
+      "source_id": "cq-2025-december-roster",
+      "publisher": "Chongqing Municipal Civil Affairs Bureau",
+      "title": "2025年12月重庆市行政区划及行政区划代码.xls",
+      "url": "https://mzj.cq.gov.cn/zwgk_218/zfxxgkml/tzgg/202601/t20260119_15332641.html",
+      "source_vintage": "2025-12-31",
+      "access": "Search index identified the official page and linked workbook; direct page open and direct host retrieval timed out in this runtime.",
+      "original_bytes_retained": false,
+      "source_sha256": null,
+      "row_crosswalk_performed": false,
+      "terms": "Not retrieved; no redistribution or extraction permission is asserted. Preserve only a lawful original once its actual notice/license/terms are inspected.",
+      "restoration": "Open the official notice URL, download its linked 2025-12 .xls workbook, preserve the exact original bytes, record retrieval timestamp/HTTP URL/file SHA-256 and inspect any reuse terms before extracting rows.",
+      "limit": "Search snippets are not the workbook. No scoped identity, code, class, current parent, omission, geometry, or current boundary has been verified from this roster."
+    },
+    {
+      "source_id": "cq-2025-code-changes",
+      "publisher": "Chongqing Municipal Civil Affairs Bureau",
+      "title": "重庆市2025年行政区划代码变更信息公告",
+      "url": "https://mzj.cq.gov.cn/zwgk_218/zfxxgkml/tzgg/202512/t20251205_15215632.html",
+      "source_vintage": "2025; notice dated 2025-12-05",
+      "access": "Official search result exposed notice text, including a new code 500157 for Liangjiang New Area and the discontinuation of prior Jiangbei/Yubei county-level codes; original HTML was not retained.",
+      "original_bytes_retained": false,
+      "source_sha256": null,
+      "row_crosswalk_performed": false,
+      "terms": "Not retrieved; no redistribution or extract permission is asserted.",
+      "restoration": "Retrieve the official notice HTML at the URL, preserve its bytes/hash and confirm the unit's legal classification, effective date and relationship to affected county-level subjects from the authoritative year-end roster and approved boundary evidence.",
+      "limit": "This is a consequential candidate identity/parent-change lead only. No Chongqing Atlas geometry is identified as affected, and no territory transfer or boundary correction is inferred."
+    },
+    {
+      "source_id": "gz-2025-year-end-roster",
+      "publisher": "Guizhou Provincial Civil Affairs Department",
+      "title": "贵州省行政区划统计表（截止2025年12月31日）",
+      "url": "https://mzt.guizhou.gov.cn/xwzx/tzgg/202601/t20260128_89347775.html",
+      "source_vintage": "2025-12-31",
+      "access": "Official endpoint open and direct retrieval timed out. Search discovery found a third-party syndication snippet carrying an aggregate 88 county-level units; that mirror is not accepted as official original evidence.",
+      "original_bytes_retained": false,
+      "source_sha256": null,
+      "row_crosswalk_performed": false,
+      "terms": "Not retrieved; no redistribution or extraction permission is asserted.",
+      "restoration": "Retrieve the original notice and downloadable table from the official Guizhou Civil Affairs page; record exact original bytes/hash and reuse terms; crosswalk the 82 scoped features individually.",
+      "limit": "The aggregate count is an access lead, not a comparison result. No scoped row or boundary is verified."
+    },
+    {
+      "source_id": "sc-2025-year-end-roster",
+      "publisher": "Sichuan Provincial Civil Affairs Department",
+      "title": "四川省行政区划代码信息表（截至2025年12月31日）",
+      "url": "https://mzt.sc.gov.cn/scmzt/mzxx/article_list_2.shtml",
+      "source_vintage": "2025-12-31",
+      "access": "Official listing and a local-government public-information listing identify the exact title/date; official direct page and workbook bytes were not retrieved.",
+      "original_bytes_retained": false,
+      "source_sha256": null,
+      "row_crosswalk_performed": false,
+      "terms": "Not retrieved; no redistribution or extraction permission is asserted.",
+      "restoration": "Retrieve the titled roster from the provincial department listing, preserve its original bytes and reuse terms, and crosswalk the 113 scoped Sichuan features individually.",
+      "limit": "A separate provincial records-office summary reported an aggregate 183 units and no county-level change through 2025-09, but it is not the exact year-end roster or polygon evidence. No scoped row or boundary is verified."
+    },
+    {
+      "source_id": "mca-national-code-database",
+      "publisher": "Ministry of Civil Affairs of the People's Republic of China",
+      "title": "National Geographical Names Information Database: administrative division code versions",
+      "url": "https://dmfw.mca.gov.cn/XzqhVersionPublish.html",
+      "source_vintage": "2025-12-31 roster expected under publication rule; current downloadable version not retrieved",
+      "access": "Parent #449 log records DNS resolution failure on 2026-10-05. Not accessible in this research runtime during this pass.",
+      "original_bytes_retained": false,
+      "source_sha256": null,
+      "row_crosswalk_performed": false,
+      "terms": "Not retrieved; do not assume a reuse license for downloaded content.",
+      "restoration": "Retry the official version-publication portal from an accessible environment; retain the exact vintage/page/file and its terms; compare provincial roster rows only after matching codes and status definitions.",
+      "limit": "National code authority can establish administrative identity/status but not polygon geometry or boundary completeness."
+    },
+    {
+      "source_id": "mca-order-79",
+      "publisher": "Ministry of Justice PRC hosting Ministry of Civil Affairs Order 79",
+      "title": "Administrative Division Code Management Measures (民政部令第79号)",
+      "url": "https://www.moj.gov.cn/pub/sfbgw/flfggz/flfggzbmgz/202512/t20251204_528920.html",
+      "source_vintage": "Promulgated 2025-06-30; in force 2025-09-01",
+      "access": "Official source and an official Chongqing-hosted text indexed. Original HTML was not retained; the parent #449 source inventory also records this as a legal-authority lead only.",
+      "original_bytes_retained": false,
+      "source_sha256": null,
+      "row_crosswalk_performed": false,
+      "terms": "Official legal text; no source data extract or polygon reuse right is implicated.",
+      "restoration": "Retrieve the original official text before quoting verbatim. Articles 5 and 14-16 distinguish code authority and annual roster publication from boundary proof.",
+      "limit": "Rules and schedule do not establish any of the 228 current names, codes, classes, parents or geometry."
+    },
+    {
+      "source_id": "prc-map-regulations",
+      "publisher": "State Council of the People's Republic of China",
+      "title": "Map Management Regulations (地图管理条例)",
+      "url": "https://www.gov.cn/zhengce/zhengceku/2015-12/14/content_10403.htm",
+      "source_vintage": "2015 regulation; current status not rechecked from a retained original in this packet",
+      "access": "Official government search result exposed Articles 11-14: county-and-higher administrative limits on maps must follow approved standard boundary depictions; public-interest maps are to be provided by mapping authorities. Original bytes were not retained.",
+      "original_bytes_retained": false,
+      "source_sha256": null,
+      "row_crosswalk_performed": false,
+      "terms": "Official legal text; no polygon bytes retained.",
+      "restoration": "Retrieve current official text and approved standard boundary-map version; confirm publication vintage, scale, map review number and permissible reuse.",
+      "limit": "A generalized approved map can indicate display boundaries but is not automatically a detailed GIS polygon suitable for county-by-county vertex, island or boundary-completeness tests."
+    },
+    {
+      "source_id": "ngcc-public-1-250k-catalog",
+      "publisher": "National Geomatics Center of China, Ministry of Natural Resources",
+      "title": "National 1:250,000 public-edition topographic vector data catalog",
+      "url": "https://www.webmap.cn/main.do?method=index1",
+      "source_vintage": "catalog states data currency 2012",
+      "access": "Official catalog search result describes county-level polygons and administrative boundaries within a public-edition national 1:250,000 data product; direct data files, individual sheets and terms were not retrieved.",
+      "original_bytes_retained": false,
+      "source_sha256": null,
+      "row_crosswalk_performed": false,
+      "terms": "Catalog describes public-edition downloads but file-level terms were not inspected; do not redistribute pending direct verification.",
+      "restoration": "Retrieve only sheets intersecting the 228 subjects through the official catalog; preserve original sheet files/hash, publication and currency dates, map approval/processing metadata and terms.",
+      "limit": "The catalog's stated 2012 currency predates this review by fourteen years and the 2025 Chongqing code-change signal; it can at most be a dated historical comparison, not current-boundary or 2025 completeness proof."
+    },
+    {
+      "source_id": "tianditu-standard-map-service",
+      "publisher": "National Geomatics Center / National Geospatial Information Public Service Platform",
+      "title": "Standard map service",
+      "url": "https://bzdt.tianditu.gov.cn/",
+      "source_vintage": "Current portal observed by indexed source discovery 2026-10-09; individual map version not retrieved",
+      "access": "Official portal description says standard maps can be browsed/downloaded as JPG/EPS and used directly with approval number; no Southwest-China county map original retained.",
+      "original_bytes_retained": false,
+      "source_sha256": null,
+      "row_crosswalk_performed": false,
+      "terms": "Portal use instructions and each map's approval/attribution terms must be inspected before use.",
+      "restoration": "Locate province/county map products for all three provinces, save approved original artifacts and approval identifiers; establish whether map scale/generalization is adequate before any comparison.",
+      "limit": "Raster/EPS public map display is not assumed to be polygon GIS or a complete high-resolution boundary reference."
+    },
+    {
+      "source_id": "dazhu-county-reported-location-extent",
+      "publisher": "Dazhu County People's Government",
+      "title": "Official government PDF; indexed excerpt from page 2 (document title and publication date not exposed by the search result)",
+      "url": "https://www.dazhu.gov.cn/uploadfile/1/Attachment/b28c3b3063.pdf",
+      "source_vintage": "Not established from the indexed result; official reported extent was retrieved 2026-10-09 UTC.",
+      "access": "Official-domain search result states Dazhu County is in eastern Sichuan, southern Dazhou, with reported longitude 106°59′–107°32′ E and latitude 30°20′–31°00′ N. The official PDF original was not retained.",
+      "original_bytes_retained": false,
+      "source_sha256": null,
+      "row_crosswalk_performed": false,
+      "terms": "Not inspected. No redistribution, extraction or boundary-use permission is asserted.",
+      "restoration": "Retrieve the exact PDF from the official Dazhu County Government URL, record its original bytes, HTTP/retrieval timestamp, SHA-256, document title/date and reuse terms. Verify the quoted location range and its intended reference object in the source document.",
+      "limit": "Indexed location text is not the source PDF and supplies no geospatial boundary. It supports a disjoint-location check only; it does not establish the identity or class of the geoBoundaries subject."
+    },
+    {
+      "source_id": "dazu-district-reported-location-extent",
+      "publisher": "Dazu District People's Government",
+      "title": "Official location-description page, published 2022-11-30",
+      "url": "https://www.dazu.gov.cn/qzfbm/qjjxxw/zwxx_53317/gzdt_53319/202211/t20221130_11345280.html",
+      "source_vintage": "Page dated 2022-11-30; location extent as published there; current status/validity not independently established.",
+      "access": "Official-domain indexed page text gives Dazu District as 105°28′–106°02′ E and 29°23′–29°52′ N. The official page original was not retained.",
+      "original_bytes_retained": false,
+      "source_sha256": null,
+      "row_crosswalk_performed": false,
+      "terms": "Not inspected. No redistribution, extraction or boundary-use permission is asserted.",
+      "restoration": "Retrieve the exact official page from the Dazu District Government URL; record original HTML, HTTP/retrieval timestamp, SHA-256, publication/update date and reuse terms. Confirm the range describes the current administrative territory and not an approximate planning extent.",
+      "limit": "Indexed text supplies a reported location rectangle, not a boundary polygon. Its overlap with the feature extent cannot prove name, identity, current parent or legal geometry."
+    }
+  ],
+  "environment_limits": [
+    "Direct official Chongqing, Guizhou and Sichuan endpoint attempts timed out in this runtime; no original workbook/roster bytes or file hashes are claimed.",
+    "Search-indexed excerpts and third-party mirrors were not substituted for official source files or row-level evidence.",
+    "No license was inferred for official roster or map data; no extracts or geometry bytes were redistributed.",
+    "No current official county-boundary polygon source, versioned legal boundary map, or approved map original was available for per-feature completeness, disconnected-piece, island, coastline or neighbor-edge comparison.",
+    "Official Chongqing standard-map/custodian pages and current province roster pages were located, but direct HTTPS requests returned HTTP 000 with zero bytes. Indexed page text is retained only as a locator/suitability lead; no current boundary original, approval/version artifact or license was obtained.",
+    "Wayback CDX queries for the three official roster notices also timed out before response; archive snapshot availability remains unknown and no archived copies were used."
+  ],
+  "followup_direct_attempt": {
+    "attempted_at": "2026-10-09 UTC",
+    "method": "curl via direct HTTPS; connect timeout 5 seconds; total timeout 12 seconds",
+    "results": [
+      {
+        "url": "https://mzj.cq.gov.cn/zwgk_218/zfxxgkml/tzgg/202601/t20260119_15332641.html",
+        "curl_exit": 28,
+        "http_status": "000",
+        "bytes_received": 0,
+        "source_sha256": null
+      },
+      {
+        "url": "https://mzt.guizhou.gov.cn/xwzx/tzgg/202601/t20260128_89347775.html",
+        "curl_exit": 28,
+        "http_status": "000",
+        "bytes_received": 0,
+        "source_sha256": null
+      },
+      {
+        "url": "https://mzt.sc.gov.cn/scmzt/quhuaxinxi/2026/1/28/fd96cce824a44fdaa434c341eb096cde.shtml",
+        "curl_exit": 28,
+        "http_status": "000",
+        "bytes_received": 0,
+        "source_sha256": null
+      },
+      {
+        "url": "https://ghzrzyj.cq.gov.cn/bsfw_186/",
+        "curl_exit": 28,
+        "http_status": "000",
+        "bytes_received": 0,
+        "source_sha256": null
+      },
+      {
+        "url": "https://mzj.cq.gov.cn/zwgk_218/jyta/202606/t20260602_15723243.html",
+        "curl_exit": 28,
+        "http_status": "000",
+        "bytes_received": 0,
+        "source_sha256": null
+      }
+    ],
+    "interpretation": "All exact first-party roster/map-custodian endpoint retries again timed out before response. No workbook, map or boundary-data bytes were retained or hashed."
+  },
+  "search_discoveries": [
+    {
+      "source_id": "cq-updated-standard-maps-2026",
+      "publisher": "Chongqing Planning and Natural Resources Bureau",
+      "title": "市规划自然资源局高效响应行政区划调整 新版地图同步“上新”",
+      "url": "https://ghzrzyj.cq.gov.cn/zwxx_186/bmdt/202602/t20260212_15440345_wap.html",
+      "observed_at": "2026-10-09 UTC",
+      "source_vintage": "Maps updated after the 2025 administrative adjustment; announcement dated 2026-02-12",
+      "access": "Official search index identifies 100+ related standard-map depictions as updated and identifies the official standard-map service module at https://ghzrzyj.cq.gov.cn/bsfw_186/. Direct page and module retrieval timed out.",
+      "original_bytes_retained": false,
+      "source_sha256": null,
+      "terms": "Individual map approval numbers, reuse terms and conditions not inspected; do not reuse/map digitize until originals and terms are read.",
+      "restoration": "Use the official service module to locate Chongqing, Liangjiang New Area and Beibei map originals; retain exact files, approval IDs, release/vintage, scale, resolution and terms. Determine whether any map is sufficiently detailed for a county-boundary comparison.",
+      "limit": "This is a locator for potentially current approved display maps, not evidence that the map set contains suitable subject-level polygons or that any Atlas geometry is correct."
+    },
+    {
+      "source_id": "cq-approved-boundary-data-custodian-2026",
+      "publisher": "Chongqing Municipal Civil Affairs Bureau; reply identifies Chongqing Planning and Natural Resources Bureau as recipient of shared results",
+      "title": "重庆市民政局关于市六届人大四次会议第0353号代表建议办理情况的答复函",
+      "url": "https://mzj.cq.gov.cn/zwgk_218/jyta/202606/t20260602_15723243.html",
+      "observed_at": "2026-10-09 UTC",
+      "source_vintage": "Reply dated 2026-06-02; references 2025 linkage mechanism for approved provincial/county boundary results",
+      "access": "Official search index reports that approved provincial- and county-level administrative boundary results were shared with the municipal Planning and Natural Resources Bureau. Original reply and boundary files could not be retrieved.",
+      "original_bytes_retained": false,
+      "source_sha256": null,
+      "terms": "No boundary data or permission retrieved. Access must follow the lawful custodial channel and applicable controls.",
+      "restoration": "Retrieve the official reply and ask the authorized data custodian, through the proper project/issue owner channel, whether a permitted, versioned boundary extract can be supplied for research; retain any returned source terms and metadata.",
+      "limit": "Identifies a possible custodian/handoff route only. It does not disclose coordinates, prove access rights, or verify any of the 33 Chongqing subjects."
+    },
+    {
+      "source_id": "cq-standard-map-service-2026-retrieved",
+      "publisher": "Chongqing Planning and Natural Resources Bureau; map sheets credit the bureau and Chongqing Civil Affairs Bureau",
+      "title": "重庆市标准地图服务 — 重庆市地图（行政区划） and 两江新区行政区划图",
+      "url": "https://yuditu.com/bzdt/",
+      "official_locator": "https://ghzrzyj.cq.gov.cn/zwxx_186/bmdt/202602/t20260212_15440345_wap.html",
+      "observed_at": "2026-10-09 UTC",
+      "source_vintage": "Retrieved map sheet print date 2026-01; map approval 渝S(2025)130号. Catalog data/qh.js labels map entries 2024年06月, which conflicts with the downloaded sheets' printed date and HTTP Last-Modified. Record both; sheet dates/approval marks take precedence for the image itself.",
+      "access": "Direct HTTPS returned the catalog and downloadable JPEG originals. The official 2026-02-12 bureau announcement names the service module as its download location. The map notes state 图内界线不作为划界依据 (map lines are not a basis for boundary demarcation). The municipal overview has a 75 km scale bar; the Liangjiang sheet has a 6 km scale bar. These are current approved display depictions, not a legal-boundary GIS dataset.",
+      "catalog": {
+        "url": "https://yuditu.com/bzdt/data/qh.js",
+        "retrieved_at": "2026-10-09 UTC",
+        "bytes": 26455,
+        "sha256": "411057c63d7a78bce13e7ef628f673e651991c5ac7f92aa4d5dd0391439be844",
+        "catalog_time_for_city_and_county_maps": "2024年06月"
+      },
+      "artifacts": [
+        {
+          "title": "重庆市地图（行政区划1）",
+          "url": "https://yuditu.com/bzdt/data/%E9%87%8D%E5%BA%86%E5%B8%82%E5%9C%B0%E5%9B%BE%28%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%921%29.jpg",
+          "bytes": 2107542,
+          "sha256": "2bb00c7f995b391554385bb64e79ff5038428aad50e2eb8e53abf19848775148",
+          "last_modified": "2026-01-26T09:36:22Z",
+          "visually_checked": true
+        },
+        {
+          "title": "重庆市地图（行政区划2）",
+          "url": "https://yuditu.com/bzdt/data/%E9%87%8D%E5%BA%86%E5%B8%82%E5%9C%B0%E5%9B%BE%28%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%922%29.jpg",
+          "bytes": 1319632,
+          "sha256": "7de5b1a2823046117bdcfeaa663b98b4a9ac830dca38e6239009ae3bd8b99e40",
+          "last_modified": "2026-01-26T09:36:22Z",
+          "visually_checked": true
+        },
+        {
+          "title": "重庆市地图（行政区划3）",
+          "url": "https://yuditu.com/bzdt/data/%E9%87%8D%E5%BA%86%E5%B8%82%E5%9C%B0%E5%9B%BE%28%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%923%29.jpg",
+          "bytes": 1485722,
+          "sha256": "7ae6a1395b4a97061424d7d040b901d6f6e4ff879f9317df39aff31c3790b7bc",
+          "last_modified": "2026-01-26T09:36:22Z",
+          "visually_checked": false
+        },
+        {
+          "title": "重庆市地图（行政区划4）",
+          "url": "https://yuditu.com/bzdt/data/%E9%87%8D%E5%BA%86%E5%B8%82%E5%9C%B0%E5%9B%BE%28%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%924%29.jpg",
+          "bytes": 856629,
+          "sha256": "faa3533a994d19188f65f1b71999635479be0eaaf5f721ea0d4a6cd0886b4c46",
+          "last_modified": "2026-01-26T09:36:22Z",
+          "visually_checked": false
+        },
+        {
+          "title": "重庆市地图（行政区划5）",
+          "url": "https://yuditu.com/bzdt/data/%E9%87%8D%E5%BA%86%E5%B8%82%E5%9C%B0%E5%9B%BE%28%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%925%29.jpg",
+          "bytes": 1310683,
+          "sha256": "a1671dd82ff05f2e58225e675cc6ef3d8b47a9863e1ab5b70d93f94d0da1adc3",
+          "last_modified": "2026-01-26T09:36:22Z",
+          "visually_checked": false
+        },
+        {
+          "title": "重庆市地图（行政区划6）",
+          "url": "https://yuditu.com/bzdt/data/%E9%87%8D%E5%BA%86%E5%B8%82%E5%9C%B0%E5%9B%BE%28%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%926%29.jpg",
+          "bytes": 779429,
+          "sha256": "35fc08c521cf01c5730dc4b0707bf8af2031f859034300684325ed9e3cc33139",
+          "last_modified": "2026-01-26T09:36:22Z",
+          "visually_checked": false
+        },
+        {
+          "title": "两江新区行政区划图",
+          "url": "https://yuditu.com/bzdt/data/%E4%B8%A4%E6%B1%9F%E6%96%B0%E5%8C%BA%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%92.jpg",
+          "bytes": 2275181,
+          "sha256": "937de9e12344427704d9376342e4105f95fc511ad121e98dedbcd28720a92a21",
+          "last_modified": "2026-06-18T10:01:58Z",
+          "visually_checked": true
+        },
+        {
+          "title": "大足区行政区划",
+          "url": "https://yuditu.com/bzdt/data/%E5%A4%A7%E8%B6%B3%E5%8C%BA%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%92.jpg",
+          "bytes": 1555186,
+          "sha256": "e647cc3840b64599bb77f440af4b82975e41346f267b07e42d67c25ce0d31bd6",
+          "last_modified": "2026-01-26T09:35:39Z",
+          "visually_checked": true
+        }
+      ],
+      "original_bytes_retained": false,
+      "source_sha256": null,
+      "terms": "The official 2026 announcement says the standard-map module offers the maps for download/use, but no per-map redistribution or adaptation license was found. Preserve exact URL/hash restoration instructions; do not check copyrighted JPEGs into this repository or digitize them without verifying applicable reuse conditions.",
+      "restoration": "Download each exact artifact URL above. Verify byte length and SHA-256, record response Last-Modified and local retrieval timestamp, inspect the approval code and printed vintage, and review reuse terms before retaining or adapting any image. For identity completeness obtain the 2025-12 roster; for legal geometry use a suitable authorized boundary-result source. The Liangjiang map is an explicit 2026 entity-level lead, not a crosswalk for the 33 historical Atlas shapes.",
+      "limit": "The overview and county images depict map cartography, not an ungeneralized polygon database. Their internal-line warning disclaims boundary-demarcation use, the map catalog vintage fields are stale/conflicting, and no per-Atlas-feature row crosswalk or exact geometry comparison was performed. They cannot settle islands, shared-edge topology, legal transfers, coverage/completeness, or the 2025 Liangjiang relationship.",
+      "license_review": "No express license permitting repository redistribution or digitization was found on retrieved pages. Public download/use and map approval are not treated as an open-data license.",
+      "finding": "A current first-party display-map artifact was directly retrieved and visually inspected, materially improving on the prior search-index-only lead. It carries approval 渝S(2025)130号 and a 2026-01 print date; Liangjiang is shown as a named unit with township/street divisions and neighboring county labels. The explicit map warning and scale/generalization prevent interpreting it as legal boundary evidence.",
+      "next_action": "Request or retrieve, through authorized channels, the approved current county-level boundary result shared with Chongqing Planning and Natural Resources Bureau; separately obtain the dated official roster and map-use terms. Do not infer a geometry correction from these display sheets."
+    },
+    {
+      "source_id": "gz-standard-map-2024-suitability",
+      "publisher": "Guizhou Provincial Department of Natural Resources",
+      "title": "上新！2024版贵州省标准地图正式发布",
+      "url": "https://zrzy.guizhou.gov.cn/wzgb/zwgk/zdlyxxgk/dlxxgl/chdlxxdt/202407/t20240710_85083701.html",
+      "observed_at": "2026-10-09 UTC",
+      "source_vintage": "2024 package; announcement 2024-07-10",
+      "access": "Official page text was read through the web index/open service: it describes ten 2024 standard maps, all 1:3,000,000 A4, mainly transport and natural-geography themes. Exact map files and terms were not retained or hashed.",
+      "original_bytes_retained": false,
+      "source_sha256": null,
+      "terms": "Announcement says public downloads are offered; each original map and approval/attribution terms still need inspection.",
+      "restoration": "Retrieve the ten map originals and metadata only if useful as provincial context; seek more detailed current approved county boundary evidence for subject-level geometry review.",
+      "limit": "The stated small-scale thematic package is not suitable evidence for county polygon completeness, small detached pieces, islands or shared-edge topology."
+    },
+    {
+      "source_id": "sc-boundary-depiction-and-demarcation-standard-2025",
+      "publisher": "Sichuan Provincial Civil Affairs Department",
+      "title": "四川省民政厅关于印发《四川省地名方案编制规范（试行）》的通知",
+      "document_number": "川民发〔2025〕5号",
+      "url": "https://mzt.sc.gov.cn/scmzt/qitawenjian2023/2025/2/6/a1cc4a2f741b4fb3a32c87fad2a69c26/files/%E5%85%B3%E4%BA%8E%E5%8D%B0%E5%8F%91%E3%80%8A%E5%9B%9B%E5%B7%9D%E7%9C%81%E5%9C%B0%E5%90%8D%E6%96%B9%E6%A1%88%E7%BC%96%E5%88%B6%E8%A7%84%E8%8C%83%EF%BC%88%E8%AF%95%E8%A1%8C%EF%BC%89%E3%80%8B%E7%9A%84%E9%80%9A%E7%9F%A5.pdf",
+      "observed_at": "2026-10-09 UTC",
+      "source_vintage": "Official standard notice/file dated 2025-02-06; trial standard",
+      "access": "Official search index exposed the clause requiring administrative boundary depictions in place-name plans to follow the latest approved standard depiction map, check against latest approved boundary-adjustment documents and latest demarcation results, and obtain Civil Affairs review of administrative-division information. The original PDF was not retrieved or hashed.",
+      "original_bytes_retained": false,
+      "source_sha256": null,
+      "terms": "No reuse or redistribution terms were inspected; this standard is cited as a process/source locator only.",
+      "restoration": "Retrieve the exact official PDF URL and hash the original bytes; verify the document status and complete clause. Request the applicable approved standard map, boundary-adjustment approvals and latest demarcation results from the authorized Sichuan Civil Affairs and surveying/mapping custodians, retaining provenance and reuse terms.",
+      "limit": "The standard describes evidence to use for mapping plans but contains no scoped subject geometry. It does not establish access rights, current polygon completeness, or correctness for any of the 113 Sichuan subjects."
+    }
+  ],
+  "archive_retry": {
+    "attempted_at": "2026-10-09 UTC",
+    "method": "Wayback CDX API over direct HTTPS; connect timeout 5 seconds; total timeout 15 seconds",
+    "results": [
+      {
+        "url": "https://web.archive.org/cdx/search/cdx?url=mzj.cq.gov.cn%2Fzwgk_218%2Fzfxxgkml%2Ftzgg%2F202601%2Ft20260119_15332641.html&output=json",
+        "curl_exit": 28,
+        "http_status": "000",
+        "bytes_received": 0,
+        "source_sha256": null
+      },
+      {
+        "url": "https://web.archive.org/cdx/search/cdx?url=mzt.guizhou.gov.cn%2Fxwzx%2Ftzgg%2F202601%2Ft20260128_89347775.html&output=json",
+        "curl_exit": 28,
+        "http_status": "000",
+        "bytes_received": 0,
+        "source_sha256": null
+      },
+      {
+        "url": "https://web.archive.org/cdx/search/cdx?url=mzt.sc.gov.cn%2Fscmzt%2Fquhuaxinxi%2F2026%2F1%2F28%2Ffd96cce824a44fdaa434c341eb096cde.shtml&output=json",
+        "curl_exit": 28,
+        "http_status": "000",
+        "bytes_received": 0,
+        "source_sha256": null
+      }
+    ],
+    "interpretation": "No CDX response was received, so snapshot availability is unknown. No archived capture was confirmed or used as evidence."
+  },
+  "retrieval_events": [
+    {
+      "observed_at": "2026-10-09T05:01:06Z",
+      "source_id": "sc-2025-roster-exact-notice-locator",
+      "method": "Direct retrieval of the municipal civil-affairs listing and linked notice. The linked notice returned a literal HTTP Location; following that redirect over HTTP timed out, and a separate HTTPS retry of the same target path also timed out.",
+      "listing": {
+        "publisher": "Guangyuan Municipal Civil Affairs Bureau",
+        "url": "https://mzj.cngy.gov.cn/New/List/20191217140324736.html?page=3",
+        "http_status": 200,
+        "bytes": 26906,
+        "sha256": "72bf15ae7db4eb90767cf555087909e097e7d2a6bd6f0313370cea012e6340b7",
+        "observed_item": "四川省行政区划代码信息表（截至2025年12月31日）",
+        "item_date": "2026-01-28",
+        "linked_path": "/new/show/20260128154122248.html"
+      },
+      "linked_notice_locator": {
+        "url": "https://mzj.cngy.gov.cn/new/show/20260128154122248.html",
+        "http_status": 302,
+        "response_bytes": 203,
+        "response_sha256": "532ab07af328fdd426de98e30d959d490063da9286afe3ca0b5a76620b0ae8c6",
+        "location": "http://mzt.sc.gov.cn/scmzt/quhuaxinxi/2026/1/28/fccc0ed4b8fe4655a3b946c6d8e9e1ed.shtml",
+        "interpretation": "Municipal-government listing exposes the exact notice link and redirects to the provincial civil-affairs article. The redirect identifies the exact locator but provides no roster content."
+      },
+      "official_target_attempt": {
+        "http_url": "http://mzt.sc.gov.cn/scmzt/quhuaxinxi/2026/1/28/fccc0ed4b8fe4655a3b946c6d8e9e1ed.shtml",
+        "http_result": "Following the literal HTTP Location from the 302; connection timeout to port 80 after 5 seconds, HTTP status 000, zero source bytes, no hash.",
+        "https_url": "https://mzt.sc.gov.cn/scmzt/quhuaxinxi/2026/1/28/fccc0ed4b8fe4655a3b946c6d8e9e1ed.shtml",
+        "https_result": "Separate HTTPS retry of the same path; connection timeout to port 443 after 5 seconds, HTTP status 000, zero source bytes, no hash."
+      },
+      "terms": "No reuse terms for the roster were inspected; do not redistribute the listing or roster and do not assert an extraction license.",
+      "restoration": "Retry the exact provincial URL in an authorized accessible environment. Preserve the original notice/table bytes, response metadata, retrieval time and hashes; inspect reuse terms; then compare all 113 scoped Sichuan rows.",
+      "limit": "This municipal listing and HTTP redirect establish a first-party route to the provincial notice, not the notice contents, current county identities, codes, parent relationships, geographic boundaries or completeness."
+    }
+  ],
+  "name_location_crosswalk_retry": {
+    "attempted_at": "2026-10-09 UTC",
+    "method": "Direct HTTPS curl to each official original, 6 second connect timeout, 28 second per-attempt maximum, two retries spaced 3 seconds apart.",
+    "results": [
+      {
+        "url": "https://www.dazhu.gov.cn/uploadfile/1/Attachment/b28c3b3063.pdf",
+        "attempts": 3,
+        "curl_exit": 28,
+        "http_status": "000",
+        "bytes_received": 0,
+        "source_sha256": null
+      },
+      {
+        "url": "https://www.dazu.gov.cn/qzfbm/qjjxxw/zwxx_53317/gzdt_53319/202211/t20221130_11345280.html",
+        "attempts": 3,
+        "curl_exit": 28,
+        "http_status": "000",
+        "bytes_received": 0,
+        "source_sha256": null
+      }
+    ],
+    "interpretation": "The source geometry could be compared reproducibly with coordinate ranges visible in indexed first-party government text. The original government pages/PDFs could not be fetched or hashed. Do not represent the indexed facts as retained source evidence."
+  }
+}

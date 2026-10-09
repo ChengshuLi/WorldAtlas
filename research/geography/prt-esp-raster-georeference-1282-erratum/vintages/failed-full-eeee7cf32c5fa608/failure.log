@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/research/geography/prt-esp-raster-georeference-1282-erratum/summarize-native-monthly-components.py", line 359, in <module>
+    main()
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/research/geography/prt-esp-raster-georeference-1282-erratum/summarize-native-monthly-components.py", line 355, in main
+    print(json.dumps(run_phase(sys.argv[1]), sort_keys=True))
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/research/geography/prt-esp-raster-georeference-1282-erratum/summarize-native-monthly-components.py", line 346, in run_phase
+    result = component_phase(commit, phase, row, geometry_row, capture, audit, scope_rows, assets, baseline, evidence)
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/research/geography/prt-esp-raster-georeference-1282-erratum/summarize-native-monthly-components.py", line 289, in component_phase
+    "input_bindings": {d["path"]: {"bytes": d["bytes"], "sha256": d["sha256"]} for d in descriptors},
+NameError: name 'descriptors' is not defined

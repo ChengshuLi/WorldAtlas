@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "attempts": [
+    {
+      "run_id": "run-20261009-big-offline-a",
+      "entry_point": "big_writer.py",
+      "created_utc": "2026-10-09T01:38:05+00:00",
+      "outcome": "refused before external BIG source read and before Shapely import/computation",
+      "exception": "FileNotFoundError: [Errno 2] No such file or directory: big-selection-response.json",
+      "cause": "The first additive draft stripped inputs/ from a repository-relative snapshot path; corrected before final runs.",
+      "outputs_created": [],
+      "completion_receipt_created": false,
+      "empty_run_directory_preserved": true
+    }
+  ]
+}

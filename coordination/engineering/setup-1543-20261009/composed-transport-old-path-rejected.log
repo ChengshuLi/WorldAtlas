@@ -1,0 +1,29 @@
+✖ composed evidence keeps bulk transport, authenticates bytes and rechecks mutable authority (10.302083ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 82.822125
+
+✖ failing tests:
+
+test at test/.old-composition-bca7602c-7473-4a38-8330-08181025eb8b.test.mjs:49:1
+✖ composed evidence keeps bulk transport, authenticates bytes and rechecks mutable authority (10.302083ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at exercise (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/test/.old-composition-bca7602c-7473-4a38-8330-08181025eb8b.test.mjs:93:12)
+      at async TestContext.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/test/.old-composition-bca7602c-7473-4a38-8330-08181025eb8b.test.mjs:98:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

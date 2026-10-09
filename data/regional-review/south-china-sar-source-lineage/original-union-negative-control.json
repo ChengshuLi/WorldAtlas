@@ -1,0 +1,29 @@
+{
+  "method_id": "historical-aggregate-replay",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "cases": [
+    {
+      "id": "Absent Natural Earth owner sentinel",
+      "expected": 0,
+      "actual": 0,
+      "rejected": true
+    },
+    {
+      "id": "Absent geoBoundaries ShapeID sentinel",
+      "expected": 0,
+      "actual": 0,
+      "rejected": true
+    },
+    {
+      "id": "Omitted required HKG member",
+      "expected_rejected": true,
+      "actual_rejected": true
+    },
+    {
+      "id": "Omitted required MAC member",
+      "expected_rejected": true,
+      "actual_rejected": true
+    }
+  ]
+}

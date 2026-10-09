@@ -1,0 +1,1498 @@
+{
+  "authorities": [
+    {
+      "current_bank_rebound": false,
+      "name": "pilot-add031",
+      "original_supported_components": [
+        {
+          "base_geometry_sha256": "bc41fde9ff7e3db2efdcc0a98313e5098da517576daff26f2e84faa0c5cfd865",
+          "component_id": "physical-component:add031b7195352292c8529323c8b99dd75002af629116b229e84be981893ca8d",
+          "disposition": "assigned",
+          "geometry_sha256": "2990484791018f36fbabe86f2954670b7db4a785314ed43867cc958d43d3053a",
+          "native_cells": 7,
+          "pixelIndex": 6757,
+          "source_receipt_sha256": "0b301a59f96273c703f333b91e5219a409139cc2c14d43d78968fd57f7845622",
+          "target_id": "atlas:physical:CAN-25:NUN"
+        }
+      ],
+      "physical_authority_approved": false,
+      "pins": {
+        "ledger": {
+          "blob": "de6db05b793f01f8006b92371a3cf5440a304235",
+          "bytes": 38500,
+          "commit": "ea8614305fbf1488a4ec32aecb7cd96e761635de",
+          "mode": "100644",
+          "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/ledger-add031.json",
+          "sha256": "aa358655aa1401bcc4d9e791b864b98ec4669139d5baa449f5d7e48ffbd1d628"
+        },
+        "native_facts": {
+          "blob": "88f3fb8ad70c99a6c38babb80029c54a60dc0687",
+          "bytes": 23966,
+          "commit": "ea8614305fbf1488a4ec32aecb7cd96e761635de",
+          "mode": "100644",
+          "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/facts.json",
+          "sha256": "ad9eaff2cba89fd3da3ab91bc2285daf3cf02572161189b69924f0602e076bfc"
+        },
+        "native_manifest": {
+          "blob": "5dae8a4aaca806af67bbd6fbffc34a0fb69c6a8c",
+          "bytes": 251732,
+          "commit": "ea8614305fbf1488a4ec32aecb7cd96e761635de",
+          "mode": "100644",
+          "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/base-native-manifest.json",
+          "sha256": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885"
+        },
+        "native_request": {
+          "blob": "cd14a78b7f682757df60e8fd824500f960e3f720",
+          "bytes": 14579,
+          "commit": "a053c6fb9866754fb0025a5e6e4d464ccba8ec23",
+          "mode": "100644",
+          "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-request-v3-run1.json",
+          "sha256": "6f8bb8e51324610356432bd65461b045b144b583c74eae3f6356d765e90c58d6"
+        },
+        "source_facts": {
+          "blob": "373166e7b7d00012918e488c0824afd81a52ad28",
+          "bytes": 26100,
+          "commit": "ad8020ab1afb6abbe54e68429de1260d8af85833",
+          "mode": "100644",
+          "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/facts.json",
+          "sha256": "0b301a59f96273c703f333b91e5219a409139cc2c14d43d78968fd57f7845622"
+        },
+        "source_request": {
+          "blob": "ddfc4feb53603e5f380443c259c104e0ecd2aa98",
+          "bytes": 15947,
+          "commit": "710e23381f30c7a6d8fad819e76e755ebe07a613",
+          "mode": "100644",
+          "path": "coordination/engineering/additive-native-gap-repair-20261008/source-premises-request-v3.json",
+          "sha256": "a69f70b8bebd256faee3fad125cdfbdf33829ecfc0084f98ff3319968e3dae52"
+        }
+      },
+      "rule_preimage": {
+        "executed_code": [
+          {
+            "bytes": 1417,
+            "path": "package.json",
+            "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+          },
+          {
+            "bytes": 59957,
+            "path": "scripts/additive-gap-repair.mjs",
+            "sha256": "870b4d7b0d52ed2a2fe2cd2a36a6b3a144d2166f03726e9c450a02cd6595bd73"
+          },
+          {
+            "bytes": 30650,
+            "path": "src/effective-footprint.js",
+            "sha256": "aca206b6c253e3bc7291bd27ce932747c279a09832b285ddb875e806703b05ea"
+          },
+          {
+            "bytes": 6371,
+            "path": "scripts/native-ownership/native-preparation-guards.mjs",
+            "sha256": "6c4ea2f29f6bfed9176fa8c38dfde522d859442797e4a3cce76f250c69c75fb0"
+          },
+          {
+            "bytes": 3497,
+            "path": "src/native-runtime.js",
+            "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+          },
+          {
+            "bytes": 4472,
+            "path": "scripts/native-ownership/compile-native-ownership.mjs",
+            "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+          },
+          {
+            "bytes": 6408,
+            "path": "src/native-grid.js",
+            "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+          },
+          {
+            "bytes": 2948,
+            "path": "src/ownership-codec.js",
+            "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+          },
+          {
+            "bytes": 6777,
+            "path": "scripts/audit-grid-intervals.mjs",
+            "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+          },
+          {
+            "bytes": 4377,
+            "path": "scripts/native-ownership/require-verified-selection.mjs",
+            "sha256": "20a8e3f472db4c06386ce2b7bd01330ea8acfd6d1ff414f6d2d32e8b1995d50c"
+          },
+          {
+            "bytes": 1540,
+            "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+            "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb"
+          },
+          {
+            "bytes": 1362,
+            "path": "scripts/native-ownership/verified-candidates.json",
+            "sha256": "d04a08074fad869f0dd618a6ba46cbad6e07d023f8acaedeec0ece4a9a9621b7"
+          },
+          {
+            "bytes": 28506,
+            "path": "scripts/evidence-quality.mjs",
+            "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97"
+          },
+          {
+            "bytes": 3126,
+            "path": "src/ownership-method.js",
+            "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df"
+          },
+          {
+            "bytes": 246591,
+            "path": "package-lock.json",
+            "sha256": "471d035f92567ea447f221661db5fa8febfc7afc32af8ac975506ce9e0303255"
+          }
+        ],
+        "native_method": "native-linear-evenodd-first-owner-v1",
+        "representation": "literal-base-or-complete-additions",
+        "source_rule_body_sha256": "d1d5f67bdfd79e7b7664ce75e3a7f5d88bc43062dd18be574bdcf7d8edbe4464",
+        "version": 2
+      },
+      "rule_sha256": "f08ddf9c1d0534aecda36ff134d6398d48c618a7e6982e7f51c31914c2140faf",
+      "selected": false,
+      "source_rule": {
+        "cases_path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/source-fit-seven-cases.json",
+        "expected_ids": [
+          "physical-component:12c9ec9813490ce8602fb26ee2e54225b99c28bbd29794a7f8ac9ee60f109e8a",
+          "physical-component:52452c5923a0ed15767ebdf150727924778349b7d9ba4370b616d1d70c0ccddd",
+          "physical-component:add031b7195352292c8529323c8b99dd75002af629116b229e84be981893ca8d",
+          "physical-component:2aca267603c8eace3a6d0a52d4e3f0b70a47506b94d2ea9e1d500e43aab4632c",
+          "physical-component:265c983a61231e3a5c2cf4bb2f7b97896d47afefe925a9eb85934101a78515a8",
+          "physical-component:17bb5b7f043b0fb2b447b8ccef216e530fed4595da1aec0feb1dea235bed0dbd",
+          "physical-component:54dc96cd3d0edd92ff9d9399d8364e17735d12f11407f707d57912f9f6a66475"
+        ],
+        "inputs": [
+          {
+            "blob": "66565b681fefc5a547a5c7dd8be2be9ae6988996",
+            "bytes": 118365,
+            "commit": "602345053edd4f2320fe6ef959bb57e9b5307f5d",
+            "mode": "100644",
+            "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/add031-construction-failure.json",
+            "sha256": "464538101f581dc6aa924ab53e180b763c24d66f7dd055d01608cdf59ec8c5f1"
+          },
+          {
+            "blob": "3c5183c35ba96ae54940edf7f2c233f798dbd69a",
+            "bytes": 271571,
+            "commit": "602345053edd4f2320fe6ef959bb57e9b5307f5d",
+            "mode": "100644",
+            "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/source-fit-seven-cases.json",
+            "sha256": "0f29f229f94c48a2ba4a520b8cbb078116d82344302f773b2171716caedac9b6"
+          },
+          {
+            "blob": "6cb35caf2959435e9e5491cb84ce5206656fdec0",
+            "bytes": 25750,
+            "commit": "602345053edd4f2320fe6ef959bb57e9b5307f5d",
+            "mode": "100644",
+            "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/applicability-comment.json",
+            "sha256": "d47365b657c7e370cd15a858c01817dffa7b68f2f7f9a2abeef03e51ed42e047"
+          },
+          {
+            "blob": "35e5e716796eb5d07d1b0e9c3c876c5c494abbf7",
+            "bytes": 18208,
+            "commit": "602345053edd4f2320fe6ef959bb57e9b5307f5d",
+            "mode": "100644",
+            "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/input-plan.json",
+            "sha256": "8029e77766968d41c1cb6c93b323674650e712e9298db0153373431d7339dec2"
+          },
+          {
+            "blob": "b83b7b4cb053ba3dc3270a8cdbf698075d3b736c",
+            "bytes": 1224550,
+            "commit": "602345053edd4f2320fe6ef959bb57e9b5307f5d",
+            "mode": "100644",
+            "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-005.jsonl.gz",
+            "sha256": "854dd2e9064342effd20b5e4e31938ead05a7e2b2566377a1ded5c4f856dd5c6",
+            "uncompressed_bytes": 8386281,
+            "uncompressed_sha256": "0eb90d9d443ca9b5eceff02f870c618d9cbc6515db727eaff1ca5fa5bb18952d"
+          },
+          {
+            "blob": "8dd53252249776512765c7a4cb1f7f010f1ff67c",
+            "bytes": 1220375,
+            "commit": "602345053edd4f2320fe6ef959bb57e9b5307f5d",
+            "mode": "100644",
+            "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-006.jsonl.gz",
+            "sha256": "a5a540231d1eb0539b97ee4549cd16119d839e8b5126a52a85e8cd3e1fcb1f4c",
+            "uncompressed_bytes": 8381281,
+            "uncompressed_sha256": "e969e873dbcfec42b788ba161349c231d88d765e02a52e701176dfb5c5530d7a"
+          },
+          {
+            "blob": "90d8353ac62a51f8458c204aa27c53dff6812c0e",
+            "bytes": 1187023,
+            "commit": "602345053edd4f2320fe6ef959bb57e9b5307f5d",
+            "mode": "100644",
+            "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-047.jsonl.gz",
+            "sha256": "e418e6cf92971f0afc047b2782fcb035e1f6305c136969469cb8be085089e82d",
+            "uncompressed_bytes": 8384762,
+            "uncompressed_sha256": "4c592e19b5d3fb42a2a539235999fb2e1a089cd5cde4219e37c5324c9af4438e"
+          },
+          {
+            "blob": "c38da7eb06802cf9b23b6267a3c8f922cd426240",
+            "bytes": 2173285,
+            "commit": "602345053edd4f2320fe6ef959bb57e9b5307f5d",
+            "mode": "100644",
+            "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/sources-000.jsonl.gz",
+            "sha256": "aaf5e4f099ab25c6e6f96632787f1654ba6054ed378fd591b360e36274ffc264",
+            "uncompressed_bytes": 8388327,
+            "uncompressed_sha256": "a75923307b24ff73fe3090307b2c8d6e590a22dbb91f4d43f92a52ac0fd23705"
+          },
+          {
+            "blob": "d0cce933268c64ddfc4ecb4a4c3cc2e86e95fa1c",
+            "bytes": 1191654,
+            "commit": "602345053edd4f2320fe6ef959bb57e9b5307f5d",
+            "mode": "100644",
+            "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-010.jsonl.gz",
+            "sha256": "58e4ad6bdc32338e1a9f21ba8db8a8c7e88651024279a0e9cde6ae7f08de4176",
+            "uncompressed_bytes": 8378285,
+            "uncompressed_sha256": "d6c4fc1f67a0b4316ab6752d0e78e17bd34d20756c65b09e4445ddaa555f0237"
+          },
+          {
+            "blob": "05d95737e7ea948b234dc3a834918751c5289165",
+            "bytes": 1206153,
+            "commit": "602345053edd4f2320fe6ef959bb57e9b5307f5d",
+            "mode": "100644",
+            "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-011.jsonl.gz",
+            "sha256": "d21c9c7aa8640dd2ca65414a2c012cecbb713976a1373dad29da6439d9ed0992",
+            "uncompressed_bytes": 8382450,
+            "uncompressed_sha256": "b69320f12a3a3516c95c2a606710a36945be20aeaf5c2263320e62992cff23ae"
+          },
+          {
+            "blob": "51cd5317124d8ad7c068cfaac412a86a9b0ab873",
+            "bytes": 1205959,
+            "commit": "602345053edd4f2320fe6ef959bb57e9b5307f5d",
+            "mode": "100644",
+            "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-022.jsonl.gz",
+            "sha256": "906a42b3345c60d515ae5016f2daa69c352c1526b27a8796d496c69ccb2f35b8",
+            "uncompressed_bytes": 8383180,
+            "uncompressed_sha256": "5e0468723f25cd675b27c0c030f3f2a6213b8410d0953e9e88d58837ef9aac5e"
+          },
+          {
+            "blob": "82ff3e4a4d2e08131c31b043db62f61f49c48dc0",
+            "bytes": 1228188,
+            "commit": "602345053edd4f2320fe6ef959bb57e9b5307f5d",
+            "mode": "100644",
+            "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-023.jsonl.gz",
+            "sha256": "db6c75946139e92d230d8a5207a2c00d538911b1f2e161c5a5ab122bd7076508",
+            "uncompressed_bytes": 8387797,
+            "uncompressed_sha256": "eb2aae217c1e821ee01bd68015baea939c278e2c807e29ecbb95a6b3333225c5"
+          }
+        ],
+        "original_products": [
+          {
+            "original_product_path": "components-005.jsonl.gz",
+            "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-005.jsonl.gz"
+          },
+          {
+            "original_product_path": "components-006.jsonl.gz",
+            "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-006.jsonl.gz"
+          },
+          {
+            "original_product_path": "components-047.jsonl.gz",
+            "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-047.jsonl.gz"
+          },
+          {
+            "original_product_path": "sources-000.jsonl.gz",
+            "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/sources-000.jsonl.gz"
+          },
+          {
+            "original_product_path": "components-010.jsonl.gz",
+            "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-010.jsonl.gz"
+          },
+          {
+            "original_product_path": "components-011.jsonl.gz",
+            "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-011.jsonl.gz"
+          },
+          {
+            "original_product_path": "components-022.jsonl.gz",
+            "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-022.jsonl.gz"
+          },
+          {
+            "original_product_path": "components-023.jsonl.gz",
+            "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-023.jsonl.gz"
+          }
+        ],
+        "pilot_path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/add031-construction-failure.json",
+        "review_body_sha256": "d1d5f67bdfd79e7b7664ce75e3a7f5d88bc43062dd18be574bdcf7d8edbe4464",
+        "review_comment_id": 6069239768,
+        "review_path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/applicability-comment.json",
+        "version": 1
+      }
+    },
+    {
+      "current_bank_rebound": false,
+      "name": "alaska-thirteen",
+      "original_supported_components": [
+        {
+          "base_geometry_sha256": "e000087b464bda87f519c3abd8117284fa3d651a46f4ccb5bf5ba9dd96f84300",
+          "component_id": "physical-component:073d9a81648d56c1b63a4e495fbd0140c17659bedb5c9b211739642b438ee488",
+          "disposition": "assigned",
+          "geometry_sha256": "f6f8b48a2f3d31bc50ea73d20075f5cb7dacb17266ae3ad8e3897abd45565614",
+          "native_cells": 2,
+          "pixelIndex": 45711,
+          "source_receipt_sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+          "target_id": "gb:USA:ADM2:52423323B46246640861022"
+        },
+        {
+          "base_geometry_sha256": "ba5ada9a970f80dbeb5f92f84c253787e10898df64d6171047901a089604b60a",
+          "component_id": "physical-component:4d36c81ff35079341e6ec0d5a207ba3844e26f5d55c30c7205924dfd33b8dc18",
+          "disposition": "assigned",
+          "geometry_sha256": "d07064e1716715618bf6b0ddb7f313bafc26acc0d11ff250d094b71b91b10120",
+          "native_cells": 19,
+          "pixelIndex": 44705,
+          "source_receipt_sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+          "target_id": "gb:USA:ADM2:52423323B16539688175930"
+        },
+        {
+          "base_geometry_sha256": "b517bd1b4485cf441617ec69af42dd07b4aa146033e791bc8521efc885fe87f0",
+          "component_id": "physical-component:5874689a46f7945e9dcc67cc3b0321d4e534572e4b4bd8a85f4a07c5005d1922",
+          "disposition": "assigned",
+          "geometry_sha256": "41d44c7ab86d4681528f4d4a4d506f65b3a780412729685c96141ec8256cc98d",
+          "native_cells": 45,
+          "pixelIndex": 46957,
+          "source_receipt_sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+          "target_id": "gb:USA:ADM2:52423323B80008995120080"
+        },
+        {
+          "base_geometry_sha256": "8d53f7cb32e41314956b6eb6e5beef9bfc4cf8097bf7fd035001b2566768fa37",
+          "component_id": "physical-component:66e4f6c15eb17f53815844efc04e7cae9faf9118de313541d3a4be2ff1fcf0a2",
+          "disposition": "assigned",
+          "geometry_sha256": "907c83f85d8cf18610a1122270e4fdac03104017b0e5237dee17b6c8c74695ad",
+          "native_cells": 11,
+          "pixelIndex": 46395,
+          "source_receipt_sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+          "target_id": "gb:USA:ADM2:52423323B64721050065013"
+        },
+        {
+          "base_geometry_sha256": "ba5ada9a970f80dbeb5f92f84c253787e10898df64d6171047901a089604b60a",
+          "component_id": "physical-component:70174bffffdbb4a421344d6c10d80b760972f9c5452daf0d7c26408fdf18bb53",
+          "disposition": "assigned",
+          "geometry_sha256": "33655bbd4900f942bd4bd4fae9066bad21fe0a51d75484c9a006210a59b0b503",
+          "native_cells": 9,
+          "pixelIndex": 44705,
+          "source_receipt_sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+          "target_id": "gb:USA:ADM2:52423323B16539688175930"
+        },
+        {
+          "base_geometry_sha256": "b517bd1b4485cf441617ec69af42dd07b4aa146033e791bc8521efc885fe87f0",
+          "component_id": "physical-component:777e7bc99320bf155684f99b0903c336f9a07862de4a7fa0ac8cde990d7d6ee5",
+          "disposition": "assigned",
+          "geometry_sha256": "3e1ac087fab9421cc3640d3b8a34ba29d9ccec237266cc0da3d63df6832ec35a",
+          "native_cells": 12,
+          "pixelIndex": 46957,
+          "source_receipt_sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+          "target_id": "gb:USA:ADM2:52423323B80008995120080"
+        },
+        {
+          "base_geometry_sha256": "ba5ada9a970f80dbeb5f92f84c253787e10898df64d6171047901a089604b60a",
+          "component_id": "physical-component:8435dc6d973751bab55c4eff12c872ba331c3e005254ceb21b76933a8cc6207a",
+          "disposition": "assigned",
+          "geometry_sha256": "80690097e995ab6c26d1447c7fc57d0190001d41ceca58cce24476b12550e295",
+          "native_cells": 1,
+          "pixelIndex": 44705,
+          "source_receipt_sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+          "target_id": "gb:USA:ADM2:52423323B16539688175930"
+        },
+        {
+          "base_geometry_sha256": "e000087b464bda87f519c3abd8117284fa3d651a46f4ccb5bf5ba9dd96f84300",
+          "component_id": "physical-component:8fb2ed9360ba13f6b19f8bb6ee9a16099039d8b59c9f51eab0a442249f428e7d",
+          "disposition": "assigned",
+          "geometry_sha256": "17ef6c1e9f81fa0ccebb0d6c9bb44753d0935bf3b50464f5f213937d6e3ecd47",
+          "native_cells": 26,
+          "pixelIndex": 45711,
+          "source_receipt_sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+          "target_id": "gb:USA:ADM2:52423323B46246640861022"
+        },
+        {
+          "base_geometry_sha256": "e000087b464bda87f519c3abd8117284fa3d651a46f4ccb5bf5ba9dd96f84300",
+          "component_id": "physical-component:9f130f023a510be6e4b2f9075ed99cf75c4f88053e93189dda3f0bd51080f14a",
+          "disposition": "assigned",
+          "geometry_sha256": "dec957bf2af7f3cb3756e99fb862e4c92b7d84c10cd5837f9c12b441400055d8",
+          "native_cells": 5,
+          "pixelIndex": 45711,
+          "source_receipt_sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+          "target_id": "gb:USA:ADM2:52423323B46246640861022"
+        },
+        {
+          "base_geometry_sha256": "9eba23401ea8d37ff0a660a299ef8070bd7e097350b62ad72130cea5c6e7618c",
+          "component_id": "physical-component:e76fd386dc9a23375537ede302f7f380a217fd4bbccd9536f856e8b4253a5ab8",
+          "disposition": "assigned",
+          "geometry_sha256": "94ea7b1ce6a9fba2d85df60d3601fcf67a5e766d371bdbc85816591aa88731d8",
+          "native_cells": 1,
+          "pixelIndex": 47017,
+          "source_receipt_sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+          "target_id": "gb:USA:ADM2:52423323B82121365400499"
+        },
+        {
+          "base_geometry_sha256": "a5948109710b057ae9a791a02fccc34eb9b3c14c4e195c092169c8f1c031f258",
+          "component_id": "physical-component:ef7383db4412abe64b7e8d009679cffa4a3174d6da100c6de1fc37272aadeca9",
+          "disposition": "assigned",
+          "geometry_sha256": "96fac28646b8469ca0fa115c7bb9def542d10af7177181bc7315af3a667c92cf",
+          "native_cells": 3,
+          "pixelIndex": 46045,
+          "source_receipt_sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+          "target_id": "gb:USA:ADM2:52423323B55198873775030"
+        }
+      ],
+      "physical_authority_approved": false,
+      "pins": {
+        "ledger": {
+          "blob": "06e609feec84066ebfeff3c9d85b565928732913",
+          "bytes": 157584,
+          "commit": "ea8614305fbf1488a4ec32aecb7cd96e761635de",
+          "mode": "100644",
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/ledger-batch.json",
+          "sha256": "d5eda4b890a45a61d8bcf916f8cc07c01515af33812612dab63bb885af1a6c74"
+        },
+        "native_facts": {
+          "blob": "60dd22378da771677504e1ca8da071c3289bd18e",
+          "bytes": 43144,
+          "commit": "ea8614305fbf1488a4ec32aecb7cd96e761635de",
+          "mode": "100644",
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/facts.json",
+          "sha256": "8369175aaad5dcdc1450932f3db98b6641d2e3d5f0db5a297d75295182ff2e76"
+        },
+        "native_manifest": {
+          "blob": "5dae8a4aaca806af67bbd6fbffc34a0fb69c6a8c",
+          "bytes": 251732,
+          "commit": "ea8614305fbf1488a4ec32aecb7cd96e761635de",
+          "mode": "100644",
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/base-native-manifest.json",
+          "sha256": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885"
+        },
+        "native_request": {
+          "blob": "2028448b752955e02e3c535ef36593214557c357",
+          "bytes": 26159,
+          "commit": "bf2234196f7f3a7a57acb1ac5d4fbedd9899e9fb",
+          "mode": "100644",
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-request-v1-run1.json",
+          "sha256": "a3686e7e2b4c83bb872ec324262ff2493b7fdb914ec0e2878f9ae50d4aa78a72"
+        },
+        "source_facts": {
+          "blob": "e8e7f13993fcd138eba54f8ec2cbe7302552fb87",
+          "bytes": 46507,
+          "commit": "b2a6b9e5b7e0cfe54f79ba174b51925c67ea6e39",
+          "mode": "100644",
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/facts.json",
+          "sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778"
+        },
+        "source_request": {
+          "blob": "7d4ddf6ffe096699431e731783e8902ccc114ace",
+          "bytes": 26535,
+          "commit": "e59c03b3f025c220206bfbcaa53d65933de5cdea",
+          "mode": "100644",
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/source-premises-request-v1.json",
+          "sha256": "037128b08977dc5698c9458f8a0a38bd88b616959b6d8737fd1f6777b767d86f"
+        }
+      },
+      "rule_preimage": {
+        "executed_code": [
+          {
+            "bytes": 1417,
+            "path": "package.json",
+            "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+          },
+          {
+            "bytes": 95874,
+            "path": "scripts/additive-gap-repair.mjs",
+            "sha256": "5bda202160724a6128cc891d9770b799c205c9fe99b9d2d4c8794b46b00e610c"
+          },
+          {
+            "bytes": 30650,
+            "path": "src/effective-footprint.js",
+            "sha256": "aca206b6c253e3bc7291bd27ce932747c279a09832b285ddb875e806703b05ea"
+          },
+          {
+            "bytes": 6371,
+            "path": "scripts/native-ownership/native-preparation-guards.mjs",
+            "sha256": "6c4ea2f29f6bfed9176fa8c38dfde522d859442797e4a3cce76f250c69c75fb0"
+          },
+          {
+            "bytes": 3497,
+            "path": "src/native-runtime.js",
+            "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+          },
+          {
+            "bytes": 4472,
+            "path": "scripts/native-ownership/compile-native-ownership.mjs",
+            "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+          },
+          {
+            "bytes": 6408,
+            "path": "src/native-grid.js",
+            "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+          },
+          {
+            "bytes": 2948,
+            "path": "src/ownership-codec.js",
+            "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+          },
+          {
+            "bytes": 6777,
+            "path": "scripts/audit-grid-intervals.mjs",
+            "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+          },
+          {
+            "bytes": 4377,
+            "path": "scripts/native-ownership/require-verified-selection.mjs",
+            "sha256": "20a8e3f472db4c06386ce2b7bd01330ea8acfd6d1ff414f6d2d32e8b1995d50c"
+          },
+          {
+            "bytes": 1540,
+            "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+            "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb"
+          },
+          {
+            "bytes": 1362,
+            "path": "scripts/native-ownership/verified-candidates.json",
+            "sha256": "d04a08074fad869f0dd618a6ba46cbad6e07d023f8acaedeec0ece4a9a9621b7"
+          },
+          {
+            "bytes": 28506,
+            "path": "scripts/evidence-quality.mjs",
+            "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97"
+          },
+          {
+            "bytes": 3126,
+            "path": "src/ownership-method.js",
+            "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df"
+          },
+          {
+            "bytes": 246591,
+            "path": "package-lock.json",
+            "sha256": "471d035f92567ea447f221661db5fa8febfc7afc32af8ac975506ce9e0303255"
+          }
+        ],
+        "native_method": "native-linear-evenodd-first-owner-v1",
+        "representation": "literal-base-or-complete-additions",
+        "source_profile": "retained-USA-ADM2-counties-2018",
+        "source_rule": {
+          "admission_path": "research/geography/alaska-thirteen-geometry-measurement-20261008/phase-admission.json",
+          "candidate_path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-components.geojson",
+          "cases_path": "research/geography/alaska-thirteen-geometry-measurement-20261008/vintages/run-fourteen/measurement.json",
+          "contact_path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/contact-authority/contact-authority-receipt.json",
+          "context_index_path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context-index.json",
+          "expected_ids": [
+            "physical-component:073d9a81648d56c1b63a4e495fbd0140c17659bedb5c9b211739642b438ee488",
+            "physical-component:4d36c81ff35079341e6ec0d5a207ba3844e26f5d55c30c7205924dfd33b8dc18",
+            "physical-component:5874689a46f7945e9dcc67cc3b0321d4e534572e4b4bd8a85f4a07c5005d1922",
+            "physical-component:66e4f6c15eb17f53815844efc04e7cae9faf9118de313541d3a4be2ff1fcf0a2",
+            "physical-component:70174bffffdbb4a421344d6c10d80b760972f9c5452daf0d7c26408fdf18bb53",
+            "physical-component:777e7bc99320bf155684f99b0903c336f9a07862de4a7fa0ac8cde990d7d6ee5",
+            "physical-component:8435dc6d973751bab55c4eff12c872ba331c3e005254ceb21b76933a8cc6207a",
+            "physical-component:8fb2ed9360ba13f6b19f8bb6ee9a16099039d8b59c9f51eab0a442249f428e7d",
+            "physical-component:9f130f023a510be6e4b2f9075ed99cf75c4f88053e93189dda3f0bd51080f14a",
+            "physical-component:cffd5f514585665c2d76279e036889887df24efa229a67f88052aef0d8ee4a83",
+            "physical-component:d688afd3657ded3f0cf85a95956f2d42726f44923b168499320d681080539fb1",
+            "physical-component:e76fd386dc9a23375537ede302f7f380a217fd4bbccd9536f856e8b4253a5ab8",
+            "physical-component:ef7383db4412abe64b7e8d009679cffa4a3174d6da100c6de1fc37272aadeca9"
+          ],
+          "inputs": [
+            {
+              "blob": "22b2ab5d5cfe0a93f85c7dfe5127ab45a23e0ea3",
+              "bytes": 131133,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/phase-admission.json",
+              "sha256": "d2be8305241edb27e222899647054c31f16209880ec079bf7a029dbeafd02673"
+            },
+            {
+              "blob": "7a3fddaf8a4d5748d2fb5c3911e11f4685664c45",
+              "bytes": 1859641,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/alaska-adm1-parent/feature.geojson",
+              "sha256": "938520d544d21c6eaf68e69cb53b220f2e38de44071ded03e980db0ace9e6793"
+            },
+            {
+              "blob": "4c08f1561b6eb8cf9e81c8d4bd4958947a33ecc8",
+              "bytes": 1653,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/alaska-adm1-parent/receipt.json",
+              "sha256": "ba0e624e248caeff90b63ba7a9b64729124fe29a1c3082f0cdf280664f0db6a3"
+            },
+            {
+              "blob": "075372c9e0edee442563eb7dbe5f2731f0ee6bb5",
+              "bytes": 163693,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/atlas-neighbors/features.geojson",
+              "sha256": "ff6fd68435898492221491636e5d8e50e72fce387c2fde9d77f48198f17c03a0"
+            },
+            {
+              "blob": "e6b85682c319b1da2ce29dd5579d6aef8e4cc9c1",
+              "bytes": 7040,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/atlas-neighbors/receipt.json",
+              "sha256": "892dfa4685aea1a1cd7c6e5108987274404704b4cf42bb8b6862bb63175d3615"
+            },
+            {
+              "blob": "f01b1efd6e218e17eb97bdb0c5643e6273a5c700",
+              "bytes": 20126,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/contact-authority/contact-authority-receipt.json",
+              "sha256": "7547a46be51a7a5cdfeaaddb86a9c0c46f9a0d3983d5fbe9239a128fb678cae1"
+            },
+            {
+              "blob": "acec80bacb3484ce7a65d48ba4404b6bc05543f7",
+              "bytes": 2672,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/contact-authority/detector-vintage-supplement.json",
+              "sha256": "f7972cfbaac738bd12e99d4581660fa2f671a77b5dabc40a06fe390e3e29c271"
+            },
+            {
+              "blob": "ed5e8f92f7bbd4915cb33ac6f9f627458185b8be",
+              "bytes": 10500644,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/geoboundaries-USA-ADM2-full-9469f09.geojson",
+              "sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43"
+            },
+            {
+              "blob": "737603d5cbf9d75229ad3ca846ee31e64391df1f",
+              "bytes": 14483,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/native-selected/receipt.json",
+              "sha256": "4b43720ead947aa1a985edf98de7347a5018da05a3b246d42e6f8aa6c5fbf624"
+            },
+            {
+              "blob": "d24c4db7566b5cc29238d352e889e5254516642a",
+              "bytes": 7168404,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/native-selected/records.bin",
+              "sha256": "9f4833fdac3cbebb9e60d413f469570453b1bad177892b9227702125728b99d5"
+            },
+            {
+              "blob": "9de64a00ea46b49b14c4ba285671f7fec76b28aa",
+              "bytes": 21588,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/original-fragment-contacts/features.geojson",
+              "sha256": "a2ffac1913df9e1b771e46f1f5a41f3776fbd67a0f2b7926dfea3605810e9185"
+            },
+            {
+              "blob": "f4524865f72c0e694399e743dd26ee5aaa29211b",
+              "bytes": 13262,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/original-fragment-contacts/receipt.json",
+              "sha256": "27aec1df27b2320eb8e7c1dfc4093acc3deada46bae7394e5a3c8fc062c16aad"
+            },
+            {
+              "blob": "d6abc998026a8cc1dfa91684f9c82ed069f8fe87",
+              "bytes": 18192,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-components.geojson",
+              "sha256": "b24011f1acef059783ea61d96308f3b43ef0aabdbaf19f1fb7694b613a470b14"
+            },
+            {
+              "blob": "d4e1b95c38860e08385ffdba337c51cf3d812f62",
+              "bytes": 166310,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-source-screen.json",
+              "sha256": "0763d5368b045b0f77951616d83ebaf1bc30336fad7f58fe5e0b4ddef52cc867"
+            },
+            {
+              "blob": "2577268b4bd90b74cbf2ad0ba64b455195687c5e",
+              "bytes": 226731,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/complete-native-family-record.jsonl",
+              "sha256": "5c79b82588ff5c8f3c1e6305e4c1bcd565b7e379203b95bc2c09322f30f18119"
+            },
+            {
+              "blob": "7f16c1c4aa7d11ddf25c6a6434630272a4c45459",
+              "bytes": 4316,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/geoBoundaries-derivative-use-terms.txt",
+              "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+            },
+            {
+              "blob": "8ffb51e7c9b58d28fa5a77a9657b75265952bb0e",
+              "bytes": 18640,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/gshhg-native-query-records.json",
+              "sha256": "d978c4e92bdcbff3ece9f4f798ea977ed21a4d709ef5598fed5bde71a7130783"
+            },
+            {
+              "blob": "f01965f04a509635df2384e43549ba2280883ded",
+              "bytes": 366513,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/native-atlas-target-features.geojson",
+              "sha256": "0cfe5197d17fdd88fa4a13bbd1ac120a7cf195cc6ee7bf3b49dbd0303b86e326"
+            },
+            {
+              "blob": "7e196e27f162126a6a79744d3a98563fa8281464",
+              "bytes": 38656,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/physical-query-rows.jsonl",
+              "sha256": "e36d6319cd9d23c4c8d508415f8af7965e069928e5e1206faac3d50cbd5ece50"
+            },
+            {
+              "blob": "79269727e2397d9851ea85cf0f780ba8f389dbb7",
+              "bytes": 608036,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/selected-2018-usa-adm2-features.geojson",
+              "sha256": "02427b560826d51ab275e3df6f8fa3d4629dd762733f5c4c69b1a8f2ee8e44b5"
+            },
+            {
+              "blob": "c5eebe4386083d2417c44a88041bbd5614c6a7e6",
+              "bytes": 2949,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/usa-adm2-attribution.json",
+              "sha256": "6236712dd0cf23fd258ce7e4a39412e7652be7d2a3c4db2b3e83ddbd4a60c8cd"
+            },
+            {
+              "blob": "e66e22aa15796ea370e634e1bf44726ddae142f2",
+              "bytes": 5084,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/usa-adm2-source-metadata.json",
+              "sha256": "88dcd7f581d5b8d2b5f5003cf4cd7b39310b8bc52c96e8371d55c92559dd2258"
+            },
+            {
+              "blob": "a7cff4940e085a588d415e66784a3f8fa23feae9",
+              "bytes": 13816,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/phase_admission.py",
+              "sha256": "d619a0413f750939732fa2be969f29d74e18060c1eb10f7e5e42e9a6889e6da2"
+            },
+            {
+              "blob": "f6dc54852a7dda788c718287c8a3bc497691c893",
+              "bytes": 12014,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/extract_native_records.py",
+              "sha256": "070d0682c6726cf8d75592d659cf882c48ca1dce9ff9f33d6c541daa09a3420f"
+            },
+            {
+              "blob": "500fbdf1e5a703aeb34dc539f8e2ff756daa6d14",
+              "bytes": 5061,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/capture_alaska_parent.py",
+              "sha256": "c79bb234817875a06db935e6f8c99ea1a81a06dbc5bf054f4fd585699bbdaaa9"
+            },
+            {
+              "blob": "fb6e620d129019616910b50595747948ab03c382",
+              "bytes": 3976,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/capture_atlas_neighbors.py",
+              "sha256": "50be53c56ba1eba2f63d7fea1a11c5dc1c7e99c2c2a7899827276f3edaa4879e"
+            },
+            {
+              "blob": "760000bff46acf8f7dd988fe167c509a2cc16544",
+              "bytes": 7767,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/capture_original_fragment_contacts.py",
+              "sha256": "71cb8eec99e12db668d6beff156ab4003bcd07ee1ace157fe4286890f429b3f6"
+            },
+            {
+              "blob": "82dfd09d6d1b89aa0e155c0557299fd70427657f",
+              "bytes": 69925,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/measure_alaska.py",
+              "sha256": "59553c3dd787925f9aef3e6654c060acbb43b33d4b0463ebd992c93f84516f41"
+            },
+            {
+              "blob": "a8c561484725a3b3c39973cc60b638244c956464",
+              "bytes": 7177,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/measurement_driver.py",
+              "sha256": "9903d31a80a946936f575733e079c083da1ffe3734615aeec5536725a5c0aa7f"
+            },
+            {
+              "blob": "ed85fe9ad89284c93bc63b1630d09161d05638e5",
+              "bytes": 6241,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/run_phase.py",
+              "sha256": "efdb3446ab35af320060403337c0ddb16b921fe04f027dbc81850f9c5d4a84f0"
+            },
+            {
+              "blob": "bf45916269e5cc73d9a2c1e5494ef45456e9583a",
+              "bytes": 4160,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/verify_extraction_replay.py",
+              "sha256": "d8b235d2970aca2defc55fb7f39ba60d57d5c46a2cfaeaaba50f9cc40a378312"
+            },
+            {
+              "blob": "35051fc1e9bc4d0595bb28f76f952b6349683bb5",
+              "bytes": 17817,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/reproduce_union_control.py",
+              "sha256": "02dd7388192b0da2d4ce8a4f49d903f6aff44e17498552694da7e91be946c2be"
+            },
+            {
+              "blob": "eeee767a7fd27877bd5723bbfcaaee82af43d6ab",
+              "bytes": 17414,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "scripts/evidence/immutable.py",
+              "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+            },
+            {
+              "blob": "cbf223f91bd603043a308b9a2b468f9b7d3c8ffa",
+              "bytes": 734884,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/vintages/run-fourteen/measurement.json",
+              "sha256": "92c2ad119724ed9905943d94cb52c5bcb74310e38f331ebbd7f64bd6851821c5"
+            },
+            {
+              "blob": "67e0841d404cde60a9236262ebb1fe4f599df55a",
+              "bytes": 986,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/vintages/run-fourteen/publication.json",
+              "sha256": "564ee3b7aa640afef4fecda7db1780af2e9b521cd48e634ba4ecc2c98ea10b04"
+            },
+            {
+              "blob": "f3c5ffd2c0ed291ed6a83709a623a7571e68f935",
+              "bytes": 2340,
+              "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+              "mode": "100644",
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/execution/measure-alaska-run-fourteen-operating-receipt.json",
+              "sha256": "96fcf16824ecae2d32afc9fb5c20d3003f819e84c86f790809025055fb8a9ffd"
+            },
+            {
+              "blob": "ced8ebf8913735bf7906c40a889557c5cb39d421",
+              "bytes": 479228,
+              "commit": "6b370a4b19d31a7e6d8580186344ee0ee43959ec",
+              "mode": "100644",
+              "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context/part-43500.json.gz",
+              "sha256": "8c0bf41e765ad3c291bff0735fd89e83c378cdfcb59e1398156970cc24400b1a",
+              "uncompressed_bytes": 1618234,
+              "uncompressed_sha256": "19f0792f121b824f444d096c6269acfafb13cae9d35ae91aa9f7de1680e955ed"
+            },
+            {
+              "blob": "73553ad8a9530da2b0a1b5264959b5e5e57f425d",
+              "bytes": 376329,
+              "commit": "6b370a4b19d31a7e6d8580186344ee0ee43959ec",
+              "mode": "100644",
+              "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context/part-45000.json.gz",
+              "sha256": "895ea07b762e61431128cc62325569e29c5aa227bfc5132d97cd551c75f537b4",
+              "uncompressed_bytes": 1291015,
+              "uncompressed_sha256": "b6311abf37f44fee86e7c4dcfb73651e6a2787d393c62f74f7404fc401e626ff"
+            },
+            {
+              "blob": "cc94f85746dae6a6f602a61554f40117e6ec0e70",
+              "bytes": 444860,
+              "commit": "6b370a4b19d31a7e6d8580186344ee0ee43959ec",
+              "mode": "100644",
+              "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context/part-46500.json.gz",
+              "sha256": "8da9ad7e913b25cf2517540e3762b2e129595a897673c87788ba114c14308569",
+              "uncompressed_bytes": 1491917,
+              "uncompressed_sha256": "3964508432d1d22766ef3ecadb683830f39b6f788e60925a00f231acaee459bb"
+            },
+            {
+              "blob": "05428ee82ed1bcc201e825e066bbca9f878bf535",
+              "bytes": 9411,
+              "commit": "6b370a4b19d31a7e6d8580186344ee0ee43959ec",
+              "mode": "100644",
+              "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context-index.json",
+              "sha256": "2a1ba93fcdfc81da3247e6abacb49a5df6284d6c1ffd2b2a73f4e84c3b760716"
+            }
+          ],
+          "native_body_path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/native-selected/records.bin",
+          "native_receipt_path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/native-selected/receipt.json",
+          "neighbor_path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/atlas-neighbors/features.geojson",
+          "operating_path": "research/geography/alaska-thirteen-geometry-measurement-20261008/execution/measure-alaska-run-fourteen-operating-receipt.json",
+          "original_code": [
+            {
+              "bytes": 13816,
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/phase_admission.py",
+              "role": "project-code",
+              "sha256": "d619a0413f750939732fa2be969f29d74e18060c1eb10f7e5e42e9a6889e6da2"
+            },
+            {
+              "bytes": 12014,
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/extract_native_records.py",
+              "role": "project-code",
+              "sha256": "070d0682c6726cf8d75592d659cf882c48ca1dce9ff9f33d6c541daa09a3420f"
+            },
+            {
+              "bytes": 5061,
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/capture_alaska_parent.py",
+              "role": "project-code",
+              "sha256": "c79bb234817875a06db935e6f8c99ea1a81a06dbc5bf054f4fd585699bbdaaa9"
+            },
+            {
+              "bytes": 3976,
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/capture_atlas_neighbors.py",
+              "role": "project-code",
+              "sha256": "50be53c56ba1eba2f63d7fea1a11c5dc1c7e99c2c2a7899827276f3edaa4879e"
+            },
+            {
+              "bytes": 7767,
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/capture_original_fragment_contacts.py",
+              "role": "project-code",
+              "sha256": "71cb8eec99e12db668d6beff156ab4003bcd07ee1ace157fe4286890f429b3f6"
+            },
+            {
+              "bytes": 69925,
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/measure_alaska.py",
+              "role": "project-code",
+              "sha256": "59553c3dd787925f9aef3e6654c060acbb43b33d4b0463ebd992c93f84516f41"
+            },
+            {
+              "bytes": 7177,
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/measurement_driver.py",
+              "role": "project-code",
+              "sha256": "9903d31a80a946936f575733e079c083da1ffe3734615aeec5536725a5c0aa7f"
+            },
+            {
+              "bytes": 6241,
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/run_phase.py",
+              "role": "project-code",
+              "sha256": "efdb3446ab35af320060403337c0ddb16b921fe04f027dbc81850f9c5d4a84f0"
+            },
+            {
+              "bytes": 4160,
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/verify_extraction_replay.py",
+              "role": "project-code",
+              "sha256": "d8b235d2970aca2defc55fb7f39ba60d57d5c46a2cfaeaaba50f9cc40a378312"
+            },
+            {
+              "bytes": 17817,
+              "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/reproduce_union_control.py",
+              "role": "project-code",
+              "sha256": "02dd7388192b0da2d4ce8a4f49d903f6aff44e17498552694da7e91be946c2be"
+            },
+            {
+              "bytes": 17414,
+              "path": "scripts/evidence/immutable.py",
+              "role": "project-code",
+              "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+            }
+          ],
+          "original_targets_path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/native-atlas-target-features.geojson",
+          "profile": "retained-USA-ADM2-counties-2018",
+          "publication_path": "research/geography/alaska-thirteen-geometry-measurement-20261008/vintages/run-fourteen/publication.json",
+          "records_path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/physical-query-rows.jsonl",
+          "target_banks": [
+            "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context/part-43500.json.gz",
+            "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context/part-45000.json.gz",
+            "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context/part-46500.json.gz"
+          ],
+          "version": 1
+        },
+        "version": 3
+      },
+      "rule_sha256": "199f6e33cf394fe92dd490100a717eb23c008cbe896f69ac01e36f49e2f6d8a6",
+      "selected": false,
+      "source_rule": {
+        "admission_path": "research/geography/alaska-thirteen-geometry-measurement-20261008/phase-admission.json",
+        "candidate_path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-components.geojson",
+        "cases_path": "research/geography/alaska-thirteen-geometry-measurement-20261008/vintages/run-fourteen/measurement.json",
+        "contact_path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/contact-authority/contact-authority-receipt.json",
+        "context_index_path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context-index.json",
+        "expected_ids": [
+          "physical-component:073d9a81648d56c1b63a4e495fbd0140c17659bedb5c9b211739642b438ee488",
+          "physical-component:4d36c81ff35079341e6ec0d5a207ba3844e26f5d55c30c7205924dfd33b8dc18",
+          "physical-component:5874689a46f7945e9dcc67cc3b0321d4e534572e4b4bd8a85f4a07c5005d1922",
+          "physical-component:66e4f6c15eb17f53815844efc04e7cae9faf9118de313541d3a4be2ff1fcf0a2",
+          "physical-component:70174bffffdbb4a421344d6c10d80b760972f9c5452daf0d7c26408fdf18bb53",
+          "physical-component:777e7bc99320bf155684f99b0903c336f9a07862de4a7fa0ac8cde990d7d6ee5",
+          "physical-component:8435dc6d973751bab55c4eff12c872ba331c3e005254ceb21b76933a8cc6207a",
+          "physical-component:8fb2ed9360ba13f6b19f8bb6ee9a16099039d8b59c9f51eab0a442249f428e7d",
+          "physical-component:9f130f023a510be6e4b2f9075ed99cf75c4f88053e93189dda3f0bd51080f14a",
+          "physical-component:cffd5f514585665c2d76279e036889887df24efa229a67f88052aef0d8ee4a83",
+          "physical-component:d688afd3657ded3f0cf85a95956f2d42726f44923b168499320d681080539fb1",
+          "physical-component:e76fd386dc9a23375537ede302f7f380a217fd4bbccd9536f856e8b4253a5ab8",
+          "physical-component:ef7383db4412abe64b7e8d009679cffa4a3174d6da100c6de1fc37272aadeca9"
+        ],
+        "inputs": [
+          {
+            "blob": "22b2ab5d5cfe0a93f85c7dfe5127ab45a23e0ea3",
+            "bytes": 131133,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/phase-admission.json",
+            "sha256": "d2be8305241edb27e222899647054c31f16209880ec079bf7a029dbeafd02673"
+          },
+          {
+            "blob": "7a3fddaf8a4d5748d2fb5c3911e11f4685664c45",
+            "bytes": 1859641,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/alaska-adm1-parent/feature.geojson",
+            "sha256": "938520d544d21c6eaf68e69cb53b220f2e38de44071ded03e980db0ace9e6793"
+          },
+          {
+            "blob": "4c08f1561b6eb8cf9e81c8d4bd4958947a33ecc8",
+            "bytes": 1653,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/alaska-adm1-parent/receipt.json",
+            "sha256": "ba0e624e248caeff90b63ba7a9b64729124fe29a1c3082f0cdf280664f0db6a3"
+          },
+          {
+            "blob": "075372c9e0edee442563eb7dbe5f2731f0ee6bb5",
+            "bytes": 163693,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/atlas-neighbors/features.geojson",
+            "sha256": "ff6fd68435898492221491636e5d8e50e72fce387c2fde9d77f48198f17c03a0"
+          },
+          {
+            "blob": "e6b85682c319b1da2ce29dd5579d6aef8e4cc9c1",
+            "bytes": 7040,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/atlas-neighbors/receipt.json",
+            "sha256": "892dfa4685aea1a1cd7c6e5108987274404704b4cf42bb8b6862bb63175d3615"
+          },
+          {
+            "blob": "f01b1efd6e218e17eb97bdb0c5643e6273a5c700",
+            "bytes": 20126,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/contact-authority/contact-authority-receipt.json",
+            "sha256": "7547a46be51a7a5cdfeaaddb86a9c0c46f9a0d3983d5fbe9239a128fb678cae1"
+          },
+          {
+            "blob": "acec80bacb3484ce7a65d48ba4404b6bc05543f7",
+            "bytes": 2672,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/contact-authority/detector-vintage-supplement.json",
+            "sha256": "f7972cfbaac738bd12e99d4581660fa2f671a77b5dabc40a06fe390e3e29c271"
+          },
+          {
+            "blob": "ed5e8f92f7bbd4915cb33ac6f9f627458185b8be",
+            "bytes": 10500644,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/geoboundaries-USA-ADM2-full-9469f09.geojson",
+            "sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43"
+          },
+          {
+            "blob": "737603d5cbf9d75229ad3ca846ee31e64391df1f",
+            "bytes": 14483,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/native-selected/receipt.json",
+            "sha256": "4b43720ead947aa1a985edf98de7347a5018da05a3b246d42e6f8aa6c5fbf624"
+          },
+          {
+            "blob": "d24c4db7566b5cc29238d352e889e5254516642a",
+            "bytes": 7168404,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/native-selected/records.bin",
+            "sha256": "9f4833fdac3cbebb9e60d413f469570453b1bad177892b9227702125728b99d5"
+          },
+          {
+            "blob": "9de64a00ea46b49b14c4ba285671f7fec76b28aa",
+            "bytes": 21588,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/original-fragment-contacts/features.geojson",
+            "sha256": "a2ffac1913df9e1b771e46f1f5a41f3776fbd67a0f2b7926dfea3605810e9185"
+          },
+          {
+            "blob": "f4524865f72c0e694399e743dd26ee5aaa29211b",
+            "bytes": 13262,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/original-fragment-contacts/receipt.json",
+            "sha256": "27aec1df27b2320eb8e7c1dfc4093acc3deada46bae7394e5a3c8fc062c16aad"
+          },
+          {
+            "blob": "d6abc998026a8cc1dfa91684f9c82ed069f8fe87",
+            "bytes": 18192,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-components.geojson",
+            "sha256": "b24011f1acef059783ea61d96308f3b43ef0aabdbaf19f1fb7694b613a470b14"
+          },
+          {
+            "blob": "d4e1b95c38860e08385ffdba337c51cf3d812f62",
+            "bytes": 166310,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-source-screen.json",
+            "sha256": "0763d5368b045b0f77951616d83ebaf1bc30336fad7f58fe5e0b4ddef52cc867"
+          },
+          {
+            "blob": "2577268b4bd90b74cbf2ad0ba64b455195687c5e",
+            "bytes": 226731,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/complete-native-family-record.jsonl",
+            "sha256": "5c79b82588ff5c8f3c1e6305e4c1bcd565b7e379203b95bc2c09322f30f18119"
+          },
+          {
+            "blob": "7f16c1c4aa7d11ddf25c6a6434630272a4c45459",
+            "bytes": 4316,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/geoBoundaries-derivative-use-terms.txt",
+            "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+          },
+          {
+            "blob": "8ffb51e7c9b58d28fa5a77a9657b75265952bb0e",
+            "bytes": 18640,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/gshhg-native-query-records.json",
+            "sha256": "d978c4e92bdcbff3ece9f4f798ea977ed21a4d709ef5598fed5bde71a7130783"
+          },
+          {
+            "blob": "f01965f04a509635df2384e43549ba2280883ded",
+            "bytes": 366513,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/native-atlas-target-features.geojson",
+            "sha256": "0cfe5197d17fdd88fa4a13bbd1ac120a7cf195cc6ee7bf3b49dbd0303b86e326"
+          },
+          {
+            "blob": "7e196e27f162126a6a79744d3a98563fa8281464",
+            "bytes": 38656,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/physical-query-rows.jsonl",
+            "sha256": "e36d6319cd9d23c4c8d508415f8af7965e069928e5e1206faac3d50cbd5ece50"
+          },
+          {
+            "blob": "79269727e2397d9851ea85cf0f780ba8f389dbb7",
+            "bytes": 608036,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/selected-2018-usa-adm2-features.geojson",
+            "sha256": "02427b560826d51ab275e3df6f8fa3d4629dd762733f5c4c69b1a8f2ee8e44b5"
+          },
+          {
+            "blob": "c5eebe4386083d2417c44a88041bbd5614c6a7e6",
+            "bytes": 2949,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/usa-adm2-attribution.json",
+            "sha256": "6236712dd0cf23fd258ce7e4a39412e7652be7d2a3c4db2b3e83ddbd4a60c8cd"
+          },
+          {
+            "blob": "e66e22aa15796ea370e634e1bf44726ddae142f2",
+            "bytes": 5084,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/usa-adm2-source-metadata.json",
+            "sha256": "88dcd7f581d5b8d2b5f5003cf4cd7b39310b8bc52c96e8371d55c92559dd2258"
+          },
+          {
+            "blob": "a7cff4940e085a588d415e66784a3f8fa23feae9",
+            "bytes": 13816,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/phase_admission.py",
+            "sha256": "d619a0413f750939732fa2be969f29d74e18060c1eb10f7e5e42e9a6889e6da2"
+          },
+          {
+            "blob": "f6dc54852a7dda788c718287c8a3bc497691c893",
+            "bytes": 12014,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/extract_native_records.py",
+            "sha256": "070d0682c6726cf8d75592d659cf882c48ca1dce9ff9f33d6c541daa09a3420f"
+          },
+          {
+            "blob": "500fbdf1e5a703aeb34dc539f8e2ff756daa6d14",
+            "bytes": 5061,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/capture_alaska_parent.py",
+            "sha256": "c79bb234817875a06db935e6f8c99ea1a81a06dbc5bf054f4fd585699bbdaaa9"
+          },
+          {
+            "blob": "fb6e620d129019616910b50595747948ab03c382",
+            "bytes": 3976,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/capture_atlas_neighbors.py",
+            "sha256": "50be53c56ba1eba2f63d7fea1a11c5dc1c7e99c2c2a7899827276f3edaa4879e"
+          },
+          {
+            "blob": "760000bff46acf8f7dd988fe167c509a2cc16544",
+            "bytes": 7767,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/capture_original_fragment_contacts.py",
+            "sha256": "71cb8eec99e12db668d6beff156ab4003bcd07ee1ace157fe4286890f429b3f6"
+          },
+          {
+            "blob": "82dfd09d6d1b89aa0e155c0557299fd70427657f",
+            "bytes": 69925,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/measure_alaska.py",
+            "sha256": "59553c3dd787925f9aef3e6654c060acbb43b33d4b0463ebd992c93f84516f41"
+          },
+          {
+            "blob": "a8c561484725a3b3c39973cc60b638244c956464",
+            "bytes": 7177,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/measurement_driver.py",
+            "sha256": "9903d31a80a946936f575733e079c083da1ffe3734615aeec5536725a5c0aa7f"
+          },
+          {
+            "blob": "ed85fe9ad89284c93bc63b1630d09161d05638e5",
+            "bytes": 6241,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/run_phase.py",
+            "sha256": "efdb3446ab35af320060403337c0ddb16b921fe04f027dbc81850f9c5d4a84f0"
+          },
+          {
+            "blob": "bf45916269e5cc73d9a2c1e5494ef45456e9583a",
+            "bytes": 4160,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/verify_extraction_replay.py",
+            "sha256": "d8b235d2970aca2defc55fb7f39ba60d57d5c46a2cfaeaaba50f9cc40a378312"
+          },
+          {
+            "blob": "35051fc1e9bc4d0595bb28f76f952b6349683bb5",
+            "bytes": 17817,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/reproduce_union_control.py",
+            "sha256": "02dd7388192b0da2d4ce8a4f49d903f6aff44e17498552694da7e91be946c2be"
+          },
+          {
+            "blob": "eeee767a7fd27877bd5723bbfcaaee82af43d6ab",
+            "bytes": 17414,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "scripts/evidence/immutable.py",
+            "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+          },
+          {
+            "blob": "cbf223f91bd603043a308b9a2b468f9b7d3c8ffa",
+            "bytes": 734884,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/vintages/run-fourteen/measurement.json",
+            "sha256": "92c2ad119724ed9905943d94cb52c5bcb74310e38f331ebbd7f64bd6851821c5"
+          },
+          {
+            "blob": "67e0841d404cde60a9236262ebb1fe4f599df55a",
+            "bytes": 986,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/vintages/run-fourteen/publication.json",
+            "sha256": "564ee3b7aa640afef4fecda7db1780af2e9b521cd48e634ba4ecc2c98ea10b04"
+          },
+          {
+            "blob": "f3c5ffd2c0ed291ed6a83709a623a7571e68f935",
+            "bytes": 2340,
+            "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+            "mode": "100644",
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/execution/measure-alaska-run-fourteen-operating-receipt.json",
+            "sha256": "96fcf16824ecae2d32afc9fb5c20d3003f819e84c86f790809025055fb8a9ffd"
+          },
+          {
+            "blob": "ced8ebf8913735bf7906c40a889557c5cb39d421",
+            "bytes": 479228,
+            "commit": "6b370a4b19d31a7e6d8580186344ee0ee43959ec",
+            "mode": "100644",
+            "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context/part-43500.json.gz",
+            "sha256": "8c0bf41e765ad3c291bff0735fd89e83c378cdfcb59e1398156970cc24400b1a",
+            "uncompressed_bytes": 1618234,
+            "uncompressed_sha256": "19f0792f121b824f444d096c6269acfafb13cae9d35ae91aa9f7de1680e955ed"
+          },
+          {
+            "blob": "73553ad8a9530da2b0a1b5264959b5e5e57f425d",
+            "bytes": 376329,
+            "commit": "6b370a4b19d31a7e6d8580186344ee0ee43959ec",
+            "mode": "100644",
+            "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context/part-45000.json.gz",
+            "sha256": "895ea07b762e61431128cc62325569e29c5aa227bfc5132d97cd551c75f537b4",
+            "uncompressed_bytes": 1291015,
+            "uncompressed_sha256": "b6311abf37f44fee86e7c4dcfb73651e6a2787d393c62f74f7404fc401e626ff"
+          },
+          {
+            "blob": "cc94f85746dae6a6f602a61554f40117e6ec0e70",
+            "bytes": 444860,
+            "commit": "6b370a4b19d31a7e6d8580186344ee0ee43959ec",
+            "mode": "100644",
+            "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context/part-46500.json.gz",
+            "sha256": "8da9ad7e913b25cf2517540e3762b2e129595a897673c87788ba114c14308569",
+            "uncompressed_bytes": 1491917,
+            "uncompressed_sha256": "3964508432d1d22766ef3ecadb683830f39b6f788e60925a00f231acaee459bb"
+          },
+          {
+            "blob": "05428ee82ed1bcc201e825e066bbca9f878bf535",
+            "bytes": 9411,
+            "commit": "6b370a4b19d31a7e6d8580186344ee0ee43959ec",
+            "mode": "100644",
+            "path": "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context-index.json",
+            "sha256": "2a1ba93fcdfc81da3247e6abacb49a5df6284d6c1ffd2b2a73f4e84c3b760716"
+          }
+        ],
+        "native_body_path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/native-selected/records.bin",
+        "native_receipt_path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/native-selected/receipt.json",
+        "neighbor_path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/atlas-neighbors/features.geojson",
+        "operating_path": "research/geography/alaska-thirteen-geometry-measurement-20261008/execution/measure-alaska-run-fourteen-operating-receipt.json",
+        "original_code": [
+          {
+            "bytes": 13816,
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/phase_admission.py",
+            "role": "project-code",
+            "sha256": "d619a0413f750939732fa2be969f29d74e18060c1eb10f7e5e42e9a6889e6da2"
+          },
+          {
+            "bytes": 12014,
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/extract_native_records.py",
+            "role": "project-code",
+            "sha256": "070d0682c6726cf8d75592d659cf882c48ca1dce9ff9f33d6c541daa09a3420f"
+          },
+          {
+            "bytes": 5061,
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/capture_alaska_parent.py",
+            "role": "project-code",
+            "sha256": "c79bb234817875a06db935e6f8c99ea1a81a06dbc5bf054f4fd585699bbdaaa9"
+          },
+          {
+            "bytes": 3976,
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/capture_atlas_neighbors.py",
+            "role": "project-code",
+            "sha256": "50be53c56ba1eba2f63d7fea1a11c5dc1c7e99c2c2a7899827276f3edaa4879e"
+          },
+          {
+            "bytes": 7767,
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/capture_original_fragment_contacts.py",
+            "role": "project-code",
+            "sha256": "71cb8eec99e12db668d6beff156ab4003bcd07ee1ace157fe4286890f429b3f6"
+          },
+          {
+            "bytes": 69925,
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/measure_alaska.py",
+            "role": "project-code",
+            "sha256": "59553c3dd787925f9aef3e6654c060acbb43b33d4b0463ebd992c93f84516f41"
+          },
+          {
+            "bytes": 7177,
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/measurement_driver.py",
+            "role": "project-code",
+            "sha256": "9903d31a80a946936f575733e079c083da1ffe3734615aeec5536725a5c0aa7f"
+          },
+          {
+            "bytes": 6241,
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/run_phase.py",
+            "role": "project-code",
+            "sha256": "efdb3446ab35af320060403337c0ddb16b921fe04f027dbc81850f9c5d4a84f0"
+          },
+          {
+            "bytes": 4160,
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/verify_extraction_replay.py",
+            "role": "project-code",
+            "sha256": "d8b235d2970aca2defc55fb7f39ba60d57d5c46a2cfaeaaba50f9cc40a378312"
+          },
+          {
+            "bytes": 17817,
+            "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/reproduce_union_control.py",
+            "role": "project-code",
+            "sha256": "02dd7388192b0da2d4ce8a4f49d903f6aff44e17498552694da7e91be946c2be"
+          },
+          {
+            "bytes": 17414,
+            "path": "scripts/evidence/immutable.py",
+            "role": "project-code",
+            "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+          }
+        ],
+        "original_targets_path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/native-atlas-target-features.geojson",
+        "profile": "retained-USA-ADM2-counties-2018",
+        "publication_path": "research/geography/alaska-thirteen-geometry-measurement-20261008/vintages/run-fourteen/publication.json",
+        "records_path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/physical-query-rows.jsonl",
+        "target_banks": [
+          "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context/part-43500.json.gz",
+          "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context/part-45000.json.gz",
+          "coordination/engineering/additive-native-gap-batch-20261008/current-v8/context/part-46500.json.gz"
+        ],
+        "version": 1
+      }
+    }
+  ],
+  "kind": "actual-existing-rule-preimage-extraction",
+  "scope": "Original immutable rule hashes and whole original bodies only; no new policy approval, full source revalidation, current-bank rebind, activation, GIS or scientific execution.",
+  "source_head": "ea8614305fbf1488a4ec32aecb7cd96e761635de",
+  "version": 1,
+  "whole_original_body_files": [
+    {
+      "bytes": 38500,
+      "path": "aa358655aa1401bcc4d9e791b864b98ec4669139d5baa449f5d7e48ffbd1d628.json",
+      "sha256": "aa358655aa1401bcc4d9e791b864b98ec4669139d5baa449f5d7e48ffbd1d628"
+    },
+    {
+      "bytes": 23966,
+      "path": "ad9eaff2cba89fd3da3ab91bc2285daf3cf02572161189b69924f0602e076bfc.json",
+      "sha256": "ad9eaff2cba89fd3da3ab91bc2285daf3cf02572161189b69924f0602e076bfc"
+    },
+    {
+      "bytes": 251732,
+      "path": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885.json",
+      "sha256": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885"
+    },
+    {
+      "bytes": 14579,
+      "path": "6f8bb8e51324610356432bd65461b045b144b583c74eae3f6356d765e90c58d6.json",
+      "sha256": "6f8bb8e51324610356432bd65461b045b144b583c74eae3f6356d765e90c58d6"
+    },
+    {
+      "bytes": 15947,
+      "path": "a69f70b8bebd256faee3fad125cdfbdf33829ecfc0084f98ff3319968e3dae52.json",
+      "sha256": "a69f70b8bebd256faee3fad125cdfbdf33829ecfc0084f98ff3319968e3dae52"
+    },
+    {
+      "bytes": 26100,
+      "path": "0b301a59f96273c703f333b91e5219a409139cc2c14d43d78968fd57f7845622.json",
+      "sha256": "0b301a59f96273c703f333b91e5219a409139cc2c14d43d78968fd57f7845622"
+    },
+    {
+      "bytes": 157584,
+      "path": "d5eda4b890a45a61d8bcf916f8cc07c01515af33812612dab63bb885af1a6c74.json",
+      "sha256": "d5eda4b890a45a61d8bcf916f8cc07c01515af33812612dab63bb885af1a6c74"
+    },
+    {
+      "bytes": 43144,
+      "path": "8369175aaad5dcdc1450932f3db98b6641d2e3d5f0db5a297d75295182ff2e76.json",
+      "sha256": "8369175aaad5dcdc1450932f3db98b6641d2e3d5f0db5a297d75295182ff2e76"
+    },
+    {
+      "bytes": 26159,
+      "path": "a3686e7e2b4c83bb872ec324262ff2493b7fdb914ec0e2878f9ae50d4aa78a72.json",
+      "sha256": "a3686e7e2b4c83bb872ec324262ff2493b7fdb914ec0e2878f9ae50d4aa78a72"
+    },
+    {
+      "bytes": 26535,
+      "path": "037128b08977dc5698c9458f8a0a38bd88b616959b6d8737fd1f6777b767d86f.json",
+      "sha256": "037128b08977dc5698c9458f8a0a38bd88b616959b6d8737fd1f6777b767d86f"
+    },
+    {
+      "bytes": 46507,
+      "path": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778.json",
+      "sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778"
+    }
+  ]
+}

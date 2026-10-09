@@ -1,0 +1,19 @@
+{
+  "method_id": "sar-source-identity-reproduction",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "cases": [
+    {
+      "id": "HKG exact Natural Earth roster",
+      "expected": 18,
+      "actual": 18,
+      "passed": true
+    },
+    {
+      "id": "MAC exact geoBoundaries native ShapeID",
+      "expected": 1,
+      "actual": 1,
+      "passed": true
+    }
+  ]
+}

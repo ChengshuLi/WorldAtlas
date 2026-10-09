@@ -6,9 +6,15 @@ import { createHash } from 'node:crypto';
 import {assertPackageStage} from './package-build.mjs';
 import {requireValidatedGeometryMigrations} from './prepare-geographic-release.mjs';
 assertPackageStage();
-import {restoreCanonicalProducts} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs';
+import {restoreCanonicalProducts} from './canonical-restoration.mjs';
+import {restoreCanonicalProducts as restoreOriginalQualifiedProducts} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs';
+import {observeSetupPhase} from './ci-setup-observations.mjs';
 await fs.mkdir('.cache',{recursive:true});
-const restoredCanonical=await restoreCanonicalProducts({root:process.cwd(),temporaryRoot:process.cwd()+'/.cache'});
+const bootstrapSelection=await fs.readFile('data/ownership-selection.json','utf8').then(JSON.parse,error=>{if(error.code==='ENOENT')return null;throw error;});
+// The reviewed artifact route consumes literal original custody; ordinary routes
+// retain main's current operational restoration and setup observation.
+const restoreSelectedProducts=bootstrapSelection?.artifact_consumption?restoreOriginalQualifiedProducts:restoreCanonicalProducts;
+const restoredCanonical=await observeSetupPhase('canonical-package',()=>restoreSelectedProducts({root:process.cwd(),temporaryRoot:process.cwd()+'/.cache'}));
 const {resolveTypedSnapshot} = await import('../src/typed-snapshot.js');
 const {createGridIndex} = await import('../src/pixel-grid.js');
 const {compileOwnership,packOwnership} = await import('../src/pixel-ownership.js');
@@ -26,7 +32,7 @@ const {validateBuildContextVintage: validateOriginalBuildContext} = await import
 const {validateBuildContextStage: validateCurrentBuildContext,BUILD_CONTEXT_STAGE_PATH} = await import('./native-ownership/validate-build-context-stage.mjs');
 const {packageNativeLatitudes} = await import('./package-native-latitudes.mjs');
 const {rebindCoverageManifest} = await import('./rebind-coverage-manifest.mjs');
-const {foldCoverageContinuation,selectBuildContextValidator} = await import('../coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs');
+const {foldCoverageContinuation,selectBuildContextValidator} = await import('./native-ownership/chained-build-context.mjs');
 const {readPackageCurrentExecution} = await import('../coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs');
 function releaseBuildContextBaselines(context) {
   const third=context.coverageContinuation.predecessorGeometryValidation;

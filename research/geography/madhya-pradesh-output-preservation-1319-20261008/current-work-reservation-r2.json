@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "accepted": true,
+  "request_id": "1c23c84a-839f-4236-a8e5-780aee4035c3",
+  "issue_number": 1485,
+  "claim_id": "de583f36-9be4-450f-bdef-047cc895df7f",
+  "worker_id": "01a10948-7d38-75d0-bc01-4cc28ea41f49",
+  "branch": "geography/mp-output-safety-1485-20261008-01a10948-r2",
+  "claimed_at": "2026-10-08T23:08:47.107Z",
+  "expires_at": "2026-10-09T23:08:47.107Z",
+  "live_work": false,
+  "mode": "geography",
+  "max_prs": 2,
+  "owned_paths": [
+    "research/geography/madhya-pradesh-output-preservation-1319-20261008/"
+  ],
+  "fresh_origin_main": "54defba631914989b0b1ebef340ce0b04c39c430",
+  "workflow_run": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37857729869",
+  "live_work_update_attempt": {
+    "request_id": "5ebb0b56-d254-4f7c-accf-979a63b68749",
+    "workflow_run": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37859262636",
+    "requested_live_work": true,
+    "accepted": false,
+    "reason": "Geography workers stage evidence only and cannot reserve live operations",
+    "effect": "The confirmed active claim remains active with live_work=false."
+  }
+}

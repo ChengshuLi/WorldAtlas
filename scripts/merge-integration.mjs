@@ -103,11 +103,12 @@ function preparedBranch({number, integrationRequestId}) {
 export async function cleanupCandidate(options, reference, expectedSHA) {
   need(reference === preparedBranch(options) && commitID(expectedSHA), 'Refuse cleanup of unowned integration reference');
   const route = `${root(options.repo)}/git/refs/heads/${reference}`;
+  const api = typeof options.api.recovery === 'function' ? options.api.recovery : options.api;
   let current;
-  try { current = await options.api(`${root(options.repo)}/git/ref/heads/${reference}`); }
+  try { current = await api(`${root(options.repo)}/git/ref/heads/${reference}`); }
   catch (error) { if (/\(HTTP 404\)$/.test(error.message)) return {status: 'absent', reference}; throw error; }
   need(current.object?.sha === expectedSHA, 'Integration reference changed; retain for operator inspection');
-  await options.api(route, 'DELETE');
+  await api(route, 'DELETE');
   return {status: 'deleted', reference};
 }
 // Cleanup is best-effort after an independently confirmed merge. GitHub's

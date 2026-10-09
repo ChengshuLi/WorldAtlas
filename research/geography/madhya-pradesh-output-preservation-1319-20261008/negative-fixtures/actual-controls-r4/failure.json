@@ -1,0 +1,8 @@
+{
+  "attempt": "actual-controls-r4",
+  "classification": "harness-failure-before-cli-execution",
+  "reason": "The reproducible wrapper stopped before executing the historical CLI because its first draft contained an incorrect expected hash for evaluation-inputs.json. No writer result is claimed from this attempt.",
+  "preserved_fixture": "negative-fixtures/actual-controls-r4/",
+  "actual_manifest_sha256": "e2f9c442883ea10768dd8ae4946061c9681cb3b9e15e4c1ff442f80c04e3a098",
+  "counted_as_success": false
+}

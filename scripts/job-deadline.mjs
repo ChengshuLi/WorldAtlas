@@ -6,8 +6,8 @@ export const JOB_FINALIZATION_MS = 30_000;
 export const HTTP_ATTEMPT_MS = 20_000;
 const need = (ok, message) => {if (!ok) throw Error(message);};
 
-export function schedulerJobMinutes(workflow, phase) {
-  need(['register', 'schedule'].includes(phase), 'Invalid scheduler phase');
+export function workflowJobMinutes(workflow, phase) {
+  need(/^[a-z][a-z0-9_-]*$/.test(phase ?? ''), 'Invalid workflow phase');
   const roots = [...workflow.matchAll(/^jobs:[ \t]*\r?\n/gm)];
   need(roots.length === 1, 'Cannot establish unique workflow jobs');
   const jobs = workflow.slice(roots[0].index + roots[0][0].length);
@@ -24,14 +24,14 @@ export function schedulerJobMinutes(workflow, phase) {
   return minutes;
 }
 
-export async function loadSchedulerDeadline({api, repo, phase, workflow, env = process.env,
+export async function loadJobDeadline({api, repo, phase, workflow, env = process.env,
   wallNow = Date.now, monotonicNow = () => performance.now()}) {
   need(/^[-\w.]+\/[-\w.]+$/.test(repo ?? ''), 'Invalid deadline repository');
   need(env.GITHUB_JOB === phase && /^[1-9]\d*$/.test(env.GITHUB_RUN_ID ?? '') &&
     /^[1-9]\d*$/.test(env.GITHUB_RUN_ATTEMPT ?? ''), 'Missing current job/run/attempt authority');
   const run = Number(env.GITHUB_RUN_ID), attempt = Number(env.GITHUB_RUN_ATTEMPT);
   need(Number.isSafeInteger(run) && Number.isSafeInteger(attempt), 'Invalid job/run/attempt authority');
-  const minutes = schedulerJobMinutes(workflow, phase);
+  const minutes = workflowJobMinutes(workflow, phase);
   const wallStarted = wallNow(), monotonicStarted = monotonicNow();
   // The bootstrap API has no quota retry. An unavailable/ambiguous inventory
   // refuses before queue writes; do not spend an eight-minute wait finding it.
@@ -60,4 +60,14 @@ export async function loadSchedulerDeadline({api, repo, phase, workflow, env = p
   need(remaining() > HTTP_ATTEMPT_MS, 'Job deadline exhausted during metadata admission');
   return {remaining, job_id: job.id, run_id: run, run_attempt: attempt,
     phase, started_at: job.started_at, timeout_minutes: minutes, finalization_ms: JOB_FINALIZATION_MS};
+}
+
+// Preserve the existing scheduler interface and its deliberately bounded phases.
+export function schedulerJobMinutes(workflow, phase) {
+  need(['register', 'schedule'].includes(phase), 'Invalid scheduler phase');
+  return workflowJobMinutes(workflow, phase);
+}
+export function loadSchedulerDeadline(options) {
+  need(['register', 'schedule'].includes(options.phase), 'Invalid scheduler phase');
+  return loadJobDeadline(options);
 }

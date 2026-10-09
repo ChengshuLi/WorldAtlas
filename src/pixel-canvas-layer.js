@@ -1,5 +1,7 @@
+import {effectiveFootprintBounds} from './effective-footprint.js';
+import {NATIVE_GRID_METHOD} from './native-grid.js';
 import L from 'leaflet';
-import {GRID_ZOOM,createGridIndex,borderKind,borderStyle,viewStride} from './pixel-grid.js';
+import {GRID_ZOOM,projectCell,createGridIndex,borderKind,borderStyle,viewStride} from './pixel-grid.js';
 import {pickOwnership} from './pixel-ownership.js';
 import {coverageExplanation,coverageText,coverageContent} from './coverage-classification.js';
 import {updateLocationMetadata} from './pixel-metadata.js';
@@ -17,7 +19,22 @@ function rgb(css){
 }
 
 export class PixelCanvasLayer extends L.Layer {
-  constructor(features,options){super();this.index=createGridIndex(features,{ordered:options.orderedOwners===true});this.options=options;this.frame=null;this.sequence=0;this.jobs=new Map();this.worker=new Worker(new URL('./pixel-worker.js',import.meta.url),{type:'module'});this.worker.onmessage=({data})=>{this.jobs.get(data.request)?.(data);this.jobs.delete(data.request);};if(options.ownership){this.worker.postMessage({type:'precompiled',grid:options.ownership});}else this.sendIndex('locations',this.index);if(options.coverage)this.worker.postMessage({type:'coverage',grid:options.coverage.grid});this.provinceIds=[null,...this.index.map(x=>x.feature.properties.parent_id)];}
+  constructor(features,options){super();
+    const composite=features.some(feature=>Object.hasOwn(feature,'additiveFootprint'));
+    if(composite && (options.ownership?.method!==NATIVE_GRID_METHOD || !((options.ownership.effective_footprint_domain==='worldatlas-effective-native-footprints:v1'&&/^[a-f0-9]{64}$/.test(options.ownership.effective_footprint_sha256??''))||(options.ownership.context_footprint_domain==='worldatlas-display-context-footprints:v1'&&/^[a-f0-9]{64}$/.test(options.ownership.context_footprints_sha256??'')&&/^[a-f0-9]{64}$/.test(options.ownership.reference_footprints_sha256??'')))))
+      throw Error('Additive footprints require the authenticated native grid; projected fallback is unsupported');
+    this.index=createGridIndex(features,{ordered:options.orderedOwners===true});
+    if(composite)for(const item of this.index){
+      if(Object.hasOwn(item.feature,'additiveFootprint')){
+        const [west,south,east,north]=effectiveFootprintBounds(item.feature);
+        const [left,bottom]=projectCell(west,south),[right,top]=projectCell(east,north);
+        item.bounds=[left,top,right,bottom];
+      }
+      // Only metadata/bounds are needed: both drawing and picking use the same
+      // supplied native grid. No projected composite is sent to the worker.
+      item.polygons=[];
+    }
+    this.options=options;this.frame=null;this.sequence=0;this.jobs=new Map();this.worker=new Worker(new URL('./pixel-worker.js',import.meta.url),{type:'module'});this.worker.onmessage=({data})=>{this.jobs.get(data.request)?.(data);this.jobs.delete(data.request);};if(options.ownership){this.worker.postMessage({type:'precompiled',grid:options.ownership});}else this.sendIndex('locations',this.index);if(options.coverage)this.worker.postMessage({type:'coverage',grid:options.coverage.grid});this.provinceIds=[null,...this.index.map(x=>x.feature.properties.parent_id)];}
   sendIndex(type,index){const slim=index.map(({index,polygons,bounds})=>({index,polygons,bounds}));this.worker.postMessage({type,index:slim},slim.flatMap(i=>i.polygons.flatMap(p=>p.map(r=>r.buffer))));}
   onAdd(map){
     this.map=map;this.canvas=L.DomUtil.create('canvas','atlas-pixel-canvas leaflet-layer leaflet-zoom-animated');this.canvas.setAttribute('aria-label','Pixel world map');

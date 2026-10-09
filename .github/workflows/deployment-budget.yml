@@ -1,12 +1,16 @@
 name: Deployment package budget
 
 on:
-  pull_request:
-    branches: [main]
   push:
     branches: [main]
 
 permissions: {}
+
+# PR applicability now shares the trusted Integration queue regression phase.
+# Main push observations retain their own exact-commit execution.
+concurrency:
+  group: worldatlas-package-main-${{ github.sha }}
+  cancel-in-progress: false
 
 jobs:
   classify:
@@ -17,6 +21,7 @@ jobs:
       pull-requests: read
     outputs:
       full: ${{ steps.profile.outputs.full }}
+      blocked: ${{ steps.profile.outputs.blocked }}
     steps:
       # Never execute the candidate classifier with the read-only API token.
       # Before the helper reaches trusted base, every event gets a full build.
@@ -29,9 +34,9 @@ jobs:
           persist-credentials: false
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            scripts/classify-deployment-budget.mjs
-            scripts/package-inputs.mjs
-            .github/package-inputs.json
+            scripts
+            src
+            .github
             package.json
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
@@ -64,6 +69,11 @@ jobs:
     permissions:
       contents: read
     steps:
+      - name: Refuse package verification while Actions API quota is unavailable
+        if: needs.classify.outputs.blocked == 'true'
+        run: |
+          echo 'Package is unverified: Actions API quota refused classification. Inspect the retained reset/retry receipt before retrying.'
+          exit 1
       - name: Checkout complete package inputs
         if: needs.classify.outputs.full != 'false'
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803

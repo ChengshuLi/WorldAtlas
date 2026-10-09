@@ -1,0 +1,3403 @@
+{
+  "version": 1,
+  "issue": 1523,
+  "lane": "engineering",
+  "worker_id": "01a11935-1ccd-7fa3-a01f-563ff29045ee",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "version": 2,
+    "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+    "files": [
+      {
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-source-screen.json",
+        "bytes": 166310,
+        "sha256": "0763d5368b045b0f77951616d83ebaf1bc30336fad7f58fe5e0b4ddef52cc867",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "b4b7db357ba92d19df513f188bbd046fe66a35e4",
+        "path": "coordination/engineering/eastern-two-gap-repair-20261007/run-one/corrections.json.gz",
+        "bytes": 94693,
+        "sha256": "ba3cda4a21245e00706a5fe065565d579f71298c2b839d56c1bcbd340459602e",
+        "uncompressed_bytes": 320200,
+        "uncompressed_sha256": "897ca97928956c190fb4b1a25f0364333528b8d789f5e9f60f345f9299803e3e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "commit": "689fa0618ce61827adc8862c3e065bcfcf97417b",
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/native-selection-receipt.json",
+        "bytes": 13848,
+        "sha256": "3e5d3a3f06d7e5340fea11b90deb8acc97d9e0c38f067e455e81359602b0aa28",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "merged_alaska_source_only_delivery": "0763d5368b045b0f77951616d83ebaf1bc30336fad7f58fe5e0b4ddef52cc867",
+      "accepted1295_original_pointset_packet": "ba3cda4a21245e00706a5fe065565d579f71298c2b839d56c1bcbd340459602e",
+      "accepted1295_offline_delivery": "3e5d3a3f06d7e5340fea11b90deb8acc97d9e0c38f067e455e81359602b0aa28"
+    },
+    "pin_files": {
+      "merged_alaska_source_only_delivery": {
+        "path": "research/geography/alaska-thirteen-source-fitness-20261008/sources/candidate-source-screen.json",
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688"
+      },
+      "accepted1295_original_pointset_packet": {
+        "path": "coordination/engineering/eastern-two-gap-repair-20261007/run-one/corrections.json.gz",
+        "commit": "b4b7db357ba92d19df513f188bbd046fe66a35e4"
+      },
+      "accepted1295_offline_delivery": {
+        "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/native-selection-receipt.json",
+        "commit": "689fa0618ce61827adc8862c3e065bcfcf97417b"
+      }
+    }
+  },
+  "sources": [
+    {
+      "id": "retained-original-source-and-native-custody",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1520",
+      "role": "Existing immutable source-relative premise and ownership custody; not contemporary land/water authority",
+      "vintage": "Original retained GSHHG/AAFC/source-fit and selectedv8 predecessor vintages; exact per-file/record/runtime bindings retained",
+      "retrieved_at": "2026-10-08",
+      "license": {
+        "status": "unknown",
+        "terms": "Original source reuse/fitness caveats remain; no new rights grant or physical approval"
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Full original report-pinned source/record bodies and upstream immutable custody remain necessary; packet keeps complete pilot pointsets, original inverse aliases and actual acquisition/input/code/runtime/operating records. Do not substitute this manifest for sources.",
+      "limit": "Unactivated mechanism/pilot only. Original physical authority/fitness/date/water/admin/history unknowns and unsupported cases remain unapproved. Initial native loading authenticates original full native word and identity closure; geometry consumers verify complete geometry before use. No global repair completion, release activation, deployment, or actual multi-component repair throughput claim."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/accepted-1295-whole-fixtures.json",
+      "bytes": 210818,
+      "sha256": "acd45e97757c84d9fba135e8eba8059372e09a529234d7fe5e488b2e5890817e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/accepted-fixture-custody.json",
+      "bytes": 610,
+      "sha256": "941748262f17548bdf2daa30b355cf57386e1e7414e37e61921ffa1a72de3e68",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-current-owner-exclusion/bounds.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 11096191,
+      "uncompressed_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-current-owner-exclusion/complete-owner-roster-receipt.json",
+      "bytes": 1828,
+      "sha256": "1a24dfc340c9ce8a6948c0bb0b6ed45d42faabcfcd8693f2342c70a931eaeb66",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-current-owner-exclusion/complete-owner-rows.json",
+      "bytes": 35239,
+      "sha256": "ffbd5ba416b3700908ce53e9d7c127af16292b45a2a0b18e85be43de723a4a34",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-current-owner-exclusion/complete-selected-owner-parent-roster.json",
+      "bytes": 4714513,
+      "sha256": "2e3f692a19f46e50f6bdba3734020395e6e5bb1b7868ad2364b198b85de4e343",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-current-owner-exclusion/complete-selected-owner-roster.json",
+      "bytes": 2257221,
+      "sha256": "90facdfa2c74a935e7e64fe2b2467de3b09f3b816eb96ba350f4f5bacb2227c2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-current-owner-exclusion/official-reader-receipt.json",
+      "bytes": 158,
+      "sha256": "af47f6a5df2ba8cbe8efe74f79e5a033edcdb6a53ee16f25248da4ea606931e1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-current-owner-exclusion/receipt.json",
+      "bytes": 6513,
+      "sha256": "e9501e3bb29a3d1c26ca40f99c3dc16a23af7c00627e1cf993ef4e09def66488",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-current-owner-exclusion/rows-0.bin.gz",
+      "bytes": 306620,
+      "sha256": "89ed3564db641f992746bf4f6f01c1eed89cb470520734ac1b85ee95e9a70ba0",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 2097328,
+      "uncompressed_sha256": "2b8878f53c7389e0ca1c675023a0ff1a0172fb2d3ac37d3d731d89b303aa045c"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-current-owner-exclusion/runs-3145728.bin.gz",
+      "bytes": 903226,
+      "sha256": "5ab8e10a21297c2c84c6feeeb907935589d02fbcfd30837b31065596f47009b4",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 4194304,
+      "uncompressed_sha256": "f3b27edf228ed680ff45db865ec31c4481c0afb61912f77ae7c2f370970c3d45"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-current-owner-exclusion/target-owner-binding.json",
+      "bytes": 763,
+      "sha256": "188f7ab71135357bcb20c4c7abb3c5d144101a844fc8bdf9204ed80b202deee1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/actual-cold.operating.json",
+      "bytes": 695,
+      "sha256": "914204d65d7aa5e5c7cf57cc795ca54963cfef19ab8a901fc69d546cd019a249",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/actual-cold.stderr",
+      "bytes": 777,
+      "sha256": "901704a2a3f772203acd2beb309dede32f92f8d29d1a0b69d61de6ab8b0889f5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/actual-cold.stdout",
+      "bytes": 1193,
+      "sha256": "c8b94efbe8c7cd00cf0ff3eacfed359491546fa46966ca31add15501fbc4dded",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/facts.json",
+      "bytes": 23297,
+      "sha256": "09d847a1421ab9daec0fc5b3b149a064fd59cc6b4f4e8ceecb26a8678a772537",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/feature.json",
+      "bytes": 37314,
+      "sha256": "8e6ecd70bce4f3294cd22004a1f735c7c2acf482584fa1f63459c459d1febdc9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/inventory.jsonl.gz",
+      "bytes": 449,
+      "sha256": "faadb63e4c76debfab771a9e255b205ca84f1e2a466199811fc8b33500f15bae",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 786,
+      "uncompressed_sha256": "4a9aadd5e60511eb58115c6a541995cefd642e241af0f3062afbef8e09dfd332"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/ledger-add031.json",
+      "bytes": 4270,
+      "sha256": "8b34761579c30385dcacaa9ba958d09be008e3a701529eca28ab2a2f5c210a75",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/owner-window.json",
+      "bytes": 34771,
+      "sha256": "fee9a1e6c0abe33a57836c0a94b3268bf8e9dfd14987d2df68ae8effee2e859f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/owners-add031.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 11096191,
+      "uncompressed_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/patch-add031.json",
+      "bytes": 1072,
+      "sha256": "7042919f54f8ce2eb7153b11c883a35e6a6b487e66a20f3806f71d2fb8c1f401",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/publication.json",
+      "bytes": 1193,
+      "sha256": "fa9b811f8619f8caa19a449ce3a2de67bfb3f5d15c0396d90a6348732d39685b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/release-envelope.json",
+      "bytes": 1505,
+      "sha256": "339b13df166c41fe052087cc405aa43a0784a6c83a3f0af1bfe7b30aecafb663",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/root-independent-readback.json",
+      "bytes": 1245,
+      "sha256": "d0f9aa4442f920004d8c6a3bda343b0d05bc0140bd64cf70b00ff8b35f322510",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/actual-cold.operating.json",
+      "bytes": 695,
+      "sha256": "f4ff61075f0ab1d8163def223b8662d5d132ee1da152b50cd213fdd50bf64e3b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/actual-cold.stderr",
+      "bytes": 777,
+      "sha256": "af1abffd2a8ae2c05699404deec194c3fb45b115dfa4d4fb149643fe27e25d1b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/actual-cold.stdout",
+      "bytes": 1193,
+      "sha256": "360818f86724d54a681029e68c2c951c0bebcdf275242fe2d8718b85cf1b25e3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/facts.json",
+      "bytes": 23961,
+      "sha256": "f6e88ad97b6d7a1240c029f35a25619371be4af54f02fafc73a8748e778260a0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/feature.json",
+      "bytes": 37314,
+      "sha256": "652fd784078370c311848f9f63d191c50ba1f534afec09ae274daf4673df4579",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/inventory.jsonl.gz",
+      "bytes": 450,
+      "sha256": "de9e7402b63873b13ce9e8cd29cadac7e709cef722d0bf6c09253505085039e1",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 786,
+      "uncompressed_sha256": "aea191549fa9b8276a1ddd7a7b7a842077574cb110a5389f491780508e54ac6d"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/ledger-add031.json",
+      "bytes": 4270,
+      "sha256": "241399baa9d7b4e63c5f7b6dc4056b5754156680a38cd4ef696ef93dcf98d919",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/owner-window.json",
+      "bytes": 34771,
+      "sha256": "fee9a1e6c0abe33a57836c0a94b3268bf8e9dfd14987d2df68ae8effee2e859f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/owners-add031.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 11096191,
+      "uncompressed_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/patch-add031.json",
+      "bytes": 1072,
+      "sha256": "074c7978d49d1a863548833a39768edddf2940e69ca3084b90c335b67120ef1a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/publication.json",
+      "bytes": 1193,
+      "sha256": "e8a2c36d606f916f7ca271a27e9e40a75081dd0acde343139bb76ab118813be1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/release-envelope.json",
+      "bytes": 1505,
+      "sha256": "01e9fc21879d652690b49de3868f60a38808157c3cdc63f9e834cb5bc48930b5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/root-independent-readback.json",
+      "bytes": 355,
+      "sha256": "f2bb3abf0e052fff114421dbff620ad71eee0272c94c4f81bf3ac5d59f720727",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/actual-cold.operating.json",
+      "bytes": 705,
+      "sha256": "459dd38564143534b28b3c7523381f6f4763434ec320dac46f64f57bd5468dee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/actual-cold.stderr",
+      "bytes": 777,
+      "sha256": "aa481e418ee56dc288341ffe6d3ebd0c60375a90f13998ff6163b4685ff5ca73",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/actual-cold.stdout",
+      "bytes": 1322,
+      "sha256": "a2aa9b8209b845a9cacfba457bc750b49286242e425b832a9647c661213309c5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/base-native-manifest.json",
+      "bytes": 251732,
+      "sha256": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/facts.json",
+      "bytes": 23966,
+      "sha256": "ad9eaff2cba89fd3da3ab91bc2285daf3cf02572161189b69924f0602e076bfc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/feature.json",
+      "bytes": 37314,
+      "sha256": "03b74577f39ea3c3446898ff4286d590898096758724e7a2d3a21a820f851ac5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/inventory.jsonl.gz",
+      "bytes": 450,
+      "sha256": "a76979aeb07bcc9a1e828f4cd70cf3aceec7a0d929a53d4ee2e6d0fedf5506c7",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 786,
+      "uncompressed_sha256": "52478afd18801a1e588c67b31afff61e57c33e584c569c3771de6b3e02ab07dc"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/ledger-add031.json",
+      "bytes": 38500,
+      "sha256": "aa358655aa1401bcc4d9e791b864b98ec4669139d5baa449f5d7e48ffbd1d628",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/owner-window.json",
+      "bytes": 34771,
+      "sha256": "fee9a1e6c0abe33a57836c0a94b3268bf8e9dfd14987d2df68ae8effee2e859f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/owners-add031.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 11096191,
+      "uncompressed_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/patch-add031.json",
+      "bytes": 1072,
+      "sha256": "8fbd5cfe37b9cc5dbcef8b6d692923ad803245bcaf90db48613f101f13892395",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/publication.json",
+      "bytes": 1322,
+      "sha256": "a4502d5d881d87bb0b8f9f1e516de52873b697f84dcc420cc0aa0cb8c7156eb3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/release-envelope.json",
+      "bytes": 1667,
+      "sha256": "9573e7ad19bdd65375627f6e64c7e354b0cba1f4bee6c5199845294d0c63dbe4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/actual-cold.operating.json",
+      "bytes": 705,
+      "sha256": "b8d96313bc10425dd3a14bf359acae294913281d147d8a59eecfa9a81b2acdb4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/actual-cold.stderr",
+      "bytes": 777,
+      "sha256": "5079c496f86efc4f3225f015a7ecb64c2b1c96108af86ea8921edb5b42e6ae9b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/actual-cold.stdout",
+      "bytes": 1322,
+      "sha256": "013c4d71831569685228fb0dd32aff6e831d21d1b89a3a351ac39a28051332df",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/base-native-manifest.json",
+      "bytes": 251732,
+      "sha256": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/facts.json",
+      "bytes": 23966,
+      "sha256": "e05d860466a77505339e8be06db46a1b50f38ae21b8b3afd39c333fff8f34e80",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/feature.json",
+      "bytes": 37314,
+      "sha256": "03b74577f39ea3c3446898ff4286d590898096758724e7a2d3a21a820f851ac5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/inventory.jsonl.gz",
+      "bytes": 450,
+      "sha256": "a76979aeb07bcc9a1e828f4cd70cf3aceec7a0d929a53d4ee2e6d0fedf5506c7",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 786,
+      "uncompressed_sha256": "52478afd18801a1e588c67b31afff61e57c33e584c569c3771de6b3e02ab07dc"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/ledger-add031.json",
+      "bytes": 38500,
+      "sha256": "aa358655aa1401bcc4d9e791b864b98ec4669139d5baa449f5d7e48ffbd1d628",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/owner-window.json",
+      "bytes": 34771,
+      "sha256": "fee9a1e6c0abe33a57836c0a94b3268bf8e9dfd14987d2df68ae8effee2e859f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/owners-add031.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 11096191,
+      "uncompressed_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/patch-add031.json",
+      "bytes": 1072,
+      "sha256": "8fbd5cfe37b9cc5dbcef8b6d692923ad803245bcaf90db48613f101f13892395",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/publication.json",
+      "bytes": 1322,
+      "sha256": "b7868528b796a6bab66d1b19db51ccae9b7f9886d43baefe058f9e36492e7a0e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/release-envelope.json",
+      "bytes": 1667,
+      "sha256": "9573e7ad19bdd65375627f6e64c7e354b0cba1f4bee6c5199845294d0c63dbe4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-request-v1.json",
+      "bytes": 14242,
+      "sha256": "58e4271aa1eab11aca76341316b53812c1d8801fb0dbe38e12c8ab1a1e0ea51b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-request-v2.json",
+      "bytes": 14574,
+      "sha256": "c6ef97f7e08cb632e670fd545c4db73e04635d0e6f7a10b49ec1dec46c36c0cc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-request-v3-run1.json",
+      "bytes": 14579,
+      "sha256": "6f8bb8e51324610356432bd65461b045b144b583c74eae3f6356d765e90c58d6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-request-v3-run2.json",
+      "bytes": 14579,
+      "sha256": "7a812eda030c86f699257e502a7b49ffc64e25819405579e96a6ee235c12b3dc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-two-cold-runs-v3.json",
+      "bytes": 5232,
+      "sha256": "b1d8fbf884612d43f322608a6912ec4a6965cc537a4784bc9104e362183b3625",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/archived-inventory-output-custody-controls.mjs",
+      "bytes": 2953,
+      "sha256": "1d91eeb4ecff1fc1479d481a12bfc40be4b0587120bbda358a59b490945ce241",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/archived-inventory-output-custody-producer.mjs",
+      "bytes": 6836,
+      "sha256": "00d66e11a8bde3dd7f4692fbb7f1d82aff267ad9616b41da850272e5be43d150",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/archived-original-execution-code-producer.py",
+      "bytes": 6570,
+      "sha256": "517dffca1db795716b1f37984f89fd5be4b49719e88002b002a51c69492db104",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/archived-original-prototype-handover.json",
+      "bytes": 6357,
+      "sha256": "da994c655ba43b0d648fc5b3a9ecb289fa69584f8cc4790a862bbf5a02554a69",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/claim-canonical-packet-branch.json",
+      "bytes": 837,
+      "sha256": "1d9787a0dd83fae2040f1eb15c300f5be2fe2c739206450e538739253a108fdd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/claim-prototype-pin-correction.json",
+      "bytes": 836,
+      "sha256": "cb7f7639f9adbf90d203c744e0933250b0c4b454f09f6b5906121857886f17cc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/claim-release-prototype-pin-correction.json",
+      "bytes": 884,
+      "sha256": "56e8355a0313b9ce2174458be2e721888e2655f40c656dd4018dc219add634d7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-execution-plan.json",
+      "bytes": 57392,
+      "sha256": "c46b6f01c36af83c2871f258a0b9ea9b6018034679e668fdac79bb9eccb5dc0f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-group-plan.json",
+      "bytes": 6100,
+      "sha256": "20a44fb763a3b1845dfc087fea4ba152385fb6fa91966584cbcd8058a027b4d3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run1-group-0.json",
+      "bytes": 71092,
+      "sha256": "53512a9496e543db7bfa9d9f40b95728b95f2b3c2e412805892f9e9a9b5aeae2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run1-group-1.json",
+      "bytes": 71092,
+      "sha256": "51cc8bc61de8a90168491b20fc92e9742b5adb977676005f8c44a270f22a2a80",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run1-group-2.json",
+      "bytes": 71092,
+      "sha256": "034f8927e4fa4ddbe654c1ccbee24b5a57e7d1d8b3692f66f352e9a970e180ad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run1-group-3.json",
+      "bytes": 71092,
+      "sha256": "7610d785b77c6254b5df427a21579dfcbd65fba15bbc01f833c14e8e05ebd90d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run1-group-4.json",
+      "bytes": 71092,
+      "sha256": "2e5160eb000304e275cb940934ddc9bf7e7b1987c6f742febb71908bed84a8a8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run1-group-5.json",
+      "bytes": 71092,
+      "sha256": "8137c513ab8c27394316c22d1c3d59319a3a4b07db7331ea21403c6dc73e9a9e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run1-group-6.json",
+      "bytes": 71092,
+      "sha256": "41c0dd34043540fadcc127bd1058b083d5c089e5f6de5dde324b592a39a24a1e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run1-group-7.json",
+      "bytes": 14373,
+      "sha256": "847c76a40aa5e30da618bcbff4ab068f487e16c68f6a66a13cfe4ebc1284bc7d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run2-group-0.json",
+      "bytes": 71092,
+      "sha256": "7c3e02735e74e87b51f3c55f7538bf516095ee481cdae3363bb477b668ea34c7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run2-group-1.json",
+      "bytes": 71092,
+      "sha256": "ce533caa1a2c40160efde9fb42775a7ded283cb89f128f41bb6317b5c6345ecd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run2-group-2.json",
+      "bytes": 71092,
+      "sha256": "880be49ab1770fe52a45f59aec362a6124d363ce1e6c45a408d216276dba6ad8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run2-group-3.json",
+      "bytes": 71092,
+      "sha256": "d31de8d5846cc19bce8593f2a997c67c11dfa1e56767e06b69d3b307524a5d3c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run2-group-4.json",
+      "bytes": 71092,
+      "sha256": "21d8030779f90035a439c7910ace0e1261c3575f957292af75077353b56d22e6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run2-group-5.json",
+      "bytes": 71092,
+      "sha256": "e28088a7ae60fdb7b0f81bcad06daff44dab71cd5a5408ed71648aedc3b1ad21",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run2-group-6.json",
+      "bytes": 71092,
+      "sha256": "054f238c612ad52ce97d1550f6386e4291120d1184c479d6b156f7731641971b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run2-group-7.json",
+      "bytes": 14373,
+      "sha256": "8878a9bce35de7814321efd08a0d96f1a33dd24c16fb0712e01fc6d8dd61ba68",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-operating-journals.json.gz",
+      "bytes": 28144,
+      "sha256": "ad9a545df0861e5ab4bad276acb2dd9e88721625d7a1bcf06310fc0d0c855396",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 163778,
+      "uncompressed_sha256": "891497d982a5f00ef45bd1558b175c9bb81160116b7bc80c8f8000b78be7461a"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-parent-plan.json",
+      "bytes": 1008,
+      "sha256": "b5df57856ffcae053ffd9ea11daf12026efe21556bbc40e9d66b353de2e2ea15",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-parents/run1-group-0.json",
+      "bytes": 80473,
+      "sha256": "a2b3fcbae3f082b37485a2fe6dee0367426d994d32825f351059068087246fb6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-parents/run2-group-0.json",
+      "bytes": 80473,
+      "sha256": "c22bad8b2136b73ef2cd9e06c5642db2e2f1524c2240e2faa10a53e31e772ed8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-000.json",
+      "bytes": 8641,
+      "sha256": "629b6036f7c2bbea5249c006c347561ae73d969791c8ad00b0130c55ae429ac3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-001.json",
+      "bytes": 8641,
+      "sha256": "96be4ae196453520f9199cd163040229f384e91af3c90f59cce039be22b0022a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-002.json",
+      "bytes": 8641,
+      "sha256": "7a81e4212bc22d1b7acd90425168abee50a10f27061f4ebf79b38fa99772a172",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-003.json",
+      "bytes": 8641,
+      "sha256": "d20657f677347fd3c18cec0635c3afdf3610b49198f816647aef344ea14b0d62",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-004.json",
+      "bytes": 8641,
+      "sha256": "a8b9150136a1eb3bde5bd3ad3dbecfaf5976c837572870b182b9364ccc59ec50",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-005.json",
+      "bytes": 8641,
+      "sha256": "d6499456e73fb37735177dc457ed53901109feb72bf26c78c126170df9242cd6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-006.json",
+      "bytes": 8641,
+      "sha256": "1096817e98227e52d7da2238621d59bd2a41cc20a7a21c0cccdda8b1b8d13864",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-007.json",
+      "bytes": 8641,
+      "sha256": "5ae8709aff6f23acc695f5efc5bd13e6edd23e3e0e0d892413e51a346860bc81",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-008.json",
+      "bytes": 8641,
+      "sha256": "f50c85dc9431c1f002c622bbf7e3fe897b97ee344fe9289a3ae605439db0977c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-009.json",
+      "bytes": 8641,
+      "sha256": "a320a0f62eed73b09f7d768ca3ce16b53da339877597c7a95576fff2f8379a54",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-010.json",
+      "bytes": 8641,
+      "sha256": "7d5e15f120e1f42349a8c95f2baa92c9b03fd72999c0a213659ec732a8e0daaa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-011.json",
+      "bytes": 8641,
+      "sha256": "57fc48f6ddacaad666ba7ff7b862848db07925dc13b0a61c19e752f164750d48",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-012.json",
+      "bytes": 8641,
+      "sha256": "05b44e9b2c15c777a964dbddf38b88867a17df165e090636e4e7cf1b1c1e6342",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-013.json",
+      "bytes": 8641,
+      "sha256": "0181964782a6d8913109592ecda8ff4113cfa6f125c327ff522f8f4729a3cb36",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-014.json",
+      "bytes": 8641,
+      "sha256": "4e24f437560abeccf10b591f0c2c951aa6cd60daeaf1da1adec1965e0f51ce71",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-015.json",
+      "bytes": 8641,
+      "sha256": "3f2d8ecfc1907a4ff2996ec488bf532b7e0ecaf5925538a12bd074e7aca5481f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-016.json",
+      "bytes": 8641,
+      "sha256": "5f74ddf4e115cc27274ef0aeb6fb08011de1fec101997a93fba8a84240e14dd2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-017.json",
+      "bytes": 8641,
+      "sha256": "3c794eb0d9f47e07fde92f3b0681ea1c1f27df98f309f363c1919e9ff951712a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-018.json",
+      "bytes": 8641,
+      "sha256": "a8758e4b3b9f8fc873d2d4bfb555c41212070b1971716f5e0f3be6c9bc307647",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-019.json",
+      "bytes": 8641,
+      "sha256": "45c2cf00ccb9c35d5a1803f078f0867e84b2d060099ebe710f0b389a81e0ce0c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-020.json",
+      "bytes": 8641,
+      "sha256": "fcfe5e801917ac25ba5c36703cda25a21c9a564913e31eeec8a4eb8924e2d864",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-021.json",
+      "bytes": 8641,
+      "sha256": "dbd159bcdf721581464d0aceba6b1cb258d56e7145c5f0989c545fe7b2dee50a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-022.json",
+      "bytes": 8641,
+      "sha256": "782bbd6198df628036bc8dc35dff91d92af95bb375363bd391e89521e45801d2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-023.json",
+      "bytes": 8641,
+      "sha256": "df1c12f4630651c442946d08f7d9c640c6e3ef17aa06578183a5a699fe9ebcf3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-024.json",
+      "bytes": 8641,
+      "sha256": "9529c520bad85f5ebc3bd153d735f9e49058ad6a4865decaf30195758ba2a98d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-025.json",
+      "bytes": 8641,
+      "sha256": "f0a070d097571151ea4dd2aabca7082a6c767b0e8c789cefd5200c69add7dc79",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-026.json",
+      "bytes": 8641,
+      "sha256": "edf949608a4f4e2db0fe1bead8f7c50140e8c6f17096fa45284cfa10c637d65f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-027.json",
+      "bytes": 8641,
+      "sha256": "34c8a10d5a70443b175c6ab3476bd133cc014ef20bbcdb77036a223dcd1b24c5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-028.json",
+      "bytes": 8641,
+      "sha256": "5c4201d233ddeb277ed1f1f0c240d5dba7ef6bf626c87456a8316c581827d6de",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-029.json",
+      "bytes": 8641,
+      "sha256": "f5a3c12f6bede004b0814ec0bd283f9ae670708fd356fa837e9492f2a49b3165",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-030.json",
+      "bytes": 8641,
+      "sha256": "f6b0af5a1698915ecc43d579f96b0fd429e1959f40d1ab74289d32f421a227e9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-031.json",
+      "bytes": 8641,
+      "sha256": "67e6e7df3f879f8b34601b25348de368fffff4384d41ea8215c62595b88dd0fb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-032.json",
+      "bytes": 8641,
+      "sha256": "638460a32b968904f663ebac3709faeb8cfbad084642866d749ba78be80badd1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-033.json",
+      "bytes": 8641,
+      "sha256": "8ba4d0d845fcefb5f7d74fd8bb3826f5b70dfc993eca84ced0123904b4a7bef8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-034.json",
+      "bytes": 8641,
+      "sha256": "4951f0217120e4f134140d2487d16fe6df490086ab7c57bda170eb9f868cd238",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-035.json",
+      "bytes": 8641,
+      "sha256": "ee7048addda8946f95e0986d84336408c25ff39bb720e28d596100538e4e17a1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-036.json",
+      "bytes": 8641,
+      "sha256": "ab5cd9750a1e34134137f74baf548e3af1674ee7c9fc38594e30fa47314210e9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-037.json",
+      "bytes": 8641,
+      "sha256": "c36b010ea89b3e39d9e25710ca9dc61cfd3ba0d58e633130f6065dec11d8ec1d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-038.json",
+      "bytes": 8641,
+      "sha256": "da6facdf540a5b7f5e939f73d72175e1f21e309a4d3ffacb06831e3bad2f7646",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-039.json",
+      "bytes": 8641,
+      "sha256": "42b7b715aa4bc822222f8747fd172f4c5ff06d1c68b4a294a9b771946b0767f8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-040.json",
+      "bytes": 8641,
+      "sha256": "193d9cfbb8a32c4897971fcd38fdef0d8d6a65abed29fdb9b5dbdad4864069f2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-041.json",
+      "bytes": 8641,
+      "sha256": "ddfe2953761ee551759f78f3365d3046178698e09b8226a85423a6a44ad48e5a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-042.json",
+      "bytes": 8641,
+      "sha256": "dc0a4e59c73994dad42e54fde913aa0cbb7d81819886066247d88c59b084eed1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-043.json",
+      "bytes": 8641,
+      "sha256": "a50437537f14f5397eb6366ef567c272855d10da8e880127543efefb03895b9d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-044.json",
+      "bytes": 8641,
+      "sha256": "5123e075c3f75f3bde78f44182e062bc3000906c4be10d56bcac4c7d3f12477d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-045.json",
+      "bytes": 8641,
+      "sha256": "e1a678792444f4c218f4adbbba0885fa4b0ee9ae828541f71dbb3e4e67c6e832",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-046.json",
+      "bytes": 8641,
+      "sha256": "0a7e18b9ac510d21763d7a8128542d1b632d4054580acb576afda886ee3669eb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-047.json",
+      "bytes": 8641,
+      "sha256": "fdd67b740d3ab62c1689a997d661b5c47afb3aa779ab25ed21af7f6b8e87ac96",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-048.json",
+      "bytes": 8641,
+      "sha256": "21f578961884f4dc523501ec61be9b4963048f0f0b94cb9c0cfa929d156763a8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-049.json",
+      "bytes": 8641,
+      "sha256": "5b119b706d7825e64d1eb584d5b9154daaa34ae00c0f7165a9389471983fac29",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-050.json",
+      "bytes": 8641,
+      "sha256": "de3e81377ed13f01608f13aaa195aefc5540d24b877138e4fca9515efea89729",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-051.json",
+      "bytes": 8641,
+      "sha256": "485f24f1b282a1e314911085d8bc51a7a5d6d609f13bf7979ea234c3a2d6e5b9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-052.json",
+      "bytes": 8641,
+      "sha256": "e8aa272e3e0dcda1ba7287f95ad87107cc3ff83071c5b4f61ad2c8e2f820dc1b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-053.json",
+      "bytes": 8641,
+      "sha256": "dceafbbfa4978b532dc9934878f3a8f19bd59454316d8702eefa0b4dc0d651a7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-054.json",
+      "bytes": 8641,
+      "sha256": "dbf1556ba5697c740ec4da12911ccdd4a1e21357356deec195de3435c464465b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-055.json",
+      "bytes": 8641,
+      "sha256": "5bf5829f6eb83fa47e67209268d2f22adaf1e3f3236f908c1cdd4f67b0d02682",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-056.json",
+      "bytes": 8641,
+      "sha256": "15db01a1092a674e076efe997fd29c499ea1a4bd53160a488466839b18e40f1b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-057.json",
+      "bytes": 8641,
+      "sha256": "63af5698dfae26c082e9ec02ee81038b630d50e2f0a9cfb0ca1237d6160edd1e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-058.json",
+      "bytes": 8641,
+      "sha256": "6cc5c668edf31f2780e4a7523ddfed566ee087e0b89cdf44ee036b527ec1d17b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-059.json",
+      "bytes": 8641,
+      "sha256": "264f1dcf6c6927aa92bdaef42dbb50df02d30c64af2b1d00ce643db3c563a13d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-060.json",
+      "bytes": 8641,
+      "sha256": "cfcdc347002d437762a0dc83f7ead0ccc7e906786e4a33d61f56764564585c84",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-061.json",
+      "bytes": 8641,
+      "sha256": "a4bdf2d03ffa7ed5a6d653b495997f821c248ab4206a68f1962cbba9966cd7f4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-062.json",
+      "bytes": 8641,
+      "sha256": "06ef4a958a06e254c497ca4d09e838a68b80debc7a4c03ce9f050a20750977eb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-063.json",
+      "bytes": 8641,
+      "sha256": "3fa2dfd6fd54e904255fb1fe213154d620d24bb641d2197982863db02c132298",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-064.json",
+      "bytes": 8641,
+      "sha256": "004cbf2015fb53958cb9cfa0b98a8e88bfcdf82b536dcbceaa9bd32c118393db",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-065.json",
+      "bytes": 8641,
+      "sha256": "582ab78b51059b7d0da91cd0dc726e1c2f36d0a32e95fd29b3b6f4665e32136d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-066.json",
+      "bytes": 8641,
+      "sha256": "0edd66210040bea94cc62249078112aaa38c27fa512626b16d4ed9eb8116f3f9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-067.json",
+      "bytes": 8641,
+      "sha256": "9d820fec497f9daf07716b6283538371ab1ef16edba630f879ff7b5ce18c2802",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-068.json",
+      "bytes": 8641,
+      "sha256": "9e3d5727be4a879e7dbde8a4d97f986a663aa86217da2dd75a8e75829cdd754e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-069.json",
+      "bytes": 8641,
+      "sha256": "3efc504f92b5f9efed2e96497ef4839a339f0355d2ab5e8ee22c7d32d88e4100",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-070.json",
+      "bytes": 8640,
+      "sha256": "ac37452137a89bffc90c5f6ac5f005a9fa685d8b04724c0af96cddc591217bc6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-000.json",
+      "bytes": 8641,
+      "sha256": "e4c394d3c710c63a7129e87d0d6995699c73cd03a04c1cf2ecd320c81bd74a23",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-001.json",
+      "bytes": 8641,
+      "sha256": "60a2ac73bb82b4d84f3ab959a85d26c04088b6a0e8f14b55f6026723424c3eac",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-002.json",
+      "bytes": 8641,
+      "sha256": "cab48edb6a8dd7f30e70b163dff4a083be4454c9ceebb3340e364c45f6545075",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-003.json",
+      "bytes": 8641,
+      "sha256": "dff72c85519ae59264242266c9d5d516405165007abbe3608e8115e7bbaf8900",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-004.json",
+      "bytes": 8641,
+      "sha256": "b49b74af649f029584baf51648a4269670ca830cfb4f1402203b90b5727dbf9f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-005.json",
+      "bytes": 8641,
+      "sha256": "7452ded18ceec8c417494ff6d11d93f42fbfa52edc0beb09d157eb0f5dd2ee93",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-006.json",
+      "bytes": 8641,
+      "sha256": "56b6a099d4174ba9bca71b9cc2b9c2b1a8f620d81e6365028c78dbcd7cdae328",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-007.json",
+      "bytes": 8641,
+      "sha256": "2fe2c70b0bfc8a30fb14a5d164ff3223d949eb7271237ee8ea9c62a17e60fedd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-008.json",
+      "bytes": 8641,
+      "sha256": "5c9fd06114a90413ad74ca1ae77bf5f21de246c7f1f6309388b0830b4959eb7b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-009.json",
+      "bytes": 8641,
+      "sha256": "7f8df29faabe72fd8019e0ad6aab33f906fe9b89a34924f185ee4655b69b88fe",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-010.json",
+      "bytes": 8641,
+      "sha256": "12fcbeb62da2e268b649ade3929755d99bad38698078cb2940a653732119e5e0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-011.json",
+      "bytes": 8641,
+      "sha256": "6f1277a6997a7e193fbcb0d6c69cbc2f0403214eea0531e3605223e35fabf990",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-012.json",
+      "bytes": 8641,
+      "sha256": "c935ac44fa069fcb9cc6b8ec761d6f0bee201d0dc2c6de5fcf90be3caee5f9dc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-013.json",
+      "bytes": 8641,
+      "sha256": "2bc7494f78fea6e600e40eecc63f199fa307f857c7aaaae840058b10d852610d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-014.json",
+      "bytes": 8641,
+      "sha256": "00bb36d286a013f545ed9d8fbf104b68aa533fb8a3589875b9b8f25ec3af34cd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-015.json",
+      "bytes": 8641,
+      "sha256": "c6fa1992ed723350c918742b8e7279ffe96cc1cdc3b6504e9824449f8c8696e0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-016.json",
+      "bytes": 8641,
+      "sha256": "90eaa2d2408f4ea870ae73146dc39220b0240ddb3f88f73ab44b53714af18935",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-017.json",
+      "bytes": 8641,
+      "sha256": "d8f95c34ea5aa7b173ea73ce7248d7d6adbadb5af4931c45801054b458f57ea5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-018.json",
+      "bytes": 8641,
+      "sha256": "43a63682b341199fd28c56d7f422a48bb53b7d3f3d40b3c414745f5fbbda00cb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-019.json",
+      "bytes": 8641,
+      "sha256": "55b8b3b5a8e1c947112c801631d01d55ebfa138385f1a64a50cf9c908ff92af7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-020.json",
+      "bytes": 8641,
+      "sha256": "f17c52b78fb4b14b42277814d49ebf35ee8fb7ce806f5ef23a56301ef558f979",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-021.json",
+      "bytes": 8641,
+      "sha256": "5cb8fc244544d1d54cbd827242a7507de6b507f6274f8ae9ad01b00d90be144c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-022.json",
+      "bytes": 8641,
+      "sha256": "5f805bc45d5ea3e144248c000b3bb1be37fc2dccc4c8f62c8742a262827dadd3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-023.json",
+      "bytes": 8641,
+      "sha256": "612a52cd0a1363aad268101309b31980dce5e69933a8c5c212091a46183528bc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-024.json",
+      "bytes": 8641,
+      "sha256": "0171d822d6b2f6042a85961eeae50fa1525fbe313a3b09dbfa0056239505055c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-025.json",
+      "bytes": 8641,
+      "sha256": "bec966238e20569811c651d4591d07ace0ce91cf89d99b3db62e50acabff2616",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-026.json",
+      "bytes": 8641,
+      "sha256": "15a9bc5a51c1dc31c02a06cc517af7a9069898b9aa4b857b82c3c283c8bb5a80",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-027.json",
+      "bytes": 8641,
+      "sha256": "de9d73db380cd1137596c535da86711e54c971eebb98d35909cf5a26dd05727f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-028.json",
+      "bytes": 8641,
+      "sha256": "0f7c4a581633c2e79b9a6ddd639d69338f64ce095117f4dc98e943dded48f651",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-029.json",
+      "bytes": 8641,
+      "sha256": "e03bacd4872c8d637eeeee81469cc786a802b6ca4c7f7af9fdc01ab364473ec9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-030.json",
+      "bytes": 8641,
+      "sha256": "7d4cd9dc5e56d6011ae1e987785376e381cd7b1733bda87f4cee090c4b2b3917",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-031.json",
+      "bytes": 8641,
+      "sha256": "a519c1541695c8295ac3824a6dfdab910f8866251c899c1b7b4334885c281627",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-032.json",
+      "bytes": 8641,
+      "sha256": "84f1d00b2cc827ba16f363fc0ef5789ac1660e07f6940d592a56654448d74450",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-033.json",
+      "bytes": 8641,
+      "sha256": "0dd9111252e718a6198167cae4055ffc08f946793c870fb042a9c9fc858449b7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-034.json",
+      "bytes": 8641,
+      "sha256": "74e40876b0ffcbd0c1d22849edede36b8656fd018be03c9248a3cfff6b159e29",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-035.json",
+      "bytes": 8641,
+      "sha256": "2a14489f35d59384c10c2fe8b12037572b3a8e388abcf06a77b989e5620b7b17",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-036.json",
+      "bytes": 8641,
+      "sha256": "adb7e2704ed06e1f2d71354fd9d5f97f971dad8d4a1213d87cbd7534c1a03a91",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-037.json",
+      "bytes": 8641,
+      "sha256": "b07d7338d20a8e9b049595a2552a86461340997e751eb160ee93147cec1bdc6a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-038.json",
+      "bytes": 8641,
+      "sha256": "4a5e2eeee96b2a7e3a404e00cb18782c789846a8a9dbfcc10aa978911b95018d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-039.json",
+      "bytes": 8641,
+      "sha256": "e8ebd465afa0f6a81fc23b16a3def51cea4eae956c99801f5cc3f1315c3ad8ab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-040.json",
+      "bytes": 8641,
+      "sha256": "d2529cdb7795f7527d8cc563d33baff30fc932898133fa957619777559c35d9f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-041.json",
+      "bytes": 8641,
+      "sha256": "2b486c3b77dea549bbadff1f3200b19d6233a0f9295576885f549ccc9c9dacd5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-042.json",
+      "bytes": 8641,
+      "sha256": "b9eacdfcf4c7c39f30159cc8832e7dde9b0feb6f81d56edb2b7b6e00e458a221",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-043.json",
+      "bytes": 8641,
+      "sha256": "07d4cb54ce227e78163a7d5170f971ce880a14a85752c3dd23b8ba005b7b723b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-044.json",
+      "bytes": 8641,
+      "sha256": "b68d79564c29843fc37695a78b8776d007c1b29067fc6fdd747378163f28a8bc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-045.json",
+      "bytes": 8641,
+      "sha256": "4f4fd7f801148022ebebbe4286dfb01a4ee5f823e8a81d38695f487bf95cd618",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-046.json",
+      "bytes": 8641,
+      "sha256": "26a2e4972f003a5c1197f89cdf0ab277c68c3c564a90841bc134480159af7b02",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-047.json",
+      "bytes": 8641,
+      "sha256": "94609882dd3ed47073f4e7465a2dec1018fc2148a7fce5683b3477e2e11ea165",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-048.json",
+      "bytes": 8641,
+      "sha256": "5e3946c47cdf5f4f268f7c0dda7a7cf17bbedb95d4539c39eacdf91dcc628137",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-049.json",
+      "bytes": 8641,
+      "sha256": "0a10fdcd6b7c7c3a3ee0f9418cff5a7926cab8ff8017c10d8d0a393ddc336f48",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-050.json",
+      "bytes": 8641,
+      "sha256": "ee444f372855faad8aa68f0e4d1c42bc77da76812b993eca54af8f47ebc2c639",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-051.json",
+      "bytes": 8641,
+      "sha256": "16b6b43ea69aa3ae0c2912880defcb9e1348d1e11c82260a9b6dc0aaaabb0f6c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-052.json",
+      "bytes": 8641,
+      "sha256": "eb796517faaa62535f2d5c3d9e18f64bd0da66c63dca788807c3889385cee647",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-053.json",
+      "bytes": 8641,
+      "sha256": "7bbffe3ba17100c0609b3b5413431ae5580d666e2ce28ca97be45f3119cbadd5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-054.json",
+      "bytes": 8641,
+      "sha256": "7457202475f9f86f57243baa1126d400258e36b9ead345c1927ad05720012675",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-055.json",
+      "bytes": 8641,
+      "sha256": "195709260a21ec9121c758980c3bb8e2e460866a596888923830cbac363b57e8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-056.json",
+      "bytes": 8641,
+      "sha256": "3ca604394ca5f749479e37a08a9690d7b85eb6221e1296bddd631aec524a08eb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-057.json",
+      "bytes": 8641,
+      "sha256": "957a2c8ebc0558ad2cc8b51c841a4397fee4a0665985b43983992caccaec3e0b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-058.json",
+      "bytes": 8641,
+      "sha256": "e9f7aab5fad3b0054790fe8310b7df9c6753a97e82cce850207f9321c9387e65",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-059.json",
+      "bytes": 8641,
+      "sha256": "7ce5b55d8b5d997fce6a4f268daac1262f123b0e1f03cd7079f1fd9aed423dd5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-060.json",
+      "bytes": 8641,
+      "sha256": "99bf2f64368ebfea42f2e0526eceb5dd43ae7443ca29fd4d3da7a06cad14571c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-061.json",
+      "bytes": 8641,
+      "sha256": "709ed29469dbcf5fc54a1688db3cc322afd2cb6121db8220eec147daa547846e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-062.json",
+      "bytes": 8641,
+      "sha256": "4f13491798f97d87228c3005bab6b149b61eebaed5799586ed7659ad22c7a205",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-063.json",
+      "bytes": 8641,
+      "sha256": "951412580311e13d3e54bf3049669756a269160f94d0d4fd3207ca2ce0ce81eb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-064.json",
+      "bytes": 8641,
+      "sha256": "da41355146fef4421a39ebf69296bd80f681ce264fd71b5bb9e9b6854897c380",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-065.json",
+      "bytes": 8641,
+      "sha256": "f61606f5051c92dcd5421401c0f972f3a2a5d91065eabcfa7ea494b740af2f11",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-066.json",
+      "bytes": 8641,
+      "sha256": "cc95d7f265f0823cf60cbd1a513c39e8e2597144e4c4ed616a4d98617cd6ffad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-067.json",
+      "bytes": 8641,
+      "sha256": "02a600d5ba5069a5406bae7551018569083a9c0488fe1cf684ba06661af45582",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-068.json",
+      "bytes": 8641,
+      "sha256": "0bbb3a8b68704ff173f3f3625604f2887088aa74e743882e225e80ee5451f3ae",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-069.json",
+      "bytes": 8641,
+      "sha256": "0a8ad8d5bf3f7cb8d29ce30f3b5b4772d1c188dbfe88019908ba73dc74265ab0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-070.json",
+      "bytes": 8640,
+      "sha256": "cdc713267b75e1b493a0935ccef0e974894f4618f4c9ed28ba24f5c2ab3786c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/final-focused-controls.log",
+      "bytes": 2573,
+      "sha256": "4620cb1de7c92e9d82576046d97c2a0842cdf23f8aa0d2bf3a936880161db365",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/final-negative-control.json",
+      "bytes": 981,
+      "sha256": "6b3191a226e3cd14fcba1d99427594b6bda582fb1a70cf0c26efd5932a9feb37",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/final-positive-control.json",
+      "bytes": 787,
+      "sha256": "71c2e23e53fcb2985e0fabb65cf49eb995e59e1f39c2cb3fa706afeac779fdab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/final-reproducibility.json",
+      "bytes": 893,
+      "sha256": "c26a0193a23b9d5eb741428f2577e1dc195968d117798eeb010f3d66fc6164b0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/first-original-shard-schema-check.json",
+      "bytes": 1112,
+      "sha256": "48a1d32678aa14cba0416a45ac696b684c1e625313a3e0eaaa7d629ed0dca1d0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/first-shard-request-run1.json",
+      "bytes": 122631,
+      "sha256": "8806f64d5d1dbad07820d27f9597802d6420744d77abba34480cf95b991137e8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/first-shard-request-run2.json",
+      "bytes": 122631,
+      "sha256": "acb8ab022281879e26222fc1be88931b85bf5a3ad5f9ab721b9b5384996a5dee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/first-shard-two-cold-runs.json",
+      "bytes": 1613,
+      "sha256": "5649772ca95545e91dea598b10a8abbc3382a8d7e4f709723664e2ce5d474b5e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/hosted-regression-legacy-digest-failure.log",
+      "bytes": 329061,
+      "sha256": "bf5a9ebe655fc4ffd73bd42c1f0d49052f36de97094f5ebad3b79653f9eef964",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/independent-original-baseline-pin-bindings.json",
+      "bytes": 1201,
+      "sha256": "4ff9d348e47f4a4ef02d95581fa83a06d767d91d74b85f553f7bef43a181d9e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/legacy-digest-correction-controls.log",
+      "bytes": 2908,
+      "sha256": "b2fe544ed2099ff9c77abc775dea22760687cd5a9d40b5dda665a15e5de0d280",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/legacy-digest-correction.md",
+      "bytes": 1489,
+      "sha256": "0ea511b95c1611ea9780032ae3dd6bfa91c3670fd305270536c6883211c575de",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/progress.json",
+      "bytes": 3757,
+      "sha256": "e80fc4ee82ccb93182ebf8bcdcf7e3069e68c14799d1af5367dca9f11ee26e86",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-inventory-output-custody/README.md",
+      "bytes": 2747,
+      "sha256": "b9b06881de99632de0323266f37ce91df78574fa0aa74ee7317dfaeda57519a7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-inventory-output-custody/actual-inverse-controls.json",
+      "bytes": 1321,
+      "sha256": "697a3bb341535c6507c1acc60b1feb6aaa12ace3e81bd228ab49ee04083b4064",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-inventory-output-custody/independent-archive-path-inverse.json",
+      "bytes": 673,
+      "sha256": "e9459fb2a6916d04f3a3c11be17800f01f84ca951487a394300f60a49d4bf330",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-inventory-output-custody/index.json",
+      "bytes": 186149,
+      "sha256": "0a3bc3d9d8be977ba72c9560314b80240f8901ccefa35ec7add34464c565c5ba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-inventory-output-custody/original-execution-code-receipt.json",
+      "bytes": 957,
+      "sha256": "e55a6342bebee7aa2836e7c92715293f93cf426ecfa36f3fb9e7a5f8ef38e202",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-inventory-output-custody/original-execution-code.json.gz",
+      "bytes": 174199,
+      "sha256": "c42ddacace7325343d4c82e523e9c609f0ed6291a59175731decb2ef7d2fb804",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1145568,
+      "uncompressed_sha256": "b0fb1b1771b40f63f7e5857504e10262e1d3bb6740d441c7806042fd94e9b20d"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-inventory-output-custody/original-outputs-000.jsonl.gz",
+      "bytes": 12204501,
+      "sha256": "55463c2181ca7d5d0eb0045527ecaba0062a91bb955634bfaf3283d56720d076",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 16714294,
+      "uncompressed_sha256": "190c5aa082874bc2eb8f89c6635caf7247e87e8ae2d39d70462e9165aae9dded"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-inventory-output-custody/original-outputs-001.jsonl.gz",
+      "bytes": 12138921,
+      "sha256": "e1a161457cbfef0c767701fc39dd8e141e5807444245dec776174926f4bf6574",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 16618040,
+      "uncompressed_sha256": "e3275274224191a5ae753c3a2224884f4c5254d627e41af52106b3d91015cb66"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-inventory-output-custody/original-outputs-002.jsonl.gz",
+      "bytes": 14112470,
+      "sha256": "a206ffe8541570df65e0672cbc334f0623bee145f5ef538d084001b1f6af7d70",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 19653798,
+      "uncompressed_sha256": "cda0d9c08903e77f762406bab5f54c91e772268f00535f09370eeb200d159682"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-inventory-output-custody/original-outputs-003.jsonl.gz",
+      "bytes": 16515720,
+      "sha256": "5a8209b7449c0b8e2c6cb33b597b411c07e28a7489459627bc79035c52a26177",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 22781085,
+      "uncompressed_sha256": "c28d6cd1af477ac97749f952eb69c74f32a1df0561701a891a4ccf1a4954b3c3"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-inventory-output-custody/original-outputs-004.jsonl.gz",
+      "bytes": 7548375,
+      "sha256": "fc3cfa8ce66cf4601c82b948320a121b36c04ba21246c1495bbf77833f207ff3",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 10024633,
+      "uncompressed_sha256": "3c442fb3e623184471af3db8ab1ac4ab4c1a008e742951cc6f4559fede9b1ba6"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/attempt-v1.operating.json",
+      "bytes": 696,
+      "sha256": "cfcfeeb804f44f2e36338f4552b1c415aec10ac234b2735c95fc56774ce8f0f0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/attempt-v1.stderr",
+      "bytes": 2230,
+      "sha256": "42697d8542fe88c7b93942f7e9b297cf1b40be194fd423bfcc96e30bc7c46c45",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/attempt-v1.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/attempt-v2.operating.json",
+      "bytes": 697,
+      "sha256": "2a5d08761349915ccc4094e0b57297e5837481e1e7584d6649da7ce413213a5c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/attempt-v2.stderr",
+      "bytes": 2230,
+      "sha256": "5d23038ca6b9d9fcf0d903e4f0e90f4eaca43d0c50b1362bf76974307e006147",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/attempt-v2.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/attempt-v3.operating.json",
+      "bytes": 695,
+      "sha256": "54f14fbd2d92cc1e5b018bb404cb6ea82236d8a92996244b3bb2dcc66c09c923",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/attempt-v3.stderr",
+      "bytes": 777,
+      "sha256": "103a3c2bfc449436a9023c491b96c821a06174442453d864f52f2f6dc285f247",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/attempt-v3.stdout",
+      "bytes": 349,
+      "sha256": "ac44e3331fe5eaef573e9ffbe317f8a1f797ccd40b025cfbd0b8766e5367bf07",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/facts.json",
+      "bytes": 26100,
+      "sha256": "0b301a59f96273c703f333b91e5219a409139cc2c14d43d78968fd57f7845622",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/inventory.jsonl.gz",
+      "bytes": 3589,
+      "sha256": "f02a3dcdf4da8f4a24b3078aa082133e0eabeb511994dc3f258a89e223ed619a",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 14784,
+      "uncompressed_sha256": "9bca3f0ba9b9cf21c77765e374d0ec0edf8f78e7e8a0454cde996bfa56814e1c"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/publication.json",
+      "bytes": 349,
+      "sha256": "e80367af3b6d8e2f0c9c892c8e3043d372e8d4b3a899248c9d2a94297bd026fa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/restore-qualified-inventory-outputs.mjs",
+      "bytes": 5782,
+      "sha256": "1f40f691dbc1f2a258f3dd4d9b62e0abd7a6728aeeadfccd1273ed5cb274d791",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/seven-cell-request-preparation-v3.mjs",
+      "bytes": 4593,
+      "sha256": "a2d8f3f3ade4dd4129b4ddac29d035b75ef53fa77d540301ad2a8c92c8b037ac",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/seven-cell-supervisor-v3.mjs",
+      "bytes": 5634,
+      "sha256": "41757b7b3ee9ac6b1fe9e1c678f0b7d88ce633c51d89749048b1412f74b76d2c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-premises-request-v1.json",
+      "bytes": 13251,
+      "sha256": "8844f4d45a73a6d89e2faf06e4cef1369eb3c9ee30b9f5bb7e154cd952d30bb3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-premises-request-v2.json",
+      "bytes": 15947,
+      "sha256": "20b53cbd4772eb607e046a51fdd12e5f3fea3893ae78da9a16bb1c08eb0f3fbf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-premises-request-v3.json",
+      "bytes": 15947,
+      "sha256": "a69f70b8bebd256faee3fad125cdfbdf33829ecfc0084f98ff3319968e3dae52",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/add031-construction-failure.json",
+      "bytes": 118365,
+      "sha256": "464538101f581dc6aa924ab53e180b763c24d66f7dd055d01608cdf59ec8c5f1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/applicability-comment.json",
+      "bytes": 25750,
+      "sha256": "d47365b657c7e370cd15a858c01817dffa7b68f2f7f9a2abeef03e51ed42e047",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/complete-seven-case-input-roster-v3.json",
+      "bytes": 7956,
+      "sha256": "0a98761a6bd07ad9838ed7d5c06ada0b76832367e3a80716478011411bfa6d65",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/complete-seven-case-input-roster.json",
+      "bytes": 7780,
+      "sha256": "e3be651ac9912bffea9781a77cc9e686a8c7bd21480bd7616e12bf1d326d4149",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/input-plan.json",
+      "bytes": 18208,
+      "sha256": "8029e77766968d41c1cb6c93b323674650e712e9298db0153373431d7339dec2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-input-roster.json",
+      "bytes": 5624,
+      "sha256": "1ac8f7833626f4073cb8141980adc6e11331330a2e5056e0d99c77abd777166d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-005.jsonl.gz",
+      "bytes": 1224550,
+      "sha256": "854dd2e9064342effd20b5e4e31938ead05a7e2b2566377a1ded5c4f856dd5c6",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8386281,
+      "uncompressed_sha256": "0eb90d9d443ca9b5eceff02f870c618d9cbc6515db727eaff1ca5fa5bb18952d"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-006.jsonl.gz",
+      "bytes": 1220375,
+      "sha256": "a5a540231d1eb0539b97ee4549cd16119d839e8b5126a52a85e8cd3e1fcb1f4c",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8381281,
+      "uncompressed_sha256": "e969e873dbcfec42b788ba161349c231d88d765e02a52e701176dfb5c5530d7a"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-009.jsonl.gz",
+      "bytes": 1196109,
+      "sha256": "c565d872b1ef0cd2742cdec942498fccf7667a322fa5d45c68c291604b900287",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8373333,
+      "uncompressed_sha256": "af40e7f6ecebce53a199f96098dc5e78c414ea7ca18a5005f5e0ded2a1e671c3"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-010.jsonl.gz",
+      "bytes": 1191654,
+      "sha256": "58e4ad6bdc32338e1a9f21ba8db8a8c7e88651024279a0e9cde6ae7f08de4176",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8378285,
+      "uncompressed_sha256": "d6c4fc1f67a0b4316ab6752d0e78e17bd34d20756c65b09e4445ddaa555f0237"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-011.jsonl.gz",
+      "bytes": 1206153,
+      "sha256": "d21c9c7aa8640dd2ca65414a2c012cecbb713976a1373dad29da6439d9ed0992",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8382450,
+      "uncompressed_sha256": "b69320f12a3a3516c95c2a606710a36945be20aeaf5c2263320e62992cff23ae"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-020.jsonl.gz",
+      "bytes": 1189915,
+      "sha256": "97d8a9690a14f13e984fb27f6f3b05283c00dbc945f5cac6044907b2441a0c53",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8388483,
+      "uncompressed_sha256": "da84c9826969ad227ce17d1456d8ae41d83735758be91c59265747f48f843fd9"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-021.jsonl.gz",
+      "bytes": 1253040,
+      "sha256": "b7c77772bece417a2e3ab1255ca405941b1800cb117976c639b943f80b64c2b2",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8388472,
+      "uncompressed_sha256": "31aeeef0e4237e9c06e41a30477950cb7ce59d06a23f7abe0c263a05bfc56adc"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-022.jsonl.gz",
+      "bytes": 1205959,
+      "sha256": "906a42b3345c60d515ae5016f2daa69c352c1526b27a8796d496c69ccb2f35b8",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8383180,
+      "uncompressed_sha256": "5e0468723f25cd675b27c0c030f3f2a6213b8410d0953e9e88d58837ef9aac5e"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-023.jsonl.gz",
+      "bytes": 1228188,
+      "sha256": "db6c75946139e92d230d8a5207a2c00d538911b1f2e161c5a5ab122bd7076508",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8387797,
+      "uncompressed_sha256": "eb2aae217c1e821ee01bd68015baea939c278e2c807e29ecbb95a6b3333225c5"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-047.jsonl.gz",
+      "bytes": 1187023,
+      "sha256": "e418e6cf92971f0afc047b2782fcb035e1f6305c136969469cb8be085089e82d",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8384762,
+      "uncompressed_sha256": "4c592e19b5d3fb42a2a539235999fb2e1a089cd5cde4219e37c5324c9af4438e"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/sources-000.jsonl.gz",
+      "bytes": 2173285,
+      "sha256": "aaf5e4f099ab25c6e6f96632787f1654ba6054ed378fd591b360e36274ffc264",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8388327,
+      "uncompressed_sha256": "a75923307b24ff73fe3090307b2c8d6e590a22dbb91f4d43f92a52ac0fd23705"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/source-fit-seven-cases.json",
+      "bytes": 271571,
+      "sha256": "0f29f229f94c48a2ba4a520b8cbb078116d82344302f773b2171716caedac9b6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/ADDITIVE_GAP_REPAIR.md",
+      "bytes": 11538,
+      "sha256": "cb4666c896a35bd85460b5c6fe07117b29373429b18577d12a6ef77407b58a47",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/additive-gap-repair.mjs",
+      "bytes": 59957,
+      "sha256": "870b4d7b0d52ed2a2fe2cd2a36a6b3a144d2166f03726e9c450a02cd6595bd73",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/data-client.js",
+      "bytes": 22352,
+      "sha256": "615ef8452db426b6e24a69608d3a9c5fb62a5c3eb7dceee1ae20a9eec673d7fe",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/effective-footprint.js",
+      "bytes": 30650,
+      "sha256": "aca206b6c253e3bc7291bd27ce932747c279a09832b285ddb875e806703b05ea",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/geometry.js",
+      "bytes": 922,
+      "sha256": "e25af44275ae19418d0b49ae4501699a76dd0e99969d2782ed574724430bdf48",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/native-location-context.js",
+      "bytes": 9904,
+      "sha256": "3524b10cf8a6aa186d6b8fa1d2593c6daa15573c12ed3328871556e9bab4eb4d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/native-source-digest.js",
+      "bytes": 2170,
+      "sha256": "adc2071f8f393a37324cd498450e6c1d725c3c5f29971f52ce7943e9f598960b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/pixel-canvas-layer.js",
+      "bytes": 12017,
+      "sha256": "43e6eeb4b4df6cc7bea0235c4f5770f8826de8eece00340d6a4b2fd9381a115c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/additive-gap-repair.test.mjs",
+      "bytes": 10226,
+      "sha256": "fd52deeae34ebc6d2b384cab8dda3439828e4d7be7ddc0d779d2518a65d991c3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/additive-native-consumers.test.mjs",
+      "bytes": 5554,
+      "sha256": "9268435fb24e0e663e1eec2c3afdc59d1e238403ed924b3d92fd44f9b9e071d0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/additive-release.test.mjs",
+      "bytes": 18442,
+      "sha256": "4bbb4ed7698aa13dd2543f495124642808489bc7870bd375a364e62adf09a9b7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/effective-footprint.test.mjs",
+      "bytes": 2266,
+      "sha256": "46df3b769b7b80777d5a2affb872f67c5f298a433b37559c280c16415307b08b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/native-location-context.test.mjs",
+      "bytes": 7628,
+      "sha256": "5e063826d9dbb7892dc4b579c7095b0aac41e4c6db6bdc96e804d2c62420f68a",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "explicit-retained-base-or-additions-native-v1",
+      "description": "Whole original source-supported set primitives, unchanged native even-odd first-owner operator, complete original owner exclusion and sparse unassigned-cell overlay; draw and pick share standard packed ownership. No floating union, epsilon, snapping, ownership transfer or pointset simplification.",
+      "software": "Node24.19.0 and immutable actual installed imports/executable; full exact code/request/runtime and operating receipts retained",
+      "units": "canonical native cells and complete source-relative records",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "unactivated-proposal-assigned_cells",
+      "value": 7,
+      "unit": "canonical cells",
+      "vintage": "archived",
+      "input_sha256": "ad9eaff2cba89fd3da3ab91bc2285daf3cf02572161189b69924f0602e076bfc",
+      "input_file": {
+        "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/facts.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "a053c6fb9866754fb0025a5e6e4d464ccba8ec23"
+    },
+    {
+      "id": "unactivated-proposal-removed_cells",
+      "value": 0,
+      "unit": "canonical cells",
+      "vintage": "archived",
+      "input_sha256": "ad9eaff2cba89fd3da3ab91bc2285daf3cf02572161189b69924f0602e076bfc",
+      "input_file": {
+        "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/facts.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "a053c6fb9866754fb0025a5e6e4d464ccba8ec23"
+    },
+    {
+      "id": "unactivated-proposal-reassigned_cells",
+      "value": 0,
+      "unit": "canonical cells",
+      "vintage": "archived",
+      "input_sha256": "ad9eaff2cba89fd3da3ab91bc2285daf3cf02572161189b69924f0602e076bfc",
+      "input_file": {
+        "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/facts.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "a053c6fb9866754fb0025a5e6e4d464ccba8ec23"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "unactivated-proposal-assigned_cells",
+      "value": 7,
+      "unit": "canonical cells"
+    },
+    {
+      "metric_id": "unactivated-proposal-removed_cells",
+      "value": 0,
+      "unit": "canonical cells"
+    },
+    {
+      "metric_id": "unactivated-proposal-reassigned_cells",
+      "value": 0,
+      "unit": "canonical cells"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "Two complete frozen unactivated source-supported add031 proposal executions agree in every whole encoded/decoded asset, adding7 unassigned cells with0removal/reassignment. Mechanism controls preserve original bounds/owner identities and keep unsupported geometry readers fail closed.",
+      "status": "supported",
+      "source_ids": [
+        "retained-original-source-and-native-custody"
+      ]
+    },
+    {
+      "text": "True multi-component batch production and actual N2-bound selection/activation remain follow-up; this partial engineering PR does not close #1523 or #1202.",
+      "status": "unresolved",
+      "source_ids": []
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/additive-gap-repair.test.mjs test/additive-release.test.mjs test/effective-footprint.test.mjs test/additive-native-consumers.test.mjs test/native-location-context.test.mjs",
+    "node scripts/additive-gap-repair.mjs <exactcommittedrequest> <whole-request-SHA>; fresh destination and declared complete prospective inputs/runtime/output required"
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "unactivated-proposal-assigned_cells",
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/facts.json",
+      "json_pointer": "/assigned_cells"
+    },
+    {
+      "metric_id": "unactivated-proposal-removed_cells",
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/facts.json",
+      "json_pointer": "/removed_cells"
+    },
+    {
+      "metric_id": "unactivated-proposal-reassigned_cells",
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/facts.json",
+      "json_pointer": "/reassigned_cells"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "explicit-retained-base-or-additions-native-v1",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/additive-native-gap-repair-20261008/final-positive-control.json"
+    },
+    {
+      "method_id": "explicit-retained-base-or-additions-native-v1",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/additive-native-gap-repair-20261008/final-negative-control.json"
+    },
+    {
+      "method_id": "explicit-retained-base-or-additions-native-v1",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/additive-native-gap-repair-20261008/final-reproducibility.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/accepted-1295-whole-fixtures.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/accepted-fixture-custody.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-current-owner-exclusion/bounds.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-current-owner-exclusion/complete-owner-roster-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-current-owner-exclusion/complete-owner-rows.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-current-owner-exclusion/complete-selected-owner-parent-roster.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-current-owner-exclusion/complete-selected-owner-roster.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-current-owner-exclusion/official-reader-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-current-owner-exclusion/receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-current-owner-exclusion/rows-0.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-current-owner-exclusion/runs-3145728.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-current-owner-exclusion/target-owner-binding.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/actual-cold.operating.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/actual-cold.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/actual-cold.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/facts.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/feature.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/inventory.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/ledger-add031.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/owner-window.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/owners-add031.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/patch-add031.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/release-envelope.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v1/root-independent-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/actual-cold.operating.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/actual-cold.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/actual-cold.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/facts.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/feature.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/inventory.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/ledger-add031.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/owner-window.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/owners-add031.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/patch-add031.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/release-envelope.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v2/root-independent-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/actual-cold.operating.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/actual-cold.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/actual-cold.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/base-native-manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/facts.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/feature.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/inventory.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/ledger-add031.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/owner-window.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/owners-add031.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/patch-add031.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/release-envelope.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/actual-cold.operating.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/actual-cold.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/actual-cold.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/base-native-manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/facts.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/feature.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/inventory.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/ledger-add031.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/owner-window.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/owners-add031.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/patch-add031.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run2/release-envelope.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-request-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-request-v2.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-request-v3-run1.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-request-v3-run2.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-two-cold-runs-v3.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/archived-inventory-output-custody-controls.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/archived-inventory-output-custody-producer.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/archived-original-execution-code-producer.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/archived-original-prototype-handover.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/claim-canonical-packet-branch.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/claim-prototype-pin-correction.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/claim-release-prototype-pin-correction.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-execution-plan.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-group-plan.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run1-group-0.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run1-group-1.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run1-group-2.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run1-group-3.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run1-group-4.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run1-group-5.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run1-group-6.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run1-group-7.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run2-group-0.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run2-group-1.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run2-group-2.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run2-group-3.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run2-group-4.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run2-group-5.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run2-group-6.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-groups/run2-group-7.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-operating-journals.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-parent-plan.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-parents/run1-group-0.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-parents/run2-group-0.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-000.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-001.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-002.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-003.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-004.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-005.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-006.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-007.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-008.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-009.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-010.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-011.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-012.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-013.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-014.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-015.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-016.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-017.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-018.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-019.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-020.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-021.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-022.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-023.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-024.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-025.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-026.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-027.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-028.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-029.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-030.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-031.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-032.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-033.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-034.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-035.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-036.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-037.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-038.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-039.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-040.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-041.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-042.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-043.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-044.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-045.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-046.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-047.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-048.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-049.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-050.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-051.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-052.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-053.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-054.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-055.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-056.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-057.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-058.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-059.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-060.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-061.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-062.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-063.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-064.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-065.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-066.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-067.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-068.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-069.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run1-shard-070.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-000.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-001.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-002.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-003.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-004.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-005.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-006.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-007.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-008.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-009.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-010.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-011.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-012.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-013.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-014.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-015.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-016.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-017.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-018.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-019.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-020.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-021.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-022.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-023.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-024.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-025.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-026.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-027.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-028.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-029.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-030.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-031.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-032.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-033.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-034.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-035.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-036.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-037.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-038.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-039.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-040.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-041.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-042.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-043.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-044.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-045.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-046.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-047.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-048.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-049.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-050.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-051.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-052.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-053.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-054.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-055.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-056.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-057.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-058.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-059.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-060.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-061.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-062.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-063.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-064.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-065.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-066.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-067.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-068.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-069.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/complete-inventory-requests/run2-shard-070.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/final-focused-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/final-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/final-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/final-reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/first-original-shard-schema-check.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/first-shard-request-run1.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/first-shard-request-run2.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/first-shard-two-cold-runs.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/hosted-regression-legacy-digest-failure.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/independent-original-baseline-pin-bindings.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/legacy-digest-correction-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/legacy-digest-correction.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/progress.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-inventory-output-custody/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-inventory-output-custody/actual-inverse-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-inventory-output-custody/independent-archive-path-inverse.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-inventory-output-custody/index.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-inventory-output-custody/original-execution-code-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-inventory-output-custody/original-execution-code.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-inventory-output-custody/original-outputs-000.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-inventory-output-custody/original-outputs-001.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-inventory-output-custody/original-outputs-002.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-inventory-output-custody/original-outputs-003.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-inventory-output-custody/original-outputs-004.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/attempt-v1.operating.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/attempt-v1.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/attempt-v1.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/attempt-v2.operating.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/attempt-v2.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/attempt-v2.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/attempt-v3.operating.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/attempt-v3.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/attempt-v3.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/facts.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/inventory.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/restore-qualified-inventory-outputs.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/seven-cell-request-preparation-v3.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/seven-cell-supervisor-v3.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-premises-request-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-premises-request-v2.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-premises-request-v3.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/add031-construction-failure.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/applicability-comment.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/complete-seven-case-input-roster-v3.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/complete-seven-case-input-roster.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/input-plan.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-input-roster.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-005.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-006.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-009.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-010.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-011.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-020.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-021.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-022.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-023.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/components-047.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/original-scientific-products/sources-000.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/source-supported-pilot/source-fit-seven-cases.json",
+      "status": "added"
+    },
+    {
+      "path": "docs/ADDITIVE_GAP_REPAIR.md",
+      "status": "added"
+    },
+    {
+      "path": "scripts/additive-gap-repair.mjs",
+      "status": "added"
+    },
+    {
+      "path": "src/data-client.js",
+      "status": "modified",
+      "original_sha256": "d9731377cd0e7b5f27ede6e53f5cfbf5c2f63b2bde8de5a56ce1246f015228fb"
+    },
+    {
+      "path": "src/effective-footprint.js",
+      "status": "added"
+    },
+    {
+      "path": "src/geometry.js",
+      "status": "modified",
+      "original_sha256": "acaa6ada5a4f9569d74870efe3799ba39ff861c7e7bfc26a1fedf7ab4723beb1"
+    },
+    {
+      "path": "src/native-location-context.js",
+      "status": "modified",
+      "original_sha256": "4035b15342072b59f1f6d97c7e6f349f319ad556373bd1d2b72eb56d2d999992"
+    },
+    {
+      "path": "src/native-source-digest.js",
+      "status": "modified",
+      "original_sha256": "82f6c1c7fc084f70bfd486299b913554a511e7433b48e8f55624e195df79cb2b"
+    },
+    {
+      "path": "src/pixel-canvas-layer.js",
+      "status": "modified",
+      "original_sha256": "1626ec20d5ddef83fb3304d10735b2d3b1823837f452aeae00490c720d4c2587"
+    },
+    {
+      "path": "test/additive-gap-repair.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/additive-native-consumers.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/additive-release.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/effective-footprint.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/native-location-context.test.mjs",
+      "status": "modified",
+      "original_sha256": "879f3aab0c790a7cf69d72da1378b1c7a973058ac13b0335ba3b81ae06b41630"
+    }
+  ]
+}

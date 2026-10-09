@@ -2,16 +2,33 @@ name: Integration queue regression
 on:
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review, edited]
 permissions:
   contents: read
   pull-requests: read
+# Only superseded read-only heads are canceled; mutation workflows stay separate.
+concurrency:
+  # Body edits and draft readiness refresh authority without canceling code work.
+  group: worldatlas-regression-pr-${{ github.event.pull_request.number }}-${{ (github.event.action == 'edited' || github.event.action == 'ready_for_review') && 'metadata' || 'code' }}
+  cancel-in-progress: true
 jobs:
   profile:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: read
+      actions: read
     outputs:
       profile: ${{ steps.select.outputs.profile }}
       shards: ${{ steps.select.outputs.shards }}
+      owned_paths: ${{ steps.select.outputs.owned_paths }}
+      pr_body: ${{ steps.select.outputs.pr_body }}
+      full: ${{ steps.select.outputs.full }}
+      blocked: ${{ steps.select.outputs.blocked }}
     steps:
+      # Only trusted base modules receive the read-only token.
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           ref: ${{ github.event.pull_request.base.sha }}
@@ -24,14 +41,33 @@ jobs:
         with:
           node-version: '24'
       - id: select
+        name: Validate ownership and focused CI applicability
         env:
           GH_TOKEN: ${{ github.token }}
+          PR_GATE_PHASE: metadata
         run: |
-          if test -f scripts/check-integration-profile.mjs; then
-            node scripts/check-integration-profile.mjs
+          if test -f scripts/check-pr-gates.mjs; then
+            node scripts/check-pr-gates.mjs
           else
-            echo 'profile=full' >> "$GITHUB_OUTPUT"
-            echo 'shards=[0,1,2]' >> "$GITHUB_OUTPUT"
+            # Bounded activation compatibility: all existing trusted checks run.
+            # No candidate helper is substituted for absent baseline code.
+            test "$GITHUB_HEAD_REF" = engineering/global-quota-1543-20261009
+            node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import {githubAPI} from './scripts/issue-claim-contract.mjs';
+          import {checkLinkedIssue} from './scripts/check-linked-github-issue.mjs';
+          import {selectIntegrationProfile} from './scripts/check-integration-profile.mjs';
+          import {deploymentBudgetProfile} from './scripts/classify-deployment-budget.mjs';
+          const event = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8'));
+          const repo = process.env.GITHUB_REPOSITORY, token = process.env.GH_TOKEN, api = githubAPI(token);
+          const pr = await api(`/repos/${repo}/pulls/${event.pull_request.number}`);
+          if (pr.head.sha !== event.pull_request.head.sha || pr.head.ref !== process.env.GITHUB_HEAD_REF) throw Error('Activation head changed');
+          const linked = await checkLinkedIssue({branch: pr.head.ref, event: {...event, pull_request: {...event.pull_request, body: pr.body}}, token, api, checkClaim: true});
+          const regression = await selectIntegrationProfile({event, repo, api});
+          const packageProfile = await deploymentBudgetProfile({event, eventName: 'pull_request', repository: repo, api});
+          if (packageProfile.blocked) throw Error('Activation package classification is quota-blocked');
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `profile=${regression.profile}\nshards=${JSON.stringify(regression.shards)}\nowned_paths=${JSON.stringify(linked.owned_paths ?? [])}\npr_body=${JSON.stringify(pr.body ?? '')}\nfull=${packageProfile.full}\nblocked=false\n`);
+          NODE
           fi
       - name: Diagnose failed API read without changing validation outcome
         if: failure()
@@ -68,7 +104,116 @@ jobs:
           } catch (error) { result.diagnostic_error = safe(error.message); }
           console.log(JSON.stringify(result));
           DIAGNOSTIC
+      - name: Retain trusted gate result and applicability
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: trusted-pr-gates-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}
+          path: |
+            pr-gates.json
+            evidence-check.json
+          if-no-files-found: ignore
+          retention-days: 30
+  evidence:
+    # Evidence transport and semantic checks run alongside selection/tests.
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: read
+      actions: read
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            scripts
+            src
+            .github
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - name: Validate exact-head evidence with trusted code
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_GATE_PHASE: evidence
+        run: |
+          if test -f scripts/check-pr-gates.mjs; then
+            node scripts/check-pr-gates.mjs
+          else
+            test "$GITHUB_HEAD_REF" = engineering/global-quota-1543-20261009
+            node scripts/check-pr-evidence.mjs
+          fi
+      - name: Retain trusted evidence result
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: trusted-pr-evidence-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}
+          path: |
+            pr-gates.json
+            evidence-check.json
+          if-no-files-found: ignore
+          retention-days: 30
+  scope:
+    needs: profile
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # Run trusted base code, not scripts modified by the pull request.
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: trusted
+          persist-credentials: false
+          sparse-checkout: |
+            scripts
+            src
+            .github
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: candidate
+          # Keep commit history for merge-base and every changed path, but
+          # materialize only the modules/config/tests used by scope checks.
+          fetch-depth: 0
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            scripts
+            src
+            test
+            .github
+            drizzle
+            hosted
+            data/research-geography-gate.json
+            package.json
+            package-lock.json
+            requirements.txt
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - name: Check exact head paths with trusted code and authenticated issue ownership
+        env:
+          LANE_BRANCH: ${{ github.head_ref }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          OWNED_PATHS: ${{ needs.profile.outputs.owned_paths }}
+          PR_BODY_JSON: ${{ needs.profile.outputs.pr_body }}
+        working-directory: candidate
+        run: |
+          node --input-type=module <<'NODE'
+          import {checkGitScope} from '../trusted/scripts/check-handoff-scope.mjs';
+          console.log(JSON.stringify(checkGitScope({branch: process.env.LANE_BRANCH,
+            base: process.env.BASE_SHA, head: 'HEAD', ownedPaths: JSON.parse(process.env.OWNED_PATHS),
+            prBody: JSON.parse(process.env.PR_BODY_JSON)})));
+          NODE
+      - name: Check worker reservations and regional content gates
+        working-directory: candidate
+        run: node --test test/handoff-scope.test.mjs test/issue-claims.test.mjs test/worker-result.test.mjs test/regional-research-gate.test.mjs test/geography-worker-lane.test.mjs test/evidence-quality.test.mjs test/historical-evidence.test.mjs test/premerge-evidence.test.mjs test/trusted-workflow-checkouts.test.mjs
   geography:
+    needs: profile
+    if: github.event.action != 'edited' && github.event.action != 'ready_for_review'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
@@ -139,6 +284,7 @@ jobs:
           retention-days: 30
   regression:
     needs: profile
+    if: github.event.action != 'edited' && github.event.action != 'ready_for_review'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     strategy:
@@ -198,3 +344,61 @@ jobs:
           INTEGRATION_PROFILE: ${{ needs.profile.outputs.profile }}
           INTEGRATION_SHARD: ${{ matrix.shard }}
         run: node scripts/run-integration-tests.mjs
+  package:
+    needs: profile
+    # Failed trusted metadata stays failed; it cannot launch a doomed build.
+    if: needs.profile.result == 'success' && github.event.action != 'edited' && github.event.action != 'ready_for_review'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - name: Refuse package verification while Actions API quota is unavailable
+        if: needs.profile.outputs.blocked == 'true'
+        run: |
+          echo 'Package is unverified: Actions API quota refused classification. Inspect the retained reset/retry receipt before retrying.'
+          exit 1
+      - name: Checkout complete package inputs
+        if: needs.profile.outputs.full != 'false'
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        if: needs.profile.outputs.full != 'false'
+        with:
+          node-version: '24'
+          cache: ${{ needs.profile.outputs.full != 'false' && 'npm' || '' }}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        if: needs.profile.outputs.full != 'false'
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: npm ci --no-audit --no-fund
+        if: needs.profile.outputs.full != 'false'
+      - run: python -m pip install -r requirements.txt
+        if: needs.profile.outputs.full != 'false'
+      - run: node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs test/package-inputs.test.mjs test/package-build.test.mjs
+        if: needs.profile.outputs.full != 'false'
+      - name: Build and enforce archive/file reserves without publishing
+        if: needs.profile.outputs.full != 'false'
+        run: npm run build:hosted
+      - name: Record package rebuild inapplicability
+        if: needs.profile.outputs.full == 'false'
+        run: echo 'No declared package input or verification path changed; package unit tests and compilation are inapplicable. No current package size measurement is claimed.' >> "$GITHUB_STEP_SUMMARY"
+      - name: Retain declared input build receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: package-input-build
+          path: .cache/package-input-build.json
+          include-hidden-files: true
+          if-no-files-found: ignore
+      - name: Retain exact file and archive accounting
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: deployment-budget
+          path: .cache/deployment-budget.json
+          include-hidden-files: true
+          if-no-files-found: ignore

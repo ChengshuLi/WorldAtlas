@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {deflateRawSync, crc32} from 'node:zlib';
+import {githubAPI} from '../scripts/issue-claim-contract.mjs';
+import {requestAccounting} from '../scripts/github-quota.mjs';
 import {readReportArchive, loadGeographicReport, reportHash} from '../scripts/geographic-report-artifact.mjs';
 
 // Real single-file ZIP records, with both archive formats used by uploaders.
@@ -83,4 +85,29 @@ test('foreign or credential-bearing delivery addresses never receive a fetch', a
     const f = transport({fetchImpl: async () => new Response(null, {status: 302, headers: {location}})});
     await assert.rejects(loadGeographicReport(f.options), /delivery host/);
   }
+});
+
+test('real shared client accounts inventory and redirect, signed delivery remains token-free', async () => {
+  const f = transport(), accounting = requestAccounting('geographic-download'), requests = [];
+  const api = githubAPI(f.options.token, {onRequest: accounting.observe, fetchImpl: async (url, init) => {
+    requests.push({url, init});
+    if (url.includes('/actions/runs/')) return Response.json({total_count: 1, artifacts: [f.artifact]});
+    return new Response(null, {status: 302, headers: {location: 'https://results.blob.core.windows.net/a?signature=private-secret'}});
+  }});
+  const delivery = [];
+  const result = await loadGeographicReport({...f.options, api, fetchImpl: async (url, init) => {
+    delivery.push({url, init}); return new Response(archive(report));
+  }});
+  assert.deepEqual(result, JSON.parse(report)); assert.equal(requests.length, 2);
+  assert.equal(accounting.receipt().actual_http_attempts, 2);
+  assert.equal(delivery.length, 1); assert.equal(delivery[0].init.headers, undefined);
+  assert(!JSON.stringify(accounting.receipt()).includes('private-secret'));
+});
+test('shared admission refusal stops artifact download before credential-free delivery', async () => {
+  const f = transport(); let delivery = false;
+  const api = githubAPI(f.options.token, {fetchImpl: async () => Response.json({total_count: 1, artifacts: [f.artifact]})});
+  let budget = 1;
+  api.setHTTPAdmission(() => {if (!budget--) throw Error('shared admission refused');});
+  await assert.rejects(loadGeographicReport({...f.options, api, fetchImpl: async () => {delivery = true; return new Response(archive(report));}}), /shared admission refused/);
+  assert.equal(delivery, false);
 });

@@ -1,0 +1,265 @@
+{
+  "version": 1,
+  "issue": 1330,
+  "prepared_at": "2026-10-09",
+  "evidence_kind": "source_context_for_validator_integrity_erratum",
+  "source_vintage": "Original #446 packet baseline 27be77596f23304de6a720735538427e6d23e242; current immutable index/helper pin 913486d0df285012e470cd670c097d5e4344de3a",
+  "research_scope": {
+    "original_issue_446": {
+      "scoped_locations": 215,
+      "parents": 32,
+      "areas": [
+        {
+          "area": "Argentina South",
+          "scoped": 1,
+          "full": 54,
+          "coverage": "partial"
+        },
+        {
+          "area": "Paraguay",
+          "scoped": 195,
+          "full": 243,
+          "coverage": "partial"
+        },
+        {
+          "area": "Uruguay",
+          "scoped": 19,
+          "full": 19,
+          "coverage": "full"
+        }
+      ]
+    },
+    "issue_1330_subjects": 263,
+    "paraguay_scope": {
+      "atlas_rows": 195,
+      "native_ids": 194,
+      "multipart_atlas_ids": 1,
+      "source_members": 196
+    },
+    "original_paraguay_crosswalk": {
+      "source_features": 247,
+      "native_one_to_one": 241,
+      "aggregate_members": 6,
+      "distinct_atlas_targets": 243
+    },
+    "issue_1330_scope_is_not_a_complete_region_or_legal_boundary_certificate": true
+  },
+  "provenance": {
+    "source_inventory": {
+      "path": "data/regional-review/regional-review-afee7ce9a5601ab2/source-inventory.json",
+      "commit": "27be77596f23304de6a720735538427e6d23e242",
+      "bytes": 5956,
+      "sha256": "ed32ec3bfd3442b63d02b2a1b6d19cb3124c07f656ad75fb78731024c85d0f1b"
+    },
+    "original_findings": {
+      "path": "data/regional-review/regional-review-afee7ce9a5601ab2/findings.md",
+      "commit": "27be77596f23304de6a720735538427e6d23e242",
+      "bytes": 9758,
+      "sha256": "2e7b2408ccdff47d1a64be845dbeb4f0fc8d2274d0c76bee90bc7cb90ee8f05b"
+    },
+    "original_scope": {
+      "path": "data/regional-review/regional-review-afee7ce9a5601ab2/scope.json",
+      "commit": "27be77596f23304de6a720735538427e6d23e242",
+      "bytes": 21195,
+      "sha256": "4bca00a1683a0104ab69beedb962dfe59b7b26597d631fdd710067b456fd82e2"
+    },
+    "original_parent_ledger": {
+      "path": "data/regional-review/regional-review-afee7ce9a5601ab2/parent-review.csv",
+      "commit": "27be77596f23304de6a720735538427e6d23e242",
+      "bytes": 18075,
+      "sha256": "66037c8a31bf44ab721ea1fd8958d47fdac2747054ad0ea5bb5776aa95b32f9b"
+    },
+    "original_unit_ledger": {
+      "path": "data/regional-review/regional-review-afee7ce9a5601ab2/unit-review.csv",
+      "commit": "27be77596f23304de6a720735538427e6d23e242",
+      "bytes": 170962,
+      "sha256": "5f6167a07dbd134891de395b0d0915c18230edbe04a93be830169edfbd58c3ac"
+    },
+    "original_crosswalk": {
+      "path": "data/regional-review/regional-review-afee7ce9a5601ab2/pry-source-crosswalk.csv",
+      "commit": "27be77596f23304de6a720735538427e6d23e242",
+      "bytes": 29116,
+      "sha256": "ba78a03b26321a56fb05736a08b791ccb485e4580471d58eed54053160b4b82e"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-pry-adm2-2012",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/f549eab25a258603ea32c9dc6cb11b7657796478/releaseData/gbOpen/PRY/ADM2/geoBoundaries-PRY-ADM2.geojson",
+      "role": "2012 district source roster and original ID/name crosswalk",
+      "vintage": "2012",
+      "retrieved": "2026-10-05",
+      "bytes": 45589273,
+      "sha256": "d42bd1f910070bf805e32dc46708230c91f58902a3c8792eda60928b22362858",
+      "retained": false,
+      "license": "CC BY 4.0 is recorded in Atlas feature metadata; the exact 2012 source file and its source-level license statement are not retained here.",
+      "restoration": "Use the exact original inventory URL; verify 45,589,273 bytes and the stated SHA-256 before any source-derived claim. Do not normalize/recompress; do not commit this source because it exceeds the 32 MiB/file limit.",
+      "limitations": [
+        "Source vintage predates 2022 census cartography.",
+        "Identity/name crosswalk does not establish current legal units, successor relationships, current completeness, boundary accuracy or legal authority.",
+        "No polygon-level reproduction or topology review was run for this erratum."
+      ]
+    },
+    {
+      "id": "paraguay-ine-cartografia-digital-2022",
+      "url": "https://www.ine.gov.py/microdatos/cartografia-digital-2022.php",
+      "role": "Official statistical-cartography context and administrative hierarchy reference",
+      "vintage": "2022",
+      "inspected": "2026-10-09",
+      "retention": "URL-only; the 2022 PDF inventory entry remains restoration-only",
+      "license": "INE public-information use statement is on the page; exact terms for the unretained raw district geometry are not independently verified.",
+      "observation": "INE describes the DPA limits as referential for its statistical operations. The page offers country/department statistical cartography including districts; that purpose does not make the map a legal-boundary instrument.",
+      "limitations": [
+        "The 2022 count of 263 districts is a statistical inventory, not a legal polygon proof.",
+        "The 2022 source does not supply a row-level 2012-to-current successor crosswalk in this packet."
+      ]
+    },
+    {
+      "id": "paraguay-ine-district-count-report",
+      "url": "https://www.ine.gov.py/Publicaciones/Biblioteca/documento/295/Documento%20metodologico%20mapa%20de%20pobreza%20distrital.pdf",
+      "role": "Official statistical count context",
+      "vintage": "2022 district inventory cited in an INE methodology document",
+      "retrieved": "2026-10-05",
+      "bytes": 6022351,
+      "sha256": "77c960d89c18eb8b8d3d9359d6a7e9ba7636f51016db8dd2b75a53f91b5145b4",
+      "retained": false,
+      "limitations": [
+        "The exact PDF is listed as restoration-only in the original inventory and was not reacquired for this integrity-only reproduction.",
+        "It supports only statistical count context, not legal boundaries or correspondence."
+      ]
+    },
+    {
+      "id": "geoboundaries-ury-adm1-2017",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/URY/ADM1/geoBoundaries-URY-ADM1.geojson",
+      "role": "2017 department-name and source-role comparison",
+      "vintage": "2017",
+      "retrieved": "2026-10-05",
+      "bytes": 3632079,
+      "sha256": "9f4887205e7b359af2ef1e4f484ad071d2dc0d12d068f1d7b6c1cc6c2624d1cf",
+      "retained": true,
+      "retained_path": "data/regional-review/regional-review-afee7ce9a5601ab2/ury-gb-2017.geojson",
+      "license": "ODbL 1.0 as pinned in source metadata; preserve attribution/share-alike obligations for any reuse.",
+      "limitations": [
+        "The 19-name comparison is a name/role join, not proof of current polygons or legal completeness."
+      ]
+    },
+    {
+      "id": "uruguay-igm-departamentos",
+      "url": "https://www.ambiente.gub.uy/metadatos/index.php/metadata/md_iframe/55",
+      "role": "Current official department-layer metadata",
+      "vintage": "Data date 2024-09-18; metadata last updated 2026-07-15",
+      "inspected": "2026-10-09",
+      "retained_geometry": "Raw response retained in the original #446 packet, 16,950,115 bytes, SHA-256 3cfa19c6be9d12bd159b236e15839f958656fdbe66ef19e38379cb54c141b3a7.",
+      "license": "Metadata says use is free with citation to IGM, AGESIC and IDE.",
+      "observation": "Metadata describes a polygon layer for Uruguay departments, EPSG:4326, with no temporal coverage specified. The retained response contains 21 features: 19 department-name matches and separate Isla Brasileña/Rincón de Maneco records.",
+      "limitations": [
+        "The two separate features are contested and are not silently counted as departments.",
+        "Metadata and name matches do not prove boundaries or settle the territorial meaning of the extra features."
+      ]
+    },
+    {
+      "id": "natural-earth-country-spi-baseline-reference",
+      "url": "https://www.naturalearthdata.com/",
+      "role": "Baseline label for a physical ice-field feature",
+      "vintage": "Undated modern reference",
+      "retrieved": "2026-10-05 baseline checkout review",
+      "retained": "Only baseline feature metadata and its original geometry hash are available; no direct Natural Earth source dataset, release or source feature ID is retained.",
+      "license": "Public domain according to baseline feature metadata only.",
+      "limitations": [
+        "The row describes a physical landform, not an administrative or sovereign unit.",
+        "Do not assign it to an administrative province or infer sovereignty from this geometry."
+      ]
+    },
+    {
+      "id": "argentina-chile-1998-boundary-agreement",
+      "url": "https://tratados.cancilleria.gob.ar/tratado_archivo.php?caso=pdf&id=kqSrmw%3D%3D&tipo=kg%3D%3D&tratados_id=kqOkmJo%3D",
+      "role": "Official treaty evidence for the boundary route from Monte Fitz Roy to Cerro Daudet",
+      "retrieved": "2026-10-05",
+      "bytes": 191319,
+      "sha256": "c29a05138447ea20153b95be7c267618ed05edd85c334275efd70dbac8ae2239",
+      "retained": false,
+      "limitations": [
+        "It does not determine ownership of the ice-field source geometry used here."
+      ]
+    },
+    {
+      "id": "argentina-cancilleria-2018-glaciers",
+      "url": "https://cancilleria.gob.ar/es/actualidad/noticias/inventario-nacional-de-glaciares-en-la-zona-de-hielos-continentales",
+      "role": "Official statement about glacier inventory cartography and pending binational demarcation",
+      "retrieved": "2026-10-05",
+      "bytes": 43866,
+      "sha256": "46d1d85d57d259b4242a58996769b5f18ed29346c2a5e7c11badba60509a29e5",
+      "retained": false,
+      "limitations": [
+        "A statement about pending demarcation does not establish a new territorial allocation."
+      ]
+    }
+  ],
+  "neighboring_granularity": [
+    {
+      "place": "Paraguay",
+      "baseline_level": "ADM2 districts",
+      "full_area_atlas_rows": 243,
+      "scoped_atlas_rows": 195,
+      "source_vintage": 2012,
+      "scope_coverage": "partial"
+    },
+    {
+      "place": "Uruguay",
+      "baseline_level": "ADM1 departments",
+      "full_area_rows": 19,
+      "scoped_rows": 19,
+      "older_source_vintage": 2017,
+      "current_official_metadata": "IGM departamentos",
+      "scope_coverage": "name/role only; current response has two separately contested features"
+    },
+    {
+      "place": "Argentina South",
+      "baseline_level": "one physical ice field in this issue scope",
+      "full_area_rows": 54,
+      "scoped_rows": 1,
+      "scope_coverage": "partial; no administrative meaning established"
+    }
+  ],
+  "outstanding_handoffs": [
+    {
+      "issue": 926,
+      "state": "open",
+      "updated_at": "2026-10-06T08:58:32Z",
+      "owner_action": "Reconcile 2012 source units with current legal units after exact oversized-source restoration and hash verification."
+    },
+    {
+      "issue": 927,
+      "state": "closed",
+      "updated_at": "2026-10-06T15:38:53Z",
+      "owner_action": "Artigas territorial-meaning follow-up is closed; inspect its final evidence before any future claim."
+    },
+    {
+      "issue": 928,
+      "state": "open; status:ready",
+      "updated_at": "2026-10-08T09:20:53Z",
+      "owner_action": "Restore SPI provenance and assess source identity."
+    },
+    {
+      "issue": 929,
+      "state": "open; status:blocked",
+      "updated_at": "2026-10-06T08:58:41Z",
+      "owner_action": "Engineering to resolve multipart geometry encoding."
+    },
+    {
+      "issue": 930,
+      "state": "open; status:ready",
+      "updated_at": "2026-10-06T09:14:13Z",
+      "owner_action": "Engineering to preserve Asunción city/district granularity."
+    }
+  ],
+  "explicit_unknowns": [
+    "Current Paraguay legal ADM2 inventory and exact 2012-to-current successor mapping.",
+    "Legal authority and completeness of any current Paraguay boundary geometry.",
+    "Whether the 2012 Paraguay shape file reproduces Atlas geometries or validates their topology.",
+    "Current Uruguay department boundary geometry agreement and territorial meaning of the two extra retained features.",
+    "Southern Patagonian Ice Field source release, source feature ID, original byte geometry and administrative/sovereign relation.",
+    "San Juan del Paraná Polygon-versus-disconnected-component semantics and Asunción city/district source granularity."
+  ],
+  "interpretation_limit": "This packet verifies a historical validator's integrity behavior and preserves original evidence. It makes no geography correction, source-legal ruling, regional approval, certificate, release, import or publication decision."
+}

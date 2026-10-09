@@ -1,4 +1,6 @@
 import fs from 'node:fs';
+import {githubAPI} from './issue-claim-contract.mjs';
+import {quotaDelay,requestAccounting} from './github-quota.mjs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {loadPackageInputs, readPackageInputs, packagePathRequired, safePackagePath, validatePackageInputs} from './package-inputs.mjs';
@@ -67,29 +69,28 @@ export async function deploymentBudgetProfile({event, eventName, repository, api
     const definition = await readPackageInputs({route, base, api});
     return {version: 2, event: eventName, ...classifyBudgetFiles(files, definition)};
   } catch (error) {
+    const delay=quotaDelay(error);
     return {version: 2, event: eventName, full: true,
+      ...(delay!==null?{blocked:true,api_error:error.github,retry_at:new Date(Date.now()+delay).toISOString()}:{}),
       reason: error instanceof Error ? error.message : 'Inventory lookup failed', paths: [], fallback: true};
   }
 }
 
-export async function githubBudgetAPI(route, {token = process.env.GH_TOKEN, fetchImpl = fetch} = {}) {
-  if (!token) throw Error('Read-only GitHub token unavailable');
-  const response = await fetchImpl(`https://api.github.com${route}`, {
-    headers: {Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'},
-    signal: AbortSignal.timeout(15000),
-  });
-  if (!response.ok) throw Error(`GitHub inventory HTTP ${response.status}`);
-  return response.json();
+export async function githubBudgetAPI(route, {token = process.env.GH_TOKEN, fetchImpl = fetch, onRequest = () => {}} = {}) {
+  return githubAPI(token, {fetchImpl, onRequest})(route);
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  let result;
+  let result;const accounting=requestAccounting('deployment-classifier');
+  const api = process.env.GH_TOKEN ? githubAPI(process.env.GH_TOKEN, {onRequest: accounting.observe}) : undefined;
   try {
     result = await deploymentBudgetProfile({event: JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8')),
-      eventName: process.env.GITHUB_EVENT_NAME, repository: process.env.GITHUB_REPOSITORY, api: githubBudgetAPI});
+      eventName: process.env.GITHUB_EVENT_NAME, repository: process.env.GITHUB_REPOSITORY, api: api ?? (() => {throw Error('Read-only GitHub token unavailable');})});
   } catch { result = {version: 2, full: true, reason: 'Classifier inputs unavailable', paths: [], fallback: true}; }
   fs.mkdirSync('.cache', {recursive: true});
   fs.writeFileSync('.cache/deployment-budget-scope.json', JSON.stringify(result, null, 2) + '\n');
-  fs.appendFileSync(process.env.GITHUB_OUTPUT, `full=${result.full}\n`);
-  console.log(JSON.stringify(result));
+  fs.appendFileSync(process.env.GITHUB_OUTPUT, `full=${result.full}\nblocked=${Boolean(result.blocked)}\n`);
+  console.log(JSON.stringify({...result,request_accounting:accounting.receipt()}));
+  // A structured blocked decision makes the package job fail before setup.
+  // Unknown non-quota inventories keep the conservative full-build fallback.
 }

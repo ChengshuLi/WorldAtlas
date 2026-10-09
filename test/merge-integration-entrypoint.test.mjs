@@ -7,12 +7,23 @@ import {spawnSync} from 'node:child_process';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
 
 const root=path.resolve(import.meta.dirname,'..');
+// Mock the real authenticated core-response boundary even when these child
+// entry points inherit the hosted Actions environment. Keep denied mutations
+// denied; missing capacity must not silently disable production admission.
+const capacityShim=`const coreHeaders={'x-ratelimit-resource':'core','x-ratelimit-limit':'5000','x-ratelimit-remaining':'4900','x-ratelimit-reset':String(Math.floor(Date.now()/1000)+3600)};
+const NativeResponse=globalThis.Response;
+globalThis.Response=class extends NativeResponse {
+ constructor(body,options={}){const headers=new Headers(options.headers);for(const [key,value] of Object.entries(coreHeaders))headers.set(key,value);super(body,{...options,headers});}
+ static json(body,options={}){return new this(JSON.stringify(body),{...options,headers:{'Content-Type':'application/json',...options.headers}});}
+};
+`;
+
 function run({readFails=false,commentFails=false}={}) {
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-merge-entry-'));
   fs.mkdirSync(path.join(directory,'.github'));
   fs.copyFileSync(path.join(root,'.github/evidence-policy.json'),path.join(directory,'.github/evidence-policy.json'));
   fs.writeFileSync(path.join(directory,'event.json'),JSON.stringify({inputs:{pr_number:'2',expected_head:'a'.repeat(40),request_id:'entrypoint-test-request'}}));
-  fs.writeFileSync(path.join(directory,'mock.mjs'),`globalThis.fetch=async(url,options)=> {
+  fs.writeFileSync(path.join(directory,'mock.mjs'),capacityShim+`globalThis.fetch=async(url,options)=> {
     const posting=options.method==='POST';
     return new Response(JSON.stringify(posting?{}:{merged:true,head:{sha:'a'.repeat(40)},merge_commit_sha:'b'.repeat(40)}),
       {status:posting?${commentFails?403:201}:${readFails?418:200},headers:{'Content-Type':'application/json'}});
@@ -60,7 +71,7 @@ test('actual entry point saves stale/head/conflict/base diagnostics even when no
     ['/commits/'+head+'/status']:{statuses:[]},'/git/ref/heads/main':{object:{sha:base}},
     ['/git/commits/'+candidate]:{sha:candidate,parents:[{sha:sha('e')},{sha:head}]}
   };
-  fs.writeFileSync(path.join(directory,'mock.mjs'),`const routes=${JSON.stringify(routes)};
+  fs.writeFileSync(path.join(directory,'mock.mjs'),capacityShim+`const routes=${JSON.stringify(routes)};
     const realSetTimeout=globalThis.setTimeout;globalThis.setTimeout=(fn,ms,...args)=>realSetTimeout(fn,ms===2000?0:ms,...args);
     let prReads=0,baseReads=0;
     globalThis.fetch=async(url,options)=>{
@@ -98,7 +109,7 @@ test('actual final entry point cleans only its owned ref and retains successful 
     fs.copyFileSync(path.join(root,'.github/evidence-policy.json'),path.join(directory,'.github/evidence-policy.json'));
     const request='cleanup-entrypoint-request',reference=`worldatlas-integration/pr-2-${request}-1234`;
     fs.writeFileSync(path.join(directory,'event.json'),JSON.stringify({inputs:{pr_number:'2',expected_head:'a'.repeat(40),request_id:request}}));
-    fs.writeFileSync(path.join(directory,'mock.mjs'),`globalThis.fetch=async(url,options)=>{
+    fs.writeFileSync(path.join(directory,'mock.mjs'),capacityShim+`globalThis.fetch=async(url,options)=>{
       const route=new URL(url).pathname;
       if(options.method==='PUT')throw Error('Unexpected new merge');
       if(options.method==='DELETE') {
@@ -142,7 +153,7 @@ test('actual fallback prepare cleans its confirmed ref when receipt notification
     ['/git/commits/'+head]:{tree:{sha:'combined'}},
     '/git/trees/combined':{truncated:false,tree:[{path:'src/a.js',sha:'blob',mode:'100644',type:'blob'}]}
   };
-  fs.writeFileSync(path.join(directory,'mock.mjs'),`import fs from 'node:fs';const routes=${JSON.stringify(routes)},refs=new Map();
+  fs.writeFileSync(path.join(directory,'mock.mjs'),capacityShim+`import fs from 'node:fs';const routes=${JSON.stringify(routes)},refs=new Map();
     const originalSetTimeout=globalThis.setTimeout;globalThis.setTimeout=(fn,ms,...args)=>originalSetTimeout(fn,ms===2000?0:ms,...args);
     globalThis.fetch=async(url,options)=>{
       const route=new URL(url).pathname.replace('/repos/owner/repo',''),body=options.body?JSON.parse(options.body):null;

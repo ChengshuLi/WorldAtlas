@@ -9,7 +9,7 @@ import {validateContextMigration} from './validate-context-migration.mjs';
 import {candidateBudget} from './native-preparation-guards.mjs';
 import {readPinnedBuildFile} from './read-pinned-build-file.mjs';
 import {repositoryReader,safeEvidencePath,sha256} from '../evidence-quality.mjs';
-import {validateChainedBuildContext} from '../../coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs';
+import {validateChainedBuildContext} from './chained-build-context.mjs';
 
 export const BUILD_CONTEXT_STAGE_PATH='data/native-context-migration/manifest.json';
 export const BUILD_CONTEXT_VALIDATOR_SOURCES=[

@@ -1,0 +1,1600 @@
+{
+  "version": 1,
+  "issue": 1201,
+  "lane": "engineering",
+  "worker_id": "01a10843-da4b-7fc1-a482-d3186bc6334d",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "version": 2,
+    "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49",
+    "files": [
+      {
+        "path": "scripts/run-integration-tests.mjs",
+        "bytes": 6872,
+        "sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+        "hash_kind": "file-bytes",
+        "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8"
+      },
+      {
+        "path": "scripts/run-integration-tests.mjs",
+        "bytes": 9645,
+        "sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+        "hash_kind": "file-bytes",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      },
+      {
+        "path": "test/physical-component-evidence-controls.py",
+        "bytes": 8532,
+        "sha256": "ac68c09da255b40d97e5a47f110c25f56dc8e7f001fa2f9309ed7e6e46fba5c9",
+        "hash_kind": "file-bytes",
+        "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8"
+      },
+      {
+        "path": "test/physical-component-evidence-controls.py",
+        "bytes": 10548,
+        "sha256": "8f68ee3abb334133fe6ce677efc391448811caa3bb9bae427472ded5e99879e7",
+        "hash_kind": "file-bytes",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      },
+      {
+        "path": "scripts/validate-physical-component-evidence.py",
+        "bytes": 17242,
+        "sha256": "4377aa20ed954b43d13d68b18ca25a0bc19ef0969746365ce3c486902951d9f5",
+        "hash_kind": "file-bytes",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      },
+      {
+        "path": "scripts/physical_component_custody.py",
+        "bytes": 10715,
+        "sha256": "13049e65a9319136179e6ed84700823d6cae8c6cbf8d51acc013a18bbfaeb5f1",
+        "hash_kind": "file-bytes",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      },
+      {
+        "path": "coordination/engineering/ci-speed-1201-20261008-p1/test-inventory.json",
+        "bytes": 44463,
+        "sha256": "e5aa1bdb7bbee3e9cc67b79248b0dec50e8e5ff0e6219631187797638712ff4f",
+        "hash_kind": "file-bytes",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      },
+      {
+        "path": "scripts/queue-pr-merge.mjs",
+        "bytes": 3561,
+        "sha256": "b458e082e691a608849efdabef80e39a1957c00f8803fffcda77b188b1394c10",
+        "hash_kind": "file-bytes",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      },
+      {
+        "path": "scripts/merge-queue-client.mjs",
+        "bytes": 7513,
+        "sha256": "c9daeb6cfb5fb00f2a6cf47bdfb840cfb97090402aa1f4481e1865f0e085e362",
+        "hash_kind": "file-bytes",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      },
+      {
+        "path": "scripts/run-worker-merge.mjs",
+        "bytes": 7365,
+        "sha256": "6c6b74512880f1d7bede38a1caccc0f08e64aadb48a94a059e8a400ae934d1ab",
+        "hash_kind": "file-bytes",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      },
+      {
+        "path": "scripts/run-merge-scheduler.mjs",
+        "bytes": 4942,
+        "sha256": "b299418995a92e1c56836571fb347c4ac25d100b04895290705f7645e2b363e6",
+        "hash_kind": "file-bytes",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      },
+      {
+        "path": "scripts/issue-claim-contract.mjs",
+        "bytes": 17819,
+        "sha256": "b09fb19d6e4a32f24f8eed4e7331ce6d4c2faead60d93809aae80987a744e504",
+        "hash_kind": "file-bytes",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/README.md",
+      "bytes": 13320,
+      "sha256": "883aa964415db0a0ac1a777e6abc4596e837f318c80f65e25003e4c7d4976b12",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/actual-main-files.json",
+      "bytes": 4040,
+      "sha256": "c71a71003b2f1f89bab6c16bfe5154efcd53949ead7a14cbc8e67f9b57a49025",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/api-and-observer-costs.json",
+      "bytes": 6522,
+      "sha256": "28024142c521f8b4690a499489a394f91ec6354d719352b0a8b9e8590a99a840",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/executed-code-vintages.json",
+      "bytes": 9230,
+      "sha256": "944e650d71adf2de1fb3c8286ab5602c0903b7e4fa5040b861cc73a3abdac938",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/geography-verification.json",
+      "bytes": 48672,
+      "sha256": "ccd6ba37d2795faaf6617ba1bb5dc3b06ec57f4f6c33c1b96b65fceb10d87d9c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "bytes": 68477,
+      "sha256": "d37a15b392e5a996cf741cb18f02c7d716021fe01634368a50f162bf56d860ac",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/inventory-assessment.json",
+      "bytes": 167470,
+      "sha256": "4cf957264b1088d1026db18e7c97680d5bac94e119a36be6dbf2defff85657de",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/observer-controls.log",
+      "bytes": 3598,
+      "sha256": "c6f74d9f6e4a28961af4ff8998a888678f7032e5685e3e1fb7bbea648459e470",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/observer-resource.log",
+      "bytes": 777,
+      "sha256": "eee5a87eb073a04ce1cc7eda1d304dae0d168016c251a499a03c27bffb5220ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/package-history-tests.log",
+      "bytes": 12439,
+      "sha256": "40a020f0b53f98a0ef7900324cdf306746a9a1b1274e10d3b0a0c481eea43290",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/selection-tests.log",
+      "bytes": 9850,
+      "sha256": "75915587d180389e8800d442b5c4b3658695b12c36b112961ddc44026e93a8db",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/CI_PERFORMANCE.md",
+      "bytes": 4230,
+      "sha256": "caade602cf59e3751e96c15030164abf5bda9035403441cb6a91bcefc41f9257",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "hosted-ci-observation",
+      "kind": "code",
+      "description": "Independent hosted log/job observation with exact main bytes, unchanged scientific controls, all-lane inventory and meaningful selector/package probes. No new geographic computation or provider operation.",
+      "software": "GitHub Ubuntu Node24/Python3.12; local Node24.19 macOS",
+      "units": "seconds and test cases"
+    }
+  ],
+  "validation": [],
+  "metrics": [
+    {
+      "id": "pr_before-0-job_seconds",
+      "value": 747.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "924c06d41356bbbf327f5d2cac95097a2b0382c3",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8"
+      }
+    },
+    {
+      "id": "pr_before-0-test_seconds",
+      "value": 235.98108478,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "924c06d41356bbbf327f5d2cac95097a2b0382c3",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8"
+      }
+    },
+    {
+      "id": "pr_before-0-passed",
+      "value": 404,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "924c06d41356bbbf327f5d2cac95097a2b0382c3",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8"
+      }
+    },
+    {
+      "id": "pr_before-0-skipped",
+      "value": 0,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "924c06d41356bbbf327f5d2cac95097a2b0382c3",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8"
+      }
+    },
+    {
+      "id": "pr_before-0-semantic-1",
+      "value": 68.382524462,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "924c06d41356bbbf327f5d2cac95097a2b0382c3",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8"
+      }
+    },
+    {
+      "id": "pr_before-1-job_seconds",
+      "value": 588.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "924c06d41356bbbf327f5d2cac95097a2b0382c3",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8"
+      }
+    },
+    {
+      "id": "pr_before-1-test_seconds",
+      "value": 180.531713016,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "924c06d41356bbbf327f5d2cac95097a2b0382c3",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8"
+      }
+    },
+    {
+      "id": "pr_before-1-passed",
+      "value": 636,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "924c06d41356bbbf327f5d2cac95097a2b0382c3",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8"
+      }
+    },
+    {
+      "id": "pr_before-1-skipped",
+      "value": 0,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "924c06d41356bbbf327f5d2cac95097a2b0382c3",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8"
+      }
+    },
+    {
+      "id": "pr_before-2-job_seconds",
+      "value": 1091.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "924c06d41356bbbf327f5d2cac95097a2b0382c3",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8"
+      }
+    },
+    {
+      "id": "pr_before-2-test_seconds",
+      "value": 557.630358965,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "924c06d41356bbbf327f5d2cac95097a2b0382c3",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8"
+      }
+    },
+    {
+      "id": "pr_before-2-passed",
+      "value": 476,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "924c06d41356bbbf327f5d2cac95097a2b0382c3",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8"
+      }
+    },
+    {
+      "id": "pr_before-2-skipped",
+      "value": 0,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "924c06d41356bbbf327f5d2cac95097a2b0382c3",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8"
+      }
+    },
+    {
+      "id": "pr_before-2-semantic-0",
+      "value": 417.368177482,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "924c06d41356bbbf327f5d2cac95097a2b0382c3",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8"
+      }
+    },
+    {
+      "id": "pr_after-0-job_seconds",
+      "value": 1045.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "defda65defb79a403788228bdf3f229039a5aa70",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "pr_after-0-test_seconds",
+      "value": 336.446839852,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "defda65defb79a403788228bdf3f229039a5aa70",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "pr_after-0-passed",
+      "value": 426,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "defda65defb79a403788228bdf3f229039a5aa70",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "pr_after-0-skipped",
+      "value": 0,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "defda65defb79a403788228bdf3f229039a5aa70",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "pr_after-1-job_seconds",
+      "value": 838.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "defda65defb79a403788228bdf3f229039a5aa70",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "pr_after-1-test_seconds",
+      "value": 489.30615395200005,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "defda65defb79a403788228bdf3f229039a5aa70",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "pr_after-1-passed",
+      "value": 574,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "defda65defb79a403788228bdf3f229039a5aa70",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "pr_after-1-skipped",
+      "value": 0,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "defda65defb79a403788228bdf3f229039a5aa70",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "pr_after-1-semantic-0",
+      "value": 419.849496345,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "defda65defb79a403788228bdf3f229039a5aa70",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "pr_after-2-job_seconds",
+      "value": 614.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "defda65defb79a403788228bdf3f229039a5aa70",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "pr_after-2-test_seconds",
+      "value": 227.77413563000002,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "defda65defb79a403788228bdf3f229039a5aa70",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "pr_after-2-passed",
+      "value": 528,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "defda65defb79a403788228bdf3f229039a5aa70",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "pr_after-2-skipped",
+      "value": 0,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "defda65defb79a403788228bdf3f229039a5aa70",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "pr_after-2-semantic-0",
+      "value": 88.296391026,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "defda65defb79a403788228bdf3f229039a5aa70",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "queue_after-0-job_seconds",
+      "value": 932.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "4134cbe8ac5cf433b2f2c94949236b064bc42114",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "queue_after-0-test_seconds",
+      "value": 337.61899518,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "4134cbe8ac5cf433b2f2c94949236b064bc42114",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "queue_after-0-passed",
+      "value": 426,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "4134cbe8ac5cf433b2f2c94949236b064bc42114",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "queue_after-0-skipped",
+      "value": 0,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "4134cbe8ac5cf433b2f2c94949236b064bc42114",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "queue_after-1-job_seconds",
+      "value": 996.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "4134cbe8ac5cf433b2f2c94949236b064bc42114",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "queue_after-1-test_seconds",
+      "value": 485.64664714900005,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "4134cbe8ac5cf433b2f2c94949236b064bc42114",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "queue_after-1-passed",
+      "value": 574,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "4134cbe8ac5cf433b2f2c94949236b064bc42114",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "queue_after-1-skipped",
+      "value": 0,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "4134cbe8ac5cf433b2f2c94949236b064bc42114",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "queue_after-1-semantic-0",
+      "value": 418.73603797,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "4134cbe8ac5cf433b2f2c94949236b064bc42114",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "queue_after-2-job_seconds",
+      "value": 838.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "4134cbe8ac5cf433b2f2c94949236b064bc42114",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "queue_after-2-test_seconds",
+      "value": 264.84488660899996,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "4134cbe8ac5cf433b2f2c94949236b064bc42114",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "queue_after-2-passed",
+      "value": 528,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "4134cbe8ac5cf433b2f2c94949236b064bc42114",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "queue_after-2-skipped",
+      "value": 0,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "4134cbe8ac5cf433b2f2c94949236b064bc42114",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "queue_after-2-semantic-0",
+      "value": 97.406376056,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "4134cbe8ac5cf433b2f2c94949236b064bc42114",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "queue-before-job-0",
+      "value": 56.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "6e618ad69b884772a7c8a518e288ea43af7508c7",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8"
+      }
+    },
+    {
+      "id": "queue-before-job-1",
+      "value": 875.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "6e618ad69b884772a7c8a518e288ea43af7508c7",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8"
+      }
+    },
+    {
+      "id": "queue-before-job-2",
+      "value": 22.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "6e618ad69b884772a7c8a518e288ea43af7508c7",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8"
+      }
+    },
+    {
+      "id": "queue-before-job-3",
+      "value": 1055.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "6e618ad69b884772a7c8a518e288ea43af7508c7",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8"
+      }
+    },
+    {
+      "id": "queue-before-job-4",
+      "value": 929.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "6e618ad69b884772a7c8a518e288ea43af7508c7",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8"
+      }
+    },
+    {
+      "id": "queue-before-job-5",
+      "value": 67.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "6e618ad69b884772a7c8a518e288ea43af7508c7",
+      "input_sha256": "64ddc1371673800d0e9851a43a6df22406f5c89c4eafbcbce08e56ad9f8ce8d2",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "ad2d418f298031c83afd30d2147c1a4e8ec546b8"
+      }
+    },
+    {
+      "id": "geography-after_pr-test_seconds",
+      "value": 2.729581118,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "2f22d6e870e8059d71f8e47a23f730f9a77b07b2",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "geography-after_pr-passed",
+      "value": 207,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "2f22d6e870e8059d71f8e47a23f730f9a77b07b2",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "geography-after_pr-failed",
+      "value": 0,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "2f22d6e870e8059d71f8e47a23f730f9a77b07b2",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "geography-after_pr-skipped",
+      "value": 0,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "2f22d6e870e8059d71f8e47a23f730f9a77b07b2",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "geography-after_pr-integration_jobs-0",
+      "value": 6.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "2f22d6e870e8059d71f8e47a23f730f9a77b07b2",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "geography-after_pr-integration_jobs-1",
+      "value": 19.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "2f22d6e870e8059d71f8e47a23f730f9a77b07b2",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "geography-after_pr-integration_jobs-2",
+      "value": 12.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "2f22d6e870e8059d71f8e47a23f730f9a77b07b2",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "geography-after_pr-package_jobs-0",
+      "value": 9.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "2f22d6e870e8059d71f8e47a23f730f9a77b07b2",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "geography-after_pr-package_jobs-1",
+      "value": 5.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "2f22d6e870e8059d71f8e47a23f730f9a77b07b2",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "geography-after_queue-test_seconds",
+      "value": 3.3971062830000003,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "7717cba0a56e73defd53f7b3e77ca42b9792dbf3",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "geography-after_queue-passed",
+      "value": 207,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "7717cba0a56e73defd53f7b3e77ca42b9792dbf3",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "geography-after_queue-failed",
+      "value": 0,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "7717cba0a56e73defd53f7b3e77ca42b9792dbf3",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "geography-after_queue-skipped",
+      "value": 0,
+      "unit": "test cases",
+      "vintage": "archived",
+      "evaluation_commit": "7717cba0a56e73defd53f7b3e77ca42b9792dbf3",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "geography-after_queue-jobs-0",
+      "value": 65.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "7717cba0a56e73defd53f7b3e77ca42b9792dbf3",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "geography-after_queue-jobs-1",
+      "value": 17.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "7717cba0a56e73defd53f7b3e77ca42b9792dbf3",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "geography-after_queue-jobs-2",
+      "value": 10.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "7717cba0a56e73defd53f7b3e77ca42b9792dbf3",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "geography-after_queue-jobs-3",
+      "value": 57.0,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "7717cba0a56e73defd53f7b3e77ca42b9792dbf3",
+      "input_sha256": "9c96f49303a4ec6cbae8cc42a727d245cd0db5debe363fa2ccb22f78214be3bb",
+      "input_file": {
+        "path": "scripts/run-integration-tests.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "api-phase-register",
+      "value": 4,
+      "unit": "HTTP attempts",
+      "vintage": "archived",
+      "evaluation_commit": "19ca4765a6de436f868742279f86f1f4e340e289",
+      "input_sha256": "b299418995a92e1c56836571fb347c4ac25d100b04895290705f7645e2b363e6",
+      "input_file": {
+        "path": "scripts/run-merge-scheduler.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "api-phase-schedule",
+      "value": 12,
+      "unit": "HTTP attempts",
+      "vintage": "archived",
+      "evaluation_commit": "19ca4765a6de436f868742279f86f1f4e340e289",
+      "input_sha256": "b299418995a92e1c56836571fb347c4ac25d100b04895290705f7645e2b363e6",
+      "input_file": {
+        "path": "scripts/run-merge-scheduler.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "api-phase-prepare",
+      "value": 99,
+      "unit": "HTTP attempts",
+      "vintage": "archived",
+      "evaluation_commit": "19ca4765a6de436f868742279f86f1f4e340e289",
+      "input_sha256": "6c6b74512880f1d7bede38a1caccc0f08e64aadb48a94a059e8a400ae934d1ab",
+      "input_file": {
+        "path": "scripts/run-worker-merge.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "api-phase-merge",
+      "value": 106,
+      "unit": "HTTP attempts",
+      "vintage": "archived",
+      "evaluation_commit": "19ca4765a6de436f868742279f86f1f4e340e289",
+      "input_sha256": "6c6b74512880f1d7bede38a1caccc0f08e64aadb48a94a059e8a400ae934d1ab",
+      "input_file": {
+        "path": "scripts/run-worker-merge.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "observer-read_requests",
+      "value": 3,
+      "unit": "HTTP attempts",
+      "vintage": "archived",
+      "evaluation_commit": "127e19bb07195c5c2057612f2c611604620846b2",
+      "input_sha256": "c9daeb6cfb5fb00f2a6cf47bdfb840cfb97090402aa1f4481e1865f0e085e362",
+      "input_file": {
+        "path": "scripts/merge-queue-client.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "observer-elapsed_ms",
+      "value": 2020,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "127e19bb07195c5c2057612f2c611604620846b2",
+      "input_sha256": "c9daeb6cfb5fb00f2a6cf47bdfb840cfb97090402aa1f4481e1865f0e085e362",
+      "input_file": {
+        "path": "scripts/merge-queue-client.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "observer-real_seconds",
+      "value": 2.07,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "127e19bb07195c5c2057612f2c611604620846b2",
+      "input_sha256": "c9daeb6cfb5fb00f2a6cf47bdfb840cfb97090402aa1f4481e1865f0e085e362",
+      "input_file": {
+        "path": "scripts/merge-queue-client.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "observer-user_cpu_seconds",
+      "value": 0.22,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "127e19bb07195c5c2057612f2c611604620846b2",
+      "input_sha256": "c9daeb6cfb5fb00f2a6cf47bdfb840cfb97090402aa1f4481e1865f0e085e362",
+      "input_file": {
+        "path": "scripts/merge-queue-client.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "observer-system_cpu_seconds",
+      "value": 0.07,
+      "unit": "seconds",
+      "vintage": "archived",
+      "evaluation_commit": "127e19bb07195c5c2057612f2c611604620846b2",
+      "input_sha256": "c9daeb6cfb5fb00f2a6cf47bdfb840cfb97090402aa1f4481e1865f0e085e362",
+      "input_file": {
+        "path": "scripts/merge-queue-client.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "observer-maximum_rss_bytes",
+      "value": 52363264,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "127e19bb07195c5c2057612f2c611604620846b2",
+      "input_sha256": "c9daeb6cfb5fb00f2a6cf47bdfb840cfb97090402aa1f4481e1865f0e085e362",
+      "input_file": {
+        "path": "scripts/merge-queue-client.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "observer-peak_footprint_bytes",
+      "value": 17669312,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "127e19bb07195c5c2057612f2c611604620846b2",
+      "input_sha256": "c9daeb6cfb5fb00f2a6cf47bdfb840cfb97090402aa1f4481e1865f0e085e362",
+      "input_file": {
+        "path": "scripts/merge-queue-client.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "observer-writes",
+      "value": 0,
+      "unit": "HTTP attempts",
+      "vintage": "archived",
+      "evaluation_commit": "127e19bb07195c5c2057612f2c611604620846b2",
+      "input_sha256": "c9daeb6cfb5fb00f2a6cf47bdfb840cfb97090402aa1f4481e1865f0e085e362",
+      "input_file": {
+        "path": "scripts/merge-queue-client.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "original-observer-read_requests",
+      "value": 9,
+      "unit": "HTTP reads",
+      "vintage": "archived",
+      "evaluation_commit": "defda65defb79a403788228bdf3f229039a5aa70",
+      "input_sha256": "c9daeb6cfb5fb00f2a6cf47bdfb840cfb97090402aa1f4481e1865f0e085e362",
+      "input_file": {
+        "path": "scripts/merge-queue-client.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    },
+    {
+      "id": "original-observer-elapsed_ms",
+      "value": 1351071,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "defda65defb79a403788228bdf3f229039a5aa70",
+      "input_sha256": "c9daeb6cfb5fb00f2a6cf47bdfb840cfb97090402aa1f4481e1865f0e085e362",
+      "input_file": {
+        "path": "scripts/merge-queue-client.mjs",
+        "commit": "cd063c6e253238ba49572c62a1addf67a0fcdb49"
+      }
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "pr_before-0-job_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_before/shards/0/job_seconds"
+    },
+    {
+      "metric_id": "pr_before-0-test_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_before/shards/0/test_seconds"
+    },
+    {
+      "metric_id": "pr_before-0-passed",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_before/shards/0/passed"
+    },
+    {
+      "metric_id": "pr_before-0-skipped",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_before/shards/0/skipped"
+    },
+    {
+      "metric_id": "pr_before-0-semantic-1",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_before/shards/0/longest_tests/1/duration_seconds"
+    },
+    {
+      "metric_id": "pr_before-1-job_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_before/shards/1/job_seconds"
+    },
+    {
+      "metric_id": "pr_before-1-test_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_before/shards/1/test_seconds"
+    },
+    {
+      "metric_id": "pr_before-1-passed",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_before/shards/1/passed"
+    },
+    {
+      "metric_id": "pr_before-1-skipped",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_before/shards/1/skipped"
+    },
+    {
+      "metric_id": "pr_before-2-job_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_before/shards/2/job_seconds"
+    },
+    {
+      "metric_id": "pr_before-2-test_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_before/shards/2/test_seconds"
+    },
+    {
+      "metric_id": "pr_before-2-passed",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_before/shards/2/passed"
+    },
+    {
+      "metric_id": "pr_before-2-skipped",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_before/shards/2/skipped"
+    },
+    {
+      "metric_id": "pr_before-2-semantic-0",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_before/shards/2/longest_tests/0/duration_seconds"
+    },
+    {
+      "metric_id": "pr_after-0-job_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_after/shards/0/job_seconds"
+    },
+    {
+      "metric_id": "pr_after-0-test_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_after/shards/0/test_seconds"
+    },
+    {
+      "metric_id": "pr_after-0-passed",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_after/shards/0/passed"
+    },
+    {
+      "metric_id": "pr_after-0-skipped",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_after/shards/0/skipped"
+    },
+    {
+      "metric_id": "pr_after-1-job_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_after/shards/1/job_seconds"
+    },
+    {
+      "metric_id": "pr_after-1-test_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_after/shards/1/test_seconds"
+    },
+    {
+      "metric_id": "pr_after-1-passed",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_after/shards/1/passed"
+    },
+    {
+      "metric_id": "pr_after-1-skipped",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_after/shards/1/skipped"
+    },
+    {
+      "metric_id": "pr_after-1-semantic-0",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_after/shards/1/longest_tests/0/seconds"
+    },
+    {
+      "metric_id": "pr_after-2-job_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_after/shards/2/job_seconds"
+    },
+    {
+      "metric_id": "pr_after-2-test_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_after/shards/2/test_seconds"
+    },
+    {
+      "metric_id": "pr_after-2-passed",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_after/shards/2/passed"
+    },
+    {
+      "metric_id": "pr_after-2-skipped",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_after/shards/2/skipped"
+    },
+    {
+      "metric_id": "pr_after-2-semantic-0",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/pr_after/shards/2/longest_tests/0/seconds"
+    },
+    {
+      "metric_id": "queue_after-0-job_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/queue_after/shards/0/job_seconds"
+    },
+    {
+      "metric_id": "queue_after-0-test_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/queue_after/shards/0/test_seconds"
+    },
+    {
+      "metric_id": "queue_after-0-passed",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/queue_after/shards/0/passed"
+    },
+    {
+      "metric_id": "queue_after-0-skipped",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/queue_after/shards/0/skipped"
+    },
+    {
+      "metric_id": "queue_after-1-job_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/queue_after/shards/1/job_seconds"
+    },
+    {
+      "metric_id": "queue_after-1-test_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/queue_after/shards/1/test_seconds"
+    },
+    {
+      "metric_id": "queue_after-1-passed",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/queue_after/shards/1/passed"
+    },
+    {
+      "metric_id": "queue_after-1-skipped",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/queue_after/shards/1/skipped"
+    },
+    {
+      "metric_id": "queue_after-1-semantic-0",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/queue_after/shards/1/longest_tests/0/seconds"
+    },
+    {
+      "metric_id": "queue_after-2-job_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/queue_after/shards/2/job_seconds"
+    },
+    {
+      "metric_id": "queue_after-2-test_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/queue_after/shards/2/test_seconds"
+    },
+    {
+      "metric_id": "queue_after-2-passed",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/queue_after/shards/2/passed"
+    },
+    {
+      "metric_id": "queue_after-2-skipped",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/queue_after/shards/2/skipped"
+    },
+    {
+      "metric_id": "queue_after-2-semantic-0",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/queue_after/shards/2/longest_tests/0/seconds"
+    },
+    {
+      "metric_id": "queue-before-job-0",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/queue_before/jobs/0/job_seconds"
+    },
+    {
+      "metric_id": "queue-before-job-1",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/queue_before/jobs/1/job_seconds"
+    },
+    {
+      "metric_id": "queue-before-job-2",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/queue_before/jobs/2/job_seconds"
+    },
+    {
+      "metric_id": "queue-before-job-3",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/queue_before/jobs/3/job_seconds"
+    },
+    {
+      "metric_id": "queue-before-job-4",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/queue_before/jobs/4/job_seconds"
+    },
+    {
+      "metric_id": "queue-before-job-5",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "json_pointer": "/queue_before/jobs/5/job_seconds"
+    },
+    {
+      "metric_id": "geography-after_pr-test_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/geography-verification.json",
+      "json_pointer": "/after_pr/regression/test_seconds"
+    },
+    {
+      "metric_id": "geography-after_pr-passed",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/geography-verification.json",
+      "json_pointer": "/after_pr/regression/passed"
+    },
+    {
+      "metric_id": "geography-after_pr-failed",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/geography-verification.json",
+      "json_pointer": "/after_pr/regression/failed"
+    },
+    {
+      "metric_id": "geography-after_pr-skipped",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/geography-verification.json",
+      "json_pointer": "/after_pr/regression/skipped"
+    },
+    {
+      "metric_id": "geography-after_pr-integration_jobs-0",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/geography-verification.json",
+      "json_pointer": "/after_pr/integration_jobs/0/job_seconds"
+    },
+    {
+      "metric_id": "geography-after_pr-integration_jobs-1",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/geography-verification.json",
+      "json_pointer": "/after_pr/integration_jobs/1/job_seconds"
+    },
+    {
+      "metric_id": "geography-after_pr-integration_jobs-2",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/geography-verification.json",
+      "json_pointer": "/after_pr/integration_jobs/2/job_seconds"
+    },
+    {
+      "metric_id": "geography-after_pr-package_jobs-0",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/geography-verification.json",
+      "json_pointer": "/after_pr/package_jobs/0/job_seconds"
+    },
+    {
+      "metric_id": "geography-after_pr-package_jobs-1",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/geography-verification.json",
+      "json_pointer": "/after_pr/package_jobs/1/job_seconds"
+    },
+    {
+      "metric_id": "geography-after_queue-test_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/geography-verification.json",
+      "json_pointer": "/after_queue/regression/test_seconds"
+    },
+    {
+      "metric_id": "geography-after_queue-passed",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/geography-verification.json",
+      "json_pointer": "/after_queue/regression/passed"
+    },
+    {
+      "metric_id": "geography-after_queue-failed",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/geography-verification.json",
+      "json_pointer": "/after_queue/regression/failed"
+    },
+    {
+      "metric_id": "geography-after_queue-skipped",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/geography-verification.json",
+      "json_pointer": "/after_queue/regression/skipped"
+    },
+    {
+      "metric_id": "geography-after_queue-jobs-0",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/geography-verification.json",
+      "json_pointer": "/after_queue/jobs/0/job_seconds"
+    },
+    {
+      "metric_id": "geography-after_queue-jobs-1",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/geography-verification.json",
+      "json_pointer": "/after_queue/jobs/1/job_seconds"
+    },
+    {
+      "metric_id": "geography-after_queue-jobs-2",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/geography-verification.json",
+      "json_pointer": "/after_queue/jobs/2/job_seconds"
+    },
+    {
+      "metric_id": "geography-after_queue-jobs-3",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/geography-verification.json",
+      "json_pointer": "/after_queue/jobs/3/job_seconds"
+    },
+    {
+      "metric_id": "api-phase-register",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/api-and-observer-costs.json",
+      "json_pointer": "/phase_accounting/0/actual_http_attempts"
+    },
+    {
+      "metric_id": "api-phase-schedule",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/api-and-observer-costs.json",
+      "json_pointer": "/phase_accounting/1/actual_http_attempts"
+    },
+    {
+      "metric_id": "api-phase-prepare",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/api-and-observer-costs.json",
+      "json_pointer": "/phase_accounting/2/actual_http_attempts"
+    },
+    {
+      "metric_id": "api-phase-merge",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/api-and-observer-costs.json",
+      "json_pointer": "/phase_accounting/3/actual_http_attempts"
+    },
+    {
+      "metric_id": "observer-read_requests",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/api-and-observer-costs.json",
+      "json_pointer": "/accepted_read_only_probe/read_requests"
+    },
+    {
+      "metric_id": "observer-elapsed_ms",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/api-and-observer-costs.json",
+      "json_pointer": "/accepted_read_only_probe/elapsed_ms"
+    },
+    {
+      "metric_id": "observer-real_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/api-and-observer-costs.json",
+      "json_pointer": "/accepted_read_only_probe/real_seconds"
+    },
+    {
+      "metric_id": "observer-user_cpu_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/api-and-observer-costs.json",
+      "json_pointer": "/accepted_read_only_probe/user_cpu_seconds"
+    },
+    {
+      "metric_id": "observer-system_cpu_seconds",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/api-and-observer-costs.json",
+      "json_pointer": "/accepted_read_only_probe/system_cpu_seconds"
+    },
+    {
+      "metric_id": "observer-maximum_rss_bytes",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/api-and-observer-costs.json",
+      "json_pointer": "/accepted_read_only_probe/maximum_rss_bytes"
+    },
+    {
+      "metric_id": "observer-peak_footprint_bytes",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/api-and-observer-costs.json",
+      "json_pointer": "/accepted_read_only_probe/peak_footprint_bytes"
+    },
+    {
+      "metric_id": "observer-writes",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/api-and-observer-costs.json",
+      "json_pointer": "/accepted_read_only_probe/writes"
+    },
+    {
+      "metric_id": "original-observer-read_requests",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/api-and-observer-costs.json",
+      "json_pointer": "/original_observer/read_requests"
+    },
+    {
+      "metric_id": "original-observer-elapsed_ms",
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/api-and-observer-costs.json",
+      "json_pointer": "/original_observer/elapsed_ms"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [],
+  "commands": [
+    "gh api repos/ChengshuLi/WorldAtlas/actions/runs/RUN/jobs --paginate",
+    "gh api repos/ChengshuLi/WorldAtlas/actions/jobs/JOB/logs",
+    "node --test test/full-regression-shards.test.mjs test/integration-proof.test.mjs test/merge-integration.test.mjs test/integration-profile-restoration.test.mjs test/integration-streaming.test.mjs test/physical-component-controls-runner.test.mjs test/trusted-workflow-checkouts.test.mjs test/native-regression-inputs.test.mjs"
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/actual-main-files.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/api-and-observer-costs.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/executed-code-vintages.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/geography-verification.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/hosted-verification.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/inventory-assessment.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/observer-controls.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/observer-resource.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/package-history-tests.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/selection-tests.log",
+      "status": "added"
+    },
+    {
+      "path": "docs/CI_PERFORMANCE.md",
+      "status": "modified",
+      "original_sha256": "6d6a6405ba82ed6ef799b681e22c7d2838c4b77facfc94edb49074e4d1c269f8"
+    },
+    {
+      "path": "coordination/engineering/ci-speed-1201-20261008-p2/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

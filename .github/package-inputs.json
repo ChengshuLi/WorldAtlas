@@ -208,10 +208,15 @@
     "scripts/build-hosted.mjs",
     "scripts/build-static-inner.mjs",
     "scripts/build-static.mjs",
+    "scripts/canonical-restoration.mjs",
     "scripts/check-prepared.mjs",
+    "scripts/ci-setup-observations.mjs",
     "scripts/compile-hosted-migrations.mjs",
     "scripts/deployment-budget.mjs",
     "scripts/evidence-quality.mjs",
+    "scripts/evidence/captured-byte-patch.mjs",
+    "scripts/evidence/restore-whole-image.mjs",
+    "scripts/native-ownership/chained-build-context.mjs",
     "scripts/native-ownership/compact-context-inputs.mjs",
     "scripts/native-ownership/compile-native-ownership.mjs",
     "scripts/native-ownership/native-candidate-manifest.mjs",
@@ -251,7 +256,10 @@
     "test/deployment-budget-scope.test.mjs",
     "test/package-inputs.test.mjs",
     "test/package-build.test.mjs",
-    "test/deployment-budget.test.mjs"
+    "test/deployment-budget.test.mjs",
+    ".github/workflows/merge-integration-checks.yml",
+    "scripts/check-pr-gates.mjs",
+    "test/pr-gates.test.mjs"
   ],
   "generated_outputs": [
     "dist/",
