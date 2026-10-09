@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "issue": 1587,
+  "lane": "engineering",
+  "worker_id": "01a10892-0782-7b13-902c-d8b4db6c155d",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "1fa6e7a357168f6d3724642f3d5ca16f3b8e2191",
+    "files": [
+      {
+        "path": "scripts/local-workspace.mjs",
+        "bytes": 13447,
+        "sha256": "8b216c53972d7caac9024da7ef5fd1577fc4b20e15b2e87525ba410a754689ad",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/local-workspace.test.mjs",
+        "bytes": 11806,
+        "sha256": "71b3d2980733d3a77ff3fe37dd664ec475d6ed6e554289a521fe334222ad59a9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/LOCAL_WORKSPACES.md",
+        "bytes": 9514,
+        "sha256": "d99838bb409cd2d67c09188cc3610b7c357ed035a33852abd228e687e4bbda38",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "allocator": "8b216c53972d7caac9024da7ef5fd1577fc4b20e15b2e87525ba410a754689ad",
+      "allocator_tests": "71b3d2980733d3a77ff3fe37dd664ec475d6ed6e554289a521fe334222ad59a9",
+      "workspace_contract": "d99838bb409cd2d67c09188cc3610b7c357ed035a33852abd228e687e4bbda38"
+    },
+    "pin_files": {
+      "allocator": "scripts/local-workspace.mjs",
+      "allocator_tests": "test/local-workspace.test.mjs",
+      "workspace_contract": "docs/LOCAL_WORKSPACES.md"
+    },
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "scripts/local-workspace.mjs",
+      "bytes": 13365,
+      "sha256": "74c390efa3360b4431d047f89ab99986da697e58716000f44a4b284760e2a373",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/local-workspace.test.mjs",
+      "bytes": 13308,
+      "sha256": "d5d5d0eb6902ea4ad0cd083c35fd08f7ec343ee93142916ef42b172b5c84892a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/LOCAL_WORKSPACES.md",
+      "bytes": 9606,
+      "sha256": "2f54bb85972e431549b3a71366c0976f99c785fdecb510636892f408a141a707",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/workspace-free-space-only-20261009/validation.json",
+      "bytes": 1432,
+      "sha256": "ce0bdef1e22c8c386e49fd43cbd1e8fe06bf91c22ab45273d8d76619f1452332",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/workspace-free-space-only-20261009.json",
+      "bytes": 1209,
+      "sha256": "c20c2c804c98af79bfd931b4eb97c3af854d129737d054186391df1f1c3630e9",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "workspace-free-headroom-policy",
+      "kind": "code",
+      "description": "Real allocator fixture entry points check admission above50GiB,exact10GiB free boundary,rejected invalid reservations and unchanged lifecycle protections. Actual current-repository allocator check separately observed.",
+      "software": "v24.19.0",
+      "units": "Byte reservations and allocator outcomes"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/local-workspace.test.mjs",
+    "node scripts/local-workspace.mjs check"
+  ],
+  "change_receipts": [
+    {
+      "path": "scripts/local-workspace.mjs",
+      "status": "modified",
+      "original_sha256": "8b216c53972d7caac9024da7ef5fd1577fc4b20e15b2e87525ba410a754689ad"
+    },
+    {
+      "path": "test/local-workspace.test.mjs",
+      "status": "modified",
+      "original_sha256": "71b3d2980733d3a77ff3fe37dd664ec475d6ed6e554289a521fe334222ad59a9"
+    },
+    {
+      "path": "docs/LOCAL_WORKSPACES.md",
+      "status": "modified",
+      "original_sha256": "d99838bb409cd2d67c09188cc3610b7c357ed035a33852abd228e687e4bbda38"
+    },
+    {
+      "path": "coordination/engineering/workspace-free-space-only-20261009/validation.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/workspace-free-space-only-20261009.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/workspace-free-space-only-20261009/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [],
+  "validation": []
+}

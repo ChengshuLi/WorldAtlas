@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "issue": 1587,
+  "base_main_commit": "1fa6e7a357168f6d3724642f3d5ca16f3b8e2191",
+  "worker_id": "01a10892-0782-7b13-902c-d8b4db6c155d",
+  "command": "node --test test/local-workspace.test.mjs",
+  "runtime": "v24.19.0",
+  "result": "passed",
+  "tests": 15,
+  "passed": 15,
+  "failed": 0,
+  "observed_duration_ms": 5590.724667,
+  "adverse_and_boundary_checks": [
+    "Single reservation 51GiB and combined reservations 53GiB accepted with sufficient space",
+    "Exactly10GiB after reservation accepted,1byte less rejected without branch/slot creation",
+    "Milestone check at10GiB accepted and1byte less rejected",
+    "Zero,negative,NaN,Infinity,unsafe reservation rejected before mutation",
+    "Existing isolation,dirty/untracked/ignored work,preservation,locks,concurrency and symlink protections pass"
+  ],
+  "actual_repository_check": {
+    "freeBytes": 30268391424,
+    "countedUsageBytes": 53529182208,
+    "limits": {
+      "minimumFree": 10737418240
+    },
+    "status": "passed"
+  },
+  "test_source_sha256": "d5d5d0eb6902ea4ad0cd083c35fd08f7ec343ee93142916ef42b172b5c84892a",
+  "allocator_source_sha256": "74c390efa3360b4431d047f89ab99986da697e58716000f44a4b284760e2a373",
+  "limits": [
+    "Local fixture controls and allocator check; no provider,production,geography or scientific validation.",
+    "Cleanup of archived duplicates is separate local maintenance and is not shipped by this PR."
+  ]
+}

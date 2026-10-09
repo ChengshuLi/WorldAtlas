@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "workspace-free-space-only-20261009",
+  "branch": "engineering/workspace-free-space-only-20261009",
+  "base_main_commit": "1fa6e7a357168f6d3724642f3d5ca16f3b8e2191",
+  "github_issue": 1587,
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "User-requested free-headroom-only local workspace policy"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-09T08:19:47.548357+00:00",
+  "completed": [
+    "Removed aggregate and individual50GiB caps",
+    "Preserved10GiB after-reservation admission and all ownership/release protections"
+  ],
+  "checks": [
+    "15focused local-workspace tests passed; actual allocator check passed"
+  ],
+  "deployment": "No deployment required for local workspace tooling",
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "coordination/engineering/workspace-free-space-only-20261009/validation.json"
+  ],
+  "blockers": [],
+  "next_action": "Independent exact-head review and normal merge queue",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}
