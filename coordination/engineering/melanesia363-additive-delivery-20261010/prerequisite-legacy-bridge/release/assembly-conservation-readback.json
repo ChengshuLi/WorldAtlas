@@ -1,0 +1,70 @@
+{
+  "execution_commit": "a0f3ef56effd8a9fdd89004d9d4cbd472c1d5a21",
+  "outputs": {
+    "ledger": {
+      "bytes": 310614,
+      "sha256": "cbaa4aa80b90f4858f6f3c6740f0e254e7f60eb7510ef8d8542c89b34555706f"
+    },
+    "patch": {
+      "bytes": 3751,
+      "sha256": "358b3bf2b2e1691e840ca28b71aacf0b2fc0995dcdd1183e05aa94707c15eedb"
+    },
+    "envelope": {
+      "bytes": 1421,
+      "sha256": "ebf5ed903456d077225e600ff7d161cfde03180699195ed7f088e52db2712a7b"
+    },
+    "qualification": {
+      "bytes": 663,
+      "sha256": "fb8cd61f79ddfb50a94afd1a4ed82af7fec63f3b39b4d4458cc3e895a10b209b"
+    }
+  },
+  "terminal": {
+    "exit_code": 0,
+    "elapsed_s": 13.68351049994817,
+    "stop_reason": null,
+    "actual_external_lifetime_process_peak_RSS_bytes": 380895232,
+    "max_sampled_group_RSS_bytes": 375930880,
+    "natural_terminal_owned_processes_absent": true
+  },
+  "scope_ids": [
+    "physical-component:073d9a81648d56c1b63a4e495fbd0140c17659bedb5c9b211739642b438ee488",
+    "physical-component:12c9ec9813490ce8602fb26ee2e54225b99c28bbd29794a7f8ac9ee60f109e8a",
+    "physical-component:17bb5b7f043b0fb2b447b8ccef216e530fed4595da1aec0feb1dea235bed0dbd",
+    "physical-component:265c983a61231e3a5c2cf4bb2f7b97896d47afefe925a9eb85934101a78515a8",
+    "physical-component:2aca267603c8eace3a6d0a52d4e3f0b70a47506b94d2ea9e1d500e43aab4632c",
+    "physical-component:4d36c81ff35079341e6ec0d5a207ba3844e26f5d55c30c7205924dfd33b8dc18",
+    "physical-component:52452c5923a0ed15767ebdf150727924778349b7d9ba4370b616d1d70c0ccddd",
+    "physical-component:54dc96cd3d0edd92ff9d9399d8364e17735d12f11407f707d57912f9f6a66475",
+    "physical-component:5874689a46f7945e9dcc67cc3b0321d4e534572e4b4bd8a85f4a07c5005d1922",
+    "physical-component:66e4f6c15eb17f53815844efc04e7cae9faf9118de313541d3a4be2ff1fcf0a2",
+    "physical-component:70174bffffdbb4a421344d6c10d80b760972f9c5452daf0d7c26408fdf18bb53",
+    "physical-component:777e7bc99320bf155684f99b0903c336f9a07862de4a7fa0ac8cde990d7d6ee5",
+    "physical-component:8435dc6d973751bab55c4eff12c872ba331c3e005254ceb21b76933a8cc6207a",
+    "physical-component:8fb2ed9360ba13f6b19f8bb6ee9a16099039d8b59c9f51eab0a442249f428e7d",
+    "physical-component:9f130f023a510be6e4b2f9075ed99cf75c4f88053e93189dda3f0bd51080f14a",
+    "physical-component:add031b7195352292c8529323c8b99dd75002af629116b229e84be981893ca8d",
+    "physical-component:cffd5f514585665c2d76279e036889887df24efa229a67f88052aef0d8ee4a83",
+    "physical-component:d688afd3657ded3f0cf85a95956f2d42726f44923b168499320d681080539fb1",
+    "physical-component:e76fd386dc9a23375537ede302f7f380a217fd4bbccd9536f856e8b4253a5ab8",
+    "physical-component:ef7383db4412abe64b7e8d009679cffa4a3174d6da100c6de1fc37272aadeca9"
+  ],
+  "components": 12,
+  "held_original_rows": 8,
+  "native_rows": 72,
+  "assigned_cells": 141,
+  "whole_ledger_except_current_rebind_literal_equal": true,
+  "whole_patch_except_ledger_sha_effective_ref_literal_equal": true,
+  "base_manifest_owner_roster_base_reference_literal_equal": true,
+  "prior_effective_reference": {
+    "footprints_sha256": "4e1d0da01601413c6574e3dc4c3194a7943544a224987f69e59d60eebf2a83a6",
+    "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "id": "geography:additive:4e1d0da01601413c6574e3dc4c3194a7943544a224987f69e59d60eebf2a83a6"
+  },
+  "new_effective_reference": {
+    "footprints_sha256": "c8107a464333caa3c7ffa739006a9d697e56cb99f978181a9827d4fe16b07dcf",
+    "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "id": "geography:additive:c8107a464333caa3c7ffa739006a9d697e56cb99f978181a9827d4fe16b07dcf"
+  },
+  "new119_excluded": true,
+  "selection_not_changed": true
+}
