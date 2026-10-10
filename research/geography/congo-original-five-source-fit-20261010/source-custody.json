@@ -1,0 +1,195 @@
+{
+  "actual_consumed_target_features": [
+    {
+      "feature_sha256": "a1909f5a920dcb7bda67dc25fbae14a6fe050cf6d1f703d7075bf234652132e0",
+      "geometry_sha256": "d732c115c4042d4718be42ce9865fdcae16e33457b1306d84bb9132ab73d1382",
+      "index": 40,
+      "properties": {
+        "shapeGroup": "COD",
+        "shapeID": "63176286B33518015273847",
+        "shapeISO": "",
+        "shapeName": "Dilolo",
+        "shapeType": "ADM2"
+      }
+    },
+    {
+      "feature_sha256": "c7d42ad74350fd78dacb4999cfd8d8e484821245f3d9958c03cbf9b3e2e99ab7",
+      "geometry_sha256": "f80496ba106ac627b29faa290ba2cd738fc39bca59899b0468b70184311aae25",
+      "index": 86,
+      "properties": {
+        "shapeGroup": "COD",
+        "shapeID": "63176286B77262619841164",
+        "shapeISO": "",
+        "shapeName": "Kasenga",
+        "shapeType": "ADM2"
+      }
+    }
+  ],
+  "authenticated_sources": {
+    "bytes": 661416,
+    "commit": "c28077da970ae39550e5edea790a266b060d3de5",
+    "limits": [
+      "Metadata/source-recipe authentication only; no source geometry/operator qualification."
+    ],
+    "path": "data/administrative-sources.json",
+    "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+    "source_records": {
+      "gb:AGO:ADM2": {
+        "Continent": "Africa",
+        "UNSDG-region": "Sub-Saharan Africa",
+        "UNSDG-subregion": "Middle Africa",
+        "admUnitCount": "161",
+        "boundaryCanonical": "Unknown",
+        "boundaryID": "AGO-ADM2-16411231",
+        "boundaryISO": "AGO",
+        "boundaryLicense": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+        "boundaryName": "Angola",
+        "boundarySource": "www.gadm.org and Instituto Nacional de Estat\u00edstica (INE - www.ine.gov.ao) - see methodology, HDX",
+        "boundarySourceURL": "data.humdata.org/dataset/cod-ab-ago",
+        "boundaryType": "ADM2",
+        "boundaryYearRepresented": "2018",
+        "buildDate": "Dec 12, 2023",
+        "collection": "gbHumanitarian",
+        "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbHumanitarian/AGO/ADM2/geoBoundaries-AGO-ADM2.geojson",
+        "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbHumanitarian/AGO/ADM2/geoBoundaries-AGO-ADM2-PREVIEW.png",
+        "licenseDetail": "nan",
+        "licenseSource": "data.humdata.org/dataset/cod-ab-ago",
+        "maxAreaSqKM": "46894.69971995518",
+        "maxPerimeterLengthKM": "1256.8726004234338",
+        "maxVertices": "7928",
+        "meanAreaSqKM": "7749.578124466859",
+        "meanPerimeterLengthKM": "415.8574579594246",
+        "meanVertices": "599.0",
+        "minAreaSqKM": "36.27219209625985",
+        "minPerimeterLengthKM": "27.994874448601724",
+        "minVertices": "33",
+        "sha256": "7cf2a401b36480f7c22d9783e4364d3eb93c3ac643e2d34778b1ce059c786dcf",
+        "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbHumanitarian/AGO/ADM2/geoBoundaries-AGO-ADM2_simplified.geojson",
+        "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+        "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbHumanitarian/AGO/ADM2/geoBoundaries-AGO-ADM2-all.zip",
+        "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbHumanitarian/AGO/ADM2/geoBoundaries-AGO-ADM2.topojson",
+        "worldBankIncomeGroup": "Lower-middle-income Countries"
+      },
+      "gb:COD:ADM2": {
+        "Continent": "Africa",
+        "UNSDG-region": "Sub-Saharan Africa",
+        "UNSDG-subregion": "Middle Africa",
+        "admUnitCount": "189",
+        "boundaryCanonical": "territory, city",
+        "boundaryID": "COD-ADM2-63176286",
+        "boundaryISO": "COD",
+        "boundaryLicense": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+        "boundaryName": "Democratic Republic of the Congo",
+        "boundarySource": "Referenciel G\u00e9ographique Commun, OCHA DR Congo",
+        "boundarySourceURL": "data.humdata.org/dataset/drc-administrative-boundaries-levels-0-2",
+        "boundaryType": "ADM2",
+        "boundaryYearRepresented": "2019",
+        "buildDate": "Dec 12, 2023",
+        "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM2/geoBoundaries-COD-ADM2.geojson",
+        "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM2/geoBoundaries-COD-ADM2-PREVIEW.png",
+        "licenseDetail": "nan",
+        "licenseSource": "data.humdata.org/dataset/drc-administrative-boundaries-levels-0-2",
+        "maxAreaSqKM": "48803.59295354783",
+        "maxPerimeterLengthKM": "1581.0015925531643",
+        "maxVertices": "4400",
+        "meanAreaSqKM": "12329.86262700922",
+        "meanPerimeterLengthKM": "597.6135987707929",
+        "meanVertices": "774.0",
+        "minAreaSqKM": "2.6159653460849555",
+        "minPerimeterLengthKM": "5.997048193930922",
+        "minVertices": "15",
+        "sha256": "922427143fcff23010af3931fb3f5e4ffea8b05c5d2b797ca02fc04c6c8b1baa",
+        "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM2/geoBoundaries-COD-ADM2_simplified.geojson",
+        "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+        "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM2/geoBoundaries-COD-ADM2-all.zip",
+        "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM2/geoBoundaries-COD-ADM2.topojson",
+        "worldBankIncomeGroup": "Low-income Countries"
+      },
+      "gb:ZMB:ADM2": {
+        "Continent": "Africa",
+        "UNSDG-region": "Sub-Saharan Africa",
+        "UNSDG-subregion": "Eastern Africa",
+        "admUnitCount": "116",
+        "boundaryCanonical": "Districts",
+        "boundaryID": "ZMB-ADM2-96606910",
+        "boundaryISO": "ZMB",
+        "boundaryLicense": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+        "boundaryName": "Zambia",
+        "boundarySource": "GRID3, Office of the Surveyor General",
+        "boundarySourceURL": "data.grid3.org/datasets/GRID3",
+        "boundaryType": "ADM2",
+        "boundaryYearRepresented": "2020",
+        "buildDate": "Dec 12, 2023",
+        "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ZMB/ADM2/geoBoundaries-ZMB-ADM2.geojson",
+        "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ZMB/ADM2/geoBoundaries-ZMB-ADM2-PREVIEW.png",
+        "licenseDetail": "nan",
+        "licenseSource": "data.grid3.org/datasets/GRID3",
+        "maxAreaSqKM": "21877.138027817564",
+        "maxPerimeterLengthKM": "1219.5829899893786",
+        "maxVertices": "45446",
+        "meanAreaSqKM": "6474.862039011392",
+        "meanPerimeterLengthKM": "511.4099651089286",
+        "meanVertices": "7010.0",
+        "minAreaSqKM": "418.8531506041268",
+        "minPerimeterLengthKM": "116.57077878336858",
+        "minVertices": "572",
+        "sha256": "58e9df3f95bb4c7539e5fb48839b246b2bfb12694cf5db3ed595240156016c60",
+        "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ZMB/ADM2/geoBoundaries-ZMB-ADM2_simplified.geojson",
+        "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+        "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ZMB/ADM2/geoBoundaries-ZMB-ADM2-all.zip",
+        "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ZMB/ADM2/geoBoundaries-ZMB-ADM2.topojson",
+        "worldBankIncomeGroup": "Lower-middle-income Countries"
+      }
+    }
+  },
+  "canonical_hash_convention": "sorted compact JSON UTF-8 with trailing newline",
+  "full_original_scope": {
+    "aggregate_extent_lonlat": [
+      22.284045,
+      -11.122421,
+      28.6356,
+      -9.9186
+    ],
+    "best_rank": {
+      "coordination_complexity": 80669,
+      "measured_impact": 94035,
+      "source_locator_readiness": 9473
+    },
+    "component_count": 5,
+    "component_ids": [
+      "physical-component:36884cbacede71f649d6dafa0fb62a470d6144ffde32887ea70684e0c50f6e31",
+      "physical-component:b6e7ad0a8daa5987cbe8a8076f73946df9a7c41d8ff76dd77b57c8c51cd69290",
+      "physical-component:1ad6bc43ff7a9a29bb08e677d81d9c647a2a7da9b417ddeade69b395226664a8",
+      "physical-component:239a541d9482d42241e3ec774bbb1cdd279e4a9b3e31618967a3df37a1255fdf",
+      "physical-component:fb70b498db99807ece66ea9135600ffccedde6733ea66b1b98627e2471830b3d"
+    ],
+    "eligibility": "Prioritized orchestration backlog; live canonical claim eligibility is not established.",
+    "existing_related_issues": [
+      411,
+      412,
+      463,
+      870,
+      1046,
+      1048
+    ],
+    "fine_family_ids": [
+      "gap-source-batch:9d2f4c276139ce9fefbbd808",
+      "gap-source-batch:c3a56b593db70fdc5742baf4",
+      "gap-source-batch:f8f91376baf4a00899c5b721"
+    ],
+    "fine_family_ids_sha256": "98ae33cb283d259a082e2d04dfcb15328882d69388d6f88f6ef64bf91b670d90",
+    "grouping": {
+      "complete_subcontinent_set": [
+        "framework:subcontinent:central-africa:5b8294b51eb7",
+        "framework:subcontinent:southern-africa:bd33c2e21863"
+      ],
+      "observed_scope_bucket": "unknown-no-strict-representative-point:multiple-edge-neighbors",
+      "responsible_role": "GEO-source-research"
+    },
+    "id": "gap-operational-batch:26e700f7c060695dd7d01f73",
+    "membership_view": "Union every referenced complete fine-family component roster; never split a shared-source/cross-subcontinent family.",
+    "next_action": "Review related open and archived issues, select a bounded complete source family closure, check current canonical claim and source contract, then dispatch source research or engineering reproduction.",
+    "source_family_count": 3,
+    "unknown_extent_components": 0
+  }
+}
