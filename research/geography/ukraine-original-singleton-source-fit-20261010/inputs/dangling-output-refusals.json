@@ -1,0 +1,45 @@
+{
+  "controls": [
+    {
+      "control": "dangling-output-symlink",
+      "entrypoint": "restore_physical.py",
+      "returncode": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/3b214c4a456ef93bc10ac6192efc0c1747873e637c8f0057cda22bad0d07de6d/work/research/geography/ukraine-original-singleton-source-fit-20261010/restore_physical.py\", line 137, in <module>\n    main()\n  File \"/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/3b214c4a456ef93bc10ac6192efc0c1747873e637c8f0057cda22bad0d07de6d/work/research/geography/ukraine-original-singleton-source-fit-20261010/restore_physical.py\", line 46, in main\n    assert not path.is_symlink()\n           ^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "control": "dangling-output-symlink",
+      "entrypoint": "bind_current_neighbors.mjs",
+      "returncode": 1,
+      "stderr": "                ^\n\nError: EEXIST: file already exists, mkdir '/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/3b214c4a456ef93bc10ac6192efc0c1747873e637c8f0057cda22bad0d07de6d/work/research/geography/ukraine-original-singleton-source-fit-20261010/vintages/current-neighbor-bindings-001'\n    at Object.mkdirSync (node:fs:1411:26)\n    at file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/3b214c4a456ef93bc10ac6192efc0c1747873e637c8f0057cda22bad0d07de6d/work/research/geography/ukraine-original-singleton-source-fit-20261010/bind_current_neighbors.mjs:103:4\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\n  errno: -17,\n  code: 'EEXIST',\n  syscall: 'mkdir',\n  path: '/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/3b214c4a456ef93bc10ac6192efc0c1747873e637c8f0057cda22bad0d07de6d/work/research/geography/ukraine-original-singleton-source-fit-20261010/vintages/current-neighbor-bindings-001'\n}\n\nNode.js v24.19.0\n"
+    },
+    {
+      "control": "dangling-output-symlink",
+      "entrypoint": "prove_serialization.mjs",
+      "returncode": 1,
+      "stderr": "mkdir(\n                         ^\n\nError: EEXIST: file already exists, mkdir '/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/3b214c4a456ef93bc10ac6192efc0c1747873e637c8f0057cda22bad0d07de6d/work/research/geography/ukraine-original-singleton-source-fit-20261010/vintages/serialization-proof-001'\n    at Object.mkdirSync (node:fs:1411:26)\n    at file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/3b214c4a456ef93bc10ac6192efc0c1747873e637c8f0057cda22bad0d07de6d/work/research/geography/ukraine-original-singleton-source-fit-20261010/prove_serialization.mjs:47:4\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\n  errno: -17,\n  code: 'EEXIST',\n  syscall: 'mkdir',\n  path: '/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/3b214c4a456ef93bc10ac6192efc0c1747873e637c8f0057cda22bad0d07de6d/work/research/geography/ukraine-original-singleton-source-fit-20261010/vintages/serialization-proof-001'\n}\n\nNode.js v24.19.0\n"
+    },
+    {
+      "control": "dangling-output-symlink",
+      "entrypoint": "build_handoff.py",
+      "returncode": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/3b214c4a456ef93bc10ac6192efc0c1747873e637c8f0057cda22bad0d07de6d/work/research/geography/ukraine-original-singleton-source-fit-20261010/build_handoff.py\", line 160, in <module>\n    main()\n  File \"/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/3b214c4a456ef93bc10ac6192efc0c1747873e637c8f0057cda22bad0d07de6d/work/research/geography/ukraine-original-singleton-source-fit-20261010/build_handoff.py\", line 71, in main\n    assert not parent.is_symlink()\n           ^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    }
+  ],
+  "all_prior_vintage_files_unchanged": true,
+  "before_and_after_file_sha256": {
+    "vintages/current-neighbor-bindings-001/result.json": "d4f557790433105065c40eae04b6756d3eec0cb3a4f14b87244dc0d7606d39a0",
+    "vintages/consumed-source-probe-001/result.json": "573ed01f42e5b4f93c2f56f7628425e8ac4492747b10ca7d06b00cf343311dee",
+    "vintages/consumed-source-probe-001/publication.json": "adcc1a1fa77131166e350f28fff4fea39840bf9378b5ce317d67cbc443d34482",
+    "vintages/source-handoff-001/source-handoff.json": "33b257cb6434bd620e87d7725245a41f7e644e4a72ccd98a383fe83f0536e7ed",
+    "vintages/physical-restoration-001/queried-source-metadata.json": "fea4973464fd8ef0925b9c447713e2bba57ddcf57de3c7a8f5101c3436e496bc",
+    "vintages/physical-restoration-001/original-component.json": "acd61551d2dbc9b6925e6d8c2d17cb210a6dcf6f3d80bbbadb64951660e3b746",
+    "vintages/physical-restoration-001/components-030.jsonl.gz": "22363c332379d6dc16354b6079bf59766abf4cb9e7b20b111c7528e7c757fde8",
+    "vintages/physical-restoration-001/receipt.json": "8ef08a5125ca2bde3858f6f165cce2bd559a0abfd7996f1a5d24fdeaf0929147",
+    "vintages/physical-restoration-001/sources-000.jsonl.gz": "aaf5e4f099ab25c6e6f96632787f1654ba6054ed378fd591b360e36274ffc264",
+    "vintages/physical-restoration-001/physical-record.json": "6cdd0680b83e5ac4543fb8812747c7eb229d889ce0ebe829dd31a19a2ac48698",
+    "vintages/current-target-probe-001/result.json": "34574db2bea75a57a0e679cee07d7d99a5b0822aa16b5e8b89435a8d4a74c21e",
+    "vintages/current-target-probe-001/publication.json": "39da118687b3b57ae39d0a159fdcbbe23f215cd8eb8bf64bf8fbd7dcd75ca826",
+    "vintages/serialization-proof-001/result.json": "12d8b0a61171e3aa38c0783d167b181d7964472393b59c555da357d583f74fc8",
+    "vintages/source-handoff-002/source-handoff.json": "30c3ed6c7d710a4e384eac18f00ffdc4ee2d4e275ef81ceabe9e5886ff4ebe6c"
+  }
+}

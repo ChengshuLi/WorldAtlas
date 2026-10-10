@@ -65,7 +65,7 @@ def bounds(geometry):
 
 def main():
     assert pathlib.Path(__file__).read_bytes() == own('build_handoff.py')
-    destination = HERE / 'vintages/source-handoff-002'
+    destination = HERE / 'vintages/source-handoff-003'
     assert not destination.exists()
     for parent in [destination, *destination.parents]:
         assert not parent.is_symlink()
@@ -74,6 +74,26 @@ def main():
     raw = own('vintages/physical-restoration-001/original-component.json')
     candidate = json.loads(raw)
     assert candidate['id'] == CID and sha(raw) == 'acd61551d2dbc9b6925e6d8c2d17cb210a6dcf6f3d80bbbadb64951660e3b746'
+    roster_pins = json.loads(own('inputs/original-batch-roster-pins.json'))
+    rosters = {}
+    for pin in roster_pins:
+        encoded = own(pin['path'])
+        assert len(encoded) == pin['bytes'] and sha(encoded) == pin['sha256']
+        assert hashlib.sha1(b'blob ' + str(len(encoded)).encode() + b'\0' + encoded).hexdigest() == pin['original_git_blob']
+        decoded = gzip.decompress(encoded)
+        assert len(decoded) == pin['uncompressed_bytes'] and sha(decoded) == pin['uncompressed_sha256']
+        rows = json.loads(decoded)
+        assert len({row['id'] for row in rows}) == len(rows)
+        rosters[pin['path']] = rows
+    original_batch = next(row for row in rosters['inputs/original-operational-batches-000.json.gz'] if row['id'] == BATCH)
+    current_batch = next(row for row in rosters['inputs/current-operational-batches-000.json.gz'] if row['id'] == BATCH)
+    assert len(rosters['inputs/original-operational-batches-000.json.gz']) == len(rosters['inputs/current-operational-batches-000.json.gz']) == 594
+    assert original_batch['fine_family_ids'] == ['gap-source-batch:e62816ae5e97daecc2a69d17']
+    assert current_batch['fine_family_ids'] == ['gap-source-batch:898fe086a85d16c0018cfbfe']
+    original_family = next(row for row in rosters['inputs/original-families-006.json.gz'] if row['id'] == original_batch['fine_family_ids'][0])
+    current_family = next(row for row in rosters['inputs/current-families-003.json.gz'] if row['id'] == current_batch['fine_family_ids'][0])
+    assert original_family['component_ids'] == current_family['component_ids'] == [CID]
+    assert original_batch['component_count'] == current_batch['component_count'] == original_family['component_count'] == current_family['component_count'] == 1
     physical = json.loads(own('vintages/physical-restoration-001/physical-record.json'))
     native = json.loads(own('vintages/physical-restoration-001/queried-source-metadata.json'))
     restoration = json.loads(own('vintages/physical-restoration-001/receipt.json'))
@@ -150,7 +170,7 @@ def main():
     assert not old_target['conditions']['gain_equals_candidate_literal_empty_symmetric_difference']
     payload = {'component_id': CID, 'candidate_feature_sha256': sha(raw), 'candidate_geometry_sha256': sha(canonical(candidate['geometry'])), 'target_stable_location_id': TARGET, 'unsupported_candidate_remainder_included': False, 'source_supported_intersection_fragments': [{'intersection_geometry': positive[0]['intersection']['geometry']}], 'target_current_feature': {'feature_sha256': old_target['target']['feature_sha256'], 'geometry_sha256': targets[TARGET]['certificate_entry'][7], 'parent_id': target['properties']['parent_id']}}
     case = {'component_id': CID, 'original_candidate_feature': candidate, 'retained_payload': payload, 'retained_source_operation_row': {'source_comparison_record': comparison, 'positive_area_recorded_source_subject_ids': [TARGET], 'positive_area_source_feature_intersections': [row['binding'] for row in positive]}}
-    scope = {'scopeIds': [CID], 'original_batch_id': BATCH, 'original_batch_component_count': 1, 'candidate_source_native_bindings': [case], 'original_physical_comparison_bindings': [{'component_id': CID, 'physical_comparison': {'row': physical}, 'original_queried_source_metadata': [{'original_source_record_metadata': row} for row in native]}], 'original_candidate_canonical_bindings': [{'component_id': CID, 'feature_sha256': sha(raw), 'feature_bytes_base64': base64.b64encode(raw).decode(), 'derived_js_canonical_sha256': serial['derived_js_canonical_sha256']}], 'consumed_source_bindings': consumed, 'current_neighbor_binding': current, 'physical_restoration': restoration, 'constructor_disposition': {'ordinary_GEOS_union_gain_failed': True, 'literal_representation': 'Complete unchanged retained target plus the complete unchanged candidate primitive. No dissolve or coordinate normalization.', 'source_relative_premises_supported': True, 'source_admission_requires_independent_review': True, 'common_adapter_candidate_serialization_not_yet_admitted': True}, 'unknowns': ['Current physical or legal truth and source observation dates remain unapproved.', 'Native operator, zero-cell disposition, exact selected continuous integration, drawing/picking and release readback remain engineering work.'], 'original_failed_dissolve': old_target, 'actual_current_target': target, 'execution_commit': HEAD, 'consumed_inputs': PINS}
+    scope = {'original_batch_roster': original_batch, 'original_family_roster': original_family, 'current_batch_roster': current_batch, 'current_family_roster': current_family, 'original_programme_batch_count': 594, 'roster_pins': roster_pins, 'scopeIds': [CID], 'original_batch_id': BATCH, 'original_batch_component_count': 1, 'candidate_source_native_bindings': [case], 'original_physical_comparison_bindings': [{'component_id': CID, 'physical_comparison': {'row': physical}, 'original_queried_source_metadata': [{'original_source_record_metadata': row} for row in native]}], 'original_candidate_canonical_bindings': [{'component_id': CID, 'feature_sha256': sha(raw), 'feature_bytes_base64': base64.b64encode(raw).decode(), 'derived_js_canonical_sha256': serial['derived_js_canonical_sha256']}], 'consumed_source_bindings': consumed, 'current_neighbor_binding': current, 'physical_restoration': restoration, 'constructor_disposition': {'ordinary_GEOS_union_gain_failed': True, 'literal_representation': 'Complete unchanged retained target plus the complete unchanged candidate primitive. No dissolve or coordinate normalization.', 'source_relative_premises_supported': True, 'source_admission_requires_independent_review': True, 'common_adapter_candidate_serialization_not_yet_admitted': True}, 'unknowns': ['Current physical or legal truth and source observation dates remain unapproved.', 'Native operator, zero-cell disposition, exact selected continuous integration, drawing/picking and release readback remain engineering work.'], 'original_failed_dissolve': old_target, 'actual_current_target': target, 'execution_commit': HEAD, 'consumed_inputs': PINS}
     assert sum(pin['bytes'] for pin in PINS) < 64 * 1024 ** 2
     destination.mkdir()
     (destination / 'source-handoff.json').write_bytes(canonical(scope))
