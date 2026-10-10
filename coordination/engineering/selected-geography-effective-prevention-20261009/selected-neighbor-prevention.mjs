@@ -2,7 +2,7 @@
 // selected-bank resolver. These functions do not select/activate a release.
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
-import {ImmutableReader, SelectedGeometrySources, NativeAssetImage} from '../../../scripts/check-effective-geographic-regression.mjs';
+import {ImmutableReader, SelectedGeometrySources, NativeAssetImage, selectedBaseAssetAlias} from '../../../scripts/check-effective-geographic-regression.mjs';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 const FILE=33554432, PHASE=268435456, SLOT=512;
 const certificates=new WeakMap(), originalAuthorities=new WeakMap(), selectedAdditions=new WeakMap();
@@ -768,20 +768,20 @@ export function readSelectedAdditive(snapshot) {
  demand(sidecar?.version===2&&sidecar.kind==='retained-native-additive-selection-v2'&&Object.keys(sidecar).sort().join(',')==='authority_registry,base_selection,kind,logical_asset_map,runtime_envelope,version','Unsupported committed additive sidecar');
  const baseSelection=nativeBaseSelection(selection);
  demand(same(sidecar.base_selection,baseSelection),'Stale/foreign actual native base selection');
- const whole=p=>{
+ const whole=({p,alias,role})=>{
   pinCheck(p);let version=p.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
   const actual=reader.descriptor(p.path,version);demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'Selected additive ordinary whole identity differs');
-  reader.admit(actual,p.decoded_bytes??0);return {p,version};
+  reader.admit(actual,alias?0:(p.decoded_bytes??0));return {p,version,...(alias?{alias:true,role}:{})};
  };
  demand(Object.keys(sidecar.logical_asset_map).sort().join(',')==='base_manifest,ledger,owner_roster,patch','Incomplete/foreign logical additive asset map');
- const roster=[sidecar.runtime_envelope,sidecar.authority_registry,...Object.values(sidecar.logical_asset_map)];
- const metadata=roster.reduce((n,p)=>n+2*(p.bytes+(p.decoded_bytes??0)),0);demand(Number.isSafeInteger(metadata)&&metadata<=PHASE&&reader.used+metadata<=PHASE,'Complete selected additive metadata admission before reads');reader.used+=metadata;
+ const roster=[{p:sidecar.runtime_envelope},{p:sidecar.authority_registry},...Object.entries(sidecar.logical_asset_map).map(([role,p])=>({p,...(['base_manifest','owner_roster'].includes(role)?(selectedBaseAssetAlias(snapshot,role,p),{alias:true,role}):{})}))];
+ const metadata=roster.reduce((n,{p,alias})=>n+2*(p.bytes+(alias?0:(p.decoded_bytes??0))),0);demand(Number.isSafeInteger(metadata)&&metadata<=PHASE&&reader.used+metadata<=PHASE,'Complete selected additive metadata admission before reads');reader.used+=metadata;
  const admitted=roster.map(whole);
- // The second whole owner/body graph is authenticated only in this completed
- // frame. Keep the original snapshot owners; retain just the ledger and patch.
+ // Every ordinary encoded alias is whole authenticated here; only privately
+ // accepted base graphs skip duplicate decoded acquisition. Retain ledger/patch.
  const assetFrame=()=>{
-  const bodies=admitted.map(({p,version})=>{
-  const raw=reader.read(p.path,{version,expected:p.sha256,decoded:p.decoded_bytes??0});if(p.decoded_bytes===undefined)return JSON.parse(raw);
+  const bodies=admitted.map(({p,version,alias,role})=>{
+  const raw=reader.read(p.path,{version,expected:p.sha256,decoded:alias?0:(p.decoded_bytes??0)});if(alias)return selectedBaseAssetAlias(snapshot,role,p);if(p.decoded_bytes===undefined)return JSON.parse(raw);
   const decoded=gunzipSync(raw,{maxOutputLength:p.decoded_bytes});demand(decoded.length===p.decoded_bytes&&sha(decoded)===p.decoded_sha256,'Selected additive whole decoded inverse differs');return JSON.parse(decoded);
  });
   const [wrapped,registry,...assets]=bodies,envelope=wrapped.additiveRelease??wrapped;

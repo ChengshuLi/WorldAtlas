@@ -18,6 +18,19 @@ const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 const freezeJson=value=>{if(value&&typeof value==='object'){Object.values(value).forEach(freezeJson);Object.freeze(value);}return value;};
 const installedRuntimes=new Map();
 const selectedSnapshots=new WeakMap();
+// Reuse only a graph whose complete encoded/decoded body was authenticated by
+// the original selected-base acquisition. Ordinary alias bytes are still read.
+export function selectedBaseAssetAlias(snapshot,role,pin) {
+  const accepted=selectedSnapshots.get(snapshot);
+  demand(accepted&&snapshot.reader===accepted.reader&&snapshot.reader.version===accepted.readerVersion&&snapshot.manifest===accepted.manifestObject&&snapshot.owners===accepted.ownerObject,'Require unchanged privately authenticated selected base');
+  demand(accepted.selection===JSON.stringify(snapshot.selection)&&accepted.manifest===JSON.stringify(snapshot.manifest),'Selected base alias metadata drift');
+  demand(role==='base_manifest'||role==='owner_roster','Foreign selected base alias role');
+  const original=accepted.assets[role];
+  demand(pin&&pin.mode===original.mode&&pin.bytes===original.bytes&&pin.sha256===original.sha256&&pin.decoded_bytes===original.decoded_bytes&&pin.decoded_sha256===original.decoded_sha256,'Selected base alias whole encoded/decoded identity differs');
+  const graph=role==='base_manifest'?snapshot.manifest:snapshot.owners;
+  demand(Object.isFrozen(graph),'Selected base alias graph is mutable');
+  return graph;
+}
 function runtimeIdentity(executable=process.execPath) {
   const executablePath=fs.realpathSync(executable);
   if(installedRuntimes.has(executablePath))return installedRuntimes.get(executablePath);
@@ -407,7 +420,11 @@ function loadBaseSelection(reader) {
   if(image instanceof StockImage)for(const part of image.index.parts){const actual=reader.descriptor(NS+'/'+part.path);demand(actual.bytes===part.bytes,'Whole selected container length differs');}
   const snapshot={selection,manifest,owners,image,receiptProvenance,artifactConsumption,metadataBytes:decoded.length+Buffer.byteLength(JSON.stringify(manifest))+(image instanceof StockImage?Buffer.byteLength(JSON.stringify(image.map))+Buffer.byteLength(JSON.stringify(image.index)):image?Buffer.byteLength(JSON.stringify(image.index)):0),acquisition_buffer_bytes:rawBounds.length+decoded.length,reader};
   if(artifactConsumption)snapshot.metadataBytes+=Buffer.byteLength(JSON.stringify(artifactConsumption));
-  selectedSnapshots.set(snapshot,{selection:JSON.stringify(selection),manifest:JSON.stringify(manifest)});
+  freezeJson(manifest);freezeJson(owners);
+  selectedSnapshots.set(snapshot,{selection:JSON.stringify(selection),manifest:JSON.stringify(manifest),reader,readerVersion:reader.version,manifestObject:manifest,ownerObject:owners,assets:{
+    base_manifest:{mode:reader.inventory.get(reader.version+':'+selection.manifest_path).mode,bytes:reader.inventory.get(reader.version+':'+selection.manifest_path).bytes,sha256:selection.sha256},
+    owner_roster:{mode:reader.inventory.get(bounds.commit+':'+bounds.path).mode,bytes:rawBounds.length,sha256:sha(rawBounds),decoded_bytes:decoded.length,decoded_sha256:sha(decoded)}
+  }});
   if(selection.selected_geography){snapshot.geometrySources=new SelectedGeometrySources(snapshot);snapshot.metadataBytes+=Buffer.byteLength(JSON.stringify(snapshot.geometrySources.bank))+Buffer.byteLength(JSON.stringify(snapshot.geometrySources.sources))+Buffer.byteLength(JSON.stringify(snapshot.geometrySources.release));}
   return snapshot;
 }
