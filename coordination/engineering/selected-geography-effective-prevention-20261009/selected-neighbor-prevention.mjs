@@ -791,8 +791,8 @@ export function readSelectedAdditive(snapshot) {
   const p=sidecar.logical_asset_map[key],declared=envelope[key];
   demand(declared&&p.bytes===declared.bytes&&p.sha256===declared.sha256&&(p.decoded_bytes??p.bytes)===(declared.decoded_bytes??declared.bytes)&&(p.decoded_sha256??p.sha256)===(declared.decoded_sha256??declared.sha256),'Runtime logical asset differs from committed ordinary pin: '+key);
  }
-  demand(sidecar.logical_asset_map.base_manifest.sha256===selection.sha256&&same(named.base_manifest,manifest),'Additive runtime rebinds actual selected native manifest');
-  demand(sidecar.logical_asset_map.owner_roster.sha256===manifest.original_assets.bounds.sha256&&same(named.owner_roster,owners),'Additive owner roster differs from independent original native bounds');
+  demand(sidecar.logical_asset_map.base_manifest.sha256===selection.sha256&&named.base_manifest===manifest,'Additive runtime rebinds actual selected native manifest');
+  demand(sidecar.logical_asset_map.owner_roster.sha256===manifest.original_assets.bounds.sha256&&named.owner_roster===owners,'Additive owner roster differs from independent original native bounds');
   return {registry,envelope,named:{ledger:named.ledger,patch:named.patch}};
  };
  const {registry,envelope,named}=assetFrame();
