@@ -642,7 +642,9 @@ export function verifyCurrentRebindExecution({request,operating,expectedCode,cus
  const dependencies=expectedCode.filter(p=>p.path.startsWith(dependencyRoot));demand(dependencies.length===5&&before.runtime.filter(p=>p.role==='installed-dependency').length===5&&dependencies.every(p=>before.runtime.some(r=>r.role==='installed-dependency'&&r.path.endsWith('/node_modules/@noble/hashes/'+p.path.slice(dependencyRoot.length))&&r.bytes===p.bytes&&r.sha256===p.sha256&&r.mode===420)),'Actual installed hash import closure differs from whole source custody');
  for(const name of ['entry','supervisor','plan']){ordinary(before[name]);demand(before[name].bytes<=FILE,'Ordinary external body cap');}
  demand(before.plan.bytes===custody.issued_plan.length&&before.plan.sha256===sha(custody.issued_plan),'Actual invoked plan whole bytes differ');
- rebindKeys(plan,'version,kind,execution_commit,base_selection,authority_registry_sha256,original_rows_sha256,original_patch_sha256s,target_sources,predecessor_proof,executed_code,limits','Foreign actual issued plan');
+ const explicitInputs=Object.hasOwn(plan,'original_inputs');
+ rebindKeys(plan,'version,kind,execution_commit,base_selection,authority_registry_sha256,original_rows_sha256,original_patch_sha256s,target_sources,predecessor_proof,executed_code,limits'+(explicitInputs?',original_inputs':''),'Foreign actual issued plan');
+ if(explicitInputs)demand(Array.isArray(plan.original_inputs)&&plan.original_inputs.length===2&&new Set(plan.original_inputs.map(p=>p?.path)).size===2&&plan.original_inputs.every(p=>p&&Object.keys(p).sort().join(',')==='bytes,commit,git_blob_oid,mode,path,sha256'&&p.mode==='100644'&&typeof p.path==='string'&&!p.path.includes('\\')&&!p.path.split('/').some(s=>!s||s==='.'||s==='..')&&/^[a-f0-9]{40}$/.test(p.commit)&&/^[a-f0-9]{40}$/.test(p.git_blob_oid)&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=FILE&&/^[a-f0-9]{64}$/.test(p.sha256)),'Missing complete original input descriptors');
  demand(plan.version===1&&plan.kind==='issued-current-rebind-acquisition-plan-v1'&&plan.execution_commit===request.execution_commit&&same(plan.base_selection,request.base_selection)&&plan.authority_registry_sha256===request.authority_registry_sha256&&plan.original_rows_sha256===valueSha(request.original_rows)&&same(plan.original_patch_sha256s,request.original_patch_sha256s)&&same(plan.target_sources,request.acquisition.target_sources)&&same(plan.predecessor_proof,request.acquisition.predecessor_proof)&&same(plan.executed_code,expectedCode)&&same(plan.limits,request.limits),'Actual cold issued input plan changes complete original/current operands or bounds');
  const command=proof.command;demand(Array.isArray(command)&&(command.length===6||command.length===7&&command[3]==='--expose-gc'),'Foreign external rebind command shape');
  const boundCommand=command.length===7?command.toSpliced(3,1):command;demand(boundCommand.every(p=>typeof p==='string')&&boundCommand[0]===before.runtime.find(p=>p.role==='time').path&&['-l','-v'].includes(command[1])&&boundCommand[2]===before.runtime.find(p=>p.role==='node').path&&boundCommand[3]===before.entry.path&&boundCommand[4]===before.plan.path&&boundCommand[5].startsWith('/')&&!boundCommand[5].split('/').some((x,i)=>i>0&&(!x||x==='.'||x==='..')),'Actual external command differs from bound runtime/entry/plan/destination');
@@ -814,7 +816,7 @@ export function acquireCurrentRebindOperands(snapshot,registry,originalRows,orig
 export function compatibleCurrentRebindCode(executionCommit,currentCode,historicalCode) {
  demand(same(currentCode.map(p=>p.path),CURRENT_REBIND_CODE)&&same(historicalCode.map(p=>p.path),CURRENT_REBIND_CODE),'Incomplete current/historical method roster');
  if(same(currentCode,historicalCode))return historicalCode;
- demand(executionCommit==='46cb67a6cc0f88c6295d2d70da654baa5c6119a0'&&valueSha(historicalCode)==='e20767cd7f4aea34c1c1ce794bd09c43993905ac8da94779781c616ccd7c20ee','Unknown historical rebind qualification generation');
+ demand((executionCommit==='46cb67a6cc0f88c6295d2d70da654baa5c6119a0'&&valueSha(historicalCode)==='e20767cd7f4aea34c1c1ce794bd09c43993905ac8da94779781c616ccd7c20ee')||(executionCommit==='c192aa5c88df9a55594b62f7dcfa6e4226f59682'&&valueSha(historicalCode)==='8542f8b0d2d41e6dc1a31090a91a47cbe383f3ab173f547a4c07aaeb8bb74284'),'Unknown historical rebind qualification generation');
  const boundaries=new Set(['coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs','coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs']);
  for(let i=0;i<currentCode.length;i++)if(!boundaries.has(currentCode[i].path))demand(same(currentCode[i],historicalCode[i]),'Historical numerical method or runtime body differs');
  return historicalCode;
@@ -855,7 +857,16 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
  for(const {p}of externalRoster){const actual=reader.descriptor(p.path,p.commit);demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'External execution ordinary identity differs');reader.admit(actual);}
  const executionCustody=Object.fromEntries(externalRoster.map(({name,p})=>[name,reader.read(p.path,{version:p.commit,expected:p.sha256})]));
  verifyCurrentRebindExecution({request:bodies.request,operating:bodies.operating,expectedCode,custody:{...executionCustody,result_sha256:roster.find(p=>p.name==='result').p.sha256}});
- const liveMetadata=carriedMetadataBytes+2*(valueBytes({certificate,bodies,code,historicalCode,currentCode,originalCode,roster,externalRoster}).length+externalBytes);
+ // Reauthenticate the exact issued explicit operands through the same whole
+ // immutable reader. Historical plans without this field retain their route.
+ const issuedOriginalInputs=JSON.parse(executionCustody.issued_plan).original_inputs;
+ if(issuedOriginalInputs!==undefined)for(const p of issuedOriginalInputs){
+  const actual=reader.descriptor(p.path,p.commit);
+  demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'Issued original input mode/OID/bytes differ');
+  reader.admit(actual);reader.read(p.path,{version:p.commit,expected:p.sha256});
+ }
+
+ const liveMetadata=carriedMetadataBytes+2*(valueBytes({certificate,bodies,code,historicalCode,currentCode,originalCode,roster,externalRoster,...(issuedOriginalInputs===undefined?{}:{issuedOriginalInputs})}).length+externalBytes);
 
  const acquired=acquireCurrentRebindOperands(snapshot,registry,originalRows,originalPatches,{targetSources:bodies.request.acquisition?.target_sources,predecessorProof:bodies.request.acquisition?.predecessor_proof,carriedMetadataBytes:liveMetadata});
  return verifyCurrentRebindProducts({certificate,...bodies,baseSelection,registry,originalRows,originalPatches,size,expectedCode,acquired,executionCustody,bodyPins:Object.fromEntries(roster.map(({name,p})=>[name,p]))});
