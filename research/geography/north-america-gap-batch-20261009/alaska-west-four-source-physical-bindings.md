@@ -17,7 +17,7 @@ On base commit `f0a0c5f1c252e68b3b987cef8625ba9d185c215f`, `data/geography/part-
 
 ## Exact original pointsets
 
-The full original component features were retrieved by exact ID from custody commit `59acfabec9a22acebdb31201037a43c8956ba8f`. The shard byte hashes matched the custody receipts; every full feature hash matches both the retained source-fitness row and its original physical-comparison row.
+The full original component features were restored byte-for-byte from custody source commit `450126d04c7e6bf85c8763c9bb6949c1fac68000` using the exact gzip-decompression receipt at restoration commit `79a41b0bfd412b0d431e57cb03a4aed46597b1af`. The shard byte hashes match the custody receipts; every full feature hash matches both the retained source-fitness row and its original physical-comparison row.
 
 | Component suffix | Pointset shard | Feature array index (0-based) | Full feature SHA-256 | Geometry SHA-256 |
 |---|---|---:|---|---|
@@ -45,6 +45,14 @@ The full features, report and transport-map receipts, original component and sou
 
 A fresh live readback on 2026-10-09 checked public issue bodies/comments and the merged source PRs for all four exact IDs. None appears in #1488 (13 IDs), #1508 (13 IDs), #1620 (13 IDs), #1377 (31 IDs), #1362 (43 IDs), or their source PRs #1384 and #1378. The published USA31 and BC43 issue rosters have no exact-ID overlap with this quartet. Closed #486 describes Alaska physical-ecoregion portions but publishes no component IDs, so its relationship remains unknown. Open #1394 has an active claim for broader source-operand recovery, but publishes no exact roster for these cases; overlap remains unknown. The issue readback records the live issue states, timestamps, roster checks, and active claims.
 
-All four cases remain unresolved, with no accepted decision, repair readiness, implementation, integration, or delivery. Missing evidence still includes accepted physical class and authority, source fitness and observation date, cause and repair authority, and verified surface status. No geometry or repair proposal is made.
+## Four-case source-rule and physical decision
+
+The exact decision record is [alaska-west-four-case-source-rule-and-physical-decision.json](./alaska-west-four-case-source-rule-and-physical-decision.json). It projects the already retained physical, query, route and source-fitness rows; it does not rerun their joins or any source, GIS, geometry, native or global operation.
+
+The four cases match the source-relative product profile used by the merged Alaska additive batch: GSHHG 2.3.7 (released 2017-06-15), WVS source flag 1, level 1, and river/lake flag 0. For each component, one retained source record fully covers it and the paired checked comparison record is disjoint; each physical report row says `mapped-land-support`. Their recorded administrative route is the same geoBoundaries gbOpen USA ADM2 Counties 2018 product, release tag `9469f09`, and each has exactly one compatible Aleutians West subject. The metadata update date (2023-01-19) and build date (2023-12-12) describe the administrative dataset/catalog, not the physical observations.
+
+The accepted Alaska rule is bounded to its exact 13 measurement IDs (11 source-compatible, 2 exceptions); none of these four IDs is in that roster. Its approved limits explicitly say GSHHG land support is source-relative only and leave per-feature observation date, positional precision/registration, and contemporary physical truth unresolved. The four therefore have a strong predicate match for a proposed source-relative extension, but the existing case-level approval does not automatically cover them. Independent exact-head review must accept or reject that extension.
+
+For each of these four, the retained evidence supports only the source-relative label `mapped-land-support`. The physical report still says authority `unapproved`, status `unknown-source-fitness-and-observation-date`, and the pointset has `water_status=unverified` and touches the reference shore. No exact record establishes per-feature observation date, shoreline accuracy/registration, or whether the footprint is exposed land, intertidal rock/reef, or water. No dated authoritative shoreline/hydrographic record for these exact footprints is retained. Thus current physical land/water class, repair cause and repair authority remain unresolved. No geometry or repair proposal is made.
 
 This four-case handoff preserves the entire #1630 batch scope (4,674 components / 152 families) and the global #1202 umbrella. It closes neither issue and creates no per-family issue. No current production assignment, source operator, GIS operation, native diagnostic, production write, or deployment was performed.
