@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "baseline_commit": "c28077da970ae39550e5edea790a266b060d3de5",
+  "owned_path": "coordination/engineering/aafc-hudson-cohort-20261010",
+  "family_id": "gap-source-batch:b4db3af508af364adc297c21",
+  "inputs": [
+    {
+      "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-004.json.gz",
+      "bytes": 1694391,
+      "sha256": "1fd21e659e1bf23deab5f8970e0a1124ac3f3cf654e758f4a85eb27fba49fff6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-013.geojson.gz",
+      "bytes": 1214905,
+      "sha256": "518fe9bf7f869670af7529dd235391b7dfc4794500984e47173249d2da997dab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/arctic-seven-source-fit-20261008/sources/aafc-ecoregions.native.geojson",
+      "bytes": 2756674,
+      "sha256": "a565563a6aef794df831dc9251fb4108018e20a4f0172acbc36b599f9b7f4abf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-a9f03b364bdefa4a/sources/aafc-terrestrial-ecoregions-v2.2.geojson",
+      "bytes": 13567291,
+      "sha256": "f2c7ac1cabc601c364479c4616c245c993443ac61f6842f01a12078844a71e6b",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "helper": {
+    "path": "scripts/evidence/immutable.py",
+    "bytes": 17414,
+    "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+    "hash_kind": "file-bytes"
+  },
+  "paths": {
+    "family": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-004.json.gz",
+    "candidates": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-013.geojson.gz",
+    "native": "research/geography/arctic-seven-source-fit-20261008/sources/aafc-ecoregions.native.geojson",
+    "official_v22": "data/regional-review/regional-review-a9f03b364bdefa4a/sources/aafc-terrestrial-ecoregions-v2.2.geojson"
+  },
+  "decoded": {
+    "family": {
+      "bytes": 8387404,
+      "sha256": "017dbcc00810cc8851e3bf215b5ce67c8571c4313c962e62a543890724d831aa"
+    },
+    "candidates": {
+      "bytes": 8388217,
+      "sha256": "6d4e5a76dd96557de78ab8678a1992bce8bf91b31264f1dec6e2dbb5a4266591"
+    }
+  },
+  "estimated_peak_rss_bytes": 536870912,
+  "admitted_process_reservation_bytes": 1073741824,
+  "phase_logical_bytes": 36026296,
+  "runtime": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "shapely": "2.1.2",
+    "numpy": "2.3.5",
+    "geos": "3.13.1",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "wheels": [
+      {
+        "filename": "shapely-2.1.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+        "bytes": 3099844,
+        "sha256": "1e7d4d7ad262a48bb44277ca12c7c78cb1b0f56b32c10734ec9a1d30c0b0c54b",
+        "url": "https://files.pythonhosted.org/packages/b9/37/e781683abac55dde9771e086b790e554811a71ed0b2b8a1e789b7430dd44/shapely-2.1.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl"
+      },
+      {
+        "filename": "numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+        "bytes": 16606086,
+        "sha256": "0d8163f43acde9a73c2a33605353a4f1bc4798745a8b1d73183b28e5b435ae28",
+        "url": "https://files.pythonhosted.org/packages/b6/23/2a1b231b8ff672b4c450dac27164a8b2ca7d9b7144f9c02d2396518352eb/numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl"
+      }
+    ],
+    "python_executable_sha256": "fa67443527ed9647f760d807e2a38f26340757123e643c4639cf273ed15d5ea7"
+  }
+}
