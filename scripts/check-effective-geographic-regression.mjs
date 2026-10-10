@@ -31,6 +31,22 @@ export function selectedBaseAssetAlias(snapshot,role,pin) {
   demand(Object.isFrozen(graph),'Selected base alias graph is mutable');
   return graph;
 }
+// The original base frame registers only its completed authenticated source
+// view. This also serves its private intermediate snapshot before additive
+// consumption finishes; caller-supplied views never establish this identity.
+export function selectedGeometrySourceAlias(snapshot) {
+  const accepted=selectedSnapshots.get(snapshot);
+  demand(accepted&&snapshot.reader===accepted.reader&&snapshot.reader.version===accepted.readerVersion&&snapshot.manifest===accepted.manifestObject&&snapshot.owners===accepted.ownerObject,'Require unchanged privately authenticated selected base');
+  demand(accepted.selection===JSON.stringify(snapshot.selection)&&accepted.manifest===JSON.stringify(snapshot.manifest),'Selected source alias metadata drift');
+  const resolver=accepted.geometrySources;
+  demand(snapshot.selection.selected_geography&&resolver&&snapshot.geometrySources===resolver
+    &&resolver instanceof SelectedGeometrySources&&Object.isFrozen(resolver)
+    &&resolver.snapshot===snapshot&&resolver.reader===snapshot.reader,'Foreign selected source view');
+  demand(resolver.bank&&Object.isFrozen(resolver.bank)&&resolver.replacements instanceof Map
+    &&resolver.replacements.size===resolver.bank.overrides.length
+    &&resolver.bank.overrides.every(p=>resolver.replacements.get(p.logical_path)===p),'Selected source replacement roster drift');
+  return resolver;
+}
 function runtimeIdentity(executable=process.execPath) {
   const executablePath=fs.realpathSync(executable);
   if(installedRuntimes.has(executablePath))return installedRuntimes.get(executablePath);
@@ -428,7 +444,7 @@ function loadBaseSelection(reader) {
     base_manifest:{mode:reader.inventory.get(reader.version+':'+selection.manifest_path).mode,bytes:reader.inventory.get(reader.version+':'+selection.manifest_path).bytes,sha256:selection.sha256},
     owner_roster:{mode:reader.inventory.get(bounds.commit+':'+bounds.path).mode,bytes:rawBounds.length,sha256:sha(rawBounds),decoded_bytes:decoded.length,decoded_sha256:sha(decoded)}
   }});
-  if(selection.selected_geography){snapshot.geometrySources=new SelectedGeometrySources(snapshot);snapshot.metadataBytes+=Buffer.byteLength(JSON.stringify(snapshot.geometrySources.bank))+Buffer.byteLength(JSON.stringify(snapshot.geometrySources.sources))+Buffer.byteLength(JSON.stringify(snapshot.geometrySources.release));}
+  if(selection.selected_geography){snapshot.geometrySources=new SelectedGeometrySources(snapshot);selectedSnapshots.get(snapshot).geometrySources=snapshot.geometrySources;snapshot.metadataBytes+=Buffer.byteLength(JSON.stringify(snapshot.geometrySources.bank))+Buffer.byteLength(JSON.stringify(snapshot.geometrySources.sources))+Buffer.byteLength(JSON.stringify(snapshot.geometrySources.release));}
   return snapshot;
 }
 

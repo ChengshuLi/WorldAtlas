@@ -2,7 +2,7 @@
 // selected-bank resolver. These functions do not select/activate a release.
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
-import {ImmutableReader, SelectedGeometrySources, NativeAssetImage, selectedBaseAssetAlias} from '../../../scripts/check-effective-geographic-regression.mjs';
+import {ImmutableReader, SelectedGeometrySources, NativeAssetImage, selectedBaseAssetAlias, selectedGeometrySourceAlias} from '../../../scripts/check-effective-geographic-regression.mjs';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 const FILE=33554432, PHASE=268435456, SLOT=512;
 const certificates=new WeakMap(), originalAuthorities=new WeakMap(), selectedAdditions=new WeakMap();
@@ -673,9 +673,14 @@ export function retainedArcticNativeRows(proof) {
 // Genuine current before-state acquisition. The original native row operator
 // is never executed here: only complete selected words and source rows are read.
 // A private selected resolver authenticates the bank; this API cannot select it.
+export function currentRebindSourceView(snapshot) {
+ demand(snapshot?.reader instanceof ImmutableReader,'Require actual current selected reader');
+ if(snapshot.selection.selected_geography)return selectedGeometrySourceAlias(snapshot);
+ return new SelectedGeometrySources(snapshot);
+}
 export function acquireCurrentRebindOperands(snapshot,registry,originalRows,originalPatches,{targetSources,predecessorProof=null,carriedMetadataBytes=0}={}) {
  demand(snapshot?.reader instanceof ImmutableReader,'Require actual current selected reader');
- const resolver=new SelectedGeometrySources(snapshot),reader=snapshot.reader;
+ const resolver=currentRebindSourceView(snapshot),reader=snapshot.reader;
  demand(Number.isSafeInteger(carriedMetadataBytes)&&carriedMetadataBytes>=0&&carriedMetadataBytes<=PHASE,'Incomplete retained rebind reader metadata');
  // The private snapshot authenticates the selected base and optional additive
  // hook. Acquisition reads only its base manifest/source roster, never a delta.
