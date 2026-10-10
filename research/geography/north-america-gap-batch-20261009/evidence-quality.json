@@ -1,0 +1,2610 @@
+{
+  "version": 1,
+  "issue": 1630,
+  "lane": "geography",
+  "worker_id": "01a112c2-1d0f-7bf2-a50e-74956219b9c1",
+  "subject_ids": [
+    "gap-source-batch:001bf31bbf8d3c9f3e4d7d2c",
+    "gap-source-batch:04359339167f7f646aaedc16",
+    "gap-source-batch:0634f44e357f340f73088cdc",
+    "gap-source-batch:0d46dcf906b80ea253175a23",
+    "gap-source-batch:0fe4c83e83c4c0ac21c9c4d1",
+    "gap-source-batch:1059909d39327e7cdf6ec6b5",
+    "gap-source-batch:11e1442442e8080ef7dfe220",
+    "gap-source-batch:168b4c075935af1b0189d418",
+    "gap-source-batch:1837673dc88a9a45d010c2db",
+    "gap-source-batch:1a2d07117d4cb07685fb66fe",
+    "gap-source-batch:1c45498fd6547d29c724f1fd",
+    "gap-source-batch:1dff90f73c54892c72cf461f",
+    "gap-source-batch:1f8abb8a47c4c19fd1fd54a1",
+    "gap-source-batch:201f982e6756d7950fd576a4",
+    "gap-source-batch:2224a1364d89e156896e6813",
+    "gap-source-batch:248291b98ae5a9bbad5ee0ec",
+    "gap-source-batch:258758085528d29326668c91",
+    "gap-source-batch:2988e0b2aaceee8d7331263e",
+    "gap-source-batch:2a5fe9daef9c482ea6574441",
+    "gap-source-batch:2ba7d7bbca79aac626d2dbdc",
+    "gap-source-batch:2ddd9459935795a65b5414a5",
+    "gap-source-batch:2f24ca8874f7f3bd6f12d029",
+    "gap-source-batch:30f84396b074ee2b68e946b2",
+    "gap-source-batch:31abcb5fbe5e272088582229",
+    "gap-source-batch:31e6dd8b5038900ae8932673",
+    "gap-source-batch:371f40bd17e0c9f625f13493",
+    "gap-source-batch:3800da3dc31e34fc72de9e3e",
+    "gap-source-batch:3a0177cddc896414104d9134",
+    "gap-source-batch:3b5220e5429a142f88797264",
+    "gap-source-batch:3bb700a26c4a70716945eab1",
+    "gap-source-batch:3ca6e2e3c1fbb8c0f521a958",
+    "gap-source-batch:3cea3acae22f5c5d6613257a",
+    "gap-source-batch:3dfc2b2aaf7e28cef572b859",
+    "gap-source-batch:3e3e3bc553d51dc0d4a7215c",
+    "gap-source-batch:3f10c40a92d09057c907cea2",
+    "gap-source-batch:3fee9733798db28e520b98a0",
+    "gap-source-batch:40b0dd338fc18dea61601ce3",
+    "gap-source-batch:4375dbf9ea3f9b79421de10b",
+    "gap-source-batch:443a274744b54435ce17c373",
+    "gap-source-batch:447201f17e15bb27d9a254af",
+    "gap-source-batch:4a78722d0b10089fd8311770",
+    "gap-source-batch:4da768395569a2ae223f61c7",
+    "gap-source-batch:4ddcd9ea524611f82e09a6cf",
+    "gap-source-batch:4e3a9f8bc7c70b62a359eb0a",
+    "gap-source-batch:4f7e7ed33f1cc89296465a0f",
+    "gap-source-batch:509b3e407e541d40f53b9111",
+    "gap-source-batch:54c403c7117486b9185434f4",
+    "gap-source-batch:56cf53467bf8a2b93f2f5e48",
+    "gap-source-batch:571b5f5e7776f7c3edc2d3bd",
+    "gap-source-batch:5c8ab085817e14fcec3e5bf5",
+    "gap-source-batch:5f4510194b16458e4f76ebde",
+    "gap-source-batch:5fc4dcc5fd46cca6842d341a",
+    "gap-source-batch:605e8c5d065c53608189fbc4",
+    "gap-source-batch:63d748f318d7dfeb738447ea",
+    "gap-source-batch:63fb69b0771eea38dd7e3e26",
+    "gap-source-batch:65f8f543e7055309827265ab",
+    "gap-source-batch:672691f99a27e3a17b6f1483",
+    "gap-source-batch:67be26bd61eb2ea9f756bc6f",
+    "gap-source-batch:6931a3a04108a8c23def392d",
+    "gap-source-batch:6d0fd239fb538db65034ce67",
+    "gap-source-batch:732dddf45379ecfd7d3a18b2",
+    "gap-source-batch:75c399121c1bd04836a8fb7d",
+    "gap-source-batch:76444014e7d8b5860fa31358",
+    "gap-source-batch:765596bd9b7b5025241b3864",
+    "gap-source-batch:785c3ee939c6ff7f71a19f59",
+    "gap-source-batch:78b262795dadd0f3031af965",
+    "gap-source-batch:7aeeae2913fdf8c667ac9188",
+    "gap-source-batch:7e683687bb945aace681451f",
+    "gap-source-batch:8023617b908a7d35a76d4aaa",
+    "gap-source-batch:81c3dd30d068f8720b605cb3",
+    "gap-source-batch:82e024536dec706162452715",
+    "gap-source-batch:82f524c0d5cd1a7e467a7eb1",
+    "gap-source-batch:85ca9245e3604d6c1af0c590",
+    "gap-source-batch:89c2d2b7f6ef027b69000c07",
+    "gap-source-batch:8b6640856df3c32e09a68a08",
+    "gap-source-batch:8c7cb850337022b0e006b6cd",
+    "gap-source-batch:8d43eb292d92194a94156b92",
+    "gap-source-batch:8e564e41a1c790916029d47b",
+    "gap-source-batch:8f9a926f438b22fe24ce42cc",
+    "gap-source-batch:90402549f403e57260e11cbc",
+    "gap-source-batch:909d8e79ab9a5b54cc4e287e",
+    "gap-source-batch:92e7f19b9aba02aee92bbea8",
+    "gap-source-batch:93133f984d05f923abf9afb8",
+    "gap-source-batch:93259b8a63443e4d2819003c",
+    "gap-source-batch:9395d975186a304196d5abcd",
+    "gap-source-batch:9485121e22389138f0834b8b",
+    "gap-source-batch:967b52f0912cb8e31f12a316",
+    "gap-source-batch:97f1fd6d2be3e76ffe1048ba",
+    "gap-source-batch:9a0480c4b4c5d681db29f1ed",
+    "gap-source-batch:9a8d66e4d47f5883620328f9",
+    "gap-source-batch:9c32f795ded5a622d82e1747",
+    "gap-source-batch:9da664cdf03e54a1fb51bedd",
+    "gap-source-batch:9f55709dbc841f8de21ad2a4",
+    "gap-source-batch:a2ab429254c050166cacc84a",
+    "gap-source-batch:a6c052d5aee6c51965016445",
+    "gap-source-batch:a6e86c40ec59c947b410e894",
+    "gap-source-batch:a81eda40773aca73141f2e9d",
+    "gap-source-batch:abaa654c38a1dd033ecb240d",
+    "gap-source-batch:ace6c71812cedf016434c9bb",
+    "gap-source-batch:add29839fa8045e3e038bd6a",
+    "gap-source-batch:ae1845fecfd1ddb7941fcddf",
+    "gap-source-batch:b2b61743f711b6b36cd5234e",
+    "gap-source-batch:b331cba283d9a80267d346a4",
+    "gap-source-batch:b367a34254ad6919ae55ddc5",
+    "gap-source-batch:b3ff466f7ba5dae0ef3facf0",
+    "gap-source-batch:ba05cfa78618e1b53ed721f3",
+    "gap-source-batch:bd0212e52b41838c9babd3a7",
+    "gap-source-batch:beaee0c9c6c117c12fe08aea",
+    "gap-source-batch:c0348079fc59827762ee0851",
+    "gap-source-batch:c18f1a00394c9241bc341122",
+    "gap-source-batch:c3caa88e893be0303f7cd239",
+    "gap-source-batch:c5718a496f9a7483448fd347",
+    "gap-source-batch:c80ce08f264b94870a013831",
+    "gap-source-batch:c98251a01d0cdb5555c41508",
+    "gap-source-batch:ca9bf08033fc0c68a6fcc527",
+    "gap-source-batch:cb5b57ee6c0e22d0670d950f",
+    "gap-source-batch:cc585007c02df55450a8c0e6",
+    "gap-source-batch:cedafcb0f583a1d5aef9ea5a",
+    "gap-source-batch:cffbc11b21f92ba76a71c242",
+    "gap-source-batch:d160ed108f2c4f4388083057",
+    "gap-source-batch:d33458b85c35494d2d84e33a",
+    "gap-source-batch:d6a4a0f2b2e112e9c7f2162a",
+    "gap-source-batch:d6f7626d3db174ea5c8c2f38",
+    "gap-source-batch:d9003a062a45cd3d3a7c678d",
+    "gap-source-batch:d9e43545da6a0958e56fa4bc",
+    "gap-source-batch:db10df969303cd95848a8bce",
+    "gap-source-batch:db20a39eb743a33bc7b748cd",
+    "gap-source-batch:db366a5a92a699f3ac2d4f82",
+    "gap-source-batch:decc865f75c35dd9677eadba",
+    "gap-source-batch:df39b59de24b2acba4ab46ce",
+    "gap-source-batch:e05a1dedf1d4380ef3ab25f5",
+    "gap-source-batch:e068461d734acfe6f6054d5c",
+    "gap-source-batch:e0fe9086a7b097f01b7a39e6",
+    "gap-source-batch:e30ddaff5c0a9f0b944f24b3",
+    "gap-source-batch:e5628a22f1a98715662750ec",
+    "gap-source-batch:e609f40d8cd0960856e5a6d7",
+    "gap-source-batch:e8242befafb730d529401142",
+    "gap-source-batch:e95c345742d97ed6dacd92b6",
+    "gap-source-batch:ea930ecf27688f4dcc3f2404",
+    "gap-source-batch:ecb477ec13cb56a27408f721",
+    "gap-source-batch:ee829a8375161e78531cb146",
+    "gap-source-batch:eefe1dacfd632702687fe0ba",
+    "gap-source-batch:f5850d20d534686bd134c940",
+    "gap-source-batch:f66204a7cfd2a4bc7b6785a9",
+    "gap-source-batch:f6df02a553657965b12b8802",
+    "gap-source-batch:f8a8bc1e498bc40b86556ef3",
+    "gap-source-batch:f8c7c28763a71ea1a06cf113",
+    "gap-source-batch:f97370ab5c3a0fbf298739f9",
+    "gap-source-batch:f98f28fa572502061052f6cd",
+    "gap-source-batch:fba60e01e74043002a73ec37",
+    "gap-source-batch:fcf7056abe79e015405eed27",
+    "gap-source-batch:fdc0431b9fd0c96d4e0edc18"
+  ],
+  "subject_ids_sha256": "5b088e947d599f73e9771d5c0780fa873f156e82bb061bda4278aa9429e760bc",
+  "baseline": {
+    "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b",
+    "files": [
+      {
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/facts.json",
+        "bytes": 46507,
+        "sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+        "bytes": 1046123,
+        "sha256": "60e770171089510b8f97ebd74a93e1c913953716a4281699e4ecca75aaefffd5",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "fd164c98e3100f98b8488c7ba81e39132cb18a2669a86c8ab5728ec6e20ce97e",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-001.bin.gz",
+        "bytes": 1003990,
+        "sha256": "1b4c5b7a0d1328bfbee83c759934843aabedde9afc947a9e555eeb6aac276fca",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "947627e169a22ca6a4f877f7ea192467c150fcc43d4fad4d99d3599702029a75",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-002.bin.gz",
+        "bytes": 1001586,
+        "sha256": "9c50b25acf826a4c65291613cc965d7675a7c66aa672a8c0fe1f21feaf432239",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "dbe45982cb0fbe54d9c8b61e0189a3f6a2093c407849326b250305723a49c0f0",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "bytes": 1063935,
+        "sha256": "8b7eedc7a4a9234f1917046167f97ad960d4a9c2941ce55dbac46a7eee422549",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "201ae80a0bcb8648950c26e0de7dedab1f6c196671c93734b169e551deb53e9c",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+        "bytes": 987691,
+        "sha256": "fab9ac669c568073ab37748190396d3f0c06ac319317c4ff7a0aa31cee259ab0",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "3d329a587e2e06a426dc802e04abfe01726d86657acfc469287cfe668c8102a8",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+        "bytes": 1026831,
+        "sha256": "03f13761ce67af5a826a98468ef2dc77d2f4a5c4ab9f25b6e6a1e3bd396bf141",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "6f7ba9a502dd9229365c522f25e3f05e6d3c2e8c329ceef6644618ebc9da930d",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "bytes": 1493537,
+        "sha256": "6bee149f0d7930d6d95d927c41b78f8a52678df4ebad9824e68b35b917e676dc",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "8d270e713aa1ec33b8b279ae71224b7c2996053e1c2aced441723df8e82c80bb",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "bytes": 962830,
+        "sha256": "4eb81385ba0d6b6d6a6b47e26a9504f9ae299f8d64dd9e0a82b3b48a4af65ad2",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "1e9358bfccab1b75a7073f63d8b84d65f64b064244a1fdad76669378204d1fc0",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-008.bin.gz",
+        "bytes": 1043652,
+        "sha256": "897a5cb10967809bb32b541c82ff19c4fd0d8c0b64241d78ea963d09cb0bab62",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "e354113a88c2d3deb64a327a469bcbca7c248b17083b3d739c18445b7b8c23df",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+        "bytes": 998433,
+        "sha256": "4621441988498fe2c05bfe6f036bf8dd9cfbc8472c5b8a65bf91d3a424f626da",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "049ab5f591d9821e7279c6c7afccfc0b55ed5a9f81976edfe969315ee25df079",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "bytes": 1039493,
+        "sha256": "8da6fcf9fd6a7f3215666ab9bae2e91f9b32e5e0bb923492137ea823af8265b7",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "23d37fcd6c369a1dca6ba0fbccea55bc40bbeb74a340b4cca6752ca0d78cf231",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "bytes": 1081053,
+        "sha256": "9e0d5879d5735d4507773cc66b7da371164c30de022c742969ba5d1e85e2c339",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "f844def184578eda6006664e38b95feb563b80dfaf3cfd3f78f2af8fd08e89ce",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "bytes": 965771,
+        "sha256": "483fb0b6c5b9a8e1b905bf2dc3aa0ca232dcede6f34ef357381770a603e52df0",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "a1663477a0e01de8bb56736262b57e95c3c49647d54db95c4d2fd6d86600c328",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-013.bin.gz",
+        "bytes": 247084,
+        "sha256": "006dd169089fc433251cc2f5939e7ae324744c00eca11066860aab578f07edac",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 2171381,
+        "uncompressed_sha256": "b1ca16e670f192da7b7f8377b1bc1c0223750d3758512e384555b351554eff6f",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-00.jsonl.gz",
+        "bytes": 526542,
+        "sha256": "cb29c1d4bf43b4c0b0596cd6bbb86435f0d48e07de666597d47d2f1e92bfbcdb",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8386838,
+        "uncompressed_sha256": "0e41158367ccce79d970a5f1802fc508af2baba5e8b834313858d9f816f1237e",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-01.jsonl.gz",
+        "bytes": 525776,
+        "sha256": "3458b4b7daefbd753fcac7cf0dd6a464b23e13cf543c5e588ec9024e8c6a1524",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8386346,
+        "uncompressed_sha256": "6f172231dbeae60932d5fe1a46b88d944607af709e4bb846eabc4c6f17dd78cd",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-02.jsonl.gz",
+        "bytes": 524729,
+        "sha256": "fe35315706a18ded37c26c528bc1ae4c9ace1f2947a929aa2730a8bf1d424a0a",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8386364,
+        "uncompressed_sha256": "15eb3ceaab3f4dc751964697f449e505ff9fd6eaa461d3696634970a0a4b9de0",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-03.jsonl.gz",
+        "bytes": 528177,
+        "sha256": "d796fbe78c00202cabe1f898f201035f202f891cb4af2a099eae90aab2107781",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8387948,
+        "uncompressed_sha256": "196c5d360828c22de6a7abf5fee6ed8120b4c0d489971cb7211eb60425c8c5a3",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-04.jsonl.gz",
+        "bytes": 525059,
+        "sha256": "54c94826b9f3370c9dd4473a78d4fa28a26b15342b3180f61ce7d18dd19befff",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388457,
+        "uncompressed_sha256": "858fd7e1f52bff31631a4de23f577221a916d0d07ac7ce36a1f837f777217d23",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-05.jsonl.gz",
+        "bytes": 407437,
+        "sha256": "4db1436e3dfdc71e5644c582935ff4a1426d3064f27d95a493f3277f4e24c901",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 6484231,
+        "uncompressed_sha256": "40fb6e698c55c76ebb40c719c6459ea572ddf1631778e7f358ece920839feb63",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-00.jsonl.gz",
+        "bytes": 528005,
+        "sha256": "106bfd22e415e51a62f05a6cc6ad3087b046b99f1804e3e9ee05b2d6c8397ad9",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8385493,
+        "uncompressed_sha256": "5367c15be79322d5b4c920e734a17b91e6ec4361d1bc983908323aeff4133921",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-01.jsonl.gz",
+        "bytes": 526771,
+        "sha256": "94127586c44c3be54000b94eb4ec5f3231fe48b725cdad0b0321953ca7f0b846",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388274,
+        "uncompressed_sha256": "4229921710ecab2fd7ce72ed687e6a16db39f0e78948cf5eabf5be51382de455",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-02.jsonl.gz",
+        "bytes": 526420,
+        "sha256": "d7b07505036bdd4faa031c50e65d9cdbe45b948480ca93b9eec17f9c6506aa20",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8387339,
+        "uncompressed_sha256": "978f3a09267097772b20acc5124ce24d0b125930317c226d0e65504ed0b61541",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-03.jsonl.gz",
+        "bytes": 526796,
+        "sha256": "083256c56716d5e7b1719e861273ee4fabfee9e5c9d64509c84ea3bfeb985749",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8385811,
+        "uncompressed_sha256": "23a72e2ccd79aae59c395a9cf10fbfe4c7ae76adde98afe4a07f14497728eafb",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-04.jsonl.gz",
+        "bytes": 529347,
+        "sha256": "a1df4261ab0d8319bd0d0f6325ef3d401d73be946af712b019940ac01f68ad99",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8386405,
+        "uncompressed_sha256": "b1904d3f763d8338a37ebb8228420c50580065400b23fe1f52f7eaf292541c9d",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-05.jsonl.gz",
+        "bytes": 408157,
+        "sha256": "d7d8f73434e787fe08436a7bbd9a405fe4c1dead01868d4c63c290df7c2f057a",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 6485875,
+        "uncompressed_sha256": "f6992a9bfdcdcb446c143e5f07a9b0545b94d015617c2d3f2c3fd79bfcf259ce",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-00.jsonl.gz",
+        "bytes": 524595,
+        "sha256": "f2a879d120295cd5656a06a2ab780619de508af9b424b6cd25061adc48749ae5",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8385158,
+        "uncompressed_sha256": "251cb24f37aaaf881172b27bdfb8ddcd85b51b79a86e9f180cd8546861fb429b",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-01.jsonl.gz",
+        "bytes": 523234,
+        "sha256": "d2e158b582738dac678ca39f85153abce967778ab2ef0a9bc1c486e1ac26c8a2",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8387757,
+        "uncompressed_sha256": "4eb073843e3f697027fdbb60190d1e758a4b9642d37ae9a307b9c73dd8b251fb",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-02.jsonl.gz",
+        "bytes": 528042,
+        "sha256": "98163ae6f018065704efca1a9f69f34a96c304b0ad205306323a6112d1da26a2",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388395,
+        "uncompressed_sha256": "d15763aeb49419c09ad05f4ed65b97d39e8c28753005ddf5b65647f8bd667fd2",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-03.jsonl.gz",
+        "bytes": 528272,
+        "sha256": "1323f741fc48de9bea737d022bfe05f75424307d2b019d76da2a9c592db6d829",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8387084,
+        "uncompressed_sha256": "e7ab3328656a8852743330096ec916daf0af1e323f7bc3b359ba0de4ada0e09b",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-04.jsonl.gz",
+        "bytes": 527033,
+        "sha256": "d8bc146302ecd36d71d263caa66682466610611e5a796e3f6eef0bfcd18ba4aa",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8385547,
+        "uncompressed_sha256": "ae12ec7323dab54d1deb3fe956e7cd295d1879f27c30f8d9f56e5adae7cf6283",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-05.jsonl.gz",
+        "bytes": 409922,
+        "sha256": "fddad80392d69a52cd6948257bf2fdaf62c926db035ba5afc8a20a2a5539406a",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 6492999,
+        "uncompressed_sha256": "81c90928a652b7874a63f1d771e22c82e0964f706797e250441551033e601a7f",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-00.jsonl.gz",
+        "bytes": 525988,
+        "sha256": "053074d99e457fe65dcb2694ffcaa2e39e83a324b23f6094d3ac1226449aa2c3",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8385443,
+        "uncompressed_sha256": "bbd64d246c531fbf1516284efe8f8949b09bdb21fe153711978a5b63a9c77c86",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-01.jsonl.gz",
+        "bytes": 523853,
+        "sha256": "6024d6f207f47f93a6f0e206ac44e7f4a9eecc6cb082938309f898e4a2b5475a",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8386086,
+        "uncompressed_sha256": "d7ed834c89f2ebbe3e6de33a66d323e78c8f4917a864f1fd5facac736c5afb14",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-02.jsonl.gz",
+        "bytes": 524810,
+        "sha256": "5823ab581fbf9fb3e886abccf14816496ff6ce76bc959d69653f62ddeb909bc3",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8386307,
+        "uncompressed_sha256": "0a650c66269fa0831eff84e9188a4f978c5e809e8f5d5276756332adf593cba0",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-03.jsonl.gz",
+        "bytes": 525570,
+        "sha256": "adf6d2700efd292b8a200a1dc5c99c85468ee9027a32ca278bfff6046353fc69",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388251,
+        "uncompressed_sha256": "aaff17bc72b255f006b12645ebad2b85b59ddbc1dbc676775c8e857c6397f1fa",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-04.jsonl.gz",
+        "bytes": 525858,
+        "sha256": "99a085e94e2cc172cc4ef56619914fe8f40cd77db1a058158bfefe984af2f266",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388199,
+        "uncompressed_sha256": "7c44c2c6445fca48dc5b33f6cc3a54e932a33a3de3786d8d9b9044f7e811d06d",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-05.jsonl.gz",
+        "bytes": 410083,
+        "sha256": "17dcad2ce00899bc496c7bf6d20187189bc138006563524f8eb92367624b9a2c",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 6534894,
+        "uncompressed_sha256": "2e0039bbd59076735d1e3a612187e483c7eaace4b36db043b3608b62537da239",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-00.jsonl.gz",
+        "bytes": 525212,
+        "sha256": "b4044fe7680ff4a48f97c54172dd06750ce0435a84ae678b92ca0324533e1311",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8385584,
+        "uncompressed_sha256": "4a22055bde6df150629aaa6592ca948e5f908d22164a9f88b0d2813daf51d205",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-01.jsonl.gz",
+        "bytes": 527162,
+        "sha256": "35030b13ddfc6b772fe5c4cdfb412be09c0e02e2a8b9a2a2739abe57fe9ec542",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8385976,
+        "uncompressed_sha256": "0b51efad2d5d302c7e1a3d20adbc96929b7830f57c29161c0472ef49bd52a10d",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-02.jsonl.gz",
+        "bytes": 528688,
+        "sha256": "9f282637a1d95cfade4727ffc1ca4a7c816958af0a06d63520b9b2d16fa9ce4f",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8386699,
+        "uncompressed_sha256": "e03c4e7f61b86569ef886d810d9d18034cc3f959d0f27cf158c0461aca9e564e",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-03.jsonl.gz",
+        "bytes": 524094,
+        "sha256": "447da5f27e0cf05f4726bd643e33046e14872ca1197952f324ade413608e12aa",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8386355,
+        "uncompressed_sha256": "9c39845339933e4c15b5e721d140e0edf777821ac7659112092927cfef5e4a8d",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-04.jsonl.gz",
+        "bytes": 525972,
+        "sha256": "0a79334210429c07d42ee5dcd24167cc0557a40d572841e252f106e0997e856e",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388013,
+        "uncompressed_sha256": "014b7abfb122c2143df01a67ba01b57c16f58158c5ddb91e292a628028a1dc15",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-05.jsonl.gz",
+        "bytes": 411435,
+        "sha256": "119f5b7c5e4956f098d86f2a1f4b2a2572b29cace31903930eeda7c2a887bfe4",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 6524960,
+        "uncompressed_sha256": "ea31650453ee299f174593cbd9190e80be2e8e599b2b51205c6bb219d21225a0",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-00.jsonl.gz",
+        "bytes": 525388,
+        "sha256": "d833624179a6d16beb72d5770b908bc4258a2d7c2b770e6cd2c12b33b30953a5",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8387583,
+        "uncompressed_sha256": "797cbcda427b80a1207bd2770d20f15f9d409b91ca2c03e7164f280e51ac8393",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-01.jsonl.gz",
+        "bytes": 525979,
+        "sha256": "e1ac46a23355fb6fff996f8276ff51513cb2198f0ecf8d4afad54495c2e8c8b8",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8388414,
+        "uncompressed_sha256": "7df6271e6024b7a3d8abc9fd6383bb3ed2caec77976b775eb97ddd81ce87246c",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-02.jsonl.gz",
+        "bytes": 525546,
+        "sha256": "c4ed7e7059193537d70fd99e99f01dde5087d3d27712dd6e7efc31ae0f133e66",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8385862,
+        "uncompressed_sha256": "b979163a7c924854c31eecaa7dfa702331cec5f92d8e7a98bea3c9bed1e1d563",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-03.jsonl.gz",
+        "bytes": 526076,
+        "sha256": "1536610f2446d68617cd8f1f39059f7491068b84112003ab656b90fcc153ebaf",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8386485,
+        "uncompressed_sha256": "984c07fc9ace10ae4f19e24cd86d01932d1ea08514d642b4212c0f6f0ee1c4d0",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-04.jsonl.gz",
+        "bytes": 524135,
+        "sha256": "37ed4644e4fa010dc252ce0b3da390b57d77df3572e646db0376188882472d1b",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8385258,
+        "uncompressed_sha256": "0b040f79edfabcf93bddc9c3b41f6d0dcd67d4ac84e961f18bd05bd8ab2452f2",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-05.jsonl.gz",
+        "bytes": 410110,
+        "sha256": "b0c32613db8ca8383a5b9329402a579bb34dda917a92f49501530bee3e42d6a6",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 6547715,
+        "uncompressed_sha256": "12d9ae5d97cdc40755d0002d2858cfe6faade58c45515ec764c0fbbbf5bfd7a6",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-07/catalog-00.jsonl.gz",
+        "bytes": 524051,
+        "sha256": "1b17ccea6e51eebb7f8f77dca33de2737571f9baa1dac5c0b0b0f977e9917c23",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8385661,
+        "uncompressed_sha256": "c5c274ba1628f9e0718180f63fc13a25fab85d0b5432c661a3f872a039795571",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-07/catalog-01.jsonl.gz",
+        "bytes": 528545,
+        "sha256": "977d8e521b092203c09055074f457040b8588ca47e1208823330431c683d8d22",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 8387399,
+        "uncompressed_sha256": "13fb1f7fdbd957a5a11171fcf972101cb3c15035f93f83af8b5f4270ea958275",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-07/catalog-02.jsonl.gz",
+        "bytes": 340998,
+        "sha256": "6882787d0c9b73cdff55221ff8f38159464588c9b5144168a78824b8c2c557fa",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 5420416,
+        "uncompressed_sha256": "ea223ce885d8e7e6236ada68a5d5386b7f327a9546888134d343ac444d4f99b2",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-006.jsonl.gz",
+        "bytes": 1007106,
+        "sha256": "292d0b5e5feeb64844652f17d09f5cd215022babde89d3f1434cf0e10af3c009",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 7422632,
+        "uncompressed_sha256": "9f239d2c1603855b5a5b40d0ee4f2cc76c0c22e638485847bdfe5f48d845e84f",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-028.jsonl.gz",
+        "bytes": 993571,
+        "sha256": "ed3f52630f7e4cb6feaaab1507e58a695a123e31d1b2a10763a8f11c07a52fb7",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 7412333,
+        "uncompressed_sha256": "35b91dd96ed782be8dc1bfbfe08a881e214099426193877ea7eb20a437da29eb",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-047.jsonl.gz",
+        "bytes": 965956,
+        "sha256": "da98827a9f205991086008ab6687a816e7968861ce9ea0d69c20ba3900b6e9c3",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 7384305,
+        "uncompressed_sha256": "0c67ce097d15e937dd8bc38d9a542d615036b31b937a5ef63970322b0e976ca6",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-051.jsonl.gz",
+        "bytes": 1034453,
+        "sha256": "d01e482dab92a49931caf38faca7562255b33406698889e72aab5ea809c7aa43",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 7461292,
+        "uncompressed_sha256": "26a0d0e80a3c3382d792c4f9e2fd441b020df6ed2df58c45e8db68598663a41d",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/report.json",
+        "bytes": 57840,
+        "sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      {
+        "path": "data/geography/part-25.json",
+        "bytes": 4525239,
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      }
+    ],
+    "pins": {
+      "route_family_000": "60e770171089510b8f97ebd74a93e1c913953716a4281699e4ecca75aaefffd5",
+      "route_family_001": "1b4c5b7a0d1328bfbee83c759934843aabedde9afc947a9e555eeb6aac276fca",
+      "route_family_002": "9c50b25acf826a4c65291613cc965d7675a7c66aa672a8c0fe1f21feaf432239",
+      "route_family_003": "8b7eedc7a4a9234f1917046167f97ad960d4a9c2941ce55dbac46a7eee422549",
+      "route_family_004": "fab9ac669c568073ab37748190396d3f0c06ac319317c4ff7a0aa31cee259ab0",
+      "route_family_005": "03f13761ce67af5a826a98468ef2dc77d2f4a5c4ab9f25b6e6a1e3bd396bf141",
+      "route_family_006": "6bee149f0d7930d6d95d927c41b78f8a52678df4ebad9824e68b35b917e676dc",
+      "route_family_007": "4eb81385ba0d6b6d6a6b47e26a9504f9ae299f8d64dd9e0a82b3b48a4af65ad2",
+      "route_family_008": "897a5cb10967809bb32b541c82ff19c4fd0d8c0b64241d78ea963d09cb0bab62",
+      "route_family_009": "4621441988498fe2c05bfe6f036bf8dd9cfbc8472c5b8a65bf91d3a424f626da",
+      "route_family_010": "8da6fcf9fd6a7f3215666ab9bae2e91f9b32e5e0bb923492137ea823af8265b7",
+      "route_family_011": "9e0d5879d5735d4507773cc66b7da371164c30de022c742969ba5d1e85e2c339",
+      "route_family_012": "483fb0b6c5b9a8e1b905bf2dc3aa0ca232dcede6f34ef357381770a603e52df0",
+      "route_family_013": "006dd169089fc433251cc2f5939e7ae324744c00eca11066860aab578f07edac",
+      "funnel_catalog_01_00": "cb29c1d4bf43b4c0b0596cd6bbb86435f0d48e07de666597d47d2f1e92bfbcdb",
+      "funnel_catalog_01_01": "3458b4b7daefbd753fcac7cf0dd6a464b23e13cf543c5e588ec9024e8c6a1524",
+      "funnel_catalog_01_02": "fe35315706a18ded37c26c528bc1ae4c9ace1f2947a929aa2730a8bf1d424a0a",
+      "funnel_catalog_01_03": "d796fbe78c00202cabe1f898f201035f202f891cb4af2a099eae90aab2107781",
+      "funnel_catalog_01_04": "54c94826b9f3370c9dd4473a78d4fa28a26b15342b3180f61ce7d18dd19befff",
+      "funnel_catalog_01_05": "4db1436e3dfdc71e5644c582935ff4a1426d3064f27d95a493f3277f4e24c901",
+      "funnel_catalog_02_00": "106bfd22e415e51a62f05a6cc6ad3087b046b99f1804e3e9ee05b2d6c8397ad9",
+      "funnel_catalog_02_01": "94127586c44c3be54000b94eb4ec5f3231fe48b725cdad0b0321953ca7f0b846",
+      "funnel_catalog_02_02": "d7b07505036bdd4faa031c50e65d9cdbe45b948480ca93b9eec17f9c6506aa20",
+      "funnel_catalog_02_03": "083256c56716d5e7b1719e861273ee4fabfee9e5c9d64509c84ea3bfeb985749",
+      "funnel_catalog_02_04": "a1df4261ab0d8319bd0d0f6325ef3d401d73be946af712b019940ac01f68ad99",
+      "funnel_catalog_02_05": "d7d8f73434e787fe08436a7bbd9a405fe4c1dead01868d4c63c290df7c2f057a",
+      "funnel_catalog_03_00": "f2a879d120295cd5656a06a2ab780619de508af9b424b6cd25061adc48749ae5",
+      "funnel_catalog_03_01": "d2e158b582738dac678ca39f85153abce967778ab2ef0a9bc1c486e1ac26c8a2",
+      "funnel_catalog_03_02": "98163ae6f018065704efca1a9f69f34a96c304b0ad205306323a6112d1da26a2",
+      "funnel_catalog_03_03": "1323f741fc48de9bea737d022bfe05f75424307d2b019d76da2a9c592db6d829",
+      "funnel_catalog_03_04": "d8bc146302ecd36d71d263caa66682466610611e5a796e3f6eef0bfcd18ba4aa",
+      "funnel_catalog_03_05": "fddad80392d69a52cd6948257bf2fdaf62c926db035ba5afc8a20a2a5539406a",
+      "funnel_catalog_04_00": "053074d99e457fe65dcb2694ffcaa2e39e83a324b23f6094d3ac1226449aa2c3",
+      "funnel_catalog_04_01": "6024d6f207f47f93a6f0e206ac44e7f4a9eecc6cb082938309f898e4a2b5475a",
+      "funnel_catalog_04_02": "5823ab581fbf9fb3e886abccf14816496ff6ce76bc959d69653f62ddeb909bc3",
+      "funnel_catalog_04_03": "adf6d2700efd292b8a200a1dc5c99c85468ee9027a32ca278bfff6046353fc69",
+      "funnel_catalog_04_04": "99a085e94e2cc172cc4ef56619914fe8f40cd77db1a058158bfefe984af2f266",
+      "funnel_catalog_04_05": "17dcad2ce00899bc496c7bf6d20187189bc138006563524f8eb92367624b9a2c",
+      "funnel_catalog_05_00": "b4044fe7680ff4a48f97c54172dd06750ce0435a84ae678b92ca0324533e1311",
+      "funnel_catalog_05_01": "35030b13ddfc6b772fe5c4cdfb412be09c0e02e2a8b9a2a2739abe57fe9ec542",
+      "funnel_catalog_05_02": "9f282637a1d95cfade4727ffc1ca4a7c816958af0a06d63520b9b2d16fa9ce4f",
+      "funnel_catalog_05_03": "447da5f27e0cf05f4726bd643e33046e14872ca1197952f324ade413608e12aa",
+      "funnel_catalog_05_04": "0a79334210429c07d42ee5dcd24167cc0557a40d572841e252f106e0997e856e",
+      "funnel_catalog_05_05": "119f5b7c5e4956f098d86f2a1f4b2a2572b29cace31903930eeda7c2a887bfe4",
+      "funnel_catalog_06_00": "d833624179a6d16beb72d5770b908bc4258a2d7c2b770e6cd2c12b33b30953a5",
+      "funnel_catalog_06_01": "e1ac46a23355fb6fff996f8276ff51513cb2198f0ecf8d4afad54495c2e8c8b8",
+      "funnel_catalog_06_02": "c4ed7e7059193537d70fd99e99f01dde5087d3d27712dd6e7efc31ae0f133e66",
+      "funnel_catalog_06_03": "1536610f2446d68617cd8f1f39059f7491068b84112003ab656b90fcc153ebaf",
+      "funnel_catalog_06_04": "37ed4644e4fa010dc252ce0b3da390b57d77df3572e646db0376188882472d1b",
+      "funnel_catalog_06_05": "b0c32613db8ca8383a5b9329402a579bb34dda917a92f49501530bee3e42d6a6",
+      "funnel_catalog_07_00": "1b17ccea6e51eebb7f8f77dca33de2737571f9baa1dac5c0b0b0f977e9917c23",
+      "funnel_catalog_07_01": "977d8e521b092203c09055074f457040b8588ca47e1208823330431c683d8d22",
+      "funnel_catalog_07_02": "6882787d0c9b73cdff55221ff8f38159464588c9b5144168a78824b8c2c557fa"
+    },
+    "pin_files": {
+      "route_family_000": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "route_family_001": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-001.bin.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "route_family_002": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-002.bin.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "route_family_003": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "route_family_004": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "route_family_005": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "route_family_006": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "route_family_007": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "route_family_008": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-008.bin.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "route_family_009": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "route_family_010": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "route_family_011": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "route_family_012": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "route_family_013": {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-013.bin.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_01_00": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-00.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_01_01": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-01.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_01_02": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-02.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_01_03": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-03.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_01_04": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-04.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_01_05": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-01/catalog-05.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_02_00": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-00.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_02_01": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-01.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_02_02": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-02.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_02_03": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-03.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_02_04": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-04.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_02_05": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-02/catalog-05.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_03_00": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-00.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_03_01": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-01.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_03_02": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-02.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_03_03": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-03.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_03_04": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-04.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_03_05": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-03/catalog-05.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_04_00": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-00.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_04_01": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-01.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_04_02": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-02.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_04_03": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-03.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_04_04": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-04.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_04_05": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-04/catalog-05.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_05_00": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-00.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_05_01": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-01.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_05_02": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-02.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_05_03": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-03.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_05_04": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-04.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_05_05": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-05/catalog-05.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_06_00": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-00.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_06_01": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-01.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_06_02": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-02.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_06_03": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-03.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_06_04": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-04.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_06_05": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-06/catalog-05.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_07_00": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-07/catalog-00.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_07_01": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-07/catalog-01.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "funnel_catalog_07_02": {
+        "path": "coordination/engineering/global-gap-candidate-funnel-20261008/vintages/catalog-two-07/catalog-02.jsonl.gz",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      }
+    },
+    "subject_files": {
+      "gap-source-batch:001bf31bbf8d3c9f3e4d7d2c": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+        "record_offset": 57672,
+        "record_bytes": 5430,
+        "record_sha256": "a34e2608797abeb684d498d04163da857a80a82ee860164dc18c5bbbfc2671e9",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:04359339167f7f646aaedc16": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+        "record_offset": 1789108,
+        "record_bytes": 4850,
+        "record_sha256": "d9378e72b4b45d4181b1ec2a0cd8586a45df66f0b3e30998e1e381b3e344acde",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:0634f44e357f340f73088cdc": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+        "record_offset": 2520769,
+        "record_bytes": 6061,
+        "record_sha256": "5b84656683f351e64b60ce7c141074e3833b8e7e8cb126e964546ec8d7bc7e05",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:0d46dcf906b80ea253175a23": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+        "record_offset": 5854228,
+        "record_bytes": 7815,
+        "record_sha256": "ee3e16a3d3e5bc037294b84c64b83e230d419f8297992d2ad05d9f7c2d636782",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:0fe4c83e83c4c0ac21c9c4d1": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+        "record_offset": 7133725,
+        "record_bytes": 6181,
+        "record_sha256": "a9d1f0463d0d5d0e972e49e4c5f0fd4ca342814ba9934d592c21fc389773efb2",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:1059909d39327e7cdf6ec6b5": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+        "record_offset": 7315276,
+        "record_bytes": 5478,
+        "record_sha256": "840c483f1d21af2a47e8ca621f42b7fb19d2f05f28c2f2fc3a90d7f9aef174dc",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:11e1442442e8080ef7dfe220": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+        "record_offset": 7937698,
+        "record_bytes": 11674,
+        "record_sha256": "592560bb485a3327759db966973c1b8e05437652df012f308683251596729c2c",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:168b4c075935af1b0189d418": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-001.bin.gz",
+        "record_offset": 1656919,
+        "record_bytes": 6059,
+        "record_sha256": "14ebc0dbd85f4781ed346c779f72bb53e6c518d785d190ca574b0a50f5cdcb83",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:1837673dc88a9a45d010c2db": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-001.bin.gz",
+        "record_offset": 2392680,
+        "record_bytes": 5519,
+        "record_sha256": "424cf2229ef212245435cd3b42890ec28f996749f87893776b66e7387c7a7c0a",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:1a2d07117d4cb07685fb66fe": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-001.bin.gz",
+        "record_offset": 3251554,
+        "record_bytes": 5665,
+        "record_sha256": "669c0a06cc90ccbf2fec38dae68a16753fa1841379d7c16efda456b151a8cbbe",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:1c45498fd6547d29c724f1fd": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-001.bin.gz",
+        "record_offset": 4072349,
+        "record_bytes": 5241,
+        "record_sha256": "6857b4c46a826a17705fed51feb498be31ffbe8c080c687c1015cbd3a4377932",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:1dff90f73c54892c72cf461f": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-001.bin.gz",
+        "record_offset": 4762757,
+        "record_bytes": 6693,
+        "record_sha256": "6b03441accb18b1e5a771fac385a2b87d1041d7a1222271af1dd34c2e232a3a0",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:1f8abb8a47c4c19fd1fd54a1": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-001.bin.gz",
+        "record_offset": 5238606,
+        "record_bytes": 5485,
+        "record_sha256": "3d3da89a23fbb0a370821c8de30ed5887e9c4fb2a3e33a91950e265fcf1792c7",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:201f982e6756d7950fd576a4": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-001.bin.gz",
+        "record_offset": 5472879,
+        "record_bytes": 6564,
+        "record_sha256": "3ccc2b23e2d28674db05a59b4b8c90fb74d3d7750a14722c28d00d25f3febe85",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:2224a1364d89e156896e6813": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-001.bin.gz",
+        "record_offset": 6353524,
+        "record_bytes": 10004,
+        "record_sha256": "8ff629759b74361836451f21465b81ac06a3ecb0daa450cce521b5cc9d0b5d2d",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:248291b98ae5a9bbad5ee0ec": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-001.bin.gz",
+        "record_offset": 7486194,
+        "record_bytes": 8260,
+        "record_sha256": "9b5a07ad16f5db735aa626b524d9315f6d55c6a85141ce07f242135fbc21bf1b",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:258758085528d29326668c91": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-001.bin.gz",
+        "record_offset": 7933303,
+        "record_bytes": 5593,
+        "record_sha256": "3c267f8301eaf7ee3e8f264f25e852f13667463f8a43163a57ed4f8c44b86d7d",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:2988e0b2aaceee8d7331263e": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-002.bin.gz",
+        "record_offset": 1406470,
+        "record_bytes": 5486,
+        "record_sha256": "c7f452611f530909e3324fd446bd87c6b9a045f1d56314054d73778807bd751c",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:2a5fe9daef9c482ea6574441": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-002.bin.gz",
+        "record_offset": 1908215,
+        "record_bytes": 5476,
+        "record_sha256": "edeff89a67d00c561e1bf55f73f61f906770fc8dd3a52c2f509a97c17c9a3cfd",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:2ba7d7bbca79aac626d2dbdc": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-002.bin.gz",
+        "record_offset": 2430806,
+        "record_bytes": 5576,
+        "record_sha256": "3f108c240458c9b75e37ba3ede18722d16a79e80f4ace2fe3d5075e60f165688",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:2ddd9459935795a65b5414a5": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-002.bin.gz",
+        "record_offset": 3456195,
+        "record_bytes": 8171,
+        "record_sha256": "37fd861a24e0821bd3581d930e8681348d70a60fad1383050fba9b31f2825441",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:2f24ca8874f7f3bd6f12d029": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-002.bin.gz",
+        "record_offset": 4106192,
+        "record_bytes": 34187,
+        "record_sha256": "5234f5635572825fc8054c9991b4930c2e8957e5aacbd0c48607f7e09992ed97",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:30f84396b074ee2b68e946b2": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-002.bin.gz",
+        "record_offset": 4854577,
+        "record_bytes": 56291,
+        "record_sha256": "2b03039992d83eb147dda6780f56ef206f15c265acb549c73d2878bf466d94f8",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:31abcb5fbe5e272088582229": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-002.bin.gz",
+        "record_offset": 5195364,
+        "record_bytes": 17357,
+        "record_sha256": "65fdc05ba4ec8dee2b5f59326c02e59628ecada4a6bf267b0bc150fd5491e90b",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:31e6dd8b5038900ae8932673": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-002.bin.gz",
+        "record_offset": 5310140,
+        "record_bytes": 21697,
+        "record_sha256": "a2d134222d453c32077a789c30a65a7c25628c01de996a5f0d395eb3031abef7",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:371f40bd17e0c9f625f13493": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-002.bin.gz",
+        "record_offset": 7284443,
+        "record_bytes": 11035,
+        "record_sha256": "56de30616801d64abb7ead92bae5b491664e0d3ef9fc4f191face408fca5e0e0",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:3800da3dc31e34fc72de9e3e": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-002.bin.gz",
+        "record_offset": 7598275,
+        "record_bytes": 5474,
+        "record_sha256": "9184bd3f502a542f11be1bb86b86c634ec35b1cbab07d90157e524029cab5c49",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:3a0177cddc896414104d9134": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "record_offset": 79104,
+        "record_bytes": 6107,
+        "record_sha256": "6764fd2776f6b5c83a23180964ffa093e3ad8a505e4a904ac09c56ee54d955bb",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:3b5220e5429a142f88797264": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "record_offset": 581005,
+        "record_bytes": 9254,
+        "record_sha256": "ac3dc115c2cf984b1a293fcae64973917d3b3bcd046b6f8f928593672d9a4c6c",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:3bb700a26c4a70716945eab1": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "record_offset": 732173,
+        "record_bytes": 6081,
+        "record_sha256": "638b19fbbdbe4de9a02d286d47567972e15f03f088a7c75876051dcea82254e4",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:3ca6e2e3c1fbb8c0f521a958": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "record_offset": 1120673,
+        "record_bytes": 26892,
+        "record_sha256": "f76cd617623620492809629a8c3da819c16072fa77539a3409678e5aa4814575",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:3cea3acae22f5c5d6613257a": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "record_offset": 1270590,
+        "record_bytes": 5861,
+        "record_sha256": "d92bade53ddffa24f42cc03c93c92b617eaaab6c7e08afa3726bfcfa7f336b14",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:3dfc2b2aaf7e28cef572b859": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "record_offset": 1699108,
+        "record_bytes": 13215,
+        "record_sha256": "fa1d0d0970fdf3bb928ee44b23295132e21277ad0b01b88e52b94ad674f505f8",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:3e3e3bc553d51dc0d4a7215c": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "record_offset": 1834789,
+        "record_bytes": 24478,
+        "record_sha256": "c5ab88b708171eff2f272aa66baef5149068a3b954a63ed9cd2889fab9beefe8",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:3f10c40a92d09057c907cea2": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "record_offset": 2240013,
+        "record_bytes": 5920,
+        "record_sha256": "71d517e3e839bdcac10fee163092f588f2e572c0d4cce4ed9d36a1ed637d711a",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:3fee9733798db28e520b98a0": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "record_offset": 2816889,
+        "record_bytes": 7136,
+        "record_sha256": "fd3a19c4d140038dac1d85511a78fba89daa1cc2924ff65a0f8f724fee3b44e4",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:40b0dd338fc18dea61601ce3": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "record_offset": 3102666,
+        "record_bytes": 17974,
+        "record_sha256": "fb84dd67a580e59b6025c659ccfe8298b4b31f7e57dc2c076826a676273723f5",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:4375dbf9ea3f9b79421de10b": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "record_offset": 4253898,
+        "record_bytes": 5408,
+        "record_sha256": "6b0b229896a2e2e15890aa6e91665eeacf6b04dec75669b8d35bf27ae4dfc8c2",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:443a274744b54435ce17c373": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "record_offset": 4548841,
+        "record_bytes": 12093,
+        "record_sha256": "5b36a657c5e6d22de047d5d79deaf74bab32c7126f2039844ea97b0b5b6adcda",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:447201f17e15bb27d9a254af": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "record_offset": 4677737,
+        "record_bytes": 5403,
+        "record_sha256": "eee8aca53b373ae9d719fc213990207ad75dc34dedff74cb5953eeac71053c9b",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:4a78722d0b10089fd8311770": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "record_offset": 7249470,
+        "record_bytes": 11317,
+        "record_sha256": "b7f287a821741993165f127640e4e04b05fb40131e3ea7b1b3a9f99931ede7f6",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:4da768395569a2ae223f61c7": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+        "record_offset": 223809,
+        "record_bytes": 5465,
+        "record_sha256": "a01acd8441bf0ebbb1dc1723c1a746da63755c048364a0553cc6bad1ef43b7f2",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:4ddcd9ea524611f82e09a6cf": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+        "record_offset": 318134,
+        "record_bytes": 5223,
+        "record_sha256": "f5667b2f2f9a432a95fdf7727a8f93fd6a357c360d9e383a3eddafbb591fc5c5",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:4e3a9f8bc7c70b62a359eb0a": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+        "record_offset": 485865,
+        "record_bytes": 11721,
+        "record_sha256": "eccf9b4418cbfa441385473aae3fbc75aaef6a7d6503283ccc2a6db50c91202e",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:4f7e7ed33f1cc89296465a0f": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+        "record_offset": 1007947,
+        "record_bytes": 6507,
+        "record_sha256": "b9d04acafd23fb088da72ff438f6ee472b9eb6e54b5d183f31ca6edf3be64ebf",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:509b3e407e541d40f53b9111": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+        "record_offset": 1461178,
+        "record_bytes": 71377,
+        "record_sha256": "f33dc815f0d6f108b72905ae38e8943b89605d9c4568a527bc16b896b1373a00",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:54c403c7117486b9185434f4": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+        "record_offset": 3213363,
+        "record_bytes": 9204,
+        "record_sha256": "039d98b9c1ddc5a5a4869dcb931cbc92b9405cbdc3dc95b504509fa51d94e9e6",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:56cf53467bf8a2b93f2f5e48": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+        "record_offset": 4179773,
+        "record_bytes": 5996,
+        "record_sha256": "490b36fdcdbbd5f549616ff545c3895204d0b0665de169aa4d2ff50744d63438",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:571b5f5e7776f7c3edc2d3bd": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+        "record_offset": 4332358,
+        "record_bytes": 5540,
+        "record_sha256": "e3657fd2256b77dcac7ac5d8d2da4a2df9807f655411ae20a39a6ee4f1862ff5",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:5c8ab085817e14fcec3e5bf5": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+        "record_offset": 6711136,
+        "record_bytes": 7540,
+        "record_sha256": "9f12f064793470d6b0a80e575e7a66c87b1425d29f17760fd9b4567f34784994",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:5f4510194b16458e4f76ebde": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+        "record_offset": 7957270,
+        "record_bytes": 7492,
+        "record_sha256": "eecf6a136645b3fa9318449a20670e4464d94da827c0c1c4350533a60b643f67",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:5fc4dcc5fd46cca6842d341a": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+        "record_offset": 8121811,
+        "record_bytes": 22686,
+        "record_sha256": "1791b5261b6d530b9f8ef08683109abcdbb447e9f4974722b519b02377a32b34",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:605e8c5d065c53608189fbc4": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+        "record_offset": 8353460,
+        "record_bytes": 7582,
+        "record_sha256": "ba04a51bad87474d7a6151b0e54dfd4cf0e59b0a0a365650ba50dc208a065f1a",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:63d748f318d7dfeb738447ea": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+        "record_offset": 1347988,
+        "record_bytes": 18431,
+        "record_sha256": "2b61c6f59d5192b124f88822ab11279a85ae1764d773f76266a8b40b0140a38e",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:63fb69b0771eea38dd7e3e26": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+        "record_offset": 1450126,
+        "record_bytes": 22368,
+        "record_sha256": "c22d977ce0b98a9884fb076294192bd1add1e9e6c6a77d2c352aca5b7f48ca55",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:65f8f543e7055309827265ab": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+        "record_offset": 2444472,
+        "record_bytes": 14162,
+        "record_sha256": "e67cc157d559d8743ba74c0d32b26868feb3cd4173dca9bbe0aec142bcbbc5c7",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:672691f99a27e3a17b6f1483": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+        "record_offset": 2753318,
+        "record_bytes": 5666,
+        "record_sha256": "8062dffa08fdca64ff92873d1cec9b8d98acc54eccdba31e6acf5936ec695d28",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:67be26bd61eb2ea9f756bc6f": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+        "record_offset": 2987505,
+        "record_bytes": 7383,
+        "record_sha256": "43e591895dd021c8b6668fd61cb7702c9e8234bbe0d1d2470840acda6dfbde9f",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:6931a3a04108a8c23def392d": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+        "record_offset": 3522468,
+        "record_bytes": 5939,
+        "record_sha256": "9325bb73b9b72a52cd0ad8c9dc9a1325f5a3585b2d99b6d190e40c6eaff1cb4a",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:6d0fd239fb538db65034ce67": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+        "record_offset": 5094753,
+        "record_bytes": 5593,
+        "record_sha256": "6f61b749fce97f3b79b9b986db304bd5f9786a09e97e4658f756f9c4a5619383",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:732dddf45379ecfd7d3a18b2": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+        "record_offset": 7571816,
+        "record_bytes": 98677,
+        "record_sha256": "121d147419fa7520fc493716185cdf941e1da59bd1891abc8c30b49d88e5fd43",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:75c399121c1bd04836a8fb7d": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "record_offset": 471546,
+        "record_bytes": 5420,
+        "record_sha256": "896b324454e071b01e82ceee83db316b5fe267952997ee5ba80f8f663aaeebc8",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:76444014e7d8b5860fa31358": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "record_offset": 754882,
+        "record_bytes": 5993,
+        "record_sha256": "0ef8f2a60cc4c72380336de3ee4bdc3d09f596a213af849a01aa4bfa875428d2",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:765596bd9b7b5025241b3864": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "record_offset": 781125,
+        "record_bytes": 5595,
+        "record_sha256": "d3c496eff662fd73fbcb09437fb8218964d25c08e270964294a6464e54152d91",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:785c3ee939c6ff7f71a19f59": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "record_offset": 1950733,
+        "record_bytes": 5549,
+        "record_sha256": "00e824745ea1b1c50435838bd67a7d2c42880e279a286055fc72add65ea8fddf",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:78b262795dadd0f3031af965": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "record_offset": 3328678,
+        "record_bytes": 9041,
+        "record_sha256": "98fe50c18abede3fa9c1e330655c2393fb4764f32111ddeeb5d042c27cd98cd3",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:7aeeae2913fdf8c667ac9188": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "record_offset": 4423550,
+        "record_bytes": 5227,
+        "record_sha256": "585ec979f746ac80d5eadff5fc0ee71628006a492fab056d5cc763e060ddfab9",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:7e683687bb945aace681451f": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "record_offset": 5740219,
+        "record_bytes": 9026,
+        "record_sha256": "44b34dce45c5bcc30ff1f62689e60f3747c35ecf6eb98eed58857e0382a46907",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:8023617b908a7d35a76d4aaa": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "record_offset": 6482069,
+        "record_bytes": 51058,
+        "record_sha256": "d211e1c971fffdf8d9b8ff66f2a88516f37ced77bbced0ad336cd1fac21ec6fd",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:81c3dd30d068f8720b605cb3": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "record_offset": 7239426,
+        "record_bytes": 8567,
+        "record_sha256": "b93aaf6e85c0ff76a69b5d9f273c006e56875358820c4748294af92a89b59284",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:82e024536dec706162452715": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "record_offset": 7751282,
+        "record_bytes": 6076,
+        "record_sha256": "f398abe9c2bcd17d8be2560f893cba2e0aad15e40bda465502a29a500e3831a3",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:82f524c0d5cd1a7e467a7eb1": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "record_offset": 7796048,
+        "record_bytes": 47667,
+        "record_sha256": "f2ee983665095d1600ae2dbd97ccd6c5c7dacf75ae2ad1d04d4b5cad473df93f",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:85ca9245e3604d6c1af0c590": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "record_offset": 515118,
+        "record_bytes": 5727,
+        "record_sha256": "649f7c1bb736afba236f6d7e646fc4eac90627ec4d0fa7205f25c81d72977eda",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:89c2d2b7f6ef027b69000c07": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "record_offset": 2265654,
+        "record_bytes": 17000,
+        "record_sha256": "98d2a1ed5a8983419949b210bc63099c6c22b21e4af212451ce310b8f17cc754",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:8b6640856df3c32e09a68a08": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "record_offset": 2945278,
+        "record_bytes": 5091,
+        "record_sha256": "5a8ac1971959135829408fd41d25bd51a9d298a5f46abef5deecad7d5ae9ac98",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:8c7cb850337022b0e006b6cd": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "record_offset": 3314580,
+        "record_bytes": 6139,
+        "record_sha256": "c1ca254ce09651853f1dc80a759218fdd64dd6be32f54b7b40252b2c1ec9b3dc",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:8d43eb292d92194a94156b92": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "record_offset": 3726936,
+        "record_bytes": 6446,
+        "record_sha256": "6800c7130f0af68225f60540640505aedb22b0440c46a9182b1630e5980d6476",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:8e564e41a1c790916029d47b": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "record_offset": 4119565,
+        "record_bytes": 5981,
+        "record_sha256": "c925d59d299c038795e300e22c1ab1f0f38100473c9469898b187023fb057f78",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:8f9a926f438b22fe24ce42cc": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "record_offset": 4657325,
+        "record_bytes": 5182,
+        "record_sha256": "731b8b18d0f70492f3a5cfebb2de7fe20095282a8bc184a76b65fa952e1a7774",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:90402549f403e57260e11cbc": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "record_offset": 4950396,
+        "record_bytes": 58468,
+        "record_sha256": "735f49d2019c5186393e104d31fa9d1b0fedbe4375430a1753fe40cfb8cd55ed",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:909d8e79ab9a5b54cc4e287e": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "record_offset": 5152950,
+        "record_bytes": 5238,
+        "record_sha256": "89a47a9794db27748cddea121bcedb57136bf49c767a342214be6d54eb01f2e6",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:92e7f19b9aba02aee92bbea8": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "record_offset": 5881648,
+        "record_bytes": 11554,
+        "record_sha256": "c08caaa449326a441d137bdb33e93cd06eb8840aa8a9da4e732f704f15a33466",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:93133f984d05f923abf9afb8": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "record_offset": 5959343,
+        "record_bytes": 5428,
+        "record_sha256": "d097ffbcde461922cb7dfc724fff7d28f0134ed4dc50aa5fc364947b6df39347",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:93259b8a63443e4d2819003c": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "record_offset": 5998163,
+        "record_bytes": 8297,
+        "record_sha256": "038cb3395aecfdcfc6730567935de08adabd424a1c509a386aaeadb49a3516bc",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:9395d975186a304196d5abcd": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "record_offset": 6240268,
+        "record_bytes": 5448,
+        "record_sha256": "346707b08033f1baa517f66c0dbc1232c2744c37d52dac1b278e418a22bb4a89",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:9485121e22389138f0834b8b": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "record_offset": 6687358,
+        "record_bytes": 14859,
+        "record_sha256": "9473376624a39abf4f96719504fb406073ec37a8b2f3f19cf1378983c70d947b",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:967b52f0912cb8e31f12a316": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "record_offset": 7517284,
+        "record_bytes": 5787,
+        "record_sha256": "317a0279dcc343b9c7fe9b8189e1fea7ea637b7df1b625d031738a54759fe8bf",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:97f1fd6d2be3e76ffe1048ba": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "record_offset": 8159447,
+        "record_bytes": 5557,
+        "record_sha256": "4649f59b551f5681a0d1d90536d9c7f4a3e1690c9a7b32d7430ce2808e14cab8",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:9a0480c4b4c5d681db29f1ed": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-008.bin.gz",
+        "record_offset": 556271,
+        "record_bytes": 5407,
+        "record_sha256": "c3055679852a4a9eeba649fe9dea9ea1abf3a9dc42f4dbfe1e98d6526d318746",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:9a8d66e4d47f5883620328f9": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-008.bin.gz",
+        "record_offset": 717019,
+        "record_bytes": 226731,
+        "record_sha256": "5c79b82588ff5c8f3c1e6305e4c1bcd565b7e379203b95bc2c09322f30f18119",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:9c32f795ded5a622d82e1747": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-008.bin.gz",
+        "record_offset": 1604187,
+        "record_bytes": 8945,
+        "record_sha256": "52eae481824641ea380fc821a883ae47dc62ef32fbbfeb9e8deef12b85c1adf1",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:9da664cdf03e54a1fb51bedd": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-008.bin.gz",
+        "record_offset": 2275617,
+        "record_bytes": 10265,
+        "record_sha256": "6072b12ca2615509e784699f60d7a793126b3791e97ab8209ca4ac5b5c34680a",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:9f55709dbc841f8de21ad2a4": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-008.bin.gz",
+        "record_offset": 3009945,
+        "record_bytes": 5572,
+        "record_sha256": "1d65d0a6cca023ea21b825ac950f8faef25d8bba09fc734dc9e052541b5e5ee8",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:a2ab429254c050166cacc84a": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-008.bin.gz",
+        "record_offset": 4402369,
+        "record_bytes": 5668,
+        "record_sha256": "c17b32812cd43cb56d834784942d5a7ed27908225490479b4858203f281c3dd7",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:a6c052d5aee6c51965016445": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-008.bin.gz",
+        "record_offset": 6277516,
+        "record_bytes": 5652,
+        "record_sha256": "bbeb6c192c39c563fef7b040856322fdcd97838ba5dca852a6cf46c1a90461d7",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:a6e86c40ec59c947b410e894": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-008.bin.gz",
+        "record_offset": 6384325,
+        "record_bytes": 7898,
+        "record_sha256": "82b5ee279d5d9f7490632bfc6244b61025b1b9ec38dae37dc9c5963c3e57191d",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:a81eda40773aca73141f2e9d": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-008.bin.gz",
+        "record_offset": 6847018,
+        "record_bytes": 5994,
+        "record_sha256": "0a2de7c0286dec658a919fb452959e7face59394a0236025305eb0848cfafcda",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:abaa654c38a1dd033ecb240d": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+        "record_offset": 66703,
+        "record_bytes": 6569,
+        "record_sha256": "9d6fbb4a494a535b6196090ba836d1ab5c137794f77dc51c39aa4bb53efa28c5",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:ace6c71812cedf016434c9bb": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+        "record_offset": 664277,
+        "record_bytes": 5644,
+        "record_sha256": "b46e902a1edfab3da738288db067c3e647ab7c06414c9d9450a4705c19b469ed",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:add29839fa8045e3e038bd6a": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+        "record_offset": 1116304,
+        "record_bytes": 14675,
+        "record_sha256": "a2384605a9dc64b59c84c3c398cc492bb31b20b7189eb0e5531483e9037215b8",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:ae1845fecfd1ddb7941fcddf": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+        "record_offset": 1272644,
+        "record_bytes": 6555,
+        "record_sha256": "b0bef328177bf86db12818b473c3b4e5aaac573c77be806f281351ea94ad2230",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:b2b61743f711b6b36cd5234e": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+        "record_offset": 3290854,
+        "record_bytes": 5073,
+        "record_sha256": "0345f0e38a84d7a40a8169e8f0ce0cdfd836e0944aa77230d42cb6a2fa2e924a",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:b331cba283d9a80267d346a4": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+        "record_offset": 3554108,
+        "record_bytes": 11449,
+        "record_sha256": "605a7b4d82e49b12b9df6289e2c9fab47230f4459042615c86a9ead5d5484ea4",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:b367a34254ad6919ae55ddc5": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+        "record_offset": 3766112,
+        "record_bytes": 9805,
+        "record_sha256": "5da7f917aeb6b6c16e1a4555c6f6ba4ba125ed85feac869a46f944c08fde3630",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:b3ff466f7ba5dae0ef3facf0": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+        "record_offset": 4057619,
+        "record_bytes": 7970,
+        "record_sha256": "e659f5e3923aeaaf7e5d6f027201ffb15c8647fd8f98a8a4fd6567cf60bc7f0f",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:ba05cfa78618e1b53ed721f3": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+        "record_offset": 6553373,
+        "record_bytes": 5360,
+        "record_sha256": "79dffbd6786f463a65e12b3caa7e222b414b385d92c4bccce944f280097c748a",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:bd0212e52b41838c9babd3a7": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+        "record_offset": 7743734,
+        "record_bytes": 5428,
+        "record_sha256": "b133a4d3c7059e87ab0af21e132573239c22f85c74c1855c9e6e55b35824c01d",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:beaee0c9c6c117c12fe08aea": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+        "record_offset": 8334856,
+        "record_bytes": 5851,
+        "record_sha256": "fb957000fd5853ba4269c7cde654241684c15bd18ae575cb706d15cc861366d0",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:c0348079fc59827762ee0851": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "record_offset": 579308,
+        "record_bytes": 5861,
+        "record_sha256": "0b149f152f39c4985aa8c7bffee47d56f484b61b8a648591d0a7a43de426e89c",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:c18f1a00394c9241bc341122": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "record_offset": 1107701,
+        "record_bytes": 9139,
+        "record_sha256": "50db712dc51ef2be990915a7a9f059c7b2af5ea5719762c35cd5db26b6d97bba",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:c3caa88e893be0303f7cd239": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "record_offset": 2191058,
+        "record_bytes": 5467,
+        "record_sha256": "57f2aef294218beea77efe6add23b74d871c66bc1ae99e8ef1f7c376827fb871",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:c5718a496f9a7483448fd347": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "record_offset": 2884984,
+        "record_bytes": 27457,
+        "record_sha256": "def56bd596e3e0b5e63964202dbba34725ff8473dc218f833a24ef89b1396827",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:c80ce08f264b94870a013831": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "record_offset": 3948100,
+        "record_bytes": 14758,
+        "record_sha256": "08c22f9e8bc536012a640d8fd4527a049a03bb2f1c62283843feff8c4b2d025f",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:c98251a01d0cdb5555c41508": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "record_offset": 4553872,
+        "record_bytes": 5067,
+        "record_sha256": "2a64b7d646a6061fe95b6bf07400c5e3b3ffe31b988bd9e5399940937d514606",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:ca9bf08033fc0c68a6fcc527": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "record_offset": 4984624,
+        "record_bytes": 5466,
+        "record_sha256": "17f82877681c49ff119130303a3233d6615ef02939d31e782d45945289410ce5",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:cb5b57ee6c0e22d0670d950f": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "record_offset": 5371416,
+        "record_bytes": 6142,
+        "record_sha256": "c335c53095bd02355a12ab0ab09534ae79b5f32b12e2bdad35d317228fa67b5c",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:cc585007c02df55450a8c0e6": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "record_offset": 5744107,
+        "record_bytes": 31480,
+        "record_sha256": "6eeec174ae0fe61abcbfb39a6588f85837cbbc5fbbf7ee44845bc7315e02556a",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:cedafcb0f583a1d5aef9ea5a": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "record_offset": 6690858,
+        "record_bytes": 6822,
+        "record_sha256": "511c9966644b4ec1615c4b3a4b6ebea3a4be76effd2dc83b941c93c943e8e7ab",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:cffbc11b21f92ba76a71c242": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "record_offset": 7249680,
+        "record_bytes": 4891,
+        "record_sha256": "60d4d3b1d48eb39ba14637de721d8e06b813e7eec106f8f0dbcfb8aaf790c8a4",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:d160ed108f2c4f4388083057": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "record_offset": 7909820,
+        "record_bytes": 5345,
+        "record_sha256": "2f040a9e0be9ba1f63461510b6c1b1874de5079b405139b5990dc49ca885f8e0",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:d33458b85c35494d2d84e33a": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "record_offset": 474097,
+        "record_bytes": 4836,
+        "record_sha256": "e5d7f5f03b9a03397231df555b55680c6ffafa7a75c7f031d986c65e95b566a1",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:d6a4a0f2b2e112e9c7f2162a": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "record_offset": 2030118,
+        "record_bytes": 5219,
+        "record_sha256": "7a75ba20b752720a0d751deeaae794cbb5a073fe7ce763f6cd449bb2ab6fe373",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:d6f7626d3db174ea5c8c2f38": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "record_offset": 2157601,
+        "record_bytes": 6073,
+        "record_sha256": "ddcdec1b0f7e033259b676018b81c204c157eff834e050b062feef85ee61320e",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:d9003a062a45cd3d3a7c678d": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "record_offset": 2916490,
+        "record_bytes": 9807,
+        "record_sha256": "597a4c7c19dedc9f93a851654d98bba56991ec966bced41baff005679058b7a5",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:d9e43545da6a0958e56fa4bc": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "record_offset": 3313788,
+        "record_bytes": 5712,
+        "record_sha256": "3dea59ee1741bccdeacdfbb99a7d9f47dd43141dc62f875f7566de98e23d2354",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:db10df969303cd95848a8bce": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "record_offset": 3782079,
+        "record_bytes": 20793,
+        "record_sha256": "ed4323c1c1091b0172aeaadeee51a1f76fa7e9dc1608c8b003af06c0f88f4bec",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:db20a39eb743a33bc7b748cd": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "record_offset": 3838044,
+        "record_bytes": 4961,
+        "record_sha256": "742de11ae5afe972fe2cc11a5193037e726e6dca87c9449e19f6be7ca23b37d3",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:db366a5a92a699f3ac2d4f82": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "record_offset": 3870196,
+        "record_bytes": 8555,
+        "record_sha256": "88f34a1ddea6b370aec21a4822f2e4cda171087a79104ab7b00eac37c8b7a330",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:decc865f75c35dd9677eadba": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "record_offset": 5345256,
+        "record_bytes": 6621,
+        "record_sha256": "8c45f681a13e2efaf58ee775be2382169743ed74f30a3c0816c7272b87dba121",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:df39b59de24b2acba4ab46ce": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "record_offset": 5517409,
+        "record_bytes": 5476,
+        "record_sha256": "2fb148c00b6e6c519cd2d491a8b54652a68fb16173f5e6b0a134dffcda4fe56d",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:e05a1dedf1d4380ef3ab25f5": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "record_offset": 6152846,
+        "record_bytes": 44720,
+        "record_sha256": "4889e4b8634dbf62a383907942ac3b489c58b19952e98d67e5491ae857486c63",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:e068461d734acfe6f6054d5c": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "record_offset": 6233271,
+        "record_bytes": 5554,
+        "record_sha256": "8ad0e11c5477359bfba75327417654a941671dd50b2b3b329a01fec844dcb9ba",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:e0fe9086a7b097f01b7a39e6": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "record_offset": 6487042,
+        "record_bytes": 40291,
+        "record_sha256": "1c33503914b1b9fd10ac35968d1759d96e5ae69ba28f1bcfba159947973b39bf",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:e30ddaff5c0a9f0b944f24b3": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "record_offset": 7381711,
+        "record_bytes": 7762,
+        "record_sha256": "76ea310823c18138a902e90b57791f9a09856c1f579917b500b67b3fefa633d3",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:e5628a22f1a98715662750ec": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "record_offset": 8340236,
+        "record_bytes": 9598,
+        "record_sha256": "333710b55b4d7b1db99580c4d8726e6ff32455924f6585b03ebc5e45dea2bd15",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:e609f40d8cd0960856e5a6d7": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "record_offset": 231933,
+        "record_bytes": 18211,
+        "record_sha256": "e9c373f252d68b884d7b62c529c175bc3721389ca353b31a115f7614a0c491e1",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:e8242befafb730d529401142": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "record_offset": 1059486,
+        "record_bytes": 8529,
+        "record_sha256": "b8a5a495649a2620cc2714e305ed4d34c76478411dd6bbad15a105b40976c487",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:e95c345742d97ed6dacd92b6": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "record_offset": 1515183,
+        "record_bytes": 5125,
+        "record_sha256": "e30c9c3eaa74420d1e390a97b8c75555563f0ce9057367211644afbb0d4587f8",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:ea930ecf27688f4dcc3f2404": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "record_offset": 2037986,
+        "record_bytes": 9911,
+        "record_sha256": "992d03a426d44400d2f8d89e98a6c03ca51d1ac2716730b959f29f2372882f1a",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:ecb477ec13cb56a27408f721": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "record_offset": 3002309,
+        "record_bytes": 4861,
+        "record_sha256": "202dafb8f78e625eec79df7540a9e1db517f40c7b6b8afeee069668f616c3338",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:ee829a8375161e78531cb146": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "record_offset": 3735181,
+        "record_bytes": 9756,
+        "record_sha256": "d699464651637953fcde382e96fd7bd6259f29fdbb20adb97700e7215d8dc993",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:eefe1dacfd632702687fe0ba": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "record_offset": 3926963,
+        "record_bytes": 4890,
+        "record_sha256": "a7d71adb0f7ec841845b056b1786f606b75b91a788ce3a08d549f6f0d82a4a4c",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:f5850d20d534686bd134c940": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "record_offset": 6669050,
+        "record_bytes": 4989,
+        "record_sha256": "e55b12f4f946bd81eb91aadfbd141b7cf877a04aa7834b130cc428eb495b2337",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:f66204a7cfd2a4bc7b6785a9": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "record_offset": 6974230,
+        "record_bytes": 12648,
+        "record_sha256": "e3510da6baa8c69535341011728c62d157a1c5966b63059d2adf395cdefc5a79",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:f6df02a553657965b12b8802": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "record_offset": 7214650,
+        "record_bytes": 5481,
+        "record_sha256": "60bb5361156fdd025bf8cd42705792982827a3741e3926f9c1d35a0ad1b4e250",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:f8a8bc1e498bc40b86556ef3": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "record_offset": 7872718,
+        "record_bytes": 28427,
+        "record_sha256": "d859528002435136b6a37411b2158fa0f5c3105aaf1dd339157be8e6d93a5f0d",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:f8c7c28763a71ea1a06cf113": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "record_offset": 7931639,
+        "record_bytes": 6374,
+        "record_sha256": "d7ff6d17cedc4ee10df5e29ae531bc22b4d74eada7efb2e256549a663f52b1da",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:f97370ab5c3a0fbf298739f9": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "record_offset": 8126654,
+        "record_bytes": 5484,
+        "record_sha256": "7abd241de6d84bd18b38681fc73e1381a4758c4fdbc4175145f709265a59cd42",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:f98f28fa572502061052f6cd": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "record_offset": 8174757,
+        "record_bytes": 6203,
+        "record_sha256": "ed90ebad3b8820078ee775544d80e7a13949c9149fb863a00b0f178e72454844",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:fba60e01e74043002a73ec37": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-013.bin.gz",
+        "record_offset": 571885,
+        "record_bytes": 4844,
+        "record_sha256": "822ffdff7f1d92dd2270cfb735d6af10617fb86d6bca0f5d7901ed602b960c6d",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:fcf7056abe79e015405eed27": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-013.bin.gz",
+        "record_offset": 1008379,
+        "record_bytes": 6002,
+        "record_sha256": "abfd251b455c8c43977f97dbf5bd23a1a640b9b77411e9c489af2ec5b0bf75ff",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      },
+      "gap-source-batch:fdc0431b9fd0c96d4e0edc18": {
+        "version": 2,
+        "kind": "gzip-jsonl-record",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-013.bin.gz",
+        "record_offset": 1325666,
+        "record_bytes": 5469,
+        "record_sha256": "17617c4bbff0aa3a334847640bcc17fdb51a48ca4c8ea55a8f81f245e183e403",
+        "commit": "2a2adb9956810dfc1a2d1d3829e116d678cd971b"
+      }
+    },
+    "version": 2
+  },
+  "sources": [
+    {
+      "id": "gshhg-2.3.7",
+      "url": "https://github.com/GenericMappingTools/gshhg-gmt",
+      "role": "Retained native source records used by the original physical comparison",
+      "vintage": "GSHHG 2.3.7 release 2017-06-15; per-feature observation dates heterogeneous and unknown",
+      "retrieved_at": "2026-10-09",
+      "license": {
+        "status": "unknown",
+        "terms": "Terms for the original source files were not re-adjudicated in this packet; no full source archive is redistributed."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "The original source query rows, exact source-record hashes, decoded pointset hashes, offsets and report descriptors are embedded in the retained four-case physical-evidence JSON. The complete original sources-000.jsonl.gz was available in the preserved local cache for the prior verified retrieval; public reproduction should restore from the pinned report/transport descriptors.",
+      "limit": "The release date does not establish per-feature observation dates, positional accuracy or present shoreline truth.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "geoboundaries-usa-adm2-2018",
+      "url": "https://www.geoboundaries.org/",
+      "role": "Recorded USA ADM2 Counties target and source metadata",
+      "vintage": "geoBoundaries gbOpen release tag 9469f09; 2018 represented-year claim; catalog source update 2023-01-19; catalog build 2023-12-12",
+      "retrieved_at": "2026-10-09",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public Domain according to the retained administrative-source catalog; this packet adds no legal conclusion."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Read the pinned data/geography/part-25.json and data/administrative-sources.json descriptors at the baseline commit; exact target id, current Atlas feature hash and route rows are retained in the four-case evidence JSON.",
+      "limit": "Metadata and unique recorded subject establish an Atlas administrative binding only; they do not determine physical land/water or government status for these fragments. Product variant equivalence to a freshly retrieved upstream feature was not re-tested.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "alaska-11-source-relative-precedent",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/b2a6b9e5b7e0cfe54f79ba174b51925c67ea6e39/coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/facts.json",
+      "role": "Previously accepted bounded Alaska 11 source-relative rule profile and limits",
+      "vintage": "Merged PR #1561; exact 13-case measurement roster; 11 source-compatible and 2 exceptions",
+      "retrieved_at": "2026-10-09",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository evidence artifact; no separate licensing assessment."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Read the immutable commit and exact path named in the URL; the selected facts are also projection-bound in the decision artifact.",
+      "limit": "Exact case roster excludes the four Aleutians West IDs; only a bounded rule-extension proposal can reuse its semantics.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "noaa-chart-source-context",
+      "url": "https://www.nauticalcharts.noaa.gov/learn/chart-source-data.html",
+      "role": "General source context for possible future case-specific shoreline/hydrographic authority",
+      "vintage": "Accessed 2026-10-09; no exact case record retrieved",
+      "retrieved_at": "2026-10-09",
+      "license": {
+        "status": "unknown",
+        "terms": "No case-specific NOAA source file retained or redistributed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Obtain an exact dated NOAA/USGS chart, shoreline, rock or hydrographic source record for each footprint; retain its source edition, date, positional accuracy and exact feature relationship.",
+      "limit": "General web page is not evidence for any of the four component footprints.",
+      "temporal_status": "unknown"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/north-america-gap-batch-20261009/alaska-west-four-live-issue-readback.json",
+      "bytes": 26436,
+      "sha256": "fc25d5a8d9564c7101aca5a5a001011d9e20ab16c2e2c459409a091ffd64e226",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/north-america-gap-batch-20261009/alaska-west-four-source-physical-evidence.json",
+      "bytes": 241474,
+      "sha256": "ee8b5fe2531b6cf2956392d7597053916d6221b361aeee1f64ed1c615f11966c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/north-america-gap-batch-20261009/alaska-west-four-case-source-rule-and-physical-decision.json",
+      "bytes": 48502,
+      "sha256": "b13aee769a91cdcc7e2db0716242555d886fd5fa8026d4bd8d99adfd7a200c0b",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "retained-evidence-comparison",
+      "kind": "source",
+      "description": "Project the exact retained four-case physical, native-query, administrative-route and source-fitness records; compare source-relative predicate/profile and exact case IDs against the merged Alaska 11 source-rule artifact. No scientific source, spatial or native operation was rerun.",
+      "software": "Python 3.8 JSON/byte projection; Git and SHA-256; no geometry software",
+      "units": "Source records, record hashes, source-relative status and square metres as reported by the pinned physical product."
+    }
+  ],
+  "metrics": [
+    {
+      "id": "mapped-land-support-18bde5cd",
+      "value": 1220.092864610161,
+      "unit": "m² of retained GSHHG-relative mapped-land support (not physical land area)",
+      "vintage": "archived",
+      "input_sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+      "evaluation_commit": "104091cfecd9c83a53f3e6e62f95b0a0c8074351"
+    },
+    {
+      "id": "mapped-land-support-6941aa6f",
+      "value": 60037.24628970157,
+      "unit": "m² of retained GSHHG-relative mapped-land support (not physical land area)",
+      "vintage": "archived",
+      "input_sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+      "evaluation_commit": "104091cfecd9c83a53f3e6e62f95b0a0c8074351"
+    },
+    {
+      "id": "mapped-land-support-ac95cb3b",
+      "value": 16971.940633394315,
+      "unit": "m² of retained GSHHG-relative mapped-land support (not physical land area)",
+      "vintage": "archived",
+      "input_sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+      "evaluation_commit": "104091cfecd9c83a53f3e6e62f95b0a0c8074351"
+    },
+    {
+      "id": "mapped-land-support-baf74325",
+      "value": 74865.1460036213,
+      "unit": "m² of retained GSHHG-relative mapped-land support (not physical land area)",
+      "vintage": "archived",
+      "input_sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+      "evaluation_commit": "104091cfecd9c83a53f3e6e62f95b0a0c8074351"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "mapped-land-support-18bde5cd",
+      "path": "research/geography/north-america-gap-batch-20261009/alaska-west-four-case-source-rule-and-physical-decision.json",
+      "json_pointer": "/cases/0/source_relative_evidence/support_areas_m2/mapped_land_support"
+    },
+    {
+      "metric_id": "mapped-land-support-6941aa6f",
+      "path": "research/geography/north-america-gap-batch-20261009/alaska-west-four-case-source-rule-and-physical-decision.json",
+      "json_pointer": "/cases/1/source_relative_evidence/support_areas_m2/mapped_land_support"
+    },
+    {
+      "metric_id": "mapped-land-support-ac95cb3b",
+      "path": "research/geography/north-america-gap-batch-20261009/alaska-west-four-case-source-rule-and-physical-decision.json",
+      "json_pointer": "/cases/2/source_relative_evidence/support_areas_m2/mapped_land_support"
+    },
+    {
+      "metric_id": "mapped-land-support-baf74325",
+      "path": "research/geography/north-america-gap-batch-20261009/alaska-west-four-case-source-rule-and-physical-decision.json",
+      "json_pointer": "/cases/3/source_relative_evidence/support_areas_m2/mapped_land_support"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "mapped-land-support-18bde5cd",
+      "value": 1220.092864610161,
+      "unit": "m² of retained GSHHG-relative mapped-land support (not physical land area)"
+    },
+    {
+      "metric_id": "mapped-land-support-6941aa6f",
+      "value": 60037.24628970157,
+      "unit": "m² of retained GSHHG-relative mapped-land support (not physical land area)"
+    },
+    {
+      "metric_id": "mapped-land-support-ac95cb3b",
+      "value": 16971.940633394315,
+      "unit": "m² of retained GSHHG-relative mapped-land support (not physical land area)"
+    },
+    {
+      "metric_id": "mapped-land-support-baf74325",
+      "value": 74865.1460036213,
+      "unit": "m² of retained GSHHG-relative mapped-land support (not physical land area)"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The four retained comparison rows support only GSHHG-relative mapped-land support and one compatible 2018 USA ADM2 Counties target each.",
+      "status": "supported",
+      "source_ids": [
+        "gshhg-2.3.7",
+        "geoboundaries-usa-adm2-2018"
+      ]
+    },
+    {
+      "text": "The existing Alaska 11 rule uses a matching source profile and predicates but its exact approved roster excludes these four; a bounded extension awaits independent review. Current physical land/water, observation date/accuracy, cause and repair authority remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "gshhg-2.3.7",
+        "geoboundaries-usa-adm2-2018",
+        "alaska-11-source-relative-precedent",
+        "noaa-chart-source-context"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node scripts/evidence-quality.mjs research/geography/north-america-gap-batch-20261009/evidence-quality.json",
+    "No source, GIS, geometry, native, or global replay was run; the case decision is a projection of the pinned retained evidence."
+  ]
+}

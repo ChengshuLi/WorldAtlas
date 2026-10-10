@@ -1,0 +1,534 @@
+{
+  "captured_at": "2026-10-09T23:45:34.078433+00:00",
+  "issues": [
+    {
+      "active_claims": [],
+      "body_sha256": "ae1838d23b85419d9bd4a44b7f5a65a3482f2a8f42dc47152c34b9527cdaf9a6",
+      "comments_count": 11,
+      "comments_sha256": "be14c49ab7426c059e622f5b0ee837b5833259fcf20b9790eb8b770431e55593",
+      "current_lease": {
+        "active": false,
+        "branch": "geography/wna-486-20261003-d7aeefc5f37a450c",
+        "claim_id": "ac31df89-f6c9-453b-b036-d1ea32d6881d",
+        "claimed_at": "2026-10-03T13:00:17.526Z",
+        "comment_id": 5969407051,
+        "expires_at": "2026-10-04T13:00:17.526Z",
+        "issue_number": 486,
+        "live_work": false,
+        "max_prs": 2,
+        "mode": "geography",
+        "owned_paths": [
+          "data/regional-review/regional-review-93f8f3bee8e205be/"
+        ],
+        "released_at": "2026-10-03T13:45:09.373Z",
+        "request_id": "c465a8f0-4e10-4955-a717-9d982e8befb0",
+        "updated_at": "2026-10-03T13:00:17.526Z",
+        "version": 1,
+        "worker_id": "codex-20261003-wna-486-d7aeefc5f37a450c8247ddbe8df5ffac"
+      },
+      "four_case_ids_present_before_this_handoff": [],
+      "labels": [
+        "kind:work-item",
+        "status:ready",
+        "type:geography"
+      ],
+      "number": 486,
+      "published_component_id_count_excluding_this_handoff": 0,
+      "state": "CLOSED",
+      "title": "Review Western North America interior batch 2: Mountain, Pacific",
+      "updated_at": "2026-10-04T08:57:54Z",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/486"
+    },
+    {
+      "active_claims": [],
+      "body_sha256": "5b264bbb6e08365dc58dc0ffc9e58b8d4ba35a0af5328e8c0ceb80350be24e8c",
+      "comments_count": 123,
+      "comments_sha256": "91437629fabdd6b1d51d1755149d14451c0622e93e7dcaf754adafdd2f0ae0a5",
+      "current_lease": null,
+      "four_case_ids_present_before_this_handoff": [],
+      "labels": [
+        "type:engineering",
+        "kind:umbrella"
+      ],
+      "number": 1202,
+      "published_component_id_count_excluding_this_handoff": 15,
+      "state": "OPEN",
+      "title": "Resolve geographic coverage gaps globally: inventory, classification, repairs and prevention",
+      "updated_at": "2026-10-09T23:24:40Z",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1202"
+    },
+    {
+      "active_claims": [],
+      "body_sha256": "71b4f70c3e70e7c150042a9dd6b12890259065400c882de8dbf4773bb0d3cad7",
+      "comments_count": 9,
+      "comments_sha256": "b2220d39ee2b1a5151f4394c6ef2bae300c8dc09ff7ac25826d301fa7283cf38",
+      "current_lease": {
+        "active": false,
+        "branch": "geography/canada-bc-gap-source-fitness-20261007",
+        "claim_id": "81075317-f55e-45d0-895b-76ce83c62444",
+        "claimed_at": "2026-10-07T10:01:12.547Z",
+        "comment_id": 6035094011,
+        "expires_at": "2026-10-08T10:01:12.547Z",
+        "issue_number": 1362,
+        "live_work": false,
+        "max_prs": 1,
+        "mode": "geography",
+        "owned_paths": [
+          "research/geography/canada-bc-gap-source-fitness-20261007/"
+        ],
+        "released_at": "2026-10-07T11:18:29.221Z",
+        "request_id": "fdb86b74-c577-4759-b288-23db9ec5c3ee",
+        "updated_at": "2026-10-07T10:01:12.547Z",
+        "version": 1,
+        "worker_id": "01a11522-1da9-75a1-8ecb-765bae224f1c"
+      },
+      "four_case_ids_present_before_this_handoff": [],
+      "labels": [
+        "kind:work-item",
+        "status:ready",
+        "type:geography"
+      ],
+      "number": 1362,
+      "published_component_id_count_excluding_this_handoff": 43,
+      "state": "CLOSED",
+      "title": "Assess source fitness for the complete 43-component British Columbia gap family",
+      "updated_at": "2026-10-07T11:18:31Z",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1362"
+    },
+    {
+      "active_claims": [],
+      "body_sha256": "000b6c677cf8cef26425041f27f3d4f85185cf7622c2382eaf5554c06d7a15b1",
+      "comments_count": 6,
+      "comments_sha256": "970734ed5cee3edf4f1f2667a811b236b66ec64bbf3c40e61af044d78c3987b4",
+      "current_lease": {
+        "active": false,
+        "branch": "geography/usa31-gap-family-source-fitness-20261007",
+        "claim_id": "ebb0dbbd-c2a5-4baf-8625-3a82030ce801",
+        "claimed_at": "2026-10-07T10:36:17.012Z",
+        "comment_id": 6036142666,
+        "expires_at": "2026-10-08T10:36:17.012Z",
+        "issue_number": 1377,
+        "live_work": false,
+        "max_prs": 1,
+        "mode": "geography",
+        "owned_paths": [
+          "research/geography/usa31-gap-family-source-fitness-20261007/"
+        ],
+        "released_at": "2026-10-07T11:53:55.247Z",
+        "request_id": "7aabef93-ebf3-4dee-8c5a-ef640c3ce401",
+        "updated_at": "2026-10-07T10:36:17.012Z",
+        "version": 1,
+        "worker_id": "01a11550-a19b-7330-955c-e56e90985bf3"
+      },
+      "four_case_ids_present_before_this_handoff": [],
+      "labels": [
+        "kind:work-item",
+        "status:ready",
+        "type:geography"
+      ],
+      "number": 1377,
+      "published_component_id_count_excluding_this_handoff": 31,
+      "state": "CLOSED",
+      "title": "Assess source fitness for the complete 31-component USA ADM2 gap family",
+      "updated_at": "2026-10-07T11:53:57Z",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1377"
+    },
+    {
+      "active_claims": [
+        {
+          "active": true,
+          "branch": "engineering/complete-replay-operand-restoration-20261007",
+          "claim_id": "67512015-4d03-458f-a2fb-72009062210b",
+          "claimed_at": "2026-10-07T12:02:24.353Z",
+          "comment_id": 6037481089,
+          "expires_at": "2026-10-10T10:43:47.272Z",
+          "issue_number": 1394,
+          "live_work": false,
+          "max_prs": 2,
+          "mode": "engineering",
+          "request_id": "1f5d53fe-c8d5-464d-9a7a-bf6f4670ec44",
+          "updated_at": "2026-10-09T10:43:47.272Z",
+          "version": 1,
+          "worker_id": "01a10893-2a57-72e0-aa08-5c36088d5206"
+        }
+      ],
+      "body_sha256": "ffde9c04ae41ff587e06e010885078cf18987290cf6816b0843fe0f773ba2685",
+      "comments_count": 33,
+      "comments_sha256": "3d8e36d830f4987f35b1067d81540db3a27b0b67db50c326032811eab638a675",
+      "current_lease": {
+        "active": true,
+        "branch": "engineering/complete-replay-operand-restoration-20261007",
+        "claim_id": "67512015-4d03-458f-a2fb-72009062210b",
+        "claimed_at": "2026-10-07T12:02:24.353Z",
+        "comment_id": 6037481089,
+        "expires_at": "2026-10-10T10:43:47.272Z",
+        "issue_number": 1394,
+        "live_work": false,
+        "max_prs": 2,
+        "mode": "engineering",
+        "request_id": "1f5d53fe-c8d5-464d-9a7a-bf6f4670ec44",
+        "updated_at": "2026-10-09T10:43:47.272Z",
+        "version": 1,
+        "worker_id": "01a10893-2a57-72e0-aa08-5c36088d5206"
+      },
+      "four_case_ids_present_before_this_handoff": [],
+      "labels": [
+        "type:engineering",
+        "kind:work-item",
+        "status:ready",
+        "status:claimed",
+        "priority:urgent"
+      ],
+      "number": 1394,
+      "published_component_id_count_excluding_this_handoff": 0,
+      "state": "OPEN",
+      "title": "Recover original source operands for all 1,294 global replay mismatches",
+      "updated_at": "2026-10-09T19:36:23Z",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1394"
+    },
+    {
+      "active_claims": [],
+      "body_sha256": "eb6d1a372d5cafe1358e7bc66e0cab8423af9bfccd33c0cbfe0b8f684cb85629",
+      "comments_count": 8,
+      "comments_sha256": "e860c34cc735bf629c976da8b1e8513b0334b2e64f37ef1797e472cd822da30c",
+      "current_lease": {
+        "active": false,
+        "branch": "geography/alaska-thirteen-source-fitness-20261008-r1",
+        "claim_id": "2efb7bfe-7a56-4344-8290-e5d1786c67e3",
+        "claimed_at": "2026-10-08T09:19:02.480Z",
+        "comment_id": 6056728619,
+        "expires_at": "2026-10-09T09:19:02.480Z",
+        "issue_number": 1488,
+        "live_work": false,
+        "max_prs": 1,
+        "mode": "geography",
+        "owned_paths": [
+          "research/geography/alaska-thirteen-source-fitness-20261008/"
+        ],
+        "released_at": "2026-10-08T18:20:25.090Z",
+        "request_id": "42698d3c-082b-46be-9ac0-70170e8bf4c6",
+        "updated_at": "2026-10-08T09:19:02.480Z",
+        "version": 1,
+        "worker_id": "01a112c2-1d0f-7bf2-a50e-74956219b9c1"
+      },
+      "four_case_ids_present_before_this_handoff": [],
+      "labels": [
+        "kind:work-item",
+        "status:ready",
+        "type:geography"
+      ],
+      "number": 1488,
+      "published_component_id_count_excluding_this_handoff": 13,
+      "state": "CLOSED",
+      "title": "Assess native physical-source fitness for 13 Alaska gap components",
+      "updated_at": "2026-10-09T19:22:00Z",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1488"
+    },
+    {
+      "active_claims": [],
+      "body_sha256": "d0a8319d851193072505adbb9c9a34600d6821156790b428fb891af1962f9160",
+      "comments_count": 8,
+      "comments_sha256": "43a6c39dce908e5f1958698a73be24925880c7b403a54c4520a4030baa332c6c",
+      "current_lease": {
+        "active": false,
+        "branch": "geography/alaska-thirteen-geometry-measurement-20261008-r1",
+        "claim_id": "9e4eacb4-e70c-44be-ad8f-8638770a95f3",
+        "claimed_at": "2026-10-08T18:59:04.035Z",
+        "comment_id": 6066954946,
+        "expires_at": "2026-10-09T18:59:04.035Z",
+        "issue_number": 1508,
+        "live_work": false,
+        "max_prs": 1,
+        "mode": "geography",
+        "owned_paths": [
+          "research/geography/alaska-thirteen-geometry-measurement-20261008/"
+        ],
+        "released_at": "2026-10-08T21:07:18.524Z",
+        "request_id": "c67e6181-6ecd-4c92-a2d8-dbe18c857cf7",
+        "updated_at": "2026-10-08T18:59:04.035Z",
+        "version": 1,
+        "worker_id": "01a112c2-1d0f-7bf2-a50e-74956219b9c1"
+      },
+      "four_case_ids_present_before_this_handoff": [],
+      "labels": [
+        "kind:work-item",
+        "status:ready",
+        "type:geography",
+        "urgent",
+        "follow-up"
+      ],
+      "number": 1508,
+      "published_component_id_count_excluding_this_handoff": 13,
+      "state": "CLOSED",
+      "title": "Measure 13 Alaska candidate components against county and native coastline geometry",
+      "updated_at": "2026-10-08T21:07:21Z",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1508"
+    },
+    {
+      "active_claims": [],
+      "body_sha256": "c14eab89b92f9e724e95c2ecb59f5da769b86d2b7badb98a1f476fb4d5bb68d5",
+      "comments_count": 1,
+      "comments_sha256": "1bd4b5db0770ca4e3c11a0c19eb7bcd6a9401f53c2fba864ca4576a0692e9328",
+      "current_lease": null,
+      "four_case_ids_present_before_this_handoff": [],
+      "labels": [
+        "bug",
+        "type:engineering",
+        "kind:work-item",
+        "status:ready",
+        "urgent",
+        "follow-up"
+      ],
+      "number": 1620,
+      "published_component_id_count_excluding_this_handoff": 13,
+      "state": "OPEN",
+      "title": "Bound complete Alaska #1495 source-fitness reproduction before input reads",
+      "updated_at": "2026-10-09T19:20:48Z",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1620"
+    },
+    {
+      "active_claims": [
+        {
+          "active": true,
+          "branch": "geography/alaska-west-four-source-custody-20261009",
+          "claim_id": "c97ae885-ce0f-4aa1-8118-3ab89114cb33",
+          "claimed_at": "2026-10-09T23:32:47.464Z",
+          "comment_id": 6089058140,
+          "expires_at": "2026-10-10T23:32:47.464Z",
+          "issue_number": 1630,
+          "live_work": false,
+          "max_prs": 1,
+          "mode": "geography",
+          "owned_paths": [
+            "research/geography/north-america-gap-batch-20261009/"
+          ],
+          "request_id": "f0d2da8f-48d4-4d9d-8a9f-cdbf78703d67",
+          "updated_at": "2026-10-09T23:32:47.464Z",
+          "version": 1,
+          "worker_id": "01a112c2-1d0f-7bf2-a50e-74956219b9c1"
+        }
+      ],
+      "body_sha256": "32bbe486f582809b94b2bd6207ba78bc70b1d97d583ca7df68308b809ad69d48",
+      "comments_count": 9,
+      "comments_sha256": "8548d304bcc2c1bcd2fff68e52898b36ac26c99a21d127034a896f16f2717770",
+      "current_lease": {
+        "active": true,
+        "branch": "geography/alaska-west-four-source-custody-20261009",
+        "claim_id": "c97ae885-ce0f-4aa1-8118-3ab89114cb33",
+        "claimed_at": "2026-10-09T23:32:47.464Z",
+        "comment_id": 6089058140,
+        "expires_at": "2026-10-10T23:32:47.464Z",
+        "issue_number": 1630,
+        "live_work": false,
+        "max_prs": 1,
+        "mode": "geography",
+        "owned_paths": [
+          "research/geography/north-america-gap-batch-20261009/"
+        ],
+        "request_id": "f0d2da8f-48d4-4d9d-8a9f-cdbf78703d67",
+        "updated_at": "2026-10-09T23:32:47.464Z",
+        "version": 1,
+        "worker_id": "01a112c2-1d0f-7bf2-a50e-74956219b9c1"
+      },
+      "four_case_ids_present_before_this_handoff": [],
+      "labels": [
+        "kind:work-item",
+        "status:ready",
+        "status:claimed",
+        "type:geography"
+      ],
+      "number": 1630,
+      "published_component_id_count_excluding_this_handoff": 5,
+      "state": "OPEN",
+      "title": "[GEO5] Reconcile complete North America operational gap batch",
+      "updated_at": "2026-10-09T23:44:45Z",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1630"
+    }
+  ],
+  "limits": [
+    "Public issue text, comments, and merged source-PR diffs were checked. Absence from public text does not establish absence from private working files.",
+    "Closed #486 describes Alaska physical-ecoregion portions but publishes no IDs for these four; relationship remains unknown.",
+    "#1394 is open with an active engineering claim for broader source-operand recovery; no exact roster overlap is published, so relationship remains unknown.",
+    "The four exact IDs now appear in this handoff comment on #1630. The separate pre-handoff readback retains the prior public-roster overlap result.",
+    "#1630 full-batch scope and #1202 umbrella scope remain unchanged."
+  ],
+  "pre_handoff_readback": {
+    "bytes": 36563,
+    "commit": "c02598f7",
+    "path": "research/geography/north-america-gap-batch-20261009/alaska-west-four-live-issue-readback.json",
+    "result": "all four exact IDs absent from the previously published issue/PR text captured in that readback",
+    "sha256": "84865863821d0d731f1be9aa35416c708efe4cebba50102e2e7d0b92bc257ea7"
+  },
+  "pull_requests": [
+    {
+      "diff_sha256": "ca0c466a908f4f75cbf20edf2e44fca55b4994818ff9e8497395d774b040a45b",
+      "file_count": 24,
+      "four_case_ids_present": [],
+      "merge_commit": "745cc86a5e1e4d9917730bad0b5a7a031de99ceb",
+      "merged_at": "2026-10-07T11:16:56Z",
+      "number": 1378,
+      "published_component_id_count": 43,
+      "published_component_ids": [
+        "physical-component:061346349ee4368f73143bfab79ebe708f5a277340f85d30f06db4ca8217b9a6",
+        "physical-component:0743ef078bbb50edae671a5925c6ba84670b2ea44edbe597b1023f13bddbb4f1",
+        "physical-component:09dcbe1acbf4ca618c80e365b8ac1bec605d4247b9028766962f14f08170dcf7",
+        "physical-component:0bcf0d3040d185b26b8ef0afd956b50685effa42483a8eaae4f3eca0b6b8dd71",
+        "physical-component:0c2f986e2aa06f893c62acc77014f5439e62fc633dbcf92ca9a3af1cd2fe7fd2",
+        "physical-component:1626dacd101b7d7bd055c7aab2b7ba78c1fe1f7095a193c539fdcd16189c5ba1",
+        "physical-component:20b882f1c7cfa4ae421d8fc6d9dcf81d8a9b1be484a6a03826723fb04aedd7b9",
+        "physical-component:299447ff4b162755c9ef6eca1542e70b5f644364597ad2b9ecd80fb3e1958b5d",
+        "physical-component:36c45387da8391bdf55df4732217e5c94243ebe8a31c3993bd3af99e06d9cf8b",
+        "physical-component:389340d085af249f7b7a85f32a55bd565f8216a7c04da4eb5eb38f50ea57dc43",
+        "physical-component:3c4b61ba491c0234251d13c5ac129ab3f091577732b02f04b977e009f2ee8d86",
+        "physical-component:3e84f2326adf27699a5080d97cce3f045b204fe97583fe65032277a407a649f7",
+        "physical-component:4ea6ac9536138502404025c5da7b81c471b77a55bf67a82a9d1bc975a765aa02",
+        "physical-component:5b0d6068e066ef989f2e1bf2c4eb8ee25fdea9a55a23adb4764cea323aa8af33",
+        "physical-component:5d5e9c2a710a51a04e5d5f9b1a0a75cffa8377f2a6f3231e15495ae76af41f0b",
+        "physical-component:64fb6fa3555012584942bdfeda8c66b7d1105d1ad9c86c6730cd71cb47d10058",
+        "physical-component:64fb7a9dddb23a2b2234f31c6e0690a2c8ed1179762f836fa64181ab02e94381",
+        "physical-component:6661138d27725b966e388fc10dd5755950232c5487e7a96c09f431d5be19160c",
+        "physical-component:6c45b20b999791ebb62ad1bdc569cc0e5a95c255aa7c84b6c66a08674aa430a0",
+        "physical-component:6c76c0ffbcfc28a5b06072aac859b4aa6b5f67e56a3fdbef0b462133cc006b03",
+        "physical-component:6dafe6710e12c6887ad2208928148fdab860378a96ab4b370216bec801474b45",
+        "physical-component:7218f2b59634a6d8be989cb60491f71388ac0e909799f70395d8e5f42fdf5a89",
+        "physical-component:7da3af5653dcf6e61b3c09104d39cf03289966c1dad69e6d94858e4a0c4ccadb",
+        "physical-component:821db28f686ae89887ff1140c2bb1744d1d5d74b8dc57c85f98ced3778553270",
+        "physical-component:822050d2ec469214d0604f8ea17aa636f7588ebbe4d27b44972f4308d0a11ea3",
+        "physical-component:8532bba41938e4fabea832de64a707f60835b234322936f4dd2086beb1eb256d",
+        "physical-component:85a34296175bd8445387803f1bb4157956e05a2a27b24bc3b74de6008378e8a5",
+        "physical-component:86f5c507aa78d1715c183c2793d527bb911a4302797de4bbc8f79204c549f9f4",
+        "physical-component:8707f71c902c0ec125ab6dd1426295dec275a0d054cd8ffcfb43ae79c647a19c",
+        "physical-component:93cc6322cd83e64cfb2ea63b5adb87f4e280d06c6f262bb57a0459fd0e8c28b0",
+        "physical-component:9b68f3dddb234787f736f6bf6300e80b52a2990c4a6625e358452476b56c777c",
+        "physical-component:a2e7e61580060877e2d587398675386b0d7bcbcab0e542b87c75d88285a94890",
+        "physical-component:a9c196dbd5aaddcfe2d536509d999e1d112520fc4112d341799187700a67bb10",
+        "physical-component:acc9bd74d9bc04c7141f125764e113186e2568a55240cb1983241678b9390ee1",
+        "physical-component:b955fe31c8ba191ef1c5a0cf2c4fee24e4eb1c35164fd1255ff5287cb1031a2b",
+        "physical-component:cc3b87d4d31ecdccbf605f8f5747e1befd6befd2d16fccb1fc689f5d0ed26399",
+        "physical-component:ddab05e70b66b84cf7273273b7415c5d9a22eb6f44bdd6a7b8f3302183151f47",
+        "physical-component:ded57a59bb1f6a5fea45c2818c615f4e3b367e57a91cbe1d9297820a75f47b31",
+        "physical-component:df4ddb5b8e22362aa21ebbc944576047a0748bd7de6c3b7df3f670113333888d",
+        "physical-component:ea26bb4e9b07eca3f3f7b78dd5f6be3a3680fcfff8696cb6daf7dbe5582d865b",
+        "physical-component:ea2cded5b0a6bb4fc7f331ba542c2e6df701caded23fa76ee68d9c6008ba0cd5",
+        "physical-component:ef375c1043b57fad20068697d8daf0cefe392f6fb5667fc3fe5f02f16e26c7e6",
+        "physical-component:fd47d0cfd13bc0aaceaf91e3f87aa1e5d48c0b8819219a717c15b8c519e87c0e"
+      ],
+      "state": "MERGED",
+      "title": "Assess complete BC gap-family source fitness",
+      "updated_at": "2026-10-08T21:28:58Z",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/pull/1378"
+    },
+    {
+      "diff_sha256": "a159ba420f38ebec7e2edf629ac6732e4fe826662e4c13a5431450366f61558a",
+      "file_count": 48,
+      "four_case_ids_present": [],
+      "merge_commit": "281424146684b98e754efba910178c7b42f3850a",
+      "merged_at": "2026-10-07T11:49:35Z",
+      "number": 1384,
+      "published_component_id_count": 44,
+      "published_component_ids": [
+        "physical-component:0d5cd8f440225c82d59ce25614502e964386ee39735fb6b2e79d2fd87589f967",
+        "physical-component:117ede480d3cb208dd3b8e53580fdc422a6839b7d3dabc06a3719a9bb86c7f54",
+        "physical-component:1df9d15457f298f714af8558b2b16db209a635f9fb3ec03a5dac44efa3a23ec4",
+        "physical-component:1e3ca3d7f1b45ca1cbb4fde683b982ff34c8cd6aecc2faddf0c268102e74e1e3",
+        "physical-component:1ec52f8aaf543dfa58bfa931baad39f71eab503d3865a4ba96079f1057488a8a",
+        "physical-component:220fde3f67ccdeb3ce78c24dec30f25e23e07c6a251961c624b9cecd9e1d5de2",
+        "physical-component:2651eed840baa51384efd0f0770f70114a6c22859b4171382bbf6999ace9e8fc",
+        "physical-component:29ad8b5c828f6f8112a29edbef9fd1d10375b63eb637f8c4b24890395d0df83e",
+        "physical-component:2af9bb184034f9632d8bea34ec66d03d46e25c02f62f231e3a4b3fdce8206852",
+        "physical-component:2c7baec8900562907910e8aeacd785fbbd207d8c55f542827e8a99cbaad841ca",
+        "physical-component:3addcf1688f537a931f845dc07a36d10065a3ef4124154b4a4c3ca7f8a872b48",
+        "physical-component:3bd4c4c020ee3646ac7bdd4edb5246f42eb7284c832d09e77db2973cf3663baa",
+        "physical-component:3e7c93a5a0e33be462cf6b4075d33198e9a09741e46af23d2b373893dfaeb584",
+        "physical-component:4b117167610135bc13c0a4e48e20f2e23143bddca9327dad07900a759d24bb13",
+        "physical-component:4efaa659090038e509efd7ee5c874207eb602cfa1148f1ff1329a00a2e3e4789",
+        "physical-component:5ad1b17e738967f93f5853e612848035f5e327ca827a42754f14f9fc3cde8419",
+        "physical-component:5d2704040bde1a1f6d0c1611967c1db5d21925c538cafde7a213c06352425fa1",
+        "physical-component:5f01c51d21c42682056cdddde1a2ef5ea6e8e86185ee006a56268d8ec14c4a0a",
+        "physical-component:61aab0fb0e7577153074a3f9c451a610234fa0becc1fe8fffffb9dff02c14dfc",
+        "physical-component:62c5afcf4a5b37cb3e8d01a13ca0960a5686af6bc889f9f464bde0dbbda75dd4",
+        "physical-component:657170b2bcfef6093351de874c9ce057ff690f198baf6df968ca460d0017f160",
+        "physical-component:7038d5cd756212396c6a79db5fddff8e8a8498b82a6b33806b172cde40fd3e61",
+        "physical-component:7bbf331113650e658cb436223a5fd32d77f2db78bd875bab6e938cfbbc8e7e87",
+        "physical-component:7d8dce8a9315be3a3b1c2fcd6b7f282a06fdf2482e288691a1451152dd21319e",
+        "physical-component:865e780b790bfa12cdfb38c6fa88eec111dc2c2913469853e28d9f94382ea812",
+        "physical-component:94a9ca93e19fada086cf060698084d033bb9995b65c3d832bd6d9635612c432b",
+        "physical-component:9ad496ca9b29c51c464f7cf28469df69702f65da00d1517f7f28a71b88b93854",
+        "physical-component:a9508b456b2255dfc443dee9db07d52004ceffd276a1240184238e4fc9e69996",
+        "physical-component:af3dbd85007c6a292e9fb5b1b5b4fa4d18f8dac246d2cbd341e53375d37cd089",
+        "physical-component:b4d12d01304c262324cf85ab2a6109e8e04d8724e7d01eb5f43e37265b164219",
+        "physical-component:bc664631a586f1e27ef51cbd4c204e2c76c76508cb908623cfd724b89380a3c9",
+        "physical-component:bd883198a057109964cc5345182b6b5f2860e0804e3562ac6b614b4a2d7c3826",
+        "physical-component:c2c8e5c5acf10e5acac71b2dbd2e6cabcbe3c3581eb623a532ca0207672d0189",
+        "physical-component:d2216da42120f0ab9794f3f93f25471a78be05306449fd0c47d63d1378a497c2",
+        "physical-component:d25f41b84205be68248e012df2b562246641445878219e5b1b558186ee0c4e44",
+        "physical-component:d7bbc7721978ab1eb97340891ba6447601ace13bf7145687be979cf34ce4d311",
+        "physical-component:e1e5980f4bf2115afa927e4db9f71ce40fa6e0ac1507274e2177b67d1163002b",
+        "physical-component:e4585fcb416f8493c5fba83bbecc26fbf97cc1a80d1f12b99529f1a5aa0bc510",
+        "physical-component:e872b63e7bd9b3492089f29ee3af30ed8b612031d1036bc0344e9a425acee5d1",
+        "physical-component:eddb906492f46099a07b0ca4baea9c991a0d2d4bf9e36b79c723d450f73509fd",
+        "physical-component:f32b35fb8de66f53a0118e8b14c6abb745e36f7041a4b533925fb412df630cba",
+        "physical-component:f4785ca782fe1590057e2afc8a46615d3b583011c36b8b18b142a27d5ad8841d",
+        "physical-component:fd3b00e53995b5cc357917adbd74e5433c722a645ce0f45ac86ec9cfa81adcb8",
+        "physical-component:fd82dda9164b11cdd30c2e329bed927aac031c881fab7c33cf311fe56700bbd5"
+      ],
+      "state": "MERGED",
+      "title": "Assess USA 31-component family against dated Census sources",
+      "updated_at": "2026-10-08T22:33:43Z",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/pull/1384"
+    }
+  ],
+  "repository": "ChengshuLi/WorldAtlas",
+  "scope_component_ids": [
+    "physical-component:18bde5cda8660806ef3cf9f851a006be827c80bc6ebf9cc5a92abdfc3f2249d0",
+    "physical-component:6941aa6f88a5581bf95d63718e554f6f37fb1d9fa70db7636b3b3f2914d49f6a",
+    "physical-component:ac95cb3b778a830c88ed69150c06716eed6014ab0c067331c3196fb79c274df4",
+    "physical-component:baf74325795539a3fcc7d27feb2a04c376a0e1d3c3287eba435ea85b99607be6"
+  ],
+  "this_handoff_comment": {
+    "body_sha256": "b067d0ed7824c40a71326ab12514dc384b35d959cc6d2a8be791630c94ef7472",
+    "comment_id": 6091183685,
+    "component_ids": [],
+    "created_at": "2026-10-09T23:44:45Z",
+    "issue": 1630,
+    "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1630#issuecomment-6091183685"
+  },
+  "version": 3,
+  "post_handoff_observation": {
+    "captured_at": "2026-10-10T00:13:01.468679+00:00",
+    "comment_reconciliation": {
+      "comment_id": 6091442124,
+      "issue": 1630,
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1630#issuecomment-6091442124",
+      "updated_at": "2026-10-10T00:12:39Z",
+      "body_sha256": "8250cd2d9398ba06afb78bfa798c65e9e47e18121ef545259b53cb746c1716ee",
+      "reconciles_initial_c02598f7_packet_with_later_5ef6abd4_live_readback": true
+    },
+    "pull_request": {
+      "baseRefOid": "2a2adb9956810dfc1a2d1d3829e116d678cd971b",
+      "changedFiles": 5,
+      "headRefOid": "ef8563da0de849094abe930356b288dd8d0922e9",
+      "number": 1653,
+      "state": "OPEN",
+      "title": "Research four Aleutians West source-rule decisions",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/pull/1653"
+    },
+    "issue_status": {
+      "1630": {
+        "number": 1630,
+        "state": "OPEN",
+        "title": "[GEO5] Reconcile complete North America operational gap batch",
+        "updatedAt": "2026-10-10T00:12:39Z",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1630"
+      },
+      "1202": {
+        "number": 1202,
+        "state": "OPEN",
+        "title": "Resolve geographic coverage gaps globally: inventory, classification, repairs and prevention",
+        "updatedAt": "2026-10-09T23:51:07Z",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1202"
+      }
+    },
+    "note": "The original captured issue/PR roster above remains the pre-handoff snapshot; this observation records only the current delivery and open-scope status."
+  }
+}

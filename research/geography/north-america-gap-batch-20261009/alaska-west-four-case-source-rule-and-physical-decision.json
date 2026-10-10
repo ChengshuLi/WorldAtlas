@@ -1,0 +1,936 @@
+{
+  "schema_version": 1,
+  "artifact": "alaska-west-four-case-source-rule-and-physical-decision",
+  "decision_date": "2026-10-09",
+  "scope": {
+    "issues": [
+      "#1630",
+      "#1202"
+    ],
+    "selected_components": 4,
+    "issue_1630_full_scope_preserved": {
+      "components": 4674,
+      "families": 152,
+      "disposition": "partial progress only; #1630 and #1202 remain open"
+    }
+  },
+  "assembly": {
+    "method": "deterministic projection of already retained, exact-bound source and physical-comparison rows; no source/GIS/geometry/native/global replay or new joins",
+    "inputs": [
+      {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-four-source-physical-evidence.json",
+        "sha256": "ee8b5fe2531b6cf2956392d7597053916d6221b361aeee1f64ed1c615f11966c"
+      },
+      {
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/facts.json",
+        "commit": "07a44ef6ee4e4ef7bd09c110388e4c936784f739",
+        "sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778"
+      }
+    ]
+  },
+  "source_edition_comparison": {
+    "gshhg": {
+      "product": "GSHHG 2.3.7",
+      "release_date": "2017-06-15",
+      "retained_sources_bundle": {
+        "path": "sources-000.jsonl.gz",
+        "compressed_bytes": 2173285,
+        "compressed_sha256": "aaf5e4f099ab25c6e6f96632787f1654ba6054ed378fd591b360e36274ffc264",
+        "decoded_bytes": 8388327,
+        "decoded_sha256": "a75923307b24ff73fe3090307b2c8d6e590a22dbb91f4d43f92a52ac0fd23705"
+      },
+      "records_used": {
+        "0": {
+          "record_sha256": "4892b19dff90b5afb9c1c9f09b77461d09004f3defe6aa0e552438a2ce884694",
+          "decoded_pointset_binary64_sha256": "e16c72412602f25db211d93fc1669d7692c103fcfc8865faf5060379f14d8ee5",
+          "source_flag": 1,
+          "level": 1,
+          "river_lake": 0,
+          "native_offset": 0,
+          "native_record_bytes": 9448844
+        },
+        "2": {
+          "record_sha256": "586f377d6bca21063987d4f597831a954135209fb3810b2377c746d9b13befea",
+          "decoded_pointset_binary64_sha256": "b5806ba809bb9c01289a13194ad502b746b3e1666c3218db3c52d62eac77ea18",
+          "source_flag": 1,
+          "level": 1,
+          "river_lake": 0,
+          "native_offset": 11507808,
+          "native_record_bytes": 7012332
+        },
+        "176": {
+          "record_sha256": "897a110706a87ea95e1c7d0ffe504aca872a2beda53bed0c6c22083825fd449c",
+          "decoded_pointset_binary64_sha256": "c35fea98a444e71d43d21e9f3c7d55f8528b7e73070a2a2591a939ce160318df",
+          "source_flag": 1,
+          "level": 1,
+          "river_lake": 0,
+          "native_offset": 42716896,
+          "native_record_bytes": 53612
+        },
+        "2123": {
+          "record_sha256": "330b4dbfd4264aefc9632ef1238f7f086b9fea0c55e373c6b202a04d206aab20",
+          "decoded_pointset_binary64_sha256": "37146539351e9bfd7f922cb07767709c7a8815a0aa0238aacc418f3684259643",
+          "source_flag": 1,
+          "level": 1,
+          "river_lake": 0,
+          "native_offset": 53662340,
+          "native_record_bytes": 1172
+        },
+        "4100": {
+          "record_sha256": "9f1039cb7decb8415e94fa87a53a6bcedc7cb0f945b65116104024ab14ee093c",
+          "decoded_pointset_binary64_sha256": "0da17145119fd0a712d0134d5e80a4a939005424c7312e59289fb4716bdf69a4",
+          "source_flag": 1,
+          "level": 1,
+          "river_lake": 0,
+          "native_offset": 57137080,
+          "native_record_bytes": 1044
+        }
+      },
+      "observation_dates": "heterogeneous; no per-feature date in exact retained records",
+      "per_feature_dates_absent_from_records": true,
+      "license_statement": "The cited GSHHG README describes World Vector Shoreline (WVS) as a public-domain data set. This records the source documentation statement only and adds no legal determination.",
+      "license_source_url": "https://github.com/GenericMappingTools/gshhg-gmt/blob/master/README.md"
+    },
+    "administrative": {
+      "product": "geoBoundaries gbOpen USA ADM2, Counties, 2018",
+      "release_tag": "9469f09",
+      "catalog_source_update_date": "Thu Jan 19 07:31:04 2023",
+      "catalog_build_date": "Dec 12, 2023",
+      "recorded_upstream_source": "United States Census Bureau, MAF/TIGER Database",
+      "non_simplified_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
+      "simplified_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2_simplified.geojson",
+      "target_count": 1,
+      "target_id": "gb:USA:ADM2:52423323B14067598441828",
+      "target_feature_sha256": "2e7774490856890a978d985d1b6282073edd9f8f3157fd65ddbf9af09a82c06d",
+      "target_parent": "framework:province:alaska:d12fadcdd2dd",
+      "atlas_source_file": {
+        "path": "data/geography/part-25.json",
+        "bytes": 4525239,
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+      },
+      "variant_limit": "Catalog records the non-simplified URL. Alaska-13 retained a simplified variant and did not resolve variant equivalence. These cases bind to the exact stored Atlas target feature hash; no new external feature bytes were acquired."
+    }
+  },
+  "accepted_source_rule_comparison": {
+    "program": "Alaska additive source-relative repair batch (#1561; 11 source-compatible of 13 exact measurement cases, 2 exceptions)",
+    "merged_batch_head": "b82ee098641b0dda3fc27d281b438ec4958ffbce",
+    "profile": "retained-USA-ADM2-counties-2018",
+    "source_rule_file": {
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/facts.json",
+      "commit": "07a44ef6ee4e4ef7bd09c110388e4c936784f739",
+      "expected_ids": [
+        "physical-component:073d9a81648d56c1b63a4e495fbd0140c17659bedb5c9b211739642b438ee488",
+        "physical-component:4d36c81ff35079341e6ec0d5a207ba3844e26f5d55c30c7205924dfd33b8dc18",
+        "physical-component:5874689a46f7945e9dcc67cc3b0321d4e534572e4b4bd8a85f4a07c5005d1922",
+        "physical-component:66e4f6c15eb17f53815844efc04e7cae9faf9118de313541d3a4be2ff1fcf0a2",
+        "physical-component:70174bffffdbb4a421344d6c10d80b760972f9c5452daf0d7c26408fdf18bb53",
+        "physical-component:777e7bc99320bf155684f99b0903c336f9a07862de4a7fa0ac8cde990d7d6ee5",
+        "physical-component:8435dc6d973751bab55c4eff12c872ba331c3e005254ceb21b76933a8cc6207a",
+        "physical-component:8fb2ed9360ba13f6b19f8bb6ee9a16099039d8b59c9f51eab0a442249f428e7d",
+        "physical-component:9f130f023a510be6e4b2f9075ed99cf75c4f88053e93189dda3f0bd51080f14a",
+        "physical-component:cffd5f514585665c2d76279e036889887df24efa229a67f88052aef0d8ee4a83",
+        "physical-component:d688afd3657ded3f0cf85a95956f2d42726f44923b168499320d681080539fb1",
+        "physical-component:e76fd386dc9a23375537ede302f7f380a217fd4bbccd9536f856e8b4253a5ab8",
+        "physical-component:ef7383db4412abe64b7e8d009679cffa4a3174d6da100c6de1fc37272aadeca9"
+      ],
+      "source_compatible_count": 11
+    },
+    "explicit_limits": {
+      "administrative": "geoBoundaries USA ADM2 release tag 9469f09; full source retained for 3,233 features; selected source targets represent the 2018 source-year claim; source product variants may differ.",
+      "geographic_authority": "No repair authority, history, ownership, rights, political affiliation, release approval or publication permission is asserted.",
+      "licensing": "Original packet attribution/use-term statements and source product licenses are retained as inputs; this result adds no legal conclusion.",
+      "native": "GSHHG 2.3.7 released 2017-06-15; 11 retained records are level 1; per-feature observation dates and precision/registration are not established. Coarse land support is not repair approval.",
+      "parent": "The source parent check uses the geoBoundaries USA ADM1 Alaska feature from the same release tag and its recorded 2018 claim; it is a source parent reference, not a new political or real-world authority finding."
+    },
+    "quartet_comparison": {
+      "physical_product": "match: same GSHHG 2.3.7/2017-06-15 release; retained query records are WVS (source_flag=1), level 1, river_lake=0; all four report mapped-land-support",
+      "administrative_product": "match by metadata: same geoBoundaries gbOpen USA ADM2 Counties, release tag 9469f09, 2018 reference-year claim; each case has one compatible recorded target",
+      "exact_case_roster": "does not match: none of these four component IDs is among the approved rule’s 13 expected IDs",
+      "physical_truth_scope": "no: precedent permits source-relative use only and explicitly leaves per-feature observation date/precision and contemporary shoreline truth unresolved",
+      "decision": "same profile and observed predicates justify a bounded extension proposal, but not automatic per-case approval"
+    }
+  },
+  "bounded_rule_extension_proposal": {
+    "status": "proposed-for-independent-exact-head-review",
+    "cases": "these four IDs only",
+    "rule": "Record source-relative mapped-land support when the retained GSHHG 2.3.7 WVS level-1, river_lake=0 query record fully covers the original component and the retained admin comparison yields exactly one compatible geoBoundaries USA ADM2 / Counties / 2018 Aleutians West subject. Zero mapped inland-water and contradictory support remain source-relative results only. This rule does not assert present physical land/water, shoreline position, intertidal exposure, history, cause, administrative authority, or repair permission.",
+    "criteria_match_in_all_four": true,
+    "case_level_acceptance": "unresolved pending independent source review; the accepted predecessor roster does not include these exact IDs"
+  },
+  "cases": [
+    {
+      "component_id": "physical-component:18bde5cda8660806ef3cf9f851a006be827c80bc6ebf9cc5a92abdfc3f2249d0",
+      "decision": "unresolved-for-current-physical-class-and-case-level-rule-acceptance",
+      "identity": {
+        "current_feature_sha256": "0dc16e1a578761df22282129fcdd6dc1700ff6fe17b709e95873b2eda5e8a453",
+        "current_geometry_sha256": "839a548dd505982c2404d9fec070840db0850d914e09c86c17ed24748ebc89d1",
+        "physical_report_row_sha256": "3d87d0a4910011d35667bf518b2df2ad6c927b5072135a1cc4e39da283755ea9",
+        "physical_report_product": "coordination/engineering/global-physical-comparison-20261006/results/components-006.jsonl.gz",
+        "physical_report_product_sha256": "a5a540231d1eb0539b97ee4549cd16119d839e8b5126a52a85e8cd3e1fcb1f4c",
+        "source_fitness_record_sha256": "fa6898cf2fd94ad221eb9d65179e54cc513b672d719f3a444344eb1391d3461c",
+        "source_fitness_candidate_file_sha256": "cef27c7734334de9813af94edf03cb0a789ad71fa9302a7b0287358112d4a45e",
+        "source_fitness_candidate_line_1_based": 11,
+        "land_source_fitness_pointer": {
+          "json_array_record_ordinal": 100,
+          "product": "land-source-fitness-000.bin.gz"
+        }
+      },
+      "source_relative_evidence": {
+        "status": "unknown-source-fitness-and-observation-date",
+        "authority_field": "unapproved",
+        "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+        "support_areas_m2": {
+          "mapped_land_support": 1220.092864610161,
+          "mapped_inland_water_support": 0.0,
+          "contradictory_land_water_support": 0.0
+        },
+        "limits": [
+          "Source-relative support does not settle narrow registration-sensitive shoreline/channel truth.",
+          "Unrecorded river widths, seasonal wetness, observation-date mismatch and source precision remain unmeasured."
+        ],
+        "source_fitness_status": "unapproved",
+        "source_fitness_route_decision": "unapproved-for-all-components",
+        "predicate_flags": {
+          "historical_555_witness": false,
+          "land_plus_unique_route_1005": true,
+          "nordic_geometric_mismatch_observation": false,
+          "numerical_diagnosis": false,
+          "source_comparison": true,
+          "unique_source_witness_1391": true
+        },
+        "candidate_source_evidence": {
+          "next_prerequisite": "land-plus-compatible-original-processing-reproduction-candidate",
+          "numerical_diagnosis": "not-in-#1300-numeric-first-cohort",
+          "physical_source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+          "physical_status_source_relative": "mapped-land-support",
+          "source_comparison_packet": "global-source-comparisons-b-package3-20261006",
+          "source_comparison_status": "one-compatible-recorded-subject-uniquely-covers-component",
+          "source_geometry_sha256": "2e7774490856890a978d985d1b6282073edd9f8f3157fd65ddbf9af09a82c06d",
+          "source_products": "gb:USA:ADM2",
+          "source_reference_year": "2018",
+          "unique_source_subject_id": "gb:USA:ADM2:52423323B14067598441828"
+        }
+      },
+      "administrative_route": {
+        "record_sha256": "5c6e1497c7392420932b6d752851ed71788c9d2bb3827d8cc34456310d90bf7b",
+        "product_path": "admin-bindings-000.bin.gz",
+        "product_compressed_sha256": "fa75a261900a8daecaf79d5ec52ff98c558c75113f125ce37b3a6cd823884e84",
+        "product_decoded_sha256": "d11952aaa416de1f46c27801b159b95487dfd7cb5b9e38db692b3334e4899a86",
+        "record_ordinal": 5500,
+        "result": "one-compatible-recorded-subject-uniquely-covers-component",
+        "surface_status": "unverified",
+        "cause_status": "unknown",
+        "unique_target": {
+          "id": "gb:USA:ADM2:52423323B14067598441828",
+          "original_feature_sha256": "2e7774490856890a978d985d1b6282073edd9f8f3157fd65ddbf9af09a82c06d",
+          "original_parent_id": "framework:province:alaska:d12fadcdd2dd",
+          "reference_year": "2018"
+        },
+        "current_binding": "exact-current-geometry",
+        "current_component_relation": "retained-full-original-feature-pointset"
+      },
+      "source_queries": [
+        {
+          "relation": {
+            "candidate_covers_source": false,
+            "container_chain_issues": [],
+            "disjoint": true,
+            "intersects": false,
+            "periodic_offset": 0,
+            "source_container": -1,
+            "source_covers_candidate": false,
+            "source_id": 2,
+            "source_level": 1,
+            "source_pointset_sha256": "b5806ba809bb9c01289a13194ad502b746b3e1666c3218db3c52d62eac77ea18",
+            "source_record_sha256": "586f377d6bca21063987d4f597831a954135209fb3810b2377c746d9b13befea",
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate"
+          },
+          "stored_join_receipt": {
+            "pointset_sha_matches": true,
+            "record_sha_matches": true,
+            "source_id": 2,
+            "source_pointset_sha256": "b5806ba809bb9c01289a13194ad502b746b3e1666c3218db3c52d62eac77ea18",
+            "source_record_sha256": "586f377d6bca21063987d4f597831a954135209fb3810b2377c746d9b13befea"
+          },
+          "original_source_row": {
+            "id": 2,
+            "record_sha256": "586f377d6bca21063987d4f597831a954135209fb3810b2377c746d9b13befea",
+            "decoded_pointset_binary64_sha256": "b5806ba809bb9c01289a13194ad502b746b3e1666c3218db3c52d62eac77ea18",
+            "coordinate_bytes_sha256": "3be922652a446bdde95d5a4ae79e5b96445da4e33c3179d57a73815a3c063a07",
+            "source_flag": 1,
+            "level": 1,
+            "river_lake": 0,
+            "native_offset": 11507808,
+            "native_record_bytes": 7012332,
+            "n": 876536,
+            "decoded_pointset_bounds": [
+              -168.132417,
+              7.20475,
+              -55.620806000000016,
+              72.00269399999999
+            ],
+            "whole_original_geometry_valid": true,
+            "geometry_issues": [],
+            "observation_date_fields_present": [],
+            "per_feature_observation_date_established": false
+          }
+        },
+        {
+          "relation": {
+            "candidate_covers_source": false,
+            "container_chain_issues": [],
+            "disjoint": false,
+            "intersects": true,
+            "periodic_offset": 0,
+            "source_container": -1,
+            "source_covers_candidate": true,
+            "source_id": 176,
+            "source_level": 1,
+            "source_pointset_sha256": "c35fea98a444e71d43d21e9f3c7d55f8528b7e73070a2a2591a939ce160318df",
+            "source_record_sha256": "897a110706a87ea95e1c7d0ffe504aca872a2beda53bed0c6c22083825fd449c",
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction"
+          },
+          "stored_join_receipt": {
+            "pointset_sha_matches": true,
+            "record_sha_matches": true,
+            "source_id": 176,
+            "source_pointset_sha256": "c35fea98a444e71d43d21e9f3c7d55f8528b7e73070a2a2591a939ce160318df",
+            "source_record_sha256": "897a110706a87ea95e1c7d0ffe504aca872a2beda53bed0c6c22083825fd449c"
+          },
+          "original_source_row": {
+            "id": 176,
+            "record_sha256": "897a110706a87ea95e1c7d0ffe504aca872a2beda53bed0c6c22083825fd449c",
+            "decoded_pointset_binary64_sha256": "c35fea98a444e71d43d21e9f3c7d55f8528b7e73070a2a2591a939ce160318df",
+            "coordinate_bytes_sha256": "6e23cfe309a5e7d552d7b6ed13f5a747e41bd3d59fe7fcf2762de0bbaaf24f90",
+            "source_flag": 1,
+            "level": 1,
+            "river_lake": 0,
+            "native_offset": 42716896,
+            "native_record_bytes": 53612,
+            "n": 6696,
+            "decoded_pointset_bounds": [
+              -167.85516700000002,
+              53.238167,
+              -166.20308300000002,
+              54.019110999999995
+            ],
+            "whole_original_geometry_valid": true,
+            "geometry_issues": [],
+            "observation_date_fields_present": [],
+            "per_feature_observation_date_established": false
+          }
+        }
+      ],
+      "unresolved_case_facts": [
+        "per-feature GSHHG observation/acquisition date",
+        "feature-specific horizontal accuracy and shoreline registration fitness",
+        "a dated authoritative record resolving this exact footprint as exposed land vs intertidal/water",
+        "independent decision whether Alaska 11 source-relative rule scope extends beyond its exact roster"
+      ],
+      "original_component_status": {
+        "measured_fragment_area_sum_m2": 1220.092864610161,
+        "measured_fragment_count": 1,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": true,
+        "water_status": "unverified",
+        "unmeasured_fragment_ids": [],
+        "fragment_bindings": [
+          {
+            "feature_sha256": "2f5b583847a5a63a47910170ca4bc4fb12da14b851e15bb9ba28335f01b78407",
+            "id": "physical-gap:1586:88:839a548dd505982c2404d9fec070840db0850d914e09c86c17ed24748ebc89d1"
+          }
+        ]
+      }
+    },
+    {
+      "component_id": "physical-component:6941aa6f88a5581bf95d63718e554f6f37fb1d9fa70db7636b3b3f2914d49f6a",
+      "decision": "unresolved-for-current-physical-class-and-case-level-rule-acceptance",
+      "identity": {
+        "current_feature_sha256": "4e0be0d0200f6a6109d1b8e509c39ce58a80617b85c8dd91ba5c5ada92140f0e",
+        "current_geometry_sha256": "93ec17aba15e0ed2c7e4ec2e57b877249967e9c404af972f2121504a99ff729d",
+        "physical_report_row_sha256": "aa2f6aab3e1399fe9e9912991920d0c21719c4df31f87c68d3e79da187b98211",
+        "physical_report_product": "coordination/engineering/global-physical-comparison-20261006/results/components-028.jsonl.gz",
+        "physical_report_product_sha256": "583a2ab684718b5266c70a739218920f95d3adedd168e5ff29575f8ed654b14a",
+        "source_fitness_record_sha256": "a03938b983cb67e3e072d211bd6cca946471193164af41d707914f7811524d21",
+        "source_fitness_candidate_file_sha256": "cef27c7734334de9813af94edf03cb0a789ad71fa9302a7b0287358112d4a45e",
+        "source_fitness_candidate_line_1_based": 12,
+        "land_source_fitness_pointer": {
+          "json_array_record_ordinal": 406,
+          "product": "land-source-fitness-000.bin.gz"
+        }
+      },
+      "source_relative_evidence": {
+        "status": "unknown-source-fitness-and-observation-date",
+        "authority_field": "unapproved",
+        "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+        "support_areas_m2": {
+          "mapped_land_support": 60037.24628970157,
+          "mapped_inland_water_support": 0.0,
+          "contradictory_land_water_support": 0.0
+        },
+        "limits": [
+          "Source-relative support does not settle narrow registration-sensitive shoreline/channel truth.",
+          "Unrecorded river widths, seasonal wetness, observation-date mismatch and source precision remain unmeasured."
+        ],
+        "source_fitness_status": "unapproved",
+        "source_fitness_route_decision": "unapproved-for-all-components",
+        "predicate_flags": {
+          "historical_555_witness": false,
+          "land_plus_unique_route_1005": true,
+          "nordic_geometric_mismatch_observation": false,
+          "numerical_diagnosis": false,
+          "source_comparison": true,
+          "unique_source_witness_1391": true
+        },
+        "candidate_source_evidence": {
+          "next_prerequisite": "land-plus-compatible-original-processing-reproduction-candidate",
+          "numerical_diagnosis": "not-in-#1300-numeric-first-cohort",
+          "physical_source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+          "physical_status_source_relative": "mapped-land-support",
+          "source_comparison_packet": "global-source-comparisons-b-package3-20261006",
+          "source_comparison_status": "one-compatible-recorded-subject-uniquely-covers-component",
+          "source_geometry_sha256": "2e7774490856890a978d985d1b6282073edd9f8f3157fd65ddbf9af09a82c06d",
+          "source_products": "gb:USA:ADM2",
+          "source_reference_year": "2018",
+          "unique_source_subject_id": "gb:USA:ADM2:52423323B14067598441828"
+        }
+      },
+      "administrative_route": {
+        "record_sha256": "7742c4f503e269d0f833102797e748783945d15ba3f347056f415ee51e9c224a",
+        "product_path": "admin-bindings-003.bin.gz",
+        "product_compressed_sha256": "281c330f5f7f5727709bdce4c3e662c313e080178d52a5e9f8a0a41c585b0a86",
+        "product_decoded_sha256": "d89f2e8f8267493aa9e9ca614fcf401d343b8c4b03dc511bbc1acc036c118a3d",
+        "record_ordinal": 23633,
+        "result": "one-compatible-recorded-subject-uniquely-covers-component",
+        "surface_status": "unverified",
+        "cause_status": "unknown",
+        "unique_target": {
+          "id": "gb:USA:ADM2:52423323B14067598441828",
+          "original_feature_sha256": "2e7774490856890a978d985d1b6282073edd9f8f3157fd65ddbf9af09a82c06d",
+          "original_parent_id": "framework:province:alaska:d12fadcdd2dd",
+          "reference_year": "2018"
+        },
+        "current_binding": "exact-current-geometry",
+        "current_component_relation": "retained-full-original-feature-pointset"
+      },
+      "source_queries": [
+        {
+          "relation": {
+            "candidate_covers_source": false,
+            "container_chain_issues": [],
+            "disjoint": true,
+            "intersects": false,
+            "periodic_offset": -360,
+            "source_container": -1,
+            "source_covers_candidate": false,
+            "source_id": 0,
+            "source_level": 1,
+            "source_pointset_sha256": "e16c72412602f25db211d93fc1669d7692c103fcfc8865faf5060379f14d8ee5",
+            "source_record_sha256": "4892b19dff90b5afb9c1c9f09b77461d09004f3defe6aa0e552438a2ce884694",
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate"
+          },
+          "stored_join_receipt": {
+            "pointset_sha_matches": true,
+            "record_sha_matches": true,
+            "source_id": 0,
+            "source_pointset_sha256": "e16c72412602f25db211d93fc1669d7692c103fcfc8865faf5060379f14d8ee5",
+            "source_record_sha256": "4892b19dff90b5afb9c1c9f09b77461d09004f3defe6aa0e552438a2ce884694"
+          },
+          "original_source_row": {
+            "id": 0,
+            "record_sha256": "4892b19dff90b5afb9c1c9f09b77461d09004f3defe6aa0e552438a2ce884694",
+            "decoded_pointset_binary64_sha256": "e16c72412602f25db211d93fc1669d7692c103fcfc8865faf5060379f14d8ee5",
+            "coordinate_bytes_sha256": "a559df0e381f461e66a40946213bbf0bebd036d4c47a8fc46a166b1cfac11af6",
+            "source_flag": 1,
+            "level": 1,
+            "river_lake": 0,
+            "native_offset": 0,
+            "native_record_bytes": 9448844,
+            "n": 1181100,
+            "decoded_pointset_bounds": [
+              -9.500444000000016,
+              1.268694,
+              190.35911099999998,
+              77.719583
+            ],
+            "whole_original_geometry_valid": true,
+            "geometry_issues": [],
+            "observation_date_fields_present": [],
+            "per_feature_observation_date_established": false
+          }
+        },
+        {
+          "relation": {
+            "candidate_covers_source": false,
+            "container_chain_issues": [],
+            "disjoint": false,
+            "intersects": true,
+            "periodic_offset": 0,
+            "source_container": -1,
+            "source_covers_candidate": true,
+            "source_id": 2123,
+            "source_level": 1,
+            "source_pointset_sha256": "37146539351e9bfd7f922cb07767709c7a8815a0aa0238aacc418f3684259643",
+            "source_record_sha256": "330b4dbfd4264aefc9632ef1238f7f086b9fea0c55e373c6b202a04d206aab20",
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction"
+          },
+          "stored_join_receipt": {
+            "pointset_sha_matches": true,
+            "record_sha_matches": true,
+            "source_id": 2123,
+            "source_pointset_sha256": "37146539351e9bfd7f922cb07767709c7a8815a0aa0238aacc418f3684259643",
+            "source_record_sha256": "330b4dbfd4264aefc9632ef1238f7f086b9fea0c55e373c6b202a04d206aab20"
+          },
+          "original_source_row": {
+            "id": 2123,
+            "record_sha256": "330b4dbfd4264aefc9632ef1238f7f086b9fea0c55e373c6b202a04d206aab20",
+            "decoded_pointset_binary64_sha256": "37146539351e9bfd7f922cb07767709c7a8815a0aa0238aacc418f3684259643",
+            "coordinate_bytes_sha256": "5169c2ce612d1138a44ce5c7cb8378f84d49669d271eaf9ac1d4596629b32ba4",
+            "source_flag": 1,
+            "level": 1,
+            "river_lake": 0,
+            "native_offset": 53662340,
+            "native_record_bytes": 1172,
+            "n": 141,
+            "decoded_pointset_bounds": [
+              -170.187556,
+              52.717861,
+              -170.0525,
+              52.792888999999995
+            ],
+            "whole_original_geometry_valid": true,
+            "geometry_issues": [],
+            "observation_date_fields_present": [],
+            "per_feature_observation_date_established": false
+          }
+        }
+      ],
+      "unresolved_case_facts": [
+        "per-feature GSHHG observation/acquisition date",
+        "feature-specific horizontal accuracy and shoreline registration fitness",
+        "a dated authoritative record resolving this exact footprint as exposed land vs intertidal/water",
+        "independent decision whether Alaska 11 source-relative rule scope extends beyond its exact roster"
+      ],
+      "original_component_status": {
+        "measured_fragment_area_sum_m2": 60037.24628970157,
+        "measured_fragment_count": 1,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": true,
+        "water_status": "unverified",
+        "unmeasured_fragment_ids": [],
+        "fragment_bindings": [
+          {
+            "feature_sha256": "a7e36614139ee46fec6e1efed62f08f7c897b0035cce9772a9a0d2b23c7cf69f",
+            "id": "physical-gap:1585:70:93ec17aba15e0ed2c7e4ec2e57b877249967e9c404af972f2121504a99ff729d"
+          }
+        ]
+      }
+    },
+    {
+      "component_id": "physical-component:ac95cb3b778a830c88ed69150c06716eed6014ab0c067331c3196fb79c274df4",
+      "decision": "unresolved-for-current-physical-class-and-case-level-rule-acceptance",
+      "identity": {
+        "current_feature_sha256": "3d9631fbd175075c49d66c0068b445de0f396fb0bdd6e94f0afcda09aa50db7a",
+        "current_geometry_sha256": "3b2659f3a633defc8c40e67cb2f9cfb16bb3ca1451a4301e33ec9d08292097d3",
+        "physical_report_row_sha256": "6d1df455fb1c1225905a1ce9e29846e80ea5dc6b8c2199a511e2018dff240cda",
+        "physical_report_product": "coordination/engineering/global-physical-comparison-20261006/results/components-047.jsonl.gz",
+        "physical_report_product_sha256": "e418e6cf92971f0afc047b2782fcb035e1f6305c136969469cb8be085089e82d",
+        "source_fitness_record_sha256": "d0d9e7785609b6ea7e09b62dcf624d6d701b95612e9984471993a26c3a012043",
+        "source_fitness_candidate_file_sha256": "cef27c7734334de9813af94edf03cb0a789ad71fa9302a7b0287358112d4a45e",
+        "source_fitness_candidate_line_1_based": 13,
+        "land_source_fitness_pointer": {
+          "json_array_record_ordinal": 656,
+          "product": "land-source-fitness-000.bin.gz"
+        }
+      },
+      "source_relative_evidence": {
+        "status": "unknown-source-fitness-and-observation-date",
+        "authority_field": "unapproved",
+        "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+        "support_areas_m2": {
+          "mapped_land_support": 16971.940633394315,
+          "mapped_inland_water_support": 0.0,
+          "contradictory_land_water_support": 0.0
+        },
+        "limits": [
+          "Source-relative support does not settle narrow registration-sensitive shoreline/channel truth.",
+          "Unrecorded river widths, seasonal wetness, observation-date mismatch and source precision remain unmeasured."
+        ],
+        "source_fitness_status": "unapproved",
+        "source_fitness_route_decision": "unapproved-for-all-components",
+        "predicate_flags": {
+          "historical_555_witness": false,
+          "land_plus_unique_route_1005": true,
+          "nordic_geometric_mismatch_observation": false,
+          "numerical_diagnosis": false,
+          "source_comparison": true,
+          "unique_source_witness_1391": true
+        },
+        "candidate_source_evidence": {
+          "next_prerequisite": "land-plus-compatible-original-processing-reproduction-candidate",
+          "numerical_diagnosis": "not-in-#1300-numeric-first-cohort",
+          "physical_source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+          "physical_status_source_relative": "mapped-land-support",
+          "source_comparison_packet": "global-source-comparisons-b-package3-20261006",
+          "source_comparison_status": "one-compatible-recorded-subject-uniquely-covers-component",
+          "source_geometry_sha256": "2e7774490856890a978d985d1b6282073edd9f8f3157fd65ddbf9af09a82c06d",
+          "source_products": "gb:USA:ADM2",
+          "source_reference_year": "2018",
+          "unique_source_subject_id": "gb:USA:ADM2:52423323B14067598441828"
+        }
+      },
+      "administrative_route": {
+        "record_sha256": "16d2e0f44615ee4c51d9a519ef99853fba4f4bfb7e259522f45545f5971b0f3e",
+        "product_path": "admin-bindings-005.bin.gz",
+        "product_compressed_sha256": "7f1ba06f6b035c9efa1a940bab789b6032bfbcee6425f9a06693db3e9cb11b6b",
+        "product_decoded_sha256": "2a8bb616b56839ee1e7c21d95443555194de318393bf489818703c014b745aab",
+        "record_ordinal": 38841,
+        "result": "one-compatible-recorded-subject-uniquely-covers-component",
+        "surface_status": "unverified",
+        "cause_status": "unknown",
+        "unique_target": {
+          "id": "gb:USA:ADM2:52423323B14067598441828",
+          "original_feature_sha256": "2e7774490856890a978d985d1b6282073edd9f8f3157fd65ddbf9af09a82c06d",
+          "original_parent_id": "framework:province:alaska:d12fadcdd2dd",
+          "reference_year": "2018"
+        },
+        "current_binding": "exact-current-geometry",
+        "current_component_relation": "retained-full-original-feature-pointset"
+      },
+      "source_queries": [
+        {
+          "relation": {
+            "candidate_covers_source": false,
+            "container_chain_issues": [],
+            "disjoint": true,
+            "intersects": false,
+            "periodic_offset": -360,
+            "source_container": -1,
+            "source_covers_candidate": false,
+            "source_id": 0,
+            "source_level": 1,
+            "source_pointset_sha256": "e16c72412602f25db211d93fc1669d7692c103fcfc8865faf5060379f14d8ee5",
+            "source_record_sha256": "4892b19dff90b5afb9c1c9f09b77461d09004f3defe6aa0e552438a2ce884694",
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate"
+          },
+          "stored_join_receipt": {
+            "pointset_sha_matches": true,
+            "record_sha_matches": true,
+            "source_id": 0,
+            "source_pointset_sha256": "e16c72412602f25db211d93fc1669d7692c103fcfc8865faf5060379f14d8ee5",
+            "source_record_sha256": "4892b19dff90b5afb9c1c9f09b77461d09004f3defe6aa0e552438a2ce884694"
+          },
+          "original_source_row": {
+            "id": 0,
+            "record_sha256": "4892b19dff90b5afb9c1c9f09b77461d09004f3defe6aa0e552438a2ce884694",
+            "decoded_pointset_binary64_sha256": "e16c72412602f25db211d93fc1669d7692c103fcfc8865faf5060379f14d8ee5",
+            "coordinate_bytes_sha256": "a559df0e381f461e66a40946213bbf0bebd036d4c47a8fc46a166b1cfac11af6",
+            "source_flag": 1,
+            "level": 1,
+            "river_lake": 0,
+            "native_offset": 0,
+            "native_record_bytes": 9448844,
+            "n": 1181100,
+            "decoded_pointset_bounds": [
+              -9.500444000000016,
+              1.268694,
+              190.35911099999998,
+              77.719583
+            ],
+            "whole_original_geometry_valid": true,
+            "geometry_issues": [],
+            "observation_date_fields_present": [],
+            "per_feature_observation_date_established": false
+          }
+        },
+        {
+          "relation": {
+            "candidate_covers_source": false,
+            "container_chain_issues": [],
+            "disjoint": false,
+            "intersects": true,
+            "periodic_offset": 0,
+            "source_container": -1,
+            "source_covers_candidate": true,
+            "source_id": 2123,
+            "source_level": 1,
+            "source_pointset_sha256": "37146539351e9bfd7f922cb07767709c7a8815a0aa0238aacc418f3684259643",
+            "source_record_sha256": "330b4dbfd4264aefc9632ef1238f7f086b9fea0c55e373c6b202a04d206aab20",
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction"
+          },
+          "stored_join_receipt": {
+            "pointset_sha_matches": true,
+            "record_sha_matches": true,
+            "source_id": 2123,
+            "source_pointset_sha256": "37146539351e9bfd7f922cb07767709c7a8815a0aa0238aacc418f3684259643",
+            "source_record_sha256": "330b4dbfd4264aefc9632ef1238f7f086b9fea0c55e373c6b202a04d206aab20"
+          },
+          "original_source_row": {
+            "id": 2123,
+            "record_sha256": "330b4dbfd4264aefc9632ef1238f7f086b9fea0c55e373c6b202a04d206aab20",
+            "decoded_pointset_binary64_sha256": "37146539351e9bfd7f922cb07767709c7a8815a0aa0238aacc418f3684259643",
+            "coordinate_bytes_sha256": "5169c2ce612d1138a44ce5c7cb8378f84d49669d271eaf9ac1d4596629b32ba4",
+            "source_flag": 1,
+            "level": 1,
+            "river_lake": 0,
+            "native_offset": 53662340,
+            "native_record_bytes": 1172,
+            "n": 141,
+            "decoded_pointset_bounds": [
+              -170.187556,
+              52.717861,
+              -170.0525,
+              52.792888999999995
+            ],
+            "whole_original_geometry_valid": true,
+            "geometry_issues": [],
+            "observation_date_fields_present": [],
+            "per_feature_observation_date_established": false
+          }
+        }
+      ],
+      "unresolved_case_facts": [
+        "per-feature GSHHG observation/acquisition date",
+        "feature-specific horizontal accuracy and shoreline registration fitness",
+        "a dated authoritative record resolving this exact footprint as exposed land vs intertidal/water",
+        "independent decision whether Alaska 11 source-relative rule scope extends beyond its exact roster"
+      ],
+      "original_component_status": {
+        "measured_fragment_area_sum_m2": 16971.940633394315,
+        "measured_fragment_count": 1,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": true,
+        "water_status": "unverified",
+        "unmeasured_fragment_ids": [],
+        "fragment_bindings": [
+          {
+            "feature_sha256": "4cc4c8f5b40d12b0dd3e8f8f9fd132522f74c2ff86199c82b23de4fa71de4674",
+            "id": "physical-gap:1585:68:3b2659f3a633defc8c40e67cb2f9cfb16bb3ca1451a4301e33ec9d08292097d3"
+          }
+        ]
+      }
+    },
+    {
+      "component_id": "physical-component:baf74325795539a3fcc7d27feb2a04c376a0e1d3c3287eba435ea85b99607be6",
+      "decision": "unresolved-for-current-physical-class-and-case-level-rule-acceptance",
+      "identity": {
+        "current_feature_sha256": "d0607905ac28495ea8e761a17132bcc9f7c03aefc6a816408a5a6b568ff513dd",
+        "current_geometry_sha256": "5edcb418f6c8bb057c8b05ce7b99dfdafeb661124e0bb2af275bf56b069a364b",
+        "physical_report_row_sha256": "916d0a0d98c0304575943287734d8e66c00ffe89d52cf8147027207507b215fe",
+        "physical_report_product": "coordination/engineering/global-physical-comparison-20261006/results/components-051.jsonl.gz",
+        "physical_report_product_sha256": "66e0febf986ec0c177c3be12e9fc7a5d33a189f45758aa6348db8bdda01953b4",
+        "source_fitness_record_sha256": "f6820f24fe3c5dd783c7aa72d0a9605f2c70b4869218710b952db785641dde8f",
+        "source_fitness_candidate_file_sha256": "cef27c7734334de9813af94edf03cb0a789ad71fa9302a7b0287358112d4a45e",
+        "source_fitness_candidate_line_1_based": 14,
+        "land_source_fitness_pointer": {
+          "json_array_record_ordinal": 719,
+          "product": "land-source-fitness-000.bin.gz"
+        }
+      },
+      "source_relative_evidence": {
+        "status": "unknown-source-fitness-and-observation-date",
+        "authority_field": "unapproved",
+        "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+        "support_areas_m2": {
+          "mapped_land_support": 74865.1460036213,
+          "mapped_inland_water_support": 0.0,
+          "contradictory_land_water_support": 0.0
+        },
+        "limits": [
+          "Source-relative support does not settle narrow registration-sensitive shoreline/channel truth.",
+          "Unrecorded river widths, seasonal wetness, observation-date mismatch and source precision remain unmeasured."
+        ],
+        "source_fitness_status": "unapproved",
+        "source_fitness_route_decision": "unapproved-for-all-components",
+        "predicate_flags": {
+          "historical_555_witness": false,
+          "land_plus_unique_route_1005": true,
+          "nordic_geometric_mismatch_observation": false,
+          "numerical_diagnosis": false,
+          "source_comparison": true,
+          "unique_source_witness_1391": true
+        },
+        "candidate_source_evidence": {
+          "next_prerequisite": "land-plus-compatible-original-processing-reproduction-candidate",
+          "numerical_diagnosis": "not-in-#1300-numeric-first-cohort",
+          "physical_source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+          "physical_status_source_relative": "mapped-land-support",
+          "source_comparison_packet": "global-source-comparisons-b-package3-20261006",
+          "source_comparison_status": "one-compatible-recorded-subject-uniquely-covers-component",
+          "source_geometry_sha256": "2e7774490856890a978d985d1b6282073edd9f8f3157fd65ddbf9af09a82c06d",
+          "source_products": "gb:USA:ADM2",
+          "source_reference_year": "2018",
+          "unique_source_subject_id": "gb:USA:ADM2:52423323B14067598441828"
+        }
+      },
+      "administrative_route": {
+        "record_sha256": "200fd6e74235041b38beb9efaed5604cc67ca9611a518f250840deec31bb8f8d",
+        "product_path": "admin-bindings-005.bin.gz",
+        "product_compressed_sha256": "7f1ba06f6b035c9efa1a940bab789b6032bfbcee6425f9a06693db3e9cb11b6b",
+        "product_decoded_sha256": "2a8bb616b56839ee1e7c21d95443555194de318393bf489818703c014b745aab",
+        "record_ordinal": 42069,
+        "result": "one-compatible-recorded-subject-uniquely-covers-component",
+        "surface_status": "unverified",
+        "cause_status": "unknown",
+        "unique_target": {
+          "id": "gb:USA:ADM2:52423323B14067598441828",
+          "original_feature_sha256": "2e7774490856890a978d985d1b6282073edd9f8f3157fd65ddbf9af09a82c06d",
+          "original_parent_id": "framework:province:alaska:d12fadcdd2dd",
+          "reference_year": "2018"
+        },
+        "current_binding": "exact-current-geometry",
+        "current_component_relation": "retained-full-original-feature-pointset"
+      },
+      "source_queries": [
+        {
+          "relation": {
+            "candidate_covers_source": false,
+            "container_chain_issues": [],
+            "disjoint": true,
+            "intersects": false,
+            "periodic_offset": -360,
+            "source_container": -1,
+            "source_covers_candidate": false,
+            "source_id": 0,
+            "source_level": 1,
+            "source_pointset_sha256": "e16c72412602f25db211d93fc1669d7692c103fcfc8865faf5060379f14d8ee5",
+            "source_record_sha256": "4892b19dff90b5afb9c1c9f09b77461d09004f3defe6aa0e552438a2ce884694",
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate"
+          },
+          "stored_join_receipt": {
+            "pointset_sha_matches": true,
+            "record_sha_matches": true,
+            "source_id": 0,
+            "source_pointset_sha256": "e16c72412602f25db211d93fc1669d7692c103fcfc8865faf5060379f14d8ee5",
+            "source_record_sha256": "4892b19dff90b5afb9c1c9f09b77461d09004f3defe6aa0e552438a2ce884694"
+          },
+          "original_source_row": {
+            "id": 0,
+            "record_sha256": "4892b19dff90b5afb9c1c9f09b77461d09004f3defe6aa0e552438a2ce884694",
+            "decoded_pointset_binary64_sha256": "e16c72412602f25db211d93fc1669d7692c103fcfc8865faf5060379f14d8ee5",
+            "coordinate_bytes_sha256": "a559df0e381f461e66a40946213bbf0bebd036d4c47a8fc46a166b1cfac11af6",
+            "source_flag": 1,
+            "level": 1,
+            "river_lake": 0,
+            "native_offset": 0,
+            "native_record_bytes": 9448844,
+            "n": 1181100,
+            "decoded_pointset_bounds": [
+              -9.500444000000016,
+              1.268694,
+              190.35911099999998,
+              77.719583
+            ],
+            "whole_original_geometry_valid": true,
+            "geometry_issues": [],
+            "observation_date_fields_present": [],
+            "per_feature_observation_date_established": false
+          }
+        },
+        {
+          "relation": {
+            "candidate_covers_source": false,
+            "container_chain_issues": [],
+            "disjoint": false,
+            "intersects": true,
+            "periodic_offset": 0,
+            "source_container": -1,
+            "source_covers_candidate": true,
+            "source_id": 4100,
+            "source_level": 1,
+            "source_pointset_sha256": "0da17145119fd0a712d0134d5e80a4a939005424c7312e59289fb4716bdf69a4",
+            "source_record_sha256": "9f1039cb7decb8415e94fa87a53a6bcedc7cb0f945b65116104024ab14ee093c",
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction"
+          },
+          "stored_join_receipt": {
+            "pointset_sha_matches": true,
+            "record_sha_matches": true,
+            "source_id": 4100,
+            "source_pointset_sha256": "0da17145119fd0a712d0134d5e80a4a939005424c7312e59289fb4716bdf69a4",
+            "source_record_sha256": "9f1039cb7decb8415e94fa87a53a6bcedc7cb0f945b65116104024ab14ee093c"
+          },
+          "original_source_row": {
+            "id": 4100,
+            "record_sha256": "9f1039cb7decb8415e94fa87a53a6bcedc7cb0f945b65116104024ab14ee093c",
+            "decoded_pointset_binary64_sha256": "0da17145119fd0a712d0134d5e80a4a939005424c7312e59289fb4716bdf69a4",
+            "coordinate_bytes_sha256": "0f2c49dab09181d30e9c19e7ff630c665623403c88e838c7c123038564e045ea",
+            "source_flag": 1,
+            "level": 1,
+            "river_lake": 0,
+            "native_offset": 57137080,
+            "native_record_bytes": 1044,
+            "n": 125,
+            "decoded_pointset_bounds": [
+              -175.879222,
+              51.915389,
+              -175.762472,
+              51.961278
+            ],
+            "whole_original_geometry_valid": true,
+            "geometry_issues": [],
+            "observation_date_fields_present": [],
+            "per_feature_observation_date_established": false
+          }
+        }
+      ],
+      "unresolved_case_facts": [
+        "per-feature GSHHG observation/acquisition date",
+        "feature-specific horizontal accuracy and shoreline registration fitness",
+        "a dated authoritative record resolving this exact footprint as exposed land vs intertidal/water",
+        "independent decision whether Alaska 11 source-relative rule scope extends beyond its exact roster"
+      ],
+      "original_component_status": {
+        "measured_fragment_area_sum_m2": 74865.1460036213,
+        "measured_fragment_count": 1,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": true,
+        "water_status": "unverified",
+        "unmeasured_fragment_ids": [],
+        "fragment_bindings": [
+          {
+            "feature_sha256": "6e631f4213c9744d715ec0c7008c30ecd6da5b9a0d4239c509b7685366116376",
+            "id": "physical-gap:1584:87:5edcb418f6c8bb057c8b05ce7b99dfdafeb661124e0bb2af275bf56b069a364b"
+          }
+        ]
+      }
+    }
+  ],
+  "physical_authority_decision": {
+    "all_four": "unresolved",
+    "reason": "Retained evidence establishes coarse GSHHG source-relative land support and a uniquely compatible recorded county subject, but not present physical truth. Per-feature observation date, horizontal accuracy/registration, and matching dated authoritative shoreline/rock/intertidal evidence are absent. Release date is not observation date. GSHHG official documentation cautions about legacy accuracy and shoreline misregistration.",
+    "not_asserted": [
+      "current land/water class",
+      "intertidal exposure state",
+      "current shoreline location",
+      "repair cause or authority",
+      "geometry proposal"
+    ]
+  },
+  "primary_source_context": [
+    {
+      "url": "https://github.com/GenericMappingTools/gshhg-gmt/blob/master/README.md",
+      "scope": "GSHHG release/level/source semantics and general legacy/registration caveats only; not exact-case physical truth."
+    },
+    {
+      "url": "https://www.nauticalcharts.noaa.gov/learn/chart-source-data.html",
+      "scope": "general NOAA chart-source context only; no exact-case record retained."
+    }
+  ],
+  "next_action": "Independent exact-head source review to accept/reject the bounded extension. If accepted, permit only source-relative classification with stated limits. If rejected, name the differing predicate. Keep physical class/date unresolved absent exact dated authoritative evidence."
+}
