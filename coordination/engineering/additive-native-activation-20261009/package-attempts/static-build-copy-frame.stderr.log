@@ -1,0 +1,75 @@
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-ZXDr0m/scripts/boundary-version-hash.py", line 35, in <module>
+    try:print(boundary_hash(con.execute('SELECT location_id,valid_from,valid_to,geometry FROM boundaries WHERE is_example=0'),args.index.resolve()))
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-ZXDr0m/scripts/boundary-version-hash.py", line 21, in boundary_hash
+    from shapely.geometry import shape
+ModuleNotFoundError: No module named 'shapely'
+node:internal/errors:985
+  const err = new Error(message);
+              ^
+
+Error: Command failed: python3 /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-ZXDr0m/scripts/boundary-version-hash.py
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-ZXDr0m/scripts/boundary-version-hash.py", line 35, in <module>
+    try:print(boundary_hash(con.execute('SELECT location_id,valid_from,valid_to,geometry FROM boundaries WHERE is_example=0'),args.index.resolve()))
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-ZXDr0m/scripts/boundary-version-hash.py", line 21, in boundary_hash
+    from shapely.geometry import shape
+ModuleNotFoundError: No module named 'shapely'
+
+    at genericNodeError (node:internal/errors:985:15)
+    at wrappedFn (node:internal/errors:539:14)
+    at checkExecSyncError (node:child_process:942:11)
+    at execFileSync (node:child_process:978:15)
+    at checkPrepared (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-ZXDr0m/scripts/check-prepared.mjs:26:25)
+    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-ZXDr0m/scripts/build-static-inner.mjs:115:3 {
+  status: 1,
+  signal: null,
+  output: [
+    null,
+    '',
+    'Traceback (most recent call last):\n' +
+      '  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-ZXDr0m/scripts/boundary-version-hash.py", line 35, in <module>\n' +
+      "    try:print(boundary_hash(con.execute('SELECT location_id,valid_from,valid_to,geometry FROM boundaries WHERE is_example=0'),args.index.resolve()))\n" +
+      '  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-ZXDr0m/scripts/boundary-version-hash.py", line 21, in boundary_hash\n' +
+      '    from shapely.geometry import shape\n' +
+      "ModuleNotFoundError: No module named 'shapely'\n"
+  ],
+  pid: 5529,
+  stdout: '',
+  stderr: 'Traceback (most recent call last):\n' +
+    '  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-ZXDr0m/scripts/boundary-version-hash.py", line 35, in <module>\n' +
+    "    try:print(boundary_hash(con.execute('SELECT location_id,valid_from,valid_to,geometry FROM boundaries WHERE is_example=0'),args.index.resolve()))\n" +
+    '  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-ZXDr0m/scripts/boundary-version-hash.py", line 21, in boundary_hash\n' +
+    '    from shapely.geometry import shape\n' +
+    "ModuleNotFoundError: No module named 'shapely'\n"
+}
+
+Node.js v24.19.0
+file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/scripts/package-build.mjs:123
+      child.on('exit', (code, signal) => code === 0 ? resolve() : reject(Error(`Package ${kind} build failed (${signal ?? code}); prior outputs retained`)));
+                                                                         ^
+
+Error: Package static build failed (1); prior outputs retained
+    at ChildProcess.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/scripts/package-build.mjs:123:74)
+    at ChildProcess.emit (node:events:509:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:295:12)
+
+Node.js v24.19.0
+      179.58 real       131.67 user        32.64 sys
+          1430061056  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+             3756461  page reclaims
+               22070  page faults
+                   0  swaps
+                   0  block input operations
+                   2  block output operations
+               10324  messages sent
+                5189  messages received
+                   0  signals received
+               89371  voluntary context switches
+              662560  involuntary context switches
+         39637098507  instructions retired
+         16126813421  cycles elapsed
+            50711104  peak memory footprint

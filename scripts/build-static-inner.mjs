@@ -34,6 +34,7 @@ const {packageNativeLatitudes} = await import('./package-native-latitudes.mjs');
 const {rebindCoverageManifest} = await import('./rebind-coverage-manifest.mjs');
 const {foldCoverageContinuation,selectBuildContextValidator} = await import('./native-ownership/chained-build-context.mjs');
 const {readPackageCurrentExecution} = await import('../coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs');
+const {preparePackageSelectedAdditive,publishPackageSelectedAdditive} = await import('../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs');
 function releaseBuildContextBaselines(context) {
   const third=context.coverageContinuation.predecessorGeometryValidation;
   const results=third?[context.geometryValidation,third,context.coverageContinuation.originalGeometryValidation]:[context.geometryValidation,context.coverageContinuation.originalGeometryValidation];
@@ -102,6 +103,7 @@ const fixedGrid=selectedGrid?.manifest;
 const currentExecution=!continuedContext&&contextStage?.version===2?readPackageCurrentExecution(process.cwd()):undefined;
 const nativeBuildContext=continuedContext??(fixedGrid?.method?await validateBuildContextStage({expectedReference:geographicRelease,currentExecution}):null);
 if(continuedContext&&(fixedGridPath!==contextStage.nativeManifest.path||selectedGrid.sha256!==contextStage.nativeManifest.sha256||geographicRelease.id!==contextStage.release_id))throw Error('Normal selected bank differs from actual three-step validation');
+const packageAdditive=await preparePackageSelectedAdditive({root:process.cwd(),currentExecution,consumedContext:continuedContext,restoredReceipt:restoredCanonical,selectedGrid,geographicRelease});
 const nativeContextInputStage=nativeBuildContext?.receipt??null;
 if(!continuedContext&&nativeBuildContext?.coverageContinuation)releaseBuildContextBaselines(nativeBuildContext);
 const db = openDatabase();
@@ -150,6 +152,7 @@ try {
     boundaries: db.prepare('SELECT * FROM boundaries WHERE location_id IN (SELECT id FROM locations WHERE active=1)').all().map(record => ({ ...record, geometry: JSON.parse(record.geometry) }))
   };
   await build({ base: './', define: { 'import.meta.env.VITE_STATIC_ATLAS': JSON.stringify('true'),'import.meta.env.VITE_HOSTED_DATABASE': JSON.stringify(process.env.ATLAS_HOSTED_BUILD==='1'?'true':'false') } });
+  publishPackageSelectedAdditive(packageAdditive,{root:process.cwd()});
   const typedBytes=await fs.readFile('data/typed-prepared-v1.json');
   await resolveTypedSnapshot(JSON.parse(typedBytes),2026,{examples:true});
   await fs.writeFile('dist/typed-evidence.json',typedBytes);
@@ -226,7 +229,7 @@ try {
     for(const part of coverageClassification.parts)await fs.copyFile('data/'+part.path,'dist/'+part.path);
   }
   const referenceBundle=await packageReferenceBundle({source:'data/reference-attributes',destination:'dist/reference-attributes',expectedFootprints:geographicRelease.footprints_sha256});
-  await fs.writeFile('dist/atlas-geography.json', JSON.stringify({gridVerification:selectedGrid?.verification??null,nativeContextInputStage,coverageClassification,referenceAttributes:referenceBundle.descriptor,contentCapabilities:{mapSnapshots:1,datedGeography:1,datedFootprints:0,storageExport:2},type:reference.type,sourceQualityReviews:reference.sourceQualityReviews,boundarySourceReviews,reference_release:geographicRelease,preparedEvidence:{footprints_sha256:preparedEvidence.footprints_sha256,hierarchy_sha256:preparedEvidence.hierarchy_sha256,index_sha256:createHash('sha256').update(await fs.readFile('data/prepared-evidence/index.json')).digest('hex')},pixelMissing:reference.pixelMissing,units:reference.units,temporal:{history:[],links:reference.temporal.links},entityParts,temporalHistoryParts,parts:catalogParts,geometryParts:parts,pixelMap}));
+  await fs.writeFile('dist/atlas-geography.json', JSON.stringify({gridVerification:selectedGrid?.verification??null,nativeContextInputStage,coverageClassification,referenceAttributes:referenceBundle.descriptor,contentCapabilities:{mapSnapshots:1,datedGeography:1,datedFootprints:0,storageExport:2},type:reference.type,sourceQualityReviews:reference.sourceQualityReviews,boundarySourceReviews,reference_release:packageAdditive?.reference_release??geographicRelease,...(packageAdditive?{additiveRelease:packageAdditive.additiveRelease}:{}),preparedEvidence:{footprints_sha256:preparedEvidence.footprints_sha256,hierarchy_sha256:preparedEvidence.hierarchy_sha256,index_sha256:createHash('sha256').update(await fs.readFile('data/prepared-evidence/index.json')).digest('hex')},pixelMissing:reference.pixelMissing,units:reference.units,temporal:{history:[],links:reference.temporal.links},entityParts,temporalHistoryParts,parts:catalogParts,geometryParts:parts,pixelMap}));
   await fs.writeFile('dist/atlas-history.json.gz',gzipSync(JSON.stringify(history)));
   await fs.writeFile('dist/environment-classifications.json',JSON.stringify({version:1,unknown:null,attributes:environmentClassifications}));
   await packageOwnershipHistory({source:'data/ownership-history',destination:'dist/ownership-history',hosted:process.env.ATLAS_HOSTED_BUILD==='1',compactReceipts:true});

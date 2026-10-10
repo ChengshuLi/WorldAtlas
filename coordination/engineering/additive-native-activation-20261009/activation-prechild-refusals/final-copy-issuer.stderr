@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py", line 42, in <module>
+    result=issue(pathlib.Path(sys.argv[1]),sys.argv[2],pathlib.Path(sys.argv[3]),pathlib.Path(sys.argv[4]),pathlib.Path(sys.argv[5]));assert sys.argv[6]=='issue-only';print(json.dumps({'bytes':len(contract.canonical(result)),'sha256':contract.digest(contract.canonical(result)),'operating_phase_bytes':result['operating_phase_bytes']}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py", line 31, in issue
+    contract.capture(root,head,pre)
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/coordination/engineering/additive-native-composition-20261009/execution-contract.py", line 49, in capture
+    admit([*pins,*code],extra=sum(p['bytes'] for p in pre['code'])) # Whole Git plus FS code separately.
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/coordination/engineering/additive-native-composition-20261009/execution-contract.py", line 33, in admit
+    stat_pin(p)
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/coordination/engineering/additive-native-composition-20261009/execution-contract.py", line 10, in stat_pin
+    s=p.stat();assert p.is_file() and s.st_size==pin['bytes'] and s.st_mode&0o777==pin['mode']
+      ^^^^^^^^
+  File "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 840, in stat
+    return os.stat(self, follow_symlinks=follow_symlinks)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs'

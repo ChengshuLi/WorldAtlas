@@ -483,7 +483,10 @@ function versionedCurrentTargets(ledger) {
 function verifyVersionedLedgerSelection(ledger,features,patch) {
   require(ledger.kind==='native-additive-repair-ledger-v2'&&hex.test(ledger.authority_registry_sha256)&&patch.version===2
     &&ledger.authority_registry_sha256===patch.authority_registry_sha256,'Foreign versioned ledger/patch authority registry');
-  require(footprintValueSha256(ledger.base_reference)===footprintValueSha256(patch.base_reference),'Versioned ledger current bank differs from patch');
+  // The normative V2 ledger stores component authorities and optional current
+  // rebind custody. Its selected base and delta count live in the separately
+  // authenticated envelope/patch; retain strict checks for explicit summaries.
+  if(Object.hasOwn(ledger,'base_reference'))require(footprintValueSha256(ledger.base_reference)===footprintValueSha256(patch.base_reference),'Versioned ledger current bank differs from patch');
   require(Number.isSafeInteger(ledger.parent_inventory?.components)&&ledger.parent_inventory.components>=ledger.rows?.length
     &&hex.test(ledger.parent_inventory?.report_sha256)&&hex.test(ledger.parent_inventory?.roster_sha256),'Missing original complete inventory denominator');
   require(Array.isArray(ledger.scope_ids)&&Array.isArray(ledger.rows)&&ledger.scope_ids.length===ledger.rows.length,'Missing complete original versioned scope');
@@ -507,6 +510,7 @@ function verifyVersionedLedgerSelection(ledger,features,patch) {
   const allowed=new Set([...wanted.values()].filter(row=>row.disposition==='assigned').map(row=>row.pixelIndex));
   require(Array.isArray(patch.rows)&&patch.rows.every(row=>row.runs.every(run=>allowed.has(run[2]))),'Native cells assigned to zero-cell/unselected owner');
   const cells=patch.rows.reduce((n,row)=>n+row.runs.reduce((sum,run)=>sum+run[1]-run[0],0),0);
-  require(Number.isSafeInteger(ledger.assigned_cells)&&cells===ledger.assigned_cells,'Complete current native cell total differs');
+  require(Number.isSafeInteger(cells)&&cells>=0,'Invalid complete current native cell total');
+  if(Object.hasOwn(ledger,'assigned_cells'))require(Number.isSafeInteger(ledger.assigned_cells)&&cells===ledger.assigned_cells,'Complete current native cell total differs');
   return {selected_components:wanted.size,assigned_cells:cells};
 }

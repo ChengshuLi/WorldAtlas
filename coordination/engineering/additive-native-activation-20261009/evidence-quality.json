@@ -6,63 +6,1514 @@
   "subject_ids": [],
   "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "baseline": {
-    "commit": "a7fcaac032534593a4b68ee4e910f0de278087ae",
+    "commit": "35fa0b9823f97f093ed0392cae5565d17df29ada",
     "files": [
+      {
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/original-registry.json",
+        "bytes": 2012,
+        "sha256": "9cb1303f108fc979b2d106445fa8c29a05945ffb0979556442f2b46eadb3a43e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/composed-original-ledger.json",
+        "bytes": 198458,
+        "sha256": "c6f161a1a4ea05eeb6493bee580f5c96483126b1be5f04a45a58cc2e31e2c3a7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+        "bytes": 252447,
+        "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-selection-receipt.json",
+        "bytes": 14625,
+        "sha256": "dcc3533b9eea251b9d5a323a05da441816a2affe2889c2484174ec853e591691",
+        "hash_kind": "file-bytes"
+      },
       {
         "path": "coordination/engineering/additive-native-composition-20261009/evidence-quality.json",
         "bytes": 46730,
         "sha256": "6148952a9b53f652f4832a549d75f7b13076fb04546d889bdc694010d1d2d294",
-        "hash_kind": "file-bytes",
-        "role": "original-source"
+        "hash_kind": "file-bytes"
       }
     ],
     "pins": {
+      "baseline_0": "9cb1303f108fc979b2d106445fa8c29a05945ffb0979556442f2b46eadb3a43e",
+      "baseline_1": "c6f161a1a4ea05eeb6493bee580f5c96483126b1be5f04a45a58cc2e31e2c3a7",
+      "baseline_2": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "baseline_3": "dcc3533b9eea251b9d5a323a05da441816a2affe2889c2484174ec853e591691",
       "merged_source_introduction_manifest": "6148952a9b53f652f4832a549d75f7b13076fb04546d889bdc694010d1d2d294"
     },
     "pin_files": {
+      "baseline_0": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/original-registry.json",
+      "baseline_1": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/composed-original-ledger.json",
+      "baseline_2": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+      "baseline_3": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-selection-receipt.json",
       "merged_source_introduction_manifest": "coordination/engineering/additive-native-composition-20261009/evidence-quality.json"
     }
   },
-  "sources": [],
+  "sources": [
+    {
+      "id": "retained-component-authorities",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1523",
+      "role": "Original pilot and Alaska source-relative component policies and qualifications, with current v9 before-state custody",
+      "vintage": "Original pilot52bed and Alaska b82ee; current-v9 qualification f64c8e91919dedeeb2c4abea547ece8544290c3f",
+      "retrieved_at": "2026-10-09",
+      "license": {
+        "status": "unknown",
+        "terms": "Original source terms and limitations retained in immutable source authority; no additional redistribution authority asserted"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Original registry, ledger and whole source/request/body locators remain in merged1547/1561 and the retained qualifications",
+      "limit": "Source-relative repairs only; contemporary physical authority, historical borders and new source classes are not approved. Original eight exceptions remain exceptions.",
+      "temporal_status": "reference"
+    }
+  ],
   "outputs": [
     {
-      "path": "coordination/engineering/additive-native-activation-20261009/independent-custody-record-ownership-review.json",
-      "bytes": 8762,
-      "sha256": "e256a2cfed615401714463f95c2ae8a88c8f0d79212a4a8d40097d00ca46f444",
-      "hash_kind": "file-bytes",
-      "role": "independent-review"
+      "path": "coordination/engineering/additive-native-activation-20261009/activation-prechild-refusals/final-copy-issuer.stderr",
+      "bytes": 2739,
+      "sha256": "09f1644214c213d00c62415e80e9e66bbb17408e7970fe72a4fd25f082af7d33",
+      "hash_kind": "file-bytes"
     },
     {
-      "path": "coordination/engineering/additive-native-activation-20261009/custody-copy-provisional-geography.json",
-      "bytes": 677103,
-      "sha256": "df85e33e833ba3992eb65524876c12e02ed94e6bfbafc8d9fea0fa72ecb4847e",
-      "hash_kind": "file-bytes",
-      "role": "provisional-diagnostic"
+      "path": "coordination/engineering/additive-native-activation-20261009/activation-prechild-refusals/final-copy-prepare.stderr",
+      "bytes": 1466,
+      "sha256": "7cef855d3cd6e210253ae22ffbc4a793607b6a8c807c1cde37e735d269085e69",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/activation-prechild-refusals/final-copy-trusted-geography.stderr",
+      "bytes": 947,
+      "sha256": "d5a1f13d420f5db5c33205412f59a6eadddd525fb3bccadc1b8cc6d09f2cefb4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/choiseul-six-existing-dispositions.json",
+      "bytes": 7477,
+      "sha256": "30ffa368b6c3c5ccf6d71f9d2dcfc9168c292a9ea42aa2a88b483186be940a2c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-rebind-source-view-controls.log",
+      "bytes": 222,
+      "sha256": "0d45329516b671c953b56fa67fcbb4344dc1b18298752373dd1443825130ed76",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-base-alias/certificate.json",
+      "bytes": 3165,
+      "sha256": "b93496571209cfc21174c8021bf0a02de7332daac2985b2932c8ff4bdd5cce63",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-base-alias/code-source.json",
+      "bytes": 52013,
+      "sha256": "9f3fd9840aea9c87e6110ed1a0210dc041ac21a14e5a2478dcd96edda67c4c96",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-base-alias/facts.json",
+      "bytes": 3263,
+      "sha256": "767ec8beeaacec39f05691c86b6ec5129deead0b771435b78b933d0df2f0822b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-base-alias/host-supply.json",
+      "bytes": 1339,
+      "sha256": "216526f56d40db319e359fe91cc60c788c24c3612a7e61c7cda69536a943361f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-base-alias/issued-execution.json",
+      "bytes": 26689,
+      "sha256": "e7540b3ab62cb298a8f74f7f837ecdae90acb8e9414a17d36c7dd99d9f4d26cf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-base-alias/issued-plan.json",
+      "bytes": 7702,
+      "sha256": "a474a70b0ac50ccf7c753fc173b3c21a7c460d2679263f81050c9f2fed2e22c5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-base-alias/launch.json",
+      "bytes": 930,
+      "sha256": "f093305557d3e0d2c324b9c98aa1f0aff33167ef85536853fd72f9005a26178b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-base-alias/operating.json",
+      "bytes": 2196,
+      "sha256": "0cb42eb3f30d8fa212bd38b7426480df3b1f79b51905965100ed81d1d6631b01",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-base-alias/publication.json",
+      "bytes": 475,
+      "sha256": "a1a150493d601cc18ca83c66cb4aaba8c5391c2ffd52fca08b130f98cf1206c0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-base-alias/request.json",
+      "bytes": 746471,
+      "sha256": "196536d38eb4cfbba612305f91114e344a6041ccd24b74a2e005a56c68c6994d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-base-alias/result.json",
+      "bytes": 1052980,
+      "sha256": "f5032a23094af866abc5d946008057dab7d474ff43f8721ef45715ba2fc510e1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-base-alias/samples.jsonl",
+      "bytes": 38856,
+      "sha256": "35c35f406133aef550de2be8b1f7a5404f6cd8a6b4c5c3e20478a30f4b816c94",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-base-alias/stderr.log",
+      "bytes": 777,
+      "sha256": "51933ff5494fc3ba86e1c3ca387990e3ebbb12c91dcd976c5eb731610a9a780c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-base-alias/stdout.json",
+      "bytes": 376,
+      "sha256": "d67089c0de346fab6eeb073cd276e34cb7f5f9920a7de96a2e9705db6fe2f3f2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-base-alias/stock-report.json",
+      "bytes": 16493,
+      "sha256": "09b88c3551f486b3ff120325246fbb2e492a2ce420c02bf0191b94347a9d9744",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-base-alias/terminal.json",
+      "bytes": 1459,
+      "sha256": "81cf8acf67b3a5b9341aee6a45ddef02d346c79de52e0097cea9fb78feacf65c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/certificate.json",
+      "bytes": 3159,
+      "sha256": "5555f7a659479e704628f6a5108a798b48963a89ab382c1b33ed2af8f1880b22",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/code-source.json",
+      "bytes": 52042,
+      "sha256": "6e4ca40aa9f0c76be32523d8ddae0646442284fb559400fe31f3ffc6e3e671b6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/facts.json",
+      "bytes": 3263,
+      "sha256": "86b182b879e994d6235cf35399859cc0d719c5e170897b5b11d43c3c513d1199",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/host-supply.json",
+      "bytes": 1339,
+      "sha256": "dcb71bf45b6a44fc731f1ad3314a52d41b778cc5b6c45b8d5ee4cb72733bf0b9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/issued-execution.json",
+      "bytes": 26710,
+      "sha256": "2c72e2058f2e7050931468d6afd44996d949b61bc8c5c63b55ac7a7cbfd4ae87",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/issued-plan.json",
+      "bytes": 7701,
+      "sha256": "4c70daf37e2303f43416742cd04e58de4abdee14d04de9b18777bc25f8879d78",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/launch.json",
+      "bytes": 943,
+      "sha256": "0a330d6bae12f4c015a26331da72ba4c50d7219e7418d487b6a32f6160b114bb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/operating.json",
+      "bytes": 2191,
+      "sha256": "0d582c065a4913c9966af48701cfbe04fc481945a41a94e7bc221e2d4605863c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/publication.json",
+      "bytes": 475,
+      "sha256": "3be780e3b45176340b7074f01672fcf2bd0404490972b4ea94cccebc68dd6de1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/request.json",
+      "bytes": 746491,
+      "sha256": "8877ca18d050ae7fd2d8853cf69bfadb4f544fd059bc30a8b0f8e706823f0217",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/result.json",
+      "bytes": 1052979,
+      "sha256": "1ad8ab377b871c8960c64feb22241317162f308987bbf83b9b2aad776c92693e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/samples.jsonl",
+      "bytes": 44908,
+      "sha256": "918d2331e87cf7af81c2af0864dbfc9b7221a0aa27236ac8819c6fd16fddf4fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/stderr.log",
+      "bytes": 777,
+      "sha256": "d8c7fa9b092cd6b412e2135d1f1525fcd882bb90fb4504f72eeae18d4a4b3870",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/stdout.json",
+      "bytes": 376,
+      "sha256": "66cb8e3719eee075bf80aeee8ad5862150129dd8d92961aa5c56a844958e7c95",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/stock-report.json",
+      "bytes": 14940,
+      "sha256": "39b716212b78e3a8b6b9f68ae61a7b5ebbe06c4fb4f9e68269d1466b2eb33bcd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/terminal.json",
+      "bytes": 1472,
+      "sha256": "70496dc1e251c8c129821adbb7f5fdafdce47a85daeffcd888bf5fe422750073",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-custody/certificate.json",
+      "bytes": 3158,
+      "sha256": "64ef7460731e8f07c922bb3436d06d347209ccde61202d8aa12621b24dcb76fe",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-custody/code-source.json",
+      "bytes": 52012,
+      "sha256": "6c82cbc9cca0236b7af09efcef4da74745fc5427787a1df61283d761ce6dda6c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-custody/facts.json",
+      "bytes": 3263,
+      "sha256": "5cdab81d4ac15b8cfa1e2e79acc107378fcadf4021ddb0bdb40e58e5bbe75af9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-custody/host-supply.json",
+      "bytes": 1339,
+      "sha256": "0e45619676288ce8a729186b61739423f424a4be94a0b1f07af3ce41eedc3f0c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-custody/issued-execution.json",
+      "bytes": 26691,
+      "sha256": "a4f22854f34fda0389504aecc12ed56d58efd585c219db134665d8941e9098ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-custody/issued-plan.json",
+      "bytes": 7710,
+      "sha256": "0ce2ed270013412db4059e2d6435e96df0355cf04a64e79e28e341a7cafeab55",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-custody/launch.json",
+      "bytes": 935,
+      "sha256": "b4cd4bf8d19049c646cd909ea4d1b78c564ff6bfd3c021100431a20524bd52df",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-custody/operating.json",
+      "bytes": 2181,
+      "sha256": "93cad7e49d4ab5e37df819d353b192f9793160b1e4cf2a8375e75b24c33bc087",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-custody/publication.json",
+      "bytes": 475,
+      "sha256": "7972417a63589d5967033201d3caf80316f7e5afda81bf47ac664b3f650bdf19",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-custody/request.json",
+      "bytes": 746481,
+      "sha256": "3c89c2a878a32b67656c8eb6c2e823f6b4bd40c35dad440920f42533499051e7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-custody/result.json",
+      "bytes": 1052988,
+      "sha256": "3fc42c589d87af53ba936582979c903cac58b57439af73641178e89e4c864232",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-custody/samples.jsonl",
+      "bytes": 33402,
+      "sha256": "7122708752f77baf39e71b30729815e3be970ab93b313c261eaca69c95243a9e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-custody/stderr.log",
+      "bytes": 777,
+      "sha256": "685fb82ba40a3c49432ca3e4744bc6d6d76b272b234fc0f6dc805e8297623121",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-custody/stdout.json",
+      "bytes": 376,
+      "sha256": "327548f527ecddacc8ae6fcdd3f72055c0f56f974cedfc5120a13ac485e25874",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-custody/stock-report.json",
+      "bytes": 14393,
+      "sha256": "aa830c65a5b1053b6b4c93af8debaf40ef4cbe571e1719fcfd9c24200fef7549",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-custody/terminal.json",
+      "bytes": 1464,
+      "sha256": "ff334348edb16dc3b95ec95fe563c025bfb26267210dcfc7aeb46476f63489c9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/certificate.json",
+      "bytes": 3148,
+      "sha256": "66f3c1f2827d01368ee50950537842733f23fcf5c496ecdafa1ac5e5b6dd7680",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/code-source.json",
+      "bytes": 52026,
+      "sha256": "232661f8d29871ace1a77abe569aed6690381c274bdf6d561f1839914494e484",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/facts.json",
+      "bytes": 3263,
+      "sha256": "5337138d08966b413a19083bc564eab371297e14fd04a7a3257327ad0cdeab69",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/host-supply.json",
+      "bytes": 1339,
+      "sha256": "e84afb847652fb8bb976ed2ee1e1237a65d134755c4d65d34ac35b7c1b37d7e5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/issued-execution.json",
+      "bytes": 26698,
+      "sha256": "61d099b229fc2b95139f103e0eed0e633182293cd04a8f7f2b7b9c11c6885e90",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/issued-plan.json",
+      "bytes": 7710,
+      "sha256": "468389fbd0f4207d0e347ccd4455b61a1a20ba4f041d18c92639cee214c27c0e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/launch.json",
+      "bytes": 935,
+      "sha256": "691300afd1c7cb407c55d58bda658639b405bec3ed74a0f6ae289114bd61755f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/operating.json",
+      "bytes": 2171,
+      "sha256": "b0e0efb504f356230f8e970ae21e405c4a1367469c3bbbcae07f65778f968757",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/publication.json",
+      "bytes": 475,
+      "sha256": "4d6dadafc3561335b6d36816762b2b850b9ffef9cc251a1da1a0eff4fe7d9a9b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/request.json",
+      "bytes": 746488,
+      "sha256": "046c19d2fd0d13cd1b71378fff5d5421deec3e46d283c10ee250cb5da1a652da",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/result.json",
+      "bytes": 1052988,
+      "sha256": "3fc42c589d87af53ba936582979c903cac58b57439af73641178e89e4c864232",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/samples.jsonl",
+      "bytes": 48011,
+      "sha256": "97fb33501d39223a1ab2c069ce8a2d3fedc9604143df4bf1dd7eb9cf68a92c57",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/stderr.log",
+      "bytes": 777,
+      "sha256": "e8b0953653abbd6d17094ba441f4aaca03f3869a0b142af753c11e1f82eca119",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/stdout.json",
+      "bytes": 376,
+      "sha256": "fa7601ab364ca5d0b59ede5790d75eff93eed5a5dd4c9031c844e293e9861ee4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/stock-report.json",
+      "bytes": 14941,
+      "sha256": "abdb488171fd0413ac65a65613bde300311909dd20619fa09a522ff54a2aee73",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/terminal.json",
+      "bytes": 1464,
+      "sha256": "fe21ca1d7d0c8d95b57c8623378da506a0057e32b7b2d5a579cdc882d9b1051f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-gc/certificate.json",
+      "bytes": 3125,
+      "sha256": "c625238eea34204e86af9d0ec25bcd30d588b7e0a55e9def5700f5644b1f737c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-gc/code-source.json",
+      "bytes": 52036,
+      "sha256": "77259ac57b4268813ac53ce442eb328b20d1415aedb1e2a2b957e6e3403270fb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-gc/facts.json",
+      "bytes": 3263,
+      "sha256": "ce5f906f97b421587df6540a250b22257dc301f9db7c1c44e7f4631f53fbe4da",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-gc/host-supply.json",
+      "bytes": 1339,
+      "sha256": "2ab22160cd6b31d94286665b0f3672c2ee9e2b54575a7083e5d6c7071ff1f492",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-gc/issued-execution.json",
+      "bytes": 26709,
+      "sha256": "9ada842d454cfcbdfa1c77bbe24276584430de9a6dc01777f0ee56c19bfff903",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-gc/issued-plan.json",
+      "bytes": 7702,
+      "sha256": "fd9b426ce5e00f4faac820de75091dcc8fa28cfcb330e1b3ffc18d0ce8516e08",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-gc/launch.json",
+      "bytes": 947,
+      "sha256": "de2f6fd995d880066d41200ed522ba233266b3063bdb88432af436be72ce88ec",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-gc/operating.json",
+      "bytes": 2156,
+      "sha256": "4a27d0cb528b528788dd62e8b5ac9228c7d017654bc302098c69d4e7a44b3a47",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-gc/publication.json",
+      "bytes": 475,
+      "sha256": "f411209cb882ecff84e4d8f6d986adf20088629a68f581d61c7027a22ec16671",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-gc/request.json",
+      "bytes": 746491,
+      "sha256": "717c59f690015e47c3c621697480d0c63abd8b978c1fd534bb8ae3935a8b72aa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-gc/result.json",
+      "bytes": 1052980,
+      "sha256": "790704a9a6dd10baaaa156ee3f221ed195ae058f00f272459f0b8985b9ecded2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-gc/samples.jsonl",
+      "bytes": 30392,
+      "sha256": "87e13361b06069e66473e49c8a57099ea2860244d31bf2c98810909456e349d2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-gc/stderr.log",
+      "bytes": 777,
+      "sha256": "ded37c1e52bc29c657e6398535be0729bd13651a335f3fdf1f94eb70edd2f789",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-gc/stdout.json",
+      "bytes": 376,
+      "sha256": "5e108f5888a64e0608e21cfebb6ba6bcaa85b78fcc7a14924432e7891b81ccf1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-gc/stock-report.json",
+      "bytes": 13109,
+      "sha256": "8a9384ff65955a1493e615a3d4b31f48ed350f24e35bf60a46f4e6afac62f097",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-gc/terminal.json",
+      "bytes": 1476,
+      "sha256": "de61c050aee61152597e83da1003f8ab2054a48bb4468eff717d4e139601d9c0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-native-lifetime-refused/code-source.json",
+      "bytes": 52030,
+      "sha256": "15dec6c06b3a621a9752ba8a5ae483702294fd6cc2b7b05c52eaf217b7fb4685",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-native-lifetime-refused/host-supply.json",
+      "bytes": 1339,
+      "sha256": "3c8b9b9d29dccd3d212477437f3f4ed71835aad1fe6c7aa1c423e43395d54c7b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-native-lifetime-refused/issued-execution.json",
+      "bytes": 26701,
+      "sha256": "01fce5d8835b712b24dda2ebdf2a6e37a21c552ebf1a5d37405b20c570fdcfd2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-native-lifetime-refused/issued-plan.json",
+      "bytes": 7709,
+      "sha256": "e3abdef3090c709ee4876030c24dc13002541ede09f2313c1ac9248c4de460d4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-native-lifetime-refused/launch.json",
+      "bytes": 937,
+      "sha256": "b9677991a0734514295a98ea8f214d124e528d804bec50b7e1a27d925f07fea2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-native-lifetime-refused/samples.jsonl",
+      "bytes": 35721,
+      "sha256": "268da71f1fc8954882b9fcb00582be2fb365619b39b19607b7baf290ccbf04a0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-native-lifetime-refused/stderr.log",
+      "bytes": 813,
+      "sha256": "77826d27a3dafcc8d6c78164bbec4fb1403979da551be3de576afbc507f8aab0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-native-lifetime-refused/stdout.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-native-lifetime-refused/stock-report.json",
+      "bytes": 13115,
+      "sha256": "90c4e64050c7140caff6db899a2a80cd6f57dc52e3a658e5328d8dffc383ffcb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-native-lifetime-refused/terminal.json",
+      "bytes": 1473,
+      "sha256": "ad9ba1e7680cac8c3c9baafa58f5f8d39188a19e16200f54a9a2a17ec8f07a38",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-source-view/certificate.json",
+      "bytes": 3177,
+      "sha256": "7246024b89d5547e5e027a52a480300695954b8b157e5729c248ca0bf34b8163",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-source-view/code-source.json",
+      "bytes": 52014,
+      "sha256": "1b83fa040d40e6ab4dedfb9b520f631eabc766390a4c68a721c6df9bd7ea2420",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-source-view/facts.json",
+      "bytes": 3263,
+      "sha256": "da8ae1acd06fc22647c61184aeac8f8629d4bac078d30e81716c13f7c0c1c88a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-source-view/host-supply.json",
+      "bytes": 1339,
+      "sha256": "bba7cf85085f3fb891d9a872ba07cd9cf0029ca9a174eda1662e818edd40657f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-source-view/issued-execution.json",
+      "bytes": 26689,
+      "sha256": "610af46813d99f56cb5ac11c1c0903313784e686b78cce961c175acb940db4d5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-source-view/issued-plan.json",
+      "bytes": 7709,
+      "sha256": "997388b1699afbd8ef2efcf62ad531383390e0efa61123c312b16dc41a3b66cd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-source-view/launch.json",
+      "bytes": 926,
+      "sha256": "4639faeceab59fbf081c64deb73e91d2da34f07a696e9923c3fd56d55130bf6a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-source-view/operating.json",
+      "bytes": 2201,
+      "sha256": "cf44b35473e78bc687267f938fceeb07d6110c5f204345b7d8b2ae950f541acb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-source-view/publication.json",
+      "bytes": 475,
+      "sha256": "585d650c1c832031282967c6f9b3c8b7c88f71f314b74a943ba33a2d6df97527",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-source-view/request.json",
+      "bytes": 746478,
+      "sha256": "a42df4564037a8a1d6a8e5dd4502345c4e80cdcffffd2354a0bcaf5dec009dee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-source-view/result.json",
+      "bytes": 1052987,
+      "sha256": "0ed00b4712f2ba22af1cca07ac3e6323ae6d73892731ebab3c5a6d80ca7b0259",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-source-view/samples.jsonl",
+      "bytes": 33144,
+      "sha256": "0103188afc9ba36d8b2d409cb34eb4fc6b3109e63c73c570516d4465976010d9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-source-view/stderr.log",
+      "bytes": 777,
+      "sha256": "d9e392ebdc7b7b4b6061838f252e48e2661abd7bd70e51f8749491fbc08fdcab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-source-view/stdout.json",
+      "bytes": 376,
+      "sha256": "05a097e5ff0d4a4fb804498df898d20e7a8c750c19516008d3420dd85cc389f3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-source-view/stock-report.json",
+      "bytes": 14239,
+      "sha256": "1e68baf0096e8dbea254a704324181fc51a79ccf1ccf0295b12c1cde31c3b493",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-source-view/terminal.json",
+      "bytes": 1458,
+      "sha256": "44ec6ec460abcf8dc03c9819e6217c0c7cd96496e2cb22652658df848bfd6d30",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/certificate.json",
+      "bytes": 3109,
+      "sha256": "cab515b5de14955f03101e45f4bbedde2365039b5c2180103a1adb2d0d097d79",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/code-source.json",
+      "bytes": 51989,
+      "sha256": "4f0d4c19c06b80644b4500770be8babf07684ec75fa8c79851f84859818ebd30",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/facts.json",
+      "bytes": 3263,
+      "sha256": "af2a3d117526555075b0e0d668cc467e67481c02c6b2a4bfdfe581ff2b308f05",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/host-supply.json",
+      "bytes": 1339,
+      "sha256": "cd610466f384130d82ee54aa7ac79d06df64937eb2fdc65d0e3ad0f404e11bb8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/issued-execution.json",
+      "bytes": 26670,
+      "sha256": "4f62e1b10792503b4100b8111d9966b9a3b7133f020288300499dd081ceffd64",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/issued-plan.json",
+      "bytes": 7701,
+      "sha256": "f1b24f6ea7d23a1fd44e586de0c1139235aaf3a26a2ab4d9db94ceae40948609",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/launch.json",
+      "bytes": 916,
+      "sha256": "5672a8d06aac6e15228c10245eed6a95276e34af7d63339881594e8adb9412b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/operating.json",
+      "bytes": 2141,
+      "sha256": "ba7a80f8a002ebfbdaf0faa1bfaf85277c0d540a0c9d46066d09fb7c786f4e36",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/publication.json",
+      "bytes": 475,
+      "sha256": "05ae60ef725dc77d5766437d3dd5ee9ba25b6cecdb5e72d98dc5a34b7e435a6f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/request.json",
+      "bytes": 746451,
+      "sha256": "470243971ba83d96ace72d4275490b01ffd4050a1f7dc64243e6c6cc2ab7fa67",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/result.json",
+      "bytes": 1052979,
+      "sha256": "1ad8ab377b871c8960c64feb22241317162f308987bbf83b9b2aad776c92693e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/samples.jsonl",
+      "bytes": 45082,
+      "sha256": "4145a8ee965e37797a091b17bc395cde8e790e2022db0fca71860668920d2ee3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/stderr.log",
+      "bytes": 777,
+      "sha256": "7a60eb2e36edf4d17deb9e0e5c77a5f3a63842d36289eb8957ab9f8733013c1a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/stdout.json",
+      "bytes": 376,
+      "sha256": "f741e8f328b0914ad5eaf29fb95d5d82935d26c073aec1e4aeedb67eaad8f980",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/stock-report.json",
+      "bytes": 15798,
+      "sha256": "1d247e8c479ccdfa3f6b785e95247bf23e7d24e550741120a9c1d8cf7746a047",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/terminal.json",
+      "bytes": 1445,
+      "sha256": "2588838f616e0c8ab20ad5fc840b4074384d0442d218cadb4963ffda785fccb8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/independent-native-consumption-wrapper-review.json",
+      "bytes": 6914,
+      "sha256": "ca283dcb0814cfbbd4430d8646eb5af3ad6e89af2669343a478c86fecf736519",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/independent-native-consumption-wrapper-self-pin-review.json",
+      "bytes": 7379,
+      "sha256": "87ab56e1354dd8a8fda532bfa008436abd35c6c506f0e0685eaa2f2f07f59a8a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/original-target-source-bindings.json",
+      "bytes": 12335,
+      "sha256": "f664c6e6e42b746947b00afa5dd2396e88f5e57efef26d281e7c7b71a3b5b940",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-attempts/static-build-complete.stderr.log",
+      "bytes": 3515,
+      "sha256": "4d32006916e8d2707eaaefcdba048c9911455d79af06f952a1b1b927fe9bff7a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-attempts/static-build-complete.stdout.log",
+      "bytes": 462,
+      "sha256": "765691530723fc0d62739a100bf7cb474a07615626bc0cde4eb2862e10ad9a4c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-attempts/static-build-copy-frame.stderr.log",
+      "bytes": 5960,
+      "sha256": "aa3795112ffbd0488e33df75954f1f0d2b63c9911df52374ef6f8efbe67d705a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-attempts/static-build-copy-frame.stdout.log",
+      "bytes": 470,
+      "sha256": "453b378c0e4b01ac779b2ac6c880a7b0560786f17cadc7d9c12242af7ea19b30",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-attempts/static-build-declared.stderr.log",
+      "bytes": 4625,
+      "sha256": "f5a8c365583edb9fc3b576502789332f89a10262ca26d1a9b904f6ccb07e5ac3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-attempts/static-build-declared.stdout.log",
+      "bytes": 465,
+      "sha256": "11a79a5e4150684cd62a0d4023a7dce879e50c5a5adde5a7c2000e7a2c97de5b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-attempts/static-build-final.stderr.log",
+      "bytes": 2849,
+      "sha256": "65c74d02070e827111913982bf2fcc51d8e4016deb967d224305fba84ebdac05",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-attempts/static-build-final.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-attempts/static-build.stderr.log",
+      "bytes": 2406,
+      "sha256": "25523d456f8eb2b232d3954848dd2bbab93ef02c888da9413aab744f596bb52c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-attempts/static-build.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-current-custody/production-row-view-result.json",
+      "bytes": 634,
+      "sha256": "381020839fe17e1ea216e3d3c1129e9a8133e67db68f6b03a57e15f47ae2242a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-current-v9/atlas-geography.json",
+      "bytes": 10547590,
+      "sha256": "0104fd05f07f8c31d273fce9d0a28b4f45f46b53921649448b3d2ef43daef086",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-current-v9/package-input-build.json",
+      "bytes": 48363,
+      "sha256": "e3f4b07f6f19c5913c037366e11c93b4eba7e95c6b811af8dbb0a22448898b8f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-current-v9/prepared-evidence-index.json",
+      "bytes": 12337,
+      "sha256": "a80160287489f0ac22ea0805692b8f5cd81a53e282467d27ee0cbf8d52cdd6b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-current-v9/production-row-view-result.json",
+      "bytes": 634,
+      "sha256": "3425556605313a344123aa1ee52bbca72d7bf254fc6257662ffddb6dfc2ecc18",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-current-v9/selected-assets-readback.json",
+      "bytes": 2707,
+      "sha256": "33ef1a774fc01b8b57e9d1faee501a285bae1e6a7ac28f4087af624f4a3f1c1b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-current-v9/stderr-time.log",
+      "bytes": 777,
+      "sha256": "74c180fadb32496410c163b94355af87468bad44a2e0703532791271d71f4060",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-current-v9/stdout.log",
+      "bytes": 1085,
+      "sha256": "573966e36fb8a436626ee16eb19f067505d0417a1af6c50fef9d79d56a31c2bf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-base-alias/authority-registry.json",
+      "bytes": 2012,
+      "sha256": "9cb1303f108fc979b2d106445fa8c29a05945ffb0979556442f2b46eadb3a43e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-base-alias/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-base-alias/envelope.json",
+      "bytes": 1421,
+      "sha256": "754dabc20625ccc7e777206ccc15919f62e60a1eb9641fd07a7e011409510858",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-base-alias/ledger.json",
+      "bytes": 310605,
+      "sha256": "89931a590c63dce418bf56b9803076f3364eca8589f98f6c8824de9c31ad2215",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-base-alias/owners.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-base-alias/patch.json",
+      "bytes": 3751,
+      "sha256": "3c2f36796a9dedbce52bcf6f5e8b98b25372fd61c7dc40210bd0facd49130cc2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-base-alias/selection-sidecar.json",
+      "bytes": 3421,
+      "sha256": "85eb3323cb8429172e99ce76091e9eeb6f4d3cd1cffbc2f0d0f77480f709ca02",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-current/authority-registry.json",
+      "bytes": 2012,
+      "sha256": "9cb1303f108fc979b2d106445fa8c29a05945ffb0979556442f2b46eadb3a43e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-current/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-current/envelope.json",
+      "bytes": 1421,
+      "sha256": "dfd0b1e6fecc94dc5435abfcbb1c73c684f3ae9ab94276157863a75fa72d136b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-current/ledger.json",
+      "bytes": 310604,
+      "sha256": "d894c4c222a624de8889fdd59329f453320d51e1ca1437a50fc39e38cbb7308e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-current/owners.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-current/patch.json",
+      "bytes": 3751,
+      "sha256": "a95499b60483af9be7bed929b383c2015be9e0e392674f1055623d255459fda2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-current/selection-sidecar.json",
+      "bytes": 3402,
+      "sha256": "59365c5b36644c87a151ad0514e01f01d8035f30f42c57b242ac7f5959381d74",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-custody/authority-registry.json",
+      "bytes": 2012,
+      "sha256": "9cb1303f108fc979b2d106445fa8c29a05945ffb0979556442f2b46eadb3a43e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-custody/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-custody/envelope.json",
+      "bytes": 1421,
+      "sha256": "c0208db620a43a7133a312b21e972aa609f4a23f759b3fdf8f8e3516b3752df8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-custody/ledger.json",
+      "bytes": 310602,
+      "sha256": "eddc73a0656b696dc2d0e55aeaa0b0371a809a4ec78a524e89737226d52ccd78",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-custody/owners.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-custody/patch.json",
+      "bytes": 3751,
+      "sha256": "ec95336937c10878f8c5a4acc5cf41889593cc950af345439dbb6a267b208755",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-custody/selection-sidecar.json",
+      "bytes": 3411,
+      "sha256": "ad217e0a9b82a244a535cb1398fa1600aca22feac2e91f3683ff488ba4384b75",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-final/authority-registry.json",
+      "bytes": 2012,
+      "sha256": "9cb1303f108fc979b2d106445fa8c29a05945ffb0979556442f2b46eadb3a43e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-final/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-final/envelope.json",
+      "bytes": 1421,
+      "sha256": "7b8efb4fcd0522bc9a3ed6e463803f7b2ad5be644bd8e31fd378260c79367327",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-final/ledger.json",
+      "bytes": 310600,
+      "sha256": "38a29c179f5d142719259e130352b4b4d66a37f32b66842f29f4188cfff083fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-final/owners.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-final/patch.json",
+      "bytes": 3751,
+      "sha256": "05a08a132456f398599beec03a83793841e203e544067a84f0c49b91cb38a3ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-final/selection-sidecar.json",
+      "bytes": 3399,
+      "sha256": "d5b717ffe3e81ddc9c202f46f1bea099d9663497c55a58fdc80e0e4e07cad278",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-gc/authority-registry.json",
+      "bytes": 2012,
+      "sha256": "9cb1303f108fc979b2d106445fa8c29a05945ffb0979556442f2b46eadb3a43e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-gc/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-gc/envelope.json",
+      "bytes": 1421,
+      "sha256": "a4b99975e0a7744da7c6a3218b579418e33b6fd43cd6c35377f4c1f5adf50f8c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-gc/ledger.json",
+      "bytes": 310597,
+      "sha256": "0a28944d646da837166c70693ed892feaf48a4da8b898d8ce25900a4b3ab18b5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-gc/owners.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-gc/patch.json",
+      "bytes": 3751,
+      "sha256": "e08933412df21e3f56887f0e3d3801837aa551e75b76c45e97a887f305976e9a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-gc/selection-sidecar.json",
+      "bytes": 3373,
+      "sha256": "cc3aab98634c8fd4e822eb32acd876e0cdd7380ef7edd7fbf327ee0a05797421",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-source-view/authority-registry.json",
+      "bytes": 2012,
+      "sha256": "9cb1303f108fc979b2d106445fa8c29a05945ffb0979556442f2b46eadb3a43e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-source-view/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-source-view/envelope.json",
+      "bytes": 1421,
+      "sha256": "61d37afc65ff17ccf01f88a1c3beb8d4e5bcc28d23d866977613a14ed9c0678a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-source-view/ledger.json",
+      "bytes": 310606,
+      "sha256": "00e25e97de88813fece66a6cda941aa8fa98d40d7db427ac0f5cdba639765aa7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-source-view/owners.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-source-view/patch.json",
+      "bytes": 3751,
+      "sha256": "4a9ca7dc9bf73e2ceb7c08b51bc01e63f9e5b9636d542ba618c7bdc701ba3d67",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-source-view/selection-sidecar.json",
+      "bytes": 3434,
+      "sha256": "1ba0344c241c7a2bf2b01b820b79158c4404f3743859965b94ab75e28b4e56c3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release/authority-registry.json",
+      "bytes": 2012,
+      "sha256": "9cb1303f108fc979b2d106445fa8c29a05945ffb0979556442f2b46eadb3a43e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release/envelope.json",
+      "bytes": 1421,
+      "sha256": "784dcefb20ca794c3b34b8181c5396eee346e4ae10d45aeb132482a330a2dfa9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release/ledger.json",
+      "bytes": 310594,
+      "sha256": "62824ba037e00b2091029f2bf2038834e3ec708a1cacad7a43a414845f5e8218",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release/owners.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release/patch.json",
+      "bytes": 3751,
+      "sha256": "912b5d3caed7d765144f5c105f0af0c8cf0da2ddaccd63c6a493a221bc3108c3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release/selection-sidecar.json",
+      "bytes": 3354,
+      "sha256": "f17f6d49ada86e06d99fd56e98f13ea79d94a1ca737e02a0d465db4bbf3c0e2b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/retained-activation-inputs.json",
+      "bytes": 5093,
+      "sha256": "da305d8a5b3822094b7e9265414e619501ef00a50527db779d95e550c85ead34",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/trusted-current-custody-geography.json",
+      "bytes": 677227,
+      "sha256": "d43054f795cd1a94443708a5f70ffa252fe4fe42a06c350aa751ce824f3fd43b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-normative-v2/certificate.json",
+      "bytes": 3183,
+      "sha256": "0074a782163b09b63492e16490318e34651e56093ed62525b3876335f3a1e6cb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-normative-v2/code-source.json",
+      "bytes": 52032,
+      "sha256": "4e8fb65dd57a0c9c27e878e94df1b945adc25dc8e13632b885278b139bf48558",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-normative-v2/facts.json",
+      "bytes": 3263,
+      "sha256": "aee64647a6569ba7c053ca6c614e0cf7d556a7ca72dae20d627d287d6522b735",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-normative-v2/host-supply.json",
+      "bytes": 1339,
+      "sha256": "7b30f8a9e076cec0ccf1de66f9f853a2c9a39080a91fba9e49c16322640cbf14",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-normative-v2/issued-execution.json",
+      "bytes": 26706,
+      "sha256": "f732bfe3e690b0875b721524febb475340ef50a88a9fd848dc3930dd0d6a5792",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-normative-v2/issued-plan.json",
+      "bytes": 7710,
+      "sha256": "16d2b6de35ca907afa07289b0cfad54c3e36f6b67d3be07eaec55846c29c51e8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-normative-v2/launch.json",
+      "bytes": 945,
+      "sha256": "236831296183d176e2f3f6d9513a59ea3c6bbdca58c4df0873b052806141e3d8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-normative-v2/operating.json",
+      "bytes": 2206,
+      "sha256": "4f4ffb1463cb41e7da13ff8761e275826bc6322fbef65a1ab8643b11781ad935",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-normative-v2/publication.json",
+      "bytes": 475,
+      "sha256": "eb936fb27995544ef9173668f9aafff114d04afe61759413e0769a2850806749",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-normative-v2/request.json",
+      "bytes": 746496,
+      "sha256": "ed001f4c547847670b40330257822be8983071eb23db3b172eff236826cb3292",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-normative-v2/result.json",
+      "bytes": 1052988,
+      "sha256": "3fc42c589d87af53ba936582979c903cac58b57439af73641178e89e4c864232",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-normative-v2/samples.jsonl",
+      "bytes": 30252,
+      "sha256": "bdc476e22509c050c3679f6f02f0354ec57bb58fb117346b3441ed8a2c08ce5f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-normative-v2/stderr.log",
+      "bytes": 777,
+      "sha256": "6eab51a09092e5e0183a10413454bd9b0f9c259ac48fd45b4c522c63eb0e6468",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-normative-v2/stdout.json",
+      "bytes": 376,
+      "sha256": "ca63fabc5a8c17748ab7944725cba95431982c475e89503f0ffe8acfb6290963",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-normative-v2/stock-report.json",
+      "bytes": 13114,
+      "sha256": "50256652fb09aa7e68aee165b9e1b6406162ed6b86c0f0b481ed9769650a0680",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-normative-v2/terminal.json",
+      "bytes": 1474,
+      "sha256": "07222729910cb89f216d3994f54a7a1026638410c11f9510d88f4ac107b29388",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-normative-v2/authority-registry.json",
+      "bytes": 2012,
+      "sha256": "9cb1303f108fc979b2d106445fa8c29a05945ffb0979556442f2b46eadb3a43e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-normative-v2/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-normative-v2/envelope.json",
+      "bytes": 1421,
+      "sha256": "1e89edbbe8bd5384361de2257484ec048d8a611cb87a0febf975bdcb665f6684",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-normative-v2/ledger.json",
+      "bytes": 310607,
+      "sha256": "c372ded37dfd1af5eb53f998dba57c072f4d6d730e4487edfbbd74aa9f9b0b96",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-normative-v2/owners.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-normative-v2/patch.json",
+      "bytes": 3751,
+      "sha256": "b328cb713d84b02ff3573373d0165cefd02c53720e4501aea5f615824b195028",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-normative-v2/selection-sidecar.json",
+      "bytes": 3441,
+      "sha256": "9dc9beed22d2244f83c48a9a4701a2d3beae567fcd44853a3f79bc5765405626",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-current-normative-v2/production-row-view-result.json",
+      "bytes": 634,
+      "sha256": "bd646bab6f89fb9d43397be556fa5cca25f022715099b84152810d779ce474f1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-current-normative-v2/row-view-executed.mjs",
+      "bytes": 4004,
+      "sha256": "cd2881f40352f9bab4c908e979928c89963446b57206eda246a31ddf706f3e63",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/trusted-current-normative-v2-geography.json",
+      "bytes": 677186,
+      "sha256": "ef31b782695eb3e8190c9400925ccc344b4b3c48342a0918e880e1004dcd40c4",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
     {
-      "id": "copied-reader-custody",
-      "kind": "code",
-      "description": "Return frozen scalar copies of the complete reader inventory, keeping its internal descriptor records mutable for authenticated subsequent reads. Test actual production expression and ImmutableReader; preserve original whole-file identity and all operating guards.",
-      "software": "Node24; original scientific operators unchanged",
-      "units": "code behavior"
+      "id": "current-before-rebind",
+      "description": "One actual current-before qualification plus repeats only for demonstrated changed-code or duplicate certificate binding defects. Whole original source, current target/native rows, all Arctic predecessor rows and execution/time custody are verified; unchanged source science is reused.",
+      "software": "Node24.19.0/Python3.12 exact installed runtime bodies captured in original issued and terminal custody",
+      "units": "native cells, complete rows, bytes and seconds",
+      "kind": "measurement"
+    },
+    {
+      "id": "selected-consumer",
+      "description": "Existing private V4 artifact consumption and selected additive reader, ordinary committed four-asset envelope/sidecar, production sparse patch and render/pick invariants",
+      "software": "Actual current package-issued import closure; no submitted historical code executes as data authority",
+      "units": "native cells and complete owners",
+      "kind": "code"
     }
   ],
-  "metrics": [],
-  "summaries": [],
-  "conclusions": [],
+  "metrics": [
+    {
+      "id": "current-supported-components",
+      "value": 12,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "3fc42c589d87af53ba936582979c903cac58b57439af73641178e89e4c864232",
+      "evaluation_commit": "46cb67a6cc0f88c6295d2d70da654baa5c6119a0"
+    },
+    {
+      "id": "current-new-native-cells",
+      "value": 141,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "3fc42c589d87af53ba936582979c903cac58b57439af73641178e89e4c864232",
+      "evaluation_commit": "46cb67a6cc0f88c6295d2d70da654baa5c6119a0"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "current-supported-components",
+      "value": 12,
+      "unit": "components"
+    },
+    {
+      "metric_id": "current-new-native-cells",
+      "value": 141,
+      "unit": "cells"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The current-v9 qualification accepts12 supported components and141 new native cells while preserving all old affected assignments and141 Arctic predecessor gains.",
+      "status": "supported",
+      "source_ids": [
+        "retained-component-authorities"
+      ]
+    },
+    {
+      "text": "Actual trusted Main native and continuous selected gates passed; complete 132-row production draw/sample/pick mathematics passed. Exact-head ordinary hosted package output association and normal CI/queue/merge readback remain pending. Earlier local package output vintages remain historical.",
+      "status": "unresolved",
+      "source_ids": [
+        "retained-component-authorities"
+      ]
+    },
+    {
+      "text": "No GPU/Canvas/browser capture was executed; production mathematical draw/sample/pick checks cover the complete authenticated 132-row view. Choiseul historical five zero-cell cases and one held positive case contribute no gains.",
+      "status": "unresolved",
+      "source_ids": [
+        "retained-component-authorities"
+      ]
+    }
+  ],
   "stages": {
-    "research": "partial",
-    "implementation": "proposed",
-    "geographic_approval": "unapproved"
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
   },
   "commands": [
-    "node coordination/engineering/additive-native-activation-20261009/custody-record-ownership-controls.mjs"
+    "Actual guarded seven-word qualification argv, runtime, pre/post custody and terminal are retained in current-v9-qualification-custody.",
+    "Actual trusted Main geographic wrapper with isolated Shapely2.1.2 Python evaluated base35fa against candidatef2e4; both native and continuous reports are retained.",
+    "Normal exact-head Ubuntu package job runs npm run build:cloudflare and uploads package-input-build/native-normal-built-output.json; observational additive report binds actual eight-key envelope and all four emitted assets.",
+    "Actual trusted Main35fa wrapper evaluated candidate8d5 with isolated GIS runtime: native no-new-native-loss and continuous no-new-regression; candidate code did not execute. Current 46cb method execution and 132-row production view are retained separately."
   ],
-  "limits": [
-    "Code-only custody ownership prerequisite. Selection, science/geometry/native artifacts, certificate, context, builder and package inputs remain unchanged; no repairs activated.",
-    "Retained full native and continuous entry completed with unpublished provisional code bbc8a6cf14381c153a004b1b6d63c9678604a19c against preserved cac27fa0378d2883f379edae05f456479ea45890. This is non-Main integration diagnostic evidence; final actual trusted gates remain required.",
-    "Original a817 qualification preserved; final changed helper byte binding requires one new current-before execution after merge. Reuse unchanged source/scientific qualification. No water/physical approval, GPU/Canvas, browser or production claim."
+  "metric_bindings": [
+    {
+      "metric_id": "current-supported-components",
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-normative-v2/result.json",
+      "json_pointer": "/original_rows/length"
+    },
+    {
+      "metric_id": "current-new-native-cells",
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-normative-v2/result.json",
+      "json_pointer": "/native/assigned_cells"
+    }
   ]
 }

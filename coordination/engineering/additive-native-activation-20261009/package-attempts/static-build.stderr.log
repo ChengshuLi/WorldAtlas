@@ -1,0 +1,40 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+22528 !== 21685
+
+    at ordinary (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-package-preflight.mjs:18:84)
+    at preflightArtifactPackage (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-package-preflight.mjs:89:16)
+    at preflightOuterArcticPackage (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-package-preflight.mjs:118:32)
+    at runPackageBuild (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/scripts/package-build.mjs:109:9)
+    at async file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/scripts/build-static.mjs:2:1 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 22528,
+  expected: 21685,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
+       10.54 real         0.58 user         4.33 sys
+            61292544  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                7472  page reclaims
+                1042  page faults
+                   0  swaps
+                   0  block input operations
+                   2  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+               16124  voluntary context switches
+              142062  involuntary context switches
+         34993408762  instructions retired
+         14417752376  cycles elapsed
+            44202496  peak memory footprint

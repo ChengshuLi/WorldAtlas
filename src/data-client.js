@@ -190,23 +190,23 @@ export async function loadGeography(initialSelection) {
   preparedEvidenceIndexRequest=null;preparedEvidenceRequests=new Map();
   const data=await readJSON(staticAtlas ? './atlas-geography.json' : '/api/geography');
   if(generation!==geographyGeneration)throw new DOMException('Geography superseded','AbortError');
+  const baseReference=additiveBaseReference(data);
   referenceAttributeBundle=data.referenceAttributes??null;
-  referenceAttributeFootprints=data.reference_release?.footprints_sha256??data.preparedEvidence?.footprints_sha256;
+  referenceAttributeFootprints=baseReference?.footprints_sha256??data.preparedEvidence?.footprints_sha256;
   preparedEvidenceProof=data.preparedEvidence;
   compactMapSupported=data.contentCapabilities?.mapSnapshots===1;
   datedGeographySupported=data.contentCapabilities?.datedGeography===1;
-  expectedGeography=data.reference_release?{release_id:data.reference_release.id,hierarchy_sha256:data.reference_release.hierarchy_sha256,footprints_sha256:data.reference_release.footprints_sha256}:null;
+  expectedGeography=baseReference?{release_id:baseReference.id,hierarchy_sha256:baseReference.hierarchy_sha256,footprints_sha256:baseReference.footprints_sha256}:null;
   if(datedGeographySupported&&!expectedGeography)throw Error('Dated geography requires a pinned reference release');
   // Preload one complete pinned bundle; legacy deployments keep their old reads.
   if(staticAtlas&&referenceAttributeBundle)loadReferenceGeneration().catch(()=>{});
   // Queue ownership rows before the catalog fan-out so decoding can overlap it.
   // Every required stream still completes before this generation is exposed.
   const nativeSelected=data.pixelMap?.method===NATIVE_METHOD;
-  const baseReference=additiveBaseReference(data);
   const nativeOptions=nativeSelected?{requireNative:true,expectedReference:baseReference}:{};
   const ownershipInput=data.parts&&data.pixelMap?loadOwnershipAssets(data.pixelMap,fetch,nativeOptions):null;
   const latitudeInput=nativeSelected?loadNativeLatitudes(data.pixelMap,baseReference):null;
-  const coverageRequest=data.coverageClassification?loadCoverageClassification(data.coverageClassification,{...data.reference_release,release_id:data.reference_release?.id,canonical_grid_sha256:data.pixelMap?.canonical_grid_sha256,size:data.pixelMap?.size,coordinateBits:data.pixelMap?.coordinateBits}):null;
+  const coverageRequest=data.coverageClassification?loadCoverageClassification(data.coverageClassification,{...baseReference,release_id:baseReference?.id,canonical_grid_sha256:data.pixelMap?.canonical_grid_sha256,size:data.pixelMap?.size,coordinateBits:data.pixelMap?.coordinateBits}):null;
   const coverageInput=nativeSelected?coverageRequest:coverageRequest?.catch(()=>null);
   // Fetch one pinned initial evidence selection while complete geography loads.
   // It is consumed only for that same year/examples pair, never another visit.
