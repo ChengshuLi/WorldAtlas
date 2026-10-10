@@ -1,0 +1,40 @@
+{
+  "state": "INCOMPLETE_STOPPED_ON_EXPLICIT_WIND_DOWN",
+  "head": "82b488077b84366ddbbd5ea935b4f380e3a7f43f",
+  "modified_path": "coordination/engineering/complete-replay-operand-restoration-20261007/runtime.py",
+  "raw_bytes": 14621,
+  "sha256": "c188383504f709bc4065cb1d1db069211bc3511d43f29584b90a87c134a070d2",
+  "diff_bytes": 18931,
+  "diff_sha256": "73bf3479316e792bcdef36608482bd58262301f8122f781def5b682e1ae8bec6",
+  "status": " M coordination/engineering/complete-replay-operand-restoration-20261007/runtime.py\n",
+  "tests": [
+    {
+      "name": "compile-only; no import, no GIS, no pycache",
+      "result": "PASS"
+    }
+  ],
+  "not_executed": [
+    "new runtime reader positive/control executions",
+    "new frozen entry",
+    "global science",
+    "commit"
+  ],
+  "known_integration_gaps": [
+    "run.py still calls removed runtime.cold; do not execute replay",
+    "runtime config/index still old25 schema; new prepare requires303 shards and previous25 inverse",
+    "loaded must import scientific packages BEFORE origin/native scan",
+    "code-list/runtime pins/complete final budget not yet updated"
+  ],
+  "preserved_proposal": "/Users/chengshuli/world-atlas-workspace/.cache/1394-runtime-closure-proposal/",
+  "proposal_index_sha256": "04311b95f488c2fd21f088be7e1a9345d93da130eeaef6e03fe4397a19b74dd9",
+  "remaining": [
+    "review or restore incomplete runtime.py",
+    "integrate303 grouped custody and25 inverse with whole guards",
+    "integrate -I -S -B cold entry/runtime-only stage and callable bindings",
+    "preserve old literal code vintages and failed outputs",
+    "run bounded actual-reader/entry controls and measure complete budget",
+    "parent review and commit before qualifying freeze or full pair"
+  ],
+  "prior_source_and_28_operator_bodies": "unchanged",
+  "timestamp": "2026-10-07T19:00:30.282512+00:00"
+}
