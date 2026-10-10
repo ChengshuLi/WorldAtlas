@@ -836,7 +836,11 @@ export function readCurrentBaselineResolutions(repo,baseline,{request,report,pro
   const carriedBytes=2*(canonical(request).length+canonical(report).length)+selectedRaw.length;
   const head=execFileSync('git',['-C',repo,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
   const reader=new ImmutableReader(repo,head,{runtimeBytes,executionBytes:codeBytes,
-    metadataBytes:8*1024*1024+carriedBytes,outputBytes:outputReserve});
+    metadataBytes:8*1024*1024+carriedBytes,
+    // Native assets do not exist in this completed baseline-acquisition frame.
+    // The outer candidate budget already retains the full outputReserve; after
+    // return it also carries complete baseline custody before native production.
+    outputBytes:request.operation===ADDITIVE_BATCH_PROPOSAL_VERSION?Math.min(outputReserve,4194304):outputReserve});
   const admit=reader.admit.bind(reader),carriedDescriptors=project.length+installedModules.length+2;
   reader.admit=(descriptor,decoded=0)=>{
     demand(reader.charged.has(descriptor.commit+':'+descriptor.path)||reader.charged.size+carriedDescriptors<512,
