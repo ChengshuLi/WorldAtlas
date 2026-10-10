@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "issue": 1695,
+  "lane": "engineering",
+  "worker_id": "01a127d7-5b17-7581-9a53-33bdf00a0007",
+  "subject_ids": [
+    "physical-component:1556c3bb1c20fc718d0e5d5d8dce2ce180b191fe63eaf492312db22550e8e737",
+    "physical-component:307e87aee838533082007e29254811d809f22152127a05815195a9d98ad327da",
+    "physical-component:47f533a94718204a72389e0ee39b538ff230f219ec619de6aadfa8dd0997616f",
+    "physical-component:5333b1363dbb396832c14da44a54e59bddf037cb92378e11d17efcc931220ce2",
+    "physical-component:6c21d4063b8f6febad1769f1e7f058e668ab8c018d93b770f560818e8db5af22",
+    "physical-component:c6e5c097e7fec0a79402758c4b8787151660e2312015f92403b1d857bdae9ca8",
+    "physical-component:e7830362e503492dae1922eb91157c0e3cc7a42043dc91eff29878eeb85aa902",
+    "physical-component:ec9be2d5c5db2b304f0e71418b2b328ae508fed448cef29e6737c3c1121dc1ef",
+    "physical-component:ed6ee8f77903a084a21fb78781debf60115e7d9ce616926fb0e3cf9dbacfda34"
+  ],
+  "subject_ids_sha256": "f66b6829b98627a6c950a72b43cebeb3b663b45318277cdc72adb506e94dc765",
+  "baseline": {
+    "commit": "c28077da970ae39550e5edea790a266b060d3de5",
+    "files": [
+      {
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/administrative-source-rule-fit.json",
+        "bytes": 1688243,
+        "sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/component-state-318.json",
+        "bytes": 505063,
+        "sha256": "8aaa5d4558eb5137775c159ec234d3dc2a9a90ae965aeaaf27086a63d0462cfd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/family-roster-122.json",
+        "bytes": 39180,
+        "sha256": "acb22105b074fefca33b84488d0d0322ebdba3195a3eff4b0421f53668e651ef",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-PHL-ADM3.bin",
+        "bytes": 2224353,
+        "sha256": "0b7b241fd977a792eca3101f31f0d02fba79d75b6ea463e33dec937b6c5ed72c",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7071267,
+        "uncompressed_sha256": "2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc"
+      }
+    ],
+    "pins": {
+      "accepted_source_rule_fit": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b",
+      "phl_encoded_source": "0b7b241fd977a792eca3101f31f0d02fba79d75b6ea463e33dec937b6c5ed72c",
+      "original_component_states": "8aaa5d4558eb5137775c159ec234d3dc2a9a90ae965aeaaf27086a63d0462cfd",
+      "original_family_roster": "acb22105b074fefca33b84488d0d0322ebdba3195a3eff4b0421f53668e651ef"
+    },
+    "pin_files": {
+      "accepted_source_rule_fit": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/administrative-source-rule-fit.json",
+      "phl_encoded_source": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-PHL-ADM3.bin",
+      "original_component_states": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/component-state-318.json",
+      "original_family_roster": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/family-roster-122.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "accepted-sea318",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/pull/1656",
+      "role": "Accepted limited retained-record source handoff; not source-rule approval or current geography",
+      "vintage": "source-rule-fit-005 at merged0635e6d935f6953005e87a2b1290ddacbe55f337",
+      "retrieved_at": "2026-10-10",
+      "license": {
+        "status": "unknown",
+        "terms": "Original administrative attribution and CC BY 3.0 IGO record preserved in retained source product; no new licensing conclusion"
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Read the whole pinned main source-rule-fit005 products and retained PHL product; no source download is required.",
+      "limit": "Retained scientific records only. Current target/native/continuous/selected qualification and geographic approval remain unestablished.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "literal-view-validation",
+      "kind": "code",
+      "description": "Pure whole-byte authenticated accepted-record projection and refusal checks. No spatial or source/native operator, current-target assertion, writer or selection change.",
+      "software": "Node 24.19.0; node:test",
+      "units": "exact record identities and byte equality"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "The adapter preserves the accepted record scope but has not been registered or executed through the source/native caller. Delivery remains open.",
+      "status": "unresolved",
+      "source_ids": [
+        "accepted-sea318"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node --test coordination/engineering/shared-country-delivery-phl-20261010/retained-sea318-view.test.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/shared-country-delivery-phl-20261010/evidence-quality.json"
+  ]
+}
