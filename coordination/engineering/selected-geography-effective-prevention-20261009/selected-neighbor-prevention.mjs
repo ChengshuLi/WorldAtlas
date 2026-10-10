@@ -291,15 +291,15 @@ export function readOriginalRuleAuthority(reader, pins, sourceOutputAliases=[]) 
 // Reuse the actually qualified source predecessor; never infer permission from
 // a hash-shaped receipt or caller-written approval boolean. No source method is
 // rerun here. Original whole case/source pins remain in the retained closure.
-// Only the reviewed b0 SOURCE /420 NATIVE pair may retain an older source
-// selector. Both original selectors and their complete unchanged source-map
+// Only a unique immutable reviewed administrative SOURCE/NATIVE pair may retain
+// an older source selector. Both selectors and their complete unchanged source-map
 // identity are authenticated; current selected-bank conservation remains later.
 function originalAdministrativeBaseline(reader, issued, request, native) {
  if(same(issued.baseline,request.baseline))return true;
  const profile='retained-consumed-administrative-source';
  demand(issued.source_rule?.profile===profile&&request.additive?.source_profile===profile
-  &&valueSha(issued.executed_code)==='8b1c7dcd78544aa42ea2598199cde0f5ab331a7a49ce3a6536112602f0ba2308'
-  &&valueSha(request.executed_code)==='89159cb6e58fb3a66bcbdd8c218b102380ae371d01657e830a9f442a40e69cb5',
+  &&SUPPORTED_PROGRAMS.filter(p=>p.preimage_version===3&&p.source_profile===profile
+   &&same(issued.executed_code,p.source_executed_code)&&same(request.executed_code,p.native_executed_code)).length===1,
   'Unreviewed original administrative baseline split');
  const read=p=>{pinCheck({...p,git_blob_oid:p.git_blob_oid??p.blob});
   const actual=reader.descriptor(p.path,p.commit);
