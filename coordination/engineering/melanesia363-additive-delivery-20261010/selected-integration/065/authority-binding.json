@@ -1,0 +1,227 @@
+{
+  "version": 1,
+  "kind": "original-issued-rule-source-custody-v1",
+  "original_pins": {
+    "source_request": {
+      "blob": "84368d43df4feec92f2e13d7e47fa3ae379c1cce",
+      "bytes": 16962,
+      "commit": "42d76d1259b25751a828ab355cb409be2ebb73a4",
+      "mode": "100644",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-requests/065-supported-fragment-request.json",
+      "sha256": "f49ff5ddb64530fc643913749246e0d19dd732390bcc7e1517a736c086478b3f",
+      "git_blob_oid": "84368d43df4feec92f2e13d7e47fa3ae379c1cce"
+    },
+    "native_request": {
+      "blob": "2a80c3dc1b13e708cf817e07cae1b62758966cf2",
+      "bytes": 17286,
+      "commit": "f959f065331220d5997793be0d31b810ad2f6e3c",
+      "mode": "100644",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-requests/065.json",
+      "sha256": "1a6471b932a35c5074724ad15d4a6bcfea0507aed8a13c1445d015c496905786",
+      "git_blob_oid": "2a80c3dc1b13e708cf817e07cae1b62758966cf2"
+    },
+    "source_facts": {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/065/facts.json",
+      "commit": "706110049de4b5910d9792557d487b66d6d2bfa1",
+      "mode": "100644",
+      "blob": "8449b4a1241b26611d4705f2560bd9631a06b4f0",
+      "bytes": 451493,
+      "sha256": "756ad23b11d0f9b45858303513d06b13111531a76ce44858b62902399f15e501",
+      "git_blob_oid": "8449b4a1241b26611d4705f2560bd9631a06b4f0"
+    },
+    "native_facts": {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/facts.json",
+      "commit": "706110049de4b5910d9792557d487b66d6d2bfa1",
+      "mode": "100644",
+      "blob": "575ec63fc347967057bf9453a1fbb3312d8ad667",
+      "bytes": 454489,
+      "sha256": "2c9c8b8adb7908c8b30d4ba04e08df914c864fec6a88e84b0ff89ffc0a9da465",
+      "git_blob_oid": "575ec63fc347967057bf9453a1fbb3312d8ad667"
+    },
+    "native_manifest": {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/base-native-manifest.json",
+      "commit": "706110049de4b5910d9792557d487b66d6d2bfa1",
+      "mode": "100644",
+      "blob": "31d970d0fe2bf8c899f020aad09a3826ea451790",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "git_blob_oid": "31d970d0fe2bf8c899f020aad09a3826ea451790"
+    },
+    "ledger": {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/ledger-batch.json",
+      "commit": "706110049de4b5910d9792557d487b66d6d2bfa1",
+      "mode": "100644",
+      "blob": "1d0058d4d97dac966ed6b84f82d64cee0096a444",
+      "bytes": 4989,
+      "sha256": "784ab1431c9d61586a46ad0d23d5a80647185492785c11b30b1a6e4639cd6327",
+      "git_blob_oid": "1d0058d4d97dac966ed6b84f82d64cee0096a444"
+    }
+  },
+  "source_output_aliases": [
+    {
+      "original": {
+        "bytes": 451493,
+        "kind": "completed-inventory-body",
+        "mode": "100644",
+        "path": ".cache/native-grid-candidates/melanesia363-source-065-92a73508/facts.json",
+        "sha256": "756ad23b11d0f9b45858303513d06b13111531a76ce44858b62902399f15e501"
+      },
+      "published": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/065/facts.json",
+        "commit": "706110049de4b5910d9792557d487b66d6d2bfa1",
+        "mode": "100644",
+        "blob": "8449b4a1241b26611d4705f2560bd9631a06b4f0",
+        "bytes": 451493,
+        "sha256": "756ad23b11d0f9b45858303513d06b13111531a76ce44858b62902399f15e501",
+        "git_blob_oid": "8449b4a1241b26611d4705f2560bd9631a06b4f0"
+      }
+    },
+    {
+      "original": {
+        "bytes": 349,
+        "kind": "completed-inventory-body",
+        "mode": "100644",
+        "path": ".cache/native-grid-candidates/melanesia363-source-065-92a73508/publication.json",
+        "sha256": "35287b527e574adaddbc5d96ff76cbaa533d2010485a0b07d7f46b6a0ff37bd6"
+      },
+      "published": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/065/publication.json",
+        "commit": "706110049de4b5910d9792557d487b66d6d2bfa1",
+        "mode": "100644",
+        "blob": "310a38130f5da12345fa9ea1ecf6428c7ebf2ab7",
+        "bytes": 349,
+        "sha256": "35287b527e574adaddbc5d96ff76cbaa533d2010485a0b07d7f46b6a0ff37bd6",
+        "git_blob_oid": "310a38130f5da12345fa9ea1ecf6428c7ebf2ab7"
+      }
+    },
+    {
+      "original": {
+        "bytes": 1771,
+        "kind": "completed-inventory-body",
+        "mode": "100644",
+        "path": ".cache/native-grid-candidates/melanesia363-source-065-92a73508/inventory.jsonl.gz",
+        "sha256": "3f1e10e18c19e3557c744701e75aea7321623f0d7e5d4b708a350b8dd5db4eb4",
+        "uncompressed_bytes": 3819,
+        "uncompressed_sha256": "8edad7863087d77f95b5cd9ee5938e4dab8e957b2f6f8aee635453f2171ef46e"
+      },
+      "published": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/065/inventory.jsonl.gz",
+        "commit": "706110049de4b5910d9792557d487b66d6d2bfa1",
+        "mode": "100644",
+        "blob": "73d2ea376dfce07eb4ae3e4016347048d3f23075",
+        "bytes": 1771,
+        "sha256": "3f1e10e18c19e3557c744701e75aea7321623f0d7e5d4b708a350b8dd5db4eb4",
+        "git_blob_oid": "73d2ea376dfce07eb4ae3e4016347048d3f23075",
+        "uncompressed_bytes": 3819,
+        "uncompressed_sha256": "8edad7863087d77f95b5cd9ee5938e4dab8e957b2f6f8aee635453f2171ef46e"
+      }
+    }
+  ],
+  "native_proof": {
+    "publication": {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/publication.json",
+      "commit": "706110049de4b5910d9792557d487b66d6d2bfa1",
+      "mode": "100644",
+      "blob": "3d716987bb2c5dc49ce524093f193a19a89ca4e7",
+      "bytes": 1448,
+      "sha256": "3489f8b5e6520776004f7ca22d05e481c3a3318cd3be3e55a2b112ee1cd38998",
+      "git_blob_oid": "3d716987bb2c5dc49ce524093f193a19a89ca4e7"
+    },
+    "inventory": {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/inventory.jsonl.gz",
+      "commit": "706110049de4b5910d9792557d487b66d6d2bfa1",
+      "mode": "100644",
+      "blob": "808109ccbad6f2154a31a92dd3d0b47ba2c73382",
+      "bytes": 303,
+      "sha256": "fb2391a65d972f5319f2300d3ab6fbebc100aec77ab48c6277324fbc86c48579",
+      "git_blob_oid": "808109ccbad6f2154a31a92dd3d0b47ba2c73382",
+      "uncompressed_bytes": 433,
+      "uncompressed_sha256": "803c5a60ac6074388ec313f65bf62d2fa93c650933c933fa39901cbf84e61a40"
+    },
+    "operating": {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operating/native065-derived-operating-view.json",
+      "commit": "706110049de4b5910d9792557d487b66d6d2bfa1",
+      "mode": "100644",
+      "blob": "56030f23115bac5fcfdb06ce2fbcb01862626b3b",
+      "bytes": 54890,
+      "sha256": "1bd775ec409f67552698133b5708012600236a335ca5690f4aa2ebc7b5f249d2",
+      "git_blob_oid": "56030f23115bac5fcfdb06ce2fbcb01862626b3b"
+    },
+    "assets": [
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/base-native-manifest.json",
+        "commit": "706110049de4b5910d9792557d487b66d6d2bfa1",
+        "mode": "100644",
+        "blob": "31d970d0fe2bf8c899f020aad09a3826ea451790",
+        "bytes": 252447,
+        "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+        "git_blob_oid": "31d970d0fe2bf8c899f020aad09a3826ea451790"
+      },
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/ledger-batch.json",
+        "commit": "706110049de4b5910d9792557d487b66d6d2bfa1",
+        "mode": "100644",
+        "blob": "1d0058d4d97dac966ed6b84f82d64cee0096a444",
+        "bytes": 4989,
+        "sha256": "784ab1431c9d61586a46ad0d23d5a80647185492785c11b30b1a6e4639cd6327",
+        "git_blob_oid": "1d0058d4d97dac966ed6b84f82d64cee0096a444"
+      },
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/patch-batch.json",
+        "commit": "706110049de4b5910d9792557d487b66d6d2bfa1",
+        "mode": "100644",
+        "blob": "fc2ca132bf2cead72a909a742c21bf6f7bb5bc0f",
+        "bytes": 2156,
+        "sha256": "2de569689c867c9fe18b32613fac203a777cbf8f0725eba3b8048028bac452ee",
+        "git_blob_oid": "fc2ca132bf2cead72a909a742c21bf6f7bb5bc0f"
+      },
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/features.json",
+        "commit": "706110049de4b5910d9792557d487b66d6d2bfa1",
+        "mode": "100644",
+        "blob": "16c5266bbaf3f845f7be150fdce7d8364825240c",
+        "bytes": 4889,
+        "sha256": "14b8aa08b7632183944d8a5b5105a4784c56c14a579b90c5ce97699a88fc19ab",
+        "git_blob_oid": "16c5266bbaf3f845f7be150fdce7d8364825240c"
+      },
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/owners-batch.json.gz",
+        "commit": "706110049de4b5910d9792557d487b66d6d2bfa1",
+        "mode": "100644",
+        "blob": "9c44513df64995d417dd3832ae604c703e84a506",
+        "bytes": 2663523,
+        "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+        "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506",
+        "uncompressed_bytes": 11096191,
+        "uncompressed_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+      },
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/release-envelope.json",
+        "commit": "706110049de4b5910d9792557d487b66d6d2bfa1",
+        "mode": "100644",
+        "blob": "86010c6e2712992cde02baf6995be6c3ac549e3a",
+        "bytes": 1663,
+        "sha256": "359fee1acb11ae17923190ead596e292ebb2c6c2cb149cb7355bdab5370b247e",
+        "git_blob_oid": "86010c6e2712992cde02baf6995be6c3ac549e3a"
+      },
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/owner-window.json",
+        "commit": "706110049de4b5910d9792557d487b66d6d2bfa1",
+        "mode": "100644",
+        "blob": "ec004e39a83d6b70fa23a372cc56f4e8663de6f0",
+        "bytes": 180649,
+        "sha256": "9fd9b0f7abd2ad29f4063dbaf3b607c439fee28707aaa475d83cffb40fbea609",
+        "git_blob_oid": "ec004e39a83d6b70fa23a372cc56f4e8663de6f0"
+      },
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/virtual-owner-window.json",
+        "commit": "706110049de4b5910d9792557d487b66d6d2bfa1",
+        "mode": "100644",
+        "blob": "848c8ea252662fff6ae206825353379b66b1f39e",
+        "bytes": 107117,
+        "sha256": "fc30627a660ac512014ffb940c7171853e7da3835be4c315c8a5f80e1bac20d3",
+        "git_blob_oid": "848c8ea252662fff6ae206825353379b66b1f39e"
+      }
+    ]
+  }
+}
