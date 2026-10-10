@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "complete",
+  "issue_number": 1630,
+  "reservation_claim_id": "1daa6116-0dac-4e2e-a087-4548d9e6e7bf",
+  "reservation_worker_id": "01a112c2-1d0f-7bf2-a50e-74956219b9c1",
+  "reservation_live_work": false,
+  "operation_kind": "local bounded source-evidence generation; no production write or external acquisition",
+  "phase_admission": {
+    "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+    "bytes": 122414,
+    "sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+    "complete_phase_bytes": 67857992,
+    "cap_bytes": 268435456
+  },
+  "pid": 93106,
+  "process_group": 93106,
+  "command": [
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/da31b756b4a018bb67dbf5261e6186fb352c732ad8563bb137dfcb8fa111eb83/work/research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/variant_coverage_driver.py"
+  ],
+  "exit_code": 0,
+  "natural_terminal": true,
+  "owned_processes_absent_after_run": true,
+  "stop_reason": null,
+  "elapsed_seconds": 4.775,
+  "peak_sampled_process_and_wrapper_rss_bytes": 159760384,
+  "final_sampled_process_and_wrapper_rss_bytes": 13762560,
+  "rss_cap_bytes": 536870912,
+  "phase_cap_bytes": 268435456,
+  "wall_deadline_seconds": 900,
+  "monitoring": "sampled/cooperative; not kernel-enforced",
+  "stdout": "{\"outputs\": [{\"bytes\": 9549, \"hash_kind\": \"file-bytes\", \"path\": \"research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json\", \"sha256\": \"8986e47ca998ca6e69f495fb50dbfcb16f848ddabbe89ea3d26fab4e65284453\"}], \"run\": \"coverage-run-20261010-02\", \"status\": \"measured\", \"summary\": {\"candidate_count\": 4, \"candidate_variant_agreement_count\": 4, \"full_coverage_pass_count\": 4, \"literal_rule_fit_count\": 4, \"literal_source_variant_agreement_count\": 4, \"scientific_approval\": false, \"simplified_coverage_pass_count\": 4, \"source_approval\": false, \"variant_comparisons\": 8}}\n",
+  "stderr": ""
+}

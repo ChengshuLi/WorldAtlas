@@ -4,8 +4,10 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import pathlib
 import subprocess
+import uuid
 
 ROOT = pathlib.Path(__file__).resolve().parents[4]
 BATCH = "research/geography/north-america-gap-batch-20261009"
@@ -37,6 +39,7 @@ CHANGED_PATHS = [
     MANIFEST,
 ]
 FULL_SOURCE = SOURCE_PATHS[0]
+ADMISSION = PACKET + "/phase-admission.json"
 SOURCE_ID = "geoBoundaries-USA-ADM2-9469f09-full-and-simplified-retained-variants"
 
 
@@ -49,8 +52,35 @@ def git(*args: str) -> bytes:
 
 
 def descriptor(path: str, role: str) -> dict:
-    raw = (ROOT / path).read_bytes()
+    target = ROOT / path
+    if target.is_symlink() or not target.is_file():
+        raise SystemExit("manifest member must be an ordinary file: " + path)
+    raw = target.read_bytes()
+    if len(raw) > 32 * 1024 * 1024:
+        raise SystemExit("manifest member exceeds 32 MiB: " + path)
     return {"path": path, "bytes": len(raw), "sha256": digest(raw), "hash_kind": "file-bytes", "role": role}
+
+
+def atomic_write(path: str, raw: bytes, *, exclusive: bool) -> None:
+    target = ROOT / path
+    if target.is_symlink():
+        raise SystemExit("unsafe evidence output destination: " + path)
+    if exclusive and target.exists():
+        if target.is_file() and target.read_bytes() == raw:
+            return
+        raise SystemExit("refusing to replace existing evidence output: " + path)
+    if not exclusive and not target.is_file():
+        raise SystemExit("required manifest is missing or not an ordinary file: " + path)
+    temporary = target.with_name("." + target.name + "." + uuid.uuid4().hex + ".incomplete")
+    with temporary.open("xb") as stream:
+        stream.write(raw)
+        stream.flush()
+        os.fsync(stream.fileno())
+    if exclusive:
+        os.link(temporary, target)
+        temporary.unlink()
+    else:
+        os.replace(temporary, target)
 
 
 def metric_id(name: str) -> str:
@@ -59,10 +89,13 @@ def metric_id(name: str) -> str:
 
 def main() -> None:
     result = json.loads((ROOT / RESULT).read_bytes())
-    manifest = json.loads((ROOT / MANIFEST).read_bytes())
     run_commit = result["baseline_commit"]
-    if not all(len(run_commit) == 40 for _ in [0]):
+    if not isinstance(run_commit, str) or len(run_commit) != 40:
         raise SystemExit("coverage result lacks its immutable execution baseline")
+    manifest_raw = (ROOT / MANIFEST).read_bytes()
+    if manifest_raw != git("show", f"{run_commit}:{MANIFEST}"):
+        raise SystemExit("existing #1630 evidence manifest changed since measurement baseline")
+    manifest = json.loads(manifest_raw)
 
     # Retain candidate identity and geometry provenance as an explicit baseline
     # file; the original 4,674/152 subject inventory and all earlier evidence stay.
@@ -119,7 +152,7 @@ def main() -> None:
         "This result changes no source, geography, physical classification, native relation, roster, conservation, production record or approval. See `vintages/coverage-run-20261010-02/source-variant-coverage.json` and its `publication.json` for the complete exact values and execution pins.",
         "",
     ])
-    (ROOT / README).write_text(readme, encoding="utf-8")
+    atomic_write(README, readme.encode("utf-8"), exclusive=True)
 
     generated_roles = {
         f"{PACKET}/README.md": "supporting-evidence",
@@ -150,7 +183,7 @@ def main() -> None:
         ("literal_variant_agreement_count", summary["literal_source_variant_agreement_count"], "candidates satisfying existing candidate-level source-variant agreement"),
         ("literal_rule_fit_count", summary["literal_rule_fit_count"], "candidates satisfying both source coverage premises and per-candidate variant agreement"),
     ]
-    input_sha = next(row["sha256"] for row in source_files if row["path"] == FULL_SOURCE)
+    input_sha = digest((ROOT / ADMISSION).read_bytes())
     existing_metrics = {row["id"] for row in manifest["metrics"]}
     existing_bindings = {row["metric_id"] for row in manifest["metric_bindings"]}
     existing_summaries = {row["metric_id"] for row in manifest["summaries"]}
@@ -163,7 +196,7 @@ def main() -> None:
         if identity in existing_summaries:
             manifest["summaries"] = [row for row in manifest["summaries"] if row["metric_id"] != identity]
         manifest["metrics"].append({"id": identity, "value": value, "unit": unit,
-                                     "input_sha256": input_sha, "input_file": {"path": FULL_SOURCE, "commit": "candidate"},
+                                     "input_sha256": input_sha, "input_file": {"path": ADMISSION, "commit": "candidate"},
                                      "evaluation_commit": run_commit, "vintage": "archived"})
         manifest["metric_bindings"].append({"metric_id": identity, "path": RESULT,
                                              "json_pointer": "/summary/" + {
@@ -184,12 +217,16 @@ def main() -> None:
             "software": "Python 3.12.14; Shapely 2.1.2; pyproj 3.7.2; immutable.py pinned Baseline/NewVintage custody",
             "units": "exact boolean coverage predicates; square metres for projected area; eight candidate/source comparisons",
         })
-    manifest["conclusions"].append({
+    new_conclusion = {
         "text": "The measured full/simplified coverage results and candidate-level agreement for the four exact Aleutians West components are recorded in the new source-variant output; they establish only the retained-source comparison required by amended #1630.",
         "status": "supported",
         "source_ids": [SOURCE_ID],
-    })
-    manifest["commands"].append("/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/variant_coverage_run_phase.py")
+    }
+    manifest["conclusions"] = [row for row in manifest["conclusions"] if row.get("text") != new_conclusion["text"]]
+    manifest["conclusions"].append(new_conclusion)
+    command = "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/variant_coverage_run_phase.py"
+    if command not in manifest["commands"]:
+        manifest["commands"].append(command)
 
     base = git("merge-base", "HEAD", "origin/main").decode().strip()
     receipts = []
@@ -200,7 +237,7 @@ def main() -> None:
             row["original_sha256"] = digest(git("show", f"{base}:{path}"))
         receipts.append(row)
     manifest["change_receipts"] = receipts
-    (ROOT / MANIFEST).write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    atomic_write(MANIFEST, (json.dumps(manifest, indent=2, ensure_ascii=False) + "\n").encode("utf-8"), exclusive=False)
     print(json.dumps({"manifest": MANIFEST, "outputs_added": len(generated_roles),
                       "metric_bindings_added": len(metric_rows), "change_receipts": len(receipts),
                       "baseline_commit_for_new_measurements": run_commit,
