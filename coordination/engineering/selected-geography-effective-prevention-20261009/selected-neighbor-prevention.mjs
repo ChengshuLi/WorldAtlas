@@ -297,41 +297,77 @@ export function qualifyOriginalNativeAuthority(custody, pins) {
  const {reader,bodies}=proof,{native_request:issued,native_facts:facts}=bodies;
  demand(proof.qualifiedSource,'Native authority requires complete qualified source predecessor first');
  demand(pins&&Object.keys(pins).sort().join(',')==='assets,inventory,operating,publication'&&Array.isArray(pins.assets),'Require complete native proof roster');
- const all=[pins.publication,pins.inventory,pins.operating,...pins.assets];
- const retained=all.reduce((n,p)=>n+2*(p.bytes+(p.decoded_bytes??p.uncompressed_bytes??0)),0);
- demand(Number.isSafeInteger(retained)&&reader.used+retained<=PHASE,'Complete original native retained phase exceeds cap before reads');
- reader.used+=retained;
- const admitted=all.map(p=>{
+ // The source acquisition frame is finished. Retain its complete live parsed
+ // custody/body/source views, then acquire one complete native member at a time.
+ // Size the complete live graph without allocating canonical clones/strings.
+ // Each string's six bytes per UTF-16 unit bounds JSON escaping and UTF-8;
+ // the doubled graph bound includes its retained object representation.
+ const measurementScratch=1024*1024;
+ demand(reader.used+measurementScratch<=PHASE,'Native carry measurement scratch exceeds phase');
+ const carryBytes=value=>{
+  const ancestors=new WeakSet();let objects=0,total=0;
+  const add=n=>{total+=n;demand(Number.isSafeInteger(total)&&total<=FILE,'Native carry graph exceeds bounded metadata member');};
+  const visit=v=>{
+   if(v===null||v===undefined){add(4);return;}
+   if(typeof v==='string'){add(6*v.length+2);return;}
+   if(typeof v==='boolean'){add(5);return;}
+   if(typeof v==='number'){demand(Number.isFinite(v),'Unsupported native carry number');add(String(v).length);return;}
+   demand(typeof v==='object'&&!ancestors.has(v)&&++objects<=131072,'Unsupported/cyclic native carry graph');ancestors.add(v);add(2);
+   if(v instanceof Map){v.forEach((item,key)=>{visit(key);visit(item);add(4);});}
+   else if(Array.isArray(v)){for(let i=0;i<v.length;i++){visit(v[i]);add(1);}}
+   else{demand(Object.getPrototypeOf(v)===Object.prototype||Object.getPrototypeOf(v)===null,'Unsupported native carry object');for(const key in v){if(Object.hasOwn(v,key)){add(6*key.length+4);visit(v[key]);}}}
+   ancestors.delete(v);
+  };visit(value);return 2*total;
+ };
+ const sourceCarry=carryBytes({custody,pins,bodies,source:proof.qualifiedSource});
+ const outerMetadata=reader.metadataBytes;
+ const sourceMetadata=outerMetadata+sourceCarry+measurementScratch;
+ const held={publication:null,operating:null,rows:[],nativePatches:[],nativeContracts:[]};
+ let maxPhase=reader.used;
+ const finishedMember=(p,parse,consume)=>{
+  reader.metadataBytes=sourceMetadata+carryBytes(reader.inventory)+carryBytes(held);reader.phase();
   const q={...p,git_blob_oid:p.git_blob_oid??p.blob,decoded_bytes:p.decoded_bytes??p.uncompressed_bytes,decoded_sha256:p.decoded_sha256??p.uncompressed_sha256};pinCheck(q);
   let version=q.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
   const actual=reader.descriptor(q.path,version);demand(actual.mode===q.mode&&actual.git_blob_oid===q.git_blob_oid&&actual.bytes===q.bytes,'Original native proof whole mode/OID differs');
-  reader.admit(actual,q.decoded_bytes??0);return {q,version};
- });
- const raw=admitted.map(({q,version})=>{
-  const body=reader.read(q.path,{version,expected:q.sha256,decoded:q.decoded_bytes??0});if(q.decoded_bytes===undefined)return body;
-  const decoded=gunzipSync(body,{maxOutputLength:q.decoded_bytes});demand(decoded.length===q.decoded_bytes&&sha(decoded)===q.decoded_sha256,'Original whole native decoded proof differs');return decoded;
- });
- const publication=JSON.parse(raw[0]),operating=JSON.parse(raw[2]),inventoryPin=pins.inventory;
+  // Parsing/comparison retains graph, string and canonical scratch while
+  // the complete byte body is live.
+  // An inverse-only gzip needs one extra decoded-size buffer for gunzip's
+  // chunks/concatenation; its raw bytes never escape this finished frame.
+  const scratch=parse?4*(q.decoded_bytes??q.bytes):(q.decoded_bytes??0);
+  demand(Number.isSafeInteger(scratch)&&reader.used+scratch<=PHASE,'Complete native decoder/parsed scratch exceeds prospective cap');reader.used+=scratch;
+  reader.admit(actual,q.decoded_bytes??0);maxPhase=Math.max(maxPhase,reader.used);
+  const encoded=reader.read(q.path,{version,expected:q.sha256,decoded:q.decoded_bytes??0});
+  let raw=encoded;
+  if(q.decoded_bytes!==undefined){raw=gunzipSync(encoded,{maxOutputLength:q.decoded_bytes});demand(raw.length===q.decoded_bytes&&sha(raw)===q.decoded_sha256,'Original whole native decoded proof differs');}
+  consume(raw);
+ };
+ finishedMember(pins.publication,true,raw=>{held.publication=JSON.parse(raw);});
+ finishedMember(pins.inventory,true,raw=>{const lines=raw.toString('utf8').split('\n');demand(lines.pop()==='','Truncated whole native inventory');held.rows=lines.map(s=>JSON.parse(s));});
+ finishedMember(pins.operating,true,raw=>{held.operating=JSON.parse(raw);});
+ const {publication,operating,rows,nativePatches,nativeContracts}=held,inventoryPin=pins.inventory;
  demand(publication.complete===true&&publication.facts.bytes===custody.pins.native_facts.bytes&&publication.facts.sha256===custody.pins.native_facts.sha256&&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(k=>publication.inventory[k]===inventoryPin[k]),'Partial/drifted original native publication');
  demand(same(facts.input_descriptors,[issued.report,...issued.additive.inputs,...issued.baseline.pins])&&same(facts.installed_modules,issued.installed_modules),'Original native actual input/module closure differs');
  demand(operating.qualified===true&&operating.execution_commit===facts.execution_commit&&operating.exit?.code===0&&operating.exit.signal===null&&operating.owned_processes_remaining?.length===0&&operating.refusal===null&&operating.request_sha256===facts.request.sha256&&operating.destination===issued.destination,'Unqualified original native operating proof');
- const lines=raw[1].toString('utf8').split('\n');demand(lines.pop()==='','Truncated whole native inventory');const rows=lines.map(s=>JSON.parse(s));
  const batch=facts.operation==='unactivated-additive-native-batch-v1',nativeScope=batch?custody.source_scope_ids:[issued.additive.component_id];
  demand(same(rows.map(r=>r.component_id),nativeScope)&&new Set(rows.map(r=>r.component_id)).size===rows.length&&(!batch||rows.length===facts.components),'Native inventory scope omitted/reordered');
  const byId=new Map(custody.ledger.rows.map(r=>[r.component_id,r]));
  for(const row of rows){const old=byId.get(row.component_id);demand(old&&(batch?row.disposition===old.disposition:['assigned','zero-cell'].includes(old.disposition))&&row.native_cells===(old.native_cells??0)&&row.target_id===(['assigned','zero-cell'].includes(old.disposition)?old.target_id:proof.qualifiedSource.rows.find(r=>r.component_id===row.component_id)?.target_id),'Native inventory disposition/contribution rebound');}
  demand(publication.assets.length===pins.assets.length&&new Set(pins.assets.map(p=>p.path)).size===pins.assets.length,'Incomplete/duplicate native asset roster');
- const nativePatches=[],nativeContracts=[];
  for(let i=0;i<pins.assets.length;i++){
   const p=pins.assets[i],declared=publication.assets[i];
   demand(p.path.endsWith('/'+declared.path)&&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(k=>p[k]===declared[k]),'Original native asset roster rebound');
-  if(declared.path==='base-native-manifest.json'){const m=JSON.parse(raw[i+3]);nativeContracts.push(Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k=>[k,m[k]])));}
-  if(declared.path.startsWith('patch-')){const patch=JSON.parse(raw[i+3]);demand(patch.kind==='unassigned-native-cells-v1'&&patch.ledger_sha256===custody.pins.ledger.sha256,'Qualified original patch/ledger differs');nativePatches.push(patch);}
-  if(p.sha256===custody.pins.ledger.sha256)demand(same(JSON.parse(raw[i+3]),custody.ledger),'Whole published native ledger differs');
+   const parsed=declared.path==='base-native-manifest.json'||declared.path.startsWith('patch-')||p.sha256===custody.pins.ledger.sha256;
+  finishedMember(p,parsed,raw=>{
+  if(declared.path==='base-native-manifest.json'){const m=JSON.parse(raw);nativeContracts.push(Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k=>[k,m[k]])));}
+  if(declared.path.startsWith('patch-')){const patch=JSON.parse(raw);demand(patch.kind==='unassigned-native-cells-v1'&&patch.ledger_sha256===custody.pins.ledger.sha256,'Qualified original patch/ledger differs');nativePatches.push(patch);}
+  if(p.sha256===custody.pins.ledger.sha256)demand(same(JSON.parse(raw),custody.ledger),'Whole published native ledger differs');
+  });
  }
  demand(nativeContracts.length===1,'Original native publication omits complete base manifest');
  demand(pins.assets.some(p=>p.sha256===custody.pins.ledger.sha256),'Published native assets omit original complete ledger');
- return freeze({version:1,kind:'qualified-original-native-authority-v1',pins,scope_ids:custody.source_scope_ids,native_scope_ids:nativeScope,inventory_rows:rows,native_patches:nativePatches,native_contract:nativeContracts[0],rule_sha256:custody.rule_sha256,complete_phase_bytes:reader.used,
+ // Only complete parsed views and descriptor custody escape the final frame.
+ reader.metadataBytes=sourceMetadata+carryBytes(reader.inventory)+carryBytes(held);reader.phase();maxPhase=Math.max(maxPhase,reader.used);
+ return freeze({version:1,kind:'qualified-original-native-authority-v1',pins,scope_ids:custody.source_scope_ids,native_scope_ids:nativeScope,inventory_rows:rows,native_patches:nativePatches,native_contract:nativeContracts[0],rule_sha256:custody.rule_sha256,complete_phase_bytes:maxPhase,
   limitations:['Original unactivated proposal custody/qualification only; selected current-bank applicability and immutable policy authority remain separately required.']});
 }
 
