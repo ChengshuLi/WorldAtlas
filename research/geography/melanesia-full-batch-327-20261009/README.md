@@ -45,3 +45,22 @@ python3 research/geography/melanesia-full-batch-327-20261009/assemble.py --work-
 Omitting `--out` selects a fresh random run directory. The assembler refuses existing directories, symlink paths and output paths outside the owned packet prefix; it creates each result file exclusively and writes the evidence-quality receipt last.
 
 The evidence manifest pins the baseline input commits and each output byte sequence. The accepted scope is tracked by GitHub issue [#1646](https://github.com/ChengshuLi/WorldAtlas/issues/1646).
+
+## #1647 literal rule fit for the same exact 327 — follow-up
+
+`rule-fit-exceptions-327.jsonl.gz` adds one source-only record per original component. `rule-fit-summary-327.json` gives totals and product splits; `derive-1647-rule-fit.py` deterministically reclassifies only the retained #1650 ledgers and the byte-preserved engineering join files. The generator does no spatial operation or new source/native query. The input engineering join JSON is pinned at SHA-256 `cdf0152a9eaf8ae31e86ec3127c2d2d8f043aad3af7914c44c240c152617631b`; its 607,780-byte original Python full-feature preimages are retained at `engineering-current-target-preimages.json` (SHA-256 `6e4d944707919bdc3ec2d00e904847bd3d3006a49c9b669185a7cec3e497da01`). The join records 43/43 selected owner/parent/year/current-full-feature matches across the 229 source-supported observations; it reports zero operator executions and three JavaScript/Python preimage serialization mismatches. The saved Python preimages are necessary for those three targets.
+
+| Original class | Count | Exact #1647 source-only fit | Handling |
+| --- | ---: | ---: | --- |
+| Full source cover | 52 | 29 | 23 fail at least one retained physical predicate |
+| Single-subject partial | 177 | 64 | 113 fail at least one retained physical predicate; all 177 keep their exact nonempty remainders |
+| Multi-subject | 2 | 0 | Retained as exceptions |
+| No source intersection in retained literal domain | 18 | 0 | Retained as exceptions |
+| No administrative comparison row | 78 | 0 | Retained as exceptions |
+| **Total** | **327** | **93** | **98 original exceptions unchanged** |
+
+The literal fit requires one compatible recorded source subject, the whole mapped-land pointset predicate, empty retained mapped-water/outside-L1/contradictory/missing/extra and hierarchy residuals, a checked retained level-1 source-cover query with no chain issues, and exact residual custody. For a full row, the source-union remainder is the retained valid empty Polygon with zero area and length. For a partial row, the retained valid Polygon/MultiPolygon remainder is nonempty with positive area and length and has its original hash. A partial fit remains a partial match; it never means the source covers the entire component.
+
+The 93 fitted rows distribute as follows: SLB 19 full + 49 partial; IDN 5 + 7; PNG 4 + 6; FJI 1 + 1; VUT 0 + 1. The retained source corpus records editions and license claims as SLB 2021/Public Domain, IDN 2020/CC BY 3.0 IGO, PNG 2019/CC BY 3.0 IGO, FJI 2020/CC BY 4.0, and VUT 2017/ODbL 1.0. These are catalogue metadata claims for the consumed simplified products, not verified effective intervals, territorial authority, or fitness findings. The five editions already occur in the existing 363-input roster; this packet does not request a new source edition.
+
+This supports a bounded reusable **source-only prequalification rule** for rows that satisfy those literal predicates, with full-cover and partial outcomes kept separate. It does not certify source fitness, source-product authority, legal status, present-day boundaries, historic water/ice, processing cause, or native eligibility. Engineering still owns the batch registration/native qualification, its downstream owner/parent/year/full-feature joins, and the three Python-vs-JavaScript canonical-preimage cases. Whole-world replay remains outside scope.
