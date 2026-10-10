@@ -22,8 +22,22 @@ demand(globalThis.gc===exposedGc,'Reclamation callable changed during trusted im
 const token=prepareCurrentRebindDestination(root,command[6]);
 const runtimeBytes=before.runtime.filter(p=>['node','git','time'].includes(p.role)).reduce((n,p)=>n+p.bytes,0),executionBytes=before.code.reduce((n,p)=>n+2*p.bytes,0)+before.entry.bytes;
 const reader=new ImmutableReader(root,head,{runtimeBytes,executionBytes,metadataBytes:8*1048576+2*(raw.length+Buffer.byteLength(serialized)),outputBytes:4194304,gitExecutable:before.runtime.find(p=>p.role==='git').path});
-const registryPin=reader.descriptor(prefix+'original-registry.json'),ledgerPin=reader.descriptor(prefix+'composed-original-ledger.json');reader.admit(registryPin);reader.admit(ledgerPin);
-const registry=reader.json(registryPin.path,{expected:plan.authority_registry_sha256}),originalLedger=reader.json(ledgerPin.path);demand(valueSha(registry)===plan.authority_registry_sha256,'Whole original registry differs');
+// Explicit original products are whole immutable plan operands. Historical
+// plans retain their literal original paths and default selected revision.
+let registry,originalLedger;
+if(Object.hasOwn(plan,'original_inputs')){
+ demand(Array.isArray(plan.original_inputs)&&plan.original_inputs.length===2,'Require complete original registry/ledger descriptors');
+ [registry,originalLedger]=plan.original_inputs.map(pin=>{
+  demand(pin&&Object.keys(pin).sort().join(',')==='bytes,commit,git_blob_oid,mode,path,sha256'&&pin.mode==='100644'&&/^[a-f0-9]{40}$/.test(pin.commit)&&/^[a-f0-9]{40}$/.test(pin.git_blob_oid)&&Number.isSafeInteger(pin.bytes)&&pin.bytes>0&&pin.bytes<=33554432&&/^[a-f0-9]{64}$/.test(pin.sha256),'Incomplete original operand');
+  const actual=reader.descriptor(pin.path,pin.commit);
+  demand(actual.mode===pin.mode&&actual.git_blob_oid===pin.git_blob_oid&&actual.bytes===pin.bytes,'Original operand mode/OID/bytes differ');
+  reader.admit(actual);return reader.json(pin.path,{version:pin.commit,expected:pin.sha256});
+ });
+}else{
+ const registryPin=reader.descriptor(prefix+'original-registry.json'),ledgerPin=reader.descriptor(prefix+'composed-original-ledger.json');reader.admit(registryPin);reader.admit(ledgerPin);
+ registry=reader.json(registryPin.path,{expected:plan.authority_registry_sha256});originalLedger=reader.json(ledgerPin.path);
+}
+demand(valueSha(registry)===plan.authority_registry_sha256,'Whole original registry differs');
 validateCurrentRebindPlan(plan,{executionCommit:head,baseSelection:plan.base_selection,registry,originalRows:[...normaliseRetainedRepairLedger(originalLedger,registry).rows.values()],executedCode:before.code});
 // Base acquisition remains a real independently bounded stock helper frame.
 // The returned full owner/map/index and phase custody remain charged later.
