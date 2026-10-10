@@ -69,8 +69,9 @@ assert sidecar['logical_asset_map']['ledger']['sha256']==m.sha256(b.pinned_bytes
 assert sidecar['base_selection']['selected_geography']==selection['selected_geography']
 added_geometries=[]
 for x in ledger['rows']:
- if 'geometry' in x:added_geometries.append(x['geometry'])
- else:assert x['disposition']=='awaiting-evidence'
+ geometries=[v for v in x.values() if isinstance(v,dict) and v.get('type') in ['Polygon','MultiPolygon']]
+ added_geometries.extend(geometries)
+ if not geometries:assert x['disposition'] in ['awaiting-evidence','rejected']
 for x in ledger['current_targets']:added_geometries.append(x['geometry'])
 for x in added_geometries:
  assert not boxes_intersect(shape(x).bounds,bbox)
