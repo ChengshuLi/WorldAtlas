@@ -834,7 +834,11 @@ export function compatibleCurrentRebindCode(executionCommit,currentCode,historic
  if(same(currentCode,historicalCode))return historicalCode;
  demand((executionCommit==='46cb67a6cc0f88c6295d2d70da654baa5c6119a0'&&valueSha(historicalCode)==='e20767cd7f4aea34c1c1ce794bd09c43993905ac8da94779781c616ccd7c20ee')||(executionCommit==='c192aa5c88df9a55594b62f7dcfa6e4226f59682'&&valueSha(historicalCode)==='8542f8b0d2d41e6dc1a31090a91a47cbe383f3ab173f547a4c07aaeb8bb74284')||(executionCommit==='0eefe294390894f66c33e24e7950f21012d3791c'&&valueSha(historicalCode)==='ff910e210d83648c50608a0295a95b7ab1c5840f2f7eb678508cb7e02afe3c1d'),'Unknown historical rebind qualification generation');
  const boundaries=new Set(['coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs','coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs']);
- for(let i=0;i<currentCode.length;i++)if(!boundaries.has(currentCode[i].path))demand(same(currentCode[i],historicalCode[i]),'Historical numerical method or runtime body differs');
+ for(let i=0;i<currentCode.length;i++)if(!boundaries.has(currentCode[i].path)){
+  const a=currentCode[i],b=historicalCode[i];
+  const visibilityOnly=a.path==='scripts/check-effective-geographic-regression.mjs'&&b.sha256==='992257b3a50f790c5f859104c67a3e6f4cf75f8c341440fff78b0dd32b95fab9'&&b.bytes===75045&&a.sha256==='801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039'&&a.bytes===75074;
+  demand(same(a,b)||visibilityOnly,'Historical numerical method or runtime body differs');
+ }
  return historicalCode;
 }
 

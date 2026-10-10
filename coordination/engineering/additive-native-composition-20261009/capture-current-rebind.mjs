@@ -26,7 +26,7 @@ function originalOperands(reader,registry,ledger,snapshot,executionMetadata){
  for(const entry of registry.entries){
   // All already returned source/authority/owner values remain charged while
   // another whole original authority frame is opened by the trusted reader.
-  reader.metadataBytes=8*1048576+2*(snapshot.metadataBytes+valueBytes({registry,ledger,proofs,executionMetadata,reader_inventory:[...reader.inventory]}).length)+(snapshot.acquisition_buffer_bytes??0);reader.outputBytes=4194304;reader.phase();
+  reader.metadataBytes=(executionMetadata.priorCarryBytes??0)+8*1048576+2*(snapshot.metadataBytes+valueBytes({registry,ledger,proofs,executionMetadata,reader_inventory:[...reader.inventory]}).length)+(snapshot.acquisition_buffer_bytes??0);reader.outputBytes=4194304;reader.phase();
   proofs.push(readRetainedRegistryAuthority(reader,entry));
   demand(valueBytes(proofs).length<=2097152,'Complete returned original authority views exceed prospective carry bound');
   // The authority call and carry measurement have returned; proofs stay live.
@@ -36,18 +36,21 @@ function originalOperands(reader,registry,ledger,snapshot,executionMetadata){
  demand(ledger.rows.length===expected.size&&ledger.rows.every(row=>{const prior=expected.get(row.component_id);if(!prior)return false;const {authority_sha256,rule_sha256,...literal}=row;return authority_sha256===prior.proof.authority_sha256&&rule_sha256===prior.proof.rule_sha256&&same(literal,prior.row); }),'Composed ledger changes original scope/exception/primitive authority');
  return {rows:[...normalized.rows.values()],patches:proofs.flatMap(p=>p.native_proof.native_patches),proofs};
 }
-export function captureCurrentRebindProducts({destination,snapshot,plan,registry,originalLedger,executionCommit,executedCode,executionPreUse}){
+export function captureCurrentRebindProducts({destination,snapshot,plan,registry,originalLedger,executionCommit,executedCode,executionPreUse,priorSnapshot=snapshot}){
  demand(prepared.has(destination)&&snapshot?.reader instanceof ImmutableReader,'Require prepared owned destination and actual immutable reader');
- requirePriorAdditiveConservation(snapshot,registry,originalLedger);
+ demand(priorSnapshot?.reader instanceof ImmutableReader&&priorSnapshot.reader.repo===snapshot.reader.repo&&priorSnapshot.reader.version===snapshot.reader.version&&same(priorSnapshot.selection,snapshot.selection)&&same(priorSnapshot.manifest,snapshot.manifest)&&same(priorSnapshot.owners,snapshot.owners),'Fresh base snapshot differs from genuinely verified prior selection');
+ requirePriorAdditiveConservation(priorSnapshot,registry,originalLedger);
+ const priorCarryBytes=priorSnapshot===snapshot?0:2*priorSnapshot.metadataBytes+2*valueBytes({prior_inventory:[...priorSnapshot.reader.inventory],prior_phases:priorSnapshot.acquisitionPhases}).length+(priorSnapshot.acquisition_buffer_bytes??0);
+ demand(Number.isSafeInteger(priorCarryBytes)&&priorCarryBytes<=PHASE,'Complete retained prior snapshot exceeds phase');
  const plannedRows=[...normaliseRetainedRepairLedger(originalLedger,registry).rows.values()];
  validateCurrentRebindPlan(plan,{executionCommit,baseSelection:nativeBaseSelection(snapshot.selection),registry,originalRows:plannedRows,executedCode});
  // Reuse the stock privately registered source view before original authority
  // bodies can be opened; its complete selected metadata remains carried.
  currentRebindSourceView(snapshot);
- const {rows,patches,proofs}=originalOperands(snapshot.reader,registry,originalLedger,snapshot,{plan,executionPreUse,executedCode});
+ const {rows,patches,proofs}=originalOperands(snapshot.reader,registry,originalLedger,snapshot,{plan,executionPreUse,executedCode,priorCarryBytes});
  demand(same(rows,plannedRows),'Original authenticated authority rows differ from admitted plan');
  demand(same(plan.original_patch_sha256s,patches.map(valueSha)),'Cold plan changes complete original native output roster');
- const acquired=acquireCurrentRebindOperands(snapshot,registry,rows,patches,{targetSources:plan.target_sources,predecessorProof:plan.predecessor_proof,carriedMetadataBytes:2*valueBytes({plan,proofs,originalLedger,executedCode,executionPreUse}).length});
+ const acquired=acquireCurrentRebindOperands(snapshot,registry,rows,patches,{targetSources:plan.target_sources,predecessorProof:plan.predecessor_proof,carriedMetadataBytes:priorCarryBytes+2*valueBytes({plan,proofs,originalLedger,executedCode,executionPreUse}).length});
  demand(acquired.acquisition_phases.every(p=>p.complete_phase_bytes<=plan.limits.complete_phase_bytes&&p.descriptors<=plan.limits.descriptors),'Actual acquisition exceeds admitted planned phase');
  const request={version:1,kind:'issued-native-additive-current-bank-rebind-v1',execution_commit:executionCommit,executed_code:executedCode,base_selection:nativeBaseSelection(snapshot.selection),authority_registry_sha256:valueSha(registry),original_rows:rows,original_patch_sha256s:patches.map(valueSha),current_targets:acquired.current_targets,current_rows:acquired.current_rows,acquisition:acquired.acquisition,execution:{command:executionPreUse.command,pre_use:executionPreUse.pre_use},size:snapshot.manifest.size,limits:plan.limits};
  const result=acquired.result,facts={version:1,kind:'native-additive-current-bank-rebind-facts-v1',execution_commit:executionCommit,request_sha256:valueSha(request),result_sha256:valueSha(result),complete_phase_bytes:Math.max(...acquired.acquisition_phases.map(p=>p.complete_phase_bytes)),descriptors:Math.max(...acquired.acquisition_phases.map(p=>p.descriptors)),acquisition_sha256:valueSha(acquired.acquisition),acquisition_phases:acquired.acquisition_phases};
