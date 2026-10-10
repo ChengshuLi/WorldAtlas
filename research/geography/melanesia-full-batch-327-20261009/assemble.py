@@ -633,7 +633,7 @@ def create_evidence_manifest(out, base_commit, ids, component_files, action_repo
 
     # Output inventory is exact bytes, including decoded size/hash for gzip products.
     out_files = []
-    for path in sorted(p for p in out.iterdir() if p.is_file() and p.name != "evidence-quality.json"):
+    for path in sorted(p for p in out.iterdir() if p.is_file() and p.name in OUTPUT_NAMES and p.name != "evidence-quality.json"):
         raw = path.read_bytes()
         decoded = gzip.decompress(raw) if path.name.endswith(".gz") else None
         out_files.append(local_descriptor(path.relative_to(ROOT).as_posix(), raw, decoded))
