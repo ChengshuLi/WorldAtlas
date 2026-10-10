@@ -18,6 +18,22 @@ def own_launched_process(process,termination,owned_group):
   process.wait(timeout=5)
   raise
 
+def require_stock_growth(stock,root,output_bytes):
+ minimum=stock['limits']['minimumFree'];free=stock['freeBytes']
+ assert type(minimum) is int and minimum>0 and type(free) is int and free>=0
+ assert type(output_bytes) is int and output_bytes>0
+ entries=[e for e in stock['entries'] if e['path']==str(root) and e['slot']=='work' and e['status']=='ready']
+ assert len(entries)==1,'Fresh owned allocator entry required'
+ reservation=entries[0]['reservation']
+ assert type(reservation) is int and reservation>0 and output_bytes<=reservation,'Positive complete growth reservation required'
+ slots=[s for s in stock['worktrees'] if s['path']==str(root) and s['managed'] is True]
+ assert len(slots)==1,'Fresh measured owned allocator slot required'
+ footprint=slots[0]['bytes']
+ assert type(footprint) is int and footprint>=0 and footprint+output_bytes<=reservation,'Measured slot plus complete growth exceeds reservation'
+ # Allocation admitted the reservation before setup. Fresh launch admits this
+ # phase's complete growth against actual free space without reserving it twice.
+ assert free-output_bytes>=minimum,'Fresh current stock/growth admission refused'
+
 def supervise(issued_path,issued_sha,operation):
  assert issued_path.is_absolute() and '..' not in issued_path.parts
  for a in [issued_path,*issued_path.parents]:assert not a.is_symlink()
@@ -28,8 +44,10 @@ def supervise(issued_path,issued_sha,operation):
  root=pathlib.Path(issued['root']);head=issued['execution_commit'];pre=issued['pre_use'];cmd=issued['command']
  assert operation.is_absolute() and operation.is_relative_to(root/'.cache') and '..' not in operation.parts and not os.path.lexists(operation)
  for a in operation.parents:assert a.is_dir() and not a.is_symlink()
- assert len(cmd)==6 and cmd[0]==next(p['path'] for p in pre['runtime'] if p['role']=='time') and cmd[1]=='-l' and cmd[2]==next(p['path'] for p in pre['runtime'] if p['role']=='node') and cmd[3]==pre['entry']['path'] and cmd[4]==pre['plan']['path']
- output=pathlib.Path(cmd[5]);assert output.is_relative_to(root/'.cache') and '..' not in output.parts and not os.path.lexists(output)
+ assert isinstance(cmd,list) and (len(cmd)==6 or len(cmd)==7 and cmd[3]=='--expose-gc')
+ bound_cmd=cmd[:3]+cmd[4:] if len(cmd)==7 else cmd
+ assert len(bound_cmd)==6 and bound_cmd[0]==next(p['path'] for p in pre['runtime'] if p['role']=='time') and bound_cmd[1]=='-l' and bound_cmd[2]==next(p['path'] for p in pre['runtime'] if p['role']=='node') and bound_cmd[3]==pre['entry']['path'] and bound_cmd[4]==pre['plan']['path']
+ output=pathlib.Path(bound_cmd[5]);assert output.is_relative_to(root/'.cache') and '..' not in output.parts and not os.path.lexists(output)
  for a in output.parents:assert a.is_dir() and not a.is_symlink()
  before=contract.capture(root,head,pre);plan=json.loads(pathlib.Path(pre['plan']['path']).read_bytes());limits=plan['limits']
  # Fresh original stock report and explicit prospective retained growth; no
@@ -37,7 +55,7 @@ def supervise(issued_path,issued_sha,operation):
  guard_env={k:v for k,v in os.environ.items() if k not in ('NODE_OPTIONS','NODE_PATH','PYTHONPATH','PYTHONHOME','PYTHONSTARTUP','PYTHONINSPECT','PYTHONUSERBASE','__PYVENV_LAUNCHER__')}
  guard_env['PATH']='/usr/bin:/bin'
  stock_raw=subprocess.check_output([cmd[2],str(root/'scripts/local-workspace.mjs'),'check'],cwd=root,env=guard_env)
- stock=json.loads(stock_raw);assert stock['freeBytes']-contract.OUTPUT>=10737418240 and stock['checkoutBytes']+contract.OUTPUT<=53687091200,'Fresh original stock/growth admission refused'
+ stock=json.loads(stock_raw);require_stock_growth(stock,root,contract.OUTPUT)
  vm=subprocess.check_output(['/usr/bin/vm_stat'],text=True,env=guard_env);page=int(re.search(r'page size of (\d+) bytes',vm).group(1));pages=sum(int(re.search(r'^Pages '+name+r':\s*(\d+)',vm,re.M).group(1)) for name in ['free','inactive','speculative']);assert pages*page>=805306368,'Fresh conservative host supply refused; reclaimability uncertain'
  extra=sum(p['bytes'] for p in pre['runtime'] if p['role'] not in ('node','git','installed-dependency'))
  assert issued['operating_phase_bytes']==limits['complete_phase_bytes']+extra+contract.OUTPUT+contract.META<=contract.PHASE

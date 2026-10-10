@@ -1,0 +1,37 @@
+node:fs:1771
+  const stats = binding.lstat(
+                        ^
+
+Error: ENOENT: no such file or directory, lstat '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-3PVLNz/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs'
+    at Object.lstatSync (node:fs:1771:25)
+    at body (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs:30:39)
+    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs:91:16
+    at Array.map (<anonymous>)
+    at issueCurrentExecution (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs:88:52)
+    at runPackageBuild (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/scripts/package-build.mjs:111:24)
+    at async file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/scripts/build-static.mjs:2:1 {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'lstat',
+  path: '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-3PVLNz/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs'
+}
+
+Node.js v24.19.0
+       14.24 real         1.05 user         5.15 sys
+            59932672  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               31128  page reclaims
+                3627  page faults
+                   0  swaps
+                   0  block input operations
+                   1  block output operations
+                  23  messages sent
+                  23  messages received
+                   0  signals received
+               18186  voluntary context switches
+              160285  involuntary context switches
+         36695251469  instructions retired
+         16497963899  cycles elapsed
+            45087168  peak memory footprint

@@ -1,0 +1,41 @@
+file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-t4TvWg/scripts/check-effective-geographic-regression.mjs:63
+    pin.sha256=sha(body);pin.whole_body_consumed=true;
+              ^
+
+TypeError: Cannot assign to read only property 'sha256' of object '#<Object>'
+    at ImmutableReader.read (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-t4TvWg/scripts/check-effective-geographic-regression.mjs:63:15)
+    at reader.read (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-t4TvWg/coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs:64:12)
+    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-t4TvWg/coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs:90:51
+    at Array.map (<anonymous>)
+    at preparePackageSelectedAdditive (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-t4TvWg/coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs:90:23)
+    at async file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/package-input-image-t4TvWg/scripts/build-static-inner.mjs:106:23
+
+Node.js v24.19.0
+file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/scripts/package-build.mjs:123
+      child.on('exit', (code, signal) => code === 0 ? resolve() : reject(Error(`Package ${kind} build failed (${signal ?? code}); prior outputs retained`)));
+                                                                         ^
+
+Error: Package static build failed (1); prior outputs retained
+    at ChildProcess.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/scripts/package-build.mjs:123:74)
+    at ChildProcess.emit (node:events:509:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:295:12)
+
+Node.js v24.19.0
+      137.12 real        99.18 user        18.99 sys
+           541917184  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+             2197136  page reclaims
+               22966  page faults
+                   0  swaps
+                   0  block input operations
+                   2  block output operations
+               10035  messages sent
+                4846  messages received
+                   0  signals received
+               27590  voluntary context switches
+              556855  involuntary context switches
+         38432456093  instructions retired
+         15704729869  cycles elapsed
+            50628672  peak memory footprint
