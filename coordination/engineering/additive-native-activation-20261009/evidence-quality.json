@@ -6,7 +6,7 @@
   "subject_ids": [],
   "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "baseline": {
-    "commit": "84bdbda72a4e9306b818c5697e1413711d1d707f",
+    "commit": "f257c075bad8efe62aa2d9ef65e60cfb1565d04e",
     "files": [
       {
         "path": "coordination/engineering/additive-native-composition-20261009/evidence-quality.json",
@@ -26,40 +26,19 @@
   "sources": [],
   "outputs": [
     {
-      "path": "coordination/engineering/additive-native-activation-20261009/selected-base-alias-controls.log",
-      "bytes": 332,
-      "sha256": "25b92f03c5e61a8ecb122dd3c7e8aded1f7b02aac8a098f3283427a259bd2237",
-      "hash_kind": "file-bytes",
-      "role": "test-output"
-    },
-    {
-      "path": "coordination/engineering/additive-native-activation-20261009/independent-native-consumption-base-alias-review.json",
-      "bytes": 8768,
-      "sha256": "8e921a42d1ea622f45b794ff18259cfb3ff923fc4b0b2232f4866aebb18ac1ed",
-      "hash_kind": "file-bytes",
-      "role": "independent-review"
-    },
-    {
-      "path": "coordination/engineering/additive-native-activation-20261009/selected-base-alias-identity-controls.log",
-      "bytes": 333,
-      "sha256": "b2ff6724e8dae9428aa333dc1926411b06cb49eeea1e8ae6f3c49d6a8246c558",
-      "hash_kind": "file-bytes",
-      "role": "test-output"
-    },
-    {
-      "path": "coordination/engineering/additive-native-activation-20261009/independent-native-consumption-identity-review.json",
-      "bytes": 9172,
-      "sha256": "5f6ca30596eec00b3ed4b328d6edcf094a0bd235714be6c08d29cf2d2f1564be",
+      "path": "coordination/engineering/additive-native-activation-20261009/independent-original-native-authority-lifetime-review.json",
+      "bytes": 8410,
+      "sha256": "fb271c9853da87165b62b65c1fbe6755bf87416552117ef759e608f7641e4184",
       "hash_kind": "file-bytes",
       "role": "independent-review"
     }
   ],
   "methods": [
     {
-      "id": "private-selected-base-alias",
+      "id": "finished-original-native-authority-members",
       "kind": "code",
-      "description": "Authenticate every ordinary encoded additive asset while reusing only the original privately validated immutable selected owner/base graph with exact full encoded and decoded identities.",
-      "software": "Node24; original scientific/native operators unchanged",
+      "description": "Authenticate each complete original native member in a finished acquisition frame while carrying full source, outer metadata, descriptor inventory and returned native views. Original authority predicates and stock caps remain unchanged.",
+      "software": "Node24; original source/scientific operators unchanged",
       "units": "code behavior"
     }
   ],
@@ -72,11 +51,11 @@
     "geographic_approval": "unapproved"
   },
   "commands": [
-    "node --test coordination/engineering/additive-native-activation-20261009/selected-base-alias.test.mjs",
-    "node --test test/selected-continuous-lifecycle.test.mjs"
+    "node coordination/engineering/additive-native-activation-20261009/original-native-authority-lifetime-controls.mjs",
+    "node coordination/engineering/additive-native-activation-20261009/native-authority-carry-counter-controls.mjs"
   ],
   "limits": [
-    "Code-only private-alias prerequisite. All six ordinary encoded assets remain whole authenticated; only duplicate already-verified decoded owner/base graphs are reused. Original scientific/code-critical and selected data bodies remain unchanged. No real downstream selected-bank qualification or activation is claimed.",
-    "Controls use genuine tiny private selected snapshots and an explicitly extracted literal six-asset acquisition boundary. They do not establish full bank/source/operating qualification. Historical qualification/package remain their original execution vintages. Activation must renew the changed whole executing-code current-before proof and complete normal selected package/CI/review/queue."
+    "Code-only original native authority acquisition prerequisite; selected native/source/geometry/application data and original scientific qualifications remain unchanged. No twelve-component activation, selected current-bank gate, package, GPU/browser or production result is claimed.",
+    "Actual retained authority reader controls preserve Alaska13 and pilot7 semantic outputs and whole member read rosters. Accounting controls use the original refused runtime/execution/outer carry as explicit fixture inputs; they are not operating/RSS qualification. The changed whole executing current-before code requires genuine final-vintage qualification before selection."
   ]
 }

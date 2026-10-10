@@ -1,0 +1,58 @@
+{
+  "limits": "Retained original custody reader controls only; no source/scientific operator, selected full gate or activation claim. Original authority function fixture is the literal pre-fix function, inserted into the current module; only two fixture imports are redirected to the actual helper/codec.",
+  "positives": [
+    {
+      "rule": "199f6e33cf394fe92dd490100a717eb23c008cbe896f69ac01e36f49e2f6d8a6",
+      "scopes": 13,
+      "complete_native_body_reads": 11,
+      "max_phase_bytes": 266403413,
+      "final_retained_metadata_bytes": 90552193,
+      "semantic_equal_excluding_phase_metric": true
+    },
+    {
+      "rule": "f08ddf9c1d0534aecda36ff134d6398d48c618a7e6982e7f51c31914c2140faf",
+      "scopes": 7,
+      "complete_native_body_reads": 10,
+      "max_phase_bytes": 263714933,
+      "final_retained_metadata_bytes": 87858785,
+      "semantic_equal_excluding_phase_metric": true
+    }
+  ],
+  "refusals": [
+    {
+      "kind": "encoded-sha",
+      "refused": true,
+      "native_body_reads_before_refusal": 3
+    },
+    {
+      "kind": "decoded-sha",
+      "refused": true,
+      "native_body_reads_before_refusal": 7
+    },
+    {
+      "kind": "mode",
+      "refused": true,
+      "native_body_reads_before_refusal": 1
+    },
+    {
+      "kind": "omitted-asset",
+      "refused": true,
+      "native_body_reads_before_refusal": 3
+    },
+    {
+      "kind": "reordered-assets",
+      "refused": true,
+      "native_body_reads_before_refusal": 3
+    },
+    {
+      "kind": "carry-cap",
+      "refused": true,
+      "native_body_reads_before_refusal": 0
+    },
+    {
+      "kind": "foreign-custody",
+      "refused": true,
+      "native_body_reads_before_refusal": 0
+    }
+  ]
+}
