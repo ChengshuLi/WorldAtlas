@@ -1596,7 +1596,7 @@ function administrativeBatchProposalStage(repo,request,resolutions) {
 // supplies exact selected IDs/ordered feature hashes. No all-world JSON lives
 // in this process. Parent joining is a subsequent bounded custody operation.
 export function inventoryCommand({repo, commit, requestPin, destination}) {
-  requirePlainExecution();
+  requirePlainExecution({boundedHeap:true});
   const sourceRoot = admitInventoryDestination(repo,destination);
   demand(execFileSync('git',['-C',sourceRoot,'rev-parse','HEAD'],{encoding:'utf8'}).trim() === commit,
     'Executing immutable head differs');
@@ -1616,6 +1616,11 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
   const project = committedPreparationFiles(sourceRoot,commit,projectNames);
   const requestBudget = candidateBudget([...project, ...pinCost(requestPin)],{reserveBytes:runtimeStat.size+131072});
   const request = JSON.parse(readPin(sourceRoot,requestPin));
+  demand(!process.execArgv.length || (request.operation===SOURCE_PREMISES_VERSION
+    &&request.source_rule?.profile==='retained-consumed-administrative-source')
+    ||(request.operation===ADDITIVE_BATCH_PROPOSAL_VERSION
+    &&request.additive?.source_profile==='retained-consumed-administrative-source'),
+    'Bounded heap profile is limited to administrative source/native stages');
   demand(request.version === 1 && [INVENTORY_VERSION,GROUP_JOIN_VERSION,COMPLETE_JOIN_VERSION,SOURCE_PREMISES_VERSION,ADDITIVE_PROPOSAL_VERSION,ADDITIVE_BATCH_PROPOSAL_VERSION].includes(request.operation)
     && JSON.stringify(canonicalValue(request.executed_code)) === JSON.stringify(canonicalValue(project)),
     'Foreign request operation/head');

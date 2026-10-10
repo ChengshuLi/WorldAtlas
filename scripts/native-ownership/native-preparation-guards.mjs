@@ -7,8 +7,11 @@ const digest = raw => createHash('sha256').update(raw).digest('hex');
 const safe = name => typeof name === 'string' && /^[a-zA-Z0-9_./-]+$/.test(name) &&
   name.split('/').every(part => part && part !== '.' && part !== '..');
 
-export function requirePlainExecution() {
-  if (process.execArgv.length || process.env.NODE_OPTIONS?.trim() || process.env.NODE_PATH?.trim())
+export function requirePlainExecution({boundedHeap=false}={}) {
+  const bounded=boundedHeap===true&&process.execArgv.length===2
+    &&process.execArgv[0]==='--max-old-space-size=128'
+    &&process.execArgv[1]==='--max-semi-space-size=16';
+  if ((process.execArgv.length&&!bounded) || process.env.NODE_OPTIONS?.trim() || process.env.NODE_PATH?.trim())
     throw Error('Native preparation requires the reviewed plain Node launch without loaders/preloads');
 }
 
