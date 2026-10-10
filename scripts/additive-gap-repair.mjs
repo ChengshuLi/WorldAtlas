@@ -21,6 +21,33 @@ export const DISPOSITIONS = ['eligible', 'assigned', 'zero-cell', 'already-resol
 const categories = new Set(['mapped-land-support', 'mapped-inland-water-support', 'mixed-source-support', 'outside-mapped-L1-context', 'unknown']);
 const sha = raw => createHash('sha256').update(raw).digest('hex');
 const canonical = value => Buffer.from(JSON.stringify(canonicalValue(value)) + '\n');
+// Hash the same canonical JSON bytes without cloning the entire source
+// coordinate graph or retaining its complete encoded string/Buffer. This is
+// only the original administrative feature/geometry hash acquisition path.
+function canonicalSourceSha(value) {
+  const hasher=createHash('sha256'),active=new WeakSet();
+  let parts=[],units=0;
+  const flush=()=>{if(parts.length){hasher.update(parts.join(''));parts=[];units=0;}};
+  const write=token=>{parts.push(token);units+=token.length;if(units>=65536)flush();};
+  const visit=value=>{
+    if(value&&typeof value==='object'){
+      demand(!active.has(value),'Cyclic original source value');active.add(value);
+      if(Array.isArray(value)){
+        write('[');for(let i=0;i<value.length;i++){if(i)write(',');if(i in value)visit(value[i]);else write('null');}write(']');
+      }else{
+        // Canonical assignment sorts string keys, while JSON.stringify emits
+        // integer-index keys first. Preserve both rules with a shallow key-only
+        // object, never a recursive clone of the source values.
+        const keys=Object.create(null);for(const key of Object.keys(value).sort())keys[key]=true;
+        write('{');let first=true;for(const key of Object.keys(keys)){if(!first)write(',');first=false;write(JSON.stringify(key));write(':');visit(value[key]);}write('}');
+      }
+      active.delete(value);return;
+    }
+    demand(value!==undefined&&(typeof value!=='number'||Number.isFinite(value)), 'Nonfinite or missing footprint value');
+    const token=JSON.stringify(value);demand(typeof token==='string','Unsupported original source value');write(token);
+  };
+  visit(value);write('\n');flush();return hasher.digest('hex');
+}
 const hex = value => /^[a-f0-9]{64}$/.test(value ?? '');
 function demand(value, message) { if (!value) throw Error(message); }
 
@@ -1107,7 +1134,7 @@ function administrativeSourcePremiseStage(repo,request,report) {
   const products=rule.administrative_products.map(pin=>{const body=get(pin.path).body,collection=JSON.parse(body);
     demand(collection.type==='FeatureCollection'&&Array.isArray(collection.features),'Incomplete original administrative product');
     return {pin,original_bytes:body.length,original_sha256:sha(body),features:collection.features.map(feature=>({
-      feature_sha256:sha(canonical(feature)),geometry_sha256:sha(canonical(feature.geometry))}))};});
+      feature_sha256:canonicalSourceSha(feature),geometry_sha256:canonicalSourceSha(feature.geometry)}))};});
   // Full owner graph is needed only after original product hash acquisition.
   const bounds=json(rule.bounds_path),owners=new Map(bounds.map(row=>[row.id,row]));
   demand(bounds.length===49625&&owners.size===49625&&new Set(bounds.map(row=>row.index)).size===49625,'Incomplete selected owner roster');
