@@ -1,0 +1,933 @@
+[
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:1556c3bb1c20fc718d0e5d5d8dce2ce180b191fe63eaf492312db22550e8e737"
+    ],
+    "current_full_feature_sha256": "72492cf45b1f6998ce111cb19c135e30813081836d1464ff220e7f1637b21a05",
+    "current_geometry_sha256": "2f452588fab0b255021357d9da87cb1aa2bb08b31b75115b8307be2d270cd812",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:samar:7ded36d6e917",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 26,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "More than 25 locations: review intermediate geographic groupings",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:philippines:07d972c3d9f6. This declaration alone is not semantic approval.",
+                "title": "gb:PHL:ADM2",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:PHL:ADM3; role Municipalities; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Philippines",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PHL/ADM3/geoBoundaries-PHL-ADM3.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 26 locations, roles {'Municipalities': 26}, source vintages {'2020': 26}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "Source-corresponding named grouping requires independent local/functional purpose and footprint review; children are not bulk approved."
+            ]
+          },
+          "source": "gb:PHL:ADM2",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Samar",
+        "parent_id": "framework:area:philippines:07d972c3d9f6"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/4542",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:samar:7ded36d6e917",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2020",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/674",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 34129,
+    "owner_row": {
+      "bounds": [
+        221909.53681333334,
+        122473.75869541444,
+        221995.61464999997,
+        122629.15345622432
+      ],
+      "id": "gb:PHL:ADM3:30758251B25296236065904",
+      "index": 34129,
+      "province_id": "framework:province:samar:7ded36d6e917",
+      "province_index": 4044
+    },
+    "parent_index": 4044,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:PHL:ADM3:30758251B25296236065904",
+      "original_feature_sha256": "72492cf45b1f6998ce111cb19c135e30813081836d1464ff220e7f1637b21a05",
+      "original_parent_id": "framework:province:samar:7ded36d6e917",
+      "reference_year": "2020"
+    },
+    "source_containing_pin": {
+      "bytes": 4909063,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "59012653b56da5a394e7692209b257e27883eab8",
+      "mode": "100644",
+      "path": "data/geography/part-18.json",
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+    },
+    "target_id": "gb:PHL:ADM3:30758251B25296236065904"
+  },
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:307e87aee838533082007e29254811d809f22152127a05815195a9d98ad327da"
+    ],
+    "current_full_feature_sha256": "09c1a6509feac0c1b91c950a0161bf74d891d07ddb0665525cee9116c57275a5",
+    "current_geometry_sha256": "6a5ed40c3f825bb4cac85b72b16f1b92a0109244a151c8925bbf8fad453321b6",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:lanao-del-norte:40e45a8e66b5",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 23,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:philippines:07d972c3d9f6. This declaration alone is not semantic approval.",
+                "title": "gb:PHL:ADM2",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:PHL:ADM3; role Municipalities; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Philippines",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PHL/ADM3/geoBoundaries-PHL-ADM3.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 23 locations, roles {'Municipalities': 23}, source vintages {'2020': 23}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "Source-corresponding named grouping requires independent local/functional purpose and footprint review; children are not bulk approved."
+            ]
+          },
+          "source": "gb:PHL:ADM2",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Lanao del Norte",
+        "parent_id": "framework:area:philippines:07d972c3d9f6"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/3132",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:lanao-del-norte:40e45a8e66b5",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2020",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/897",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 34261,
+    "owner_row": {
+      "bounds": [
+        221251.79144888886,
+        125136.3436648863,
+        221349.59393166666,
+        125197.3225481876
+      ],
+      "id": "gb:PHL:ADM3:30758251B3312801270328",
+      "index": 34261,
+      "province_id": "framework:province:lanao-del-norte:40e45a8e66b5",
+      "province_index": 2634
+    },
+    "parent_index": 2634,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:PHL:ADM3:30758251B3312801270328",
+      "original_feature_sha256": "09c1a6509feac0c1b91c950a0161bf74d891d07ddb0665525cee9116c57275a5",
+      "original_parent_id": "framework:province:lanao-del-norte:40e45a8e66b5",
+      "reference_year": "2020"
+    },
+    "source_containing_pin": {
+      "bytes": 4909063,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "59012653b56da5a394e7692209b257e27883eab8",
+      "mode": "100644",
+      "path": "data/geography/part-18.json",
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+    },
+    "target_id": "gb:PHL:ADM3:30758251B3312801270328"
+  },
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:47f533a94718204a72389e0ee39b538ff230f219ec619de6aadfa8dd0997616f"
+    ],
+    "current_full_feature_sha256": "ecd1e7dfc77c7dc25bc20278ef0803666e546099c2a05bdf88af357ad696a1ce",
+    "current_geometry_sha256": "8a58402408ba69708b09d68fd6be8e906b5701ba0290a57aa669c9ff3bed87c6",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:quezon:20079c4f6453",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 41,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "More than 25 locations: review intermediate geographic groupings",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:philippines:07d972c3d9f6. This declaration alone is not semantic approval.",
+                "title": "gb:PHL:ADM2",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:PHL:ADM3; role Municipalities; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Philippines",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PHL/ADM3/geoBoundaries-PHL-ADM3.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 41 locations, roles {'Municipalities': 41}, source vintages {'2020': 41}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "Source-corresponding named grouping requires independent local/functional purpose and footprint review; children are not bulk approved."
+            ]
+          },
+          "source": "gb:PHL:ADM2",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Quezon",
+        "parent_id": "framework:area:philippines:07d972c3d9f6"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/4364",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:quezon:20079c4f6453",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2020",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/1408",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 34907,
+    "owner_row": {
+      "bounds": [
+        220352.92618833334,
+        121200.9369865808,
+        220456.40893444442,
+        121375.76233956525
+      ],
+      "id": "gb:PHL:ADM3:30758251B69966193362953",
+      "index": 34907,
+      "province_id": "framework:province:quezon:20079c4f6453",
+      "province_index": 3866
+    },
+    "parent_index": 3866,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:PHL:ADM3:30758251B69966193362953",
+      "original_feature_sha256": "ecd1e7dfc77c7dc25bc20278ef0803666e546099c2a05bdf88af357ad696a1ce",
+      "original_parent_id": "framework:province:quezon:20079c4f6453",
+      "reference_year": "2020"
+    },
+    "source_containing_pin": {
+      "bytes": 4909063,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "59012653b56da5a394e7692209b257e27883eab8",
+      "mode": "100644",
+      "path": "data/geography/part-18.json",
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+    },
+    "target_id": "gb:PHL:ADM3:30758251B69966193362953"
+  },
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:5333b1363dbb396832c14da44a54e59bddf037cb92378e11d17efcc931220ce2"
+    ],
+    "current_full_feature_sha256": "af76cf0de2c411bf1acfea2268bbbb33ef463b2245c5187fa3ebb56e8b1a71c9",
+    "current_geometry_sha256": "462143c9b7274abbbc36d97b6d6633ee121683ab6d273300d2326a7e994f032f",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:sulu:278349037800",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 19,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:philippines:07d972c3d9f6. This declaration alone is not semantic approval.",
+                "title": "gb:PHL:ADM2",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:PHL:ADM3; role Municipalities; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Philippines",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PHL/ADM3/geoBoundaries-PHL-ADM3.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 19 locations, roles {'Municipalities': 19}, source vintages {'2020': 19}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "members have source parent overlap below 0.8; full-parent validation required",
+              "Exact members requiring stronger parent correspondence: gb:PHL:ADM3:30758251B6152572202720",
+              "Fresh independent pinned-parent diagnostic: Jolo (gb:PHL:ADM3:30758251B6152572202720) representative point(s) outside the named source parent. Full footprint/source-vintage comparison is required; do not reparent from a point alone."
+            ]
+          },
+          "source": "gb:PHL:ADM2",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Sulu",
+        "parent_id": "framework:area:philippines:07d972c3d9f6"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/4926",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:sulu:278349037800",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2020",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/1246",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 33925,
+    "owner_row": {
+      "bounds": [
+        218759.46667555557,
+        126843.56422828647,
+        219062.34122944446,
+        127093.90722520162
+      ],
+      "id": "gb:PHL:ADM3:30758251B13625365204801",
+      "index": 33925,
+      "province_id": "framework:province:sulu:278349037800",
+      "province_index": 4428
+    },
+    "parent_index": 4428,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:PHL:ADM3:30758251B13625365204801",
+      "original_feature_sha256": "af76cf0de2c411bf1acfea2268bbbb33ef463b2245c5187fa3ebb56e8b1a71c9",
+      "original_parent_id": "framework:province:sulu:278349037800",
+      "reference_year": "2020"
+    },
+    "source_containing_pin": {
+      "bytes": 4909063,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "59012653b56da5a394e7692209b257e27883eab8",
+      "mode": "100644",
+      "path": "data/geography/part-18.json",
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+    },
+    "target_id": "gb:PHL:ADM3:30758251B13625365204801"
+  },
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:6c21d4063b8f6febad1769f1e7f058e668ab8c018d93b770f560818e8db5af22"
+    ],
+    "current_full_feature_sha256": "6d5fb14e1b0ac4bfc0035742bffefb52312ab2097f5cdb7e82717eb260e092e8",
+    "current_geometry_sha256": "73ffe0a79b30bcf534b6644c2168710073420939559625ca2f7c0ea9bde7953d",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:basilan:495b7fb116de",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 12,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:philippines:07d972c3d9f6. This declaration alone is not semantic approval.",
+                "title": "gb:PHL:ADM2",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:PHL:ADM3; role Municipalities; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Philippines",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PHL/ADM3/geoBoundaries-PHL-ADM3.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 12 locations, roles {'Municipalities': 12}, source vintages {'2020': 12}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "Source-corresponding named grouping requires independent local/functional purpose and footprint review; children are not bulk approved."
+            ]
+          },
+          "source": "gb:PHL:ADM2",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Basilan",
+        "parent_id": "framework:area:philippines:07d972c3d9f6"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/1325",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:basilan:495b7fb116de",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2020",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/154",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 34131,
+    "owner_row": {
+      "bounds": [
+        219891.7325,
+        126440.46754402714,
+        219952.32197555553,
+        126496.73865607864
+      ],
+      "id": "gb:PHL:ADM3:30758251B25477955083554",
+      "index": 34131,
+      "province_id": "framework:province:basilan:495b7fb116de",
+      "province_index": 827
+    },
+    "parent_index": 827,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:PHL:ADM3:30758251B25477955083554",
+      "original_feature_sha256": "6d5fb14e1b0ac4bfc0035742bffefb52312ab2097f5cdb7e82717eb260e092e8",
+      "original_parent_id": "framework:province:basilan:495b7fb116de",
+      "reference_year": "2020"
+    },
+    "source_containing_pin": {
+      "bytes": 4583022,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "306125db7012a9ac927bb4a169dea5166ef126e7",
+      "mode": "100644",
+      "path": "data/geography/part-19.json",
+      "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+    },
+    "target_id": "gb:PHL:ADM3:30758251B25477955083554"
+  },
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:c6e5c097e7fec0a79402758c4b8787151660e2312015f92403b1d857bdae9ca8"
+    ],
+    "current_full_feature_sha256": "72d0011cafd71945bc91618ff34a88e48de46e5524705dd221330f0f638dbd17",
+    "current_geometry_sha256": "bf3acea2d016a875fffe2f8d88e739302ef16ce6cfbd23ff4b8b799b215946e4",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:cavite:34d44526c143",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 23,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:philippines:07d972c3d9f6. This declaration alone is not semantic approval.",
+                "title": "gb:PHL:ADM2",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:PHL:ADM3; role Municipalities; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Philippines",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PHL/ADM3/geoBoundaries-PHL-ADM3.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 23 locations, roles {'Municipalities': 23}, source vintages {'2020': 23}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "Source-corresponding named grouping requires independent local/functional purpose and footprint review; children are not bulk approved."
+            ]
+          },
+          "source": "gb:PHL:ADM2",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Cavite",
+        "parent_id": "framework:area:philippines:07d972c3d9f6"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/1697",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:cavite:34d44526c143",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2020",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/569",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 33934,
+    "owner_row": {
+      "bounds": [
+        218882.10210444444,
+        120415.52620229528,
+        219129.48485500002,
+        120503.65713481604
+      ],
+      "id": "gb:PHL:ADM3:30758251B13765165414384",
+      "index": 33934,
+      "province_id": "framework:province:cavite:34d44526c143",
+      "province_index": 1199
+    },
+    "parent_index": 1199,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:PHL:ADM3:30758251B13765165414384",
+      "original_feature_sha256": "72d0011cafd71945bc91618ff34a88e48de46e5524705dd221330f0f638dbd17",
+      "original_parent_id": "framework:province:cavite:34d44526c143",
+      "reference_year": "2020"
+    },
+    "source_containing_pin": {
+      "bytes": 4909063,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "59012653b56da5a394e7692209b257e27883eab8",
+      "mode": "100644",
+      "path": "data/geography/part-18.json",
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+    },
+    "target_id": "gb:PHL:ADM3:30758251B13765165414384"
+  },
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:e7830362e503492dae1922eb91157c0e3cc7a42043dc91eff29878eeb85aa902"
+    ],
+    "current_full_feature_sha256": "8e81e122c4c04630014bfc217347600cdd9585e47571c8fd0beefbfad602f83d",
+    "current_geometry_sha256": "b0ddc2c385beb059ea611460425756e0b1e8bfc74056a6efc39570c64058b080",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:palawan:d3a8964f8800",
+        "level": "province",
+        "metadata": {
+          "basis": "Geographic portion of a source administrative unit; not a new government division",
+          "child_count": 23,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Geographic portion of a source administrative unit; not a new government division; exact current parent framework:area:philippines:07d972c3d9f6. This declaration alone is not semantic approval.",
+                "title": "gb:PHL:ADM2",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:PHL:ADM3; role Municipalities; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Philippines",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PHL/ADM3/geoBoundaries-PHL-ADM3.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 23 locations, roles {'Municipalities': 23}, source vintages {'2020': 23}. Current declared purpose is Geographic portion of a source administrative unit; not a new government division. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "Source-corresponding named grouping requires independent local/functional purpose and footprint review; children are not bulk approved."
+            ]
+          },
+          "source": "gb:PHL:ADM2",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Palawan",
+        "parent_id": "framework:area:philippines:07d972c3d9f6"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/4058",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:palawan:d3a8964f8800",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2020",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/727",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 35376,
+    "owner_row": {
+      "bounds": [
+        218067.42125944447,
+        123275.38805845978,
+        218414.3542661111,
+        123487.44482783551
+      ],
+      "id": "gb:PHL:ADM3:30758251B96628789522948",
+      "index": 35376,
+      "province_id": "framework:province:palawan:d3a8964f8800",
+      "province_index": 3560
+    },
+    "parent_index": 3560,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:PHL:ADM3:30758251B96628789522948",
+      "original_feature_sha256": "8e81e122c4c04630014bfc217347600cdd9585e47571c8fd0beefbfad602f83d",
+      "original_parent_id": "framework:province:palawan:d3a8964f8800",
+      "reference_year": "2020"
+    },
+    "source_containing_pin": {
+      "bytes": 4909063,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "59012653b56da5a394e7692209b257e27883eab8",
+      "mode": "100644",
+      "path": "data/geography/part-18.json",
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+    },
+    "target_id": "gb:PHL:ADM3:30758251B96628789522948"
+  },
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:ec9be2d5c5db2b304f0e71418b2b328ae508fed448cef29e6737c3c1121dc1ef"
+    ],
+    "current_full_feature_sha256": "91bb2dffff0129792a4248829a42ae1d679f85ec2fa90920d01050438153eca9",
+    "current_geometry_sha256": "9e30b968700ea7d28bef829a7f3f0c64ff9eb8d193be2f8ad186552d0d7f7875",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:guimaras:e9d7c3ca1a13",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 5,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:philippines:07d972c3d9f6. This declaration alone is not semantic approval.",
+                "title": "gb:PHL:ADM2",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:PHL:ADM3; role Municipalities; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Philippines",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PHL/ADM3/geoBoundaries-PHL-ADM3.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 5 locations, roles {'Municipalities': 5}, source vintages {'2020': 5}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "Source-corresponding named grouping requires independent local/functional purpose and footprint review; children are not bulk approved."
+            ]
+          },
+          "source": "gb:PHL:ADM2",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Guimaras",
+        "parent_id": "framework:area:philippines:07d972c3d9f6"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/2423",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:guimaras:e9d7c3ca1a13",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2020",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/1196",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 34225,
+    "owner_row": {
+      "bounds": [
+        220274.93180333334,
+        123362.51588572422,
+        220379.50690777777,
+        123463.6047028951
+      ],
+      "id": "gb:PHL:ADM3:30758251B31351007635483",
+      "index": 34225,
+      "province_id": "framework:province:guimaras:e9d7c3ca1a13",
+      "province_index": 1925
+    },
+    "parent_index": 1925,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:PHL:ADM3:30758251B31351007635483",
+      "original_feature_sha256": "91bb2dffff0129792a4248829a42ae1d679f85ec2fa90920d01050438153eca9",
+      "original_parent_id": "framework:province:guimaras:e9d7c3ca1a13",
+      "reference_year": "2020"
+    },
+    "source_containing_pin": {
+      "bytes": 4909063,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "59012653b56da5a394e7692209b257e27883eab8",
+      "mode": "100644",
+      "path": "data/geography/part-18.json",
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+    },
+    "target_id": "gb:PHL:ADM3:30758251B31351007635483"
+  },
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:ed6ee8f77903a084a21fb78781debf60115e7d9ce616926fb0e3cf9dbacfda34"
+    ],
+    "current_full_feature_sha256": "0429d0553ec7745b12063aacd4f96d96b6d030d7a7a0add7b70fc5b11f8a8dbe",
+    "current_geometry_sha256": "a5f75b97346d16f40feb4bcdc7145376064b4f04c46015fa06108fc5d254905c",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:southern-leyte:78e78392f187",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 19,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:philippines:07d972c3d9f6. This declaration alone is not semantic approval.",
+                "title": "gb:PHL:ADM2",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:PHL:ADM3; role Municipalities; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Philippines",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PHL/ADM3/geoBoundaries-PHL-ADM3.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 19 locations, roles {'Municipalities': 19}, source vintages {'2020': 19}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "Source-corresponding named grouping requires independent local/functional purpose and footprint review; children are not bulk approved."
+            ]
+          },
+          "source": "gb:PHL:ADM2",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Southern Leyte",
+        "parent_id": "framework:area:philippines:07d972c3d9f6"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/4866",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:southern-leyte:78e78392f187",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2020",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/970",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 34319,
+    "owner_row": {
+      "bounds": [
+        222156.84674000004,
+        123789.4566455995,
+        222170.90175055555,
+        123819.91771421224
+      ],
+      "id": "gb:PHL:ADM3:30758251B36088332034654",
+      "index": 34319,
+      "province_id": "framework:province:southern-leyte:78e78392f187",
+      "province_index": 4368
+    },
+    "parent_index": 4368,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:PHL:ADM3:30758251B36088332034654",
+      "original_feature_sha256": "0429d0553ec7745b12063aacd4f96d96b6d030d7a7a0add7b70fc5b11f8a8dbe",
+      "original_parent_id": "framework:province:southern-leyte:78e78392f187",
+      "reference_year": "2020"
+    },
+    "source_containing_pin": {
+      "bytes": 4909063,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "59012653b56da5a394e7692209b257e27883eab8",
+      "mode": "100644",
+      "path": "data/geography/part-18.json",
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+    },
+    "target_id": "gb:PHL:ADM3:30758251B36088332034654"
+  }
+]

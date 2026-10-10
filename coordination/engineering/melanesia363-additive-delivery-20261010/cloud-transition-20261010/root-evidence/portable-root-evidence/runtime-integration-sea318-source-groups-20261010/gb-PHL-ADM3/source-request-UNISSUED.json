@@ -1,0 +1,535 @@
+{
+  "baseline": {
+    "kind": "current-selected-native-baseline-v1",
+    "pins": [
+      {
+        "blob": "c3e8614ba784729e0d6570af0f5d57a35f4baae6",
+        "bytes": 1592,
+        "commit": "c28077da970ae39550e5edea790a266b060d3de5",
+        "mode": "100644",
+        "path": "data/ownership-selection.json",
+        "sha256": "34f969f6d792aa3900c1dfd69328500ef46775319d2e48a8b1d109312b675d42"
+      }
+    ],
+    "version": 2
+  },
+  "destination": "sea318-source-gb-PHL-ADM3-current353-UNISSUED",
+  "executed_code": [
+    {
+      "bytes": 1417,
+      "path": "package.json",
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+    },
+    {
+      "bytes": null,
+      "path": "scripts/additive-gap-repair.mjs",
+      "sha256": null
+    },
+    {
+      "bytes": 45330,
+      "path": "src/effective-footprint.js",
+      "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+    },
+    {
+      "bytes": 6580,
+      "path": "scripts/native-ownership/native-preparation-guards.mjs",
+      "sha256": "44901437d91c0ff8805030170abcd855aac3ac8354f10e4e67002f23e6a2ba31"
+    },
+    {
+      "bytes": 3497,
+      "path": "src/native-runtime.js",
+      "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+    },
+    {
+      "bytes": 4472,
+      "path": "scripts/native-ownership/compile-native-ownership.mjs",
+      "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+    },
+    {
+      "bytes": 6408,
+      "path": "src/native-grid.js",
+      "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+    },
+    {
+      "bytes": 2948,
+      "path": "src/ownership-codec.js",
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+    },
+    {
+      "bytes": 6777,
+      "path": "scripts/audit-grid-intervals.mjs",
+      "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+    },
+    {
+      "bytes": 4377,
+      "path": "scripts/native-ownership/require-verified-selection.mjs",
+      "sha256": "20a8e3f472db4c06386ce2b7bd01330ea8acfd6d1ff414f6d2d32e8b1995d50c"
+    },
+    {
+      "bytes": 1540,
+      "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+      "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb"
+    },
+    {
+      "bytes": 1810,
+      "path": "scripts/native-ownership/verified-candidates.json",
+      "sha256": "080a481b71383bd6ba3388ad9b26138b25fced628a61830c3bb02a933562e40a"
+    },
+    {
+      "bytes": 28506,
+      "path": "scripts/evidence-quality.mjs",
+      "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97"
+    },
+    {
+      "bytes": 3126,
+      "path": "src/ownership-method.js",
+      "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df"
+    },
+    {
+      "bytes": 75074,
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "sha256": "801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039"
+    },
+    {
+      "bytes": 175564,
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "sha256": "e32bde2be56b5c8002248eac7eedb5fd7c83b8ced46015778c6eb2145dcda44a"
+    },
+    {
+      "bytes": 246591,
+      "path": "package-lock.json",
+      "sha256": "471d035f92567ea447f221661db5fa8febfc7afc32af8ac975506ce9e0303255"
+    }
+  ],
+  "installed_modules": [
+    {
+      "bytes": 2799,
+      "path": "node_modules/@noble/hashes/package.json",
+      "sha256": "ceb30ba96a14786c419db53f2b8d3d59ece7ac5221c198ac03def462cf96ef23"
+    },
+    {
+      "bytes": 16773,
+      "path": "node_modules/@noble/hashes/sha2.js",
+      "sha256": "3ddc587c588283cbceed4dd9929cefcce06a0c231b54d4c6f0f99c478c686c00"
+    },
+    {
+      "bytes": 5615,
+      "path": "node_modules/@noble/hashes/_md.js",
+      "sha256": "a112f0fe1b15db00f2638618c436a17be1c5e13baf19d02fcc29016ae1db2233"
+    },
+    {
+      "bytes": 3081,
+      "path": "node_modules/@noble/hashes/_u64.js",
+      "sha256": "e48c0cfc10810439a4807b46db136ce603a3fa09b62584f513ef2f3ca496af54"
+    },
+    {
+      "bytes": 9356,
+      "path": "node_modules/@noble/hashes/utils.js",
+      "sha256": "11319ec0a8132a0c2ced8c98af33ae9274c001d6baf4f4709c4a6115e031a3c5"
+    }
+  ],
+  "operation": "retained-land-source-premises-v1",
+  "output_reserve": 4194304,
+  "parent": {
+    "components": 95173,
+    "report_sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+    "roster_sha256": "ab1d9b3f9450805219a418c670278dd351b8b9b97b76ce2cd5164058dbf31224",
+    "version": 1
+  },
+  "report": {
+    "blob": "7c97f3e7feb1ef58a996ac199ddb886c4f024752",
+    "bytes": 57840,
+    "commit": "0198938719a5666b6726fb6a1e45779926eefeb2",
+    "mode": "100644",
+    "path": "coordination/engineering/global-physical-comparison-20261006/results/report.json",
+    "sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0"
+  },
+  "source_rule": {
+    "administrative_products": [
+      {
+        "blob": "7d61eaaa19bafa71d8ddad43f72f6b8062bb40cc",
+        "bytes": 2224353,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-PHL-ADM3.bin",
+        "sha256": "0b7b241fd977a792eca3101f31f0d02fba79d75b6ea463e33dec937b6c5ed72c",
+        "uncompressed_bytes": 7071267,
+        "uncompressed_sha256": "2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc"
+      }
+    ],
+    "bounds_path": "data/canonical-grid/bounds.json.gz",
+    "cases_path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/administrative-source-rule-fit.json",
+    "cohort_ids": [
+      "physical-component:03503f1fa71e2bf719b13d543e04fe99e56235693c1d1e189df86aa3018406de",
+      "physical-component:1556c3bb1c20fc718d0e5d5d8dce2ce180b191fe63eaf492312db22550e8e737",
+      "physical-component:2a6f76f2cc30dc3b93f08d59750b9519adc26ae7bd22a328683f5a048c2b4d8f",
+      "physical-component:2b4f4da5787b5d718443cca535274ed74ae62ff08f7b410c46277ef36705e0ff",
+      "physical-component:307e87aee838533082007e29254811d809f22152127a05815195a9d98ad327da",
+      "physical-component:328987ce3f5504e7d598e7a94928a309cddbe9e00c774cd488dfdfb57bb585fe",
+      "physical-component:47f533a94718204a72389e0ee39b538ff230f219ec619de6aadfa8dd0997616f",
+      "physical-component:5333b1363dbb396832c14da44a54e59bddf037cb92378e11d17efcc931220ce2",
+      "physical-component:5e2faf09bde718e22120c26bc79f98ee620f8e47ccb3e93b96345f80cbc548bf",
+      "physical-component:6c21d4063b8f6febad1769f1e7f058e668ab8c018d93b770f560818e8db5af22",
+      "physical-component:6c46d18235a22c15683039d3346b55f1a7625a3ce49ead2111413d91d75362d2",
+      "physical-component:849377ccf645d794deaa1f43fd91ab9bfe9d9464c1c1cb31b19cf53b990291c4",
+      "physical-component:9094128c18d3075578719177328356ff5147b1abbe17e09626010f91b79aeea8",
+      "physical-component:98ba8cabf21ed4bdcfb0761cb6aabac54f7fd153a60f656a06587e2125cc8f36",
+      "physical-component:9c46373452264bbd5441d6a6349cab667177ff6ecfda374df366433502da9c61",
+      "physical-component:9f5d178736a1a6549f7660e6d048e61923c33865d08f91445a5237ce20d4e29b",
+      "physical-component:ae27cc3d8e51ae163f2052f4455cb072bca1960607d7de8fb8cc087e8257f79b",
+      "physical-component:b90682fb902bb719879e69d1a161080cb46a7cd041cb3ad0c9bd963b5e1f4900",
+      "physical-component:b971f9d191cf018cfbaa158f4f32be07f9c8bbbd3ae248ddc1261fba50e8af94",
+      "physical-component:c6e5c097e7fec0a79402758c4b8787151660e2312015f92403b1d857bdae9ca8",
+      "physical-component:cd6c8035a1a2e8c52ab5b851b7ba26eb366acafd2babbbd82e149d7ea7e5c7e5",
+      "physical-component:dd50282d0498fe710bf1ecaf6ca06f22d97391356cfe8c17fb9d5c10b25d874e",
+      "physical-component:dd8aab5edb2689e1b07b799505f2c052799dd3d1f3770dd2d8ac668e0dfdffaf",
+      "physical-component:e499668746ebf62edfaef15068a437158e322c29a711aef7598f7e78a99148fb",
+      "physical-component:e4abb61a130c9be6d764a0a058df31d6acd4f427624c8b3d5af9bdb709b8badf",
+      "physical-component:e7830362e503492dae1922eb91157c0e3cc7a42043dc91eff29878eeb85aa902",
+      "physical-component:ec9be2d5c5db2b304f0e71418b2b328ae508fed448cef29e6737c3c1121dc1ef",
+      "physical-component:ed6ee8f77903a084a21fb78781debf60115e7d9ce616926fb0e3cf9dbacfda34",
+      "physical-component:f4516260fac3e4331de3658dde9bff6614d897c4bac651a962f80196b6ca94bc",
+      "physical-component:fa8aa714b724a4eef86de954326dcfd9cb04db5fdb0695a4e76b7e90b2f29966"
+    ],
+    "expected_ids": [
+      "physical-component:1556c3bb1c20fc718d0e5d5d8dce2ce180b191fe63eaf492312db22550e8e737",
+      "physical-component:307e87aee838533082007e29254811d809f22152127a05815195a9d98ad327da",
+      "physical-component:47f533a94718204a72389e0ee39b538ff230f219ec619de6aadfa8dd0997616f",
+      "physical-component:5333b1363dbb396832c14da44a54e59bddf037cb92378e11d17efcc931220ce2",
+      "physical-component:6c21d4063b8f6febad1769f1e7f058e668ab8c018d93b770f560818e8db5af22",
+      "physical-component:c6e5c097e7fec0a79402758c4b8787151660e2312015f92403b1d857bdae9ca8",
+      "physical-component:e7830362e503492dae1922eb91157c0e3cc7a42043dc91eff29878eeb85aa902",
+      "physical-component:ec9be2d5c5db2b304f0e71418b2b328ae508fed448cef29e6737c3c1121dc1ef",
+      "physical-component:ed6ee8f77903a084a21fb78781debf60115e7d9ce616926fb0e3cf9dbacfda34"
+    ],
+    "family_roster_path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/family-roster-122.json",
+    "geometry_scope": "full-component",
+    "inputs": [
+      {
+        "blob": "97d19e63405662600d4ea4d84f55b6e5d38e0ebd",
+        "bytes": 1688243,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/administrative-source-rule-fit.json",
+        "sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b"
+      },
+      {
+        "blob": "91c954290b83a05eb8e09ea09dafece8635870b8",
+        "bytes": 505063,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/component-state-318.json",
+        "sha256": "8aaa5d4558eb5137775c159ec234d3dc2a9a90ae965aeaaf27086a63d0462cfd"
+      },
+      {
+        "blob": "55228c5bde660cfc175171135564001788806126",
+        "bytes": 39180,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/family-roster-122.json",
+        "sha256": "acb22105b074fefca33b84488d0d0322ebdba3195a3eff4b0421f53668e651ef"
+      },
+      {
+        "blob": "cebc5ee2ce824934de3f8f83d33b800cbf0da760",
+        "bytes": 10313,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_1556c3bb1c20fc718d0e5d5d8dce2ce180b191fe63eaf492312db22550e8e737.json.gz",
+        "sha256": "3633547a074f8138e606329b726299a708489bf5f9c260838e60fcaa12f109cc",
+        "uncompressed_bytes": 36784,
+        "uncompressed_sha256": "b0f132cc2c4bd0449c1a15c0cbaefb35411c459528729bff6c7d80d600667a81"
+      },
+      {
+        "blob": "0c2d0ef0107b53388f572bd7ed23a66de2fe966e",
+        "bytes": 6437,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_307e87aee838533082007e29254811d809f22152127a05815195a9d98ad327da.json.gz",
+        "sha256": "8a53ab16b9d625b16a79a1e5c8280e551a45a502fb9e2d3891226fe53ef8aa08",
+        "uncompressed_bytes": 25511,
+        "uncompressed_sha256": "464949243c05523fee7bda79cd8b81a1d1b51a0c53cd87f68bfe57a9d4948375"
+      },
+      {
+        "blob": "a716207fec941dc9e5202cb98a25438cc68b1e81",
+        "bytes": 6954,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_47f533a94718204a72389e0ee39b538ff230f219ec619de6aadfa8dd0997616f.json.gz",
+        "sha256": "6b55d913f1944bf2620896fbc646482fcad18671aaba444294193f2ef82d744f",
+        "uncompressed_bytes": 27376,
+        "uncompressed_sha256": "d88859a42a9e987ab20ecd758610813c6bd17011bf754f459ac76f3e3a49265c"
+      },
+      {
+        "blob": "cb99a3453502f536a10de90d09c651a1d2383db4",
+        "bytes": 8634,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_5333b1363dbb396832c14da44a54e59bddf037cb92378e11d17efcc931220ce2.json.gz",
+        "sha256": "f7d6cf47046de181574acf36f87c7eb608273ec569164fb5446e864f7055070e",
+        "uncompressed_bytes": 31586,
+        "uncompressed_sha256": "a675e1f450f029c040424c6878d4fb90386430db9c0497d071356ba0b1d835a0"
+      },
+      {
+        "blob": "645c2faffa1fe10e6f8fc110a017f08fb871a978",
+        "bytes": 7347,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_6c21d4063b8f6febad1769f1e7f058e668ab8c018d93b770f560818e8db5af22.json.gz",
+        "sha256": "3b171f58c062dd592c618d033a75c7530a07d758dffcf50233804eb27fd09b72",
+        "uncompressed_bytes": 28461,
+        "uncompressed_sha256": "3e70201b87978138424d83098394fe1e64a0acbdae642d93d6694f3dd46681af"
+      },
+      {
+        "blob": "ce16e29a06d8a937afce2b299437c86036a92201",
+        "bytes": 6211,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_c6e5c097e7fec0a79402758c4b8787151660e2312015f92403b1d857bdae9ca8.json.gz",
+        "sha256": "f06b70020153f46f7c4674ca73b2a434fe5aed14560d7f2fcbe43c52f36db7b0",
+        "uncompressed_bytes": 25313,
+        "uncompressed_sha256": "d288e8c0ce920058f533d3c83f15ce5d9c4d62b64162ea1c14fcd57503f10528"
+      },
+      {
+        "blob": "9a6bdbeb769edc3edf2a0caa7b59289f493adb96",
+        "bytes": 10884,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_e7830362e503492dae1922eb91157c0e3cc7a42043dc91eff29878eeb85aa902.json.gz",
+        "sha256": "c0750c944bb6bf99d39e62b50fe46b3408e0de4678806e44530a220380746298",
+        "uncompressed_bytes": 37396,
+        "uncompressed_sha256": "d06954d4ed23eae9d9e62f342e8d2113cc27e5061f303469ff72e6e8a456f1bd"
+      },
+      {
+        "blob": "c3804443ba675ba73f7c53928f5ed99e46e7ff22",
+        "bytes": 10808,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_ec9be2d5c5db2b304f0e71418b2b328ae508fed448cef29e6737c3c1121dc1ef.json.gz",
+        "sha256": "c64950c224c7225b6a0672aee6c9546c8621b24bddc38a6b0658547554f68922",
+        "uncompressed_bytes": 39216,
+        "uncompressed_sha256": "dd5173d815ba31d776ec0df0ca3c81799bc8d438bef5a2b36fd6116f0d0dd7ee"
+      },
+      {
+        "blob": "36ae5de4cc8958d6b6e571e595e40c8e59d192bb",
+        "bytes": 5078,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_ed6ee8f77903a084a21fb78781debf60115e7d9ce616926fb0e3cf9dbacfda34.json.gz",
+        "sha256": "57bbc0112fb2171cda5117d648988aae5856790e3c5c9b824fc42478185933d7",
+        "uncompressed_bytes": 21865,
+        "uncompressed_sha256": "010864b064a8eaa97d3f170ca6280e63f61581f88e5fd4dcbbd85f187bb62d34"
+      },
+      {
+        "blob": "f44f0880183529247070f596772d3427c6d341d1",
+        "bytes": 6796059,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/0.json.gz",
+        "sha256": "31dd6e17c538df126e36004e1a89a78adc892bb914ef911a97c43dcd1a30282a",
+        "uncompressed_bytes": 32191061,
+        "uncompressed_sha256": "deb0cf095907818bbd543ecdfbc91496aa37e498fc95b810fa73c4ef61f4b027"
+      },
+      {
+        "blob": "d2fbe39b1ceaca20364e8852613dee732344323b",
+        "bytes": 39209,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/68.json.gz",
+        "sha256": "3415eb30dc215f2190de37195843a4317eb0ebdab341adc3926fef50f6c609c7",
+        "uncompressed_bytes": 201401,
+        "uncompressed_sha256": "a575dad02d76e44a230a45586761b8221064e79a2d5c9625c93b4ab8737a6b39"
+      },
+      {
+        "blob": "b938659b12425bce17b0571ee2af45b8fef1959b",
+        "bytes": 5282,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/1496.json.gz",
+        "sha256": "8e826f44cd0bac1aad7ec30f18db94db45f20b269cbdf4a7f79ae54a9046b686",
+        "uncompressed_bytes": 24317,
+        "uncompressed_sha256": "ae2da8d71535bd46cc1a8e49f158530f2fab67b88aa496ef3a301ace8f3c7ca9"
+      },
+      {
+        "blob": "56b5a5cdc62f145888bde9352f1fdfe7345f550a",
+        "bytes": 121770,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/25.json.gz",
+        "sha256": "824d09bf5fb0175a199fefe3a690283ee8f5dce6a1b080aaa803a2b48d0fd2af",
+        "uncompressed_bytes": 626118,
+        "uncompressed_sha256": "6ca56c991548fefb2018a3b1d35ddb55a95939433e3e5ce2e3d1631afaefdb41"
+      },
+      {
+        "blob": "1854cff39c2b608b038e7bba0f75ee837b2d8ed9",
+        "bytes": 135437,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/23.json.gz",
+        "sha256": "6b62db4522c894f406f98039e7331d43e9347cd0c47b08a5cf2011160732c3dd",
+        "uncompressed_bytes": 704822,
+        "uncompressed_sha256": "1d0cd7922dc9ac2dacf75b83e6f8c545e77d8973b00d6173e7b5f3924d7b4cae"
+      },
+      {
+        "blob": "f6c1dca74adacd07c98929fff0dd456e16dac6aa",
+        "bytes": 950,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/8481.json.gz",
+        "sha256": "37a98a3c222a685b56de401fd39ea2a71efd427ed360722982862b53e7605f08",
+        "uncompressed_bytes": 2674,
+        "uncompressed_sha256": "fd19159cb4d0ab31b08b9115170b1063d7ddc9cb4b6982920896f2b1e99399e5"
+      },
+      {
+        "blob": "06f3e7eb400e37e8a63975411dbab620f01cf8ae",
+        "bytes": 1947,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/2572.json.gz",
+        "sha256": "8a534b79703dc86b877aeeef60a16597130dd2e4027db7ffa1d88e359fb1f116",
+        "uncompressed_bytes": 7116,
+        "uncompressed_sha256": "8803c7da76be985bfc234745cb30d71636b3f9b08aaa20cc3c62766f132af5c8"
+      },
+      {
+        "blob": "e593b5467f5ce7c30dcfba353753b30f6eeb96e4",
+        "bytes": 1559,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/5178.json.gz",
+        "sha256": "3f0da1b751e769104449cac8bc99b01762a6d86b23e102eaf960cf963ffbc76a",
+        "uncompressed_bytes": 5463,
+        "uncompressed_sha256": "61243c745c5779ae7c8a64b29cf5d90b5d80a9d37772f4a5aa1f324df19e78e3"
+      },
+      {
+        "blob": "135d17ccc95649c892c489cbb31d950b019a8af5",
+        "bytes": 1241,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/7343.json.gz",
+        "sha256": "669a2f8e2e35e2b4b777857e00f0531411af98af16ae9e6cb3343ea9a92368e4",
+        "uncompressed_bytes": 3752,
+        "uncompressed_sha256": "27bf79db74e5e983b9a7e273b0e00ba4efc6bb39d00c11e51227659fcfe7711f"
+      },
+      {
+        "blob": "99b1ba9c0abc962a700da289d55bef845cbb349c",
+        "bytes": 5664,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/693.json.gz",
+        "sha256": "0159dec0bb27af4e944c2eac1cd64b20b79a6c5d6a1c4854abc2a7794e5a1a77",
+        "uncompressed_bytes": 25643,
+        "uncompressed_sha256": "4c1e369da7281f5332eda49a0a0450cfaa8070551743071ea6c6fd771f23298a"
+      },
+      {
+        "blob": "0591a3c81605bbd0476b5f61bdee0a27d1703aa2",
+        "bytes": 24859,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/67.json.gz",
+        "sha256": "f63d4fbc1c6d191109f280a6b6be973e68215c17749634b5768766f36e90e7b6",
+        "uncompressed_bytes": 132060,
+        "uncompressed_sha256": "e293b056060fb85315642fc023bbc8482f3e24dc9256c2c46a72f4c420294f7b"
+      },
+      {
+        "blob": "aa2a909cda843abfc3b237b59c27bae81e50e8a9",
+        "bytes": 28826,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/72.json.gz",
+        "sha256": "9c81ebae6fd453e55cac85ff0571bb3fe5b6b4848031073a6e4fc2ed5d0ea822",
+        "uncompressed_bytes": 155699,
+        "uncompressed_sha256": "cbad6423cfc6d44dd463fba38a1abe20762648772958c5ad6894bd0f6723b8fe"
+      },
+      {
+        "blob": "2f24c574d776799029f52363a531e8401bd1cace",
+        "bytes": 5633,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/461.json.gz",
+        "sha256": "1f00abd07891467b9156f2bc6944d26a971bbb8b93ca90a20a8a06f3ecb7d484",
+        "uncompressed_bytes": 27759,
+        "uncompressed_sha256": "b922462c7df10e2dd9cceebf56adb557e9c135329e780a437bbbbeb08018b7f1"
+      },
+      {
+        "blob": "ccb2f3870a7ddb7134d50a7ae12f3bb8e631acef",
+        "bytes": 1179,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/6584.json.gz",
+        "sha256": "340f709bc4d3aa9097ebb0f69aad3c676012aaeb49bccc079dfbfdbdb29a330a",
+        "uncompressed_bytes": 3484,
+        "uncompressed_sha256": "d62e336d8b22fa154c2e8cef8e2d41ee98ede05c9b49c18bda2a688edb1492d0"
+      },
+      {
+        "blob": "7d61eaaa19bafa71d8ddad43f72f6b8062bb40cc",
+        "bytes": 2224353,
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "mode": "100644",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-PHL-ADM3.bin",
+        "sha256": "0b7b241fd977a792eca3101f31f0d02fba79d75b6ea463e33dec937b6c5ed72c",
+        "uncompressed_bytes": 7071267,
+        "uncompressed_sha256": "2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc"
+      },
+      {
+        "blob": "59012653b56da5a394e7692209b257e27883eab8",
+        "bytes": 4909063,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "mode": "100644",
+        "path": "data/geography/part-18.json",
+        "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+      },
+      {
+        "blob": "306125db7012a9ac927bb4a169dea5166ef126e7",
+        "bytes": 4583022,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "mode": "100644",
+        "path": "data/geography/part-19.json",
+        "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+      },
+      {
+        "blob": "31d970d0fe2bf8c899f020aad09a3826ea451790",
+        "bytes": 252447,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "mode": "100644",
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+        "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba"
+      },
+      {
+        "blob": "9c44513df64995d417dd3832ae604c703e84a506",
+        "bytes": 2663523,
+        "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+        "mode": "100644",
+        "path": "data/canonical-grid/bounds.json.gz",
+        "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+        "uncompressed_bytes": 11096191,
+        "uncompressed_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+      },
+      {
+        "blob": null,
+        "bytes": 21241,
+        "commit": null,
+        "mode": "100644",
+        "path": "coordination/engineering/southeast-asia318-source-rule-delivery-20261010/groups/gb-PHL-ADM3/original-query-metadata.json",
+        "sha256": "e6063c2dc601b7eae3667f25aa864a02a94568e5fdd533d0210d8614a597de2e"
+      },
+      {
+        "blob": null,
+        "bytes": 40476,
+        "commit": null,
+        "mode": "100644",
+        "path": "coordination/engineering/southeast-asia318-source-rule-delivery-20261010/groups/gb-PHL-ADM3/target-canonical-bindings.json",
+        "sha256": "4d8a8fea0004e9d02641c0e9afbff23315039f5bf9106a276390a24a51664e82"
+      }
+    ],
+    "manifest_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+    "original_query_metadata_path": "coordination/engineering/southeast-asia318-source-rule-delivery-20261010/groups/gb-PHL-ADM3/original-query-metadata.json",
+    "outcomes_path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/component-state-318.json",
+    "profile": "retained-consumed-administrative-source",
+    "target_banks": [
+      "data/geography/part-18.json",
+      "data/geography/part-19.json"
+    ],
+    "target_canonical_bindings_path": "coordination/engineering/southeast-asia318-source-rule-delivery-20261010/groups/gb-PHL-ADM3/target-canonical-bindings.json",
+    "version": 1
+  },
+  "version": 1
+}

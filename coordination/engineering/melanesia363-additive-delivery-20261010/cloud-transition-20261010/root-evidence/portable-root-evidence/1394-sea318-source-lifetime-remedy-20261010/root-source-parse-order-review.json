@@ -1,0 +1,28 @@
+{
+  "result": "PASS-draft-source-lifetime-parse-order-for-seven-exact-requests",
+  "caller_bytes": 202252,
+  "caller_sha256": "19c453ad348c7475675c43954bebf0ae330fc5abb8164170750ac34694de5b11",
+  "reviewed_patch_sha256": "e671c97ebdc757fea125a80b8b7b04ce15bc819e5ff090a1f92613b65f33e428",
+  "all_frozen_artifact_hashes_verified": true,
+  "allocation_before_parse": [
+    "Authentication corpus scratch uses unallocated arena, separately retaining complete corpus roots",
+    "Full maximum parse scratch admitted before complete banks parse",
+    "Complete bounds parsed root admitted before bounds parse",
+    "Product graphs admitted before product parse loop"
+  ],
+  "released_raw_lifetimes": [
+    "Whole-authenticated unparsed query bodies; typed descriptor survives, reopening refused",
+    "Corpus raw released only after full parsed roots charged",
+    "Banks raw released only after retaining complete graph charges",
+    "Bounds raw released only after retaining complete bounds graph"
+  ],
+  "authority_original_source_scoring_and_remainders_preserved": true,
+  "seven_groups": 7,
+  "supported_cases": 30,
+  "operator_executed": false,
+  "conditions": [
+    "Final actual code/runtime/request/current355 custody must be recomputed; tightest prototype headroom276557B is not operating admission",
+    "SEA native full physical-case/metadata/target dependencies must be retained before adopting native combined caller",
+    "Reviewer has approved exact7requests only; this receipt does not assert admission for arbitrary aliased roles or requests"
+  ]
+}

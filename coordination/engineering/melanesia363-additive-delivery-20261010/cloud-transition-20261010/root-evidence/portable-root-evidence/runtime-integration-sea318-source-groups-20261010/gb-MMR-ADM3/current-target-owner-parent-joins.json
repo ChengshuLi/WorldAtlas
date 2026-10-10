@@ -1,0 +1,414 @@
+[
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:6c46d18235a22c15683039d3346b55f1a7625a3ce49ead2111413d91d75362d2"
+    ],
+    "current_full_feature_sha256": "f077af3cabd92067121dad2466a3ba225fd6a3de1f96f3bf033d7f3a1b27ab0f",
+    "current_geometry_sha256": "bc9c1c79be1f3767a6986b9c9764a4a4bf10fb6fc1e90acad05b6cc32927b2bf",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:kyaukpyu:901c624c7832",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 4,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:myanmar:90fbf45753f0. This declaration alone is not semantic approval.",
+                "title": "gb:MMR:ADM2",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:MMR:ADM3; role Township; reference vintage 2019; license Creative Commons Attribution 4.0 (CC BY 4.0). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Myanmar",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 4 locations, roles {'Township': 4}, source vintages {'2019': 4}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "Source-corresponding named grouping requires independent local/functional purpose and footprint review; children are not bulk approved."
+            ]
+          },
+          "source": "gb:MMR:ADM2",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Kyaukpyu",
+        "parent_id": "framework:area:myanmar:90fbf45753f0"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/3066",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:kyaukpyu:901c624c7832",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2019",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/926",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 30100,
+    "owner_row": {
+      "bounds": [
+        199152.58130277778,
+        116547.28113610244,
+        199452.90702055555,
+        116929.58227423052
+      ],
+      "id": "gb:MMR:ADM3:66882298B17691670471295",
+      "index": 30100,
+      "province_id": "framework:province:kyaukpyu:901c624c7832",
+      "province_index": 2568
+    },
+    "parent_index": 2568,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:MMR:ADM3:66882298B17691670471295",
+      "original_feature_sha256": "f077af3cabd92067121dad2466a3ba225fd6a3de1f96f3bf033d7f3a1b27ab0f",
+      "original_parent_id": "framework:province:kyaukpyu:901c624c7832",
+      "reference_year": "2019"
+    },
+    "source_containing_pin": {
+      "bytes": 5180426,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "4ef51307797f81b8cf7a647495f037a089f8b368",
+      "mode": "100644",
+      "path": "data/geography/part-15.json",
+      "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+    },
+    "target_id": "gb:MMR:ADM3:66882298B17691670471295"
+  },
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:9f5d178736a1a6549f7660e6d048e61923c33865d08f91445a5237ce20d4e29b"
+    ],
+    "current_full_feature_sha256": "aabd4fe75f5de37b872fe5b4addadfbaada50ec3a10b00a6bb1663a72942841f",
+    "current_geometry_sha256": "804e4a65c784b23ea4a5f12a7572d08526f1852a9613cbbf669d69e3da38e193",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:myeik:2820a791707f",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 4,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:myanmar:90fbf45753f0. This declaration alone is not semantic approval.",
+                "title": "gb:MMR:ADM2",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:MMR:ADM3; role Township; reference vintage 2019; license Creative Commons Attribution 4.0 (CC BY 4.0). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Myanmar",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 4 locations, roles {'Township': 4}, source vintages {'2019': 4}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "Source-corresponding named grouping requires independent local/functional purpose and footprint review; children are not bulk approved."
+            ]
+          },
+          "source": "gb:MMR:ADM2",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Myeik",
+        "parent_id": "framework:area:myanmar:90fbf45753f0"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/3646",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:myeik:2820a791707f",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2019",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/1032",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 30271,
+    "owner_row": {
+      "bounds": [
+        202039.0289627778,
+        121669.95444053247,
+        203129.63952277778,
+        122698.56030934998
+      ],
+      "id": "gb:MMR:ADM3:66882298B62167174305830",
+      "index": 30271,
+      "province_id": "framework:province:myeik:2820a791707f",
+      "province_index": 3148
+    },
+    "parent_index": 3148,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:MMR:ADM3:66882298B62167174305830",
+      "original_feature_sha256": "aabd4fe75f5de37b872fe5b4addadfbaada50ec3a10b00a6bb1663a72942841f",
+      "original_parent_id": "framework:province:myeik:2820a791707f",
+      "reference_year": "2019"
+    },
+    "source_containing_pin": {
+      "bytes": 5180426,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "4ef51307797f81b8cf7a647495f037a089f8b368",
+      "mode": "100644",
+      "path": "data/geography/part-15.json",
+      "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+    },
+    "target_id": "gb:MMR:ADM3:66882298B62167174305830"
+  },
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:ae27cc3d8e51ae163f2052f4455cb072bca1960607d7de8fb8cc087e8257f79b"
+    ],
+    "current_full_feature_sha256": "70943854f66c732c278dd5b76cd85820e91b940bb29e25511f4a64ba3908e097",
+    "current_geometry_sha256": "6c27c48467331618f4a71c378076b9f19f4fbe6823460401e94d1a0ad39eeb75",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:mrauk-u:69b555f3ae5a",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 4,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:myanmar:90fbf45753f0. This declaration alone is not semantic approval.",
+                "title": "gb:MMR:ADM2",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:MMR:ADM3; role Township; reference vintage 2019; license Creative Commons Attribution 4.0 (CC BY 4.0). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Myanmar",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 4 locations, roles {'Township': 4}, source vintages {'2019': 4}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "Source-corresponding named grouping requires independent local/functional purpose and footprint review; children are not bulk approved."
+            ]
+          },
+          "source": "gb:MMR:ADM2",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Mrauk-U",
+        "parent_id": "framework:area:myanmar:90fbf45753f0"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/3614",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:mrauk-u:69b555f3ae5a",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2019",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/1059",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 30340,
+    "owner_row": {
+      "bounds": [
+        198952.60690388893,
+        116015.55480997638,
+        199395.0120288889,
+        116485.5128852497
+      ],
+      "id": "gb:MMR:ADM3:66882298B80264177521474",
+      "index": 30340,
+      "province_id": "framework:province:mrauk-u:69b555f3ae5a",
+      "province_index": 3116
+    },
+    "parent_index": 3116,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:MMR:ADM3:66882298B80264177521474",
+      "original_feature_sha256": "70943854f66c732c278dd5b76cd85820e91b940bb29e25511f4a64ba3908e097",
+      "original_parent_id": "framework:province:mrauk-u:69b555f3ae5a",
+      "reference_year": "2019"
+    },
+    "source_containing_pin": {
+      "bytes": 5180426,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "4ef51307797f81b8cf7a647495f037a089f8b368",
+      "mode": "100644",
+      "path": "data/geography/part-15.json",
+      "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+    },
+    "target_id": "gb:MMR:ADM3:66882298B80264177521474"
+  },
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:e499668746ebf62edfaef15068a437158e322c29a711aef7598f7e78a99148fb"
+    ],
+    "current_full_feature_sha256": "0c294e18d022dc2a0a993302563542c41e58450518b35fb04917bf51e4eaf306",
+    "current_geometry_sha256": "675f381b0f8349ff8a4727557b6e29e7709491f357e61af8eae8975f2a017075",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:myeik:2820a791707f",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 4,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:myanmar:90fbf45753f0. This declaration alone is not semantic approval.",
+                "title": "gb:MMR:ADM2",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:MMR:ADM3; role Township; reference vintage 2019; license Creative Commons Attribution 4.0 (CC BY 4.0). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Myanmar",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 4 locations, roles {'Township': 4}, source vintages {'2019': 4}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "Source-corresponding named grouping requires independent local/functional purpose and footprint review; children are not bulk approved."
+            ]
+          },
+          "source": "gb:MMR:ADM2",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Myeik",
+        "parent_id": "framework:area:myanmar:90fbf45753f0"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/3646",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:myeik:2820a791707f",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2019",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/1042",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 30179,
+    "owner_row": {
+      "bounds": [
+        202883.13065888887,
+        121727.30372766516,
+        203123.66796388885,
+        122113.81351142023
+      ],
+      "id": "gb:MMR:ADM3:66882298B36911639137507",
+      "index": 30179,
+      "province_id": "framework:province:myeik:2820a791707f",
+      "province_index": 3148
+    },
+    "parent_index": 3148,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:MMR:ADM3:66882298B36911639137507",
+      "original_feature_sha256": "0c294e18d022dc2a0a993302563542c41e58450518b35fb04917bf51e4eaf306",
+      "original_parent_id": "framework:province:myeik:2820a791707f",
+      "reference_year": "2019"
+    },
+    "source_containing_pin": {
+      "bytes": 5180426,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "4ef51307797f81b8cf7a647495f037a089f8b368",
+      "mode": "100644",
+      "path": "data/geography/part-15.json",
+      "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+    },
+    "target_id": "gb:MMR:ADM3:66882298B36911639137507"
+  }
+]

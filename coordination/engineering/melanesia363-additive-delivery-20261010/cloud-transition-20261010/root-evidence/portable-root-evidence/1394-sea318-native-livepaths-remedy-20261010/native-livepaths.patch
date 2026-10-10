@@ -1,0 +1,56 @@
+--- frozen-19c453-caller.mjs
++++ caller-proposed.mjs
+@@ -1811,9 +1811,10 @@
+ }
+ 
+ function administrativeBatchProposalStage(repo,request,resolutions,budget) {
+-  const spec=request.additive,inputs=new Map(),releasedPaths=new Set(),accessedPaths=new Set(),equal=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
+-  for(const pin of spec.inputs){demand(!inputs.has(pin.path),'Duplicate batch operand');inputs.set(pin.path,{pin,body:readPin(repo,pin)});}
++  const spec=request.additive,inputs=new Map(),authenticatedPins=new Map(),releasedPaths=new Set(),accessedPaths=new Set(),equal=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
++  for(const pin of spec.inputs){demand(!inputs.has(pin.path),'Duplicate batch operand');inputs.set(pin.path,{pin,body:readPin(repo,pin)});authenticatedPins.set(pin.path,pin);}
+   const get=name=>{demand(!releasedPaths.has(name),'Released authenticate-only native operand cannot be reopened');accessedPaths.add(name);if(!inputs.has(name)){const pin=request.baseline.pins.find(pin=>pin.path===name);demand(pin,'Missing complete batch operand');inputs.set(name,{pin,body:readPin(repo,pin)});}return inputs.get(name);};
++  const getPin=name=>{const pin=authenticatedPins.get(name);demand(pin,'Missing whole authenticated native source descriptor');return {pin};};
+   const json=name=>JSON.parse(get(name).body),publication=json(spec.publication_path),facts=json(spec.facts_path),issued=json(spec.source_request_path),operating=json(spec.operating_path);
+   demand(publication.complete===true&&publication.facts.bytes===get(spec.facts_path).pin.bytes&&publication.facts.sha256===get(spec.facts_path).pin.sha256
+     &&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(key=>publication.inventory[key]===get(spec.inventory_path).pin[key]),'Incomplete batch source predecessor');
+@@ -1833,12 +1834,21 @@
+   demand(equal(sourceRows.map(row=>row.component_id),spec.scope_ids)&&equal(spec.scope_ids,issued.source_rule.expected_ids)
+     &&sourceRows.length===facts.components,'Batch selection omitted/reordered a source candidate');
+   validateAdministrativeNativeRoster({facts,issued,spec,sourceRows});
++  // SEA318's case view parses these separate whole bodies in each iteration.
++  // Protect them independently of the accepted fit corpus, and preserve query
++  // descriptor custody without retaining its never-used coordinate buffer.
++  const seaBodyPaths=issued.source_rule.family_roster_path?
++    [...new Set([issued.source_rule.original_query_metadata_path,issued.source_rule.target_canonical_bindings_path,
++      ...sourceRows.map(row=>row.original_record?.source?.path)])]:[];
++  demand(seaBodyPaths.every(name=>typeof name==='string'&&spec.inputs.some(pin=>pin.path===name&&
++    equal(pin,issued.source_rule.inputs.find(source=>source.path===name)))),
++    'Missing/changed complete SEA318 native physical or metadata operand');
+   if(typeof budget.produce==='function'){
+   // Whole originals were authenticated above and the original source closure,
+   // status/order/current-baseline joins are complete. Only named native operands
+   // below can be consumed subsequently; every other raw buffer has no parsed
+   // descendant and is released. get() forbids a later accidental reacquisition.
+-  const livePaths=new Set([...accessedPaths,spec.manifest_path,spec.bounds_path,spec.latitudes_path,spec.facts_path,
++  const livePaths=new Set([...seaBodyPaths,...accessedPaths,spec.manifest_path,spec.bounds_path,spec.latitudes_path,spec.facts_path,
+     ...issued.source_rule.target_banks,...sourceRows.map(row=>row.source_case?.source?.path),
+     ...spec.owner_parts.map(row=>row.path)]);
+   const released=[];let costOrdinal=budget.nativeStageCostStart;
+@@ -1866,6 +1876,8 @@
+   budget.produce(released,[...retainedPins.map(pin=>({bytes:pin.uncompressed_bytes??pin.bytes,path:pin.path,role:'whole-parsed-or-native-array-closure'})),
+     ...parsedMetadata.map(pin=>({bytes:pin.uncompressed_bytes??pin.bytes,path:pin.path,role:'retained-parsed-predecessor-metadata'})),
+     {bytes:Math.max(0,...casePins.map(pin=>pin.uncompressed_bytes??pin.bytes)),role:'one-complete-parsed-source-case-scope'},
++    ...seaBodyPaths.map(name=>get(name).pin).filter(pin=>!parsedMetadata.some(prior=>prior.path===pin.path)&&!retainedPins.some(prior=>prior.path===pin.path))
++      .map(pin=>({bytes:pin.uncompressed_bytes??pin.bytes,path:pin.path,role:'whole-SEA318-physical-and-metadata-parsed-closure'})),
+     {bytes:4194304,role:'candidate-window-and-canonical-workspace'}]);
+   }
+   const manifest=json(spec.manifest_path),bounds=json(spec.bounds_path),targets=new Map();
+@@ -1883,7 +1895,7 @@
+       &&target.properties.parent_id===owner.province_id&&footprintValueSha256(target.geometry)===selected.target_geometry_sha256,'Stale batch target/owner join');
+     const casePin=selected.source_case?.source;demand(casePin&&spec.inputs.some(pin=>equal(pin,casePin)),'Original full batch case omitted');
+     const rawScope=json(casePin.path),sea318=rawScope.batch_id===SEA318_BATCH;
+-    const seaView=sea318?administrative318SourceScope(rawScope,get,issued.source_rule,selected.component_id):null;
++    const seaView=sea318?administrative318SourceScope(rawScope,get,issued.source_rule,selected.component_id,getPin):null;
+     const sourceScope=seaView?.sourceScope??rawScope,sourceCase=seaView?.sourceCase??sourceScope.candidate_source_native_bindings[selected.source_case.ordinal];
+     if(sea318)demand(seaView.ordinal===selected.source_case.ordinal,'SEA318 original source ordinal differs');
+     demand(sourceCase?.component_id===selected.component_id&&sha(canonical(sourceCase))===selected.source_case.row_sha256,'Original batch case drift');

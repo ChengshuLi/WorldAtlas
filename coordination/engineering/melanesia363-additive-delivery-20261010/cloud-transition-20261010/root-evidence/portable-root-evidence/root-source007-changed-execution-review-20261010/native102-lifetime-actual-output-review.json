@@ -1,0 +1,115 @@
+{
+  "result": "PASS-actual-native-output-only",
+  "head": "c39df2a8745203be6662a1ce963b5984a04301cd",
+  "mixed_code_approval": 6100627926,
+  "actual_elapsed_seconds": 52.37594895798247,
+  "actual_RSS_bytes": 296108032,
+  "owned_processes_absent": true,
+  "whole_output_bodies": 11,
+  "whole_output_bytes": 3684262,
+  "publication_sha256": "a3c20fbda4d6eb70ac7eb8c42b57f28058e4af484c6870714b3ac3c5122dd34d",
+  "pins": [
+    {
+      "bytes": 252447,
+      "path": "base-native-manifest.json",
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba"
+    },
+    {
+      "bytes": 5609,
+      "path": "ledger-batch.json",
+      "sha256": "b5dbf4f1a8e05d3e6a0698b72d23b0a3d065628cca404fee1df3fdb00cd5c5ba"
+    },
+    {
+      "bytes": 880,
+      "path": "patch-batch.json",
+      "sha256": "fe7ae28f07b8ddd635999f036c944ea9c30b286a8a083d76794536ebc416743c"
+    },
+    {
+      "bytes": 5413,
+      "path": "features.json",
+      "sha256": "4b37c3ab95cd9cf5d106b89795c1fea5ddd66222f8b35c4a093105357c7ac846"
+    },
+    {
+      "bytes": 2663523,
+      "path": "owners-batch.json.gz",
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "uncompressed_bytes": 11096191,
+      "uncompressed_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+    },
+    {
+      "bytes": 1662,
+      "path": "release-envelope.json",
+      "sha256": "7895c28dad44486ae4fae20c0b9c087ebe78649d81f94eb4f2f550572f046859"
+    },
+    {
+      "bytes": 67014,
+      "path": "owner-window.json",
+      "sha256": "b3d475e2d0ae637d51405244dee69cb9a6da00462d26c1bd72339414d54de114"
+    },
+    {
+      "bytes": 5376,
+      "path": "virtual-owner-window.json",
+      "sha256": "b5b54a3ea2bdcefa0d344736591313d43370bbd7ee80aa6bce63e8fa4bc3ff98"
+    },
+    {
+      "path": "facts.json",
+      "bytes": 680590,
+      "sha256": "f2f5540f70c8c520830ac0e91af4524065b1544c4e777f07be0f1dcf098410a3"
+    },
+    {
+      "path": "inventory.jsonl.gz",
+      "bytes": 304,
+      "sha256": "56821ab338f3db294d9e68eacb9d1c3c598a7d868cb742a9e9fc138291713d51",
+      "uncompressed_bytes": 432,
+      "uncompressed_sha256": "93c2d7a97f37adcd2d7708a10b66664e57f3b45a70c53d5d83182f4af0b7fd81"
+    }
+  ],
+  "component_id": "physical-component:64621d74ca19d475b02d7c9144029019088f8734c068058fc5e8055d33426e15",
+  "new_native_cells": 2,
+  "pixelIndex": 39704,
+  "target_id": "gb:SLB:ADM1:17018030B43755880178831",
+  "whole_gap_completion": false,
+  "nonempty_original_remainder_preserved": true,
+  "selected_release_delivery": false,
+  "production_delivery": false,
+  "authentication_admission": {
+    "accounted_bytes": 100742628,
+    "accounted_descriptors": 67,
+    "limit_bytes": 268435456,
+    "limit_descriptors": 512,
+    "limits_include_reserve": true,
+    "reserved_review_bytes": 125629856,
+    "reserved_review_descriptors": 16
+  },
+  "production_admission": {
+    "accounted_bytes": 77682956,
+    "accounted_descriptors": 79,
+    "limit_bytes": 268435456,
+    "limit_descriptors": 512,
+    "limits_include_reserve": true,
+    "reserved_review_bytes": 137435552,
+    "reserved_review_descriptors": 16
+  },
+  "independent_whole_affected_row_conservation": {
+    "before_window_rows": 24,
+    "affected_after_rows": 2,
+    "changes": [
+      [
+        139002,
+        249212,
+        249213,
+        39704
+      ],
+      [
+        139018,
+        249253,
+        249254,
+        39704
+      ]
+    ],
+    "removed_or_reassigned_cells": 0,
+    "new_unassigned_to_owner39704_cells": 2
+  },
+  "source_exceptions": 0,
+  "qualification_still_pending": true
+}

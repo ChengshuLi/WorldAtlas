@@ -1,0 +1,29 @@
+file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs:8
+const demand=(v,m)=>{if(!v)throw Error(m);},same=(a,b)=>valueBytes(a).equals(valueBytes(b));
+                                 ^
+
+Error: Completed prior phase exceeds issued child bound: {"limit":234734255,"completion_phase_bytes":176435592,"phases":[{"index":0,"kind":"complete-selected-base-acquisition-v1","complete_phase_bytes":212502068},{"index":1,"kind":"complete-selected-additive-acquisition-v1","complete_phase_bytes":241778918}]}
+    at demand (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs:8:34)
+    at completePriorConservationFrame (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs:64:2)
+    at completedPriorFrame (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs:56:14)
+    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs:59:59
+
+Node.js v24.19.0
+       39.90 real        30.99 user        14.45 sys
+           355205120  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+             2379680  page reclaims
+               35069  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+               25916  messages sent
+               13870  messages received
+                   0  signals received
+                3110  voluntary context switches
+              106405  involuntary context switches
+        103944717236  instructions retired
+         45514428141  cycles elapsed
+           278301632  peak memory footprint

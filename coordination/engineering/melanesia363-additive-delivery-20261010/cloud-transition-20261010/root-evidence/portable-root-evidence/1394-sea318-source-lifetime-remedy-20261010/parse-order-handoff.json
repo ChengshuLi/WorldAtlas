@@ -1,0 +1,48 @@
+{
+  "kind": "SEA318-parse-order-correction-frozen-handoff",
+  "operators_executed": false,
+  "original_requests_unchanged": true,
+  "supersedes_caller_sha256": "9f76dc0e89e1bf7b4ea92e35c4ab47c68f75196faf1ffac815a6e72720fa52b5",
+  "parsed_root_charge_is_scratch": false,
+  "authentication_reservation": "No outputs exist yet: reserved output-size arena is explicitly admitted as one corpus parse workspace before parse; full output plus distinct workspace and max scratch charged in production.",
+  "allocation_order": [
+    "whole raw authentication and separately charged corpus graphs + admitted reserved corpus workspace",
+    "release exact query/corpus raw; admit all allocated/future roots except bounds/products plus complete max scratch before banks parse",
+    "parse banks retaining full graph charges; release bank raw after parsing",
+    "admit complete bounds parsed root before bounds parse",
+    "release bounds raw after bounds graph retention",
+    "admit every complete product graph before products parse"
+  ],
+  "limits": [
+    "Descriptor-only boundary controls; no body authentication or SOURCE/native/science execution",
+    "Actual final author355/current code/body/request/custody freeze must recompute margins; tightest prototype276557B",
+    "Existing controls.mjs and phase-ledger-controls.json describe superseded parse-order version, not current proof"
+  ],
+  "artifacts": [
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-source-lifetime-remedy-20261010/caller-proposed.mjs",
+      "bytes": 202252,
+      "sha256": "19c453ad348c7475675c43954bebf0ae330fc5abb8164170750ac34694de5b11"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-source-lifetime-remedy-20261010/source-lifetime.patch",
+      "bytes": 21765,
+      "sha256": "e671c97ebdc757fea125a80b8b7b04ce15bc819e5ff090a1f92613b65f33e428"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-source-lifetime-remedy-20261010/combined-lifetime.patch",
+      "bytes": 27647,
+      "sha256": "2bf770a768a398853b74f8d344ce5c7461dfd922d452eff262d45f6278e82687"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-source-lifetime-remedy-20261010/scratch-controls.mjs",
+      "bytes": 5489,
+      "sha256": "ddd848a9aba5306789a429a21104d8fc08eab667435432997c923fc8d1b0f7d7"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-source-lifetime-remedy-20261010/scratch-boundary-controls.json",
+      "bytes": 90474,
+      "sha256": "c48a5a361ff39dac82d6de0a577c5bd9f1adc4ed92c8eb9ecfefe49b3c8a143c"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "status": "ACTUAL_PRIOR_PHASE_REFUSAL_PRESERVED",
+  "terminal": {
+    "code_source_sha256": "05b8c136f7f88a6dceaa451386142c51f08277fc7c36a3010a112384b7e6b078",
+    "command": [
+      "/usr/bin/time",
+      "-l",
+      "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--expose-gc",
+      "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs",
+      "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/.cache/native102-current355-plan-a370f562.json",
+      "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/.cache/native102-current355-products-a370f562"
+    ],
+    "elapsed_seconds": 51.774043041979894,
+    "execution_commit": "a370f562ded889b4b75339669735be108f014b82",
+    "exit_code": 1,
+    "guard_reason": null,
+    "kind": "current-rebind-external-terminal-v1",
+    "lifetime_ceiling_bytes": 536870912,
+    "lifetime_rss_bytes": 345128960,
+    "owned_processes_remaining": [],
+    "publication_sha256": null,
+    "request_sha256": null,
+    "sampled_group_peak_bytes": 315195392,
+    "sampled_stop_bytes": 402653184,
+    "signal": null,
+    "termination_events": [],
+    "version": 1,
+    "wall_limit_seconds": 1200
+  },
+  "operating_pins": [
+    {
+      "name": "stderr.log",
+      "bytes": 2318,
+      "sha256": "dfab84a500a782a2ac06fe1530130e9c956996488471acadb66df5a1e417f1ca"
+    },
+    {
+      "name": "code-source.json",
+      "bytes": 51980,
+      "sha256": "05b8c136f7f88a6dceaa451386142c51f08277fc7c36a3010a112384b7e6b078"
+    },
+    {
+      "name": "host-supply.json",
+      "bytes": 1339,
+      "sha256": "67def6381fffb6d2bd103291c9b99a1b4f813bfbc346539c5cdcd8488a00f687"
+    },
+    {
+      "name": "stock-report.json",
+      "bytes": 13629,
+      "sha256": "d3f75a0234b25976633e75fcbdf532a8ad1dfd9ad5f5cb0759156cafbb3594ac"
+    },
+    {
+      "name": "samples.jsonl",
+      "bytes": 278573,
+      "sha256": "7e8ab702d596b7e93b780ef8c4d494ed7308f11541c0b345bbabe2f1f23f6eba"
+    },
+    {
+      "name": "terminal.json",
+      "bytes": 1329,
+      "sha256": "bbfdf8c036b96ea9e9f12b2f454bda23a1bccbe4eb4280eeaf7b7ee2d9eda966"
+    },
+    {
+      "name": "launch.json",
+      "bytes": 924,
+      "sha256": "d2fdc27e5dd27c6ff0383bbf6b6bbbaed6892629440f9ac10eb17548f8fd540f"
+    },
+    {
+      "name": "stdout.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "products_directory_exists": false,
+  "products": [],
+  "no_retry": true,
+  "source_native_producers_replayed": false
+}

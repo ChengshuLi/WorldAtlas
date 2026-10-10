@@ -1,0 +1,106 @@
+[
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:03503f1fa71e2bf719b13d543e04fe99e56235693c1d1e189df86aa3018406de"
+    ],
+    "current_full_feature_sha256": "f8228ecc6aba0b643120de763a62147b841d580fac7fcb91ed897af588f9f03c",
+    "current_geometry_sha256": "705fa2d2969e4931b1de8e2e8dca81a3e5de6c2a1a27d219743048e2ae8f92d5",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:brunei-muara:b7213cc1c869",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 1,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Single-child tier: geographic role requires individual review",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:borneo:f3cde4b889a9. This declaration alone is not semantic approval.",
+                "title": "gb:BRN:ADM1",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:BRN:ADM1; role Districts; reference vintage 2011; license Public Domain. Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Brunei Darussalam",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BRN/ADM1/geoBoundaries-BRN-ADM1.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 1 locations, roles {'Districts': 1}, source vintages {'2011': 1}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "single-location province; assess whether adjacent tiers are coextensive"
+            ]
+          },
+          "source": "gb:BRN:ADM1",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Brunei-Muara",
+        "parent_id": "framework:area:borneo:f3cde4b889a9"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/1543",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:brunei-muara:b7213cc1c869",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2011",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/578",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 10448,
+    "owner_row": {
+      "bounds": [
+        214666.108705,
+        127403.83948493334,
+        214924.2693911111,
+        127634.43774551478
+      ],
+      "id": "gb:BRN:ADM1:89281809B42057356743122",
+      "index": 10448,
+      "province_id": "framework:province:brunei-muara:b7213cc1c869",
+      "province_index": 1045
+    },
+    "parent_index": 1045,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:BRN:ADM1:89281809B42057356743122",
+      "original_feature_sha256": "f8228ecc6aba0b643120de763a62147b841d580fac7fcb91ed897af588f9f03c",
+      "original_parent_id": "framework:province:brunei-muara:b7213cc1c869",
+      "reference_year": "2011"
+    },
+    "source_containing_pin": {
+      "bytes": 6259307,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "389e463dd5e44894fd221f53db584f55fff330d1",
+      "mode": "100644",
+      "path": "data/geography/part-2.json",
+      "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+    },
+    "target_id": "gb:BRN:ADM1:89281809B42057356743122"
+  }
+]

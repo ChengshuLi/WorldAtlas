@@ -1,0 +1,439 @@
+{
+  "status": "CACHE-ONLY seven exact product-group requests; unissued, no operator",
+  "original_batch": "gap-operational-batch:0393f64c9f8549bcfca1ace9",
+  "accepted_packet_commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+  "scope": {
+    "components": 318,
+    "families": 122,
+    "priority": 30,
+    "other_components": 288,
+    "positive_intersections": 30,
+    "extra_zero_area_empty_intersections": 15,
+    "cases_with_empty_extras": 11,
+    "routed_priority_ids": 30,
+    "unique_priority_ids": 30
+  },
+  "groups": [
+    {
+      "accounting": {
+        "bytes": 1386,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-BRN-ADM1/prospective-accounting.json",
+        "sha256": "4d2d6aad496a377775a7cfec60ff388084843a1aa6bdbdccb2364c2c23d1e3bc"
+      },
+      "cases": 1,
+      "classification": "PROSPECTIVE_WITHIN_LIMIT_NOT_ISSUED_OR_HEAP_FIT",
+      "expected_ids": [
+        "physical-component:03503f1fa71e2bf719b13d543e04fe99e56235693c1d1e189df86aa3018406de"
+      ],
+      "floor": 265848551,
+      "group": "gb-BRN-ADM1",
+      "metadata": {
+        "bytes": 3025,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-BRN-ADM1/original-query-metadata.json",
+        "sha256": "360f128bf432ee65835dc2bd7c41a9609a3efbde122299339e2395881fae615f"
+      },
+      "product": "gb:BRN:ADM1",
+      "query_ids": [
+        0,
+        9
+      ],
+      "request": {
+        "bytes": 14980,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-BRN-ADM1/source-request-UNISSUED.json",
+        "sha256": "91a34ca1cb501b5619367ab30ba667e2774cb1ca39845f59e6f474702f9d81c0"
+      },
+      "target_bindings": {
+        "bytes": 8189,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-BRN-ADM1/target-canonical-bindings.json",
+        "sha256": "5eb677f1ec173e2c8fe13c7faa65bb2c4b3041b9aa973edbd1e2ce83aba0f3c8"
+      },
+      "target_ids": [
+        "gb:BRN:ADM1:89281809B42057356743122"
+      ]
+    },
+    {
+      "accounting": {
+        "bytes": 1387,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-PHL-ADM3/prospective-accounting.json",
+        "sha256": "7a6373d9c0454c84316b7ccd11a1a7c57aec530f9a7964ba3db9bdbdee233c97"
+      },
+      "cases": 9,
+      "classification": "OVERLIMIT_AT_CONSERVATIVE_FULL_PARSED_ACCOUNTING",
+      "expected_ids": [
+        "physical-component:1556c3bb1c20fc718d0e5d5d8dce2ce180b191fe63eaf492312db22550e8e737",
+        "physical-component:307e87aee838533082007e29254811d809f22152127a05815195a9d98ad327da",
+        "physical-component:47f533a94718204a72389e0ee39b538ff230f219ec619de6aadfa8dd0997616f",
+        "physical-component:5333b1363dbb396832c14da44a54e59bddf037cb92378e11d17efcc931220ce2",
+        "physical-component:6c21d4063b8f6febad1769f1e7f058e668ab8c018d93b770f560818e8db5af22",
+        "physical-component:c6e5c097e7fec0a79402758c4b8787151660e2312015f92403b1d857bdae9ca8",
+        "physical-component:e7830362e503492dae1922eb91157c0e3cc7a42043dc91eff29878eeb85aa902",
+        "physical-component:ec9be2d5c5db2b304f0e71418b2b328ae508fed448cef29e6737c3c1121dc1ef",
+        "physical-component:ed6ee8f77903a084a21fb78781debf60115e7d9ce616926fb0e3cf9dbacfda34"
+      ],
+      "floor": 271646888,
+      "group": "gb-PHL-ADM3",
+      "metadata": {
+        "bytes": 21241,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-PHL-ADM3/original-query-metadata.json",
+        "sha256": "e6063c2dc601b7eae3667f25aa864a02a94568e5fdd533d0210d8614a597de2e"
+      },
+      "product": "gb:PHL:ADM3",
+      "query_ids": [
+        0,
+        68,
+        1496,
+        25,
+        23,
+        8481,
+        2572,
+        5178,
+        7343,
+        693,
+        67,
+        72,
+        461,
+        6584
+      ],
+      "request": {
+        "bytes": 27488,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-PHL-ADM3/source-request-UNISSUED.json",
+        "sha256": "126742d9cc573aeacb0e0540107fe1e280608a1eeb9fe1afb2fba1fdc784447a"
+      },
+      "target_bindings": {
+        "bytes": 40476,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-PHL-ADM3/target-canonical-bindings.json",
+        "sha256": "4d8a8fea0004e9d02641c0e9afbff23315039f5bf9106a276390a24a51664e82"
+      },
+      "target_ids": [
+        "gb:PHL:ADM3:30758251B25296236065904",
+        "gb:PHL:ADM3:30758251B3312801270328",
+        "gb:PHL:ADM3:30758251B69966193362953",
+        "gb:PHL:ADM3:30758251B13625365204801",
+        "gb:PHL:ADM3:30758251B25477955083554",
+        "gb:PHL:ADM3:30758251B13765165414384",
+        "gb:PHL:ADM3:30758251B96628789522948",
+        "gb:PHL:ADM3:30758251B31351007635483",
+        "gb:PHL:ADM3:30758251B36088332034654"
+      ]
+    },
+    {
+      "accounting": {
+        "bytes": 1388,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-IDN-ADM2/prospective-accounting.json",
+        "sha256": "3364b0f05233eb9d2469c2c936750d4ff9bf65f219bd70f8112c19ccbadf12fc"
+      },
+      "cases": 12,
+      "classification": "OVERLIMIT_AT_CONSERVATIVE_FULL_PARSED_ACCOUNTING",
+      "expected_ids": [
+        "physical-component:2a6f76f2cc30dc3b93f08d59750b9519adc26ae7bd22a328683f5a048c2b4d8f",
+        "physical-component:2b4f4da5787b5d718443cca535274ed74ae62ff08f7b410c46277ef36705e0ff",
+        "physical-component:328987ce3f5504e7d598e7a94928a309cddbe9e00c774cd488dfdfb57bb585fe",
+        "physical-component:5e2faf09bde718e22120c26bc79f98ee620f8e47ccb3e93b96345f80cbc548bf",
+        "physical-component:849377ccf645d794deaa1f43fd91ab9bfe9d9464c1c1cb31b19cf53b990291c4",
+        "physical-component:9094128c18d3075578719177328356ff5147b1abbe17e09626010f91b79aeea8",
+        "physical-component:98ba8cabf21ed4bdcfb0761cb6aabac54f7fd153a60f656a06587e2125cc8f36",
+        "physical-component:cd6c8035a1a2e8c52ab5b851b7ba26eb366acafd2babbbd82e149d7ea7e5c7e5",
+        "physical-component:dd50282d0498fe710bf1ecaf6ca06f22d97391356cfe8c17fb9d5c10b25d874e",
+        "physical-component:dd8aab5edb2689e1b07b799505f2c052799dd3d1f3770dd2d8ac668e0dfdffaf",
+        "physical-component:e4abb61a130c9be6d764a0a058df31d6acd4f427624c8b3d5af9bdb709b8badf",
+        "physical-component:fa8aa714b724a4eef86de954326dcfd9cb04db5fdb0695a4e76b7e90b2f29966"
+      ],
+      "floor": 281258727,
+      "group": "gb-IDN-ADM2",
+      "metadata": {
+        "bytes": 22731,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-IDN-ADM2/original-query-metadata.json",
+        "sha256": "3d48652a1b19f794a5a6ba77bb625fd1a30b900c8e8b2ddfef8b268e1da7e31d"
+      },
+      "product": "gb:IDN:ADM2",
+      "query_ids": [
+        0,
+        9,
+        17,
+        2725,
+        19,
+        8,
+        590,
+        2581,
+        129,
+        4127,
+        3715,
+        133,
+        3876,
+        62,
+        691
+      ],
+      "request": {
+        "bytes": 29809,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-IDN-ADM2/source-request-UNISSUED.json",
+        "sha256": "5f7a8366e27ad3d26844f3e2c8beb2a5d25f52106755442899afe4b18425cf8d"
+      },
+      "target_bindings": {
+        "bytes": 130003,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-IDN-ADM2/target-canonical-bindings.json",
+        "sha256": "6ea04123f1e6f785dbedc6542ebe88c99c4b29984357fa724ca328ac60f892c1"
+      },
+      "target_ids": [
+        "gb:IDN:ADM2:22746128B10941975158621",
+        "gb:IDN:ADM2:22746128B69202393010200",
+        "gb:IDN:ADM2:22746128B59857718615465",
+        "gb:IDN:ADM2:22746128B5634485200629",
+        "gb:IDN:ADM2:22746128B6545713511337",
+        "gb:IDN:ADM2:22746128B79752231805890",
+        "gb:IDN:ADM2:22746128B80009106787015",
+        "gb:IDN:ADM2:22746128B46307112426649",
+        "gb:IDN:ADM2:22746128B848155691224",
+        "gb:IDN:ADM2:22746128B68991025063444"
+      ]
+    },
+    {
+      "accounting": {
+        "bytes": 1386,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-MMR-ADM3/prospective-accounting.json",
+        "sha256": "35bae57b4ba5bd77b7227d8dffdc706f79ba8c71633cc53fb6d9a1c13ed1b41e"
+      },
+      "cases": 4,
+      "classification": "PROSPECTIVE_WITHIN_LIMIT_NOT_ISSUED_OR_HEAP_FIT",
+      "expected_ids": [
+        "physical-component:6c46d18235a22c15683039d3346b55f1a7625a3ce49ead2111413d91d75362d2",
+        "physical-component:9f5d178736a1a6549f7660e6d048e61923c33865d08f91445a5237ce20d4e29b",
+        "physical-component:ae27cc3d8e51ae163f2052f4455cb072bca1960607d7de8fb8cc087e8257f79b",
+        "physical-component:e499668746ebf62edfaef15068a437158e322c29a711aef7598f7e78a99148fb"
+      ],
+      "floor": 265848551,
+      "group": "gb-MMR-ADM3",
+      "metadata": {
+        "bytes": 9078,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-MMR-ADM3/original-query-metadata.json",
+        "sha256": "808f99b0e0b551808a24aae13f064bb8fbbfd772f07e558895d3ee0213ed2b63"
+      },
+      "product": "gb:MMR:ADM3",
+      "query_ids": [
+        0,
+        462,
+        4453,
+        1340,
+        3901,
+        1155
+      ],
+      "request": {
+        "bytes": 19274,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-MMR-ADM3/source-request-UNISSUED.json",
+        "sha256": "ec85168ba2107488aaa8630c4880dd1aaf45b4da61b9dda90d01725e201cd5d3"
+      },
+      "target_bindings": {
+        "bytes": 65607,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-MMR-ADM3/target-canonical-bindings.json",
+        "sha256": "17ef397b24019ce95363c504f5ba9325fb8893d3740b46787f21564891af205f"
+      },
+      "target_ids": [
+        "gb:MMR:ADM3:66882298B17691670471295",
+        "gb:MMR:ADM3:66882298B62167174305830",
+        "gb:MMR:ADM3:66882298B80264177521474",
+        "gb:MMR:ADM3:66882298B36911639137507"
+      ]
+    },
+    {
+      "accounting": {
+        "bytes": 1386,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-VNM-ADM2/prospective-accounting.json",
+        "sha256": "3f9ded3d22ec6868fc95bf19fe91fe6ead0f964de71184da610e2d1c0a09341f"
+      },
+      "cases": 2,
+      "classification": "PROSPECTIVE_WITHIN_LIMIT_NOT_ISSUED_OR_HEAP_FIT",
+      "expected_ids": [
+        "physical-component:9c46373452264bbd5441d6a6349cab667177ff6ecfda374df366433502da9c61",
+        "physical-component:f4516260fac3e4331de3658dde9bff6614d897c4bac651a962f80196b6ca94bc"
+      ],
+      "floor": 265848551,
+      "group": "gb-VNM-ADM2",
+      "metadata": {
+        "bytes": 1515,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-VNM-ADM2/original-query-metadata.json",
+        "sha256": "f2c7ad6b06d484f4268b6b465277f5f4b1ccdba51e2137ab4d2c3ff4afaba47c"
+      },
+      "product": "gb:VNM:ADM2",
+      "query_ids": [
+        0
+      ],
+      "request": {
+        "bytes": 15160,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-VNM-ADM2/source-request-UNISSUED.json",
+        "sha256": "0ee4a53d40d2c87a55fc3a20de055995bc4a72ee4a71e7063d70cbf51b9f7104"
+      },
+      "target_bindings": {
+        "bytes": 12003,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-VNM-ADM2/target-canonical-bindings.json",
+        "sha256": "c51c3c4948d03ec85ae8e04e0d26562997867fb3f38b6a24fcc121e2c5c354fb"
+      },
+      "target_ids": [
+        "gb:VNM:ADM2:81297802B53592665760601",
+        "gb:VNM:ADM2:81297802B85934029741785"
+      ]
+    },
+    {
+      "accounting": {
+        "bytes": 1386,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-THA-ADM2/prospective-accounting.json",
+        "sha256": "bdf561ca13f4b81e97a54eac6b6fb2fa9a941e8be74e3bad092735c774905492"
+      },
+      "cases": 1,
+      "classification": "PROSPECTIVE_WITHIN_LIMIT_NOT_ISSUED_OR_HEAP_FIT",
+      "expected_ids": [
+        "physical-component:b90682fb902bb719879e69d1a161080cb46a7cd041cb3ad0c9bd963b5e1f4900"
+      ],
+      "floor": 267651284,
+      "group": "gb-THA-ADM2",
+      "metadata": {
+        "bytes": 3040,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-THA-ADM2/original-query-metadata.json",
+        "sha256": "46aad04b4b2e291cb8858d7755602f13d73811b21b22d9923c98e794a2999f23"
+      },
+      "product": "gb:THA:ADM2",
+      "query_ids": [
+        0,
+        496
+      ],
+      "request": {
+        "bytes": 14988,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-THA-ADM2/source-request-UNISSUED.json",
+        "sha256": "f2b44b3fd42f1cfd10d32af01d4bc76d69d512ec332a7980370e57dcc4672958"
+      },
+      "target_bindings": {
+        "bytes": 4793,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-THA-ADM2/target-canonical-bindings.json",
+        "sha256": "bffd2054cc62dbe31eb08c907d4b6b3632f49ce5a2132c3118823e71ca06fae4"
+      },
+      "target_ids": [
+        "gb:THA:ADM2:78962969B19426862373274"
+      ]
+    },
+    {
+      "accounting": {
+        "bytes": 1386,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-IND-ADM2/prospective-accounting.json",
+        "sha256": "a898d8d0224be90e745c7b2d6456b1142d060913f4cc742096b47e80d591ff8f"
+      },
+      "cases": 1,
+      "classification": "PROSPECTIVE_WITHIN_LIMIT_NOT_ISSUED_OR_HEAP_FIT",
+      "expected_ids": [
+        "physical-component:b971f9d191cf018cfbaa158f4f32be07f9c8bbbd3ae248ddc1261fba50e8af94"
+      ],
+      "floor": 266445070,
+      "group": "gb-IND-ADM2",
+      "metadata": {
+        "bytes": 3016,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-IND-ADM2/original-query-metadata.json",
+        "sha256": "217afec8e24d540a447de819ff8eac0715504685a05935f7c0650a12249bac06"
+      },
+      "product": "gb:IND:ADM2",
+      "query_ids": [
+        0,
+        6041
+      ],
+      "request": {
+        "bytes": 14990,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-IND-ADM2/source-request-UNISSUED.json",
+        "sha256": "f16e8f5784ede059fd714a5e03b62873e39de2a290dc9da6d3dddd0d73ae79c7"
+      },
+      "target_bindings": {
+        "bytes": 19457,
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-IND-ADM2/target-canonical-bindings.json",
+        "sha256": "7b6bcb18d8a2be7cec241d0efa9f377a6f38ee34f57b73eee28475e0a4873f77"
+      },
+      "target_ids": [
+        "gb:IND:ADM2:76128533B28397307540277"
+      ]
+    }
+  ],
+  "priority_before_issuance": [
+    "gb-MMR-ADM3",
+    "gb-VNM-ADM2",
+    "gb-BRN-ADM1",
+    "gb-IND-ADM2",
+    "gb-THA-ADM2"
+  ],
+  "hold_at_current_conservative_bound": [
+    "gb-PHL-ADM3",
+    "gb-IDN-ADM2"
+  ],
+  "accounting_method": {
+    "whole_inputs": "Exact encoded plus decoded pin costs, every ordinary decoded input <=32MiB; includes complete original physical cases, query pointsets, accepted318/122 roster, product, current target banks, full owners and both prepared bindings.",
+    "parsed_graphs": "Full serialized live owner graph + accepted fit/state/family objects + complete retained target canonical features + metadata/bindings, plus max one complete bank/product/physical-case parser frame. Explicit serialization-domain costs do not assert exact V8 allocations or heap/RSS fit.",
+    "stock_saved_floor": "Reuse saved SOURCE current353 phases205292794/234493518 and direct group floor227594066/input44812729; only positive request/code/input deltas; external27128561 plus4MiB metadata; stock4MiB output,128/16 Node,384MiB sampled/512MiB RSS/256MiB union unchanged.",
+    "explicit_parsed_floor": "Additional parsed serialization beyond stated8MiB metadata allowance added conservatively to direct-stage bound; overlimit groups stay held without bespoke redesign. Actual final combined code/runtime/admission required for every group.",
+    "final_actual_accounting_pending": true
+  },
+  "publication": {
+    "filelist": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/publication-filelist.json",
+      "bytes": 6493,
+      "sha256": "1b1c2c9dff5dfad1001b639439e576068d7b1e5936e9eba9848bc3a99a8e5c8c"
+    },
+    "ordinary_bodies": 14,
+    "source_requests": 7,
+    "null_fields": "Exactly two generated input commit/blob pairs per request plus final combined scripts/additive-gap-repair.mjs bytes/sha256. Other16 programme identities, report,parent,modules,original source operands and current353 baseline pins retained literally."
+  },
+  "exact_routing": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/exact30-routing.json",
+    "bytes": 9413,
+    "sha256": "288766517519c36f9deeb0d5735f4b403c9e4843e978050daa1cf5949b8a1e95"
+  },
+  "whole_original_query_metadata_custody": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/query-metadata-whole-origin-custody.json",
+    "bytes": 24254,
+    "sha256": "c475a7074ab4a547f544dcc142f471f736961089ecf82711c64f3153efb04f8e"
+  },
+  "provenance": {
+    "accepted_raw_fit": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/administrative-source-rule-fit.json",
+      "bytes": 1688243,
+      "sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b"
+    },
+    "complete_state318": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/component-state-318.json",
+      "bytes": 505063,
+      "sha256": "8aaa5d4558eb5137775c159ec234d3dc2a9a90ae965aeaaf27086a63d0462cfd"
+    },
+    "families122": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/family-roster-122.json",
+      "bytes": 39180,
+      "sha256": "acb22105b074fefca33b84488d0d0322ebdba3195a3eff4b0421f53668e651ef"
+    },
+    "current28_target30_link_join": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source30-20261010/current-selected-target-owner-parent-joins.json",
+      "bytes": 204613,
+      "sha256": "93265d65793cc8d3ab659c8783948b2b0138967ccffc4024b72167fb6c8df901"
+    },
+    "complete28_original_target_preimages": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source30-20261010/current-selected-complete-target-preimages.json",
+      "bytes": 346096,
+      "sha256": "db3dce076c98ee7773f2a4084de0e5dec40b2ef240fdc5007660347ecff6dcad"
+    },
+    "frozen_BRN_adapter_handoff_unchanged": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/HANDOFF.json",
+      "bytes": 10071,
+      "sha256": "49ac1580c96e08ff7309d21da34a731528f271355834c3142f96f04d5d219acf"
+    }
+  },
+  "exclusions": {
+    "original363_complete110_overlap": [],
+    "prior_delivered_and_staged_overlap": [],
+    "previous_retained_join": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source30-20261010/SOURCE30-OPERAND-HANDOFF.json",
+      "bytes": 666649,
+      "sha256": "b1e9be0661a011b3cc5439a94093ad6ef8dec61643a640dadc4a4c6b24fc5ddf"
+    },
+    "explanation": "All SEA30 disjoint from complete original363110 roster, hence its completed34SOURCE, native19 and delivered staged IDs. Final actual selected-state exclusion remains mandatory; no global ledger/audit reacquired."
+  },
+  "current_target_custody": "Exact target source bank mode/OID equality checked read-only at current353 c28077; existing full bytes/hash/original feature/preimages/owner-parent joins reused. Current year remains unsupported.",
+  "sole_author_actions": [
+    "Combine frozen SEA adapter delta with adopted bf9, retain exact later SEA operand paths and parsed charges; root review actual final17 pair.",
+    "Publish exact14 metadata/binding bodies plus request templates; replace their null ordinary commit/blob with real pins.",
+    "Replace pending caller bytes/hash with actual combined code tuple; bind actual executingHEAD/runtime/installed modules and existing source supervisor/pre-use guards.",
+    "Run only genuinely admitted product groups; preserve any refusal, never raise cap or silently prune inputs."
+  ],
+  "frozen_BRN_files_modified": false,
+  "no_scientific_or_source_native_operator_executed": true,
+  "no_worktree_tracked_edits_or_claim": true
+}

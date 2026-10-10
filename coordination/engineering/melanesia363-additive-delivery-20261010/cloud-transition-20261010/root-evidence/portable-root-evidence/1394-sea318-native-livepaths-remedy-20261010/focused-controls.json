@@ -1,0 +1,27 @@
+{
+  "kind": "cache-only-SEA318-native-live-path-controls",
+  "operators_executed": false,
+  "actual_native_admission": false,
+  "checks": [
+    {
+      "name": "Actual native release block protects physical/copy-metadata/binding bodies and charges all parsed closures",
+      "pass": true
+    },
+    {
+      "name": "Query raw removed; authenticated full descriptor remains; ordinary reopen refused",
+      "pass": true
+    },
+    {
+      "name": "Missing physical source or changed source descriptor refused before release",
+      "pass": true
+    },
+    {
+      "name": "Actual SEA native scope uses typed query custody with unchanged byte/hash/decoded checks",
+      "pass": true
+    },
+    {
+      "name": "SOURCE parse-order fix and original scientific/source predicates byte-for-byte unchanged",
+      "pass": true
+    }
+  ]
+}

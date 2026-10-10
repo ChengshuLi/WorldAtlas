@@ -1,0 +1,875 @@
+{
+  "version": 1,
+  "kind": "root-cloud-handoff-relevant-evidence-v1",
+  "created_utc": "2026-10-10T20:12:24.040869+00:00",
+  "owner": "01a10893-2a57-72e0-aa08-5c36088d5206",
+  "author_holder": "01a112b0-39fb-7f02-a3c7-d21d0916009f",
+  "execution_head": "86a38809c0751f1652be8154bdce9363343472fe",
+  "qualification": "EXTERNAL_QUALIFICATION_INCOMPLETE: missing handle/terminal/code-source, no matching process;4 child products exist. Preserve; no restart/acceptance.",
+  "selected_counts": {
+    "whole_gaps": 21,
+    "baseline_gaps": 95173,
+    "complete_batches": 0,
+    "baseline_batches": 594,
+    "assigned_cells": 353,
+    "Makira_additional_cells_not_delivered": 2
+  },
+  "SEA318": "30supported grouped cases prepared only; scope not amended, no adoption/operator",
+  "files": [
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-native-livepaths-remedy-20261010/HANDOFF.json",
+      "retained_path": "portable-root-evidence/1394-sea318-native-livepaths-remedy-20261010/HANDOFF.json",
+      "bytes": 11374,
+      "sha256": "66d26ea9611b994efe19a15a016b83f42ec59e3999db9e5159fed60664559358"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-native-livepaths-remedy-20261010/caller-proposed.mjs",
+      "retained_path": "portable-root-evidence/1394-sea318-native-livepaths-remedy-20261010/caller-proposed.mjs",
+      "bytes": 203505,
+      "sha256": "69fa0c82e6f1da88eebd02a0a74350de718e666c416a251da2fd564c971dd1f0"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-native-livepaths-remedy-20261010/combined-lifetime.patch",
+      "retained_path": "portable-root-evidence/1394-sea318-native-livepaths-remedy-20261010/combined-lifetime.patch",
+      "bytes": 30017,
+      "sha256": "295388d0c9ccf7029a9bef38c80ed29a25934a27c7a40579ce51d6c00064d4af"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-native-livepaths-remedy-20261010/controls.mjs",
+      "retained_path": "portable-root-evidence/1394-sea318-native-livepaths-remedy-20261010/controls.mjs",
+      "bytes": 5474,
+      "sha256": "82926e7dc841a0e61c535e38f09f05b0862809211af80923fa93482db9a43b72"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-native-livepaths-remedy-20261010/focused-controls.json",
+      "retained_path": "portable-root-evidence/1394-sea318-native-livepaths-remedy-20261010/focused-controls.json",
+      "bytes": 833,
+      "sha256": "424072d38eb5540d9b0d49122c1dbfb66636463f08c95111787611ce7523f279"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-native-livepaths-remedy-20261010/native-livepaths.patch",
+      "retained_path": "portable-root-evidence/1394-sea318-native-livepaths-remedy-20261010/native-livepaths.patch",
+      "bytes": 5747,
+      "sha256": "eeaaf3ecc894a38c72acc05fe9ba2390c794d8a9961dce6a7e3b43946a54079b"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-native-livepaths-remedy-20261010/root-native-livepaths-review.json",
+      "retained_path": "portable-root-evidence/1394-sea318-native-livepaths-remedy-20261010/root-native-livepaths-review.json",
+      "bytes": 868,
+      "sha256": "11ff5cde2311ff9890887e78ef5e64926968db5adfaa78d17fa7854e30787388"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-source-lifetime-remedy-20261010/case-pin-roles.json",
+      "retained_path": "portable-root-evidence/1394-sea318-source-lifetime-remedy-20261010/case-pin-roles.json",
+      "bytes": 328154,
+      "sha256": "002de6d0938d50f24571f65cce151586f3fe0912602f119e975d9ce71817abde"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-source-lifetime-remedy-20261010/parse-order-handoff.json",
+      "retained_path": "portable-root-evidence/1394-sea318-source-lifetime-remedy-20261010/parse-order-handoff.json",
+      "bytes": 2658,
+      "sha256": "145e45bbfb75c5c68422161f0c5bc5e190d9fcd4a79d22e534cb6ca5b6f92f8a"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-source-lifetime-remedy-20261010/root-source-parse-order-review.json",
+      "retained_path": "portable-root-evidence/1394-sea318-source-lifetime-remedy-20261010/root-source-parse-order-review.json",
+      "bytes": 1562,
+      "sha256": "8e29670018702f11c1eafc3c64ebf175443c7288cc7677d74bc27a597744f3df"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-source-lifetime-remedy-20261010/scratch-boundary-controls.json",
+      "retained_path": "portable-root-evidence/1394-sea318-source-lifetime-remedy-20261010/scratch-boundary-controls.json",
+      "bytes": 90474,
+      "sha256": "c48a5a361ff39dac82d6de0a577c5bd9f1adc4ed92c8eb9ecfefe49b3c8a143c"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-source-lifetime-remedy-20261010/scratch-controls.mjs",
+      "retained_path": "portable-root-evidence/1394-sea318-source-lifetime-remedy-20261010/scratch-controls.mjs",
+      "bytes": 5489,
+      "sha256": "ddd848a9aba5306789a429a21104d8fc08eab667435432997c923fc8d1b0f7d7"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-source-lifetime-remedy-20261010/source-lifetime.patch",
+      "retained_path": "portable-root-evidence/1394-sea318-source-lifetime-remedy-20261010/source-lifetime.patch",
+      "bytes": 21765,
+      "sha256": "e671c97ebdc757fea125a80b8b7b04ce15bc819e5ff090a1f92613b65f33e428"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/canonical-selected119-ledger-correction-20261010/root-application.json",
+      "retained_path": "portable-root-evidence/canonical-selected119-ledger-correction-20261010/root-application.json",
+      "bytes": 400,
+      "sha256": "e47f5d1e30ae927708911677161a2d27648a049f38d9b313107405a05c44060c"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/global-gap-work-index-20261009/selected-release-decisions.json",
+      "retained_path": "portable-root-evidence/global-gap-work-index-20261009/selected-release-decisions.json",
+      "bytes": 727113,
+      "sha256": "7b634baee57dc227ac7fd2ab9107a7ae88767e4b731680db25c3c94d6905af5b"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/actual-issuance-bindings.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/actual-issuance-bindings.json",
+      "bytes": 38611,
+      "sha256": "ea34ec33bd19bc6058b37125f749f672946ff1f80294e4e11ca7ea1311ef5582"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/actual-refusal.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/actual-refusal.json",
+      "bytes": 2784,
+      "sha256": "cb3cc74f2b4e433d6b3719fb99f4246f601f4fc9644739c7b89c52cb72e536ee"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/issued.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/issued.json",
+      "bytes": 26669,
+      "sha256": "7b7fb6c1228beabe95d7b6a78d8ff2887a8a5f3581e1b1ead5288e3efde06fdf"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/issuer-terminal.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/issuer-terminal.json",
+      "bytes": 434,
+      "sha256": "7617ef75fe776e76795ddbc026b9822f45eb29969a70feb6fb02362c3952cd82"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/plan-UNISSUED.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/plan-UNISSUED.json",
+      "bytes": 11424,
+      "sha256": "9c88e1af7a9b9108f498ec792e833a21abd02d5d4fe35944c3de42277abe62f7"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/plan.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/plan.json",
+      "bytes": 11424,
+      "sha256": "9c88e1af7a9b9108f498ec792e833a21abd02d5d4fe35944c3de42277abe62f7"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/prospective-acquired-phase-increment.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/prospective-acquired-phase-increment.json",
+      "bytes": 2500,
+      "sha256": "30935f683a6932849452b7e176093f4ed1caa3e9d16088d83139d105925746ae"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/prospective-live-paths.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/prospective-live-paths.json",
+      "bytes": 1396,
+      "sha256": "c1ce83f36a14602af688c2ff3f6c96af1f8a460f1053d1ba91e335f2f56f40ea"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/retained-actual-operating/code-source.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/retained-actual-operating/code-source.json",
+      "bytes": 51980,
+      "sha256": "8dba6ce26e4af34b71d3ecff4820b08bd7de57a7fa4bf6540a74c79f8342142b"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/retained-actual-operating/host-supply.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/retained-actual-operating/host-supply.json",
+      "bytes": 1339,
+      "sha256": "6e5aa88793f59ca09b32517713b1fae77f27f8841b19718bac0cae990d3646e9"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/retained-actual-operating/launch.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/retained-actual-operating/launch.json",
+      "bytes": 921,
+      "sha256": "0b8cb12c32074155df7024de72372338fb98f295f82bffe4625629450ab04837"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/retained-actual-operating/samples.jsonl",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/retained-actual-operating/samples.jsonl",
+      "bytes": 235618,
+      "sha256": "31f1af4a1009d7fd39c995b772b2c063c311039a33c0619dee6b80ba9e0771a4"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/retained-actual-operating/stderr.log",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/retained-actual-operating/stderr.log",
+      "bytes": 2573,
+      "sha256": "7a5b906d40ac015c05d0bf7249c943d6d3ce3b4b06c84cacdf913320052a462a"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/retained-actual-operating/stdout.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/retained-actual-operating/stdout.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/retained-actual-operating/stock-report.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/retained-actual-operating/stock-report.json",
+      "bytes": 13629,
+      "sha256": "8a73b94b72976e51f0ab42b30e2a9495b251f248a788e232d079f82ac3b21b5c"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/retained-actual-operating/terminal.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/retained-actual-operating/terminal.json",
+      "bytes": 1328,
+      "sha256": "3cf321f3cd1443698839cf7cbc24d376d15b1f8c7641202364c4682779f9d4dc"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/root-actual-issued-qualification-review.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/root-actual-issued-qualification-review.json",
+      "bytes": 841,
+      "sha256": "d06291301f79d498a316aea92994bf80f96c372235af7f4f68b5a30bf3817a8f"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/stderr.log",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/stderr.log",
+      "bytes": 2573,
+      "sha256": "7a5b906d40ac015c05d0bf7249c943d6d3ce3b4b06c84cacdf913320052a462a"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/terminal.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-5ba9966f/terminal.json",
+      "bytes": 1328,
+      "sha256": "3cf321f3cd1443698839cf7cbc24d376d15b1f8c7641202364c4682779f9d4dc"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/actual-issuance-bindings.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/actual-issuance-bindings.json",
+      "bytes": 44486,
+      "sha256": "21049b665d9adacd308a62109ecd6513723906a7f52311bb7d02c7e7bc97d343"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/issuer-terminal.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/issuer-terminal.json",
+      "bytes": 204,
+      "sha256": "bf809d1a460442c465b1de7838a73ab104e64193583945855aa7614621f69846"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/prospective-live-paths.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/prospective-live-paths.json",
+      "bytes": 1118,
+      "sha256": "d20a7d252a66b1fc8a9aba84bd73b8233fab1fd5ab89befa8a3452bfba6ec833"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/retained-incomplete-operating/host-supply.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/retained-incomplete-operating/host-supply.json",
+      "bytes": 1339,
+      "sha256": "8950a2a627595a41389dcd0ea3f9b99bdaf4ae5c486bb3153ee789abb74b642f"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/retained-incomplete-operating/launch.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/retained-incomplete-operating/launch.json",
+      "bytes": 924,
+      "sha256": "58ee38fccf0b8435a61adacef0aec1e07fbfd0df82ba2d99823398289929aadc"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/retained-incomplete-operating/stock-report.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/retained-incomplete-operating/stock-report.json",
+      "bytes": 13629,
+      "sha256": "ea2c4b051899d0852d9d5d7acc7eafe4eb3509c8c6496f58fc329e2da6831abc"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/root-actual-issued-qualification-review.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/root-actual-issued-qualification-review.json",
+      "bytes": 1244,
+      "sha256": "c8b633c03233866e17c11fdc0715930f7209e2d5814aa437f2e6e3f2814f2aeb"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/actual-first-refusal.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/actual-first-refusal.json",
+      "bytes": 2898,
+      "sha256": "674a9cb97e45ec2f50d46436e5ddfccb163234082af13630f006c7382c7be691"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/actual-issuance-bindings.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/actual-issuance-bindings.json",
+      "bytes": 37816,
+      "sha256": "0b99dbb3edb55a893edfd9082762d16d1d6b201ba4ff2618568180cf76a04c35"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/claim-live-renewal.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/claim-live-renewal.json",
+      "bytes": 1484,
+      "sha256": "1f1222d4abad2271e89859fdb5fa202dda949447f9b1a22135ee55797f403de3"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/issued.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/issued.json",
+      "bytes": 26669,
+      "sha256": "b11378630c7a148b10afd698e586399c39aac29761d123e1268d9b41ee7a6e0a"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/issuer-terminal.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/issuer-terminal.json",
+      "bytes": 434,
+      "sha256": "f785ca66b0f341fa2dd2cfb89da8b77aaea617c87de71c2f173b7cc77680d2ef"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/plan-UNISSUED.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/plan-UNISSUED.json",
+      "bytes": 11424,
+      "sha256": "1b2aeebfa4cb4105d116ba32e003a36fd7dd2b5c08b0acfa7aee99da277d492a"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/plan.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/plan.json",
+      "bytes": 11424,
+      "sha256": "1b2aeebfa4cb4105d116ba32e003a36fd7dd2b5c08b0acfa7aee99da277d492a"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/prospective-live-paths.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/prospective-live-paths.json",
+      "bytes": 2534,
+      "sha256": "420ebb00c8da583617d8de8465514a267a5a1f29bb94e8499fe872ca935ec146"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/retained-actual-operating/code-source.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/retained-actual-operating/code-source.json",
+      "bytes": 51980,
+      "sha256": "05b8c136f7f88a6dceaa451386142c51f08277fc7c36a3010a112384b7e6b078"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/retained-actual-operating/host-supply.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/retained-actual-operating/host-supply.json",
+      "bytes": 1339,
+      "sha256": "67def6381fffb6d2bd103291c9b99a1b4f813bfbc346539c5cdcd8488a00f687"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/retained-actual-operating/launch.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/retained-actual-operating/launch.json",
+      "bytes": 924,
+      "sha256": "d2fdc27e5dd27c6ff0383bbf6b6bbbaed6892629440f9ac10eb17548f8fd540f"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/retained-actual-operating/samples.jsonl",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/retained-actual-operating/samples.jsonl",
+      "bytes": 278573,
+      "sha256": "7e8ab702d596b7e93b780ef8c4d494ed7308f11541c0b345bbabe2f1f23f6eba"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/retained-actual-operating/stderr.log",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/retained-actual-operating/stderr.log",
+      "bytes": 2318,
+      "sha256": "dfab84a500a782a2ac06fe1530130e9c956996488471acadb66df5a1e417f1ca"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/retained-actual-operating/stdout.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/retained-actual-operating/stdout.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/retained-actual-operating/stock-report.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/retained-actual-operating/stock-report.json",
+      "bytes": 13629,
+      "sha256": "d3f75a0234b25976633e75fcbdf532a8ad1dfd9ad5f5cb0759156cafbb3594ac"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/retained-actual-operating/terminal.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/retained-actual-operating/terminal.json",
+      "bytes": 1329,
+      "sha256": "bbfdf8c036b96ea9e9f12b2f454bda23a1bccbe4eb4280eeaf7b7ee2d9eda966"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/root-actual-issued-qualification-review.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/root-actual-issued-qualification-review.json",
+      "bytes": 1040,
+      "sha256": "abb6f11ec4e0c84690a0dc0d43aa9f30ab17d2a0a4278a7caed1a11e34157dad"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/root-current-status-update.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/root-current-status-update.json",
+      "bytes": 52343,
+      "sha256": "63b05586a69d46c4fe232538db510ad8b9575260cbbcf20ba7df614fac9717a3"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/root-current-status-whole-get.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/root-current-status-whole-get.json",
+      "bytes": 53966,
+      "sha256": "3ac95907c8d11292577c7e82558a6fdab735ad5f09ff7aa5bc730591eb81cbe0"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/root-pre-status-whole-get.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/root-pre-status-whole-get.json",
+      "bytes": 53459,
+      "sha256": "bdae3857159b9b3267c452642ff7708c2a85d48516fb77f725cb67434776a211"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/stderr.log",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/stderr.log",
+      "bytes": 2318,
+      "sha256": "dfab84a500a782a2ac06fe1530130e9c956996488471acadb66df5a1e417f1ca"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/stdout.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/stdout.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/terminal.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-a370f562/terminal.json",
+      "bytes": 1329,
+      "sha256": "bbfdf8c036b96ea9e9f12b2f454bda23a1bccbe4eb4280eeaf7b7ee2d9eda966"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-selected353-staged-phase-adoption/actual-adoption.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-selected353-staged-phase-adoption/actual-adoption.json",
+      "bytes": 776,
+      "sha256": "60ad4bc3d4764accf85101d8e441a27cb9ee4b414b5dcffd3685ba170544ff97"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-selected353-staged-phase-adoption/actual-one-body.patch",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-selected353-staged-phase-adoption/actual-one-body.patch",
+      "bytes": 8287,
+      "sha256": "b5c95ff1de1eccf2f2593cd0ff942f1f5152531df5d9f1154e4c14d454e89d2c"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-selected353-staged-phase-adoption/root-actual-code-review-post.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-selected353-staged-phase-adoption/root-actual-code-review-post.json",
+      "bytes": 1535,
+      "sha256": "2ea86bbb8e7c98dd452f0fa6a4de4aa2be54f2be22487ea97c054bdead43d33c"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-selected353-staged-phase-adoption/root-actual-code-review-response.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-selected353-staged-phase-adoption/root-actual-code-review-response.json",
+      "bytes": 3211,
+      "sha256": "08e61d877afdd3917cfa9671710686caba575973907fabe2f754dd64b02df7aa"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-selected353-staged-phase-adoption/root-actual-code-review-whole-get.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-selected353-staged-phase-adoption/root-actual-code-review-whole-get.json",
+      "bytes": 3211,
+      "sha256": "08e61d877afdd3917cfa9671710686caba575973907fabe2f754dd64b02df7aa"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-selected353-staged-phase-adoption/root-actual-staged-phase-review.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-selected353-staged-phase-adoption/root-actual-staged-phase-review.json",
+      "bytes": 736,
+      "sha256": "f35ac5f9ed5c8f77a61eb07b42320fd97bc203994b65220e3385ae27185e9369"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-selected353-staged-phase-adoption/root-actual28-code.json",
+      "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-selected353-staged-phase-adoption/root-actual28-code.json",
+      "bytes": 7943,
+      "sha256": "d3b70f260cd8b17bf764d502eed56127e7c6aec57b8643b7ea0312228e05faef"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/root-delivery-continuation-20261010.json",
+      "retained_path": "portable-root-evidence/root-delivery-continuation-20261010.json",
+      "bytes": 184189,
+      "sha256": "03e3f2b4d6b2ba2e96a72b3e05596968b2c5f5f1906313f4aef9ed4e46beee8d"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/root-sea318-scope-amendment-20261010/prepared-amendment.json",
+      "retained_path": "portable-root-evidence/root-sea318-scope-amendment-20261010/prepared-amendment.json",
+      "bytes": 2761,
+      "sha256": "0c012a6201f836c01f2cc32c658cd05bd1bd020a1b993db36d5bc2376454a09a"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/root-source007-changed-execution-review-20261010/native102-lifetime-actual-output-review.json",
+      "retained_path": "portable-root-evidence/root-source007-changed-execution-review-20261010/native102-lifetime-actual-output-review.json",
+      "bytes": 3581,
+      "sha256": "372b2e8ec9d8e18364f088979e27a4ab9d1d9fd62ab77e95f746c9e32ae9fb60"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/root-source007-changed-execution-review-20261010/native102-lifetime-approval-whole-get.json",
+      "retained_path": "portable-root-evidence/root-source007-changed-execution-review-20261010/native102-lifetime-approval-whole-get.json",
+      "bytes": 10043,
+      "sha256": "d80a5414e15db7fe8eec8ead4003ace432d2ae6f979dd366acedac10da5217c5"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/root-source007-changed-execution-review-20261010/native102-lifetime-publication-review.json",
+      "retained_path": "portable-root-evidence/root-source007-changed-execution-review-20261010/native102-lifetime-publication-review.json",
+      "bytes": 6721,
+      "sha256": "0346a68890500908c3a411e37ec7ef1b017f30c34cb44d89b3fde0c0b2b58a8b"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/root-source007-changed-execution-review-20261010/native102-mixed-pair-approval-whole-get.json",
+      "retained_path": "portable-root-evidence/root-source007-changed-execution-review-20261010/native102-mixed-pair-approval-whole-get.json",
+      "bytes": 9780,
+      "sha256": "0cf2ca54a0f568f09d47e029c46892781d93ac099c9f8cde70a1b22857cb6623"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-native355-additive-live-phase-20261010/HANDOFF.json",
+      "retained_path": "portable-root-evidence/runtime-integration-native355-additive-live-phase-20261010/HANDOFF.json",
+      "bytes": 7195,
+      "sha256": "525a6bbf05fdf98a368f22ec38c2b8e620b4f14fba400c6af111fa300928cb3f"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-native355-additive-live-phase-20261010/accounting.py",
+      "retained_path": "portable-root-evidence/runtime-integration-native355-additive-live-phase-20261010/accounting.py",
+      "bytes": 5841,
+      "sha256": "40bf8fbfba12ed889ce9b4f900e3da7fa7bae21b039fa7c593823dbd81abe609"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-native355-additive-live-phase-20261010/acquisition-spec-retained.json",
+      "retained_path": "portable-root-evidence/runtime-integration-native355-additive-live-phase-20261010/acquisition-spec-retained.json",
+      "bytes": 3013,
+      "sha256": "9f6df4f7d449174388354ff3c06fe6332139276dd2f2777ee67ce45233b24936"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-native355-additive-live-phase-20261010/completed-rebind-product-frames.patch",
+      "retained_path": "portable-root-evidence/runtime-integration-native355-additive-live-phase-20261010/completed-rebind-product-frames.patch",
+      "bytes": 7732,
+      "sha256": "791924d2af5bd70521f220c6037b279b7e26314d073c7e2eaaad4e3b23075a54"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-native355-additive-live-phase-20261010/conservative-accounting.json",
+      "retained_path": "portable-root-evidence/runtime-integration-native355-additive-live-phase-20261010/conservative-accounting.json",
+      "bytes": 1766,
+      "sha256": "26b8f7cd0b7ecf1bf44c0fdbe6d51716f0a785f52a23df3b103b66013a3c219e"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-native355-additive-live-phase-20261010/controls.log",
+      "retained_path": "portable-root-evidence/runtime-integration-native355-additive-live-phase-20261010/controls.log",
+      "bytes": 723,
+      "sha256": "23fe2d11ad1561463baf7f78d91bc16e8970d8c6a4d3c31447a292b5e1a7cd61"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-native355-additive-live-phase-20261010/controls.mjs",
+      "retained_path": "portable-root-evidence/runtime-integration-native355-additive-live-phase-20261010/controls.mjs",
+      "bytes": 5222,
+      "sha256": "e24bfa3944e509551be8db918a0293b8a4c142fa1f2e0ae69279b0dc8c86305f"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-native355-additive-live-phase-20261010/projected-actual-25-proof-metadata.json",
+      "retained_path": "portable-root-evidence/runtime-integration-native355-additive-live-phase-20261010/projected-actual-25-proof-metadata.json",
+      "bytes": 203076,
+      "sha256": "7199bca6a205179e38f2fb98c24206b65f97a78e5817df4563112667f09e5183"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-native355-additive-live-phase-20261010/root-static-staged-frame-review.json",
+      "retained_path": "portable-root-evidence/runtime-integration-native355-additive-live-phase-20261010/root-static-staged-frame-review.json",
+      "bytes": 4460,
+      "sha256": "8d677b70db4ba589c6333ca15350575d87712e60f9a4c839053251e397bd26b8"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/HANDOFF.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/HANDOFF.json",
+      "bytes": 21473,
+      "sha256": "4fe1ce65ec48538032e80e9b32d60d54e8670a888d7f08c2d65878b56e4dec20"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/exact30-routing.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/exact30-routing.json",
+      "bytes": 9413,
+      "sha256": "288766517519c36f9deeb0d5735f4b403c9e4843e978050daa1cf5949b8a1e95"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/freeze.py",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/freeze.py",
+      "bytes": 4994,
+      "sha256": "7570fef313b36b7b5a37151f23d312ab37661f77365c713b1d05713e69f6e59e"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-BRN-ADM1/current-target-owner-parent-joins.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-BRN-ADM1/current-target-owner-parent-joins.json",
+      "bytes": 5053,
+      "sha256": "66a6b20fd5ed2142a5731e82914436784aea273eead846716efb683ddaff0a36"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-BRN-ADM1/original-query-metadata.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-BRN-ADM1/original-query-metadata.json",
+      "bytes": 3025,
+      "sha256": "360f128bf432ee65835dc2bd7c41a9609a3efbde122299339e2395881fae615f"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-BRN-ADM1/prospective-accounting.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-BRN-ADM1/prospective-accounting.json",
+      "bytes": 1386,
+      "sha256": "4d2d6aad496a377775a7cfec60ff388084843a1aa6bdbdccb2364c2c23d1e3bc"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-BRN-ADM1/source-request-UNISSUED.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-BRN-ADM1/source-request-UNISSUED.json",
+      "bytes": 14980,
+      "sha256": "91a34ca1cb501b5619367ab30ba667e2774cb1ca39845f59e6f474702f9d81c0"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-BRN-ADM1/target-canonical-bindings.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-BRN-ADM1/target-canonical-bindings.json",
+      "bytes": 8189,
+      "sha256": "5eb677f1ec173e2c8fe13c7faa65bb2c4b3041b9aa973edbd1e2ce83aba0f3c8"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-IDN-ADM2/current-target-owner-parent-joins.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-IDN-ADM2/current-target-owner-parent-joins.json",
+      "bytes": 51505,
+      "sha256": "c260e10e10c4d318203ce5aceea32f446597dc5aa7e9c3726ffee8abb3d00276"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-IDN-ADM2/original-query-metadata.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-IDN-ADM2/original-query-metadata.json",
+      "bytes": 22731,
+      "sha256": "3d48652a1b19f794a5a6ba77bb625fd1a30b900c8e8b2ddfef8b268e1da7e31d"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-IDN-ADM2/prospective-accounting.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-IDN-ADM2/prospective-accounting.json",
+      "bytes": 1388,
+      "sha256": "3364b0f05233eb9d2469c2c936750d4ff9bf65f219bd70f8112c19ccbadf12fc"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-IDN-ADM2/source-request-UNISSUED.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-IDN-ADM2/source-request-UNISSUED.json",
+      "bytes": 29809,
+      "sha256": "5f7a8366e27ad3d26844f3e2c8beb2a5d25f52106755442899afe4b18425cf8d"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-IDN-ADM2/target-canonical-bindings.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-IDN-ADM2/target-canonical-bindings.json",
+      "bytes": 130003,
+      "sha256": "6ea04123f1e6f785dbedc6542ebe88c99c4b29984357fa724ca328ac60f892c1"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-IND-ADM2/current-target-owner-parent-joins.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-IND-ADM2/current-target-owner-parent-joins.json",
+      "bytes": 5181,
+      "sha256": "2d01c26caf5196ada4084071dbef0cf4bf99830cefa1493ade593df3d1026a8a"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-IND-ADM2/original-query-metadata.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-IND-ADM2/original-query-metadata.json",
+      "bytes": 3016,
+      "sha256": "217afec8e24d540a447de819ff8eac0715504685a05935f7c0650a12249bac06"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-IND-ADM2/prospective-accounting.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-IND-ADM2/prospective-accounting.json",
+      "bytes": 1386,
+      "sha256": "a898d8d0224be90e745c7b2d6456b1142d060913f4cc742096b47e80d591ff8f"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-IND-ADM2/source-request-UNISSUED.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-IND-ADM2/source-request-UNISSUED.json",
+      "bytes": 14990,
+      "sha256": "f16e8f5784ede059fd714a5e03b62873e39de2a290dc9da6d3dddd0d73ae79c7"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-IND-ADM2/target-canonical-bindings.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-IND-ADM2/target-canonical-bindings.json",
+      "bytes": 19457,
+      "sha256": "7b6bcb18d8a2be7cec241d0efa9f377a6f38ee34f57b73eee28475e0a4873f77"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-MMR-ADM3/current-target-owner-parent-joins.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-MMR-ADM3/current-target-owner-parent-joins.json",
+      "bytes": 20148,
+      "sha256": "17c9c4a81e9c263d57775cf11721ccfe4e23e9c919116e3bb91cc1b6fbfab0d2"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-MMR-ADM3/original-query-metadata.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-MMR-ADM3/original-query-metadata.json",
+      "bytes": 9078,
+      "sha256": "808f99b0e0b551808a24aae13f064bb8fbbfd772f07e558895d3ee0213ed2b63"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-MMR-ADM3/prospective-accounting.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-MMR-ADM3/prospective-accounting.json",
+      "bytes": 1386,
+      "sha256": "35bae57b4ba5bd77b7227d8dffdc706f79ba8c71633cc53fb6d9a1c13ed1b41e"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-MMR-ADM3/source-request-UNISSUED.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-MMR-ADM3/source-request-UNISSUED.json",
+      "bytes": 19274,
+      "sha256": "ec85168ba2107488aaa8630c4880dd1aaf45b4da61b9dda90d01725e201cd5d3"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-MMR-ADM3/target-canonical-bindings.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-MMR-ADM3/target-canonical-bindings.json",
+      "bytes": 65607,
+      "sha256": "17ef397b24019ce95363c504f5ba9325fb8893d3740b46787f21564891af205f"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-PHL-ADM3/current-target-owner-parent-joins.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-PHL-ADM3/current-target-owner-parent-joins.json",
+      "bytes": 46464,
+      "sha256": "3f187fc91b0106dc4482df5d45a7d038d14209e76a20ed10904737aa2fad5638"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-PHL-ADM3/original-query-metadata.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-PHL-ADM3/original-query-metadata.json",
+      "bytes": 21241,
+      "sha256": "e6063c2dc601b7eae3667f25aa864a02a94568e5fdd533d0210d8614a597de2e"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-PHL-ADM3/prospective-accounting.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-PHL-ADM3/prospective-accounting.json",
+      "bytes": 1387,
+      "sha256": "7a6373d9c0454c84316b7ccd11a1a7c57aec530f9a7964ba3db9bdbdee233c97"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-PHL-ADM3/source-request-UNISSUED.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-PHL-ADM3/source-request-UNISSUED.json",
+      "bytes": 27488,
+      "sha256": "126742d9cc573aeacb0e0540107fe1e280608a1eeb9fe1afb2fba1fdc784447a"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-PHL-ADM3/target-canonical-bindings.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-PHL-ADM3/target-canonical-bindings.json",
+      "bytes": 40476,
+      "sha256": "4d8a8fea0004e9d02641c0e9afbff23315039f5bf9106a276390a24a51664e82"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-THA-ADM2/current-target-owner-parent-joins.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-THA-ADM2/current-target-owner-parent-joins.json",
+      "bytes": 5059,
+      "sha256": "514419917c4c99e991d025e877bb6fad92a4926bcfbfadc872b595c4ac74d805"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-THA-ADM2/original-query-metadata.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-THA-ADM2/original-query-metadata.json",
+      "bytes": 3040,
+      "sha256": "46aad04b4b2e291cb8858d7755602f13d73811b21b22d9923c98e794a2999f23"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-THA-ADM2/prospective-accounting.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-THA-ADM2/prospective-accounting.json",
+      "bytes": 1386,
+      "sha256": "bdf561ca13f4b81e97a54eac6b6fb2fa9a941e8be74e3bad092735c774905492"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-THA-ADM2/source-request-UNISSUED.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-THA-ADM2/source-request-UNISSUED.json",
+      "bytes": 14988,
+      "sha256": "f2b44b3fd42f1cfd10d32af01d4bc76d69d512ec332a7980370e57dcc4672958"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-THA-ADM2/target-canonical-bindings.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-THA-ADM2/target-canonical-bindings.json",
+      "bytes": 4793,
+      "sha256": "bffd2054cc62dbe31eb08c907d4b6b3632f49ce5a2132c3118823e71ca06fae4"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-VNM-ADM2/current-target-owner-parent-joins.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-VNM-ADM2/current-target-owner-parent-joins.json",
+      "bytes": 11125,
+      "sha256": "d1c67f280d2a033a9d2a2a38024dbefddcf3fc4acaa7fad25534170bac63a9b2"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-VNM-ADM2/original-query-metadata.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-VNM-ADM2/original-query-metadata.json",
+      "bytes": 1515,
+      "sha256": "f2c7ad6b06d484f4268b6b465277f5f4b1ccdba51e2137ab4d2c3ff4afaba47c"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-VNM-ADM2/prospective-accounting.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-VNM-ADM2/prospective-accounting.json",
+      "bytes": 1386,
+      "sha256": "3f9ded3d22ec6868fc95bf19fe91fe6ead0f964de71184da610e2d1c0a09341f"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-VNM-ADM2/source-request-UNISSUED.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-VNM-ADM2/source-request-UNISSUED.json",
+      "bytes": 15160,
+      "sha256": "0ee4a53d40d2c87a55fc3a20de055995bc4a72ee4a71e7063d70cbf51b9f7104"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/gb-VNM-ADM2/target-canonical-bindings.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/gb-VNM-ADM2/target-canonical-bindings.json",
+      "bytes": 12003,
+      "sha256": "c51c3c4948d03ec85ae8e04e0d26562997867fb3f38b6a24fcc121e2c5c354fb"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/groups-index.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/groups-index.json",
+      "bytes": 14337,
+      "sha256": "854ca354dd9f30f85b936a8b3831bd2b402748ba62b8caff90460463e19a87e5"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/prepare-groups.py",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/prepare-groups.py",
+      "bytes": 11283,
+      "sha256": "8338b8100afc917a274e6dee66bfbef06fb089d246ecfc434f336df6c5260b1b"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/publication-filelist.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/publication-filelist.json",
+      "bytes": 6493,
+      "sha256": "1b1c2c9dff5dfad1001b639439e576068d7b1e5936e9eba9848bc3a99a8e5c8c"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/query-metadata-whole-origin-custody.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/query-metadata-whole-origin-custody.json",
+      "bytes": 24254,
+      "sha256": "c475a7074ab4a547f544dcc142f471f736961089ecf82711c64f3153efb04f8e"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/root-grouped-request-review.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/root-grouped-request-review.json",
+      "bytes": 900,
+      "sha256": "bb4b57e782928069ea58a7ccfd96c124515a4137c36f8ac66bfea2e0b2f4c625"
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source-groups-20261010/whole-file-pins.json",
+      "retained_path": "portable-root-evidence/runtime-integration-sea318-source-groups-20261010/whole-file-pins.json",
+      "bytes": 9269,
+      "sha256": "c0b9a2826a4929a9056fcd2536a2e70df14bdf031987f9f96e0c4b9f989d2505"
+    }
+  ],
+  "total_bytes": 3734300,
+  "excluded": [
+    "runtime/dependencies",
+    "credentials",
+    "unrelated worker work",
+    "transient downloads/banks",
+    "speculative12MB acquired graph"
+  ],
+  "claim": "Existing holder releases under own identity; fresh cloud identity refreshes readiness/claim separately.",
+  "deduplicated_author_evidence": {
+    "commit": "2554ff0e38c1379f9a0650734715690f79e1f14f",
+    "repository_directory": "coordination/engineering/melanesia363-additive-delivery-20261010/cloud-transition-20261010/interrupted86a",
+    "files_retained_once_under_author": [
+      {
+        "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/interrupted-outcome.json",
+        "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/interrupted-outcome.json",
+        "bytes": 2170,
+        "sha256": "a9980d35f17f71d6fd4d2a67e9758666a629e32ec9ff77df56a25097f5d9dcd5"
+      },
+      {
+        "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/issued.json",
+        "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/issued.json",
+        "bytes": 26669,
+        "sha256": "a35c88282b733a216e6d07916e3e3f8e25aaeda3e0ef5ef7b52be950b6c35d6a"
+      },
+      {
+        "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/plan.json",
+        "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/plan.json",
+        "bytes": 11424,
+        "sha256": "e0453331c5176bc9fdbeb67dbd2602bd9a9b16a7467a97d16067f156fa80a8be"
+      },
+      {
+        "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/retained-incomplete-child_products/facts.json",
+        "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/retained-incomplete-child_products/facts.json",
+        "bytes": 5494,
+        "sha256": "bfc74c8e1d831b8acf088f4838adeca28266a8770f31bfd6764e5e3ce9f0fdab"
+      },
+      {
+        "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/retained-incomplete-child_products/publication.json",
+        "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/retained-incomplete-child_products/publication.json",
+        "bytes": 475,
+        "sha256": "2d0aaeb3768d360517ff2c2ab2ae5dc607ef9f715bad0b12535f82040079005d"
+      },
+      {
+        "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/retained-incomplete-child_products/request.json",
+        "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/retained-incomplete-child_products/request.json",
+        "bytes": 1380831,
+        "sha256": "5cc60763760cd63023ecbbae49fa8afd505e7a90d327e9fc7df5e95acb249b5e"
+      },
+      {
+        "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/retained-incomplete-child_products/result.json",
+        "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/retained-incomplete-child_products/result.json",
+        "bytes": 2186654,
+        "sha256": "dc1d44220f3a9211557117d6d58c3758421cc469f363b4cc49ce733f94fd3a5d"
+      },
+      {
+        "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/retained-incomplete-operating/samples.jsonl",
+        "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/retained-incomplete-operating/samples.jsonl",
+        "bytes": 422964,
+        "sha256": "f5a1f68d9923fe1b1553bccd833c4cbc73b484241f4b958ae9a22eb2be9495ae"
+      },
+      {
+        "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/retained-incomplete-operating/stderr.log",
+        "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/retained-incomplete-operating/stderr.log",
+        "bytes": 777,
+        "sha256": "3e351b09a6d288b56fa9e838fba97b6929a90955ecef524154ab1a72649b7083"
+      },
+      {
+        "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/retained-incomplete-operating/stdout.json",
+        "retained_path": "portable-root-evidence/native-1647-363-execution-operands-20261010/native102-current355-qualification-86a38809/retained-incomplete-operating/stdout.json",
+        "bytes": 376,
+        "sha256": "5b9d1ce48c08ac7758b1821fa1603f7d5ecf01e556600944c8f9d646ba8c3d5e"
+      }
+    ]
+  }
+}

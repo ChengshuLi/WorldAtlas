@@ -1,0 +1,105 @@
+[
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:b971f9d191cf018cfbaa158f4f32be07f9c8bbbd3ae248ddc1261fba50e8af94"
+    ],
+    "current_full_feature_sha256": "71e202d5f930e002160a22e4bd7db5594166a3b208986281fe84f2d52b776aed",
+    "current_geometry_sha256": "bab6df5f74f43e813b623fb5f202714e79fcf4a0bf623082a5c2bbe43169d761",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:andaman-and-nicobar-islands:e41aa7fa22ac",
+        "level": "province",
+        "metadata": {
+          "basis": "Geographic portion of a source administrative unit; not a new government division",
+          "child_count": 2,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Geographic portion of a source administrative unit; not a new government division; exact current parent framework:area:andaman-is:52dd6013bd5e. This declaration alone is not semantic approval.",
+                "title": "gb:IND:ADM1",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:IND:ADM2; role District; reference vintage 2021; license Open Data Commons Open Database License 1.0. Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "India",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IND/ADM2/geoBoundaries-IND-ADM2.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 2 locations, roles {'District': 2}, source vintages {'2021': 2}. Current declared purpose is Geographic portion of a source administrative unit; not a new government division. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "Source-corresponding named grouping requires independent local/functional purpose and footprint review; children are not bulk approved."
+            ]
+          },
+          "source": "gb:IND:ADM1",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Andaman and Nicobar Islands",
+        "parent_id": "framework:area:andaman-is:52dd6013bd5e"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/1082",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:andaman-and-nicobar-islands:e41aa7fa22ac",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2021",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/93",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 23282,
+    "owner_row": {
+      "bounds": [
+        198552.94940166667,
+        121027.44013889723,
+        199737.21148277776,
+        122226.7428168537
+      ],
+      "id": "gb:IND:ADM2:76128533B28397307540277",
+      "index": 23282,
+      "province_id": "framework:province:andaman-and-nicobar-islands:e41aa7fa22ac",
+      "province_index": 584
+    },
+    "parent_index": 584,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:IND:ADM2:76128533B28397307540277",
+      "original_feature_sha256": "71e202d5f930e002160a22e4bd7db5594166a3b208986281fe84f2d52b776aed",
+      "original_parent_id": "framework:province:andaman-and-nicobar-islands:e41aa7fa22ac",
+      "reference_year": "2021"
+    },
+    "source_containing_pin": {
+      "bytes": 5133018,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "fd7d6f9f564a4b9b0ae7a56a2d7eb27e920017d8",
+      "mode": "100644",
+      "path": "data/geography/part-11.json",
+      "sha256": "d1b2fb15c9427497de740eb33a529ef382b58cb319028f2aa38f5878de4c9b02"
+    },
+    "target_id": "gb:IND:ADM2:76128533B28397307540277"
+  }
+]

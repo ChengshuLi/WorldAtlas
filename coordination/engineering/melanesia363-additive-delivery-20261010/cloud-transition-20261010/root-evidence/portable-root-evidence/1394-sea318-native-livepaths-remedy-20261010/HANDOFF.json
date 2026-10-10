@@ -1,0 +1,142 @@
+{
+  "kind": "SEA318-native-live-dependency-frozen-handoff",
+  "base_sha256": "19c453ad348c7475675c43954bebf0ae330fc5abb8164170750ac34694de5b11",
+  "source_parse_order_unchanged": true,
+  "operators_executed": false,
+  "actual_native_admission": false,
+  "mechanism": "Keep every selected original_record full physical body and shared copied query/binding bodies live; charge all full parsed closures in addition to raw costs. Authenticate query bodies initially then preserve typed descriptors after eligible raw release; ordinary lazy reopen remains forbidden.",
+  "group_source_descriptor_upper_costs": [
+    {
+      "group": "gb-BRN-ADM1",
+      "cases": 1,
+      "protected_whole_paths": [
+        "coordination/engineering/southeast-asia318-source-rule-delivery-20261010/groups/gb-BRN-ADM1/original-query-metadata.json",
+        "coordination/engineering/southeast-asia318-source-rule-delivery-20261010/groups/gb-BRN-ADM1/target-canonical-bindings.json",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_03503f1fa71e2bf719b13d543e04fe99e56235693c1d1e189df86aa3018406de.json.gz"
+      ],
+      "raw_body_bytes": 39368,
+      "additional_full_parsed_closure_upper_bytes": 39368
+    },
+    {
+      "group": "gb-PHL-ADM3",
+      "cases": 9,
+      "protected_whole_paths": [
+        "coordination/engineering/southeast-asia318-source-rule-delivery-20261010/groups/gb-PHL-ADM3/original-query-metadata.json",
+        "coordination/engineering/southeast-asia318-source-rule-delivery-20261010/groups/gb-PHL-ADM3/target-canonical-bindings.json",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_1556c3bb1c20fc718d0e5d5d8dce2ce180b191fe63eaf492312db22550e8e737.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_307e87aee838533082007e29254811d809f22152127a05815195a9d98ad327da.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_47f533a94718204a72389e0ee39b538ff230f219ec619de6aadfa8dd0997616f.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_5333b1363dbb396832c14da44a54e59bddf037cb92378e11d17efcc931220ce2.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_6c21d4063b8f6febad1769f1e7f058e668ab8c018d93b770f560818e8db5af22.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_c6e5c097e7fec0a79402758c4b8787151660e2312015f92403b1d857bdae9ca8.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_e7830362e503492dae1922eb91157c0e3cc7a42043dc91eff29878eeb85aa902.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_ec9be2d5c5db2b304f0e71418b2b328ae508fed448cef29e6737c3c1121dc1ef.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_ed6ee8f77903a084a21fb78781debf60115e7d9ce616926fb0e3cf9dbacfda34.json.gz"
+      ],
+      "raw_body_bytes": 335225,
+      "additional_full_parsed_closure_upper_bytes": 335225
+    },
+    {
+      "group": "gb-IDN-ADM2",
+      "cases": 12,
+      "protected_whole_paths": [
+        "coordination/engineering/southeast-asia318-source-rule-delivery-20261010/groups/gb-IDN-ADM2/original-query-metadata.json",
+        "coordination/engineering/southeast-asia318-source-rule-delivery-20261010/groups/gb-IDN-ADM2/target-canonical-bindings.json",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_2a6f76f2cc30dc3b93f08d59750b9519adc26ae7bd22a328683f5a048c2b4d8f.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_2b4f4da5787b5d718443cca535274ed74ae62ff08f7b410c46277ef36705e0ff.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_328987ce3f5504e7d598e7a94928a309cddbe9e00c774cd488dfdfb57bb585fe.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_5e2faf09bde718e22120c26bc79f98ee620f8e47ccb3e93b96345f80cbc548bf.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_849377ccf645d794deaa1f43fd91ab9bfe9d9464c1c1cb31b19cf53b990291c4.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_9094128c18d3075578719177328356ff5147b1abbe17e09626010f91b79aeea8.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_98ba8cabf21ed4bdcfb0761cb6aabac54f7fd153a60f656a06587e2125cc8f36.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_cd6c8035a1a2e8c52ab5b851b7ba26eb366acafd2babbbd82e149d7ea7e5c7e5.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_dd50282d0498fe710bf1ecaf6ca06f22d97391356cfe8c17fb9d5c10b25d874e.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_dd8aab5edb2689e1b07b799505f2c052799dd3d1f3770dd2d8ac668e0dfdffaf.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_e4abb61a130c9be6d764a0a058df31d6acd4f427624c8b3d5af9bdb709b8badf.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_fa8aa714b724a4eef86de954326dcfd9cb04db5fdb0695a4e76b7e90b2f29966.json.gz"
+      ],
+      "raw_body_bytes": 861049,
+      "additional_full_parsed_closure_upper_bytes": 861049
+    },
+    {
+      "group": "gb-MMR-ADM3",
+      "cases": 4,
+      "protected_whole_paths": [
+        "coordination/engineering/southeast-asia318-source-rule-delivery-20261010/groups/gb-MMR-ADM3/original-query-metadata.json",
+        "coordination/engineering/southeast-asia318-source-rule-delivery-20261010/groups/gb-MMR-ADM3/target-canonical-bindings.json",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_6c46d18235a22c15683039d3346b55f1a7625a3ce49ead2111413d91d75362d2.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_9f5d178736a1a6549f7660e6d048e61923c33865d08f91445a5237ce20d4e29b.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_ae27cc3d8e51ae163f2052f4455cb072bca1960607d7de8fb8cc087e8257f79b.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_e499668746ebf62edfaef15068a437158e322c29a711aef7598f7e78a99148fb.json.gz"
+      ],
+      "raw_body_bytes": 377037,
+      "additional_full_parsed_closure_upper_bytes": 377037
+    },
+    {
+      "group": "gb-VNM-ADM2",
+      "cases": 2,
+      "protected_whole_paths": [
+        "coordination/engineering/southeast-asia318-source-rule-delivery-20261010/groups/gb-VNM-ADM2/original-query-metadata.json",
+        "coordination/engineering/southeast-asia318-source-rule-delivery-20261010/groups/gb-VNM-ADM2/target-canonical-bindings.json",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_9c46373452264bbd5441d6a6349cab667177ff6ecfda374df366433502da9c61.json.gz",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_f4516260fac3e4331de3658dde9bff6614d897c4bac651a962f80196b6ca94bc.json.gz"
+      ],
+      "raw_body_bytes": 81261,
+      "additional_full_parsed_closure_upper_bytes": 81261
+    },
+    {
+      "group": "gb-THA-ADM2",
+      "cases": 1,
+      "protected_whole_paths": [
+        "coordination/engineering/southeast-asia318-source-rule-delivery-20261010/groups/gb-THA-ADM2/original-query-metadata.json",
+        "coordination/engineering/southeast-asia318-source-rule-delivery-20261010/groups/gb-THA-ADM2/target-canonical-bindings.json",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_b90682fb902bb719879e69d1a161080cb46a7cd041cb3ad0c9bd963b5e1f4900.json.gz"
+      ],
+      "raw_body_bytes": 38118,
+      "additional_full_parsed_closure_upper_bytes": 38118
+    },
+    {
+      "group": "gb-IND-ADM2",
+      "cases": 1,
+      "protected_whole_paths": [
+        "coordination/engineering/southeast-asia318-source-rule-delivery-20261010/groups/gb-IND-ADM2/original-query-metadata.json",
+        "coordination/engineering/southeast-asia318-source-rule-delivery-20261010/groups/gb-IND-ADM2/target-canonical-bindings.json",
+        "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_b971f9d191cf018cfbaa158f4f32be07f9c8bbbd3ae248ddc1261fba50e8af94.json.gz"
+      ],
+      "raw_body_bytes": 97463,
+      "additional_full_parsed_closure_upper_bytes": 97463
+    }
+  ],
+  "limits": [
+    "No native request/current355/runtime admission performed; author must compute complete native stage cost with final frozen request/code.",
+    "Full physical graph charges sum all selected physical files conservatively, rather than only maximum simultaneous case.",
+    "Untouched SOURCE groups not rerun."
+  ],
+  "artifacts": [
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-native-livepaths-remedy-20261010/caller-proposed.mjs",
+      "bytes": 203505,
+      "sha256": "69fa0c82e6f1da88eebd02a0a74350de718e666c416a251da2fd564c971dd1f0"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-native-livepaths-remedy-20261010/native-livepaths.patch",
+      "bytes": 5747,
+      "sha256": "eeaaf3ecc894a38c72acc05fe9ba2390c794d8a9961dce6a7e3b43946a54079b"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-native-livepaths-remedy-20261010/combined-lifetime.patch",
+      "bytes": 30017,
+      "sha256": "295388d0c9ccf7029a9bef38c80ed29a25934a27c7a40579ce51d6c00064d4af"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-native-livepaths-remedy-20261010/controls.mjs",
+      "bytes": 5474,
+      "sha256": "82926e7dc841a0e61c535e38f09f05b0862809211af80923fa93482db9a43b72"
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/1394-sea318-native-livepaths-remedy-20261010/focused-controls.json",
+      "bytes": 833,
+      "sha256": "424072d38eb5540d9b0d49122c1dbfb66636463f08c95111787611ce7523f279"
+    }
+  ]
+}

@@ -1,0 +1,212 @@
+[
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:9c46373452264bbd5441d6a6349cab667177ff6ecfda374df366433502da9c61"
+    ],
+    "current_full_feature_sha256": "392a1c0d9b407ab23babedc640f2525b7c9d0c14ee848fd796746fc547290407",
+    "current_geometry_sha256": "43a429bd5da7a5a37d6d7c967cec2dbc154f80d95571ff6298b52efda9d8677b",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:quang-ninh:ee47d1dc8422",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 11,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:vietnam:52cf854a517c. This declaration alone is not semantic approval.",
+                "title": "gb:VNM:ADM1",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:VNM:ADM2; role District; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Viet Nam",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 11 locations, roles {'District': 11}, source vintages {'2020': 11}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "members have source parent overlap below 0.8; full-parent validation required",
+              "Exact members requiring stronger parent correspondence: gb:VNM:ADM2:81297802B5641238333098, gb:VNM:ADM2:81297802B69562638547328, gb:VNM:ADM2:81297802B1435628045096, gb:VNM:ADM2:81297802B42641748496229",
+              "Fresh independent pinned-parent diagnostic: Mong Cai (gb:VNM:ADM2:81297802B69562638547328), Uong Bi (gb:VNM:ADM2:81297802B42641748496229) representative point(s) outside the named source parent. Full footprint/source-vintage comparison is required; do not reparent from a point alone."
+            ]
+          },
+          "source": "gb:VNM:ADM1",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Quảng Ninh",
+        "parent_id": "framework:area:vietnam:52cf854a517c"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/4356",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:quang-ninh:ee47d1dc8422",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2020",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/1424",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 48459,
+    "owner_row": {
+      "bounds": [
+        209381.64320777776,
+        114934.75045431686,
+        209600.77028944445,
+        115198.86168753594
+      ],
+      "id": "gb:VNM:ADM2:81297802B53592665760601",
+      "index": 48459,
+      "province_id": "framework:province:quang-ninh:ee47d1dc8422",
+      "province_index": 3858
+    },
+    "parent_index": 3858,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:VNM:ADM2:81297802B53592665760601",
+      "original_feature_sha256": "392a1c0d9b407ab23babedc640f2525b7c9d0c14ee848fd796746fc547290407",
+      "original_parent_id": "framework:province:quang-ninh:ee47d1dc8422",
+      "reference_year": "2020"
+    },
+    "source_containing_pin": {
+      "bytes": 4863162,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "a6a359c8c566462b280a461b4a5e1591e1f486c4",
+      "mode": "100644",
+      "path": "data/geography/part-27.json",
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+    },
+    "target_id": "gb:VNM:ADM2:81297802B53592665760601"
+  },
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:f4516260fac3e4331de3658dde9bff6614d897c4bac651a962f80196b6ca94bc"
+    ],
+    "current_full_feature_sha256": "ae3b47c6e47c9992953cf608e350d2e2ec07da89fb7d03c299ac0d2faade5b5b",
+    "current_geometry_sha256": "68d1399c109f6dcf97f5c7931c8ebe52acd80785181b82ec8f07c14b70aac33a",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:quang-ninh:ee47d1dc8422",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 11,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:vietnam:52cf854a517c. This declaration alone is not semantic approval.",
+                "title": "gb:VNM:ADM1",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:VNM:ADM2; role District; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Viet Nam",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VNM/ADM2/geoBoundaries-VNM-ADM2.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 11 locations, roles {'District': 11}, source vintages {'2020': 11}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "members have source parent overlap below 0.8; full-parent validation required",
+              "Exact members requiring stronger parent correspondence: gb:VNM:ADM2:81297802B5641238333098, gb:VNM:ADM2:81297802B69562638547328, gb:VNM:ADM2:81297802B1435628045096, gb:VNM:ADM2:81297802B42641748496229",
+              "Fresh independent pinned-parent diagnostic: Mong Cai (gb:VNM:ADM2:81297802B69562638547328), Uong Bi (gb:VNM:ADM2:81297802B42641748496229) representative point(s) outside the named source parent. Full footprint/source-vintage comparison is required; do not reparent from a point alone."
+            ]
+          },
+          "source": "gb:VNM:ADM1",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Quảng Ninh",
+        "parent_id": "framework:area:vietnam:52cf854a517c"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/4356",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:quang-ninh:ee47d1dc8422",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2020",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/1352",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 48696,
+    "owner_row": {
+      "bounds": [
+        209346.54209333335,
+        115046.18222792004,
+        209483.37818055556,
+        115251.53270709341
+      ],
+      "id": "gb:VNM:ADM2:81297802B85934029741785",
+      "index": 48696,
+      "province_id": "framework:province:quang-ninh:ee47d1dc8422",
+      "province_index": 3858
+    },
+    "parent_index": 3858,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:VNM:ADM2:81297802B85934029741785",
+      "original_feature_sha256": "ae3b47c6e47c9992953cf608e350d2e2ec07da89fb7d03c299ac0d2faade5b5b",
+      "original_parent_id": "framework:province:quang-ninh:ee47d1dc8422",
+      "reference_year": "2020"
+    },
+    "source_containing_pin": {
+      "bytes": 4863162,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "a6a359c8c566462b280a461b4a5e1591e1f486c4",
+      "mode": "100644",
+      "path": "data/geography/part-27.json",
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+    },
+    "target_id": "gb:VNM:ADM2:81297802B85934029741785"
+  }
+]

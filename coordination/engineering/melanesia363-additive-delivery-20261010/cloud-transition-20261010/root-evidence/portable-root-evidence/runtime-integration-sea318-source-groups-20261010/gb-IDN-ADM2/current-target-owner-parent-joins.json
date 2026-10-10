@@ -1,0 +1,1038 @@
+[
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:2a6f76f2cc30dc3b93f08d59750b9519adc26ae7bd22a328683f5a048c2b4d8f"
+    ],
+    "current_full_feature_sha256": "35e803a3c994fb335575bcea28b5aa14af229680e37c77aef7eb25150666cccf",
+    "current_geometry_sha256": "bac8ecc1f2308e490f38b1e63bc3a2146b78a42ca0307158f258458fccd5a661",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:north-kalimantan:c38f2f263afa",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 5,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:borneo:f3cde4b889a9. This declaration alone is not semantic approval.",
+                "title": "gb:IDN:ADM1",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:IDN:ADM2; role regency, city; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Indonesia",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 5 locations, roles {'regency, city': 5}, source vintages {'2020': 5}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "parent canonical role unknown or unavailable; no ADM-number tier inference"
+            ]
+          },
+          "source": "gb:IDN:ADM1",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "North Kalimantan",
+        "parent_id": "framework:area:borneo:f3cde4b889a9"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/3834",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:north-kalimantan:c38f2f263afa",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2020",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/1028",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 22698,
+    "owner_row": {
+      "bounds": [
+        215550.918955,
+        128466.32632297509,
+        217004.92072055556,
+        129551.46112195315
+      ],
+      "id": "gb:IDN:ADM2:22746128B10941975158621",
+      "index": 22698,
+      "province_id": "framework:province:north-kalimantan:c38f2f263afa",
+      "province_index": 3336
+    },
+    "parent_index": 3336,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:IDN:ADM2:22746128B10941975158621",
+      "original_feature_sha256": "35e803a3c994fb335575bcea28b5aa14af229680e37c77aef7eb25150666cccf",
+      "original_parent_id": "framework:province:north-kalimantan:c38f2f263afa",
+      "reference_year": "2020"
+    },
+    "source_containing_pin": {
+      "bytes": 5144571,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+      "mode": "100644",
+      "path": "data/geography/part-10.json",
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+    },
+    "target_id": "gb:IDN:ADM2:22746128B10941975158621"
+  },
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:2b4f4da5787b5d718443cca535274ed74ae62ff08f7b410c46277ef36705e0ff"
+    ],
+    "current_full_feature_sha256": "825716d82fdd40bd0f5c3faa5d1bd6c55b886e775cb18408af0c1b643737cc81",
+    "current_geometry_sha256": "01e2ff57655b06f306ad06b5136596a1b76c3b5182d5ea77ec7f8daef3e97045",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:southeast-sulawesi:c8e16d08d440",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 17,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:sulawesi:eda7a91483f6. This declaration alone is not semantic approval.",
+                "title": "gb:IDN:ADM1",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:IDN:ADM2; role regency, city; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Indonesia",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 17 locations, roles {'regency, city': 17}, source vintages {'2020': 17}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "parent canonical role unknown or unavailable; no ADM-number tier inference"
+            ]
+          },
+          "source": "gb:IDN:ADM1",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Southeast Sulawesi",
+        "parent_id": "framework:area:sulawesi:eda7a91483f6"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/4854",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:southeast-sulawesi:c8e16d08d440",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2020",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/1118",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 23028,
+    "owner_row": {
+      "bounds": [
+        219276.73475833336,
+        133714.92398377918,
+        219786.28350888888,
+        134430.36650355713
+      ],
+      "id": "gb:IDN:ADM2:22746128B69202393010200",
+      "index": 23028,
+      "province_id": "framework:province:southeast-sulawesi:c8e16d08d440",
+      "province_index": 4356
+    },
+    "parent_index": 4356,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:IDN:ADM2:22746128B69202393010200",
+      "original_feature_sha256": "825716d82fdd40bd0f5c3faa5d1bd6c55b886e775cb18408af0c1b643737cc81",
+      "original_parent_id": "framework:province:southeast-sulawesi:c8e16d08d440",
+      "reference_year": "2020"
+    },
+    "source_containing_pin": {
+      "bytes": 5144571,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+      "mode": "100644",
+      "path": "data/geography/part-10.json",
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+    },
+    "target_id": "gb:IDN:ADM2:22746128B69202393010200"
+  },
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:328987ce3f5504e7d598e7a94928a309cddbe9e00c774cd488dfdfb57bb585fe"
+    ],
+    "current_full_feature_sha256": "d243b5573470ecdfda165db86c0752f142e0d48c881abfec1ae50c5c1cc41264",
+    "current_geometry_sha256": "db7c95a6f7620d21d9ad573928c7af0a9c1d15a9627f1e2659c47c65928b85f7",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:west-java:d7a3b34096dc",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 28,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "More than 25 locations: review intermediate geographic groupings",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:jawa:63a0ff1869bd. This declaration alone is not semantic approval.",
+                "title": "gb:IDN:ADM1",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:IDN:ADM2; role regency, city; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Indonesia",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 28 locations, roles {'regency, city': 28}, source vintages {'2020': 28}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "parent canonical role unknown or unavailable; no ADM-number tier inference"
+            ]
+          },
+          "source": "gb:IDN:ADM1",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "West Java",
+        "parent_id": "framework:area:jawa:63a0ff1869bd"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/5402",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:west-java:d7a3b34096dc",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2020",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/1332",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 22971,
+    "owner_row": {
+      "bounds": [
+        209961.61265888892,
+        136531.00352636774,
+        210316.41064555556,
+        136796.1795836478
+      ],
+      "id": "gb:IDN:ADM2:22746128B59857718615465",
+      "index": 22971,
+      "province_id": "framework:province:west-java:d7a3b34096dc",
+      "province_index": 4904
+    },
+    "parent_index": 4904,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:IDN:ADM2:22746128B59857718615465",
+      "original_feature_sha256": "d243b5573470ecdfda165db86c0752f142e0d48c881abfec1ae50c5c1cc41264",
+      "original_parent_id": "framework:province:west-java:d7a3b34096dc",
+      "reference_year": "2020"
+    },
+    "source_containing_pin": {
+      "bytes": 5144571,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+      "mode": "100644",
+      "path": "data/geography/part-10.json",
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+    },
+    "target_id": "gb:IDN:ADM2:22746128B59857718615465"
+  },
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:5e2faf09bde718e22120c26bc79f98ee620f8e47ccb3e93b96345f80cbc548bf",
+      "physical-component:9094128c18d3075578719177328356ff5147b1abbe17e09626010f91b79aeea8"
+    ],
+    "current_full_feature_sha256": "14331647d969e72a8491d6d346451e0f73aa3290b387c168e4c7a9ea277385df",
+    "current_geometry_sha256": "6e4e51f3b4fdd0d2821ff88253c801637a0096e220bbdf2471ae5d1f5aea6662",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:west-sulawesi:34037ea50bda",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 6,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:sulawesi:eda7a91483f6. This declaration alone is not semantic approval.",
+                "title": "gb:IDN:ADM1",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:IDN:ADM2; role regency, city; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Indonesia",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 6 locations, roles {'regency, city': 6}, source vintages {'2020': 6}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "parent canonical role unknown or unavailable; no ADM-number tier inference"
+            ]
+          },
+          "source": "gb:IDN:ADM1",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "West Sulawesi",
+        "parent_id": "framework:area:sulawesi:eda7a91483f6"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/5415",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:west-sulawesi:34037ea50bda",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2020",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/1275",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 22951,
+    "owner_row": {
+      "bounds": [
+        217950.39327,
+        131703.0454092972,
+        218377.94232166666,
+        132421.44126072037
+      ],
+      "id": "gb:IDN:ADM2:22746128B5634485200629",
+      "index": 22951,
+      "province_id": "framework:province:west-sulawesi:34037ea50bda",
+      "province_index": 4917
+    },
+    "parent_index": 4917,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:IDN:ADM2:22746128B5634485200629",
+      "original_feature_sha256": "14331647d969e72a8491d6d346451e0f73aa3290b387c168e4c7a9ea277385df",
+      "original_parent_id": "framework:province:west-sulawesi:34037ea50bda",
+      "reference_year": "2020"
+    },
+    "source_containing_pin": {
+      "bytes": 5144571,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+      "mode": "100644",
+      "path": "data/geography/part-10.json",
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+    },
+    "target_id": "gb:IDN:ADM2:22746128B5634485200629"
+  },
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:849377ccf645d794deaa1f43fd91ab9bfe9d9464c1c1cb31b19cf53b990291c4"
+    ],
+    "current_full_feature_sha256": "eb8e13c45a684e708ded6cb1899dc865faeb6872d2647985bec2f606b68e7e5b",
+    "current_geometry_sha256": "4471f69c6bbde288edd131e4324ff69aade7a23f0ba5abb95329c7549ee7e209",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:maluku:f39da568968f",
+        "level": "province",
+        "metadata": {
+          "basis": "Geographic portion of a source administrative unit; not a new government division",
+          "child_count": 4,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Geographic portion of a source administrative unit; not a new government division; exact current parent framework:area:lesser-sunda-is:21e4a49d55fc. This declaration alone is not semantic approval.",
+                "title": "gb:IDN:ADM1",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:IDN:ADM2; role regency, city; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Indonesia",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.geojson"
+              }
+            ],
+            "rationale": "Actual members include Aru, Kota Tual, Maluku Barat Daya, Maluku Tenggara and Maluku Tenggara Barat. These were assigned to Lesser Sunda botanical geography; inspect the whole Moluccan/southeastern-island convention and source memberships before assigning one coherent named province.",
+            "remaining_reasons": [
+              "Actual members include Aru, Kota Tual, Maluku Barat Daya, Maluku Tenggara and Maluku Tenggara Barat. These were assigned to Lesser Sunda botanical geography; inspect the whole Moluccan/southeastern-island convention and source memberships before assigning one coherent named province.",
+              "No independently sourced full-footprint correction is yet approved."
+            ]
+          },
+          "source": "gb:IDN:ADM1",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Maluku",
+        "parent_id": "framework:area:lesser-sunda-is:21e4a49d55fc"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/3354",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:maluku:f39da568968f",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2020",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/1268",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 22996,
+    "owner_row": {
+      "bounds": [
+        227526.00642000002,
+        134934.87159169326,
+        228077.35608277775,
+        135483.87402695077
+      ],
+      "id": "gb:IDN:ADM2:22746128B6545713511337",
+      "index": 22996,
+      "province_id": "framework:province:maluku:f39da568968f",
+      "province_index": 2856
+    },
+    "parent_index": 2856,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:IDN:ADM2:22746128B6545713511337",
+      "original_feature_sha256": "eb8e13c45a684e708ded6cb1899dc865faeb6872d2647985bec2f606b68e7e5b",
+      "original_parent_id": "framework:province:maluku:f39da568968f",
+      "reference_year": "2020"
+    },
+    "source_containing_pin": {
+      "bytes": 5144571,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+      "mode": "100644",
+      "path": "data/geography/part-10.json",
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+    },
+    "target_id": "gb:IDN:ADM2:22746128B6545713511337"
+  },
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:98ba8cabf21ed4bdcfb0761cb6aabac54f7fd153a60f656a06587e2125cc8f36"
+    ],
+    "current_full_feature_sha256": "e2d89008c49e53e4e610445020048b0cba4a044eb91ecce5671f34cf6b8b61cd",
+    "current_geometry_sha256": "46bd0c5f72ff57376838d91c7fe2f517aa01c9468891f9b7ae448c0317d183d8",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:maluku:f39da568968f",
+        "level": "province",
+        "metadata": {
+          "basis": "Geographic portion of a source administrative unit; not a new government division",
+          "child_count": 4,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Geographic portion of a source administrative unit; not a new government division; exact current parent framework:area:lesser-sunda-is:21e4a49d55fc. This declaration alone is not semantic approval.",
+                "title": "gb:IDN:ADM1",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:IDN:ADM2; role regency, city; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Indonesia",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.geojson"
+              }
+            ],
+            "rationale": "Actual members include Aru, Kota Tual, Maluku Barat Daya, Maluku Tenggara and Maluku Tenggara Barat. These were assigned to Lesser Sunda botanical geography; inspect the whole Moluccan/southeastern-island convention and source memberships before assigning one coherent named province.",
+            "remaining_reasons": [
+              "Actual members include Aru, Kota Tual, Maluku Barat Daya, Maluku Tenggara and Maluku Tenggara Barat. These were assigned to Lesser Sunda botanical geography; inspect the whole Moluccan/southeastern-island convention and source memberships before assigning one coherent named province.",
+              "No independently sourced full-footprint correction is yet approved."
+            ]
+          },
+          "source": "gb:IDN:ADM1",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Maluku",
+        "parent_id": "framework:area:lesser-sunda-is:21e4a49d55fc"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/3354",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:maluku:f39da568968f",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2020",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/1217",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 23094,
+    "owner_row": {
+      "bounds": [
+        227181.69507333334,
+        134951.839094802,
+        227804.99473833333,
+        135290.15578536797
+      ],
+      "id": "gb:IDN:ADM2:22746128B79752231805890",
+      "index": 23094,
+      "province_id": "framework:province:maluku:f39da568968f",
+      "province_index": 2856
+    },
+    "parent_index": 2856,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:IDN:ADM2:22746128B79752231805890",
+      "original_feature_sha256": "e2d89008c49e53e4e610445020048b0cba4a044eb91ecce5671f34cf6b8b61cd",
+      "original_parent_id": "framework:province:maluku:f39da568968f",
+      "reference_year": "2020"
+    },
+    "source_containing_pin": {
+      "bytes": 5144571,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+      "mode": "100644",
+      "path": "data/geography/part-10.json",
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+    },
+    "target_id": "gb:IDN:ADM2:22746128B79752231805890"
+  },
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:cd6c8035a1a2e8c52ab5b851b7ba26eb366acafd2babbbd82e149d7ea7e5c7e5",
+      "physical-component:dd50282d0498fe710bf1ecaf6ca06f22d97391356cfe8c17fb9d5c10b25d874e"
+    ],
+    "current_full_feature_sha256": "d13d5552806fb8a182fdc60065ffa75fd4ab877ff0ac714a7c2a0d92ecbe6bc7",
+    "current_geometry_sha256": "9e6b62e32cc29c42c3e843e5d02b34fc34b8c8f7b8b63f729c7663d40babe5f4",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:bangka-belitung-islands:1d3d2ca69b7d",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 7,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:sumatera:728bef1c4923. This declaration alone is not semantic approval.",
+                "title": "gb:IDN:ADM1",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:IDN:ADM2; role regency, city; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Indonesia",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 7 locations, roles {'regency, city': 7}, source vintages {'2020': 7}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "parent canonical role unknown or unavailable; no ADM-number tier inference"
+            ]
+          },
+          "source": "gb:IDN:ADM1",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Bangka-Belitung Islands",
+        "parent_id": "framework:area:sumatera:728bef1c4923"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/1289",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:bangka-belitung-islands:1d3d2ca69b7d",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2020",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/996",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 23099,
+    "owner_row": {
+      "bounds": [
+        209260.75555222222,
+        132925.46026243144,
+        209729.59574888888,
+        133443.53369753656
+      ],
+      "id": "gb:IDN:ADM2:22746128B80009106787015",
+      "index": 23099,
+      "province_id": "framework:province:bangka-belitung-islands:1d3d2ca69b7d",
+      "province_index": 791
+    },
+    "parent_index": 791,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:IDN:ADM2:22746128B80009106787015",
+      "original_feature_sha256": "d13d5552806fb8a182fdc60065ffa75fd4ab877ff0ac714a7c2a0d92ecbe6bc7",
+      "original_parent_id": "framework:province:bangka-belitung-islands:1d3d2ca69b7d",
+      "reference_year": "2020"
+    },
+    "source_containing_pin": {
+      "bytes": 5144571,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+      "mode": "100644",
+      "path": "data/geography/part-10.json",
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+    },
+    "target_id": "gb:IDN:ADM2:22746128B80009106787015"
+  },
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:dd8aab5edb2689e1b07b799505f2c052799dd3d1f3770dd2d8ac668e0dfdffaf"
+    ],
+    "current_full_feature_sha256": "9180b4455a0f2742f3ab3b55011c26d35e60d9f6436f1d36f36838351ba7e8a0",
+    "current_geometry_sha256": "58357880c23fd9c9b1b077fd67110e11197ccd6057dd57915635dcb6885c1c20",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:east-java:0b101a843bf6",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 38,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "More than 25 locations: review intermediate geographic groupings",
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:jawa:63a0ff1869bd. This declaration alone is not semantic approval.",
+                "title": "gb:IDN:ADM1",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:IDN:ADM2; role regency, city; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Indonesia",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 38 locations, roles {'regency, city': 38}, source vintages {'2020': 38}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "parent canonical role unknown or unavailable; no ADM-number tier inference"
+            ]
+          },
+          "source": "gb:IDN:ADM1",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "East Java",
+        "parent_id": "framework:area:jawa:63a0ff1869bd"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/2103",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:east-java:0b101a843bf6",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2020",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/1419",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 22894,
+    "owner_row": {
+      "bounds": [
+        213797.3925344445,
+        134767.71669313783,
+        215750.74770611108,
+        136366.45379821604
+      ],
+      "id": "gb:IDN:ADM2:22746128B46307112426649",
+      "index": 22894,
+      "province_id": "framework:province:east-java:0b101a843bf6",
+      "province_index": 1605
+    },
+    "parent_index": 1605,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:IDN:ADM2:22746128B46307112426649",
+      "original_feature_sha256": "9180b4455a0f2742f3ab3b55011c26d35e60d9f6436f1d36f36838351ba7e8a0",
+      "original_parent_id": "framework:province:east-java:0b101a843bf6",
+      "reference_year": "2020"
+    },
+    "source_containing_pin": {
+      "bytes": 5144571,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+      "mode": "100644",
+      "path": "data/geography/part-10.json",
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+    },
+    "target_id": "gb:IDN:ADM2:22746128B46307112426649"
+  },
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:e4abb61a130c9be6d764a0a058df31d6acd4f427624c8b3d5af9bdb709b8badf"
+    ],
+    "current_full_feature_sha256": "6a930ebc77801f0a9c21f00428e8b5ffd0e1d0ef89ce18bb72a9eccb5beaa3d7",
+    "current_geometry_sha256": "e0ab1e34da26f5e2454f5f4c6e798e61cbd1f62df7d74415711ff4d80be99030",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:west-nusa-tenggara:ab58e0cc06bd",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 10,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:lesser-sunda-is:21e4a49d55fc. This declaration alone is not semantic approval.",
+                "title": "gb:IDN:ADM1",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:IDN:ADM2; role regency, city; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Indonesia",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 10 locations, roles {'regency, city': 10}, source vintages {'2020': 10}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "parent canonical role unknown or unavailable; no ADM-number tier inference"
+            ]
+          },
+          "source": "gb:IDN:ADM1",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "West Nusa Tenggara",
+        "parent_id": "framework:area:lesser-sunda-is:21e4a49d55fc"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/5409",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:west-nusa-tenggara:ab58e0cc06bd",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2020",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/1416",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 23122,
+    "owner_row": {
+      "bounds": [
+        216185.57914666666,
+        137022.96201967297,
+        217257.69243888886,
+        137741.1098077658
+      ],
+      "id": "gb:IDN:ADM2:22746128B848155691224",
+      "index": 23122,
+      "province_id": "framework:province:west-nusa-tenggara:ab58e0cc06bd",
+      "province_index": 4911
+    },
+    "parent_index": 4911,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:IDN:ADM2:22746128B848155691224",
+      "original_feature_sha256": "6a930ebc77801f0a9c21f00428e8b5ffd0e1d0ef89ce18bb72a9eccb5beaa3d7",
+      "original_parent_id": "framework:province:west-nusa-tenggara:ab58e0cc06bd",
+      "reference_year": "2020"
+    },
+    "source_containing_pin": {
+      "bytes": 5144571,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+      "mode": "100644",
+      "path": "data/geography/part-10.json",
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+    },
+    "target_id": "gb:IDN:ADM2:22746128B848155691224"
+  },
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:fa8aa714b724a4eef86de954326dcfd9cb04db5fdb0695a4e76b7e90b2f29966"
+    ],
+    "current_full_feature_sha256": "2b370061058f263ef67be7a0aca00db6379834d2b9fee9049d27a4eebbb5d350",
+    "current_geometry_sha256": "441d8cb415421b6d28b81fe91143838fd4e4350333769bb9cdcf6d46cf7cc302",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:southeast-sulawesi:c8e16d08d440",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 17,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:sulawesi:eda7a91483f6. This declaration alone is not semantic approval.",
+                "title": "gb:IDN:ADM1",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:IDN:ADM2; role regency, city; reference vintage 2020; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Indonesia",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IDN/ADM2/geoBoundaries-IDN-ADM2.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 17 locations, roles {'regency, city': 17}, source vintages {'2020': 17}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "parent canonical role unknown or unavailable; no ADM-number tier inference"
+            ]
+          },
+          "source": "gb:IDN:ADM1",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Southeast Sulawesi",
+        "parent_id": "framework:area:sulawesi:eda7a91483f6"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/4854",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:southeast-sulawesi:c8e16d08d440",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2020",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/1124",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 23024,
+    "owner_row": {
+      "bounds": [
+        219511.4461522222,
+        133240.9321089636,
+        220270.70801777777,
+        133907.22539709273
+      ],
+      "id": "gb:IDN:ADM2:22746128B68991025063444",
+      "index": 23024,
+      "province_id": "framework:province:southeast-sulawesi:c8e16d08d440",
+      "province_index": 4356
+    },
+    "parent_index": 4356,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:IDN:ADM2:22746128B68991025063444",
+      "original_feature_sha256": "2b370061058f263ef67be7a0aca00db6379834d2b9fee9049d27a4eebbb5d350",
+      "original_parent_id": "framework:province:southeast-sulawesi:c8e16d08d440",
+      "reference_year": "2020"
+    },
+    "source_containing_pin": {
+      "bytes": 5144571,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d",
+      "mode": "100644",
+      "path": "data/geography/part-10.json",
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+    },
+    "target_id": "gb:IDN:ADM2:22746128B68991025063444"
+  }
+]

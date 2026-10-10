@@ -1,0 +1,29 @@
+file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs:8
+const demand=(v,m)=>{if(!v)throw Error(m);},same=(a,b)=>valueBytes(a).equals(valueBytes(b));
+                                 ^
+
+Error: Completed prior phase exceeds issued child bound
+    at demand (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs:8:34)
+    at completePriorConservationFrame (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs:64:2)
+    at completedPriorFrame (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs:46:14)
+    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs:49:59
+
+Node.js v24.19.0
+       51.05 real        34.19 user        17.98 sys
+           345128960  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+             2476375  page reclaims
+               35218  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+               25916  messages sent
+               14088  messages received
+                   0  signals received
+                3879  voluntary context switches
+              290411  involuntary context switches
+        107680823770  instructions retired
+         50914938086  cycles elapsed
+           286263680  peak memory footprint

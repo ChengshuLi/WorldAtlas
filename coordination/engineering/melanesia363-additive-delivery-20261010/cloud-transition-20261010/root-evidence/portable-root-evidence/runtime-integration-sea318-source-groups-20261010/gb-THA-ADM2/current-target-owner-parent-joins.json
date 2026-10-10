@@ -1,0 +1,105 @@
+[
+  {
+    "canonical_preimage_format": "Original Python sorted compact UTF-8 JSON plus LF; complete parsed feature unchanged",
+    "component_ids": [
+      "physical-component:b90682fb902bb719879e69d1a161080cb46a7cd041cb3ad0c9bd963b5e1f4900"
+    ],
+    "current_full_feature_sha256": "7d3b45a10b3b215e13146540f1f9d8367e8d125f2314a0aa9f2e931b8d7c8aea",
+    "current_geometry_sha256": "e5659752241c473c62fce0f38df5cb3c74d0c5039d76f1b317e3088d86017feb",
+    "current_parent_hierarchy": {
+      "complete_record": {
+        "id": "framework:province:phuket-province:0078cac3efcc",
+        "level": "province",
+        "metadata": {
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "child_count": 3,
+          "framework_status": "retained-reference",
+          "kind": "geographic",
+          "review_reasons": [
+            "Previous reference grouping retained; semantic tier review outstanding"
+          ],
+          "semantic_review": {
+            "action": "open",
+            "boundary_status": "open",
+            "evidence": [
+              {
+                "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:thailand:52d169be3bae. This declaration alone is not semantic approval.",
+                "title": "gb:THA:ADM1",
+                "url": "https://www.geoboundaries.org/"
+              },
+              {
+                "inspected_fact": "Actual location source gb:THA:ADM2; role districts; reference vintage 2019; license Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO). Source feature/member identifiers were inspected separately from ADM-level labels.",
+                "title": "Thailand",
+                "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/THA/ADM2/geoBoundaries-THA-ADM2.geojson"
+              }
+            ],
+            "rationale": "Actual member audit: 3 locations, roles {'districts': 3}, source vintages {'2019': 3}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+            "remaining_reasons": [
+              "parent canonical role unknown or unavailable; no ADM-number tier inference"
+            ]
+          },
+          "source": "gb:THA:ADM1",
+          "source_url": "https://www.geoboundaries.org/"
+        },
+        "name": "Phuket Province",
+        "parent_id": "framework:area:thailand:52d169be3bae"
+      },
+      "containing_pin": {
+        "bytes": 10164089,
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+        "mode": "100644",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      "json_pointer": "/4147",
+      "semantic_approval": false
+    },
+    "current_parent_id": "framework:province:phuket-province:0078cac3efcc",
+    "current_selected_target_join_complete": true,
+    "current_source_metadata_reference_year": "2019",
+    "current_temporal_applicability": "unsupported by this immutable identity join",
+    "guards": {
+      "full_feature_original_hash_equal": true,
+      "owner_parent_matches_raw_feature": true,
+      "owner_present": true,
+      "parent_index_is_authentic_bound_membership": true,
+      "recorded_parent_equals_current": true,
+      "recorded_reference_year_equals_current_metadata": true,
+      "unique_current_hierarchy_parent_present": true
+    },
+    "json_pointer": "/features/1002",
+    "native_eligibility": false,
+    "original_source_claim_matches_current_whole_feature": true,
+    "owner_index": 41281,
+    "owner_row": {
+      "bounds": [
+        202647.54537833337,
+        125091.02429175138,
+        202770.326455,
+        125279.17205382774
+      ],
+      "id": "gb:THA:ADM2:78962969B19426862373274",
+      "index": 41281,
+      "province_id": "framework:province:phuket-province:0078cac3efcc",
+      "province_index": 3649
+    },
+    "parent_index": 3649,
+    "parent_index_domain": "canonical province membership index, separate from county owner index",
+    "recorded_subject": {
+      "id": "gb:THA:ADM2:78962969B19426862373274",
+      "original_feature_sha256": "7d3b45a10b3b215e13146540f1f9d8367e8d125f2314a0aa9f2e931b8d7c8aea",
+      "original_parent_id": "framework:province:phuket-province:0078cac3efcc",
+      "reference_year": "2019"
+    },
+    "source_containing_pin": {
+      "bytes": 4962410,
+      "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+      "git_blob_oid": "371e95033d9c542bbf07c42afe7111074e35f246",
+      "mode": "100644",
+      "path": "data/geography/part-23.json",
+      "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2"
+    },
+    "target_id": "gb:THA:ADM2:78962969B19426862373274"
+  }
+]

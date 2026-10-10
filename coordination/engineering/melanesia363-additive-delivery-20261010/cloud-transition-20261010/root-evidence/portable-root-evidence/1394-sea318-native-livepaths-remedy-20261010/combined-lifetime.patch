@@ -1,0 +1,319 @@
+--- final-SEA318-caller.mjs
++++ caller-proposed.mjs
+@@ -1123,10 +1123,10 @@
+     physical_comparison:{row:record},original_queried_source_metadata:queried}],original_target_canonical_bindings:bindings};
+   return {record,sourceCase,sourceScope,original:row,ordinal:fit.cases.indexOf(row)};
+ }
+-function administrative318SourceScope(fit,get,rule,componentId) {
++function administrative318SourceScope(fit,get,rule,componentId,getPin=get) {
+   const row=fit.cases.find(row=>row.component_id===componentId);demand(row,'Missing SEA318 original case');
+   const q=row.original_physical_query_custody;
+-  const exact=(name,bytes,hash)=>{const entry=get(name);demand(entry.pin.bytes===bytes&&entry.pin.sha256===hash,'SEA318 declared whole product differs');return entry;};
++  const exact=(name,bytes,hash,pinOnly=false)=>{const entry=(pinOnly?getPin:get)(name);demand(entry.pin.bytes===bytes&&entry.pin.sha256===hash,'SEA318 declared whole product differs');return entry;};
+   const physical=exact(q.case_file,q.case_file_bytes,q.case_file_sha256);
+   demand(physical.pin.uncompressed_sha256===q.case_file_uncompressed_sha256,'SEA318 decoded physical case differs');
+   // Authenticate every complete original encoded/decoded pointset via readPin,
+@@ -1134,7 +1134,7 @@
+   // This literal metadata view was copied from those same whole products;
+   // every used scalar is rejoined to the accepted raw005 query/pin below.
+   for(const pin of q.complete_query_source_pointsets){
+-    const source=exact(pin.source_file,pin.bytes,pin.sha256);
++    const source=exact(pin.source_file,pin.bytes,pin.sha256,true);
+     demand(source.pin.uncompressed_bytes===pin.uncompressed_bytes&&source.pin.uncompressed_sha256===pin.uncompressed_sha256,'SEA318 decoded query product differs');
+   }
+   const metadata=JSON.parse(get(rule.original_query_metadata_path).body);
+@@ -1147,17 +1147,24 @@
+   return retainedAdministrative318CaseView({fit,physicalCase:JSON.parse(physical.body),querySources:sources,
+     targetBindings:JSON.parse(get(rule.target_canonical_bindings_path).body),componentId});
+ }
+-function administrative318SourcePremiseStage(repo,request,report) {
++function administrative318SourcePremiseStage(repo,request,report,budget) {
+   const rule=request.source_rule;
+   demand(request.report.sha256==='2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0'
+     &&report.execution_commit==='104091cfecd9c83a53f3e6e62f95b0a0c8074351','Unsupported original physical-comparison authority');
+   demand(rule.profile==='retained-consumed-administrative-source'&&rule.version===1
+     &&rule.geometry_scope==='full-component'&&rule.expected_ids.length>0&&new Set(rule.expected_ids).size===rule.expected_ids.length,
+     'Incomplete SEA318 administrative phase');
+-  const bodies=new Map();for(const pin of rule.inputs){demand(pin.kind===undefined&&!bodies.has(pin.path),'Duplicate SEA318 input');bodies.set(pin.path,{pin,body:readPin(repo,pin)});}
+-  const get=name=>{const entry=bodies.get(name);demand(entry,'Missing whole SEA318 operand');return entry;};
++  const bodies=new Map(),releasedPaths=new Set();for(const pin of rule.inputs){demand(pin.kind===undefined&&!bodies.has(pin.path),'Duplicate SEA318 input');bodies.set(pin.path,{pin,body:readPin(repo,pin)});}
++  const get=name=>{demand(!releasedPaths.has(name),'Released SEA318 whole pointset cannot be reopened/parsed');const entry=bodies.get(name);demand(entry,'Missing whole SEA318 operand');return entry;};
++  const getPin=name=>{const entry=bodies.get(name);demand(entry,'Missing authenticated SEA318 whole descriptor');return {pin:entry.pin};};
+   for(const accepted of RETAINED_ADMINISTRATIVE_318_HANDOFF){const entry=get(rule[accepted.role]);
+     demand(['path','mode','blob','bytes','sha256'].every(key=>entry.pin[key]===accepted[key]),'SEA318 outside accepted corpus');}
++  demand(budget&&typeof budget.releaseMore==='function','Explicit SOURCE sequential lifetime budget required');
++  for(const name of [rule.cases_path,rule.outcomes_path,rule.family_roster_path])budget.add({bytes:get(name).pin.bytes,
++    path:name,role:'early-whole-parsed-corpus-root'});
++  // No output exists during authentication. Its reserved arena instead bounds
++  // one complete corpus parse; retained corpus graphs remain separately charged.
++  budget.admitAuthenticationScratch(Math.max(...[rule.cases_path,rule.outcomes_path,rule.family_roster_path].map(name=>get(name).pin.bytes)));
+   const fit=JSON.parse(get(rule.cases_path).body),state=JSON.parse(get(rule.outcomes_path).body),families=JSON.parse(get(rule.family_roster_path).body);
+   demand(fit.batch_id===SEA318_BATCH&&state.batch_id===SEA318_BATCH&&families.batch_id===SEA318_BATCH
+     &&state.component_count===318&&state.family_count===122&&families.component_count===318&&families.family_count===122
+@@ -1165,19 +1172,79 @@
+     'SEA318 original whole component/family roster differs');
+   demand(JSON.stringify(rule.cohort_ids)===JSON.stringify(fit.cases.map(row=>row.component_id))
+     &&rule.expected_ids.every(id=>rule.cohort_ids.includes(id)),'SEA318 priority/cohort scope differs');
++  demand(budget&&typeof budget.produce==='function','Explicit SEA318 source lifetime admission required');
++  const selectedCases=fit.cases.filter(row=>rule.expected_ids.includes(row.component_id));
++  const queryPins=new Map();
++  for(const row of selectedCases)for(const original of row.original_physical_query_custody.complete_query_source_pointsets){
++    const entry=get(original.source_file);
++    demand(['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(key=>entry.pin[key]===original[key]),
++      'SEA318 exact whole query descriptor differs before release');
++    demand(!queryPins.has(entry.pin.path)||JSON.stringify(queryPins.get(entry.pin.path))===JSON.stringify(entry.pin),
++      'Conflicting original SEA318 whole query source');queryPins.set(entry.pin.path,entry.pin);
++  }
++  // The query coordinate graphs are NEVER parsed by this stage. Retain their
++  // exact authenticated descriptors for getPin; explicitly remove raw bodies.
++  const nonQueryPaths=new Set([rule.cases_path,rule.outcomes_path,rule.family_roster_path,
++    rule.manifest_path,rule.bounds_path,rule.original_query_metadata_path,rule.target_canonical_bindings_path,
++    ...rule.target_banks,...rule.administrative_products.map(pin=>pin.path),
++    ...selectedCases.map(row=>row.original_physical_query_custody.case_file)]);
++  demand([...queryPins.keys()].every(name=>!nonQueryPaths.has(name)),
++    'Cannot release a query source also consumed as an ordinary parsed root');
++  const corpusPaths=new Set([rule.cases_path,rule.outcomes_path,rule.family_roster_path]);
++  demand([...corpusPaths].every(name=>!queryPins.has(name)),'Query/corpus source alias conflict');
++  const rawReleasePaths=new Set([...queryPins.keys(),...corpusPaths]);
++  const releaseRows=names=>{const released=[];let costOrdinal=budget.nativeStageCostStart;
++  for(const pin of rule.inputs){
++    if(names.has(pin.path)){
++      const entry=bodies.get(pin.path),bytes=pin.uncompressed_bytes??pin.bytes;
++      demand(entry.body.length===bytes,'SEA318 whole query raw buffer length differs');
++      released.push({cost_ordinal:costOrdinal+(pin.uncompressed_bytes===undefined?0:1),bytes,path:pin.path,
++        sha256:pin.sha256,uncompressed_sha256:pin.uncompressed_sha256});
++      entry.body=null;releasedPaths.add(pin.path);
++    }
++    costOrdinal+=pinCost(pin).length;
++  }return released;};
++  const released=releaseRows(rawReleasePaths);
++  // Retain FULL serialized closure charges for every consumed JSON root,
++  // including physical cases, copied query/binding metadata, corpus rosters,
++  // manifest/owners, full target banks and administrative source products.
++  const parsedPins=[...nonQueryPaths].map(name=>getPin(name).pin);
++  const parseScratch=Math.max(0,...parsedPins.map(pin=>pin.uncompressed_bytes??pin.bytes));
++  budget.produce(released,[...parsedPins.filter(pin=>pin.path!==rule.bounds_path&&!rule.administrative_products.some(product=>product.path===pin.path)).map(pin=>({bytes:pin.uncompressed_bytes??pin.bytes,path:pin.path,
++    role:'retained-whole-source-parsed-root'})),
++    {bytes:4194304,role:'source-premise-canonical-and-output-workspace'},
++    {bytes:parseScratch,role:'one-complete-parse-canonical-scratch'}]);
+   const needed=new Set(fit.cases.filter(row=>rule.expected_ids.includes(row.component_id)).map(row=>row.original_administrative_comparison.record.uniquely_covering_compatible_recorded_subject.id));
+   const targets=new Map(),allIds=new Set();for(const name of rule.target_banks){const entry=get(name);
+     demand(execFileSync('git',['-C',repo,'ls-tree','-z','HEAD','--',name],{encoding:'utf8'})===`${entry.pin.mode} blob ${entry.pin.blob}\t${name}\0`,'SEA318 current target bank differs');
+     const features=JSON.parse(entry.body).features;demand(Array.isArray(features),'Missing complete SEA318 target bank');
+     for(const feature of features){demand(!allIds.has(feature.id),'Duplicate complete SEA318 target');allIds.add(feature.id);if(needed.has(feature.id))targets.set(feature.id,feature);}}
++  // Bank graphs and selected features remain charged in full. Their raw bodies
++  // are unreachable before admitting the additional complete bounds graph.
++  const parsedRawReleasePaths=new Set(rule.target_banks);
++  demand([...parsedRawReleasePaths].every(name=>!rawReleasePaths.has(name)&&name!==rule.bounds_path&&
++    !rule.administrative_products.some(pin=>pin.path===name)&&
++    !selectedCases.some(row=>row.original_physical_query_custody.case_file===name)&&
++    ![rule.manifest_path,rule.original_query_metadata_path,rule.target_canonical_bindings_path].includes(name)),
++    'Cannot release a target raw body reused as another source role');
++  budget.releaseMore(releaseRows(parsedRawReleasePaths),[]);
+   const manifest=JSON.parse(get(rule.manifest_path).body),boundsPin=get(rule.bounds_path).pin;
+   demand(manifest.original_assets.bounds.sha256===boundsPin.sha256,'SEA318 current bounds differs');
++  demand(!rawReleasePaths.has(rule.bounds_path)&&!rule.administrative_products.some(pin=>pin.path===rule.bounds_path)&&
++    !selectedCases.some(row=>row.original_physical_query_custody.case_file===rule.bounds_path)&&
++    ![rule.manifest_path,rule.original_query_metadata_path,rule.target_canonical_bindings_path].includes(rule.bounds_path),
++    'Cannot release an owner raw body reused as another source role');
++  budget.releaseMore([],[{bytes:boundsPin.uncompressed_bytes??boundsPin.bytes,path:boundsPin.path,role:'retained-whole-source-parsed-root'}]);
+   const bounds=JSON.parse(get(rule.bounds_path).body),owners=new Map(bounds.map(row=>[row.id,row]));
+   demand(bounds.length===49625&&owners.size===49625&&new Set(bounds.map(row=>row.index)).size===49625,'Incomplete SEA318 complete owner roster');
++  budget.releaseMore(releaseRows(new Set([rule.bounds_path])),[]);
++  // Complete product graphs do not exist until this parse loop; admit their
++  // whole sizes now, with scratch and every other retained graph still charged.
++  budget.releaseMore([],rule.administrative_products.map(pin=>({bytes:pin.uncompressed_bytes??pin.bytes,path:pin.path,role:'retained-whole-source-parsed-root'})));
+   const products=rule.administrative_products.map(pin=>{const entry=get(pin.path);demand(entry.pin.sha256===pin.sha256,'SEA318 source descriptor differs');const product=JSON.parse(entry.body);
+     demand(product.type==='FeatureCollection'&&Array.isArray(product.features),'Incomplete SEA318 source product');return {pin:entry.pin,features:product.features.map(feature=>({feature_sha256:canonicalSourceSha(feature),geometry_sha256:canonicalSourceSha(feature.geometry)}))};});
+   const rows=fit.cases.filter(row=>rule.expected_ids.includes(row.component_id)).map(row=>{
+-    const view=administrative318SourceScope(fit,get,rule,row.component_id),target=targets.get(view.sourceCase.retained_payload.target_stable_location_id),owner=owners.get(target?.id);
++    const view=administrative318SourceScope(fit,get,rule,row.component_id,getPin),target=targets.get(view.sourceCase.retained_payload.target_stable_location_id),owner=owners.get(target?.id);
+     demand(target&&owner&&target.properties.parent_id===owner.province_id,'SEA318 current target/parent differs');
+     const packed=row.original_physical_query_custody.complete_original_packed_comparison_row;
+     const physicalProduct=report.products.find(pin=>pin.path===packed.original_product.path);
+@@ -1192,13 +1259,13 @@
+       geometry_scope:'full-component',whole_gap_completion:false,disposition:premises.source_compatible?'awaiting-native-exclusion':'awaiting-evidence',
+       target_geometry_sha256:footprintValueSha256(target.geometry),
+       original_record:{source:get(row.original_physical_query_custody.case_file).pin,ordinal:0,row_sha256:sha(canonical(view.record))},
+-      source_case:{source:get(rule.cases_path).pin,ordinal:view.ordinal,row_sha256:sha(canonical(view.sourceCase))}};
++      source_case:{source:getPin(rule.cases_path).pin,ordinal:view.ordinal,row_sha256:sha(canonical(view.sourceCase))}};
+   });
+   return {rows,facts:{version:1,operation:SOURCE_PREMISES_VERSION,source_profile:rule.profile,parent:request.parent,components:rows.length,
+     source_compatible:rows.filter(row=>row.source_compatible).length,assigned_cells:0,source_rule:rule,geometry_scope:'full-component',whole_gap_completion:false,
+     cohort_ids:rule.cohort_ids,unprocessed_cohort_ids:rule.cohort_ids.filter(id=>!rule.expected_ids.includes(id)),
+-    original_batch_outcomes:{source:get(rule.outcomes_path).pin,batch_id:SEA318_BATCH,components:318,families:122},
+-    original_remainders:{source:get(rule.outcomes_path).pin,preserved_without_reclassification:true},
++    original_batch_outcomes:{source:getPin(rule.outcomes_path).pin,batch_id:SEA318_BATCH,components:318,families:122},
++    original_remainders:{source:getPin(rule.outcomes_path).pin,preserved_without_reclassification:true},
+     source_limits:fit.limitations,limits:[...fit.limitations,'Retained original source-relative premises only; current native/neighbor qualification and selected delivery pending.']}};
+ }
+ const RETAINED_ADMINISTRATIVE_HANDOFFS=[RETAINED_ADMINISTRATIVE_HANDOFF,RETAINED_ADMINISTRATIVE_327_HANDOFF,RETAINED_ADMINISTRATIVE_318_HANDOFF];
+@@ -1209,8 +1276,8 @@
+   demand(matches.length===1,'Unknown/ambiguous accepted administrative batch roster');return matches[0];
+ }
+ 
+-function administrativeSourcePremiseStage(repo,request,report) {
+-  if(request.source_rule?.family_roster_path)return administrative318SourcePremiseStage(repo,request,report);
++function administrativeSourcePremiseStage(repo,request,report,budget) {
++  if(request.source_rule?.family_roster_path)return administrative318SourcePremiseStage(repo,request,report,budget);
+   const rule=request.source_rule,profile='retained-consumed-administrative-source';
+   demand(rule?.profile===profile&&rule.version===1&&Array.isArray(rule.expected_ids)
+     &&rule.expected_ids.length>0&&new Set(rule.expected_ids).size===rule.expected_ids.length
+@@ -1349,8 +1416,8 @@
+       'Current source-file equality is not selected-bank geometry applicability. Genuine current snapshot/rebind, full native/neighbor conservation and activation remain required.'])}};
+ }
+ 
+-function sourcePremiseStage(repo,request,report) {
+-  if(request.source_rule?.profile==='retained-consumed-administrative-source')return administrativeSourcePremiseStage(repo,request,report);
++function sourcePremiseStage(repo,request,report,budget) {
++  if(request.source_rule?.profile==='retained-consumed-administrative-source')return administrativeSourcePremiseStage(repo,request,report,budget);
+   if(request.source_rule?.profile==='retained-USA-ADM2-counties-2018')return countySourcePremiseStage(repo,request);
+   const rule=request.source_rule;
+   demand(rule?.version===1&&Array.isArray(rule.inputs)&&rule.inputs.length===12&&Array.isArray(rule.expected_ids)
+@@ -1699,10 +1766,55 @@
+   }
+ }
+ 
++// Administrative-only sequential lifetime accounting. Authentication phase has
++// no final assets; production retains the FULL requested output allowance.
++function administrativeSourceLifetimeBudget(inputs,{runtimeBytes,outputReserve}) {
++  const live=inputs.map(item=>({...item})),extra=[],releasedOrdinals=new Set(),history=[];
++  let authenticationScratch=0;
++  let current=candidateBudget(live,{reserveBytes:runtimeBytes+outputReserve+131072});
++  const complete=snapshot=>snapshot.accounted_bytes+snapshot.reserved_review_bytes;
++  function transition(released,retained,phase){
++    const prior=current.snapshot();history.push({phase:history.length?'source-retained-production':'whole-operand-authentication',admission:prior});
++    for(const row of released){const entry=live[row.cost_ordinal];
++      demand(entry&&entry.bytes===row.bytes&&!releasedOrdinals.has(row.cost_ordinal),'Changed/duplicate SOURCE whole-buffer release');
++      entry.bytes=0;releasedOrdinals.add(row.cost_ordinal);}
++    current=candidateBudget([...live,...extra,...retained],{reserveBytes:runtimeBytes+outputReserve+131072});
++    extra.push(...retained);history.push({phase,raw_release_receipt:released.map(row=>({...row})),
++      retained_closure_charges:retained.map(row=>({...row})),admission:current.snapshot()});
++  }
++  return {admitAuthenticationScratch(bytes){demand(!history.length&&Number.isSafeInteger(bytes)&&bytes>=0&&bytes<=outputReserve,'Authentication parse exceeds reserved unallocated output arena');authenticationScratch=Math.max(authenticationScratch,bytes);},
++    add(item){current.add(item);extra.push(item);},produce(released,retained){transition(released,retained,'source-retained-production');},
++    releaseMore(released,retained){demand(history.length,'SOURCE production transition missing');transition(released,retained,'source-complete-parse-production');},
++    snapshot(){const now=current.snapshot();return {...now,lifetime:{phase:history.length?'source-complete-parse-production':'whole-operand-authentication',
++      authentication_admission:history[0]?.admission??null,authentication_parse_workspace_bytes:authenticationScratch,
++      authentication_output_allocated:false,authentication_reserved_workspace_bytes:outputReserve,phase_history:history,
++      maximum_complete_phase_bytes:Math.max(complete(now),...history.map(row=>complete(row.admission))),full_final_output_reserve:outputReserve}};}};
++}
++
++function administrativeLifetimeBudget(inputs,{runtimeBytes,outputReserve,productionPhase='native-production'}) {
++  const all=[...inputs],extras=[];let releasedBytes=0,transitioned=false,releaseReceipt=[],retainedReceipt=[],authenticationAdmission=null;
++  let current=candidateBudget(all,{reserveBytes:runtimeBytes+4194304+131072});
++  return {add(item){current.add(item);extras.push(item);},snapshot(){return {...current.snapshot(),
++    lifetime:{phase:transitioned?productionPhase:'whole-operand-authentication',released_raw_bytes:releasedBytes,
++      full_final_output_reserve:outputReserve,authentication_admission:authenticationAdmission,raw_release_receipt:releaseReceipt,retained_closure_charges:retainedReceipt}};},produce(released,retained){
++    demand(!transitioned&&released.every(row=>Number.isSafeInteger(row.bytes)&&row.bytes>=0),'Invalid native lifetime transition');
++    // Keep every input charge except exact decoded/raw buffers made unreachable.
++    // Descriptor charges are retained as zero-byte entries; original pins remain
++    // in facts and independently reauthenticated source-premise custody.
++    const remaining=all.map(item=>({...item}));
++    for(const row of released){const entry=remaining[row.cost_ordinal];
++      demand(entry&&entry.bytes===row.bytes,'Changed released whole operand cost');entry.bytes=0;releasedBytes+=row.bytes;}
++    authenticationAdmission=current.snapshot();
++    current=candidateBudget([...remaining,...extras,...retained],{reserveBytes:runtimeBytes+outputReserve+131072});
++    releaseReceipt=released.map(row=>({...row}));retainedReceipt=retained.map(row=>({...row}));transitioned=true;
++  }};
++}
++
+ function administrativeBatchProposalStage(repo,request,resolutions,budget) {
+-  const spec=request.additive,inputs=new Map(),equal=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
+-  for(const pin of spec.inputs){demand(!inputs.has(pin.path),'Duplicate batch operand');inputs.set(pin.path,{pin,body:readPin(repo,pin)});}
+-  const get=name=>{if(!inputs.has(name)){const pin=request.baseline.pins.find(pin=>pin.path===name);demand(pin,'Missing complete batch operand');inputs.set(name,{pin,body:readPin(repo,pin)});}return inputs.get(name);};
++  const spec=request.additive,inputs=new Map(),authenticatedPins=new Map(),releasedPaths=new Set(),accessedPaths=new Set(),equal=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
++  for(const pin of spec.inputs){demand(!inputs.has(pin.path),'Duplicate batch operand');inputs.set(pin.path,{pin,body:readPin(repo,pin)});authenticatedPins.set(pin.path,pin);}
++  const get=name=>{demand(!releasedPaths.has(name),'Released authenticate-only native operand cannot be reopened');accessedPaths.add(name);if(!inputs.has(name)){const pin=request.baseline.pins.find(pin=>pin.path===name);demand(pin,'Missing complete batch operand');inputs.set(name,{pin,body:readPin(repo,pin)});}return inputs.get(name);};
++  const getPin=name=>{const pin=authenticatedPins.get(name);demand(pin,'Missing whole authenticated native source descriptor');return {pin};};
+   const json=name=>JSON.parse(get(name).body),publication=json(spec.publication_path),facts=json(spec.facts_path),issued=json(spec.source_request_path),operating=json(spec.operating_path);
+   demand(publication.complete===true&&publication.facts.bytes===get(spec.facts_path).pin.bytes&&publication.facts.sha256===get(spec.facts_path).pin.sha256
+     &&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(key=>publication.inventory[key]===get(spec.inventory_path).pin[key]),'Incomplete batch source predecessor');
+@@ -1722,6 +1834,52 @@
+   demand(equal(sourceRows.map(row=>row.component_id),spec.scope_ids)&&equal(spec.scope_ids,issued.source_rule.expected_ids)
+     &&sourceRows.length===facts.components,'Batch selection omitted/reordered a source candidate');
+   validateAdministrativeNativeRoster({facts,issued,spec,sourceRows});
++  // SEA318's case view parses these separate whole bodies in each iteration.
++  // Protect them independently of the accepted fit corpus, and preserve query
++  // descriptor custody without retaining its never-used coordinate buffer.
++  const seaBodyPaths=issued.source_rule.family_roster_path?
++    [...new Set([issued.source_rule.original_query_metadata_path,issued.source_rule.target_canonical_bindings_path,
++      ...sourceRows.map(row=>row.original_record?.source?.path)])]:[];
++  demand(seaBodyPaths.every(name=>typeof name==='string'&&spec.inputs.some(pin=>pin.path===name&&
++    equal(pin,issued.source_rule.inputs.find(source=>source.path===name)))),
++    'Missing/changed complete SEA318 native physical or metadata operand');
++  if(typeof budget.produce==='function'){
++  // Whole originals were authenticated above and the original source closure,
++  // status/order/current-baseline joins are complete. Only named native operands
++  // below can be consumed subsequently; every other raw buffer has no parsed
++  // descendant and is released. get() forbids a later accidental reacquisition.
++  const livePaths=new Set([...seaBodyPaths,...accessedPaths,spec.manifest_path,spec.bounds_path,spec.latitudes_path,spec.facts_path,
++    ...issued.source_rule.target_banks,...sourceRows.map(row=>row.source_case?.source?.path),
++    ...spec.owner_parts.map(row=>row.path)]);
++  const released=[];let costOrdinal=budget.nativeStageCostStart;
++  for(const pin of spec.inputs){const costs=pinCost(pin),entry=inputs.get(pin.path);
++    if(!livePaths.has(pin.path)){
++      const decodedOrdinal=costOrdinal+(pin.uncompressed_bytes===undefined?0:1);
++      const bytes=pin.uncompressed_bytes??pin.bytes;
++      demand(entry.body.length===bytes,'Released whole buffer length drift');
++      released.push({cost_ordinal:decodedOrdinal,bytes,path:pin.path,sha256:pin.sha256});
++      entry.body=null;inputs.delete(pin.path);releasedPaths.add(pin.path);
++    }
++    costOrdinal+=costs.length;
++  }
++  // Charge complete owner/target object closures separately from retained raw
++  // bodies, and the full latitude/native word arrays separately from raw input.
++  // Existing acquisition scratch allowance covers the small source inventory,
++  // one complete source-case parsed scope at a time and candidate/window scratch.
++  const retainedPins=[spec.bounds_path,...issued.source_rule.target_banks,spec.latitudes_path,
++    ...spec.owner_parts.map(row=>row.path)].map(name=>get(name).pin);
++  const parsedMetadata=[...accessedPaths].filter(name=>!retainedPins.some(pin=>pin.path===name))
++    .map(name=>get(name).pin);
++  const casePins=[...new Set(sourceRows.map(row=>row.source_case?.source?.path))].map(name=>get(name).pin);
++  // One whole sourceScope is parsed inside the candidate loop and becomes dead
++  // on iteration exit; its maximum whole closure is separately charged.
++  budget.produce(released,[...retainedPins.map(pin=>({bytes:pin.uncompressed_bytes??pin.bytes,path:pin.path,role:'whole-parsed-or-native-array-closure'})),
++    ...parsedMetadata.map(pin=>({bytes:pin.uncompressed_bytes??pin.bytes,path:pin.path,role:'retained-parsed-predecessor-metadata'})),
++    {bytes:Math.max(0,...casePins.map(pin=>pin.uncompressed_bytes??pin.bytes)),role:'one-complete-parsed-source-case-scope'},
++    ...seaBodyPaths.map(name=>get(name).pin).filter(pin=>!parsedMetadata.some(prior=>prior.path===pin.path)&&!retainedPins.some(prior=>prior.path===pin.path))
++      .map(pin=>({bytes:pin.uncompressed_bytes??pin.bytes,path:pin.path,role:'whole-SEA318-physical-and-metadata-parsed-closure'})),
++    {bytes:4194304,role:'candidate-window-and-canonical-workspace'}]);
++  }
+   const manifest=json(spec.manifest_path),bounds=json(spec.bounds_path),targets=new Map();
+   for(const name of issued.source_rule.target_banks){demand(spec.inputs.some(pin=>equal(pin,issued.source_rule.inputs.find(source=>source.path===name))),'Batch containing context differs from source proof');const rows=json(name).features;demand(Array.isArray(rows),'Invalid complete administrative target bank');
+     for(const target of rows){demand(!targets.has(target.id),'Duplicate selected context identity');targets.set(target.id,target);}}
+@@ -1737,7 +1895,7 @@
+       &&target.properties.parent_id===owner.province_id&&footprintValueSha256(target.geometry)===selected.target_geometry_sha256,'Stale batch target/owner join');
+     const casePin=selected.source_case?.source;demand(casePin&&spec.inputs.some(pin=>equal(pin,casePin)),'Original full batch case omitted');
+     const rawScope=json(casePin.path),sea318=rawScope.batch_id===SEA318_BATCH;
+-    const seaView=sea318?administrative318SourceScope(rawScope,get,issued.source_rule,selected.component_id):null;
++    const seaView=sea318?administrative318SourceScope(rawScope,get,issued.source_rule,selected.component_id,getPin):null;
+     const sourceScope=seaView?.sourceScope??rawScope,sourceCase=seaView?.sourceCase??sourceScope.candidate_source_native_bindings[selected.source_case.ordinal];
+     if(sea318)demand(seaView.ordinal===selected.source_case.ordinal,'SEA318 original source ordinal differs');
+     demand(sourceCase?.component_id===selected.component_id&&sha(canonical(sourceCase))===selected.source_case.row_sha256,'Original batch case drift');
+@@ -1871,7 +2029,15 @@
+   demand(Array.isArray(stagePins) && stagePins.length>0 && stagePins.length<=213, 'Missing complete child body roster');
+   const baselinePins=[INVENTORY_VERSION,SOURCE_PREMISES_VERSION,ADDITIVE_PROPOSAL_VERSION,ADDITIVE_BATCH_PROPOSAL_VERSION].includes(request.operation)?(request.baseline?.pins??[]):[];
+   const inputs = [...project,...request.installed_modules,...pinCost(requestPin),...pinCost(request.report),...stagePins.flatMap(pinCost),...baselinePins.flatMap(pinCost)];
+-  const budget = candidateBudget(inputs,{reserveBytes:runtimeStat.size+outputReserve+131072});
++  const administrativeSequential=request.operation===ADDITIVE_BATCH_PROPOSAL_VERSION
++    &&request.additive?.source_profile==='retained-consumed-administrative-source'&&request.baseline?.version===2;
++  const sourceSequential=request.operation===SOURCE_PREMISES_VERSION
++    &&request.source_rule?.family_roster_path&&request.baseline?.version===2;
++  const budget = sourceSequential?administrativeSourceLifetimeBudget(inputs,{runtimeBytes:runtimeStat.size,outputReserve})
++    :administrativeSequential?administrativeLifetimeBudget(inputs,{runtimeBytes:runtimeStat.size,outputReserve})
++    :candidateBudget(inputs,{reserveBytes:runtimeStat.size+outputReserve+131072});
++  if(administrativeSequential||sourceSequential)budget.nativeStageCostStart=project.length+request.installed_modules.length
++    +pinCost(requestPin).length+pinCost(request.report).length;
+   const runtimeRead=()=>{
+     const before=fs.lstatSync(process.execPath);
+     demand(before.isFile() && !before.isSymbolicLink() && before.size===runtimeStat.size
+@@ -1913,7 +2079,7 @@
+     demand(resolutions,'Complete selected-bank reconciliation required');result=additiveProposalStage(sourceRoot,request);
+   }else if(request.operation===SOURCE_PREMISES_VERSION){
+     demand(resolutions,'Complete selected-bank reconciliation required');
+-    result=sourcePremiseStage(sourceRoot,request,report);
++    result=sourcePremiseStage(sourceRoot,request,report,budget);
+   }else if(request.operation===INVENTORY_VERSION){
+   demand(/^components-[0-9]{3}\.jsonl\.gz$/.test(request.original_product_path), 'Only complete original component shards accepted');
+   const product = report.products.find(pin=>pin.path === request.original_product_path);

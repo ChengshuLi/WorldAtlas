@@ -1,0 +1,76 @@
+diff --git a/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs b/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs
+index 10394df2c..61341e619 100644
+--- a/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs
++++ b/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs
+@@ -902,9 +902,10 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
+  demand(Object.keys(certificate).sort().join(',')==='authority_registry_sha256,base_selection,execution_commit,facts,kind,operating,publication,request,result,version','Foreign current rebind certificate roster');
+  const names=['request','facts','publication','operating','result'];
+  const roster=names.map(name=>{const p=certificate[name];pinCheck(p);demand(p.decoded_bytes===undefined,'Current rebind products require ordinary whole JSON');return {name,p};});
+- const metadata=roster.reduce((n,{p})=>n+2*p.bytes,0)+2*pin.bytes;
++ const earlyRoster=roster.filter(({name})=>name!=='result');
++ const metadata=earlyRoster.reduce((n,{p})=>n+2*p.bytes,0)+2*pin.bytes;
+  demand(reader.used+metadata<=PHASE,'Complete current rebind custody admission before body opens');reader.used+=metadata;
+- for(const {p}of roster){const actual=reader.descriptor(p.path,p.commit);demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'Whole rebind product mode/OID/length differs');reader.admit(actual);}
++ for(const {name,p}of roster){const actual=reader.descriptor(p.path,p.commit);demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'Whole rebind product mode/OID/length differs');if(name!=='result')reader.admit(actual);}
+  demand(/^[a-f0-9]{40}$/.test(certificate.execution_commit),'Missing actual rebind execution identity');
+  const code=CURRENT_REBIND_CODE.map(path=>reader.descriptor(path));
+  const historicalCode=CURRENT_REBIND_CODE.map(path=>reader.descriptor(path,certificate.execution_commit));
+@@ -912,7 +913,7 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
+  const currentCode=code.map(p=>({path:p.path,bytes:p.bytes,sha256:sha(reader.read(p.path))}));
+  const originalCode=historicalCode.map(p=>({path:p.path,bytes:p.bytes,sha256:sha(reader.read(p.path,{version:p.commit}))}));
+  const expectedCode=compatibleCurrentRebindCode(certificate.execution_commit,currentCode,originalCode);
+- const bodies=Object.fromEntries(roster.map(({name,p})=>[name,JSON.parse(reader.read(p.path,{version:p.commit,expected:p.sha256}))]));
++ const bodies=Object.fromEntries(earlyRoster.map(({name,p})=>[name,JSON.parse(reader.read(p.path,{version:p.commit,expected:p.sha256}))]));
+  // External custody verifies the original vector; current acquisition below
+  // executes the current trusted closure without relabelling historical runs.
+  demand(snapshot?.reader===reader,'Current rebind custody requires the actual privately authenticated selected snapshot');
+@@ -934,12 +935,34 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
+   reader.admit(actual);reader.read(p.path,{version:p.commit,expected:p.sha256});
+  }
+ 
+- const liveMetadata=carriedMetadataBytes+2*(valueBytes({certificate,bodies,code,historicalCode,currentCode,originalCode,roster,externalRoster,...(issuedOriginalInputs===undefined?{}:{issuedOriginalInputs})}).length+externalBytes);
++ // The original request/external-plan frame is fully authenticated above.
++ // Only these issued acquisition locators are needed during current word reads;
++ // whole request/result bodies are reopened at their identical immutable pins
++ // after the completed window frame, for the unchanged complete verifier.
++ const acquisitionSpec={targetSources:bodies.request.acquisition?.target_sources,predecessorProof:bodies.request.acquisition?.predecessor_proof};
++ bodies.request=null;
++ reclaimCompletedRebindFrame();
++ const priorPhaseBytes=reader.used;
++ const liveMetadata=carriedMetadataBytes+2*(valueBytes({certificate,bodies,acquisitionSpec,code,historicalCode,currentCode,originalCode,roster,externalRoster,...(issuedOriginalInputs===undefined?{}:{issuedOriginalInputs})}).length+externalBytes);
+ 
+- const acquired=acquireCurrentRebindOperands(snapshot,registry,originalRows,originalPatches,{targetSources:bodies.request.acquisition?.target_sources,predecessorProof:bodies.request.acquisition?.predecessor_proof,carriedMetadataBytes:liveMetadata});
++ const acquired=acquireCurrentRebindOperands(snapshot,registry,originalRows,originalPatches,{...acquisitionSpec,carriedMetadataBytes:liveMetadata});
++ // Complete raw row/run frames have returned. All acquired result/rows/targets,
++ // source/native custody and the full selected snapshot stay live and charged.
++ reclaimCompletedRebindFrame();
++ reader.metadataBytes=8*1048576+2*snapshot.metadataBytes+carriedMetadataBytes+2*(valueBytes({certificate,bodies,acquisitionSpec,code,historicalCode,currentCode,originalCode,roster,externalRoster,acquired,...(issuedOriginalInputs===undefined?{}:{issuedOriginalInputs})}).length+externalBytes)+(snapshot.acquisition_buffer_bytes??0);reader.phase();
++ for(const name of ['request','result']){
++  const {p}=roster.find(row=>row.name===name);
++  // Encoded bytes plus parsed/canonical/expected-result scratch are reserved
++  // before reads; completed-window words are no longer live in this phase.
++  demand(reader.used+4*p.bytes<=PHASE,'Complete reopened rebind product exceeds phase');reader.used+=3*p.bytes;
++  bodies[name]=JSON.parse(reader.read(p.path,{version:p.commit,expected:p.sha256}));
++ }
+  const identityScratch=2*(valueBytes(bodies.request.acquisition.native_inputs).length+valueBytes(acquired.acquisition.native_inputs).length);
+  demand(Number.isSafeInteger(identityScratch)&&identityScratch<=FILE&&reader.used+identityScratch<=PHASE,'Complete native identity comparison scratch exceeds phase');reader.used+=identityScratch;
+- return verifyCurrentRebindProducts({certificate,...bodies,baseSelection,registry,originalRows,originalPatches,size,expectedCode,acquired,executionCustody,bodyPins:Object.fromEntries(roster.map(({name,p})=>[name,p]))});
++ const result=verifyCurrentRebindProducts({certificate,...bodies,baseSelection,registry,originalRows,originalPatches,size,expectedCode,acquired,executionCustody,bodyPins:Object.fromEntries(roster.map(({name,p})=>[name,p]))});
++ // A sequential phase must never hide an earlier complete acquisition peak.
++ reader.used=Math.max(priorPhaseBytes,reader.used,...acquired.acquisition_phases.map(p=>p.complete_phase_bytes));
++ return result;
+ }
+ 
+ // Explicit committed data-only hook. This does not discover proposal files.
+@@ -1040,6 +1063,11 @@ export function readSelectedAdditive(snapshot) {
+   demand(named.ledger.version===2&&envelope.version===2,'Current rebind is an explicit v2-only extension');
+   const currentContract=Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k=>[k,manifest[k]]));
+   demand(proofs.every(p=>same(p.native_proof.native_contract,currentContract)),'Current rebind changes original native lattice/method/owner-parent contract');
++  // Complete original scope/pointset/contract checks above have finished.
++  // Retain only native patches/contracts and custody before current acquisition.
++  expectedScope.clear();
++  for(const proof of proofs){delete proof.original_ledger;proof.native_proof={native_contract:proof.native_proof.native_contract,native_patches:proof.native_proof.native_patches};}
++  reclaimCompletedRebindFrame();
+   rebind=readCurrentRebindCustody(reader,named.ledger.current_rebind,{baseSelection,registry,originalRows:[...normalized.rows.values()],originalPatches,size:manifest.size,snapshot,carriedMetadataBytes:2*valueBytes({sidecar,admitted,envelope,named,proofs,patch}).length});
+   demand(same(named.ledger.current_targets,rebind.current_targets),'Ledger current target pointsets differ from complete qualified rebind result');
+  }else demand(!Object.hasOwn(named.ledger,'current_targets'),'Current targets require complete rebind custody');
