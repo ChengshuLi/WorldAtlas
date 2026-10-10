@@ -291,6 +291,51 @@ export function readOriginalRuleAuthority(reader, pins, sourceOutputAliases=[]) 
 // Reuse the actually qualified source predecessor; never infer permission from
 // a hash-shaped receipt or caller-written approval boolean. No source method is
 // rerun here. Original whole case/source pins remain in the retained closure.
+// Only the reviewed b0 SOURCE /420 NATIVE pair may retain an older source
+// selector. Both original selectors and their complete unchanged source-map
+// identity are authenticated; current selected-bank conservation remains later.
+function originalAdministrativeBaseline(reader, issued, request, native) {
+ if(same(issued.baseline,request.baseline))return true;
+ const profile='retained-consumed-administrative-source';
+ demand(issued.source_rule?.profile===profile&&request.additive?.source_profile===profile
+  &&valueSha(issued.executed_code)==='8b1c7dcd78544aa42ea2598199cde0f5ab331a7a49ce3a6536112602f0ba2308'
+  &&valueSha(request.executed_code)==='89159cb6e58fb3a66bcbdd8c218b102380ae371d01657e830a9f442a40e69cb5',
+  'Unreviewed original administrative baseline split');
+ const read=p=>{pinCheck({...p,git_blob_oid:p.git_blob_oid??p.blob});
+  const actual=reader.descriptor(p.path,p.commit);
+  demand(actual.mode===p.mode&&actual.git_blob_oid===(p.git_blob_oid??p.blob)&&actual.bytes===p.bytes,'Original selector/source-map Git identity differs');
+  // Whole encoded input and parsed/canonical scratch stay charged in this
+  // existing phase; no reset or release of the retained authority graph.
+  const retained=3*p.bytes;demand(Number.isSafeInteger(retained)&&reader.used+retained<=PHASE,'Original baseline retained phase exceeds cap');
+  reader.metadataBytes+=retained;reader.used+=retained;reader.admit(actual);
+  return JSON.parse(reader.read(p.path,{version:p.commit,expected:p.sha256}));};
+ for(const baseline of [issued.baseline,request.baseline])demand(baseline?.version===2
+  &&baseline.kind==='current-selected-native-baseline-v1'&&Object.keys(baseline).sort().join(',')==='kind,pins,version'
+  &&Array.isArray(baseline.pins)&&baseline.pins.length===1&&baseline.pins[0].kind===undefined
+  &&baseline.pins[0].path==='data/ownership-selection.json','Foreign original administrative selector');
+ const historical=read(issued.baseline.pins[0]),selected=read(request.baseline.pins[0]),a=native.baseline_acquisition;
+ demand(a?.kind==='current-selected-native-baseline-custody-v1'&&same(a.baseline_pin,request.baseline.pins[0])
+  &&same(a.selection,selected)&&a.manifest_sha256===selected.sha256&&a.source_map_sha256===selected.selected_geography?.sha256,
+  'Original native selector acquisition differs');
+ demand(['method','manifest_path','sha256','release_id'].every(key=>historical[key]===selected[key])
+  &&same(historical.selected_geography,selected.selected_geography),'Original historical/current base geometry differs');
+ const descriptor=selected.selected_geography;
+ demand(descriptor?.kind==='complete-world-index-with-exact-encoded-overrides','Unsupported original selected source map');
+ const actual=reader.descriptor(descriptor.path,request.baseline.pins[0].commit);
+ demand(actual.bytes===descriptor.bytes,'Original selected source-map size differs');
+ const map=read({...actual,sha256:descriptor.sha256});
+ demand(map.kind===descriptor.kind&&map.native_manifest_sha256===selected.sha256&&map.release_id===selected.release_id,
+  'Original selected source-map binding differs');
+ const names=issued.source_rule.target_banks;
+ demand(Array.isArray(names)&&names.length>0&&new Set(names).size===names.length&&Array.isArray(a.source_bindings),'Incomplete original target-bank roster');
+ for(const name of names){const expected=issued.source_rule.inputs.filter(p=>p.path===name),acquired=a.source_bindings.filter(p=>p.path===name),mapped=map.unchanged_files.filter(p=>p.path===name);
+  demand(expected.length===1&&acquired.length===1&&mapped.length===1&&expected[0].kind===undefined
+   &&acquired[0].kind==='ordinary-immutable-git-source'&&['mode','bytes','sha256'].every(k=>expected[0][k]===acquired[0][k]&&expected[0][k]===mapped[0][k])
+   &&expected[0].blob===acquired[0].git_blob_oid&&expected[0].blob===mapped[0].git_blob_oid
+   &&acquired[0].commit===mapped[0].commit,'Original complete administrative target bank differs');}
+ return true;
+}
+
 export function qualifyOriginalSourceAuthority(custody) {
  const proof=originalAuthorities.get(custody);demand(proof,'Require actual authenticated original rule custody');
  const {reader,bodies}=proof,{native_request:request,source_request:issued,source_facts:facts}=bodies,spec=request.additive;
@@ -306,7 +351,7 @@ export function qualifyOriginalSourceAuthority(custody) {
   demand(hash(p.uncompressed_sha256),'Missing complete decoded proof hash');const decoded=gunzipSync(encoded,{maxOutputLength:p.uncompressed_bytes});demand(decoded.length===p.uncompressed_bytes&&sha(decoded)===p.uncompressed_sha256,'Whole decoded original proof differs');return decoded;});
  const [publication,inventory,operating]=[JSON.parse(raw[0]),raw[1],JSON.parse(raw[2])],inventoryPin=pins[1];
  demand(publication.complete===true&&publication.facts.bytes===custody.pins.source_facts.bytes&&publication.facts.sha256===custody.pins.source_facts.sha256&&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(k=>publication.inventory[k]===inventoryPin[k]),'Partial/drifted original source publication');
- demand(facts.execution_commit===spec.source_execution_commit&&same(facts.input_descriptors,[issued.report,...issued.source_rule.inputs,...issued.baseline.pins])&&same(facts.runtime,spec.source_runtime)&&same(facts.installed_modules,issued.installed_modules)&&same(facts.parent,request.parent)&&same(issued.baseline,request.baseline),'Original source execution closure differs');
+ demand(facts.execution_commit===spec.source_execution_commit&&same(facts.input_descriptors,[issued.report,...issued.source_rule.inputs,...issued.baseline.pins])&&same(facts.runtime,spec.source_runtime)&&same(facts.installed_modules,issued.installed_modules)&&same(facts.parent,request.parent)&&originalAdministrativeBaseline(reader,issued,request,bodies.native_facts),'Original source execution closure differs');
  demand(operating.qualified===true&&operating.execution_commit===facts.execution_commit&&operating.exit?.code===0&&operating.exit.signal===null&&operating.owned_processes_remaining?.length===0&&operating.refusal===null&&operating.request_sha256===facts.request.sha256&&operating.destination===issued.destination,'Unqualified original source operating proof');
  const lines=inventory.toString('utf8').split('\n');demand(lines.pop()==='','Truncated complete source inventory');const rows=lines.map(line=>JSON.parse(line));
  demand(same(rows.map(r=>r.component_id),issued.source_rule.expected_ids)&&rows.length===facts.components&&new Set(rows.map(r=>r.component_id)).size===rows.length,'Omitted/duplicate/reordered source inventory');
