@@ -1,6 +1,6 @@
 import {SelectedGeometrySources} from '../../../scripts/check-effective-geographic-regression.mjs';
 import {additiveBaseReference} from '../../../src/effective-footprint.js';
-import {nativeBaseSelection,requirePriorAdditiveConservation,normaliseRetainedRepairLedger,readCurrentRebindCustody,valueBytes,valueSha}
+import {nativeBaseSelection,requirePriorAdditiveConservation,reclaimCompletedRebindFrame,normaliseRetainedRepairLedger,readCurrentRebindCustody,valueBytes,valueSha}
   from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const demand=(value,message)=>{if(!value)throw Error(message);};
@@ -11,6 +11,7 @@ const safe=p=>typeof p==='string'&&!p.includes('\\')&&p.split('/').every(s=>s&&s
 // producer boolean for that authority and never writes/selects any output.
 export function assembleSupportedActivation({snapshot,registry,originalLedger,originalPatches,
   rebindPin,baseAssets,logicalPaths}) {
+  reclaimCompletedRebindFrame();
   demand(baseAssets&&Object.keys(baseAssets).sort().join(',')==='base_manifest,owner_roster'
     &&logicalPaths&&Object.keys(logicalPaths).sort().join(',')==='ledger,patch'
     &&Object.values(logicalPaths).every(safe),'Exact base assets and two safe new logical paths required');
