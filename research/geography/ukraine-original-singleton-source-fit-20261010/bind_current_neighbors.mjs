@@ -62,9 +62,10 @@ demand(certificate.inputs.length === index.parts.length && certificate.entries.l
 demand(JSON.stringify(certificate.inputs.map(x => x.path).sort()) === JSON.stringify(index.parts.map(x => 'data/' + x).sort()), 'Certificate omits indexed parts');
 demand(certificate.binding.release.id === selection.release_id && certificate.binding.release.footprints_sha256 === bank.footprints_sha256, 'Certificate reference differs');
 for (const input of certificate.inputs) {
-  demand(git('ls-tree', '-z', baseline, '--', input.path).toString() === input.source.mode + ' blob ' + input.source.git_blob_oid + '\t' + input.path + '\0', 'Certificate source changed: ' + input.path);
-  const selected = selectedSources.find(row => row.path === input.path);
-  demand(selected && selected.git_blob_oid === input.source.git_blob_oid && selected.sha256 === input.whole_body_sha256, 'Certificate is not current selected source');
+  const sourcePath = input.source.path;
+  demand(git('ls-tree', '-z', baseline, '--', sourcePath).toString() === input.source.mode + ' blob ' + input.source.git_blob_oid + '\t' + sourcePath + '\0', 'Certificate source changed: ' + input.path);
+  const selected = selectedSources.find(row => (row.logical_path ?? row.path) === input.path);
+  demand(selected && selected.git_blob_oid === input.source.git_blob_oid && (selected.decoded_sha256 ?? selected.sha256) === input.whole_body_sha256, 'Certificate is not current selected source');
 }
 const identities = new Set();
 for (const row of certificate.entries) {
