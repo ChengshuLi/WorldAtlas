@@ -1,0 +1,12 @@
+file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/scripts/check-effective-geographic-regression.mjs:13
+const demand=(v,m)=>{if(!v)throw Error(m);};
+                                 ^
+
+Error: Missing typed artifact review
+    at demand (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/scripts/check-effective-geographic-regression.mjs:13:34)
+    at readArtifactConsumption (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/scripts/check-effective-geographic-regression.mjs:383:105)
+    at loadBaseSelection (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/scripts/check-effective-geographic-regression.mjs:415:29)
+    at loadSelection (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/scripts/check-effective-geographic-regression.mjs:458:18)
+    at file:///Users/chengshuli/world-atlas-workspace/.cache/additive-activation-successor-20261009/completed-frame-reclamation/prepare-final-custody-plan.mjs:11:16
+
+Node.js v24.19.0

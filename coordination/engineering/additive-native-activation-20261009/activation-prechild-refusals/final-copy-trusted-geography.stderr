@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/scripts/run-geographic-check.py", line 408, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/scripts/run-geographic-check.py", line 384, in main
+    verify_trusted_checkout(repo, args.baseline)
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/scripts/run-geographic-check.py", line 77, in verify_trusted_checkout
+    raise ValueError('Checker checkout must be the exact trusted baseline commit')
+ValueError: Checker checkout must be the exact trusted baseline commit
