@@ -16,6 +16,7 @@ MANIFEST = BATCH + "/evidence-quality.json"
 RESULT = BATCH + "/vintages/coverage-run-20261010-02/source-variant-coverage.json"
 README = PACKET + "/README.md"
 BASELINE_CANDIDATE = BATCH + "/alaska-west-four-source-physical-evidence.json"
+CANDIDATE_SOURCE_COMMIT = "b2b34087682b9a20e53c72c83f6d53054e09e8cf"
 SOURCE_PATHS = [
     "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/geoboundaries-USA-ADM2-full-9469f09.geojson",
     "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/geoboundaries-USA-ADM2-full-9469f09-receipt.json",
@@ -99,10 +100,12 @@ def main() -> None:
 
     # Retain candidate identity and geometry provenance as an explicit baseline
     # file; the original 4,674/152 subject inventory and all earlier evidence stay.
-    raw_candidate = git("show", f"{run_commit}:{BASELINE_CANDIDATE}")
+    raw_candidate = git("show", f"{CANDIDATE_SOURCE_COMMIT}:{BASELINE_CANDIDATE}")
+    if raw_candidate != git("show", f"{run_commit}:{BASELINE_CANDIDATE}"):
+        raise SystemExit("retained physical-evidence bytes differ from their merged #1653 source commit")
     candidate_descriptor = {"path": BASELINE_CANDIDATE, "bytes": len(raw_candidate),
-                            "sha256": digest(raw_candidate), "hash_kind": "file-bytes", "commit": run_commit}
-    if not any(row["path"] == BASELINE_CANDIDATE and row.get("commit") == run_commit for row in manifest["baseline"]["files"]):
+                            "sha256": digest(raw_candidate), "hash_kind": "file-bytes", "commit": CANDIDATE_SOURCE_COMMIT}
+    if not any(row["path"] == BASELINE_CANDIDATE and row.get("commit") == CANDIDATE_SOURCE_COMMIT for row in manifest["baseline"]["files"]):
         manifest["baseline"]["files"].append(candidate_descriptor)
 
     source_files = [descriptor(path, "retained-2018-USA-ADM2-full-or-simplified-variant") for path in SOURCE_PATHS]
