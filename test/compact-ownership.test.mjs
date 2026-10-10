@@ -167,3 +167,128 @@ test('packaged coverage supports all modes, gap explanations and unavailable-ref
   }
  }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}
 });
+
+// Actual selected output probe in the existing shard0 route.
+test('actual selected additive cells draw and pick identically in production GPU and Canvas', {timeout:240000},async t=>{
+ const {createHash}=await import('node:crypto'),path=await import('node:path');
+ const digest=raw=>createHash('sha256').update(raw).digest('hex');
+ const repo=path.resolve('.'),output=path.resolve('dist/client');
+ const whole=(root,pin)=>{
+  assert.ok(pin&&typeof pin.path==='string'&&!path.isAbsolute(pin.path)&&!pin.path.split('/').some(p=>!p||p==='.'||p==='..'));
+  let file=root;for(const part of pin.path.split('/')){file=path.join(file,part);assert.equal(fs.lstatSync(file).isSymbolicLink(),false);}
+  const first=fs.lstatSync(file);assert.ok(first.isFile());
+  if(pin.mode)assert.equal(first.mode&0o777,parseInt(pin.mode,8)&0o777);
+  const fd=fs.openSync(file,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);let raw;
+  try{raw=fs.readFileSync(fd);const held=fs.fstatSync(fd),last=fs.lstatSync(file);for(const k of ['dev','ino','size','mode','mtimeMs','ctimeMs'])assert.equal(first[k],held[k]),assert.equal(held[k],last[k]);}finally{fs.closeSync(fd);}
+  assert.equal(raw.length,pin.bytes);assert.equal(digest(raw),pin.sha256);
+  if(pin.encoding==='gzip'||pin.decoded_bytes!==undefined){const decoded=gunzipSync(raw,{maxOutputLength:pin.decoded_bytes});assert.equal(decoded.length,pin.decoded_bytes);assert.equal(digest(decoded),pin.decoded_sha256);return decoded;}
+  return raw;
+ };
+ const json=(root,pin)=>JSON.parse(whole(root,pin));
+ const selection=JSON.parse(fs.readFileSync('data/ownership-selection.json'));
+ assert.equal(selection.version,1);assert.equal(typeof selection.manifest_path,'string');
+ if(selection.additive_release===undefined){t.skip('Actual selected bank has no additive release');return;}
+ const sidecar=json(repo,selection.additive_release),envelope=json(repo,sidecar.runtime_envelope);
+ assert.deepEqual(Object.keys(envelope).sort(),['base_manifest','base_reference','effective_reference','kind','ledger','owner_roster','patch','version'].sort());
+ assert.equal(envelope.version,2);assert.equal(envelope.kind,'retained-native-base-plus-delta-v2');
+ const atlas=JSON.parse(fs.readFileSync(path.join(output,'atlas-geography.json')));
+ assert.deepEqual(atlas.additiveRelease,envelope);assert.deepEqual(atlas.reference_release,envelope.effective_reference);
+ const bodies={};for(const role of ['base_manifest','ledger','owner_roster','patch']){
+  const published=whole(output,envelope[role]),original=whole(repo,sidecar.logical_asset_map[role]);
+  assert.deepEqual(published,original);bodies[role]=JSON.parse(published);
+ }
+ const {ledger,patch,owner_roster:owners,base_manifest:manifest}=bodies;
+ assert.equal(envelope.base_manifest.sha256,selection.sha256);assert.equal(atlas.pixelMap.canonical_grid_sha256,selection.sha256);
+ const certificate=json(repo,ledger.current_rebind),request=json(repo,certificate.request),result=json(repo,certificate.result);
+ assert.deepEqual(result.original_rows,request.original_rows);assert.deepEqual(result.current_targets,request.current_targets);
+ assert.deepEqual(result.base_selection,certificate.base_selection);assert.deepEqual(result.native.rows,patch.rows);
+ assert.deepEqual(request.base_selection,sidecar.base_selection);
+ assert.ok(owners.length>0&&owners.length<2**24);
+ assert.equal(manifest.original_assets.bounds.sha256,envelope.owner_roster.sha256);
+ assert.deepEqual(owners.map(o=>o.index),owners.map((_,i)=>i+1));assert.equal(new Set(owners.map(o=>o.id)).size,owners.length);
+ const latitudePin=atlas.pixelMap.native_latitudes;
+ assert.equal(latitudePin.transport_path,'native-v1/native-row-latitudes.f64le.gz');
+ const latitudes=whole(output,{...latitudePin,path:latitudePin.transport_path});
+ assert.equal(latitudes.length,manifest.size*8);assert.equal(digest(latitudes),manifest.native_latitudes.decoded_sha256);
+ // Reuse complete qualified row inputs; do not repeat the old fourteen-million-cell CPU proof.
+ const observed=new Map();for(const row of [...request.current_rows,...request.acquisition.predecessor_rows]){
+  if(observed.has(row.y))assert.deepEqual(observed.get(row.y),row);else observed.set(row.y,row);
+ }
+ const probes=[],addedKeys=new Set(),gainByOwner=new Map();
+ for(const row of patch.rows)for(const [start,end,owner]of row.runs){
+  assert.ok(owners[owner-1]);for(let x=start;x<end;x++){
+   const key=x+'/'+row.y;assert.equal(addedKeys.has(key),false);addedKeys.add(key);
+   assert.ok(observed.has(row.y));assert.ok(!observed.get(row.y).runs.some(([a,b])=>a<=x&&x<b));
+   probes.push({x,y:row.y,before:0,after:owner,added:true});gainByOwner.set(owner,(gainByOwner.get(owner)??0)+1);
+  }
+ }
+ assert.ok(probes.length>0);assert.equal(probes.length,result.native.assigned_cells);
+ for(const row of observed.values()){
+  const run=row.runs.find(([a,b])=>a<b);assert.ok(run,'Complete observed row needs a stable before control');
+  probes.push({x:run[0],y:row.y,before:run[2],after:run[2],added:false});
+ }
+ for(const probe of probes){probe.lon=(probe.x+.5)/manifest.size*360-180;probe.lat=latitudes.readDoubleLE(probe.y*8);assert.ok(Number.isFinite(probe.lat));}
+ const expectedGains=new Map();for(const row of result.native.rows)for(const [start,end,owner]of row.runs)expectedGains.set(owner,(expectedGains.get(owner)??0)+end-start);
+ assert.deepEqual([...gainByOwner].sort((a,b)=>a[0]-b[0]),[...expectedGains].filter(([,cells])=>cells>0).sort((a,b)=>a[0]-b[0]));
+ const payload={atlas,owners,probes};
+ const html=`<!doctype html><link rel="stylesheet" href="/node_modules/leaflet/dist/leaflet.css"><style>#map{width:256px;height:256px}</style><div id="map"></div><script type="module">
+ import * as L from '/node_modules/leaflet/dist/leaflet-src.esm.js';
+ import {PixelLayer} from '/src/pixel-layer.js';import {PixelCanvasLayer} from '/src/pixel-canvas-layer.js';
+ import {loadOwnershipAssets} from '/src/ownership-assets.js';import {loadAdditiveNativePatch} from '/src/effective-footprint.js';
+ import {readJSON} from '/src/data-client.js';
+ import {pickOwnership} from '/src/pixel-ownership.js';import {projectCell} from '/src/pixel-grid.js';
+ const payload=await fetch('/selected-render-input').then(r=>r.json()),fetcher=p=>fetch('/selected-assets/'+(p.startsWith('./')?p.slice(2):p));
+ const base=await loadOwnershipAssets(payload.atlas.pixelMap,fetcher);
+ const originalFeatures=(await Promise.all(payload.atlas.parts.map(p=>readJSON('/selected-assets/'+p)))).flat();
+ if(originalFeatures.length!==payload.owners.length||originalFeatures.some((f,i)=>f.id!==payload.owners[i].id||f.pixelIndex!==payload.owners[i].index||f.properties.parent_id!==payload.owners[i].province_id))throw Error('Complete emitted catalog/owner roster mismatch');
+ const features=originalFeatures.map(f=>({...f,properties:{...f.properties}}));
+ const effective=await loadAdditiveNativePatch(payload.atlas,features,base,{fetcher});
+ const map=L.map('map',{zoomSnap:0,minZoom:1,maxZoom:13}).setView([0,0],13),rgba=id=>id?[id&255,id>>>8&255,id>>>16&255,255]:[0,0,0,0];
+ const color=f=>'#'+rgba(f.pixelIndex).slice(0,3).map(x=>x.toString(16).padStart(2,'0')).join('');
+ window.selectedRender={L,map,payload,base,effective,originalFeatures,features,rgba,pickOwnership,projectCell,color,PixelLayer,PixelCanvasLayer};
+ </script>`;
+ const server=await createServer({server:{host:'127.0.0.1',port:0},logLevel:'error',plugins:[{name:'selected-added-cell-test',configureServer(s){s.middlewares.use((req,res,next)=>{
+  const name=new URL(req.url,'http://localhost').pathname;
+  if(name==='/selected-render'){res.setHeader('Content-Type','text/html');res.end(html);return;}
+  if(name==='/selected-render-input'){res.setHeader('Content-Type','application/json');res.end(JSON.stringify(payload));return;}
+  if(!name.startsWith('/selected-assets/')){next();return;}
+  const relative=decodeURIComponent(name.slice('/selected-assets/'.length)),file=path.resolve(output,relative);
+  if(!file.startsWith(output+path.sep)||relative.split('/').some(x=>x==='..')||!fs.existsSync(file)){res.statusCode=404;res.end();return;}
+  res.setHeader('Content-Type','application/octet-stream');fs.createReadStream(file).pipe(res);
+ });}}]});let browser;
+ try{
+  await server.listen();const port=server.httpServer.address().port;
+  browser=await chromium.launch({args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+  const page=await browser.newPage({deviceScaleFactor:1}),errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.route('**/*',route=>{const u=new URL(route.request().url());return u.protocol==='http:'&&u.hostname==='127.0.0.1'&&u.port===String(port)?route.continue():route.abort();});
+  await page.goto(`http://127.0.0.1:${port}/selected-render`);await page.waitForFunction(()=>!!window.selectedRender);
+  const observations=await page.evaluate(async()=>{
+   const s=window.selectedRender,checks=[];
+   for(const renderer of ['gpu','canvas'])for(const vintage of ['before','after']){
+    const grid=vintage==='before'?s.base:s.effective,features=vintage==='before'?s.originalFeatures:s.features;
+    const options={ownership:grid,orderedOwners:true,color:s.color,selected:()=>null,locationBorders:()=>false,select:id=>s.selected=id};
+    const layer=new(renderer==='gpu'?s.PixelLayer:s.PixelCanvasLayer)(features,options).addTo(s.map);
+    if((!!layer.gpu)!==(renderer==='gpu'))throw Error('Unexpected renderer fallback');
+    let checked=0;
+    for(const probe of s.payload.probes){
+     const latlng=s.L.latLng(probe.lat,probe.lon),expected=probe[vintage];s.map.setView(latlng,13,{animate:false});
+     cancelAnimationFrame(layer.pending);await layer.draw();const projected=s.projectCell(probe.lon,probe.lat);
+     if(Math.floor(projected[0])!==probe.x||Math.floor(projected[1])!==probe.y)throw Error('Normative cell center projection drift');
+     if(s.pickOwnership(grid,probe.x,probe.y)!==expected||(layer.pick(latlng)?.id??null)!==(expected?s.payload.owners[expected-1].id:null))throw Error('Selected owner/pick mismatch');
+     s.selected=null;if(expected){layer.click({latlng});if(s.selected!==s.payload.owners[expected-1].id)throw Error('Production click selected another owner');}
+     const c=layer.canvas,at=s.map.latLngToContainerPoint(latlng),mapRect=s.map.getContainer().getBoundingClientRect(),rect=c.getBoundingClientRect();
+     const x=Math.floor(mapRect.left+at.x-rect.left),y=Math.floor(mapRect.top+at.y-rect.top);let pixel;
+     if(layer.gpu){pixel=new Uint8Array(4);const gl=layer.gpu.gl;gl.readPixels(x,c.height-1-y,1,1,gl.RGBA,gl.UNSIGNED_BYTE,pixel);if(gl.getError()!==0)throw Error('GPU read error');}
+     else pixel=c.getContext('2d').getImageData(x,y,1,1).data;
+     if(!s.rgba(expected).every((v,i)=>v===pixel[i]))throw Error('Selected fill mismatch '+renderer+'/'+vintage+'/'+probe.x+'/'+probe.y);
+     checked++;
+    }
+    if(Number(layer.canvas.dataset.compilations)!==0)throw Error('Precompiled selected bank was recompiled');
+    checks.push({renderer,vintage,checked});layer.remove();
+   }
+   return checks;
+  });
+  assert.deepEqual(errors,[]);assert.equal(observations.length,4);assert.ok(observations.every(o=>o.checked===probes.length));
+  console.log(JSON.stringify({kind:'actual-selected-additive-gpu-canvas-picking',backend:'headless SwiftShader/Canvas2D; not physical-device performance',selected_envelope_sha256:sidecar.runtime_envelope.sha256,owners:owners.length,added_cells:result.native.assigned_cells,complete_observed_rows:observed.size,stable_before_controls:observed.size,observations}));
+ }finally{await browser?.close();await server.close();}
+});

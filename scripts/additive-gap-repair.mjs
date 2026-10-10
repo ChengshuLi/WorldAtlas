@@ -9,6 +9,7 @@ import verifiedCandidates from './native-ownership/verified-candidates.json' wit
 import {canonicalValue, footprintValueSha256, polygonParts, additiveReleaseFootprintDigest} from '../src/effective-footprint.js';
 import {candidateBudget, committedPreparationFiles, createNativeCandidateOutput, requirePlainExecution} from './native-ownership/native-preparation-guards.mjs';
 
+import {ImmutableReader, loadSelection} from './check-effective-geographic-regression.mjs';
 import {nativePolygonIntervals} from '../src/native-grid.js';
 import {nativeRuntimeIndex} from '../src/native-runtime.js';
 import {unshuffleOwnershipBytes} from '../src/ownership-codec.js';
@@ -227,6 +228,301 @@ export function retainedCountySourcePremises({record,candidate,sourceCase,source
     representation:'retained-base-plus-additions'};
 }
 
+// Reuse the original Python canonical byte preimage only when its whole SHA
+// equals the retained operation's recorded hash and its parsed complete value
+// equals the actual target. This preserves the historical hash domain without
+// changing any coordinates or pretending that JS recomputed the old SHA.
+export function originalAdministrativeTargetHash({sourceScope,target,kind,expected}) {
+  if(!['feature','geometry'].includes(kind)||!hex(expected))return false;
+  const value=kind==='feature'?target:target.geometry;
+  if(sha(canonical(value))===expected)return true;
+  const matches=sourceScope.original_target_canonical_bindings?.filter(row=>row.target_id===target.id);
+  if(matches?.length!==1)return false;
+  const binding=matches[0],encoded=binding[kind+'_bytes_base64'];
+  if(binding[kind+'_sha256']!==expected||typeof encoded!=='string')return false;
+  const bytes=Buffer.from(encoded,'base64');
+  if(bytes.length===0||bytes.length>32*1024*1024||sha(bytes)!==expected)return false;
+  try{return JSON.stringify(canonicalValue(JSON.parse(bytes)))===JSON.stringify(canonicalValue(value));}
+  catch{return false;}
+}
+
+export function retainedAdministrativeSourcePremises({record,candidate,sourceCase,sourceScope,target}) {
+  demand(record?.component_id===sourceCase?.component_id,'Administrative component join differs');
+  polygonParts(candidate);polygonParts(target.geometry);
+  const failures=[],premise=(name,value)=>{if(!value)failures.push(name);};
+  const digest=value=>sha(canonical(value));
+  const same=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
+  const support=record.complete_support;
+  demand(support?.hierarchy_disagreements,'Incomplete original administrative land operations');
+  const empty=operation=>operation?.kind==='empty'&&operation.area_m2===0
+    &&operation.planar_area===0&&completeEmptyGeometry(operation.geometry);
+  premise('original-full-candidate-binding',record.candidate_feature_sha256===digest(sourceCase.original_candidate_feature)
+    &&record.candidate_geometry_sha256===digest(candidate)
+    &&wholePrimitivePointsetEqual(candidate,sourceCase.original_candidate_feature.geometry));
+  premise('retained-whole-land-pointset',record.status==='mapped-land-support'
+    &&support.mapped_land_support?.kind==='whole-operation-pointset'
+    &&wholePrimitivePointsetEqual(candidate,support.mapped_land_support.geometry));
+  for(const key of ['mapped_inland_water_support','outside_mapped_L1_context','contradictory_land_water_support','missing_reconstruction','extra_reconstruction'])premise(key,empty(support[key]));
+  for(const key of ['L2-outside-L1','L3-outside-L2','L4-outside-L3'])premise(key,empty(support.hierarchy_disagreements[key]));
+  const original=sourceScope.original_physical_comparison_bindings?.filter(x=>x.component_id===record.component_id);
+  premise('complete-original-query-and-source-metadata',original?.length===1
+    &&same(record,original[0].physical_comparison.row)
+    &&Array.isArray(record.query_relations)&&record.query_relations.length>0
+    &&original[0].original_queried_source_metadata.length===record.query_relations.length
+    &&record.query_relations.every((query,i)=>{
+      const native=original[0].original_queried_source_metadata[i].original_source_record_metadata;
+      return native.id===query.source_id&&native.level===query.source_level
+        &&native.record_sha256===query.source_record_sha256
+        &&native.decoded_pointset_binary64_sha256===query.source_pointset_sha256
+        &&query.status==='checked'&&Array.isArray(query.container_chain_issues)&&query.container_chain_issues.length===0;
+    })
+    &&record.query_relations.some(q=>q.source_level===1&&q.source_covers_candidate===true&&q.intersects===true&&q.disjoint===false));
+  const payload=sourceCase.retained_payload,operation=sourceCase.retained_source_operation_row;
+  premise('whole-administrative-candidate-and-target',payload?.component_id===record.component_id
+    &&payload.candidate_feature_sha256===record.candidate_feature_sha256
+    &&payload.candidate_geometry_sha256===record.candidate_geometry_sha256
+    &&payload.target_stable_location_id===target.id
+    &&payload.unsupported_candidate_remainder_included===false
+    &&payload.source_supported_intersection_fragments?.length===1
+    &&wholePrimitivePointsetEqual(candidate,payload.source_supported_intersection_fragments[0].intersection_geometry)
+    &&originalAdministrativeTargetHash({sourceScope,target,kind:'feature',expected:payload.target_current_feature.feature_sha256})
+    &&originalAdministrativeTargetHash({sourceScope,target,kind:'geometry',expected:payload.target_current_feature.geometry_sha256})
+    &&payload.target_current_feature.parent_id===target.properties?.parent_id);
+  const admin=operation?.source_comparison_record;
+  if(admin){
+    const hits=operation.positive_area_source_feature_intersections,subject=admin.uniquely_covering_compatible_recorded_subject;
+    premise('retained-simplified-unique-source-subject',admin.component===record.component_id
+      &&admin.component_geometry_sha256===record.candidate_geometry_sha256
+      &&admin.full_component_feature_sha256===record.candidate_feature_sha256
+      &&admin.current_component_relation==='retained-full-original-feature-pointset'
+      &&admin.status==='one-compatible-recorded-subject-uniquely-covers-component'
+      &&admin.component_minus_source_union?.is_empty===true
+      &&completeEmptyGeometry(admin.component_minus_source_union.geometry)
+      &&admin.component_minus_source_union.planar_area_coordinate_units_squared===0
+      &&admin.component_minus_source_union.planar_length_coordinate_units===0
+      &&admin.component_minus_source_union.is_valid===true
+      &&admin.component_minus_source_union.geometry_type===admin.component_minus_source_union.geometry?.type
+      &&admin.component_minus_source_union.geometry_sha256===digest(admin.component_minus_source_union.geometry)
+      &&operation.positive_area_recorded_source_subject_ids?.length===1
+      &&operation.positive_area_recorded_source_subject_ids[0]===target.id
+      &&hits?.length===1&&hits[0].recorded_stable_subjects?.length===1
+      &&same(hits[0].recorded_stable_subjects[0],subject)
+      &&subject.id===target.id&&originalAdministrativeTargetHash({sourceScope,target,kind:'feature',expected:subject.original_feature_sha256})
+      &&subject.original_parent_id===target.properties.parent_id
+      &&typeof subject.reference_year==='string'&&subject.reference_year.length>0
+      &&admin.feature_intersections.some(hit=>hit.binding.feature_sha256===hits[0].feature_sha256
+        &&hit.binding.geometry_sha256===hits[0].geometry_sha256&&hit.binding.valid_polygon===true
+        &&hit.source_feature_covers_entire_component===true
+        &&wholePrimitivePointsetEqual(candidate,hit.intersection.geometry)));
+  }else{
+    const hits=operation?.province_intersections?.filter(hit=>hit.intersection_dimension==='area');
+    const coverage=sourceCase.whole_original_case?.whole_candidate_source_coverage;
+    premise('retained-generalized-NCL-unique-source-subject',operation?.component_id===record.component_id
+      &&operation.candidate_feature_sha256===record.candidate_feature_sha256
+      &&operation.candidate_geometry_sha256===record.candidate_geometry_sha256
+      &&operation.disposition==='unique-positive-area-georep-province-match'
+      &&operation.positive_area_target_stable_location_ids?.length===1
+      &&operation.positive_area_target_stable_location_ids[0]===target.id
+      &&hits?.length===1&&hits[0].target_stable_location_id===target.id
+      &&coverage?.status==='complete-exact-candidate-minus-source-empty'
+      &&coverage.target_stable_location_id===target.id
+      &&coverage.candidate_minus_retained_source_feature?.is_empty===true
+      &&completeEmptyGeometry(coverage.candidate_minus_retained_source_feature.geometry)
+      &&coverage.candidate_minus_retained_source_feature.area_degree2===0
+      &&['Polygon','MultiPolygon'].includes(coverage.candidate_minus_retained_source_feature.geometry_type)
+      &&(coverage.candidate_minus_retained_source_feature.geometry===null
+        ||coverage.candidate_minus_retained_source_feature.geometry_type===coverage.candidate_minus_retained_source_feature.geometry.type)
+      &&wholePrimitivePointsetEqual(candidate,hits[0].intersection_geometry)
+      &&sourceScope.source_policy_facts.generalized_ncl_profile.source_product.features.some(feature=>
+        feature.target_stable_location_id===target.id&&feature.source_path===hits[0].source_path
+        &&feature.source_file_sha256===hits[0].source_file_sha256
+        &&feature.source_feature_sha256===hits[0].source_feature_sha256
+        &&feature.source_geometry_sha256===hits[0].source_geometry_sha256));
+  }
+  return {component_id:record.component_id,target_id:target.id,source_compatible:failures.length===0,
+    failed_premises:failures,representation:'retained-base-plus-additions',
+    authority:record.physical_authority,status:record.physical_status,limits:record.physical_limits,
+    source_vintage:record.source_vintage,
+    source_profile:admin?'retained-consumed-simplified-administrative-source':'retained-generalized-NCL-2024-province-source'};
+}
+
+// A separate subgeometry premise. The existing whole-source function's empty
+// residual guards remain literal. Pure predicates are not custody issuers;
+// the caller requires the accepted original whole product roster and inverses.
+export function retainedAdministrativeFragmentPremises({record,fragment,sourceCase,sourceScope,target}) {
+  demand(record?.component_id===sourceCase?.component_id,'Administrative component join differs');
+  const candidate=sourceCase.original_candidate_feature.geometry;
+  polygonParts(candidate);polygonParts(fragment);polygonParts(target.geometry);
+  const failures=[],premise=(name,value)=>{if(!value)failures.push(name);};
+  const digest=value=>sha(canonical(value));
+  const same=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
+  const support=record.complete_support;
+  demand(support?.hierarchy_disagreements,'Incomplete original administrative land operations');
+  const empty=operation=>operation?.kind==='empty'&&operation.area_m2===0
+    &&operation.planar_area===0&&completeEmptyGeometry(operation.geometry);
+  premise('original-full-candidate-binding',record.candidate_feature_sha256===digest(sourceCase.original_candidate_feature)
+    &&record.candidate_geometry_sha256===digest(candidate)
+    &&wholePrimitivePointsetEqual(candidate,sourceCase.original_candidate_feature.geometry));
+  premise('retained-whole-land-pointset',record.status==='mapped-land-support'
+    &&support.mapped_land_support?.kind==='whole-operation-pointset'
+    &&wholePrimitivePointsetEqual(candidate,support.mapped_land_support.geometry));
+  for(const key of ['mapped_inland_water_support','outside_mapped_L1_context','contradictory_land_water_support','missing_reconstruction','extra_reconstruction'])premise(key,empty(support[key]));
+  for(const key of ['L2-outside-L1','L3-outside-L2','L4-outside-L3'])premise(key,empty(support.hierarchy_disagreements[key]));
+  const original=sourceScope.original_physical_comparison_bindings?.filter(x=>x.component_id===record.component_id);
+  premise('complete-original-query-and-source-metadata',original?.length===1
+    &&same(record,original[0].physical_comparison.row)
+    &&Array.isArray(record.query_relations)&&record.query_relations.length>0
+    &&original[0].original_queried_source_metadata.length===record.query_relations.length
+    &&record.query_relations.every((query,i)=>{
+      const native=original[0].original_queried_source_metadata[i].original_source_record_metadata;
+      return native.id===query.source_id&&native.level===query.source_level
+        &&native.record_sha256===query.source_record_sha256
+        &&native.decoded_pointset_binary64_sha256===query.source_pointset_sha256
+        &&query.status==='checked'&&Array.isArray(query.container_chain_issues)&&query.container_chain_issues.length===0;
+    })
+    &&record.query_relations.some(q=>q.source_level===1&&q.source_covers_candidate===true&&q.intersects===true&&q.disjoint===false));
+  const payload=sourceCase.retained_payload,operation=sourceCase.retained_source_operation_row,coverage=sourceCase.whole_original_case?.whole_candidate_source_coverage;
+  const sameGeometry=(a,b)=>wholePrimitivePointsetEqual(a,b);
+  const originalTargetHash=(kind,expected,value)=>originalAdministrativeTargetHash({sourceScope,target,kind,expected});
+  premise('literal-original-component-and-supported-fragment',payload?.component_id===record.component_id
+    &&same(payload.candidate_feature,sourceCase.original_candidate_feature)
+    &&same(sourceCase.whole_original_case.candidate_feature,sourceCase.original_candidate_feature)
+    &&payload.candidate_feature_sha256===record.candidate_feature_sha256
+    &&payload.candidate_geometry_sha256===record.candidate_geometry_sha256
+    &&payload.unsupported_candidate_remainder_included===false
+    &&payload.source_supported_intersection_fragments?.length===1
+    &&sameGeometry(fragment,payload.source_supported_intersection_fragments[0].intersection_geometry)
+    &&sameGeometry(fragment,sourceCase.entire_supported_fragment)
+    &&payload.target_stable_location_id===target.id
+    &&originalTargetHash('feature',payload.target_current_feature.feature_sha256,target)
+    &&originalTargetHash('geometry',payload.target_current_feature.geometry_sha256,target.geometry)
+    &&payload.target_current_feature.parent_id===target.properties?.parent_id);
+  const remainder=coverage?.remainder,admin=operation?.source_comparison_record;
+  const nonempty=g=>g&&['Polygon','MultiPolygon'].includes(g.type)&&!completeEmptyGeometry(g);
+  premise('nonempty-original-remainder-preserved',remainder?.is_empty===false&&nonempty(remainder.geometry)
+    &&remainder.geometry_type===remainder.geometry.type);
+  const selected=payload.source_supported_intersection_fragments?.[0];
+  if(admin){
+    const hits=operation.positive_area_source_feature_intersections;
+    const originalHit=admin.feature_intersections?.filter(hit=>hit.binding?.feature_sha256===selected?.source_feature_sha256);
+    const residual=admin.component_minus_source_union;
+    premise('original-GB-component-intersection-and-remainder',admin.component===record.component_id
+      &&admin.full_component_feature_sha256===record.candidate_feature_sha256
+      &&admin.component_geometry_sha256===record.candidate_geometry_sha256
+      &&admin.current_component_relation==='retained-full-original-feature-pointset'
+      &&admin.status==='positive-source-coverage-mixed-partial-or-subject-unresolved'
+      &&originalHit?.length===1&&originalHit[0].binding.valid_polygon===true
+      &&originalHit[0].intersection.is_valid===true&&originalHit[0].intersection.is_empty===false
+      &&originalHit[0].intersection.planar_area_coordinate_units_squared>0
+      &&originalHit[0].intersection.geometry_type===originalHit[0].intersection.geometry.type
+      &&originalHit[0].intersection.geometry_sha256===digest(originalHit[0].intersection.geometry)
+      &&sameGeometry(fragment,originalHit[0].intersection.geometry)
+      &&same(residual,remainder)&&residual.is_empty===false&&residual.is_valid===true
+      &&residual.planar_area_coordinate_units_squared>0&&residual.planar_length_coordinate_units>0
+      &&residual.geometry_type===residual.geometry.type&&residual.geometry_sha256===digest(residual.geometry));
+    premise('original-GB-fragment-unique-compatible-source-subject',hits?.length===1
+      &&operation.positive_area_recorded_source_subject_ids?.length===1
+      &&operation.positive_area_recorded_source_subject_ids[0]===target.id
+      &&hits[0].recorded_stable_subjects?.length===1
+      &&hits[0].recorded_stable_subjects[0].id===target.id
+      &&originalTargetHash('feature',hits[0].recorded_stable_subjects[0].original_feature_sha256,target)
+      &&hits[0].recorded_stable_subjects[0].original_parent_id===target.properties.parent_id
+      &&same(hits[0].recorded_stable_subjects,originalHit?.[0].binding.recorded_stable_subjects)
+      &&hits[0].feature_sha256===selected?.source_feature_sha256
+      &&hits[0].geometry_sha256===selected?.source_geometry_sha256
+      &&sameGeometry(fragment,hits[0].intersection_geometry));
+  }else{
+    const hits=operation?.province_intersections?.filter(hit=>hit.intersection_dimension==='area');
+    premise('original-NCL-fragment-intersection-and-remainder',operation?.component_id===record.component_id
+      &&operation.candidate_feature_sha256===record.candidate_feature_sha256
+      &&operation.candidate_geometry_sha256===record.candidate_geometry_sha256
+      &&operation.positive_area_target_stable_location_ids?.length===1
+      &&operation.positive_area_target_stable_location_ids[0]===target.id
+      &&hits?.length===1&&hits[0].target_stable_location_id===target.id
+      &&hits[0].intersection_area_degree2>0&&sameGeometry(fragment,hits[0].intersection_geometry)
+      &&coverage.status==='partial-exact-candidate-minus-source-nonempty'
+      &&coverage.target_stable_location_id===target.id&&coverage.source_id==='NCL-GeoReP-2024'
+      &&remainder.area_degree2>0
+      &&sourceScope.source_policy_facts.generalized_ncl_profile.source_product.features.some(feature=>
+        feature.target_stable_location_id===target.id&&feature.source_path===hits[0].source_path
+        &&feature.source_file_sha256===hits[0].source_file_sha256
+        &&feature.source_feature_sha256===hits[0].source_feature_sha256
+        &&feature.source_geometry_sha256===hits[0].source_geometry_sha256));
+  }
+  return {component_id:record.component_id,target_id:target.id,source_compatible:failures.length===0,failed_premises:failures,
+    candidate:fragment,original_candidate:sourceCase.original_candidate_feature,original_remainder:remainder,
+    whole_gap_completion:false,geometry_scope:'original-source-supported-fragment',
+    authority:record.physical_authority,status:record.physical_status,source_vintage:record.source_vintage,limits:record.physical_limits};
+}
+
+const RETAINED_ADMINISTRATIVE_327_HANDOFF=[{"blob":"e4e0e0bc7ce21519712b1cecf7d2b278f7510669","bytes":133710,"commit":"cb99f9f008860041aacb342c7baa766bda61fdf7","mode":"100644","original_capture_commit":"e4430256abdfd9b1b1fbde8ab54a6333309eb9c8","path":"research/geography/melanesia-full-batch-327-20261009/physical-records-327.jsonl.gz","sha256":"2e6eb9ac8ae45cbeb9598742c551d449f6025e9f14a0f0df0c20c3eec6068d1c","uncompressed_bytes":1111955,"uncompressed_sha256":"937c4376d4f8ebcda602b9172be4955daabfb90da4c2c4b69a16c391eb9b70b3","role":"packed_physical_path","accepted_merged_head":"cb99f9f008860041aacb342c7baa766bda61fdf7","original_head":"e4430256abdfd9b1b1fbde8ab54a6333309eb9c8"},{"blob":"8be6f077b8eb819f22edad00435d0b7e05eb5c6f","bytes":146653,"commit":"cb99f9f008860041aacb342c7baa766bda61fdf7","mode":"100644","original_capture_commit":"e4430256abdfd9b1b1fbde8ab54a6333309eb9c8","path":"research/geography/melanesia-full-batch-327-20261009/source-comparison-records-249.jsonl.gz","sha256":"7fb03790bd8d9d5ab954a2bf103247ce715105d0e725df5d430f4890d76808bf","uncompressed_bytes":1042575,"uncompressed_sha256":"7bf62b2a0eb51913ff71b1a645e06a0cb5a327fca4485109845188693d0e4c84","role":"simplified_comparison_path","accepted_merged_head":"cb99f9f008860041aacb342c7baa766bda61fdf7","original_head":"e4430256abdfd9b1b1fbde8ab54a6333309eb9c8"},{"blob":"f55fef947515f69717de07dea5d752acfe63d57c","bytes":49018,"commit":"cb99f9f008860041aacb342c7baa766bda61fdf7","mode":"100644","original_capture_commit":"e4430256abdfd9b1b1fbde8ab54a6333309eb9c8","path":"research/geography/melanesia-full-batch-327-20261009/admin-binding-records-249.jsonl.gz","sha256":"81c89b6838648b4f8987463d9c7def7ccd7f426bf47c8d45b312bbf8d9e04dc4","uncompressed_bytes":301935,"uncompressed_sha256":"7d4486e0e6cbe648efde8abe54c7aca97edf9af5558cac58ea66038548eca082","role":"administrative_bindings_path","accepted_merged_head":"cb99f9f008860041aacb342c7baa766bda61fdf7","original_head":"e4430256abdfd9b1b1fbde8ab54a6333309eb9c8"},{"blob":"36a1da4de581883d4c170ef5e9d14f50752df439","bytes":68542,"commit":"cb99f9f008860041aacb342c7baa766bda61fdf7","mode":"100644","original_capture_commit":"e4430256abdfd9b1b1fbde8ab54a6333309eb9c8","path":"research/geography/melanesia-full-batch-327-20261009/candidate-current-target-features.geojson.gz","sha256":"6e9c86e0989f689cb42bf1db35823f93ee8a85a597d35ab8f6ea5b161b38656f","uncompressed_bytes":290807,"uncompressed_sha256":"92af7b41e7a393d76e90ead0f46dbd3d3b3ca6affe0c9279523d6f5f132ab800","role":"candidate_features_path","accepted_merged_head":"cb99f9f008860041aacb342c7baa766bda61fdf7","original_head":"e4430256abdfd9b1b1fbde8ab54a6333309eb9c8"},{"blob":"731a8dbcf04d81efcf19901f9fd94f8468e352e8","bytes":169544,"commit":"cb99f9f008860041aacb342c7baa766bda61fdf7","mode":"100644","original_capture_commit":"e4430256abdfd9b1b1fbde8ab54a6333309eb9c8","path":"research/geography/melanesia-full-batch-327-20261009/outcomes-327.jsonl.gz","sha256":"f7df623302fb51035c5b5880222fc8e4199e26824c57198cf7a8b1cac8e7723e","uncompressed_bytes":984723,"uncompressed_sha256":"3c70da12c9ac8eff8a1b264ae856fbb9b3bed8cb5a5c4ee9ea8f1c24a4406a14","role":"outcomes_path","accepted_merged_head":"cb99f9f008860041aacb342c7baa766bda61fdf7","original_head":"e4430256abdfd9b1b1fbde8ab54a6333309eb9c8"},{"blob":"a4c46c6a2072523cfd3aa22003efaf7b4cc6f24c","bytes":80012,"commit":"cb99f9f008860041aacb342c7baa766bda61fdf7","mode":"100644","original_capture_commit":"e4430256abdfd9b1b1fbde8ab54a6333309eb9c8","path":"research/geography/melanesia-full-batch-327-20261009/rule-fit-exceptions-327.jsonl.gz","sha256":"0ec9670a9d1d523b3216f0330a2d6ee5b94d1eb3f54b436d7a75f1be2d1570e2","uncompressed_bytes":666543,"uncompressed_sha256":"8ae10d5332981cf15b4d20a7cb03a69747a7061a283751f3129a87f13a971442","role":"rule_fit_path","accepted_merged_head":"cb99f9f008860041aacb342c7baa766bda61fdf7","original_head":"e4430256abdfd9b1b1fbde8ab54a6333309eb9c8"}];
+// A literal view of the accepted original327 products, not a new source profile.
+// Full raw records remain the inverse; no coordinates or operator results change.
+export function retainedAdministrative327Views({scope,geometryScope,operands}) {
+  const equal=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
+  demand(['full-component','supported-fragment'].includes(geometryScope),'Foreign327 geometry scope');
+  const decoded=new Map();
+  for(const accepted of RETAINED_ADMINISTRATIVE_327_HANDOFF){
+    const matches=operands.filter(value=>value.pin.path===accepted.path);
+    demand(matches.length===1,'Missing/duplicate accepted327 product');const value=matches[0];
+    demand(['path','mode','blob','bytes','sha256'].every(key=>value.pin[key]===accepted[key])
+      &&Buffer.isBuffer(value.body)&&value.body.length===accepted.uncompressed_bytes
+      &&sha(value.body)===accepted.uncompressed_sha256,'Changed accepted327 product custody');
+    if(accepted.role==='candidate_features_path')decoded.set(accepted.role,JSON.parse(value.body).features);
+    else decoded.set(accepted.role,value.body.toString('utf8').split('\n').filter(line=>line.trim()).map(line=>JSON.parse(line)));
+  }
+  const outcomes=decoded.get('outcomes_path'),source=decoded.get('simplified_comparison_path'),admin=decoded.get('administrative_bindings_path'),features=decoded.get('candidate_features_path'),physical=decoded.get('packed_physical_path'),fits=decoded.get('rule_fit_path');
+  const unique=(list,key,count)=>{demand(Array.isArray(list)&&list.length===count&&new Set(list.map(row=>row[key])).size===count,'Incomplete327 original roster');return new Map(list.map(row=>[row[key],row]));};
+  const om=unique(outcomes,'component_id',327),sm=unique(source,'component',249),am=unique(admin,'component',249),fm=unique(features,'id',327),pm=unique(physical,'component_id',327),qm=unique(fits,'component_id',327);
+  demand(equal([...om.keys()],[...fm.keys()])&&equal([...om.keys()],[...pm.keys()])&&equal([...om.keys()],[...qm.keys()])
+    &&scope.original_operational_batch==='gap-operational-batch:f94321eb696d00702d30402d'&&scope.original_denominator===327
+    &&equal(scope.whole_original_outcomes,outcomes)&&scope.whole_gap_completion===false,'Foreign/omitted327 complete original batch');
+  const full=outcomes.filter(row=>qm.get(row.component_id).source_evidence_class==='full-source-cover');
+  const partial=outcomes.filter(row=>qm.get(row.component_id).source_evidence_class==='single-subject-partial');
+  demand(full.length===52&&partial.length===177,'Changed327 full/partial denominator');
+  const remainders=partial.map(row=>({component_id:row.component_id,remainder:sm.get(row.component_id).component_minus_source_union}));
+  demand(equal(scope.whole_original_remainders,remainders),'Omitted/rebound327 original remainders');
+  const cohort=geometryScope==='full-component'?full:partial,cohortIds=cohort.map(row=>row.component_id);
+  demand(equal(scope.scopeIds,cohortIds)&&equal(scope.candidate_source_native_bindings.map(row=>row.component_id),cohortIds)
+    &&equal(scope.original_physical_comparison_bindings.map(row=>row.component_id),cohortIds),'Foreign/omitted327 cohort');
+  const supported=new Set([...full,...partial].map(row=>row.component_id));
+  const exceptions=outcomes.filter(row=>!supported.has(row.component_id));
+  demand(exceptions.length===98&&scope.original_exception_rows.length===98
+    &&equal(scope.original_exception_rows.map(row=>row.component_id),exceptions.map(row=>row.component_id)),'Omitted327 exception denominator');
+  for(const row of scope.original_exception_rows)demand(equal(row.original_outcome_record,om.get(row.component_id))
+    &&equal(row.original_source_comparison_record,sm.get(row.component_id)??null)
+    &&equal(row.original_rule_fit_record,qm.get(row.component_id))&&row.source_compatible===false
+    &&row.native_cells===null&&row.whole_gap_completion===false,'Rebound327 exception');
+  for(const sourceCase of scope.candidate_source_native_bindings){
+    const id=sourceCase.component_id,op=sm.get(id),outcome=om.get(id),candidate=fm.get(id),fit=qm.get(id);
+    const hits=op.feature_intersections.filter(hit=>hit.intersection.planar_area_coordinate_units_squared>0);
+    demand(hits.length===1&&hits[0].binding.recorded_stable_subjects.length===1,'Nonunique327 original subject');
+    const hit=hits[0],subject=hit.binding.recorded_stable_subjects[0];
+    const projection={component_id:id,candidate_feature:candidate,whole_candidate_coverage_status:geometryScope==='full-component'?'complete-in-retained-comparison':'partial-in-retained-comparison; exact remainder attached',whole_candidate_source_coverage:{remainder:op.component_minus_source_union},original_outcome_record:outcome};
+    const operation={component_id:id,source_comparison_record:op,positive_area_recorded_source_subject_ids:[subject.id],positive_area_source_feature_intersections:[{feature_sha256:hit.binding.feature_sha256,geometry_sha256:hit.binding.geometry_sha256,source_id:hit.binding.source_id,recorded_stable_subjects:hit.binding.recorded_stable_subjects,intersection_geometry:hit.intersection.geometry}],original_admin_binding_record:am.get(id)};
+    const payload=sourceCase.retained_payload,target=payload.target_current_feature;
+    demand(equal(sourceCase.original_candidate_feature,candidate)&&equal(sourceCase.original_outcome_record,outcome)
+      &&equal(sourceCase.whole_original_case,projection)&&equal(sourceCase.retained_source_operation_row,operation)
+      &&equal(sourceCase.original_rule_fit_record,fit)&&equal(sourceCase.entire_supported_fragment,hit.intersection.geometry)
+      &&sourceCase.source_compatible_derived_by_original1655===fit.source_only_rule_fit
+      &&sourceCase.geometry_scope===geometryScope&&sourceCase.whole_gap_completion===false,'Changed327 literal field projection');
+    demand(payload.component_id===id&&equal(payload.candidate_feature,candidate)
+      &&payload.candidate_feature_sha256===op.full_component_feature_sha256
+      &&payload.candidate_geometry_sha256===op.component_geometry_sha256
+      &&outcome.candidate_current_target.feature_sha256===payload.candidate_feature_sha256
+      &&outcome.candidate_current_target.geometry_sha256===payload.candidate_geometry_sha256
+      &&payload.target_stable_location_id===subject.id&&target.feature_sha256===subject.original_feature_sha256
+      &&target.parent_id===subject.original_parent_id&&payload.unsupported_candidate_remainder_included===false
+      &&equal(payload.source_supported_intersection_fragments,[{source_feature_sha256:hit.binding.feature_sha256,source_geometry_sha256:hit.binding.geometry_sha256,intersection_geometry:hit.intersection.geometry}]),'Changed327 candidate/target/intersection join');
+    const bindings=scope.original_physical_comparison_bindings.filter(row=>row.component_id===id);
+    demand(bindings.length===1&&equal(bindings[0].original_component_feature,candidate),'Missing327 whole original physical binding');
+    const whole=bindings[0].physical_comparison.row,{candidate_feature_sha256,candidate_geometry_sha256,original_context,...packed}=whole;
+    demand(candidate_feature_sha256===payload.candidate_feature_sha256&&candidate_geometry_sha256===payload.candidate_geometry_sha256
+      &&equal({...packed,complete_current_record_metadata_alias:'v1'},pm.get(id)),'Changed327 original packed physical inverse');
+  }
+  return {cohort,payloads:scope.candidate_source_native_bindings.map(row=>row.retained_payload),outcomes:scope.candidate_source_native_bindings.map(row=>row.whole_original_case),gb:scope.candidate_source_native_bindings.map(row=>row.retained_source_operation_row),ncl:[],remainderRows:remainders.map(row=>({component_id:row.component_id,candidate_minus_retained_source_union:row.remainder})),original_outcome_count:327};
+}
+
 const resolutionBrands = new WeakSet();
 // A reconciliation, not permission for a new repair. The caller authenticates
 // these complete bodies against its independently frozen selected-bank plan.
@@ -391,7 +687,7 @@ function pinCost(pin) {
   } else if(pin?.kind === 'original-report-product'){
     demand(safe(pin.path) && pin.path.startsWith('.cache/additive-native-gap-repair/') && pin.mode === '100644'
       && hex(pin.report_sha256) && hex(pin.sha256) && Number.isSafeInteger(pin.uncompressed_bytes)
-      && hex(pin.uncompressed_sha256) && /^components-[0-9]{3}\.jsonl\.gz$/.test(pin.original_product_path), 'Invalid whole report product binding');
+      && hex(pin.uncompressed_sha256) && /^(components|sources)-[0-9]{3}\.jsonl\.gz$/.test(pin.original_product_path), 'Invalid whole report product binding');
   } else demand(/^[a-f0-9]{40}$/.test(pin?.commit ?? '') && safe(pin.path) && ['100644','100755'].includes(pin.mode)
     && /^[a-f0-9]{40}$/.test(pin.blob ?? '') && hex(pin.sha256), 'Missing whole immutable input descriptor');
   demand(Number.isSafeInteger(pin.bytes) && pin.bytes >= 0 && pin.bytes <= 32*1024*1024, 'Ordinary input exceeds cap');
@@ -492,6 +788,75 @@ export function readBaselineResolutions(repo, baseline) {
   const features=JSON.parse(bank.raw).features;
   return selectedBankResolutions({features,corrections,selectedManifest:manifest,selectionReceipt:JSON.parse(receiptBody.raw),
     selectedManifestSha256:selection.sha256,bankDecodedSha256:target.sha256,expectedBankDecodedSha256:baseline.expected_bank_decoded_sha256});
+}
+
+
+// Explicit current selected route. The historical twelve-pin V8 reconciler
+// above remains literal; no predecessor pointer is relabelled as current.
+const currentBaselineViews=new WeakMap();
+export function readCurrentBaselineResolutions(repo,baseline,{request,report,project,installedModules,runtimeBytes,outputReserve}) {
+  demand(baseline?.version===2&&baseline.kind==='current-selected-native-baseline-v1'
+    &&Object.keys(baseline).sort().join(',')==='kind,pins,version'
+    &&Array.isArray(baseline.pins)&&baseline.pins.length===1,'Missing explicit current baseline declaration');
+  const pin=baseline.pins[0];
+  demand(pin.kind===undefined&&pin.path==='data/ownership-selection.json','Current baseline must bind the actual committed selector');
+  const tree=execFileSync('git',['-C',repo,'ls-tree','-z','HEAD','--',pin.path],{encoding:'utf8'});
+  demand(tree===`${pin.mode} blob ${pin.blob}\t${pin.path}\0`,'Stale executing current selected baseline');
+  const selectedRaw=readPin(repo,pin),selected=JSON.parse(selectedRaw);
+  const codeBytes=[...project,...installedModules].reduce((sum,p)=>sum+p.bytes,0);
+  // Request/report objects and their serialized custody remain live throughout
+  // acquisition; future whole source containers have not yet been opened.
+  const carriedBytes=2*(canonical(request).length+canonical(report).length)+selectedRaw.length;
+  const head=execFileSync('git',['-C',repo,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
+  const reader=new ImmutableReader(repo,head,{runtimeBytes,executionBytes:codeBytes,
+    metadataBytes:8*1024*1024+carriedBytes,outputBytes:outputReserve});
+  const admit=reader.admit.bind(reader),carriedDescriptors=project.length+installedModules.length+2;
+  reader.admit=(descriptor,decoded=0)=>{
+    demand(reader.charged.has(descriptor.commit+':'+descriptor.path)||reader.charged.size+carriedDescriptors<512,
+      'Current selected phase plus carried descriptors exceeds cap');
+    return admit(descriptor,decoded);
+  };
+  const snapshot=loadSelection(reader);
+  demand(snapshot&&snapshot.selection.method==='native-linear-evenodd-first-owner-v1'
+    &&snapshot.manifest.accounting.owners===49625&&snapshot.owners.length===49625
+    &&sha(selectedRaw)===pin.sha256&&JSON.stringify(snapshot.selection)===JSON.stringify(selected),
+    'Current privately authenticated selected bank differs');
+  const rule=request.operation===SOURCE_PREMISES_VERSION?request.source_rule:null;
+  if(rule){
+    demand(rule.profile==='retained-consumed-administrative-source','Current source route is administrative only');
+    const named=name=>{const p=rule.inputs.find(p=>p.path===name);demand(p,'Missing complete selected source operand');return p;};
+    demand(named(rule.manifest_path).sha256===snapshot.selection.sha256
+      &&named(rule.bounds_path).sha256===snapshot.manifest.original_assets.bounds.sha256,
+      'Current administrative native manifest/owner custody differs');
+    for(const name of rule.target_banks){
+      const expected=named(name),source=snapshot.geometrySources.sources[snapshot.geometrySources.paths.indexOf(name)];
+      demand(source&&source.kind==='ordinary-immutable-git-source'&&source.mode===expected.mode
+        &&source.git_blob_oid===expected.blob&&source.bytes===expected.bytes&&source.sha256===expected.sha256,
+        'Current full administrative source bank differs; explicit override inverse required');
+    }
+  }
+  const prior=snapshot.additive;
+  const custody={kind:'current-selected-native-baseline-custody-v1',selection:snapshot.selection,
+    manifest_sha256:snapshot.selection.sha256,source_map_sha256:snapshot.selection.selected_geography?.sha256??null,
+    prior_additive:prior?{sidecar:prior.sidecar,ledger:prior.ledger,registry:prior.registry,patch:prior.patch}:null,
+    phases:snapshot.acquisitionPhases,input_inventory:[...reader.inventory.values()].map(p=>({...p})),
+    carried_request_report_bytes:carriedBytes,executing_code_bytes:codeBytes};
+  // This authenticated baseline is not a new per-component resolution/approval.
+  // Existing complete inventory reconciliation continues using the V8 route.
+  const resolutions=new Map();resolutionBrands.add(resolutions);currentBaselineViews.set(resolutions,custody);
+  return resolutions;
+}
+export function currentSelectedOwnerRows(resolutions,manifestSha256,rows) {
+  const current=currentBaselineViews.get(resolutions);if(!current)return rows;
+  demand(current.manifest_sha256===manifestSha256,'Native stage differs from authenticated current baseline');
+  const selected=new Map((current.prior_additive?.patch.rows??[]).map(row=>[row.y,row.runs]));
+  return rows.map(row=>{
+    const runs=[...row.complete_owner_intervals.map(run=>[...run]),...(selected.get(row.y)??[]).map(run=>[...run])]
+      .sort((a,b)=>a[0]-b[0]||a[1]-b[1]||a[2]-b[2]);let end=0;
+    for(const run of runs){demand(run.length===3&&run.every(Number.isSafeInteger)&&run[0]>=end
+      &&run[1]>run[0]&&run[1]<=262166&&run[2]>0&&run[2]<=49625,'Current prior additive assignment overlaps/drifts');end=run[1];}
+    return {y:row.y,complete_owner_intervals:runs};
+  });
 }
 
 function readInventoryChildren(repo, request, report, {project,runtimeSha,runtimeBytes}) {
@@ -649,7 +1014,151 @@ function countySourcePremiseStage(repo,request) {
       'No cells assigned; complete selected native owner and combined-candidate exclusions remain required.']}};
 }
 
+// Uses the existing source-premises stage, whole readPin admission and output
+// publication. expected_ids is a complete phase roster, never an allowlist of
+// positive cells. cohort_ids preserves the complete ordered cohort across phases.
+const RETAINED_ADMINISTRATIVE_HANDOFF=[{"role":"payloads_path","original_head":"2bbc1ce28a5c6995be10a70e79b4f872b94e69e5","accepted_merged_head":"361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5","path":"research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/native-payloads-110-001/native-payloads-110.json","mode":"100644","blob":"fafbcedd32ce49c97e280a99ba705007e814c5d7","bytes":349724,"sha256":"1f7bec65878449856747f82801a816685727f83ddb1144350583344b032b9831"},{"role":"outcomes_path","original_head":"2bbc1ce28a5c6995be10a70e79b4f872b94e69e5","accepted_merged_head":"361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5","path":"research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/batch-outcomes-363-002/batch-outcomes-363-v2.json","mode":"100644","blob":"1df73e14af6d424293b1bf37a9b41f07d9d3b120","bytes":1050202,"sha256":"e19ac2c7b9bb408845558facdd0b4457af73015ff93691f75d27d54c2ce05f21"},{"role":"simplified_comparison_path","original_head":"2bbc1ce28a5c6995be10a70e79b4f872b94e69e5","accepted_merged_head":"361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5","path":"research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/source-comparison-capture-001/batch-source-comparisons.json","mode":"100644","blob":"f5141071e57b93ba1f87c11956ba34c40bcf18d5","bytes":1703412,"sha256":"ac8cdc651035ccc2cb1ca643f9baebac08b1112420cfb95859b3f6f926573029"},{"role":"generalized_comparison_path","original_head":"2bbc1ce28a5c6995be10a70e79b4f872b94e69e5","accepted_merged_head":"361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5","path":"research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/ncl-targeted-source-match-029-001/ncl-source-matches-029.json","mode":"100644","blob":"7f52f83f171090273435b0fef5ec83374fdde890","bytes":73731,"sha256":"cd8adf21f59c2f8a8ed6c07f616862b778bde3bb47bf9e5b24fd19e68f62f659"},{"role":"remainders_path","original_head":"2bbc1ce28a5c6995be10a70e79b4f872b94e69e5","accepted_merged_head":"361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5","path":"research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/source-remainders-084-001/source-remainders-084.json","mode":"100644","blob":"aea04a1a855260afb2cca8cd4402f3d8fcd46991","bytes":109916,"sha256":"9372e82622369f29e4374d92d12c50944dce60f4468b7842ace4f41cf3f4873d"}];
+// One reviewed complete product roster per original research batch. A future
+// accepted corpus appends its exact ordinary product identities here; it does
+// not become a new source profile or rewrite the per-case predicate.
+const RETAINED_ADMINISTRATIVE_HANDOFFS=[RETAINED_ADMINISTRATIVE_HANDOFF,RETAINED_ADMINISTRATIVE_327_HANDOFF];
+function administrativeHandoffFor(rule) {
+  const outcome=rule.inputs?.find(pin=>pin.path===rule.outcomes_path);
+  const matches=RETAINED_ADMINISTRATIVE_HANDOFFS.filter(roster=>roster.some(pin=>pin.role==='outcomes_path'
+    &&['path','mode','blob','bytes','sha256'].every(key=>outcome?.[key]===pin[key])));
+  demand(matches.length===1,'Unknown/ambiguous accepted administrative batch roster');return matches[0];
+}
+
+function administrativeSourcePremiseStage(repo,request,report) {
+  const rule=request.source_rule,profile='retained-consumed-administrative-source';
+  demand(rule?.profile===profile&&rule.version===1&&Array.isArray(rule.expected_ids)
+    &&rule.expected_ids.length>0&&new Set(rule.expected_ids).size===rule.expected_ids.length
+    &&Array.isArray(rule.cohort_ids)&&new Set(rule.cohort_ids).size===rule.cohort_ids.length
+    &&rule.expected_ids.every(id=>rule.cohort_ids.includes(id)),'Incomplete administrative phase/cohort');
+  demand(request.report.sha256==='2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0'
+    &&report.execution_commit==='104091cfecd9c83a53f3e6e62f95b0a0c8074351','Unsupported original physical-comparison authority');
+  const geometryScope=rule.geometry_scope??'full-component';
+  demand(['full-component','supported-fragment'].includes(geometryScope),'Unsupported administrative geometry scope');
+  const bodies=new Map(),equal=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
+  for(const pin of rule.inputs){demand((pin.kind===undefined||pin.kind==='original-report-product')&&!bodies.has(pin.path),'Duplicate administrative input');bodies.set(pin.path,{pin,body:readPin(repo,pin)});}
+  const get=name=>{const value=bodies.get(name);demand(value,'Missing complete administrative operand');return value;};
+  // These relations are the actual independently reviewed and merged1639
+  // products. Immutable identity alone would permit fabricated covers/unique
+  // assertions; the literal accepted whole roster is the authority boundary.
+  const acceptedHandoff=administrativeHandoffFor(rule);
+  const jsonl327=acceptedHandoff===RETAINED_ADMINISTRATIVE_327_HANDOFF;
+  for(const accepted of acceptedHandoff){
+    if(accepted.role==='remainders_path'&&geometryScope==='full-component')continue;
+    const value=get(rule[accepted.role]);
+    demand(['path','mode','blob','bytes','sha256'].every(key=>value.pin[key]===accepted[key]),
+      'Administrative comparison/outcome is outside the accepted original handoff');
+  }
+  const json=name=>JSON.parse(get(name).body),scope=json(rule.cases_path);
+  const views327=jsonl327?retainedAdministrative327Views({scope,geometryScope,operands:[...bodies.values()]}):null;
+  const payloads=views327?.payloads??json(rule.payloads_path).additive_payloads,outcomes=views327?.outcomes??json(rule.outcomes_path).cases;
+  const gb=views327?.gb??json(rule.simplified_comparison_path).cases,ncl=views327?.ncl??json(rule.generalized_comparison_path).cases;
+  demand(equal(scope.candidate_source_native_bindings.map(row=>row.component_id),scope.scopeIds)&&scope.scopeIds.every(id=>rule.cohort_ids.includes(id))&&rule.expected_ids.every(id=>scope.scopeIds.includes(id)),
+    'Administrative request omitted/reordered phase case');
+  demand(Array.isArray(payloads)&&Array.isArray(outcomes)&&Array.isArray(gb)&&Array.isArray(ncl),'Missing original research products');
+  const coverageKinds=geometryScope==='full-component'
+    ?['complete-in-retained-comparison','complete-exact-in-retained-generalized-NCL-province-source']
+    :['partial-in-retained-comparison; exact remainder attached','partial-exact-in-retained-generalized-NCL-province-source; exact remainder attached'];
+  const cohort=views327?.cohort??outcomes.filter(row=>coverageKinds.includes(row.whole_candidate_coverage_status));
+  demand(equal(cohort.map(row=>row.component_id),rule.cohort_ids),'Administrative cohort differs from entire accepted outcome ledger');
+  const remainderProduct=geometryScope==='supported-fragment'&&!jsonl327?json(rule.remainders_path):null;
+  const remainderRows=views327?.remainderRows??(remainderProduct?[...remainderProduct.geoBoundaries_partial_remainders,...remainderProduct.NCL_partial_remainders]:[]);
+  if(remainderProduct)demand(remainderRows.length===69&&new Set(remainderRows.map(row=>row.component_id)).size===69
+    &&equal(remainderRows.map(row=>row.component_id).sort(),rule.cohort_ids.toSorted()),'Incomplete original partial remainder roster');
+
+  const originals=new Map(),native=new Map();
+  for(const source of rule.original_products){
+    const value=get(source.path),product=report.products.find(pin=>pin.path===source.original_product_path);
+    demand(value.pin.report_sha256===request.report.sha256&&value.pin.original_product_path===source.original_product_path&&product&&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(key=>product[key]===value.pin[key]),
+      'Administrative original physical product differs from qualified report');
+    const lines=value.body.toString('utf8').split('\n');demand(lines.pop()==='','Truncated original physical product');
+    for(let ordinal=0;ordinal<lines.length;ordinal++){
+      const row=JSON.parse(lines[ordinal]);
+      if(source.original_product_path.startsWith('sources-')){demand(!native.has(row.id),'Duplicate original native metadata');native.set(row.id,{row,ordinal,product});}
+      else if(rule.expected_ids.includes(row.component_id)){demand(!originals.has(row.component_id),'Duplicate physical component');originals.set(row.component_id,{row,ordinal,product,pin:value.pin,row_sha256:sha(Buffer.from(lines[ordinal]+'\n'))});}
+    }
+  }
+  demand(originals.size===rule.expected_ids.length,'Missing complete original physical record');
+  const targets=new Map();
+  for(const name of rule.target_banks){
+    const value=get(name),tree=execFileSync('git',['-C',repo,'ls-tree','-z','HEAD','--',name],{encoding:'utf8'});
+    demand(tree===`${value.pin.mode} blob ${value.pin.blob}\t${name}\0`,'Prepared target source body differs from actual immutable HEAD');
+    const features=json(name).features;demand(Array.isArray(features),'Missing full target bank');
+    for(const feature of features){demand(!targets.has(feature.id),'Duplicate selected target');targets.set(feature.id,feature);}
+  }
+  const bounds=json(rule.bounds_path),owners=new Map(bounds.map(row=>[row.id,row]));
+  demand(bounds.length===49625&&owners.size===49625&&new Set(bounds.map(row=>row.index)).size===49625,'Incomplete selected owner roster');
+  const manifest=json(rule.manifest_path),boundsPin=get(rule.bounds_path).pin;
+  demand(manifest.original_assets.bounds.sha256===boundsPin.sha256&&Number.isSafeInteger(boundsPin.uncompressed_bytes),'Foreign original selected bounds');
+  demand(get(rule.source_catalogue_path).pin.sha256==='d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9','Administrative source edition catalogue differs from retained corpus');
+  const catalogue=json(rule.source_catalogue_path);
+  const products=rule.administrative_products.map(pin=>{const body=get(pin.path).body,collection=JSON.parse(body);
+    demand(collection.type==='FeatureCollection'&&Array.isArray(collection.features),'Incomplete original administrative product');
+    return {pin,body,features:collection.features};});
+  const rows=scope.candidate_source_native_bindings.filter(row=>rule.expected_ids.includes(row.component_id)).map(sourceCase=>{
+    const ordinal=scope.candidate_source_native_bindings.indexOf(sourceCase);
+    const cid=sourceCase.component_id,original=originals.get(cid),binding=scope.original_physical_comparison_bindings.filter(row=>row.component_id===cid);
+    demand(binding.length===1&&equal(binding[0].physical_comparison.row,original.row)
+      &&binding[0].physical_comparison.ordinal===original.ordinal
+      &&equal(binding[0].physical_comparison.original_report_product,original.product),'Prepared physical record is not exact original inverse');
+    const queried=binding[0].original_queried_source_metadata;
+    demand(queried.length===original.row.query_relations.length&&queried.every((row,i)=>{
+      const value=native.get(original.row.query_relations[i].source_id);
+      return value&&row.ordinal===value.ordinal&&equal(row.original_sources_product,value.product)&&equal(row.original_source_record_metadata,value.row);
+    }),'Missing/rebound original queried source metadata');
+    const one=(list,id)=>{const matches=list.filter(row=>row.component_id===id);demand(matches.length===1,'Nonunique original case');return matches[0];};
+    demand(equal(sourceCase.retained_payload,one(payloads,cid))&&equal(sourceCase.whole_original_case,one(outcomes,cid))
+      &&equal(sourceCase.retained_source_operation_row,one(sourceCase.retained_source_operation_row.source_comparison_record?gb:ncl,cid)),
+      'Prepared administrative operations differ from original whole products');
+    const operation=sourceCase.retained_source_operation_row;
+    const hits=operation.positive_area_source_feature_intersections??operation.province_intersections.filter(row=>row.intersection_dimension==='area');
+    for(const hit of hits){
+      const matches=products.flatMap(product=>product.features.filter(feature=>sha(canonical(feature))===hit.feature_sha256||sha(canonical(feature))===hit.source_feature_sha256)
+        .map(feature=>({product,feature})));
+      demand(matches.length===1&&sha(canonical(matches[0].feature.geometry))===(hit.geometry_sha256??hit.source_geometry_sha256),
+        'Original administrative full feature/geometry omitted or rebound');
+      if(hit.source_file_sha256)demand(matches[0].product.pin.sha256===hit.source_file_sha256,'Wrong generalized source body');
+      else {const product=catalogue.products.filter(row=>row.key===hit.source_id);demand(product.length===1,'Missing original source edition');
+        const part=product[0].parts.filter(row=>row.path===matches[0].product.pin.path);
+        demand(part.length===1&&product[0].parts.length===1&&part[0].offset===0
+          &&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(key=>part[0][key]===matches[0].product.pin[key])
+          &&matches[0].product.body.length===product[0].original_bytes&&sha(matches[0].product.body)===product[0].original_sha256
+          &&matches[0].product.features.length===product[0].feature_count
+          &&hit.recorded_stable_subjects.length===1
+          &&hit.recorded_stable_subjects[0].reference_year===product[0].source_represented_year_claim,'Original consumed administrative product/edition changed');}
+    }
+    const target=targets.get(sourceCase.retained_payload.target_stable_location_id),owner=owners.get(target?.id);
+    demand(target&&owner&&target.properties.parent_id===owner.province_id,'Foreign current target/parent');
+    const candidate=geometryScope==='full-component'?sourceCase.original_candidate_feature.geometry:sourceCase.entire_supported_fragment;
+    if(geometryScope==='supported-fragment'){
+      const retained=remainderRows.filter(row=>row.component_id===cid);
+      demand(retained.length===1&&equal(retained[0].candidate_minus_retained_source_union??retained[0].candidate_minus_retained_source_feature,sourceCase.whole_original_case.whole_candidate_source_coverage.remainder),
+        'Original nonempty fragment remainder omitted/rebound');
+    }
+    const premises=geometryScope==='full-component'
+      ?retainedAdministrativeSourcePremises({record:original.row,candidate,sourceCase,sourceScope:scope,target})
+      :retainedAdministrativeFragmentPremises({record:original.row,fragment:candidate,sourceCase,sourceScope:scope,target});
+    return {...premises,pixelIndex:owner.index,candidate,
+
+      disposition:premises.source_compatible?'awaiting-native-exclusion':'awaiting-evidence',
+      target_geometry_sha256:footprintValueSha256(target.geometry),original_record:{source:original.pin,ordinal:original.ordinal,row_sha256:original.row_sha256},
+      source_case:{source:get(rule.cases_path).pin,ordinal,row_sha256:sha(canonical(sourceCase))}};
+  });
+  return {rows,facts:{version:1,operation:SOURCE_PREMISES_VERSION,source_profile:profile,parent:request.parent,
+    components:rows.length,source_compatible:rows.filter(row=>row.source_compatible).length,assigned_cells:0,source_rule:rule,
+    cohort_ids:rule.cohort_ids,geometry_scope:geometryScope,source_coverage_complete:geometryScope==='full-component',whole_gap_completion:false,
+    original_batch_outcomes:get(rule.outcomes_path).pin,original_remainders:geometryScope==='supported-fragment'?get(jsonl327?rule.simplified_comparison_path:rule.remainders_path).pin:null,
+    unprocessed_cohort_ids:rule.cohort_ids.filter(id=>!rule.expected_ids.includes(id)),target_source_kind:'ordinary-HEAD-current-world-index-part',limits:scope.limits.concat(['Original dated/unapproved physical and administrative sources only.',
+      'Full-source rule retains exact empty residuals; supported-fragment rule retains literal nonempty remainder and never claims whole-gap completion.',
+      'Current source-file equality is not selected-bank geometry applicability. Genuine current snapshot/rebind, full native/neighbor conservation and activation remain required.'])}};
+}
+
 function sourcePremiseStage(repo,request,report) {
+  if(request.source_rule?.profile==='retained-consumed-administrative-source')return administrativeSourcePremiseStage(repo,request,report);
   if(request.source_rule?.profile==='retained-USA-ADM2-counties-2018')return countySourcePremiseStage(repo,request);
   const rule=request.source_rule;
   demand(rule?.version===1&&Array.isArray(rule.inputs)&&rule.inputs.length===12&&Array.isArray(rule.expected_ids)
@@ -795,7 +1304,58 @@ function additiveProposalStage(repo,request) {
 
 // Shared bounded producer: one source roster, one whole current asset closure,
 // one symmetric batch decision and one sparse overlay. The base bank is literal.
-function additiveBatchProposalStage(repo,request) {
+// Native entry consumes the completed original source stage, not an approval
+// boolean or a reconstructed administrative overlay. Complete source-product
+// custody is checked by the caller before this pure case/target boundary.
+export function validateAdministrativeNativeRoster({facts,issued,spec,sourceRows}) {
+  const equal=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
+  demand(spec.source_profile==='retained-consumed-administrative-source'
+    &&facts.source_profile===spec.source_profile&&issued.source_rule.profile===spec.source_profile
+    &&facts.operation===SOURCE_PREMISES_VERSION&&facts.whole_gap_completion===false&&facts.assigned_cells===0
+    &&['full-component','supported-fragment'].includes(facts.geometry_scope)
+    &&facts.geometry_scope===(issued.source_rule.geometry_scope??'full-component')
+    &&equal(facts.source_rule,issued.source_rule),'Foreign administrative native source profile/scope');
+  demand(Array.isArray(spec.scope_ids)&&spec.scope_ids.length>0&&new Set(spec.scope_ids).size===spec.scope_ids.length
+    &&equal(sourceRows.map(row=>row.component_id),spec.scope_ids)
+    &&equal(spec.scope_ids,issued.source_rule.expected_ids)&&facts.components===sourceRows.length
+    &&Array.isArray(facts.cohort_ids)&&new Set(facts.cohort_ids).size===facts.cohort_ids.length
+    &&equal(facts.cohort_ids,issued.source_rule.cohort_ids)
+    &&spec.scope_ids.every(id=>facts.cohort_ids.includes(id))
+    &&equal(facts.unprocessed_cohort_ids,facts.cohort_ids.filter(id=>!spec.scope_ids.includes(id))),
+    'Incomplete/duplicate administrative native phase/cohort');
+  for(const accepted of administrativeHandoffFor(issued.source_rule)){
+    if(accepted.role==='remainders_path'&&facts.geometry_scope==='full-component')continue;
+    const pin=issued.source_rule.inputs.find(row=>row.path===issued.source_rule[accepted.role]);
+    demand(pin&&['path','mode','blob','bytes','sha256'].every(key=>pin[key]===accepted[key]),'Administrative native predecessor outside accepted product roster');
+  }
+  return true;
+}
+
+export function validateAdministrativeNativeCase({selected,sourceCase,sourceScope,target,owner,geometryScope}) {
+  demand(['full-component','supported-fragment'].includes(geometryScope),'Foreign administrative geometry scope');
+  demand(sourceCase?.component_id===selected.component_id&&target?.id===selected.target_id
+    &&owner?.id===target.id&&owner.index===selected.pixelIndex&&target.properties.parent_id===owner.province_id
+    &&footprintValueSha256(target.geometry)===selected.target_geometry_sha256,'Stale administrative native target/owner');
+  const bindings=sourceScope.original_physical_comparison_bindings.filter(row=>row.component_id===selected.component_id);
+  demand(bindings.length===1,'Missing/duplicate original administrative physical case');
+  const candidate=geometryScope==='full-component'?sourceCase.original_candidate_feature.geometry:sourceCase.entire_supported_fragment;
+  demand(wholePrimitivePointsetEqual(candidate,selected.candidate),'Administrative source/native pointset differs');
+  const premises=geometryScope==='full-component'
+    ?retainedAdministrativeSourcePremises({record:bindings[0].physical_comparison.row,candidate,sourceCase,sourceScope,target})
+    :retainedAdministrativeFragmentPremises({record:bindings[0].physical_comparison.row,fragment:candidate,sourceCase,sourceScope,target});
+  demand(premises.source_compatible===selected.source_compatible
+    &&JSON.stringify(premises.failed_premises)===JSON.stringify(selected.failed_premises),'Administrative source decision rebound');
+  if(geometryScope==='supported-fragment')demand(selected.whole_gap_completion===false
+    &&JSON.stringify(canonicalValue(selected.original_remainder))===JSON.stringify(canonicalValue(premises.original_remainder))
+    &&wholePrimitivePointsetEqual(selected.original_candidate.geometry,premises.original_candidate.geometry),'Administrative original remainder omitted/rebound');
+  return premises;
+}
+
+function additiveBatchProposalStage(repo,request,resolutions) {
+  if(request.additive?.source_profile==='retained-consumed-administrative-source')return administrativeBatchProposalStage(repo,request,resolutions);
+  return countyBatchProposalStage(repo,request);
+}
+function countyBatchProposalStage(repo,request) {
   const spec=request.additive,inputs=new Map(),equal=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
   for(const pin of spec.inputs){demand(!inputs.has(pin.path),'Duplicate batch operand');inputs.set(pin.path,{pin,body:readPin(repo,pin)});}
   const get=name=>{if(!inputs.has(name)){const pin=request.baseline.pins.find(pin=>pin.path===name);demand(pin,'Missing complete batch operand');inputs.set(name,{pin,body:readPin(repo,pin)});}return inputs.get(name);};
@@ -908,6 +1468,125 @@ function additiveBatchProposalStage(repo,request) {
         'N2 selection and actual current-bank rebind required before activation.']}};
 }
 
+
+function administrativeBatchProposalStage(repo,request,resolutions) {
+  const spec=request.additive,inputs=new Map(),equal=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
+  for(const pin of spec.inputs){demand(!inputs.has(pin.path),'Duplicate batch operand');inputs.set(pin.path,{pin,body:readPin(repo,pin)});}
+  const get=name=>{if(!inputs.has(name)){const pin=request.baseline.pins.find(pin=>pin.path===name);demand(pin,'Missing complete batch operand');inputs.set(name,{pin,body:readPin(repo,pin)});}return inputs.get(name);};
+  const json=name=>JSON.parse(get(name).body),publication=json(spec.publication_path),facts=json(spec.facts_path),issued=json(spec.source_request_path),operating=json(spec.operating_path);
+  demand(publication.complete===true&&publication.facts.bytes===get(spec.facts_path).pin.bytes&&publication.facts.sha256===get(spec.facts_path).pin.sha256
+    &&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(key=>publication.inventory[key]===get(spec.inventory_path).pin[key]),'Incomplete batch source predecessor');
+  demand(facts.operation===SOURCE_PREMISES_VERSION&&facts.source_profile==='retained-consumed-administrative-source'&&issued.source_rule.profile===facts.source_profile
+    &&['full-component','supported-fragment'].includes(facts.geometry_scope)&&facts.geometry_scope===(issued.source_rule.geometry_scope??'full-component')
+    &&facts.whole_gap_completion===false&&facts.assigned_cells===0&&equal(facts.source_rule,issued.source_rule)
+    &&facts.execution_commit===spec.source_execution_commit&&equal(facts.request,get(spec.source_request_path).pin)
+    &&equal(facts.executed_code,issued.executed_code)&&equal(facts.input_descriptors,[issued.report,...issued.source_rule.inputs,...issued.baseline.pins])
+    &&equal(facts.runtime,spec.source_runtime)&&equal(facts.installed_modules,issued.installed_modules)
+    &&equal(facts.parent,request.parent)&&equal(issued.baseline,request.baseline),'Batch predecessor closure/vintage differs');
+  demand(operating.qualified===true&&operating.execution_commit===facts.execution_commit&&operating.exit?.code===0
+    &&operating.exit.signal===null&&operating.owned_processes_remaining?.length===0&&operating.refusal===null
+    &&operating.request_sha256===facts.request.sha256&&operating.destination===issued.destination,'Unqualified batch source execution');
+  const lines=get(spec.inventory_path).body.toString('utf8').split('\n');demand(lines.pop()==='','Truncated full batch source roster');
+  const sourceRows=lines.map(JSON.parse);
+  demand(equal(sourceRows.map(row=>row.component_id),spec.scope_ids)&&equal(spec.scope_ids,issued.source_rule.expected_ids)
+    &&sourceRows.length===facts.components,'Batch selection omitted/reordered a source candidate');
+  validateAdministrativeNativeRoster({facts,issued,spec,sourceRows});
+  const manifest=json(spec.manifest_path),bounds=json(spec.bounds_path),targets=new Map();
+  for(const name of issued.source_rule.target_banks){demand(spec.inputs.some(pin=>equal(pin,issued.source_rule.inputs.find(source=>source.path===name))),'Batch containing context differs from source proof');const rows=json(name).features;demand(Array.isArray(rows),'Invalid complete administrative target bank');
+    for(const target of rows){demand(!targets.has(target.id),'Duplicate selected context identity');targets.set(target.id,target);}}
+  demand(bounds.length===49625&&new Set(bounds.map(row=>row.id)).size===49625&&new Set(bounds.map(row=>row.index)).size===49625
+    &&equal(manifest.original_assets.bounds,spec.original_bounds)&&get(spec.bounds_path).pin.sha256===manifest.original_assets.bounds.sha256,'Foreign selected native owner roster');
+  const owners=new Map(bounds.map(row=>[row.id,row]));
+  const latitudeBody=get(spec.latitudes_path).body,size=262166;
+  demand(latitudeBody.length===size*8&&sha(latitudeBody)==='66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23','Changed native latitude rule');
+  const latitudes=Float64Array.from({length:size},(_,y)=>latitudeBody.readDoubleLE(y*8)),candidates=[],wantedRows=new Set();
+  for(const selected of sourceRows){
+    const target=targets.get(selected.target_id),owner=owners.get(selected.target_id);
+    demand(target&&owner&&selected.pixelIndex===owner.index
+      &&target.properties.parent_id===owner.province_id&&footprintValueSha256(target.geometry)===selected.target_geometry_sha256,'Stale batch target/owner join');
+    const casePin=selected.source_case?.source;demand(casePin&&spec.inputs.some(pin=>equal(pin,casePin)),'Original full batch case omitted');
+    const sourceScope=json(casePin.path),sourceCase=sourceScope.candidate_source_native_bindings[selected.source_case.ordinal];
+    demand(sourceCase?.component_id===selected.component_id&&sha(canonical(sourceCase))===selected.source_case.row_sha256,'Original batch case drift');
+    validateAdministrativeNativeCase({selected,sourceCase,sourceScope,target,owner,geometryScope:facts.geometry_scope});
+    if(!selected.source_compatible)continue;
+    demand(polygonParts(selected.candidate).length>0,'Empty administrative native primitive');
+    const coordinates=polygonParts(selected.candidate).flat(2),max=Math.max(...coordinates.map(point=>point[1])),min=Math.min(...coordinates.map(point=>point[1]));
+    const first=Math.max(0,latitudes.findIndex(value=>value<=max)-1),stop=latitudes.findIndex(value=>value<min),end=stop<0?size:Math.min(size,stop+1);
+    demand(first>=0&&end>first&&end-first<=4096,'Batch candidate requires another bounded row phase');
+    const index=nativeRuntimeIndex([{id:target.id,pixelIndex:owner.index,geometry:selected.candidate}]);
+    const native=nativePolygonIntervals(index,{size,latitudes,rowStart:first,rowEnd:end});
+    const rows=[];for(let y=first;y<end;y++){wantedRows.add(y);rows.push({y,runs:(native.rows.get(y)??[]).map(span=>[span.start,span.end,owner.index])});}
+    candidates.push({component_id:selected.component_id,target_id:target.id,pixelIndex:owner.index,row_start:first,row_end:end,rows});
+  }
+  const containers=[];
+  for(const body of spec.owner_parts){const descriptor=manifest.parts.find(part=>part.path===body.manifest_path),entry=get(body.path);
+    demand(descriptor&&equal(descriptor,body.manifest_descriptor)&&descriptor.encoding==='byte-shuffle'
+      &&entry.pin.sha256===descriptor.sha256&&entry.pin.bytes===descriptor.bytes,'Foreign batch owner container');
+    const words=unshuffleOwnershipBytes(entry.body,descriptor.words);
+    demand(words.byteLength===descriptor.decoded_bytes&&sha(Buffer.from(words.buffer))===descriptor.decoded_sha256,'Whole batch native words changed');containers.push({descriptor,words});}
+  const table=containers.find(value=>value.descriptor.kind==='rows'&&value.descriptor.offset===0);
+  demand(table&&table.words.length===size*2,'Missing complete batch row table');const ownerRows=[];
+  for(const y of [...wantedRows].sort((a,b)=>a-b)){const offset=table.words[y*2],count=table.words[y*2+1],runs=[];
+    for(let n=offset;n<offset+count;n++){const source=containers.find(value=>value.descriptor.kind==='runs'&&n*2>=value.descriptor.offset&&n*2+1<value.descriptor.offset+value.words.length);
+      demand(source,'Missing whole batch containing native asset');const i=n*2-source.descriptor.offset,a=source.words[i],b=source.words[i+1];
+      runs.push([a%2**19,b%2**19+1,Math.floor(a/2**19)+Math.floor(b/2**19)*2**13]);}
+    ownerRows.push({y,complete_owner_intervals:runs});}
+  // No county-only historical pair matrix is asserted for this profile.
+  // Native conflict detection below remains complete. Continuous applicability
+  // is unknown here and must pass the existing full selected-neighbor gate;
+  // these results are held proposals, never selected/qualified repairs.
+  const continuousConflicts=[];
+  const combined=combineNativeBatch({scopeIds:spec.scope_ids,sourceRows,candidates,ownerRows:currentSelectedOwnerRows(resolutions,get(spec.manifest_path).pin.sha256,ownerRows),continuousConflicts,size});
+  const baseReference={id:manifest.geographic_release,footprints_sha256:manifest.footprints_sha256,hierarchy_sha256:manifest.hierarchy_sha256};
+  const ruleSha=sha(canonical({version:3,source_profile:issued.source_rule.profile,source_rule:issued.source_rule,
+    representation:'literal-base-or-complete-additions',native_method:manifest.method,executed_code:request.executed_code}));
+  const receiptSha=get(spec.facts_path).pin.sha256;
+  const ledgerRows=combined.decisions.map(row=>{
+    if(!['assigned','zero-cell'].includes(row.disposition))return {component_id:row.component_id,disposition:'rejected',reason_kind:row.reason_kind,
+      failed_premises:row.failed_premises,native_conflicts:row.native_conflicts??[],source_limits:row.limits,native_cells:0};
+    const target=targets.get(row.target_id);return {component_id:row.component_id,disposition:row.disposition,target_id:row.target_id,pixelIndex:row.pixelIndex,
+      base_geometry:target.geometry,base_geometry_sha256:footprintValueSha256(target.geometry),geometry:row.candidate,
+      geometry_sha256:footprintValueSha256(row.candidate),source_receipt_sha256:receiptSha,native_cells:row.native_cells,
+      geometry_scope:facts.geometry_scope,whole_gap_completion:false,
+      ...(facts.geometry_scope==='supported-fragment'?{original_candidate:sourceRows.find(source=>source.component_id===row.component_id).original_candidate,
+        original_remainder:sourceRows.find(source=>source.component_id===row.component_id).original_remainder}: {})};});
+  const ledger={version:1,kind:'native-additive-repair-ledger-v1',rule_sha256:ruleSha,base_reference:baseReference,parent_inventory:request.parent,
+    scope_ids:spec.scope_ids,assigned_cells:combined.assigned_cells,rows:ledgerRows};
+  const ledgerBody=canonical(ledger),ledgerSha=sha(ledgerBody),features=[];
+  for(const targetId of [...new Set(ledgerRows.filter(row=>['assigned','zero-cell'].includes(row.disposition)).map(row=>row.target_id))].sort()){
+    const target=targets.get(targetId),additions=ledgerRows.filter(row=>row.target_id===targetId).map(row=>({component_id:row.component_id,geometry:row.geometry,
+      geometry_sha256:row.geometry_sha256,source_receipt_sha256:receiptSha}));
+    features.push({...target,pixelIndex:owners.get(targetId).index,additiveFootprint:{version:1,kind:'retained-base-plus-additions',baseline_release_sha256:baseReference.footprints_sha256,
+      base_geometry_sha256:footprintValueSha256(target.geometry),ledger_sha256:ledgerSha,rule_sha256:ruleSha,additions}});}
+  const effectiveReference={...baseReference,id:'geography:additive:'+ledgerSha,footprints_sha256:additiveReleaseFootprintDigest(baseReference,features)};
+  const patch={version:1,kind:'unassigned-native-cells-v1',base_reference:baseReference,effective_reference:effectiveReference,
+    ledger_sha256:ledgerSha,rule_sha256:ruleSha,rows:combined.rows};
+  const boundsPin=get(spec.bounds_path).pin,encodedBounds=readPin(repo,Object.fromEntries(Object.entries(boundsPin).filter(([key])=>!['uncompressed_bytes','uncompressed_sha256'].includes(key))));
+  const asset=(name,body)=>({path:'additive-repairs/'+name,bytes:body.length,sha256:sha(body)}),patchBody=canonical(patch);
+  const release={reference_release:effectiveReference,additiveRelease:{version:1,kind:'retained-native-base-plus-delta-v1',base_reference:baseReference,effective_reference:effectiveReference,
+    base_manifest:asset('base-native-manifest.json',get(spec.manifest_path).body),ledger:asset('ledger-batch.json',ledgerBody),patch:asset('patch-batch.json',patchBody),
+    owner_roster:{...asset('owners-batch.json.gz',encodedBounds),encoding:'gzip',decoded_bytes:boundsPin.uncompressed_bytes,decoded_sha256:boundsPin.uncompressed_sha256}}};
+  const assets=[{name:'base-native-manifest.json',body:get(spec.manifest_path).body},{name:'ledger-batch.json',body:ledgerBody},{name:'patch-batch.json',body:patchBody},
+    {name:'features.json',body:canonical(features)},{name:'owners-batch.json.gz',body:encodedBounds,decoded_bytes:boundsPin.uncompressed_bytes,decoded_sha256:boundsPin.uncompressed_sha256},
+    {name:'release-envelope.json',body:canonical(release)},{name:'owner-window.json',body:canonical(ownerRows)},
+    {name:'virtual-owner-window.json',body:canonical(combined.virtual_owner_rows)}];
+  return {rows:combined.decisions.map(row=>({component_id:row.component_id,target_id:row.target_id,disposition:row.disposition,
+      reason_kind:row.reason_kind,native_cells:row.native_cells,failed_premises:row.failed_premises,native_conflicts:row.native_conflicts??[],activation:false,qualification:false,
+      applicability_disposition:'held-pending-current-selected-neighbor-qualification',whole_gap_completion:false})),assets,
+    facts:{version:1,operation:ADDITIVE_BATCH_PROPOSAL_VERSION,parent:request.parent,components:sourceRows.length,
+      source_profile:issued.source_rule.profile,source_predecessor:spec,
+      geometry_scope:facts.geometry_scope,original_batch_outcomes:facts.original_batch_outcomes,original_remainders:facts.original_remainders,
+      cohort_ids:facts.cohort_ids,unprocessed_cohort_ids:facts.unprocessed_cohort_ids,
+      continuous_qualified:false,native_authority:false,qualification:false,whole_gap_completion:false,
+      assigned_cells:combined.assigned_cells,assigned_components:combined.assigned_components,zero_cell_components:combined.zero_cell_components,
+      source_exceptions:combined.source_exceptions,native_conflicts:combined.native_conflicts,
+      candidate_cell_contributions:combined.candidate_cell_contributions,shared_same_owner_cells:combined.shared_same_owner_cells,
+      removed_cells:0,reassigned_cells:0,complete_owner_rows:ownerRows.length,effective_reference:effectiveReference,
+      limits:['Unactivated source-compatible batch; no new physical authority or current shoreline approval.',
+        'Literal original native word layout retained; combined virtual intervals conserve all old owners.',
+        'Actual current-selected source/native/prior-ledger conservation and full continuous neighbor qualification required before activation.']}};
+}
+
 // One genuine detached whole-shard acquisition per invocation. The parent
 // report supplies the complete denominator; an independently frozen scope
 // supplies exact selected IDs/ordered feature hashes. No all-world JSON lives
@@ -924,6 +1603,8 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
     'scripts/native-ownership/compile-native-ownership.mjs','src/native-grid.js','src/ownership-codec.js','scripts/audit-grid-intervals.mjs',
     'scripts/native-ownership/require-verified-selection.mjs','scripts/native-ownership/read-pinned-build-file.mjs',
     'scripts/native-ownership/verified-candidates.json','scripts/evidence-quality.mjs','src/ownership-method.js',
+    'scripts/check-effective-geographic-regression.mjs',
+    'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
     'node_modules/@noble/hashes/package.json'];
   const projectNames = codeNames.filter(name=>!name.startsWith('node_modules/')).concat('package-lock.json');
   const projectSizes = projectNames.map(name=>({bytes:fs.lstatSync(path.join(sourceRoot,name)).size}));
@@ -969,10 +1650,18 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
     && request.source.original_product_path === request.original_product_path, 'Foreign report-product source authority');
   demand(request.parent.report_sha256 === request.report.sha256 && request.parent.components === report.component_count
     && request.parent.roster_sha256 === report.complete_roster_sha256, 'Wrong complete original report');
-  const resolutions=baselinePins.length?readBaselineResolutions(sourceRoot,request.baseline):undefined;
+  const currentBaseline=request.baseline?.version===2;
+  if(currentBaseline)demand((request.operation===SOURCE_PREMISES_VERSION&&request.source_rule?.profile==='retained-consumed-administrative-source')
+    ||(request.operation===ADDITIVE_BATCH_PROPOSAL_VERSION&&request.additive?.source_profile==='retained-consumed-administrative-source'),
+    'Current baseline route is limited to administrative source/native stages');
+  const resolutions=baselinePins.length?(currentBaseline
+    ?readCurrentBaselineResolutions(sourceRoot,request.baseline,{request,report,project,installedModules:request.installed_modules,runtimeBytes:runtimeStat.size,outputReserve})
+    :readBaselineResolutions(sourceRoot,request.baseline)):undefined;
+  const baselineCustody=currentBaselineViews.get(resolutions);
+  if(baselineCustody)budget.add({bytes:2*canonical(baselineCustody).length});
   let result;
   if(request.operation===ADDITIVE_BATCH_PROPOSAL_VERSION){
-    demand(resolutions,'Complete selected-bank reconciliation required');result=additiveBatchProposalStage(sourceRoot,request);
+    demand(resolutions,'Complete selected-bank reconciliation required');result=additiveBatchProposalStage(sourceRoot,request,resolutions);
   }else if(request.operation===ADDITIVE_PROPOSAL_VERSION){
     demand(resolutions,'Complete selected-bank reconciliation required');result=additiveProposalStage(sourceRoot,request);
   }else if(request.operation===SOURCE_PREMISES_VERSION){
@@ -999,7 +1688,8 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
   }
   const body = Buffer.concat(result.rows.map(canonical)), encoded = gzipSync(body,{mtime:0});
   const facts = canonical({...result.facts,execution_commit:commit,executed_code:project,request:requestPin,
-    input_descriptors:[request.report,...stagePins,...baselinePins],baseline:request.baseline??null,runtime:{bytes:runtimeStat.size,sha256:runtimeSha},
+    input_descriptors:[request.report,...stagePins,...baselinePins],baseline:request.baseline??null,
+    ...(baselineCustody?{baseline_acquisition:baselineCustody}:{}),runtime:{bytes:runtimeStat.size,sha256:runtimeSha},
     installed_modules:request.installed_modules, admission:budget.snapshot(), request_admission:requestBudget.snapshot()});
   demand(body.length <= 32*1024*1024 && encoded.length <= 32*1024*1024 && body.length+encoded.length+facts.length+(result.assets??[]).reduce((n,asset)=>n+asset.body.length+(asset.decoded_bytes??0),0) <= outputReserve,
     'Complete outputs exceed prospective reserve');
