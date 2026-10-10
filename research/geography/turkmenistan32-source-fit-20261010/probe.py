@@ -9,6 +9,7 @@ from pathlib import Path
 import subprocess
 import sys
 import types
+import time
 
 HERE = 'research/geography/turkmenistan32-source-fit-20261010/'
 
@@ -16,6 +17,7 @@ def git(repo, commit, path):
     return subprocess.check_output(['git', '-C', repo, 'show', commit + ':' + path])
 
 def main():
+    started=time.monotonic()
     p = argparse.ArgumentParser()
     p.add_argument('--repo', required=True)
     p.add_argument('--commit', required=True)
@@ -78,6 +80,10 @@ def main():
     source_ids = [f['properties']['shapeID'] for f in source]
     if len(source_ids) != len(set(source_ids)) or len(source_ids) != 59:
         raise ValueError('Complete retained source roster changed')
+    full=load(HERE+'full-2009-source.geojson')['features']
+    full_ids=[f['properties']['shapeID'] for f in full]
+    if len(full_ids)!=len(set(full_ids)) or set(full_ids)!=set(source_ids):
+        raise ValueError('Full/simplified same-edition identity roster disagrees')
     targets = load('data/geography/part-23.json')['features']
     selected = {f['id']: f for f in targets if f['id'] in scope['contacts']}
     if set(selected) != set(scope['contacts']):
@@ -96,6 +102,11 @@ def main():
             raise ValueError('Nonfinite geometry')
         return g
     sources = [(f['properties']['shapeID'], geom(f)) for f in source]
+    full_shapes=[(f['properties']['shapeID'],geom(f)) for f in full]
+    simple_union=shapely.union_all([g for i,g in sources])
+    full_union=shapely.union_all([g for i,g in full_shapes])
+    if not simple_union.is_valid or not full_union.is_valid:
+        raise ValueError('Source representation union invalid')
     current = [(i,geom(f)) for i,f in selected.items()]
     results=[]
     for identity,f in sorted(found.items()):
@@ -109,7 +120,10 @@ def main():
                   'intersection_empty':intersection.is_empty,'intersection_planar_degrees2':intersection.area,
                   'fragment_minus_source_empty':difference.is_empty})
             return result
-        results.append({'fragment_id':identity,'bounds':list(g.bounds),'source_fit':evaluate(sources),'six_recorded_current_contacts_fit':evaluate(current)})
+        results.append({'fragment_id':identity,'bounds':list(g.bounds),'source_fit':evaluate(sources),'full_same_edition_fit':evaluate(full_shapes),
+          'whole_simplified_product_fit':evaluate([('simplified-product-union',simple_union)]),
+          'whole_full_product_fit':evaluate([('full-product-union',full_union)]),
+          'six_recorded_current_contacts_fit':evaluate(current)})
     source_current=[]
     for i,g in current:
         s=next(s for sid,s in sources if sid==i.split(':')[-1])
@@ -118,12 +132,13 @@ def main():
           'source_minus_current_empty':s.difference(g).is_empty,'current_minus_source_empty':g.difference(s).is_empty})
     report={'component_id':row['component'],'component_count_tested':1,'family_count':32,'original_batch_count':441,
             'fragment_count':len(found),'retained_fragment_area_m2':row['measured_fragment_area_sum_m2'],
-            'source_product_feature_count':len(source),'source_current':source_current,'fragments':results,
+            'source_product_feature_count':len(source),'same_edition_full_feature_count':len(full),'elapsed_seconds':time.monotonic()-started,'source_current':source_current,'fragments':results,
             'baseline_commit':a.commit,'runtime':{'python':sys.version,'shapely':shapely.__version__,'geos':shapely.geos_version_string,'numpy':numpy.__version__},
             'consumed_inputs':baseline.consumed,'peak_rss_kib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,'limits':['Exact fit diagnostic only; no administrative authority or water classification.',
             'Six current source contacts are checked; this first probe is not a complete current-neighbor or native-grid acceptance.',
             'Retained area is inherited, not recomputed. Planar degrees squared are GEOS diagnostic units, not land area.',
-            'No buffer, snapping, normalization, tolerance, MakeValid or full-resolution source substitution.']}
+            'Full same-edition comparison is diagnostic only; consumed-source provenance remains unchanged.',
+            'No buffer, snapping, normalization, tolerance or MakeValid.']}
     output.publish({'fit.json':report,'fragments.json':{'type':'FeatureCollection','features':list(found.values())}})
     print(json.dumps({'run':str(output.root),'component':row['component'],'fragments':len(found)}))
 
