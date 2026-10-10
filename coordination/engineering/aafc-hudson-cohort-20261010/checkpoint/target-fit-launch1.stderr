@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "<stdin>", line 12, in <module>
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/265793f74d3ef80b35974dda740d2bafb4f6287a068d9de7c932a9c14af0f26f/work/scripts/evidence/immutable.py", line 246, in __init__
+    self.root = admit_destination(baseline, owned_path, vintage, self.filenames)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/265793f74d3ef80b35974dda740d2bafb4f6287a068d9de7c932a9c14af0f26f/work/scripts/evidence/immutable.py", line 222, in admit_destination
+    raise ValueError('Use a safe named fresh vintage')
+ValueError: Use a safe named fresh vintage
