@@ -1,0 +1,72 @@
+{
+  "status": "INTERRUPTED_EXTERNAL_QUALIFICATION_INCOMPLETE",
+  "head": "86a38809c0751f1652be8154bdce9363343472fe",
+  "owned_handle": 53842,
+  "handle_observation": "Unknown process id on reconciliation",
+  "matching_processes_observed": [],
+  "external_terminal_present": false,
+  "child_products_present": true,
+  "qualified": false,
+  "qualification_acceptance_credit": 0,
+  "selected_cells": 353,
+  "whole_repaired": 21,
+  "native102_cells_undelivered": 2,
+  "SEA318_published": false,
+  "no_restart": true,
+  "custody": {
+    "operating": [
+      {
+        "name": "host-supply.json",
+        "bytes": 1339,
+        "sha256": "8950a2a627595a41389dcd0ea3f9b99bdaf4ae5c486bb3153ee789abb74b642f"
+      },
+      {
+        "name": "launch.json",
+        "bytes": 924,
+        "sha256": "58ee38fccf0b8435a61adacef0aec1e07fbfd0df82ba2d99823398289929aadc"
+      },
+      {
+        "name": "samples.jsonl",
+        "bytes": 422964,
+        "sha256": "f5a1f68d9923fe1b1553bccd833c4cbc73b484241f4b958ae9a22eb2be9495ae"
+      },
+      {
+        "name": "stderr.log",
+        "bytes": 777,
+        "sha256": "3e351b09a6d288b56fa9e838fba97b6929a90955ecef524154ab1a72649b7083"
+      },
+      {
+        "name": "stdout.json",
+        "bytes": 376,
+        "sha256": "5b9d1ce48c08ac7758b1821fa1603f7d5ecf01e556600944c8f9d646ba8c3d5e"
+      },
+      {
+        "name": "stock-report.json",
+        "bytes": 13629,
+        "sha256": "ea2c4b051899d0852d9d5d7acc7eafe4eb3509c8c6496f58fc329e2da6831abc"
+      }
+    ],
+    "child_products": [
+      {
+        "name": "facts.json",
+        "bytes": 5494,
+        "sha256": "bfc74c8e1d831b8acf088f4838adeca28266a8770f31bfd6764e5e3ce9f0fdab"
+      },
+      {
+        "name": "publication.json",
+        "bytes": 475,
+        "sha256": "2d0aaeb3768d360517ff2c2ab2ae5dc607ef9f715bad0b12535f82040079005d"
+      },
+      {
+        "name": "request.json",
+        "bytes": 1380831,
+        "sha256": "5cc60763760cd63023ecbbae49fa8afd505e7a90d327e9fc7df5e95acb249b5e"
+      },
+      {
+        "name": "result.json",
+        "bytes": 2186654,
+        "sha256": "dc1d44220f3a9211557117d6d58c3758421cc469f363b4cc49ce733f94fd3a5d"
+      }
+    ]
+  }
+}
