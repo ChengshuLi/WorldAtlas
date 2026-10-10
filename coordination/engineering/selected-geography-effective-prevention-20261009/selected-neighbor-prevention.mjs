@@ -607,7 +607,8 @@ export function verifyCurrentRebindExecution({request,operating,expectedCode,cus
  demand(before.plan.bytes===custody.issued_plan.length&&before.plan.sha256===sha(custody.issued_plan),'Actual invoked plan whole bytes differ');
  rebindKeys(plan,'version,kind,execution_commit,base_selection,authority_registry_sha256,original_rows_sha256,original_patch_sha256s,target_sources,predecessor_proof,executed_code,limits','Foreign actual issued plan');
  demand(plan.version===1&&plan.kind==='issued-current-rebind-acquisition-plan-v1'&&plan.execution_commit===request.execution_commit&&same(plan.base_selection,request.base_selection)&&plan.authority_registry_sha256===request.authority_registry_sha256&&plan.original_rows_sha256===valueSha(request.original_rows)&&same(plan.original_patch_sha256s,request.original_patch_sha256s)&&same(plan.target_sources,request.acquisition.target_sources)&&same(plan.predecessor_proof,request.acquisition.predecessor_proof)&&same(plan.executed_code,expectedCode)&&same(plan.limits,request.limits),'Actual cold issued input plan changes complete original/current operands or bounds');
- const command=proof.command;demand(Array.isArray(command)&&command.length===6&&command.every(p=>typeof p==='string')&&command[0]===before.runtime.find(p=>p.role==='time').path&&['-l','-v'].includes(command[1])&&command[2]===before.runtime.find(p=>p.role==='node').path&&command[3]===before.entry.path&&command[4]===before.plan.path&&command[5].startsWith('/')&&!command[5].split('/').some((x,i)=>i>0&&(!x||x==='.'||x==='..')),'Actual external command differs from bound runtime/entry/plan/destination');
+ const command=proof.command;demand(Array.isArray(command)&&(command.length===6||command.length===7&&command[3]==='--expose-gc'),'Foreign external rebind command shape');
+ const boundCommand=command.length===7?command.toSpliced(3,1):command;demand(boundCommand.every(p=>typeof p==='string')&&boundCommand[0]===before.runtime.find(p=>p.role==='time').path&&['-l','-v'].includes(command[1])&&boundCommand[2]===before.runtime.find(p=>p.role==='node').path&&boundCommand[3]===before.entry.path&&boundCommand[4]===before.plan.path&&boundCommand[5].startsWith('/')&&!boundCommand[5].split('/').some((x,i)=>i>0&&(!x||x==='.'||x==='..')),'Actual external command differs from bound runtime/entry/plan/destination');
  rebindKeys(terminal,'version,kind,execution_commit,command,request_sha256,publication_sha256,code_source_sha256,exit_code,signal,guard_reason,lifetime_rss_bytes,sampled_group_peak_bytes,sampled_stop_bytes,lifetime_ceiling_bytes,elapsed_seconds,wall_limit_seconds,owned_processes_remaining,termination_events','Foreign actual terminal roster');
  demand(terminal.version===1&&terminal.kind==='current-rebind-external-terminal-v1'&&terminal.execution_commit===request.execution_commit&&same(terminal.command,command)&&terminal.request_sha256===operating.request_sha256&&terminal.publication_sha256===operating.publication_sha256&&terminal.code_source_sha256===operating.execution_custody.code_source.sha256&&Number.isSafeInteger(terminal.exit_code)&&terminal.exit_code===0&&terminal.signal===null&&terminal.guard_reason===null&&Array.isArray(terminal.owned_processes_remaining)&&terminal.owned_processes_remaining.length===0&&Array.isArray(terminal.termination_events)&&terminal.termination_events.length===0,'Failed/foreign external command or surviving owned process');
  demand(Number.isSafeInteger(terminal.lifetime_rss_bytes)&&terminal.lifetime_rss_bytes>0&&terminal.lifetime_rss_bytes<=request.limits.rss_bytes&&Number.isFinite(terminal.elapsed_seconds)&&terminal.elapsed_seconds>=0&&terminal.elapsed_seconds<=request.limits.wall_seconds,'External actual lifetime/wall bound');
@@ -678,6 +679,16 @@ export function currentRebindSourceView(snapshot) {
  if(snapshot.selection.selected_geography)return selectedGeometrySourceAlias(snapshot);
  return new SelectedGeometrySources(snapshot);
 }
+// Reclaim only temporaries from a completed whole frame. The retained table,
+// targets, source/native custody, rows and proofs remain live and charged.
+const rebindGc=process.execArgv.length===1&&process.execArgv[0]==='--expose-gc'?globalThis.gc:null;
+function reclaimCompletedRebindFrame() {
+ if(process.execArgv.includes('--expose-gc')) {
+  demand(process.execArgv.length===1&&typeof rebindGc==='function'&&globalThis.gc===rebindGc&&Function.prototype.toString.call(rebindGc)==='function gc() { [native code] }','Require exact exposed Node reclamation callable');
+  rebindGc();
+  demand(globalThis.gc===rebindGc,'Reclamation callable drift');
+ }
+}
 export function acquireCurrentRebindOperands(snapshot,registry,originalRows,originalPatches,{targetSources,predecessorProof=null,carriedMetadataBytes=0}={}) {
  demand(snapshot?.reader instanceof ImmutableReader,'Require actual current selected reader');
  const resolver=currentRebindSourceView(snapshot),reader=snapshot.reader;
@@ -706,7 +717,7 @@ export function acquireCurrentRebindOperands(snapshot,registry,originalRows,orig
  demand(Array.isArray(targetSources)&&targetSources.length===targets.size,'Missing complete target source bindings');
  const sourceByTarget=new Map();for(const entry of targetSources){rebindKeys(entry,'target_id,path','Foreign target source binding');demand(targets.has(entry.target_id)&&resolver.paths.includes(entry.path)&&!sourceByTarget.has(entry.target_id),'Foreign/duplicate target source');sourceByTarget.set(entry.target_id,entry.path);}
  const paths=resolver.paths.filter(name=>targetSources.some(entry=>entry.path===name));
- for(const name of paths){const declared=resolver.sources[resolver.paths.indexOf(name)];begin(declared.decoded_bytes??declared.bytes);const frame=sourceFrame(name);currentTargets.push(...frame.found);sourceInputs.push(frame.input);phases.push({kind:'complete-current-target-source',path:name,complete_phase_bytes:reader.used,descriptors:reader.charged.size});}
+ for(const name of paths){const declared=resolver.sources[resolver.paths.indexOf(name)];begin(declared.decoded_bytes??declared.bytes);const frame=sourceFrame(name);currentTargets.push(...frame.found);sourceInputs.push(frame.input);phases.push({kind:'complete-current-target-source',path:name,complete_phase_bytes:reader.used,descriptors:reader.charged.size});reclaimCompletedRebindFrame();}
  currentTargets.sort((a,b)=>a.target_id.localeCompare(b.target_id));
  demand(currentTargets.length===targets.size&&new Set(currentTargets.map(t=>t.target_id)).size===targets.size,'Missing/duplicate complete current targets');
  const continuity=snapshot.manifest.provenance?.successor_continuation;
@@ -715,7 +726,7 @@ export function acquireCurrentRebindOperands(snapshot,registry,originalRows,orig
   pinCheck(predecessorProof);demand(predecessorProof.bytes===1990604&&predecessorProof.sha256==='d8af3b2eaf77f4fa948c01937ccb107f3d7eaa833ea4bac1d4480c633d509794'&&predecessorProof.decoded_bytes===undefined,'Missing exact whole qualified Arctic predecessor proof');
   begin(2*predecessorProof.bytes);
   const predecessorFrame=()=>{let version=predecessorProof.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}const actual=reader.descriptor(predecessorProof.path,version);demand(actual.mode===predecessorProof.mode&&actual.git_blob_oid===predecessorProof.git_blob_oid&&actual.bytes===predecessorProof.bytes,'Predecessor whole original mode/OID/bytes differ');return retainedArcticNativeRows(JSON.parse(reader.read(predecessorProof.path,{version,expected:predecessorProof.sha256})));};
-  predecessorRows=predecessorFrame();phases.push({kind:'complete-qualified-arctic-predecessor',path:predecessorProof.path,sha256:predecessorProof.sha256,complete_phase_bytes:reader.used,descriptors:reader.charged.size});
+  predecessorRows=predecessorFrame();phases.push({kind:'complete-qualified-arctic-predecessor',path:predecessorProof.path,sha256:predecessorProof.sha256,complete_phase_bytes:reader.used,descriptors:reader.charged.size});reclaimCompletedRebindFrame();
  }else demand(predecessorProof===null,'Invented predecessor conservation proof');
  const manifest=snapshot.manifest,root=snapshot.selection.manifest_path.slice(0,snapshot.selection.manifest_path.lastIndexOf('/')+1),image=snapshot.image;
  const load=pin=>{
@@ -735,7 +746,7 @@ export function acquireCurrentRebindOperands(snapshot,registry,originalRows,orig
  };
  const rowPins=manifest.parts.filter(p=>p.kind==='rows');demand(rowPins.length===1,'Unsupported split current row table');begin(0);const table=load(rowPins[0]);
  demand(table.length===manifest.size*2,'Incomplete current native row table');let offset=0;for(let y=0;y<manifest.size;y++){demand(table[y*2]===offset,'Current whole row partition differs');offset+=table[y*2+1];}demand(offset*2===manifest.runWords,'Current native row table omits runs');
- phases.push({kind:'complete-current-native-row-table',complete_phase_bytes:reader.used,descriptors:reader.charged.size});
+ phases.push({kind:'complete-current-native-row-table',complete_phase_bytes:reader.used,descriptors:reader.charged.size});reclaimCompletedRebindFrame();
  const neededRows=[...new Set(originalPatches.flatMap(p=>p.rows.map(row=>row.y)).concat(predecessorRows.map(row=>row.y)))].sort((a,b)=>a-b),currentRows=[],groups=new Map();
  for(const y of neededRows){demand(Number.isSafeInteger(y)&&y>=0&&y<manifest.size,'Foreign original row');const start=table[y*2]*2,end=start+table[y*2+1]*2;
   const parts=manifest.parts.filter(p=>p.kind==='runs'&&start<p.offset+p.words&&p.offset<end),key=valueSha(parts);
@@ -750,6 +761,7 @@ export function acquireCurrentRebindOperands(snapshot,registry,originalRows,orig
  for(const group of groups.values()){begin(table.byteLength+2*valueBytes(currentRows).length);
   const rowReserve=group.rows.reduce((n,{y})=>n+table[y*2+1]*24+64,0);demand(reader.used+rowReserve<=PHASE,'Current complete row output exceeds phase');reader.used+=rowReserve;
   const rows=groupFrame(group);currentRows.push(...rows);phases.push({kind:'complete-current-native-window-group',rows:group.rows.map(row=>row.y),parts:group.parts.map(pin=>pin.path),complete_phase_bytes:reader.used,descriptors:reader.charged.size});
+  reclaimCompletedRebindFrame();
  }
  currentRows.sort((a,b)=>a.y-b.y);
  const candidateIds=new Set(originalPatches.flatMap(p=>p.rows.map(row=>row.y))),candidateRows=currentRows.filter(row=>candidateIds.has(row.y));

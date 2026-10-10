@@ -29,7 +29,7 @@ def issue(root,head,plan_path,destination,output):
  operating=plan['limits']['complete_phase_bytes']+python_extra+contract.OUTPUT+contract.META
  assert operating<=contract.PHASE,'Whole child carried union plus actual external runtime/output reserve exceeds operating phase'
  contract.capture(root,head,pre)
- command=[next(p['path'] for p in runtime if p['role']=='time'),'-l',next(p['path'] for p in runtime if p['role']=='node'),pre['entry']['path'],str(plan_path),str(destination)]
+ command=[next(p['path'] for p in runtime if p['role']=='time'),'-l',next(p['path'] for p in runtime if p['role']=='node'),'--expose-gc',pre['entry']['path'],str(plan_path),str(destination)]
  result={'version':1,'kind':'issued-current-rebind-execution-pre-use-v1','execution_commit':head,'root':str(root),'command':command,'pre_use':pre,'operating_phase_bytes':operating,'output_log_reserve_bytes':contract.OUTPUT}
  body=contract.canonical(result);assert len(body)<=131072
  fd=os.open(output,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o644)
