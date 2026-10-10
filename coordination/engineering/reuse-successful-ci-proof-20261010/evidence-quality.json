@@ -25,7 +25,7 @@
     {
       "id": "exact-tree-job-proof",
       "kind": "code",
-      "description": "Reuse existing successful pinned regression jobs only after evidence-only aggregate failure; require all other observed jobs successful and current authority plus fresh combined geography. Focused positive and adverse controls exercise the proof selector and both merge phases.",
+      "description": "Reuse existing successful pinned regression jobs only after evidence-only aggregate failure; require all other observed jobs successful and current authority plus fresh combined geography. Focused positive and adverse controls exercise the proof selector and both merge phases. Hosted final-capacity inventory admits completed failure for inventory only; the full proof validator still decides coverage before merge. Real finalCapacity=true controls cover this consumer.",
       "software": "Node.js 24.19.0",
       "units": "Not applicable: control-flow verification, no geographic measurement"
     }
@@ -39,7 +39,7 @@
     "geographic_approval": "not-requested"
   },
   "commands": [
-    "node --test test/integration-proof.test.mjs test/merge-integration.test.mjs"
+    "node --test test/integration-proof.test.mjs test/merge-integration.test.mjs test/final-capacity.test.mjs"
   ],
   "limits": [
     "Focused synthetic API controls do not measure post-rollout queue elapsed time. The original observed CI run is linked from issue 1700.",

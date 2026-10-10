@@ -10,6 +10,7 @@ import {inspectMerge, completeIntegration} from '../scripts/merge-integration.mj
 import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
 import {assertAdmission, queueBody, executionTitle} from '../scripts/merge-scheduler.mjs';
 import {reviewContractBinding} from '../scripts/premerge-evidence.mjs';
+import {PROOF_PATHS, WORKFLOW_PATH} from '../scripts/integration-proof.mjs';
 
 const quota = (remaining, reset = 2, limit = 2000) => ({resources: {core: {remaining, reset, limit}}});
 function clock() {
@@ -127,6 +128,73 @@ function fixture() {
       source_approval: false, gate_status: 'passed', status: 'not-applicable'}), ...extra});
   return f;
 }
+
+function evidenceFailedProof(f) {
+  const workflow='ref: ${{ github.event.pull_request.head.sha }}\nname: Complete regression shard\nname: Build hosted assets';
+  for (const path of PROOF_PATHS) {
+    const raw=Buffer.from(path===WORKFLOW_PATH ? workflow : path);
+    const sha=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
+    f.blobs.set(sha,{sha,size:raw.length,encoding:'base64',content:raw.toString('base64')});
+    const row={path,sha,size:raw.length,mode:'100644',type:'blob'};
+    f.baseline.push(row);f.authored.push(row);
+  }
+  f.proofRun={id:44,run_attempt:1,head_sha:f.head,event:'pull_request',path:WORKFLOW_PATH,
+    repository:{full_name:f.repo},head_repository:{full_name:f.repo},status:'completed',conclusion:'failure',
+    pull_requests:[{number:23,head:{sha:f.head}}]};
+  f.proofJobs=[...['profile','scope','geography','package'].map(name=>({name,status:'completed',conclusion:'success'})),
+    {name:'evidence',status:'completed',conclusion:'failure'},
+    {name:'regression (0)',status:'completed',conclusion:'success',steps:
+      ['Checkout reviewed head','Install browser dependencies only for tests that use Playwright','Complete regression shard']
+        .map(name=>({name,status:'completed',conclusion:'success'}))}];
+  const original=f.api;f.proofReads=0;
+  f.api=async(route,...args)=>{
+    if(route.endsWith('/actions/runs/44')) {f.proofReads++;return structuredClone(f.proofRun);}
+    if(route.includes('/actions/runs/44/attempts/1/jobs')) return {jobs:structuredClone(f.proofJobs)};
+    return original(route,...args);
+  };
+  const complete=f.complete;
+  f.complete=extra=>complete({integrationResult:'skipped',proofRunId:44,proofRunAttempt:1,...extra});
+  return f;
+}
+test('real hosted final-capacity path accepts evidence-only run failure after full proof revalidation',async()=>{
+  const f=evidenceFailedProof(fixture());
+  const result=await f.complete();
+  assert.equal(result.accepted,true);assert.equal(result.final_capacity.status,'observed-sufficient');
+  assert.equal(result.proof.run_id,44);assert.equal(result.proof.run_attempt,1);
+  assert.equal(f.proofReads,3,'inventory before and after capacity observation, then full final proof');
+  assert.equal(f.writes.filter(row=>row.route.endsWith('/merge')).length,1);
+});
+test('hosted final-capacity inventory cannot authorize failed or missing code and science',async()=>{
+  for (const mutate of [
+    f=>f.proofJobs.find(job=>job.name==='regression (0)').conclusion='failure',
+    f=>f.proofJobs.find(job=>job.name==='regression (0)').steps.pop(),
+    f=>f.proofJobs.find(job=>job.name==='regression (0)').steps[0].conclusion='skipped',
+    f=>f.proofJobs=f.proofJobs.filter(job=>job.name!=='geography'),
+    f=>f.proofJobs.find(job=>job.name==='geography').conclusion='failure',
+    f=>f.proofJobs.find(job=>job.name==='scope').conclusion='skipped',
+    f=>f.proofRun.run_attempt=2,
+    f=>f.proofRun.conclusion='cancelled',
+    f=>f.proofRun.status='in_progress'
+  ]) {
+    const f=evidenceFailedProof(fixture());mutate(f);
+    await assert.rejects(f.complete(),/Trusted (?:integration )?proof/);
+    assert.equal(f.writes.length,0);
+  }
+});
+test('hosted proof is rechecked after capacity inventory before any merge write',async()=>{
+  for(const change of ['attempt','code-step']) {
+    const f=evidenceFailedProof(fixture()), original=f.api;
+    f.api=async(route,...args)=>{
+      const result=await original(route,...args);
+      if(route.endsWith('/actions/runs/44') && f.proofReads===2) {
+        if(change==='attempt') {f.proofRun.run_attempt=2;return structuredClone(f.proofRun);}
+        f.proofJobs.find(job=>job.name==='regression (0)').steps[0].conclusion='failure';
+      }
+      return result;
+    };
+    await assert.rejects(f.complete(),/Trusted (?:integration )?proof/);assert.equal(f.writes.length,0);
+  }
+});
 
 test('real tree/path/vintage inventory includes nonadded originals and verified OID reuse', async () => {
   const f = fixture(), options = f.options();
