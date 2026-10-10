@@ -1,0 +1,524 @@
+{
+  "version": 1,
+  "issue": 1693,
+  "lane": "geography",
+  "worker_id": "01a127ed-61eb-7281-8716-1e8e6a2ae00f",
+  "subject_ids": [
+    "physical-component:6fd25496ae4a7635eef229d0cfd1eb8dc7d9c10c252d3255fe8d42d186e706d1"
+  ],
+  "subject_ids_sha256": "44ba67d932237b514fa871c291c57129e4a8f5680eeeb546526332f61febb77f",
+  "baseline": {
+    "commit": "c28077da970ae39550e5edea790a266b060d3de5",
+    "files": [
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json",
+        "bytes": 14656,
+        "sha256": "3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-030.jsonl.gz",
+        "bytes": 981988,
+        "sha256": "f86f9194d9dd334e750152e731cf4bc7913a535e1f73d7915805dc814ef816b9",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7414681,
+        "uncompressed_sha256": "c258515deba7ea4a61a20c3b73c265ba071f698a2d4ed57eb0a301dc5409d290"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/report.json",
+        "bytes": 57840,
+        "sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/sources-000.jsonl.gz",
+        "bytes": 1257080,
+        "sha256": "c548e4465e2ad06647d456b74d17395fd6f2b6ad3ff146ecd6d21d61e51933e1",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7012839,
+        "uncompressed_sha256": "6221acc498dc62b6691624541c6e80ab789b8180bee2b51ecf6c7763c10457b2"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/transport-map.json",
+        "bytes": 56473,
+        "sha256": "644345be3d231431177c416b6ddbe3a1b2486597295af45fd5224857b5612d26",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-sources-20261006/run-one/records-000.jsonl.gz",
+        "bytes": 1774667,
+        "sha256": "546134cfca6fff194b6b82fa94e2fc6ce058dbd53e5edca658bd641560ef42d3",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388198,
+        "uncompressed_sha256": "3336a34f054682e36848903934cdfa4dcb164007e71912818d3f6f8da034244e"
+      },
+      {
+        "path": "coordination/engineering/global-physical-sources-20261006/run-one/report.json",
+        "bytes": 6535,
+        "sha256": "b90334b4a836604049eb268604f090f686400147e4747dd12bd2ea1d698b497c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-a-001-20261006/scientific/components-003.json.gz",
+        "bytes": 1596085,
+        "sha256": "e365fcb45223bd78bcdab54b61801262ac76ec2e4feb180160fbb672679aab47",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8383857,
+        "uncompressed_sha256": "f4d401274e5570be8147c5bcb894523ed43c3c5ea401e40e80c218cd699908f4"
+      },
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/ledger.json",
+        "bytes": 482146,
+        "sha256": "f2822cfaac526eae21a10d688f8ec04b618c4fa5ee6d8b9226f7721f21512c37",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/selection-sidecar.json",
+        "bytes": 3494,
+        "sha256": "b16fde4ec57ae2c8b520b842c2c01dc2212d4dc14d4bdb51ed9e64c6a075709b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/current-f02-coordinate/certificate.json.gz",
+        "bytes": 7515239,
+        "sha256": "23aef083ceeabff7d76e7da2a6d047e9dc30b40a3e9b03e122492c4d41c9cd7e",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 18414409,
+        "uncompressed_sha256": "60cc10692d3133b8141e659b932fe1f1d6c14286a6b80009c47b324c6bcaaf23"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "bytes": 403376,
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+        "bytes": 117156,
+        "sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+        "bytes": 2074475,
+        "sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387395,
+        "uncompressed_sha256": "0a895961defbcf80f8cc2e97cd7253830f2720a2fb51b6d4439c53ef0d1f80d9"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-10.json",
+        "bytes": 5144571,
+        "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-25.json",
+        "bytes": 4525239,
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/ownership-selection.json",
+        "bytes": 1592,
+        "sha256": "34f969f6d792aa3900c1dfd69328500ef46775319d2e48a8b1d109312b675d42",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/administrative.py",
+        "bytes": 12313,
+        "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "baseline_administrative_metadata": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "baseline_administrative_recipe": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22"
+    },
+    "pin_files": {
+      "baseline_administrative_metadata": "data/administrative-sources.json",
+      "baseline_administrative_recipe": "scripts/administrative.py"
+    },
+    "subject_files": {
+      "physical-component:6fd25496ae4a7635eef229d0cfd1eb8dc7d9c10c252d3255fe8d42d186e706d1": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin"
+    }
+  },
+  "sources": [
+    {
+      "id": "gb:UKR:ADM2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/blob/9469f09/releaseData/gbOpen/UKR/ADM2/geoBoundaries-UKR-ADM2_simplified.geojson",
+      "role": "Actual consumed simplified administrative reference product; source-relative comparison only",
+      "vintage": "2006",
+      "retrieved_at": "2026-10-10",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public Domain (retained provider declaration); geoBoundaries and Wikimedia Commons attribution retained."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/ukraine-original-singleton-source-fit-20261010/inputs/geoBoundaries-UKR-ADM2_simplified.geojson",
+          "bytes": 698065,
+          "sha256": "c102ab08775ce4dc25a64e133bb7726a1b50715d31140e9846eaad26602631cb",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "gb:HUN:ADM2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/blob/9469f09/releaseData/gbOpen/HUN/ADM2/geoBoundaries-HUN-ADM2_simplified.geojson",
+      "role": "Actual consumed simplified administrative reference product; source-relative comparison only",
+      "vintage": "2017",
+      "retrieved_at": "2026-10-10",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Data Commons Open Database License 1.0; OpenStreetMap contributors / Wambacher attribution retained."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/ukraine-original-singleton-source-fit-20261010/inputs/geoBoundaries-HUN-ADM2_simplified.geojson",
+          "bytes": 830083,
+          "sha256": "88a9601bd634471c8a748dc23d8bbd5aa5cad58c0f0de1494df63c0bde8ef286",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "retained-physical",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/c28077da970ae39550e5edea790a266b060d3de5/coordination/engineering/global-physical-comparison-20261006",
+      "role": "Complete original GSHHG-derived physical comparison and source query metadata",
+      "vintage": "GSHHG 2.3.7 / 2017-06-15; heterogeneous original observation dates",
+      "retrieved_at": "2026-10-10",
+      "license": {
+        "status": "redistributable",
+        "terms": "Retained original project evidence; underlying GSHHG source archive documented as LGPLv3 or later. Attribution retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Restore exact whole original product encoded and decoded bytes using restore_physical.py and pinned whole candidate/native metadata bodies.",
+      "limit": "No new current legal or physical truth; original physical authority and registration/date uncertainty remain unapproved."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/inputs/actual-entrypoint-refusals.json",
+      "bytes": 6464,
+      "sha256": "30a9de439c3f42a59eccb6437175b649fc9ec97ab1aba4503febd127ff3feb9c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/inputs/current-families-003.json.gz",
+      "bytes": 1598911,
+      "sha256": "71ca9168a7c26f6aeee948f18600bbe00c2eeb5515ec22e0d8e9143551b4f7f7",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8387115,
+      "uncompressed_sha256": "03a917626bbf21544931be0cde339ce4dd8fef62991a6c22f16b8233e9047fa1"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/inputs/current-neighbor-refusal-001.json",
+      "bytes": 322,
+      "sha256": "c7f573709c0260fca179e92146b71433e16a89ab6a4e442680b6264aacd1c72f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/inputs/current-operational-batches-000.json.gz",
+      "bytes": 343242,
+      "sha256": "ebce7a1993e62afc589e6e89ec8b9a082551f57d69a3eaf9364ec9dabc9c2efc",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1396675,
+      "uncompressed_sha256": "f22f91eb8f9ce2aeb08ecf938cf16f55bc4152b72e55ceb6097ff39890dcca5d"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/inputs/dangling-output-refusals.json",
+      "bytes": 5937,
+      "sha256": "2728aee845e43b09ba61149a92209dac69e28781173822829c4ccc99480de1e0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/inputs/gb-HUN-ADM2-000.bin.gz",
+      "bytes": 212244,
+      "sha256": "8f2afd8b4f5ab706c0fdf09ceb2bf1f6f5e62091ba2b8e465a4df32b96231bd7",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 830083,
+      "uncompressed_sha256": "88a9601bd634471c8a748dc23d8bbd5aa5cad58c0f0de1494df63c0bde8ef286"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/inputs/original-batch-roster-pins.json",
+      "bytes": 2291,
+      "sha256": "028b67347376257f0bc5d58e555aa65073a5819aab2f3443293971e93b3dad06",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/inputs/original-families-006.json.gz",
+      "bytes": 1284086,
+      "sha256": "0d0b088bdaa09a01f86f798a7c7353d2092699d7d38654a9769c807641a49687",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 7720948,
+      "uncompressed_sha256": "668d344054af270005a022e24a36bc2ccc02aa2e047b427ce0f3850e1e07e045"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/inputs/original-operational-batches-000.json.gz",
+      "bytes": 343222,
+      "sha256": "ea985a089f7f6c2fc532d6744aeffc2d33434215ce7a7080e6579080db3caf21",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1396675,
+      "uncompressed_sha256": "0d5baf1270b09f93b0e0bdb6ccbb1a299206a2681956fc838d3ae4148b454410"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/inputs/prelaunch-failure.json",
+      "bytes": 246,
+      "sha256": "dd723c36f289c84970a54374d343e9d98fc7ae8077d44fd7b3204ce3eab6b54a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/inputs/probe-admission.json",
+      "bytes": 659,
+      "sha256": "e65973025982345e1459bb2f687fdbb3a69be5a828cb058d8158a7821d2e92d5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/inputs/probe-execution-admission.json",
+      "bytes": 203,
+      "sha256": "54848f4745a93051d02904e3dc9ace8bb221b18166d093df04160ab5c5c710ab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/inputs/runtime-provenance.json",
+      "bytes": 1121,
+      "sha256": "b3c542c6470f373fe654fed01f8717945df897bb01b6c322d1f6e105bd941d90",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/inputs/target-probe-admission.json",
+      "bytes": 277,
+      "sha256": "fb491bf058b5dfa3f5a16fde88c5d9d3eefb9d9d6d3af0d62b7ecec064a37c23",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/physical-restoration-inputs.json",
+      "bytes": 1936,
+      "sha256": "285b20310631778ad4b12cfb6ef95ed23d55c307092b5af5d6bb09fc5c3ce67c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/predecessor-file-manifest.json",
+      "bytes": 2078,
+      "sha256": "eaa38b76946aa7a3b7eaa520e9da903a5674950cfd5c2835d48189d367df6020",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/consumed-source-probe-001/publication.json",
+      "bytes": 284,
+      "sha256": "adcc1a1fa77131166e350f28fff4fea39840bf9378b5ce317d67cbc443d34482",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/consumed-source-probe-001/result.json",
+      "bytes": 6223,
+      "sha256": "573ed01f42e5b4f93c2f56f7628425e8ac4492747b10ca7d06b00cf343311dee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/current-neighbor-bindings-001/result.json",
+      "bytes": 30956,
+      "sha256": "d4f557790433105065c40eae04b6756d3eec0cb3a4f14b87244dc0d7606d39a0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/current-target-probe-001/publication.json",
+      "bytes": 283,
+      "sha256": "39da118687b3b57ae39d0a159fdcbbe23f215cd8eb8bf64bf8fbd7dcd75ca826",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/current-target-probe-001/result.json",
+      "bytes": 7875,
+      "sha256": "34574db2bea75a57a0e679cee07d7d99a5b0822aa16b5e8b89435a8d4a74c21e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/components-030.jsonl.gz",
+      "bytes": 1196109,
+      "sha256": "22363c332379d6dc16354b6079bf59766abf4cb9e7b20b111c7528e7c757fde8",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8376604,
+      "uncompressed_sha256": "05a242b39ebd98bd0f4a7b49515f50376e48c012e9e4561d22b455f5c04d6ae8"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/original-component.json",
+      "bytes": 868,
+      "sha256": "acd61551d2dbc9b6925e6d8c2d17cb210a6dcf6f3d80bbbadb64951660e3b746",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/physical-record.json",
+      "bytes": 3297,
+      "sha256": "6cdd0680b83e5ac4543fb8812747c7eb229d889ce0ebe829dd31a19a2ac48698",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/queried-source-metadata.json",
+      "bytes": 777,
+      "sha256": "fea4973464fd8ef0925b9c447713e2bba57ddcf57de3c7a8f5101c3436e496bc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/receipt.json",
+      "bytes": 2676,
+      "sha256": "8ef08a5125ca2bde3858f6f165cce2bd559a0abfd7996f1a5d24fdeaf0929147",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/sources-000.jsonl.gz",
+      "bytes": 2173285,
+      "sha256": "aaf5e4f099ab25c6e6f96632787f1654ba6054ed378fd591b360e36274ffc264",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8388327,
+      "uncompressed_sha256": "a75923307b24ff73fe3090307b2c8d6e590a22dbb91f4d43f92a52ac0fd23705"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/serialization-proof-001/result.json",
+      "bytes": 1205,
+      "sha256": "12d8b0a61171e3aa38c0783d167b181d7964472393b59c555da357d583f74fc8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/source-handoff-001/source-handoff.json",
+      "bytes": 70088,
+      "sha256": "33b257cb6434bd620e87d7725245a41f7e644e4a72ccd98a383fe83f0536e7ed",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/source-handoff-002/source-handoff.json",
+      "bytes": 70643,
+      "sha256": "30c3ed6c7d710a4e384eac18f00ffdc4ee2d4e275ef81ceabe9e5886ff4ebe6c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/source-handoff-003/source-handoff.json",
+      "bytes": 82015,
+      "sha256": "7fd3d6da63c1fc9890784a6db6e4a3e9fb55755d52bb3c3a45cf0ad8a7f32462",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "retained-source-binding",
+      "kind": "source",
+      "description": "Authenticate complete original source/physical products and exact source, candidate, current-target, original roster and complete neighbor bindings. Reuse unchanged prior GIS results; no new GIS operators or measurements. Preserve failed ordinary dissolve and current-physical/source authority limits.",
+      "software": "Python 3.12.14 standard library; Node 24.19.0 built-ins. Retained predecessor probes used Shapely 2.1.2 / GEOS 3.13.1.",
+      "units": "literal GeoJSON longitude-latitude coordinates; retained source area m2; counts are components, batches and locations."
+    },
+    {
+      "id": "exact-byte-and-serialization-controls",
+      "kind": "code",
+      "description": "Whole original encoded/decoded restoration; exact original byte hash and parsed-value roundtrip; actual changed number/field/identity/hash refusals; actual existing/dangling-output and executing-code refusals with unchanged complete vintage hashes.",
+      "software": "Python 3.12.14 and Node 24.19.0; no imported project modules in new producers.",
+      "units": "bytes, SHA256, exact equality, rejection outcomes"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "original-batch-size",
+      "value": 1,
+      "unit": "component",
+      "vintage": "baseline",
+      "input_sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+      "evaluation_commit": "c28077da970ae39550e5edea790a266b060d3de5"
+    },
+    {
+      "id": "original-programme-size",
+      "value": 594,
+      "unit": "batch",
+      "vintage": "baseline",
+      "input_sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+      "evaluation_commit": "c28077da970ae39550e5edea790a266b060d3de5"
+    },
+    {
+      "id": "current-neighbor-universe",
+      "value": 49625,
+      "unit": "location",
+      "vintage": "baseline",
+      "input_sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+      "evaluation_commit": "c28077da970ae39550e5edea790a266b060d3de5"
+    },
+    {
+      "id": "retained-component-area",
+      "value": 1.0665098670870066e-07,
+      "unit": "m2",
+      "vintage": "baseline",
+      "input_sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+      "evaluation_commit": "c28077da970ae39550e5edea790a266b060d3de5"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "original-batch-size",
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/source-handoff-003/source-handoff.json",
+      "json_pointer": "/original_batch_component_count"
+    },
+    {
+      "metric_id": "original-programme-size",
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/source-handoff-003/source-handoff.json",
+      "json_pointer": "/original_programme_batch_count"
+    },
+    {
+      "metric_id": "current-neighbor-universe",
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/source-handoff-003/source-handoff.json",
+      "json_pointer": "/current_neighbor_binding/complete_owner_rows"
+    },
+    {
+      "metric_id": "retained-component-area",
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/source-handoff-003/source-handoff.json",
+      "json_pointer": "/candidate_source_native_bindings/0/original_candidate_feature/properties/measured_fragment_area_sum_m2"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "The complete unchanged original singleton has authenticated source-relative literal-additive premises and complete current neighbor exclusion. Independent review and normal common source admission remain required.",
+      "status": "supported",
+      "source_ids": [
+        "gb:UKR:ADM2",
+        "gb:HUN:ADM2",
+        "retained-physical"
+      ]
+    },
+    {
+      "text": "Common candidate serialization admission, native/continuous integration, draw/pick, merge/readback and current legal/physical truth are not established by this source packet.",
+      "status": "unresolved",
+      "source_ids": [
+        "retained-physical"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python research/geography/ukraine-original-singleton-source-fit-20261010/restore_physical.py",
+    "node research/geography/ukraine-original-singleton-source-fit-20261010/bind_current_neighbors.mjs",
+    "node research/geography/ukraine-original-singleton-source-fit-20261010/prove_serialization.mjs",
+    "python research/geography/ukraine-original-singleton-source-fit-20261010/build_handoff.py"
+  ]
+}
