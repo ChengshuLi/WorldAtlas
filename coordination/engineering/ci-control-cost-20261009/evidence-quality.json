@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "issue": 1658,
+  "lane": "engineering",
+  "worker_id": "01a10843-da4b-7fc1-a482-d3186bc6334d",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "cb99f9f008860041aacb342c7baa766bda61fdf7",
+    "files": [
+      {
+        "path": "scripts/validate-physical-component-evidence.py",
+        "bytes": 18181,
+        "sha256": "39296c7a83857ba602f86d0971242bd64e674ae9f7694eb1e0a9751b5b0203b2",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/ci-control-cost-20261009/controls.txt",
+      "bytes": 1479,
+      "sha256": "9e70706ecbdc89105fd5248bac20d1c17c69a888e651bcf0bdb80b47402799a8",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "compact-regression",
+      "kind": "code",
+      "description": "Same production accounting and reconstruction predicates exercised on compact adverse cases; original whole-world and custody test entry points retained.",
+      "software": "Node 24.19.0, Python 3.12",
+      "units": "test assertions"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/physical-component-controls-runner.test.mjs test/physical-component-evidence-controls.test.mjs"
+  ]
+}

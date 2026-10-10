@@ -1,0 +1,9 @@
+# Compact semantic regression controls
+
+The seven corruption cases now exercise the same production accounting and reconstruction predicates with a compact fixture. It includes measured and unmeasured fragments, overlapping old/new records, an unlinked component, shared-edge, point-only and dateline contacts, and a blocked-domain binding. Every case first passes unchanged, then fails for its specific semantic reason. No copied validator or success cache is used.
+
+The full-world positive validator remains enabled, as do whole-byte custody, report-drift, fixture preservation and structural geometry tests. No source records, scientific operators, package/CI selection, test concurrency or selected release changes.
+
+The production refactor only moves accounting and reconstruction into named functions. It still authenticates the complete files and releases accounting graphs before whole-world reconstruction. Local fast controls are recorded in controls.txt. Complete preservation validation and hosted timings are pending; local timings do not establish hosted end-to-end speedup.
+
+Measured investigation: https://github.com/ChengshuLi/WorldAtlas/actions/runs/38005876327/job/114074478709 reports 266.48 seconds for the old seven-case suite and 69.55 seconds for the separate complete-world positive. Setup inspection also found 61.24 seconds of historical input fetching and 142.02 seconds of selected model preparation in https://github.com/ChengshuLi/WorldAtlas/actions/runs/38009260978/job/114085250716. Those setup phases are left unchanged: the model/database tests consume selected data, and eliminating their inputs without a verified replacement would weaken coverage. This change targets the independently measured test bottleneck without adding setup caches or a new dependency-selection framework.

@@ -186,6 +186,22 @@ def validate_science(index_path=INDEX):
     require(set(report['outputs']) == {'new_components', 'new_contacts', 'fragment_pairs', 'old_fragments',
                                      'new_fragments', 'component_links', 'components'}, 'Incomplete output families')
     rows = {k: features(v, True) for k, v in report['outputs'].items()}
+    fragment_pair_count = validate_accounting(report, old_report, component_report, new_report,
+                                              old, new, remnants, old_records, rows)
+    new_records, new_contacts = rows['new_components'], rows['new_contacts']
+    # Release validated accounting graphs before complete geometry reconstruction.
+    del rows, old, old_records, remnants
+    return {**result, 'fragment_pairs': fragment_pair_count,
+            **validate_reconstruction(new, new_report, new_records, new_contacts)}
+
+
+def validate_accounting(report, old_report, component_report, new_report,
+                        old, new, remnants, old_records, rows):
+    """Check original identities, joins and uncertainty at any input size.
+
+    The file entry point authenticates the complete inputs before calling here.
+    Compact adversarial tests use this same predicate, never a second validator.
+    """
     new_records = rows['new_components']
     old_members, new_members = membership(old, old_records), membership(new, new_records)
     require(set(r['id'] for r in old_records).isdisjoint(r['id'] for r in new_records), 'Old/new component identities collide')
@@ -269,33 +285,24 @@ def validate_science(index_path=INDEX):
     for binding, tile in zip(report['original_blocked_domains'], old_report['tiles_blocked']):
         same = [t for t in new_report['tiles'] if t['bounds'] == tile['bounds']]
         require(len(same) == 1 and binding == {'original': tile, 'new': same[0]}, 'Old blocked domain binding changed')
-    # These parsed accounting rows and lookup tables have been checked in full.
-    # Retire them before reconstruction, rather than growing its working set.
-    # Original custody bytes and files remain unchanged and independently bound.
-    fragment_pair_count = len(rows['fragment_pairs'])
-    for family in set(rows) - {'new_components', 'new_contacts'}:
-        del rows[family]
-    del pair_refs, link_refs, component_refs, old_by, new_by, old_members, new_members
-    del identities, seen_links, seen, records, ledgers, links, errors, differences
-    del old, old_records, remnants
-    # Reject invalid accounting before expensive reconstruction. Every successful
-    # execution still reconstructs the complete world and checks exact shapes.
-    # Independently reconstruct complete connected sets and their edge/point/
-    # dateline contact roster; counts alone cannot detect a rehashed omission.
+    return len(rows['fragment_pairs'])
+
+
+def validate_reconstruction(new, new_report, new_records, new_contacts):
+    """Reconstruct every component and edge/point/dateline contact."""
     rebuilt, contacts = components(new, [t for t in new_report['tiles'] if t['status'] != 'checked'], new_report['bounds'])
     for record in rebuilt:
         record['id'] = 'physical-component:' + record['id'].split(':', 1)[1]
     rebuilt_members = membership(new, rebuilt)
     for contact in contacts:
         contact['components'] = [rebuilt_members[i] for i in contact['fragments']]
-    require_exact_reconstruction(rows['new_contacts'], contacts,
+    require_exact_reconstruction(new_contacts, contacts,
                                  'Complete original edge/point/dateline contact roster changed')
     require_exact_reconstruction(new_records, rebuilt,
                                  'Complete exact connected component shapes changed')
     resolved = component_contacts(new, new_records)
-    result.update(fragment_pairs=fragment_pair_count, new_components=len(new_records),
+    return dict(new_components=len(new_records),
                   source_contact_components=len(resolved), source_contact_unknowns=sum(r['status'] != 'complete-recorded-contacts' for r in resolved))
-    return result
 
 
 if __name__ == '__main__':
