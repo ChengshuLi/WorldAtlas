@@ -61,6 +61,9 @@ export const MIGRATION_WORKER_TESTS = [
 // Shard 1 had the shortest setup and test path (181 s of tests). Keep the
 // ordinary inventory index intact so moving this file does not move neighbors.
 export const COMPONENT_CONTROL_TEST = 'test/physical-component-evidence-controls.test.mjs';
+// Run 38005876327: priority evidence took 61 s on the critical build/parity
+// shard. Compact controls free shard 1; move this file without shifting neighbors.
+export const PRIORITY_EVIDENCE_TEST = 'test/physical-gap-priority-evidence.test.mjs';
 export function fullRegressionShard(inventory, shard) {
   const placement = new Map([
     ...PACKAGED_ASSET_TESTS.map(name => [name, 0]),
@@ -70,7 +73,7 @@ export function fullRegressionShard(inventory, shard) {
   const reserved = inventory.filter(name => placement.has(name) && placement.get(name) === shard);
   const ordinary = inventory.filter(name => !placement.has(name));
   return [...reserved, ...ordinary.filter((name, index) =>
-    (name === COMPONENT_CONTROL_TEST ? 1 : index % 3) === shard)];
+    ([COMPONENT_CONTROL_TEST, PRIORITY_EVIDENCE_TEST].includes(name) ? 1 : index % 3) === shard)];
 }
 
 export function integrationTestFiles(profile, shard) {
