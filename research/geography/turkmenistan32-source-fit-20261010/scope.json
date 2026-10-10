@@ -1,0 +1,722 @@
+{
+  "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+  "source_products": [
+    "gb:TKM:ADM2"
+  ],
+  "contacts": [
+    "gb:TKM:ADM2:10190150B31923585689840",
+    "gb:TKM:ADM2:10190150B40000077655635",
+    "gb:TKM:ADM2:10190150B42989304972975",
+    "gb:TKM:ADM2:10190150B49022220136906",
+    "gb:TKM:ADM2:10190150B73322470423680",
+    "gb:TKM:ADM2:10190150B850620817547"
+  ],
+  "original_batch_ids": [
+    "gap-operational-batch:1df1240f1cba596d821d83f5"
+  ],
+  "related_issues": [
+    319
+  ],
+  "source_families": [
+    {
+      "kind": "source-authority-and-product-comparison",
+      "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "recipe": "scripts/administrative.py",
+      "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TKM/ADM2/geoBoundaries-TKM-ADM2.geojson",
+      "reference_year": "2009",
+      "source_id": "gb:TKM:ADM2",
+      "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+    }
+  ],
+  "grouping": {
+    "observed_scope_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+    "recorded_parent_ids": [
+      "framework:province:ahai:4b56bb7706fe"
+    ],
+    "source_families": [
+      "8368d98eeb17960bb76c2ef37422dcf21377233b443f2fd77b0b562d470b447c"
+    ],
+    "subcontinents": [
+      "framework:subcontinent:central-asia:ea8c6c73dce4"
+    ],
+    "work_kind": "source-authority-and-water-reference-research"
+  },
+  "component_count": 32,
+  "measured_count": 32,
+  "unmeasured_count": 0,
+  "retained_component_area_sum_km2": 132.87859687439982,
+  "max_component_area_km2": 20.730677722501582,
+  "median_measured_component_area_m2": 2761053.444015524,
+  "at_least_1km2_components": 27,
+  "at_least_1ha_components": 32,
+  "below_1m2_components": 0,
+  "observed_buckets": {
+    "inside-unassigned-native-cell:multiple-edge-neighbors": 32
+  },
+  "locator_readiness_pairs": {
+    "[0, 0]": 32
+  },
+  "provisional_unique_fit_ids": 0,
+  "provisional_unique_fit_retained_area_sum_km2": 0.0,
+  "original_batches": [
+    {
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "original_family_count": 85,
+      "source_products": [
+        "gb:KAZ:ADM2",
+        "gb:KGZ:ADM2",
+        "gb:RUS:ADM2",
+        "gb:TJK:ADM2",
+        "gb:TKM:ADM2",
+        "gb:UZB:ADM2",
+        "natural-earth:KGZ-1115",
+        "osm:relation:15658168",
+        "osm:relation:15659823",
+        "osm:relation:15661094",
+        "osm:relation:15661095",
+        "osm:relation:15661096",
+        "osm:relation:15666813",
+        "osm:relation:15686777",
+        "osm:relation:15686917",
+        "osm:relation:15695444"
+      ],
+      "related_issues": [
+        318,
+        319,
+        320,
+        1096,
+        1118
+      ],
+      "component_count": 441,
+      "measured_count": 441,
+      "unmeasured_count": 0,
+      "retained_component_area_sum_km2": 8435.464511804148,
+      "max_component_area_km2": 6189.897013051662,
+      "median_measured_component_area_m2": 1303429.3714609607,
+      "at_least_1km2_components": 261,
+      "at_least_1ha_components": 441,
+      "below_1m2_components": 0,
+      "observed_buckets": {
+        "inside-unassigned-native-cell:multiple-edge-neighbors": 441
+      },
+      "locator_readiness_pairs": {
+        "[0, 0]": 441
+      }
+    }
+  ],
+  "component_observations": [
+    {
+      "component_id": "physical-component:049e6a3170feb6896ecce24ef5288bc91ea0acf4b7d0941e4f1cea4004d269d4",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 2144143.0026078084,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-000.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "c5a3f232c7d31eb51847f65be310cc598db73436515633d5bed65793dfb743a4",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-000.json.gz",
+        "row_index": 1701
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:0a197e4c28fb37d1d88879e90c6efc98fd2c72f62ef271b02597f7bc01008e74",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 915050.66014249,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-000.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "0c93efac5b28567bbf9c5ca456e2de8f9fb6409f1a5fa6c5f7adcfbd3250f2e9",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-001.json.gz",
+        "row_index": 934
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:0f649470e854f211fd11677b7101bc120c1fed68b1862cb4e09e33a85f0eedff",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 9086284.512592552,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-001.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "3bc3c7a21889a983d0fe225a7b6ec06b7f84009a9cc9219e91bf769ac955259d",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-002.json.gz",
+        "row_index": 39
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:15c6fb2b461042f6a40197a97727f764864cf992de530cba5fc4e3ba5fe58b41",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 7357113.644051944,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-002.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "3bc3c7a21889a983d0fe225a7b6ec06b7f84009a9cc9219e91bf769ac955259d",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-002.json.gz",
+        "row_index": 2403
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:216a326e5f9e7b547b79b78ec6007ce1e2c9358dc6dbc899cb664648c9509093",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 8658507.830565006,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-003.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "b9c86497707ddf0836a58cb4a470b2ba14344aaaca8e216402d840f24a8d1fd6",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-004.json.gz",
+        "row_index": 1200
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:2d116e45f0328d7762601fcb1269b4029cbd754505abd030aacbb62e5fa3b204",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 3915086.482440963,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-004.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "dc1061ab19a18d425c149f7dfe08aca40cf1f4506a92c4002969d576173a3eaf",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-005.json.gz",
+        "row_index": 2690
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:35a16cf5778d493b391ea22d6867b6402ca00174187ddb404c8163997d574e37",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 1084615.2292441358,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-005.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "a15f64161b9eb4d9a7935c710d5781cb4d2009d0aa37b7ad4aede0923ba68481",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-007.json.gz",
+        "row_index": 176
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:3866d3331427806685a204a3d8751af265901bae30aae310fca1f3b7b6d1fe72",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 4499389.553096538,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-005.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "a15f64161b9eb4d9a7935c710d5781cb4d2009d0aa37b7ad4aede0923ba68481",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-007.json.gz",
+        "row_index": 1182
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:3963b5fd0458a59ae916ab8233492e13781b3b0260ae376a3cedd8e5eb123685",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 1512271.490412595,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-005.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "a15f64161b9eb4d9a7935c710d5781cb4d2009d0aa37b7ad4aede0923ba68481",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-007.json.gz",
+        "row_index": 1533
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:45a07292b14f3ece1a3ed0752cd4d4816a4a1f69f48e1478b6974901b89b21f4",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 2642067.178225219,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-006.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "8c77878d4d16128819fc178273e182da1472bb0868d7b519e3510d36cc9e74d2",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-009.json.gz",
+        "row_index": 437
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:47006230cb5557b71afb203d0aa8131dd307d624915277d81c0bddce9536a837",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 948471.7827019884,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-006.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "8c77878d4d16128819fc178273e182da1472bb0868d7b519e3510d36cc9e74d2",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-009.json.gz",
+        "row_index": 960
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:494b3b2d6d4f354a8b1ec94aa6ff1e08bae7092a05ec9d93806d6609e3b5a965",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 11106570.3649954,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-006.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "8c77878d4d16128819fc178273e182da1472bb0868d7b519e3510d36cc9e74d2",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-009.json.gz",
+        "row_index": 1786
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:51373bc508ea964b27c743288a32b0e39a519980d1304b37df760023207bacd7",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 20730677.722501583,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-007.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "64c6dec1d8a86bae3ce2c8f471df174698f82caba7643a2aa518e4d2d105b6ac",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-010.json.gz",
+        "row_index": 1880
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:5372c75114a6f8a54e7ed38b9a214b65120a678d84c4b4aba734b2027f61393e",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 3733326.7534750584,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-007.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "64c6dec1d8a86bae3ce2c8f471df174698f82caba7643a2aa518e4d2d105b6ac",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-010.json.gz",
+        "row_index": 2709
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:544410442e33f16555c1ba5db0c9a5203c0f64aab654f8949dee4c78b4f83c10",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 1274113.483074845,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-007.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "ddcb40c2b13b04cd4e4437680ef6c6eb372dea8fc2117b1ce1cf8a2dd07413e4",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-011.json.gz",
+        "row_index": 171
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:614474b64c2399f698b034ff1de6962a2a766890de60c799ae3e07193ff9a4a0",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 3804713.635322915,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-009.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "71233c8156b511385a4b69b3125d010636c8fc689d3d08c52613e5da6a6abac9",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-012.json.gz",
+        "row_index": 2079
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:66d7672d847ac0003cf8f77c760848cbb36db1856ca6735ecf93dcf86c2a129b",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 1593277.31876421,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-009.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "1c37a7327794aa4b7411bea591a4c25b7436484febe55501d596d4a0843ac2e8",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-013.json.gz",
+        "row_index": 1326
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:6d8094e618185eaa988efa41f9125e7a07d7774959c1759167e307cbf6712d77",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 2761053.444015524,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-010.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "8bb253cb98bb8b73f26fcdbd22343055eaf61abe6b9a7976b2327ba024f22035",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-014.json.gz",
+        "row_index": 927
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:6f6deb9eb8ffa22226214324605bdf5b0e6ac81cdb839adbc0c10161d9f9f2cd",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 5012233.592578445,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-010.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "8bb253cb98bb8b73f26fcdbd22343055eaf61abe6b9a7976b2327ba024f22035",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-014.json.gz",
+        "row_index": 1645
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:7791eaeb9756d4a3841d95dbabd3f0fbea42eef228b3c6580a82366dc304190a",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 5460229.651947504,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-011.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "942ea1c138eab6099e521ee854b60ec69ab5aad7f467368f7aecb74bc10f0db5",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-015.json.gz",
+        "row_index": 1824
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:7f783c2ee35d1cac2341061cb6fe00a32d79fdd473f45f4030ae21ec9a5b1d1f",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 3050505.1620157734,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-011.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "36423a8ef87ad3cbe63bff3183446468a9503e62420b46223e9f0bf9ec747db3",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-016.json.gz",
+        "row_index": 1905
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:8f5824df79906dcd975c3ff77eb47d64122b63fd7b545e6f998f4d104d6bf17c",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 1220730.2426413307,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-013.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "9341bee09fa1dc8b01922a1a2158a71c225fa5dce36ade99a98473f02c84f292",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-018.json.gz",
+        "row_index": 2140
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:98cbe3dcb556ac688105f07ce3c6b55fddac6d092c373d401b3007a96a4488e6",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 266770.13462462195,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-014.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "7f66fe9ad8dd8965e0fb757db4ff354faf9983d994877204e3c61a015b0824f5",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-019.json.gz",
+        "row_index": 2695
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:98f45b2388d7b126f49a94362730d673cf1e2410bcb28b1738c1211cd4cbf433",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 2461542.484854283,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-014.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "7f66fe9ad8dd8965e0fb757db4ff354faf9983d994877204e3c61a015b0824f5",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-019.json.gz",
+        "row_index": 2747
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:9bdf2936f2aca400d7f50d85f581230f8480fad505cff3cdafcd973fb38598ba",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 240170.4403035554,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-014.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "c7c667ae8876ecf746030663cd9d94ddbef08691925e905a5dfcd324071bd19e",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-020.json.gz",
+        "row_index": 1024
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:a22c81e0f29446ec9db4e069f874602a7628d3c0f30dc9bd81de95a3eb0a351b",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 2053871.4371793198,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-015.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "4b833e33f137d531ab87b8fe898c4cf656559e14ce740c1eca56b5acf77532d1",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-021.json.gz",
+        "row_index": 511
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:a6c3743dc38bcde4ee81f52f0cd7ec5495a2404b6d0e923931383b2b02396013",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 5963012.167775089,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-015.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "4b833e33f137d531ab87b8fe898c4cf656559e14ce740c1eca56b5acf77532d1",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-021.json.gz",
+        "row_index": 2288
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:aa895b657e0ab63e029e2e5605f10ec3ad37daec430f04cea9a3c3d87b62f0a5",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 808886.939026854,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-015.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "1ad29415f28933d1a316d75646dbdcec5e125a33ff662bc7278d56bb5b7d4db3",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-022.json.gz",
+        "row_index": 863
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:c84047f831bdbd5f8d096a0e78092802c1bc939525958cf638db9a91d79ab8b1",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 1916089.6100893049,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-018.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "b959aa8b81b44225d799f961d04f424a588219979a23ab882e1676b3b891fae0",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-026.json.gz",
+        "row_index": 530
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:c8758653f00f5136e43f34aa20a78bd7cc613c9233d901b36dba63df8b2dbbb0",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 12010617.716361385,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-018.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "b959aa8b81b44225d799f961d04f424a588219979a23ab882e1676b3b891fae0",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-026.json.gz",
+        "row_index": 610
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:e61cd81cb3a21fc568cc0d06ebde422f29e33464210c32d6e07f9ec0768e4bd8",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 3534563.5193970376,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-021.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "30ecd96048f39a06dc104df198bf90872bd849174f3e87a13cc0ba56c27e703b",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-030.json.gz",
+        "row_index": 534
+      },
+      "retained_status_snapshot": "awaiting"
+    },
+    {
+      "component_id": "physical-component:e7d18dbbd957465894037bbd9273fefd1feb77474b8616ea52a38f8a11d6a5a9",
+      "batch_id": "gap-operational-batch:1df1240f1cba596d821d83f5",
+      "fine_family_id": "gap-source-batch:3a2b40a540dd11a20cfd68b5",
+      "area_m2": 1112639.6873745474,
+      "observed_bucket": "inside-unassigned-native-cell:multiple-edge-neighbors",
+      "locator_readiness": [
+        0,
+        0
+      ],
+      "annotation_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-021.json.gz",
+      "investigation": {
+        "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "file_sha256": "30ecd96048f39a06dc104df198bf90872bd849174f3e87a13cc0ba56c27e703b",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-030.json.gz",
+        "row_index": 1186
+      },
+      "retained_status_snapshot": "awaiting"
+    }
+  ],
+  "provisional_comparisons": [],
+  "retained_status_counts": {
+    "awaiting": 32
+  },
+  "provisional_status_counts": {}
+}

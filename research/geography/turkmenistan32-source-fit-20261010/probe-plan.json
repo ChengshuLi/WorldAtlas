@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "original_baseline": "c28077da970ae39550e5edea790a266b060d3de5",
+  "component_id": "physical-component:51373bc508ea964b27c743288a32b0e39a519980d1304b37df760023207bacd7",
+  "files": [
+    {
+      "path": "research/geography/turkmenistan32-source-fit-20261010/probe.py",
+      "bytes": 6870,
+      "sha256": "4626d6ff8871c6f8d93c64c43de3097c8ed8dcb15314beb9cc64bcb94049de83",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/turkmenistan32-source-fit-20261010/scope.json",
+      "bytes": 34792,
+      "sha256": "b5d71eb9c35d990a48e6d9f4e9faec63b44ccce95e651c2a109e5d05e14d224a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/evidence/immutable.py",
+      "bytes": 17414,
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/administrative.py",
+      "bytes": 12313,
+      "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/geography/part-23.json",
+      "bytes": 4962410,
+      "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-TKM-ADM2-000.bin.gz",
+      "bytes": 80771,
+      "sha256": "2d90c64e364eded8e91e27490d45022dd0eca55ffbccf2e7d5399039dca0b9d2",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 259969,
+      "uncompressed_sha256": "af6d0ea1274198ae5579ef23c9da9c2a45bb1fcc4e77fa5532e18c47c778d27d"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-009.geojson.gz",
+      "bytes": 1196442,
+      "sha256": "1a6ddb8db2116f6570bf695897f17aa592684280d93458248ce1ea5fa66ec78d",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8386692,
+      "uncompressed_sha256": "7cc734babaec29ee58954f972711d8f2933e5aa65f85f51826f48ffc993df0f5"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-010.json.gz",
+      "bytes": 1019514,
+      "sha256": "64c6dec1d8a86bae3ce2c8f471df174698f82caba7643a2aa518e4d2d105b6ac",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8387232,
+      "uncompressed_sha256": "eef9996caae754ed2a4b832356ff43e81c55b3c5bf41bc4511e68b8c7a116d27"
+    }
+  ],
+  "source_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-TKM-ADM2-000.bin.gz",
+  "candidate_path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-009.geojson.gz",
+  "investigations_path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-010.json.gz",
+  "runtime": {
+    "python_executable_sha256": "fa67443527ed9647f760d807e2a38f26340757123e643c4639cf273ed15d5ea7",
+    "python": "3.12.14",
+    "shapely": "2.1.2",
+    "geos": "3.13.1",
+    "numpy": "2.3.5"
+  },
+  "budget": {
+    "phase_bytes_max": 67108864,
+    "raw_plus_decoded_input_bytes": 24364419,
+    "rss_reservation_bytes": 402653184,
+    "source_feature_count": 59,
+    "target_contact_count": 6,
+    "candidate_fragment_count": 2,
+    "operations_limit": 1000
+  }
+}
