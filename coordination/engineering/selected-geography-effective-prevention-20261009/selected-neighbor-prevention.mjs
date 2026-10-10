@@ -667,6 +667,22 @@ export function verifyCurrentRebindExecution({request,operating,expectedCode,cus
 
 // This checks complete products, not an asserted qualified flag. The selected
 // reader supplies whole authenticated pins and actual trusted method bodies.
+// Mutable reader consumption history is retained in the actual inventories,
+// not part of the immutable containing-member identity compared across reads.
+export function currentRebindAcquisitionIdentity(acquisition) {
+ return {...acquisition,native_inputs:acquisition.native_inputs.map(input=>{
+  if(input.custody.kind!=='selected-native-transport')return input;
+  return {...input,custody:{...input.custody,fragments:input.custody.fragments.map(fragment=>{
+   const p=fragment.pin;
+   rebindKeys(p,'bytes,git_blob_oid,mode,path'+(Object.hasOwn(p,'sha256')?',sha256':'')+(Object.hasOwn(p,'whole_body_consumed')?',whole_body_consumed':''),'Foreign native fragment descriptor fields');
+   if(Object.hasOwn(p,'sha256'))demand(hash(p.sha256)&&p.sha256===fragment.sha256,'Native fragment optional whole SHA differs');
+   if(Object.hasOwn(p,'whole_body_consumed'))demand(p.whole_body_consumed===true,'Native fragment false consumption claim');
+   const {sha256,whole_body_consumed,...identity}=p;
+   return {...fragment,pin:identity};
+  })}};
+ })};
+}
+
 export function verifyCurrentRebindProducts({certificate,request,facts,publication,operating,result,baseSelection,registry,originalRows,originalPatches,size,expectedCode,bodyPins,acquired,executionCustody}) {
  for(const [name,body]of Object.entries({request,facts,publication,operating,result}))demand(body&&bodyPins[name]?.sha256===valueSha(body)&&bodyPins[name]?.bytes===valueBytes(body).length,'Whole canonical rebind product bytes differ: '+name);
  rebindKeys(certificate,'version,kind,execution_commit,base_selection,authority_registry_sha256,request,facts,publication,operating,result','Foreign current rebind certificate');
@@ -678,7 +694,7 @@ export function verifyCurrentRebindProducts({certificate,request,facts,publicati
  demand(request.limits.complete_phase_bytes<=268435456&&request.limits.descriptors<=512&&request.limits.output_bytes<=33554432&&request.limits.rss_bytes<=536870912&&request.limits.sampled_stop_bytes<=402653184&&request.limits.sampled_stop_bytes<=request.limits.rss_bytes,'Rebind admission exceeds existing bounds');
  demand(acquired&&same(acquired.base_selection,baseSelection)&&same(acquired.current_targets,request.current_targets)&&same(acquired.current_rows,request.current_rows),'Current operands differ from independently acquired selected bodies');
  rebindKeys(request.acquisition,'version,kind,target_sources,source_inputs,native_inputs,predecessor_proof,predecessor_rows,manifest_sha256','Incomplete current rebind acquisition custody');
- demand(request.acquisition.version===1&&request.acquisition.kind==='complete-selected-rebind-inputs-v1'&&same(request.acquisition,acquired.acquisition),'Issued acquisition is not the complete independently consumed source/native roster');
+ demand(request.acquisition.version===1&&request.acquisition.kind==='complete-selected-rebind-inputs-v1'&&same(currentRebindAcquisitionIdentity(request.acquisition),currentRebindAcquisitionIdentity(acquired.acquisition)),'Issued acquisition is not the complete independently consumed source/native roster');
  demand(Array.isArray(acquired.acquisition_phases)&&acquired.acquisition_phases.length>0&&acquired.acquisition_phases.every(p=>Number.isSafeInteger(p.complete_phase_bytes)&&p.complete_phase_bytes>0&&p.complete_phase_bytes<=PHASE&&Number.isSafeInteger(p.descriptors)&&p.descriptors>0&&p.descriptors<=request.limits.descriptors),'Independent acquisition exceeds consumer bounds');
  const expected=currentRebindResult({baseSelection,registry,originalRows,originalPatches,currentTargets:request.current_targets,currentRows:request.current_rows,size});
  demand(same(result,expected),'Complete current rebind result/inverse differs');
@@ -816,7 +832,7 @@ export function acquireCurrentRebindOperands(snapshot,registry,originalRows,orig
 export function compatibleCurrentRebindCode(executionCommit,currentCode,historicalCode) {
  demand(same(currentCode.map(p=>p.path),CURRENT_REBIND_CODE)&&same(historicalCode.map(p=>p.path),CURRENT_REBIND_CODE),'Incomplete current/historical method roster');
  if(same(currentCode,historicalCode))return historicalCode;
- demand((executionCommit==='46cb67a6cc0f88c6295d2d70da654baa5c6119a0'&&valueSha(historicalCode)==='e20767cd7f4aea34c1c1ce794bd09c43993905ac8da94779781c616ccd7c20ee')||(executionCommit==='c192aa5c88df9a55594b62f7dcfa6e4226f59682'&&valueSha(historicalCode)==='8542f8b0d2d41e6dc1a31090a91a47cbe383f3ab173f547a4c07aaeb8bb74284'),'Unknown historical rebind qualification generation');
+ demand((executionCommit==='46cb67a6cc0f88c6295d2d70da654baa5c6119a0'&&valueSha(historicalCode)==='e20767cd7f4aea34c1c1ce794bd09c43993905ac8da94779781c616ccd7c20ee')||(executionCommit==='c192aa5c88df9a55594b62f7dcfa6e4226f59682'&&valueSha(historicalCode)==='8542f8b0d2d41e6dc1a31090a91a47cbe383f3ab173f547a4c07aaeb8bb74284')||(executionCommit==='0eefe294390894f66c33e24e7950f21012d3791c'&&valueSha(historicalCode)==='ff910e210d83648c50608a0295a95b7ab1c5840f2f7eb678508cb7e02afe3c1d'),'Unknown historical rebind qualification generation');
  const boundaries=new Set(['coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs','coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs']);
  for(let i=0;i<currentCode.length;i++)if(!boundaries.has(currentCode[i].path))demand(same(currentCode[i],historicalCode[i]),'Historical numerical method or runtime body differs');
  return historicalCode;
@@ -869,6 +885,8 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
  const liveMetadata=carriedMetadataBytes+2*(valueBytes({certificate,bodies,code,historicalCode,currentCode,originalCode,roster,externalRoster,...(issuedOriginalInputs===undefined?{}:{issuedOriginalInputs})}).length+externalBytes);
 
  const acquired=acquireCurrentRebindOperands(snapshot,registry,originalRows,originalPatches,{targetSources:bodies.request.acquisition?.target_sources,predecessorProof:bodies.request.acquisition?.predecessor_proof,carriedMetadataBytes:liveMetadata});
+ const identityScratch=2*(valueBytes(bodies.request.acquisition.native_inputs).length+valueBytes(acquired.acquisition.native_inputs).length);
+ demand(Number.isSafeInteger(identityScratch)&&identityScratch<=FILE&&reader.used+identityScratch<=PHASE,'Complete native identity comparison scratch exceeds phase');reader.used+=identityScratch;
  return verifyCurrentRebindProducts({certificate,...bodies,baseSelection,registry,originalRows,originalPatches,size,expectedCode,acquired,executionCustody,bodyPins:Object.fromEntries(roster.map(({name,p})=>[name,p]))});
 }
 
