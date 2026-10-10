@@ -1087,15 +1087,19 @@ function administrativeSourcePremiseStage(repo,request,report) {
     }
   }
   demand(originals.size===rule.expected_ids.length,'Missing complete original physical record');
-  const targets=new Map();
+  const targets=new Map(),targetIds=new Set();
+  const neededTargetIds=new Set(scope.candidate_source_native_bindings
+    .filter(row=>rule.expected_ids.includes(row.component_id))
+    .map(row=>row.retained_payload.target_stable_location_id));
   for(const name of rule.target_banks){
     const value=get(name),tree=execFileSync('git',['-C',repo,'ls-tree','-z','HEAD','--',name],{encoding:'utf8'});
     demand(tree===`${value.pin.mode} blob ${value.pin.blob}\t${name}\0`,'Prepared target source body differs from actual immutable HEAD');
     const features=json(name).features;demand(Array.isArray(features),'Missing full target bank');
-    for(const feature of features){demand(!targets.has(feature.id),'Duplicate selected target');targets.set(feature.id,feature);}
+    for(const feature of features){
+      demand(!targetIds.has(feature.id),'Duplicate selected target');targetIds.add(feature.id);
+      if(neededTargetIds.has(feature.id))targets.set(feature.id,feature);
+    }
   }
-  const bounds=json(rule.bounds_path),owners=new Map(bounds.map(row=>[row.id,row]));
-  demand(bounds.length===49625&&owners.size===49625&&new Set(bounds.map(row=>row.index)).size===49625,'Incomplete selected owner roster');
   const manifest=json(rule.manifest_path),boundsPin=get(rule.bounds_path).pin;
   demand(manifest.original_assets.bounds.sha256===boundsPin.sha256&&Number.isSafeInteger(boundsPin.uncompressed_bytes),'Foreign original selected bounds');
   demand(get(rule.source_catalogue_path).pin.sha256==='d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9','Administrative source edition catalogue differs from retained corpus');
@@ -1104,6 +1108,9 @@ function administrativeSourcePremiseStage(repo,request,report) {
     demand(collection.type==='FeatureCollection'&&Array.isArray(collection.features),'Incomplete original administrative product');
     return {pin,original_bytes:body.length,original_sha256:sha(body),features:collection.features.map(feature=>({
       feature_sha256:sha(canonical(feature)),geometry_sha256:sha(canonical(feature.geometry))}))};});
+  // Full owner graph is needed only after original product hash acquisition.
+  const bounds=json(rule.bounds_path),owners=new Map(bounds.map(row=>[row.id,row]));
+  demand(bounds.length===49625&&owners.size===49625&&new Set(bounds.map(row=>row.index)).size===49625,'Incomplete selected owner roster');
   const rows=scope.candidate_source_native_bindings.filter(row=>rule.expected_ids.includes(row.component_id)).map(sourceCase=>{
     const ordinal=scope.candidate_source_native_bindings.indexOf(sourceCase);
     const cid=sourceCase.component_id,original=originals.get(cid),binding=scope.original_physical_comparison_bindings.filter(row=>row.component_id===cid);

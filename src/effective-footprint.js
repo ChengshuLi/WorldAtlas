@@ -418,7 +418,24 @@ function versionedPrimitiveGeometries(feature) {
   require(Array.isArray(value.components)&&value.components.length>0,'Missing complete original components');
   let previous='';const output=[feature.geometry];
   for(const row of value.components){
-    exactKeys(row,['base_geometry','base_geometry_sha256','component_id','disposition','geometry','geometry_sha256','native_cells','pixelIndex','source_receipt_sha256','target_id','authority_sha256','rule_sha256'],'Original authority component');
+    const componentKeys=['base_geometry','base_geometry_sha256','component_id','disposition','geometry','geometry_sha256','native_cells','pixelIndex','source_receipt_sha256','target_id','authority_sha256','rule_sha256'];
+    const partial=Object.hasOwn(row,'geometry_scope');
+    exactKeys(row,partial?[...componentKeys,'geometry_scope','original_candidate','original_remainder','whole_gap_completion']:componentKeys,'Original authority component');
+    if(partial){
+      require(row.geometry_scope==='supported-fragment'&&row.whole_gap_completion===false,'False whole-gap completion / unsupported fragment scope');
+      exactKeys(row.original_candidate,['type','id','properties','geometry'],'Original whole candidate');
+      require(row.original_candidate.type==='Feature'&&row.original_candidate.id===row.component_id
+        &&row.original_candidate.properties&&typeof row.original_candidate.properties==='object'&&!Array.isArray(row.original_candidate.properties),'Foreign original whole candidate');
+      polygonParts(row.original_candidate.geometry);
+      const remainder=row.original_remainder;
+      exactKeys(remainder,['geometry','geometry_sha256','geometry_type','is_empty','is_valid','planar_area_coordinate_units_squared','planar_length_coordinate_units'],'Original partial remainder');
+      require(remainder.is_empty===false&&remainder.is_valid===true&&remainder.geometry_type===remainder.geometry?.type
+        &&Number.isFinite(remainder.planar_area_coordinate_units_squared)&&remainder.planar_area_coordinate_units_squared>0
+        &&Number.isFinite(remainder.planar_length_coordinate_units)&&remainder.planar_length_coordinate_units>0,'Missing/nonpositive original remainder');
+      polygonParts(remainder.geometry);
+      require(hex.test(remainder.geometry_sha256??'')&&footprintValueSha256(remainder.geometry)===remainder.geometry_sha256,'Original remainder pointsets changed');
+      require(footprintValueSha256(row.original_candidate.geometry)!==row.geometry_sha256,'Whole original candidate relabelled as supported fragment');
+    }
     require(typeof row.component_id==='string'&&row.component_id>previous&&row.target_id===feature.id&&row.pixelIndex===feature.pixelIndex,'Foreign/duplicate/unordered component owner');
     previous=row.component_id;
     for(const key of ['base_geometry_sha256','geometry_sha256','source_receipt_sha256','authority_sha256','rule_sha256'])
