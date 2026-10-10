@@ -43,6 +43,18 @@
         "hash_kind": "file-bytes",
         "uncompressed_bytes": 7071267,
         "uncompressed_sha256": "2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc"
+      },
+      {
+        "path": "data/geography/part-18.json",
+        "bytes": 4909063,
+        "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-19.json",
+        "bytes": 4583022,
+        "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+        "hash_kind": "file-bytes"
       }
     ],
     "pins": {
@@ -76,7 +88,14 @@
       "temporal_status": "reference"
     }
   ],
-  "outputs": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/shared-country-delivery-phl-20261010/current-target-file-joins.json",
+      "bytes": 5152,
+      "sha256": "0cb947209c303fc9f71e6201fc87230e75e2220225d4991aa570ac697d2c8bd9",
+      "hash_kind": "file-bytes"
+    }
+  ],
   "methods": [
     {
       "id": "literal-view-validation",
@@ -84,6 +103,13 @@
       "description": "Pure whole-byte authenticated accepted-record projection and refusal checks. No spatial or source/native operator, current-target assertion, writer or selection change.",
       "software": "Node 24.19.0; node:test",
       "units": "exact record identities and byte equality"
+    },
+    {
+      "id": "current-target-byte-join",
+      "kind": "code",
+      "description": "Read two entire current-main containing FeatureCollections, require one exact target ID, compare parent and SHA256 of complete sorted-key compact Python JSON with trailing newline to the accepted original feature hash. This is a byte-domain join, not a geometric/native operator or selected-effective qualification.",
+      "software": "Python 3.12.14; hashlib/json; Git 2.52.0",
+      "units": "whole-feature SHA256 and exact parent identities"
     }
   ],
   "metrics": [],
