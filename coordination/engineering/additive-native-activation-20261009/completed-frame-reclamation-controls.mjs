@@ -1,0 +1,20 @@
+import fs from 'node:fs';import path from 'node:path';import {pathToFileURL} from 'node:url';import vm from 'node:vm';import assert from 'node:assert/strict';import {spawnSync} from 'node:child_process';import {setImmediate as tick} from 'node:timers/promises';
+const root=process.argv[2]??process.cwd(),directory=pathToFileURL(path.join(root,'coordination/engineering/additive-native-composition-20261009/')),source=fs.readFileSync(path.join(root,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs'),'utf8'),demand=(v,m)=>{if(!v)throw Error(m);};
+const start=source.indexOf('const rebindGc='),end=source.indexOf('export function acquireCurrentRebindOperands',start),body=source.slice(start,end);
+assert(start>0&&end>start);const make=(args,gc)=>{const context=vm.createContext({process:{execArgv:args},gc,demand});const call=vm.runInContext(body+'\nreclaimCompletedRebindFrame',context);return {context,call};};
+const actual=make(['--expose-gc'],globalThis.gc),retained={table:new Uint32Array([0,2,2,1]),rows:[{y:0,runs:[[2,5,1],[7,9,2]]}],custody:{sha256:'a'.repeat(64)},used:216590057};const before=JSON.stringify(retained);
+const completed=()=>{const temporary=Buffer.alloc(32*1048576,7);return new WeakRef(temporary);};const weak=completed();await tick();actual.call();assert.equal(weak.deref(),undefined);assert.equal(JSON.stringify(retained),before);
+let negatives=0;for(const [args,gc] of [[['--expose-gc'],undefined],[['--expose-gc'],()=>{}],[['--expose-gc','--trace-warnings'],globalThis.gc]]){assert.throws(()=>make(args,gc).call());negatives++;}
+const changed=make(['--expose-gc'],globalThis.gc);changed.context.gc=()=>{};assert.throws(changed.call,/callable/);negatives++;
+let legacyCalls=0;make([],()=>legacyCalls++).call();assert.equal(legacyCalls,0);
+// Invoke the exact production command predicate, retaining all original fields.
+const predicate=source.match(/const command=proof.command;[\s\S]*?'Actual external command differs from bound runtime\/entry\/plan\/destination'\);/)[0];
+const beforeCommand={runtime:[{role:'time',path:'/usr/bin/time'},{role:'node',path:process.execPath}],entry:{path:'/owned/entry.mjs'},plan:{path:'/owned/plan.json'}};
+const old=['/usr/bin/time','-l',process.execPath,'/owned/entry.mjs','/owned/plan.json','/owned/output'],fresh=old.toSpliced(3,0,'--expose-gc');const check=command=>vm.runInNewContext(predicate,{proof:{command},before:beforeCommand,demand});check(old);check(fresh);
+for(const command of [fresh.toSpliced(3,1,'--inspect'),fresh.toSpliced(4,0,'--trace-warnings'),fresh.toSpliced(2,1,'/foreign/node'),fresh.toSpliced(4,1,'/foreign/entry'),fresh.toSpliced(5,1,'/foreign/plan'),fresh.toSpliced(6,1,'/owned/../outside')]){assert.throws(()=>check(command));negatives++;}
+// Both collection calls follow the complete source/native frame return and
+// retained output join. Every phase budget/admission expression remains literal.
+assert.match(source,/const frame=sourceFrame\(name\);currentTargets.push\(\.\.\.frame.found\);sourceInputs.push\(frame.input\);phases.push\([^\n]*\);reclaimCompletedRebindFrame\(\);/);
+assert.match(source,/const rows=groupFrame\(group\);currentRows.push\(\.\.\.rows\);phases.push\([^\n]*\);\n  reclaimCompletedRebindFrame\(\);/);
+const entry=new URL('run-current-rebind.mjs',directory);for(const args of [[],['--expose-gc'],['--expose-gc','--trace-warnings']]){const result=spawnSync(process.execPath,[...args,entry.pathname],{encoding:'utf8',env:{PATH:process.env.PATH}});assert.notEqual(result.status,0);assert.match(result.stderr,/Missing\/plain bounded actual execution identity/);negatives++;}
+console.log(JSON.stringify({positive_controls:4,negative_controls:negatives,completed_temporary_reclaimed:true,retained_output_and_accounting_unchanged:true,historical_six_word_command_preserved:true,exact_seven_word_command_accepted:true,limits:['Small real Node collector/command/entry controls only; no scientific operator, current-bank qualification or actual RSS acceptance.']}));
