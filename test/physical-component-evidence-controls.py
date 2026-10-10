@@ -1,8 +1,7 @@
-"""Semantic tampering controls against the complete retained world evidence.
+"""Compact semantic controls and retained whole-world custody fixtures.
 
-Rebind hashes honestly after tampering both actual-run exports. These controls
-must fail on scientific accounting, rather than on a stale custody digest.
-Ordinary hard links share unchanged bytes; replacements never alter originals.
+Semantic cases call the actual validator predicates with small original records.
+The separate full-world positive and custody tests retain complete-byte coverage.
 """
 import gzip
 import importlib.util
@@ -119,47 +118,75 @@ class FixtureBindingControls(unittest.TestCase):
                 validate(f.root, f.index)
 
 
+class CompactFixture:
+    """All required failure conditions in six new fragments, without world copies."""
+    def __init__(self):
+        from copy import deepcopy
+        from shapely.geometry import box, mapping
+        from geographic_components import components
+        from physical_gap_crosswalk import crosswalk, membership
+
+        def feature(identity, bounds, area=1):
+            return {'type': 'Feature', 'id': identity, 'geometry': mapping(box(*bounds)),
+                    'properties': {'area_m2': area, 'exact_location_contacts': []}}
+
+        self.old = [feature('old-overlap', (0, 0, 2, 1), None),
+                    feature('old-unlinked', (10, 10, 11, 11))]
+        self.new = [feature('new-a', (0, 0, 1, 1)),
+                    feature('new-edge', (1, 0, 2, 1)),
+                    feature('new-point', (2, 1, 3, 2)),
+                    feature('new-east', (179, 3, 180, 4)),
+                    feature('new-west', (-180, 3, -179, 4)),
+                    feature('new-unlinked', (15, 15, 16, 16))]
+        bounds = [-180, -60, 180, 85]
+        blocked = {'bounds': [20, 20, 21, 21], 'status': 'blocked-original-water'}
+        self.old_records, _ = components(self.old, [blocked], bounds)
+        new_records, contacts = components(self.new, [blocked], bounds)
+        for row in new_records:
+            row['id'] = 'physical-component:' + row['id'].split(':', 1)[1]
+        members = membership(self.new, new_records)
+        for contact in contacts:
+            contact['components'] = [members[i] for i in contact['fragments']]
+        assert {c['kind'] for c in contacts} == {'shared-edge', 'point-only-ambiguous'}
+        assert any(c['dateline'] for c in contacts)
+        self.rows = crosswalk(self.old, self.new, self.old_records, new_records)
+        self.rows.update(new_components=new_records, new_contacts=contacts)
+        self.old_report = {'candidate_fragments': len(self.old), 'tiles_blocked': [blocked]}
+        self.new_report = {'candidate_fragments': len(self.new), 'residues': 0,
+                           'tiles': [blocked], 'bounds': bounds}
+        self.component_report = {'component_count': len(self.old_records)}
+        report = {name: len(self.rows[name]) for name in
+                  ['old_fragments', 'new_fragments', 'new_components', 'fragment_pairs', 'component_links']}
+        report.update(old_components=len(self.old_records), new_remnants_preserved_in_original_bundles=0,
+                      unmeasured_original_ids=['old-overlap'], unmeasured_new_ids=[],
+                      original_blocked_domains=[{'original': deepcopy(blocked), 'new': deepcopy(blocked)}],
+                      overlay_unknowns=[], difference_unknowns=[], status='complete-exact-correspondence-accounting')
+        self.reports = {'compact-control': report}
+        # Match actual decoded JSON representations, including coordinate arrays.
+        self.__dict__ = json.loads(canonical_json(self.__dict__))
+
+    def alter_rows(self, family, change, select=lambda rows: True):
+        rows = self.rows[family]
+        assert select(rows), 'Control is missing its required failure condition'
+        change(rows)
+
+    def validate(self):
+        report = self.reports['compact-control']
+        validator.validate_accounting(report, self.old_report, self.component_report, self.new_report,
+                                      self.old, self.new, [], self.old_records, self.rows)
+        return validator.validate_reconstruction(self.new, self.new_report,
+                                                self.rows['new_components'], self.rows['new_contacts'])
+
+
 class Controls(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.cache_directory = tempfile.TemporaryDirectory(prefix='physical-component-kernel-control-')
-        cls.original_components = validator.components
-
-        def cached_components(features, blocked, bounds):
-            # Bind the complete unchanged actual input, including every original
-            # feature/property/geometry, unknown tile and domain. Only output
-            # evidence is tampered in these controls. The production validator
-            # and mandatory artifact test always reconstruct without this cache.
-            key = sha256(canonical_json({'features': features, 'blocked': blocked, 'bounds': bounds}))
-            path = pathlib.Path(cls.cache_directory.name) / (key + '.json.gz')
-            if path.exists():
-                return json.loads(gzip.decompress(path.read_bytes()))
-            result = cls.original_components(features, blocked, bounds)
-            path.write_bytes(gzip.compress(canonical_json(result), mtime=0))
-            return result
-
-        validator.components = cached_components
-
-    @classmethod
-    def tearDownClass(cls):
-        validator.components = cls.original_components
-        cls.cache_directory.cleanup()
-
     def control(self, tamper, message):
-        with tempfile.TemporaryDirectory(prefix='physical-component-control-') as directory:
-            fixture = Fixture(pathlib.Path(directory))
-            tamper(fixture)
-            fixture.finalize()
-            previous = validator.ROOT
-            try:
-                validator.ROOT = fixture.root
-                # validate_science starts with the complete real custody check.
-                # Requiring the particular scientific rejection proves custody
-                # succeeded, without authenticating the entire fixture twice.
-                with self.assertRaisesRegex(ValueError, message):
-                    validator.validate_science()
-            finally:
-                validator.ROOT = previous
+        fixture = CompactFixture()
+        self.assertEqual(fixture.validate()['source_contact_unknowns'], 0)
+        tamper(fixture)
+        # No stale file hash can short-circuit these actual semantic predicates.
+        # Full-file authentication is exercised separately with retained evidence.
+        with self.assertRaisesRegex(ValueError, message):
+            fixture.validate()
 
     def test_missing_fragment_with_self_consistent_reported_count(self):
         def tamper(f):

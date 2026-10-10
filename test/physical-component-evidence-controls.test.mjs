@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
 
-test('complete world component evidence rejects rehashed identity, uncertainty and relationship omissions', async () => {
+test('compact component controls reject identity, uncertainty and relationship omissions', async () => {
   const child = spawn(process.env.PYTHON || 'python3', ['-B', 'test/physical-component-evidence-controls.py'],
     {timeout: 600000, stdio: ['ignore', 'pipe', 'pipe']});
   let stdout = '', stderr = '', failure;

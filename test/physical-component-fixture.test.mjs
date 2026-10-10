@@ -16,57 +16,37 @@ test('control fixture retains actual shared-output custody and refuses unchanged
   const run=runPython(t,['-B','test/physical-component-evidence-controls.py','FixtureBindingControls']);
   assert.match(run.stderr,/Ran 2 tests/);
 });
-test('actual ephemeral component cache invalidates every input family and a fresh method',t=>{
+test('compact controls consume the current reconstruction method on every validation',t=>{
   const run=runPython(t,['-B','-c',String.raw`
-import copy, importlib.util, pathlib
+import importlib.util
 spec=importlib.util.spec_from_file_location('actual_controls','test/physical-component-evidence-controls.py')
 helper=importlib.util.module_from_spec(spec)
 spec.loader.exec_module(helper)
+fixture=helper.CompactFixture()
 original=helper.validator.components
-features=[{'id':'a','properties':{'kind':'land'},'geometry':{'type':'Polygon','coordinates':[[[0,0],[1,0],[1,1],[0,0]]]}}]
-blocked=[{'id':'tile-a','bounds':[0,0,1,1]}]
-bounds=[-180,-90,180,90]
 calls=[]
-def kernel(*args):
-    calls.append(copy.deepcopy(args))
-    return {'method':'first','call':len(calls)}
-helper.validator.components=kernel
+def observed(*args):
+    calls.append(True)
+    return original(*args)
 try:
-    helper.Controls.setUpClass()
+    helper.validator.components=observed
+    fixture.validate()
+    fixture.validate()
+    assert len(calls)==2, 'Every reconstruction must execute the current method'
+    def missing_contacts(*args):
+        rebuilt, contacts=original(*args)
+        assert contacts
+        return rebuilt, []
+    helper.validator.components=missing_contacts
     try:
-        cached=helper.validator.components
-        first=cached(features,blocked,bounds)
-        assert cached(copy.deepcopy(features),copy.deepcopy(blocked),copy.deepcopy(bounds))==first
-        assert len(calls)==1
-        mutations=[]
-        for field in ['properties','geometry','id']:
-            changed=copy.deepcopy(features)
-            if field=='properties': changed[0]['properties']['kind']='water'
-            elif field=='geometry': changed[0]['geometry']['coordinates'][0][1][0]=2
-            else: changed[0]['id']='different-subject'
-            mutations.append((changed,blocked,bounds))
-        mutations.extend([(features+[{'id':'new-subject','properties':{},'geometry':None}],blocked,bounds),
-                          (features,[{'id':'tile-b','bounds':[0,0,1,1]}],bounds),
-                          (features,[{'id':'tile-a','bounds':[0,0,2,1]}],bounds),
-                          (features,blocked,[-179,-90,180,90])])
-        for expected,args in enumerate(mutations,start=2):
-            assert cached(*args)['call']==expected
-            assert len(calls)==expected
-        retained=pathlib.Path(helper.Controls.cache_directory.name)
-    finally: helper.Controls.tearDownClass()
-    assert not retained.exists()
-    second_calls=[]
-    def second_kernel(*args):
-        second_calls.append(args)
-        return {'method':'second'}
-    helper.validator.components=second_kernel
-    helper.Controls.setUpClass()
-    try:
-        assert helper.validator.components(features,blocked,bounds)=={'method':'second'}
-        assert len(second_calls)==1
-    finally: helper.Controls.tearDownClass()
-finally: helper.validator.components=original
-print('cache input and method reload controls passed')
+        fixture.validate()
+    except ValueError as error:
+        assert 'Complete original edge/point/dateline contact roster changed' in str(error), str(error)
+    else:
+        raise AssertionError('A changed reconstruction method reused a prior success')
+finally:
+    helper.validator.components=original
+print('current reconstruction method controls passed')
 `]);
-  assert.match(run.stdout,/cache input and method reload controls passed/);
+  assert.match(run.stdout,/current reconstruction method controls passed/);
 });
