@@ -235,7 +235,7 @@ def main() -> None:
     receipts = []
     for path in sorted(CHANGED_PATHS):
         old = subprocess.run(["git", "-C", str(ROOT), "cat-file", "-e", f"{base}:{path}"], capture_output=True)
-        row = {"path": path, "status": "modified" if old.returncode == 0 else "added", "previous_path": None}
+        row = {"path": path, "status": "modified" if old.returncode == 0 else "added"}
         if old.returncode == 0:
             row["original_sha256"] = digest(git("show", f"{base}:{path}"))
         receipts.append(row)
