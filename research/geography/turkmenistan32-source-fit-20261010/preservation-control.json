@@ -1,0 +1,18 @@
+{
+  "control": "actual-entrypoint-existing-run-preservation",
+  "executed_commit": "d61c83dccf28894788b23be1881d10f3538ff43f",
+  "returncode": 1,
+  "before_sha256": {
+    "publication.json": "312a99cdcf87479d373d3cae0dc2dc62a1e75f06cda6d4c048370b2db60eda98",
+    "fragments.json": "b4f1abba8259e9d66ee63c29e525cb73662e1906c1406343a2ce724f16e4df9d",
+    "fit.json": "1bcd86b8f9629e13c764f719d9426a82bb23140ac7f37ab4b0814a26faf90bca"
+  },
+  "after_sha256": {
+    "publication.json": "312a99cdcf87479d373d3cae0dc2dc62a1e75f06cda6d4c048370b2db60eda98",
+    "fragments.json": "b4f1abba8259e9d66ee63c29e525cb73662e1906c1406343a2ce724f16e4df9d",
+    "fit.json": "1bcd86b8f9629e13c764f719d9426a82bb23140ac7f37ab4b0814a26faf90bca"
+  },
+  "error": "FileExistsError: Evidence already exists; choose a new vintage",
+  "result": "Existing scientific run preserved; refusal occurred before Shapely imports or source fit",
+  "limit": "An earlier wrapper expected a different error string and failed its assertion; it was not counted as a passed control. This record is the subsequently observed actual-entrypoint refusal."
+}
