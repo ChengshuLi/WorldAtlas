@@ -2,8 +2,8 @@
 // complete import/runtime closure before import and records external operation.
 // This module cannot issue an operating certificate or select a release.
 import fs from 'node:fs';import path from 'node:path';
-import {ImmutableReader,SelectedGeometrySources} from '../../../scripts/check-effective-geographic-regression.mjs';
-import {CURRENT_REBIND_CODE,normaliseRetainedRepairLedger,readRetainedRegistryAuthority,acquireCurrentRebindOperands,valueBytes,valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {ImmutableReader} from '../../../scripts/check-effective-geographic-regression.mjs';
+import {CURRENT_REBIND_CODE,normaliseRetainedRepairLedger,readRetainedRegistryAuthority,acquireCurrentRebindOperands,currentRebindSourceView,valueBytes,valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 const FILE=33554432,PHASE=268435456,prepared=new WeakSet();
 const demand=(v,m)=>{if(!v)throw Error(m);},same=(a,b)=>valueBytes(a).equals(valueBytes(b));
 const exists=p=>{try{return fs.lstatSync(p);}catch(e){if(e.code==='ENOENT')return null;throw e;}};
@@ -37,9 +37,9 @@ export function captureCurrentRebindProducts({destination,snapshot,plan,registry
  demand(!Object.hasOwn(snapshot.selection,'additive_release'),'Cold rebind producer requires the selected native base only');
  const plannedRows=[...normaliseRetainedRepairLedger(originalLedger,registry).rows.values()];
  validateCurrentRebindPlan(plan,{executionCommit,baseSelection:snapshot.selection,registry,originalRows:plannedRows,executedCode});
- // The constructor checks the stock private snapshot identity before original
- // authority bodies can be opened. Its selected metadata reads stay admitted.
- new SelectedGeometrySources(snapshot);
+ // Reuse the stock privately registered source view before original authority
+ // bodies can be opened; its complete selected metadata remains carried.
+ currentRebindSourceView(snapshot);
  const {rows,patches,proofs}=originalOperands(snapshot.reader,registry,originalLedger,snapshot,{plan,executionPreUse,executedCode});
  demand(same(rows,plannedRows),'Original authenticated authority rows differ from admitted plan');
  demand(same(plan.original_patch_sha256s,patches.map(valueSha)),'Cold plan changes complete original native output roster');

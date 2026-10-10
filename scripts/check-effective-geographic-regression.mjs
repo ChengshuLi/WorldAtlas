@@ -31,6 +31,22 @@ export function selectedBaseAssetAlias(snapshot,role,pin) {
   demand(Object.isFrozen(graph),'Selected base alias graph is mutable');
   return graph;
 }
+// The original base frame registers only its completed authenticated source
+// view. This also serves its private intermediate snapshot before additive
+// consumption finishes; caller-supplied views never establish this identity.
+export function selectedGeometrySourceAlias(snapshot) {
+  const accepted=selectedSnapshots.get(snapshot);
+  demand(accepted&&snapshot.reader===accepted.reader&&snapshot.reader.version===accepted.readerVersion&&snapshot.manifest===accepted.manifestObject&&snapshot.owners===accepted.ownerObject,'Require unchanged privately authenticated selected base');
+  demand(accepted.selection===JSON.stringify(snapshot.selection)&&accepted.manifest===JSON.stringify(snapshot.manifest),'Selected source alias metadata drift');
+  const resolver=accepted.geometrySources;
+  demand(snapshot.selection.selected_geography&&resolver&&snapshot.geometrySources===resolver
+    &&resolver instanceof SelectedGeometrySources&&Object.isFrozen(resolver)
+    &&resolver.snapshot===snapshot&&resolver.reader===snapshot.reader,'Foreign selected source view');
+  demand(resolver.bank&&Object.isFrozen(resolver.bank)&&resolver.replacements instanceof Map
+    &&resolver.replacements.size===resolver.bank.overrides.length
+    &&resolver.bank.overrides.every(p=>resolver.replacements.get(p.logical_path)===p),'Selected source replacement roster drift');
+  return resolver;
+}
 function runtimeIdentity(executable=process.execPath) {
   const executablePath=fs.realpathSync(executable);
   if(installedRuntimes.has(executablePath))return installedRuntimes.get(executablePath);
@@ -282,7 +298,8 @@ const REGISTERED_ARTIFACT_REVIEW_GETS=Object.freeze({
   '87ab56e1354dd8a8fda532bfa008436abd35c6c506f0e0685eaa2f2f07f59a8a':Object.freeze({review_id:6090739618,github_user_id:6732996,issue:1520,releaseCatalogue:true,entryProfiles:true,cloudflareProfile:true}),
   '8e921a42d1ea622f45b794ff18259cfb3ff923fc4b0b2232f4866aebb18ac1ed':Object.freeze({review_id:6091607261,github_user_id:6732996,issue:1520,releaseCatalogue:true,entryProfiles:true,cloudflareProfile:true}),
   '5f6ca30596eec00b3ed4b328d6edcf094a0bd235714be6c08d29cf2d2f1564be':Object.freeze({review_id:6091729508,github_user_id:6732996,issue:1520,releaseCatalogue:true,entryProfiles:true,cloudflareProfile:true}),
-  'fb271c9853da87165b62b65c1fbe6755bf87416552117ef759e608f7641e4184':Object.freeze({review_id:6092465135,github_user_id:6732996,issue:1520,releaseCatalogue:true,entryProfiles:true,cloudflareProfile:true})
+  'fb271c9853da87165b62b65c1fbe6755bf87416552117ef759e608f7641e4184':Object.freeze({review_id:6092465135,github_user_id:6732996,issue:1520,releaseCatalogue:true,entryProfiles:true,cloudflareProfile:true}),
+  'e25ebb5dd01f0f07ffe95d59c66baa308bd271e855f0d62cd203afd59e4ab569':Object.freeze({review_id:6092997716,github_user_id:6732996,issue:1520,releaseCatalogue:true,entryProfiles:true,cloudflareProfile:true})
 });
 // Validate the complete ordered installer catalogue as immutable provenance.
 // Reading these descriptors does not claim this gate installs their payloads.
@@ -428,7 +445,7 @@ function loadBaseSelection(reader) {
     base_manifest:{mode:reader.inventory.get(reader.version+':'+selection.manifest_path).mode,bytes:reader.inventory.get(reader.version+':'+selection.manifest_path).bytes,sha256:selection.sha256},
     owner_roster:{mode:reader.inventory.get(bounds.commit+':'+bounds.path).mode,bytes:rawBounds.length,sha256:sha(rawBounds),decoded_bytes:decoded.length,decoded_sha256:sha(decoded)}
   }});
-  if(selection.selected_geography){snapshot.geometrySources=new SelectedGeometrySources(snapshot);snapshot.metadataBytes+=Buffer.byteLength(JSON.stringify(snapshot.geometrySources.bank))+Buffer.byteLength(JSON.stringify(snapshot.geometrySources.sources))+Buffer.byteLength(JSON.stringify(snapshot.geometrySources.release));}
+  if(selection.selected_geography){snapshot.geometrySources=new SelectedGeometrySources(snapshot);selectedSnapshots.get(snapshot).geometrySources=snapshot.geometrySources;snapshot.metadataBytes+=Buffer.byteLength(JSON.stringify(snapshot.geometrySources.bank))+Buffer.byteLength(JSON.stringify(snapshot.geometrySources.sources))+Buffer.byteLength(JSON.stringify(snapshot.geometrySources.release));}
   return snapshot;
 }
 
