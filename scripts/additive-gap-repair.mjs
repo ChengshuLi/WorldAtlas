@@ -838,6 +838,7 @@ export function readCurrentBaselineResolutions(repo,baseline,{request,report,pro
   const prior=snapshot.additive;
   const custody={kind:'current-selected-native-baseline-custody-v1',selection:snapshot.selection,
     manifest_sha256:snapshot.selection.sha256,source_map_sha256:snapshot.selection.selected_geography?.sha256??null,
+    baseline_pin:{...pin},source_bindings:snapshot.geometrySources.sources.map(source=>({...source})),
     prior_additive:prior?{sidecar:prior.sidecar,ledger:prior.ledger,registry:prior.registry,patch:prior.patch}:null,
     phases:snapshot.acquisitionPhases,input_inventory:[...reader.inventory.values()].map(p=>({...p})),
     carried_request_report_bytes:carriedBytes,executing_code_bytes:codeBytes};
@@ -1355,8 +1356,8 @@ export function validateAdministrativeNativeCase({selected,sourceCase,sourceScop
   return premises;
 }
 
-function additiveBatchProposalStage(repo,request,resolutions) {
-  if(request.additive?.source_profile==='retained-consumed-administrative-source')return administrativeBatchProposalStage(repo,request,resolutions);
+function additiveBatchProposalStage(repo,request,resolutions,budget) {
+  if(request.additive?.source_profile==='retained-consumed-administrative-source')return administrativeBatchProposalStage(repo,request,resolutions,budget);
   return countyBatchProposalStage(repo,request);
 }
 function countyBatchProposalStage(repo,request) {
@@ -1473,7 +1474,45 @@ function countyBatchProposalStage(repo,request) {
 }
 
 
-function administrativeBatchProposalStage(repo,request,resolutions) {
+function requireAdministrativeSourceBaseline(repo,{issued,request,resolutions,budget}) {
+  const equal=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
+  if(equal(issued.baseline,request.baseline))return;
+  const current=currentBaselineViews.get(resolutions);
+  demand(current&&request.additive?.source_profile==='retained-consumed-administrative-source'
+    &&issued.source_rule?.profile===request.additive.source_profile,
+    'Historical source/current native baseline split requires private administrative current acquisition');
+  for(const baseline of [issued.baseline,request.baseline])demand(baseline?.version===2
+    &&baseline.kind==='current-selected-native-baseline-v1'
+    &&Object.keys(baseline).sort().join(',')==='kind,pins,version'
+    &&Array.isArray(baseline.pins)&&baseline.pins.length===1,
+    'Foreign administrative source/current baseline declaration');
+  const old=issued.baseline.pins[0],now=request.baseline.pins[0];
+  demand(old.kind===undefined&&old.path==='data/ownership-selection.json'
+    &&equal(now,current.baseline_pin),'Current native selector custody differs');
+  demand(budget&&typeof budget.add==='function','Missing historical selector prospective admission');
+  for(const item of pinCost(old))budget.add(item);
+  // Complete encoded body plus parsed/canonical scratch remain charged;
+  // use separate member-sized entries, preserving the stock per-member cap.
+  for(let i=0;i<3;i++)budget.add({bytes:old.bytes});
+  const historical=JSON.parse(readPin(repo,old));
+  demand(['method','manifest_path','sha256','release_id'].every(key=>historical[key]===current.selection[key])
+    &&equal(historical.selected_geography,current.selection.selected_geography),
+    'Historical source/current native base geometry differs');
+  demand(Array.isArray(issued.source_rule.target_banks)&&issued.source_rule.target_banks.length>0
+    &&new Set(issued.source_rule.target_banks).size===issued.source_rule.target_banks.length,
+    'Incomplete historical administrative target banks');
+  for(const name of issued.source_rule.target_banks){
+    const expected=issued.source_rule.inputs.filter(pin=>pin.path===name);
+    const acquired=current.source_bindings.filter(pin=>pin.path===name);
+    demand(expected.length===1&&acquired.length===1&&expected[0].kind===undefined
+      &&acquired[0].kind==='ordinary-immutable-git-source'
+      &&acquired[0].mode===expected[0].mode&&acquired[0].git_blob_oid===expected[0].blob
+      &&acquired[0].bytes===expected[0].bytes&&acquired[0].sha256===expected[0].sha256,
+      'Historical administrative target bank is not the complete current selected source');
+  }
+}
+
+function administrativeBatchProposalStage(repo,request,resolutions,budget) {
   const spec=request.additive,inputs=new Map(),equal=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
   for(const pin of spec.inputs){demand(!inputs.has(pin.path),'Duplicate batch operand');inputs.set(pin.path,{pin,body:readPin(repo,pin)});}
   const get=name=>{if(!inputs.has(name)){const pin=request.baseline.pins.find(pin=>pin.path===name);demand(pin,'Missing complete batch operand');inputs.set(name,{pin,body:readPin(repo,pin)});}return inputs.get(name);};
@@ -1486,7 +1525,8 @@ function administrativeBatchProposalStage(repo,request,resolutions) {
     &&facts.execution_commit===spec.source_execution_commit&&equal(facts.request,get(spec.source_request_path).pin)
     &&equal(facts.executed_code,issued.executed_code)&&equal(facts.input_descriptors,[issued.report,...issued.source_rule.inputs,...issued.baseline.pins])
     &&equal(facts.runtime,spec.source_runtime)&&equal(facts.installed_modules,issued.installed_modules)
-    &&equal(facts.parent,request.parent)&&equal(issued.baseline,request.baseline),'Batch predecessor closure/vintage differs');
+    &&equal(facts.parent,request.parent),'Batch predecessor closure/vintage differs');
+  requireAdministrativeSourceBaseline(repo,{issued,request,resolutions,budget});
   demand(operating.qualified===true&&operating.execution_commit===facts.execution_commit&&operating.exit?.code===0
     &&operating.exit.signal===null&&operating.owned_processes_remaining?.length===0&&operating.refusal===null
     &&operating.request_sha256===facts.request.sha256&&operating.destination===issued.destination,'Unqualified batch source execution');
@@ -1678,7 +1718,7 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
   if(baselineCustody)budget.add({bytes:2*canonical(baselineCustody).length});
   let result;
   if(request.operation===ADDITIVE_BATCH_PROPOSAL_VERSION){
-    demand(resolutions,'Complete selected-bank reconciliation required');result=additiveBatchProposalStage(sourceRoot,request,resolutions);
+    demand(resolutions,'Complete selected-bank reconciliation required');result=additiveBatchProposalStage(sourceRoot,request,resolutions,budget);
   }else if(request.operation===ADDITIVE_PROPOSAL_VERSION){
     demand(resolutions,'Complete selected-bank reconciliation required');result=additiveProposalStage(sourceRoot,request);
   }else if(request.operation===SOURCE_PREMISES_VERSION){
