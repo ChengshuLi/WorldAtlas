@@ -190,9 +190,17 @@ def compare(before_features, after_features):
         affected.update(neighbors(tree_after, ids_after, piece))
     occupied_before = union_all([before[i] for i in sorted(affected) if i in before])
     occupied_after = union_all([after[i] for i in sorted(affected) if i in after])
+    # Exact stable-owner primitive inclusion proves coverage monotonicity.
+    # Dissolving the same retained primitive with additions can introduce
+    # floating overlay residuals; no area threshold or geometry edit is used.
+    literal_coverage_preserved = all(
+        identity in after_features
+        and before_features[identity]['geometry'] == after_features[identity]['geometry']
+        for identity in before_features)
+    lost = union_all([]) if literal_coverage_preserved else occupied_before.difference(occupied_after)
     findings, gained = [], []
     for kind, geometry, output in [
-        ('lost-previous-coverage', occupied_before.difference(occupied_after), findings),
+        ('lost-previous-coverage', lost, findings),
         ('gained-coverage', occupied_after.difference(occupied_before), gained)]:
         for piece in polygon_parts(geometry):
             # Preserve all positive-area shapes; no sliver-size filtering.

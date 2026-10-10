@@ -82,6 +82,88 @@ class EffectivePrimitiveControls(unittest.TestCase):
         self.assertEqual(result['status'], 'blocked-invalid-or-unsupported-geometry')
 
 
+class LiteralCoverageMonotonicityControls(unittest.TestCase):
+    """Exact primitive inclusion, never an area tolerance or geometry repair."""
+    @classmethod
+    def setUpClass(cls):
+        spec = importlib.util.spec_from_file_location('monotonicity_wrapper', ROOT / 'scripts/run-geographic-check.py')
+        cls.wrapper = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(cls.wrapper)
+
+    def findings(self, before, after, kind):
+        return [row for row in gate.compare(before, after)['findings']['features']
+                if row['properties']['kind'] == kind]
+
+    def test_retained_owner_with_disjoint_addition(self):
+        before = features(land=box(0, 0, 1, 1))
+        after = {**before, **features(new=box(3, 0, 4, 1))}
+        self.assertFalse(self.findings(before, after, 'lost-previous-coverage'))
+        self.assertTrue(gate.compare(before, after)['coverage_gained']['features'])
+
+    def test_complete_prior_collection_with_new_primitive(self):
+        before = features(land=box(0, 0, 1, 1), neighbor=box(3, 0, 4, 1))
+        after = {**before, **features(new=box(6, 0, 7, 1))}
+        self.assertFalse(self.findings(before, after, 'lost-previous-coverage'))
+        self.assertEqual(set(before), {'land', 'neighbor'})
+
+    def test_retained_collection_does_not_waive_cross_owner_overlap(self):
+        before = features(land=box(0, 0, 1, 1))
+        after = {**before, **features(new=box(.5, 0, 1.5, 1))}
+        self.assertFalse(self.findings(before, after, 'lost-previous-coverage'))
+        self.assertTrue(self.findings(before, after, 'new-pair-overlap'))
+
+    def test_shrunk_original_retains_loss_finding(self):
+        before = features(land=box(0, 0, 1, 1))
+        after = features(land=box(0, 0, .5, 1))
+        self.assertTrue(self.findings(before, after, 'lost-previous-coverage'))
+
+    def test_removed_original_retains_loss_finding(self):
+        before = features(land=box(0, 0, 1, 1), neighbor=box(3, 0, 4, 1))
+        self.assertTrue(self.findings(before, {'land': before['land']}, 'lost-previous-coverage'))
+
+    def test_foreign_owner_cannot_establish_literal_inclusion(self):
+        import ast
+        tree = ast.parse((ROOT / 'scripts/check-geographic-regression.py').read_text())
+        assignment = next(node for node in ast.walk(tree) if isinstance(node, ast.Assign)
+                          and any(isinstance(target, ast.Name) and target.id == 'literal_coverage_preserved'
+                                  for target in node.targets))
+        predicate = compile(ast.Expression(assignment.value), '<literal-inclusion>', 'eval')
+        before = features(land=box(0, 0, 1, 1))
+        after = features(foreign=box(0, 0, 1, 1))
+        self.assertFalse(eval(predicate, {'before_features': before, 'after_features': after}))
+
+    def test_tiny_real_positive_area_loss_is_not_filtered(self):
+        before = features(land=box(0, 0, 1, 1))
+        after = features(land=box(0, 0, 1 - 2**-40, 1))
+        losses = self.findings(before, after, 'lost-previous-coverage')
+        self.assertTrue(losses)
+        self.assertTrue(all(row['properties']['source_geometry_area_square_degrees'] > 0 for row in losses))
+
+    def test_invalid_appended_geometry_is_blocked(self):
+        before = features(land=box(0, 0, 1, 1))
+        after = {**before, **features(new=Polygon([(3, 0), (4, 1), (3, 1), (4, 0), (3, 0)]))}
+        self.assertEqual(gate.compare(before, after)['status'], 'blocked-invalid-or-unsupported-geometry')
+
+    def test_same_owner_literal_or_preserves_base(self):
+        base = features(land=box(0, 0, 1, 1))
+        retained = copy.deepcopy(base)
+        addition = {'target_id': 'land', 'component_id': 'addition',
+                    'base_geometry_sha256': gate.geometry_hash(base['land']),
+                    'geometry': mapping(box(.5, 0, 1.5, 1))}
+        result = self.wrapper.compare_effective_primitives(gate, base, base,
+                  {'baseline': [], 'candidate': [addition]})
+        self.assertEqual(result['regressions'], 0)
+        self.assertEqual(base, retained)
+
+    def test_stale_source_base_binding_is_rejected(self):
+        base = features(land=box(0, 0, 1, 1))
+        addition = {'target_id': 'land', 'component_id': 'addition',
+                    'base_geometry_sha256': 'a' * 64, 'geometry': mapping(box(.5, 0, 1.5, 1))}
+        with self.assertRaisesRegex(ValueError, 'stale complete effective primitive'):
+            self.wrapper.compare_effective_primitives(gate, base, base,
+                  {'baseline': [], 'candidate': [addition]})
+
+
 class RegressionControls(unittest.TestCase):
     def test_prepared_invalid_actual_translation(self):
         from unittest.mock import patch
