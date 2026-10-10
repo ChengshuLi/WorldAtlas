@@ -4,6 +4,7 @@ import gzip
 import hashlib
 import json
 import math
+import resource
 from pathlib import Path
 import subprocess
 import sys
@@ -31,9 +32,19 @@ def main():
     plan_raw = git(repo, a.commit, HERE + 'probe-plan.json')
     plan = json.loads(plan_raw)
     pins = plan['files'] + [module.descriptor(HERE+'probe-plan.json', plan_raw)]
-    baseline = module.Baseline(repo, a.commit, pins, max_phase_bytes=64*1024*1024)
+    baseline = module.Baseline(repo, a.commit, pins, max_phase_bytes=192*1024*1024)
     baseline.pinned_bytes(HERE+'probe.py')
     baseline.pinned_bytes('scripts/evidence/immutable.py')
+    lock=json.loads(baseline.pinned_bytes(HERE+'runtime-lock.json'))
+    roots={'base_python':Path(sys.base_prefix),'venv':Path(sys.prefix),'system':Path('/')}
+    for item in lock['files']:
+        name=roots[item['root']]/item['path']
+        data=name.read_bytes()
+        if len(data)!=item['bytes'] or module.sha256(data)!=item['sha256']:
+            raise ValueError('Pinned runtime file drift: '+item['path'])
+        baseline.admit('runtime:'+item['root']+'/'+item['path'],len(data))
+    del data
+    resource.setrlimit(resource.RLIMIT_AS,(1024*1024*1024,1024*1024*1024))
     output = module.NewVintage(baseline, HERE, a.run, ['fit.json', 'fragments.json'])
     if hashlib.sha256(Path(sys.executable).resolve().read_bytes()).hexdigest() != plan['runtime']['python_executable_sha256']:
         raise ValueError('Python executable changed')
@@ -109,7 +120,7 @@ def main():
             'fragment_count':len(found),'retained_fragment_area_m2':row['measured_fragment_area_sum_m2'],
             'source_product_feature_count':len(source),'source_current':source_current,'fragments':results,
             'baseline_commit':a.commit,'runtime':{'python':sys.version,'shapely':shapely.__version__,'geos':shapely.geos_version_string,'numpy':numpy.__version__},
-            'consumed_inputs':baseline.consumed,'limits':['Exact fit diagnostic only; no administrative authority or water classification.',
+            'consumed_inputs':baseline.consumed,'peak_rss_kib':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,'limits':['Exact fit diagnostic only; no administrative authority or water classification.',
             'Six current source contacts are checked; this first probe is not a complete current-neighbor or native-grid acceptance.',
             'Retained area is inherited, not recomputed. Planar degrees squared are GEOS diagnostic units, not land area.',
             'No buffer, snapping, normalization, tolerance, MakeValid or full-resolution source substitution.']}

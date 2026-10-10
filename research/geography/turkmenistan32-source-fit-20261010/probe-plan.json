@@ -5,8 +5,8 @@
   "files": [
     {
       "path": "research/geography/turkmenistan32-source-fit-20261010/probe.py",
-      "bytes": 6870,
-      "sha256": "4626d6ff8871c6f8d93c64c43de3097c8ed8dcb15314beb9cc64bcb94049de83",
+      "bytes": 7533,
+      "sha256": "3a39b8b7bbaa2cbec33511ce110001269a38f88fde1698f9d4fafb268c953cee",
       "hash_kind": "file-bytes"
     },
     {
@@ -56,6 +56,12 @@
       "hash_kind": "file-bytes",
       "uncompressed_bytes": 8387232,
       "uncompressed_sha256": "eef9996caae754ed2a4b832356ff43e81c55b3c5bf41bc4511e68b8c7a116d27"
+    },
+    {
+      "path": "research/geography/turkmenistan32-source-fit-20261010/runtime-lock.json",
+      "hash_kind": "file-bytes",
+      "bytes": 378387,
+      "sha256": "f202939c9cb00c5875c2644bc3f093503c0986eb7cfe87a5f31c23d5fa80fa5f"
     }
   ],
   "source_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-TKM-ADM2-000.bin.gz",
@@ -69,12 +75,15 @@
     "numpy": "2.3.5"
   },
   "budget": {
-    "phase_bytes_max": 67108864,
-    "raw_plus_decoded_input_bytes": 24364419,
-    "rss_reservation_bytes": 402653184,
+    "phase_bytes_max": 201326592,
+    "raw_plus_decoded_input_bytes": 24743469,
+    "rss_reservation_bytes": 1073741824,
     "source_feature_count": 59,
     "target_contact_count": 6,
     "candidate_fragment_count": 2,
-    "operations_limit": 1000
+    "operations_limit": 1000,
+    "runtime_logical_bytes": 141785286,
+    "output_reserve_bytes": 2097152,
+    "address_space_limit_bytes": 1073741824
   }
 }
