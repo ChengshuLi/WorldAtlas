@@ -79,6 +79,27 @@ function emittedInventory(base){
 
 const originalStartupPins=[{"path":"native-v1/ownership/startup-runs-0.bin.gz","bytes":3854101,"sha256":"3d551738a3454d2028e1d9adc352b7446d7c0f25c8d42044704cf1efb6f64b6b"},{"path":"native-v1/ownership/startup-runs-12582912.bin.gz","bytes":3478667,"sha256":"01012dd358291a9e4ee51888a1d2b618ab2003e06a6eebd3a236392ecdbbc015"},{"path":"native-v1/ownership/startup-runs-16777216.bin.gz","bytes":3289324,"sha256":"d5ed4d7e1700fb60298a53cc37ad9943257f57f853e19cc786ef975ebc7f0cae"},{"path":"native-v1/ownership/startup-runs-20971520.bin.gz","bytes":3146696,"sha256":"198daba78eaeed9f316f088a86f8a7c4cf8f7e868253fc09487870eceddaf58a"},{"path":"native-v1/ownership/startup-runs-25165824.bin.gz","bytes":3272873,"sha256":"764a967753d010daa794b30ca597bee0503646e7cae6965b14df63f280b9c544"},{"path":"native-v1/ownership/startup-runs-29360128.bin.gz","bytes":3296575,"sha256":"ff29a1956ae0dd99e4db155c9cdabf96c72155a1a772210910d5119845759cf8"},{"path":"native-v1/ownership/startup-runs-33554432.bin.gz","bytes":3521891,"sha256":"826cffaf4b05286a68ae479bc6e6caba3b3b3993f7fa57eae08efe7f6089694b"},{"path":"native-v1/ownership/startup-runs-37748736.bin.gz","bytes":3497645,"sha256":"18472136ceb94b95a17918acdfba32c56d13a2979043c66fb74cf615d81551ee"},{"path":"native-v1/ownership/startup-runs-4194304.bin.gz","bytes":3428397,"sha256":"da6498fc3c898adca6231896e9b1f2c734153064d78431bc5a311fec768c18f9"},{"path":"native-v1/ownership/startup-runs-41943040.bin.gz","bytes":3534601,"sha256":"f4e7f8de92e3d709db9675386961fac934a8a21652bf6f34f8d122ed71c73c44"},{"path":"native-v1/ownership/startup-runs-46137344.bin.gz","bytes":3556931,"sha256":"bb9b1ba3ace6229a338eee6c903e1d5db637a765c46ed60f957ceb6e34346101"},{"path":"native-v1/ownership/startup-runs-50331648.bin.gz","bytes":3397952,"sha256":"09aaf4d9a115dea6a85ed2a853532045c627ea2408f259513ce9de8e616ef55d"},{"path":"native-v1/ownership/startup-runs-54525952.bin.gz","bytes":2460609,"sha256":"91bfddd9aa632dc18ecc2f487a71673b504f971d2795e7c4af9c9298f4fe4fbc"},{"path":"native-v1/ownership/startup-runs-8388608.bin.gz","bytes":3423683,"sha256":"244e3da13a412b4a4ccbc652191a080495a5611df5d0ee2207c8d08ac27b929a"}];
 
+async function readEmittedAdditive(base,atlas,selected){
+ if(!Object.hasOwn(selected,'additive_release')){assert(!Object.hasOwn(atlas,'additiveRelease'));assert.equal(atlas.reference_release.id,selected.release_id);return null;}
+ const {gunzipSync}=await import('node:zlib');
+ const sidecar=JSON.parse(requireEmittedPin(root,selected.additive_release));
+ const originalSelection={...selected};delete originalSelection.additive_release;
+ assert.deepEqual(sidecar.base_selection,originalSelection);
+ const envelopeRaw=requireEmittedPin(root,sidecar.runtime_envelope),envelope=JSON.parse(envelopeRaw);
+ assert.deepEqual(Object.keys(envelope).sort(),['base_manifest','base_reference','effective_reference','kind','ledger','owner_roster','patch','version']);
+ assert.deepEqual(atlas.additiveRelease,envelope);assert.deepEqual(atlas.reference_release,envelope.effective_reference);
+ assert.equal(envelope.base_reference.id,selected.release_id);assert.equal(envelope.base_manifest.sha256,selected.sha256);
+ const assets=[];
+ for(const role of ['base_manifest','ledger','owner_roster','patch']){
+  const emitted=requireEmittedPin(base,envelope[role]),source=requireEmittedPin(root,sidecar.logical_asset_map[role]);
+  assert(emitted.equals(source),'Emitted additive asset differs from selected whole source');
+  const pin={role,...envelope[role]};
+  if(role==='owner_roster'){const decoded=gunzipSync(emitted);assert.equal(decoded.length,pin.decoded_bytes);assert.equal(readbackHash(decoded),pin.decoded_sha256);}
+  assets.push(pin);
+ }
+ return {envelope,selection_sidecar:selected.additive_release,envelope_pin:sidecar.runtime_envelope,assets,limitation:'Actual emitted whole bytes associated with selected source pins; no new scientific or GPU qualification.'};
+}
+
 async function builtOutputReadback(report){
  const target=reportDestination(report),base=path.join(root,'dist/client');
  const {gunzipSync}=await import('node:zlib');
@@ -95,9 +116,10 @@ async function builtOutputReadback(report){
  assert.equal(nativeSha,selected.sha256);
  const beforeRaw=fs.readFileSync(N2+'/qualified-artifacts/prior-v8/input-04.bin');assert.equal(beforeRaw.length,251732);assert.equal(readbackHash(beforeRaw),'a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885');const beforeNative=JSON.parse(beforeRaw);
  const pixel=atlas.pixelMap;assert.equal(pixel.version,2);assert.equal(pixel.size,native.size);assert.equal(pixel.runWords,native.runWords);
- assert.equal(atlas.reference_release.id,'geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb');
+ const additive=await readEmittedAdditive(base,atlas,selected);
+ assert.equal(selected.release_id,'geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb');
  assert.equal(atlas.preparedEvidence.footprints_sha256,native.footprints_sha256);assert.equal(atlas.preparedEvidence.hierarchy_sha256,native.hierarchy_sha256);
- validateCoverageManifest(atlas.coverageClassification,{...native,canonical_grid_sha256:nativeSha,release_id:atlas.reference_release.id});
+ validateCoverageManifest(atlas.coverageClassification,{...native,canonical_grid_sha256:nativeSha,release_id:selected.release_id});
  const rowsPart=pixel.parts.filter(x=>x.kind==='rows');assert.equal(rowsPart.length,1);
  const rowRaw=requireEmittedPin(base,rowsPart[0]),rows=unshuffleOwnershipBytes(gunzipSync(rowRaw),rowsPart[0].words);
  assert.equal(readbackHash(Buffer.from(rows.buffer)),rowsPart[0].decoded_sha256);assert.equal(rows.length,native.size*2);
@@ -148,7 +170,7 @@ async function builtOutputReadback(report){
   static_assets:{count:files.length,bytes:files.reduce((n,x)=>n+x.bytes,0),largest,limits:{file_bytes:25*1024*1024,free_count:20000},files},worker_bundle_files:worker,
   old_url_provenance:{original_budget_sha256:'1f8c8ceb7f7ec7bd5c36a5d7ce083f246841187a23b663b6b228ccea1fdc2e85',pins:originalStartupPins},
   ownership:{complete_source_owners:ids.size,unchanged_owner_counts:49623,rows:native.size,runWords:native.runWords,total_owned_cells:total,deltas,old_word_stream_sha256:oldDecoded.word_stream_sha256,current_word_stream_sha256:newDecoded.word_stream_sha256,qualified_before_manifest_sha256:readbackHash(beforeRaw),qualified_after_manifest_sha256:nativeSha,before_blocks:oldDecoded.qualified_native_blocks,after_blocks:newDecoded.qualified_native_blocks},
-  emitted_geometry:{records:seenGeometry.size,qualified_targets:actualTargets},reference_release:atlas.reference_release,preparedEvidence:atlas.preparedEvidence,coverageClassification:atlas.coverageClassification,
+  additive,emitted_geometry:{records:seenGeometry.size,qualified_targets:actualTargets},reference_release:atlas.reference_release,preparedEvidence:atlas.preparedEvidence,coverageClassification:atlas.coverageClassification,
   nativeContextInputStage:atlas.nativeContextInputStage,contentCapabilities:atlas.contentCapabilities,referenceAttributes:atlas.referenceAttributes,
   history_sha256:readbackHash(emittedFile(base,'atlas-history.json.gz')),history_keys:Object.keys(history),
   limitation:'Offline whole emitted bytes and ownership/association readback; no browser, deployment, scientific replay or inferred repair acceptance.'};

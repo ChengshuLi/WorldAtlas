@@ -20,14 +20,8 @@ async function copyOrdinary(source, destination, inventory, relative) {
     }
   } else if (stat.isFile()) {
     await fs.mkdir(path.dirname(destination), {recursive: true});
-    // Darwin admission relies on clonefile succeeding without a copy fallback.
-    if (process.platform === 'darwin') await new Promise((resolve, reject) => {
-      const child = spawn('/usr/bin/python3', ['-I', '-S', '-c', "import ctypes,os,sys; lib=ctypes.CDLL('/usr/lib/libSystem.B.dylib',use_errno=True); clone=lib.clonefile; clone.argtypes=[ctypes.c_char_p,ctypes.c_char_p,ctypes.c_uint]; clone.restype=ctypes.c_int; result=clone(os.fsencode(sys.argv[1]),os.fsencode(sys.argv[2]),0); error=ctypes.get_errno(); sys.exit(0) if result==0 else (_ for _ in ()).throw(OSError(error,os.strerror(error)))", source, destination], {stdio: ['ignore', 'ignore', 'pipe']});
-      let stderr = ''; child.stderr.on('data', bytes => { stderr += bytes; });
-      child.once('error', reject);
-      child.once('exit', (code, signal) => code === 0 ? resolve() : reject(Error(`Package clonefile failed (${signal ?? code}): ${stderr.trim()}`)));
-    });
-    else await fs.copyFile(source, destination, constants.COPYFILE_FICLONE);
+    // APFS uses copy-on-write where available; other filesystems safely copy.
+    await fs.copyFile(source, destination, constants.COPYFILE_FICLONE);
     inventory.push({path: relative, bytes: stat.size});
   } else throw Error(`Nonordinary package source: ${relative}`);
 }
