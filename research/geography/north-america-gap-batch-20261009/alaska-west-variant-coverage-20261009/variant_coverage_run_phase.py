@@ -156,6 +156,11 @@ def main() -> int:
     result = {
         "version": 1,
         "status": "complete" if process.returncode == 0 and stop_reason is None else "failed",
+        "issue_number": 1630,
+        "reservation_claim_id": "1daa6116-0dac-4e2e-a087-4548d9e6e7bf",
+        "reservation_worker_id": "01a112c2-1d0f-7bf2-a50e-74956219b9c1",
+        "reservation_live_work": False,
+        "operation_kind": "local bounded source-evidence generation; no production write or external acquisition",
         "phase_admission": {"path": str(PHASE.relative_to(ROOT)), "bytes": len(phase_raw), "sha256": digest(phase_raw),
                             "complete_phase_bytes": phase["complete_phase_bytes"], "cap_bytes": PHASE_CAP},
         "pid": process.pid,
