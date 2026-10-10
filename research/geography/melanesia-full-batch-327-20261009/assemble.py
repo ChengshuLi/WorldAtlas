@@ -16,6 +16,7 @@ import pathlib
 import re
 import subprocess
 import sys
+import uuid
 from collections import Counter, defaultdict
 
 ROOT = pathlib.Path(__file__).resolve().parents[3]
@@ -32,6 +33,17 @@ CONTEXT = "research/campaigns/solomon-islands-source-fitness-20261007/batch-cont
 MAKIRA_ISSUE = 1457
 EXPECTED_BATCH = "gap-operational-batch:f94321eb696d00702d30402d"
 EXPECTED_COUNT = 327
+OWNED_PATH = pathlib.Path("research/geography/melanesia-full-batch-327-20261009")
+OUTPUT_NAMES = (
+    "actionability-records-327.jsonl.gz", "admin-binding-records-249.jsonl.gz", "assembly-receipt.json",
+    "candidate-current-target-features.geojson.gz", "component-custody-origin.json", "component-subject-files.json",
+    "context-reuse.json", "evidence-quality.json", "fine-family-records-38.jsonl.gz",
+    "inherited-makira-findings-15.jsonl.gz", "operational-batch-record.jsonl.gz", "outcomes-327.jsonl.gz",
+    "physical-records-327.jsonl.gz", "prior-work-reuse.json", "source-comparison-records-249.jsonl.gz",
+    "source-feature-index.json", "source-features-gb-FJI-ADM2.geojson.gz", "source-features-gb-IDN-ADM2.geojson.gz",
+    "source-features-gb-PNG-ADM3.geojson.gz", "source-features-gb-SLB-ADM1.geojson.gz",
+    "source-features-gb-VUT-ADM1.geojson.gz", "summary.json", "work-index.json",
+)
 PRIOR_363 = "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/batch-outcomes-363-002/batch-outcomes-363-v2.json"
 PRIOR_25 = "research/geography/melanesia-gap-batch-241e2ce0-20261009/component-outcomes.jsonl"
 
@@ -74,11 +86,38 @@ def deterministic_gzip(raw: bytes) -> bytes:
 
 
 def write_json(path: pathlib.Path, value) -> None:
-    path.write_bytes(json_bytes(value))
+    write_bytes_exclusive(path, json_bytes(value))
 
 
 def write_jsonl_gz(path: pathlib.Path, rows) -> None:
-    path.write_bytes(deterministic_gzip(b"".join(json_bytes(row) + b"\n" for row in rows)))
+    write_bytes_exclusive(path, deterministic_gzip(b"".join(json_bytes(row) + b"\n" for row in rows)))
+
+
+def write_bytes_exclusive(path: pathlib.Path, value: bytes) -> None:
+    with path.open("xb") as stream:
+        stream.write(value)
+
+
+def admit_output_directory(requested: pathlib.Path) -> pathlib.Path:
+    owned = (ROOT / OWNED_PATH).absolute()
+    out = pathlib.Path(os.path.abspath(requested))
+    try:
+        out.relative_to(owned)
+    except ValueError as error:
+        raise ValueError(f"output must be inside the owned packet path: {OWNED_PATH}") from error
+    cursor = out
+    while cursor != owned.parent:
+        if cursor.is_symlink():
+            raise ValueError(f"symlink output path is not allowed: {cursor}")
+        cursor = cursor.parent
+    if out.exists() or out.is_symlink():
+        raise FileExistsError(f"output directory must be fresh; refusing to modify: {out}")
+    for name in OUTPUT_NAMES:
+        target = out / name
+        if target.exists() or target.is_symlink():
+            raise FileExistsError(f"output file already exists; refusing to modify: {target}")
+    out.mkdir(parents=True, exist_ok=False)
+    return out
 
 
 def descriptor(path: str, commit: str, raw: bytes, decoded: bytes | None = None):
@@ -177,10 +216,11 @@ def source_catalogue(corpus_root: pathlib.Path):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--work-index", type=pathlib.Path, default=INDEX_DEFAULT)
-    parser.add_argument("--out", type=pathlib.Path, default=ROOT / "research/geography/melanesia-full-batch-327-20261009")
+    parser.add_argument("--out", type=pathlib.Path,
+        help="fresh output directory inside the owned packet path; existing paths are refused")
     args = parser.parse_args()
-    out = args.out.resolve()
-    out.mkdir(parents=True, exist_ok=True)
+    requested_out = args.out or (ROOT / OWNED_PATH / "reproductions" / f"run-{uuid.uuid4().hex}")
+    out = admit_output_directory(requested_out)
     index_raw = args.work_index.read_bytes()
     index = json.loads(index_raw)
     batch = index["original_operational_batch"]
@@ -396,7 +436,7 @@ def main():
     # disjoint classification/status ledger. Current target equals retained
     # candidate Feature byte-semantics, as proved above for every subject.
     ordered_features = [component_features[component] for component in sorted(ids)]
-    (out / "candidate-current-target-features.geojson.gz").write_bytes(
+    write_bytes_exclusive(out / "candidate-current-target-features.geojson.gz",
         deterministic_gzip(json_bytes({"type": "FeatureCollection", "features": ordered_features})))
     component_commit_by_path = {path: entry[0]["commit"] for path, entry in component_source_file_records.items()}
     write_json(out / "component-subject-files.json", {
@@ -414,7 +454,7 @@ def main():
     for source_id in sorted(used_source_features):
         features = [used_source_features[source_id][sid] for sid in sorted(used_source_features[source_id])]
         filename = "source-features-" + source_id.replace(":", "-") + ".geojson.gz"
-        (out / filename).write_bytes(deterministic_gzip(json_bytes({"type": "FeatureCollection", "features": features})))
+        write_bytes_exclusive(out / filename, deterministic_gzip(json_bytes({"type": "FeatureCollection", "features": features})))
         for sid, feature in sorted(used_source_features[source_id].items()):
             source_feature_index.append({"source_feature_id": sid, "source_product": source_id,
                                          "shapeID": feature["properties"]["shapeID"],
@@ -481,7 +521,7 @@ def main():
         raise ValueError("outcomes do not form a complete disjoint 327-row partition")
     write_jsonl_gz(out / "outcomes-327.jsonl.gz", outcomes)
 
-    (out / "work-index.json").write_bytes(index_raw)
+    write_bytes_exclusive(out / "work-index.json", index_raw)
     write_json(out / "context-reuse.json", {
         "issue": 1424, "path": CONTEXT, "sha256": sha(context_raw), "bytes": len(context_raw),
         "retained_context": {"operational_batches": len(context_value["batches"]),

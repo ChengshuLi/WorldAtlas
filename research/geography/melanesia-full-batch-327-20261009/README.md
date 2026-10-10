@@ -36,10 +36,12 @@ This is extraction and identity reconciliation over already retained products. T
 
 The administrative source payloads and physical comparisons are unapproved as authority. Physical observations use the retained GSHHG 2.3.7/2017 source context with heterogeneous observation dates; narrow shoreline/channel truth remains unresolved. The 25 priority rows still need independent source-fitness evidence. The 15 inherited Makira findings remain as #1457 recorded them: no qualifying physical/imagery source was established, and its screening candidates did not provide exact asset bytes, coverage, lineage, rights or component-level fitness. Processing cause, historic water/ice interpretation, territorial/boundary authority and present-day physical truth remain unresolved. These outputs are not native qualification, a proposed repair or a production target.
 
-Rebuild the packet from the exact supplied work index with:
+Rebuild into a new, uniquely named directory under the owned packet path with:
 
 ```text
-python3 research/geography/melanesia-full-batch-327-20261009/assemble.py --work-index /path/to/geo4-next-full-batch-327.json
+python3 research/geography/melanesia-full-batch-327-20261009/assemble.py --work-index /path/to/geo4-next-full-batch-327.json --out research/geography/melanesia-full-batch-327-20261009/reproductions/run-unique-name
 ```
+
+Omitting `--out` selects a fresh random run directory. The assembler refuses existing directories, symlink paths and output paths outside the owned packet prefix; it creates each result file exclusively and writes the evidence-quality receipt last.
 
 The evidence manifest pins the baseline input commits and each output byte sequence. The accepted scope is tracked by GitHub issue [#1646](https://github.com/ChengshuLi/WorldAtlas/issues/1646).
