@@ -731,6 +731,24 @@
         "uncompressed_sha256": "730dc3717f523b25f936e6e081150bbc7ddd4846cf60345c7e2cb7e36f6cf2c9"
       },
       {
+        "path": "data/administrative-sources.json",
+        "commit": "b2b34087682b9a20e53c72c83f6d53054e09e8cf",
+        "hash_kind": "file-bytes",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "mode": "100644",
+        "blob": "2747b845f0c5654765da3b951c9074e52f220077"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "commit": "b2b34087682b9a20e53c72c83f6d53054e09e8cf",
+        "hash_kind": "file-bytes",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "mode": "100644",
+        "blob": "324575c55f3c2992517446d1ac06bdd806f06573"
+      },
+      {
         "bytes": 147194,
         "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
         "hash_kind": "file-bytes",
@@ -815,8 +833,15 @@
         "sha256": "6a432ffbe3d9a8d4412140438c960b0113f752cb70c2db20b76c7467e9575025"
       },
       {
+        "path": "scripts/evidence/contracts.py",
+        "commit": "b2b34087682b9a20e53c72c83f6d53054e09e8cf",
+        "bytes": 3445,
+        "sha256": "6473265fe8683004fe091084145957604f2e45d7d143505c69f8099c48467802",
+        "hash_kind": "file-bytes"
+      },
+      {
         "bytes": 17414,
-        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "commit": "b2b34087682b9a20e53c72c83f6d53054e09e8cf",
         "hash_kind": "file-bytes",
         "path": "scripts/evidence/immutable.py",
         "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
@@ -989,7 +1014,8 @@
   "commands": [
     "python3.12 -I -B research/geography/southeast-asia-gap-batch-0393f64c-20261009/reconcile-roster.py",
     "python3.12 -I -B research/geography/southeast-asia-gap-batch-0393f64c-20261009/bind-priority-cases.py",
-    "node scripts/evidence-quality.mjs research/geography/southeast-asia-gap-batch-0393f64c-20261009/evidence-quality.json"
+    "node scripts/evidence-quality.mjs research/geography/southeast-asia-gap-batch-0393f64c-20261009/evidence-quality.json",
+    "python3 -B research/geography/southeast-asia-gap-batch-0393f64c-20261009/build-source-rule-fit.py"
   ],
   "conclusions": [
     {
@@ -1024,6 +1050,35 @@
       ],
       "status": "unresolved",
       "text": "Accepted physical class, current physical status, causal mechanism, legal or administrative authority, and repair eligibility remain unresolved; no approval or repair is asserted."
+    },
+    {
+      "source_ids": [
+        "gb:BRN:ADM1",
+        "gb:IDN:ADM2",
+        "gb:IND:ADM2",
+        "gb:MMR:ADM3",
+        "gb:PHL:ADM3",
+        "gb:THA:ADM2",
+        "gb:VNM:ADM2",
+        "current-component-parent-source-bank"
+      ],
+      "status": "supported",
+      "text": "For the 30 prioritized IDs, retained original administrative comparison rows bind Atlas-consumed simplified source products/features and complete current physical-component candidate features. All 30 original source-union residuals are recorded empty, valid Polygon with zero coordinate-plane area and length, and each row records one unique compatible subject; full current target blobs and compatible-parent hierarchy records are bound, with parent semantic review still open."
+    },
+    {
+      "source_ids": [
+        "gb:BRN:ADM1",
+        "gb:IDN:ADM2",
+        "gb:IND:ADM2",
+        "gb:MMR:ADM3",
+        "gb:PHL:ADM3",
+        "gb:THA:ADM2",
+        "gb:VNM:ADM2",
+        "current-component-parent-source-bank",
+        "gshhg-2017-query-record-subsets"
+      ],
+      "status": "unresolved",
+      "text": "Source-union observations do not establish contemporary physical land/water, source observation date, shoreline registration accuracy, selected effective current owner/parent, native cells, authority, cause, or repair eligibility. The 318 states and 122 families are unchanged; no whole gap completion or approval is asserted."
     }
   ],
   "issue": 1641,
@@ -1050,6 +1105,13 @@
       "kind": "source",
       "software": "Python 3.12 standard library, NumPy/Shapely for pointset representation, exact pinned repository decoders; no geographic calculation performed.",
       "units": "source record identities, binary64 coordinate pairs, linked source/current/admin records"
+    },
+    {
+      "id": "retained-administrative-source-rule-fit-004",
+      "kind": "source",
+      "description": "Rebind whole simplified source products, retained full feature relations, current component candidate blobs, current parent hierarchy rows and existing physical query pointset references from already retained Git records; no overlay, GIS, native or source operator is invoked.",
+      "software": "Python standard library and immutable Git blob reads",
+      "units": "exact component IDs, source records, source predicates, and file/record identities"
     }
   ],
   "metric_bindings": [
@@ -1092,6 +1154,66 @@
       "json_pointer": "/counts/physical_query_relations",
       "metric_id": "retained_physical_query_relations",
       "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/manifest.json"
+    },
+    {
+      "metric_id": "source_rule_fit_priority_cases",
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/administrative-source-rule-fit.json",
+      "json_pointer": "/counts/priority_components"
+    },
+    {
+      "metric_id": "source_rule_fit_established_full_union",
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/administrative-source-rule-fit.json",
+      "json_pointer": "/counts/established_full_source_union"
+    },
+    {
+      "metric_id": "source_rule_fit_partial_original_union",
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/administrative-source-rule-fit.json",
+      "json_pointer": "/counts/partial_nonempty_original_source_union_residual"
+    },
+    {
+      "metric_id": "source_rule_fit_missing_original_relation",
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/administrative-source-rule-fit.json",
+      "json_pointer": "/counts/missing_original_required_source_relation"
+    },
+    {
+      "metric_id": "source_rule_fit_source_products",
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/administrative-source-rule-fit.json",
+      "json_pointer": "/counts/source_products"
+    },
+    {
+      "metric_id": "source_rule_fit_query_pointsets",
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/administrative-source-rule-fit.json",
+      "json_pointer": "/original_query_pointsets/pointset_count"
+    },
+    {
+      "metric_id": "source_rule_fit_query_relations",
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/administrative-source-rule-fit.json",
+      "json_pointer": "/custody_manifest/counts/physical_query_relations"
+    },
+    {
+      "metric_id": "source_rule_fit_whole_gap_completions",
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/administrative-source-rule-fit.json",
+      "json_pointer": "/counts/whole_gap_completion"
+    },
+    {
+      "metric_id": "source_rule_fit_approved_repairs",
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/administrative-source-rule-fit.json",
+      "json_pointer": "/counts/approved_repairs"
+    },
+    {
+      "metric_id": "source_rule_fit_accepted_physical_classes",
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/administrative-source-rule-fit.json",
+      "json_pointer": "/counts/accepted_physical_classes"
+    },
+    {
+      "metric_id": "source_rule_fit_state_rows",
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/component-state-318.json",
+      "json_pointer": "/component_count"
+    },
+    {
+      "metric_id": "source_rule_fit_family_rows",
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/component-state-318.json",
+      "json_pointer": "/family_count"
     }
   ],
   "metrics": [
@@ -1165,7 +1287,7 @@
       "input_sha256": "b31b7473b590586836a3a948a9a7460d48496746a21562abf44c000774773ec7",
       "unit": "source-query custody cases",
       "value": 30,
-      "vintage": "current"
+      "vintage": "archived"
     },
     {
       "evaluation_commit": "f0a0c5f1c252e68b3b987cef8625ba9d185c215f",
@@ -1177,7 +1299,7 @@
       "input_sha256": "b31b7473b590586836a3a948a9a7460d48496746a21562abf44c000774773ec7",
       "unit": "complete original query source pointsets",
       "value": 35,
-      "vintage": "current"
+      "vintage": "archived"
     },
     {
       "evaluation_commit": "f0a0c5f1c252e68b3b987cef8625ba9d185c215f",
@@ -1189,15 +1311,159 @@
       "input_sha256": "b31b7473b590586836a3a948a9a7460d48496746a21562abf44c000774773ec7",
       "unit": "source-relative query relations",
       "value": 61,
-      "vintage": "current"
+      "vintage": "archived"
+    },
+    {
+      "id": "source_rule_fit_priority_cases",
+      "unit": "priority component IDs",
+      "value": 30,
+      "vintage": "archived",
+      "evaluation_commit": "b2b34087682b9a20e53c72c83f6d53054e09e8cf",
+      "input_file": {
+        "commit": "candidate",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/administrative-source-rule-fit.json"
+      },
+      "input_sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b"
+    },
+    {
+      "id": "source_rule_fit_established_full_union",
+      "unit": "original full source-union predicates",
+      "value": 30,
+      "vintage": "archived",
+      "evaluation_commit": "b2b34087682b9a20e53c72c83f6d53054e09e8cf",
+      "input_file": {
+        "commit": "candidate",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/administrative-source-rule-fit.json"
+      },
+      "input_sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b"
+    },
+    {
+      "id": "source_rule_fit_partial_original_union",
+      "unit": "original nonempty source-union remainders",
+      "value": 0,
+      "vintage": "archived",
+      "evaluation_commit": "b2b34087682b9a20e53c72c83f6d53054e09e8cf",
+      "input_file": {
+        "commit": "candidate",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/administrative-source-rule-fit.json"
+      },
+      "input_sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b"
+    },
+    {
+      "id": "source_rule_fit_missing_original_relation",
+      "unit": "missing original source relations",
+      "value": 0,
+      "vintage": "archived",
+      "evaluation_commit": "b2b34087682b9a20e53c72c83f6d53054e09e8cf",
+      "input_file": {
+        "commit": "candidate",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/administrative-source-rule-fit.json"
+      },
+      "input_sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b"
+    },
+    {
+      "id": "source_rule_fit_source_products",
+      "unit": "Atlas-consumed simplified source products",
+      "value": 7,
+      "vintage": "archived",
+      "evaluation_commit": "b2b34087682b9a20e53c72c83f6d53054e09e8cf",
+      "input_file": {
+        "commit": "candidate",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/administrative-source-rule-fit.json"
+      },
+      "input_sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b"
+    },
+    {
+      "id": "source_rule_fit_query_pointsets",
+      "unit": "complete retained physical query pointsets",
+      "value": 35,
+      "vintage": "archived",
+      "evaluation_commit": "b2b34087682b9a20e53c72c83f6d53054e09e8cf",
+      "input_file": {
+        "commit": "candidate",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/administrative-source-rule-fit.json"
+      },
+      "input_sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b"
+    },
+    {
+      "id": "source_rule_fit_query_relations",
+      "unit": "retained physical query relations",
+      "value": 61,
+      "vintage": "archived",
+      "evaluation_commit": "b2b34087682b9a20e53c72c83f6d53054e09e8cf",
+      "input_file": {
+        "commit": "candidate",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/administrative-source-rule-fit.json"
+      },
+      "input_sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b"
+    },
+    {
+      "id": "source_rule_fit_whole_gap_completions",
+      "unit": "whole-gap completions",
+      "value": 0,
+      "vintage": "archived",
+      "evaluation_commit": "b2b34087682b9a20e53c72c83f6d53054e09e8cf",
+      "input_file": {
+        "commit": "candidate",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/administrative-source-rule-fit.json"
+      },
+      "input_sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b"
+    },
+    {
+      "id": "source_rule_fit_approved_repairs",
+      "unit": "approved repairs",
+      "value": 0,
+      "vintage": "archived",
+      "evaluation_commit": "b2b34087682b9a20e53c72c83f6d53054e09e8cf",
+      "input_file": {
+        "commit": "candidate",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/administrative-source-rule-fit.json"
+      },
+      "input_sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b"
+    },
+    {
+      "id": "source_rule_fit_accepted_physical_classes",
+      "unit": "accepted physical classes",
+      "value": 0,
+      "vintage": "archived",
+      "evaluation_commit": "b2b34087682b9a20e53c72c83f6d53054e09e8cf",
+      "input_file": {
+        "commit": "candidate",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/administrative-source-rule-fit.json"
+      },
+      "input_sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b"
+    },
+    {
+      "id": "source_rule_fit_state_rows",
+      "unit": "full batch component states retained",
+      "value": 318,
+      "vintage": "archived",
+      "evaluation_commit": "b2b34087682b9a20e53c72c83f6d53054e09e8cf",
+      "input_file": {
+        "commit": "candidate",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/component-state-318.json"
+      },
+      "input_sha256": "8aaa5d4558eb5137775c159ec234d3dc2a9a90ae965aeaaf27086a63d0462cfd"
+    },
+    {
+      "id": "source_rule_fit_family_rows",
+      "unit": "full batch family locators retained",
+      "value": 122,
+      "vintage": "archived",
+      "evaluation_commit": "b2b34087682b9a20e53c72c83f6d53054e09e8cf",
+      "input_file": {
+        "commit": "candidate",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/component-state-318.json"
+      },
+      "input_sha256": "8aaa5d4558eb5137775c159ec234d3dc2a9a90ae965aeaaf27086a63d0462cfd"
     }
   ],
   "outputs": [
     {
-      "bytes": 3932,
-      "hash_kind": "file-bytes",
       "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/README.md",
-      "sha256": "a0565773446bbfe2180aab43fb4bcb86c2a4b935dd18235b4ba2cc8db84e1693"
+      "hash_kind": "file-bytes",
+      "bytes": 7255,
+      "sha256": "1400b3cfe75e04eb58668ecc426b7802af6b0e7fe6744a2f16e48d21f8e7c0ad"
     },
     {
       "bytes": 44653,
@@ -1210,6 +1476,12 @@
       "hash_kind": "file-bytes",
       "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/bind-priority-cases.py",
       "sha256": "42d129e32555fb98af80aa4397ed6244c500ec82f1fd0b9bc02cfc09f99aa7b9"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/build-source-rule-fit.py",
+      "hash_kind": "file-bytes",
+      "bytes": 30760,
+      "sha256": "e2602101784d071755011eea70ce349fea8c81012341ce33ac957e6491fa98a1"
     },
     {
       "bytes": 606,
@@ -1842,6 +2114,12 @@
       "sha256": "8bbb3420d167471647e4593d045e85c04b2368797c637ead3d77aca4b2b59a1a"
     },
     {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-rule-fit-004-contract-readback.json",
+      "hash_kind": "file-bytes",
+      "bytes": 31105,
+      "sha256": "58a25cdc6b00dbdf491528548570723e90552c7a9d3b62e7ef72052301869fec"
+    },
+    {
       "bytes": 7872,
       "hash_kind": "file-bytes",
       "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/reconcile-roster.py",
@@ -1876,6 +2154,54 @@
       "hash_kind": "file-bytes",
       "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/roster-reconcile-001/summary.json",
       "sha256": "717e0ff058070f062821cd0f6c5fa3402b50de80d610be0246c86a33f338d7a0"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/administrative-source-rule-fit.json",
+      "hash_kind": "file-bytes",
+      "bytes": 1688243,
+      "sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/component-state-318.json",
+      "hash_kind": "file-bytes",
+      "bytes": 505063,
+      "sha256": "8aaa5d4558eb5137775c159ec234d3dc2a9a90ae965aeaaf27086a63d0462cfd"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/family-roster-122.json",
+      "hash_kind": "file-bytes",
+      "bytes": 39180,
+      "sha256": "acb22105b074fefca33b84488d0d0322ebdba3195a3eff4b0421f53668e651ef"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-004/publication.json",
+      "hash_kind": "file-bytes",
+      "bytes": 784,
+      "sha256": "dc66304e76e98f8d69bbb6b988a6ca2c440c773fc51d8c422947df755cc6978a"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/administrative-source-rule-fit.json",
+      "hash_kind": "file-bytes",
+      "bytes": 1688243,
+      "sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/component-state-318.json",
+      "hash_kind": "file-bytes",
+      "bytes": 505063,
+      "sha256": "8aaa5d4558eb5137775c159ec234d3dc2a9a90ae965aeaaf27086a63d0462cfd"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/family-roster-122.json",
+      "hash_kind": "file-bytes",
+      "bytes": 39180,
+      "sha256": "acb22105b074fefca33b84488d0d0322ebdba3195a3eff4b0421f53668e651ef"
+    },
+    {
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/publication.json",
+      "hash_kind": "file-bytes",
+      "bytes": 784,
+      "sha256": "1c953504723f4a578095960362c8cba031683d6fc53209acfb7208cff9d674cb"
     }
   ],
   "sources": [
@@ -2085,6 +2411,23 @@
       "url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.7.zip",
       "verification": "unverified",
       "vintage": "Distributed GSHHG 2.3.7, 15 June 2017; underlying heterogeneous WVS/WDBII observation dates unresolved."
+    },
+    {
+      "id": "current-component-parent-source-bank",
+      "license": {
+        "status": "unknown",
+        "terms": "Internal Git source-bank references only; external source reuse terms remain in the complete source-product metadata."
+      },
+      "limit": "Full current component candidate and hierarchy parent records are bound from the exact committed source bank. These are not selected effective-owner geometry; parent semantics remain open and current native selection is not established.",
+      "retention": "restoration-only",
+      "retrieved_at": "Exact main commit b2b34087682b9a20e53c72c83f6d53054e09e8cf read from immutable Git blobs.",
+      "role": "Current source-bank descriptors for full component candidates and recorded compatible subject parent references.",
+      "temporal_status": "reference",
+      "url": "https://github.com/ChengshuLi/WorldAtlas",
+      "verification": "verified",
+      "vintage": "main b2b34087682b9a20e53c72c83f6d53054e09e8cf",
+      "source_bank_commit": "b2b34087682b9a20e53c72c83f6d53054e09e8cf",
+      "restoration": "The exact Git descriptors and commit are preserved in vintages/source-rule-fit-004/administrative-source-rule-fit.json and the baseline file inventory."
     }
   ],
   "stages": {
@@ -2165,6 +2508,66 @@
       "metric_id": "retained_physical_query_relations",
       "unit": "source-relative query relations",
       "value": 61
+    },
+    {
+      "metric_id": "source_rule_fit_priority_cases",
+      "unit": "priority component IDs",
+      "value": 30
+    },
+    {
+      "metric_id": "source_rule_fit_established_full_union",
+      "unit": "original full source-union predicates",
+      "value": 30
+    },
+    {
+      "metric_id": "source_rule_fit_partial_original_union",
+      "unit": "original nonempty source-union remainders",
+      "value": 0
+    },
+    {
+      "metric_id": "source_rule_fit_missing_original_relation",
+      "unit": "missing original source relations",
+      "value": 0
+    },
+    {
+      "metric_id": "source_rule_fit_source_products",
+      "unit": "Atlas-consumed simplified source products",
+      "value": 7
+    },
+    {
+      "metric_id": "source_rule_fit_query_pointsets",
+      "unit": "complete retained physical query pointsets",
+      "value": 35
+    },
+    {
+      "metric_id": "source_rule_fit_query_relations",
+      "unit": "retained physical query relations",
+      "value": 61
+    },
+    {
+      "metric_id": "source_rule_fit_whole_gap_completions",
+      "unit": "whole-gap completions",
+      "value": 0
+    },
+    {
+      "metric_id": "source_rule_fit_approved_repairs",
+      "unit": "approved repairs",
+      "value": 0
+    },
+    {
+      "metric_id": "source_rule_fit_accepted_physical_classes",
+      "unit": "accepted physical classes",
+      "value": 0
+    },
+    {
+      "metric_id": "source_rule_fit_state_rows",
+      "unit": "full batch component states retained",
+      "value": 318
+    },
+    {
+      "metric_id": "source_rule_fit_family_rows",
+      "unit": "full batch family locators retained",
+      "value": 122
     }
   ],
   "version": 1,
