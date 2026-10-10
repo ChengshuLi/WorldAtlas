@@ -185,7 +185,7 @@ def main() -> None:
         "status": "supported",
         "source_ids": [SOURCE_ID],
     })
-    manifest["commands"].append("python3 research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/variant_coverage_run_phase.py")
+    manifest["commands"].append("/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/variant_coverage_run_phase.py")
 
     base = git("merge-base", "HEAD", "origin/main").decode().strip()
     receipts = []
