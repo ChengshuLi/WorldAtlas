@@ -21,7 +21,7 @@ WALL_CAP = 900
 NODE = "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node"
 PYTHON = "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3"
 DRIVER = PACKET / "variant_coverage_driver.py"
-RECEIPT = PACKET / "execution" / "coverage-run-20261010-01-operating-receipt.json"
+RECEIPT = PACKET / "execution" / "coverage-run-20261010-02-operating-receipt.json"
 
 
 def digest(raw: bytes) -> str:

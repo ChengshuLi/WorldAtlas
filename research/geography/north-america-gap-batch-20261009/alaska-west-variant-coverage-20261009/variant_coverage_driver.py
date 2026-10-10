@@ -13,7 +13,7 @@ import types
 ROOT = pathlib.Path(__file__).resolve().parents[4]
 PACKET = "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009"
 PHASE_PATH = PACKET + "/phase-admission.json"
-RUN_NAME = "coverage-run-20261010-01"
+RUN_NAME = "coverage-run-20261010-02"
 OUTPUTS = ["source-variant-coverage.json"]
 IDS = [
     "physical-component:18bde5cda8660806ef3cf9f851a006be827c80bc6ebf9cc5a92abdfc3f2249d0",
@@ -97,7 +97,7 @@ def main() -> int:
     if output_reserve > len(OUTPUTS) * helper.MAX_FILE_BYTES:
         raise SystemExit("output reservation exceeds the admitted per-file count")
 
-    vintage = helper.NewVintage(baseline, PACKET + "/", RUN_NAME, OUTPUTS)
+    vintage = helper.NewVintage(baseline, "research/geography/north-america-gap-batch-20261009/", RUN_NAME, OUTPUTS)
     modules = baseline.load_modules({"alaska_measurement": METHOD})
     for module in tuple(sys.modules.values()):
         filename = getattr(module, "__file__", None)

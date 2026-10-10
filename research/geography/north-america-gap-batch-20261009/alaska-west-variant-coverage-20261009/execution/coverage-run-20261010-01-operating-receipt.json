@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "status": "failed",
+  "issue_number": 1630,
+  "reservation_claim_id": "1daa6116-0dac-4e2e-a087-4548d9e6e7bf",
+  "reservation_worker_id": "01a112c2-1d0f-7bf2-a50e-74956219b9c1",
+  "reservation_live_work": false,
+  "operation_kind": "local bounded source-evidence generation; no production write or external acquisition",
+  "phase_admission": {
+    "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+    "bytes": 122414,
+    "sha256": "d94a22fe869b3ddfd91e4504ce092c1e96be4dfddcb61e515d36972390934b76",
+    "complete_phase_bytes": 67857462,
+    "cap_bytes": 268435456
+  },
+  "pid": 90891,
+  "process_group": 90891,
+  "command": [
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/da31b756b4a018bb67dbf5261e6186fb352c732ad8563bb137dfcb8fa111eb83/work/research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/variant_coverage_driver.py"
+  ],
+  "exit_code": 1,
+  "natural_terminal": true,
+  "owned_processes_absent_after_run": true,
+  "stop_reason": null,
+  "elapsed_seconds": 2.006,
+  "peak_sampled_process_and_wrapper_rss_bytes": 95895552,
+  "final_sampled_process_and_wrapper_rss_bytes": 14417920,
+  "rss_cap_bytes": 536870912,
+  "phase_cap_bytes": 268435456,
+  "wall_deadline_seconds": 900,
+  "monitoring": "sampled/cooperative; not kernel-enforced",
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/da31b756b4a018bb67dbf5261e6186fb352c732ad8563bb137dfcb8fa111eb83/work/research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/variant_coverage_driver.py\", line 226, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/da31b756b4a018bb67dbf5261e6186fb352c732ad8563bb137dfcb8fa111eb83/work/research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/variant_coverage_driver.py\", line 100, in main\n    vintage = helper.NewVintage(baseline, PACKET + \"/\", RUN_NAME, OUTPUTS)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/da31b756b4a018bb67dbf5261e6186fb352c732ad8563bb137dfcb8fa111eb83/work/scripts/evidence/immutable.py\", line 246, in __init__\n    self.root = admit_destination(baseline, owned_path, vintage, self.filenames)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/da31b756b4a018bb67dbf5261e6186fb352c732ad8563bb137dfcb8fa111eb83/work/scripts/evidence/immutable.py\", line 220, in admit_destination\n    raise ValueError('Destination must be an explicitly owned evidence namespace')\nValueError: Destination must be an explicitly owned evidence namespace\n"
+}

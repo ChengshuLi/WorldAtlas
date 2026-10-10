@@ -11,7 +11,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[4]
 BATCH = "research/geography/north-america-gap-batch-20261009"
 PACKET = BATCH + "/alaska-west-variant-coverage-20261009"
 MANIFEST = BATCH + "/evidence-quality.json"
-RESULT = PACKET + "/vintages/coverage-run-20261010-01/source-variant-coverage.json"
+RESULT = BATCH + "/vintages/coverage-run-20261010-02/source-variant-coverage.json"
 README = PACKET + "/README.md"
 BASELINE_CANDIDATE = BATCH + "/alaska-west-four-source-physical-evidence.json"
 SOURCE_PATHS = [
@@ -31,7 +31,8 @@ CHANGED_PATHS = [
     f"{PACKET}/variant_coverage_driver.py",
     f"{PACKET}/variant_coverage_run_phase.py",
     f"{PACKET}/execution/coverage-run-20261010-01-operating-receipt.json",
-    f"{PACKET}/vintages/coverage-run-20261010-01/publication.json",
+    f"{PACKET}/execution/coverage-run-20261010-02-operating-receipt.json",
+    f"{BATCH}/vintages/coverage-run-20261010-02/publication.json",
     RESULT,
     MANIFEST,
 ]
@@ -105,6 +106,8 @@ def main() -> None:
         "",
         "This source-only evidence adds the eight first-time coverage measurements authorized by the amended #1630 work item. It uses the four exact candidates from the merged #1653 handoff and the already-retained full and simplified USA ADM2 variants from release 9469f09.",
         "",
+        "The first admitted attempt stopped at the shared evidence writer's owned-path check before any spatial comparison. Its failed operating receipt is retained under `execution/coverage-run-20261010-01-operating-receipt.json`; the successful fresh run uses the issue-owned batch namespace.",
+        "",
         "The unchanged `intersections()` overlay method is used for each candidate/source pair. The literal coverage rule is `status=measured`, `candidate_covered_exactly=true`, `candidate_uncovered_area_projected_m2_exact=0`, and `candidate_coverage_ratio=1`. Per-candidate variant agreement compares measured coverage outputs, including overlap and exact projected areas. It requires no whole-source or clipped-geometry equality.",
         "",
         "| Component | Full: status / covered / uncovered m² / ratio | Simplified: status / covered / uncovered m² / ratio | Coverage outputs agree | Literal candidate agreement |",
@@ -113,7 +116,7 @@ def main() -> None:
         "",
         f"Summary: {result['summary']['variant_comparisons']} overlays across {result['summary']['candidate_count']} candidates; full coverage premises pass for {result['summary']['full_coverage_pass_count']}; simplified coverage premises pass for {result['summary']['simplified_coverage_pass_count']}; coverage outputs agree for {result['summary']['candidate_variant_agreement_count']}; candidate-level source agreement passes for {result['summary']['literal_source_variant_agreement_count']}; all three literal premises fit for {result['summary']['literal_rule_fit_count']}.",
         "",
-        "This result changes no source, geography, physical classification, native relation, roster, conservation, production record or approval. See `vintages/coverage-run-20261010-01/source-variant-coverage.json` and its `publication.json` for the complete exact values and execution pins.",
+        "This result changes no source, geography, physical classification, native relation, roster, conservation, production record or approval. See `vintages/coverage-run-20261010-02/source-variant-coverage.json` and its `publication.json` for the complete exact values and execution pins.",
         "",
     ])
     (ROOT / README).write_text(readme, encoding="utf-8")
@@ -125,8 +128,9 @@ def main() -> None:
         f"{PACKET}/phase-admission.json": "phase-admission",
         f"{PACKET}/variant_coverage_driver.py": "code",
         f"{PACKET}/variant_coverage_run_phase.py": "code",
-        f"{PACKET}/execution/coverage-run-20261010-01-operating-receipt.json": "operating-receipt",
-        f"{PACKET}/vintages/coverage-run-20261010-01/publication.json": "publication-receipt",
+        f"{PACKET}/execution/coverage-run-20261010-01-operating-receipt.json": "failed-operating-receipt",
+        f"{PACKET}/execution/coverage-run-20261010-02-operating-receipt.json": "operating-receipt",
+        f"{BATCH}/vintages/coverage-run-20261010-02/publication.json": "publication-receipt",
         RESULT: "generated-result",
     }
     known = {row["path"] for row in manifest["outputs"]}
