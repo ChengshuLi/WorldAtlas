@@ -106,9 +106,11 @@ def admit_output_directory(requested: pathlib.Path) -> pathlib.Path:
     except ValueError as error:
         raise ValueError(f"output must be inside the owned packet path: {OWNED_PATH}") from error
     cursor = out
-    while cursor != owned.parent:
+    while True:
         if cursor.is_symlink():
             raise ValueError(f"symlink output path is not allowed: {cursor}")
+        if cursor == ROOT:
+            break
         cursor = cursor.parent
     if out.exists() or out.is_symlink():
         raise FileExistsError(f"output directory must be fresh; refusing to modify: {out}")
@@ -220,7 +222,6 @@ def main():
         help="fresh output directory inside the owned packet path; existing paths are refused")
     args = parser.parse_args()
     requested_out = args.out or (ROOT / OWNED_PATH / "reproductions" / f"run-{uuid.uuid4().hex}")
-    out = admit_output_directory(requested_out)
     index_raw = args.work_index.read_bytes()
     index = json.loads(index_raw)
     batch = index["original_operational_batch"]
@@ -431,6 +432,10 @@ def main():
         "issue_deduplication": "One exact full-batch issue (#1646); no per-gap or sub-batch issue created.",
         "global_594_operational_batches": {"count": global_batch_count, "preserved": True}
     }
+
+    # Validate and reserve a fresh destination only after all immutable input and
+    # roster checks pass, so invalid input does not leave an empty run directory.
+    out = admit_output_directory(requested_out)
 
     # Emit exact full pointsets, full source features, unchanged science rows and a
     # disjoint classification/status ledger. Current target equals retained
