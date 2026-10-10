@@ -1,0 +1,8 @@
+{
+  "execution_commit": "8e6ccb27",
+  "entrypoint": "bind_current_neighbors.mjs",
+  "stage": "before-output",
+  "observed_error": "Original feature drift",
+  "cause": "Python original canonical bytes use exponent -07, parsed JS canonical bytes use exponent -7. Original values are preserved.",
+  "output_created": false
+}
