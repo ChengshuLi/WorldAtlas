@@ -155,7 +155,7 @@ test('parallel full-regression shards cover each unit file once and focused prof
  assert.ok([0,1,2].some(shard=>integrationNeedsBrowser('full',shard)));
 });
 
-function addTrustedProof(f) {
+function addTrustedProof(f, {evidenceFailed = false} = {}) {
   const original=f.api;
   const workflowRaw=fs.readFileSync('.github/workflows/merge-integration-checks.yml');
   const workflowOID=createHash('sha1').update(`blob ${workflowRaw.length}\0`).update(workflowRaw).digest('hex');
@@ -164,6 +164,7 @@ function addTrustedProof(f) {
   const run={id:12,run_attempt:1,head_sha:f.head,event:'pull_request',path:WORKFLOW_PATH,
     repository:{full_name:f.repo},head_repository:{full_name:f.repo},status:'completed',conclusion:'success',
     pull_requests:[{number:2,head:{sha:f.head}}]};
+  if (evidenceFailed) run.conclusion='failure';
   f.run=run;
   const api=async(route,method,body)=>{
     if(route.endsWith('/git/commits/'+f.head) || route.endsWith('/git/commits/'+f.base)) return {tree:{sha:'authored'}};
@@ -172,6 +173,8 @@ function addTrustedProof(f) {
     if(route.includes('/actions/workflows/')) return {workflow_runs:[run]};
     if(route.endsWith('/actions/runs/12')) return run;
     if(route.includes('/jobs')) return {jobs:[{name:'profile',status:'completed',conclusion:'success'},
+      ...(evidenceFailed ? [{name:'evidence',status:'completed',conclusion:'failure'},
+        ...['scope','geography','package'].map(name=>({name,status:'completed',conclusion:'success'}))] : []),
       ...[0,1,2].map(shard=>({name:`regression (${shard})`,status:'completed',conclusion:'success',
         steps:['Checkout reviewed head','Install Node dependencies','Install browser dependencies only for tests that use Playwright','Install Python dependencies','Complete regression shard',
           ...(shard===0?['Build hosted assets']:[])].map(name=>({name,status:'completed',conclusion:'success'}))}))]};
@@ -184,6 +187,35 @@ test('prepare pins successful exact-tree run; skipped candidate job merges only 
   const prepared=await prepareIntegration(f.options());assert.equal(prepared.proof.run_id,12);
   const result=await f.complete({integrationResult:'skipped',proofRunId:12,proofRunAttempt:1});
   assert.equal(result.proof.run_id,12);assert.equal(f.writes.length,1);
+});
+test('evidence-only historical failure reuses code after fresh authority and geography pass',async()=>{
+  const f=fixture();addTrustedProof(f,{evidenceFailed:true});
+  // Later metadata authority is green; historical code coverage stays separate.
+  f.checks.push({id:2,name:'evidence',app:{id:1},status:'completed',conclusion:'success'});
+  const prepared=await prepareIntegration(f.options());assert.equal(prepared.proof.run_id,12);
+  const result=await f.complete({integrationResult:'skipped',proofRunId:12,proofRunAttempt:1});
+  assert.equal(result.proof.run_attempt,1);assert.equal(f.writes.length,1);
+  assert.equal(f.evidenceReads,2);
+});
+test('historical code success never bypasses fresh evidence, review, ownership, checks or geography',async()=>{
+  for (const mutate of [
+    f=>f.checks.push({id:2,name:'evidence',app:{id:1},status:'completed',conclusion:'failure'}),
+    f=>f.staleReview=true,
+    f=>f.claim.expires_at='2000-01-01T00:00:00Z',
+    f=>f.checks[0].conclusion='failure'
+  ]) {
+    const f=fixture();addTrustedProof(f,{evidenceFailed:true});
+    assert.ok((await prepareIntegration(f.options())).proof);mutate(f);
+    await assert.rejects(prepareIntegration(f.options()));
+    await assert.rejects(f.complete({integrationResult:'skipped',proofRunId:12,proofRunAttempt:1}));
+    assert.equal(f.writes.length,0);
+  }
+  for (const geographyResult of [undefined,'failure','cancelled','skipped']) {
+    const f=fixture();addTrustedProof(f,{evidenceFailed:true});
+    assert.ok((await prepareIntegration(f.options())).proof);
+    await assert.rejects(f.complete({integrationResult:'skipped',proofRunId:12,proofRunAttempt:1,geographyResult}),/Trusted combined geography check/);
+    assert.equal(f.writes.length,0);
+  }
 });
 test('failed proof reread and stale main prevent merge despite prior accepted proof',async()=>{
   const f=fixture();addTrustedProof(f);assert.ok((await prepareIntegration(f.options())).proof);

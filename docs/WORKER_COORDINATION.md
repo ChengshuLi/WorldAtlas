@@ -197,13 +197,20 @@ The PR profile selector runs trusted base code against GitHub's complete file li
 a base without the selector runs full regression. Full shards cover every test file
 exactly once, build actual packaged assets and reject skipped tests.
 
-The queue can avoid repeating those tests only when GitHub's successful current
-`merge-integration-checks.yml` run proves the entire candidate Git tree equals the
+The queue can avoid repeating those tests only when a completed
+`merge-integration-checks.yml` run's successful code jobs prove the entire candidate Git tree equals the
 reviewed head's tested tree. That approved workflow explicitly checks out the head;
 GitHub's `head_sha` alone cannot establish what a default PR merge-ref checkout tested.
 The workflow and runner/profile blobs must match trusted current main. All expected
 shards and their required completed steps must succeed; skipped jobs establish no
-coverage. Preparation pins the run ID and attempt. The final serialized merge re-reads that run,
+coverage. A run whose only failed job is `evidence` can retain that code proof
+when its profile, scope, geography, package and every required regression job
+completed successfully. This handles a PR-body metadata race without repeating
+unchanged code work. Both merge phases still require fresh successful current
+checks, evidence, ownership and exact-head review. The queue's combined geography
+job and its authenticated report remain mandatory; no historical geography report
+is reused by this exception. Cancelled runs or other failed/skipped jobs do not
+qualify. Preparation pins the run ID and attempt. The final serialized merge re-reads that run,
 the same successful attempt/jobs and the usual exact-head review, evidence, ownership,
 checks, candidate parents and base guards. An unavailable/untrusted proof causes
 normal isolated tests; a proof revoked after preparation refuses the merge and
