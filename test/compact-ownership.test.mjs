@@ -9,6 +9,57 @@ import {loadOwnershipAssets} from '../src/ownership-assets.js';
 import {NATIVE_METHOD} from '../src/ownership-method.js';
 import {shuffleOwnershipBytes,unshuffleOwnershipBytes,encodeOwnershipVarints,decodeOwnershipVarints} from '../src/ownership-codec.js';
 
+const startupFailure='Atlas could not load. Check the server and reload the page.';
+function captureStartupErrors(page){
+ const errors=[];
+ page.on('console',message=>{if(message.type()==='error'&&message.text().startsWith('Atlas startup failed:'))errors.push(message.text());});
+ return errors;
+}
+async function waitForStartup(page,errors,startupErrors,{timeout=60000}={}){
+ try{
+  const result=await page.waitForFunction(failure=>{
+   if(document.querySelector('#loading')?.textContent.includes(failure))return 'failed';
+   if(document.querySelector('.atlas-pixel-canvas')?.dataset.rendered==='true')return 'rendered';
+   return false;
+  },startupFailure,{timeout});
+  try{assert.equal(await result.jsonValue(),'rendered','Atlas reported terminal startup failure');}finally{await result.dispose();}
+ }catch(error){error.message+='; page errors: '+JSON.stringify(errors)+'; startup errors: '+JSON.stringify(startupErrors);throw error;}
+}
+
+test('startup diagnostics expose caught app errors and distinguish delayed rendering from a stall', {timeout:30000},async()=>{
+ const server=await createServer({server:{host:'127.0.0.1',port:0},logLevel:'error'});let browser;
+ try{
+  await server.listen();const base=server.resolvedUrls.local[0];
+  browser=await chromium.launch();const page=await browser.newPage(),errors=[],startupErrors=captureStartupErrors(page);
+  page.on('pageerror',error=>errors.push(error.message));
+  await page.route('**/*',route=>{
+   const url=new URL(route.request().url());
+   if(url.origin!==new URL(base).origin)return route.abort();
+   if(url.pathname==='/src/data-client.js')return route.fulfill({contentType:'text/javascript',body:`
+    export async function loadGeography(){throw new Error('Injected geography startup failure');}
+    export async function loadSnapshot(){}
+    export async function ensureGeometry(){}
+    export async function readJSON(){}
+   `});
+   return route.continue();
+  });
+  await page.goto(base);
+  await assert.rejects(waitForStartup(page,errors,startupErrors,{timeout:5000}),error=>{
+   assert.match(error.message,/Atlas reported terminal startup failure/);
+   assert.match(error.message,/Injected geography startup failure/);return true;
+  });
+  assert.equal(await page.locator('#loading').textContent(),startupFailure);
+  assert.equal(await page.locator('.atlas-pixel-canvas').count(),0);
+  assert.deepEqual(errors,[]);await page.close();
+  const fixture=await browser.newPage();
+  await fixture.setContent('<div id="loading">Preparing your atlas…</div><canvas class="atlas-pixel-canvas"></canvas>');
+  await fixture.evaluate(()=>setTimeout(()=>{document.querySelector('.atlas-pixel-canvas').dataset.rendered='true';},100));
+  await waitForStartup(fixture,[],[],{timeout:5000});
+  await fixture.setContent('<div id="loading">Preparing your atlas…</div>');
+  await assert.rejects(waitForStartup(fixture,[],[],{timeout:100}),/Timeout 100ms exceeded/);
+ }finally{try{await browser?.close();}finally{await server.close();}}
+});
+
 function readPublished(){
  const manifest=JSON.parse(fs.readFileSync('dist/client/atlas-geography.json')).pixelMap;
  const grid={...manifest,rows:new Uint32Array(manifest.size*2),runs:new Uint32Array(manifest.runWords)};
@@ -122,6 +173,7 @@ test('packaged coverage supports all modes, gap explanations and unavailable-ref
   for(const unavailable of [false,true]){
    const page=await browser.newPage({viewport:{width:1440,height:1080}}),errors=[];
    page.on('pageerror',error=>errors.push(error.message));
+   const startupErrors=captureStartupErrors(page);
    await page.route('**/*',route=>{
     const url=new URL(route.request().url());
     if(url.origin!==base)return route.abort();
@@ -136,7 +188,7 @@ test('packaged coverage supports all modes, gap explanations and unavailable-ref
     assert.equal(await page.locator('.atlas-pixel-canvas').count(),0);
     assert.deepEqual(errors,[]);await page.close();continue;
    }
-   await page.waitForFunction(()=>document.querySelector('.atlas-pixel-canvas')?.dataset.rendered==='true',null,{timeout:60000}).catch(error=>{error.message+='; page errors: '+JSON.stringify(errors);throw error;});
+   await waitForStartup(page,errors,startupErrors);
    await page.locator('#loading').waitFor({state:'hidden',timeout:60000});
    assert.equal(await page.locator('.atlas-pixel-canvas').getAttribute('data-renderer'),'webgl2');
    const before=await page.locator('.atlas-pixel-canvas').evaluate(canvas=>({...canvas.dataset}));

@@ -236,7 +236,7 @@ async function start() {
   try {
     data=await loadGeography({year:desiredYear,examples:$('#examples').checked});referenceData=data; $('#framework-status').textContent=`Framework research in progress: ${data.units.filter(u=>u.metadata?.review_reasons?.length).length.toLocaleString()} geographic groups have open review notes. Complete parent chains do not mean every grouping is semantically verified.`; parents=new Map(data.units.map(u=>[u.id,u])); features=new Map(data.features.map(f=>[f.id,f]));
     rebuildGeometry(); await loadYear(desiredYear);
-  } catch { $('#loading').textContent='Atlas could not load. Check the server and reload the page.'; }
+  } catch(error) { console.error('Atlas startup failed:',error); $('#loading').textContent='Atlas could not load. Check the server and reload the page.'; }
 }
 installCoverage(()=>({data,states,year,parents}));
 installRecordImport({getContext:()=>({year,selected,feature:features.get(selected)}),refresh:async()=>{await loadYear(desiredYear);if($('#year-error').textContent)throw Error('Map refresh failed');}});

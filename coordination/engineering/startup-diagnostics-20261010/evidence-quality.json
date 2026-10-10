@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "issue": 1676,
+  "lane": "engineering",
+  "worker_id": "01a10843-da4b-7fc1-a482-d3186bc6334d",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "35fa0b9823f97f093ed0392cae5565d17df29ada",
+    "files": [
+      {
+        "path": "src/main.js",
+        "bytes": 38237,
+        "sha256": "79d6e13264c23a1170146c72c9c08655872468a0153ced3f4a32e939f07a2e04",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/compact-ownership.test.mjs",
+        "bytes": 15017,
+        "sha256": "46dd960151af4457f202fe422387cbe0c5229f87bdf4bca66099f6dc74f17795",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/startup-diagnostics-20261010/controls.txt",
+      "bytes": 228,
+      "sha256": "37a51449fe31c267b70d5b13ce6225b817c8b294e4990f1b01ccbaf11b93e61c",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "startup-diagnostics",
+      "kind": "code",
+      "description": "Actual app entry point with an injected loader exception; lightweight delayed-render and stalled-page controls exercise the same browser wait as the packaged test. Existing packaged success and intentional unavailable-reference assertions remain in hosted CI.",
+      "software": "Node 24.21.0; Playwright from package-lock.json",
+      "units": "test assertions"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test --test-name-pattern='startup diagnostics' test/compact-ownership.test.mjs"
+  ]
+}
