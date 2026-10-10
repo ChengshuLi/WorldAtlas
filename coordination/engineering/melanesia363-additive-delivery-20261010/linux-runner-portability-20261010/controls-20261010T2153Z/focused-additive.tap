@@ -1,0 +1,21 @@
+✔ shared batch preserves every source exception and distinguishes positive geometry with zero native cells (2.08448ms)
+✔ same-owner additions are aggregated and shared cells counted once, independent of candidate order (0.503577ms)
+✔ competing batch owners are both refused, never assigned by first-target ordering (0.24981ms)
+✔ complete old owners survive virtual interval split/merge; only previously empty cells are emitted (0.311171ms)
+✔ batch rejects omitted, duplicate, foreign or incompletely measured candidates and owner windows (0.671886ms)
+✔ all provisional candidates preserved exactly once; land is not repair permission, water rejected (3.292962ms)
+✔ whole original roster/alias and parent joins reject omission, duplicate, order and coherent field drift (1.942429ms)
+✔ output collision, dangling link and foreign parent rejected before acquisition; sentinels preserved (1.728132ms)
+✔ selected baseline accepted repairs remain resolved/idempotent; stale target and unverified resolution maps reject (0.599579ms)
+✔ bounded groups join every original identity and preserve two-level complete inverse (1.877574ms)
+✔ continuous different-owner overlap is refused even when no native cell is sampled; same-owner primitive sets may overlap (0.322768ms)
+✔ Linux runtime compatibility keeps complete historical vectors and exact byte pairs (12.335076ms)
+✔ Linux runtime pairs preserve only the existing visibility and schema transitions (2.654415ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 126.710193

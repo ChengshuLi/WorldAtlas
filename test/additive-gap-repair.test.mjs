@@ -185,3 +185,43 @@ test('continuous different-owner overlap is refused even when no native cell is 
  const same=combineNativeBatch({scopeIds:['a','b'],sourceRows:[batchSource('a'),batchSource('b')],candidates:[batchCandidate('a',1,[]),batchCandidate('b',1,[])],ownerRows:[{y:1,complete_owner_intervals:[]}],continuousConflicts:[['a','b']],size:32});
  assert.equal(same.zero_cell_components,2);assert.equal(same.native_conflicts,0);
 });
+
+// Linux compatibility is an exact runtime-byte transition, not a method waiver.
+import {compatibleCurrentRebindCode,CURRENT_REBIND_CODE,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+const linuxHistory=JSON.parse(fs.readFileSync('coordination/engineering/melanesia363-additive-delivery-20261010/linux-runner-portability-20261010/historical-code-vectors.json'));
+const linuxRuntimePaths=['issue-current-rebind-execution.py','supervise-current-rebind.py'].map(name=>'coordination/engineering/additive-native-composition-20261009/'+name);
+const actualLinuxRuntime=linuxRuntimePaths.map(path=>{const body=fs.readFileSync(path);return {path,bytes:body.length,sha256:createHash('sha256').update(body).digest('hex')};});
+test('Linux runtime compatibility keeps complete historical vectors and exact byte pairs',()=>{
+ assert.equal(linuxHistory.length,6);
+ for(const row of linuxHistory){
+  const historical=row.code;assert.equal(valueSha(historical),row.vector_sha256);assert.deepEqual(historical.map(p=>p.path),CURRENT_REBIND_CODE);
+  const current=historical.map(p=>actualLinuxRuntime.find(r=>r.path===p.path)??{...p});
+  assert.deepEqual(compatibleCurrentRebindCode(row.commit,current,historical),historical);
+  for(const path of linuxRuntimePaths){
+   for(const key of ['bytes','sha256']){const wrong=structuredClone(current),pin=wrong.find(p=>p.path===path);pin[key]=key==='bytes'?pin.bytes+1:'f'.repeat(64);assert.throws(()=>compatibleCurrentRebindCode(row.commit,wrong,historical),/runtime body differs/);}
+  }
+  const numerical=structuredClone(current);numerical.find(p=>p.path==='src/native-grid.js').sha256='f'.repeat(64);assert.throws(()=>compatibleCurrentRebindCode(row.commit,numerical,historical),/runtime body differs/);
+  assert.throws(()=>compatibleCurrentRebindCode('a'.repeat(40),current,historical),/Unknown historical/);
+  assert.deepEqual(compatibleCurrentRebindCode('a'.repeat(40),historical,historical),historical);
+  const missing=current.slice(1);assert.throws(()=>compatibleCurrentRebindCode(row.commit,missing,historical),/Incomplete/);
+  const forged=structuredClone(historical);forged[0].bytes++;assert.throws(()=>compatibleCurrentRebindCode(row.commit,current,forged),/Unknown historical/);
+ }
+});
+test('Linux runtime pairs preserve only the existing visibility and schema transitions',()=>{
+ const transitions=[
+  {path:'scripts/check-effective-geographic-regression.mjs',old:'992257b3a50f790c5f859104c67a3e6f4cf75f8c341440fff78b0dd32b95fab9',bytes:75074,sha256:'801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039'},
+  {path:'src/effective-footprint.js',old:'30c524aba3e556d4d92508306a6b76b760a51cf08715457ece72646ee9b5921c',bytes:44682,sha256:'0f971449c093ad728495dc05da9a047872c4b57c55bc75fd79012fbcb3db7e65'},
+  {commit:'16c35b9188d130b060fc2dcf4e917983d42d9db1',path:'src/effective-footprint.js',old:'0f971449c093ad728495dc05da9a047872c4b57c55bc75fd79012fbcb3db7e65',bytes:44784,sha256:'29a2d9867aa8ffae8645559b34e1638a007cc1504f99ef766ef9c44176491e91'},
+  {commit:'bb73f014366ed7e7b10a54a4fb3b2113e8743d66',path:'src/effective-footprint.js',old:'29a2d9867aa8ffae8645559b34e1638a007cc1504f99ef766ef9c44176491e91',bytes:45330,sha256:'28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745'}
+ ];
+ for(const transition of transitions){
+  let exercised=0;
+  for(const row of linuxHistory){
+   if(transition.commit&&row.commit!==transition.commit||row.code.find(p=>p.path===transition.path)?.sha256!==transition.old)continue;
+   const current=row.code.map(p=>actualLinuxRuntime.find(r=>r.path===p.path)??{...p});Object.assign(current.find(p=>p.path===transition.path),{bytes:transition.bytes,sha256:transition.sha256});
+   assert.deepEqual(compatibleCurrentRebindCode(row.commit,current,row.code),row.code);exercised++;
+   current.find(p=>p.path===transition.path).bytes++;assert.throws(()=>compatibleCurrentRebindCode(row.commit,current,row.code),/runtime body differs/);
+  }
+  assert(exercised>0,'Every named preexisting transition must be exercised');
+ }
+});
