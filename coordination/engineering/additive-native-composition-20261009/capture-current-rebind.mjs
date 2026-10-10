@@ -4,7 +4,7 @@
 import fs from 'node:fs';import path from 'node:path';
 import {ImmutableReader} from '../../../scripts/check-effective-geographic-regression.mjs';
 import {CURRENT_REBIND_CODE,normaliseRetainedRepairLedger,nativeBaseSelection,requirePriorAdditiveConservation,readRetainedRegistryAuthority,acquireCurrentRebindOperands,currentRebindSourceView,reclaimCompletedRebindFrame,valueBytes,valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
-const FILE=33554432,PHASE=268435456,prepared=new WeakSet();
+const FILE=33554432,PHASE=268435456,prepared=new WeakSet(),completedPrior=new WeakMap();
 const demand=(v,m)=>{if(!v)throw Error(m);},same=(a,b)=>valueBytes(a).equals(valueBytes(b));
 const exists=p=>{try{return fs.lstatSync(p);}catch(e){if(e.code==='ENOENT')return null;throw e;}};
 const ordinaryAncestors=p=>{let current=path.parse(p).root;for(const part of p.slice(current.length).split(path.sep)){if(!part)continue;current=path.join(current,part);const s=exists(current);demand(s&&s.isDirectory()&&!s.isSymbolicLink(),'Require ordinary existing output ancestor');}};
@@ -36,18 +36,45 @@ function originalOperands(reader,registry,ledger,snapshot,executionMetadata){
  demand(ledger.rows.length===expected.size&&ledger.rows.every(row=>{const prior=expected.get(row.component_id);if(!prior)return false;const {authority_sha256,rule_sha256,...literal}=row;return authority_sha256===prior.proof.authority_sha256&&rule_sha256===prior.proof.rule_sha256&&same(literal,prior.row); }),'Composed ledger changes original scope/exception/primitive authority');
  return {rows:[...normalized.rows.values()],patches:proofs.flatMap(p=>p.native_proof.native_patches),proofs};
 }
-export function captureCurrentRebindProducts({destination,snapshot,plan,registry,originalLedger,executionCommit,executedCode,executionPreUse,priorSnapshot=snapshot}){
+// Ephemeral private completion evidence; never a persisted certificate or
+// caller-authored approval. No snapshot/reader/owner/source graph escapes.
+const PRIOR_MARKER_MAX=1048576;
+const priorOwnerIdentity=snapshot=>({bounds:snapshot.manifest.bounds,original_bounds:snapshot.manifest.original_assets.bounds,owners:snapshot.owners.length});
+export function completePriorConservationFrame(snapshot,registry,originalLedger,executionMetadata){
+ demand(snapshot?.reader instanceof ImmutableReader,'Require genuine completed prior reader');
+ currentRebindSourceView(snapshot);
+ requirePriorAdditiveConservation(snapshot,registry,originalLedger);
+ const reader=snapshot.reader;
+ // The prior load helper has returned. Full parsed prior graphs are still live
+ // during these identities; small complete marker/canonical scratch is reserved.
+ reader.metadataBytes=8*1048576+2*snapshot.metadataBytes+2*valueBytes({registry,originalLedger,executionMetadata,inventory:[...reader.inventory],phases:snapshot.acquisitionPhases}).length+4*PRIOR_MARKER_MAX+(snapshot.acquisition_buffer_bytes??0);reader.phase();
+ const record={repo:reader.repo,commit:reader.version,selection_sha256:valueSha(snapshot.selection),manifest_sha256:valueSha(snapshot.manifest),owner_identity:priorOwnerIdentity(snapshot),registry_sha256:valueSha(registry),ledger_sha256:valueSha(originalLedger),prior_phases:structuredClone(snapshot.acquisitionPhases),prior_inventory:[...reader.inventory.values()].map(pin=>({...pin})),completion_phase_bytes:reader.used};
+ const limit=executionMetadata.plan.limits.complete_phase_bytes;
+ demand(Number.isSafeInteger(limit)&&limit>0&&limit<=PHASE&&record.prior_phases.length>0&&record.prior_phases.every(p=>Number.isSafeInteger(p.complete_phase_bytes)&&p.complete_phase_bytes>0&&p.complete_phase_bytes<=limit)&&record.completion_phase_bytes<=limit,'Completed prior phase exceeds issued child bound');
+ const raw=valueBytes(record);demand(raw.length<=PRIOR_MARKER_MAX,'Complete private prior marker exceeds bound');
+ const freeze=v=>{if(v&&typeof v==='object'){for(const child of Object.values(v))freeze(child);Object.freeze(v);}return v;};freeze(record);
+ const token=Object.freeze({});completedPrior.set(token,{record,sha256:valueSha(record),bytes:raw.length});return token;
+}
+function consumeCompletedPrior(token,snapshot,registry,originalLedger,plan){
+ const completed=completedPrior.get(token);demand(completed&&completed.bytes<=PRIOR_MARKER_MAX&&valueSha(completed.record)===completed.sha256,'Require unchanged privately completed prior conservation');
+ currentRebindSourceView(snapshot);
+ const p=completed.record;
+ const limit=plan?.limits?.complete_phase_bytes;demand(Number.isSafeInteger(limit)&&limit>0&&limit<=PHASE&&p.prior_phases.every(p=>p.complete_phase_bytes<=limit)&&p.completion_phase_bytes<=limit,'Completed prior phase exceeds current issued child bound');
+ demand(snapshot.reader.repo===p.repo&&snapshot.reader.version===p.commit&&valueSha(snapshot.selection)===p.selection_sha256&&valueSha(snapshot.manifest)===p.manifest_sha256&&same(priorOwnerIdentity(snapshot),p.owner_identity)&&valueSha(registry)===p.registry_sha256&&valueSha(originalLedger)===p.ledger_sha256,'Fresh base differs from completed prior conservation');
+ return {record:p,carriedBytes:2*completed.bytes};
+}
+
+export function captureCurrentRebindProducts({destination,snapshot,plan,registry,originalLedger,executionCommit,executedCode,executionPreUse,priorMarker}){
  demand(prepared.has(destination)&&snapshot?.reader instanceof ImmutableReader,'Require prepared owned destination and actual immutable reader');
- demand(priorSnapshot?.reader instanceof ImmutableReader&&priorSnapshot.reader.repo===snapshot.reader.repo&&priorSnapshot.reader.version===snapshot.reader.version&&same(priorSnapshot.selection,snapshot.selection)&&same(priorSnapshot.manifest,snapshot.manifest)&&same(priorSnapshot.owners,snapshot.owners),'Fresh base snapshot differs from genuinely verified prior selection');
- requirePriorAdditiveConservation(priorSnapshot,registry,originalLedger);
- const priorCarryBytes=priorSnapshot===snapshot?0:2*priorSnapshot.metadataBytes+2*valueBytes({prior_inventory:[...priorSnapshot.reader.inventory],prior_phases:priorSnapshot.acquisitionPhases}).length+(priorSnapshot.acquisition_buffer_bytes??0);
- demand(Number.isSafeInteger(priorCarryBytes)&&priorCarryBytes<=PHASE,'Complete retained prior snapshot exceeds phase');
+ let priorCarryBytes=0,priorCompletion=null;
+ if(priorMarker===undefined)requirePriorAdditiveConservation(snapshot,registry,originalLedger);
+ else{const prior=consumeCompletedPrior(priorMarker,snapshot,registry,originalLedger,plan);priorCarryBytes=prior.carriedBytes;priorCompletion=prior.record;}
  const plannedRows=[...normaliseRetainedRepairLedger(originalLedger,registry).rows.values()];
  validateCurrentRebindPlan(plan,{executionCommit,baseSelection:nativeBaseSelection(snapshot.selection),registry,originalRows:plannedRows,executedCode});
  // Reuse the stock privately registered source view before original authority
  // bodies can be opened; its complete selected metadata remains carried.
  currentRebindSourceView(snapshot);
- const {rows,patches,proofs}=originalOperands(snapshot.reader,registry,originalLedger,snapshot,{plan,executionPreUse,executedCode,priorCarryBytes});
+ const {rows,patches,proofs}=originalOperands(snapshot.reader,registry,originalLedger,snapshot,{plan,executionPreUse,executedCode,priorCarryBytes,priorCompletion});
  demand(same(rows,plannedRows),'Original authenticated authority rows differ from admitted plan');
  demand(same(plan.original_patch_sha256s,patches.map(valueSha)),'Cold plan changes complete original native output roster');
  const acquired=acquireCurrentRebindOperands(snapshot,registry,rows,patches,{targetSources:plan.target_sources,predecessorProof:plan.predecessor_proof,carriedMetadataBytes:priorCarryBytes+2*valueBytes({plan,proofs,originalLedger,executedCode,executionPreUse}).length});
