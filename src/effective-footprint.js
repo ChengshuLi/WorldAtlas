@@ -419,10 +419,10 @@ function versionedPrimitiveGeometries(feature) {
   let previous='';const output=[feature.geometry];
   for(const row of value.components){
     const componentKeys=['base_geometry','base_geometry_sha256','component_id','disposition','geometry','geometry_sha256','native_cells','pixelIndex','source_receipt_sha256','target_id','authority_sha256','rule_sha256'];
-    const scoped=Object.hasOwn(row,'geometry_scope'),partial=row.geometry_scope==='supported-fragment';
-    exactKeys(row,scoped?[...componentKeys,'geometry_scope','whole_gap_completion',...(partial?['original_candidate','original_remainder']:[])]:componentKeys,'Original authority component');
-    if(scoped)require(['full-component','supported-fragment'].includes(row.geometry_scope)&&row.whole_gap_completion===false,'False whole-gap completion / unsupported component scope');
+    const partial=Object.hasOwn(row,'geometry_scope');
+    exactKeys(row,partial?[...componentKeys,'geometry_scope','original_candidate','original_remainder','whole_gap_completion']:componentKeys,'Original authority component');
     if(partial){
+      require(row.geometry_scope==='supported-fragment'&&row.whole_gap_completion===false,'False whole-gap completion / unsupported fragment scope');
       exactKeys(row.original_candidate,['type','id','properties','geometry'],'Original whole candidate');
       require(row.original_candidate.type==='Feature'&&row.original_candidate.id===row.component_id
         &&row.original_candidate.properties&&typeof row.original_candidate.properties==='object'&&!Array.isArray(row.original_candidate.properties),'Foreign original whole candidate');
