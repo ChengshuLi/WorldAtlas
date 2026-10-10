@@ -1,0 +1,2284 @@
+{
+  "version": 1,
+  "created_at_utc": "2026-10-06T13:57:41.755657+00:00",
+  "operation": "read-only local ignored SQLite custody inventory",
+  "sqlite_version": "3.53.1",
+  "connection": "immutable=1&mode=ro; query_only=ON; cache_size=-8192",
+  "files": [
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/data/atlas.sqlite",
+      "bytes": 406265856,
+      "sha256": "063d65d035e7c68c95caf137a59d9ed9465b27ba7a362694f5209eea82d5e47d",
+      "stat_signature": [
+        16777231,
+        182778264,
+        406265856,
+        1791291999373268634
+      ],
+      "tables": {
+        "attribute_entities": 1444,
+        "attribute_records": 0,
+        "boundaries": 0,
+        "entities": 85417,
+        "entity_history": 9307,
+        "entity_links": 0,
+        "locations": 68700,
+        "polities": 13378,
+        "reference_location_archives": 52,
+        "states": 9,
+        "units": 9068
+      },
+      "schemas": {
+        "attribute_entities": {
+          "sha256": "50e769b61f3a40b8cdbcf869fb8bdc2350cfbab63fb48bf916c2a3f0045a0bad",
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "source"
+          ]
+        },
+        "attribute_records": {
+          "sha256": "ccc3e521dabbb0b20d8583ee5b601b6612f35f617e90eda8b9d2ec3e6552c33c",
+          "columns": [
+            "id",
+            "location_id",
+            "attribute",
+            "value",
+            "category_id",
+            "valid_from",
+            "valid_to",
+            "method",
+            "status",
+            "source",
+            "is_example",
+            "metadata"
+          ]
+        },
+        "boundaries": {
+          "sha256": "a8f133c5f41fa1baf92fb3dcd56509b6c8dfcb0701a6fc0297c0c1414007e50e",
+          "columns": [
+            "id",
+            "location_id",
+            "valid_from",
+            "valid_to",
+            "geometry",
+            "source",
+            "is_example"
+          ]
+        },
+        "entities": {
+          "sha256": "7efb231eff085fabd5beca53a49ce442ba76fb79b61246799652b85461f0cabf",
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "parent_id",
+            "valid_from",
+            "valid_to",
+            "source",
+            "is_example"
+          ]
+        },
+        "entity_history": {
+          "sha256": "6aa612734d791f7a570b6996728f1dd33484419284677d9281bca266cf59a57e",
+          "columns": [
+            "id",
+            "entity_id",
+            "field",
+            "valid_from",
+            "valid_to",
+            "language",
+            "name_role",
+            "value",
+            "source",
+            "is_example"
+          ]
+        },
+        "entity_links": {
+          "sha256": "fc3eb329155fe9e6916c9d747699502e0604a2d4ff73fdf833cae3a1db7c4082",
+          "columns": [
+            "id",
+            "predecessor_id",
+            "successor_id",
+            "kind",
+            "year",
+            "source",
+            "is_example"
+          ]
+        },
+        "locations": {
+          "sha256": "d094d05975f52c64d28cf52923063db1af38ddbf492561404b48c39d73288c1a",
+          "columns": [
+            "id",
+            "name",
+            "parent_id",
+            "geometry",
+            "reference_owner",
+            "active",
+            "metadata"
+          ]
+        },
+        "polities": {
+          "sha256": "ea0891f63de7a692f15257aeec5ddd7cf13e6206b127c1060a476d8b7e89ed6e",
+          "columns": [
+            "id",
+            "name",
+            "valid_from",
+            "valid_to",
+            "geometry",
+            "metadata"
+          ]
+        },
+        "reference_location_archives": {
+          "sha256": "2b7f06deb4f4c10e56f7f015821e7be097d468d267b4a06610b9d68828970f89",
+          "columns": [
+            "id",
+            "location_id",
+            "snapshot",
+            "source"
+          ]
+        },
+        "states": {
+          "sha256": "7929fef0d41f9f5eef1ce974a939823a10f2305b4c808eb56cfc2498f8b5c4ef",
+          "columns": [
+            "id",
+            "location_id",
+            "valid_from",
+            "valid_to",
+            "owner",
+            "population",
+            "culture",
+            "religion",
+            "topography",
+            "vegetation",
+            "climate",
+            "rank",
+            "is_example",
+            "source"
+          ]
+        },
+        "units": {
+          "sha256": "c6a3ce529c83700b61882c946544ad50b575c3ce7b478ef54783611b1cd4f652",
+          "columns": [
+            "id",
+            "name",
+            "level",
+            "parent_id",
+            "metadata"
+          ]
+        }
+      },
+      "factual_row_digests": {
+        "attribute_entities": {
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "source"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 1444,
+              "sha256": "3685c02fe0feb74469829420356b7e82482527d0f9c9e2201e6b46dd315abd0c"
+            }
+          }
+        },
+        "attribute_records": {
+          "columns": [
+            "id",
+            "location_id",
+            "attribute",
+            "value",
+            "category_id",
+            "valid_from",
+            "valid_to",
+            "method",
+            "status",
+            "source",
+            "is_example",
+            "metadata"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 0,
+              "sha256": "d61c3c9f0db0942cc5ed90ad97a983011dbc9451cdfcded30c8318d4c2b1ae7a"
+            },
+            "nonexample_rows": {
+              "rows": 0,
+              "sha256": "d61c3c9f0db0942cc5ed90ad97a983011dbc9451cdfcded30c8318d4c2b1ae7a"
+            }
+          }
+        },
+        "entities": {
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "parent_id",
+            "valid_from",
+            "valid_to",
+            "source",
+            "is_example"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 85417,
+              "sha256": "c3fe46fec7c67a098019b25050ab0266ea1b2faaf72554667844505144575817"
+            },
+            "nonexample_rows": {
+              "rows": 85415,
+              "sha256": "afa25486f298f385486c66e91a79e7b11c803af86ded725bc44d905303798d4f"
+            }
+          }
+        },
+        "entity_history": {
+          "columns": [
+            "id",
+            "entity_id",
+            "field",
+            "valid_from",
+            "valid_to",
+            "language",
+            "name_role",
+            "value",
+            "source",
+            "is_example"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 9307,
+              "sha256": "91aab2f744b9cdeec079ecc797e4c580549696164d4627bdc0d80633107126a3"
+            },
+            "nonexample_rows": {
+              "rows": 9301,
+              "sha256": "5f40301e7cbcd469cad87050c4f683f53698d7db994776b302735d557ece1501"
+            }
+          }
+        },
+        "entity_links": {
+          "columns": [
+            "id",
+            "predecessor_id",
+            "successor_id",
+            "kind",
+            "year",
+            "source",
+            "is_example"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 0,
+              "sha256": "b2ee8a8df6079264e8d263bb199764034fa914ec1ba13ed7eb6261065d2f4e51"
+            },
+            "nonexample_rows": {
+              "rows": 0,
+              "sha256": "b2ee8a8df6079264e8d263bb199764034fa914ec1ba13ed7eb6261065d2f4e51"
+            }
+          }
+        },
+        "states": {
+          "columns": [
+            "id",
+            "location_id",
+            "valid_from",
+            "valid_to",
+            "owner",
+            "population",
+            "culture",
+            "religion",
+            "topography",
+            "vegetation",
+            "climate",
+            "rank",
+            "is_example",
+            "source"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 9,
+              "sha256": "dcbee4f5dbdb7c829239bebeb50fadae4d842f2aaa352888b46ce872c4ab5e26"
+            },
+            "nonexample_rows": {
+              "rows": 0,
+              "sha256": "fb0abfb2be2366e04df2eb3e98749c57e892003aa4004cfbbae3b03ca9c7112c"
+            }
+          }
+        }
+      },
+      "factual_comparison_to_current": {
+        "attribute_entities": true,
+        "attribute_records": true,
+        "entities": true,
+        "entity_history": true,
+        "entity_links": true,
+        "states": true
+      }
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/data/atlas.sqlite.hierarchy-v3-backup-1791291334886",
+      "bytes": 401096704,
+      "sha256": "e16544065b6ca13a19f504bb40244e9458943523d4a744769a9714e6afe43e77",
+      "stat_signature": [
+        16777231,
+        182742997,
+        401096704,
+        1791291337032639732
+      ],
+      "tables": {
+        "attribute_entities": 1444,
+        "attribute_records": 0,
+        "boundaries": 0,
+        "entities": 85417,
+        "entity_history": 9307,
+        "entity_links": 0,
+        "locations": 68700,
+        "polities": 13378,
+        "reference_location_archives": 52,
+        "states": 9,
+        "units": 9068
+      },
+      "schemas": {
+        "attribute_entities": {
+          "sha256": "50e769b61f3a40b8cdbcf869fb8bdc2350cfbab63fb48bf916c2a3f0045a0bad",
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "source"
+          ]
+        },
+        "attribute_records": {
+          "sha256": "ccc3e521dabbb0b20d8583ee5b601b6612f35f617e90eda8b9d2ec3e6552c33c",
+          "columns": [
+            "id",
+            "location_id",
+            "attribute",
+            "value",
+            "category_id",
+            "valid_from",
+            "valid_to",
+            "method",
+            "status",
+            "source",
+            "is_example",
+            "metadata"
+          ]
+        },
+        "boundaries": {
+          "sha256": "a8f133c5f41fa1baf92fb3dcd56509b6c8dfcb0701a6fc0297c0c1414007e50e",
+          "columns": [
+            "id",
+            "location_id",
+            "valid_from",
+            "valid_to",
+            "geometry",
+            "source",
+            "is_example"
+          ]
+        },
+        "entities": {
+          "sha256": "7efb231eff085fabd5beca53a49ce442ba76fb79b61246799652b85461f0cabf",
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "parent_id",
+            "valid_from",
+            "valid_to",
+            "source",
+            "is_example"
+          ]
+        },
+        "entity_history": {
+          "sha256": "6aa612734d791f7a570b6996728f1dd33484419284677d9281bca266cf59a57e",
+          "columns": [
+            "id",
+            "entity_id",
+            "field",
+            "valid_from",
+            "valid_to",
+            "language",
+            "name_role",
+            "value",
+            "source",
+            "is_example"
+          ]
+        },
+        "entity_links": {
+          "sha256": "fc3eb329155fe9e6916c9d747699502e0604a2d4ff73fdf833cae3a1db7c4082",
+          "columns": [
+            "id",
+            "predecessor_id",
+            "successor_id",
+            "kind",
+            "year",
+            "source",
+            "is_example"
+          ]
+        },
+        "locations": {
+          "sha256": "d094d05975f52c64d28cf52923063db1af38ddbf492561404b48c39d73288c1a",
+          "columns": [
+            "id",
+            "name",
+            "parent_id",
+            "geometry",
+            "reference_owner",
+            "active",
+            "metadata"
+          ]
+        },
+        "polities": {
+          "sha256": "ea0891f63de7a692f15257aeec5ddd7cf13e6206b127c1060a476d8b7e89ed6e",
+          "columns": [
+            "id",
+            "name",
+            "valid_from",
+            "valid_to",
+            "geometry",
+            "metadata"
+          ]
+        },
+        "reference_location_archives": {
+          "sha256": "2b7f06deb4f4c10e56f7f015821e7be097d468d267b4a06610b9d68828970f89",
+          "columns": [
+            "id",
+            "location_id",
+            "snapshot",
+            "source"
+          ]
+        },
+        "states": {
+          "sha256": "7929fef0d41f9f5eef1ce974a939823a10f2305b4c808eb56cfc2498f8b5c4ef",
+          "columns": [
+            "id",
+            "location_id",
+            "valid_from",
+            "valid_to",
+            "owner",
+            "population",
+            "culture",
+            "religion",
+            "topography",
+            "vegetation",
+            "climate",
+            "rank",
+            "is_example",
+            "source"
+          ]
+        },
+        "units": {
+          "sha256": "c6a3ce529c83700b61882c946544ad50b575c3ce7b478ef54783611b1cd4f652",
+          "columns": [
+            "id",
+            "name",
+            "level",
+            "parent_id",
+            "metadata"
+          ]
+        }
+      },
+      "factual_row_digests": {
+        "attribute_entities": {
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "source"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 1444,
+              "sha256": "3685c02fe0feb74469829420356b7e82482527d0f9c9e2201e6b46dd315abd0c"
+            }
+          }
+        },
+        "attribute_records": {
+          "columns": [
+            "id",
+            "location_id",
+            "attribute",
+            "value",
+            "category_id",
+            "valid_from",
+            "valid_to",
+            "method",
+            "status",
+            "source",
+            "is_example",
+            "metadata"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 0,
+              "sha256": "d61c3c9f0db0942cc5ed90ad97a983011dbc9451cdfcded30c8318d4c2b1ae7a"
+            },
+            "nonexample_rows": {
+              "rows": 0,
+              "sha256": "d61c3c9f0db0942cc5ed90ad97a983011dbc9451cdfcded30c8318d4c2b1ae7a"
+            }
+          }
+        },
+        "entities": {
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "parent_id",
+            "valid_from",
+            "valid_to",
+            "source",
+            "is_example"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 85417,
+              "sha256": "c3fe46fec7c67a098019b25050ab0266ea1b2faaf72554667844505144575817"
+            },
+            "nonexample_rows": {
+              "rows": 85415,
+              "sha256": "afa25486f298f385486c66e91a79e7b11c803af86ded725bc44d905303798d4f"
+            }
+          }
+        },
+        "entity_history": {
+          "columns": [
+            "id",
+            "entity_id",
+            "field",
+            "valid_from",
+            "valid_to",
+            "language",
+            "name_role",
+            "value",
+            "source",
+            "is_example"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 9307,
+              "sha256": "91aab2f744b9cdeec079ecc797e4c580549696164d4627bdc0d80633107126a3"
+            },
+            "nonexample_rows": {
+              "rows": 9301,
+              "sha256": "5f40301e7cbcd469cad87050c4f683f53698d7db994776b302735d557ece1501"
+            }
+          }
+        },
+        "entity_links": {
+          "columns": [
+            "id",
+            "predecessor_id",
+            "successor_id",
+            "kind",
+            "year",
+            "source",
+            "is_example"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 0,
+              "sha256": "b2ee8a8df6079264e8d263bb199764034fa914ec1ba13ed7eb6261065d2f4e51"
+            },
+            "nonexample_rows": {
+              "rows": 0,
+              "sha256": "b2ee8a8df6079264e8d263bb199764034fa914ec1ba13ed7eb6261065d2f4e51"
+            }
+          }
+        },
+        "states": {
+          "columns": [
+            "id",
+            "location_id",
+            "valid_from",
+            "valid_to",
+            "owner",
+            "population",
+            "culture",
+            "religion",
+            "topography",
+            "vegetation",
+            "climate",
+            "rank",
+            "is_example",
+            "source"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 9,
+              "sha256": "dcbee4f5dbdb7c829239bebeb50fadae4d842f2aaa352888b46ce872c4ab5e26"
+            },
+            "nonexample_rows": {
+              "rows": 0,
+              "sha256": "fb0abfb2be2366e04df2eb3e98749c57e892003aa4004cfbbae3b03ca9c7112c"
+            }
+          }
+        }
+      },
+      "factual_comparison_to_current": {
+        "attribute_entities": true,
+        "attribute_records": true,
+        "entities": true,
+        "entity_history": true,
+        "entity_links": true,
+        "states": true
+      }
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/data/atlas.sqlite.hierarchy-v3-backup-1791291464005",
+      "bytes": 401096704,
+      "sha256": "7f78d66b63b6797c46b64a0616ffe07ae3b6e10e3b8191f5b4c2bff1ade38002",
+      "stat_signature": [
+        16777231,
+        182747375,
+        401096704,
+        1791291465171681432
+      ],
+      "tables": {
+        "attribute_entities": 1444,
+        "attribute_records": 0,
+        "boundaries": 0,
+        "entities": 85417,
+        "entity_history": 9307,
+        "entity_links": 0,
+        "locations": 68700,
+        "polities": 13378,
+        "reference_location_archives": 52,
+        "states": 9,
+        "units": 9068
+      },
+      "schemas": {
+        "attribute_entities": {
+          "sha256": "50e769b61f3a40b8cdbcf869fb8bdc2350cfbab63fb48bf916c2a3f0045a0bad",
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "source"
+          ]
+        },
+        "attribute_records": {
+          "sha256": "ccc3e521dabbb0b20d8583ee5b601b6612f35f617e90eda8b9d2ec3e6552c33c",
+          "columns": [
+            "id",
+            "location_id",
+            "attribute",
+            "value",
+            "category_id",
+            "valid_from",
+            "valid_to",
+            "method",
+            "status",
+            "source",
+            "is_example",
+            "metadata"
+          ]
+        },
+        "boundaries": {
+          "sha256": "a8f133c5f41fa1baf92fb3dcd56509b6c8dfcb0701a6fc0297c0c1414007e50e",
+          "columns": [
+            "id",
+            "location_id",
+            "valid_from",
+            "valid_to",
+            "geometry",
+            "source",
+            "is_example"
+          ]
+        },
+        "entities": {
+          "sha256": "7efb231eff085fabd5beca53a49ce442ba76fb79b61246799652b85461f0cabf",
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "parent_id",
+            "valid_from",
+            "valid_to",
+            "source",
+            "is_example"
+          ]
+        },
+        "entity_history": {
+          "sha256": "6aa612734d791f7a570b6996728f1dd33484419284677d9281bca266cf59a57e",
+          "columns": [
+            "id",
+            "entity_id",
+            "field",
+            "valid_from",
+            "valid_to",
+            "language",
+            "name_role",
+            "value",
+            "source",
+            "is_example"
+          ]
+        },
+        "entity_links": {
+          "sha256": "fc3eb329155fe9e6916c9d747699502e0604a2d4ff73fdf833cae3a1db7c4082",
+          "columns": [
+            "id",
+            "predecessor_id",
+            "successor_id",
+            "kind",
+            "year",
+            "source",
+            "is_example"
+          ]
+        },
+        "locations": {
+          "sha256": "d094d05975f52c64d28cf52923063db1af38ddbf492561404b48c39d73288c1a",
+          "columns": [
+            "id",
+            "name",
+            "parent_id",
+            "geometry",
+            "reference_owner",
+            "active",
+            "metadata"
+          ]
+        },
+        "polities": {
+          "sha256": "ea0891f63de7a692f15257aeec5ddd7cf13e6206b127c1060a476d8b7e89ed6e",
+          "columns": [
+            "id",
+            "name",
+            "valid_from",
+            "valid_to",
+            "geometry",
+            "metadata"
+          ]
+        },
+        "reference_location_archives": {
+          "sha256": "2b7f06deb4f4c10e56f7f015821e7be097d468d267b4a06610b9d68828970f89",
+          "columns": [
+            "id",
+            "location_id",
+            "snapshot",
+            "source"
+          ]
+        },
+        "states": {
+          "sha256": "7929fef0d41f9f5eef1ce974a939823a10f2305b4c808eb56cfc2498f8b5c4ef",
+          "columns": [
+            "id",
+            "location_id",
+            "valid_from",
+            "valid_to",
+            "owner",
+            "population",
+            "culture",
+            "religion",
+            "topography",
+            "vegetation",
+            "climate",
+            "rank",
+            "is_example",
+            "source"
+          ]
+        },
+        "units": {
+          "sha256": "c6a3ce529c83700b61882c946544ad50b575c3ce7b478ef54783611b1cd4f652",
+          "columns": [
+            "id",
+            "name",
+            "level",
+            "parent_id",
+            "metadata"
+          ]
+        }
+      },
+      "factual_row_digests": {
+        "attribute_entities": {
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "source"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 1444,
+              "sha256": "3685c02fe0feb74469829420356b7e82482527d0f9c9e2201e6b46dd315abd0c"
+            }
+          }
+        },
+        "attribute_records": {
+          "columns": [
+            "id",
+            "location_id",
+            "attribute",
+            "value",
+            "category_id",
+            "valid_from",
+            "valid_to",
+            "method",
+            "status",
+            "source",
+            "is_example",
+            "metadata"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 0,
+              "sha256": "d61c3c9f0db0942cc5ed90ad97a983011dbc9451cdfcded30c8318d4c2b1ae7a"
+            },
+            "nonexample_rows": {
+              "rows": 0,
+              "sha256": "d61c3c9f0db0942cc5ed90ad97a983011dbc9451cdfcded30c8318d4c2b1ae7a"
+            }
+          }
+        },
+        "entities": {
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "parent_id",
+            "valid_from",
+            "valid_to",
+            "source",
+            "is_example"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 85417,
+              "sha256": "c3fe46fec7c67a098019b25050ab0266ea1b2faaf72554667844505144575817"
+            },
+            "nonexample_rows": {
+              "rows": 85415,
+              "sha256": "afa25486f298f385486c66e91a79e7b11c803af86ded725bc44d905303798d4f"
+            }
+          }
+        },
+        "entity_history": {
+          "columns": [
+            "id",
+            "entity_id",
+            "field",
+            "valid_from",
+            "valid_to",
+            "language",
+            "name_role",
+            "value",
+            "source",
+            "is_example"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 9307,
+              "sha256": "91aab2f744b9cdeec079ecc797e4c580549696164d4627bdc0d80633107126a3"
+            },
+            "nonexample_rows": {
+              "rows": 9301,
+              "sha256": "5f40301e7cbcd469cad87050c4f683f53698d7db994776b302735d557ece1501"
+            }
+          }
+        },
+        "entity_links": {
+          "columns": [
+            "id",
+            "predecessor_id",
+            "successor_id",
+            "kind",
+            "year",
+            "source",
+            "is_example"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 0,
+              "sha256": "b2ee8a8df6079264e8d263bb199764034fa914ec1ba13ed7eb6261065d2f4e51"
+            },
+            "nonexample_rows": {
+              "rows": 0,
+              "sha256": "b2ee8a8df6079264e8d263bb199764034fa914ec1ba13ed7eb6261065d2f4e51"
+            }
+          }
+        },
+        "states": {
+          "columns": [
+            "id",
+            "location_id",
+            "valid_from",
+            "valid_to",
+            "owner",
+            "population",
+            "culture",
+            "religion",
+            "topography",
+            "vegetation",
+            "climate",
+            "rank",
+            "is_example",
+            "source"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 9,
+              "sha256": "dcbee4f5dbdb7c829239bebeb50fadae4d842f2aaa352888b46ce872c4ab5e26"
+            },
+            "nonexample_rows": {
+              "rows": 0,
+              "sha256": "fb0abfb2be2366e04df2eb3e98749c57e892003aa4004cfbbae3b03ca9c7112c"
+            }
+          }
+        }
+      },
+      "factual_comparison_to_current": {
+        "attribute_entities": true,
+        "attribute_records": true,
+        "entities": true,
+        "entity_history": true,
+        "entity_links": true,
+        "states": true
+      }
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/data/atlas.sqlite.hierarchy-v3-backup-1791291528583",
+      "bytes": 401096704,
+      "sha256": "9dfa627736faa512b3b5b542c737fb53f108836a6d9b33b899fcae766098c54c",
+      "stat_signature": [
+        16777231,
+        182756335,
+        401096704,
+        1791291532257422377
+      ],
+      "tables": {
+        "attribute_entities": 1444,
+        "attribute_records": 0,
+        "boundaries": 0,
+        "entities": 85417,
+        "entity_history": 9307,
+        "entity_links": 0,
+        "locations": 68700,
+        "polities": 13378,
+        "reference_location_archives": 52,
+        "states": 9,
+        "units": 9068
+      },
+      "schemas": {
+        "attribute_entities": {
+          "sha256": "50e769b61f3a40b8cdbcf869fb8bdc2350cfbab63fb48bf916c2a3f0045a0bad",
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "source"
+          ]
+        },
+        "attribute_records": {
+          "sha256": "ccc3e521dabbb0b20d8583ee5b601b6612f35f617e90eda8b9d2ec3e6552c33c",
+          "columns": [
+            "id",
+            "location_id",
+            "attribute",
+            "value",
+            "category_id",
+            "valid_from",
+            "valid_to",
+            "method",
+            "status",
+            "source",
+            "is_example",
+            "metadata"
+          ]
+        },
+        "boundaries": {
+          "sha256": "a8f133c5f41fa1baf92fb3dcd56509b6c8dfcb0701a6fc0297c0c1414007e50e",
+          "columns": [
+            "id",
+            "location_id",
+            "valid_from",
+            "valid_to",
+            "geometry",
+            "source",
+            "is_example"
+          ]
+        },
+        "entities": {
+          "sha256": "7efb231eff085fabd5beca53a49ce442ba76fb79b61246799652b85461f0cabf",
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "parent_id",
+            "valid_from",
+            "valid_to",
+            "source",
+            "is_example"
+          ]
+        },
+        "entity_history": {
+          "sha256": "6aa612734d791f7a570b6996728f1dd33484419284677d9281bca266cf59a57e",
+          "columns": [
+            "id",
+            "entity_id",
+            "field",
+            "valid_from",
+            "valid_to",
+            "language",
+            "name_role",
+            "value",
+            "source",
+            "is_example"
+          ]
+        },
+        "entity_links": {
+          "sha256": "fc3eb329155fe9e6916c9d747699502e0604a2d4ff73fdf833cae3a1db7c4082",
+          "columns": [
+            "id",
+            "predecessor_id",
+            "successor_id",
+            "kind",
+            "year",
+            "source",
+            "is_example"
+          ]
+        },
+        "locations": {
+          "sha256": "d094d05975f52c64d28cf52923063db1af38ddbf492561404b48c39d73288c1a",
+          "columns": [
+            "id",
+            "name",
+            "parent_id",
+            "geometry",
+            "reference_owner",
+            "active",
+            "metadata"
+          ]
+        },
+        "polities": {
+          "sha256": "ea0891f63de7a692f15257aeec5ddd7cf13e6206b127c1060a476d8b7e89ed6e",
+          "columns": [
+            "id",
+            "name",
+            "valid_from",
+            "valid_to",
+            "geometry",
+            "metadata"
+          ]
+        },
+        "reference_location_archives": {
+          "sha256": "2b7f06deb4f4c10e56f7f015821e7be097d468d267b4a06610b9d68828970f89",
+          "columns": [
+            "id",
+            "location_id",
+            "snapshot",
+            "source"
+          ]
+        },
+        "states": {
+          "sha256": "7929fef0d41f9f5eef1ce974a939823a10f2305b4c808eb56cfc2498f8b5c4ef",
+          "columns": [
+            "id",
+            "location_id",
+            "valid_from",
+            "valid_to",
+            "owner",
+            "population",
+            "culture",
+            "religion",
+            "topography",
+            "vegetation",
+            "climate",
+            "rank",
+            "is_example",
+            "source"
+          ]
+        },
+        "units": {
+          "sha256": "c6a3ce529c83700b61882c946544ad50b575c3ce7b478ef54783611b1cd4f652",
+          "columns": [
+            "id",
+            "name",
+            "level",
+            "parent_id",
+            "metadata"
+          ]
+        }
+      },
+      "factual_row_digests": {
+        "attribute_entities": {
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "source"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 1444,
+              "sha256": "3685c02fe0feb74469829420356b7e82482527d0f9c9e2201e6b46dd315abd0c"
+            }
+          }
+        },
+        "attribute_records": {
+          "columns": [
+            "id",
+            "location_id",
+            "attribute",
+            "value",
+            "category_id",
+            "valid_from",
+            "valid_to",
+            "method",
+            "status",
+            "source",
+            "is_example",
+            "metadata"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 0,
+              "sha256": "d61c3c9f0db0942cc5ed90ad97a983011dbc9451cdfcded30c8318d4c2b1ae7a"
+            },
+            "nonexample_rows": {
+              "rows": 0,
+              "sha256": "d61c3c9f0db0942cc5ed90ad97a983011dbc9451cdfcded30c8318d4c2b1ae7a"
+            }
+          }
+        },
+        "entities": {
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "parent_id",
+            "valid_from",
+            "valid_to",
+            "source",
+            "is_example"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 85417,
+              "sha256": "c3fe46fec7c67a098019b25050ab0266ea1b2faaf72554667844505144575817"
+            },
+            "nonexample_rows": {
+              "rows": 85415,
+              "sha256": "afa25486f298f385486c66e91a79e7b11c803af86ded725bc44d905303798d4f"
+            }
+          }
+        },
+        "entity_history": {
+          "columns": [
+            "id",
+            "entity_id",
+            "field",
+            "valid_from",
+            "valid_to",
+            "language",
+            "name_role",
+            "value",
+            "source",
+            "is_example"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 9307,
+              "sha256": "91aab2f744b9cdeec079ecc797e4c580549696164d4627bdc0d80633107126a3"
+            },
+            "nonexample_rows": {
+              "rows": 9301,
+              "sha256": "5f40301e7cbcd469cad87050c4f683f53698d7db994776b302735d557ece1501"
+            }
+          }
+        },
+        "entity_links": {
+          "columns": [
+            "id",
+            "predecessor_id",
+            "successor_id",
+            "kind",
+            "year",
+            "source",
+            "is_example"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 0,
+              "sha256": "b2ee8a8df6079264e8d263bb199764034fa914ec1ba13ed7eb6261065d2f4e51"
+            },
+            "nonexample_rows": {
+              "rows": 0,
+              "sha256": "b2ee8a8df6079264e8d263bb199764034fa914ec1ba13ed7eb6261065d2f4e51"
+            }
+          }
+        },
+        "states": {
+          "columns": [
+            "id",
+            "location_id",
+            "valid_from",
+            "valid_to",
+            "owner",
+            "population",
+            "culture",
+            "religion",
+            "topography",
+            "vegetation",
+            "climate",
+            "rank",
+            "is_example",
+            "source"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 9,
+              "sha256": "dcbee4f5dbdb7c829239bebeb50fadae4d842f2aaa352888b46ce872c4ab5e26"
+            },
+            "nonexample_rows": {
+              "rows": 0,
+              "sha256": "fb0abfb2be2366e04df2eb3e98749c57e892003aa4004cfbbae3b03ca9c7112c"
+            }
+          }
+        }
+      },
+      "factual_comparison_to_current": {
+        "attribute_entities": true,
+        "attribute_records": true,
+        "entities": true,
+        "entity_history": true,
+        "entity_links": true,
+        "states": true
+      }
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/data/atlas.sqlite.topology-backup-1791291343175",
+      "bytes": 401063936,
+      "sha256": "d82fbef1d4fc38f0f4e22de5ac689e3908b6c12a6a31ae1002a01fcde8b9e035",
+      "stat_signature": [
+        16777231,
+        182743003,
+        401063936,
+        1791291346376997219
+      ],
+      "tables": {
+        "attribute_entities": 1444,
+        "attribute_records": 0,
+        "boundaries": 0,
+        "entities": 85417,
+        "entity_history": 9307,
+        "entity_links": 0,
+        "locations": 68700,
+        "polities": 13378,
+        "reference_location_archives": 52,
+        "states": 9,
+        "units": 9059
+      },
+      "schemas": {
+        "attribute_entities": {
+          "sha256": "50e769b61f3a40b8cdbcf869fb8bdc2350cfbab63fb48bf916c2a3f0045a0bad",
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "source"
+          ]
+        },
+        "attribute_records": {
+          "sha256": "ccc3e521dabbb0b20d8583ee5b601b6612f35f617e90eda8b9d2ec3e6552c33c",
+          "columns": [
+            "id",
+            "location_id",
+            "attribute",
+            "value",
+            "category_id",
+            "valid_from",
+            "valid_to",
+            "method",
+            "status",
+            "source",
+            "is_example",
+            "metadata"
+          ]
+        },
+        "boundaries": {
+          "sha256": "a8f133c5f41fa1baf92fb3dcd56509b6c8dfcb0701a6fc0297c0c1414007e50e",
+          "columns": [
+            "id",
+            "location_id",
+            "valid_from",
+            "valid_to",
+            "geometry",
+            "source",
+            "is_example"
+          ]
+        },
+        "entities": {
+          "sha256": "7efb231eff085fabd5beca53a49ce442ba76fb79b61246799652b85461f0cabf",
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "parent_id",
+            "valid_from",
+            "valid_to",
+            "source",
+            "is_example"
+          ]
+        },
+        "entity_history": {
+          "sha256": "6aa612734d791f7a570b6996728f1dd33484419284677d9281bca266cf59a57e",
+          "columns": [
+            "id",
+            "entity_id",
+            "field",
+            "valid_from",
+            "valid_to",
+            "language",
+            "name_role",
+            "value",
+            "source",
+            "is_example"
+          ]
+        },
+        "entity_links": {
+          "sha256": "fc3eb329155fe9e6916c9d747699502e0604a2d4ff73fdf833cae3a1db7c4082",
+          "columns": [
+            "id",
+            "predecessor_id",
+            "successor_id",
+            "kind",
+            "year",
+            "source",
+            "is_example"
+          ]
+        },
+        "locations": {
+          "sha256": "d094d05975f52c64d28cf52923063db1af38ddbf492561404b48c39d73288c1a",
+          "columns": [
+            "id",
+            "name",
+            "parent_id",
+            "geometry",
+            "reference_owner",
+            "active",
+            "metadata"
+          ]
+        },
+        "polities": {
+          "sha256": "ea0891f63de7a692f15257aeec5ddd7cf13e6206b127c1060a476d8b7e89ed6e",
+          "columns": [
+            "id",
+            "name",
+            "valid_from",
+            "valid_to",
+            "geometry",
+            "metadata"
+          ]
+        },
+        "reference_location_archives": {
+          "sha256": "2b7f06deb4f4c10e56f7f015821e7be097d468d267b4a06610b9d68828970f89",
+          "columns": [
+            "id",
+            "location_id",
+            "snapshot",
+            "source"
+          ]
+        },
+        "states": {
+          "sha256": "7929fef0d41f9f5eef1ce974a939823a10f2305b4c808eb56cfc2498f8b5c4ef",
+          "columns": [
+            "id",
+            "location_id",
+            "valid_from",
+            "valid_to",
+            "owner",
+            "population",
+            "culture",
+            "religion",
+            "topography",
+            "vegetation",
+            "climate",
+            "rank",
+            "is_example",
+            "source"
+          ]
+        },
+        "units": {
+          "sha256": "c6a3ce529c83700b61882c946544ad50b575c3ce7b478ef54783611b1cd4f652",
+          "columns": [
+            "id",
+            "name",
+            "level",
+            "parent_id",
+            "metadata"
+          ]
+        }
+      },
+      "factual_row_digests": {
+        "attribute_entities": {
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "source"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 1444,
+              "sha256": "3685c02fe0feb74469829420356b7e82482527d0f9c9e2201e6b46dd315abd0c"
+            }
+          }
+        },
+        "attribute_records": {
+          "columns": [
+            "id",
+            "location_id",
+            "attribute",
+            "value",
+            "category_id",
+            "valid_from",
+            "valid_to",
+            "method",
+            "status",
+            "source",
+            "is_example",
+            "metadata"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 0,
+              "sha256": "d61c3c9f0db0942cc5ed90ad97a983011dbc9451cdfcded30c8318d4c2b1ae7a"
+            },
+            "nonexample_rows": {
+              "rows": 0,
+              "sha256": "d61c3c9f0db0942cc5ed90ad97a983011dbc9451cdfcded30c8318d4c2b1ae7a"
+            }
+          }
+        },
+        "entities": {
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "parent_id",
+            "valid_from",
+            "valid_to",
+            "source",
+            "is_example"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 85417,
+              "sha256": "c3fe46fec7c67a098019b25050ab0266ea1b2faaf72554667844505144575817"
+            },
+            "nonexample_rows": {
+              "rows": 85415,
+              "sha256": "afa25486f298f385486c66e91a79e7b11c803af86ded725bc44d905303798d4f"
+            }
+          }
+        },
+        "entity_history": {
+          "columns": [
+            "id",
+            "entity_id",
+            "field",
+            "valid_from",
+            "valid_to",
+            "language",
+            "name_role",
+            "value",
+            "source",
+            "is_example"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 9307,
+              "sha256": "91aab2f744b9cdeec079ecc797e4c580549696164d4627bdc0d80633107126a3"
+            },
+            "nonexample_rows": {
+              "rows": 9301,
+              "sha256": "5f40301e7cbcd469cad87050c4f683f53698d7db994776b302735d557ece1501"
+            }
+          }
+        },
+        "entity_links": {
+          "columns": [
+            "id",
+            "predecessor_id",
+            "successor_id",
+            "kind",
+            "year",
+            "source",
+            "is_example"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 0,
+              "sha256": "b2ee8a8df6079264e8d263bb199764034fa914ec1ba13ed7eb6261065d2f4e51"
+            },
+            "nonexample_rows": {
+              "rows": 0,
+              "sha256": "b2ee8a8df6079264e8d263bb199764034fa914ec1ba13ed7eb6261065d2f4e51"
+            }
+          }
+        },
+        "states": {
+          "columns": [
+            "id",
+            "location_id",
+            "valid_from",
+            "valid_to",
+            "owner",
+            "population",
+            "culture",
+            "religion",
+            "topography",
+            "vegetation",
+            "climate",
+            "rank",
+            "is_example",
+            "source"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 9,
+              "sha256": "dcbee4f5dbdb7c829239bebeb50fadae4d842f2aaa352888b46ce872c4ab5e26"
+            },
+            "nonexample_rows": {
+              "rows": 0,
+              "sha256": "fb0abfb2be2366e04df2eb3e98749c57e892003aa4004cfbbae3b03ca9c7112c"
+            }
+          }
+        }
+      },
+      "factual_comparison_to_current": {
+        "attribute_entities": true,
+        "attribute_records": true,
+        "entities": true,
+        "entity_history": true,
+        "entity_links": true,
+        "states": true
+      }
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/data/atlas.sqlite.topology-backup-1791291468759",
+      "bytes": 401063936,
+      "sha256": "f217ccbd7dc2a2c233311efa6603eaa709d5abc8ba6595471c8041fb21bae0f1",
+      "stat_signature": [
+        16777231,
+        182747382,
+        401063936,
+        1791291470320143042
+      ],
+      "tables": {
+        "attribute_entities": 1444,
+        "attribute_records": 0,
+        "boundaries": 0,
+        "entities": 85417,
+        "entity_history": 9307,
+        "entity_links": 0,
+        "locations": 68700,
+        "polities": 13378,
+        "reference_location_archives": 52,
+        "states": 9,
+        "units": 9059
+      },
+      "schemas": {
+        "attribute_entities": {
+          "sha256": "50e769b61f3a40b8cdbcf869fb8bdc2350cfbab63fb48bf916c2a3f0045a0bad",
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "source"
+          ]
+        },
+        "attribute_records": {
+          "sha256": "ccc3e521dabbb0b20d8583ee5b601b6612f35f617e90eda8b9d2ec3e6552c33c",
+          "columns": [
+            "id",
+            "location_id",
+            "attribute",
+            "value",
+            "category_id",
+            "valid_from",
+            "valid_to",
+            "method",
+            "status",
+            "source",
+            "is_example",
+            "metadata"
+          ]
+        },
+        "boundaries": {
+          "sha256": "a8f133c5f41fa1baf92fb3dcd56509b6c8dfcb0701a6fc0297c0c1414007e50e",
+          "columns": [
+            "id",
+            "location_id",
+            "valid_from",
+            "valid_to",
+            "geometry",
+            "source",
+            "is_example"
+          ]
+        },
+        "entities": {
+          "sha256": "7efb231eff085fabd5beca53a49ce442ba76fb79b61246799652b85461f0cabf",
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "parent_id",
+            "valid_from",
+            "valid_to",
+            "source",
+            "is_example"
+          ]
+        },
+        "entity_history": {
+          "sha256": "6aa612734d791f7a570b6996728f1dd33484419284677d9281bca266cf59a57e",
+          "columns": [
+            "id",
+            "entity_id",
+            "field",
+            "valid_from",
+            "valid_to",
+            "language",
+            "name_role",
+            "value",
+            "source",
+            "is_example"
+          ]
+        },
+        "entity_links": {
+          "sha256": "fc3eb329155fe9e6916c9d747699502e0604a2d4ff73fdf833cae3a1db7c4082",
+          "columns": [
+            "id",
+            "predecessor_id",
+            "successor_id",
+            "kind",
+            "year",
+            "source",
+            "is_example"
+          ]
+        },
+        "locations": {
+          "sha256": "d094d05975f52c64d28cf52923063db1af38ddbf492561404b48c39d73288c1a",
+          "columns": [
+            "id",
+            "name",
+            "parent_id",
+            "geometry",
+            "reference_owner",
+            "active",
+            "metadata"
+          ]
+        },
+        "polities": {
+          "sha256": "ea0891f63de7a692f15257aeec5ddd7cf13e6206b127c1060a476d8b7e89ed6e",
+          "columns": [
+            "id",
+            "name",
+            "valid_from",
+            "valid_to",
+            "geometry",
+            "metadata"
+          ]
+        },
+        "reference_location_archives": {
+          "sha256": "2b7f06deb4f4c10e56f7f015821e7be097d468d267b4a06610b9d68828970f89",
+          "columns": [
+            "id",
+            "location_id",
+            "snapshot",
+            "source"
+          ]
+        },
+        "states": {
+          "sha256": "7929fef0d41f9f5eef1ce974a939823a10f2305b4c808eb56cfc2498f8b5c4ef",
+          "columns": [
+            "id",
+            "location_id",
+            "valid_from",
+            "valid_to",
+            "owner",
+            "population",
+            "culture",
+            "religion",
+            "topography",
+            "vegetation",
+            "climate",
+            "rank",
+            "is_example",
+            "source"
+          ]
+        },
+        "units": {
+          "sha256": "c6a3ce529c83700b61882c946544ad50b575c3ce7b478ef54783611b1cd4f652",
+          "columns": [
+            "id",
+            "name",
+            "level",
+            "parent_id",
+            "metadata"
+          ]
+        }
+      },
+      "factual_row_digests": {
+        "attribute_entities": {
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "source"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 1444,
+              "sha256": "3685c02fe0feb74469829420356b7e82482527d0f9c9e2201e6b46dd315abd0c"
+            }
+          }
+        },
+        "attribute_records": {
+          "columns": [
+            "id",
+            "location_id",
+            "attribute",
+            "value",
+            "category_id",
+            "valid_from",
+            "valid_to",
+            "method",
+            "status",
+            "source",
+            "is_example",
+            "metadata"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 0,
+              "sha256": "d61c3c9f0db0942cc5ed90ad97a983011dbc9451cdfcded30c8318d4c2b1ae7a"
+            },
+            "nonexample_rows": {
+              "rows": 0,
+              "sha256": "d61c3c9f0db0942cc5ed90ad97a983011dbc9451cdfcded30c8318d4c2b1ae7a"
+            }
+          }
+        },
+        "entities": {
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "parent_id",
+            "valid_from",
+            "valid_to",
+            "source",
+            "is_example"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 85417,
+              "sha256": "c3fe46fec7c67a098019b25050ab0266ea1b2faaf72554667844505144575817"
+            },
+            "nonexample_rows": {
+              "rows": 85415,
+              "sha256": "afa25486f298f385486c66e91a79e7b11c803af86ded725bc44d905303798d4f"
+            }
+          }
+        },
+        "entity_history": {
+          "columns": [
+            "id",
+            "entity_id",
+            "field",
+            "valid_from",
+            "valid_to",
+            "language",
+            "name_role",
+            "value",
+            "source",
+            "is_example"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 9307,
+              "sha256": "91aab2f744b9cdeec079ecc797e4c580549696164d4627bdc0d80633107126a3"
+            },
+            "nonexample_rows": {
+              "rows": 9301,
+              "sha256": "5f40301e7cbcd469cad87050c4f683f53698d7db994776b302735d557ece1501"
+            }
+          }
+        },
+        "entity_links": {
+          "columns": [
+            "id",
+            "predecessor_id",
+            "successor_id",
+            "kind",
+            "year",
+            "source",
+            "is_example"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 0,
+              "sha256": "b2ee8a8df6079264e8d263bb199764034fa914ec1ba13ed7eb6261065d2f4e51"
+            },
+            "nonexample_rows": {
+              "rows": 0,
+              "sha256": "b2ee8a8df6079264e8d263bb199764034fa914ec1ba13ed7eb6261065d2f4e51"
+            }
+          }
+        },
+        "states": {
+          "columns": [
+            "id",
+            "location_id",
+            "valid_from",
+            "valid_to",
+            "owner",
+            "population",
+            "culture",
+            "religion",
+            "topography",
+            "vegetation",
+            "climate",
+            "rank",
+            "is_example",
+            "source"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 9,
+              "sha256": "dcbee4f5dbdb7c829239bebeb50fadae4d842f2aaa352888b46ce872c4ab5e26"
+            },
+            "nonexample_rows": {
+              "rows": 0,
+              "sha256": "fb0abfb2be2366e04df2eb3e98749c57e892003aa4004cfbbae3b03ca9c7112c"
+            }
+          }
+        }
+      },
+      "factual_comparison_to_current": {
+        "attribute_entities": true,
+        "attribute_records": true,
+        "entities": true,
+        "entity_history": true,
+        "entity_links": true,
+        "states": true
+      }
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/data/atlas.sqlite.topology-backup-1791291540512",
+      "bytes": 401063936,
+      "sha256": "852353068156f2ad05c1882f200d5aeafec12414963558958a1b8ee107e5dcd6",
+      "stat_signature": [
+        16777231,
+        182759374,
+        401063936,
+        1791291543142018607
+      ],
+      "tables": {
+        "attribute_entities": 1444,
+        "attribute_records": 0,
+        "boundaries": 0,
+        "entities": 85417,
+        "entity_history": 9307,
+        "entity_links": 0,
+        "locations": 68700,
+        "polities": 13378,
+        "reference_location_archives": 52,
+        "states": 9,
+        "units": 9059
+      },
+      "schemas": {
+        "attribute_entities": {
+          "sha256": "50e769b61f3a40b8cdbcf869fb8bdc2350cfbab63fb48bf916c2a3f0045a0bad",
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "source"
+          ]
+        },
+        "attribute_records": {
+          "sha256": "ccc3e521dabbb0b20d8583ee5b601b6612f35f617e90eda8b9d2ec3e6552c33c",
+          "columns": [
+            "id",
+            "location_id",
+            "attribute",
+            "value",
+            "category_id",
+            "valid_from",
+            "valid_to",
+            "method",
+            "status",
+            "source",
+            "is_example",
+            "metadata"
+          ]
+        },
+        "boundaries": {
+          "sha256": "a8f133c5f41fa1baf92fb3dcd56509b6c8dfcb0701a6fc0297c0c1414007e50e",
+          "columns": [
+            "id",
+            "location_id",
+            "valid_from",
+            "valid_to",
+            "geometry",
+            "source",
+            "is_example"
+          ]
+        },
+        "entities": {
+          "sha256": "7efb231eff085fabd5beca53a49ce442ba76fb79b61246799652b85461f0cabf",
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "parent_id",
+            "valid_from",
+            "valid_to",
+            "source",
+            "is_example"
+          ]
+        },
+        "entity_history": {
+          "sha256": "6aa612734d791f7a570b6996728f1dd33484419284677d9281bca266cf59a57e",
+          "columns": [
+            "id",
+            "entity_id",
+            "field",
+            "valid_from",
+            "valid_to",
+            "language",
+            "name_role",
+            "value",
+            "source",
+            "is_example"
+          ]
+        },
+        "entity_links": {
+          "sha256": "fc3eb329155fe9e6916c9d747699502e0604a2d4ff73fdf833cae3a1db7c4082",
+          "columns": [
+            "id",
+            "predecessor_id",
+            "successor_id",
+            "kind",
+            "year",
+            "source",
+            "is_example"
+          ]
+        },
+        "locations": {
+          "sha256": "d094d05975f52c64d28cf52923063db1af38ddbf492561404b48c39d73288c1a",
+          "columns": [
+            "id",
+            "name",
+            "parent_id",
+            "geometry",
+            "reference_owner",
+            "active",
+            "metadata"
+          ]
+        },
+        "polities": {
+          "sha256": "ea0891f63de7a692f15257aeec5ddd7cf13e6206b127c1060a476d8b7e89ed6e",
+          "columns": [
+            "id",
+            "name",
+            "valid_from",
+            "valid_to",
+            "geometry",
+            "metadata"
+          ]
+        },
+        "reference_location_archives": {
+          "sha256": "2b7f06deb4f4c10e56f7f015821e7be097d468d267b4a06610b9d68828970f89",
+          "columns": [
+            "id",
+            "location_id",
+            "snapshot",
+            "source"
+          ]
+        },
+        "states": {
+          "sha256": "7929fef0d41f9f5eef1ce974a939823a10f2305b4c808eb56cfc2498f8b5c4ef",
+          "columns": [
+            "id",
+            "location_id",
+            "valid_from",
+            "valid_to",
+            "owner",
+            "population",
+            "culture",
+            "religion",
+            "topography",
+            "vegetation",
+            "climate",
+            "rank",
+            "is_example",
+            "source"
+          ]
+        },
+        "units": {
+          "sha256": "c6a3ce529c83700b61882c946544ad50b575c3ce7b478ef54783611b1cd4f652",
+          "columns": [
+            "id",
+            "name",
+            "level",
+            "parent_id",
+            "metadata"
+          ]
+        }
+      },
+      "factual_row_digests": {
+        "attribute_entities": {
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "source"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 1444,
+              "sha256": "3685c02fe0feb74469829420356b7e82482527d0f9c9e2201e6b46dd315abd0c"
+            }
+          }
+        },
+        "attribute_records": {
+          "columns": [
+            "id",
+            "location_id",
+            "attribute",
+            "value",
+            "category_id",
+            "valid_from",
+            "valid_to",
+            "method",
+            "status",
+            "source",
+            "is_example",
+            "metadata"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 0,
+              "sha256": "d61c3c9f0db0942cc5ed90ad97a983011dbc9451cdfcded30c8318d4c2b1ae7a"
+            },
+            "nonexample_rows": {
+              "rows": 0,
+              "sha256": "d61c3c9f0db0942cc5ed90ad97a983011dbc9451cdfcded30c8318d4c2b1ae7a"
+            }
+          }
+        },
+        "entities": {
+          "columns": [
+            "id",
+            "kind",
+            "name",
+            "parent_id",
+            "valid_from",
+            "valid_to",
+            "source",
+            "is_example"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 85417,
+              "sha256": "c3fe46fec7c67a098019b25050ab0266ea1b2faaf72554667844505144575817"
+            },
+            "nonexample_rows": {
+              "rows": 85415,
+              "sha256": "afa25486f298f385486c66e91a79e7b11c803af86ded725bc44d905303798d4f"
+            }
+          }
+        },
+        "entity_history": {
+          "columns": [
+            "id",
+            "entity_id",
+            "field",
+            "valid_from",
+            "valid_to",
+            "language",
+            "name_role",
+            "value",
+            "source",
+            "is_example"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 9307,
+              "sha256": "91aab2f744b9cdeec079ecc797e4c580549696164d4627bdc0d80633107126a3"
+            },
+            "nonexample_rows": {
+              "rows": 9301,
+              "sha256": "5f40301e7cbcd469cad87050c4f683f53698d7db994776b302735d557ece1501"
+            }
+          }
+        },
+        "entity_links": {
+          "columns": [
+            "id",
+            "predecessor_id",
+            "successor_id",
+            "kind",
+            "year",
+            "source",
+            "is_example"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 0,
+              "sha256": "b2ee8a8df6079264e8d263bb199764034fa914ec1ba13ed7eb6261065d2f4e51"
+            },
+            "nonexample_rows": {
+              "rows": 0,
+              "sha256": "b2ee8a8df6079264e8d263bb199764034fa914ec1ba13ed7eb6261065d2f4e51"
+            }
+          }
+        },
+        "states": {
+          "columns": [
+            "id",
+            "location_id",
+            "valid_from",
+            "valid_to",
+            "owner",
+            "population",
+            "culture",
+            "religion",
+            "topography",
+            "vegetation",
+            "climate",
+            "rank",
+            "is_example",
+            "source"
+          ],
+          "ordering": "id COLLATE BINARY ASC",
+          "scopes": {
+            "all_rows": {
+              "rows": 9,
+              "sha256": "dcbee4f5dbdb7c829239bebeb50fadae4d842f2aaa352888b46ce872c4ab5e26"
+            },
+            "nonexample_rows": {
+              "rows": 0,
+              "sha256": "fb0abfb2be2366e04df2eb3e98749c57e892003aa4004cfbbae3b03ca9c7112c"
+            }
+          }
+        }
+      },
+      "factual_comparison_to_current": {
+        "attribute_entities": true,
+        "attribute_records": true,
+        "entities": true,
+        "entity_history": true,
+        "entity_links": true,
+        "states": true
+      }
+    }
+  ],
+  "whole_byte_identical_groups": [
+    {
+      "sha256": "063d65d035e7c68c95caf137a59d9ed9465b27ba7a362694f5209eea82d5e47d",
+      "paths": [
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/data/atlas.sqlite"
+      ]
+    },
+    {
+      "sha256": "e16544065b6ca13a19f504bb40244e9458943523d4a744769a9714e6afe43e77",
+      "paths": [
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/data/atlas.sqlite.hierarchy-v3-backup-1791291334886"
+      ]
+    },
+    {
+      "sha256": "7f78d66b63b6797c46b64a0616ffe07ae3b6e10e3b8191f5b4c2bff1ade38002",
+      "paths": [
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/data/atlas.sqlite.hierarchy-v3-backup-1791291464005"
+      ]
+    },
+    {
+      "sha256": "9dfa627736faa512b3b5b542c737fb53f108836a6d9b33b899fcae766098c54c",
+      "paths": [
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/data/atlas.sqlite.hierarchy-v3-backup-1791291528583"
+      ]
+    },
+    {
+      "sha256": "d82fbef1d4fc38f0f4e22de5ac689e3908b6c12a6a31ae1002a01fcde8b9e035",
+      "paths": [
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/data/atlas.sqlite.topology-backup-1791291343175"
+      ]
+    },
+    {
+      "sha256": "f217ccbd7dc2a2c233311efa6603eaa709d5abc8ba6595471c8041fb21bae0f1",
+      "paths": [
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/data/atlas.sqlite.topology-backup-1791291468759"
+      ]
+    },
+    {
+      "sha256": "852353068156f2ad05c1882f200d5aeafec12414963558958a1b8ee107e5dcd6",
+      "paths": [
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/data/atlas.sqlite.topology-backup-1791291540512"
+      ]
+    }
+  ],
+  "factual_tables_checked": [
+    "attribute_entities",
+    "attribute_records",
+    "entities",
+    "entity_history",
+    "entity_links",
+    "states"
+  ],
+  "digest_encoding": "SHA256 over ordered full rows; column header and each typed compact UTF-8 JSON row prefixed by uint64 big-endian byte length; SQL text strings retained exactly; real values float.hex; blob values hex; no values dumped",
+  "excluded_from_row_digest": [
+    "boundaries",
+    "locations",
+    "polities",
+    "reference_location_archives",
+    "units"
+  ],
+  "scope_limit": "All table names/counts/schema hashes inventoried. Entire rows compared only for explicitly listed factual/source-bearing tables including inline source and all/nonexample rows. Excluded geographic/derived/archive tables have counts only; equal counts do not establish equal contents. No comparison with remote/provider databases or tracked import files; source preservation necessity beyond this scope is not inferred.",
+  "source_database_mutations": false,
+  "database_copies": false
+}

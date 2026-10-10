@@ -1,0 +1,1851 @@
+{
+  "direct_original_segment_equals_output_count": 74,
+  "direct_segment_validation_count": 88,
+  "full_partition_control": {
+    "added_empty": true,
+    "assembled_valid": true,
+    "both_faces_valid": true,
+    "float_node_gap_covers": false,
+    "gap_coordinates": [
+      [
+        0.0,
+        1.0
+      ],
+      [
+        1.0,
+        -1.0
+      ],
+      [
+        1.0,
+        1.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "inside_coordinates": [
+      [
+        0.0,
+        1.0
+      ],
+      [
+        1.0,
+        1.0
+      ],
+      [
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "missing_empty": true,
+    "outside_coordinates": [
+      [
+        1.0,
+        -1.0
+      ],
+      [
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      [
+        1.0,
+        1.0
+      ],
+      [
+        1.0,
+        -1.0
+      ]
+    ],
+    "pairwise_area": 0.0,
+    "source_coordinates": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        1.0,
+        1.0
+      ],
+      [
+        0.0,
+        1.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "union_equals_gap": false
+  },
+  "max_output_vs_nearest_exact_round_ulp_by_axis": [
+    7.0,
+    1.0
+  ],
+  "per_vertex": [
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        629203.7398665692,
+        4391728.186854156
+      ],
+      "gap_edge": 28,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        629203.7398665692,
+        4391728.186854156
+      ],
+      "source_key": "dgt_0502",
+      "source_ring": 0,
+      "source_segment": 24661
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        629811.5383700574,
+        4391692.30341235
+      ],
+      "gap_edge": 28,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        629811.5383700574,
+        4391692.30341235
+      ],
+      "source_key": "ign_adminunit_1173029",
+      "source_ring": 0,
+      "source_segment": 237
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        629811.5413190085,
+        4391692.303238248
+      ],
+      "gap_edge": 28,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        629811.5413190085,
+        4391692.303238248
+      ],
+      "source_key": "dgt_0502",
+      "source_ring": 0,
+      "source_segment": 24659
+    },
+    {
+      "direct_intersection_equals_four_way_output": false,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        634400.495591402,
+        4390650.543317681
+      ],
+      "gap_edge": 27,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        3.0,
+        -1.0
+      ],
+      "output_xy": [
+        634400.4955914024,
+        4390650.54331768
+      ],
+      "source_key": "dgt_0502",
+      "source_ring": 0,
+      "source_segment": 24634
+    },
+    {
+      "direct_intersection_equals_four_way_output": false,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        634411.1413161753,
+        4390645.037148718
+      ],
+      "gap_edge": 27,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        2.0,
+        -1.0
+      ],
+      "output_xy": [
+        634411.1413161756,
+        4390645.037148717
+      ],
+      "source_key": "ign_adminunit_1173029",
+      "source_ring": 0,
+      "source_segment": 262
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        637491.1798728768,
+        4389838.836804904
+      ],
+      "gap_edge": 25,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        637491.1798728768,
+        4389838.836804904
+      ],
+      "source_key": "dgt_0502",
+      "source_ring": 0,
+      "source_segment": 24613
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        639208.8084579566,
+        4390261.059948576
+      ],
+      "gap_edge": 25,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        639208.8084579566,
+        4390261.059948576
+      ],
+      "source_key": "dgt_0502",
+      "source_ring": 0,
+      "source_segment": 24607
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        641390.0000528974,
+        4389736.61803166
+      ],
+      "gap_edge": 24,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        641390.0000528974,
+        4389736.61803166
+      ],
+      "source_key": "dgt_0502",
+      "source_ring": 0,
+      "source_segment": 24598
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        641500.4934356948,
+        4389703.627531085
+      ],
+      "gap_edge": 24,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        641500.4934356948,
+        4389703.627531085
+      ],
+      "source_key": "ign_adminunit_1173060",
+      "source_ring": 0,
+      "source_segment": 221
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        643951.950021661,
+        4389817.063777527
+      ],
+      "gap_edge": 22,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        643951.950021661,
+        4389817.063777527
+      ],
+      "source_key": "dgt_0502",
+      "source_ring": 0,
+      "source_segment": 24589
+    },
+    {
+      "direct_intersection_equals_four_way_output": false,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        644647.067504182,
+        4390226.334213973
+      ],
+      "gap_edge": 22,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        -2.0,
+        0.0
+      ],
+      "output_xy": [
+        644647.0675041818,
+        4390226.334213973
+      ],
+      "source_key": "dgt_0502",
+      "source_ring": 0,
+      "source_segment": 24587
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        644694.5474275628,
+        4390254.289386232
+      ],
+      "gap_edge": 22,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        644694.5474275628,
+        4390254.289386232
+      ],
+      "source_key": "ign_adminunit_1173135",
+      "source_ring": 0,
+      "source_segment": 4
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        648829.6675500035,
+        4391990.934795066
+      ],
+      "gap_edge": 21,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        648829.6675500035,
+        4391990.934795066
+      ],
+      "source_key": "ign_adminunit_1173135",
+      "source_ring": 0,
+      "source_segment": 27
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        653418.9407666505,
+        4391601.26350517
+      ],
+      "gap_edge": 19,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        653418.9407666505,
+        4391601.26350517
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 8642
+    },
+    {
+      "direct_intersection_equals_four_way_output": false,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        655613.3703205002,
+        4391554.153897574
+      ],
+      "gap_edge": 18,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        5.0,
+        0.0
+      ],
+      "output_xy": [
+        655613.3703205008,
+        4391554.153897574
+      ],
+      "source_key": "ign_adminunit_1173013",
+      "source_ring": 0,
+      "source_segment": 2
+    },
+    {
+      "direct_intersection_equals_four_way_output": false,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        655738.2420940413,
+        4391529.590309585
+      ],
+      "gap_edge": 18,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        -7.0,
+        0.0
+      ],
+      "output_xy": [
+        655738.2420940405,
+        4391529.590309585
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 8631
+    },
+    {
+      "direct_intersection_equals_four_way_output": false,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        656132.8212437801,
+        4391451.972450974
+      ],
+      "gap_edge": 18,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        -1.0,
+        0.0
+      ],
+      "output_xy": [
+        656132.82124378,
+        4391451.972450974
+      ],
+      "source_key": "ign_adminunit_1173013",
+      "source_ring": 0,
+      "source_segment": 5
+    },
+    {
+      "direct_intersection_equals_four_way_output": false,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        656156.0080594405,
+        4391447.411361062
+      ],
+      "gap_edge": 18,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        -2.0,
+        0.0
+      ],
+      "output_xy": [
+        656156.0080594403,
+        4391447.411361062
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 8629
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        657542.5003853161,
+        4391174.67377372
+      ],
+      "gap_edge": 18,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        657542.5003853161,
+        4391174.67377372
+      ],
+      "source_key": "ign_adminunit_1173013",
+      "source_ring": 0,
+      "source_segment": 14
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        657598.7269245853,
+        4391163.613423526
+      ],
+      "gap_edge": 18,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        657598.7269245853,
+        4391163.613423526
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 8620
+    },
+    {
+      "direct_intersection_equals_four_way_output": false,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        659046.9068379021,
+        4390914.048780403
+      ],
+      "gap_edge": 17,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        -2.0,
+        -1.0
+      ],
+      "output_xy": [
+        659046.9068379019,
+        4390914.048780402
+      ],
+      "source_key": "ign_adminunit_1173085",
+      "source_ring": 0,
+      "source_segment": 185
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        662341.9148195903,
+        4392159.0540409135
+      ],
+      "gap_edge": 16,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        662341.9148195903,
+        4392159.0540409135
+      ],
+      "source_key": "ign_adminunit_1173085",
+      "source_ring": 0,
+      "source_segment": 211
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        662753.1598251266,
+        4392163.023648926
+      ],
+      "gap_edge": 16,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        662753.1598251266,
+        4392163.023648926
+      ],
+      "source_key": "ign_adminunit_1173085",
+      "source_ring": 0,
+      "source_segment": 216
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        662753.1611179118,
+        4392163.023661405
+      ],
+      "gap_edge": 16,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        662753.1611179118,
+        4392163.023661405
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 8582
+    },
+    {
+      "direct_intersection_equals_four_way_output": false,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        664101.4773363356,
+        4392059.0631824555
+      ],
+      "gap_edge": 15,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        1.0,
+        0.0
+      ],
+      "output_xy": [
+        664101.4773363357,
+        4392059.0631824555
+      ],
+      "source_key": "ign_adminunit_1173085",
+      "source_ring": 0,
+      "source_segment": 228
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        667398.8434060555,
+        4392076.677242908
+      ],
+      "gap_edge": 14,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        667398.8434060555,
+        4392076.677242908
+      ],
+      "source_key": "ign_adminunit_1172975",
+      "source_ring": 0,
+      "source_segment": 12
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        669349.6778222121,
+        4392783.645425959
+      ],
+      "gap_edge": 14,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        669349.6778222121,
+        4392783.645425959
+      ],
+      "source_key": "ign_adminunit_1172975",
+      "source_ring": 0,
+      "source_segment": 29
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        669349.678615505,
+        4392783.645713442
+      ],
+      "gap_edge": 14,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        669349.678615505,
+        4392783.645713442
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 8525
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        669673.1238573821,
+        4392900.8599132085
+      ],
+      "gap_edge": 14,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        669673.1238573821,
+        4392900.8599132085
+      ],
+      "source_key": "ign_adminunit_1172975",
+      "source_ring": 0,
+      "source_segment": 32
+    },
+    {
+      "direct_intersection_equals_four_way_output": false,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        669990.1008806186,
+        4393015.730077652
+      ],
+      "gap_edge": 14,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        6.0,
+        0.0
+      ],
+      "output_xy": [
+        669990.1008806193,
+        4393015.730077652
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 8519
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        670223.183145638,
+        4393100.197392785
+      ],
+      "gap_edge": 14,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        670223.183145638,
+        4393100.197392785
+      ],
+      "source_key": "ign_adminunit_1172975",
+      "source_ring": 0,
+      "source_segment": 40
+    },
+    {
+      "direct_intersection_equals_four_way_output": false,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        670819.3066784441,
+        4394553.947883799
+      ],
+      "gap_edge": 13,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        -2.0,
+        -1.0
+      ],
+      "output_xy": [
+        670819.3066784439,
+        4394553.947883798
+      ],
+      "source_key": "ign_adminunit_1172975",
+      "source_ring": 0,
+      "source_segment": 68
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        670819.3067268993,
+        4394553.948003216
+      ],
+      "gap_edge": 13,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        670819.3067268993,
+        4394553.948003216
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 8489
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        671147.108284568,
+        4396013.420376586
+      ],
+      "gap_edge": 12,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        671147.108284568,
+        4396013.420376586
+      ],
+      "source_key": "ign_adminunit_1172975",
+      "source_ring": 0,
+      "source_segment": 94
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        671964.6974522352,
+        4399814.791502549
+      ],
+      "gap_edge": 12,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        671964.6974522352,
+        4399814.791502549
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 8388
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        672019.0390237698,
+        4400165.423488168
+      ],
+      "gap_edge": 11,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        672019.0390237698,
+        4400165.423488168
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 8380
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        672019.0390305552,
+        4400165.423543673
+      ],
+      "gap_edge": 11,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        672019.0390305552,
+        4400165.423543673
+      ],
+      "source_key": "ign_adminunit_1172975",
+      "source_ring": 0,
+      "source_segment": 177
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        672064.4950931978,
+        4400537.255652989
+      ],
+      "gap_edge": 11,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        672064.4950931978,
+        4400537.255652989
+      ],
+      "source_key": "ign_adminunit_1172975",
+      "source_ring": 0,
+      "source_segment": 184
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        672138.9787529061,
+        4406897.9395664595
+      ],
+      "gap_edge": 8,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        672138.9787529061,
+        4406897.9395664595
+      ],
+      "source_key": "ign_adminunit_1172975",
+      "source_ring": 0,
+      "source_segment": 299
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        672138.9789200278,
+        4406897.940301707
+      ],
+      "gap_edge": 8,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        672138.9789200278,
+        4406897.940301707
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 8257
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        672273.3493129234,
+        4402245.690139951
+      ],
+      "gap_edge": 11,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        672273.3493129234,
+        4402245.690139951
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 8347
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        672274.8881130292,
+        4407495.868727685
+      ],
+      "gap_edge": 8,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        672274.8881130292,
+        4407495.868727685
+      ],
+      "source_key": "ign_adminunit_1172975",
+      "source_ring": 0,
+      "source_segment": 312
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        672274.8882544809,
+        4407495.8693499975
+      ],
+      "gap_edge": 8,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        672274.8882544809,
+        4407495.8693499975
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 8244
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        672360.5061994072,
+        4402958.636379872
+      ],
+      "gap_edge": 11,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        672360.5061994072,
+        4402958.636379872
+      ],
+      "source_key": "ign_adminunit_1172975",
+      "source_ring": 0,
+      "source_segment": 230
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        672360.50642592,
+        4402958.638232755
+      ],
+      "gap_edge": 11,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        672360.50642592,
+        4402958.638232755
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 8326
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        672533.6424604552,
+        4408634.250733013
+      ],
+      "gap_edge": 8,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        672533.6424604552,
+        4408634.250733013
+      ],
+      "source_key": "ign_adminunit_1172975",
+      "source_ring": 0,
+      "source_segment": 338
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        673277.44497873,
+        4404473.971981337
+      ],
+      "gap_edge": 10,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        673277.44497873,
+        4404473.971981337
+      ],
+      "source_key": "ign_adminunit_1172975",
+      "source_ring": 0,
+      "source_segment": 253
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        673277.4453018318,
+        4404473.9724809695
+      ],
+      "gap_edge": 10,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        673277.4453018318,
+        4404473.9724809695
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 8303
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        673573.1070481341,
+        4410013.961502389
+      ],
+      "gap_edge": 7,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        673573.1070481341,
+        4410013.961502389
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 8174
+    },
+    {
+      "direct_intersection_equals_four_way_output": false,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        674424.3799428628,
+        4410287.328970033
+      ],
+      "gap_edge": 7,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        2.0,
+        0.0
+      ],
+      "output_xy": [
+        674424.379942863,
+        4410287.328970033
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 8142
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        674513.1923278141,
+        4410315.849103728
+      ],
+      "gap_edge": 7,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        674513.1923278141,
+        4410315.849103728
+      ],
+      "source_key": "ign_adminunit_1172975",
+      "source_ring": 0,
+      "source_segment": 420
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        674518.3833674169,
+        4410317.516091318
+      ],
+      "gap_edge": 7,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        674518.3833674169,
+        4410317.516091318
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 8139
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        674585.8939420775,
+        4410339.195619644
+      ],
+      "gap_edge": 7,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        674585.8939420775,
+        4410339.195619644
+      ],
+      "source_key": "ign_adminunit_1172975",
+      "source_ring": 0,
+      "source_segment": 422
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        675625.1519318684,
+        4410798.91139761
+      ],
+      "gap_edge": 6,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        675625.1519318684,
+        4410798.91139761
+      ],
+      "source_key": "ign_adminunit_1172975",
+      "source_ring": 0,
+      "source_segment": 448
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        675625.1522043222,
+        4410798.911910494
+      ],
+      "gap_edge": 6,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        675625.1522043222,
+        4410798.911910494
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 8111
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        676005.6328190555,
+        4411515.152649823
+      ],
+      "gap_edge": 6,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        676005.6328190555,
+        4411515.152649823
+      ],
+      "source_key": "ign_adminunit_1172975",
+      "source_ring": 0,
+      "source_segment": 467
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        676821.3415543184,
+        4413050.694291099
+      ],
+      "gap_edge": 6,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        676821.3415543184,
+        4413050.694291099
+      ],
+      "source_key": "ign_adminunit_1172975",
+      "source_ring": 0,
+      "source_segment": 512
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        677134.6915604367,
+        4413640.564132978
+      ],
+      "gap_edge": 6,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        677134.6915604367,
+        4413640.564132978
+      ],
+      "source_key": "ign_adminunit_1172975",
+      "source_ring": 0,
+      "source_segment": 520
+    },
+    {
+      "direct_intersection_equals_four_way_output": false,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        677222.5411056989,
+        4413725.975911818
+      ],
+      "gap_edge": 5,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        3.0,
+        0.0
+      ],
+      "output_xy": [
+        677222.5411056993,
+        4413725.975911818
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 8041
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        678228.5396251894,
+        4414115.208315051
+      ],
+      "gap_edge": 5,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        678228.5396251894,
+        4414115.208315051
+      ],
+      "source_key": "ign_adminunit_1172975",
+      "source_ring": 0,
+      "source_segment": 533
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        678607.0476167923,
+        4436778.457655169
+      ],
+      "gap_edge": 57,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        678607.0476167923,
+        4436778.457655169
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 7598
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        678811.0201380161,
+        4420808.320799679
+      ],
+      "gap_edge": 2,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        678811.0201380161,
+        4420808.320799679
+      ],
+      "source_key": "ign_adminunit_1173184",
+      "source_ring": 0,
+      "source_segment": 140
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        678865.4317756485,
+        4420736.9372554235
+      ],
+      "gap_edge": 2,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        678865.4317756485,
+        4420736.9372554235
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 7898
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        679109.4863796444,
+        4415397.673034859
+      ],
+      "gap_edge": 4,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        679109.4863796444,
+        4415397.673034859
+      ],
+      "source_key": "ign_adminunit_1173184",
+      "source_ring": 0,
+      "source_segment": 29
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        679333.2539423102,
+        4415836.9692578465
+      ],
+      "gap_edge": 3,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        679333.2539423102,
+        4415836.9692578465
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 7991
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        679333.4172672199,
+        4415843.074178659
+      ],
+      "gap_edge": 3,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        679333.4172672199,
+        4415843.074178659
+      ],
+      "source_key": "ign_adminunit_1173184",
+      "source_ring": 0,
+      "source_segment": 40
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        679370.1413397494,
+        4417215.78306449
+      ],
+      "gap_edge": 3,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        679370.1413397494,
+        4417215.78306449
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 7965
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        679370.1413533414,
+        4417215.7835725425
+      ],
+      "gap_edge": 3,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        679370.1413533414,
+        4417215.7835725425
+      ],
+      "source_key": "ign_adminunit_1173184",
+      "source_ring": 0,
+      "source_segment": 69
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        679372.8776274435,
+        4417318.062745721
+      ],
+      "gap_edge": 3,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        679372.8776274435,
+        4417318.062745721
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 7962
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        679405.9599462084,
+        4418554.64653952
+      ],
+      "gap_edge": 3,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        679405.9599462084,
+        4418554.64653952
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 7935
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        679423.1705641747,
+        4419197.962124791
+      ],
+      "gap_edge": 3,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        679423.1705641747,
+        4419197.962124791
+      ],
+      "source_key": "ign_adminunit_1173184",
+      "source_ring": 0,
+      "source_segment": 109
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        679434.7251197762,
+        4419629.859789007
+      ],
+      "gap_edge": 3,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        679434.7251197762,
+        4419629.859789007
+      ],
+      "source_key": "ign_adminunit_1173184",
+      "source_ring": 0,
+      "source_segment": 117
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        680481.4229171817,
+        4434733.2111139465
+      ],
+      "gap_edge": 60,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        680481.4229171817,
+        4434733.2111139465
+      ],
+      "source_key": "ign_adminunit_1173031",
+      "source_ring": 0,
+      "source_segment": 705
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        680498.0369296018,
+        4434719.390083563
+      ],
+      "gap_edge": 60,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        680498.0369296018,
+        4434719.390083563
+      ],
+      "source_key": "ign_adminunit_1173031",
+      "source_ring": 0,
+      "source_segment": 704
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        680551.2724451115,
+        4427325.030800373
+      ],
+      "gap_edge": 0,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        680551.2724451115,
+        4427325.030800373
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 7765
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        680574.2749017678,
+        4426166.898963057
+      ],
+      "gap_edge": 0,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        680574.2749017678,
+        4426166.898963057
+      ],
+      "source_key": "ign_adminunit_1173184",
+      "source_ring": 0,
+      "source_segment": 252
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        680596.285194818,
+        4425058.720757964
+      ],
+      "gap_edge": 0,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        680596.285194818,
+        4425058.720757964
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 7809
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        680599.0026486592,
+        4427837.333233465
+      ],
+      "gap_edge": 64,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        680599.0026486592,
+        4427837.333233465
+      ],
+      "source_key": "ign_adminunit_1173184",
+      "source_ring": 0,
+      "source_segment": 290
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        680599.0026576626,
+        4427837.333252002
+      ],
+      "gap_edge": 64,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        680599.0026576626,
+        4427837.333252002
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 7755
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        680607.5937266067,
+        4424489.356759438
+      ],
+      "gap_edge": 0,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        680607.5937266067,
+        4424489.356759438
+      ],
+      "source_key": "ign_adminunit_1173184",
+      "source_ring": 0,
+      "source_segment": 221
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        680608.4952173576,
+        4424443.9683404835
+      ],
+      "gap_edge": 0,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        680608.4952173576,
+        4424443.9683404835
+      ],
+      "source_key": "ign_adminunit_1173184",
+      "source_ring": 0,
+      "source_segment": 220
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        680787.2562402386,
+        4434462.004292706
+      ],
+      "gap_edge": 61,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        680787.2562402386,
+        4434462.004292706
+      ],
+      "source_key": "ign_adminunit_1173031",
+      "source_ring": 0,
+      "source_segment": 697
+    },
+    {
+      "direct_intersection_equals_four_way_output": false,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        680993.8871120298,
+        4433167.390935089
+      ],
+      "gap_edge": 61,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        -1.0,
+        1.0
+      ],
+      "output_xy": [
+        680993.8871120297,
+        4433167.39093509
+      ],
+      "source_key": "ign_adminunit_1173031",
+      "source_ring": 0,
+      "source_segment": 679
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        681168.018392173,
+        4432076.398677748
+      ],
+      "gap_edge": 61,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        681168.018392173,
+        4432076.398677748
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 7686
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        681256.9358397833,
+        4431836.920107473
+      ],
+      "gap_edge": 62,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        681256.9358397833,
+        4431836.920107473
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 7691
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        681591.6649678877,
+        4429880.988064407
+      ],
+      "gap_edge": 64,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        681591.6649678877,
+        4429880.988064407
+      ],
+      "source_key": "ign_adminunit_1173184",
+      "source_ring": 0,
+      "source_segment": 322
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        681592.9181156214,
+        4429883.567996546
+      ],
+      "gap_edge": 64,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        681592.9181156214,
+        4429883.567996546
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 7727
+    },
+    {
+      "direct_intersection_equals_four_way_output": true,
+      "direct_original_segments_intersection_type": "Point",
+      "direct_original_segments_intersection_xy": [
+        682050.8210117049,
+        4430977.083988054
+      ],
+      "gap_edge": 62,
+      "output_minus_nearest_rounded_exact_intersection_in_ulp": [
+        0.0,
+        0.0
+      ],
+      "output_xy": [
+        682050.8210117049,
+        4430977.083988054
+      ],
+      "source_key": "dgt_0505",
+      "source_ring": 0,
+      "source_segment": 7708
+    }
+  ]
+}

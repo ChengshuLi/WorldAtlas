@@ -1,0 +1,11 @@
+# GEO6 physical-water handover (2026-10-06)
+
+PR #1167 has merged at `f6ddb61a853a488901af5cad6c83de5b7cfa7600` (reported merge time 2026-10-06T17:54:54Z; successful queue run 37506918197). An actual merged-tree readback compared all 65 paths against the PR file list and verified every downloaded Git blob SHA. The readback covers 1,783,046 bytes and is preserved at `pr1167-merged-65file-readback.json` (SHA-256 `c5295e23513ad22c406354304f9d44b117d3c0783b15bb29bc057a6777011737`).
+
+The assigned local author checkout remains at `4dee07e9cb990bed4b069b9c7ab499f5de9ebac7` on `geography/physical-water-prt-esp-20261006`; its tracked worktree was clean at handover. The merged commit is not present in that checkout’s local object database. No attempt was made to update or repurpose the checkout.
+
+Issue #1163 remains open for any future bounded work. The prior claim under worker `01a11197-62f9-7fd3-b334-f810b077601a`, claim `d9fdb763-352a-4a3e-932b-f57c691c5624`, was released through the issue-claims workflow at `2026-10-06T18:00:20.347Z`; the resulting receipt is `issue-1163-release-receipt.json` (request `37f5fb4f-915a-4cf7-9e53-ca98f31d5ce6`, accepted=True, workflow `https://github.com/ChengshuLi/WorldAtlas/actions/runs/37507883792`). The claim is now inactive. No PR2 was started or submitted.
+
+The private `pr2-source-addendum-staging-plan/` folder and source response cache are preserved as exploratory/preparation material, not accepted evidence or a ready-to-merge change. A future owner must re-read the current issue contract and repository guidance, establish a new distinct claim/branch, check evidence against current `main`, and independently decide whether to reuse any of this material. Existing comparisons preserve limits: official hydrography is contextual feature evidence, not a water mask or wetness observation; line centerlines do not supply surveyed channel widths; planning-cycle dates do not establish when water was present; no territorial ownership or legal boundary conclusion follows. No geometry classification, source approval, or issue completion is claimed here.
+
+`cache-preservation-manifest.json` inventories the other files in this private directory by relative path, byte count, and SHA-256. The manifest excludes itself to avoid a self-hash cycle; its own SHA-256 is recorded separately.

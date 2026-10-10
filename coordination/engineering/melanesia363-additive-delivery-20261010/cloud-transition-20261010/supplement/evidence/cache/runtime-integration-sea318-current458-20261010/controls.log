@@ -1,0 +1,55 @@
+{
+  "scope": "Extracted literal schema/premise boundary only; no producer, source/GIS/native operator or current-reader issuance",
+  "positives": 2,
+  "refusals": 10,
+  "results": [
+    {
+      "name": "Actual BRN complete original source/physical/query/current-target",
+      "result": "PASS"
+    },
+    {
+      "name": "Original disjoint query0 remains disjoint; query9 alone covers",
+      "result": "PASS"
+    },
+    {
+      "name": "Foreign accepted batch",
+      "result": "REFUSE"
+    },
+    {
+      "name": "Missing original query",
+      "result": "REFUSE"
+    },
+    {
+      "name": "Query metadata hash drift",
+      "result": "REFUSE"
+    },
+    {
+      "name": "Original physical inverse drift",
+      "result": "REFUSE"
+    },
+    {
+      "name": "Whole candidate geometry drift",
+      "result": "REFUSE"
+    },
+    {
+      "name": "Missing full-source fit",
+      "result": "REFUSE"
+    },
+    {
+      "name": "Whole completion cannot be minted",
+      "result": "REFUSE"
+    },
+    {
+      "name": "Original target preimage SHA drift",
+      "result": "REFUSE"
+    },
+    {
+      "name": "Current target parent drift",
+      "result": "REFUSE"
+    },
+    {
+      "name": "Nonzero contradictory residual",
+      "result": "REFUSE"
+    }
+  ]
+}

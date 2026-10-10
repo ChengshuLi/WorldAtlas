@@ -1,0 +1,193 @@
+{
+  "status": "CACHE-ONLY reviewable adapter and unissued BRN request; no producer/qualification/native execution",
+  "issue": 1641,
+  "original_batch": "gap-operational-batch:0393f64c9f8549bcfca1ace9",
+  "accepted_source_commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+  "scope": {
+    "original_components": 318,
+    "families": 122,
+    "priority_cases": 30,
+    "other_components": 288,
+    "positive_intersections": 30,
+    "extra_zero_area_empty_intersections": 15,
+    "cases_with_empty_extras": 11
+  },
+  "artifacts": {
+    "caller-base458.mjs": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/caller-base458.mjs",
+      "bytes": 173128,
+      "sha256": "458b71905508d7557de024419324b48c9b47ca21d95be92a75cf074d2015efce"
+    },
+    "caller-proposed318.mjs": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/caller-proposed318.mjs",
+      "bytes": 188881,
+      "sha256": "853c71ec5d2a6ac755c346f378cc38c60b8122329a177ebae543926c9919c6a7"
+    },
+    "sea318-caller.patch": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/sea318-caller.patch",
+      "bytes": 18009,
+      "sha256": "e2ebdfd1a46dc30c278cd587da7795d80ab8c8dbe2f4fa975d40eea00dfdf7e6"
+    },
+    "sea318-adapter-hunk.mjs": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/sea318-adapter-hunk.mjs",
+      "bytes": 15269,
+      "sha256": "a5431ff6670375528dd58d2a58dfaf88a95ebce9ab47fe9f32baf5a8a5a446e6"
+    },
+    "BRN-source-request-UNISSUED.json": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/BRN-source-request-UNISSUED.json",
+      "bytes": 14976,
+      "sha256": "4968389cc721b8726523e9481271fb78277685e771ce345932ab95ce37f0a8b1"
+    },
+    "BRN-operand-roster.json": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/BRN-operand-roster.json",
+      "bytes": 14415,
+      "sha256": "fad7444a8c891fc92e1a2ca1760b51fd01521daf2f1fa9066a453ebcd0a58c9a"
+    },
+    "BRN-original-query-metadata.json": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/BRN-original-query-metadata.json",
+      "bytes": 3025,
+      "sha256": "360f128bf432ee65835dc2bd7c41a9609a3efbde122299339e2395881fae615f"
+    },
+    "BRN-target-canonical-bindings.json": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/BRN-target-canonical-bindings.json",
+      "bytes": 8189,
+      "sha256": "a44c3b7bcba06935fcd6ef006a4e04bf447316bc22a6f3b018720a0fa8c9d03f"
+    },
+    "BRN-complete-current-target.json": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/BRN-complete-current-target.json",
+      "bytes": 8584,
+      "sha256": "19f92925f2d9c94460644c27b0fc28f90e287a6786f3e0886d05ce67ba00d469"
+    },
+    "literal-boundary-controls-module.mjs": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/literal-boundary-controls-module.mjs",
+      "bytes": 17511,
+      "sha256": "f677d3ba44622f706f52963982e268fc693b88bbd6b7de624993109250b364c6"
+    },
+    "controls.mjs": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/controls.mjs",
+      "bytes": 3421,
+      "sha256": "2d037a48fe3b3b7dafbcab567cb643e936f81252fe97181c34ed58ed59de2eab"
+    },
+    "controls-final.log": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/controls-final.log",
+      "bytes": 1357,
+      "sha256": "a7f7c2117ddc0bcd33f0368397a3ae69f40812d090c430faa1349c8b8b316c5f"
+    },
+    "prospective-accounting.json": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/prospective-accounting.json",
+      "bytes": 1567,
+      "sha256": "658581b0a4549e6d5010c041f7ee7a1983c20b892b7fd7cc506f6f20d7fdbc38"
+    }
+  },
+  "controls": {
+    "scope": "Extracted literal schema/premise boundary only; no producer, source/GIS/native operator or current-reader issuance",
+    "positives": 2,
+    "refusals": 11,
+    "results": [
+      {
+        "name": "Actual BRN complete original source/physical/query/current-target",
+        "result": "PASS"
+      },
+      {
+        "name": "Original disjoint query0 remains disjoint; query9 alone covers",
+        "result": "PASS"
+      },
+      {
+        "name": "Foreign accepted batch",
+        "result": "REFUSE"
+      },
+      {
+        "name": "Missing original query",
+        "result": "REFUSE"
+      },
+      {
+        "name": "Missing original query pointset descriptor",
+        "result": "REFUSE"
+      },
+      {
+        "name": "Query metadata hash drift",
+        "result": "REFUSE"
+      },
+      {
+        "name": "Original physical inverse drift",
+        "result": "REFUSE"
+      },
+      {
+        "name": "Whole candidate geometry drift",
+        "result": "REFUSE"
+      },
+      {
+        "name": "Missing full-source fit",
+        "result": "REFUSE"
+      },
+      {
+        "name": "Whole completion cannot be minted",
+        "result": "REFUSE"
+      },
+      {
+        "name": "Original target preimage SHA drift",
+        "result": "REFUSE"
+      },
+      {
+        "name": "Current target parent drift",
+        "result": "REFUSE"
+      },
+      {
+        "name": "Nonzero contradictory residual",
+        "result": "REFUSE"
+      }
+    ]
+  },
+  "guard_preservation": [
+    "Legacy363/327 predicates/rosters retain their whole byte bodies; only accepted318 roster appended and literal raw005 SOURCE/NATIVE reader dispatch added.",
+    "Unchanged retainedAdministrativeSourcePremises executes all original land, empty-water, hierarchy, query, unique-subject, exact-zero residual, original-current-target hash/parent joins.",
+    "Original report2a5/execution104091 and packed.original_product whole tuple checked; restored delivered bytes are not mislabeled original report bytes.",
+    "Whole query0/9 encoded/decoded bytes authenticated as declared inputs; scalar metadata is an explicit copied ordinary body, joined to original checked query and pointset hashes. Unused large polygon coordinate objects are not parsed.",
+    "No whole-gap completion/native assignment/current shoreline/observation-date/year authority is minted."
+  ],
+  "ordinary_publication_filelist": [
+    {
+      "source": {
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/BRN-original-query-metadata.json",
+        "bytes": 3025,
+        "sha256": "360f128bf432ee65835dc2bd7c41a9609a3efbde122299339e2395881fae615f"
+      },
+      "destination": "coordination/engineering/southeast-asia318-source-rule-delivery-20261010/BRN-original-query-metadata.json"
+    },
+    {
+      "source": {
+        "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/BRN-target-canonical-bindings.json",
+        "bytes": 8189,
+        "sha256": "a44c3b7bcba06935fcd6ef006a4e04bf447316bc22a6f3b018720a0fa8c9d03f"
+      },
+      "destination": "coordination/engineering/southeast-asia318-source-rule-delivery-20261010/BRN-target-canonical-bindings.json"
+    }
+  ],
+  "current_target": {
+    "target_id": "gb:BRN:ADM1:89281809B42057356743122",
+    "owner_index": 10448,
+    "parent_index": 1045,
+    "current_year": "unsupported",
+    "prior_28_unique_target_30_link_joins": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-source30-20261010/current-selected-target-owner-parent-joins.json",
+    "current353_part2_immutable_mode_blob_equal": true
+  },
+  "bf9_combination": {
+    "apply_delta_only_after_native102_bf9": "Do not overwrite sole-author current combined caller with whole proposed318 body.",
+    "exact_later_native_operand_paths": [
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_03503f1fa71e2bf719b13d543e04fe99e56235693c1d1e189df86aa3018406de.json.gz",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/0.json.gz",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/9.json.gz",
+      "coordination/engineering/southeast-asia318-source-rule-delivery-20261010/BRN-original-query-metadata.json",
+      "coordination/engineering/southeast-asia318-source-rule-delivery-20261010/BRN-target-canonical-bindings.json"
+    ],
+    "retention": "For selected SEA raw005 sourceRows only, add these literal row-derived paths to livePaths before decoded/raw release. Keep existing case.source.path for accepted fit. Retained raw bodies stay fully charged.",
+    "extra_parsed_views": "Current source-case maximum covers fit; conservatively charge whole decoded physical-case + metadata-view + target-preimage bodies as parsed views or retain them within explicitly reserved workspace; never silently release a live parsed closure."
+  },
+  "remaining_real_values": [
+    "Sole author combines SEA delta with adopted bf9, freezes actual17 vector; genuine SOURCE/NATIVE programme review/approval required.",
+    "Publish two exact ordinary binding bodies; fill only their currently null commit/blob.",
+    "Bind actual executing HEAD/current353 selector and whole runtime/installed modules/pre-use/current source baseline admission; use stock caps and fresh host/storage guards."
+  ],
+  "operator_invocation_template": "NODE --max-old-space-size=128 --max-semi-space-size=16 scripts/additive-gap-repair.mjs ACTUAL_W ACTUAL_HEAD REQUEST_PATH REQUEST_SHA UNIQUE_DESTINATION; issue through existing stock source supervisor only after genuine whole pre-use admission",
+  "not_ready_for_execution_until_above_values_issued": true
+}

@@ -1,0 +1,560 @@
+{
+  "version": 1,
+  "created_at_utc": "2026-10-06T13:44:24.340478+00:00",
+  "operation": "copy-only private whole-source preservation",
+  "root_workspace_token": "[workspace-ownership-token-omitted]",
+  "originals_retained": true,
+  "private_cache_only": true,
+  "external_publication": false,
+  "authority_or_scientific_approval_inferred": false,
+  "total_source_bytes": 318017746,
+  "files": [
+    {
+      "original_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/koppen-geiger-v3-original.zip",
+      "destination_path": "/Users/chengshuli/world-atlas-workspace/.cache/reference-repair-991-preserved-sources-20261006/bb84453d4541f1a0bc5a804ead83f483c19ce70f16a5197f6d3a7b6a63e65562.zip",
+      "bytes": 130618411,
+      "sha256": "bb84453d4541f1a0bc5a804ead83f483c19ce70f16a5197f6d3a7b6a63e65562",
+      "vintage": "climate v3 exact original used by environment-references-v3",
+      "destination_reused_after_exact_validation": false,
+      "source_and_destination_whole_bytes_verified": true
+    },
+    {
+      "original_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/terrain-original.tif",
+      "destination_path": "/Users/chengshuli/world-atlas-workspace/.cache/reference-repair-991-preserved-sources-20261006/acbb0254a6ecc5464abbdaff63c6e8af42a085ada4eba1c8feb8d40c4fc6414b.tif",
+      "bytes": 61980766,
+      "sha256": "acbb0254a6ecc5464abbdaff63c6e8af42a085ada4eba1c8feb8d40c4fc6414b",
+      "vintage": "terrain exact original used by environment-references-v3",
+      "destination_reused_after_exact_validation": false,
+      "source_and_destination_whole_bytes_verified": true
+    },
+    {
+      "original_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/resolve-original.geojson",
+      "destination_path": "/Users/chengshuli/world-atlas-workspace/.cache/reference-repair-991-preserved-sources-20261006/d473404d20a918bf9bc64b020bda1250ffc93ef6c31e0b2006e837f4f1287aa8.geojson",
+      "bytes": 33197198,
+      "sha256": "d473404d20a918bf9bc64b020bda1250ffc93ef6c31e0b2006e837f4f1287aa8",
+      "vintage": "vegetation exact original recovered from immutable original archive",
+      "destination_reused_after_exact_validation": false,
+      "source_and_destination_whole_bytes_verified": true
+    },
+    {
+      "original_path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/koppen-geiger-original.zip",
+      "destination_path": "/Users/chengshuli/world-atlas-workspace/.cache/reference-repair-991-preserved-sources-20261006/0f43cd0c83a781e29c0e9c43e114f690bb84274bfc78b3dc2c879888b0f60df1.zip",
+      "bytes": 92221371,
+      "sha256": "0f43cd0c83a781e29c0e9c43e114f690bb84274bfc78b3dc2c879888b0f60df1",
+      "vintage": "distinct earlier climate archive; not v3 and not the accepted v3 reference input",
+      "destination_reused_after_exact_validation": false,
+      "source_and_destination_whole_bytes_verified": true
+    }
+  ],
+  "allocator_before": {
+    "root": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827",
+    "registry": "/Users/chengshuli/world-atlas-workspace/WorldAtlas/.git/worldatlas-local-workspaces",
+    "freeBytes": 15775494144,
+    "checkoutBytes": 51681755136,
+    "limits": {
+      "minimumFree": 10737418240,
+      "maximumCheckouts": 53687091200
+    },
+    "entries": [
+      {
+        "worker": "worldatlas-geography-812-20261005-9e9a71",
+        "slot": "work",
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/37978a5cf0940b8fac5ed07886201ac596c9c9e3dab1458f3e731917187feacf/work",
+        "head": "c89bd7384b295da221a76a8dbf375adff431ab0a",
+        "branch": "geography/southeastern-na-south-atlantic-430-20261005-r1",
+        "profile": "sparse",
+        "include": [
+          "data/regional-review/regional-review-2353eb2f714cba0c",
+          "data/world-index.json",
+          "data/hierarchy.json",
+          "data/geography/part-25.json",
+          "data/geography/part-26.json",
+          "data/geography/part-27.json",
+          "data/geography/part-29.json",
+          "data/macro-foundation/regional-handoffs.json.gz",
+          "data/macro-foundation/macro-certificate.json",
+          "data/macro-foundation/approved-boundary-decisions.json",
+          "data/administrative-sources.json",
+          "data/semantic-report.json",
+          "data/geographic-releases/current-manifest.json"
+        ],
+        "reservation": 2147483648,
+        "status": "ready",
+        "createdAt": "2026-10-05T13:31:52.288Z"
+      },
+      {
+        "worker": "01a10893-2a57-72e0-aa08-5c36088d5206",
+        "slot": "work",
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work",
+        "head": "d0cc67eac85038159f88a673acbc39b77ab7461d",
+        "branch": "engineering/iran-pakistan-offline-integration-991-20261006-local22",
+        "profile": "sparse",
+        "include": [
+          "data/geography",
+          "data/world-index.json",
+          "data/hierarchy.json",
+          "data/canonical-grid",
+          "data/geographic-releases",
+          "data/hosted-catalog",
+          "data/macro-foundation",
+          "data/administrative-sources.json",
+          "data/semantic-report.json",
+          "data/native-ownership",
+          "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21",
+          "coordination/engineering/native-grid-fidelity-1010-20261005-local15",
+          "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09",
+          "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10"
+        ],
+        "reservation": 2147483648,
+        "status": "ready",
+        "createdAt": "2026-10-06T09:46:34.810Z"
+      },
+      {
+        "worker": "01a10947-b3d7-7812-8b2f-c5a47e88ccb2",
+        "slot": "work",
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work",
+        "head": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+        "branch": "geography/southeastern-comparator-validity-1148-20261006",
+        "profile": "sparse",
+        "include": [
+          "data/regional-review/southeastern-comparator-validity-427",
+          "data/regional-review/regional-review-599d6fe712bbbcae",
+          "data/geography/part-26.json",
+          "data/geography/part-27.json",
+          "data/world-index.json",
+          "data/hierarchy.json"
+        ],
+        "reservation": 2147483648,
+        "status": "ready",
+        "createdAt": "2026-10-06T12:42:29.062Z"
+      },
+      {
+        "worker": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc",
+        "slot": "work",
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work",
+        "head": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+        "branch": "geography/new-caledonia-valid-province-source-20261005-g0-20261006",
+        "profile": "sparse",
+        "include": [
+          "data/regional-review/new-caledonia-valid-province-source-20261005",
+          "data/regional-review/regional-review-1aa97b490604ea4e",
+          "data/world-index.json",
+          "data/administrative-sources.json",
+          "data/validation/macro-publication-v5.json",
+          "data/macro-foundation/macro-certificate.json",
+          "data/macro-foundation/regional-handoffs.json.gz",
+          "data/macro-foundation/current-membership-inventory.json.gz",
+          "data/hierarchy.json",
+          "data/geography/part-8.json",
+          "data/geography/part-22.json",
+          "data/geography/part-28.json"
+        ],
+        "reservation": 1073741824,
+        "status": "ready",
+        "createdAt": "2026-10-06T12:47:47.354Z"
+      },
+      {
+        "worker": "01a10892-0782-7b13-902c-d8b4db6c155d",
+        "slot": "review",
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/4ef3a08ee2579161518859452f288657c4e3c96d5e549ee4c31356b320522a47/review",
+        "head": "af25bf3e0eb18afb7ab90305727dd0b3bf4e7817",
+        "branch": null,
+        "profile": "sparse",
+        "include": [
+          "data/geography/macro-loose-ends-v5-additions.json",
+          "data/geography/part-0.json",
+          "data/geography/part-1.json",
+          "data/geography/part-10.json",
+          "data/geography/part-11.json",
+          "data/geography/part-12.json",
+          "data/geography/part-13.json",
+          "data/geography/part-14.json",
+          "data/geography/part-15.json",
+          "data/geography/part-16.json",
+          "data/geography/part-17.json",
+          "data/geography/part-18.json",
+          "data/geography/part-19.json",
+          "data/geography/part-2.json",
+          "data/geography/part-20.json",
+          "data/geography/part-21.json",
+          "data/geography/part-22.json",
+          "data/geography/part-23.json",
+          "data/geography/part-24.json",
+          "data/geography/part-25.json",
+          "data/geography/part-26.json",
+          "data/geography/part-27.json",
+          "data/geography/part-28.json",
+          "data/geography/part-29.json",
+          "data/geography/part-3.json",
+          "data/geography/part-30.json",
+          "data/geography/part-31.json",
+          "data/geography/part-32.json",
+          "data/geography/part-33.json",
+          "data/geography/part-4.json",
+          "data/geography/part-5.json",
+          "data/geography/part-6.json",
+          "data/geography/part-7.json",
+          "data/geography/part-8.json",
+          "data/geography/part-9.json",
+          "data/geography/source-restoration-additions.json",
+          "data/hierarchy.json",
+          "data/macro-foundation/current-membership-inventory.json.gz",
+          "data/regional-review/regional-review-d282e62cf0209796",
+          "data/world-index.json"
+        ],
+        "reservation": 1073741824,
+        "status": "ready",
+        "createdAt": "2026-10-06T13:42:54.072Z"
+      }
+    ],
+    "worktrees": [
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas",
+        "bytes": 16698675200,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work",
+        "bytes": 87580672,
+        "managed": true
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/37978a5cf0940b8fac5ed07886201ac596c9c9e3dab1458f3e731917187feacf/work",
+        "bytes": 103530496,
+        "managed": true
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work",
+        "bytes": 7504646144,
+        "managed": true
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/4ef3a08ee2579161518859452f288657c4e3c96d5e549ee4c31356b320522a47/review",
+        "bytes": 252059648,
+        "managed": true
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work",
+        "bytes": 98115584,
+        "managed": true
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas-cloudflare",
+        "bytes": 502992896,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas-cloudflare-deploy",
+        "bytes": 283660288,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas-cloudflare-public",
+        "bytes": 283856896,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas-compact-recovery",
+        "bytes": 22663168,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas-current-recovery",
+        "bytes": 22663168,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas-export-pages",
+        "bytes": 3819823104,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas-geography-457",
+        "bytes": 3555745792,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas-geography-897",
+        "bytes": 3493232640,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas-membership-storage",
+        "bytes": 502767616,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas-ownership-generation",
+        "bytes": 2567585792,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas-publisher-main",
+        "bytes": 16527360,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas/.worldatlas-workspaces/8c86b01772c1c827/1154-g0-20261006/work",
+        "bytes": 5964464128,
+        "managed": false
+      }
+    ]
+  },
+  "allocator_after": {
+    "root": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827",
+    "registry": "/Users/chengshuli/world-atlas-workspace/WorldAtlas/.git/worldatlas-local-workspaces",
+    "freeBytes": 15457001472,
+    "checkoutBytes": 51681755136,
+    "limits": {
+      "minimumFree": 10737418240,
+      "maximumCheckouts": 53687091200
+    },
+    "entries": [
+      {
+        "worker": "worldatlas-geography-812-20261005-9e9a71",
+        "slot": "work",
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/37978a5cf0940b8fac5ed07886201ac596c9c9e3dab1458f3e731917187feacf/work",
+        "head": "c89bd7384b295da221a76a8dbf375adff431ab0a",
+        "branch": "geography/southeastern-na-south-atlantic-430-20261005-r1",
+        "profile": "sparse",
+        "include": [
+          "data/regional-review/regional-review-2353eb2f714cba0c",
+          "data/world-index.json",
+          "data/hierarchy.json",
+          "data/geography/part-25.json",
+          "data/geography/part-26.json",
+          "data/geography/part-27.json",
+          "data/geography/part-29.json",
+          "data/macro-foundation/regional-handoffs.json.gz",
+          "data/macro-foundation/macro-certificate.json",
+          "data/macro-foundation/approved-boundary-decisions.json",
+          "data/administrative-sources.json",
+          "data/semantic-report.json",
+          "data/geographic-releases/current-manifest.json"
+        ],
+        "reservation": 2147483648,
+        "status": "ready",
+        "createdAt": "2026-10-05T13:31:52.288Z"
+      },
+      {
+        "worker": "01a10893-2a57-72e0-aa08-5c36088d5206",
+        "slot": "work",
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work",
+        "head": "d0cc67eac85038159f88a673acbc39b77ab7461d",
+        "branch": "engineering/iran-pakistan-offline-integration-991-20261006-local22",
+        "profile": "sparse",
+        "include": [
+          "data/geography",
+          "data/world-index.json",
+          "data/hierarchy.json",
+          "data/canonical-grid",
+          "data/geographic-releases",
+          "data/hosted-catalog",
+          "data/macro-foundation",
+          "data/administrative-sources.json",
+          "data/semantic-report.json",
+          "data/native-ownership",
+          "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21",
+          "coordination/engineering/native-grid-fidelity-1010-20261005-local15",
+          "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09",
+          "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10"
+        ],
+        "reservation": 2147483648,
+        "status": "ready",
+        "createdAt": "2026-10-06T09:46:34.810Z"
+      },
+      {
+        "worker": "01a10947-b3d7-7812-8b2f-c5a47e88ccb2",
+        "slot": "work",
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work",
+        "head": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+        "branch": "geography/southeastern-comparator-validity-1148-20261006",
+        "profile": "sparse",
+        "include": [
+          "data/regional-review/southeastern-comparator-validity-427",
+          "data/regional-review/regional-review-599d6fe712bbbcae",
+          "data/geography/part-26.json",
+          "data/geography/part-27.json",
+          "data/world-index.json",
+          "data/hierarchy.json"
+        ],
+        "reservation": 2147483648,
+        "status": "ready",
+        "createdAt": "2026-10-06T12:42:29.062Z"
+      },
+      {
+        "worker": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc",
+        "slot": "work",
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work",
+        "head": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+        "branch": "geography/new-caledonia-valid-province-source-20261005-g0-20261006",
+        "profile": "sparse",
+        "include": [
+          "data/regional-review/new-caledonia-valid-province-source-20261005",
+          "data/regional-review/regional-review-1aa97b490604ea4e",
+          "data/world-index.json",
+          "data/administrative-sources.json",
+          "data/validation/macro-publication-v5.json",
+          "data/macro-foundation/macro-certificate.json",
+          "data/macro-foundation/regional-handoffs.json.gz",
+          "data/macro-foundation/current-membership-inventory.json.gz",
+          "data/hierarchy.json",
+          "data/geography/part-8.json",
+          "data/geography/part-22.json",
+          "data/geography/part-28.json"
+        ],
+        "reservation": 1073741824,
+        "status": "ready",
+        "createdAt": "2026-10-06T12:47:47.354Z"
+      },
+      {
+        "worker": "01a10892-0782-7b13-902c-d8b4db6c155d",
+        "slot": "review",
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/4ef3a08ee2579161518859452f288657c4e3c96d5e549ee4c31356b320522a47/review",
+        "head": "af25bf3e0eb18afb7ab90305727dd0b3bf4e7817",
+        "branch": null,
+        "profile": "sparse",
+        "include": [
+          "data/geography/macro-loose-ends-v5-additions.json",
+          "data/geography/part-0.json",
+          "data/geography/part-1.json",
+          "data/geography/part-10.json",
+          "data/geography/part-11.json",
+          "data/geography/part-12.json",
+          "data/geography/part-13.json",
+          "data/geography/part-14.json",
+          "data/geography/part-15.json",
+          "data/geography/part-16.json",
+          "data/geography/part-17.json",
+          "data/geography/part-18.json",
+          "data/geography/part-19.json",
+          "data/geography/part-2.json",
+          "data/geography/part-20.json",
+          "data/geography/part-21.json",
+          "data/geography/part-22.json",
+          "data/geography/part-23.json",
+          "data/geography/part-24.json",
+          "data/geography/part-25.json",
+          "data/geography/part-26.json",
+          "data/geography/part-27.json",
+          "data/geography/part-28.json",
+          "data/geography/part-29.json",
+          "data/geography/part-3.json",
+          "data/geography/part-30.json",
+          "data/geography/part-31.json",
+          "data/geography/part-32.json",
+          "data/geography/part-33.json",
+          "data/geography/part-4.json",
+          "data/geography/part-5.json",
+          "data/geography/part-6.json",
+          "data/geography/part-7.json",
+          "data/geography/part-8.json",
+          "data/geography/part-9.json",
+          "data/geography/source-restoration-additions.json",
+          "data/hierarchy.json",
+          "data/macro-foundation/current-membership-inventory.json.gz",
+          "data/regional-review/regional-review-d282e62cf0209796",
+          "data/world-index.json"
+        ],
+        "reservation": 1073741824,
+        "status": "ready",
+        "createdAt": "2026-10-06T13:42:54.072Z"
+      }
+    ],
+    "worktrees": [
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas",
+        "bytes": 16698675200,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work",
+        "bytes": 87580672,
+        "managed": true
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/37978a5cf0940b8fac5ed07886201ac596c9c9e3dab1458f3e731917187feacf/work",
+        "bytes": 103530496,
+        "managed": true
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work",
+        "bytes": 7504646144,
+        "managed": true
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/4ef3a08ee2579161518859452f288657c4e3c96d5e549ee4c31356b320522a47/review",
+        "bytes": 252059648,
+        "managed": true
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work",
+        "bytes": 98115584,
+        "managed": true
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas-cloudflare",
+        "bytes": 502992896,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas-cloudflare-deploy",
+        "bytes": 283660288,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas-cloudflare-public",
+        "bytes": 283856896,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas-compact-recovery",
+        "bytes": 22663168,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas-current-recovery",
+        "bytes": 22663168,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas-export-pages",
+        "bytes": 3819823104,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas-geography-457",
+        "bytes": 3555745792,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas-geography-897",
+        "bytes": 3493232640,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas-membership-storage",
+        "bytes": 502767616,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas-ownership-generation",
+        "bytes": 2567585792,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas-publisher-main",
+        "bytes": 16527360,
+        "managed": false
+      },
+      {
+        "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas/.worldatlas-workspaces/8c86b01772c1c827/1154-g0-20261006/work",
+        "bytes": 5964464128,
+        "managed": false
+      }
+    ]
+  },
+  "conservative_projected_before_free_bytes": 15456427822,
+  "conservative_projected_before_storage_bytes": 52000821458,
+  "note": "Shared-cache copy is outside managed checkout. Earlier climate archive preserved distinctly; never relabeled v3. No original or author cache deleted or modified."
+}

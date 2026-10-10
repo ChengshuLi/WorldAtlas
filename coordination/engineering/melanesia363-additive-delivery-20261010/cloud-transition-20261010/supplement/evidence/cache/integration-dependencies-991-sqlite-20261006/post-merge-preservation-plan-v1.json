@@ -1,0 +1,955 @@
+{
+  "version": 1,
+  "created_at_utc": "2026-10-06T14:02:29.984346+00:00",
+  "read_only_preflight": true,
+  "proposed_destination_root": "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44",
+  "destination_root_exists": false,
+  "database_files": [
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/data/atlas.sqlite",
+      "destination": "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44/databases/063d65d035e7c68c95caf137a59d9ed9465b27ba7a362694f5209eea82d5e47d.sqlite",
+      "original_name": "atlas.sqlite",
+      "bytes": 406265856,
+      "sha256": "063d65d035e7c68c95caf137a59d9ed9465b27ba7a362694f5209eea82d5e47d"
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/data/atlas.sqlite.hierarchy-v3-backup-1791291334886",
+      "destination": "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44/databases/e16544065b6ca13a19f504bb40244e9458943523d4a744769a9714e6afe43e77.sqlite",
+      "original_name": "atlas.sqlite.hierarchy-v3-backup-1791291334886",
+      "bytes": 401096704,
+      "sha256": "e16544065b6ca13a19f504bb40244e9458943523d4a744769a9714e6afe43e77"
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/data/atlas.sqlite.hierarchy-v3-backup-1791291464005",
+      "destination": "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44/databases/7f78d66b63b6797c46b64a0616ffe07ae3b6e10e3b8191f5b4c2bff1ade38002.sqlite",
+      "original_name": "atlas.sqlite.hierarchy-v3-backup-1791291464005",
+      "bytes": 401096704,
+      "sha256": "7f78d66b63b6797c46b64a0616ffe07ae3b6e10e3b8191f5b4c2bff1ade38002"
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/data/atlas.sqlite.hierarchy-v3-backup-1791291528583",
+      "destination": "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44/databases/9dfa627736faa512b3b5b542c737fb53f108836a6d9b33b899fcae766098c54c.sqlite",
+      "original_name": "atlas.sqlite.hierarchy-v3-backup-1791291528583",
+      "bytes": 401096704,
+      "sha256": "9dfa627736faa512b3b5b542c737fb53f108836a6d9b33b899fcae766098c54c"
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/data/atlas.sqlite.topology-backup-1791291343175",
+      "destination": "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44/databases/d82fbef1d4fc38f0f4e22de5ac689e3908b6c12a6a31ae1002a01fcde8b9e035.sqlite",
+      "original_name": "atlas.sqlite.topology-backup-1791291343175",
+      "bytes": 401063936,
+      "sha256": "d82fbef1d4fc38f0f4e22de5ac689e3908b6c12a6a31ae1002a01fcde8b9e035"
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/data/atlas.sqlite.topology-backup-1791291468759",
+      "destination": "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44/databases/f217ccbd7dc2a2c233311efa6603eaa709d5abc8ba6595471c8041fb21bae0f1.sqlite",
+      "original_name": "atlas.sqlite.topology-backup-1791291468759",
+      "bytes": 401063936,
+      "sha256": "f217ccbd7dc2a2c233311efa6603eaa709d5abc8ba6595471c8041fb21bae0f1"
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/data/atlas.sqlite.topology-backup-1791291540512",
+      "destination": "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44/databases/852353068156f2ad05c1882f200d5aeafec12414963558958a1b8ee107e5dcd6.sqlite",
+      "original_name": "atlas.sqlite.topology-backup-1791291540512",
+      "bytes": 401063936,
+      "sha256": "852353068156f2ad05c1882f200d5aeafec12414963558958a1b8ee107e5dcd6"
+    }
+  ],
+  "database_total_bytes": 2812747776,
+  "cache_top_level_inventory": [
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/bootstrap-controls",
+      "destination": "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44/ignored-cache/bootstrap-controls",
+      "regular_files": 0,
+      "logical_bytes": 0,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/build-selection-controls",
+      "destination": "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44/ignored-cache/build-selection-controls",
+      "regular_files": 0,
+      "logical_bytes": 0,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/coverage-vite",
+      "destination": "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44/ignored-cache/coverage-vite",
+      "regular_files": 8,
+      "logical_bytes": 1137856,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/native-dated-browser",
+      "destination": "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44/ignored-cache/native-dated-browser",
+      "regular_files": 8,
+      "logical_bytes": 1138111,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/native-preparer-tests",
+      "destination": "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44/ignored-cache/native-preparer-tests",
+      "regular_files": 0,
+      "logical_bytes": 0,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/native-renderer-controls",
+      "destination": "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44/ignored-cache/native-renderer-controls",
+      "regular_files": 9,
+      "logical_bytes": 1139630,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/package-input-build.json",
+      "destination": "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44/ignored-cache/package-input-build.json",
+      "regular_files": 1,
+      "logical_bytes": 8277,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991",
+      "destination": "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44/ignored-cache/reference-repair-991",
+      "regular_files": 4559,
+      "logical_bytes": 1635266033,
+      "symlinks": [
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/runtime-rasterio-1.4.3-py312-arm64/bin/python3",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/runtime-rasterio-1.4.3-py312-arm64/bin/python",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/runtime-rasterio-1.4.3-py312-arm64/bin/python3.12"
+      ]
+    }
+  ],
+  "reference_cache_inventory": [
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/build-context-image-v1",
+      "classification": "derived snapshot or dependency installation: reproducible in principle; exact-byte reproducibility not audited; preserve in initial move",
+      "regular_files": 154,
+      "logical_bytes": 294805157,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/build-context-image-v3",
+      "classification": "derived snapshot or dependency installation: reproducible in principle; exact-byte reproducibility not audited; preserve in initial move",
+      "regular_files": 154,
+      "logical_bytes": 294807299,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/build-context-image-v4",
+      "classification": "derived snapshot or dependency installation: reproducible in principle; exact-byte reproducibility not audited; preserve in initial move",
+      "regular_files": 154,
+      "logical_bytes": 294807299,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/build-context-relocation-v1.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 291,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/build-selection-tests-v1.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 538,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/certifi-install-report.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 3981,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/ci-405f75ce-watch.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 27908,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/ci-5ae929d0-package",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 99488,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/ci-5ae929d0-regression0-failure.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 0,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/ci-5ae929d0-regression0-job.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 265686,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/ci-5ae929d0-watch.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 4416,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/claim-curated-local22.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 854,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/claim-curated-local22.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 854,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/claim-final23.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 854,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/claim-final23.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 854,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/compressed-audit-build-storage-check.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 9760,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/compressed-coverage-ui-v1.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 2108,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/compressed-coverage-ui-v2.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 362,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/context-dedup-storage-check.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 8626,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/context-part-reuse-v1.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 383,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/continuation-20261006-curated.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 7090,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/coverage-debug-v1.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 2582,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/coverage-debug.mjs",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 5853,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/curated-full-shard-1-v1.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 2292,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/curated-full-shard-2-v1.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 2245,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/curated-pr-body.md",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 2512,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/curated-selection-binding-tests.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 862,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/final-curated-build-v1.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 5181,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/final-curated-build-v2.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 622,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/final-curated-build-v3.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 622,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/final-curated-build-v4.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 622,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/final-curated-build-v5.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 622,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/final-curated-hosted-v1.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 2628,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/final-curated-storage-check.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 11172,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/final-curation-plan.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 29686,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/final-evidence-v1.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 353,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/final-evidence-v2.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 353,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/final-selection-binding-tests.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 863,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/full-coverage-build-storage-check.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 8783,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/full-offline-build-v1.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 984,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/full-offline-build-v2.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 1989,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/full-offline-build-v3.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 622,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/geospatial-install-report.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 42652,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/granularity-v7-canonical-shards.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 157,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/granularity-v7.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 157,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/koppen-geiger-original.zip",
+      "classification": "exact original bytes already copied/verified outside author; retain original in initial move",
+      "regular_files": 1,
+      "logical_bytes": 92221371,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/koppen-geiger-v3-original.zip",
+      "classification": "exact original bytes already copied/verified outside author; retain original in initial move",
+      "regular_files": 1,
+      "logical_bytes": 130618411,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/local-regression-cancellation-v1.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 503,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/native-pixel-audit-v1.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 3923,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/native-pixel-audit-v2.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 3923,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/native-pixel-audit-v3.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 3923,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/native-pixel-audit-v4.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 3923,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/native-render-context-regression-tests-v2.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 715,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/native-render-regression-tests-v1.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 215,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/npm-11.6.2",
+      "classification": "derived snapshot or dependency installation: reproducible in principle; exact-byte reproducibility not audited; preserve in initial move",
+      "regular_files": 2134,
+      "logical_bytes": 14449447,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/offline-browser-v1.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 626,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/offline-browser-v10.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 334,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/offline-browser-v11.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 334,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/offline-browser-v12.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 443,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/offline-browser-v13.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 334,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/offline-browser-v2.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 906,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/offline-browser-v3.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 644,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/offline-browser-v4.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 849,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/offline-browser-v5.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 885,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/offline-browser-v6.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 885,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/offline-browser-v7.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 598,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/offline-browser-v8.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 598,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/offline-browser-v9.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 880,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/original-physical-context-tests-v1.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 559,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/original-physical-context-tests-v2.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 561,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/ownership-before-v1.sqlite",
+      "classification": "local product/baseline snapshot; exact archive correspondence not audited; preserve",
+      "regular_files": 1,
+      "logical_bytes": 8630272,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/ownership-delivery-v1",
+      "classification": "local product/baseline snapshot; exact archive correspondence not audited; preserve",
+      "regular_files": 134,
+      "logical_bytes": 30291935,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/packaged-coverage-probe-v1.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 724,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/packaged-coverage-probe-v2.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 722,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/packaged-coverage-probe-v3.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 226,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/playwright-browsers",
+      "classification": "derived snapshot or dependency installation: reproducible in principle; exact-byte reproducibility not audited; preserve in initial move",
+      "regular_files": 25,
+      "logical_bytes": 207269024,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/playwright-install.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 4861,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/pr1150-actual-github-files-v1.txt",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 28572,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/pr1150-comments-current.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 67277,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/pr1150-current-files-pages.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 1351386,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/pr1150-current-files.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 1351378,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/pr1150-current.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 17891,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/pr1150-files-405-pages.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 1361293,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/pr1150-meta-405.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 18327,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/pr1150-package-failure-v1.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 10769,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/pr1150-progress-v2.md",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 1964,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/pr1150-progress-v3.md",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 1811,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/pr1150-progress.md",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 1297,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/pr1150-regression-failure-v1.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 265646,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/pr1150-regression0-failure-v1.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 0,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/pr1150-review-405-comment.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 68014,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/pr1150-review-current.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 66422,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/pr1150-review-validation-405.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 2095,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/pr1150-review-validation-current.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 1993,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/pr1150-scope-evidence-failure-v1.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 6730,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/queue-405-prepare-job.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 19710,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/queue-405f75ce.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 139,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/rasterio-install-report.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 50130,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/repacked-release-staging-v1.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 359,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/repacked-release-v1.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 716,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/repacked-release-v2.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 716,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/repacked-release-v3.log",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 716,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/repaired-reference-package-v1",
+      "classification": "local product/baseline snapshot; exact archive correspondence not audited; preserve",
+      "regular_files": 1,
+      "logical_bytes": 2017571,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/resolve-original.geojson",
+      "classification": "exact original bytes already copied/verified outside author; retain original in initial move",
+      "regular_files": 1,
+      "logical_bytes": 33197198,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/resolve-provider-candidate-v1.geojson",
+      "classification": "rejected partial provider candidate; unique attempted download, never treat as accepted original; preserve",
+      "regular_files": 1,
+      "logical_bytes": 67108864,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/runtime-rasterio-1.4.3-py312-arm64",
+      "classification": "derived snapshot or dependency installation: reproducible in principle; exact-byte reproducibility not audited; preserve in initial move",
+      "regular_files": 1697,
+      "logical_bytes": 97638058,
+      "symlinks": [
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/runtime-rasterio-1.4.3-py312-arm64/bin/python3",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/runtime-rasterio-1.4.3-py312-arm64/bin/python",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/runtime-rasterio-1.4.3-py312-arm64/bin/python3.12"
+      ]
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/source-preservation-independent-readback-v1.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 2954,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/static-v5-hosted-test-layout.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 82493,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/storage-before-full-build-v3.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 10109,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/storage-before-render-runtime.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 10109,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/storage-check-20261006-context-stage.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 11266,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/storage-check-20261006-ownership.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 9315,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/terrain-original.tif",
+      "classification": "exact original bytes already copied/verified outside author; retain original in initial move",
+      "regular_files": 1,
+      "logical_bytes": 61980766,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/test-scratch",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 0,
+      "logical_bytes": 0,
+      "symlinks": []
+    },
+    {
+      "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/reference-repair-991/world-priority-impact-preflight-v1.json",
+      "classification": "potentially unique local execution/attempt evidence: preserve",
+      "regular_files": 1,
+      "logical_bytes": 10203,
+      "symlinks": []
+    }
+  ],
+  "proposed_cache_move": {
+    "source": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache",
+    "destination": "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44/ignored-cache",
+    "reason": "Conservative preservation of complete ignored cache, including failed attempts and historical snapshots; avoids treating matching factual rows or reproducibility assumptions as disposal authority."
+  },
+  "verification_steps": [
+    "Wait for actual merge confirmation; stop all author-local build/test/browser/server/watch/queue writers before inventory snapshot and moves.",
+    "Run allocator check and verify exact root slot token; require same filesystem for rename, exclusive absent targets, ordinary source paths and no symlink substitution.",
+    "Rehash all seven complete databases against recorded SHA/length and check absence of WAL/journal sidecars; if changed, inventory new vintage and preserve it separately.",
+    "Write exclusive per-file source/destination/length/SHA receipt for all ignored-cache regular files after writers stop; record symlink link-text without following outside author.",
+    "Rename each exact database and the whole ignored cache into proposed private destinations without overwriting; retain all seven distinct vintages.",
+    "Read back destination whole lengths/hashes and complete path inventories, and durably save exclusive final receipt outside author.",
+    "Inspect remaining ignored/untracked files. Remove only verified regenerable node_modules/dist/Vite/pyc artifacts; retain any uncertain file.",
+    "Verify no dirty/untracked/ignored/trust-flag files remain and release exact owned slot from primary checkout using exact token."
+  ],
+  "limits": [
+    "No large files moved/copied/deleted during this preflight.",
+    "Cache sizes are a live inventory, not final immutable snapshot; queue logs can still grow.",
+    "Geographic/archive tables in SQLite have counts only; all seven backups must be retained.",
+    "Outside-cache archive is private handoff storage after task completion, not a new unmanaged worktree or reproduction baseline.",
+    "Stored paths/tokens/private receipts must remain uncommitted."
+  ],
+  "existing_original_source_receipt": "/Users/chengshuli/world-atlas-workspace/.cache/reference-repair-991-preserved-sources-20261006/preservation-receipt-v1.json"
+}

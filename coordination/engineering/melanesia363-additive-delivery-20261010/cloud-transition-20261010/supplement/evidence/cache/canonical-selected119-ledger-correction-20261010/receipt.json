@@ -1,0 +1,171 @@
+{
+  "kind": "bounded-selected119-delivery-accounting-readback-v1",
+  "outcome": "proposal ready; canonical unchanged",
+  "canonical_before": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.cache/global-gap-work-index-20261009/selected-release-decisions.json",
+    "bytes": 673653,
+    "sha256": "1ed2dd800b36a7af9237760238d43727823ee71b1a2d7ad52be16706ffe3269c"
+  },
+  "canonical_after_sha256": "1ed2dd800b36a7af9237760238d43727823ee71b1a2d7ad52be16706ffe3269c",
+  "proposal": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.cache/canonical-selected119-ledger-correction-20261010/proposal.json",
+    "bytes": 55495,
+    "sha256": "1917052e06c350c8aba7155085ea33b67b963ac886ae13c428059aa9d2f7df77"
+  },
+  "actual_merged_commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+  "root_acceptance": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/selected119-changed-consumer-assembly-execution/root-actual-merged-selected119-acceptance.json",
+    "bytes": 4688,
+    "sha256": "a5ce4a020d456d61ac5e729ad9feb892fc935e167c8a086a51dfa747392683dc"
+  },
+  "retained_event": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/selected119-changed-consumer-assembly-execution/exact-id-selected119-delivery-ledger-event.json",
+    "bytes": 5221,
+    "sha256": "2a6d39d86d5cf9075c97b0b9154df4669a99b4f63dd7eb72f35a7e66e1b552e1"
+  },
+  "retained_conservation": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/selected119-changed-consumer-assembly-execution/actual-conservation-readback.json",
+    "bytes": 2352,
+    "sha256": "4e272f4a880fa4c0a693c20fc2cb0ed86b63778e52f42567c947bba27ef801df"
+  },
+  "retained_render_log": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/selected119-changed-consumer-assembly-execution/3ef-reg0-production-render.log",
+    "bytes": 537118,
+    "sha256": "3cd2a5b6d233b4006268eb46b60d7aee916a5b3fb1244680a60d5d0be2ba84b4"
+  },
+  "whole_git_read_pins": [
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/ledger.json",
+      "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+      "mode": "100644",
+      "git_blob_oid": "f60e0296073278432d7f5df3a58211a2dce61e5e",
+      "bytes": 358012,
+      "sha256": "dcffbaf201f4a88cbb3a07475032d55d83836ea5274236839ad88f5872f3316b"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/patch.json",
+      "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+      "mode": "100644",
+      "git_blob_oid": "07268b3f20e1b5d186554effd8f054684e421a29",
+      "bytes": 6479,
+      "sha256": "935bee45ff80ddd217e1dc75ace3ab5bdf339fc0a5b1aa01664204d32f865884"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/selection-sidecar.json",
+      "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+      "mode": "100644",
+      "git_blob_oid": "0b58164984539530c73ec0646378cf2d2c0d5978",
+      "bytes": 3440,
+      "sha256": "4373c949ccb952154834ef4c7cd49241602f0b81a6cc199e5b535fac9cc07c10"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/qualification.json",
+      "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+      "mode": "100644",
+      "git_blob_oid": "9395c695bca9ebd02b1337c2fed2da03458d579a",
+      "bytes": 685,
+      "sha256": "d2b22bbfba9548fdf6cc87002d4d0198d91c0dfccffcab01a41ff00d67a2eb31"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/envelope.json",
+      "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+      "mode": "100644",
+      "git_blob_oid": "106c4e55c83c0e9b052e00f46c0692b8744ff3cd",
+      "bytes": 1421,
+      "sha256": "71d65c3dc340a7be1dfade7fc0a1bc1f5f398515b146afee18fe4995d8d64ae1"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/authority-registry.json",
+      "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+      "mode": "100644",
+      "git_blob_oid": "7bee33b418f2a8998b8c85cf3c3daff902b1146a",
+      "bytes": 6788,
+      "sha256": "3bb2645413ab9a1c45c1939f909cf410dc815b9fa50410053ff8117050fb3387"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/certificate.json",
+      "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+      "mode": "100644",
+      "git_blob_oid": "9a3c3fff92ce1375aeb8aa6037448b8e3a51e4ed",
+      "bytes": 3329,
+      "sha256": "c182a05bc72e182a190a29f7d0bce7442618da64ad0adcad002d08232f5c265c"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/result.json",
+      "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+      "mode": "100644",
+      "git_blob_oid": "e37a964f18d95fe053ace9a264cb9c43e5fdbc05",
+      "bytes": 1549679,
+      "sha256": "d40baba62e2b8ad0276dab8943b0d8a198c55b2bc023bc86ebcdc073bd23b219"
+    },
+    {
+      "path": "data/ownership-selection.json",
+      "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+      "mode": "100644",
+      "git_blob_oid": "0b7033d5af4aa31fb9fe3b2610dbd58d1af5cdb4",
+      "bytes": 1583,
+      "sha256": "4d750ed8f8466d7358642e1195d963cbe0e7c3775afbee1fd99f24399589611a"
+    }
+  ],
+  "five_exact_joins": [
+    {
+      "component_id": "physical-component:1e6775304d377bbcb519ad8721c8d4da5a5f0595bf2ca3e309d4a1a6b65401d3",
+      "phase": "065",
+      "assigned_native_pixels": 35,
+      "target_id": "gb:SLB:ADM1:17018030B21058058503942",
+      "ownerIndex": 39700,
+      "remainder_sha256": "e42bd281064d61f02c69399d0ac87724fc85527ba3665f06f030cf0bc46f1c42",
+      "remainder_empty": false,
+      "source_provenance_preserved": true,
+      "state_unchanged": true
+    },
+    {
+      "component_id": "physical-component:920d9c0c57598d71fac2181fdc6520caf1a3ef661bc798cd2562a6f495e162bd",
+      "phase": "080",
+      "assigned_native_pixels": 23,
+      "target_id": "gb:SLB:ADM1:17018030B19935783635883",
+      "ownerIndex": 39699,
+      "remainder_sha256": "408e9f7ae9fb16a18501baf48be5e4173692d0ac911ba081b49fc10ea861df15",
+      "remainder_empty": false,
+      "source_provenance_preserved": true,
+      "state_unchanged": true
+    },
+    {
+      "component_id": "physical-component:c31b53ea6554bddaaf73ad9f2878c0baa6a1272a05b82531755033d1465a6f4f",
+      "phase": "060",
+      "assigned_native_pixels": 26,
+      "target_id": "gb:SLB:ADM1:17018030B36628097040544",
+      "ownerIndex": 39703,
+      "remainder_sha256": "fd0170bc086a798ff2dd04d544d5c808d25d7a900fcbbade8a9d5f5b66250a00",
+      "remainder_empty": false,
+      "source_provenance_preserved": true,
+      "state_unchanged": true
+    },
+    {
+      "component_id": "physical-component:ec19d620a7a37c4066f4a4dcb639fda20602806054537b3998d8464d718539dc",
+      "phase": "048",
+      "assigned_native_pixels": 15,
+      "target_id": "gb:SLB:ADM1:17018030B8659224027401",
+      "ownerIndex": 39708,
+      "remainder_sha256": "a73e9c42bf71f1348271dfe1f7c9fb5b1b9109410b6f3e712a1fb09c578fd0cd",
+      "remainder_empty": false,
+      "source_provenance_preserved": true,
+      "state_unchanged": true
+    },
+    {
+      "component_id": "physical-component:f55c8e22781c0c1c1fea7916b23d5e003f99ab05cd63fb4fb5a8c7fd6f39d018",
+      "phase": "084",
+      "assigned_native_pixels": 20,
+      "target_id": "gb:SLB:ADM1:17018030B68013150931387",
+      "ownerIndex": 39706,
+      "remainder_sha256": "1a232f961ec8d188e71cc210f47152ad24cac644398bbbceaff4fc7b7c620957",
+      "remainder_empty": false,
+      "source_provenance_preserved": true,
+      "state_unchanged": true
+    }
+  ],
+  "sum_native_pixels": 119,
+  "source_native_operators_executed": 0,
+  "shared_writes": 0,
+  "original_gap_promotion": 0
+}

@@ -1,0 +1,2399 @@
+{
+  "status": "BLOCKED_EXACT_ACCEPTED_CORPUS_SCHEMA_NO_ISSUED_REQUEST",
+  "issue": 1641,
+  "source_batch": "gap-operational-batch:0393f64c9f8549bcfca1ace9",
+  "original_scope": {
+    "components": 318,
+    "families": 122,
+    "priority": 30,
+    "remaining": 288
+  },
+  "accepted_merged_commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+  "artifacts": {
+    "administrative-source-rule-fit.json": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/administrative-source-rule-fit.json",
+      "bytes": 1688243,
+      "sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b"
+    },
+    "component-state-318.json": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/component-state-318.json",
+      "bytes": 505063,
+      "sha256": "8aaa5d4558eb5137775c159ec234d3dc2a9a90ae965aeaaf27086a63d0462cfd"
+    },
+    "family-roster-122.json": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/family-roster-122.json",
+      "bytes": 39180,
+      "sha256": "acb22105b074fefca33b84488d0d0322ebdba3195a3eff4b0421f53668e651ef"
+    },
+    "publication.json": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-sea318-current458-20261010/publication.json",
+      "bytes": 784,
+      "sha256": "1c953504723f4a578095960362c8cba031683d6fc53209acfb7208cff9d674cb"
+    }
+  },
+  "source_observation_correction": {
+    "positive_area_total": 30,
+    "zero_area_empty_extra_total": 15,
+    "cases_with_extras": 11,
+    "additional_positive_intersections": 0
+  },
+  "next_minimum_input_group": {
+    "expected_ids": [
+      "physical-component:03503f1fa71e2bf719b13d543e04fe99e56235693c1d1e189df86aa3018406de"
+    ],
+    "product": "gb:BRN:ADM1",
+    "selection_basis": "Single compatible source-fit case; smallest complete administrative product10409 encoded/34750 decoded; no positive-native-yield claim. Larger productgroups IDN12/PHL9/MMR4/VNM2/THA1/IND1 available after adapter admission.",
+    "source_case": {
+      "compatible_recorded_subject": {
+        "current_hierarchy_descriptor": {
+          "blob": "324575c55f3c2992517446d1ac06bdd806f06573",
+          "bytes": 10164089,
+          "commit": "b2b34087682b9a20e53c72c83f6d53054e09e8cf",
+          "mode": "100644",
+          "path": "data/hierarchy.json",
+          "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+        },
+        "current_hierarchy_row": {
+          "id": "framework:province:brunei-muara:b7213cc1c869",
+          "level": "province",
+          "metadata": {
+            "basis": "Named source administrative unit grouped within this geographic area",
+            "child_count": 1,
+            "framework_status": "retained-reference",
+            "kind": "geographic",
+            "review_reasons": [
+              "Single-child tier: geographic role requires individual review",
+              "Previous reference grouping retained; semantic tier review outstanding"
+            ],
+            "semantic_review": {
+              "action": "open",
+              "boundary_status": "open",
+              "evidence": [
+                {
+                  "inspected_fact": "Current declared purpose: Named source administrative unit grouped within this geographic area; exact current parent framework:area:borneo:f3cde4b889a9. This declaration alone is not semantic approval.",
+                  "title": "gb:BRN:ADM1",
+                  "url": "https://www.geoboundaries.org/"
+                },
+                {
+                  "inspected_fact": "Actual location source gb:BRN:ADM1; role Districts; reference vintage 2011; license Public Domain. Source feature/member identifiers were inspected separately from ADM-level labels.",
+                  "title": "Brunei Darussalam",
+                  "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BRN/ADM1/geoBoundaries-BRN-ADM1.geojson"
+                }
+              ],
+              "rationale": "Actual member audit: 1 locations, roles {'Districts': 1}, source vintages {'2011': 1}. Current declared purpose is Named source administrative unit grouped within this geographic area. Name/source correspondence was checked where a pinned cache exists; that alone does not prove local-scale consistency or full original-parent correspondence.",
+              "remaining_reasons": [
+                "single-location province; assess whether adjacent tiers are coextensive"
+              ]
+            },
+            "source": "gb:BRN:ADM1",
+            "source_url": "https://www.geoboundaries.org/"
+          },
+          "name": "Brunei-Muara",
+          "parent_id": "framework:area:borneo:f3cde4b889a9"
+        },
+        "hierarchy_array_record_ordinal_zero_based": 1543,
+        "parent_geometry_in_hierarchy": false,
+        "record": {
+          "id": "gb:BRN:ADM1:89281809B42057356743122",
+          "original_feature_sha256": "f8228ecc6aba0b643120de763a62147b841d580fac7fcb91ed897af588f9f03c",
+          "original_parent_id": "framework:province:brunei-muara:b7213cc1c869",
+          "reference_year": "2011"
+        },
+        "semantic_review_status": "open"
+      },
+      "component_id": "physical-component:03503f1fa71e2bf719b13d543e04fe99e56235693c1d1e189df86aa3018406de",
+      "country_codes": [
+        "BRN"
+      ],
+      "current_component_candidate": {
+        "candidate_administrative_assignment": null,
+        "candidate_parent_id": null,
+        "component_id": "physical-component:03503f1fa71e2bf719b13d543e04fe99e56235693c1d1e189df86aa3018406de",
+        "containing_source_descriptor": {
+          "blob": "f31ce3d8e216d1bd01c945834c2ee665ffea7554",
+          "bytes": 8387182,
+          "commit": "b2b34087682b9a20e53c72c83f6d53054e09e8cf",
+          "mode": "100644",
+          "path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-000.json",
+          "sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36"
+        },
+        "current_component_source_successor": "7c7cdf2388e0e7200b937c2cfb440b53165d9d98",
+        "current_effective_owner_parent_binding": {
+          "reason": "The full component candidate does not carry a selected current effective-owner or parent binding; Engineering owns selection and native qualification.",
+          "status": "unavailable-from-retained-component-candidate"
+        },
+        "feature": {
+          "geometry": {
+            "coordinates": [
+              [
+                [
+                  115.015798,
+                  4.916409
+                ],
+                [
+                  115.01608874766356,
+                  4.915536757009346
+                ],
+                [
+                  115.01500939814395,
+                  4.91516573061198
+                ],
+                [
+                  115.015798,
+                  4.916409
+                ]
+              ]
+            ],
+            "type": "Polygon"
+          },
+          "id": "physical-component:03503f1fa71e2bf719b13d543e04fe99e56235693c1d1e189df86aa3018406de",
+          "properties": {
+            "administrative_assignment": null,
+            "dateline_connected": false,
+            "diagnostic_nearby_locations": [],
+            "fragment_bindings": [
+              {
+                "feature_sha256": "504743387fb095b68cc3b7bb2cc95657c7cc12eac1b55b93f3b2da301324f40f",
+                "id": "physical-gap:923:70:51d756ed45141561a9765f695bf5f10356be16d037c6464c1f6d5995af09ad29"
+              }
+            ],
+            "measured_fragment_area_sum_m2": 6435.0185772972045,
+            "measured_fragment_count": 1,
+            "positive_area_input_overlap": false,
+            "touches_blocked_tile": false,
+            "touches_domain_boundary": false,
+            "touches_reference_shore": true,
+            "unmeasured_fragment_ids": [],
+            "water_status": "unverified"
+          },
+          "type": "Feature"
+        },
+        "feature_sha256": "599d22dc227ba425d23e190b5fe4ec715fe68dfad522bf4fdce325129f91b4d3",
+        "geometry_sha256": "51d756ed45141561a9765f695bf5f10356be16d037c6464c1f6d5995af09ad29",
+        "record_ordinal_one_based": 1218,
+        "selected_effective_owner_binding": "not-present; engineering-owned",
+        "source_path": "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-000.json"
+      },
+      "family_id": "gap-source-batch:e0d068e5c830a18076154107",
+      "missing_required_premises": [
+        "selected-current-owner-and-owner-parent-binding-remains-engineering-owned",
+        "selected-native-cell-and-uncovered-cell-binding-remains-engineering-owned",
+        "contemporary-physical-class-and-land-water-status-are-unverified",
+        "source-observation-date-and-registration-accuracy-remain-unresolved",
+        "cause-and-repair-authority-remain-unknown"
+      ],
+      "original_administrative_comparison": {
+        "component_minus_source_union": {
+          "geometry": {
+            "coordinates": [],
+            "type": "Polygon"
+          },
+          "geometry_sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02",
+          "geometry_type": "Polygon",
+          "is_empty": true,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 0.0,
+          "planar_length_coordinate_units": 0.0
+        },
+        "descriptor": {
+          "bytes": 1480398,
+          "path": "coordination/engineering/global-source-comparisons-b-package3-20261006/scientific/components-010.json.gz",
+          "sha256": "69423ae7e41146f8149ad4627c42a56bf32dee545539d8d3e8651dc0291796b5",
+          "uncompressed_sha256": "72a54649e3470857d6fdc1ba1a63922b27bb3844ec64c634f63071f9fade879d"
+        },
+        "feature_intersections": [
+          {
+            "binding": {
+              "feature_index": 2,
+              "feature_sha256": "10821800e1dbbe45ac143b6608cf9e730375341f3cf99cf4b9465d7156d3169d",
+              "geometry_sha256": "e4d94296a69a4c06494f1f02fcf5e3ec9666b8ad58efe31f622e49587cc8cc7e",
+              "recorded_stable_subjects": [
+                {
+                  "id": "gb:BRN:ADM1:89281809B42057356743122",
+                  "original_feature_sha256": "f8228ecc6aba0b643120de763a62147b841d580fac7fcb91ed897af588f9f03c",
+                  "original_parent_id": "framework:province:brunei-muara:b7213cc1c869",
+                  "reference_year": "2011"
+                }
+              ],
+              "shapeID": "89281809B42057356743122",
+              "source_id": "gb:BRN:ADM1",
+              "valid_polygon": true
+            },
+            "intersection": {
+              "geometry": {
+                "coordinates": [
+                  [
+                    [
+                      115.01608874766356,
+                      4.915536757009346
+                    ],
+                    [
+                      115.01500939814395,
+                      4.91516573061198
+                    ],
+                    [
+                      115.015798,
+                      4.916409
+                    ],
+                    [
+                      115.01608874766356,
+                      4.915536757009346
+                    ]
+                  ]
+                ],
+                "type": "Polygon"
+              },
+              "geometry_sha256": "10e242a524ac3b4a00c5f8434b65ad1e85474baaaec8a5eb73e686f40baa6f51",
+              "geometry_type": "Polygon",
+              "is_empty": false,
+              "is_valid": true,
+              "planar_area_coordinate_units_squared": 5.246650555501731e-07,
+              "planar_length_coordinate_units": 0.003533045500410348
+            },
+            "source_feature_covers_entire_component": true
+          }
+        ],
+        "record": {
+          "administrative_assignment": null,
+          "cause_status": "unknown",
+          "component": "physical-component:03503f1fa71e2bf719b13d543e04fe99e56235693c1d1e189df86aa3018406de",
+          "component_geometry_sha256": "51d756ed45141561a9765f695bf5f10356be16d037c6464c1f6d5995af09ad29",
+          "component_minus_source_union": {
+            "geometry": {
+              "coordinates": [],
+              "type": "Polygon"
+            },
+            "geometry_sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02",
+            "geometry_type": "Polygon",
+            "is_empty": true,
+            "is_valid": true,
+            "planar_area_coordinate_units_squared": 0.0,
+            "planar_length_coordinate_units": 0.0
+          },
+          "coordinate_scope": "literal original GeoJSON lon/lat pointsets; no periodic wrapping, coordinate snapping, datum transformation or normalization",
+          "current_component_relation": "retained-full-original-feature-pointset",
+          "current_component_source_successor": "7c7cdf2388e0e7200b937c2cfb440b53165d9d98",
+          "dateline_connected": false,
+          "family": "gap-source-batch:e0d068e5c830a18076154107",
+          "feature_intersections": [
+            {
+              "binding": {
+                "feature_index": 2,
+                "feature_sha256": "10821800e1dbbe45ac143b6608cf9e730375341f3cf99cf4b9465d7156d3169d",
+                "geometry_sha256": "e4d94296a69a4c06494f1f02fcf5e3ec9666b8ad58efe31f622e49587cc8cc7e",
+                "recorded_stable_subjects": [
+                  {
+                    "id": "gb:BRN:ADM1:89281809B42057356743122",
+                    "original_feature_sha256": "f8228ecc6aba0b643120de763a62147b841d580fac7fcb91ed897af588f9f03c",
+                    "original_parent_id": "framework:province:brunei-muara:b7213cc1c869",
+                    "reference_year": "2011"
+                  }
+                ],
+                "shapeID": "89281809B42057356743122",
+                "source_id": "gb:BRN:ADM1",
+                "valid_polygon": true
+              },
+              "intersection": {
+                "geometry": {
+                  "coordinates": [
+                    [
+                      [
+                        115.01608874766356,
+                        4.915536757009346
+                      ],
+                      [
+                        115.01500939814395,
+                        4.91516573061198
+                      ],
+                      [
+                        115.015798,
+                        4.916409
+                      ],
+                      [
+                        115.01608874766356,
+                        4.915536757009346
+                      ]
+                    ]
+                  ],
+                  "type": "Polygon"
+                },
+                "geometry_sha256": "10e242a524ac3b4a00c5f8434b65ad1e85474baaaec8a5eb73e686f40baa6f51",
+                "geometry_type": "Polygon",
+                "is_empty": false,
+                "is_valid": true,
+                "planar_area_coordinate_units_squared": 5.246650555501731e-07,
+                "planar_length_coordinate_units": 0.003533045500410348
+              },
+              "source_feature_covers_entire_component": true
+            }
+          ],
+          "full_component_feature_sha256": "599d22dc227ba425d23e190b5fe4ec715fe68dfad522bf4fdce325129f91b4d3",
+          "original_component_commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+          "positive_area_feature_ids": [
+            {
+              "feature_index": 2,
+              "recorded_stable_subject_ids": [
+                "gb:BRN:ADM1:89281809B42057356743122"
+              ],
+              "shapeID": "89281809B42057356743122",
+              "source_id": "gb:BRN:ADM1"
+            }
+          ],
+          "source_products": [
+            "gb:BRN:ADM1"
+          ],
+          "source_union_intersection": {
+            "geometry": {
+              "coordinates": [
+                [
+                  [
+                    115.01608874766356,
+                    4.915536757009346
+                  ],
+                  [
+                    115.01500939814395,
+                    4.91516573061198
+                  ],
+                  [
+                    115.015798,
+                    4.916409
+                  ],
+                  [
+                    115.01608874766356,
+                    4.915536757009346
+                  ]
+                ]
+              ],
+              "type": "Polygon"
+            },
+            "geometry_sha256": "10e242a524ac3b4a00c5f8434b65ad1e85474baaaec8a5eb73e686f40baa6f51",
+            "geometry_type": "Polygon",
+            "is_empty": false,
+            "is_valid": true,
+            "planar_area_coordinate_units_squared": 5.246650555501731e-07,
+            "planar_length_coordinate_units": 0.003533045500410348
+          },
+          "status": "one-compatible-recorded-subject-uniquely-covers-component",
+          "surface_status": "unverified",
+          "uniquely_covering_compatible_recorded_subject": {
+            "id": "gb:BRN:ADM1:89281809B42057356743122",
+            "original_feature_sha256": "f8228ecc6aba0b643120de763a62147b841d580fac7fcb91ed897af588f9f03c",
+            "original_parent_id": "framework:province:brunei-muara:b7213cc1c869",
+            "reference_year": "2011"
+          },
+          "unknowns": [],
+          "whole_product_bbox_queries": [
+            {
+              "complete_bbox_candidate_indices": [
+                2
+              ],
+              "source_id": "gb:BRN:ADM1",
+              "whole_product_feature_count": 4
+            }
+          ],
+          "whole_relevant_source_union": {
+            "geometry": {
+              "canonical_geometry_bytes": 7204,
+              "geometry_object_sha256": "35b245986ae15a0157aba549964d96ea051d505b2bf56cd0b9b28ab24f958e84",
+              "object_index": "source-union-object-index.json"
+            },
+            "geometry_sha256": "35b245986ae15a0157aba549964d96ea051d505b2bf56cd0b9b28ab24f958e84",
+            "geometry_type": "MultiPolygon",
+            "is_empty": false,
+            "is_valid": true,
+            "planar_area_coordinate_units_squared": 0.04538870535899528,
+            "planar_length_coordinate_units": 1.787814251188689
+          },
+          "zero_area_feature_ids": []
+        },
+        "record_canonical_sha256": "89b1667335cd33f8cdc2ae2da10019628857e85caf2c67387aa157abf8f0f7d4",
+        "record_ordinal_one_based": 1395,
+        "source_union_intersection": {
+          "geometry": {
+            "coordinates": [
+              [
+                [
+                  115.01608874766356,
+                  4.915536757009346
+                ],
+                [
+                  115.01500939814395,
+                  4.91516573061198
+                ],
+                [
+                  115.015798,
+                  4.916409
+                ],
+                [
+                  115.01608874766356,
+                  4.915536757009346
+                ]
+              ]
+            ],
+            "type": "Polygon"
+          },
+          "geometry_sha256": "10e242a524ac3b4a00c5f8434b65ad1e85474baaaec8a5eb73e686f40baa6f51",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 5.246650555501731e-07,
+          "planar_length_coordinate_units": 0.003533045500410348
+        },
+        "uniquely_covering_compatible_recorded_subject": {
+          "id": "gb:BRN:ADM1:89281809B42057356743122",
+          "original_feature_sha256": "f8228ecc6aba0b643120de763a62147b841d580fac7fcb91ed897af588f9f03c",
+          "original_parent_id": "framework:province:brunei-muara:b7213cc1c869",
+          "reference_year": "2011"
+        },
+        "whole_relevant_source_union": {
+          "geometry": {
+            "canonical_geometry_bytes": 7204,
+            "geometry_object_sha256": "35b245986ae15a0157aba549964d96ea051d505b2bf56cd0b9b28ab24f958e84",
+            "object_index": "source-union-object-index.json"
+          },
+          "geometry_sha256": "35b245986ae15a0157aba549964d96ea051d505b2bf56cd0b9b28ab24f958e84",
+          "geometry_type": "MultiPolygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 0.04538870535899528,
+          "planar_length_coordinate_units": 1.787814251188689
+        }
+      },
+      "original_atlas_recipe_descriptor": {
+        "blob": "cdc5e1bfdd0cdd95d473228d81737722f2a5a706",
+        "bytes": 12313,
+        "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
+        "mode": "100644",
+        "path": "scripts/administrative.py",
+        "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22"
+      },
+      "original_atlas_registry_descriptor": {
+        "blob": "2747b845f0c5654765da3b951c9074e52f220077",
+        "bytes": 661416,
+        "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+        "mode": "100644",
+        "path": "data/administrative-sources.json",
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+      },
+      "original_physical_query_custody": {
+        "case_file": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_03503f1fa71e2bf719b13d543e04fe99e56235693c1d1e189df86aa3018406de.json.gz",
+        "case_file_bytes": 7460,
+        "case_file_sha256": "3b5db6ab33b19b874fadf296b7c80732e973f0d45c3d19bce0f0457848801457",
+        "case_file_uncompressed_sha256": "d6805036907bc8a14faa63f7ca6ab06b51260a18679f1e7d7b9a8aeb2ef2b0b9",
+        "complete_candidate_pointer": "/case/complete_current_component_candidate",
+        "complete_original_case_pointer": "/case",
+        "complete_original_packed_comparison_row": {
+          "delivered_product": {
+            "bytes": 1008871,
+            "hash_kind": "file-bytes",
+            "path": "components-000.jsonl.gz",
+            "sha256": "0f6db960d478b98734adb5d77cbeb9a1610fd300a4bf5773a51ca5672c881465",
+            "uncompressed_bytes": 7440052,
+            "uncompressed_sha256": "717c9e64fbc2c63a774b15defaddc84893dc527333a44fe38920e2f9ae1c329b"
+          },
+          "original_product": {
+            "bytes": 1219776,
+            "hash_kind": "file-bytes",
+            "path": "components-000.jsonl.gz",
+            "sha256": "0c6e0c12add305144fc932351dd517af4656808579422c6ba4be932b33cdf6f2",
+            "uncompressed_bytes": 8383652,
+            "uncompressed_sha256": "761304c1ef6034e2f5e87bc0c37489227ae6c523a996fb2fe51eb2a52ebd40a7"
+          },
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/components-000.jsonl.gz",
+          "record": {
+            "complete_contact_ids": [],
+            "complete_current_record_metadata_alias": "v1",
+            "complete_support": {
+              "contradictory_land_water_support": {
+                "area_m2": 0.0,
+                "geometry": {
+                  "geometries": [],
+                  "type": "GeometryCollection"
+                },
+                "kind": "empty",
+                "planar_area": 0.0
+              },
+              "extra_reconstruction": {
+                "area_m2": 0.0,
+                "geometry": {
+                  "coordinates": [],
+                  "type": "Polygon"
+                },
+                "kind": "empty",
+                "planar_area": 0.0
+              },
+              "hierarchy_disagreements": {
+                "L2-outside-L1": {
+                  "area_m2": 0.0,
+                  "geometry": {
+                    "geometries": [],
+                    "type": "GeometryCollection"
+                  },
+                  "kind": "empty",
+                  "planar_area": 0.0
+                },
+                "L3-outside-L2": {
+                  "area_m2": 0.0,
+                  "geometry": {
+                    "geometries": [],
+                    "type": "GeometryCollection"
+                  },
+                  "kind": "empty",
+                  "planar_area": 0.0
+                },
+                "L4-outside-L3": {
+                  "area_m2": 0.0,
+                  "geometry": {
+                    "geometries": [],
+                    "type": "GeometryCollection"
+                  },
+                  "kind": "empty",
+                  "planar_area": 0.0
+                }
+              },
+              "mapped_inland_water_support": {
+                "area_m2": 0.0,
+                "geometry": {
+                  "geometries": [],
+                  "type": "GeometryCollection"
+                },
+                "kind": "empty",
+                "planar_area": 0.0
+              },
+              "mapped_land_support": {
+                "area_m2": 6435.0185772972045,
+                "geometry": {
+                  "coordinates": [
+                    [
+                      [
+                        115.01608874766356,
+                        4.915536757009346
+                      ],
+                      [
+                        115.01500939814395,
+                        4.91516573061198
+                      ],
+                      [
+                        115.015798,
+                        4.916409
+                      ],
+                      [
+                        115.01608874766356,
+                        4.915536757009346
+                      ]
+                    ]
+                  ],
+                  "type": "Polygon"
+                },
+                "geometry_sha256": "10e242a524ac3b4a00c5f8434b65ad1e85474baaaec8a5eb73e686f40baa6f51",
+                "kind": "whole-operation-pointset",
+                "planar_area": 5.246650555501731e-07
+              },
+              "missing_reconstruction": {
+                "area_m2": 0.0,
+                "geometry": {
+                  "coordinates": [],
+                  "type": "Polygon"
+                },
+                "kind": "empty",
+                "planar_area": 0.0
+              },
+              "outside_mapped_L1_context": {
+                "area_m2": 0.0,
+                "geometry": {
+                  "coordinates": [],
+                  "type": "Polygon"
+                },
+                "kind": "empty",
+                "planar_area": 0.0
+              }
+            },
+            "component_id": "physical-component:03503f1fa71e2bf719b13d543e04fe99e56235693c1d1e189df86aa3018406de",
+            "physical_authority": "unapproved",
+            "physical_limits": [
+              "Source-relative support does not settle narrow registration-sensitive shoreline/channel truth.",
+              "Unrecorded river widths, seasonal wetness, observation-date mismatch and source precision remain unmeasured."
+            ],
+            "physical_status": "unknown-source-fitness-and-observation-date",
+            "query_relations": [
+              {
+                "candidate_covers_source": false,
+                "container_chain_issues": [],
+                "disjoint": true,
+                "intersects": false,
+                "periodic_offset": 0,
+                "source_container": -1,
+                "source_covers_candidate": false,
+                "source_id": 0,
+                "source_level": 1,
+                "source_pointset_sha256": "e16c72412602f25db211d93fc1669d7692c103fcfc8865faf5060379f14d8ee5",
+                "source_record_sha256": "4892b19dff90b5afb9c1c9f09b77461d09004f3defe6aa0e552438a2ce884694",
+                "status": "checked",
+                "witness": "disjoint-after-explicit-predicate"
+              },
+              {
+                "candidate_covers_source": false,
+                "container_chain_issues": [],
+                "disjoint": false,
+                "intersects": true,
+                "periodic_offset": 0,
+                "source_container": -1,
+                "source_covers_candidate": true,
+                "source_id": 9,
+                "source_level": 1,
+                "source_pointset_sha256": "acfeff435583fe1a8ed05952506fb7736b75b7d685cd5c7f70bcb01903c6e82e",
+                "source_record_sha256": "62755afc44c37dfd91274a4eb8da603e0a6f490fe1ab5695ce2a0ad3186e08eb",
+                "status": "checked",
+                "witness": "complete-candidate-reconstruction"
+              }
+            ],
+            "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+            "status": "mapped-land-support",
+            "unresolved": []
+          },
+          "whole_packed_scientific_row_sha256": "7fb5c49278d226389276cead5d7d1b32eef52d4b50d4a400613e803517cf10eb"
+        },
+        "complete_original_query_relations": [
+          {
+            "candidate_covers_source": false,
+            "container_chain_issues": [],
+            "disjoint": true,
+            "intersects": false,
+            "periodic_offset": 0,
+            "source_container": -1,
+            "source_covers_candidate": false,
+            "source_id": 0,
+            "source_level": 1,
+            "source_pointset_sha256": "e16c72412602f25db211d93fc1669d7692c103fcfc8865faf5060379f14d8ee5",
+            "source_record_sha256": "4892b19dff90b5afb9c1c9f09b77461d09004f3defe6aa0e552438a2ce884694",
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate"
+          },
+          {
+            "candidate_covers_source": false,
+            "container_chain_issues": [],
+            "disjoint": false,
+            "intersects": true,
+            "periodic_offset": 0,
+            "source_container": -1,
+            "source_covers_candidate": true,
+            "source_id": 9,
+            "source_level": 1,
+            "source_pointset_sha256": "acfeff435583fe1a8ed05952506fb7736b75b7d685cd5c7f70bcb01903c6e82e",
+            "source_record_sha256": "62755afc44c37dfd91274a4eb8da603e0a6f490fe1ab5695ce2a0ad3186e08eb",
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction"
+          }
+        ],
+        "complete_original_query_source_ids": [
+          0,
+          9
+        ],
+        "complete_query_source_pointsets": [
+          {
+            "binary64_pointset_sha256": "e16c72412602f25db211d93fc1669d7692c103fcfc8865faf5060379f14d8ee5",
+            "bytes": 6796059,
+            "coordinate_bytes_sha256": "a559df0e381f461e66a40946213bbf0bebd036d4c47a8fc46a166b1cfac11af6",
+            "geometry_status": "original-supported-polygon-object",
+            "sha256": "31dd6e17c538df126e36004e1a89a78adc892bb914ef911a97c43dcd1a30282a",
+            "source_file": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/0.json.gz",
+            "source_record_pointer": "/source",
+            "uncompressed_bytes": 32191061,
+            "uncompressed_sha256": "deb0cf095907818bbd543ecdfbc91496aa37e498fc95b810fa73c4ef61f4b027"
+          },
+          {
+            "binary64_pointset_sha256": "acfeff435583fe1a8ed05952506fb7736b75b7d685cd5c7f70bcb01903c6e82e",
+            "bytes": 274180,
+            "coordinate_bytes_sha256": "b7afe9e9aec9695624e367014dc02599d731f0306733d28554c35455449ab7cf",
+            "geometry_status": "original-supported-polygon-object",
+            "sha256": "940badf264bf2981cb20f9800501130b718a3c112e80df22660675107596dd44",
+            "source_file": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/9.json.gz",
+            "source_record_pointer": "/source",
+            "uncompressed_bytes": 1471946,
+            "uncompressed_sha256": "58ebc87ce3ff91e4668327c6a09077fc305580cfe42c81a93b64866d40002ce0"
+          }
+        ],
+        "physical_comparison_pointer": "/case/physical_comparison_packed_row",
+        "physical_query_relations_pointer": "/case/physical_query_relations",
+        "physical_query_source_ids_pointer": "/case/physical_query_source_ids"
+      },
+      "source_date_and_authority_limits": [
+        "The advertised represented year is source metadata, not an authenticated per-feature observation date.",
+        "Historical retrieval time is unknown; exact source/feature registration accuracy has not been established.",
+        "Source-relative mapped-land overlap does not establish contemporary land/water, legal ownership, cause, repair authority, or approval."
+      ],
+      "source_feature": {
+        "canonical_feature_sha256": "10821800e1dbbe45ac143b6608cf9e730375341f3cf99cf4b9465d7156d3169d",
+        "canonical_geometry_sha256": "e4d94296a69a4c06494f1f02fcf5e3ec9666b8ad58efe31f622e49587cc8cc7e",
+        "feature": {
+          "geometry": {
+            "coordinates": [
+              [
+                [
+                  [
+                    115.05150968100008,
+                    4.890668996000045
+                  ],
+                  [
+                    115.05285703400011,
+                    4.892514859000073
+                  ],
+                  [
+                    115.05201493900006,
+                    4.89687778800004
+                  ],
+                  [
+                    115.04561501,
+                    4.89637437500005
+                  ],
+                  [
+                    115.04106769300006,
+                    4.891172414000039
+                  ],
+                  [
+                    115.03652037600011,
+                    4.890501190000066
+                  ],
+                  [
+                    115.03332041100009,
+                    4.882949876000055
+                  ],
+                  [
+                    115.04578343000003,
+                    4.890165578000051
+                  ],
+                  [
+                    115.05150968100008,
+                    4.890668996000045
+                  ]
+                ]
+              ],
+              [
+                [
+                  [
+                    115.03972034000003,
+                    4.898891439000067
+                  ],
+                  [
+                    115.04443607600001,
+                    4.903925537000021
+                  ],
+                  [
+                    115.0437624000001,
+                    4.908959598000024
+                  ],
+                  [
+                    115.04746762100001,
+                    4.915839419000065
+                  ],
+                  [
+                    115.04780446000007,
+                    4.921208987000057
+                  ],
+                  [
+                    115.04578343000003,
+                    4.92154458300007
+                  ],
+                  [
+                    115.04123611200009,
+                    4.907281582000053
+                  ],
+                  [
+                    115.0358466990001,
+                    4.90157629600003
+                  ],
+                  [
+                    115.03601511800002,
+                    4.89805241800002
+                  ],
+                  [
+                    115.03769931000011,
+                    4.897381202000076
+                  ],
+                  [
+                    115.03972034000003,
+                    4.898891439000067
+                  ]
+                ]
+              ],
+              [
+                [
+                  [
+                    115.02570786500007,
+                    4.929424341000072
+                  ],
+                  [
+                    115.0258156540001,
+                    4.931894297000042
+                  ],
+                  [
+                    115.02484555900003,
+                    4.931786908000049
+                  ],
+                  [
+                    115.02419883000005,
+                    4.92813566500007
+                  ],
+                  [
+                    115.02570786500007,
+                    4.929424341000072
+                  ]
+                ]
+              ],
+              [
+                [
+                  [
+                    115.02732468900001,
+                    4.943384841000068
+                  ],
+                  [
+                    115.02743247700005,
+                    4.946176905000073
+                  ],
+                  [
+                    115.0301271840001,
+                    4.948432026000035
+                  ],
+                  [
+                    115.02894151300006,
+                    4.950579753000056
+                  ],
+                  [
+                    115.02603123000006,
+                    4.946391679000044
+                  ],
+                  [
+                    115.02603123000006,
+                    4.942203579000022
+                  ],
+                  [
+                    115.02732468900001,
+                    4.943384841000068
+                  ]
+                ]
+              ],
+              [
+                [
+                  [
+                    115.0623558750001,
+                    4.976351928000042
+                  ],
+                  [
+                    115.06429606400002,
+                    4.981721005000054
+                  ],
+                  [
+                    115.06149356900005,
+                    4.982902196000055
+                  ],
+                  [
+                    115.05901443900007,
+                    4.976244546000032
+                  ],
+                  [
+                    115.06106241600003,
+                    4.974955961000035
+                  ],
+                  [
+                    115.0623558750001,
+                    4.976351928000042
+                  ]
+                ]
+              ],
+              [
+                [
+                  [
+                    115.09663254400004,
+                    5.011787021000032
+                  ],
+                  [
+                    115.08854842400001,
+                    5.014686171000051
+                  ],
+                  [
+                    115.07970978600008,
+                    5.020699181000055
+                  ],
+                  [
+                    115.07679950300007,
+                    5.020484432000046
+                  ],
+                  [
+                    115.07561383200004,
+                    5.01887380900007
+                  ],
+                  [
+                    115.07518267900002,
+                    5.012323901000059
+                  ],
+                  [
+                    115.0772306560001,
+                    5.008995235000043
+                  ],
+                  [
+                    115.08574592900004,
+                    5.002767361000053
+                  ],
+                  [
+                    115.08660823500009,
+                    4.997613214000069
+                  ],
+                  [
+                    115.09145870700002,
+                    4.994284472000061
+                  ],
+                  [
+                    115.11592664300008,
+                    4.994713988000058
+                  ],
+                  [
+                    115.12551979800003,
+                    4.993318060000036
+                  ],
+                  [
+                    115.12875344600002,
+                    4.994713988000058
+                  ],
+                  [
+                    115.12045375000002,
+                    5.011679645000072
+                  ],
+                  [
+                    115.1174356790001,
+                    5.014041916000053
+                  ],
+                  [
+                    115.11581885500004,
+                    5.011464892000049
+                  ],
+                  [
+                    115.09663254400004,
+                    5.011787021000032
+                  ]
+                ]
+              ],
+              [
+                [
+                  [
+                    115.12917476900009,
+                    5.043360002000043
+                  ],
+                  [
+                    115.11751915000002,
+                    5.043008169000075
+                  ],
+                  [
+                    115.10409752800001,
+                    5.04028145500007
+                  ],
+                  [
+                    115.09866706900004,
+                    5.041292979000048
+                  ],
+                  [
+                    115.09650371500004,
+                    5.037114934000044
+                  ],
+                  [
+                    115.1208304050001,
+                    5.041908689000024
+                  ],
+                  [
+                    115.13222112400001,
+                    5.042128585000057
+                  ],
+                  [
+                    115.1376957330001,
+                    5.040765228000055
+                  ],
+                  [
+                    115.13707763200011,
+                    5.042568377000066
+                  ],
+                  [
+                    115.12917476900009,
+                    5.043360002000043
+                  ]
+                ]
+              ],
+              [
+                [
+                  [
+                    114.77861422700005,
+                    4.733272889000034
+                  ],
+                  [
+                    114.78052324700002,
+                    4.730898850000074
+                  ],
+                  [
+                    114.78439688700007,
+                    4.729220394000038
+                  ],
+                  [
+                    114.78574424100009,
+                    4.731738076000056
+                  ],
+                  [
+                    114.78827052800011,
+                    4.728549011000041
+                  ],
+                  [
+                    114.79399678000004,
+                    4.73442359400002
+                  ],
+                  [
+                    114.79820725900004,
+                    4.735766349000073
+                  ],
+                  [
+                    114.80005987000004,
+                    4.73442359400002
+                  ],
+                  [
+                    114.8046071870001,
+                    4.73442359400002
+                  ],
+                  [
+                    114.81387024100002,
+                    4.739962441000046
+                  ],
+                  [
+                    114.82549116300004,
+                    4.741305185000044
+                  ],
+                  [
+                    114.83424896000008,
+                    4.74482987500005
+                  ],
+                  [
+                    114.841154146,
+                    4.75422896300006
+                  ],
+                  [
+                    114.8470488160001,
+                    4.766145478000055
+                  ],
+                  [
+                    114.84789091200003,
+                    4.784103780000066
+                  ],
+                  [
+                    114.8507540380001,
+                    4.791320535000068
+                  ],
+                  [
+                    114.871469595,
+                    4.802900750000049
+                  ],
+                  [
+                    114.8780379420001,
+                    4.804411198000025
+                  ],
+                  [
+                    114.89639563100002,
+                    4.81649466500005
+                  ],
+                  [
+                    114.91509015800011,
+                    4.810285132000047
+                  ],
+                  [
+                    114.92351111700009,
+                    4.810285132000047
+                  ],
+                  [
+                    114.9302478830001,
+                    4.813305993000029
+                  ],
+                  [
+                    114.93782674600004,
+                    4.814480768000067
+                  ],
+                  [
+                    114.94203722500004,
+                    4.809949480000057
+                  ],
+                  [
+                    114.95231079400003,
+                    4.803739888000052
+                  ],
+                  [
+                    114.95803704500008,
+                    4.812466866000022
+                  ],
+                  [
+                    114.96140542900002,
+                    4.810788610000031
+                  ],
+                  [
+                    114.96696326100005,
+                    4.810788610000031
+                  ],
+                  [
+                    114.97218425500012,
+                    4.808271218000073
+                  ],
+                  [
+                    114.9878472370001,
+                    4.839486222000062
+                  ],
+                  [
+                    114.98515253100004,
+                    4.84351386000003
+                  ],
+                  [
+                    114.98414201600008,
+                    4.849219639000069
+                  ],
+                  [
+                    114.99239455500003,
+                    4.855932259000042
+                  ],
+                  [
+                    114.98751039900003,
+                    4.870364165000069
+                  ],
+                  [
+                    114.9885209140001,
+                    4.872881326000027
+                  ],
+                  [
+                    114.99711029100001,
+                    4.882278644000053
+                  ],
+                  [
+                    115.01260485400007,
+                    4.895199742000045
+                  ],
+                  [
+                    115.0248994530001,
+                    4.902247509000063
+                  ],
+                  [
+                    115.02534857100011,
+                    4.904652682000062
+                  ],
+                  [
+                    115.02175562900004,
+                    4.917480125000054
+                  ],
+                  [
+                    115.01786327500008,
+                    4.920761525000046
+                  ],
+                  [
+                    115.01217445000009,
+                    4.914198710000051
+                  ],
+                  [
+                    115.00438974200006,
+                    4.899879616000021
+                  ],
+                  [
+                    114.99929974000008,
+                    4.896299795000061
+                  ],
+                  [
+                    114.9882215020001,
+                    4.894509877000075
+                  ],
+                  [
+                    114.9759456160001,
+                    4.879593710000051
+                  ],
+                  [
+                    114.96816090800007,
+                    4.874522137000042
+                  ],
+                  [
+                    114.95528619900006,
+                    4.861992205000035
+                  ],
+                  [
+                    114.9513938450001,
+                    4.861395536000032
+                  ],
+                  [
+                    114.94750149100003,
+                    4.864677210000025
+                  ],
+                  [
+                    114.94630384400011,
+                    4.851252078000073
+                  ],
+                  [
+                    114.9391179590001,
+                    4.857218837000062
+                  ],
+                  [
+                    114.93402795800012,
+                    4.863782210000068
+                  ],
+                  [
+                    114.9331297220001,
+                    4.870643850000022
+                  ],
+                  [
+                    114.93486631100006,
+                    4.878770327000041
+                  ],
+                  [
+                    114.93735741800003,
+                    4.878770327000041
+                  ],
+                  [
+                    114.9408066420001,
+                    4.873615216000076
+                  ],
+                  [
+                    114.94559723200007,
+                    4.871705906000045
+                  ],
+                  [
+                    114.9561365290001,
+                    4.872278700000038
+                  ],
+                  [
+                    114.9854549370001,
+                    4.897481138000046
+                  ],
+                  [
+                    114.9946528690001,
+                    4.903781600000059
+                  ],
+                  [
+                    115.00365917700003,
+                    4.905499897000027
+                  ],
+                  [
+                    115.00979113100004,
+                    4.920773457000053
+                  ],
+                  [
+                    115.01534821500002,
+                    4.927837360000069
+                  ],
+                  [
+                    115.02780374800011,
+                    4.951510432000021
+                  ],
+                  [
+                    115.04504987100006,
+                    4.966019316000029
+                  ],
+                  [
+                    115.04849909500001,
+                    4.971364614000038
+                  ],
+                  [
+                    115.04849909500001,
+                    4.973655442000052
+                  ],
+                  [
+                    115.041600646,
+                    4.97270093100002
+                  ],
+                  [
+                    115.03872629200009,
+                    4.975182657000062
+                  ],
+                  [
+                    115.03949278700009,
+                    4.97976428000004
+                  ],
+                  [
+                    115.04370850500004,
+                    4.980527880000068
+                  ],
+                  [
+                    115.04524149400004,
+                    4.982627778000051
+                  ],
+                  [
+                    115.03531171300006,
+                    4.994746574000033
+                  ],
+                  [
+                    115.04017803300007,
+                    4.99881249200007
+                  ],
+                  [
+                    115.04111990100012,
+                    5.001314583000067
+                  ],
+                  [
+                    115.05022462700003,
+                    5.001314583000067
+                  ],
+                  [
+                    115.05579734700007,
+                    4.999047063000035
+                  ],
+                  [
+                    115.06278287000009,
+                    5.00068906100006
+                  ],
+                  [
+                    115.06709976600007,
+                    4.989273183000023
+                  ],
+                  [
+                    115.06929745900004,
+                    4.98833488300005
+                  ],
+                  [
+                    115.06396020500006,
+                    5.000454490000038
+                  ],
+                  [
+                    115.06568696400007,
+                    5.004363993000027
+                  ],
+                  [
+                    115.06670732100008,
+                    5.021018213000048
+                  ],
+                  [
+                    115.06780616700007,
+                    5.023363844000073
+                  ],
+                  [
+                    115.06937594800002,
+                    5.02266015500004
+                  ],
+                  [
+                    115.07589053600009,
+                    5.028524202000028
+                  ],
+                  [
+                    115.091352873,
+                    5.03657740500006
+                  ],
+                  [
+                    115.09300114300004,
+                    5.03939209400005
+                  ],
+                  [
+                    115.06458811800007,
+                    5.037828380000064
+                  ],
+                  [
+                    115.06058517800011,
+                    5.040643063000061
+                  ],
+                  [
+                    115.05932935300007,
+                    5.045646914000031
+                  ],
+                  [
+                    115.05446303400004,
+                    5.044708695000054
+                  ],
+                  [
+                    115.02283195900009,
+                    5.034231822000038
+                  ],
+                  [
+                    114.94220564400007,
+                    5.003760603000046
+                  ],
+                  [
+                    114.87551165500008,
+                    4.975405624000075
+                  ],
+                  [
+                    114.87079591800011,
+                    4.972217710000052
+                  ],
+                  [
+                    114.84755407400007,
+                    4.96483511200006
+                  ],
+                  [
+                    114.84149098400007,
+                    4.961311570000021
+                  ],
+                  [
+                    114.83172267200007,
+                    4.952250948000028
+                  ],
+                  [
+                    114.81285972600006,
+                    4.941847858000074
+                  ],
+                  [
+                    114.79307563500004,
+                    4.923978211000076
+                  ],
+                  [
+                    114.79516700200008,
+                    4.916338119000045
+                  ],
+                  [
+                    114.79516700200008,
+                    4.910087070000031
+                  ],
+                  [
+                    114.79237851200003,
+                    4.894806482000035
+                  ],
+                  [
+                    114.79516700200008,
+                    4.887166056000069
+                  ],
+                  [
+                    114.79516700200008,
+                    4.877441753000028
+                  ],
+                  [
+                    114.80632096300008,
+                    4.862160420000066
+                  ],
+                  [
+                    114.80632096300008,
+                    4.85521424500007
+                  ],
+                  [
+                    114.79656124700011,
+                    4.839237771000057
+                  ],
+                  [
+                    114.79656124700011,
+                    4.830207423000047
+                  ],
+                  [
+                    114.79307563500004,
+                    4.814230359000021
+                  ],
+                  [
+                    114.78192167400005,
+                    4.802420984000037
+                  ],
+                  [
+                    114.77773893900007,
+                    4.791306091000024
+                  ],
+                  [
+                    114.77773893900007,
+                    4.78158041100005
+                  ],
+                  [
+                    114.77425332700011,
+                    4.768381054000031
+                  ],
+                  [
+                    114.77425332700011,
+                    4.75934976800005
+                  ],
+                  [
+                    114.78122455200003,
+                    4.741981578000036
+                  ],
+                  [
+                    114.78192167400005,
+                    4.737118407000025
+                  ],
+                  [
+                    114.77861422700005,
+                    4.733272889000034
+                  ]
+                ]
+              ]
+            ],
+            "type": "MultiPolygon"
+          },
+          "properties": {
+            "shapeGroup": "BRN",
+            "shapeID": "89281809B42057356743122",
+            "shapeISO": "BN-BM",
+            "shapeName": "Brunei-Muara",
+            "shapeType": "ADM1"
+          },
+          "type": "Feature"
+        },
+        "source_id": "gb:BRN:ADM1",
+        "source_record_ordinal_one_based": 3,
+        "source_subject_id": "gb:BRN:ADM1:89281809B42057356743122"
+      },
+      "source_product": {
+        "captured_file": {
+          "bytes": 10409,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/global-source-comparisons-b-package3-20261006/i/153.bin",
+          "sha256": "30a83ca34e6843ffd42642aea4368fe3cd0536a3c1dc58e8a2cca632b0543563",
+          "uncompressed_bytes": 34750,
+          "uncompressed_sha256": "6ec08eaab7ef1d4d7eaa1280eb6d33e234e08dc90d7fdf8f9153fd1f38fc4d3b"
+        },
+        "license": {
+          "status": "redistributable",
+          "terms": "Public Domain; original source metadata and attribution retained through source catalogue and feature bindings."
+        },
+        "limit": "Whole source bytes verified, source date/physical water/legal meaning not independently approved.",
+        "original_atlas_recipe": {
+          "bytes": 12313,
+          "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "path": "scripts/administrative.py",
+          "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22"
+        },
+        "original_atlas_registry": {
+          "Continent": "Asia",
+          "UNSDG-region": "Eastern and South-Eastern Asia",
+          "UNSDG-subregion": "South-Eastern Asia",
+          "admUnitCount": "4",
+          "boundaryCanonical": "Districts",
+          "boundaryID": "BRN-ADM1-89281809",
+          "boundaryISO": "BRN",
+          "boundaryLicense": "Public Domain",
+          "boundaryName": "Brunei Darussalam",
+          "boundarySource": "geoBoundaries, Wikimedia Commons; credit to user 'Tachymetre'",
+          "boundarySourceURL": "commons.wikimedia.org/wiki/File",
+          "boundaryType": "ADM1",
+          "boundaryYearRepresented": "2011",
+          "buildDate": "Dec 12, 2023",
+          "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BRN/ADM1/geoBoundaries-BRN-ADM1.geojson",
+          "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BRN/ADM1/geoBoundaries-BRN-ADM1-PREVIEW.png",
+          "licenseDetail": "nan",
+          "licenseSource": "commons.wikimedia.org/wiki/File",
+          "maxAreaSqKM": "2796.5501389622978",
+          "maxPerimeterLengthKM": "304.5113721651665",
+          "maxVertices": "443",
+          "meanAreaSqKM": "1467.7929744867452",
+          "meanPerimeterLengthKM": "237.0368260204452",
+          "meanVertices": "352.0",
+          "minAreaSqKM": "557.0327266072696",
+          "minPerimeterLengthKM": "194.72792636935384",
+          "minVertices": "235",
+          "sha256": "6ec08eaab7ef1d4d7eaa1280eb6d33e234e08dc90d7fdf8f9153fd1f38fc4d3b",
+          "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BRN/ADM1/geoBoundaries-BRN-ADM1_simplified.geojson",
+          "sourceDataUpdateDate": "Wed May 3 23:20:00 2023",
+          "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BRN/ADM1/geoBoundaries-BRN-ADM1-all.zip",
+          "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BRN/ADM1/geoBoundaries-BRN-ADM1.topojson",
+          "worldBankIncomeGroup": "High-income Countries"
+        },
+        "packet": "global-source-comparisons-b-package3-20261006",
+        "product_id": "gb:BRN:ADM1",
+        "retention": "retained",
+        "retrieved_at": "2026-10-06 immutable accepted capsule readback; historical retrieval time remains unknown",
+        "role": "Complete original consumed input geometry, not dated physical land/water or legal authority",
+        "temporal_status": "reference",
+        "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BRN/ADM1/geoBoundaries-BRN-ADM1_simplified.geojson",
+        "verification": "unverified",
+        "vintage": "Original consumed whole SHA 6ec08eaab7ef1d4d7eaa1280eb6d33e234e08dc90d7fdf8f9153fd1f38fc4d3b; advertised represented year 2011"
+      },
+      "source_product_capture": {
+        "advertised_original_registry_sha256": "6ec08eaab7ef1d4d7eaa1280eb6d33e234e08dc90d7fdf8f9153fd1f38fc4d3b",
+        "current_registry_entry": {
+          "Continent": "Asia",
+          "UNSDG-region": "Eastern and South-Eastern Asia",
+          "UNSDG-subregion": "South-Eastern Asia",
+          "admUnitCount": "4",
+          "boundaryCanonical": "Districts",
+          "boundaryID": "BRN-ADM1-89281809",
+          "boundaryISO": "BRN",
+          "boundaryLicense": "Public Domain",
+          "boundaryName": "Brunei Darussalam",
+          "boundarySource": "geoBoundaries, Wikimedia Commons; credit to user 'Tachymetre'",
+          "boundarySourceURL": "commons.wikimedia.org/wiki/File",
+          "boundaryType": "ADM1",
+          "boundaryYearRepresented": "2011",
+          "buildDate": "Dec 12, 2023",
+          "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BRN/ADM1/geoBoundaries-BRN-ADM1.geojson",
+          "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BRN/ADM1/geoBoundaries-BRN-ADM1-PREVIEW.png",
+          "licenseDetail": "nan",
+          "licenseSource": "commons.wikimedia.org/wiki/File",
+          "maxAreaSqKM": "2796.5501389622978",
+          "maxPerimeterLengthKM": "304.5113721651665",
+          "maxVertices": "443",
+          "meanAreaSqKM": "1467.7929744867452",
+          "meanPerimeterLengthKM": "237.0368260204452",
+          "meanVertices": "352.0",
+          "minAreaSqKM": "557.0327266072696",
+          "minPerimeterLengthKM": "194.72792636935384",
+          "minVertices": "235",
+          "sha256": "6ec08eaab7ef1d4d7eaa1280eb6d33e234e08dc90d7fdf8f9153fd1f38fc4d3b",
+          "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BRN/ADM1/geoBoundaries-BRN-ADM1_simplified.geojson",
+          "sourceDataUpdateDate": "Wed May 3 23:20:00 2023",
+          "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BRN/ADM1/geoBoundaries-BRN-ADM1-all.zip",
+          "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BRN/ADM1/geoBoundaries-BRN-ADM1.topojson",
+          "worldBankIncomeGroup": "High-income Countries"
+        },
+        "decoded_source_bytes": 34750,
+        "decoded_source_sha256": "6ec08eaab7ef1d4d7eaa1280eb6d33e234e08dc90d7fdf8f9153fd1f38fc4d3b",
+        "retained_capture_bytes": 10409,
+        "retained_capture_path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-BRN-ADM1.bin",
+        "retained_capture_sha256": "30a83ca34e6843ffd42642aea4368fe3cd0536a3c1dc58e8a2cca632b0543563"
+      },
+      "source_rule_fit_state": "established",
+      "whole_gap_completion": false
+    },
+    "existing_current_target_owner_parent_join": {
+      "component_id": "physical-component:03503f1fa71e2bf719b13d543e04fe99e56235693c1d1e189df86aa3018406de",
+      "target_id": "gb:BRN:ADM1:89281809B42057356743122",
+      "owner_index": 10448,
+      "current_parent_id": "framework:province:brunei-muara:b7213cc1c869",
+      "parent_index": 1045,
+      "parent_index_domain": "canonical province membership index, separate from county owner index",
+      "whole_target_containing_pin": {
+        "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+        "path": "data/geography/part-2.json",
+        "mode": "100644",
+        "git_blob_oid": "389e463dd5e44894fd221f53db584f55fff330d1",
+        "bytes": 6259307,
+        "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+      },
+      "whole_target_json_pointer": "/features/578",
+      "complete_current_feature_sha256": "f8228ecc6aba0b643120de763a62147b841d580fac7fcb91ed897af588f9f03c",
+      "complete_current_geometry_sha256": "705fa2d2969e4931b1de8e2e8dca81a3e5de6c2a1a27d219743048e2ae8f92d5",
+      "current_parent_hierarchy": {
+        "pin": {
+          "commit": "65f7db6e12ce7eff306debdf1a89468fbf8a84e4",
+          "path": "data/hierarchy.json",
+          "mode": "100644",
+          "git_blob_oid": "324575c55f3c2992517446d1ac06bdd806f06573",
+          "bytes": 10164089,
+          "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+        },
+        "json_pointer": "/1543"
+      },
+      "recorded_source_year": "2011",
+      "current_temporal_applicability": "unsupported"
+    },
+    "administrative_product_whole_pin": {
+      "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+      "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-BRN-ADM1.bin",
+      "mode": "100644",
+      "blob": "52b83027ad0341cda3352c12ea3da248c35437c5",
+      "bytes": 10409,
+      "sha256": "30a83ca34e6843ffd42642aea4368fe3cd0536a3c1dc58e8a2cca632b0543563",
+      "uncompressed_bytes": 34750,
+      "uncompressed_sha256": "6ec08eaab7ef1d4d7eaa1280eb6d33e234e08dc90d7fdf8f9153fd1f38fc4d3b"
+    },
+    "complete_query_source_pointsets": [
+      {
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/0.json.gz",
+        "mode": "100644",
+        "blob": "f44f0880183529247070f596772d3427c6d341d1",
+        "bytes": 6796059,
+        "binary64_pointset_sha256": "e16c72412602f25db211d93fc1669d7692c103fcfc8865faf5060379f14d8ee5",
+        "coordinate_bytes_sha256": "a559df0e381f461e66a40946213bbf0bebd036d4c47a8fc46a166b1cfac11af6",
+        "geometry_status": "original-supported-polygon-object",
+        "sha256": "31dd6e17c538df126e36004e1a89a78adc892bb914ef911a97c43dcd1a30282a",
+        "source_file": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/0.json.gz",
+        "source_record_pointer": "/source",
+        "uncompressed_bytes": 32191061,
+        "uncompressed_sha256": "deb0cf095907818bbd543ecdfbc91496aa37e498fc95b810fa73c4ef61f4b027"
+      },
+      {
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/9.json.gz",
+        "mode": "100644",
+        "blob": "5ed105a2a907067ae714c86c319fbcecbe7b2b92",
+        "bytes": 274180,
+        "binary64_pointset_sha256": "acfeff435583fe1a8ed05952506fb7736b75b7d685cd5c7f70bcb01903c6e82e",
+        "coordinate_bytes_sha256": "b7afe9e9aec9695624e367014dc02599d731f0306733d28554c35455449ab7cf",
+        "geometry_status": "original-supported-polygon-object",
+        "sha256": "940badf264bf2981cb20f9800501130b718a3c112e80df22660675107596dd44",
+        "source_file": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/9.json.gz",
+        "source_record_pointer": "/source",
+        "uncompressed_bytes": 1471946,
+        "uncompressed_sha256": "58ebc87ce3ff91e4668327c6a09077fc305580cfe42c81a93b64866d40002ce0"
+      }
+    ],
+    "all_original_query_source_ids": [
+      0,
+      9
+    ],
+    "complete_physical_case": {
+      "case_file": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_03503f1fa71e2bf719b13d543e04fe99e56235693c1d1e189df86aa3018406de.json.gz",
+      "case_file_bytes": 7460,
+      "case_file_sha256": "3b5db6ab33b19b874fadf296b7c80732e973f0d45c3d19bce0f0457848801457",
+      "case_file_uncompressed_sha256": "d6805036907bc8a14faa63f7ca6ab06b51260a18679f1e7d7b9a8aeb2ef2b0b9",
+      "complete_candidate_pointer": "/case/complete_current_component_candidate",
+      "complete_original_case_pointer": "/case",
+      "complete_original_packed_comparison_row": {
+        "delivered_product": {
+          "bytes": 1008871,
+          "hash_kind": "file-bytes",
+          "path": "components-000.jsonl.gz",
+          "sha256": "0f6db960d478b98734adb5d77cbeb9a1610fd300a4bf5773a51ca5672c881465",
+          "uncompressed_bytes": 7440052,
+          "uncompressed_sha256": "717c9e64fbc2c63a774b15defaddc84893dc527333a44fe38920e2f9ae1c329b"
+        },
+        "original_product": {
+          "bytes": 1219776,
+          "hash_kind": "file-bytes",
+          "path": "components-000.jsonl.gz",
+          "sha256": "0c6e0c12add305144fc932351dd517af4656808579422c6ba4be932b33cdf6f2",
+          "uncompressed_bytes": 8383652,
+          "uncompressed_sha256": "761304c1ef6034e2f5e87bc0c37489227ae6c523a996fb2fe51eb2a52ebd40a7"
+        },
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-000.jsonl.gz",
+        "record": {
+          "complete_contact_ids": [],
+          "complete_current_record_metadata_alias": "v1",
+          "complete_support": {
+            "contradictory_land_water_support": {
+              "area_m2": 0.0,
+              "geometry": {
+                "geometries": [],
+                "type": "GeometryCollection"
+              },
+              "kind": "empty",
+              "planar_area": 0.0
+            },
+            "extra_reconstruction": {
+              "area_m2": 0.0,
+              "geometry": {
+                "coordinates": [],
+                "type": "Polygon"
+              },
+              "kind": "empty",
+              "planar_area": 0.0
+            },
+            "hierarchy_disagreements": {
+              "L2-outside-L1": {
+                "area_m2": 0.0,
+                "geometry": {
+                  "geometries": [],
+                  "type": "GeometryCollection"
+                },
+                "kind": "empty",
+                "planar_area": 0.0
+              },
+              "L3-outside-L2": {
+                "area_m2": 0.0,
+                "geometry": {
+                  "geometries": [],
+                  "type": "GeometryCollection"
+                },
+                "kind": "empty",
+                "planar_area": 0.0
+              },
+              "L4-outside-L3": {
+                "area_m2": 0.0,
+                "geometry": {
+                  "geometries": [],
+                  "type": "GeometryCollection"
+                },
+                "kind": "empty",
+                "planar_area": 0.0
+              }
+            },
+            "mapped_inland_water_support": {
+              "area_m2": 0.0,
+              "geometry": {
+                "geometries": [],
+                "type": "GeometryCollection"
+              },
+              "kind": "empty",
+              "planar_area": 0.0
+            },
+            "mapped_land_support": {
+              "area_m2": 6435.0185772972045,
+              "geometry": {
+                "coordinates": [
+                  [
+                    [
+                      115.01608874766356,
+                      4.915536757009346
+                    ],
+                    [
+                      115.01500939814395,
+                      4.91516573061198
+                    ],
+                    [
+                      115.015798,
+                      4.916409
+                    ],
+                    [
+                      115.01608874766356,
+                      4.915536757009346
+                    ]
+                  ]
+                ],
+                "type": "Polygon"
+              },
+              "geometry_sha256": "10e242a524ac3b4a00c5f8434b65ad1e85474baaaec8a5eb73e686f40baa6f51",
+              "kind": "whole-operation-pointset",
+              "planar_area": 5.246650555501731e-07
+            },
+            "missing_reconstruction": {
+              "area_m2": 0.0,
+              "geometry": {
+                "coordinates": [],
+                "type": "Polygon"
+              },
+              "kind": "empty",
+              "planar_area": 0.0
+            },
+            "outside_mapped_L1_context": {
+              "area_m2": 0.0,
+              "geometry": {
+                "coordinates": [],
+                "type": "Polygon"
+              },
+              "kind": "empty",
+              "planar_area": 0.0
+            }
+          },
+          "component_id": "physical-component:03503f1fa71e2bf719b13d543e04fe99e56235693c1d1e189df86aa3018406de",
+          "physical_authority": "unapproved",
+          "physical_limits": [
+            "Source-relative support does not settle narrow registration-sensitive shoreline/channel truth.",
+            "Unrecorded river widths, seasonal wetness, observation-date mismatch and source precision remain unmeasured."
+          ],
+          "physical_status": "unknown-source-fitness-and-observation-date",
+          "query_relations": [
+            {
+              "candidate_covers_source": false,
+              "container_chain_issues": [],
+              "disjoint": true,
+              "intersects": false,
+              "periodic_offset": 0,
+              "source_container": -1,
+              "source_covers_candidate": false,
+              "source_id": 0,
+              "source_level": 1,
+              "source_pointset_sha256": "e16c72412602f25db211d93fc1669d7692c103fcfc8865faf5060379f14d8ee5",
+              "source_record_sha256": "4892b19dff90b5afb9c1c9f09b77461d09004f3defe6aa0e552438a2ce884694",
+              "status": "checked",
+              "witness": "disjoint-after-explicit-predicate"
+            },
+            {
+              "candidate_covers_source": false,
+              "container_chain_issues": [],
+              "disjoint": false,
+              "intersects": true,
+              "periodic_offset": 0,
+              "source_container": -1,
+              "source_covers_candidate": true,
+              "source_id": 9,
+              "source_level": 1,
+              "source_pointset_sha256": "acfeff435583fe1a8ed05952506fb7736b75b7d685cd5c7f70bcb01903c6e82e",
+              "source_record_sha256": "62755afc44c37dfd91274a4eb8da603e0a6f490fe1ab5695ce2a0ad3186e08eb",
+              "status": "checked",
+              "witness": "complete-candidate-reconstruction"
+            }
+          ],
+          "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+          "status": "mapped-land-support",
+          "unresolved": []
+        },
+        "whole_packed_scientific_row_sha256": "7fb5c49278d226389276cead5d7d1b32eef52d4b50d4a400613e803517cf10eb"
+      },
+      "complete_original_query_relations": [
+        {
+          "candidate_covers_source": false,
+          "container_chain_issues": [],
+          "disjoint": true,
+          "intersects": false,
+          "periodic_offset": 0,
+          "source_container": -1,
+          "source_covers_candidate": false,
+          "source_id": 0,
+          "source_level": 1,
+          "source_pointset_sha256": "e16c72412602f25db211d93fc1669d7692c103fcfc8865faf5060379f14d8ee5",
+          "source_record_sha256": "4892b19dff90b5afb9c1c9f09b77461d09004f3defe6aa0e552438a2ce884694",
+          "status": "checked",
+          "witness": "disjoint-after-explicit-predicate"
+        },
+        {
+          "candidate_covers_source": false,
+          "container_chain_issues": [],
+          "disjoint": false,
+          "intersects": true,
+          "periodic_offset": 0,
+          "source_container": -1,
+          "source_covers_candidate": true,
+          "source_id": 9,
+          "source_level": 1,
+          "source_pointset_sha256": "acfeff435583fe1a8ed05952506fb7736b75b7d685cd5c7f70bcb01903c6e82e",
+          "source_record_sha256": "62755afc44c37dfd91274a4eb8da603e0a6f490fe1ab5695ce2a0ad3186e08eb",
+          "status": "checked",
+          "witness": "complete-candidate-reconstruction"
+        }
+      ],
+      "complete_original_query_source_ids": [
+        0,
+        9
+      ],
+      "complete_query_source_pointsets": [
+        {
+          "binary64_pointset_sha256": "e16c72412602f25db211d93fc1669d7692c103fcfc8865faf5060379f14d8ee5",
+          "bytes": 6796059,
+          "coordinate_bytes_sha256": "a559df0e381f461e66a40946213bbf0bebd036d4c47a8fc46a166b1cfac11af6",
+          "geometry_status": "original-supported-polygon-object",
+          "sha256": "31dd6e17c538df126e36004e1a89a78adc892bb914ef911a97c43dcd1a30282a",
+          "source_file": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/0.json.gz",
+          "source_record_pointer": "/source",
+          "uncompressed_bytes": 32191061,
+          "uncompressed_sha256": "deb0cf095907818bbd543ecdfbc91496aa37e498fc95b810fa73c4ef61f4b027"
+        },
+        {
+          "binary64_pointset_sha256": "acfeff435583fe1a8ed05952506fb7736b75b7d685cd5c7f70bcb01903c6e82e",
+          "bytes": 274180,
+          "coordinate_bytes_sha256": "b7afe9e9aec9695624e367014dc02599d731f0306733d28554c35455449ab7cf",
+          "geometry_status": "original-supported-polygon-object",
+          "sha256": "940badf264bf2981cb20f9800501130b718a3c112e80df22660675107596dd44",
+          "source_file": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/9.json.gz",
+          "source_record_pointer": "/source",
+          "uncompressed_bytes": 1471946,
+          "uncompressed_sha256": "58ebc87ce3ff91e4668327c6a09077fc305580cfe42c81a93b64866d40002ce0"
+        }
+      ],
+      "physical_comparison_pointer": "/case/physical_comparison_packed_row",
+      "physical_query_relations_pointer": "/case/physical_query_relations",
+      "physical_query_source_ids_pointer": "/case/physical_query_source_ids"
+    },
+    "source_case_mapping": {
+      "index": 0,
+      "component_id": "physical-component:03503f1fa71e2bf719b13d543e04fe99e56235693c1d1e189df86aa3018406de",
+      "family_id": "gap-source-batch:e0d068e5c830a18076154107",
+      "geometry_scope": "full-component",
+      "whole_gap_completion": false,
+      "source_fit_pin": {
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/administrative-source-rule-fit.json",
+        "mode": "100644",
+        "blob": "97d19e63405662600d4ea4d84f55b6e5d38e0ebd",
+        "bytes": 1688243,
+        "sha256": "77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b"
+      },
+      "source_fit_pointer": "/cases/0",
+      "candidate_pointer": "/cases/0/current_component_candidate/feature",
+      "recorded_subject": {
+        "id": "gb:BRN:ADM1:89281809B42057356743122",
+        "original_feature_sha256": "f8228ecc6aba0b643120de763a62147b841d580fac7fcb91ed897af588f9f03c",
+        "original_parent_id": "framework:province:brunei-muara:b7213cc1c869",
+        "reference_year": "2011"
+      },
+      "administrative_products": [
+        "gb:BRN:ADM1"
+      ],
+      "positive_area_intersections": [
+        {
+          "binding": {
+            "feature_index": 2,
+            "feature_sha256": "10821800e1dbbe45ac143b6608cf9e730375341f3cf99cf4b9465d7156d3169d",
+            "geometry_sha256": "e4d94296a69a4c06494f1f02fcf5e3ec9666b8ad58efe31f622e49587cc8cc7e",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:BRN:ADM1:89281809B42057356743122",
+                "original_feature_sha256": "f8228ecc6aba0b643120de763a62147b841d580fac7fcb91ed897af588f9f03c",
+                "original_parent_id": "framework:province:brunei-muara:b7213cc1c869",
+                "reference_year": "2011"
+              }
+            ],
+            "shapeID": "89281809B42057356743122",
+            "source_id": "gb:BRN:ADM1",
+            "valid_polygon": true
+          },
+          "intersection": {
+            "geometry": {
+              "coordinates": [
+                [
+                  [
+                    115.01608874766356,
+                    4.915536757009346
+                  ],
+                  [
+                    115.01500939814395,
+                    4.91516573061198
+                  ],
+                  [
+                    115.015798,
+                    4.916409
+                  ],
+                  [
+                    115.01608874766356,
+                    4.915536757009346
+                  ]
+                ]
+              ],
+              "type": "Polygon"
+            },
+            "geometry_sha256": "10e242a524ac3b4a00c5f8434b65ad1e85474baaaec8a5eb73e686f40baa6f51",
+            "geometry_type": "Polygon",
+            "is_empty": false,
+            "is_valid": true,
+            "planar_area_coordinate_units_squared": 5.246650555501731e-07,
+            "planar_length_coordinate_units": 0.003533045500410348
+          },
+          "source_feature_covers_entire_component": true
+        }
+      ],
+      "zero_area_intersections_preserved": [],
+      "physical_case_pin": {
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_03503f1fa71e2bf719b13d543e04fe99e56235693c1d1e189df86aa3018406de.json.gz",
+        "mode": "100644",
+        "blob": "1661e2eacec84475855efc34dad4e8ef3e78fc35",
+        "bytes": 7460,
+        "sha256": "3b5db6ab33b19b874fadf296b7c80732e973f0d45c3d19bce0f0457848801457",
+        "uncompressed_sha256": "d6805036907bc8a14faa63f7ca6ab06b51260a18679f1e7d7b9a8aeb2ef2b0b9",
+        "whole_body_qualification": "reused accepted PR1656 custody; tree mode/OID/bytes joined here"
+      },
+      "physical_query_custody": {
+        "case_file": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/cases/physical-component_03503f1fa71e2bf719b13d543e04fe99e56235693c1d1e189df86aa3018406de.json.gz",
+        "case_file_bytes": 7460,
+        "case_file_sha256": "3b5db6ab33b19b874fadf296b7c80732e973f0d45c3d19bce0f0457848801457",
+        "case_file_uncompressed_sha256": "d6805036907bc8a14faa63f7ca6ab06b51260a18679f1e7d7b9a8aeb2ef2b0b9",
+        "complete_candidate_pointer": "/case/complete_current_component_candidate",
+        "complete_original_case_pointer": "/case",
+        "complete_original_packed_comparison_row": {
+          "delivered_product": {
+            "bytes": 1008871,
+            "hash_kind": "file-bytes",
+            "path": "components-000.jsonl.gz",
+            "sha256": "0f6db960d478b98734adb5d77cbeb9a1610fd300a4bf5773a51ca5672c881465",
+            "uncompressed_bytes": 7440052,
+            "uncompressed_sha256": "717c9e64fbc2c63a774b15defaddc84893dc527333a44fe38920e2f9ae1c329b"
+          },
+          "original_product": {
+            "bytes": 1219776,
+            "hash_kind": "file-bytes",
+            "path": "components-000.jsonl.gz",
+            "sha256": "0c6e0c12add305144fc932351dd517af4656808579422c6ba4be932b33cdf6f2",
+            "uncompressed_bytes": 8383652,
+            "uncompressed_sha256": "761304c1ef6034e2f5e87bc0c37489227ae6c523a996fb2fe51eb2a52ebd40a7"
+          },
+          "path": "coordination/engineering/global-physical-comparison-20261006/results/components-000.jsonl.gz",
+          "record": {
+            "complete_contact_ids": [],
+            "complete_current_record_metadata_alias": "v1",
+            "complete_support": {
+              "contradictory_land_water_support": {
+                "area_m2": 0.0,
+                "geometry": {
+                  "geometries": [],
+                  "type": "GeometryCollection"
+                },
+                "kind": "empty",
+                "planar_area": 0.0
+              },
+              "extra_reconstruction": {
+                "area_m2": 0.0,
+                "geometry": {
+                  "coordinates": [],
+                  "type": "Polygon"
+                },
+                "kind": "empty",
+                "planar_area": 0.0
+              },
+              "hierarchy_disagreements": {
+                "L2-outside-L1": {
+                  "area_m2": 0.0,
+                  "geometry": {
+                    "geometries": [],
+                    "type": "GeometryCollection"
+                  },
+                  "kind": "empty",
+                  "planar_area": 0.0
+                },
+                "L3-outside-L2": {
+                  "area_m2": 0.0,
+                  "geometry": {
+                    "geometries": [],
+                    "type": "GeometryCollection"
+                  },
+                  "kind": "empty",
+                  "planar_area": 0.0
+                },
+                "L4-outside-L3": {
+                  "area_m2": 0.0,
+                  "geometry": {
+                    "geometries": [],
+                    "type": "GeometryCollection"
+                  },
+                  "kind": "empty",
+                  "planar_area": 0.0
+                }
+              },
+              "mapped_inland_water_support": {
+                "area_m2": 0.0,
+                "geometry": {
+                  "geometries": [],
+                  "type": "GeometryCollection"
+                },
+                "kind": "empty",
+                "planar_area": 0.0
+              },
+              "mapped_land_support": {
+                "area_m2": 6435.0185772972045,
+                "geometry": {
+                  "coordinates": [
+                    [
+                      [
+                        115.01608874766356,
+                        4.915536757009346
+                      ],
+                      [
+                        115.01500939814395,
+                        4.91516573061198
+                      ],
+                      [
+                        115.015798,
+                        4.916409
+                      ],
+                      [
+                        115.01608874766356,
+                        4.915536757009346
+                      ]
+                    ]
+                  ],
+                  "type": "Polygon"
+                },
+                "geometry_sha256": "10e242a524ac3b4a00c5f8434b65ad1e85474baaaec8a5eb73e686f40baa6f51",
+                "kind": "whole-operation-pointset",
+                "planar_area": 5.246650555501731e-07
+              },
+              "missing_reconstruction": {
+                "area_m2": 0.0,
+                "geometry": {
+                  "coordinates": [],
+                  "type": "Polygon"
+                },
+                "kind": "empty",
+                "planar_area": 0.0
+              },
+              "outside_mapped_L1_context": {
+                "area_m2": 0.0,
+                "geometry": {
+                  "coordinates": [],
+                  "type": "Polygon"
+                },
+                "kind": "empty",
+                "planar_area": 0.0
+              }
+            },
+            "component_id": "physical-component:03503f1fa71e2bf719b13d543e04fe99e56235693c1d1e189df86aa3018406de",
+            "physical_authority": "unapproved",
+            "physical_limits": [
+              "Source-relative support does not settle narrow registration-sensitive shoreline/channel truth.",
+              "Unrecorded river widths, seasonal wetness, observation-date mismatch and source precision remain unmeasured."
+            ],
+            "physical_status": "unknown-source-fitness-and-observation-date",
+            "query_relations": [
+              {
+                "candidate_covers_source": false,
+                "container_chain_issues": [],
+                "disjoint": true,
+                "intersects": false,
+                "periodic_offset": 0,
+                "source_container": -1,
+                "source_covers_candidate": false,
+                "source_id": 0,
+                "source_level": 1,
+                "source_pointset_sha256": "e16c72412602f25db211d93fc1669d7692c103fcfc8865faf5060379f14d8ee5",
+                "source_record_sha256": "4892b19dff90b5afb9c1c9f09b77461d09004f3defe6aa0e552438a2ce884694",
+                "status": "checked",
+                "witness": "disjoint-after-explicit-predicate"
+              },
+              {
+                "candidate_covers_source": false,
+                "container_chain_issues": [],
+                "disjoint": false,
+                "intersects": true,
+                "periodic_offset": 0,
+                "source_container": -1,
+                "source_covers_candidate": true,
+                "source_id": 9,
+                "source_level": 1,
+                "source_pointset_sha256": "acfeff435583fe1a8ed05952506fb7736b75b7d685cd5c7f70bcb01903c6e82e",
+                "source_record_sha256": "62755afc44c37dfd91274a4eb8da603e0a6f490fe1ab5695ce2a0ad3186e08eb",
+                "status": "checked",
+                "witness": "complete-candidate-reconstruction"
+              }
+            ],
+            "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+            "status": "mapped-land-support",
+            "unresolved": []
+          },
+          "whole_packed_scientific_row_sha256": "7fb5c49278d226389276cead5d7d1b32eef52d4b50d4a400613e803517cf10eb"
+        },
+        "complete_original_query_relations": [
+          {
+            "candidate_covers_source": false,
+            "container_chain_issues": [],
+            "disjoint": true,
+            "intersects": false,
+            "periodic_offset": 0,
+            "source_container": -1,
+            "source_covers_candidate": false,
+            "source_id": 0,
+            "source_level": 1,
+            "source_pointset_sha256": "e16c72412602f25db211d93fc1669d7692c103fcfc8865faf5060379f14d8ee5",
+            "source_record_sha256": "4892b19dff90b5afb9c1c9f09b77461d09004f3defe6aa0e552438a2ce884694",
+            "status": "checked",
+            "witness": "disjoint-after-explicit-predicate"
+          },
+          {
+            "candidate_covers_source": false,
+            "container_chain_issues": [],
+            "disjoint": false,
+            "intersects": true,
+            "periodic_offset": 0,
+            "source_container": -1,
+            "source_covers_candidate": true,
+            "source_id": 9,
+            "source_level": 1,
+            "source_pointset_sha256": "acfeff435583fe1a8ed05952506fb7736b75b7d685cd5c7f70bcb01903c6e82e",
+            "source_record_sha256": "62755afc44c37dfd91274a4eb8da603e0a6f490fe1ab5695ce2a0ad3186e08eb",
+            "status": "checked",
+            "witness": "complete-candidate-reconstruction"
+          }
+        ],
+        "complete_original_query_source_ids": [
+          0,
+          9
+        ],
+        "complete_query_source_pointsets": [
+          {
+            "binary64_pointset_sha256": "e16c72412602f25db211d93fc1669d7692c103fcfc8865faf5060379f14d8ee5",
+            "bytes": 6796059,
+            "coordinate_bytes_sha256": "a559df0e381f461e66a40946213bbf0bebd036d4c47a8fc46a166b1cfac11af6",
+            "geometry_status": "original-supported-polygon-object",
+            "sha256": "31dd6e17c538df126e36004e1a89a78adc892bb914ef911a97c43dcd1a30282a",
+            "source_file": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/0.json.gz",
+            "source_record_pointer": "/source",
+            "uncompressed_bytes": 32191061,
+            "uncompressed_sha256": "deb0cf095907818bbd543ecdfbc91496aa37e498fc95b810fa73c4ef61f4b027"
+          },
+          {
+            "binary64_pointset_sha256": "acfeff435583fe1a8ed05952506fb7736b75b7d685cd5c7f70bcb01903c6e82e",
+            "bytes": 274180,
+            "coordinate_bytes_sha256": "b7afe9e9aec9695624e367014dc02599d731f0306733d28554c35455449ab7cf",
+            "geometry_status": "original-supported-polygon-object",
+            "sha256": "940badf264bf2981cb20f9800501130b718a3c112e80df22660675107596dd44",
+            "source_file": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/physical-custody-003/sources/9.json.gz",
+            "source_record_pointer": "/source",
+            "uncompressed_bytes": 1471946,
+            "uncompressed_sha256": "58ebc87ce3ff91e4668327c6a09077fc305580cfe42c81a93b64866d40002ce0"
+          }
+        ],
+        "physical_comparison_pointer": "/case/physical_comparison_packed_row",
+        "physical_query_relations_pointer": "/case/physical_query_relations",
+        "physical_query_source_ids_pointer": "/case/physical_query_source_ids"
+      },
+      "source_product": {
+        "captured_file": {
+          "bytes": 10409,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/global-source-comparisons-b-package3-20261006/i/153.bin",
+          "sha256": "30a83ca34e6843ffd42642aea4368fe3cd0536a3c1dc58e8a2cca632b0543563",
+          "uncompressed_bytes": 34750,
+          "uncompressed_sha256": "6ec08eaab7ef1d4d7eaa1280eb6d33e234e08dc90d7fdf8f9153fd1f38fc4d3b"
+        },
+        "license": {
+          "status": "redistributable",
+          "terms": "Public Domain; original source metadata and attribution retained through source catalogue and feature bindings."
+        },
+        "limit": "Whole source bytes verified, source date/physical water/legal meaning not independently approved.",
+        "original_atlas_recipe": {
+          "bytes": 12313,
+          "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "path": "scripts/administrative.py",
+          "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22"
+        },
+        "original_atlas_registry": {
+          "Continent": "Asia",
+          "UNSDG-region": "Eastern and South-Eastern Asia",
+          "UNSDG-subregion": "South-Eastern Asia",
+          "admUnitCount": "4",
+          "boundaryCanonical": "Districts",
+          "boundaryID": "BRN-ADM1-89281809",
+          "boundaryISO": "BRN",
+          "boundaryLicense": "Public Domain",
+          "boundaryName": "Brunei Darussalam",
+          "boundarySource": "geoBoundaries, Wikimedia Commons; credit to user 'Tachymetre'",
+          "boundarySourceURL": "commons.wikimedia.org/wiki/File",
+          "boundaryType": "ADM1",
+          "boundaryYearRepresented": "2011",
+          "buildDate": "Dec 12, 2023",
+          "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BRN/ADM1/geoBoundaries-BRN-ADM1.geojson",
+          "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BRN/ADM1/geoBoundaries-BRN-ADM1-PREVIEW.png",
+          "licenseDetail": "nan",
+          "licenseSource": "commons.wikimedia.org/wiki/File",
+          "maxAreaSqKM": "2796.5501389622978",
+          "maxPerimeterLengthKM": "304.5113721651665",
+          "maxVertices": "443",
+          "meanAreaSqKM": "1467.7929744867452",
+          "meanPerimeterLengthKM": "237.0368260204452",
+          "meanVertices": "352.0",
+          "minAreaSqKM": "557.0327266072696",
+          "minPerimeterLengthKM": "194.72792636935384",
+          "minVertices": "235",
+          "sha256": "6ec08eaab7ef1d4d7eaa1280eb6d33e234e08dc90d7fdf8f9153fd1f38fc4d3b",
+          "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BRN/ADM1/geoBoundaries-BRN-ADM1_simplified.geojson",
+          "sourceDataUpdateDate": "Wed May 3 23:20:00 2023",
+          "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BRN/ADM1/geoBoundaries-BRN-ADM1-all.zip",
+          "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BRN/ADM1/geoBoundaries-BRN-ADM1.topojson",
+          "worldBankIncomeGroup": "High-income Countries"
+        },
+        "packet": "global-source-comparisons-b-package3-20261006",
+        "product_id": "gb:BRN:ADM1",
+        "retention": "retained",
+        "retrieved_at": "2026-10-06 immutable accepted capsule readback; historical retrieval time remains unknown",
+        "role": "Complete original consumed input geometry, not dated physical land/water or legal authority",
+        "temporal_status": "reference",
+        "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BRN/ADM1/geoBoundaries-BRN-ADM1_simplified.geojson",
+        "verification": "unverified",
+        "vintage": "Original consumed whole SHA 6ec08eaab7ef1d4d7eaa1280eb6d33e234e08dc90d7fdf8f9153fd1f38fc4d3b; advertised represented year 2011"
+      },
+      "source_capture_pin": {
+        "commit": "0635e6d935f6953005e87a2b1290ddacbe55f337",
+        "path": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/inputs/source-products/gb-BRN-ADM1.bin",
+        "mode": "100644",
+        "blob": "52b83027ad0341cda3352c12ea3da248c35437c5",
+        "bytes": 10409,
+        "sha256": "30a83ca34e6843ffd42642aea4368fe3cd0536a3c1dc58e8a2cca632b0543563",
+        "uncompressed_bytes": 34750,
+        "uncompressed_sha256": "6ec08eaab7ef1d4d7eaa1280eb6d33e234e08dc90d7fdf8f9153fd1f38fc4d3b"
+      },
+      "current_selected_target_binding": null,
+      "runtime_issuance": null,
+      "programme_approval": null,
+      "missing_fields": [
+        "scope.target_current_bindings: actual selected target owner index, parent owner index/year, whole current feature and authenticated canonical preimage",
+        "accepted administrative batch roster + literal SEA005-to-existing-sourceCase/payload/outcome field adapter"
+      ]
+    }
+  },
+  "exact_current_caller_blockers": [
+    {
+      "function": "administrativeHandoffFor",
+      "predicate": "matches.length===1 over RETAINED_ADMINISTRATIVE_HANDOFFS=[363,327]",
+      "cause": "SEA accepted0635 product mode/OID/bytes/SHA cannot match either original roster; not a current code programme approval problem."
+    },
+    {
+      "function": "administrativeSourcePremiseStage",
+      "predicate": "payloads=json(...).additive_payloads; outcomes/gb/ncl=.cases; scope.candidate_source_native_bindings/original_physical_comparison_bindings",
+      "cause": "SEA accepted005 is literal cases with different original names. Cannot supply renamed scientific facts as original363 payloads."
+    }
+  ],
+  "smallest_required_adaptation": {
+    "owned_path": "scripts/additive-gap-repair.mjs",
+    "registration": "Append exact accepted0635 SEA005 fit/state/family product roster; preserve363/327 rosters literal and same existing profile.",
+    "literal_reader": "Add explicit SEA005 view reader retaining raw original component features, comparison records, physical packed rows/query relations, whole source features/recipe/registry. Use exact accepted inverse fields, not invented covers/validity/date fields.",
+    "full_source_predicates": "Reuse exact residualzero/is_valid/hash/unique-subject/currenttarget and wholemappedland+emptywater guards; physical v1 metadata alias must restore original candidate knownmetadata from whole physicalcase before existing premises.",
+    "preserved_scope": "All318 IDs/family122/30priority and unchanged288 outcomes travel with request/sourcefacts. Original15 empty intersections retained and never relabeled positive.",
+    "native_route": "Once real source output qualifies, existing native request consumes its exact sourcepublication/facts/inventory/whole currentbounds/latitudes/containingmembers; no native output descriptor currently issued."
+  },
+  "current_fact_status": {
+    "stable_subject_crosswalk": "all30 known,28unique selectedtargets joined; no exception",
+    "current_target_geometry": "complete original65f7 bindings retained; must authenticate unchanged actual current353 target bodies/owners before issuing, no new research needed",
+    "current_year": "unsupported; retained source reference year not contemporary approval",
+    "source_physical_date_authority": "limits unchanged/unapproved",
+    "native_cells": "unknown for SEA30; no existing gain qualification",
+    "programme": "Existing current458 only contains363/327 reader. New reader body requires genuine reviewed SOURCE/NATIVE tuple, not borrowed programme."
+  },
+  "required_only_missing_operative_values": [
+    "reviewed accepted318 corpus registration and literal reader body",
+    "current HEAD whole target/owner/parent equality to retained28 joins",
+    "real request publication/runtime/host/storage operating admission",
+    "actual source output then native window/current-neighborqualification"
+  ],
+  "limits": "Private cache operands/static exact predicates only. No operators/source comparison/GIS/grid scan/control/W edit/claim/provider. Full research not repeated; no manufactured runnable request."
+}

@@ -1,0 +1,1920 @@
+[
+  {
+    "gap_edge_index": 27,
+    "original_source": {
+      "geographic_endpoints": [
+        [
+          -7.433009894088692,
+          39.654813107452554
+        ],
+        [
+          -7.434030840138079,
+          39.6556231671724
+        ]
+      ],
+      "key": "dgt_0502",
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/dgt-municipios-castelo-branco.json",
+      "projected_endpoints": [
+        [
+          634432.028695788,
+          4390619.2855767105
+        ],
+        [
+          634342.8690831584,
+          4390707.6666013785
+        ]
+      ],
+      "ring_index": 0,
+      "segment_index": 24634
+    },
+    "output_xy": [
+      634400.4955914024,
+      4390650.54331768
+    ],
+    "stages": [
+      {
+        "both_endpoints_exactly_on_traced_original_source": true,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 1.7618818889057768e-10,
+        "nearest_segment_endpoints": [
+          [
+            634432.028695788,
+            4390619.2855767105
+          ],
+          [
+            634342.8690831584,
+            4390707.6666013785
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "portugal_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 3.138926670162972,
+        "nearest_segment_endpoints": [
+          [
+            634342.8688418325,
+            4390707.666355979
+          ],
+          [
+            634434.2029592184,
+            4390623.881735268
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "spain_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 3.138926670278649,
+        "nearest_segment_endpoints": [
+          [
+            634434.2029592184,
+            4390623.881735268
+          ],
+          [
+            634342.8753973291,
+            4390707.660342347
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "portugal_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 2.911585613766571e-10,
+        "nearest_segment_endpoints": [
+          [
+            634342.8753973291,
+            4390707.660342347
+          ],
+          [
+            634432.028695788,
+            4390619.2855767105
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "spain_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 2.911585613766571e-10,
+        "nearest_segment_endpoints": [
+          [
+            634432.028695788,
+            4390619.2855767105
+          ],
+          [
+            634342.8753973291,
+            4390707.660342347
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "both_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 81.13224557358954,
+        "nearest_segment_endpoints": [
+          [
+            634342.8688418325,
+            4390707.666355979
+          ],
+          [
+            634342.8753973291,
+            4390707.660342347
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "neither_operand"
+      }
+    ]
+  },
+  {
+    "gap_edge_index": 27,
+    "original_source": {
+      "geographic_endpoints": [
+        [
+          -7.434030843,
+          39.655623165
+        ],
+        [
+          -7.432983624,
+          39.654854163
+        ]
+      ],
+      "key": "ign_adminunit_1173029",
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173029.json",
+      "projected_endpoints": [
+        [
+          634342.8688418325,
+          4390707.666355979
+        ],
+        [
+          634434.2029592184,
+          4390623.881735268
+        ]
+      ],
+      "ring_index": 0,
+      "segment_index": 262
+    },
+    "output_xy": [
+      634411.1413161756,
+      4390645.037148717
+    ],
+    "stages": [
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 3.5840940690958742,
+        "nearest_segment_endpoints": [
+          [
+            634432.028695788,
+            4390619.2855767105
+          ],
+          [
+            634342.8690831584,
+            4390707.6666013785
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "portugal_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": true,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 2.192309176879618e-10,
+        "nearest_segment_endpoints": [
+          [
+            634342.8688418325,
+            4390707.666355979
+          ],
+          [
+            634434.2029592184,
+            4390623.881735268
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "spain_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 3.036932353054408e-10,
+        "nearest_segment_endpoints": [
+          [
+            634434.2029592184,
+            4390623.881735268
+          ],
+          [
+            634342.8753973291,
+            4390707.660342347
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "portugal_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 3.5840940690105216,
+        "nearest_segment_endpoints": [
+          [
+            634342.8753973291,
+            4390707.660342347
+          ],
+          [
+            634432.028695788,
+            4390619.2855767105
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "spain_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 3.03691400666817e-10,
+        "nearest_segment_endpoints": [
+          [
+            634342.8753973291,
+            4390707.660342347
+          ],
+          [
+            634434.2029592184,
+            4390623.881735268
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "both_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 92.63854519786108,
+        "nearest_segment_endpoints": [
+          [
+            634342.8688418325,
+            4390707.666355979
+          ],
+          [
+            634342.8753973291,
+            4390707.660342347
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "neither_operand"
+      }
+    ]
+  },
+  {
+    "gap_edge_index": 22,
+    "original_source": {
+      "geographic_endpoints": [
+        [
+          -7.313015597656417,
+          39.64986889615598
+        ],
+        [
+          -7.318381509294816,
+          39.648538128021336
+        ]
+      ],
+      "key": "dgt_0502",
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/dgt-municipios-castelo-branco.json",
+      "projected_endpoints": [
+        [
+          644737.187449364,
+          4390257.122368374
+        ],
+        [
+          644279.5536584794,
+          4390100.778511481
+        ]
+      ],
+      "ring_index": 0,
+      "segment_index": 24587
+    },
+    "output_xy": [
+      644647.0675041818,
+      4390226.334213973
+    ],
+    "stages": [
+      {
+        "both_endpoints_exactly_on_traced_original_source": true,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 1.7206185645039013e-10,
+        "nearest_segment_endpoints": [
+          [
+            644737.187449364,
+            4390257.122368374
+          ],
+          [
+            644279.5536584794,
+            4390100.778511481
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "portugal_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 14.951408940883661,
+        "nearest_segment_endpoints": [
+          [
+            644491.1945968481,
+            4390200.775467072
+          ],
+          [
+            644732.9696211122,
+            4390264.400492886
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "spain_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 14.951408940883661,
+        "nearest_segment_endpoints": [
+          [
+            644732.9696211122,
+            4390264.400492886
+          ],
+          [
+            644491.1945968481,
+            4390200.775467072
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "portugal_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 1.0888308420049737e-10,
+        "nearest_segment_endpoints": [
+          [
+            644279.5545833495,
+            4390100.778827449
+          ],
+          [
+            644737.187449364,
+            4390257.122368374
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "spain_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 1.0888308420049737e-10,
+        "nearest_segment_endpoints": [
+          [
+            644737.187449364,
+            4390257.122368374
+          ],
+          [
+            644279.5545833495,
+            4390100.778827449
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "both_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 388.3682557364593,
+        "nearest_segment_endpoints": [
+          [
+            644279.5534305703,
+            4390100.778282779
+          ],
+          [
+            644279.5545833495,
+            4390100.778827449
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "neither_operand"
+      }
+    ]
+  },
+  {
+    "gap_edge_index": 18,
+    "original_source": {
+      "geographic_endpoints": [
+        [
+          -7.1874656550000005,
+          39.659696923000006
+        ],
+        [
+          -7.185481785,
+          39.659619510000006
+        ]
+      ],
+      "key": "ign_adminunit_1173013",
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173013.json",
+      "projected_endpoints": [
+        [
+          655487.5423956038,
+          4391557.9597376445
+        ],
+        [
+          655657.9122880162,
+          4391552.806664002
+        ]
+      ],
+      "ring_index": 0,
+      "segment_index": 2
+    },
+    "output_xy": [
+      655613.3703205008,
+      4391554.153897574
+    ],
+    "stages": [
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 10.366640348606564,
+        "nearest_segment_endpoints": [
+          [
+            655797.6495302713,
+            4391522.867624818
+          ],
+          [
+            655487.542702572,
+            4391557.9600405
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "portugal_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": true,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 3.571813631804637e-10,
+        "nearest_segment_endpoints": [
+          [
+            655487.5423956038,
+            4391557.9597376445
+          ],
+          [
+            655657.9122880162,
+            4391552.806664002
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "spain_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 2.679459516523882e-10,
+        "nearest_segment_endpoints": [
+          [
+            655657.9122880162,
+            4391552.806664002
+          ],
+          [
+            655487.5464671131,
+            4391557.959614496
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "portugal_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 10.36664034874505,
+        "nearest_segment_endpoints": [
+          [
+            655487.5464671131,
+            4391557.959614496
+          ],
+          [
+            655797.6464335906,
+            4391522.867975246
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "spain_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 2.679459516523882e-10,
+        "nearest_segment_endpoints": [
+          [
+            655487.5464671131,
+            4391557.959614496
+          ],
+          [
+            655657.9122880162,
+            4391552.806664002
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "both_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 125.88139482315958,
+        "nearest_segment_endpoints": [
+          [
+            655487.5423956038,
+            4391557.9597376445
+          ],
+          [
+            655487.5464671131,
+            4391557.959614496
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "neither_operand"
+      }
+    ]
+  },
+  {
+    "gap_edge_index": 18,
+    "original_source": {
+      "geographic_endpoints": [
+        [
+          -7.183860683582325,
+          39.65932442921057
+        ],
+        [
+          -7.187465651352053,
+          39.65969692567164
+        ]
+      ],
+      "key": "dgt_0505",
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/dgt-municipios-idanha-a-nova.json",
+      "projected_endpoints": [
+        [
+          655797.6495302713,
+          4391522.867624818
+        ],
+        [
+          655487.542702572,
+          4391557.9600405
+        ]
+      ],
+      "ring_index": 0,
+      "segment_index": 8631
+    },
+    "output_xy": [
+      655738.2420940405,
+      4391529.590309585
+    ],
+    "stages": [
+      {
+        "both_endpoints_exactly_on_traced_original_source": true,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 2.1901848121697144e-10,
+        "nearest_segment_endpoints": [
+          [
+            655797.6495302713,
+            4391522.867624818
+          ],
+          [
+            655487.542702572,
+            4391557.9600405
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "portugal_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 5.872054674916574,
+        "nearest_segment_endpoints": [
+          [
+            655657.9122880162,
+            4391552.806664002
+          ],
+          [
+            655797.6492420328,
+            4391522.867373524
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "spain_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 5.872054675005676,
+        "nearest_segment_endpoints": [
+          [
+            655797.6464335906,
+            4391522.867975246
+          ],
+          [
+            655657.9122880162,
+            4391552.806664002
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "portugal_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 2.8345721008434973e-10,
+        "nearest_segment_endpoints": [
+          [
+            655487.5464671131,
+            4391557.959614496
+          ],
+          [
+            655797.6464335906,
+            4391522.867975246
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "spain_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 2.834542957767942e-10,
+        "nearest_segment_endpoints": [
+          [
+            655797.6464335906,
+            4391522.867975246
+          ],
+          [
+            655487.5464671131,
+            4391557.959614496
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "both_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 59.78348715446674,
+        "nearest_segment_endpoints": [
+          [
+            655797.6495302713,
+            4391522.867624818
+          ],
+          [
+            655797.6464335906,
+            4391522.867975246
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "neither_operand"
+      }
+    ]
+  },
+  {
+    "gap_edge_index": 18,
+    "original_source": {
+      "geographic_endpoints": [
+        [
+          -7.180726831,
+          39.658648551000006
+        ],
+        [
+          -7.178513015,
+          39.658578899000005
+        ]
+      ],
+      "key": "ign_adminunit_1173013",
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173013.json",
+      "projected_endpoints": [
+        [
+          656068.0249896297,
+          4391453.294574988
+        ],
+        [
+          656258.1081323443,
+          4391449.416056224
+        ]
+      ],
+      "ring_index": 0,
+      "segment_index": 5
+    },
+    "output_xy": [
+      656132.82124378,
+      4391451.972450974
+    ],
+    "stages": [
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 3.0038476670086216,
+        "nearest_segment_endpoints": [
+          [
+            656255.59091115,
+            4391440.752122172
+          ],
+          [
+            656068.0252483349,
+            4391453.2948896745
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "portugal_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": true,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 1.2726905338196247e-10,
+        "nearest_segment_endpoints": [
+          [
+            656068.0249896297,
+            4391453.294574988
+          ],
+          [
+            656258.1081323443,
+            4391449.416056224
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "spain_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 1.5260266830531517e-10,
+        "nearest_segment_endpoints": [
+          [
+            656258.1081323443,
+            4391449.416056224
+          ],
+          [
+            656068.0321341906,
+            4391453.294429208
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "portugal_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 3.0038476669838485,
+        "nearest_segment_endpoints": [
+          [
+            656068.0321341906,
+            4391453.294429208
+          ],
+          [
+            656255.59091115,
+            4391440.752122172
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "spain_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 1.5260281780233246e-10,
+        "nearest_segment_endpoints": [
+          [
+            656068.0321341906,
+            4391453.294429208
+          ],
+          [
+            656258.1081323443,
+            4391449.416056224
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "both_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 64.8025952245728,
+        "nearest_segment_endpoints": [
+          [
+            656068.0249896297,
+            4391453.294574988
+          ],
+          [
+            656068.0321341906,
+            4391453.294429208
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "neither_operand"
+      }
+    ]
+  },
+  {
+    "gap_edge_index": 18,
+    "original_source": {
+      "geographic_endpoints": [
+        [
+          -7.178544392892511,
+          39.658501333692676
+        ],
+        [
+          -7.180726827911397,
+          39.65864855378677
+        ]
+      ],
+      "key": "dgt_0505",
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/dgt-municipios-idanha-a-nova.json",
+      "projected_endpoints": [
+        [
+          656255.59091115,
+          4391440.752122172
+        ],
+        [
+          656068.0252483349,
+          4391453.2948896745
+        ]
+      ],
+      "ring_index": 0,
+      "segment_index": 8629
+    },
+    "output_xy": [
+      656156.0080594403,
+      4391447.411361062
+    ],
+    "stages": [
+      {
+        "both_endpoints_exactly_on_traced_original_source": true,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 2.7675340820970622e-11,
+        "nearest_segment_endpoints": [
+          [
+            656255.59091115,
+            4391440.752122172
+          ],
+          [
+            656068.0252483349,
+            4391453.2948896745
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "portugal_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 4.087127801977346,
+        "nearest_segment_endpoints": [
+          [
+            656068.0249896297,
+            4391453.294574988
+          ],
+          [
+            656258.1081323443,
+            4391449.416056224
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "spain_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 4.0871278019979735,
+        "nearest_segment_endpoints": [
+          [
+            656258.1081323443,
+            4391449.416056224
+          ],
+          [
+            656068.0321341906,
+            4391453.294429208
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "portugal_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 4.773600033946014e-11,
+        "nearest_segment_endpoints": [
+          [
+            656068.0321341906,
+            4391453.294429208
+          ],
+          [
+            656255.59091115,
+            4391440.752122172
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "spain_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 4.773600033946014e-11,
+        "nearest_segment_endpoints": [
+          [
+            656255.59091115,
+            4391440.752122172
+          ],
+          [
+            656068.0321341906,
+            4391453.294429208
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "both_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 88.17241016532073,
+        "nearest_segment_endpoints": [
+          [
+            656068.0249896297,
+            4391453.294574988
+          ],
+          [
+            656068.0321341906,
+            4391453.294429208
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "neither_operand"
+      }
+    ]
+  },
+  {
+    "gap_edge_index": 17,
+    "original_source": {
+      "geographic_endpoints": [
+        [
+          -7.146552188,
+          39.653236377
+        ],
+        [
+          -7.146019756,
+          39.653245519
+        ]
+      ],
+      "key": "ign_adminunit_1173085",
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173085.json",
+      "projected_endpoints": [
+        [
+          659012.3239575363,
+          4390912.565674954
+        ],
+        [
+          659057.9847767816,
+          4390914.5238637775
+        ]
+      ],
+      "ring_index": 0,
+      "segment_index": 185
+    },
+    "output_xy": [
+      659046.9068379019,
+      4390914.048780402
+    ],
+    "stages": [
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 0.316392557173437,
+        "nearest_segment_endpoints": [
+          [
+            659057.9850396307,
+            4390914.5241568815
+          ],
+          [
+            658833.170834859,
+            4390898.440072331
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "portugal_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": true,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 6.011804183106632e-10,
+        "nearest_segment_endpoints": [
+          [
+            659012.3239575363,
+            4390912.565674954
+          ],
+          [
+            659057.9847767816,
+            4390914.5238637775
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "spain_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 4.310107844018967e-10,
+        "nearest_segment_endpoints": [
+          [
+            659057.9752054475,
+            4390914.5234533055
+          ],
+          [
+            659012.3239575363,
+            4390912.565674954
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "portugal_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 0.31639255738609046,
+        "nearest_segment_endpoints": [
+          [
+            658833.170834859,
+            4390898.440072331
+          ],
+          [
+            659057.9752054475,
+            4390914.5234533055
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "spain_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 4.3101055114751795e-10,
+        "nearest_segment_endpoints": [
+          [
+            659012.3239575363,
+            4390912.565674954
+          ],
+          [
+            659057.9752054475,
+            4390914.5234533055
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "both_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 11.078541171554688,
+        "nearest_segment_endpoints": [
+          [
+            659057.9850396307,
+            4390914.5241568815
+          ],
+          [
+            659057.9752054475,
+            4390914.5234533055
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "neither_operand"
+      }
+    ]
+  },
+  {
+    "gap_edge_index": 15,
+    "original_source": {
+      "geographic_endpoints": [
+        [
+          -7.087504062000001,
+          39.662787583000004
+        ],
+        [
+          -7.085499867,
+          39.662069383
+        ]
+      ],
+      "key": "ign_adminunit_1173085",
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173085.json",
+      "projected_endpoints": [
+        [
+          664055.978337526,
+          4392078.991348149
+        ],
+        [
+          664229.61310978,
+          4392002.94082831
+        ]
+      ],
+      "ring_index": 0,
+      "segment_index": 228
+    },
+    "output_xy": [
+      664101.4773363357,
+      4392059.0631824555
+    ],
+    "stages": [
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 5.015701083042408,
+        "nearest_segment_endpoints": [
+          [
+            664229.6133878998,
+            4392002.941074218
+          ],
+          [
+            664051.1712744508,
+            4392073.584348825
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "portugal_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": true,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 2.5230467043758425e-10,
+        "nearest_segment_endpoints": [
+          [
+            664055.978337526,
+            4392078.991348149
+          ],
+          [
+            664229.61310978,
+            4392002.94082831
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "spain_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 2.794362568922625e-10,
+        "nearest_segment_endpoints": [
+          [
+            664229.6046538965,
+            4392002.944531914
+          ],
+          [
+            664055.978337526,
+            4392078.991348149
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "portugal_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 5.015701083013309,
+        "nearest_segment_endpoints": [
+          [
+            664051.1712744508,
+            4392073.584348825
+          ],
+          [
+            664229.6046538965,
+            4392002.944531914
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "spain_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 2.7944105506968776e-10,
+        "nearest_segment_endpoints": [
+          [
+            664055.978337526,
+            4392078.991348149
+          ],
+          [
+            664229.6046538965,
+            4392002.944531914
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "both_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 139.8782057503966,
+        "nearest_segment_endpoints": [
+          [
+            664229.6133878998,
+            4392002.941074218
+          ],
+          [
+            664229.6046538965,
+            4392002.944531914
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "neither_operand"
+      }
+    ]
+  },
+  {
+    "gap_edge_index": 14,
+    "original_source": {
+      "geographic_endpoints": [
+        [
+          -7.017009231142151,
+          39.67012435551969
+        ],
+        [
+          -7.019009665611629,
+          39.670014832805265
+        ]
+      ],
+      "key": "dgt_0505",
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/dgt-municipios-idanha-a-nova.json",
+      "projected_endpoints": [
+        [
+          670085.5477435783,
+          4393024.614465677
+        ],
+        [
+          669914.2216370755,
+          4393008.667083419
+        ]
+      ],
+      "ring_index": 0,
+      "segment_index": 8519
+    },
+    "output_xy": [
+      669990.1008806193,
+      4393015.730077652
+    ],
+    "stages": [
+      {
+        "both_endpoints_exactly_on_traced_original_source": true,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 5.886430653289615e-11,
+        "nearest_segment_endpoints": [
+          [
+            670085.5477435783,
+            4393024.614465677
+          ],
+          [
+            669914.2216370755,
+            4393008.667083419
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "portugal_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 7.102122275146804,
+        "nearest_segment_endpoints": [
+          [
+            669914.2213533004,
+            4393008.666765627
+          ],
+          [
+            670000.5779632013,
+            4393024.9301846
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "spain_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 7.102122275199662,
+        "nearest_segment_endpoints": [
+          [
+            670000.5779632013,
+            4393024.9301846
+          ],
+          [
+            669914.224412488,
+            4393008.66734176
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "portugal_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 2.3838162062167833e-10,
+        "nearest_segment_endpoints": [
+          [
+            669914.224412488,
+            4393008.66734176
+          ],
+          [
+            670085.5447663737,
+            4393024.614188553
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "spain_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 2.383829420934847e-10,
+        "nearest_segment_endpoints": [
+          [
+            670085.5447663737,
+            4393024.614188553
+          ],
+          [
+            669914.224412488,
+            4393008.66734176
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "both_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 76.2044661049738,
+        "nearest_segment_endpoints": [
+          [
+            669914.2213533004,
+            4393008.666765627
+          ],
+          [
+            669914.224412488,
+            4393008.66734176
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "neither_operand"
+      }
+    ]
+  },
+  {
+    "gap_edge_index": 13,
+    "original_source": {
+      "geographic_endpoints": [
+        [
+          -7.008081113,
+          39.683739764
+        ],
+        [
+          -7.007815301000001,
+          39.683886608
+        ]
+      ],
+      "key": "ign_adminunit_1172975",
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1172975.json",
+      "projected_endpoints": [
+        [
+          670817.8318240286,
+          4394552.843082129
+        ],
+        [
+          670840.2663261831,
+          4394569.648588607
+        ]
+      ],
+      "ring_index": 0,
+      "segment_index": 68
+    },
+    "output_xy": [
+      670819.3066784439,
+      4394553.947883798
+    ],
+    "stages": [
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 6.652562706940561e-05,
+        "nearest_segment_endpoints": [
+          [
+            670840.2666194475,
+            4394569.648838633
+          ],
+          [
+            670817.8321168155,
+            4394552.843388286
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "portugal_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": true,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 4.1381610486253514e-10,
+        "nearest_segment_endpoints": [
+          [
+            670817.8318240286,
+            4394552.843082129
+          ],
+          [
+            670840.2663261831,
+            4394569.648588607
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "spain_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 6.652561695249046e-05,
+        "nearest_segment_endpoints": [
+          [
+            670840.2663881319,
+            4394569.648665356
+          ],
+          [
+            670817.8321168155,
+            4394552.843388286
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "portugal_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 8.078397914103934e-11,
+        "nearest_segment_endpoints": [
+          [
+            670817.8319501166,
+            4394552.84317658
+          ],
+          [
+            670840.2663261831,
+            4394569.648588607
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "spain_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 1.8426073039379807,
+        "nearest_segment_endpoints": [
+          [
+            670817.8318240286,
+            4394552.843082129
+          ],
+          [
+            670817.8319501166,
+            4394552.84317658
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "both_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 8.078397914103934e-11,
+        "nearest_segment_endpoints": [
+          [
+            670817.8319501166,
+            4394552.84317658
+          ],
+          [
+            670840.2663261831,
+            4394569.648588607
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "neither_operand"
+      }
+    ]
+  },
+  {
+    "gap_edge_index": 7,
+    "original_source": {
+      "geographic_endpoints": [
+        [
+          -6.961316315451763,
+          39.82466418466775
+        ],
+        [
+          -6.962255784691003,
+          39.824710578285924
+        ]
+      ],
+      "key": "dgt_0505",
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/dgt-municipios-idanha-a-nova.json",
+      "projected_endpoints": [
+        [
+          674472.394727356,
+          4410285.3511102265
+        ],
+        [
+          674391.870592363,
+          4410288.668118763
+        ]
+      ],
+      "ring_index": 0,
+      "segment_index": 8142
+    },
+    "output_xy": [
+      674424.379942863,
+      4410287.328970033
+    ],
+    "stages": [
+      {
+        "both_endpoints_exactly_on_traced_original_source": true,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 6.280941830490899e-11,
+        "nearest_segment_endpoints": [
+          [
+            674472.394727356,
+            4410285.3511102265
+          ],
+          [
+            674391.870592363,
+            4410288.668118763
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "portugal_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 2.493823509175182,
+        "nearest_segment_endpoints": [
+          [
+            674393.0888860088,
+            4410292.755102122
+          ],
+          [
+            674472.3944304221,
+            4410285.350807183
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "spain_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 2.493823509272766,
+        "nearest_segment_endpoints": [
+          [
+            674472.3883873717,
+            4410285.351371388
+          ],
+          [
+            674393.0888860088,
+            4410292.755102122
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "portugal_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 3.60018194534926e-11,
+        "nearest_segment_endpoints": [
+          [
+            674391.870592363,
+            4410288.668118763
+          ],
+          [
+            674472.3883873717,
+            4410285.351371388
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "spain_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 3.600164310970104e-11,
+        "nearest_segment_endpoints": [
+          [
+            674472.3883873717,
+            4410285.351371388
+          ],
+          [
+            674391.870592363,
+            4410288.668118763
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "both_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 48.0491585830637,
+        "nearest_segment_endpoints": [
+          [
+            674472.394727356,
+            4410285.3511102265
+          ],
+          [
+            674472.3883873717,
+            4410285.351371388
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "neither_operand"
+      }
+    ]
+  },
+  {
+    "gap_edge_index": 5,
+    "original_source": {
+      "geographic_endpoints": [
+        [
+          -6.927951381528884,
+          39.85539663086406
+        ],
+        [
+          -6.928599301725997,
+          39.85474231069948
+        ]
+      ],
+      "key": "dgt_0505",
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/dgt-municipios-idanha-a-nova.json",
+      "projected_endpoints": [
+        [
+          677248.9510618127,
+          4413762.296646773
+        ],
+        [
+          677195.2052156483,
+          4413688.381770693
+        ]
+      ],
+      "ring_index": 0,
+      "segment_index": 8041
+    },
+    "output_xy": [
+      677222.5411056993,
+      4413725.975911818
+    ],
+    "stages": [
+      {
+        "both_endpoints_exactly_on_traced_original_source": true,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 3.694553605008569e-10,
+        "nearest_segment_endpoints": [
+          [
+            677248.9510618127,
+            4413762.296646773
+          ],
+          [
+            677195.2052156483,
+            4413688.381770693
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "portugal_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 0.3873474202173335,
+        "nearest_segment_endpoints": [
+          [
+            677189.1425065845,
+            4413690.065001375
+          ],
+          [
+            677252.7674721252,
+            4413757.401544367
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "spain_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 1.2406229731051826e-10,
+        "nearest_segment_endpoints": [
+          [
+            677248.9510618127,
+            4413762.296646773
+          ],
+          [
+            677220.7615537206,
+            4413723.528553123
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "portugal_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 0.3873474205015498,
+        "nearest_segment_endpoints": [
+          [
+            677220.7615537206,
+            4413723.528553123
+          ],
+          [
+            677252.7674721252,
+            4413757.401544367
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "spain_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 3.025949409807539,
+        "nearest_segment_endpoints": [
+          [
+            677189.1425065845,
+            4413690.065001375
+          ],
+          [
+            677220.7615537206,
+            4413723.528553123
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "both_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 1.2406229731051826e-10,
+        "nearest_segment_endpoints": [
+          [
+            677248.9510618127,
+            4413762.296646773
+          ],
+          [
+            677220.7615537206,
+            4413723.528553123
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "neither_operand"
+      }
+    ]
+  },
+  {
+    "gap_edge_index": 61,
+    "original_source": {
+      "geographic_endpoints": [
+        [
+          -6.878090955,
+          40.028550391
+        ],
+        [
+          -6.879734074000001,
+          40.030319490000004
+        ]
+      ],
+      "key": "ign_adminunit_1173031",
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173031.json",
+      "projected_endpoints": [
+        [
+          681057.2962434145,
+          4433082.911274659
+        ],
+        [
+          680912.405562719,
+          4433275.948385204
+        ]
+      ],
+      "ring_index": 0,
+      "segment_index": 679
+    },
+    "output_xy": [
+      680993.8871120297,
+      4433167.39093509
+    ],
+    "stages": [
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 2.9489374938795914,
+        "nearest_segment_endpoints": [
+          [
+            680906.3783115086,
+            4433272.700621604
+          ],
+          [
+            681057.2965817286,
+            4433082.911572911
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "portugal_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": true,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 3.7150130257403656e-10,
+        "nearest_segment_endpoints": [
+          [
+            681057.2962434145,
+            4433082.911274659
+          ],
+          [
+            680912.405562719,
+            4433275.948385204
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "spain_union"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 2.9489374937040087,
+        "nearest_segment_endpoints": [
+          [
+            680906.3783115086,
+            4433272.700621604
+          ],
+          [
+            681057.2865595878,
+            4433082.924176373
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "portugal_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 2.0185788494077188e-10,
+        "nearest_segment_endpoints": [
+          [
+            681057.2865595878,
+            4433082.924176373
+          ],
+          [
+            680912.405562719,
+            4433275.948385204
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "spain_only_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": false,
+        "nearest_segment_distance_m": 105.61308289677096,
+        "nearest_segment_endpoints": [
+          [
+            681057.2962434145,
+            4433082.911274659
+          ],
+          [
+            681057.2865595878,
+            4433082.924176373
+          ]
+        ],
+        "rational_intersection_round_equals_output": false,
+        "stage": "both_operand"
+      },
+      {
+        "both_endpoints_exactly_on_traced_original_source": false,
+        "geos_direct_intersection_equals_output": true,
+        "nearest_segment_distance_m": 2.0185788494077188e-10,
+        "nearest_segment_endpoints": [
+          [
+            681057.2865595878,
+            4433082.924176373
+          ],
+          [
+            680912.405562719,
+            4433275.948385204
+          ]
+        ],
+        "rational_intersection_round_equals_output": true,
+        "stage": "neither_operand"
+      }
+    ]
+  }
+]

@@ -1,0 +1,147 @@
+{
+  "accepted": true,
+  "request_id": "cf8dd931-c70a-4df6-8feb-7484ab91e8f7",
+  "pr_number": 1690,
+  "phase": "merge",
+  "queue_attempt": 1,
+  "final_capacity": {
+    "phase": "final-capacity",
+    "reserved": false,
+    "planning": {
+      "limit": 5000,
+      "remaining": 4919,
+      "reset": 1791651232,
+      "resource": "core",
+      "required": 17,
+      "observations": 1,
+      "waited_ms": 427,
+      "reserved": false
+    },
+    "planning_attempts": 1,
+    "required": 103,
+    "metadata_calls": 18,
+    "admission_calls": 8,
+    "proof_calls": 0,
+    "artifact_pages": 1,
+    "inventory": {
+      "blob_calls": 10,
+      "water": false,
+      "descriptor_count": 9,
+      "original_count": 2,
+      "immutable_oids": 10,
+      "cache_fit": true,
+      "exact_git_transport": false,
+      "review_pages": 1
+    },
+    "limit": 5000,
+    "remaining": 4901,
+    "reset": 1791651232,
+    "resource": "core",
+    "observations": 1,
+    "elapsed_ms": 155,
+    "waited_ms": 155,
+    "status": "observed-sufficient",
+    "validation_call_bound": 87
+  },
+  "merge_commit": "e94eb44e790f3c41e5b4e1ae4d45affa4f767e73",
+  "title": "Give required geography jobs a 25-minute deadline",
+  "github_issue": 1689,
+  "geography": {
+    "status": "passed",
+    "trusted_code_commit": "92ad83fa4fda9f1f31ce2e4e637149ebd4819485",
+    "candidate_commit": "52597e5b83df42c4a6f992198072104674c91b58",
+    "report_sha256": "f35a6c0e3dc42a7dc30af05c7bd2538baa6bf3f45fffc05bd645997cc20646ea",
+    "adjudication": null
+  },
+  "tested_base": "92ad83fa4fda9f1f31ce2e4e637149ebd4819485",
+  "tested_candidate": "52597e5b83df42c4a6f992198072104674c91b58",
+  "reviewed_head": "14af243bab94012f63960fe77b54fb7a189b6667",
+  "evidence": {
+    "status": "bytes-verified",
+    "head_sha": "14af243bab94012f63960fe77b54fb7a189b6667",
+    "manifest_sha256": "c9689537fdd655e925e5ac3d1795f72a943f87232d845ac1d9e5833ec2c53de7",
+    "checked": [
+      "92ad83fa4fda9f1f31ce2e4e637149ebd4819485:.github/workflows/merge-integration-checks.yml",
+      "92ad83fa4fda9f1f31ce2e4e637149ebd4819485:.github/workflows/worker-merge.yml",
+      "candidate:.github/workflows/merge-integration-checks.yml",
+      "candidate:.github/workflows/worker-merge.yml",
+      "candidate:coordination/engineering/geography-job-deadline-20261010/original-ci-timeout-annotations.json",
+      "candidate:coordination/engineering/geography-job-deadline-20261010/focused-test.stdout",
+      "candidate:coordination/engineering/geography-job-deadline-20261010/README.md",
+      "candidate:coordination/engineering/geography-job-deadline-20261010/exact-workflow-comparison.json",
+      "candidate:coordination/engineering/geography-job-deadline-20261010/original-worker-timeout-annotations.json"
+    ],
+    "limits": [],
+    "factual_validation": "Requires independent source/method review; hashes do not establish truth",
+    "change_files_checked": 8,
+    "metric_bindings_checked": 0,
+    "record_checks_checked": 0,
+    "review": {
+      "reviewer": "01a10893-2a57-72e0-aa08-5c36088d5206",
+      "domains": [
+        "implementation"
+      ],
+      "limits": [
+        "Timeout annotations establish the wall-clock ceiling; they do not identify an algorithmic or active-child cause. No new scientific result, repair, release selection or deployment is claimed."
+      ],
+      "comment_id": 6099570485
+    }
+  },
+  "proof": null,
+  "head_cleanup": {
+    "status": "deleted",
+    "reference": "engineering/geography-job-deadline",
+    "expected_head": "14af243bab94012f63960fe77b54fb7a189b6667"
+  },
+  "status": "merged",
+  "request_accounting": {
+    "phase": "merge",
+    "actual_http_attempts": 94,
+    "counts": {
+      "GET:repository-authority:200": 7,
+      "GET:pulls:200": 5,
+      "GET:comments:200": 3,
+      "GET:actions:200": 8,
+      "GET:pulls:304": 12,
+      "GET:issues:200": 2,
+      "GET:checks:200": 2,
+      "GET:immutable-metadata:200": 5,
+      "GET:immutable-blob:200": 1,
+      "GET:comments:304": 8,
+      "GET:repository-authority:304": 7,
+      "GET:actions:304": 4,
+      "GET:issues:304": 6,
+      "GET:checks:304": 6,
+      "GET:immutable-metadata:304": 15,
+      "GET:actions:302": 1,
+      "PUT:pulls:200": 1,
+      "DELETE:repository-authority:204": 1
+    },
+    "observed_repository_core": {
+      "first": {
+        "limit": 5000,
+        "remaining": 4919,
+        "reset": 1791651232
+      },
+      "last": {
+        "limit": 5000,
+        "remaining": 4936,
+        "reset": 1791651232
+      },
+      "lowest_remaining": {
+        "limit": 5000,
+        "remaining": 4900,
+        "reset": 1791651232
+      }
+    }
+  },
+  "result_source": "github-comment",
+  "result_comment_id": 6099822305,
+  "local_cleanup": {
+    "status": "released",
+    "released": true,
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work",
+    "preservedRef": "refs/worldatlas-local-recovery/0eca65a7-26c0-4816-a7c4-c987c577f2e2",
+    "head": "14af243bab94012f63960fe77b54fb7a189b6667"
+  }
+}

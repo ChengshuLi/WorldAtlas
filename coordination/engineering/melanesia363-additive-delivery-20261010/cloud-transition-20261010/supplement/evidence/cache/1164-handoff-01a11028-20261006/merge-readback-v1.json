@@ -1,0 +1,96 @@
+{
+  "actual_github_changed_files": [
+    "coordination/engineering/global-successor-audit-1164-20261006-local01/claim.json",
+    "coordination/engineering/global-successor-audit-1164-20261006-local01/evidence-quality.json",
+    "coordination/engineering/global-successor-audit-1164-20261006-local01/validation.txt",
+    "docs/PHYSICAL_GAP_SUCCESSORS.md",
+    "scripts/physical_gap_successor.py",
+    "test/physical-gap-successor.py",
+    "test/physical-gap-successor.test.mjs"
+  ],
+  "all_changed_file_bytes_and_modes_match_reviewed_head_and_current_main": true,
+  "changed_files": [
+    {
+      "bytes": 740,
+      "matches_current_origin_main": true,
+      "matches_reviewed_head": true,
+      "mode": "100644",
+      "path": "coordination/engineering/global-successor-audit-1164-20261006-local01/claim.json",
+      "sha256": "c7fcc7b9de7a453e14b27c1550839fd3ce386db607d63cfbd3b005e530173b93"
+    },
+    {
+      "bytes": 6155,
+      "matches_current_origin_main": true,
+      "matches_reviewed_head": true,
+      "mode": "100644",
+      "path": "coordination/engineering/global-successor-audit-1164-20261006-local01/evidence-quality.json",
+      "sha256": "248bdbab114544f100c433a2ac4b40509817493ca018c5bf275b855589279401"
+    },
+    {
+      "bytes": 1926,
+      "matches_current_origin_main": true,
+      "matches_reviewed_head": true,
+      "mode": "100644",
+      "path": "coordination/engineering/global-successor-audit-1164-20261006-local01/validation.txt",
+      "sha256": "fd2884a5811a116efaeb4e2c42a42b8b6dc9b04ecb6fb8d970d23e56dbbe0b41"
+    },
+    {
+      "bytes": 4075,
+      "matches_current_origin_main": true,
+      "matches_reviewed_head": true,
+      "mode": "100644",
+      "path": "docs/PHYSICAL_GAP_SUCCESSORS.md",
+      "sha256": "81cb6b067dc3c1481ee7917055ec68d1fd65414d1c26babde3ead9b8e2d7192d"
+    },
+    {
+      "bytes": 22571,
+      "matches_current_origin_main": true,
+      "matches_reviewed_head": true,
+      "mode": "100644",
+      "path": "scripts/physical_gap_successor.py",
+      "sha256": "6b2f7b23a0ac3b9640384c62771e7069b13d530ff8ebe39931df13b35c91e599"
+    },
+    {
+      "bytes": 25145,
+      "matches_current_origin_main": true,
+      "matches_reviewed_head": true,
+      "mode": "100644",
+      "path": "test/physical-gap-successor.py",
+      "sha256": "e85cdb136b0a27e69bd0d663e228006f983c74731f0c271a5dbc5da5c92675bc"
+    },
+    {
+      "bytes": 507,
+      "matches_current_origin_main": true,
+      "matches_reviewed_head": true,
+      "mode": "100644",
+      "path": "test/physical-gap-successor.test.mjs",
+      "sha256": "a1578d1d025ca187fa0a36b9a4bf63826d987e48640aa2b0ba3bc3b1e69eb0f4"
+    }
+  ],
+  "created_utc": "2026-10-06T18:16:04.231652+00:00",
+  "current_origin_main": "48fef180ea85dffa3c335a94a56d3def35a50f3a",
+  "limits": [
+    "This validates merge and changed-byte custody for the generic framework PR only.",
+    "No complete-world adapter/run, native-grid, global status refresh or priority evidence is supplied by this readback.",
+    "No source authority, water, ownership, legal, geographic approval, or deployment claim."
+  ],
+  "manifest_matches_reviewed_head_and_main": true,
+  "manifest_path": "coordination/engineering/global-successor-audit-1164-20261006-local01/evidence-quality.json",
+  "manifest_sha256": "248bdbab114544f100c433a2ac4b40509817493ca018c5bf275b855589279401",
+  "merge_commit": "48fef180ea85dffa3c335a94a56d3def35a50f3a",
+  "merge_commit_is_ancestor_of_current_main": true,
+  "pr_number": 1168,
+  "queue_comment_id": 6022589619,
+  "queue_receipt": {
+    "accepted": true,
+    "candidate_cleanup": "deleted",
+    "candidate_test_report_sha256": "d8abac2624d8f786b7ed85a52b279061a5c52572dbff2a56397b6e80c93ad6f0",
+    "head_cleanup": "deleted",
+    "status": "merged",
+    "tested_base": "f6ddb61a853a488901af5cad6c83de5b7cfa7600",
+    "tested_candidate": "90207007a8e66b99ecf7db7a5b8753627003b198"
+  },
+  "request_id": "62ce9c99-8af7-451e-9ecf-eab973d308b1",
+  "reviewed_head": "1c032b7aa5a5ed8cddaa4d5b52beea00bc35d029",
+  "version": "worldatlas-1168-merged-byte-readback-v1"
+}

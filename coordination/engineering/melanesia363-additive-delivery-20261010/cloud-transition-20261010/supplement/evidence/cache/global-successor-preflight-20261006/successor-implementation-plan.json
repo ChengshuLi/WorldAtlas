@@ -1,0 +1,239 @@
+{
+  "version": 1,
+  "status": "read-only-planning-not-admitted-successor-reuse",
+  "baseline_commit": "548c5f89f00271050823076a84695bb41e1b8454",
+  "candidate_head_commit": "405f75ce2280dc44172ba596b9ee08513abe437c",
+  "candidate_merge_state": "not verified by this helper; root reported PR1150 awaiting queue attempt2",
+  "actual_reads": {
+    "original_geography_part_count": 36,
+    "git_diff_changed_parts": [
+      "data/geography/part-11.json",
+      "data/geography/part-17.json"
+    ],
+    "feature_comparisons": [
+      {
+        "id": "gb:IRN:ADM2:26516999B17111396986996",
+        "path": "data/geography/part-11.json",
+        "before_sha256": "e3453bbbd2e5fb7ed48a467cb829e61c8940b01eba0ed77197fbfa8fe941b071",
+        "after_sha256": "a9a1cf0a2cd6474b72e20adafa97c3eb0f51b7984418ae42f00dbe050da0b9df",
+        "hash_kind": "whole-feature-canonical-json-with-trailing-newline",
+        "geometry_changed": true,
+        "properties_equal": true,
+        "part_feature_counts": [
+          1500,
+          1500
+        ],
+        "added_ids": [],
+        "removed_ids": [],
+        "all_changed_ids": [
+          "gb:IRN:ADM2:26516999B17111396986996"
+        ]
+      },
+      {
+        "id": "gb:PAK:ADM2:60131773B78019453337506",
+        "path": "data/geography/part-17.json",
+        "before_sha256": "13b715336e2a6aa2f13864350f7eb25dd589776bdd1dbe3a96272bcdf16b3d7d",
+        "after_sha256": "d468f0dd0e21caa411da972f9cea02603622c6a71c199392225ec660ed540a58",
+        "hash_kind": "whole-feature-canonical-json-with-trailing-newline",
+        "geometry_changed": true,
+        "properties_equal": true,
+        "part_feature_counts": [
+          1500,
+          1500
+        ],
+        "added_ids": [],
+        "removed_ids": [],
+        "all_changed_ids": [
+          "gb:PAK:ADM2:60131773B78019453337506"
+        ]
+      }
+    ],
+    "unchanged_world_index": true,
+    "unchanged_hierarchy": true,
+    "part_pins": [
+      {
+        "commit": "548c5f89f00271050823076a84695bb41e1b8454",
+        "path": "data/geography/part-11.json",
+        "bytes": 5131824,
+        "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f"
+      },
+      {
+        "commit": "405f75ce2280dc44172ba596b9ee08513abe437c",
+        "path": "data/geography/part-11.json",
+        "bytes": 5133018,
+        "sha256": "d1b2fb15c9427497de740eb33a529ef382b58cb319028f2aa38f5878de4c9b02"
+      },
+      {
+        "commit": "548c5f89f00271050823076a84695bb41e1b8454",
+        "path": "data/geography/part-17.json",
+        "bytes": 4945828,
+        "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db"
+      },
+      {
+        "commit": "405f75ce2280dc44172ba596b9ee08513abe437c",
+        "path": "data/geography/part-17.json",
+        "bytes": 4948066,
+        "sha256": "1ae1a9ef25c1f71b66084aadf57933132383d4271b888ab38866905da5678af3"
+      }
+    ],
+    "report_and_manifest_pins": [
+      {
+        "commit": "405f75ce2280dc44172ba596b9ee08513abe437c",
+        "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3/report.json",
+        "bytes": 433512,
+        "sha256": "c84bcf6dfac17ae4ba38b2a6d90f64dbf57926f13ddf0291b423f97d066abde4"
+      },
+      {
+        "commit": "405f75ce2280dc44172ba596b9ee08513abe437c",
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json",
+        "bytes": 492083,
+        "sha256": "230a49dbb3feab482d2946a7a4c75b9b8069acd841fc2609f2251cf6d2d58330"
+      },
+      {
+        "commit": "405f75ce2280dc44172ba596b9ee08513abe437c",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+        "bytes": 117156,
+        "sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c"
+      },
+      {
+        "commit": "405f75ce2280dc44172ba596b9ee08513abe437c",
+        "path": "data/ownership-selection.json",
+        "bytes": 301,
+        "sha256": "660d72b9448566a8584231a44862d586c9ebc37261ff72e3e0c656b07c38ae3b"
+      },
+      {
+        "commit": "405f75ce2280dc44172ba596b9ee08513abe437c",
+        "path": "scripts/native-ownership/verified-candidates.json",
+        "bytes": 929,
+        "sha256": "3ce99ece408f042c8c3fc060c5668f43e13b051b27e35462780282a9908e04ce"
+      },
+      {
+        "commit": "405f75ce2280dc44172ba596b9ee08513abe437c",
+        "path": "data/native-context-migration/manifest.json",
+        "bytes": 6278,
+        "sha256": "471e6a71856c13b5856cd74f24b79cc9961b3b091980e8b9106a19c1f32a2765"
+      }
+    ],
+    "inspected_code_pins": [
+      {
+        "commit": "405f75ce2280dc44172ba596b9ee08513abe437c",
+        "path": "scripts/audit-physical-gaps.py",
+        "bytes": 9773,
+        "sha256": "7656263b33f222942f709c3b9671c344dd5350cafd2726423c6632b38a667f07"
+      },
+      {
+        "commit": "405f75ce2280dc44172ba596b9ee08513abe437c",
+        "path": "scripts/physical_gap_audit.py",
+        "bytes": 11971,
+        "sha256": "d0854276b311354160cc8b4ceaae052857bb102f4dd2e61ddaa2de0f8482819d"
+      },
+      {
+        "commit": "405f75ce2280dc44172ba596b9ee08513abe437c",
+        "path": "scripts/build-physical-gap-components.py",
+        "bytes": 10793,
+        "sha256": "a80dd384ccb0176d06d39af36c9cee7effaf2535a2aedf067cc9988e2751ea4c"
+      },
+      {
+        "commit": "405f75ce2280dc44172ba596b9ee08513abe437c",
+        "path": "scripts/physical_gap_crosswalk.py",
+        "bytes": 8799,
+        "sha256": "0e9cb04cecdab62fed2e9102340b87926224916b02e929049f279110cf9d180f"
+      },
+      {
+        "commit": "405f75ce2280dc44172ba596b9ee08513abe437c",
+        "path": "scripts/build-physical-gap-priorities.py",
+        "bytes": 16410,
+        "sha256": "bac8f2777178ca14b6db624ad58a41975d296c9931d747842c4b76971d36bc19"
+      },
+      {
+        "commit": "405f75ce2280dc44172ba596b9ee08513abe437c",
+        "path": "scripts/physical_gap_priority.py",
+        "bytes": 17403,
+        "sha256": "26ff1467cef85a0a30c21334ad9c2a6be4a0d635bae50ca4940086853773ab28"
+      },
+      {
+        "commit": "405f75ce2280dc44172ba596b9ee08513abe437c",
+        "path": "scripts/triage-geographic-grid.py",
+        "bytes": 16052,
+        "sha256": "ba1d29868bf372782ade1ebb1335c8e90f9a0be2058db04158ad4c51755123c5"
+      },
+      {
+        "commit": "405f75ce2280dc44172ba596b9ee08513abe437c",
+        "path": "scripts/geographic_grid.py",
+        "bytes": 10751,
+        "sha256": "74b3f06feedf9c10d1626e11378f1ec4ab92b283e05d1ffd510e90f8c2df7fdf"
+      },
+      {
+        "commit": "405f75ce2280dc44172ba596b9ee08513abe437c",
+        "path": "scripts/evidence/immutable.py",
+        "bytes": 7090,
+        "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+      }
+    ]
+  },
+  "archived_scope": {
+    "component_count": 95174,
+    "fragment_count": 96963,
+    "native_context_count": 49625,
+    "original_native_commit": "548c5f89f00271050823076a84695bb41e1b8454",
+    "investigation_parts": 34,
+    "investigations_encoded_bytes": 34237925,
+    "investigations_decoded_bytes": 281885651,
+    "native_context_parts": 19,
+    "detection_tiles": 2160,
+    "detection_unchecked_tiles": 0,
+    "numbers_are": "archived report values, not successor results"
+  },
+  "bounded_proposal": {
+    "geometry_detector_tiles_from_combined_old_new_county_bboxes": [
+      [
+        60,
+        25,
+        65,
+        30
+      ],
+      [
+        65,
+        25,
+        70,
+        30
+      ]
+    ],
+    "remaining_tile_count_potential_reuse_only": 2158,
+    "admitted_reused_tiles": 0,
+    "applicability_roster": "all 95174 archived components, including seven existing contact associations and every other archived component",
+    "representative_native_statuses": "reassess all 95174 archived component samples against selected v7 native grid; successor component count is unknown until recomputed",
+    "contexts": "authenticate all 49625 archived/current identities; refresh two whole-feature hashes; retain verified ancestry and metadata",
+    "adapter_paths": [
+      "scripts/audit-physical-gaps.py",
+      "scripts/physical_gap_audit.py",
+      "scripts/build-physical-gap-components.py",
+      "scripts/physical_gap_crosswalk.py",
+      "scripts/triage-geographic-grid.py",
+      "scripts/geographic_grid.py",
+      "scripts/build-physical-gap-priorities.py",
+      "scripts/physical_gap_priority.py"
+    ],
+    "selected_grid_manifest": "data/native-ownership/repaired-v7/manifest.json",
+    "selected_manifest_sha256": "70204c43deefd1af97c898f120d3638d4b8a3953445df37036d5771a54d718cc",
+    "critical_grid_limit": "954 cells is native-before versus native-after repair delta. Archived triage used legacy projected grid. It is not a legacy-grid fidelity delta."
+  },
+  "not_verified_reuse_prerequisites": [
+    "Actual merge and fresh-main successor release pointer/index closure.",
+    "Whole retained physical-land bytes, nested decoded original bytes and source receipt hash at both baselines; physical union/shoreline operands. Report descriptors were read, actual reference files not rehashed.",
+    "Whole lake reference/receipt encoded and decoded bytes and original source metadata at both baselines. No actual water files rehashed.",
+    "Complete detection input-envelope restoration and all 45 original-file closure; archived custody payload bytes, fragment features, residues and connectivity not independently decoded by this helper.",
+    "Per-tile complete original and successor location operand roster/order/geometry hashes, including clipping/contact metadata, invalid-source extents and tile-edge/date-line semantics. County bbox exclusion is only the proposed conservative boundary.",
+    "Executed scientific code parity to original producer commits and Python/Shapely/GEOS/pyproj/zlib environment parity. Current code inspected but original executions not rerun or all archived code blobs compared.",
+    "Selected v7 native manifest actual bytes and every grid row/run asset encoded/decoded hash, normative latitude bytes, complete-domain accounting, reviewed receipt and ID order. Selection and registry descriptors read only.",
+    "Representative sampling must use selected native semantics/normative latitude rather than inadvertently legacy projected interpolation or unverified Python recomputation.",
+    "All current issue API pages and exact declared subject rosters; fresh ranking positions and every component accounting."
+  ],
+  "controls_required": [
+    "Reject reuse after source/reference/code/software/operand changes or missing/tampered descriptors.",
+    "Recompute both affected tiles fully, preserve every positive fragment, zero-area residue and measurement/operation unknown.",
+    "Preserve global component connectivity across tile edges and date line and complete old/current crosswalk; recompute affected closure rather than seven contact-associated shapes.",
+    "Two complete reproducible successor generations with encoded and decoded equality; whole roster/rank coverage and independent exact-head review."
+  ],
+  "operations_performed": "Git blob and diff reads, small existing preflight read, private JSON write only; no claims, generation, tracked edits, checkout copies, browser or production access"
+}

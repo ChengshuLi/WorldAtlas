@@ -1,0 +1,1010 @@
+{
+  "kind": "selected119-existing-delivery-accounting-correction-proposal-v1",
+  "apply_authority": "root only; not applied",
+  "canonical_before": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.cache/global-gap-work-index-20261009/selected-release-decisions.json",
+    "bytes": 673653,
+    "sha256": "1ed2dd800b36a7af9237760238d43727823ee71b1a2d7ad52be16706ffe3269c"
+  },
+  "append_only_updates": [
+    {
+      "component_id": "physical-component:1e6775304d377bbcb519ad8721c8d4da5a5f0595bf2ca3e309d4a1a6b65401d3",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "previous_state": "accepted-evidence",
+      "previous_effective_state": "accepted-evidence",
+      "state": "accepted-evidence",
+      "source_coverage": "partial-supported-fragment",
+      "candidate_feature_sha256": "1aa25819410b32dc5e6dfe0abc227a9de539ec1327a651e057b1a67372a2a2c9",
+      "candidate_geometry_sha256": "d1e34a7135076f9c8b3ab7c5ce5290ada7710c0cf37c7c2b356805f1a99d26c9",
+      "target_stable_location_id": "gb:SLB:ADM1:17018030B21058058503942",
+      "source_provenance": {
+        "kind": "retained-exact-consumed-simplified-product-comparison",
+        "comparison_path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/source-comparison-capture-001/batch-source-comparisons.json",
+        "source_product_codes": [
+          "gb:SLB:ADM1"
+        ],
+        "source_features": [
+          {
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:SLB:ADM1:17018030B21058058503942",
+                "original_feature_sha256": "bb5f88c6271626945b56959cc94cb6a0a1ced11d816c034444d411bb8893be09",
+                "original_parent_id": "framework:province:guadalcanal:181b5d3b77d0",
+                "reference_year": "2021"
+              }
+            ],
+            "shapeID": "17018030B21058058503942",
+            "source_feature_index": 5,
+            "source_feature_sha256": "1dafb91370cd7e1f3b2b5f856455d43a80c1f2d474aca2000955ad7ea76c5172",
+            "source_geometry_sha256": "67021e68a21d50e9895f1aa87ef24945a01c4f658aa9f2f9d35faa97c6690cd4",
+            "source_id": "gb:SLB:ADM1"
+          }
+        ]
+      },
+      "remainder_retained": true,
+      "evidence": {
+        "accepted_source_merge": "361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5",
+        "review_whole_get": {
+          "path": "/Users/chengshuli/world-atlas-workspace/.cache/review1639-runtime-4ab-20261009/review-whole-get.json",
+          "bytes": 6965,
+          "sha256": "2fe0823741af0398802860e4550695e3410b1edb81ee6514012678c4541f0baa"
+        },
+        "source_roster_sha256": "0b591b5f9e9b222106a6a9ab4162c30566d464e5b4a30969dc60c564888b35a2",
+        "payload_component_pointer": "/additive_payloads/6",
+        "actual_native_candidate": {
+          "root_whole_acceptance": ".cache/native-1647-363-execution-operands-20261010/native065-phase-execution/root-native065-whole-result-acceptance.json",
+          "bytes": 2199,
+          "sha256": "c919a677511253b9c9592aa8e11d1ae7265bd786e7537343bdbfcf3b12adb03a",
+          "candidate_native_cells": 35,
+          "removed_cells": 0,
+          "reassigned_cells": 0,
+          "integration_credit": 0
+        },
+        "actual_current_rebind": {
+          "root_whole_acceptance": ".cache/native-1647-363-execution-operands-20261010/combined-current-rebind-preparation/root-attempt4-current-union-conservation-acceptance.json",
+          "bytes": 1284,
+          "sha256": "08270faedfaadcdb3fe923f83af601cd667ae53e79c531ba8ea13d5f42a5f2ad",
+          "execution_commit": "c192aa5c88df9a55594b62f7dcfa6e4226f59682",
+          "deduplicated_new_cells": 35,
+          "combined_new_cells": 119,
+          "cumulative_patch_cells": 260,
+          "prior_cells_preserved": 141,
+          "selected_release_credit": 0,
+          "qualification_certificate_commit": "fc51f8a067d9fc782c6adc9e47741e240348466c"
+        },
+        "actual_supported_activation_assembly": {
+          "root_whole_acceptance": ".cache/native-1647-363-execution-operands-20261010/five-existing-assembly-execution-attempt2/root-actual-assembly-whole-acceptance.json",
+          "bytes": 1361,
+          "sha256": "3a3a3a110dbe2981f200d81a0e053e8d3d8694c178199d83da6fd8978ecc203f",
+          "assembly_commit": "0eefe294390894f66c33e24e7950f21012d3791c",
+          "cumulative_patch_cells": 260,
+          "new_cells": 119,
+          "selected_release_credit": 0,
+          "prerequisite_pr": 1682
+        },
+        "actual_selected_delivery": {
+          "pr": 1683,
+          "merge": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+          "reviewed_head": "3ef1d167e0f78a6214e08f7b6bc31d4dbdb4b036",
+          "root_whole_merge_acceptance": {
+            "path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/selected119-changed-consumer-assembly-execution/root-actual-merged-selected119-acceptance.json",
+            "bytes": 4688,
+            "sha256": "a5ce4a020d456d61ac5e729ad9feb892fc935e167c8a086a51dfa747392683dc"
+          },
+          "retained_exact_id_event": {
+            "path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/selected119-changed-consumer-assembly-execution/exact-id-selected119-delivery-ledger-event.json",
+            "bytes": 5221,
+            "sha256": "2a6d39d86d5cf9075c97b0b9154df4669a99b4f63dd7eb72f35a7e66e1b552e1"
+          },
+          "selected_sidecar_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/selection-sidecar.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "0b58164984539530c73ec0646378cf2d2c0d5978",
+            "bytes": 3440,
+            "sha256": "4373c949ccb952154834ef4c7cd49241602f0b81a6cc199e5b535fac9cc07c10"
+          },
+          "selected_patch_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/patch.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "07268b3f20e1b5d186554effd8f054684e421a29",
+            "bytes": 6479,
+            "sha256": "935bee45ff80ddd217e1dc75ace3ab5bdf339fc0a5b1aa01664204d32f865884"
+          },
+          "selected_ledger_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/ledger.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "f60e0296073278432d7f5df3a58211a2dce61e5e",
+            "bytes": 358012,
+            "sha256": "dcffbaf201f4a88cbb3a07475032d55d83836ea5274236839ad88f5872f3316b"
+          },
+          "selected_envelope_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/envelope.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "106c4e55c83c0e9b052e00f46c0692b8744ff3cd",
+            "bytes": 1421,
+            "sha256": "71d65c3dc340a7be1dfade7fc0a1bc1f5f398515b146afee18fe4995d8d64ae1"
+          },
+          "qualification_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/qualification.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "9395c695bca9ebd02b1337c2fed2da03458d579a",
+            "bytes": 685,
+            "sha256": "d2b22bbfba9548fdf6cc87002d4d0198d91c0dfccffcab01a41ff00d67a2eb31"
+          },
+          "rebind_certificate_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/certificate.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "9a3c3fff92ce1375aeb8aa6037448b8e3a51e4ed",
+            "bytes": 3329,
+            "sha256": "c182a05bc72e182a190a29f7d0bce7442618da64ad0adcad002d08232f5c265c"
+          },
+          "qualified_result_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/result.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "e37a964f18d95fe053ace9a264cb9c43e5fdbc05",
+            "bytes": 1549679,
+            "sha256": "d40baba62e2b8ad0276dab8943b0d8a198c55b2bc023bc86ebcdc073bd23b219"
+          },
+          "render_log": {
+            "path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/selected119-changed-consumer-assembly-execution/3ef-reg0-production-render.log",
+            "bytes": 537118,
+            "sha256": "3cd2a5b6d233b4006268eb46b60d7aee916a5b3fb1244680a60d5d0be2ba84b4"
+          },
+          "new_selected_cells": 119,
+          "prior_cells_preserved": 141,
+          "cumulative_selected_cells_at_this_delivery": 260
+        }
+      },
+      "remaining_missing_fact": "Original nonempty remainder and source-fitness limits remain unresolved; no whole-component repair credit.",
+      "production_delivered": false,
+      "native_eligible": true,
+      "whole_gap_repaired": false,
+      "batch_owner": "engineering #1647 / native_batch_delivery",
+      "next_concrete_action": "Resolve only the original remainder using additional supported evidence; retain delivered cells and do not repeat the completed native producer.",
+      "assigned_native_pixels": 35,
+      "repaired_area_m2": null,
+      "repair_measurement_scope": "Verified selected native-cell contribution for the supported fragment; no inferred physical area or whole-gap credit.",
+      "whole_gap_completion": false,
+      "selected_native_delivery": "verified-partial",
+      "applied": true,
+      "native_phase": "065",
+      "target_id": "gb:SLB:ADM1:17018030B21058058503942",
+      "ownerIndex": 39700,
+      "geometry_scope": "supported-fragment",
+      "original_remainder": {
+        "immutable_ledger_pin": {
+          "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/ledger.json",
+          "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+          "mode": "100644",
+          "git_blob_oid": "f60e0296073278432d7f5df3a58211a2dce61e5e",
+          "bytes": 358012,
+          "sha256": "dcffbaf201f4a88cbb3a07475032d55d83836ea5274236839ad88f5872f3316b"
+        },
+        "pointer": "/rows/3/original_remainder",
+        "retained_non_geometry_fields": {
+          "geometry_sha256": "e42bd281064d61f02c69399d0ac87724fc85527ba3665f06f030cf0bc46f1c42",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 5.293872319788544e-09,
+          "planar_length_coordinate_units": 0.08834416599941923
+        }
+      }
+    },
+    {
+      "component_id": "physical-component:920d9c0c57598d71fac2181fdc6520caf1a3ef661bc798cd2562a6f495e162bd",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "previous_state": "accepted-evidence",
+      "previous_effective_state": "accepted-evidence",
+      "state": "accepted-evidence",
+      "source_coverage": "partial-supported-fragment",
+      "candidate_feature_sha256": "a0e7d2b237af322fc1369b288dcef5f43b3bd0083138cfed185c0269a9b9649b",
+      "candidate_geometry_sha256": "f33933d31ea73d9fe4e47164e15597a4f6f962db7669110bcb283357cedd5422",
+      "target_stable_location_id": "gb:SLB:ADM1:17018030B19935783635883",
+      "source_provenance": {
+        "kind": "retained-exact-consumed-simplified-product-comparison",
+        "comparison_path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/source-comparison-capture-001/batch-source-comparisons.json",
+        "source_product_codes": [
+          "gb:SLB:ADM1"
+        ],
+        "source_features": [
+          {
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:SLB:ADM1:17018030B19935783635883",
+                "original_feature_sha256": "b5684e7e3307c64a4f68071d35f9a9e1b1e0ea192361e654e0bead62c6d9fabb",
+                "original_parent_id": "framework:province:temotu:c9f46b66cd8a",
+                "reference_year": "2021"
+              }
+            ],
+            "shapeID": "17018030B19935783635883",
+            "source_feature_index": 2,
+            "source_feature_sha256": "678ce6f54ff2d80c6533c045d8e29c56166ba508aab8ca919355cfc6ea697b34",
+            "source_geometry_sha256": "0c52fab2e3675ee3b06edb7e2b7ef5bcebcfa007a43de297ebc8b4d0f7012440",
+            "source_id": "gb:SLB:ADM1"
+          }
+        ]
+      },
+      "remainder_retained": true,
+      "evidence": {
+        "accepted_source_merge": "361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5",
+        "review_whole_get": {
+          "path": "/Users/chengshuli/world-atlas-workspace/.cache/review1639-runtime-4ab-20261009/review-whole-get.json",
+          "bytes": 6965,
+          "sha256": "2fe0823741af0398802860e4550695e3410b1edb81ee6514012678c4541f0baa"
+        },
+        "source_roster_sha256": "0b591b5f9e9b222106a6a9ab4162c30566d464e5b4a30969dc60c564888b35a2",
+        "payload_component_pointer": "/additive_payloads/52",
+        "actual_native_candidate": {
+          "root_whole_acceptance": ".cache/native-1647-363-execution-operands-20261010/next-native-positive-executions/root-four-native-whole-result-acceptance.json",
+          "bytes": 1664,
+          "sha256": "f4fbfeea494b5051d8071f819ba7b987a52a5078637223796a21c63131e8cadf",
+          "phase": "080",
+          "candidate_native_cells": 23,
+          "removed_cells": 0,
+          "reassigned_cells": 0,
+          "integration_credit": 0
+        },
+        "actual_current_rebind": {
+          "root_whole_acceptance": ".cache/native-1647-363-execution-operands-20261010/combined-current-rebind-preparation/root-attempt4-current-union-conservation-acceptance.json",
+          "bytes": 1284,
+          "sha256": "08270faedfaadcdb3fe923f83af601cd667ae53e79c531ba8ea13d5f42a5f2ad",
+          "execution_commit": "c192aa5c88df9a55594b62f7dcfa6e4226f59682",
+          "deduplicated_new_cells": 23,
+          "combined_new_cells": 119,
+          "cumulative_patch_cells": 260,
+          "prior_cells_preserved": 141,
+          "selected_release_credit": 0,
+          "qualification_certificate_commit": "fc51f8a067d9fc782c6adc9e47741e240348466c"
+        },
+        "actual_supported_activation_assembly": {
+          "root_whole_acceptance": ".cache/native-1647-363-execution-operands-20261010/five-existing-assembly-execution-attempt2/root-actual-assembly-whole-acceptance.json",
+          "bytes": 1361,
+          "sha256": "3a3a3a110dbe2981f200d81a0e053e8d3d8694c178199d83da6fd8978ecc203f",
+          "assembly_commit": "0eefe294390894f66c33e24e7950f21012d3791c",
+          "cumulative_patch_cells": 260,
+          "new_cells": 119,
+          "selected_release_credit": 0,
+          "prerequisite_pr": 1682
+        },
+        "actual_selected_delivery": {
+          "pr": 1683,
+          "merge": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+          "reviewed_head": "3ef1d167e0f78a6214e08f7b6bc31d4dbdb4b036",
+          "root_whole_merge_acceptance": {
+            "path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/selected119-changed-consumer-assembly-execution/root-actual-merged-selected119-acceptance.json",
+            "bytes": 4688,
+            "sha256": "a5ce4a020d456d61ac5e729ad9feb892fc935e167c8a086a51dfa747392683dc"
+          },
+          "retained_exact_id_event": {
+            "path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/selected119-changed-consumer-assembly-execution/exact-id-selected119-delivery-ledger-event.json",
+            "bytes": 5221,
+            "sha256": "2a6d39d86d5cf9075c97b0b9154df4669a99b4f63dd7eb72f35a7e66e1b552e1"
+          },
+          "selected_sidecar_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/selection-sidecar.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "0b58164984539530c73ec0646378cf2d2c0d5978",
+            "bytes": 3440,
+            "sha256": "4373c949ccb952154834ef4c7cd49241602f0b81a6cc199e5b535fac9cc07c10"
+          },
+          "selected_patch_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/patch.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "07268b3f20e1b5d186554effd8f054684e421a29",
+            "bytes": 6479,
+            "sha256": "935bee45ff80ddd217e1dc75ace3ab5bdf339fc0a5b1aa01664204d32f865884"
+          },
+          "selected_ledger_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/ledger.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "f60e0296073278432d7f5df3a58211a2dce61e5e",
+            "bytes": 358012,
+            "sha256": "dcffbaf201f4a88cbb3a07475032d55d83836ea5274236839ad88f5872f3316b"
+          },
+          "selected_envelope_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/envelope.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "106c4e55c83c0e9b052e00f46c0692b8744ff3cd",
+            "bytes": 1421,
+            "sha256": "71d65c3dc340a7be1dfade7fc0a1bc1f5f398515b146afee18fe4995d8d64ae1"
+          },
+          "qualification_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/qualification.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "9395c695bca9ebd02b1337c2fed2da03458d579a",
+            "bytes": 685,
+            "sha256": "d2b22bbfba9548fdf6cc87002d4d0198d91c0dfccffcab01a41ff00d67a2eb31"
+          },
+          "rebind_certificate_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/certificate.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "9a3c3fff92ce1375aeb8aa6037448b8e3a51e4ed",
+            "bytes": 3329,
+            "sha256": "c182a05bc72e182a190a29f7d0bce7442618da64ad0adcad002d08232f5c265c"
+          },
+          "qualified_result_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/result.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "e37a964f18d95fe053ace9a264cb9c43e5fdbc05",
+            "bytes": 1549679,
+            "sha256": "d40baba62e2b8ad0276dab8943b0d8a198c55b2bc023bc86ebcdc073bd23b219"
+          },
+          "render_log": {
+            "path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/selected119-changed-consumer-assembly-execution/3ef-reg0-production-render.log",
+            "bytes": 537118,
+            "sha256": "3cd2a5b6d233b4006268eb46b60d7aee916a5b3fb1244680a60d5d0be2ba84b4"
+          },
+          "new_selected_cells": 119,
+          "prior_cells_preserved": 141,
+          "cumulative_selected_cells_at_this_delivery": 260
+        }
+      },
+      "remaining_missing_fact": "Original nonempty remainder and source-fitness limits remain unresolved; no whole-component repair credit.",
+      "production_delivered": false,
+      "native_eligible": true,
+      "whole_gap_repaired": false,
+      "batch_owner": "engineering #1647 / native_batch_delivery",
+      "next_concrete_action": "Resolve only the original remainder using additional supported evidence; retain delivered cells and do not repeat the completed native producer.",
+      "assigned_native_pixels": 23,
+      "repaired_area_m2": null,
+      "repair_measurement_scope": "Verified selected native-cell contribution for the supported fragment; no inferred physical area or whole-gap credit.",
+      "whole_gap_completion": false,
+      "selected_native_delivery": "verified-partial",
+      "applied": true,
+      "native_phase": "080",
+      "target_id": "gb:SLB:ADM1:17018030B19935783635883",
+      "ownerIndex": 39699,
+      "geometry_scope": "supported-fragment",
+      "original_remainder": {
+        "immutable_ledger_pin": {
+          "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/ledger.json",
+          "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+          "mode": "100644",
+          "git_blob_oid": "f60e0296073278432d7f5df3a58211a2dce61e5e",
+          "bytes": 358012,
+          "sha256": "dcffbaf201f4a88cbb3a07475032d55d83836ea5274236839ad88f5872f3316b"
+        },
+        "pointer": "/rows/15/original_remainder",
+        "retained_non_geometry_fields": {
+          "geometry_sha256": "408e9f7ae9fb16a18501baf48be5e4173692d0ac911ba081b49fc10ea861df15",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 3.970002649308891e-09,
+          "planar_length_coordinate_units": 0.02779646940232492
+        }
+      }
+    },
+    {
+      "component_id": "physical-component:c31b53ea6554bddaaf73ad9f2878c0baa6a1272a05b82531755033d1465a6f4f",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "previous_state": "accepted-evidence",
+      "previous_effective_state": "accepted-evidence",
+      "state": "accepted-evidence",
+      "source_coverage": "partial-supported-fragment",
+      "candidate_feature_sha256": "6a676b593ef5cadb99579a89856636d43e5b00254ffb530f33c152f20dc2a65c",
+      "candidate_geometry_sha256": "44e1969c411a8b263098499a6be1962952c42ce9f3cb149ef2367285201ae725",
+      "target_stable_location_id": "gb:SLB:ADM1:17018030B36628097040544",
+      "source_provenance": {
+        "kind": "retained-exact-consumed-simplified-product-comparison",
+        "comparison_path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/source-comparison-capture-001/batch-source-comparisons.json",
+        "source_product_codes": [
+          "gb:SLB:ADM1"
+        ],
+        "source_features": [
+          {
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:SLB:ADM1:17018030B36628097040544",
+                "original_feature_sha256": "ee7c13e83dd0d1b978bb541eaea6d108ca302b4eeeb7b037d2a3bf74af4283f9",
+                "original_parent_id": "framework:province:isabel:c4cd1477b41f",
+                "reference_year": "2021"
+              }
+            ],
+            "shapeID": "17018030B36628097040544",
+            "source_feature_index": 8,
+            "source_feature_sha256": "139e8c844f7d9a435a97ae7dec72726cc7688c00a745b6df7716dc5b0b893f54",
+            "source_geometry_sha256": "311754a7a17197fab264da76b23dabcacd8991b13220bdb6aaf71f779e99909d",
+            "source_id": "gb:SLB:ADM1"
+          }
+        ]
+      },
+      "remainder_retained": true,
+      "evidence": {
+        "accepted_source_merge": "361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5",
+        "review_whole_get": {
+          "path": "/Users/chengshuli/world-atlas-workspace/.cache/review1639-runtime-4ab-20261009/review-whole-get.json",
+          "bytes": 6965,
+          "sha256": "2fe0823741af0398802860e4550695e3410b1edb81ee6514012678c4541f0baa"
+        },
+        "source_roster_sha256": "0b591b5f9e9b222106a6a9ab4162c30566d464e5b4a30969dc60c564888b35a2",
+        "payload_component_pointer": "/additive_payloads/72",
+        "actual_native_candidate": {
+          "root_whole_acceptance": ".cache/native-1647-363-execution-operands-20261010/next-native-positive-executions/root-four-native-whole-result-acceptance.json",
+          "bytes": 1664,
+          "sha256": "f4fbfeea494b5051d8071f819ba7b987a52a5078637223796a21c63131e8cadf",
+          "phase": "060",
+          "candidate_native_cells": 26,
+          "removed_cells": 0,
+          "reassigned_cells": 0,
+          "integration_credit": 0
+        },
+        "actual_current_rebind": {
+          "root_whole_acceptance": ".cache/native-1647-363-execution-operands-20261010/combined-current-rebind-preparation/root-attempt4-current-union-conservation-acceptance.json",
+          "bytes": 1284,
+          "sha256": "08270faedfaadcdb3fe923f83af601cd667ae53e79c531ba8ea13d5f42a5f2ad",
+          "execution_commit": "c192aa5c88df9a55594b62f7dcfa6e4226f59682",
+          "deduplicated_new_cells": 26,
+          "combined_new_cells": 119,
+          "cumulative_patch_cells": 260,
+          "prior_cells_preserved": 141,
+          "selected_release_credit": 0,
+          "qualification_certificate_commit": "fc51f8a067d9fc782c6adc9e47741e240348466c"
+        },
+        "actual_supported_activation_assembly": {
+          "root_whole_acceptance": ".cache/native-1647-363-execution-operands-20261010/five-existing-assembly-execution-attempt2/root-actual-assembly-whole-acceptance.json",
+          "bytes": 1361,
+          "sha256": "3a3a3a110dbe2981f200d81a0e053e8d3d8694c178199d83da6fd8978ecc203f",
+          "assembly_commit": "0eefe294390894f66c33e24e7950f21012d3791c",
+          "cumulative_patch_cells": 260,
+          "new_cells": 119,
+          "selected_release_credit": 0,
+          "prerequisite_pr": 1682
+        },
+        "actual_selected_delivery": {
+          "pr": 1683,
+          "merge": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+          "reviewed_head": "3ef1d167e0f78a6214e08f7b6bc31d4dbdb4b036",
+          "root_whole_merge_acceptance": {
+            "path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/selected119-changed-consumer-assembly-execution/root-actual-merged-selected119-acceptance.json",
+            "bytes": 4688,
+            "sha256": "a5ce4a020d456d61ac5e729ad9feb892fc935e167c8a086a51dfa747392683dc"
+          },
+          "retained_exact_id_event": {
+            "path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/selected119-changed-consumer-assembly-execution/exact-id-selected119-delivery-ledger-event.json",
+            "bytes": 5221,
+            "sha256": "2a6d39d86d5cf9075c97b0b9154df4669a99b4f63dd7eb72f35a7e66e1b552e1"
+          },
+          "selected_sidecar_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/selection-sidecar.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "0b58164984539530c73ec0646378cf2d2c0d5978",
+            "bytes": 3440,
+            "sha256": "4373c949ccb952154834ef4c7cd49241602f0b81a6cc199e5b535fac9cc07c10"
+          },
+          "selected_patch_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/patch.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "07268b3f20e1b5d186554effd8f054684e421a29",
+            "bytes": 6479,
+            "sha256": "935bee45ff80ddd217e1dc75ace3ab5bdf339fc0a5b1aa01664204d32f865884"
+          },
+          "selected_ledger_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/ledger.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "f60e0296073278432d7f5df3a58211a2dce61e5e",
+            "bytes": 358012,
+            "sha256": "dcffbaf201f4a88cbb3a07475032d55d83836ea5274236839ad88f5872f3316b"
+          },
+          "selected_envelope_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/envelope.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "106c4e55c83c0e9b052e00f46c0692b8744ff3cd",
+            "bytes": 1421,
+            "sha256": "71d65c3dc340a7be1dfade7fc0a1bc1f5f398515b146afee18fe4995d8d64ae1"
+          },
+          "qualification_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/qualification.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "9395c695bca9ebd02b1337c2fed2da03458d579a",
+            "bytes": 685,
+            "sha256": "d2b22bbfba9548fdf6cc87002d4d0198d91c0dfccffcab01a41ff00d67a2eb31"
+          },
+          "rebind_certificate_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/certificate.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "9a3c3fff92ce1375aeb8aa6037448b8e3a51e4ed",
+            "bytes": 3329,
+            "sha256": "c182a05bc72e182a190a29f7d0bce7442618da64ad0adcad002d08232f5c265c"
+          },
+          "qualified_result_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/result.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "e37a964f18d95fe053ace9a264cb9c43e5fdbc05",
+            "bytes": 1549679,
+            "sha256": "d40baba62e2b8ad0276dab8943b0d8a198c55b2bc023bc86ebcdc073bd23b219"
+          },
+          "render_log": {
+            "path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/selected119-changed-consumer-assembly-execution/3ef-reg0-production-render.log",
+            "bytes": 537118,
+            "sha256": "3cd2a5b6d233b4006268eb46b60d7aee916a5b3fb1244680a60d5d0be2ba84b4"
+          },
+          "new_selected_cells": 119,
+          "prior_cells_preserved": 141,
+          "cumulative_selected_cells_at_this_delivery": 260
+        }
+      },
+      "remaining_missing_fact": "Original nonempty remainder and source-fitness limits remain unresolved; no whole-component repair credit.",
+      "production_delivered": false,
+      "native_eligible": true,
+      "whole_gap_repaired": false,
+      "batch_owner": "engineering #1647 / native_batch_delivery",
+      "next_concrete_action": "Resolve only the original remainder using additional supported evidence; retain delivered cells and do not repeat the completed native producer.",
+      "assigned_native_pixels": 26,
+      "repaired_area_m2": null,
+      "repair_measurement_scope": "Verified selected native-cell contribution for the supported fragment; no inferred physical area or whole-gap credit.",
+      "whole_gap_completion": false,
+      "selected_native_delivery": "verified-partial",
+      "applied": true,
+      "native_phase": "060",
+      "target_id": "gb:SLB:ADM1:17018030B36628097040544",
+      "ownerIndex": 39703,
+      "geometry_scope": "supported-fragment",
+      "original_remainder": {
+        "immutable_ledger_pin": {
+          "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/ledger.json",
+          "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+          "mode": "100644",
+          "git_blob_oid": "f60e0296073278432d7f5df3a58211a2dce61e5e",
+          "bytes": 358012,
+          "sha256": "dcffbaf201f4a88cbb3a07475032d55d83836ea5274236839ad88f5872f3316b"
+        },
+        "pointer": "/rows/18/original_remainder",
+        "retained_non_geometry_fields": {
+          "geometry_sha256": "fd0170bc086a798ff2dd04d544d5c808d25d7a900fcbbade8a9d5f5b66250a00",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 5.554061591172681e-09,
+          "planar_length_coordinate_units": 0.05038904869366372
+        }
+      }
+    },
+    {
+      "component_id": "physical-component:ec19d620a7a37c4066f4a4dcb639fda20602806054537b3998d8464d718539dc",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "previous_state": "accepted-evidence",
+      "previous_effective_state": "accepted-evidence",
+      "state": "accepted-evidence",
+      "source_coverage": "partial-supported-fragment",
+      "candidate_feature_sha256": "4c334d71777814d5afbdf051553da013a8d61b70d21d022895640ba2fb6c8d38",
+      "candidate_geometry_sha256": "00e0e12292f52f3fd59d3d1cd73118cf2c0fcf6b4756db7853a8dfbd5dc7e340",
+      "target_stable_location_id": "gb:SLB:ADM1:17018030B8659224027401",
+      "source_provenance": {
+        "kind": "retained-exact-consumed-simplified-product-comparison",
+        "comparison_path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/source-comparison-capture-001/batch-source-comparisons.json",
+        "source_product_codes": [
+          "gb:SLB:ADM1"
+        ],
+        "source_features": [
+          {
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:SLB:ADM1:17018030B8659224027401",
+                "original_feature_sha256": "6ec2115ca0788b920b3708a124cd9183fcaf1d269261ed417fb393b60190d0e9",
+                "original_parent_id": "framework:province:western:1ad96796acf3",
+                "reference_year": "2021"
+              }
+            ],
+            "shapeID": "17018030B8659224027401",
+            "source_feature_index": 7,
+            "source_feature_sha256": "38c59d5fc7216cd98c58756266525269fcdf76d58e53c7f6105c3bf4629ea9f6",
+            "source_geometry_sha256": "1de05f689e46188a8910f2292cb507ab544935ce8b274b76c98f1956ee9f3468",
+            "source_id": "gb:SLB:ADM1"
+          }
+        ]
+      },
+      "remainder_retained": true,
+      "evidence": {
+        "accepted_source_merge": "361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5",
+        "review_whole_get": {
+          "path": "/Users/chengshuli/world-atlas-workspace/.cache/review1639-runtime-4ab-20261009/review-whole-get.json",
+          "bytes": 6965,
+          "sha256": "2fe0823741af0398802860e4550695e3410b1edb81ee6514012678c4541f0baa"
+        },
+        "source_roster_sha256": "0b591b5f9e9b222106a6a9ab4162c30566d464e5b4a30969dc60c564888b35a2",
+        "payload_component_pointer": "/additive_payloads/85",
+        "actual_native_candidate": {
+          "root_whole_acceptance": ".cache/native-1647-363-execution-operands-20261010/next-native-positive-executions/root-four-native-whole-result-acceptance.json",
+          "bytes": 1664,
+          "sha256": "f4fbfeea494b5051d8071f819ba7b987a52a5078637223796a21c63131e8cadf",
+          "phase": "048",
+          "candidate_native_cells": 15,
+          "removed_cells": 0,
+          "reassigned_cells": 0,
+          "integration_credit": 0
+        },
+        "actual_current_rebind": {
+          "root_whole_acceptance": ".cache/native-1647-363-execution-operands-20261010/combined-current-rebind-preparation/root-attempt4-current-union-conservation-acceptance.json",
+          "bytes": 1284,
+          "sha256": "08270faedfaadcdb3fe923f83af601cd667ae53e79c531ba8ea13d5f42a5f2ad",
+          "execution_commit": "c192aa5c88df9a55594b62f7dcfa6e4226f59682",
+          "deduplicated_new_cells": 15,
+          "combined_new_cells": 119,
+          "cumulative_patch_cells": 260,
+          "prior_cells_preserved": 141,
+          "selected_release_credit": 0,
+          "qualification_certificate_commit": "fc51f8a067d9fc782c6adc9e47741e240348466c"
+        },
+        "actual_supported_activation_assembly": {
+          "root_whole_acceptance": ".cache/native-1647-363-execution-operands-20261010/five-existing-assembly-execution-attempt2/root-actual-assembly-whole-acceptance.json",
+          "bytes": 1361,
+          "sha256": "3a3a3a110dbe2981f200d81a0e053e8d3d8694c178199d83da6fd8978ecc203f",
+          "assembly_commit": "0eefe294390894f66c33e24e7950f21012d3791c",
+          "cumulative_patch_cells": 260,
+          "new_cells": 119,
+          "selected_release_credit": 0,
+          "prerequisite_pr": 1682
+        },
+        "actual_selected_delivery": {
+          "pr": 1683,
+          "merge": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+          "reviewed_head": "3ef1d167e0f78a6214e08f7b6bc31d4dbdb4b036",
+          "root_whole_merge_acceptance": {
+            "path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/selected119-changed-consumer-assembly-execution/root-actual-merged-selected119-acceptance.json",
+            "bytes": 4688,
+            "sha256": "a5ce4a020d456d61ac5e729ad9feb892fc935e167c8a086a51dfa747392683dc"
+          },
+          "retained_exact_id_event": {
+            "path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/selected119-changed-consumer-assembly-execution/exact-id-selected119-delivery-ledger-event.json",
+            "bytes": 5221,
+            "sha256": "2a6d39d86d5cf9075c97b0b9154df4669a99b4f63dd7eb72f35a7e66e1b552e1"
+          },
+          "selected_sidecar_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/selection-sidecar.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "0b58164984539530c73ec0646378cf2d2c0d5978",
+            "bytes": 3440,
+            "sha256": "4373c949ccb952154834ef4c7cd49241602f0b81a6cc199e5b535fac9cc07c10"
+          },
+          "selected_patch_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/patch.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "07268b3f20e1b5d186554effd8f054684e421a29",
+            "bytes": 6479,
+            "sha256": "935bee45ff80ddd217e1dc75ace3ab5bdf339fc0a5b1aa01664204d32f865884"
+          },
+          "selected_ledger_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/ledger.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "f60e0296073278432d7f5df3a58211a2dce61e5e",
+            "bytes": 358012,
+            "sha256": "dcffbaf201f4a88cbb3a07475032d55d83836ea5274236839ad88f5872f3316b"
+          },
+          "selected_envelope_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/envelope.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "106c4e55c83c0e9b052e00f46c0692b8744ff3cd",
+            "bytes": 1421,
+            "sha256": "71d65c3dc340a7be1dfade7fc0a1bc1f5f398515b146afee18fe4995d8d64ae1"
+          },
+          "qualification_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/qualification.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "9395c695bca9ebd02b1337c2fed2da03458d579a",
+            "bytes": 685,
+            "sha256": "d2b22bbfba9548fdf6cc87002d4d0198d91c0dfccffcab01a41ff00d67a2eb31"
+          },
+          "rebind_certificate_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/certificate.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "9a3c3fff92ce1375aeb8aa6037448b8e3a51e4ed",
+            "bytes": 3329,
+            "sha256": "c182a05bc72e182a190a29f7d0bce7442618da64ad0adcad002d08232f5c265c"
+          },
+          "qualified_result_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/result.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "e37a964f18d95fe053ace9a264cb9c43e5fdbc05",
+            "bytes": 1549679,
+            "sha256": "d40baba62e2b8ad0276dab8943b0d8a198c55b2bc023bc86ebcdc073bd23b219"
+          },
+          "render_log": {
+            "path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/selected119-changed-consumer-assembly-execution/3ef-reg0-production-render.log",
+            "bytes": 537118,
+            "sha256": "3cd2a5b6d233b4006268eb46b60d7aee916a5b3fb1244680a60d5d0be2ba84b4"
+          },
+          "new_selected_cells": 119,
+          "prior_cells_preserved": 141,
+          "cumulative_selected_cells_at_this_delivery": 260
+        }
+      },
+      "remaining_missing_fact": "Original nonempty remainder and source-fitness limits remain unresolved; no whole-component repair credit.",
+      "production_delivered": false,
+      "native_eligible": true,
+      "whole_gap_repaired": false,
+      "batch_owner": "engineering #1647 / native_batch_delivery",
+      "next_concrete_action": "Resolve only the original remainder using additional supported evidence; retain delivered cells and do not repeat the completed native producer.",
+      "assigned_native_pixels": 15,
+      "repaired_area_m2": null,
+      "repair_measurement_scope": "Verified selected native-cell contribution for the supported fragment; no inferred physical area or whole-gap credit.",
+      "whole_gap_completion": false,
+      "selected_native_delivery": "verified-partial",
+      "applied": true,
+      "native_phase": "048",
+      "target_id": "gb:SLB:ADM1:17018030B8659224027401",
+      "ownerIndex": 39708,
+      "geometry_scope": "supported-fragment",
+      "original_remainder": {
+        "immutable_ledger_pin": {
+          "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/ledger.json",
+          "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+          "mode": "100644",
+          "git_blob_oid": "f60e0296073278432d7f5df3a58211a2dce61e5e",
+          "bytes": 358012,
+          "sha256": "dcffbaf201f4a88cbb3a07475032d55d83836ea5274236839ad88f5872f3316b"
+        },
+        "pointer": "/rows/22/original_remainder",
+        "retained_non_geometry_fields": {
+          "geometry_sha256": "a73e9c42bf71f1348271dfe1f7c9fb5b1b9109410b6f3e712a1fb09c578fd0cd",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 2.8734595601324372e-09,
+          "planar_length_coordinate_units": 0.03582322527270122
+        }
+      }
+    },
+    {
+      "component_id": "physical-component:f55c8e22781c0c1c1fea7916b23d5e003f99ab05cd63fb4fb5a8c7fd6f39d018",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "previous_state": "accepted-evidence",
+      "previous_effective_state": "accepted-evidence",
+      "state": "accepted-evidence",
+      "source_coverage": "partial-supported-fragment",
+      "candidate_feature_sha256": "d83b60ba69b086465ba241731fd3cbac0e434a16a5e25b2e7dcf4f516d74ec9a",
+      "candidate_geometry_sha256": "baf040a44f6b6e121f2db2c8c363e19749dd861092de2eaf49daef06afb0323d",
+      "target_stable_location_id": "gb:SLB:ADM1:17018030B68013150931387",
+      "source_provenance": {
+        "kind": "retained-exact-consumed-simplified-product-comparison",
+        "comparison_path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/source-comparison-capture-001/batch-source-comparisons.json",
+        "source_product_codes": [
+          "gb:SLB:ADM1"
+        ],
+        "source_features": [
+          {
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:SLB:ADM1:17018030B68013150931387",
+                "original_feature_sha256": "20780e254d9f23651603e8081009d8f899cba3edfadbbfde5f182400afe6c550",
+                "original_parent_id": "framework:province:choiseul:ab27d1cd77eb",
+                "reference_year": "2021"
+              }
+            ],
+            "shapeID": "17018030B68013150931387",
+            "source_feature_index": 9,
+            "source_feature_sha256": "c82b0b46ee74bbefba004675b21fc452e9fd7dab2936ce9d4c5ac572a97c1a10",
+            "source_geometry_sha256": "56a128a17f304f440cee40409195b976589f4df02e06451ba971d970c5fbc844",
+            "source_id": "gb:SLB:ADM1"
+          }
+        ]
+      },
+      "remainder_retained": true,
+      "evidence": {
+        "accepted_source_merge": "361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5",
+        "review_whole_get": {
+          "path": "/Users/chengshuli/world-atlas-workspace/.cache/review1639-runtime-4ab-20261009/review-whole-get.json",
+          "bytes": 6965,
+          "sha256": "2fe0823741af0398802860e4550695e3410b1edb81ee6514012678c4541f0baa"
+        },
+        "source_roster_sha256": "0b591b5f9e9b222106a6a9ab4162c30566d464e5b4a30969dc60c564888b35a2",
+        "payload_component_pointer": "/additive_payloads/87",
+        "actual_native_candidate": {
+          "root_whole_acceptance": ".cache/native-1647-363-execution-operands-20261010/next-native-positive-executions/root-four-native-whole-result-acceptance.json",
+          "bytes": 1664,
+          "sha256": "f4fbfeea494b5051d8071f819ba7b987a52a5078637223796a21c63131e8cadf",
+          "phase": "084",
+          "candidate_native_cells": 20,
+          "removed_cells": 0,
+          "reassigned_cells": 0,
+          "integration_credit": 0
+        },
+        "actual_current_rebind": {
+          "root_whole_acceptance": ".cache/native-1647-363-execution-operands-20261010/combined-current-rebind-preparation/root-attempt4-current-union-conservation-acceptance.json",
+          "bytes": 1284,
+          "sha256": "08270faedfaadcdb3fe923f83af601cd667ae53e79c531ba8ea13d5f42a5f2ad",
+          "execution_commit": "c192aa5c88df9a55594b62f7dcfa6e4226f59682",
+          "deduplicated_new_cells": 20,
+          "combined_new_cells": 119,
+          "cumulative_patch_cells": 260,
+          "prior_cells_preserved": 141,
+          "selected_release_credit": 0,
+          "qualification_certificate_commit": "fc51f8a067d9fc782c6adc9e47741e240348466c"
+        },
+        "actual_supported_activation_assembly": {
+          "root_whole_acceptance": ".cache/native-1647-363-execution-operands-20261010/five-existing-assembly-execution-attempt2/root-actual-assembly-whole-acceptance.json",
+          "bytes": 1361,
+          "sha256": "3a3a3a110dbe2981f200d81a0e053e8d3d8694c178199d83da6fd8978ecc203f",
+          "assembly_commit": "0eefe294390894f66c33e24e7950f21012d3791c",
+          "cumulative_patch_cells": 260,
+          "new_cells": 119,
+          "selected_release_credit": 0,
+          "prerequisite_pr": 1682
+        },
+        "actual_selected_delivery": {
+          "pr": 1683,
+          "merge": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+          "reviewed_head": "3ef1d167e0f78a6214e08f7b6bc31d4dbdb4b036",
+          "root_whole_merge_acceptance": {
+            "path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/selected119-changed-consumer-assembly-execution/root-actual-merged-selected119-acceptance.json",
+            "bytes": 4688,
+            "sha256": "a5ce4a020d456d61ac5e729ad9feb892fc935e167c8a086a51dfa747392683dc"
+          },
+          "retained_exact_id_event": {
+            "path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/selected119-changed-consumer-assembly-execution/exact-id-selected119-delivery-ledger-event.json",
+            "bytes": 5221,
+            "sha256": "2a6d39d86d5cf9075c97b0b9154df4669a99b4f63dd7eb72f35a7e66e1b552e1"
+          },
+          "selected_sidecar_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/selection-sidecar.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "0b58164984539530c73ec0646378cf2d2c0d5978",
+            "bytes": 3440,
+            "sha256": "4373c949ccb952154834ef4c7cd49241602f0b81a6cc199e5b535fac9cc07c10"
+          },
+          "selected_patch_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/patch.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "07268b3f20e1b5d186554effd8f054684e421a29",
+            "bytes": 6479,
+            "sha256": "935bee45ff80ddd217e1dc75ace3ab5bdf339fc0a5b1aa01664204d32f865884"
+          },
+          "selected_ledger_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/ledger.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "f60e0296073278432d7f5df3a58211a2dce61e5e",
+            "bytes": 358012,
+            "sha256": "dcffbaf201f4a88cbb3a07475032d55d83836ea5274236839ad88f5872f3316b"
+          },
+          "selected_envelope_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/envelope.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "106c4e55c83c0e9b052e00f46c0692b8744ff3cd",
+            "bytes": 1421,
+            "sha256": "71d65c3dc340a7be1dfade7fc0a1bc1f5f398515b146afee18fe4995d8d64ae1"
+          },
+          "qualification_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/qualification.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "9395c695bca9ebd02b1337c2fed2da03458d579a",
+            "bytes": 685,
+            "sha256": "d2b22bbfba9548fdf6cc87002d4d0198d91c0dfccffcab01a41ff00d67a2eb31"
+          },
+          "rebind_certificate_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/certificate.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "9a3c3fff92ce1375aeb8aa6037448b8e3a51e4ed",
+            "bytes": 3329,
+            "sha256": "c182a05bc72e182a190a29f7d0bce7442618da64ad0adcad002d08232f5c265c"
+          },
+          "qualified_result_pin": {
+            "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/result.json",
+            "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+            "mode": "100644",
+            "git_blob_oid": "e37a964f18d95fe053ace9a264cb9c43e5fdbc05",
+            "bytes": 1549679,
+            "sha256": "d40baba62e2b8ad0276dab8943b0d8a198c55b2bc023bc86ebcdc073bd23b219"
+          },
+          "render_log": {
+            "path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1647-363-execution-operands-20261010/selected119-changed-consumer-assembly-execution/3ef-reg0-production-render.log",
+            "bytes": 537118,
+            "sha256": "3cd2a5b6d233b4006268eb46b60d7aee916a5b3fb1244680a60d5d0be2ba84b4"
+          },
+          "new_selected_cells": 119,
+          "prior_cells_preserved": 141,
+          "cumulative_selected_cells_at_this_delivery": 260
+        }
+      },
+      "remaining_missing_fact": "Original nonempty remainder and source-fitness limits remain unresolved; no whole-component repair credit.",
+      "production_delivered": false,
+      "native_eligible": true,
+      "whole_gap_repaired": false,
+      "batch_owner": "engineering #1647 / native_batch_delivery",
+      "next_concrete_action": "Resolve only the original remainder using additional supported evidence; retain delivered cells and do not repeat the completed native producer.",
+      "assigned_native_pixels": 20,
+      "repaired_area_m2": null,
+      "repair_measurement_scope": "Verified selected native-cell contribution for the supported fragment; no inferred physical area or whole-gap credit.",
+      "whole_gap_completion": false,
+      "selected_native_delivery": "verified-partial",
+      "applied": true,
+      "native_phase": "084",
+      "target_id": "gb:SLB:ADM1:17018030B68013150931387",
+      "ownerIndex": 39706,
+      "geometry_scope": "supported-fragment",
+      "original_remainder": {
+        "immutable_ledger_pin": {
+          "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/ledger.json",
+          "commit": "67981bd9c3346fd697cbc8576c30bdc879d6e146",
+          "mode": "100644",
+          "git_blob_oid": "f60e0296073278432d7f5df3a58211a2dce61e5e",
+          "bytes": 358012,
+          "sha256": "dcffbaf201f4a88cbb3a07475032d55d83836ea5274236839ad88f5872f3316b"
+        },
+        "pointer": "/rows/24/original_remainder",
+        "retained_non_geometry_fields": {
+          "geometry_sha256": "1a232f961ec8d188e71cc210f47152ad24cac644398bbbceaff4fc7b7c620957",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 1.256611585949058e-09,
+          "planar_length_coordinate_units": 0.054656394711889704
+        }
+      }
+    }
+  ],
+  "state_count_delta": 0,
+  "whole_gap_completion_delta": 0,
+  "completed_original_batch_delta": 0,
+  "incremental_missing_accounted_native_pixels": 119,
+  "latest_delivery_must_remain_1688": {
+    "pr": 1688,
+    "merge": "c28077da970ae39550e5edea790a266b060d3de5",
+    "components": 18,
+    "whole_components_repaired": 5,
+    "partial_components_with_unresolved_remainders": 13,
+    "assigned_native_pixels": 93,
+    "cumulative_selected_added_cells": 353,
+    "whole_changed_paths": 23,
+    "required_full_ci_run": 38068866117,
+    "serialized_merge_worker": 38070088558,
+    "gpu_canvas_all_new_cells_verified": true,
+    "production_delivered": false
+  },
+  "projected_disjoint_counts_must_remain": {
+    "awaiting-evidence": 27260,
+    "evidence-ready": 67781,
+    "eligible-source-relative-rule": 0,
+    "repaired-verified-selected-release": 21,
+    "confirmed-water-or-no-defect": 0,
+    "rejected-or-ambiguous": 6,
+    "accepted-evidence": 105
+  },
+  "effective_pipeline_counts_must_remain": {
+    "awaiting-evidence": 95041,
+    "accepted-evidence": 105,
+    "eligible-for-repair": 0,
+    "repaired-and-verified-selected-release": 21,
+    "confirmed-water-or-no-defect": 0,
+    "explicit-unresolved-or-rejected-exception": 6
+  },
+  "limits": [
+    "Historical delivered119 cells already belong to current cumulative353; do not add119 again to cumulative selection.",
+    "All five originalIDs and literal nonempty remainders/provenance retained; no whole-gap or production credit.",
+    "Root alone may append these five updates after independently reviewing this proposal; no canonical write performed."
+  ]
+}

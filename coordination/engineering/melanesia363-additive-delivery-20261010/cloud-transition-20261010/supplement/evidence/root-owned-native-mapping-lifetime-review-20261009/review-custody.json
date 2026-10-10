@@ -1,0 +1,43 @@
+{
+  "kind": "independent-adapter-prerequisite-proof-custody",
+  "reviewer": "canonical_stream_review",
+  "accepted_adapter_sha256": "0205c8a302963c077893d608b9d5e2d7f29dc918bcd94065e7c7e2c6368d4bed",
+  "execution_commit": "edf38df7396045f5cbe16de8bc9179e57988ef38",
+  "members": [
+    {
+      "path": "full-native0.py",
+      "bytes": 2620,
+      "sha256": "21d36d551cc789ef38d1e3bdfe675538df3515fb993ede94ed5f07ace8a12303"
+    },
+    {
+      "path": "full-native0.json",
+      "bytes": 1215,
+      "sha256": "c8bf7c3e8c8ed5068f333050b6dc637d970f33d40863d0a7f55859cc868d3b5e"
+    },
+    {
+      "path": "full-native0.stdout",
+      "bytes": 1093,
+      "sha256": "2928ca59dd33f6060c921f384acad8e7e92470835a02f5d96d380953a0879309"
+    },
+    {
+      "path": "full-native0.stderr",
+      "bytes": 777,
+      "sha256": "ab32bbaaef4842fa9d504810abba5830789e21a4c671ed218da0dc7eabc1a229"
+    },
+    {
+      "path": "root-proposal-controls.py",
+      "bytes": 5085,
+      "sha256": "aae4cb98a37a41555640fa49833e8e249db0dde1dae5fb96050b49038dc56e28"
+    },
+    {
+      "path": "root-proposal-controls.json",
+      "bytes": 1534,
+      "sha256": "b281b992efd0bcbf055afc6f77b9e629308be3ffa929997cd1af06bda8fd1358"
+    }
+  ],
+  "limits": [
+    "Historical validator paths preserved unchanged; complete immutable input pins and original producer lineage remain required.",
+    "Prerequisite byte equivalence, not a full cohort qualification or proof of observed peak stage.",
+    "Original scientific code and all caps unchanged."
+  ]
+}

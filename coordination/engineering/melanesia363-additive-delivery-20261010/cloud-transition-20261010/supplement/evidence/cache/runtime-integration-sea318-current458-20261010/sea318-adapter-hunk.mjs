@@ -1,0 +1,148 @@
+// Accepted original SEA318 packet: literal field reader, not a new source profile.
+const RETAINED_ADMINISTRATIVE_318_HANDOFF=[{"role":"cases_path","commit":"0635e6d935f6953005e87a2b1290ddacbe55f337","path":"research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/administrative-source-rule-fit.json","mode":"100644","blob":"97d19e63405662600d4ea4d84f55b6e5d38e0ebd","bytes":1688243,"sha256":"77aec8595ae41b03f595f28e14c05b5fa09e1a98e15a918dbe0c49cb95866f3b"},{"role":"outcomes_path","commit":"0635e6d935f6953005e87a2b1290ddacbe55f337","path":"research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/component-state-318.json","mode":"100644","blob":"91c954290b83a05eb8e09ea09dafece8635870b8","bytes":505063,"sha256":"8aaa5d4558eb5137775c159ec234d3dc2a9a90ae965aeaaf27086a63d0462cfd"},{"role":"family_roster_path","commit":"0635e6d935f6953005e87a2b1290ddacbe55f337","path":"research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/family-roster-122.json","mode":"100644","blob":"55228c5bde660cfc175171135564001788806126","bytes":39180,"sha256":"acb22105b074fefca33b84488d0d0322ebdba3195a3eff4b0421f53668e651ef"}];
+const SEA318_BATCH='gap-operational-batch:0393f64c9f8549bcfca1ace9';
+export function retainedAdministrative318CaseView({fit,physicalCase,querySources,targetBindings,componentId}) {
+  demand(fit?.batch_id===SEA318_BATCH&&Array.isArray(fit.cases)&&fit.cases.length===30
+    &&new Set(fit.cases.map(row=>row.component_id)).size===30,'Foreign SEA318 priority roster');
+  const matches=fit.cases.filter(row=>row.component_id===componentId);
+  demand(matches.length===1,'Missing/nonunique SEA318 case');const row=matches[0],q=row.original_physical_query_custody;
+  const equal=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
+  demand(row.source_rule_fit_state==='established'&&row.whole_gap_completion===false
+    &&row.current_component_candidate.component_id===componentId&&physicalCase?.batch_id===SEA318_BATCH
+    &&physicalCase.case?.component_id===componentId,'Foreign SEA318 fit/candidate/physical case');
+  const original=physicalCase.case,feature=row.current_component_candidate.feature;
+  demand(equal(original.complete_current_component_candidate.feature,feature)
+    &&equal(original.physical_comparison_packed_row,q.complete_original_packed_comparison_row)
+    &&equal(original.physical_query_relations,q.complete_original_query_relations)
+    &&equal(original.physical_query_source_ids,q.complete_original_query_source_ids)
+    &&equal(original.existing_full_admin_comparison.record,row.original_administrative_comparison.record),
+    'SEA318 original case inverse differs');
+  demand(sha(canonical(feature))===row.current_component_candidate.feature_sha256
+    &&sha(canonical(feature.geometry))===row.current_component_candidate.geometry_sha256,
+    'SEA318 whole candidate hash differs');
+  const packed=q.complete_original_packed_comparison_row.record;
+  demand(packed.complete_current_record_metadata_alias==='v1'
+    &&packed.component_id===componentId&&equal(packed.query_relations,q.complete_original_query_relations),
+    'Foreign SEA318 original physical metadata alias');
+  // Restore only the original alias's whole candidate hashes. All other original
+  // relation/support/authority fields stay literal, including unknown limits.
+  const record={...packed,candidate_feature_sha256:row.current_component_candidate.feature_sha256,
+    candidate_geometry_sha256:row.current_component_candidate.geometry_sha256};
+  demand(Array.isArray(q.complete_query_source_pointsets)
+    &&q.complete_query_source_pointsets.length===record.query_relations.length
+    &&Array.isArray(querySources)&&querySources.length===record.query_relations.length
+    &&new Set(querySources.map(source=>source.source_id)).size===querySources.length,'Incomplete SEA318 queried sources');
+  const queried=record.query_relations.map((relation,index)=>{
+    const source=querySources[index],pin=q.complete_query_source_pointsets[index];
+    demand(source?.source_id===relation.source_id&&source.native_record_sha256===relation.source_record_sha256
+      &&source.decoded_pointset_binary64_sha256===relation.source_pointset_sha256
+      &&source.coordinate_bytes_sha256===pin.coordinate_bytes_sha256
+      &&source.decoded_pointset_binary64_sha256===pin.binary64_pointset_sha256
+      &&source.native_metadata?.id===relation.source_id&&source.native_metadata.level===relation.source_level
+      &&source.native_metadata.record_sha256===relation.source_record_sha256
+      &&source.native_metadata.decoded_pointset_binary64_sha256===relation.source_pointset_sha256,
+      'SEA318 complete query metadata inverse differs');
+    return {original_source_record_metadata:source.native_metadata};
+  });
+  const admin=row.original_administrative_comparison.record;
+  demand(equal(admin,row.original_administrative_comparison.record)&&admin.component===componentId
+    &&admin.full_component_feature_sha256===record.candidate_feature_sha256
+    &&admin.component_geometry_sha256===record.candidate_geometry_sha256,'SEA318 retained comparison differs');
+  const hits=admin.feature_intersections.filter(hit=>hit.intersection.planar_area_coordinate_units_squared>0
+    &&hit.intersection.is_empty===false).map(hit=>({...hit.binding,intersection_geometry:hit.intersection.geometry}));
+  const subject=admin.uniquely_covering_compatible_recorded_subject;
+  demand(hits.length===1&&subject&&hits[0].recorded_stable_subjects?.length===1
+    &&equal(hits[0].recorded_stable_subjects[0],subject),'SEA318 nonunique positive subject');
+  const bindings=targetBindings.filter(binding=>binding.target_id===subject.id);
+  demand(bindings.length===1,'Missing SEA318 original target canonical binding');
+  const binding=bindings[0];
+  const sourceCase={component_id:componentId,original_candidate_feature:feature,
+    retained_source_operation_row:{source_comparison_record:admin,positive_area_source_feature_intersections:hits,
+      positive_area_recorded_source_subject_ids:[subject.id]},
+    retained_payload:{component_id:componentId,candidate_feature_sha256:record.candidate_feature_sha256,
+      candidate_geometry_sha256:record.candidate_geometry_sha256,target_stable_location_id:subject.id,
+      unsupported_candidate_remainder_included:false,
+      source_supported_intersection_fragments:hits,
+      target_current_feature:{feature_sha256:binding.feature_sha256,geometry_sha256:binding.geometry_sha256,parent_id:subject.original_parent_id}}};
+  const sourceScope={original_physical_comparison_bindings:[{component_id:componentId,
+    physical_comparison:{row:record},original_queried_source_metadata:queried}],original_target_canonical_bindings:bindings};
+  return {record,sourceCase,sourceScope,original:row,ordinal:fit.cases.indexOf(row)};
+}
+function administrative318SourceScope(fit,get,rule,componentId) {
+  const row=fit.cases.find(row=>row.component_id===componentId);demand(row,'Missing SEA318 original case');
+  const q=row.original_physical_query_custody;
+  const exact=(name,bytes,hash)=>{const entry=get(name);demand(entry.pin.bytes===bytes&&entry.pin.sha256===hash,'SEA318 declared whole product differs');return entry;};
+  const physical=exact(q.case_file,q.case_file_bytes,q.case_file_sha256);
+  demand(physical.pin.uncompressed_sha256===q.case_file_uncompressed_sha256,'SEA318 decoded physical case differs');
+  // Authenticate every complete original encoded/decoded pointset via readPin,
+  // but do not parse its unused coordinate graph merely to recover metadata.
+  // This literal metadata view was copied from those same whole products;
+  // every used scalar is rejoined to the accepted raw005 query/pin below.
+  for(const pin of q.complete_query_source_pointsets){
+    const source=exact(pin.source_file,pin.bytes,pin.sha256);
+    demand(source.pin.uncompressed_bytes===pin.uncompressed_bytes&&source.pin.uncompressed_sha256===pin.uncompressed_sha256,'SEA318 decoded query product differs');
+  }
+  const metadata=JSON.parse(get(rule.original_query_metadata_path).body);
+  demand(Array.isArray(metadata)&&new Set(metadata.map(source=>source.source_id)).size===metadata.length,
+    'Duplicate/missing SEA318 original query metadata view');
+  const sources=q.complete_original_query_source_ids.map(id=>{
+    const matches=metadata.filter(source=>source.source_id===id);
+    demand(matches.length===1,'Missing/nonunique SEA318 original query metadata');return matches[0];
+  });
+  return retainedAdministrative318CaseView({fit,physicalCase:JSON.parse(physical.body),querySources:sources,
+    targetBindings:JSON.parse(get(rule.target_canonical_bindings_path).body),componentId});
+}
+function administrative318SourcePremiseStage(repo,request,report) {
+  const rule=request.source_rule;
+  demand(request.report.sha256==='2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0'
+    &&report.execution_commit==='104091cfecd9c83a53f3e6e62f95b0a0c8074351','Unsupported original physical-comparison authority');
+  demand(rule.profile==='retained-consumed-administrative-source'&&rule.version===1
+    &&rule.geometry_scope==='full-component'&&rule.expected_ids.length>0&&new Set(rule.expected_ids).size===rule.expected_ids.length,
+    'Incomplete SEA318 administrative phase');
+  const bodies=new Map();for(const pin of rule.inputs){demand(pin.kind===undefined&&!bodies.has(pin.path),'Duplicate SEA318 input');bodies.set(pin.path,{pin,body:readPin(repo,pin)});}
+  const get=name=>{const entry=bodies.get(name);demand(entry,'Missing whole SEA318 operand');return entry;};
+  for(const accepted of RETAINED_ADMINISTRATIVE_318_HANDOFF){const entry=get(rule[accepted.role]);
+    demand(['path','mode','blob','bytes','sha256'].every(key=>entry.pin[key]===accepted[key]),'SEA318 outside accepted corpus');}
+  const fit=JSON.parse(get(rule.cases_path).body),state=JSON.parse(get(rule.outcomes_path).body),families=JSON.parse(get(rule.family_roster_path).body);
+  demand(fit.batch_id===SEA318_BATCH&&state.batch_id===SEA318_BATCH&&families.batch_id===SEA318_BATCH
+    &&state.component_count===318&&state.family_count===122&&families.component_count===318&&families.family_count===122
+    &&Array.isArray(state.rows)&&state.rows.length===318&&new Set(state.rows.map(row=>row.component_id)).size===318,
+    'SEA318 original whole component/family roster differs');
+  demand(JSON.stringify(rule.cohort_ids)===JSON.stringify(fit.cases.map(row=>row.component_id))
+    &&rule.expected_ids.every(id=>rule.cohort_ids.includes(id)),'SEA318 priority/cohort scope differs');
+  const needed=new Set(fit.cases.filter(row=>rule.expected_ids.includes(row.component_id)).map(row=>row.original_administrative_comparison.record.uniquely_covering_compatible_recorded_subject.id));
+  const targets=new Map(),allIds=new Set();for(const name of rule.target_banks){const entry=get(name);
+    demand(execFileSync('git',['-C',repo,'ls-tree','-z','HEAD','--',name],{encoding:'utf8'})===`${entry.pin.mode} blob ${entry.pin.blob}\t${name}\0`,'SEA318 current target bank differs');
+    const features=JSON.parse(entry.body).features;demand(Array.isArray(features),'Missing complete SEA318 target bank');
+    for(const feature of features){demand(!allIds.has(feature.id),'Duplicate complete SEA318 target');allIds.add(feature.id);if(needed.has(feature.id))targets.set(feature.id,feature);}}
+  const manifest=JSON.parse(get(rule.manifest_path).body),boundsPin=get(rule.bounds_path).pin;
+  demand(manifest.original_assets.bounds.sha256===boundsPin.sha256,'SEA318 current bounds differs');
+  const bounds=JSON.parse(get(rule.bounds_path).body),owners=new Map(bounds.map(row=>[row.id,row]));
+  demand(bounds.length===49625&&owners.size===49625&&new Set(bounds.map(row=>row.index)).size===49625,'Incomplete SEA318 complete owner roster');
+  const products=rule.administrative_products.map(pin=>{const entry=get(pin.path);demand(entry.pin.sha256===pin.sha256,'SEA318 source descriptor differs');const product=JSON.parse(entry.body);
+    demand(product.type==='FeatureCollection'&&Array.isArray(product.features),'Incomplete SEA318 source product');return {pin:entry.pin,features:product.features.map(feature=>({feature_sha256:canonicalSourceSha(feature),geometry_sha256:canonicalSourceSha(feature.geometry)}))};});
+  const rows=fit.cases.filter(row=>rule.expected_ids.includes(row.component_id)).map(row=>{
+    const view=administrative318SourceScope(fit,get,rule,row.component_id),target=targets.get(view.sourceCase.retained_payload.target_stable_location_id),owner=owners.get(target?.id);
+    demand(target&&owner&&target.properties.parent_id===owner.province_id,'SEA318 current target/parent differs');
+    const packed=row.original_physical_query_custody.complete_original_packed_comparison_row;
+    const physicalProduct=report.products.find(pin=>pin.path===packed.original_product.path);
+    demand(physicalProduct&&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(key=>physicalProduct[key]===packed.original_product[key]),'SEA318 original qualified physical report differs');
+    const sourceMatches=products.filter(p=>p.pin.sha256===row.source_product_capture.retained_capture_sha256
+      &&p.pin.uncompressed_bytes===row.source_product_capture.decoded_source_bytes
+      &&p.pin.uncompressed_sha256===row.source_product_capture.decoded_source_sha256);
+    demand(sourceMatches.length===1&&sourceMatches[0].features.some(feature=>feature.feature_sha256===row.source_feature.canonical_feature_sha256
+      &&feature.geometry_sha256===row.source_feature.canonical_geometry_sha256),'SEA318 whole source feature/product differs');
+    const premises=retainedAdministrativeSourcePremises({record:view.record,candidate:view.sourceCase.original_candidate_feature.geometry,sourceCase:view.sourceCase,sourceScope:view.sourceScope,target});
+    return {...premises,pixelIndex:owner.index,candidate:view.sourceCase.original_candidate_feature.geometry,
+      geometry_scope:'full-component',whole_gap_completion:false,disposition:premises.source_compatible?'awaiting-native-exclusion':'awaiting-evidence',
+      target_geometry_sha256:footprintValueSha256(target.geometry),
+      original_record:{source:get(row.original_physical_query_custody.case_file).pin,ordinal:0,row_sha256:sha(canonical(view.record))},
+      source_case:{source:get(rule.cases_path).pin,ordinal:view.ordinal,row_sha256:sha(canonical(view.sourceCase))}};
+  });
+  return {rows,facts:{version:1,operation:SOURCE_PREMISES_VERSION,source_profile:rule.profile,parent:request.parent,components:rows.length,
+    source_compatible:rows.filter(row=>row.source_compatible).length,assigned_cells:0,source_rule:rule,geometry_scope:'full-component',whole_gap_completion:false,
+    cohort_ids:rule.cohort_ids,unprocessed_cohort_ids:rule.cohort_ids.filter(id=>!rule.expected_ids.includes(id)),
+    original_batch_outcomes:{source:get(rule.outcomes_path).pin,batch_id:SEA318_BATCH,components:318,families:122},
+    original_remainders:{source:get(rule.outcomes_path).pin,preserved_without_reclassification:true},
+    source_limits:fit.limitations,limits:[...fit.limitations,'Retained original source-relative premises only; current native/neighbor qualification and selected delivery pending.']}};
+}

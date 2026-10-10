@@ -1,0 +1,956 @@
+{
+  "bot_receipt": {
+    "author_association": "NONE",
+    "body": "**Merge result:** accepted\n\nRequest: `7d845677-19bd-420c-8b92-776169461553`\n\n<!-- worldatlas-merge-result:v1\n{\"accepted\":true,\"request_id\":\"7d845677-19bd-420c-8b92-776169461553\",\"pr_number\":1190,\"phase\":\"merge\",\"queue_attempt\":1,\"merge_commit\":\"62efba6368b8ff7969327f436f91425f222a7673\",\"title\":\"Add exact original-source point and export-incidence diagnostics\",\"github_issue\":1188,\"geography\":{\"status\":\"passed\",\"trusted_code_commit\":\"aee3bc644593c8e080f4a8495a851890695581ec\",\"candidate_commit\":\"7f8842b4ac5ed19ba182ca35bd318c5eb5246fae\",\"report_sha256\":\"a788fa4351a6074de169f84a9557c628f82e8195463e4ae5ed2d64ea5e64ab1a\",\"adjudication\":null},\"tested_base\":\"aee3bc644593c8e080f4a8495a851890695581ec\",\"tested_candidate\":\"7f8842b4ac5ed19ba182ca35bd318c5eb5246fae\",\"reviewed_head\":\"2aa378836c51c3fa0cd150bd4b203995d5d97e2c\",\"evidence\":{\"status\":\"bytes-verified\",\"head_sha\":\"2aa378836c51c3fa0cd150bd4b203995d5d97e2c\",\"manifest_sha256\":\"409f1f054fb5bc167b3129db0e101b797ebfff61c70e5d4f7459297708da5ad5\",\"checked\":[\"efc79fe809a05cff04aa4d0446c8dc169e8c639f:docs/PREMERGE_EVIDENCE_REVIEW.md\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/fixtures/first.json\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/fixtures/gap.json\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/fixtures/request.json\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/fixtures/second.json\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/claim.json\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/failed-committed-v2.json\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/progress.json\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/run-controls.py\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v1/negative-control.json\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v1/positive-control.json\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v1/reproducibility.json\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v1/run-one.json\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v1/run-two.json\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v3/negative-control.json\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v3/positive-control.json\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v3/reproducibility.json\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v3/run-one.json\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v3/run-two.json\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v4/negative-control.json\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v4/positive-control.json\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v4/reproducibility.json\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v4/run-one.json\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v4/run-two.json\",\"candidate:coordination/engineering/exact-source-predicates-1188-20261006/runtime.json\",\"candidate:docs/EXACT_SOURCE_PREDICATES.md\",\"candidate:scripts/evidence/exact_predicates.py\",\"candidate:scripts/exact-source-diagnostic.py\",\"candidate:test/exact-source-predicates.py\",\"candidate:test/exact-source-predicates.test.mjs\"],\"limits\":[],\"factual_validation\":\"Requires independent source/method review; hashes do not establish truth\",\"change_files_checked\":30,\"metric_bindings_checked\":0,\"review\":{\"reviewer\":\"01a10893-2a57-72e0-aa08-5c36088d5206\",\"domains\":[\"implementation\",\"release\",\"source\"],\"limits\":[\"Generic bounded encoded-binary64 diagnostics only; full private Portugal\u2013Spain originals remain unsupported.\",\"No exact projection, ground truth, whole-cell/component coverage, materialized-face acceptance, owner assignment or source authority established.\",\"Pinned Python3.12.14 checks pass; initial system Python run failed because its math module lacks nextafter.\",\"Author-created fictional Cartesian fixtures only; modeled temporal status, no real provider, country, legal boundary, physical water or historical authority is established.\",\"Redistribution is supported by the author-created fixture declaration; this review makes no independent legal certification of real-world source rights.\"],\"comment_id\":6021688600}},\"proof\":null,\"head_cleanup\":{\"status\":\"deleted\",\"reference\":\"engineering/exact-source-predicates-1188-20261006\",\"expected_head\":\"2aa378836c51c3fa0cd150bd4b203995d5d97e2c\"},\"status\":\"merged\",\"candidate_cleanup\":{\"status\":\"deleted\",\"reference\":\"worldatlas-integration/pr-1190-7d845677-19bd-420c-8b92-776169461553-37504716969\"}}\n-->",
+    "created_at": "2026-10-06T17:50:30Z",
+    "html_url": "https://github.com/ChengshuLi/WorldAtlas/pull/1190#issuecomment-6022138411",
+    "id": 6022138411,
+    "issue_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/issues/1190",
+    "minimized": null,
+    "node_id": "IC_kwDOU2GYiM8AAAABZvKKKw",
+    "performed_via_github_app": {
+      "created_at": "2018-07-30T09:30:17Z",
+      "description": "Automate your workflow from idea to production",
+      "events": [
+        "branch_protection_rule",
+        "check_run",
+        "check_suite",
+        "create",
+        "delete",
+        "deployment",
+        "deployment_status",
+        "discussion",
+        "discussion_comment",
+        "fork",
+        "gollum",
+        "issues",
+        "issue_comment",
+        "label",
+        "merge_group",
+        "milestone",
+        "page_build",
+        "public",
+        "pull_request",
+        "pull_request_review",
+        "pull_request_review_comment",
+        "push",
+        "registry_package",
+        "release",
+        "repository",
+        "repository_dispatch",
+        "status",
+        "watch",
+        "workflow_dispatch",
+        "workflow_run"
+      ],
+      "external_url": "https://help.github.com/en/actions",
+      "html_url": "https://github.com/apps/github-actions",
+      "id": 15368,
+      "name": "GitHub Actions",
+      "node_id": "MDM6QXBwMTUzNjg=",
+      "owner": {
+        "avatar_url": "https://avatars.githubusercontent.com/u/9919?v=4",
+        "events_url": "https://api.github.com/users/github/events{/privacy}",
+        "followers_url": "https://api.github.com/users/github/followers",
+        "following_url": "https://api.github.com/users/github/following{/other_user}",
+        "gists_url": "https://api.github.com/users/github/gists{/gist_id}",
+        "gravatar_id": "",
+        "html_url": "https://github.com/github",
+        "id": 9919,
+        "login": "github",
+        "node_id": "MDEyOk9yZ2FuaXphdGlvbjk5MTk=",
+        "organizations_url": "https://api.github.com/users/github/orgs",
+        "received_events_url": "https://api.github.com/users/github/received_events",
+        "repos_url": "https://api.github.com/users/github/repos",
+        "site_admin": false,
+        "starred_url": "https://api.github.com/users/github/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/github/subscriptions",
+        "type": "Organization",
+        "url": "https://api.github.com/users/github",
+        "user_view_type": "public"
+      },
+      "permissions": {
+        "actions": "write",
+        "administration": "read",
+        "artifact_metadata": "write",
+        "attestations": "write",
+        "checks": "write",
+        "code_quality": "write",
+        "contents": "write",
+        "copilot_requests": "write",
+        "deployments": "write",
+        "discussions": "write",
+        "drives": "write",
+        "issues": "write",
+        "merge_queues": "write",
+        "metadata": "read",
+        "models": "read",
+        "packages": "write",
+        "pages": "write",
+        "pull_requests": "write",
+        "repository_hooks": "write",
+        "repository_projects": "write",
+        "security_events": "write",
+        "statuses": "write",
+        "vulnerability_alerts": "read"
+      },
+      "slug": "github-actions",
+      "updated_at": "2026-06-18T16:17:48Z"
+    },
+    "pin": null,
+    "reactions": {
+      "+1": 0,
+      "-1": 0,
+      "confused": 0,
+      "eyes": 0,
+      "heart": 0,
+      "hooray": 0,
+      "laugh": 0,
+      "rocket": 0,
+      "total_count": 0,
+      "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/issues/comments/6022138411/reactions"
+    },
+    "updated_at": "2026-10-06T17:50:30Z",
+    "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/issues/comments/6022138411",
+    "user": {
+      "avatar_url": "https://avatars.githubusercontent.com/in/15368?v=4",
+      "events_url": "https://api.github.com/users/github-actions%5Bbot%5D/events{/privacy}",
+      "followers_url": "https://api.github.com/users/github-actions%5Bbot%5D/followers",
+      "following_url": "https://api.github.com/users/github-actions%5Bbot%5D/following{/other_user}",
+      "gists_url": "https://api.github.com/users/github-actions%5Bbot%5D/gists{/gist_id}",
+      "gravatar_id": "",
+      "html_url": "https://github.com/apps/github-actions",
+      "id": 41898282,
+      "login": "github-actions[bot]",
+      "node_id": "MDM6Qm90NDE4OTgyODI=",
+      "organizations_url": "https://api.github.com/users/github-actions%5Bbot%5D/orgs",
+      "received_events_url": "https://api.github.com/users/github-actions%5Bbot%5D/received_events",
+      "repos_url": "https://api.github.com/users/github-actions%5Bbot%5D/repos",
+      "site_admin": false,
+      "starred_url": "https://api.github.com/users/github-actions%5Bbot%5D/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/github-actions%5Bbot%5D/subscriptions",
+      "type": "Bot",
+      "url": "https://api.github.com/users/github-actions%5Bbot%5D",
+      "user_view_type": "public"
+    }
+  },
+  "file_count": 30,
+  "files": [
+    {
+      "bytes": 839,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/claim.json",
+      "sha256": "e50dd046e154ad7266857c3032d28d97cf51a4050b637a62287ccae4439f9dfc"
+    },
+    {
+      "bytes": 15234,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/evidence-quality.json",
+      "sha256": "409f1f054fb5bc167b3129db0e101b797ebfff61c70e5d4f7459297708da5ad5"
+    },
+    {
+      "bytes": 386,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/failed-committed-v2.json",
+      "sha256": "e1e715d8df8a1f29a442e8f349f18a2a80c3fc5be3f37f3952a41c3e10c506c8"
+    },
+    {
+      "bytes": 386,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/fixtures/first.json",
+      "sha256": "d5bfd53612ecb658616ed5e4efda26f70ffe99971110ee3c45d27bc389d974ae"
+    },
+    {
+      "bytes": 190,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/fixtures/gap.json",
+      "sha256": "d56a32fe5011c9fe7d1e0295b8a643ef6cdd25202779976cd536c5ae12eb8bab"
+    },
+    {
+      "bytes": 2483,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/fixtures/request.json",
+      "sha256": "384ac82548d06e81bcfe0f704c4efd8e706d7ba6da4068681c7c77b68e174c82"
+    },
+    {
+      "bytes": 209,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/fixtures/second.json",
+      "sha256": "5019fd2badda6f4c4c8b749fa08ce76026be2722a820f10ec8279e356987b3a2"
+    },
+    {
+      "bytes": 1573,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/progress.json",
+      "sha256": "2bff4c17d5937b8001ba5d4b0c72b722bdfba4d185bef8451a331a92ee9b766a"
+    },
+    {
+      "bytes": 4575,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/run-controls.py",
+      "sha256": "0e7db0bd806cd0119e3e3467534031455669e29b010426eee52e7a756240441a"
+    },
+    {
+      "bytes": 3781,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v1/negative-control.json",
+      "sha256": "755e645d6610aa33cf8e92fc9eb63b76bcc53471ccc49a7e280940cacdb173cb"
+    },
+    {
+      "bytes": 1425,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v1/positive-control.json",
+      "sha256": "0297d6ff2004e5141b2fe261b4d2121e6322b65caa170739bcf6684d890c7c3b"
+    },
+    {
+      "bytes": 433,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v1/reproducibility.json",
+      "sha256": "df402369c4f9279e53e1700756df038babe6a3509b90a7977861ee816f7903fc"
+    },
+    {
+      "bytes": 10815,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v1/run-one.json",
+      "sha256": "ae65a69eed6980ecbda595ae18d7e451e8dc0999cea24665d27c02c87d0a7503"
+    },
+    {
+      "bytes": 10815,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v1/run-two.json",
+      "sha256": "ae65a69eed6980ecbda595ae18d7e451e8dc0999cea24665d27c02c87d0a7503"
+    },
+    {
+      "bytes": 3781,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v3/negative-control.json",
+      "sha256": "755e645d6610aa33cf8e92fc9eb63b76bcc53471ccc49a7e280940cacdb173cb"
+    },
+    {
+      "bytes": 1425,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v3/positive-control.json",
+      "sha256": "0297d6ff2004e5141b2fe261b4d2121e6322b65caa170739bcf6684d890c7c3b"
+    },
+    {
+      "bytes": 1345,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v3/reproducibility.json",
+      "sha256": "48b58b11316dd869366d758a3814a8656723ce9f7a6793f9ffee2ff31aa42697"
+    },
+    {
+      "bytes": 10815,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v3/run-one.json",
+      "sha256": "ae65a69eed6980ecbda595ae18d7e451e8dc0999cea24665d27c02c87d0a7503"
+    },
+    {
+      "bytes": 10815,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v3/run-two.json",
+      "sha256": "ae65a69eed6980ecbda595ae18d7e451e8dc0999cea24665d27c02c87d0a7503"
+    },
+    {
+      "bytes": 3781,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v4/negative-control.json",
+      "sha256": "755e645d6610aa33cf8e92fc9eb63b76bcc53471ccc49a7e280940cacdb173cb"
+    },
+    {
+      "bytes": 1425,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v4/positive-control.json",
+      "sha256": "0297d6ff2004e5141b2fe261b4d2121e6322b65caa170739bcf6684d890c7c3b"
+    },
+    {
+      "bytes": 1345,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v4/reproducibility.json",
+      "sha256": "d92b79a1abe03ac6b8d3816924463331927be083d09dec449b4f41a45f0fe2c1"
+    },
+    {
+      "bytes": 10815,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v4/run-one.json",
+      "sha256": "ae65a69eed6980ecbda595ae18d7e451e8dc0999cea24665d27c02c87d0a7503"
+    },
+    {
+      "bytes": 10815,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/runs/committed-v4/run-two.json",
+      "sha256": "ae65a69eed6980ecbda595ae18d7e451e8dc0999cea24665d27c02c87d0a7503"
+    },
+    {
+      "bytes": 459,
+      "merge_identical": true,
+      "path": "coordination/engineering/exact-source-predicates-1188-20261006/runtime.json",
+      "sha256": "6846a27b030cc37c509e63f02c5c4e5b2ba4252fa1c5626220a122c5a1279cfb"
+    },
+    {
+      "bytes": 5029,
+      "merge_identical": true,
+      "path": "docs/EXACT_SOURCE_PREDICATES.md",
+      "sha256": "2f511f810d0a02810ae1a146746f1c4a9c70cc077f9a450d5cdddce3ee1cd0d9"
+    },
+    {
+      "bytes": 19959,
+      "merge_identical": true,
+      "path": "scripts/evidence/exact_predicates.py",
+      "sha256": "dba1ce1648398122dc69a196d73e2d48ed08be5dfb39b5df5991e68efb7d1b8e"
+    },
+    {
+      "bytes": 2945,
+      "merge_identical": true,
+      "path": "scripts/exact-source-diagnostic.py",
+      "sha256": "ee92e8b23957555156d9b91f08009c5e1d6b52c88d42821f6f0b6addf3c134fd"
+    },
+    {
+      "bytes": 12348,
+      "merge_identical": true,
+      "path": "test/exact-source-predicates.py",
+      "sha256": "05be90676c4130ba6e5dd65a88f3ccc1b10db92f3a602df0e8610eeaaa58f611"
+    },
+    {
+      "bytes": 460,
+      "merge_identical": true,
+      "path": "test/exact-source-predicates.test.mjs",
+      "sha256": "b36e629f0541f6f09f56f86753f2aeceedd4b6433badd77687ffba4947e660c6"
+    }
+  ],
+  "limitations": [
+    "Generic analytic fixtures only; full Portugal-Spain input scope remains unsupported by this merged helper.",
+    "No #972 materialized-face, owner, legal, water or geography repair approval.",
+    "Observer closed-before-receipt race does not negate verified actual merge; no queue retry occurred."
+  ],
+  "merge_commit": "62efba6368b8ff7969327f436f91425f222a7673",
+  "merge_proven": true,
+  "merged_at": "2026-10-06T17:50:27Z",
+  "original_author_base": "efc79fe809a05cff04aa4d0446c8dc169e8c639f",
+  "result": "all-reviewed-files-byte-identical",
+  "reviewed_head": "2aa378836c51c3fa0cd150bd4b203995d5d97e2c",
+  "run": {
+    "conclusion": "success",
+    "jobs": [
+      {
+        "completedAt": "2026-10-06T17:36:20Z",
+        "conclusion": "success",
+        "databaseId": 112410312639,
+        "name": "prepare",
+        "startedAt": "2026-10-06T17:35:26Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-06T17:35:29Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-06T17:35:27Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:35:32Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "number": 2,
+            "startedAt": "2026-10-06T17:35:29Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:35:32Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "number": 3,
+            "startedAt": "2026-10-06T17:35:32Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:36:16Z",
+            "conclusion": "success",
+            "name": "Validate ready reviewed head and pin current integration candidate",
+            "number": 4,
+            "startedAt": "2026-10-06T17:35:32Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:36:17Z",
+            "conclusion": "success",
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "number": 5,
+            "startedAt": "2026-10-06T17:36:16Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:36:18Z",
+            "conclusion": "success",
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "number": 9,
+            "startedAt": "2026-10-06T17:36:17Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:36:18Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "number": 10,
+            "startedAt": "2026-10-06T17:36:18Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:36:18Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 11,
+            "startedAt": "2026-10-06T17:36:18Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37504716969/job/112410312639"
+      },
+      {
+        "completedAt": "2026-10-06T17:36:52Z",
+        "conclusion": "success",
+        "databaseId": 112410732914,
+        "name": "geography",
+        "startedAt": "2026-10-06T17:36:25Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-06T17:36:27Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-06T17:36:26Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:36:29Z",
+            "conclusion": "success",
+            "name": "Checkout trusted geographic checker",
+            "number": 2,
+            "startedAt": "2026-10-06T17:36:27Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:36:32Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "number": 3,
+            "startedAt": "2026-10-06T17:36:29Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:36:33Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "number": 4,
+            "startedAt": "2026-10-06T17:36:33Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:36:46Z",
+            "conclusion": "success",
+            "name": "Install trusted geographic dependencies",
+            "number": 5,
+            "startedAt": "2026-10-06T17:36:33Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:36:48Z",
+            "conclusion": "success",
+            "name": "Check exact combined geography with trusted baseline code",
+            "number": 6,
+            "startedAt": "2026-10-06T17:36:46Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:36:49Z",
+            "conclusion": "success",
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "number": 7,
+            "startedAt": "2026-10-06T17:36:48Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:36:49Z",
+            "conclusion": "success",
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "number": 12,
+            "startedAt": "2026-10-06T17:36:49Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:36:49Z",
+            "conclusion": "success",
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "number": 13,
+            "startedAt": "2026-10-06T17:36:49Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:36:49Z",
+            "conclusion": "success",
+            "name": "Post Checkout trusted geographic checker",
+            "number": 14,
+            "startedAt": "2026-10-06T17:36:49Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:36:49Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 15,
+            "startedAt": "2026-10-06T17:36:49Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37504716969/job/112410732914"
+      },
+      {
+        "completedAt": "2026-10-06T17:49:56Z",
+        "conclusion": "success",
+        "databaseId": 112410732971,
+        "name": "integration (1)",
+        "startedAt": "2026-10-06T17:36:25Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-06T17:36:27Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-06T17:36:26Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:37:52Z",
+            "conclusion": "success",
+            "name": "Checkout complete candidate for application regression",
+            "number": 2,
+            "startedAt": "2026-10-06T17:36:27Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:37:52Z",
+            "conclusion": "skipped",
+            "name": "Checkout only focused-test inputs for evidence regression",
+            "number": 3,
+            "startedAt": "2026-10-06T17:37:52Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:37:52Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "number": 4,
+            "startedAt": "2026-10-06T17:37:52Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:37:53Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "number": 5,
+            "startedAt": "2026-10-06T17:37:52Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:38:05Z",
+            "conclusion": "success",
+            "name": "Run npm ci --no-audit --no-fund",
+            "number": 6,
+            "startedAt": "2026-10-06T17:37:53Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:38:15Z",
+            "conclusion": "success",
+            "name": "Run python -m pip install -r requirements.txt",
+            "number": 7,
+            "startedAt": "2026-10-06T17:38:05Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:38:37Z",
+            "conclusion": "success",
+            "name": "Install browser dependencies only for tests that use Playwright",
+            "number": 8,
+            "startedAt": "2026-10-06T17:38:15Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:38:37Z",
+            "conclusion": "skipped",
+            "name": "Build the combined application once before asset-dependent tests",
+            "number": 9,
+            "startedAt": "2026-10-06T17:38:37Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:49:51Z",
+            "conclusion": "success",
+            "name": "Test applicable combined-tree invariants without publishing or live imports",
+            "number": 10,
+            "startedAt": "2026-10-06T17:38:37Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:49:51Z",
+            "conclusion": "success",
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "number": 18,
+            "startedAt": "2026-10-06T17:49:51Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:49:51Z",
+            "conclusion": "success",
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "number": 19,
+            "startedAt": "2026-10-06T17:49:51Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:49:51Z",
+            "conclusion": "success",
+            "name": "Post Checkout complete candidate for application regression",
+            "number": 20,
+            "startedAt": "2026-10-06T17:49:51Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:49:51Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 21,
+            "startedAt": "2026-10-06T17:49:51Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37504716969/job/112410732971"
+      },
+      {
+        "completedAt": "2026-10-06T17:43:50Z",
+        "conclusion": "success",
+        "databaseId": 112410732999,
+        "name": "integration (2)",
+        "startedAt": "2026-10-06T17:36:25Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-06T17:36:27Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-06T17:36:26Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:37:44Z",
+            "conclusion": "success",
+            "name": "Checkout complete candidate for application regression",
+            "number": 2,
+            "startedAt": "2026-10-06T17:36:27Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:37:44Z",
+            "conclusion": "skipped",
+            "name": "Checkout only focused-test inputs for evidence regression",
+            "number": 3,
+            "startedAt": "2026-10-06T17:37:44Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:37:44Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "number": 4,
+            "startedAt": "2026-10-06T17:37:44Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:37:44Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "number": 5,
+            "startedAt": "2026-10-06T17:37:44Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:37:57Z",
+            "conclusion": "success",
+            "name": "Run npm ci --no-audit --no-fund",
+            "number": 6,
+            "startedAt": "2026-10-06T17:37:44Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:38:07Z",
+            "conclusion": "success",
+            "name": "Run python -m pip install -r requirements.txt",
+            "number": 7,
+            "startedAt": "2026-10-06T17:37:57Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:38:07Z",
+            "conclusion": "success",
+            "name": "Install browser dependencies only for tests that use Playwright",
+            "number": 8,
+            "startedAt": "2026-10-06T17:38:07Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:38:07Z",
+            "conclusion": "skipped",
+            "name": "Build the combined application once before asset-dependent tests",
+            "number": 9,
+            "startedAt": "2026-10-06T17:38:07Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:43:46Z",
+            "conclusion": "success",
+            "name": "Test applicable combined-tree invariants without publishing or live imports",
+            "number": 10,
+            "startedAt": "2026-10-06T17:38:07Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:43:46Z",
+            "conclusion": "success",
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "number": 18,
+            "startedAt": "2026-10-06T17:43:46Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:43:46Z",
+            "conclusion": "success",
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "number": 19,
+            "startedAt": "2026-10-06T17:43:46Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:43:46Z",
+            "conclusion": "success",
+            "name": "Post Checkout complete candidate for application regression",
+            "number": 20,
+            "startedAt": "2026-10-06T17:43:46Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:43:46Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 21,
+            "startedAt": "2026-10-06T17:43:46Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37504716969/job/112410732999"
+      },
+      {
+        "completedAt": "2026-10-06T17:45:16Z",
+        "conclusion": "success",
+        "databaseId": 112410733034,
+        "name": "integration (0)",
+        "startedAt": "2026-10-06T17:36:25Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-06T17:36:26Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-06T17:36:26Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:37:29Z",
+            "conclusion": "success",
+            "name": "Checkout complete candidate for application regression",
+            "number": 2,
+            "startedAt": "2026-10-06T17:36:26Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:37:29Z",
+            "conclusion": "skipped",
+            "name": "Checkout only focused-test inputs for evidence regression",
+            "number": 3,
+            "startedAt": "2026-10-06T17:37:29Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:37:30Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "number": 4,
+            "startedAt": "2026-10-06T17:37:29Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:37:30Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "number": 5,
+            "startedAt": "2026-10-06T17:37:30Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:37:44Z",
+            "conclusion": "success",
+            "name": "Run npm ci --no-audit --no-fund",
+            "number": 6,
+            "startedAt": "2026-10-06T17:37:30Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:37:55Z",
+            "conclusion": "success",
+            "name": "Run python -m pip install -r requirements.txt",
+            "number": 7,
+            "startedAt": "2026-10-06T17:37:44Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:38:16Z",
+            "conclusion": "success",
+            "name": "Install browser dependencies only for tests that use Playwright",
+            "number": 8,
+            "startedAt": "2026-10-06T17:37:55Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:39:56Z",
+            "conclusion": "success",
+            "name": "Build the combined application once before asset-dependent tests",
+            "number": 9,
+            "startedAt": "2026-10-06T17:38:16Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:45:13Z",
+            "conclusion": "success",
+            "name": "Test applicable combined-tree invariants without publishing or live imports",
+            "number": 10,
+            "startedAt": "2026-10-06T17:39:56Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:45:14Z",
+            "conclusion": "success",
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "number": 18,
+            "startedAt": "2026-10-06T17:45:13Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:45:14Z",
+            "conclusion": "success",
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "number": 19,
+            "startedAt": "2026-10-06T17:45:14Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:45:14Z",
+            "conclusion": "success",
+            "name": "Post Checkout complete candidate for application regression",
+            "number": 20,
+            "startedAt": "2026-10-06T17:45:14Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:45:14Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 21,
+            "startedAt": "2026-10-06T17:45:14Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37504716969/job/112410733034"
+      },
+      {
+        "completedAt": "2026-10-06T17:50:33Z",
+        "conclusion": "success",
+        "databaseId": 112416650390,
+        "name": "merge",
+        "startedAt": "2026-10-06T17:49:59Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-06T17:50:00Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-06T17:49:59Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:50:01Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "number": 2,
+            "startedAt": "2026-10-06T17:50:00Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:50:04Z",
+            "conclusion": "success",
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "number": 3,
+            "startedAt": "2026-10-06T17:50:01Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:50:31Z",
+            "conclusion": "success",
+            "name": "Recheck tested base, ownership, reviewed bytes and checks before squash",
+            "number": 4,
+            "startedAt": "2026-10-06T17:50:04Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:50:31Z",
+            "conclusion": "success",
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "number": 5,
+            "startedAt": "2026-10-06T17:50:31Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:50:32Z",
+            "conclusion": "success",
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "number": 9,
+            "startedAt": "2026-10-06T17:50:31Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:50:32Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "number": 10,
+            "startedAt": "2026-10-06T17:50:32Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-06T17:50:32Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 11,
+            "startedAt": "2026-10-06T17:50:32Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37504716969/job/112416650390"
+      }
+    ],
+    "status": "completed"
+  },
+  "schema": "private-actual-merge-readback-v1"
+}

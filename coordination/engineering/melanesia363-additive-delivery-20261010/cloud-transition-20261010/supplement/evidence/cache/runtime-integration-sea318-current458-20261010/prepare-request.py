@@ -1,0 +1,26 @@
+from pathlib import Path
+import json,hashlib,subprocess,copy
+r=Path('.cache/runtime-integration-sea318-current458-20261010');repo='.worldatlas-checkout';commit='0635e6d935f6953005e87a2b1290ddacbe55f337';current='c28077da970ae39550e5edea790a266b060d3de5'
+def load(p):return json.load(open(p))
+def pin_file(p,path=None):
+ raw=p.read_bytes();return {'path':path or str(p.resolve()),'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+def tree(commit,path):
+ line=subprocess.check_output(['git','-C',repo,'ls-tree','-z',commit,'--',path]).decode().rstrip('\0');m,typ,rest=line.split(' ',2);blob,n=rest.split('\t');assert typ=='blob' and n==path;return {'commit':commit,'path':path,'mode':m,'blob':blob}
+def desc(x):
+ p={k:v for k,v in x.items()if k in ['commit','path','mode','bytes','sha256','uncompressed_bytes','uncompressed_sha256']};p['blob']=x.get('blob',x.get('git_blob_oid'));return p
+fit=load(r/'administrative-source-rule-fit.json');row=next(x for x in fit['cases']if x['country_codes']==['BRN']);h=load('.cache/runtime-integration-sea318-source30-20261010/SOURCE30-OPERAND-HANDOFF.json');joins=load('.cache/runtime-integration-sea318-source30-20261010/current-selected-target-owner-parent-joins.json');brn=next(x for x in joins['targets']if x['target_id'].startswith('gb:BRN'))
+request=load('.cache/runtime-integration-source-group057-068-091-20261010/group057-068-091-source-request-DRAFT.json');request['destination']='sea318-source-BRN-current353-UNISSUED';caller=next(p for p in request['executed_code']if p['path']=='scripts/additive-gap-repair.mjs');caller.update(pin_file(r/'caller-proposed318.mjs','scripts/additive-gap-repair.mjs'))
+inputs=[];accepted=[('cases_path','administrative-source-rule-fit.json'),('outcomes_path','component-state-318.json'),('family_roster_path','family-roster-122.json')];rule={'version':1,'profile':'retained-consumed-administrative-source','geometry_scope':'full-component','expected_ids':[row['component_id']],'cohort_ids':[x['component_id']for x in fit['cases']]}
+for role,name in accepted:
+ p=fitpath='research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/'+name;pin=tree(commit,p);pin.update(pin_file(r/name,p));inputs.append(pin);rule[role]=p
+q=row['original_physical_query_custody'];p=tree(commit,q['case_file']);p.update(bytes=q['case_file_bytes'],sha256=q['case_file_sha256'],uncompressed_bytes=(r/'BRN-original-physical-case.json').stat().st_size,uncompressed_sha256=q['case_file_uncompressed_sha256']);assert hashlib.sha256((r/'BRN-original-physical-case.json').read_bytes()).hexdigest()==p['uncompressed_sha256'];inputs.append(p)
+for source in q['complete_query_source_pointsets']:
+ p=next(x for x in h['complete_original_query_pointsets']if x['path']==source['source_file']);inputs.append(desc(p))
+product=desc(h['source_products']['gb:BRN:ADM1']);inputs.append(product);rule['administrative_products']=[product]
+bank=desc(brn['source_containing_pin']);actual=tree(current,bank['path']);assert all(actual[k]==bank[k] for k in ['path','mode','blob']);inputs.append(bank);rule['target_banks']=[bank['path']]
+manifest=desc(joins['manifest']);assert tree(current,manifest['path'])['blob']==manifest['blob'];inputs.append(manifest);rule['manifest_path']=manifest['path']
+bounds=desc(joins['complete_owner_roster']);bounds.update(uncompressed_bytes=joins['complete_owner_roster']['decoded_bytes'],uncompressed_sha256=joins['complete_owner_roster']['decoded_sha256']);inputs.append(bounds);rule['bounds_path']=bounds['path']
+binding_path='coordination/engineering/southeast-asia318-source-rule-delivery-20261010/BRN-target-canonical-bindings.json';binding=pin_file(r/'BRN-target-canonical-bindings.json',binding_path);binding.update(commit=None,mode='100644',blob=None);inputs.append(binding);rule['target_canonical_bindings_path']=binding_path;rule['inputs']=inputs;request['source_rule']=rule
+(r/'BRN-source-request-UNISSUED.json').write_text(json.dumps(request,ensure_ascii=False,sort_keys=True,indent=2)+'\n')
+(r/'BRN-operand-roster.json').write_text(json.dumps({'inputs':inputs,'current_target_join':brn,'current_target_join_provenance':pin_file(Path('.cache/runtime-integration-sea318-source30-20261010/current-selected-target-owner-parent-joins.json')),'source_programme':request['executed_code'],'original_scope':{'batch_id':fit['batch_id'],'components':318,'families':122,'priority':30,'other_components':288,'positive_intersections':30,'extra_zero_area_empty_intersections':15,'cases_with_empty_extras':11},'pending':['Author publish BRN-target-canonical-bindings.json; replace null commit/blob with actual whole matching ordinary pin.','Author adopt reviewed caller, root independently approve exact changed17 SOURCE/NATIVE vectors.','Actual executing HEAD, installed runtime whole custody, operating/pre-use admission and destination issuance.'],'not_missing_facts':['Original physical/query custody and complete raw candidate; current BRN target10448/parent1045 original whole target and parent joins.'],'no_current_year_authority':True,'no_operator_executed':True},ensure_ascii=False,indent=2)+'\n')
+print(json.dumps({'request':pin_file(r/'BRN-source-request-UNISSUED.json'),'input_encoded_plus_decoded':sum(x['bytes']+x.get('uncompressed_bytes',0)for x in inputs),'descriptors':len(inputs),'caller':caller}))

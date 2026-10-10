@@ -1,0 +1,54 @@
+{
+  "accepted": true,
+  "request_id": "726b4f15-10cb-4cdb-ae27-031641d7165c",
+  "issue_number": 1394,
+  "claim": {
+    "comment_id": 6037481089,
+    "version": 1,
+    "active": false,
+    "worker_id": "01a10893-2a57-72e0-aa08-5c36088d5206",
+    "claim_id": "67512015-4d03-458f-a2fb-72009062210b",
+    "branch": "engineering/complete-replay-operand-restoration-20261007",
+    "request_id": "726b4f15-10cb-4cdb-ae27-031641d7165c",
+    "issue_number": 1394,
+    "claimed_at": "2026-10-07T12:02:24.353Z",
+    "updated_at": "2026-10-09T10:43:47.272Z",
+    "expires_at": "2026-10-10T10:43:47.272Z",
+    "live_work": false,
+    "mode": "engineering",
+    "max_prs": 2,
+    "released_at": "2026-10-10T20:30:51.485Z"
+  },
+  "replayed": false,
+  "result_source": "github-comment",
+  "result_comment_id": 6101875790,
+  "logical_observation_reads": 4,
+  "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/38084028023",
+  "request_accounting": {
+    "phase": "claim-observer",
+    "actual_http_attempts": 6,
+    "counts": {
+      "GET:repository-authority:200": 1,
+      "POST:actions:204": 1,
+      "GET:comments:200": 2,
+      "GET:actions:200": 2
+    },
+    "observed_repository_core": {
+      "first": {
+        "limit": 5000,
+        "remaining": 4317,
+        "reset": 1791664918
+      },
+      "last": {
+        "limit": 5000,
+        "remaining": 4282,
+        "reset": 1791664918
+      },
+      "lowest_remaining": {
+        "limit": 5000,
+        "remaining": 4282,
+        "reset": 1791664918
+      }
+    }
+  }
+}
