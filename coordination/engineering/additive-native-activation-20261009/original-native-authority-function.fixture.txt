@@ -1,0 +1,42 @@
+export function qualifyOriginalNativeAuthority(custody, pins) {
+ const proof=originalAuthorities.get(custody);demand(proof,'Require actual original custody');
+ const {reader,bodies}=proof,{native_request:issued,native_facts:facts}=bodies;
+ demand(proof.qualifiedSource,'Native authority requires complete qualified source predecessor first');
+ demand(pins&&Object.keys(pins).sort().join(',')==='assets,inventory,operating,publication'&&Array.isArray(pins.assets),'Require complete native proof roster');
+ const all=[pins.publication,pins.inventory,pins.operating,...pins.assets];
+ const retained=all.reduce((n,p)=>n+2*(p.bytes+(p.decoded_bytes??p.uncompressed_bytes??0)),0);
+ demand(Number.isSafeInteger(retained)&&reader.used+retained<=PHASE,'Complete original native retained phase exceeds cap before reads');
+ reader.used+=retained;
+ const admitted=all.map(p=>{
+  const q={...p,git_blob_oid:p.git_blob_oid??p.blob,decoded_bytes:p.decoded_bytes??p.uncompressed_bytes,decoded_sha256:p.decoded_sha256??p.uncompressed_sha256};pinCheck(q);
+  let version=q.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+  const actual=reader.descriptor(q.path,version);demand(actual.mode===q.mode&&actual.git_blob_oid===q.git_blob_oid&&actual.bytes===q.bytes,'Original native proof whole mode/OID differs');
+  reader.admit(actual,q.decoded_bytes??0);return {q,version};
+ });
+ const raw=admitted.map(({q,version})=>{
+  const body=reader.read(q.path,{version,expected:q.sha256,decoded:q.decoded_bytes??0});if(q.decoded_bytes===undefined)return body;
+  const decoded=gunzipSync(body,{maxOutputLength:q.decoded_bytes});demand(decoded.length===q.decoded_bytes&&sha(decoded)===q.decoded_sha256,'Original whole native decoded proof differs');return decoded;
+ });
+ const publication=JSON.parse(raw[0]),operating=JSON.parse(raw[2]),inventoryPin=pins.inventory;
+ demand(publication.complete===true&&publication.facts.bytes===custody.pins.native_facts.bytes&&publication.facts.sha256===custody.pins.native_facts.sha256&&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(k=>publication.inventory[k]===inventoryPin[k]),'Partial/drifted original native publication');
+ demand(same(facts.input_descriptors,[issued.report,...issued.additive.inputs,...issued.baseline.pins])&&same(facts.installed_modules,issued.installed_modules),'Original native actual input/module closure differs');
+ demand(operating.qualified===true&&operating.execution_commit===facts.execution_commit&&operating.exit?.code===0&&operating.exit.signal===null&&operating.owned_processes_remaining?.length===0&&operating.refusal===null&&operating.request_sha256===facts.request.sha256&&operating.destination===issued.destination,'Unqualified original native operating proof');
+ const lines=raw[1].toString('utf8').split('\n');demand(lines.pop()==='','Truncated whole native inventory');const rows=lines.map(s=>JSON.parse(s));
+ const batch=facts.operation==='unactivated-additive-native-batch-v1',nativeScope=batch?custody.source_scope_ids:[issued.additive.component_id];
+ demand(same(rows.map(r=>r.component_id),nativeScope)&&new Set(rows.map(r=>r.component_id)).size===rows.length&&(!batch||rows.length===facts.components),'Native inventory scope omitted/reordered');
+ const byId=new Map(custody.ledger.rows.map(r=>[r.component_id,r]));
+ for(const row of rows){const old=byId.get(row.component_id);demand(old&&(batch?row.disposition===old.disposition:['assigned','zero-cell'].includes(old.disposition))&&row.native_cells===(old.native_cells??0)&&row.target_id===(['assigned','zero-cell'].includes(old.disposition)?old.target_id:proof.qualifiedSource.rows.find(r=>r.component_id===row.component_id)?.target_id),'Native inventory disposition/contribution rebound');}
+ demand(publication.assets.length===pins.assets.length&&new Set(pins.assets.map(p=>p.path)).size===pins.assets.length,'Incomplete/duplicate native asset roster');
+ const nativePatches=[],nativeContracts=[];
+ for(let i=0;i<pins.assets.length;i++){
+  const p=pins.assets[i],declared=publication.assets[i];
+  demand(p.path.endsWith('/'+declared.path)&&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(k=>p[k]===declared[k]),'Original native asset roster rebound');
+  if(declared.path==='base-native-manifest.json'){const m=JSON.parse(raw[i+3]);nativeContracts.push(Object.fromEntries(['size','coordinateBits','method','native_latitudes','hierarchy_sha256','original_assets'].map(k=>[k,m[k]])));}
+  if(declared.path.startsWith('patch-')){const patch=JSON.parse(raw[i+3]);demand(patch.kind==='unassigned-native-cells-v1'&&patch.ledger_sha256===custody.pins.ledger.sha256,'Qualified original patch/ledger differs');nativePatches.push(patch);}
+  if(p.sha256===custody.pins.ledger.sha256)demand(same(JSON.parse(raw[i+3]),custody.ledger),'Whole published native ledger differs');
+ }
+ demand(nativeContracts.length===1,'Original native publication omits complete base manifest');
+ demand(pins.assets.some(p=>p.sha256===custody.pins.ledger.sha256),'Published native assets omit original complete ledger');
+ return freeze({version:1,kind:'qualified-original-native-authority-v1',pins,scope_ids:custody.source_scope_ids,native_scope_ids:nativeScope,inventory_rows:rows,native_patches:nativePatches,native_contract:nativeContracts[0],rule_sha256:custody.rule_sha256,complete_phase_bytes:reader.used,
+  limitations:['Original unactivated proposal custody/qualification only; selected current-bank applicability and immutable policy authority remain separately required.']});
+}
