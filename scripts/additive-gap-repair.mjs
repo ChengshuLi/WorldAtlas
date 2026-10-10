@@ -1637,10 +1637,18 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
     const before=fs.lstatSync(process.execPath);
     demand(before.isFile() && !before.isSymbolicLink() && before.size===runtimeStat.size
       && before.ino===runtimeStat.ino && before.dev===runtimeStat.dev && before.mode===runtimeStat.mode,'Installed runtime descriptor drift');
-    const raw=fs.readFileSync(process.execPath),after=fs.lstatSync(process.execPath);
-    demand(raw.length===runtimeStat.size && after.size===before.size && after.ino===before.ino
-      && after.dev===before.dev && after.mode===before.mode,'Installed runtime whole read drift');
-    return sha(raw);
+    const sameStat=stat=>stat.isFile() && stat.size===before.size && stat.ino===before.ino
+      && stat.dev===before.dev && stat.mode===before.mode;
+    const fd=fs.openSync(process.execPath,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);
+    try{
+      demand(sameStat(fs.fstatSync(fd)),'Installed runtime opened descriptor drift');
+      const hasher=createHash('sha256'),buffer=Buffer.alloc(1024*1024);let bytes=0;
+      for(let n;(n=fs.readSync(fd,buffer,0,buffer.length,null));){hasher.update(buffer.subarray(0,n));bytes+=n;}
+      const after=fs.lstatSync(process.execPath);
+      demand(bytes===runtimeStat.size && sameStat(fs.fstatSync(fd)) && sameStat(after)
+        && !after.isSymbolicLink(),'Installed runtime whole read drift');
+      return hasher.digest('hex');
+    }finally{fs.closeSync(fd);}
   };
   const runtimeSha=runtimeRead();
   verifyModules();
