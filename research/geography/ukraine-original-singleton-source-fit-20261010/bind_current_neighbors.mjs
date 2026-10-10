@@ -33,7 +33,7 @@ for (let p = path.dirname(output); p !== repo; p = path.dirname(p)) if (fs.exist
 const candidatePath = path.relative(repo, path.join(here, 'vintages/physical-restoration-001/original-component.json'));
 const candidateRaw = git('show', head + ':' + candidatePath);
 const candidate = JSON.parse(candidateRaw);
-demand(digest(candidate) === 'acd61551d2dbc9b6925e6d8c2d17cb210a6dcf6f3d80bbbadb64951660e3b746', 'Original feature drift');
+demand(sha(candidateRaw) === 'acd61551d2dbc9b6925e6d8c2d17cb210a6dcf6f3d80bbbadb64951660e3b746', 'Original raw feature drift');
 function bounds(geometry) {
   const box = [Infinity, Infinity, -Infinity, -Infinity];
   const visit = value => {
@@ -98,7 +98,7 @@ function scan(value, locator) {
 }
 scan(ledger.rows, '/rows'); scan(ledger.current_targets, '/current_targets');
 demand(geometryRows.length > 0 && geometryRows.every(row => !row.candidate_bbox_intersects), 'Current additive geometry requires actual predicate');
-const result = {baseline, execution_commit: head, component_id: candidate.id, candidate_bounds: box, complete_owner_rows: certificate.entries.length, complete_source_parts: certificate.inputs.length, complete_additive_geometry_records: geometryRows.length, candidate_neighbors: targets, additive_geometry_screen: geometryRows, inputs: pins, old_certificate_vintage: certificate.binding.release.id, actual_selection: selection, method: 'Complete-coordinate certificate for conservative exclusions; authenticate actual whole features for every hit and all current additive geometry fields.', limits: ['Bounding boxes are exclusions only. Prior exact whole-target and HUN-neighbor predicate results apply only after their whole-feature hashes match.', 'No native cell or selected continuous integration is established by this metadata proof.']};
+const result = {baseline, execution_commit: head, original_feature_raw_sha256: sha(candidateRaw), derived_js_feature_sha256: digest(candidate), component_id: candidate.id, candidate_bounds: box, complete_owner_rows: certificate.entries.length, complete_source_parts: certificate.inputs.length, complete_additive_geometry_records: geometryRows.length, candidate_neighbors: targets, additive_geometry_screen: geometryRows, inputs: pins, old_certificate_vintage: certificate.binding.release.id, actual_selection: selection, method: 'Complete-coordinate certificate for conservative exclusions; authenticate actual whole features for every hit and all current additive geometry fields.', limits: ['Bounding boxes are exclusions only. Prior exact whole-target and HUN-neighbor predicate results apply only after their whole-feature hashes match.', 'No native cell or selected continuous integration is established by this metadata proof.']};
 demand(pins.reduce((sum, p) => sum + p.bytes, 0) + decoded.length < 128 * 1024 ** 2, 'Complete phase budget exceeded');
 fs.mkdirSync(output);
 fs.writeFileSync(path.join(output, 'result.json'), JSON.stringify(result) + '\n', {flag: 'wx'});
