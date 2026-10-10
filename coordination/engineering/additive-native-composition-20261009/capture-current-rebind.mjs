@@ -21,13 +21,22 @@ export function validateCurrentRebindPlan(plan,{executionCommit,baseSelection,re
  demand(plan.limits&&Object.keys(plan.limits).sort().join(',')==='complete_phase_bytes,descriptors,output_bytes,rss_bytes,sampled_stop_bytes,wall_seconds'&&Object.values(plan.limits).every(n=>Number.isSafeInteger(n)&&n>0)&&plan.limits.complete_phase_bytes<=PHASE&&plan.limits.descriptors<=512&&plan.limits.output_bytes<=4194304&&plan.limits.rss_bytes<=536870912&&plan.limits.sampled_stop_bytes<=402653184&&plan.limits.sampled_stop_bytes<=plan.limits.rss_bytes,'Planned complete phase/operating/output bounds differ');
  demand(Array.isArray(plan.target_sources)&&plan.target_sources.length>0&&Array.isArray(plan.original_patch_sha256s)&&plan.original_patch_sha256s.length===registry.entries.length,'Missing complete planned input roster');return plan;
 }
+// The complete source/native authority is authenticated before projection.
+// Only the already-proven selected-hook custody fields escape this completed
+// frame; source rows/programme presentation are not used by capture/rebind.
+function completedOriginalAuthority(reader,entry){
+ const proof=readRetainedRegistryAuthority(reader,entry);
+ return Object.freeze({authority_sha256:proof.authority_sha256,rule_sha256:proof.rule_sha256,
+  source_scope_ids:proof.source_scope_ids,native_proof:proof.native_proof,
+  original_ledger:proof.original_ledger,pins:proof.pins,original_pins:proof.original_pins});
+}
 function originalOperands(reader,registry,ledger,snapshot,executionMetadata){
  const normalized=normaliseRetainedRepairLedger(ledger,registry),proofs=[];
  for(const entry of registry.entries){
   // All already returned source/authority/owner values remain charged while
   // another whole original authority frame is opened by the trusted reader.
   reader.metadataBytes=(executionMetadata.priorCarryBytes??0)+8*1048576+2*(snapshot.metadataBytes+valueBytes({registry,ledger,proofs,executionMetadata,reader_inventory:[...reader.inventory]}).length)+(snapshot.acquisition_buffer_bytes??0);reader.outputBytes=4194304;reader.phase();
-  proofs.push(readRetainedRegistryAuthority(reader,entry));
+  proofs.push(completedOriginalAuthority(reader,entry));
   demand(valueBytes(proofs).length<=2097152,'Complete returned original authority views exceed prospective carry bound');
   // The authority call and carry measurement have returned; proofs stay live.
   reclaimCompletedRebindFrame();
@@ -78,7 +87,7 @@ export function captureCurrentRebindProducts({destination,snapshot,plan,registry
  demand(same(rows,plannedRows),'Original authenticated authority rows differ from admitted plan');
  demand(same(plan.original_patch_sha256s,patches.map(valueSha)),'Cold plan changes complete original native output roster');
  const acquired=acquireCurrentRebindOperands(snapshot,registry,rows,patches,{targetSources:plan.target_sources,predecessorProof:plan.predecessor_proof,carriedMetadataBytes:priorCarryBytes+2*valueBytes({plan,proofs,originalLedger,executedCode,executionPreUse}).length});
- demand(acquired.acquisition_phases.every(p=>p.complete_phase_bytes<=plan.limits.complete_phase_bytes&&p.descriptors<=plan.limits.descriptors),'Actual acquisition exceeds admitted planned phase');
+ demand(acquired.acquisition_phases.every(p=>p.complete_phase_bytes<=plan.limits.complete_phase_bytes&&p.descriptors<=plan.limits.descriptors),'Actual acquisition exceeds admitted planned phase: '+JSON.stringify({limits:{complete_phase_bytes:plan.limits.complete_phase_bytes,descriptors:plan.limits.descriptors},phases:acquired.acquisition_phases.flatMap((p,index)=>p.complete_phase_bytes>plan.limits.complete_phase_bytes||p.descriptors>plan.limits.descriptors?[{index,kind:p.kind,complete_phase_bytes:p.complete_phase_bytes,descriptors:p.descriptors}]:[])}));
  const request={version:1,kind:'issued-native-additive-current-bank-rebind-v1',execution_commit:executionCommit,executed_code:executedCode,base_selection:nativeBaseSelection(snapshot.selection),authority_registry_sha256:valueSha(registry),original_rows:rows,original_patch_sha256s:patches.map(valueSha),current_targets:acquired.current_targets,current_rows:acquired.current_rows,acquisition:acquired.acquisition,execution:{command:executionPreUse.command,pre_use:executionPreUse.pre_use},size:snapshot.manifest.size,limits:plan.limits};
  const result=acquired.result,facts={version:1,kind:'native-additive-current-bank-rebind-facts-v1',execution_commit:executionCommit,request_sha256:valueSha(request),result_sha256:valueSha(result),complete_phase_bytes:Math.max(...acquired.acquisition_phases.map(p=>p.complete_phase_bytes)),descriptors:Math.max(...acquired.acquisition_phases.map(p=>p.descriptors)),acquisition_sha256:valueSha(acquired.acquisition),acquisition_phases:acquired.acquisition_phases};
  // These local output pins deliberately omit commit/OID: publication custody
