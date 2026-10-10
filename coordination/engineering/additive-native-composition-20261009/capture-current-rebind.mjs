@@ -43,7 +43,9 @@ function originalOperands(reader,registry,ledger,snapshot,executionMetadata){
  }
  const expected=new Map();for(const proof of proofs)for(const row of proof.original_ledger.rows){demand(!expected.has(row.component_id),'Repeated original complete authority component');expected.set(row.component_id,{row,proof});}
  demand(ledger.rows.length===expected.size&&ledger.rows.every(row=>{const prior=expected.get(row.component_id);if(!prior)return false;const {authority_sha256,rule_sha256,...literal}=row;return authority_sha256===prior.proof.authority_sha256&&rule_sha256===prior.proof.rule_sha256&&same(literal,prior.row); }),'Composed ledger changes original scope/exception/primitive authority');
- return {rows:[...normalized.rows.values()],patches:proofs.flatMap(p=>p.native_proof.native_patches),proofs};
+ // Complete ledger/patch authentication above has finished. Duplicate original
+ // ledgers and native presentation graphs do not escape this helper frame.
+ return {rows:[...normalized.rows.values()],patches:proofs.flatMap(p=>p.native_proof.native_patches),proofs:proofs.map(proof=>Object.freeze({authority_sha256:proof.authority_sha256,rule_sha256:proof.rule_sha256,source_scope_ids:proof.source_scope_ids,pins:proof.pins,original_pins:proof.original_pins}))};
 }
 // Ephemeral private completion evidence; never a persisted certificate or
 // caller-authored approval. No snapshot/reader/owner/source graph escapes.
@@ -86,6 +88,9 @@ export function captureCurrentRebindProducts({destination,snapshot,plan,registry
  const {rows,patches,proofs}=originalOperands(snapshot.reader,registry,originalLedger,snapshot,{plan,executionPreUse,executedCode,priorCarryBytes,priorCompletion});
  demand(same(rows,plannedRows),'Original authenticated authority rows differ from admitted plan');
  demand(same(plan.original_patch_sha256s,patches.map(valueSha)),'Cold plan changes complete original native output roster');
+ // The original-authority frame and complete row/patch checks have returned;
+ // only needed rows, patches and compact custody remain live and charged.
+ reclaimCompletedRebindFrame();
  const acquired=acquireCurrentRebindOperands(snapshot,registry,rows,patches,{targetSources:plan.target_sources,predecessorProof:plan.predecessor_proof,carriedMetadataBytes:priorCarryBytes+2*valueBytes({plan,proofs,originalLedger,executedCode,executionPreUse}).length});
  demand(acquired.acquisition_phases.every(p=>p.complete_phase_bytes<=plan.limits.complete_phase_bytes&&p.descriptors<=plan.limits.descriptors),'Actual acquisition exceeds admitted planned phase: '+JSON.stringify({limits:{complete_phase_bytes:plan.limits.complete_phase_bytes,descriptors:plan.limits.descriptors},phases:acquired.acquisition_phases.flatMap((p,index)=>p.complete_phase_bytes>plan.limits.complete_phase_bytes||p.descriptors>plan.limits.descriptors?[{index,kind:p.kind,complete_phase_bytes:p.complete_phase_bytes,descriptors:p.descriptors}]:[])}));
  // The complete acquisition/result helper has returned. Its table/group and
