@@ -13,9 +13,8 @@
   "partial_source_scope": 69,
   "original_holds": 253,
   "qualified_result_pin": {
-    "name": "result.json",
-    "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/qualified-current/result.json",
-    "commit": "8f1e23a4354314611d7bc393a9cc5ce9600622b8",
+    "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/selected353-compact-NCL-qualified/result.json",
+    "commit": "836dd9a75542d2a9ac3b08b92473616dbe13fbdc",
     "mode": "100644",
     "git_blob_oid": "50b7baa00ed7e7f7b9f3fc631e398d580fbcf503",
     "bytes": 2169280,
@@ -1070,5 +1069,52 @@
     "Partial native delivery retains accepted-evidence state and complete unresolved residuals.",
     "No native-pixel-to-area conversion, water inference, contemporary physical authority or deployment claim.",
     "Original historical b0 SOURCE /420db NATIVE approval6097232665 and producer vintages remain."
-  ]
+  ],
+  "refreshed_qualification_certificate_pin": {
+    "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/selected353-compact-NCL-qualified/certificate.json",
+    "commit": "836dd9a75542d2a9ac3b08b92473616dbe13fbdc",
+    "mode": "100644",
+    "git_blob_oid": "55554debdb175caefa1f8cb295f7f81232bdd7bc",
+    "bytes": 3289,
+    "sha256": "d10d67e5ff5ed24a21bd1c5535ec490e880ba3b08a398b2db92d296bb1c05dc2"
+  },
+  "refreshed_assembly_acceptance": {
+    "status": "PASS",
+    "complete_patch_rows_literal_preserved": true,
+    "four_products": {
+      "qualification.json": {
+        "bytes": 677,
+        "sha256": "df38b81ecde598acfc31542999cfeec8ae2d8e599c9b7da4127e3a7e1c0d4348",
+        "changed_top_level_keys_vs_original353": [
+          "rebind_certificate"
+        ]
+      },
+      "patch.json": {
+        "bytes": 9691,
+        "sha256": "b8c0abf5fd5b49f974f92ae21d666b668e1503875b18c1a3e6c17ddd19af79f8",
+        "changed_top_level_keys_vs_original353": [
+          "effective_reference",
+          "ledger_sha256"
+        ]
+      },
+      "ledger.json": {
+        "bytes": 482146,
+        "sha256": "f2822cfaac526eae21a10d688f8ec04b618c4fa5ee6d8b9226f7721f21512c37",
+        "changed_top_level_keys_vs_original353": [
+          "current_rebind"
+        ]
+      },
+      "envelope.json": {
+        "bytes": 1421,
+        "sha256": "060c158d90f05b58111eee8ab0e31f6a20ddbffcf5020c4ddef3e667d8513c41",
+        "changed_top_level_keys_vs_original353": [
+          "effective_reference",
+          "ledger",
+          "patch"
+        ]
+      }
+    },
+    "execution_commit": "836dd9a75542d2a9ac3b08b92473616dbe13fbdc",
+    "selected_delivery_credit": false
+  }
 }
