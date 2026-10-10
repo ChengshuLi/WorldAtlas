@@ -1,0 +1,22 @@
+// Thin invocation of the existing assembler; no scientific producer or selected write.
+import fs from 'node:fs';import path from 'node:path';import {pathToFileURL} from 'node:url';import {createHash} from 'node:crypto';
+const require=(v,m)=>{if(!v)throw Error(m);},sha=b=>createHash('sha256').update(b).digest('hex');
+require(process.execArgv.length===1&&process.execArgv[0]==='--expose-gc'&&!process.env.NODE_OPTIONS&&!process.env.NODE_PATH,'Exact exposed-GC consumer entry required');
+require(process.argv.length===4,'Whole issued parameter path/SHA required');const parameterPath=process.argv[2],parameterSha=process.argv[3];const fd=fs.openSync(parameterPath,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);let bytes;try{const a=fs.fstatSync(fd),q=fs.lstatSync(parameterPath);require(a.isFile()&&!q.isSymbolicLink()&&a.dev===q.dev&&a.ino===q.ino&&a.size<=131072,'Ordinary bound parameter file required');bytes=fs.readFileSync(fd);const z=fs.fstatSync(fd),t=fs.lstatSync(parameterPath);require(z.dev===a.dev&&z.ino===a.ino&&z.size===a.size&&z.mtimeMs===a.mtimeMs&&z.ctimeMs===a.ctimeMs&&!t.isSymbolicLink()&&t.dev===a.dev&&t.ino===a.ino,'Parameter identity drift');}finally{fs.closeSync(fd);}require(bytes.length<=131072&&sha(bytes)===parameterSha,'Whole parameters differ');const p=JSON.parse(bytes),root=p.root;
+require(path.isAbsolute(root)&&fs.realpathSync(root)===root&&path.resolve(p.destination)===p.destination&&p.destination.startsWith(root+'/.cache/')&&!fs.existsSync(p.destination),'Fresh owned destination required');
+const code=JSON.parse(fs.readFileSync(path.join(root,'coordination/engineering/additive-native-composition-20261009/execution-code-paths.json')));
+const before=JSON.parse(process.env.WORLDATLAS_ASSEMBLY_PRE_USE??'null');require(before&&before.head===p.execution_commit&&JSON.stringify(before.code.map(p=>p.path))===JSON.stringify(code),'Whole actual executing code admission required');
+const {ImmutableReader,loadSelection}=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
+const {valueBytes,valueSha}=await import(pathToFileURL(path.join(root,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs')));
+const {prepareCurrentRebindDestination}=await import(pathToFileURL(path.join(root,'coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs')));
+prepareCurrentRebindDestination(root,p.destination);
+const {assembleSupportedActivation}=await import(pathToFileURL(path.join(root,'coordination/engineering/additive-native-activation-20261009/assemble-supported-activation.mjs')));
+const reader=new ImmutableReader(root,p.execution_commit,{runtimeBytes:before.runtimeBytes,executionBytes:before.executionBytes,metadataBytes:8*1048576+2*(bytes.length+Buffer.byteLength(process.env.WORLDATLAS_ASSEMBLY_PRE_USE)),outputBytes:4194304,gitExecutable:before.gitExecutable});
+const read=pin=>{const actual=reader.descriptor(pin.path,pin.commit);require(actual.mode===pin.mode&&actual.git_blob_oid===(pin.git_blob_oid??pin.blob)&&actual.bytes===pin.bytes,'Whole ordinary operand differs');reader.admit(actual);return reader.json(pin.path,{version:pin.commit,expected:pin.sha256});};
+const [registry,originalLedger]=p.original_inputs.map(read),originalPatches=p.original_patch_pins.map(read);
+reader.metadataBytes+=2*valueBytes({registry,originalLedger,originalPatches,p}).length;
+const snapshot=loadSelection(reader);require(snapshot,'Actual private selected bank required');
+const assembled=assembleSupportedActivation({snapshot,registry,originalLedger,originalPatches,rebindPin:p.rebindPin,baseAssets:p.baseAssets,logicalPaths:p.logicalPaths});
+const bodies={ledger:assembled.ledger,patch:assembled.patch,envelope:assembled.envelope,qualification:assembled.qualification};const output=Object.entries(bodies).map(([name,body])=>({name,raw:valueBytes(body)}));require(output.reduce((n,b)=>n+b.raw.length,0)<=4194304,'Complete output reserve exceeded');
+prepareCurrentRebindDestination(root,p.destination);fs.mkdirSync(p.destination,{mode:0o700});for(const {name,raw}of output)fs.writeFileSync(path.join(p.destination,name+'.json'),raw,{flag:'wx',mode:0o644});
+process.stdout.write(JSON.stringify({execution_commit:p.execution_commit,complete_reader_phase_bytes:reader.used,products:output.map(({name,raw})=>({path:name+'.json',bytes:raw.length,sha256:sha(raw)})),qualification:assembled.qualification})+'\n');

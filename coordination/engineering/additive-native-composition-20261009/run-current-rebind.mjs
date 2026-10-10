@@ -15,21 +15,47 @@ const fd=fs.openSync(p.path,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);let r
 demand(raw.length===p.bytes&&sha(raw)===p.sha256,'Whole raw plan differs');const plan=JSON.parse(raw);
 demand(plan.execution_commit===head&&plan.limits&&Number.isSafeInteger(plan.limits.complete_phase_bytes)&&plan.limits.complete_phase_bytes<=268435456&&Number.isSafeInteger(plan.limits.output_bytes)&&plan.limits.output_bytes<=4194304,'Actual injected plan/head/admission differs before imports');
 const root=fs.realpathSync(process.cwd()),prefix='coordination/engineering/additive-native-gap-batch-20261008/composition-v2/';
-const {ImmutableReader,loadSelection}=await import('../../../scripts/check-effective-geographic-regression.mjs');
-const {prepareCurrentRebindDestination,captureCurrentRebindProducts,validateCurrentRebindPlan}=await import('./capture-current-rebind.mjs');
-const {nativeBaseSelection,valueSha,valueBytes,normaliseRetainedRepairLedger}=await import('../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs');
+const {ImmutableReader,loadSelection,loadBaseSelection}=await import('../../../scripts/check-effective-geographic-regression.mjs');
+const {prepareCurrentRebindDestination,captureCurrentRebindProducts,validateCurrentRebindPlan,completePriorConservationFrame}=await import('./capture-current-rebind.mjs');
+const {nativeBaseSelection,valueSha,valueBytes,normaliseRetainedRepairLedger,reclaimCompletedRebindFrame}=await import('../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs');
 demand(globalThis.gc===exposedGc,'Reclamation callable changed during trusted imports');
 const token=prepareCurrentRebindDestination(root,command[6]);
 const runtimeBytes=before.runtime.filter(p=>['node','git','time'].includes(p.role)).reduce((n,p)=>n+p.bytes,0),executionBytes=before.code.reduce((n,p)=>n+2*p.bytes,0)+before.entry.bytes;
+function completedPriorFrame(){
 const reader=new ImmutableReader(root,head,{runtimeBytes,executionBytes,metadataBytes:8*1048576+2*(raw.length+Buffer.byteLength(serialized)),outputBytes:4194304,gitExecutable:before.runtime.find(p=>p.role==='git').path});
-const registryPin=reader.descriptor(prefix+'original-registry.json'),ledgerPin=reader.descriptor(prefix+'composed-original-ledger.json');reader.admit(registryPin);reader.admit(ledgerPin);
-const registry=reader.json(registryPin.path,{expected:plan.authority_registry_sha256}),originalLedger=reader.json(ledgerPin.path);demand(valueSha(registry)===plan.authority_registry_sha256,'Whole original registry differs');
+// Explicit original products are whole immutable plan operands. Historical
+// plans retain their literal original paths and default selected revision.
+let registry,originalLedger;
+if(Object.hasOwn(plan,'original_inputs')){
+ demand(Array.isArray(plan.original_inputs)&&plan.original_inputs.length===2,'Require complete original registry/ledger descriptors');
+ [registry,originalLedger]=plan.original_inputs.map(pin=>{
+  demand(pin&&Object.keys(pin).sort().join(',')==='bytes,commit,git_blob_oid,mode,path,sha256'&&pin.mode==='100644'&&/^[a-f0-9]{40}$/.test(pin.commit)&&/^[a-f0-9]{40}$/.test(pin.git_blob_oid)&&Number.isSafeInteger(pin.bytes)&&pin.bytes>0&&pin.bytes<=33554432&&/^[a-f0-9]{64}$/.test(pin.sha256),'Incomplete original operand');
+  const actual=reader.descriptor(pin.path,pin.commit);
+  demand(actual.mode===pin.mode&&actual.git_blob_oid===pin.git_blob_oid&&actual.bytes===pin.bytes,'Original operand mode/OID/bytes differ');
+  reader.admit(actual);return reader.json(pin.path,{version:pin.commit,expected:pin.sha256});
+ });
+}else{
+ const registryPin=reader.descriptor(prefix+'original-registry.json'),ledgerPin=reader.descriptor(prefix+'composed-original-ledger.json');reader.admit(registryPin);reader.admit(ledgerPin);
+ registry=reader.json(registryPin.path,{expected:plan.authority_registry_sha256});originalLedger=reader.json(ledgerPin.path);
+}
+demand(valueSha(registry)===plan.authority_registry_sha256,'Whole original registry differs');
 validateCurrentRebindPlan(plan,{executionCommit:head,baseSelection:plan.base_selection,registry,originalRows:[...normaliseRetainedRepairLedger(originalLedger,registry).rows.values()],executedCode:before.code});
 // Base acquisition remains a real independently bounded stock helper frame.
 // The returned full owner/map/index and phase custody remain charged later.
-reader.metadataBytes+=2*(valueBytes(registry).length+valueBytes(originalLedger).length);const snapshot=loadSelection(reader);demand(snapshot,'Missing actual selected native bank');
+reader.metadataBytes+=2*(valueBytes(registry).length+valueBytes(originalLedger).length);const priorSnapshot=loadSelection(reader);demand(priorSnapshot,'Missing actual selected native bank');
+const marker=completePriorConservationFrame(priorSnapshot,registry,originalLedger,{plan,executionPreUse:input,executedCode:before.code});
+return {registry,originalLedger,marker,budget:reader.budget};
+}
+const {registry,originalLedger,marker:priorMarker,budget}=completedPriorFrame();
+reclaimCompletedRebindFrame();
+const freshReader=new ImmutableReader(root,head,{runtimeBytes,executionBytes,metadataBytes:8*1048576+2*(raw.length+Buffer.byteLength(serialized)+valueBytes(registry).length+valueBytes(originalLedger).length)+2097152,outputBytes:4194304,gitExecutable:before.runtime.find(p=>p.role==='git').path,budget});
+freshReader.phase();
+const snapshot=loadBaseSelection(freshReader);demand(snapshot,'Missing actual fresh base bank');
+snapshot.acquisition_buffer_bytes=0;
+const basePhase={kind:'complete-selected-base-acquisition-v1',complete_phase_bytes:freshReader.used,inputs:structuredClone([...freshReader.inventory.values()])};
+snapshot.acquisitionPhases=[basePhase];snapshot.metadataBytes+=Buffer.byteLength(JSON.stringify(snapshot.acquisitionPhases));
 demand(valueSha(nativeBaseSelection(snapshot.selection))===valueSha(plan.base_selection),'Actual selected native base differs from issued plan');
-const result=captureCurrentRebindProducts({destination:token,snapshot,plan,registry,originalLedger,executionCommit:head,executedCode:before.code,executionPreUse:input});
+const result=captureCurrentRebindProducts({destination:token,snapshot,plan,registry,originalLedger,executionCommit:head,executedCode:before.code,executionPreUse:input,priorMarker});
 const publication={version:1,kind:'current-rebind-child-publication-v1',execution_commit:head,request_sha256:result.products.request.sha256,publication_sha256:result.products.publication.sha256,result_sha256:result.products.result.sha256};process.stdout.write(JSON.stringify(publication)+'\n');
 
 demand(globalThis.gc===exposedGc,'Reclamation callable changed during actual acquisition');

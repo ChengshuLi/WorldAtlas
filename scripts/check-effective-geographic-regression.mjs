@@ -702,3 +702,5 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
   const [repo,baseline,candidate,parentRuntimePath]=process.argv.slice(2);const result=inspectSelected(repo,baseline,candidate,{parentRuntimePath});const body=JSON.stringify(result)+'\n';demand(Buffer.byteLength(body)<=OUTPUT,'Generated selected-native receipt exceeds admitted output reserve');process.stdout.write(body);
 }
+
+export {loadBaseSelection};

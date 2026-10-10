@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "kind": "explicit-current-target-source-binding-readback",
+  "source_bindings": [
+    {
+      "target_id": "atlas:physical:CAN-25:NUN",
+      "path": "data/geography/part-29.json"
+    },
+    {
+      "target_id": "gb:USA:ADM2:52423323B16539688175930",
+      "path": "data/geography/part-25.json"
+    },
+    {
+      "target_id": "gb:USA:ADM2:52423323B46246640861022",
+      "path": "data/geography/part-26.json"
+    },
+    {
+      "target_id": "gb:USA:ADM2:52423323B55198873775030",
+      "path": "data/geography/part-25.json"
+    },
+    {
+      "target_id": "gb:USA:ADM2:52423323B64721050065013",
+      "path": "data/geography/part-27.json"
+    },
+    {
+      "target_id": "gb:USA:ADM2:52423323B80008995120080",
+      "path": "data/geography/part-26.json"
+    },
+    {
+      "target_id": "gb:USA:ADM2:52423323B82121365400499",
+      "path": "data/geography/part-25.json"
+    },
+    {
+      "target_id": "gb:SLB:ADM1:17018030B21058058503942",
+      "path": "data/geography/part-22.json"
+    },
+    {
+      "target_id": "gb:SLB:ADM1:17018030B36628097040544",
+      "path": "data/geography/part-22.json"
+    },
+    {
+      "target_id": "gb:SLB:ADM1:17018030B19935783635883",
+      "path": "data/geography/part-22.json"
+    },
+    {
+      "target_id": "gb:SLB:ADM1:17018030B68013150931387",
+      "path": "data/geography/part-22.json"
+    },
+    {
+      "target_id": "gb:SLB:ADM1:17018030B8659224027401",
+      "path": "data/geography/part-22.json"
+    }
+  ],
+  "original_prior_binding_pin": {
+    "commit": "f02e522442121ad6977e1264044d7fc9b0382924",
+    "path": "coordination/engineering/additive-native-activation-20261009/original-target-source-bindings.json",
+    "mode": "100644",
+    "git_blob_oid": "8b078c6499ce673704a186b0e1c7a1c9e16843aa",
+    "bytes": 12335,
+    "sha256": "f664c6e6e42b746947b00afa5dd2396e88f5e57efef26d281e7c7b71a3b5b940"
+  },
+  "new_current_target_joins": [
+    {
+      "complete_original_current_feature_equal": true,
+      "complete_original_current_geometry_equal": true,
+      "containing_pin": {
+        "blob": "b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f",
+        "bytes": 4746385,
+        "commit": "f02e522442121ad6977e1264044d7fc9b0382924",
+        "mode": "100644",
+        "path": "data/geography/part-22.json",
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+      },
+      "owner_index": 39700,
+      "parent_id": "framework:province:guadalcanal:181b5d3b77d0",
+      "target_id": "gb:SLB:ADM1:17018030B21058058503942"
+    },
+    {
+      "complete_original_current_feature_equal": true,
+      "complete_original_current_geometry_equal": true,
+      "containing_pin": {
+        "blob": "b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f",
+        "bytes": 4746385,
+        "commit": "f02e522442121ad6977e1264044d7fc9b0382924",
+        "mode": "100644",
+        "path": "data/geography/part-22.json",
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+      },
+      "owner_index": 39703,
+      "parent_id": "framework:province:isabel:c4cd1477b41f",
+      "target_id": "gb:SLB:ADM1:17018030B36628097040544"
+    },
+    {
+      "complete_original_current_feature_equal": true,
+      "complete_original_current_geometry_equal": true,
+      "containing_pin": {
+        "blob": "b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f",
+        "bytes": 4746385,
+        "commit": "f02e522442121ad6977e1264044d7fc9b0382924",
+        "mode": "100644",
+        "path": "data/geography/part-22.json",
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+      },
+      "owner_index": 39699,
+      "parent_id": "framework:province:temotu:c9f46b66cd8a",
+      "target_id": "gb:SLB:ADM1:17018030B19935783635883"
+    },
+    {
+      "complete_original_current_feature_equal": true,
+      "complete_original_current_geometry_equal": true,
+      "containing_pin": {
+        "blob": "b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f",
+        "bytes": 4746385,
+        "commit": "f02e522442121ad6977e1264044d7fc9b0382924",
+        "mode": "100644",
+        "path": "data/geography/part-22.json",
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+      },
+      "owner_index": 39706,
+      "parent_id": "framework:province:choiseul:ab27d1cd77eb",
+      "target_id": "gb:SLB:ADM1:17018030B68013150931387"
+    },
+    {
+      "complete_original_current_feature_equal": true,
+      "complete_original_current_geometry_equal": true,
+      "containing_pin": {
+        "blob": "b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f",
+        "bytes": 4746385,
+        "commit": "f02e522442121ad6977e1264044d7fc9b0382924",
+        "mode": "100644",
+        "path": "data/geography/part-22.json",
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+      },
+      "owner_index": 39708,
+      "parent_id": "framework:province:western:1ad96796acf3",
+      "target_id": "gb:SLB:ADM1:17018030B8659224027401"
+    }
+  ],
+  "limits": [
+    "Actual f02 raw source/parent/owner joins reused, not current effective neighbor approval."
+  ]
+}

@@ -252,7 +252,16 @@ jobs:
           GEOGRAPHY_CANDIDATE: ${{ github.event.pull_request.head.sha }}
         run: |
           if test -f scripts/run-geographic-check.py; then
-            python -I -B scripts/run-geographic-check.py --fetch --out geography-check.json
+            python -I -B - --fetch --out geography-check.json <<'PY'
+          import runpy, subprocess, sys
+          try:
+              runpy.run_path('scripts/run-geographic-check.py', run_name='__main__')
+          except subprocess.CalledProcessError as error:
+              if error.stderr:
+                  sys.stderr.buffer.write(error.stderr)
+                  sys.stderr.buffer.flush()
+              raise
+          PY
           else
             # Only this named activation branch can report bootstrap absence,
             # and only after trusted API code proves it changes no live data.
