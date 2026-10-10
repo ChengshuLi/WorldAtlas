@@ -428,12 +428,19 @@ function versionedPrimitiveGeometries(feature) {
         &&row.original_candidate.properties&&typeof row.original_candidate.properties==='object'&&!Array.isArray(row.original_candidate.properties),'Foreign original whole candidate');
       polygonParts(row.original_candidate.geometry);
       const remainder=row.original_remainder;
-      exactKeys(remainder,['geometry','geometry_sha256','geometry_type','is_empty','is_valid','planar_area_coordinate_units_squared','planar_length_coordinate_units'],'Original partial remainder');
-      require(remainder.is_empty===false&&remainder.is_valid===true&&remainder.geometry_type===remainder.geometry?.type
+      // Original NCL operations retain a four-field residual; its whole
+      // pointset is retained in the authenticated selected ledger.
+      const originalNcl=Object.hasOwn(remainder,'area_degree2');
+      exactKeys(remainder,originalNcl?['area_degree2','geometry','geometry_type','is_empty']:
+        ['geometry','geometry_sha256','geometry_type','is_empty','is_valid','planar_area_coordinate_units_squared','planar_length_coordinate_units'],'Original partial remainder');
+      require(remainder.is_empty===false&&remainder.geometry_type===remainder.geometry?.type,'Missing/nonpositive original remainder');
+      if(originalNcl)require(/^NCL-[0-9]+$/.test(row.target_id)
+        &&Number.isFinite(remainder.area_degree2)&&remainder.area_degree2>0,'Foreign/nonpositive original NCL remainder');
+      else require(remainder.is_valid===true
         &&Number.isFinite(remainder.planar_area_coordinate_units_squared)&&remainder.planar_area_coordinate_units_squared>0
         &&Number.isFinite(remainder.planar_length_coordinate_units)&&remainder.planar_length_coordinate_units>0,'Missing/nonpositive original remainder');
       polygonParts(remainder.geometry);
-      require(hex.test(remainder.geometry_sha256??'')&&footprintValueSha256(remainder.geometry)===remainder.geometry_sha256,'Original remainder pointsets changed');
+      if(!originalNcl)require(hex.test(remainder.geometry_sha256??'')&&footprintValueSha256(remainder.geometry)===remainder.geometry_sha256,'Original remainder pointsets changed');
       require(footprintValueSha256(row.original_candidate.geometry)!==row.geometry_sha256,'Whole original candidate relabelled as supported fragment');
     }
     require(typeof row.component_id==='string'&&row.component_id>previous&&row.target_id===feature.id&&row.pixelIndex===feature.pixelIndex,'Foreign/duplicate/unordered component owner');

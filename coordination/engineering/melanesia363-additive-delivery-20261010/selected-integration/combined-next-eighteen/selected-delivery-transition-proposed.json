@@ -1,0 +1,1120 @@
+{
+  "status": "UNAPPLIED_DRAFT_PENDING_ACTUAL_MERGED353_SELECTION",
+  "canonical_input_pin": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.cache/global-gap-work-index-20261009/selected-release-decisions.json",
+    "bytes": 437547,
+    "sha256": "90047a20a0de36db66870173536f67e04a4a6b66513c9c52cb11256eff6ec291"
+  },
+  "original_denominator": 95173,
+  "identity_unit": "physical-component candidate",
+  "original_batch_scope": 363,
+  "source_supported_scope": 110,
+  "full_source_scope": 41,
+  "partial_source_scope": 69,
+  "original_holds": 253,
+  "qualified_result_pin": {
+    "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/selected353-compact-NCL-qualified/result.json",
+    "commit": "836dd9a75542d2a9ac3b08b92473616dbe13fbdc",
+    "mode": "100644",
+    "git_blob_oid": "50b7baa00ed7e7f7b9f3fc631e398d580fbcf503",
+    "bytes": 2169280,
+    "sha256": "8b3e44e80e1da4e9347a9d1692abbae1c12016db0c2c2343b1f4eb0a29813a00"
+  },
+  "existing_assembly_acceptance": {
+    "status": "PASS",
+    "head": "8f1e23a4354314611d7bc393a9cc5ce9600622b8",
+    "complete_reader_phase_bytes": 245679222,
+    "actual_operating_receipt_sha256": "503c473624062ee83c72b6d65c0490b333aa8b8bdb3e833378e2c2183cf90efe",
+    "whole_outputs": [
+      {
+        "path": "ledger.json",
+        "bytes": 482153,
+        "sha256": "32e482f1c086682b1f0013a68923a6ffa3eabc0fc32c387c3f2702d94fcc6cc4"
+      },
+      {
+        "path": "patch.json",
+        "bytes": 9691,
+        "sha256": "2d7d0b4733fdd38edda372b0e6d6bb503ef3affe49305ac3552a5568982a12aa"
+      },
+      {
+        "path": "envelope.json",
+        "bytes": 1421,
+        "sha256": "408fbe4dc717dde50f90f1cb731e1731150942fb4e75e6cddac677c33066c20d"
+      },
+      {
+        "path": "qualification.json",
+        "bytes": 684,
+        "sha256": "461a0729dd5feb15d35a966ef762325413561755de06204e01916dadeb66ced0"
+      }
+    ],
+    "cumulative_cells": 353,
+    "new_cells": 93,
+    "selected_delivery_credit": false,
+    "patch_rows_literal_actual_qualified_result": true,
+    "row_count": 202
+  },
+  "interval_attribution": {
+    "new_components": 18,
+    "new_unique_cells": 93,
+    "prior_unique_cells": 260,
+    "qualified_cumulative_cells": 353,
+    "intercomponent_shared_cells": 0,
+    "new_prior_overlap_cells": 0,
+    "every_new_patch_subset_of_qualified_rows": true,
+    "qualified_rows_equal_prior_union_new": true,
+    "operation": "Bounded interval/provenance arithmetic over existing completed products only; no native or geometry execution."
+  },
+  "post_merge_count_draft": {
+    "repaired": 21,
+    "eligible": 0,
+    "accepted_evidence": 105,
+    "conditional_whole_component_increment": 5,
+    "partial_components_with_delivered_cells_but_unresolved_remainders": 13,
+    "full_new_cells": 29,
+    "partial_new_cells": 64
+  },
+  "rows": [
+    {
+      "component_id": "physical-component:6434b01a19d91e8b121cc47a79753478e77e4d3e1650506105c00b318f84a47e",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "native_phase": "004",
+      "target_id": "NCL-559",
+      "ownerIndex": 49598,
+      "new_delivered_cells_draft": 11,
+      "attribution": "unique completed patch cells, all in qualified current result; zero intercomponent/prior260 overlap",
+      "geometry_scope": "full-component",
+      "previous_state": "eligible-source-relative-rule",
+      "post_merge_state_draft": "repaired-verified-selected-release",
+      "whole_gap_completion_draft_after_merged_proof": true,
+      "remainder_retained": false,
+      "original_remainder": null,
+      "original_native_ledger_pin": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/004/ledger-batch.json",
+        "commit": "52a721df6955f567642f12873101ae4553e79916",
+        "mode": "100644",
+        "blob": "d0eaff479f2e144ca07f528977e7c3f8808849b0",
+        "bytes": 6710,
+        "sha256": "71e5ba8fbe7e9e20294a8e98d3384379edd5a302c4cb5767c7871f83e3e81d95"
+      },
+      "source_rule_sha256": "14fda5d5257997eb2818aab0d43ab89a909b78461e37366b129ae42496788329",
+      "source_receipt_sha256": "592a091fb749ff073aa122948d87641a018e5fb4559e5cb4c4488d6bc813982e",
+      "candidate_geometry_sha256": "7ca2bbf9332c87ab321af2284b758f281de9931eba53a37e47176d7d50dca2cb",
+      "needed_merged_proof": {
+        "merge_commit": null,
+        "final_selected_head": null,
+        "whole_selector_sidecar_four_assets_readback": null,
+        "selected_patch_matches_qualified_result": null,
+        "prior260_owner_conservation": null,
+        "normal_native_continuous_package_render_checks": null
+      },
+      "production_delivered": false,
+      "applied": false
+    },
+    {
+      "component_id": "physical-component:78100df8c42f6c8a6c936102b110cad2820bd219a083981d1dbb961273cb1881",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "native_phase": "016",
+      "target_id": "NCL-1258",
+      "ownerIndex": 49596,
+      "new_delivered_cells_draft": 1,
+      "attribution": "unique completed patch cells, all in qualified current result; zero intercomponent/prior260 overlap",
+      "geometry_scope": "full-component",
+      "previous_state": "eligible-source-relative-rule",
+      "post_merge_state_draft": "repaired-verified-selected-release",
+      "whole_gap_completion_draft_after_merged_proof": true,
+      "remainder_retained": false,
+      "original_remainder": null,
+      "original_native_ledger_pin": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/016/ledger-batch.json",
+        "commit": "52a721df6955f567642f12873101ae4553e79916",
+        "mode": "100644",
+        "blob": "50e214290dc96edfed1a09730035456476e8d7e6",
+        "bytes": 4224,
+        "sha256": "1ffdc6092606c2e136cfbf652e6f75b3d068580437ca81ee350216212be4f04e"
+      },
+      "source_rule_sha256": "c80a6bbe575811a0c691a298538dbb81ef326561ab3d009010d999911701ad24",
+      "source_receipt_sha256": "f0b54c168bc599deca93867551c01b2b76d8434610d6a25d717ea5e04c4a9a8d",
+      "candidate_geometry_sha256": "ca344ad450877a0f070cd8e01d880978d3fdfe0eec07473d0b8ed91f34065bd3",
+      "needed_merged_proof": {
+        "merge_commit": null,
+        "final_selected_head": null,
+        "whole_selector_sidecar_four_assets_readback": null,
+        "selected_patch_matches_qualified_result": null,
+        "prior260_owner_conservation": null,
+        "normal_native_continuous_package_render_checks": null
+      },
+      "production_delivered": false,
+      "applied": false
+    },
+    {
+      "component_id": "physical-component:5eb203ea755668e2f35e8cf2881ef73a06e42508867f9f364e17dfb084af37f9",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "native_phase": "023",
+      "target_id": "gb:SLB:ADM1:17018030B68013150931387",
+      "ownerIndex": 39706,
+      "new_delivered_cells_draft": 1,
+      "attribution": "unique completed patch cells, all in qualified current result; zero intercomponent/prior260 overlap",
+      "geometry_scope": "full-component",
+      "previous_state": "eligible-source-relative-rule",
+      "post_merge_state_draft": "repaired-verified-selected-release",
+      "whole_gap_completion_draft_after_merged_proof": true,
+      "remainder_retained": false,
+      "original_remainder": null,
+      "original_native_ledger_pin": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/023/ledger-batch.json",
+        "commit": "52a721df6955f567642f12873101ae4553e79916",
+        "mode": "100644",
+        "blob": "a87d758522f03a6158d31f565e5425b799a68b3a",
+        "bytes": 3701,
+        "sha256": "c7932e18017a0f246523aaf55727c11485f9c167b8fc6542448a2bb91cba1bec"
+      },
+      "source_rule_sha256": "537a4be77c707d3d20b5398f09cdf71396665e82969ef04be079c65cee647827",
+      "source_receipt_sha256": "7fc30a8ee8787146f4240833b8f6b2bd12e9a530c4a3f53871b73f06aef71ccd",
+      "candidate_geometry_sha256": "f648c77c8421bf1674704283924e881a4be7e951c951679cf0d17de5e5f79a73",
+      "needed_merged_proof": {
+        "merge_commit": null,
+        "final_selected_head": null,
+        "whole_selector_sidecar_four_assets_readback": null,
+        "selected_patch_matches_qualified_result": null,
+        "prior260_owner_conservation": null,
+        "normal_native_continuous_package_render_checks": null
+      },
+      "production_delivered": false,
+      "applied": false
+    },
+    {
+      "component_id": "physical-component:5234b8785cace7ed45cb21f3e42336bbb6c0b9484955a3b71326bd59e803f95b",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "native_phase": "030",
+      "target_id": "gb:PNG:ADM3:22992897B4280241021703",
+      "ownerIndex": 35559,
+      "new_delivered_cells_draft": 2,
+      "attribution": "unique completed patch cells, all in qualified current result; zero intercomponent/prior260 overlap",
+      "geometry_scope": "full-component",
+      "previous_state": "eligible-source-relative-rule",
+      "post_merge_state_draft": "repaired-verified-selected-release",
+      "whole_gap_completion_draft_after_merged_proof": true,
+      "remainder_retained": false,
+      "original_remainder": null,
+      "original_native_ledger_pin": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/030/ledger-batch.json",
+        "commit": "52a721df6955f567642f12873101ae4553e79916",
+        "mode": "100644",
+        "blob": "a5bd2772dfcf06ebfabd385706795c80e12d8530",
+        "bytes": 2789,
+        "sha256": "ddac3ba5c1c079436ca0e216bbf13315b99dac5436c1c2ec083e760b0b6bc49d"
+      },
+      "source_rule_sha256": "ea7f3537fd999312488a9c103c8de203dac7849f1693f5584afc8d3834789ab3",
+      "source_receipt_sha256": "21d174ce62d5d19c60f7d3925abf2e71ed88162b373994161d3df2efb63cd51a",
+      "candidate_geometry_sha256": "2b96262f8a17fce6408211cede0fcfcb3e35a55933dd28b9f8c6c622a21003c7",
+      "needed_merged_proof": {
+        "merge_commit": null,
+        "final_selected_head": null,
+        "whole_selector_sidecar_four_assets_readback": null,
+        "selected_patch_matches_qualified_result": null,
+        "prior260_owner_conservation": null,
+        "normal_native_continuous_package_render_checks": null
+      },
+      "production_delivered": false,
+      "applied": false
+    },
+    {
+      "component_id": "physical-component:3ad5b5708983a0c6b48f370a238f08a56e562f05ab0c47484f065db3931c712a",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "native_phase": "036",
+      "target_id": "gb:SLB:ADM1:17018030B84591335552725",
+      "ownerIndex": 39707,
+      "new_delivered_cells_draft": 14,
+      "attribution": "unique completed patch cells, all in qualified current result; zero intercomponent/prior260 overlap",
+      "geometry_scope": "full-component",
+      "previous_state": "eligible-source-relative-rule",
+      "post_merge_state_draft": "repaired-verified-selected-release",
+      "whole_gap_completion_draft_after_merged_proof": true,
+      "remainder_retained": false,
+      "original_remainder": null,
+      "original_native_ledger_pin": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/036/ledger-batch.json",
+        "commit": "52a721df6955f567642f12873101ae4553e79916",
+        "mode": "100644",
+        "blob": "a2dbe751ead2497ba50156576f97156d6a7de01d",
+        "bytes": 2615,
+        "sha256": "e5eb4345e6ba3bf9dba2b0b3986abcb998da3bf6c65f91b99e05c0378a7ed876"
+      },
+      "source_rule_sha256": "8c6844a239319db64b3a6a856ab7b45b7c7167aca56d63d2318c708860c43bfb",
+      "source_receipt_sha256": "a45c6503de7a9d6b218df58a3f786f0d22978459969ac0340ffd07d62e8da062",
+      "candidate_geometry_sha256": "56a99080ac41fd8d4310ea7a4920bbd020bbd732fa23a65f25d01ce77ca63e70",
+      "needed_merged_proof": {
+        "merge_commit": null,
+        "final_selected_head": null,
+        "whole_selector_sidecar_four_assets_readback": null,
+        "selected_patch_matches_qualified_result": null,
+        "prior260_owner_conservation": null,
+        "normal_native_continuous_package_render_checks": null
+      },
+      "production_delivered": false,
+      "applied": false
+    },
+    {
+      "component_id": "physical-component:8fcf098be5391eb150b9bbe20c8b1bb22b18732047c8721de804a2c0f573741b",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "native_phase": "044",
+      "target_id": "gb:SLB:ADM1:17018030B8659224027401",
+      "ownerIndex": 39708,
+      "new_delivered_cells_draft": 1,
+      "attribution": "unique completed patch cells, all in qualified current result; zero intercomponent/prior260 overlap",
+      "geometry_scope": "supported-fragment",
+      "previous_state": "accepted-evidence",
+      "post_merge_state_draft": "accepted-evidence",
+      "whole_gap_completion_draft_after_merged_proof": false,
+      "remainder_retained": true,
+      "original_remainder": {
+        "immutable_ledger_pin": {
+          "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/044/ledger-batch.json",
+          "commit": "52a721df6955f567642f12873101ae4553e79916",
+          "mode": "100644",
+          "blob": "4e804ea7e896e3ae6cd58196f40f5093d7234142",
+          "bytes": 10181,
+          "sha256": "91d9660349823617d769dd792f2324d5aafb3ff2d99a7528b822bfa42ae07c19"
+        },
+        "pointer": "/rows/0/original_remainder",
+        "retained_non_geometry_fields": {
+          "geometry_sha256": "55b79e2911025b4c31b5ec09acb06b6de1f13d85c80ac8ac48f1df94c8b50d0d",
+          "geometry_type": "MultiPolygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 6.5535163328530794e-09,
+          "planar_length_coordinate_units": 0.0460910185759068
+        }
+      },
+      "original_native_ledger_pin": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/044/ledger-batch.json",
+        "commit": "52a721df6955f567642f12873101ae4553e79916",
+        "mode": "100644",
+        "blob": "4e804ea7e896e3ae6cd58196f40f5093d7234142",
+        "bytes": 10181,
+        "sha256": "91d9660349823617d769dd792f2324d5aafb3ff2d99a7528b822bfa42ae07c19"
+      },
+      "source_rule_sha256": "7b4292c4182cef42e8bdc14007ebd0c7ae3e15f5bee8334cfcdbb2033542534d",
+      "source_receipt_sha256": "d9c24575af329f8fcb506232ed73c8ff2a0bfc6b8d952fb59759ec3bb62d238c",
+      "candidate_geometry_sha256": "16665993d36e16ac5d8ec0c79ec1cb064bbb2ae6fd5dee27caa34453fcc0b7cb",
+      "needed_merged_proof": {
+        "merge_commit": null,
+        "final_selected_head": null,
+        "whole_selector_sidecar_four_assets_readback": null,
+        "selected_patch_matches_qualified_result": null,
+        "prior260_owner_conservation": null,
+        "normal_native_continuous_package_render_checks": null
+      },
+      "production_delivered": false,
+      "applied": false
+    },
+    {
+      "component_id": "physical-component:01648ecb35ddc372d53a272eb8350f1f72a889f3b7b0c47ec662eed78e6d07dd",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "native_phase": "050",
+      "target_id": "NCL-559",
+      "ownerIndex": 49598,
+      "new_delivered_cells_draft": 4,
+      "attribution": "unique completed patch cells, all in qualified current result; zero intercomponent/prior260 overlap",
+      "geometry_scope": "supported-fragment",
+      "previous_state": "accepted-evidence",
+      "post_merge_state_draft": "accepted-evidence",
+      "whole_gap_completion_draft_after_merged_proof": false,
+      "remainder_retained": true,
+      "original_remainder": {
+        "immutable_ledger_pin": {
+          "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/050/ledger-batch.json",
+          "commit": "52a721df6955f567642f12873101ae4553e79916",
+          "mode": "100644",
+          "blob": "7c42431a9dc2a0fa1679c0b17045f06898481c63",
+          "bytes": 9749,
+          "sha256": "31e2adfafa6d39d3388e04f2ae614a4b5f078d9e359284ac9219bfa242e3bcf8"
+        },
+        "pointer": "/rows/0/original_remainder",
+        "retained_non_geometry_fields": {
+          "area_degree2": 1.009955968644968e-07,
+          "geometry_type": "MultiPolygon",
+          "is_empty": false
+        }
+      },
+      "original_native_ledger_pin": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/050/ledger-batch.json",
+        "commit": "52a721df6955f567642f12873101ae4553e79916",
+        "mode": "100644",
+        "blob": "7c42431a9dc2a0fa1679c0b17045f06898481c63",
+        "bytes": 9749,
+        "sha256": "31e2adfafa6d39d3388e04f2ae614a4b5f078d9e359284ac9219bfa242e3bcf8"
+      },
+      "source_rule_sha256": "3d9b97a22aef0dbb3d876f09927029226cfa281473933de66cf437390cfc3c60",
+      "source_receipt_sha256": "031494041b18a5817b7a81421e281ee3d11caf18ec6abe798f39be80651820ab",
+      "candidate_geometry_sha256": "69053c40dc2cc171ff9cef41beba00163aa5f38180dab76def27e44891c4e090",
+      "needed_merged_proof": {
+        "merge_commit": null,
+        "final_selected_head": null,
+        "whole_selector_sidecar_four_assets_readback": null,
+        "selected_patch_matches_qualified_result": null,
+        "prior260_owner_conservation": null,
+        "normal_native_continuous_package_render_checks": null
+      },
+      "production_delivered": false,
+      "applied": false
+    },
+    {
+      "component_id": "physical-component:ba75d7bb21cee36d42738d7da1be04d0d0a379d6a31852fde00ed35b800b4a55",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "native_phase": "059",
+      "target_id": "gb:SLB:ADM1:17018030B36628097040544",
+      "ownerIndex": 39703,
+      "new_delivered_cells_draft": 1,
+      "attribution": "unique completed patch cells, all in qualified current result; zero intercomponent/prior260 overlap",
+      "geometry_scope": "supported-fragment",
+      "previous_state": "accepted-evidence",
+      "post_merge_state_draft": "accepted-evidence",
+      "whole_gap_completion_draft_after_merged_proof": false,
+      "remainder_retained": true,
+      "original_remainder": {
+        "immutable_ledger_pin": {
+          "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/059/ledger-batch.json",
+          "commit": "52a721df6955f567642f12873101ae4553e79916",
+          "mode": "100644",
+          "blob": "8fe15faa844d8ba0edd4a72ca2def21f2bbcd683",
+          "bytes": 6856,
+          "sha256": "80014248d3c441583c5ef7c8c67b7a6bf4884ca39d4042704317feba932a670e"
+        },
+        "pointer": "/rows/0/original_remainder",
+        "retained_non_geometry_fields": {
+          "geometry_sha256": "ab8f77f25f51335379c725223c842af52b769e2a1221efc8a01d2e3925fee368",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 1.6397882141159737e-11,
+          "planar_length_coordinate_units": 9.718223599747474e-05
+        }
+      },
+      "original_native_ledger_pin": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/059/ledger-batch.json",
+        "commit": "52a721df6955f567642f12873101ae4553e79916",
+        "mode": "100644",
+        "blob": "8fe15faa844d8ba0edd4a72ca2def21f2bbcd683",
+        "bytes": 6856,
+        "sha256": "80014248d3c441583c5ef7c8c67b7a6bf4884ca39d4042704317feba932a670e"
+      },
+      "source_rule_sha256": "a259311e33af022fa5b1d0fe354d9d1c4bd65a9119f6f9cef9cb5fd112ea2a19",
+      "source_receipt_sha256": "0449c22b41698a1f476dfb952e1acc172caada7a6322765c489cce4b78f0441d",
+      "candidate_geometry_sha256": "694dbb6e335426a50c6a5e771869fc07adef35f1d157623dfcbea51d6cd713c8",
+      "needed_merged_proof": {
+        "merge_commit": null,
+        "final_selected_head": null,
+        "whole_selector_sidecar_four_assets_readback": null,
+        "selected_patch_matches_qualified_result": null,
+        "prior260_owner_conservation": null,
+        "normal_native_continuous_package_render_checks": null
+      },
+      "production_delivered": false,
+      "applied": false
+    },
+    {
+      "component_id": "physical-component:e800720b95dd8bb0aa4952624e7621dde1b053ea83c6df588a5afdb048bf407d",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "native_phase": "062",
+      "target_id": "gb:SLB:ADM1:17018030B36628097040544",
+      "ownerIndex": 39703,
+      "new_delivered_cells_draft": 1,
+      "attribution": "unique completed patch cells, all in qualified current result; zero intercomponent/prior260 overlap",
+      "geometry_scope": "supported-fragment",
+      "previous_state": "accepted-evidence",
+      "post_merge_state_draft": "accepted-evidence",
+      "whole_gap_completion_draft_after_merged_proof": false,
+      "remainder_retained": true,
+      "original_remainder": {
+        "immutable_ledger_pin": {
+          "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/062/ledger-batch.json",
+          "commit": "52a721df6955f567642f12873101ae4553e79916",
+          "mode": "100644",
+          "blob": "83d68da12f0d1a977c2e79b294797de03ada3760",
+          "bytes": 6996,
+          "sha256": "da18ba722a02cebb3270ba9e3b7c9f20da79903a8e8ce9f4719b4ec933e8064d"
+        },
+        "pointer": "/rows/0/original_remainder",
+        "retained_non_geometry_fields": {
+          "geometry_sha256": "96d909270feeac921b89a83839c495ba5703062068a5faec4ecd4d929e380f7a",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 8.838638061350429e-09,
+          "planar_length_coordinate_units": 0.0846353270591925
+        }
+      },
+      "original_native_ledger_pin": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/062/ledger-batch.json",
+        "commit": "52a721df6955f567642f12873101ae4553e79916",
+        "mode": "100644",
+        "blob": "83d68da12f0d1a977c2e79b294797de03ada3760",
+        "bytes": 6996,
+        "sha256": "da18ba722a02cebb3270ba9e3b7c9f20da79903a8e8ce9f4719b4ec933e8064d"
+      },
+      "source_rule_sha256": "fe679035161c8ee95eabcb99e1de4675ea02ecf1113ef7a54d4ea0eb09eec40c",
+      "source_receipt_sha256": "7f333c66beaf2c41549ab519ea0abb3cad7e4ff58ebf80878f5c8c9872ada145",
+      "candidate_geometry_sha256": "05e3a3a2ad287596c41ddfbfd171f8e42f7807d73025f92deb7a4e2e3a1f2193",
+      "needed_merged_proof": {
+        "merge_commit": null,
+        "final_selected_head": null,
+        "whole_selector_sidecar_four_assets_readback": null,
+        "selected_patch_matches_qualified_result": null,
+        "prior260_owner_conservation": null,
+        "normal_native_continuous_package_render_checks": null
+      },
+      "production_delivered": false,
+      "applied": false
+    },
+    {
+      "component_id": "physical-component:94d4cd339d6adca3fecd86682a700d3c85c7c67a8745996b1d878a875cb4c0bc",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "native_phase": "063",
+      "target_id": "gb:PNG:ADM3:22992897B51075159497258",
+      "ownerIndex": 35587,
+      "new_delivered_cells_draft": 3,
+      "attribution": "unique completed patch cells, all in qualified current result; zero intercomponent/prior260 overlap",
+      "geometry_scope": "supported-fragment",
+      "previous_state": "accepted-evidence",
+      "post_merge_state_draft": "accepted-evidence",
+      "whole_gap_completion_draft_after_merged_proof": false,
+      "remainder_retained": true,
+      "original_remainder": {
+        "immutable_ledger_pin": {
+          "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/063/ledger-batch.json",
+          "commit": "52a721df6955f567642f12873101ae4553e79916",
+          "mode": "100644",
+          "blob": "818716957f0dbbc9e9a2b858d02121e1259a925e",
+          "bytes": 3707,
+          "sha256": "3a15aba7900a018544cf11cf94298c0a3f28efc61444691165e831e52f4e4972"
+        },
+        "pointer": "/rows/0/original_remainder",
+        "retained_non_geometry_fields": {
+          "geometry_sha256": "23c8aedd749b48956182be1ec5979f3f54b6b2707dc4576459e8891389d083b3",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 1.0025638180281827e-06,
+          "planar_length_coordinate_units": 0.006943803143900256
+        }
+      },
+      "original_native_ledger_pin": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/063/ledger-batch.json",
+        "commit": "52a721df6955f567642f12873101ae4553e79916",
+        "mode": "100644",
+        "blob": "818716957f0dbbc9e9a2b858d02121e1259a925e",
+        "bytes": 3707,
+        "sha256": "3a15aba7900a018544cf11cf94298c0a3f28efc61444691165e831e52f4e4972"
+      },
+      "source_rule_sha256": "4138284b96568893e0a9ef7fb8387bf064390fffbdf17e0ae4fd3524415aaa48",
+      "source_receipt_sha256": "23627d5d967c5411c3d61d54dbf35a207d9df1a6154aed558e3d5f1702227cf7",
+      "candidate_geometry_sha256": "582089da9814c8892e6e232916932a55f0a7de86b120f8adf3eb71dc4839531d",
+      "needed_merged_proof": {
+        "merge_commit": null,
+        "final_selected_head": null,
+        "whole_selector_sidecar_four_assets_readback": null,
+        "selected_patch_matches_qualified_result": null,
+        "prior260_owner_conservation": null,
+        "normal_native_continuous_package_render_checks": null
+      },
+      "production_delivered": false,
+      "applied": false
+    },
+    {
+      "component_id": "physical-component:327079327a1e08f3c08550fe027f8f17fa6571d78b40c92145d603b2faf2b6eb",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "native_phase": "067",
+      "target_id": "gb:SLB:ADM1:17018030B21058058503942",
+      "ownerIndex": 39700,
+      "new_delivered_cells_draft": 8,
+      "attribution": "unique completed patch cells, all in qualified current result; zero intercomponent/prior260 overlap",
+      "geometry_scope": "supported-fragment",
+      "previous_state": "accepted-evidence",
+      "post_merge_state_draft": "accepted-evidence",
+      "whole_gap_completion_draft_after_merged_proof": false,
+      "remainder_retained": true,
+      "original_remainder": {
+        "immutable_ledger_pin": {
+          "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/067/ledger-batch.json",
+          "commit": "52a721df6955f567642f12873101ae4553e79916",
+          "mode": "100644",
+          "blob": "e4a05d336e946c1354014a61aa40abeb1a3e713d",
+          "bytes": 4860,
+          "sha256": "0f13bba7afb2cdd5da104d66505e07581ae9c3a2d86f7cfbef04efb1fd188015"
+        },
+        "pointer": "/rows/0/original_remainder",
+        "retained_non_geometry_fields": {
+          "geometry_sha256": "a37b3601d979b577cd0979ca4954a79d76c9ce6fcfcea7d41b3b0101b0ee749a",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 2.33195231196426e-08,
+          "planar_length_coordinate_units": 0.1408441972545148
+        }
+      },
+      "original_native_ledger_pin": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/067/ledger-batch.json",
+        "commit": "52a721df6955f567642f12873101ae4553e79916",
+        "mode": "100644",
+        "blob": "e4a05d336e946c1354014a61aa40abeb1a3e713d",
+        "bytes": 4860,
+        "sha256": "0f13bba7afb2cdd5da104d66505e07581ae9c3a2d86f7cfbef04efb1fd188015"
+      },
+      "source_rule_sha256": "d4c0ebaa8a708fb229df9006bb0e5c01521422c02a2ebb4dcb613ef1fbfb7146",
+      "source_receipt_sha256": "23f1c146ddbdf3ed77d90129c7ccf802f3d1ceb2b3d2b16396a5d052d4abeffe",
+      "candidate_geometry_sha256": "19b00806a8c66126166edce6863ebdfd9064fc04537e399e5d6c74d5cdbb82c8",
+      "needed_merged_proof": {
+        "merge_commit": null,
+        "final_selected_head": null,
+        "whole_selector_sidecar_four_assets_readback": null,
+        "selected_patch_matches_qualified_result": null,
+        "prior260_owner_conservation": null,
+        "normal_native_continuous_package_render_checks": null
+      },
+      "production_delivered": false,
+      "applied": false
+    },
+    {
+      "component_id": "physical-component:768fe4b3068e570c2257750496a4d7dc8edd343958716fbe235bc21f48a28649",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "native_phase": "069",
+      "target_id": "gb:PNG:ADM3:22992897B90035319530873",
+      "ownerIndex": 35728,
+      "new_delivered_cells_draft": 3,
+      "attribution": "unique completed patch cells, all in qualified current result; zero intercomponent/prior260 overlap",
+      "geometry_scope": "supported-fragment",
+      "previous_state": "accepted-evidence",
+      "post_merge_state_draft": "accepted-evidence",
+      "whole_gap_completion_draft_after_merged_proof": false,
+      "remainder_retained": true,
+      "original_remainder": {
+        "immutable_ledger_pin": {
+          "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/069/ledger-batch.json",
+          "commit": "52a721df6955f567642f12873101ae4553e79916",
+          "mode": "100644",
+          "blob": "cd6ef0a80e46c27cee9802fc5f5b4d24beee199f",
+          "bytes": 3627,
+          "sha256": "2194cc155b376c358ba21664833c492cf09211c06089784e61f371b4db08d180"
+        },
+        "pointer": "/rows/0/original_remainder",
+        "retained_non_geometry_fields": {
+          "geometry_sha256": "51f4d2bc747a7b1ec723d9c5d7a6f04fbccadb85129e0367decfea063fcb57e4",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 1.1692222121972438e-05,
+          "planar_length_coordinate_units": 0.03628989823348972
+        }
+      },
+      "original_native_ledger_pin": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/069/ledger-batch.json",
+        "commit": "52a721df6955f567642f12873101ae4553e79916",
+        "mode": "100644",
+        "blob": "cd6ef0a80e46c27cee9802fc5f5b4d24beee199f",
+        "bytes": 3627,
+        "sha256": "2194cc155b376c358ba21664833c492cf09211c06089784e61f371b4db08d180"
+      },
+      "source_rule_sha256": "61043b09020f8071883231e5acfd63bec2306b27ed59e2ab005cce11f2ca3f93",
+      "source_receipt_sha256": "b1da1e6c54d0c8ff9c54686632af1d0ca9acbb3b0c591d057846d770fda7a4c7",
+      "candidate_geometry_sha256": "eb308f24b07b023198920412c5a67104d7f958a9e90bd6f358b45e9776ccb468",
+      "needed_merged_proof": {
+        "merge_commit": null,
+        "final_selected_head": null,
+        "whole_selector_sidecar_four_assets_readback": null,
+        "selected_patch_matches_qualified_result": null,
+        "prior260_owner_conservation": null,
+        "normal_native_continuous_package_render_checks": null
+      },
+      "production_delivered": false,
+      "applied": false
+    },
+    {
+      "component_id": "physical-component:1823bc93676bb57db1b85751dee537a7892037599c04fcbbc26130ed85add368",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "native_phase": "073",
+      "target_id": "gb:PNG:ADM3:22992897B55791738173493",
+      "ownerIndex": 35604,
+      "new_delivered_cells_draft": 4,
+      "attribution": "unique completed patch cells, all in qualified current result; zero intercomponent/prior260 overlap",
+      "geometry_scope": "supported-fragment",
+      "previous_state": "accepted-evidence",
+      "post_merge_state_draft": "accepted-evidence",
+      "whole_gap_completion_draft_after_merged_proof": false,
+      "remainder_retained": true,
+      "original_remainder": {
+        "immutable_ledger_pin": {
+          "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/073/ledger-batch.json",
+          "commit": "52a721df6955f567642f12873101ae4553e79916",
+          "mode": "100644",
+          "blob": "62921e335e7974716db87dfb342e74d97e83fa83",
+          "bytes": 4680,
+          "sha256": "97423cee702bea3b4715be6cc81b64c5bbf8a3730e19b74730f68463463080f6"
+        },
+        "pointer": "/rows/0/original_remainder",
+        "retained_non_geometry_fields": {
+          "geometry_sha256": "5516ff2b1c0997b4381f78c87ded41536855c25bb890f27e9a88e521ce8251e3",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 1.666959620299007e-05,
+          "planar_length_coordinate_units": 0.041763998641792706
+        }
+      },
+      "original_native_ledger_pin": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/073/ledger-batch.json",
+        "commit": "52a721df6955f567642f12873101ae4553e79916",
+        "mode": "100644",
+        "blob": "62921e335e7974716db87dfb342e74d97e83fa83",
+        "bytes": 4680,
+        "sha256": "97423cee702bea3b4715be6cc81b64c5bbf8a3730e19b74730f68463463080f6"
+      },
+      "source_rule_sha256": "37172557eb3f7e06242c5c50c4b4a1020d2b12b7f0b867e7da0845fc9ce0a8e4",
+      "source_receipt_sha256": "5491213e09b5397930449f7720e43bf5dbf3a073644946e97d43e0b1441afb40",
+      "candidate_geometry_sha256": "fc3bf51d3874e13f7d1b5f56bf0e757920c791d635217751dedc277b0022bcdb",
+      "needed_merged_proof": {
+        "merge_commit": null,
+        "final_selected_head": null,
+        "whole_selector_sidecar_four_assets_readback": null,
+        "selected_patch_matches_qualified_result": null,
+        "prior260_owner_conservation": null,
+        "normal_native_continuous_package_render_checks": null
+      },
+      "production_delivered": false,
+      "applied": false
+    },
+    {
+      "component_id": "physical-component:8968b22d73907e3452f4102da4bd9b534f86b65a1fbb7b7e3482bf4365eabcbb",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "native_phase": "074",
+      "target_id": "gb:IDN:ADM2:22746128B65756496772256",
+      "ownerIndex": 23001,
+      "new_delivered_cells_draft": 12,
+      "attribution": "unique completed patch cells, all in qualified current result; zero intercomponent/prior260 overlap",
+      "geometry_scope": "supported-fragment",
+      "previous_state": "accepted-evidence",
+      "post_merge_state_draft": "accepted-evidence",
+      "whole_gap_completion_draft_after_merged_proof": false,
+      "remainder_retained": true,
+      "original_remainder": {
+        "immutable_ledger_pin": {
+          "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/074/ledger-batch.json",
+          "commit": "52a721df6955f567642f12873101ae4553e79916",
+          "mode": "100644",
+          "blob": "586a09fdfd9f80b2274d632ac47db23138d89af5",
+          "bytes": 12108,
+          "sha256": "ce78ceadecb533abe2dcc9b4a76f5ca73947f736e420ccfefc190e22aece395c"
+        },
+        "pointer": "/rows/0/original_remainder",
+        "retained_non_geometry_fields": {
+          "geometry_sha256": "8a235c30b1a1cebe34540f1d99bcf9a4d523560554e349271b95d969c10d3408",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 2.7013389318132694e-05,
+          "planar_length_coordinate_units": 0.05989176835729801
+        }
+      },
+      "original_native_ledger_pin": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/074/ledger-batch.json",
+        "commit": "52a721df6955f567642f12873101ae4553e79916",
+        "mode": "100644",
+        "blob": "586a09fdfd9f80b2274d632ac47db23138d89af5",
+        "bytes": 12108,
+        "sha256": "ce78ceadecb533abe2dcc9b4a76f5ca73947f736e420ccfefc190e22aece395c"
+      },
+      "source_rule_sha256": "3a9f284a121cef6ecfbcaab86c4f36c0a8062e0b45e5c8471180d7a8df6c8c4f",
+      "source_receipt_sha256": "30cb0f11ba3595b13b209368a70f0f2edb567b93fe9866e9ed9555b2febc87eb",
+      "candidate_geometry_sha256": "b7fe5a0c94608a142f95a5323a0bfb18a5ddbce2c9f2128fd012e26e766b6e8c",
+      "needed_merged_proof": {
+        "merge_commit": null,
+        "final_selected_head": null,
+        "whole_selector_sidecar_four_assets_readback": null,
+        "selected_patch_matches_qualified_result": null,
+        "prior260_owner_conservation": null,
+        "normal_native_continuous_package_render_checks": null
+      },
+      "production_delivered": false,
+      "applied": false
+    },
+    {
+      "component_id": "physical-component:b4f157a2dd71d807c03f52a1828827813bcf829c18b681d22bf8b4c72f09c029",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "native_phase": "093",
+      "target_id": "gb:VUT:ADM1:32282491B7486560380604",
+      "ownerIndex": 48794,
+      "new_delivered_cells_draft": 1,
+      "attribution": "unique completed patch cells, all in qualified current result; zero intercomponent/prior260 overlap",
+      "geometry_scope": "supported-fragment",
+      "previous_state": "accepted-evidence",
+      "post_merge_state_draft": "accepted-evidence",
+      "whole_gap_completion_draft_after_merged_proof": false,
+      "remainder_retained": true,
+      "original_remainder": {
+        "immutable_ledger_pin": {
+          "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/093/ledger-batch.json",
+          "commit": "52a721df6955f567642f12873101ae4553e79916",
+          "mode": "100644",
+          "blob": "a09583b11b06e0c952ec6b6390680ba65f85c7e1",
+          "bytes": 6675,
+          "sha256": "f4a2d834c95143a506dad63d7bfa204915837157e0224c9a3d71a3c7c9d2b10b"
+        },
+        "pointer": "/rows/0/original_remainder",
+        "retained_non_geometry_fields": {
+          "geometry_sha256": "8c2846296b02b82100f056b7ee5ebda8b6a10e0c084fa34ba467bd25a2f1a924",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 1.2725354870768108e-07,
+          "planar_length_coordinate_units": 0.005590092527066914
+        }
+      },
+      "original_native_ledger_pin": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/093/ledger-batch.json",
+        "commit": "52a721df6955f567642f12873101ae4553e79916",
+        "mode": "100644",
+        "blob": "a09583b11b06e0c952ec6b6390680ba65f85c7e1",
+        "bytes": 6675,
+        "sha256": "f4a2d834c95143a506dad63d7bfa204915837157e0224c9a3d71a3c7c9d2b10b"
+      },
+      "source_rule_sha256": "2494ec48d765b58d78508587ffe37243a60e0b0b8a31d225d079d5412090a5c7",
+      "source_receipt_sha256": "366dc779d45eaa30f1c0bf558befa7d6def56cdd711e3c5e8d4d93e69110fc73",
+      "candidate_geometry_sha256": "ea8377b6ae16cf3f9ac93a5f861ae771ef5354e730b0378c0309c20bebe9d8fe",
+      "needed_merged_proof": {
+        "merge_commit": null,
+        "final_selected_head": null,
+        "whole_selector_sidecar_four_assets_readback": null,
+        "selected_patch_matches_qualified_result": null,
+        "prior260_owner_conservation": null,
+        "normal_native_continuous_package_render_checks": null
+      },
+      "production_delivered": false,
+      "applied": false
+    },
+    {
+      "component_id": "physical-component:87e079a4cfe8bb992c326637cfc95c85c1c95e78a5aa07a4a333d537ae632500",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "native_phase": "096",
+      "target_id": "gb:SLB:ADM1:17018030B84591335552725",
+      "ownerIndex": 39707,
+      "new_delivered_cells_draft": 18,
+      "attribution": "unique completed patch cells, all in qualified current result; zero intercomponent/prior260 overlap",
+      "geometry_scope": "supported-fragment",
+      "previous_state": "accepted-evidence",
+      "post_merge_state_draft": "accepted-evidence",
+      "whole_gap_completion_draft_after_merged_proof": false,
+      "remainder_retained": true,
+      "original_remainder": {
+        "immutable_ledger_pin": {
+          "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/096/ledger-batch.json",
+          "commit": "52a721df6955f567642f12873101ae4553e79916",
+          "mode": "100644",
+          "blob": "095e943c7a31996a1469c3fc26854eb32779d2d5",
+          "bytes": 4256,
+          "sha256": "d0a748e333e7d16f5f006ac9f70e83f5e34ebd210aa0c5face1a9821ccf5d02d"
+        },
+        "pointer": "/rows/0/original_remainder",
+        "retained_non_geometry_fields": {
+          "geometry_sha256": "3417151fca648081d5058b91c1f042cf98f0514b84108f540279fecf8512ecdd",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 1.6811022719981345e-10,
+          "planar_length_coordinate_units": 0.003296676757915764
+        }
+      },
+      "original_native_ledger_pin": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/096/ledger-batch.json",
+        "commit": "52a721df6955f567642f12873101ae4553e79916",
+        "mode": "100644",
+        "blob": "095e943c7a31996a1469c3fc26854eb32779d2d5",
+        "bytes": 4256,
+        "sha256": "d0a748e333e7d16f5f006ac9f70e83f5e34ebd210aa0c5face1a9821ccf5d02d"
+      },
+      "source_rule_sha256": "ded1fccc5e9834fa0e751460d2a2cf029e448284a31413aed64436a86b846963",
+      "source_receipt_sha256": "742ed78efe78ad3851638662f4d2ec00558980e3216b89a4ed2a84ab84e2711b",
+      "candidate_geometry_sha256": "ab1856ea863e981678d932a3a2a44c3bdf5ec568fa6c6c57fdf0bce2782837c6",
+      "needed_merged_proof": {
+        "merge_commit": null,
+        "final_selected_head": null,
+        "whole_selector_sidecar_four_assets_readback": null,
+        "selected_patch_matches_qualified_result": null,
+        "prior260_owner_conservation": null,
+        "normal_native_continuous_package_render_checks": null
+      },
+      "production_delivered": false,
+      "applied": false
+    },
+    {
+      "component_id": "physical-component:551ca58c3f9a9f37b506c4da3b2bf8641e479b36af76aa1936018d0e50e0d011",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "native_phase": "098",
+      "target_id": "gb:IDN:ADM2:22746128B11366688050704",
+      "ownerIndex": 22702,
+      "new_delivered_cells_draft": 3,
+      "attribution": "unique completed patch cells, all in qualified current result; zero intercomponent/prior260 overlap",
+      "geometry_scope": "supported-fragment",
+      "previous_state": "accepted-evidence",
+      "post_merge_state_draft": "accepted-evidence",
+      "whole_gap_completion_draft_after_merged_proof": false,
+      "remainder_retained": true,
+      "original_remainder": {
+        "immutable_ledger_pin": {
+          "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/098/ledger-batch.json",
+          "commit": "52a721df6955f567642f12873101ae4553e79916",
+          "mode": "100644",
+          "blob": "97631c8f383f89d7362f3b3896b6ccfe12ce9e0e",
+          "bytes": 4393,
+          "sha256": "02e0191e66e8e1d68f3de96986a81926f978fdd85f502ab416b0d7f985876e40"
+        },
+        "pointer": "/rows/0/original_remainder",
+        "retained_non_geometry_fields": {
+          "geometry_sha256": "2a02caf4e48c821c828fc019b784f7f27c0314324390ea1a5979d6d52cd9e953",
+          "geometry_type": "MultiPolygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 1.4331692910762122e-05,
+          "planar_length_coordinate_units": 0.036831280117790605
+        }
+      },
+      "original_native_ledger_pin": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/098/ledger-batch.json",
+        "commit": "52a721df6955f567642f12873101ae4553e79916",
+        "mode": "100644",
+        "blob": "97631c8f383f89d7362f3b3896b6ccfe12ce9e0e",
+        "bytes": 4393,
+        "sha256": "02e0191e66e8e1d68f3de96986a81926f978fdd85f502ab416b0d7f985876e40"
+      },
+      "source_rule_sha256": "af461a4f54539c8ab54d0b709b6f391cd305003ef60666145a15ced38613e1f5",
+      "source_receipt_sha256": "96f0e69304acba389beb807a9e9f2d0decd29a81c5cbf2a6de59f6449415bde2",
+      "candidate_geometry_sha256": "f4e5bb4f7f506a5588e5391aff0b78c9f649e1014baa2ca4261336dad308c730",
+      "needed_merged_proof": {
+        "merge_commit": null,
+        "final_selected_head": null,
+        "whole_selector_sidecar_four_assets_readback": null,
+        "selected_patch_matches_qualified_result": null,
+        "prior260_owner_conservation": null,
+        "normal_native_continuous_package_render_checks": null
+      },
+      "production_delivered": false,
+      "applied": false
+    },
+    {
+      "component_id": "physical-component:cc8500298299eff6edf9663b563a6d06a73939d6eec1aaea93963fa165ae5ccd",
+      "batch_id": "gap-operational-batch:37ed51b2c2eac38570c40a87",
+      "native_phase": "107",
+      "target_id": "gb:SLB:ADM1:17018030B43755880178831",
+      "ownerIndex": 39704,
+      "new_delivered_cells_draft": 5,
+      "attribution": "unique completed patch cells, all in qualified current result; zero intercomponent/prior260 overlap",
+      "geometry_scope": "supported-fragment",
+      "previous_state": "accepted-evidence",
+      "post_merge_state_draft": "accepted-evidence",
+      "whole_gap_completion_draft_after_merged_proof": false,
+      "remainder_retained": true,
+      "original_remainder": {
+        "immutable_ledger_pin": {
+          "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/107/ledger-batch.json",
+          "commit": "52a721df6955f567642f12873101ae4553e79916",
+          "mode": "100644",
+          "blob": "b1450abbdb0d98f9ca9a1fed2bbc1e839f93d7a5",
+          "bytes": 5337,
+          "sha256": "89a444a89091bb361be0b45a7f2968d15c4ef81c9648f468f54d485e10500f0d"
+        },
+        "pointer": "/rows/0/original_remainder",
+        "retained_non_geometry_fields": {
+          "geometry_sha256": "9f4914a96502d7d715ee9beba99d0bc8cadb9ba446fef2cd995b332d2cd1c029",
+          "geometry_type": "Polygon",
+          "is_empty": false,
+          "is_valid": true,
+          "planar_area_coordinate_units_squared": 5.645087656617618e-10,
+          "planar_length_coordinate_units": 0.013105255609404521
+        }
+      },
+      "original_native_ledger_pin": {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/107/ledger-batch.json",
+        "commit": "52a721df6955f567642f12873101ae4553e79916",
+        "mode": "100644",
+        "blob": "b1450abbdb0d98f9ca9a1fed2bbc1e839f93d7a5",
+        "bytes": 5337,
+        "sha256": "89a444a89091bb361be0b45a7f2968d15c4ef81c9648f468f54d485e10500f0d"
+      },
+      "source_rule_sha256": "42fa672a54ad5aba38a19e069ce2e83fe6dd7cead5b7123b787d5471d9d88e96",
+      "source_receipt_sha256": "247baf38f35d75f8583f64eedf897ee815ceaa1ff14ee5ca7083bb7567b9c646",
+      "candidate_geometry_sha256": "b75c971fb2c2e9f7518d6f58425c90cd5d27c08a5ca68812715b4d090371941e",
+      "needed_merged_proof": {
+        "merge_commit": null,
+        "final_selected_head": null,
+        "whole_selector_sidecar_four_assets_readback": null,
+        "selected_patch_matches_qualified_result": null,
+        "prior260_owner_conservation": null,
+        "normal_native_continuous_package_render_checks": null
+      },
+      "production_delivered": false,
+      "applied": false
+    }
+  ],
+  "literal_patch_input_pins": [
+    {
+      "phase": "004",
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-combined18-native-20261010/patch-4.json",
+      "bytes": 1276,
+      "sha256": "8007f1f473323b7058f56b629c4cb9863a21be67bee51e526e7c2624da19a221"
+    },
+    {
+      "phase": "016",
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-combined18-native-20261010/patch-16.json",
+      "bytes": 836,
+      "sha256": "5f415d1a318c9c212d5b851dfb8824e1d84ec8d3307db19d5e90a5a527c91b3c"
+    },
+    {
+      "phase": "023",
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-combined18-native-20261010/patch-23.json",
+      "bytes": 836,
+      "sha256": "b461b344160b925773842f3cec18bb2e2de059d8d191bc683097cc1a0e0e568d"
+    },
+    {
+      "phase": "030",
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-combined18-native-20261010/patch-30.json",
+      "bytes": 836,
+      "sha256": "d2f6d5722ceba376fd0bc0b74421205f85d029ef82b3550acd8ae8e30f089be7"
+    },
+    {
+      "phase": "036",
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-combined18-native-20261010/patch-36.json",
+      "bytes": 1188,
+      "sha256": "b96879fc43d0aecd33593b31de61603725694a15a92886ed3ee39f20854d47f4"
+    },
+    {
+      "phase": "044",
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-combined18-native-20261010/patch-44.json",
+      "bytes": 836,
+      "sha256": "9eeef6ec80af6e31d532a3d098bff33f446b35fda1d7f6d68d61706170a4ea87"
+    },
+    {
+      "phase": "050",
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-combined18-native-20261010/patch-50.json",
+      "bytes": 968,
+      "sha256": "b59bc4e6c42f4d9c994a702a78632fe212d6aa75a6cbfa9efe2e3a63f9ef609f"
+    },
+    {
+      "phase": "059",
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-combined18-native-20261010/patch-59.json",
+      "bytes": 836,
+      "sha256": "250455b3493c3ada23cae84d69b394893344451bdf7bde7720e90761c3dfe57a"
+    },
+    {
+      "phase": "062",
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-combined18-native-20261010/patch-62.json",
+      "bytes": 836,
+      "sha256": "97a940fe90604196972830d0a06f49ed2827a63618d2ce9a098467f7e6e385c5"
+    },
+    {
+      "phase": "063",
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-combined18-native-20261010/patch-63.json",
+      "bytes": 858,
+      "sha256": "a8979b3ebfc3dd248051289882e77c91bc8c95a1b7ca4ee65bb55e3f8a150166"
+    },
+    {
+      "phase": "067",
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-combined18-native-20261010/patch-67.json",
+      "bytes": 1056,
+      "sha256": "73995a503caf024f9676a52a49f9a62d3c2e6e9b813b5139ac0183f2c77c6725"
+    },
+    {
+      "phase": "069",
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-combined18-native-20261010/patch-69.json",
+      "bytes": 924,
+      "sha256": "aea3897c98d9b7afbdb5961b1eb8411b7ed8bbeef6356ae714027d194fb22dac"
+    },
+    {
+      "phase": "073",
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-combined18-native-20261010/patch-73.json",
+      "bytes": 880,
+      "sha256": "2e11b7d4799a30c1fbbfc89437d6e78ea52a1090b7785bb278778fb3db4bc0fb"
+    },
+    {
+      "phase": "074",
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-combined18-native-20261010/patch-74.json",
+      "bytes": 1232,
+      "sha256": "13ce5fc52d5b93b001c63ddc3377b666664204145d82121ddd5dd087773ea988"
+    },
+    {
+      "phase": "093",
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-combined18-native-20261010/patch-93.json",
+      "bytes": 836,
+      "sha256": "0c7023f24ea6419c5966ff3c97bd7b613352c257d7851a5df1e779fcaf425bd7"
+    },
+    {
+      "phase": "096",
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-combined18-native-20261010/patch-96.json",
+      "bytes": 1584,
+      "sha256": "77f7a1a753d95234de23e622eb60d3b98254e76c3a52c8895f32ab42a1fb8f25"
+    },
+    {
+      "phase": "098",
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-combined18-native-20261010/patch-98.json",
+      "bytes": 924,
+      "sha256": "216c6bd85d19bd125fcb5ab6b44d3e8dbbe7ad68da498033eafd9e635f3f8200"
+    },
+    {
+      "phase": "107",
+      "path": "/Users/chengshuli/world-atlas-workspace/.cache/runtime-integration-combined18-native-20261010/patch-107.json",
+      "bytes": 924,
+      "sha256": "fccc46b1c8277934ad55585fdb74929128e34764bf11c80a710b4da11a102497"
+    }
+  ],
+  "limits": [
+    "No completion credit or canonical mutation before actual merged353 proof.",
+    "Partial native delivery retains accepted-evidence state and complete unresolved residuals.",
+    "No native-pixel-to-area conversion, water inference, contemporary physical authority or deployment claim.",
+    "Original historical b0 SOURCE /420db NATIVE approval6097232665 and producer vintages remain."
+  ],
+  "refreshed_qualification_certificate_pin": {
+    "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/selected353-compact-NCL-qualified/certificate.json",
+    "commit": "836dd9a75542d2a9ac3b08b92473616dbe13fbdc",
+    "mode": "100644",
+    "git_blob_oid": "55554debdb175caefa1f8cb295f7f81232bdd7bc",
+    "bytes": 3289,
+    "sha256": "d10d67e5ff5ed24a21bd1c5535ec490e880ba3b08a398b2db92d296bb1c05dc2"
+  },
+  "refreshed_assembly_acceptance": {
+    "status": "PASS",
+    "complete_patch_rows_literal_preserved": true,
+    "four_products": {
+      "qualification.json": {
+        "bytes": 677,
+        "sha256": "df38b81ecde598acfc31542999cfeec8ae2d8e599c9b7da4127e3a7e1c0d4348",
+        "changed_top_level_keys_vs_original353": [
+          "rebind_certificate"
+        ]
+      },
+      "patch.json": {
+        "bytes": 9691,
+        "sha256": "b8c0abf5fd5b49f974f92ae21d666b668e1503875b18c1a3e6c17ddd19af79f8",
+        "changed_top_level_keys_vs_original353": [
+          "effective_reference",
+          "ledger_sha256"
+        ]
+      },
+      "ledger.json": {
+        "bytes": 482146,
+        "sha256": "f2822cfaac526eae21a10d688f8ec04b618c4fa5ee6d8b9226f7721f21512c37",
+        "changed_top_level_keys_vs_original353": [
+          "current_rebind"
+        ]
+      },
+      "envelope.json": {
+        "bytes": 1421,
+        "sha256": "060c158d90f05b58111eee8ab0e31f6a20ddbffcf5020c4ddef3e667d8513c41",
+        "changed_top_level_keys_vs_original353": [
+          "effective_reference",
+          "ledger",
+          "patch"
+        ]
+      }
+    },
+    "execution_commit": "836dd9a75542d2a9ac3b08b92473616dbe13fbdc",
+    "selected_delivery_credit": false
+  }
+}
