@@ -1,0 +1,135 @@
+{
+  "version": 1,
+  "issue": 1689,
+  "lane": "engineering",
+  "worker_id": "01a119de-e3de-7860-aa56-0484afa8a261",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "92ad83fa4fda9f1f31ce2e4e637149ebd4819485",
+    "files": [
+      {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 25043,
+        "sha256": "698dd4688811c0037d92973022e330c92d61364b5d6653a83319c4ac3bba79ca",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/worker-merge.yml",
+        "bytes": 12030,
+        "sha256": "2dbf5a78f4856b517a7de06c5b4c371a88dfb9fe510aff99b8d0dcf2768ab0d0",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "bytes": 25043,
+      "sha256": "0e5b4065195e4ba8b358fbc1a396863e787187fd1a0fc054d5b99a661f3b4764",
+      "hash_kind": "file-bytes",
+      "role": "code"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "bytes": 12030,
+      "sha256": "ea62234fa64ce05c5c6b1367279ab95bb885e9a8dcc41d38f4de212833c3a10b",
+      "hash_kind": "file-bytes",
+      "role": "code"
+    },
+    {
+      "path": "coordination/engineering/geography-job-deadline-20261010/original-ci-timeout-annotations.json",
+      "bytes": 2018,
+      "sha256": "5e622f9e2a006401663514de15737cdd0cf38e1dc4c8ea78e4956cf967fe4cc1",
+      "hash_kind": "file-bytes",
+      "role": "retained-diagnostic"
+    },
+    {
+      "path": "coordination/engineering/geography-job-deadline-20261010/focused-test.stdout",
+      "bytes": 219,
+      "sha256": "fb83e3888f1827de7577624b965acee657697bd31ff09f042c522b9804d6d5c8",
+      "hash_kind": "file-bytes",
+      "role": "retained-diagnostic"
+    },
+    {
+      "path": "coordination/engineering/geography-job-deadline-20261010/README.md",
+      "bytes": 803,
+      "sha256": "d1709433bb1f28911ac485dada5d92e038275f9128080885a82bd0ed21f5090d",
+      "hash_kind": "file-bytes",
+      "role": "retained-diagnostic"
+    },
+    {
+      "path": "coordination/engineering/geography-job-deadline-20261010/exact-workflow-comparison.json",
+      "bytes": 1031,
+      "sha256": "b4ec19a5edd324ced6b5bceec80a445c278dea66a087c1fec4182ff053b827d3",
+      "hash_kind": "file-bytes",
+      "role": "retained-diagnostic"
+    },
+    {
+      "path": "coordination/engineering/geography-job-deadline-20261010/original-worker-timeout-annotations.json",
+      "bytes": 2018,
+      "sha256": "447d486164f5e5fdc0ca811d1e789f8245e78974d5d55ffe6922671cde95a3d6",
+      "hash_kind": "file-bytes",
+      "role": "retained-diagnostic"
+    }
+  ],
+  "methods": [
+    {
+      "id": "geography-job-deadline",
+      "kind": "code",
+      "description": "Single scalar deadline substitution in each complete workflow; byte-exact inverse preserves every other job setting and all scientific commands and guards. Existing geography output binding test exercised.",
+      "software": "Node 24; Python 3 standard library; Git",
+      "units": "job wall-clock minutes"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "not-requested",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test --test-name-pattern=\"trusted geography outputs bind\" test/merge-integration.test.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "status": "modified",
+      "original_sha256": "698dd4688811c0037d92973022e330c92d61364b5d6653a83319c4ac3bba79ca"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "status": "modified",
+      "original_sha256": "2dbf5a78f4856b517a7de06c5b4c371a88dfb9fe510aff99b8d0dcf2768ab0d0"
+    },
+    {
+      "path": "coordination/engineering/geography-job-deadline-20261010/original-ci-timeout-annotations.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geography-job-deadline-20261010/focused-test.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geography-job-deadline-20261010/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geography-job-deadline-20261010/exact-workflow-comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geography-job-deadline-20261010/original-worker-timeout-annotations.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geography-job-deadline-20261010/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

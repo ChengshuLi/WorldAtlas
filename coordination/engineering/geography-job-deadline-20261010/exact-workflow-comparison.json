@@ -1,0 +1,23 @@
+{
+  "kind": "exact-whole-workflow-substitution",
+  "baseline": "92ad83fa4fda9f1f31ce2e4e637149ebd4819485",
+  "comparisons": [
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "only_geography_deadline_changed": true,
+      "old_minutes": 15,
+      "new_minutes": 25,
+      "base_sha256": "698dd4688811c0037d92973022e330c92d61364b5d6653a83319c4ac3bba79ca",
+      "candidate_sha256": "0e5b4065195e4ba8b358fbc1a396863e787187fd1a0fc054d5b99a661f3b4764"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "only_geography_deadline_changed": true,
+      "old_minutes": 15,
+      "new_minutes": 25,
+      "base_sha256": "2dbf5a78f4856b517a7de06c5b4c371a88dfb9fe510aff99b8d0dcf2768ab0d0",
+      "candidate_sha256": "ea62234fa64ce05c5c6b1367279ab95bb885e9a8dcc41d38f4de212833c3a10b"
+    }
+  ],
+  "preservation": "Inverse of the single geography timeout scalar substitution reconstructs each entire original workflow byte for byte, including permissions, commands and all other job deadlines."
+}
