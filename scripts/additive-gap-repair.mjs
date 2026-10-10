@@ -1101,7 +1101,8 @@ function administrativeSourcePremiseStage(repo,request,report) {
   const catalogue=json(rule.source_catalogue_path);
   const products=rule.administrative_products.map(pin=>{const body=get(pin.path).body,collection=JSON.parse(body);
     demand(collection.type==='FeatureCollection'&&Array.isArray(collection.features),'Incomplete original administrative product');
-    return {pin,body,features:collection.features};});
+    return {pin,original_bytes:body.length,original_sha256:sha(body),features:collection.features.map(feature=>({
+      feature_sha256:sha(canonical(feature)),geometry_sha256:sha(canonical(feature.geometry))}))};});
   const rows=scope.candidate_source_native_bindings.filter(row=>rule.expected_ids.includes(row.component_id)).map(sourceCase=>{
     const ordinal=scope.candidate_source_native_bindings.indexOf(sourceCase);
     const cid=sourceCase.component_id,original=originals.get(cid),binding=scope.original_physical_comparison_bindings.filter(row=>row.component_id===cid);
@@ -1120,16 +1121,16 @@ function administrativeSourcePremiseStage(repo,request,report) {
     const operation=sourceCase.retained_source_operation_row;
     const hits=operation.positive_area_source_feature_intersections??operation.province_intersections.filter(row=>row.intersection_dimension==='area');
     for(const hit of hits){
-      const matches=products.flatMap(product=>product.features.filter(feature=>sha(canonical(feature))===hit.feature_sha256||sha(canonical(feature))===hit.source_feature_sha256)
+      const matches=products.flatMap(product=>product.features.filter(feature=>feature.feature_sha256===hit.feature_sha256||feature.feature_sha256===hit.source_feature_sha256)
         .map(feature=>({product,feature})));
-      demand(matches.length===1&&sha(canonical(matches[0].feature.geometry))===(hit.geometry_sha256??hit.source_geometry_sha256),
+      demand(matches.length===1&&matches[0].feature.geometry_sha256===(hit.geometry_sha256??hit.source_geometry_sha256),
         'Original administrative full feature/geometry omitted or rebound');
       if(hit.source_file_sha256)demand(matches[0].product.pin.sha256===hit.source_file_sha256,'Wrong generalized source body');
       else {const product=catalogue.products.filter(row=>row.key===hit.source_id);demand(product.length===1,'Missing original source edition');
         const part=product[0].parts.filter(row=>row.path===matches[0].product.pin.path);
         demand(part.length===1&&product[0].parts.length===1&&part[0].offset===0
           &&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(key=>part[0][key]===matches[0].product.pin[key])
-          &&matches[0].product.body.length===product[0].original_bytes&&sha(matches[0].product.body)===product[0].original_sha256
+          &&matches[0].product.original_bytes===product[0].original_bytes&&matches[0].product.original_sha256===product[0].original_sha256
           &&matches[0].product.features.length===product[0].feature_count
           &&hit.recorded_stable_subjects.length===1
           &&hit.recorded_stable_subjects[0].reference_year===product[0].source_represented_year_claim,'Original consumed administrative product/edition changed');}
