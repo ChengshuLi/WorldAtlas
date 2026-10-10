@@ -36,6 +36,24 @@ export function readBoundPublicationAssets(reader,roster,declared) {
   return {bodies,input_inventory:structuredClone([...reader.inventory.values(),...copy.inventory.values()]),complete_phase_bytes:copy.used};
 }
 
+// Acquire only a genuinely requested missing immutable tree. This does not
+// substitute current bytes for historical provenance or move the checkout.
+export function bindPackageImmutableCommits(reader,declared){
+ const descriptor=reader.descriptor.bind(reader),available=new Set(),fetched=[];
+ reader.descriptor=(name,version=reader.version)=>{
+  demand(declared(name),'Undeclared additive package source/code payload: '+name);
+  demand(typeof version==='string'&&/^[a-f0-9]{40}$/.test(version),'Exact immutable package source version required');
+  if(!available.has(version)){
+   demand(available.size<32,'Bounded package immutable source versions exceeded');
+   try{reader.git('cat-file','-e',version+'^{commit}');}
+   catch{reader.git('fetch','--quiet','--depth=1','--filter=blob:none','--no-tags','--no-write-fetch-head','origin',version);fetched.push(version);}
+   reader.git('cat-file','-e',version+'^{commit}');available.add(version);
+  }
+  return descriptor(name,version);
+ };
+ return fetched;
+}
+
 // Called before context/database allocations. The package issuer authenticates
 // its executing closure; the existing private selected reader authenticates all
 // source/rule/current-rebind authority. This bridge grants no new authority.
@@ -77,6 +95,7 @@ export async function preparePackageSelectedAdditive({root,currentExecution,cons
   const reader=new ImmutableReader(execution.source_root,execution.source_commit,{
     runtimeBytes:execution.runtime.bytes+gitStat.size,executionBytes,
     metadataBytes,outputBytes:4194304,gitExecutable:git});
+  bindPackageImmutableCommits(reader,name=>containsPackagePath(definition.inputs,name)||execution.files.some(p=>p.path===name));
   const wholeRead=reader.read.bind(reader);
   reader.read=(name,options)=>{
     demand(containsPackagePath(definition.inputs,name)||execution.files.some(p=>p.path===name),
