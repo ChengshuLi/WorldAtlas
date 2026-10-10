@@ -13,7 +13,7 @@ fixture=fixture.replace("'../../../scripts/check-effective-geographic-regression
 fs.writeFileSync(path.join(temp,'original.mjs'),fixture,{flag:'wx'});
 try{
 const original=await import(pathToFileURL(path.join(temp,'original.mjs')).href);
-const options={runtimeBytes:146540752,executionBytes:282529,metadataBytes:8388608,outputBytes:4194304,gitExecutable:'/Library/Developer/CommandLineTools/usr/bin/git'};
+const options={runtimeBytes:146540752,executionBytes:282529,metadataBytes:8388608,outputBytes:4194304};
 const reader=metadata=>new ImmutableReader(repo,'c3cd586bbbc73ff44932a2c170e339c820cdfafd',{...options,metadataBytes:metadata});
 const strip=v=>{if(Array.isArray(v))return v.map(strip);if(v&&typeof v==='object')return Object.fromEntries(Object.entries(v).filter(([k])=>k!=='complete_phase_bytes').map(([k,x])=>[k,strip(x)]));return v;};
 const receipts=[];
