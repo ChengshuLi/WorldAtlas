@@ -1070,7 +1070,10 @@ function administrativeSourcePremiseStage(repo,request,report) {
   if(remainderProduct)demand(remainderRows.length===69&&new Set(remainderRows.map(row=>row.component_id)).size===69
     &&equal(remainderRows.map(row=>row.component_id).sort(),rule.cohort_ids.toSorted()),'Incomplete original partial remainder roster');
 
-  const originals=new Map(),native=new Map();
+  const originals=new Map(),native=new Map(),nativeIds=new Set();
+  const neededNativeIds=new Set(scope.original_physical_comparison_bindings
+    .filter(binding=>rule.expected_ids.includes(binding.component_id))
+    .flatMap(binding=>binding.physical_comparison.row.query_relations.map(query=>query.source_id)));
   for(const source of rule.original_products){
     const value=get(source.path),product=report.products.find(pin=>pin.path===source.original_product_path);
     demand(value.pin.report_sha256===request.report.sha256&&value.pin.original_product_path===source.original_product_path&&product&&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(key=>product[key]===value.pin[key]),
@@ -1078,7 +1081,7 @@ function administrativeSourcePremiseStage(repo,request,report) {
     const lines=value.body.toString('utf8').split('\n');demand(lines.pop()==='','Truncated original physical product');
     for(let ordinal=0;ordinal<lines.length;ordinal++){
       const row=JSON.parse(lines[ordinal]);
-      if(source.original_product_path.startsWith('sources-')){demand(!native.has(row.id),'Duplicate original native metadata');native.set(row.id,{row,ordinal,product});}
+      if(source.original_product_path.startsWith('sources-')){demand(!nativeIds.has(row.id),'Duplicate original native metadata');nativeIds.add(row.id);if(neededNativeIds.has(row.id))native.set(row.id,{row,ordinal,product});}
       else if(rule.expected_ids.includes(row.component_id)){demand(!originals.has(row.component_id),'Duplicate physical component');originals.set(row.component_id,{row,ordinal,product,pin:value.pin,row_sha256:sha(Buffer.from(lines[ordinal]+'\n'))});}
     }
   }
