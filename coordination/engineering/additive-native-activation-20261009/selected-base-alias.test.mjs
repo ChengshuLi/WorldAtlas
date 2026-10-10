@@ -105,6 +105,13 @@ test('literal six-asset acquisition authenticates encoded aliases without duplic
  assert.deepEqual(result.named,{ledger:{},patch:{}});assert.equal(reads,7);
  assert.equal(snapshot.reader.charged.get(commit+':'+assets.owner_roster.path),bound.length,'Alias still charges complete encoded body');
  assert.equal(snapshot.owners.length,2);
+ // Fault-injected extracted callee returns a value-equal replacement after the
+ // genuine private check. The production comparison must require identity.
+ for(const role of ['base_manifest','owner_roster']){
+  const replaced=(...args)=>{const actual=selectedBaseAssetAlias(...args);return args[1]===role?JSON.parse(JSON.stringify(actual)):actual;};
+  assert.throws(()=>invoke(snapshot,hook,demand,hash,check,(a,b)=>JSON.stringify(a)===JSON.stringify(b),s=>s,replaced,gunzipSync,sha,33554432,268435456,valueBytes),role==='base_manifest'?/actual selected native manifest/:/independent original native bounds/);
+ }
+
  assert.throws(()=>invoke({...snapshot},hook,demand,hash,check,(a,b)=>JSON.stringify(a)===JSON.stringify(b),s=>s,selectedBaseAssetAlias,gunzipSync,sha,33554432,268435456,valueBytes),/privately/);
  snapshot.reader.read=(name,options)=>{if(name===assets.owner_roster.path)return original(name,{...options,expected:'0'.repeat(64)});return original(name,options);};
  assert.throws(()=>invoke(snapshot,hook,demand,hash,check,(a,b)=>JSON.stringify(a)===JSON.stringify(b),s=>s,selectedBaseAssetAlias,gunzipSync,sha,33554432,268435456,valueBytes),/hash|SHA|differs/i);
