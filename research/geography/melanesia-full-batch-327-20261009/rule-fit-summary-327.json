@@ -1,0 +1,49 @@
+{
+  "counts": {
+    "full-source-cover": 52,
+    "multi-subject-exception": 2,
+    "no-administrative-comparison": 78,
+    "no-source-intersection": 18,
+    "single-subject-partial": 177
+  },
+  "fit_by_source_product_and_class": {
+    "gb:FJI:ADM2:full-source-cover": 1,
+    "gb:FJI:ADM2:single-subject-partial": 1,
+    "gb:IDN:ADM2:full-source-cover": 5,
+    "gb:IDN:ADM2:single-subject-partial": 7,
+    "gb:PNG:ADM3:full-source-cover": 4,
+    "gb:PNG:ADM3:single-subject-partial": 6,
+    "gb:SLB:ADM1:full-source-cover": 19,
+    "gb:SLB:ADM1:single-subject-partial": 49,
+    "gb:VUT:ADM1:single-subject-partial": 1
+  },
+  "limits": [
+    "This is a literal retained-record source-only prequalification, not source fitness/authority approval, current native qualification, repair selection, or processing-cause finding.",
+    "The 64 partial rule-fit rows retain their exact nonempty source-union remainders and must not be treated as complete source coverage.",
+    "All 98 original exceptions and all 177 partial rows remain individually represented.",
+    "No source/GIS/native operators, provider calls, or whole-world replay were run."
+  ],
+  "output": {
+    "bytes": 80012,
+    "path": "rule-fit-exceptions-327.jsonl.gz",
+    "sha256": "0ec9670a9d1d523b3216f0330a2d6ee5b94d1eb3f54b436d7a75f1be2d1570e2"
+  },
+  "scope": "exact 327 Melanesia operational batch; source-only fit to existing #1647 rule predicates",
+  "selected_target_join": {
+    "actual_main_commit": "b2b34087682b9a20e53c72c83f6d53054e09e8cf",
+    "component_links": 229,
+    "js_python_preimage_mismatch_targets": 3,
+    "operator_executions": 0,
+    "passed": 43,
+    "path": "engineering-current-target-joins.json",
+    "preimages_bytes": 607780,
+    "preimages_path": "engineering-current-target-preimages.json",
+    "preimages_sha256": "6e4d944707919bdc3ec2d00e904847bd3d3006a49c9b669185a7cec3e497da01",
+    "refused": 0,
+    "sha256": "cdf0152a9eaf8ae31e86ec3127c2d2d8f043aad3af7914c44c240c152617631b",
+    "status": "immutable-current-target-join-only",
+    "targets": 43
+  },
+  "source_only_rule_fit": 93,
+  "version": 1
+}
