@@ -1,18 +1,15 @@
-# Completed-frame reclamation prerequisite for #1632
+# Reader custody ownership prerequisite for #1632
 
-The current-bank qualification at `4a52941e4f21a04629a844bf57cd44bca609556c` produced the same twelve supported components and 141 native additions as the retained qualification, but its sampled process-group RSS exceeded the unchanged 384 MiB guard. Its child exited naturally with no survivors; the run remains unqualified. The source, products, raw operating records and earlier qualifications remain in the author recovery and Git recovery reference.
+The qualified twelve-component candidate at `cac27fa0378d2883f379edae05f456479ea45890` reached the ordinary trusted geography entry, then failed when a later native row-table read tried to update a descriptor frozen by the returned acquisition proof. The proof borrowed `reader.inventory` records. This prerequisite copies those scalar records before the existing recursive freeze, leaving the reader mutable while its returned custody remains immutable. Complete values, schema, source and native operands, admission accounting and all original guards remain unchanged.
 
-This code prerequisite issues exactly one Node `--expose-gc` flag and pins that actual seven-word command throughout entry, terminal and returned execution custody. The original six-word historical command remains valid. The entry rejects other flags and preload variables, captures the actual exposed native collector, and checks its identity across trusted imports and execution.
-
-The collector runs only after completed source, predecessor, row-table and containing-native-group frames return their complete rows and custody. The full retained table, targets, rows, proofs, descriptor inventory and metadata stay live and charged. All original member, phase, output, wall, sampled RSS, lifetime RSS, ownership and cleanup guards remain unchanged. Reclamation does not establish that a future qualification fits its memory guards.
-
-Run the focused controls with Node 24:
+Run the focused Node 24 control:
 
 ```
-node --expose-gc coordination/engineering/additive-native-activation-20261009/completed-frame-reclamation-controls.mjs
-node coordination/engineering/additive-native-activation-20261009/completed-frame-command-custody-controls.mjs
+node coordination/engineering/additive-native-activation-20261009/custody-record-ownership-controls.mjs
 ```
 
-The collector controls cover actual finished-temporary reclamation, retained output/accounting equality, absent or substituted collector refusal and early entry refusals. The command controls exercise the exact production route, whole terminal identity and returned custody for genuine historical and exposed-GC commands on both time formats; mismatched actual/terminal commands and malformed paths are rejected. Their runtime and authority records are small synthetic fixtures, not qualification authority.
+It extracts the actual production inventory expression and immutable reader from the current Git head, reproduces the original borrowed-record failure, freezes the corrected custody, and performs a genuine whole encoded row-table reread. It checks separate record identities, immutable returned values, internal reader mutation and subsequent restoration, plus whole hash, missing-file, size and blob-identity refusals. It performs no decompression or source/native scientific calculation.
 
-Selection, application certificate/context, builder, package inputs, geography, native products and original scientific qualifications remain unchanged in this prerequisite. After its merge, the final activation must pass the changed-code qualification and real trusted native and continuous candidate checks before its package and normal delivery. No repair, water, GPU/Canvas, browser or production success is claimed here.
+The retained provisional full-entry report uses unpublished code `bbc8a6cf14381c153a004b1b6d63c9678604a19c` (actual Main plus this one line) against the unchanged qualified candidate `cac27fa0378d2883f379edae05f456479ea45890`. Both selected native and continuous branches completed: no native loss or reassignment across the affected rows and no new continuous regressions. This is an integration diagnostic with patched, non-Main code, not trusted-Main acceptance, release activation or a fresh scientific qualification. The first attempt's isolated Python lacked Shapely; its refusal is preserved. The successful attempt used the existing isolated GIS environment without installing dependencies or changing any resource cap.
+
+Selection, native/geometry/source artifacts, N2 certificate and consumer inventory, context, builder and package inputs remain unchanged in this code-only PR. The actual `a817` qualification and candidate are preserved. After this prerequisite merges, the final activation needs one newly bound current-before execution because its actual helper code changed, then ordinary trusted native and continuous checks, package/emitted asset associations and the affected-row production render/pick checks. Earlier scientific/source qualification remains valid and is reused. No repaired count, physical/water approval, GPU/Canvas capture, browser operation or production publication is claimed here.
