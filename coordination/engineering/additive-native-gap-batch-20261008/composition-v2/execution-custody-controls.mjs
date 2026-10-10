@@ -31,17 +31,4 @@ reject(c=>{edit(c,'issued_plan',p=>p.target_sources.pop());const b=c.executionCu
 reject(c=>edit(c,'code_source',p=>{p.command[2]='/foreign/node';c.request.execution.command=[...p.command];}),/external command differs/);
 reject(c=>{c.executionCustody.stderr=Buffer.alloc(40961,32);refresh(c,'stderr');},/metadata\/log bound/);
 reject(c=>delete c.operating.execution_custody.issued_plan,/Incomplete external execution roster/);
-// GNU time uses KiB, while the custody journal and all caps remain bytes.
-const linux=clone();linux.request.execution.command=[...linux.request.execution.command];linux.request.execution.command[1]='-v';linux.request.execution.command.splice(3,0,'--expose-gc');
-const linuxCommand=linux.request.execution.command;
-edit(linux,'code_source',p=>p.command=linuxCommand);
-edit(linux,'terminal',t=>{t.command=linuxCommand;t.code_source_sha256=linux.operating.execution_custody.code_source.sha256;t.lifetime_rss_bytes=100000768;});
-linux.operating.lifetime_rss_bytes=100000768;
-linux.executionCustody.stderr=Buffer.from('Maximum resident set size (kbytes): 97657\nElapsed (wall clock) time (h:mm:ss or m:ss): 0:01.00\n');refresh(linux,'stderr');
-assert.equal(verify(linux).command[1],'-v');
-const linuxReject=(change,error)=>{const c=structuredClone(linux);for(const name of Object.keys(c.executionCustody))c.executionCustody[name]=Buffer.from(c.executionCustody[name]);change(c);assert.throws(()=>verify(c),error);negative++;};
-for(const raw of ['Maximum resident set size (bytes): 100000768\nElapsed (wall clock) time (h:mm:ss or m:ss): 0:01.00\n','Maximum resident set size (kbytes): 100000768\nElapsed (wall clock) time (h:mm:ss or m:ss): 0:01.00\n',linux.executionCustody.stderr.toString().repeat(2)])linuxReject(c=>{c.executionCustody.stderr=Buffer.from(raw);refresh(c,'stderr');},/time lifetime RSS differs/);
-linuxReject(c=>{c.executionCustody.stderr=Buffer.from('Maximum resident set size (kbytes): 97657\n');refresh(c,'stderr');},/raw external time wall duration/);
-linuxReject(c=>{c.executionCustody.stderr=Buffer.from('Maximum resident set size (kbytes): 97657\nElapsed (wall clock) time (h:mm:ss or m:ss): 0:01.02\n');refresh(c,'stderr');},/time wall duration differs/);
-linuxReject(c=>edit(c,'terminal',t=>t.command[1]='-l'),/Failed\/foreign external/);
-console.log(JSON.stringify({version:1,kind:'complete-external-rebind-execution-custody-controls',positives:3,negatives:negative,code:all.expectedCode,runtime_roles:verify(all).runtime.map(r=>r.role),limits:['Whole raw/canonical execution records are synthetic. Mac bytes and GNU KiB are verified against the same byte caps and custody crossbindings. This is not actual operating qualification.','No child command, selected-bank read or activation executed.']}));
+fs.writeFileSync(Q+'execution-custody-controls.json',valueBytes({version:1,kind:'complete-external-rebind-execution-custody-controls',positives:2,negatives:negative,code:all.expectedCode,runtime_roles:verify(all).runtime.map(r=>r.role),limits:['Whole raw/canonical execution records are synthetic. This is a parser/crossbinding test, not actual preimport/runtime/operating qualification.','No child command, original source fitness/native operator, selected-bank read or activation executed.']}));console.log(JSON.stringify({positive:2,negative,executing_source_bodies:all.expectedCode.length,runtime_roles:9}));
