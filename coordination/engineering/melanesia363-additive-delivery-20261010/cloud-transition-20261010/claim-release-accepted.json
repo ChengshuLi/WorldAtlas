@@ -1,0 +1,52 @@
+{
+  "accepted": true,
+  "request_id": "77aef894-a5af-49bf-8ab7-2f02a52689f9",
+  "issue_number": 1647,
+  "claim": {
+    "comment_id": 6094832446,
+    "version": 1,
+    "active": false,
+    "worker_id": "01a112b0-39fb-7f02-a3c7-d21d0916009f",
+    "claim_id": "1b7cb4d6-0de2-4939-98f7-f6364a16cc2e",
+    "branch": "engineering/melanesia363-source007-canonical-hash-20261010",
+    "request_id": "77aef894-a5af-49bf-8ab7-2f02a52689f9",
+    "issue_number": 1647,
+    "claimed_at": "2026-10-10T06:51:32.637Z",
+    "updated_at": "2026-10-10T20:12:55.914Z",
+    "expires_at": "2026-10-11T20:12:55.914Z",
+    "live_work": false,
+    "mode": "engineering",
+    "max_prs": 2,
+    "released_at": "2026-10-10T20:13:56.567Z"
+  },
+  "replayed": false,
+  "result_source": "github-comment",
+  "result_comment_id": 6101732565,
+  "logical_observation_reads": 1,
+  "request_accounting": {
+    "phase": "claim-observer",
+    "actual_http_attempts": 3,
+    "counts": {
+      "GET:repository-authority:200": 1,
+      "POST:actions:204": 1,
+      "GET:comments:200": 1
+    },
+    "observed_repository_core": {
+      "first": {
+        "limit": 5000,
+        "remaining": 4809,
+        "reset": 1791664918
+      },
+      "last": {
+        "limit": 5000,
+        "remaining": 4807,
+        "reset": 1791664918
+      },
+      "lowest_remaining": {
+        "limit": 5000,
+        "remaining": 4807,
+        "reset": 1791664918
+      }
+    }
+  }
+}

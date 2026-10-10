@@ -1,0 +1,40 @@
+{
+  "accepted": false,
+  "request_id": "1614c4d2-bf84-4c94-84b0-92814d91c55a",
+  "issue_number": 1647,
+  "reason": "Preserve the active PR/live operation; finish or hand over before release",
+  "mutation_attempted": false,
+  "reconcile_required": false,
+  "retryable": false,
+  "result_source": "github-comment",
+  "result_comment_id": 6101714114,
+  "logical_observation_reads": 4,
+  "workflow_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/38082768514",
+  "request_accounting": {
+    "phase": "claim-observer",
+    "actual_http_attempts": 6,
+    "counts": {
+      "GET:repository-authority:200": 1,
+      "POST:actions:204": 1,
+      "GET:comments:200": 2,
+      "GET:actions:200": 2
+    },
+    "observed_repository_core": {
+      "first": {
+        "limit": 5000,
+        "remaining": 4821,
+        "reset": 1791664918
+      },
+      "last": {
+        "limit": 5000,
+        "remaining": 4818,
+        "reset": 1791664918
+      },
+      "lowest_remaining": {
+        "limit": 5000,
+        "remaining": 4818,
+        "reset": 1791664918
+      }
+    }
+  }
+}
