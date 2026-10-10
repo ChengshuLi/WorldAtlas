@@ -218,7 +218,7 @@ jobs:
     needs: profile
     if: github.event.action != 'edited' && github.event.action != 'ready_for_review'
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     permissions:
       contents: read
       pull-requests: read
