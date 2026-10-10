@@ -818,7 +818,7 @@ export function acquireCurrentRebindOperands(snapshot,registry,originalRows,orig
  const sourceByTarget=new Map();for(const entry of targetSources){rebindKeys(entry,'target_id,path','Foreign target source binding');demand(targets.has(entry.target_id)&&resolver.paths.includes(entry.path)&&!sourceByTarget.has(entry.target_id),'Foreign/duplicate target source');sourceByTarget.set(entry.target_id,entry.path);}
  const paths=resolver.paths.filter(name=>targetSources.some(entry=>entry.path===name));
  for(const name of paths){const declared=resolver.sources[resolver.paths.indexOf(name)];begin(declared.decoded_bytes??declared.bytes);const frame=sourceFrame(name);currentTargets.push(...frame.found);sourceInputs.push(frame.input);phases.push({kind:'complete-current-target-source',path:name,complete_phase_bytes:reader.used,descriptors:reader.charged.size});reclaimCompletedRebindFrame();}
- currentTargets.sort((a,b)=>a.target_id.localeCompare(b.target_id));
+ currentTargets.sort((a,b)=>a.target_id<b.target_id?-1:a.target_id>b.target_id?1:0);
  demand(currentTargets.length===targets.size&&new Set(currentTargets.map(t=>t.target_id)).size===targets.size,'Missing/duplicate complete current targets');
  const continuity=snapshot.manifest.provenance?.successor_continuation;
  if(continuity?.issue===1520){
