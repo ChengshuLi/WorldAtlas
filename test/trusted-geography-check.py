@@ -331,6 +331,198 @@ def receipt_run(directory):
     return 0
 
 
+
+class LinuxTransitionControls(unittest.TestCase):
+    """Real Git/tree/body controls; mocked baseline proof is labelled orchestration-only."""
+    def setUp(self):
+        import importlib.util
+        from unittest import mock
+        self.mock = mock
+        spec = importlib.util.spec_from_file_location('trusted_linux_transition_control', DRAFT)
+        self.gate = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(self.gate)
+        scratch = ROOT / '.cache/trusted-linux-transition-fixtures'
+        scratch.mkdir(parents=True, exist_ok=True)
+        self.temporary = tempfile.TemporaryDirectory(dir=scratch)
+        self.addCleanup(self.temporary.cleanup)
+        self.repo = Path(self.temporary.name)
+        self.git('init', '-q')
+        self.git('config', 'user.name', 'synthetic-control')
+        self.git('config', 'user.email', 'control@example.invalid')
+        self.paths = [f'support/boundary-{i:02}.py' for i in range(30)]
+        self.vector_paths = self.paths[:3] + [f'methods/method-{i:02}.js' for i in range(25)]
+        for i, name in enumerate(self.vector_paths):
+            self.write(name, f'original-method-{i}\n'.encode())
+        for i, name in enumerate(self.paths[3:7]):
+            self.write(name, f'original-support-{i}\n'.encode())
+        self.write(self.gate.LINUX_SUPPORT_MANIFEST, b'current author identity\n')
+        self.write('data/ownership-selection.json', b'{}\n')
+        self.write('data/scientific-input.json', b'unchanged scientific bytes\n')
+        self.baseline = self.commit('synthetic trusted baseline')
+        vector = [{'path': name, 'bytes': (self.repo/name).stat().st_size,
+                   'sha256': hashlib.sha256((self.repo/name).read_bytes()).hexdigest()} for name in self.vector_paths]
+        before = {name: self.pin(self.baseline, name) for name in self.paths}
+        for i, name in enumerate(self.paths):
+            self.write(name, f"raise RuntimeError('candidate must never execute {i}')\n".encode())
+        self.candidate = self.commit('synthetic exact support transition')
+        reference = [{'path': name, 'before': before[name], 'after': self.pin(self.candidate, name)} for name in self.paths]
+        current = self.pin(self.baseline, self.gate.LINUX_SUPPORT_MANIFEST)
+        reference.append({'path': self.gate.LINUX_SUPPORT_MANIFEST, 'before': {**current, 'sha256': '0'*64}, 'after': current})
+        reference.sort(key=lambda row: row['path'])
+        # Explicit synthetic contract; separately test the production literal map.
+        self.gate.LINUX_SUPPORT_REFERENCE = reference
+        self.gate.LINUX_SUPPORT_OLD_VECTOR = vector
+        self.rehash()
+
+    def git(self, *args):
+        return subprocess.check_output(['git', '-C', str(self.repo), *args], stderr=subprocess.PIPE)
+
+    def write(self, name, body):
+        p = self.repo/name
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_bytes(body)
+
+    def commit(self, message):
+        self.git('add', '--all')
+        self.git('commit', '-qm', message)
+        return self.git('rev-parse', 'HEAD').decode().strip()
+
+    def pin(self, version, name):
+        row = self.git('ls-tree', '-z', version, '--', name)
+        if not row:
+            return None
+        mode, kind, oid = row.split(b'\t')[0].decode().split()
+        self.assertEqual(kind, 'blob')
+        body = self.git('cat-file', 'blob', oid)
+        return {'mode': mode, 'git_blob_oid': oid, 'bytes': len(body), 'sha256': hashlib.sha256(body).hexdigest()}
+
+    def rehash(self):
+        g = self.gate
+        g.LINUX_SUPPORT_REFERENCE_SHA256 = g.transition_digest(g.LINUX_SUPPORT_REFERENCE)
+        g.LINUX_SUPPORT_DELTA_SHA256 = g.transition_digest([r for r in g.LINUX_SUPPORT_REFERENCE if r['path'] != g.LINUX_SUPPORT_MANIFEST])
+        g.LINUX_SUPPORT_VECTOR_SHA256 = g.transition_digest(g.LINUX_SUPPORT_OLD_VECTOR, newline=True)
+
+    def check(self, candidate=None):
+        return self.gate.linux_support_transition(self.repo, self.baseline, candidate or self.candidate)
+
+    def test_exact_real_git_transition_and_no_candidate_execution(self):
+        proof = self.check()
+        self.assertEqual(proof['changed_paths'], 30)
+        self.assertEqual(proof['baseline_commit'], self.baseline)
+        self.assertEqual(proof['candidate_commit'], self.candidate)
+        self.assertFalse(proof['candidate_code_executed'])
+        self.assertFalse(proof['candidate_scientific_qualification'])
+        self.assertIsNone(self.gate.linux_support_transition(self.repo, self.baseline, self.baseline))
+
+    def test_production_literal_contract_is_complete_and_authentic(self):
+        namespace = {'__name__': 'non_cli_control'}
+        exec(compile(DRAFT.read_bytes(), str(DRAFT), 'exec'), namespace)
+        self.assertEqual(namespace['transition_digest'](namespace['LINUX_SUPPORT_OLD_VECTOR'], newline=True),
+                         '4ba0e3b564611248d428613c33bd60cf68a99233f2db572f3893a7d46dda429a')
+        self.assertEqual(namespace['transition_digest'](namespace['LINUX_SUPPORT_REFERENCE']),
+                         'ae94c33f7923a04648bb7da080c61fffef67cbe7f966127fc9869e3863d468ca')
+        self.assertEqual(len(namespace['LINUX_SUPPORT_REFERENCE']), 31)
+
+    def test_changed_body_missing_addition_and_wrong_mode_refuse(self):
+        for alteration in ['body', 'missing', 'mode']:
+            with self.subTest(alteration=alteration):
+                self.git('checkout', '-q', '--detach', self.candidate)
+                p = self.repo/self.paths[-1]
+                if alteration == 'body': p.write_bytes(b'changed same audience\n')
+                elif alteration == 'missing': p.unlink()
+                else: p.chmod(0o755)
+                self.assertIsNone(self.check(self.commit(alteration)))
+
+    def test_excluded_path_directory_and_symlink_cannot_hide_descendants(self):
+        for alteration in ['directory', 'symlink']:
+            with self.subTest(alteration=alteration):
+                self.git('checkout', '-q', '--detach', self.candidate)
+                p = self.repo/self.paths[-1]
+                p.unlink()
+                if alteration == 'directory':
+                    p.mkdir();(p/'hidden-child.py').write_bytes(b'not admitted\n')
+                else: p.symlink_to('../data/scientific-input.json')
+                self.assertIsNone(self.check(self.commit(alteration)))
+
+    def test_extra_data_method_rename_and_file_refuse(self):
+        for alteration in ['data', 'method', 'rename', 'extra']:
+            with self.subTest(alteration=alteration):
+                self.git('checkout', '-q', '--detach', self.candidate)
+                if alteration == 'data': self.write('data/scientific-input.json', b'changed\n')
+                elif alteration == 'method': self.write(self.vector_paths[-1], b'changed method\n')
+                elif alteration == 'rename': (self.repo/self.paths[-1]).rename(self.repo/'renamed.py')
+                else: self.write('outside.py', b'not admitted\n')
+                self.assertIsNone(self.check(self.commit(alteration)))
+
+    def test_preinstalled_manifest_identity_cannot_change(self):
+        self.write(self.gate.LINUX_SUPPORT_MANIFEST, b'wrong worker\n')
+        self.assertIsNone(self.check(self.commit('manifest drift')))
+
+    def test_literal_vector_reordering_truncation_and_descriptor_bounds_refuse(self):
+        g = self.gate
+        original = list(g.LINUX_SUPPORT_OLD_VECTOR)
+        for malformed in [original[::-1], original[:-1]]:
+            g.LINUX_SUPPORT_OLD_VECTOR = malformed
+            with self.assertRaisesRegex(ValueError, 'Incomplete or reordered'):
+                self.check()
+        g.LINUX_SUPPORT_OLD_VECTOR = original
+        g.LINUX_SUPPORT_REFERENCE[-1]['after']['bytes'] = g.MAX_BYTES + 1
+        self.rehash()
+        with self.mock.patch.object(g, 'git', side_effect=AssertionError('body opened before admission')):
+            with self.assertRaisesRegex(ValueError, 'bounds'):
+                self.check()
+
+    def test_whole_tree_git_failure_and_timeout_do_not_pass(self):
+        from types import SimpleNamespace
+        original = self.gate.subprocess.run
+        def refusal(command, **kwargs):
+            return SimpleNamespace(returncode=128) if 'diff-tree' in command else original(command, **kwargs)
+        with self.mock.patch.object(self.gate.subprocess, 'run', side_effect=refusal):
+            with self.assertRaisesRegex(ValueError, 'equivalence unavailable'):
+                self.check()
+        def timeout(command, **kwargs):
+            if 'diff-tree' in command:
+                raise subprocess.TimeoutExpired('git', 30)
+            return original(command, **kwargs)
+        with self.mock.patch.object(self.gate.subprocess, 'run', side_effect=timeout):
+            with self.assertRaises(subprocess.TimeoutExpired):
+                self.check()
+
+    def orchestrate(self, proof):
+        g = self.gate
+        inspect = g.inspect
+        with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='synthetic-checkout'), \
+             self.mock.patch.object(g, 'inventory', return_value=['synthetic-equal-input']), \
+             self.mock.patch.object(g, 'inspect', side_effect=proof) as called:
+            result = inspect(self.repo, self.baseline, self.candidate)
+            called.assert_called_once_with(self.repo, self.baseline, self.baseline)
+            return result
+
+    def test_orchestration_retains_actual_baseline_proof_identities(self):
+        proof = {'status': 'not-applicable', 'regressions': None,
+                 'baseline_commit': self.baseline, 'candidate_commit': self.baseline,
+                 'selected_native_report': {'synthetic_proof': True},
+                 'selected_continuous_report': {'synthetic_proof': True}}
+        result = self.orchestrate(lambda *args: proof)
+        self.assertIs(result['reused_baseline_proof'], proof)
+        self.assertEqual(result['candidate_commit'], self.candidate)
+        self.assertEqual(result['reused_baseline_proof']['candidate_commit'], self.baseline)
+        self.assertFalse(result['candidate_code_executed'])
+
+    def test_original_baseline_failure_and_blocked_report_propagate(self):
+        with self.assertRaisesRegex(RuntimeError, 'original baseline failure'):
+            self.orchestrate(lambda *args: (_ for _ in ()).throw(RuntimeError('original baseline failure')))
+        with self.assertRaisesRegex(ValueError, 'baseline proof did not pass'):
+            self.orchestrate(lambda *args: {'status': 'native-regressions-found', 'regressions': 1})
+
+    def test_candidate_input_inventory_mismatch_refuses_before_proof(self):
+        g = self.gate
+        with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='synthetic-checkout'), \
+             self.mock.patch.object(g, 'inventory', side_effect=[['before'], ['after']]):
+            with self.assertRaisesRegex(ValueError, 'changed geographic inputs'):
+                g.inspect(self.repo, self.baseline, self.candidate)
+
+
 if __name__ == '__main__':
     if '--receipts' in sys.argv:
         import argparse
