@@ -2565,15 +2565,15 @@
     },
     {
       "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/README.md",
-      "bytes": 2399,
-      "sha256": "b9ea4395397165f0f0605a61a3fa4e9d4e7bc943039615e93696ffdbbfc52616",
+      "bytes": 6091,
+      "sha256": "e801000a5153f59bcb26e62e72898813f579f159ac3b1e0cb2bccb83daeec4bb",
       "hash_kind": "file-bytes",
-      "role": "supporting-evidence"
+      "role": "generated-table"
     },
     {
       "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/build_evidence_manifest.py",
-      "bytes": 16499,
-      "sha256": "79dd10d790a0ffa0bb52d9b677d57786685424d417d618ebaa4cd7eabd9438ba",
+      "bytes": 19186,
+      "sha256": "a8a3f922afcb7e1cd14a70e46b1f9ec60148e636fb2050a0ec0bb8e38bd7055c",
       "hash_kind": "file-bytes",
       "role": "code"
     },
@@ -2654,7 +2654,7 @@
     {
       "id": "mapped-land-support-18bde5cd",
       "value": 1220.092864610161,
-      "unit": "m\u00b2 of retained GSHHG-relative mapped-land support (not physical land area)",
+      "unit": "m² of retained GSHHG-relative mapped-land support (not physical land area)",
       "vintage": "archived",
       "input_sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
       "evaluation_commit": "104091cfecd9c83a53f3e6e62f95b0a0c8074351"
@@ -2662,7 +2662,7 @@
     {
       "id": "mapped-land-support-6941aa6f",
       "value": 60037.24628970157,
-      "unit": "m\u00b2 of retained GSHHG-relative mapped-land support (not physical land area)",
+      "unit": "m² of retained GSHHG-relative mapped-land support (not physical land area)",
       "vintage": "archived",
       "input_sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
       "evaluation_commit": "104091cfecd9c83a53f3e6e62f95b0a0c8074351"
@@ -2670,7 +2670,7 @@
     {
       "id": "mapped-land-support-ac95cb3b",
       "value": 16971.940633394315,
-      "unit": "m\u00b2 of retained GSHHG-relative mapped-land support (not physical land area)",
+      "unit": "m² of retained GSHHG-relative mapped-land support (not physical land area)",
       "vintage": "archived",
       "input_sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
       "evaluation_commit": "104091cfecd9c83a53f3e6e62f95b0a0c8074351"
@@ -2678,7 +2678,7 @@
     {
       "id": "mapped-land-support-baf74325",
       "value": 74865.1460036213,
-      "unit": "m\u00b2 of retained GSHHG-relative mapped-land support (not physical land area)",
+      "unit": "m² of retained GSHHG-relative mapped-land support (not physical land area)",
       "vintage": "archived",
       "input_sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
       "evaluation_commit": "104091cfecd9c83a53f3e6e62f95b0a0c8074351"
@@ -2754,6 +2754,294 @@
       },
       "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
       "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_1_full_intersection_area_m2",
+      "value": 1220.0921404613182,
+      "unit": "m²",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_1_full_uncovered_area_m2",
+      "value": 0.0,
+      "unit": "m²",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_1_full_coverage_ratio",
+      "value": 1.0,
+      "unit": "ratio",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_1_simplified_intersection_area_m2",
+      "value": 1220.0921404613182,
+      "unit": "m²",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_1_simplified_uncovered_area_m2",
+      "value": 0.0,
+      "unit": "m²",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_1_simplified_coverage_ratio",
+      "value": 1.0,
+      "unit": "ratio",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_2_full_intersection_area_m2",
+      "value": 60037.52998979814,
+      "unit": "m²",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_2_full_uncovered_area_m2",
+      "value": 0.0,
+      "unit": "m²",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_2_full_coverage_ratio",
+      "value": 1.0,
+      "unit": "ratio",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_2_simplified_intersection_area_m2",
+      "value": 60037.52998979814,
+      "unit": "m²",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_2_simplified_uncovered_area_m2",
+      "value": 0.0,
+      "unit": "m²",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_2_simplified_coverage_ratio",
+      "value": 1.0,
+      "unit": "ratio",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_3_full_intersection_area_m2",
+      "value": 16972.20282105729,
+      "unit": "m²",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_3_full_uncovered_area_m2",
+      "value": 0.0,
+      "unit": "m²",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_3_full_coverage_ratio",
+      "value": 1.0,
+      "unit": "ratio",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_3_simplified_intersection_area_m2",
+      "value": 16972.20282105729,
+      "unit": "m²",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_3_simplified_uncovered_area_m2",
+      "value": 0.0,
+      "unit": "m²",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_3_simplified_coverage_ratio",
+      "value": 1.0,
+      "unit": "ratio",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_4_full_intersection_area_m2",
+      "value": 74863.10386863796,
+      "unit": "m²",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_4_full_uncovered_area_m2",
+      "value": 0.0,
+      "unit": "m²",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_4_full_coverage_ratio",
+      "value": 1.0,
+      "unit": "ratio",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_4_simplified_intersection_area_m2",
+      "value": 74863.10386863796,
+      "unit": "m²",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_4_simplified_uncovered_area_m2",
+      "value": 0.0,
+      "unit": "m²",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
+    },
+    {
+      "id": "alaska_west_variant_coverage_case_4_simplified_coverage_ratio",
+      "value": 1.0,
+      "unit": "ratio",
+      "input_sha256": "275b2975d1ccf934c055ec74536b94db6a008dfcf8ee4dd2807911e45fdecf2d",
+      "input_file": {
+        "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/phase-admission.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "405cfcec6e19d4bac2af8c2c6c3481d54899444b",
+      "vintage": "archived"
     }
   ],
   "metric_bindings": [
@@ -2806,28 +3094,148 @@
       "metric_id": "alaska_west_variant_coverage_literal_rule_fit_count",
       "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
       "json_pointer": "/summary/literal_rule_fit_count"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_1_full_intersection_area_m2",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/0/full/intersection_area_projected_m2_exact"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_1_full_uncovered_area_m2",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/0/full/candidate_uncovered_area_projected_m2_exact"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_1_full_coverage_ratio",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/0/full/candidate_coverage_ratio"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_1_simplified_intersection_area_m2",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/0/simplified/intersection_area_projected_m2_exact"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_1_simplified_uncovered_area_m2",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/0/simplified/candidate_uncovered_area_projected_m2_exact"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_1_simplified_coverage_ratio",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/0/simplified/candidate_coverage_ratio"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_2_full_intersection_area_m2",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/1/full/intersection_area_projected_m2_exact"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_2_full_uncovered_area_m2",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/1/full/candidate_uncovered_area_projected_m2_exact"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_2_full_coverage_ratio",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/1/full/candidate_coverage_ratio"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_2_simplified_intersection_area_m2",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/1/simplified/intersection_area_projected_m2_exact"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_2_simplified_uncovered_area_m2",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/1/simplified/candidate_uncovered_area_projected_m2_exact"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_2_simplified_coverage_ratio",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/1/simplified/candidate_coverage_ratio"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_3_full_intersection_area_m2",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/2/full/intersection_area_projected_m2_exact"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_3_full_uncovered_area_m2",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/2/full/candidate_uncovered_area_projected_m2_exact"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_3_full_coverage_ratio",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/2/full/candidate_coverage_ratio"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_3_simplified_intersection_area_m2",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/2/simplified/intersection_area_projected_m2_exact"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_3_simplified_uncovered_area_m2",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/2/simplified/candidate_uncovered_area_projected_m2_exact"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_3_simplified_coverage_ratio",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/2/simplified/candidate_coverage_ratio"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_4_full_intersection_area_m2",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/3/full/intersection_area_projected_m2_exact"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_4_full_uncovered_area_m2",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/3/full/candidate_uncovered_area_projected_m2_exact"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_4_full_coverage_ratio",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/3/full/candidate_coverage_ratio"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_4_simplified_intersection_area_m2",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/3/simplified/intersection_area_projected_m2_exact"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_4_simplified_uncovered_area_m2",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/3/simplified/candidate_uncovered_area_projected_m2_exact"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_4_simplified_coverage_ratio",
+      "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
+      "json_pointer": "/cases/3/simplified/candidate_coverage_ratio"
     }
   ],
   "summaries": [
     {
       "metric_id": "mapped-land-support-18bde5cd",
       "value": 1220.092864610161,
-      "unit": "m\u00b2 of retained GSHHG-relative mapped-land support (not physical land area)"
+      "unit": "m² of retained GSHHG-relative mapped-land support (not physical land area)"
     },
     {
       "metric_id": "mapped-land-support-6941aa6f",
       "value": 60037.24628970157,
-      "unit": "m\u00b2 of retained GSHHG-relative mapped-land support (not physical land area)"
+      "unit": "m² of retained GSHHG-relative mapped-land support (not physical land area)"
     },
     {
       "metric_id": "mapped-land-support-ac95cb3b",
       "value": 16971.940633394315,
-      "unit": "m\u00b2 of retained GSHHG-relative mapped-land support (not physical land area)"
+      "unit": "m² of retained GSHHG-relative mapped-land support (not physical land area)"
     },
     {
       "metric_id": "mapped-land-support-baf74325",
       "value": 74865.1460036213,
-      "unit": "m\u00b2 of retained GSHHG-relative mapped-land support (not physical land area)"
+      "unit": "m² of retained GSHHG-relative mapped-land support (not physical land area)"
     },
     {
       "metric_id": "alaska_west_variant_coverage_overlay_comparison_count",
@@ -2858,6 +3266,126 @@
       "metric_id": "alaska_west_variant_coverage_literal_rule_fit_count",
       "value": 4,
       "unit": "candidates satisfying both source coverage premises and per-candidate variant agreement"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_1_full_intersection_area_m2",
+      "value": 1220.0921404613182,
+      "unit": "m²"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_1_full_uncovered_area_m2",
+      "value": 0.0,
+      "unit": "m²"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_1_full_coverage_ratio",
+      "value": 1.0,
+      "unit": "ratio"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_1_simplified_intersection_area_m2",
+      "value": 1220.0921404613182,
+      "unit": "m²"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_1_simplified_uncovered_area_m2",
+      "value": 0.0,
+      "unit": "m²"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_1_simplified_coverage_ratio",
+      "value": 1.0,
+      "unit": "ratio"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_2_full_intersection_area_m2",
+      "value": 60037.52998979814,
+      "unit": "m²"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_2_full_uncovered_area_m2",
+      "value": 0.0,
+      "unit": "m²"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_2_full_coverage_ratio",
+      "value": 1.0,
+      "unit": "ratio"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_2_simplified_intersection_area_m2",
+      "value": 60037.52998979814,
+      "unit": "m²"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_2_simplified_uncovered_area_m2",
+      "value": 0.0,
+      "unit": "m²"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_2_simplified_coverage_ratio",
+      "value": 1.0,
+      "unit": "ratio"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_3_full_intersection_area_m2",
+      "value": 16972.20282105729,
+      "unit": "m²"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_3_full_uncovered_area_m2",
+      "value": 0.0,
+      "unit": "m²"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_3_full_coverage_ratio",
+      "value": 1.0,
+      "unit": "ratio"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_3_simplified_intersection_area_m2",
+      "value": 16972.20282105729,
+      "unit": "m²"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_3_simplified_uncovered_area_m2",
+      "value": 0.0,
+      "unit": "m²"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_3_simplified_coverage_ratio",
+      "value": 1.0,
+      "unit": "ratio"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_4_full_intersection_area_m2",
+      "value": 74863.10386863796,
+      "unit": "m²"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_4_full_uncovered_area_m2",
+      "value": 0.0,
+      "unit": "m²"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_4_full_coverage_ratio",
+      "value": 1.0,
+      "unit": "ratio"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_4_simplified_intersection_area_m2",
+      "value": 74863.10386863796,
+      "unit": "m²"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_4_simplified_uncovered_area_m2",
+      "value": 0.0,
+      "unit": "m²"
+    },
+    {
+      "metric_id": "alaska_west_variant_coverage_case_4_simplified_coverage_ratio",
+      "value": 1.0,
+      "unit": "ratio"
     }
   ],
   "conclusions": [
@@ -2942,6 +3470,157 @@
     {
       "path": "research/geography/north-america-gap-batch-20261009/vintages/coverage-run-20261010-02/source-variant-coverage.json",
       "status": "added"
+    }
+  ],
+  "rendered_tables": [
+    {
+      "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/README.md",
+      "rows": [
+        {
+          "metric_id": "alaska_west_variant_coverage_case_1_full_intersection_area_m2",
+          "line": 22,
+          "template": "| `physical-component:18bde5cda8660806ef3cf9f851a006be827c80bc6ebf9cc5a92abdfc3f2249d0` | full | Projected intersection area | {value} | m² |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_1_full_uncovered_area_m2",
+          "line": 23,
+          "template": "| `physical-component:18bde5cda8660806ef3cf9f851a006be827c80bc6ebf9cc5a92abdfc3f2249d0` | full | Uncovered candidate area | {value} | m² |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_1_full_coverage_ratio",
+          "line": 24,
+          "template": "| `physical-component:18bde5cda8660806ef3cf9f851a006be827c80bc6ebf9cc5a92abdfc3f2249d0` | full | Coverage ratio | {value} | ratio |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_1_simplified_intersection_area_m2",
+          "line": 25,
+          "template": "| `physical-component:18bde5cda8660806ef3cf9f851a006be827c80bc6ebf9cc5a92abdfc3f2249d0` | simplified | Projected intersection area | {value} | m² |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_1_simplified_uncovered_area_m2",
+          "line": 26,
+          "template": "| `physical-component:18bde5cda8660806ef3cf9f851a006be827c80bc6ebf9cc5a92abdfc3f2249d0` | simplified | Uncovered candidate area | {value} | m² |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_1_simplified_coverage_ratio",
+          "line": 27,
+          "template": "| `physical-component:18bde5cda8660806ef3cf9f851a006be827c80bc6ebf9cc5a92abdfc3f2249d0` | simplified | Coverage ratio | {value} | ratio |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_2_full_intersection_area_m2",
+          "line": 28,
+          "template": "| `physical-component:6941aa6f88a5581bf95d63718e554f6f37fb1d9fa70db7636b3b3f2914d49f6a` | full | Projected intersection area | {value} | m² |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_2_full_uncovered_area_m2",
+          "line": 29,
+          "template": "| `physical-component:6941aa6f88a5581bf95d63718e554f6f37fb1d9fa70db7636b3b3f2914d49f6a` | full | Uncovered candidate area | {value} | m² |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_2_full_coverage_ratio",
+          "line": 30,
+          "template": "| `physical-component:6941aa6f88a5581bf95d63718e554f6f37fb1d9fa70db7636b3b3f2914d49f6a` | full | Coverage ratio | {value} | ratio |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_2_simplified_intersection_area_m2",
+          "line": 31,
+          "template": "| `physical-component:6941aa6f88a5581bf95d63718e554f6f37fb1d9fa70db7636b3b3f2914d49f6a` | simplified | Projected intersection area | {value} | m² |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_2_simplified_uncovered_area_m2",
+          "line": 32,
+          "template": "| `physical-component:6941aa6f88a5581bf95d63718e554f6f37fb1d9fa70db7636b3b3f2914d49f6a` | simplified | Uncovered candidate area | {value} | m² |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_2_simplified_coverage_ratio",
+          "line": 33,
+          "template": "| `physical-component:6941aa6f88a5581bf95d63718e554f6f37fb1d9fa70db7636b3b3f2914d49f6a` | simplified | Coverage ratio | {value} | ratio |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_3_full_intersection_area_m2",
+          "line": 34,
+          "template": "| `physical-component:ac95cb3b778a830c88ed69150c06716eed6014ab0c067331c3196fb79c274df4` | full | Projected intersection area | {value} | m² |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_3_full_uncovered_area_m2",
+          "line": 35,
+          "template": "| `physical-component:ac95cb3b778a830c88ed69150c06716eed6014ab0c067331c3196fb79c274df4` | full | Uncovered candidate area | {value} | m² |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_3_full_coverage_ratio",
+          "line": 36,
+          "template": "| `physical-component:ac95cb3b778a830c88ed69150c06716eed6014ab0c067331c3196fb79c274df4` | full | Coverage ratio | {value} | ratio |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_3_simplified_intersection_area_m2",
+          "line": 37,
+          "template": "| `physical-component:ac95cb3b778a830c88ed69150c06716eed6014ab0c067331c3196fb79c274df4` | simplified | Projected intersection area | {value} | m² |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_3_simplified_uncovered_area_m2",
+          "line": 38,
+          "template": "| `physical-component:ac95cb3b778a830c88ed69150c06716eed6014ab0c067331c3196fb79c274df4` | simplified | Uncovered candidate area | {value} | m² |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_3_simplified_coverage_ratio",
+          "line": 39,
+          "template": "| `physical-component:ac95cb3b778a830c88ed69150c06716eed6014ab0c067331c3196fb79c274df4` | simplified | Coverage ratio | {value} | ratio |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_4_full_intersection_area_m2",
+          "line": 40,
+          "template": "| `physical-component:baf74325795539a3fcc7d27feb2a04c376a0e1d3c3287eba435ea85b99607be6` | full | Projected intersection area | {value} | m² |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_4_full_uncovered_area_m2",
+          "line": 41,
+          "template": "| `physical-component:baf74325795539a3fcc7d27feb2a04c376a0e1d3c3287eba435ea85b99607be6` | full | Uncovered candidate area | {value} | m² |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_4_full_coverage_ratio",
+          "line": 42,
+          "template": "| `physical-component:baf74325795539a3fcc7d27feb2a04c376a0e1d3c3287eba435ea85b99607be6` | full | Coverage ratio | {value} | ratio |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_4_simplified_intersection_area_m2",
+          "line": 43,
+          "template": "| `physical-component:baf74325795539a3fcc7d27feb2a04c376a0e1d3c3287eba435ea85b99607be6` | simplified | Projected intersection area | {value} | m² |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_4_simplified_uncovered_area_m2",
+          "line": 44,
+          "template": "| `physical-component:baf74325795539a3fcc7d27feb2a04c376a0e1d3c3287eba435ea85b99607be6` | simplified | Uncovered candidate area | {value} | m² |",
+          "decimals": 12
+        },
+        {
+          "metric_id": "alaska_west_variant_coverage_case_4_simplified_coverage_ratio",
+          "line": 45,
+          "template": "| `physical-component:baf74325795539a3fcc7d27feb2a04c376a0e1d3c3287eba435ea85b99607be6` | simplified | Coverage ratio | {value} | ratio |",
+          "decimals": 12
+        }
+      ]
     }
   ]
 }

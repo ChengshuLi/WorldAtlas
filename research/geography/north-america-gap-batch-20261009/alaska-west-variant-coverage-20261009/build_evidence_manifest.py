@@ -128,16 +128,32 @@ def main() -> None:
     manifest["sources"].append(source)
 
     case_lines = []
-    for case in result["cases"]:
+    detail_metrics = []
+    for case_index, case in enumerate(result["cases"]):
         full = case["full"]
         simple = case["simplified"]
         p = case["literal_retained_county_coverage_premises"]
         case_lines.append(
-            f"| `{case['component_id']}` | {full['status']} / {full['candidate_covered_exactly']} / {full['candidate_uncovered_area_projected_m2_exact']} / {full['candidate_coverage_ratio']} | "
-            f"{simple['status']} / {simple['candidate_covered_exactly']} / {simple['candidate_uncovered_area_projected_m2_exact']} / {simple['candidate_coverage_ratio']} | "
+            f"| `{case['component_id']}` | {full['status']} / {full['candidate_covered_exactly']} | "
+            f"{simple['status']} / {simple['candidate_covered_exactly']} | "
             f"{case['source_variants_agree_on_coverage_predicate_outputs']} | {p['candidate_source_variants_agree_for_this_candidate']} |"
         )
-    readme = "\n".join([
+        for variant in ("full", "simplified"):
+            for suffix, field, label, unit in (
+                ("intersection_area_m2", "intersection_area_projected_m2_exact", "Projected intersection area", "m²"),
+                ("uncovered_area_m2", "candidate_uncovered_area_projected_m2_exact", "Uncovered candidate area", "m²"),
+                ("coverage_ratio", "candidate_coverage_ratio", "Coverage ratio", "ratio"),
+            ):
+                detail_metrics.append({
+                    "metric_id": metric_id(f"case_{case_index + 1}_{variant}_{suffix}"),
+                    "value": case[variant][field],
+                    "unit": unit,
+                    "label": label,
+                    "component_id": case["component_id"],
+                    "variant": variant,
+                    "json_pointer": f"/cases/{case_index}/{variant}/{field}",
+                })
+    readme_lines = [
         "# Aleutians West retained-source variant coverage",
         "",
         "This source-only evidence adds the eight first-time coverage measurements authorized by the amended #1630 work item. It uses the four exact candidates from the merged #1653 handoff and the already-retained full and simplified USA ADM2 variants from release 9469f09.",
@@ -146,19 +162,35 @@ def main() -> None:
         "",
         "The unchanged `intersections()` overlay method is used for each candidate/source pair. The literal coverage rule is `status=measured`, `candidate_covered_exactly=true`, `candidate_uncovered_area_projected_m2_exact=0`, and `candidate_coverage_ratio=1`. Per-candidate variant agreement compares measured coverage outputs, including overlap and exact projected areas. It requires no whole-source or clipped-geometry equality.",
         "",
-        "| Component | Full: status / covered / uncovered m² / ratio | Simplified: status / covered / uncovered m² / ratio | Coverage outputs agree | Literal candidate agreement |",
+        "| Component | Full result | Simplified result | Coverage outputs agree | Literal candidate agreement |",
         "|---|---|---|---:|---:|",
         *case_lines,
+        "",
+        "### Per-variant numeric results",
+        "",
+        "Each value below is bound to the exact scalar in the generated result JSON. Table values display 12 decimal places; exact source numbers remain in the JSON.",
+        "",
+        "| Component | Variant | Measurement | Value | Unit |",
+        "|---|---|---|---:|---|",
+    ]
+    rendered_rows = []
+    for metric in detail_metrics:
+        line = len(readme_lines) + 1
+        template = f"| `{metric['component_id']}` | {metric['variant']} | {metric['label']} | {{value}} | {metric['unit']} |"
+        readme_lines.append(template.replace("{value}", f"{metric['value']:.12f}"))
+        rendered_rows.append({"metric_id": metric["metric_id"], "line": line, "template": template, "decimals": 12})
+    readme_lines.extend([
         "",
         f"Summary: {result['summary']['variant_comparisons']} overlays across {result['summary']['candidate_count']} candidates; full coverage premises pass for {result['summary']['full_coverage_pass_count']}; simplified coverage premises pass for {result['summary']['simplified_coverage_pass_count']}; coverage outputs agree for {result['summary']['candidate_variant_agreement_count']}; candidate-level source agreement passes for {result['summary']['literal_source_variant_agreement_count']}; all three literal premises fit for {result['summary']['literal_rule_fit_count']}.",
         "",
         "This result changes no source, geography, physical classification, native relation, roster, conservation, production record or approval. See `vintages/coverage-run-20261010-02/source-variant-coverage.json` and its `publication.json` for the complete exact values and execution pins.",
         "",
     ])
+    readme = "\n".join(readme_lines)
     atomic_write(README, readme.encode("utf-8"), exclusive=True)
 
     generated_roles = {
-        f"{PACKET}/README.md": "supporting-evidence",
+        f"{PACKET}/README.md": "generated-table",
         f"{PACKET}/build_evidence_manifest.py": "code",
         f"{PACKET}/build_phase_admission.py": "code",
         f"{PACKET}/phase-admission.json": "phase-admission",
@@ -211,6 +243,21 @@ def main() -> None:
                                                  "literal_rule_fit_count": "literal_rule_fit_count",
                                              }[name]})
         manifest["summaries"].append({"metric_id": identity, "value": value, "unit": unit})
+
+    for metric in detail_metrics:
+        identity = metric["metric_id"]
+        manifest["metrics"] = [row for row in manifest["metrics"] if row["id"] != identity]
+        manifest["metric_bindings"] = [row for row in manifest["metric_bindings"] if row["metric_id"] != identity]
+        manifest["summaries"] = [row for row in manifest["summaries"] if row["metric_id"] != identity]
+        manifest["metrics"].append({"id": identity, "value": metric["value"], "unit": metric["unit"],
+                                     "input_sha256": input_sha, "input_file": {"path": ADMISSION, "commit": "candidate"},
+                                     "evaluation_commit": run_commit, "vintage": "archived"})
+        manifest["metric_bindings"].append({"metric_id": identity, "path": RESULT,
+                                             "json_pointer": metric["json_pointer"]})
+        manifest["summaries"].append({"metric_id": identity, "value": metric["value"], "unit": metric["unit"]})
+
+    manifest["rendered_tables"] = [table for table in manifest.get("rendered_tables", []) if table.get("path") != README]
+    manifest["rendered_tables"].append({"path": README, "rows": rendered_rows})
 
     if not any(row["id"] == "alaska-west-four-retained-variant-coverage-v1" for row in manifest["methods"]):
         manifest["methods"].append({
