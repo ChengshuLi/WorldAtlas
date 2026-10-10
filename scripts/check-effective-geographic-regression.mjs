@@ -298,7 +298,8 @@ const REGISTERED_ARTIFACT_REVIEW_GETS=Object.freeze({
   '87ab56e1354dd8a8fda532bfa008436abd35c6c506f0e0685eaa2f2f07f59a8a':Object.freeze({review_id:6090739618,github_user_id:6732996,issue:1520,releaseCatalogue:true,entryProfiles:true,cloudflareProfile:true}),
   '8e921a42d1ea622f45b794ff18259cfb3ff923fc4b0b2232f4866aebb18ac1ed':Object.freeze({review_id:6091607261,github_user_id:6732996,issue:1520,releaseCatalogue:true,entryProfiles:true,cloudflareProfile:true}),
   '5f6ca30596eec00b3ed4b328d6edcf094a0bd235714be6c08d29cf2d2f1564be':Object.freeze({review_id:6091729508,github_user_id:6732996,issue:1520,releaseCatalogue:true,entryProfiles:true,cloudflareProfile:true}),
-  'fb271c9853da87165b62b65c1fbe6755bf87416552117ef759e608f7641e4184':Object.freeze({review_id:6092465135,github_user_id:6732996,issue:1520,releaseCatalogue:true,entryProfiles:true,cloudflareProfile:true})
+  'fb271c9853da87165b62b65c1fbe6755bf87416552117ef759e608f7641e4184':Object.freeze({review_id:6092465135,github_user_id:6732996,issue:1520,releaseCatalogue:true,entryProfiles:true,cloudflareProfile:true}),
+  'e25ebb5dd01f0f07ffe95d59c66baa308bd271e855f0d62cd203afd59e4ab569':Object.freeze({review_id:6092997716,github_user_id:6732996,issue:1520,releaseCatalogue:true,entryProfiles:true,cloudflareProfile:true})
 });
 // Validate the complete ordered installer catalogue as immutable provenance.
 // Reading these descriptors does not claim this gate installs their payloads.
