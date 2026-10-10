@@ -23,7 +23,7 @@
       },
       {
         "path": "coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/facts.json",
-        "commit": "b2a6b9e5b7e0cfe54f79ba174b51925c67ea6e39",
+        "commit": "07a44ef6ee4e4ef7bd09c110388e4c936784f739",
         "sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778"
       }
     ]
@@ -87,7 +87,9 @@
         }
       },
       "observation_dates": "heterogeneous; no per-feature date in exact retained records",
-      "per_feature_dates_absent_from_records": true
+      "per_feature_dates_absent_from_records": true,
+      "license_statement": "The cited GSHHG README describes World Vector Shoreline (WVS) as a public-domain data set. This records the source documentation statement only and adds no legal determination.",
+      "license_source_url": "https://github.com/GenericMappingTools/gshhg-gmt/blob/master/README.md"
     },
     "administrative": {
       "product": "geoBoundaries gbOpen USA ADM2, Counties, 2018",
