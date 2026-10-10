@@ -1,0 +1,14 @@
+import {execFileSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
+import {gunzipSync} from 'node:zlib';
+const [repo,commit]=process.argv.slice(2);
+const sha=x=>createHash('sha256').update(x).digest('hex');
+const canonical=v=>Array.isArray(v)?v.map(canonical):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canonical(v[k])])):v;
+const valueSha=v=>sha(Buffer.from(JSON.stringify(canonical(v))+'\n'));
+const read=(path,expected)=>{const b=execFileSync('git',['-C',repo,'show',`${commit}:${path}`],{maxBuffer:33554432});if(expected&&sha(b)!==expected)throw Error('Input drift');return b;};
+const certPath='coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/current-f02-coordinate/certificate.json.gz';
+const certBytes=read(certPath);const decoded=gunzipSync(certBytes,{maxOutputLength:33554432});const cert=JSON.parse(decoded);
+const source=cert.inputs.find(x=>x.path==='data/geography/part-29.json').source;
+const raw=read(source.path,source.sha256);const body=gunzipSync(raw,{maxOutputLength:33554432});if(sha(body)!==source.decoded_sha256)throw Error('Decoded drift');const features=JSON.parse(body).features;
+const rows=['atlas:physical:CAN-45:NUN','atlas:physical:CAN-30:NUN'].map(id=>{const r=cert.entries.find(x=>x[0]===id);const f=features[r[5]];if(f.id!==id||valueSha(f)!==r[6]||valueSha(f.geometry)!==r[7])throw Error('Feature mismatch');return {id,ordinal:r[5],whole_feature_sha256:r[6],geometry_sha256:r[7]};});
+process.stdout.write(JSON.stringify({version:1,baseline_commit:commit,certificate:{path:certPath,bytes:certBytes.length,sha256:sha(certBytes),decoded_bytes:decoded.length,decoded_sha256:sha(decoded)},selected_part:source,rows,method:'Existing selected-neighbor valueSha convention: recursively key-sorted JSON.stringify plus newline; exact source whole bytes and ordinal checked.'},null,2)+'\n');
