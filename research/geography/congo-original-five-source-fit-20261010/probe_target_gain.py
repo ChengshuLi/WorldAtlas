@@ -45,7 +45,10 @@ class PinnedBaseline(namespace["Baseline"]):
     def _git(self, *args):
         return git(*args)
 base = PinnedBaseline(ROOT, plan["baseline_commit"], plan["files"])
-base.admit("runtime-and-controls", runtime["logical_bytes"] + len(code) + len(plan_raw) + len(runtime_raw))
+for runtime_file in runtime["files"]:
+    base.admit("runtime:" + runtime_file["path"], runtime_file["bytes"])
+for name, raw in [("producer", code), ("plan", plan_raw), ("runtime-lock", runtime_raw)]:
+    base.admit("execution-control:" + name, len(raw))
 base.admit("output-reservation", OUTPUT_RESERVE)
 dest = namespace["NewVintage"](base, OWN + "/", VINTAGE, ["result.json"])
 canon = namespace["canonical_json"]
