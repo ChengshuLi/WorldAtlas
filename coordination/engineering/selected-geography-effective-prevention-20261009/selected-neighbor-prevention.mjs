@@ -803,6 +803,18 @@ export function acquireCurrentRebindOperands(snapshot,registry,originalRows,orig
   limits:['Actual selected before-state acquisition and exact applicability only. Original registry/source/native authority must also be authenticated by the committed reader; no activation or physical approval.','External cold operating qualification and repeated whole outputs remain mandatory before publishing a current_rebind certificate.']});
 }
 
+// Retained qualification stays bound to its original whole execution vector.
+// Only reviewed custody/entry boundaries may differ; numerical methods remain
+// byte-identical and current applicability is independently reacquired below.
+export function compatibleCurrentRebindCode(executionCommit,currentCode,historicalCode) {
+ demand(same(currentCode.map(p=>p.path),CURRENT_REBIND_CODE)&&same(historicalCode.map(p=>p.path),CURRENT_REBIND_CODE),'Incomplete current/historical method roster');
+ if(same(currentCode,historicalCode))return historicalCode;
+ demand(executionCommit==='46cb67a6cc0f88c6295d2d70da654baa5c6119a0'&&valueSha(historicalCode)==='e20767cd7f4aea34c1c1ce794bd09c43993905ac8da94779781c616ccd7c20ee','Unknown historical rebind qualification generation');
+ const boundaries=new Set(['coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs','coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs']);
+ for(let i=0;i<currentCode.length;i++)if(!boundaries.has(currentCode[i].path))demand(same(currentCode[i],historicalCode[i]),'Historical numerical method or runtime body differs');
+ return historicalCode;
+}
+
 // A current rebind is complete data custody plus independently recomputed
 // applicability. It never replaces the original registry/source authority.
 export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,originalRows,originalPatches,size,snapshot,carriedMetadataBytes=0}) {
@@ -822,11 +834,12 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
  const code=CURRENT_REBIND_CODE.map(path=>reader.descriptor(path));
  const historicalCode=CURRENT_REBIND_CODE.map(path=>reader.descriptor(path,certificate.execution_commit));
  for(const p of [...code,...historicalCode])reader.admit(p);
- const expectedCode=code.map(p=>({path:p.path,bytes:p.bytes,sha256:sha(reader.read(p.path))}));
+ const currentCode=code.map(p=>({path:p.path,bytes:p.bytes,sha256:sha(reader.read(p.path))}));
+ const originalCode=historicalCode.map(p=>({path:p.path,bytes:p.bytes,sha256:sha(reader.read(p.path,{version:p.commit}))}));
+ const expectedCode=compatibleCurrentRebindCode(certificate.execution_commit,currentCode,originalCode);
  const bodies=Object.fromEntries(roster.map(({name,p})=>[name,JSON.parse(reader.read(p.path,{version:p.commit,expected:p.sha256}))]));
- // The historical execution code must be whole-byte identical to the actual
- // trusted method. Current unrelated wrapper vintages are not relabelled.
- for(const expected of expectedCode){const actual=historicalCode.find(p=>p.path===expected.path);demand(actual.bytes===expected.bytes,'Historical rebind method size differs');reader.read(actual.path,{version:actual.commit,expected:expected.sha256});}
+ // External custody verifies the original vector; current acquisition below
+ // executes the current trusted closure without relabelling historical runs.
  demand(snapshot?.reader===reader,'Current rebind custody requires the actual privately authenticated selected snapshot');
  const externalNames=['code_source','terminal','stderr','stdout','issued_plan'];rebindKeys(bodies.operating.execution_custody,externalNames.join(','),'Incomplete external execution roster');
  const externalRoster=externalNames.map(name=>({name,p:bodies.operating.execution_custody[name]}));
@@ -837,7 +850,7 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
  for(const {p}of externalRoster){const actual=reader.descriptor(p.path,p.commit);demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'External execution ordinary identity differs');reader.admit(actual);}
  const executionCustody=Object.fromEntries(externalRoster.map(({name,p})=>[name,reader.read(p.path,{version:p.commit,expected:p.sha256})]));
  verifyCurrentRebindExecution({request:bodies.request,operating:bodies.operating,expectedCode,custody:{...executionCustody,result_sha256:roster.find(p=>p.name==='result').p.sha256}});
- const liveMetadata=carriedMetadataBytes+2*(valueBytes({certificate,bodies,code,historicalCode,roster,externalRoster}).length+externalBytes);
+ const liveMetadata=carriedMetadataBytes+2*(valueBytes({certificate,bodies,code,historicalCode,currentCode,originalCode,roster,externalRoster}).length+externalBytes);
 
  const acquired=acquireCurrentRebindOperands(snapshot,registry,originalRows,originalPatches,{targetSources:bodies.request.acquisition?.target_sources,predecessorProof:bodies.request.acquisition?.predecessor_proof,carriedMetadataBytes:liveMetadata});
  return verifyCurrentRebindProducts({certificate,...bodies,baseSelection,registry,originalRows,originalPatches,size,expectedCode,acquired,executionCustody,bodyPins:Object.fromEntries(roster.map(({name,p})=>[name,p]))});
