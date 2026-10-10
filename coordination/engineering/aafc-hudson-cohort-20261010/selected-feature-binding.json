@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "baseline_commit": "c28077da970ae39550e5edea790a266b060d3de5",
+  "certificate": {
+    "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/current-f02-coordinate/certificate.json.gz",
+    "bytes": 7515239,
+    "sha256": "23aef083ceeabff7d76e7da2a6d047e9dc30b40a3e9b03e122492c4d41c9cd7e",
+    "decoded_bytes": 18414409,
+    "decoded_sha256": "60cc10692d3133b8141e659b932fe1f1d6c14286a6b80009c47b324c6bcaaf23"
+  },
+  "selected_part": {
+    "bytes": 3353763,
+    "commit": "ee684e3145079ff93f68520e3c17837789be5b0c",
+    "decoded_bytes": 12932719,
+    "decoded_sha256": "723d16eb63b7f2dcd8260a516eac6571a7ef1eaaf9bff3c926e0c63235b98fd3",
+    "encoding": "gzip",
+    "git_blob_oid": "d3f17ccd8eecca88b16f2bbbf075320b6d555aea",
+    "kind": "selected-exact-encoded-override",
+    "logical_path": "data/geography/part-29.json",
+    "mode": "100644",
+    "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz",
+    "sha256": "d7665a1fdf68f0626c7e28da9ac0e40f4e35aaeacdf91bad4ab8e2d77221bc49"
+  },
+  "rows": [
+    {
+      "id": "atlas:physical:CAN-45:NUN",
+      "ordinal": 1226,
+      "whole_feature_sha256": "b0de1e8c6aa22920bff0fb05747a7582b826dcac3e0a5e7c384468d077901539",
+      "geometry_sha256": "421043ea8bc3d1d0070e949bcb258bcc7fab1c5a7fda4fabc23e2132db096147"
+    },
+    {
+      "id": "atlas:physical:CAN-30:NUN",
+      "ordinal": 1214,
+      "whole_feature_sha256": "d8f4cdb9047f4929b340dff2457a91cd266d1059cd1079b154c6854e1ae8969b",
+      "geometry_sha256": "2029f6d0fe114d903ef91767027811e43bdda9163c529a7d4290197dfd13c98f"
+    }
+  ],
+  "method": "Existing selected-neighbor valueSha convention: recursively key-sorted JSON.stringify plus newline; exact source whole bytes and ordinal checked."
+}
