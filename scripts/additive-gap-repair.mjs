@@ -1550,10 +1550,31 @@ function requireAdministrativeSourceBaseline(repo,{issued,request,resolutions,bu
   }
 }
 
+// Administrative-only sequential lifetime accounting. Authentication phase has
+// no final assets; production retains the FULL requested output allowance.
+function administrativeLifetimeBudget(inputs,{runtimeBytes,outputReserve}) {
+  const all=[...inputs],extras=[];let releasedBytes=0,transitioned=false,releaseReceipt=[],retainedReceipt=[],authenticationAdmission=null;
+  let current=candidateBudget(all,{reserveBytes:runtimeBytes+4194304+131072});
+  return {add(item){current.add(item);extras.push(item);},snapshot(){return {...current.snapshot(),
+    lifetime:{phase:transitioned?'native-production':'whole-operand-authentication',released_raw_bytes:releasedBytes,
+      full_final_output_reserve:outputReserve,authentication_admission:authenticationAdmission,raw_release_receipt:releaseReceipt,retained_closure_charges:retainedReceipt}};},produce(released,retained){
+    demand(!transitioned&&released.every(row=>Number.isSafeInteger(row.bytes)&&row.bytes>=0),'Invalid native lifetime transition');
+    // Keep every input charge except exact decoded/raw buffers made unreachable.
+    // Descriptor charges are retained as zero-byte entries; original pins remain
+    // in facts and independently reauthenticated source-premise custody.
+    const remaining=all.map(item=>({...item}));
+    for(const row of released){const entry=remaining[row.cost_ordinal];
+      demand(entry&&entry.bytes===row.bytes,'Changed released whole operand cost');entry.bytes=0;releasedBytes+=row.bytes;}
+    authenticationAdmission=current.snapshot();
+    current=candidateBudget([...remaining,...extras,...retained],{reserveBytes:runtimeBytes+outputReserve+131072});
+    releaseReceipt=released.map(row=>({...row}));retainedReceipt=retained.map(row=>({...row}));transitioned=true;
+  }};
+}
+
 function administrativeBatchProposalStage(repo,request,resolutions,budget) {
-  const spec=request.additive,inputs=new Map(),equal=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
+  const spec=request.additive,inputs=new Map(),releasedPaths=new Set(),accessedPaths=new Set(),equal=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
   for(const pin of spec.inputs){demand(!inputs.has(pin.path),'Duplicate batch operand');inputs.set(pin.path,{pin,body:readPin(repo,pin)});}
-  const get=name=>{if(!inputs.has(name)){const pin=request.baseline.pins.find(pin=>pin.path===name);demand(pin,'Missing complete batch operand');inputs.set(name,{pin,body:readPin(repo,pin)});}return inputs.get(name);};
+  const get=name=>{demand(!releasedPaths.has(name),'Released authenticate-only native operand cannot be reopened');accessedPaths.add(name);if(!inputs.has(name)){const pin=request.baseline.pins.find(pin=>pin.path===name);demand(pin,'Missing complete batch operand');inputs.set(name,{pin,body:readPin(repo,pin)});}return inputs.get(name);};
   const json=name=>JSON.parse(get(name).body),publication=json(spec.publication_path),facts=json(spec.facts_path),issued=json(spec.source_request_path),operating=json(spec.operating_path);
   demand(publication.complete===true&&publication.facts.bytes===get(spec.facts_path).pin.bytes&&publication.facts.sha256===get(spec.facts_path).pin.sha256
     &&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(key=>publication.inventory[key]===get(spec.inventory_path).pin[key]),'Incomplete batch source predecessor');
@@ -1573,6 +1594,41 @@ function administrativeBatchProposalStage(repo,request,resolutions,budget) {
   demand(equal(sourceRows.map(row=>row.component_id),spec.scope_ids)&&equal(spec.scope_ids,issued.source_rule.expected_ids)
     &&sourceRows.length===facts.components,'Batch selection omitted/reordered a source candidate');
   validateAdministrativeNativeRoster({facts,issued,spec,sourceRows});
+  if(typeof budget.produce==='function'){
+  // Whole originals were authenticated above and the original source closure,
+  // status/order/current-baseline joins are complete. Only named native operands
+  // below can be consumed subsequently; every other raw buffer has no parsed
+  // descendant and is released. get() forbids a later accidental reacquisition.
+  const livePaths=new Set([...accessedPaths,spec.manifest_path,spec.bounds_path,spec.latitudes_path,spec.facts_path,
+    ...issued.source_rule.target_banks,...sourceRows.map(row=>row.source_case?.source?.path),
+    ...spec.owner_parts.map(row=>row.path)]);
+  const released=[];let costOrdinal=budget.nativeStageCostStart;
+  for(const pin of spec.inputs){const costs=pinCost(pin),entry=inputs.get(pin.path);
+    if(!livePaths.has(pin.path)){
+      const decodedOrdinal=costOrdinal+(pin.uncompressed_bytes===undefined?0:1);
+      const bytes=pin.uncompressed_bytes??pin.bytes;
+      demand(entry.body.length===bytes,'Released whole buffer length drift');
+      released.push({cost_ordinal:decodedOrdinal,bytes,path:pin.path,sha256:pin.sha256});
+      entry.body=null;inputs.delete(pin.path);releasedPaths.add(pin.path);
+    }
+    costOrdinal+=costs.length;
+  }
+  // Charge complete owner/target object closures separately from retained raw
+  // bodies, and the full latitude/native word arrays separately from raw input.
+  // Existing acquisition scratch allowance covers the small source inventory,
+  // one complete source-case parsed scope at a time and candidate/window scratch.
+  const retainedPins=[spec.bounds_path,...issued.source_rule.target_banks,spec.latitudes_path,
+    ...spec.owner_parts.map(row=>row.path)].map(name=>get(name).pin);
+  const parsedMetadata=[...accessedPaths].filter(name=>!retainedPins.some(pin=>pin.path===name))
+    .map(name=>get(name).pin);
+  const casePins=[...new Set(sourceRows.map(row=>row.source_case?.source?.path))].map(name=>get(name).pin);
+  // One whole sourceScope is parsed inside the candidate loop and becomes dead
+  // on iteration exit; its maximum whole closure is separately charged.
+  budget.produce(released,[...retainedPins.map(pin=>({bytes:pin.uncompressed_bytes??pin.bytes,path:pin.path,role:'whole-parsed-or-native-array-closure'})),
+    ...parsedMetadata.map(pin=>({bytes:pin.uncompressed_bytes??pin.bytes,path:pin.path,role:'retained-parsed-predecessor-metadata'})),
+    {bytes:Math.max(0,...casePins.map(pin=>pin.uncompressed_bytes??pin.bytes)),role:'one-complete-parsed-source-case-scope'},
+    {bytes:4194304,role:'candidate-window-and-canonical-workspace'}]);
+  }
   const manifest=json(spec.manifest_path),bounds=json(spec.bounds_path),targets=new Map();
   for(const name of issued.source_rule.target_banks){demand(spec.inputs.some(pin=>equal(pin,issued.source_rule.inputs.find(source=>source.path===name))),'Batch containing context differs from source proof');const rows=json(name).features;demand(Array.isArray(rows),'Invalid complete administrative target bank');
     for(const target of rows){demand(!targets.has(target.id),'Duplicate selected context identity');targets.set(target.id,target);}}
@@ -1719,7 +1775,12 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
   demand(Array.isArray(stagePins) && stagePins.length>0 && stagePins.length<=213, 'Missing complete child body roster');
   const baselinePins=[INVENTORY_VERSION,SOURCE_PREMISES_VERSION,ADDITIVE_PROPOSAL_VERSION,ADDITIVE_BATCH_PROPOSAL_VERSION].includes(request.operation)?(request.baseline?.pins??[]):[];
   const inputs = [...project,...request.installed_modules,...pinCost(requestPin),...pinCost(request.report),...stagePins.flatMap(pinCost),...baselinePins.flatMap(pinCost)];
-  const budget = candidateBudget(inputs,{reserveBytes:runtimeStat.size+outputReserve+131072});
+  const administrativeSequential=request.operation===ADDITIVE_BATCH_PROPOSAL_VERSION
+    &&request.additive?.source_profile==='retained-consumed-administrative-source'&&request.baseline?.version===2;
+  const budget = administrativeSequential?administrativeLifetimeBudget(inputs,{runtimeBytes:runtimeStat.size,outputReserve})
+    :candidateBudget(inputs,{reserveBytes:runtimeStat.size+outputReserve+131072});
+  if(administrativeSequential)budget.nativeStageCostStart=project.length+request.installed_modules.length
+    +pinCost(requestPin).length+pinCost(request.report).length;
   const runtimeRead=()=>{
     const before=fs.lstatSync(process.execPath);
     demand(before.isFile() && !before.isSymbolicLink() && before.size===runtimeStat.size
