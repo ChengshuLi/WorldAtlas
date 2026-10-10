@@ -356,6 +356,7 @@ export function qualifyOriginalNativeAuthority(custody, pins) {
  const held={publication:null,operating:null,rows:[],nativePatches:[],nativeContracts:[]};
  let maxPhase=reader.used;
  const finishedMember=(p,parse,consume)=>{
+  const readCompletedMember=()=>{
   reader.metadataBytes=sourceMetadata+carryBytes(reader.inventory)+carryBytes(held);reader.phase();
   const q={...p,git_blob_oid:p.git_blob_oid??p.blob,decoded_bytes:p.decoded_bytes??p.uncompressed_bytes,decoded_sha256:p.decoded_sha256??p.uncompressed_sha256};pinCheck(q);
   let version=q.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
@@ -371,6 +372,10 @@ export function qualifyOriginalNativeAuthority(custody, pins) {
   let raw=encoded;
   if(q.decoded_bytes!==undefined){raw=gunzipSync(encoded,{maxOutputLength:q.decoded_bytes});demand(raw.length===q.decoded_bytes&&sha(raw)===q.decoded_sha256,'Original whole native decoded proof differs');}
   consume(raw);
+  };
+  readCompletedMember();
+  // Whole body/decoder temporaries are out of scope; parsed custody stays held.
+  reclaimCompletedRebindFrame();
  };
  finishedMember(pins.publication,true,raw=>{held.publication=JSON.parse(raw);});
  finishedMember(pins.inventory,true,raw=>{const lines=raw.toString('utf8').split('\n');demand(lines.pop()==='','Truncated whole native inventory');held.rows=lines.map(s=>JSON.parse(s));});
@@ -714,7 +719,7 @@ export function currentRebindSourceView(snapshot) {
 // Reclaim only temporaries from a completed whole frame. The retained table,
 // targets, source/native custody, rows and proofs remain live and charged.
 const rebindGc=process.execArgv.length===1&&process.execArgv[0]==='--expose-gc'?globalThis.gc:null;
-function reclaimCompletedRebindFrame() {
+export function reclaimCompletedRebindFrame() {
  if(process.execArgv.includes('--expose-gc')) {
   demand(process.execArgv.length===1&&typeof rebindGc==='function'&&globalThis.gc===rebindGc&&Function.prototype.toString.call(rebindGc)==='function gc() { [native code] }','Require exact exposed Node reclamation callable');
   rebindGc();

@@ -3,7 +3,7 @@
 // This module cannot issue an operating certificate or select a release.
 import fs from 'node:fs';import path from 'node:path';
 import {ImmutableReader} from '../../../scripts/check-effective-geographic-regression.mjs';
-import {CURRENT_REBIND_CODE,normaliseRetainedRepairLedger,nativeBaseSelection,requirePriorAdditiveConservation,readRetainedRegistryAuthority,acquireCurrentRebindOperands,currentRebindSourceView,valueBytes,valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {CURRENT_REBIND_CODE,normaliseRetainedRepairLedger,nativeBaseSelection,requirePriorAdditiveConservation,readRetainedRegistryAuthority,acquireCurrentRebindOperands,currentRebindSourceView,reclaimCompletedRebindFrame,valueBytes,valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 const FILE=33554432,PHASE=268435456,prepared=new WeakSet();
 const demand=(v,m)=>{if(!v)throw Error(m);},same=(a,b)=>valueBytes(a).equals(valueBytes(b));
 const exists=p=>{try{return fs.lstatSync(p);}catch(e){if(e.code==='ENOENT')return null;throw e;}};
@@ -29,6 +29,8 @@ function originalOperands(reader,registry,ledger,snapshot,executionMetadata){
   reader.metadataBytes=8*1048576+2*(snapshot.metadataBytes+valueBytes({registry,ledger,proofs,executionMetadata,reader_inventory:[...reader.inventory]}).length)+(snapshot.acquisition_buffer_bytes??0);reader.outputBytes=4194304;reader.phase();
   proofs.push(readRetainedRegistryAuthority(reader,entry));
   demand(valueBytes(proofs).length<=2097152,'Complete returned original authority views exceed prospective carry bound');
+  // The authority call and carry measurement have returned; proofs stay live.
+  reclaimCompletedRebindFrame();
  }
  const expected=new Map();for(const proof of proofs)for(const row of proof.original_ledger.rows){demand(!expected.has(row.component_id),'Repeated original complete authority component');expected.set(row.component_id,{row,proof});}
  demand(ledger.rows.length===expected.size&&ledger.rows.every(row=>{const prior=expected.get(row.component_id);if(!prior)return false;const {authority_sha256,rule_sha256,...literal}=row;return authority_sha256===prior.proof.authority_sha256&&rule_sha256===prior.proof.rule_sha256&&same(literal,prior.row); }),'Composed ledger changes original scope/exception/primitive authority');
