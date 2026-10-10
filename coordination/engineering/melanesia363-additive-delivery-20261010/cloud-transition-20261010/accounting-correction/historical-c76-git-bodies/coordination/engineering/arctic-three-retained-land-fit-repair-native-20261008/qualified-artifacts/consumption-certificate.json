@@ -1,0 +1,1681 @@
+{
+  "version": 1,
+  "kind": "qualified-arctic-immutable-product-certificate-v1",
+  "issue": 1520,
+  "author_worker_id": "01a112b0-39fb-7f02-a3c7-d21d0916009f",
+  "subjects": [
+    "atlas:physical:CAN-15:NWT",
+    "atlas:physical:CAN-25:NUN"
+  ],
+  "before_footprints_sha256": "b9a3c8bf375217dba3a50d1a022ec7e4ac6c6f1cdedff22845da953c805b7433",
+  "after_footprints_sha256": "2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9",
+  "native_manifest_sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+  "complete_locations": 49625,
+  "unchanged_complete_records": 49623,
+  "added_native_cells": 141,
+  "qualification_inventory": {
+    "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/inventory.json.gz",
+    "mode": "100644",
+    "bytes": 1142795,
+    "sha256": "d298552dca773e992d78cf1deaefa1f7f33e53c20804bf0e1576af325861d93a",
+    "decoded_bytes": 11431701,
+    "decoded_sha256": "302d60928b8d8d7f9bb21cf094e99f4c76ac1bda5463c81bafb385ecb1224285"
+  },
+  "qualification_custody": {
+    "index": {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/operating/index.json",
+      "mode": "100644",
+      "bytes": 618299,
+      "sha256": "efe7cdbb5a90630ac966048125018269561366f6fb4585c4896f2484b56afd9d"
+    }
+  },
+  "source_policy": {
+    "sha256": "6e60a9a001a4379a4114be56e4e70ce46f45fa720bf43365f5fd69d3bee3804b"
+  },
+  "application_consumer_code": {
+    "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-consumer-code.json",
+    "mode": "100644",
+    "bytes": 22528,
+    "sha256": "f62d4053a3f81a498fa8b5ac66723683ce064867f35aab6d5eb8cd4b6948c624"
+  },
+  "selected_artifact_bindings": {
+    "native_manifest": {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba"
+    },
+    "native_comparison": {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-selection-receipt.json",
+      "bytes": 14625,
+      "sha256": "dcc3533b9eea251b9d5a323a05da441816a2affe2889c2484174ec853e591691"
+    },
+    "migration_receipt": {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/migration-receipt.json",
+      "bytes": 1930289,
+      "sha256": "fbcdc93980b55dd679cf7343da7c22e5ef8b7f37278f340f932a70b3770014b6"
+    },
+    "geometry_manifest": {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/geometry-manifest.json",
+      "bytes": 423,
+      "sha256": "09b5eb619d15eef705fff210e78360734de5804e1c573c984f78254d62a78bb0"
+    },
+    "registry": {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/release-v9/releases-v9.json.gz",
+      "bytes": 237425,
+      "sha256": "a9b84f8a8ef2a07ef4407614750b744ca9bde1841d2888de10a13382da58eb32",
+      "decoded_bytes": 745951,
+      "decoded_sha256": "f0ef8525ea416fb08a2c0fc9395a1658fc7195876d7c1fc6da0600ab75fffb86"
+    },
+    "pixel_audit": {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/pixel-audit-v9.json",
+      "mode": "100644",
+      "bytes": 14325660,
+      "sha256": "fb87c4b48428579bb039337c3bd70180844ad6c5d0f14e03d57048215e99deda"
+    },
+    "selected_geography": {
+      "version": 1,
+      "kind": "complete-world-index-with-exact-encoded-overrides",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json",
+      "bytes": 14656,
+      "sha256": "3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776"
+    }
+  },
+  "registry": {
+    "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/release-v9/releases-v9.json.gz",
+    "bytes": 237425,
+    "sha256": "a9b84f8a8ef2a07ef4407614750b744ca9bde1841d2888de10a13382da58eb32",
+    "decoded_bytes": 745951,
+    "decoded_sha256": "f0ef8525ea416fb08a2c0fc9395a1658fc7195876d7c1fc6da0600ab75fffb86"
+  },
+  "release_product_catalogue": {
+    "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/release-products.json.gz",
+    "mode": "100644",
+    "bytes": 32082,
+    "sha256": "d1d4e039b468b0dd460a803e4469e93e266633e3e01a96f0d78e3f7d8d9f261b",
+    "decoded_bytes": 117061,
+    "decoded_sha256": "f45c64324d821763cb3faa1c76bd6bdee62b2f508ad891deab9839d20b3cc5d4"
+  },
+  "predecessor_registry": {
+    "path": "data/geographic-releases/releases-v8.json.gz",
+    "bytes": 195488,
+    "sha256": "10052f88a3ecdd42d555f05a2d5672c212d2ca9196cff383f8ce7a4cccd7652e",
+    "decoded_bytes": 655490,
+    "decoded_sha256": "a937c0fe3afee1e565d05580daa5822f686b7c7678ed244958e8730a98b44b33"
+  },
+  "native_comparison": {
+    "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-selection-receipt.json",
+    "bytes": 14625,
+    "sha256": "dcc3533b9eea251b9d5a323a05da441816a2affe2889c2484174ec853e591691"
+  },
+  "steps": [
+    {
+      "predecessor_release_id": "geography:review:831aada26a8c7fe8c75553caf4432a22dc9c2cf458b14221a1135addb475f186",
+      "successor_release_id": "geography:review:2632d51da0efa5574c74638afe441c4efd5f29e93804c507a24cc6dbb56c0199",
+      "original_grid_sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "selected_grid": {
+        "space": "root",
+        "path": "data/native-ownership/repaired-v7/manifest.json",
+        "bytes": 252680,
+        "sha256": "70204c43deefd1af97c898f120d3638d4b8a3953445df37036d5771a54d718cc",
+        "mode": "100644"
+      },
+      "geometry_manifest": {
+        "space": "prior",
+        "path": "coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/release-proof-v3/index.json",
+        "bytes": 395,
+        "sha256": "67c5a2508055fe49abff3d4e5484c7f29b31b0bec9cc120f83881115d5cf48fb",
+        "mode": "100644"
+      },
+      "migration_receipt": {
+        "space": "prior",
+        "path": "coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/release-proof-v3/migration-receipt.json",
+        "bytes": 1886445,
+        "sha256": "e2eb810a57988535c24354a3b45d73e32e004ecfb6597ecdcde272f1c65730d0",
+        "mode": "100644"
+      }
+    },
+    {
+      "predecessor_release_id": "geography:review:2632d51da0efa5574c74638afe441c4efd5f29e93804c507a24cc6dbb56c0199",
+      "successor_release_id": "geography:review:896bf79dd6e5661dfbbffba60da96fa987b9971af2b884cf52347189861ebe9e",
+      "original_grid_sha256": "70204c43deefd1af97c898f120d3638d4b8a3953445df37036d5771a54d718cc",
+      "selected_grid": {
+        "path": "data/canonical-grid/eastern-v8/manifest.json",
+        "bytes": 251732,
+        "sha256": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885"
+      },
+      "geometry_manifest": {
+        "space": "root",
+        "path": "data/reference-migrations/eastern-two-gap-repair-20261006/index.json",
+        "bytes": 1765,
+        "sha256": "f650f6786107145d657bdcbcfbe0c84a9e1e97af4922d4db6c641b7a241442ef",
+        "mode": "100644"
+      },
+      "migration_receipt": {
+        "space": "root",
+        "path": "data/reference-migrations/eastern-two-gap-repair-20261006/migration-receipt.json.gz",
+        "bytes": 449759,
+        "sha256": "84af24772c716b5252ef7b2048c0a2787bfa72d8c8723fb5220d6a89a85aba23",
+        "mode": "100644",
+        "decoded_bytes": 1957442,
+        "decoded_sha256": "026010eb1a5f1b98bcdf5ad6ebf2721ba98512900a6afa3ef5de99f876e0b3a5"
+      }
+    },
+    {
+      "predecessor_release_id": "geography:review:896bf79dd6e5661dfbbffba60da96fa987b9971af2b884cf52347189861ebe9e",
+      "successor_release_id": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb",
+      "original_grid_sha256": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885",
+      "selected_grid": {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+        "bytes": 252447,
+        "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba"
+      },
+      "geometry_manifest": {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/geometry-manifest.json",
+        "bytes": 423,
+        "sha256": "09b5eb619d15eef705fff210e78360734de5804e1c573c984f78254d62a78bb0"
+      },
+      "migration_receipt": {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/migration-receipt.json",
+        "bytes": 1930289,
+        "sha256": "fbcdc93980b55dd679cf7343da7c22e5ef8b7f37278f340f932a70b3770014b6"
+      }
+    }
+  ],
+  "application_inputs": [
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/operating/index.json",
+      "mode": "100644",
+      "bytes": 618299,
+      "sha256": "efe7cdbb5a90630ac966048125018269561366f6fb4585c4896f2484b56afd9d"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/operating/part-000.bin.gz",
+      "mode": "100644",
+      "bytes": 661350,
+      "sha256": "33973d96540abbde85adaa721602d20391d4940a0d0b4984a33ce29a4a4f0030",
+      "decoded_bytes": 5757474,
+      "decoded_sha256": "a3339aa2bddde9c49f5485c22d9c3e40c042130a758a6f1c57b1bec9b3cf4eef"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/registry-issuer-ff95d34d-attempt2-independent-completion.json",
+      "mode": "100644",
+      "bytes": 2517,
+      "sha256": "f9036156c62f1198f642de4eb2921c069c2316b9b0ed746a75a27de6b26ee99f"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/registry-encoding-ae42e1e9-independent-completion.json",
+      "mode": "100644",
+      "bytes": 2127,
+      "sha256": "99cf377a75a8b84185ac183fc9d704fd5e99ab0812a9a83cbe8b03fdece6ce9f"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/inventory.json.gz",
+      "mode": "100644",
+      "bytes": 1142795,
+      "sha256": "d298552dca773e992d78cf1deaefa1f7f33e53c20804bf0e1576af325861d93a",
+      "decoded_bytes": 11431701,
+      "decoded_sha256": "302d60928b8d8d7f9bb21cf094e99f4c76ac1bda5463c81bafb385ecb1224285"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-consumer-code.json",
+      "mode": "100644",
+      "bytes": 22528,
+      "sha256": "f62d4053a3f81a498fa8b5ac66723683ce064867f35aab6d5eb8cd4b6948c624"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-20261008/evidence-quality.json",
+      "mode": "100644",
+      "bytes": 46540,
+      "sha256": "7a56ff80647a9ff153cbe1deb85d67ef480a4f8fef48395a8f163398e8b7120c"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-20261008/applicability-comment.json",
+      "mode": "100644",
+      "bytes": 25750,
+      "sha256": "d47365b657c7e370cd15a858c01817dffa7b68f2f7f9a2abeef03e51ed42e047"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-20261008/delivery/independent-disposition.json",
+      "mode": "100644",
+      "bytes": 1121,
+      "sha256": "1e9ea65496bf6fae148ca2f63d55429dcf3a11d089f15c80a5172cd7a6f93afd"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-20261008/delivery/original-source-custody-readback.json",
+      "mode": "100644",
+      "bytes": 5821,
+      "sha256": "d3dca5c912a2f61763e4579138fe353d3a98c0c05cfe2de362ac69f90c963b96"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-20261008/source-fit-seven-cases.json",
+      "mode": "100644",
+      "bytes": 271571,
+      "sha256": "0f29f229f94c48a2ba4a520b8cbb078116d82344302f773b2171716caedac9b6"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-20261008/delivery/execution/code-source.json",
+      "mode": "100644",
+      "bytes": 2527,
+      "sha256": "28e6f56180beda7b6f6e3a3d2ac8c48b8292ae26ad41ef044aaf8b23b5607aca"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/prior-v8/input-00.bin",
+      "mode": "100644",
+      "bytes": 94693,
+      "sha256": "ba3cda4a21245e00706a5fe065565d579f71298c2b839d56c1bcbd340459602e"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/prior-v8/input-01.bin",
+      "mode": "100644",
+      "bytes": 43054,
+      "sha256": "a658b6269bcdaa136399985f9cf2c0c5c282d5d5e60e12bdbac9b749fc26c4c0"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/prior-v8/input-02.bin",
+      "mode": "100644",
+      "bytes": 1765,
+      "sha256": "f650f6786107145d657bdcbcfbe0c84a9e1e97af4922d4db6c641b7a241442ef"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/prior-v8/input-03.bin",
+      "mode": "100644",
+      "bytes": 298,
+      "sha256": "e00f6a6e02661e60085688ff336c91001f3c691bf2694dd336fa7a18e357a876"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/prior-v8/input-04.bin",
+      "mode": "100644",
+      "bytes": 251732,
+      "sha256": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/prior-v8/input-05.bin",
+      "mode": "100644",
+      "bytes": 2425,
+      "sha256": "f82665815350abeab07f9d787fc4c05fc9b82e6569c8cd3d155c154932baf970"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/prior-v8/transition-inputs.json",
+      "mode": "100644",
+      "bytes": 7747,
+      "sha256": "662ffbd846213ad529a724a3b3cea25e29ae010148c452c332bf81da5718e710"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/prior-v8/accepted-review.json",
+      "mode": "100644",
+      "bytes": 44413,
+      "sha256": "6095b9615f1f3cba3ad33c42d62274dcf00dde0e204f116695f5fe606f79c556"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/prior-v8/accepted-queue.json",
+      "mode": "100644",
+      "bytes": 32346,
+      "sha256": "6fa35d42bec8d1ca4f4e826f35bf19bc1c34d5a7de701e947d757f8b13674612"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/prior-v8/merged-readback.json",
+      "mode": "100644",
+      "bytes": 619,
+      "sha256": "b2d648868b6fcdb911629742bec653c0c3e08011b4cadb7847bf5c85e82daeb5"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/prior-v8/evidence-quality.json",
+      "mode": "100644",
+      "bytes": 93174,
+      "sha256": "84796d0684cb3d31dd3a2153736a40c93fdef88a602a5ec25f1164626f5ff241"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/operand-code-source-7b0d0d35.json",
+      "mode": "100644",
+      "bytes": 3898,
+      "sha256": "df7f7e5e25cc04c52b585a8cca14cb51d3717c20ee440b2074903f2dce41eb90"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/release-products.json.gz",
+      "mode": "100644",
+      "bytes": 32082,
+      "sha256": "d1d4e039b468b0dd460a803e4469e93e266633e3e01a96f0d78e3f7d8d9f261b",
+      "decoded_bytes": 117061,
+      "decoded_sha256": "f45c64324d821763cb3faa1c76bd6bdee62b2f508ad891deab9839d20b3cc5d4"
+    },
+    {
+      "space": "root",
+      "path": "data/native-ownership/repaired-v7/manifest.json",
+      "mode": "100644",
+      "bytes": 252680,
+      "sha256": "70204c43deefd1af97c898f120d3638d4b8a3953445df37036d5771a54d718cc"
+    },
+    {
+      "space": "prior",
+      "path": "coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/release-proof-v3/index.json",
+      "mode": "100644",
+      "bytes": 395,
+      "sha256": "67c5a2508055fe49abff3d4e5484c7f29b31b0bec9cc120f83881115d5cf48fb"
+    },
+    {
+      "space": "prior",
+      "path": "coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/release-proof-v3/migration-receipt.json",
+      "mode": "100644",
+      "bytes": 1886445,
+      "sha256": "e2eb810a57988535c24354a3b45d73e32e004ecfb6597ecdcde272f1c65730d0"
+    },
+    {
+      "space": "root",
+      "path": "data/canonical-grid/eastern-v8/manifest.json",
+      "mode": "100644",
+      "bytes": 251732,
+      "sha256": "a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885"
+    },
+    {
+      "space": "root",
+      "path": "data/reference-migrations/eastern-two-gap-repair-20261006/index.json",
+      "mode": "100644",
+      "bytes": 1765,
+      "sha256": "f650f6786107145d657bdcbcfbe0c84a9e1e97af4922d4db6c641b7a241442ef"
+    },
+    {
+      "space": "root",
+      "path": "data/reference-migrations/eastern-two-gap-repair-20261006/migration-receipt.json.gz",
+      "mode": "100644",
+      "bytes": 449759,
+      "sha256": "84af24772c716b5252ef7b2048c0a2787bfa72d8c8723fb5220d6a89a85aba23",
+      "decoded_bytes": 1957442,
+      "decoded_sha256": "026010eb1a5f1b98bcdf5ad6ebf2721ba98512900a6afa3ef5de99f876e0b3a5"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+      "mode": "100644",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/geometry-manifest.json",
+      "mode": "100644",
+      "bytes": 423,
+      "sha256": "09b5eb619d15eef705fff210e78360734de5804e1c573c984f78254d62a78bb0"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/migration-receipt.json",
+      "mode": "100644",
+      "bytes": 1930289,
+      "sha256": "fbcdc93980b55dd679cf7343da7c22e5ef8b7f37278f340f932a70b3770014b6"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/release-v9/releases-v9.json.gz",
+      "mode": "100644",
+      "bytes": 237425,
+      "sha256": "a9b84f8a8ef2a07ef4407614750b744ca9bde1841d2888de10a13382da58eb32",
+      "decoded_bytes": 745951,
+      "decoded_sha256": "f0ef8525ea416fb08a2c0fc9395a1658fc7195876d7c1fc6da0600ab75fffb86"
+    },
+    {
+      "space": "root",
+      "path": "data/geographic-releases/releases-v8.json.gz",
+      "mode": "100644",
+      "bytes": 195488,
+      "sha256": "10052f88a3ecdd42d555f05a2d5672c212d2ca9196cff383f8ce7a4cccd7652e",
+      "decoded_bytes": 655490,
+      "decoded_sha256": "a937c0fe3afee1e565d05580daa5822f686b7c7678ed244958e8730a98b44b33"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/pixel-audit-v9.json",
+      "mode": "100644",
+      "bytes": 14325660,
+      "sha256": "fb87c4b48428579bb039337c3bd70180844ad6c5d0f14e03d57048215e99deda"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json",
+      "mode": "100644",
+      "bytes": 14656,
+      "sha256": "3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776"
+    },
+    {
+      "space": "root",
+      "path": "data/world-index.json",
+      "mode": "100644",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-0.json",
+      "mode": "100644",
+      "bytes": 8539839,
+      "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-1.json",
+      "mode": "100644",
+      "bytes": 8060108,
+      "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-2.json",
+      "mode": "100644",
+      "bytes": 6259307,
+      "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-3.json",
+      "mode": "100644",
+      "bytes": 5153118,
+      "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-4.json",
+      "mode": "100644",
+      "bytes": 4835479,
+      "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-5.json",
+      "mode": "100644",
+      "bytes": 5226173,
+      "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-6.json",
+      "mode": "100644",
+      "bytes": 4607953,
+      "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-7.json",
+      "mode": "100644",
+      "bytes": 4257402,
+      "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-8.json",
+      "mode": "100644",
+      "bytes": 5097739,
+      "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-9.json",
+      "mode": "100644",
+      "bytes": 5729632,
+      "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-10.json",
+      "mode": "100644",
+      "bytes": 5144571,
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-11.json",
+      "mode": "100644",
+      "bytes": 5133018,
+      "sha256": "d1b2fb15c9427497de740eb33a529ef382b58cb319028f2aa38f5878de4c9b02"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-12.json",
+      "mode": "100644",
+      "bytes": 4489493,
+      "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-13.json",
+      "mode": "100644",
+      "bytes": 5709487,
+      "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-14.json",
+      "mode": "100644",
+      "bytes": 4355198,
+      "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-15.json",
+      "mode": "100644",
+      "bytes": 5180426,
+      "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-16.json",
+      "mode": "100644",
+      "bytes": 5213846,
+      "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-17.json",
+      "mode": "100644",
+      "bytes": 4948066,
+      "sha256": "1ae1a9ef25c1f71b66084aadf57933132383d4271b888ab38866905da5678af3"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-18.json",
+      "mode": "100644",
+      "bytes": 4909063,
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-19.json",
+      "mode": "100644",
+      "bytes": 4583022,
+      "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-20.json",
+      "mode": "100644",
+      "bytes": 6570767,
+      "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-21.json",
+      "mode": "100644",
+      "bytes": 6737781,
+      "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-22.json",
+      "mode": "100644",
+      "bytes": 4746385,
+      "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-23.json",
+      "mode": "100644",
+      "bytes": 4962410,
+      "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-24.json",
+      "mode": "100644",
+      "bytes": 4816899,
+      "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-25.json",
+      "mode": "100644",
+      "bytes": 4525239,
+      "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-26.json",
+      "mode": "100644",
+      "bytes": 4608983,
+      "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-27.json",
+      "mode": "100644",
+      "bytes": 4863162,
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-28.json",
+      "mode": "100644",
+      "bytes": 6613963,
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-30.json",
+      "mode": "100644",
+      "bytes": 11979437,
+      "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-31.json",
+      "mode": "100644",
+      "bytes": 10086485,
+      "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-32.json",
+      "mode": "100644",
+      "bytes": 10211739,
+      "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/part-33.json",
+      "mode": "100644",
+      "bytes": 607984,
+      "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/source-restoration-additions.json",
+      "mode": "100644",
+      "bytes": 1573576,
+      "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9"
+    },
+    {
+      "space": "root",
+      "path": "data/geography/macro-loose-ends-v5-additions.json",
+      "mode": "100644",
+      "bytes": 11393,
+      "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1"
+    },
+    {
+      "logical_path": "data/geography/part-29.json",
+      "encoding": "gzip",
+      "commit": "e05471c2d331fe62688f47bc1cd88a041805256d",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29.json.gz",
+      "mode": "100644",
+      "bytes": 3399520,
+      "sha256": "5f76a01a2c43eeccb3a202507faf593f56157fe38bd89f541be3b64145bdb1a8",
+      "decoded_bytes": 12932723,
+      "decoded_sha256": "4eca02f85d5e3a0974a96a38d59e46b0b71b41d2513dcf20ab27eb17fd5a0b4c",
+      "git_blob_oid": "0f54db4189f3c49af137df5310b6b50362062b31"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-selection-receipt.json",
+      "mode": "100644",
+      "bytes": 14625,
+      "sha256": "dcc3533b9eea251b9d5a323a05da441816a2affe2889c2484174ec853e591691"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/index.json",
+      "mode": "100644",
+      "bytes": 21330,
+      "sha256": "91b868b66f52d3051a09b88a84411f7c70f38de9528a0166a8fb16dcdc71ba02"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-00/part-000.bin.gz",
+      "mode": "100644",
+      "bytes": 16773351,
+      "sha256": "74dd9af0c01fa5552b9af60d03935eb97b56bf6685c5bf964862d3b2b5d2b22d",
+      "decoded_bytes": 16777216,
+      "decoded_sha256": "5498b99fff54c063e49236eaaa07f4b868bcfdcb129f5aeee74b0876aec49001"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-00/part-001.bin.gz",
+      "mode": "100644",
+      "bytes": 6533385,
+      "sha256": "c06a881c56cd5b2a4a26b82a326ffba37a5b27169f93a296b4c987bea1e4e211",
+      "decoded_bytes": 6535322,
+      "decoded_sha256": "7b405af1dfb88df10a657cd032a612f8bb25f331ac7347954f67f8c71d5738b3"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-01/part-000.bin.gz",
+      "mode": "100644",
+      "bytes": 16775548,
+      "sha256": "e0506f0969dc1d1d58c4cd28dbd441a986e9a07ef3ebc6c447fed35d3c6bd798",
+      "decoded_bytes": 16777216,
+      "decoded_sha256": "b4734a3a4775c68aa91582bda523c03f3e98f2036c3007ef127986fc4876dc9c"
+    },
+    {
+      "space": "root",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-01/part-001.bin.gz",
+      "mode": "100644",
+      "bytes": 7512977,
+      "sha256": "7853385cbc84cb1de9489f8c49f3492ee4794e6497b3782398e5dfc10b6225aa",
+      "decoded_bytes": 7514891,
+      "decoded_sha256": "fa391801cc5b55ad8101faefcae0a80b30dce86e2b7b7c2a6eabceaf9d3680f2"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/rows-0.bin.gz",
+      "mode": "100644",
+      "bytes": 306620,
+      "sha256": "89ed3564db641f992746bf4f6f01c1eed89cb470520734ac1b85ee95e9a70ba0"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-0.bin.gz",
+      "mode": "100644",
+      "bytes": 983823,
+      "sha256": "8f867b6e64b1117a4fa80dd4ed82733ae9696461e1612dc7fb314c40935fd462"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-1048576.bin.gz",
+      "mode": "100644",
+      "bytes": 999496,
+      "sha256": "fceeec44661182bb9344083dd8aefee195d521b982619602f55a4c4e21f84ce7"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-10485760.bin.gz",
+      "mode": "100644",
+      "bytes": 855339,
+      "sha256": "41573aead112141c0dd904c33f1b9c47074d93b7c8dd68da0184bf6f297c80ca"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-11534336.bin.gz",
+      "mode": "100644",
+      "bytes": 874119,
+      "sha256": "c8b834faad9825db2b50b579cfb1e49dbd31698adfb5dfc7dd6a1eae015d536a"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-12582912.bin.gz",
+      "mode": "100644",
+      "bytes": 878294,
+      "sha256": "ad248445d13714a5aeb9f4dd371b330d1b6443293f1e0f55a2767d66294a1717"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-13631488.bin.gz",
+      "mode": "100644",
+      "bytes": 866895,
+      "sha256": "c7909c129678ae56d4a4a1815b6a3c41613ef1a4ee1c7df73c32a50da341d30f"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-14680064.bin.gz",
+      "mode": "100644",
+      "bytes": 867983,
+      "sha256": "149bd674930ca0fc84c6f7afbdadd3ab47384f77a407088e445908a1f3eec53c"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-15728640.bin.gz",
+      "mode": "100644",
+      "bytes": 876730,
+      "sha256": "b485ff0cbb5d0b8881e52dc0879327b3ac45dd7a58d2c060f6609bae26563fdc"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-16777216.bin.gz",
+      "mode": "100644",
+      "bytes": 846063,
+      "sha256": "2de4e9c8abf266796679c4c75079689f9ef58e747e0bad3223467c3a65943f9e"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-17825792.bin.gz",
+      "mode": "100644",
+      "bytes": 827000,
+      "sha256": "db80e08b03e5227657759f6000fcf710d3e1438590a64349c90f442151524e21"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-18874368.bin.gz",
+      "mode": "100644",
+      "bytes": 816595,
+      "sha256": "a9577142e462b52ac9d11e0b1367bbf5dbac6442eecdc89d72a63b6cafe6f1ea"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-19922944.bin.gz",
+      "mode": "100644",
+      "bytes": 812930,
+      "sha256": "87df7ad611a88601c0d224f9854397f1f307ac0488b85e6e45f12e877099449c"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-2097152.bin.gz",
+      "mode": "100644",
+      "bytes": 967519,
+      "sha256": "fca2e7d5f30a1914d370ebf660c69bdb5b872af41e528a7f0bebde08de6644ea"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-20971520.bin.gz",
+      "mode": "100644",
+      "bytes": 792059,
+      "sha256": "2266034b5df2e0fa6f17b598540bf87aeed90dbe28a5b34b1b648393db75cbd1"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-22020096.bin.gz",
+      "mode": "100644",
+      "bytes": 789755,
+      "sha256": "c526cbf7319bc890ab8388fc3adb752e7375c3ee4547467ebf42d224d0086e85"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-23068672.bin.gz",
+      "mode": "100644",
+      "bytes": 788443,
+      "sha256": "ac5116910b9db0d34ace41b636187240c003a144a609261f43bf98d333d9ea20"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-24117248.bin.gz",
+      "mode": "100644",
+      "bytes": 787631,
+      "sha256": "a3589b07cb0110a44c25b85a05a19241f8204bea31fed5a606b3d97081d42477"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-25165824.bin.gz",
+      "mode": "100644",
+      "bytes": 805339,
+      "sha256": "7521a4cb7f302cfb428abe1c3dee86e122bb6b0dd0b8fa2ac668ad454a4d19e2"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-26214400.bin.gz",
+      "mode": "100644",
+      "bytes": 836068,
+      "sha256": "1983cec0c80b56bd7a9caff3edb4ae23661d650ff06bc3cf25b23aa462eaa3df"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-27262976.bin.gz",
+      "mode": "100644",
+      "bytes": 823672,
+      "sha256": "6b3639524cf96c8e95075ec346090eea4a24c7fb2a5fa9b0dc008b4c04ee0281"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-28311552.bin.gz",
+      "mode": "100644",
+      "bytes": 820934,
+      "sha256": "9dab5a7416a4ea570906263617ed433862a87185fde5aa11099621977b209238"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-29360128.bin.gz",
+      "mode": "100644",
+      "bytes": 806418,
+      "sha256": "0a80d9d83cdb9b719a9215029eb599517e8d9c79afca1d7ed363dea21485a8b5"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-30408704.bin.gz",
+      "mode": "100644",
+      "bytes": 808805,
+      "sha256": "16f47da696532d5f2218611d41566db0821eca7da443ed0c808bd04484dce828"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-3145728.bin.gz",
+      "mode": "100644",
+      "bytes": 903226,
+      "sha256": "51a2e4a95b922856870e644fcf1c2ec6685fc36d49a1ad684708d6df8e42b47b"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-31457280.bin.gz",
+      "mode": "100644",
+      "bytes": 832804,
+      "sha256": "84e4c5eebe7be349fbad0fae7b448c438a3a40c6c255132f28206f5e50854ff4"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-32505856.bin.gz",
+      "mode": "100644",
+      "bytes": 858268,
+      "sha256": "dd818be1a2233e0d0d83bfb3a0a6ef0528347226b2ff258e55a289a226135b46"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-33554432.bin.gz",
+      "mode": "100644",
+      "bytes": 879710,
+      "sha256": "94e671a2ef4d62da1c3b50b3164bc3935f5a55275214d43258e0fc1d45972110"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-34603008.bin.gz",
+      "mode": "100644",
+      "bytes": 868466,
+      "sha256": "09d79674a1cd32e991a5a76c0a28d8d6296312fa83e78dff2f644d5212e01dea"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-35651584.bin.gz",
+      "mode": "100644",
+      "bytes": 894415,
+      "sha256": "e0fe3f8a63719056ef880ccbcf8e93862ba776793aa84d3e4ed9d022c763f4a7"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-36700160.bin.gz",
+      "mode": "100644",
+      "bytes": 892298,
+      "sha256": "4e6692eec8f9702d2298b7f97af8932fabe552936012363754b4ef1e7c0e0b36"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-37748736.bin.gz",
+      "mode": "100644",
+      "bytes": 880041,
+      "sha256": "67dfce1a817e105c64b6647b90fb46e922908c49b5b68b4133a39e12f0ac6c69"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-38797312.bin.gz",
+      "mode": "100644",
+      "bytes": 869845,
+      "sha256": "3c558f346c6ae4c3a1f3e8e0eea7c73b97ad773d50af19d8d6680e12aee11eb4"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-39845888.bin.gz",
+      "mode": "100644",
+      "bytes": 873704,
+      "sha256": "8604408be668b2097c812de7f3e02ce90b13e4c0f300a2e4274ace9dff0775f3"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-40894464.bin.gz",
+      "mode": "100644",
+      "bytes": 888634,
+      "sha256": "58d26169dfe7b1a4c175ccb7d74cb9f84e88a1622b3bf505c3b80023558360cb"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-4194304.bin.gz",
+      "mode": "100644",
+      "bytes": 868242,
+      "sha256": "2d39a4a314ff55f8f4135e21ac6f8dd42359a801f01ab435b7b4adb31019003e"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-41943040.bin.gz",
+      "mode": "100644",
+      "bytes": 896715,
+      "sha256": "122d4fef0562496cc574ae61ebd37de4cc9f68d59798fa68977dc7ca70929592"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-42991616.bin.gz",
+      "mode": "100644",
+      "bytes": 890492,
+      "sha256": "ad1ed53c1a2812e45e709cf91b64efeb0ba84417c03528cd2e2482d40e43af6e"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-44040192.bin.gz",
+      "mode": "100644",
+      "bytes": 876368,
+      "sha256": "8af2c6ce9acc40ba083def1168b47da39d8ee4d0d5d2f2278b6440964415eeeb"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-45088768.bin.gz",
+      "mode": "100644",
+      "bytes": 883292,
+      "sha256": "f15da8aef07ce0d9630dbe3b8d372092fbc4a54c7577094b4984f2e7447ec6c0"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-46137344.bin.gz",
+      "mode": "100644",
+      "bytes": 884764,
+      "sha256": "37c5de9d61165ca86960dd6c37077384ce7526418e1a923e600537814767b5c9"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-47185920.bin.gz",
+      "mode": "100644",
+      "bytes": 899855,
+      "sha256": "3ca6cdcd9c95e7387e18ab9bd35a9b2df7bd8e45ee30275874550cd2592da622"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-48234496.bin.gz",
+      "mode": "100644",
+      "bytes": 878785,
+      "sha256": "486dcf08e55e3cab928b90a48fa7dc128fd2407cd428345b13bd133068da9f59"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-49283072.bin.gz",
+      "mode": "100644",
+      "bytes": 903382,
+      "sha256": "0bbec87a2b610f5dd3a81cb21b243ba87462e66e15dec26fdd6cfcc67c128c01"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-50331648.bin.gz",
+      "mode": "100644",
+      "bytes": 877430,
+      "sha256": "7df616b4446cb3e213838c7e12b5a02e0880bc78a9170218cd29e745128d7e4d"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-51380224.bin.gz",
+      "mode": "100644",
+      "bytes": 859552,
+      "sha256": "f1de009e6b8fe062614b6f37498d46090ec30c09baf9c3a6e0af5ac61008fa68"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-5242880.bin.gz",
+      "mode": "100644",
+      "bytes": 868549,
+      "sha256": "295247e4a865b866070e6747a13dc816d0c7f76573e72ab3519dbb8cd8c33e9a"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-52428800.bin.gz",
+      "mode": "100644",
+      "bytes": 848562,
+      "sha256": "a9143cff7852fe32d40dccf7d79f0b438acb4b28db25e87e00908526722ba6e0"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-53477376.bin.gz",
+      "mode": "100644",
+      "bytes": 822830,
+      "sha256": "e9776a1205aaa5ac02bff9518d9bef7ec8f598d9cce5a22dd003b92dfcc2b9c8"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-54525952.bin.gz",
+      "mode": "100644",
+      "bytes": 798490,
+      "sha256": "47c5f61a7957e054f2523dee8788eae7ac2a3d9fc175e8715d2b3aa1c5b2a2a3"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-55574528.bin.gz",
+      "mode": "100644",
+      "bytes": 813344,
+      "sha256": "6d32230bbb1ee4db07d5c4b7b784fcf497cd3e7e1687ab5bfad77cb78968ad07"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-56623104.bin.gz",
+      "mode": "100644",
+      "bytes": 852165,
+      "sha256": "c96d891b83a8f35390f4fc60d224df14b8117a84f62c86dc131425524d7bb9e7"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-6291456.bin.gz",
+      "mode": "100644",
+      "bytes": 851783,
+      "sha256": "eca1667dfc637570231ba2a1174e8cc52f34e599a35259915145ebe1045e4663"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-7340032.bin.gz",
+      "mode": "100644",
+      "bytes": 847665,
+      "sha256": "237e70f2c59d54b80c55e274338a2e1b8e0cf0d9d9356bf861f14a362594cbc7"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-8388608.bin.gz",
+      "mode": "100644",
+      "bytes": 851524,
+      "sha256": "564ac30f9675984701481cf8e6277c43252ed1c02f16245b87536fa64befc221"
+    },
+    {
+      "space": "image",
+      "path": "native-v1/ownership/runs-9437184.bin.gz",
+      "mode": "100644",
+      "bytes": 850915,
+      "sha256": "573f2e8baaf7364810038e67f02c883c4d8661a521d015fcc4b8d674be3d4856"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz",
+      "mode": "100644",
+      "bytes": 3353763,
+      "sha256": "d7665a1fdf68f0626c7e28da9ac0e40f4e35aaeacdf91bad4ab8e2d77221bc49",
+      "logical_path": "data/geography/part-29.json",
+      "encoding": "gzip",
+      "commit": "ee684e3145079ff93f68520e3c17837789be5b0c",
+      "decoded_bytes": 12932719,
+      "decoded_sha256": "723d16eb63b7f2dcd8260a516eac6571a7ef1eaaf9bff3c926e0c63235b98fd3",
+      "git_blob_oid": "d3f17ccd8eecca88b16f2bbbf075320b6d555aea"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/actual-operating-output-readback.json",
+      "mode": "100644",
+      "bytes": 1621,
+      "sha256": "ab2925cf5833e30609b783476cd1ce2da094301c1ed40e0560b35004fb5acb42"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/application-geometry-code-source-b1cf0d5e.json",
+      "mode": "100644",
+      "bytes": 2026,
+      "sha256": "ec0b2122731af717b61ec80cf5e063a52fc1ce6b9e7bc298712e323ccfd535b9"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/application-geometry-entry-b1cf0d5e.mjs",
+      "mode": "100644",
+      "bytes": 737,
+      "sha256": "c73272825a61962a8f9534007ed68ea2e722b0671b95c0c6e202bdb66ccf78be"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/application-geometry-plan-b1cf0d5e.json",
+      "mode": "100644",
+      "bytes": 3283,
+      "sha256": "cfa347b2d38c6b957ddd5cd841c9b7582420c125d6cb2a751b519e510c185f98"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/application-geometry-supervisor-b1cf0d5e.py",
+      "mode": "100644",
+      "bytes": 10204,
+      "sha256": "7b48ad60a0621366eb8d9197c0f1f722872f85886ed5b60ac04cf8213592d548"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/artifact-checkout-execution-boundary-attempt1.json",
+      "mode": "100644",
+      "bytes": 2068,
+      "sha256": "2dff4da424685809cd068b7097fb6b41d7553cb025fe6b60957935c11f56d779"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/complete-original-inverse.json",
+      "mode": "100644",
+      "bytes": 122564,
+      "sha256": "ba9f1a903fa1619d2ce6e10adc9eb01f446210bb71741fd9361b7360c648368d"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/launch.json",
+      "mode": "100644",
+      "bytes": 989,
+      "sha256": "198dbf37b83a49562c927ffb31cd2388f6f0710468097e99491d90f66bbbe097"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/model-reader-call-boundary-controls-attempt1.json",
+      "mode": "100644",
+      "bytes": 7164,
+      "sha256": "8dad186be7cafac2cc42f3bbb14f8b8c86f923096b88208a861dcee242100713"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/producer-bounded-review-receipt.json",
+      "mode": "100644",
+      "bytes": 2038,
+      "sha256": "c528a2cfd1c7a3b25a5eae417976c2c5e504b7fc956282a54598b6cdf75c0adc"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/publication-receipt.json",
+      "mode": "100644",
+      "bytes": 3791,
+      "sha256": "cc47d1095a7d452f65325f16c969aa7690c712b56f78c70bf6c7508f1436535c"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/samples.jsonl",
+      "mode": "100644",
+      "bytes": 7951,
+      "sha256": "3a1d55f2077b9f120d5e4548f7f86d57e3896ae07ff80eb56d0dc2cd11c8651e"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/selected-application-geometry-controls-attempt1.json",
+      "mode": "100644",
+      "bytes": 682,
+      "sha256": "a99c0341b0ed55f220b9fff178a766b69bb964ea288d1904a014c48eafdbdff5"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/stderr.log",
+      "mode": "100644",
+      "bytes": 777,
+      "sha256": "fe0c8ac2d6ccc985d9b24a14c00df009f48a660d1e8737584efaa59573c3b81d"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/stdout.json",
+      "mode": "100644",
+      "bytes": 3346,
+      "sha256": "3698370747b771c65ffbda2994880cdd4eeb7f04932cb7d8c9860f1c51d532f9"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/terminal.json",
+      "mode": "100644",
+      "bytes": 1427,
+      "sha256": "fb15119e5b172d02b0fb4cb5e61dea7ddb4212c8dc8ce0a6ae5226eb97bae001"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/application-geometry-serialization.mjs",
+      "mode": "100644",
+      "bytes": 5382,
+      "sha256": "0cd990c586eba990671a535931ee9385d55fc963d2d2e473e83b2a2a37fa45e0"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/application-geometry-producer.mjs",
+      "mode": "100644",
+      "bytes": 5096,
+      "sha256": "e3c821f3d30691b4c626127af80a8792864b258a3c4e04eb7a474773697baf5c"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/phase-admission.mjs",
+      "mode": "100644",
+      "bytes": 5103,
+      "sha256": "990a1f09cc0757cd4ddfef4253b07b184e3dd023e746c0046259a8a7f5d85d8f"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-package-preflight.mjs",
+      "mode": "100644",
+      "bytes": 13941,
+      "sha256": "b5f538cffc737d52519a9246cd86cdc2cfa36daeed30a3c8cf1ad0ecda514807",
+      "git_blob": "728039a5cefbf93deffcdd7850804130ab763769"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/artifact-checkout-execution.mjs",
+      "mode": "100644",
+      "bytes": 6326,
+      "sha256": "e85797d9ad90a2c3ddcda29ffabd9600beb0682b8a0c4cac5426a3f11f760b3d",
+      "git_blob": "3c6bf04d6eb6853171f7ef390c1557bd0844940a"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/install-v9-stage.mjs",
+      "mode": "100644",
+      "bytes": 14025,
+      "sha256": "191567f31fb4ec7f03b1ac1100c0ca016bbe5ae26b4e4cc28a169ea857e45ccd",
+      "git_blob": "f1e9de6faca913543b30d889882303b2df98e0d9"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/prepare-model-reader-checkout.mjs",
+      "mode": "100644",
+      "bytes": 2121,
+      "sha256": "c285032b7201d456577660da1ebd8b9653b7748a9200a8c104fbc09e6e06124c",
+      "git_blob": "e8a6a2413f67d282f7883fd4e8a3e5227d4b034b"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifact-association.mjs",
+      "mode": "100644",
+      "bytes": 6664,
+      "sha256": "aa6b6bc3663257db6104f46ef143177d6989239c517d254aa88cbe971a348c86",
+      "git_blob": "9a39c892416b4f7d0100fc7c5fd5d508d132b9ce"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifact-consumer.mjs",
+      "mode": "100644",
+      "bytes": 35613,
+      "sha256": "c4af4bc0d3d46b3a27718f725afb47e3924505343131a592f22f96f904e744b6",
+      "git_blob": "46f406950864569832ce1d67116db682411b6b2d"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/release-product-inputs.mjs",
+      "mode": "100644",
+      "bytes": 1716,
+      "sha256": "0253b8fb2fe4902b261bed9b0ae48b163cc78add588965c0ecd0dad34b79b58c",
+      "git_blob": "8ba0c6814ab0c3aaf1261ebb96890a4e8b7ebdf4"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/retained-product-binding.mjs",
+      "mode": "100644",
+      "bytes": 2589,
+      "sha256": "e5c8f0fd2c581193a6cbf22f3bfd375333fc41021d8a3e8eb8fe384465d2a5b7",
+      "git_blob": "9610c50cadb5bc75c68b4b073687aeec9f822ab0"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/startup-vintage.mjs",
+      "mode": "100644",
+      "bytes": 2465,
+      "sha256": "710f7c342f98e275f077c50fc7028271166861551757437ad3564f9d3bbcf1f9",
+      "git_blob": "73fa6ef08230944f6ba7562b1698e7512b98ae86"
+    },
+    {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/temporal-runtime-binding.mjs",
+      "mode": "100644",
+      "bytes": 2306,
+      "sha256": "c52e678ebaf61b2179faf8b06384ae74e17189d5fb23e0aac2732b6e456cca24",
+      "git_blob": "04f6ff1bc1ceba126927342677cc9330d35e7d00"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/byte-patch.mjs",
+      "mode": "100644",
+      "bytes": 2810,
+      "sha256": "d3f83b2667e1864b2654bd66edc1bdb2556760409e0783f76a7f3775e1e77c47",
+      "git_blob": "fd920efd547508b203ebf4884b4a470cedc71ef4"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs",
+      "mode": "100644",
+      "bytes": 10262,
+      "sha256": "f681fc675e665c5091e38670f9b096a7bef8d4e957cde856ca26831cbb24e721",
+      "git_blob": "ac42893677eb7e8ea8861096cf23295285d615c4"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs",
+      "mode": "100644",
+      "bytes": 26158,
+      "sha256": "ca0c91cc93a66bb65db16b2fc91f79d88da97e479f37a2f4716046dc25e0d7c6",
+      "git_blob": "af346db3cf28c744d82a7a9a2b0ca60094a2746a"
+    },
+    {
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/whole-image.mjs",
+      "mode": "100644",
+      "bytes": 5049,
+      "sha256": "c99945eb4fae208e4a6dbf8ce325d93bb35e317b3feeb78312c05bce008d7898",
+      "git_blob": "a638fb29ec7c318b032c50ad00e38fa35053c908"
+    },
+    {
+      "path": "hosted/geographic-releases.js",
+      "mode": "100644",
+      "bytes": 17288,
+      "sha256": "9eba2ddeeb267ca09dc396225b8fe27385c1834ab6f9ebf5cb627ae38ebf1701",
+      "git_blob": "dddb27a2463b4924092a390344fedec23862c8cd"
+    },
+    {
+      "path": "scripts/check-prepared.mjs",
+      "mode": "100644",
+      "bytes": 3133,
+      "sha256": "66926416887b1e3a69962837a9e10ff322dc061f6f1a70be4624edb3583c5242",
+      "git_blob": "238d7a7526a4fc6e2b2e55ff8a56916e57ea1938"
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "mode": "100644",
+      "bytes": 28506,
+      "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97",
+      "git_blob": "3f8980f573af0a9fb48b763ed875026f0ce99199"
+    },
+    {
+      "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+      "mode": "100644",
+      "bytes": 1540,
+      "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb",
+      "git_blob": "a6d60162cd4ee51bb90bed913110b8fe2b323521"
+    },
+    {
+      "path": "scripts/native-ownership/require-verified-selection.mjs",
+      "mode": "100644",
+      "bytes": 4377,
+      "sha256": "20a8e3f472db4c06386ce2b7bd01330ea8acfd6d1ff414f6d2d32e8b1995d50c",
+      "git_blob": "0c73282307526101812f25e3fabb5fca68d8acf0"
+    },
+    {
+      "path": "scripts/package-startup-ownership.mjs",
+      "mode": "100644",
+      "bytes": 4093,
+      "sha256": "a088c1296be000afdbc6ee1b8d51e12946ac1b90beb18be15a05decfec7293fc",
+      "git_blob": "0ed65ad3e1f3aaffc0bb20987021d134a3817b8f"
+    },
+    {
+      "path": "scripts/prepare-geographic-release.mjs",
+      "mode": "100644",
+      "bytes": 47459,
+      "sha256": "dde318e3fd4cda7c94857abdaee3e33be3eb3f786e322d00637a636c3ff922b2",
+      "git_blob": "0603976d39fe8be9266318f47bf4ac86cff5b9b6"
+    },
+    {
+      "path": "scripts/read-geographic-release-manifest.mjs",
+      "mode": "100644",
+      "bytes": 3978,
+      "sha256": "9fddf4a6486a05d85558d19e4937e4da0955844b2156c016cfaec6d6cf2e0486",
+      "git_blob": "740284b35c0eef1d4b001d648fedbe138cd23de9"
+    },
+    {
+      "path": "scripts/read-prepared-evidence-bundle.mjs",
+      "mode": "100644",
+      "bytes": 1749,
+      "sha256": "327890c1c1fd6f8dbc96905c8759b5eef91874eb4d513da1f98630997c16ea8f",
+      "git_blob": "ab89c52546d01846b61ecfdcce88e993d07793cb"
+    },
+    {
+      "path": "src/category-palette.js",
+      "mode": "100644",
+      "bytes": 82979,
+      "sha256": "c449f2087075c9e03a25a26449154ac874c54a3285cf0d3df068c8cf6afd43b2",
+      "git_blob": "fb814163ba0aab841a0affd1a47f5539a964566b"
+    },
+    {
+      "path": "src/coverage-classification.js",
+      "mode": "100644",
+      "bytes": 7378,
+      "sha256": "469e64633f322c0610193f284ece49aea0671384a635a708fa27d69d1047b4c4",
+      "git_blob": "aabb3b0f48b0be011342e16920a45d9d23525a1a"
+    },
+    {
+      "path": "src/environment-classifications.js",
+      "mode": "100644",
+      "bytes": 5340,
+      "sha256": "d589aa3aa91831f0d1d2b5a21e161270ba44e86ef90dea23110a761510074970",
+      "git_blob": "1bc6cfa8165b144cacfc6de73d552990d7e64d80"
+    },
+    {
+      "path": "src/model.js",
+      "mode": "100644",
+      "bytes": 2822,
+      "sha256": "6cf64270d9c912b09aa93c60a14d058b4482c52e5ffa31d55fdcef026bea3dcc",
+      "git_blob": "b742ff4778deb48200007150c77b1f533f8bec41"
+    },
+    {
+      "path": "src/ownership-assets.js",
+      "mode": "100644",
+      "bytes": 4437,
+      "sha256": "7bc1938dbc3b1215a2c1a378c1bc4f85ee191a9d5c6779db91549e3d2b34dcba",
+      "git_blob": "f574fab74d46576c4ef835ec22b2e2d0fd42f5c3"
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "mode": "100644",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+      "git_blob": "03eacc9bcb1bff03723a93c248ea6de5f2fed5e4"
+    },
+    {
+      "path": "src/ownership-method.js",
+      "mode": "100644",
+      "bytes": 3126,
+      "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df",
+      "git_blob": "839abe54e65a98d7be47f7e6d8d58eda0b5a7abe"
+    },
+    {
+      "path": "src/pixel-grid.js",
+      "mode": "100644",
+      "bytes": 3699,
+      "sha256": "ad31039b651e157480eaf0053787b119bdab4b9a2a699e5f6a05d396736c7595",
+      "git_blob": "008aaf69e65105029e64e09317b8f9aa4df1f352"
+    },
+    {
+      "path": "src/pixel-ownership.js",
+      "mode": "100644",
+      "bytes": 6134,
+      "sha256": "da8e0b4f05e5ce390b47713030bffeefb7ea0df2700f7c358a9ebe77fe92586f",
+      "git_blob": "de88d87bea5ddca72c5816b1356ab18b9795f985"
+    },
+    {
+      "path": "src/prepared-evidence.js",
+      "mode": "100644",
+      "bytes": 7572,
+      "sha256": "12ad4e797603270958b9997a743a0a4531d65caf73f39e8a8055a33d38774e21",
+      "git_blob": "30b219d288d09c2f6bb866477788119476fbb989"
+    }
+  ],
+  "limits": {
+    "historical_runtime_unknown": true,
+    "current_old_source_area_recomputation_pass": false,
+    "science_reexecuted_for_application": false,
+    "production_deployment": false
+  },
+  "geometry_application_representation": {
+    "kind": "qualified-geometry-application-serialization",
+    "application": {
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz",
+      "mode": "100644",
+      "bytes": 3353763,
+      "sha256": "d7665a1fdf68f0626c7e28da9ac0e40f4e35aaeacdf91bad4ab8e2d77221bc49",
+      "logical_path": "data/geography/part-29.json",
+      "encoding": "gzip",
+      "commit": "ee684e3145079ff93f68520e3c17837789be5b0c",
+      "decoded_bytes": 12932719,
+      "decoded_sha256": "723d16eb63b7f2dcd8260a516eac6571a7ef1eaaf9bff3c926e0c63235b98fd3",
+      "git_blob_oid": "d3f17ccd8eecca88b16f2bbbf075320b6d555aea"
+    },
+    "scientific": {
+      "logical_path": "data/geography/part-29.json",
+      "encoding": "gzip",
+      "commit": "e05471c2d331fe62688f47bc1cd88a041805256d",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29.json.gz",
+      "mode": "100644",
+      "bytes": 3399520,
+      "sha256": "5f76a01a2c43eeccb3a202507faf593f56157fe38bd89f541be3b64145bdb1a8",
+      "decoded_bytes": 12932723,
+      "decoded_sha256": "4eca02f85d5e3a0974a96a38d59e46b0b71b41d2513dcf20ab27eb17fd5a0b4c",
+      "git_blob_oid": "0f54db4189f3c49af137df5310b6b50362062b31"
+    },
+    "original_application_sha256": "c34114912dc620dce0821e251877470b5a83385ab3bf1284408f077b78bbdec8",
+    "unchanged_literal_full_records": 1498,
+    "changed_ids": [
+      "atlas:physical:CAN-15:NWT",
+      "atlas:physical:CAN-25:NUN"
+    ],
+    "proof_bodies": [
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/actual-operating-output-readback.json",
+        "mode": "100644",
+        "bytes": 1621,
+        "sha256": "ab2925cf5833e30609b783476cd1ce2da094301c1ed40e0560b35004fb5acb42"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/application-geometry-code-source-b1cf0d5e.json",
+        "mode": "100644",
+        "bytes": 2026,
+        "sha256": "ec0b2122731af717b61ec80cf5e063a52fc1ce6b9e7bc298712e323ccfd535b9"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/application-geometry-entry-b1cf0d5e.mjs",
+        "mode": "100644",
+        "bytes": 737,
+        "sha256": "c73272825a61962a8f9534007ed68ea2e722b0671b95c0c6e202bdb66ccf78be"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/application-geometry-plan-b1cf0d5e.json",
+        "mode": "100644",
+        "bytes": 3283,
+        "sha256": "cfa347b2d38c6b957ddd5cd841c9b7582420c125d6cb2a751b519e510c185f98"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/application-geometry-supervisor-b1cf0d5e.py",
+        "mode": "100644",
+        "bytes": 10204,
+        "sha256": "7b48ad60a0621366eb8d9197c0f1f722872f85886ed5b60ac04cf8213592d548"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/artifact-checkout-execution-boundary-attempt1.json",
+        "mode": "100644",
+        "bytes": 2068,
+        "sha256": "2dff4da424685809cd068b7097fb6b41d7553cb025fe6b60957935c11f56d779"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/complete-original-inverse.json",
+        "mode": "100644",
+        "bytes": 122564,
+        "sha256": "ba9f1a903fa1619d2ce6e10adc9eb01f446210bb71741fd9361b7360c648368d"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/launch.json",
+        "mode": "100644",
+        "bytes": 989,
+        "sha256": "198dbf37b83a49562c927ffb31cd2388f6f0710468097e99491d90f66bbbe097"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/model-reader-call-boundary-controls-attempt1.json",
+        "mode": "100644",
+        "bytes": 7164,
+        "sha256": "8dad186be7cafac2cc42f3bbb14f8b8c86f923096b88208a861dcee242100713"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/producer-bounded-review-receipt.json",
+        "mode": "100644",
+        "bytes": 2038,
+        "sha256": "c528a2cfd1c7a3b25a5eae417976c2c5e504b7fc956282a54598b6cdf75c0adc"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/publication-receipt.json",
+        "mode": "100644",
+        "bytes": 3791,
+        "sha256": "cc47d1095a7d452f65325f16c969aa7690c712b56f78c70bf6c7508f1436535c"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/samples.jsonl",
+        "mode": "100644",
+        "bytes": 7951,
+        "sha256": "3a1d55f2077b9f120d5e4548f7f86d57e3896ae07ff80eb56d0dc2cd11c8651e"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/selected-application-geometry-controls-attempt1.json",
+        "mode": "100644",
+        "bytes": 682,
+        "sha256": "a99c0341b0ed55f220b9fff178a766b69bb964ea288d1904a014c48eafdbdff5"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/stderr.log",
+        "mode": "100644",
+        "bytes": 777,
+        "sha256": "fe0c8ac2d6ccc985d9b24a14c00df009f48a660d1e8737584efaa59573c3b81d"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/stdout.json",
+        "mode": "100644",
+        "bytes": 3346,
+        "sha256": "3698370747b771c65ffbda2994880cdd4eeb7f04932cb7d8c9860f1c51d532f9"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-serialization-b1cf0d5e/terminal.json",
+        "mode": "100644",
+        "bytes": 1427,
+        "sha256": "fb15119e5b172d02b0fb4cb5e61dea7ddb4212c8dc8ce0a6ae5226eb97bae001"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/application-geometry-serialization.mjs",
+        "mode": "100644",
+        "bytes": 5382,
+        "sha256": "0cd990c586eba990671a535931ee9385d55fc963d2d2e473e83b2a2a37fa45e0"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/application-geometry-producer.mjs",
+        "mode": "100644",
+        "bytes": 5096,
+        "sha256": "e3c821f3d30691b4c626127af80a8792864b258a3c4e04eb7a474773697baf5c"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/phase-admission.mjs",
+        "mode": "100644",
+        "bytes": 5103,
+        "sha256": "990a1f09cc0757cd4ddfef4253b07b184e3dd023e746c0046259a8a7f5d85d8f"
+      }
+    ],
+    "authority_limit": "Independently reviewed complete parsed-value equality,1498 literal records,two exact qualified geometry strings and complete original byte inverse. No scientific rerun; prior sorted-key scientific product remains literal."
+  }
+}

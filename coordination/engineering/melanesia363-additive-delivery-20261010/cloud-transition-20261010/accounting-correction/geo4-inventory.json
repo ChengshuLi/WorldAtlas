@@ -1,0 +1,90 @@
+{
+  "claim_and_slot": {
+    "owned_checkout_or_branch": null,
+    "task_claim": "none_created",
+    "verification": "This ClioPatria custody audit did not request or receive an issue claim/allocator receipt and allocated no author slot. No claim release is pending for this task. This statement does not assert the state of prior unrelated tasks."
+  },
+  "descendants": [],
+  "durable_evidence": {
+    "baseline_committed_inputs": [
+      "data/cliopatria/index.json",
+      "data/cliopatria/part-000.json through data/cliopatria/part-066.json",
+      "data/ownership-history/index.json",
+      "data/ownership-runtime/index.json",
+      "research/campaigns/cliopatria-iberia-1800-1820-source/source-manifest.json"
+    ],
+    "historical_attached_prs": [
+      1100,
+      1112,
+      1127
+    ],
+    "historical_pr_note": "These attachments belong to earlier completed, unrelated work and are not evidence for this ClioPatria audit.",
+    "public_or_github_evidence_created_by_this_audit": "none; the findings were reported internally to root",
+    "raw_original_zip": "not present in Git and not downloaded by this worker; source-manifest is a receipt, not the raw archive."
+  },
+  "goal": {
+    "objective": "Identify exact restoration/custody route for original ClioPatria inputs pinned by data/ownership-history/index.json at baseline d0cc67eac85038159f88a673acbc39b77ab7461d.",
+    "status": "complete",
+    "thread_id": "01a11013-8ab3-7691-9548-082b89a5a25a",
+    "verification": "get_goal returned complete; no active goal to pause."
+  },
+  "inventory_date": "2026-10-10",
+  "local_only_disposition": "This inventory is the only file created for this handoff. No cleanup, slot release, claim mutation, source download, project-code execution, or scientific rerun was performed.",
+  "processes": {
+    "matching_worker_or_audit_process": "none_observed",
+    "verification": "A process-list check for geo4_shared_seam, cliopatria, and ownership-history found only the inspection shell and ripgrep itself; no matching audit process remained."
+  },
+  "scope": "Read-only ClioPatria source-custody audit and cloud-handoff accounting only.",
+  "shared_checkout_observation": {
+    "branch": "main",
+    "head": "e760d68ff48a679b08f6fbf0581d1035de35105d",
+    "observed_untracked_paths": [
+      ".DS_Store",
+      ".github/.DS_Store",
+      "coordination/.DS_Store",
+      "data/.DS_Store",
+      "docs/.DS_Store",
+      "research/.DS_Store",
+      "claim-result.json",
+      "data/regional-review/nukunonu-bounty-1292-replay-preservation-erratum/"
+    ],
+    "ownership_note": "These are shared-checkout observations and were not created, inspected internally, or modified by this worker. No cleanup was performed.",
+    "path": "/Users/chengshuli/world-atlas-workspace/WorldAtlas",
+    "staged_diff": [],
+    "tracked_unstaged_diff": [],
+    "tracking": "origin/main; 542 commits ahead and 63 behind at observation"
+  },
+  "verified_source_custody_findings": {
+    "baseline": "d0cc67eac85038159f88a673acbc39b77ab7461d",
+    "bounded_zip_directory_observation": {
+      "members": [
+        {
+          "compressed_bytes": 44230763,
+          "crc32": "0x0d981573",
+          "decoded_bytes": 165608072,
+          "name": "cliopatria_polities_only.geojson"
+        },
+        {
+          "compressed_bytes": 86,
+          "decoded_bytes": 163,
+          "name": "__MACOSX/._cliopatria_polities_only.geojson"
+        }
+      ],
+      "method": "suffix-only HTTP Range of 65,536 bytes; no full archive download",
+      "zip_total_bytes": 44231317
+    },
+    "limits": "The original ZIP exceeds the 32 MiB evidence limit and would require compliant partition/reassembly if acquired. No raw ZIP or arbitrary parts were downloaded. Existing committed cliopatria inputs are prepared/simplified features, not the upstream raw ZIP. No historical approval or new data import is asserted.",
+    "repo_blob_crosscheck": "All 68 baseline repository blobs (index plus 67 part JSON files) hash-check against ownership-history/index.json inputs; aggregate size 47,875,964 bytes.",
+    "upstream_archive": {
+      "bytes": 44231317,
+      "citation": "Bennett et al. 2025, DOI 10.1038/s41597-025-04516-9",
+      "git_blob_sha1": "cefab0f4b622e2e7fb3daf68d4f461f83991204c",
+      "license": "CC BY 4.0",
+      "pinned_upstream_commit": "ad28a691b7c07c1fca89d0e0636d324667d2a258",
+      "sha256": "d01ae3a20d358cc5d54f69d9d725d390767d9c8759ac89ad6f90c58d106f3370",
+      "tag": "v0.2.0-duplicate"
+    },
+    "upstream_archive_url": "https://raw.githubusercontent.com/Seshat-Global-History-Databank/cliopatria/ad28a691b7c07c1fca89d0e0636d324667d2a258/cliopatria.geojson.zip"
+  },
+  "worker_id": "/root/geo4_shared_seam"
+}

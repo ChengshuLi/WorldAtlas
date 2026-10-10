@@ -1,0 +1,65 @@
+{
+  "execution_commit": "1a5d4090319202b82bab9cc34735053410ceff1d",
+  "terminal": {
+    "code_source_sha256": "1b83fa040d40e6ab4dedfb9b520f631eabc766390a4c68a721c6df9bd7ea2420",
+    "command": [
+      "/usr/bin/time",
+      "-l",
+      "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs",
+      "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/activation-current-v9-source-view-preparation/plan.json",
+      "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/activation-current-v9-source-view/products"
+    ],
+    "elapsed_seconds": 6.307228624995332,
+    "execution_commit": "1a5d4090319202b82bab9cc34735053410ceff1d",
+    "exit_code": 0,
+    "guard_reason": null,
+    "kind": "current-rebind-external-terminal-v1",
+    "lifetime_ceiling_bytes": 536870912,
+    "lifetime_rss_bytes": 392478720,
+    "owned_processes_remaining": [],
+    "publication_sha256": "585d650c1c832031282967c6f9b3c8b7c88f71f314b74a943ba33a2d6df97527",
+    "request_sha256": "a42df4564037a8a1d6a8e5dd4502345c4e80cdcffffd2354a0bcaf5dec009dee",
+    "sampled_group_peak_bytes": 372588544,
+    "sampled_stop_bytes": 402653184,
+    "signal": null,
+    "termination_events": [],
+    "version": 1,
+    "wall_limit_seconds": 1200
+  },
+  "whole_products": {
+    "request": {
+      "bytes": 746478,
+      "sha256": "a42df4564037a8a1d6a8e5dd4502345c4e80cdcffffd2354a0bcaf5dec009dee",
+      "path": ".worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/activation-current-v9-source-view/products/request.json"
+    },
+    "result": {
+      "bytes": 1052987,
+      "sha256": "0ed00b4712f2ba22af1cca07ac3e6323ae6d73892731ebab3c5a6d80ca7b0259",
+      "path": ".worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/activation-current-v9-source-view/products/result.json"
+    },
+    "facts": {
+      "bytes": 3263,
+      "sha256": "da8ae1acd06fc22647c61184aeac8f8629d4bac078d30e81716c13f7c0c1c88a",
+      "path": ".worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/activation-current-v9-source-view/products/facts.json"
+    },
+    "publication": {
+      "bytes": 475,
+      "sha256": "585d650c1c832031282967c6f9b3c8b7c88f71f314b74a943ba33a2d6df97527",
+      "path": ".worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/activation-current-v9-source-view/products/publication.json"
+    }
+  },
+  "unchanged_proposal_fields": {
+    "original_rows": true,
+    "original_patch_sha256s": true,
+    "current_targets": true,
+    "geometry": true,
+    "native": true,
+    "authority_registry_sha256": true
+  },
+  "pending_components": 12,
+  "targets": 7,
+  "affected_rows": 72,
+  "new_cells": 141,
+  "not_selected_release_delivery": true
+}

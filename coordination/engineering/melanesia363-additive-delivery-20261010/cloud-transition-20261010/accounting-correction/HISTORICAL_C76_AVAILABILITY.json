@@ -1,0 +1,72 @@
+{
+  "kind": "historical-c76-preservation-availability-v1",
+  "historical_candidate": "c76a77a850f0d88f99529096c2a29ae65fd22720",
+  "local_git_object_available": true,
+  "local_git_common_dir": "/Users/chengshuli/world-atlas-workspace/WorldAtlas/.git",
+  "local_commit_body_bytes": 281,
+  "local_commit_body_sha256": "4df14f88e3578662821c9bf13ffacb5ca6b1f1b6b85613d4bc0490cb80663511",
+  "local_containing_refs": [
+    "refs/heads/engineering/additive-native-selected-delivery-20261010",
+    "refs/worldatlas-local-recovery/7791875b-b05d-4476-9671-2d569eb7c08a",
+    "refs/worldatlas-local-recovery/source-view-c76-20261010"
+  ],
+  "remote_candidate_availability": "Cloud inspection found candidate not remotely resolvable; this handoff does not publish the historical candidate commit or its complete artifact graph.",
+  "readbacks": [
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/root1632-source-view-qualification-readback-20261010.json",
+      "available_locally": true,
+      "original_bytes": 3342,
+      "original_sha256": "0c625b02a819625f824897cbadd7ab7b55b2c56e951ec4007071638143b706e2",
+      "handoff_copy": "historical-readbacks/root1632-source-view-qualification-readback-20261010.json",
+      "disposition": "Small original historical readback copied; author must inspect/sanitize before committing; not current release authority."
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1632-stock-correction-independent-review-20261010/source-view-qualification-readback-1a5d.json",
+      "available_locally": true,
+      "original_bytes": 18926,
+      "original_sha256": "2a88c3a950fcea00f8696eee5de329694ca7e0a8c62cd57548a5a7daaf591b64",
+      "handoff_copy": "historical-readbacks/source-view-qualification-readback-1a5d.json",
+      "disposition": "Small original historical readback copied; author must inspect/sanitize before committing; not current release authority."
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/root1632-source-view-candidate-selection-readback-20261010.json",
+      "available_locally": true,
+      "original_bytes": 2888,
+      "original_sha256": "7867d6f1daaabd191341f0d9d3895bc204e42215b036713fe38835e402faf259",
+      "handoff_copy": "historical-readbacks/root1632-source-view-candidate-selection-readback-20261010.json",
+      "disposition": "Small original historical readback copied; author must inspect/sanitize before committing; not current release authority."
+    },
+    {
+      "original_local_path": "/Users/chengshuli/world-atlas-workspace/.cache/root1632-source-view-certificate-binding-readback-20261010.json",
+      "available_locally": true,
+      "original_bytes": 2316,
+      "original_sha256": "6b0d96f96d1c728db14060394987037a512c7fb5183779a431bf2b6002220d78",
+      "handoff_copy": "historical-readbacks/root1632-source-view-certificate-binding-readback-20261010.json",
+      "disposition": "Small original historical readback copied; author must inspect/sanitize before committing; not current release authority."
+    }
+  ],
+  "small_historical_git_records": [
+    {
+      "original_git_commit": "c76a77a850f0d88f99529096c2a29ae65fd22720",
+      "original_git_path": "data/ownership-selection.json",
+      "bytes": 1409,
+      "sha256": "2e03287515f985c3e0ac2d18243202884bb287da1d1cd0ee22b61cac8d74b578",
+      "handoff_copy": "historical-c76-git-bodies/data/ownership-selection.json",
+      "disposition": "Historical candidate body copied from existing local Git object; not executed/adopted/current release."
+    },
+    {
+      "original_git_commit": "c76a77a850f0d88f99529096c2a29ae65fd22720",
+      "original_git_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/consumption-certificate.json",
+      "bytes": 68158,
+      "sha256": "26b505e3131a2513badc45d1552bcf603c24c565bdfb21b0f623fe4e6c7d4070",
+      "handoff_copy": "historical-c76-git-bodies/coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/consumption-certificate.json",
+      "disposition": "Historical candidate body copied from existing local Git object; not executed/adopted/current release."
+    }
+  ],
+  "limits": [
+    "Historical references in root-delivery-continuation are superseded; use current21gap/353cell selected release, not this old activation candidate.",
+    "Raw local Git object is available now; no cloud availability for full c76 tree is implied. Two small candidate bodies and four readback records are copied; complete referenced scientific/runtime inputs remain local or at their original public commits, unless separately manifested.",
+    "No scientific processing, qualification, project code execution, credentials/tokens/slots or claims changed.",
+    "Author must inspect exact copies and record any sanitized derivative hashes; private originals remain unchanged."
+  ]
+}

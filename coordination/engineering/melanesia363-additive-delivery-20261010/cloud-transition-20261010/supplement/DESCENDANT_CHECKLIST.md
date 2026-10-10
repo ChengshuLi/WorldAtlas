@@ -129,6 +129,8 @@ Thread: `01a11013-8ab3-7691-9548-082b89a5a25a`; parent: `01a10893-2a57-72e0-aa08
 
 Inventory sent to root. No cleanup, claim release, or other owner changes were made.
 
+Concrete final GEO4 inventory is preserved in [accounting-correction/geo4-inventory.json](../accounting-correction/geo4-inventory.json), 4708 bytes/SHA bf7841faa4044db47b7a8b3acdfa9147018e5e04b2819fc29cdd8c988c8a8b08. [Latest signoff](../accounting-correction/geo4-latest-signoff.json) provides fresh completed-source verification and current ownership/evidence/local-only findings. These concrete records supplement the historical signoff; they confer no new claim, execution or delivery.
+
 ## /root/geometry_exact_boundary_preflight
 
 Thread: `01a1120b-1119-7ca1-84e6-0958f80deef7`; parent: `01a10893-2a57-72e0-aa08-5c36088d5206`. Latest turn: completed.

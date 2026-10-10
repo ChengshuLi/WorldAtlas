@@ -1,0 +1,351 @@
+{
+  "base_selection": {
+    "artifact_consumption": {
+      "certificate": {
+        "bytes": 68158,
+        "mode": "100644",
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/consumption-certificate.json",
+        "sha256": "26b505e3131a2513badc45d1552bcf603c24c565bdfb21b0f623fe4e6c7d4070"
+      },
+      "review": {
+        "bytes": 8410,
+        "mode": "100644",
+        "path": "coordination/engineering/additive-native-activation-20261009/independent-original-native-authority-lifetime-review.json",
+        "sha256": "fb271c9853da87165b62b65c1fbe6755bf87416552117ef759e608f7641e4184"
+      }
+    },
+    "manifest_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+    "method": "native-linear-evenodd-first-owner-v1",
+    "release_id": "geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb",
+    "selected_geography": {
+      "bytes": 14656,
+      "kind": "complete-world-index-with-exact-encoded-overrides",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json",
+      "sha256": "3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776",
+      "version": 1
+    },
+    "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+    "version": 1
+  },
+  "execution_commit": "1a5d4090319202b82bab9cc34735053410ceff1d",
+  "geometry_summary": [
+    {
+      "added_polygon_bounds": [
+        [
+          -76.22610286859776,
+          68.3032,
+          -76.22353615454084,
+          68.303588387391
+        ]
+      ],
+      "preserved_polygons": 27,
+      "target_id": "atlas:physical:CAN-25:NUN"
+    },
+    {
+      "added_polygon_bounds": [],
+      "preserved_polygons": 9,
+      "target_id": "gb:USA:ADM2:52423323B16539688175930"
+    },
+    {
+      "added_polygon_bounds": [],
+      "preserved_polygons": 24,
+      "target_id": "gb:USA:ADM2:52423323B46246640861022"
+    },
+    {
+      "added_polygon_bounds": [],
+      "preserved_polygons": 15,
+      "target_id": "gb:USA:ADM2:52423323B55198873775030"
+    },
+    {
+      "added_polygon_bounds": [],
+      "preserved_polygons": 9,
+      "target_id": "gb:USA:ADM2:52423323B64721050065013"
+    },
+    {
+      "added_polygon_bounds": [],
+      "preserved_polygons": 14,
+      "target_id": "gb:USA:ADM2:52423323B80008995120080"
+    },
+    {
+      "added_polygon_bounds": [],
+      "preserved_polygons": 10,
+      "target_id": "gb:USA:ADM2:52423323B82121365400499"
+    }
+  ],
+  "kind": "independent-actual-current-v9-rebind-products-readback",
+  "limits": [
+    "Readback only; no operator executed.",
+    "Complete 72 requested row streams preserved with additions only; not a whole-world native/continuous gate.",
+    "141 cells here are the twelve additive components, not Arctic NWT+140/NUN+1 qualification.",
+    "Current source applicability retains historical policy limits. Selected repair requires candidate trusted native AND continuous gates, merge and selected-output readback."
+  ],
+  "native": {
+    "additions_overlap_existing": 0,
+    "assigned_cells": 141,
+    "complete_requested_rows": 72,
+    "existing_assignments_changed": 0,
+    "per_owner": {
+      "44705": 29,
+      "45711": 33,
+      "46045": 3,
+      "46395": 11,
+      "46957": 57,
+      "47017": 1,
+      "6757": 7
+    }
+  },
+  "operating_files": [
+    {
+      "bytes": 52014,
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/activation-current-v9-source-view/operating/code-source.json",
+      "sha256": "1b83fa040d40e6ab4dedfb9b520f631eabc766390a4c68a721c6df9bd7ea2420"
+    },
+    {
+      "bytes": 1339,
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/activation-current-v9-source-view/operating/host-supply.json",
+      "sha256": "bba7cf85085f3fb891d9a872ba07cd9cf0029ca9a174eda1662e818edd40657f"
+    },
+    {
+      "bytes": 926,
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/activation-current-v9-source-view/operating/launch.json",
+      "sha256": "4639faeceab59fbf081c64deb73e91d2da34f07a696e9923c3fd56d55130bf6a"
+    },
+    {
+      "bytes": 33144,
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/activation-current-v9-source-view/operating/samples.jsonl",
+      "sha256": "0103188afc9ba36d8b2d409cb34eb4fc6b3109e63c73c570516d4465976010d9"
+    },
+    {
+      "bytes": 777,
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/activation-current-v9-source-view/operating/stderr.log",
+      "sha256": "d9e392ebdc7b7b4b6061838f252e48e2661abd7bd70e51f8749491fbc08fdcab"
+    },
+    {
+      "bytes": 376,
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/activation-current-v9-source-view/operating/stdout.json",
+      "sha256": "05a097e5ff0d4a4fb804498df898d20e7a8c750c19516008d3420dd85cc389f3"
+    },
+    {
+      "bytes": 14239,
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/activation-current-v9-source-view/operating/stock-report.json",
+      "sha256": "1e68baf0096e8dbea254a704324181fc51a79ccf1ccf0295b12c1cde31c3b493"
+    },
+    {
+      "bytes": 1458,
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/activation-current-v9-source-view/operating/terminal.json",
+      "sha256": "44ec6ec460abcf8dc03c9819e6217c0c7cd96496e2cb22652658df848bfd6d30"
+    }
+  ],
+  "original_rows": [
+    {
+      "authority_sha256": "867c3de9451a33f756c7f52852a782bc0877757d5ea71818bf88da4263690d46",
+      "base_geometry_sha256": "e000087b464bda87f519c3abd8117284fa3d651a46f4ccb5bf5ba9dd96f84300",
+      "component_id": "physical-component:073d9a81648d56c1b63a4e495fbd0140c17659bedb5c9b211739642b438ee488",
+      "disposition": "assigned",
+      "geometry_sha256": "f6f8b48a2f3d31bc50ea73d20075f5cb7dacb17266ae3ad8e3897abd45565614",
+      "native_cells": 2,
+      "pixelIndex": 45711,
+      "rule_sha256": "199f6e33cf394fe92dd490100a717eb23c008cbe896f69ac01e36f49e2f6d8a6",
+      "source_receipt_sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+      "target_id": "gb:USA:ADM2:52423323B46246640861022"
+    },
+    {
+      "authority_sha256": "867c3de9451a33f756c7f52852a782bc0877757d5ea71818bf88da4263690d46",
+      "base_geometry_sha256": "ba5ada9a970f80dbeb5f92f84c253787e10898df64d6171047901a089604b60a",
+      "component_id": "physical-component:4d36c81ff35079341e6ec0d5a207ba3844e26f5d55c30c7205924dfd33b8dc18",
+      "disposition": "assigned",
+      "geometry_sha256": "d07064e1716715618bf6b0ddb7f313bafc26acc0d11ff250d094b71b91b10120",
+      "native_cells": 19,
+      "pixelIndex": 44705,
+      "rule_sha256": "199f6e33cf394fe92dd490100a717eb23c008cbe896f69ac01e36f49e2f6d8a6",
+      "source_receipt_sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+      "target_id": "gb:USA:ADM2:52423323B16539688175930"
+    },
+    {
+      "authority_sha256": "867c3de9451a33f756c7f52852a782bc0877757d5ea71818bf88da4263690d46",
+      "base_geometry_sha256": "b517bd1b4485cf441617ec69af42dd07b4aa146033e791bc8521efc885fe87f0",
+      "component_id": "physical-component:5874689a46f7945e9dcc67cc3b0321d4e534572e4b4bd8a85f4a07c5005d1922",
+      "disposition": "assigned",
+      "geometry_sha256": "41d44c7ab86d4681528f4d4a4d506f65b3a780412729685c96141ec8256cc98d",
+      "native_cells": 45,
+      "pixelIndex": 46957,
+      "rule_sha256": "199f6e33cf394fe92dd490100a717eb23c008cbe896f69ac01e36f49e2f6d8a6",
+      "source_receipt_sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+      "target_id": "gb:USA:ADM2:52423323B80008995120080"
+    },
+    {
+      "authority_sha256": "867c3de9451a33f756c7f52852a782bc0877757d5ea71818bf88da4263690d46",
+      "base_geometry_sha256": "8d53f7cb32e41314956b6eb6e5beef9bfc4cf8097bf7fd035001b2566768fa37",
+      "component_id": "physical-component:66e4f6c15eb17f53815844efc04e7cae9faf9118de313541d3a4be2ff1fcf0a2",
+      "disposition": "assigned",
+      "geometry_sha256": "907c83f85d8cf18610a1122270e4fdac03104017b0e5237dee17b6c8c74695ad",
+      "native_cells": 11,
+      "pixelIndex": 46395,
+      "rule_sha256": "199f6e33cf394fe92dd490100a717eb23c008cbe896f69ac01e36f49e2f6d8a6",
+      "source_receipt_sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+      "target_id": "gb:USA:ADM2:52423323B64721050065013"
+    },
+    {
+      "authority_sha256": "867c3de9451a33f756c7f52852a782bc0877757d5ea71818bf88da4263690d46",
+      "base_geometry_sha256": "ba5ada9a970f80dbeb5f92f84c253787e10898df64d6171047901a089604b60a",
+      "component_id": "physical-component:70174bffffdbb4a421344d6c10d80b760972f9c5452daf0d7c26408fdf18bb53",
+      "disposition": "assigned",
+      "geometry_sha256": "33655bbd4900f942bd4bd4fae9066bad21fe0a51d75484c9a006210a59b0b503",
+      "native_cells": 9,
+      "pixelIndex": 44705,
+      "rule_sha256": "199f6e33cf394fe92dd490100a717eb23c008cbe896f69ac01e36f49e2f6d8a6",
+      "source_receipt_sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+      "target_id": "gb:USA:ADM2:52423323B16539688175930"
+    },
+    {
+      "authority_sha256": "867c3de9451a33f756c7f52852a782bc0877757d5ea71818bf88da4263690d46",
+      "base_geometry_sha256": "b517bd1b4485cf441617ec69af42dd07b4aa146033e791bc8521efc885fe87f0",
+      "component_id": "physical-component:777e7bc99320bf155684f99b0903c336f9a07862de4a7fa0ac8cde990d7d6ee5",
+      "disposition": "assigned",
+      "geometry_sha256": "3e1ac087fab9421cc3640d3b8a34ba29d9ccec237266cc0da3d63df6832ec35a",
+      "native_cells": 12,
+      "pixelIndex": 46957,
+      "rule_sha256": "199f6e33cf394fe92dd490100a717eb23c008cbe896f69ac01e36f49e2f6d8a6",
+      "source_receipt_sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+      "target_id": "gb:USA:ADM2:52423323B80008995120080"
+    },
+    {
+      "authority_sha256": "867c3de9451a33f756c7f52852a782bc0877757d5ea71818bf88da4263690d46",
+      "base_geometry_sha256": "ba5ada9a970f80dbeb5f92f84c253787e10898df64d6171047901a089604b60a",
+      "component_id": "physical-component:8435dc6d973751bab55c4eff12c872ba331c3e005254ceb21b76933a8cc6207a",
+      "disposition": "assigned",
+      "geometry_sha256": "80690097e995ab6c26d1447c7fc57d0190001d41ceca58cce24476b12550e295",
+      "native_cells": 1,
+      "pixelIndex": 44705,
+      "rule_sha256": "199f6e33cf394fe92dd490100a717eb23c008cbe896f69ac01e36f49e2f6d8a6",
+      "source_receipt_sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+      "target_id": "gb:USA:ADM2:52423323B16539688175930"
+    },
+    {
+      "authority_sha256": "867c3de9451a33f756c7f52852a782bc0877757d5ea71818bf88da4263690d46",
+      "base_geometry_sha256": "e000087b464bda87f519c3abd8117284fa3d651a46f4ccb5bf5ba9dd96f84300",
+      "component_id": "physical-component:8fb2ed9360ba13f6b19f8bb6ee9a16099039d8b59c9f51eab0a442249f428e7d",
+      "disposition": "assigned",
+      "geometry_sha256": "17ef6c1e9f81fa0ccebb0d6c9bb44753d0935bf3b50464f5f213937d6e3ecd47",
+      "native_cells": 26,
+      "pixelIndex": 45711,
+      "rule_sha256": "199f6e33cf394fe92dd490100a717eb23c008cbe896f69ac01e36f49e2f6d8a6",
+      "source_receipt_sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+      "target_id": "gb:USA:ADM2:52423323B46246640861022"
+    },
+    {
+      "authority_sha256": "867c3de9451a33f756c7f52852a782bc0877757d5ea71818bf88da4263690d46",
+      "base_geometry_sha256": "e000087b464bda87f519c3abd8117284fa3d651a46f4ccb5bf5ba9dd96f84300",
+      "component_id": "physical-component:9f130f023a510be6e4b2f9075ed99cf75c4f88053e93189dda3f0bd51080f14a",
+      "disposition": "assigned",
+      "geometry_sha256": "dec957bf2af7f3cb3756e99fb862e4c92b7d84c10cd5837f9c12b441400055d8",
+      "native_cells": 5,
+      "pixelIndex": 45711,
+      "rule_sha256": "199f6e33cf394fe92dd490100a717eb23c008cbe896f69ac01e36f49e2f6d8a6",
+      "source_receipt_sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+      "target_id": "gb:USA:ADM2:52423323B46246640861022"
+    },
+    {
+      "authority_sha256": "ad30afabcd8b821c7877705b4af34b806956a158de6c53fb10a90c1c435ac85f",
+      "base_geometry_sha256": "bc41fde9ff7e3db2efdcc0a98313e5098da517576daff26f2e84faa0c5cfd865",
+      "component_id": "physical-component:add031b7195352292c8529323c8b99dd75002af629116b229e84be981893ca8d",
+      "disposition": "assigned",
+      "geometry_sha256": "2990484791018f36fbabe86f2954670b7db4a785314ed43867cc958d43d3053a",
+      "native_cells": 7,
+      "pixelIndex": 6757,
+      "rule_sha256": "f08ddf9c1d0534aecda36ff134d6398d48c618a7e6982e7f51c31914c2140faf",
+      "source_receipt_sha256": "0b301a59f96273c703f333b91e5219a409139cc2c14d43d78968fd57f7845622",
+      "target_id": "atlas:physical:CAN-25:NUN"
+    },
+    {
+      "authority_sha256": "867c3de9451a33f756c7f52852a782bc0877757d5ea71818bf88da4263690d46",
+      "base_geometry_sha256": "9eba23401ea8d37ff0a660a299ef8070bd7e097350b62ad72130cea5c6e7618c",
+      "component_id": "physical-component:e76fd386dc9a23375537ede302f7f380a217fd4bbccd9536f856e8b4253a5ab8",
+      "disposition": "assigned",
+      "geometry_sha256": "94ea7b1ce6a9fba2d85df60d3601fcf67a5e766d371bdbc85816591aa88731d8",
+      "native_cells": 1,
+      "pixelIndex": 47017,
+      "rule_sha256": "199f6e33cf394fe92dd490100a717eb23c008cbe896f69ac01e36f49e2f6d8a6",
+      "source_receipt_sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+      "target_id": "gb:USA:ADM2:52423323B82121365400499"
+    },
+    {
+      "authority_sha256": "867c3de9451a33f756c7f52852a782bc0877757d5ea71818bf88da4263690d46",
+      "base_geometry_sha256": "a5948109710b057ae9a791a02fccc34eb9b3c14c4e195c092169c8f1c031f258",
+      "component_id": "physical-component:ef7383db4412abe64b7e8d009679cffa4a3174d6da100c6de1fc37272aadeca9",
+      "disposition": "assigned",
+      "geometry_sha256": "96fac28646b8469ca0fa115c7bb9def542d10af7177181bc7315af3a667c92cf",
+      "native_cells": 3,
+      "pixelIndex": 46045,
+      "rule_sha256": "199f6e33cf394fe92dd490100a717eb23c008cbe896f69ac01e36f49e2f6d8a6",
+      "source_receipt_sha256": "d2ce0959497b5bb9f282db97eb4374e4554209e37c069b59bfb97a988311f778",
+      "target_id": "gb:USA:ADM2:52423323B55198873775030"
+    }
+  ],
+  "permission_binding": "Recorded mode field compared as st_mode & 0o777, matching original execution-contract.py.",
+  "phase_bytes": 216587827,
+  "pre_post_equal": true,
+  "products": {
+    "facts": {
+      "bytes": 3263,
+      "mode": 420,
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/activation-current-v9-source-view/products/facts.json",
+      "sha256": "da8ae1acd06fc22647c61184aeac8f8629d4bac078d30e81716c13f7c0c1c88a"
+    },
+    "publication": {
+      "bytes": 475,
+      "mode": 420,
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/activation-current-v9-source-view/products/publication.json",
+      "sha256": "585d650c1c832031282967c6f9b3c8b7c88f71f314b74a943ba33a2d6df97527"
+    },
+    "request": {
+      "bytes": 746478,
+      "mode": 420,
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/activation-current-v9-source-view/products/request.json",
+      "sha256": "a42df4564037a8a1d6a8e5dd4502345c4e80cdcffffd2354a0bcaf5dec009dee"
+    },
+    "result": {
+      "bytes": 1052987,
+      "mode": 420,
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/activation-current-v9-source-view/products/result.json",
+      "sha256": "0ed00b4712f2ba22af1cca07ac3e6323ae6d73892731ebab3c5a6d80ca7b0259"
+    }
+  },
+  "retained_previous_qualification": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.cache/native-1632-stock-correction-independent-review-20261010/actual-growth-qualification-readback-2e04.json",
+    "sha256": "f490263978f293997865995652946b72b4cad79d5aa71c9edbd6355e72b350f2"
+  },
+  "sample_records": 19,
+  "sample_sum_and_peak_match": true,
+  "source_bodies_equal_immutable_execution_commit": true,
+  "terminal": {
+    "code_source_sha256": "1b83fa040d40e6ab4dedfb9b520f631eabc766390a4c68a721c6df9bd7ea2420",
+    "command": [
+      "/usr/bin/time",
+      "-l",
+      "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs",
+      "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/activation-current-v9-source-view-preparation/plan.json",
+      "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cf40d9d594efb1cc1cb6158e6803afea25baf2d6058a2324fe45a0b23a03fb41/work/.cache/activation-current-v9-source-view/products"
+    ],
+    "elapsed_seconds": 6.307228624995332,
+    "execution_commit": "1a5d4090319202b82bab9cc34735053410ceff1d",
+    "exit_code": 0,
+    "guard_reason": null,
+    "kind": "current-rebind-external-terminal-v1",
+    "lifetime_ceiling_bytes": 536870912,
+    "lifetime_rss_bytes": 392478720,
+    "owned_processes_remaining": [],
+    "publication_sha256": "585d650c1c832031282967c6f9b3c8b7c88f71f314b74a943ba33a2d6df97527",
+    "request_sha256": "a42df4564037a8a1d6a8e5dd4502345c4e80cdcffffd2354a0bcaf5dec009dee",
+    "sampled_group_peak_bytes": 372588544,
+    "sampled_stop_bytes": 402653184,
+    "signal": null,
+    "termination_events": [],
+    "version": 1,
+    "wall_limit_seconds": 1200
+  },
+  "version": 1,
+  "whole_custody_bytes": 148874085,
+  "whole_custody_entries": 110
+}
