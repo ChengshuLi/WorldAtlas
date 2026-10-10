@@ -1,0 +1,2181 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "scientific_operations_invoked": false,
+  "scope": "Exactly four PR #1653 component geometries against the Aleutians West feature in two already-retained geoBoundaries USA ADM2 variants from the 9469f09 release.",
+  "inputs": [
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/phase-admission.json",
+      "bytes": 131133,
+      "sha256": "d2be8305241edb27e222899647054c31f16209880ec079bf7a029dbeafd02673",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/north-america-gap-batch-20261009/alaska-west-four-source-physical-evidence.json",
+      "bytes": 241474,
+      "sha256": "ee8b5fe2531b6cf2956392d7597053916d6221b361aeee1f64ed1c615f11966c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/geoboundaries-USA-ADM2-full-9469f09.geojson",
+      "bytes": 10500644,
+      "sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/geoboundaries-USA-ADM2-full-9469f09-receipt.json",
+      "bytes": 1233,
+      "sha256": "5e242bc78bc8a0481e60619583e1c00419c1e8849416308fd5ffbf498f9ccd6c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/geoboundaries-USA-ADM2-full-9469f09-source-check.json",
+      "bytes": 1263,
+      "sha256": "5b15222cc72044db7b8f45e8f3000e462698b240f1f7ad77d9f0964b0ca6c1ae",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/usa-adm2-lineage-428/sources/upstream-2018/geoBoundaries-USA-ADM2_simplified.geojson",
+      "bytes": 7938450,
+      "sha256": "16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/usa-adm2-lineage-428/sources/upstream-2018/simplified-object-retrieval.json",
+      "bytes": 717,
+      "sha256": "8c215453feef0b2b43a6e1618d7aec94f45fbc6a553d8edf939304d3faaef12f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/usa-adm2-lineage-428/sources/upstream-2018/retrieval.json",
+      "bytes": 6807,
+      "sha256": "6fa77ed577eed18f745bca79aab0f86e879c88ec769026dbd22a386ecad6bc35",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/usa-adm2-lineage-428/sources/upstream-2018/geoBoundaries-USA-ADM2-metaData.json",
+      "bytes": 939,
+      "sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "project_code": [
+    {
+      "path": "scripts/evidence/immutable.py",
+      "bytes": 17414,
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/measure_alaska.py",
+      "bytes": 69925,
+      "sha256": "59553c3dd787925f9aef3e6654c060acbb43b33d4b0463ebd992c93f84516f41",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/variant_coverage_driver.py",
+      "bytes": 12750,
+      "sha256": "73d13e4b774104b600527e8c384c62e481dc0afd5e72f254a3ccbbd59deb073b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/variant_coverage_run_phase.py",
+      "bytes": 9058,
+      "sha256": "8dd4030b6393a082fef0be7ec13461dda767d6fea252083feacc7b88208233b9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/build_phase_admission.py",
+      "bytes": 6338,
+      "sha256": "a52a0f081bd58729585e2699a2d480fa6a3c6a4d974911ad2bd5aecffaef7c33",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/north-america-gap-batch-20261009/alaska-west-variant-coverage-20261009/build_evidence_manifest.py",
+      "bytes": 14627,
+      "sha256": "d1e0f8c756e6a7f70ca466b41f594b441787f389920ce3b1d429e81d68f08a7f",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "runtime": {
+    "python": "3.12.14",
+    "shapely": "2.1.2",
+    "pyproj": "3.7.2",
+    "numpy": "2.3.5",
+    "proj_db_bytes": 9273344,
+    "proj_db_sha256": "ec8cea0a5490a6f9247d9063645049e0f93fb83307067ebfc859187f0539e67e",
+    "imported_files": 292,
+    "imported_file_bytes": 30072278
+  },
+  "runtime_file_closure": [
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+      "bytes": 18058560,
+      "sha256": "2498a31965647f1507a53e391842b23c29d96f0ef4550475f34a1d2b30c23ddb",
+      "mode": 493
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/__future__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/__future__.py",
+      "bytes": 5218,
+      "sha256": "981d4c398849f9ebcab72300d9c1fe288fd6d7f28957b3b3fa3a493a5836d95c",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/_collections_abc.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/_collections_abc.py",
+      "bytes": 32089,
+      "sha256": "d4945c8410c4bab351741b04bca3de066f7c27ed7e38df89e206a96617102ffb",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/_compat_pickle.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/_compat_pickle.py",
+      "bytes": 8761,
+      "sha256": "12c8356a3d40bd0a336f13d7c6e2bed50d5c1a876563766a3175a6b328b5855e",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/_compression.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/_compression.py",
+      "bytes": 5681,
+      "sha256": "3ad5d60627477a60939ee44fc1bb3a05dbe8fb52f0f75039b8f5d8f1a278b981",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/_sitebuiltins.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/_sitebuiltins.py",
+      "bytes": 3128,
+      "sha256": "b9388bc1d6d12ed6be12da420ab1feca40f99c0e33ec315d92b1e01cb69b25bc",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/_weakrefset.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/_weakrefset.py",
+      "bytes": 5893,
+      "sha256": "91895a451d06e9f521a1171b31b9b19bc9740f35af00d4fa106338ab7167c9ac",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/abc.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/abc.py",
+      "bytes": 6538,
+      "sha256": "e558702a95cdce3febd289da021715d2b92bc43995b8a1bc58dfa1c3d8010287",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/argparse.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/argparse.py",
+      "bytes": 101155,
+      "sha256": "7cc582dcb3b76e2c957f78a3f74e9809d6c311d6aab7bcaa2c9954d0cbff5f30",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/ast.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/ast.py",
+      "bytes": 64452,
+      "sha256": "b515c23dbbc459329d3b802a3aac742cc456d7472e66f7ed6e9dc97e40596d7d",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/base64.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/base64.py",
+      "bytes": 20635,
+      "sha256": "8d1f608dbf030d11d6ec4df9e4c55b73fb68cdfbd9f53a7c91684a93b55564b5",
+      "mode": 493
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/bisect.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/bisect.py",
+      "bytes": 3423,
+      "sha256": "f1cf7b85fc36b5da249813fc5ab97d9464f8cc1bc817f7146206fa2713e35999",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/bz2.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/bz2.py",
+      "bytes": 11847,
+      "sha256": "76ab3252924e71e859d7d90e8d3db13b6554975cfcac0fdadced4de7f8779330",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/calendar.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/calendar.py",
+      "bytes": 25864,
+      "sha256": "0010004d32c694e4afa554db2434952040819c09c438e88d465dcf6d9fb63718",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/codecs.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/codecs.py",
+      "bytes": 36870,
+      "sha256": "7b7839e53a77961153240aecfe11edc8054d05b1dedd83894450dae21ec05785",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/collections/__init__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/collections/__init__.py",
+      "bytes": 52378,
+      "sha256": "7fdb04dd248ab37909f46d2085bfee56b32d7e91e49ad3a2fad99c453295659b",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/collections/abc.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/collections/abc.py",
+      "bytes": 119,
+      "sha256": "9cb4208f99128a0489b6c8e6c61637617dd7d4250c59e065491957eda084dd10",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/contextlib.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/contextlib.py",
+      "bytes": 27637,
+      "sha256": "8b7a477f978a8532852fd81e241c78182516bc4975d672d580a5848a76e11eb6",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/contextvars.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/contextvars.py",
+      "bytes": 129,
+      "sha256": "5ed260be8d1f4fe92261b7810b4bb1e8539c42093d7493f677d076e1a87f459a",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/copy.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/copy.py",
+      "bytes": 8412,
+      "sha256": "cbd25547933176fcf6bb05c2adc9f4796d15ac20b9b82dcf890daea7203daeab",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/copyreg.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/copyreg.py",
+      "bytes": 7614,
+      "sha256": "c8eda41f05c6bf95a4da4726a530409d2485ae060b8d019b3a8034389a15d3e9",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/csv.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/csv.py",
+      "bytes": 17132,
+      "sha256": "2fd2a39ec59a5cbcd71596a93205001e593c65dc2ca3bef6028f148372028a88",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/ctypes/__init__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/ctypes/__init__.py",
+      "bytes": 18268,
+      "sha256": "e048845f8f5c14a5fc873526a27da4a19d4eed25ab2f2a01fa6e0b79faca78d0",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/ctypes/_endian.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/ctypes/_endian.py",
+      "bytes": 2535,
+      "sha256": "c5d692bdce10dfee242752620061bab684633bc72445a3def484961ef1bdbf3a",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/dataclasses.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/dataclasses.py",
+      "bytes": 62085,
+      "sha256": "d242aea5fcf6408b1c1f622442f88f68b9526ce1f8bd2890d74a144677c427d9",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/datetime.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/datetime.py",
+      "bytes": 268,
+      "sha256": "ef20dc6b3554cd585dddffdc573f1f9a7a54c522f2a3fb4576c44edbb1e14238",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/dis.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/dis.py",
+      "bytes": 30227,
+      "sha256": "44c0b389c96124d8fb5cb0bc41c7a2aa7a6848ef4001b4000dcbd858efa4a1a2",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/__init__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/__init__.py",
+      "bytes": 1764,
+      "sha256": "e4f46e3414c4602c9abb8b404a45e84412fc49dbe38a3d163f9575132dc7c93e",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/_encoded_words.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/_encoded_words.py",
+      "bytes": 8541,
+      "sha256": "4178321600c0a19ca04cfe8542ce44487f339d15d89a473b58cea63c0b230217",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/_parseaddr.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/_parseaddr.py",
+      "bytes": 17821,
+      "sha256": "4308932872acbf4a674312a45a49b870e48026e3dfedc878ee2f512ddf2f30ba",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/_policybase.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/_policybase.py",
+      "bytes": 15535,
+      "sha256": "284be073d7fe99d1021958e6dbeefe4c98a6c00021ea465d01aac71338d1579f",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/base64mime.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/base64mime.py",
+      "bytes": 3551,
+      "sha256": "e2b4b87a5f42a8c5780e343f675513bbcc6abdd23fa14f8f1a7d4f7d72304770",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/charset.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/charset.py",
+      "bytes": 17063,
+      "sha256": "a90653f13a4dc5eb3205079dda1d62561a8bf9a7b45585f5dbf90aa31a966680",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/encoders.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/encoders.py",
+      "bytes": 1778,
+      "sha256": "690b275529788cc48e8f541a2aef321dc31e92f75764ac7924896db72d8a9555",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/errors.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/errors.py",
+      "bytes": 3814,
+      "sha256": "dbfb4bbfc85e9d556d3385dc6356518846d8a122bc643b171ea61b6e8dc42c8b",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/feedparser.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/feedparser.py",
+      "bytes": 22796,
+      "sha256": "6046239fcdd6977d1c25841581cabedaeec8046cc5fedcb8ff2d6450a36442bd",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/header.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/header.py",
+      "bytes": 24092,
+      "sha256": "4d9baa908ad5288dd8fad8cf20b3802ffac77ba1642727804a633b201c56e5ca",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/iterators.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/iterators.py",
+      "bytes": 2129,
+      "sha256": "1080a2d03779176d6d45f6ecd976dbe69f5579f7e4e83b75224c3f92fd258102",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/message.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/message.py",
+      "bytes": 48396,
+      "sha256": "ba32efea2602ea52e73028a2817afddccccacc4385b9800896556d5c22db2b90",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/parser.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/parser.py",
+      "bytes": 4975,
+      "sha256": "88890ea9994c55ff7d6c1fd570fece2785f51ed407ee95df4aff946e250bcd66",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/quoprimime.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/quoprimime.py",
+      "bytes": 9864,
+      "sha256": "77b454bd3ba3b5e3776be28ae3a0fd8de5d1e50d5b8ee10dd539c37c2bd68082",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/utils.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/email/utils.py",
+      "bytes": 16071,
+      "sha256": "65d259aded3b7d29609d320decdb59cb0a0f7f0e5c453e1d3c380e8a4a5d61c9",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/encodings/__init__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/encodings/__init__.py",
+      "bytes": 5884,
+      "sha256": "78c4744d407690f321565488710b5aaf6486b5afa8d185637aa1e7633ab59cd8",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/encodings/aliases.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/encodings/aliases.py",
+      "bytes": 15677,
+      "sha256": "6fdcc49ba23a0203ae6cf28e608f8e6297d7c4d77d52e651db3cb49b9564c6d2",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/encodings/utf_8.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/encodings/utf_8.py",
+      "bytes": 1005,
+      "sha256": "ba0cac060269583523ca9506473a755203037c57d466a11aa89a30a5f6756f3d",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/encodings/utf_8_sig.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/encodings/utf_8_sig.py",
+      "bytes": 4133,
+      "sha256": "1ef3da8d8aa08149e7f274dc64dbfce2155da812e5258ca8e8f832428d3b5c2d",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/enum.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/enum.py",
+      "bytes": 81540,
+      "sha256": "f35e542d8c4c1d2b5e910138d726fa48774925f3c4dc5462793ebcb66aa55501",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/fnmatch.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/fnmatch.py",
+      "bytes": 5999,
+      "sha256": "6683da36e47af523f3f41e18ad244d837783e19e98911cc0b7415dea81494ebc",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/functools.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/functools.py",
+      "bytes": 37940,
+      "sha256": "de4a1d37c795e2a065124b5c49357893433bc6bb111b41277ccc9930ef08d4c9",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/genericpath.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/genericpath.py",
+      "bytes": 5572,
+      "sha256": "2b0b35d2206778af4081cf81dd9b513876e72c35a55bec941402e1fa62b1f1aa",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/gettext.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/gettext.py",
+      "bytes": 21320,
+      "sha256": "a5c249a522b6b8e3aa6f1b12a8bcc09508b99ad612b58d2fc973db27ea3b7cc3",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/gzip.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/gzip.py",
+      "bytes": 25402,
+      "sha256": "ea6e194b9df26398bf0d5215e63320c7b9d801b2d8b723fb9c80619df48076e9",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/hashlib.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/hashlib.py",
+      "bytes": 9349,
+      "sha256": "6dbdebf270868b391080e21dc9687eddfaf321c965ad979f68d3f5c423c613ab",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/http/__init__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/http/__init__.py",
+      "bytes": 8308,
+      "sha256": "17f4f6832cfc84b5b9600414bab80b77e67ccb611bdfed10a3f2beca9d0d568b",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/http/client.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/http/client.py",
+      "bytes": 59574,
+      "sha256": "c2c0694155837d72fc710a4138e5d1e53ae1a652b117a2e23a5b1b0db527a0f9",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/__init__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/__init__.py",
+      "bytes": 4784,
+      "sha256": "d540b5ac137fcb3e26a8d5f2939649e34373c6685f98a30a9f682cf231be5854",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/_abc.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/_abc.py",
+      "bytes": 1354,
+      "sha256": "80aab7931dc999dee581c8b8b56fcd973fe156335a96ceeaf6acfc03cebf10e8",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/_bootstrap.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/_bootstrap.py",
+      "bytes": 57057,
+      "sha256": "d112d54b7831cf4a818d4841d5ff8003b54df220a6dabafa61f67d7c7a5603f7",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/_bootstrap_external.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/_bootstrap_external.py",
+      "bytes": 69428,
+      "sha256": "e6ad72f3f0f9b65c99ab52598cd02ab748511dcdce1dd51f18dace9be9a680c6",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/abc.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/abc.py",
+      "bytes": 7612,
+      "sha256": "5f9cb36ca1bce9d5df00bc8d4d7f46b7ea2353dfa99292ad7f099affddfb5d03",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/machinery.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/machinery.py",
+      "bytes": 880,
+      "sha256": "d045cd7ecf2a12b6ecbfbef79eb114e87ef2ebd756f5b705f73e6f3266e3dede",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/metadata/__init__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/metadata/__init__.py",
+      "bytes": 28757,
+      "sha256": "1a26dfee8cb302b729501e944626f77e2cbcc4675038f3d18c2d8534751b3e8b",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/metadata/_adapters.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/metadata/_adapters.py",
+      "bytes": 2406,
+      "sha256": "de9a880abc4513af1b69ce150cd5a5093201c39131717cdc2ba6b19f4364c163",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/metadata/_collections.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/metadata/_collections.py",
+      "bytes": 743,
+      "sha256": "089d0e4c21c88d6034648552e2fa0e440b27d91e11d9c40112d3ec6442690126",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/metadata/_functools.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/metadata/_functools.py",
+      "bytes": 2895,
+      "sha256": "3ec636fb8aeb297e1155e442d681a9d65075a660bd78a37cf3f7fe6c3f6e3a80",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/metadata/_itertools.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/metadata/_itertools.py",
+      "bytes": 2068,
+      "sha256": "72faffdaff0145bc5c225e71e6575fa9d1e3848f188bcb3cca4e741bf9e6ea34",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/metadata/_meta.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/metadata/_meta.py",
+      "bytes": 1590,
+      "sha256": "bd3504040497cd049e6b529bde0b461f63cd2be3070f2d0815d4dd7609b266c8",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/metadata/_text.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/metadata/_text.py",
+      "bytes": 2166,
+      "sha256": "1c2b0592c66924b7933f734493f9e0ac079755146d4ebb7287d78e001a113f80",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/readers.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/readers.py",
+      "bytes": 327,
+      "sha256": "d0d57d118d64916f7e6edb04f8bd1a760a1abb879125899ef50a36d09ef54df4",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/resources/__init__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/resources/__init__.py",
+      "bytes": 532,
+      "sha256": "4146e1d00d56a783d4087f15257f0c284fae52e71fa3f20613fa268d911bf6d5",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/resources/_adapters.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/resources/_adapters.py",
+      "bytes": 4482,
+      "sha256": "be9ac919b51e1db6a35fa5c2b8c3fa27794caea0a2f8ffcc4e5ce225447b8df9",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/resources/_common.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/resources/_common.py",
+      "bytes": 5486,
+      "sha256": "a0de4a899a2aa787b052f92f516b39f80b183c3f0d409d1305cc6dc374f18870",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/resources/_itertools.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/resources/_itertools.py",
+      "bytes": 1277,
+      "sha256": "7838ac57a46a88d64ea202d25dfe8b3861ce61cefd14680faca34bcc52e60ab5",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/resources/_legacy.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/resources/_legacy.py",
+      "bytes": 2949,
+      "sha256": "79c566fdf1a61129683e38e8c11a660d6233dd84422456ae5dd230e658a7857f",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/resources/abc.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/resources/abc.py",
+      "bytes": 5203,
+      "sha256": "a726c48590b21ba5532f0c654735991571bc0ecafe88145cb8891d82cd364e5e",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/resources/readers.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/resources/readers.py",
+      "bytes": 4370,
+      "sha256": "10884a02b4a97636887fcedc7bae248a4ff42f3e52abb80d613cc0b2190b6ce9",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/util.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/util.py",
+      "bytes": 10994,
+      "sha256": "671f2995653f673f6d5056a1089debef473bc28ae7114f7a8db71475733d6876",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/inspect.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/inspect.py",
+      "bytes": 127125,
+      "sha256": "5c54ebf0bfdc25397750e5d0f63800751650ee50e65325ff3ea4069c9bfa5f75",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/io.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/io.py",
+      "bytes": 3582,
+      "sha256": "7cec3cb8ac004058dd0a5af246e6d950fb59c7ddd0058fda48bcb3fcb98d8822",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/ipaddress.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/ipaddress.py",
+      "bytes": 81414,
+      "sha256": "ba8d3389ff084fcb232b48204ec04f2b3ea4bd0eadf7b18c814947d185de2c64",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py",
+      "bytes": 14020,
+      "sha256": "d5d41e2c29049515d295d81a6d40b4890fbec8d8482cfb401630f8ef2f77e4d5",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py",
+      "bytes": 12525,
+      "sha256": "382cd02af6f7efede5a6d4abbcda1015e5c7a75794b0016022878f9cf32a24f6",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/encoder.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/encoder.py",
+      "bytes": 16075,
+      "sha256": "52bfb1b66029cc70fa3bd7fe11df9f2e03922d413407a341b387a22c987f24f8",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/scanner.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/scanner.py",
+      "bytes": 2434,
+      "sha256": "572958017eae8842eeddd0e3d18d3c56cc0a197348224915e1d87ce937841764",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/keyword.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/keyword.py",
+      "bytes": 1073,
+      "sha256": "18c2be738c04ad20ad375f6a71db34b3823c7f40b0340f5294d0e89f3c9b093b",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/linecache.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/linecache.py",
+      "bytes": 5800,
+      "sha256": "9eb9194707991b49f9fea67a5222b0e6a0e49c865cdffc69fbc80a1f829e77fb",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/locale.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/locale.py",
+      "bytes": 78599,
+      "sha256": "3988c5419552d5b9f0bef3695102376f79357f0f440e9cd1f32c501f966e6ef3",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/logging/__init__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/logging/__init__.py",
+      "bytes": 83437,
+      "sha256": "43f86bbc08fdd5c7b6e697abffe1381f534a92bb32e1f1aee8360d6a142592a1",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/lzma.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/lzma.py",
+      "bytes": 13277,
+      "sha256": "58fb9d2fdc8a8af7b25e218f17ea3b51bdfa53bdf40f440ab33c605974ca5c2e",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/ntpath.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/ntpath.py",
+      "bytes": 30404,
+      "sha256": "6c0d55ee892f98ef87b1ed3c50c9dfc7e267a98d2db47e08d3dc67529af56725",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/numbers.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/numbers.py",
+      "bytes": 11467,
+      "sha256": "ac381960a3dc1db0498b0bd43d8ef278d6599713121a186b153ff09d9552e0db",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/opcode.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/opcode.py",
+      "bytes": 13174,
+      "sha256": "192f6008508f28d3273bff42eaea9b01c8394dab1607cd36aea778bdd166c3a6",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/operator.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/operator.py",
+      "bytes": 10965,
+      "sha256": "b2af20f67667203c1730e686cc5d0427becc94db4c97f1d3efe3ed2158473f6a",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/os.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/os.py",
+      "bytes": 40821,
+      "sha256": "54c43a1fc69c979c70d8f7d097174cee163bfe59937723ee353043dd4a0211e1",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py",
+      "bytes": 51052,
+      "sha256": "10ba48ae8063cfe7589436041d0d4628c05f427c7709cf8e75e486f8930cc32c",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pickle.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pickle.py",
+      "bytes": 66911,
+      "sha256": "7e3447b6d993a6306a7893fd2fba916010ed79f8e09ceb56158a550fa8099a14",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/platform.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/platform.py",
+      "bytes": 43388,
+      "sha256": "f5ff83f15c841792be42709a6710dc8d7a9f72791c1ae4cad719b1fb0abe0a05",
+      "mode": 493
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/posixpath.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/posixpath.py",
+      "bytes": 17356,
+      "sha256": "03825681086638649a43480954f7f6a16b4da3bd41ece956864ae96e4f795cd9",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/quopri.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/quopri.py",
+      "bytes": 7184,
+      "sha256": "a1cd7f3b22033d32151209886cc855d4b71cc4c83530769f920097582339013a",
+      "mode": 493
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/random.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/random.py",
+      "bytes": 34689,
+      "sha256": "de48263a837339c7e01cf9f3c4d756696e0e0775f7778eb9cf81ad5b00134569",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/re/__init__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/re/__init__.py",
+      "bytes": 16315,
+      "sha256": "8ff3c37c63b917fcf8dc8d50993a502292a3dc159e41de4f4018c72a53d1c07b",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/re/_casefix.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/re/_casefix.py",
+      "bytes": 5444,
+      "sha256": "1b12d9136f23db6c3f6f26053fefc15ca964b886838c7b9c1fabf8d2efc1e5c8",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/re/_compiler.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/re/_compiler.py",
+      "bytes": 26399,
+      "sha256": "c75620761098a70ed75b9accef63ef2881d8abb6d4e5cbfd10074bd165eefe4d",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/re/_constants.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/re/_constants.py",
+      "bytes": 5930,
+      "sha256": "fa4fdb200f238f9e7817b63892b0d69833d8165134801e775e10cc113348a375",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/re/_parser.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/re/_parser.py",
+      "bytes": 41201,
+      "sha256": "a51a85b37cf3f44ba7ff25754da5f31306e4ccfa6eb3c017f9d37bdf4e770840",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/reprlib.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/reprlib.py",
+      "bytes": 7148,
+      "sha256": "e177bc70da83a7fbcde6fd261dc15da34e8a20873b1cccd4f9a1f8f27cca3779",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/selectors.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/selectors.py",
+      "bytes": 19671,
+      "sha256": "1eeb102373e18c96311203f30c516e785bd8642275aa0bd66e43a284c9692385",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/shutil.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/shutil.py",
+      "bytes": 56198,
+      "sha256": "53496e06742fe008fee2bccc8caeac77473e69923bec05358bd43eea467db1f8",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/signal.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/signal.py",
+      "bytes": 2495,
+      "sha256": "0363c964c90ac0b3e515de5749205e6e6454051a1211058375d84d91eab6071a",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/_distutils_hack/__init__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/_distutils_hack/__init__.py",
+      "bytes": 6800,
+      "sha256": "ced72e54431ecf2d8d7dbd8a1e27724f1b171af3ca1503c304bf11c59a7fe861",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/__config__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/__config__.py",
+      "bytes": 4867,
+      "sha256": "ae91af2ea14c5e2e6c24433263cf43bdec95f2db7042c6bee594dc60de1d7622",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/__init__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/__init__.py",
+      "bytes": 25919,
+      "sha256": "93924ac4b793328947dfd9eb9355e54eccdfd26a92c8dd52188aed2e52c7eb38",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_array_api_info.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_array_api_info.py",
+      "bytes": 10354,
+      "sha256": "373252b9ff2fbad8c64aa8aa6a1ab78d12374b1317e17d5cbdae09e9d16fe045",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/__init__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/__init__.py",
+      "bytes": 5542,
+      "sha256": "c89d22cb57d793da200859df9425b30412f094a492fb1950582a560a8cda4fa7",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_add_newdocs.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_add_newdocs.py",
+      "bytes": 208893,
+      "sha256": "c922ae3ffe2c54f34b1e9d688e04cc8524568b7775f02701147147903f177fe5",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_add_newdocs_scalars.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_add_newdocs_scalars.py",
+      "bytes": 12600,
+      "sha256": "67959c2005f2d95b3c9162c2ce0cafc56547d02025f8eeb86052b7b6d6d4ef27",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_asarray.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_asarray.py",
+      "bytes": 3911,
+      "sha256": "7c23472da6823fee486be451fdb22b1f1598df1925726be56621a12480e228b3",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_dtype.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_dtype.py",
+      "bytes": 10547,
+      "sha256": "70ce899e3a072d445608780df15990ca37a28838dcc210792ff7cf30e7b5bae3",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_dtype_ctypes.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_dtype_ctypes.py",
+      "bytes": 3726,
+      "sha256": "28f3e56a40ec3e4b938523abe6a1705b48c9f559e36ef5b811684e6c21d81881",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_exceptions.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_exceptions.py",
+      "bytes": 5159,
+      "sha256": "5fc120d61ab5b94f0bf7088ec05a368d1aba4b4be78c27606051e3de1016f42a",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_internal.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_internal.py",
+      "bytes": 28981,
+      "sha256": "619ea730654ebdf4c3d67ce4d97a91773f24d395959d81a29636f54e71ef32af",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_machar.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_machar.py",
+      "bytes": 11569,
+      "sha256": "6145f6e1761bc5727bf4aad66abdbb1650d829f7a876bfd10a413bc346c44eab",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_methods.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_methods.py",
+      "bytes": 9430,
+      "sha256": "e2a8945044b9c273857979cf6afb6aa8c561674f5965e48a970a9d3f0d9e2922",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_multiarray_umath.cpython-312-darwin.so",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_multiarray_umath.cpython-312-darwin.so",
+      "bytes": 3466496,
+      "sha256": "e96a0f1422d8cbccb8ebd9b5610abcde6d24ffabafb401dc97f798e7d2254e6a",
+      "mode": 493
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_string_helpers.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_string_helpers.py",
+      "bytes": 2845,
+      "sha256": "e929a0a22ea80f60ae9e3c014abf41676d079029ef5ba9d33db953394de95a78",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_type_aliases.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_type_aliases.py",
+      "bytes": 3489,
+      "sha256": "9ac147064676b35c0a432ba0b8afdc17a3414b4ff700ec30ee3de8876ea6a374",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_ufunc_config.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/_ufunc_config.py",
+      "bytes": 15130,
+      "sha256": "f63e91d7662635b693e7ecb9ac200e3c16e01f86d81989670e016afaf6799c3b",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/arrayprint.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/arrayprint.py",
+      "bytes": 65278,
+      "sha256": "00002f92b23453a3daff064e9e9b95641a5db020a3a58a5c585f2c03f48f61b8",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/einsumfunc.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/einsumfunc.py",
+      "bytes": 52820,
+      "sha256": "85e15e0a210a8e2faa7d593ccc06756f96ca9be31430bcc2113310ef2c870617",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/fromnumeric.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/fromnumeric.py",
+      "bytes": 143882,
+      "sha256": "b347fa59f908455c0564c943add61bdc48f217dbcc1abd1b9acd0f73e55c3803",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/function_base.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/function_base.py",
+      "bytes": 19683,
+      "sha256": "413d696e597ff2b7ffdd9b06b4b42801e435392a82a9e006b4c4f33c013523fc",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/getlimits.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/getlimits.py",
+      "bytes": 26101,
+      "sha256": "df641eeed94115dca20ef7528c6d5ca766b4349d2b48cc5e0d18a3dda8223eb8",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/memmap.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/memmap.py",
+      "bytes": 12651,
+      "sha256": "c88b10ea7f64a59ba58204492459136e35709c1e257a8ca2cef529736894e27f",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/multiarray.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/multiarray.py",
+      "bytes": 58155,
+      "sha256": "cf01c17723a8c6205170e846d9007fc410189bea7c0114a941bc9ef44cebac1a",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/numeric.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/numeric.py",
+      "bytes": 82322,
+      "sha256": "fc3727bd7bbaa1a1d74a2f50f8157dc86cdfc7bb5cf620b1ebdafd3272439b98",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/numerictypes.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/numerictypes.py",
+      "bytes": 15967,
+      "sha256": "d7924b057d26fcc4206a21ffc81048e6096fd2f5ee794d1aae74b9e915df5319",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/overrides.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/overrides.py",
+      "bytes": 7241,
+      "sha256": "32d8333816af1bbc33418080eceec0add089555ef649321bfdcbe4581b832c91",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/printoptions.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/printoptions.py",
+      "bytes": 1056,
+      "sha256": "345a6fcb96e78dbbea9ca7aa42dd2f784131a400180153688865c7de98255807",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/records.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/records.py",
+      "bytes": 36767,
+      "sha256": "8685c20ecc0cea16f2b6219d6069214484b34239ea2265dc21d1a536e3940d7e",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/shape_base.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/shape_base.py",
+      "bytes": 32738,
+      "sha256": "ef20cfac85d39a606764c512b475ecab58893621a623110071ea7143da3e2554",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/umath.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_core/umath.py",
+      "bytes": 2130,
+      "sha256": "b7f49020747b764305f95469f1d2b2ae838477dd28a8d9739a01b0687dbca96f",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_distributor_init.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_distributor_init.py",
+      "bytes": 421,
+      "sha256": "14148976054795071ae41ad011560fa059ba2924c98481675ad59b1241214d2a",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_expired_attrs_2_0.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_expired_attrs_2_0.py",
+      "bytes": 3826,
+      "sha256": "ccfdf511799bc3281c384cf27ad0c4a7e4712fd7147db51486df79eb368e49ff",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_globals.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_globals.py",
+      "bytes": 3091,
+      "sha256": "9396559f351b28d48b3e667451163024de42ffbc48cdf30d69a4ac052acf4ee2",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_pytesttester.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_pytesttester.py",
+      "bytes": 6328,
+      "sha256": "0e39582fcb8834dd9759ade79e55fa80f1aea0b8dcc750627bf3d0cdba767290",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_typing/__init__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_typing/__init__.py",
+      "bytes": 7188,
+      "sha256": "306e56bfd75cdd9c8e9837e2747e5c16dca47b234cefb02b0b8477516ed39fe6",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_typing/_array_like.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_typing/_array_like.py",
+      "bytes": 4188,
+      "sha256": "10f6547c94a36a6bec589e91b39670c00ff916106961da227dc555b557163e7d",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_typing/_char_codes.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_typing/_char_codes.py",
+      "bytes": 8764,
+      "sha256": "8f4ee7a64f3635bec8adadb3ed94e553751c38fc2dda033ba992ab3cb7634f8f",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_typing/_dtype_like.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_typing/_dtype_like.py",
+      "bytes": 3762,
+      "sha256": "f0ce517a42ea7617848d63089f84676e4133b12ee309ab42893d03e6183ee777",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_typing/_nbit.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_typing/_nbit.py",
+      "bytes": 632,
+      "sha256": "2926cac0e2adb686fee72b53e6f095907ac3327d181efca9b534f28ffe8061cc",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_typing/_nbit_base.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_typing/_nbit_base.py",
+      "bytes": 3058,
+      "sha256": "9cf669b1096db91e41d22680605f6a0f685efe45e79acb2ffd185a50d16c5beb",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_typing/_nested_sequence.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_typing/_nested_sequence.py",
+      "bytes": 2505,
+      "sha256": "b28d5a818187779803a3f201bef1ea041e65b2a19b1ea37f8a6c82e541d4f872",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_typing/_scalars.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_typing/_scalars.py",
+      "bytes": 944,
+      "sha256": "2e15d8d814c799e60acde2197e98efb8c9fee5e38b8d4da7f73ef3d65e5b29ff",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_typing/_shape.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_typing/_shape.py",
+      "bytes": 275,
+      "sha256": "e9c16ff8b6d2c86f6695f4813861b2ba5f50fc652b95c1d00bd2596be9b6d1c0",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_typing/_ufunc.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_typing/_ufunc.py",
+      "bytes": 156,
+      "sha256": "1ce91a13eeb05747dddeb9876460b7f580072087fcb72be5cde903e32e064310",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_utils/__init__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_utils/__init__.py",
+      "bytes": 3477,
+      "sha256": "8559d9ec2d0c09235b330f99caaf8c282612b5a197e91cea14c9e787b79de1d1",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_utils/_convertions.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_utils/_convertions.py",
+      "bytes": 329,
+      "sha256": "d3133175e2cece20e61ec44cffc96e121e12fa441d328320e86c4d0c36acebd9",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_utils/_inspect.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/_utils/_inspect.py",
+      "bytes": 7436,
+      "sha256": "cc5b890011f4f03d4a82afde79c6240f53a0834397a75b78a2a8d9c4cd2474b9",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/dtypes.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/dtypes.py",
+      "bytes": 1312,
+      "sha256": "cee3f0802d228c5da80d100e27a23d24a85a26e857140ca00722d06a856d4f9e",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/exceptions.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/exceptions.py",
+      "bytes": 7800,
+      "sha256": "c75cfb0b6463ac3156f2d2dec1b663c8c890a24d16066e642ae44f23154b5238",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/__init__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/__init__.py",
+      "bytes": 3004,
+      "sha256": "cd81aea847cfaaaecb0db89da7162cf068023409a8278c50805bc5dd7289e518",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_array_utils_impl.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_array_utils_impl.py",
+      "bytes": 1697,
+      "sha256": "1985a2c8da8b43b0c6512057cf46db47a000a994ad0c8c147bbb6c6d9fffd793",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_arraypad_impl.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_arraypad_impl.py",
+      "bytes": 32296,
+      "sha256": "cf9fbe5d3f344dc9c365ecc756b7716ae252637c82e2f30375dec994efa1df3c",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_arraysetops_impl.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_arraysetops_impl.py",
+      "bytes": 41275,
+      "sha256": "545760a456497322616053dc4e4fcb403fd2aea5faa68cbfb21b0b2af662832d",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_arrayterator_impl.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_arrayterator_impl.py",
+      "bytes": 7218,
+      "sha256": "1ed3800c81ee1bd0036db3138268783ff9ae91ed55fbc13e14d10eddb54e18f0",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_datasource.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_datasource.py",
+      "bytes": 22731,
+      "sha256": "ce4f956e7e099431c455adc37ba0373608e79e2cd2262f8717466fbc0e98228e",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_format_impl.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_format_impl.py",
+      "bytes": 36865,
+      "sha256": "cdc437c57c4f7fb7a992db18adc7416c83ee38287d38f575837801ea085fe2b1",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py",
+      "bytes": 196425,
+      "sha256": "0191b2376f44730e0b46e5354cd51c3c2edc5473bdc9ee1b27d15023b9ff1b07",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_histograms_impl.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_histograms_impl.py",
+      "bytes": 38432,
+      "sha256": "52dbbb68041ced9a6c1e7ff4e288149d9ab565c7477e2a5cabd791abcd7ba155",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_index_tricks_impl.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_index_tricks_impl.py",
+      "bytes": 32186,
+      "sha256": "83b369e04f001bdb20ca2f474d482f38cd3ca489408ff72f5f0e1c73b36b5392",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_iotools.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_iotools.py",
+      "bytes": 30876,
+      "sha256": "d23b69be99792feff5383236d45fb58b5f6dd5edcbfbac09c517750922dec0bd",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_nanfunctions_impl.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_nanfunctions_impl.py",
+      "bytes": 71949,
+      "sha256": "71d393edd6308ef52923d8841d3af0cdb6ed2a13fd65980e08c8ab4c17983d49",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_npyio_impl.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_npyio_impl.py",
+      "bytes": 99277,
+      "sha256": "92e71acf00ae7e1e26370102c99c447abc6ca9afc6c50333d6462e65444323cb",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_polynomial_impl.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_polynomial_impl.py",
+      "bytes": 44134,
+      "sha256": "4d68aa946dd60daf7bb5acb1402125b590fd4cd854c85a6bccbfd499decbc6ca",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_scimath_impl.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_scimath_impl.py",
+      "bytes": 15692,
+      "sha256": "400538b8cfc837356a093b3e013132cb526144497fc03267ff2814ef962d7e01",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_shape_base_impl.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_shape_base_impl.py",
+      "bytes": 39479,
+      "sha256": "e6f914f6b3cec0abd273b4f3c5d7d6b4cd3cb95d26d798873d3c5ba9c638ece7",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_stride_tricks_impl.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_stride_tricks_impl.py",
+      "bytes": 18025,
+      "sha256": "cb7531a778c5cc3c26210d77ecddb36a9efebd6fe338d5109979db7eaaeceb40",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_twodim_base_impl.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_twodim_base_impl.py",
+      "bytes": 33925,
+      "sha256": "de738bbc20fa71f33a303de8dfcd45e3c181f29a2ab1418308339094e0505e66",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_type_check_impl.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_type_check_impl.py",
+      "bytes": 19221,
+      "sha256": "59e55f5b3ff42a5bdbd8affa974c789c7c070703d881f7317998a757f769fe6c",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_ufunclike_impl.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_ufunclike_impl.py",
+      "bytes": 6309,
+      "sha256": "d1e7a67ff11894b9926b88a736bde2b89d5ea1332a2f2211d27e9d4329a06b76",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_utils_impl.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_utils_impl.py",
+      "bytes": 23499,
+      "sha256": "96db16f4c329de4d6fc3b22789d8584f97e8f60ae0c33eb6e1fbd17a21c3c967",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_version.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/_version.py",
+      "bytes": 4851,
+      "sha256": "e1d52b73d26cd0a3c443969da18291e5d9cfe1f7e3083b4950a3ea70c6aec18e",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/array_utils.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/array_utils.py",
+      "bytes": 144,
+      "sha256": "5db732849f52d0894d9cff4dcbacb280b30400259650f34e53cbdebe3d531292",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/format.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/format.py",
+      "bytes": 477,
+      "sha256": "9e9274789853eee28d2b96b49423067e226ff91e23c8d86220f7996c970d5c1b",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/introspect.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/introspect.py",
+      "bytes": 2749,
+      "sha256": "bbec207ccb98b7c188dc09d135d5ece23e30f5e353b1ace5aab6b34be3fb80a0",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/mixins.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/mixins.py",
+      "bytes": 7200,
+      "sha256": "29f7fbe9272981657772bba2708f40edae337c19c65665edc10cccceee710c4a",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/npyio.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/npyio.py",
+      "bytes": 68,
+      "sha256": "79a3ef7c7192cd413bd132471cb3823c85fd1b98a132e0447b1cbafcf36127d4",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/scimath.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/scimath.py",
+      "bytes": 169,
+      "sha256": "aa315a41eab4cc4225ee02aa3a16a3fef9820bf29a15dc9398774b514912a792",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/stride_tricks.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/lib/stride_tricks.py",
+      "bytes": 88,
+      "sha256": "c74fc17f097270102547706fa714e775e3fde9d1c14ff7c049b9134d3cc16202",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/linalg/__init__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/linalg/__init__.py",
+      "bytes": 2124,
+      "sha256": "ee956f17038914a380ac6794b3a30d8f730daaab31ef1c74beddbfedabcd020e",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/linalg/_linalg.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/linalg/_linalg.py",
+      "bytes": 115106,
+      "sha256": "eab0bbee9c8758d387934dc32849f01deceb50261d02e22d41f03ad6ff2562cc",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/linalg/_umath_linalg.cpython-312-darwin.so",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/linalg/_umath_linalg.cpython-312-darwin.so",
+      "bytes": 170800,
+      "sha256": "8bdefd0bf6ecf16c97c66ee534f6e22876630e4c08a5d001fda109ac911275b0",
+      "mode": 493
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/linalg/linalg.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/linalg/linalg.py",
+      "bytes": 585,
+      "sha256": "e8d8a63faf2d61ad2a051825587f3bfed3a1dac72c86d0e97307ef06f99de8fa",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/matrixlib/__init__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/matrixlib/__init__.py",
+      "bytes": 243,
+      "sha256": "52de88a9f8ee03e930c28e8704e6008058d75c2fe1ed857fdc7c83b0a33bd9d9",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/matrixlib/defmatrix.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/matrixlib/defmatrix.py",
+      "bytes": 30875,
+      "sha256": "c29c3a95953d5faaa9f30009a240d7b76441acbd5e5ea96606dfa88c8c18ce55",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/version.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/version.py",
+      "bytes": 293,
+      "sha256": "e5acbe1a666da629f581c40a2c09d54229c7aa918f3a1d567dbac0829c807472",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site.py",
+      "bytes": 23198,
+      "sha256": "b39ab288cc7a6d0cb3bb2655179221411340b22418e4efdee4c20175537a5fa2",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/socket.py",
+      "bytes": 37815,
+      "sha256": "7d4d4c66e6f4bcc961ab462c4f08002ca97def8713a4be1c7373bdbd970a5274",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/ssl.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/ssl.py",
+      "bytes": 51655,
+      "sha256": "db62eeaae59c6e7087dcafb28087cd0bb092087381edc556f97c8cb614484380",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/stat.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/stat.py",
+      "bytes": 5485,
+      "sha256": "052af0327eae6941b69b05c088b3e748f79995635f80ac4cc7125eb333eb4c77",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/string.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/string.py",
+      "bytes": 11786,
+      "sha256": "24aeae1f0526250f442022022bf98df9a823b1cb330543ee79e70e44907462e9",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/struct.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/struct.py",
+      "bytes": 257,
+      "sha256": "9c231f9497caf513a22dee8f790b07f969b0e45854a0bdd6dd84b492e08c2856",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py",
+      "bytes": 88747,
+      "sha256": "85d29b2bf0249f5436838298c9a60ee93508b1102e9ac43b001f8a7e7ae8f375",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/tempfile.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/tempfile.py",
+      "bytes": 32386,
+      "sha256": "2eea4401f4f29d0d3647ed6fc8bcf6aa1daf879c8aa407a8ea310edac9dfc317",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/textwrap.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/textwrap.py",
+      "bytes": 19718,
+      "sha256": "62867e40cdea6669b361f72af4d7daf0359f207c92cbeddfc7c7506397c1f31c",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/threading.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/threading.py",
+      "bytes": 60200,
+      "sha256": "846f450ae794e4aab823a163f8c71d27751148af33e91dd3de886686a4e8ebfb",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/token.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/token.py",
+      "bytes": 2511,
+      "sha256": "1a4d994ce9744f4bfe2d964fc24d112a1e76796a08c2e45a2d73c82a8587f922",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/tokenize.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/tokenize.py",
+      "bytes": 21570,
+      "sha256": "026f566ac63e60d69c8185a3880831b657accc5eac984fadf271fc99a5e5825d",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/traceback.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/traceback.py",
+      "bytes": 46393,
+      "sha256": "2c44af2848836d9af0c7b3547469695cd22586c64274d362eafcf466af284bd6",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/types.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/types.py",
+      "bytes": 10993,
+      "sha256": "345474ef027a1273f353da9bdc1f7c18f65335e72e681bcc0376774cc51f2405",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/typing.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/typing.py",
+      "bytes": 118836,
+      "sha256": "be92d60fb8382bb29ead21c128825d7c96d0e8c915b44f840791e49f5a8d554c",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/urllib/__init__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/urllib/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/urllib/error.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/urllib/error.py",
+      "bytes": 2415,
+      "sha256": "d12b3cc66af3f42a8ebe63e1c91d24f92c6237b6a93a3702938dffabd812d77b",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/urllib/parse.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/urllib/parse.py",
+      "bytes": 45676,
+      "sha256": "e6af7f475262f1de335bb2e41e26adb94d6103977cf5fe1ddc430dc6a3b1623f",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/urllib/request.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/urllib/request.py",
+      "bytes": 103724,
+      "sha256": "6ffc7d993de64319a40fad631966bd1fd643d355a5c154c1a8b1821f49e5c470",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/urllib/response.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/urllib/response.py",
+      "bytes": 2361,
+      "sha256": "7e6c3b6d7a95f0d74f5968f51a87adae8a51bf42390cdfec98c7a99203e7bb76",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/warnings.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/warnings.py",
+      "bytes": 21909,
+      "sha256": "6405e281882932205eae641b2d31fba7776f94517a206d289465a1caffbf310e",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/weakref.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/weakref.py",
+      "bytes": 21513,
+      "sha256": "56f8d313fb74019e53eb9287400702fbce788b7fe30e097b0b6e06296f3f080c",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/zipfile/__init__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/zipfile/__init__.py",
+      "bytes": 89520,
+      "sha256": "83031a1582b84054fdde260a372f8ed25d9dedfbfcbedcef2bc015bcca7c5332",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/zipfile/_path/__init__.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/zipfile/_path/__init__.py",
+      "bytes": 10860,
+      "sha256": "63fc930890d38a662253bcf7ae50a1bfa06ce38bade19084f9c89f964dcd0e12",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/zipfile/_path/glob.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/zipfile/_path/glob.py",
+      "bytes": 1158,
+      "sha256": "64e27d3872da2ea18b901718c91297d32b9610ebdad058de8561344b0a10e8d7",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/zipimport.py",
+      "realpath": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/zipimport.py",
+      "bytes": 27840,
+      "sha256": "a96f1d7a7b6aaf421a3cf382b94b1422f4f0ad452fdd0bb61d635b560d7a4e91",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/certifi/__init__.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/certifi/__init__.py",
+      "bytes": 94,
+      "sha256": "7a52e5f4205f9b3d12a31898ceaa7e3f6837d19cc230700bcae1a9d91d1486c1",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/certifi/core.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/certifi/core.py",
+      "bytes": 3394,
+      "sha256": "5c55f2727746e697f7edac9e17c377d8752e0da7ecca191531b3b80403d61dad",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/__init__.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/__init__.py",
+      "bytes": 3116,
+      "sha256": "b080b99ec2cef0ebe9b17a28c5bc50df7a478efde0e32f0996db60448badfa72",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/_compat.cpython-312-darwin.so",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/_compat.cpython-312-darwin.so",
+      "bytes": 100864,
+      "sha256": "c659f164032f027618dd34df7bba066157894b0e6d5d1fa5416e328d15c5fa75",
+      "mode": 493
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/_context.cpython-312-darwin.so",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/_context.cpython-312-darwin.so",
+      "bytes": 145888,
+      "sha256": "51377fb098777b12c5c95f220e01a98b7e913a7a19fa76b33a952b829dc1164b",
+      "mode": 493
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/_crs.cpython-312-darwin.so",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/_crs.cpython-312-darwin.so",
+      "bytes": 492464,
+      "sha256": "1baf3ad2509a4ccc0ebf59bebea9b903fee15b8184c573c15ac0d3f28e22c078",
+      "mode": 493
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/_geod.cpython-312-darwin.so",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/_geod.cpython-312-darwin.so",
+      "bytes": 182288,
+      "sha256": "45b4b779970d3e5b7925d888ccf615f713364d9cd26c8a8c9d0c72ee7a30a20f",
+      "mode": 493
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/_network.cpython-312-darwin.so",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/_network.cpython-312-darwin.so",
+      "bytes": 100656,
+      "sha256": "97e5be5dd76118343b07366002198091a99379d72dc95cc3af5cd3ce1a01c3dd",
+      "mode": 493
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/_show_versions.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/_show_versions.py",
+      "bytes": 3029,
+      "sha256": "8cc6c584dbb9913a1327a635108653452e6aed3f117070b68c5de0af35554c89",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/_sync.cpython-312-darwin.so",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/_sync.cpython-312-darwin.so",
+      "bytes": 96592,
+      "sha256": "b57862a1e341b1e9f8503c3b644f9e94f8976f69632ee6db0252842f4f866ab7",
+      "mode": 493
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/_transformer.cpython-312-darwin.so",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/_transformer.cpython-312-darwin.so",
+      "bytes": 232000,
+      "sha256": "5d5910f1f1439d4def03b49c6ca3009a1cc5a6734766e6199624cc34befe9eb3",
+      "mode": 493
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/_version.cpython-312-darwin.so",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/_version.cpython-312-darwin.so",
+      "bytes": 73328,
+      "sha256": "aadbd27b57c8ea5dce61fb3c05f4547988e9e928bfa36a9f0a0341227802fe9d",
+      "mode": 493
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/aoi.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/aoi.py",
+      "bytes": 3424,
+      "sha256": "00f6d8735ef695db1516a7ed9ec02c126ebb66501b5d51f8b5cd85e8954b3340",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/crs/__init__.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/crs/__init__.py",
+      "bytes": 847,
+      "sha256": "afa145b9eeb0a6d04806dbe51067ffb89e076a129f65d16d77f666337074e24c",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/crs/_cf1x8.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/crs/_cf1x8.py",
+      "bytes": 27463,
+      "sha256": "d399af4faa11bf03ac1f22df80f685775a738999b63256fa67969b4b67dc5a3c",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/crs/coordinate_operation.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/crs/coordinate_operation.py",
+      "bytes": 60195,
+      "sha256": "2ffe7277e5dc12b80db00dbf3c20f63a89507a89424f78ab84501c506d11772e",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/crs/coordinate_system.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/crs/coordinate_system.py",
+      "bytes": 10021,
+      "sha256": "7c7b85b92d724c515ed66f51a6e64b0afef043f5a17297ba8abf31c9d9bf8468",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/crs/crs.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/crs/crs.py",
+      "bytes": 64474,
+      "sha256": "4ebb3176db5a7adc762ee3886e210a0188ddb11f53de163cd09ac09f442bb4c8",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/crs/datum.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/crs/datum.py",
+      "bytes": 3682,
+      "sha256": "c5e3678f7faf740b5137341abb96852351a12b8e3b6219f03176dd6099e1fe77",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/crs/enums.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/crs/enums.py",
+      "bytes": 3675,
+      "sha256": "4a576feed149bba712d561187d0cd158019de614b4a02593a0dfd113c1270503",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/database.cpython-312-darwin.so",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/database.cpython-312-darwin.so",
+      "bytes": 160736,
+      "sha256": "e2ae4e207768075cb5d836a9d1228157ed61461943f84a6e880645fa9d328946",
+      "mode": 493
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/datadir.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/datadir.py",
+      "bytes": 3814,
+      "sha256": "51cc23fb44d239bb8d6bfe7913611e94f0598435779bf5cae1ec503121c560f4",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/enums.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/enums.py",
+      "bytes": 4092,
+      "sha256": "0610e7cf733fc39dcabffbc2d45e25e02ea602a7ff439b42f0626a922b8b3e78",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/exceptions.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/exceptions.py",
+      "bytes": 694,
+      "sha256": "bb7b1155c4074409d51833953c7ea2ae21af73ca58b7f23e1991d312c9d78ef3",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/geod.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/geod.py",
+      "bytes": 43866,
+      "sha256": "49af33410bb6637c1fc82e8ac91d7ee2b357f044982f8b7cb962150e573b7697",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/list.cpython-312-darwin.so",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/list.cpython-312-darwin.so",
+      "bytes": 99296,
+      "sha256": "aa39cf7007519be95e1ef5b29889cd41a12ab9d0a56156b702abfee7404530df",
+      "mode": 493
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/network.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/network.py",
+      "bytes": 1922,
+      "sha256": "ddee282dc03e85a42b0d678ca5288dfd5ccc435f9c72ba5c2b613d37ccf06e74",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/proj.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/proj.py",
+      "bytes": 11239,
+      "sha256": "8bac50f4c4257f894eb40792487600af5e26b78835760a905ad0170a4be5824c",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/proj_dir/share/proj/proj.db",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/proj_dir/share/proj/proj.db",
+      "bytes": 9273344,
+      "sha256": "ec8cea0a5490a6f9247d9063645049e0f93fb83307067ebfc859187f0539e67e",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/sync.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/sync.py",
+      "bytes": 8694,
+      "sha256": "cdbd432c4f1234a23f7bd9c438a4f23957e2ac76e722a7ed2d1828520866048e",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/transformer.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/transformer.py",
+      "bytes": 44813,
+      "sha256": "755b5dfffea4220b821bde4c7667f2f028f4ede63f8bc4b8881a128c1d03722d",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/utils.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/pyproj/utils.py",
+      "bytes": 4474,
+      "sha256": "5d6d9463dfe669f89c0d671f2748a4da39b5aab2361c2e55feac86425ceef9f1",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/__init__.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/__init__.py",
+      "bytes": 1031,
+      "sha256": "ec46944357e1207798213bf98e715cf862906ec317082494f9823f2370fd70e3",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/_coverage.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/_coverage.py",
+      "bytes": 5732,
+      "sha256": "ca208be59b4c28c0c7570e84947911f02fc2da7d03b51a6c82c189861bae70be",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/_enum.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/_enum.py",
+      "bytes": 704,
+      "sha256": "ca39c449cce225924b68cd0fd6b6063de90dffe99677ae3eae67b93ec68a7879",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/_geometry.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/_geometry.py",
+      "bytes": 29155,
+      "sha256": "5d9c6f98b07f8e0d251e83221e028577f2cd4a28f89eb27f41834aa6afa16e84",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/_geometry_helpers.cpython-312-darwin.so",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/_geometry_helpers.cpython-312-darwin.so",
+      "bytes": 502640,
+      "sha256": "62522d263e18ec9bfa7ef21b37784dc1a84e5b28925dd28bff4d0ea9e9797460",
+      "mode": 493
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/_geos.cpython-312-darwin.so",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/_geos.cpython-312-darwin.so",
+      "bytes": 154944,
+      "sha256": "3c0000dc80af3161a59663908d56cad3a04ce2c377b530cf8fab36ce8cd7bd8e",
+      "mode": 493
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/_ragged_array.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/_ragged_array.py",
+      "bytes": 17445,
+      "sha256": "f9e68c01526d66fdcfd1dcc675c670c7ca8912de3d105992dfce150149530101",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/_version.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/_version.py",
+      "bytes": 497,
+      "sha256": "f3cc49f6c0bfcc0439409bc86b59d5d48bea3cb72c12d82e8f3fe4a2f5e8931d",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/affinity.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/affinity.py",
+      "bytes": 8255,
+      "sha256": "ee1593f65fcc884923f551022ae91d014cff3584a8877bc8ea1bcd57d03a3d8a",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/algorithms/__init__.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/algorithms/__init__.py",
+      "bytes": 41,
+      "sha256": "647222bee439c391895c1ee1c0ba74cdc91dfdbdb6ea4ebcc230614f493d032a",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/algorithms/_oriented_envelope.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/algorithms/_oriented_envelope.py",
+      "bytes": 1933,
+      "sha256": "697a317a01d740acc44aaa3c294d2a5f2bd82e1f002c98d6946b7418e452f2f4",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/algorithms/cga.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/algorithms/cga.py",
+      "bytes": 1757,
+      "sha256": "28d5ef19a213e49c47da4ffac272c192735d44e4f77280f67d822ea7e60fefa2",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/algorithms/polylabel.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/algorithms/polylabel.py",
+      "bytes": 1344,
+      "sha256": "83357995c6f3665be5ff050d0964056bbf26de13f2b990ae04c940ff81ee6964",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/constructive.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/constructive.py",
+      "bytes": 56189,
+      "sha256": "9c814d4fb0f6e5e3a2a9a8381a7a3ff1e97c9556995ee25c5f437913e1afd173",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/coordinates.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/coordinates.py",
+      "bytes": 12575,
+      "sha256": "b6f11e24833518c9f06193442a1fb79b9d5c1e025a6d961a0124a10e113cfb13",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/coords.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/coords.py",
+      "bytes": 3032,
+      "sha256": "21bba876608d89b91973cfd7a5af1eec71714f85bea02318e1fb6f253b831979",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/creation.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/creation.py",
+      "bytes": 30987,
+      "sha256": "c2da7a51288863ac29e09a7deb1b32d9a7bb6bd2a02bd4b99c56f43db644b36d",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/decorators.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/decorators.py",
+      "bytes": 5694,
+      "sha256": "13056b4756f9e0d8cd33c2d15b4c5f6ae78bb078add4b4029c9231371927f1c9",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/errors.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/errors.py",
+      "bytes": 2398,
+      "sha256": "30d5a32b7dfd8dfa59e7d526559815b17dadc990b0de744265ad23ff323cce5c",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/geometry/__init__.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/geometry/__init__.py",
+      "bytes": 763,
+      "sha256": "f98ad1c4a67e1df4f7c951b89250f9104bdd1477f058d00aea8be3bae361865a",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/geometry/base.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/geometry/base.py",
+      "bytes": 40375,
+      "sha256": "7b0d96b827cf97e88eac9b2bdf83659ba84e99d00e971829fa71c8cc14376122",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/geometry/collection.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/geometry/collection.py",
+      "bytes": 1736,
+      "sha256": "c448eae40adb0397be7b7c7aa5b73a5c343b632881892fb925b9decad0c43374",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/geometry/geo.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/geometry/geo.py",
+      "bytes": 4366,
+      "sha256": "537722bc18969aba33000a63862aa95d804f8b76128f0ac026acec3050a23d37",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/geometry/linestring.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/geometry/linestring.py",
+      "bytes": 7599,
+      "sha256": "606ff10e909e1ab8b342a10e6ca8fc0f853ac95c9fbeafd86e1f2f64819f4172",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/geometry/multilinestring.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/geometry/multilinestring.py",
+      "bytes": 2942,
+      "sha256": "b5129ce9cacbea65adad4a743d121d29926989bc1538a905f74e362b5ae3125e",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/geometry/multipoint.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/geometry/multipoint.py",
+      "bytes": 3222,
+      "sha256": "746c8a1b130ebaf20cd4301bcf107d5f75d28c3bd8a5250db58914805635a7f8",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/geometry/multipolygon.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/geometry/multipolygon.py",
+      "bytes": 3955,
+      "sha256": "05390e5692bccc4e8feb813378abf736601ccbafa897e562091d239cf8426d8e",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/geometry/point.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/geometry/point.py",
+      "bytes": 4731,
+      "sha256": "a4807c55cffa37b54d9e76e0baa8c7c0e03db92e3d05b484d94c0e302e7c5db1",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/geometry/polygon.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/geometry/polygon.py",
+      "bytes": 11082,
+      "sha256": "2d5347b806e9d6879079473a2390b8ef4095f4f83a3a3b37fa324920233c51c8",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/io.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/io.py",
+      "bytes": 15108,
+      "sha256": "01def5ceed0bc1cb720fb45ab55730645b2f390fd537e6cbca42403813abf631",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/lib.cpython-312-darwin.so",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/lib.cpython-312-darwin.so",
+      "bytes": 270912,
+      "sha256": "0ccdda55bb8987471b141d549c35bdf6ab2a30407539841e6ebc2832581b0c0a",
+      "mode": 493
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/linear.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/linear.py",
+      "bytes": 8675,
+      "sha256": "afb83b3a2aebd774f1a69391b46a08ed11812a811f739a5fc08b103d810b9fb1",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/measurement.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/measurement.py",
+      "bytes": 10622,
+      "sha256": "289e4559bf3b0ee685f2a4d1fa327befe63c1b31f8cf84d9e162516d2747995a",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/ops.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/ops.py",
+      "bytes": 25679,
+      "sha256": "3b7a787dec9b5a8b956f1c7f39f3ada6100f3faa9947ad57cd1cbe20bec8c5c4",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/predicates.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/predicates.py",
+      "bytes": 39673,
+      "sha256": "7214ab3ea82b6a11fcfb5c95927a28e0bfd4b1fa1858d5c8f5f74ab16f9d6688",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/prepared.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/prepared.py",
+      "bytes": 2351,
+      "sha256": "43deda7f1121baa5cccb1760360c73b28323a58aa23331d7c27d4717c59b9ae9",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/set_operations.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/set_operations.py",
+      "bytes": 27437,
+      "sha256": "1d72ddf8aefbda450ddfdfb1ebf10acad3374d68659c562cf6a488cb9c7f97af",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/strtree.py",
+      "realpath": "/Users/chengshuli/.local/lib/python3.12/site-packages/shapely/strtree.py",
+      "bytes": 20649,
+      "sha256": "22a4beacf62ef1b54f579d076dfd46688b4b38f287d7bd912f765ed59f6e3d22",
+      "mode": 420
+    },
+    {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/da31b756b4a018bb67dbf5261e6186fb352c732ad8563bb137dfcb8fa111eb83/work/research/geography/alaska-thirteen-geometry-measurement-20261008/phase_admission.py",
+      "realpath": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/da31b756b4a018bb67dbf5261e6186fb352c732ad8563bb137dfcb8fa111eb83/work/research/geography/alaska-thirteen-geometry-measurement-20261008/phase_admission.py",
+      "bytes": 13816,
+      "sha256": "d619a0413f750939732fa2be969f29d74e18060c1eb10f7e5e42e9a6889e6da2",
+      "mode": 420
+    }
+  ],
+  "caps": {
+    "max_member_bytes": 33554432,
+    "max_phase_bytes": 268435456,
+    "max_process_bytes": 536870912,
+    "wall_seconds": 900
+  },
+  "max_process_bytes": 536870912,
+  "cap_bytes": 268435456,
+  "component_totals": {
+    "encoded_inputs": 18822660,
+    "project_code_files": 130112,
+    "imported_runtime_files_and_python_executable": 39345622,
+    "scratch_reservation": 8388608,
+    "generated_output_reservation": 1048576,
+    "phase_admission_file_bytes": 122414
+  },
+  "complete_phase_bytes": 67857992,
+  "headroom_bytes": 200577464
+}
