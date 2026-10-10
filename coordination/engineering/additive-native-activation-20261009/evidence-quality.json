@@ -6,47 +6,715 @@
   "subject_ids": [],
   "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "baseline": {
-    "commit": "f0a0c5f1c252e68b3b987cef8625ba9d185c215f",
+    "commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce",
     "files": [
+      {
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/original-registry.json",
+        "bytes": 2012,
+        "sha256": "9cb1303f108fc979b2d106445fa8c29a05945ffb0979556442f2b46eadb3a43e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/composed-original-ledger.json",
+        "bytes": 198458,
+        "sha256": "c6f161a1a4ea05eeb6493bee580f5c96483126b1be5f04a45a58cc2e31e2c3a7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+        "bytes": 252447,
+        "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-selection-receipt.json",
+        "bytes": 14625,
+        "sha256": "dcc3533b9eea251b9d5a323a05da441816a2affe2889c2484174ec853e591691",
+        "hash_kind": "file-bytes"
+      },
       {
         "path": "coordination/engineering/additive-native-composition-20261009/evidence-quality.json",
         "bytes": 46730,
         "sha256": "6148952a9b53f652f4832a549d75f7b13076fb04546d889bdc694010d1d2d294",
-        "hash_kind": "file-bytes",
-        "role": "original-source"
+        "hash_kind": "file-bytes"
       }
     ],
     "pins": {
+      "baseline_0": "9cb1303f108fc979b2d106445fa8c29a05945ffb0979556442f2b46eadb3a43e",
+      "baseline_1": "c6f161a1a4ea05eeb6493bee580f5c96483126b1be5f04a45a58cc2e31e2c3a7",
+      "baseline_2": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "baseline_3": "dcc3533b9eea251b9d5a323a05da441816a2affe2889c2484174ec853e591691",
       "merged_source_introduction_manifest": "6148952a9b53f652f4832a549d75f7b13076fb04546d889bdc694010d1d2d294"
     },
     "pin_files": {
+      "baseline_0": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/original-registry.json",
+      "baseline_1": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/composed-original-ledger.json",
+      "baseline_2": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+      "baseline_3": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-selection-receipt.json",
       "merged_source_introduction_manifest": "coordination/engineering/additive-native-composition-20261009/evidence-quality.json"
     }
   },
-  "sources": [],
-  "outputs": [],
-  "methods": [
+  "sources": [
     {
-      "id": "trusted-reader-prerequisite",
-      "kind": "code",
-      "description": "Introduce already reviewed authority registrations and selected additive consumer lifetime/custody corrections before selection changes, preserving original scientific operators and current selection.",
-      "software": "Node 24; original immutable Git source bodies from PR1648 head68e89",
-      "units": "code behavior"
+      "id": "retained-component-authorities",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1523",
+      "role": "Original pilot and Alaska source-relative component policies and qualifications, with current v9 before-state custody",
+      "vintage": "Original pilot52bed and Alaska b82ee; current-v9 qualification9ec080a4688fc2a2a1a88b6332c3ac4cf900f3fb",
+      "retrieved_at": "2026-10-09",
+      "license": {
+        "status": "unknown",
+        "terms": "Original source terms and limitations retained in immutable source authority; no additional redistribution authority asserted"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Original registry, ledger and whole source/request/body locators remain in merged1547/1561 and the retained qualifications",
+      "limit": "Source-relative repairs only; contemporary physical authority, historical borders and new source classes are not approved. Original eight exceptions remain exceptions.",
+      "temporal_status": "reference"
     }
   ],
-  "metrics": [],
-  "summaries": [],
-  "conclusions": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/certificate.json",
+      "bytes": 3109,
+      "sha256": "cab515b5de14955f03101e45f4bbedde2365039b5c2180103a1adb2d0d097d79",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/code-source.json",
+      "bytes": 51989,
+      "sha256": "4f0d4c19c06b80644b4500770be8babf07684ec75fa8c79851f84859818ebd30",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/facts.json",
+      "bytes": 3263,
+      "sha256": "af2a3d117526555075b0e0d668cc467e67481c02c6b2a4bfdfe581ff2b308f05",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/host-supply.json",
+      "bytes": 1339,
+      "sha256": "cd610466f384130d82ee54aa7ac79d06df64937eb2fdc65d0e3ad0f404e11bb8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/issued-execution.json",
+      "bytes": 26670,
+      "sha256": "4f62e1b10792503b4100b8111d9966b9a3b7133f020288300499dd081ceffd64",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/issued-plan.json",
+      "bytes": 7701,
+      "sha256": "f1b24f6ea7d23a1fd44e586de0c1139235aaf3a26a2ab4d9db94ceae40948609",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/launch.json",
+      "bytes": 916,
+      "sha256": "5672a8d06aac6e15228c10245eed6a95276e34af7d63339881594e8adb9412b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/operating.json",
+      "bytes": 2141,
+      "sha256": "ba7a80f8a002ebfbdaf0faa1bfaf85277c0d540a0c9d46066d09fb7c786f4e36",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/publication.json",
+      "bytes": 475,
+      "sha256": "05ae60ef725dc77d5766437d3dd5ee9ba25b6cecdb5e72d98dc5a34b7e435a6f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/request.json",
+      "bytes": 746451,
+      "sha256": "470243971ba83d96ace72d4275490b01ffd4050a1f7dc64243e6c6cc2ab7fa67",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/result.json",
+      "bytes": 1052979,
+      "sha256": "1ad8ab377b871c8960c64feb22241317162f308987bbf83b9b2aad776c92693e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/samples.jsonl",
+      "bytes": 45082,
+      "sha256": "4145a8ee965e37797a091b17bc395cde8e790e2022db0fca71860668920d2ee3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/stderr.log",
+      "bytes": 777,
+      "sha256": "7a60eb2e36edf4d17deb9e0e5c77a5f3a63842d36289eb8957ab9f8733013c1a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/stdout.json",
+      "bytes": 376,
+      "sha256": "f741e8f328b0914ad5eaf29fb95d5d82935d26c073aec1e4aeedb67eaad8f980",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/stock-report.json",
+      "bytes": 15798,
+      "sha256": "1d247e8c479ccdfa3f6b785e95247bf23e7d24e550741120a9c1d8cf7746a047",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification/terminal.json",
+      "bytes": 1445,
+      "sha256": "2588838f616e0c8ab20ad5fc840b4074384d0442d218cadb4963ffda785fccb8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/certificate.json",
+      "bytes": 3159,
+      "sha256": "5555f7a659479e704628f6a5108a798b48963a89ab382c1b33ed2af8f1880b22",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/code-source.json",
+      "bytes": 52042,
+      "sha256": "6e4ca40aa9f0c76be32523d8ddae0646442284fb559400fe31f3ffc6e3e671b6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/facts.json",
+      "bytes": 3263,
+      "sha256": "86b182b879e994d6235cf35399859cc0d719c5e170897b5b11d43c3c513d1199",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/host-supply.json",
+      "bytes": 1339,
+      "sha256": "dcb71bf45b6a44fc731f1ad3314a52d41b778cc5b6c45b8d5ee4cb72733bf0b9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/issued-execution.json",
+      "bytes": 26710,
+      "sha256": "2c72e2058f2e7050931468d6afd44996d949b61bc8c5c63b55ac7a7cbfd4ae87",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/issued-plan.json",
+      "bytes": 7701,
+      "sha256": "4c70daf37e2303f43416742cd04e58de4abdee14d04de9b18777bc25f8879d78",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/launch.json",
+      "bytes": 943,
+      "sha256": "0a330d6bae12f4c015a26331da72ba4c50d7219e7418d487b6a32f6160b114bb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/operating.json",
+      "bytes": 2191,
+      "sha256": "0d582c065a4913c9966af48701cfbe04fc481945a41a94e7bc221e2d4605863c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/publication.json",
+      "bytes": 475,
+      "sha256": "3be780e3b45176340b7074f01672fcf2bd0404490972b4ea94cccebc68dd6de1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/request.json",
+      "bytes": 746491,
+      "sha256": "8877ca18d050ae7fd2d8853cf69bfadb4f544fd059bc30a8b0f8e706823f0217",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/result.json",
+      "bytes": 1052979,
+      "sha256": "1ad8ab377b871c8960c64feb22241317162f308987bbf83b9b2aad776c92693e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/samples.jsonl",
+      "bytes": 44908,
+      "sha256": "918d2331e87cf7af81c2af0864dbfc9b7221a0aa27236ac8819c6fd16fddf4fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/stderr.log",
+      "bytes": 777,
+      "sha256": "d8c7fa9b092cd6b412e2135d1f1525fcd882bb90fb4504f72eeae18d4a4b3870",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/stdout.json",
+      "bytes": 376,
+      "sha256": "66cb8e3719eee075bf80aeee8ad5862150129dd8d92961aa5c56a844958e7c95",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/stock-report.json",
+      "bytes": 14940,
+      "sha256": "39b716212b78e3a8b6b9f68ae61a7b5ebbe06c4fb4f9e68269d1466b2eb33bcd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-corrected/terminal.json",
+      "bytes": 1472,
+      "sha256": "70496dc1e251c8c129821adbb7f5fdafdce47a85daeffcd888bf5fe422750073",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/certificate.json",
+      "bytes": 3148,
+      "sha256": "66f3c1f2827d01368ee50950537842733f23fcf5c496ecdafa1ac5e5b6dd7680",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/code-source.json",
+      "bytes": 52026,
+      "sha256": "232661f8d29871ace1a77abe569aed6690381c274bdf6d561f1839914494e484",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/facts.json",
+      "bytes": 3263,
+      "sha256": "5337138d08966b413a19083bc564eab371297e14fd04a7a3257327ad0cdeab69",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/host-supply.json",
+      "bytes": 1339,
+      "sha256": "e84afb847652fb8bb976ed2ee1e1237a65d134755c4d65d34ac35b7c1b37d7e5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/issued-execution.json",
+      "bytes": 26698,
+      "sha256": "61d099b229fc2b95139f103e0eed0e633182293cd04a8f7f2b7b9c11c6885e90",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/issued-plan.json",
+      "bytes": 7710,
+      "sha256": "468389fbd0f4207d0e347ccd4455b61a1a20ba4f041d18c92639cee214c27c0e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/launch.json",
+      "bytes": 935,
+      "sha256": "691300afd1c7cb407c55d58bda658639b405bec3ed74a0f6ae289114bd61755f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/operating.json",
+      "bytes": 2171,
+      "sha256": "b0e0efb504f356230f8e970ae21e405c4a1367469c3bbbcae07f65778f968757",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/publication.json",
+      "bytes": 475,
+      "sha256": "4d6dadafc3561335b6d36816762b2b850b9ffef9cc251a1da1a0eff4fe7d9a9b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/request.json",
+      "bytes": 746488,
+      "sha256": "046c19d2fd0d13cd1b71378fff5d5421deec3e46d283c10ee250cb5da1a652da",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/result.json",
+      "bytes": 1052988,
+      "sha256": "3fc42c589d87af53ba936582979c903cac58b57439af73641178e89e4c864232",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/samples.jsonl",
+      "bytes": 48011,
+      "sha256": "97fb33501d39223a1ab2c069ce8a2d3fedc9604143df4bf1dd7eb9cf68a92c57",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/stderr.log",
+      "bytes": 777,
+      "sha256": "e8b0953653abbd6d17094ba441f4aaca03f3869a0b142af753c11e1f82eca119",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/stdout.json",
+      "bytes": 376,
+      "sha256": "fa7601ab364ca5d0b59ede5790d75eff93eed5a5dd4c9031c844e293e9861ee4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/stock-report.json",
+      "bytes": 14941,
+      "sha256": "abdb488171fd0413ac65a65613bde300311909dd20619fa09a522ff54a2aee73",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/current-v9-qualification-final/terminal.json",
+      "bytes": 1464,
+      "sha256": "fe21ca1d7d0c8d95b57c8623378da506a0057e32b7b2d5a579cdc882d9b1051f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release/authority-registry.json",
+      "bytes": 2012,
+      "sha256": "9cb1303f108fc979b2d106445fa8c29a05945ffb0979556442f2b46eadb3a43e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release/envelope.json",
+      "bytes": 1421,
+      "sha256": "784dcefb20ca794c3b34b8181c5396eee346e4ae10d45aeb132482a330a2dfa9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release/ledger.json",
+      "bytes": 310594,
+      "sha256": "62824ba037e00b2091029f2bf2038834e3ec708a1cacad7a43a414845f5e8218",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release/owners.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 11096191,
+      "uncompressed_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release/patch.json",
+      "bytes": 3751,
+      "sha256": "912b5d3caed7d765144f5c105f0af0c8cf0da2ddaccd63c6a493a221bc3108c3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release/selection-sidecar.json",
+      "bytes": 3354,
+      "sha256": "f17f6d49ada86e06d99fd56e98f13ea79d94a1ca737e02a0d465db4bbf3c0e2b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-current/authority-registry.json",
+      "bytes": 2012,
+      "sha256": "9cb1303f108fc979b2d106445fa8c29a05945ffb0979556442f2b46eadb3a43e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-current/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-current/envelope.json",
+      "bytes": 1421,
+      "sha256": "dfd0b1e6fecc94dc5435abfcbb1c73c684f3ae9ab94276157863a75fa72d136b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-current/ledger.json",
+      "bytes": 310604,
+      "sha256": "d894c4c222a624de8889fdd59329f453320d51e1ca1437a50fc39e38cbb7308e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-current/owners.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 11096191,
+      "uncompressed_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-current/patch.json",
+      "bytes": 3751,
+      "sha256": "a95499b60483af9be7bed929b383c2015be9e0e392674f1055623d255459fda2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-current/selection-sidecar.json",
+      "bytes": 3402,
+      "sha256": "59365c5b36644c87a151ad0514e01f01d8035f30f42c57b242ac7f5959381d74",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-final/authority-registry.json",
+      "bytes": 2012,
+      "sha256": "9cb1303f108fc979b2d106445fa8c29a05945ffb0979556442f2b46eadb3a43e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-final/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-final/envelope.json",
+      "bytes": 1421,
+      "sha256": "7b8efb4fcd0522bc9a3ed6e463803f7b2ad5be644bd8e31fd378260c79367327",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-final/ledger.json",
+      "bytes": 310600,
+      "sha256": "38a29c179f5d142719259e130352b4b4d66a37f32b66842f29f4188cfff083fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-final/owners.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 11096191,
+      "uncompressed_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-final/patch.json",
+      "bytes": 3751,
+      "sha256": "05a08a132456f398599beec03a83793841e203e544067a84f0c49b91cb38a3ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/release-final/selection-sidecar.json",
+      "bytes": 3399,
+      "sha256": "d5b717ffe3e81ddc9c202f46f1bea099d9663497c55a58fdc80e0e4e07cad278",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/retained-activation-inputs.json",
+      "bytes": 5093,
+      "sha256": "da305d8a5b3822094b7e9265414e619501ef00a50527db779d95e550c85ead34",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/original-target-source-bindings.json",
+      "bytes": 12335,
+      "sha256": "f664c6e6e42b746947b00afa5dd2396e88f5e57efef26d281e7c7b71a3b5b940",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/independent-native-consumption-wrapper-review.json",
+      "bytes": 6914,
+      "sha256": "ca283dcb0814cfbbd4430d8646eb5af3ad6e89af2669343a478c86fecf736519",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/independent-native-consumption-wrapper-self-pin-review.json",
+      "bytes": 7379,
+      "sha256": "87ab56e1354dd8a8fda532bfa008436abd35c6c506f0e0685eaa2f2f07f59a8a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/choiseul-six-existing-dispositions.json",
+      "bytes": 7477,
+      "sha256": "30ffa368b6c3c5ccf6d71f9d2dcfc9168c292a9ea42aa2a88b483186be940a2c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-attempts/static-build-complete.stderr.log",
+      "bytes": 3515,
+      "sha256": "4d32006916e8d2707eaaefcdba048c9911455d79af06f952a1b1b927fe9bff7a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-attempts/static-build-complete.stdout.log",
+      "bytes": 462,
+      "sha256": "765691530723fc0d62739a100bf7cb474a07615626bc0cde4eb2862e10ad9a4c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-attempts/static-build-copy-frame.stderr.log",
+      "bytes": 5960,
+      "sha256": "aa3795112ffbd0488e33df75954f1f0d2b63c9911df52374ef6f8efbe67d705a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-attempts/static-build-copy-frame.stdout.log",
+      "bytes": 470,
+      "sha256": "453b378c0e4b01ac779b2ac6c880a7b0560786f17cadc7d9c12242af7ea19b30",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-attempts/static-build-declared.stderr.log",
+      "bytes": 4625,
+      "sha256": "f5a8c365583edb9fc3b576502789332f89a10262ca26d1a9b904f6ccb07e5ac3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-attempts/static-build-declared.stdout.log",
+      "bytes": 465,
+      "sha256": "11a79a5e4150684cd62a0d4023a7dce879e50c5a5adde5a7c2000e7a2c97de5b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-attempts/static-build-final.stderr.log",
+      "bytes": 2849,
+      "sha256": "65c74d02070e827111913982bf2fcc51d8e4016deb967d224305fba84ebdac05",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-attempts/static-build-final.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-attempts/static-build.stderr.log",
+      "bytes": 2406,
+      "sha256": "25523d456f8eb2b232d3954848dd2bbab93ef02c888da9413aab744f596bb52c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-attempts/static-build.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-current-v9/atlas-geography.json",
+      "bytes": 10547590,
+      "sha256": "0104fd05f07f8c31d273fce9d0a28b4f45f46b53921649448b3d2ef43daef086",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-current-v9/package-input-build.json",
+      "bytes": 48363,
+      "sha256": "e3f4b07f6f19c5913c037366e11c93b4eba7e95c6b811af8dbb0a22448898b8f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-current-v9/prepared-evidence-index.json",
+      "bytes": 12337,
+      "sha256": "a80160287489f0ac22ea0805692b8f5cd81a53e282467d27ee0cbf8d52cdd6b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-current-v9/production-row-view-result.json",
+      "bytes": 634,
+      "sha256": "3425556605313a344123aa1ee52bbca72d7bf254fc6257662ffddb6dfc2ecc18",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-current-v9/selected-assets-readback.json",
+      "bytes": 2707,
+      "sha256": "33ef1a774fc01b8b57e9d1faee501a285bae1e6a7ac28f4087af624f4a3f1c1b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-current-v9/stderr-time.log",
+      "bytes": 777,
+      "sha256": "74c180fadb32496410c163b94355af87468bad44a2e0703532791271d71f4060",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-current-v9/stdout.log",
+      "bytes": 1085,
+      "sha256": "573966e36fb8a436626ee16eb19f067505d0417a1af6c50fef9d79d56a31c2bf",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "current-before-rebind",
+      "description": "One actual current-before qualification plus repeats only for demonstrated changed-code or duplicate certificate binding defects. Whole original source, current target/native rows, all Arctic predecessor rows and execution/time custody are verified; unchanged source science is reused.",
+      "software": "Node24.19.0/Python3.12 exact installed runtime bodies captured in original issued and terminal custody",
+      "units": "native cells, complete rows, bytes and seconds",
+      "kind": "measurement"
+    },
+    {
+      "id": "selected-consumer",
+      "description": "Existing private V4 artifact consumption and selected additive reader, ordinary committed four-asset envelope/sidecar, production sparse patch and render/pick invariants",
+      "software": "Actual current package-issued import closure; no submitted historical code executes as data authority",
+      "units": "native cells and complete owners",
+      "kind": "code"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "current-supported-components",
+      "value": 12,
+      "unit": "components",
+      "vintage": "baseline",
+      "input_sha256": "3fc42c589d87af53ba936582979c903cac58b57439af73641178e89e4c864232",
+      "evaluation_commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce"
+    },
+    {
+      "id": "current-new-native-cells",
+      "value": 141,
+      "unit": "cells",
+      "vintage": "baseline",
+      "input_sha256": "3fc42c589d87af53ba936582979c903cac58b57439af73641178e89e4c864232",
+      "evaluation_commit": "d07f64b2feab45f4eb2583743da74de91f8bbcce"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "current-supported-components",
+      "value": 12,
+      "unit": "components"
+    },
+    {
+      "metric_id": "current-new-native-cells",
+      "value": 141,
+      "unit": "cells"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The current-v9 qualification accepts12 supported components and141 new native cells while preserving all old affected assignments and141 Arctic predecessor gains.",
+      "status": "supported",
+      "source_ids": [
+        "retained-component-authorities"
+      ]
+    },
+    {
+      "text": "The ordinary static package emits all four selected additive assets byte-identically with the committed final release; normal geographic checks and merged delivery remain pending.",
+      "status": "supported",
+      "source_ids": [
+        "retained-component-authorities"
+      ]
+    },
+    {
+      "text": "No GPU/Canvas/browser capture was executed; production mathematical draw/sample/pick checks cover the complete authenticated 132-row view. Choiseul historical five zero-cell cases and one held positive case contribute no gains.",
+      "status": "unresolved",
+      "source_ids": [
+        "retained-component-authorities"
+      ]
+    }
+  ],
   "stages": {
-    "research": "partial",
-    "implementation": "proposed",
-    "geographic_approval": "unapproved"
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
   },
   "commands": [
-    "node --test test/selected-continuous-lifecycle.test.mjs"
+    "Original current qualification exact command and runtime identity are retained in current-v9-qualification-final/terminal.json and issued-execution.json.",
+    "node scripts/build-static.mjs through the ordinary package materializer and V4 private execution boundary.",
+    "PATH=<bundled-node-bin>:<bundled-python-bin>:/usr/bin:/bin node scripts/build-static.mjs"
   ],
-  "limits": [
-    "Code-only prerequisite. Selection, certificate/context, package routing and qualification products remain unchanged. No new current-bank qualification, integrated repair, geographic authority, water classification, deployment or visual rendering claim.",
-    "Existing qualification, selected-package and mathematical row-view proof at PR1648 head68e89 remains its original execution vintage; this PR does not relabel or replay it. Activation requires the subsequent normal reviewed delivery."
+  "metric_bindings": [
+    {
+      "metric_id": "current-supported-components",
+      "path": "coordination/engineering/additive-native-activation-20261009/package-current-v9/selected-assets-readback.json",
+      "json_pointer": "/supported_components"
+    },
+    {
+      "metric_id": "current-new-native-cells",
+      "path": "coordination/engineering/additive-native-activation-20261009/package-current-v9/selected-assets-readback.json",
+      "json_pointer": "/new_native_cells"
+    }
   ]
 }

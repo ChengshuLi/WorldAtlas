@@ -209,3 +209,23 @@ create batch-specific certificate/helper frameworks by default. Deliver independ
 supported cases now; unresolved source/target cases retain their existing owners and
 do not become prerequisites for unrelated repairs. Report actual integrated gaps and
 cells separately from proposed fragments and remaining candidates on the existing issue.
+
+## Retained pilot and Alaska activation
+
+The bounded #1632 delivery reuses the original seven-cell pilot and 134-cell
+Alaska qualifications. Its current-v9 qualifier authenticates seven complete
+targets, all 72 affected rows and all 60 Arctic predecessor rows, then verifies
+141 new previously unassigned cells while conserving every old assignment and
+the 141 Arctic gains. The twelve source-relative components preserve their
+original immutable per-component policies; eight original exceptions remain
+exceptions. See `coordination/engineering/additive-native-activation-20261009/README.md`
+for exact qualification and selected output custody.
+
+The static builder obtains the actual private V4 consumption execution record,
+loads the existing selected additive reader, and publishes only the four bound
+envelope assets. It uses the same effective reference for the application and
+native patch. Future supported batches change committed request, qualification,
+release assets and sidecar data through these existing paths; they do not need
+another consumer framework or a worldwide audit. A new source class still needs
+its actual source-policy evidence. Zero native cells are distinct from water or
+physical approval.

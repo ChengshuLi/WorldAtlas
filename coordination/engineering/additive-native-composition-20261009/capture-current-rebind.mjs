@@ -3,7 +3,7 @@
 // This module cannot issue an operating certificate or select a release.
 import fs from 'node:fs';import path from 'node:path';
 import {ImmutableReader,SelectedGeometrySources} from '../../../scripts/check-effective-geographic-regression.mjs';
-import {CURRENT_REBIND_CODE,normaliseRetainedRepairLedger,readRetainedRegistryAuthority,acquireCurrentRebindOperands,valueBytes,valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {CURRENT_REBIND_CODE,nativeBaseSelection,requirePriorAdditiveConservation,normaliseRetainedRepairLedger,readRetainedRegistryAuthority,acquireCurrentRebindOperands,valueBytes,valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 const FILE=33554432,PHASE=268435456,prepared=new WeakSet();
 const demand=(v,m)=>{if(!v)throw Error(m);},same=(a,b)=>valueBytes(a).equals(valueBytes(b));
 const exists=p=>{try{return fs.lstatSync(p);}catch(e){if(e.code==='ENOENT')return null;throw e;}};
@@ -34,18 +34,19 @@ function originalOperands(reader,registry,ledger,snapshot,executionMetadata){
 }
 export function captureCurrentRebindProducts({destination,snapshot,plan,registry,originalLedger,executionCommit,executedCode,executionPreUse}){
  demand(prepared.has(destination)&&snapshot?.reader instanceof ImmutableReader,'Require prepared owned destination and actual immutable reader');
- demand(!Object.hasOwn(snapshot.selection,'additive_release'),'Cold rebind producer requires the selected native base only');
+ const baseSelection=nativeBaseSelection(snapshot.selection);
  const plannedRows=[...normaliseRetainedRepairLedger(originalLedger,registry).rows.values()];
- validateCurrentRebindPlan(plan,{executionCommit,baseSelection:snapshot.selection,registry,originalRows:plannedRows,executedCode});
+ validateCurrentRebindPlan(plan,{executionCommit,baseSelection,registry,originalRows:plannedRows,executedCode});
  // The constructor checks the stock private snapshot identity before original
  // authority bodies can be opened. Its selected metadata reads stay admitted.
  new SelectedGeometrySources(snapshot);
+ requirePriorAdditiveConservation(snapshot,registry,originalLedger);
  const {rows,patches,proofs}=originalOperands(snapshot.reader,registry,originalLedger,snapshot,{plan,executionPreUse,executedCode});
  demand(same(rows,plannedRows),'Original authenticated authority rows differ from admitted plan');
  demand(same(plan.original_patch_sha256s,patches.map(valueSha)),'Cold plan changes complete original native output roster');
  const acquired=acquireCurrentRebindOperands(snapshot,registry,rows,patches,{targetSources:plan.target_sources,predecessorProof:plan.predecessor_proof,carriedMetadataBytes:2*valueBytes({plan,proofs,originalLedger,executedCode,executionPreUse}).length});
  demand(acquired.acquisition_phases.every(p=>p.complete_phase_bytes<=plan.limits.complete_phase_bytes&&p.descriptors<=plan.limits.descriptors),'Actual acquisition exceeds admitted planned phase');
- const request={version:1,kind:'issued-native-additive-current-bank-rebind-v1',execution_commit:executionCommit,executed_code:executedCode,base_selection:snapshot.selection,authority_registry_sha256:valueSha(registry),original_rows:rows,original_patch_sha256s:patches.map(valueSha),current_targets:acquired.current_targets,current_rows:acquired.current_rows,acquisition:acquired.acquisition,execution:{command:executionPreUse.command,pre_use:executionPreUse.pre_use},size:snapshot.manifest.size,limits:plan.limits};
+ const request={version:1,kind:'issued-native-additive-current-bank-rebind-v1',execution_commit:executionCommit,executed_code:executedCode,base_selection:baseSelection,authority_registry_sha256:valueSha(registry),original_rows:rows,original_patch_sha256s:patches.map(valueSha),current_targets:acquired.current_targets,current_rows:acquired.current_rows,acquisition:acquired.acquisition,execution:{command:executionPreUse.command,pre_use:executionPreUse.pre_use},size:snapshot.manifest.size,limits:plan.limits};
  const result=acquired.result,facts={version:1,kind:'native-additive-current-bank-rebind-facts-v1',execution_commit:executionCommit,request_sha256:valueSha(request),result_sha256:valueSha(result),complete_phase_bytes:Math.max(...acquired.acquisition_phases.map(p=>p.complete_phase_bytes)),descriptors:Math.max(...acquired.acquisition_phases.map(p=>p.descriptors)),acquisition_sha256:valueSha(acquired.acquisition),acquisition_phases:acquired.acquisition_phases};
  // These local output pins deliberately omit commit/OID: publication custody
  // is bound in a separate finished step after genuine Git retention. No future
@@ -56,5 +57,5 @@ export function captureCurrentRebindProducts({destination,snapshot,plan,registry
  demand(encoded.every(p=>p.raw.length<=FILE)&&combined<=plan.limits.output_bytes,'Complete cold products exceed prospective output bound before writes');
  demand(!exists(destination.destination),'Destination appeared during source acquisition');ordinaryAncestors(path.dirname(destination.destination));fs.mkdirSync(destination.destination,{mode:0o700});
  for(const {name,raw}of encoded){const fd=fs.openSync(path.join(destination.destination,name+'.json'),fs.constants.O_WRONLY|fs.constants.O_CREAT|fs.constants.O_EXCL|fs.constants.O_NOFOLLOW,0o644);try{fs.writeFileSync(fd,raw);}finally{fs.closeSync(fd);}}
- return {execution_commit:executionCommit,output_directory:destination.destination,products:Object.fromEntries(Object.entries(bodies).map(([name,b])=>[name,pin(name,b)])),combined_bytes:combined,acquisition_phases:acquired.acquisition_phases,source_inventory:acquired.input_inventory,limits:['Actual cold data acquisition/output only. External operating qualification, two-run equality and genuine immutable publication binding remain required. No selection or physical approval.']};
+ return {execution_commit:executionCommit,output_directory:destination.destination,products:Object.fromEntries(Object.entries(bodies).map(([name,b])=>[name,pin(name,b)])),combined_bytes:combined,acquisition_phases:acquired.acquisition_phases,source_inventory:acquired.input_inventory,limits:['Actual cold data acquisition/output only. External operating qualification and genuine immutable publication binding remain required. Retained unchanged repeatability evidence is reused. No selection or physical approval.']};
 }

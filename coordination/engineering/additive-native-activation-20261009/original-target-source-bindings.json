@@ -1,0 +1,312 @@
+{
+  "version": 1,
+  "kind": "explicit-current-target-source-binding-readback",
+  "proposed_bank_commit": "10429d63e5a0ce462bb6f1bf3f811a5a56ed6cf2",
+  "metadata_pins": [
+    {
+      "commit": "10429d63e5a0ce462bb6f1bf3f811a5a56ed6cf2",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json",
+      "bytes": 14656,
+      "sha256": "3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "research/geography/alaska-thirteen-geometry-measurement-20261008/sources/atlas-neighbors/receipt.json",
+      "bytes": 7040,
+      "sha256": "892dfa4685aea1a1cd7c6e5108987274404704b4cf42bb8b6862bb63175d3615"
+    }
+  ],
+  "source_bindings": [
+    {
+      "target_id": "atlas:physical:CAN-25:NUN",
+      "path": "data/geography/part-29.json"
+    },
+    {
+      "target_id": "gb:USA:ADM2:52423323B16539688175930",
+      "path": "data/geography/part-25.json"
+    },
+    {
+      "target_id": "gb:USA:ADM2:52423323B46246640861022",
+      "path": "data/geography/part-26.json"
+    },
+    {
+      "target_id": "gb:USA:ADM2:52423323B55198873775030",
+      "path": "data/geography/part-25.json"
+    },
+    {
+      "target_id": "gb:USA:ADM2:52423323B64721050065013",
+      "path": "data/geography/part-27.json"
+    },
+    {
+      "target_id": "gb:USA:ADM2:52423323B80008995120080",
+      "path": "data/geography/part-26.json"
+    },
+    {
+      "target_id": "gb:USA:ADM2:52423323B82121365400499",
+      "path": "data/geography/part-25.json"
+    }
+  ],
+  "whole_source_inputs": [
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-25.json",
+      "mode": "100644",
+      "git_blob_oid": "16ba4f38251d1bd99ac85f0ae7cca2f0424470f8",
+      "bytes": 4525239,
+      "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+      "role": "current-v8-unchanged-source-body",
+      "original_capture": {
+        "bytes": 4525239,
+        "commit": "6c0ea95b7a8214ac1548161368bd952af136b5c2",
+        "path": "data/geography/part-25.json",
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+      }
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-26.json",
+      "mode": "100644",
+      "git_blob_oid": "5d61478ece9042cbd0791eabd2536e1054e26341",
+      "bytes": 4608983,
+      "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
+      "role": "current-v8-unchanged-source-body",
+      "original_capture": {
+        "bytes": 4608983,
+        "commit": "6c0ea95b7a8214ac1548161368bd952af136b5c2",
+        "path": "data/geography/part-26.json",
+        "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+      }
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-27.json",
+      "mode": "100644",
+      "git_blob_oid": "a6a359c8c566462b280a461b4a5e1591e1f486c4",
+      "bytes": 4863162,
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+      "role": "current-v8-unchanged-source-body",
+      "original_capture": {
+        "bytes": 4863162,
+        "commit": "6c0ea95b7a8214ac1548161368bd952af136b5c2",
+        "path": "data/geography/part-27.json",
+        "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+      }
+    }
+  ],
+  "targets": [
+    {
+      "target_id": "gb:USA:ADM2:52423323B82121365400499",
+      "pixelIndex": 47017,
+      "path": "data/geography/part-25.json",
+      "geometry_sha256": "9eba23401ea8d37ff0a660a299ef8070bd7e097350b62ad72130cea5c6e7618c",
+      "original_base_geometry_sha256": "9eba23401ea8d37ff0a660a299ef8070bd7e097350b62ad72130cea5c6e7618c",
+      "geometry_equal_original": true,
+      "parent_id": "framework:province:alaska:4057e2fddbc5",
+      "feature_keys": [
+        "type",
+        "geometry",
+        "properties",
+        "id"
+      ],
+      "source_pin": {
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "path": "data/geography/part-25.json",
+        "mode": "100644",
+        "git_blob_oid": "16ba4f38251d1bd99ac85f0ae7cca2f0424470f8",
+        "bytes": 4525239,
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+        "role": "current-v8-unchanged-source-body",
+        "original_capture": {
+          "bytes": 4525239,
+          "commit": "6c0ea95b7a8214ac1548161368bd952af136b5c2",
+          "path": "data/geography/part-25.json",
+          "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+        }
+      }
+    },
+    {
+      "target_id": "gb:USA:ADM2:52423323B55198873775030",
+      "pixelIndex": 46045,
+      "path": "data/geography/part-25.json",
+      "geometry_sha256": "a5948109710b057ae9a791a02fccc34eb9b3c14c4e195c092169c8f1c031f258",
+      "original_base_geometry_sha256": "a5948109710b057ae9a791a02fccc34eb9b3c14c4e195c092169c8f1c031f258",
+      "geometry_equal_original": true,
+      "parent_id": "framework:province:alaska:4057e2fddbc5",
+      "feature_keys": [
+        "type",
+        "geometry",
+        "properties",
+        "id"
+      ],
+      "source_pin": {
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "path": "data/geography/part-25.json",
+        "mode": "100644",
+        "git_blob_oid": "16ba4f38251d1bd99ac85f0ae7cca2f0424470f8",
+        "bytes": 4525239,
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+        "role": "current-v8-unchanged-source-body",
+        "original_capture": {
+          "bytes": 4525239,
+          "commit": "6c0ea95b7a8214ac1548161368bd952af136b5c2",
+          "path": "data/geography/part-25.json",
+          "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+        }
+      }
+    },
+    {
+      "target_id": "gb:USA:ADM2:52423323B16539688175930",
+      "pixelIndex": 44705,
+      "path": "data/geography/part-25.json",
+      "geometry_sha256": "ba5ada9a970f80dbeb5f92f84c253787e10898df64d6171047901a089604b60a",
+      "original_base_geometry_sha256": "ba5ada9a970f80dbeb5f92f84c253787e10898df64d6171047901a089604b60a",
+      "geometry_equal_original": true,
+      "parent_id": "framework:province:alaska:4057e2fddbc5",
+      "feature_keys": [
+        "type",
+        "geometry",
+        "properties",
+        "id"
+      ],
+      "source_pin": {
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "path": "data/geography/part-25.json",
+        "mode": "100644",
+        "git_blob_oid": "16ba4f38251d1bd99ac85f0ae7cca2f0424470f8",
+        "bytes": 4525239,
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+        "role": "current-v8-unchanged-source-body",
+        "original_capture": {
+          "bytes": 4525239,
+          "commit": "6c0ea95b7a8214ac1548161368bd952af136b5c2",
+          "path": "data/geography/part-25.json",
+          "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+        }
+      }
+    },
+    {
+      "target_id": "gb:USA:ADM2:52423323B46246640861022",
+      "pixelIndex": 45711,
+      "path": "data/geography/part-26.json",
+      "geometry_sha256": "e000087b464bda87f519c3abd8117284fa3d651a46f4ccb5bf5ba9dd96f84300",
+      "original_base_geometry_sha256": "e000087b464bda87f519c3abd8117284fa3d651a46f4ccb5bf5ba9dd96f84300",
+      "geometry_equal_original": true,
+      "parent_id": "framework:province:alaska:4057e2fddbc5",
+      "feature_keys": [
+        "type",
+        "geometry",
+        "properties",
+        "id"
+      ],
+      "source_pin": {
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "path": "data/geography/part-26.json",
+        "mode": "100644",
+        "git_blob_oid": "5d61478ece9042cbd0791eabd2536e1054e26341",
+        "bytes": 4608983,
+        "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
+        "role": "current-v8-unchanged-source-body",
+        "original_capture": {
+          "bytes": 4608983,
+          "commit": "6c0ea95b7a8214ac1548161368bd952af136b5c2",
+          "path": "data/geography/part-26.json",
+          "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+        }
+      }
+    },
+    {
+      "target_id": "gb:USA:ADM2:52423323B80008995120080",
+      "pixelIndex": 46957,
+      "path": "data/geography/part-26.json",
+      "geometry_sha256": "b517bd1b4485cf441617ec69af42dd07b4aa146033e791bc8521efc885fe87f0",
+      "original_base_geometry_sha256": "b517bd1b4485cf441617ec69af42dd07b4aa146033e791bc8521efc885fe87f0",
+      "geometry_equal_original": true,
+      "parent_id": "framework:province:alaska:4057e2fddbc5",
+      "feature_keys": [
+        "type",
+        "geometry",
+        "properties",
+        "id"
+      ],
+      "source_pin": {
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "path": "data/geography/part-26.json",
+        "mode": "100644",
+        "git_blob_oid": "5d61478ece9042cbd0791eabd2536e1054e26341",
+        "bytes": 4608983,
+        "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
+        "role": "current-v8-unchanged-source-body",
+        "original_capture": {
+          "bytes": 4608983,
+          "commit": "6c0ea95b7a8214ac1548161368bd952af136b5c2",
+          "path": "data/geography/part-26.json",
+          "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+        }
+      }
+    },
+    {
+      "target_id": "gb:USA:ADM2:52423323B64721050065013",
+      "pixelIndex": 46395,
+      "path": "data/geography/part-27.json",
+      "geometry_sha256": "8d53f7cb32e41314956b6eb6e5beef9bfc4cf8097bf7fd035001b2566768fa37",
+      "original_base_geometry_sha256": "8d53f7cb32e41314956b6eb6e5beef9bfc4cf8097bf7fd035001b2566768fa37",
+      "geometry_equal_original": true,
+      "parent_id": "framework:province:alaska:4057e2fddbc5",
+      "feature_keys": [
+        "type",
+        "geometry",
+        "properties",
+        "id"
+      ],
+      "source_pin": {
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "path": "data/geography/part-27.json",
+        "mode": "100644",
+        "git_blob_oid": "a6a359c8c566462b280a461b4a5e1591e1f486c4",
+        "bytes": 4863162,
+        "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+        "role": "current-v8-unchanged-source-body",
+        "original_capture": {
+          "bytes": 4863162,
+          "commit": "6c0ea95b7a8214ac1548161368bd952af136b5c2",
+          "path": "data/geography/part-27.json",
+          "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+        }
+      }
+    }
+  ],
+  "source_phases": [
+    {
+      "path": "data/geography/part-25.json",
+      "features": 1500,
+      "complete_phase_bytes": 138907408
+    },
+    {
+      "path": "data/geography/part-26.json",
+      "features": 1500,
+      "complete_phase_bytes": 139080552
+    },
+    {
+      "path": "data/geography/part-27.json",
+      "features": 1500,
+      "complete_phase_bytes": 139592682
+    }
+  ],
+  "nun_override": {
+    "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz",
+    "mode": "100644",
+    "bytes": 3353763,
+    "sha256": "d7665a1fdf68f0626c7e28da9ac0e40f4e35aaeacdf91bad4ab8e2d77221bc49",
+    "logical_path": "data/geography/part-29.json",
+    "encoding": "gzip",
+    "commit": "ee684e3145079ff93f68520e3c17837789be5b0c",
+    "decoded_bytes": 12932719,
+    "decoded_sha256": "723d16eb63b7f2dcd8260a516eac6571a7ef1eaaf9bff3c926e0c63235b98fd3",
+    "git_blob_oid": "d3f17ccd8eecca88b16f2bbbf075320b6d555aea"
+  },
+  "limits": [
+    "Only the3 original17-feature capture parts were read; not a world source scan. Complete6 current immutable raw target geometries match original qualified bases.",
+    "NUN29 binding comes from previously authenticated full mapped source; current application override still requires actual selected resolver read during cold qualification.",
+    "Immutable proposed10429 bank only; not current Main/private selected qualification or source/physical approval. Runtime amounts are stat sizing, not fresh authenticated execution."
+  ]
+}
