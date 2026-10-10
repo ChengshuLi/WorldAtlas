@@ -65,7 +65,7 @@ def bounds(geometry):
 
 def main():
     assert pathlib.Path(__file__).read_bytes() == own('build_handoff.py')
-    destination = HERE / 'vintages/source-handoff-001'
+    destination = HERE / 'vintages/source-handoff-002'
     assert not destination.exists()
     for parent in [destination, *destination.parents]:
         assert not parent.is_symlink()
@@ -77,6 +77,17 @@ def main():
     physical = json.loads(own('vintages/physical-restoration-001/physical-record.json'))
     native = json.loads(own('vintages/physical-restoration-001/queried-source-metadata.json'))
     restoration = json.loads(own('vintages/physical-restoration-001/receipt.json'))
+    for name, selected_rows in [('components-030.jsonl.gz', [physical]), ('sources-000.jsonl.gz', native)]:
+        encoded = own('vintages/physical-restoration-001/' + name)
+        descriptor = next(row for row in restoration['restorations'] if row['path'] == name)
+        assert len(encoded) == descriptor['whole_original_bytes'] and sha(encoded) == descriptor['whole_original_sha256']
+        decoded = gzip.decompress(encoded)
+        assert len(decoded) == descriptor['decoded_bytes'] and sha(decoded) == descriptor['decoded_sha256']
+        rows = [json.loads(line) for line in decoded.splitlines()]
+        key = 'component_id' if name.startswith('components') else 'id'
+        for selected in selected_rows:
+            originals = [row for row in rows if row[key] == selected[key]]
+            assert originals == [selected]
     serial = json.loads(own('vintages/serialization-proof-001/result.json'))
     source = json.loads(own('vintages/consumed-source-probe-001/result.json'))
     old_target = json.loads(own('vintages/current-target-probe-001/result.json'))
