@@ -39,7 +39,7 @@ export async function loadJobDeadline({api, repo, phase, workflow, env = process
   need(Number.isSafeInteger(run) && Number.isSafeInteger(attempt), 'Invalid job/run/attempt authority');
   const minutes = workflowJobMinutes(workflow, phase);
   const wallStarted = wallNow(), monotonicStarted = monotonicNow(), observations = [];
-  let reads = 0, waited = 0, pinnedID, pinnedStart, job, started;
+  let reads = 0, waited = 0, pinnedID, job, started;
   const elapsed = () => {
     const value = monotonicNow() - monotonicStarted;
     need(Number.isFinite(value) && value >= 0, 'Invalid elapsed job clock');
@@ -96,16 +96,16 @@ export async function loadJobDeadline({api, repo, phase, workflow, env = process
         const canonical = typeof job.started_at === 'string' && START_FORMAT.test(job.started_at)
           ? job.started_at.includes('.') ? job.started_at.replace(/\.(\d{1,3})Z$/, (_, fraction) => '.' + fraction.padEnd(3, '0') + 'Z')
             : job.started_at.replace(/Z$/, '.000Z') : null;
-        if (!canonical || !Number.isFinite(started) || started > wallStarted || new Date(started).toISOString() !== canonical ||
-          pinnedStart !== undefined && started !== pinnedStart) {mismatches.push('started_at');pending = false;}
-        else pinnedStart ??= started;
+        if (!canonical || !Number.isFinite(started) || started > wallStarted || new Date(started).toISOString() !== canonical) {mismatches.push('started_at');pending = false;}
+        // Pending rows can expose provisional starts. Only the fully bound
+        // in-progress row below establishes the job clock; the ID stays pinned.
       }
     }
     if (!mismatches.length) break;
     const binding = snapshot(mismatches, job, {match_count: matches.length, total_count: count});
     observations.push(binding);
     const message = 'Job metadata does not bind the executing phase: ' + mismatches.join(', ');
-    const pause = [250, 750][reads - 1];
+    const pause = [250, 750, 2000, 4000, 4000, 4000, 4000][reads - 1];
     if (!pending || typeof metadataRemaining !== 'function' || pause === undefined) fail(message, binding);
     const canRead = wait => {
       const budget = metadataRemaining();

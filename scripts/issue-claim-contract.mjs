@@ -171,7 +171,10 @@ export function githubAPI(token, {fetchImpl = fetch, onRequest = () => {}, readW
   const usesRecovery=recovery&&minimumRemaining>0&&capacityState?.remaining<=minimumRemaining;
   if(usesRecovery&&recoveryAttempts>=4)throw Object.assign(Error('Bounded recovery allocation exhausted; preserve pending cleanup'),{recoveryBudget:true});
   // Immutable blobs already have independently bounded custody/transport caches.
-  const conditional=!artifactRedirect&&conditionalReads&&method==='GET'&&body===undefined&&!capacityProbe&&route!=='/rate_limit'&&!/\/git\/blobs\//.test(route);
+  // Actions may retain a queued snapshot while the same job starts. Always
+  // read this mutable inventory afresh; other authority routes retain ETags.
+  const jobInventory=/^\/repos\/[^/]+\/[^/]+\/actions\/runs\/\d+\/attempts\/\d+\/jobs(?:\?|$)/.test(route);
+  const conditional=!jobInventory&&!artifactRedirect&&conditionalReads&&method==='GET'&&body===undefined&&!capacityProbe&&route!=='/rate_limit'&&!/\/git\/blobs\//.test(route);
   const snapshot=conditional?snapshots.get(route):undefined;
   // Charge the possible paid attempt conservatively. A genuine 304 refunds it;
   // stale/higher response counters cannot repeatedly mint new request capacity.

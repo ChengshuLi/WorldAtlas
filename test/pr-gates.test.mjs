@@ -338,7 +338,7 @@ test('metadata-only draft readiness preserves code work and cannot replace its t
 
 // Exercise the actual hosted entry and HTTP wrapper, including startup admission.
 async function startup({phase = 'evidence', rows = [{status: 'queued', started_at: null}, {}],
-  workflowMs = 0, jobMs = [], oversleep = 0, httpFailure, editInventory, rollback = false} = {}) {
+  workflowMs = 0, jobMs = [], oversleep = 0, httpFailure, editInventory, rollback = false, staleConditional = false} = {}) {
   const f = fixture(), epoch = Date.parse('2026-10-11T00:00:00Z'), sha = 'd'.repeat(40);
   const workflow = Buffer.from('jobs:\n  profile:\n    timeout-minutes: 10\n  evidence:\n    timeout-minutes: 10\n');
   let time = 0, reads = 0, constructed = false, deadlineRemaining;
@@ -350,7 +350,7 @@ async function startup({phase = 'evidence', rows = [{status: 'queued', started_a
     assert.equal(new URL(url).origin, 'https://api.github.com');
     assert.equal(options.method, 'GET');
     const route = new URL(url).pathname + new URL(url).search;
-    calls.push({route, at: time});
+    calls.push({route, at: time, conditional: options.headers['If-None-Match']});
     let payload;
     if (route.includes('/contents/.github/workflows/')) {
       time += workflowMs;
@@ -359,6 +359,7 @@ async function startup({phase = 'evidence', rows = [{status: 'queued', started_a
         sha: createHash('sha1').update(`blob ${workflow.length}\0`).update(workflow).digest('hex')};
     } else if (route.endsWith('/actions/runs/30/attempts/2/jobs?per_page=100&page=1')) {
       const i = reads++;time += jobMs[i] ?? 0;
+      if (staleConditional && options.headers['If-None-Match']) return new Response(null, {status: 304});
       const failure = Array.isArray(httpFailure) ? httpFailure[i] : httpFailure;
       if (failure === 'transport') throw Error('synthetic transport refusal');
       if (failure) return new Response('{}', {status: failure, headers: {'retry-after': '1'}});
@@ -368,7 +369,7 @@ async function startup({phase = 'evidence', rows = [{status: 'queued', started_a
         started_at: new Date(epoch).toISOString(), ...row}]};
       payload = editInventory?.(payload, i) ?? payload;
     } else payload = await f.api(route);
-    return new Response(JSON.stringify(payload), {status: 200});
+    return new Response(JSON.stringify(payload), {status: 200, headers: staleConditional ? {etag: '"pending"'} : {}});
   };
   const result = await runPRGates({event: f.event, env, phase,
     wallNow: () => epoch + time, monotonicNow: () => time,
@@ -409,10 +410,10 @@ test('actual startup recovers missing metadata and every pending state within th
 test('persistent pending startup remains failed and never constructs transport or inspects evidence', async () => {
   const x = await startup({rows: [{status: 'queued', started_at: null}]});
   assert.equal(x.result.status, 'incomplete-or-invalid');assert.equal(x.constructed, false);assert.deepEqual(x.inspected, []);
-  assert.equal(x.reads, 3);assert.equal(x.calls.length, 4);assert.deepEqual(x.waits, [250, 750]);
+  assert.equal(x.reads, 8);assert.equal(x.calls.length, 9);assert.deepEqual(x.waits, [250, 750, 2000, 4000, 4000, 4000, 4000]);
   assert.deepEqual(x.result.deadline_binding.mismatches, ['status', 'started_at']);
-  assert.equal(x.result.deadline_binding.metadata_reads, 3);assert.equal(x.result.deadline_binding.metadata_wait_ms, 1000);
-  assert.equal(x.result.request_accounting.actual_http_attempts, 4);
+  assert.equal(x.result.deadline_binding.metadata_reads, 8);assert.equal(x.result.deadline_binding.metadata_wait_ms, 19000);
+  assert.equal(x.result.request_accounting.actual_http_attempts, 9);
 });
 
 test('explicit foreign identities, terminal states and malformed starts refuse without rereading', async () => {
@@ -427,8 +428,8 @@ test('explicit foreign identities, terminal states and malformed starts refuse w
   }
 });
 
-test('same-job startup pins the first ID and valid start rather than accepting a replacement', async () => {
-  for (const [field, value] of [['id', 41], ['started_at', '2026-10-10T23:59:59Z'], ['run_id', 31], ['run_attempt', 3]]) {
+test('same-job startup pins the first ID and run identity rather than accepting a replacement', async () => {
+  for (const [field, value] of [['id', 41], ['run_id', 31], ['run_attempt', 3]]) {
     const x = await startup({rows: [{status: 'queued'}, {[field]: value}]});
     assert.equal(x.result.status, 'incomplete-or-invalid');assert.equal(x.reads, 2);assert.deepEqual(x.waits, [250]);
     assert.deepEqual(x.result.deadline_binding.mismatches, [field === 'id' ? 'job_id' : field]);
@@ -478,4 +479,58 @@ test('metadata observations never retry HTTP quota, permission or uncertain tran
       if (second) assert.equal(x.result.deadline_binding.metadata_reads, 2);
     }
   }
+});
+
+
+test('actual PR entry establishes the authoritative start after provisional queued timestamps', async () => {
+  for (const phase of ['evidence', 'metadata']) {
+    const x = await startup({phase, staleConditional: true, rows: [
+      {status: 'queued', started_at: '2026-10-10T23:59:57Z'},
+      {status: 'queued', started_at: '2026-10-10T23:59:58Z'},
+      null, {status: 'queued'}, {status: 'queued'}, {},
+    ]});
+    assert.equal(x.result.status, 'checked');assert.equal(x.reads, 6);
+    assert.equal(x.result.job_deadline.started_at, '2026-10-11T00:00:00.000Z');
+    assert.equal(x.result.job_deadline.job_id, 40);assert.equal(x.deadlineRemaining(), 570000 - 11000);
+    assert.deepEqual(x.waits, [250, 750, 2000, 4000, 4000]);
+    assert.equal(x.result.job_deadline.metadata_observations[0].observed.started_at, '2026-10-10T23:59:57Z');
+    assert(x.calls.filter(row => row.route.includes('/attempts/')).every(row => row.conditional === undefined));
+  }
+});
+
+test('later startup reads retain identity, timestamp, terminal and HTTP refusal boundaries', async () => {
+  for (const row of [{id: 41}, {run_id: 31}, {run_attempt: 3}, {status: 'completed'},
+    {status: 'foreign'}, {started_at: 'bad'}, {started_at: '2026-10-11T00:00:01Z'}]) {
+    const x = await startup({rows: [{status: 'queued'}, null, {status: 'waiting'}, row]});
+    assert.equal(x.result.status, 'incomplete-or-invalid');assert.equal(x.reads, 4);
+    assert.equal(x.constructed, false);assert.deepEqual(x.inspected, []);
+  }
+  const http = await startup({rows: [{status: 'queued'}], httpFailure: [null, null, null, 500]});
+  assert.equal(http.result.status, 'incomplete-or-invalid');assert.equal(http.reads, 4);
+  assert.equal(http.constructed, false);assert.deepEqual(http.inspected, []);
+});
+
+test('extended pending reads still charge the original startup deadline and full HTTP reserve', async () => {
+  const x = await startup({rows: [{status: 'queued'}], workflowMs: 10000, jobMs: [0, 0, 0, 1000]});
+  assert.equal(x.result.status, 'incomplete-or-invalid');assert.equal(x.result.job_deadline_exhausted, true);
+  assert.equal(x.reads, 5);assert.equal(x.time, 18000);assert.deepEqual(x.waits, [250, 750, 2000, 4000]);
+  assert.equal(x.constructed, false);assert.deepEqual(x.inspected, []);
+});
+
+test('only exact attempt-job inventory bypasses conditional snapshots; unsolicited 304 refuses', async () => {
+  const inventory = '/repos/a/b/actions/runs/30/attempts/2/jobs';
+  for (const route of [inventory, inventory + '?per_page=100&page=1',
+    '/repos/a/b/actions/runs/30/jobs', inventory + '/other', '/repos/a/b/pulls/20']) {
+    const conditional = ![inventory, inventory + '?per_page=100&page=1'].includes(route), seen = [];
+    const api = githubAPI('fixture', {fetchImpl: async (_, options) => {
+      seen.push(options.headers['If-None-Match']);
+      return new Response(seen.at(-1) ? null : '{"status":"queued"}',
+        {status: seen.at(-1) ? 304 : 200, headers: {etag: '"same"'}});
+    }});
+    await api(route);await api(route);assert.deepEqual(seen, [undefined, conditional ? '"same"' : undefined]);
+  }
+  let reads = 0;
+  const api = githubAPI('fixture', {fetchImpl: async () => ++reads === 1
+    ? new Response('{}', {headers: {etag: '"pending"'}}) : new Response(null, {status: 304})});
+  await api(inventory);await assert.rejects(api(inventory), /Unrequested conditional/);assert.equal(reads, 2);
 });
