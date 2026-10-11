@@ -75,7 +75,7 @@ test('all four products contribute and collision or symlink never changes origin
 test('actual supervisor reads bounded products only after complete union admission',t=>{
  const base=path.join(root,'coordination/engineering/additive-native-composition-20261009'),f=fixture(t),b=products(4*MiB+1024);
  writeCurrentRebindProducts(f.token,b,8*MiB);
- assert.match(fs.readFileSync(path.join(base,'run-current-rebind.mjs'),'utf8'),/plan\.limits\.output_bytes>0&&plan\.limits\.output_bytes<=8388608/);
+ assert.match(fs.readFileSync(path.join(base,'run-current-rebind.mjs'),'utf8'),/processingAllowance\(\{phaseBytes:plan\.limits\.complete_phase_bytes,rssBytes:plan\.limits\.rss_bytes\}\)/);
  const code=`import pathlib,importlib.util,hashlib
 from unittest.mock import patch
 p=pathlib.Path(${JSON.stringify(base)})
@@ -84,7 +84,7 @@ m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 output=pathlib.Path(${JSON.stringify(f.destination)})
 actual=m.current_rebind_product_hashes(output,8*1048576)
 assert actual=={name:hashlib.sha256((output/(name+'.json')).read_bytes()).hexdigest() for name in ['request','facts','result','publication']}
-for bound in [4*1048576,True,0,8*1048576+1]:
+for bound in [4*1048576,True,0,9007199254740992]:
  with patch.object(pathlib.Path,'read_bytes',side_effect=RuntimeError('opened before admission')):
   try: m.current_rebind_product_hashes(output,bound)
   except AssertionError: pass

@@ -25,14 +25,23 @@ def require_stock_growth(stock,root,output_bytes):
  entries=[e for e in stock['entries'] if e['path']==str(root) and e['slot']=='work' and e['status']=='ready']
  assert len(entries)==1,'Fresh owned allocator entry required'
  reservation=entries[0]['reservation']
- assert type(reservation) is int and reservation>0 and output_bytes<=reservation,'Positive complete growth reservation required'
+ assert type(reservation) is int and reservation>0,'Positive complete growth reservation required'
  slots=[s for s in stock['worktrees'] if s['path']==str(root) and s['managed'] is True]
  assert len(slots)==1,'Fresh measured owned allocator slot required'
  footprint=slots[0]['bytes']
- assert type(footprint) is int and footprint>=0 and footprint+output_bytes<=reservation,'Measured slot plus complete growth exceeds reservation'
+ assert type(footprint) is int and footprint>=0,'Invalid measured slot footprint'
  # Allocation admitted the reservation before setup. Fresh launch admits this
  # phase's complete growth against actual free space without reserving it twice.
- assert free-output_bytes>=minimum,'Fresh current stock/growth admission refused'
+ # Already materialized bytes are reflected in free space. Reservations are
+ # future-growth estimates, not a hard quota on an existing managed checkout.
+ measured={row['path']:row['bytes'] for row in stock['worktrees']}
+ pending=0
+ for entry in stock['entries']:
+  reserved=entry['reservation'];used=measured.get(entry['path'],0)
+  assert type(reserved) is int and reserved>=0 and type(used) is int and used>=0
+  remaining=max(0,reserved-used)
+  pending+=max(remaining,output_bytes) if entry['path']==str(root) else remaining
+ assert free-pending>=minimum,'Fresh current stock/growth admission refused'
 
 def platform_contract(pre):
  # The literal issuer roster is already part of the unchanged 28-file closure.
@@ -63,7 +72,7 @@ def bounded_resource_text(path,limit=65536):
  finally:os.close(fd)
  return raw.decode('ascii')
 
-def evaluate_linux_supply(evidence):
+def evaluate_linux_supply(evidence,required_bytes=805306368):
  # Reported prospective availability, matching the original Mac estimate.
  # Unknown hidden limits are disclosed; exposed finite limits always tighten it.
  values={}
@@ -91,10 +100,11 @@ def evaluate_linux_supply(evidence):
   usage=re.findall(r'^'+key+r':\s*(\d+) kB$',evidence['status'],re.M)
   assert len(ceiling)==len(usage)==1,'Unknown process memory ceiling/usage'
   if ceiling[0]!='unlimited':supply=min(supply,max(0,int(ceiling[0])-int(usage[0])*1024))
+ assert contract.positive(required_bytes)
  residual=supply-headroom-reserved
- assert residual>=805306368,'Fresh reported residual Linux supply refused'
+ assert residual>=required_bytes,'Fresh reported residual Linux supply refused'
  return {'supply_upper_bytes':supply,'headroom_reserve_bytes':headroom,'concurrent_reserved_bytes':reserved,
-         'residual_reported_bytes':residual,'required_bytes':805306368,'observations':evidence,
+         'residual_reported_bytes':residual,'required_bytes':required_bytes,'observations':evidence,
          'uncertainty':'Prospective reported availability only; unexposed limits are unknown, not unlimited. No swap credit or guaranteed allocation.'}
 
 def exposed_cgroup_headroom(cgroup,mountinfo):
@@ -140,16 +150,17 @@ def exposed_cgroup_headroom(cgroup,mountinfo):
  if not memberships:unknown.append('No memory cgroup membership exposed')
  return rows,unknown
 
-def fresh_host_supply(env):
+def fresh_host_supply(env,required_bytes=805306368):
+ reservation=env.get('WORLDATLAS_CONCURRENT_RESERVED_BYTES','')
+ assert re.fullmatch(r'0|[1-9][0-9]*',reservation),'Fresh coordinator concurrent reservation is required'
  if sys.platform=='darwin':
   vm=subprocess.check_output(['/usr/bin/vm_stat'],text=True,env=env)
   page=int(re.search(r'page size of (\d+) bytes',vm).group(1))
   pages=sum(int(re.search(r'^Pages '+name+r':\s*(\d+)',vm,re.M).group(1)) for name in ['free','inactive','speculative'])
-  assert pages*page>=805306368,'Fresh conservative host supply refused; reclaimability uncertain'
-  return {'vm_stat':vm,'supply_upper_bytes':pages*page,'required_bytes':805306368,'uncertainty':'Inactive/speculative reclaimability is an upper estimate, not guaranteed availability.'}
+  residual=pages*page-int(reservation)-2*1024**3
+  assert residual>=required_bytes,'Fresh conservative host supply refused; reclaimability uncertain'
+  return {'vm_stat':vm,'supply_upper_bytes':pages*page,'residual_reported_bytes':residual,'concurrent_reserved_bytes':int(reservation),'parent_headroom_bytes':2*1024**3,'required_bytes':required_bytes,'uncertainty':'Inactive/speculative reclaimability is an upper estimate, not guaranteed availability.'}
  assert sys.platform=='linux','Unreviewed execution platform'
- reservation=env.get('WORLDATLAS_CONCURRENT_RESERVED_BYTES','')
- assert re.fullmatch(r'0|[1-9][0-9]*',reservation),'Fresh coordinator concurrent reservation is required'
  proc=pathlib.Path('/proc')/str(os.getpid())
  evidence={name:bounded_resource_text(path) for name,path in {
   'meminfo':'/proc/meminfo','cgroup':proc/'cgroup','mountinfo':proc/'mountinfo',
@@ -164,7 +175,7 @@ def fresh_host_supply(env):
   rss+=int(fields[1])*1024
  evidence.update(concurrent_reserved_bytes=int(reservation),observed_aggregate_rss_bytes=rss,aggregate_ps=ps)
  assert len(contract.canonical(evidence))<=contract.META,'Resource observation metadata reserve exceeded'
- return evaluate_linux_supply(evidence)
+ return evaluate_linux_supply(evidence,required_bytes)
 
 def external_time_usage(text,option):
  assert option in ('-l','-v')
@@ -180,9 +191,9 @@ def external_time_usage(text,option):
 
 def current_rebind_product_hashes(output,output_bytes):
  # Stat the complete union before opening any body, including post-child reads.
- assert type(output_bytes) is int and 0<output_bytes<=8388608
+ assert contract.positive(output_bytes)
  paths={name:output/(name+'.json') for name in ['request','facts','result','publication']}
- for q in paths.values():assert q.is_file() and not q.is_symlink() and 0<q.stat().st_size<=output_bytes
+ for q in paths.values():assert q.is_file() and not q.is_symlink() and 0<q.stat().st_size<=min(output_bytes,contract.FILE)
  assert sum(q.stat().st_size for q in paths.values())<=output_bytes,'Complete current-rebind product union exceeds issued bound before reads'
  return {name:contract.digest(q.read_bytes()) for name,q in paths.items()}
 
@@ -202,17 +213,22 @@ def supervise(issued_path,issued_sha,operation):
  assert len(bound_cmd)==6 and bound_cmd[0]==next(p['path'] for p in pre['runtime'] if p['role']=='time') and bound_cmd[1]==time_option and bound_cmd[2]==next(p['path'] for p in pre['runtime'] if p['role']=='node') and bound_cmd[3]==pre['entry']['path'] and bound_cmd[4]==pre['plan']['path']
  output=pathlib.Path(bound_cmd[5]);assert output.is_relative_to(root/'.cache') and '..' not in output.parts and not os.path.lexists(output)
  for a in output.parents:assert a.is_dir() and not a.is_symlink()
- before=contract.capture(root,head,pre);plan=json.loads(pathlib.Path(pre['plan']['path']).read_bytes());limits=plan['limits']
+ assert type(pre['plan']['bytes']) is int and 0<pre['plan']['bytes']<=131072,'Issued plan exceeds small pre-use metadata bound'
+ contract.authenticate_file(pre['plan']);plan=json.loads(pathlib.Path(pre['plan']['path']).read_bytes());limits=contract.execution_limits(plan['limits'])
+ output_reserve=contract.retained_output(limits)
  # Fresh original stock report and explicit prospective retained growth; no
  # stale receipt or shell continuation can authorize the actual command.
  guard_env={k:v for k,v in os.environ.items() if k not in ('NODE_OPTIONS','NODE_PATH','PYTHONPATH','PYTHONHOME','PYTHONSTARTUP','PYTHONINSPECT','PYTHONUSERBASE','__PYVENV_LAUNCHER__')}
  guard_env.update(PATH=private_path,LC_ALL='C',LANG='C')
  stock_raw=subprocess.check_output([cmd[2],str(root/'scripts/local-workspace.mjs'),'check'],cwd=root,env=guard_env)
- stock=json.loads(stock_raw);require_stock_growth(stock,root,contract.OUTPUT)
- supply=fresh_host_supply(guard_env)
+ stock=json.loads(stock_raw);require_stock_growth(stock,root,output_reserve)
+ supply=fresh_host_supply(guard_env,limits['rss_bytes']+805306368)
+ assert limits['complete_phase_bytes']<=supply['residual_reported_bytes']-805306368,'Current logical allowance exceeds fresh machine share'
  extra=sum(p['bytes'] for p in pre['runtime'] if p['role'] not in ('node','git','installed-dependency'))
- assert issued['operating_phase_bytes']==limits['complete_phase_bytes']+extra+contract.OUTPUT+contract.META<=contract.PHASE
- assert limits['sampled_stop_bytes']<=402653184 and limits['rss_bytes']<=536870912 and limits['wall_seconds']<=1200 and type(limits['output_bytes']) is int and 0<limits['output_bytes']<=8388608
+ operating=limits['complete_phase_bytes']+extra+output_reserve+contract.META
+ assert contract.positive(operating) and issued['operating_phase_bytes']==operating and issued['output_log_reserve_bytes']==output_reserve
+ before=contract.capture(root,head,pre,phase_bytes=operating,output_bytes=output_reserve)
+ # Actual issued finite values drive this job; historical defaults are not quotas.
  # Whole helper bytes are already frozen/pre-use verified in the complete code
  # roster. These literal historical mechanisms are not rewritten or relabeled.
  loaders=[]
@@ -221,7 +237,8 @@ def supervise(issued_path,issued_sha,operation):
  termination,owned_group=loaders
  operation.mkdir(mode=0o700);(operation/'stock-report.json').write_bytes(stock_raw);(operation/'host-supply.json').write_bytes(contract.canonical(supply));stdout=operation/'stdout.json';stderr=operation/'stderr.log';samples=operation/'samples.jsonl'
  def retained():return sum(p.stat().st_size for base in [operation,output] if base.exists() for p in base.rglob('*') if p.is_file())
- def logs():return all(not p.exists() or p.stat().st_size<= {'stdout.json':8192,'stderr.log':40960,'samples.jsonl':1048576}[p.name] for p in [stdout,stderr,samples])
+ log_limits=contract.runtime_logs(limits)
+ def logs():return all(not p.exists() or p.stat().st_size<=log_limits[p.name] for p in [stdout,stderr,samples])
  def usage(group):
   ps=next(p['path'] for p in pre['runtime'] if p['role']=='process-inspector');rows=[]
   for line in subprocess.check_output([ps,'-axo','pid=,ppid=,pgid=,rss=,command='],text=True).splitlines():
@@ -245,7 +262,7 @@ def supervise(issued_path,issued_sha,operation):
     if not logs():reason='whole raw log/sample bound'
     elif rss>=limits['sampled_stop_bytes']:reason='sampled owned process group bound'
     elif time.monotonic()-start>limits['wall_seconds']:reason='wall deadline'
-    elif retained()>contract.OUTPUT:reason='complete retained output/log bound'
+    elif retained()>output_reserve:reason='complete retained output/log bound'
     if reason:events=authority.cleanup();break
     time.sleep(.25)
    exit_code=p.wait()
@@ -254,7 +271,7 @@ def supervise(issued_path,issued_sha,operation):
    raise
  survivors=[{'pid':pid,**row} for pid,row in termination.snapshot().items() if row['pgid']==p.pid]
  if survivors:events+=authority.cleanup();reason=reason or 'owned descendants after natural exit';survivors=[{'pid':pid,**row} for pid,row in termination.snapshot().items() if row['pgid']==p.pid]
- assert logs(),'Terminal log bounds';after=contract.capture(root,head,pre)
+ assert logs(),'Terminal log bounds';after=contract.capture(root,head,pre,phase_bytes=operating,output_bytes=output_reserve)
  text=stderr.read_text();lifetime=None;raw_elapsed=None
  try:lifetime,raw_elapsed=external_time_usage(text,time_option)
  except (AssertionError,ValueError):reason=reason or 'raw external time usage malformed'
@@ -273,7 +290,7 @@ def supervise(issued_path,issued_sha,operation):
    request_sha=products['request'];publication_sha=products['publication']
   except (AssertionError,FileNotFoundError,KeyError,ValueError):reason=reason or 'missing/foreign actual child products or stdout bindings'
  terminal={'version':1,'kind':'current-rebind-external-terminal-v1','execution_commit':head,'command':cmd,'request_sha256':request_sha,'publication_sha256':publication_sha,'code_source_sha256':contract.digest(source_raw),'exit_code':exit_code,'signal':None if exit_code>=0 else -exit_code,'guard_reason':reason,'lifetime_rss_bytes':lifetime,'sampled_group_peak_bytes':peak,'sampled_stop_bytes':limits['sampled_stop_bytes'],'lifetime_ceiling_bytes':limits['rss_bytes'],'elapsed_seconds':elapsed,'wall_limit_seconds':limits['wall_seconds'],'owned_processes_remaining':survivors,'termination_events':events}
- (operation/'terminal.json').write_bytes(contract.canonical(terminal));assert retained()<=contract.OUTPUT
+ (operation/'terminal.json').write_bytes(contract.canonical(terminal));assert retained()<=output_reserve
  assert exit_code==0 and reason is None and not survivors,'Unqualified actual command; retained history, no retry'
  return terminal
 if __name__=='__main__':

@@ -90,6 +90,6 @@ test('only finite exact complete migrations succeed and nearby changed vectors r
 
 test('current reader adoption preserves all accepted programmes and both earlier migrations',()=>{
  const c=read();
- assert.equal(valueSha(c.programs),'f98ce117470918303d67fdcd0392acca35a508908c5ac9db8e15757104003c08');
+ assert.equal(valueSha(c.programs.slice(0,17)),'f98ce117470918303d67fdcd0392acca35a508908c5ac9db8e15757104003c08');
  assert.equal(valueSha(c.current_rebind_migrations.slice(0,2)),'1b2dc6750f4cd57af263288541b3987b2f5818394c9f1970142c4d1a8b46933e');
 });

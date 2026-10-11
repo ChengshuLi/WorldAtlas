@@ -736,7 +736,7 @@ export function verifyCurrentRebindExecution({request,operating,expectedCode,cus
  const names=['code_source','terminal','stderr','stdout','issued_plan'];
  rebindKeys(operating.execution_custody,names.join(','),'Incomplete external execution roster');
  for(const name of names){const pin=operating.execution_custody[name];pinCheck(pin);demand(pin.decoded_bytes===undefined,'Execution custody must be whole ordinary bodies');const raw=custody[name];demand(Buffer.isBuffer(raw)&&raw.length===pin.bytes&&sha(raw)===pin.sha256,'External execution whole body differs: '+name);}
- demand(operating.execution_custody.code_source.bytes<=1048576&&operating.execution_custody.terminal.bytes<=131072&&operating.execution_custody.stderr.bytes<=40960&&operating.execution_custody.stdout.bytes<=8192&&operating.execution_custody.issued_plan.bytes<=1048576,'External execution metadata/log bound');
+ demand(operating.execution_custody.code_source.bytes<=1048576&&operating.execution_custody.terminal.bytes<=131072&&operating.execution_custody.stderr.bytes<=currentRebindLogLimits(request.limits).stderr&&operating.execution_custody.stdout.bytes<=currentRebindLogLimits(request.limits).stdout&&operating.execution_custody.issued_plan.bytes<=1048576,'External execution metadata/log bound');
  const proof=JSON.parse(custody.code_source),terminal=JSON.parse(custody.terminal),output=JSON.parse(custody.stdout),plan=JSON.parse(custody.issued_plan);
  rebindKeys(request.execution,'command,pre_use','Missing issued actual execution contract');
  rebindKeys(proof,'version,kind,execution_commit,command,pre_use,post_use','Foreign whole execution source proof');
@@ -792,15 +792,25 @@ export function currentRebindAcquisitionIdentity(acquisition) {
  })};
 }
 
+export function currentRebindLogLimits(limits) {
+ const out={stdout:limits?.stdout_bytes??8192,stderr:limits?.stderr_bytes??40960,monitor:limits?.monitor_bytes??1048576};
+ demand(Object.values(out).every(n=>Number.isSafeInteger(n)&&n>0&&n<=FILE),'Invalid bounded runtime log allowance');
+ return out;
+}
+export function validateCurrentRebindLimits(limits) {
+ const required=['complete_phase_bytes','descriptors','output_bytes','rss_bytes','sampled_stop_bytes','wall_seconds'],optional=['stdout_bytes','stderr_bytes','monitor_bytes'];
+ demand(limits&&required.every(k=>Object.hasOwn(limits,k))&&Object.keys(limits).every(k=>required.includes(k)||optional.includes(k))&&Object.values(limits).every(n=>Number.isSafeInteger(n)&&n>0),'Untyped or foreign rebind limits');
+ demand(limits.descriptors<=512&&Number.isSafeInteger(7*limits.output_bytes)&&limits.sampled_stop_bytes<=limits.rss_bytes,'Rebind admission exceeds supported finite bounds');
+ currentRebindLogLimits(limits);return limits;
+}
+
 export function verifyCurrentRebindProducts({certificate,request,facts,publication,operating,result,baseSelection,registry,originalRows,originalPatches,size,expectedCode,bodyPins,acquired,executionCustody,currentPhaseLimit=processingAllowance().phaseBytes}) {
  for(const [name,body]of Object.entries({request,facts,publication,operating,result}))demand(body&&bodyPins[name]?.sha256===valueSha(body)&&bodyPins[name]?.bytes===valueBytes(body).length,'Whole canonical rebind product bytes differ: '+name);
  rebindKeys(certificate,'version,kind,execution_commit,base_selection,authority_registry_sha256,request,facts,publication,operating,result','Foreign current rebind certificate');
  demand(certificate.version===1&&/^[a-f0-9]{40}$/.test(certificate.execution_commit)&&certificate.execution_commit===request.execution_commit&&certificate.kind==='qualified-native-additive-current-bank-rebind-v1'&&same(certificate.base_selection,baseSelection)&&certificate.authority_registry_sha256===valueSha(registry),'Stale current rebind certificate');
  rebindKeys(request,'version,kind,execution_commit,executed_code,base_selection,authority_registry_sha256,original_rows,original_patch_sha256s,current_targets,current_rows,acquisition,execution,size,limits','Foreign issued rebind request');
  demand(request.version===1&&request.kind==='issued-native-additive-current-bank-rebind-v1'&&/^[a-f0-9]{40}$/.test(request.execution_commit)&&same(request.executed_code,expectedCode)&&same(request.base_selection,baseSelection)&&request.authority_registry_sha256===valueSha(registry)&&same(request.original_rows,originalRows)&&same(request.original_patch_sha256s,originalPatches.map(valueSha))&&request.size===size,'Issued rebind changes original authority, current base or trusted method');
- rebindKeys(request.limits,'complete_phase_bytes,descriptors,output_bytes,rss_bytes,sampled_stop_bytes,wall_seconds','Incomplete rebind operating limits');
- for(const k of Object.keys(request.limits))demand(Number.isSafeInteger(request.limits[k])&&request.limits[k]>0,'Untyped rebind limit');
- demand(request.limits.complete_phase_bytes<=268435456&&request.limits.descriptors<=512&&request.limits.output_bytes<=33554432&&request.limits.rss_bytes<=536870912&&request.limits.sampled_stop_bytes<=402653184&&request.limits.sampled_stop_bytes<=request.limits.rss_bytes,'Rebind admission exceeds existing bounds');
+ validateCurrentRebindLimits(request.limits);
  demand(acquired&&same(acquired.base_selection,baseSelection)&&same(acquired.current_targets,request.current_targets)&&same(acquired.current_rows,request.current_rows),'Current operands differ from independently acquired selected bodies');
  rebindKeys(request.acquisition,'version,kind,target_sources,source_inputs,native_inputs,predecessor_proof,predecessor_rows,manifest_sha256','Incomplete current rebind acquisition custody');
  demand(request.acquisition.version===1&&request.acquisition.kind==='complete-selected-rebind-inputs-v1'&&same(currentRebindAcquisitionIdentity(request.acquisition),currentRebindAcquisitionIdentity(acquired.acquisition)),'Issued acquisition is not the complete independently consumed source/native roster');
@@ -1035,7 +1045,8 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
  const externalNames=['code_source','terminal','stderr','stdout','issued_plan'];rebindKeys(bodies.operating.execution_custody,externalNames.join(','),'Incomplete external execution roster');
  const externalRoster=externalNames.map(name=>({name,p:bodies.operating.execution_custody[name]}));
  for(const {p}of externalRoster){pinCheck(p);demand(p.decoded_bytes===undefined,'External execution whole ordinary custody required');}
- const externalCaps={code_source:1048576,terminal:131072,stderr:40960,stdout:8192,issued_plan:1048576};
+ const logLimits=currentRebindLogLimits(bodies.request.limits);
+ const externalCaps={code_source:1048576,terminal:131072,stderr:logLimits.stderr,stdout:logLimits.stdout,issued_plan:1048576};
  for(const {name,p}of externalRoster)demand(p.bytes<=externalCaps[name],'External metadata/log cap before read');
  const externalBytes=externalRoster.reduce((n,{p})=>n+2*p.bytes,0);demand(reader.used+externalBytes<=reader.phaseLimit,'Complete external execution custody before opens');reader.used+=externalBytes;
  for(const {p}of externalRoster){const actual=reader.descriptor(p.path,p.commit);demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'External execution ordinary identity differs');reader.admit(actual);}

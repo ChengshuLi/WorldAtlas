@@ -9,17 +9,18 @@ import {bindNativeTopology} from './native-topology-binding.mjs';
 import {loadNativeSourceInputs} from './native-only-inputs.mjs';
 import {compileNativeOwnership} from './compile-native-ownership.mjs';
 import {nativeCandidateManifest,NATIVE_CANONICAL_LATITUDE_SHA256} from './native-candidate-manifest.mjs';
-import {committedPreparationFiles,createNativeCandidateOutput,requirePlainExecution,candidateBudget} from './native-preparation-guards.mjs';
+import {committedPreparationFiles,createNativeCandidateOutput,requirePlainExecution,candidateBudget,preparationAllowance} from './native-preparation-guards.mjs';
 import {shuffleOwnershipBytes} from '../../src/ownership-codec.js';
 
 const options = {};
 requirePlainExecution();
 for (let n = 2; n < process.argv.length; n += 2) {
   const key = process.argv[n];
-  if (!['--repo', '--baseline', '--vintage'].includes(key) || !process.argv[n + 1] || options[key])
+  if (!['--repo', '--baseline', '--vintage','--phase-bytes','--rss-bytes'].includes(key) || !process.argv[n + 1] || options[key])
     throw Error('Explicit repository, immutable baseline and fresh offline vintage required');
   options[key] = process.argv[n + 1];
 }
+const allowance=preparationAllowance({phaseBytes:options['--phase-bytes']===undefined?undefined:Number(options['--phase-bytes']),rssBytes:options['--rss-bytes']===undefined?undefined:Number(options['--rss-bytes'])});
 const repo = fs.realpathSync(options['--repo']), baseline = options['--baseline'];
 if (!/^[a-f0-9]{40}$/.test(baseline ?? '') || !/^[a-zA-Z0-9_-]+$/.test(options['--vintage'] ?? ''))
   throw Error('Invalid immutable baseline or vintage');
@@ -48,7 +49,7 @@ const latitudeBytes = gunzipSync(latitudeEncoded, {maxOutputLength: inputs.manif
 if (latitudeBytes.length !== inputs.manifest.size * 8 || digest(latitudeBytes) !== NATIVE_CANONICAL_LATITUDE_SHA256)
   throw Error('Immutable normative latitude bytes differ');
 const latitudes = Float64Array.from({length: inputs.manifest.size}, (_, i) => latitudeBytes.readDoubleLE(i * 8));
-const admission = candidateBudget([...inputs.sourceFiles, ...executed, ...topology.files, {bytes: latitudeEncoded.length}]);
+const admission = candidateBudget([...inputs.sourceFiles, ...executed, ...topology.files, {bytes: latitudeEncoded.length}],{allowance});
 const out = createNativeCandidateOutput(repo, '.cache/native-grid-candidates/' + options['--vintage']);
 const products = [];
 function write(relative, raw, decoded = raw) {

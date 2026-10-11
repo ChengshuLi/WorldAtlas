@@ -100,7 +100,7 @@ export class ImmutableReader {
     demand(Number.isSafeInteger(decoded)&&decoded>=0&&decoded<=FILE,'Whole decoded member exceeds ordinary cap');
     const key=pin.commit+':'+pin.path,prior=this.charged.get(key);
     demand(!prior||prior===pin.bytes+decoded,'Ambiguous phase input accounting');
-    if(!prior){demand(this.charged.size<512&&this.used+pin.bytes+decoded<=this.phaseLimit,'Complete phase exceeds prospective cap');this.charged.set(key,pin.bytes+decoded);this.used+=pin.bytes+decoded;}
+    if(!prior){demand(this.charged.size<512,'Complete phase descriptor limit exceeded');if(!(this.used+pin.bytes+decoded<=this.phaseLimit))throw Error('Complete phase exceeds prospective cap: '+JSON.stringify({used:this.used,encoded_bytes:pin.bytes,decoded_bytes:decoded,limit:this.phaseLimit,descriptors:this.charged.size}));this.charged.set(key,pin.bytes+decoded);this.used+=pin.bytes+decoded;}
   }
   read(name,{version=this.version,expected,decoded=0}={}) {
     const pin=this.descriptor(name,version);this.admit(pin,decoded);
