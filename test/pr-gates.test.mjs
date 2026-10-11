@@ -334,3 +334,143 @@ test('metadata-only draft readiness preserves code work and cannot replace its t
     const block=next<0?tail:tail.slice(0,next+3);assert.doesNotMatch(block,/^    if: /m,`${name} must refresh authority`);
   }
 });
+
+// Exercise the actual hosted entry and HTTP wrapper, including startup admission.
+async function startup({phase = 'evidence', rows = [{status: 'queued', started_at: null}, {}],
+  workflowMs = 0, jobMs = [], oversleep = 0, httpFailure, editInventory, rollback = false} = {}) {
+  const f = fixture(), epoch = Date.parse('2026-10-11T00:00:00Z'), sha = 'd'.repeat(40);
+  const workflow = Buffer.from('jobs:\n  profile:\n    timeout-minutes: 10\n  evidence:\n    timeout-minutes: 10\n');
+  let time = 0, reads = 0, constructed = false, deadlineRemaining;
+  const calls = [], waits = [], current = phase === 'evidence' ? 'evidence' : 'profile';
+  const env = {GITHUB_ACTIONS: 'true', GITHUB_REPOSITORY: f.repo, GH_TOKEN: 'fixture',
+    GITHUB_WORKFLOW_SHA: sha, GITHUB_WORKFLOW_REF: `${f.repo}/.github/workflows/merge-integration-checks.yml@refs/pull/20/merge`,
+    GITHUB_JOB: current, GITHUB_RUN_ID: '30', GITHUB_RUN_ATTEMPT: '2'};
+  const fetchImpl = async (url, options) => {
+    assert.equal(new URL(url).origin, 'https://api.github.com');
+    assert.equal(options.method, 'GET');
+    const route = new URL(url).pathname + new URL(url).search;
+    calls.push({route, at: time});
+    let payload;
+    if (route.includes('/contents/.github/workflows/')) {
+      time += workflowMs;
+      payload = {type: 'file', path: '.github/workflows/merge-integration-checks.yml', encoding: 'base64',
+        size: workflow.length, content: workflow.toString('base64'),
+        sha: createHash('sha1').update(`blob ${workflow.length}\0`).update(workflow).digest('hex')};
+    } else if (route.endsWith('/actions/runs/30/attempts/2/jobs?per_page=100&page=1')) {
+      const i = reads++;time += jobMs[i] ?? 0;
+      const failure = Array.isArray(httpFailure) ? httpFailure[i] : httpFailure;
+      if (failure === 'transport') throw Error('synthetic transport refusal');
+      if (failure) return new Response('{}', {status: failure, headers: {'retry-after': '1'}});
+      const row = rows[Math.min(i, rows.length - 1)];
+      payload = {total_count: row === null ? 0 : 1, jobs: row === null ? [] : [{
+        id: 40, name: current, run_id: 30, run_attempt: 2, status: 'in_progress',
+        started_at: new Date(epoch).toISOString(), ...row}]};
+      payload = editInventory?.(payload, i) ?? payload;
+    } else payload = await f.api(route);
+    return new Response(JSON.stringify(payload), {status: 200});
+  };
+  const result = await runPRGates({event: f.event, env, phase,
+    wallNow: () => epoch + time, monotonicNow: () => time,
+    sleep: async ms => {waits.push(ms);time += rollback ? -1 : ms + oversleep;},
+    apiFactory: (token, options) => {deadlineRemaining = options.deadlineRemaining;return githubAPI(token, {...options, fetchImpl});},
+    transportFactory: api => {constructed = true;return {api, close() {}};}});
+  return {result, calls, waits, reads, time, constructed, inspected: f.calls, deadlineRemaining};
+}
+
+test('actual hosted evidence and profile recover pending same-job metadata before inspection', async () => {
+  for (const phase of ['evidence', 'metadata']) {
+    const x = await startup({phase});
+    assert.equal(x.result.status, 'checked');assert.equal(x.reads, 2);assert.deepEqual(x.waits, [250]);
+    assert.equal(x.result.job_deadline.job_id, 40);
+    assert.equal(x.result.job_deadline.metadata_reads, 2);
+    assert.equal(x.result.job_deadline.metadata_wait_ms, 250);
+    assert.deepEqual(x.result.job_deadline.metadata_observations[0].mismatches, ['status', 'started_at']);
+    assert.equal(x.result.job_deadline.metadata_observations[0].observed.started_at, null);
+    assert.equal(x.deadlineRemaining(), 570000 - x.time);
+    assert.equal(x.constructed, phase === 'evidence');assert.ok(x.inspected.length > 0);
+    assert.ok(x.calls.slice(0, 3).every(row => /\/contents\/\.github\/workflows\/|\/attempts\/2\/jobs\?/.test(row.route)));
+  }
+});
+
+test('actual startup recovers missing metadata and every pending state within three exact reads', async () => {
+  for (const row of [null, {started_at: null}, {started_at: undefined}, {run_id: null, run_attempt: undefined},
+    {status: null}, ...['queued', 'waiting', 'pending', 'requested'].map(status => ({status}))]) {
+    const x = await startup({rows: [row, row, {}]});
+    assert.equal(x.result.status, 'checked', JSON.stringify(row));assert.equal(x.reads, 3);
+    assert.deepEqual(x.waits, [250, 750]);assert.equal(x.result.job_deadline.metadata_wait_ms, 1000);
+    assert.equal(x.result.job_deadline.metadata_observations.length, 2);
+    const paths = x.calls.filter(row => row.route.includes('/attempts/'));
+    assert.equal(new Set(paths.map(row => row.route)).size, 1);assert.match(paths[0].route, /\/runs\/30\/attempts\/2\/jobs/);
+    assert.equal(x.deadlineRemaining(), 569000);
+  }
+});
+
+test('persistent pending startup remains failed and never constructs transport or inspects evidence', async () => {
+  const x = await startup({rows: [{status: 'queued', started_at: null}]});
+  assert.equal(x.result.status, 'incomplete-or-invalid');assert.equal(x.constructed, false);assert.deepEqual(x.inspected, []);
+  assert.equal(x.reads, 3);assert.equal(x.calls.length, 4);assert.deepEqual(x.waits, [250, 750]);
+  assert.deepEqual(x.result.deadline_binding.mismatches, ['status', 'started_at']);
+  assert.equal(x.result.deadline_binding.metadata_reads, 3);assert.equal(x.result.deadline_binding.metadata_wait_ms, 1000);
+  assert.equal(x.result.request_accounting.actual_http_attempts, 4);
+});
+
+test('explicit foreign identities, terminal states and malformed starts refuse without rereading', async () => {
+  for (const [field, value] of [['run_id', 31], ['run_attempt', 1], ['run_id', '30'],
+    ['status', 'completed'], ['status', 'injected-secret'], ['started_at', ''], ['started_at', 'injected-secret'],
+    ['started_at', 17], ['started_at', {}], ['started_at', '2026-02-30T00:00:00Z'],
+    ['started_at', '2026-10-11T00:00:01Z']]) {
+    const x = await startup({rows: [{[field]: value}]});
+    assert.equal(x.result.status, 'incomplete-or-invalid');assert.equal(x.reads, 1);assert.deepEqual(x.waits, []);
+    assert.deepEqual(x.result.deadline_binding.mismatches, [field]);assert.deepEqual(x.inspected, []);
+    assert.equal(x.constructed, false);assert.doesNotMatch(JSON.stringify(x.result), /injected-secret/);
+  }
+});
+
+test('same-job startup pins the first ID and valid start rather than accepting a replacement', async () => {
+  for (const [field, value] of [['id', 41], ['started_at', '2026-10-10T23:59:59Z'], ['run_id', 31], ['run_attempt', 3]]) {
+    const x = await startup({rows: [{status: 'queued'}, {[field]: value}]});
+    assert.equal(x.result.status, 'incomplete-or-invalid');assert.equal(x.reads, 2);assert.deepEqual(x.waits, [250]);
+    assert.deepEqual(x.result.deadline_binding.mismatches, [field === 'id' ? 'job_id' : field]);
+    assert.equal(x.constructed, false);assert.deepEqual(x.inspected, []);
+  }
+});
+
+test('ambiguous or incomplete startup inventories refuse before a metadata wait', async () => {
+  for (const editInventory of [
+    value => ({...value, total_count: 2}), value => ({...value, total_count: 101}),
+    value => ({total_count: 2, jobs: [value.jobs[0], value.jobs[0]]}),
+    value => ({total_count: 2, jobs: [value.jobs[0], {...value.jobs[0], id: 41}]}),
+    value => ({total_count: 1, jobs: [null]})
+  ]) {
+    const x = await startup({editInventory});
+    assert.equal(x.result.status, 'incomplete-or-invalid');assert.equal(x.reads, 1);assert.deepEqual(x.waits, []);
+    assert.equal(x.constructed, false);assert.deepEqual(x.inspected, []);assert.ok(x.result.deadline_binding);
+  }
+});
+
+test('same existing startup budget charges workflow time, slow reads and oversleep before any reread', async () => {
+  for (const config of [{workflowMs: 20751}, {jobMs: [21000]}, {oversleep: 21000}]) {
+    const x = await startup(config);
+    assert.equal(x.result.status, 'incomplete-or-invalid');assert.equal(x.result.job_deadline_exhausted, true);
+    assert.equal(x.reads, 1);assert.deepEqual(x.inspected, []);assert.equal(x.constructed, false);
+  }
+  const boundary = await startup({workflowMs: 20749});
+  assert.equal(boundary.result.status, 'checked');assert.equal(boundary.reads, 2);
+  assert.equal(boundary.deadlineRemaining(), 570000 - 20999);
+  const second = await startup({jobMs: [0, 20000]});
+  assert.equal(second.result.status, 'checked');assert.equal(second.deadlineRemaining(), 570000 - 20250);
+  const rollback = await startup({rollback: true});
+  assert.equal(rollback.result.status, 'incomplete-or-invalid');assert.match(rollback.result.reason, /clock/);
+  assert.equal(rollback.reads, 1);assert.deepEqual(rollback.inspected, []);
+});
+
+test('metadata observations never retry HTTP quota, permission or uncertain transport failures', async () => {
+  for (const failure of [403, 429, 500, 'transport']) {
+    for (const second of [false, true]) {
+      const x = await startup({httpFailure: second ? [null, failure] : failure});
+      assert.equal(x.result.status, 'incomplete-or-invalid');assert.equal(x.reads, second ? 2 : 1);
+      assert.deepEqual(x.waits, second ? [250] : []);assert.equal(x.constructed, false);assert.deepEqual(x.inspected, []);
+      if (second) assert.equal(x.result.deadline_binding.metadata_reads, 2);
+    }
+  }
+});
