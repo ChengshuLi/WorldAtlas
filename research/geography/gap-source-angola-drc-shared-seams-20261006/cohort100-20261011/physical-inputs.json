@@ -1,0 +1,171 @@
+{
+  "baseline": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+  "comparison_prefix": "coordination/engineering/global-physical-comparison-20261006/results/",
+  "components": [
+    {
+      "component_id": "physical-component:8441fde5898d6f7db14840ed710f12785697897e45a863a5edd692e935866fc2",
+      "candidate_product": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+        "bytes": 2080606,
+        "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+        "uncompressed_bytes": 8387970,
+        "uncompressed_sha256": "406730575957ec1115eb05973783814988733887fe64765d49ad22dcfdae6584",
+        "hash_kind": "file-bytes"
+      },
+      "feature_index": 5030,
+      "candidate_feature_sha256": "01e96b2bb38346891f4c6844d793397217d8e319f7d2d46fa5fe139db1812b91",
+      "candidate_geometry_sha256": "c8de497eaec497dfe8c9fc38678a156b2756dc1106f1d50975c4ffddc5e38fdf",
+      "comparison_product": "components-036.jsonl.gz"
+    },
+    {
+      "component_id": "physical-component:a207016c2c38eebb7539f7f778ab83588c0fed4cd909656ec88ea9905e1205da",
+      "candidate_product": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "bytes": 2085907,
+        "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+        "uncompressed_bytes": 8387875,
+        "uncompressed_sha256": "82d775abb31da05bb6058c547ea47a4e8428338f5287b79072e778c50139a7e9",
+        "hash_kind": "file-bytes"
+      },
+      "feature_index": 7148,
+      "candidate_feature_sha256": "cdc09b325f2e3f03d39a5ba1daa5631a9dceec4d0f12765d28c5f5fad6386824",
+      "candidate_geometry_sha256": "b2cc1405972f982c29f65de834d22438312e929c7b8b30f87e415623aa860f8d",
+      "comparison_product": "components-044.jsonl.gz"
+    },
+    {
+      "component_id": "physical-component:ab0110c97a2fe410389b76f435b0272b71880cb34f988cc9956c354837901667",
+      "candidate_product": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+        "bytes": 2079265,
+        "sha256": "654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca",
+        "uncompressed_bytes": 8387777,
+        "uncompressed_sha256": "827ec32b0cd1ff9d841d6f5201dac6e015ad080d6d5b32afc0bc664e73d890e2",
+        "hash_kind": "file-bytes"
+      },
+      "feature_index": 1850,
+      "candidate_feature_sha256": "b61b0e4a510fb4958e085eee93b4a610dbf222d8f5fd899f9e6c0c70ed26ecdf",
+      "candidate_geometry_sha256": "66946061b0fbbc6acd51056e3cdadeec3d16df5aeabb64a600d6bde4b0d68f97",
+      "comparison_product": "components-047.jsonl.gz"
+    },
+    {
+      "component_id": "physical-component:fb03e785463b4a99a605ca297b6dd2a2bb27f3352e108844ad5ca147d9fc622c",
+      "candidate_product": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+        "bytes": 1714760,
+        "sha256": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+        "uncompressed_bytes": 6909917,
+        "uncompressed_sha256": "6a432ffbe3d9a8d4412140438c960b0113f752cb70c2db20b76c7467e9575025",
+        "hash_kind": "file-bytes"
+      },
+      "feature_index": 5394,
+      "candidate_feature_sha256": "6b584f4b015fc0dc5433e51e44b22eff0eb4419ef54fdc18543c4abae94e5010",
+      "candidate_geometry_sha256": "f9d6326adc8ebdb6497c87f96e1b1f5dcfc4d322e02b02485352af469ee0b2a7",
+      "comparison_product": "components-069.jsonl.gz"
+    }
+  ],
+  "reused_source_product": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/sources-000.jsonl.gz",
+  "reused_source_receipt": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/receipt.json",
+  "runtime_inventory": {
+    "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/substantial-ten-v1/runtime-lock.json",
+    "bytes": 545963,
+    "sha256": "f4cbad7ce77748dda6cf68a3a34e4a65cedc09f2c50e0c9cf20abaa2d8a4b30b",
+    "hash_kind": "file-bytes",
+    "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382"
+  },
+  "files": [
+    {
+      "path": "scripts/evidence/immutable.py",
+      "bytes": 17414,
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/report.json",
+      "bytes": 57840,
+      "sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/transport-map.json",
+      "bytes": 56473,
+      "sha256": "644345be3d231431177c416b6ddbe3a1b2486597295af45fd5224857b5612d26",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/sources-000.jsonl.gz",
+      "bytes": 2173285,
+      "sha256": "aaf5e4f099ab25c6e6f96632787f1654ba6054ed378fd591b360e36274ffc264",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/receipt.json",
+      "bytes": 2676,
+      "sha256": "8ef08a5125ca2bde3858f6f165cce2bd559a0abfd7996f1a5d24fdeaf0929147",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+      "bytes": 2080606,
+      "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+      "uncompressed_bytes": 8387970,
+      "uncompressed_sha256": "406730575957ec1115eb05973783814988733887fe64765d49ad22dcfdae6584",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "bytes": 981658,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-036.jsonl.gz",
+      "sha256": "53c2d55ef83f774b50b413d6c37d6dc152544ed7e3461ca9752842a25949277a",
+      "uncompressed_bytes": 7408351,
+      "uncompressed_sha256": "a89070a56552d0b03f989a0d637920b8489fc2d4525b032d33d44d434afac4fa"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+      "bytes": 2085907,
+      "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+      "uncompressed_bytes": 8387875,
+      "uncompressed_sha256": "82d775abb31da05bb6058c547ea47a4e8428338f5287b79072e778c50139a7e9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "bytes": 950482,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-044.jsonl.gz",
+      "sha256": "f3abb47188e2645668e4de41c8e630d8c97441ce5de9bf549bfb35d94027f014",
+      "uncompressed_bytes": 7293115,
+      "uncompressed_sha256": "93e8f75205a8635c50f4d22120d4a487bafcb1c50dc9f4862d064eb52bc996f7"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+      "bytes": 2079265,
+      "sha256": "654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca",
+      "uncompressed_bytes": 8387777,
+      "uncompressed_sha256": "827ec32b0cd1ff9d841d6f5201dac6e015ad080d6d5b32afc0bc664e73d890e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "bytes": 965956,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-047.jsonl.gz",
+      "sha256": "da98827a9f205991086008ab6687a816e7968861ce9ea0d69c20ba3900b6e9c3",
+      "uncompressed_bytes": 7384305,
+      "uncompressed_sha256": "0c67ce097d15e937dd8bc38d9a542d615036b31b937a5ef63970322b0e976ca6"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+      "bytes": 1714760,
+      "sha256": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+      "uncompressed_bytes": 6909917,
+      "uncompressed_sha256": "6a432ffbe3d9a8d4412140438c960b0113f752cb70c2db20b76c7467e9575025",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "bytes": 961094,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-069.jsonl.gz",
+      "sha256": "8b644f1e388ef3632f1d48ca2e2935cf92f17d72abe73c3e8d2a3a1ef2c87b1e",
+      "uncompressed_bytes": 7346379,
+      "uncompressed_sha256": "c6349d0297d2e606d4b2f763698da1096c81a63eaf48b9a5b84ce2ac8cf79607"
+    }
+  ]
+}

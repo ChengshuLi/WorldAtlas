@@ -1,0 +1,141 @@
+{
+  "current_context": {
+    "complete_owner_rows": 49625,
+    "source_parts": 36,
+    "neighbors": [
+      {
+        "component": "physical-component:8441fde5898d6f7db14840ed710f12785697897e45a863a5edd692e935866fc2",
+        "ids": [
+          "gb:AGO:ADM2:16411231B22766430211667",
+          "gb:COD:ADM2:63176286B47015384768636",
+          "gb:COG:ADM2:1427508B53261587685070"
+        ],
+        "additive_contacts": []
+      },
+      {
+        "component": "physical-component:a207016c2c38eebb7539f7f778ab83588c0fed4cd909656ec88ea9905e1205da",
+        "ids": [
+          "gb:AGO:ADM2:16411231B92925110223694",
+          "gb:COD:ADM2:63176286B41140464701712",
+          "gb:COD:ADM2:63176286B81146580347594"
+        ],
+        "additive_contacts": []
+      },
+      {
+        "component": "physical-component:ab0110c97a2fe410389b76f435b0272b71880cb34f988cc9956c354837901667",
+        "ids": [
+          "gb:AGO:ADM2:16411231B87249097951168",
+          "gb:COD:ADM2:63176286B94968684087840"
+        ],
+        "additive_contacts": []
+      },
+      {
+        "component": "physical-component:fb03e785463b4a99a605ca297b6dd2a2bb27f3352e108844ad5ca147d9fc622c",
+        "ids": [
+          "gb:AGO:ADM2:16411231B28924925367001",
+          "gb:COD:ADM2:63176286B33518015273847"
+        ],
+        "additive_contacts": []
+      }
+    ],
+    "output_bytes": 385435,
+    "context_phases": [
+      {
+        "kind": "coordinate-certificate-rebind",
+        "phase_bytes": 179734877
+      },
+      {
+        "kind": "whole-selected-source",
+        "path": "data/geography/part-5.json",
+        "phase_bytes": 159129681
+      },
+      {
+        "kind": "whole-selected-source",
+        "path": "data/geography/part-29.json",
+        "phase_bytes": 170237165
+      }
+    ],
+    "acquisition_phases": [
+      {
+        "kind": "complete-selected-base-acquisition-v1",
+        "complete_phase_bytes": 209230497
+      },
+      {
+        "kind": "complete-selected-additive-acquisition-v1",
+        "complete_phase_bytes": 230946783
+      }
+    ],
+    "peak_rss_bytes": 369209344
+  },
+  "numerical": {
+    "results": [
+      {
+        "component_id": "physical-component:8441fde5898d6f7db14840ed710f12785697897e45a863a5edd692e935866fc2",
+        "failed_predicates": [],
+        "diagnostic_dissolve": {
+          "dissolved_zero_loss": true,
+          "dissolved_full_gain": false,
+          "dissolved_gain_positive_area": false
+        }
+      },
+      {
+        "component_id": "physical-component:a207016c2c38eebb7539f7f778ab83588c0fed4cd909656ec88ea9905e1205da",
+        "failed_predicates": [
+          "candidate_current_target_no_positive_area_overlap",
+          "no_positive_area_any_current_neighbor"
+        ],
+        "diagnostic_dissolve": {
+          "dissolved_zero_loss": true,
+          "dissolved_full_gain": false,
+          "dissolved_gain_positive_area": true
+        }
+      },
+      {
+        "component_id": "physical-component:ab0110c97a2fe410389b76f435b0272b71880cb34f988cc9956c354837901667",
+        "failed_predicates": [],
+        "diagnostic_dissolve": {
+          "dissolved_zero_loss": true,
+          "dissolved_full_gain": true,
+          "dissolved_gain_positive_area": true
+        }
+      },
+      {
+        "component_id": "physical-component:fb03e785463b4a99a605ca297b6dd2a2bb27f3352e108844ad5ca147d9fc622c",
+        "failed_predicates": [],
+        "diagnostic_dissolve": {
+          "dissolved_zero_loss": false,
+          "dissolved_full_gain": false,
+          "dissolved_gain_positive_area": false
+        }
+      }
+    ],
+    "prospective_logical_bytes": 151913124,
+    "peak_rss_bytes": 80351232,
+    "elapsed_seconds": 0.044266500990488566
+  },
+  "physical_inverse": {
+    "components": 4,
+    "restored_products": 4,
+    "reused_source_products": 1,
+    "peak_rss_bytes": 165076992,
+    "elapsed_seconds": 3.802799598997808,
+    "source_admitted": false
+  },
+  "handoff_join": {
+    "cohort": "congo-ago2018-cod2019-qualified-20261011",
+    "proposed_members": [
+      "physical-component:ab0110c97a2fe410389b76f435b0272b71880cb34f988cc9956c354837901667"
+    ],
+    "all_dispositions": 100,
+    "logical_input_bytes": 114501441,
+    "peak_rss_bytes": 237346816
+  },
+  "physical_complete_input_output_bytes": 264619911,
+  "physical_admitted_logical_bound": 264856675,
+  "numerical_admitted_logical_bound": 151913124,
+  "handoff_admitted_logical_bound": 118726731,
+  "limits": [
+    "Recorded successful process results, not scientific acceptance.",
+    "No duplicate-only second GIS execution."
+  ]
+}
