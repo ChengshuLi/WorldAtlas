@@ -11,9 +11,9 @@ const sha256 = body => createHash('sha256').update(body).digest('hex');
 const safe = value => typeof value === 'string' && value && !value.includes('\\') && !value.includes('\0') && !path.posix.isAbsolute(value) && value.split('/').every(p => p && p !== '.' && p !== '..');
 const requireValue = (value, message) => { if (!value) throw Error(message); };
 
-export function createAcquisition({repo, loadTree, execute = execFileSync, token = process.env.GH_TOKEN, limits = {member: FILE, total: TOTAL, entries: ENTRIES}}) {
+export function createAcquisition({repo, loadTree, loadDescriptor, execute = execFileSync, token = process.env.GH_TOKEN, limits = {member: FILE, total: TOTAL, entries: ENTRIES}}) {
   const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('GIT_')));
-  Object.assign(env, {GIT_NO_LAZY_FETCH: '1', GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0',
+  Object.assign(env, {GIT_NO_LAZY_FETCH: '1', GIT_NO_REPLACE_OBJECTS: '1', GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0',
     GIT_CONFIG_COUNT: token ? '3' : '2', GIT_CONFIG_KEY_0: 'core.hooksPath', GIT_CONFIG_VALUE_0: '/dev/null',
     GIT_CONFIG_KEY_1: 'credential.helper', GIT_CONFIG_VALUE_1: ''});
   if (token) Object.assign(env, {GIT_CONFIG_KEY_2: 'http.https://github.com/.extraheader',
@@ -48,7 +48,7 @@ export function createAcquisition({repo, loadTree, execute = execFileSync, token
     requireValue(safe(name), 'Unsafe declared geography path');
     requireValue(stats.declarations < limits.entries, 'Geography prefetch declaration limit');
     stats.declarations++;
-    const row = (await tree(version)).get(name);
+    const row = loadDescriptor ? await loadDescriptor(version, name) : (await tree(version)).get(name);
     requireValue(row?.type === 'blob' && ['100644', '100755'].includes(row.mode) && oid(row.sha)
       && Number.isSafeInteger(row.size) && row.size >= 0 && row.size <= limits.member, 'Missing, nonordinary or oversized declared geography input');
     requireValue(git(['ls-tree', '-z', version, '--', name]).toString() === `${row.mode} blob ${row.sha}\t${name}\0`,
@@ -167,10 +167,10 @@ export async function prefetchSelectedGeography(acquisition, baseline, candidate
     limits: ['No scientific or full dependency-closure claim. Deeper historical authority/rebind inputs and unknown formats retain the unchanged checker acquisition.']};
 }
 
-async function githubTree(version) {
+export async function githubTree(version, recursive = true) {
   const headers = {'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'};
   if (process.env.GH_TOKEN) headers.Authorization = 'Bearer ' + process.env.GH_TOKEN;
-  const response = await fetch(`https://api.github.com/repos/${repository}/git/trees/${version}?recursive=1`, {headers, signal: AbortSignal.timeout(60000)});
+  const response = await fetch(`https://api.github.com/repos/${repository}/git/trees/${version}${recursive ? '?recursive=1' : ''}`, {headers, signal: AbortSignal.timeout(60000)});
   requireValue(response.ok, 'Geography tree metadata unavailable');
   const chunks = []; let bytes = 0;
   for await (const chunk of response.body) { bytes += chunk.length; requireValue(bytes <= FILE, 'Geography tree metadata exceeds bound'); chunks.push(chunk); }

@@ -237,12 +237,17 @@ test('continuous different-owner overlap is refused even when no native cell is 
 import {compatibleCurrentRebindCode,CURRENT_REBIND_CODE,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 const linuxHistory=JSON.parse(fs.readFileSync('coordination/engineering/melanesia363-additive-delivery-20261010/linux-runner-portability-20261010/historical-code-vectors.json'));
 const linuxRuntimePaths=['issue-current-rebind-execution.py','supervise-current-rebind.py'].map(name=>'coordination/engineering/additive-native-composition-20261009/'+name);
-const actualLinuxRuntime=linuxRuntimePaths.map(path=>{const body=fs.readFileSync(path);return {path,bytes:body.length,sha256:createHash('sha256').update(body).digest('hex')};});
+// Frozen Linux specimens approved before output-budget adoption (main 61491046).
+// Later live runtime bytes are a different reviewed transition, not this fixture.
+const approvedLinuxRuntime=[
+ {path:linuxRuntimePaths[0],bytes:23671,sha256:'37d6e02607204302fc01c5d3d6652c89a937e5e84acaa71fb25f5ddc7bcdf5e8'},
+ {path:linuxRuntimePaths[1],bytes:20660,sha256:'5be26c44ef36a097a24c82dab89a91693c94065278f5e15aeb57b0d295755345'}
+];
 test('Linux runtime compatibility keeps complete historical vectors and exact byte pairs',()=>{
  assert.equal(linuxHistory.length,6);
  for(const row of linuxHistory){
   const historical=row.code;assert.equal(valueSha(historical),row.vector_sha256);assert.deepEqual(historical.map(p=>p.path),CURRENT_REBIND_CODE);
-  const current=historical.map(p=>actualLinuxRuntime.find(r=>r.path===p.path)??{...p});
+  const current=historical.map(p=>approvedLinuxRuntime.find(r=>r.path===p.path)??{...p});
   assert.deepEqual(compatibleCurrentRebindCode(row.commit,current,historical),historical);
   for(const path of linuxRuntimePaths){
    for(const key of ['bytes','sha256']){const wrong=structuredClone(current),pin=wrong.find(p=>p.path===path);pin[key]=key==='bytes'?pin.bytes+1:'f'.repeat(64);assert.throws(()=>compatibleCurrentRebindCode(row.commit,wrong,historical),/runtime body differs/);}
@@ -252,6 +257,15 @@ test('Linux runtime compatibility keeps complete historical vectors and exact by
   assert.deepEqual(compatibleCurrentRebindCode('a'.repeat(40),historical,historical),historical);
   const missing=current.slice(1);assert.throws(()=>compatibleCurrentRebindCode(row.commit,missing,historical),/Incomplete/);
   const forged=structuredClone(historical);forged[0].bytes++;assert.throws(()=>compatibleCurrentRebindCode(row.commit,current,forged),/Unknown historical/);
+ }
+});
+test('Linux legacy compatibility refuses the separately approved output-budget supervisor',()=>{
+ // Exact frozen #1747 supervisor, from f3097f971f0d276b0037be0d2b8a9173e5c02721.
+ const outputBudgetSupervisor={path:linuxRuntimePaths[1],bytes:21045,sha256:'3744c6e04d90d822ffdd291ddc542e87ba39984f9e4b9947b26b589b8da79674'};
+ for(const row of linuxHistory){
+  const current=row.code.map(p=>({...approvedLinuxRuntime.find(r=>r.path===p.path)??p}));
+  Object.assign(current.find(p=>p.path===outputBudgetSupervisor.path),outputBudgetSupervisor);
+  assert.throws(()=>compatibleCurrentRebindCode(row.commit,current,row.code),/runtime body differs/);
  }
 });
 test('Linux runtime pairs preserve only the existing visibility and schema transitions',()=>{
@@ -265,7 +279,7 @@ test('Linux runtime pairs preserve only the existing visibility and schema trans
   let exercised=0;
   for(const row of linuxHistory){
    if(transition.commit&&row.commit!==transition.commit||row.code.find(p=>p.path===transition.path)?.sha256!==transition.old)continue;
-   const current=row.code.map(p=>actualLinuxRuntime.find(r=>r.path===p.path)??{...p});Object.assign(current.find(p=>p.path===transition.path),{bytes:transition.bytes,sha256:transition.sha256});
+   const current=row.code.map(p=>approvedLinuxRuntime.find(r=>r.path===p.path)??{...p});Object.assign(current.find(p=>p.path===transition.path),{bytes:transition.bytes,sha256:transition.sha256});
    assert.deepEqual(compatibleCurrentRebindCode(row.commit,current,row.code),row.code);exercised++;
    current.find(p=>p.path===transition.path).bytes++;assert.throws(()=>compatibleCurrentRebindCode(row.commit,current,row.code),/runtime body differs/);
   }
