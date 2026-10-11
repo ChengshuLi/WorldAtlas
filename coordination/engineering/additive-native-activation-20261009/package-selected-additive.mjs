@@ -94,7 +94,7 @@ export async function preparePackageSelectedAdditive({root,currentExecution,cons
   const metadataBytes=8*1048576+inheritedBytes+2*valueBytes(execution).length;
   const reader=new ImmutableReader(execution.source_root,execution.source_commit,{
     runtimeBytes:execution.runtime.bytes+gitStat.size,executionBytes,
-    metadataBytes,outputBytes:4194304,gitExecutable:git});
+    metadataBytes,outputBytes:0,gitExecutable:git});
   bindPackageImmutableCommits(reader,name=>containsPackagePath(definition.inputs,name)||execution.files.some(p=>p.path===name));
   const wholeRead=reader.read.bind(reader);
   reader.read=(name,options)=>{
@@ -121,7 +121,8 @@ export async function preparePackageSelectedAdditive({root,currentExecution,cons
     demand(/^additive-repairs\/[A-Za-z0-9_.-]+$/.test(logical.path),'Unsafe additive public asset path');
   }
   demand(new Set(roster.map(p=>p.logical.path)).size===4,'Four distinct additive public assets required');
-  const outputBytes=roster.reduce((n,p)=>n+p.pin.bytes,0);demand(outputBytes<=4194304,'Complete additive publication exceeds reserved output');
+  const outputBytes=roster.reduce((n,p)=>n+p.pin.bytes,0);demand(Number.isSafeInteger(outputBytes)&&outputBytes>0&&outputBytes<=reader.phaseLimit,'Complete additive publication exceeds current admitted allowance');
+  reader.outputBytes=outputBytes;
   reader.metadataBytes+=snapshot.metadataBytes+2*valueBytes(view).length;reader.phase();
   const copied=readBoundPublicationAssets(reader,roster,name=>containsPackagePath(definition.inputs,name)||execution.files.some(p=>p.path===name));
   const bodies=copied.bodies;
