@@ -31,9 +31,12 @@ export function createAcquisition({repo, loadTree, execute = execFileSync, token
     if (!trees.has(version)) {
       requireValue(trees.size < 8, 'Geography prefetch tree limit');
       const started = performance.now();
-      const value = await loadTree(version);
-      stats.tree_metadata_ms += Math.round(performance.now() - started);
       const root = git(['rev-parse', version + '^{tree}']).toString().trim();
+      requireValue(oid(root), 'Invalid immutable geography root tree');
+      // GitHub echoes a supplied commit in the envelope SHA. Request the actual
+      // locally bound tree OID so the envelope and every row remain exact-bound.
+      const value = await loadTree(root);
+      stats.tree_metadata_ms += Math.round(performance.now() - started);
       requireValue(value && !value.truncated && value.sha === root && Array.isArray(value.tree), 'Incomplete or wrong immutable tree metadata');
       const rows = new Map(value.tree.map(row => [row.path, row]));
       requireValue(rows.size === value.tree.length, 'Duplicate tree metadata paths');

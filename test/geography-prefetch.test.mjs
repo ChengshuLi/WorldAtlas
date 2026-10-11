@@ -67,10 +67,26 @@ function fixture() {
     }
     return execFileSync(command, args, options);
   };
-  const acquisition = options => createAcquisition({repo: destination, loadTree: async version => maps.get(version), execute, token: 'fixture-secret', ...options});
+  const acquisition = options => createAcquisition({repo: destination, loadTree: async root => [...maps.values()].find(value => value.sha === root), execute, token: 'fixture-secret', ...options});
   return {directory, origin, destination, baseline, candidate, maps, bodies, batches, git, acquisition, bankFiles, commit,
     close() { fs.rmSync(directory, {recursive: true, force: true}); }};
 }
+
+test('GitHub commit-valued envelopes require requesting the exact local root tree', async () => {
+  const f = fixture(); try {
+    const requested = [], root = f.git(f.destination, ['rev-parse', f.baseline + '^{tree}']).toString().trim();
+    const metadata = f.maps.get(f.baseline);
+    assert.notEqual(root, f.baseline);
+    const acquisition = f.acquisition({loadTree: async requestedOid => {
+      requested.push(requestedOid);
+      // Production API returns the requested commit or tree as envelope SHA.
+      return {...metadata, sha: requestedOid};
+    }});
+    await acquisition.descriptor(f.baseline, 'data/ownership-selection.json');
+    assert.deepEqual(requested, [root]);
+    await assert.rejects(f.acquisition({loadTree: async () => ({...metadata, sha: f.baseline})}).tree(f.baseline), /wrong immutable tree/);
+  } finally { f.close(); }
+});
 
 test('real missing-object fetches are batched, shared OIDs deduplicate, and candidate-only bytes arrive', async () => {
   const f = fixture(); try {
