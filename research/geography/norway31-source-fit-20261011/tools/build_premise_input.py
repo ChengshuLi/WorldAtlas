@@ -4,7 +4,7 @@ HERE=pathlib.Path(__file__).resolve().parent;ROOT=HERE.parents[3];OWN=HERE.paren
 def git(*a):return subprocess.check_output(['git','-C',str(ROOT),*a])
 head,vintage=sys.argv[1:]
 if git('rev-parse','HEAD').decode().strip()!=head:raise ValueError('Exact HEAD required')
-locators=json.loads(git('show',head+':'+OWN+'/physical-locators.json'));parts=sorted(p.name.split('-')[3] for p in (ROOT/OWN/'vintages').glob('nor31-physical-part-*-001') if (p/'publication.json').is_file());names=[OWN+'/tools/build_premise_input.py',OWN+'/physical-locators.json',OWN+'/vintages/nor31-original-candidates-001/original-candidates.json',OWN+'/vintages/nor31-current-neighbors-001/result.json',OWN+'/vintages/nor31-original-classification-001/original-comparison-rows.json','scripts/evidence/immutable.py']+[OWN+'/vintages/physical-custody-'+p+'-001/'+f for p in parts for f in ['physical-records.json','queried-source-metadata.json']];pins=[]
+locators=json.loads(git('show',head+':'+OWN+'/physical-locators.json'));parts=sorted(p.name.split('-')[3] for p in (ROOT/OWN/'vintages').glob('nor31-physical-part-*-001') if (p/'publication.json').is_file());names=[OWN+'/tools/build_premise_input.py',OWN+'/physical-locators.json',OWN+'/vintages/nor31-original-candidates-001/original-candidates.json',OWN+'/vintages/nor31-current-neighbors-001/result.json',OWN+'/vintages/nor31-original-classification-001/original-comparison-rows.json','scripts/evidence/immutable.py']+[OWN+'/vintages/nor31-physical-part-'+p+'-001/'+f for p in parts for f in ['physical-records.json','queried-source-metadata.json']];pins=[]
 for p in names:
  b=(ROOT/p).read_bytes()
  if b!=git('show',head+':'+p):raise ValueError('Unfrozen input')
