@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {spawnSync} from 'node:child_process';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
 import {prepareCurrentRebindDestination,writeCurrentRebindProducts,boundedCurrentRebindProductBytes} from '../coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs';
-import {valueBytes,admitCurrentRebindOutputFrame} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {valueBytes,admitCurrentRebindOutputFrame,retainCurrentRebindPhasePeak} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 const root=path.resolve(fileURLToPath(new URL('../',import.meta.url))),MiB=1048576;
 const reader=()=>new ImmutableReader(root,'a'.repeat(40),{runtimeBytes:11,executionBytes:13,metadataBytes:17,outputBytes:4*MiB});
 function fixture(t){
@@ -27,6 +27,15 @@ test('complete output frame charges seven representations before production',()=
  for(const output of [0,-1,1.5,8*MiB+1])assert.throws(()=>admitCurrentRebindOutputFrame(reader(),{output_bytes:output,complete_phase_bytes:256*MiB}),/Bounded/);
  const r=reader();r.metadataBytes=256*MiB-7*8*MiB;
  assert.throws(()=>admitCurrentRebindOutputFrame(r,{output_bytes:8*MiB,complete_phase_bytes:256*MiB}),/complete phase/);
+});
+test('consumer keeps final-result peak after a smaller or larger reopen-frame reset',()=>{
+ for(const reopen of [1,80*MiB]){
+  const r=reader(),outputPeak=admitCurrentRebindOutputFrame(r,{output_bytes:8*MiB,complete_phase_bytes:256*MiB});
+  r.outputBytes=1;r.metadataBytes=reopen;r.phase();const reopened=r.used;
+  const phases=[{complete_phase_bytes:19*MiB}];
+  assert.equal(retainCurrentRebindPhasePeak(r,23*MiB,outputPeak,phases),Math.max(outputPeak,reopened));
+  assert.equal(outputPeak,56*MiB+41);assert.equal(r.used>=outputPeak,true);
+ }
 });
 test('bounded counter matches canonical Unicode, escapes, numbers and nested products',()=>{
  const b={request:{'é\u0000': ['quote"', '\\', '\b\f\n\r\t', '\u0001', '雪😀', '\ud800', '\udfff', -0, 1e21, true, null]},result:{z:[],a:{}} ,facts:{},publication:{}};

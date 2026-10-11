@@ -986,6 +986,11 @@ export function compatibleCurrentRebindCode(executionCommit,currentCode,historic
 
 // A current rebind is complete data custody plus independently recomputed
 // applicability. It never replaces the original registry/source authority.
+// Preserve completed-frame peaks after a later complete phase resets used.
+export function retainCurrentRebindPhasePeak(reader,priorPhaseBytes,outputPhaseBytes,acquisitionPhases){
+ reader.used=Math.max(priorPhaseBytes,outputPhaseBytes,reader.used,...acquisitionPhases.map(p=>p.complete_phase_bytes));
+ return reader.used;
+}
 export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,originalRows,originalPatches,size,snapshot,carriedMetadataBytes=0}) {
  demand(reader instanceof ImmutableReader,'Require actual immutable custody reader');
  demand(snapshot?.reader===reader,'Current rebind custody requires the actual privately authenticated selected snapshot');
@@ -1057,7 +1062,7 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
  demand(Number.isSafeInteger(identityScratch)&&identityScratch<=FILE&&reader.used+identityScratch<=PHASE,'Complete native identity comparison scratch exceeds phase');reader.used+=identityScratch;
  const result=verifyCurrentRebindProducts({certificate,...bodies,baseSelection,registry,originalRows,originalPatches,size,expectedCode,acquired,executionCustody,bodyPins:Object.fromEntries(roster.map(({name,p})=>[name,p]))});
  // A sequential phase must never hide an earlier complete acquisition peak.
- reader.used=Math.max(priorPhaseBytes,outputPhaseBytes,reader.used,...acquired.acquisition_phases.map(p=>p.complete_phase_bytes));
+ retainCurrentRebindPhasePeak(reader,priorPhaseBytes,outputPhaseBytes,acquired.acquisition_phases);
  return result;
 }
 
