@@ -1,0 +1,56 @@
+{
+  "kind": "unmerged-support-diagnostic-controls",
+  "status": "four-genuine-controls-qualified-native-and-full-path-pending",
+  "execution_commit": "d975d701cefc492ce7ea9ce7214648722ecb0cd8",
+  "reviewed_support_commit": "e33a142b190103e529d12a245bf733f0caba6853",
+  "independent_review": "https://github.com/ChengshuLi/WorldAtlas/pull/1751#issuecomment-6114941914",
+  "preparation_cli_commit": "2a2d25f54464e06a0b011ac8470b8c36dd534e8b",
+  "historical_selected_authority": "ea64d1041d7378d1684fe4e25a70b8ce18059a6b",
+  "source_inventory_bytes": 1234,
+  "source_inventory_sha256": "3cab1f2c602b2bc28e0f1363dda2ab30713a65bc018f74820e5ba4f6d3c713f1",
+  "source_inventory_whole_bytes_equal_to_both_and_historical": true,
+  "rebind_comparison": {
+    "all_whole_results_equal": true,
+    "controls": [
+      {
+        "elapsed_seconds": 86.27197486499972,
+        "lifetime_rss_bytes": 311586816,
+        "limits": {
+          "complete_phase_bytes": 536870912,
+          "descriptors": 512,
+          "monitor_bytes": 4194304,
+          "output_bytes": 8388608,
+          "rss_bytes": 805306368,
+          "sampled_stop_bytes": 704643072,
+          "stderr_bytes": 40960,
+          "stdout_bytes": 8192,
+          "wall_seconds": 1200
+        }
+      },
+      {
+        "elapsed_seconds": 87.17765399500058,
+        "lifetime_rss_bytes": 312393728,
+        "limits": {
+          "complete_phase_bytes": 536870912,
+          "descriptors": 512,
+          "monitor_bytes": 4194304,
+          "output_bytes": 16777216,
+          "rss_bytes": 805306368,
+          "sampled_stop_bytes": 704643072,
+          "stderr_bytes": 40960,
+          "stdout_bytes": 8192,
+          "wall_seconds": 1200
+        }
+      }
+    ],
+    "execution_commit": "d975d701cefc492ce7ea9ce7214648722ecb0cd8",
+    "kind": "genuine-current13-parameterization-controls",
+    "original_authority": "ea64d1041d7378d1684fe4e25a70b8ce18059a6b",
+    "scientific_result_bytes": 3200420,
+    "scientific_result_sha256": "80420ed4cd173fc975f795cf9790bde6d4c32b0dd9c1331921eb3d1f2a615e22"
+  },
+  "limits": [
+    "Diagnostic parameterization controls over already-qualified operands; no new gap qualification or accepted-main claim.",
+    "Current003 and the original 13-case SOURCE/NATIVE outputs remain the delivery authority."
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "execution_commit": "d975d701cefc492ce7ea9ce7214648722ecb0cd8",
+  "fresh_mem_available_bytes": 9300377600,
+  "environment": {
+    "WORLDATLAS_CONCURRENT_RESERVED_BYTES": "3221225472",
+    "MALLOC_ARENA_MAX": "2",
+    "MALLOC_TRIM_THRESHOLD_": "131072",
+    "MALLOC_MMAP_THRESHOLD_": "131072"
+  },
+  "jobs": [
+    {
+      "id": "source-a",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs",
+        "coordination/engineering/nor-grc-congo-delivery-20261011/resource-budget-controls-001/source-a/cod-002-a-source-request.json"
+      ]
+    },
+    {
+      "id": "source-b",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs",
+        "coordination/engineering/nor-grc-congo-delivery-20261011/resource-budget-controls-001/source-b/cod-002-b-source-request.json"
+      ]
+    },
+    {
+      "id": "output-8mib",
+      "command": [
+        "/usr/bin/python3.13",
+        "-I",
+        "-B",
+        "coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py",
+        "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/.cache/current13-budget-controls-d975d701cefc/output-8mib/issued.json",
+        "f8ec06ede22ef112e33bf9b20edf9e8b6fbbcd13937fdb80a45b6896eb06918b",
+        "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/.cache/current13-budget-controls-d975d701cefc/output-8mib/operating"
+      ]
+    },
+    {
+      "id": "output-16mib",
+      "command": [
+        "/usr/bin/python3.13",
+        "-I",
+        "-B",
+        "coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py",
+        "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/.cache/current13-budget-controls-d975d701cefc/output-16mib/issued.json",
+        "6e2c0d1ba9f35f01de54308caac0a7ca5ad259c9ed92f7e2b1bd819e9e96a4c2",
+        "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/.cache/current13-budget-controls-d975d701cefc/output-16mib/operating"
+      ]
+    }
+  ]
+}
