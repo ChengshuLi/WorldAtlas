@@ -119,6 +119,7 @@ def main():
             exact_status = exc.status + ':' + exc.reason
         predicates['exact_binary64_candidate_topology'] = exact_status == 'valid'
         source_hits, neighbor_hits, addition_hits, cohort_hits, residuals = [], [], [], [], {}
+        current_coverage = {'status': 'unresolved-invalid-input', 'proved_full_current_coverage': False}
         if all(predicates.values()):
             predicates['consumed_target_source_covers_candidate'] = sg.covers(cg)
             overlap = cg.intersection(tg)
@@ -144,7 +145,7 @@ def main():
                 row = {'id': identity, 'whole_current_feature_sha256': sha(canon(feature)), 'valid': geometry.is_valid}
                 if geometry.is_valid:
                     hit = cg.intersection(geometry)
-                    row.update(positive_area=hit.area > 0, intersection=mapping(hit))
+                    row.update(positive_area=hit.area > 0, covers_candidate=geometry.covers(cg), intersection=mapping(hit))
                 else:
                     row['reason'] = explain_validity(geometry)
                 neighbor_hits.append(row)
@@ -155,7 +156,7 @@ def main():
                 row = {**screen, 'valid': geometry.is_valid}
                 if geometry.is_valid:
                     hit = cg.intersection(geometry)
-                    row.update(positive_area=hit.area > 0, intersection=mapping(hit))
+                    row.update(positive_area=hit.area > 0, covers_candidate=geometry.covers(cg), intersection=mapping(hit))
                 else:
                     row['reason'] = explain_validity(geometry)
                 addition_hits.append(row)
@@ -166,6 +167,16 @@ def main():
                 if cg.envelope.intersects(geometry.envelope):
                     hit = cg.intersection(geometry)
                     cohort_hits.append({'component_id': other['id'], 'positive_area': hit.area > 0, 'intersection': mapping(hit)})
+            valid_current = all(r['valid'] for r in neighbor_hits + addition_hits)
+            if valid_current:
+                complete_union = shapely.union_all([shape(f['geometry']) for f in neighbors.values()] +
+                    [addition_geoms[r['component_id']] for r in addition_hits])
+                uncovered = cg.difference(complete_union)
+                current_coverage = {'status': 'measured', 'current_union_valid': complete_union.is_valid,
+                    'proved_full_current_coverage': complete_union.is_valid and complete_union.covers(cg) and uncovered.is_empty,
+                    'individually_covering_owner_ids': [r['id'] for r in neighbor_hits if r.get('covers_candidate')],
+                    'uncovered_candidate': mapping(uncovered), 'uncovered_is_empty': uncovered.is_empty,
+                    'uncovered_area': uncovered.area}
             predicates.update({
                 'all_possible_consumed_source_features_valid': all(r['valid'] for r in source_hits),
                 'unique_full_cover_consumed_source': [r['id'] for r in source_hits if r.get('covers_candidate')] == [target],
@@ -185,6 +196,7 @@ def main():
                         'status': 'necessary-predicate-failed' if failures else 'necessary-predicates-supported-needs-independent-review',
                         'failed_predicates': failures, 'predicates': predicates,
                         'exact_binary64_status': exact_status, 'diagnostic_dissolve': diagnostics,
+                        'complete_current_coverage': current_coverage,
                         'candidate_feature_sha256': sha(canon(cf)),
                         'current_target_feature_sha256': sha(canon(tf)),
                         'consumed_target_source_feature_sha256': sha(canon(sf)),
