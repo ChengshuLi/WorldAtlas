@@ -721,6 +721,126 @@ class ProgrammeMigrationControls(unittest.TestCase):
             proof.assert_not_called()
 
 
+class OutputBudgetMigrationControls(unittest.TestCase):
+    """Real tiny Git trees exercise the exact finite output-budget transition."""
+    git = LinuxTransitionControls.git
+    write = LinuxTransitionControls.write
+    commit = LinuxTransitionControls.commit
+    pin = LinuxTransitionControls.pin
+    orchestrate = LinuxTransitionControls.orchestrate
+
+    def setUp(self):
+        import importlib.util
+        from unittest import mock
+        self.mock = mock
+        spec = importlib.util.spec_from_file_location('trusted_output_budget_control', DRAFT)
+        self.gate = importlib.util.module_from_spec(spec); spec.loader.exec_module(self.gate)
+        scratch = ROOT / '.cache/trusted-output-budget-fixtures'; scratch.mkdir(parents=True, exist_ok=True)
+        self.temporary = tempfile.TemporaryDirectory(dir=scratch); self.addCleanup(self.temporary.cleanup)
+        self.repo = Path(self.temporary.name)
+        self.git('init', '-q'); self.git('config', 'user.name', 'synthetic-control'); self.git('config', 'user.email', 'control@example.invalid')
+        self.helper = 'methods/method[0].py'
+        self.vector_paths = [self.helper, *[f'methods/method-{i:02}.py' for i in range(27)]]
+        self.paths = sorted([self.helper, 'support/catalogue.json', *[f'control/file-{i}.py' for i in range(5)]])
+        self.addition = 'control/file-4.py'
+        for i, name in enumerate(set(self.vector_paths + self.paths) - {self.addition}): self.write(name, f'original-{i}\n'.encode())
+        self.write('data/ownership-selection.json', b'{}\n'); self.write('data/scientific-input.json', b'unchanged\n')
+        self.baseline = self.commit('original synthetic output-budget baseline')
+        def vector(version):
+            return [{'path': name, **{k: v for k, v in self.pin(version, name).items() if k in ['bytes', 'sha256']}} for name in self.vector_paths]
+        old = vector(self.baseline); before = {p: self.pin(self.baseline, p) for p in self.paths}
+        for name in self.paths: self.write(name, b"raise RuntimeError('candidate must never execute')\n")
+        self.candidate = self.commit('exact synthetic output-budget candidate')
+        g = self.gate
+        g.OUTPUT_BUDGET_REFERENCE = [{'path': p, 'before': before[p], 'after': self.pin(self.candidate, p)} for p in self.paths]
+        g.OUTPUT_BUDGET_OLD_VECTOR = old; g.OUTPUT_BUDGET_NEW_VECTOR = vector(self.candidate); self.rehash()
+
+    def rehash(self):
+        g = self.gate
+        g.OUTPUT_BUDGET_REFERENCE_SHA256 = g.transition_digest(g.OUTPUT_BUDGET_REFERENCE)
+        g.OUTPUT_BUDGET_OLD_VECTOR_SHA256 = g.transition_digest(g.OUTPUT_BUDGET_OLD_VECTOR, newline=True)
+        g.OUTPUT_BUDGET_NEW_VECTOR_SHA256 = g.transition_digest(g.OUTPUT_BUDGET_NEW_VECTOR, newline=True)
+
+    def check(self, candidate=None, baseline=None):
+        return self.gate.output_budget_transition(self.repo, baseline or self.baseline, candidate or self.candidate)
+
+    def test_exact_transition_authenticates_both_vectors_without_candidate_execution(self):
+        result = self.check()
+        self.assertEqual(result['kind'], 'exact-reviewed-output-budget-migration-v1')
+        self.assertEqual(result['changed_paths'], 7); self.assertTrue(result['whole_tree_outside_exact_delta_equal'])
+        self.assertFalse(result['candidate_code_executed']); self.assertFalse(result['candidate_scientific_qualification'])
+        self.assertEqual(result['baseline_commit'], self.baseline); self.assertEqual(result['candidate_commit'], self.candidate)
+        self.assertIsNone(self.check(candidate=self.baseline))
+
+    def test_body_missing_mode_type_symlink_and_rename_refuse(self):
+        for alteration in ['body', 'missing', 'mode', 'directory', 'symlink', 'rename']:
+            with self.subTest(alteration=alteration):
+                self.git('checkout', '-q', '--detach', self.candidate); p = self.repo/self.addition
+                if alteration == 'body': p.write_bytes(b'unreviewed\n')
+                elif alteration == 'missing': p.unlink()
+                elif alteration == 'mode': p.chmod(0o755)
+                elif alteration == 'directory': p.unlink(); p.mkdir(); (p/'hidden').write_bytes(b'unreviewed')
+                elif alteration == 'symlink': p.unlink(); p.symlink_to('../data/scientific-input.json')
+                else: p.rename(self.repo/'renamed.py')
+                self.assertIsNone(self.check(self.commit(alteration)))
+
+    def test_complete_tree_and_both_vectors_refuse_unlisted_or_equal_substitution(self):
+        for name in ['data/scientific-input.json', self.vector_paths[-1], 'methods/method0.py', 'outside.py']:
+            with self.subTest(path=name):
+                self.git('checkout', '-q', '--detach', self.candidate); self.write(name, b'unreviewed\n')
+                self.assertIsNone(self.check(self.commit('candidate drift')))
+        self.git('checkout', '-q', '--detach', self.baseline)
+        self.write(self.vector_paths[-1], b'equal but unknown method\n'); baseline = self.commit('substituted baseline')
+        for name in self.paths: self.write(name, self.git('show', self.candidate + ':' + name))
+        self.assertIsNone(self.check(self.commit('same substituted candidate method'), baseline))
+
+    def test_inventory_and_prospective_body_union_fail_before_opens(self):
+        g = self.gate
+        for name in ['OUTPUT_BUDGET_REFERENCE', 'OUTPUT_BUDGET_OLD_VECTOR', 'OUTPUT_BUDGET_NEW_VECTOR']:
+            for value in [getattr(g, name)[::-1], getattr(g, name)[:-1]]:
+                with self.subTest(name=name), self.mock.patch.object(g, name, value):
+                    with self.assertRaises(ValueError): self.check()
+        g.OUTPUT_BUDGET_NEW_VECTOR = [{**p, 'bytes': g.MAX_BYTES} for p in g.OUTPUT_BUDGET_NEW_VECTOR]; self.rehash()
+        with self.mock.patch.object(g, 'git', side_effect=AssertionError('body opened before admission')):
+            with self.assertRaisesRegex(ValueError, 'bounds'): self.check()
+
+    def test_whole_tree_git_failure_or_timeout_never_passes(self):
+        from types import SimpleNamespace
+        original = self.gate.subprocess.run
+        def refusal(command, **kwargs): return SimpleNamespace(returncode=128) if 'diff-tree' in command else original(command, **kwargs)
+        with self.mock.patch.object(self.gate.subprocess, 'run', side_effect=refusal):
+            with self.assertRaisesRegex(ValueError, 'equivalence unavailable'): self.check()
+        def timeout(command, **kwargs):
+            if 'diff-tree' in command: raise subprocess.TimeoutExpired('git', 30)
+            return original(command, **kwargs)
+        with self.mock.patch.object(self.gate.subprocess, 'run', side_effect=timeout):
+            with self.assertRaises(subprocess.TimeoutExpired): self.check()
+
+    def test_orchestration_keeps_real_baseline_identity_and_propagates_failure(self):
+        proof = {'status': 'not-applicable', 'regressions': None, 'baseline_commit': self.baseline, 'candidate_commit': self.baseline}
+        result = self.orchestrate(lambda *args: proof)
+        self.assertIs(result['reused_baseline_proof'], proof)
+        self.assertEqual(result['reviewed_code_transition']['kind'], 'exact-reviewed-output-budget-migration-v1')
+        with self.assertRaisesRegex(RuntimeError, 'original baseline failure'):
+            self.orchestrate(lambda *args: (_ for _ in ()).throw(RuntimeError('original baseline failure')))
+        with self.assertRaisesRegex(ValueError, 'baseline proof did not pass'):
+            self.orchestrate(lambda *args: {'status': 'native-regressions-found', 'regressions': 1})
+        with self.mock.patch.object(self.gate, 'verify_trusted_checkout', return_value='fixture'), self.mock.patch.object(self.gate, 'inventory', side_effect=[['before'], ['after']]):
+            with self.assertRaisesRegex(ValueError, 'changed geographic inputs'): self.gate.inspect(self.repo, self.baseline, self.candidate)
+
+    def test_production_output_budget_map_is_one_finite_seven_file_transition(self):
+        namespace = {'__name__': 'non_cli_control'}; exec(compile(DRAFT.read_bytes(), str(DRAFT), 'exec'), namespace)
+        reference = namespace['OUTPUT_BUDGET_REFERENCE']; old = namespace['OUTPUT_BUDGET_OLD_VECTOR']; new = namespace['OUTPUT_BUDGET_NEW_VECTOR']
+        self.assertEqual(len(reference), 7); self.assertEqual(len(old), 28); self.assertEqual(len(new), 28)
+        self.assertEqual(namespace['transition_digest'](reference), namespace['OUTPUT_BUDGET_REFERENCE_SHA256'])
+        self.assertEqual(namespace['transition_digest'](old, newline=True), namespace['OUTPUT_BUDGET_OLD_VECTOR_SHA256'])
+        self.assertEqual(namespace['transition_digest'](new, newline=True), namespace['OUTPUT_BUDGET_NEW_VECTOR_SHA256'])
+        self.assertEqual([p['path'] for p in old], [p['path'] for p in new])
+        self.assertEqual({a['path'] for a, b in zip(old, new) if a != b}, {
+            'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
+            *['coordination/engineering/additive-native-composition-20261009/' + p for p in ['capture-current-rebind.mjs', 'run-current-rebind.mjs', 'supervise-current-rebind.py']]})
+
+
 if __name__ == '__main__':
     if '--receipts' in sys.argv:
         import argparse

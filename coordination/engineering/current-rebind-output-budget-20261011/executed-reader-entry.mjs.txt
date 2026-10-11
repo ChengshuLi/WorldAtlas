@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import {ImmutableReader,loadSelection} from '../../scripts/check-effective-geographic-regression.mjs';
+import {loadPackageInputs,containsPackagePath} from '../../scripts/package-inputs.mjs';
+import {bindPackageImmutableCommits} from '../../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
+const root=process.cwd(), head=execFileSync('/usr/bin/git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(), def=loadPackageInputs(root);
+const reader=new ImmutableReader(root,head,{gitExecutable:'/usr/bin/git'});
+const git=reader.git.bind(reader); reader.git=(...args)=>{if(args[0]==='fetch')throw Error('Missing exact commit metadata; preparation required '+args.at(-1));return git(...args);};
+bindPackageImmutableCommits(reader,p=>containsPackagePath(def.inputs,p));
+try {const s=loadSelection(reader);fs.writeFileSync('.cache/selected-reader-budget/selected-reader.json',JSON.stringify({passed:true,head,inventory:[...reader.inventory.values()],complete_phase_bytes:reader.used,selected_loaded:true,cumulative_cells:s.additive?.patch?.rows?.reduce((n,r)=>n+r.runs.reduce((m,x)=>m+x[1]-x[0],0),0)??null},null,2)+'\n');console.log('actual selected reader package declaration passed',reader.inventory.size,reader.used);}catch(e){fs.writeFileSync('.cache/selected-reader-budget/selected-reader.json',JSON.stringify({passed:false,head,error:e.message,inventory:[...reader.inventory.values()]},null,2)+'\n');throw e;}

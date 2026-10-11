@@ -1,0 +1,35 @@
+import os,sys,subprocess,time,signal,json,pathlib,hashlib,re
+root=pathlib.Path.cwd();out=root/'.cache/selected-reader-budget'
+assert not (out/'terminal.json').exists() and not (out/'stdout.log').exists()
+command=['/workspace/scratch/127991fc8b8e/cloud-tools/gnu-time/time-1.9-0.2-amd64/usr/bin/time','-v','/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node','--expose-gc',str(out/'read-selected.mjs')]
+env=dict(os.environ,MALLOC_ARENA_MAX='2',MALLOC_TRIM_THRESHOLD_='131072',LC_ALL='C',LANG='C')
+for k in ['NODE_OPTIONS','NODE_PATH']:env.pop(k,None)
+start=time.monotonic();peak=0;reason=None
+with (out/'stdout.log').open('xb') as stdout,(out/'stderr.log').open('xb') as stderr:
+ p=subprocess.Popen(command,stdout=stdout,stderr=stderr,env=env,start_new_session=True)
+ try:
+  while p.poll() is None:
+   rows=subprocess.check_output(['/usr/bin/ps','-axo','pgid=,rss='],text=True)
+   rss=sum(int(f[1])*1024 for line in rows.splitlines() if len(f:=line.split())==2 and int(f[0])==p.pid)
+   peak=max(peak,rss)
+   if rss>=1073741824:reason='1 GiB owned-group RSS bound'
+   elif time.monotonic()-start>600:reason='600 second wall bound'
+   elif (out/'stderr.log').stat().st_size>1048576 or (out/'stdout.log').stat().st_size>1048576:reason='log bound'
+   if reason:os.killpg(p.pid,signal.SIGTERM);break
+   time.sleep(.25)
+  try:exit_code=p.wait(timeout=5)
+  except subprocess.TimeoutExpired:os.killpg(p.pid,signal.SIGKILL);exit_code=p.wait()
+ except BaseException:
+  try:os.killpg(p.pid,signal.SIGKILL)
+  except ProcessLookupError:pass
+  p.wait();raise
+rows=subprocess.check_output(['/usr/bin/ps','-axo','pid=,pgid='],text=True)
+survivors=[int(f[0]) for line in rows.splitlines() if len(f:=line.split())==2 and int(f[1])==p.pid]
+if survivors:
+ os.killpg(p.pid,signal.SIGKILL);reason=reason or 'owned process survivors'
+lifetime_matches=re.findall(r'Maximum resident set size \(kbytes\): (\d+)',(out/'stderr.log').read_text())
+lifetime=int(lifetime_matches[0])*1024 if len(lifetime_matches)==1 else None
+if lifetime is None or lifetime>1073741824:reason=reason or 'external lifetime RSS bound'
+terminal={'lifetime_rss_bytes':lifetime,'command':command,'exit_code':exit_code,'guard_reason':reason,'sampled_owned_group_peak_bytes':peak,'elapsed_seconds':time.monotonic()-start,'owned_processes_remaining':survivors,'rss_limit_bytes':1073741824,'wall_limit_seconds':600,'malloc_environment':{k:env[k] for k in ['MALLOC_ARENA_MAX','MALLOC_TRIM_THRESHOLD_']},'probe_sha256':hashlib.sha256((out/'read-selected.mjs').read_bytes()).hexdigest()}
+(out/'terminal.json').write_text(json.dumps(terminal,indent=2)+'\n');print(json.dumps(terminal))
+sys.exit(0 if exit_code==0 and reason is None else 1)

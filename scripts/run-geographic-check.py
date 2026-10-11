@@ -901,6 +901,294 @@ def programme_registry_transition(repo, baseline, candidate):
             'candidate_code_executed': False, 'candidate_scientific_qualification': False}
 
 
+# One exact reviewed bounded-output adoption. All candidate bytes and both
+# complete vectors are frozen here; candidate policy never chooses this map.
+OUTPUT_BUDGET_REFERENCE = [{'path': 'coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs',
+  'before': {'mode': '100644',
+             'git_blob_oid': 'db989598fc1c6b1a549822b2a44e90aea6604b2b',
+             'bytes': 15742,
+             'sha256': '7af853f9ff63a221f83db831200b7d4943b7006e97bd872a72eccbbe2aef6930'},
+  'after': {'mode': '100644',
+            'git_blob_oid': '83c2e7e09aac57c9ba80a33d2b858de08c498ff8',
+            'bytes': 18526,
+            'sha256': 'ddb9f9ef10b8f5c470e3fe40267dece5cb7b39cdb773e9fa12bec80c9a694157'}},
+ {'path': 'coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs',
+  'before': {'mode': '100644',
+             'git_blob_oid': '6266a85f0a1d47981922b345cbedec20d8efcd7a',
+             'bytes': 8614,
+             'sha256': '8115ad748fab6ba9b829510db5f020b1b070138ea80ad96be93d515597b3a738'},
+  'after': {'mode': '100644',
+            'git_blob_oid': '77bf7b4b65f9982beafa16d755c202ca2e941a80',
+            'bytes': 8642,
+            'sha256': 'fb9e0899c08a71f336118cea8dfe8607aac6bb44bd0f4073a4207874113c697d'}},
+ {'path': 'coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py',
+  'before': {'mode': '100644',
+             'git_blob_oid': 'e1a19f502fe2a975a833c75fe6d50457c0ffc682',
+             'bytes': 20660,
+             'sha256': '5be26c44ef36a097a24c82dab89a91693c94065278f5e15aeb57b0d295755345'},
+  'after': {'mode': '100644',
+            'git_blob_oid': '829e25e4036efb7e35c58ae005ebdb1acb54b2f1',
+            'bytes': 21045,
+            'sha256': '3744c6e04d90d822ffdd291ddc542e87ba39984f9e4b9947b26b589b8da79674'}},
+ {'path': 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
+  'before': {'mode': '100644',
+             'git_blob_oid': '8f683627d555c85c3ab166ea0ce58451b3eab02f',
+             'bytes': 139553,
+             'sha256': '63745cc5d4f15bdd8c153787df07379d813ab037fc1e0734944a75568235e8aa'},
+  'after': {'mode': '100644',
+            'git_blob_oid': 'f8e4a88a6dbe3d3961d6b17d9b926ee4488561a8',
+            'bytes': 142012,
+            'sha256': '6da5919c63822393959afc8f2499c76470aa6b51d6e29664d372e9eee79ae4b1'}},
+ {'path': 'coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json',
+  'before': {'mode': '100644',
+             'git_blob_oid': 'f687f63c5f77285bd7f961e92236e09ebd04991e',
+             'bytes': 121130,
+             'sha256': '22f82cf3cc6fa8520321b25c99bf27357f7f5558fa5aa5359abc430f90edf8d2'},
+  'after': {'mode': '100644',
+            'git_blob_oid': '61876aff6a7c80953be85e0d0c9ec4d6525c345e',
+            'bytes': 140958,
+            'sha256': 'e2bbf204d69fe46c44617002aa94a86e59321a2c96b5e95ae0d4d1c84a10735c'}},
+ {'path': 'test/current-rebind-output-budget.test.mjs',
+  'before': None,
+  'after': {'mode': '100644',
+            'git_blob_oid': '4c3fbf5288c6b265269bda148b9395544d8618ce',
+            'bytes': 7031,
+            'sha256': 'ffe0c23ef5f472b4cc76717c069441d73bb6687502c6ba51d302c0f9fd4f2570'}},
+ {'path': 'test/supported-programs.test.mjs',
+  'before': {'mode': '100644',
+             'git_blob_oid': 'a1f351ca01e2ed85b9e8bb97bf52ac4e4da9b434',
+             'bytes': 6637,
+             'sha256': '3e6f98381b73008070d64db6ef91e834c9c04ed149f7fdb9c6a9ad8266567cc5'},
+  'after': {'mode': '100644',
+            'git_blob_oid': 'c1496036ff36fcb3ed59c9efe24bcc692527b194',
+            'bytes': 7077,
+            'sha256': 'dd21cf40866283fe4993f967a191a71d18bb6fafeda95ccf954ae49500634ce0'}}]
+OUTPUT_BUDGET_REFERENCE_SHA256 = '8a3a3d98963259b05c00566731ac1da9802c1ef6fcb8ca459322fd79327704ec'
+OUTPUT_BUDGET_OLD_VECTOR = [{'bytes': 2279,
+  'path': 'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs',
+  'sha256': 'f4d5480d23ba6ae097a559d066b2a244ce388ba81aa6c486331e731be23e1813'},
+ {'bytes': 242,
+  'path': 'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs',
+  'sha256': '704b8a224f09943b4290d0c39514c480d041de946683253f36ef86dcf4f92f7c'},
+ {'bytes': 317,
+  'path': 'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind.mjs',
+  'sha256': 'a0aecb8720ff295df16e5bef6bb5f527ed002380c6cb64a514242f79614c8cb0'},
+ {'bytes': 139553,
+  'path': 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
+  'sha256': '63745cc5d4f15bdd8c153787df07379d813ab037fc1e0734944a75568235e8aa'},
+ {'bytes': 45330,
+  'path': 'src/effective-footprint.js',
+  'sha256': '28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745'},
+ {'bytes': 75074,
+  'path': 'scripts/check-effective-geographic-regression.mjs',
+  'sha256': '801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039'},
+ {'bytes': 2948,
+  'path': 'src/ownership-codec.js',
+  'sha256': '64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d'},
+ {'bytes': 1417, 'path': 'package.json', 'sha256': '2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3'},
+ {'bytes': 3497,
+  'path': 'src/native-runtime.js',
+  'sha256': '988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600'},
+ {'bytes': 4472,
+  'path': 'scripts/native-ownership/compile-native-ownership.mjs',
+  'sha256': '2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378'},
+ {'bytes': 6408,
+  'path': 'src/native-grid.js',
+  'sha256': 'b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663'},
+ {'bytes': 2799,
+  'path': 'coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/package.json',
+  'sha256': 'ceb30ba96a14786c419db53f2b8d3d59ece7ac5221c198ac03def462cf96ef23'},
+ {'bytes': 16773,
+  'path': 'coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/sha2.js',
+  'sha256': '3ddc587c588283cbceed4dd9929cefcce06a0c231b54d4c6f0f99c478c686c00'},
+ {'bytes': 5615,
+  'path': 'coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_md.js',
+  'sha256': 'a112f0fe1b15db00f2638618c436a17be1c5e13baf19d02fcc29016ae1db2233'},
+ {'bytes': 3081,
+  'path': 'coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_u64.js',
+  'sha256': 'e48c0cfc10810439a4807b46db136ce603a3fa09b62584f513ef2f3ca496af54'},
+ {'bytes': 9356,
+  'path': 'coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/utils.js',
+  'sha256': '11319ec0a8132a0c2ced8c98af33ae9274c001d6baf4f4709c4a6115e031a3c5'},
+ {'bytes': 6777,
+  'path': 'scripts/audit-grid-intervals.mjs',
+  'sha256': '084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9'},
+ {'bytes': 15742,
+  'path': 'coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs',
+  'sha256': '7af853f9ff63a221f83db831200b7d4943b7006e97bd872a72eccbbe2aef6930'},
+ {'bytes': 8614,
+  'path': 'coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs',
+  'sha256': '8115ad748fab6ba9b829510db5f020b1b070138ea80ad96be93d515597b3a738'},
+ {'bytes': 23671,
+  'path': 'coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py',
+  'sha256': '37d6e02607204302fc01c5d3d6652c89a937e5e84acaa71fb25f5ddc7bcdf5e8'},
+ {'bytes': 20660,
+  'path': 'coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py',
+  'sha256': '5be26c44ef36a097a24c82dab89a91693c94065278f5e15aeb57b0d295755345'},
+ {'bytes': 3169,
+  'path': 'coordination/engineering/additive-native-composition-20261009/execution-contract.py',
+  'sha256': '8bdc08d55830a7a3d95bce5ad20044f0ce5de08bcd5e514b51570bd19e8b114a'},
+ {'bytes': 2201,
+  'path': 'coordination/engineering/additive-native-composition-20261009/owned-group-original.py',
+  'sha256': '9ac8aeca9c721968bf33e69e219dbfb103875263b994dff1bd2e94402d0750ce'},
+ {'bytes': 2596,
+  'path': 'coordination/engineering/additive-native-composition-20261009/owned-child-termination-original.py',
+  'sha256': '00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61'},
+ {'bytes': 22001,
+  'path': 'coordination/engineering/additive-native-composition-20261009/mac-execution-runtime-original.json',
+  'sha256': '3b4c62732d123b00c436f724387f3fec67390b205223561b70787b0e2d44d4f5'},
+ {'bytes': 2197,
+  'path': 'coordination/engineering/additive-native-composition-20261009/execution-code-paths.json',
+  'sha256': '9173f3eb7a6c9dfe6c6aaf4524229db6c7caec296a09ed41347b0c43c6145708'},
+ {'bytes': 13365,
+  'path': 'scripts/local-workspace.mjs',
+  'sha256': '74c390efa3360b4431d047f89ab99986da697e58716000f44a4b284760e2a373'},
+ {'bytes': 548,
+  'path': 'scripts/worker-identity.mjs',
+  'sha256': 'e31ef3d286c3250f7f69e23f455edd896cfa96b8eb6438026aa4374da57128bd'}]
+OUTPUT_BUDGET_NEW_VECTOR = [{'bytes': 2279,
+  'path': 'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs',
+  'sha256': 'f4d5480d23ba6ae097a559d066b2a244ce388ba81aa6c486331e731be23e1813'},
+ {'bytes': 242,
+  'path': 'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs',
+  'sha256': '704b8a224f09943b4290d0c39514c480d041de946683253f36ef86dcf4f92f7c'},
+ {'bytes': 317,
+  'path': 'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind.mjs',
+  'sha256': 'a0aecb8720ff295df16e5bef6bb5f527ed002380c6cb64a514242f79614c8cb0'},
+ {'bytes': 142012,
+  'path': 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
+  'sha256': '6da5919c63822393959afc8f2499c76470aa6b51d6e29664d372e9eee79ae4b1'},
+ {'bytes': 45330,
+  'path': 'src/effective-footprint.js',
+  'sha256': '28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745'},
+ {'bytes': 75074,
+  'path': 'scripts/check-effective-geographic-regression.mjs',
+  'sha256': '801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039'},
+ {'bytes': 2948,
+  'path': 'src/ownership-codec.js',
+  'sha256': '64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d'},
+ {'bytes': 1417, 'path': 'package.json', 'sha256': '2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3'},
+ {'bytes': 3497,
+  'path': 'src/native-runtime.js',
+  'sha256': '988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600'},
+ {'bytes': 4472,
+  'path': 'scripts/native-ownership/compile-native-ownership.mjs',
+  'sha256': '2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378'},
+ {'bytes': 6408,
+  'path': 'src/native-grid.js',
+  'sha256': 'b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663'},
+ {'bytes': 2799,
+  'path': 'coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/package.json',
+  'sha256': 'ceb30ba96a14786c419db53f2b8d3d59ece7ac5221c198ac03def462cf96ef23'},
+ {'bytes': 16773,
+  'path': 'coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/sha2.js',
+  'sha256': '3ddc587c588283cbceed4dd9929cefcce06a0c231b54d4c6f0f99c478c686c00'},
+ {'bytes': 5615,
+  'path': 'coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_md.js',
+  'sha256': 'a112f0fe1b15db00f2638618c436a17be1c5e13baf19d02fcc29016ae1db2233'},
+ {'bytes': 3081,
+  'path': 'coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_u64.js',
+  'sha256': 'e48c0cfc10810439a4807b46db136ce603a3fa09b62584f513ef2f3ca496af54'},
+ {'bytes': 9356,
+  'path': 'coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/utils.js',
+  'sha256': '11319ec0a8132a0c2ced8c98af33ae9274c001d6baf4f4709c4a6115e031a3c5'},
+ {'bytes': 6777,
+  'path': 'scripts/audit-grid-intervals.mjs',
+  'sha256': '084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9'},
+ {'bytes': 18526,
+  'path': 'coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs',
+  'sha256': 'ddb9f9ef10b8f5c470e3fe40267dece5cb7b39cdb773e9fa12bec80c9a694157'},
+ {'bytes': 8642,
+  'path': 'coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs',
+  'sha256': 'fb9e0899c08a71f336118cea8dfe8607aac6bb44bd0f4073a4207874113c697d'},
+ {'bytes': 23671,
+  'path': 'coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py',
+  'sha256': '37d6e02607204302fc01c5d3d6652c89a937e5e84acaa71fb25f5ddc7bcdf5e8'},
+ {'bytes': 21045,
+  'path': 'coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py',
+  'sha256': '3744c6e04d90d822ffdd291ddc542e87ba39984f9e4b9947b26b589b8da79674'},
+ {'bytes': 3169,
+  'path': 'coordination/engineering/additive-native-composition-20261009/execution-contract.py',
+  'sha256': '8bdc08d55830a7a3d95bce5ad20044f0ce5de08bcd5e514b51570bd19e8b114a'},
+ {'bytes': 2201,
+  'path': 'coordination/engineering/additive-native-composition-20261009/owned-group-original.py',
+  'sha256': '9ac8aeca9c721968bf33e69e219dbfb103875263b994dff1bd2e94402d0750ce'},
+ {'bytes': 2596,
+  'path': 'coordination/engineering/additive-native-composition-20261009/owned-child-termination-original.py',
+  'sha256': '00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61'},
+ {'bytes': 22001,
+  'path': 'coordination/engineering/additive-native-composition-20261009/mac-execution-runtime-original.json',
+  'sha256': '3b4c62732d123b00c436f724387f3fec67390b205223561b70787b0e2d44d4f5'},
+ {'bytes': 2197,
+  'path': 'coordination/engineering/additive-native-composition-20261009/execution-code-paths.json',
+  'sha256': '9173f3eb7a6c9dfe6c6aaf4524229db6c7caec296a09ed41347b0c43c6145708'},
+ {'bytes': 13365,
+  'path': 'scripts/local-workspace.mjs',
+  'sha256': '74c390efa3360b4431d047f89ab99986da697e58716000f44a4b284760e2a373'},
+ {'bytes': 548,
+  'path': 'scripts/worker-identity.mjs',
+  'sha256': 'e31ef3d286c3250f7f69e23f455edd896cfa96b8eb6438026aa4374da57128bd'}]
+OUTPUT_BUDGET_OLD_VECTOR_SHA256 = '45adfb72d488c0cbdaa185e86e906acef1a8e7f135412c7cf77d159e0f31eb52'
+OUTPUT_BUDGET_NEW_VECTOR_SHA256 = '11487b4d1ad7c12f2d22c6c324d136da555c82cd6c962178767d672cdf0ded1a'
+
+
+def output_budget_transition(repo, baseline, candidate):
+    """One exact reviewed output-budget adoption, using only trusted literals."""
+    if baseline == candidate:
+        return None
+    reference = OUTPUT_BUDGET_REFERENCE
+    old_vector, new_vector = OUTPUT_BUDGET_OLD_VECTOR, OUTPUT_BUDGET_NEW_VECTOR
+    paths = [row['path'] for row in reference]
+    if (len(reference) != 7 or paths != sorted(set(paths))
+            or transition_digest(reference) != OUTPUT_BUDGET_REFERENCE_SHA256
+            or len(old_vector) != 28 or len({p['path'] for p in old_vector}) != 28
+            or [p['path'] for p in old_vector] != [p['path'] for p in new_vector]
+            or transition_digest(old_vector, newline=True) != OUTPUT_BUDGET_OLD_VECTOR_SHA256
+            or transition_digest(new_vector, newline=True) != OUTPUT_BUDGET_NEW_VECTOR_SHA256
+            or any(row['before'] == row['after'] for row in reference)):
+        raise ValueError('Incomplete trusted output-budget migration inventory')
+    pins = [p for row in reference for p in [row['before'], row['after']] if p is not None]
+    sizes = [p['bytes'] for p in pins] + [p['bytes'] for p in old_vector + new_vector]
+    if any(type(n) is not int or not 0 <= n <= MAX_BYTES for n in sizes) or sum(sizes) > 256 * 1024 * 1024:
+        raise ValueError('Output-budget migration body union exceeds original bounds')
+    for row in reference:
+        if not transition_pin_matches(repo, baseline, row['path'], row['before']):
+            return None
+        if not transition_pin_matches(repo, candidate, row['path'], row['after']):
+            return None
+    for version, vector in [(baseline, old_vector), (candidate, new_vector)]:
+        for pin in vector:
+            actual = entry(repo, version, pin['path'])
+            if git(repo, 'cat-file', '-s', actual['git_blob_oid']).strip() != str(pin['bytes']).encode():
+                return None
+            body = read(repo, version, pin['path'])
+            if actual['mode'] != '100644' or len(body) != pin['bytes'] or hashlib.sha256(body).hexdigest() != pin['sha256']:
+                return None
+    command = ['git', '-c', 'core.hooksPath=/dev/null', '-c', 'credential.helper=',
+               '-C', str(repo), 'diff-tree', '--quiet', '-r', '--no-ext-diff',
+               '--no-textconv', '--no-renames', baseline, candidate, '--', '.',
+               *[':(exclude,literal)' + name for name in paths]]
+    compared = subprocess.run(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                              timeout=30, env=dict(os.environ, GIT_NO_LAZY_FETCH='1', GIT_TERMINAL_PROMPT='0'))
+    if compared.returncode == 1:
+        return None
+    if compared.returncode != 0:
+        raise ValueError('Complete output-budget candidate tree equivalence unavailable')
+    if not git(repo, 'ls-tree', '-z', baseline, '--', 'data/ownership-selection.json'):
+        raise ValueError('Output-budget migration needs actual selected baseline')
+    trees = [git(repo, 'rev-parse', version + '^{tree}').decode().strip() for version in [baseline, candidate]]
+    for tree in trees:
+        immutable_sha(tree)
+    return {'kind': 'exact-reviewed-output-budget-migration-v1',
+            'changed_paths': len(reference), 'reference_sha256': OUTPUT_BUDGET_REFERENCE_SHA256,
+            'old_vector_sha256': OUTPUT_BUDGET_OLD_VECTOR_SHA256,
+            'new_vector_sha256': OUTPUT_BUDGET_NEW_VECTOR_SHA256,
+            'baseline_commit': baseline, 'candidate_commit': candidate,
+            'baseline_tree': trees[0], 'candidate_tree': trees[1],
+            'whole_tree_outside_exact_delta_equal': True,
+            'candidate_code_executed': False, 'candidate_scientific_qualification': False}
+
+
 def inspect(repo, baseline, candidate):
     immutable_sha(baseline)
     immutable_sha(candidate)
@@ -913,7 +1201,7 @@ def inspect(repo, baseline, candidate):
               'candidate_code_executed': False,
               'baseline_input_inventory': before, 'candidate_input_inventory': after,
               'published': False, 'source_approval': False}
-    transition = programme_registry_transition(repo, baseline, candidate) or linux_support_transition(repo, baseline, candidate)
+    transition = output_budget_transition(repo, baseline, candidate) or programme_registry_transition(repo, baseline, candidate) or linux_support_transition(repo, baseline, candidate)
     if transition is not None:
         if before != after:
             raise ValueError('Finite transition changed geographic inputs')

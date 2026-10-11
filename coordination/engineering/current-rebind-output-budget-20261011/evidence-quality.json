@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "issue": 1742,
+  "lane": "engineering",
+  "worker_id": "01a12bf5-5867-746b-95a6-aa2d685fd02e",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "32103b9c717ae43e7e88b067a9c1dfe5a07e8c73",
+    "files": [
+      {
+        "path": "package.json",
+        "bytes": 1417,
+        "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/ownership-selection.json",
+        "bytes": 1592,
+        "sha256": "2dc41f354893cb40a76a58d767450060cc5aac1bbb65c0379486f347e703aa33",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/current-rebind-output-budget-20261011/static-sizing.json",
+      "bytes": 14386,
+      "sha256": "829fe2496835f2a80d884b859685b2d42d624c546163b68ebb81d0feb5087c8e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/current-rebind-output-budget-20261011/selected-reader.json",
+      "bytes": 51085,
+      "sha256": "340fdaa209756a05560124e46b37a449d018a721f3d2456f1ea46094400f83dd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/current-rebind-output-budget-20261011/selected-reader-terminal.json",
+      "bytes": 849,
+      "sha256": "237bfd3f2729b60a601e5ea44b14caab6744fa401fde63e1038bc26db090c51a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/current-rebind-output-budget-20261011/selected-reader-time.log",
+      "bytes": 987,
+      "sha256": "e9c0fef0be3cfad4796d85ca015ec9d7b8ecb0698c5837db3d4f308d48237c81",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/current-rebind-output-budget-20261011/executed-reader-entry.mjs.txt",
+      "bytes": 1522,
+      "sha256": "0a65716ff2672cebdd32f8ad3f492ac75019d399c0dd52c857529c439b7235e1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/current-rebind-output-budget-20261011/executed-reader-supervisor.py.txt",
+      "bytes": 2696,
+      "sha256": "0e788e82e8bf5f96db7f9185e15c3e358e224e71d69eecd12b911826a07add14",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "bounded-output-adoption",
+      "kind": "code",
+      "description": "Exact finite mode/OID/size/hash and complete-vector adoption, static canonical JSON byte bounds, and one actual unchanged selected-reader boundary check. No SOURCE/NATIVE scientific producer was replayed.",
+      "software": "Node 24.19.0; Python 3.13; GNU time 1.9",
+      "units": "bytes"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "retained-output-lower-bound",
+      "value": 4760318,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "829fe2496835f2a80d884b859685b2d42d624c546163b68ebb81d0feb5087c8e",
+      "evaluation_commit": "e8d6de16f4902e2455b193a81696dd20394c37d4"
+    },
+    {
+      "id": "conservative-output-upper-bound",
+      "value": 6320871,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "829fe2496835f2a80d884b859685b2d42d624c546163b68ebb81d0feb5087c8e",
+      "evaluation_commit": "e8d6de16f4902e2455b193a81696dd20394c37d4"
+    },
+    {
+      "id": "actual-selected-reader-logical-peak",
+      "value": 230719344,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "340fdaa209756a05560124e46b37a449d018a721f3d2456f1ea46094400f83dd",
+      "evaluation_commit": "f3097f971f0d276b0037be0d2b8a9173e5c02721"
+    },
+    {
+      "id": "actual-selected-reader-lifetime-rss",
+      "value": 288915456,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "237bfd3f2729b60a601e5ea44b14caab6744fa401fde63e1038bc26db090c51a",
+      "evaluation_commit": "f3097f971f0d276b0037be0d2b8a9173e5c02721"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "retained-output-lower-bound",
+      "path": "coordination/engineering/current-rebind-output-budget-20261011/static-sizing.json",
+      "json_pointer": "/four_body_combined_lower_bound_bytes"
+    },
+    {
+      "metric_id": "conservative-output-upper-bound",
+      "path": "coordination/engineering/current-rebind-output-budget-20261011/static-sizing.json",
+      "json_pointer": "/static_upper_bound/combined_upper_with_metadata_reserve_bytes"
+    },
+    {
+      "metric_id": "actual-selected-reader-logical-peak",
+      "path": "coordination/engineering/current-rebind-output-budget-20261011/selected-reader.json",
+      "json_pointer": "/complete_phase_bytes"
+    },
+    {
+      "metric_id": "actual-selected-reader-lifetime-rss",
+      "path": "coordination/engineering/current-rebind-output-budget-20261011/selected-reader-terminal.json",
+      "json_pointer": "/lifetime_rss_bytes"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "Output-cap adoption and bounded local reader validation only. Actual current-cohort rebind, selected delivery and future-cohort operating qualification remain separate.",
+      "status": "unresolved",
+      "source_ids": []
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/current-rebind-output-budget.test.mjs test/supported-programs.test.mjs",
+    "python -I -B test/trusted-geography-check.py OutputBudgetMigrationControls ProgrammeMigrationControls LinuxTransitionControls"
+  ]
+}
