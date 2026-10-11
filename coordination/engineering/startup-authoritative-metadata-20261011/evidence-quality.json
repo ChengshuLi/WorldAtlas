@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "issue": 1715,
+  "lane": "engineering",
+  "worker_id": "01a12806-e666-7781-b612-e4af40560004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "61d487a68c01c950891069c6936ad2b7002b6aa1",
+    "files": [
+      {
+        "path": "scripts/job-deadline.mjs",
+        "bytes": 8122,
+        "sha256": "2a6e4dfc9c6f88d5d93d49d71c4a0cf5d774409da2e19189e81b844a2b065ccd",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "authoritative-startup-metadata",
+      "kind": "code",
+      "description": "Actual hosted PR entry and HTTP client controls exercise authoritative in-progress start establishment, bounded repeated observations and exact mutable job-inventory conditional-cache exclusion. Scheduler and adjacent conditional authority behavior remain checked.",
+      "software": "Node.js 24.19.0",
+      "units": "Not applicable: control flow and identity"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/pr-gates.test.mjs test/job-deadline.test.mjs"
+  ],
+  "limits": [
+    "Retained hosted diagnostics establish queued provisional metadata and repeated conditional responses. The cause of upstream visibility lag is not established.",
+    "Synthetic HTTP and clock controls establish bounded recovery. Actual hosted recovery frequency and elapsed savings require subsequent observations; successful hosted gates alone do not prove a reread occurred."
+  ]
+}
