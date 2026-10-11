@@ -1,0 +1,10 @@
+2026-10-11T21:37:17.3096082Z {"geography_stage": "trusted-checkout-initial", "elapsed_ms": 678}
+2026-10-11T21:37:17.6649418Z {"geography_stage": "candidate-fetch", "elapsed_ms": 355}
+2026-10-11T21:37:18.3311703Z {"geography_stage": "trusted-checkout-inspect", "elapsed_ms": 666}
+2026-10-11T21:37:18.8705254Z {"geography_stage": "unchanged-selected-inputs", "elapsed_ms": 45}
+2026-10-11T21:37:44.5289228Z {"geography_prefetch": {"scope": "declared-selected-bank-and-direct-additive-assets", "complete_scientific_closure": false, "unique_objects": 57, "declared_bytes": 246339322, "verified_import_objects": 53, "verified_import_bytes": 245816424, "fetch_batches": 6, "tree_metadata_ms": 2284, "fetch_ms": 20716, "verification_ms": 1606, "declarations": 116, "selected_commits": ["8a346ba7c957220b34c5cc3368d5d835de533ad4", "47680888460cb772da6eb7cbab4a05f6b8474fa0"], "status": "scoped-prefetch-completed", "limits": ["No scientific or full dependency-closure claim. Deeper historical authority/rebind inputs and unknown formats retain the unchanged checker acquisition."], "elapsed_ms": 25599}}
+2026-10-11T21:37:44.5294964Z {"geography_stage": "selected-prefetch", "elapsed_ms": 25658}
+2026-10-11T21:42:07.8966099Z {"geography_stage": "selected-native", "elapsed_ms": 263162}
+2026-10-11T21:49:26.2222881Z {"geography_stage": "selected-continuous-node-operands", "elapsed_ms": 438156}
+2026-10-11T21:49:26.2558542Z {"geography_stage": "selected-continuous-python-compare", "elapsed_ms": 0}
+2026-10-11T21:49:26.2618804Z {"geography_stage": "selected-continuous", "elapsed_ms": 438196}

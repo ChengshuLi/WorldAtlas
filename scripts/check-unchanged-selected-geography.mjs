@@ -65,11 +65,23 @@ function createReader({repo, baseline, candidate, trusted, limits, acquisition})
   const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('GIT_')));
   Object.assign(env, {GIT_NO_LAZY_FETCH: '1', GIT_NO_REPLACE_OBJECTS: '1', GIT_CONFIG_NOSYSTEM: '1',
     GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0', GIT_OPTIONAL_LOCKS: '0'});
-  const git = (...args) => {
+  const runGit = (args, ignoreShallow = false) => {
     try { return execFileSync('git', ['--no-replace-objects', '-c', 'core.hooksPath=/dev/null', '-c', 'credential.helper=', '-C', repo, ...args],
-      {env: args[0] === 'merge-base' ? {...env, GIT_SHALLOW_FILE: '/dev/null'} : env, maxBuffer: limits.member + 1024, timeout: 30000, stdio: ['ignore', 'pipe', 'pipe']}); }
+      {env: ignoreShallow ? {...env, GIT_SHALLOW_FILE: '/dev/null'} : env, maxBuffer: limits.member + 1024, timeout: 30000, stdio: ['ignore', 'pipe', 'pipe']}); }
     catch { throw Error('immutable-object-unavailable:' + args.slice(0, 4).join(':')); }
   };
+  const git = (...args) => runGit(args);
+  function mergeBase() {
+    // A shallow baseline is already a valid common ancestor of a fresh source
+    // branch. Do not traverse its intentionally absent parent in that case.
+    try { return git('merge-base', baseline, candidate); }
+    catch {
+      // Divergent historical heads may already supply the hidden parents. This
+      // read-only fallback succeeds only with the necessary objects present;
+      // no ancestry fetch or shallow-file mutation is authorized here.
+      return runGit(['merge-base', baseline, candidate], true);
+    }
+  }
   const descriptors = new Map(), metadata = new Map(), origins = new Map(), current = new Map();
   let metadataBytes = 0;
   const missingOrigins = new Set();
@@ -151,7 +163,7 @@ function createReader({repo, baseline, candidate, trusted, limits, acquisition})
     demand(value.mode === undefined || value.mode === p.mode, 'current-pin-mode');
     return p;
   }
-  return {git, descriptor, equalCurrent, currentJson, currentPin, pinned, pinnedJson, jsonAt, body, originExists,
+  return {git, mergeBase, descriptor, equalCurrent, currentJson, currentPin, pinned, pinnedJson, jsonAt, body, originExists,
     missingOrigins,
     resetOrigins() { origins.clear(); missingOrigins.clear(); },
     trustedJson(name) { return jsonAt(descriptor(trusted, name)); },
@@ -237,10 +249,9 @@ async function collect(reader, {baseline, candidate, trusted}) {
   // This is an eligibility bound, not input equivalence. Compare the authored
   // diff from its real merge base; all consumed identities below still compare
   // the exact supplied baseline and candidate, including baseline-only changes.
-  // A depth-one baseline may hide a parent already present via candidate
-  // ancestry. Ignore only the shallow boundary for this read-only query; never
-  // hydrate a graph. Missing required ancestor objects still decline.
-  const mergeBase = reader.git('merge-base', baseline, candidate).toString().trim();
+  // Prefer Git's real shallow boundary; consult already-present hidden ancestry
+  // only if the normal query fails. Missing required history still declines.
+  const mergeBase = reader.mergeBase().toString().trim();
   demand(oid(mergeBase), 'source-scope-merge-base-unavailable');
   const changed = reader.git('diff-tree', '--no-commit-id', '--name-only', '-r', '-z', '--no-renames', mergeBase, candidate).toString().split('\0').filter(Boolean);
   demand(changed.length > 0 && changed.length <= 512 && changed.every(name => safe(name)
