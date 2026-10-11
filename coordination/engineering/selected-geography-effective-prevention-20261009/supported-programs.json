@@ -3016,6 +3016,186 @@
       ],
       "accepted_head": "8fe910edd0dba95b45ae8ecd910d6c9486976341",
       "independent_review_comment": 6111799461
+    },
+    {
+      "preimage_version": 3,
+      "source_profile": "retained-consumed-administrative-source",
+      "source_executed_code": [
+        {
+          "path": "package.json",
+          "bytes": 1417,
+          "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+        },
+        {
+          "path": "scripts/additive-gap-repair.mjs",
+          "bytes": 192403,
+          "sha256": "27582c56dfcc1341c952366a9eec0bb47e3f83b0a79c31d4a85a674df25bbebb"
+        },
+        {
+          "path": "src/effective-footprint.js",
+          "bytes": 45330,
+          "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+        },
+        {
+          "path": "scripts/native-ownership/native-preparation-guards.mjs",
+          "bytes": 8654,
+          "sha256": "c5b8ca1d3d1d773b0fafb79c613ce4b89532b01d08b8fda761a465755c16f694"
+        },
+        {
+          "path": "src/native-runtime.js",
+          "bytes": 3497,
+          "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+        },
+        {
+          "path": "scripts/native-ownership/compile-native-ownership.mjs",
+          "bytes": 4472,
+          "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+        },
+        {
+          "path": "src/native-grid.js",
+          "bytes": 6408,
+          "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+        },
+        {
+          "path": "src/ownership-codec.js",
+          "bytes": 2948,
+          "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+        },
+        {
+          "path": "scripts/audit-grid-intervals.mjs",
+          "bytes": 6777,
+          "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+        },
+        {
+          "path": "scripts/native-ownership/require-verified-selection.mjs",
+          "bytes": 4377,
+          "sha256": "20a8e3f472db4c06386ce2b7bd01330ea8acfd6d1ff414f6d2d32e8b1995d50c"
+        },
+        {
+          "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+          "bytes": 1540,
+          "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb"
+        },
+        {
+          "path": "scripts/native-ownership/verified-candidates.json",
+          "bytes": 1810,
+          "sha256": "080a481b71383bd6ba3388ad9b26138b25fced628a61830c3bb02a933562e40a"
+        },
+        {
+          "path": "scripts/evidence-quality.mjs",
+          "bytes": 28506,
+          "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97"
+        },
+        {
+          "path": "src/ownership-method.js",
+          "bytes": 3126,
+          "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df"
+        },
+        {
+          "path": "scripts/check-effective-geographic-regression.mjs",
+          "bytes": 77142,
+          "sha256": "5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda"
+        },
+        {
+          "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+          "bytes": 144181,
+          "sha256": "1ebc1415f9c18cf8639734073313667bbc0e831317484c48fcafbc6f6d7f1216"
+        },
+        {
+          "path": "package-lock.json",
+          "bytes": 246591,
+          "sha256": "471d035f92567ea447f221661db5fa8febfc7afc32af8ac975506ce9e0303255"
+        }
+      ],
+      "native_executed_code": [
+        {
+          "path": "package.json",
+          "bytes": 1417,
+          "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+        },
+        {
+          "path": "scripts/additive-gap-repair.mjs",
+          "bytes": 192403,
+          "sha256": "27582c56dfcc1341c952366a9eec0bb47e3f83b0a79c31d4a85a674df25bbebb"
+        },
+        {
+          "path": "src/effective-footprint.js",
+          "bytes": 45330,
+          "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+        },
+        {
+          "path": "scripts/native-ownership/native-preparation-guards.mjs",
+          "bytes": 8654,
+          "sha256": "c5b8ca1d3d1d773b0fafb79c613ce4b89532b01d08b8fda761a465755c16f694"
+        },
+        {
+          "path": "src/native-runtime.js",
+          "bytes": 3497,
+          "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+        },
+        {
+          "path": "scripts/native-ownership/compile-native-ownership.mjs",
+          "bytes": 4472,
+          "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+        },
+        {
+          "path": "src/native-grid.js",
+          "bytes": 6408,
+          "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+        },
+        {
+          "path": "src/ownership-codec.js",
+          "bytes": 2948,
+          "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+        },
+        {
+          "path": "scripts/audit-grid-intervals.mjs",
+          "bytes": 6777,
+          "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+        },
+        {
+          "path": "scripts/native-ownership/require-verified-selection.mjs",
+          "bytes": 4377,
+          "sha256": "20a8e3f472db4c06386ce2b7bd01330ea8acfd6d1ff414f6d2d32e8b1995d50c"
+        },
+        {
+          "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+          "bytes": 1540,
+          "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb"
+        },
+        {
+          "path": "scripts/native-ownership/verified-candidates.json",
+          "bytes": 1810,
+          "sha256": "080a481b71383bd6ba3388ad9b26138b25fced628a61830c3bb02a933562e40a"
+        },
+        {
+          "path": "scripts/evidence-quality.mjs",
+          "bytes": 28506,
+          "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97"
+        },
+        {
+          "path": "src/ownership-method.js",
+          "bytes": 3126,
+          "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df"
+        },
+        {
+          "path": "scripts/check-effective-geographic-regression.mjs",
+          "bytes": 77142,
+          "sha256": "5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda"
+        },
+        {
+          "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+          "bytes": 144181,
+          "sha256": "1ebc1415f9c18cf8639734073313667bbc0e831317484c48fcafbc6f6d7f1216"
+        },
+        {
+          "path": "package-lock.json",
+          "bytes": 246591,
+          "sha256": "471d035f92567ea447f221661db5fa8febfc7afc32af8ac975506ce9e0303255"
+        }
+      ],
+      "accepted_head": "512c100efbb4c6334b39cefaabac2d30ec2c7823",
+      "independent_review_comment": 6114941914
     }
   ],
   "current_rebind_migrations": [
@@ -3757,8 +3937,8 @@
         },
         {
           "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
-          "bytes": 143586,
-          "sha256": "b2bef450ee2dcab07b7110a9c91b275df4772450a8541571032da98f1e657293"
+          "bytes": 144181,
+          "sha256": "1ebc1415f9c18cf8639734073313667bbc0e831317484c48fcafbc6f6d7f1216"
         },
         {
           "path": "src/effective-footprint.js",
@@ -3767,8 +3947,8 @@
         },
         {
           "path": "scripts/check-effective-geographic-regression.mjs",
-          "bytes": 76948,
-          "sha256": "306d1f273fb66ac8fec8cf27b85162837f31104e4d8b6663192645759c9f8037"
+          "bytes": 77142,
+          "sha256": "5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda"
         },
         {
           "path": "src/ownership-codec.js",
@@ -3827,28 +4007,28 @@
         },
         {
           "path": "coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs",
-          "bytes": 18526,
-          "sha256": "ddb9f9ef10b8f5c470e3fe40267dece5cb7b39cdb773e9fa12bec80c9a694157"
+          "bytes": 17977,
+          "sha256": "99e9a5f2508cea0a830480d7ff01af85654f04a972e49ee2391b3e0b2c3d3c68"
         },
         {
           "path": "coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs",
-          "bytes": 8642,
-          "sha256": "fb9e0899c08a71f336118cea8dfe8607aac6bb44bd0f4073a4207874113c697d"
+          "bytes": 8823,
+          "sha256": "319744feb3c73f2b51deed68222e43c2241dbb28557c917a15a4f9010273b614"
         },
         {
           "path": "coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py",
-          "bytes": 23671,
-          "sha256": "37d6e02607204302fc01c5d3d6652c89a937e5e84acaa71fb25f5ddc7bcdf5e8"
+          "bytes": 25823,
+          "sha256": "372e020108f6ddbf6cecefc5522b31105ebdf81e2bf9e6fe0a459a19fd561669"
         },
         {
           "path": "coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py",
-          "bytes": 21045,
-          "sha256": "3744c6e04d90d822ffdd291ddc542e87ba39984f9e4b9947b26b589b8da79674"
+          "bytes": 22240,
+          "sha256": "538c5d85f69345f6436d1cf34dca3c78bd0cef13fec1c7271a5ba9f19b0bb0ea"
         },
         {
           "path": "coordination/engineering/additive-native-composition-20261009/execution-contract.py",
-          "bytes": 3169,
-          "sha256": "8bdc08d55830a7a3d95bce5ad20044f0ce5de08bcd5e514b51570bd19e8b114a"
+          "bytes": 4874,
+          "sha256": "6caf8f51ce4516c7a9ca8c407c06c522dac7676a26eb91999c8f25170aa1fc13"
         },
         {
           "path": "coordination/engineering/additive-native-composition-20261009/owned-group-original.py",
@@ -3881,7 +4061,7 @@
           "sha256": "e31ef3d286c3250f7f69e23f455edd896cfa96b8eb6438026aa4374da57128bd"
         }
       ],
-      "independent_review_comment": 6114533906
+      "independent_review_comment": 6114941914
     },
     {
       "execution_commit": "17b80a99f11193b2aa23c85c3d6e84f8183801ce",
@@ -4045,8 +4225,8 @@
         },
         {
           "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
-          "bytes": 143586,
-          "sha256": "b2bef450ee2dcab07b7110a9c91b275df4772450a8541571032da98f1e657293"
+          "bytes": 144181,
+          "sha256": "1ebc1415f9c18cf8639734073313667bbc0e831317484c48fcafbc6f6d7f1216"
         },
         {
           "path": "src/effective-footprint.js",
@@ -4055,8 +4235,8 @@
         },
         {
           "path": "scripts/check-effective-geographic-regression.mjs",
-          "bytes": 76948,
-          "sha256": "306d1f273fb66ac8fec8cf27b85162837f31104e4d8b6663192645759c9f8037"
+          "bytes": 77142,
+          "sha256": "5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda"
         },
         {
           "path": "src/ownership-codec.js",
@@ -4115,28 +4295,28 @@
         },
         {
           "path": "coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs",
-          "bytes": 18526,
-          "sha256": "ddb9f9ef10b8f5c470e3fe40267dece5cb7b39cdb773e9fa12bec80c9a694157"
+          "bytes": 17977,
+          "sha256": "99e9a5f2508cea0a830480d7ff01af85654f04a972e49ee2391b3e0b2c3d3c68"
         },
         {
           "path": "coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs",
-          "bytes": 8642,
-          "sha256": "fb9e0899c08a71f336118cea8dfe8607aac6bb44bd0f4073a4207874113c697d"
+          "bytes": 8823,
+          "sha256": "319744feb3c73f2b51deed68222e43c2241dbb28557c917a15a4f9010273b614"
         },
         {
           "path": "coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py",
-          "bytes": 23671,
-          "sha256": "37d6e02607204302fc01c5d3d6652c89a937e5e84acaa71fb25f5ddc7bcdf5e8"
+          "bytes": 25823,
+          "sha256": "372e020108f6ddbf6cecefc5522b31105ebdf81e2bf9e6fe0a459a19fd561669"
         },
         {
           "path": "coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py",
-          "bytes": 21045,
-          "sha256": "3744c6e04d90d822ffdd291ddc542e87ba39984f9e4b9947b26b589b8da79674"
+          "bytes": 22240,
+          "sha256": "538c5d85f69345f6436d1cf34dca3c78bd0cef13fec1c7271a5ba9f19b0bb0ea"
         },
         {
           "path": "coordination/engineering/additive-native-composition-20261009/execution-contract.py",
-          "bytes": 3169,
-          "sha256": "8bdc08d55830a7a3d95bce5ad20044f0ce5de08bcd5e514b51570bd19e8b114a"
+          "bytes": 4874,
+          "sha256": "6caf8f51ce4516c7a9ca8c407c06c522dac7676a26eb91999c8f25170aa1fc13"
         },
         {
           "path": "coordination/engineering/additive-native-composition-20261009/owned-group-original.py",
@@ -4169,7 +4349,7 @@
           "sha256": "e31ef3d286c3250f7f69e23f455edd896cfa96b8eb6438026aa4374da57128bd"
         }
       ],
-      "independent_review_comment": 6114533906
+      "independent_review_comment": 6114941914
     },
     {
       "execution_commit": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
@@ -4333,8 +4513,8 @@
         },
         {
           "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
-          "bytes": 143586,
-          "sha256": "b2bef450ee2dcab07b7110a9c91b275df4772450a8541571032da98f1e657293"
+          "bytes": 144181,
+          "sha256": "1ebc1415f9c18cf8639734073313667bbc0e831317484c48fcafbc6f6d7f1216"
         },
         {
           "path": "src/effective-footprint.js",
@@ -4343,8 +4523,8 @@
         },
         {
           "path": "scripts/check-effective-geographic-regression.mjs",
-          "bytes": 76948,
-          "sha256": "306d1f273fb66ac8fec8cf27b85162837f31104e4d8b6663192645759c9f8037"
+          "bytes": 77142,
+          "sha256": "5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda"
         },
         {
           "path": "src/ownership-codec.js",
@@ -4403,28 +4583,28 @@
         },
         {
           "path": "coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs",
-          "bytes": 18526,
-          "sha256": "ddb9f9ef10b8f5c470e3fe40267dece5cb7b39cdb773e9fa12bec80c9a694157"
+          "bytes": 17977,
+          "sha256": "99e9a5f2508cea0a830480d7ff01af85654f04a972e49ee2391b3e0b2c3d3c68"
         },
         {
           "path": "coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs",
-          "bytes": 8642,
-          "sha256": "fb9e0899c08a71f336118cea8dfe8607aac6bb44bd0f4073a4207874113c697d"
+          "bytes": 8823,
+          "sha256": "319744feb3c73f2b51deed68222e43c2241dbb28557c917a15a4f9010273b614"
         },
         {
           "path": "coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py",
-          "bytes": 23671,
-          "sha256": "37d6e02607204302fc01c5d3d6652c89a937e5e84acaa71fb25f5ddc7bcdf5e8"
+          "bytes": 25823,
+          "sha256": "372e020108f6ddbf6cecefc5522b31105ebdf81e2bf9e6fe0a459a19fd561669"
         },
         {
           "path": "coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py",
-          "bytes": 21045,
-          "sha256": "3744c6e04d90d822ffdd291ddc542e87ba39984f9e4b9947b26b589b8da79674"
+          "bytes": 22240,
+          "sha256": "538c5d85f69345f6436d1cf34dca3c78bd0cef13fec1c7271a5ba9f19b0bb0ea"
         },
         {
           "path": "coordination/engineering/additive-native-composition-20261009/execution-contract.py",
-          "bytes": 3169,
-          "sha256": "8bdc08d55830a7a3d95bce5ad20044f0ce5de08bcd5e514b51570bd19e8b114a"
+          "bytes": 4874,
+          "sha256": "6caf8f51ce4516c7a9ca8c407c06c522dac7676a26eb91999c8f25170aa1fc13"
         },
         {
           "path": "coordination/engineering/additive-native-composition-20261009/owned-group-original.py",
@@ -4457,7 +4637,7 @@
           "sha256": "e31ef3d286c3250f7f69e23f455edd896cfa96b8eb6438026aa4374da57128bd"
         }
       ],
-      "independent_review_comment": 6114533906
+      "independent_review_comment": 6114941914
     }
   ]
 }
