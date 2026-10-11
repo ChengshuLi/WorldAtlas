@@ -163,3 +163,69 @@ Final focused command: node --test test/delivery-handoff.test.mjs test/premerge-
 ℹ skipped 0
 ℹ todo 0
 ℹ duration_ms 333.973634
+
+Final public resource schema compatibility: 512c100efbb4c6334b39cefaabac2d30ec2c7823.
+Matched SOURCE/NATIVE output reserve minimum, phase allowance and safe arithmetic. Overflow fixture uses an explicit finite allowance and fills its declared limit before attempting any write. No resource helper changed.
+$ node --test test/delivery-handoff.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs
+✔ SOURCE preparation preserves handoff order, methods/resources and complete whole handoff pin (7.770934ms)
+✔ accepted whole handoff target/order drift fails even when its new pin is coherent (2.113574ms)
+✔ writer resumes only exact complete bytes and rejects collisions, dangling symlinks and changed bindings (5.430483ms)
+✔ combined read/output budget fails before creating destination (4.970932ms)
+✔ retention joins genuine terminal, request, facts and every published output; no completion from partial files (8.123737ms)
+✔ native preparation requires committed genuine SOURCE products and preserves immutable runtime/resource fields (3.27692ms)
+✔ composition invokes existing conservation logic and rejects duplicate original scope (16.644774ms)
+✔ immutable Git input reader rejects whole-body drift, missing objects and nonordinary pins (73.264197ms)
+✔ review handoff includes current bindings/complete rename scope and no approval; stale head/body/scope fail (14.102008ms)
+✔ rebind commit phases require complete custody and publication-matching result pins (2.037641ms)
+✔ new request issuance requires explicit finite v2 profiles and actual HEAD support/code pins (3.754097ms)
+✔ coherent SOURCE inventory changes and native preparation facts omissions are rejected against pinned scope/targets (14.104972ms)
+✔ native retention rejects a publication that omits the required ledger asset (3.202049ms)
+✔ native self-consistent target substitutions fail the independent immutable SOURCE join (6.013283ms)
+✔ verifies bytes without claiming factual correctness (3.859994ms)
+✔ schema-only validation reports unverified bytes (0.456997ms)
+✔ known broken pins, stale baseline, entry hashes and contradictory summaries fail (2.836357ms)
+✔ source access/license limits remain explicit; no unsafe retention (1.337924ms)
+✔ research cannot grant approval; supported conclusions need known sources (0.709442ms)
+✔ containing-file inventory verifies actual subject IDs, not optional properties.part (1.281821ms)
+✔ compressed vs uncompressed hashes and decompression budgets are checked (4.221931ms)
+✔ paths and symlinks cannot escape candidate reader (2.460198ms)
+✔ new identity registry is checked against retained prior roster without claiming source or geometry approval (1.28765ms)
+✔ prior inventory cannot accept invented subjects, candidate baselines or ambiguous authority (5.935462ms)
+✔ identity-only projection rejects duplicates, geometry and altered native IDs even with updated output hashes (2.465907ms)
+✔ declared gzip .bin containing files preserve complete mixed 45-component/eight-contact membership (10.091465ms)
+✔ subject gzip declaration does not accept unsupported bytes, wrong hashes or coherently missing subjects (11.561295ms)
+✔ actual subject decompression remains bounded for legacy gzip with small encoded bytes (1.66579ms)
+✔ prior inventory and candidate registry decode their declared gzip .bin descriptors at correct vintages (1.804947ms)
+✔ independent record bindings reject coherent wrong joins, incomplete and vacuous coverage (3.759125ms)
+✔ new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption (1.369191ms)
+✔ positive real-format ledger validates actual files and binds an independent review (3.710913ms)
+✔ regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail (2.976294ms)
+✔ full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence (1.656977ms)
+✔ coordinate/helper policies remain enforced without ceremonial control files (1.076386ms)
+✔ generator controls bind actual positive, negative and equal two-run output bytes (1.262853ms)
+✔ Washington-style generated narrative/table mismatch fails against the same numeric ledger (1.734402ms)
+✔ reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review (1.84747ms)
+✔ mock remote queue checks exact blobs/head/independent receipt with read-only requests (11.572346ms)
+✔ incomplete remote trees cannot become a passed byte check (0.820747ms)
+✔ remote decisions reject stale exact-head reviews and a later change request (1.808512ms)
+✔ unchanged authored evidence survives unrelated main advance, while current metrics require refresh (0.32376ms)
+✔ trusted hosted gate checks a new limited prior-evidence registry and still rejects nonancestor baselines (3.243299ms)
+✔ fresh remote review, head, tree/path and reservation checks reject after immutable bytes were reused (16.859091ms)
+✔ acceptance/disposition binding invalidates substantive changes but preserves JSON formatting and progress comments (4.452754ms)
+✔ binding activation preserves existing PRs and rejects unknown activation timestamps (0.2498ms)
+✔ compact review binds canonical complete inventory and preserves literal receipts (1.180851ms)
+✔ compact reviews refuse malformed, mixed, omitted, changed and renamed inventories (6.304135ms)
+✔ compact inventory does not weaken head, reviewer, contract, domain or limit authority (3.979265ms)
+✔ normal remote comment route admits a complete compact review beyond literal GitHub comment size (91.351466ms)
+✔ minimal manifests reuse Git change inventory but preserve evidence and independent review (0.926624ms)
+✔ omitting duplicate change receipts does not authorize replacing original scientific evidence (1.733991ms)
+✔ declared controls remain checked, not accepted merely because controls are optional (0.688571ms)
+✔ remote minimal manifests need no base-body copies for unrelated code changes (0.78223ms)
+ℹ tests 54
+ℹ suites 0
+ℹ pass 54
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 356.595929

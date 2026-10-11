@@ -19,7 +19,7 @@ explicit `requested_resources`, either at config level or per group:
 `output_bytes`, `retained_bytes`, `log_bytes`, `monitor_bytes`, and `receipt_bytes`.
 The requested values replace only these resource fields. No old 256 MiB reader,
 1 GiB process, time, output, log or monitor limit is silently chosen by this tool.
-The request's existing output reserve and all finite cross-bounds must fit. The
+The request's existing output reserve must be at least 131072 bytes and fit the requested reader phase; its sum with the 131072-byte operating margin must remain safe and fit the output limit. All other finite cross-bounds must fit. The
 existing executing-code and supervisor descriptors, plus ordered
 `operating_runtime.support_code` entries for `scripts/local-workspace.mjs` and
 `scripts/worker-identity.mjs`, must match actual HEAD bytes. A new template must be

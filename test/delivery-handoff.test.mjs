@@ -81,7 +81,10 @@ test('writer resumes only exact complete bytes and rejects collisions, dangling 
 });
 
 test('combined read/output budget fails before creating destination', t => {
-  const root = directory(t), budget = candidateBudget([{bytes: 32 * 1048576}, ...Array(7).fill({bytes: 32 * 1048576})], {reserveBytes: 0, reserveDescriptors: 0});
+  const root = directory(t), budget = candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0,
+    allowance: {phaseBytes: 256 * 1048576, rssBytes: 1024 * 1048576}});
+  let remaining = budget.snapshot().limit_bytes;
+  while (remaining) { const bytes = Math.min(32 * 1048576, remaining); budget.add({bytes}); remaining -= bytes; }
   assert.throws(() => publish(root, '.cache/delivery-handoff/overflow', {'x.json': jsonBytes({})}, {}, false, budget), /Aggregate/);
   assert.equal(fs.existsSync(path.join(root, '.cache')), false);
 });
@@ -226,7 +229,7 @@ test('rebind commit phases require complete custody and publication-matching res
 test('new request issuance requires explicit finite v2 profiles and actual HEAD support/code pins', () => {
   const reader = memoryReader(), code = reader.add('scripts/operator.mjs', Buffer.from('code'));
   const support = ['scripts/local-workspace.mjs', 'scripts/worker-identity.mjs'].map(p => reader.add(p, Buffer.from('support')));
-  const template = {operating_profile: 'source-native-v2', output_reserve: 1000, executed_code: [code], operating_runtime: {supervisor: code, support_code: support}};
+  const template = {operating_profile: 'source-native-v2', output_reserve: 131072, executed_code: [code], operating_runtime: {supervisor: code, support_code: support}};
   reader.git = () => Buffer.from(commit); reader.pin = (c, p) => [code, ...support].find(x => x.path === p);
   const requested_resources = {processing_allowance: {phaseBytes: 600000000, rssBytes: 700000000}, operating_limits:
     {rss_bytes: 800000000, wall_seconds: 1400, output_bytes: 2000000, retained_bytes: 3000000, log_bytes: 100000, monitor_bytes: 100000, receipt_bytes: 10000}};
@@ -235,10 +238,13 @@ test('new request issuance requires explicit finite v2 profiles and actual HEAD 
   assert.throws(() => requestProfile({...template, operating_profile: undefined}, {}, {}, reader), /v2/);
   assert.throws(() => requestProfile(template, {}, {}, reader), /Explicit/);
   for (const mutate of [x => x.operating_limits.rss_bytes = Infinity, x => x.operating_limits.wall_seconds = 0,
-    x => x.processing_allowance.phaseBytes = 900000000, x => x.operating_limits.output_bytes = 1,
+    x => x.processing_allowance.phaseBytes = 900000000, x => x.processing_allowance.phaseBytes = 131071, x => x.operating_limits.output_bytes = 1,
     x => x.operating_limits.retained_bytes = 1, x => x.operating_limits.log_bytes = 900000000,
     x => x.operating_limits.monitor_bytes = 900000000, x => x.operating_limits.receipt_bytes = 900000000]) {
     const bad = structuredClone(requested_resources); mutate(bad); assert.throws(() => requestProfile(template, {}, {requested_resources: bad}, reader));
+  }
+  for (const output_reserve of [1000, Number.MAX_SAFE_INTEGER]) {
+    assert.throws(() => requestProfile({...template, output_reserve}, {}, {requested_resources}, reader), /finite bounds/);
   }
   const drift = structuredClone(template); drift.operating_runtime.support_code[0].sha256 = '0'.repeat(64);
   assert.throws(() => requestProfile(drift, {}, {requested_resources}, reader), /actual HEAD/);

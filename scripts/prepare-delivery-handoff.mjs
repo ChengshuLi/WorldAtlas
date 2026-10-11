@@ -120,7 +120,8 @@ export function requestProfile(template, group, config, reader) {
     && [...Object.values(allowance), ...Object.values(limits)].every(v => Number.isSafeInteger(v) && v > 0)
     && Number.isSafeInteger(limits.wall_seconds * 1000), 'Explicit positive finite requested reader/operating configuration required');
   need(allowance.phaseBytes <= limits.rss_bytes && allowance.rssBytes <= limits.rss_bytes
-    && Number.isSafeInteger(template.output_reserve) && template.output_reserve > 0
+    && Number.isSafeInteger(template.output_reserve) && template.output_reserve >= 131072
+    && template.output_reserve <= allowance.phaseBytes && Number.isSafeInteger(template.output_reserve + 131072)
     && limits.output_bytes >= template.output_reserve + 131072
     && Number.isSafeInteger(limits.output_bytes + limits.receipt_bytes)
     && limits.output_bytes + limits.receipt_bytes <= limits.retained_bytes
