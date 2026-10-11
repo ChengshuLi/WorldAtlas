@@ -63,18 +63,21 @@ function fixture(){
 
 import * as native from '../scripts/check-effective-geographic-regression.mjs';
 import * as helper from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
-import {validatePersistedColdSide,reopenCompleteColdPlan} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs';
+import {validatePersistedColdSide,reopenCompleteColdPlan,acquireContinuousSources,acquireContinuousSource,mayUseNonAdditiveShortcut} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs';
 const P='coordination/engineering/selected-geography-effective-prevention-20261009/';
 function sourceSides(f){
  const rect=(a,b)=>({type:'Polygon',coordinates:[[[a,0],[b,0],[b,1],[a,1],[a,0]]]});
- const install=(first,second,releaseId)=>{
+ const install=(first,second,releaseId,{split=false}={})=>{
   const rows=['old-owner','other-owner'].map((id,i)=>({type:'Feature',id,properties:{id,parent_id:'parent'},geometry:i?second:first}));
   const selected=f.select([[[0,1,1]],[[2,3,2]],[],[]],{transport:true,releaseId}),selection=JSON.parse(fs.readFileSync(path.join(f.repo,'data/ownership-selection.json')));
-  const body=Buffer.from(JSON.stringify({type:'FeatureCollection',features:rows}));f.write('source/current.json.gz',gzipSync(body));
+  const groups=split?rows.map(row=>[row]):[rows];
+  const sources=groups.map((features,i)=>({path:split?`source/current-${i}.json.gz`:'source/current.json.gz',logical_path:split?`data/geography/fixture-${i}.json`:'data/geography/fixture.json',body:Buffer.from(JSON.stringify({type:'FeatureCollection',features}))}));
+  f.write('data/world-index.json',{parts:sources.map(p=>p.logical_path.slice(5))});
+  for(const source of sources)f.write(source.path,gzipSync(source.body));
   const digest=sha(Buffer.from(JSON.stringify(rows.map(r=>[r.id,r.geometry]).sort((a,b)=>a[0].localeCompare(b[0])))));
   const release=f.write('data/geographic-releases/selected.json.gz',gzipSync(Buffer.from(JSON.stringify({releases:[{id:releaseId,footprints_sha256:digest}]}))));f.write('data/geographic-releases/current-manifest.json',{path:'selected.json.gz',sha256:sha(release)});const original=f.commit();
   const pin=name=>{const raw=execFileSync('git',['-C',f.repo,'show',original+':'+name]),[mode,,git_blob_oid]=f.git('ls-tree',original,'--',name).split(/[ \t]/);return {commit:original,path:name,mode,git_blob_oid,bytes:raw.length,sha256:sha(raw)};};
-  const bank={version:1,kind:'complete-world-index-with-exact-encoded-overrides',release_id:releaseId,native_manifest_sha256:selection.sha256,footprints_sha256:digest,locations:2,world_index:pin('data/world-index.json'),unchanged_files:[],overrides:[{...pin('source/current.json.gz'),logical_path:'data/geography/fixture.json',encoding:'gzip',decoded_bytes:body.length,decoded_sha256:sha(body)}]};const raw=f.write('source/bank.json',bank);
+  const bank={version:1,kind:'complete-world-index-with-exact-encoded-overrides',release_id:releaseId,native_manifest_sha256:selection.sha256,footprints_sha256:digest,locations:2,world_index:pin('data/world-index.json'),unchanged_files:[],overrides:sources.map(source=>({...pin(source.path),logical_path:source.logical_path,encoding:'gzip',decoded_bytes:source.body.length,decoded_sha256:sha(source.body)}))};const raw=f.write('source/bank.json',bank);
   f.write('data/ownership-selection.json',{...selection,selected_geography:{version:1,kind:bank.kind,path:'source/bank.json',bytes:raw.length,sha256:sha(raw)}});return f.commit();
  };
  return {rect,install};
@@ -122,7 +125,7 @@ test('reopened complete carry and runtime admission refuse before any cold body 
 
 test('actual continuous entry emits full source inverses with independently ended acquisition stages',()=>{
  const f=fixture();try{const {rect,install}=sourceSides(f),before=install(rect(0,1),rect(2,3),'before'),after=install(rect(0,2.5),rect(2,3),'after');f.git('checkout',before);const env={...process.env};delete env.NODE_OPTIONS;delete env.NODE_PATH;
-  const out=path.join(f.repo,'actual-continuous'),r=spawnSync(process.execPath,[path.join(f.repo,P+'selected-continuous-entry.mjs'),'continuous',f.repo,before,before,after,out],{env,encoding:'utf8'});assert.equal(r.status,0,r.stderr);const ack=JSON.parse(r.stdout),facts=JSON.parse(fs.readFileSync(path.join(out,'facts.json'))),body=JSON.parse(gunzipSync(fs.readFileSync(path.join(out,'operands.json.gz'))));
+  const out=path.join(f.repo,'actual-continuous'),r=spawnSync(process.execPath,[path.join(f.repo,P+'selected-continuous-entry.mjs'),'continuous',f.repo,before,before,after,out],{env,encoding:'utf8'});assert.equal(r.status,0,r.stderr);assert.match(r.stderr,/required-source-count/);assert.match(r.stderr,/coordinate-source/);assert.match(r.stderr,/required-side-selection/);const ack=JSON.parse(r.stdout),facts=JSON.parse(fs.readFileSync(path.join(out,'facts.json'))),body=JSON.parse(gunzipSync(fs.readFileSync(path.join(out,'operands.json.gz'))));
   assert.deepEqual(ack.affected_ids,['old-owner','other-owner']);assert.equal(facts.lifecycle.filter(p=>p.kind==='complete-snapshot-bound-cold-validation').length,2);assert.equal(facts.lifecycle.filter(p=>p.kind==='complete-required-containing-source').length,2);assert.equal(facts.inverse.length,4);assert.ok(facts.lifecycle.every(p=>p.complete_phase_bytes<=268435456));assert.deepEqual(Object.keys(body.baseline).sort(),ack.affected_ids);assert.deepEqual(Object.keys(body.candidate).sort(),ack.affected_ids);
   for(const side of ['baseline','candidate'])assert.equal(fs.existsSync(path.join(out,side,'certificate.json.gz')),true);
  }finally{f.cleanup();}
@@ -167,5 +170,53 @@ test('genuine acknowledged cold facts refuse coherent source SHA rebinding',()=>
   const {rect,install}=sourceSides(f),before=install(rect(0,1),rect(2,3),'before'),after=install(rect(0,1.2),rect(2,3),'after'),state=issueStages(f,before,after),startup=native.selectedBootstrap(f.repo,before,after),snapshot=native.loadSelection(startup.beforeReader),resolver=snapshot.geometrySources??new native.SelectedGeometrySources(snapshot),original=product(state.stagePaths[0],state.ack[0]);
   const changed=structuredClone(original);changed.certificate.inputs[0].whole_body_sha256='0'.repeat(64);changed.facts.inputs[0].sha256='0'.repeat(64);
   assert.throws(()=>helper.acceptColdCoordinateCertificate(resolver,changed.certificate,{...changed,expectedPublication:state.ack[0].publication}),/Cold facts differ from genuine acknowledged publication/);
+ }finally{f.cleanup();}
+});
+
+
+test('same-vintage multi-source custody loads once and preserves exact independent source projections',()=>{
+ const f=fixture();try{
+  const {rect,install}=sourceSides(f),before=install(rect(0,1),rect(2,3),'before',{split:true}),after=install(rect(0,2.5),rect(2,3),'after',{split:true}),state=issueStages(f,before,after);
+  const receipts=[validate(f,state,before,0)];receipts.push(validate(f,state,after,1,receipts));
+  const closure=reopenCompleteColdPlan(native,helper,{repo:f.repo,baseline:before,candidate:after,...state,receipts,carriedBytes:2*valueBytes({context:state.context,ack:state.ack,receipts}).length});
+  const loads=[],readers=[],counted={...native,loadSelection(reader){loads.push(reader.version);readers.push(reader);return native.loadSelection(reader);}};
+  for(const [side,selected,i]of [['baseline',before,0],['candidate',after,1]]){
+   const options={repo:f.repo,selected,names:closure.plan.source_paths[side],receipt:receipts[i],rows:closure.rows[side],inputs:closure.inputs[side],context:state.context,carriedBytes:2*valueBytes({closure,receipts}).length};
+   assert.equal(options.names.length,2);
+   const grouped=acquireContinuousSources(counted,helper,options);
+   const independent=options.names.map(name=>acquireContinuousSource(native,helper,{...options,name}));
+   assert.deepEqual(grouped.map(p=>p.features),independent.map(p=>p.features));assert.deepEqual(grouped.map(p=>p.inverse),independent.map(p=>p.inverse));
+   assert(grouped[1].complete_phase_bytes>independent[1].complete_phase_bytes,'prior projections and growing inventory were not charged');
+   assert(grouped[1].inputs.length>=independent[1].inputs.length);assert(grouped.every(p=>p.complete_phase_bytes<=268435456));
+   assert.throws(()=>acquireContinuousSources(native,helper,{...options,names:[...options.names,'foreign.json']}),/Foreign required/);
+   const wrong=structuredClone(options.inputs);wrong.find(p=>p.path===options.names[1]).whole_body_sha256='0'.repeat(64);
+   assert.throws(()=>acquireContinuousSources(native,helper,{...options,inputs:wrong}),/Complete affected containing input/);
+   assert.throws(()=>acquireContinuousSources(native,helper,{...options,selected:side==='baseline'?after:before}),/Reacquired selected source/);
+   let reads=0;const original=native.SelectedGeometrySources.prototype.read;
+   native.SelectedGeometrySources.prototype.read=function(...args){const result=original.apply(this,args);if(++reads===1)this.reader.version='f'.repeat(40);return result;};
+   try{assert.throws(()=>acquireContinuousSources(native,helper,options),/selected side removed or rebound/);}finally{native.SelectedGeometrySources.prototype.read=original;}
+   let opens=0;const blocked={...native,loadSelection(){opens++;throw Error('must not open');}};
+   assert.throws(()=>acquireContinuousSources(blocked,helper,{...options,carriedBytes:268435456}),/Installed runtime\/metadata/);assert.equal(opens,0);
+  }
+  assert.deepEqual(loads,[before,after]);assert.notEqual(readers[0],readers[1]);
+ }finally{f.cleanup();}
+});
+
+test('immutable additive selector only disables the shortcut and malformed hooks still fail the real child',()=>{
+ const f=fixture();try{
+  const {rect,install}=sourceSides(f),before=install(rect(0,1),rect(2,3),'before');
+  const selected=JSON.parse(fs.readFileSync(path.join(f.repo,'data/ownership-selection.json')));
+  f.write('data/ownership-selection.json',{...selected,additive_release:null});const after=f.commit();
+  const reader=version=>new native.ImmutableReader(f.repo,version);
+  assert.equal(mayUseNonAdditiveShortcut(reader(before),reader(before)),true);
+  assert.equal(mayUseNonAdditiveShortcut(reader(before),reader(after)),false);
+  assert.equal(mayUseNonAdditiveShortcut(reader(after),reader(before)),false);
+  // A mutable working-tree selector cannot override immutable versions.
+  f.write('data/ownership-selection.json',{...selected,additive_release:{forged:true}});
+  assert.equal(mayUseNonAdditiveShortcut(reader(before),reader(before)),true);
+  f.git('checkout','--','data/ownership-selection.json');f.git('checkout',before);
+  const r=spawnSync(process.execPath,[path.join(f.repo,P+'selected-continuous-entry.mjs'),'continuous',f.repo,before,before,after,path.join(f.repo,'malformed-additive')],{encoding:'utf8'});
+  assert.notEqual(r.status,0);assert.match(r.stderr,/Unsupported committed additive hook/);assert.equal(r.stdout,'');
+  assert.doesNotMatch(r.stderr,/shortcut-baseline-selection/);assert.match(r.stderr,/coordinate-selection/);
  }finally{f.cleanup();}
 });
