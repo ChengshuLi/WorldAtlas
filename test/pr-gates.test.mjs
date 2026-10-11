@@ -10,6 +10,8 @@ import {checkPREvidence} from '../scripts/check-pr-evidence.mjs';
 import {checkLinkedIssue} from '../scripts/check-linked-github-issue.mjs';
 import {selectIntegrationProfile} from '../scripts/check-integration-profile.mjs';
 import {deploymentBudgetProfile} from '../scripts/classify-deployment-budget.mjs';
+import {reviewContractBinding} from '../scripts/premerge-evidence.mjs';
+import {inspectMerge, prepareIntegration, completeIntegration} from '../scripts/merge-integration.mjs';
 
 function fixture(lane = 'engineering') {
   const repo = 'owner/repo', root = `/repos/${repo}`, branch = lane + '/bounded-job';
@@ -265,7 +267,7 @@ test('workflow starts real evidence independently, preserves test parallelism an
     assert.match(block, job === 'package' ? /needs: \[profile, regression\]/ : /needs: profile/);
     assert.doesNotMatch(block, /needs: evidence/);
   }
-  assert.match(source, /\(github.event.action == 'edited' \|\| github.event.action == 'ready_for_review'\) && 'metadata' \|\| 'code'/);
+  assert.match(source, /github.event.action == 'edited' && 'metadata' \|\| 'code'/);
 });
 
 test('parallel evidence phase binds its own actual job start and deadline', async () => {
@@ -313,7 +315,7 @@ test('real split gates reduce paid metadata repeats against independent old read
 
 // Evaluate the actual workflow predicates for every declared PR event rather
 // than asserting only that a desired substring exists in the configuration.
-test('metadata-only draft readiness preserves code work and cannot replace its tests', () => {
+test('draft readiness starts no duplicate run while code and edited events keep their actual gates', () => {
   const source = fs.readFileSync('.github/workflows/merge-integration-checks.yml', 'utf8');
   const events = source.match(/types: \[([^\]]+)\]/)[1].split(',').map(x=>x.trim());
   const groupLine = source.split('\n').find(line=>line.trim().startsWith('group:'));
@@ -322,19 +324,47 @@ test('metadata-only draft readiness preserves code work and cannot replace its t
     `return (${predicate.replaceAll('github.event.action','action').replaceAll('needs.profile.outputs.test_selection','selection')});`)(action, selection, () => true, () => cancelled);
   const groups = Object.fromEntries(events.map(action=>[action,evaluate(expression,action)]));
   assert.equal(groups.opened, 'code');assert.equal(groups.synchronize, 'code');assert.equal(groups.reopened, 'code');
-  assert.equal(groups.edited, 'metadata');assert.equal(groups.ready_for_review, 'metadata');
-  assert.notEqual(groups.opened,groups.ready_for_review,'readiness must not cancel an unfinished opening run');
+  assert.equal(groups.edited, 'metadata');
+  assert.deepEqual(events, ['opened','synchronize','reopened','edited']);
+  assert.equal(groups.ready_for_review, undefined, 'draft readiness changes no tested bytes or authority binding');
+  assert.notEqual(groups.opened,groups.edited,'body edits must not cancel an unfinished code run');
   for (const name of ['geography','regression','package']) {
     const start=source.indexOf(`  ${name}:`), tail=source.slice(start), next=tail.slice(3).search(/\n  [a-z]+:/);
     const block=next<0?tail:tail.slice(0,next+3), predicate=block.match(/^    if: (.+)$/m)[1];
     const active=predicate.replace("needs.profile.result == 'success' && ",'');
-    for(const action of events)assert.equal(evaluate(active,action),!['edited','ready_for_review'].includes(action),`${name}/${action}`);
+    for(const action of events)assert.equal(evaluate(active,action),action !== 'edited',`${name}/${action}`);
     if(name==='package')for(const action of events)assert.equal(evaluate(active,action,'complete',true),false,'cancelled package never launches');
   }
   for(const name of ['profile','evidence','scope']) {
     const start=source.indexOf(`  ${name}:`),tail=source.slice(start),next=tail.slice(3).search(/\n  [a-z]+:/);
     const block=next<0?tail:tail.slice(0,next+3);assert.doesNotMatch(block,/^    if: /m,`${name} must refresh authority`);
   }
+});
+
+test('draft readiness preserves byte authority while both merge phases require current non-draft state', async () => {
+  const f = fixture(); f.pr.draft = true;
+  const binding = reviewContractBinding(f.issue, f.pr), draft = await f.run();
+  f.pr.draft = false;
+  assert.deepEqual(reviewContractBinding(f.issue, f.pr), binding);
+  const ready = await f.run();
+  assert.equal(ready.profile, draft.profile); assert.deepEqual(ready.shards, draft.shards);
+  assert.notDeepEqual(reviewContractBinding(f.issue, {...f.pr, body: f.pr.body + '\nChanged disposition'}), binding);
+  const original = f.api, options = {repo: f.repo, number: f.pr.number, expectedHead: f.pr.head.sha,
+    policy: {version: 1, mode: 'enforce-new', activation_time: '2100-01-01T00:00:00Z'},
+    evidenceCheck: async () => ({status: 'legacy'}),
+    api: async (route, method = 'GET') => {
+      assert.equal(method, 'GET', 'readiness must never substitute for a merge write gate');
+      if (route === f.root + '/git/ref/heads/main') return {object: {sha: f.pr.base.sha}};
+      if (route.startsWith(f.root + '/commits/') && route.includes('/check-runs'))
+        return {check_runs: [{id: 1, name: 'scope', app: {id: 1}, status: 'completed', conclusion: 'success'}]};
+      if (route.startsWith(f.root + '/commits/') && route.endsWith('/status')) return {statuses: []};
+      return original(route);
+    }};
+  assert.equal((await inspectMerge(options)).pr.draft, false);
+  f.pr.draft = true;
+  await assert.rejects(prepareIntegration(options), /non-draft/);
+  await assert.rejects(completeIntegration({...options, integrationResult: 'success', geographyResult: 'success',
+    testedBase: f.pr.base.sha}), /non-draft/);
 });
 
 // Exercise the actual hosted entry and HTTP wrapper, including startup admission.

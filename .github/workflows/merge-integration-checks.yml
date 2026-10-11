@@ -2,14 +2,14 @@ name: Integration queue regression
 on:
   pull_request:
     branches: [main]
-    types: [opened, synchronize, reopened, ready_for_review, edited]
+    types: [opened, synchronize, reopened, edited]
 permissions:
   contents: read
   pull-requests: read
 # Only superseded read-only heads are canceled; mutation workflows stay separate.
 concurrency:
-  # Body edits and draft readiness refresh authority without canceling code work.
-  group: worldatlas-regression-pr-${{ github.event.pull_request.number }}-${{ (github.event.action == 'edited' || github.event.action == 'ready_for_review') && 'metadata' || 'code' }}
+  # Body edits refresh authority without canceling code work.
+  group: worldatlas-regression-pr-${{ github.event.pull_request.number }}-${{ github.event.action == 'edited' && 'metadata' || 'code' }}
   cancel-in-progress: true
 # The intended normal package target is Cloudflare; the separate Site gate is retained.
 
@@ -218,7 +218,7 @@ jobs:
         run: node --test test/handoff-scope.test.mjs test/issue-claims.test.mjs test/worker-result.test.mjs test/regional-research-gate.test.mjs test/geography-worker-lane.test.mjs test/evidence-quality.test.mjs test/historical-evidence.test.mjs test/premerge-evidence.test.mjs test/trusted-workflow-checkouts.test.mjs
   geography:
     needs: profile
-    if: github.event.action != 'edited' && github.event.action != 'ready_for_review'
+    if: github.event.action != 'edited'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     permissions:
@@ -299,7 +299,7 @@ jobs:
           retention-days: 30
   regression:
     needs: profile
-    if: github.event.action != 'edited' && github.event.action != 'ready_for_review' && needs.profile.outputs.test_selection != 'selected-data'
+    if: github.event.action != 'edited' && needs.profile.outputs.test_selection != 'selected-data'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     strategy:
@@ -436,7 +436,7 @@ jobs:
     needs: [profile, regression]
     # Selected-data intentionally skips regression; full reuse requires its success below.
     # Cancellation and metadata-only events never start a fallback build.
-    if: always() && !cancelled() && needs.profile.result == 'success' && github.event.action != 'edited' && github.event.action != 'ready_for_review'
+    if: always() && !cancelled() && needs.profile.result == 'success' && github.event.action != 'edited'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
