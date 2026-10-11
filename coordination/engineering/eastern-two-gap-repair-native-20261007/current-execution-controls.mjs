@@ -10,6 +10,8 @@ import {restoreWholeImage} from './whole-image.mjs';
 import {verifyAuthoredValidatorSources} from './chained-context.mjs';
 import {materializePackageInputs,runPackageBuild} from '../../../scripts/package-build.mjs';
 import {issueCurrentExecution,authenticateCurrentExecution,requireCurrentExecution} from './current-execution.mjs';
+// Minimal synthetic repositories exercise package execution custody, not installed runtime readiness.
+const fixturePreflight=async()=>({passed:true,errors:[],synthetic_package_boundary_fixture:true});
 async function fixture(t, {program, promoted = false} = {}) {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'atlas-package-boundary-'));
   t.after(() => fs.rm(root, {recursive: true, force: true}));
@@ -55,13 +57,13 @@ async function currentPositive(t){
   const record=authenticateCurrentExecution(JSON.parse(raw),{root:cwd,executingRoot:root,sourceRoot:root});requireCurrentExecution(record);
   await fs.mkdir(path.join(cwd,'dist'));await fs.writeFile(path.join(cwd,'dist/value'),'actual current execution');
  };
- const first=await runPackageBuild('static',{root,execute});
+ const first=await runPackageBuild('static',{root,preflight:fixturePreflight,execute});
  await fs.writeFile(path.join(root,'scripts/evidence-quality.mjs'),'export const currentLibrary=2;\n');const head=commit();
- const second=await runPackageBuild('static',{root,execute});
+ const second=await runPackageBuild('static',{root,preflight:fixturePreflight,execute});
  assert.notEqual(first.current_context_execution.source_commit,head);assert.equal(second.current_context_execution.source_commit,head);
  assert.notEqual(first.current_context_execution.files.find(p=>p.path==='scripts/evidence-quality.mjs').sha256,second.current_context_execution.files.find(p=>p.path==='scripts/evidence-quality.mjs').sha256);
  assert((await fs.readFile(path.join(root,'data/native-context-migration/manifest.json'))).equals(historical));
- await assert.rejects(runPackageBuild('static',{root,execute:async(entry,{cwd})=>{await fs.appendFile(path.join(cwd,'scripts/evidence-quality.mjs'),'// midrun mutation');}}),/strictly equal|Expected values|SHA|length/i);
+ await assert.rejects(runPackageBuild('static',{root,preflight:fixturePreflight,execute:async(entry,{cwd})=>{await fs.appendFile(path.join(cwd,'scripts/evidence-quality.mjs'),'// midrun mutation');}}),/strictly equal|Expected values|SHA|length/i);
 }
 
 async function realInnerControls(t){
@@ -73,8 +75,8 @@ async function realInnerControls(t){
 const record=readPackageCurrentExecution(process.cwd());requireCurrentExecution(record);fs.mkdirSync('dist');fs.writeFileSync('dist/sentinel','authenticated actual child');
 `;
   await fs.writeFile(path.join(root,'scripts/build-static-inner.mjs'),program);commit();
-  if(name==='positive'){const result=await runPackageBuild('static',{root});assert(result.current_context_execution);assert.equal(await fs.readFile(path.join(root,'dist/sentinel'),'utf8'),'authenticated actual child');}
-  else{await assert.rejects(runPackageBuild('static',{root}),/Package static build failed/);await assert.rejects(fs.stat(path.join(root,'dist/sentinel')),/ENOENT/);}
+  if(name==='positive'){const result=await runPackageBuild('static',{root,preflight:fixturePreflight});assert(result.current_context_execution);assert.equal(await fs.readFile(path.join(root,'dist/sentinel'),'utf8'),'authenticated actual child');}
+  else{await assert.rejects(runPackageBuild('static',{root,preflight:fixturePreflight}),/Package static build failed/);await assert.rejects(fs.stat(path.join(root,'dist/sentinel')),/ENOENT/);}
  }
  return {actual_spawn_without_execute_injection:true,actual_environment_boundary_cases:cases.map(([name])=>name)};
 }
