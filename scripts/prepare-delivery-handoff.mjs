@@ -525,13 +525,21 @@ export function finalizeDelivery(config, reader) {
   need(same(Object.keys(sidecar).sort(), ['authority_registry', 'base_selection', 'kind', 'logical_asset_map', 'runtime_envelope', 'version'])
     && assets && same(Object.keys(assets).sort(), ['base_manifest', 'ledger', 'owner_roster', 'patch'])
     && same(sidecar.authority_registry, config.registry) && same(assets.ledger, config.selected_ledger), 'Final sidecar authority/selected-ledger pins differ');
+  const originalSelector = reader.read(config.selector);
+  need(assets.base_manifest.sha256 === JSON.parse(originalSelector).sha256, 'Final base manifest differs from unchanged selector');
+  const baseManifest = reader.json(assets.base_manifest);
+  need(assets.owner_roster.sha256 === baseManifest.original_assets?.bounds?.sha256, 'Final owner roster differs from original native bounds');
   const selected = reader.json(config.selected_ledger), patch = reader.json(assets.patch), envelope = reader.json(sidecar.runtime_envelope);
   need(same(selected.current_rebind, config.rebind) && patch.ledger_sha256 === config.selected_ledger.sha256
     && patch.authority_registry_sha256 === config.registry.sha256 && same(patch.base_reference, envelope.base_reference)
     && same(patch.effective_reference, envelope.effective_reference), 'Final release metadata joins differ');
-  for (const [role, pin] of Object.entries(assets)) need(envelope[role]?.bytes === pin.bytes && envelope[role]?.sha256 === pin.sha256,
-    'Final envelope asset descriptor differs: ' + role);
-  const selector = finalizedSelection(reader.read(config.selector), sidecar, config.sidecar);
+  for (const [role, pin] of Object.entries(assets)) {
+    const declared = envelope[role];
+    need(declared?.bytes === pin.bytes && declared?.sha256 === pin.sha256
+      && (declared.decoded_bytes ?? declared.bytes) === (pin.decoded_bytes ?? pin.bytes)
+      && (declared.decoded_sha256 ?? declared.sha256) === (pin.decoded_sha256 ?? pin.sha256), 'Final envelope asset descriptor differs: ' + role);
+  }
+  const selector = finalizedSelection(originalSelector, sidecar, config.sidecar);
   const outputs = packageProjection({...config, outer_roles: [assets.patch, sidecar.runtime_envelope, config.sidecar]}, reader);
   const projection = JSON.parse(outputs['package-roles.json']);
   const paths = projection.paths.map(p => p.path);

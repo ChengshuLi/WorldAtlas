@@ -109,7 +109,10 @@ No proposed input is called accepted merely because a hash matches.
    and `rebind`. Choose the last known-good original selector; this phase preserves
    its base fields and nested insertion order rather than repairing an already
    reordered original. Sidecar registry/ledger, ledger rebind, patch and envelope
-   descriptors must agree. The four final release roles are derived, not supplied
+   descriptors must agree. Base-manifest and owner-roster hashes stay joined to the
+   unchanged selector and its original native bounds. Encoded/decoded envelope
+   descriptors must match; existing consumers still authenticate private graphs
+   and scientific validity. The four final release roles are derived, not supplied
    through `outer_roles`. It stages `ownership-selection.json`,
    `package-inputs.json`, the fixed-role inventory and bound smoke expectations.
    It only replaces `additive_release` in the selector, preserving an already-final
