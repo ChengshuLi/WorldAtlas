@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "issue": 1739,
+  "lane": "engineering",
+  "worker_id": "01a12bad-d575-7076-afc9-9d5bada37005",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "59d0229e391461bea7ff392043f505d8a1bb2aed",
+    "files": [
+      {
+        "path": "scripts/additive-gap-repair.mjs",
+        "bytes": 184937,
+        "sha256": "c5cd30d32b15a461a186074a1704a64f8895e33199c34d982af0e97bf0615895",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "original-hash-join-controls",
+      "kind": "code",
+      "description": "Repair two exact byte-preimage join boundaries without changing original coordinate values or hashes. Synthetic adverse controls cover scope, source body, ordinal, complete value equality, hash-domain pairing and existing aggregate admission; bounded retained-original replay exercises NOR and COD source operands. No new geographic measurement or native execution is claimed.",
+      "software": "Node.js 24.19.0; Python 3.12; Git",
+      "units": "exact identities and executable assertions"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/additive-gap-repair.test.mjs test/administrative-original-hashes.test.mjs test/additive-native-consumers.test.mjs",
+    "GIT_NO_LAZY_FETCH=1 python coordination/engineering/source-hash-serialization-20261011/reproduce-original-hashes.py"
+  ],
+  "metric_bindings": []
+}
