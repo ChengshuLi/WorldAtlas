@@ -1,0 +1,22 @@
+{
+  "lifetime_rss_bytes": 288915456,
+  "command": [
+    "/workspace/scratch/127991fc8b8e/cloud-tools/gnu-time/time-1.9-0.2-amd64/usr/bin/time",
+    "-v",
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "--expose-gc",
+    "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/83137e0f74d1fc03530f69087601db4b17e76f4e7514ac20a788b5356706fef6/work/.cache/selected-reader-budget/read-selected.mjs"
+  ],
+  "exit_code": 0,
+  "guard_reason": null,
+  "sampled_owned_group_peak_bytes": 271695872,
+  "elapsed_seconds": 33.424986008001724,
+  "owned_processes_remaining": [],
+  "rss_limit_bytes": 1073741824,
+  "wall_limit_seconds": 600,
+  "malloc_environment": {
+    "MALLOC_ARENA_MAX": "2",
+    "MALLOC_TRIM_THRESHOLD_": "131072"
+  },
+  "probe_sha256": "0a65716ff2672cebdd32f8ad3f492ac75019d399c0dd52c857529c439b7235e1"
+}

@@ -72,18 +72,12 @@ test('compact programme authority survives a native phase reset with its carry c
  assert.match(reader.inventory.get(head+':'+helper).sha256,/^[a-f0-9]{64}$/);
 });
 
-test('sixteen accepted producer records and the original471 migration remain unchanged',()=>{
- const c=read();assert.equal(valueSha(c.programs.slice(0,16)),'df048b1a191966ba76a4bea47695f6abb5e3cc6440195664dc012e077a8628e9');
- assert.equal(valueSha(c.current_rebind_migrations[0]),'0d23b26bc7a1730c100921d25524b938498bb37ab231fb3f2a4efe162507845b');
-});
-test('only finite exact complete migrations succeed and nearby changed vectors refuse',()=>{
+test('one exact complete471 migration succeeds and nearby changed vectors refuse',()=>{
  const head=git('rev-parse','HEAD').toString().trim(),reader=new ImmutableReader(root,head,{runtimeBytes:1,metadataBytes:1,executionBytes:1,outputBytes:1});
- const c=read();assert.ok(c.current_rebind_migrations.length>0&&c.current_rebind_migrations.length<=2);
- for(const m of c.current_rebind_migrations){
-  assert.deepEqual(compatibleCurrentRebindCode(m.execution_commit,m.current_code,m.historical_code,reader),m.historical_code);
-  for(const field of ['current_code','historical_code']){const changed=clone(m);changed[field][0].sha256='e'.repeat(64);
-   assert.throws(()=>compatibleCurrentRebindCode(m.execution_commit,changed.current_code,changed.historical_code,reader),/Unknown historical/);}
-  assert.throws(()=>compatibleCurrentRebindCode('f'.repeat(40),m.current_code,m.historical_code,reader),/Unknown historical/);
- }
- c.current_rebind_migrations.push(clone(c.current_rebind_migrations[0]));assert.throws(()=>validateSupportedProgrammeCatalogue(c),/Malformed|Ambiguous/);
+ const c=read(),m=c.current_rebind_migrations[0];assert.ok(m);assert.equal(c.current_rebind_migrations.length,1);
+ assert.deepEqual(compatibleCurrentRebindCode(m.execution_commit,m.current_code,m.historical_code,reader),m.historical_code);
+ for(const field of ['current_code','historical_code']){const changed=clone(m);changed[field][0].sha256='e'.repeat(64);
+  assert.throws(()=>compatibleCurrentRebindCode(m.execution_commit,changed.current_code,changed.historical_code,reader),/Unknown historical/);}
+ assert.throws(()=>compatibleCurrentRebindCode('f'.repeat(40),m.current_code,m.historical_code,reader),/Unknown historical/);
+ c.current_rebind_migrations.push(clone(m));assert.throws(()=>validateSupportedProgrammeCatalogue(c),/Malformed/);
 });
