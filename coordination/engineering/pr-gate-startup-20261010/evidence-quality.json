@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "issue": 1706,
+  "lane": "engineering",
+  "worker_id": "01a12806-e666-7781-b612-e4af40560004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "180042b1ef55c69a0b2f7b33a9860951d1b5ea82",
+    "files": [
+      {
+        "path": "scripts/job-deadline.mjs",
+        "bytes": 4661,
+        "sha256": "f6257e37a3139ceea7c886de48c446c94541112261d9f0b1b3622f584865ee32",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "bounded-startup-metadata",
+      "kind": "code",
+      "description": "Actual hosted PR-gate entry and real HTTP-wrapper controls demonstrate bounded same-job pending-metadata recovery and precise refusal diagnostics without changing startup budget, run/attempt identity, source/scientific gates or scheduler retry behavior.",
+      "software": "Node.js 24.19.0",
+      "units": "Not applicable: control-flow and identity verification"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test --test-concurrency=1 test/pr-gates.test.mjs test/job-deadline.test.mjs"
+  ],
+  "limits": [
+    "The historical combined guard error did not record its failed field. Eventual metadata visibility is suspected, not an established root cause.",
+    "Synthetic HTTP/clock controls establish bounded admission behavior; no actual hosted recovered metadata observation or elapsed-time saving is claimed. Successful hosted gates alone do not prove that a reread occurred."
+  ]
+}

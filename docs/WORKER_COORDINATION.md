@@ -359,6 +359,24 @@ and Bearer values. This later same-token probe describes its own response, not a
 inferred original response. The trusted-base selector still owns the actual
 profile/coverage decision; a successful probe cannot substitute for validation.
 
+### Bounded PR startup metadata observations
+
+PR evidence/profile admission may observe the same exact run/attempt job inventory
+up to three times, with at most 250 ms and 750 ms between successful responses.
+The existing 41-second startup allowance includes immutable workflow lookup,
+every read and wait; it is never restarted or extended. A full 20-second HTTP
+attempt must fit before either sleep or another read. HTTP errors, quota refusal,
+permission failures and uncertain transport are not retried by this path.
+
+Missing/null metadata and known pending states may settle to a fully valid row.
+The first unique job ID and valid nonempty start are pinned. Wrong run/attempt,
+duplicate jobs, ID/start drift, terminal state or malformed nonempty start refuse.
+No evidence transport or inspection starts before all original identity and timing
+checks pass. Allowlisted binding fields and read/wait counts explain both failed
+and recovered observations; they do not assert a provider cause or saved time.
+Scheduler callers retain their single metadata read. A simulated recovery proves
+the control path, not that a particular hosted failure was eventual consistency.
+
 ### Observed capacity before final validation
 
 The final job observes `/rate_limit` with its existing authenticated token before
