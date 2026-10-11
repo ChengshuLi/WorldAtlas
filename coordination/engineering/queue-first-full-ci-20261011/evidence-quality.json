@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "issue": 1746,
+  "lane": "engineering",
+  "worker_id": "01a12c31-79bf-741f-b094-7fa0aa575029",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "6149104603dec4cc4967a10cba9bfb1e90a119b7",
+    "files": [
+      {
+        "path": "package.json",
+        "bytes": 1417,
+        "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-geographic-check.py",
+        "bytes": 84237,
+        "sha256": "f634daac63203d781dd4c8fa6791d27c115d9e776c722474c20b03a77e9e4448",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/check-effective-geographic-regression.mjs",
+        "bytes": 75074,
+        "sha256": "801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+        "bytes": 139553,
+        "sha256": "63745cc5d4f15bdd8c153787df07379d813ab037fc1e0734944a75568235e8aa",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+        "bytes": 24194,
+        "sha256": "84ddc84798fa371e37c0acbd6764a39ef79296f3b8a57ff09aa4ed416e7ae1b9",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "unchanged-selected-input-applicability",
+      "kind": "code",
+      "description": "Trusted typed routing-metadata identity closure before full geography prefetch/native/continuous checks, with audited reader versions and conservative fallback. No scientific authority was newly qualified.",
+      "software": "Node 24.19.0; Python 3.12.14; Git 2.52.0",
+      "units": "immutable Git identities; elapsed milliseconds"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "Source-only unchanged-geography applicability only. Unknown or changed dependency closures retain full checks; no new geographic, source, publication or consumer qualification.",
+      "status": "unresolved",
+      "source_ids": []
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/trusted-geography-check.test.mjs test/unchanged-selected-geography.test.mjs"
+  ]
+}

@@ -134,8 +134,12 @@ class TrustedCheckControls(unittest.TestCase):
         checkout = self.f.repo / 'isolated-fetch-control'
         subprocess.run(['git', 'clone', '--quiet', '--depth=1', '--filter=blob:none', '--no-checkout',
                         '--branch', 'trusted', self.f.repo.as_uri(), str(checkout)], check=True, capture_output=True)
+        # This one partial-clone control uses only its owned local fixture remote.
+        # Real repository operations keep the caller's no-lazy-fetch policy.
+        fixture_env = {**os.environ, 'GIT_NO_LAZY_FETCH': '0'}
         def git(*args, env=None):
-            return subprocess.run(['git', '-C', str(checkout), *args], capture_output=True, text=True, env=env)
+            return subprocess.run(['git', '-C', str(checkout), *args], capture_output=True, text=True, env=fixture_env if env is None else env)
+        self.assertEqual(git('remote', 'get-url', 'origin').stdout.strip(), self.f.repo.as_uri())
         self.assertEqual(git('sparse-checkout', 'init', '--cone').returncode, 0)
         self.assertEqual(git('sparse-checkout', 'set', 'scripts', 'src', '.github',
                              'coordination/engineering/selected-geography-effective-prevention-20261009').returncode, 0)
@@ -154,7 +158,7 @@ class TrustedCheckControls(unittest.TestCase):
         result = subprocess.run([PYTHON, '-I', '-B', str(checkout / 'scripts/run-geographic-check.py'),
                                  '--repo', str(checkout), '--baseline', self.f.baseline,
                                  '--candidate', candidate, '--fetch', '--out', str(output)],
-                                capture_output=True, text=True, env={**os.environ, 'GH_TOKEN': token})
+                                capture_output=True, text=True, env={**fixture_env, 'GH_TOKEN': token})
         self.assertEqual(result.returncode, 1, result.stderr)
         self.assertTrue(output.is_file(), result.stderr)
         report = json.loads(output.read_bytes())
@@ -839,6 +843,71 @@ class OutputBudgetMigrationControls(unittest.TestCase):
         self.assertEqual({a['path'] for a, b in zip(old, new) if a != b}, {
             'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
             *['coordination/engineering/additive-native-composition-20261009/' + p for p in ['capture-current-rebind.mjs', 'run-current-rebind.mjs', 'supervise-current-rebind.py']]})
+
+
+class UnchangedSelectedApplicabilityControls(unittest.TestCase):
+    def setUp(self):
+        import importlib.util
+        from unittest import mock
+        self.mock = mock
+        spec = importlib.util.spec_from_file_location('unchanged_applicability_control', DRAFT)
+        self.g = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(self.g)
+        self.baseline, self.candidate = 'a' * 40, 'b' * 40
+        self.proof = {'version': 1, 'status': 'unchanged-selected-inputs',
+                      'baseline_commit': self.baseline, 'candidate_commit': self.candidate,
+                      'trusted_reader_policy_commit': self.baseline, 'candidate_code_executed': False}
+
+    def test_same_commit_never_shortcuts_genuine_baseline_proof(self):
+        with self.mock.patch.object(self.g.subprocess, 'run') as child:
+            self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.baseline))
+            child.assert_not_called()
+
+    def test_helper_accepts_only_bound_success_and_falls_back_on_unknown(self):
+        values = [self.proof, {**self.proof, 'status': 'full-check-required'},
+                  {**self.proof, 'baseline_commit': self.candidate},
+                  {**self.proof, 'candidate_commit': self.baseline},
+                  {**self.proof, 'candidate_code_executed': True},
+                  {**self.proof, 'trusted_reader_policy_commit': self.candidate}, [], 'malformed']
+        for value in values:
+            raw = json.dumps(value).encode()
+            with self.subTest(value=value), self.mock.patch.object(self.g.subprocess, 'run',
+                    return_value=subprocess.CompletedProcess([], 0, raw, b'')):
+                result = self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate)
+                self.assertEqual(result, self.proof if value == self.proof else None)
+
+    def test_helper_failures_and_bounds_preserve_full_validation(self):
+        for output in [subprocess.CompletedProcess([], 1, json.dumps(self.proof).encode(), b''),
+                       subprocess.CompletedProcess([], 0, b'x' * (2 * 1024 * 1024 + 1), b''),
+                       subprocess.CompletedProcess([], 0, b'{', b'')]:
+            with self.mock.patch.object(self.g.subprocess, 'run', return_value=output):
+                self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate))
+        for error in [OSError('missing'), subprocess.TimeoutExpired('node', 60)]:
+            with self.mock.patch.object(self.g.subprocess, 'run', side_effect=error):
+                self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate))
+
+    def test_positive_identity_precedes_prefetch_and_scientific_checks(self):
+        g = self.g
+        with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='fixture'), \
+             self.mock.patch.object(g, 'inventory', return_value=['same']), \
+             self.mock.patch.object(g, 'unchanged_selected_inputs', return_value=self.proof), \
+             self.mock.patch.object(g, 'prefetch_declared_inputs', side_effect=AssertionError('prefetch ran')), \
+             self.mock.patch.object(g, 'output_budget_transition', side_effect=AssertionError('transition ran')), \
+             self.mock.patch.object(g.subprocess, 'check_output', side_effect=AssertionError('science ran')):
+            result = g.inspect(ROOT, self.baseline, self.candidate, prefetch=True)
+        self.assertEqual(result['status'], 'not-applicable')
+        self.assertIs(result['unchanged_selected_inputs'], self.proof)
+        self.assertNotIn('selected_native_report', result)
+        self.assertNotIn('selected_continuous_report', result)
+
+    def test_changed_raw_inputs_never_consult_selected_shortcut(self):
+        g = self.g
+        with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='fixture'), \
+             self.mock.patch.object(g, 'inventory', side_effect=[['before'], ['after']]), \
+             self.mock.patch.object(g, 'unchanged_selected_inputs', side_effect=AssertionError('shortcut consulted')), \
+             self.mock.patch.object(g, 'prefetch_declared_inputs', side_effect=RuntimeError('full-check-reached')):
+            with self.assertRaisesRegex(RuntimeError, 'full-check-reached'):
+                g.inspect(ROOT, self.baseline, self.candidate, prefetch=True)
 
 
 if __name__ == '__main__':
