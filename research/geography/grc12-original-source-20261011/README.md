@@ -22,8 +22,9 @@ Neither the observation count nor that inherited area is accepted repair progres
 - One actual strict source/current run retains all twelve outcomes. Three pass
   every strict predicate and full-gain/zero-loss dissolve diagnostics. Two have
   positive same-target overlap; seven other candidates fail a dissolve diagnostic.
-  The existing literal additive representation is evaluated independently of these
-  retained GEOS diagnostics; none is silently removed or changed.
+  The separately reviewed policy in `policy/literal-union-source-policy-v1.json`
+  permits same-intended-owner overlap for literal OR membership while retaining
+  every GEOS diagnostic. Foreign-owner overlap remains forbidden.
 - The actual unchanged `retainedAdministrativeSourcePremises` function passes ten
   candidates and fails two. The ten SOURCE-compatible cases total
   683306.5518599388 m² of inherited detector area. This is a pure source-premise
@@ -93,7 +94,7 @@ The executed stages are independently reusable; the original input pins live in
    Python canonical preimages plus unchanged pure SOURCE predicates over all twelve.
 7. `python tools/build_handoff.py HEAD FRESH_VINTAGE`, then
    `node tools/check_handoff.mjs`: final v2 subset assembly and actual registered
-   consumer/premise controls, once the representation interpretation is settled.
+   consumer/premise controls, under the separately reviewed literal-operation policy.
 
 Commands above abbreviate paths relative to this packet for readability; actual
 scripts must be invoked at their repository-relative paths. The final argument
@@ -114,3 +115,14 @@ object descriptors are distinguished from whole-body reads in its receipt.
 
 No core geography, method15 implementation, native operator, selected integration,
 provider, publication or live import is changed here.
+
+The policy body is exactly 3786 bytes, SHA-256
+`21c143adcc3883046c9e93339201b945bad22210df41d481d0a727ab8ac6e967`.
+It is retained here as a reviewed interpretation, not as a claim that an unmerged
+parallel source branch is accepted ancestry. Incremental continuous area remains
+unknown. The inherited detector total must not be presented as newly added area.
+
+Shared interpretation review: https://github.com/ChengshuLi/WorldAtlas/issues/1732#issuecomment-6110654265.
+The final proposed v2 handoff has ten cases. Actual registered v2 and SOURCE
+controls passed all 21 checks. Its acceptance still requires this packet's independent
+exact-head source and geometry review; native and selected delivery remain separate.
