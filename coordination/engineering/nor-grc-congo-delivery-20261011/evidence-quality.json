@@ -1,0 +1,1393 @@
+{
+  "version": 1,
+  "issue": 1647,
+  "lane": "engineering",
+  "worker_id": "01a12b77-f87a-73cf-973c-f36acd06f016",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "version": 2,
+    "commit": "49a8405d5329d1db6cb9c1c2241572750d936169",
+    "files": [
+      {
+        "path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/native-payloads-110-001/native-payloads-110.json",
+        "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+        "bytes": 349724,
+        "sha256": "1f7bec65878449856747f82801a816685727f83ddb1144350583344b032b9831",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/batch-outcomes-363-002/batch-outcomes-363-v2.json",
+        "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+        "bytes": 1050202,
+        "sha256": "e19ac2c7b9bb408845558facdd0b4457af73015ff93691f75d27d54c2ce05f21",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/source-comparison-capture-001/batch-source-comparisons.json",
+        "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+        "bytes": 1703412,
+        "sha256": "ac8cdc651035ccc2cb1ca643f9baebac08b1112420cfb95859b3f6f926573029",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/ncl-targeted-source-match-029-001/ncl-source-matches-029.json",
+        "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+        "bytes": 73731,
+        "sha256": "cd8adf21f59c2f8a8ed6c07f616862b778bde3bb47bf9e5b24fd19e68f62f659",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/source-remainders-084-001/source-remainders-084.json",
+        "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+        "bytes": 109916,
+        "sha256": "9372e82622369f29e4374d92d12c50944dce60f4468b7842ace4f41cf3f4873d",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/congo-ago2018-delivery-20261011/evidence-quality.json",
+        "bytes": 193880,
+        "sha256": "8b111e4c36119f6615e11e03b9d8a88e4c1a56172073d1dc3a1f793682fe5a76",
+        "hash_kind": "file-bytes",
+        "role": "prior-accepted-evidence",
+        "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382"
+      },
+      {
+        "path": "data/ownership-selection.json",
+        "bytes": 1592,
+        "sha256": "2dc41f354893cb40a76a58d767450060cc5aac1bbb65c0379486f347e703aa33",
+        "hash_kind": "file-bytes",
+        "role": "historical-selected-input",
+        "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382"
+      },
+      {
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json",
+        "bytes": 14656,
+        "sha256": "3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776",
+        "hash_kind": "file-bytes",
+        "role": "historical-selected-input",
+        "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382"
+      },
+      {
+        "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/selection-sidecar.json",
+        "bytes": 3461,
+        "sha256": "d2fb04e2a07016bf797218c0ddb1fc2e96acc0d2cff48a560a8757d765f7a5fb",
+        "hash_kind": "file-bytes",
+        "role": "historical-selected-input",
+        "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382"
+      },
+      {
+        "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authority-registry.json",
+        "bytes": 29339,
+        "sha256": "3b0f66add74b8b231cca5374739e42fcd398de57d5ca60d846921667b6e642a5",
+        "hash_kind": "file-bytes",
+        "role": "historical-selected-input",
+        "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382"
+      },
+      {
+        "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/envelope.json",
+        "bytes": 1422,
+        "sha256": "6480398bd284301373756d8d55f88d34b560b69d0fbccd1ea158e6955cdf503f",
+        "hash_kind": "file-bytes",
+        "role": "historical-selected-input",
+        "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382"
+      },
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/base-native-manifest.json",
+        "bytes": 252447,
+        "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+        "hash_kind": "file-bytes",
+        "role": "historical-selected-input",
+        "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382"
+      },
+      {
+        "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/ledger.json",
+        "bytes": 531308,
+        "sha256": "efffb06b7d531928ac0c748a1a79258dad9c3051b934201ed922a8dd7729480f",
+        "hash_kind": "file-bytes",
+        "role": "historical-selected-input",
+        "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382"
+      },
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+        "bytes": 2663523,
+        "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+        "hash_kind": "file-bytes",
+        "role": "historical-selected-input",
+        "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382"
+      },
+      {
+        "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/patch.json",
+        "bytes": 10766,
+        "sha256": "0654d4653bce65e24d0f7c0ac279e6165d5cc075dcca2f5a0c2b78993cbbffb0",
+        "hash_kind": "file-bytes",
+        "role": "historical-selected-input",
+        "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382"
+      },
+      {
+        "path": "research/geography/grc12-original-source-20261011/vintages/source-handoff-002/source-handoff.json",
+        "bytes": 729755,
+        "sha256": "d28022788eb4112f2d16f54db5ada4af00db718c3e48c8494800c8e4ce27e372",
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "commit": "49a8405d5329d1db6cb9c1c2241572750d936169"
+      }
+    ],
+    "pins": {
+      "payloads_path_sha256": "1f7bec65878449856747f82801a816685727f83ddb1144350583344b032b9831",
+      "outcomes_path_sha256": "e19ac2c7b9bb408845558facdd0b4457af73015ff93691f75d27d54c2ce05f21",
+      "simplified_comparison_path_sha256": "ac8cdc651035ccc2cb1ca643f9baebac08b1112420cfb95859b3f6f926573029",
+      "generalized_comparison_path_sha256": "cd8adf21f59c2f8a8ed6c07f616862b778bde3bb47bf9e5b24fd19e68f62f659",
+      "remainders_path_sha256": "9372e82622369f29e4374d92d12c50944dce60f4468b7842ace4f41cf3f4873d"
+    },
+    "pin_files": {
+      "payloads_path_sha256": {
+        "path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/native-payloads-110-001/native-payloads-110.json",
+        "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382"
+      },
+      "outcomes_path_sha256": {
+        "path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/batch-outcomes-363-002/batch-outcomes-363-v2.json",
+        "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382"
+      },
+      "simplified_comparison_path_sha256": {
+        "path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/source-comparison-capture-001/batch-source-comparisons.json",
+        "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382"
+      },
+      "generalized_comparison_path_sha256": {
+        "path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/ncl-targeted-source-match-029-001/ncl-source-matches-029.json",
+        "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382"
+      },
+      "remainders_path_sha256": {
+        "path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/source-remainders-084-001/source-remainders-084.json",
+        "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382"
+      }
+    },
+    "subject_files": {}
+  },
+  "sources": [
+    {
+      "id": "prior-selected-delivery",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/commit/6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "role": "Previously accepted selected geography and direct current authority/ledger inputs",
+      "vintage": "Historical selected baseline6a99a760",
+      "retrieved_at": "2026-10-11",
+      "license": {
+        "status": "unknown",
+        "terms": "Original edition-specific limitations retained; no new rights assertion"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Use pinned prior accepted manifest and direct selected inputs; unchanged transitive authority stays with its original domain readers.",
+      "limit": "Prior acceptance does not itself qualify this wave or prove complete original batches.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "grc2010-original-ten-20261011",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/commit/49a8405d5329d1db6cb9c1c2241572750d936169",
+      "role": "Merged independently accepted cohort handoff, complete original physical/source custody and preserved held outcomes",
+      "vintage": "Retained original source edition; exact accepted handoff",
+      "retrieved_at": "2026-10-11",
+      "license": {
+        "status": "unknown",
+        "terms": "Original edition-specific limitations in accepted handoff remain; no new rights assertion"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Use exact accepted source registration and original consumed-input/physical-product descriptors in the pinned handoff.",
+      "limit": "Source compatibility is source-relative; incremental continuous area is unknown and original batch completion is not asserted.",
+      "temporal_status": "unknown"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authorities/GRC-001/authority-binding.json",
+      "bytes": 7941,
+      "sha256": "d7829ef7f9ea583f06e50b5c8845bc65fd67639e610492fa7b5d78eeab8bf917",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authorities/GRC-001/original-rule-preimage.json",
+      "bytes": 9578,
+      "sha256": "1855806240e0dfcb8b4cb82fd78ae85a3afaa02255abc9ae57ee7db62413bc98",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authorities/GRC-002/authority-binding.json",
+      "bytes": 7942,
+      "sha256": "8835cc1d012bdcff0a1c24f66bf25634f1f70729767ac37951ead6b315d5024f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authorities/GRC-002/original-rule-preimage.json",
+      "bytes": 10982,
+      "sha256": "ef2938743cf63b89e2a564383297f1b43301f08ea9c615b0f7c7dedd686d7ddb",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authorities/GRC-003/authority-binding.json",
+      "bytes": 7942,
+      "sha256": "6825dc150a6f3bf6f35128530263f5740819151ccb54fec790207b848e63f3f4",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authorities/GRC-003/original-rule-preimage.json",
+      "bytes": 10982,
+      "sha256": "e2bc9941eddc980cd15822f287f063662c4d48e768a1ba0d9559b62a5741c651",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-001-native-operating-001.json",
+      "bytes": 16078,
+      "sha256": "12764ec05396286a6f38c2b9b2d7f6b75e402f9b589554a1da962590064403e9",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-001-native-request-001.json",
+      "bytes": 21719,
+      "sha256": "51e8d8c29ab021c7e8b113e11bc07394cf0a468586e71a47ca165ed79f5a5414",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-001-source-operating-001.json",
+      "bytes": 16084,
+      "sha256": "0d28c3a3b0b8dc8810a25edb698e3eca461cf0f942b2776195312fc9edffc6e8",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-001-source-request-001.json",
+      "bytes": 14660,
+      "sha256": "a0170ed667b28a4f0b493d11e769658adfdbd26c567f77dccfe5eb34104f9fee",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-002-native-operating-001.json",
+      "bytes": 16077,
+      "sha256": "baf3c8d3014e4eb205e2576c4d44545609d9277089e91b64146cda38cbc3111c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-002-native-request-001.json",
+      "bytes": 23071,
+      "sha256": "180c59e9c560fa228854b8873aa546bb9e34843365b1126b13e60b4bd984afae",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-002-source-operating-001.json",
+      "bytes": 16082,
+      "sha256": "cbd2ea47156da40289b8607b308bc2fb966100ed8a6fbc2c07ace7820768eb1c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-002-source-request-001.json",
+      "bytes": 16354,
+      "sha256": "41e4a98154e3f46b5598f48fe61ada24106dda7ef932f454a15cad95cbd31e88",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-003-native-operating-001.json",
+      "bytes": 16078,
+      "sha256": "0dc13cafadf4638e560e5d84434169955865231f80ed913a8122b1bc0ce5337c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-003-native-request-001.json",
+      "bytes": 26506,
+      "sha256": "5a18c90e069c86f277cd017a07e7c0be88c123fae740b1c6455e693fb9237358",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-003-source-operating-001.json",
+      "bytes": 16083,
+      "sha256": "f00479abfda2be38a0df33cd82751684004c39a9489c22f4d48a762e5246bfec",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-003-source-request-001.json",
+      "bytes": 16354,
+      "sha256": "f2179a193e5519d23505eb4eba860728b7b6704c89f34fdd40f1452925c3a5ac",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-source-native-results-001.json",
+      "bytes": 11071,
+      "sha256": "b69a92f7f2a317aa6400275a404cc288c62b1190d24d036511229ae5f0806d66",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/input-preparation.json",
+      "bytes": 15013,
+      "sha256": "92463127539a40a47301aafd41745bcea7b5a46cccc633c7953264ba98944e5b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/native-operands/runs-24117248.bin.gz",
+      "bytes": 787631,
+      "sha256": "a3589b07cb0110a44c25b85a05a19241f8204bea31fed5a606b3d97081d42477",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/native-operands/runs-25165824.bin.gz",
+      "bytes": 805339,
+      "sha256": "7521a4cb7f302cfb428abe1c3dee86e122bb6b0dd0b8fa2ac668ad454a4d19e2",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/native-operands/runs-26214400.bin.gz",
+      "bytes": 836068,
+      "sha256": "1983cec0c80b56bd7a9caff3edb4ae23661d650ff06bc3cf25b23aa462eaa3df",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/facts.json",
+      "bytes": 713070,
+      "sha256": "e9e139fe6500695a9f3a7f1c65ff7c9925f0f2cd635fbd124e31a829a6268c00",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/features.json",
+      "bytes": 7100,
+      "sha256": "097c94570ed8b576060503d731411b92686312d3be77741ac6edd3941cf96076",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/inventory.jsonl.gz",
+      "bytes": 372,
+      "sha256": "04d887d9c6dc3372973f05c452dd3011a3cca7c1b3ac564c55144bed5436f193",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/ledger-batch.json",
+      "bytes": 3233,
+      "sha256": "f30a0bbc65349be04b04193882ee39d77c8963bf46d227b044975464640e1cdf",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/owner-window.json",
+      "bytes": 164834,
+      "sha256": "8f0cb2d1b376c9fab68e95f08522ffa829f97b7154bc7eb9fa952ae7338e328d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/patch-batch.json",
+      "bytes": 1320,
+      "sha256": "a5ffa9874faedec2a7677b303417f424a7d97f28d2bb877da58ee60d7fc474b1",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/publication.json",
+      "bytes": 1448,
+      "sha256": "67d805301a7e08ca6674a7e06229ae926d6e9be8dfd491ab1fb0b078b032d0b8",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/release-envelope.json",
+      "bytes": 1663,
+      "sha256": "dcccb5b5600d5d925b93e6f59796e96593f8523ab8bda36247b5f12a25cf48a7",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/virtual-owner-window.json",
+      "bytes": 115857,
+      "sha256": "5330f0a183d00e0d3f7cd6ab9a3e7240a8528413a3e1ec3827466fbb57c7d01a",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native-operating/receipt.json",
+      "bytes": 16078,
+      "sha256": "12764ec05396286a6f38c2b9b2d7f6b75e402f9b589554a1da962590064403e9",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native-operating/samples.json",
+      "bytes": 122238,
+      "sha256": "9dcfa457be1e6613bbc908138dca070501aac3360e085afbf0a9c9259e3ef5e7",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native-operating/stderr.log",
+      "bytes": 1204,
+      "sha256": "2a2963445bc818a8bbcf7cabf11eef8063036d85cbed418a5bef7fbf6a259c54",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native-operating/stdout.log",
+      "bytes": 1448,
+      "sha256": "e0972b12d8e8b01ea3eb4dbcc482d818fcb67610f38ca6ff6fa71d6040511514",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/source/facts.json",
+      "bytes": 705836,
+      "sha256": "61a6d5c35f88ee89993d9e3d14cb7cad758798f4255a27b3094bfed0f82a9372",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/source/inventory.jsonl.gz",
+      "bytes": 1584,
+      "sha256": "452a7134803fd7c584903629cd90cc3aa05420d4f2a212a1844bd340aec599ba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/source/publication.json",
+      "bytes": 349,
+      "sha256": "2152b6cba00e97d103eb440bfea2d24275b79c49d06dc3a2064f507bf962828e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/source-operating/receipt.json",
+      "bytes": 16084,
+      "sha256": "0d28c3a3b0b8dc8810a25edb698e3eca461cf0f942b2776195312fc9edffc6e8",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/source-operating/samples.json",
+      "bytes": 133478,
+      "sha256": "794eca9ce0419fe08835fbd7819547f986b147aa2b9891bffc1dcd03c937ce83",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/source-operating/stderr.log",
+      "bytes": 1204,
+      "sha256": "cd054e09fc55fd969bdefb82101f0dcc0677a2e370503121d1e6f460cd9df385",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/source-operating/stdout.log",
+      "bytes": 349,
+      "sha256": "28e5e2fc2592af67dc9b8f476cb881e9ba7a6558b831fbd61e7d0846af0d10a1",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/facts.json",
+      "bytes": 714986,
+      "sha256": "787e23eba86fa07f8a9aa77302137dc98f0b91441864b71e631afabbf879f48f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/features.json",
+      "bytes": 16333,
+      "sha256": "9d3668b58727cb766d97a519ac4af53f0bd679c2ada31478ced4ce4ddd9b01b4",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/inventory.jsonl.gz",
+      "bytes": 478,
+      "sha256": "4ab641bd3de0e6398add15c9e93bff6f1bc98895e00a9d44f82483e4fbf0dfc8",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/ledger-batch.json",
+      "bytes": 7944,
+      "sha256": "1d1d96ded08da34e75168312ee1cbfa86d89aa9ccc42da5f2702c12718c19114",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/owner-window.json",
+      "bytes": 149390,
+      "sha256": "f77d6e6a4245cc8ea49e5c28bc8ae74f75564cff11699f5eade5b198fc5329d9",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/patch-batch.json",
+      "bytes": 1100,
+      "sha256": "51e5bc6a85485d55dc43da2d4fcb527a258d1c7fcebd2d3a9391197c07c3d8f9",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/publication.json",
+      "bytes": 1449,
+      "sha256": "258984a7304a06c0007eb19b8288e50a6022fc367a1438e7a41f7aeefb0af7db",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/release-envelope.json",
+      "bytes": 1663,
+      "sha256": "6866ad3f029f8f7c58a90c8d4e2b3e913b1c74d3daf8ba4ccaf7d2d32797dd6f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/virtual-owner-window.json",
+      "bytes": 61696,
+      "sha256": "a6e245c26cf44bedc83a025e4fd7783dda318ed553f5308cf3eb983019794152",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native-operating/receipt.json",
+      "bytes": 16077,
+      "sha256": "baf3c8d3014e4eb205e2576c4d44545609d9277089e91b64146cda38cbc3111c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native-operating/samples.json",
+      "bytes": 123882,
+      "sha256": "6ed7519158526b088b1d865ded3da8b22e2b1ea30dd462eb597b06dc4143e099",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native-operating/stderr.log",
+      "bytes": 1204,
+      "sha256": "2c7b8a1169b208e418a8f76014cc7ec24b3eee2411c1f20354739531eb211e83",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native-operating/stdout.log",
+      "bytes": 1449,
+      "sha256": "65dccb741b23d6b7f7e4f3335125ef1c96a06699bfd4b38c4b8f8d4bc954c8a9",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/source/facts.json",
+      "bytes": 708026,
+      "sha256": "a002e0aa63b833279174a98504a33c63a231358676cfa5355b6ce5a273628fcd",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/source/inventory.jsonl.gz",
+      "bytes": 2268,
+      "sha256": "abde9a9649fcceae7a664f8a66ebe334df2e92c6b82af95dae0748131cee0c3a",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/source/publication.json",
+      "bytes": 349,
+      "sha256": "61bac79e61c352f081850bc32bf7eda558b6ae249960d250b452ed0f53939096",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/source-operating/receipt.json",
+      "bytes": 16082,
+      "sha256": "cbd2ea47156da40289b8607b308bc2fb966100ed8a6fbc2c07ace7820768eb1c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/source-operating/samples.json",
+      "bytes": 130469,
+      "sha256": "df23f68dab037f4d656b6c2e37a3c6f8711e199fe7950a1fe365eb82febbc807",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/source-operating/stderr.log",
+      "bytes": 1204,
+      "sha256": "aceedb6613b515295f995294171ae059d646962cb008c3a60c622d8912b8fdf9",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/source-operating/stdout.log",
+      "bytes": 349,
+      "sha256": "e5ab365480bf4f477205baac1503100dbbefc50f878cb5ac91b7b197ec8752c7",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/facts.json",
+      "bytes": 717960,
+      "sha256": "7cb0e26ea6dfea8087c6e5c9292d87334644e2d041417674ea08ec185fca492c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/features.json",
+      "bytes": 15626,
+      "sha256": "9ebd7b7acf0c220e3ea263fe829f3f2e8cbb5a3457f4eb7802c085e54dc24976",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/inventory.jsonl.gz",
+      "bytes": 510,
+      "sha256": "583c12cb34456b80e33661f82fef39eda791a65f392b10ad883ef836ff5aba72",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/ledger-batch.json",
+      "bytes": 7197,
+      "sha256": "aecdfdf6d3163c394e698461efc4d0c6d2fe7eedb3ab5d87fe43feba578a6991",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/owner-window.json",
+      "bytes": 158060,
+      "sha256": "5af95b6bd90f8024f7b689115c4139220eff4118a013745fa488268a03f48b58",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/patch-batch.json",
+      "bytes": 1010,
+      "sha256": "577844c97acceb6ad3b6e61b4e80687cb86346e14e94ecc9e57779a4ee2ecbd4",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/publication.json",
+      "bytes": 1449,
+      "sha256": "2f61eb72f5280179c2ca9e75d3b7987b295967d0284d866588cd794be44cb496",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/release-envelope.json",
+      "bytes": 1663,
+      "sha256": "db74ae0461662277cc37787c88a248d909ec4e6729694ece0359f4cfa954e993",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/virtual-owner-window.json",
+      "bytes": 44773,
+      "sha256": "7e640213c0b65ab3e6080e9d77c116e3c415285def28f78d60c81e707fc80e98",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native-operating/receipt.json",
+      "bytes": 16078,
+      "sha256": "0dc13cafadf4638e560e5d84434169955865231f80ed913a8122b1bc0ce5337c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native-operating/samples.json",
+      "bytes": 120301,
+      "sha256": "04c4998f3d908212bbf4cab9a7f79b8ec291987d0a78147b4b8060a658b75b55",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native-operating/stderr.log",
+      "bytes": 1204,
+      "sha256": "6169cc4bd48e48233d3eda88ef8591b70a5f7f9321d73270d6a214e2e281d34f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native-operating/stdout.log",
+      "bytes": 1449,
+      "sha256": "7486aa803721a9a18d4d37ba469444859cc9b8cb677871130d61aac241ccb6d3",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/source/facts.json",
+      "bytes": 708026,
+      "sha256": "51310fcb3e78fce1de6e6faf17150e3bbd9dce6877dd5f18aebaf156559a5696",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/source/inventory.jsonl.gz",
+      "bytes": 2264,
+      "sha256": "1622eb7bef1be532b7293ea160d889f47d42ba601d5f071fae8c026c43a707b2",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/source/publication.json",
+      "bytes": 349,
+      "sha256": "ab01a7eee37928cb7bffcc5fd12446067737acaff6ef3b664d0bf9bf08e83703",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/source-operating/receipt.json",
+      "bytes": 16083,
+      "sha256": "f00479abfda2be38a0df33cd82751684004c39a9489c22f4d48a762e5246bfec",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/source-operating/samples.json",
+      "bytes": 135376,
+      "sha256": "37065b611f390c0718e929d57f9f42196871dea8e943fc4eb716fe7b913291e6",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/source-operating/stderr.log",
+      "bytes": 1204,
+      "sha256": "d4f687eb3256cecf615afc053ecc721b3bb4d3cdd00751e5e8c7baa7569a3cdb",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/source-operating/stdout.log",
+      "bytes": 349,
+      "sha256": "f9a358a8663cbac1807ef9a3084315f8e850439dc1a4cf00338cbb9260ef7a13",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json",
+      "bytes": 5611,
+      "sha256": "97d18d7a1d4a1fa88fd0069b8d2071afc25bb114f3818604dfe1b23858e19615",
+      "hash_kind": "file-bytes",
+      "role": "append-only-administrative-registration"
+    }
+  ],
+  "methods": [
+    {
+      "id": "accepted-cohort-source-native",
+      "kind": "code",
+      "description": "Unchanged accepted SOURCE/NATIVE method and stock byte/RAM guards; exact whole inputs, actual code/runtime vectors and complete Linux receipts. Literal old primitives retained; same-owner occupancy yields no new cells and foreign-owner conflicts remain forbidden.",
+      "software": "Pinned Node24.19.0, GNU time and full executing vectors in each issued request",
+      "units": "Whole bytes, original component IDs and native cells"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "grc-001-source-components",
+      "value": 2,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "a0170ed667b28a4f0b493d11e769658adfdbd26c567f77dccfe5eb34104f9fee",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-001-source-request-001.json"
+      },
+      "evaluation_commit": "1af6adfec2b6ea2f6ab2c58211ca09ac68b086a9"
+    },
+    {
+      "id": "grc-001-source-source_compatible",
+      "value": 2,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "a0170ed667b28a4f0b493d11e769658adfdbd26c567f77dccfe5eb34104f9fee",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-001-source-request-001.json"
+      },
+      "evaluation_commit": "1af6adfec2b6ea2f6ab2c58211ca09ac68b086a9"
+    },
+    {
+      "id": "grc-001-native-components",
+      "value": 2,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "51e8d8c29ab021c7e8b113e11bc07394cf0a468586e71a47ca165ed79f5a5414",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-001-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-001-native-assigned_cells",
+      "value": 32,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "51e8d8c29ab021c7e8b113e11bc07394cf0a468586e71a47ca165ed79f5a5414",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-001-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-001-native-assigned_components",
+      "value": 2,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "51e8d8c29ab021c7e8b113e11bc07394cf0a468586e71a47ca165ed79f5a5414",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-001-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-001-native-zero_cell_components",
+      "value": 0,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "51e8d8c29ab021c7e8b113e11bc07394cf0a468586e71a47ca165ed79f5a5414",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-001-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-001-native-native_conflicts",
+      "value": 0,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "51e8d8c29ab021c7e8b113e11bc07394cf0a468586e71a47ca165ed79f5a5414",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-001-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-001-native-source_exceptions",
+      "value": 0,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "51e8d8c29ab021c7e8b113e11bc07394cf0a468586e71a47ca165ed79f5a5414",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-001-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-001-native-removed_cells",
+      "value": 0,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "51e8d8c29ab021c7e8b113e11bc07394cf0a468586e71a47ca165ed79f5a5414",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-001-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-001-native-reassigned_cells",
+      "value": 0,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "51e8d8c29ab021c7e8b113e11bc07394cf0a468586e71a47ca165ed79f5a5414",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-001-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-002-source-components",
+      "value": 4,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "41e4a98154e3f46b5598f48fe61ada24106dda7ef932f454a15cad95cbd31e88",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-002-source-request-001.json"
+      },
+      "evaluation_commit": "1af6adfec2b6ea2f6ab2c58211ca09ac68b086a9"
+    },
+    {
+      "id": "grc-002-source-source_compatible",
+      "value": 4,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "41e4a98154e3f46b5598f48fe61ada24106dda7ef932f454a15cad95cbd31e88",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-002-source-request-001.json"
+      },
+      "evaluation_commit": "1af6adfec2b6ea2f6ab2c58211ca09ac68b086a9"
+    },
+    {
+      "id": "grc-002-native-components",
+      "value": 4,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "180c59e9c560fa228854b8873aa546bb9e34843365b1126b13e60b4bd984afae",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-002-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-002-native-assigned_cells",
+      "value": 10,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "180c59e9c560fa228854b8873aa546bb9e34843365b1126b13e60b4bd984afae",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-002-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-002-native-assigned_components",
+      "value": 4,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "180c59e9c560fa228854b8873aa546bb9e34843365b1126b13e60b4bd984afae",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-002-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-002-native-zero_cell_components",
+      "value": 0,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "180c59e9c560fa228854b8873aa546bb9e34843365b1126b13e60b4bd984afae",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-002-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-002-native-native_conflicts",
+      "value": 0,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "180c59e9c560fa228854b8873aa546bb9e34843365b1126b13e60b4bd984afae",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-002-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-002-native-source_exceptions",
+      "value": 0,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "180c59e9c560fa228854b8873aa546bb9e34843365b1126b13e60b4bd984afae",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-002-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-002-native-removed_cells",
+      "value": 0,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "180c59e9c560fa228854b8873aa546bb9e34843365b1126b13e60b4bd984afae",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-002-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-002-native-reassigned_cells",
+      "value": 0,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "180c59e9c560fa228854b8873aa546bb9e34843365b1126b13e60b4bd984afae",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-002-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-003-source-components",
+      "value": 4,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "f2179a193e5519d23505eb4eba860728b7b6704c89f34fdd40f1452925c3a5ac",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-003-source-request-001.json"
+      },
+      "evaluation_commit": "1af6adfec2b6ea2f6ab2c58211ca09ac68b086a9"
+    },
+    {
+      "id": "grc-003-source-source_compatible",
+      "value": 4,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "f2179a193e5519d23505eb4eba860728b7b6704c89f34fdd40f1452925c3a5ac",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-003-source-request-001.json"
+      },
+      "evaluation_commit": "1af6adfec2b6ea2f6ab2c58211ca09ac68b086a9"
+    },
+    {
+      "id": "grc-003-native-components",
+      "value": 4,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "5a18c90e069c86f277cd017a07e7c0be88c123fae740b1c6455e693fb9237358",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-003-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-003-native-assigned_cells",
+      "value": 14,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "5a18c90e069c86f277cd017a07e7c0be88c123fae740b1c6455e693fb9237358",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-003-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-003-native-assigned_components",
+      "value": 3,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "5a18c90e069c86f277cd017a07e7c0be88c123fae740b1c6455e693fb9237358",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-003-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-003-native-zero_cell_components",
+      "value": 1,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "5a18c90e069c86f277cd017a07e7c0be88c123fae740b1c6455e693fb9237358",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-003-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-003-native-native_conflicts",
+      "value": 0,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "5a18c90e069c86f277cd017a07e7c0be88c123fae740b1c6455e693fb9237358",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-003-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-003-native-source_exceptions",
+      "value": 0,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "5a18c90e069c86f277cd017a07e7c0be88c123fae740b1c6455e693fb9237358",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-003-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-003-native-removed_cells",
+      "value": 0,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "5a18c90e069c86f277cd017a07e7c0be88c123fae740b1c6455e693fb9237358",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-003-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    },
+    {
+      "id": "grc-003-native-reassigned_cells",
+      "value": 0,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "5a18c90e069c86f277cd017a07e7c0be88c123fae740b1c6455e693fb9237358",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-003-native-request-001.json"
+      },
+      "evaluation_commit": "91b27e02d1e7068d1a53474ffa25842352f0670a"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "grc-001-source-components",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/source/facts.json",
+      "json_pointer": "/components"
+    },
+    {
+      "metric_id": "grc-001-source-source_compatible",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/source/facts.json",
+      "json_pointer": "/source_compatible"
+    },
+    {
+      "metric_id": "grc-001-native-components",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/facts.json",
+      "json_pointer": "/components"
+    },
+    {
+      "metric_id": "grc-001-native-assigned_cells",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/facts.json",
+      "json_pointer": "/assigned_cells"
+    },
+    {
+      "metric_id": "grc-001-native-assigned_components",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/facts.json",
+      "json_pointer": "/assigned_components"
+    },
+    {
+      "metric_id": "grc-001-native-zero_cell_components",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/facts.json",
+      "json_pointer": "/zero_cell_components"
+    },
+    {
+      "metric_id": "grc-001-native-native_conflicts",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/facts.json",
+      "json_pointer": "/native_conflicts"
+    },
+    {
+      "metric_id": "grc-001-native-source_exceptions",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/facts.json",
+      "json_pointer": "/source_exceptions"
+    },
+    {
+      "metric_id": "grc-001-native-removed_cells",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/facts.json",
+      "json_pointer": "/removed_cells"
+    },
+    {
+      "metric_id": "grc-001-native-reassigned_cells",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/facts.json",
+      "json_pointer": "/reassigned_cells"
+    },
+    {
+      "metric_id": "grc-002-source-components",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/source/facts.json",
+      "json_pointer": "/components"
+    },
+    {
+      "metric_id": "grc-002-source-source_compatible",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/source/facts.json",
+      "json_pointer": "/source_compatible"
+    },
+    {
+      "metric_id": "grc-002-native-components",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/facts.json",
+      "json_pointer": "/components"
+    },
+    {
+      "metric_id": "grc-002-native-assigned_cells",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/facts.json",
+      "json_pointer": "/assigned_cells"
+    },
+    {
+      "metric_id": "grc-002-native-assigned_components",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/facts.json",
+      "json_pointer": "/assigned_components"
+    },
+    {
+      "metric_id": "grc-002-native-zero_cell_components",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/facts.json",
+      "json_pointer": "/zero_cell_components"
+    },
+    {
+      "metric_id": "grc-002-native-native_conflicts",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/facts.json",
+      "json_pointer": "/native_conflicts"
+    },
+    {
+      "metric_id": "grc-002-native-source_exceptions",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/facts.json",
+      "json_pointer": "/source_exceptions"
+    },
+    {
+      "metric_id": "grc-002-native-removed_cells",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/facts.json",
+      "json_pointer": "/removed_cells"
+    },
+    {
+      "metric_id": "grc-002-native-reassigned_cells",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/facts.json",
+      "json_pointer": "/reassigned_cells"
+    },
+    {
+      "metric_id": "grc-003-source-components",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/source/facts.json",
+      "json_pointer": "/components"
+    },
+    {
+      "metric_id": "grc-003-source-source_compatible",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/source/facts.json",
+      "json_pointer": "/source_compatible"
+    },
+    {
+      "metric_id": "grc-003-native-components",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/facts.json",
+      "json_pointer": "/components"
+    },
+    {
+      "metric_id": "grc-003-native-assigned_cells",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/facts.json",
+      "json_pointer": "/assigned_cells"
+    },
+    {
+      "metric_id": "grc-003-native-assigned_components",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/facts.json",
+      "json_pointer": "/assigned_components"
+    },
+    {
+      "metric_id": "grc-003-native-zero_cell_components",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/facts.json",
+      "json_pointer": "/zero_cell_components"
+    },
+    {
+      "metric_id": "grc-003-native-native_conflicts",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/facts.json",
+      "json_pointer": "/native_conflicts"
+    },
+    {
+      "metric_id": "grc-003-native-source_exceptions",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/facts.json",
+      "json_pointer": "/source_exceptions"
+    },
+    {
+      "metric_id": "grc-003-native-removed_cells",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/facts.json",
+      "json_pointer": "/removed_cells"
+    },
+    {
+      "metric_id": "grc-003-native-reassigned_cells",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/facts.json",
+      "json_pointer": "/reassigned_cells"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "The retained phase facts and complete operating receipts establish only genuine source-compatible and unactivated native outcomes for their exact original IDs.",
+      "status": "supported",
+      "source_ids": [
+        "prior-selected-delivery",
+        "grc2010-original-ten-20261011"
+      ]
+    },
+    {
+      "text": "Final composed authority, current-selected rebind, assembled selected pins, real emitted consumer tests, independent review and serialized merge are pending. No selected delivery or whole original-batch completion is claimed by these producer outputs.",
+      "status": "unresolved",
+      "source_ids": [
+        "prior-selected-delivery",
+        "grc2010-original-ten-20261011"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs coordination/engineering/nor-grc-congo-delivery-20261011/grc-001-source-request-001.json (executed at 1af6adfec2b6ea2f6ab2c58211ca09ac68b086a9)",
+    "node coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs coordination/engineering/nor-grc-congo-delivery-20261011/grc-001-native-request-001.json (executed at 91b27e02d1e7068d1a53474ffa25842352f0670a)",
+    "node coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs coordination/engineering/nor-grc-congo-delivery-20261011/grc-002-source-request-001.json (executed at 1af6adfec2b6ea2f6ab2c58211ca09ac68b086a9)",
+    "node coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs coordination/engineering/nor-grc-congo-delivery-20261011/grc-002-native-request-001.json (executed at 91b27e02d1e7068d1a53474ffa25842352f0670a)",
+    "node coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs coordination/engineering/nor-grc-congo-delivery-20261011/grc-003-source-request-001.json (executed at 1af6adfec2b6ea2f6ab2c58211ca09ac68b086a9)",
+    "node coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs coordination/engineering/nor-grc-congo-delivery-20261011/grc-003-native-request-001.json (executed at 91b27e02d1e7068d1a53474ffa25842352f0670a)"
+  ]
+}
