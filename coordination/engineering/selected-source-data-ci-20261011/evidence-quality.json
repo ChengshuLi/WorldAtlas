@@ -55,8 +55,8 @@
     "geographic_approval": "not-requested"
   },
   "commands": [
-    "node --test test/selected-data-profile.test.mjs",
-    "node --test test/pr-gates.test.mjs"
+    "node --test test/selected-data-profile.test.mjs test/pr-gates.test.mjs",
+    "node --test test/pr-gates.test.mjs test/trusted-workflow-checkouts.test.mjs test/deployment-budget-scope.test.mjs"
   ],
   "metric_bindings": []
 }

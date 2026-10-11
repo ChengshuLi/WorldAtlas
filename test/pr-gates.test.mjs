@@ -267,7 +267,7 @@ test('workflow starts real evidence independently, preserves test parallelism an
     assert.match(block, job === 'package' ? /needs: \[profile, regression\]/ : /needs: profile/);
     assert.doesNotMatch(block, /needs: evidence/);
   }
-  assert.match(source, /github.event.action == 'edited' && 'metadata' \|\| 'code'/);
+  assert.match(source, /\(github.event.action == 'edited' \|\| github.event.action == 'ready_for_review'\) && 'metadata' \|\| 'code'/);
 });
 
 test('parallel evidence phase binds its own actual job start and deadline', async () => {
