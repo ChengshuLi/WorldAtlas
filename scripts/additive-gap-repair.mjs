@@ -1040,26 +1040,32 @@ const RETAINED_ADMINISTRATIVE_HANDOFF=[{"role":"payloads_path","original_head":"
 // not become a new source profile or rewrite the per-case predicate.
 const RETAINED_ADMINISTRATIVE_HANDOFFS=[RETAINED_ADMINISTRATIVE_HANDOFF,RETAINED_ADMINISTRATIVE_327_HANDOFF];
 const ADMINISTRATIVE_REGISTRY_PATH='coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json';
+const EXECUTION_COHORT_FORMAT='source-native-execution-cohort-v2';
 export function registeredAdministrativeHandoff(registry,rule) {
   demand(registry?.version===1&&registry.kind==='accepted-administrative-handoffs-v1'&&Object.keys(registry).sort().join(',')==='entries,kind,version'&&Array.isArray(registry.entries),'Unsupported administrative handoff registry');
   const batches=new Set(),components=new Set(),sources=new Set(),ids=new Set();
   const strings=value=>Array.isArray(value)&&value.length>0&&value.every(id=>typeof id==='string'&&id)&&new Set(value).size===value.length;
   demand(registry.entries.length>0&&registry.entries.length<=512,'Incomplete registry entries');
   for(const entry of registry.entries){
-    demand(Object.keys(entry).sort().join(',')==='accepted_source_commit,cohort_ids,format,id,original_batch_id,original_component_count,source,target_ids'
-      &&entry.format==='source-native-handoff-v1'&&typeof entry.id==='string'&&entry.id
+    const execution=entry.format===EXECUTION_COHORT_FORMAT;
+    const keys=execution?'accepted_source_commit,cohort_ids,format,id,source,target_ids'
+      :'accepted_source_commit,cohort_ids,format,id,original_batch_id,original_component_count,source,target_ids';
+    demand(Object.keys(entry).sort().join(',')===keys
+      &&(execution||entry.format==='source-native-handoff-v1')&&typeof entry.id==='string'&&entry.id
       &&/^[a-f0-9]{40}$/.test(entry.accepted_source_commit??'')
       &&Object.keys(entry.source??{}).sort().join(',')==='blob,bytes,mode,path,sha256'
       &&safe(entry.source.path)&&entry.source.mode==='100644'&&/^[a-f0-9]{40}$/.test(entry.source.blob??'')&&hex(entry.source.sha256)
       &&Number.isSafeInteger(entry.source.bytes)&&entry.source.bytes>0&&entry.source.bytes<=32*1024*1024
-      &&strings(entry.cohort_ids)&&strings(entry.target_ids)&&typeof entry.original_batch_id==='string'&&entry.original_batch_id
-      &&entry.original_component_count===entry.cohort_ids.length,'Incomplete registry entry');
-    demand(!ids.has(entry.id)&&!batches.has(entry.original_batch_id)&&!sources.has(entry.source.path)
+      &&strings(entry.cohort_ids)&&strings(entry.target_ids)
+      &&(execution||typeof entry.original_batch_id==='string'&&entry.original_batch_id
+        &&entry.original_component_count===entry.cohort_ids.length),'Incomplete registry entry');
+    demand(!ids.has(entry.id)&&(execution||!batches.has(entry.original_batch_id))&&!sources.has(entry.source.path)
       &&entry.cohort_ids.every(id=>!components.has(id)),'Incomplete registry: duplicate batch/cohort/source registration');
-    ids.add(entry.id);batches.add(entry.original_batch_id);sources.add(entry.source.path);entry.cohort_ids.forEach(id=>components.add(id));
+    ids.add(entry.id);if(!execution)batches.add(entry.original_batch_id);
+    sources.add(entry.source.path);entry.cohort_ids.forEach(id=>components.add(id));
   }
   const pin=rule.inputs?.find(row=>row.path===rule.cases_path);
-  const matches=registry.entries.filter(entry=>entry.format==='source-native-handoff-v1'
+  const matches=registry.entries.filter(entry=>['source-native-handoff-v1',EXECUTION_COHORT_FORMAT].includes(entry.format)
     &&['path','mode','blob','bytes','sha256'].every(key=>pin?.[key]===entry.source?.[key]));
   demand(matches.length===1,'Unknown/ambiguous registered administrative handoff');
   const entry=matches[0];
@@ -1068,8 +1074,8 @@ export function registeredAdministrativeHandoff(registry,rule) {
     &&Array.isArray(entry.cohort_ids)&&entry.cohort_ids.length>0&&entry.cohort_ids.every(id=>typeof id==='string'&&id)&&new Set(entry.cohort_ids).size===entry.cohort_ids.length
     &&JSON.stringify(entry.cohort_ids)===JSON.stringify(rule.cohort_ids)
     &&Array.isArray(entry.target_ids)&&entry.target_ids.length>0&&entry.target_ids.every(id=>typeof id==='string'&&id)&&new Set(entry.target_ids).size===entry.target_ids.length
-    &&typeof entry.original_batch_id==='string'&&entry.original_batch_id.length>0
-    &&entry.original_component_count===entry.cohort_ids.length
+    &&(entry.format===EXECUTION_COHORT_FORMAT||typeof entry.original_batch_id==='string'&&entry.original_batch_id.length>0
+      &&entry.original_component_count===entry.cohort_ids.length)
     &&(rule.geometry_scope??'full-component')==='full-component','Incomplete registered original batch or unsupported view');
   return entry;
 }
@@ -1098,9 +1104,27 @@ export function readRegisteredAdministrativeHandoff(repo,rule,registry) {
 export function registeredAdministrativeViews(scope,entry) {
   const same=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
   const cases=scope.candidate_source_native_bindings;
+  const execution=entry.format===EXECUTION_COHORT_FORMAT;
+  if(execution){
+    // Source review authenticates this small projection against the immutable
+    // original index. It is accounting, not a request to load unrelated held
+    // geometries or fabricate scientific cases for every historical batch ID.
+    const mapping=scope.original_gap_membership,index=mapping?.index;
+    demand(scope.execution_cohort_id===entry.id
+      &&mapping?.version===1&&Object.keys(mapping).sort().join(',')==='index,members,version'
+      &&Object.keys(index??{}).sort().join(',')==='blob,bytes,commit,mode,path,sha256'
+      &&/^[a-f0-9]{40}$/.test(index.commit??'')&&safe(index.path)&&index.mode==='100644'
+      &&/^[a-f0-9]{40}$/.test(index.blob??'')&&hex(index.sha256)
+      &&Number.isSafeInteger(index.bytes)&&index.bytes>0
+      &&Array.isArray(mapping.members)&&same(mapping.members.map(row=>row.component_id),entry.cohort_ids)
+      &&mapping.members.every(row=>Object.keys(row).sort().join(',')==='component_id,original_batch_id,original_family_id'
+        &&['component_id','original_batch_id','original_family_id'].every(key=>typeof row[key]==='string'&&row[key])),
+      'Registered execution cohort changed original gap membership');
+  }
   demand(Array.isArray(cases)&&same(cases.map(row=>row.component_id),entry.cohort_ids)
-    &&same(scope.scopeIds,entry.cohort_ids)&&scope.original_batch_id===entry.original_batch_id
-    &&scope.original_batch_component_count===entry.original_component_count
+    &&same(scope.scopeIds,entry.cohort_ids)
+    &&(execution||scope.original_batch_id===entry.original_batch_id
+      &&scope.original_batch_component_count===entry.original_component_count)
     &&same([...new Set(cases.map(row=>row.retained_payload?.target_stable_location_id))].sort(),[...entry.target_ids].sort())
     &&Array.isArray(scope.unknowns),'Registered handoff changed original batch/subjects/limits');
   return {direct:true,payloads:cases.map(row=>row.retained_payload),outcomes:cases,gb:[],ncl:[],cohort:cases,remainderRows:[]};
