@@ -1,0 +1,25 @@
+{
+  "runtime": [
+    {
+      "role": "node",
+      "realpath": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "bytes": 125989464
+    },
+    {
+      "role": "parent-python",
+      "realpath": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+      "bytes": 30894944
+    },
+    {
+      "role": "git-launcher",
+      "realpath": "/usr/bin/git",
+      "bytes": 4082768
+    },
+    {
+      "role": "git-executable",
+      "realpath": "/usr/bin/git",
+      "bytes": 4082768
+    }
+  ],
+  "unique_runtime_bytes": 160967176
+}

@@ -1,0 +1,65 @@
+{
+  "head": "afd4581ef2434011367d7f6c4d8682dca7ad308d",
+  "baseline": "1098d766a9f5f90f04bdf5bbefc3f0cf8d5c7629",
+  "candidate": "1098d766a9f5f90f04bdf5bbefc3f0cf8d5c7629",
+  "code": [
+    {
+      "path": "scripts/run-geographic-check.py",
+      "bytes": 87343,
+      "sha256": "2e4d1026280458bf46a7683fd385c9890e74e9edf2540d190409a37b4dc30af4"
+    },
+    {
+      "path": "scripts/check-geographic-regression.py",
+      "bytes": 15589,
+      "sha256": "07057a490035ac5376868b0ce8258c2e64917779830498ec311278df1340f75b"
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "bytes": 75074,
+      "sha256": "801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039"
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+    },
+    {
+      "path": "scripts/evidence/immutable.py",
+      "bytes": 17414,
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+    },
+    {
+      "path": "scripts/evidence/geometry.py",
+      "bytes": 8846,
+      "sha256": "4b016a4efccf8a1080b048f350c0db94ac14343b40e0ed890c2ce4d2300436a9"
+    },
+    {
+      "path": "scripts/ellipsoidal_area.py",
+      "bytes": 1953,
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 146,
+      "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 142012,
+      "sha256": "6da5919c63822393959afc8f2499c76470aa6b51d6e29664d372e9eee79ae4b1"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "bytes": 24194,
+      "sha256": "84ddc84798fa371e37c0acbd6764a39ef79296f3b8a57ff09aa4ed416e7ae1b9"
+    }
+  ],
+  "parent_runtime": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+  "measured_at": "2026-10-11T22:11:09.782915+00:00",
+  "MemAvailable_bytes": 9332727808,
+  "own_reservation_bytes": 1073741824,
+  "assembly_reservation_bytes": 1073741824,
+  "parent_headroom_bytes": 2147483648,
+  "residual_bytes": 5037760512,
+  "wall_seconds": 1200
+}
