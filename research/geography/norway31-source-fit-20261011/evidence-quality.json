@@ -1,0 +1,1432 @@
+{
+  "version": 1,
+  "issue": 1732,
+  "lane": "geography",
+  "worker_id": "01a1276f-39af-7732-ac0f-727aade18023",
+  "subject_ids": [
+    "physical-component:02503ad88ce4a8ba68be7b197491e3610b557016bdca2b3ae5692514603930a6",
+    "physical-component:03ac6ae7206cd8b5ab4379505067d8bda444a1513146d69434a519522cc32b19",
+    "physical-component:040b81866ed44166ca5c08cebe436417e629b5eba0a263d9531288fc6416832d",
+    "physical-component:20314a1f10831597e31b841d5ab43b93e8b4fc2b99960ca8c1cc8b1bba85d06f",
+    "physical-component:270b5cc144fffa3af15d9538ecbb8665d52f98965fa9a61cb5be4b20a8c7243d",
+    "physical-component:375e55e26bfc017ffc1cc2966705822a4577dc94b3cb02f3d30803ccd34b2b5a",
+    "physical-component:3f1a462840f8fc7b9baff21c776d48f747f67ec7a71b4319218f2cf6c7aa5c50",
+    "physical-component:4081abe76b91d1659f15dc3acc3345ebe5f244538d434535010aa65731b6a7bb",
+    "physical-component:43d1d39fd50e54e8dcda3f70ec1eece46918fb1a987e4acc3c0d5bd811b3fa4f",
+    "physical-component:460d3a728fdb443a33d47749701ee293777149845d461831ada31b0df73530b7",
+    "physical-component:46e0f6b1de7155d2722cac7669ae89b1f8bda954c298884f5dc239ac5237de8a",
+    "physical-component:4ad46689db771c990a36f19cc00ceba2b6a856f3a0da4d4b47c024e9b69d4dea",
+    "physical-component:51621e475e003e83e6b23203827a0b255ec5f7b4fe4af550148fb486c36695ca",
+    "physical-component:53a483cd884d8485caa8b0407d5f502cd4e04dffffb764644c36f7ffcfb8464a",
+    "physical-component:637dcec04c36985cb0f74b8b90c2643c1275f038639aa297a1ae53d05241e279",
+    "physical-component:64171b5abfce1a9bc1fd39092e8fc94edc3ed571216ab9a1be5d89550c3c139e",
+    "physical-component:672f627ebc78de7674588907b30608503591f86e95e193142b800e547d18b377",
+    "physical-component:7e72874be89ff9107dc87c86aafe0ee2cfc7430e5a9f1688bdf556b2b284ef3b",
+    "physical-component:8276ef5ecbc96485527b4ea6440b4767884c1b3df442c8c194b0ba2edae4315c",
+    "physical-component:8c215cb7795d2616a7743a89e09a4f26fb1cd590fa6101e204348a4cf55212af",
+    "physical-component:9870535a638523dd87ea5eaf44ab2f0db3d12cba27db6c31a33773e669cf4215",
+    "physical-component:990ff8dc7d906a734266e2a3ea0151bd77b5ed700b6c4ab1e45da915cc4f9dee",
+    "physical-component:a9d29e29f262e4fcb640f56b9c571c13ed7b0b41c21d9a591e3c18a4f2ce46c7",
+    "physical-component:abb4663da9c0480823953d8c8cccfe6d324a15bb1a92566503a85f4c7a79c4f6",
+    "physical-component:c1d5e49737e17af6a5a2dcbc5467b7d3bad9d895115dbb7ef374ef76295c8e4d",
+    "physical-component:cb03679e20a514e86009ca5a936e6ec74b22fc6f2266028555870124ed23d47f",
+    "physical-component:d122c9b2ee9a4c78f9355a0b2cd76f00e0ca427da739759d68e4aa86e87267a9",
+    "physical-component:d183bad00349d708a7d8ff8a052555c6a944b82ec9dd05eaca6469001556c6c7",
+    "physical-component:dcd32a8588db0f27d571bbbd99d33c80ae6b8e9e7dad89458f22c1a4af03c699",
+    "physical-component:df2cf8877fd9e127728b71547dd7d87368ba90db73d5484a0ad321446275551d",
+    "physical-component:fd74f968ce9574878d1555b5a76881c363e71ccef85efd01aa0d570cca1edf33",
+    "gb:NOR:ADM2:86288312B12055584821312",
+    "gb:NOR:ADM2:86288312B24070411232655",
+    "gb:NOR:ADM2:86288312B25142202859534",
+    "gb:NOR:ADM2:86288312B28845238871652",
+    "gb:NOR:ADM2:86288312B32212303283583",
+    "gb:NOR:ADM2:86288312B39619690303479",
+    "gb:NOR:ADM2:86288312B40106717450016",
+    "gb:NOR:ADM2:86288312B40278854732862",
+    "gb:NOR:ADM2:86288312B43880270832618",
+    "gb:NOR:ADM2:86288312B46732094957179",
+    "gb:NOR:ADM2:86288312B48399951224278",
+    "gb:NOR:ADM2:86288312B50454164159248",
+    "gb:NOR:ADM2:86288312B61529177731516",
+    "gb:NOR:ADM2:86288312B75737452629522",
+    "gb:NOR:ADM2:86288312B80976394887598",
+    "gb:NOR:ADM2:86288312B81169350398117",
+    "gb:NOR:ADM2:86288312B81438149454650",
+    "gb:NOR:ADM2:86288312B92584171254866",
+    "gb:NOR:ADM2:86288312B98224162040661"
+  ],
+  "subject_ids_sha256": "bf429f721719788f068aa01669d8af6bdcdce5998e36c60e4720ea2d8f07a403",
+  "baseline": {
+    "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+    "files": [
+      {
+        "path": "research/geography/gap-source-nordic-shared-seams-20261006/gb-NOR-ADM2-original-simplified.geojson",
+        "bytes": 4724258,
+        "sha256": "ab294b0b1dadfb937daa07963aa5995544fd8a16a6c9eb6261a82bb66401d90e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+        "bytes": 117156,
+        "sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/report.json",
+        "bytes": 57840,
+        "sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/transport-map.json",
+        "bytes": 56473,
+        "sha256": "644345be3d231431177c416b6ddbe3a1b2486597295af45fd5224857b5612d26",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "bytes": 403376,
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+        "bytes": 2080037,
+        "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387182,
+        "uncompressed_sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+        "bytes": 2081609,
+        "sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388214,
+        "uncompressed_sha256": "10d2e853604b368fb9f0dbeb29919bec472640c98b457019865ff02e266a883a"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+        "bytes": 2080126,
+        "sha256": "001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388138,
+        "uncompressed_sha256": "318de208374f6418fa7733b380e78aa26e54e883758637d5c5196e19e87b99fb"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+        "bytes": 2081831,
+        "sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388063,
+        "uncompressed_sha256": "b02763e7ee4e514a6208432d5ec3d78713cdae5f15b19118a3ac8ba43184cf85"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+        "bytes": 2074475,
+        "sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387395,
+        "uncompressed_sha256": "0a895961defbcf80f8cc2e97cd7253830f2720a2fb51b6d4439c53ef0d1f80d9"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+        "bytes": 2080606,
+        "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387970,
+        "uncompressed_sha256": "406730575957ec1115eb05973783814988733887fe64765d49ad22dcfdae6584"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "bytes": 2085907,
+        "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387875,
+        "uncompressed_sha256": "82d775abb31da05bb6058c547ea47a4e8428338f5287b79072e778c50139a7e9"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+        "bytes": 2079265,
+        "sha256": "654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387777,
+        "uncompressed_sha256": "827ec32b0cd1ff9d841d6f5201dac6e015ad080d6d5b32afc0bc664e73d890e2"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+        "bytes": 2085110,
+        "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388464,
+        "uncompressed_sha256": "5863c2c80e7d4d3213531d757b7bd0d372cbb3fbcc74c52f1177ab9dbb8ac94d"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+        "bytes": 2079838,
+        "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387897,
+        "uncompressed_sha256": "66957c60574f28108c2cf633f02017a99d8dcbf9e1187c2588487675123a6cdd"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+        "bytes": 1714760,
+        "sha256": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 6909917,
+        "uncompressed_sha256": "6a432ffbe3d9a8d4412140438c960b0113f752cb70c2db20b76c7467e9575025"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-000.json.gz",
+        "bytes": 292200,
+        "sha256": "93170206b39395740f4dfcd0deaf0ded6b8fc72351438af3d36224400c56e9d4",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1546581,
+        "uncompressed_sha256": "e5dfb290cc186944d49915da332e6c918d06db6e269897c3d71f7a7ff5f2c2da"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-006.json.gz",
+        "bytes": 323435,
+        "sha256": "9889170a528facaf84c555928d0d2ae9480d016f5d696b02073fadaaa6e81140",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1705099,
+        "uncompressed_sha256": "d81825e77346ca238b1e48f05662cbd52ff42b80cc6638b3f2c4fd00ed101c61"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-007.json.gz",
+        "bytes": 300989,
+        "sha256": "835fae2f53d9a7cad395293a47bb260b864fd56876b426a784eaac97757d3c00",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1595147,
+        "uncompressed_sha256": "cc90403ec3b49eba2acf9acdff02f5deb07ec63a64f5e79799b7de644ecc0b52"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-010.json.gz",
+        "bytes": 289153,
+        "sha256": "4841cc1baa94a44fa203f2c2b98a65e8a3bf342f50cae12738fa9f1d53900704",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1522670,
+        "uncompressed_sha256": "7104ddd1905441ed3ba3e529c8f306e84660c7b314255f5aaf736372acc9c0c4"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-012.json.gz",
+        "bytes": 307351,
+        "sha256": "b60b0c5be9a506a1ae1013b188213cdb515bc6fa5d977ade513c184df3efba1f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1618781,
+        "uncompressed_sha256": "69682509ca40037dc666033490468ec8627a0645712fb7118c008da96f0de6d6"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-013.json.gz",
+        "bytes": 279043,
+        "sha256": "864c4e9afabddd4cc6b97839f0ef2d3b7a82166ffe9090b8a2be15c6b0e547e4",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1468535,
+        "uncompressed_sha256": "a77ff2c99f07363378a3deb08b7be28258e6295cef8ba60747e73941e596f8d2"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-014.json.gz",
+        "bytes": 318766,
+        "sha256": "382502fa0e7706490aef4b47ff1d851b8f74e4a79d22ebe22c48b5b80da57a57",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1677787,
+        "uncompressed_sha256": "ee89d3b1f6eeb0d6e804caa97598c4cd209391f03d8b756b2c2cb429ee2a43f0"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-015.json.gz",
+        "bytes": 293685,
+        "sha256": "500b0ba47376a2244737d25b87a5d6ad7fd6316e4d7359b5e5c475b259291c80",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1542985,
+        "uncompressed_sha256": "fbdbec1591644adbc2f2593da712ec14786b9e6e13fb6cff4ec29abdc319f089"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-016.json.gz",
+        "bytes": 315166,
+        "sha256": "5a432a4d5d6b25f407bfeb03fe87a46f3452345e71337c18c0dbc0d4f199dc7f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1620641,
+        "uncompressed_sha256": "87befa83c32a99597f268f02338393953243b6d09600ad658f84f3045a4677e1"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-019.json.gz",
+        "bytes": 290645,
+        "sha256": "4c9bdaff15cf7a53367541c81520be01f4f6c39cc6b7a62a42973a7f3cabd2f8",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1529303,
+        "uncompressed_sha256": "eea9f73cdea0a2beed88e437815c0012ec5a344542e8d7621e51e7cc3fd45467"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-024.json.gz",
+        "bytes": 307062,
+        "sha256": "328b541f33cb4f03deba1d849b328a3f732279a581b71866d88a178bffd587b1",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1619649,
+        "uncompressed_sha256": "1faa6cd1e70ab84def8563bbe292c1297bbea8bf77b6d54d17a7d2c1133dae98"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-025.json.gz",
+        "bytes": 291004,
+        "sha256": "d18607e838f1100d17c5d55efc479c1babbb70188de475a7613e2efb0ab28e82",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1531843,
+        "uncompressed_sha256": "40e9ac491e761863359adb2b821bf1a6e97db030ed5496b885ec78716cf83cb9"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-026.json.gz",
+        "bytes": 327714,
+        "sha256": "8b7a5cc96542812b5c21cec0ed0a1269933257eef40bed4e27ba90c2e28c4d9d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1693183,
+        "uncompressed_sha256": "49aa7b8fbdf34c28ba4ce1111ed3a6d3caead468364ebae7846187fb826c3bb8"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-029.json.gz",
+        "bytes": 297245,
+        "sha256": "e392b100bf715f113862e1c939c522a4b583089f06c79a6dc6bcee252ac41b45",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1582754,
+        "uncompressed_sha256": "d58f3850faa1054dd149e9fbfabf94d117a37fd4bcadc3a4308e073252661eed"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-032.json.gz",
+        "bytes": 307586,
+        "sha256": "344010a6a26372e0297ac7044c42bd0ff6ab5d6f25ac6ac0e1560c20afb2aaa9",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1617552,
+        "uncompressed_sha256": "bc21710f908507af3e94f3679584ec047ac80ebfd91edf685aaaa6e1d45df4e3"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-033.json.gz",
+        "bytes": 291847,
+        "sha256": "eee799d72959efdd19cc85baaed2b9799b943c814a40140bf17be50f1244db9b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1544816,
+        "uncompressed_sha256": "91c7302ba9cd0a5f5f627295c1e25ea9418bbaf07441e7c30b3a84524ff3a223"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-037.json.gz",
+        "bytes": 289042,
+        "sha256": "1b096a6e13f04b283f70981430d78c690b42c786b6e2542b38595249d71ec9b2",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1529087,
+        "uncompressed_sha256": "1176969d670dc08c0ffb1ee583c33fe406c5d602b8a16651da1a0b29c7b15864"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-039.json.gz",
+        "bytes": 296453,
+        "sha256": "e5d3089a64916d9434654f47f4575eb4557d3c5d754d0f1a75cce3c955534fc5",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1566991,
+        "uncompressed_sha256": "2dc1d26cf8a269fad53aabc72637a5df190d09f89ad1e1a72688ec503d0264a7"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-040.json.gz",
+        "bytes": 279105,
+        "sha256": "53d11d9087cae935efefe35a324f7d999e52249278b367d5448e16e29cf0e4f0",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1482926,
+        "uncompressed_sha256": "edbc840b8ff69b6e870ee42c8876fcf515a6f8e803e70600bdda920f5fbde857"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-042.json.gz",
+        "bytes": 353653,
+        "sha256": "86f18147a2660fc9b36bfee4401b54ae3df0e2080a6cff1c6b07f2f78132955a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1704909,
+        "uncompressed_sha256": "963058764b794788f84676bbfc49345d41ce5f4b6045b6c5f1fbf15294d9375c"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-043.json.gz",
+        "bytes": 295405,
+        "sha256": "cbb591d341c32d8dfb0922ab23154e428fc2b6093fe6ef6c59050d122f154169",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1558339,
+        "uncompressed_sha256": "0291da300619b543dffb6b0f0d43c4f1598fe861bb8b8149bc9d22bf9ddfdb78"
+      },
+      {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-049.json.gz",
+        "bytes": 229242,
+        "sha256": "6b821fafcfc7baac31641f08a395c32274fd050a9bffca7be1980a5d9bb69f0a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1186820,
+        "uncompressed_sha256": "b96cf87b0c6df06a6aa567c9475fc62c1aa7c5ffcbdc46955b5608ccd8e8d483"
+      },
+      {
+        "path": "data/geography/part-17.json",
+        "bytes": 4948066,
+        "sha256": "1ae1a9ef25c1f71b66084aadf57933132383d4271b888ab38866905da5678af3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-20.json",
+        "bytes": 6570767,
+        "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "nor_adm2_simplified": "ab294b0b1dadfb937daa07963aa5995544fd8a16a6c9eb6261a82bb66401d90e",
+      "original_physical_custody_index": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+      "administrative_sources": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    "pin_files": {
+      "nor_adm2_simplified": "research/geography/gap-source-nordic-shared-seams-20261006/gb-NOR-ADM2-original-simplified.geojson",
+      "original_physical_custody_index": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+      "administrative_sources": "data/administrative-sources.json",
+      "hierarchy": "data/hierarchy.json"
+    },
+    "subject_files": {
+      "physical-component:02503ad88ce4a8ba68be7b197491e3610b557016bdca2b3ae5692514603930a6": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+      "physical-component:03ac6ae7206cd8b5ab4379505067d8bda444a1513146d69434a519522cc32b19": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+      "physical-component:040b81866ed44166ca5c08cebe436417e629b5eba0a263d9531288fc6416832d": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+      "physical-component:20314a1f10831597e31b841d5ab43b93e8b4fc2b99960ca8c1cc8b1bba85d06f": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+      "physical-component:270b5cc144fffa3af15d9538ecbb8665d52f98965fa9a61cb5be4b20a8c7243d": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+      "physical-component:375e55e26bfc017ffc1cc2966705822a4577dc94b3cb02f3d30803ccd34b2b5a": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+      "physical-component:3f1a462840f8fc7b9baff21c776d48f747f67ec7a71b4319218f2cf6c7aa5c50": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+      "physical-component:4081abe76b91d1659f15dc3acc3345ebe5f244538d434535010aa65731b6a7bb": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+      "physical-component:43d1d39fd50e54e8dcda3f70ec1eece46918fb1a987e4acc3c0d5bd811b3fa4f": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+      "physical-component:460d3a728fdb443a33d47749701ee293777149845d461831ada31b0df73530b7": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+      "physical-component:46e0f6b1de7155d2722cac7669ae89b1f8bda954c298884f5dc239ac5237de8a": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+      "physical-component:4ad46689db771c990a36f19cc00ceba2b6a856f3a0da4d4b47c024e9b69d4dea": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+      "physical-component:51621e475e003e83e6b23203827a0b255ec5f7b4fe4af550148fb486c36695ca": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+      "physical-component:53a483cd884d8485caa8b0407d5f502cd4e04dffffb764644c36f7ffcfb8464a": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+      "physical-component:637dcec04c36985cb0f74b8b90c2643c1275f038639aa297a1ae53d05241e279": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+      "physical-component:64171b5abfce1a9bc1fd39092e8fc94edc3ed571216ab9a1be5d89550c3c139e": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+      "physical-component:672f627ebc78de7674588907b30608503591f86e95e193142b800e547d18b377": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+      "physical-component:7e72874be89ff9107dc87c86aafe0ee2cfc7430e5a9f1688bdf556b2b284ef3b": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+      "physical-component:8276ef5ecbc96485527b4ea6440b4767884c1b3df442c8c194b0ba2edae4315c": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+      "physical-component:8c215cb7795d2616a7743a89e09a4f26fb1cd590fa6101e204348a4cf55212af": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+      "physical-component:9870535a638523dd87ea5eaf44ab2f0db3d12cba27db6c31a33773e669cf4215": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+      "physical-component:990ff8dc7d906a734266e2a3ea0151bd77b5ed700b6c4ab1e45da915cc4f9dee": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+      "physical-component:a9d29e29f262e4fcb640f56b9c571c13ed7b0b41c21d9a591e3c18a4f2ce46c7": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+      "physical-component:abb4663da9c0480823953d8c8cccfe6d324a15bb1a92566503a85f4c7a79c4f6": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+      "physical-component:c1d5e49737e17af6a5a2dcbc5467b7d3bad9d895115dbb7ef374ef76295c8e4d": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+      "physical-component:cb03679e20a514e86009ca5a936e6ec74b22fc6f2266028555870124ed23d47f": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+      "physical-component:d122c9b2ee9a4c78f9355a0b2cd76f00e0ca427da739759d68e4aa86e87267a9": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+      "physical-component:d183bad00349d708a7d8ff8a052555c6a944b82ec9dd05eaca6469001556c6c7": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+      "physical-component:dcd32a8588db0f27d571bbbd99d33c80ae6b8e9e7dad89458f22c1a4af03c699": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+      "physical-component:df2cf8877fd9e127728b71547dd7d87368ba90db73d5484a0ad321446275551d": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+      "physical-component:fd74f968ce9574878d1555b5a76881c363e71ccef85efd01aa0d570cca1edf33": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+      "gb:NOR:ADM2:86288312B40278854732862": "data/geography/part-17.json",
+      "gb:NOR:ADM2:86288312B28845238871652": "data/geography/part-17.json",
+      "gb:NOR:ADM2:86288312B61529177731516": "data/geography/part-17.json",
+      "gb:NOR:ADM2:86288312B40106717450016": "data/geography/part-17.json",
+      "gb:NOR:ADM2:86288312B39619690303479": "data/geography/part-17.json",
+      "gb:NOR:ADM2:86288312B12055584821312": "data/geography/part-17.json",
+      "gb:NOR:ADM2:86288312B81169350398117": "data/geography/part-17.json",
+      "gb:NOR:ADM2:86288312B25142202859534": "data/geography/part-17.json",
+      "gb:NOR:ADM2:86288312B32212303283583": "data/geography/part-17.json",
+      "gb:NOR:ADM2:86288312B43880270832618": "data/geography/part-17.json",
+      "gb:NOR:ADM2:86288312B46732094957179": "data/geography/part-17.json",
+      "gb:NOR:ADM2:86288312B24070411232655": "data/geography/part-17.json",
+      "gb:NOR:ADM2:86288312B81438149454650": "data/geography/part-17.json",
+      "gb:NOR:ADM2:86288312B50454164159248": "data/geography/part-17.json",
+      "gb:NOR:ADM2:86288312B92584171254866": "data/geography/part-17.json",
+      "gb:NOR:ADM2:86288312B75737452629522": "data/geography/part-17.json",
+      "gb:NOR:ADM2:86288312B80976394887598": "data/geography/part-17.json",
+      "gb:NOR:ADM2:86288312B98224162040661": "data/geography/part-17.json",
+      "gb:NOR:ADM2:86288312B48399951224278": "data/geography/part-17.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "gb:NOR:ADM2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/NOR/ADM2/geoBoundaries-NOR-ADM2_simplified.geojson",
+      "role": "Whole actually consumed simplified Norwegian municipality source, source-relative fitness only",
+      "vintage": "2013 represented; source updated2023-01-19 and built2023-12-12",
+      "retrieved_at": "2026-10-11",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 4.0 International (CC BY 4.0); source Geonorge, Mapping Authority of Norway; original registry license/source URL kartkatalog.geonorge.no/metadata/kartverket/administrative-enheter/041f1e6e-bdbc-4091-b48f-8a5990f3cc5b"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "research/geography/norway31-source-fit-20261011/sources/administrative/gb-NOR-ADM2-consumed-simplified.geojson",
+          "bytes": 4724258,
+          "sha256": "ab294b0b1dadfb937daa07963aa5995544fd8a16a6c9eb6261a82bb66401d90e",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "temporal_status": "reference",
+      "limit": "No new present-day legal or physical authority; original observation dates remain unknown."
+    },
+    {
+      "id": "original-physical-reference",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/6a99a7606b9c2d11ac8cd093610653d4cd5d1382/coordination/engineering/global-physical-comparison-20261006/results",
+      "role": "Whole original GSHHG2.3.7 physical comparison and native query custody",
+      "vintage": "GSHHG2.3.7/2017-06-15; heterogeneous observation dates",
+      "retrieved_at": "2026-10-11",
+      "license": {
+        "status": "unknown",
+        "terms": "Original retained comparison metadata; no new underlying source license claim."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Exact whole original encoded and decoded physical products are restored and checked against original report.json; original complete source metadata is authenticated against its retained original product and receipt.",
+      "temporal_status": "unknown",
+      "limit": "Physical authority remains unapproved; source observation dates and current truth remain unknown."
+    },
+    {
+      "id": "current-selected-reference",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "role": "Actual selected source/target context and unchanged SOURCE predicate implementation",
+      "vintage": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "retrieved_at": "2026-10-11",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository reference data and code; no separate external licensing claim."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Current-neighbors result retains complete actual phased acquisition inventory, code/runtime bindings, selected envelope and whole possible-neighbor geometries. Strict and SOURCE controls consume these exact bytes.",
+      "temporal_status": "reference",
+      "limit": "Pure SOURCE compatibility does not prove native qualification, same-owner conservation or selected delivery. Current acquisition is genuinely phased; flattening all historical inputs is not an executed phase."
+    }
+  ],
+  "methods": [
+    {
+      "id": "whole-source-custody",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Immutable whole-byte admission, exact original candidate/source/physical inverse and fresh NewVintage publication. Physical inverses authenticate and charge the actual pinned runtime before execution.",
+      "software": "Python3.12.14;Git;SHA256;gzip;actual1789-file runtime-lock.json",
+      "units": "Whole bytes and exact record identities"
+    },
+    {
+      "id": "current-selected-binding",
+      "kind": "code",
+      "description": "Existing actual selected reader with genuine phased input/runtime/output accounting; complete coordinate certificate rebind and whole target/possible-neighbor features; current additives retained.",
+      "software": "Node24.19.0; existing ImmutableReader/loadSelection",
+      "units": "Exact whole feature identities and inclusive coordinate bounds"
+    },
+    {
+      "id": "source-current-predicates",
+      "kind": "measurement",
+      "description": "Existing strict literal source/current topological predicates, exact binary64 candidate topology, and separately retained GEOS dissolve residuals. No normalization, tolerance, geodesic metric or new physical-land area is introduced.",
+      "software": "Python3.12.14;Shapely2.1.2;GEOS3.13.1;NumPy2.3.5;exact_predicates.py;actual pinned runtime",
+      "units": "Boolean predicates and unscaled lon/lat coordinate-space diagnostic pointsets"
+    },
+    {
+      "id": "actual-source-premises",
+      "kind": "code",
+      "description": "Unchanged method15 SOURCE17 authenticates original canonical bindings and whole physical/native query rows. Nineteen of twenty custody-complete cases pass; one geometry hash-domain mismatch remains held. This is pure premise testing, not operator qualification.",
+      "software": "Node24.19.0;unchanged additive-gap-repair.mjs;@noble/hashes2.0.1 from exact package-lock",
+      "units": "Original component identities and boolean SOURCE outcomes"
+    },
+    {
+      "id": "literal-v2-handoff",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Frozen nineteen-case v2 join under the shared exact literal policy; reuses completed authenticated per-product inverse receipts and exact rows, projects original encoded/decoded descriptors and counts, authenticates complete original passive membership, and preserves all31 outcomes. Metadata assembly does not redundantly decode nineteen whole physical products.",
+      "software": "Python3.12.14; unchanged NewVintage; actual registeredAdministrativeViews, registeredOriginalPhysicalProduct and SOURCE predicates",
+      "units": "Whole original component identities, passive accounting and original source bindings"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/norway31-source-fit-20261011/physical-locators.json",
+      "bytes": 3111,
+      "sha256": "82a6dfb84705780bd75e2596f8b3a8ec7878a31be5f364618e694ea8d0a28148",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/policy/literal-union-source-policy-v1.json",
+      "bytes": 3786,
+      "sha256": "21c143adcc3883046c9e93339201b945bad22210df41d481d0a727ab8ac6e967",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/roster.json",
+      "bytes": 73216,
+      "sha256": "5836517d2edf996325f406050ed0870273a6f916cbef14cea6e683bbd1fa9d21",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/scope-roster.json",
+      "bytes": 34228,
+      "sha256": "1a195344ac6f37ff9397366e30b96de981538e3eb7ece272bfcf6e254c37f5c2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/source-qualification/current-inputs.json",
+      "bytes": 5632,
+      "sha256": "fdfea89d6bcbfed174c86bf9679f2e33de08b1ad145e304a03f567173baf21bc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/source-qualification/probe-inputs.json",
+      "bytes": 4766,
+      "sha256": "9e80bbc81cafdac090c464153b508d71929c088d4903020c3e5f5b83a7e3b091",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/source-qualification/roster.json",
+      "bytes": 10935,
+      "sha256": "ac8552eeef7c6bf5075a173dd52343156abe81762a5ffc9f465d8f0b585bc7f5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/sources/administrative/custody.json",
+      "bytes": 1066,
+      "sha256": "89e7a03f8903daafeae9fc7e9704f42779f88ed343d77c86c3ac41178c9f6a45",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/tools/handoff-inputs.json",
+      "bytes": 1934,
+      "sha256": "bd3c8c0a099c4fbef385d3a7d401aaca7de6db10ec9f6a2f164621c8a65bd452",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/tools/runtime-lock.json",
+      "bytes": 473933,
+      "sha256": "7860a19df8a79cbd73d4096fba6d0322d9264894eb27ab6392e7fd9a948c971f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/controls-001/handoff-controls.log",
+      "bytes": 4396,
+      "sha256": "df73cd2d5b91e6d562ee3d2943874f67669cf047510f1c6a5077b9469e24c296",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-current-neighbors-001/publication.json",
+      "bytes": 271,
+      "sha256": "802e18ee332a9a8abca9269f1b5c71bcbc3a0379f703b536e5d5b26d72ff68b6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-current-neighbors-001/result.json",
+      "bytes": 1456568,
+      "sha256": "21fe574ebe1395029ad66cac56163db817a16ba23691c4c53e3f0ca2c46ec866",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-delivered-physical-screen-001/delivered-physical-screen.json",
+      "bytes": 166125,
+      "sha256": "d9843d6a98107ee6e4ca9ece593548c371ff12851555bc23a644b32d7c4613f6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-original-candidates-001/original-candidates.json",
+      "bytes": 65923,
+      "sha256": "fa7fe6dcb7d4837e898a8f7b709d651cd291e0af983300fdbe0f06da660813e4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-original-candidates-001/publication.json",
+      "bytes": 509,
+      "sha256": "b417d55b966d3a0b3f6a426c6d8602e6c373e2503ada50f2c33c70030f5112a0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-original-candidates-001/receipt.json",
+      "bytes": 6284,
+      "sha256": "427bdb3c2f5203a229608f437c86962a8476a44dfb7db0459431577f64db69d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-original-classification-001/dispositions.json",
+      "bytes": 47712,
+      "sha256": "dccd084274f16b763eb0a57d535613907b40ec1fdb5a0bf96c4abe77a8573f94",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-original-classification-001/original-comparison-rows.json",
+      "bytes": 156213,
+      "sha256": "51fc104cb7d1cd65e99040998acd463a5ee20b4b7f76586c7ead5f40ec0723b6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-original-classification-001/publication.json",
+      "bytes": 759,
+      "sha256": "cd49b487b19283bbc40252f2c34dc7d01547aec2856bc97b5596cac391f8a751",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-original-classification-001/receipt.json",
+      "bytes": 12960,
+      "sha256": "b8305821b674f90612c4875a98e14f22d7c45db68121f53a425ea2f0e2c57b95",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-000-001/components-000.jsonl.gz",
+      "bytes": 1219776,
+      "sha256": "0c6e0c12add305144fc932351dd517af4656808579422c6ba4be932b33cdf6f2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-000-001/physical-records.json",
+      "bytes": 3724,
+      "sha256": "365c2f4671043dc36828ca2e630b3d8cff645f0d1ee1d0cb6bb4155ac16aca6f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-000-001/publication.json",
+      "bytes": 977,
+      "sha256": "bb3ace87d25118a3ecc7630aa30744226f760f8b788604aac2af536cd21a8700",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-000-001/queried-source-metadata.json",
+      "bytes": 1666,
+      "sha256": "020142a4121ce196deadd8a4dba3698efb768196be52f68ef037b07bac8c12ad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-000-001/receipt.json",
+      "bytes": 4296,
+      "sha256": "cffec5e3a45e8c01f64758c8b9a12fc63b2e20b22cffd3171c45e4ff7c092699",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-001-001/components-001.jsonl.gz",
+      "bytes": 1203607,
+      "sha256": "3ccdcc410baa9f82c6299320e91ed622cd1ed0976146b61d2f4fec3da77b85ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-001-001/physical-records.json",
+      "bytes": 3270,
+      "sha256": "65c2ee0bada945f0c624c79d400d4314e5d266bafa890a89a6d4a62d21facf9a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-001-001/publication.json",
+      "bytes": 976,
+      "sha256": "25106a55600fb8b7cba3ce8b98095ca972fc9be7b20b245525a740ae8cc6af97",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-001-001/queried-source-metadata.json",
+      "bytes": 892,
+      "sha256": "d933c4fc1f42adb448e2a5ab71247331d6a96ac22c5aec7f8f674e00687abffd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-001-001/receipt.json",
+      "bytes": 4295,
+      "sha256": "1a065ab9b0fb99319f1e4ba5d787c870b439caba143cd37c5dc83fd7e199c981",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-008-001/components-008.jsonl.gz",
+      "bytes": 1187799,
+      "sha256": "b71e1be0087f6ad955642b4385d6d209ac6cbb9937fe1e4b082b5efe8d6fb05a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-008-001/physical-records.json",
+      "bytes": 3717,
+      "sha256": "53300ee0ca460e049ad73099d3c56fc97dabc8b871b14fafa1738ceab8106153",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-008-001/publication.json",
+      "bytes": 977,
+      "sha256": "e1015e9bcb64e1776cb4b452df6430c2a10ffb7f0af25e62614805e175adbfa1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-008-001/queried-source-metadata.json",
+      "bytes": 1674,
+      "sha256": "cb0b52ebf08039537cd062c46b64bca33b016ce200d6a3f20aecf6bfc339a1e4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-008-001/receipt.json",
+      "bytes": 4295,
+      "sha256": "c3936c8f98d22cd7600d34c9437f901ea97d9d0d224eea1495d2b60590a7f7fc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-010-001/components-010.jsonl.gz",
+      "bytes": 1191654,
+      "sha256": "58e4ad6bdc32338e1a9f21ba8db8a8c7e88651024279a0e9cde6ae7f08de4176",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-010-001/physical-records.json",
+      "bytes": 3719,
+      "sha256": "3ded113cef611de993d741a89833d9da56e3b43a58264eb5c0961fccc83f5c3f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-010-001/publication.json",
+      "bytes": 977,
+      "sha256": "c00fb626e6d3c609e768fb4dbcd2e2bbfc9a8cbd9a91dc6d9bab05d8bf3bcbec",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-010-001/queried-source-metadata.json",
+      "bytes": 1654,
+      "sha256": "a6f94d69ba1f5c43a93f33ab1cbccc288250ed7b16b47de527b58515a80e39a3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-010-001/receipt.json",
+      "bytes": 4295,
+      "sha256": "aba55c50eb34ea4f3a5068dfcdfeccbb00cc2f7a7a77bed34b2116e276a48ca6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-015-001/components-015.jsonl.gz",
+      "bytes": 1183303,
+      "sha256": "d1b20d63a9263e46ecc4fd8e3350b71d96f074c37fa3cf470f4a363e66ca3d22",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-015-001/physical-records.json",
+      "bytes": 3722,
+      "sha256": "c262a22c2b5e6842f8804f093a01857f39f3ed5bcfdc98af7b52cd89aae6ab1f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-015-001/publication.json",
+      "bytes": 977,
+      "sha256": "4fd0f8a4c48ca325a1d3dc7694b255c56c5a6b421bf4f9e662c6dca812634f13",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-015-001/queried-source-metadata.json",
+      "bytes": 1674,
+      "sha256": "2d516cf62d1538785836587ce7dc414ee47a29cf34f4199ed267efe54c4021ef",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-015-001/receipt.json",
+      "bytes": 4292,
+      "sha256": "9b8c0db9eeea65fb5e615f7b741ebc94c7c0ab31a0bd3a75073b463c64b313ef",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-017-001/components-017.jsonl.gz",
+      "bytes": 1188960,
+      "sha256": "95ba77de37240e28d74fa4f4e88ca0807e3a865b7e7bf37ed18dd3f7a9255680",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-017-001/physical-records.json",
+      "bytes": 3724,
+      "sha256": "25f14ebf778e5aa4abe53f282c5b8d149c66da91872dfbbc6f94644041228972",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-017-001/publication.json",
+      "bytes": 977,
+      "sha256": "04f9f2e1f014b0c8b9dc4b55a9a10ec1206bc75131a66381a0115e8fdd88e5e0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-017-001/queried-source-metadata.json",
+      "bytes": 1674,
+      "sha256": "c3879e9d8d68b0f51fac82a303818f756bf987f80b6e78211b3f16c2d560eb84",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-017-001/receipt.json",
+      "bytes": 4295,
+      "sha256": "750768cd2595f468a6ef341fda8e1850234d412ee75cee5d36813617760bc662",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-018-001/components-018.jsonl.gz",
+      "bytes": 1192157,
+      "sha256": "01db51182a1f6c66a138398ed80fa3ca7f0a2402a30847570a819d3ff2c339c3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-018-001/physical-records.json",
+      "bytes": 4176,
+      "sha256": "8f52cf0362d666386b12365d3192545bc72ea4daf11bb69519598ee61ead6aec",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-018-001/publication.json",
+      "bytes": 977,
+      "sha256": "c77d6ccf5a3c3594d64fc47a1355d3b386c52032038830eee7f5a41d60c43a4a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-018-001/queried-source-metadata.json",
+      "bytes": 2444,
+      "sha256": "2ce6997cfa5b4f1f3d1e316dc5d7a6ded7d678c23dbfa81466313019205a8f5d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-018-001/receipt.json",
+      "bytes": 4295,
+      "sha256": "fadc32a0c6b56faed7b5b6c4b6f97d7c902cd7e0960bdcf98ea26b2b6e100f6f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-019-001/components-019.jsonl.gz",
+      "bytes": 1204154,
+      "sha256": "0f580cea306d8b49dfe02469392b039faaa472ba813e44590ba35e8caf6a2faf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-019-001/physical-records.json",
+      "bytes": 3268,
+      "sha256": "de9cda803451fd35924b629f8f5122018ffff813e71ad4a3ac719fa0437e46c2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-019-001/publication.json",
+      "bytes": 976,
+      "sha256": "47c57a26c4f01fd72fd80a8e2a2b0a9cba9ae2e71b9e107075c01a0b5fe8c4bd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-019-001/queried-source-metadata.json",
+      "bytes": 892,
+      "sha256": "1685f644283acb65f1e29101f8cae5fa8302645ca39486c3b612710ccd1910a6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-019-001/receipt.json",
+      "bytes": 4802,
+      "sha256": "ecd0ddf002ef3fbdf254fc00da4ff83c2974444886579b47d44440705ce064c7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-022-001/components-022.jsonl.gz",
+      "bytes": 1205959,
+      "sha256": "906a42b3345c60d515ae5016f2daa69c352c1526b27a8796d496c69ccb2f35b8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-022-001/physical-records.json",
+      "bytes": 3271,
+      "sha256": "0a4ef7067b8bcf1ad6e3e3d081c55e1986014ec26137f107efc74c743f642975",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-022-001/publication.json",
+      "bytes": 976,
+      "sha256": "1408919f648ac2799da54c9fc9b9f8815edfad9eba7c2162fdf567e719faa3e5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-022-001/queried-source-metadata.json",
+      "bytes": 892,
+      "sha256": "e160915b95011c2c25880114eb60d054a6db4b4bf88a7fed07f8d20e76006783",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-022-001/receipt.json",
+      "bytes": 4295,
+      "sha256": "5fb16185a29200ae6beaf0968e10ae0a7250fa71b3b6a016220698094c01fd27",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-028-001/components-028.jsonl.gz",
+      "bytes": 1211367,
+      "sha256": "583a2ab684718b5266c70a739218920f95d3adedd168e5ff29575f8ed654b14a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-028-001/physical-records.json",
+      "bytes": 3720,
+      "sha256": "ce3dfe4f3521e176471fe52b5b7ab949a46f5af7670a18803d7668bd2a97329a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-028-001/publication.json",
+      "bytes": 977,
+      "sha256": "80df89707becea3eaa7a85b5a5222d106e05b6c2b195d9fe4166cf9f51702b03",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-028-001/queried-source-metadata.json",
+      "bytes": 1665,
+      "sha256": "ade90ede3a2bab2f68b1ad2cd452fcad3b6da2fcbb4adec59c960b78ba62531a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-028-001/receipt.json",
+      "bytes": 4295,
+      "sha256": "b6ca00f5220d16495da1d02ef97f1d1360d41b77f22cc48719fa5ada7a26ea3a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-034-001/components-034.jsonl.gz",
+      "bytes": 1203179,
+      "sha256": "65273fd94af91ea114f3f84bf4f3ceaffc906b6f43844812d96c759eefd60fa1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-034-001/physical-records.json",
+      "bytes": 3721,
+      "sha256": "2adaed240982ae2405e0bee16ae99a8fe6aa7506ca578bbb8968131e1c212137",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-034-001/publication.json",
+      "bytes": 977,
+      "sha256": "ade2ddfd4e0ca6af5308bd1874a28ed3053771df4af4e110ab0ebe6fe1cbf1d4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-034-001/queried-source-metadata.json",
+      "bytes": 1674,
+      "sha256": "1b980b623e4dbcc098e0e4ea7bb12a6169894cece38bb10e4c51125aab7935a3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-034-001/receipt.json",
+      "bytes": 4295,
+      "sha256": "37c00d7463db2076ace6a8098a055faf0c747bb4cdf3011170be4816251c50db",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-038-001/components-038.jsonl.gz",
+      "bytes": 1195769,
+      "sha256": "ce0bf5a1170de055c8f29b4be0beba5db4519ac5400856e045b865ab4111f4b9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-038-001/physical-records.json",
+      "bytes": 3262,
+      "sha256": "94230e6bbecf1dfd8cff44333b5cf5abdabc84f761c7bb2e4c6abc70defdae65",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-038-001/publication.json",
+      "bytes": 976,
+      "sha256": "4a78bd160c2ceca2f6ad783bb64f523c2865a052eb1d3c6d13826de17a96218d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-038-001/queried-source-metadata.json",
+      "bytes": 892,
+      "sha256": "e0661e141639a2857d2ea2fdca22d1c5f4b744fd069be0ccc48668c3d8d34fc2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-038-001/receipt.json",
+      "bytes": 4295,
+      "sha256": "0998ab9d969e2669a294ea7fefe5623ccb710bbe3996c3e2b01c410971a771c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-041-001/components-041.jsonl.gz",
+      "bytes": 1241137,
+      "sha256": "cd657d2c7dfee0db73e4b32d29437309537326e72554b99e341fc218f6db6bdc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-041-001/physical-records.json",
+      "bytes": 3630,
+      "sha256": "5056e487d6106ad8edddec3dca65292154f2b62e6eabcaf5f7872e38b092dbb6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-041-001/publication.json",
+      "bytes": 976,
+      "sha256": "731c6db8b7157a0cfcae6a90a6714a1d68a34617093c3a38869a152fb04bc1a3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-041-001/queried-source-metadata.json",
+      "bytes": 892,
+      "sha256": "c499349802496cac9a6caa8f97d21e138cd19c8161c4fed2c708a9de07d3a781",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-041-001/receipt.json",
+      "bytes": 4296,
+      "sha256": "db02c401287c6f3c3febb0437afef9634c1daab783d749683240346e40d84451",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-042-001/components-042.jsonl.gz",
+      "bytes": 1200581,
+      "sha256": "77aa4393c231c34317337045e736f75eeb890526d04c5a2a3df1e1be96cb954b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-042-001/physical-records.json",
+      "bytes": 3723,
+      "sha256": "5cab0cad9bef950fa2728a11a7276834a60c3a6f8da7cc80b6097505788e2437",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-042-001/publication.json",
+      "bytes": 977,
+      "sha256": "023c182310a095adccc837bc43819f0b27d1add88203c5d114656295950c9bdf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-042-001/queried-source-metadata.json",
+      "bytes": 1665,
+      "sha256": "b14b424b4633342e4917a2ef12a4cdae974e24b61eda0995db24b4d4eeb4a34b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-042-001/receipt.json",
+      "bytes": 4294,
+      "sha256": "5183fab90b84d87ff562603eca9085d3ad4825c7f58b6bde01f2fe4dec19342a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-047-001/components-047.jsonl.gz",
+      "bytes": 1187023,
+      "sha256": "e418e6cf92971f0afc047b2782fcb035e1f6305c136969469cb8be085089e82d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-047-001/physical-records.json",
+      "bytes": 3723,
+      "sha256": "c0ce2b4595f44cdeacf2c0c2c9e8ec05af668c8501fd27f43c44aec0cdf9ad5c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-047-001/publication.json",
+      "bytes": 977,
+      "sha256": "79528066bbebb2fc2c22f6bb948f7a5aac41c569789aab925aa9da73180d4789",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-047-001/queried-source-metadata.json",
+      "bytes": 1665,
+      "sha256": "dda67628bc6afc45a5a40b9aaef374711f0a7bcd3ed85a4e13a6f718754fa99f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-047-001/receipt.json",
+      "bytes": 4295,
+      "sha256": "ce8cda03ed77d151831fca703b8940fff452d55cc1b85eef3226dec5faa2a8bf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-053-001/components-053.jsonl.gz",
+      "bytes": 1207888,
+      "sha256": "0a8dcae7cd00ff3db0ffe770eadfc78b5e0b171e06791a94e15e5b83eed5d81e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-053-001/physical-records.json",
+      "bytes": 3270,
+      "sha256": "48b2616db1c3dfe415b6f99d86b0bb973cf1895c22e2255c8cbf10c5ddff5bd6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-053-001/publication.json",
+      "bytes": 976,
+      "sha256": "3466d651095f12de2b93fee91bb19b56592614d354d7442e11892f89e8cb2657",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-053-001/queried-source-metadata.json",
+      "bytes": 892,
+      "sha256": "2ec84b1068e2053ac76facd3e32743f7f93f36e77071ecc06128a4946ee52441",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-053-001/receipt.json",
+      "bytes": 4295,
+      "sha256": "9070c95b83594066f91a66135edab6c2e29aed44ac64a803e6bc61abf16f6886",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-055-001/components-055.jsonl.gz",
+      "bytes": 1179859,
+      "sha256": "d36ce8f8263037f34c65b0e986f539cb292acd376833376a97c47eb46c37a630",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-055-001/physical-records.json",
+      "bytes": 3724,
+      "sha256": "7e6122a073afca869e0b235ba99f6e3f95802d6543f46ae683ea195b6db4ea59",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-055-001/publication.json",
+      "bytes": 977,
+      "sha256": "03bfcaac8ad8ccc92f9c7e4ab227ed5e256fc5389773bc345507776c9586fc06",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-055-001/queried-source-metadata.json",
+      "bytes": 1665,
+      "sha256": "328e75bb3a927a0a1db8044af46be282fcfaa662f3377df4b781ee2619cb4d37",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-055-001/receipt.json",
+      "bytes": 4295,
+      "sha256": "ad8274d667781ea094fe41f68cf44f414d02e7121aaa037ebfc429d20b09beef",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-057-001/components-057.jsonl.gz",
+      "bytes": 1400226,
+      "sha256": "980a4cf96e620d0ddd9a10ea05b10c24ccab7d08239e39fb3220f2a6bb2710d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-057-001/physical-records.json",
+      "bytes": 4176,
+      "sha256": "c6d82191e3ac9cd0a68147df26adfd6a1d03abf516b1e1e83252b1950cb1573c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-057-001/publication.json",
+      "bytes": 977,
+      "sha256": "10618f3bca13601dfed44b4a0bc917eff673284a0ff6068de524e0291a545eb2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-057-001/queried-source-metadata.json",
+      "bytes": 2448,
+      "sha256": "cebbbaed8feb9d5abbd2749d2a4f75f788f95f14943a0b9eeb4ba0a5be3a62cc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-057-001/receipt.json",
+      "bytes": 4296,
+      "sha256": "35ff8bf6af9c2044c70e868bd46a87a9acb63fa4fc768050e0ea6b8de2afdcd2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-061-001/components-061.jsonl.gz",
+      "bytes": 1205763,
+      "sha256": "73bded55db2ff68063b8c30e226d462580cd2d02afaddc3d064e2ec04b3f88f1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-061-001/physical-records.json",
+      "bytes": 3322,
+      "sha256": "0a9fb5a0af7d4bad7ccc5ddb6dc0618adcc2d1473be0f1664d2a3d5037fb89c6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-061-001/publication.json",
+      "bytes": 976,
+      "sha256": "dbab52167366fe1da765631c1feabdd9e9f6791f445d376681feec3712518b6f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-061-001/queried-source-metadata.json",
+      "bytes": 892,
+      "sha256": "c2bc2bd65c594afda1658a3c5a528834c16fd04f8caa89992459950246cf0d52",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-061-001/receipt.json",
+      "bytes": 4295,
+      "sha256": "42dcbd411f81c6000b28bfab0d627c2c2b7c5bf5ddc4ae95a52d39da4d705415",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-070-001/components-070.jsonl.gz",
+      "bytes": 931431,
+      "sha256": "7d4bcba0924830d3311123be42e87e56a4ba4118cfa57d4d1e817b38415285ca",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-070-001/physical-records.json",
+      "bytes": 3269,
+      "sha256": "aaf5a55f8e7b18af83bdb010ce7db1731b30ef9ce39219ecbdcb1f9fbf031630",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-070-001/publication.json",
+      "bytes": 975,
+      "sha256": "f99f7498e845355b325a5883f89e4f8270f72dcd5afd6297fee56ab2d434aa05",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-070-001/queried-source-metadata.json",
+      "bytes": 892,
+      "sha256": "a6053dc1c7b21a8c6e3bfe1ad35efa32177265ae9b4c80f76d09fa1e518a3773",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-physical-part-070-001/receipt.json",
+      "bytes": 4294,
+      "sha256": "acf0c9e8cbc0ad34ab82881a6bbd96c88c83828975eae98035526a368ceb2024",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-strict-001/publication.json",
+      "bytes": 270,
+      "sha256": "b561b5fa5d381e4ece6f6741f019812d288b8b444b0909ed33ed0a09064c034c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-strict-001/strict-predicates.json",
+      "bytes": 135001,
+      "sha256": "21cf8c800824650d9b9cc57ec57cb7f5d535cd4ca6b28305c5d355acaf3f39ce",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/preserved-refusals-001/inverse-part020-refusal.log",
+      "bytes": 803,
+      "sha256": "ff74c338faefe936835080fac8979c322b6bba29393d1dc14dde2afb2c2f14fb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/preserved-refusals-001/inverse-rest.log",
+      "bytes": 803,
+      "sha256": "ff74c338faefe936835080fac8979c322b6bba29393d1dc14dde2afb2c2f14fb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/preserved-refusals-001/premise-input.log",
+      "bytes": 1060,
+      "sha256": "7c6fc284da0f5b231ec237955d0b838b533bcb65b99ce46fadb74518b01e24d8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/preserved-refusals-001/premises-002.log",
+      "bytes": 1026,
+      "sha256": "7c7563b01bd4553fd6af8f5ff379154ef75dc1bc43e587aadd0c6180c794fab7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/preserved-refusals-001/premises.log",
+      "bytes": 1138,
+      "sha256": "a66e74b049070fec7c485332876b8a3d29e789f16aae4549a08e211e12a064b8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/source-handoff-001/all31-dispositions.json",
+      "bytes": 148372,
+      "sha256": "f0e11e57930c2458c0d51229f1e8e6cbb67ee8474328898809ab75bfb891abfd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/source-handoff-001/publication.json",
+      "bytes": 497,
+      "sha256": "af7d5de282fd0a8a6bfa6562ecd63b10816053e905338637064a9dd698bfc77f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/source-handoff-001/source-handoff.json",
+      "bytes": 2005336,
+      "sha256": "81df80503859d9939f2d2a05654aa5c3350030cd3f9468bd713844270c24dc69",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/source-handoff-002/all31-dispositions.json",
+      "bytes": 148372,
+      "sha256": "f0e11e57930c2458c0d51229f1e8e6cbb67ee8474328898809ab75bfb891abfd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/source-handoff-002/publication.json",
+      "bytes": 497,
+      "sha256": "f3e84aef383799bd2c8d35274fcf3484160982e303ad06d82841a1c878c4e325",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/source-handoff-002/source-handoff.json",
+      "bytes": 2014778,
+      "sha256": "8774bb2c52e63efe2a28fc91f8cb428c012ac2fd48033d4aef967d91b0af7611",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/source-premise-input-001/premise-input.json",
+      "bytes": 1883779,
+      "sha256": "a5464acb0e24480e6544a070db816275f09021e22f43f479e701d0234a635085",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/source-premise-input-001/publication.json",
+      "bytes": 275,
+      "sha256": "e7b9a0ef5820be32ed5066234d414ea612ff3c4bd6a7df980e4571f9cc9a97de",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/source-premises-001/publication.json",
+      "bytes": 261,
+      "sha256": "1e108a245b5871ab510dad5c42f19d4f214196dca7c1ed49cd33fae07fa0b8ff",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/source-premises-001/result.json",
+      "bytes": 17768,
+      "sha256": "28ce82b91be1b79bb79ec8d457144fb6b69e9b861bff0825938644a9285643ad",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "source_compatible_count",
+      "value": 19,
+      "unit": "components",
+      "vintage": "baseline",
+      "evaluation_commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "input_sha256": "a5464acb0e24480e6544a070db816275f09021e22f43f479e701d0234a635085"
+    },
+    {
+      "id": "proposed_handoff_count",
+      "value": 19,
+      "unit": "components",
+      "vintage": "baseline",
+      "evaluation_commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "input_sha256": "bd3c8c0a099c4fbef385d3a7d401aaca7de6db10ec9f6a2f164621c8a65bd452"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "source_compatible_count",
+      "path": "research/geography/norway31-source-fit-20261011/vintages/source-premises-001/result.json",
+      "json_pointer": "/source_compatible_count"
+    },
+    {
+      "metric_id": "proposed_handoff_count",
+      "path": "research/geography/norway31-source-fit-20261011/vintages/source-handoff-002/all31-dispositions.json",
+      "json_pointer": "/proposed_count"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [
+    {
+      "status": "supported",
+      "source_ids": [
+        "gb:NOR:ADM2",
+        "original-physical-reference",
+        "current-selected-reference"
+      ],
+      "text": "Nineteen original Norway components have complete source-relative custody and actual unchanged pure SOURCE premise support under the shared literal primitive interpretation. All31 original outcomes, original strict failures and dissolved diagnostics remain explicit."
+    },
+    {
+      "status": "unresolved",
+      "source_ids": [
+        "original-physical-reference",
+        "current-selected-reference"
+      ],
+      "text": "Twelve cases remain held: eight mixed/unknown physical cases, three cases whose two complete physical inverse products cannot yet be reconstructed, and one original Python-versus-JS geometry hash mismatch. Downstream SOURCE/NATIVE operators, current rebind, actual native/continuous/consumer gates and selected integration remain mandatory. Incremental continuous area is unknown. Original detector area is not net newly added map area."
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "See README.md for exact immutable stage interfaces, actual execution heads and fresh-vintage requirements.",
+    "node research/geography/norway31-source-fit-20261011/tools/check_handoff.mjs",
+    "node scripts/evidence-quality.mjs research/geography/norway31-source-fit-20261011/evidence-quality.json"
+  ]
+}
