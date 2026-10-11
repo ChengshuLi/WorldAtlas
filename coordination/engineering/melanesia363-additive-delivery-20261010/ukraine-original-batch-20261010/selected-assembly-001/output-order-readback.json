@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "kind": "assembly-object-order-correction-readback-v1",
+  "operator_rerun": false,
+  "original_wrapper_qualified": false,
+  "original_refusal": "Assembly qualification summary differs",
+  "output_validation": "passed",
+  "execution_commit": "547a7c1778bc49d841ee619b23a4b8d545b915fc",
+  "corrected_checker": {
+    "path": "coordination/engineering/melanesia363-additive-delivery-20261010/supervise-selected-assembly-linux.mjs",
+    "sha256": "bfee53a1661fec240dc781a4b14d5f8509476331eb34fa35e93b6032b923385d"
+  },
+  "inputs": [
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-assembly-001/receipt.json",
+      "bytes": 35391,
+      "sha256": "6111963a8fbdef2eef39d7531f53e2b6d9bf5fc26a3e76314f22db002bd5ffb7"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-assembly-001/samples.json",
+      "bytes": 87511,
+      "sha256": "c6860206f30be7425f6f9ee638df6af164daa71ae8f298e794672282d9719dac"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-assembly-001/stdout.txt",
+      "bytes": 1265,
+      "sha256": "19200a5519dcf326d9e24122d427451d9302eeee28d915ba49dd77496a463ecb"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-assembly-001/stderr.txt",
+      "bytes": 1310,
+      "sha256": "545ff6ae23c4371dc85d76acfc58eeaee74118764ddab6096d8546db9db93c46"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-assembly-001/issued-parameters.json",
+      "bytes": 17270,
+      "sha256": "9bf514ce68107a1ade2329c3d655d4a2423ea83a926e342ea0d81ea0007bd8d8"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-release-001/ledger.json",
+      "bytes": 486331,
+      "sha256": "72f5b366ab03e13274f5f682624c740a183eb09aa9f02d6b056cb7bda3f7bc6e"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-release-001/patch.json",
+      "bytes": 9691,
+      "sha256": "920888d9f48c61c439a2109f776ae1849f747d9f413ed113e0e63dd7556688d4"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-release-001/envelope.json",
+      "bytes": 1421,
+      "sha256": "f1d43db79da7430c6e7e3276849333a4d10d4c927e666f1b48c45621fa6d244c"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-release-001/qualification.json",
+      "bytes": 675,
+      "sha256": "ac746b4ded8dfc0162a82f38b2ff45a0a4e94987ebc0c880b20da53fd176020a"
+    }
+  ],
+  "complete_reader_phase_bytes": 253228786,
+  "assigned_cells": 353,
+  "components": 36,
+  "elapsed_seconds": 24.919,
+  "lifetime_plus_supervisor_bytes": 395120640,
+  "limits": [
+    "Original false refusal and measurements remain unchanged. This is corrected parsed-value output validation, not a newly executed operating receipt.",
+    "Current-rebind certificate and normal independent selected native/continuous gates remain authoritative."
+  ]
+}

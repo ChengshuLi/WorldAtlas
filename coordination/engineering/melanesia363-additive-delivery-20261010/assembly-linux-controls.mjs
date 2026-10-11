@@ -28,8 +28,8 @@ test('assembly terminal storage checks exact stderr, product union and original 
 test('assembly final entry binds all four actual product bytes and qualified summary',()=>{
  const root=fs.mkdtempSync(path.join(os.tmpdir(),'assembly-products-')),head='a'.repeat(40),products=[];
  try{
-  for(const name of ['ledger','patch','envelope','qualification']){const raw=Buffer.from('{}\n');fs.writeFileSync(path.join(root,name+'.json'),raw);products.push({path:name+'.json',bytes:raw.length,sha256:createHash('sha256').update(raw).digest('hex')});}
-  const result={execution_commit:head,complete_reader_phase_bytes:100,products,qualification:{}};assert.equal(assemblyProducts(root,JSON.stringify(result),head).execution_commit,head);
+  for(const name of ['ledger','patch','envelope','qualification']){const raw=Buffer.from(name==='qualification'?'{"a":1,"z":{"first":true,"second":2}}\n':'{}\n');fs.writeFileSync(path.join(root,name+'.json'),raw);products.push({path:name+'.json',bytes:raw.length,sha256:createHash('sha256').update(raw).digest('hex')});}
+  const result={execution_commit:head,complete_reader_phase_bytes:100,products,qualification:{z:{second:2,first:true},a:1}};assert.equal(assemblyProducts(root,JSON.stringify(result),head).execution_commit,head);
   for(const edit of [r=>r.execution_commit='b'.repeat(40),r=>r.products[0].sha256='c'.repeat(64),r=>r.products[0].bytes++,r=>r.products.push(r.products[0]),r=>r.qualification={changed:true},r=>r.complete_reader_phase_bytes=268435457]){const other=structuredClone(result);edit(other);assert.throws(()=>assemblyProducts(root,JSON.stringify(other),head),/Assembly|assembly/);}
  }finally{fs.rmSync(root,{recursive:true,force:true});}
 });

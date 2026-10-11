@@ -1,5 +1,6 @@
 // Fixed Linux operating wrapper for the existing selected-release assembler.
 // SOURCE/NATIVE evidence and current-rebind certificate limits are unchanged.
+import {isDeepStrictEqual} from 'node:util';
 import fs from 'node:fs';import path from 'node:path';import {execFileSync} from 'node:child_process';import {createHash} from 'node:crypto';import {fileURLToPath,pathToFileURL} from 'node:url';
 const MiB=1048576,CAP=1024*MiB,PHASE=256*MiB;
 const PREFIX='coordination/engineering/melanesia363-additive-delivery-20261010/';
@@ -18,7 +19,7 @@ export function assemblyProducts(output,stdout,head){
  demand(Number.isSafeInteger(summary.complete_reader_phase_bytes)&&summary.complete_reader_phase_bytes>0&&summary.complete_reader_phase_bytes<=PHASE,'Complete assembly reader phase');
  let total=0;for(const name of names){const raw=smallFile(path.join(output,name+'.json'),4*MiB);total+=raw.length;
   const matches=summary.products.filter(p=>p.path===name+'.json');demand(matches.length===1&&matches[0].bytes===raw.length&&matches[0].sha256===sha(raw),'Assembly product/stdout mismatch');}
- demand(total<=4*MiB,'Assembly product union');demand(JSON.stringify(JSON.parse(smallFile(path.join(output,'qualification.json'),4*MiB)))===JSON.stringify(summary.qualification),'Assembly qualification summary differs');return summary;
+ demand(total<=4*MiB,'Assembly product union');demand(isDeepStrictEqual(JSON.parse(smallFile(path.join(output,'qualification.json'),4*MiB)),summary.qualification),'Assembly qualification summary differs');return summary;
 }
 async function main(){
  demand(process.platform==='linux'&&!process.execArgv.length&&!process.env.NODE_OPTIONS&&!process.env.NODE_PATH,'Plain Linux assembly supervisor required');
