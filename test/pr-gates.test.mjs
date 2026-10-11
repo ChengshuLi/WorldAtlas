@@ -3,7 +3,9 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import fs from 'node:fs';
 import {checkPRGates, runPRGates} from '../scripts/check-pr-gates.mjs';
-import {githubAPI} from '../scripts/issue-claim-contract.mjs';
+import {githubAPI, verifyClaimForPR} from '../scripts/issue-claim-contract.mjs';
+import {integrationProfile} from '../scripts/integration-profile.mjs';
+import {PROOF_PATHS, WORKFLOW_PATH} from '../scripts/integration-proof.mjs';
 import {requestAccounting} from '../scripts/github-quota.mjs';
 import {loadPackageInputs} from '../scripts/package-inputs.mjs';
 import {checkPREvidence} from '../scripts/check-pr-evidence.mjs';
@@ -106,6 +108,186 @@ for (const lane of ['engineering', 'geography', 'research']) test(`real composed
   assert.equal(result.evidence.status, 'legacy-or-report-only');
   assert.deepEqual(result.owned_paths, f.claim.owned_paths ?? []);
 });
+// A fresh branch can publish its original issue-owned evidence without
+// restoring the historical branch whose name matches the retained prefix.
+function ownedEngineeringFixture() {
+  const f = fixture(), owned = 'coordination/engineering/retained-job/';
+  const spec = JSON.parse(f.issue.body.match(/\n(.+)\n/)[1]);
+  spec.owned_paths = [owned];
+  f.issue.body = '<!-- worldatlas-work:v1\n' + JSON.stringify(spec) + '\n-->';
+  f.files.splice(0, f.files.length, {filename: owned + 'vintages/next/source-handoff.json', status: 'added'});
+  f.owned = owned;
+  return f;
+}
+async function currentEngineeringReservation(f) {
+  const comments = await f.api(f.root + '/issues/10/comments?per_page=100&page=1');
+  return verifyClaimForPR({branch: f.pr.head.ref, issue: f.issue, comments});
+}
+test('actual PR selector and merge profile share the authenticated retained engineering prefix', async () => {
+  const f = ownedEngineeringFixture();
+  assert.equal(integrationProfile(f.pr.head.ref, f.files), 'full', 'No unverified ownership shortcut');
+  const selected = await selectIntegrationProfile({event: f.event, repo: f.repo, api: f.api});
+  assert.equal(selected.profile, 'evidence'); assert.deepEqual(selected.shards, [0]);
+  const reservation = await currentEngineeringReservation(f);
+  // prepareIntegration and completeIntegration both use this exact exported
+  // classifier with their freshly authenticated reservation.
+  assert.equal(integrationProfile(f.pr.head.ref, f.files, reservation), selected.profile);
+  const state = await inspectMerge({repo: f.repo, number: f.pr.number, expectedHead: f.pr.head.sha,
+    api: async route => {
+      if (route === f.root + '/git/ref/heads/main') return {object: {sha: f.pr.base.sha}};
+      if (route.startsWith(f.root + '/commits/') && route.includes('/check-runs'))
+        return {check_runs: [{id: 1, name: 'scope', app: {id: 1}, status: 'completed', conclusion: 'success'}]};
+      if (route.startsWith(f.root + '/commits/') && route.endsWith('/status')) return {statuses: []};
+      return f.api(route);
+    }, policy: {version: 1, mode: 'enforce-new', activation_time: '2100-01-01T00:00:00Z'},
+    evidenceCheck: async () => ({status: 'legacy'})});
+  assert.deepEqual(state.reservation, reservation);
+  assert.equal(integrationProfile(state.pr.head.ref, state.files, state.reservation), 'evidence');
+});
+test('actual prepare and final merge reuse only successful focused proof for retained engineering ownership', async () => {
+  const f = ownedEngineeringFixture(), candidate = 'c'.repeat(40), testedTree = 'd'.repeat(40), baseTree = 'e'.repeat(40);
+  Object.assign(f.pr, {draft: false, mergeable: true, merge_commit_sha: candidate, title: 'Publish retained evidence'});
+  const workflow = Buffer.from('ref: ${{ github.event.pull_request.head.sha }}\nname: Complete regression shard\nname: Build hosted assets');
+  const workflowOID = createHash('sha1').update(`blob ${workflow.length}\0`).update(workflow).digest('hex');
+  const authorityRows = PROOF_PATHS.map(name => ({path: name, sha: name === WORKFLOW_PATH ? workflowOID : 'f'.repeat(40), mode: '100644', type: 'blob'}));
+  const rows = [...authorityRows, {path: f.files[0].filename, sha: '1'.repeat(40), mode: '100644', type: 'blob'}];
+  const run = {id: 12, run_attempt: 1, head_sha: f.pr.head.sha, event: 'pull_request', path: WORKFLOW_PATH,
+    repository: {full_name: f.repo}, head_repository: {full_name: f.repo}, status: 'completed', conclusion: 'success',
+    pull_requests: [{number: f.pr.number, head: {sha: f.pr.head.sha}}]};
+  const jobs = [{name: 'profile', status: 'completed', conclusion: 'success'},
+    {name: 'regression (0)', status: 'completed', conclusion: 'success', steps: [
+      'Checkout reviewed head', 'Install browser dependencies only for tests that use Playwright', 'Complete regression shard'
+    ].map(name => ({name, status: 'completed', conclusion: 'success'}))}];
+  const writes = [], options = {repo: f.repo, number: f.pr.number, expectedHead: f.pr.head.sha,
+    candidateSleep: async () => {}, policy: {version: 1, mode: 'enforce-new', activation_time: '2100-01-01T00:00:00Z'},
+    evidenceCheck: async () => ({status: 'legacy'}), api: async (route, method = 'GET', body) => {
+      if (method !== 'GET') {assert.equal(method, 'PUT');writes.push(body);return {merged: true, sha: '2'.repeat(40)};}
+      if (route === f.root + '/git/ref/heads/main') return {object: {sha: f.pr.base.sha}};
+      if (route.startsWith(f.root + '/commits/') && route.includes('/check-runs'))
+        return {check_runs: [{id: 1, name: 'scope', app: {id: 1}, status: 'completed', conclusion: 'success'}]};
+      if (route.startsWith(f.root + '/commits/') && route.endsWith('/status')) return {statuses: []};
+      if (route === f.root + '/git/commits/' + candidate) return {tree: {sha: testedTree}, parents: [{sha: f.pr.base.sha}, {sha: f.pr.head.sha}]};
+      if (route === f.root + '/git/commits/' + f.pr.head.sha) return {tree: {sha: testedTree}};
+      if (route === f.root + '/git/commits/' + f.pr.base.sha) return {tree: {sha: baseTree}};
+      if (route.startsWith(f.root + '/git/trees/')) return {truncated: false, tree: route.includes(baseTree) ? authorityRows : rows};
+      if (route === f.root + '/git/blobs/' + workflowOID) return {sha: workflowOID, size: workflow.length, encoding: 'base64', content: workflow.toString('base64')};
+      if (route.includes('/actions/workflows/')) return {workflow_runs: [run]};
+      if (route.endsWith('/actions/runs/12')) return run;
+      if (route.includes('/actions/runs/12/attempts/1/jobs')) return {jobs};
+      return f.api(route);
+    }};
+  const prepared = await prepareIntegration(options);
+  assert.equal(prepared.profile, 'evidence');assert.equal(prepared.proof.profile, 'evidence');
+  assert.equal(prepared.proof.run_id, 12);assert.equal(writes.length, 0);
+  const complete = () => completeIntegration({...options, integrationResult: 'skipped', geographyResult: 'success',
+    testedBase: f.pr.base.sha, testedCandidate: candidate, proofRunId: 12, proofRunAttempt: 1,
+    geographyReportLoader: async () => ({version: 1, method_id: 'worldatlas-trusted-geography-check-v1',
+      baseline_commit: f.pr.base.sha, trusted_code_commit: f.pr.base.sha, candidate_commit: candidate,
+      candidate_code_executed: false, published: false, source_approval: false, gate_status: 'passed', status: 'not-applicable'})});
+  jobs[1].conclusion = 'failure';
+  await assert.rejects(complete(), /proof is no longer valid/);assert.equal(writes.length, 0);
+  jobs[1].conclusion = 'success';
+  const result = await complete();assert.equal(result.accepted, true);assert.equal(result.proof.profile, 'evidence');
+  assert.equal(writes.length, 1);assert.equal(writes[0].sha, f.pr.head.sha);
+});
+
+test('actual composed engineering gates reuse captured claim reads and keep package classification independent', async () => {
+  const f = ownedEngineeringFixture();
+  const result = await checkPRGates({event: f.event, repo: f.repo, token: 'fixture', api: f.api, phase: 'metadata'});
+  assert.equal(result.profile, 'evidence'); assert.equal(result.package.full, false);
+  assert.deepEqual(result.owned_paths, [f.owned]);
+  assert.equal(f.calls.filter(route => route === f.root + '/issues/10').length, 2, 'One captured pass plus final fresh reconciliation');
+  assert.equal(f.calls.filter(route => route === f.root + '/issues/10/comments?per_page=100&page=1').length, 2);
+  f.files.push({filename: 'src/attributes.js', status: 'modified'});f.pr.changed_files++;
+  const full = await checkPRGates({event: f.event, repo: f.repo, token: 'fixture', api: f.api, phase: 'metadata'});
+  assert.equal(full.profile, 'full'); assert.equal(full.package.full, true);
+});
+for (const [name, mutate] of [
+  ['expired', f => {f.claim.expires_at = '2020-01-01T00:00:00Z';}],
+  ['inactive', f => {f.claim.active = false;}],
+  ['wrong branch', f => {f.claim.branch = 'engineering/retained-job';}],
+  ['not ready', f => {f.issue.labels = f.issue.labels.filter(x => x !== 'status:ready');}],
+  ['blocked', f => {f.issue.labels.push('status:blocked');}],
+  ['wrong issue type', f => {f.issue.labels[0] = 'type:geography';}],
+  ['wrong scope mode', f => {f.issue.body = f.issue.body.replace('"mode":"engineering"', '"mode":"geography"');}],
+  ['unsafe scope', f => {f.issue.body = f.issue.body.replace('coordination/engineering/retained-job/', 'coordination/engineering/../');}]
+]) test(`actual retained-prefix PR selection rejects ${name} ownership`, async () => {
+  const f = ownedEngineeringFixture();mutate(f);
+  await assert.rejects(selectIntegrationProfile({event: f.event, repo: f.repo, api: f.api}));
+});
+test('retained-prefix classification does not accept namespace roots, exact files, foreign files or rename origins', async () => {
+  const f = ownedEngineeringFixture(), reservation = await currentEngineeringReservation(f);
+  for (const grant of ['coordination/engineering/', 'coordination/', 'src/', 'data/', '.github/',
+    f.files[0].filename, f.owned + '../', f.owned + './', f.owned.slice(0, -1)])
+    assert.equal(integrationProfile(f.pr.head.ref, f.files, {...reservation, owned_paths: [grant]}), 'full', grant);
+  for (const value of [{}, {...reservation, mode: 'geography'}, {...reservation, owned_paths: []}])
+    assert.equal(integrationProfile(f.pr.head.ref, f.files, value), 'full');
+  for (const name of ['coordination/engineering/retained-job-other/result.json', 'coordination/engineering/foreign/result.json',
+    'src/attributes.js', 'data/ownership-selection.json', '.github/workflows/arbitrary.yml']) {
+    const files = [{filename: name, status: 'added'}];
+    assert.equal(integrationProfile(f.pr.head.ref, files, reservation), 'full', name);
+    assert.equal(integrationProfile(f.pr.head.ref, [{...f.files[0], status: 'renamed', previous_filename: name}], reservation), 'full', name);
+  }
+});
+test('new retained-prefix exception cannot downgrade the actual selected scientific reader', async () => {
+  const f = ownedEngineeringFixture(), prefix = 'coordination/engineering/selected-geography-effective-prevention-20261009/';
+  f.issue.body = f.issue.body.replace(f.owned, prefix);
+  f.files[0] = {filename: prefix + 'selected-neighbor-prevention.mjs', status: 'modified'};
+  const reservation = await currentEngineeringReservation(f);
+  assert.equal(reservation.mode, 'engineering');assert.deepEqual(reservation.owned_paths, [prefix]);
+  assert.equal(integrationProfile(f.pr.head.ref, f.files, reservation), 'full');
+  assert.equal((await selectIntegrationProfile({event: f.event, repo: f.repo, api: f.api})).profile, 'full');
+});
+test('new retained-prefix exception accepts additions and only the exact evidence manifest modification', async () => {
+  const f = ownedEngineeringFixture(), reservation = await currentEngineeringReservation(f);
+  const added = ['README.md', 'custody/build_handoff.py', 'custody/bind_current_neighbors.mjs',
+    'vintages/components-005.jsonl.gz', 'vintages/source-handoff.json', 'logs/source.stderr']
+    .map(name => ({filename: f.owned + name, status: 'added'}));
+  assert.equal(integrationProfile(f.pr.head.ref, added, reservation), 'evidence');
+  assert.equal(integrationProfile(f.pr.head.ref, [...added, {filename: f.owned + 'evidence-quality.json', status: 'modified'}], reservation), 'evidence');
+  for (const filename of [f.owned + 'vintages/evidence-quality.json', f.owned + 'custody/build_handoff.py',
+    f.owned + 'method.mjs', f.owned + 'package.json', f.owned + 'result.json']) {
+    for (const status of ['modified', 'removed', 'renamed', 'copied', 'unknown'])
+      assert.equal(integrationProfile(f.pr.head.ref, [{filename, status}], reservation), 'full', `${filename}/${status}`);
+  }
+  for (const status of ['removed', 'renamed', 'copied'])
+    assert.equal(integrationProfile(f.pr.head.ref, [{filename: f.owned + 'evidence-quality.json', status}], reservation), 'full');
+  assert.equal(integrationProfile(f.pr.head.ref, [{...added[0], previous_filename: f.owned + 'old.md'}], reservation), 'full');
+  assert.equal(integrationProfile('engineering/retained-job', [{filename: f.owned + 'method.mjs', status: 'modified'}]), 'evidence',
+    'Existing branch-aligned behavior is outside this narrow correction');
+});
+test('retained-prefix exception does not use old checked-out package roles after a PR base advance', async () => {
+  const f = ownedEngineeringFixture();f.pr.base.sha = '9'.repeat(40);
+  assert.notEqual(f.event.pull_request.base.sha, f.pr.base.sha);
+  assert.equal((await selectIntegrationProfile({event: f.event, repo: f.repo, api: f.api})).profile, 'full');
+});
+
+test('new retained-prefix additions do not exempt package inputs, module configuration or unknown artifacts', async () => {
+  const f = ownedEngineeringFixture(), reservation = await currentEngineeringReservation(f);
+  for (const name of ['package.json', 'package-lock.json', 'npm-shrinkwrap.json', '__init__.py', 'sitecustomize.py', 'usercustomize.py',
+    'requirements.txt', 'pyproject.toml', 'setup.py', 'setup.cfg', '.npmrc', '.pth', 'binding.node', 'plugin.so'])
+    assert.equal(integrationProfile(f.pr.head.ref, [{filename: f.owned + 'custody/' + name, status: 'added'}], reservation), 'full', name);
+  for (const mode of ['120000', '160000', '040000'])
+    assert.equal(integrationProfile(f.pr.head.ref, [{filename: f.owned + 'new.py', status: 'added', mode}], reservation), 'full');
+  const active = 'coordination/engineering/additive-native-activation-20261009/';
+  const claimed = {...reservation, owned_paths: [active]};
+  assert.equal(integrationProfile(f.pr.head.ref, [{filename: active + 'new-input.json', status: 'added'}], claimed), 'full',
+    'Existing package directory grants remain active input authority');
+  const selected = 'coordination/engineering/selected-geography-effective-prevention-20261009/';
+  assert.equal(integrationProfile(f.pr.head.ref, [{filename: selected + 'selected-neighbor-prevention.mjs', status: 'added'}],
+    {...reservation, owned_paths: [selected]}), 'full', 'Declared exact dependency cannot use a claimed-added status to waive full tests');
+});
+
+test('retained engineering scope changes during actual composed inspection still refuse', async () => {
+  for (const mutate of [
+    f => {f.claim.worker_id = 'another-worker';},
+    f => {f.issue.body = f.issue.body.replace('retained-job/', 'foreign-job/');}
+  ]) {
+    const f = ownedEngineeringFixture();f.hooks[f.definitionRoute] = () => mutate(f);
+    await assert.rejects(checkPRGates({event: f.event, repo: f.repo, token: 'fixture', api: f.api, phase: 'metadata'}));
+  }
+});
+
 test('new required evidence cannot succeed using the legacy fixture', async () => {
   const f = fixture(); f.issue.created_at = '2026-10-08T00:00:00Z';
   await assert.rejects(f.run(), /evidence|Evidence|quality|subjects/i);

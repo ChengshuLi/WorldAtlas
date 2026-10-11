@@ -25,8 +25,29 @@ export function integrationProfile(branch, files, reservation = {}) {
       names.every(name => reservation.owned_paths.some(prefix => name.startsWith(prefix)))) return 'evidence';
   const job = branch.split('/').slice(1).join('/');
   if (branch.startsWith('research/') && names.every(name => name.startsWith(`research/campaigns/${job}/`))) return 'evidence';
-  if (branch.startsWith('engineering/') && names.every(name => COORDINATION_PATHS.has(name) || (name.startsWith('docs/') && /\.(md|txt)$/.test(name)) ||
-      name.startsWith(`coordination/engineering/${job}/`) || name === `coordination/engineering/${job}.json`)) return 'evidence';
+  if (branch.startsWith('engineering/')) {
+    const legacy = name => COORDINATION_PATHS.has(name) || (name.startsWith('docs/') && /\.(md|txt)$/.test(name)) ||
+      name.startsWith(`coordination/engineering/${job}/`) || name === `coordination/engineering/${job}.json`;
+    if (names.every(legacy)) return 'evidence';
+    // A verified retained scope permits new packets, not edits to its existing
+    // methods. Keep the original branch-matched policy above unchanged.
+    const scopes = reservation.mode === 'engineering' && Array.isArray(reservation.owned_paths)
+      ? reservation.owned_paths.filter(prefix => typeof prefix === 'string' &&
+        /^coordination\/engineering\/[^/]+\/(?:[^/]+\/)*$/.test(prefix) &&
+        prefix.slice(0, -1).split('/').every(part => /^[a-zA-Z0-9_.-]+$/.test(part) && part !== '.' && part !== '..')) : [];
+    if (!scopes.length) return 'full';
+    let definition;
+    try { definition = loadPackageInputs(); } catch { return 'full'; }
+    const packet = name => /\.(?:md|txt|json|jsonl|jsonl\.gz|log|stdout|stderr|mjs|py|csv|tsv)$/.test(name) &&
+      !/^(?:package(?:-lock)?\.json|npm-shrinkwrap\.json|(?:requirements|constraints)(?:[.-].*)?\.txt|pyproject\.toml|setup\.(?:py|cfg)|__init__\.py|(?:site|user)customize\.py|(?:js|ts)config(?:\.[^.]+)?\.json|import[-_.]?map\.json)$/i.test(name.split('/').at(-1));
+    if (files.every(file => {
+      if ([file.filename, ...(file.previous_filename ? [file.previous_filename] : [])].every(legacy)) return true;
+      if (file.previous_filename || !safePackagePath(file.filename) || file.filename.split('/').some(part => part.startsWith('.')) ||
+          file.mode !== undefined && !['100644', '100755'].includes(file.mode) || packagePathRequired(file.filename, definition)) return false;
+      return scopes.some(prefix => file.filename.startsWith(prefix) &&
+        (file.status === 'added' && packet(file.filename) || file.status === 'modified' && file.filename === prefix + 'evidence-quality.json'));
+    })) return 'evidence';
+  }
   return 'full';
 }
 
@@ -34,7 +55,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {isDeepStrictEqual as same} from 'node:util';
-import {validatePackageInputs, PACKAGE_INPUT_FILE} from './package-inputs.mjs';
+import {validatePackageInputs, loadPackageInputs, packagePathRequired, safePackagePath, PACKAGE_INPUT_FILE} from './package-inputs.mjs';
 const SELECTION = 'data/ownership-selection.json';
 const ADMINISTRATIVE_REGISTRY = 'coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json';
 const SOURCE_CORPUS = 'coordination/engineering/original-geography-source-corpus-20261006/';
