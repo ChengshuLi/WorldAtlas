@@ -23,7 +23,10 @@ export async function selectIntegrationProfile({event, repo, api, now = Date.now
     throw Error('Incomplete changed-path inventory');
   }
   let reservation = {};
-  if (pr.head.ref.startsWith('geography/') || selectedDataCandidate(pr.head.ref, files)) {
+  const needsEngineeringScope = pr.head.ref.startsWith('engineering/') &&
+    integrationProfile(pr.head.ref, files) === 'full' &&
+    files.some(file => [file.filename, file.previous_filename].some(name => name?.startsWith('coordination/engineering/')));
+  if (pr.head.ref.startsWith('geography/') || needsEngineeringScope || selectedDataCandidate(pr.head.ref, files)) {
     const {github_issue} = validateIssuePRBody(pr.body ?? '');
     const [issue, comments] = await completeReads([
       api(`${prefix}/issues/${github_issue}`),
@@ -32,12 +35,15 @@ export async function selectIntegrationProfile({event, repo, api, now = Date.now
     if (issue.number !== github_issue || readClaim(comments)?.issue_number !== github_issue) {
       throw Error('Reservation must belong to the linked issue');
     }
-    // Reuse the claim contract: current holder, exact branch, ready geography
-    // issue, safe owned prefixes and equality with the reviewed issue scope.
+    // Reuse the claim contract: current holder, exact branch, ready lane/type,
+    // safe owned paths and the current reviewed issue scope.
     // Profile selection is not a replacement for the merge/evidence gates.
     reservation = verifyClaimForPR({branch: pr.head.ref, issue, comments, now});
   }
-  const profile = integrationProfile(pr.head.ref, files, reservation);
+  let profile = integrationProfile(pr.head.ref, files, reservation);
+  // The retained-prefix exception consults package roles in this workflow's
+  // trusted event-base checkout. A newer PR base needs its own classification.
+  if (needsEngineeringScope && profile === 'evidence' && pr.base.sha !== scheduled.base?.sha) profile = 'full';
   const selection = profile === 'full' ? await selectedDataSelection({api, repo, branch: pr.head.ref, files,
     base: pr.base.sha, head: pr.head.sha}) : null;
   return {profile, shards: profile === 'full' ? [0, 1, 2] : [0], ...selection};

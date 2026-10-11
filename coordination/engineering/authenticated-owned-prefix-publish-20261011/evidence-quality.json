@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "issue": 1725,
+  "lane": "engineering",
+  "worker_id": "01a12806-e666-7781-b612-e4af40560004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+    "files": [
+      {
+        "path": "scripts/integration-profile.mjs",
+        "bytes": 34161,
+        "sha256": "dae629b854946bc28981d54f413de858d2e0e6cca5212a43295e79a82c7953db",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/check-integration-profile.mjs",
+        "bytes": 3742,
+        "sha256": "25dc7d673f4231038880c2a7ffa660f00203ae1376611eaea1fa8c4d5fc542cb",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/pr-gates.test.mjs",
+        "bytes": 38998,
+        "sha256": "d1fa007e0288f2acab9e9e7d26e64238fd0986b2c64dc1092d3c514067c3d2e2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/package-inputs.json",
+        "bytes": 71638,
+        "sha256": "835b9dec63bc799ba87514ec9671a93178e027040e9d100a9252fe054fc69854",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "authenticated-owned-prefix-entry-controls",
+      "kind": "code",
+      "description": "Existing active claim verification and narrowly additive retained engineering evidence-prefix classification through actual PR gates, integration preparation and final proof consumer. Only added packet/reproduction files and the exact owned evidence manifest edit use the new exception; existing helper/configuration mutations, active package roles, unsafe module files and stale event-base role policy retain full tests. Controls include the actual selected scientific reader counterexample, failed code proof and changed ownership before any merge write. The retained real PR1724 diff and issue1695 records establish the observed branch/prefix mismatch; no hosted runtime savings or scientific approval are claimed. The original PHL fifty-file positive was checked on its historical baseline. On the new delivery baseline, nineteen of those paths are now declared package inputs and correctly retain full classification; a separate unconsumed new-path fixture still receives the focused profile.",
+      "software": "Node.js 24; Git",
+      "units": "exact path, authority and entry-point assertions"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/pr-gates.test.mjs test/integration-proof.test.mjs test/merge-integration.test.mjs",
+    "node --test --test-name-pattern='retained|owned|composed engineering|scientific|package roles' test/pr-gates.test.mjs"
+  ],
+  "metric_bindings": []
+}
