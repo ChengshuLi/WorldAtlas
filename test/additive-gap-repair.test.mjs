@@ -6,7 +6,7 @@ import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readRegisteredAdministrativeHandoff,registeredAdministrativeHandoff,registeredAdministrativeViews,originalAdministrativeCandidateHash,retainedAdministrativeSourcePremises,retainedAdministrativeFragmentPremises,combineNativeBatch,retainedCountySourcePremises,retainedLandSourcePremises,wholePrimitivePointsetEqual,inventoryRows,joinInventoryFacts,restoreInventoryRow,candidateDisposition,admitInventoryDestination,selectedBankResolutions,inventoryGroup,restoreGroupedInventoryRow} from '../scripts/additive-gap-repair.mjs';
+import {registeredOriginalPhysicalProduct,readRegisteredAdministrativeHandoff,registeredAdministrativeHandoff,registeredAdministrativeViews,originalAdministrativeCandidateHash,retainedAdministrativeSourcePremises,retainedAdministrativeFragmentPremises,combineNativeBatch,retainedCountySourcePremises,retainedLandSourcePremises,wholePrimitivePointsetEqual,inventoryRows,joinInventoryFacts,restoreInventoryRow,candidateDisposition,admitInventoryDestination,selectedBankResolutions,inventoryGroup,restoreGroupedInventoryRow} from '../scripts/additive-gap-repair.mjs';
 import {footprintValueSha256 as hash} from '../src/effective-footprint.js';
 const row=(id,status='mapped-land-support')=>({component_id:id,candidate_feature_sha256:hash(id),candidate_geometry_sha256:hash([id]),status,
  physical_authority:'unapproved',physical_status:'unknown-source-fitness-and-observation-date',physical_limits:['original retained source limits'],complete_support:{whole_original_geometry:true}});
@@ -292,4 +292,15 @@ test('registered handoff provenance requires exact HEAD body and merged source a
   assert.throws(()=>readRegisteredAdministrativeHandoff(repo,rule,{pin:{...pin,blob:'f'.repeat(40)},body}),/executing-HEAD/);
   git('update-ref','refs/remotes/origin/main',initial);assert.throws(()=>readRegisteredAdministrativeHandoff(repo,rule,{pin,body}));
  }finally{fs.rmSync(repo,{recursive:true,force:true});}
+});
+
+test('registered physical inverse uses independent whole restored products and complete row counts',()=>{
+ const product={path:'components-030.jsonl.gz',bytes:1196109,sha256:'22363c332379d6dc16354b6079bf59766abf4cb9e7b20b111c7528e7c757fde8',hash_kind:'file-bytes',uncompressed_bytes:8376604,uncompressed_sha256:'05a242b39ebd98bd0f4a7b49515f50376e48c012e9e4561d22b455f5c04d6ae8'};
+ const restoration={path:product.path,whole_original_bytes:product.bytes,whole_original_sha256:product.sha256,decoded_bytes:product.uncompressed_bytes,decoded_sha256:product.uncompressed_sha256,rows:1326};
+ const scope={physical_restoration:{restorations:[restoration]}};assert.equal(registeredOriginalPhysicalProduct(scope,product,1326),true);
+ for(const key of ['path','bytes','sha256','uncompressed_bytes','uncompressed_sha256','hash_kind'])assert.equal(registeredOriginalPhysicalProduct(scope,{...product,[key]:typeof product[key]==='number'?product[key]+1:'changed'},1326),false);
+ for(const rows of [1325,1327,0])assert.equal(registeredOriginalPhysicalProduct(scope,product,rows),false);
+ assert.equal(registeredOriginalPhysicalProduct({physical_restoration:{restorations:[]}},product,1326),false);
+ assert.equal(registeredOriginalPhysicalProduct({physical_restoration:{restorations:[restoration,restoration]}},product,1326),false);
+ assert.equal(registeredOriginalPhysicalProduct(scope,{...product,unexpected:true},1326),false);
 });

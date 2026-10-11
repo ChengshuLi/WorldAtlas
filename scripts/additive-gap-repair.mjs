@@ -1073,6 +1073,17 @@ export function registeredAdministrativeHandoff(registry,rule) {
     &&(rule.geometry_scope??'full-component')==='full-component','Incomplete registered original batch or unsupported view');
   return entry;
 }
+// Direct accepted handoffs bind the complete restored products rather than
+// duplicating legacy per-row locator wrappers. Whole-product hashes bind order;
+// the stage still matches every expected complete row and unique source ID.
+export function registeredOriginalPhysicalProduct(scope,product,rows) {
+  const matches=scope?.physical_restoration?.restorations?.filter(p=>p.path===product.path);
+  if(!Array.isArray(matches)||matches.length!==1||!Number.isSafeInteger(rows)||rows<1)return false;
+  const p=matches[0],expected={path:p.path,bytes:p.whole_original_bytes,sha256:p.whole_original_sha256,
+    hash_kind:'file-bytes',uncompressed_bytes:p.decoded_bytes,uncompressed_sha256:p.decoded_sha256};
+  return p.rows===rows&&JSON.stringify(canonicalValue(expected))===JSON.stringify(canonicalValue(product));
+}
+
 export function readRegisteredAdministrativeHandoff(repo,rule,registry) {
   demand(rule.registry_path===ADMINISTRATIVE_REGISTRY_PATH,'Untrusted administrative registry path');
   const tree=execFileSync('git',['-C',repo,'ls-tree','-z','HEAD','--',rule.registry_path],{encoding:'utf8'});
@@ -1155,6 +1166,7 @@ function administrativeSourcePremiseStage(repo,request,report) {
     demand(value.pin.report_sha256===request.report.sha256&&value.pin.original_product_path===source.original_product_path&&product&&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(key=>product[key]===value.pin[key]),
       'Administrative original physical product differs from qualified report');
     const lines=value.body.toString('utf8').split('\n');demand(lines.pop()==='','Truncated original physical product');
+    if(registration)demand(registeredOriginalPhysicalProduct(scope,product,lines.length),'Registered original whole product/count differs');
     for(let ordinal=0;ordinal<lines.length;ordinal++){
       const row=JSON.parse(lines[ordinal]);
       if(source.original_product_path.startsWith('sources-')){demand(!nativeIds.has(row.id),'Duplicate original native metadata');nativeIds.add(row.id);if(neededNativeIds.has(row.id))native.set(row.id,{row,ordinal,product});}
@@ -1190,12 +1202,12 @@ function administrativeSourcePremiseStage(repo,request,report) {
     const ordinal=scope.candidate_source_native_bindings.indexOf(sourceCase);
     const cid=sourceCase.component_id,original=originals.get(cid),binding=scope.original_physical_comparison_bindings.filter(row=>row.component_id===cid);
     demand(binding.length===1&&equal(binding[0].physical_comparison.row,original.row)
-      &&binding[0].physical_comparison.ordinal===original.ordinal
-      &&equal(binding[0].physical_comparison.original_report_product,original.product),'Prepared physical record is not exact original inverse');
+      &&(registration||(binding[0].physical_comparison.ordinal===original.ordinal
+      &&equal(binding[0].physical_comparison.original_report_product,original.product))),'Prepared physical record is not exact original inverse');
     const queried=binding[0].original_queried_source_metadata;
     demand(queried.length===original.row.query_relations.length&&queried.every((row,i)=>{
       const value=native.get(original.row.query_relations[i].source_id);
-      return value&&row.ordinal===value.ordinal&&equal(row.original_sources_product,value.product)&&equal(row.original_source_record_metadata,value.row);
+      return value&&(registration||(row.ordinal===value.ordinal&&equal(row.original_sources_product,value.product)))&&equal(row.original_source_record_metadata,value.row);
     }),'Missing/rebound original queried source metadata');
     const one=(list,id)=>{const matches=list.filter(row=>row.component_id===id);demand(matches.length===1,'Nonunique original case');return matches[0];};
     if(!registration)demand(equal(sourceCase.retained_payload,one(payloads,cid))&&equal(sourceCase.whole_original_case,one(outcomes,cid))
