@@ -1,7 +1,10 @@
 {
   "execution_cohort_id": "congo-ago2018-cod2019-qualified-20261011",
   "component_ids": [
-    "physical-component:ab0110c97a2fe410389b76f435b0272b71880cb34f988cc9956c354837901667"
+    "physical-component:8441fde5898d6f7db14840ed710f12785697897e45a863a5edd692e935866fc2",
+    "physical-component:a207016c2c38eebb7539f7f778ab83588c0fed4cd909656ec88ea9905e1205da",
+    "physical-component:ab0110c97a2fe410389b76f435b0272b71880cb34f988cc9956c354837901667",
+    "physical-component:fb03e785463b4a99a605ca297b6dd2a2bb27f3352e108844ad5ca147d9fc622c"
   ],
   "historical_checkpoint": {
     "commit": "61b7b6115e1a16e426d16b72990998cf9329010c",
@@ -12,9 +15,21 @@
     "issue": 1694,
     "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1694#issuecomment-6102726622"
   },
-  "held_necessary_only_ids": [
-    "physical-component:8441fde5898d6f7db14840ed710f12785697897e45a863a5edd692e935866fc2",
-    "physical-component:fb03e785463b4a99a605ca297b6dd2a2bb27f3352e108844ad5ca147d9fc622c"
-  ],
-  "hold_reason": "Independent preliminary source review: necessary predicates alone do not resolve failed full-gain/zero-gain diagnostics; fb03 also reports nonempty dissolved loss. No acceptance or method waiver."
+  "held_necessary_only_ids": [],
+  "hold_reason": "Four historical COD5 cases remain held because their old strict failures have not been followed by complete current source/physical/neighbor qualification in this wave.",
+  "literal_policy": {
+    "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/cohort100-20261011/literal-union-source-policy-v1.json",
+    "bytes": 3786,
+    "sha256": "21c143adcc3883046c9e93339201b945bad22210df41d481d0a727ab8ac6e967",
+    "origin_commit": "05b118a84b9b97a3e8dd53d3bef67d6690853219",
+    "origin_path": "research/geography/norway31-source-fit-20261011/policy/literal-union-source-policy-v1.json",
+    "identical_copy_no_accepted_ancestry_claim": true
+  },
+  "original_target_preimage_products": [
+    {
+      "path": "data/geography/part-5.json",
+      "bytes": 5226173,
+      "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc"
+    }
+  ]
 }

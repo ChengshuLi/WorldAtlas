@@ -82,8 +82,30 @@ def main():
     if strict['baseline_commit'] != BASE or current['baseline'] != BASE or strict['scientific_or_publication_approval'] is not False:
         raise ValueError('Wrong current numerical premises')
     measured = {r['component_id']: r for r in strict['results']}
-    if set(selected_ids).intersection(config['held_necessary_only_ids']) or any(measured[cid]['failed_predicates'] for cid in selected_ids):
-        raise ValueError('Failed numerical case cannot enter producer handoff')
+    policy_raw = read(config['literal_policy']['path'], expected=config['literal_policy'])
+    policy = json.loads(policy_raw)
+    if policy['policy_id'] != 'retained-base-or-whole-original-component-20261011-v1' or not policy['method']['interpretation_only'] or policy['method']['executable_method_change']:
+        raise ValueError('Wrong existing literal-operation interpretation')
+    # Preserve every research predicate failure. The actual literal OR method
+    # permits same-intended-owner overlap, never foreign occupancy or bad inputs.
+    same_owner_probe_labels = {'candidate_current_target_no_positive_area_overlap', 'no_positive_area_any_current_neighbor'}
+    for cid in selected_ids:
+        row = measured[cid]
+        if set(row['failed_predicates']) - same_owner_probe_labels:
+            raise ValueError('Required source/current predicate failed')
+        if any(not hit.get('valid') or (hit.get('positive_area') and hit['id'] != row['target_id']) for hit in row['current_neighbor_hits']):
+            raise ValueError('Invalid or positive foreign current-owner overlap')
+        if any(not hit.get('valid') or (hit.get('positive_area') and hit['target_id'] != row['target_id']) for hit in row['current_addition_hits']):
+            raise ValueError('Invalid or positive foreign additive overlap')
+        if any(hit.get('positive_area') for hit in row['cohort_hits']):
+            raise ValueError('Conflicting proposed original candidates')
+    original_target_preimages = {}
+    for product in config['original_target_preimage_products']:
+        if not any(pin['path'] == product['path'] and pin.get('sha256') == product['sha256'] and pin.get('whole_body_consumed') for pin in current['source_inputs']):
+            raise ValueError('Target preimage product was not actual selected input')
+        collection = json.loads(read(product['path'], BASE, product))
+        for feature in collection['features']:
+            original_target_preimages[feature['id']] = feature
     # Reauthenticate whole original physical products, including nonselected rows.
     report = json.loads(read('coordination/engineering/global-physical-comparison-20261006/results/report.json', BASE))
     report_products = {p['path']: p for p in report['products']}
@@ -147,11 +169,14 @@ def main():
         positive = [r for r in comparison['feature_intersections'] if r['intersection']['planar_area_coordinate_units_squared'] > 0]
         if comparison['status'] != 'one-compatible-recorded-subject-uniquely-covers-component' or len(positive) != 1 or not positive[0]['source_feature_covers_entire_component']:
             raise ValueError('Original unique-source premise differs')
-        payload = {'component_id': cid, 'candidate_feature_sha256': sha(canon(candidate)), 'candidate_geometry_sha256': physical[cid]['candidate_geometry_sha256'], 'target_stable_location_id': target_id, 'unsupported_candidate_remainder_included': False, 'source_supported_intersection_fragments': [{'intersection_geometry': positive[0]['intersection']['geometry']}], 'target_current_feature': {'feature_sha256': sha(canon(target)), 'geometry_sha256': sha(canon(target['geometry'])), 'parent_id': target['properties']['parent_id']}}
+        canonical_target = original_target_preimages.get(target_id, target)
+        if canonical_target != target or sha(canon(canonical_target)) != comparison['uniquely_covering_compatible_recorded_subject']['original_feature_sha256']:
+            raise ValueError('Original target canonical preimage does not bind actual current feature')
+        payload = {'component_id': cid, 'candidate_feature_sha256': sha(canon(candidate)), 'candidate_geometry_sha256': physical[cid]['candidate_geometry_sha256'], 'target_stable_location_id': target_id, 'unsupported_candidate_remainder_included': False, 'source_supported_intersection_fragments': [{'intersection_geometry': positive[0]['intersection']['geometry']}], 'target_current_feature': {'feature_sha256': sha(canon(canonical_target)), 'geometry_sha256': sha(canon(canonical_target['geometry'])), 'parent_id': target['properties']['parent_id']}}
         cases.append({'component_id': cid, 'original_candidate_feature': candidate, 'retained_payload': payload, 'retained_source_operation_row': {'source_comparison_record': comparison, 'positive_area_recorded_source_subject_ids': [target_id], 'positive_area_source_feature_intersections': [r['binding'] for r in positive]}})
         physical_bindings.append({'component_id': cid, 'physical_comparison': {'row': physical[cid]}, 'original_queried_source_metadata': [{'original_source_record_metadata': r} for r in native[cid]['sources']]})
         candidate_bindings.append({'component_id': cid, 'feature_sha256': sha(canon(candidate)), 'feature_bytes_base64': base64.b64encode(canon(candidate)).decode(), 'derived_js_canonical_sha256': context['derived_js_feature_sha256']})
-        target_bindings[target_id] = {'target_id': target_id, 'feature_sha256': sha(canon(target)), 'feature_bytes_base64': base64.b64encode(canon(target)).decode(), 'geometry_sha256': sha(canon(target['geometry'])), 'geometry_bytes_base64': base64.b64encode(canon(target['geometry'])).decode()}
+        target_bindings[target_id] = {'target_id': target_id, 'feature_sha256': sha(canon(canonical_target)), 'feature_bytes_base64': base64.b64encode(canon(canonical_target)).decode(), 'geometry_sha256': sha(canon(canonical_target['geometry'])), 'geometry_bytes_base64': base64.b64encode(canon(canonical_target['geometry'])).decode()}
     historical = own('cohort100-20261011/historical-cod5-checkpoint.json')
     historical_pin = inputs[head + ':' + OWN + '/cohort100-20261011/historical-cod5-checkpoint.json']
     if any(historical_pin[k] != config['historical_checkpoint'][k] for k in ['bytes', 'sha256']):
@@ -167,9 +192,9 @@ def main():
         cid = old['component_id']
         row = {**old, 'retained_detector_area_m2': custody[cid]['retained_detector_area_m2'], 'resolved': False}
         if cid in historical_results:
-            row.update(disposition='retained-prior-strict-target-premise-failure-not-reexecuted', historical_observation=historical_results[cid], historical_checkpoint=config['historical_checkpoint'])
+            row.update(disposition='historical-probe-failure-retained-current-custody-not-qualified', historical_observation=historical_results[cid], historical_checkpoint=config['historical_checkpoint'])
         elif cid in measured:
-            row.update(disposition=('source-relative-supported-awaiting-independent-review' if cid in selected_ids else 'necessary-only-held-source-sufficiency' if cid in config['held_necessary_only_ids'] else 'current-target-positive-overlap-refused'), current_numerical_observation=measured[cid])
+            row.update(disposition=('literal-policy-source-supported-awaiting-independent-review' if cid in selected_ids else 'necessary-only-held-source-sufficiency' if cid in config['held_necessary_only_ids'] else 'current-target-positive-overlap-refused'), current_numerical_observation=measured[cid])
         all_dispositions.append(row)
     if len(all_dispositions) != 100 or {r['component_id'] for r in all_dispositions} != set(roster['candidate_ids']):
         raise ValueError('Incomplete full wave dispositions')
@@ -180,8 +205,10 @@ def main():
         'original_candidate_canonical_bindings': candidate_bindings, 'original_target_canonical_bindings': list(target_bindings.values()),
         'consumed_source_bindings': consumed, 'current_neighbor_binding': current, 'physical_restoration': restoration,
         'retained_necessary_predicates': {'execution_commit': strict['execution_head'], 'path': OWN + '/vintages/cohort100-strict-001/strict-predicates.json', 'sha256': inputs[head + ':' + OWN + '/vintages/cohort100-strict-001/strict-predicates.json']['sha256'], 'method': 'One actual current-context numerical execution; no duplicate-only rerun.'},
+        'literal_operation_policy': {**config['literal_policy'], 'consumed_pin': inputs[head + ':' + config['literal_policy']['path']]},
+        'incremental_continuous_area': 'unknown; retained detector area is not newly added map area',
         'constructor_disposition': {'source_relative_premises_supported': True, 'source_admission_requires_independent_review': True, 'literal_representation': 'Complete unchanged retained target plus complete unchanged candidate primitive; no dissolve or coordinate normalization.'},
-        'unknowns': ['Independent source review is required before this proposed handoff is admitted.', 'Physical/legal/current truth, original observation dates and processing cause remain unapproved.', 'Numerical dissolve diagnostics and all held cases remain explicit in the full100 packet.', 'SOURCE/NATIVE, selected continuous conservation and application delivery remain engineering work.', 'Accepted execution membership does not close the original100 wave, original ten,130 batch or global programme.'],
+        'unknowns': ['Independent source review is required before this proposed handoff is admitted.', 'Physical/legal/current truth, original observation dates and processing cause remain unapproved.', 'All original strict-probe failures, dissolved replacement diagnostics and held cases remain explicit; separately reviewed existing literal-operation interpretation does not relabel them.', 'SOURCE/NATIVE, selected continuous conservation and application delivery remain engineering work.', 'Accepted execution membership does not close the original100 wave, original ten,130 batch or global programme.'],
         'execution_commit': head, 'consumed_inputs': list(inputs.values())}
     summary = {'scope_count': 100, 'execution_scope_proposed': selected_ids, 'disposition_counts': dict(collections.Counter(r['disposition'] for r in all_dispositions)), 'rows': all_dispositions, 'scientific_or_publication_approval': False}
     if resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024 > 512 * 1024 ** 2:
