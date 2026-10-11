@@ -104,18 +104,18 @@ export async function checkPRGates({event, repo, token, api, now = Date.now, pha
 
 export async function runPRGates({event, env = process.env, directory = process.cwd(),
   apiFactory = githubAPI, transportFactory = gitBlobTransport, wallNow = Date.now,
-  monotonicNow = () => performance.now(), phase = 'all'}) {
+  monotonicNow = () => performance.now(), sleep, phase = 'all'}) {
   const accounting = requestAccounting('pr-gates'), downloads = [], started = monotonicNow();
   let result, transport, deadline;
   const hosted = env.GITHUB_ACTIONS === 'true';
-  // Only finite, no-retry metadata reads can precede authenticated job timing.
+  // One existing startup budget covers immutable workflow lookup and bounded job metadata observations.
   const bootstrapRemaining = () => 2 * HTTP_ATTEMPT_MS + 1000 - (monotonicNow() - started);
   const api = apiFactory(env.GH_TOKEN, {onRequest: accounting.observe,
     deadlineRemaining: () => deadline ? deadline.remaining() : hosted ? bootstrapRemaining() : 8 * 60 * 1000 - (monotonicNow() - started)});
   try {
     if (hosted) {
       const workflow = await readPRGateWorkflow({api, event, env});
-      deadline = await loadJobDeadline({api, repo: env.GITHUB_REPOSITORY, phase: phase === 'evidence' ? 'evidence' : 'profile', workflow, env, wallNow, monotonicNow});
+      deadline = await loadJobDeadline({api, repo: env.GITHUB_REPOSITORY, phase: phase === 'evidence' ? 'evidence' : 'profile', workflow, env, wallNow, monotonicNow, metadataRemaining: bootstrapRemaining, sleep});
     }
     if (phase !== 'metadata') transport = transportFactory(api, {repo: env.GITHUB_REPOSITORY, token: env.GH_TOKEN,
       directory, onFetch: row => downloads.push(row)});
@@ -125,6 +125,8 @@ export async function runPRGates({event, env = process.env, directory = process.
     const delay = quotaDelay(error, wallNow());
     result = {status: 'incomplete-or-invalid', head_sha: event.pull_request?.head?.sha,
       reason: error.message, ...(error.github ? {api_error: error.github} : {}),
+      ...(error.deadlineBinding ? {deadline_binding: error.deadlineBinding} : {}),
+      ...(error.jobDeadline ? {job_deadline_exhausted: true} : {}),
       ...(error.blocked ? {package: error.blocked} : {}), retryable: delay !== null || Boolean(error.blocked),
       ...(delay !== null ? {retry_at: new Date(wallNow() + delay).toISOString()} : {}),
       limits: ['Trusted metadata/evidence gates remain unverified; no success or applicability skip is claimed']};
