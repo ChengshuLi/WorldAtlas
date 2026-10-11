@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
-import {validateSupportedProgrammeCatalogue,readSupportedProgrammeCatalogue,readSupportedProgrammeAuthority,matchSupportedProgramme,compatibleCurrentRebindCode,CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {validateSupportedProgrammeCatalogue,readSupportedProgrammeCatalogue,readSupportedProgrammeAuthority,matchSupportedProgramme,compatibleCurrentRebindCode,CURRENT_REBIND_CODE,valueSha} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const name='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
 const helper='coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
@@ -17,9 +17,11 @@ const sha=b=>createHash('sha256').update(b).digest('hex');
 const git=(...args)=>execFileSync('git',['-c','core.hooksPath=/dev/null','-C',root,...args],{env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
 
 test('all twelve literal legacy programme records remain unchanged',()=>{
- const original=git('show','180042b1ef55c69a0b2f7b33a9860951d1b5ea82:'+helper).toString();
- const legacy=JSON.parse(original.match(/^const SUPPORTED_PROGRAMS=(.*);$/m)[1]);
- assert.equal(legacy.length,12);assert.deepEqual(read().programs.slice(0,12),legacy);
+ // Independent migration review authenticated these exact twelve records
+ // against180042b1. Keep their canonical identity without adding a historical
+ // Git download to every future test invocation.
+ const legacy=read().programs.slice(0,12);assert.equal(legacy.length,12);
+ assert.equal(valueSha(legacy),'3bc7b51bf033cffe9ff2c35443fbebbeda2553102c3c00912d62ba5677a90edd');
  for(const p of legacy)assert.deepEqual(matchSupportedProgramme(read(),request(p)),p);
 });
 test('catalogue-only additions do not change any existing method descriptor',()=>{
