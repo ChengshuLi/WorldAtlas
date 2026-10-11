@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {selectIntegrationProfile} from '../scripts/check-integration-profile.mjs';
 import {prepareIntegration, completeIntegration} from '../scripts/merge-integration.mjs';
@@ -25,7 +26,8 @@ function fixture({mutate = () => {}} = {}) {
   const registryBody={version:1,kind:'registry',entries:[entry]};
   const oldRegistry=put('coordination/engineering/prior/registry.json',registryBody,true);
   const base={version:1,method:'native-linear-evenodd-first-owner-v1',artifact_consumption:{certificate:{},review:{}},manifest_path:'unchanged.json',sha256:'a'.repeat(64)};
-  const oldSidecar=put('coordination/engineering/prior/sidecar.json',{authority_registry:oldRegistry},true);
+  const oldLedger=put('coordination/engineering/prior/ledger.json',{rows:[]},true);
+  const oldSidecar=put('coordination/engineering/prior/sidecar.json',{authority_registry:oldRegistry,logical_asset_map:{ledger:oldLedger}},true);
   const hook=pin=>({path:pin.path,bytes:pin.bytes,sha256:pin.sha256});
   put('data/ownership-selection.json',{...base,additive_release:hook(oldSidecar)},true);
   const registry=put(prefix+'registry.json',registryBody);
@@ -226,4 +228,60 @@ test('real prepare and cold final-capacity consumer measure selected metadata an
 test('actual capacity-enabled selected proof rechecks required consumer steps after waiting before any write',async()=>{
   const f=mergeFixture({afterWait:f=>{f.jobs.find(job=>job.name==='package').steps.at(-1).conclusion='failure';}});
   await assert.rejects(f.complete(),/proof is no longer valid/);assert.equal(f.writes.length,0);
+});
+
+// Retained real UKR metadata, not an idealized two-row ledger. Only a new hook,
+// reviewed expectations and exact package append are synthesized for eligibility;
+// no new repair or scientific output is constructed or published.
+function retainedUKRFixture() {
+  const blobs=new Map(), parsed=new Map(), pins=new Map();
+  const readOriginal=name=>{
+    if(parsed.has(name))return parsed.get(name);
+    const bytes=execFileSync('git',['show','HEAD:'+name],{maxBuffer:4*1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
+    const oid=createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');blobs.set(oid,bytes);
+    pins.set(name,{path:name,bytes:bytes.length,sha256:digest(bytes),git_blob_oid:oid,mode:'100644'});
+    const value=JSON.parse(bytes);parsed.set(name,value);return value;
+  };
+  const stem='coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/';
+  const sidecar=readOriginal(stem+'selected-release-001/selection-sidecar.json');
+  const ledger=readOriginal(sidecar.logical_asset_map.ledger.path),registry=readOriginal(sidecar.authority_registry.path);
+  assert.equal(digest(blobs.get(pins.get(sidecar.logical_asset_map.ledger.path).git_blob_oid)),
+    '72f5b366ab03e13274f5f682624c740a183eb09aa9f02d6b056cb7bda3f7bc6e');
+  assert.equal(ledger.rows.length,44);
+  const certificate=readOriginal(ledger.current_rebind.path);
+  const collect=value=>{if(!value||typeof value!=='object')return;
+    if(value.path&&value.git_blob_oid&&value.bytes!==undefined)pins.set(value.path,value);
+    for(const child of Object.values(value))collect(child);
+  };
+  for(const value of [sidecar,ledger,registry,certificate])collect(value);
+  const names=[...pins.keys()],rows=execFileSync('git',['ls-tree','HEAD','--',...names],{encoding:'utf8',maxBuffer:1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}}).trim().split('\n');
+  const baseline={entries:new Map()},authored={entries:new Map()};
+  for(const line of rows){const m=/^(\d+) (\w+) ([a-f0-9]+)\t(.+)$/.exec(line);assert(m,line);const pin=pins.get(m[4]);
+    assert.equal(m[1],pin.mode);assert.equal(m[3],pin.git_blob_oid);baseline.entries.set(m[4],{path:m[4],type:m[2],mode:m[1],sha:m[3],size:pin.bytes});}
+  for(const [name,row] of baseline.entries)authored.entries.set(name,{...row});
+  const put=(name,value,old=false)=>{const bytes=Buffer.from(typeof value==='string'?value:JSON.stringify(value)),sha=createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
+    blobs.set(sha,bytes);const row={path:name,mode:'100644',type:'blob',sha,size:bytes.length};authored.entries.set(name,row);if(old)baseline.entries.set(name,row);
+    return {path:name,bytes:bytes.length,sha256:digest(bytes)};};
+  put(SELECTED_SMOKE,'// fixture: generic helper accepted unchanged on future baseline',true);
+  const oldHook=pins.get(stem+'selected-release-001/selection-sidecar.json');
+  put('data/ownership-selection.json',{...sidecar.base_selection,additive_release:{path:oldHook.path,bytes:oldHook.bytes,sha256:oldHook.sha256}},true);
+  const definition=readOriginal('.github/package-inputs.json');put('.github/package-inputs.json',definition,true);
+  const hook=put(prefix+'selection-sidecar.json',sidecar);put('data/ownership-selection.json',{...sidecar.base_selection,additive_release:hook});
+  const active=ledger.rows.filter(row=>['assigned','zero-cell'].includes(row.disposition));
+  assert.equal(active.length,36);const expected={version:1,selected_ledger_sha256:sidecar.logical_asset_map.ledger.sha256,cumulative_native_cells:353,
+    cohorts:[{original_batch_id:'retained-active-roster-fixture',component_ids:active.map(row=>row.component_id),members:active.map(row=>Object.fromEntries(['component_id','target_id','disposition','geometry_sha256'].map(key=>[key,row[key]])))}]};
+  put(prefix+'selected-delivery-expectations.json',expected);put('.github/package-inputs.json',{...definition,inputs:[...definition.inputs,hook.path]});
+  const files=[...authored.entries].filter(([name,row])=>baseline.entries.get(name)?.sha!==row.sha).map(([filename])=>({filename,status:baseline.entries.has(filename)?'modified':'added'}));
+  const api=async route=>{const oid=route.split('/').at(-1),bytes=blobs.get(oid);assert(bytes,'unexpected opaque read '+route);return {sha:oid,size:bytes.length,encoding:'base64',content:bytes.toString('base64')};};
+  return {ledger,expected,sidecar,run:()=>selectedDataSelection({api,repo:'owner/repo',branch:'engineering/fixture-delivery',files,baseline,authored})};
+}
+test('actual retained44-row UKR graph admits36 active rows while preserving6 held and2 rejected rows',async()=>{
+  const f=retainedUKRFixture();assert.ok(await f.run());
+  assert.doesNotThrow(()=>validateSelectedExpectations(f.expected,f.ledger,f.sidecar.logical_asset_map.ledger.sha256,f.ledger));
+  for(const disposition of ['awaiting-evidence','rejected']){
+    const candidate=structuredClone(f.ledger);candidate.rows=candidate.rows.filter(row=>row!==candidate.rows.find(row=>row.disposition===disposition));
+    assert.throws(()=>validateSelectedExpectations(f.expected,candidate,f.sidecar.logical_asset_map.ledger.sha256,f.ledger),/held\/rejected/);
+  }
+  const partial=structuredClone(f.expected);partial.cohorts[0].members.pop();partial.cohorts[0].component_ids.pop();
+  assert.throws(()=>validateSelectedExpectations(partial,f.ledger,f.sidecar.logical_asset_map.ledger.sha256,f.ledger),/omit selected members/);
 });

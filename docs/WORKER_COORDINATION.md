@@ -568,8 +568,10 @@ regression shards.
 Each such delivery adds exactly one `selected-delivery-expectations.json` under its
 owned delivery directory. Use the existing smoke's version 1 schema, authored from
 reviewed original authority/ledger inputs. Eligibility binds its ledger hash,
-complete selected component roster (including zero-cell rows), targets, dispositions,
-geometries and cumulative native cells. Do not derive expectations from emitted
+complete active selected component roster (including zero-cell rows), targets,
+dispositions, geometries and cumulative native cells. Existing awaiting-evidence
+and rejected ledger rows remain unchanged; they are retained source records, not
+rendered selections. Reclassifying those old rows takes the full route. Do not derive expectations from emitted
 assets. Missing or ambiguous expectations retain full regression. Batch labels
 remain reviewed source-side statements, not a new independent source approval.
 

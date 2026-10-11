@@ -47,8 +47,9 @@ const keys = (value, names) => value && typeof value === 'object' && !Array.isAr
 const text = value => typeof value === 'string' && value.length > 0 && value.length < 1024;
 
 // Expectations are reviewed source-side data. Require the WHOLE selected roster,
-// including zero-cell members; a self-consistent subset cannot select fewer tests.
-export function validateSelectedExpectations(expected, ledger, ledgerHash) {
+// including zero-cell members. Held/rejected rows remain in the ledger but
+// are not rendered selections; a self-consistent active subset cannot select fewer tests.
+export function validateSelectedExpectations(expected, ledger, ledgerHash, previousLedger) {
   needSelected(keys(expected, ['version','selected_ledger_sha256','cumulative_native_cells','cohorts']) &&
     expected.version === 1 && expected.selected_ledger_sha256 === ledgerHash && hash(ledgerHash) &&
     Number.isSafeInteger(expected.cumulative_native_cells) && expected.cumulative_native_cells >= 0 &&
@@ -56,11 +57,18 @@ export function validateSelectedExpectations(expected, ledger, ledgerHash) {
     'invalid reviewed expectations');
   needSelected(ledger?.version === 2 && ledger.kind === 'native-additive-repair-ledger-v2' &&
     Array.isArray(ledger.rows) && ledger.rows.length > 0 && ledger.rows.length <= 10000, 'invalid selected ledger');
-  const actual = new Map(), members = new Map(), batches = new Set();
+  const actual = new Map(), allRows = new Map(), members = new Map(), batches = new Set();
   let cells = 0;
   for (const row of ledger.rows) {
-    needSelected(text(row.component_id) && !actual.has(row.component_id) &&
-      Number.isSafeInteger(row.native_cells) && row.native_cells >= 0, 'duplicate/invalid ledger member');
+    needSelected(text(row.component_id) && !allRows.has(row.component_id), 'duplicate/invalid ledger member');
+    allRows.set(row.component_id, row);
+    if (!['assigned','zero-cell'].includes(row.disposition)) {
+      needSelected(['awaiting-evidence','rejected'].includes(row.disposition) &&
+        (row.native_cells === undefined || row.native_cells === 0) && hash(row.authority_sha256) && hash(row.rule_sha256),
+        'unsupported inactive ledger member');
+      continue;
+    }
+    needSelected(Number.isSafeInteger(row.native_cells) && row.native_cells >= 0, 'invalid active native cells');
     actual.set(row.component_id, row); cells += row.native_cells;
   }
   needSelected(Number.isSafeInteger(cells) && cells === expected.cumulative_native_cells, 'native cell expectation differs');
@@ -79,7 +87,12 @@ export function validateSelectedExpectations(expected, ledger, ledgerHash) {
       members.set(member.component_id, member);
     }
   }
-  needSelected(members.size === actual.size, 'expectations omit selected members');
+  needSelected(members.size === actual.size && actual.size > 0, 'expectations omit selected members');
+  if (previousLedger) {
+    needSelected(Array.isArray(previousLedger.rows), 'missing previous ledger roster');
+    for (const old of previousLedger.rows.filter(row => ['awaiting-evidence','rejected'].includes(row.disposition)))
+      needSelected(same(allRows.get(old.component_id), old), 'previous held/rejected row changed or disappeared');
+  }
   return expected;
 }
 
@@ -166,7 +179,6 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     pin(sidecar.runtime_envelope);
     for (const value of Object.values(sidecar.logical_asset_map)) pin(value);
     const ledger = await pinnedJSON(sidecar.logical_asset_map.ledger);
-    validateSelectedExpectations(await json(expectedPaths[0]), ledger, sidecar.logical_asset_map.ledger.sha256);
     const registry = await pinnedJSON(sidecar.authority_registry);
     needSelected(keys(registry, ['version','kind','entries']) && registry.version === 1 &&
       Array.isArray(registry.entries) && registry.entries.length > 0 && registry.entries.length <= 1024,
@@ -175,6 +187,9 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     const oldSideBytes = await read(oldHook.path, baseline);
     needSelected(oldSideBytes.length === oldHook.bytes && sha256(oldSideBytes) === oldHook.sha256, 'preceding sidecar differs');
     const oldSide = JSON.parse(oldSideBytes), oldRegistryPin = oldSide.authority_registry;
+    const oldLedgerPin = oldSide.logical_asset_map?.ledger, oldLedgerBytes = await read(oldLedgerPin?.path, baseline);
+    needSelected(oldLedgerBytes.length === oldLedgerPin.bytes && sha256(oldLedgerBytes) === oldLedgerPin.sha256, 'preceding ledger differs');
+    validateSelectedExpectations(await json(expectedPaths[0]), ledger, sidecar.logical_asset_map.ledger.sha256, JSON.parse(oldLedgerBytes));
     const oldRegistryBytes = await read(oldRegistryPin.path, baseline);
     needSelected(oldRegistryBytes.length === oldRegistryPin.bytes && sha256(oldRegistryBytes) === oldRegistryPin.sha256, 'preceding registry differs');
     const oldRegistry = JSON.parse(oldRegistryBytes);
