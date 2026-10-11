@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
-import {validateSupportedProgrammeCatalogue,readSupportedProgrammeCatalogue,matchSupportedProgramme,compatibleCurrentRebindCode,CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {validateSupportedProgrammeCatalogue,readSupportedProgrammeCatalogue,readSupportedProgrammeAuthority,matchSupportedProgramme,compatibleCurrentRebindCode,CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const name='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
 const helper='coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
@@ -56,4 +56,16 @@ test('actual trusted-checkout catalogue is inventoried and charged, never select
  assert.equal(policy.pin.commit,head);assert.equal(policy.pin.path,name);assert.equal(policy.pin.sha256,sha(fs.readFileSync(path.join(root,name))));
  assert.equal(policy.pin.whole_body_consumed,true);assert.ok(reader.used>=before+3*policy.pin.bytes);
  assert.ok(reader.inventory.has(head+':'+name));assert.deepEqual(policy.catalogue,read());
+});
+
+test('compact programme authority survives a native phase reset with its carry charged',()=>{
+ const head=git('rev-parse','HEAD').toString().trim();
+ const reader=new ImmutableReader(root,head,{runtimeBytes:1,metadataBytes:17,executionBytes:1,outputBytes:1});
+ const proof=readSupportedProgrammeAuthority(reader,request(read().programs[0]));
+ assert.deepEqual(Object.keys(proof).sort(),['accepted_head','catalogue','independent_review_comment']);
+ assert.equal('programs' in proof,false);assert.equal('source_executed_code' in proof,false);
+ const carry=2*(JSON.stringify(proof)+'\n').length;assert.equal(reader.metadataBytes,17+carry);
+ reader.phase();assert.equal(reader.used,20+carry);
+ assert.equal(reader.inventory.get(head+':'+helper).whole_body_consumed,true);
+ assert.match(reader.inventory.get(head+':'+helper).sha256,/^[a-f0-9]{64}$/);
 });

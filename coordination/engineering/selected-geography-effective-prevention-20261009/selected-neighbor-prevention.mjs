@@ -78,9 +78,11 @@ export function matchSupportedProgramme(catalogue,{preimageVersion,sourceProfile
 
 // Only the compact reviewed authority escapes. The full policy graph and
 // exact matching scratch finish before native member phases reset accounting.
-function completedProgrammeAuthority(reader,request) {
+export function readSupportedProgrammeAuthority(reader,request) {
  const policy=readSupportedProgrammeCatalogue(reader),supported=matchSupportedProgramme(policy.catalogue,request);
- return {accepted_head:supported.accepted_head,independent_review_comment:supported.independent_review_comment,catalogue:policy.pin};
+ const authority={accepted_head:supported.accepted_head,independent_review_comment:supported.independent_review_comment,catalogue:policy.pin};
+ const carry=2*valueBytes(authority).length;demand(reader.used+carry<=PHASE,'Programme authority carry exceeds complete phase');
+ reader.metadataBytes+=carry;reader.used+=carry;return authority;
 }
 
 function pinCheck(p){
@@ -553,10 +555,7 @@ export function readRetainedRegistryAuthority(reader, entry) {
  demand(same(preimage,custody.rule_preimage)&&custody.rule_sha256===entry.rule_sha256,'Registry relabelled original executed rule');
  const original=originalAuthorities.get(custody).bodies;
  const codeIdentity=rows=>rows.map(p=>{demand(Object.keys(p).sort().join(',')==='bytes,path,sha256','Unsupported original complete code roster shape');return {path:p.path,bytes:p.bytes,sha256:p.sha256};});
- const programmeAuthority=completedProgrammeAuthority(reader,{preimageVersion:preimage.version,sourceProfile:custody.source_rule.profile??null,sourceCode:codeIdentity(original.source_request.executed_code),nativeCode:codeIdentity(original.native_request.executed_code)});
- const programmeCarry=2*valueBytes(programmeAuthority).length;
- demand(reader.used+programmeCarry<=PHASE,'Programme authority carry exceeds complete phase');
- reader.metadataBytes+=programmeCarry;reader.used+=programmeCarry;
+ const programmeAuthority=readSupportedProgrammeAuthority(reader,{preimageVersion:preimage.version,sourceProfile:custody.source_rule.profile??null,sourceCode:codeIdentity(original.source_request.executed_code),nativeCode:codeIdentity(original.native_request.executed_code)});
  const source=qualifyOriginalSourceAuthority(custody),native=qualifyOriginalNativeAuthority(custody,binding.native_proof);
  return freeze({version:1,kind:'authenticated-registry-source-custody-v1',authority_sha256:entry.authority_sha256,
   rule_sha256:entry.rule_sha256,original_program_authority:programmeAuthority,policy_id:entry.policy_id,policy_version:entry.policy_version,
