@@ -7,7 +7,7 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
 const demand=(ok,message)=>{if(!ok)throw Error(message);};
-const MiB=1024*1024,CAP=512*MiB,WALL=600000;
+const MiB=1024*1024,CAP=1024*MiB,WALL=600000;
 const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 const within=(promise,ms,message)=>new Promise((resolve,reject)=>{const timer=setTimeout(()=>reject(Error(message)),ms);promise.then(value=>{clearTimeout(timer);resolve(value);},error=>{clearTimeout(timer);reject(error);});});
 // Exact executables already independently reviewed for the Linux runner. Paths
@@ -80,8 +80,8 @@ export function evaluateSupply(evidence){
   demand(ceilings.length===1&&usage.length===1,'Unknown process ceiling/usage');
   if(ceilings[0][1]!=='unlimited')supply=Math.min(supply,Math.max(0,Number(ceilings[0][1])-Number(usage[0][1])*1024));
  }
- const residual=supply-2*1024*MiB-evidence.reserved;demand(residual>=768*MiB,'Fresh reported residual supply refused');
- return {supply_upper_bytes:supply,residual_reported_bytes:residual,headroom_reserve_bytes:2*1024*MiB,required_bytes:768*MiB,observations:evidence,
+ const residual=supply-2*1024*MiB-evidence.reserved-CAP;demand(residual>=768*MiB,'Fresh reported residual supply refused');
+ return {supply_upper_bytes:supply,residual_reported_bytes:residual,headroom_reserve_bytes:2*1024*MiB,process_peak_reservation_bytes:CAP,required_bytes:768*MiB,observations:evidence,
   uncertainty:'Reported availability only; unexposed limits remain unknown, not unlimited. No swap credit or guaranteed allocation.'};
 }
 function freshSupply(ps,reserved){

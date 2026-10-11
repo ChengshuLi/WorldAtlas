@@ -12,7 +12,7 @@ test('GNU time uses actual KiB, wall and terminal status; malformed/duplicate ro
 });
 const supply=()=>({meminfo:'MemTotal: 8388608 kB\nMemAvailable: 6291456 kB\n',reserved:1024*MiB,aggregate_rss:1024*MiB,ancestors:[],limits:'Max address space         unlimited            unlimited            bytes\nMax data size             unlimited            unlimited            bytes\n',status:'VmSize: 100000 kB\nVmData: 50000 kB\n',unknown_limits:['hidden ancestors unknown']});
 test('reported RAM subtracts other peaks and headroom, tightens known caps, retains uncertainty',()=>{
- const evidence=supply(),pass=evaluateSupply(evidence);assert.equal(pass.residual_reported_bytes,3*1024*MiB);assert.match(pass.uncertainty,/unknown/);
+ const evidence=supply(),pass=evaluateSupply(evidence);assert.equal(pass.residual_reported_bytes,2*1024*MiB);assert.match(pass.uncertainty,/unknown/);
  for(const change of [s=>s.reserved=5*1024*MiB,s=>s.ancestors=[{maximum:String(2*1024*MiB),current:'0'}],s=>s.ancestors=[{maximum:'bad',current:'0'}],s=>s.meminfo+='MemAvailable: 100 kB\n',s=>s.limits=s.limits.replace('unlimited','1000')]){const altered=supply();change(altered);assert.throws(()=>evaluateSupply(altered));}
 });
 test('complete external closure and parent monitoring reserve also reduce the child phase',()=>{
@@ -54,4 +54,11 @@ test('changed original root birth or group never authorizes a foreign group sign
 });
 test('terminal stdout burst beyond raw reserve cannot qualify between polls',async()=>{
  const r=await run('terminal-burst',"require('fs').writeSync(1,Buffer.alloc(5*1024*1024));",{interval:200});assert.equal(r.qualified,false);assert.equal(r.refusal,'raw-output-reserve');assert.deepEqual(r.owned_processes_remaining,[]);
+});
+
+test('approved one GiB cap is admitted only with matching fresh supply and never expands',async()=>{
+ const r=await run('one-gib','console.log("bounded real child")',{cap:1024*MiB});assert.equal(r.qualified,true);assert.equal(r.rss_cap_bytes,1024*MiB);
+ const refused=path.join(base,'above-one-gib');await assert.rejects(supervise([process.execPath,'-e','0'],{time,ps,operation:refused,env,cap:1024*MiB+1}),/Limits cannot be expanded/);assert.equal(fs.existsSync(refused),false);
+ const low=supply();low.reserved=0;low.aggregate_rss=0;low.meminfo='MemTotal: 8388608 kB\nMemAvailable: 2916352 kB\n';assert.throws(()=>evaluateSupply(low),/residual supply/);
+ const exact=supply();exact.reserved=0;exact.aggregate_rss=0;exact.meminfo='MemTotal: 8388608 kB\nMemAvailable: 3932160 kB\n';const admitted=evaluateSupply(exact);assert.equal(admitted.required_bytes,768*MiB);assert.equal(admitted.residual_reported_bytes,768*MiB);assert.equal(admitted.process_peak_reservation_bytes,1024*MiB);
 });
