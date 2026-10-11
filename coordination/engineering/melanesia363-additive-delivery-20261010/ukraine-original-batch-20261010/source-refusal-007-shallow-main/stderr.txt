@@ -1,0 +1,48 @@
+node:internal/errors:985
+  const err = new Error(message);
+              ^
+
+Error: Command failed: git -C /workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work merge-base --is-ancestor 4171675cdf746a43d3e1dfc0ff9aee8dbaaf6646 24cb205820980ced522a736412b0d1cdaa79b50d
+    at genericNodeError (node:internal/errors:985:15)
+    at wrappedFn (node:internal/errors:539:14)
+    at checkExecSyncError (node:child_process:942:11)
+    at execFileSync (node:child_process:978:15)
+    at readRegisteredAdministrativeHandoff (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/scripts/additive-gap-repair.mjs:1084:53)
+    at administrativeSourcePremiseStage (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/scripts/additive-gap-repair.mjs:1122:38)
+    at sourcePremiseStage (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/scripts/additive-gap-repair.mjs:1249:86)
+    at inventoryCommand (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/scripts/additive-gap-repair.mjs:1831:12)
+    at file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/scripts/additive-gap-repair.mjs:1879:23
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25) {
+  status: 1,
+  signal: null,
+  output: [ null, Buffer(0) [Uint8Array] [], Buffer(0) [Uint8Array] [] ],
+  pid: 5011,
+  stdout: Buffer(0) [Uint8Array] [],
+  stderr: Buffer(0) [Uint8Array] []
+}
+
+Node.js v24.19.0
+Command exited with non-zero status 1
+	Command being timed: "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/additive-gap-repair.mjs /workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work 6b41cbb8f42b4ca9fa1a4032dbd34c6fde49a3f7 coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-request-004.json 786be2a8e63861a0b0ba7adbe642642649dfcdcad4a30d6997fc939e85e9a74d .cache/native-grid-candidates/ukraine-original-singleton-source-linux-004"
+	User time (seconds): 12.04
+	System time (seconds): 8.28
+	Percent of CPU this job got: 107%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:18.85
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 351936
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 4021337
+	Voluntary context switches: 23605
+	Involuntary context switches: 1116
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 16
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1

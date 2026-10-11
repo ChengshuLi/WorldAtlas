@@ -246,6 +246,22 @@ export function originalAdministrativeTargetHash({sourceScope,target,kind,expect
   catch{return false;}
 }
 
+// Original candidate identity keeps its original serialization domain. A
+// separately derived JS digest never replaces the recorded source hash.
+export function originalAdministrativeCandidateHash({sourceScope,componentId,candidate,expected}) {
+  if(typeof componentId!=='string'||!hex(expected))return false;
+  const derived=sha(canonical(candidate));
+  if(derived===expected)return true;
+  const matches=sourceScope.original_candidate_canonical_bindings?.filter(row=>row.component_id===componentId);
+  if(matches?.length!==1)return false;
+  const binding=matches[0],encoded=binding.feature_bytes_base64;
+  if(binding.feature_sha256!==expected||binding.derived_js_canonical_sha256!==derived||typeof encoded!=='string')return false;
+  const bytes=Buffer.from(encoded,'base64');
+  if(bytes.length===0||bytes.length>32*1024*1024||sha(bytes)!==expected)return false;
+  try{return JSON.stringify(canonicalValue(JSON.parse(bytes)))===JSON.stringify(canonicalValue(candidate));}
+  catch{return false;}
+}
+
 export function retainedAdministrativeSourcePremises({record,candidate,sourceCase,sourceScope,target}) {
   demand(record?.component_id===sourceCase?.component_id,'Administrative component join differs');
   polygonParts(candidate);polygonParts(target.geometry);
@@ -256,7 +272,7 @@ export function retainedAdministrativeSourcePremises({record,candidate,sourceCas
   demand(support?.hierarchy_disagreements,'Incomplete original administrative land operations');
   const empty=operation=>operation?.kind==='empty'&&operation.area_m2===0
     &&operation.planar_area===0&&completeEmptyGeometry(operation.geometry);
-  premise('original-full-candidate-binding',record.candidate_feature_sha256===digest(sourceCase.original_candidate_feature)
+  premise('original-full-candidate-binding',originalAdministrativeCandidateHash({sourceScope,componentId:record.component_id,candidate:sourceCase.original_candidate_feature,expected:record.candidate_feature_sha256})
     &&record.candidate_geometry_sha256===digest(candidate)
     &&wholePrimitivePointsetEqual(candidate,sourceCase.original_candidate_feature.geometry));
   premise('retained-whole-land-pointset',record.status==='mapped-land-support'
@@ -360,7 +376,7 @@ export function retainedAdministrativeFragmentPremises({record,fragment,sourceCa
   demand(support?.hierarchy_disagreements,'Incomplete original administrative land operations');
   const empty=operation=>operation?.kind==='empty'&&operation.area_m2===0
     &&operation.planar_area===0&&completeEmptyGeometry(operation.geometry);
-  premise('original-full-candidate-binding',record.candidate_feature_sha256===digest(sourceCase.original_candidate_feature)
+  premise('original-full-candidate-binding',originalAdministrativeCandidateHash({sourceScope,componentId:record.component_id,candidate:sourceCase.original_candidate_feature,expected:record.candidate_feature_sha256})
     &&record.candidate_geometry_sha256===digest(candidate)
     &&wholePrimitivePointsetEqual(candidate,sourceCase.original_candidate_feature.geometry));
   premise('retained-whole-land-pointset',record.status==='mapped-land-support'
@@ -1023,6 +1039,72 @@ const RETAINED_ADMINISTRATIVE_HANDOFF=[{"role":"payloads_path","original_head":"
 // accepted corpus appends its exact ordinary product identities here; it does
 // not become a new source profile or rewrite the per-case predicate.
 const RETAINED_ADMINISTRATIVE_HANDOFFS=[RETAINED_ADMINISTRATIVE_HANDOFF,RETAINED_ADMINISTRATIVE_327_HANDOFF];
+const ADMINISTRATIVE_REGISTRY_PATH='coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json';
+export function registeredAdministrativeHandoff(registry,rule) {
+  demand(registry?.version===1&&registry.kind==='accepted-administrative-handoffs-v1'&&Object.keys(registry).sort().join(',')==='entries,kind,version'&&Array.isArray(registry.entries),'Unsupported administrative handoff registry');
+  const batches=new Set(),components=new Set(),sources=new Set(),ids=new Set();
+  const strings=value=>Array.isArray(value)&&value.length>0&&value.every(id=>typeof id==='string'&&id)&&new Set(value).size===value.length;
+  demand(registry.entries.length>0&&registry.entries.length<=512,'Incomplete registry entries');
+  for(const entry of registry.entries){
+    demand(Object.keys(entry).sort().join(',')==='accepted_source_commit,cohort_ids,format,id,original_batch_id,original_component_count,source,target_ids'
+      &&entry.format==='source-native-handoff-v1'&&typeof entry.id==='string'&&entry.id
+      &&/^[a-f0-9]{40}$/.test(entry.accepted_source_commit??'')
+      &&Object.keys(entry.source??{}).sort().join(',')==='blob,bytes,mode,path,sha256'
+      &&safe(entry.source.path)&&entry.source.mode==='100644'&&/^[a-f0-9]{40}$/.test(entry.source.blob??'')&&hex(entry.source.sha256)
+      &&Number.isSafeInteger(entry.source.bytes)&&entry.source.bytes>0&&entry.source.bytes<=32*1024*1024
+      &&strings(entry.cohort_ids)&&strings(entry.target_ids)&&typeof entry.original_batch_id==='string'&&entry.original_batch_id
+      &&entry.original_component_count===entry.cohort_ids.length,'Incomplete registry entry');
+    demand(!ids.has(entry.id)&&!batches.has(entry.original_batch_id)&&!sources.has(entry.source.path)
+      &&entry.cohort_ids.every(id=>!components.has(id)),'Incomplete registry: duplicate batch/cohort/source registration');
+    ids.add(entry.id);batches.add(entry.original_batch_id);sources.add(entry.source.path);entry.cohort_ids.forEach(id=>components.add(id));
+  }
+  const pin=rule.inputs?.find(row=>row.path===rule.cases_path);
+  const matches=registry.entries.filter(entry=>entry.format==='source-native-handoff-v1'
+    &&['path','mode','blob','bytes','sha256'].every(key=>pin?.[key]===entry.source?.[key]));
+  demand(matches.length===1,'Unknown/ambiguous registered administrative handoff');
+  const entry=matches[0];
+  demand(/^[a-f0-9]{40}$/.test(entry.accepted_source_commit??'')&&pin.commit===entry.accepted_source_commit
+    &&entry.source.mode==='100644'&&entry.source.path===rule.outcomes_path
+    &&Array.isArray(entry.cohort_ids)&&entry.cohort_ids.length>0&&entry.cohort_ids.every(id=>typeof id==='string'&&id)&&new Set(entry.cohort_ids).size===entry.cohort_ids.length
+    &&JSON.stringify(entry.cohort_ids)===JSON.stringify(rule.cohort_ids)
+    &&Array.isArray(entry.target_ids)&&entry.target_ids.length>0&&entry.target_ids.every(id=>typeof id==='string'&&id)&&new Set(entry.target_ids).size===entry.target_ids.length
+    &&typeof entry.original_batch_id==='string'&&entry.original_batch_id.length>0
+    &&entry.original_component_count===entry.cohort_ids.length
+    &&(rule.geometry_scope??'full-component')==='full-component','Incomplete registered original batch or unsupported view');
+  return entry;
+}
+// Direct accepted handoffs bind the complete restored products rather than
+// duplicating legacy per-row locator wrappers. Whole-product hashes bind order;
+// the stage still matches every expected complete row and unique source ID.
+export function registeredOriginalPhysicalProduct(scope,product,rows) {
+  const matches=scope?.physical_restoration?.restorations?.filter(p=>p.path===product.path);
+  if(!Array.isArray(matches)||matches.length!==1||!Number.isSafeInteger(rows)||rows<1)return false;
+  const p=matches[0],expected={path:p.path,bytes:p.whole_original_bytes,sha256:p.whole_original_sha256,
+    hash_kind:'file-bytes',uncompressed_bytes:p.decoded_bytes,uncompressed_sha256:p.decoded_sha256};
+  return p.rows===rows&&JSON.stringify(canonicalValue(expected))===JSON.stringify(canonicalValue(product));
+}
+
+export function readRegisteredAdministrativeHandoff(repo,rule,registry) {
+  demand(rule.registry_path===ADMINISTRATIVE_REGISTRY_PATH,'Untrusted administrative registry path');
+  const tree=execFileSync('git',['-C',repo,'ls-tree','-z','HEAD','--',rule.registry_path],{encoding:'utf8'});
+  demand(tree===`${registry.pin.mode} blob ${registry.pin.blob}\t${rule.registry_path}\0`&&registry.pin.mode==='100644'
+    &&registry.body.length===registry.pin.bytes&&sha(registry.body)===registry.pin.sha256,'Registry is not the ordinary executing-HEAD body');
+  const registration=registeredAdministrativeHandoff(JSON.parse(registry.body),rule);
+  const registrationMain=execFileSync('git',['-C',repo,'rev-parse','--verify','refs/remotes/origin/main^{commit}'],{encoding:'utf8'}).trim();
+  demand(/^[a-f0-9]{40}$/.test(registrationMain),'Missing canonical source ancestry anchor');
+  for(const descendant of [registrationMain,'HEAD'])execFileSync('git',['-C',repo,'merge-base','--is-ancestor',registration.accepted_source_commit,descendant]);
+  return {registration,registrationMain};
+}
+export function registeredAdministrativeViews(scope,entry) {
+  const same=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
+  const cases=scope.candidate_source_native_bindings;
+  demand(Array.isArray(cases)&&same(cases.map(row=>row.component_id),entry.cohort_ids)
+    &&same(scope.scopeIds,entry.cohort_ids)&&scope.original_batch_id===entry.original_batch_id
+    &&scope.original_batch_component_count===entry.original_component_count
+    &&same([...new Set(cases.map(row=>row.retained_payload?.target_stable_location_id))].sort(),[...entry.target_ids].sort())
+    &&Array.isArray(scope.unknowns),'Registered handoff changed original batch/subjects/limits');
+  return {direct:true,payloads:cases.map(row=>row.retained_payload),outcomes:cases,gb:[],ncl:[],cohort:cases,remainderRows:[]};
+}
 function administrativeHandoffFor(rule) {
   const outcome=rule.inputs?.find(pin=>pin.path===rule.outcomes_path);
   const matches=RETAINED_ADMINISTRATIVE_HANDOFFS.filter(roster=>roster.some(pin=>pin.role==='outcomes_path'
@@ -1046,7 +1128,11 @@ function administrativeSourcePremiseStage(repo,request,report) {
   // These relations are the actual independently reviewed and merged1639
   // products. Immutable identity alone would permit fabricated covers/unique
   // assertions; the literal accepted whole roster is the authority boundary.
-  const acceptedHandoff=administrativeHandoffFor(rule);
+  let registration=null,registrationMain=null;
+  if(rule.registry_path!==undefined){
+    ({registration,registrationMain}=readRegisteredAdministrativeHandoff(repo,rule,get(rule.registry_path)));
+  }
+  const acceptedHandoff=registration?[]:administrativeHandoffFor(rule);
   const jsonl327=acceptedHandoff===RETAINED_ADMINISTRATIVE_327_HANDOFF;
   for(const accepted of acceptedHandoff){
     if(accepted.role==='remainders_path'&&geometryScope==='full-component')continue;
@@ -1055,7 +1141,7 @@ function administrativeSourcePremiseStage(repo,request,report) {
       'Administrative comparison/outcome is outside the accepted original handoff');
   }
   const json=name=>JSON.parse(get(name).body),scope=json(rule.cases_path);
-  const views327=jsonl327?retainedAdministrative327Views({scope,geometryScope,operands:[...bodies.values()]}):null;
+  const views327=registration?registeredAdministrativeViews(scope,registration):(jsonl327?retainedAdministrative327Views({scope,geometryScope,operands:[...bodies.values()]}):null);
   const payloads=views327?.payloads??json(rule.payloads_path).additive_payloads,outcomes=views327?.outcomes??json(rule.outcomes_path).cases;
   const gb=views327?.gb??json(rule.simplified_comparison_path).cases,ncl=views327?.ncl??json(rule.generalized_comparison_path).cases;
   demand(equal(scope.candidate_source_native_bindings.map(row=>row.component_id),scope.scopeIds)&&scope.scopeIds.every(id=>rule.cohort_ids.includes(id))&&rule.expected_ids.every(id=>scope.scopeIds.includes(id)),
@@ -1080,6 +1166,7 @@ function administrativeSourcePremiseStage(repo,request,report) {
     demand(value.pin.report_sha256===request.report.sha256&&value.pin.original_product_path===source.original_product_path&&product&&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(key=>product[key]===value.pin[key]),
       'Administrative original physical product differs from qualified report');
     const lines=value.body.toString('utf8').split('\n');demand(lines.pop()==='','Truncated original physical product');
+    if(registration)demand(registeredOriginalPhysicalProduct(scope,product,lines.length),'Registered original whole product/count differs');
     for(let ordinal=0;ordinal<lines.length;ordinal++){
       const row=JSON.parse(lines[ordinal]);
       if(source.original_product_path.startsWith('sources-')){demand(!nativeIds.has(row.id),'Duplicate original native metadata');nativeIds.add(row.id);if(neededNativeIds.has(row.id))native.set(row.id,{row,ordinal,product});}
@@ -1115,15 +1202,15 @@ function administrativeSourcePremiseStage(repo,request,report) {
     const ordinal=scope.candidate_source_native_bindings.indexOf(sourceCase);
     const cid=sourceCase.component_id,original=originals.get(cid),binding=scope.original_physical_comparison_bindings.filter(row=>row.component_id===cid);
     demand(binding.length===1&&equal(binding[0].physical_comparison.row,original.row)
-      &&binding[0].physical_comparison.ordinal===original.ordinal
-      &&equal(binding[0].physical_comparison.original_report_product,original.product),'Prepared physical record is not exact original inverse');
+      &&(registration||(binding[0].physical_comparison.ordinal===original.ordinal
+      &&equal(binding[0].physical_comparison.original_report_product,original.product))),'Prepared physical record is not exact original inverse');
     const queried=binding[0].original_queried_source_metadata;
     demand(queried.length===original.row.query_relations.length&&queried.every((row,i)=>{
       const value=native.get(original.row.query_relations[i].source_id);
-      return value&&row.ordinal===value.ordinal&&equal(row.original_sources_product,value.product)&&equal(row.original_source_record_metadata,value.row);
+      return value&&(registration||(row.ordinal===value.ordinal&&equal(row.original_sources_product,value.product)))&&equal(row.original_source_record_metadata,value.row);
     }),'Missing/rebound original queried source metadata');
     const one=(list,id)=>{const matches=list.filter(row=>row.component_id===id);demand(matches.length===1,'Nonunique original case');return matches[0];};
-    demand(equal(sourceCase.retained_payload,one(payloads,cid))&&equal(sourceCase.whole_original_case,one(outcomes,cid))
+    if(!registration)demand(equal(sourceCase.retained_payload,one(payloads,cid))&&equal(sourceCase.whole_original_case,one(outcomes,cid))
       &&equal(sourceCase.retained_source_operation_row,one(sourceCase.retained_source_operation_row.source_comparison_record?gb:ncl,cid)),
       'Prepared administrative operations differ from original whole products');
     const operation=sourceCase.retained_source_operation_row;
@@ -1163,8 +1250,9 @@ function administrativeSourcePremiseStage(repo,request,report) {
   return {rows,facts:{version:1,operation:SOURCE_PREMISES_VERSION,source_profile:profile,parent:request.parent,
     components:rows.length,source_compatible:rows.filter(row=>row.source_compatible).length,assigned_cells:0,source_rule:rule,
     cohort_ids:rule.cohort_ids,geometry_scope:geometryScope,source_coverage_complete:geometryScope==='full-component',whole_gap_completion:false,
+    ...(registration?{registered_handoff:{registry:get(rule.registry_path).pin,accepted_source_commit:registration.accepted_source_commit,canonical_main_commit:registrationMain}}:{}),
     original_batch_outcomes:get(rule.outcomes_path).pin,original_remainders:geometryScope==='supported-fragment'?get(jsonl327?rule.simplified_comparison_path:rule.remainders_path).pin:null,
-    unprocessed_cohort_ids:rule.cohort_ids.filter(id=>!rule.expected_ids.includes(id)),target_source_kind:'ordinary-HEAD-current-world-index-part',limits:scope.limits.concat(['Original dated/unapproved physical and administrative sources only.',
+    unprocessed_cohort_ids:rule.cohort_ids.filter(id=>!rule.expected_ids.includes(id)),target_source_kind:'ordinary-HEAD-current-world-index-part',limits:(registration?scope.unknowns:scope.limits).concat(['Original dated/unapproved physical and administrative sources only.',
       'Full-source rule retains exact empty residuals; supported-fragment rule retains literal nonempty remainder and never claims whole-gap completion.',
       'Current source-file equality is not selected-bank geometry applicability. Genuine current snapshot/rebind, full native/neighbor conservation and activation remain required.'])}};
 }
@@ -1319,7 +1407,7 @@ function additiveProposalStage(repo,request) {
 // Native entry consumes the completed original source stage, not an approval
 // boolean or a reconstructed administrative overlay. Complete source-product
 // custody is checked by the caller before this pure case/target boundary.
-export function validateAdministrativeNativeRoster({facts,issued,spec,sourceRows}) {
+export function validateAdministrativeNativeRoster({facts,issued,spec,sourceRows,registry=null}) {
   const equal=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
   demand(spec.source_profile==='retained-consumed-administrative-source'
     &&facts.source_profile===spec.source_profile&&issued.source_rule.profile===spec.source_profile
@@ -1335,7 +1423,18 @@ export function validateAdministrativeNativeRoster({facts,issued,spec,sourceRows
     &&spec.scope_ids.every(id=>facts.cohort_ids.includes(id))
     &&equal(facts.unprocessed_cohort_ids,facts.cohort_ids.filter(id=>!spec.scope_ids.includes(id))),
     'Incomplete/duplicate administrative native phase/cohort');
-  for(const accepted of administrativeHandoffFor(issued.source_rule)){
+  let registration=null;
+  if(issued.source_rule.registry_path!==undefined){
+    const pins=issued.source_rule.inputs.filter(pin=>pin.path===issued.source_rule.registry_path);
+    demand(registry&&pins.length===1&&equal(registry.pin,pins[0])
+      &&equal(facts.registered_handoff?.registry,registry.pin)
+      &&registry.body.length===registry.pin.bytes&&sha(registry.body)===registry.pin.sha256,
+      'Administrative native registry differs from qualified source');
+    registration=registeredAdministrativeHandoff(JSON.parse(registry.body),issued.source_rule);
+    demand(facts.registered_handoff.accepted_source_commit===registration.accepted_source_commit,
+      'Administrative native accepted source changed');
+  }else demand(registry===null&&!facts.registered_handoff,'Unexpected administrative native registration');
+  for(const accepted of registration?[]:administrativeHandoffFor(issued.source_rule)){
     if(accepted.role==='remainders_path'&&facts.geometry_scope==='full-component')continue;
     const pin=issued.source_rule.inputs.find(row=>row.path===issued.source_rule[accepted.role]);
     demand(pin&&['path','mode','blob','bytes','sha256'].every(key=>pin[key]===accepted[key]),'Administrative native predecessor outside accepted product roster');
@@ -1541,7 +1640,12 @@ function administrativeBatchProposalStage(repo,request,resolutions,budget) {
   const sourceRows=lines.map(JSON.parse);
   demand(equal(sourceRows.map(row=>row.component_id),spec.scope_ids)&&equal(spec.scope_ids,issued.source_rule.expected_ids)
     &&sourceRows.length===facts.components,'Batch selection omitted/reordered a source candidate');
-  validateAdministrativeNativeRoster({facts,issued,spec,sourceRows});
+  const registry=issued.source_rule.registry_path===undefined?null:inputs.get(issued.source_rule.registry_path);
+  demand(issued.source_rule.registry_path===undefined||registry,'Missing complete native registry operand');
+  // Reuse the same executing-HEAD and merged-source authority as SOURCE; the
+  // roster boundary also binds these bytes to the qualified predecessor.
+  if(registry)readRegisteredAdministrativeHandoff(repo,issued.source_rule,registry);
+  validateAdministrativeNativeRoster({facts,issued,spec,sourceRows,registry});
   const manifest=json(spec.manifest_path),bounds=json(spec.bounds_path),targets=new Map();
   for(const name of issued.source_rule.target_banks){demand(spec.inputs.some(pin=>equal(pin,issued.source_rule.inputs.find(source=>source.path===name))),'Batch containing context differs from source proof');const rows=json(name).features;demand(Array.isArray(rows),'Invalid complete administrative target bank');
     for(const target of rows){demand(!targets.has(target.id),'Duplicate selected context identity');targets.set(target.id,target);}}
@@ -1642,6 +1746,25 @@ function administrativeBatchProposalStage(repo,request,resolutions,budget) {
 // report supplies the complete denominator; an independently frozen scope
 // supplies exact selected IDs/ordered feature hashes. No all-world JSON lives
 // in this process. Parent joining is a subsequent bounded custody operation.
+// A same-runtime external supervisor is charged during every child phase too.
+// Historical requests without this new binding retain their original budget.
+export function externalOperatingReserve(request, requestBytes) {
+  const operating=request.operating_runtime;if(operating===undefined)return 0;
+  demand(operating.version===1&&operating.platform==='linux'&&Array.isArray(operating.runtime)
+    &&operating.runtime.map(p=>p.role).join(',')==='git,node,process-inspector,time','Incomplete operating runtime');
+  demand(operating.runtime.every(p=>typeof p.path==='string'&&path.isAbsolute(p.path)&&hex(p.sha256)
+    &&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.mode===0o755)
+    &&new Set(operating.runtime.map(p=>p.path)).size===4,'Invalid operating runtime pins');
+  const supervisor=operating.supervisor;
+  demand(supervisor?.path==='coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs'
+    &&Number.isSafeInteger(supervisor.bytes)&&supervisor.bytes>0&&supervisor.bytes<=131072&&hex(supervisor.sha256)
+    &&Number.isSafeInteger(requestBytes)&&requestBytes>0&&requestBytes<=131072,'Invalid operating supervisor/request binding');
+  // Node is already charged by the scientific child. The rest is the external
+  // executable closure, parent request/code, and bounded raw monitoring output.
+  return operating.runtime.filter(p=>p.role!=='node').reduce((n,p)=>n+p.bytes,0)
+    +supervisor.bytes+requestBytes+13*1024*1024;
+}
+
 export function inventoryCommand({repo, commit, requestPin, destination}) {
   requirePlainExecution({boundedHeap:true});
   const sourceRoot = admitInventoryDestination(repo,destination);
@@ -1663,6 +1786,7 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
   const project = committedPreparationFiles(sourceRoot,commit,projectNames);
   const requestBudget = candidateBudget([...project, ...pinCost(requestPin)],{reserveBytes:runtimeStat.size+131072});
   const request = JSON.parse(readPin(sourceRoot,requestPin));
+  const operatingReserve=externalOperatingReserve(request,requestPin.bytes);
   demand(!process.execArgv.length || (request.operation===SOURCE_PREMISES_VERSION
     &&request.source_rule?.profile==='retained-consumed-administrative-source')
     ||(request.operation===ADDITIVE_BATCH_PROPOSAL_VERSION
@@ -1688,7 +1812,7 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
   demand(Array.isArray(stagePins) && stagePins.length>0 && stagePins.length<=213, 'Missing complete child body roster');
   const baselinePins=[INVENTORY_VERSION,SOURCE_PREMISES_VERSION,ADDITIVE_PROPOSAL_VERSION,ADDITIVE_BATCH_PROPOSAL_VERSION].includes(request.operation)?(request.baseline?.pins??[]):[];
   const inputs = [...project,...request.installed_modules,...pinCost(requestPin),...pinCost(request.report),...stagePins.flatMap(pinCost),...baselinePins.flatMap(pinCost)];
-  const budget = candidateBudget(inputs,{reserveBytes:runtimeStat.size+outputReserve+131072});
+  const budget = candidateBudget(inputs,{reserveBytes:runtimeStat.size+outputReserve+131072+operatingReserve});
   const runtimeRead=()=>{
     const before=fs.lstatSync(process.execPath);
     demand(before.isFile() && !before.isSymbolicLink() && before.size===runtimeStat.size
@@ -1707,6 +1831,8 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
     }finally{fs.closeSync(fd);}
   };
   const runtimeSha=runtimeRead();
+  if(request.operating_runtime){const node=request.operating_runtime.runtime.find(p=>p.role==='node');
+    demand(node.path===process.execPath&&node.bytes===runtimeStat.size&&node.sha256===runtimeSha,'Operating Node differs from actual child runtime');}
   verifyModules();
   demand(requestPin.kind === undefined && request.report.kind === undefined, 'Report/request must be independently immutable Git bodies');
   const report = JSON.parse(readPin(sourceRoot,request.report));
@@ -1719,7 +1845,7 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
     ||(request.operation===ADDITIVE_BATCH_PROPOSAL_VERSION&&request.additive?.source_profile==='retained-consumed-administrative-source'),
     'Current baseline route is limited to administrative source/native stages');
   const resolutions=baselinePins.length?(currentBaseline
-    ?readCurrentBaselineResolutions(sourceRoot,request.baseline,{request,report,project,installedModules:request.installed_modules,runtimeBytes:runtimeStat.size,outputReserve})
+    ?readCurrentBaselineResolutions(sourceRoot,request.baseline,{request,report,project,installedModules:request.installed_modules,runtimeBytes:runtimeStat.size,outputReserve:outputReserve+operatingReserve})
     :readBaselineResolutions(sourceRoot,request.baseline)):undefined;
   const baselineCustody=currentBaselineViews.get(resolutions);
   if(baselineCustody)budget.add({bytes:2*canonical(baselineCustody).length});

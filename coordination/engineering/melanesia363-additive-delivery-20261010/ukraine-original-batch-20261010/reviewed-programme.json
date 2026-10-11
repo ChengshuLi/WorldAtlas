@@ -1,0 +1,180 @@
+{
+  "preimage_version": 3,
+  "source_profile": "retained-consumed-administrative-source",
+  "source_executed_code": [
+    {
+      "path": "package.json",
+      "bytes": 1417,
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+    },
+    {
+      "path": "scripts/additive-gap-repair.mjs",
+      "bytes": 180812,
+      "sha256": "afae10c2cc99790037fb9b6a1743f3b974106cf717ecd9183160231634e88d30"
+    },
+    {
+      "path": "src/effective-footprint.js",
+      "bytes": 45330,
+      "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+    },
+    {
+      "path": "scripts/native-ownership/native-preparation-guards.mjs",
+      "bytes": 6580,
+      "sha256": "44901437d91c0ff8805030170abcd855aac3ac8354f10e4e67002f23e6a2ba31"
+    },
+    {
+      "path": "src/native-runtime.js",
+      "bytes": 3497,
+      "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+    },
+    {
+      "path": "scripts/native-ownership/compile-native-ownership.mjs",
+      "bytes": 4472,
+      "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+    },
+    {
+      "path": "src/native-grid.js",
+      "bytes": 6408,
+      "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+    },
+    {
+      "path": "scripts/audit-grid-intervals.mjs",
+      "bytes": 6777,
+      "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+    },
+    {
+      "path": "scripts/native-ownership/require-verified-selection.mjs",
+      "bytes": 4377,
+      "sha256": "20a8e3f472db4c06386ce2b7bd01330ea8acfd6d1ff414f6d2d32e8b1995d50c"
+    },
+    {
+      "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+      "bytes": 1540,
+      "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb"
+    },
+    {
+      "path": "scripts/native-ownership/verified-candidates.json",
+      "bytes": 1810,
+      "sha256": "080a481b71383bd6ba3388ad9b26138b25fced628a61830c3bb02a933562e40a"
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "bytes": 28506,
+      "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97"
+    },
+    {
+      "path": "src/ownership-method.js",
+      "bytes": 3126,
+      "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df"
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "bytes": 75074,
+      "sha256": "801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 187348,
+      "sha256": "424a498264c174b3acce567b03282d721fae02565bdfa02507f076355b3be2cb"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 246591,
+      "sha256": "471d035f92567ea447f221661db5fa8febfc7afc32af8ac975506ce9e0303255"
+    }
+  ],
+  "native_executed_code": [
+    {
+      "path": "package.json",
+      "bytes": 1417,
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+    },
+    {
+      "path": "scripts/additive-gap-repair.mjs",
+      "bytes": 182137,
+      "sha256": "337b7f376adc8c1e80fc5d2899bceecde51329997a321f53a49b4e8ccf2b5450"
+    },
+    {
+      "path": "src/effective-footprint.js",
+      "bytes": 45330,
+      "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+    },
+    {
+      "path": "scripts/native-ownership/native-preparation-guards.mjs",
+      "bytes": 6580,
+      "sha256": "44901437d91c0ff8805030170abcd855aac3ac8354f10e4e67002f23e6a2ba31"
+    },
+    {
+      "path": "src/native-runtime.js",
+      "bytes": 3497,
+      "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+    },
+    {
+      "path": "scripts/native-ownership/compile-native-ownership.mjs",
+      "bytes": 4472,
+      "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+    },
+    {
+      "path": "src/native-grid.js",
+      "bytes": 6408,
+      "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+    },
+    {
+      "path": "scripts/audit-grid-intervals.mjs",
+      "bytes": 6777,
+      "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+    },
+    {
+      "path": "scripts/native-ownership/require-verified-selection.mjs",
+      "bytes": 4377,
+      "sha256": "20a8e3f472db4c06386ce2b7bd01330ea8acfd6d1ff414f6d2d32e8b1995d50c"
+    },
+    {
+      "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+      "bytes": 1540,
+      "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb"
+    },
+    {
+      "path": "scripts/native-ownership/verified-candidates.json",
+      "bytes": 1810,
+      "sha256": "080a481b71383bd6ba3388ad9b26138b25fced628a61830c3bb02a933562e40a"
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "bytes": 28506,
+      "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97"
+    },
+    {
+      "path": "src/ownership-method.js",
+      "bytes": 3126,
+      "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df"
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "bytes": 75074,
+      "sha256": "801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 187348,
+      "sha256": "424a498264c174b3acce567b03282d721fae02565bdfa02507f076355b3be2cb"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 246591,
+      "sha256": "471d035f92567ea447f221661db5fa8febfc7afc32af8ac975506ce9e0303255"
+    }
+  ],
+  "accepted_head": "bc387dd5a75b6ca869c6bcd080822476715c7f81",
+  "independent_review_comment": 6103870282
+}

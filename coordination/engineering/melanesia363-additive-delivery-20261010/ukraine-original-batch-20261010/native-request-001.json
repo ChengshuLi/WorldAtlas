@@ -1,0 +1,489 @@
+{
+  "additive": {
+    "bounds_path": "data/canonical-grid/bounds.json.gz",
+    "latitudes_path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+    "manifest_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+    "original_bounds": {
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "path": "data/canonical-grid/bounds.json.gz",
+      "role": "original-identity-parent-camera-context",
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f"
+    },
+    "source_profile": "retained-consumed-administrative-source",
+    "scope_ids": [
+      "physical-component:6fd25496ae4a7635eef229d0cfd1eb8dc7d9c10c252d3255fe8d42d186e706d1"
+    ],
+    "source_execution_commit": "3bd1da0fdd9b63428f4957924eba6d360d1af45f",
+    "source_runtime": {
+      "bytes": 125989464,
+      "sha256": "bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12"
+    },
+    "source_request_path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-request-005.json",
+    "operating_path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-operating-005.json",
+    "publication_path": ".cache/native-grid-candidates/ukraine-original-singleton-source-linux-005/publication.json",
+    "facts_path": ".cache/native-grid-candidates/ukraine-original-singleton-source-linux-005/facts.json",
+    "inventory_path": ".cache/native-grid-candidates/ukraine-original-singleton-source-linux-005/inventory.jsonl.gz",
+    "inputs": [
+      {
+        "commit": "4171675cdf746a43d3e1dfc0ff9aee8dbaaf6646",
+        "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/source-handoff-003/source-handoff.json",
+        "mode": "100644",
+        "blob": "9636c1992f3c764b65de9df043667fbc22855807",
+        "bytes": 82015,
+        "sha256": "7fd3d6da63c1fc9890784a6db6e4a3e9fb55755d52bb3c3a45cf0ad8a7f32462"
+      },
+      {
+        "bytes": 403376,
+        "commit": "c28077da970ae39550e5edea790a266b060d3de5",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "mode": "100644",
+        "blob": "09afab19371f0814da61e79e5f310c5fb2405b6d"
+      },
+      {
+        "kind": "original-report-product",
+        "path": ".cache/additive-native-gap-repair/ukraine-original-singleton/components-030.jsonl.gz",
+        "mode": "100644",
+        "original_product_path": "components-030.jsonl.gz",
+        "report_sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+        "bytes": 1196109,
+        "sha256": "22363c332379d6dc16354b6079bf59766abf4cb9e7b20b111c7528e7c757fde8",
+        "uncompressed_bytes": 8376604,
+        "uncompressed_sha256": "05a242b39ebd98bd0f4a7b49515f50376e48c012e9e4561d22b455f5c04d6ae8"
+      },
+      {
+        "kind": "original-report-product",
+        "path": ".cache/additive-native-gap-repair/ukraine-original-singleton/sources-000.jsonl.gz",
+        "mode": "100644",
+        "original_product_path": "sources-000.jsonl.gz",
+        "report_sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+        "bytes": 2173285,
+        "sha256": "aaf5e4f099ab25c6e6f96632787f1654ba6054ed378fd591b360e36274ffc264",
+        "uncompressed_bytes": 8388327,
+        "uncompressed_sha256": "a75923307b24ff73fe3090307b2c8d6e590a22dbb91f4d43f92a52ac0fd23705"
+      },
+      {
+        "bytes": 163194,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-UKR-ADM2-000.bin.gz",
+        "sha256": "35cef639ce0928d52a51699b0183d5369ba725befec9de43415e8b51664405b9",
+        "uncompressed_bytes": 698065,
+        "uncompressed_sha256": "c102ab08775ce4dc25a64e133bb7726a1b50715d31140e9846eaad26602631cb",
+        "commit": "c28077da970ae39550e5edea790a266b060d3de5",
+        "mode": "100644",
+        "blob": "ae2c9bb0e9ee047a98bf01a9e2529b002a22d4e6"
+      },
+      {
+        "blob": "31d970d0fe2bf8c899f020aad09a3826ea451790",
+        "bytes": 252447,
+        "commit": "92a73508da607461008f5523cfdc19d08f814e57",
+        "mode": "100644",
+        "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+        "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba"
+      },
+      {
+        "blob": "9c44513df64995d417dd3832ae604c703e84a506",
+        "bytes": 2663523,
+        "commit": "92a73508da607461008f5523cfdc19d08f814e57",
+        "mode": "100644",
+        "path": "data/canonical-grid/bounds.json.gz",
+        "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+        "uncompressed_bytes": 11096191,
+        "uncompressed_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+      },
+      {
+        "path": "data/geography/part-25.json",
+        "bytes": 4525239,
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+        "mode": "100644",
+        "commit": "c28077da970ae39550e5edea790a266b060d3de5",
+        "blob": "16ba4f38251d1bd99ac85f0ae7cca2f0424470f8"
+      },
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json",
+        "mode": "100644",
+        "commit": "b7bc4cb0775174b01b5bb5f6fe954484fe9c85de",
+        "blob": "c2de5063acd5804522d6c0fcdce67d10f91c22e9",
+        "bytes": 943,
+        "sha256": "70d969584dd16f5123d3ad0c688b734d5248c1b8964b2eae3029e139400c5fcb"
+      },
+      {
+        "blob": "de6905e162dc031b1b93248fae91190c39c4ad53",
+        "bytes": 1851757,
+        "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+        "mode": "100644",
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "uncompressed_bytes": 2097328,
+        "uncompressed_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+      },
+      {
+        "blob": "5d8aa5e0341ae0a24f3553d67e1b8581d36c7d1b",
+        "bytes": 306620,
+        "commit": "f3932b6d842a9969f177ad972cfbfa0374b0cac5",
+        "mode": "100644",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operands/rows-0.bin.gz",
+        "sha256": "89ed3564db641f992746bf4f6f01c1eed89cb470520734ac1b85ee95e9a70ba0",
+        "uncompressed_bytes": 2097328,
+        "uncompressed_sha256": "2b8878f53c7389e0ca1c675023a0ff1a0172fb2d3ac37d3d731d89b303aa045c"
+      },
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operands/runs-17825792.bin.gz",
+        "commit": "3bd1da0fdd9b63428f4957924eba6d360d1af45f",
+        "mode": "100644",
+        "blob": "d71755a5fbd09300fe99c52f139e064f7f08f21a",
+        "bytes": 827000,
+        "sha256": "db80e08b03e5227657759f6000fcf710d3e1438590a64349c90f442151524e21",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "f1a18fbd23f701b6bac85f85d90c9bbf701be29c2aea7f2f7fa6eca74ddf0c1d"
+      },
+      {
+        "path": ".cache/native-grid-candidates/ukraine-original-singleton-source-linux-005/publication.json",
+        "mode": "100644",
+        "bytes": 349,
+        "sha256": "f2ef4f62b9b14d86d9c2914901c9295eda1d47086e1f306b61117ab1903fc45c",
+        "kind": "completed-inventory-body"
+      },
+      {
+        "path": ".cache/native-grid-candidates/ukraine-original-singleton-source-linux-005/facts.json",
+        "mode": "100644",
+        "bytes": 648414,
+        "sha256": "c87732466eaded9eb6e98ae572daf30a87e262172a03aa907b21f0c58634e691",
+        "kind": "completed-inventory-body"
+      },
+      {
+        "path": ".cache/native-grid-candidates/ukraine-original-singleton-source-linux-005/inventory.jsonl.gz",
+        "kind": "completed-inventory-body",
+        "mode": "100644",
+        "bytes": 1195,
+        "sha256": "6450fbdbf44ff86e60fe58fe5ce8a23f8b2f16fe4725c52fee7b26ee7ba0e6a5",
+        "uncompressed_bytes": 2092,
+        "uncompressed_sha256": "adb3550c6ce91c91e08d786b5d27dffdf4f1eaa16f66a3fc91990aa12603350f"
+      },
+      {
+        "blob": "fd8746ffe94024f78033a4fc617de3c1ebadceca",
+        "bytes": 13147,
+        "commit": "3bd1da0fdd9b63428f4957924eba6d360d1af45f",
+        "mode": "100644",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-request-005.json",
+        "sha256": "b43f9d4bf6c5b5b9f8c957bb137e1a2eae06ab66f2fa79a0c501c405775eb768"
+      },
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-operating-005.json",
+        "mode": "100644",
+        "bytes": 16149,
+        "sha256": "e2b21d1e03d6d7f990ef0b2b5d8f6127d4de55671b9979e4e8b65de7eb71b995",
+        "commit": "148febd1296dc7863ad9f1be6532a5181ee4eeb7",
+        "blob": "e0cdbff48f080a9cf7c5ecafed1e1d5aadeac74e"
+      }
+    ],
+    "owner_parts": [
+      {
+        "containing_inverse": {
+          "bank_member": {
+            "bytes": 306620,
+            "mode": "100644",
+            "offset": 0,
+            "original_binding": {
+              "copy_receipt_sha256": "c1843f9d9ce9ccc0dcbae4fbbe677eebaa5a1044c4878cbeb61d938e39508be3",
+              "issue": 1520,
+              "original_asset": "native-v1/ownership/rows-0.bin.gz"
+            },
+            "path": "native-v1/ownership/rows-0.bin.gz",
+            "sha256": "89ed3564db641f992746bf4f6f01c1eed89cb470520734ac1b85ee95e9a70ba0"
+          },
+          "inverse_ranges": [
+            {
+              "end": 306620,
+              "physical_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-00/part-000.bin.gz",
+              "start": 0
+            }
+          ],
+          "logical_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/native-v1/ownership/rows-0.bin.gz",
+          "manifest_descriptor": {
+            "bytes": 306620,
+            "decoded_bytes": 2097328,
+            "decoded_sha256": "e9044c8304a47cd0d0acbb306bd31c2ba15f71e57648ab7d1581a6a77a875294",
+            "encoding": "byte-shuffle",
+            "kind": "rows",
+            "offset": 0,
+            "path": "native-v1/ownership/rows-0.bin.gz",
+            "sha256": "89ed3564db641f992746bf4f6f01c1eed89cb470520734ac1b85ee95e9a70ba0",
+            "words": 524332
+          },
+          "whole_containing_fragments": [
+            {
+              "blob": "359bfc9c3b80f2d0b60fa2cc859aaaebdeb6b22f",
+              "bytes": 16773351,
+              "commit": "b6d86dff57e210cca7b2a4f9e3763922ed8ce263",
+              "decoded_bytes": 16777216,
+              "decoded_sha256": "5498b99fff54c063e49236eaaa07f4b868bcfdcb129f5aeee74b0876aec49001",
+              "mode": "100644",
+              "offset": 0,
+              "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-00/part-000.bin.gz",
+              "sha256": "74dd9af0c01fa5552b9af60d03935eb97b56bf6685c5bf964862d3b2b5d2b22d"
+            }
+          ]
+        },
+        "manifest_descriptor": {
+          "bytes": 306620,
+          "decoded_bytes": 2097328,
+          "decoded_sha256": "e9044c8304a47cd0d0acbb306bd31c2ba15f71e57648ab7d1581a6a77a875294",
+          "encoding": "byte-shuffle",
+          "kind": "rows",
+          "offset": 0,
+          "path": "native-v1/ownership/rows-0.bin.gz",
+          "sha256": "89ed3564db641f992746bf4f6f01c1eed89cb470520734ac1b85ee95e9a70ba0",
+          "words": 524332
+        },
+        "manifest_path": "native-v1/ownership/rows-0.bin.gz",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operands/rows-0.bin.gz"
+      },
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operands/runs-17825792.bin.gz",
+        "manifest_path": "native-v1/ownership/runs-17825792.bin.gz",
+        "manifest_descriptor": {
+          "kind": "runs",
+          "offset": 17825792,
+          "words": 1048576,
+          "path": "native-v1/ownership/runs-17825792.bin.gz",
+          "bytes": 827000,
+          "sha256": "db80e08b03e5227657759f6000fcf710d3e1438590a64349c90f442151524e21",
+          "decoded_bytes": 4194304,
+          "decoded_sha256": "ac9bb219c87d4e622103a4c4f15e5889418d04b2a52ac1f91602b90882661c4b",
+          "encoding": "byte-shuffle"
+        },
+        "containing_inverse": {
+          "logical_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/native-v1/ownership/runs-17825792.bin.gz",
+          "manifest_descriptor": {
+            "kind": "runs",
+            "offset": 17825792,
+            "words": 1048576,
+            "path": "native-v1/ownership/runs-17825792.bin.gz",
+            "bytes": 827000,
+            "sha256": "db80e08b03e5227657759f6000fcf710d3e1438590a64349c90f442151524e21",
+            "decoded_bytes": 4194304,
+            "decoded_sha256": "ac9bb219c87d4e622103a4c4f15e5889418d04b2a52ac1f91602b90882661c4b",
+            "encoding": "byte-shuffle"
+          },
+          "bank_member": {
+            "path": "native-v1/ownership/runs-17825792.bin.gz",
+            "offset": 8355362,
+            "bytes": 827000,
+            "sha256": "db80e08b03e5227657759f6000fcf710d3e1438590a64349c90f442151524e21",
+            "mode": "100644",
+            "original_binding": {
+              "issue": 1520,
+              "copy_receipt_sha256": "c1843f9d9ce9ccc0dcbae4fbbe677eebaa5a1044c4878cbeb61d938e39508be3",
+              "original_asset": "native-v1/ownership/runs-17825792.bin.gz"
+            }
+          },
+          "inverse_ranges": [
+            {
+              "physical_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-00/part-000.bin.gz",
+              "start": 8355362,
+              "end": 9182362
+            }
+          ],
+          "whole_containing_fragments": [
+            {
+              "blob": "359bfc9c3b80f2d0b60fa2cc859aaaebdeb6b22f",
+              "bytes": 16773351,
+              "commit": "b6d86dff57e210cca7b2a4f9e3763922ed8ce263",
+              "decoded_bytes": 16777216,
+              "decoded_sha256": "5498b99fff54c063e49236eaaa07f4b868bcfdcb129f5aeee74b0876aec49001",
+              "mode": "100644",
+              "offset": 0,
+              "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-00/part-000.bin.gz",
+              "sha256": "74dd9af0c01fa5552b9af60d03935eb97b56bf6685c5bf964862d3b2b5d2b22d"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "baseline": {
+    "kind": "current-selected-native-baseline-v1",
+    "version": 2,
+    "pins": [
+      {
+        "path": "data/ownership-selection.json",
+        "bytes": 1592,
+        "sha256": "34f969f6d792aa3900c1dfd69328500ef46775319d2e48a8b1d109312b675d42",
+        "mode": "100644",
+        "commit": "c28077da970ae39550e5edea790a266b060d3de5",
+        "blob": "c3e8614ba784729e0d6570af0f5d57a35f4baae6"
+      }
+    ]
+  },
+  "destination": ".cache/native-grid-candidates/ukraine-original-singleton-native-linux-001",
+  "executed_code": [
+    {
+      "path": "package.json",
+      "bytes": 1417,
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+    },
+    {
+      "path": "scripts/additive-gap-repair.mjs",
+      "bytes": 180812,
+      "sha256": "afae10c2cc99790037fb9b6a1743f3b974106cf717ecd9183160231634e88d30"
+    },
+    {
+      "path": "src/effective-footprint.js",
+      "bytes": 45330,
+      "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+    },
+    {
+      "path": "scripts/native-ownership/native-preparation-guards.mjs",
+      "bytes": 6580,
+      "sha256": "44901437d91c0ff8805030170abcd855aac3ac8354f10e4e67002f23e6a2ba31"
+    },
+    {
+      "path": "src/native-runtime.js",
+      "bytes": 3497,
+      "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+    },
+    {
+      "path": "scripts/native-ownership/compile-native-ownership.mjs",
+      "bytes": 4472,
+      "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+    },
+    {
+      "path": "src/native-grid.js",
+      "bytes": 6408,
+      "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+    },
+    {
+      "path": "scripts/audit-grid-intervals.mjs",
+      "bytes": 6777,
+      "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+    },
+    {
+      "path": "scripts/native-ownership/require-verified-selection.mjs",
+      "bytes": 4377,
+      "sha256": "20a8e3f472db4c06386ce2b7bd01330ea8acfd6d1ff414f6d2d32e8b1995d50c"
+    },
+    {
+      "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+      "bytes": 1540,
+      "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb"
+    },
+    {
+      "path": "scripts/native-ownership/verified-candidates.json",
+      "bytes": 1810,
+      "sha256": "080a481b71383bd6ba3388ad9b26138b25fced628a61830c3bb02a933562e40a"
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "bytes": 28506,
+      "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97"
+    },
+    {
+      "path": "src/ownership-method.js",
+      "bytes": 3126,
+      "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df"
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "bytes": 75074,
+      "sha256": "801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 187348,
+      "sha256": "424a498264c174b3acce567b03282d721fae02565bdfa02507f076355b3be2cb"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 246591,
+      "sha256": "471d035f92567ea447f221661db5fa8febfc7afc32af8ac975506ce9e0303255"
+    }
+  ],
+  "installed_modules": [
+    {
+      "path": "node_modules/@noble/hashes/package.json",
+      "bytes": 2799,
+      "sha256": "ceb30ba96a14786c419db53f2b8d3d59ece7ac5221c198ac03def462cf96ef23"
+    },
+    {
+      "path": "node_modules/@noble/hashes/sha2.js",
+      "bytes": 16773,
+      "sha256": "3ddc587c588283cbceed4dd9929cefcce06a0c231b54d4c6f0f99c478c686c00"
+    },
+    {
+      "path": "node_modules/@noble/hashes/_md.js",
+      "bytes": 5615,
+      "sha256": "a112f0fe1b15db00f2638618c436a17be1c5e13baf19d02fcc29016ae1db2233"
+    },
+    {
+      "path": "node_modules/@noble/hashes/_u64.js",
+      "bytes": 3081,
+      "sha256": "e48c0cfc10810439a4807b46db136ce603a3fa09b62584f513ef2f3ca496af54"
+    },
+    {
+      "path": "node_modules/@noble/hashes/utils.js",
+      "bytes": 9356,
+      "sha256": "11319ec0a8132a0c2ced8c98af33ae9274c001d6baf4f4709c4a6115e031a3c5"
+    }
+  ],
+  "operation": "unactivated-additive-native-batch-v1",
+  "output_reserve": 16000000,
+  "parent": {
+    "components": 95173,
+    "report_sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+    "roster_sha256": "ab1d9b3f9450805219a418c670278dd351b8b9b97b76ce2cd5164058dbf31224",
+    "version": 1
+  },
+  "report": {
+    "blob": "7c97f3e7feb1ef58a996ac199ddb886c4f024752",
+    "bytes": 57840,
+    "commit": "0198938719a5666b6726fb6a1e45779926eefeb2",
+    "mode": "100644",
+    "path": "coordination/engineering/global-physical-comparison-20261006/results/report.json",
+    "sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0"
+  },
+  "version": 1,
+  "operating_runtime": {
+    "version": 1,
+    "platform": "linux",
+    "runtime": [
+      {
+        "role": "git",
+        "path": "/usr/bin/git",
+        "bytes": 4082768,
+        "mode": 493,
+        "sha256": "356db14e102d68a1a37d8a1ac577dfd678d45d46e92f468bef8b7154e7bfdc60"
+      },
+      {
+        "role": "node",
+        "path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "bytes": 125989464,
+        "mode": 493,
+        "sha256": "bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12"
+      },
+      {
+        "role": "process-inspector",
+        "path": "/usr/bin/ps",
+        "bytes": 154552,
+        "mode": 493,
+        "sha256": "43b8d2d049183e9ebc409c86b89150b5a4a68fa19fe1815b16bed5561921a9c3"
+      },
+      {
+        "role": "time",
+        "path": "/workspace/scratch/127991fc8b8e/cloud-tools/gnu-time/time-1.9-0.2-amd64/usr/bin/time",
+        "bytes": 27384,
+        "mode": 493,
+        "sha256": "efc0d1112e36ec76c14bf7508e287935cf1631d9d0d91fb532802d07aef51cea"
+      }
+    ],
+    "supervisor": {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs",
+      "bytes": 20051,
+      "sha256": "9c62091265c8a5d44c724fe8d01a68096a6953a753b83173bda6adcf29884bf3"
+    }
+  }
+}

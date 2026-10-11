@@ -1,0 +1,68 @@
+node:internal/errors:985
+  const err = new Error(message);
+              ^
+
+Error: Command failed: git -c core.hooksPath=/dev/null -C /workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work cat-file -s 3653196289ab988ec577723c0b177fbc49351b4d
+fatal: git cat-file: could not get object info
+
+    at genericNodeError (node:internal/errors:985:15)
+    at wrappedFn (node:internal/errors:539:14)
+    at checkExecSyncError (node:child_process:942:11)
+    at execFileSync (node:child_process:978:15)
+    at ImmutableReader.git (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/scripts/check-effective-geographic-regression.mjs:69:23)
+    at ImmutableReader.descriptor (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/scripts/check-effective-geographic-regression.mjs:74:84)
+    at ImmutableReader.read (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/scripts/check-effective-geographic-regression.mjs:89:20)
+    at ImmutableReader.json (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/scripts/check-effective-geographic-regression.mjs:95:45)
+    at new SelectedGeometrySources (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/scripts/check-effective-geographic-regression.mjs:197:31)
+    at loadBaseSelection (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/scripts/check-effective-geographic-regression.mjs:450:61) {
+  status: 128,
+  signal: null,
+  output: [
+    null,
+    Buffer(0) [Uint8Array] [],
+    Buffer(47) [Uint8Array] [
+      102,  97, 116, 97, 108,  58,  32, 103, 105,
+      116,  32,  99, 97, 116,  45, 102, 105, 108,
+      101,  58,  32, 99, 111, 117, 108, 100,  32,
+      110, 111, 116, 32, 103, 101, 116,  32, 111,
+       98, 106, 101, 99, 116,  32, 105, 110, 102,
+      111,  10
+    ]
+  ],
+  pid: 229,
+  stdout: Buffer(0) [Uint8Array] [],
+  stderr: Buffer(47) [Uint8Array] [
+    102,  97, 116, 97, 108,  58,  32, 103, 105,
+    116,  32,  99, 97, 116,  45, 102, 105, 108,
+    101,  58,  32, 99, 111, 117, 108, 100,  32,
+    110, 111, 116, 32, 103, 101, 116,  32, 111,
+     98, 106, 101, 99, 116,  32, 105, 110, 102,
+    111,  10
+  ]
+}
+
+Node.js v24.19.0
+Command exited with non-zero status 1
+	Command being timed: "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/additive-gap-repair.mjs /workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work 22154d53ef75530a525331290f3f936976a1090d coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-request-002.json ae105b85bd822bcb83c137d674ff459ad5ea67edc8a87a85afb0ac2f2f1848d1 .cache/native-grid-candidates/ukraine-original-singleton-source-linux-002"
+	User time (seconds): 0.62
+	System time (seconds): 0.26
+	Percent of CPU this job got: 109%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.80
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 121560
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 179151
+	Voluntary context switches: 1254
+	Involuntary context switches: 52
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1

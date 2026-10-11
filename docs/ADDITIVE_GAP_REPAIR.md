@@ -229,3 +229,40 @@ release assets and sidecar data through these existing paths; they do not need
 another consumer framework or a worldwide audit. A new source class still needs
 its actual source-policy evidence. Zero native cells are distinct from water or
 physical approval.
+
+
+## Reviewed source registrations and Linux execution
+
+New full-component administrative source handoffs can use the immutable data
+registry at
+`coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json`.
+The request pins that registry at the executing HEAD. Each entry binds a merged
+source commit, the complete original batch and exact ordered component/target
+rosters to one whole source handoff. The existing physical-product inverse,
+source operation, target joins and scientific predicates still run. Duplicate
+registrations and source commits outside both current main and the executing
+history refuse admission. Existing 363- and 327-case registrations retain their
+original paths and meanings.
+
+When an original Python feature serialization differs from JavaScript's spelling
+of the same values, the handoff may bind the original complete byte preimage and
+a separately derived JavaScript digest. Both the original byte hash and exact
+complete parsed values are checked; a new digest never replaces the original.
+
+The Linux SOURCE/NATIVE supervisor is
+`coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs`.
+Run it with plain Node from the owned checkout and one frozen request path. The
+request names the exact genuine Node, Git, process inspector and GNU time bodies;
+no machine-specific executable path is built into the supervisor. The launcher
+checks reported available memory with the coordinated reserve, retains 2 GiB
+headroom plus this run's full 1 GiB peak reservation and the original 768 MiB
+residual admission floor, and enforces the reviewed
+1 GiB combined child/supervisor guard and 600-second deadline. Hidden memory
+limits remain unknown. Its bounded raw output, process samples and whole terminal
+receipt are evidence; a nonzero exit or incomplete cleanup never qualifies.
+
+Each attempt uses a fresh request/output destination and retains any earlier
+refusal. A qualified SOURCE result can feed NATIVE through its exact full operating
+receipt. These phases alone do not select a release or complete a batch: programme
+admission, current neighbor/conservation qualification and the actual selected
+output remain separate requirements. Zero native cells remain zero cells.

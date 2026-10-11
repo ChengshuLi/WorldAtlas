@@ -48,6 +48,14 @@
         "sha256": "9372e82622369f29e4374d92d12c50944dce60f4468b7842ace4f41cf3f4873d",
         "hash_kind": "file-bytes",
         "role": "original-source"
+      },
+      {
+        "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/source-handoff-003/source-handoff.json",
+        "commit": "4171675cdf746a43d3e1dfc0ff9aee8dbaaf6646",
+        "bytes": 82015,
+        "sha256": "7fd3d6da63c1fc9890784a6db6e4a3e9fb55755d52bb3c3a45cf0ad8a7f32462",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
       }
     ],
     "pins": {
@@ -96,6 +104,22 @@
       "verification": "unverified",
       "restoration": "Use the five exact original baseline descriptors and original product/edition pins retained in each issued request.",
       "limit": "Source-relative predicates do not prove current truth, dates, rights, native eligibility, whole-gap completion or delivery.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "ukr-original-singleton-source-1699",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/pull/1699",
+      "role": "Accepted original singleton source, physical custody and complete current-neighbor evidence",
+      "vintage": "Original immutable source corpus; accepted handoff003",
+      "retrieved_at": "2026-10-11",
+      "license": {
+        "status": "unknown",
+        "terms": "Original edition-specific limitations retained; no new rights assertion"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Read the exact merged4171675 source-handoff003 and its complete original product pins; reuse source review6103065358.",
+      "limit": "Source-relative evidence and zero-cell native production do not establish current selected-neighbor qualification, geographic approval or whole-gap delivery.",
       "temporal_status": "unknown"
     }
   ],
@@ -2542,6 +2566,545 @@
       "sha256": "9cffcf6f3e3399e35fe03eabfa70525620c69f0de4f1dc0dc7a72400963e2660",
       "hash_kind": "file-bytes",
       "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/README.md",
+      "bytes": 3596,
+      "sha256": "4c1ef34075454960190c1822bda7fb67119bdd1b53717b66f9ab1b6fd24de2aa",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/controls/caller-controls.log",
+      "bytes": 449,
+      "sha256": "6fbd6df7c1a828c0e8afc395bff1e11332eaa130bc5b6cec9de6d164db8d79e0",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/controls/direct-physical-product-controls.log",
+      "bytes": 559,
+      "sha256": "2e712083a0dbe6e8780b867a1a2e33bf35b14fc2c150c63040f2facd008bb82d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/controls/linux-controls.log",
+      "bytes": 1286,
+      "sha256": "c19e4b9f026080c4609d1fb594690fdfbe3a48d284a3cff8f3bcdc430725de77",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/controls/native-actual-registry-binding.log",
+      "bytes": 173,
+      "sha256": "26d1f14e87422b0c6b5edb160c9c8425a190b0a76677748bc3fdf7be514c2d74",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/controls/native-registry-controls.log",
+      "bytes": 320,
+      "sha256": "7c4780ec2597e7c8df8702bc5ca2ba6d640a54ef46f515b41443f4aacb3bf5bd",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/controls/one-gib-control-final.log",
+      "bytes": 512,
+      "sha256": "eba92ee7c817d78740fdad990ec643e103a884f378cdfb8fe45f89846acf242f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/controls/provenance.log",
+      "bytes": 213,
+      "sha256": "86ecebb47ab5e2a56a28a38761350d4b79386550e95c9303067db6c5542410ac",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-operating-002/samples.json",
+      "bytes": 69470,
+      "sha256": "67f56898aeedd6f82870110ad40a4ad08654f316c1ba7bfe629f7b9795317476",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-operating-002/stderr.txt",
+      "bytes": 1260,
+      "sha256": "ab82c6aff6ff02e93f6ff5b9988384474b3f11002ba6799f079acf76879bf43b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-operating-002/stdout.txt",
+      "bytes": 1441,
+      "sha256": "d5a9f40fa588976811328f0bf4a0d2272f564f5b9f086af96387c70423a6862d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-operating-002.json",
+      "bytes": 16149,
+      "sha256": "559311973dee9ff0106777fb69ff2d456613ff669bab26c220bdc4864583d547",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/facts.json",
+      "bytes": 657113,
+      "sha256": "dd3def1530ae5a7e74cb8b008da16ee24d8fc7d7110a662d917d4fcc2acb16e7",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/features.json",
+      "bytes": 4864,
+      "sha256": "306140a0bbb9bafb29f498f719f289f880fad67e390ae704d481b67b8045cf12",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/inventory.jsonl.gz",
+      "bytes": 310,
+      "sha256": "99838508a5dae530d40131509ce3824b487e000082bc5a9f268e6143a0c07d40",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/ledger-batch.json",
+      "bytes": 3017,
+      "sha256": "0d027ffcf23bfd465c76f36d8cbfaf48b59ffbd8c561615c282aaab6c520ac61",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/owner-window.json",
+      "bytes": 92792,
+      "sha256": "b539d2fb716c860590edcf7cb218263d7cd208d6092240a5d9fb9b871c231eb8",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/patch-batch.json",
+      "bytes": 793,
+      "sha256": "c9eb6d80990eff34c4e269639974e8ab287304e488a97551cff37a277a74ea08",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/publication.json",
+      "bytes": 1441,
+      "sha256": "27c67dcb23e80bad2c846517adce5d5ca69951a521f855de625d5a107a8f10fc",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/release-envelope.json",
+      "bytes": 1662,
+      "sha256": "4bc0ab9eda8339cebcaa3dda320d4fa5f79e8c804fcca60f4010d1c7ce05186a",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/virtual-owner-window.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-refusal-001-registry/receipt.json",
+      "bytes": 16150,
+      "sha256": "eb9aa58fd69b4faa200f113a3dbeeadc0a1be9306855d4cd0a248444b1145440",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-refusal-001-registry/samples.json",
+      "bytes": 79303,
+      "sha256": "0cba295cc4752fb1fec2f81c5c664ba75d13dd71bf4281b7b2d6233ee8e2903f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-refusal-001-registry/stderr.txt",
+      "bytes": 3302,
+      "sha256": "7cf2fb3699e280187150114e0d59e9bcb15e1151fc4d90ba2c1fd29c36116f47",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-refusal-001-registry/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-request-001.json",
+      "bytes": 21391,
+      "sha256": "e4f57a2259ef6594d31fb90b84618fdd658f5b3ae769bbd6f086c6553ad51a1e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-request-002.json",
+      "bytes": 21391,
+      "sha256": "192850d3aaff4dc34f66e93d4d3ec6142b80f802f714343513fc76855210ab8e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-operating-005/samples.json",
+      "bytes": 76683,
+      "sha256": "694110fda66797b62a6f48acb7b48007944585fa7d641ca93a3c008c86c3d3e7",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-operating-005/stderr.txt",
+      "bytes": 1261,
+      "sha256": "40b8693a5373ce0b6cc6f8d3b117cff00c574948a7674c58e6e54d353c6c8822",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-operating-005/stdout.txt",
+      "bytes": 349,
+      "sha256": "36e12458a993f9b88f47df3e4e92f21731fcbce958f8b6d24547c05be0cac322",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-operating-005.json",
+      "bytes": 16149,
+      "sha256": "e2b21d1e03d6d7f990ef0b2b5d8f6127d4de55671b9979e4e8b65de7eb71b995",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-qualified-005/facts.json",
+      "bytes": 648414,
+      "sha256": "c87732466eaded9eb6e98ae572daf30a87e262172a03aa907b21f0c58634e691",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-qualified-005/inventory.jsonl.gz",
+      "bytes": 1195,
+      "sha256": "6450fbdbf44ff86e60fe58fe5ce8a23f8b2f16fe4725c52fee7b26ee7ba0e6a5",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-qualified-005/publication.json",
+      "bytes": 349,
+      "sha256": "f2ef4f62b9b14d86d9c2914901c9295eda1d47086e1f306b61117ab1903fc45c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-001/receipt.json",
+      "bytes": 16095,
+      "sha256": "705385d01002c312ddf626c9b137ad18190de606832b686652246a86b1e70493",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-001/samples.json",
+      "bytes": 1274,
+      "sha256": "805fc82662cc2d120d67ad62c433bc986ccfcef1c8f54073c64d63208363120c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-001/stderr.txt",
+      "bytes": 3928,
+      "sha256": "f7281dcf133f192df20046afd660d67be44ca73e5fb8b5925675cdb44872da65",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-001/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-002/receipt.json",
+      "bytes": 16099,
+      "sha256": "4607ecf7ac30fc7d030163e8cb995bf4f7683b9c2b429984eed9dbdeffa072e5",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-002/samples.json",
+      "bytes": 2778,
+      "sha256": "b61fef82928ca835adc3ecb0bb2749f5c7ba86e006c1de0df26216add91417d9",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-002/stderr.txt",
+      "bytes": 3947,
+      "sha256": "175a49499e937645256ebf9e85bfd79dceeb3000ffda492cc54ac3a585b6bc0d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-002/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-003/receipt.json",
+      "bytes": 16098,
+      "sha256": "bf50bb9211ab8d2d5eefa1b6173c8db9a6d14871405974926401c45f8da5c65b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-003/samples.json",
+      "bytes": 3732,
+      "sha256": "7b408ab87e7c1f8f6b752551fc4781b9d86c895ac0159e633f855d9888d79773",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-003/stderr.txt",
+      "bytes": 3846,
+      "sha256": "6b8aeee4c008795a97e4b114d55f1f80597223ec7f35285f9a373a6e0cc5dd6e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-003/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-004/receipt.json",
+      "bytes": 16098,
+      "sha256": "67f608fe88ea844d6a4915b61ff43202ebba726b7c069b055884596138716419",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-004/samples.json",
+      "bytes": 4601,
+      "sha256": "92095a4ca78c354caa0f877516685d1a5cc98b6ca632ef46cee1bbb9f74621e0",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-004/stderr.txt",
+      "bytes": 4022,
+      "sha256": "292a03c9f3c77c46cfedb8eef1fb7841a579a17a36409aed5e78b60381bfa974",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-004/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-005/receipt.json",
+      "bytes": 16099,
+      "sha256": "4163945fcd03e3098d67825990a36b023f1e6779fba48c6300777fc681e29b7f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-005/samples.json",
+      "bytes": 60853,
+      "sha256": "40b7b76a60b527e4fbdb8cc3b22b77a856b7a4674a642c254b05cc7315a86145",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-005/stderr.txt",
+      "bytes": 3927,
+      "sha256": "7bf5cad5b7ec40ad8f0a772924bbfde527ed76dadb267808281754c734f1dc70",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-005/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-006-rss512/receipt.json",
+      "bytes": 16379,
+      "sha256": "ecb87f866a91136286d8ced45c7938b3d9cc7e3f72b2c8b128294f1b6cc521e4",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-006-rss512/samples.json",
+      "bytes": 64120,
+      "sha256": "9bc924dc22b9339c2391217a2729afd7d8dd090ae34ecc8a85c3a235f3ef4015",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-006-rss512/stderr.txt",
+      "bytes": 1289,
+      "sha256": "10601eb69fecc6b8e0976d96717dd6ebada169bd7686414c5fd0c1bd300c2cb2",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-006-rss512/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-007-shallow-main/receipt.json",
+      "bytes": 16150,
+      "sha256": "f8da38a9b1b84b89338047f7d955a22353feb1d062656efd042684cb100f66e2",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-007-shallow-main/samples.json",
+      "bytes": 65329,
+      "sha256": "0ac8f2e75aec3fb8139ca30c80780d88500e20b5d30b6354e56bc8107b8fe10e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-007-shallow-main/stderr.txt",
+      "bytes": 3141,
+      "sha256": "2465cb91c5322d7c118930b9251095f8da8db9b1608c1d66471e7daa74a3dc2a",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-007-shallow-main/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-008-direct-product-shape/receipt.json",
+      "bytes": 16150,
+      "sha256": "dced584d4a7a64c7bd69cf4f89e3395f70401884ddc879dba00f5d4ec0d4542f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-008-direct-product-shape/samples.json",
+      "bytes": 72815,
+      "sha256": "fb96e6be80df262790014e432df92ef78290dcdaa17ad4d5c06e8016d576f412",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-008-direct-product-shape/stderr.txt",
+      "bytes": 3080,
+      "sha256": "acaea2b724fdd890ddcdc2b2ad31680bb3158a05d40be1c23f5abc7197ddb031",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-008-direct-product-shape/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-request-001.json",
+      "bytes": 13147,
+      "sha256": "e99e6b5fac3c663706ad29434393319f27a3f8fb0b9521899b4a4f7f48be06ad",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-request-002.json",
+      "bytes": 13147,
+      "sha256": "ae105b85bd822bcb83c137d674ff459ad5ea67edc8a87a85afb0ac2f2f1848d1",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-request-003.json",
+      "bytes": 13147,
+      "sha256": "419c725ba1add4314a5e973afe29349e2726c196fe1907dde7b1b58df3b08df6",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-request-004.json",
+      "bytes": 13147,
+      "sha256": "786be2a8e63861a0b0ba7adbe642642649dfcdcad4a30d6997fc939e85e9a74d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-request-005.json",
+      "bytes": 13147,
+      "sha256": "b43f9d4bf6c5b5b9f8c957bb137e1a2eae06ab66f2fa79a0c501c405775eb768",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json",
+      "bytes": 943,
+      "sha256": "70d969584dd16f5123d3ad0c688b734d5248c1b8964b2eae3029e139400c5fcb",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operands/runs-17825792.bin.gz",
+      "bytes": 827000,
+      "sha256": "db80e08b03e5227657759f6000fcf710d3e1438590a64349c90f442151524e21",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/reviewed-programme.json",
+      "bytes": 6164,
+      "sha256": "d78033987121e5c7fefe417758f6fdcf83a866add63948f892214e7033753b45",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/controls/evidence-delta-validation.json",
+      "bytes": 12030,
+      "sha256": "1ee9472d77966b38c5d9be7015089051fe9b630ed1d26f4fdbf93278e9129a23",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
     }
   ],
   "methods": [
@@ -2551,6 +3114,13 @@
       "description": "Select the already qualified and assembled353-cell additive release: preserve all260 prior owner-cell assignments and select93 distinct new pairs. Reuse literal original source/native products, genuine2c qualification and completed assembly; no scientific operators rerun.",
       "software": "Node24 with exact issued bounded-heap argv; retained Python supervisor; unchanged native grid and scientific kernels",
       "units": "Whole bytes, native cells, original component IDs"
+    },
+    {
+      "id": "registered-ukr-source-native-linux",
+      "kind": "code",
+      "description": "Reusable immutable original-batch registry and original-byte serialization adapter; genuine bounded SOURCE005 and NATIVE002 run the existing source predicates and native grid method, with distinct frozen producer vectors and full retained outputs. No selected activation in this PR.",
+      "software": "Node24.19.0 and genuine GNU time; exact code, installed module and operating-runtime vectors in issued requests and full operating receipts",
+      "units": "Whole bytes, original components and native cells"
     }
   ],
   "metrics": [
@@ -2589,6 +3159,78 @@
         "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/qualified-current/request.json"
       },
       "evaluation_commit": "2c8768d782fe33b8634a41e3941077259e2618c6"
+    },
+    {
+      "id": "ukr_native002_components",
+      "value": 1,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "192850d3aaff4dc34f66e93d4d3ec6142b80f802f714343513fc76855210ab8e",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-request-002.json"
+      },
+      "evaluation_commit": "bc387dd5a75b6ca869c6bcd080822476715c7f81"
+    },
+    {
+      "id": "ukr_native002_zero_cell_components",
+      "value": 1,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "192850d3aaff4dc34f66e93d4d3ec6142b80f802f714343513fc76855210ab8e",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-request-002.json"
+      },
+      "evaluation_commit": "bc387dd5a75b6ca869c6bcd080822476715c7f81"
+    },
+    {
+      "id": "ukr_native002_assigned_cells",
+      "value": 0,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "192850d3aaff4dc34f66e93d4d3ec6142b80f802f714343513fc76855210ab8e",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-request-002.json"
+      },
+      "evaluation_commit": "bc387dd5a75b6ca869c6bcd080822476715c7f81"
+    },
+    {
+      "id": "ukr_native002_native_conflicts",
+      "value": 0,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "192850d3aaff4dc34f66e93d4d3ec6142b80f802f714343513fc76855210ab8e",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-request-002.json"
+      },
+      "evaluation_commit": "bc387dd5a75b6ca869c6bcd080822476715c7f81"
+    },
+    {
+      "id": "ukr_native002_removed_cells",
+      "value": 0,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "192850d3aaff4dc34f66e93d4d3ec6142b80f802f714343513fc76855210ab8e",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-request-002.json"
+      },
+      "evaluation_commit": "bc387dd5a75b6ca869c6bcd080822476715c7f81"
+    },
+    {
+      "id": "ukr_native002_reassigned_cells",
+      "value": 0,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "192850d3aaff4dc34f66e93d4d3ec6142b80f802f714343513fc76855210ab8e",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-request-002.json"
+      },
+      "evaluation_commit": "bc387dd5a75b6ca869c6bcd080822476715c7f81"
     }
   ],
   "metric_bindings": [
@@ -2606,6 +3248,36 @@
       "metric_id": "old_nonzero_cells_preserved_in_affected_rows",
       "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/qualified-current/whole-output-conservation-readback.json",
       "json_pointer": "/old_nonzero_cells_preserved_in_affected_rows"
+    },
+    {
+      "metric_id": "ukr_native002_components",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/facts.json",
+      "json_pointer": "/components"
+    },
+    {
+      "metric_id": "ukr_native002_zero_cell_components",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/facts.json",
+      "json_pointer": "/zero_cell_components"
+    },
+    {
+      "metric_id": "ukr_native002_assigned_cells",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/facts.json",
+      "json_pointer": "/assigned_cells"
+    },
+    {
+      "metric_id": "ukr_native002_native_conflicts",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/facts.json",
+      "json_pointer": "/native_conflicts"
+    },
+    {
+      "metric_id": "ukr_native002_removed_cells",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/facts.json",
+      "json_pointer": "/removed_cells"
+    },
+    {
+      "metric_id": "ukr_native002_reassigned_cells",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/facts.json",
+      "json_pointer": "/reassigned_cells"
     }
   ],
   "summaries": [],
@@ -2623,6 +3295,13 @@
       "source_ids": [
         "original-1639-administrative-corpus"
       ]
+    },
+    {
+      "text": "The original UKR singleton has genuinely qualified SOURCE005 and NATIVE002: a source-compatible complete original candidate with zero new native cells. Exact continuous addition is retained. Current-selected-neighbor qualification, selected delivery, whole-original-batch completion and publication remain unestablished. Original selected353 and historical363/327 evidence are preserved unchanged.",
+      "status": "supported",
+      "source_ids": [
+        "ukr-original-singleton-source-1699"
+      ]
     }
   ],
   "stages": {
@@ -2633,6 +3312,9 @@
   "commands": [
     "node scripts/run-integration-tests.mjs (normal full-profile jobs, including production selected GPU/Canvas/picking)",
     "python3 -I -B scripts/run-geographic-check.py --fetch --out .cache/geography-check.json (normal trusted native and continuous gate)",
-    "node scripts/evidence-quality.mjs coordination/engineering/melanesia363-additive-delivery-20261010/evidence-quality.json"
+    "node scripts/evidence-quality.mjs coordination/engineering/melanesia363-additive-delivery-20261010/evidence-quality.json",
+    "node --test --test-name-pattern=\"registered native roster|registered handoff provenance\" test/additive-gap-repair.test.mjs",
+    "node coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-request-005.json (at original3bd1da0 with exact pinned runtime and complete admitted inputs)",
+    "node coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-request-002.json (at originalbc387dd with qualified SOURCE005 and exact pinned runtime)"
   ]
 }
