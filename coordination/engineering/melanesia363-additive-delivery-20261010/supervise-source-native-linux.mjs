@@ -41,7 +41,7 @@ export function signalAuthenticatedGroup(original,current,signal,send=process.ki
  if(!original||!current||original.pid!==current.pid||original.pgid!==current.pgid||original.started_ticks!==current.started_ticks)return false;
  demand(original.pid===original.pgid,'Owned root is not a detached group');send(-original.pgid,signal);return true;
 }
-function ordinary(pin){
+export function ordinary(pin){
  const before=fs.lstatSync(pin.path);
  demand(before.isFile()&&!before.isSymbolicLink()&&fs.realpathSync(pin.path)===pin.path
    &&before.size===pin.bytes&&(before.mode&0o777)===pin.mode,'Runtime descriptor differs');
@@ -84,7 +84,7 @@ export function evaluateSupply(evidence){
  return {supply_upper_bytes:supply,residual_reported_bytes:residual,headroom_reserve_bytes:2*1024*MiB,process_peak_reservation_bytes:CAP,required_bytes:768*MiB,observations:evidence,
   uncertainty:'Reported availability only; unexposed limits remain unknown, not unlimited. No swap credit or guaranteed allocation.'};
 }
-function freshSupply(ps,reserved){
+export function freshSupply(ps,reserved){
  demand(/^(0|[1-9][0-9]*)$/.test(reserved??''),'Fresh coordinator reservation required');
  const proc='/proc/'+process.pid,evidence={reserved:Number(reserved),ancestors:[],unknown_limits:[]};
  for(const [key,name] of Object.entries({meminfo:'/proc/meminfo',cgroup:proc+'/cgroup',mountinfo:proc+'/mountinfo',limits:proc+'/limits',status:proc+'/status'}))evidence[key]=boundedText(name);
@@ -117,9 +117,27 @@ function freshSupply(ps,reserved){
  for(const line of rows.trim().split('\n')){const fields=line.trim().split(/\s+/);demand(fields.length===2&&fields.every(x=>/^\d+$/.test(x)),'Malformed aggregate RSS');evidence.aggregate_rss+=Number(fields[1])*1024;}
  return evaluateSupply(evidence);
 }
-export async function supervise(command,{time,ps,operation,cap=CAP,wall=WALL,interval=100,env}){
+export function assemblyStorage(output,operation,reservedSamples=0) {
+ const names=['ledger.json','patch.json','envelope.json','qualification.json'];
+ const sum=(directory,allowed)=>{
+  if(!fs.existsSync(directory))return 0;
+  const stat=fs.lstatSync(directory);demand(stat.isDirectory()&&!stat.isSymbolicLink(),'Nonordinary assembly output directory');
+  return fs.readdirSync(directory).reduce((total,name)=>{demand(allowed.includes(name),'Unexpected assembly output member');
+   const p=path.join(directory,name),s=fs.lstatSync(p);demand(s.isFile()&&!s.isSymbolicLink(),'Nonordinary assembly output member');return total+s.size;},0);
+ };
+ const productBytes=sum(output,names),operationBytes=sum(operation,['stdout.txt','stderr.txt','samples.json','receipt.json']);
+ const stderr=path.join(operation,'stderr.txt');
+ demand(productBytes<=4*MiB,'Assembly product reserve');
+ demand(!fs.existsSync(stderr)||fs.statSync(stderr).size<=40960,'Assembly stderr reserve');
+ const retainedBytes=productBytes+operationBytes+(fs.existsSync(path.join(operation,'samples.json'))?0:reservedSamples);
+ demand(retainedBytes<=12*MiB,'Assembly retained growth reserve');return {productBytes,retainedBytes};
+}
+export async function supervise(command,{time,ps,operation,cap=CAP,wall=WALL,interval=100,env,profile='source-native-v1',outputDirectory}){
  demand(env&&env.GIT_NO_LAZY_FETCH==='1'&&env.GIT_CONFIG_GLOBAL==='/dev/null','Isolated no-lazy child environment required');
- demand(Number.isSafeInteger(cap)&&cap>0&&cap<=CAP&&Number.isInteger(wall)&&wall>0&&wall<=WALL,'Limits cannot be expanded');
+ demand(['source-native-v1','selected-assembly-v1'].includes(profile),'Unknown fixed operating profile');
+ const assembly=profile==='selected-assembly-v1';
+ demand(Number.isSafeInteger(cap)&&cap>0&&cap<=CAP&&Number.isInteger(wall)&&wall>0&&wall<=(assembly?1200000:WALL),'Limits cannot be expanded');
+ demand(!assembly||typeof outputDirectory==='string'&&path.isAbsolute(outputDirectory),'Assembly destination required');
  fs.mkdirSync(operation);const out=path.join(operation,'stdout.txt'),err=path.join(operation,'stderr.txt');
  const stdout=fs.openSync(out,'wx'),stderr=fs.openSync(err,'wx'),samples=[],events=[],captured=new Map();
  let child,identity,launchBirth,exit=null,refusal=null,peakParent=0,peak=0,sampleBytes=0;const start=Date.now();
@@ -166,6 +184,7 @@ export async function supervise(command,{time,ps,operation,cap=CAP,wall=WALL,int
    if(rss+parent>cap)refusal='sampled-group-plus-supervisor-rss-cap';
    if(Date.now()-start>wall)refusal='wall-deadline';
    if(fs.statSync(out).size+fs.statSync(err).size>4*MiB)refusal='raw-output-reserve';
+   if(assembly)try{assemblyStorage(outputDirectory,operation,sampleBytes+samples.length+3);}catch(error){refusal??=error.message;}
    if(refusal){await terminate();break;}await sleep(interval);
   }
   await terminal;if(members().length){refusal??='owned-group-survived-natural-exit';await terminate();}
@@ -174,6 +193,7 @@ export async function supervise(command,{time,ps,operation,cap=CAP,wall=WALL,int
  let usage=null;try{usage=parseTime(boundedText(err,4*MiB));}catch(error){refusal??=error.message;}
  const sampleFd=fs.openSync(path.join(operation,'samples.json'),'wx');
  try{fs.writeSync(sampleFd,'[');for(let i=0;i<samples.length;i++)fs.writeSync(sampleFd,(i?',':'')+JSON.stringify(samples[i]));fs.writeSync(sampleFd,']\n');}finally{fs.closeSync(sampleFd);}
+ if(assembly)try{assemblyStorage(outputDirectory,operation);}catch(error){refusal??=error.message;}
  peakParent=Math.max(peakParent,process.memoryUsage().rss);
  if(usage&&(usage.rss_bytes+peakParent>cap||usage.elapsed_seconds>wall/1000||usage.exit_code!==exit?.code))refusal??='time-lifetime-supervisor-wall-or-exit-bound';
  let remaining=[];if(identity){try{remaining=members();}catch(error){refusal??=error.message;}}

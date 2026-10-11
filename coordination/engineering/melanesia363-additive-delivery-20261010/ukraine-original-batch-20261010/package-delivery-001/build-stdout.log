@@ -1,0 +1,20 @@
+
+> world-atlas@0.1.0 build:cloudflare
+> node scripts/build-cloudflare.mjs
+
+{"setup_phase":"canonical-package","status":"started"}
+{"setup_phase":"canonical-package","status":"success","elapsed_ms":92807.294286,"counters":{"controlled_rest_attempts":0,"controlled_quota_sleep_ms":0,"http_observation_ms":null,"transport_quota_sleep_ms":null},"process_peak_rss_bytes":556363776,"limits":["RSS is the process high-water mark, not an isolated phase maximum.","Git/Actions internal HTTP attempts and waits are not established by this record."]}
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 57 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                  0.46 kB │ gzip:   0.31 kB
+dist/assets/pixel-gpu-worker-DOOaZKfq.js         2.33 kB
+dist/assets/pixel-worker-CRnmADsw.js             2.68 kB
+dist/assets/native-context-worker-CaPDYsYs.js   25.75 kB
+dist/assets/index-C3pmC4rP.css                  31.46 kB │ gzip:  10.63 kB
+dist/assets/index-HMxWlALz.js                  410.89 kB │ gzip: 125.11 kB
+✓ built in 1.08s
+Static atlas ready: 49625 polygons and 4 dated records.
+Cloudflare package prepared; explicit access mode, PostgreSQL and read-only defaults. No deployment or database migrations performed.
