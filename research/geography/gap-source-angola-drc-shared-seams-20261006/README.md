@@ -1,3 +1,7 @@
+## 2026-10-11 complete 100-member source wave
+
+The current continuation is documented in [cohort100-20261011/README.md](cohort100-20261011/README.md). All 100 remaining exact AGO2018/COD2019 original gaps were classified with original membership preserved. Four complete original gaps are proposed under the independently reviewed existing literal-operation interpretation; the other96 remain explicitly held or unresolved. The accepted earlier two-case history below remains unchanged.
+
 # Angola–DRC shared-seam source assessment (#1243)
 
 ## Disposition

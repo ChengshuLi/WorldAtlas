@@ -4,24 +4,24 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {retainedAdministrativeSourcePremises, registeredAdministrativeViews} from '../../../../scripts/additive-gap-repair.mjs';
 
-const scope=JSON.parse(fs.readFileSync(new URL('../vintages/cohort100-source-handoff-001/source-handoff.json',import.meta.url)));
+const scope=JSON.parse(fs.readFileSync(new URL('../vintages/cohort100-source-handoff-002/source-handoff.json',import.meta.url)));
 const clone=()=>structuredClone(scope);
-const targetFor=s=>s.current_neighbor_binding.rows.find(r=>r.component_id===s.scopeIds[0]).candidate_neighbors.find(r=>r.feature.id===s.candidate_source_native_bindings[0].retained_payload.target_stable_location_id).feature;
-function premise(s,index=0,target=targetFor(s)){
+const targetFor=(s,index=0)=>s.current_neighbor_binding.rows.find(r=>r.component_id===s.scopeIds[index]).candidate_neighbors.find(r=>r.feature.id===s.candidate_source_native_bindings[index].retained_payload.target_stable_location_id).feature;
+function premise(s,index=0,target=targetFor(s,index)){
   const sourceCase=s.candidate_source_native_bindings[index];
   const record=s.original_physical_comparison_bindings[index].physical_comparison.row;
   return retainedAdministrativeSourcePremises({record,candidate:sourceCase.original_candidate_feature.geometry,sourceCase,sourceScope:s,target});
 }
-const entry={format:'source-native-execution-cohort-v2',id:scope.execution_cohort_id,cohort_ids:scope.scopeIds,target_ids:[targetFor(scope).id]};
+const entry={format:'source-native-execution-cohort-v2',id:scope.execution_cohort_id,cohort_ids:scope.scopeIds,target_ids:scope.scopeIds.map((_,i)=>targetFor(scope,i).id)};
 let count=0;
 function test(name,fn){fn();count++;console.log('ok '+count+' - '+name);}
 for(let i=0;i<scope.scopeIds.length;i++)test('actual complete case '+i+' retains source-relative support and unapproved truth',()=>{
   const result=premise(scope,i);assert.equal(result.source_compatible,true);assert.deepEqual(result.failed_premises,[]);
   assert.equal(result.authority,'unapproved');assert.equal(result.status,'unknown-source-fitness-and-observation-date');
 });
-test('actual v2 has one scientific case and unchanged full100 passive accounting',()=>{
-  assert.equal(registeredAdministrativeViews(scope,entry).cohort.length,1);
-  assert.equal(scope.original_gap_membership.members.length,1);
+test('actual v2 has four scientific cases and unchanged full100 passive accounting',()=>{
+  assert.equal(registeredAdministrativeViews(scope,entry).cohort.length,4);
+  assert.equal(scope.original_gap_membership.members.length,4);
   assert.equal(scope.original_membership_evidence.wave_components,100);
 });
 test('changed complete candidate is refused',()=>{const s=clone();s.candidate_source_native_bindings[0].original_candidate_feature.geometry.coordinates[0][1][0]+=0.01;assert.equal(premise(s).source_compatible,false);});
