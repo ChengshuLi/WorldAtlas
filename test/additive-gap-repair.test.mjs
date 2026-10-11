@@ -6,7 +6,7 @@ import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {validateAdministrativeNativeRoster,registeredOriginalPhysicalProduct,readRegisteredAdministrativeHandoff,registeredAdministrativeHandoff,registeredAdministrativeViews,originalAdministrativeCandidateHash,retainedAdministrativeSourcePremises,retainedAdministrativeFragmentPremises,combineNativeBatch,retainedCountySourcePremises,retainedLandSourcePremises,wholePrimitivePointsetEqual,inventoryRows,joinInventoryFacts,restoreInventoryRow,candidateDisposition,admitInventoryDestination,selectedBankResolutions,inventoryGroup,restoreGroupedInventoryRow} from '../scripts/additive-gap-repair.mjs';
+import {requireCurrentAdministrativeTargetBank,validateAdministrativeNativeRoster,registeredOriginalPhysicalProduct,readRegisteredAdministrativeHandoff,registeredAdministrativeHandoff,registeredAdministrativeViews,originalAdministrativeCandidateHash,retainedAdministrativeSourcePremises,retainedAdministrativeFragmentPremises,combineNativeBatch,retainedCountySourcePremises,retainedLandSourcePremises,wholePrimitivePointsetEqual,inventoryRows,joinInventoryFacts,restoreInventoryRow,candidateDisposition,admitInventoryDestination,selectedBankResolutions,inventoryGroup,restoreGroupedInventoryRow} from '../scripts/additive-gap-repair.mjs';
 import {footprintValueSha256 as hash} from '../src/effective-footprint.js';
 const row=(id,status='mapped-land-support')=>({component_id:id,candidate_feature_sha256:hash(id),candidate_geometry_sha256:hash([id]),status,
  physical_authority:'unapproved',physical_status:'unknown-source-fitness-and-observation-date',physical_limits:['original retained source limits'],complete_support:{whole_original_geometry:true}});
@@ -21,6 +21,52 @@ const batchSource=(id,owner=1,compatible=true)=>({component_id:id,target_id:'tar
 const batchCandidate=(id,owner,runs)=>({component_id:id,target_id:'target-'+owner,pixelIndex:owner,row_start:1,row_end:2,rows:[{y:1,runs:runs.map(([start,end])=>[start,end,owner])}]});
 const batch=(sources,candidates,old=[],scope=sources.map(row=>row.component_id))=>combineNativeBatch({scopeIds:scope,sourceRows:sources,candidates,
  ownerRows:[{y:1,complete_owner_intervals:old}],size:8});
+
+function selectedEncodedTargetFixture(){
+ const map=JSON.parse(fs.readFileSync(new URL('../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json',import.meta.url)));
+ const source={...map.overrides.find(row=>row.logical_path==='data/geography/part-29.json'),kind:'selected-exact-encoded-override'};
+ const sources=[...map.unchanged_files.map(row=>({...row,kind:'ordinary-immutable-git-source'})),source];
+ const resolver={sources,paths:sources.map(row=>row.logical_path??row.path)};
+ const expected={path:source.path,commit:source.commit,mode:source.mode,blob:source.git_blob_oid,bytes:source.bytes,sha256:source.sha256,
+  uncompressed_bytes:source.decoded_bytes,uncompressed_sha256:source.decoded_sha256};
+ return {resolver,source,expected};
+}
+test('selected encoded target admits actual part29 whole transport with exact decoded binding',()=>{
+ const {resolver,source,expected}=selectedEncodedTargetFixture();
+ assert.equal(source.git_blob_oid,'d3f17ccd8eecca88b16f2bbbf075320b6d555aea');
+ assert.equal(source.bytes,3353763);assert.equal(source.decoded_bytes,12932719);
+ // The old logical-path lookup and ordinary-only predicate reject this body.
+ assert.equal(resolver.paths.indexOf(expected.path),-1);assert.notEqual(source.kind,'ordinary-immutable-git-source');
+ assert.equal(requireCurrentAdministrativeTargetBank(resolver,expected.path,expected),source);
+});
+test('selected encoded target refuses every encoded decoded and original-commit drift',()=>{
+ const {resolver,expected}=selectedEncodedTargetFixture();
+ for(const key of ['path','commit','mode','blob','bytes','sha256','uncompressed_bytes','uncompressed_sha256']){
+  const changed={...expected,[key]:typeof expected[key]==='number'?expected[key]+1:'changed'};
+  assert.throws(()=>requireCurrentAdministrativeTargetBank(resolver,expected.path,changed),/administrative/);
+ }
+ for(const key of ['uncompressed_bytes','uncompressed_sha256']){
+  const changed={...expected};delete changed[key];
+  assert.throws(()=>requireCurrentAdministrativeTargetBank(resolver,expected.path,changed),/inverse/);
+ }
+ assert.throws(()=>requireCurrentAdministrativeTargetBank(resolver,expected.path,{...expected,kind:'completed-inventory-body'}),/inverse/);
+});
+test('selected encoded target refuses foreign duplicate and ambiguous resolver bindings',()=>{
+ for(const edit of [r=>r.sources.pop(),r=>r.sources.push({...r.sources.at(-1)}),
+  r=>r.sources.at(-1).logical_path='data/geography/foreign.json',r=>r.paths[r.paths.length-1]='data/geography/foreign.json',
+  r=>r.paths.push(r.paths.at(-1)),r=>r.paths.push(r.sources.at(-1).path),
+  r=>r.sources.at(-1).encoding='unknown',r=>r.sources.at(-1).kind='selected-whole-bank-member',
+  r=>r.sources.at(-1).kind='ordinary-immutable-git-source']){
+  const {resolver,expected}=selectedEncodedTargetFixture();edit(resolver);
+  assert.throws(()=>requireCurrentAdministrativeTargetBank(resolver,expected.path,expected),/administrative/);
+ }
+});
+test('selected encoded target extension preserves ordinary target-bank joins',()=>{
+ const {resolver}=selectedEncodedTargetFixture(),source=resolver.sources.find(row=>row.kind==='ordinary-immutable-git-source');
+ const expected={path:source.path,commit:source.commit,mode:source.mode,blob:source.git_blob_oid,bytes:source.bytes,sha256:source.sha256};
+ assert.equal(requireCurrentAdministrativeTargetBank(resolver,source.path,expected),source);
+ assert.throws(()=>requireCurrentAdministrativeTargetBank(resolver,source.path,{...expected,blob:'0'.repeat(40)}),/bank differs/);
+});
 test('shared batch preserves every source exception and distinguishes positive geometry with zero native cells',()=>{
  const sources=[batchSource('a'),batchSource('zero'),batchSource('b'),batchSource('parent-1',1,false),batchSource('parent-2',1,false)];
  const result=batch(sources,[batchCandidate('a',1,[[0,2]]),batchCandidate('zero',1,[]),batchCandidate('b',1,[[4,7]])]);

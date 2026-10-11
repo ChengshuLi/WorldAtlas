@@ -810,6 +810,28 @@ export function readBaselineResolutions(repo, baseline) {
 // Explicit current selected route. The historical twelve-pin V8 reconciler
 // above remains literal; no predecessor pointer is relabelled as current.
 const currentBaselineViews=new WeakMap();
+// Pure descriptor join, not a source authority. Production supplies only the
+// privately authenticated resolver from loadSelection below. The existing
+// readPin decoder and target loop then consume the complete committed body.
+export function requireCurrentAdministrativeTargetBank(resolver,name,expected) {
+  const matches=resolver.sources.flatMap((source,i)=>source.path===name?[{source,logical:resolver.paths[i]}]:[]);
+  demand(matches.length===1&&expected.path===name,'Ambiguous or missing current administrative target source');
+  const {source,logical}=matches[0];
+  demand(source.mode===expected.mode&&source.git_blob_oid===expected.blob
+    &&source.bytes===expected.bytes&&source.sha256===expected.sha256,
+    'Current full administrative source bank differs');
+  if(source.kind==='ordinary-immutable-git-source') {
+    demand(logical===name,'Ordinary administrative source path differs');
+    return source;
+  }
+  demand(source.kind==='selected-exact-encoded-override'&&source.logical_path===logical
+    &&resolver.paths.filter(p=>p===logical).length===1&&!resolver.paths.includes(name)
+    &&source.encoding==='gzip'&&expected.kind===undefined&&source.mode==='100644'
+    &&source.commit===expected.commit&&source.decoded_bytes===expected.uncompressed_bytes
+    &&source.decoded_sha256===expected.uncompressed_sha256,
+    'Current encoded administrative target inverse differs');
+  return source;
+}
 export function readCurrentBaselineResolutions(repo,baseline,{request,report,project,installedModules,runtimeBytes,outputReserve}) {
   demand(baseline?.version===2&&baseline.kind==='current-selected-native-baseline-v1'
     &&Object.keys(baseline).sort().join(',')==='kind,pins,version'
@@ -845,10 +867,7 @@ export function readCurrentBaselineResolutions(repo,baseline,{request,report,pro
       &&named(rule.bounds_path).sha256===snapshot.manifest.original_assets.bounds.sha256,
       'Current administrative native manifest/owner custody differs');
     for(const name of rule.target_banks){
-      const expected=named(name),source=snapshot.geometrySources.sources[snapshot.geometrySources.paths.indexOf(name)];
-      demand(source&&source.kind==='ordinary-immutable-git-source'&&source.mode===expected.mode
-        &&source.git_blob_oid===expected.blob&&source.bytes===expected.bytes&&source.sha256===expected.sha256,
-        'Current full administrative source bank differs; explicit override inverse required');
+      requireCurrentAdministrativeTargetBank(snapshot.geometrySources,name,named(name));
     }
   }
   const prior=snapshot.additive;
