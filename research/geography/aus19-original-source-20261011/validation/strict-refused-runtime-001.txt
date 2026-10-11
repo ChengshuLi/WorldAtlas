@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/311d266739da13877960e9492b3891d2a3a20d7ae5c0b6f849cf49f362e77475/work/research/geography/aus19-original-source-20261011/tools/probe.py", line 223, in <module>
+    main()
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/311d266739da13877960e9492b3891d2a3a20d7ae5c0b6f849cf49f362e77475/work/research/geography/aus19-original-source-20261011/tools/probe.py", line 50, in main
+    raise ValueError('Runtime drift: ' + pin['path'])
+ValueError: Runtime drift: /workspace/scratch/127991fc8b8e/cloud-tools/trusted-geography-cp312-np235-sh212-pr372/venv/lib/python3.12/site-packages/numpy/_core/_simd.pyi

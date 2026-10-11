@@ -1,0 +1,1472 @@
+{
+  "source_products": [
+    {
+      "key": "gb:AUS:ADM2",
+      "whole_sha256": "69115100f6d6fa953651988ecb091b1c3a687a4a8a95782bfafaa950af66b3e4",
+      "original_bytes": 11066867,
+      "parts": [
+        {
+          "alias": "inputs/sources/17e2fd8c2c4dc112bd3c37516394d8f0f23a87a102f7dc8cc25e653be53a8c4c.bin.gz",
+          "bytes": 3462640,
+          "hash_kind": "file-bytes",
+          "offset": 0,
+          "ordinal": 0,
+          "original_corpus_commit": "1c4b606d35614bd7c4990bb9da1098fa181c7fe8",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-AUS-ADM2-000.bin.gz",
+          "sha256": "17e2fd8c2c4dc112bd3c37516394d8f0f23a87a102f7dc8cc25e653be53a8c4c",
+          "uncompressed_bytes": 11066867,
+          "uncompressed_sha256": "69115100f6d6fa953651988ecb091b1c3a687a4a8a95782bfafaa950af66b3e4"
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "component_id": "physical-component:d23d0b3cb30b0de91369fd23732c356389e9df225271a84d25a03ab52731c9d7",
+      "family": "gap-source-batch:4473df02f29fc7b8cb762d2d",
+      "source_products": [
+        "gb:AUS:ADM2"
+      ],
+      "target": {
+        "id": "gb:AUS:ADM2:25037944B90195923531970",
+        "original_feature_sha256": "91bcde8138adc87a9aa4c3e1eac6964b3c3eda9081e7292e13ed1eb78e87d951",
+        "original_parent_id": "framework:province:queensland:c14c54289f37",
+        "reference_year": "2022"
+      },
+      "geometry_sha256": "5f9f8a1a5c196986dae704b39abaca1fe2efcf4a0f8fbbe78b8ddef0ecfffe76",
+      "full_feature_sha256": "e40374830116040d35653f22647672661d535ef7789d1520a51fb7c5da81eb20",
+      "original_unknowns": [],
+      "source_row": {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-040.json.gz",
+        "git_blob_oid": "2529b8ff8e6c5e8fa7ced29fa552bb0a38f6f8a7",
+        "ordinal": 192
+      },
+      "disposition": "provisional-full-source-cover",
+      "family_metadata": {
+        "source_families": [
+          {
+            "kind": "source-authority-and-product-comparison",
+            "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+            "recipe": "scripts/administrative.py",
+            "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2.geojson",
+            "reference_year": "2022",
+            "source_id": "gb:AUS:ADM2",
+            "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+          }
+        ],
+        "related_issues": [
+          165
+        ],
+        "original_component_count": 335,
+        "contact_ids": [
+          "gb:AUS:ADM2:25037944B13244512579669",
+          "gb:AUS:ADM2:25037944B14025919363288",
+          "gb:AUS:ADM2:25037944B15390433377666",
+          "gb:AUS:ADM2:25037944B16136262303417",
+          "gb:AUS:ADM2:25037944B1656499074776",
+          "gb:AUS:ADM2:25037944B17459590153092",
+          "gb:AUS:ADM2:25037944B19400187923346",
+          "gb:AUS:ADM2:25037944B21166714819483",
+          "gb:AUS:ADM2:25037944B25466476596436",
+          "gb:AUS:ADM2:25037944B26487143019559",
+          "gb:AUS:ADM2:25037944B30530613092043",
+          "gb:AUS:ADM2:25037944B34353436415485",
+          "gb:AUS:ADM2:25037944B35450059513963",
+          "gb:AUS:ADM2:25037944B36323732446250",
+          "gb:AUS:ADM2:25037944B37268575436611",
+          "gb:AUS:ADM2:25037944B43303794043608",
+          "gb:AUS:ADM2:25037944B52648858671508",
+          "gb:AUS:ADM2:25037944B53664742087650",
+          "gb:AUS:ADM2:25037944B5517287997374",
+          "gb:AUS:ADM2:25037944B68165922230856",
+          "gb:AUS:ADM2:25037944B72297710108089",
+          "gb:AUS:ADM2:25037944B73642390976852",
+          "gb:AUS:ADM2:25037944B76061046607907",
+          "gb:AUS:ADM2:25037944B77283019061987",
+          "gb:AUS:ADM2:25037944B82919316631597",
+          "gb:AUS:ADM2:25037944B87142005071762",
+          "gb:AUS:ADM2:25037944B90195923531970",
+          "gb:AUS:ADM2:25037944B90533392045393",
+          "gb:AUS:ADM2:25037944B91391383703186",
+          "gb:AUS:ADM2:25037944B93306496735140",
+          "gb:AUS:ADM2:25037944B93362533996498",
+          "gb:AUS:ADM2:25037944B93557893838922",
+          "gb:AUS:ADM2:25037944B95382354250521",
+          "gb:AUS:ADM2:25037944B96271376045080",
+          "gb:AUS:ADM2:25037944B96392818490355",
+          "gb:AUS:ADM2:25037944B97488266373518"
+        ]
+      },
+      "detector_area_m2": 190872.64078277608,
+      "candidate_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+        "git_blob_oid": "1a722aa0e2179777bbbe1e752e0b5ecb38416ce2",
+        "bytes": 2085110,
+        "decoded_bytes": 8388464,
+        "ordinal": 7657
+      },
+      "original_geometry_flags": {
+        "dateline_connected": false,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": true,
+        "unmeasured_fragment_ids": []
+      }
+    },
+    {
+      "component_id": "physical-component:0f132f659a1cd02c13cddb383b2d39a40134e249c0771a9b3dfc42b488755f35",
+      "family": "gap-source-batch:1ac18b09b8b8d6fd6b35ee13",
+      "source_products": [
+        "gb:AUS:ADM2"
+      ],
+      "target": {
+        "id": "gb:AUS:ADM2:25037944B43303794043608",
+        "original_feature_sha256": "864a8eb9816764cf4e14514acb7414c8d212ebca47c8057c18e8bbc9d508ab93",
+        "original_parent_id": "framework:province:queensland:c14c54289f37",
+        "reference_year": "2022"
+      },
+      "geometry_sha256": "ed02dc93d59d4359ab0f8c5e16e4c3b3f1ecd924bb990c77e58176dba3986db2",
+      "full_feature_sha256": "9499dbf9fcd431533c6be370388a927ad80bc49eeb5805000664fcb1288ddf0a",
+      "original_unknowns": [],
+      "source_row": {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-003.json.gz",
+        "git_blob_oid": "0903228097f970cf07dae11043bc4f535b3c7b21",
+        "ordinal": 17
+      },
+      "disposition": "provisional-full-source-cover",
+      "family_metadata": {
+        "source_families": [
+          {
+            "kind": "source-authority-and-product-comparison",
+            "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+            "recipe": "scripts/administrative.py",
+            "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2.geojson",
+            "reference_year": "2022",
+            "source_id": "gb:AUS:ADM2",
+            "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+          }
+        ],
+        "related_issues": [
+          165
+        ],
+        "original_component_count": 15,
+        "contact_ids": [
+          "gb:AUS:ADM2:25037944B14025919363288",
+          "gb:AUS:ADM2:25037944B15390433377666",
+          "gb:AUS:ADM2:25037944B1656499074776",
+          "gb:AUS:ADM2:25037944B25466476596436",
+          "gb:AUS:ADM2:25037944B30530613092043",
+          "gb:AUS:ADM2:25037944B37268575436611",
+          "gb:AUS:ADM2:25037944B43303794043608",
+          "gb:AUS:ADM2:25037944B72297710108089",
+          "gb:AUS:ADM2:25037944B91391383703186"
+        ]
+      },
+      "detector_area_m2": 154649.80722686654,
+      "candidate_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+        "git_blob_oid": "372e21a9e1ace88f428ac79a96ae7caf44d05ef3",
+        "bytes": 2080037,
+        "decoded_bytes": 8387182,
+        "ordinal": 5602
+      },
+      "original_geometry_flags": {
+        "dateline_connected": false,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": true,
+        "unmeasured_fragment_ids": []
+      }
+    },
+    {
+      "component_id": "physical-component:ea41656ef57f6a294406dba881c7d63e70460c1c060147692992137380cf7c8b",
+      "family": "gap-source-batch:92f158e2100f90c655987fd2",
+      "source_products": [
+        "gb:AUS:ADM2"
+      ],
+      "target": {
+        "id": "gb:AUS:ADM2:25037944B47305351718046",
+        "original_feature_sha256": "267e1123685337dc57c9d063d98a6254fc5ac2822f1fee753b8a0891a444e9e7",
+        "original_parent_id": "framework:province:northern-territory:f0073829bfe4",
+        "reference_year": "2022"
+      },
+      "geometry_sha256": "e2d627c0e6275cee68bddaa104b19c05bb859e564f8d01422294666accfebb06",
+      "full_feature_sha256": "057d621adf9846e2de95faf356c148751ed360e9e7cc5f5565ca934a8359d37c",
+      "original_unknowns": [],
+      "source_row": {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-045.json.gz",
+        "git_blob_oid": "1cedc52f6328946803ba6248d821d2c875cbdb60",
+        "ordinal": 76
+      },
+      "disposition": "provisional-full-source-cover",
+      "family_metadata": {
+        "source_families": [
+          {
+            "kind": "source-authority-and-product-comparison",
+            "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+            "recipe": "scripts/administrative.py",
+            "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2.geojson",
+            "reference_year": "2022",
+            "source_id": "gb:AUS:ADM2",
+            "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+          }
+        ],
+        "related_issues": [
+          164
+        ],
+        "original_component_count": 28,
+        "contact_ids": [
+          "gb:AUS:ADM2:25037944B28082311396997",
+          "gb:AUS:ADM2:25037944B47305351718046",
+          "gb:AUS:ADM2:25037944B62285809064209",
+          "gb:AUS:ADM2:25037944B73531494726593",
+          "gb:AUS:ADM2:25037944B87513158470011"
+        ]
+      },
+      "detector_area_m2": 75624.97273861576,
+      "candidate_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+        "git_blob_oid": "6104e93ee8f398bb0e4cc47902810e277c7701d9",
+        "bytes": 2079838,
+        "decoded_bytes": 8387897,
+        "ordinal": 7904
+      },
+      "original_geometry_flags": {
+        "dateline_connected": false,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": true,
+        "unmeasured_fragment_ids": []
+      }
+    },
+    {
+      "component_id": "physical-component:ae546e54d7ddf21a006459eeec529ac90f1b030b9797bed032d21f5885126a7d",
+      "family": "gap-source-batch:a292b947707de0ce9a3a1348",
+      "source_products": [
+        "gb:AUS:ADM2"
+      ],
+      "target": {
+        "id": "gb:AUS:ADM2:25037944B43303794043608",
+        "original_feature_sha256": "864a8eb9816764cf4e14514acb7414c8d212ebca47c8057c18e8bbc9d508ab93",
+        "original_parent_id": "framework:province:queensland:c14c54289f37",
+        "reference_year": "2022"
+      },
+      "geometry_sha256": "b888322b53f03b30ddfc6ded6ebaada5a9c9a4c0aa19cb9a289b6048d061de25",
+      "full_feature_sha256": "f95be8c84436456a1cee7729b283d358cbb19a88f15f0eac5578d134c626c97b",
+      "original_unknowns": [],
+      "source_row": {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-033.json.gz",
+        "git_blob_oid": "c26ddbcc21d27dce4ecf6f05fa5d5d684f027dc6",
+        "ordinal": 154
+      },
+      "disposition": "provisional-full-source-cover",
+      "family_metadata": {
+        "source_families": [
+          {
+            "kind": "source-authority-and-product-comparison",
+            "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+            "recipe": "scripts/administrative.py",
+            "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2.geojson",
+            "reference_year": "2022",
+            "source_id": "gb:AUS:ADM2",
+            "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+          }
+        ],
+        "related_issues": [
+          165
+        ],
+        "original_component_count": 27,
+        "contact_ids": [
+          "gb:AUS:ADM2:25037944B14025919363288",
+          "gb:AUS:ADM2:25037944B15390433377666",
+          "gb:AUS:ADM2:25037944B1656499074776",
+          "gb:AUS:ADM2:25037944B17459590153092",
+          "gb:AUS:ADM2:25037944B19400187923346",
+          "gb:AUS:ADM2:25037944B21166714819483",
+          "gb:AUS:ADM2:25037944B26487143019559",
+          "gb:AUS:ADM2:25037944B43303794043608",
+          "gb:AUS:ADM2:25037944B5517287997374",
+          "gb:AUS:ADM2:25037944B73642390976852",
+          "gb:AUS:ADM2:25037944B82919316631597",
+          "gb:AUS:ADM2:25037944B87142005071762",
+          "gb:AUS:ADM2:25037944B90195923531970",
+          "gb:AUS:ADM2:25037944B91391383703186",
+          "gb:AUS:ADM2:25037944B93306496735140",
+          "gb:AUS:ADM2:25037944B95382354250521"
+        ]
+      },
+      "detector_area_m2": 48887.29894049083,
+      "candidate_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+        "git_blob_oid": "cc58df0f67dcad69c4b624a6566f440f14de0914",
+        "bytes": 2079265,
+        "decoded_bytes": 8387777,
+        "ordinal": 3132
+      },
+      "original_geometry_flags": {
+        "dateline_connected": false,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": true,
+        "unmeasured_fragment_ids": []
+      }
+    },
+    {
+      "component_id": "physical-component:dc85692f522c0fedaaacd434b39520bb84001ba0355441458cbc3b82e6c38a0a",
+      "family": "gap-source-batch:4473df02f29fc7b8cb762d2d",
+      "source_products": [
+        "gb:AUS:ADM2"
+      ],
+      "target": {
+        "id": "gb:AUS:ADM2:25037944B95382354250521",
+        "original_feature_sha256": "c94679e659f9980bdb06122de3eeba17b5ff657cfc5ab44aa50bf8bb87c4a252",
+        "original_parent_id": "framework:province:queensland:c14c54289f37",
+        "reference_year": "2022"
+      },
+      "geometry_sha256": "8a33d1cccc4371cd22d85f7ec56c6fae9f1f03dd6c8a880a639dec1c8867ef4a",
+      "full_feature_sha256": "104863f215a013cb4a702c99c65900e3e3a08a28ff350e0732375da2726ae71a",
+      "original_unknowns": [],
+      "source_row": {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-042.json.gz",
+        "git_blob_oid": "13ea366362d4e2ddf99a5a3637a36aa87f6959bc",
+        "ordinal": 196
+      },
+      "disposition": "provisional-full-source-cover",
+      "family_metadata": {
+        "source_families": [
+          {
+            "kind": "source-authority-and-product-comparison",
+            "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+            "recipe": "scripts/administrative.py",
+            "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2.geojson",
+            "reference_year": "2022",
+            "source_id": "gb:AUS:ADM2",
+            "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+          }
+        ],
+        "related_issues": [
+          165
+        ],
+        "original_component_count": 335,
+        "contact_ids": [
+          "gb:AUS:ADM2:25037944B13244512579669",
+          "gb:AUS:ADM2:25037944B14025919363288",
+          "gb:AUS:ADM2:25037944B15390433377666",
+          "gb:AUS:ADM2:25037944B16136262303417",
+          "gb:AUS:ADM2:25037944B1656499074776",
+          "gb:AUS:ADM2:25037944B17459590153092",
+          "gb:AUS:ADM2:25037944B19400187923346",
+          "gb:AUS:ADM2:25037944B21166714819483",
+          "gb:AUS:ADM2:25037944B25466476596436",
+          "gb:AUS:ADM2:25037944B26487143019559",
+          "gb:AUS:ADM2:25037944B30530613092043",
+          "gb:AUS:ADM2:25037944B34353436415485",
+          "gb:AUS:ADM2:25037944B35450059513963",
+          "gb:AUS:ADM2:25037944B36323732446250",
+          "gb:AUS:ADM2:25037944B37268575436611",
+          "gb:AUS:ADM2:25037944B43303794043608",
+          "gb:AUS:ADM2:25037944B52648858671508",
+          "gb:AUS:ADM2:25037944B53664742087650",
+          "gb:AUS:ADM2:25037944B5517287997374",
+          "gb:AUS:ADM2:25037944B68165922230856",
+          "gb:AUS:ADM2:25037944B72297710108089",
+          "gb:AUS:ADM2:25037944B73642390976852",
+          "gb:AUS:ADM2:25037944B76061046607907",
+          "gb:AUS:ADM2:25037944B77283019061987",
+          "gb:AUS:ADM2:25037944B82919316631597",
+          "gb:AUS:ADM2:25037944B87142005071762",
+          "gb:AUS:ADM2:25037944B90195923531970",
+          "gb:AUS:ADM2:25037944B90533392045393",
+          "gb:AUS:ADM2:25037944B91391383703186",
+          "gb:AUS:ADM2:25037944B93306496735140",
+          "gb:AUS:ADM2:25037944B93362533996498",
+          "gb:AUS:ADM2:25037944B93557893838922",
+          "gb:AUS:ADM2:25037944B95382354250521",
+          "gb:AUS:ADM2:25037944B96271376045080",
+          "gb:AUS:ADM2:25037944B96392818490355",
+          "gb:AUS:ADM2:25037944B97488266373518"
+        ]
+      },
+      "detector_area_m2": 41653.01828002047,
+      "candidate_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+        "git_blob_oid": "6104e93ee8f398bb0e4cc47902810e277c7701d9",
+        "bytes": 2079838,
+        "decoded_bytes": 8387897,
+        "ordinal": 2814
+      },
+      "original_geometry_flags": {
+        "dateline_connected": false,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": true,
+        "unmeasured_fragment_ids": []
+      }
+    },
+    {
+      "component_id": "physical-component:ee9d9768fca9795b3d5be1b865c72fe5e9cd2fba30b7b670a4efced1d23c8c74",
+      "family": "gap-source-batch:00d3f59608f4181f7f1f5f5b",
+      "source_products": [
+        "gb:AUS:ADM2"
+      ],
+      "target": {
+        "id": "gb:AUS:ADM2:25037944B11916296746250",
+        "original_feature_sha256": "246d0213cd1749d1ac053d32b977ef3226b4712422044cb6afa4692d5ae13556",
+        "original_parent_id": "framework:province:new-south-wales:319e780fcd36",
+        "reference_year": "2022"
+      },
+      "geometry_sha256": "b4c9054b8eb7f756b4186975058ac3fe310a4ea89084d715227c8a79a448c8b8",
+      "full_feature_sha256": "d52bc302fc6ea6b4789ff11917cddd280d8b0d82f377196e57cc343164b14e9c",
+      "original_unknowns": [],
+      "source_row": {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-046.json.gz",
+        "git_blob_oid": "46f7b3099c94356ad2b97db5f2f985961eeeb3b1",
+        "ordinal": 31
+      },
+      "disposition": "provisional-full-source-cover",
+      "family_metadata": {
+        "source_families": [
+          {
+            "kind": "source-authority-and-product-comparison",
+            "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+            "recipe": "scripts/administrative.py",
+            "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2.geojson",
+            "reference_year": "2022",
+            "source_id": "gb:AUS:ADM2",
+            "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+          }
+        ],
+        "related_issues": [
+          164
+        ],
+        "original_component_count": 10,
+        "contact_ids": [
+          "gb:AUS:ADM2:25037944B11916296746250",
+          "gb:AUS:ADM2:25037944B16891547173569",
+          "gb:AUS:ADM2:25037944B67552272844427",
+          "gb:AUS:ADM2:25037944B78442704405462",
+          "gb:AUS:ADM2:25037944B90970778714828"
+        ]
+      },
+      "detector_area_m2": 28649.57325808782,
+      "candidate_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+        "git_blob_oid": "d2dd7d481c62be11a11d08ddc25b02e231a458bc",
+        "bytes": 1714760,
+        "decoded_bytes": 6909917,
+        "ordinal": 739
+      },
+      "original_geometry_flags": {
+        "dateline_connected": false,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": true,
+        "unmeasured_fragment_ids": []
+      }
+    },
+    {
+      "component_id": "physical-component:19f523ffe4951aaa8802fe1731f7befd6f48acda3d3d313fcaa31281e304374e",
+      "family": "gap-source-batch:4473df02f29fc7b8cb762d2d",
+      "source_products": [
+        "gb:AUS:ADM2"
+      ],
+      "target": {
+        "id": "gb:AUS:ADM2:25037944B43303794043608",
+        "original_feature_sha256": "864a8eb9816764cf4e14514acb7414c8d212ebca47c8057c18e8bbc9d508ab93",
+        "original_parent_id": "framework:province:queensland:c14c54289f37",
+        "reference_year": "2022"
+      },
+      "geometry_sha256": "eb70749aa25fba819d3d5f21591788c9913a2287c2ffb1a56a25dfbb1c8fee8c",
+      "full_feature_sha256": "871f8cb120efdd8e9781c56b8d3c4f87877108b4729bee67aaaf03b7ef872b96",
+      "original_unknowns": [],
+      "source_row": {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-005.json.gz",
+        "git_blob_oid": "ac501664af7065c5e932f9c70a6e086b4feaa9fb",
+        "ordinal": 17
+      },
+      "disposition": "provisional-full-source-cover",
+      "family_metadata": {
+        "source_families": [
+          {
+            "kind": "source-authority-and-product-comparison",
+            "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+            "recipe": "scripts/administrative.py",
+            "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2.geojson",
+            "reference_year": "2022",
+            "source_id": "gb:AUS:ADM2",
+            "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+          }
+        ],
+        "related_issues": [
+          165
+        ],
+        "original_component_count": 335,
+        "contact_ids": [
+          "gb:AUS:ADM2:25037944B13244512579669",
+          "gb:AUS:ADM2:25037944B14025919363288",
+          "gb:AUS:ADM2:25037944B15390433377666",
+          "gb:AUS:ADM2:25037944B16136262303417",
+          "gb:AUS:ADM2:25037944B1656499074776",
+          "gb:AUS:ADM2:25037944B17459590153092",
+          "gb:AUS:ADM2:25037944B19400187923346",
+          "gb:AUS:ADM2:25037944B21166714819483",
+          "gb:AUS:ADM2:25037944B25466476596436",
+          "gb:AUS:ADM2:25037944B26487143019559",
+          "gb:AUS:ADM2:25037944B30530613092043",
+          "gb:AUS:ADM2:25037944B34353436415485",
+          "gb:AUS:ADM2:25037944B35450059513963",
+          "gb:AUS:ADM2:25037944B36323732446250",
+          "gb:AUS:ADM2:25037944B37268575436611",
+          "gb:AUS:ADM2:25037944B43303794043608",
+          "gb:AUS:ADM2:25037944B52648858671508",
+          "gb:AUS:ADM2:25037944B53664742087650",
+          "gb:AUS:ADM2:25037944B5517287997374",
+          "gb:AUS:ADM2:25037944B68165922230856",
+          "gb:AUS:ADM2:25037944B72297710108089",
+          "gb:AUS:ADM2:25037944B73642390976852",
+          "gb:AUS:ADM2:25037944B76061046607907",
+          "gb:AUS:ADM2:25037944B77283019061987",
+          "gb:AUS:ADM2:25037944B82919316631597",
+          "gb:AUS:ADM2:25037944B87142005071762",
+          "gb:AUS:ADM2:25037944B90195923531970",
+          "gb:AUS:ADM2:25037944B90533392045393",
+          "gb:AUS:ADM2:25037944B91391383703186",
+          "gb:AUS:ADM2:25037944B93306496735140",
+          "gb:AUS:ADM2:25037944B93362533996498",
+          "gb:AUS:ADM2:25037944B93557893838922",
+          "gb:AUS:ADM2:25037944B95382354250521",
+          "gb:AUS:ADM2:25037944B96271376045080",
+          "gb:AUS:ADM2:25037944B96392818490355",
+          "gb:AUS:ADM2:25037944B97488266373518"
+        ]
+      },
+      "detector_area_m2": 28413.32210351792,
+      "candidate_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+        "git_blob_oid": "662d6595c65ef52eaded18bdf48a22777f28d964",
+        "bytes": 2081609,
+        "decoded_bytes": 8388214,
+        "ordinal": 871
+      },
+      "original_geometry_flags": {
+        "dateline_connected": false,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": true,
+        "unmeasured_fragment_ids": []
+      }
+    },
+    {
+      "component_id": "physical-component:1b59110d4416db7dfe722ce9451539f4b0bcb0bafdb029eb0b311844d155a187",
+      "family": "gap-source-batch:4473df02f29fc7b8cb762d2d",
+      "source_products": [
+        "gb:AUS:ADM2"
+      ],
+      "target": {
+        "id": "gb:AUS:ADM2:25037944B43303794043608",
+        "original_feature_sha256": "864a8eb9816764cf4e14514acb7414c8d212ebca47c8057c18e8bbc9d508ab93",
+        "original_parent_id": "framework:province:queensland:c14c54289f37",
+        "reference_year": "2022"
+      },
+      "geometry_sha256": "82bfd89c261ab135b546eba1cab04adb3e9047bdc47f886c720450086579670c",
+      "full_feature_sha256": "f11388df4d536740b236156dfe88f1399ede290f88b41b9446a03cedd91212d4",
+      "original_unknowns": [],
+      "source_row": {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-005.json.gz",
+        "git_blob_oid": "ac501664af7065c5e932f9c70a6e086b4feaa9fb",
+        "ordinal": 88
+      },
+      "disposition": "provisional-full-source-cover",
+      "family_metadata": {
+        "source_families": [
+          {
+            "kind": "source-authority-and-product-comparison",
+            "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+            "recipe": "scripts/administrative.py",
+            "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2.geojson",
+            "reference_year": "2022",
+            "source_id": "gb:AUS:ADM2",
+            "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+          }
+        ],
+        "related_issues": [
+          165
+        ],
+        "original_component_count": 335,
+        "contact_ids": [
+          "gb:AUS:ADM2:25037944B13244512579669",
+          "gb:AUS:ADM2:25037944B14025919363288",
+          "gb:AUS:ADM2:25037944B15390433377666",
+          "gb:AUS:ADM2:25037944B16136262303417",
+          "gb:AUS:ADM2:25037944B1656499074776",
+          "gb:AUS:ADM2:25037944B17459590153092",
+          "gb:AUS:ADM2:25037944B19400187923346",
+          "gb:AUS:ADM2:25037944B21166714819483",
+          "gb:AUS:ADM2:25037944B25466476596436",
+          "gb:AUS:ADM2:25037944B26487143019559",
+          "gb:AUS:ADM2:25037944B30530613092043",
+          "gb:AUS:ADM2:25037944B34353436415485",
+          "gb:AUS:ADM2:25037944B35450059513963",
+          "gb:AUS:ADM2:25037944B36323732446250",
+          "gb:AUS:ADM2:25037944B37268575436611",
+          "gb:AUS:ADM2:25037944B43303794043608",
+          "gb:AUS:ADM2:25037944B52648858671508",
+          "gb:AUS:ADM2:25037944B53664742087650",
+          "gb:AUS:ADM2:25037944B5517287997374",
+          "gb:AUS:ADM2:25037944B68165922230856",
+          "gb:AUS:ADM2:25037944B72297710108089",
+          "gb:AUS:ADM2:25037944B73642390976852",
+          "gb:AUS:ADM2:25037944B76061046607907",
+          "gb:AUS:ADM2:25037944B77283019061987",
+          "gb:AUS:ADM2:25037944B82919316631597",
+          "gb:AUS:ADM2:25037944B87142005071762",
+          "gb:AUS:ADM2:25037944B90195923531970",
+          "gb:AUS:ADM2:25037944B90533392045393",
+          "gb:AUS:ADM2:25037944B91391383703186",
+          "gb:AUS:ADM2:25037944B93306496735140",
+          "gb:AUS:ADM2:25037944B93362533996498",
+          "gb:AUS:ADM2:25037944B93557893838922",
+          "gb:AUS:ADM2:25037944B95382354250521",
+          "gb:AUS:ADM2:25037944B96271376045080",
+          "gb:AUS:ADM2:25037944B96392818490355",
+          "gb:AUS:ADM2:25037944B97488266373518"
+        ]
+      },
+      "detector_area_m2": 25529.30396667798,
+      "candidate_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+        "git_blob_oid": "662d6595c65ef52eaded18bdf48a22777f28d964",
+        "bytes": 2081609,
+        "decoded_bytes": 8388214,
+        "ordinal": 1413
+      },
+      "original_geometry_flags": {
+        "dateline_connected": false,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": true,
+        "unmeasured_fragment_ids": []
+      }
+    },
+    {
+      "component_id": "physical-component:6e05d606a5ac09942295520893df259382c0634574213b6caea9c782076dae94",
+      "family": "gap-source-batch:4473df02f29fc7b8cb762d2d",
+      "source_products": [
+        "gb:AUS:ADM2"
+      ],
+      "target": {
+        "id": "gb:AUS:ADM2:25037944B91391383703186",
+        "original_feature_sha256": "acae2926bbb8bcd7ed5836795966786199765b17d29b138bacacf4f6283610bf",
+        "original_parent_id": "framework:province:queensland:c14c54289f37",
+        "reference_year": "2022"
+      },
+      "geometry_sha256": "1b9f30991a92d429c2fb90a5bb67b5336b7060ee50f17c32afbf0aab5baa98aa",
+      "full_feature_sha256": "78ab78e5039b4b4aebb6caa8de1fc46a8904bcd269ad2167d464e5477803b038",
+      "original_unknowns": [],
+      "source_row": {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-021.json.gz",
+        "git_blob_oid": "b53657cc9ba6602fa7044b8c09ff261a8ec21a89",
+        "ordinal": 44
+      },
+      "disposition": "provisional-full-source-cover",
+      "family_metadata": {
+        "source_families": [
+          {
+            "kind": "source-authority-and-product-comparison",
+            "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+            "recipe": "scripts/administrative.py",
+            "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2.geojson",
+            "reference_year": "2022",
+            "source_id": "gb:AUS:ADM2",
+            "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+          }
+        ],
+        "related_issues": [
+          165
+        ],
+        "original_component_count": 335,
+        "contact_ids": [
+          "gb:AUS:ADM2:25037944B13244512579669",
+          "gb:AUS:ADM2:25037944B14025919363288",
+          "gb:AUS:ADM2:25037944B15390433377666",
+          "gb:AUS:ADM2:25037944B16136262303417",
+          "gb:AUS:ADM2:25037944B1656499074776",
+          "gb:AUS:ADM2:25037944B17459590153092",
+          "gb:AUS:ADM2:25037944B19400187923346",
+          "gb:AUS:ADM2:25037944B21166714819483",
+          "gb:AUS:ADM2:25037944B25466476596436",
+          "gb:AUS:ADM2:25037944B26487143019559",
+          "gb:AUS:ADM2:25037944B30530613092043",
+          "gb:AUS:ADM2:25037944B34353436415485",
+          "gb:AUS:ADM2:25037944B35450059513963",
+          "gb:AUS:ADM2:25037944B36323732446250",
+          "gb:AUS:ADM2:25037944B37268575436611",
+          "gb:AUS:ADM2:25037944B43303794043608",
+          "gb:AUS:ADM2:25037944B52648858671508",
+          "gb:AUS:ADM2:25037944B53664742087650",
+          "gb:AUS:ADM2:25037944B5517287997374",
+          "gb:AUS:ADM2:25037944B68165922230856",
+          "gb:AUS:ADM2:25037944B72297710108089",
+          "gb:AUS:ADM2:25037944B73642390976852",
+          "gb:AUS:ADM2:25037944B76061046607907",
+          "gb:AUS:ADM2:25037944B77283019061987",
+          "gb:AUS:ADM2:25037944B82919316631597",
+          "gb:AUS:ADM2:25037944B87142005071762",
+          "gb:AUS:ADM2:25037944B90195923531970",
+          "gb:AUS:ADM2:25037944B90533392045393",
+          "gb:AUS:ADM2:25037944B91391383703186",
+          "gb:AUS:ADM2:25037944B93306496735140",
+          "gb:AUS:ADM2:25037944B93362533996498",
+          "gb:AUS:ADM2:25037944B93557893838922",
+          "gb:AUS:ADM2:25037944B95382354250521",
+          "gb:AUS:ADM2:25037944B96271376045080",
+          "gb:AUS:ADM2:25037944B96392818490355",
+          "gb:AUS:ADM2:25037944B97488266373518"
+        ]
+      },
+      "detector_area_m2": 25237.899713487797,
+      "candidate_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+        "git_blob_oid": "d4e0ebb006cd28772b1c49ddfa6fa5bb9ec060fc",
+        "bytes": 2074475,
+        "decoded_bytes": 8387395,
+        "ordinal": 5619
+      },
+      "original_geometry_flags": {
+        "dateline_connected": false,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": true,
+        "unmeasured_fragment_ids": []
+      }
+    },
+    {
+      "component_id": "physical-component:9d53e507a92cc13f65caf2dc51679708b3fee6e5b87a670c5d5179e40019dbbe",
+      "family": "gap-source-batch:1e0d57dee3adecafc87c3bbe",
+      "source_products": [
+        "gb:AUS:ADM2"
+      ],
+      "target": {
+        "id": "gb:AUS:ADM2:25037944B17338277063313",
+        "original_feature_sha256": "d41ad99c469031ee458ba714c53b0da2b23763030d7135542a93ba56bf48c125",
+        "original_parent_id": "framework:province:other-territories:c15a4190f7ab",
+        "reference_year": "2022"
+      },
+      "geometry_sha256": "889c483d1dee38d05f94073227ccadff403b1a1431c62bfe3a0678a056bfebb5",
+      "full_feature_sha256": "ff614ca45287756d919d311313f6f408dad7260973100b8b773eb388ee35c389",
+      "original_unknowns": [],
+      "source_row": {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-030.json.gz",
+        "git_blob_oid": "722d4b9e5a835417c800aab281d3942592d3b6f2",
+        "ordinal": 38
+      },
+      "disposition": "provisional-full-source-cover",
+      "family_metadata": {
+        "source_families": [
+          {
+            "kind": "source-authority-and-product-comparison",
+            "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+            "recipe": "scripts/administrative.py",
+            "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2.geojson",
+            "reference_year": "2022",
+            "source_id": "gb:AUS:ADM2",
+            "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+          }
+        ],
+        "related_issues": [
+          293
+        ],
+        "original_component_count": 1,
+        "contact_ids": [
+          "gb:AUS:ADM2:25037944B17338277063313"
+        ]
+      },
+      "detector_area_m2": 18824.00736774107,
+      "candidate_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "git_blob_oid": "62780ff6d69bab894f8eb89a5173460dd917086e",
+        "bytes": 2085907,
+        "decoded_bytes": 8387875,
+        "ordinal": 5403
+      },
+      "original_geometry_flags": {
+        "dateline_connected": false,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": false,
+        "unmeasured_fragment_ids": []
+      }
+    },
+    {
+      "component_id": "physical-component:c24dc1abe05ff8e61e1a6246bf0d7dd15b1201152989b26e80c6854b30abbae2",
+      "family": "gap-source-batch:92f158e2100f90c655987fd2",
+      "source_products": [
+        "gb:AUS:ADM2"
+      ],
+      "target": {
+        "id": "gb:AUS:ADM2:25037944B47305351718046",
+        "original_feature_sha256": "267e1123685337dc57c9d063d98a6254fc5ac2822f1fee753b8a0891a444e9e7",
+        "original_parent_id": "framework:province:northern-territory:f0073829bfe4",
+        "reference_year": "2022"
+      },
+      "geometry_sha256": "7948eaaf2b0b4cb3d26972b472ce3484ccdaa4082c27c1e9a83c57be5367981e",
+      "full_feature_sha256": "aa89edc959547a25fc10d6dce37f55bed2013114c936356d6d9ec01fa51339d3",
+      "original_unknowns": [],
+      "source_row": {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-037.json.gz",
+        "git_blob_oid": "90928dd75bc21282bc486510d7319cb1f11b14a5",
+        "ordinal": 147
+      },
+      "disposition": "provisional-full-source-cover",
+      "family_metadata": {
+        "source_families": [
+          {
+            "kind": "source-authority-and-product-comparison",
+            "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+            "recipe": "scripts/administrative.py",
+            "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2.geojson",
+            "reference_year": "2022",
+            "source_id": "gb:AUS:ADM2",
+            "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+          }
+        ],
+        "related_issues": [
+          164
+        ],
+        "original_component_count": 28,
+        "contact_ids": [
+          "gb:AUS:ADM2:25037944B28082311396997",
+          "gb:AUS:ADM2:25037944B47305351718046",
+          "gb:AUS:ADM2:25037944B62285809064209",
+          "gb:AUS:ADM2:25037944B73531494726593",
+          "gb:AUS:ADM2:25037944B87513158470011"
+        ]
+      },
+      "detector_area_m2": 15284.68470940538,
+      "candidate_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+        "git_blob_oid": "1a722aa0e2179777bbbe1e752e0b5ecb38416ce2",
+        "bytes": 2085110,
+        "decoded_bytes": 8388464,
+        "ordinal": 1589
+      },
+      "original_geometry_flags": {
+        "dateline_connected": false,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": true,
+        "unmeasured_fragment_ids": []
+      }
+    },
+    {
+      "component_id": "physical-component:a02d1bc4b12eaeb786305a63ee523a14fb785ff72e1263d0ce3399b42d38568d",
+      "family": "gap-source-batch:92f158e2100f90c655987fd2",
+      "source_products": [
+        "gb:AUS:ADM2"
+      ],
+      "target": {
+        "id": "gb:AUS:ADM2:25037944B47305351718046",
+        "original_feature_sha256": "267e1123685337dc57c9d063d98a6254fc5ac2822f1fee753b8a0891a444e9e7",
+        "original_parent_id": "framework:province:northern-territory:f0073829bfe4",
+        "reference_year": "2022"
+      },
+      "geometry_sha256": "80061e4d5c55f65e68b67b589b6a4381bd08800714700bb4cc17c24dc819a98e",
+      "full_feature_sha256": "f164150f672351a2e0c015f63b37c8eac6d9db7514bac2673496737f94c60a43",
+      "original_unknowns": [],
+      "source_row": {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-030.json.gz",
+        "git_blob_oid": "722d4b9e5a835417c800aab281d3942592d3b6f2",
+        "ordinal": 191
+      },
+      "disposition": "provisional-full-source-cover",
+      "family_metadata": {
+        "source_families": [
+          {
+            "kind": "source-authority-and-product-comparison",
+            "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+            "recipe": "scripts/administrative.py",
+            "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2.geojson",
+            "reference_year": "2022",
+            "source_id": "gb:AUS:ADM2",
+            "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+          }
+        ],
+        "related_issues": [
+          164
+        ],
+        "original_component_count": 28,
+        "contact_ids": [
+          "gb:AUS:ADM2:25037944B28082311396997",
+          "gb:AUS:ADM2:25037944B47305351718046",
+          "gb:AUS:ADM2:25037944B62285809064209",
+          "gb:AUS:ADM2:25037944B73531494726593",
+          "gb:AUS:ADM2:25037944B87513158470011"
+        ]
+      },
+      "detector_area_m2": 8648.742890600335,
+      "candidate_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "git_blob_oid": "62780ff6d69bab894f8eb89a5173460dd917086e",
+        "bytes": 2085907,
+        "decoded_bytes": 8387875,
+        "ordinal": 6446
+      },
+      "original_geometry_flags": {
+        "dateline_connected": false,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": true,
+        "unmeasured_fragment_ids": []
+      }
+    },
+    {
+      "component_id": "physical-component:a44d1d9c6745adf29f14613802ab5525b8b9d7beb2c90fc3991ba4832bff2ff6",
+      "family": "gap-source-batch:a292b947707de0ce9a3a1348",
+      "source_products": [
+        "gb:AUS:ADM2"
+      ],
+      "target": {
+        "id": "gb:AUS:ADM2:25037944B90195923531970",
+        "original_feature_sha256": "91bcde8138adc87a9aa4c3e1eac6964b3c3eda9081e7292e13ed1eb78e87d951",
+        "original_parent_id": "framework:province:queensland:c14c54289f37",
+        "reference_year": "2022"
+      },
+      "geometry_sha256": "91aab8465dc8ba596e7638a031ab2dd3ebbbc60b4901273d4e2260abb97650cb",
+      "full_feature_sha256": "bc271c2ccec9594f3a8ca5d4623ecf5026336e81be406a78fe0ea39da6388cab",
+      "original_unknowns": [],
+      "source_row": {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-031.json.gz",
+        "git_blob_oid": "67b5e64d028d3e31e70e59b035a82cd7e8a1dd9c",
+        "ordinal": 147
+      },
+      "disposition": "provisional-full-source-cover",
+      "family_metadata": {
+        "source_families": [
+          {
+            "kind": "source-authority-and-product-comparison",
+            "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+            "recipe": "scripts/administrative.py",
+            "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2.geojson",
+            "reference_year": "2022",
+            "source_id": "gb:AUS:ADM2",
+            "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+          }
+        ],
+        "related_issues": [
+          165
+        ],
+        "original_component_count": 27,
+        "contact_ids": [
+          "gb:AUS:ADM2:25037944B14025919363288",
+          "gb:AUS:ADM2:25037944B15390433377666",
+          "gb:AUS:ADM2:25037944B1656499074776",
+          "gb:AUS:ADM2:25037944B17459590153092",
+          "gb:AUS:ADM2:25037944B19400187923346",
+          "gb:AUS:ADM2:25037944B21166714819483",
+          "gb:AUS:ADM2:25037944B26487143019559",
+          "gb:AUS:ADM2:25037944B43303794043608",
+          "gb:AUS:ADM2:25037944B5517287997374",
+          "gb:AUS:ADM2:25037944B73642390976852",
+          "gb:AUS:ADM2:25037944B82919316631597",
+          "gb:AUS:ADM2:25037944B87142005071762",
+          "gb:AUS:ADM2:25037944B90195923531970",
+          "gb:AUS:ADM2:25037944B91391383703186",
+          "gb:AUS:ADM2:25037944B93306496735140",
+          "gb:AUS:ADM2:25037944B95382354250521"
+        ]
+      },
+      "detector_area_m2": 6565.598167472629,
+      "candidate_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "git_blob_oid": "62780ff6d69bab894f8eb89a5173460dd917086e",
+        "bytes": 2085907,
+        "decoded_bytes": 8387875,
+        "ordinal": 8021
+      },
+      "original_geometry_flags": {
+        "dateline_connected": false,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": true,
+        "unmeasured_fragment_ids": []
+      }
+    },
+    {
+      "component_id": "physical-component:adbba6d33b360a3b72ddad4af7c3b7ef5d2241c8e7e023040edfdceda4801f38",
+      "family": "gap-source-batch:a292b947707de0ce9a3a1348",
+      "source_products": [
+        "gb:AUS:ADM2"
+      ],
+      "target": {
+        "id": "gb:AUS:ADM2:25037944B14025919363288",
+        "original_feature_sha256": "5ac8ebcaf6a23eb84c110cb6c47671b8d5575a1fd7748035f2e2a28e7aae93b5",
+        "original_parent_id": "framework:province:queensland:c14c54289f37",
+        "reference_year": "2022"
+      },
+      "geometry_sha256": "aecf658e26ef017ecdfade31754e90138402699d165273c84917b93bcdc8efd2",
+      "full_feature_sha256": "5838b4a079f6ede673493cd8b5d77dca82e4b60df4f1913be17f0f178642ecc8",
+      "original_unknowns": [],
+      "source_row": {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-033.json.gz",
+        "git_blob_oid": "c26ddbcc21d27dce4ecf6f05fa5d5d684f027dc6",
+        "ordinal": 125
+      },
+      "disposition": "provisional-full-source-cover",
+      "family_metadata": {
+        "source_families": [
+          {
+            "kind": "source-authority-and-product-comparison",
+            "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+            "recipe": "scripts/administrative.py",
+            "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2.geojson",
+            "reference_year": "2022",
+            "source_id": "gb:AUS:ADM2",
+            "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+          }
+        ],
+        "related_issues": [
+          165
+        ],
+        "original_component_count": 27,
+        "contact_ids": [
+          "gb:AUS:ADM2:25037944B14025919363288",
+          "gb:AUS:ADM2:25037944B15390433377666",
+          "gb:AUS:ADM2:25037944B1656499074776",
+          "gb:AUS:ADM2:25037944B17459590153092",
+          "gb:AUS:ADM2:25037944B19400187923346",
+          "gb:AUS:ADM2:25037944B21166714819483",
+          "gb:AUS:ADM2:25037944B26487143019559",
+          "gb:AUS:ADM2:25037944B43303794043608",
+          "gb:AUS:ADM2:25037944B5517287997374",
+          "gb:AUS:ADM2:25037944B73642390976852",
+          "gb:AUS:ADM2:25037944B82919316631597",
+          "gb:AUS:ADM2:25037944B87142005071762",
+          "gb:AUS:ADM2:25037944B90195923531970",
+          "gb:AUS:ADM2:25037944B91391383703186",
+          "gb:AUS:ADM2:25037944B93306496735140",
+          "gb:AUS:ADM2:25037944B95382354250521"
+        ]
+      },
+      "detector_area_m2": 6488.499720198153,
+      "candidate_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+        "git_blob_oid": "cc58df0f67dcad69c4b624a6566f440f14de0914",
+        "bytes": 2079265,
+        "decoded_bytes": 8387777,
+        "ordinal": 2897
+      },
+      "original_geometry_flags": {
+        "dateline_connected": false,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": true,
+        "unmeasured_fragment_ids": []
+      }
+    },
+    {
+      "component_id": "physical-component:64efd5aee39eeef3fd2373469acb69007b90bf8532265298ea247da595a05d99",
+      "family": "gap-source-batch:92f158e2100f90c655987fd2",
+      "source_products": [
+        "gb:AUS:ADM2"
+      ],
+      "target": {
+        "id": "gb:AUS:ADM2:25037944B73531494726593",
+        "original_feature_sha256": "1be7b59311b0d09ec71cb7ebc228e0cf5d1ad70d93624a06f70f8ec793ccac49",
+        "original_parent_id": "framework:province:northern-territory:f0073829bfe4",
+        "reference_year": "2022"
+      },
+      "geometry_sha256": "2a7facff3adf6feda923ad81a44b744e9fe16557051fa398757576a08387e9dd",
+      "full_feature_sha256": "512a907854c2359559ec3a4c80a5886cb1cb67449606f8e6b2a602c51a24c8c4",
+      "original_unknowns": [],
+      "source_row": {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-019.json.gz",
+        "git_blob_oid": "735b4bb84e30f609aec979f9c3792863f9178296",
+        "ordinal": 126
+      },
+      "disposition": "provisional-full-source-cover",
+      "family_metadata": {
+        "source_families": [
+          {
+            "kind": "source-authority-and-product-comparison",
+            "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+            "recipe": "scripts/administrative.py",
+            "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2.geojson",
+            "reference_year": "2022",
+            "source_id": "gb:AUS:ADM2",
+            "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+          }
+        ],
+        "related_issues": [
+          164
+        ],
+        "original_component_count": 28,
+        "contact_ids": [
+          "gb:AUS:ADM2:25037944B28082311396997",
+          "gb:AUS:ADM2:25037944B47305351718046",
+          "gb:AUS:ADM2:25037944B62285809064209",
+          "gb:AUS:ADM2:25037944B73531494726593",
+          "gb:AUS:ADM2:25037944B87513158470011"
+        ]
+      },
+      "detector_area_m2": 6051.918330232312,
+      "candidate_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+        "git_blob_oid": "d4e0ebb006cd28772b1c49ddfa6fa5bb9ec060fc",
+        "bytes": 2074475,
+        "decoded_bytes": 8387395,
+        "ordinal": 2294
+      },
+      "original_geometry_flags": {
+        "dateline_connected": false,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": true,
+        "unmeasured_fragment_ids": []
+      }
+    },
+    {
+      "component_id": "physical-component:6aeef9d450464698868d758f9032b7bf4d17b17813e931e380a08cbff1a95a3c",
+      "family": "gap-source-batch:1ac18b09b8b8d6fd6b35ee13",
+      "source_products": [
+        "gb:AUS:ADM2"
+      ],
+      "target": {
+        "id": "gb:AUS:ADM2:25037944B91391383703186",
+        "original_feature_sha256": "acae2926bbb8bcd7ed5836795966786199765b17d29b138bacacf4f6283610bf",
+        "original_parent_id": "framework:province:queensland:c14c54289f37",
+        "reference_year": "2022"
+      },
+      "geometry_sha256": "c08c7d7a761ca0246a44ad6027e7ef751531409330fba4dd06e359e67f4cab8b",
+      "full_feature_sha256": "53f0347059172f1ab33a9f9e372ffd28507c949ce5f2fff2fbb635f77f85c0b4",
+      "original_unknowns": [],
+      "source_row": {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-020.json.gz",
+        "git_blob_oid": "c7d554ff594702e8e1d165b67672d33478be4661",
+        "ordinal": 161
+      },
+      "disposition": "provisional-full-source-cover",
+      "family_metadata": {
+        "source_families": [
+          {
+            "kind": "source-authority-and-product-comparison",
+            "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+            "recipe": "scripts/administrative.py",
+            "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2.geojson",
+            "reference_year": "2022",
+            "source_id": "gb:AUS:ADM2",
+            "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+          }
+        ],
+        "related_issues": [
+          165
+        ],
+        "original_component_count": 15,
+        "contact_ids": [
+          "gb:AUS:ADM2:25037944B14025919363288",
+          "gb:AUS:ADM2:25037944B15390433377666",
+          "gb:AUS:ADM2:25037944B1656499074776",
+          "gb:AUS:ADM2:25037944B25466476596436",
+          "gb:AUS:ADM2:25037944B30530613092043",
+          "gb:AUS:ADM2:25037944B37268575436611",
+          "gb:AUS:ADM2:25037944B43303794043608",
+          "gb:AUS:ADM2:25037944B72297710108089",
+          "gb:AUS:ADM2:25037944B91391383703186"
+        ]
+      },
+      "detector_area_m2": 1497.6712138670969,
+      "candidate_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+        "git_blob_oid": "d4e0ebb006cd28772b1c49ddfa6fa5bb9ec060fc",
+        "bytes": 2074475,
+        "decoded_bytes": 8387395,
+        "ordinal": 4497
+      },
+      "original_geometry_flags": {
+        "dateline_connected": false,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": true,
+        "unmeasured_fragment_ids": []
+      }
+    },
+    {
+      "component_id": "physical-component:693f67a95c8dc115e9a678b873cf00272dca011feb1e980233100e32dd4e5d60",
+      "family": "gap-source-batch:e9a2b638c0c092782f4f823e",
+      "source_products": [
+        "gb:AUS:ADM2"
+      ],
+      "target": {
+        "id": "gb:AUS:ADM2:25037944B47305351718046",
+        "original_feature_sha256": "267e1123685337dc57c9d063d98a6254fc5ac2822f1fee753b8a0891a444e9e7",
+        "original_parent_id": "framework:province:northern-territory:f0073829bfe4",
+        "reference_year": "2022"
+      },
+      "geometry_sha256": "099c78830f5b6d3feed9a38532b519017b17f5be0b0c644f5c8ce430f4cf53c7",
+      "full_feature_sha256": "d08978222c2851982b6f03031ae0f1b74a3496394d4cc166e7d4ff35610bb117",
+      "original_unknowns": [],
+      "source_row": {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-020.json.gz",
+        "git_blob_oid": "c7d554ff594702e8e1d165b67672d33478be4661",
+        "ordinal": 81
+      },
+      "disposition": "provisional-full-source-cover",
+      "family_metadata": {
+        "source_families": [
+          {
+            "kind": "source-authority-and-product-comparison",
+            "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+            "recipe": "scripts/administrative.py",
+            "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2.geojson",
+            "reference_year": "2022",
+            "source_id": "gb:AUS:ADM2",
+            "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+          }
+        ],
+        "related_issues": [
+          164
+        ],
+        "original_component_count": 37,
+        "contact_ids": [
+          "gb:AUS:ADM2:25037944B28082311396997",
+          "gb:AUS:ADM2:25037944B47305351718046",
+          "gb:AUS:ADM2:25037944B62285809064209",
+          "gb:AUS:ADM2:25037944B73531494726593"
+        ]
+      },
+      "detector_area_m2": 663.5899480626824,
+      "candidate_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+        "git_blob_oid": "d4e0ebb006cd28772b1c49ddfa6fa5bb9ec060fc",
+        "bytes": 2074475,
+        "decoded_bytes": 8387395,
+        "ordinal": 3867
+      },
+      "original_geometry_flags": {
+        "dateline_connected": false,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": true,
+        "unmeasured_fragment_ids": []
+      }
+    },
+    {
+      "component_id": "physical-component:db59475224c643d6cdb491488f2e7ce6280ca7be60726f1fa255f00c22749683",
+      "family": "gap-source-batch:e9a2b638c0c092782f4f823e",
+      "source_products": [
+        "gb:AUS:ADM2"
+      ],
+      "target": {
+        "id": "gb:AUS:ADM2:25037944B47305351718046",
+        "original_feature_sha256": "267e1123685337dc57c9d063d98a6254fc5ac2822f1fee753b8a0891a444e9e7",
+        "original_parent_id": "framework:province:northern-territory:f0073829bfe4",
+        "reference_year": "2022"
+      },
+      "geometry_sha256": "8a3feb85fb2bfa9a92e187082f69e089cc9e3a0ed8f7cd37207f08c00e921146",
+      "full_feature_sha256": "cd0bc126d10b360193bcae64de1be711d521fbbfe6946446ba5efb0d8d02fbe0",
+      "original_unknowns": [],
+      "source_row": {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-042.json.gz",
+        "git_blob_oid": "13ea366362d4e2ddf99a5a3637a36aa87f6959bc",
+        "ordinal": 135
+      },
+      "disposition": "provisional-full-source-cover",
+      "family_metadata": {
+        "source_families": [
+          {
+            "kind": "source-authority-and-product-comparison",
+            "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+            "recipe": "scripts/administrative.py",
+            "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2.geojson",
+            "reference_year": "2022",
+            "source_id": "gb:AUS:ADM2",
+            "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+          }
+        ],
+        "related_issues": [
+          164
+        ],
+        "original_component_count": 37,
+        "contact_ids": [
+          "gb:AUS:ADM2:25037944B28082311396997",
+          "gb:AUS:ADM2:25037944B47305351718046",
+          "gb:AUS:ADM2:25037944B62285809064209",
+          "gb:AUS:ADM2:25037944B73531494726593"
+        ]
+      },
+      "detector_area_m2": 270.24071614324066,
+      "candidate_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+        "git_blob_oid": "6104e93ee8f398bb0e4cc47902810e277c7701d9",
+        "bytes": 2079838,
+        "decoded_bytes": 8387897,
+        "ordinal": 2361
+      },
+      "original_geometry_flags": {
+        "dateline_connected": false,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": true,
+        "unmeasured_fragment_ids": []
+      }
+    },
+    {
+      "component_id": "physical-component:ee44e2e0c39317375ed4a5ac5c4e5bf8056e65f8aced6609f07b3f5abc430915",
+      "family": "gap-source-batch:e9a2b638c0c092782f4f823e",
+      "source_products": [
+        "gb:AUS:ADM2"
+      ],
+      "target": {
+        "id": "gb:AUS:ADM2:25037944B47305351718046",
+        "original_feature_sha256": "267e1123685337dc57c9d063d98a6254fc5ac2822f1fee753b8a0891a444e9e7",
+        "original_parent_id": "framework:province:northern-territory:f0073829bfe4",
+        "reference_year": "2022"
+      },
+      "geometry_sha256": "721de96ef6113bfbc580b189e1e5b600ce52ed3272eda52e72fd571d7c4a7ea1",
+      "full_feature_sha256": "e64117355cc62003998fc7ceb6bdef3d2495b57d592b59bc87c7a8c292a27bb9",
+      "original_unknowns": [],
+      "source_row": {
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-046.json.gz",
+        "git_blob_oid": "46f7b3099c94356ad2b97db5f2f985961eeeb3b1",
+        "ordinal": 15
+      },
+      "disposition": "provisional-full-source-cover",
+      "family_metadata": {
+        "source_families": [
+          {
+            "kind": "source-authority-and-product-comparison",
+            "original_recipe_metadata_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+            "recipe": "scripts/administrative.py",
+            "recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2.geojson",
+            "reference_year": "2022",
+            "source_id": "gb:AUS:ADM2",
+            "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+          }
+        ],
+        "related_issues": [
+          164
+        ],
+        "original_component_count": 37,
+        "contact_ids": [
+          "gb:AUS:ADM2:25037944B28082311396997",
+          "gb:AUS:ADM2:25037944B47305351718046",
+          "gb:AUS:ADM2:25037944B62285809064209",
+          "gb:AUS:ADM2:25037944B73531494726593"
+        ]
+      },
+      "detector_area_m2": 6.148133290061427,
+      "candidate_custody": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+        "git_blob_oid": "d2dd7d481c62be11a11d08ddc25b02e231a458bc",
+        "bytes": 1714760,
+        "decoded_bytes": 6909917,
+        "ordinal": 597
+      },
+      "original_geometry_flags": {
+        "dateline_connected": false,
+        "positive_area_input_overlap": false,
+        "touches_blocked_tile": false,
+        "touches_domain_boundary": false,
+        "touches_reference_shore": true,
+        "unmeasured_fragment_ids": []
+      }
+    }
+  ],
+  "candidate_count": 19,
+  "detector_area_m2": 683818.9382075542,
+  "above_1m2_count": 19,
+  "family_count": 7,
+  "source_encoded_bytes": 3462640,
+  "source_decoded_bytes": 11066867,
+  "candidate_products": [
+    {
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+      "git_blob_oid": "1a722aa0e2179777bbbe1e752e0b5ecb38416ce2",
+      "bytes": 2085110,
+      "decoded_bytes": 8388464,
+      "ordinal": 1589
+    },
+    {
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+      "git_blob_oid": "372e21a9e1ace88f428ac79a96ae7caf44d05ef3",
+      "bytes": 2080037,
+      "decoded_bytes": 8387182,
+      "ordinal": 5602
+    },
+    {
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+      "git_blob_oid": "6104e93ee8f398bb0e4cc47902810e277c7701d9",
+      "bytes": 2079838,
+      "decoded_bytes": 8387897,
+      "ordinal": 2361
+    },
+    {
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+      "git_blob_oid": "cc58df0f67dcad69c4b624a6566f440f14de0914",
+      "bytes": 2079265,
+      "decoded_bytes": 8387777,
+      "ordinal": 2897
+    },
+    {
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+      "git_blob_oid": "d2dd7d481c62be11a11d08ddc25b02e231a458bc",
+      "bytes": 1714760,
+      "decoded_bytes": 6909917,
+      "ordinal": 597
+    },
+    {
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+      "git_blob_oid": "662d6595c65ef52eaded18bdf48a22777f28d964",
+      "bytes": 2081609,
+      "decoded_bytes": 8388214,
+      "ordinal": 1413
+    },
+    {
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+      "git_blob_oid": "d4e0ebb006cd28772b1c49ddfa6fa5bb9ec060fc",
+      "bytes": 2074475,
+      "decoded_bytes": 8387395,
+      "ordinal": 3867
+    },
+    {
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+      "git_blob_oid": "62780ff6d69bab894f8eb89a5173460dd917086e",
+      "bytes": 2085907,
+      "decoded_bytes": 8387875,
+      "ordinal": 8021
+    }
+  ],
+  "candidate_product_count": 8,
+  "likely_reuse": "Exact consumed source products shared within this group; all listed original candidate custody products are warm. Physical-query inverses, current targets/neighbors, source-rule admissibility and native windows still require qualification.",
+  "known_blockers": [
+    "Source-cover observations alone do not establish dry land, strict current full gain, physical custody or selected delivery."
+  ],
+  "source_transport_missing": [
+    {
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-AUS-ADM2-000.bin.gz",
+      "git_blob_oid": "9cc8318ff4083780c067195179ac7fff7a541836",
+      "bytes": 3462640,
+      "sha256": "17e2fd8c2c4dc112bd3c37516394d8f0f23a87a102f7dc8cc25e653be53a8c4c"
+    }
+  ],
+  "missing_source_encoded_bytes": 3462640,
+  "warm_source_parts": 0,
+  "source_part_count": 1
+}
