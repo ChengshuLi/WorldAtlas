@@ -1,0 +1,96 @@
+{
+  "head": "3853d5a5a10acd5012bc92cb0261765d8117dc02",
+  "handoff": {
+    "bytes": 567595,
+    "sha256": "8fc69221771a60d516425009adfe0edf6bf2f1ac952b85a8d34c0bf54f5f59dd"
+  },
+  "operator": "Exact SOURCE-stage full original canonicalValue + JSON.stringify + newline feature/geometry join; no GIS or normalization",
+  "inputs": [
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/sources/administrative/gb-AGO-ADM2-ADM2-consumed-simplified.geojson",
+      "bytes": 813152,
+      "sha256": "7cf2a401b36480f7c22d9783e4364d3eb93c3ac643e2d34778b1ce059c786dcf",
+      "source_id": "gb:AGO:ADM2",
+      "feature_count": 161
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/sources/administrative/gb-COD-ADM2-ADM2-consumed-simplified.geojson",
+      "bytes": 3294607,
+      "sha256": "922427143fcff23010af3931fb3f5e4ffea8b05c5d2b797ca02fc04c6c8b1baa",
+      "source_id": "gb:COD:ADM2",
+      "feature_count": 189
+    }
+  ],
+  "cases": [
+    {
+      "component_id": "physical-component:8441fde5898d6f7db14840ed710f12785697897e45a863a5edd692e935866fc2",
+      "hits": [
+        {
+          "recorded_feature_sha256": "1746d109bbf833821aedc979dd3ba32c13bae70006c4eadb367eaa9a9d773d22",
+          "recorded_geometry_sha256": "2f9f609a27d5b8cb80f445ec4ad4351d1e59e643f6aedb169a6853edd4536f5a",
+          "matches": [
+            {
+              "source_id": "gb:COD:ADM2",
+              "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/sources/administrative/gb-COD-ADM2-ADM2-consumed-simplified.geojson",
+              "index": 173,
+              "feature_sha256": "1746d109bbf833821aedc979dd3ba32c13bae70006c4eadb367eaa9a9d773d22",
+              "geometry_sha256": "2f9f609a27d5b8cb80f445ec4ad4351d1e59e643f6aedb169a6853edd4536f5a"
+            }
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:a207016c2c38eebb7539f7f778ab83588c0fed4cd909656ec88ea9905e1205da",
+      "hits": [
+        {
+          "recorded_feature_sha256": "073065da276348dfeb51aff0b0f66c40dbf897620c889337fbf23b62e2b65108",
+          "recorded_geometry_sha256": "0a89c87e3031067a87e973d67e0b296ea7f7d51314941d7f31160bfd5154494a",
+          "matches": [
+            {
+              "source_id": "gb:AGO:ADM2",
+              "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/sources/administrative/gb-AGO-ADM2-ADM2-consumed-simplified.geojson",
+              "index": 98,
+              "feature_sha256": "073065da276348dfeb51aff0b0f66c40dbf897620c889337fbf23b62e2b65108",
+              "geometry_sha256": "0a89c87e3031067a87e973d67e0b296ea7f7d51314941d7f31160bfd5154494a"
+            }
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:ab0110c97a2fe410389b76f435b0272b71880cb34f988cc9956c354837901667",
+      "hits": [
+        {
+          "recorded_feature_sha256": "3d0a03658cfff30847d0268e18842918cd5a20d2cbda7e5c0330a2546147b0f0",
+          "recorded_geometry_sha256": "fa622c83f7ee36fdb6c4cb300f47f6fa887c7c8fedead76834b9bd314f71badc",
+          "matches": [],
+          "passed": false
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:fb03e785463b4a99a605ca297b6dd2a2bb27f3352e108844ad5ca147d9fc622c",
+      "hits": [
+        {
+          "recorded_feature_sha256": "a1909f5a920dcb7bda67dc25fbae14a6fe050cf6d1f703d7075bf234652132e0",
+          "recorded_geometry_sha256": "d732c115c4042d4718be42ce9865fdcae16e33457b1306d84bb9132ab73d1382",
+          "matches": [
+            {
+              "source_id": "gb:COD:ADM2",
+              "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/sources/administrative/gb-COD-ADM2-ADM2-consumed-simplified.geojson",
+              "index": 40,
+              "feature_sha256": "a1909f5a920dcb7bda67dc25fbae14a6fe050cf6d1f703d7075bf234652132e0",
+              "geometry_sha256": "d732c115c4042d4718be42ce9865fdcae16e33457b1306d84bb9132ab73d1382"
+            }
+          ],
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "passed": false,
+  "peak_rss_bytes": 75505664
+}

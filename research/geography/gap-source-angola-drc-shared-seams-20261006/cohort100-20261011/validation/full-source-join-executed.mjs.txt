@@ -1,0 +1,19 @@
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import assert from 'node:assert/strict';
+import {canonicalValue} from '../../src/effective-footprint.js';
+const own='research/geography/gap-source-angola-drc-shared-seams-20261006';
+const sha=value=>createHash('sha256').update(value).digest('hex');
+const handoffBody=fs.readFileSync(`${own}/vintages/cohort100-source-handoff-002/source-handoff.json`),scope=JSON.parse(handoffBody);
+const products=scope.consumed_source_bindings.map(binding=>{
+ const country=binding.source_id.split(':')[1],path=`${own}/sources/administrative/gb-${country}-ADM2-ADM2-consumed-simplified.geojson`,body=fs.readFileSync(path);
+ assert.equal(body.length,binding.whole_bytes); assert.equal(sha(body),binding.whole_sha256);
+ const collection=JSON.parse(body);assert.equal(collection.features.length,binding.feature_count);
+ return {path,bytes:body.length,sha256:sha(body),source_id:binding.source_id,features:collection.features.map((feature,index)=>({index,feature_sha256:sha(JSON.stringify(canonicalValue(feature))+'\n'),geometry_sha256:sha(JSON.stringify(canonicalValue(feature.geometry))+'\n')}))};
+});
+const cases=scope.candidate_source_native_bindings.map(sourceCase=>({component_id:sourceCase.component_id,hits:sourceCase.retained_source_operation_row.positive_area_source_feature_intersections.map(hit=>{
+ const matches=products.flatMap(product=>product.features.filter(feature=>feature.feature_sha256===hit.feature_sha256||feature.feature_sha256===hit.source_feature_sha256).map(feature=>({source_id:product.source_id,path:product.path,...feature})));
+ return {recorded_feature_sha256:hit.feature_sha256,recorded_geometry_sha256:hit.geometry_sha256,matches,passed:matches.length===1&&matches[0].geometry_sha256===(hit.geometry_sha256??hit.source_geometry_sha256)};
+})}));
+const result={head:'3853d5a5a10acd5012bc92cb0261765d8117dc02',handoff:{bytes:handoffBody.length,sha256:sha(handoffBody)},operator:'Exact SOURCE-stage full original canonicalValue + JSON.stringify + newline feature/geometry join; no GIS or normalization',inputs:products.map(({features,...p})=>({...p,feature_count:features.length})),cases,passed:cases.every(row=>row.hits.length>0&&row.hits.every(hit=>hit.passed)),peak_rss_bytes:process.resourceUsage().maxRSS*1024};
+fs.writeFileSync('.cache/cohort100/full-source-join-result.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));if(!result.passed)process.exitCode=1;
