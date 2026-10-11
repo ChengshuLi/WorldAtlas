@@ -1,0 +1,28 @@
+build_premise_input.py collision refusal
+Traceback (most recent call last):
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/311d266739da13877960e9492b3891d2a3a20d7ae5c0b6f849cf49f362e77475/work/research/geography/aus19-original-source-20261011/tools/build_premise_input.py", line 12, in <module>
+    ns={'__name__':'aus_immutable','__file__':str(ROOT/'scripts/evidence/immutable.py')};exec(compile(git('show',head+':scripts/evidence/immutable.py'),ns['__file__'],'exec'),ns);base=ns['Baseline'](ROOT,head,pins,max_phase_bytes=32*1024**2);canon=ns['canonical_json'];dest=ns['NewVintage'](base,OWN+'/',vintage,['premise-input.json']);read=lambda p:json.loads(base.pinned_bytes(OWN+'/'+p));candidates=[c for c in read('vintages/candidate-custody-001/original-components.json') if c['id'] in plan['component_ids']];
+                                                                                                                                                                                                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/311d266739da13877960e9492b3891d2a3a20d7ae5c0b6f849cf49f362e77475/work/scripts/evidence/immutable.py", line 246, in __init__
+    self.root = admit_destination(baseline, owned_path, vintage, self.filenames)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/311d266739da13877960e9492b3891d2a3a20d7ae5c0b6f849cf49f362e77475/work/scripts/evidence/immutable.py", line 235, in admit_destination
+    raise FileExistsError('Evidence already exists; choose a new vintage')
+FileExistsError: Evidence already exists; choose a new vintage
+
+build_handoff.py collision refusal
+Traceback (most recent call last):
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/311d266739da13877960e9492b3891d2a3a20d7ae5c0b6f849cf49f362e77475/work/research/geography/aus19-original-source-20261011/tools/build_handoff.py", line 108, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/311d266739da13877960e9492b3891d2a3a20d7ae5c0b6f849cf49f362e77475/work/research/geography/aus19-original-source-20261011/tools/build_handoff.py", line 13, in main
+    ns={'__name__':'aus_immutable','__file__':str(ROOT/'scripts/evidence/immutable.py')};exec(compile(git('show',head+':scripts/evidence/immutable.py'),ns['__file__'],'exec'),ns);base=ns['Baseline'](ROOT,head,pins,max_phase_bytes=128*1024**2);canon=ns['canonical_json'];dest=ns['NewVintage'](base,OWN+'/',vintage,['source-handoff.json','all19-dispositions.json']);inputs={}
+                                                                                                                                                                                                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/311d266739da13877960e9492b3891d2a3a20d7ae5c0b6f849cf49f362e77475/work/scripts/evidence/immutable.py", line 246, in __init__
+    self.root = admit_destination(baseline, owned_path, vintage, self.filenames)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/311d266739da13877960e9492b3891d2a3a20d7ae5c0b6f849cf49f362e77475/work/scripts/evidence/immutable.py", line 235, in admit_destination
+    raise FileExistsError('Evidence already exists; choose a new vintage')
+FileExistsError: Evidence already exists; choose a new vintage
+
+All retained packet file hashes unchanged.

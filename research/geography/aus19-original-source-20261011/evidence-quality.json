@@ -1,0 +1,1067 @@
+{
+  "version": 1,
+  "issue": 1741,
+  "lane": "geography",
+  "worker_id": "01a12be1-ba58-73ca-bff8-227f01725011",
+  "subject_ids": [
+    "gb:AUS:ADM2:25037944B11916296746250",
+    "gb:AUS:ADM2:25037944B14025919363288",
+    "gb:AUS:ADM2:25037944B17338277063313",
+    "gb:AUS:ADM2:25037944B43303794043608",
+    "gb:AUS:ADM2:25037944B47305351718046",
+    "gb:AUS:ADM2:25037944B73531494726593",
+    "gb:AUS:ADM2:25037944B90195923531970",
+    "gb:AUS:ADM2:25037944B91391383703186",
+    "gb:AUS:ADM2:25037944B95382354250521"
+  ],
+  "subject_ids_sha256": "a137fbd98128bc64993cbc7f46234122cacaded1ded739a90dc2605bf7b18062",
+  "baseline": {
+    "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+    "files": [
+      {
+        "bytes": 117156,
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+        "sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 2080037,
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+        "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+        "uncompressed_bytes": 8387182,
+        "uncompressed_sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 2081609,
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+        "sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+        "uncompressed_bytes": 8388214,
+        "uncompressed_sha256": "10d2e853604b368fb9f0dbeb29919bec472640c98b457019865ff02e266a883a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 2074475,
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+        "sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+        "uncompressed_bytes": 8387395,
+        "uncompressed_sha256": "0a895961defbcf80f8cc2e97cd7253830f2720a2fb51b6d4439c53ef0d1f80d9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 2085907,
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+        "uncompressed_bytes": 8387875,
+        "uncompressed_sha256": "82d775abb31da05bb6058c547ea47a4e8428338f5287b79072e778c50139a7e9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 2079265,
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+        "sha256": "654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca",
+        "uncompressed_bytes": 8387777,
+        "uncompressed_sha256": "827ec32b0cd1ff9d841d6f5201dac6e015ad080d6d5b32afc0bc664e73d890e2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 2085110,
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+        "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+        "uncompressed_bytes": 8388464,
+        "uncompressed_sha256": "5863c2c80e7d4d3213531d757b7bd0d372cbb3fbcc74c52f1177ab9dbb8ac94d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 2079838,
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+        "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+        "uncompressed_bytes": 8387897,
+        "uncompressed_sha256": "66957c60574f28108c2cf633f02017a99d8dcbf9e1187c2588487675123a6cdd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 1714760,
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+        "sha256": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+        "uncompressed_bytes": 6909917,
+        "uncompressed_sha256": "6a432ffbe3d9a8d4412140438c960b0113f752cb70c2db20b76c7467e9575025",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 445308,
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-003.json.gz",
+        "sha256": "c0ec416e3ffed3814caaf92b500c3121599d20ae16b9c9cf3a421513181beda2",
+        "uncompressed_bytes": 1954268,
+        "uncompressed_sha256": "3c381d1b9165128264e6e39862884707c1842fa2329322e98bc8ca2ce47e8e22",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 295796,
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-005.json.gz",
+        "sha256": "3399a05957f4ae4597c14e34567bbf580f74ad95606068687208e98d90a6cbf5",
+        "uncompressed_bytes": 1556295,
+        "uncompressed_sha256": "0ceaba19e6b8c6f8debc284ddb177c9fb4aad31c7527af04c1726bbcaffddd35",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 290645,
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-019.json.gz",
+        "sha256": "4c9bdaff15cf7a53367541c81520be01f4f6c39cc6b7a62a42973a7f3cabd2f8",
+        "uncompressed_bytes": 1529303,
+        "uncompressed_sha256": "eea9f73cdea0a2beed88e437815c0012ec5a344542e8d7621e51e7cc3fd45467",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 295803,
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-020.json.gz",
+        "sha256": "33f33aab47545c2843b4314fcf9d7e272cf653593081666d280fcbe41663d842",
+        "uncompressed_bytes": 1557674,
+        "uncompressed_sha256": "fc4955a6d1e2e91f5cd69c47ab61a5b61d1583f4b0856dfae9f6120e6cb5931a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 306014,
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-021.json.gz",
+        "sha256": "ab0b9c7eba1e3bb5c1779f3b038fd95fb153b903c8707cb0b8f4828a764aae75",
+        "uncompressed_bytes": 1617500,
+        "uncompressed_sha256": "921f5d99163330a145402f9fbf96776e3b2533744ebc73efc2f1bd91581eb672",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 289207,
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-030.json.gz",
+        "sha256": "06b16ae88b18484dbea5b2ad0216811414563e81d151a22100a7216db6397726",
+        "uncompressed_bytes": 1523001,
+        "uncompressed_sha256": "4b25e94948f7f6080e429d7b3f1f09326e69ebc5df3baf0598eb29b4d1751a4e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 286973,
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-031.json.gz",
+        "sha256": "1792a50e557617c09befa32995cf7d9419fd604145a02a56ac5297a893b712d5",
+        "uncompressed_bytes": 1500320,
+        "uncompressed_sha256": "639fc4f6529bf15754280e8de402daef7b0433848ee4fee18a941ed83d4be273",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 291847,
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-033.json.gz",
+        "sha256": "eee799d72959efdd19cc85baaed2b9799b943c814a40140bf17be50f1244db9b",
+        "uncompressed_bytes": 1544816,
+        "uncompressed_sha256": "91c7302ba9cd0a5f5f627295c1e25ea9418bbaf07441e7c30b3a84524ff3a223",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 289042,
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-037.json.gz",
+        "sha256": "1b096a6e13f04b283f70981430d78c690b42c786b6e2542b38595249d71ec9b2",
+        "uncompressed_bytes": 1529087,
+        "uncompressed_sha256": "1176969d670dc08c0ffb1ee583c33fe406c5d602b8a16651da1a0b29c7b15864",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 279105,
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-040.json.gz",
+        "sha256": "53d11d9087cae935efefe35a324f7d999e52249278b367d5448e16e29cf0e4f0",
+        "uncompressed_bytes": 1482926,
+        "uncompressed_sha256": "edbc840b8ff69b6e870ee42c8876fcf515a6f8e803e70600bdda920f5fbde857",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 353653,
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-042.json.gz",
+        "sha256": "86f18147a2660fc9b36bfee4401b54ae3df0e2080a6cff1c6b07f2f78132955a",
+        "uncompressed_bytes": 1704909,
+        "uncompressed_sha256": "963058764b794788f84676bbfc49345d41ce5f4b6045b6c5f1fbf15294d9375c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 321578,
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-045.json.gz",
+        "sha256": "0b4b437ad3c1825133f28bbc280cb455ec4f118d84043cb74c9406e3308e522a",
+        "uncompressed_bytes": 1673344,
+        "uncompressed_sha256": "c2713321baeddf7a620a601c4a9f52186e6e0a82c13c5fd6abe09f7cad7fe053",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 292865,
+        "path": "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-046.json.gz",
+        "sha256": "c005e2e4a13b77696af620728dfbf4d1a6e677236a2a6ffb87e6f9dc0270330c",
+        "uncompressed_bytes": 1534058,
+        "uncompressed_sha256": "412c06ada4a6c06dd55a8ab140ca0965b268856c0ccfb66c59b16c716ef2e21b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 3462640,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-AUS-ADM2-000.bin.gz",
+        "sha256": "17e2fd8c2c4dc112bd3c37516394d8f0f23a87a102f7dc8cc25e653be53a8c4c",
+        "uncompressed_bytes": 11066867,
+        "uncompressed_sha256": "69115100f6d6fa953651988ecb091b1c3a687a4a8a95782bfafaa950af66b3e4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 661416,
+        "path": "data/administrative-sources.json",
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "bytes": 403376,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-1.json",
+        "bytes": 8060108,
+        "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/ownership-selection.json",
+        "bytes": 1592,
+        "sha256": "2dc41f354893cb40a76a58d767450060cc5aac1bbb65c0379486f347e703aa33",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/report.json",
+        "bytes": 57840,
+        "sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/transport-map.json",
+        "bytes": 56473,
+        "sha256": "644345be3d231431177c416b6ddbe3a1b2486597295af45fd5224857b5612d26",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/components-delta.json.gz",
+        "bytes": 2335,
+        "sha256": "21ad3c832ef294cae76d5e6603e61313fc2890a1a5653667caef8665374de460",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7011,
+        "uncompressed_sha256": "4b554e0194f7b3782bc2a8b1557832eb46fe5f2130fbb363429c18e43816512c"
+      },
+      {
+        "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/sources-000.jsonl.gz",
+        "bytes": 2173285,
+        "sha256": "aaf5e4f099ab25c6e6f96632787f1654ba6054ed378fd591b360e36274ffc264",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388327,
+        "uncompressed_sha256": "a75923307b24ff73fe3090307b2c8d6e590a22dbb91f4d43f92a52ac0fd23705"
+      },
+      {
+        "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/receipt.json",
+        "bytes": 2676,
+        "sha256": "8ef08a5125ca2bde3858f6f165cce2bd559a0abfd7996f1a5d24fdeaf0929147",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/report.json",
+        "bytes": 103877,
+        "sha256": "3527014045c5aedc2b26be8bb5dff97e3e34097b7d4cb66a9b2fe3fcf33a6856",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "consumed_source_payload": "17e2fd8c2c4dc112bd3c37516394d8f0f23a87a102f7dc8cc25e653be53a8c4c"
+    },
+    "pin_files": {
+      "consumed_source_payload": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-AUS-ADM2-000.bin.gz"
+    },
+    "subject_files": {
+      "gb:AUS:ADM2:25037944B11916296746250": "data/geography/part-0.json",
+      "gb:AUS:ADM2:25037944B14025919363288": "data/geography/part-0.json",
+      "gb:AUS:ADM2:25037944B17338277063313": "data/geography/part-1.json",
+      "gb:AUS:ADM2:25037944B43303794043608": "data/geography/part-0.json",
+      "gb:AUS:ADM2:25037944B47305351718046": "data/geography/part-1.json",
+      "gb:AUS:ADM2:25037944B73531494726593": "data/geography/part-1.json",
+      "gb:AUS:ADM2:25037944B90195923531970": "data/geography/part-0.json",
+      "gb:AUS:ADM2:25037944B91391383703186": "data/geography/part-0.json",
+      "gb:AUS:ADM2:25037944B95382354250521": "data/geography/part-0.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "gb:AUS:ADM2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2_simplified.geojson",
+      "role": "Complete actually consumed 2022 ABS Local Government Areas simplified derivative; source-relative administrative comparison only",
+      "vintage": "2022 represented; registry source update2023-01-19;build2023-12-12",
+      "retrieved_at": "2026-10-11T17:00:11Z",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution4.0 International, original Australian Bureau of Statistics and geoBoundaries attribution required; original source/citation and registry preserved. Exact source fitness is not warranted."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "research/geography/aus19-original-source-20261011/vintages/administrative-custody-002/consumed-source.geojson",
+          "bytes": 11066867,
+          "sha256": "69115100f6d6fa953651988ecb091b1c3a687a4a8a95782bfafaa950af66b3e4",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "temporal_status": "reference",
+      "limit": "Consumed derivative is WGS84 CRS84 longitude/latitude; original ABS download filename states GDA94. No silent datum equivalence, current official boundary, legal roster, shoreline truth or geographic approval is inferred."
+    },
+    {
+      "id": "original-physical-reference",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/6a99a7606b9c2d11ac8cd093610653d4cd5d1382/coordination/engineering/global-physical-comparison-20261006/results",
+      "role": "Whole original GSHHG2.3.7 physical comparison and native query custody, only for thirteen actual preliminary survivors",
+      "vintage": "GSHHG2.3.7/2017-06-15; heterogeneous observation dates",
+      "retrieved_at": "2026-10-11T17:12:12Z",
+      "license": {
+        "status": "unknown",
+        "terms": "Original retained comparison metadata; no new underlying source license claim."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Six whole original physical shards restored through exact inverse including the original successor delta; seven warm whole original products reused by exact original report encoded/decoded hash. Every selected query joins the complete original sources-000 metadata. Exact immutable reference paths and completed per-product input/runtime receipts are in physical-plan.json and physical-custody-*-002. Whole referenced products are not duplicated into this packet or flattened into a new execution phase.",
+      "temporal_status": "unknown",
+      "limit": "Physical authority remains unapproved; source observation dates, physical truth and GA Cocos imagery/date/rights work #1453 remain unresolved. Six original non-full-support rows are held without unnecessary inverse."
+    },
+    {
+      "id": "current-selected-reference",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "role": "Genuine selected current target/neighbor binding and actual pre1740 method15 SOURCE premise caller",
+      "vintage": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "retrieved_at": "2026-10-11T17:05:50Z",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository reference data and code; no separate external licensing claim."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Current-neighbors result retains complete actual phased acquisition inventory, complete-coordinate certificate rebind, code/runtime bindings, all current additives and whole possible-neighbor features. SOURCE controls authenticate15 transitive actual project imports unchanged from6a, locked Node/@noble runtime, and original canonical target preimages from complete selected source parts.",
+      "temporal_status": "reference",
+      "limit": "Pure SOURCE/v2 compatibility does not prove downstream SOURCE/NATIVE operator qualification, same-owner native conservation or selected delivery. Current acquisition is genuinely phased; metadata assembly reuses unchanged completed inverses."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/aus19-original-source-20261011/issue-v2.json",
+      "bytes": 10261,
+      "sha256": "bec8af1d753757ee04342a7985733b927eccccd9c8c6914e4be5e4a8f3ea60c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/issue.json",
+      "bytes": 9509,
+      "sha256": "b5c646342122533e960ee3bfc24cc129b007a55cf896ab8cdf7b8641267d80bd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/physical-locators.json",
+      "bytes": 3627,
+      "sha256": "9a2094efad97e2f8ec28de0c62220729e8213341e2512325185a5c3c8d3e55ed",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/physical-plan.json",
+      "bytes": 4434,
+      "sha256": "43e0ff7a4b41de6c11a31d06cec8ee879e4e87d899aefa1a7c45054e2ae32596",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/policy/literal-union-source-policy-v1.json",
+      "bytes": 3786,
+      "sha256": "21c143adcc3883046c9e93339201b945bad22210df41d481d0a727ab8ac6e967",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/roster.json",
+      "bytes": 66198,
+      "sha256": "12f04b1780c4ba3b0761f00d8e91fa3c4e1b679dc30adae0717fd0ce06111380",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/tools/current-inputs.json",
+      "bytes": 3426,
+      "sha256": "d537da3d8fc8b72da48343ee1e8c9e33bb85480f281099d10f15ea9105b96a95",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/tools/handoff-inputs.json",
+      "bytes": 1365,
+      "sha256": "c34a59177235f87fd3f52679b3557f4c8a412edb5504fd36dee4d5118640c58d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/tools/probe-inputs.json",
+      "bytes": 3623,
+      "sha256": "b3f83ac6af6ded52b32b5099e9b3b928c9208f884303e88741f26bbf4527b2d2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/tools/runtime-lock.json",
+      "bytes": 473933,
+      "sha256": "7860a19df8a79cbd73d4096fba6d0322d9264894eb27ab6392e7fd9a948c971f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/tools/source-entry-lock.json",
+      "bytes": 20098,
+      "sha256": "e8576ace181436f21ace7c38ca6d2169af9355afa9d246d9f2c49aee488aae01",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/validation/current-admission.json",
+      "bytes": 369,
+      "sha256": "a217e36b6a0d7c10664017909e94bc3f9ea6fca8e935e51f83ad6c6833159326",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/validation/physical-admission.json",
+      "bytes": 257,
+      "sha256": "41dc16f91893d6537cfdae34721e41437a545e0156da116ac28dd63ebd0890fe",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/validation/probe-admission.json",
+      "bytes": 248,
+      "sha256": "622cf20b309b8871cf9462f10f73b1dddea9257efafd0d9514113a452189eeb0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/administrative-custody-002/comparison-rows.json",
+      "bytes": 96341,
+      "sha256": "847a974e660321bfd12c7ae7672b76eab7b5b7f397daf6e3a11456ad250e48a6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/administrative-custody-002/publication.json",
+      "bytes": 974,
+      "sha256": "1fcd27e4bda1021e893aed425f52c5af3a2d119718152d72f65144aa438c5056",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/administrative-custody-002/receipt.json",
+      "bytes": 7518,
+      "sha256": "98aa75d39f530b76f220396849c9c02066f562f8887232e6423fab20834bccaf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/administrative-custody-002/source-metadata.json",
+      "bytes": 3129,
+      "sha256": "a73714eb69441505386c9324180c0f46150545bcd762b351e80fc2d9f3e08493",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/candidate-custody-001/candidate-bindings.json",
+      "bytes": 44852,
+      "sha256": "7db4cb5c1b47b62abcf57c35f3903e1cc5c8aa3d55cda018679a97b2cc27588f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/candidate-custody-001/original-components.json",
+      "bytes": 20739,
+      "sha256": "8eef995e5d3cc643b550ca31e2b892c7bd75c1e5c62b9c3e6f2f5927582d0307",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/candidate-custody-001/publication.json",
+      "bytes": 728,
+      "sha256": "244e3960aae3f33a90f19a9652b7758475e79eb11ccb3abeeab019ba081fb2fc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/candidate-custody-001/receipt.json",
+      "bytes": 4844,
+      "sha256": "895b35a0e39592b7a8bff4652d35b2655a2b30e9a73c38fd487a0fc178a1d190",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/current-neighbors-001/publication.json",
+      "bytes": 267,
+      "sha256": "4b4deff6993811eda22079fd719e407935a30b0c70050a35eb6a394b651e9ce8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/current-neighbors-001/result.json",
+      "bytes": 1053525,
+      "sha256": "1475641f450b9dce7505304a9b53960cb1eba32295484380b0988916de165ee5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/delivered-physical-screen-001/discovery.json",
+      "bytes": 104175,
+      "sha256": "f76092e87ef0cdd82846e5c0bbac4b25479cae0c56874fba607ec72909e1d229",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-004-002/components-004.jsonl.gz",
+      "bytes": 1218035,
+      "sha256": "c15da2ba94b4333ffb03c96396e67950efb580ebd8b09724cfd76e29cdbbb583",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8370154,
+      "uncompressed_sha256": "09d428e4755cf6b17fb1be21394ee7ac33a94e2db8959b3a79f7e2d107d59616"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-004-002/physical-records.json",
+      "bytes": 3734,
+      "sha256": "be4c3a07caff58654f907f00ad78963c6ae35f6b58b6108738ae4643ac6954cb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-004-002/publication.json",
+      "bytes": 973,
+      "sha256": "9bfed07a3b512d69baa9d5ce2843d9d15f8efb61895964b252918f433283178f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-004-002/queried-source-metadata.json",
+      "bytes": 1674,
+      "sha256": "e8a21b8628428a0e5bd91b7e0e7c17a03ec214789b7534faa8a168a1ee975964",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-004-002/receipt.json",
+      "bytes": 4942,
+      "sha256": "5b7edbe12840abceda087fb060354b8b4f3ca73f9c233c2d7c6919bcf2d3dcad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-007-002/components-007.jsonl.gz",
+      "bytes": 1187214,
+      "sha256": "2177f6396d7e22ea5e0abae4ceba7dd5cccc3eacbf68a398c476d7dab14cfa92",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8387775,
+      "uncompressed_sha256": "581b660a545248eb0c85aa3469b89f300e57a7e2083933d4e340faba4dc464be"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-007-002/physical-records.json",
+      "bytes": 3726,
+      "sha256": "257f0ccb0b1c7af81fca97acba61c84af383ecef1e30d746f4b7f0ad91a237f1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-007-002/publication.json",
+      "bytes": 973,
+      "sha256": "d49bbcfab7d7785d3f188bc9c497ec0c0929f5cc4de0feac8ee14fae55076ed3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-007-002/queried-source-metadata.json",
+      "bytes": 1660,
+      "sha256": "54b1c1f481d222d312fd1d29fe059ac3ef503b59d3a88417caa9cc888efcadb0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-007-002/receipt.json",
+      "bytes": 4941,
+      "sha256": "e2ee91e615f7d3e1acccd7bafc87ed7956431f0f5de96bb0559600c1702a6a84",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-027-002/components-027.jsonl.gz",
+      "bytes": 1185446,
+      "sha256": "5344a5df2e2d9f101ef96bc3c07fdf0301d4fd08eb45b9666310555ceba2d90d",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8383754,
+      "uncompressed_sha256": "db870cd9ba120736513fe46a76f1814b86541104fae5d5cf6eb975edc34e944c"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-027-002/physical-records.json",
+      "bytes": 3279,
+      "sha256": "9c55343f531f8182bed140cb3826bd589a37fed2ae6b7f08f24e39165999bd14",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-027-002/publication.json",
+      "bytes": 972,
+      "sha256": "e01f00e6166da9da345da941751b32edc07c4a3315b4a0879d40421c7d4c5dc0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-027-002/queried-source-metadata.json",
+      "bytes": 899,
+      "sha256": "d7070822f97a2a2f730f0da119d76eab30ee2446f150435592b29adbd17bc5b3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-027-002/receipt.json",
+      "bytes": 4941,
+      "sha256": "4ec196a76daa1a4c15c866e09bfedfbe2032557275a046cf32f0bee02fd5a3eb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-028-002/physical-records.json",
+      "bytes": 3727,
+      "sha256": "9ceba4355f049d53560672b03d7f385a50f186adff406e052871f8b2a9718b58",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-028-002/publication.json",
+      "bytes": 737,
+      "sha256": "bca4e082f33a85de3de0ff7a6dcac5b200476ec747bd7a2d7461165b5f5935ff",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-028-002/queried-source-metadata.json",
+      "bytes": 1681,
+      "sha256": "e7a6ec8e19e6ea04fa1c167794bb87fba1324f3343215ff5778f1dc0b13f4704",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-028-002/receipt.json",
+      "bytes": 3780,
+      "sha256": "6f4a6e67e2e76291da8ae88d6407611b47c4d6b9c87b065d8a6a7e91806bf2e6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-029-002/physical-records.json",
+      "bytes": 3727,
+      "sha256": "e24ebe36b4e4351f8f476f6bd1701e5fdc1e99b30e93211eeb9043cdd57d07fb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-029-002/publication.json",
+      "bytes": 737,
+      "sha256": "83556b1e2529009b1bd25f07401bcdfe4a7a68172a63c03892dbe481dc235f64",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-029-002/queried-source-metadata.json",
+      "bytes": 1680,
+      "sha256": "b1f1d211665701920e4218339a9482a3e58d80feef816e80638a19b615c51654",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-029-002/receipt.json",
+      "bytes": 3780,
+      "sha256": "7b2401e2e1f81e5f8335ca02998561edef2870f8b2e88fd1cab8c4d888af09c8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-030-002/physical-records.json",
+      "bytes": 3728,
+      "sha256": "42f09270c2f4efe08c64b082f69a83f944f0137708f0c168438417791cf238b4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-030-002/publication.json",
+      "bytes": 737,
+      "sha256": "bfd3d0eeab51e5dc77814b14fb8196c78b60afd967f60ac3f89607e745af4fab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-030-002/queried-source-metadata.json",
+      "bytes": 1678,
+      "sha256": "9dda0f5685de858a9b44a1fd8377708c7647e6ddd6c0b89bc5b763e49c5d1390",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-030-002/receipt.json",
+      "bytes": 3779,
+      "sha256": "8c37ffc59aa1adae60a1b6bf6b04ece8f1c9f0fbe400a8993e38b646ecfa230e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-043-002/components-043.jsonl.gz",
+      "bytes": 1224451,
+      "sha256": "92cc54b70c66cfc4fa0202a8190bf69399a206c910f514a98da2e3f42fea135d",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8383119,
+      "uncompressed_sha256": "2984717927a26d0f012afb86102b513b6527249c56083e9501a12c6301aee17c"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-043-002/physical-records.json",
+      "bytes": 7637,
+      "sha256": "82107e78930f73acdc68c7bb5095e42db19b4f80d1931f16f8b8f11de1562f33",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-043-002/publication.json",
+      "bytes": 972,
+      "sha256": "ec3f50bce86a6b4ccfee7ee6f709934567d3811131b5b3e16446a649bf3dc2d3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-043-002/queried-source-metadata.json",
+      "bytes": 895,
+      "sha256": "0999b07c0bc2eb99ad1d1661fb634b1d3866da3d10cf51a089c99206485f7872",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-043-002/receipt.json",
+      "bytes": 4942,
+      "sha256": "e970821deff9608c65de5b32a01bc843195ed9fbd6ad21473b187a7eb99f51ca",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-044-002/physical-records.json",
+      "bytes": 3727,
+      "sha256": "e35b7806eba12e44c21fd09b08f8abdf362086f77c472f44da8b8ecce271dad9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-044-002/publication.json",
+      "bytes": 737,
+      "sha256": "23d0b1e737cd4a768c1c0099a83c42ded9239e017b64241ccc302efce2fa4c94",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-044-002/queried-source-metadata.json",
+      "bytes": 1686,
+      "sha256": "c0b571172e48ffa877075121d050d4d6cba61a4a018539660965b729fd0b8d3a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-044-002/receipt.json",
+      "bytes": 3778,
+      "sha256": "8f80ea35e6a08d08a69762dd6973116da975cb884a6d4ca61114a59678badc43",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-047-002/physical-records.json",
+      "bytes": 3723,
+      "sha256": "ff9d1c132900dd5cfe1f6723b09fbbf3bfd6ae5fee9b6406c324dc6d0a99e6a4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-047-002/publication.json",
+      "bytes": 737,
+      "sha256": "db4fffa6f4c2bb80c69267a6dcc315840610d833786d73d0a7c0d0f4535c2f1f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-047-002/queried-source-metadata.json",
+      "bytes": 1669,
+      "sha256": "33ee028114d256c578802a0a4c5d3e7d43efd33a6e6c7ce627d933e5f9de2d4f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-047-002/receipt.json",
+      "bytes": 3778,
+      "sha256": "74fff6527f6d45bccb19428f0253a5be069d58a09333a567f84f16a697bc8dda",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-053-002/components-053.jsonl.gz",
+      "bytes": 1207888,
+      "sha256": "0a8dcae7cd00ff3db0ffe770eadfc78b5e0b171e06791a94e15e5b83eed5d81e",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8386661,
+      "uncompressed_sha256": "3f92e355ecfbb4146b0dea5e32d634ed1baed2da965f6c266d01592cff79a075"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-053-002/physical-records.json",
+      "bytes": 3278,
+      "sha256": "a8870d55e513af0c315c7a3d37869522f604e61d208a9832a71cdb3f5b270c3e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-053-002/publication.json",
+      "bytes": 972,
+      "sha256": "5c3ae3608de0165eb4e17167fe6d2188de8a5884f2149f4cc6790f07fd58ab3f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-053-002/queried-source-metadata.json",
+      "bytes": 899,
+      "sha256": "5879653c31c45de39bc03b7a70b42ccf26802190d3842b3b8db9204bfa1f1f4d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-053-002/receipt.json",
+      "bytes": 4941,
+      "sha256": "c8a16a1c4b35af5607fb11c1480b1da02f0c79c0b0d307e4965f16d78dd84d34",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-061-002/physical-records.json",
+      "bytes": 4183,
+      "sha256": "0bdfb5787d4c05d50f79dd5bb35e103744ed1ba6d1556e8c218c284cd32c0e0b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-061-002/publication.json",
+      "bytes": 737,
+      "sha256": "b755a08c8cfd6ed414716d4fb51190891e8550ddb8eca3778c8d40a15796d959",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-061-002/queried-source-metadata.json",
+      "bytes": 2448,
+      "sha256": "3cb107d2f2a38da5aa71141b77379639643317a1745ea26c03d9ab640634ddef",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-061-002/receipt.json",
+      "bytes": 3780,
+      "sha256": "333af6552b2887dd5575eb54e681fded24ee10b8811e2d6bde22f07ff29b1eea",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-064-002/physical-records.json",
+      "bytes": 3274,
+      "sha256": "ace4c30f9123453f79832631171849b4b8d1da434fe1aa3db95607f0c8c06ab4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-064-002/publication.json",
+      "bytes": 736,
+      "sha256": "cf60893847d289575d57d70c2010859d65fe0405ef15b7113273ddc047968279",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-064-002/queried-source-metadata.json",
+      "bytes": 899,
+      "sha256": "de8f34504d728481f1745e89fc88158131a84798c06a37e832024fbe1a9cd3ef",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-064-002/receipt.json",
+      "bytes": 3780,
+      "sha256": "658f8761f7edcbc4a6a79858403d0abf7ecfb0161c3cb391a7844ef2a47caa83",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-065-002/components-065.jsonl.gz",
+      "bytes": 1193900,
+      "sha256": "561fe5fc5c3cf0d70ea9be10eb4f741e34411dc348e4fedbaab1da8106414ced",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8373751,
+      "uncompressed_sha256": "df749723a52e7e6eb77cbe90274796ed6a5879f1e930bae264c5642e19016c50"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-065-002/physical-records.json",
+      "bytes": 3275,
+      "sha256": "1bcb226856defdff710b982c92477aee5c8a2abe4ae48eda684ae807b84ed0f3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-065-002/publication.json",
+      "bytes": 972,
+      "sha256": "20e5c245afb3b9e82e5cf6f9c0889aee90496dbe25c53abd94d85e09e2c8c610",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-065-002/queried-source-metadata.json",
+      "bytes": 899,
+      "sha256": "60d85e5c321521869960b8fa659c1f64f050c66cc267e24a67cc607a0149694a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-065-002/receipt.json",
+      "bytes": 5448,
+      "sha256": "43435144b216d15550f8ffd7dbe72b61be9059ef6c16e89f82751ca7e248ca4b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/source-handoff-001/all19-dispositions.json",
+      "bytes": 120705,
+      "sha256": "38ff3d2d97d766ba96e29df2f78772d1625bcdbea73858308010c96dc5533b3a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/source-handoff-001/publication.json",
+      "bytes": 501,
+      "sha256": "70336ac70af832b350b7c56923ab061cd145a623825ad0d67435d87e3f3ec0cd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/source-handoff-001/source-handoff.json",
+      "bytes": 1998089,
+      "sha256": "a86d07773cb98ac2e3b747b700eb07f845fb33da79da45c904927a2fa3b610b0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/source-premise-input-001/premise-input.json",
+      "bytes": 1883584,
+      "sha256": "ee5910d7b4b0e98ab37d59bba16d759168ec323a1b25a8c508b89a0bd8282f59",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/source-premise-input-001/publication.json",
+      "bytes": 277,
+      "sha256": "620444a51f21fd895d904c2d4f1c32c10edc7e359ea92a91005cf3c6bb44974a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/source-premise-input-002/premise-input.json",
+      "bytes": 1884208,
+      "sha256": "44913d4b4ea1b930b7e27fd05a5fae02eafe52111da2f6cf9f4df29eea5d7690",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/source-premise-input-002/publication.json",
+      "bytes": 277,
+      "sha256": "db00b9ae85052079098ef08b17fd429b37dd084d9260d667d57de04432048db6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/source-premises-002/publication.json",
+      "bytes": 263,
+      "sha256": "76a417dc53a005850384529a268afd78ba9d10a7d90aa139c379247525fbbd4d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/source-premises-002/result.json",
+      "bytes": 15644,
+      "sha256": "0fa0a9727869f4bf35dce1777bd351d9acaa2eb427259ce214276f394cd3edf7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/source-premises-003/publication.json",
+      "bytes": 263,
+      "sha256": "af4030d732060cfa8c14eb30c6feb0b7438dc28dae55fe033a27e1539ada0939",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/source-premises-003/result.json",
+      "bytes": 15405,
+      "sha256": "bdd94de72f64268d3749b2f6f1d9e7a5f96dc1bea5fd45b5a946f7c1805d4af1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/source-premises-004/publication.json",
+      "bytes": 263,
+      "sha256": "e78b1cf5de9e8e6bcc18ff480c0cc6c6ad0ab5c8fb26f7b6ccfe4cb64b0ec4e4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/source-premises-004/result.json",
+      "bytes": 15405,
+      "sha256": "5039840d9a6a961efe52da9b98f04b6ae2358c6b42cd82bc6607e4e50c0a4235",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/source-product-join-002/publication.json",
+      "bytes": 267,
+      "sha256": "83488f9a6d85c041d523ccfe835664cda8b37a1c4ca451b19bd49b5bc65c5b41",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/source-product-join-002/result.json",
+      "bytes": 25207,
+      "sha256": "2110d7cd7b0c4133739c05021e1aa6bd88acfb25d04fa3f9fca852f9410a6356",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/strict-predicates-002/publication.json",
+      "bytes": 277,
+      "sha256": "27254c3ceaabe5c7b81be3d922a3ed40b32ad2c2e616da6d27d757a9abab2dd4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/aus19-original-source-20261011/vintages/strict-predicates-002/strict-predicates.json",
+      "bytes": 113253,
+      "sha256": "71726499081e4e64da8740aef3546b5f249c8eded6aea5fcd85842d1043a8c03",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "whole-source-custody",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Immutable whole-byte admission, complete candidate/source joins and exact original physical inverse or authenticated warm whole-product reuse. The original report successor delta is included where required. Fresh NewVintage publication, same original bytes and no geometry processing during custody.",
+      "software": "Python3.12.14;Git;SHA256;gzip;exact unchanged1789-file runtime-lock.json for inverse/GIS",
+      "units": "Whole bytes and exact record identities"
+    },
+    {
+      "id": "current-selected-binding",
+      "kind": "code",
+      "description": "Existing actual selected reader with phased input/runtime/output accounting; complete coordinate-certificate rebind and whole possible-neighbor geometries; every active additive primitive retained.",
+      "software": "Node24.19.0;unchanged ImmutableReader/loadSelection",
+      "units": "Exact whole feature identities and inclusive coordinate bounds"
+    },
+    {
+      "id": "source-current-predicates",
+      "kind": "measurement",
+      "description": "Existing exact binary64 candidate topology and strict source/current predicates; diagnostic GEOS dissolve failures retained separately from literal union. No normalization, floating residual proposal, tolerance, new method or continuous area measurement.",
+      "software": "Python3.12.14;Shapely2.1.2;GEOS3.13.1;NumPy2.3.5;exact_predicates.py;actual pinned runtime",
+      "units": "Boolean predicates and unscaled longitude/latitude coordinate-space diagnostic pointsets"
+    },
+    {
+      "id": "actual-source-premises",
+      "kind": "code",
+      "description": "Actual unchanged pre1740 retainedAdministrativeSourcePremises and registered v2/original-product consumers. Original Python target byte preimages are authenticated against complete current whole products and parse-equal actual selected target. Thirteen SOURCE passes do not replace later engineering operators.",
+      "software": "Node24.19.0 exact binary;15 actual transitive unchanged project imports;@noble/hashes2.0.1 locked package",
+      "units": "Original component identities and boolean SOURCE/v2 outcomes"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "scope_count",
+      "value": 19,
+      "unit": "components",
+      "vintage": "baseline",
+      "evaluation_commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "input_sha256": "38ff3d2d97d766ba96e29df2f78772d1625bcdbea73858308010c96dc5533b3a"
+    },
+    {
+      "id": "proposed_count",
+      "value": 13,
+      "unit": "components",
+      "vintage": "baseline",
+      "evaluation_commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "input_sha256": "38ff3d2d97d766ba96e29df2f78772d1625bcdbea73858308010c96dc5533b3a"
+    },
+    {
+      "id": "source_compatible_count",
+      "value": 13,
+      "unit": "components",
+      "vintage": "baseline",
+      "evaluation_commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "input_sha256": "bdd94de72f64268d3749b2f6f1d9e7a5f96dc1bea5fd45b5a946f7c1805d4af1"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "scope_count",
+      "path": "research/geography/aus19-original-source-20261011/vintages/source-handoff-001/all19-dispositions.json",
+      "json_pointer": "/scope_count"
+    },
+    {
+      "metric_id": "proposed_count",
+      "path": "research/geography/aus19-original-source-20261011/vintages/source-handoff-001/all19-dispositions.json",
+      "json_pointer": "/proposed_count"
+    },
+    {
+      "metric_id": "source_compatible_count",
+      "path": "research/geography/aus19-original-source-20261011/vintages/source-premises-003/result.json",
+      "json_pointer": "/source_compatible_count"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [
+    {
+      "status": "supported",
+      "source_ids": [
+        "gb:AUS:ADM2",
+        "original-physical-reference",
+        "current-selected-reference"
+      ],
+      "text": "Complete original custody, full consumed-source canonical joins and actual unchanged SOURCE/v2 predicates support a thirteen-case source-relative handoff. All nineteen original outcomes, including six physical-support holds and earlier failed attempts/diagnostics, are preserved."
+    },
+    {
+      "status": "unresolved",
+      "source_ids": [
+        "original-physical-reference",
+        "current-selected-reference"
+      ],
+      "text": "Independent source acceptance is separate from downstream operator qualification, native conservation, current selected integration and delivery. No current physical/legal truth, source observation date, regional approval or global closure is established. Incremental continuous area remains unknown; Cocos #1453 remains open for its distinct physical observation evidence."
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "See README.md for immutable stage heads and fresh-vintage requirements.",
+    "node research/geography/aus19-original-source-20261011/tools/check_handoff.mjs",
+    "node scripts/evidence-quality.mjs research/geography/aus19-original-source-20261011/evidence-quality.json"
+  ]
+}
