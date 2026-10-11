@@ -262,7 +262,7 @@ test('workflow starts real evidence independently, preserves test parallelism an
     const remainder = source.slice(start);
     const next = remainder.slice(3).search(/\n  [a-z]+:/);
     const block = next === -1 ? remainder : remainder.slice(0, next + 3);
-    assert.match(block, /needs: profile/);
+    assert.match(block, job === 'package' ? /needs: \[profile, regression\]/ : /needs: profile/);
     assert.doesNotMatch(block, /needs: evidence/);
   }
   assert.match(source, /\(github.event.action == 'edited' \|\| github.event.action == 'ready_for_review'\) && 'metadata' \|\| 'code'/);
@@ -318,8 +318,8 @@ test('metadata-only draft readiness preserves code work and cannot replace its t
   const events = source.match(/types: \[([^\]]+)\]/)[1].split(',').map(x=>x.trim());
   const groupLine = source.split('\n').find(line=>line.trim().startsWith('group:'));
   const expression = [...groupLine.matchAll(/\$\{\{ (.*?) \}\}/g)].at(-1)[1];
-  const evaluate = (predicate, action, selection = 'complete') => Function('action', 'selection',
-    `return (${predicate.replaceAll('github.event.action','action').replaceAll('needs.profile.outputs.test_selection','selection')});`)(action, selection);
+  const evaluate = (predicate, action, selection = 'complete', cancelled = false) => Function('action', 'selection', 'always', 'cancelled',
+    `return (${predicate.replaceAll('github.event.action','action').replaceAll('needs.profile.outputs.test_selection','selection')});`)(action, selection, () => true, () => cancelled);
   const groups = Object.fromEntries(events.map(action=>[action,evaluate(expression,action)]));
   assert.equal(groups.opened, 'code');assert.equal(groups.synchronize, 'code');assert.equal(groups.reopened, 'code');
   assert.equal(groups.edited, 'metadata');assert.equal(groups.ready_for_review, 'metadata');
@@ -329,6 +329,7 @@ test('metadata-only draft readiness preserves code work and cannot replace its t
     const block=next<0?tail:tail.slice(0,next+3), predicate=block.match(/^    if: (.+)$/m)[1];
     const active=predicate.replace("needs.profile.result == 'success' && ",'');
     for(const action of events)assert.equal(evaluate(active,action),!['edited','ready_for_review'].includes(action),`${name}/${action}`);
+    if(name==='package')for(const action of events)assert.equal(evaluate(active,action,'complete',true),false,'cancelled package never launches');
   }
   for(const name of ['profile','evidence','scope']) {
     const start=source.indexOf(`  ${name}:`),tail=source.slice(start),next=tail.slice(3).search(/\n  [a-z]+:/);

@@ -39,11 +39,12 @@
     "geographic_approval": "not-requested"
   },
   "commands": [
-    "node --test --test-concurrency=1 test/integration-proof.test.mjs test/merge-integration.test.mjs test/selected-data-profile.test.mjs test/trusted-workflow-checkouts.test.mjs"
+    "node --test --test-concurrency=1 test/integration-proof.test.mjs test/merge-integration.test.mjs test/selected-data-profile.test.mjs test/trusted-workflow-checkouts.test.mjs test/pr-gates.test.mjs"
   ],
   "limits": [
     "Focused controls model the GitHub status-expression subset present in the actual workflow and execute its gate/receipt shell bodies against bounded fixtures. They are not a hosted Actions run or a fresh application/GPU/Canvas/scientific execution.",
     "Prior observed parallel full and package job durations establish duplicate runner work, not additive wall-time savings. No measured savings or first successful ordinary full-route execution after this change is claimed before it is observed.",
-    "Full test inventory, package builders, model-reader custody, science and selected-data browser/parity requirements are unchanged. The separate main-push Sites package budget workflow remains the actual archive/file reserve gate; Cloudflare compilation does not claim that measurement."
+    "Full test inventory, package builders, model-reader custody, science and selected-data browser/parity requirements are unchanged. The separate main-push Sites package budget workflow remains the actual archive/file reserve gate; Cloudflare compilation does not claim that measurement.",
+    "The initial hosted full activation exposed two existing PR-gate workflow fixtures whose old dependency and status-function assumptions were omitted from the first focused list. Those adjacent fixtures are corrected and their actual full suite is included; the first hosted failure remains recorded, not relabeled as success."
   ]
 }
