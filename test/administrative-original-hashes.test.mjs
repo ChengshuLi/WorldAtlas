@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -80,4 +81,16 @@ test('original alias decoding uses the same phase budget across products and nat
  assert.throws(()=>admitAdministrativeOriginalPreimages(f.scope,almostFull),/Aggregate evidence/);
  const crowded=structuredClone(f.scope);crowded.original_administrative_canonical_bindings=Array(257).fill(f.binding);
  assert.throws(()=>admitAdministrativeOriginalPreimages(crowded,budget),/descriptor limit/);
+});
+
+test('registered original-hash programme preserves all prior methods and exact reviewed current vector',()=>{
+ const catalogue=JSON.parse(fs.readFileSync(new URL('../coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json',import.meta.url)));
+ assert.equal(sha(canonical(catalogue.programs.slice(0,15))),'c0a9744587b0c0c78da2365008e3b2392deb18abbd9aa947209cb784fcb32ada');
+ assert.equal(sha(canonical(catalogue.current_rebind_migrations.slice(0,1))),'b94c0b3a5d6d020b23465489049cf2c9299e12ee47b009850e81aec139c2a4ae');
+ const approved=catalogue.programs[15];assert.equal(approved.accepted_head,'e2a1061921b1917ed48f0578940ee0494d02dc90');
+ assert.equal(approved.independent_review_comment,6111057198);
+ assert.equal(sha(canonical(approved.source_executed_code)),'d0155921b5a930c7d78dadbda85631bc261a92428c93fc52aee37c355d851412');
+ assert.deepEqual(approved.source_executed_code,approved.native_executed_code);
+ // Historical approval stays literal even after future caller changes.
+ assert.equal(approved.source_executed_code.length,17);
 });
