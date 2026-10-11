@@ -459,6 +459,10 @@ test('same existing startup budget charges workflow time, slow reads and oversle
   assert.equal(boundary.deadlineRemaining(), 570000 - 20999);
   const second = await startup({jobMs: [0, 20000]});
   assert.equal(second.result.status, 'checked');assert.equal(second.deadlineRemaining(), 570000 - 20250);
+  const late = await startup({jobMs: [0, 41000]});
+  assert.equal(late.result.status, 'incomplete-or-invalid');assert.equal(late.result.job_deadline_exhausted, true);
+  assert.equal(late.reads, 2);assert.equal(late.constructed, false);assert.deepEqual(late.inspected, []);
+  assert.equal(late.result.deadline_binding.metadata_reads, 2);
   const rollback = await startup({rollback: true});
   assert.equal(rollback.result.status, 'incomplete-or-invalid');assert.match(rollback.result.reason, /clock/);
   assert.equal(rollback.reads, 1);assert.deepEqual(rollback.inspected, []);
