@@ -37,10 +37,10 @@ def main():
  if sha(source)!=product['whole_sha256'] or len(source)!=product['original_bytes']:raise ValueError('Consumed source whole bytes differ')
  data=json.loads(source)
  if len(data['features'])!=547:raise ValueError('Incomplete source feature roster')
- registry=json.loads(read('data/administrative-sources.json'));catalogue=json.loads(read('coordination/engineering/original-geography-source-corpus-20261006/catalogue.json'));entry=next(r for r in catalogue['products'] if r['key']=='gb:AUS:ADM3')
- if entry['original_sha256']!=sha(source) or registry['gb:AUS:ADM3']['sha256']!=sha(source):raise ValueError('Consumed original catalogue mismatch')
+ registry=json.loads(read('data/administrative-sources.json'));catalogue=json.loads(read('coordination/engineering/original-geography-source-corpus-20261006/catalogue.json'));entry=next(r for r in catalogue['products'] if r['key']=='gb:AUS:ADM2')
+ if entry['original_sha256']!=sha(source) or registry['gb:AUS:ADM2']['sha256']!=sha(source):raise ValueError('Consumed original catalogue mismatch')
  receipt={'execution_commit':head,'baseline':BASE,'components':len(selected),'source_inputs':inputs,'logical_consumed_input_bytes':sum(base.consumed.values()),'peak_rss_bytes':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024,'elapsed_seconds':time.monotonic()-start,'limits':['Original whole source-cover observations are provisional, not accepted physical or legal truth.']}
  if receipt['peak_rss_bytes']>256*1024**2:raise ValueError('RSS exceeded')
- dest.publish_bytes({'comparison-rows.json':canon([selected[r['component_id']] for r in roster['members']]),'consumed-source.geojson':source,'source-metadata.json':canon({'source_id':'gb:AUS:ADM3','registry_record':registry['gb:AUS:ADM3'],'catalogue_record':entry}),'receipt.json':canon(receipt)})
+ dest.publish_bytes({'comparison-rows.json':canon([selected[r['component_id']] for r in roster['members']]),'consumed-source.geojson':source,'source-metadata.json':canon({'source_id':'gb:AUS:ADM2','registry_record':registry['gb:AUS:ADM2'],'catalogue_record':entry}),'receipt.json':canon(receipt)})
  print(json.dumps({k:receipt[k] for k in ['components','logical_consumed_input_bytes','peak_rss_bytes','elapsed_seconds']}))
 if __name__=='__main__':main()
