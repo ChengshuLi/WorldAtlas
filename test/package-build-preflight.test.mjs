@@ -136,3 +136,9 @@ test('all actual package entries match retained roles and extra or missing impor
   assert.throws(()=>validatePackageExecutionRoles(actual.files.slice(1),consumerCode,entry),/Complete actual execution role closure/);
  }
 });
+
+test('ambient Node injection is refused during runtime preflight',t=>{
+ const f=fixture(t),before=process.env.NODE_OPTIONS;
+ try{process.env.NODE_OPTIONS='--no-warnings';const result=inspectPackageRuntime(f.root,{python:f.python});assert(result.errors.some(e=>e.kind==='node-execution'));}
+ finally{if(before===undefined)delete process.env.NODE_OPTIONS;else process.env.NODE_OPTIONS=before;}
+});
