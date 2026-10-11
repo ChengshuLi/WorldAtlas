@@ -105,7 +105,7 @@ def main():
     restoration = json.loads(own(p + 'receipt.json'))
     current = json.loads(own('vintages/congo-current-neighbors-001/result.json'))
     strict_path = OWN + '/vintages/substantial-two-strict-001/strict-predicates.json'
-    strict = json.loads(read(strict_path, CHECKPOINT_RESULT, {'bytes': 10887, 'sha256': '790a5ef43b55168b568b7549b322ba02ec49143d0b325ad949c3196ee4b35f26'}))
+    strict = json.loads(read(strict_path, head, {'bytes': 10887, 'sha256': '790a5ef43b55168b568b7549b322ba02ec49143d0b325ad949c3196ee4b35f26'}))
     if strict['execution_head'] != CHECKPOINT or strict['scientific_or_publication_approval'] is not False:
         raise ValueError('Wrong necessary-predicate checkpoint')
     if [c['id'] for c in candidates] != IDS or [r['component_id'] for r in physical] != IDS or [r['component_id'] for r in native] != IDS or current['scopeIds'] != IDS:
@@ -144,7 +144,7 @@ def main():
     consumed = []
     for country in ['AGO', 'COD']:
         key = 'gb:' + country + ':ADM2'
-        raw = read(OWN + '/sources/administrative/gb-' + country + '-ADM2-ADM2-consumed-simplified.geojson', CHECKPOINT)
+        raw = read(OWN + '/sources/administrative/gb-' + country + '-ADM2-ADM2-consumed-simplified.geojson', BASE)
         product = next(r for r in catalogue['products'] if r['key'] == key)
         if sha(raw) != product['original_sha256'] or len(raw) != product['original_bytes'] or registry[key]['sha256'] != sha(raw):
             raise ValueError('Consumed source edition differs')
@@ -203,7 +203,7 @@ def main():
              'candidate_source_native_bindings': cases, 'original_physical_comparison_bindings': physical_bindings,
              'original_candidate_canonical_bindings': candidate_bindings, 'original_target_canonical_bindings': list(target_bindings.values()),
              'consumed_source_bindings': consumed, 'current_neighbor_binding': current, 'physical_restoration': restoration,
-             'retained_necessary_predicates': {'commit': CHECKPOINT_RESULT, 'execution_commit': CHECKPOINT, 'path': strict_path, 'sha256': pins[CHECKPOINT_RESULT + ':' + strict_path]['sha256'], 'reuse': 'Original candidate, target and every actual possible-neighbor complete feature match. Prior numerical results are reused, not a new execution.'},
+             'retained_necessary_predicates': {'commit': head, 'original_retention_commit': CHECKPOINT_RESULT, 'execution_commit': CHECKPOINT, 'path': strict_path, 'sha256': pins[head + ':' + strict_path]['sha256'], 'reuse': 'Original candidate, target and every actual possible-neighbor complete feature match. Prior numerical results are reused, not a new execution.'},
              'constructor_disposition': {'source_relative_premises_supported': True, 'source_admission_requires_independent_review': True, 'literal_representation': 'Complete unchanged retained target plus complete unchanged candidate primitive; no dissolve or coordinate normalization.'},
              'unknowns': ['Current physical or legal truth, source observation dates and processing cause remain unapproved.', 'Known execution blocker at frozen c3293051: SOURCE current-baseline and NATIVE reuse admit only ordinary-immutable-git-source target banks, while actual Cuango is in the selected encoded part-29 override. Engineering must admit and authenticate that real encoded override before execution; relabeling or old-base substitution is forbidden.', 'Native operator, native window admission, selected continuous conservation, package/reader/picker/renderer delivery and release readback remain engineering work.', 'The two cases do not close the ten-case family, the130-member original operational batch, or any other original accounting.'],
              'execution_commit': head, 'consumed_inputs': list(pins.values())}

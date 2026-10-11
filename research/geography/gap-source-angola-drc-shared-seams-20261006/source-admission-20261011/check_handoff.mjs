@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {retainedAdministrativeSourcePremises, registeredAdministrativeViews} from '../../../../scripts/additive-gap-repair.mjs';
 
-const scope=JSON.parse(fs.readFileSync(new URL('../vintages/congo-source-handoff-002/source-handoff.json',import.meta.url)));
+const scope=JSON.parse(fs.readFileSync(new URL('../vintages/congo-source-handoff-003/source-handoff.json',import.meta.url)));
 const clone=()=>structuredClone(scope);
 const targetFor=s=>s.current_neighbor_binding.rows[0].candidate_neighbors.find(r=>r.feature.id==='gb:AGO:ADM2:16411231B62076307190429').feature;
 function premise(s,index=0,target=targetFor(s)){
@@ -25,7 +25,7 @@ test('actual v2 has two scientific cases and unchanged130 passive original accou
   assert.equal(scope.original_membership_evidence.batch.component_count,130);
 });
 test('changed complete candidate is refused',()=>{const s=clone();s.candidate_source_native_bindings[0].original_candidate_feature.geometry.coordinates[0][1][0]+=0.01;assert.equal(premise(s).source_compatible,false);});
-test('missing mapped-land pointset is refused',()=>{const s=clone();s.original_physical_comparison_bindings[0].physical_comparison.row.complete_support.mapped_land_support.geometry={type:'Polygon',coordinates:[]};assert.equal(premise(s).source_compatible,false);});
+test('missing mapped-land pointset is refused',()=>{const s=clone();s.original_physical_comparison_bindings[0].physical_comparison.row.complete_support.mapped_land_support.geometry={type:'Polygon',coordinates:[]};assert.throws(()=>premise(s),/Missing footprint rings/);});
 test('positive mapped-water support is refused',()=>{const s=clone();const r=s.original_physical_comparison_bindings[0].physical_comparison.row;r.complete_support.mapped_inland_water_support=structuredClone(r.complete_support.mapped_land_support);assert.equal(premise(s).source_compatible,false);});
 test('wrong original native record hash is refused',()=>{const s=clone();s.original_physical_comparison_bindings[0].original_queried_source_metadata[0].original_source_record_metadata.record_sha256='0'.repeat(64);assert.equal(premise(s).source_compatible,false);});
 test('missing full query is refused',()=>{const s=clone();s.original_physical_comparison_bindings[0].physical_comparison.row.query_relations=[];assert.equal(premise(s).source_compatible,false);});
