@@ -8,7 +8,7 @@ import {ImmutableReader} from '../scripts/check-effective-geographic-regression.
 import {prepareCurrentRebindDestination,writeCurrentRebindProducts,boundedCurrentRebindProductBytes} from '../coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs';
 import {valueBytes,admitCurrentRebindOutputFrame,retainCurrentRebindPhasePeak} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 const root=path.resolve(fileURLToPath(new URL('../',import.meta.url))),MiB=1048576;
-const reader=()=>new ImmutableReader(root,'a'.repeat(40),{runtimeBytes:11,executionBytes:13,metadataBytes:17,outputBytes:4*MiB});
+const reader=()=>new ImmutableReader(root,'a'.repeat(40),{runtimeBytes:11,executionBytes:13,metadataBytes:17,outputBytes:4*MiB,allowance:{phaseBytes:256*MiB,rssBytes:1024*MiB}});
 function fixture(t){
  const cache=path.join(root,'.cache');fs.mkdirSync(cache,{recursive:true});
  const dir=fs.mkdtempSync(path.join(cache,'rebind-output-control-'));t.after(()=>fs.rmSync(dir,{recursive:true}));
@@ -24,7 +24,7 @@ test('complete output frame charges seven representations before production',()=
   assert.equal(r.outputBytes,7*output);assert.equal(r.metadataBytes,17);
   assert.throws(()=>admitCurrentRebindOutputFrame(reader(),{output_bytes:output,complete_phase_bytes:expected-1}),/before products/);
  }
- for(const output of [0,-1,1.5,8*MiB+1])assert.throws(()=>admitCurrentRebindOutputFrame(reader(),{output_bytes:output,complete_phase_bytes:256*MiB}),/Bounded/);
+ for(const output of [0,-1,1.5,Infinity,Number.MAX_SAFE_INTEGER])assert.throws(()=>admitCurrentRebindOutputFrame(reader(),{output_bytes:output,complete_phase_bytes:256*MiB}),/Bounded/);
  const r=reader();r.metadataBytes=256*MiB-7*8*MiB;
  assert.throws(()=>admitCurrentRebindOutputFrame(r,{output_bytes:8*MiB,complete_phase_bytes:256*MiB}),/complete phase/);
 });

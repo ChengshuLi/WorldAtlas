@@ -5,9 +5,9 @@ import fs from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
-import {ImmutableReader, SelectedGeometrySources, NativeAssetImage, selectedBaseAssetAlias, selectedGeometrySourceAlias} from '../../../scripts/check-effective-geographic-regression.mjs';
+import {processingAllowance, ImmutableReader, SelectedGeometrySources, NativeAssetImage, selectedBaseAssetAlias, selectedGeometrySourceAlias} from '../../../scripts/check-effective-geographic-regression.mjs';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
-const FILE=33554432, PHASE=268435456, SLOT=512;
+const FILE=33554432, SLOT=512;
 const certificates=new WeakMap(), originalAuthorities=new WeakMap(), selectedAdditions=new WeakMap();
 // Original accepted source/native programs. Case rosters are not policy IDs.
 // Changing a complete program requires ordinary trusted-code/rule review.
@@ -32,7 +32,7 @@ export function validateSupportedProgrammeCatalogue(catalogue) {
  demand(catalogue&&Object.keys(catalogue).sort().join(',')==='current_rebind_migrations,kind,programs,version'
   &&catalogue.version===1&&catalogue.kind==='trusted-source-native-programmes-v1'
   &&Array.isArray(catalogue.programs)&&catalogue.programs.length>0&&catalogue.programs.length<=512
-  &&Array.isArray(catalogue.current_rebind_migrations)&&catalogue.current_rebind_migrations.length<=2,'Malformed trusted programme catalogue');
+  &&Array.isArray(catalogue.current_rebind_migrations)&&catalogue.current_rebind_migrations.length<=512,'Malformed trusted programme catalogue');
  const vector=rows=>{demand(Array.isArray(rows)&&rows.length>0&&rows.length<=28&&new Set(rows.map(p=>p?.path)).size===rows.length,'Incomplete/duplicate programme code vector');
   for(const p of rows)demand(p&&Object.keys(p).sort().join(',')==='bytes,path,sha256'&&typeof p.path==='string'&&!p.path.includes('\\')&&!p.path.split('/').some(s=>!s||s==='.'||s==='..')&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=FILE&&hash(p.sha256),'Malformed programme code descriptor');};
  const keys=new Set();
@@ -60,11 +60,11 @@ export function readSupportedProgrammeCatalogue(reader) {
  const version=execFileSync(reader.gitExecutable,['-c','core.hooksPath=/dev/null','-C',moduleRoot,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
  demand(/^[a-f0-9]{40}$/.test(version),'Missing executing trusted policy checkout');
  const modulePin=reader.descriptor(PROGRAMME_MODULE,version);
- demand(reader.used+2*modulePin.bytes<=PHASE,'Policy helper identity scratch exceeds complete phase');reader.used+=modulePin.bytes;
+ demand(reader.used+2*modulePin.bytes<=reader.phaseLimit,'Policy helper identity scratch exceeds complete phase');reader.used+=modulePin.bytes;
  const moduleBody=fs.readFileSync(fileURLToPath(import.meta.url));
  demand(moduleBody.length===modulePin.bytes&&sha(moduleBody)===sha(reader.read(PROGRAMME_MODULE,{version})),'Executing policy helper differs from trusted checkout');
  const descriptor=reader.descriptor(PROGRAMME_CATALOGUE,version);
- demand(descriptor.mode==='100644'&&descriptor.bytes<=1048576&&reader.used+3*descriptor.bytes<=PHASE,'Trusted policy body exceeds complete phase');
+ demand(descriptor.mode==='100644'&&descriptor.bytes<=1048576&&reader.used+3*descriptor.bytes<=reader.phaseLimit,'Trusted policy body exceeds complete phase');
  // Whole bytes plus parsed/canonical scratch are charged before parsing. The
  // local full catalogue does not escape the calling authority frame.
  reader.used+=2*descriptor.bytes;
@@ -83,7 +83,7 @@ export function matchSupportedProgramme(catalogue,{preimageVersion,sourceProfile
 export function readSupportedProgrammeAuthority(reader,request) {
  const policy=readSupportedProgrammeCatalogue(reader),supported=matchSupportedProgramme(policy.catalogue,request);
  const authority={accepted_head:supported.accepted_head,independent_review_comment:supported.independent_review_comment,catalogue:policy.pin};
- const carry=2*valueBytes(authority).length;demand(reader.used+carry<=PHASE,'Programme authority carry exceeds complete phase');
+ const carry=2*valueBytes(authority).length;demand(reader.used+carry<=reader.phaseLimit,'Programme authority carry exceeds complete phase');
  reader.metadataBytes+=carry;reader.used+=carry;return authority;
 }
 
@@ -225,7 +225,7 @@ export function sealColdCoordinateCertificate(certificate,product) {
  demand(proof.accepted&&valueSha(product.publication)===proof.accepted.publication_sha256&&valueSha(product.facts)===proof.accepted.facts_sha256&&product.encoded_sha256===proof.accepted.encoded_sha256&&product.decoded_sha256===proof.accepted.decoded_sha256,'Persisted custody differs from privately accepted whole product');
  demand(valueSha(certificate)===product.decoded_sha256&&same(product.publication.certificate,{path:'certificate.json.gz',bytes:product.publication.certificate.bytes,sha256:product.encoded_sha256,decoded_bytes:product.publication.certificate.decoded_bytes,decoded_sha256:product.decoded_sha256})&&valueSha(product.facts)===product.publication.facts.sha256,'Validated persisted cold product changed');
  const inventory=[...proof.resolver.reader.inventory.values()],completePhaseBytes=proof.resolver.reader.used;
- demand(Array.isArray(inventory)&&Number.isSafeInteger(completePhaseBytes)&&completePhaseBytes>0&&completePhaseBytes<=PHASE,'Missing complete persisted cold acquisition custody');
+ demand(Array.isArray(inventory)&&Number.isSafeInteger(completePhaseBytes)&&completePhaseBytes>0&&completePhaseBytes<=proof.resolver.reader.phaseLimit,'Missing complete persisted cold acquisition custody');
  const receipt=JSON.parse(valueBytes({version:1,kind:'privately-validated-persisted-coordinate-receipt-v1',binding:certificate.binding,publication:product.publication,facts:product.facts,inventory,complete_phase_bytes:completePhaseBytes,effective_additions:proof.resolver.snapshot.additive?.normalized_rows??[]}));
  demand(valueBytes(receipt).length<=FILE,'Complete persisted cold custody exceeds member bound');
  freeze(receipt);coldReceipts.set(receipt,{decoded_sha256:product.decoded_sha256,encoded_sha256:product.encoded_sha256});
@@ -294,7 +294,7 @@ function originalSourceAliases(reader, request, aliases) {
   const actual=reader.descriptor(q.path,q.commit);
   demand(actual.mode===q.mode&&actual.git_blob_oid===(q.git_blob_oid??q.blob)&&actual.bytes===q.bytes,'Completed alias actual Git identity differs');
   const decoded=p.uncompressed_bytes??0;
-  demand(Number.isSafeInteger(decoded)&&decoded>=0&&decoded<=FILE&&reader.used+2*decoded<=PHASE,'Completed alias decoder phase exceeds cap');reader.used+=2*decoded;
+  demand(Number.isSafeInteger(decoded)&&decoded>=0&&decoded<=FILE&&reader.used+2*decoded<=reader.phaseLimit,'Completed alias decoder phase exceeds cap');reader.used+=2*decoded;
   reader.admit(actual,decoded);const encoded=reader.read(q.path,{version:q.commit,expected:q.sha256,decoded});
   if(p.uncompressed_bytes!==undefined){demand(hash(p.uncompressed_sha256),'Missing completed decoded hash');const raw=gunzipSync(encoded,{maxOutputLength:decoded});demand(raw.length===decoded&&sha(raw)===p.uncompressed_sha256,'Completed alias decoded body differs');}
   byPath.set(p.path,q);
@@ -372,7 +372,7 @@ function originalAdministrativeBaseline(reader, issued, request, native) {
   demand(actual.mode===p.mode&&actual.git_blob_oid===(p.git_blob_oid??p.blob)&&actual.bytes===p.bytes,'Original selector/source-map Git identity differs');
   // Whole encoded input and parsed/canonical scratch stay charged in this
   // existing phase; no reset or release of the retained authority graph.
-  const retained=3*p.bytes;demand(Number.isSafeInteger(retained)&&reader.used+retained<=PHASE,'Original baseline retained phase exceeds cap');
+  const retained=3*p.bytes;demand(Number.isSafeInteger(retained)&&reader.used+retained<=reader.phaseLimit,'Original baseline retained phase exceeds cap');
   reader.metadataBytes+=retained;reader.used+=retained;reader.admit(actual);
   return JSON.parse(reader.read(p.path,{version:p.commit,expected:p.sha256}));};
  for(const baseline of [issued.baseline,request.baseline])demand(baseline?.version===2
@@ -410,7 +410,7 @@ export function qualifyOriginalSourceAuthority(custody) {
  const retained=pins.reduce((n,p)=>n+2*(p.bytes+(p.uncompressed_bytes??0)),0);
  demand(Number.isSafeInteger(retained)&&retained<=FILE,'Qualified proof retained metadata cap');reader.metadataBytes+=retained;
  // Retain and charge the prior six whole bodies: no phase reset while live.
- demand(reader.used+retained<=PHASE,'Complete original source proof phase exceeds cap');reader.used+=retained;
+ demand(reader.used+retained<=reader.phaseLimit,'Complete original source proof phase exceeds cap');reader.used+=retained;
  const admitted=pins.map(p=>{let version=p.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
   const actual=reader.descriptor(p.path,version);demand(actual.mode===p.mode&&actual.git_blob_oid===(p.git_blob_oid??p.blob)&&actual.bytes===p.bytes,'Qualified original proof mode/OID differs');reader.admit(actual,p.uncompressed_bytes??0);return {p,version};});
  const raw=admitted.map(({p,version})=>{const encoded=reader.read(p.path,{version,expected:p.sha256,decoded:p.uncompressed_bytes??0});if(p.uncompressed_bytes===undefined)return encoded;
@@ -445,7 +445,7 @@ export function qualifyOriginalNativeAuthority(custody, pins) {
  // Each string's six bytes per UTF-16 unit bounds JSON escaping and UTF-8;
  // the doubled graph bound includes its retained object representation.
  const measurementScratch=1024*1024;
- demand(reader.used+measurementScratch<=PHASE,'Native carry measurement scratch exceeds phase');
+ demand(reader.used+measurementScratch<=reader.phaseLimit,'Native carry measurement scratch exceeds phase');
  const carryBytes=value=>{
   const ancestors=new WeakSet();let objects=0,total=0;
   const add=n=>{total+=n;demand(Number.isSafeInteger(total)&&total<=FILE,'Native carry graph exceeds bounded metadata member');};
@@ -477,7 +477,7 @@ export function qualifyOriginalNativeAuthority(custody, pins) {
   // An inverse-only gzip needs one extra decoded-size buffer for gunzip's
   // chunks/concatenation; its raw bytes never escape this finished frame.
   const scratch=parse?4*(q.decoded_bytes??q.bytes):(q.decoded_bytes??0);
-  demand(Number.isSafeInteger(scratch)&&reader.used+scratch<=PHASE,'Complete native decoder/parsed scratch exceeds prospective cap');reader.used+=scratch;
+  demand(Number.isSafeInteger(scratch)&&reader.used+scratch<=reader.phaseLimit,'Complete native decoder/parsed scratch exceeds prospective cap');reader.used+=scratch;
   reader.admit(actual,q.decoded_bytes??0);maxPhase=Math.max(maxPhase,reader.used);
   const encoded=reader.read(q.path,{version,expected:q.sha256,decoded:q.decoded_bytes??0});
   let raw=encoded;
@@ -792,7 +792,7 @@ export function currentRebindAcquisitionIdentity(acquisition) {
  })};
 }
 
-export function verifyCurrentRebindProducts({certificate,request,facts,publication,operating,result,baseSelection,registry,originalRows,originalPatches,size,expectedCode,bodyPins,acquired,executionCustody}) {
+export function verifyCurrentRebindProducts({certificate,request,facts,publication,operating,result,baseSelection,registry,originalRows,originalPatches,size,expectedCode,bodyPins,acquired,executionCustody,currentPhaseLimit=processingAllowance().phaseBytes}) {
  for(const [name,body]of Object.entries({request,facts,publication,operating,result}))demand(body&&bodyPins[name]?.sha256===valueSha(body)&&bodyPins[name]?.bytes===valueBytes(body).length,'Whole canonical rebind product bytes differ: '+name);
  rebindKeys(certificate,'version,kind,execution_commit,base_selection,authority_registry_sha256,request,facts,publication,operating,result','Foreign current rebind certificate');
  demand(certificate.version===1&&/^[a-f0-9]{40}$/.test(certificate.execution_commit)&&certificate.execution_commit===request.execution_commit&&certificate.kind==='qualified-native-additive-current-bank-rebind-v1'&&same(certificate.base_selection,baseSelection)&&certificate.authority_registry_sha256===valueSha(registry),'Stale current rebind certificate');
@@ -804,7 +804,7 @@ export function verifyCurrentRebindProducts({certificate,request,facts,publicati
  demand(acquired&&same(acquired.base_selection,baseSelection)&&same(acquired.current_targets,request.current_targets)&&same(acquired.current_rows,request.current_rows),'Current operands differ from independently acquired selected bodies');
  rebindKeys(request.acquisition,'version,kind,target_sources,source_inputs,native_inputs,predecessor_proof,predecessor_rows,manifest_sha256','Incomplete current rebind acquisition custody');
  demand(request.acquisition.version===1&&request.acquisition.kind==='complete-selected-rebind-inputs-v1'&&same(currentRebindAcquisitionIdentity(request.acquisition),currentRebindAcquisitionIdentity(acquired.acquisition)),'Issued acquisition is not the complete independently consumed source/native roster');
- demand(Array.isArray(acquired.acquisition_phases)&&acquired.acquisition_phases.length>0&&acquired.acquisition_phases.every(p=>Number.isSafeInteger(p.complete_phase_bytes)&&p.complete_phase_bytes>0&&p.complete_phase_bytes<=PHASE&&Number.isSafeInteger(p.descriptors)&&p.descriptors>0&&p.descriptors<=request.limits.descriptors),'Independent acquisition exceeds consumer bounds');
+ demand(Array.isArray(acquired.acquisition_phases)&&acquired.acquisition_phases.length>0&&acquired.acquisition_phases.every(p=>Number.isSafeInteger(p.complete_phase_bytes)&&p.complete_phase_bytes>0&&p.complete_phase_bytes<=currentPhaseLimit&&Number.isSafeInteger(p.descriptors)&&p.descriptors>0&&p.descriptors<=request.limits.descriptors),'Independent acquisition exceeds consumer bounds');
  const expected=currentRebindResult({baseSelection,registry,originalRows,originalPatches,currentTargets:request.current_targets,currentRows:request.current_rows,size});
  demand(same(result,expected),'Complete current rebind result/inverse differs');
  rebindKeys(facts,'version,kind,execution_commit,request_sha256,result_sha256,complete_phase_bytes,descriptors,acquisition_sha256,acquisition_phases','Foreign rebind facts');
@@ -861,7 +861,7 @@ export function reclaimCompletedRebindFrame() {
 // here before constructing/hashing any final product. Seven bytes per admitted
 // UTF-8 byte is a conservative logical representation reserve, not measured RSS.
 export function admitCurrentRebindOutputFrame(reader,limits){
- demand(reader instanceof ImmutableReader&&limits&&Number.isSafeInteger(limits.output_bytes)&&limits.output_bytes>0&&limits.output_bytes<=8388608&&Number.isSafeInteger(limits.complete_phase_bytes)&&limits.complete_phase_bytes>0&&limits.complete_phase_bytes<=PHASE,'Bounded complete product output frame required');
+ demand(reader instanceof ImmutableReader&&limits&&Number.isSafeInteger(limits.output_bytes)&&limits.output_bytes>0&&Number.isSafeInteger(7*limits.output_bytes)&&Number.isSafeInteger(limits.complete_phase_bytes)&&limits.complete_phase_bytes>0&&limits.complete_phase_bytes<=reader.phaseLimit,'Bounded complete product output frame required');
  reader.outputBytes=7*limits.output_bytes;reader.phase();
  demand(reader.used<=limits.complete_phase_bytes,'Complete retained product serialization frame exceeds issued child bound before products');
  return reader.used;
@@ -869,7 +869,7 @@ export function admitCurrentRebindOutputFrame(reader,limits){
 export function acquireCurrentRebindOperands(snapshot,registry,originalRows,originalPatches,{targetSources,predecessorProof=null,carriedMetadataBytes=0,outputLimits=null}={}) {
  demand(snapshot?.reader instanceof ImmutableReader,'Require actual current selected reader');
  const resolver=currentRebindSourceView(snapshot),reader=snapshot.reader;
- demand(Number.isSafeInteger(carriedMetadataBytes)&&carriedMetadataBytes>=0&&carriedMetadataBytes<=PHASE,'Incomplete retained rebind reader metadata');
+ demand(Number.isSafeInteger(carriedMetadataBytes)&&carriedMetadataBytes>=0&&carriedMetadataBytes<=reader.phaseLimit,'Incomplete retained rebind reader metadata');
  // The private snapshot authenticates the selected base and optional additive
  // hook. Acquisition reads only its base manifest/source roster, never a delta.
  const baseSelection=nativeBaseSelection(snapshot.selection);
@@ -908,7 +908,7 @@ export function acquireCurrentRebindOperands(snapshot,registry,originalRows,orig
  const manifest=snapshot.manifest,root=snapshot.selection.manifest_path.slice(0,snapshot.selection.manifest_path.lastIndexOf('/')+1),image=snapshot.image;
  const load=pin=>{
   const name=root+pin.path,ordinary=reader.git('ls-tree','-z',reader.version,'--',name).length>0;
-  const representations=pin.decoded_bytes*(ordinary?2:3);demand(reader.used+representations<=PHASE,'Current complete native representations exceed prospective bound');reader.used+=representations;
+  const representations=pin.decoded_bytes*(ordinary?2:3);demand(reader.used+representations<=reader.phaseLimit,'Current complete native representations exceed prospective bound');reader.used+=representations;
   if(!nativeInputs.some(p=>p.logical_path===name)){
    let custody;if(ordinary)custody={kind:'ordinary-native-body',pin:{...bodyIdentity(reader.descriptor(name)),sha256:pin.sha256}};
    else{demand(image instanceof NativeAssetImage,'Missing genuine selected native transport');const member=image.index.files.find(p=>p.path===pin.path);demand(member,'Missing complete native member');custody={kind:'selected-native-transport',index:manifest.native_asset_transport.index,member,fragments:image.index.parts.filter(p=>p.offset<member.offset+member.bytes&&member.offset<p.offset+p.decoded_bytes).map(p=>({...p,pin:bodyIdentity(reader.descriptor(image.directory+'/'+p.path))}))};}
@@ -936,7 +936,7 @@ export function acquireCurrentRebindOperands(snapshot,registry,originalRows,orig
    demand(runs.length===table[y*2+1],'Incomplete current containing word inverse');return {y,runs};});
  };
  for(const group of groups.values()){begin(table.byteLength+2*valueBytes(currentRows).length);
-  const rowReserve=group.rows.reduce((n,{y})=>n+table[y*2+1]*24+64,0);demand(reader.used+rowReserve<=PHASE,'Current complete row output exceeds phase');reader.used+=rowReserve;
+  const rowReserve=group.rows.reduce((n,{y})=>n+table[y*2+1]*24+64,0);demand(reader.used+rowReserve<=reader.phaseLimit,'Current complete row output exceeds phase');reader.used+=rowReserve;
   const rows=groupFrame(group);currentRows.push(...rows);phases.push({kind:'complete-current-native-window-group',rows:group.rows.map(row=>row.y),parts:group.parts.map(pin=>pin.path),complete_phase_bytes:reader.used,descriptors:reader.charged.size});
   reclaimCompletedRebindFrame();
  }
@@ -991,11 +991,27 @@ export function retainCurrentRebindPhasePeak(reader,priorPhaseBytes,outputPhaseB
  reader.used=Math.max(priorPhaseBytes,outputPhaseBytes,reader.used,...acquisitionPhases.map(p=>p.complete_phase_bytes));
  return reader.used;
 }
+// Serialization scratch belongs to this call. Keep reader.used's measured
+// peak for custody, but do not charge completed serialization to later phases.
+export function withCurrentRebindOutputReserve(reader,run) {
+ const outputBytes=reader.outputBytes;
+ try{return run();}finally{reader.outputBytes=outputBytes;}
+}
+// Replaying an authenticated receipt consumes current resources. Its historical
+// producer grant remains evidence to verify, never authority for this allocation.
+export function currentRebindReadbackLimits(reader,roster) {
+ demand(reader instanceof ImmutableReader,'Require actual current readback reader');
+ const products=roster.filter(({name})=>['request','facts','result','publication'].includes(name));
+ demand(products.length===4&&new Set(products.map(p=>p.name)).size===4,'Incomplete current readback products');
+ const output_bytes=products.reduce((n,{p})=>{demand(Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=FILE,'Invalid whole readback product');return n+p.bytes;},0);
+ return {output_bytes,complete_phase_bytes:reader.phaseLimit};
+}
 export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,originalRows,originalPatches,size,snapshot,carriedMetadataBytes=0}) {
+ return withCurrentRebindOutputReserve(reader,()=>{
  demand(reader instanceof ImmutableReader,'Require actual immutable custody reader');
  demand(snapshot?.reader===reader,'Current rebind custody requires the actual privately authenticated selected snapshot');
- demand(Number.isSafeInteger(carriedMetadataBytes)&&carriedMetadataBytes>=0&&carriedMetadataBytes<=PHASE,'Untyped retained rebind metadata');
- rebindKeys(pin,'commit,path,mode,git_blob_oid,bytes,sha256','Foreign ordinary current rebind pin');pinCheck(pin);demand(pin.decoded_bytes===undefined&&reader.used+2*pin.bytes<=PHASE,'Whole current rebind certificate exceeds prospective bound');reader.used+=2*pin.bytes;
+ demand(Number.isSafeInteger(carriedMetadataBytes)&&carriedMetadataBytes>=0&&carriedMetadataBytes<=reader.phaseLimit,'Untyped retained rebind metadata');
+ rebindKeys(pin,'commit,path,mode,git_blob_oid,bytes,sha256','Foreign ordinary current rebind pin');pinCheck(pin);demand(pin.decoded_bytes===undefined&&reader.used+2*pin.bytes<=reader.phaseLimit,'Whole current rebind certificate exceeds prospective bound');reader.used+=2*pin.bytes;
  const descriptor=reader.descriptor(pin.path,pin.commit);demand(descriptor.mode===pin.mode&&descriptor.git_blob_oid===pin.git_blob_oid&&descriptor.bytes===pin.bytes,'Whole rebind certificate identity differs');
  const certificate=reader.json(pin.path,{version:pin.commit,expected:pin.sha256});
  demand(Object.keys(certificate).sort().join(',')==='authority_registry_sha256,base_selection,execution_commit,facts,kind,operating,publication,request,result,version','Foreign current rebind certificate roster');
@@ -1003,7 +1019,7 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
  const roster=names.map(name=>{const p=certificate[name];pinCheck(p);demand(p.decoded_bytes===undefined,'Current rebind products require ordinary whole JSON');return {name,p};});
  const earlyRoster=roster.filter(({name})=>name!=='result');
  const metadata=earlyRoster.reduce((n,{p})=>n+2*p.bytes,0)+2*pin.bytes;
- demand(reader.used+metadata<=PHASE,'Complete current rebind custody admission before body opens');reader.used+=metadata;
+ demand(reader.used+metadata<=reader.phaseLimit,'Complete current rebind custody admission before body opens');reader.used+=metadata;
  for(const {name,p}of roster){const actual=reader.descriptor(p.path,p.commit);demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'Whole rebind product mode/OID/length differs');if(name!=='result')reader.admit(actual);}
  demand(/^[a-f0-9]{40}$/.test(certificate.execution_commit),'Missing actual rebind execution identity');
  const code=CURRENT_REBIND_CODE.map(path=>reader.descriptor(path));
@@ -1021,7 +1037,7 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
  for(const {p}of externalRoster){pinCheck(p);demand(p.decoded_bytes===undefined,'External execution whole ordinary custody required');}
  const externalCaps={code_source:1048576,terminal:131072,stderr:40960,stdout:8192,issued_plan:1048576};
  for(const {name,p}of externalRoster)demand(p.bytes<=externalCaps[name],'External metadata/log cap before read');
- const externalBytes=externalRoster.reduce((n,{p})=>n+2*p.bytes,0);demand(reader.used+externalBytes<=PHASE,'Complete external execution custody before opens');reader.used+=externalBytes;
+ const externalBytes=externalRoster.reduce((n,{p})=>n+2*p.bytes,0);demand(reader.used+externalBytes<=reader.phaseLimit,'Complete external execution custody before opens');reader.used+=externalBytes;
  for(const {p}of externalRoster){const actual=reader.descriptor(p.path,p.commit);demand(actual.mode===p.mode&&actual.git_blob_oid===p.git_blob_oid&&actual.bytes===p.bytes,'External execution ordinary identity differs');reader.admit(actual);}
  const executionCustody=Object.fromEntries(externalRoster.map(({name,p})=>[name,reader.read(p.path,{version:p.commit,expected:p.sha256})]));
  verifyCurrentRebindExecution({request:bodies.request,operating:bodies.operating,expectedCode,custody:{...executionCustody,result_sha256:roster.find(p=>p.name==='result').p.sha256}});
@@ -1038,7 +1054,7 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
  // Only these issued acquisition locators are needed during current word reads;
  // whole request/result bodies are reopened at their identical immutable pins
  // after the completed window frame, for the unchanged complete verifier.
- const acquisitionSpec={targetSources:bodies.request.acquisition?.target_sources,predecessorProof:bodies.request.acquisition?.predecessor_proof,outputLimits:bodies.request.limits};
+ const acquisitionSpec={targetSources:bodies.request.acquisition?.target_sources,predecessorProof:bodies.request.acquisition?.predecessor_proof,outputLimits:currentRebindReadbackLimits(reader,roster)};
  bodies.request=null;
  reclaimCompletedRebindFrame();
  const priorPhaseBytes=reader.used;
@@ -1055,15 +1071,16 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
   const {p}=roster.find(row=>row.name===name);
   // Encoded bytes plus parsed/canonical/expected-result scratch are reserved
   // before reads; completed-window words are no longer live in this phase.
-  demand(reader.used+4*p.bytes<=PHASE,'Complete reopened rebind product exceeds phase');reader.used+=3*p.bytes;
+  demand(reader.used+4*p.bytes<=reader.phaseLimit,'Complete reopened rebind product exceeds phase');reader.used+=3*p.bytes;
   bodies[name]=JSON.parse(reader.read(p.path,{version:p.commit,expected:p.sha256}));
  }
  const identityScratch=2*(valueBytes(bodies.request.acquisition.native_inputs).length+valueBytes(acquired.acquisition.native_inputs).length);
- demand(Number.isSafeInteger(identityScratch)&&identityScratch<=FILE&&reader.used+identityScratch<=PHASE,'Complete native identity comparison scratch exceeds phase');reader.used+=identityScratch;
- const result=verifyCurrentRebindProducts({certificate,...bodies,baseSelection,registry,originalRows,originalPatches,size,expectedCode,acquired,executionCustody,bodyPins:Object.fromEntries(roster.map(({name,p})=>[name,p]))});
+ demand(Number.isSafeInteger(identityScratch)&&identityScratch<=FILE&&reader.used+identityScratch<=reader.phaseLimit,'Complete native identity comparison scratch exceeds phase');reader.used+=identityScratch;
+ const result=verifyCurrentRebindProducts({certificate,...bodies,baseSelection,registry,originalRows,originalPatches,size,expectedCode,acquired,executionCustody,currentPhaseLimit:reader.phaseLimit,bodyPins:Object.fromEntries(roster.map(({name,p})=>[name,p]))});
  // A sequential phase must never hide an earlier complete acquisition peak.
  retainCurrentRebindPhasePeak(reader,priorPhaseBytes,outputPhaseBytes,acquired.acquisition_phases);
  return result;
+ });
 }
 
 // Explicit committed data-only hook. This does not discover proposal files.
@@ -1083,7 +1100,7 @@ export function readSelectedAdditive(snapshot) {
  };
  demand(Object.keys(sidecar.logical_asset_map).sort().join(',')==='base_manifest,ledger,owner_roster,patch','Incomplete/foreign logical additive asset map');
  const roster=[{p:sidecar.runtime_envelope},{p:sidecar.authority_registry},...Object.entries(sidecar.logical_asset_map).map(([role,p])=>({p,...(['base_manifest','owner_roster'].includes(role)?(selectedBaseAssetAlias(snapshot,role,p),{alias:true,role}):{})}))];
- const metadata=roster.reduce((n,{p,alias})=>n+2*(p.bytes+(alias?0:(p.decoded_bytes??0))),0);demand(Number.isSafeInteger(metadata)&&metadata<=PHASE&&reader.used+metadata<=PHASE,'Complete selected additive metadata admission before reads');reader.used+=metadata;
+ const metadata=roster.reduce((n,{p,alias})=>n+2*(p.bytes+(alias?0:(p.decoded_bytes??0))),0);demand(Number.isSafeInteger(metadata)&&metadata<=reader.phaseLimit&&reader.used+metadata<=reader.phaseLimit,'Complete selected additive metadata admission before reads');reader.used+=metadata;
  const admitted=roster.map(whole);
  // Every ordinary encoded alias is whole authenticated here; only privately
  // accepted base graphs skip duplicate decoded acquisition. Retain ledger/patch.
@@ -1111,7 +1128,7 @@ export function readSelectedAdditive(snapshot) {
   // the current acquisition's complete input charges are still resident.
   resolver=new SelectedGeometrySources(snapshot);snapshot.geometrySources=resolver;
   const retainedSourceMetadata=valueBytes({...(resolver.bank?{bank:resolver.bank}:{}),sources:resolver.sources,release:resolver.release}).length;
-  demand(reader.used+retainedSourceMetadata<=PHASE,'Complete selected source metadata exceeds acquisition phase');
+  demand(reader.used+retainedSourceMetadata<=reader.phaseLimit,'Complete selected source metadata exceeds acquisition phase');
   reader.used+=retainedSourceMetadata;reader.metadataBytes+=retainedSourceMetadata;snapshot.metadataBytes+=retainedSourceMetadata;
  }
  demand(envelope.base_reference.id===selection.release_id&&envelope.base_reference.footprints_sha256===resolver.release.footprints_sha256,'Additive effective baseline differs from actual selected source bank');
@@ -1121,7 +1138,7 @@ export function readSelectedAdditive(snapshot) {
   demand(entry.policy_id==='retained-source-literal-additions'&&entry.policy_version===1,'Unsupported source policy semantics/version');
   // Previous acquisition bodies have been discarded. Only the complete selected
   // metadata/proof views are live across genuine detached authority phases.
-  const child=new ImmutableReader(reader.repo,reader.version,{runtimeBytes:reader.runtimeBytes,executionBytes:reader.executionBytes,outputBytes:4*1024*1024,metadataBytes:reader.metadataBytes+retained,gitExecutable:reader.gitExecutable});
+  const child=new ImmutableReader(reader.repo,reader.version,{runtimeBytes:reader.runtimeBytes,executionBytes:reader.executionBytes,outputBytes:4*1024*1024,metadataBytes:reader.metadataBytes+retained,gitExecutable:reader.gitExecutable,allowance:reader.allowance});
   const proof=readRetainedRegistryAuthority(child,entry);
   demand(valueBytes(proof).length<=child.outputBytes,'Complete detached authority view exceeds prospective output reserve');
   for(const row of normalized.rows.values())if(row.authority_sha256===entry.authority_sha256){
