@@ -212,7 +212,7 @@ def main():
               'limits': ['Original consumed AUS2022 simplified source-relative numerical screen only; complete physical/query custody remains separately required.',
                          'No current legal/physical truth or source observation-date approval.',
                          'Literal target-plus-full-candidate representation preserves coordinates; diagnostic dissolve is separately reported.',
-                         'All19 original Norway candidates remain accounted, including failed numerical outcomes. No physical acceptance is inferred.',
+                         'All 19 original Australian candidates remain accounted, including failed numerical outcomes. No physical acceptance is inferred.',
                          'Independent source review and subsequent engineering SOURCE/NATIVE/selected delivery remain required.']}
     if result['peak_rss_bytes'] > 512 * 1024 ** 2:
         raise ValueError('Scientific process reservation exceeded')
