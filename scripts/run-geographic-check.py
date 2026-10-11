@@ -10,6 +10,61 @@ import re
 import subprocess
 import tempfile
 import gzip
+import time
+import signal
+import sys
+from contextlib import contextmanager
+
+@contextmanager
+def stage_timing(name):
+    started = time.monotonic()
+    try:
+        yield
+    finally:
+        print(json.dumps({'geography_stage': name, 'elapsed_ms': round((time.monotonic() - started) * 1000)}), file=sys.stderr, flush=True)
+
+
+def prefetch_declared_inputs(repo, baseline, candidate, timeout=120):
+    # Optional transport preparation only. The original checker still consumes
+    # every required input and establishes all scientific/identity guarantees.
+    env = dict(os.environ)
+    for name in ['NODE_OPTIONS', 'NODE_PATH']:
+        env.pop(name, None)
+    try:
+        if os.name != 'posix':
+            raise ValueError('Prefetch requires owned process-group cleanup')
+        child = subprocess.Popen([env.get('NODE', 'node'), str(repo / 'scripts/geography-prefetch.mjs'),
+                                  str(repo), baseline, candidate], env=env, stdout=subprocess.PIPE,
+                                 stderr=subprocess.PIPE, start_new_session=True)
+        try:
+            stdout, _ = child.communicate(timeout=timeout)
+        finally:
+            # Kill the owned group even if Node exited after a Git failure. A
+            # launcher timeout must not leave a Git descendant writing while
+            # the ordinary checker resumes. Failure to reap blocks continuation.
+            try:
+                os.killpg(child.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+            except OSError as error:
+                raise RuntimeError('Cannot terminate owned prefetch process group') from error
+            try:
+                child.communicate(timeout=5)
+            except subprocess.TimeoutExpired as error:
+                raise RuntimeError('Prefetch process group did not terminate') from error
+        if len(stdout) > 1024 * 1024:
+            raise ValueError('Prefetch summary exceeds bound')
+        summary = json.loads(stdout)
+        if not isinstance(summary, dict) or summary.get('complete_scientific_closure') is not False:
+            raise ValueError('Prefetch cannot assert scientific closure')
+        if child.returncode != 0:
+            summary['status'] = 'scoped-prefetch-unavailable'
+            summary['partial_import_possible'] = True
+        print(json.dumps({'geography_prefetch': summary}), file=sys.stderr, flush=True)
+    except (subprocess.TimeoutExpired, OSError, ValueError):
+        print(json.dumps({'geography_prefetch': {'status': 'scoped-prefetch-unavailable',
+              'complete_scientific_closure': False, 'partial_import_possible': True}}), file=sys.stderr, flush=True)
+
 
 MAX_BYTES = 32 * 1024 * 1024
 TRUSTED_PATHS = ['scripts/run-geographic-check.py', 'scripts/check-geographic-regression.py',
@@ -847,7 +902,8 @@ def programme_registry_transition(repo, baseline, candidate):
 def inspect(repo, baseline, candidate):
     immutable_sha(baseline)
     immutable_sha(candidate)
-    trusted_inventory = verify_trusted_checkout(repo, baseline)
+    with stage_timing('trusted-checkout-inspect'):
+        trusted_inventory = verify_trusted_checkout(repo, baseline)
     before, after = inventory(repo, baseline), inventory(repo, candidate)
     report = {'version': 1, 'method_id': 'worldatlas-trusted-geography-check-v1',
               'baseline_commit': baseline, 'candidate_commit': candidate,
@@ -877,9 +933,10 @@ def inspect(repo, baseline, candidate):
         env = dict(os.environ)
         for name in ['NODE_OPTIONS', 'NODE_PATH']:
             env.pop(name, None)
-        native_raw = subprocess.check_output([
-            os.environ.get('NODE', 'node'), str(repo / 'scripts/check-effective-geographic-regression.mjs'),
-            str(repo), baseline, candidate, sys.executable], stderr=subprocess.PIPE, env=env)
+        with stage_timing('selected-native'):
+            native_raw = subprocess.check_output([
+                os.environ.get('NODE', 'node'), str(repo / 'scripts/check-effective-geographic-regression.mjs'),
+                str(repo), baseline, candidate, sys.executable], stderr=subprocess.PIPE, env=env)
         if len(native_raw) > MAX_BYTES:
             raise ValueError('Selected native report exceeds bounded output')
         native = json.loads(native_raw)
@@ -894,7 +951,8 @@ def inspect(repo, baseline, candidate):
     detector = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(detector)
     if selected:
-        continuous = selected_continuous(repo, baseline, candidate, detector)
+        with stage_timing('selected-continuous'):
+            continuous = selected_continuous(repo, baseline, candidate, detector)
         report['selected_continuous_report'] = continuous
         if continuous.get('regressions') not in [None, 0] or str(continuous.get('status', '')).startswith('blocked-'):
             return {**report, 'status': continuous['status'], 'regressions': continuous['regressions'],
@@ -905,7 +963,8 @@ def inspect(repo, baseline, candidate):
                 'limits': ['Live geography input blobs are unchanged; this is applicability evidence, not fresh polygon validation or a global gap clearance.']}
     # Import only after verifying the checked-out implementation against trusted
     # baseline bytes. Candidate scripts, hooks and reproduction commands never run.
-    result = detector.inspect(repo, baseline, candidate)
+    with stage_timing('raw-polygon'):
+        result = detector.inspect(repo, baseline, candidate)
     return {**report, 'status': result['status'], 'regressions': result['regressions'],
             'differential_report': result,
             'limits': ['No automatic repair. Water-loss acceptance requires retained original physical sources, full-shape support and separate exact-head independent review.',
@@ -979,9 +1038,13 @@ def main():
     if not args.out.absolute().parent.is_dir():
         raise ValueError('Report parent must be an existing ordinary directory')
     repo = args.repo.resolve()
-    verify_trusted_checkout(repo, args.baseline)
+    with stage_timing('trusted-checkout-initial'):
+        verify_trusted_checkout(repo, args.baseline)
     if args.fetch:
-        fetch_candidate(repo, args.candidate)
+        with stage_timing('candidate-fetch'):
+            fetch_candidate(repo, args.candidate)
+        with stage_timing('selected-prefetch'):
+            prefetch_declared_inputs(repo, args.baseline, args.candidate)
     result = apply_adjudications(repo, args.candidate, inspect(repo, args.baseline, args.candidate))
     passed = result['status'] in ['not-applicable', 'no-footprint-change', 'no-new-regression'] or (
         result.get('adjudication', {}).get('status') == 'all-findings-supported-and-reviewed')

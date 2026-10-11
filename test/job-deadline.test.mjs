@@ -427,3 +427,10 @@ test('a failed or cancelled worker without final receipt wakes only ordinary bou
     assert.equal(x.posted[2].inputs.queue_attempt, '2');
   }
 });
+
+
+test('scheduler pending metadata remains a single-read refusal with no queue work', async () => {
+  const x = await execute({editJobs: jobs => ({...jobs, jobs: [{...jobs.jobs[0], status: 'queued'}]})});
+  assert.equal(x.result.failed, true);assert.equal(x.calls.length, 1);
+  assert.deepEqual(x.waits, []);assert.deepEqual(x.posted, []);
+});
