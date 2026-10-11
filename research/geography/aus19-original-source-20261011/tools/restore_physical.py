@@ -44,7 +44,13 @@ def main():
  else:
   rows=[json.loads(l) for l in read(PRE+name,entry['delivered'],True).splitlines()];ids=[r['component_id'] for r in rows]
   if ids!=sorted(set(ids)) or not set(want).issubset(ids):raise ValueError('Wrong original partition')
-  needed=set(ids);features={};index=json.loads(read(CINDEX));selected={r['candidate_custody']['path'] for r in roster['members'] if r['component_id'] in want};allaliases=sorted([a for a in index['aliases'] if '/components-v3/components-' in a['original']['path']],key=lambda a:a['original']['path']);aliases=[a for a in allaliases if a['payload'] in selected]
+  needed=set(ids)
+  delta_pin=next(p for p in report['input_receipts'] if p['kind']=='components_delta')
+  delta=json.loads(read(delta_pin['path'],delta_pin,True))
+  if delta['current_count']!=report['component_count'] or set(delta['removed_ids'])&needed:raise ValueError('Original successor closure mismatch')
+  upserts=delta['upsert_records']
+  if len({f['id'] for f in upserts})!=len(upserts):raise ValueError('Duplicate original successor identity')
+  features={f['id']:f for f in upserts if f['id'] in needed};index=json.loads(read(CINDEX));selected={r['candidate_custody']['path'] for r in roster['members'] if r['component_id'] in want};allaliases=sorted([a for a in index['aliases'] if '/components-v3/components-' in a['original']['path']],key=lambda a:a['original']['path']);aliases=[a for a in allaliases if a['payload'] in selected]
   # Neighbor products are admitted only if this full original physical shard crosses a boundary.
   loaded=set();queue=list(aliases)
   while queue and set(features)!=needed:
