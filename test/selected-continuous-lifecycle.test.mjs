@@ -8,6 +8,7 @@ import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync} from 'node:zlib';
 import {ImmutableReader,NativeAssetImage,loadSelection,inspectSelected,compareIntervals,compareRepairLedgers,readArtifactConsumption,validateReleaseCatalogue,validateArtifactSourceMetadata,loadNativeRowTable,acquireNativeRows,validateNativeRowCarry} from '../scripts/check-effective-geographic-regression.mjs';
 import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
+import {assembleSupportedActivation} from '../coordination/engineering/additive-native-activation-20261009/assemble-supported-activation.mjs';
 import {valueBytes,valueSha,readOriginalRuleAuthority,selectedCoordinateShard,joinSelectedCoordinateCertificate,acceptColdCoordinateCertificate,selectedAffectedPlan,possibleNeighbors,compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const sha=b=>createHash('sha256').update(b).digest('hex'),root=process.cwd();
@@ -218,5 +219,37 @@ test('immutable additive selector only disables the shortcut and malformed hooks
   const r=spawnSync(process.execPath,[path.join(f.repo,P+'selected-continuous-entry.mjs'),'continuous',f.repo,before,before,after,path.join(f.repo,'malformed-additive')],{encoding:'utf8'});
   assert.notEqual(r.status,0);assert.match(r.stderr,/Unsupported committed additive hook/);assert.equal(r.stdout,'');
   assert.doesNotMatch(r.stderr,/shortcut-baseline-selection/);assert.match(r.stderr,/coordinate-selection/);
+ }finally{f.cleanup();}
+});
+
+test('selected assembly reuses its privately authenticated source view without duplicate acquisition',()=>{
+ const f=fixture();try{
+  const {rect,install}=sourceSides(f),selected=install(rect(0,1),rect(2,3),'assembly-source-alias');
+  const reader=new native.ImmutableReader(f.repo,selected),snapshot=native.loadSelection(reader);
+  const before={used:reader.used,metadataBytes:reader.metadataBytes,inventory:[...reader.inventory]};
+  const read=reader.read;reader.read=()=>assert.fail('Duplicate selected source acquisition');
+  try{
+   assert.equal(helper.currentRebindSourceView(snapshot),snapshot.geometrySources);
+   // The authentic four-cell fixture must reach the unchanged Arctic-only
+   // guard. It is not a production activation or a fabricated large snapshot.
+   assert.throws(()=>assembleSupportedActivation({snapshot,
+    baseAssets:{base_manifest:{},owner_roster:{}},logicalPaths:{ledger:'ledger.json',patch:'patch.json'}}),
+   /Require actual selected Arctic successor/);
+   assert.deepEqual({used:reader.used,metadataBytes:reader.metadataBytes,inventory:[...reader.inventory]},before);
+  }finally{reader.read=read;}
+ }finally{f.cleanup();}
+});
+
+test('selected assembly refuses an unauthenticated snapshot before any source acquisition',()=>{
+ const f=fixture();try{
+  const {rect,install}=sourceSides(f),selected=install(rect(0,1),rect(2,3),'assembly-source-forgery');
+  const reader=new native.ImmutableReader(f.repo,selected),snapshot=native.loadSelection(reader);
+  const read=reader.read;reader.read=()=>assert.fail('Unauthenticated source acquisition');
+  try{
+   for(const forged of [{...snapshot},{...snapshot,geometrySources:{...snapshot.geometrySources}}])
+    assert.throws(()=>assembleSupportedActivation({snapshot:forged,
+     baseAssets:{base_manifest:{},owner_roster:{}},logicalPaths:{ledger:'ledger.json',patch:'patch.json'}}),
+    /Require unchanged privately authenticated selected base/);
+  }finally{reader.read=read;}
  }finally{f.cleanup();}
 });
