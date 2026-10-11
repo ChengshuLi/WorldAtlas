@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "kind": "combined-cod-phl-selected-delivery-evidence",
+  "build_execution_commit": "54ad492561eda5569ee24f60f31214cd223a9a64",
+  "selected_assets_commit": "007fd02906bfcebd96fb5cfb39417f78a3013aa8",
+  "scientific_method_17_sha256": "11e87081dadfd65b1b397aad5e53ba913e6db61a2de2cc536901148584298aec",
+  "prior_authorities": 26,
+  "authorities": 30,
+  "prior_original_rows": 44,
+  "original_rows": 55,
+  "active_components": 47,
+  "assigned_components": 37,
+  "zero_cell_components": 10,
+  "inactive_original_rows": 8,
+  "prior_native_cells": 353,
+  "new_native_cells": 653,
+  "cumulative_native_cells": 1006,
+  "new_components": 11,
+  "source_native": {
+    "COD": {
+      "components": 2,
+      "native_cells": 653,
+      "source_seconds": 25.525,
+      "native_seconds": 27.189,
+      "outputs_commit": "89a0bcb0c4c5e03108904724456cf3cde2c2a208"
+    },
+    "PHL": {
+      "components": 9,
+      "native_cells": 0,
+      "expected_id_phase_sizes": [
+        4,
+        2,
+        3
+      ],
+      "source_seconds": [
+        27.05,
+        27.369,
+        26.639
+      ],
+      "native_seconds": [
+        29.352,
+        29.372,
+        29.266
+      ],
+      "outputs_commit": "7efbb48e220e4cb7a6da11b74ff95e1044d1821b"
+    }
+  },
+  "current_rebind": {
+    "execution_commit": "17b80a99f11193b2aa23c85c3d6e84f8183801ce",
+    "runs": 1,
+    "qualified": true,
+    "seconds": 57.821403919,
+    "logical_bytes": 235676090,
+    "lifetime_rss_bytes": 353402880,
+    "sampled_rss_bytes": 357097472
+  },
+  "assembly": {
+    "execution_commit": "3436d678cef0ee6c5456780c357e9ae35bea6617",
+    "qualified": true,
+    "seconds": 30.062,
+    "logical_bytes": 253546417,
+    "measured_process_bytes": 402456576
+  },
+  "package": {
+    "qualified": true,
+    "seconds": 249.22,
+    "maximum_rss_kib": 2665676,
+    "features": 49625,
+    "emitted_readback_seconds": 5.12,
+    "consumer_seconds": 5.82,
+    "cells_checked": 1006,
+    "active_primitives_checked": 47,
+    "stable_owner_controls": 287
+  },
+  "original_accounting": {
+    "COD": {
+      "selected_candidates": 2,
+      "original_batch_size": 130,
+      "original_batch_id": "fd46e2f61cf28daed6ad024b"
+    },
+    "PHL": {
+      "selected_candidates": 9,
+      "original_batch_size": 318
+    },
+    "new_complete_original_batches_claimed": 0
+  },
+  "retained_refusals": [
+    "SOURCE001 refused an absent immutable corpus transport; exact body imported, SOURCE002 genuinely succeeded.",
+    "PHL SOURCE001/002/003 refused stale canonical origin/main ancestry; normal metadata refresh and fresh004/005/006 succeeded.",
+    "First package attempt refused a sparse missing static import before build; the exact existing package declaration was materialized from warm objects before successful build."
+  ],
+  "limits": [
+    "Hosted trusted native/continuous and actual GPU/Canvas gates, exact-head review and serialized merge remain required.",
+    "Source-era, rights and physical authority limits remain those of accepted source packets.",
+    "Zero native cells preserve exact continuous primitives; they do not demonstrate new visible native pixels.",
+    "The two COD candidates and nine PHL candidates do not complete their original130/318 batches.",
+    "No deployment is performed."
+  ],
+  "ci_route": {
+    "expected": "full",
+    "reason": "New exact native ownership-run .bin.gz operands are required by genuine issued requests and fall outside the current selected-data filename allowlist. Executed pins are preserved."
+  }
+}
