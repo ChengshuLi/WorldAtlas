@@ -45,6 +45,8 @@ jobs:
       base: ${{ steps.prepare.outputs.base }}
       profile: ${{ steps.prepare.outputs.profile }}
       shards: ${{ steps.prepare.outputs.shards }}
+      test_selection: ${{ steps.prepare.outputs.test_selection }}
+      expectations_path: ${{ steps.prepare.outputs.expectations_path }}
       proof_attempt: ${{ steps.prepare.outputs.proof_attempt }}
       proof_run: ${{ steps.prepare.outputs.proof_run }}
       geography_proof: ${{ steps.prepare.outputs.geography_proof }}
@@ -177,10 +179,15 @@ jobs:
         env:
           INTEGRATION_PROFILE: ${{ needs.prepare.outputs.profile }}
           INTEGRATION_SHARD: ${{ matrix.shard }}
+          INTEGRATION_TEST_SELECTION: ${{ needs.prepare.outputs.test_selection }}
+          SELECTED_EXPECTATIONS_PATH: ${{ needs.prepare.outputs.expectations_path }}
         run: |
-          if node --input-type=module -e "import {integrationNeedsBrowser} from './scripts/run-integration-tests.mjs'; process.exit(integrationNeedsBrowser(process.env.INTEGRATION_PROFILE, Number(process.env.INTEGRATION_SHARD)) ? 0 : 1)"; then
+          if node --input-type=module -e "import {integrationNeedsBrowser} from './scripts/run-integration-tests.mjs'; process.exit(integrationNeedsBrowser(process.env.INTEGRATION_PROFILE, Number(process.env.INTEGRATION_SHARD), process.env.INTEGRATION_TEST_SELECTION || 'complete') ? 0 : 1)"; then
             npx playwright install --with-deps chromium
           fi
+      - name: Verify selected-data package controls
+        if: needs.prepare.outputs.test_selection == 'selected-data'
+        run: node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs test/package-inputs.test.mjs test/package-build.test.mjs
       - name: Build the combined application once before asset-dependent tests
         if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0
         run: npm run build:cloudflare
@@ -211,13 +218,17 @@ jobs:
         env:
           INTEGRATION_PROFILE: ${{ needs.prepare.outputs.profile }}
           INTEGRATION_SHARD: ${{ matrix.shard }}
+          INTEGRATION_TEST_SELECTION: ${{ needs.prepare.outputs.test_selection }}
+          SELECTED_EXPECTATIONS_PATH: ${{ needs.prepare.outputs.expectations_path }}
         run: node scripts/run-integration-tests.mjs
       - name: Retain native built-output readback
         if: always() && needs.prepare.outputs.profile == 'full' && matrix.shard == 0
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: native-built-output-${{ inputs.request_id }}
-          path: .cache/native-normal-built-output.json
+          path: |
+            .cache/native-normal-built-output.json
+            .cache/selected-delivery-smoke.json
           include-hidden-files: true
           if-no-files-found: ignore
   merge:

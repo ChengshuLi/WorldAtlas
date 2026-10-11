@@ -541,3 +541,48 @@ dependency/build work. It never reports package success or a source-only skip.
 Unknown non-quota inventories retain the conservative full-build fallback.
 Concurrent read batches finish their existing bounded requests before receipts
 are finalized, so a fast rejection cannot hide other already-started attempts.
+
+
+### Exact-tree delivery CI reuse
+
+The existing integration proof can also carry the original successful trusted
+geography job's report. Preparation authenticates its run/attempt, unique producer
+steps, job-log report hash/size, artifact ID/name/digest and complete tested tree.
+The final gate revalidates these bindings and current geography adjudication before
+merging. Its receipt preserves the original report candidate and labels reuse;
+it does not claim that a skipped queue geography job ran successfully. An absent
+usable original report causes a fresh geography job. A pinned proof that changes
+before merge is refused.
+
+For unchanged-method selected deliveries, the setup profile remains `full` while
+`test_selection=selected-data` declares the narrower inventory. This option is
+ineligible until the generic selected-delivery smoke exists unchanged on trusted
+main. Only the additive selection changes; all existing method/base authority and
+registry entries remain intact. New files must be ordinary inert data/evidence in
+the worker's own delivery directory. The package definition may only append exact
+new data file entries reachable through the fixed selected-reader roles, preserving
+all existing entries, order and other policy fields. Supporting JSON/log evidence
+cannot create package/import authority. Unknown boundaries retain all three full
+regression shards.
+
+Each such delivery adds exactly one `selected-delivery-expectations.json` under its
+owned delivery directory. Use the existing smoke's version 1 schema, authored from
+reviewed original authority/ledger inputs. Eligibility binds its ledger hash,
+complete selected component roster (including zero-cell rows), targets, dispositions,
+geometries and cumulative native cells. Do not derive expectations from emitted
+assets. Missing or ambiguous expectations retain full regression. Batch labels
+remain reviewed source-side statements, not a new independent source approval.
+
+Selected PR validation uses the existing package job once: all four package
+controls, real build and qualified native output readback, then the generic emitted
+asset smoke and all 14 focused/parity/UI test files. Queue fallback uses the same
+full setup and package responsibilities on shard 0. Chromium, actual selected
+GPU/Canvas tests, source/geography/current-authority gates and zero skipped tests
+remain required. The runner reports setup profile and actual test selection
+separately. Proof reuse requires every actual package/consumer step to succeed;
+the intentionally omitted generic regression job is only accepted for this mode.
+Final-capacity planning measures the applicable selector inventory, including
+cold metadata reads, rather than assuming overlap with evidence or reserving a
+blanket worst-case count. Hosted applicability, automatic next-ticket advancement
+and elapsed savings must be recorded when observed, not inferred from local
+controls or added parallel job durations.

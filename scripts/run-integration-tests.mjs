@@ -2,6 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawn, spawnSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
+import {validateSelectedExpectations, SELECTED_SMOKE} from './integration-profile.mjs';
 import {compileHostedMigrations} from './compile-hosted-migrations.mjs';
 import {observeSetupPhase,measuredGitSetup} from './ci-setup-observations.mjs';
 
@@ -76,19 +78,21 @@ export function fullRegressionShard(inventory, shard) {
     ([COMPONENT_CONTROL_TEST, PRIORITY_EVIDENCE_TEST].includes(name) ? 1 : index % 3) === shard)];
 }
 
-export function integrationTestFiles(profile, shard) {
+export function integrationTestFiles(profile, shard, testSelection = 'complete') {
+  if (!['complete','selected-data'].includes(testSelection) ||
+      (testSelection === 'selected-data' && (profile !== 'full' || shard !== 0))) throw Error('Invalid trusted test selection');
   if (!['full','evidence'].includes(profile) || !Number.isInteger(shard) || shard < 0 || shard > 2 ||
       (profile === 'evidence' && shard !== 0)) throw Error('Invalid trusted integration test profile');
   const focused = ['handoff-scope','issue-claims','worker-result','regional-research-gate','geography-worker-lane',
     'evidence-quality','premerge-evidence','trusted-workflow-checkouts','merge-integration','merge-integration-client','merge-integration-entrypoint','integration-proof'];
   const inventory = fs.readdirSync('test').filter(name => name.endsWith('.test.mjs')).sort().map(name=>`test/${name}`);
-  const files = profile === 'full' ? fullRegressionShard(inventory, shard)
-    : focused.map(name => `test/${name}.test.mjs`);
+  const files = testSelection === 'selected-data' ? [...focused.map(name => `test/${name}.test.mjs`), ...PACKAGED_ASSET_TESTS]
+    : profile === 'full' ? fullRegressionShard(inventory, shard) : focused.map(name => `test/${name}.test.mjs`);
   if (!files.length || files.some(name => !fs.existsSync(name))) throw Error('Missing integration test inventory');
   return files;
 }
-export function integrationNeedsBrowser(profile, shard) {
-  return integrationTestFiles(profile, shard).some(name => /['"](?:@playwright\/test|playwright)['"]/.test(fs.readFileSync(name, 'utf8')));
+export function integrationNeedsBrowser(profile, shard, testSelection = 'complete') {
+  return integrationTestFiles(profile, shard, testSelection).some(name => /['"](?:@playwright\/test|playwright)['"]/.test(fs.readFileSync(name, 'utf8')));
 }
 export function prepareIntegrationTests(files) {
   if (files.some(name=>PACKAGED_ASSET_TESTS.includes(name)) && !fs.existsSync('dist/client/atlas-geography.json')) {
@@ -97,6 +101,34 @@ export function prepareIntegrationTests(files) {
   if (files.includes('test/stage-site-migrations.test.mjs')) {
     compileHostedMigrations({input:'drizzle', output:'dist/drizzle'});
   }
+}
+
+// Bind the reviewed source-side expectations before calling the actual generic
+// emitted-assets smoke. Missing selected/browser assets never become a skip.
+export async function selectedDeliverySmoke(expectationsPath) {
+  if (typeof expectationsPath !== 'string' || !/^coordination\/engineering\/[A-Za-z0-9_./-]+\/selected-delivery-expectations\.json$/.test(expectationsPath) ||
+      expectationsPath.split('/').some(part => !part || part.startsWith('.'))) throw Error('Missing reviewed selected expectations path');
+  const read = name => {
+    const stat = fs.lstatSync(name);
+    if (!stat.isFile() || stat.isSymbolicLink() || stat.size > 32 * 1024 * 1024) throw Error('Nonordinary selected data');
+    return fs.readFileSync(name);
+  };
+  const pinned = pin => {
+    if (!pin || typeof pin.path !== 'string' || pin.path.split('/').some(part => !part || part.startsWith('.')) || pin.path.includes('\\'))
+      throw Error('Invalid selected data pin');
+    const bytes = read(pin.path);
+    if (bytes.length !== pin.bytes || createHash('sha256').update(bytes).digest('hex') !== pin.sha256) throw Error('Selected data bytes differ');
+    return JSON.parse(bytes);
+  };
+  const selection = JSON.parse(read('data/ownership-selection.json'));
+  if (!selection.artifact_consumption || !selection.additive_release) throw Error('Missing actual selected artifact');
+  // Its successful readback was produced by the preceding mandatory build step.
+  read('.cache/native-normal-built-output.json');
+  const sidecar = pinned(selection.additive_release), ledgerPin = sidecar.logical_asset_map?.ledger;
+  validateSelectedExpectations(JSON.parse(read(expectationsPath)), pinned(ledgerPin), ledgerPin.sha256);
+  const {runSelectedDeliverySmoke} = await import('../' + SELECTED_SMOKE);
+  return runSelectedDeliverySmoke({root: process.cwd(), emittedDirectory: path.resolve('dist/client'),
+    expectationsPath, outputPath: path.resolve('.cache/selected-delivery-smoke.json')});
 }
 
 // Stream diagnostics immediately; retain only a bounded tail for the final TAP
@@ -164,7 +196,8 @@ export async function streamTestProcess(args, {env = process.env,
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const profile = process.env.INTEGRATION_PROFILE, shard = Number(process.env.INTEGRATION_SHARD);
-  const files = integrationTestFiles(profile, shard);
+  const testSelection = process.env.INTEGRATION_TEST_SELECTION || 'complete';
+  const files = integrationTestFiles(profile, shard, testSelection);
   const git=measuredGitSetup();
   const nativeInputs=await observeSetupPhase('immutable-regression-inputs',()=>prepareNativeRegressionInputs(profile,{run:git.run}),{counters:git.snapshot});
   console.log(JSON.stringify({native_inputs:nativeInputs}));
@@ -185,8 +218,10 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     }
   }
   prepareIntegrationTests(files);
-  console.log(JSON.stringify({profile, shard, files}));
+  if (testSelection === 'selected-data') console.log(JSON.stringify({selected_delivery_smoke:
+    await selectedDeliverySmoke(process.env.SELECTED_EXPECTATIONS_PATH)}));
+  console.log(JSON.stringify({profile, test_selection: testSelection, shard, files}));
   process.exitCode = await streamTestProcess(['--test','--test-reporter=tap','--test-concurrency=2', ...files], {
-    env:{...process.env,...(profile==='full' && shard===0?{ATLAS_REQUIRE_STATIC:'1'}:{})}
+    env:{...process.env,...(profile==='full' && shard===0?{ATLAS_REQUIRE_STATIC:'1', ...(testSelection === 'selected-data' ? {ATLAS_REQUIRE_PREPARED:'1'} : {})}:{})}
   });
 }

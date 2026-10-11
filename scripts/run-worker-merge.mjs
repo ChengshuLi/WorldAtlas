@@ -29,10 +29,10 @@ try {
   if (phase === 'prepare') {
     const state = await prepareIntegration(options);
     result = {...result, status: state.replayed ? 'already-merged' : 'testing',
-      tested_base: state.base, tested_candidate: state.candidate, reviewed_head: input.expected_head, profile: state.profile, proof: state.proof,
+      tested_base: state.base, tested_candidate: state.candidate, reviewed_head: input.expected_head, profile: state.profile, test_selection: state.test_selection ?? 'complete', expectations_path: state.expectations_path, proof: state.proof,
       geography_proof: state.geography_proof, candidate_refresh_attempts: state.candidate_refresh_attempts, candidate_ref: state.candidate_ref};
     // Only validated commit IDs and owned ref identifiers become job outputs.
-    fs.appendFileSync(process.env.GITHUB_OUTPUT, `candidate_ref=${state.candidate_ref ?? ''}\nproof_attempt=${state.proof?.run_attempt ?? ''}\nproof_run=${state.proof?.run_id ?? ''}\ncandidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\nprofile=${state.profile ?? 'evidence'}\nshards=${JSON.stringify(state.profile === 'full' ? [0,1,2] : [0])}\n`);
+    fs.appendFileSync(process.env.GITHUB_OUTPUT, `candidate_ref=${state.candidate_ref ?? ''}\nproof_attempt=${state.proof?.run_attempt ?? ''}\nproof_run=${state.proof?.run_id ?? ''}\ncandidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\nprofile=${state.profile ?? 'evidence'}\nshards=${JSON.stringify(state.shards ?? (state.profile === 'full' ? [0,1,2] : [0]))}\ntest_selection=${state.test_selection ?? 'complete'}\nexpectations_path=${state.expectations_path ?? ''}\n`);
     fs.appendFileSync(process.env.GITHUB_OUTPUT, `geography_proof=${state.geography_proof ? JSON.stringify(state.geography_proof) : ''}\n`);
   } else {
     const geographyProof = process.env.GEOGRAPHY_PROOF ? validateGeographyProof(JSON.parse(process.env.GEOGRAPHY_PROOF)) : null;

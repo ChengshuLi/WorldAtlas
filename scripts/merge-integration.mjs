@@ -1,5 +1,5 @@
 import {collectGeographicApproval, bindingHash} from './geographic-adjudication-api.mjs';
-import {integrationProfile} from './integration-profile.mjs';
+import {integrationProfile, selectedDataCandidate, selectedDataSelection} from './integration-profile.mjs';
 import {integrationProof} from './integration-proof.mjs';
 import {githubPages, linkedPulls, verifyClaimForPR, workSpec} from './issue-claim-contract.mjs';
 import {validateIssuePRBody, validateLanePaths} from './check-handoff-scope.mjs';
@@ -316,9 +316,16 @@ export async function prepareIntegration(options) {
     checkCandidateParents(integrated.object, fresh.base, state.pr.head.sha);
     checkReviewedTrees(state.files, authored.entries, integrated.entries);
     const profile = integrationProfile(state.pr.head.ref, state.files, state.reservation);
+    let baseline, selection = null;
+    if (profile === 'full' && selectedDataCandidate(state.pr.head.ref, state.files)) {
+      try {
+        baseline = await tree(options.api, options.repo, state.base);
+        selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files: state.files, baseline, authored});
+      } catch { /* Unknown applicability retains the complete suite. */ }
+    }
     let proof = null;
-    try { proof = await integrationProof({...options, head: state.pr.head.sha, profile,
-      baseline: await tree(options.api, options.repo, state.base), authored, candidate: integrated}); } catch { /* unavailable proof requires isolated tests */ }
+    try { proof = await integrationProof({...options, head: state.pr.head.sha, profile, testSelection: selection?.test_selection,
+      baseline: baseline ?? await tree(options.api, options.repo, state.base), authored, candidate: integrated}); } catch { /* unavailable proof requires isolated tests */ }
     let geographyProof = null;
     if (proof && options.geographyProofLoader) {
       try {
@@ -331,7 +338,7 @@ export async function prepareIntegration(options) {
         }
       } catch { /* A missing original report never discards valid regression proof or waives fresh geography. */ }
     }
-    return {...state, candidate, profile, proof, geography_proof: geographyProof,
+    return {...state, candidate, profile, ...selection, proof, geography_proof: geographyProof,
       candidate_refresh_attempts: fresh.attempts, candidate_ref: fresh.reference};
   } catch (error) {
     if (fresh.reference) {
@@ -359,7 +366,12 @@ export async function completeIntegration(options) {
   if (options.finalCapacity) {
     need(geographyReady, 'Trusted combined geography check missing, failed or cancelled; no merge performed');
     options = await beginFinalPlanning(options);
-    const paced = await paceFinalValidation(options, {inspect: inspectMerge, admission: options.finalAdmission});
+    const proofApplicabilityInventory = async ({api, state}) => {
+      if (!selectedDataCandidate(state.pr.head.ref, state.files)) return;
+      const [baseline, authored] = await Promise.all([tree(api, options.repo, state.base), tree(api, options.repo, state.pr.head.sha)]);
+      await selectedDataSelection({...options, api, branch: state.pr.head.ref, files: state.files, baseline, authored});
+    };
+    const paced = await paceFinalValidation({...options, proofApplicabilityInventory}, {inspect: inspectMerge, admission: options.finalAdmission});
     options = {...options, api: paced.api}; capacity = paced.receipt;
   }
   // Rejection-only fast path: known stale base/head cannot benefit from the
@@ -389,9 +401,11 @@ export async function completeIntegration(options) {
   checkReviewedTrees(state.files, authored.entries, candidate.entries);
   let proof = null;
   if (options.proofRunId) {
+    const baseline = await tree(options.api, options.repo, state.base);
+    const selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files: state.files, baseline, authored});
     proof = await integrationProof({...options, runId: options.proofRunId, runAttempt: options.proofRunAttempt, head: state.pr.head.sha,
       profile: integrationProfile(state.pr.head.ref, state.files, state.reservation),
-      baseline: await tree(options.api, options.repo, state.base), authored, candidate});
+      testSelection: selection?.test_selection, baseline, authored, candidate});
     need(proof, 'Trusted integration proof is no longer valid; resubmit unchanged head');
   }
   if (geographyProof) bindGeographyProof(geographyProof, {proof, number: options.number,

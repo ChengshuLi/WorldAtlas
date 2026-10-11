@@ -219,7 +219,7 @@ export async function paceFinalValidation(options, {inspect, admission = async (
   const admissionAPI = async (...args) => {admissionCalls++; return options.api(...args);};
   let receipt = {phase: 'final-capacity', reserved: false, ...(options.planningCapacity ? {planning: options.planningCapacity} : {})};
   try {
-    const proofInventory = async api => {
+    const proofInventory = async (api, state) => {
       if (!options.proofRunId) return;
       const run = await api(`/repos/${options.repo}/actions/runs/${options.proofRunId}`);
       // This pass budgets the proof inventory, not coverage. The later full
@@ -229,6 +229,9 @@ export async function paceFinalValidation(options, {inspect, admission = async (
         'Trusted proof changed before final evidence; resubmit unchanged head');
       await githubPages(async route => (await api(route)).jobs,
         `/repos/${options.repo}/actions/runs/${options.proofRunId}/attempts/${options.proofRunAttempt}/jobs`);
+      // Measure only the applicable selector reads; do not reserve a blanket
+      // worst-case inventory or assume every blob overlaps evidence transport.
+      if (options.proofApplicabilityInventory) await options.proofApplicabilityInventory({api, state});
     };
     let before;
     for (let planningAttempt = 1; planningAttempt <= 3; planningAttempt++) {
@@ -244,7 +247,7 @@ export async function paceFinalValidation(options, {inspect, admission = async (
         before = await inspect({...options, api: counted, evidenceCheck: inventoryFinalEvidence});
         if (before.replayed) return {api: options.capacityAPI ?? options.api, receipt: {...receipt, status: 'already-merged'}};
         need(before.base === options.testedBase, 'Main advanced before capacity wait; resubmit unchanged head');
-        await proofInventory(async (...args) => {proofCalls++; return options.api(...args);});
+        await proofInventory(async (...args) => {proofCalls++; return options.api(...args);}, before);
         need(Number.isSafeInteger(options.artifactRunId) && options.artifactRunId > 0,
           'Cannot bound final geographic artifact inventory');
         for (let page = 1, seen = 0; page <= 100; page++) {
@@ -298,7 +301,7 @@ export async function paceFinalValidation(options, {inspect, admission = async (
       after.pr.base.sha === before.pr.base.sha && after.issue.body === before.issue.body &&
       after.reservation.claim_id === before.reservation.claim_id && after.reservation.worker_id === before.reservation.worker_id,
       'Authority or tested base changed during capacity wait; resubmit unchanged head');
-    await proofInventory(api);
+    await proofInventory(api, after);
     return {api, receipt};
   } catch (error) {error.capacity = receipt; throw error;}
 }

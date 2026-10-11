@@ -25,7 +25,8 @@ export function successfulGeographyJob(jobs) {
 // immutable blobs to main and the entire tested tree to the candidate connects
 // GitHub's run metadata to the bytes actually executed, rather than treating a
 // PR merge-ref run's head_sha as evidence that it tested the authored head.
-export async function integrationProof({api, repo, number, head, profile, baseline, authored, candidate, runId, runAttempt}) {
+export async function integrationProof({api, repo, number, head, profile, testSelection = 'complete', baseline, authored, candidate, runId, runAttempt}) {
+  if (!['complete','selected-data'].includes(testSelection) || (testSelection === 'selected-data' && profile !== 'full')) return null;
   if (runId !== undefined && (!Number.isSafeInteger(runId) || runId < 1 ||
       !Number.isSafeInteger(runAttempt) || runAttempt < 1)) return null;
   if (runAttempt !== undefined && runId === undefined) return null;
@@ -52,15 +53,31 @@ export async function integrationProof({api, repo, number, head, profile, baseli
     // A PR-body edit can invalidate this run's evidence job after all code
     // checks finish. Current authority is checked independently by both merge
     // phases. Reuse only that narrow failure; other failed/skipped jobs do not
-    // become coverage, and the combined geography check still runs separately.
+    // become coverage. Geography is either checked fresh or revalidated from
+    // the authenticated original report on this exact tested tree.
     if (run.conclusion === 'failure' && (
       jobs.filter(job => job.name === 'evidence').length !== 1 ||
       !jobs.some(job => job.name === 'evidence' && job.conclusion === 'failure') ||
       !['scope', 'geography', 'package'].every(name => jobs.some(job => job.name === name)) ||
       jobs.some(job => job.status !== 'completed' ||
-        job.conclusion !== (job.name === 'evidence' ? 'failure' : 'success')))) continue;
-    const expected = profile === 'full' ? [0,1,2] : [0];
-    const regression = jobs.filter(job => /^regression \(\d\)$/.test(job.name));
+        job.conclusion !== (job.name === 'evidence' ? 'failure' :
+          testSelection === 'selected-data' && /^regression(?: \(\d\))?$/.test(job.name) ? 'skipped' : 'success')))) continue;
+    const expected = testSelection === 'selected-data' ? [] : profile === 'full' ? [0,1,2] : [0];
+    if (testSelection === 'selected-data') {
+      const skipped = jobs.filter(job => /^regression(?: \(\d\))?$/.test(job.name));
+      if (skipped.length !== 1 || skipped[0].status !== 'completed' || skipped[0].conclusion !== 'skipped') continue;
+      const packages = jobs.filter(job => job.name === 'package');
+      const required = ['Checkout complete package inputs', 'Install package Node dependencies', 'Install package Python dependencies',
+        'Verify package controls', 'Build and enforce archive/file reserves without publishing',
+        'Read back qualified native build outputs when selected', 'Install selected-data browser dependencies', 'Run selected-data consumer checks'];
+      if (packages.length !== 1 || packages[0].status !== 'completed' || packages[0].conclusion !== 'success' ||
+          !required.every(name => {
+            const steps = packages[0].steps?.filter(step => step.name === name) ?? [];
+            return steps.length === 1 && steps[0].status === 'completed' && steps[0].conclusion === 'success';
+          })) continue;
+    }
+    const regression = jobs.filter(job => /^regression \(\d\)$/.test(job.name) &&
+      !(testSelection === 'selected-data' && job.conclusion === 'skipped'));
     if (regression.length !== expected.length) continue;
     if (!expected.every(shard => {
       const job = regression.find(job => job.name === `regression (${shard})`);
@@ -73,6 +90,7 @@ export async function integrationProof({api, repo, number, head, profile, baseli
     if (selector?.conclusion !== 'success' || selector.status !== 'completed') continue;
     const geography = successfulGeographyJob(jobs);
     return {run_id: run.id, run_attempt: run.run_attempt, tree: authored.object.tree.sha, profile,
+      ...(testSelection === 'selected-data' ? {test_selection: testSelection} : {}),
       ...(geography ? {geography_job_id: geography.id} : {})};
   }
   return null;

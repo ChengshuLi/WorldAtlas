@@ -4,7 +4,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {githubAPI, githubPages, readClaim, verifyClaimForPR} from './issue-claim-contract.mjs';
 import {validateIssuePRBody} from './check-handoff-scope.mjs';
-import {integrationProfile} from './integration-profile.mjs';
+import {integrationProfile, selectedDataCandidate, selectedDataSelection} from './integration-profile.mjs';
 
 export async function selectIntegrationProfile({event, repo, api, now = Date.now()}) {
   const scheduled = event.pull_request;
@@ -23,7 +23,7 @@ export async function selectIntegrationProfile({event, repo, api, now = Date.now
     throw Error('Incomplete changed-path inventory');
   }
   let reservation = {};
-  if (pr.head.ref.startsWith('geography/')) {
+  if (pr.head.ref.startsWith('geography/') || selectedDataCandidate(pr.head.ref, files)) {
     const {github_issue} = validateIssuePRBody(pr.body ?? '');
     const [issue, comments] = await completeReads([
       api(`${prefix}/issues/${github_issue}`),
@@ -38,7 +38,9 @@ export async function selectIntegrationProfile({event, repo, api, now = Date.now
     reservation = verifyClaimForPR({branch: pr.head.ref, issue, comments, now});
   }
   const profile = integrationProfile(pr.head.ref, files, reservation);
-  return {profile, shards: profile === 'full' ? [0, 1, 2] : [0]};
+  const selection = profile === 'full' ? await selectedDataSelection({api, repo, branch: pr.head.ref, files,
+    base: pr.base.sha, head: pr.head.sha}) : null;
+  return {profile, shards: profile === 'full' ? [0, 1, 2] : [0], ...selection};
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
@@ -48,7 +50,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     const result = await selectIntegrationProfile({event, repo: process.env.GITHUB_REPOSITORY,
       api: githubAPI(process.env.GH_TOKEN,{onRequest:accounting.observe})});
     fs.appendFileSync(process.env.GITHUB_OUTPUT,
-      `profile=${result.profile}\nshards=${JSON.stringify(result.shards)}\n`);
+      `profile=${result.profile}\nshards=${JSON.stringify(result.shards)}\ntest_selection=${result.test_selection ?? 'complete'}\nexpectations_path=${result.expectations_path ?? ''}\n`);
     console.log(JSON.stringify({integration_profile: result.profile, shards: result.shards}));
   }catch(error){
     const delay=quotaDelay(error);
