@@ -173,11 +173,12 @@ function addTrustedProof(f, {evidenceFailed = false} = {}) {
     if(route.includes('/actions/workflows/')) return {workflow_runs:[run]};
     if(route.endsWith('/actions/runs/12')) return run;
     if(route.includes('/jobs')) return {jobs:[{name:'profile',status:'completed',conclusion:'success'},
+      {name:'package',status:'completed',conclusion:'success',steps:[{name:'Use full-regression package verification',status:'completed',conclusion:'success'}]},
       ...(evidenceFailed ? [{name:'evidence',status:'completed',conclusion:'failure'},
-        ...['scope','geography','package'].map(name=>({name,status:'completed',conclusion:'success'}))] : []),
+        ...['scope','geography'].map(name=>({name,status:'completed',conclusion:'success'}))] : []),
       ...[0,1,2].map(shard=>({name:`regression (${shard})`,status:'completed',conclusion:'success',
         steps:['Checkout reviewed head','Install Node dependencies','Install browser dependencies only for tests that use Playwright','Install Python dependencies','Complete regression shard',
-          ...(shard===0?['Build hosted assets']:[])].map(name=>({name,status:'completed',conclusion:'success'}))}))]};
+          ...(shard===0?['Build hosted assets','Verify full-regression package controls','Read back qualified native build outputs when selected','Verify full-regression package receipt','Retain full-regression package receipt']:[])].map(name=>({name,status:'completed',conclusion:'success'}))}))]};
     return original(route,method,body);
   };
   const options=f.options;f.options=()=>({...options(),api});

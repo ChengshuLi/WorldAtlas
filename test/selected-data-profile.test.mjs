@@ -186,7 +186,7 @@ function mergeFixture({capacity = 2000, afterWait} = {}) {
   Object.assign(f.pr,{draft:false,merged:false,title:'Synthetic selected delivery',mergeable:true,merge_commit_sha:candidate});
   for(const name of PROOF_PATHS)f.put(name,name===WORKFLOW_PATH?'ref: ${{ github.event.pull_request.head.sha }}\nname: Complete regression shard\nname: Build hosted assets':'// accepted '+name,true);
   const steps=['Checkout complete package inputs','Install package Node dependencies','Install package Python dependencies','Verify package controls',
-    'Build and enforce archive/file reserves without publishing','Read back qualified native build outputs when selected','Install selected-data browser dependencies','Run selected-data consumer checks'];
+    'Build Cloudflare package without publishing','Read back qualified native build outputs when selected','Install selected-data browser dependencies','Run selected-data consumer checks'];
   f.runRecord={id:44,run_attempt:1,head_sha:f.head,event:'pull_request',path:WORKFLOW_PATH,repository:{full_name:'owner/repo'},head_repository:{full_name:'owner/repo'},
     status:'completed',conclusion:'success',pull_requests:[{number:20,head:{sha:f.head}}]};
   f.jobs=[{name:'profile',status:'completed',conclusion:'success'},{name:'regression',status:'completed',conclusion:'skipped'},

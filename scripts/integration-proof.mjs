@@ -73,13 +73,19 @@ export async function integrationProof({api, repo, number, head, profile, testSe
       if (skipped.length !== 1 || skipped[0].status !== 'completed' || skipped[0].conclusion !== 'skipped') continue;
       const packages = jobs.filter(job => job.name === 'package');
       const required = ['Checkout complete package inputs', 'Install package Node dependencies', 'Install package Python dependencies',
-        'Verify package controls', 'Build and enforce archive/file reserves without publishing',
+        'Verify package controls', 'Build Cloudflare package without publishing',
         'Read back qualified native build outputs when selected', 'Install selected-data browser dependencies', 'Run selected-data consumer checks'];
       if (packages.length !== 1 || packages[0].status !== 'completed' || packages[0].conclusion !== 'success' ||
           !required.every(name => {
             const steps = packages[0].steps?.filter(step => step.name === name) ?? [];
             return steps.length === 1 && steps[0].status === 'completed' && steps[0].conclusion === 'success';
           })) continue;
+    }
+    if (profile === 'full' && testSelection === 'complete') {
+      const packages = jobs.filter(job => job.name === 'package');
+      const steps = packages[0]?.steps?.filter(step => step.name === 'Use full-regression package verification') ?? [];
+      if (packages.length !== 1 || packages[0].status !== 'completed' || packages[0].conclusion !== 'success' ||
+          steps.length !== 1 || steps[0].status !== 'completed' || steps[0].conclusion !== 'success') continue;
     }
     const regression = jobs.filter(job => /^regression \(\d\)$/.test(job.name) &&
       !(testSelection === 'selected-data' && job.conclusion === 'skipped'));
@@ -88,7 +94,12 @@ export async function integrationProof({api, repo, number, head, profile, testSe
       const job = regression.find(job => job.name === `regression (${shard})`);
       const required = ['Checkout reviewed head', 'Install browser dependencies only for tests that use Playwright', 'Complete regression shard',
         ...(profile === 'full' ? ['Install Node dependencies', 'Install Python dependencies', ...(shard === 0 ? ['Build hosted assets'] : [])] : [])];
-      return job?.status === 'completed' && job.conclusion === 'success' &&
+      const producerSteps = profile === 'full' && shard === 0 ? ['Verify full-regression package controls',
+        'Read back qualified native build outputs when selected', 'Verify full-regression package receipt', 'Retain full-regression package receipt'] : [];
+      return producerSteps.every(name => {
+        const steps = job?.steps?.filter(step => step.name === name) ?? [];
+        return steps.length === 1 && steps[0].status === 'completed' && steps[0].conclusion === 'success';
+      }) && job?.status === 'completed' && job.conclusion === 'success' &&
         required.every(name => job.steps?.some(step => step.name === name && step.status === 'completed' && step.conclusion === 'success'));
     })) continue;
     reason = 'profile-job-unavailable';
