@@ -51,3 +51,8 @@ Raw GNU time, terminal and full reader inventory are retained alongside this
 file. The 288,915,456-byte external lifetime RSS and successful bounded exit
 establish this reader boundary only. The current cohort's real rebind still
 belongs to #1647 after activation. Both earlier failed rebinds remain failures.
+
+The two `executed-reader-*` text files preserve the exact local validation
+entry and supervisor bodies, including their original cache-relative imports
+and output locations. They are immutable execution provenance, not a new
+production wrapper or a command to run directly from this evidence directory.
