@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "issue": 1734,
+  "lane": "engineering",
+  "worker_id": "01a12806-e666-7781-b612-e4af40560004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "fa64761e75d3edada70616b4d13f1310b8bcfc49",
+    "files": [
+      {
+        "path": "scripts/integration-profile.mjs",
+        "bytes": 35958,
+        "sha256": "f0e4391817b0fe0b7d3fa7babe147bdbcf74ecfa89c8d3bdaf4cdf018a449b6b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/selected-data-profile.test.mjs",
+        "bytes": 45476,
+        "sha256": "690c715bc3e12ceaecfcf3881f43439674c604ddb6f168e6e7770e4c5f93b5ae",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/selected-reader.json",
+        "bytes": 50613,
+        "sha256": "00b0c3d75447a83e5c0ba47bd58727473b963444abe0cd2d60aa16a59472bcb6",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "test/fixtures/selected-native-role-ci-1726.json",
+      "bytes": 187844,
+      "sha256": "2f3215499af29900699030be5db1fbd4ffa24bdfecdac8b02278a6da66e03dfb",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "qualified-selected-input-roles",
+      "kind": "code",
+      "description": "Conservative selected-data eligibility for exact qualified native operand roles, registered unchanged SOURCE custody and nonconsumed packet-root README. Native encoded payloads are hashed; shuffled and canonical-word decoded hashes remain distinct. Unchanged opaque SOURCE leaves use accepted metadata/restoration joins and exact ordinary Git identity; partial historical pins retain body reads. Explicit reused physical roles preserve whole_body_consumed=false and reject ambiguous or missing pins. Complete historical COD/PHL preparation declarations remain a full-profile negative. A separate prospective declaration-only fixture preserves its actual scientific bytes and retains outer and nested reader roles; this does not establish a historical or future minimal-package build. Real author and cold final-capacity controls retain full setup/build/readback/smoke/UI/geography and review. The explicit reused-role fixture is schema-only on retained UKR metadata, not genuine NOR adoption. No new science or hosted selected runtime saving is claimed.",
+      "software": "Node.js 24; Git",
+      "units": "exact immutable metadata, encoded bytes and real consumer entry assertions"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/selected-data-profile.test.mjs test/pr-gates.test.mjs"
+  ],
+  "metric_bindings": []
+}

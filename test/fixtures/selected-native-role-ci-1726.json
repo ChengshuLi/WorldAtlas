@@ -1,0 +1,973 @@
+{
+  "version": 1,
+  "basis": "Immutable PR1726 metadata with its test-only correction excluded from the candidate-like data delta; no new scientific result.",
+  "base": "01c5db7fecdffb58e59a57bf05b943c596656b72",
+  "head": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+  "branch": "engineering/congo-ago2018-delivery-20261011",
+  "snapshots": [
+    {
+      "commit": "01c5db7fecdffb58e59a57bf05b943c596656b72",
+      "path": "data/ownership-selection.json",
+      "mode": "100644",
+      "git_blob_oid": "74f276463c1100a32010a4794565f550dcd1eda7",
+      "bytes": 1623,
+      "sha256": "2b1a76c4acda2c6f349cb41a89ff761e900183f6861ee0f193efcab4877ded13",
+      "body": "{\n  \"artifact_consumption\": {\n    \"certificate\": {\n      \"bytes\": 68158,\n      \"mode\": \"100644\",\n      \"path\": \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/consumption-certificate.json\",\n      \"sha256\": \"26b505e3131a2513badc45d1552bcf603c24c565bdfb21b0f623fe4e6c7d4070\"\n    },\n    \"review\": {\n      \"bytes\": 7379,\n      \"mode\": \"100644\",\n      \"path\": \"coordination/engineering/additive-native-activation-20261009/independent-native-consumption-wrapper-self-pin-review.json\",\n      \"sha256\": \"87ab56e1354dd8a8fda532bfa008436abd35c6c506f0e0685eaa2f2f07f59a8a\"\n    }\n  },\n  \"manifest_path\": \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json\",\n  \"method\": \"native-linear-evenodd-first-owner-v1\",\n  \"release_id\": \"geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb\",\n  \"selected_geography\": {\n    \"version\": 1,\n    \"kind\": \"complete-world-index-with-exact-encoded-overrides\",\n    \"path\": \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json\",\n    \"bytes\": 14656,\n    \"sha256\": \"3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776\"\n  },\n  \"sha256\": \"d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba\",\n  \"version\": 1,\n  \"additive_release\": {\n    \"bytes\": 3594,\n    \"path\": \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-release-001/selection-sidecar.json\",\n    \"sha256\": \"a107af05497045bb9ee2cb25082ba6e224f46cc7446559c31c354ba7cf73c1b5\"\n  }\n}\n"
+    },
+    {
+      "commit": "01c5db7fecdffb58e59a57bf05b943c596656b72",
+      "path": ".github/package-inputs.json",
+      "mode": "100644",
+      "git_blob_oid": "8d25f4cba29675a5aa9404cd09c54432275c9036",
+      "bytes": 48639,
+      "sha256": "e362862aa6a02431dd3c35bbf4d20542803d24a46b2680d98356f4f20740909c",
+      "body": "{\n  \"version\": 1,\n  \"description\": \"One input boundary for package source images and CI applicability. Research enters only by explicit reviewed paths. Code contents are not frozen.\",\n  \"inputs\": [\n    \".github/package-inputs.json\",\n    \".openai/hosting.json\",\n    \"attribute-records.mjs\",\n    \"coordination/engineering/additive-native-activation-20261009/\",\n    \"coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs\",\n    \"coordination/engineering/additive-native-composition-20261009/execution-code-paths.json\",\n    \"coordination/engineering/additive-native-composition-20261009/execution-contract.py\",\n    \"coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py\",\n    \"coordination/engineering/additive-native-composition-20261009/mac-execution-runtime-original.json\",\n    \"coordination/engineering/additive-native-composition-20261009/owned-child-termination-original.py\",\n    \"coordination/engineering/additive-native-composition-20261009/owned-group-original.py\",\n    \"coordination/engineering/additive-native-composition-20261009/predecessor-native/selected-native-proof-original.json\",\n    \"coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs\",\n    \"coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/base-native-manifest.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/facts.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/features.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/inventory.jsonl.gz\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/ledger-batch.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/operating-receipt.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/owner-window.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/owners-batch.json.gz\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/patch-batch.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/publication.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/release-envelope.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/virtual-owner-window.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-request-v1-run1.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind.mjs\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_md.js\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_u64.js\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/package.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/sha2.js\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/utils.js\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/facts.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/inventory.jsonl.gz\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/operating-receipt.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/publication.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/source-premises-request-v1.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/actual-cold.operating.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/base-native-manifest.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/facts.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/feature.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/inventory.jsonl.gz\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/ledger-add031.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/owner-window.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/owners-add031.json.gz\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/patch-add031.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/publication.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/release-envelope.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-request-v3-run1.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/attempt-v3.operating.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/facts.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/inventory.jsonl.gz\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/publication.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/source-premises-request-v3.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-20261008/applicability-comment.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-20261008/delivery/execution/code-source.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-20261008/delivery/independent-disposition.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-20261008/delivery/original-source-custody-readback.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-20261008/evidence-quality.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-20261008/source-fit-seven-cases.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/application-geometry-producer.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/application-geometry-serialization.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-context.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-package-preflight.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/artifact-checkout-execution.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/changed-complete-context-rows.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/context-index-v9.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/context-stage-v9.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/geometry-manifest.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/install-v9-stage.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/migration-receipt.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/model-reader-call-boundary-controls.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-selection-receipt.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/phase-admission.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/pixel-audit-v9.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/predecessor-context-v9.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/prepare-model-reader-checkout.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/prior-numerical-inputs.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifact-association.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifact-consumer.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/release-product-inputs.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/release-v9/\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/retained-product-binding.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29.json.gz\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/startup-vintage.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/temporal-runtime-binding.mjs\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/byte-patch.mjs\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/context-record-alias.mjs\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/current-consumer-code/\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/native-producer.mjs\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/native-proposal.json\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/native-selection-receipt.json\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/prior-v1/\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/release-memberships/\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/whole-image.mjs\",\n    \"coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v3/candidates.json\",\n    \"coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/native-release-binding.json\",\n    \"coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/release-proof-v3/\",\n    \"coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/repaired-context-v2/\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/qualification/certificate.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/qualification/code-source.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/qualification/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/qualification/issued-plan.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/qualification/operating.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/qualification/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/qualification/request.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/qualification/result.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/qualification/stderr.log\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/qualification/stdout.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/qualification/terminal.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/release/envelope.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/release/ledger.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/release/patch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/release/selection-sidecar.json\",\n    \"coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/\",\n    \"coordination/engineering/native-grid-candidate-1010-20261005-local16/decoded-native-verification.json\",\n    \"coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz\",\n    \"coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/\",\n    \"coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/alaska-thirteen-preimage.json\",\n    \"coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/alaska-thirteen-source-custody.json\",\n    \"coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/pilot-add031-preimage.json\",\n    \"coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/pilot-add031-source-custody.json\",\n    \"coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs\",\n    \"coordination/engineering/subject-descriptor-decode-20261007/context-vintage-dispatch.mjs\",\n    \"coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/\",\n    \"data/administrative-sources.json\",\n    \"data/attribute-sources.json\",\n    \"data/border-parent-review.json\",\n    \"data/canonical-grid/\",\n    \"data/cliopatria/\",\n    \"data/coverage-classification/\",\n    \"data/coverage-report.json\",\n    \"data/dated-reference-names/\",\n    \"data/demographic-evidence/\",\n    \"data/deployment-package/\",\n    \"data/engineering/\",\n    \"data/examples.json\",\n    \"data/final-grid-rendering-review.json\",\n    \"data/final-grid-resolution-review.json.gz\",\n    \"data/framework-changes-0.json\",\n    \"data/framework-changes-1.json\",\n    \"data/framework-changes-2.json\",\n    \"data/framework-changes-3.json\",\n    \"data/framework-changes-4.json\",\n    \"data/framework-sources/\",\n    \"data/geographic-decision-migration.json.gz\",\n    \"data/geographic-decisions/\",\n    \"data/geographic-migration-archive.json.gz\",\n    \"data/geographic-migration-review.json\",\n    \"data/geographic-migration-review.json.gz\",\n    \"data/geographic-releases/\",\n    \"data/geographic-repair-evidence/\",\n    \"data/geographic-restoration-manifest.json\",\n    \"data/geographic-semantic-followup/\",\n    \"data/geography/\",\n    \"data/global-refinement-report.json\",\n    \"data/global-semantic-closure.json.gz\",\n    \"data/global-sources/\",\n    \"data/granularity-audit.json\",\n    \"data/granularity-report.json\",\n    \"data/granularity-review-evidence.json\",\n    \"data/granularity-review-evidence.json.gz\",\n    \"data/grid-resolution-review.json\",\n    \"data/hierarchy-report.json\",\n    \"data/hierarchy.json\",\n    \"data/hosted-catalog/\",\n    \"data/hosted-type-catalog.json\",\n    \"data/interrupted-preparation/\",\n    \"data/location-policy.json\",\n    \"data/macro-boundary-decisions.json\",\n    \"data/macro-boundary-migration.json.gz\",\n    \"data/macro-boundary-source-rivers.geojson.gz\",\n    \"data/macro-corrections.json\",\n    \"data/macro-foundation/\",\n    \"data/macro-improvements/\",\n    \"data/macro-review-evidence.json\",\n    \"data/namibia-source-quality-annotations.json\",\n    \"data/namibia-source-review.json.gz\",\n    \"data/native-context-migration/\",\n    \"data/native-ownership/\",\n    \"data/observation-registry-history/\",\n    \"data/ownership-history/\",\n    \"data/ownership-runtime/\",\n    \"data/ownership-selection.json\",\n    \"data/pixel-audit.json\",\n    \"data/population-ghsl/\",\n    \"data/prepared-evidence/\",\n    \"data/publication-geography-receipt.json\",\n    \"data/reference-attributes/\",\n    \"data/reference-hierarchy-corrections/\",\n    \"data/reference-migrations/\",\n    \"data/reference-polity-report.json\",\n    \"data/region-semantic-review.json\",\n    \"data/regional-membership-report.json\",\n    \"data/research-geography-gate.json\",\n    \"data/retained-geographic-sources/\",\n    \"data/reviewed-geography-restoration-proof.json\",\n    \"data/schema.sql\",\n    \"data/semantic-evidence/\",\n    \"data/semantic-report.json\",\n    \"data/semantic-sources.json\",\n    \"data/settlement-estimates.json\",\n    \"data/settlement-source-report.json\",\n    \"data/source-inventory.json\",\n    \"data/source-policy-corrections/\",\n    \"data/source-quality-reviews/\",\n    \"data/source-territory-splits.json.gz\",\n    \"data/sources.json\",\n    \"data/storage-checkpoints/\",\n    \"data/storage-migration/\",\n    \"data/temporal-examples.json\",\n    \"data/topography-reference/\",\n    \"data/topology-report.json\",\n    \"data/typed-entity-types-v1.json\",\n    \"data/typed-prepared-v1.json\",\n    \"data/validation/\",\n    \"data/vegetation-numerical-review/\",\n    \"data/world-index.json\",\n    \"data/world-review-locations-0.json.gz\",\n    \"data/world-review-locations-1.json.gz\",\n    \"data/world-review-locations-10.json.gz\",\n    \"data/world-review-locations-11.json.gz\",\n    \"data/world-review-locations-12.json.gz\",\n    \"data/world-review-locations-13.json.gz\",\n    \"data/world-review-locations-14.json.gz\",\n    \"data/world-review-locations-15.json.gz\",\n    \"data/world-review-locations-16.json.gz\",\n    \"data/world-review-locations-17.json.gz\",\n    \"data/world-review-locations-18.json.gz\",\n    \"data/world-review-locations-19.json.gz\",\n    \"data/world-review-locations-2.json.gz\",\n    \"data/world-review-locations-20.json.gz\",\n    \"data/world-review-locations-21.json.gz\",\n    \"data/world-review-locations-22.json.gz\",\n    \"data/world-review-locations-23.json.gz\",\n    \"data/world-review-locations-24.json.gz\",\n    \"data/world-review-locations-25.json.gz\",\n    \"data/world-review-locations-26.json.gz\",\n    \"data/world-review-locations-27.json.gz\",\n    \"data/world-review-locations-28.json.gz\",\n    \"data/world-review-locations-29.json.gz\",\n    \"data/world-review-locations-3.json.gz\",\n    \"data/world-review-locations-30.json.gz\",\n    \"data/world-review-locations-31.json.gz\",\n    \"data/world-review-locations-32.json.gz\",\n    \"data/world-review-locations-33.json.gz\",\n    \"data/world-review-locations-4.json.gz\",\n    \"data/world-review-locations-5.json.gz\",\n    \"data/world-review-locations-6.json.gz\",\n    \"data/world-review-locations-7.json.gz\",\n    \"data/world-review-locations-8.json.gz\",\n    \"data/world-review-locations-9.json.gz\",\n    \"data/world-review.json\",\n    \"database.mjs\",\n    \"derived.mjs\",\n    \"drizzle-source/\",\n    \"drizzle/\",\n    \"geographic-archive.mjs\",\n    \"hierarchy.mjs\",\n    \"hosted/\",\n    \"index.html\",\n    \"package-lock.json\",\n    \"package.json\",\n    \"prepared-evidence.mjs\",\n    \"public/\",\n    \"reference-archive.mjs\",\n    \"reference.mjs\",\n    \"requirements.txt\",\n    \"scripts/audit-grid-intervals.mjs\",\n    \"scripts/boundary-version-hash.py\",\n    \"scripts/build-cloudflare-inner.mjs\",\n    \"scripts/build-cloudflare.mjs\",\n    \"scripts/build-hosted-inner.mjs\",\n    \"scripts/build-hosted.mjs\",\n    \"scripts/build-static-inner.mjs\",\n    \"scripts/build-static.mjs\",\n    \"scripts/canonical-restoration.mjs\",\n    \"scripts/check-effective-geographic-regression.mjs\",\n    \"scripts/check-prepared.mjs\",\n    \"scripts/ci-setup-observations.mjs\",\n    \"scripts/compile-hosted-migrations.mjs\",\n    \"scripts/deployment-budget.mjs\",\n    \"scripts/evidence-quality.mjs\",\n    \"scripts/evidence/captured-byte-patch.mjs\",\n    \"scripts/evidence/restore-whole-image.mjs\",\n    \"scripts/local-workspace.mjs\",\n    \"scripts/native-ownership/chained-build-context.mjs\",\n    \"scripts/native-ownership/compact-context-inputs.mjs\",\n    \"scripts/native-ownership/compile-native-ownership.mjs\",\n    \"scripts/native-ownership/native-candidate-manifest.mjs\",\n    \"scripts/native-ownership/native-only-inputs.mjs\",\n    \"scripts/native-ownership/native-preparation-guards.mjs\",\n    \"scripts/native-ownership/read-pinned-build-file.mjs\",\n    \"scripts/native-ownership/require-verified-selection.mjs\",\n    \"scripts/native-ownership/validate-build-context-stage.mjs\",\n    \"scripts/native-ownership/validate-context-input-stage.mjs\",\n    \"scripts/native-ownership/validate-context-migration.mjs\",\n    \"scripts/native-ownership/verified-candidates.json\",\n    \"scripts/package-build.mjs\",\n    \"scripts/package-inputs.mjs\",\n    \"scripts/package-native-latitudes.mjs\",\n    \"scripts/package-ownership-history.mjs\",\n    \"scripts/package-reference-bundle.mjs\",\n    \"scripts/package-startup-ownership.mjs\",\n    \"scripts/prepare-evidence-bundle.mjs\",\n    \"scripts/prepare-geographic-release.mjs\",\n    \"scripts/read-geographic-release-manifest.mjs\",\n    \"scripts/read-prepared-evidence-bundle.mjs\",\n    \"scripts/rebind-coverage-manifest.mjs\",\n    \"scripts/select-build-ownership.mjs\",\n    \"scripts/worker-identity.mjs\",\n    \"src/\",\n    \"temporal.mjs\",\n    \"topology.mjs\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/qualification/certificate.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/qualification/code-source.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/qualification/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/qualification/issued-plan.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/qualification/operating.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/qualification/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/qualification/request.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/qualification/result.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/qualification/stderr.log\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/qualification/stdout.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/qualification/terminal.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/release/envelope.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/release/ledger.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/release/patch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/release/qualification.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/release/selection-sidecar.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/base-native-manifest.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/features.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/ledger-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/owners-batch.json.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/release-envelope.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/virtual-owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/base-native-manifest.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/features.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/ledger-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/owners-batch.json.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/release-envelope.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/virtual-owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/base-native-manifest.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/features.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/ledger-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/owners-batch.json.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/release-envelope.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/virtual-owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/base-native-manifest.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/features.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/ledger-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/owners-batch.json.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/release-envelope.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/virtual-owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/base-native-manifest.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/features.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/ledger-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/owners-batch.json.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/release-envelope.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/virtual-owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/048/authority-binding.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/048/original-rule-preimage.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/060/authority-binding.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/060/original-rule-preimage.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/065/authority-binding.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/065/original-rule-preimage.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/080/authority-binding.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/080/original-rule-preimage.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/084/authority-binding.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/084/original-rule-preimage.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/authority-registry.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/composed-original-ledger.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/certificate.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/code-source.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/issued-plan.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/operating.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/request.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/result.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/stderr.log\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/stdout.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/terminal.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/whole-output-conservation-readback.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/048/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/048/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/048/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/060/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/060/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/060/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/065/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/065/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/065/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/080/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/080/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/080/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/084/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/084/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/084/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/release-five/ledger.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/release-five/patch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/release-five/envelope.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/release-five/qualification.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/release-five/base-native-manifest.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/release-five/owners.json.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/release-five/selection-sidecar.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/request.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/result.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/code-source.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/terminal.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/stdout.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/stderr.log\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/issued-plan.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/operating.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/certificate.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/prior260-current-programme-qualified/\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/selected353-compact-NCL-qualified/\",\n    \"coordination/engineering/global-physical-comparison-20261006/results/report.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-operands/rows-0.bin.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-operands/runs-17825792.bin.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/004/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/016/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/023/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/030/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/036/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/044/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/050/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/059/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/062/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/063/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/067/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/069/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/073/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/074/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/093/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/096/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/098/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/107/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/assemble-existing-five.mjs\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/supervise-selected-assembly-linux.mjs\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-operating-002.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/base-native-manifest.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/features.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/ledger-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/owners-batch.json.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/release-envelope.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/virtual-owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-request-002.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-assembly-001/issued-parameters.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-assembly-001/receipt.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-assembly-001/samples.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-assembly-001/stderr.txt\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-assembly-001/stdout.txt\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-authority/authority-binding.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-authority/authority-registry.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-authority/composed-original-ledger.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-authority/original-rule-preimage.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/certificate.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/code-source.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/issued-plan.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/operating.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/request.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/result.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/stderr.log\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/stdout.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/terminal.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-release-001/envelope.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-release-001/ledger.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-release-001/patch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-release-001/qualification.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-release-001/selection-sidecar.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-operating-005.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-qualified-005/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-qualified-005/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-qualified-005/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-request-005.json\",\n    \"coordination/engineering/original-geography-source-corpus-20261006/catalogue.json\",\n    \"coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-UKR-ADM2-000.bin.gz\",\n    \"research/geography/ukraine-original-singleton-source-fit-20261010/vintages/source-handoff-003/source-handoff.json\",\n    \"scripts/additive-gap-repair.mjs\",\n    \"research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/components-030.jsonl.gz\",\n    \"research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/sources-000.jsonl.gz\",\n    \"scripts/package-build-preflight.mjs\",\n    \"coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json\"\n  ],\n  \"optional_inputs\": [\n    \"public/\",\n    \"drizzle-source/\"\n  ],\n  \"verification_paths\": [\n    \".github/workflows/deployment-budget.yml\",\n    \"scripts/classify-deployment-budget.mjs\",\n    \"scripts/package-inputs.mjs\",\n    \"scripts/package-build.mjs\",\n    \"test/deployment-budget-scope.test.mjs\",\n    \"test/package-inputs.test.mjs\",\n    \"test/package-build.test.mjs\",\n    \"test/deployment-budget.test.mjs\",\n    \".github/workflows/merge-integration-checks.yml\",\n    \"scripts/check-pr-gates.mjs\",\n    \"test/pr-gates.test.mjs\"\n  ],\n  \"generated_outputs\": [\n    \"dist/\",\n    \".cache/deployment-budget.json\",\n    \"data/prepared-evidence/\",\n    \"data/atlas.sqlite\"\n  ]\n}\n"
+    },
+    {
+      "commit": "01c5db7fecdffb58e59a57bf05b943c596656b72",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json",
+      "mode": "100644",
+      "git_blob_oid": "c2de5063acd5804522d6c0fcdce67d10f91c22e9",
+      "bytes": 943,
+      "sha256": "70d969584dd16f5123d3ad0c688b734d5248c1b8964b2eae3029e139400c5fcb",
+      "body": "{\n  \"version\": 1,\n  \"kind\": \"accepted-administrative-handoffs-v1\",\n  \"entries\": [\n    {\n      \"id\": \"ukr-original-b139696d47c4fa03f8f73dbe\",\n      \"format\": \"source-native-handoff-v1\",\n      \"accepted_source_commit\": \"4171675cdf746a43d3e1dfc0ff9aee8dbaaf6646\",\n      \"source\": {\n        \"path\": \"research/geography/ukraine-original-singleton-source-fit-20261010/vintages/source-handoff-003/source-handoff.json\",\n        \"mode\": \"100644\",\n        \"blob\": \"9636c1992f3c764b65de9df043667fbc22855807\",\n        \"bytes\": 82015,\n        \"sha256\": \"7fd3d6da63c1fc9890784a6db6e4a3e9fb55755d52bb3c3a45cf0ad8a7f32462\"\n      },\n      \"original_batch_id\": \"gap-operational-batch:b139696d47c4fa03f8f73dbe\",\n      \"original_component_count\": 1,\n      \"cohort_ids\": [\n        \"physical-component:6fd25496ae4a7635eef229d0cfd1eb8dc7d9c10c252d3255fe8d42d186e706d1\"\n      ],\n      \"target_ids\": [\n        \"gb:UKR:ADM2:74538382B77535249747568\"\n      ]\n    }\n  ]\n}\n"
+    },
+    {
+      "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "path": "data/ownership-selection.json",
+      "mode": "100644",
+      "git_blob_oid": "048c2fe3945355ef4f3c653c47778ff2d585a045",
+      "bytes": 1592,
+      "sha256": "2dc41f354893cb40a76a58d767450060cc5aac1bbb65c0379486f347e703aa33",
+      "body": "{\n  \"artifact_consumption\": {\n    \"certificate\": {\n      \"bytes\": 68158,\n      \"mode\": \"100644\",\n      \"path\": \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/consumption-certificate.json\",\n      \"sha256\": \"26b505e3131a2513badc45d1552bcf603c24c565bdfb21b0f623fe4e6c7d4070\"\n    },\n    \"review\": {\n      \"bytes\": 7379,\n      \"mode\": \"100644\",\n      \"path\": \"coordination/engineering/additive-native-activation-20261009/independent-native-consumption-wrapper-self-pin-review.json\",\n      \"sha256\": \"87ab56e1354dd8a8fda532bfa008436abd35c6c506f0e0685eaa2f2f07f59a8a\"\n    }\n  },\n  \"manifest_path\": \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json\",\n  \"method\": \"native-linear-evenodd-first-owner-v1\",\n  \"release_id\": \"geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb\",\n  \"selected_geography\": {\n    \"version\": 1,\n    \"kind\": \"complete-world-index-with-exact-encoded-overrides\",\n    \"path\": \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json\",\n    \"bytes\": 14656,\n    \"sha256\": \"3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776\"\n  },\n  \"sha256\": \"d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba\",\n  \"version\": 1,\n  \"additive_release\": {\n    \"path\": \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/selection-sidecar.json\",\n    \"bytes\": 3461,\n    \"sha256\": \"d2fb04e2a07016bf797218c0ddb1fc2e96acc0d2cff48a560a8757d765f7a5fb\"\n  }\n}\n"
+    },
+    {
+      "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "path": ".github/package-inputs.json",
+      "mode": "100644",
+      "git_blob_oid": "841641ac7b60470ac1f0e93e92693b60b801ff3f",
+      "bytes": 71638,
+      "sha256": "835b9dec63bc799ba87514ec9671a93178e027040e9d100a9252fe054fc69854",
+      "body": "{\n  \"version\": 1,\n  \"description\": \"One input boundary for package source images and CI applicability. Research enters only by explicit reviewed paths. Code contents are not frozen.\",\n  \"inputs\": [\n    \".github/package-inputs.json\",\n    \".openai/hosting.json\",\n    \"attribute-records.mjs\",\n    \"coordination/engineering/additive-native-activation-20261009/\",\n    \"coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs\",\n    \"coordination/engineering/additive-native-composition-20261009/execution-code-paths.json\",\n    \"coordination/engineering/additive-native-composition-20261009/execution-contract.py\",\n    \"coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py\",\n    \"coordination/engineering/additive-native-composition-20261009/mac-execution-runtime-original.json\",\n    \"coordination/engineering/additive-native-composition-20261009/owned-child-termination-original.py\",\n    \"coordination/engineering/additive-native-composition-20261009/owned-group-original.py\",\n    \"coordination/engineering/additive-native-composition-20261009/predecessor-native/selected-native-proof-original.json\",\n    \"coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs\",\n    \"coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/base-native-manifest.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/facts.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/features.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/inventory.jsonl.gz\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/ledger-batch.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/operating-receipt.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/owner-window.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/owners-batch.json.gz\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/patch-batch.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/publication.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/release-envelope.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/virtual-owner-window.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/batch-request-v1-run1.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind.mjs\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_md.js\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_u64.js\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/package.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/sha2.js\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/utils.js\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/facts.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/inventory.jsonl.gz\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/operating-receipt.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/qualified-source-premises-v1/publication.json\",\n    \"coordination/engineering/additive-native-gap-batch-20261008/source-premises-request-v1.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/actual-cold.operating.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/base-native-manifest.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/facts.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/feature.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/inventory.jsonl.gz\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/ledger-add031.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/owner-window.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/owners-add031.json.gz\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/patch-add031.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/publication.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/release-envelope.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/add031-release-request-v3-run1.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/attempt-v3.operating.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/facts.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/inventory.jsonl.gz\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/qualified-source-premises-v3/publication.json\",\n    \"coordination/engineering/additive-native-gap-repair-20261008/source-premises-request-v3.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-20261008/applicability-comment.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-20261008/delivery/execution/code-source.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-20261008/delivery/independent-disposition.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-20261008/delivery/original-source-custody-readback.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-20261008/evidence-quality.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-20261008/source-fit-seven-cases.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/application-geometry-producer.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/application-geometry-serialization.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-context.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/arctic-package-preflight.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/artifact-checkout-execution.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/changed-complete-context-rows.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/context-index-v9.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/context-stage-v9.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/geometry-manifest.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/install-v9-stage.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/migration-receipt.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/model-reader-call-boundary-controls.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-selection-receipt.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/phase-admission.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/pixel-audit-v9.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/predecessor-context-v9.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/prepare-model-reader-checkout.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/prior-numerical-inputs.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifact-association.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifact-consumer.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/release-product-inputs.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/release-v9/\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/retained-product-binding.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29.json.gz\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/startup-vintage.mjs\",\n    \"coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/temporal-runtime-binding.mjs\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/byte-patch.mjs\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products/\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/context-record-alias.mjs\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/current-consumer-code/\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/native-producer.mjs\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/native-proposal.json\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/native-selection-receipt.json\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/prior-v1/\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/release-memberships/\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/restore-canonical-products.mjs\",\n    \"coordination/engineering/eastern-two-gap-repair-native-20261007/whole-image.mjs\",\n    \"coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v3/candidates.json\",\n    \"coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/native-release-binding.json\",\n    \"coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/release-proof-v3/\",\n    \"coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/repaired-context-v2/\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/qualification/certificate.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/qualification/code-source.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/qualification/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/qualification/issued-plan.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/qualification/operating.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/qualification/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/qualification/request.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/qualification/result.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/qualification/stderr.log\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/qualification/stdout.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/qualification/terminal.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/release/envelope.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/release/ledger.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/release/patch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-legacy-bridge/release/selection-sidecar.json\",\n    \"coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/\",\n    \"coordination/engineering/native-grid-candidate-1010-20261005-local16/decoded-native-verification.json\",\n    \"coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz\",\n    \"coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/\",\n    \"coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/alaska-thirteen-preimage.json\",\n    \"coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/alaska-thirteen-source-custody.json\",\n    \"coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/pilot-add031-preimage.json\",\n    \"coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/pilot-add031-source-custody.json\",\n    \"coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs\",\n    \"coordination/engineering/subject-descriptor-decode-20261007/context-vintage-dispatch.mjs\",\n    \"coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/\",\n    \"data/administrative-sources.json\",\n    \"data/attribute-sources.json\",\n    \"data/border-parent-review.json\",\n    \"data/canonical-grid/\",\n    \"data/cliopatria/\",\n    \"data/coverage-classification/\",\n    \"data/coverage-report.json\",\n    \"data/dated-reference-names/\",\n    \"data/demographic-evidence/\",\n    \"data/deployment-package/\",\n    \"data/engineering/\",\n    \"data/examples.json\",\n    \"data/final-grid-rendering-review.json\",\n    \"data/final-grid-resolution-review.json.gz\",\n    \"data/framework-changes-0.json\",\n    \"data/framework-changes-1.json\",\n    \"data/framework-changes-2.json\",\n    \"data/framework-changes-3.json\",\n    \"data/framework-changes-4.json\",\n    \"data/framework-sources/\",\n    \"data/geographic-decision-migration.json.gz\",\n    \"data/geographic-decisions/\",\n    \"data/geographic-migration-archive.json.gz\",\n    \"data/geographic-migration-review.json\",\n    \"data/geographic-migration-review.json.gz\",\n    \"data/geographic-releases/\",\n    \"data/geographic-repair-evidence/\",\n    \"data/geographic-restoration-manifest.json\",\n    \"data/geographic-semantic-followup/\",\n    \"data/geography/\",\n    \"data/global-refinement-report.json\",\n    \"data/global-semantic-closure.json.gz\",\n    \"data/global-sources/\",\n    \"data/granularity-audit.json\",\n    \"data/granularity-report.json\",\n    \"data/granularity-review-evidence.json\",\n    \"data/granularity-review-evidence.json.gz\",\n    \"data/grid-resolution-review.json\",\n    \"data/hierarchy-report.json\",\n    \"data/hierarchy.json\",\n    \"data/hosted-catalog/\",\n    \"data/hosted-type-catalog.json\",\n    \"data/interrupted-preparation/\",\n    \"data/location-policy.json\",\n    \"data/macro-boundary-decisions.json\",\n    \"data/macro-boundary-migration.json.gz\",\n    \"data/macro-boundary-source-rivers.geojson.gz\",\n    \"data/macro-corrections.json\",\n    \"data/macro-foundation/\",\n    \"data/macro-improvements/\",\n    \"data/macro-review-evidence.json\",\n    \"data/namibia-source-quality-annotations.json\",\n    \"data/namibia-source-review.json.gz\",\n    \"data/native-context-migration/\",\n    \"data/native-ownership/\",\n    \"data/observation-registry-history/\",\n    \"data/ownership-history/\",\n    \"data/ownership-runtime/\",\n    \"data/ownership-selection.json\",\n    \"data/pixel-audit.json\",\n    \"data/population-ghsl/\",\n    \"data/prepared-evidence/\",\n    \"data/publication-geography-receipt.json\",\n    \"data/reference-attributes/\",\n    \"data/reference-hierarchy-corrections/\",\n    \"data/reference-migrations/\",\n    \"data/reference-polity-report.json\",\n    \"data/region-semantic-review.json\",\n    \"data/regional-membership-report.json\",\n    \"data/research-geography-gate.json\",\n    \"data/retained-geographic-sources/\",\n    \"data/reviewed-geography-restoration-proof.json\",\n    \"data/schema.sql\",\n    \"data/semantic-evidence/\",\n    \"data/semantic-report.json\",\n    \"data/semantic-sources.json\",\n    \"data/settlement-estimates.json\",\n    \"data/settlement-source-report.json\",\n    \"data/source-inventory.json\",\n    \"data/source-policy-corrections/\",\n    \"data/source-quality-reviews/\",\n    \"data/source-territory-splits.json.gz\",\n    \"data/sources.json\",\n    \"data/storage-checkpoints/\",\n    \"data/storage-migration/\",\n    \"data/temporal-examples.json\",\n    \"data/topography-reference/\",\n    \"data/topology-report.json\",\n    \"data/typed-entity-types-v1.json\",\n    \"data/typed-prepared-v1.json\",\n    \"data/validation/\",\n    \"data/vegetation-numerical-review/\",\n    \"data/world-index.json\",\n    \"data/world-review-locations-0.json.gz\",\n    \"data/world-review-locations-1.json.gz\",\n    \"data/world-review-locations-10.json.gz\",\n    \"data/world-review-locations-11.json.gz\",\n    \"data/world-review-locations-12.json.gz\",\n    \"data/world-review-locations-13.json.gz\",\n    \"data/world-review-locations-14.json.gz\",\n    \"data/world-review-locations-15.json.gz\",\n    \"data/world-review-locations-16.json.gz\",\n    \"data/world-review-locations-17.json.gz\",\n    \"data/world-review-locations-18.json.gz\",\n    \"data/world-review-locations-19.json.gz\",\n    \"data/world-review-locations-2.json.gz\",\n    \"data/world-review-locations-20.json.gz\",\n    \"data/world-review-locations-21.json.gz\",\n    \"data/world-review-locations-22.json.gz\",\n    \"data/world-review-locations-23.json.gz\",\n    \"data/world-review-locations-24.json.gz\",\n    \"data/world-review-locations-25.json.gz\",\n    \"data/world-review-locations-26.json.gz\",\n    \"data/world-review-locations-27.json.gz\",\n    \"data/world-review-locations-28.json.gz\",\n    \"data/world-review-locations-29.json.gz\",\n    \"data/world-review-locations-3.json.gz\",\n    \"data/world-review-locations-30.json.gz\",\n    \"data/world-review-locations-31.json.gz\",\n    \"data/world-review-locations-32.json.gz\",\n    \"data/world-review-locations-33.json.gz\",\n    \"data/world-review-locations-4.json.gz\",\n    \"data/world-review-locations-5.json.gz\",\n    \"data/world-review-locations-6.json.gz\",\n    \"data/world-review-locations-7.json.gz\",\n    \"data/world-review-locations-8.json.gz\",\n    \"data/world-review-locations-9.json.gz\",\n    \"data/world-review.json\",\n    \"database.mjs\",\n    \"derived.mjs\",\n    \"drizzle-source/\",\n    \"drizzle/\",\n    \"geographic-archive.mjs\",\n    \"hierarchy.mjs\",\n    \"hosted/\",\n    \"index.html\",\n    \"package-lock.json\",\n    \"package.json\",\n    \"prepared-evidence.mjs\",\n    \"public/\",\n    \"reference-archive.mjs\",\n    \"reference.mjs\",\n    \"requirements.txt\",\n    \"scripts/audit-grid-intervals.mjs\",\n    \"scripts/boundary-version-hash.py\",\n    \"scripts/build-cloudflare-inner.mjs\",\n    \"scripts/build-cloudflare.mjs\",\n    \"scripts/build-hosted-inner.mjs\",\n    \"scripts/build-hosted.mjs\",\n    \"scripts/build-static-inner.mjs\",\n    \"scripts/build-static.mjs\",\n    \"scripts/canonical-restoration.mjs\",\n    \"scripts/check-effective-geographic-regression.mjs\",\n    \"scripts/check-prepared.mjs\",\n    \"scripts/ci-setup-observations.mjs\",\n    \"scripts/compile-hosted-migrations.mjs\",\n    \"scripts/deployment-budget.mjs\",\n    \"scripts/evidence-quality.mjs\",\n    \"scripts/evidence/captured-byte-patch.mjs\",\n    \"scripts/evidence/restore-whole-image.mjs\",\n    \"scripts/local-workspace.mjs\",\n    \"scripts/native-ownership/chained-build-context.mjs\",\n    \"scripts/native-ownership/compact-context-inputs.mjs\",\n    \"scripts/native-ownership/compile-native-ownership.mjs\",\n    \"scripts/native-ownership/native-candidate-manifest.mjs\",\n    \"scripts/native-ownership/native-only-inputs.mjs\",\n    \"scripts/native-ownership/native-preparation-guards.mjs\",\n    \"scripts/native-ownership/read-pinned-build-file.mjs\",\n    \"scripts/native-ownership/require-verified-selection.mjs\",\n    \"scripts/native-ownership/validate-build-context-stage.mjs\",\n    \"scripts/native-ownership/validate-context-input-stage.mjs\",\n    \"scripts/native-ownership/validate-context-migration.mjs\",\n    \"scripts/native-ownership/verified-candidates.json\",\n    \"scripts/package-build.mjs\",\n    \"scripts/package-inputs.mjs\",\n    \"scripts/package-native-latitudes.mjs\",\n    \"scripts/package-ownership-history.mjs\",\n    \"scripts/package-reference-bundle.mjs\",\n    \"scripts/package-startup-ownership.mjs\",\n    \"scripts/prepare-evidence-bundle.mjs\",\n    \"scripts/prepare-geographic-release.mjs\",\n    \"scripts/read-geographic-release-manifest.mjs\",\n    \"scripts/read-prepared-evidence-bundle.mjs\",\n    \"scripts/rebind-coverage-manifest.mjs\",\n    \"scripts/select-build-ownership.mjs\",\n    \"scripts/worker-identity.mjs\",\n    \"src/\",\n    \"temporal.mjs\",\n    \"topology.mjs\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/qualification/certificate.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/qualification/code-source.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/qualification/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/qualification/issued-plan.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/qualification/operating.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/qualification/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/qualification/request.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/qualification/result.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/qualification/stderr.log\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/qualification/stdout.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/qualification/terminal.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/release/envelope.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/release/ledger.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/release/patch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/release/qualification.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/prerequisite-fresh-bridge/release/selection-sidecar.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/base-native-manifest.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/features.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/ledger-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/owners-batch.json.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/release-envelope.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/virtual-owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/base-native-manifest.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/features.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/ledger-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/owners-batch.json.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/release-envelope.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/virtual-owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/base-native-manifest.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/features.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/ledger-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/owners-batch.json.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/release-envelope.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/virtual-owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/base-native-manifest.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/features.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/ledger-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/owners-batch.json.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/release-envelope.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/virtual-owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/base-native-manifest.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/features.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/ledger-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/owners-batch.json.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/release-envelope.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/virtual-owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/048/authority-binding.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/048/original-rule-preimage.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/060/authority-binding.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/060/original-rule-preimage.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/065/authority-binding.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/065/original-rule-preimage.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/080/authority-binding.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/080/original-rule-preimage.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/084/authority-binding.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/084/original-rule-preimage.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/authority-registry.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/composed-original-ledger.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/certificate.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/code-source.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/issued-plan.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/operating.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/request.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/result.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/stderr.log\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/stdout.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/terminal.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/current-rebind-qualified/whole-output-conservation-readback.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/048/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/048/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/048/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/060/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/060/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/060/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/065/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/065/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/065/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/080/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/080/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/080/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/084/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/084/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/084/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/release-five/ledger.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/release-five/patch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/release-five/envelope.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/release-five/qualification.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/release-five/base-native-manifest.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/release-five/owners.json.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/release-five/selection-sidecar.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/request.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/result.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/code-source.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/terminal.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/stdout.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/stderr.log\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/issued-plan.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/operating.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/partial-consumer-qualified/certificate.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/prior260-current-programme-qualified/\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/selected353-compact-NCL-qualified/\",\n    \"coordination/engineering/global-physical-comparison-20261006/results/report.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-operands/rows-0.bin.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-operands/runs-17825792.bin.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/004/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/016/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/023/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/030/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/036/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/044/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/050/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/059/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/062/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/063/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/067/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/069/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/073/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/074/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/093/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/096/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/098/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/107/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/assemble-existing-five.mjs\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/supervise-selected-assembly-linux.mjs\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-operating-002.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/base-native-manifest.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/features.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/ledger-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/owners-batch.json.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/patch-batch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/release-envelope.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/virtual-owner-window.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-request-002.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-assembly-001/issued-parameters.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-assembly-001/receipt.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-assembly-001/samples.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-assembly-001/stderr.txt\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-assembly-001/stdout.txt\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-authority/authority-binding.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-authority/authority-registry.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-authority/composed-original-ledger.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-authority/original-rule-preimage.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/certificate.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/code-source.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/issued-plan.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/operating.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/request.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/result.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/stderr.log\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/stdout.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/terminal.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-release-001/envelope.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-release-001/ledger.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-release-001/patch.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-release-001/qualification.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-release-001/selection-sidecar.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-operating-005.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-qualified-005/facts.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-qualified-005/inventory.jsonl.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-qualified-005/publication.json\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-request-005.json\",\n    \"coordination/engineering/original-geography-source-corpus-20261006/catalogue.json\",\n    \"coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-UKR-ADM2-000.bin.gz\",\n    \"research/geography/ukraine-original-singleton-source-fit-20261010/vintages/source-handoff-003/source-handoff.json\",\n    \"scripts/additive-gap-repair.mjs\",\n    \"research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/components-030.jsonl.gz\",\n    \"research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/sources-000.jsonl.gz\",\n    \"scripts/package-build-preflight.mjs\",\n    \"coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/assembly-001/issued-parameters.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/assembly-001/receipt.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/assembly-001/samples.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/assembly-001/stderr.log\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/assembly-001/stdout.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/COD/authority-binding.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/COD/original-rule-preimage.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-001/authority-binding.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-001/original-rule-preimage.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-002/authority-binding.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-002/original-rule-preimage.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-003/authority-binding.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-003/original-rule-preimage.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authority-registry.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/composed-original-ledger.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/certificate.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/code-source.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/facts.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/issued-plan.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/operating.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/publication.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/request.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/result.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/stderr.log\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/stdout.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/terminal.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/original-patch-roster.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/envelope.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/ledger.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/patch.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/qualification.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/selection-sidecar.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/evidence-quality.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-39845888.bin.gz\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-40894464.bin.gz\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-41943040.bin.gz\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-42991616.bin.gz\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-44040192.bin.gz\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-45088768.bin.gz\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-49283072.bin.gz\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-operating-001.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/base-native-manifest.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/facts.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/features.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/inventory.jsonl.gz\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/ledger-batch.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/owner-window.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/owners-batch.json.gz\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/patch-batch.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/publication.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/release-envelope.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/samples.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/stderr.log\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/stdout.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/virtual-owner-window.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/native-request-001.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-operating-001.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-operating-002.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-operating-003.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/base-native-manifest.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/facts.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/features.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/inventory.jsonl.gz\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/ledger-batch.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/owner-window.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/owners-batch.json.gz\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/patch-batch.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/publication.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/release-envelope.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/samples.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/stderr.log\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/stdout.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/virtual-owner-window.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/base-native-manifest.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/facts.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/features.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/inventory.jsonl.gz\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/ledger-batch.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/owner-window.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/owners-batch.json.gz\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/patch-batch.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/publication.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/release-envelope.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/samples.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/stderr.log\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/stdout.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/virtual-owner-window.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/base-native-manifest.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/facts.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/features.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/inventory.jsonl.gz\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/ledger-batch.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/owner-window.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/owners-batch.json.gz\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/patch-batch.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/publication.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/release-envelope.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/samples.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/stderr.log\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/stdout.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/virtual-owner-window.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-request-001.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-request-002.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-native-request-003.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-ancestry-refusal-001/receipt.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-ancestry-refusal-001/stderr.log\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-ancestry-refusal-002/receipt.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-ancestry-refusal-002/stderr.log\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-ancestry-refusal-003/receipt.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-ancestry-refusal-003/stderr.log\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-operating-004.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-operating-005.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-operating-006.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-004/facts.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-004/inventory.jsonl.gz\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-004/publication.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-004/samples.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-004/stderr.log\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-004/stdout.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-005/facts.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-005/inventory.jsonl.gz\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-005/publication.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-005/samples.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-005/stderr.log\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-005/stdout.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-006/facts.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-006/inventory.jsonl.gz\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-006/publication.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-006/samples.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-006/stderr.log\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-006/stdout.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-request-001.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-request-002.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-request-003.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-request-004.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-request-005.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/phl-source-request-006.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/source-operating-002.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/source-qualified-002/facts.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/source-qualified-002/inventory.jsonl.gz\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/source-qualified-002/publication.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/source-qualified-002/samples.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/source-qualified-002/stderr.log\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/source-qualified-002/stdout.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/source-request-001.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/source-request-002.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/source-transport-refusal-001/receipt.json\",\n    \"coordination/engineering/congo-ago2018-delivery-20261011/source-transport-refusal-001/stderr.log\",\n    \"coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-015.json.gz\",\n    \"coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-041.json.gz\",\n    \"coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/current-f02-coordinate/certificate.json.gz\",\n    \"coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-AGO-ADM2-000.bin.gz\",\n    \"coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-COD-ADM2-000.bin.gz\",\n    \"coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PHL-ADM3-000.bin.gz\",\n    \"coordination/engineering/shared-country-delivery-phl-20261010/custody-20261011/physical-inputs.json\",\n    \"coordination/engineering/shared-country-delivery-phl-20261010/vintages/phl-current-neighbors-001/result.json\",\n    \"coordination/engineering/shared-country-delivery-phl-20261010/vintages/phl-source-handoff-003/source-handoff.json\",\n    \"coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase1-001/components-005.jsonl.gz\",\n    \"coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase1-001/components-013.jsonl.gz\",\n    \"coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase1-001/components-019.jsonl.gz\",\n    \"coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase1-001/components-022.jsonl.gz\",\n    \"coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase1-001/original-components.json\",\n    \"coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase1-001/physical-records.json\",\n    \"coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase1-001/queried-source-metadata.json\",\n    \"coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase1-001/receipt.json\",\n    \"coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase2-001/components-029.jsonl.gz\",\n    \"coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase2-001/components-054.jsonl.gz\",\n    \"coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase2-001/components-064.jsonl.gz\",\n    \"coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase2-001/components-065.jsonl.gz\",\n    \"coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase2-001/original-components.json\",\n    \"coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase2-001/physical-records.json\",\n    \"coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase2-001/queried-source-metadata.json\",\n    \"coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase2-001/receipt.json\",\n    \"coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-000.json.gz\",\n    \"coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-001.json.gz\",\n    \"coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-002.json.gz\",\n    \"coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-003.json.gz\",\n    \"coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-004.json.gz\",\n    \"coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-005.json.gz\",\n    \"coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-operational-batches-000.json.gz\",\n    \"coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/report.json\",\n    \"research/geography/gap-source-angola-drc-shared-seams-20261006/sources/administrative/gb-AGO-ADM2-ADM2-consumed-simplified.geojson\",\n    \"research/geography/gap-source-angola-drc-shared-seams-20261006/sources/administrative/gb-COD-ADM2-ADM2-consumed-simplified.geojson\",\n    \"research/geography/gap-source-angola-drc-shared-seams-20261006/substantial-ten-v1/runtime-lock.json\",\n    \"research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/congo-current-neighbors-001/result.json\",\n    \"research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/congo-physical-custody-002/components-021.jsonl.gz\",\n    \"research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/congo-physical-custody-002/components-059.jsonl.gz\",\n    \"research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/congo-physical-custody-002/original-components.json\",\n    \"research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/congo-physical-custody-002/physical-records.json\",\n    \"research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/congo-physical-custody-002/queried-source-metadata.json\",\n    \"research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/congo-physical-custody-002/receipt.json\",\n    \"research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/congo-source-handoff-003/source-handoff.json\",\n    \"research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/substantial-two-strict-001/strict-predicates.json\",\n    \"research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-000.json\",\n    \"research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-002.json\",\n    \"research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-003.json\",\n    \"research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-004.json\",\n    \"research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-008.json\",\n    \"research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-009.json\",\n    \"research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-010.json\",\n    \"research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/batch-outcomes-363-002/batch-outcomes-363-v2.json\",\n    \"research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/native-payloads-110-001/native-payloads-110.json\",\n    \"research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/ncl-targeted-source-match-029-001/ncl-source-matches-029.json\",\n    \"research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/source-comparison-capture-001/batch-source-comparisons.json\",\n    \"research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/source-remainders-084-001/source-remainders-084.json\",\n    \"research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/administrative-source-rule-fit.json\",\n    \"research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/component-state-318.json\",\n    \"research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/family-roster-122.json\",\n    \"research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/receipt.json\",\n    \"scripts/administrative.py\"\n  ],\n  \"optional_inputs\": [\n    \"public/\",\n    \"drizzle-source/\"\n  ],\n  \"verification_paths\": [\n    \".github/workflows/deployment-budget.yml\",\n    \"scripts/classify-deployment-budget.mjs\",\n    \"scripts/package-inputs.mjs\",\n    \"scripts/package-build.mjs\",\n    \"test/deployment-budget-scope.test.mjs\",\n    \"test/package-inputs.test.mjs\",\n    \"test/package-build.test.mjs\",\n    \"test/deployment-budget.test.mjs\",\n    \".github/workflows/merge-integration-checks.yml\",\n    \"scripts/check-pr-gates.mjs\",\n    \"test/pr-gates.test.mjs\"\n  ],\n  \"generated_outputs\": [\n    \"dist/\",\n    \".cache/deployment-budget.json\",\n    \"data/prepared-evidence/\",\n    \"data/atlas.sqlite\"\n  ]\n}\n"
+    },
+    {
+      "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json",
+      "mode": "100644",
+      "git_blob_oid": "8832eda5131293fb05e77ca0cb19527725072c97",
+      "bytes": 3027,
+      "sha256": "7e0dd1272a7424d2349dfc2c940cfb2cb7182ebb7fe62a15a761f603c889f2fd",
+      "body": "{\"entries\":[{\"accepted_source_commit\":\"4171675cdf746a43d3e1dfc0ff9aee8dbaaf6646\",\"cohort_ids\":[\"physical-component:6fd25496ae4a7635eef229d0cfd1eb8dc7d9c10c252d3255fe8d42d186e706d1\"],\"format\":\"source-native-handoff-v1\",\"id\":\"ukr-original-b139696d47c4fa03f8f73dbe\",\"original_batch_id\":\"gap-operational-batch:b139696d47c4fa03f8f73dbe\",\"original_component_count\":1,\"source\":{\"blob\":\"9636c1992f3c764b65de9df043667fbc22855807\",\"bytes\":82015,\"mode\":\"100644\",\"path\":\"research/geography/ukraine-original-singleton-source-fit-20261010/vintages/source-handoff-003/source-handoff.json\",\"sha256\":\"7fd3d6da63c1fc9890784a6db6e4a3e9fb55755d52bb3c3a45cf0ad8a7f32462\"},\"target_ids\":[\"gb:UKR:ADM2:74538382B77535249747568\"]},{\"accepted_source_commit\":\"9f0672de18c469d11fe63a90b3aa55d9e3d9a923\",\"cohort_ids\":[\"physical-component:4ceb0de66be41e24e9e2f640442ec3ae3690a7d134d73cfbe2a6ac01edf098d4\",\"physical-component:d70ba927292a3f812f481885193f21b099328f0697ff13fea7585dac7a8118c2\"],\"format\":\"source-native-execution-cohort-v2\",\"id\":\"congo-ago2018-two-20261011\",\"source\":{\"blob\":\"cb2fd484416bd60e2d56e47d982039c3d5faf679\",\"bytes\":192461,\"mode\":\"100644\",\"path\":\"research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/congo-source-handoff-003/source-handoff.json\",\"sha256\":\"e22e96ee87e6861651cacd0bb538329ad2820953ae26f3de8b180b2dbe7ef3fe\"},\"target_ids\":[\"gb:AGO:ADM2:16411231B62076307190429\"]},{\"accepted_source_commit\":\"7a5d250c652b780cf6fdece4e61f67ad44f2f0fe\",\"cohort_ids\":[\"physical-component:1556c3bb1c20fc718d0e5d5d8dce2ce180b191fe63eaf492312db22550e8e737\",\"physical-component:307e87aee838533082007e29254811d809f22152127a05815195a9d98ad327da\",\"physical-component:47f533a94718204a72389e0ee39b538ff230f219ec619de6aadfa8dd0997616f\",\"physical-component:5333b1363dbb396832c14da44a54e59bddf037cb92378e11d17efcc931220ce2\",\"physical-component:6c21d4063b8f6febad1769f1e7f058e668ab8c018d93b770f560818e8db5af22\",\"physical-component:c6e5c097e7fec0a79402758c4b8787151660e2312015f92403b1d857bdae9ca8\",\"physical-component:e7830362e503492dae1922eb91157c0e3cc7a42043dc91eff29878eeb85aa902\",\"physical-component:ec9be2d5c5db2b304f0e71418b2b328ae508fed448cef29e6737c3c1121dc1ef\",\"physical-component:ed6ee8f77903a084a21fb78781debf60115e7d9ce616926fb0e3cf9dbacfda34\"],\"format\":\"source-native-execution-cohort-v2\",\"id\":\"phl2020-nine-20261011\",\"source\":{\"blob\":\"eb7dde8ee22c5ecb08caf73e3f9c1067dfafb180\",\"bytes\":784713,\"mode\":\"100644\",\"path\":\"coordination/engineering/shared-country-delivery-phl-20261010/vintages/phl-source-handoff-003/source-handoff.json\",\"sha256\":\"01d220885af169a2e9eb3c5909b0a752917edac23ad20d9871312297f8d01131\"},\"target_ids\":[\"gb:PHL:ADM3:30758251B13625365204801\",\"gb:PHL:ADM3:30758251B13765165414384\",\"gb:PHL:ADM3:30758251B25296236065904\",\"gb:PHL:ADM3:30758251B25477955083554\",\"gb:PHL:ADM3:30758251B31351007635483\",\"gb:PHL:ADM3:30758251B3312801270328\",\"gb:PHL:ADM3:30758251B36088332034654\",\"gb:PHL:ADM3:30758251B69966193362953\",\"gb:PHL:ADM3:30758251B96628789522948\"]}],\"kind\":\"accepted-administrative-handoffs-v1\",\"version\":1}\n"
+    },
+    {
+      "commit": "d96dd13c4a6a86f834742559c07559aa044987d8",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json",
+      "mode": "100644",
+      "git_blob_oid": "595847eef67de0296b3729c46f5cc9b59bf3c024",
+      "bytes": 1782,
+      "sha256": "ff0b242551fc0bad6a211370ea063912de06d15ef6383a4aff855b04b78040bf",
+      "body": "{\n  \"version\": 1,\n  \"kind\": \"accepted-administrative-handoffs-v1\",\n  \"entries\": [\n    {\n      \"id\": \"ukr-original-b139696d47c4fa03f8f73dbe\",\n      \"format\": \"source-native-handoff-v1\",\n      \"accepted_source_commit\": \"4171675cdf746a43d3e1dfc0ff9aee8dbaaf6646\",\n      \"source\": {\n        \"path\": \"research/geography/ukraine-original-singleton-source-fit-20261010/vintages/source-handoff-003/source-handoff.json\",\n        \"mode\": \"100644\",\n        \"blob\": \"9636c1992f3c764b65de9df043667fbc22855807\",\n        \"bytes\": 82015,\n        \"sha256\": \"7fd3d6da63c1fc9890784a6db6e4a3e9fb55755d52bb3c3a45cf0ad8a7f32462\"\n      },\n      \"original_batch_id\": \"gap-operational-batch:b139696d47c4fa03f8f73dbe\",\n      \"original_component_count\": 1,\n      \"cohort_ids\": [\n        \"physical-component:6fd25496ae4a7635eef229d0cfd1eb8dc7d9c10c252d3255fe8d42d186e706d1\"\n      ],\n      \"target_ids\": [\n        \"gb:UKR:ADM2:74538382B77535249747568\"\n      ]\n    },\n    {\n      \"id\": \"congo-ago2018-two-20261011\",\n      \"format\": \"source-native-execution-cohort-v2\",\n      \"accepted_source_commit\": \"9f0672de18c469d11fe63a90b3aa55d9e3d9a923\",\n      \"source\": {\n        \"path\": \"research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/congo-source-handoff-003/source-handoff.json\",\n        \"mode\": \"100644\",\n        \"blob\": \"cb2fd484416bd60e2d56e47d982039c3d5faf679\",\n        \"bytes\": 192461,\n        \"sha256\": \"e22e96ee87e6861651cacd0bb538329ad2820953ae26f3de8b180b2dbe7ef3fe\"\n      },\n      \"cohort_ids\": [\n        \"physical-component:4ceb0de66be41e24e9e2f640442ec3ae3690a7d134d73cfbe2a6ac01edf098d4\",\n        \"physical-component:d70ba927292a3f812f481885193f21b099328f0697ff13fea7585dac7a8118c2\"\n      ],\n      \"target_ids\": [\n        \"gb:AGO:ADM2:16411231B62076307190429\"\n      ]\n    }\n  ]\n}\n"
+    }
+  ],
+  "authorities": [
+    {
+      "authority_path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/COD/authority-binding.json",
+      "source_request": "coordination/engineering/congo-ago2018-delivery-20261011/source-request-002.json",
+      "native_request": "coordination/engineering/congo-ago2018-delivery-20261011/native-request-001.json"
+    },
+    {
+      "authority_path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-001/authority-binding.json",
+      "source_request": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-request-004.json",
+      "native_request": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-request-001.json"
+    },
+    {
+      "authority_path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-002/authority-binding.json",
+      "source_request": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-request-005.json",
+      "native_request": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-request-002.json"
+    },
+    {
+      "authority_path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-003/authority-binding.json",
+      "source_request": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-request-006.json",
+      "native_request": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-request-003.json"
+    }
+  ],
+  "files": [
+    {
+      "filename": ".github/package-inputs.json",
+      "status": "modified"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/README.md",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/assembly-001/issued-parameters.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/assembly-001/receipt.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/assembly-001/samples.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/assembly-001/stderr.log",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/assembly-001/stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/COD/authority-binding.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/COD/original-rule-preimage.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-001/authority-binding.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-001/original-rule-preimage.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-002/authority-binding.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-002/original-rule-preimage.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-003/authority-binding.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-003/original-rule-preimage.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authority-registry.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/composed-original-ledger.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/certificate.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/code-source.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/facts.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/issued-plan.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/operating.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/publication.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/request.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/result.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/stderr.log",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/terminal.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/original-patch-roster.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/envelope.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/ledger.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/patch.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/qualification.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/selection-sidecar.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-39845888.bin.gz",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-40894464.bin.gz",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-41943040.bin.gz",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-42991616.bin.gz",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-44040192.bin.gz",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-45088768.bin.gz",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-49283072.bin.gz",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-operating-001.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/base-native-manifest.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/facts.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/features.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/inventory.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/ledger-batch.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/owner-window.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/owners-batch.json.gz",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/patch-batch.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/publication.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/release-envelope.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/samples.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/stderr.log",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/virtual-owner-window.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/native-request-001.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/built-output-readback.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/consumer-smoke.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/selected-reader.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/summary.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-operating-001.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-operating-002.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-operating-003.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/base-native-manifest.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/facts.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/features.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/inventory.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/ledger-batch.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/owner-window.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/owners-batch.json.gz",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/patch-batch.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/publication.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/release-envelope.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/samples.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/stderr.log",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/virtual-owner-window.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/base-native-manifest.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/facts.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/features.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/inventory.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/ledger-batch.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/owner-window.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/owners-batch.json.gz",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/patch-batch.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/publication.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/release-envelope.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/samples.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/stderr.log",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/virtual-owner-window.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/base-native-manifest.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/facts.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/features.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/inventory.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/ledger-batch.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/owner-window.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/owners-batch.json.gz",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/patch-batch.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/publication.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/release-envelope.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/samples.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/stderr.log",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/virtual-owner-window.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-request-001.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-request-002.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-request-003.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-ancestry-refusal-001/receipt.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-ancestry-refusal-001/stderr.log",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-ancestry-refusal-002/receipt.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-ancestry-refusal-002/stderr.log",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-ancestry-refusal-003/receipt.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-ancestry-refusal-003/stderr.log",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-operating-004.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-operating-005.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-operating-006.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-004/facts.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-004/inventory.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-004/publication.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-004/samples.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-004/stderr.log",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-004/stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-005/facts.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-005/inventory.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-005/publication.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-005/samples.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-005/stderr.log",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-005/stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-006/facts.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-006/inventory.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-006/publication.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-006/samples.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-006/stderr.log",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-006/stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-request-001.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-request-002.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-request-003.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-request-004.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-request-005.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-request-006.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/selected-delivery-expectations.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/source-operating-002.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/source-qualified-002/facts.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/source-qualified-002/inventory.jsonl.gz",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/source-qualified-002/publication.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/source-qualified-002/samples.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/source-qualified-002/stderr.log",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/source-qualified-002/stdout.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/source-request-001.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/source-request-002.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/source-transport-refusal-001/receipt.json",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/congo-ago2018-delivery-20261011/source-transport-refusal-001/stderr.log",
+      "status": "added"
+    },
+    {
+      "filename": "coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json",
+      "status": "modified"
+    },
+    {
+      "filename": "data/ownership-selection.json",
+      "status": "modified"
+    }
+  ],
+  "accepted_sources": [
+    {
+      "commit": "9f0672de18c469d11fe63a90b3aa55d9e3d9a923",
+      "tree": "9e797f0a5432b1ba7285277aaf21ebcbe013520f",
+      "entry": {
+        "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/congo-source-handoff-003/source-handoff.json",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "cb2fd484416bd60e2d56e47d982039c3d5faf679",
+        "size": 192461
+      }
+    },
+    {
+      "commit": "7a5d250c652b780cf6fdece4e61f67ad44f2f0fe",
+      "tree": "ac2090fe96e375cbe2e6966acd88c2be2f033790",
+      "entry": {
+        "path": "coordination/engineering/shared-country-delivery-phl-20261010/vintages/phl-source-handoff-003/source-handoff.json",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "eb7dde8ee22c5ecb08caf73e3f9c1067dfafb180",
+        "size": 784713
+      }
+    }
+  ],
+  "prospective_lean_package": {
+    "basis": "Separate candidate-like declaration-only fixture. Preserve all actual scientific and evidence bytes. Keep prior package inputs/imports unchanged; append outer actual selected-reader paths plus explicit nested authority/rule, six original pins, native proof assets/publication/inventory/operating and qualified SOURCE publication/inventory/operating aliases. This is not a historical #1726 package build or a proven future minimal build. Actual future package/gates remain required.",
+    "outer_reader": {
+      "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/selected-reader.json",
+      "mode": "100644",
+      "git_blob_oid": "050f2351f2677157adb00c8c61775d517b4ce562",
+      "bytes": 50613,
+      "sha256": "00b0c3d75447a83e5c0ba47bd58727473b963444abe0cd2d60aa16a59472bcb6"
+    },
+    "inputs": [
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/COD/authority-binding.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/COD/original-rule-preimage.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-001/authority-binding.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-001/original-rule-preimage.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-002/authority-binding.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-002/original-rule-preimage.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-003/authority-binding.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-003/original-rule-preimage.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authority-registry.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/composed-original-ledger.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/certificate.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/code-source.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/facts.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/issued-plan.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/operating.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/publication.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/request.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/result.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/stderr.log",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/stdout.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/terminal.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/envelope.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/ledger.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/patch.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/selection-sidecar.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-operating-001.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/base-native-manifest.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/facts.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/features.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/inventory.jsonl.gz",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/ledger-batch.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/owner-window.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/owners-batch.json.gz",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/patch-batch.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/publication.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/release-envelope.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/virtual-owner-window.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-request-001.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-operating-001.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-operating-002.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-operating-003.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/base-native-manifest.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/facts.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/features.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/inventory.jsonl.gz",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/ledger-batch.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/owner-window.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/owners-batch.json.gz",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/patch-batch.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/publication.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/release-envelope.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/virtual-owner-window.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/base-native-manifest.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/facts.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/features.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/inventory.jsonl.gz",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/ledger-batch.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/owner-window.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/owners-batch.json.gz",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/patch-batch.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/publication.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/release-envelope.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/virtual-owner-window.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/base-native-manifest.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/facts.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/features.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/inventory.jsonl.gz",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/ledger-batch.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/owner-window.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/owners-batch.json.gz",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/patch-batch.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/publication.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/release-envelope.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/virtual-owner-window.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-request-001.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-request-002.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-request-003.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-operating-004.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-operating-005.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-operating-006.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-004/facts.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-004/inventory.jsonl.gz",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-004/publication.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-005/facts.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-005/inventory.jsonl.gz",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-005/publication.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-006/facts.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-006/inventory.jsonl.gz",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-006/publication.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-request-004.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-request-005.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-request-006.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/source-operating-002.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/source-qualified-002/facts.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/source-qualified-002/inventory.jsonl.gz",
+      "coordination/engineering/congo-ago2018-delivery-20261011/source-qualified-002/publication.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/source-request-002.json"
+    ],
+    "removed_preparation_only_inputs": [
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/assembly-001/issued-parameters.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/assembly-001/receipt.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/assembly-001/samples.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/assembly-001/stderr.log",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/assembly-001/stdout.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/original-patch-roster.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/qualification.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/evidence-quality.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-39845888.bin.gz",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-40894464.bin.gz",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-41943040.bin.gz",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-42991616.bin.gz",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-44040192.bin.gz",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-45088768.bin.gz",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-49283072.bin.gz",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/samples.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/stderr.log",
+      "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/stdout.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/samples.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/stderr.log",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/stdout.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/samples.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/stderr.log",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/stdout.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/samples.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/stderr.log",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/stdout.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-ancestry-refusal-001/receipt.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-ancestry-refusal-001/stderr.log",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-ancestry-refusal-002/receipt.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-ancestry-refusal-002/stderr.log",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-ancestry-refusal-003/receipt.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-ancestry-refusal-003/stderr.log",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-004/samples.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-004/stderr.log",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-004/stdout.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-005/samples.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-005/stderr.log",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-005/stdout.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-006/samples.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-006/stderr.log",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-006/stdout.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-request-001.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-request-002.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-request-003.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/source-qualified-002/samples.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/source-qualified-002/stderr.log",
+      "coordination/engineering/congo-ago2018-delivery-20261011/source-qualified-002/stdout.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/source-request-001.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/source-transport-refusal-001/receipt.json",
+      "coordination/engineering/congo-ago2018-delivery-20261011/source-transport-refusal-001/stderr.log",
+      "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-015.json.gz",
+      "coordination/engineering/global-source-comparisons-b-20261006/source-comparisons-b-package2/scientific/components-041.json.gz",
+      "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/current-f02-coordinate/certificate.json.gz",
+      "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-AGO-ADM2-000.bin.gz",
+      "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-COD-ADM2-000.bin.gz",
+      "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PHL-ADM3-000.bin.gz",
+      "coordination/engineering/shared-country-delivery-phl-20261010/custody-20261011/physical-inputs.json",
+      "coordination/engineering/shared-country-delivery-phl-20261010/vintages/phl-current-neighbors-001/result.json",
+      "coordination/engineering/shared-country-delivery-phl-20261010/vintages/phl-source-handoff-003/source-handoff.json",
+      "coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase1-001/components-005.jsonl.gz",
+      "coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase1-001/components-013.jsonl.gz",
+      "coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase1-001/components-019.jsonl.gz",
+      "coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase1-001/components-022.jsonl.gz",
+      "coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase1-001/original-components.json",
+      "coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase1-001/physical-records.json",
+      "coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase1-001/queried-source-metadata.json",
+      "coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase1-001/receipt.json",
+      "coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase2-001/components-029.jsonl.gz",
+      "coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase2-001/components-054.jsonl.gz",
+      "coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase2-001/components-064.jsonl.gz",
+      "coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase2-001/components-065.jsonl.gz",
+      "coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase2-001/original-components.json",
+      "coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase2-001/physical-records.json",
+      "coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase2-001/queried-source-metadata.json",
+      "coordination/engineering/shared-country-delivery-phl-20261010/vintages/physical-custody-phase2-001/receipt.json",
+      "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-000.json.gz",
+      "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-001.json.gz",
+      "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-002.json.gz",
+      "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-003.json.gz",
+      "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-004.json.gz",
+      "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-005.json.gz",
+      "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-operational-batches-000.json.gz",
+      "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/report.json",
+      "research/geography/gap-source-angola-drc-shared-seams-20261006/sources/administrative/gb-AGO-ADM2-ADM2-consumed-simplified.geojson",
+      "research/geography/gap-source-angola-drc-shared-seams-20261006/sources/administrative/gb-COD-ADM2-ADM2-consumed-simplified.geojson",
+      "research/geography/gap-source-angola-drc-shared-seams-20261006/substantial-ten-v1/runtime-lock.json",
+      "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/congo-current-neighbors-001/result.json",
+      "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/congo-physical-custody-002/components-021.jsonl.gz",
+      "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/congo-physical-custody-002/components-059.jsonl.gz",
+      "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/congo-physical-custody-002/original-components.json",
+      "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/congo-physical-custody-002/physical-records.json",
+      "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/congo-physical-custody-002/queried-source-metadata.json",
+      "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/congo-physical-custody-002/receipt.json",
+      "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/congo-source-handoff-003/source-handoff.json",
+      "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/substantial-two-strict-001/strict-predicates.json",
+      "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-000.json",
+      "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-002.json",
+      "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-003.json",
+      "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-004.json",
+      "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-008.json",
+      "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-009.json",
+      "research/geography/indonesia-borneo-source-fitness-20261007/vintages/restore-450126d0/components-010.json",
+      "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/batch-outcomes-363-002/batch-outcomes-363-v2.json",
+      "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/native-payloads-110-001/native-payloads-110.json",
+      "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/ncl-targeted-source-match-029-001/ncl-source-matches-029.json",
+      "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/source-comparison-capture-001/batch-source-comparisons.json",
+      "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/source-remainders-084-001/source-remainders-084.json",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/administrative-source-rule-fit.json",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/component-state-318.json",
+      "research/geography/southeast-asia-gap-batch-0393f64c-20261009/vintages/source-rule-fit-005/family-roster-122.json",
+      "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/receipt.json",
+      "scripts/administrative.py"
+    ]
+  }
+}

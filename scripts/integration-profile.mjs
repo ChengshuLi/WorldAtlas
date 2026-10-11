@@ -128,7 +128,8 @@ export function selectedDataCandidate(branch, files) {
     files.some(file => file.filename === SELECTION && file.status === 'modified') &&
     files.every(file => !file.previous_filename && ([SELECTION, PACKAGE_INPUT_FILE, ADMINISTRATIVE_REGISTRY].includes(file.filename)
       ? file.status === 'modified' : file.status === 'added' && file.filename.startsWith(owned) && safe(file.filename) &&
-        /\.(?:json|jsonl\.gz|json\.gz|log)$/.test(file.filename) &&
+        (/\.(?:json|jsonl\.gz|json\.gz|log)$/.test(file.filename) || file.filename === owned + 'README.md' ||
+          new RegExp('^' + owned + 'native-operands/(?:rows|runs)-[0-9]+\\.bin\\.gz$').test(file.filename)) &&
         !/(?:^|\/)(?:package(?:-lock)?|tsconfig|jsconfig|binding|deno|composer)\.json$/.test(file.filename)));
 }
 export async function integrationTree(api, repo, commit) {
@@ -156,9 +157,8 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     const expectedPaths = [...added].filter(name => name.endsWith('/selected-delivery-expectations.json'));
     needSelected(expectedPaths.length === 1, 'one reviewed expectations file required');
     const cache = new Map(); let readBytes = 0;
-    const read = async (name, tree = authored) => {
-      const row = tree.entries.get(name);
-      needSelected(ordinary(row), 'missing ordinary role ' + name);
+    const readRow = async row => {
+      needSelected(ordinary(row), 'missing ordinary role');
       if (!cache.has(row.sha)) {
         needSelected(readBytes + row.size <= 16 * 1024 * 1024 && cache.size < 256, 'metadata read budget exceeded');
         readBytes += row.size;
@@ -171,6 +171,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       }
       return cache.get(row.sha);
     };
+    const read = (name, tree = authored) => readRow(tree.entries.get(name));
     const json = async (name, tree) => JSON.parse(await read(name, tree));
     let packageAdditions = [];
     if (files.some(file => file.filename === PACKAGE_INPUT_FILE)) {
@@ -186,9 +187,9 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     const {additive_release: oldHook, ...oldBase} = oldSelection, {additive_release: hook, ...newBase} = selection;
     needSelected(selection.version === 1 && selection.method === 'native-linear-evenodd-first-owner-v1' &&
       selection.artifact_consumption && same(oldBase, newBase) && !same(oldHook, hook), 'selection changes method/base authority');
-    const reachable = new Set(), identities = new Map();
+    const reachable = new Set(), nativeOperands = new Set(), identities = new Map();
     const pin = value => {
-      needSelected(value && safe(value.path) && /\.(?:json|jsonl\.gz|json\.gz|log)$/.test(value.path) &&
+      needSelected(value && safe(value.path) && (/\.(?:json|jsonl\.gz|json\.gz|log)$/.test(value.path) || nativeOperands.has(value.path)) &&
         hash(value.sha256) && Number.isSafeInteger(value.bytes) && value.bytes >= 0, 'invalid inert role pin');
       const row = authored.entries.get(value.path);
       needSelected(ordinary(row) && row.size === value.bytes &&
@@ -230,7 +231,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
           (execution || entry.format === 'source-native-handoff-v1') && typeof entry.id === 'string' && entry.id &&
           /^[a-f0-9]{40}$/.test(entry.accepted_source_commit ?? '') &&
           keys(entry.source, ['blob','bytes','mode','path','sha256']) && safe(entry.source.path) &&
-          /^research\/geography\/[^/]+\/.+\.json$/.test(entry.source.path) && entry.source.mode === '100644' &&
+          /^(?:research\/geography|coordination\/engineering)\/[^/]+\/.+\.json$/.test(entry.source.path) && entry.source.mode === '100644' &&
           /^[a-f0-9]{40}$/.test(entry.source.blob ?? '') && hash(entry.source.sha256) &&
           Number.isSafeInteger(entry.source.bytes) && entry.source.bytes > 0 && entry.source.bytes <= 32 * 1024 * 1024 &&
           strings(entry.cohort_ids) && strings(entry.target_ids) &&
@@ -243,14 +244,87 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       }
       return value.entries;
     };
-    const acceptedSource = async value => {
+    const acceptedSource = async (value, opaque = false) => {
       const current = authored.entries.get(value.path), previous = baseline.entries.get(value.path);
       needSelected(safe(value.path) && ordinary(current) && ordinary(previous) && current.sha === previous.sha &&
         current.size === value.bytes && previous.size === current.size && (!oid(value) || oid(value) === current.sha) &&
         (value.mode === undefined || value.mode === '100644') && hash(value.sha256), 'SOURCE data is not unchanged accepted input');
+      if (opaque && value.mode === '100644' && /^[a-f0-9]{40}$/.test(oid(value) ?? '') &&
+          /^[a-f0-9]{40}$/.test(value.commit ?? '')) {
+        // These unchanged leaves are already named by authenticated SOURCE
+        // metadata and still undergo actual package/geography body validation.
+        // Exact Git pins avoid rereading the physical world merely to select tests.
+        sourceDeclarations.add(value.path);return;
+      }
       const bytes = await read(value.path);
       needSelected(sha256(bytes) === value.sha256, 'accepted SOURCE bytes differ');
       sourceDeclarations.add(value.path);return bytes;
+    };
+    const nativeRoles = async (authority, issued) => {
+      const spec = issued.additive, owners = spec.owner_parts;
+      if (!Array.isArray(owners) || !owners.some(part => added.has(part.path))) return;
+      needSelected(issued.version === 1 && issued.operation === 'unactivated-additive-native-batch-v1' &&
+        owners.length > 0 && owners.length <= 256 && new Set(owners.map(part => part.path)).size === owners.length,
+        'unsupported native operand roles');
+      const facts = await pinnedJSON(authority.original_pins.native_facts);
+      needSelected(facts.version === 1 && facts.operation === issued.operation &&
+        same(content(facts.request), content(authority.original_pins.native_request)) &&
+        same(facts.input_descriptors, [issued.report, ...spec.inputs, ...issued.baseline.pins]), 'native request/facts roster differs');
+      const manifestPin = unique(spec.inputs, row => row.path === spec.manifest_path, 'native manifest input');
+      const unchanged = value => {
+        const before = baseline.entries.get(value.path), after = authored.entries.get(value.path);
+        needSelected(ordinary(before) && ordinary(after) && before.sha === after.sha && before.size === after.size &&
+          after.size === value.bytes && (!oid(value) || after.sha === oid(value)), 'native authority input changed');
+        return after;
+      };
+      unchanged(manifestPin);
+      const manifest = await pinnedJSON({...manifestPin, git_blob_oid: oid(manifestPin)});
+      needSelected(manifest.version === 2 && manifest.method === selection.method && Array.isArray(manifest.parts) &&
+        ['bytes','sha256'].every(key => authority.original_pins.native_manifest[key] === manifestPin[key]) &&
+        oid(authority.original_pins.native_manifest) === oid(manifestPin), 'native manifest authority differs');
+      const transport = manifest.native_asset_transport;
+      needSelected(transport?.version === 1 && transport.kind === 'ordered-exact-original-byte-fragments', 'unknown native transport');
+      unchanged(transport.index);
+      const indexBytes = await read(transport.index.path);
+      needSelected(sha256(indexBytes) === transport.index.sha256, 'native transport index differs');
+      const index = JSON.parse(indexBytes), manifestRoot = spec.manifest_path.slice(0, spec.manifest_path.lastIndexOf('/') + 1),
+        bankRoot = transport.index.path.slice(0, transport.index.path.lastIndexOf('/') + 1);
+      needSelected(index.version === 1 && index.kind === transport.kind && Array.isArray(index.files) && Array.isArray(index.parts),
+        'unsupported native transport index');
+      for (const part of owners.filter(part => added.has(part.path))) {
+        const input = unique(spec.inputs, row => row.path === part.path, 'native operand input');
+        const descriptor = unique(manifest.parts, row => row.path === part.manifest_path, 'native manifest part');
+        const inverse = part.containing_inverse, member = unique(index.files, row => row.path === descriptor.path, 'native bank member');
+        const owned = `coordination/engineering/${branch.slice('engineering/'.length)}/native-operands/`;
+        needSelected(['rows','runs'].includes(descriptor.kind) && descriptor.encoding === 'byte-shuffle' &&
+          Number.isSafeInteger(descriptor.offset) && descriptor.offset >= 0 && Number.isSafeInteger(descriptor.words) && descriptor.words > 0 &&
+          descriptor.path === `native-v1/ownership/${descriptor.kind}-${descriptor.offset}.bin.gz` &&
+          part.path === owned + descriptor.path.split('/').at(-1) && input.mode === '100644' &&
+          same(part.manifest_descriptor, descriptor) && same(inverse?.manifest_descriptor, descriptor) &&
+          inverse.logical_path === manifestRoot + descriptor.path && same(inverse.bank_member, member) &&
+          ['bytes','sha256'].every(key => input[key] === descriptor[key] && member[key] === descriptor[key]) &&
+          input.uncompressed_bytes === descriptor.decoded_bytes && descriptor.decoded_bytes === descriptor.words * 4 &&
+          hash(input.uncompressed_sha256) && hash(descriptor.decoded_sha256), 'native operand identities differ');
+        // The request hashes shuffled bytes; the descriptor hashes canonical words.
+        // Their lengths agree, but their decoded hashes intentionally need not.
+        const pieces = index.parts.filter(row => Math.max(member.offset, row.offset) <
+          Math.min(member.offset + member.bytes, row.offset + row.decoded_bytes));
+        needSelected(pieces.length > 0 && Array.isArray(inverse.whole_containing_fragments) &&
+          inverse.whole_containing_fragments.length === pieces.length &&
+          same(inverse.inverse_ranges, pieces.map(row => ({physical_path: bankRoot + row.path,
+            start: Math.max(member.offset, row.offset) - row.offset,
+            end: Math.min(member.offset + member.bytes, row.offset + row.decoded_bytes) - row.offset}))), 'native inverse ranges differ');
+        for (let i = 0; i < pieces.length; i++) {
+          const row = pieces[i], fragment = inverse.whole_containing_fragments[i];
+          needSelected(fragment.path === bankRoot + row.path && fragment.mode === '100644' &&
+            /^[a-f0-9]{40}$/.test(fragment.commit ?? '') && /^[a-f0-9]{40}$/.test(oid(fragment) ?? '') &&
+            ['offset','bytes','sha256','decoded_bytes','decoded_sha256'].every(key => fragment[key] === row[key]), 'native containing fragment differs');
+          unchanged(fragment);
+        }
+        nativeOperands.add(part.path);
+        pin({...input, git_blob_oid: oid(input)});
+        needSelected(sha256(await read(part.path)) === input.sha256, 'native operand encoded hash differs');
+      }
     };
     const sourceRoles = async authority => {
       const issued = await pinnedJSON(authority.original_pins.source_request), facts = await pinnedJSON(authority.original_pins.source_facts);
@@ -263,9 +337,18 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         same(facts.input_descriptors, [issued.report, ...rule.inputs, ...issued.baseline.pins]), 'SOURCE request/facts join differs');
       administrative ??= registryEntries(await json(ADMINISTRATIVE_REGISTRY));
       const registryPin = unique(rule.inputs, row => row.path === ADMINISTRATIVE_REGISTRY, 'SOURCE registry input');
-      await pinnedJSON({...registryPin, git_blob_oid: oid(registryPin)});
+      // Each qualified SOURCE request keeps its actual execution-time registry.
+      // Later cohorts append entries; they must not rewrite that original pin.
+      needSelected(registryPin.mode === '100644' && /^[a-f0-9]{40}$/.test(registryPin.commit ?? '') &&
+        hash(registryPin.sha256), 'invalid original SOURCE registry pin');
+      const registryBytes = await readRow({path: registryPin.path, mode: registryPin.mode, type: 'blob',
+        sha: oid(registryPin), size: registryPin.bytes});
+      needSelected(sha256(registryBytes) === registryPin.sha256, 'original SOURCE registry bytes differ');
+      const originalRegistry = registryEntries(JSON.parse(registryBytes));
+      needSelected(originalRegistry.length > 0 && same(originalRegistry, administrative.slice(0, originalRegistry.length)),
+        'original SOURCE registry history differs');
       const source = unique(rule.inputs, row => row.path === rule.cases_path, 'registered SOURCE input');
-      const entry = unique(administrative, row => same(content(row.source), content(source)), 'registered SOURCE');
+      const entry = unique(originalRegistry, row => same(content(row.source), content(source)), 'registered SOURCE');
       needSelected(source.commit === entry.accepted_source_commit && rule.outcomes_path === source.path &&
         same(rule.cohort_ids, entry.cohort_ids), 'SOURCE registration scope differs');
       const baselineCommit = baseline.object?.sha ?? base;
@@ -311,14 +394,22 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         needSelected(same(content(input), content(product)) && fields.every(key => product[key] === part[key] && product[key] === input[key]) &&
           hash(product.uncompressed_sha256) && Number.isSafeInteger(product.uncompressed_bytes) && product.uncompressed_bytes > 0,
           'administrative product identities differ');
-        await acceptedSource(product);
+        await acceptedSource(input, true);
       }
       const report = JSON.parse(await acceptedSource(issued.report));
       // The report binds a role, but cannot itself become a newly declared input.
       sourceDeclarations.delete(issued.report.path);
+      // Metadata-only handoff assembly may retain a previously authenticated
+      // physical inverse without claiming that assembly consumed it again.
+      const reused = handoff.reused_whole_product_inputs ?? [];
+      needSelected(Array.isArray(handoff.consumed_inputs) && Array.isArray(reused) && reused.length <= 1024 &&
+        new Set(reused.map(row => row.path)).size === reused.length && reused.every(row =>
+          row.whole_body_consumed === false && row.mode === '100644' && safe(row.path) &&
+          /^[a-f0-9]{40}$/.test(row.commit ?? '') && /^[a-f0-9]{40}$/.test(oid(row) ?? '') && hash(row.sha256) &&
+          Number.isSafeInteger(row.bytes) && row.bytes > 0 && !handoff.consumed_inputs.some(old => old.path === row.path)),
+        'ambiguous or unbound reused physical role');
       needSelected(Array.isArray(rule.original_products) && rule.original_products.length > 0 && rule.original_products.length <= 1024,
         'missing original physical roles');
-      const campaign = source.path.split('/').slice(0, 3).join('/') + '/';
       for (const locator of rule.original_products) {
         const name = locator.original_product_path;
         needSelected(/^(?:components|sources)-\d{3}\.jsonl\.gz$/.test(name ?? ''), 'unknown original physical role');
@@ -329,9 +420,9 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
           fields.every(key => input[key] === product[key]) && restoration.whole_original_bytes === product.bytes &&
           restoration.whole_original_sha256 === product.sha256 && restoration.decoded_bytes === product.uncompressed_bytes &&
           restoration.decoded_sha256 === product.uncompressed_sha256, 'physical restoration identities differ');
-        const retained = unique(handoff.consumed_inputs, row => safe(row.path) && row.path.startsWith(campaign) &&
+        const retained = unique([...handoff.consumed_inputs, ...reused], row => safe(row.path) && /^(?:research\/geography|coordination\/engineering)\/[^/]+\//.test(row.path) &&
           row.path.endsWith('/' + name) && row.bytes === product.bytes && row.sha256 === product.sha256, 'retained physical Git input');
-        await acceptedSource(retained);
+        await acceptedSource(retained, true);
       }
     };
     const sidecar = await pinnedJSON(hook);
@@ -397,6 +488,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         pin(alias.published);
       }
       const nativeRequest = await pinnedJSON(authority.original_pins.native_request), spec = nativeRequest.additive;
+      await nativeRoles(authority, nativeRequest);
       if (sourceExtension) await sourceRoles(authority);
       needSelected(Array.isArray(spec?.inputs) && spec.inputs.length <= 1024, 'missing source role inputs');
       for (const role of ['publication_path','inventory_path','operating_path']) {
@@ -415,6 +507,13 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     await operating(certificate.operating, true);
     const manifest = `coordination/engineering/${branch.slice('engineering/'.length)}/evidence-quality.json`;
     for (const name of added) {
+      if (name === `coordination/engineering/${branch.slice('engineering/'.length)}/README.md`) {
+        needSelected(!reachable.has(name) && !sourceDeclarations.has(name) &&
+          !packagePathRequired(name, validatePackageInputs(await json(PACKAGE_INPUT_FILE))), 'README is a consumed role');
+        const bytes = await read(name);
+        needSelected(bytes.length <= 128 * 1024 && !bytes.includes(0) && Buffer.from(bytes.toString('utf8')).equals(bytes), 'nontext packet README');
+        continue;
+      }
       if (reachable.has(name) || name === expectedPaths[0] || name === manifest) continue;
       // Non-consumed supporting evidence cannot become package input. It must
       // still be ordinary inert JSON/text, never a module, configuration or archive.

@@ -1,3 +1,4 @@
+import {readFileSync} from 'node:fs';
 import {isDeepStrictEqual as same} from "node:util";
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -122,7 +123,7 @@ function gateFixture(f=fixture()) {
   const base='b'.repeat(40), head='c'.repeat(40), root='/repos/owner/repo';
   const issue={number:10,state:'open',created_at:'2020-01-01T00:00:00Z',labels:['type:engineering','kind:work-item','status:ready'],
     body:'<!-- worldatlas-work:v1\n'+JSON.stringify({max_prs:2,depends_on:[],mode:'engineering',scope:'Exact unchanged-method selected data',...(f.sourceState?{owned_paths:[administrativePath]}:{})})+'\n-->'};
-  const claim={version:1,active:true,issue_number:10,worker_id:'author',claim_id:'selected-claim',branch:'engineering/fixture-delivery',mode:'engineering',expires_at:'2099-01-01T00:00:00Z'};
+  const claim={version:1,active:true,issue_number:10,worker_id:'author',claim_id:'selected-claim',branch:f.branch??'engineering/fixture-delivery',mode:'engineering',expires_at:'2099-01-01T00:00:00Z'};
   const pr={number:20,state:'open',changed_files:f.files.length,body:'Refs #10',head:{sha:head,ref:claim.branch,repo:{full_name:'owner/repo'}},
     base:{sha:base,ref:'main',repo:{full_name:'owner/repo'}}};
   f.baseline.object={sha:base};
@@ -130,7 +131,7 @@ function gateFixture(f=fixture()) {
   const blobAPI=f.api;
   f.api=async route=>{
     if(route===root+'/pulls/20')return structuredClone(pr);
-    if(route===root+'/pulls/20/files?per_page=100&page=1')return f.files;
+    if(route.startsWith(root+'/pulls/20/files?per_page=100&page=')){const page=Number(route.split('=').at(-1));return f.files.slice((page-1)*100,page*100);}
     if(route===root+'/issues/10')return issue;
     if(route===root+'/issues/10/comments?per_page=100&page=1')return [{id:1,user:{login:'github-actions[bot]'},body:'**Worker reservation:** claimed\n\n<!-- worldatlas-claim:v1\n'+JSON.stringify(claim)+'\n-->'}];
     if(route===root+'/issues/10/timeline?per_page=100&page=1')return [];
@@ -512,4 +513,231 @@ test('real SOURCE metadata entry and cold final-capacity proof include every add
   const exact=mergeFixture({capacity:result.final_capacity.required,selectedFixture:retainedSourceFixture()});
   const accepted=await exact.complete();assert.equal(accepted.accepted,true);assert.equal(exact.writes.length,1);
   assert(exact.afterCalls<=accepted.final_capacity.validation_call_bound);
+});
+
+// Only mutable global metadata is snapshotted. Original delivery vintages stay
+// in their retained repository paths and are checked against actual Git bodies.
+const fixedRows=new Map(),fixedBlobs=new Map();
+function fixedDeliveryFixture({leanPackage=false}={}) {
+  const fixed=JSON.parse(readFileSync(new URL('./fixtures/selected-native-role-ci-1726.json',import.meta.url))),
+    files=structuredClone(fixed.files),added=new Set(files.filter(row=>row.status==='added').map(row=>row.filename)),
+    blobs=new Map(fixedBlobs),reads=[],root='/repos/owner/repo';
+  const git=(...args)=>execFileSync('git',args,{maxBuffer:32*1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
+  const oid=bytes=>createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
+  for(const snap of fixed.snapshots){const raw=Buffer.from(snap.body);assert.equal(raw.length,snap.bytes);assert.equal(digest(raw),snap.sha256);assert.equal(oid(raw),snap.git_blob_oid);blobs.set(snap.git_blob_oid,raw);}
+  const rows=fixedRows;
+  const repositoryRow=name=>{
+    if(rows.has(name))return rows.get(name);
+    const raw=git('ls-tree','HEAD','--',name).toString('utf8').trim(),match=/^(\d+) (\w+) ([a-f0-9]+)\t(.+)$/.exec(raw);
+    if(!match)return undefined;
+    const row={path:match[4],mode:match[1],type:match[2],sha:match[3],size:Number(git('cat-file','-s',match[3]).toString())};rows.set(name,row);return row;
+  };
+  class RoleTree extends Map {
+    constructor(commit){super();this.commit=commit;}
+    get(name){
+      if(super.has(name))return super.get(name);
+      if(this.commit===fixed.base&&added.has(name))return undefined;
+      const snapshot=fixed.snapshots.find(row=>row.commit===this.commit&&row.path===name);
+      const row=snapshot?{path:name,mode:snapshot.mode,type:'blob',sha:snapshot.git_blob_oid,size:snapshot.bytes}:repositoryRow(name);
+      if(row)super.set(name,{...row});return super.get(name);
+    }
+    has(name){return Boolean(this.get(name));}
+  }
+  const baseline={object:{sha:fixed.base},entries:new RoleTree(fixed.base)},authored={object:{sha:fixed.head},entries:new RoleTree(fixed.head)};
+  for(const row of files){baseline.entries.get(row.filename);authored.entries.get(row.filename);}
+  const api=async route=>{
+    if(route.includes('/git/blobs/')){const sha=route.split('/').at(-1);if(!blobs.has(sha)){const raw=git('cat-file','blob',sha);blobs.set(sha,raw);fixedBlobs.set(sha,raw);}const bytes=blobs.get(sha);reads.push(sha);return {sha,size:bytes.length,encoding:'base64',content:bytes.toString('base64')};}
+    if(route.startsWith(root+'/compare/'))return {status:'ahead'};
+    if(route.startsWith(root+'/git/commits/')){const sha=route.split('/').at(-1);const source=fixed.accepted_sources.find(row=>row.commit===sha);assert(source,route);return {sha,tree:{sha:source.tree}};}
+    if(route.startsWith(root+'/git/trees/')){const sha=route.split('/').at(-1).split('?')[0],source=fixed.accepted_sources.find(row=>row.tree===sha);assert(source,route);return {truncated:false,tree:[source.entry]};}
+    throw Error('Unexpected fixed delivery API route '+route);
+  };
+  const put=(name,value,old=false)=>{const bytes=Buffer.from(typeof value==='string'?value:JSON.stringify(value)),sha=oid(bytes);blobs.set(sha,bytes);const row={path:name,mode:'100644',type:'blob',sha,size:bytes.length};authored.entries.set(name,row);if(old)baseline.entries.set(name,row);return {path:name,mode:'100644',git_blob_oid:sha,bytes:bytes.length,sha256:digest(bytes),commit:'a'.repeat(40)};};
+  if(leanPackage){
+    const policy=JSON.parse(blobs.get(baseline.entries.get('.github/package-inputs.json').sha));
+    put('.github/package-inputs.json',{...policy,inputs:[...policy.inputs,...fixed.prospective_lean_package.inputs]});
+  }
+  const document=name=>{const row=authored.entries.get(name);if(!blobs.has(row.sha)){const raw=git('cat-file','blob',row.sha);blobs.set(row.sha,raw);fixedBlobs.set(row.sha,raw);}return JSON.parse(blobs.get(row.sha));};
+  const f={fixed,files,branch:fixed.branch,baseline,authored,blobs,reads,api,put,document,sourceState:{}};
+  f.run=()=>selectedDataSelection({api:f.api,repo:'owner/repo',branch:f.branch,files:f.files,baseline,authored});return f;
+}
+test('fixed complete COD/PHL package preparation declarations correctly retain full CI',async()=>{
+  const f=fixedDeliveryFixture();assert.equal(selectedDataCandidate(f.branch,f.files),true);
+  assert.equal(await f.run(),null); // Includes unconsumed preparation evidence and scripts/administrative.py.
+  const operands=f.files.filter(row=>row.filename.endsWith('.bin.gz'));assert.equal(operands.length,7);
+  for(const row of operands)assert(f.reads.includes(f.authored.entries.get(row.filename).sha));
+});
+
+
+test('only a new unconsumed packet-root README is eligible supporting text',async()=>{
+  const f=fixture({mutate:f=>f.put(prefix+'README.md','Retained delivery packet\n')});
+  assert.equal((await f.run()).test_selection,'selected-data');
+  f.definition.inputs.push(prefix+'README.md');f.put('.github/package-inputs.json',f.definition);
+  assert.equal(await f.run(),null,'a packaged README is not inert supporting text');
+});
+for(const [label,change] of Object.entries({
+  'nested README':f=>f.put(prefix+'nested/README.md','text'),
+  'other Markdown':f=>f.put(prefix+'notes.md','text'),
+  'NUL README':f=>f.put(prefix+'README.md','a\0b'),
+  'oversized README':f=>f.put(prefix+'README.md','a'.repeat(128*1024+1)),
+  'executable README':f=>{f.put(prefix+'README.md','text');f.authored.entries.get(prefix+'README.md').mode='100755';},
+  'symlink README':f=>{f.put(prefix+'README.md','text');f.authored.entries.get(prefix+'README.md').mode='120000';},
+}))test('packet documentation falls back for '+label,async()=>assert.equal(await fixture({mutate:change}).run(),null));
+
+test('unchanged SOURCE opaque leaves retain exact baseline/candidate Git body and mode bindings',async()=>{
+  for(const mutation of ['body','both-body','size','mode']){
+    const f=retainedSourceFixture(),name=f.sourceState.packageRoles.find(name=>name.endsWith('.bin.gz'));
+    assert(name);const row=f.authored.entries.get(name);
+    if(mutation==='body'||mutation==='both-body')row.sha='0'.repeat(40);
+    if(mutation==='both-body')f.baseline.entries.get(name).sha=row.sha;
+    if(mutation==='size')row.size++;
+    if(mutation==='mode')row.mode='100755';
+    assert.equal(await f.run(),null,mutation);
+  }
+});
+test('selected structural eligibility retains its metadata byte and body-count limits',async()=>{
+  const bytes=fixture({mutate:f=>f.put(prefix+'oversized-evidence.json',JSON.stringify('x'.repeat(16*1024*1024)))});
+  assert.equal(await bytes.run(),null);
+  assert(!bytes.reads.includes(bytes.authored.entries.get(prefix+'oversized-evidence.json').sha),'over-budget body was fetched');
+  const count=fixture({mutate:f=>{for(let n=0;n<256;n++)f.put(prefix+'evidence-'+n+'.json',{n});}});
+  assert.equal(await count.run(),null);assert.equal(new Set(count.reads).size,256);
+});
+
+
+test('prospective lean package keeps the actual COD/PHL scientific graph and selects targeted checks',async()=>{
+  const f=fixedDeliveryFixture({leanPackage:true});
+  assert.deepEqual(await f.run(),{test_selection:'selected-data',expectations_path:'coordination/engineering/congo-ago2018-delivery-20261011/selected-delivery-expectations.json',shards:[0]});
+  const proof=f.fixed.prospective_lean_package.outer_reader,report=f.document(proof.path),reportRow=f.authored.entries.get(proof.path);
+  assert.equal(reportRow.sha,proof.git_blob_oid);assert.equal(reportRow.size,proof.bytes);assert.equal(digest(f.blobs.get(reportRow.sha)),proof.sha256);
+  const declared=f.document('.github/package-inputs.json').inputs,required=new Set(report.inventory.map(row=>row.path));
+  for(const locator of f.fixed.authorities){
+    const authority=f.document(locator.authority_path);required.add(locator.authority_path);
+    Object.values(authority.original_pins).forEach(pin=>required.add(pin.path));
+    for(const role of ['publication','inventory','operating'])required.add(authority.native_proof[role].path);
+    authority.native_proof.assets.forEach(pin=>required.add(pin.path));
+    const native=f.document(locator.native_request).additive,aliases=authority.source_output_aliases??[];
+    for(const role of ['publication_path','inventory_path','operating_path']){
+      const original=native.inputs.find(pin=>pin.path===native[role]);
+      required.add((aliases.find(alias=>alias.original.path===original.path)?.published??original).path);
+    }
+    aliases.forEach(alias=>required.add(alias.published.path));
+  }
+  for(const name of required)assert(declared.some(input=>input===name||input.endsWith('/')&&name.startsWith(input)),name);
+  assert.equal(f.fixed.prospective_lean_package.inputs.length,97);
+  assert(f.fixed.prospective_lean_package.removed_preparation_only_inputs.includes('scripts/administrative.py'));
+  const readBytes=[...new Set(f.reads)].reduce((sum,oid)=>sum+f.blobs.get(oid).length,0);
+  assert(readBytes<=16*1024*1024);assert(f.reads.length<256);
+});
+
+
+// Synthetic malicious metadata only: rebind every enclosing exact JSON pin so
+// the real native-role checks, rather than a stale outer hash, must refuse it.
+function rewriteFixedNative(f,mutate,{factsMutate=()=>{}}={}) {
+  const locator=f.fixed.authorities[0],authority=f.document(locator.authority_path),
+    request=f.document(locator.native_request),facts=f.document(authority.original_pins.native_facts.path);
+  mutate(request);
+  const requestPin=f.put(locator.native_request,request);
+  facts.request={...facts.request,...requestPin,blob:requestPin.git_blob_oid};
+  facts.input_descriptors=[request.report,...request.additive.inputs,...request.baseline.pins];
+  facts.source_predecessor=request.additive;factsMutate(facts);
+  authority.original_pins.native_request=requestPin;
+  authority.original_pins.native_facts=f.put(authority.original_pins.native_facts.path,facts);
+  const authorityPin=f.put(locator.authority_path,authority),selection=f.document('data/ownership-selection.json'),
+    side=f.document(selection.additive_release.path),registry=f.document(side.authority_registry.path);
+  const entry=registry.entries.find(row=>row.source_authority.path===locator.authority_path);
+  entry.source_authority=authorityPin;entry.authority_sha256=authorityPin.sha256;
+  const registryPin=f.put(side.authority_registry.path,registry);
+  const ledger=f.document(side.logical_asset_map.ledger.path),certificate=f.document(ledger.current_rebind.path),
+    operating=f.document(certificate.operating.path),plan=f.document(operating.execution_custody.issued_plan.path);
+  plan.original_inputs[0]=registryPin;
+  operating.execution_custody.issued_plan=f.put(operating.execution_custody.issued_plan.path,plan);
+  certificate.operating=f.put(certificate.operating.path,operating);certificate.authority_registry_sha256=registryPin.sha256;
+  ledger.current_rebind=f.put(ledger.current_rebind.path,certificate);
+  side.authority_registry=registryPin;side.logical_asset_map.ledger=f.put(side.logical_asset_map.ledger.path,ledger);
+  const hook=f.put(selection.additive_release.path,side);
+  selection.additive_release={path:hook.path,bytes:hook.bytes,sha256:hook.sha256};f.put('data/ownership-selection.json',selection);
+  const expectedPath=f.files.find(row=>row.filename.endsWith('/selected-delivery-expectations.json')).filename,
+    expected=f.document(expectedPath);expected.selected_ledger_sha256=side.logical_asset_map.ledger.sha256;f.put(expectedPath,expected);
+}
+for(const [label,mutate] of Object.entries({
+  'native manifest descriptor':r=>{r.additive.owner_parts.find(p=>p.path.includes('/congo-ago2018-')).manifest_descriptor.sha256='0'.repeat(64);},
+  'native inverse range':r=>{r.additive.owner_parts.find(p=>p.path.includes('/congo-ago2018-')).containing_inverse.inverse_ranges[0].start++;},
+  'native bank member':r=>{r.additive.owner_parts.find(p=>p.path.includes('/congo-ago2018-')).containing_inverse.bank_member.offset++;},
+  'native containing fragment':r=>{r.additive.owner_parts.find(p=>p.path.includes('/congo-ago2018-')).containing_inverse.whole_containing_fragments[0].blob='0'.repeat(40);},
+  'native decoded length':r=>{r.additive.inputs.find(p=>p.path.includes('/congo-ago2018-')&&p.path.endsWith('.bin.gz')).uncompressed_bytes++;},
+  'native operand encoded hash':r=>{r.additive.inputs.find(p=>p.path.includes('/congo-ago2018-')&&p.path.endsWith('.bin.gz')).sha256='0'.repeat(64);},
+  'native input duplicate':r=>{r.additive.inputs.push(structuredClone(r.additive.inputs.find(p=>p.path.includes('/congo-ago2018-')&&p.path.endsWith('.bin.gz'))));},
+}))test('fixed native role refuses rebound '+label,async()=>{
+  const f=fixedDeliveryFixture({leanPackage:true});rewriteFixedNative(f,mutate);assert.equal(await f.run(),null);
+});
+test('fixed native role refuses facts input omission after outer pin rebinding',async()=>{
+  const f=fixedDeliveryFixture({leanPackage:true});rewriteFixedNative(f,()=>{},{factsMutate:facts=>facts.input_descriptors.pop()});assert.equal(await f.run(),null);
+});
+
+test('fixed native mutation harness preserves a valid exact outer pin graph before adverse changes',async()=>{
+  const f=fixedDeliveryFixture({leanPackage:true});rewriteFixedNative(f,()=>{});
+  assert.equal((await f.run())?.test_selection,'selected-data');
+});
+
+async function fixedConsumerFixture(options={}) {
+  const f=fixedDeliveryFixture({leanPackage:true});
+  // Populate the fake complete Git trees from retained immutable metadata;
+  // subsequent consumer calls have fresh API/planning caches and counters.
+  assert.equal((await f.run()).test_selection,'selected-data');f.reads.length=0;
+  return options.gate?gateFixture(f):mergeFixture({...options,selectedFixture:f});
+}
+test('fixed COD/PHL lean declarations reach actual author selection and cold final-capacity merge validation',async()=>{
+  const gate=await fixedConsumerFixture({gate:true}),selection=await gate.gate();
+  assert.equal(selection.test_selection,'selected-data');assert.deepEqual(selection.shards,[0]);assert.equal(selection.package.full,true);
+  const prep=await fixedConsumerFixture(),prepared=await prepareIntegration(prep.options);
+  assert.equal(prepared.test_selection,'selected-data');assert.equal(prepared.proof.test_selection,'selected-data');
+  const cold=await fixedConsumerFixture(),result=await cold.complete();
+  assert.equal(result.accepted,true);assert(result.final_capacity.proof_calls>30);
+  const exact=await fixedConsumerFixture({capacity:result.final_capacity.required}),accepted=await exact.complete();
+  assert.equal(accepted.accepted,true);assert.equal(exact.writes.length,1);
+  assert(exact.afterCalls<=accepted.final_capacity.validation_call_bound);
+});
+
+for(const [label,mutate] of Object.entries({
+  'orphan operand':f=>{const name='coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-999.bin.gz';f.put(name,'orphan');f.files.push({filename:name,status:'added'});},
+  'executable operand':f=>{f.authored.entries.get(f.files.find(row=>row.filename.endsWith('.bin.gz')).filename).mode='100755';},
+  'substituted encoded body':f=>{const row=f.authored.entries.get(f.files.find(row=>row.filename.endsWith('.bin.gz')).filename);f.blobs.set(row.sha,Buffer.alloc(row.size));},
+  'changed original registry prefix':f=>{const body=f.document(administrativePath);body.entries[0].id='changed';f.put(administrativePath,body);},
+  'ambiguous registered source':f=>{const body=f.document(administrativePath);body.entries.push(structuredClone(body.entries[0]));f.put(administrativePath,body);},
+  'unaccepted source':f=>{const prior=f.api;f.api=route=>route.includes('/compare/')?Promise.resolve({status:'diverged'}):prior(route);},
+  'changed native manifest':f=>{const request=f.document(f.fixed.authorities[0].native_request);f.authored.entries.get(request.additive.manifest_path).sha='0'.repeat(40);},
+}))test('fixed selected graph refuses '+label,async()=>{
+  const f=fixedDeliveryFixture({leanPackage:true});mutate(f);assert.equal(await f.run(),null);
+});
+test('native physical path cannot escape its exact new operand role',async()=>{
+  const f=fixedDeliveryFixture({leanPackage:true});rewriteFixedNative(f,request=>{
+    const part=request.additive.owner_parts.find(p=>p.path.includes('/congo-ago2018-'));
+    const input=request.additive.inputs.find(p=>p.path===part.path);input.path=part.path=part.path.replace('/native-operands/','/foreign/');
+  });assert.equal(await f.run(),null);
+});
+
+function reusePhysicalRole(state) {
+  const index=state.handoff.consumed_inputs.findIndex(row=>row.path.endsWith('/components-030.jsonl.gz'));
+  assert(index>=0);const [row]=state.handoff.consumed_inputs.splice(index,1);
+  const entry=state.f.authored.entries.get(row.path);
+  // Schema-only alternative on the retained UKR body, not a claimed NOR execution.
+  state.handoff.reused_whole_product_inputs=[{...row,commit:state.registration.accepted_source_commit,
+    mode:entry.mode,git_blob_oid:entry.sha,whole_body_consumed:false}];
+  return state.handoff.reused_whole_product_inputs[0];
+}
+test('explicit reused physical role preserves non-consumption while exact original SOURCE joins pass',async()=>{
+  const f=retainedSourceFixture({mutate:reusePhysicalRole});assert.equal((await f.run()).test_selection,'selected-data');
+  assert.equal(f.sourceState.handoff.reused_whole_product_inputs[0].whole_body_consumed,false);
+});
+for(const [label,mutate] of Object.entries({
+  'missing reuse flag':(s,r)=>{delete r.whole_body_consumed;},
+  'false consumption claim':(s,r)=>{r.whole_body_consumed=true;},
+  'missing full commit':(s,r)=>{delete r.commit;},
+  'missing full OID':(s,r)=>{delete r.blob;delete r.git_blob_oid;},
+  'changed body OID':(s,r)=>{r.blob='0'.repeat(40);r.git_blob_oid='0'.repeat(40);},
+  'changed encoded hash':(s,r)=>{r.sha256='0'.repeat(64);},
+  'cross-list duplicate':(s,r)=>{s.handoff.consumed_inputs.push({...r});},
+  'same-list duplicate':(s,r)=>{s.handoff.reused_whole_product_inputs.push({...r});},
+}))test('explicit reused physical role refuses '+label,async()=>{
+  const f=retainedSourceFixture({mutate:s=>mutate(s,reusePhysicalRole(s))});assert.equal(await f.run(),null);
 });
