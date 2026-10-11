@@ -1040,6 +1040,8 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
  const liveMetadata=carriedMetadataBytes+2*(valueBytes({certificate,bodies,acquisitionSpec,code,historicalCode,currentCode,originalCode,roster,externalRoster,...(issuedOriginalInputs===undefined?{}:{issuedOriginalInputs})}).length+externalBytes);
 
  const acquired=acquireCurrentRebindOperands(snapshot,registry,originalRows,originalPatches,{...acquisitionSpec,carriedMetadataBytes:liveMetadata});
+ // Preserve the complete live-table/result peak before the reopen frame resets.
+ const outputPhaseBytes=reader.used;
  // Complete raw row/run frames have returned. All acquired result/rows/targets,
  // source/native custody and the full selected snapshot stay live and charged.
  reclaimCompletedRebindFrame();
@@ -1055,7 +1057,7 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
  demand(Number.isSafeInteger(identityScratch)&&identityScratch<=FILE&&reader.used+identityScratch<=PHASE,'Complete native identity comparison scratch exceeds phase');reader.used+=identityScratch;
  const result=verifyCurrentRebindProducts({certificate,...bodies,baseSelection,registry,originalRows,originalPatches,size,expectedCode,acquired,executionCustody,bodyPins:Object.fromEntries(roster.map(({name,p})=>[name,p]))});
  // A sequential phase must never hide an earlier complete acquisition peak.
- reader.used=Math.max(priorPhaseBytes,reader.used,...acquired.acquisition_phases.map(p=>p.complete_phase_bytes));
+ reader.used=Math.max(priorPhaseBytes,outputPhaseBytes,reader.used,...acquired.acquisition_phases.map(p=>p.complete_phase_bytes));
  return result;
 }
 
