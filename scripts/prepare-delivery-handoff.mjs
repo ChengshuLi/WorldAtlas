@@ -529,6 +529,7 @@ export function finalizeDelivery(config, reader) {
   need(assets.base_manifest.sha256 === selection.sha256, 'Final base manifest differs from unchanged selector');
   const baseManifest = reader.json(assets.base_manifest);
   need(assets.owner_roster.sha256 === baseManifest.original_assets?.bounds?.sha256, 'Final owner roster differs from original native bounds');
+  reader.read(assets.owner_roster); // Authenticate the retained encoded alias; no decoding or graph computation.
   const selected = reader.json(config.selected_ledger), patch = reader.json(assets.patch), envelope = reader.json(sidecar.runtime_envelope);
   need(typeof selection.release_id === 'string' && baseManifest.geographic_release === selection.release_id
     && hex(baseManifest.footprints_sha256, 64) && hex(baseManifest.hierarchy_sha256, 64)

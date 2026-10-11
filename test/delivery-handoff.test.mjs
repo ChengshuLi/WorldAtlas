@@ -168,7 +168,7 @@ test('immutable Git input reader rejects whole-body drift, missing objects and n
   const root = directory(t); const git = (...args) => execFileSync('git', args, {cwd: root, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
   git('init'); git('config', 'user.name', 'Fixture'); git('config', 'user.email', 'fixture@example.invalid'); write(root, 'input.json', jsonBytes({value: 1}));
   git('add', 'input.json'); git('commit', '-m', 'Fixture'); const r = pinReader(root), pin = r.pin(git('rev-parse', 'HEAD'), 'input.json');
-  assert.equal(r.json(pin).value, 1); assert.throws(() => r.read({...pin, sha256: '0'.repeat(64)}), /hash differs/);
+  assert.equal(r.json(pin).value, 1); assert.throws(() => r.read({...pin, path: 'missing.json'}), /Missing ordinary/); assert.throws(() => r.read({...pin, sha256: '0'.repeat(64)}), /hash differs/);
   assert.throws(() => r.read({...pin, mode: '120000'}), /identity/); assert.throws(() => r.read({...pin, path: '../input.json'}), /safe/);
 });
 
@@ -363,7 +363,10 @@ function finalizationFixture() {
 }
 
 test('finalization joins genuine release metadata, stages fresh files, and repeats without changes', t => {
-  const {reader,config} = finalizationFixture(), root = directory(t), output = finalizeDelivery(config, reader);
+  const {reader,config} = finalizationFixture(), root = directory(t), reads = [], originalRead = reader.read;
+  reader.read = pin => { reads.push(pin.path); return originalRead(pin); };
+  const output = finalizeDelivery(config, reader);
+  assert.ok(reads.includes(reader.json(config.sidecar).logical_asset_map.owner_roster.path), 'retained owner whole pin was authenticated');
   assert.equal(JSON.parse(output['selected-delivery-expectations.json']).selected_ledger_sha256, config.selected_ledger.sha256);
   const again = finalizeDelivery({...config, selector: reader.add(config.selector.path, output['ownership-selection.json']),
     package_inputs: reader.add(config.package_inputs.path, output['package-inputs.json'])}, reader);
