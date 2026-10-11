@@ -557,8 +557,9 @@ def selected_continuous(repo, baseline, candidate, detector):
     entrypoint = repo / 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs'
     with tempfile.TemporaryDirectory(prefix='trusted-selected-footprints-') as temporary:
         destination = pathlib.Path(temporary).resolve() / 'complete'
-        raw = subprocess.check_output([executable, str(entrypoint), 'continuous', str(repo), baseline,
-                                      baseline, candidate, str(destination), sys.executable], env=env, stderr=subprocess.PIPE)
+        with stage_timing('selected-continuous-node-operands'):
+            raw = subprocess.check_output([executable, str(entrypoint), 'continuous', str(repo), baseline,
+                                          baseline, candidate, str(destination), sys.executable], env=env)
         if len(raw) > MAX_BYTES:
             raise ValueError('Cold selected acknowledgement exceeds output cap')
         issued = json.loads(raw)
@@ -621,7 +622,8 @@ def selected_continuous(repo, baseline, candidate, detector):
             base_hashes[vintage][identity] = row['geometry_sha256']
         if any(sorted(v) != ids for v in base_hashes.values()):
             raise ValueError('Complete source geometry inverse scope differs')
-        result = compare_effective_primitives(detector, operands['baseline'], operands['candidate'], additions, base_hashes)
+        with stage_timing('selected-continuous-python-compare'):
+            result = compare_effective_primitives(detector, operands['baseline'], operands['candidate'], additions, base_hashes)
         if result['changed_location_ids'] != plan['changed_ids']:
             raise ValueError('Original polygon operator changed-ID closure differs from complete certificate')
         return {'version': 1, 'kind': 'trusted-selected-continuous-comparison-v1',

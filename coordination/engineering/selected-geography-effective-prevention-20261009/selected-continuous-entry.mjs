@@ -10,6 +10,18 @@ const P='coordination/engineering/selected-geography-effective-prevention-202610
 const CODE=[P+'selected-continuous-entry.mjs',P+'selected-neighbor-prevention.mjs','scripts/check-effective-geographic-regression.mjs','src/ownership-codec.js','scripts/run-geographic-check.py','scripts/check-geographic-regression.py','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt'];
 const demand=(v,m)=>{if(!v)throw Error(m);},sha=b=>createHash('sha256').update(b).digest('hex');
 const coldGc=globalThis.gc;
+function timedStage(name, details, run) {
+ const start=performance.now();
+ process.stderr.write(JSON.stringify({selected_continuous_stage:name,event:'start',...details})+'\n');
+ try { return run(); }
+ finally { process.stderr.write(JSON.stringify({selected_continuous_stage:name,event:'end',...details,elapsed_ms:Math.round(performance.now()-start)})+'\n'); }
+}
+// An additive hook can only disable the old shortcut. It grants no acceptance;
+// the independent coordinate children still validate both complete selections.
+export function mayUseNonAdditiveShortcut(beforeReader,afterReader) {
+ const selectors=[beforeReader,afterReader].map(reader=>reader.json('data/ownership-selection.json'));
+ return !selectors.some(value=>value!==null&&typeof value==='object'&&Object.hasOwn(value,'additive_release'));
+}
 export function checkColdReclaimer(){demand(process.execArgv.length===1&&process.execArgv[0]==='--expose-gc'&&process.env.NODE_OPTIONS===undefined&&process.env.NODE_PATH===undefined&&typeof coldGc==='function'&&globalThis.gc===coldGc&&Function.prototype.toString.call(coldGc).includes('[native code]'),'Cold whole-source acquisition requires authenticated native GC entry');}
 function reclaimCompletedSource(){checkColdReclaimer();coldGc();}
 const commit=v=>typeof v==='string'&&/^[a-f0-9]{40}$/.test(v);
@@ -30,7 +42,7 @@ export async function coordinateStage(repo,trusted,selected,destination,parentRu
  const helper=await import('./selected-neighbor-prevention.mjs');
  const startup=native.selectedBootstrap(repo,selected,selected,{parentRuntimePath});
  startup.beforeReader.outputBytes=FILE;startup.beforeReader.phase();
- const snapshot=native.loadSelection(startup.beforeReader);demand(snapshot,'Selected continuous certificate requires a committed native selection');
+ const snapshot=timedStage('coordinate-selection',{selected},()=>native.loadSelection(startup.beforeReader));demand(snapshot,'Selected continuous certificate requires a committed native selection');
  // Completed metadata helper frames no longer retain raw decoded containers.
  // The complete authenticated snapshot remains live and charged below.
  checkColdReclaimer();coldGc();
@@ -39,7 +51,7 @@ export async function coordinateStage(repo,trusted,selected,destination,parentRu
  // separate certificate authenticates every actual selected whole source body,
  // full unique owner roster and per-record pointsets; it does not recompute the
  // legacy world digest using a source traversal that was never its method.
- for(const name of resolver.paths){shards.push(helper.selectedCoordinateShard(resolver,[name],{priorShards:shards}));
+ for(const name of resolver.paths){shards.push(timedStage('coordinate-source',{selected,source:name},()=>helper.selectedCoordinateShard(resolver,[name],{priorShards:shards})));
   // Only compact immutable certificates survive here. The complete original
   // FeatureCollection has left the helper frame; reclaim it before next input.
   reclaimCompletedSource();
@@ -83,7 +95,7 @@ export function validatePersistedColdSide(native,helper,{repo,selected,parentRun
  const carriedBytes=2*helper.valueBytes(carriedState).length;
  const reader=coldReader(native,context,selected,carriedBytes);
  reader.metadataBytes=8388608+carriedBytes;reader.outputBytes=FILE;reader.phase();
- const snapshot=native.loadSelection(reader);demand(snapshot,'Selected cold side removed or unsupported');
+ const snapshot=timedStage('persisted-selection',{selected},()=>native.loadSelection(reader));demand(snapshot,'Selected cold side removed or unsupported');
  const resolver=snapshot.geometrySources??new native.SelectedGeometrySources(snapshot);
  reader.metadataBytes=8388608+carriedBytes+2*snapshot.metadataBytes;reader.phase();
  const product=readColdProduct(directory,ack,reader,helper);
@@ -107,13 +119,12 @@ export function reopenCompleteColdPlan(native,helper,{repo,baseline,candidate,pa
  demand(rows.baseline.length===required.size&&rows.candidate.length===required.size,'Complete affected cold row closure differs');
  return {plan,rows,inputs:{baseline:oldCertificate.inputs,candidate:newCertificate.inputs},complete_phase_bytes:reader.used};
 }
-export function acquireContinuousSource(native,helper,{repo,selected,parentRuntimePath,name,receipt,rows,inputs,context,carriedBytes}) {
- const reader=coldReader(native,context,selected,carriedBytes);
- reader.metadataBytes=8388608+carriedBytes;reader.outputBytes=FILE;reader.phase();
- const snapshot=native.loadSelection(reader);demand(snapshot,'Required selected side removed');
- const resolver=snapshot.geometrySources??new native.SelectedGeometrySources(snapshot);
+// The actual whole collection/raw buffers belong only to this completed frame.
+// The enclosing same-vintage frame retains authenticated metadata and projected
+// outputs, never a whole containing source or a cross-vintage reader cache.
+function projectContinuousSource(helper,{reader,snapshot,resolver,name,receipt,rows,inputs}) {
  demand(helper.valueSha(snapshot.selection)===helper.valueSha(receipt.binding.selection)&&helper.valueSha(resolver.release)===helper.valueSha(receipt.binding.release)&&helper.valueSha(resolver.sources)===helper.valueSha(receipt.binding.sources)&&helper.valueSha(snapshot.owners)===receipt.binding.owners_sha256,'Reacquired selected source differs from complete cold binding');
- reader.metadataBytes=8388608+carriedBytes+2*snapshot.metadataBytes;reader.phase();
+
  const actual=resolver.read(name),input=inputs.find(p=>p.path===name);
  demand(input&&actual.whole_sha256===input.whole_body_sha256,'Complete affected containing input differs from qualified certificate');
  const features={},inverse=[];
@@ -125,22 +136,52 @@ export function acquireContinuousSource(native,helper,{repo,selected,parentRunti
  demand(helper.valueBytes({features,inverse}).length<=FILE,'Complete required source projection exceeds ordinary bound');
  return {features,inverse,complete_phase_bytes:reader.used,inputs:[...reader.inventory.values()]};
 }
+export function acquireContinuousSources(native,helper,{repo,selected,parentRuntimePath,names,receipt,rows,inputs,context,carriedBytes}) {
+ demand(Array.isArray(names)&&names.every(name=>typeof name==='string')&&new Set(names).size===names.length,'Foreign/duplicate required containing source');
+ demand(Number.isSafeInteger(carriedBytes)&&carriedBytes>=0,'Incomplete required-source carry');
+ if(!names.length)return [];
+ const reader=coldReader(native,context,selected,carriedBytes);
+ reader.metadataBytes=8388608+carriedBytes;reader.outputBytes=FILE;reader.phase();
+ const snapshot=timedStage('required-side-selection',{selected,sources:names.length},()=>native.loadSelection(reader));
+ demand(snapshot&&snapshot.reader===reader&&reader.version===selected,'Required selected side removed or rebound');
+ const resolver=snapshot.geometrySources??new native.SelectedGeometrySources(snapshot),results=[];
+ for(const name of names){
+  demand(snapshot.reader===reader&&resolver.reader===reader&&reader.version===selected,'Required selected side removed or rebound');
+  demand(resolver.paths.includes(name),'Foreign required containing source');
+  // Count the complete retained snapshot plus every prior projection/receipt and
+  // the growing reader inventory before admitting another actual whole source.
+  const retainedBytes=2*helper.valueBytes({results,inventory:[...reader.inventory.values()]}).length;
+  reader.metadataBytes=8388608+carriedBytes+2*snapshot.metadataBytes+retainedBytes;reader.phase();
+  const result=timedStage('required-source',{selected,source:name},()=>projectContinuousSource(helper,{reader,snapshot,resolver,name,receipt,rows,inputs}));
+  results.push({source:name,...result});
+ }
+ demand(helper.valueBytes(results).length<=FILE,'Complete required-source side projection exceeds ordinary bound');
+ return results;
+}
+export function acquireContinuousSource(native,helper,options) {
+ const [result]=acquireContinuousSources(native,helper,{...options,names:[options.name]});
+ const {source,...projection}=result;return projection;
+}
 export async function continuousOperandsStage(repo,trusted,baseline,candidate,destination,parentRuntimePath){
  demand(commit(baseline)&&commit(candidate),'Missing immutable selected comparison commits');destination=path.resolve(destination);fresh(destination);const code=guard(repo,trusted);
  const native=await import('../../../scripts/check-effective-geographic-regression.mjs'),helper=await import('./selected-neighbor-prevention.mjs');
- let startup=native.selectedBootstrap(repo,baseline,candidate,{parentRuntimePath}),before=native.loadSelection(startup.beforeReader);
- demand(before,'Selected baseline removed or unsupported');startup.afterReader.metadataBytes=8388608+2*before.metadataBytes;startup.afterReader.phase();let after=native.loadSelection(startup.afterReader);demand(after,'Selected candidate removed or unsupported');
- let oldResolver=before.geometrySources??new native.SelectedGeometrySources(before),newResolver=after.geometrySources??new native.SelectedGeometrySources(after);
- const normal=r=>r.sources.map(p=>({path:p.logical_path??p.path,mode:p.mode,bytes:p.decoded_bytes??p.bytes,sha256:p.decoded_sha256??p.sha256??p.git_blob_oid}));
- if(!before.additive&&!after.additive&&helper.valueSha(normal(oldResolver))===helper.valueSha(normal(newResolver))&&helper.valueSha(before.owners)===helper.valueSha(after.owners))return {version:1,kind:'trusted-selected-continuous-comparison-v1',status:'selected-sources-unchanged',changed_ids:[],complete_owners:before.owners.length,candidate_code_executed:false};
- // The bootstrap metadata is discarded before independent cold acquisitions.
- // Only the issued child acknowledgements survive, not a global geometry image.
+ let startup=native.selectedBootstrap(repo,baseline,candidate,{parentRuntimePath});
+ if(mayUseNonAdditiveShortcut(startup.beforeReader,startup.afterReader)){
+  let before=timedStage('shortcut-baseline-selection',{selected:baseline},()=>native.loadSelection(startup.beforeReader));
+  demand(before,'Selected baseline removed or unsupported');startup.afterReader.metadataBytes=8388608+2*before.metadataBytes;startup.afterReader.phase();
+  let after=timedStage('shortcut-candidate-selection',{selected:candidate},()=>native.loadSelection(startup.afterReader));demand(after,'Selected candidate removed or unsupported');
+  const oldResolver=before.geometrySources??new native.SelectedGeometrySources(before),newResolver=after.geometrySources??new native.SelectedGeometrySources(after);
+  const normal=r=>r.sources.map(p=>({path:p.logical_path??p.path,mode:p.mode,bytes:p.decoded_bytes??p.bytes,sha256:p.decoded_sha256??p.sha256??p.git_blob_oid}));
+  if(!before.additive&&!after.additive&&helper.valueSha(normal(oldResolver))===helper.valueSha(normal(newResolver))&&helper.valueSha(before.owners)===helper.valueSha(after.owners))return {version:1,kind:'trusted-selected-continuous-comparison-v1',status:'selected-sources-unchanged',changed_ids:[],complete_owners:before.owners.length,candidate_code_executed:false};
+ }
+ // Bootstrap selectors and any non-additive shortcut snapshots end here. Only
+ // runtime context survives into independent complete coordinate acquisitions.
  const context={repo,runtimeBytes:startup.beforeReader.runtimeBytes,executionBytes:startup.beforeReader.executionBytes,gitExecutable:startup.beforeReader.gitExecutable,identities:startup.identities};
- before=null;after=null;oldResolver=null;newResolver=null;startup=null;
+ startup=null;
  fs.mkdirSync(destination);const stagePaths=[path.join(destination,'baseline'),path.join(destination,'candidate')],ack=[];
  const env={...process.env};delete env.NODE_OPTIONS;delete env.NODE_PATH;
  for(const [i,selected]of [baseline,candidate].entries()){
-  const raw=execFileSync(process.execPath,['--expose-gc',fileURLToPath(import.meta.url),'coordinate',repo,trusted,selected,stagePaths[i],...(parentRuntimePath?[parentRuntimePath]:[])],{env,maxBuffer:1048576,stdio:['ignore','pipe','pipe']});const value=JSON.parse(raw);demand(value.publication?.complete===true,'Cold coordinate child lacks complete acknowledgement');ack.push(value);
+  const raw=timedStage('coordinate-child',{selected},()=>execFileSync(process.execPath,['--expose-gc',fileURLToPath(import.meta.url),'coordinate',repo,trusted,selected,stagePaths[i],...(parentRuntimePath?[parentRuntimePath]:[])],{env,maxBuffer:1048576,stdio:['ignore','pipe','inherit']}));const value=JSON.parse(raw);demand(value.publication?.complete===true,'Cold coordinate child lacks complete acknowledgement');ack.push(value);
  }
  const custodyBytes=value=>2*helper.valueBytes(value).length;
  const receipts=[],lifecycle=[];
@@ -148,16 +189,17 @@ export async function continuousOperandsStage(repo,trusted,baseline,candidate,de
   const receipt=validatePersistedColdSide(native,helper,{repo,selected,parentRuntimePath,directory:stagePaths[i],ack:ack[i],context,carriedState:{context,code,ack,receipts,lifecycle}});
   receipts.push(receipt);lifecycle.push({kind:'complete-snapshot-bound-cold-validation',vintage:i?'candidate':'baseline',complete_phase_bytes:receipt.complete_phase_bytes});
  }
- const closure=reopenCompleteColdPlan(native,helper,{repo,baseline,candidate,parentRuntimePath,stagePaths,ack,receipts,context,carriedBytes:custodyBytes({code,ack,receipts,lifecycle})});
+ const closure=timedStage('affected-plan',{},()=>reopenCompleteColdPlan(native,helper,{repo,baseline,candidate,parentRuntimePath,stagePaths,ack,receipts,context,carriedBytes:custodyBytes({code,ack,receipts,lifecycle})}));
  lifecycle.push({kind:'complete-both-vintage-neighbor-plan',complete_phase_bytes:closure.complete_phase_bytes});
  // Both whole certificates remain authenticated persisted outputs. Their full
 // scan has finished; retain every required row, release only unused live rows.
  const {plan,rows,inputs}=closure,outputs={baseline:{},candidate:{}},inverse=[];
+ process.stderr.write(JSON.stringify({selected_continuous_stage:'required-source-count',baseline:plan.source_paths.baseline.length,candidate:plan.source_paths.candidate.length,changed_owners:plan.changed_ids.length,required_owners:plan.required_ids.length})+'\n');
  for(const [vintage,selected,i]of [['baseline',baseline,0],['candidate',candidate,1]]){
-  for(const name of plan.source_paths[vintage]){
-   const result=acquireContinuousSource(native,helper,{repo,selected,parentRuntimePath,name,receipt:receipts[i],rows:rows[vintage],inputs:inputs[vintage],context,carriedBytes:custodyBytes({context,code,ack,receipts,plan,rows,inputs,outputs,inverse,lifecycle})});
+  const results=acquireContinuousSources(native,helper,{repo,selected,parentRuntimePath,names:plan.source_paths[vintage],receipt:receipts[i],rows:rows[vintage],inputs:inputs[vintage],context,carriedBytes:custodyBytes({context,code,ack,receipts,plan,rows,inputs,outputs,inverse,lifecycle})});
+  for(const result of results){
    Object.assign(outputs[vintage],result.features);inverse.push(...result.inverse.map(r=>({vintage,...r})));
-   lifecycle.push({kind:'complete-required-containing-source',vintage,source:name,complete_phase_bytes:result.complete_phase_bytes,inputs:result.inputs});
+   lifecycle.push({kind:'complete-required-containing-source',vintage,source:result.source,complete_phase_bytes:result.complete_phase_bytes,inputs:result.inputs});
   }
   demand(Object.keys(outputs[vintage]).sort().join('\0')===plan.required_ids.join('\0'),'Affected operand closure omitted owner');
  }
