@@ -178,6 +178,14 @@ def external_time_usage(text,option):
  assert lifetime>0 and elapsed>=0,'Malformed raw time usage'
  return lifetime,elapsed
 
+def current_rebind_product_hashes(output,output_bytes):
+ # Stat the complete union before opening any body, including post-child reads.
+ assert type(output_bytes) is int and 0<output_bytes<=8388608
+ paths={name:output/(name+'.json') for name in ['request','facts','result','publication']}
+ for q in paths.values():assert q.is_file() and not q.is_symlink() and 0<q.stat().st_size<=output_bytes
+ assert sum(q.stat().st_size for q in paths.values())<=output_bytes,'Complete current-rebind product union exceeds issued bound before reads'
+ return {name:contract.digest(q.read_bytes()) for name,q in paths.items()}
+
 def supervise(issued_path,issued_sha,operation):
  assert issued_path.is_absolute() and '..' not in issued_path.parts
  for a in [issued_path,*issued_path.parents]:assert not a.is_symlink()
@@ -204,7 +212,7 @@ def supervise(issued_path,issued_sha,operation):
  supply=fresh_host_supply(guard_env)
  extra=sum(p['bytes'] for p in pre['runtime'] if p['role'] not in ('node','git','installed-dependency'))
  assert issued['operating_phase_bytes']==limits['complete_phase_bytes']+extra+contract.OUTPUT+contract.META<=contract.PHASE
- assert limits['sampled_stop_bytes']<=402653184 and limits['rss_bytes']<=536870912 and limits['wall_seconds']<=1200 and limits['output_bytes']<=4194304
+ assert limits['sampled_stop_bytes']<=402653184 and limits['rss_bytes']<=536870912 and limits['wall_seconds']<=1200 and type(limits['output_bytes']) is int and 0<limits['output_bytes']<=8388608
  # Whole helper bytes are already frozen/pre-use verified in the complete code
  # roster. These literal historical mechanisms are not rewritten or relabeled.
  loaders=[]
@@ -255,12 +263,10 @@ def supervise(issued_path,issued_sha,operation):
  if elapsed>limits['wall_seconds']:reason=reason or 'actual external elapsed wall bound'
  if raw_elapsed is not None and (raw_elapsed>limits['wall_seconds'] or raw_elapsed>elapsed+.01):reason=reason or 'raw external elapsed wall bound'
  code_source={'version':1,'kind':'whole-current-rebind-execution-custody-v1','execution_commit':head,'command':cmd,'pre_use':before,'post_use':after};source_raw=contract.canonical(code_source);(operation/'code-source.json').write_bytes(source_raw)
- def product(name):q=output/(name+'.json');assert q.is_file() and not q.is_symlink() and q.stat().st_size<=4194304;return contract.digest(q.read_bytes())
  request_sha=None;publication_sha=None
  if exit_code==0:
   try:
-   products={name:product(name) for name in ['request','facts','result','publication']}
-   assert sum((output/(name+'.json')).stat().st_size for name in products)<=limits['output_bytes']
+   products=current_rebind_product_hashes(output,limits['output_bytes'])
    request=json.loads((output/'request.json').read_bytes());publication=json.loads((output/'publication.json').read_bytes());child=json.loads(stdout.read_bytes())
    assert request['execution_commit']==head and request['execution']=={'command':cmd,'pre_use':before}
    assert publication['request_sha256']==products['request'] and child['request_sha256']==products['request'] and child['publication_sha256']==products['publication'] and child['result_sha256']==products['result']
