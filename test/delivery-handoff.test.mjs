@@ -349,12 +349,13 @@ function finalizationFixture() {
   const stub = r.add(owned + 'custody.json', {}), operating = r.add(owned + 'operating.json', {execution_custody: {terminal: stub}});
   const rebind = r.add(owned + 'certificate.json', {request: stub, facts: stub, publication: stub, result: stub, operating});
   const selected_ledger = r.add(owned + 'selected.json', {...r.json(ledger), current_rebind: rebind, current_targets: {target: true}});
-  const patch = r.add(owned + 'patch.json', {ledger_sha256: selected_ledger.sha256, authority_registry_sha256: registry.sha256, base_reference: {id: 'base'}, effective_reference: {id: 'effective'}});
+  const baseReference = {id: 'base', footprints_sha256: 'b'.repeat(64), hierarchy_sha256: 'c'.repeat(64)};
+  const patch = r.add(owned + 'patch.json', {ledger_sha256: selected_ledger.sha256, authority_registry_sha256: registry.sha256, base_reference: baseReference, effective_reference: {id: 'effective'}});
   const owner_roster = r.add(owned + 'owner-roster.json', {});
-  const base_manifest = r.add(owned + 'base-manifest.json', {original_assets: {bounds: {sha256: owner_roster.sha256}}});
+  const base_manifest = r.add(owned + 'base-manifest.json', {original_assets: {bounds: {sha256: owner_roster.sha256}}, geographic_release: 'base', footprints_sha256: baseReference.footprints_sha256, hierarchy_sha256: baseReference.hierarchy_sha256});
   const assets = {base_manifest, ledger: selected_ledger, owner_roster, patch};
-  const runtime_envelope = r.add(owned + 'envelope.json', {...Object.fromEntries(Object.entries(assets).map(([key,pin]) => [key, {bytes: pin.bytes, sha256: pin.sha256}])), base_reference: {id: 'base'}, effective_reference: {id: 'effective'}});
-  const base = {version: 1, sha256: base_manifest.sha256, selected_geography: {version: 1, path: 'bank.json', sha256: 'a'.repeat(64)}};
+  const runtime_envelope = r.add(owned + 'envelope.json', {...Object.fromEntries(Object.entries(assets).map(([key,pin]) => [key, {bytes: pin.bytes, sha256: pin.sha256}])), base_reference: baseReference, effective_reference: {id: 'effective'}});
+  const base = {version: 1, release_id: 'base', sha256: base_manifest.sha256, selected_geography: {version: 1, path: 'bank.json', sha256: 'a'.repeat(64)}};
   const selector = r.add('data/ownership-selection.json', Buffer.from(JSON.stringify(base, null, 2) + '\n'));
   const sidecar = r.add(owned + 'sidecar.json', {version: 2, kind: 'retained-native-additive-selection-v2', base_selection: base, authority_registry: registry, logical_asset_map: assets, runtime_envelope});
   const package_inputs = r.add('.github/package-inputs.json', {version: 1, inputs: ['.github/package-inputs.json', owned + 'obsolete.json', 'public/'], optional_inputs: ['public/'], verification_paths: [], generated_outputs: []});
@@ -381,6 +382,7 @@ test('finalization rejects coherent foreign sidecar/base/ledger/envelope binding
     (f,s) => { const p=f.reader.add(s.logical_asset_map.base_manifest.path,{foreign:'manifest'}); s.logical_asset_map.base_manifest=p; const e=f.reader.json(s.runtime_envelope); e.base_manifest={bytes:p.bytes,sha256:p.sha256}; s.runtime_envelope=f.reader.add(s.runtime_envelope.path,e); },
     (f,s) => { const p=f.reader.add(s.logical_asset_map.owner_roster.path,{foreign:'roster'}); s.logical_asset_map.owner_roster=p; const e=f.reader.json(s.runtime_envelope); e.owner_roster={bytes:p.bytes,sha256:p.sha256}; s.runtime_envelope=f.reader.add(s.runtime_envelope.path,e); },
     (f,s) => { const e=f.reader.json(s.runtime_envelope); e.owner_roster.decoded_bytes=10; s.runtime_envelope=f.reader.add(s.runtime_envelope.path,e); },
+    ...['id', 'footprints_sha256', 'hierarchy_sha256'].map(key => (f,s) => { const p=f.reader.json(s.logical_asset_map.patch), e=f.reader.json(s.runtime_envelope); p.base_reference[key]='foreign'; e.base_reference[key]='foreign'; s.logical_asset_map.patch=f.reader.add(s.logical_asset_map.patch.path,p); e.patch={bytes:s.logical_asset_map.patch.bytes,sha256:s.logical_asset_map.patch.sha256}; s.runtime_envelope=f.reader.add(s.runtime_envelope.path,e); }),
     (f,s) => s.logical_asset_map.ledger = f.config.ledger,
     (f,s) => { const e=f.reader.json(s.runtime_envelope); e.patch.sha256='0'.repeat(64); s.runtime_envelope=f.reader.add(s.runtime_envelope.path,e); },
     (f,s) => { const p=f.reader.json(s.logical_asset_map.patch); p.ledger_sha256='0'.repeat(64); s.logical_asset_map.patch=f.reader.add(s.logical_asset_map.patch.path,p); const e=f.reader.json(s.runtime_envelope); e.patch={bytes:s.logical_asset_map.patch.bytes,sha256:s.logical_asset_map.patch.sha256}; s.runtime_envelope=f.reader.add(s.runtime_envelope.path,e); },

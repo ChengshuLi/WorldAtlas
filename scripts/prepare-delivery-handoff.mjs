@@ -525,11 +525,15 @@ export function finalizeDelivery(config, reader) {
   need(same(Object.keys(sidecar).sort(), ['authority_registry', 'base_selection', 'kind', 'logical_asset_map', 'runtime_envelope', 'version'])
     && assets && same(Object.keys(assets).sort(), ['base_manifest', 'ledger', 'owner_roster', 'patch'])
     && same(sidecar.authority_registry, config.registry) && same(assets.ledger, config.selected_ledger), 'Final sidecar authority/selected-ledger pins differ');
-  const originalSelector = reader.read(config.selector);
-  need(assets.base_manifest.sha256 === JSON.parse(originalSelector).sha256, 'Final base manifest differs from unchanged selector');
+  const originalSelector = reader.read(config.selector), selection = JSON.parse(originalSelector);
+  need(assets.base_manifest.sha256 === selection.sha256, 'Final base manifest differs from unchanged selector');
   const baseManifest = reader.json(assets.base_manifest);
   need(assets.owner_roster.sha256 === baseManifest.original_assets?.bounds?.sha256, 'Final owner roster differs from original native bounds');
   const selected = reader.json(config.selected_ledger), patch = reader.json(assets.patch), envelope = reader.json(sidecar.runtime_envelope);
+  need(typeof selection.release_id === 'string' && baseManifest.geographic_release === selection.release_id
+    && hex(baseManifest.footprints_sha256, 64) && hex(baseManifest.hierarchy_sha256, 64)
+    && same(envelope.base_reference, {id: selection.release_id, footprints_sha256: baseManifest.footprints_sha256,
+      hierarchy_sha256: baseManifest.hierarchy_sha256}), 'Final release baseline differs from original selector/native manifest');
   need(same(selected.current_rebind, config.rebind) && patch.ledger_sha256 === config.selected_ledger.sha256
     && patch.authority_registry_sha256 === config.registry.sha256 && same(patch.base_reference, envelope.base_reference)
     && same(patch.effective_reference, envelope.effective_reference), 'Final release metadata joins differ');
