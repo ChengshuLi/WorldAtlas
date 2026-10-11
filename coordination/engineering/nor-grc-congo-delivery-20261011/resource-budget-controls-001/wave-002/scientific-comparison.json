@@ -1,0 +1,44 @@
+{
+  "kind": "cod002-two-issued-resource-control-scientific-comparison",
+  "whole_equal_to_each_other_and_original": [
+    "source/inventory.jsonl.gz",
+    "native/inventory.jsonl.gz",
+    "native/owners-batch.json.gz",
+    "native/base-native-manifest.json",
+    "native/owner-window.json",
+    "native/virtual-owner-window.json"
+  ],
+  "ledger_excluded_derived_fields": [
+    "rule_sha256",
+    "rows[].source_receipt_sha256"
+  ],
+  "feature_excluded_derived_fields": [
+    "[].additiveFootprint.ledger_sha256",
+    "[].additiveFootprint.rule_sha256",
+    "[].additiveFootprint.additions[].source_receipt_sha256"
+  ],
+  "patch_compared_fields": [
+    "base_reference",
+    "kind",
+    "rows",
+    "version"
+  ],
+  "all_other_ledger_and_feature_fields_equal": true,
+  "scope_ids": [
+    "physical-component:a207016c2c38eebb7539f7f778ab83588c0fed4cd909656ec88ea9905e1205da"
+  ],
+  "assigned_cells": 41,
+  "native_row_count": 18,
+  "whole_custody_hashes": [
+    {
+      "source_facts_sha256": "556707311b8ad4a753d47411dfecbafaa9bb9046a7ec79937389d8d22a7f0da5",
+      "native_ledger_sha256": "647eb76b079a6e8741c35d8a46dcaced22fb2ea977e0ad72041d1335cf20afa2",
+      "rule_sha256": "10924fc0334d5188cf0e008e8501ef8f1e590885f899101f984a178becd2dbd8"
+    },
+    {
+      "source_facts_sha256": "8c4a2d57dc36b5b5d4daefb4c5a33a574b5f660a733451b6393a723c31c1aa38",
+      "native_ledger_sha256": "28c653f6fe58130148ac12ae1bbf28563830a6eff27468f3e39d578d4d240326",
+      "rule_sha256": "10924fc0334d5188cf0e008e8501ef8f1e590885f899101f984a178becd2dbd8"
+    }
+  ]
+}
