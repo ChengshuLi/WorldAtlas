@@ -158,3 +158,149 @@ for (const [workflow, expected] of [['merge-integration-checks.yml', 2], ['worke
     assert.match(source, /path: (?:\|\n[\s\S]*?)?[^\n]*\.cache\/native-normal-built-output\.json/);
   });
 }
+
+// Read the actual workflow declarations and shell bodies. These bounded controls
+// model the status-expression subset used here; hosted execution remains required.
+function packageWorkflow() {
+  const source=fs.readFileSync(path.join(root,'.github/workflows/merge-integration-checks.yml'),'utf8');
+  const job=name=>{
+    const match=source.match(new RegExp('^  '+name+':\\n([\\s\\S]*?)(?=^  [a-z][a-z_-]*:|$(?![\\s\\S]))','m'));
+    assert(match,'Missing job '+name);
+    const header=match[1].split('    steps:\n')[0];
+    const steps=match[1].split(/\n(?=      - )/).slice(1).map(text=>{
+      const name=text.match(/^      - name: (.+)$/m)?.[1];
+      const condition=text.match(/^        if: (.+)$/m)?.[1];
+      const runLine=text.match(/^        run: (.+)$/m);
+      let run=runLine?.[1];
+      if(runLine?.[1]==='|'){
+        const lines=text.slice(runLine.index+runLine[0].length+1).split('\n'),body=[];
+        for(const line of lines){if(line&&!line.startsWith('          '))break;body.push(line.slice(10));}
+        run=body.join('\n');
+      }
+      return {name,condition,run,text};
+    });
+    return {header,condition:header.match(/^    if: (.+)$/m)?.[1],steps};
+  };
+  return {source,regression:job('regression'),package:job('package')};
+}
+function workflowCondition(expression, context, {success=true,cancelled=false}={}) {
+  if(expression&&!/\b(?:always|success|failure|cancelled)\(/.test(expression)&&!success)return false;
+  return expression?Boolean(new Function('needs','github','matrix','always','cancelled','success','failure',
+    `return (${expression});`)(context.needs,context.github,context.matrix,()=>true,()=>cancelled,()=>success,()=>!success)):success;
+}
+function packageContext({profile='full',selection='complete',full='true',action='synchronize',result='success'}={}) {
+  return {needs:{profile:{result:'success',outputs:{profile,test_selection:selection,full,blocked:'false'}},regression:{result}},
+    github:{event:{action}},matrix:{shard:0}};
+}
+function packageStep(job,name){const found=job.steps.filter(step=>step.name===name);assert.equal(found.length,1,name);return found[0];}
+
+test('full PR co-locates actual package work on shard zero without changing the complete inventory',()=>{
+  const w=packageWorkflow(),ctx=packageContext();
+  assert.match(w.package.header,/needs: \[profile, regression\]/);
+  assert.match(w.regression.header,/needs: profile/);
+  assert.doesNotMatch(w.regression.header,/needs:.*package/);
+  const controls='node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs test/package-inputs.test.mjs test/package-build.test.mjs';
+  assert.equal(packageStep(w.regression,'Verify full-regression package controls').run,controls);
+  assert.equal(packageStep(w.package,'Verify package controls').run,controls);
+  assert.equal(packageStep(w.regression,'Build hosted assets').run,'npm run build:cloudflare');
+  assert.equal(packageStep(w.regression,'Complete regression shard').run,'node scripts/run-integration-tests.mjs');
+  assert.match(w.regression.steps.find(step=>step.name==='Checkout reviewed head').text,/ref: \$\{\{ github.event.pull_request.head.sha \}\}/);
+  for(const full of ['true','false'])for(const shard of [0,1,2]){
+    ctx.needs.profile.outputs.full=full;ctx.matrix.shard=shard;
+    const producer=['Verify full-regression package controls','Build hosted assets','Read back qualified native build outputs when selected',
+      'Verify full-regression package receipt','Retain full-regression package receipt'];
+    for(const name of producer)assert.equal(workflowCondition(packageStep(w.regression,name).condition,ctx),shard===0,name);
+    assert.equal(workflowCondition(packageStep(w.regression,'Complete regression shard').condition,ctx),true);
+    assert.equal(w.package.steps.filter(step=>step.run==='npm run build:cloudflare'&&workflowCondition(step.condition,ctx)).length,0);
+    for(const name of ['Checkout complete package inputs','Install package Node dependencies','Install package Python dependencies','Verify package controls'])
+      assert.equal(workflowCondition(packageStep(w.package,name).condition,ctx),false,name);
+    assert.equal(workflowCondition(packageStep(w.package,'Retain declared input build receipt').condition,ctx),false);
+  }
+  const receipt=packageStep(w.regression,'Retain full-regression package receipt');
+  assert.match(receipt.text,/name: package-input-build\n/);assert.match(receipt.text,/path: \|\n            \.cache\/package-input-build.json\n/);
+  assert.match(receipt.text,/if-no-files-found: error/);
+  assert(w.regression.steps.indexOf(packageStep(w.regression,'Verify full-regression package controls'))<w.regression.steps.indexOf(packageStep(w.regression,'Build hosted assets')));
+  assert(w.regression.steps.indexOf(packageStep(w.regression,'Read back qualified native build outputs when selected'))<w.regression.steps.indexOf(packageStep(w.regression,'Verify full-regression package receipt')));
+  assert(w.regression.steps.indexOf(packageStep(w.regression,'Complete regression shard'))<w.regression.steps.indexOf(packageStep(w.regression,'Verify full-regression package receipt')),'validate the bytes actually retained after tests');
+});
+
+test('selected-data skipped regression still executes every existing real package consumer',()=>{
+  const w=packageWorkflow(),ctx=packageContext({selection:'selected-data',result:'skipped'});
+  assert.equal(workflowCondition(w.regression.condition,ctx),false);
+  assert.equal(workflowCondition(w.package.condition,ctx,{success:false}),true,'explicit status condition permits intentional dependency skip');
+  assert.equal(workflowCondition(packageStep(w.package,'Use full-regression package verification').condition,ctx),false);
+  for(const name of ['Checkout complete package inputs','Install package Node dependencies','Install package Python dependencies','Verify package controls',
+    'Build Cloudflare package without publishing','Read back qualified native build outputs when selected','Install selected-data browser dependencies','Run selected-data consumer checks'])
+    assert.equal(workflowCondition(packageStep(w.package,name).condition,ctx),true,name);
+  const consumer=packageStep(w.package,'Run selected-data consumer checks');
+  assert.match(consumer.text,/INTEGRATION_TEST_SELECTION: selected-data/);
+  assert.match(consumer.run,/selectedDeliverySmoke/);assert.match(consumer.run,/node scripts\/run-integration-tests.mjs/);
+  assert.equal(w.package.steps.filter(step=>step.run==='npm run build:cloudflare'&&workflowCondition(step.condition,ctx)).length,1);
+  assert.equal(workflowCondition(packageStep(w.package,'Retain declared input build receipt').condition,ctx),true);
+});
+
+test('evidence applicability and metadata/cancelled/failed dependency semantics stay fail-closed',()=>{
+  const w=packageWorkflow();
+  for(const full of ['true','false']){
+    const ctx=packageContext({profile:'evidence',full});
+    assert.equal(workflowCondition(w.package.condition,ctx),true);
+    assert.equal(workflowCondition(packageStep(w.package,'Build Cloudflare package without publishing').condition,ctx),full==='true');
+    assert.equal(workflowCondition(packageStep(w.package,'Use full-regression package verification').condition,ctx),false);
+  }
+  for(const action of ['edited','ready_for_review'])for(const selection of ['complete','selected-data']){
+    const ctx=packageContext({action,selection});
+    assert.equal(workflowCondition(w.regression.condition,ctx),false);assert.equal(workflowCondition(w.package.condition,ctx),false);
+  }
+  for(const profileResult of ['failure','cancelled','skipped']){
+    const ctx=packageContext();ctx.needs.profile.result=profileResult;
+    assert.equal(workflowCondition(w.package.condition,ctx,{success:false}),false);
+  }
+  assert.equal(workflowCondition(w.package.condition,packageContext(),{cancelled:true}),false);
+  const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-package-gate-'));
+  try{
+    const gate=packageStep(w.package,'Use full-regression package verification');
+    for(const result of ['success','failure','cancelled','skipped','']){
+      const ctx=packageContext({result});
+      assert.equal(workflowCondition(w.package.condition,ctx,{success:result==='success'}),true);
+      const run=spawnSync('/bin/bash',['-e','-c',gate.run],{cwd:tmp,encoding:'utf8',env:{PATH:process.env.PATH,REGRESSION_RESULT:result,GITHUB_STEP_SUMMARY:path.join(tmp,'summary')}});
+      assert.equal(run.status===0,result==='success',result);
+    }
+    assert.equal(fs.readFileSync(path.join(tmp,'summary'),'utf8').trim().split('\n').length,1,'only a successful dependency may report reuse');
+  }finally{fs.rmSync(tmp,{recursive:true});}
+});
+
+test('actual package receipt command refuses missing, stale, failed, changed or nonordinary producer bytes',()=>{
+  const w=packageWorkflow(),body=packageStep(w.regression,'Verify full-regression package receipt').run,head='a'.repeat(40);
+  const cases=['valid','no-native-selection','missing-receipt','stale-head','failed-preflight','preflight-errors','wrong-kind','changed-definition','missing-native','stale-native','symlink','bad-head'];
+  for(const kind of cases){
+    const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-package-receipt-'));
+    try{
+      for(const dir of ['.cache','.github','data'])fs.mkdirSync(path.join(tmp,dir));
+      const definition='{"version":1}\n';fs.writeFileSync(path.join(tmp,'.github/package-inputs.json'),definition);
+      const hash=execFileSync(process.execPath,['--input-type=module','-e',"import {createHash} from 'node:crypto';process.stdout.write(createHash('sha256').update(process.argv[1]).digest('hex'));",definition],{encoding:'utf8'});
+      const receipt={version:1,kind:'cloudflare',input_definition_sha256:hash,preflight:{passed:true,errors:[],inputs:{head}}};
+      const native={version:1,kind:'ordinary-cloudflare-built-output-readback',head};
+      if(kind==='stale-head')receipt.preflight.inputs.head='b'.repeat(40);
+      if(kind==='failed-preflight')receipt.preflight.passed=false;
+      if(kind==='preflight-errors')receipt.preflight.errors=['missing input'];
+      if(kind==='wrong-kind')receipt.kind='hosted';
+      if(kind==='changed-definition')receipt.input_definition_sha256='b'.repeat(64);
+      if(kind==='stale-native')native.head='b'.repeat(40);
+      const receiptPath=path.join(tmp,'.cache/package-input-build.json');
+      if(kind!=='missing-receipt')fs.writeFileSync(receiptPath,JSON.stringify(receipt));
+      if(kind==='symlink'){fs.renameSync(receiptPath,receiptPath+'.original');fs.symlinkSync(receiptPath+'.original',receiptPath);}
+      fs.writeFileSync(path.join(tmp,'data/ownership-selection.json'),JSON.stringify(kind==='no-native-selection'?{}:{artifact_consumption:{}}));
+      if(!['missing-native','no-native-selection'].includes(kind))fs.writeFileSync(path.join(tmp,'.cache/native-normal-built-output.json'),JSON.stringify(native));
+      const run=spawnSync('/bin/bash',['-e','-c',body],{cwd:tmp,encoding:'utf8',env:{PATH:path.dirname(process.execPath)+':/usr/bin:/bin',PACKAGE_REVIEWED_HEAD:kind==='bad-head'?'':head}});
+      assert.equal(run.status===0,['valid','no-native-selection'].includes(kind),kind+': '+run.stderr);
+    }finally{fs.rmSync(tmp,{recursive:true});}
+  }
+});
+
+test('Cloudflare label and artifacts do not claim the separate Sites reserve measurement',()=>{
+  const w=packageWorkflow(),site=fs.readFileSync(path.join(root,'.github/workflows/deployment-budget.yml'),'utf8');
+  assert.doesNotMatch(w.package.steps.map(step=>step.name).join('\n'),/enforce archive\/file reserves|Retain exact file and archive accounting/);
+  assert.doesNotMatch(w.source,/path: \.cache\/deployment-budget.json/);
+  assert.equal(packageStep(w.package,'Build Cloudflare package without publishing').run,'npm run build:cloudflare');
+  assert.match(site,/run: npm run build:hosted/);assert.match(site,/path: \.cache\/deployment-budget.json/);
+});

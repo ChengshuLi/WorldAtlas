@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "issue": 1714,
+  "lane": "engineering",
+  "worker_id": "01a129b3-48f0-73b6-ba63-491965890026",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "61d487a68c01c950891069c6936ad2b7002b6aa1",
+    "files": [
+      {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 26240,
+        "sha256": "0c44d5b4ccc5f854ebdc4279a15a8d6f45bddd4622941e25bed556c511933768",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "same-run-full-package-producer",
+      "kind": "code",
+      "description": "Actual workflow condition and shell-command controls bind ordinary full package verification to the existing regression-zero producer, mandatory controls, build, native readback, current-head input receipt and successful upload. Exact proof requires the producer and status consumer. Selected-data and evidence package execution remain genuine; Cloudflare labels do not claim the independent Sites reserve measurement.",
+      "software": "Node.js 24.19.0",
+      "units": "Not applicable: bounded workflow, identity and failure-propagation controls"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test --test-concurrency=1 test/integration-proof.test.mjs test/merge-integration.test.mjs test/selected-data-profile.test.mjs test/trusted-workflow-checkouts.test.mjs test/pr-gates.test.mjs"
+  ],
+  "limits": [
+    "Focused controls model the GitHub status-expression subset present in the actual workflow and execute its gate/receipt shell bodies against bounded fixtures. They are not a hosted Actions run or a fresh application/GPU/Canvas/scientific execution.",
+    "Prior observed parallel full and package job durations establish duplicate runner work, not additive wall-time savings. No measured savings or first successful ordinary full-route execution after this change is claimed before it is observed.",
+    "Full test inventory, package builders, model-reader custody, science and selected-data browser/parity requirements are unchanged. The separate main-push Sites package budget workflow remains the actual archive/file reserve gate; Cloudflare compilation does not claim that measurement.",
+    "The initial hosted full activation exposed two existing PR-gate workflow fixtures whose old dependency and status-function assumptions were omitted from the first focused list. Those adjacent fixtures are corrected and their actual full suite is included; the first hosted failure remains recorded, not relabeled as success."
+  ]
+}

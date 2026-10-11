@@ -588,3 +588,15 @@ cold metadata reads, rather than assuming overlap with evidence or reserving a
 blanket worst-case count. Hosted applicability, automatic next-ticket advancement
 and elapsed savings must be recorded when observed, not inferred from local
 controls or added parallel job durations.
+
+Ordinary full PR validation also builds Cloudflare only once, in regression (0).
+That same job runs the existing package controls, verifies reviewed-head package
+and applicable native readback receipts, uploads them, and retains its complete
+regression inventory. The package status depends on successful regression and
+reports reuse from this exact run; a failed, cancelled or skipped producer cannot
+supply it. Evidence-profile package execution and selected-data's single package
+producer remain separate. No large build artifact is transferred between jobs.
+The Cloudflare step does not measure the historical Sites archive reserve; the
+separate main-push Deployment package budget workflow retains its actual Sites
+build and file/archive accounting. Parallel build removal reduces runner work;
+no wall-time improvement is established merely by adding those job durations.

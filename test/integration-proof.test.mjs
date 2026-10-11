@@ -15,7 +15,8 @@ function fixture(profile = 'full') {
   const jobs = [{name:'profile',status:'completed',conclusion:'success'},
     ...(profile === 'full' ? [0,1,2] : [0]).map(shard=>({name:`regression (${shard})`,status:'completed',conclusion:'success',
       steps:['Checkout reviewed head','Install browser dependencies only for tests that use Playwright','Complete regression shard',
-        ...(profile==='full'?['Install Node dependencies','Install Python dependencies',...(shard===0?['Build hosted assets']:[])]:[])].map(name=>({name,status:'completed',conclusion:'success'}))}))];
+        ...(profile==='full'?['Install Node dependencies','Install Python dependencies',...(shard===0?['Build hosted assets','Verify full-regression package controls','Read back qualified native build outputs when selected','Verify full-regression package receipt','Retain full-regression package receipt']:[])]:[])].map(name=>({name,status:'completed',conclusion:'success'}))})),
+    ...(profile === 'full' ? [{name:'package',status:'completed',conclusion:'success',steps:[{name:'Use full-regression package verification',status:'completed',conclusion:'success'}]}] : [])];
   const f = {run,jobs,workflow};
   f.options = {repo:'owner/repo',number:2,head:'head',profile,baseline:tree,authored:structuredClone(tree),candidate:structuredClone(tree),api:async route=>{
     if(route.includes('/git/blobs/')) return {sha:workflowOID,size:Buffer.byteLength(f.workflow),encoding:'base64',content:Buffer.from(f.workflow).toString('base64')};
@@ -55,7 +56,7 @@ test('geography reuse requires one actual successful producer and every trusted 
 function failOnlyEvidence(f) {
   f.run.conclusion = 'failure';
   f.jobs.push({name:'evidence',status:'completed',conclusion:'failure'},
-    ...['scope','geography','package'].map(name=>({name,status:'completed',conclusion:'success'})));
+    ...['scope','geography','package'].filter(name=>!f.jobs.some(job=>job.name===name)).map(name=>({name,status:'completed',conclusion:'success'})));
   return f;
 }
 test('evidence-only failure reuses successful exact-tree code jobs for both profiles and pinned final reads', async()=>{
@@ -270,7 +271,7 @@ test('package CI coordination paths use focused tests while builders and runners
 });
 
 const selectedPackageSteps = ['Checkout complete package inputs','Install package Node dependencies','Install package Python dependencies',
-  'Verify package controls','Build and enforce archive/file reserves without publishing','Read back qualified native build outputs when selected',
+  'Verify package controls','Build Cloudflare package without publishing','Read back qualified native build outputs when selected',
   'Install selected-data browser dependencies','Run selected-data consumer checks'];
 function selectedProofFixture(failedEvidence = false) {
   const f = fixture(); f.options.testSelection = 'selected-data';
@@ -316,4 +317,32 @@ test('proof fallback reports existing allowlisted decisions without extra reques
     const proof=await integrationProof({...f.options,runId:12,runAttempt:1,api:async route=>{calls.push(route);return api(route);},onUnavailable:value=>{observed=value;}});
     assert.equal(proof,null);assert.deepEqual(observed,{reason});assert(calls.length<=3);
   }
+});
+
+
+test('full package proof binds every producer control, readback, receipt and status consumer', async () => {
+  const producer = ['Verify full-regression package controls', 'Read back qualified native build outputs when selected',
+    'Verify full-regression package receipt', 'Retain full-regression package receipt'];
+  for (const name of [...producer, 'Use full-regression package verification']) for (const outcome of ['failure','cancelled','skipped','missing','duplicate','in_progress']) {
+    const f = fixture(), job = f.jobs.find(job => job.name === (producer.includes(name) ? 'regression (0)' : 'package'));
+    const step = job.steps.find(step => step.name === name);
+    if (outcome === 'missing') job.steps = job.steps.filter(row => row !== step);
+    else if (outcome === 'duplicate') job.steps.push({...step});
+    else if (outcome === 'in_progress') step.status = outcome;
+    else step.conclusion = outcome;
+    assert.equal(await integrationProof(f.options), null, name + '/' + outcome);
+  }
+  for (const outcome of ['failure','cancelled','skipped','missing','duplicate']) {
+    const f=fixture(), job=f.jobs.find(job=>job.name==='package');
+    if(outcome==='missing')f.jobs=f.jobs.filter(row=>row!==job);
+    else if(outcome==='duplicate')f.jobs.push({...job});
+    else job.conclusion=outcome;
+    assert.equal(await integrationProof(f.options),null,outcome);
+  }
+});
+
+test('the obsolete Sites reserve label cannot substitute for the actual selected Cloudflare step', async () => {
+  const f=selectedProofFixture();
+  f.jobs.find(job=>job.name==='package').steps.find(step=>step.name==='Build Cloudflare package without publishing').name='Build and enforce archive/file reserves without publishing';
+  assert.equal(await integrationProof(f.options),null);
 });
