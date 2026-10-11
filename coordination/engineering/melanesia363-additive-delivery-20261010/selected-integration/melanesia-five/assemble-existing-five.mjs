@@ -1,4 +1,6 @@
 // Thin invocation of the existing assembler; no scientific producer or selected write.
+import {isDeepStrictEqual} from 'node:util';
+import {assemblyProcessingAllowance} from '../../supervise-selected-assembly-linux.mjs';
 import fs from 'node:fs';import path from 'node:path';import {pathToFileURL} from 'node:url';import {createHash} from 'node:crypto';
 const require=(v,m)=>{if(!v)throw Error(m);},sha=b=>createHash('sha256').update(b).digest('hex');
 require(process.execArgv.length===1&&process.execArgv[0]==='--expose-gc'&&!process.env.NODE_OPTIONS&&!process.env.NODE_PATH,'Exact exposed-GC consumer entry required');
@@ -6,12 +8,16 @@ require(process.argv.length===4,'Whole issued parameter path/SHA required');cons
 require(path.isAbsolute(root)&&fs.realpathSync(root)===root&&path.resolve(p.destination)===p.destination&&p.destination.startsWith(root+'/.cache/')&&!fs.existsSync(p.destination),'Fresh owned destination required');
 const code=JSON.parse(fs.readFileSync(path.join(root,'coordination/engineering/additive-native-composition-20261009/execution-code-paths.json')));
 const before=JSON.parse(process.env.WORLDATLAS_ASSEMBLY_PRE_USE??'null');require(before&&before.head===p.execution_commit&&JSON.stringify(before.code.map(p=>p.path))===JSON.stringify(code),'Whole actual executing code admission required');
-const {ImmutableReader,loadSelection}=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
+const issuedAllowance=assemblyProcessingAllowance(p.processing_allowance);
+require(isDeepStrictEqual(before.processing_allowance,issuedAllowance),'Assembly issued/pre-use allowance differs');
+require(/^(0|[1-9][0-9]*)$/.test(process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES??'')&&Number(process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES)===before.concurrent_reserved_bytes,'Assembly concurrent reservation differs');
+const {ImmutableReader,loadSelection,processingAllowance}=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
 const {valueBytes,valueSha}=await import(pathToFileURL(path.join(root,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs')));
 const {prepareCurrentRebindDestination}=await import(pathToFileURL(path.join(root,'coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs')));
 prepareCurrentRebindDestination(root,p.destination);
 const {assembleSupportedActivation}=await import(pathToFileURL(path.join(root,'coordination/engineering/additive-native-activation-20261009/assemble-supported-activation.mjs')));
-const reader=new ImmutableReader(root,p.execution_commit,{runtimeBytes:before.runtimeBytes,executionBytes:before.executionBytes,metadataBytes:8*1048576+2*(bytes.length+Buffer.byteLength(process.env.WORLDATLAS_ASSEMBLY_PRE_USE)),outputBytes:4194304,gitExecutable:before.gitExecutable});
+const allowance=processingAllowance(issuedAllowance);
+const reader=new ImmutableReader(root,p.execution_commit,{allowance,runtimeBytes:before.runtimeBytes,executionBytes:before.executionBytes,metadataBytes:8*1048576+2*(bytes.length+Buffer.byteLength(process.env.WORLDATLAS_ASSEMBLY_PRE_USE)),outputBytes:4194304,gitExecutable:before.gitExecutable});
 const read=pin=>{const actual=reader.descriptor(pin.path,pin.commit);require(actual.mode===pin.mode&&actual.git_blob_oid===(pin.git_blob_oid??pin.blob)&&actual.bytes===pin.bytes,'Whole ordinary operand differs');reader.admit(actual);return reader.json(pin.path,{version:pin.commit,expected:pin.sha256});};
 const [registry,originalLedger]=p.original_inputs.map(read),originalPatches=p.original_patch_pins.map(read);
 reader.metadataBytes+=2*valueBytes({registry,originalLedger,originalPatches,p}).length;
@@ -19,4 +25,4 @@ const snapshot=loadSelection(reader);require(snapshot,'Actual private selected b
 const assembled=assembleSupportedActivation({snapshot,registry,originalLedger,originalPatches,rebindPin:p.rebindPin,baseAssets:p.baseAssets,logicalPaths:p.logicalPaths});
 const bodies={ledger:assembled.ledger,patch:assembled.patch,envelope:assembled.envelope,qualification:assembled.qualification};const output=Object.entries(bodies).map(([name,body])=>({name,raw:valueBytes(body)}));require(output.reduce((n,b)=>n+b.raw.length,0)<=4194304,'Complete output reserve exceeded');
 prepareCurrentRebindDestination(root,p.destination);fs.mkdirSync(p.destination,{mode:0o700});for(const {name,raw}of output)fs.writeFileSync(path.join(p.destination,name+'.json'),raw,{flag:'wx',mode:0o644});
-process.stdout.write(JSON.stringify({execution_commit:p.execution_commit,complete_reader_phase_bytes:reader.used,products:output.map(({name,raw})=>({path:name+'.json',bytes:raw.length,sha256:sha(raw)})),qualification:assembled.qualification})+'\n');
+process.stdout.write(JSON.stringify({execution_commit:p.execution_commit,processing_allowance:allowance,complete_reader_phase_bytes:reader.used,products:output.map(({name,raw})=>({path:name+'.json',bytes:raw.length,sha256:sha(raw)})),qualification:assembled.qualification})+'\n');

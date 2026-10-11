@@ -1,6 +1,6 @@
 import fs from 'node:fs';import os from 'node:os';import path from 'node:path';import test from 'node:test';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
 import {supervise,assemblyStorage,scientificEnvironment} from './supervise-source-native-linux.mjs';
-import {assemblyProducts} from './supervise-selected-assembly-linux.mjs';
+import {assemblyProducts,assemblyProcessingAllowance} from './supervise-selected-assembly-linux.mjs';
 const time='/workspace/scratch/127991fc8b8e/cloud-tools/gnu-time/time-1.9-0.2-amd64/usr/bin/time',ps='/usr/bin/ps',MiB=1048576;
 const env=scientificEnvironment([{role:'git',path:'/usr/bin/git'},{role:'process-inspector',path:ps}]);
 test('fixed assembly profile admits genuine tiny child and refuses expanded limits before launch',async()=>{
@@ -29,7 +29,13 @@ test('assembly final entry binds all four actual product bytes and qualified sum
  const root=fs.mkdtempSync(path.join(os.tmpdir(),'assembly-products-')),head='a'.repeat(40),products=[];
  try{
   for(const name of ['ledger','patch','envelope','qualification']){const raw=Buffer.from(name==='qualification'?'{"a":1,"z":{"first":true,"second":2}}\n':'{}\n');fs.writeFileSync(path.join(root,name+'.json'),raw);products.push({path:name+'.json',bytes:raw.length,sha256:createHash('sha256').update(raw).digest('hex')});}
-  const result={execution_commit:head,complete_reader_phase_bytes:100,products,qualification:{z:{second:2,first:true},a:1}};assert.equal(assemblyProducts(root,JSON.stringify(result),head).execution_commit,head);
-  for(const edit of [r=>r.execution_commit='b'.repeat(40),r=>r.products[0].sha256='c'.repeat(64),r=>r.products[0].bytes++,r=>r.products.push(r.products[0]),r=>r.qualification={changed:true},r=>r.complete_reader_phase_bytes=268435457]){const other=structuredClone(result);edit(other);assert.throws(()=>assemblyProducts(root,JSON.stringify(other),head),/Assembly|assembly/);}
+  const allowance={phaseBytes:512*MiB,rssBytes:768*MiB};
+  const result={execution_commit:head,processing_allowance:allowance,complete_reader_phase_bytes:300*MiB,products,qualification:{z:{second:2,first:true},a:1}};assert.equal(assemblyProducts(root,JSON.stringify(result),head,allowance).execution_commit,head);
+  for(const edit of [r=>r.execution_commit='b'.repeat(40),r=>r.products[0].sha256='c'.repeat(64),r=>r.products[0].bytes++,r=>r.products.push(r.products[0]),r=>r.qualification={changed:true},r=>r.complete_reader_phase_bytes=allowance.phaseBytes+1,r=>r.processing_allowance.phaseBytes++,r=>r.processing_allowance.rssBytes--,r=>delete r.processing_allowance]){const other=structuredClone(result);edit(other);assert.throws(()=>assemblyProducts(root,JSON.stringify(other),head,allowance),/Assembly|assembly/);}
  }finally{fs.rmSync(root,{recursive:true,force:true});}
+});
+
+test('assembly current allowance is explicit, finite and bounded by its actual group guard',()=>{
+ for(const phaseBytes of [256*MiB,512*MiB,640*MiB])assert.deepEqual(assemblyProcessingAllowance({phaseBytes,rssBytes:768*MiB}),{phaseBytes,rssBytes:768*MiB});
+ for(const profile of [null,{}, {phaseBytes:0,rssBytes:768*MiB},{phaseBytes:512*MiB,rssBytes:Infinity},{phaseBytes:512*MiB,rssBytes:1024*MiB+1},{phaseBytes:1024*MiB+1,rssBytes:768*MiB},{phaseBytes:512*MiB,rssBytes:768*MiB,availableBytes:2**40}])assert.throws(()=>assemblyProcessingAllowance(profile),/assembly|Assembly/);
 });
