@@ -187,3 +187,88 @@ test('job-log capability retains shared admission and refuses arbitrary redirect
   assert.throws(() => f.options.api.jobLogRedirect('/repos/owner/repo/issues/2'), /job log redirect route/);
   assert.equal(await prepareGeographyProof({...f.options, proof: {}}), null);
 });
+
+// Verbatim receipt lines from successful job 114478521619 (run 38142298387,
+// attempt 1). Job 114483839359, exposed by attempt 2 after failed-job-only retry,
+// returned the byte-identical complete log. No geographic experiment is rerun.
+const retained1726Receipt = Buffer.from(`2026-10-11T13:28:18.8017747Z {"status": "not-applicable", "regressions": null, "report_bytes": 274717, "report_sha256": "00ba911099849b347811c5dabc4b79f3e797a4ec25ab7fce81b0439260555cb7"}
+2026-10-11T13:28:19.2767025Z SHA256 digest of uploaded artifact zip is 799a31398a52ae11c73c8646337aa0c02e810d175fc8c69741d868a24db1381e
+2026-10-11T13:28:19.4818073Z Artifact proposed-geography-1726-1 has been successfully uploaded! Final size is 39994 bytes. Artifact ID is 11703004023`);
+test('retained failed-job-only retry log discovers its truthful origin rather than relabeling attempt two', () => {
+  assert.throws(() => readGeographyJobReceipt(retained1726Receipt, 'proposed-geography-1726-2'), /receipt/);
+  assert.deepEqual(readGeographyJobReceipt(retained1726Receipt, {number: 1726, runAttempt: 2}), {
+    artifact_name: 'proposed-geography-1726-1', artifact_id: 11703004023, artifact_bytes: 39994,
+    artifact_digest: '799a31398a52ae11c73c8646337aa0c02e810d175fc8c69741d868a24db1381e',
+    report_sha256: '00ba911099849b347811c5dabc4b79f3e797a4ec25ab7fce81b0439260555cb7', report_bytes: 274717
+  });
+  for (const raw of [Buffer.from(retained1726Receipt.toString().replace('proposed-geography-1726-1', 'proposed-geography-1726-3')),
+    Buffer.from(retained1726Receipt.toString().replace('proposed-geography-1726-1', 'proposed-geography-1727-1')),
+    Buffer.from(retained1726Receipt.toString().split('\n').slice(0, 2).join('\n')),
+    Buffer.concat([retained1726Receipt, Buffer.from('\nArtifact proposed-geography-1726-2 has been successfully uploaded! Final size is 39994 bytes. Artifact ID is 99')]),
+    Buffer.concat([retained1726Receipt, Buffer.from('\nArtifact proposed-geography-1727-1 has been successfully uploaded! Final size is 39994 bytes. Artifact ID is 99')])])
+    assert.throws(() => readGeographyJobReceipt(raw, {number: 1726, runAttempt: 2}), /receipt/);
+});
+
+function carriedTransport() {
+  const f = originalTransport(), original = f.options.api;
+  f.options.proof.run_attempt = 2; f.options.proof.geography_job_id = 66;
+  f.run = {id: 123, run_attempt: 1, head_sha: f.options.head, event: 'pull_request',
+    path: '.github/workflows/merge-integration-checks.yml', repository: {full_name: 'owner/repo'},
+    head_repository: {full_name: 'owner/repo'}, status: 'completed', conclusion: 'failure',
+    pull_requests: [{number: 2, head: {sha: f.options.head}}]};
+  f.jobs = [{id: 55, run_id: 123, run_attempt: 1, head_sha: f.options.head, name: 'geography',
+    status: 'completed', conclusion: 'success', steps: ['Checkout trusted geographic checker', 'Install trusted geographic dependencies',
+      'Check proposed geography with trusted baseline code', 'Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02']
+      .map(name => ({name, status: 'completed', conclusion: 'success'}))}];
+  f.metadata = [];
+  f.options.api = async (...args) => {
+    const [route] = args; f.metadata.push(route);
+    if (route.endsWith('/attempts/1')) return structuredClone(f.run);
+    if (route.includes('/attempts/1/jobs')) return {jobs: structuredClone(f.jobs)};
+    return original(...args);
+  };
+  f.options.api.artifactRedirect = original.artifactRedirect;
+  f.options.api.jobLogRedirect = async route => {
+    f.metadata.push(route);
+    return new Response(null, {status: 302, headers: {location: `https://results.blob.core.windows.net/${route.includes('/55/') ? 'origin-log' : 'log'}?fixture`}});
+  };
+  const fetch = f.options.fetchImpl;
+  f.options.fetchImpl = async (url, init) => url.includes('/origin-log?') ? new Response(f.originLog ?? f.log) : fetch(url, init);
+  return f;
+}
+test('carried geography authenticates only its exact origin metadata, successful job and matching log', async () => {
+  const f = carriedTransport(), result = await prepareGeographyProof(f.options);
+  assert.equal(result.source.run_attempt, 1); assert.equal(result.source.job_id, 55);
+  assert.equal(result.source.current_run_attempt, 2); assert.equal(result.source.current_job_id, 66);
+  assert.equal(result.source.artifact_name, 'proposed-geography-2-1');
+  assert.deepEqual(result.report, JSON.parse(report));
+  assert.equal(f.metadata.filter(x => x.endsWith('/attempts/1')).length, 1);
+  assert.equal(f.metadata.filter(x => x.includes('/attempts/1/jobs')).length, 1);
+  assert(f.metadata.some(x => x.endsWith('/jobs/55/logs')));
+  assert(!f.metadata.some(x => /attempts\/(?:0|2|3)\//.test(x)));
+});
+test('origin metadata, job steps and actual originating log cannot be substituted', async () => {
+  for (const mutate of [
+    f => {f.run.id++;}, f => {f.run.run_attempt++;}, f => {f.run.head_sha = 'f'.repeat(40);},
+    f => {f.run.repository.full_name = 'foreign/repo';}, f => {f.run.head_repository.full_name = 'foreign/repo';},
+    f => {f.run.event = 'push';}, f => {f.run.path = '.github/workflows/other.yml';},
+    f => {f.run.pull_requests[0].head.sha = 'f'.repeat(40);}, f => {f.run.pull_requests[0].number++;},
+    f => {f.run.status = 'in_progress';}, f => {delete f.run.pull_requests;},
+    f => {f.jobs[0].run_id++;}, f => {f.jobs[0].run_attempt++;}, f => {f.jobs[0].head_sha = 'f'.repeat(40);},
+    f => {f.jobs[0].conclusion = 'failure';}, f => {f.jobs[0].steps.pop();},
+    f => {f.jobs[0].steps[2].conclusion = 'skipped';}, f => {f.jobs.push(structuredClone(f.jobs[0]));},
+    f => {f.jobs = [];},
+    f => {f.originLog = Buffer.from(f.log.toString().replace('Artifact ID is 12', 'Artifact ID is 13'));},
+    f => {f.originLog = Buffer.from(f.log.toString().replace(digest, 'f'.repeat(64)));},
+    f => {f.originLog = Buffer.from('missing receipt');}
+  ]) {
+    const f = carriedTransport(); mutate(f); await assert.rejects(prepareGeographyProof(f.options));
+    assert(!f.metadata.some(x => x.includes('/artifacts?')), 'reject before artifact discovery');
+  }
+});
+
+test('completed cancelled origin retains its actually successful geography even without historical PR links', async () => {
+  const f = carriedTransport(); f.run.conclusion = 'cancelled'; f.run.pull_requests = [];
+  const result = await prepareGeographyProof(f.options);
+  assert.equal(result.source.run_attempt, 1); assert.equal(result.source.job_id, 55);
+});

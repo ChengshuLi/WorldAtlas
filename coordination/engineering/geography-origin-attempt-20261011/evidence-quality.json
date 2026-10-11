@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "issue": 1729,
+  "lane": "engineering",
+  "worker_id": "01a12b55-176c-7563-afef-f41b419c0037",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+    "files": [
+      {
+        "path": "scripts/geographic-report-artifact.mjs",
+        "bytes": 12149,
+        "sha256": "7b23d443e957f8c3abab71a3650c2966551d9560314c9d1f11543154e0853c29",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "exact-origin-geography-proof",
+      "description": "Bounded authentication of the carried successful geographic job receipt and exact originating run, job, successful steps and original receipt, retaining code and geography attempt identities independently through final-capacity and merge validation.",
+      "software": "Node 24; GitHub Actions REST metadata and retained bounded job logs",
+      "units": "identity equality and fail-closed pass/fail",
+      "kind": "code"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/geographic-report-artifact.test.mjs test/final-capacity.test.mjs test/merge-integration.test.mjs test/integration-proof.test.mjs"
+  ],
+  "limits": [
+    "No new geographic computation or scientific approval; real retained incident receipt plus faithful bounded production-entry-point controls establish this identity/transport repair."
+  ]
+}
