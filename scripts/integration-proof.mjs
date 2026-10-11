@@ -6,6 +6,21 @@ export const PROOF_PATHS = ['.github/workflows/merge-integration-checks.yml',
 export const WORKFLOW_PATH = PROOF_PATHS[0];
 const prefix = repo => `/repos/${repo}`;
 
+export function successfulGeographyJob(jobs) {
+  const matches = jobs.filter(job => job.name === 'geography');
+  if (matches.length !== 1) return null;
+  const job = matches[0];
+  const required = ['Checkout trusted geographic checker', 'Install trusted geographic dependencies',
+    'Check proposed geography with trusted baseline code',
+    'Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02'];
+  if (!Number.isSafeInteger(job.id) || job.id < 1 || job.status !== 'completed' || job.conclusion !== 'success' ||
+      !required.every(name => {
+        const steps = job.steps?.filter(step => step.name === name) ?? [];
+        return steps.length === 1 && steps[0].status === 'completed' && steps[0].conclusion === 'success';
+      })) return null;
+  return job;
+}
+
 // The approved workflow explicitly checks out the reviewed head. Matching its
 // immutable blobs to main and the entire tested tree to the candidate connects
 // GitHub's run metadata to the bytes actually executed, rather than treating a
@@ -56,7 +71,9 @@ export async function integrationProof({api, repo, number, head, profile, baseli
     })) continue;
     const selector = jobs.find(job => job.name === 'profile');
     if (selector?.conclusion !== 'success' || selector.status !== 'completed') continue;
-    return {run_id: run.id, run_attempt: run.run_attempt, tree: authored.object.tree.sha, profile};
+    const geography = successfulGeographyJob(jobs);
+    return {run_id: run.id, run_attempt: run.run_attempt, tree: authored.object.tree.sha, profile,
+      ...(geography ? {geography_job_id: geography.id} : {})};
   }
   return null;
 }

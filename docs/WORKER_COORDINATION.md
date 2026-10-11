@@ -248,8 +248,11 @@ Both preparation and final merge require that same FIFO ticket and dispatch
 attempt. All existing reviewed-head, authority, evidence, test, candidate-parent,
 base and SHA-guarded squash checks remain mandatory.
 
-GitHub retains only one pending concurrency run. A replaced scheduler tick loses
-no requests because their registrations already exist outside that group.
+GitHub defaults to one pending concurrency run, which lets a newer registration
+tick replace a completion wake. The short scheduler opts into `queue: max` so
+pending wakes remain queued without overlapping active scheduler jobs. GitHub
+allows at most 100 pending jobs in that group; excess runs can still be cancelled.
+Registrations remain durable outside the group, independent of wake retention.
 The workflow declares completion-triggered scheduler ticks and a five-minute
 scheduled fallback for cancelled execution, failed notification and ambiguous
 dispatch; provider delivery can be delayed or unavailable. Live,
@@ -271,6 +274,33 @@ dispatch. A failed or uncertain rejection write stops the tick before any later
 request can advance. Even a changed head retains the two-minute dispatch discovery
 window. Each API attempt still shares the actual job deadline and quota controls;
 no new registration, idle wake loop or completion-trigger guarantee is introduced.
+
+A separate, two-minute trusted worker-completion job sends one registration-free
+`workflow_dispatch` to the existing scheduler. It checks out the immutable
+executing workflow commit, runs no candidate code, and makes no automatic retry
+of the notification POST. Its process admits only a short bounded HTTP budget;
+quota refusal or transport uncertainty stays visible rather than authorizing
+another write. No startup job-metadata request is added to this notifier.
+
+The `wake_run_id` input is only an observation hint. The scheduler checks that it
+identifies a main-branch worker workflow and waits for that run to become terminal
+within its existing authenticated job deadline. It then performs normal complete
+live-run and FIFO admission; the hint cannot approve a merge, skip another live
+run or recreate a request. This closes the race where the notifier is still live
+when its scheduler starts. Requests arriving during that wait are read afterward.
+Mixed wake/registration inputs, unrelated runs and invalid hints refuse safely.
+An empty queue or duplicate wake causes no idle self-dispatch. The scheduler
+retains pending wake jobs so a later ordinary registration tick cannot replace
+the only tick that knows to wait for its still-live notifier.
+
+Cancellation before the notifier can run, runner loss, quota refusal and provider
+outages can still prevent notification; the existing completion event and
+five-minute fallback remain. Inspect existing durable requests before bounded
+manual recovery, never submit a duplicate. A workflow already running when this
+change lands keeps its original definition, so rollout may still need that normal
+recovery once. Hosted automatic advancement must be recorded separately from
+local simulated controls. Scheduler quota-floor refusals retain their observed
+numeric admission fields and retry time; they are not ordinary permission errors.
 
 The CLI observes for 65 minutes, then reports its request ID without cancelling
 anything. Resume read-only observation using

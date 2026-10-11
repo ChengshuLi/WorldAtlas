@@ -577,8 +577,10 @@ test('trusted geography outputs bind attempted artifact digest through the privi
  assert.match(workflow,/GEOGRAPHY_ARTIFACT_NAME: \$\{\{ needs\.geography\.outputs\.artifact_name \}\}/);
  const runner=fs.readFileSync('scripts/run-worker-merge.mjs','utf8');
  assert.match(runner,/geographyReportLoader: \(\{api: reportAPI = api\} = \{\}\) => loadGeographicReport\(\{api: reportAPI/);
- assert.match(runner,/runId: process\.env\.GITHUB_RUN_ID/);
- assert.match(runner,/expectedHash: process\.env\.GEOGRAPHY_REPORT_SHA256/);
+ assert.match(runner,/runId: geographyProof\?\.run_id \?\? process\.env\.GITHUB_RUN_ID/);
+ assert.match(runner,/expectedHash: geographyProof\?\.report_sha256 \?\? process\.env\.GEOGRAPHY_REPORT_SHA256/);
+ assert.match(geography,/needs\.prepare\.outputs\.geography_proof == ''/);
+ assert.match(workflow,/GEOGRAPHY_PROOF: \$\{\{ needs\.prepare\.outputs\.geography_proof \}\}/);
  assert.doesNotMatch(workflow,/actions\/download-artifact/,'privileged job must not extract an unverified archive');
 });
 

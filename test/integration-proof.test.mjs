@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {integrationProof, PROOF_PATHS, WORKFLOW_PATH} from '../scripts/integration-proof.mjs';
+import {integrationProof, PROOF_PATHS, WORKFLOW_PATH, successfulGeographyJob} from '../scripts/integration-proof.mjs';
 import {integrationProfile, COORDINATION_PATHS} from '../scripts/integration-profile.mjs';
 
 function fixture(profile = 'full') {
@@ -33,6 +33,24 @@ test('successful full and focused workflows prove exact tree and pinned current 
     assert.deepEqual(proof,{run_id:12,run_attempt:1,tree:'exact-complete-tree',profile});
     assert.deepEqual(await integrationProof({...f.options,runId:12,runAttempt:1}),proof);
   }
+});
+test('geography reuse requires one actual successful producer and every trusted step', async () => {
+  const geography = {id: 44, name: 'geography', status: 'completed', conclusion: 'success', steps: [
+    'Checkout trusted geographic checker', 'Install trusted geographic dependencies',
+    'Check proposed geography with trusted baseline code',
+    'Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02'
+  ].map(name => ({name, status: 'completed', conclusion: 'success'}))};
+  const f = fixture(); f.jobs.push(geography);
+  assert.equal((await integrationProof(f.options)).geography_job_id, 44);
+  for (const mutate of [job => {job.id = 0;}, job => {job.status = 'in_progress';},
+    job => {job.conclusion = 'failure';}, job => {job.steps.pop();},
+    job => {job.steps[2].conclusion = 'skipped';}, job => {job.steps.push({...job.steps[2]});}]) {
+    const job = structuredClone(geography); mutate(job); assert.equal(successfulGeographyJob([job]), null);
+  }
+  assert.equal(successfulGeographyJob([geography, structuredClone(geography)]), null);
+  f.jobs.push(structuredClone(geography));
+  assert.equal((await integrationProof(f.options)).geography_job_id, undefined,
+    'unusable geography must not discard valid application proof; a fresh geography job remains required');
 });
 function failOnlyEvidence(f) {
   f.run.conclusion = 'failure';

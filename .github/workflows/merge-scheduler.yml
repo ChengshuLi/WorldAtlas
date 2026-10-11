@@ -5,13 +5,17 @@ on:
     inputs:
       pr_number:
         type: string
-        required: true
+        required: false
       expected_head:
         type: string
-        required: true
+        required: false
       request_id:
         type: string
-        required: true
+        required: false
+      wake_run_id:
+        description: Worker run to observe before ordinary scheduling; does not register a request
+        type: string
+        required: false
   workflow_run:
     workflows: ['Serialize worker PR merges']
     types: [completed]
@@ -20,7 +24,7 @@ on:
 permissions: {}
 jobs:
   register:
-    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
+    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && inputs.wake_run_id == ''
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -53,6 +57,8 @@ jobs:
     timeout-minutes: 10
     concurrency:
       group: worldatlas-merge-admission
+      # Retain completion wakes instead of replacing them with later ticks.
+      queue: max
       cancel-in-progress: false
     permissions:
       contents: read

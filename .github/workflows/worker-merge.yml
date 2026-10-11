@@ -47,6 +47,7 @@ jobs:
       shards: ${{ steps.prepare.outputs.shards }}
       proof_attempt: ${{ steps.prepare.outputs.proof_attempt }}
       proof_run: ${{ steps.prepare.outputs.proof_run }}
+      geography_proof: ${{ steps.prepare.outputs.geography_proof }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
@@ -75,7 +76,7 @@ jobs:
           retention-days: 30
   geography:
     needs: prepare
-    if: needs.prepare.outputs.candidate != ''
+    if: needs.prepare.outputs.candidate != '' && needs.prepare.outputs.geography_proof == ''
     runs-on: ubuntu-latest
     timeout-minutes: 25
     permissions:
@@ -257,6 +258,7 @@ jobs:
           PROOF_RUN_ID: ${{ needs.prepare.outputs.proof_run }}
           INTEGRATION_RESULT: ${{ needs.integration.result }}
           GEOGRAPHY_RESULT: ${{ needs.geography.result }}
+          GEOGRAPHY_PROOF: ${{ needs.prepare.outputs.geography_proof }}
           GEOGRAPHY_REPORT_SHA256: ${{ needs.geography.outputs.report_sha256 }}
           GEOGRAPHY_ARTIFACT_NAME: ${{ needs.geography.outputs.artifact_name }}
         run: node scripts/run-worker-merge.mjs
@@ -266,3 +268,29 @@ jobs:
           name: merge-${{ inputs.request_id }}
           path: merge-result.json
           retention-days: 30
+
+  wake:
+    needs: [prepare, integration, geography, merge]
+    if: always() && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    permissions:
+      contents: read
+      actions: write
+    steps:
+      # This separate trusted job never checks out or executes candidate code.
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ github.workflow_sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            scripts
+            src
+            .github
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - name: Wake existing FIFO after this worker settles
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/run-merge-wake.mjs
