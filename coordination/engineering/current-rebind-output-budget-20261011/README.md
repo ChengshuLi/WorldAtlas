@@ -20,7 +20,7 @@ before constructing the final result. The consumer preserves that peak across
 its later reopen frame. Earlier source/native input frames keep their separate
 4 MiB reserves. The acquired historical phase roster is unchanged.
 
-An allocation-free canonical counter bounds complete products before full
+A whole-serialization-free canonical counter bounds complete products before full
 hash/serialization buffers. The actual writer checks the complete four-product
 union before creating a destination; the supervisor checks the complete union
 before reading any product. Collision and symlink refusals preserve originals.
