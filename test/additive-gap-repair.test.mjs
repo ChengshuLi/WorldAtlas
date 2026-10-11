@@ -273,8 +273,52 @@ test('registered administrative handoff binds exact complete merged source roste
  }
 });
 
-// Tiny actual Git provenance fixture; no geography operator is invoked.
-test('registered handoff provenance requires exact HEAD body and merged source ancestry',()=>{
+function executionCohortFixture(ids=['one','two']) {
+ const source={path:'research/geography/fixture/cohort.json',mode:'100644',blob:'b'.repeat(40),bytes:100,sha256:'c'.repeat(64)},commit='a'.repeat(40);
+ const entry={id:'execution-set',format:'source-native-execution-cohort-v2',accepted_source_commit:commit,source,cohort_ids:ids,target_ids:['target']};
+ const registry={version:1,kind:'accepted-administrative-handoffs-v1',entries:[entry]};
+ const rule={cases_path:source.path,outcomes_path:source.path,inputs:[{commit,...source}],cohort_ids:ids,expected_ids:[ids[0]],geometry_scope:'full-component'};
+ const scope={execution_cohort_id:entry.id,scopeIds:ids,unknowns:['Synthetic shape control; no source acceptance.'],
+  original_gap_membership:{version:1,index:{commit:'d'.repeat(40),path:'original-index.json',mode:'100644',blob:'e'.repeat(40),bytes:10000,sha256:'f'.repeat(64)},
+   members:ids.map(component_id=>({component_id,original_batch_id:'original-130',original_family_id:'family'}))},
+  candidate_source_native_bindings:ids.map(component_id=>({component_id,retained_payload:{target_stable_location_id:'target'},retained_source_operation_row:{}}))};
+ return {entry,registry,rule,scope};
+}
+test('execution cohort carries only admitted cases while historical membership stays passive',()=>{
+ const {entry,registry,rule,scope}=executionCohortFixture();
+ assert.equal(registeredAdministrativeHandoff(registry,rule),entry);
+ assert.equal(registeredAdministrativeViews(scope,entry).cohort.length,2);
+ assert.equal(scope.candidate_source_native_bindings.length,2); // No128 invented held-case wrappers.
+ assert.equal(scope.original_gap_membership.members.length,2);
+ const across=structuredClone(scope);across.original_gap_membership.members[1].original_batch_id='other-original';
+ across.original_gap_membership.members[1].original_family_id='other-family';
+ assert.equal(registeredAdministrativeViews(across,entry).cohort.length,2);
+ const other=executionCohortFixture(['three']);other.entry.id='separate-set';other.entry.source.path='research/geography/fixture/second.json';
+ registry.entries.push(other.entry);assert.equal(registeredAdministrativeHandoff(registry,rule),entry);
+ other.entry.cohort_ids=['one'];assert.throws(()=>registeredAdministrativeHandoff(registry,rule),/duplicate/);
+});
+test('execution cohort refuses foreign or incomplete registered cases and original membership',()=>{
+ const {entry,registry,rule,scope}=executionCohortFixture();
+ for(const edit of [s=>delete s.original_gap_membership,s=>s.execution_cohort_id='other',
+  s=>s.original_gap_membership.members.pop(),s=>s.original_gap_membership.members[1].component_id='one',
+  s=>s.original_gap_membership.members[0].component_id='foreign',s=>s.original_gap_membership.members[0].original_batch_id='',
+  s=>delete s.original_gap_membership.members[0].original_family_id,s=>s.original_gap_membership.index.sha256='unbound',
+  s=>s.original_gap_membership.index.path='../foreign',s=>s.original_gap_membership.index.mode='120000',
+  s=>s.original_gap_membership.members[0].accepted=true]) {
+  const bad=structuredClone(scope);edit(bad);assert.throws(()=>registeredAdministrativeViews(bad,entry),/original gap membership/);
+ }
+ for(const edit of [s=>s.candidate_source_native_bindings.pop(),s=>s.scopeIds.reverse(),
+  s=>s.candidate_source_native_bindings[0].retained_payload.target_stable_location_id='foreign']){
+  const bad=structuredClone(scope);edit(bad);assert.throws(()=>registeredAdministrativeViews(bad,entry),/Registered handoff changed/);
+ }
+ for(const edit of [e=>e.original_component_count=2,e=>e.format='unapproved-format',e=>e.accepted_source_commit='d'.repeat(40)]){
+  const bad=structuredClone(registry);edit(bad.entries[0]);assert.throws(()=>registeredAdministrativeHandoff(bad,rule),/Incomplete|Unknown/);
+ }
+});
+
+// Tiny actual Git provenance fixtures; no geography operator is invoked.
+for(const format of ['source-native-handoff-v1','source-native-execution-cohort-v2'])
+test(`${format} provenance requires exact HEAD body and merged source ancestry`,()=>{
  const repo=fs.mkdtempSync(path.join(os.tmpdir(),'administrative-registry-'));
  const git=(...args)=>execFileSync('git',['-C',repo,'-c','core.hooksPath=/dev/null','-c','user.name=Fixture','-c','user.email=fixture@example.invalid',...args],{encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
  try{
@@ -282,7 +326,8 @@ test('registered handoff provenance requires exact HEAD body and merged source a
   const sourceName='research/geography/fixture/handoff.json';fs.mkdirSync(path.dirname(path.join(repo,sourceName)),{recursive:true});fs.writeFileSync(path.join(repo,sourceName),'{}\n');git('add','.');git('commit','-qm','source');const sourceCommit=git('rev-parse','HEAD');
   const source={path:sourceName,mode:'100644',blob:git('rev-parse','HEAD:'+sourceName),bytes:3,sha256:createHash('sha256').update('{}\n').digest('hex')};
   const registryPath='coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json';
-  const entry={id:'fixture',format:'source-native-handoff-v1',accepted_source_commit:sourceCommit,source,original_batch_id:'batch',original_component_count:1,cohort_ids:['component'],target_ids:['target']};
+  const entry={id:'fixture',format,accepted_source_commit:sourceCommit,source,cohort_ids:['component'],target_ids:['target'],
+   ...(format==='source-native-handoff-v1'?{original_batch_id:'batch',original_component_count:1}:{})};
   const body=Buffer.from(JSON.stringify({version:1,kind:'accepted-administrative-handoffs-v1',entries:[entry]})+'\n');
   fs.mkdirSync(path.dirname(path.join(repo,registryPath)),{recursive:true});fs.writeFileSync(path.join(repo,registryPath),body);git('add','.');git('commit','-qm','registration');git('update-ref','refs/remotes/origin/main',sourceCommit);
   const pin={path:registryPath,mode:'100644',blob:git('rev-parse','HEAD:'+registryPath),bytes:body.length,sha256:createHash('sha256').update(body).digest('hex')};
@@ -306,9 +351,11 @@ test('registered physical inverse uses independent whole restored products and c
 });
 
 
-test('registered native roster reuses the exact qualified source registry and original cohort',()=>{
+for(const format of ['source-native-handoff-v1','source-native-execution-cohort-v2'])
+test(`${format} native roster reuses the exact qualified source registry and cohort`,()=>{
  const source={path:'research/geography/fixture/handoff.json',mode:'100644',blob:'b'.repeat(40),bytes:100,sha256:'c'.repeat(64)},commit='a'.repeat(40);
- const entry={id:'fixture',format:'source-native-handoff-v1',accepted_source_commit:commit,source,original_batch_id:'batch',original_component_count:1,cohort_ids:['component'],target_ids:['target']};
+ const entry={id:'fixture',format,accepted_source_commit:commit,source,cohort_ids:['component'],target_ids:['target'],
+  ...(format==='source-native-handoff-v1'?{original_batch_id:'batch',original_component_count:1}:{})};
  const body=Buffer.from(JSON.stringify({version:1,kind:'accepted-administrative-handoffs-v1',entries:[entry]}));
  const pin={path:'coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json',commit:'d'.repeat(40),mode:'100644',blob:'e'.repeat(40),bytes:body.length,sha256:createHash('sha256').update(body).digest('hex')};
  const rule={profile:'retained-consumed-administrative-source',registry_path:pin.path,cases_path:source.path,outcomes_path:source.path,inputs:[{commit,...source},pin],cohort_ids:['component'],expected_ids:['component'],geometry_scope:'full-component'};
