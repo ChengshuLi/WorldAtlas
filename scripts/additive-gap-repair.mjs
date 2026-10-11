@@ -1407,7 +1407,7 @@ function additiveProposalStage(repo,request) {
 // Native entry consumes the completed original source stage, not an approval
 // boolean or a reconstructed administrative overlay. Complete source-product
 // custody is checked by the caller before this pure case/target boundary.
-export function validateAdministrativeNativeRoster({facts,issued,spec,sourceRows}) {
+export function validateAdministrativeNativeRoster({facts,issued,spec,sourceRows,registry=null}) {
   const equal=(a,b)=>JSON.stringify(canonicalValue(a))===JSON.stringify(canonicalValue(b));
   demand(spec.source_profile==='retained-consumed-administrative-source'
     &&facts.source_profile===spec.source_profile&&issued.source_rule.profile===spec.source_profile
@@ -1423,7 +1423,18 @@ export function validateAdministrativeNativeRoster({facts,issued,spec,sourceRows
     &&spec.scope_ids.every(id=>facts.cohort_ids.includes(id))
     &&equal(facts.unprocessed_cohort_ids,facts.cohort_ids.filter(id=>!spec.scope_ids.includes(id))),
     'Incomplete/duplicate administrative native phase/cohort');
-  for(const accepted of administrativeHandoffFor(issued.source_rule)){
+  let registration=null;
+  if(issued.source_rule.registry_path!==undefined){
+    const pins=issued.source_rule.inputs.filter(pin=>pin.path===issued.source_rule.registry_path);
+    demand(registry&&pins.length===1&&equal(registry.pin,pins[0])
+      &&equal(facts.registered_handoff?.registry,registry.pin)
+      &&registry.body.length===registry.pin.bytes&&sha(registry.body)===registry.pin.sha256,
+      'Administrative native registry differs from qualified source');
+    registration=registeredAdministrativeHandoff(JSON.parse(registry.body),issued.source_rule);
+    demand(facts.registered_handoff.accepted_source_commit===registration.accepted_source_commit,
+      'Administrative native accepted source changed');
+  }else demand(registry===null&&!facts.registered_handoff,'Unexpected administrative native registration');
+  for(const accepted of registration?[]:administrativeHandoffFor(issued.source_rule)){
     if(accepted.role==='remainders_path'&&facts.geometry_scope==='full-component')continue;
     const pin=issued.source_rule.inputs.find(row=>row.path===issued.source_rule[accepted.role]);
     demand(pin&&['path','mode','blob','bytes','sha256'].every(key=>pin[key]===accepted[key]),'Administrative native predecessor outside accepted product roster');
@@ -1629,7 +1640,12 @@ function administrativeBatchProposalStage(repo,request,resolutions,budget) {
   const sourceRows=lines.map(JSON.parse);
   demand(equal(sourceRows.map(row=>row.component_id),spec.scope_ids)&&equal(spec.scope_ids,issued.source_rule.expected_ids)
     &&sourceRows.length===facts.components,'Batch selection omitted/reordered a source candidate');
-  validateAdministrativeNativeRoster({facts,issued,spec,sourceRows});
+  const registry=issued.source_rule.registry_path===undefined?null:inputs.get(issued.source_rule.registry_path);
+  demand(issued.source_rule.registry_path===undefined||registry,'Missing complete native registry operand');
+  // Reuse the same executing-HEAD and merged-source authority as SOURCE; the
+  // roster boundary also binds these bytes to the qualified predecessor.
+  if(registry)readRegisteredAdministrativeHandoff(repo,issued.source_rule,registry);
+  validateAdministrativeNativeRoster({facts,issued,spec,sourceRows,registry});
   const manifest=json(spec.manifest_path),bounds=json(spec.bounds_path),targets=new Map();
   for(const name of issued.source_rule.target_banks){demand(spec.inputs.some(pin=>equal(pin,issued.source_rule.inputs.find(source=>source.path===name))),'Batch containing context differs from source proof');const rows=json(name).features;demand(Array.isArray(rows),'Invalid complete administrative target bank');
     for(const target of rows){demand(!targets.has(target.id),'Duplicate selected context identity');targets.set(target.id,target);}}

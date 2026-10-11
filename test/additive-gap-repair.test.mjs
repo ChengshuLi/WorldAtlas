@@ -6,7 +6,7 @@ import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {registeredOriginalPhysicalProduct,readRegisteredAdministrativeHandoff,registeredAdministrativeHandoff,registeredAdministrativeViews,originalAdministrativeCandidateHash,retainedAdministrativeSourcePremises,retainedAdministrativeFragmentPremises,combineNativeBatch,retainedCountySourcePremises,retainedLandSourcePremises,wholePrimitivePointsetEqual,inventoryRows,joinInventoryFacts,restoreInventoryRow,candidateDisposition,admitInventoryDestination,selectedBankResolutions,inventoryGroup,restoreGroupedInventoryRow} from '../scripts/additive-gap-repair.mjs';
+import {validateAdministrativeNativeRoster,registeredOriginalPhysicalProduct,readRegisteredAdministrativeHandoff,registeredAdministrativeHandoff,registeredAdministrativeViews,originalAdministrativeCandidateHash,retainedAdministrativeSourcePremises,retainedAdministrativeFragmentPremises,combineNativeBatch,retainedCountySourcePremises,retainedLandSourcePremises,wholePrimitivePointsetEqual,inventoryRows,joinInventoryFacts,restoreInventoryRow,candidateDisposition,admitInventoryDestination,selectedBankResolutions,inventoryGroup,restoreGroupedInventoryRow} from '../scripts/additive-gap-repair.mjs';
 import {footprintValueSha256 as hash} from '../src/effective-footprint.js';
 const row=(id,status='mapped-land-support')=>({component_id:id,candidate_feature_sha256:hash(id),candidate_geometry_sha256:hash([id]),status,
  physical_authority:'unapproved',physical_status:'unknown-source-fitness-and-observation-date',physical_limits:['original retained source limits'],complete_support:{whole_original_geometry:true}});
@@ -303,4 +303,19 @@ test('registered physical inverse uses independent whole restored products and c
  assert.equal(registeredOriginalPhysicalProduct({physical_restoration:{restorations:[]}},product,1326),false);
  assert.equal(registeredOriginalPhysicalProduct({physical_restoration:{restorations:[restoration,restoration]}},product,1326),false);
  assert.equal(registeredOriginalPhysicalProduct(scope,{...product,unexpected:true},1326),false);
+});
+
+
+test('registered native roster reuses the exact qualified source registry and original cohort',()=>{
+ const source={path:'research/geography/fixture/handoff.json',mode:'100644',blob:'b'.repeat(40),bytes:100,sha256:'c'.repeat(64)},commit='a'.repeat(40);
+ const entry={id:'fixture',format:'source-native-handoff-v1',accepted_source_commit:commit,source,original_batch_id:'batch',original_component_count:1,cohort_ids:['component'],target_ids:['target']};
+ const body=Buffer.from(JSON.stringify({version:1,kind:'accepted-administrative-handoffs-v1',entries:[entry]}));
+ const pin={path:'coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json',commit:'d'.repeat(40),mode:'100644',blob:'e'.repeat(40),bytes:body.length,sha256:createHash('sha256').update(body).digest('hex')};
+ const rule={profile:'retained-consumed-administrative-source',registry_path:pin.path,cases_path:source.path,outcomes_path:source.path,inputs:[{commit,...source},pin],cohort_ids:['component'],expected_ids:['component'],geometry_scope:'full-component'};
+ const facts={source_profile:rule.profile,operation:'retained-land-source-premises-v1',whole_gap_completion:false,assigned_cells:0,geometry_scope:rule.geometry_scope,source_rule:rule,components:1,cohort_ids:['component'],unprocessed_cohort_ids:[],registered_handoff:{registry:pin,accepted_source_commit:commit}};
+ const args={facts,issued:{source_rule:rule},spec:{source_profile:rule.profile,scope_ids:['component']},sourceRows:[{component_id:'component'}],registry:{pin,body}};
+ assert.equal(validateAdministrativeNativeRoster(args),true);
+ for(const edit of [a=>a.registry=null,a=>a.registry.pin={...pin,commit:'f'.repeat(40)},a=>a.registry.body=Buffer.from('{}'),a=>a.facts.registered_handoff={...a.facts.registered_handoff,accepted_source_commit:'f'.repeat(40)},a=>a.facts.cohort_ids=['other'],a=>a.issued.source_rule={...rule,cohort_ids:['other']},a=>a.spec.scope_ids=[]]){
+  const other=structuredClone(args);other.registry={pin:{...pin},body:Buffer.from(body)};edit(other);assert.throws(()=>validateAdministrativeNativeRoster(other),/Administrative|administrative/);
+ }
 });
