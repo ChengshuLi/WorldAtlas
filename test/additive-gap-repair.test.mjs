@@ -1,11 +1,12 @@
 import fs from 'node:fs';
+import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {combineNativeBatch,retainedCountySourcePremises,retainedLandSourcePremises,wholePrimitivePointsetEqual,inventoryRows,joinInventoryFacts,restoreInventoryRow,candidateDisposition,admitInventoryDestination,selectedBankResolutions,inventoryGroup,restoreGroupedInventoryRow} from '../scripts/additive-gap-repair.mjs';
+import {readRegisteredAdministrativeHandoff,registeredAdministrativeHandoff,registeredAdministrativeViews,originalAdministrativeCandidateHash,retainedAdministrativeSourcePremises,retainedAdministrativeFragmentPremises,combineNativeBatch,retainedCountySourcePremises,retainedLandSourcePremises,wholePrimitivePointsetEqual,inventoryRows,joinInventoryFacts,restoreInventoryRow,candidateDisposition,admitInventoryDestination,selectedBankResolutions,inventoryGroup,restoreGroupedInventoryRow} from '../scripts/additive-gap-repair.mjs';
 import {footprintValueSha256 as hash} from '../src/effective-footprint.js';
 const row=(id,status='mapped-land-support')=>({component_id:id,candidate_feature_sha256:hash(id),candidate_geometry_sha256:hash([id]),status,
  physical_authority:'unapproved',physical_status:'unknown-source-fitness-and-observation-date',physical_limits:['original retained source limits'],complete_support:{whole_original_geometry:true}});
@@ -224,4 +225,71 @@ test('Linux runtime pairs preserve only the existing visibility and schema trans
   }
   assert(exercised>0,'Every named preexisting transition must be exercised');
  }
+});
+
+// This is a tiny serialization-boundary fixture, not a source qualification.
+function candidateAliasFixture(){
+ const geometry={type:'Polygon',coordinates:[[[0,0],[1,0],[1,1],[0,0]]]},feature={type:'Feature',id:'component',properties:{area:1e-7},geometry};
+ const raw=Buffer.from(JSON.stringify(feature).replace('1e-7','1e-07')+'\n'),expected=createHash('sha256').update(raw).digest('hex');
+ const binding={component_id:'component',feature_sha256:expected,feature_bytes_base64:raw.toString('base64'),derived_js_canonical_sha256:hash(feature)};
+ return {geometry,feature,expected,scope:{original_candidate_canonical_bindings:[binding]}};
+}
+test('original candidate alias preserves whole historical bytes and exact complete parsed values',()=>{
+ const f=candidateAliasFixture(),check=(scope=f.scope,candidate=f.feature,expected=f.expected)=>originalAdministrativeCandidateHash({sourceScope:scope,componentId:'component',candidate,expected});
+ assert.notEqual(f.expected,hash(f.feature));assert.equal(check(),true);
+ assert.equal(check({},f.feature,hash(f.feature)),true);
+ for(const change of [x=>x.original_candidate_canonical_bindings[0].component_id='other',x=>x.original_candidate_canonical_bindings.push({...x.original_candidate_canonical_bindings[0]}),x=>x.original_candidate_canonical_bindings[0].feature_sha256='a'.repeat(64),x=>x.original_candidate_canonical_bindings[0].derived_js_canonical_sha256='b'.repeat(64),x=>x.original_candidate_canonical_bindings[0].feature_bytes_base64=Buffer.from('{}').toString('base64')]){
+  const scope=structuredClone(f.scope);change(scope);assert.equal(check(scope),false);
+ }
+ const numeric=structuredClone(f.feature);numeric.properties.area=2e-7;assert.equal(check(f.scope,numeric),false);
+ const extra=structuredClone(f.feature);extra.properties.extra=true;assert.equal(check(f.scope,extra),false);
+ // Even a matching derived digest cannot authorize a changed parsed object.
+ const rebound=structuredClone(f.scope);rebound.original_candidate_canonical_bindings[0].derived_js_canonical_sha256=hash(extra);assert.equal(check(rebound,extra),false);
+});
+test('both full and fragment source predicates consume the original candidate byte binding',()=>{
+ const f=candidateAliasFixture(),empty={kind:'empty',area_m2:0,planar_area:0,geometry:{type:'Polygon',coordinates:[]}};
+ const record={component_id:'component',candidate_feature_sha256:f.expected,candidate_geometry_sha256:hash(f.geometry),status:'mapped-land-support',complete_support:{mapped_land_support:{kind:'whole-operation-pointset',geometry:f.geometry},hierarchy_disagreements:Object.fromEntries(['L2-outside-L1','L3-outside-L2','L4-outside-L3'].map(k=>[k,empty])),...Object.fromEntries(['mapped_inland_water_support','outside_mapped_L1_context','contradictory_land_water_support','missing_reconstruction','extra_reconstruction'].map(k=>[k,empty]))}};
+ const sourceCase={component_id:'component',original_candidate_feature:f.feature,retained_payload:{}},target={id:'target',properties:{},geometry:f.geometry};
+ for(const fn of [retainedAdministrativeSourcePremises,retainedAdministrativeFragmentPremises]){
+  const args={record,candidate:f.geometry,fragment:f.geometry,sourceCase,sourceScope:f.scope,target};
+  assert.equal(fn(args).failed_premises.includes('original-full-candidate-binding'),false);
+  assert.equal(fn({...args,sourceScope:{}}).failed_premises.includes('original-full-candidate-binding'),true);
+ }
+});
+
+test('registered administrative handoff binds exact complete merged source roster without a cohort code exception',()=>{
+ const source={path:'research/geography/fixture/handoff.json',mode:'100644',blob:'b'.repeat(40),bytes:100,sha256:'c'.repeat(64)},commit='a'.repeat(40);
+ const entry={id:'fixture',format:'source-native-handoff-v1',accepted_source_commit:commit,source,original_batch_id:'batch',original_component_count:1,cohort_ids:['component'],target_ids:['target']};
+ const registry={version:1,kind:'accepted-administrative-handoffs-v1',entries:[entry]},rule={cases_path:source.path,outcomes_path:source.path,inputs:[{commit,...source}],cohort_ids:['component'],geometry_scope:'full-component'};
+ assert.equal(registeredAdministrativeHandoff(registry,rule),entry);
+ const scope={candidate_source_native_bindings:[{component_id:'component',retained_payload:{target_stable_location_id:'target'},retained_source_operation_row:{}}],scopeIds:['component'],original_batch_id:'batch',original_batch_component_count:1,unknowns:['fixture only']};
+ const views=registeredAdministrativeViews(scope,entry);assert.equal(views.cohort,scope.candidate_source_native_bindings);assert.equal(views.payloads[0],scope.candidate_source_native_bindings[0].retained_payload);
+ for(const edit of [r=>r.entries.push(structuredClone(r.entries[0])),r=>r.entries[0].source.blob='d'.repeat(40),r=>r.entries[0].accepted_source_commit='e'.repeat(40),r=>r.entries[0].cohort_ids=['other'],r=>r.entries[0].target_ids=['target','target'],r=>r.entries[0].original_component_count=2]){
+  const other=structuredClone(registry);edit(other);assert.throws(()=>registeredAdministrativeHandoff(other,rule),/Unknown\/ambiguous|Incomplete/);
+ }
+ assert.throws(()=>registeredAdministrativeHandoff(registry,{...rule,geometry_scope:'supported-fragment'}),/Incomplete/);
+ for(const edit of [s=>s.scopeIds=[],s=>s.original_batch_id='other',s=>s.original_batch_component_count=2,s=>s.candidate_source_native_bindings[0].retained_payload.target_stable_location_id='other']){
+  const other=structuredClone(scope);edit(other);assert.throws(()=>registeredAdministrativeViews(other,entry),/Registered handoff changed/);
+ }
+});
+
+// Tiny actual Git provenance fixture; no geography operator is invoked.
+test('registered handoff provenance requires exact HEAD body and merged source ancestry',()=>{
+ const repo=fs.mkdtempSync(path.join(os.tmpdir(),'administrative-registry-'));
+ const git=(...args)=>execFileSync('git',['-C',repo,'-c','core.hooksPath=/dev/null','-c','user.name=Fixture','-c','user.email=fixture@example.invalid',...args],{encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
+ try{
+  git('init','-q');fs.writeFileSync(path.join(repo,'initial'),'initial');git('add','.');git('commit','-qm','initial');const initial=git('rev-parse','HEAD');
+  const sourceName='research/geography/fixture/handoff.json';fs.mkdirSync(path.dirname(path.join(repo,sourceName)),{recursive:true});fs.writeFileSync(path.join(repo,sourceName),'{}\n');git('add','.');git('commit','-qm','source');const sourceCommit=git('rev-parse','HEAD');
+  const source={path:sourceName,mode:'100644',blob:git('rev-parse','HEAD:'+sourceName),bytes:3,sha256:createHash('sha256').update('{}\n').digest('hex')};
+  const registryPath='coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json';
+  const entry={id:'fixture',format:'source-native-handoff-v1',accepted_source_commit:sourceCommit,source,original_batch_id:'batch',original_component_count:1,cohort_ids:['component'],target_ids:['target']};
+  const body=Buffer.from(JSON.stringify({version:1,kind:'accepted-administrative-handoffs-v1',entries:[entry]})+'\n');
+  fs.mkdirSync(path.dirname(path.join(repo,registryPath)),{recursive:true});fs.writeFileSync(path.join(repo,registryPath),body);git('add','.');git('commit','-qm','registration');git('update-ref','refs/remotes/origin/main',sourceCommit);
+  const pin={path:registryPath,mode:'100644',blob:git('rev-parse','HEAD:'+registryPath),bytes:body.length,sha256:createHash('sha256').update(body).digest('hex')};
+  const rule={registry_path:registryPath,cases_path:sourceName,outcomes_path:sourceName,cohort_ids:['component'],inputs:[{commit:sourceCommit,...source}]};
+  assert.equal(readRegisteredAdministrativeHandoff(repo,rule,{pin,body}).registrationMain,sourceCommit);
+  assert.throws(()=>readRegisteredAdministrativeHandoff(repo,rule,{pin,body:Buffer.from('{}')}),/executing-HEAD/);
+  assert.throws(()=>readRegisteredAdministrativeHandoff(repo,rule,{pin:{...pin,blob:'f'.repeat(40)},body}),/executing-HEAD/);
+  git('update-ref','refs/remotes/origin/main',initial);assert.throws(()=>readRegisteredAdministrativeHandoff(repo,rule,{pin,body}));
+ }finally{fs.rmSync(repo,{recursive:true,force:true});}
 });
