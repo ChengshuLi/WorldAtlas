@@ -1,18 +1,23 @@
 """Independent whole-shard exact inverse; no physical or geometric calculation."""
-import gzip,hashlib,io,json,pathlib,resource,subprocess,sys,time
+import gzip,hashlib,io,json,pathlib,resource,subprocess,sys,time,os
 HERE=pathlib.Path(__file__).resolve().parent;ROOT=HERE.parents[3];OWN=HERE.parent.relative_to(ROOT).as_posix();BASE='6a99a7606b9c2d11ac8cd093610653d4cd5d1382';PRE='coordination/engineering/global-physical-comparison-20261006/results/';CINDEX='coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json';SOURCE='research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/'
 sha=lambda b:hashlib.sha256(b).hexdigest()
 def git(*a):return subprocess.check_output(['git','-C',str(ROOT),*a])
 def main():
  head,vintage,part=sys.argv[1:];start=time.monotonic();name=f'components-{int(part):03}.jsonl.gz'
  if git('rev-parse','HEAD').decode().strip()!=head:raise ValueError('Exact execution HEAD required')
- controls=[OWN+'/tools/restore_physical.py',OWN+'/roster.json',OWN+'/physical-locators.json','scripts/evidence/immutable.py'];pins=[]
+ controls=[OWN+'/tools/restore_physical.py',OWN+'/roster.json',OWN+'/physical-locators.json',OWN+'/tools/runtime-lock.json','scripts/evidence/immutable.py'];pins=[]
  for p in controls:
   b=(ROOT/p).read_bytes()
   if b!=git('show',head+':'+p):raise ValueError('Unfrozen control')
   pins.append({'path':p,'bytes':len(b),'sha256':sha(b),'hash_kind':'file-bytes'})
  ns={'__name__':'grc_immutable','__file__':str(ROOT/'scripts/evidence/immutable.py')};exec(compile(git('show',head+':scripts/evidence/immutable.py'),ns['__file__'],'exec'),ns)
- base=ns['Baseline'](ROOT,head,pins,max_phase_bytes=128*1024**2);canon=ns['canonical_json'];dest=ns['NewVintage'](base,OWN+'/',vintage,[name,'physical-records.json','queried-source-metadata.json','receipt.json'])
+ base=ns['Baseline'](ROOT,head,pins,max_phase_bytes=256*1024**2);canon=ns['canonical_json'];dest=ns['NewVintage'](base,OWN+'/',vintage,[name,'physical-records.json','queried-source-metadata.json','receipt.json'])
+ runtime=json.loads(base.pinned_bytes(OWN+'/tools/runtime-lock.json'))
+ if pathlib.Path(sys.executable).resolve()!=pathlib.Path(runtime['python_executable']).resolve() or not os.environ.get('PYTHONDONTWRITEBYTECODE') or not os.environ.get('PYTHONPYCACHEPREFIX'):raise ValueError('Wrong runtime or bytecode policy')
+ for pin in runtime['files']:
+  base.admit('runtime:'+pin['path'],pin['bytes']);b=pathlib.Path(pin['path']).read_bytes()
+  if len(b)!=pin['bytes'] or sha(b)!=pin['sha256']:raise ValueError('Runtime drift')
  inputs=[]
  def read(p,pin=None,decode=False):
   line=git('ls-tree','-z',BASE,'--',p).decode().rstrip('\0');fields,path=line.split('\t');mode,kind,oid=fields.split()
@@ -33,14 +38,24 @@ def main():
  if entry['original']!=next(r for r in report['products'] if r['path']==name):raise ValueError('Original report binding changed')
  rows=[json.loads(l) for l in read(PRE+name,entry['delivered'],True).splitlines()];ids=[r['component_id'] for r in rows]
  if ids!=sorted(set(ids)) or not set(want).issubset(ids):raise ValueError('Wrong original partition')
- needed=set(ids);features={};index=json.loads(read(CINDEX));selected={r['candidate_custody']['path'] for r in roster['members']};aliases=[a for a in index['aliases'] if '/components-v3/components-' in a['original']['path'] and a['payload'] in selected]
- for a in aliases:
+ needed=set(ids);features={};index=json.loads(read(CINDEX));selected={r['candidate_custody']['path'] for r in roster['members'] if r['component_id'] in want};allaliases=sorted([a for a in index['aliases'] if '/components-v3/components-' in a['original']['path']],key=lambda a:a['original']['path']);aliases=[a for a in allaliases if a['payload'] in selected]
+ # Neighbor products are admitted only if this full original physical shard crosses a boundary.
+ loaded=set();queue=list(aliases)
+ while queue and set(features)!=needed:
+  a=queue.pop(0)
+  if a['payload'] in loaded:continue
+  if len(loaded)>=3:raise ValueError('Declared three-product inverse closure exhausted')
+  loaded.add(a['payload'])
   product=json.loads(read(a['payload'],a['original'],True))['features'];pids=[f['id'] for f in product]
   if len(pids)!=len(set(pids)):raise ValueError('Duplicate original candidate')
   for f in product:
    if f['id'] in needed:
     if f['id'] in features:raise ValueError('Duplicate inverse candidate')
     features[f['id']]=f
+  missing=needed-set(features)
+  ai=allaliases.index(a)
+  if missing and min(missing)<min(pids) and ai>0:queue.append(allaliases[ai-1])
+  if missing and max(missing)>max(pids) and ai+1<len(allaliases):queue.append(allaliases[ai+1])
  if set(features)!=needed:raise ValueError('Incomplete full inverse candidate closure')
  for r in rows:
   if r.pop('complete_current_record_metadata_alias')!='v1':raise ValueError('Unknown alias')
@@ -64,7 +79,7 @@ def main():
    if (s['record_sha256'],s['decoded_pointset_binary64_sha256'],s['level'])!=(q['source_record_sha256'],q['source_pointset_sha256'],q['source_level']):raise ValueError('Original native/query mismatch')
    ms.append(s)
   queried.append({'component_id':r['component_id'],'sources':ms})
- receipt={'baseline':BASE,'execution_commit':head,'component_ids':want,'original_product':expected,'restored_complete_rows':len(ids),'source_metadata_product':sp,'reused_source_receipt':oldentry,'source_inputs':inputs,'logical_consumed_input_bytes':sum(base.consumed.values()),'peak_rss_bytes':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024,'elapsed_seconds':time.monotonic()-start,'python_version':sys.version,'limits':['Exact original whole-product custody inverse only; no new GIS or source approval.','Existing GSHHG source authority and observation-date limits remain unchanged.']}
+ receipt={'baseline':BASE,'execution_commit':head,'component_ids':want,'original_product':expected,'restored_complete_rows':len(ids),'source_metadata_product':sp,'reused_source_receipt':oldentry,'source_inputs':inputs,'logical_consumed_input_bytes':sum(base.consumed.values()),'peak_rss_bytes':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024,'elapsed_seconds':time.monotonic()-start,'python_version':sys.version,'runtime_inventory_sha256':sha(base.pinned_bytes(OWN+'/tools/runtime-lock.json')),'limits':['Exact original whole-product custody inverse only; no new GIS or source approval.','Existing GSHHG source authority and observation-date limits remain unchanged.']}
  if receipt['peak_rss_bytes']>512*1024**2:raise ValueError('RSS reservation exceeded')
  dest.publish_bytes({name:encoded,'physical-records.json':canon(selected),'queried-source-metadata.json':canon(queried),'receipt.json':canon(receipt)})
  print(json.dumps({'part':part,'components':len(want),'logical_bytes':receipt['logical_consumed_input_bytes'],'peak_rss_bytes':receipt['peak_rss_bytes']}))
