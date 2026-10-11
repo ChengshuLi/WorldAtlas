@@ -859,7 +859,7 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
                       'trusted_reader_policy_commit': self.baseline, 'candidate_code_executed': False}
 
     def test_same_commit_never_shortcuts_genuine_baseline_proof(self):
-        with self.mock.patch.object(self.g.subprocess, 'run') as child:
+        with self.mock.patch.object(self.g, 'run_applicability_collector') as child:
             self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.baseline))
             child.assert_not_called()
 
@@ -871,7 +871,7 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
                   {**self.proof, 'trusted_reader_policy_commit': self.candidate}, [], 'malformed']
         for value in values:
             raw = json.dumps(value).encode()
-            with self.subTest(value=value), self.mock.patch.object(self.g.subprocess, 'run',
+            with self.subTest(value=value), self.mock.patch.object(self.g, 'run_applicability_collector',
                     return_value=subprocess.CompletedProcess([], 0, raw, b'')):
                 result = self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate)
                 self.assertEqual(result, self.proof if value == self.proof else None)
@@ -880,11 +880,29 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
         for output in [subprocess.CompletedProcess([], 1, json.dumps(self.proof).encode(), b''),
                        subprocess.CompletedProcess([], 0, b'x' * (2 * 1024 * 1024 + 1), b''),
                        subprocess.CompletedProcess([], 0, b'{', b'')]:
-            with self.mock.patch.object(self.g.subprocess, 'run', return_value=output):
+            with self.mock.patch.object(self.g, 'run_applicability_collector', return_value=output):
                 self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate))
         for error in [OSError('missing'), subprocess.TimeoutExpired('node', 60)]:
-            with self.mock.patch.object(self.g.subprocess, 'run', side_effect=error):
+            with self.mock.patch.object(self.g, 'run_applicability_collector', side_effect=error):
                 self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate))
+
+    def test_metadata_timeout_reaps_owned_git_group_before_fallback(self):
+        child = self.mock.Mock(pid=123456, returncode=-9)
+        child.communicate.side_effect = [subprocess.TimeoutExpired('node', 60), (b'', b'')]
+        with self.mock.patch.object(self.g.subprocess, 'Popen', return_value=child) as start, \
+             self.mock.patch.object(self.g.os, 'killpg') as kill:
+            self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate))
+            self.assertTrue(start.call_args.kwargs['start_new_session'])
+            kill.assert_called_once_with(child.pid, self.g.signal.SIGKILL)
+            self.assertEqual(child.communicate.call_args.kwargs['timeout'], 5)
+
+    def test_failed_owned_group_cleanup_blocks_instead_of_resuming_full_checks(self):
+        child = self.mock.Mock(pid=123456, returncode=0)
+        child.communicate.return_value = (json.dumps(self.proof).encode(), b'')
+        with self.mock.patch.object(self.g.subprocess, 'Popen', return_value=child), \
+             self.mock.patch.object(self.g.os, 'killpg', side_effect=PermissionError('cannot reap')):
+            with self.assertRaisesRegex(RuntimeError, 'Cannot terminate owned applicability'):
+                self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate)
 
     def test_positive_identity_precedes_prefetch_and_scientific_checks(self):
         g = self.g

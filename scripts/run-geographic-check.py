@@ -1189,6 +1189,29 @@ def output_budget_transition(repo, baseline, candidate):
             'candidate_code_executed': False, 'candidate_scientific_qualification': False}
 
 
+def run_applicability_collector(command, env, timeout=120):
+    # Metadata acquisition may launch Git. A timeout must reap that owned group
+    # before ordinary prefetch/full checks can resume in the same object store.
+    if os.name != 'posix':
+        raise OSError('Owned applicability process groups unavailable')
+    child = subprocess.Popen(command, env=env, stdout=subprocess.PIPE,
+                             stderr=subprocess.PIPE, start_new_session=True)
+    try:
+        stdout, stderr = child.communicate(timeout=timeout)
+    finally:
+        try:
+            os.killpg(child.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        except OSError as error:
+            raise RuntimeError('Cannot terminate owned applicability process group') from error
+        try:
+            child.communicate(timeout=5)
+        except subprocess.TimeoutExpired as error:
+            raise RuntimeError('Applicability process group did not terminate') from error
+    return subprocess.CompletedProcess(command, child.returncode, stdout, stderr)
+
+
 def unchanged_selected_inputs(repo, baseline, candidate):
     """Bounded applicability only; incomplete identity discovery keeps full checks."""
     if baseline == candidate:
@@ -1198,10 +1221,9 @@ def unchanged_selected_inputs(repo, baseline, candidate):
     for name in ['NODE_OPTIONS', 'NODE_PATH']:
         env.pop(name, None)
     try:
-        result = subprocess.run([
+        result = run_applicability_collector([
             env.get('NODE', 'node'), str(repo / 'scripts/check-unchanged-selected-geography.mjs'),
-            str(repo), baseline, candidate], env=env, stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE, timeout=60)
+            str(repo), baseline, candidate], env)
         if result.returncode or len(result.stdout) > 2 * 1024 * 1024:
             return None
         proof = json.loads(result.stdout)

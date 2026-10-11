@@ -5,6 +5,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
+import {createRoutingMetadataAcquisition} from './geography-routing-metadata.mjs';
 
 const PREFIX = 'coordination/engineering/selected-geography-effective-prevention-20261009/';
 const POLICY = PREFIX + 'supported-programs.json';
@@ -19,6 +20,11 @@ const keys = (value, expected, role) => demand(value && typeof value === 'object
 const array = (value, role, minimum = 1) => { demand(Array.isArray(value) && value.length >= minimum && value.length <= 512, 'unsupported-' + role); return value; };
 const canonical = value => Array.isArray(value) ? value.map(canonical) : value && typeof value === 'object' ? Object.fromEntries(Object.keys(value).sort().map(k => [k, canonical(value[k])])) : value;
 const same = (a, b) => JSON.stringify(canonical(a)) === JSON.stringify(canonical(b));
+const joined = async promises => {
+  const rows = await Promise.allSettled(promises), failure = rows.find(row => row.status === 'rejected');
+  if (failure) throw failure.reason;
+  return rows.map(row => row.value);
+};
 
 // A later trusted reader may introduce another input route. Equal candidate code
 // alone cannot prove this older collector complete for that new reader. Updating
@@ -55,23 +61,29 @@ export const REBIND_CODE = Object.freeze([
   'scripts/local-workspace.mjs', 'scripts/worker-identity.mjs'
 ]);
 
-function createReader({repo, baseline, candidate, trusted, limits}) {
+function createReader({repo, baseline, candidate, trusted, limits, acquisition}) {
   const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('GIT_')));
   Object.assign(env, {GIT_NO_LAZY_FETCH: '1', GIT_NO_REPLACE_OBJECTS: '1', GIT_CONFIG_NOSYSTEM: '1',
     GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0', GIT_OPTIONAL_LOCKS: '0'});
   const git = (...args) => {
     try { return execFileSync('git', ['--no-replace-objects', '-c', 'core.hooksPath=/dev/null', '-c', 'credential.helper=', '-C', repo, ...args],
-      {env, maxBuffer: limits.member + 1024, timeout: 30000, stdio: ['ignore', 'pipe', 'pipe']}); }
+      {env: args[0] === 'merge-base' ? {...env, GIT_SHALLOW_FILE: '/dev/null'} : env, maxBuffer: limits.member + 1024, timeout: 30000, stdio: ['ignore', 'pipe', 'pipe']}); }
     catch { throw Error('immutable-object-unavailable:' + args.slice(0, 4).join(':')); }
   };
   const descriptors = new Map(), metadata = new Map(), origins = new Map(), current = new Map();
   let metadataBytes = 0;
+  const missingOrigins = new Set();
+  function requireOrigin(commit) {
+    missingOrigins.add(commit); throw Error('missing-strict-historical-commit:' + commit);
+  }
   function descriptor(commit, name, optional = false) {
     demand(oid(commit) && safe(name), 'unsafe-immutable-locator');
     const key = commit + ':' + name;
     if (!descriptors.has(key)) {
       demand(descriptors.size < limits.entries, 'identity-entry-limit');
-      const raw = git('ls-tree', '-z', commit, '--', name).toString();
+      let raw;
+      try { raw = git('ls-tree', '-z', commit, '--', name).toString(); }
+      catch (error) { if (!originExists(commit)) requireOrigin(commit); throw error; }
       if (!raw) descriptors.set(key, null);
       else {
         const match = raw.match(/^(100644|100755) blob ([a-f0-9]{40})\t([^\0]+)\0$/);
@@ -89,18 +101,23 @@ function createReader({repo, baseline, candidate, trusted, limits}) {
     current.set(name, before ? {path: name, mode: before.mode, git_blob_oid: before.git_blob_oid} : {path: name, absent: true});
     return before;
   }
-  function body(pin, expected) {
+  async function body(pin, expected) {
     const key = pin.commit + ':' + pin.path;
-    if (!metadata.has(key)) {
-      const size = Number(git('cat-file', '-s', pin.git_blob_oid));
+    if (!metadata.has(key)) metadata.set(key, (async () => {
+      let size;
+      try { size = Number(git('cat-file', '-s', pin.git_blob_oid)); }
+      catch {
+        await acquisition.acquire(pin, expected);
+        size = Number(git('cat-file', '-s', pin.git_blob_oid));
+      }
       demand(Number.isSafeInteger(size) && size > 0 && size <= limits.member && metadataBytes + size <= limits.metadata, 'metadata-byte-limit');
       metadataBytes += size;
       const raw = git('cat-file', 'blob', pin.git_blob_oid);
       demand(raw.length === size, 'metadata-length-drift');
       demand(createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex') === pin.git_blob_oid, 'metadata-git-object-identity');
-      metadata.set(key, raw);
-    }
-    const raw = metadata.get(key);
+      return raw;
+    })());
+    const raw = await metadata.get(key);
     demand(!expected || expected.bytes === undefined || expected.bytes === raw.length, 'metadata-pin-length');
     demand(!expected || !expected.sha256 || hash(expected.sha256) && expected.sha256 === sha(raw), 'metadata-pin-hash');
     return raw;
@@ -120,12 +137,12 @@ function createReader({repo, baseline, candidate, trusted, limits}) {
     // A later object hydration must not expose a candidate-only alternative.
     if (fallback) equalCurrent(value.path, true);
     const version = originExists(value.commit) ? value.commit : fallback ? baseline : null;
-    demand(version, 'missing-strict-historical-commit');
+    if (!version) requireOrigin(value.commit);
     const actual = descriptor(version, value.path);
     demand(actual.mode === value.mode && actual.git_blob_oid === (value.git_blob_oid ?? value.blob), 'historical-pin-identity');
     return actual;
   }
-  const jsonAt = (pin, expected) => JSON.parse(body(pin, expected));
+  const jsonAt = async (pin, expected) => JSON.parse(await body(pin, expected));
   const currentJson = (name, expected) => jsonAt(equalCurrent(name), expected);
   const pinnedJson = (value, options) => jsonAt(pinned(value, options), value);
   function currentPin(value) {
@@ -135,6 +152,8 @@ function createReader({repo, baseline, candidate, trusted, limits}) {
     return p;
   }
   return {git, descriptor, equalCurrent, currentJson, currentPin, pinned, pinnedJson, jsonAt, body, originExists,
+    missingOrigins,
+    resetOrigins() { origins.clear(); missingOrigins.clear(); },
     trustedJson(name) { return jsonAt(descriptor(trusted, name)); },
     summary() {
       const rows = [...descriptors.values()].filter(Boolean).sort((a, b) => (a.commit + ':' + a.path).localeCompare(b.commit + ':' + b.path));
@@ -146,16 +165,15 @@ function createReader({repo, baseline, candidate, trusted, limits}) {
     }};
 }
 
-function originalAuthority(reader, entry) {
+async function originalAuthority(reader, entry) {
   keys(entry, 'authority_sha256,policy_id,policy_version,rule_preimage,rule_sha256,source_authority', 'authority-entry');
   reader.pinned(entry.rule_preimage);
-  const binding = reader.pinnedJson(entry.source_authority);
+  const binding = await reader.pinnedJson(entry.source_authority);
   keys(binding, 'kind,native_proof,original_pins,version' + (Object.hasOwn(binding, 'source_output_aliases') ? ',source_output_aliases' : ''), 'authority-binding');
   demand(binding.version === 1 && binding.kind === 'original-issued-rule-source-custody-v1', 'unsupported-authority-binding');
   keys(binding.original_pins, 'ledger,native_facts,native_manifest,native_request,source_facts,source_request', 'original-custody');
   for (const p of Object.values(binding.original_pins)) reader.pinned(p);
-  const request = reader.pinnedJson(binding.original_pins.native_request);
-  const source = reader.pinnedJson(binding.original_pins.source_request);
+  const [request, source] = await joined([reader.pinnedJson(binding.original_pins.native_request), reader.pinnedJson(binding.original_pins.source_request)]);
   demand(['unactivated-additive-native-release-v1', 'unactivated-additive-native-batch-v1'].includes(request.operation)
     && source.operation === 'retained-land-source-premises-v1', 'unsupported-original-programme');
   const aliases = new Map();
@@ -188,23 +206,22 @@ function originalAuthority(reader, entry) {
     }
     reader.pinned(source.baseline.pins[0], {fallback: false});
     const selectorPin = request.baseline.pins[0];
-    const selector = reader.pinnedJson(selectorPin, {fallback: false});
+    const selector = await reader.pinnedJson(selectorPin, {fallback: false});
     demand(selector.selected_geography?.kind === 'complete-world-index-with-exact-encoded-overrides' && safe(selector.selected_geography.path), 'unsupported-original-source-map');
     reader.descriptor(selectorPin.commit, selector.selected_geography.path);
   }
 }
 
-function currentRebind(reader, pin, sourcePaths) {
-  const certificate = reader.pinnedJson(pin, {fallback: false});
+async function currentRebind(reader, pin, sourcePaths) {
+  const certificate = await reader.pinnedJson(pin, {fallback: false});
   keys(certificate, 'authority_registry_sha256,base_selection,execution_commit,facts,kind,operating,publication,request,result,version', 'current-rebind');
   demand(certificate.version === 1 && certificate.kind === 'qualified-native-additive-current-bank-rebind-v1' && oid(certificate.execution_commit), 'unsupported-current-rebind');
   for (const role of ['request', 'facts', 'publication', 'operating', 'result']) reader.pinned(certificate[role], {fallback: false});
   for (const name of REBIND_CODE) { reader.equalCurrent(name); reader.descriptor(certificate.execution_commit, name); }
-  const request = reader.pinnedJson(certificate.request, {fallback: false});
-  const operating = reader.pinnedJson(certificate.operating, {fallback: false});
+  const [request, operating] = await joined([reader.pinnedJson(certificate.request, {fallback: false}), reader.pinnedJson(certificate.operating, {fallback: false})]);
   keys(operating.execution_custody, 'code_source,terminal,stderr,stdout,issued_plan', 'external-custody');
   for (const p of Object.values(operating.execution_custody)) reader.pinned(p, {fallback: false});
-  const plan = reader.pinnedJson(operating.execution_custody.issued_plan, {fallback: false});
+  const plan = await reader.pinnedJson(operating.execution_custody.issued_plan, {fallback: false});
   if (plan.original_inputs !== undefined) for (const p of array(plan.original_inputs, 'issued-original-inputs', 0)) reader.pinned(p, {fallback: false});
   demand(request.acquisition && Array.isArray(request.acquisition.target_sources), 'unsupported-rebind-acquisition');
   for (const target of request.acquisition.target_sources) {
@@ -216,10 +233,13 @@ function currentRebind(reader, pin, sourcePaths) {
   // selected source bank; it cannot introduce another physical input locator.
 }
 
-function collect(reader, {baseline, candidate, trusted}) {
+async function collect(reader, {baseline, candidate, trusted}) {
   // This is an eligibility bound, not input equivalence. Compare the authored
   // diff from its real merge base; all consumed identities below still compare
   // the exact supplied baseline and candidate, including baseline-only changes.
+  // A depth-one baseline may hide a parent already present via candidate
+  // ancestry. Ignore only the shallow boundary for this read-only query; never
+  // hydrate a graph. Missing required ancestor objects still decline.
   const mergeBase = reader.git('merge-base', baseline, candidate).toString().trim();
   demand(oid(mergeBase), 'source-scope-merge-base-unavailable');
   const changed = reader.git('diff-tree', '--no-commit-id', '--name-only', '-r', '-z', '--no-renames', mergeBase, candidate).toString().split('\0').filter(Boolean);
@@ -231,31 +251,39 @@ function collect(reader, {baseline, candidate, trusted}) {
     reader.descriptor(candidate, name, true);
   }
   for (const name of EXECUTION_CODE) reader.equalCurrent(name);
-  reader.equalCurrent('scripts/check-unchanged-selected-geography.mjs', true);
+  for (const name of ['scripts/check-unchanged-selected-geography.mjs', 'scripts/geography-routing-metadata.mjs']) reader.equalCurrent(name, true);
+  reader.equalCurrent('scripts/geography-prefetch.mjs');
+  await joined([...Object.keys(AUDITED_READERS).map(name => reader.body(reader.descriptor(trusted, name))),
+    reader.trustedJson(POLICY), ...[HANDOFFS, 'data/world-index.json', 'data/geographic-releases/current-manifest.json',
+      'data/ownership-selection.json', 'scripts/native-ownership/verified-candidates.json'].map(name => reader.currentJson(name))]);
   for (const [name, allowed] of Object.entries(AUDITED_READERS)) {
-    const raw = reader.body(reader.descriptor(trusted, name));
+    const raw = await reader.body(reader.descriptor(trusted, name));
     demand(allowed.includes(sha(raw)), 'unsupported-reader-profile:' + name);
   }
   // The original reader uses executing-checkout policy for BOTH selections.
-  const programme = reader.trustedJson(POLICY);
+  const programme = await reader.trustedJson(POLICY);
   demand(programme.version === 1 && programme.kind === 'trusted-source-native-programmes-v1', 'unsupported-programme-catalogue');
-  const handoffs = reader.currentJson(HANDOFFS);
+  const handoffs = await reader.currentJson(HANDOFFS);
   demand(handoffs.version === 1 && handoffs.kind === 'accepted-administrative-handoffs-v1', 'unsupported-handoff-registry');
   for (const row of array(handoffs.entries, 'administrative-handoffs')) {
     reader.pinned({...row.source, commit: row.accepted_source_commit});
   }
-  const world = reader.currentJson('data/world-index.json');
+  const world = await reader.currentJson('data/world-index.json');
   const parts = array(world.parts, 'world-parts');
   demand(new Set(parts).size === parts.length && parts.every(safe), 'unsupported-world-parts');
   for (const name of parts) reader.equalCurrent('data/' + name);
   for (const name of ['data/hierarchy.json', 'data/canonical-grid/manifest.json', 'data/geographic-releases/index.json']) reader.equalCurrent(name);
-  const pointer = reader.currentJson('data/geographic-releases/current-manifest.json');
+  const pointer = await reader.currentJson('data/geographic-releases/current-manifest.json');
   demand(safe(pointer.path) && hash(pointer.sha256) && !pointer.path.startsWith('data/'), 'unsupported-release-pointer');
   reader.equalCurrent('data/geographic-releases/' + pointer.path);
-  const selection = reader.currentJson('data/ownership-selection.json');
+  const selection = await reader.currentJson('data/ownership-selection.json');
   keys(selection, 'manifest_path,method,release_id,sha256,version' + ['selected_geography', 'additive_release', 'artifact_consumption'].filter(k => Object.hasOwn(selection, k)).map(k => ',' + k).join(''), 'selection');
   demand(selection.version === 1 && selection.method === 'native-linear-evenodd-first-owner-v1' && safe(selection.manifest_path), 'unsupported-selection');
-  const manifest = reader.currentJson(selection.manifest_path, {sha256: selection.sha256});
+  await joined([reader.currentJson(selection.manifest_path, {sha256: selection.sha256}),
+    ...(selection.selected_geography ? [reader.currentJson(selection.selected_geography.path, selection.selected_geography)] : []),
+    ...(selection.additive_release ? [reader.jsonAt(reader.currentPin(selection.additive_release), selection.additive_release)] : []),
+    ...(selection.artifact_consumption ? [reader.jsonAt(reader.currentPin(selection.artifact_consumption.certificate), selection.artifact_consumption.certificate)] : [])]);
+  const manifest = await reader.currentJson(selection.manifest_path, {sha256: selection.sha256});
   demand(manifest.version === 2 && manifest.method === selection.method, 'unsupported-native-manifest');
   const nativeParts = array(manifest.parts, 'native-parts');
   for (const p of nativeParts) {
@@ -265,7 +293,7 @@ function collect(reader, {baseline, candidate, trusted}) {
   const bounds = manifest.original_assets?.bounds;
   demand(bounds && oid(bounds.commit) && bounds.path === 'data/canonical-grid/bounds.json.gz', 'unsupported-owner-roster');
   reader.descriptor(bounds.commit, bounds.path);
-  const verified = reader.currentJson('scripts/native-ownership/verified-candidates.json');
+  const verified = await reader.currentJson('scripts/native-ownership/verified-candidates.json');
   const receipt = verified.candidates?.[selection.sha256];
   demand(verified.version === 1 && receipt?.role === 'reviewed-exhaustive-native-rule-comparison' && oid(receipt.commit) && safe(receipt.path), 'unsupported-native-receipt');
   // This historical receipt has no declared Git OID/mode; its retained location
@@ -276,7 +304,7 @@ function collect(reader, {baseline, candidate, trusted}) {
   const transport = manifest.native_asset_transport;
   keys(transport, 'index,kind,logical_assets,original_compressed_bytes,version', 'native-transport');
   demand(transport.version === 1 && transport.kind === 'ordered-exact-original-byte-fragments', 'unsupported-native-transport');
-  const index = reader.currentJson(transport.index.path, transport.index);
+  const index = await reader.currentJson(transport.index.path, transport.index);
   demand(index.version === 1 && index.kind === transport.kind, 'unsupported-native-index');
   for (const p of array(index.parts, 'native-fragments')) {
     demand(safe(p.path), 'unsupported-native-fragment');
@@ -285,14 +313,14 @@ function collect(reader, {baseline, candidate, trusted}) {
   const declared = selection.selected_geography;
   keys(declared, 'bytes,kind,path,sha256,version', 'selected-source-map');
   demand(declared.version === 1 && declared.kind === 'complete-world-index-with-exact-encoded-overrides', 'unsupported-selected-source-map');
-  const bank = reader.currentJson(declared.path, declared);
+  const bank = await reader.currentJson(declared.path, declared);
   demand(bank.version === 1 && bank.kind === declared.kind, 'unsupported-selected-source-bank');
   for (const p of [bank.world_index, ...array(bank.unchanged_files, 'unchanged-sources', 0), ...array(bank.overrides, 'source-overrides', 0)]) reader.pinned(p);
   if (selection.artifact_consumption !== undefined) {
     const hook = selection.artifact_consumption;
     keys(hook, 'certificate,review', 'artifact-hook');
     reader.currentPin(hook.review);
-    const certificate = reader.jsonAt(reader.currentPin(hook.certificate), hook.certificate);
+    const certificate = await reader.jsonAt(reader.currentPin(hook.certificate), hook.certificate);
     demand(certificate.version === 1 && certificate.kind === 'qualified-arctic-immutable-product-certificate-v1', 'unsupported-artifact-certificate');
     for (const p of [certificate.application_consumer_code, certificate.qualification_inventory]) reader.currentPin(p);
     if (certificate.release_product_catalogue !== undefined) {
@@ -301,40 +329,49 @@ function collect(reader, {baseline, candidate, trusted}) {
     }
   }
   if (selection.additive_release !== undefined) {
-    const sidecar = reader.jsonAt(reader.currentPin(selection.additive_release), selection.additive_release);
+    const sidecar = await reader.jsonAt(reader.currentPin(selection.additive_release), selection.additive_release);
     keys(sidecar, 'authority_registry,base_selection,kind,logical_asset_map,runtime_envelope,version', 'additive-sidecar');
     demand(sidecar.version === 2 && sidecar.kind === 'retained-native-additive-selection-v2', 'unsupported-additive-sidecar');
     keys(sidecar.logical_asset_map, 'base_manifest,ledger,owner_roster,patch', 'additive-assets');
     for (const p of [sidecar.runtime_envelope, ...Object.values(sidecar.logical_asset_map)]) reader.pinned(p);
-    const registry = reader.pinnedJson(sidecar.authority_registry);
+    const [registry, ledger] = await joined([reader.pinnedJson(sidecar.authority_registry), reader.pinnedJson(sidecar.logical_asset_map.ledger)]);
     demand(registry.version === 1 && registry.kind === 'retained-rule-authority-registry-v1', 'unsupported-authority-registry');
-    for (const entry of array(registry.entries, 'authorities')) originalAuthority(reader, entry);
-    const ledger = reader.pinnedJson(sidecar.logical_asset_map.ledger);
+    await joined(array(registry.entries, 'authorities').map(entry => originalAuthority(reader, entry)));
     demand([1, 2].includes(ledger.version) && ledger.kind === 'native-additive-repair-ledger-v' + ledger.version, 'unsupported-selected-ledger');
-    if (Object.hasOwn(ledger, 'current_rebind')) currentRebind(reader, ledger.current_rebind, parts.map(p => 'data/' + p));
+    if (Object.hasOwn(ledger, 'current_rebind')) await currentRebind(reader, ledger.current_rebind, parts.map(p => 'data/' + p));
   }
 }
 
-export function inspectUnchangedSelectedGeography({repo, baseline, candidate, trusted = baseline, limits = {member: FILE, metadata: METADATA, entries: ENTRIES}}) {
+export async function inspectUnchangedSelectedGeography({repo, baseline, candidate, trusted = baseline, acquisition, limits = {member: FILE, metadata: METADATA, entries: ENTRIES}}) {
   const report = {version: 1, kind: 'trusted-unchanged-selected-geography-v1', baseline_commit: baseline,
     candidate_commit: candidate, trusted_reader_policy_commit: trusted, candidate_code_executed: false,
     science_reexecuted: false, source_approval: false, published: false};
   try {
     demand(oid(baseline) && oid(candidate) && oid(trusted), 'require-immutable-commits');
     demand(baseline !== candidate, 'baseline-proof-requires-full-check');
-    const reader = createReader({repo, baseline, candidate, trusted, limits});
-    collect(reader, {baseline, candidate, trusted});
-    const result = {...report, status: 'unchanged-selected-inputs', ...reader.summary(),
+    acquisition ??= createRoutingMetadataAcquisition({repo, baseline, limits});
+    const reader = createReader({repo, baseline, candidate, trusted, limits, acquisition});
+    for (let round = 0; ; round++) {
+      try { await collect(reader, {baseline, candidate, trusted}); break; }
+      catch (error) {
+        if (!String(error.message).startsWith('missing-strict-historical-commit:') || round >= 8) throw error;
+        acquisition.acquireOrigins([...reader.missingOrigins].sort());
+        // New strict graphs may also contain fallback-eligible origins. Recheck
+        // every route from its typed root rather than keeping stale absence.
+        reader.resetOrigins();
+      }
+    }
+    const result = {...report, status: 'unchanged-selected-inputs', ...reader.summary(), metadata_acquisition: acquisition.summary(),
       limits: ['Exact immutable input/code applicability only; no fresh native, polygon, source-authority, publication or consumer validation.',
         'Unknown reader layouts and changed or absent alternatives retain the original full checker.']};
     demand(Buffer.byteLength(JSON.stringify(result)) <= 2 * 1024 * 1024, 'identity-report-limit');
     return result;
   } catch (error) {
-    return {...report, status: 'full-check-required', reason: error instanceof SyntaxError ? 'invalid-routing-metadata' : String(error.message).slice(0, 512)};
+    return {...report, status: 'full-check-required', ...(acquisition ? {metadata_acquisition: acquisition.summary()} : {}), reason: error instanceof SyntaxError ? 'invalid-routing-metadata' : String(error.message).slice(0, 512)};
   }
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const [repo, baseline, candidate, trusted] = process.argv.slice(2);
-  process.stdout.write(JSON.stringify(inspectUnchangedSelectedGeography({repo, baseline, candidate, ...(trusted ? {trusted} : {})})) + '\n');
+  process.stdout.write(JSON.stringify(await inspectUnchangedSelectedGeography({repo, baseline, candidate, ...(trusted ? {trusted} : {})})) + '\n');
 }
