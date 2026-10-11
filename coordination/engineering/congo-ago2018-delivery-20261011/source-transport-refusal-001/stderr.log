@@ -1,0 +1,51 @@
+fatal: git cat-file: could not get object info
+node:internal/errors:985
+  const err = new Error(message);
+              ^
+
+Error: Command failed: git -C /workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work cat-file -s dc4f2926dc0945eef1f35fa34c506a270b6239b2
+fatal: git cat-file: could not get object info
+
+    at genericNodeError (node:internal/errors:985:15)
+    at wrappedFn (node:internal/errors:539:14)
+    at checkExecSyncError (node:child_process:942:11)
+    at execFileSync (node:child_process:978:15)
+    at readPin (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/scripts/additive-gap-repair.mjs:736:24)
+    at administrativeSourcePremiseStage (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/scripts/additive-gap-repair.mjs:1169:188)
+    at sourcePremiseStage (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/scripts/additive-gap-repair.mjs:1304:86)
+    at inventoryCommand (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/scripts/additive-gap-repair.mjs:1902:12)
+    at file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/scripts/additive-gap-repair.mjs:1950:23
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25) {
+  status: 128,
+  signal: null,
+  output: [ null, '', 'fatal: git cat-file: could not get object info\n' ],
+  pid: 5698,
+  stdout: '',
+  stderr: 'fatal: git cat-file: could not get object info\n'
+}
+
+Node.js v24.19.0
+Command exited with non-zero status 1
+	Command being timed: "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/additive-gap-repair.mjs /workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work 7d95c32be805aaa9c29c025ce02d9e85645aba2f coordination/engineering/congo-ago2018-delivery-20261011/source-request-001.json c46e00dea8cc7df9d40f4393a388bb5c24c6ce76b2bc0ed5d0d4d4d7ad9daf61 .cache/native-grid-candidates/congo-ago2018-two-source-001"
+	User time (seconds): 14.09
+	System time (seconds): 12.72
+	Percent of CPU this job got: 107%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:24.97
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 393496
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 1
+	Minor (reclaiming a frame) page faults: 4597406
+	Voluntary context switches: 29377
+	Involuntary context switches: 1139
+	Swaps: 0
+	File system inputs: 8
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1
