@@ -1,0 +1,101 @@
+{
+  "baseline": "c3293051718839b08127db7b058536a87997a0c6",
+  "comparison_prefix": "coordination/engineering/global-physical-comparison-20261006/results/",
+  "components": [
+    {
+      "component_id": "physical-component:4ceb0de66be41e24e9e2f640442ec3ae3690a7d134d73cfbe2a6ac01edf098d4",
+      "candidate_product": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+        "bytes": 2081831,
+        "sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8388063,
+        "uncompressed_sha256": "b02763e7ee4e514a6208432d5ec3d78713cdae5f15b19118a3ac8ba43184cf85"
+      },
+      "feature_index": 2266,
+      "candidate_feature_sha256": "911bc5c8100f6b26c749c9aabf185cf4fa4c97a514ba736896b9a8ca5bf370cc",
+      "candidate_geometry_sha256": "d57c8d5906975fb117822cc04521c6b2c53de49d0739dbd063f7d857ebf36ca1",
+      "comparison_product": "components-021.jsonl.gz"
+    },
+    {
+      "component_id": "physical-component:d70ba927292a3f812f481885193f21b099328f0697ff13fea7585dac7a8118c2",
+      "candidate_product": {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+        "bytes": 2079838,
+        "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387897,
+        "uncompressed_sha256": "66957c60574f28108c2cf633f02017a99d8dcbf9e1187c2588487675123a6cdd"
+      },
+      "feature_index": 772,
+      "candidate_feature_sha256": "645d73a900180d4c52c4ee4de5a14c94c03ec0059604aa78cdddd0e9b383fdeb",
+      "candidate_geometry_sha256": "58a4c920b56908538bfbf7db14fc55b360442a08df39b3c78ad1783398f052b9",
+      "comparison_product": "components-059.jsonl.gz"
+    }
+  ],
+  "reused_source_product": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/sources-000.jsonl.gz",
+  "reused_source_receipt": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/receipt.json",
+  "runtime_inventory": {
+    "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/substantial-ten-v1/runtime-lock.json",
+    "bytes": 545963,
+    "sha256": "f4cbad7ce77748dda6cf68a3a34e4a65cedc09f2c50e0c9cf20abaa2d8a4b30b",
+    "hash_kind": "file-bytes",
+    "commit": "c827ea9314c6b5437183a5de0cd874c971d424df"
+  },
+  "files": [
+    {
+      "path": "scripts/evidence/immutable.py",
+      "bytes": 17414,
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/report.json",
+      "bytes": 57840,
+      "sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/transport-map.json",
+      "bytes": 56473,
+      "sha256": "644345be3d231431177c416b6ddbe3a1b2486597295af45fd5224857b5612d26",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-021.jsonl.gz",
+      "bytes": 1048680,
+      "sha256": "bd56ef9dd652929096534f8cbd7d1edbff4a7ec8cad3573c287903f6543e1b6f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-059.jsonl.gz",
+      "bytes": 1063065,
+      "sha256": "fdb3e1b89f8dba54cd2827b7118d47398c8dc4935bee5cff8444cb5623d5f8b9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/sources-000.jsonl.gz",
+      "bytes": 2173285,
+      "sha256": "aaf5e4f099ab25c6e6f96632787f1654ba6054ed378fd591b360e36274ffc264",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/receipt.json",
+      "bytes": 2676,
+      "sha256": "8ef08a5125ca2bde3858f6f165cce2bd559a0abfd7996f1a5d24fdeaf0929147",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+      "bytes": 2081831,
+      "sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+      "bytes": 2079838,
+      "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+      "hash_kind": "file-bytes"
+    }
+  ]
+}
