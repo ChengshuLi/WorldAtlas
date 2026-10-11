@@ -229,3 +229,85 @@ $ node --test test/delivery-handoff.test.mjs test/premerge-evidence.test.mjs tes
 ℹ skipped 0
 ℹ todo 0
 ℹ duration_ms 356.595929
+
+Order-preserving finalization delta. Existing selected consumer compares selected_geography with JSON.stringify; canonical key sorting changes its contract. No consumer predicate or active delivery file changed.
+Initial preparation from 79f89d2c original selector/package: 2.09 seconds, 84604 KiB max RSS; selector and smoke expectations exactly equal corrected 79157664; package declaration set equal, untouched declaration order preserved.
+$ finalize current13-finalize.json finalized-002
+{"destination":".cache/delivery-handoff/finalized-002","resumed":false,"binding":{"phase":"finalize","config_sha256":"b0046e313d454fe4143e562c736e57c3007e062b0c692e2d1a411c97d92408d4"}}
+elapsed_seconds=2.27 max_rss_kb=84728
+$ same command --resume
+{"destination":".cache/delivery-handoff/finalized-002","resumed":true,"binding":{"phase":"finalize","config_sha256":"b0046e313d454fe4143e562c736e57c3007e062b0c692e2d1a411c97d92408d4"}}
+elapsed_seconds=2.04 max_rss_kb=85384
+ownership-selection.json: exact public byte equality, 1592 bytes, SHA256 a25491f253ab42129b9ec8cce19a6530dee7b861c7928ac07dd543e5f62c35ad
+package-inputs.json: exact public byte equality, 84140 bytes, SHA256 4f34b4a63685a3f4edc820f82e5904d6bbec03373568afdd29573563378e38ad
+selected-delivery-expectations.json: exact public byte equality, 32243 bytes, SHA256 0260439991c24db01ea589b4b678569bdcbe5838dd7920778bd9f73a4b508aec
+Derived owned role paths: 117; no unrelated declaration changed.
+Prior 79f89d2c preparation also preserves all untouched declaration order; same final declaration set. Original-to-final selector/expectation bytes match 79157664.
+$ node --test test/delivery-handoff.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs test/package-inputs.test.mjs
+✔ SOURCE preparation preserves handoff order, methods/resources and complete whole handoff pin (23.896294ms)
+✔ accepted whole handoff target/order drift fails even when its new pin is coherent (3.171175ms)
+✔ writer resumes only exact complete bytes and rejects collisions, dangling symlinks and changed bindings (9.014763ms)
+✔ combined read/output budget fails before creating destination (0.839215ms)
+✔ retention joins genuine terminal, request, facts and every published output; no completion from partial files (8.130331ms)
+✔ native preparation requires committed genuine SOURCE products and preserves immutable runtime/resource fields (2.814045ms)
+✔ composition invokes existing conservation logic and rejects duplicate original scope (16.633725ms)
+✔ immutable Git input reader rejects whole-body drift, missing objects and nonordinary pins (68.986106ms)
+✔ review handoff includes current bindings/complete rename scope and no approval; stale head/body/scope fail (10.99455ms)
+✔ rebind commit phases require complete custody and publication-matching result pins (2.675589ms)
+✔ new request issuance requires explicit finite v2 profiles and actual HEAD support/code pins (1.167342ms)
+✔ coherent SOURCE inventory changes and native preparation facts omissions are rejected against pinned scope/targets (8.323707ms)
+✔ native retention rejects a publication that omits the required ledger asset (1.790896ms)
+✔ native self-consistent target substitutions fail the independent immutable SOURCE join (4.326338ms)
+✔ selector finalization preserves insertion order and repeat bytes, including unsorted nested geography (0.605688ms)
+✔ final package replacement preserves every foreign field and declaration order and validates overlaps (1.028606ms)
+✔ finalization joins genuine release metadata, stages fresh files, and repeats without changes (5.151012ms)
+✔ finalization rejects coherent foreign sidecar/base/ledger/envelope bindings before publication (8.719034ms)
+✔ verifies bytes without claiming factual correctness (3.018958ms)
+✔ schema-only validation reports unverified bytes (0.444139ms)
+✔ known broken pins, stale baseline, entry hashes and contradictory summaries fail (2.339901ms)
+✔ source access/license limits remain explicit; no unsafe retention (1.312136ms)
+✔ research cannot grant approval; supported conclusions need known sources (0.723263ms)
+✔ containing-file inventory verifies actual subject IDs, not optional properties.part (1.267831ms)
+✔ compressed vs uncompressed hashes and decompression budgets are checked (3.675923ms)
+✔ paths and symlinks cannot escape candidate reader (2.065204ms)
+✔ new identity registry is checked against retained prior roster without claiming source or geometry approval (1.372226ms)
+✔ prior inventory cannot accept invented subjects, candidate baselines or ambiguous authority (2.627057ms)
+✔ identity-only projection rejects duplicates, geometry and altered native IDs even with updated output hashes (2.576773ms)
+✔ declared gzip .bin containing files preserve complete mixed 45-component/eight-contact membership (8.54763ms)
+✔ subject gzip declaration does not accept unsupported bytes, wrong hashes or coherently missing subjects (10.304976ms)
+✔ actual subject decompression remains bounded for legacy gzip with small encoded bytes (1.649126ms)
+✔ prior inventory and candidate registry decode their declared gzip .bin descriptors at correct vintages (2.153514ms)
+✔ declaration uses literal paths, precise directory membership and approved outputs (95.568069ms)
+✔ independent record bindings reject coherent wrong joins, incomplete and vacuous coverage (8.007909ms)
+✔ new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption (1.72618ms)
+✔ positive real-format ledger validates actual files and binds an independent review (5.682119ms)
+✔ regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail (3.712548ms)
+✔ full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence (1.719701ms)
+✔ coordinate/helper policies remain enforced without ceremonial control files (1.967309ms)
+✔ generator controls bind actual positive, negative and equal two-run output bytes (1.553204ms)
+✔ Washington-style generated narrative/table mismatch fails against the same numeric ledger (1.506024ms)
+✔ reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review (2.434682ms)
+✔ mock remote queue checks exact blobs/head/independent receipt with read-only requests (10.572214ms)
+✔ incomplete remote trees cannot become a passed byte check (0.612999ms)
+✔ remote decisions reject stale exact-head reviews and a later change request (1.344965ms)
+✔ unchanged authored evidence survives unrelated main advance, while current metrics require refresh (0.261809ms)
+✔ trusted hosted gate checks a new limited prior-evidence registry and still rejects nonancestor baselines (1.930934ms)
+✔ fresh remote review, head, tree/path and reservation checks reject after immutable bytes were reused (9.966314ms)
+✔ acceptance/disposition binding invalidates substantive changes but preserves JSON formatting and progress comments (5.492603ms)
+✔ binding activation preserves existing PRs and rejects unknown activation timestamps (0.282529ms)
+✔ compact review binds canonical complete inventory and preserves literal receipts (1.147462ms)
+✔ compact reviews refuse malformed, mixed, omitted, changed and renamed inventories (4.291587ms)
+✔ compact inventory does not weaken head, reviewer, contract, domain or limit authority (2.016352ms)
+✔ normal remote comment route admits a complete compact review beyond literal GitHub comment size (85.098173ms)
+✔ minimal manifests reuse Git change inventory but preserve evidence and independent review (0.655842ms)
+✔ omitting duplicate change receipts does not authorize replacing original scientific evidence (1.651811ms)
+✔ declared controls remain checked, not accepted merely because controls are optional (0.317421ms)
+✔ remote minimal manifests need no base-body copies for unrelated code changes (1.028966ms)
+ℹ tests 59
+ℹ suites 0
+ℹ pass 59
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 378.555924

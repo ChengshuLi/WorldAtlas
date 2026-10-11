@@ -7,6 +7,7 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {gunzipSync} from 'node:zlib';
 import {candidateBudget} from './native-ownership/native-preparation-guards.mjs';
+import {validatePackageInputs} from './package-inputs.mjs';
 import {reviewContractBinding, reviewInventoryCommitment, checkPremergeEvidence} from './premerge-evidence.mjs';
 import {githubAPI, githubPages, readClaim, workSpec} from './issue-claim-contract.mjs';
 import {composeRetainedLedgers} from '../coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs';
@@ -486,6 +487,66 @@ export function packageProjection(config, reader) {
   return {'package-roles.json': jsonBytes(projection), 'selected-delivery-expectations.json': jsonBytes(expectation)};
 }
 
+const orderedBytes = value => Buffer.from(JSON.stringify(value, null, 2) + '\n');
+
+export function finalizedSelection(originalRaw, sidecar, pin) {
+  const selection = JSON.parse(originalRaw), base = {...selection}; delete base.additive_release;
+  need(selection.version === 1 && sidecar.version === 2 && sidecar.kind === 'retained-native-additive-selection-v2'
+    && same(sidecar.base_selection, base), 'Final sidecar must preserve the complete original base selection');
+  const reference = {path: pin.path, bytes: pin.bytes, sha256: pin.sha256};
+  // The selected consumer compares some nested metadata with JSON.stringify.
+  // Keep original key insertion order, including selected_geography, and leave
+  // an already-finalized body's whitespace untouched on repeated preparation.
+  if (same(selection.additive_release, reference)) return originalRaw;
+  selection.additive_release = reference;
+  const after = {...selection}; delete after.additive_release;
+  need(JSON.stringify(after) === JSON.stringify(base), 'Unchanged selector insertion order differs');
+  return orderedBytes(selection);
+}
+
+export function finalizedPackageInputs(original, prefix, paths) {
+  validatePackageInputs(original);
+  need(safe(prefix.slice(0, -1)) && prefix.endsWith('/') && original.version === 1
+    && unique(original.inputs) && unique(paths) && paths.every(p => safe(p) && p.startsWith(prefix)), 'Exact owned package paths required');
+  const inputs = original.inputs.filter(p => !p.startsWith(prefix));
+  let position = original.inputs.findIndex(p => p.startsWith(prefix));
+  if (position < 0) position = inputs.findIndex(p => p > prefix);
+  if (position < 0) position = inputs.length;
+  const replacement = [...inputs.slice(0, position), ...[...paths].sort(), ...inputs.slice(position)];
+  need(unique(replacement), 'Duplicate final package declaration');
+  return validatePackageInputs({...original, inputs: replacement});
+}
+
+export function finalizeDelivery(config, reader) {
+  need(config.selector?.path === 'data/ownership-selection.json' && config.package_inputs?.path === '.github/package-inputs.json'
+    && config.sidecar?.path.startsWith(config.new_prefix) && config.selected_ledger && config.rebind && !config.outer_roles,
+  'Finalization requires original selector/package, actual sidecar/ledger/rebind and derived outer roles');
+  const sidecar = reader.json(config.sidecar), assets = sidecar.logical_asset_map;
+  need(same(Object.keys(sidecar).sort(), ['authority_registry', 'base_selection', 'kind', 'logical_asset_map', 'runtime_envelope', 'version'])
+    && assets && same(Object.keys(assets).sort(), ['base_manifest', 'ledger', 'owner_roster', 'patch'])
+    && same(sidecar.authority_registry, config.registry) && same(assets.ledger, config.selected_ledger), 'Final sidecar authority/selected-ledger pins differ');
+  const selected = reader.json(config.selected_ledger), patch = reader.json(assets.patch), envelope = reader.json(sidecar.runtime_envelope);
+  need(same(selected.current_rebind, config.rebind) && patch.ledger_sha256 === config.selected_ledger.sha256
+    && patch.authority_registry_sha256 === config.registry.sha256 && same(patch.base_reference, envelope.base_reference)
+    && same(patch.effective_reference, envelope.effective_reference), 'Final release metadata joins differ');
+  for (const [role, pin] of Object.entries(assets)) need(envelope[role]?.bytes === pin.bytes && envelope[role]?.sha256 === pin.sha256,
+    'Final envelope asset descriptor differs: ' + role);
+  const selector = finalizedSelection(reader.read(config.selector), sidecar, config.sidecar);
+  const outputs = packageProjection({...config, outer_roles: [assets.patch, sidecar.runtime_envelope, config.sidecar]}, reader);
+  const projection = JSON.parse(outputs['package-roles.json']);
+  const paths = projection.paths.map(p => p.path);
+  need(paths.every(p => p.startsWith(config.new_prefix)), 'Final package replacement escapes its owned prefix');
+  const packageInputs = finalizedPackageInputs(reader.json(config.package_inputs), config.new_prefix, paths);
+  const expectation = JSON.parse(outputs['selected-delivery-expectations.json']);
+  // Preserve the established final smoke-expectation presentation as well.
+  const expectations = {version: expectation.version, selected_ledger_sha256: expectation.selected_ledger_sha256,
+    cumulative_native_cells: expectation.cumulative_native_cells, cohorts: expectation.cohorts.map(c => ({original_batch_id: c.original_batch_id,
+      component_ids: c.component_ids, members: c.members.map(m => ({component_id: m.component_id, target_id: m.target_id,
+        disposition: m.disposition, geometry_sha256: m.geometry_sha256}))}))};
+  return {...outputs, 'ownership-selection.json': selector, 'package-inputs.json': orderedBytes(packageInputs),
+    'selected-delivery-expectations.json': orderedBytes(expectations)};
+}
+
 export async function freezeReview({repo, number, expectedHead, api, reader}) {
   need(/^[\w.-]+\/[\w.-]+$/.test(repo) && Number.isSafeInteger(number) && number > 0 && hex(expectedHead, 40), 'Exact PR/repository/head required');
   const route = `/repos/${repo}`, pr = await api(`${route}/pulls/${number}`);
@@ -525,8 +586,8 @@ export async function freezeReview({repo, number, expectedHead, api, reader}) {
 
 async function main(args) {
   const [phase, configFile, destination, ...flags] = args;
-  need(['requests', 'native-requests', 'retain', 'rebind-operating', 'rebind-certificate', 'compose', 'package', 'review'].includes(phase) && configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
-    'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|package|review CONFIG DESTINATION [--resume]');
+  need(['requests', 'native-requests', 'retain', 'rebind-operating', 'rebind-certificate', 'compose', 'package', 'finalize', 'review'].includes(phase) && configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
+    'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|package|finalize|review CONFIG DESTINATION [--resume]');
   need(!process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node launch required');
   const root = fs.realpathSync(process.cwd()); admitDestination(root, destination, flags.includes('--resume'));
   const raw = ordinary(root, configFile), config = JSON.parse(raw), reader = pinReader(root);
@@ -538,6 +599,7 @@ async function main(args) {
   if (phase === 'retain') outputs = retainProducts(config, root, reader);
   if (phase === 'compose') outputs = composeAuthorities(config, reader);
   if (phase === 'package') outputs = packageProjection(config, reader);
+  if (phase === 'finalize') outputs = finalizeDelivery(config, reader);
   if (phase === 'review') {
     const token = execFileSync('gh', ['auth', 'token'], {encoding: 'utf8', maxBuffer: 16384}).trim();
     outputs = await freezeReview({repo: config.repo, number: config.pr_number, expectedHead: config.head_sha, api: githubAPI(token), reader});

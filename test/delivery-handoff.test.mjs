@@ -9,7 +9,7 @@ import {candidateBudget} from '../scripts/native-ownership/native-preparation-gu
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
 import {subjectsHash} from '../scripts/evidence-quality.mjs';
 import {jsonBytes, digest, pinReader, publish, prepareRequests, retainProducts, nativeRequests,
-  composeAuthorities, packageProjection, rebindCustody, requestProfile, freezeReview} from '../scripts/prepare-delivery-handoff.mjs';
+  composeAuthorities, packageProjection, rebindCustody, requestProfile, finalizedSelection, finalizedPackageInputs, finalizeDelivery, freezeReview} from '../scripts/prepare-delivery-handoff.mjs';
 
 const commit = 'a'.repeat(40), prefix = 'coordination/engineering/control/';
 function memoryReader() {
@@ -307,4 +307,84 @@ test('native self-consistent target substitutions fail the independent immutable
   candidate('target'); assert.ok(retainProducts({...f.config, request: pin}, root, r)['ledger-batch.json']);
   candidate('foreign-native-target');
   assert.throws(() => retainProducts({...f.config, request: pin}, root, r), /immutable SOURCE handoff/);
+});
+
+
+test('selector finalization preserves insertion order and repeat bytes, including unsorted nested geography', () => {
+  const original = {version: 1, selected_geography: {version: 1, kind: 'bank', path: 'bank.json', bytes: 9, sha256: 'a'.repeat(64)},
+    policy: {z: 1, a: 2}, additive_release: {path: 'old.json', bytes: 2, sha256: 'b'.repeat(64)}};
+  const base = {...original}; delete base.additive_release;
+  const sidecar = {version: 2, kind: 'retained-native-additive-selection-v2', base_selection: JSON.parse(jsonBytes(base))};
+  const pin = {path: prefix + 'sidecar.json', bytes: 200, sha256: 'c'.repeat(64)};
+  const output = finalizedSelection(Buffer.from(JSON.stringify(original, null, 2) + '\n'), sidecar, pin);
+  const actual = JSON.parse(output), after = {...actual}; delete after.additive_release;
+  assert.equal(JSON.stringify(after), JSON.stringify(base));
+  assert.notEqual(JSON.stringify(actual.selected_geography), JSON.stringify(JSON.parse(jsonBytes(base)).selected_geography));
+  assert.equal(finalizedSelection(output, sidecar, pin), output);
+  const compact = Buffer.from(JSON.stringify(actual) + '\n');
+  assert.equal(finalizedSelection(compact, sidecar, pin), compact);
+  const changed = structuredClone(sidecar); changed.base_selection.policy.a = 3;
+  assert.throws(() => finalizedSelection(output, changed, pin), /complete original base/);
+});
+
+test('final package replacement preserves every foreign field and declaration order and validates overlaps', () => {
+  const original = {version: 1, description: 'untouched', inputs: ['.github/package-inputs.json', 'z.json', prefix + 'obsolete.json', 'a.json'],
+    optional_inputs: ['a.json'], verification_paths: ['test/check.mjs'], generated_outputs: ['dist/'], extra: {z: 1, a: 2}};
+  const paths = [prefix + 'new-z.json', prefix + 'new-a.json'];
+  const actual = finalizedPackageInputs(original, prefix, paths);
+  assert.deepEqual(actual.inputs, ['.github/package-inputs.json', 'z.json', ...paths.toSorted(), 'a.json']);
+  assert.deepEqual(original.inputs, ['.github/package-inputs.json', 'z.json', prefix + 'obsolete.json', 'a.json']);
+  assert.equal(JSON.stringify({...actual, inputs: []}), JSON.stringify({...original, inputs: []}));
+  assert.equal(JSON.stringify(finalizedPackageInputs(actual, prefix, paths)), JSON.stringify(actual));
+  assert.throws(() => finalizedPackageInputs(original, prefix, [prefix + '../bad']), /owned package/);
+  assert.throws(() => finalizedPackageInputs({...original, inputs: [...original.inputs, 'coordination/engineering/']}, prefix, paths), /Overlapping/);
+  assert.throws(() => finalizedPackageInputs({...original, optional_inputs: [prefix + 'obsolete.json']}, prefix, paths), /Incomplete/);
+});
+
+function finalizationFixture() {
+  const f = authorityFixture(), r = f.reader, owned = 'coordination/engineering/finalize/';
+  const composed = composeAuthorities({registries: [r.add(prefix + 'original-registry.json', f.registry)], ledgers: [r.add(prefix + 'original-ledger.json', f.ledger)]}, r);
+  const registry = r.add(owned + 'registry.json', composed['authority-registry.json']);
+  const ledger = r.add(owned + 'ledger.json', composed['composed-original-ledger.json']);
+  const stub = r.add(owned + 'custody.json', {}), operating = r.add(owned + 'operating.json', {execution_custody: {terminal: stub}});
+  const rebind = r.add(owned + 'certificate.json', {request: stub, facts: stub, publication: stub, result: stub, operating});
+  const selected_ledger = r.add(owned + 'selected.json', {...r.json(ledger), current_rebind: rebind, current_targets: {target: true}});
+  const patch = r.add(owned + 'patch.json', {ledger_sha256: selected_ledger.sha256, authority_registry_sha256: registry.sha256, base_reference: {id: 'base'}, effective_reference: {id: 'effective'}});
+  const base_manifest = r.add(owned + 'base-manifest.json', {}), owner_roster = r.add(owned + 'owner-roster.json', {});
+  const assets = {base_manifest, ledger: selected_ledger, owner_roster, patch};
+  const runtime_envelope = r.add(owned + 'envelope.json', {...Object.fromEntries(Object.entries(assets).map(([key,pin]) => [key, {bytes: pin.bytes, sha256: pin.sha256}])), base_reference: {id: 'base'}, effective_reference: {id: 'effective'}});
+  const base = {version: 1, selected_geography: {version: 1, path: 'bank.json', sha256: 'a'.repeat(64)}};
+  const selector = r.add('data/ownership-selection.json', Buffer.from(JSON.stringify(base, null, 2) + '\n'));
+  const sidecar = r.add(owned + 'sidecar.json', {version: 2, kind: 'retained-native-additive-selection-v2', base_selection: base, authority_registry: registry, logical_asset_map: assets, runtime_envelope});
+  const package_inputs = r.add('.github/package-inputs.json', {version: 1, inputs: ['.github/package-inputs.json', owned + 'obsolete.json', 'public/'], optional_inputs: ['public/'], verification_paths: [], generated_outputs: []});
+  return {reader: r, config: {version: 1, registry, ledger, rebind, selected_ledger, selector, sidecar, package_inputs, new_prefix: owned}};
+}
+
+test('finalization joins genuine release metadata, stages fresh files, and repeats without changes', t => {
+  const {reader,config} = finalizationFixture(), root = directory(t), output = finalizeDelivery(config, reader);
+  assert.equal(JSON.parse(output['selected-delivery-expectations.json']).selected_ledger_sha256, config.selected_ledger.sha256);
+  const again = finalizeDelivery({...config, selector: reader.add(config.selector.path, output['ownership-selection.json']),
+    package_inputs: reader.add(config.package_inputs.path, output['package-inputs.json'])}, reader);
+  for (const key of Object.keys(output)) assert.deepEqual(again[key], output[key]);
+  const destination = '.cache/delivery-handoff/finalized';
+  publish(root, destination, output, {phase: 'finalize'});
+  assert.equal(publish(root, destination, output, {phase: 'finalize'}, true).resumed, true);
+  assert.equal(fs.existsSync(path.join(root, 'data')), false);
+  assert.throws(() => publish(root, destination, output, {phase: 'changed'}, true), /changed/);
+});
+
+test('finalization rejects coherent foreign sidecar/base/ledger/envelope bindings before publication', t => {
+  for (const mutate of [
+    (f,s) => s.base_selection.selected_geography.sha256 = '0'.repeat(64),
+    (f,s) => s.authority_registry = f.config.ledger,
+    (f,s) => s.logical_asset_map.ledger = f.config.ledger,
+    (f,s) => { const e=f.reader.json(s.runtime_envelope); e.patch.sha256='0'.repeat(64); s.runtime_envelope=f.reader.add(s.runtime_envelope.path,e); },
+    (f,s) => { const p=f.reader.json(s.logical_asset_map.patch); p.ledger_sha256='0'.repeat(64); s.logical_asset_map.patch=f.reader.add(s.logical_asset_map.patch.path,p); const e=f.reader.json(s.runtime_envelope); e.patch={bytes:s.logical_asset_map.patch.bytes,sha256:s.logical_asset_map.patch.sha256}; s.runtime_envelope=f.reader.add(s.runtime_envelope.path,e); },
+    (f,s) => { const l=f.reader.json(f.config.selected_ledger); l.current_rebind=f.config.ledger; f.config.selected_ledger=f.reader.add(f.config.selected_ledger.path,l); s.logical_asset_map.ledger=f.config.selected_ledger; }
+  ]) {
+    const f=finalizationFixture(), root=directory(t), sidecar=f.reader.json(f.config.sidecar); mutate(f,sidecar);
+    f.config.sidecar=f.reader.add(f.config.sidecar.path,sidecar);
+    assert.throws(() => publish(root, '.cache/delivery-handoff/refused', finalizeDelivery(f.config,f.reader), {}), /differs|differ|preserve/);
+    assert.equal(fs.existsSync(path.join(root,'.cache')),false);
+  }
 });

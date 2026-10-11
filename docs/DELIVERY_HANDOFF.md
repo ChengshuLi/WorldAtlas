@@ -103,7 +103,24 @@ No proposed input is called accepted merely because a hash matches.
    the actual selected ledger conserves the rows and carries current bindings.
    Preserve prior package declarations. Compare against the actual completed reader
    inventory and run the existing package and consumer checks before delivery.
-7. `review`: supply `repo`, `pr_number` and exact `head_sha`. Existing `gh` login is
+7. `finalize`: extend the package config with an immutable original `selector`
+   (`data/ownership-selection.json`), original `package_inputs`
+   (`.github/package-inputs.json`), real committed `sidecar`, `selected_ledger`
+   and `rebind`. Choose the last known-good original selector; this phase preserves
+   its base fields and nested insertion order rather than repairing an already
+   reordered original. Sidecar registry/ledger, ledger rebind, patch and envelope
+   descriptors must agree. The four final release roles are derived, not supplied
+   through `outer_roles`. It stages `ownership-selection.json`,
+   `package-inputs.json`, the fixed-role inventory and bound smoke expectations.
+   It only replaces `additive_release` in the selector, preserving an already-final
+   body's bytes. It replaces only the owned package-prefix paths, keeping every
+   other field and declaration's relative order. The existing package definition
+   validator rejects overlaps, missing optional declarations and unsafe paths.
+   No tracked selector or package file is written: inspect and adopt these staged
+   files in the delivery owner's ordinary commit/review flow. Repeating from the
+   staged selector/package or using exact `--resume` must produce no changes.
+   Scientific assembly, package builds and final delivery remain separate.
+8. `review`: supply `repo`, `pr_number` and exact `head_sha`. Existing `gh` login is
    read once for read-only API calls. The command reads current PR, issue, claim,
    complete changed-file/rename scope and existing premerge evidence checks, then
    rereads current head/base/body/claim. The frozen packet carries required domains,
@@ -130,12 +147,15 @@ They are historical construction examples, not execution instructions for today'
 runtime or resource policy. The preparation checks need only their bounded exact
 metadata bodies, not physical/GIS replay inputs. The package example leaves final
 selection/assembly/reader checks pending. Do not call the prospective totals a
-completed delivery.
+completed delivery. The separate `current13-finalize.json` example is pinned to
+the later corrected 79157664 selector/package and genuine release metadata; it
+reproduces those staged bytes without rewriting the active delivery.
 
 ```
 node scripts/prepare-delivery-handoff.mjs requests coordination/engineering/delivery-handoff-20261011/current13-requests.json .cache/delivery-handoff/source-example-001
 node scripts/prepare-delivery-handoff.mjs native-requests coordination/engineering/delivery-handoff-20261011/current13-native-requests.json .cache/delivery-handoff/native-example-001
 node scripts/prepare-delivery-handoff.mjs package coordination/engineering/delivery-handoff-20261011/current13-package.json .cache/delivery-handoff/package-example-001
+node scripts/prepare-delivery-handoff.mjs finalize coordination/engineering/delivery-handoff-20261011/current13-finalize.json .cache/delivery-handoff/final-example-001
 node --test test/delivery-handoff.test.mjs
 ```
 
