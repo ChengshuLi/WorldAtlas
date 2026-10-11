@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "issue": 1720,
+  "lane": "engineering",
+  "worker_id": "01a12806-e666-7781-b612-e4af40560004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "01f2998567649835888fc86fbe6051591ead63c8",
+    "files": [
+      {
+        "path": "scripts/integration-profile.mjs",
+        "bytes": 22132,
+        "sha256": "c60011b6a3b32d49483743440b736792bf68c4884add6b4f9bcbd0fcc72f2519",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/selected-data-profile.test.mjs",
+        "bytes": 26859,
+        "sha256": "d89501c75e1f338784fbaa48273a24aa366055d6babdd2bc7b3e31cb2537a857",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 30120,
+        "sha256": "a9a59c2e19a775b33686054db7f0d425039ecc3a9c9c4b2f4f26f793e4cf497b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/pr-gates.test.mjs",
+        "bytes": 37016,
+        "sha256": "ef5744eb75b8b997a6c14bdbfa73b4cc964dd7b05799299b81643b21dea63ab0",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "bounded-source-eligibility-and-event-controls",
+      "kind": "code",
+      "description": "Fixed accepted SOURCE role and registry joins at the real selected-data entry/final-capacity consumers, plus actual workflow event and live draft-admission controls. Retained v1 metadata is mixed with deliberate candidate fixture changes; v2 schema fixtures do not claim production adoption.",
+      "software": "Node.js 24; Git",
+      "units": "exact identities and test assertions"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/selected-data-profile.test.mjs test/pr-gates.test.mjs",
+    "node --test test/pr-gates.test.mjs test/trusted-workflow-checkouts.test.mjs test/deployment-budget-scope.test.mjs"
+  ],
+  "metric_bindings": []
+}
