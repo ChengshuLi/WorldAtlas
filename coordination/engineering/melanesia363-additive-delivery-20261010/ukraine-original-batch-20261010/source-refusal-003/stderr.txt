@@ -1,0 +1,68 @@
+node:internal/errors:985
+  const err = new Error(message);
+              ^
+
+Error: Command failed: git -c core.hooksPath=/dev/null -C /workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work cat-file -s 54305a50eebf8873bc821a599149de09122a9d9a
+fatal: git cat-file: could not get object info
+
+    at genericNodeError (node:internal/errors:985:15)
+    at wrappedFn (node:internal/errors:539:14)
+    at checkExecSyncError (node:child_process:942:11)
+    at execFileSync (node:child_process:978:15)
+    at ImmutableReader.git (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/scripts/check-effective-geographic-regression.mjs:69:23)
+    at ImmutableReader.descriptor (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/scripts/check-effective-geographic-regression.mjs:74:84)
+    at whole (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:984:23)
+    at Array.map (<anonymous>)
+    at readSelectedAdditive (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:990:24)
+    at loadSelection (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/scripts/check-effective-geographic-regression.mjs:467:23) {
+  status: 128,
+  signal: null,
+  output: [
+    null,
+    Buffer(0) [Uint8Array] [],
+    Buffer(47) [Uint8Array] [
+      102,  97, 116, 97, 108,  58,  32, 103, 105,
+      116,  32,  99, 97, 116,  45, 102, 105, 108,
+      101,  58,  32, 99, 111, 117, 108, 100,  32,
+      110, 111, 116, 32, 103, 101, 116,  32, 111,
+       98, 106, 101, 99, 116,  32, 105, 110, 102,
+      111,  10
+    ]
+  ],
+  pid: 326,
+  stdout: Buffer(0) [Uint8Array] [],
+  stderr: Buffer(47) [Uint8Array] [
+    102,  97, 116, 97, 108,  58,  32, 103, 105,
+    116,  32,  99, 97, 116,  45, 102, 105, 108,
+    101,  58,  32, 99, 111, 117, 108, 100,  32,
+    110, 111, 116, 32, 103, 101, 116,  32, 111,
+     98, 106, 101, 99, 116,  32, 105, 110, 102,
+    111,  10
+  ]
+}
+
+Node.js v24.19.0
+Command exited with non-zero status 1
+	Command being timed: "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/additive-gap-repair.mjs /workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work ddbbb1828f3ed05f0e07448f7653453d6a3811ca coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-request-003.json 419c725ba1add4314a5e973afe29349e2726c196fe1907dde7b1b58df3b08df6 .cache/native-grid-candidates/ukraine-original-singleton-source-linux-003"
+	User time (seconds): 0.76
+	System time (seconds): 0.41
+	Percent of CPU this job got: 107%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:01.10
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 123028
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 243595
+	Voluntary context switches: 1790
+	Involuntary context switches: 49
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1
