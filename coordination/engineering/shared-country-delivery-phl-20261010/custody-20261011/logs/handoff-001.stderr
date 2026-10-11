@@ -1,0 +1,19 @@
+fatal: git cat-file: could not get object info
+Traceback (most recent call last):
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/54a5c43682b9af319bad932cdb65ef72f5d01e6efef9b4fa0bf8499ee8fa2a13/work/coordination/engineering/shared-country-delivery-phl-20261010/custody-20261011/build_handoff.py", line 245, in <module>
+    main()
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/54a5c43682b9af319bad932cdb65ef72f5d01e6efef9b4fa0bf8499ee8fa2a13/work/coordination/engineering/shared-country-delivery-phl-20261010/custody-20261011/build_handoff.py", line 155, in main
+    rows = unique(json.loads(read(pin['path'], expected=pin, decode=True)), 'id')
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/54a5c43682b9af319bad932cdb65ef72f5d01e6efef9b4fa0bf8499ee8fa2a13/work/coordination/engineering/shared-country-delivery-phl-20261010/custody-20261011/build_handoff.py", line 84, in read
+    size = int(git('cat-file', '-s', blob))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/54a5c43682b9af319bad932cdb65ef72f5d01e6efef9b4fa0bf8499ee8fa2a13/work/coordination/engineering/shared-country-delivery-phl-20261010/custody-20261011/build_handoff.py", line 34, in git
+    return subprocess.check_output(['git', '-c', 'user.name=WorldAtlas Agent',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-c', 'user.name=WorldAtlas Agent', '-c', 'user.email=agent@invalid', '-C', '/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/54a5c43682b9af319bad932cdb65ef72f5d01e6efef9b4fa0bf8499ee8fa2a13/work', 'cat-file', '-s', 'c613b456d400834f386ea9c186c3b872a789a405']' returned non-zero exit status 128.

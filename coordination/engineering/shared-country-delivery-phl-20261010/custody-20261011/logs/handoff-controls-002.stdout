@@ -1,0 +1,28 @@
+ok 1 - actual complete PHL case 0 retains source-relative support and unapproved truth
+ok 2 - actual complete PHL case 1 retains source-relative support and unapproved truth
+ok 3 - actual complete PHL case 2 retains source-relative support and unapproved truth
+ok 4 - actual complete PHL case 3 retains source-relative support and unapproved truth
+ok 5 - actual complete PHL case 4 retains source-relative support and unapproved truth
+ok 6 - actual complete PHL case 5 retains source-relative support and unapproved truth
+ok 7 - actual complete PHL case 6 retains source-relative support and unapproved truth
+ok 8 - actual complete PHL case 7 retains source-relative support and unapproved truth
+ok 9 - actual complete PHL case 8 retains source-relative support and unapproved truth
+ok 10 - actual v2 has nine executable cases with passive original318 accounting
+ok 11 - exactly two necessary Python target aliases are retained
+ok 12 - alias gb:PHL:ADM3:30758251B13625365204801 succeeds only with authentic complete Python preimage
+ok 13 - tampered alias gb:PHL:ADM3:30758251B13625365204801 is refused
+ok 14 - alias gb:PHL:ADM3:30758251B36088332034654 succeeds only with authentic complete Python preimage
+ok 15 - tampered alias gb:PHL:ADM3:30758251B36088332034654 is refused
+ok 16 - changed complete candidate is refused
+ok 17 - positive mapped-water support is refused
+ok 18 - wrong complete native metadata is refused
+ok 19 - missing original query is refused
+ok 20 - changed target parent fails original source relation
+ok 21 - nonempty original source remainder is refused
+ok 22 - wrong unique source subject is refused
+ok 23 - missing executable case is refused
+ok 24 - duplicate executable case is refused
+ok 25 - missing passive member is refused
+ok 26 - extra fabricated passive member is refused
+ok 27 - complete reused source metadata has original native roster coverage
+1..27
