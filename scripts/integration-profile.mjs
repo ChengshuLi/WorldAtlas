@@ -36,6 +36,8 @@ import {createHash} from 'node:crypto';
 import {isDeepStrictEqual as same} from 'node:util';
 import {validatePackageInputs, PACKAGE_INPUT_FILE} from './package-inputs.mjs';
 const SELECTION = 'data/ownership-selection.json';
+const ADMINISTRATIVE_REGISTRY = 'coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json';
+const SOURCE_CORPUS = 'coordination/engineering/original-geography-source-corpus-20261006/';
 export const SELECTED_SMOKE = 'scripts/selected-delivery-smoke.mjs';
 const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
 const hash = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
@@ -103,7 +105,7 @@ export function selectedDataCandidate(branch, files) {
   const owned = `coordination/engineering/${branch.slice('engineering/'.length)}/`;
   return branch.startsWith('engineering/') && files.length > 1 && files.length <= 1024 &&
     files.some(file => file.filename === SELECTION && file.status === 'modified') &&
-    files.every(file => !file.previous_filename && (file.filename === SELECTION || file.filename === PACKAGE_INPUT_FILE
+    files.every(file => !file.previous_filename && ([SELECTION, PACKAGE_INPUT_FILE, ADMINISTRATIVE_REGISTRY].includes(file.filename)
       ? file.status === 'modified' : file.status === 'added' && file.filename.startsWith(owned) && safe(file.filename) &&
         /\.(?:json|jsonl\.gz|json\.gz|log)$/.test(file.filename) &&
         !/(?:^|\/)(?:package(?:-lock)?|tsconfig|jsconfig|binding|deno|composer)\.json$/.test(file.filename)));
@@ -149,6 +151,16 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       return cache.get(row.sha);
     };
     const json = async (name, tree) => JSON.parse(await read(name, tree));
+    let packageAdditions = [];
+    if (files.some(file => file.filename === PACKAGE_INPUT_FILE)) {
+      const {inputs: before, ...oldPolicy} = validatePackageInputs(await json(PACKAGE_INPUT_FILE, baseline));
+      const {inputs: after, ...policy} = validatePackageInputs(await json(PACKAGE_INPUT_FILE));
+      needSelected(same(oldPolicy, policy) && after.length >= before.length && same(before, after.slice(0, before.length)),
+        'package policy is not append-only');
+      packageAdditions = after.slice(before.length);
+    }
+    const registryChanged = files.some(file => file.filename === ADMINISTRATIVE_REGISTRY);
+    const sourceExtension = registryChanged || packageAdditions.some(name => baseline.entries.has(name));
     const oldSelection = await json(SELECTION, baseline), selection = await json(SELECTION);
     const {additive_release: oldHook, ...oldBase} = oldSelection, {additive_release: hook, ...newBase} = selection;
     needSelected(selection.version === 1 && selection.method === 'native-linear-evenodd-first-owner-v1' &&
@@ -172,6 +184,134 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       const name = pin(value), bytes = await read(name);
       needSelected(sha256(bytes) === value.sha256, 'role content hash differs');
       return JSON.parse(bytes);
+    };
+    // Only the two declared exceptions need this SOURCE inventory. Ordinary
+    // selected deliveries keep their existing small fixed-role walk.
+    const sourceDeclarations = new Set(), usedRegistrations = new Set(), acceptedTrees = new Map();
+    let administrative;
+    const strings = value => Array.isArray(value) && value.length > 0 && value.length <= 4096 &&
+      value.every(id => typeof id === 'string' && id.length > 0) && new Set(value).size === value.length;
+    const oid = value => value?.git_blob_oid ?? value?.blob;
+    const content = value => [value?.path, value?.mode, oid(value), value?.bytes, value?.sha256];
+    const unique = (rows, predicate, label) => {
+      needSelected(Array.isArray(rows), 'missing ' + label);
+      const matches = rows.filter(predicate);needSelected(matches.length === 1, 'ambiguous ' + label);return matches[0];
+    };
+    const registryEntries = value => {
+      needSelected(keys(value, ['version','kind','entries']) && value.version === 1 &&
+        value.kind === 'accepted-administrative-handoffs-v1' && Array.isArray(value.entries) && value.entries.length <= 512,
+        'unsupported administrative registry');
+      const ids = new Set(), paths = new Set(), components = new Set(), batches = new Set();
+      for (const entry of value.entries) {
+        const execution = entry.format === 'source-native-execution-cohort-v2';
+        needSelected(keys(entry, ['accepted_source_commit','cohort_ids','format','id','source','target_ids',
+          ...(execution ? [] : ['original_batch_id','original_component_count'])]) &&
+          (execution || entry.format === 'source-native-handoff-v1') && typeof entry.id === 'string' && entry.id &&
+          /^[a-f0-9]{40}$/.test(entry.accepted_source_commit ?? '') &&
+          keys(entry.source, ['blob','bytes','mode','path','sha256']) && safe(entry.source.path) &&
+          /^research\/geography\/[^/]+\/.+\.json$/.test(entry.source.path) && entry.source.mode === '100644' &&
+          /^[a-f0-9]{40}$/.test(entry.source.blob ?? '') && hash(entry.source.sha256) &&
+          Number.isSafeInteger(entry.source.bytes) && entry.source.bytes > 0 && entry.source.bytes <= 32 * 1024 * 1024 &&
+          strings(entry.cohort_ids) && strings(entry.target_ids) &&
+          (execution || typeof entry.original_batch_id === 'string' && entry.original_batch_id &&
+            entry.original_component_count === entry.cohort_ids.length), 'unsupported administrative entry');
+        needSelected(!ids.has(entry.id) && !paths.has(entry.source.path) && entry.cohort_ids.every(id => !components.has(id)) &&
+          (execution || !batches.has(entry.original_batch_id)), 'duplicate administrative registration');
+        ids.add(entry.id);paths.add(entry.source.path);entry.cohort_ids.forEach(id => components.add(id));
+        if (!execution) batches.add(entry.original_batch_id);
+      }
+      return value.entries;
+    };
+    const acceptedSource = async value => {
+      const current = authored.entries.get(value.path), previous = baseline.entries.get(value.path);
+      needSelected(safe(value.path) && ordinary(current) && ordinary(previous) && current.sha === previous.sha &&
+        current.size === value.bytes && previous.size === current.size && (!oid(value) || oid(value) === current.sha) &&
+        (value.mode === undefined || value.mode === '100644') && hash(value.sha256), 'SOURCE data is not unchanged accepted input');
+      const bytes = await read(value.path);
+      needSelected(sha256(bytes) === value.sha256, 'accepted SOURCE bytes differ');
+      sourceDeclarations.add(value.path);return bytes;
+    };
+    const sourceRoles = async authority => {
+      const issued = await pinnedJSON(authority.original_pins.source_request), facts = await pinnedJSON(authority.original_pins.source_facts);
+      const rule = issued.source_rule;
+      needSelected(issued.version === 1 && issued.operation === 'retained-land-source-premises-v1' &&
+        rule?.profile === 'retained-consumed-administrative-source' && rule.version === 1 &&
+        rule.registry_path === ADMINISTRATIVE_REGISTRY && rule.geometry_scope === 'full-component' &&
+        Array.isArray(rule.inputs) && rule.inputs.length <= 1024 && Array.isArray(issued.baseline?.pins) &&
+        same(content(facts.request), content(authority.original_pins.source_request)) && same(facts.source_rule, rule) &&
+        same(facts.input_descriptors, [issued.report, ...rule.inputs, ...issued.baseline.pins]), 'SOURCE request/facts join differs');
+      administrative ??= registryEntries(await json(ADMINISTRATIVE_REGISTRY));
+      const registryPin = unique(rule.inputs, row => row.path === ADMINISTRATIVE_REGISTRY, 'SOURCE registry input');
+      await pinnedJSON({...registryPin, git_blob_oid: oid(registryPin)});
+      const source = unique(rule.inputs, row => row.path === rule.cases_path, 'registered SOURCE input');
+      const entry = unique(administrative, row => same(content(row.source), content(source)), 'registered SOURCE');
+      needSelected(source.commit === entry.accepted_source_commit && rule.outcomes_path === source.path &&
+        same(rule.cohort_ids, entry.cohort_ids), 'SOURCE registration scope differs');
+      const baselineCommit = baseline.object?.sha ?? base;
+      needSelected(/^[a-f0-9]{40}$/.test(baselineCommit ?? ''), 'missing accepted baseline identity');
+      if (!acceptedTrees.has(source.commit)) {
+        needSelected(acceptedTrees.size < 32, 'accepted source vintage budget exceeded');
+        const comparison = await api(`/repos/${repo}/compare/${source.commit}...${baselineCommit}`);
+        needSelected(['ahead','identical'].includes(comparison?.status), 'SOURCE commit is not accepted on baseline');
+        acceptedTrees.set(source.commit, await integrationTree(api, repo, source.commit));
+      }
+      const original = acceptedTrees.get(source.commit).entries.get(source.path);
+      needSelected(ordinary(original) && original.sha === oid(source) && original.size === source.bytes, 'accepted SOURCE commit pin differs');
+      const handoff = JSON.parse(await acceptedSource(source)), cases = handoff.candidate_source_native_bindings;
+      needSelected(Array.isArray(cases) && same(cases.map(row => row.component_id), entry.cohort_ids) &&
+        same(handoff.scopeIds, entry.cohort_ids) && Array.isArray(handoff.unknowns) &&
+        same([...new Set(cases.map(row => row.retained_payload?.target_stable_location_id))].sort(), [...entry.target_ids].sort()),
+        'registered SOURCE subjects differ');
+      if (entry.format === 'source-native-handoff-v1') {
+        needSelected(handoff.original_batch_id === entry.original_batch_id &&
+          handoff.original_batch_component_count === entry.original_component_count, 'original SOURCE batch differs');
+      } else {
+        const mapping = handoff.original_gap_membership, index = mapping?.index;
+        needSelected(handoff.execution_cohort_id === entry.id && keys(mapping, ['version','index','members']) && mapping.version === 1 &&
+          keys(index, ['blob','bytes','commit','mode','path','sha256']) && safe(index.path) && index.mode === '100644' &&
+          /^[a-f0-9]{40}$/.test(index.commit ?? '') && /^[a-f0-9]{40}$/.test(index.blob ?? '') && hash(index.sha256) &&
+          Number.isSafeInteger(index.bytes) && index.bytes > 0 && Array.isArray(mapping.members) &&
+          same(mapping.members.map(row => row.component_id), entry.cohort_ids) && mapping.members.every(row =>
+            keys(row, ['component_id','original_batch_id','original_family_id']) &&
+            Object.values(row).every(value => typeof value === 'string' && value)), 'execution cohort original membership differs');
+      }
+      usedRegistrations.add(entry.id);
+      needSelected(rule.source_catalogue_path === SOURCE_CORPUS + 'catalogue.json', 'unknown SOURCE catalogue');
+      const cataloguePin = unique(rule.inputs, row => row.path === rule.source_catalogue_path, 'SOURCE catalogue');
+      const catalogue = JSON.parse(await acceptedSource(cataloguePin));
+      needSelected(Array.isArray(catalogue.products) && Array.isArray(rule.administrative_products) &&
+        rule.administrative_products.length > 0 && rule.administrative_products.length <= 1024, 'missing administrative products');
+      const fields = ['bytes','sha256','uncompressed_bytes','uncompressed_sha256'];
+      for (const product of rule.administrative_products) {
+        needSelected(safe(product.path) && product.path.startsWith(SOURCE_CORPUS + 'payloads/') && product.path.endsWith('.bin.gz'),
+          'unknown administrative payload role');
+        const input = unique(rule.inputs, row => row.path === product.path, 'administrative input');
+        const part = unique(catalogue.products.flatMap(row => row.parts ?? []), row => row.path === product.path, 'catalogue part');
+        needSelected(same(content(input), content(product)) && fields.every(key => product[key] === part[key] && product[key] === input[key]) &&
+          hash(product.uncompressed_sha256) && Number.isSafeInteger(product.uncompressed_bytes) && product.uncompressed_bytes > 0,
+          'administrative product identities differ');
+        await acceptedSource(product);
+      }
+      const report = JSON.parse(await acceptedSource(issued.report));
+      // The report binds a role, but cannot itself become a newly declared input.
+      sourceDeclarations.delete(issued.report.path);
+      needSelected(Array.isArray(rule.original_products) && rule.original_products.length > 0 && rule.original_products.length <= 1024,
+        'missing original physical roles');
+      const campaign = source.path.split('/').slice(0, 3).join('/') + '/';
+      for (const locator of rule.original_products) {
+        const name = locator.original_product_path;
+        needSelected(/^(?:components|sources)-\d{3}\.jsonl\.gz$/.test(name ?? ''), 'unknown original physical role');
+        const input = unique(rule.inputs, row => row.path === locator.path && row.original_product_path === name, 'original physical input');
+        const product = unique(report.products, row => row.path === name, 'original report product');
+        const restoration = unique(handoff.physical_restoration?.restorations, row => row.path === name, 'physical restoration');
+        needSelected(input.kind === 'original-report-product' && input.report_sha256 === issued.report.sha256 &&
+          fields.every(key => input[key] === product[key]) && restoration.whole_original_bytes === product.bytes &&
+          restoration.whole_original_sha256 === product.sha256 && restoration.decoded_bytes === product.uncompressed_bytes &&
+          restoration.decoded_sha256 === product.uncompressed_sha256, 'physical restoration identities differ');
+        const retained = unique(handoff.consumed_inputs, row => safe(row.path) && row.path.startsWith(campaign) &&
+          row.path.endsWith('/' + name) && row.bytes === product.bytes && row.sha256 === product.sha256, 'retained physical Git input');
+        await acceptedSource(retained);
+      }
     };
     const sidecar = await pinnedJSON(hook);
     needSelected(sidecar.version === 2 && sidecar.kind === 'retained-native-additive-selection-v2' &&
@@ -236,6 +376,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         pin(alias.published);
       }
       const nativeRequest = await pinnedJSON(authority.original_pins.native_request), spec = nativeRequest.additive;
+      if (sourceExtension) await sourceRoles(authority);
       needSelected(Array.isArray(spec?.inputs) && spec.inputs.length <= 1024, 'missing source role inputs');
       for (const role of ['publication_path','inventory_path','operating_path']) {
         const matches = spec.inputs.filter(value => value.path === spec[role]);
@@ -263,14 +404,13 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         needSelected(bytes.length <= 128 * 1024 && !bytes.includes(0) && Buffer.from(bytes.toString('utf8')).equals(bytes), 'nontext evidence log');
       }
     }
-    if (files.some(file => file.filename === PACKAGE_INPUT_FILE)) {
-      const oldDefinition = validatePackageInputs(await json(PACKAGE_INPUT_FILE, baseline));
-      const definition = validatePackageInputs(await json(PACKAGE_INPUT_FILE));
-      const {inputs: before, ...oldPolicy} = oldDefinition, {inputs: after, ...policy} = definition;
-      needSelected(same(oldPolicy, policy) && after.length >= before.length && same(before, after.slice(0, before.length)) &&
-        after.slice(before.length).every(name => added.has(name) && reachable.has(name)),
-        'package change is not append-only exact reachable data');
+    if (registryChanged) {
+      const previous = registryEntries(await json(ADMINISTRATIVE_REGISTRY, baseline));
+      needSelected(administrative && administrative.length > previous.length && same(previous, administrative.slice(0, previous.length)) &&
+        administrative.slice(previous.length).every(entry => usedRegistrations.has(entry.id)), 'registry is not append-only selected SOURCE data');
     }
+    needSelected(packageAdditions.every(name => added.has(name) && reachable.has(name) || sourceDeclarations.has(name)),
+      'package change is not append-only exact reachable data');
     return {test_selection: 'selected-data', expectations_path: expectedPaths[0], shards: [0]};
   } catch (error) {
     if (error.planningNeeded) throw error; // Preserve the existing bounded capacity-planning retry.

@@ -1,3 +1,4 @@
+import {isDeepStrictEqual as same} from "node:util";
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
@@ -117,13 +118,15 @@ test('whole-ledger expectation check rejects duplicate batches/members and forei
   }
 });
 
-function gateFixture() {
-  const f=fixture(), base='b'.repeat(40), head='c'.repeat(40), root='/repos/owner/repo';
+function gateFixture(f=fixture()) {
+  const base='b'.repeat(40), head='c'.repeat(40), root='/repos/owner/repo';
   const issue={number:10,state:'open',created_at:'2020-01-01T00:00:00Z',labels:['type:engineering','kind:work-item','status:ready'],
-    body:'<!-- worldatlas-work:v1\n'+JSON.stringify({max_prs:2,depends_on:[],mode:'engineering',scope:'Exact unchanged-method selected data'})+'\n-->'};
+    body:'<!-- worldatlas-work:v1\n'+JSON.stringify({max_prs:2,depends_on:[],mode:'engineering',scope:'Exact unchanged-method selected data',...(f.sourceState?{owned_paths:[administrativePath]}:{})})+'\n-->'};
   const claim={version:1,active:true,issue_number:10,worker_id:'author',claim_id:'selected-claim',branch:'engineering/fixture-delivery',mode:'engineering',expires_at:'2099-01-01T00:00:00Z'};
   const pr={number:20,state:'open',changed_files:f.files.length,body:'Refs #10',head:{sha:head,ref:claim.branch,repo:{full_name:'owner/repo'}},
     base:{sha:base,ref:'main',repo:{full_name:'owner/repo'}}};
+  f.baseline.object={sha:base};
+  if(f.sourceState)claim.owned_paths=[administrativePath];
   const blobAPI=f.api;
   f.api=async route=>{
     if(route===root+'/pulls/20')return structuredClone(pr);
@@ -131,8 +134,8 @@ function gateFixture() {
     if(route===root+'/issues/10')return issue;
     if(route===root+'/issues/10/comments?per_page=100&page=1')return [{id:1,user:{login:'github-actions[bot]'},body:'**Worker reservation:** claimed\n\n<!-- worldatlas-claim:v1\n'+JSON.stringify(claim)+'\n-->'}];
     if(route===root+'/issues/10/timeline?per_page=100&page=1')return [];
-    if(route===root+'/git/commits/'+base)return {tree:{sha:'base-tree'}};
-    if(route===root+'/git/commits/'+head)return {tree:{sha:'head-tree'}};
+    if(route===root+'/git/commits/'+base)return {sha:base,tree:{sha:'base-tree'}};
+    if(route===root+'/git/commits/'+head)return {sha:head,tree:{sha:'head-tree'}};
     if(route===root+'/git/trees/base-tree?recursive=1')return {tree:[...f.baseline.entries.values()],truncated:false};
     if(route===root+'/git/trees/head-tree?recursive=1')return {tree:[...f.authored.entries.values()],truncated:false};
     if(route===root+'/contents/.github/package-inputs.json?ref='+base){const row=f.baseline.entries.get('.github/package-inputs.json');return {type:'file',path:row.path,sha:row.sha,size:row.size,encoding:'base64',content:f.blobs.get(row.sha).toString('base64')};}
@@ -181,8 +184,8 @@ for(const [name,mutate] of Object.entries({
   'code original operand':f=>refreshPins(f,{planMutate:p=>p.original_inputs[1]=f.put(prefix+'helper.mjs','export default 1')}),
 }))test('selected-data rejects '+name,async()=>assert.equal(await fixture({mutate}).run(),null));
 
-function mergeFixture({capacity = 2000, afterWait} = {}) {
-  const f=gateFixture(), candidate='d'.repeat(40), root='/repos/owner/repo';
+function mergeFixture({capacity = 2000, afterWait, selectedFixture} = {}) {
+  const f=gateFixture(selectedFixture), candidate='d'.repeat(40), root='/repos/owner/repo';
   Object.assign(f.pr,{draft:false,merged:false,title:'Synthetic selected delivery',mergeable:true,merge_commit_sha:candidate});
   for(const name of PROOF_PATHS)f.put(name,name===WORKFLOW_PATH?'ref: ${{ github.event.pull_request.head.sha }}\nname: Complete regression shard\nname: Build hosted assets':'// accepted '+name,true);
   const steps=['Checkout complete package inputs','Install package Node dependencies','Install package Python dependencies','Verify package controls',
@@ -284,4 +287,211 @@ test('actual retained44-row UKR graph admits36 active rows while preserving6 hel
   }
   const partial=structuredClone(f.expected);partial.cohorts[0].members.pop();partial.cohorts[0].component_ids.pop();
   assert.throws(()=>validateSelectedExpectations(partial,f.ledger,f.sidecar.logical_asset_map.ledger.sha256,f.ledger),/omit selected members/);
+});
+
+// Replay actual retained SOURCE request/facts/handoff/catalogue/report and all
+// declared inputs inside a synthetic next-selection delta. No scientific result
+// is regenerated: only registry history, the new authority locator and package
+// declarations model the classifier boundary under test.
+const administrativePath = 'coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json';
+const corpusPath = 'coordination/engineering/original-geography-source-corpus-20261006/';
+let sourceSpecimen;
+function actualSourceSpecimen() {
+  if (sourceSpecimen) return sourceSpecimen;
+  const bodies = new Map(), documents = new Map(), paths = new Set();
+  const raw = name => {
+    const bytes = execFileSync('git', ['show', 'HEAD:' + name], {maxBuffer:32*1024*1024, env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
+    bodies.set(createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex'), bytes);return bytes;
+  };
+  const json = name => {const value=JSON.parse(raw(name));documents.set(name,value);paths.add(name);return value;};
+  const stem='coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/';
+  const authority=json(stem+'selected-authority/authority-binding.json');
+  const issued=json(authority.original_pins.source_request.path),facts=json(authority.original_pins.source_facts.path);
+  json(authority.original_pins.native_request.path);
+  const registry=json(administrativePath),registration=registry.entries.find(row=>row.source.path===issued.source_rule.cases_path);
+  assert(registration);const handoff=json(registration.source.path);
+  const catalogue=json(issued.source_rule.source_catalogue_path),report=json(issued.report.path);
+  assert.equal(authority.original_pins.source_request.sha256,'b43f9d4bf6c5b5b9f8c957bb137e1a2eae06ab66f2fa79a0c501c405775eb768');
+  assert.equal(registration.source.sha256,'7fd3d6da63c1fc9890784a6db6e4a3e9fb55755d52bb3c3a45cf0ad8a7f32462');
+  const collect=value=>{if(!value||typeof value!=='object')return;
+    if(typeof value.path==='string'&&Number.isSafeInteger(value.bytes)&&!value.path.startsWith('.')&&!value.path.startsWith('/'))paths.add(value.path);
+    for(const child of Object.values(value))collect(child);
+  };
+  for(const value of documents.values())collect(value);
+  const output=execFileSync('git',['ls-tree','-l','HEAD','--',...paths],{encoding:'utf8',maxBuffer:4*1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
+  const entries=new Map();
+  for(const line of output.trim().split('\n')) {
+    const match=/^(\d+) (\w+) ([a-f0-9]+)\s+(\d+)\t(.+)$/.exec(line);
+    if(match)entries.set(match[5],{path:match[5],mode:match[1],type:match[2],sha:match[3],size:Number(match[4])});
+  }
+  // The two whole restored bodies are encoded data, never decoded or executed.
+  const physical=handoff.consumed_inputs.filter(row=>/\/(?:components|sources)-\d{3}\.jsonl\.gz$/.test(row.path));
+  assert.equal(physical.length,2);for(const row of physical)raw(row.path);
+  for(const row of issued.source_rule.administrative_products)raw(row.path);
+  return sourceSpecimen={bodies,documents,entries,authority,issued,facts,registry,registration,handoff,catalogue,report,physical};
+}
+function retainedSourceFixture({format='v1',mutate=()=>{}}={}) {
+  const actual=actualSourceSpecimen(),documents=new Map([...actual.documents].map(([name,value])=>[name,structuredClone(value)]));
+  const authority=structuredClone(actual.authority),issued=documents.get(authority.original_pins.source_request.path),
+    facts=documents.get(authority.original_pins.source_facts.path),registry=documents.get(administrativePath),
+    registration=registry.entries.find(row=>row.id===actual.registration.id),handoff=documents.get(registration.source.path);
+  const f=fixture({mutate:f=>{
+    for(const [oid,bytes] of actual.bodies)f.blobs.set(oid,bytes);
+    for(const [name,row] of actual.entries)if(!f.baseline.entries.has(name)){f.baseline.entries.set(name,{...row});f.authored.entries.set(name,{...row});}
+    f.policy.inputs.push(administrativePath);f.put('.github/package-inputs.json',f.policy,true);
+    f.put(administrativePath,{...registry,entries:[]},true);
+    // Explicit v2 schema fixture only. Its input is not a genuine accepted v2
+    // packet and cannot establish production adoption or scientific acceptance.
+    if(format==='v2'){
+      registration.format='source-native-execution-cohort-v2';delete registration.original_batch_id;delete registration.original_component_count;
+      handoff.execution_cohort_id=registration.id;
+      handoff.original_gap_membership={version:1,index:{path:'data/original-gap-index.json',mode:'100644',commit:'a'.repeat(40),blob:'b'.repeat(40),bytes:100,sha256:'c'.repeat(64)},
+        members:registration.cohort_ids.map(component_id=>({component_id,original_batch_id:actual.registration.original_batch_id,original_family_id:'retained-family-schema-fixture'}))};
+    }
+    const packageRoles=[registration.source.path,issued.source_rule.source_catalogue_path,
+      ...issued.source_rule.administrative_products.map(row=>row.path),...actual.physical.map(row=>row.path)];
+    const state={f,authority,issued,facts,registry,registration,handoff,documents,packageRoles,comparison:'ahead'};
+    Object.assign(f,{sourceState:state});
+    mutate(state);
+    // Refresh only synthetic candidate bindings after deliberate fixture edits;
+    // every unaltered document/encoded payload keeps its real original bytes.
+    const write=(name,value,old=false)=>{
+      const original=actual.documents.get(name);
+      if(same(value,original)){
+        const row=actual.entries.get(name);f.authored.entries.set(name,{...row});if(old)f.baseline.entries.set(name,{...row});
+        return {path:name,mode:row.mode,git_blob_oid:row.sha,bytes:row.size,sha256:digest(actual.bodies.get(row.sha)),commit:registration.accepted_source_commit};
+      }
+      return f.put(name,value,old);
+    };
+    const sourcePin=write(registration.source.path,handoff,true);
+    // Source acceptance in this fixture is an exact mocked immutable commit,
+    // independent of whether the format is retained v1 or schema-only v2.
+    Object.assign(registration.source,{blob:sourcePin.git_blob_oid,bytes:sourcePin.bytes,sha256:sourcePin.sha256});
+    const sourceInput=issued.source_rule.inputs.find(row=>row.path===registration.source.path);
+    Object.assign(sourceInput,{blob:sourcePin.git_blob_oid,bytes:sourcePin.bytes,sha256:sourcePin.sha256});
+    const registryPin=write(administrativePath,registry);
+    const registryInput=issued.source_rule.inputs.find(row=>row.path===administrativePath);
+    Object.assign(registryInput,{blob:registryPin.git_blob_oid,bytes:registryPin.bytes,sha256:registryPin.sha256});
+    const requestPin=write(authority.original_pins.source_request.path,issued,true);
+    Object.assign(authority.original_pins.source_request,{git_blob_oid:requestPin.git_blob_oid,bytes:requestPin.bytes,sha256:requestPin.sha256});
+    Object.assign(facts.request,{blob:requestPin.git_blob_oid,bytes:requestPin.bytes,sha256:requestPin.sha256});
+    facts.source_rule=structuredClone(issued.source_rule);
+    facts.input_descriptors=structuredClone([issued.report,...issued.source_rule.inputs,...issued.baseline.pins]);
+    state.afterFacts?.(facts);
+    const factsPin=write(authority.original_pins.source_facts.path,facts,true);
+    Object.assign(authority.original_pins.source_facts,{git_blob_oid:factsPin.git_blob_oid,bytes:factsPin.bytes,sha256:factsPin.sha256});
+    for(const alias of authority.source_output_aliases??[])if(alias.published.path===factsPin.path){
+      Object.assign(alias.published,{git_blob_oid:factsPin.git_blob_oid,bytes:factsPin.bytes,sha256:factsPin.sha256});
+      Object.assign(alias.original,{bytes:factsPin.bytes,sha256:factsPin.sha256});
+    }
+    const source_authority=f.put(prefix+'source-authority.json',authority),rule_preimage=f.leaf('source-rule.json');
+    f.registryBody.entries.push({authority_sha256:source_authority.sha256,policy_id:'retained-source-literal-additions',policy_version:1,
+      source_authority,rule_preimage,rule_sha256:rule_preimage.sha256});refreshPins(f);
+    f.definition.inputs.push(...packageRoles);f.put('.github/package-inputs.json',f.definition);
+  }});
+  f.baseline.object={sha:'d'.repeat(40)};
+  const original=f.api;const state=f.sourceState;
+  const sourceTree={truncated:false,tree:[{...f.baseline.entries.get(state.registration.source.path)}]};
+  f.api=async route=>{
+    if(route===`/repos/owner/repo/compare/${state.registration.accepted_source_commit}...${f.baseline.object.sha}`)return {status:state.comparison};
+    if(route===`/repos/owner/repo/git/commits/${state.registration.accepted_source_commit}`)return {sha:state.registration.accepted_source_commit,tree:{sha:'accepted-source-tree'}};
+    if(route==='/repos/owner/repo/git/trees/accepted-source-tree?recursive=1')return sourceTree;
+    return original(route);
+  };
+  return {...f,sourceTree};
+}
+
+test('retained complete v1 SOURCE graph admits registry append and exact already-on-main package inputs',async()=>{
+  const f=retainedSourceFixture();assert.ok(await f.run());
+  for(const name of f.sourceState.packageRoles)assert(f.baseline.entries.has(name));
+  assert(f.sourceState.handoff.consumed_inputs.some(row=>row.path.endsWith('.py')),'negative executable example is present');
+  assert(!f.sourceState.packageRoles.some(name=>name.startsWith('.cache/')||name.endsWith('.py')));
+  const bytes=[...new Set(f.reads)].reduce((sum,oid)=>sum+f.blobs.get(oid).length,0);
+  assert(bytes<16*1024*1024);assert(f.reads.length<256);
+});
+test('explicit v2 schema fixture admits preserved original membership without claiming genuine v2 adoption',async()=>{
+  assert.ok(await retainedSourceFixture({format:'v2'}).run());
+});
+
+for(const [name,mutate] of Object.entries({
+  'foreign registry field':x=>{x.registry.module='unreviewed.mjs';},
+  'foreign entry field':x=>{x.registration.module='unreviewed.mjs';},
+  'unknown entry format':x=>{x.registration.format='future-unapproved-format';},
+  'mixed v1/v2 keys':x=>{x.registration.format='source-native-execution-cohort-v2';},
+  'duplicate registration ID':x=>{x.registry.entries.push({...structuredClone(x.registration)});},
+  'duplicate registered source':x=>{x.registry.entries.push({...structuredClone(x.registration),id:'other'});},
+  'unselected registration append':x=>{x.registry.entries.push({...structuredClone(x.registration),id:'other',original_batch_id:'other',cohort_ids:['other'],source:{...x.registration.source,path:'research/geography/other/unselected.json'}});},
+  'wrong accepted source commit':x=>{x.registration.accepted_source_commit='1'.repeat(40);},
+  'unaccepted source ancestry':x=>{x.comparison='diverged';},
+  'wrong cohort membership':x=>{x.registration.cohort_ids=['foreign'];},
+  'wrong target membership':x=>{x.registration.target_ids=['foreign'];},
+  'wrong original batch':x=>{x.handoff.original_batch_id='foreign';},
+  'incomplete handoff roster':x=>{x.handoff.scopeIds=[];},
+  'different SOURCE profile':x=>{x.issued.source_rule.profile='unreviewed';},
+  'partial geometry scope':x=>{x.issued.source_rule.geometry_scope='fragment';},
+  'wrong registry locator':x=>{x.issued.source_rule.registry_path='coordination/engineering/foreign/registry.json';},
+  'wrong outcome locator':x=>{x.issued.source_rule.outcomes_path='research/geography/other/handoff.json';},
+  'foreign catalogue locator':x=>{x.issued.source_rule.source_catalogue_path='data/foreign.json';},
+  'facts request mismatch':x=>{x.afterFacts=f=>{f.request.sha256='0'.repeat(64);};},
+  'facts rule mismatch':x=>{x.afterFacts=f=>{f.source_rule.geometry_scope='fragment';};},
+  'facts input omission':x=>{x.afterFacts=f=>{f.input_descriptors.pop();};},
+  'facts input injection':x=>{x.afterFacts=f=>{f.input_descriptors.push({path:'scripts/unreviewed.mjs'});};},
+  'wrong administrative decoded identity':x=>{x.issued.source_rule.administrative_products[0].uncompressed_sha256='0'.repeat(64);},
+  'unreferenced administrative payload':x=>{x.issued.source_rule.administrative_products[0].path=corpusPath+'payloads/unreferenced.bin.gz';},
+  'wrong restored encoded identity':x=>{x.handoff.physical_restoration.restorations[0].whole_original_sha256='0'.repeat(64);},
+  'wrong restored decoded identity':x=>{x.handoff.physical_restoration.restorations[0].decoded_sha256='0'.repeat(64);},
+  'absent restoration':x=>{x.handoff.physical_restoration.restorations.shift();},
+  'ambiguous restoration':x=>{x.handoff.physical_restoration.restorations.push({...x.handoff.physical_restoration.restorations[0]});},
+  'ambiguous retained physical input':x=>{x.handoff.consumed_inputs.push({...x.handoff.consumed_inputs.find(row=>row.path.endsWith('/components-030.jsonl.gz'))});},
+  'foreign retained physical input':x=>{x.handoff.consumed_inputs.find(row=>row.path.endsWith('/components-030.jsonl.gz')).path='research/geography/foreign/components-030.jsonl.gz';},
+  'cache declaration':x=>{x.packageRoles.push(x.issued.source_rule.original_products[0].path);},
+  'consumed executable declaration':x=>{x.packageRoles.push(x.handoff.consumed_inputs.find(row=>row.path.endsWith('.py')).path);},
+  'undeclared same-folder data':x=>{x.packageRoles.push(x.handoff.consumed_inputs.find(row=>row.path.endsWith('/original-component.json')).path);},
+  'source directory declaration':x=>{x.packageRoles.push(x.registration.source.path.split('/').slice(0,-1).join('/'));},
+}))test('SOURCE data eligibility refuses '+name,async()=>{
+  const f=retainedSourceFixture({mutate});assert.equal(await f.run(),null,name);
+});
+for(const [name,mutate] of Object.entries({
+  'wrong execution cohort':x=>{x.handoff.execution_cohort_id='foreign';},
+  'membership omission':x=>{x.handoff.original_gap_membership.members=[];},
+  'membership component drift':x=>{x.handoff.original_gap_membership.members[0].component_id='foreign';},
+  'missing original family':x=>{delete x.handoff.original_gap_membership.members[0].original_family_id;},
+  'foreign membership field':x=>{x.handoff.original_gap_membership.module='unreviewed';},
+  'nonordinary original index':x=>{x.handoff.original_gap_membership.index.mode='120000';},
+}))test('v2 schema-only eligibility refuses '+name,async()=>assert.equal(await retainedSourceFixture({format:'v2',mutate}).run(),null));
+
+test('SOURCE additions refuse changed or newly introduced foreign baseline data and wrong accepted source tree',async()=>{
+  for(const change of ['changed','mode','missing','accepted-source']){
+    const f=retainedSourceFixture(),name=f.sourceState.packageRoles[0];
+    if(change==='changed')f.authored.entries.get(name).sha='0'.repeat(40);
+    if(change==='mode')f.authored.entries.get(name).mode='100755';
+    if(change==='missing')f.baseline.entries.delete(name);
+    if(change==='accepted-source')f.sourceTree.tree[0].sha='0'.repeat(40);
+    assert.equal(await f.run(),null,change);
+  }
+});
+test('registry changes preserve every original entry and cannot remove or rewrite earlier authority',async()=>{
+  for(const change of ['rewrite','reorder','remove']){
+    const f=retainedSourceFixture(),entry=f.sourceState.registration;
+    const old={...structuredClone(entry),id:'prior',original_batch_id:'prior',cohort_ids:['prior'],source:{...entry.source,path:'research/geography/prior/handoff.json'}};
+    const value={...f.sourceState.registry,entries:[old,entry]};
+    const previous=change==='rewrite'?{...value,entries:[{...old,id:'rewritten'}]}:
+      change==='reorder'?{...value,entries:[entry,old]}:{...value,entries:[old,entry,{...old,id:'missing',original_batch_id:'missing',cohort_ids:['missing'],source:{...old.source,path:'research/geography/missing/handoff.json'}}]};
+    // This is a negative prefix control. A refreshed candidate SOURCE request
+    // is unnecessary: either its pin or the original-prefix check must refuse.
+    const candidate=f.authored.entries.get(administrativePath);f.put(administrativePath,previous,true);f.authored.entries.set(administrativePath,candidate);
+    assert.equal(await f.run(),null,change);
+  }
+});
+
+test('real SOURCE metadata entry and cold final-capacity proof include every added applicability read',async()=>{
+  const gate=gateFixture(retainedSourceFixture()),selection=await gate.gate();
+  assert.equal(selection.test_selection,'selected-data');assert.equal(selection.profile,'full');assert.equal(selection.package.full,true);
+  const prep=mergeFixture({selectedFixture:retainedSourceFixture()}),prepared=await prepareIntegration(prep.options);
+  assert.equal(prepared.test_selection,'selected-data');assert.equal(prepared.proof.test_selection,'selected-data');
+  const cold=mergeFixture({selectedFixture:retainedSourceFixture()}),result=await cold.complete();
+  assert.equal(result.accepted,true);assert(result.final_capacity.proof_calls>30);
+  const exact=mergeFixture({capacity:result.final_capacity.required,selectedFixture:retainedSourceFixture()});
+  const accepted=await exact.complete();assert.equal(accepted.accepted,true);assert.equal(exact.writes.length,1);
+  assert(exact.afterCalls<=accepted.final_capacity.validation_call_bound);
 });
