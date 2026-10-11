@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
-import {inspectPackageInputs, inspectPackageAncestry, inspectPackageRuntime, inspectPackageBrowser, inspectPackageExecutionInputs, preflightPackageBuild, requirePackagePreflight} from '../scripts/package-build-preflight.mjs';
+import {inspectPackageInputs, inspectPackageAncestry, inspectPackageRuntime, inspectPackageBrowser, inspectPackageExecutionInputs, validatePackageExecutionRoles, preflightPackageBuild, requirePackagePreflight} from '../scripts/package-build-preflight.mjs';
 import {loadPackageInputs} from '../scripts/package-inputs.mjs';
 import {runPackageBuild} from '../scripts/package-build.mjs';
 
@@ -110,9 +110,10 @@ test('actual current package import closure rejects an undeclared new helper bef
   const root = process.cwd(), definition = loadPackageInputs(root);
   const actual = inspectPackageExecutionInputs(root, definition);
   assert.equal(actual.errors.length, 0, JSON.stringify(actual.errors));
-  assert(actual.files.includes('scripts/package-build-preflight.mjs'));
-  const missing = inspectPackageExecutionInputs(root, {...definition, inputs: definition.inputs.filter(x => x !== 'scripts/package-build-preflight.mjs')});
-  assert(missing.errors.some(x => x.kind === 'execution-declaration' && x.path === 'scripts/package-build-preflight.mjs'));
+  assert(actual.files.includes('scripts/package-build.mjs'));
+  assert(!actual.files.includes('scripts/package-build-preflight.mjs'));
+  const missing = inspectPackageExecutionInputs(root, {...definition, inputs: definition.inputs.filter(x => x !== 'scripts/package-inputs.mjs')});
+  assert(missing.errors.some(x => x.kind === 'execution-declaration' && x.path === 'scripts/package-inputs.mjs'));
 });
 
 test('CLI preserves occupied and dangling-symlink report destinations', t => {
@@ -123,4 +124,15 @@ test('CLI preserves occupied and dangling-symlink report destinations', t => {
   fs.unlinkSync(out); fs.symlinkSync('absent', out);
   assert.throws(() => execFileSync(process.execPath, [entry, '--root', f.root, '--browser', 'off', '--python', f.python, '--out', out], {stdio: 'pipe'}));
   assert.equal(fs.readlinkSync(out), 'absent'); assert.equal(fs.existsSync(path.join(f.root, 'absent')), false);
+});
+
+test('all actual package entries match retained roles and extra or missing imports refuse early',()=>{
+ const root=process.cwd(),definition=loadPackageInputs(root);
+ const consumerCode=JSON.parse(fs.readFileSync('coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/application-consumer-code.json'));
+ for(const kind of ['static','hosted','cloudflare']){
+  const actual=inspectPackageExecutionInputs(root,definition,kind),entry=`scripts/build-${kind}-inner.mjs`;assert.deepEqual(actual.errors,[]);
+  assert.equal(validatePackageExecutionRoles(actual.files,consumerCode,entry),true);
+  assert.throws(()=>validatePackageExecutionRoles([...actual.files,'scripts/package-build-preflight.mjs'],consumerCode,entry),/Complete actual execution role closure/);
+  assert.throws(()=>validatePackageExecutionRoles(actual.files.slice(1),consumerCode,entry),/Complete actual execution role closure/);
+ }
 });
