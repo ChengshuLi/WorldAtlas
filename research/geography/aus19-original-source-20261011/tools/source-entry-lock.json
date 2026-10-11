@@ -1,0 +1,573 @@
+{
+  "project_files": [
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 139553,
+      "sha256": "63745cc5d4f15bdd8c153787df07379d813ab037fc1e0734944a75568235e8aa"
+    },
+    {
+      "path": "scripts/additive-gap-repair.mjs",
+      "bytes": 184937,
+      "sha256": "c5cd30d32b15a461a186074a1704a64f8895e33199c34d982af0e97bf0615895"
+    },
+    {
+      "path": "scripts/audit-grid-intervals.mjs",
+      "bytes": 6777,
+      "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "bytes": 75074,
+      "sha256": "801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039"
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "bytes": 28506,
+      "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97"
+    },
+    {
+      "path": "scripts/native-ownership/compile-native-ownership.mjs",
+      "bytes": 4472,
+      "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+    },
+    {
+      "path": "scripts/native-ownership/native-preparation-guards.mjs",
+      "bytes": 6580,
+      "sha256": "44901437d91c0ff8805030170abcd855aac3ac8354f10e4e67002f23e6a2ba31"
+    },
+    {
+      "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+      "bytes": 1540,
+      "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb"
+    },
+    {
+      "path": "scripts/native-ownership/require-verified-selection.mjs",
+      "bytes": 4377,
+      "sha256": "20a8e3f472db4c06386ce2b7bd01330ea8acfd6d1ff414f6d2d32e8b1995d50c"
+    },
+    {
+      "path": "scripts/native-ownership/verified-candidates.json",
+      "bytes": 1810,
+      "sha256": "080a481b71383bd6ba3388ad9b26138b25fced628a61830c3bb02a933562e40a"
+    },
+    {
+      "path": "src/effective-footprint.js",
+      "bytes": 45330,
+      "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+    },
+    {
+      "path": "src/native-grid.js",
+      "bytes": 6408,
+      "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+    },
+    {
+      "path": "src/native-runtime.js",
+      "bytes": 3497,
+      "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+    },
+    {
+      "path": "src/ownership-method.js",
+      "bytes": 3126,
+      "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df"
+    }
+  ],
+  "package_lock_sha256": "471d035f92567ea447f221661db5fa8febfc7afc32af8ac975506ce9e0303255",
+  "node": "v24.19.0",
+  "installed_files": [
+    {
+      "path": "node_modules/@noble/hashes/LICENSE",
+      "bytes": 1109,
+      "sha256": "4f221aee6e072336700c408c68ab3b96a3fc09f6aebe6f48f1bd99e5ef13faec"
+    },
+    {
+      "path": "node_modules/@noble/hashes/README.md",
+      "bytes": 24015,
+      "sha256": "fd00624d481f9ef47dbf1c85733a2ae6e13f6231f70d94b2d027608f00f5a416"
+    },
+    {
+      "path": "node_modules/@noble/hashes/_blake.d.ts",
+      "bytes": 474,
+      "sha256": "752c7599bbc58e80175df0324b6b5a543b2de6d61f3ad5aef6b632de6ee983c3"
+    },
+    {
+      "path": "node_modules/@noble/hashes/_blake.d.ts.map",
+      "bytes": 553,
+      "sha256": "c202ced66c6174006a09da86476d6e57aa3c71ab7bf9e7b844c140660eda46f4"
+    },
+    {
+      "path": "node_modules/@noble/hashes/_blake.js",
+      "bytes": 1661,
+      "sha256": "220f7ae8e2aaa0f38f7b1c38028dd5301c2fd6ecf94dc36b003aa74e9edc9c74"
+    },
+    {
+      "path": "node_modules/@noble/hashes/_blake.js.map",
+      "bytes": 3628,
+      "sha256": "373767bfd627e7e994c62c5ec02c9a4eef72cdcd1cc6355a892b71b87f071836"
+    },
+    {
+      "path": "node_modules/@noble/hashes/_md.d.ts",
+      "bytes": 1968,
+      "sha256": "df631652f3f3b2a3a63c95430303a5fc29e7337e43d37492137e235a457d511f"
+    },
+    {
+      "path": "node_modules/@noble/hashes/_md.d.ts.map",
+      "bytes": 1518,
+      "sha256": "3f7079effe93ebf8d7147b464db1e8839e9f78739c1e946544cbf69bccd703cf"
+    },
+    {
+      "path": "node_modules/@noble/hashes/_md.js",
+      "bytes": 5615,
+      "sha256": "a112f0fe1b15db00f2638618c436a17be1c5e13baf19d02fcc29016ae1db2233"
+    },
+    {
+      "path": "node_modules/@noble/hashes/_md.js.map",
+      "bytes": 5065,
+      "sha256": "73d731617a5fad31de88e8b4589af6e56a8af629264359241e1c53476aa1a24a"
+    },
+    {
+      "path": "node_modules/@noble/hashes/_u64.d.ts",
+      "bytes": 3129,
+      "sha256": "259a1b56e4e26a2df0df38735e19a1dcb7702e1fe334044c1179bb6514c1c758"
+    },
+    {
+      "path": "node_modules/@noble/hashes/_u64.d.ts.map",
+      "bytes": 4314,
+      "sha256": "d4a56ca889b0555e9b0d8911ab1291a1e3acf32d283255aa7d5e4a59468919d2"
+    },
+    {
+      "path": "node_modules/@noble/hashes/_u64.js",
+      "bytes": 3081,
+      "sha256": "e48c0cfc10810439a4807b46db136ce603a3fa09b62584f513ef2f3ca496af54"
+    },
+    {
+      "path": "node_modules/@noble/hashes/_u64.js.map",
+      "bytes": 5045,
+      "sha256": "9e32d7e33f63d4e8e67b48c33c1aefa9d7ff13573039e3119617f3c325f23935"
+    },
+    {
+      "path": "node_modules/@noble/hashes/argon2.d.ts",
+      "bytes": 1498,
+      "sha256": "043dd09bceca04ca3794ddfc886af2895bf49b08b3c2384bcb427e7d6f2e5c77"
+    },
+    {
+      "path": "node_modules/@noble/hashes/argon2.d.ts.map",
+      "bytes": 1137,
+      "sha256": "a28793dc95f0bafce8431f476c521f4136b2af942ef57eaed1c24bd4f3a22d4d"
+    },
+    {
+      "path": "node_modules/@noble/hashes/argon2.js",
+      "bytes": 16308,
+      "sha256": "caa85a3fd1b6396bdd4bd89eadb90295e77ce2089ff35610f84d2bc50d425719"
+    },
+    {
+      "path": "node_modules/@noble/hashes/argon2.js.map",
+      "bytes": 21113,
+      "sha256": "a4849ce7ac3698de84b76064db24af64a507124d8c249434175e3028d0396689"
+    },
+    {
+      "path": "node_modules/@noble/hashes/blake1.d.ts",
+      "bytes": 3624,
+      "sha256": "5abd6aba8c8d4e2e6d5af320f1479c45ea669d55b4290893d3d9ba21ca43b37f"
+    },
+    {
+      "path": "node_modules/@noble/hashes/blake1.d.ts.map",
+      "bytes": 3743,
+      "sha256": "af03718ddbc6454ea1a5ab032e1113e0ae64417bf09469a45c64c2cca63b92e0"
+    },
+    {
+      "path": "node_modules/@noble/hashes/blake1.js",
+      "bytes": 19433,
+      "sha256": "564615991e0aa274f68b9067fc5cea2ca8d194410c211bd9a67e6087be5a1d20"
+    },
+    {
+      "path": "node_modules/@noble/hashes/blake1.js.map",
+      "bytes": 28454,
+      "sha256": "ff7fac700aa23f1285c11eb5ab60e40b7bb16e5a462c67dde33b8f19032c7181"
+    },
+    {
+      "path": "node_modules/@noble/hashes/blake2.d.ts",
+      "bytes": 3907,
+      "sha256": "28ecc09d428c2ad9c470d8bd1c4abf3fe0c7e428f9ca737d4cfda87917446731"
+    },
+    {
+      "path": "node_modules/@noble/hashes/blake2.d.ts.map",
+      "bytes": 4103,
+      "sha256": "e948c531a61f2361509d6a3bbb77095affe0b09ba246faf7630a7e24e8398ef4"
+    },
+    {
+      "path": "node_modules/@noble/hashes/blake2.js",
+      "bytes": 16895,
+      "sha256": "a4859659d19a79acbdac44ecbb5da9fd1a06936b1ea1ab82c10b38a372a954f3"
+    },
+    {
+      "path": "node_modules/@noble/hashes/blake2.js.map",
+      "bytes": 25543,
+      "sha256": "8e5da15a364b471cc9669dedfc241d2fa36249dba66e34de38870bc4baf6d37b"
+    },
+    {
+      "path": "node_modules/@noble/hashes/blake3.d.ts",
+      "bytes": 1837,
+      "sha256": "b98294a4a70504927599f0cdbdfac64c38e8afe43eccf41ace666496c1e72b00"
+    },
+    {
+      "path": "node_modules/@noble/hashes/blake3.d.ts.map",
+      "bytes": 1296,
+      "sha256": "d4d8d6538e3ddc30e5e0093bd4bde4c69c48c1d0e46352b9fdaf613ad2d88300"
+    },
+    {
+      "path": "node_modules/@noble/hashes/blake3.js",
+      "bytes": 9627,
+      "sha256": "c2d4a8338ee55a35318c0fb1e4a5cd3990c1ae22cd2feedd4ec894f8e6be1bce"
+    },
+    {
+      "path": "node_modules/@noble/hashes/blake3.js.map",
+      "bytes": 10753,
+      "sha256": "4f9771a3df3f8baf92cfe23848829066211178227669052d2a80a1bf3eb0badc"
+    },
+    {
+      "path": "node_modules/@noble/hashes/eskdf.d.ts",
+      "bytes": 1752,
+      "sha256": "51a600635e7cd4ddbc8ea6cc24d2ba7318d6287eac377c7e2fc02a9419354171"
+    },
+    {
+      "path": "node_modules/@noble/hashes/eskdf.d.ts.map",
+      "bytes": 902,
+      "sha256": "a9115b31a15a8d31e87bd8fbd7bd661e68664629ffaf453c6dd5e2f1c100e25b"
+    },
+    {
+      "path": "node_modules/@noble/hashes/eskdf.js",
+      "bytes": 6550,
+      "sha256": "3703de30066a0f300b952cbb8fc7ab06bf42b0254f2a53ac893740cbba9f9877"
+    },
+    {
+      "path": "node_modules/@noble/hashes/eskdf.js.map",
+      "bytes": 6007,
+      "sha256": "1b4ab1152b5d33cd5e87a3a8120b72047b8a253180caf58cabfc5e5dee8dd1c3"
+    },
+    {
+      "path": "node_modules/@noble/hashes/hkdf.d.ts",
+      "bytes": 1996,
+      "sha256": "97d55fb5fb1562fcc38e551098e4e6eaefb714c80fbdf8820746d3eb01246479"
+    },
+    {
+      "path": "node_modules/@noble/hashes/hkdf.d.ts.map",
+      "bytes": 553,
+      "sha256": "518f270857e5ae08ba8e4be400e82533139a77346b20dd32eadb40e24a122ef5"
+    },
+    {
+      "path": "node_modules/@noble/hashes/hkdf.js",
+      "bytes": 3538,
+      "sha256": "adee07d4415fddbc58179acb43bb3b759204dc1253ff7090c957e9fa74607269"
+    },
+    {
+      "path": "node_modules/@noble/hashes/hkdf.js.map",
+      "bytes": 2147,
+      "sha256": "131668fec23758b1d29f9c3a3a564e47b835e9549412b1dc22c982cdebaab42f"
+    },
+    {
+      "path": "node_modules/@noble/hashes/hmac.d.ts",
+      "bytes": 1090,
+      "sha256": "760b214711c917fea57cdd571f661a66a7ff377caf2b4973cbf7c1df06fa0ea5"
+    },
+    {
+      "path": "node_modules/@noble/hashes/hmac.d.ts.map",
+      "bytes": 934,
+      "sha256": "91d6594560b8d0ab8ee75ad4571d8b5e4d9575981ee9de0c73b3bfd6b4875f05"
+    },
+    {
+      "path": "node_modules/@noble/hashes/hmac.js",
+      "bytes": 2992,
+      "sha256": "b834a4e7ffecb7847fd87ebd792f7fdd13003d448acee5e8d97a6b77b8620797"
+    },
+    {
+      "path": "node_modules/@noble/hashes/hmac.js.map",
+      "bytes": 3067,
+      "sha256": "0db6db0ce57ab1ce136b7e382c3a3aad6fb73078b2db7f7df65ae810af166af1"
+    },
+    {
+      "path": "node_modules/@noble/hashes/index.d.ts",
+      "bytes": 46,
+      "sha256": "f667f6b1d66ba55f0dcd27f5ff050063fecfe289bad00e8c5d48344a775c1439"
+    },
+    {
+      "path": "node_modules/@noble/hashes/index.d.ts.map",
+      "bytes": 101,
+      "sha256": "7755bad6a1fd1a6a721ae0bbaac3da2d95847c72f2dff7bdaf44d56cd82ac9d9"
+    },
+    {
+      "path": "node_modules/@noble/hashes/index.js",
+      "bytes": 1162,
+      "sha256": "0eba253f40dfa51b247d7d8d03cdaeecdf334c986e2a9ae7cada211c32eb7b7c"
+    },
+    {
+      "path": "node_modules/@noble/hashes/index.js.map",
+      "bytes": 180,
+      "sha256": "57b03f4e28194d5bffaacc987d0ceb2bec5d44d409280b7a4e2ece2e5a9d6223"
+    },
+    {
+      "path": "node_modules/@noble/hashes/legacy.d.ts",
+      "bytes": 2579,
+      "sha256": "0ab44cda9526166a04ed1afc03fbdac9897161dcf89dd540649c09d7fd250158"
+    },
+    {
+      "path": "node_modules/@noble/hashes/legacy.d.ts.map",
+      "bytes": 1888,
+      "sha256": "3e496c562e06cf8e1b973c29f634079bda6f8e55342f10c998a775bc6a3cd5a6"
+    },
+    {
+      "path": "node_modules/@noble/hashes/legacy.js",
+      "bytes": 9763,
+      "sha256": "5f80e3f887113607d4c028eee3e3707c961a366a5ce4d427ceb6ee8f41624344"
+    },
+    {
+      "path": "node_modules/@noble/hashes/legacy.js.map",
+      "bytes": 13498,
+      "sha256": "cee3bcb5ce08647297b8bb533872d65a16ebed94e789fa3114b569fc1cb583e6"
+    },
+    {
+      "path": "node_modules/@noble/hashes/package.json",
+      "bytes": 2799,
+      "sha256": "ceb30ba96a14786c419db53f2b8d3d59ece7ac5221c198ac03def462cf96ef23"
+    },
+    {
+      "path": "node_modules/@noble/hashes/pbkdf2.d.ts",
+      "bytes": 1194,
+      "sha256": "cbf91da8fbcbd062db814a63cf037b3f7faa4c608a2c0ca70913c6da314070e8"
+    },
+    {
+      "path": "node_modules/@noble/hashes/pbkdf2.d.ts.map",
+      "bytes": 576,
+      "sha256": "dc5cce8ddbffaa3786ea5187bb3f91de0f504a3f93c47a47cd4f67c6db42f3af"
+    },
+    {
+      "path": "node_modules/@noble/hashes/pbkdf2.js",
+      "bytes": 3898,
+      "sha256": "d971ad41b21ebfe9c5d61897ef6b3d669e17cf5524c94f03b01c8c2c120caa22"
+    },
+    {
+      "path": "node_modules/@noble/hashes/pbkdf2.js.map",
+      "bytes": 4050,
+      "sha256": "def25116a3aa1924f065dbc90ff7c30109c1f2884c18f072a61dc8368eb89190"
+    },
+    {
+      "path": "node_modules/@noble/hashes/scrypt.d.ts",
+      "bytes": 1337,
+      "sha256": "4af05f41cbd9de859dcf6dbad24d2faeea79aa3eae38c1a7e88e37e45f921ae6"
+    },
+    {
+      "path": "node_modules/@noble/hashes/scrypt.d.ts.map",
+      "bytes": 658,
+      "sha256": "ec6871a3aec7c0436b3d3c8582a1c83d679c4a077cbfe50269a6b5cbb55a0f7d"
+    },
+    {
+      "path": "node_modules/@noble/hashes/scrypt.js",
+      "bytes": 9720,
+      "sha256": "cce8f569bb8000d99e1e747be4ef1e49fed7cfadd2f249ac542ee2854ef359a9"
+    },
+    {
+      "path": "node_modules/@noble/hashes/scrypt.js.map",
+      "bytes": 12136,
+      "sha256": "89827a043986657d2b5e70109434bc42accbf6c60fae9c6891a2cbda7b0d4854"
+    },
+    {
+      "path": "node_modules/@noble/hashes/sha2.d.ts",
+      "bytes": 6512,
+      "sha256": "a329a3e6fa537684cd4c192aac096e967244ede305e5ff07d91041b53503d74b"
+    },
+    {
+      "path": "node_modules/@noble/hashes/sha2.d.ts.map",
+      "bytes": 6359,
+      "sha256": "8a89baaf9c48d45ae6c5ee8a4859ad43b00482022aaf9672e03c67c5a3475bba"
+    },
+    {
+      "path": "node_modules/@noble/hashes/sha2.js",
+      "bytes": 16773,
+      "sha256": "3ddc587c588283cbceed4dd9929cefcce06a0c231b54d4c6f0f99c478c686c00"
+    },
+    {
+      "path": "node_modules/@noble/hashes/sha2.js.map",
+      "bytes": 20062,
+      "sha256": "d5f96d0a6630b7130b67b710fcc5d4cad4480990fea7e03a87fcf6f117901be1"
+    },
+    {
+      "path": "node_modules/@noble/hashes/sha3-addons.d.ts",
+      "bytes": 6232,
+      "sha256": "58cfa01c6c0e35c679361e16b50e5e226628d50c008b13ba1d00ba6c89dc613e"
+    },
+    {
+      "path": "node_modules/@noble/hashes/sha3-addons.d.ts.map",
+      "bytes": 4419,
+      "sha256": "6c5ad172117f90eaa73c3715e0ec95dfde0857bd7b4b695d2005e72616f47c09"
+    },
+    {
+      "path": "node_modules/@noble/hashes/sha3-addons.js",
+      "bytes": 17028,
+      "sha256": "684709a686ff9c9da8d011a870d487860887dd75889bddaf5c519599b4a0cdfc"
+    },
+    {
+      "path": "node_modules/@noble/hashes/sha3-addons.js.map",
+      "bytes": 17483,
+      "sha256": "4989cd5c44213c68d131658b23232630abb8b4ae3b20c21ea4db196aa1b6cafe"
+    },
+    {
+      "path": "node_modules/@noble/hashes/sha3.d.ts",
+      "bytes": 2325,
+      "sha256": "8d7a21d56762d31155096c4d3b9dc5828e9d855d87d2e8c142f1785255051138"
+    },
+    {
+      "path": "node_modules/@noble/hashes/sha3.d.ts.map",
+      "bytes": 1933,
+      "sha256": "75a8527cd41bea7fe2913bc25949828afc680af5d87ba0e76651f8353b6d5fca"
+    },
+    {
+      "path": "node_modules/@noble/hashes/sha3.js",
+      "bytes": 9199,
+      "sha256": "8741330184fd2af27d8805e400888060294ac1e31e7b7038e5347c31e1bb33ca"
+    },
+    {
+      "path": "node_modules/@noble/hashes/sha3.js.map",
+      "bytes": 10690,
+      "sha256": "473d0ae163c74005c81e468112cafcb4e433ce1144606085ec18a9c51d21b036"
+    },
+    {
+      "path": "node_modules/@noble/hashes/src/_blake.ts",
+      "bytes": 1768,
+      "sha256": "cafb4ace6b6210786ed1a6a1dc3283387a56947b28f2048d6fe752d6a4917e84"
+    },
+    {
+      "path": "node_modules/@noble/hashes/src/_md.ts",
+      "bytes": 5783,
+      "sha256": "1a97097fe990f2832f769d64dcfa47fb1cc68dc89276a2d0e4b6e0d32d94b89d"
+    },
+    {
+      "path": "node_modules/@noble/hashes/src/_u64.ts",
+      "bytes": 4984,
+      "sha256": "45b2c85051e99922030ed755fa14c2f0a7887ed9b1e73664af6ea007ef4c93b7"
+    },
+    {
+      "path": "node_modules/@noble/hashes/src/argon2.ts",
+      "bytes": 17154,
+      "sha256": "f34b94ed111bd1246a3aabdc38f9fbb167918ebe7ea853b71868a715efa76501"
+    },
+    {
+      "path": "node_modules/@noble/hashes/src/blake1.ts",
+      "bytes": 19883,
+      "sha256": "da6b73433dcc805443de55a68a03b81b737f461ef0692f56bdb1f98fdc6dfbc9"
+    },
+    {
+      "path": "node_modules/@noble/hashes/src/blake2.ts",
+      "bytes": 17852,
+      "sha256": "068ef7ac36c7c37497e2416a4e89105903e4bd725ed3e0df2b4b7f1704453db6"
+    },
+    {
+      "path": "node_modules/@noble/hashes/src/blake3.ts",
+      "bytes": 9664,
+      "sha256": "019c0da2e3dee6b2e36ef5028a2f7aea0c2c85781b7abc2dbd4539025fbf2685"
+    },
+    {
+      "path": "node_modules/@noble/hashes/src/eskdf.ts",
+      "bytes": 7386,
+      "sha256": "7d05086a1b309e08c295cbe5f637c4f0d989f4fcf9617c8b08d8c7fab2d20fea"
+    },
+    {
+      "path": "node_modules/@noble/hashes/src/hkdf.ts",
+      "bytes": 3603,
+      "sha256": "f8dbc24c8c357d360ac24794cb46f824aaf23b8b4232eee177238c485646c415"
+    },
+    {
+      "path": "node_modules/@noble/hashes/src/hmac.ts",
+      "bytes": 3135,
+      "sha256": "5df650dadf39086721ada9ecfcc64b67e08a8acda4eb17a7eaac667ac457b821"
+    },
+    {
+      "path": "node_modules/@noble/hashes/src/index.ts",
+      "bytes": 1118,
+      "sha256": "7fe83557c6d878ce707c3eb392599d7ed4847390aabfa71be6a0839632ce3ef2"
+    },
+    {
+      "path": "node_modules/@noble/hashes/src/legacy.ts",
+      "bytes": 9550,
+      "sha256": "da99a96579d6ba3183d5bf8c1b4d81aa2dead1bdb2662b85b6d84a9c740244f3"
+    },
+    {
+      "path": "node_modules/@noble/hashes/src/pbkdf2.ts",
+      "bytes": 4238,
+      "sha256": "e26d6e827b042dec0a35569e49df2b1574b3df553b8c1039f74d980ffb20f284"
+    },
+    {
+      "path": "node_modules/@noble/hashes/src/scrypt.ts",
+      "bytes": 10232,
+      "sha256": "b2b0cb19d809de4fd51202bcdc40ccff45e819e98a1114cd2a77bd9b36257763"
+    },
+    {
+      "path": "node_modules/@noble/hashes/src/sha2.ts",
+      "bytes": 19135,
+      "sha256": "9acb8a744b27c57b92cb0f3f7725d1c673d3b36272d3a65b8ace4669ef63215c"
+    },
+    {
+      "path": "node_modules/@noble/hashes/src/sha3-addons.ts",
+      "bytes": 19177,
+      "sha256": "22c96d7777f5c523e87d504e616477b4bdc0995d2abe54c4cba2c658991ee844"
+    },
+    {
+      "path": "node_modules/@noble/hashes/src/sha3.ts",
+      "bytes": 9468,
+      "sha256": "2d474e78cd680677bfd1257eed49b4d85d3d91b92d8e9e70b191e179a8335005"
+    },
+    {
+      "path": "node_modules/@noble/hashes/src/utils.ts",
+      "bytes": 11986,
+      "sha256": "1271ee3da2b8b56073a5831c8ee3d37d09105e86c1fa982dd63ef95f4cf133c3"
+    },
+    {
+      "path": "node_modules/@noble/hashes/src/webcrypto.ts",
+      "bytes": 5719,
+      "sha256": "0116f6f39d2a459c5452f43d4d0148f00443ba98dfb372d3a7817f3ea0f93410"
+    },
+    {
+      "path": "node_modules/@noble/hashes/utils.d.ts",
+      "bytes": 6128,
+      "sha256": "e0a7f739c291bfa769fdf200d5d1502f48ee23036238b8fab6f7485e2c801aaf"
+    },
+    {
+      "path": "node_modules/@noble/hashes/utils.d.ts.map",
+      "bytes": 4117,
+      "sha256": "142fb50d0bbe579a4b76e81f2dba4a74260c741f67e402e9ff71fdbc43473c66"
+    },
+    {
+      "path": "node_modules/@noble/hashes/utils.js",
+      "bytes": 9356,
+      "sha256": "11319ec0a8132a0c2ced8c98af33ae9274c001d6baf4f4709c4a6115e031a3c5"
+    },
+    {
+      "path": "node_modules/@noble/hashes/utils.js.map",
+      "bytes": 9127,
+      "sha256": "e81a4a79b408a3059f01cc6c7628e2669f845200226df73cff507b3f2f1062bf"
+    },
+    {
+      "path": "node_modules/@noble/hashes/webcrypto.d.ts",
+      "bytes": 2718,
+      "sha256": "62aa5961fb52567e81a8b8f3a08fefcc2d87f7110a258e74ecadf3afd60b57cc"
+    },
+    {
+      "path": "node_modules/@noble/hashes/webcrypto.d.ts.map",
+      "bytes": 1099,
+      "sha256": "71296c3ecedd30016ef4c38b23a67e134c1145a9222eb12685c6215a2e3a48c2"
+    },
+    {
+      "path": "node_modules/@noble/hashes/webcrypto.js",
+      "bytes": 5090,
+      "sha256": "78bbed967e929a86b7f9430949705294a678ec53396e910941a3935966aaec33"
+    },
+    {
+      "path": "node_modules/@noble/hashes/webcrypto.js.map",
+      "bytes": 3969,
+      "sha256": "fef0084ebbd308b92381cbbe17940418ea90c5eaa5d19a50dcb0c4481cd38942"
+    }
+  ]
+}
