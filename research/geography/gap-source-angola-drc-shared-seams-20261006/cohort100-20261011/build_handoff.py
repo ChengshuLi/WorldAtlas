@@ -34,7 +34,7 @@ def main():
     pins.append({'path': helper_path, 'bytes': len(helper), 'sha256': sha(helper), 'hash_kind': 'file-bytes'})
     ns = {'__name__': 'cohort_immutable', '__file__': str(ROOT / helper_path)}
     exec(compile(helper, ns['__file__'], 'exec'), ns)
-    base = ns['Baseline'](ROOT, head, pins)
+    base = ns['Baseline'](ROOT, head, pins, max_phase_bytes=128 * 1024 ** 2)
     canon = ns['canonical_json']
     destination = ns['NewVintage'](base, OWN + '/', vintage, ['source-handoff.json', 'all100-dispositions.json'])
     inputs = {}
@@ -153,7 +153,15 @@ def main():
         candidate_bindings.append({'component_id': cid, 'feature_sha256': sha(canon(candidate)), 'feature_bytes_base64': base64.b64encode(canon(candidate)).decode(), 'derived_js_canonical_sha256': context['derived_js_feature_sha256']})
         target_bindings[target_id] = {'target_id': target_id, 'feature_sha256': sha(canon(target)), 'feature_bytes_base64': base64.b64encode(canon(target)).decode(), 'geometry_sha256': sha(canon(target['geometry'])), 'geometry_bytes_base64': base64.b64encode(canon(target['geometry'])).decode()}
     historical = own('cohort100-20261011/historical-cod5-checkpoint.json')
+    historical_pin = inputs[head + ':' + OWN + '/cohort100-20261011/historical-cod5-checkpoint.json']
+    if any(historical_pin[k] != config['historical_checkpoint'][k] for k in ['bytes', 'sha256']):
+        raise ValueError('Retained historical failure checkpoint differs')
     historical_results = {r['component']: r for r in historical['results']}
+    if len(set(historical_results).intersection(roster['candidate_ids'])) != 4:
+        raise ValueError('Wrong preserved historical-failure membership')
+    for cid in set(historical_results).intersection(roster['candidate_ids']):
+        if historical_results[cid]['original_geometry_sha256'] != custody[cid]['geometry_sha256']:
+            raise ValueError('Historical failure bound to another original pointset')
     all_dispositions = []
     for old in prior_dispositions:
         cid = old['component_id']
