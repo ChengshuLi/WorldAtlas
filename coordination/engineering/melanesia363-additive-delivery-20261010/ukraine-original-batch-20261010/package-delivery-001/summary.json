@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "kind": "actual-selected-package-delivery-smoke",
+  "execution_head": "eeac0d6905c8bdeb5a1413d99b43c6141d62e9aa",
+  "package_input_definition_sha256": "ec0674e28535bc89a9058eaf86731e450cd2f0cc62f209c40449307e65a23a64",
+  "package_source_files": 8305,
+  "package_source_bytes": 2580784410,
+  "declared_input_paths": 532,
+  "new_explicit_paths": 74,
+  "selected_reader": {
+    "passed": true,
+    "authenticated_descriptors": 141,
+    "complete_phase_bytes": 230293608,
+    "limitation": "Declaration guard and loadSelection completed; final full package carries the immutable declaration at execution_head."
+  },
+  "operations": {
+    "build": {
+      "exit_code": 1,
+      "seconds": 187.7674088800013,
+      "sampled_group_peak_bytes": 2633269248,
+      "sampled_group_cap_bytes": 4294967296,
+      "mem_available_before": 8609304576,
+      "refusal": null
+    },
+    "build-002": {
+      "exit_code": 0,
+      "seconds": 221.1621185289987,
+      "sampled_group_peak_bytes": 2861559808,
+      "sampled_group_cap_bytes": 4294967296,
+      "mem_available_before": 8599117824,
+      "refusal": null
+    },
+    "readback": {
+      "exit_code": 0,
+      "seconds": 4.259067718998267,
+      "sampled_group_peak_bytes": 331681792,
+      "sampled_group_cap_bytes": 2147483648,
+      "mem_available_before": 8617541632,
+      "refusal": null
+    },
+    "consumer": {
+      "exit_code": 0,
+      "seconds": 4.258813543001452,
+      "sampled_group_peak_bytes": 1178902528,
+      "sampled_group_cap_bytes": 2147483648,
+      "mem_available_before": 8462733312,
+      "refusal": null
+    }
+  },
+  "initial_local_refusal": "The first ordinary build passed selected package authority, then default python3 lacked Shapely at existing boundary-version-hash.py. The unchanged build succeeded using the existing exact Shapely2.1.2/NumPy2.3.5 runtime. Original local stderr SHA256 2248a0d6bd798e7584b7e550f78191187aedf765bf5fff52023dea825bffed79",
+  "commands": [
+    "npm run build:cloudflare",
+    "node coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/model-reader-call-boundary-controls.mjs --built-output-readback .cache/ukr-final-built-output.json",
+    "node coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/package-delivery-001/emitted-consumer.mjs .cache/ukr-emitted-consumer.json"
+  ],
+  "passed": [
+    "complete declared package input image and genuine private selected reader/publication",
+    "normal Cloudflare static/worker package",
+    "whole emitted selected assets, native conservation and source association readback",
+    "actual production ownership loader, effective primitive loader, renderer sampler and picker"
+  ],
+  "limits": [
+    "Local GPU/Canvas could not start: official bundled-browser transport returned non-ZIP data and installed Chromium refused process-singleton sockets. Required unchanged hosted browser test remains authoritative.",
+    "Standalone prepared-parity was not rerun because it requires another unrelated whole-current-checkout restoration; normal required hosted regression checks remain required.",
+    "No scientific producer was replayed and no new UKR native pixel is claimed."
+  ]
+}
