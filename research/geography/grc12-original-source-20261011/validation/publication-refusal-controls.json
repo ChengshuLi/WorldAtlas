@@ -1,0 +1,28 @@
+{
+  "execution_head": "17e810984a0f9bffc105275bdf801972375592f2",
+  "passed": 2,
+  "tests": [
+    {
+      "name": "candidate publication",
+      "returncode": 1,
+      "originals_unchanged": true,
+      "stderr": "Traceback (most recent call last):\n  File \"/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/research/geography/grc12-original-source-20261011/tools/bind_candidates.py\", line 57, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/research/geography/grc12-original-source-20261011/tools/bind_candidates.py\", line 26, in main\n    dest=ns['NewVintage'](base,OWN+'/',vintage,['original-components.json','candidate-bindings.json','receipt.json'])\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/scripts/evidence/immutable.py\", line 246, in __init__\n    self.root = admit_destination(baseline, owned_path, vintage, self.filenames)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/scripts/evidence/immutable.py\", line 235, in admit_destination\n    raise FileExistsError('Evidence already exists; choose a new vintage')\nFileExistsError: Evidence already exists; choose a new vintage\n",
+      "before_sha256": {
+        "research/geography/grc12-original-source-20261011/vintages/candidate-custody-001/candidate-bindings.json": "d5242c2f72f7878ff61c91db7d8e698b3070652a647b5b46bd223354fcb0917b",
+        "research/geography/grc12-original-source-20261011/vintages/candidate-custody-001/publication.json": "46650fbb2775890d3e98deb9ee68cdfebc02ba9c567c18578fc229c77115a4eb",
+        "research/geography/grc12-original-source-20261011/vintages/candidate-custody-001/receipt.json": "ca3b1e067f697092a56ef6454e09619d7787bfaf8bf91155d9cf41f20b6a0e04",
+        "research/geography/grc12-original-source-20261011/vintages/candidate-custody-001/original-components.json": "20b6d8a8cc91da8959a39b989df2f56d27e6fa2495cf736addf5d37e5786e1eb"
+      }
+    },
+    {
+      "name": "all-SOURCE publication",
+      "returncode": 1,
+      "originals_unchanged": true,
+      "stderr": "file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/research/geography/grc12-original-source-20261011/tools/check_all_source_premises.mjs:10\nconst need=(v,m)=>{if(!v)throw Error(m);};\n                               ^\n\nError: Occupied or symlink output\n    at need (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/research/geography/grc12-original-source-20261011/tools/check_all_source_premises.mjs:10:32)\n    at file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/research/geography/grc12-original-source-20261011/tools/check_all_source_premises.mjs:12:159\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0\n",
+      "before_sha256": {
+        "research/geography/grc12-original-source-20261011/vintages/source-premises-001/result.json": "08f098f4f15d91a189830afe419d3c9fd757f645cad6a645b13077fb0ff80760",
+        "research/geography/grc12-original-source-20261011/vintages/source-premises-001/publication.json": "1fd9f9f0f7d45d6021f8c5d28e9bc5069bee888dd81ec5897c0abfcad1d2effd"
+      }
+    }
+  ]
+}

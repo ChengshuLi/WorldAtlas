@@ -1,0 +1,227 @@
+{
+  "execution_commit": "17e810984a0f9bffc105275bdf801972375592f2",
+  "source_baseline": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+  "inputs": [
+    {
+      "path": "research/geography/grc12-original-source-20261011/tools/check_all_source_premises.mjs",
+      "commit": "17e810984a0f9bffc105275bdf801972375592f2",
+      "bytes": 3525,
+      "sha256": "0a18b86d6528fd234b0520588be93565495e99de801f12d6fdd5aee2f6ccf0a1"
+    },
+    {
+      "path": "research/geography/grc12-original-source-20261011/vintages/source-premise-input-001/premise-input.json",
+      "commit": "17e810984a0f9bffc105275bdf801972375592f2",
+      "bytes": 692701,
+      "sha256": "f6453c810f231049e3d5ebe3d4e005989406a22cc7521dc9bc9854a8008cc1f6"
+    },
+    {
+      "path": "scripts/additive-gap-repair.mjs",
+      "commit": "17e810984a0f9bffc105275bdf801972375592f2",
+      "bytes": 184937,
+      "sha256": "c5cd30d32b15a461a186074a1704a64f8895e33199c34d982af0e97bf0615895"
+    },
+    {
+      "path": "src/effective-footprint.js",
+      "commit": "17e810984a0f9bffc105275bdf801972375592f2",
+      "bytes": 45330,
+      "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+    }
+  ],
+  "rows": [
+    {
+      "component_id": "physical-component:9b7d5477755d2307f881b42e2fce0de98b68b2ebf702183e7d4d16b296c7b8ea",
+      "target_id": "gb:GRC:ADM3:53547021B68771809691865",
+      "source_compatible": true,
+      "failed_premises": [],
+      "representation": "retained-base-plus-additions",
+      "authority": "unapproved",
+      "status": "unknown-source-fitness-and-observation-date",
+      "limits": [
+        "Source-relative support does not settle narrow registration-sensitive shoreline/channel truth.",
+        "Unrecorded river widths, seasonal wetness, observation-date mismatch and source precision remain unmeasured."
+      ],
+      "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+      "source_profile": "retained-consumed-simplified-administrative-source"
+    },
+    {
+      "component_id": "physical-component:cebfb84aae8af0e2534907a5a55f25e4f4acf41c36ce46563f9823e10597bc3f",
+      "target_id": "gb:GRC:ADM3:53547021B72748856763578",
+      "source_compatible": true,
+      "failed_premises": [],
+      "representation": "retained-base-plus-additions",
+      "authority": "unapproved",
+      "status": "unknown-source-fitness-and-observation-date",
+      "limits": [
+        "Source-relative support does not settle narrow registration-sensitive shoreline/channel truth.",
+        "Unrecorded river widths, seasonal wetness, observation-date mismatch and source precision remain unmeasured."
+      ],
+      "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+      "source_profile": "retained-consumed-simplified-administrative-source"
+    },
+    {
+      "component_id": "physical-component:0bdf2ee153bf92a00d854efb144310b2aa0fb0f1c9cbee883ee186240aed83bf",
+      "target_id": "gb:GRC:ADM3:53547021B48337850511986",
+      "source_compatible": true,
+      "failed_premises": [],
+      "representation": "retained-base-plus-additions",
+      "authority": "unapproved",
+      "status": "unknown-source-fitness-and-observation-date",
+      "limits": [
+        "Source-relative support does not settle narrow registration-sensitive shoreline/channel truth.",
+        "Unrecorded river widths, seasonal wetness, observation-date mismatch and source precision remain unmeasured."
+      ],
+      "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+      "source_profile": "retained-consumed-simplified-administrative-source"
+    },
+    {
+      "component_id": "physical-component:c4b517a90f05cceee501af2b3aab93b8042921f40c98696e991a54b2e8fb7930",
+      "target_id": "gb:GRC:ADM3:53547021B56133984364891",
+      "source_compatible": true,
+      "failed_premises": [],
+      "representation": "retained-base-plus-additions",
+      "authority": "unapproved",
+      "status": "unknown-source-fitness-and-observation-date",
+      "limits": [
+        "Source-relative support does not settle narrow registration-sensitive shoreline/channel truth.",
+        "Unrecorded river widths, seasonal wetness, observation-date mismatch and source precision remain unmeasured."
+      ],
+      "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+      "source_profile": "retained-consumed-simplified-administrative-source"
+    },
+    {
+      "component_id": "physical-component:0490e58431949470602032aabab032bc20b32e38f2e74705e63ee2c37ee16a07",
+      "target_id": "gb:GRC:ADM3:53547021B25533689161556",
+      "source_compatible": true,
+      "failed_premises": [],
+      "representation": "retained-base-plus-additions",
+      "authority": "unapproved",
+      "status": "unknown-source-fitness-and-observation-date",
+      "limits": [
+        "Source-relative support does not settle narrow registration-sensitive shoreline/channel truth.",
+        "Unrecorded river widths, seasonal wetness, observation-date mismatch and source precision remain unmeasured."
+      ],
+      "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+      "source_profile": "retained-consumed-simplified-administrative-source"
+    },
+    {
+      "component_id": "physical-component:342f765f469621d4aa95daa0e7db7e51afe5d86eee2c435fa110ddc7ee39a181",
+      "target_id": "gb:GRC:ADM3:53547021B25533689161556",
+      "source_compatible": true,
+      "failed_premises": [],
+      "representation": "retained-base-plus-additions",
+      "authority": "unapproved",
+      "status": "unknown-source-fitness-and-observation-date",
+      "limits": [
+        "Source-relative support does not settle narrow registration-sensitive shoreline/channel truth.",
+        "Unrecorded river widths, seasonal wetness, observation-date mismatch and source precision remain unmeasured."
+      ],
+      "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+      "source_profile": "retained-consumed-simplified-administrative-source"
+    },
+    {
+      "component_id": "physical-component:7db8df2e41af60ef6f5f5de963e97070cfea2d500225b061ca191e85cc08d882",
+      "target_id": "gb:GRC:ADM3:53547021B4893314686518",
+      "source_compatible": true,
+      "failed_premises": [],
+      "representation": "retained-base-plus-additions",
+      "authority": "unapproved",
+      "status": "unknown-source-fitness-and-observation-date",
+      "limits": [
+        "Source-relative support does not settle narrow registration-sensitive shoreline/channel truth.",
+        "Unrecorded river widths, seasonal wetness, observation-date mismatch and source precision remain unmeasured."
+      ],
+      "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+      "source_profile": "retained-consumed-simplified-administrative-source"
+    },
+    {
+      "component_id": "physical-component:a98bad0e3cc4c2b5d61836e64aa6277a14762e4c7dfba2814c7f28c89cb2eee0",
+      "target_id": "gb:GRC:ADM3:53547021B16404317109439",
+      "source_compatible": true,
+      "failed_premises": [],
+      "representation": "retained-base-plus-additions",
+      "authority": "unapproved",
+      "status": "unknown-source-fitness-and-observation-date",
+      "limits": [
+        "Source-relative support does not settle narrow registration-sensitive shoreline/channel truth.",
+        "Unrecorded river widths, seasonal wetness, observation-date mismatch and source precision remain unmeasured."
+      ],
+      "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+      "source_profile": "retained-consumed-simplified-administrative-source"
+    },
+    {
+      "component_id": "physical-component:359407ac71496ae2450ff932bcb6565c6d90a3d86d3551aab72567f22f5edecf",
+      "target_id": "gb:GRC:ADM3:53547021B84204057813712",
+      "source_compatible": false,
+      "failed_premises": [
+        "retained-whole-land-pointset",
+        "outside_mapped_L1_context",
+        "complete-original-query-and-source-metadata",
+        "retained-simplified-unique-source-subject"
+      ],
+      "representation": "retained-base-plus-additions",
+      "authority": "unapproved",
+      "status": "unknown-source-fitness-and-observation-date",
+      "limits": [
+        "Source-relative support does not settle narrow registration-sensitive shoreline/channel truth.",
+        "Unrecorded river widths, seasonal wetness, observation-date mismatch and source precision remain unmeasured."
+      ],
+      "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+      "source_profile": "retained-consumed-simplified-administrative-source"
+    },
+    {
+      "component_id": "physical-component:da5add0c0b7b1622d62c5c2b0eb6cb1057a960ed99a5fc24ec44a73f79e7a8d7",
+      "target_id": "gb:GRC:ADM3:53547021B16096881973590",
+      "source_compatible": true,
+      "failed_premises": [],
+      "representation": "retained-base-plus-additions",
+      "authority": "unapproved",
+      "status": "unknown-source-fitness-and-observation-date",
+      "limits": [
+        "Source-relative support does not settle narrow registration-sensitive shoreline/channel truth.",
+        "Unrecorded river widths, seasonal wetness, observation-date mismatch and source precision remain unmeasured."
+      ],
+      "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+      "source_profile": "retained-consumed-simplified-administrative-source"
+    },
+    {
+      "component_id": "physical-component:d8d4ee4572cb68660f08579bf6faacada6a23870ddf371f5a315af14a2c177de",
+      "target_id": "gb:GRC:ADM3:53547021B40832205739746",
+      "source_compatible": false,
+      "failed_premises": [
+        "retained-whole-land-pointset",
+        "outside_mapped_L1_context",
+        "extra_reconstruction",
+        "complete-original-query-and-source-metadata"
+      ],
+      "representation": "retained-base-plus-additions",
+      "authority": "unapproved",
+      "status": "unknown-source-fitness-and-observation-date",
+      "limits": [
+        "Source-relative support does not settle narrow registration-sensitive shoreline/channel truth.",
+        "Unrecorded river widths, seasonal wetness, observation-date mismatch and source precision remain unmeasured."
+      ],
+      "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+      "source_profile": "retained-consumed-simplified-administrative-source"
+    },
+    {
+      "component_id": "physical-component:97da0452499d074bc2acfcd26d2b16dcc409d13dcd3487c88818e683366de807",
+      "target_id": "gb:GRC:ADM3:53547021B22263739106563",
+      "source_compatible": true,
+      "failed_premises": [],
+      "representation": "retained-base-plus-additions",
+      "authority": "unapproved",
+      "status": "unknown-source-fitness-and-observation-date",
+      "limits": [
+        "Source-relative support does not settle narrow registration-sensitive shoreline/channel truth.",
+        "Unrecorded river widths, seasonal wetness, observation-date mismatch and source precision remain unmeasured."
+      ],
+      "source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+      "source_profile": "retained-consumed-simplified-administrative-source"
+    }
+  ],
+  "source_compatible_count": 10,
+  "limits": [
+    "Actual unchanged pure retainedAdministrativeSourcePremises only.",
+    "This result does not establish source acceptance, native operator qualification, same-owner native conservation or selected delivery."
+  ]
+}
