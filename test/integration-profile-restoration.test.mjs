@@ -13,12 +13,29 @@ const focused=['handoff-scope','issue-claims','worker-result','regional-research
   'merge-integration-client','merge-integration-entrypoint','integration-proof'];
 const helper='scripts/canonical-restoration.mjs';
 
-test('actual checkout authority scans the complete production runner dependency tree',()=>{
+test('actual checkout authority matches the selected certificate role closure and critical bytes',()=>{
   const closure=checkoutExecutionClosure(repo);
-  for(const name of ['scripts/run-integration-tests.mjs','scripts/integration-profile.mjs',
-    'scripts/selected-delivery-smoke.mjs','src/ownership-assets.js','src/effective-footprint.js',
-    'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/prepare-model-reader-checkout.mjs'])
-    assert(closure.includes(name),`Missing authenticated runner dependency: ${name}`);
+  const gitBody=name=>{
+    const result=spawnSync('git',['show',`HEAD:${name}`],{cwd:repo});
+    assert.equal(result.status,0,result.stderr.toString());return result.stdout;
+  };
+  const pinned=pin=>{
+    const raw=gitBody(pin.path);assert.equal(raw.length,pin.bytes);
+    assert.equal(createHash('sha256').update(raw).digest('hex'),pin.sha256);
+    return JSON.parse(raw);
+  };
+  const selection=JSON.parse(gitBody('data/ownership-selection.json'));
+  const certificate=pinned(selection.artifact_consumption.certificate);
+  const code=pinned(certificate.application_consumer_code),entry='scripts/run-integration-tests.mjs';
+  const critical=[...code.critical_files,...code.entry_critical_files[entry]];
+  assert.deepEqual(closure,[...critical.map(pin=>pin.path),...Object.values(code.entry_roles[entry]).flat()].sort(),
+    'Complete actual execution role closure required by qualified-artifact-consumer');
+  for(const pin of critical){
+    const raw=fs.readFileSync(path.join(repo,pin.path));assert.equal(raw.length,pin.bytes);
+    assert.equal((fs.statSync(path.join(repo,pin.path)).mode&511)===493?'100755':'100644',pin.mode);
+    assert.equal(createHash('sha256').update(raw).digest('hex'),pin.sha256,'Reviewed critical consumer semantics changed');
+    assert.equal(createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex'),pin.git_blob);
+  }
 });
 
 test('actual checkout authority refuses concatenated relative imports and missing smoke dependencies',t=>{
@@ -33,6 +50,15 @@ test('actual checkout authority refuses concatenated relative imports and missin
   fs.writeFileSync(entry,"const smoke = await import('./selected-delivery-smoke.mjs');\n");
   assert.throws(()=>checkoutExecutionClosure(root),{code:'ENOENT'});
 });
+
+function selectedWorkflowCommand(workflow='pr') {
+  const name=workflow==='pr'?'merge-integration-checks':'worker-merge';
+  const step=workflow==='pr'?'Run selected-data consumer checks':'Test applicable combined-tree invariants without publishing or live imports';
+  const yaml=fs.readFileSync(path.join(repo,`.github/workflows/${name}.yml`),'utf8');
+  const start=yaml.indexOf(`      - name: ${step}\n`);assert(start>=0);
+  const command=yaml.slice(start).split('\n      - ')[0].split('        run: |\n')[1];assert(command);
+  return command.trimEnd().split('\n').map(line=>line.slice(10)).join('\n');
+}
 
 function fixture(t,{full=false,helperBody,selectedHelperBody,omitSelectedHelper=false,skip=false,selected=false,smokeBody}={}) {
   // This is a tiny actual runner boundary fixture, not a scientific restoration.
@@ -81,11 +107,11 @@ export async function runSelectedDeliverySmoke({root,expectationsPath,emittedDir
   fs.writeFileSync(outputPath,'{"fixture_only":true}',{flag:'wx'});return {fixture_only:true};
 }`);
   }
-  return {root,expectations,run(profile=full?'full':'evidence',shard='0') {
+  return {root,expectations,run(profile=full?'full':'evidence',shard='0',workflow='pr') {
     const env={...process.env,INTEGRATION_PROFILE:profile,INTEGRATION_SHARD:shard,...(selected?{INTEGRATION_TEST_SELECTION:'selected-data',SELECTED_EXPECTATIONS_PATH:expectations}:{})};
     // Match a plain CLI launch, rather than inheriting node:test's recursion tag.
     delete env.NODE_TEST_CONTEXT;
-    return spawnSync(process.execPath,['scripts/run-integration-tests.mjs'],{
+    return spawnSync(selected?'bash':process.execPath,selected?['-e','-o','pipefail','-c',selectedWorkflowCommand(workflow)]:['scripts/run-integration-tests.mjs'],{
       cwd:root,encoding:'utf8',timeout:30000,maxBuffer:1024*1024,
       env
     });
@@ -133,11 +159,14 @@ test('invalid profile rejects before either restoration or tests',t=>{
 });
 
 const restored=`import fs from 'node:fs';export function prepareCanonicalCheckout(){fs.writeFileSync('restored-fixture.json','{}',{flag:'wx'});return {fixture_only:true};}`;
-test('real selected-data entry preserves full setup then runs smoke and every retained asset/consumer test',t=>{
-  const f=fixture(t,{full:true,selected:true,helperBody:restored}),r=f.run();
-  assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/# skipped 0/);assert.match(r.stdout,/"test_selection":"selected-data"/);
-  assert.equal(fs.readdirSync(f.root).filter(n=>n.startsWith('tests-reached-')).length,14);
-  assert(fs.existsSync(path.join(f.root,'.cache/selected-delivery-smoke.json')));
+test('actual PR and queue selected commands run smoke and genuine full setup before all retained tests',t=>{
+  for(const workflow of ['pr','queue']){
+    const f=fixture(t,{full:true,selected:true,helperBody:restored}),r=f.run('full','0',workflow);
+    assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/# skipped 0/);assert.match(r.stdout,/"test_selection":"selected-data"/);
+    assert.equal(fs.readdirSync(f.root).filter(n=>n.startsWith('tests-reached-')).length,14);
+    assert(fs.existsSync(path.join(f.root,'.cache/selected-delivery-smoke.json')));
+    assert(fs.existsSync(path.join(f.root,'selected-checkout-fixture-reached.json')));
+  }
 });
 for(const missing of ['dist/client/atlas-geography.json','.cache/native-normal-built-output.json','scripts/selected-delivery-smoke.mjs','coordination/engineering/fixture/selected-delivery-expectations.json'])
  test('real selected-data entry refuses missing actual '+missing+' before tests',t=>{

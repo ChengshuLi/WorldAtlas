@@ -466,7 +466,9 @@ jobs:
           INTEGRATION_SHARD: '0'
           INTEGRATION_TEST_SELECTION: selected-data
           SELECTED_EXPECTATIONS_PATH: ${{ needs.profile.outputs.expectations_path }}
-        run: node scripts/run-integration-tests.mjs
+        run: |
+          node --input-type=module -e 'import {selectedDeliverySmoke} from "./scripts/integration-profile.mjs"; console.log(JSON.stringify({selected_delivery_smoke:await selectedDeliverySmoke(process.env.SELECTED_EXPECTATIONS_PATH)}));'
+          node scripts/run-integration-tests.mjs
       - name: Record package rebuild inapplicability
         if: needs.profile.outputs.full == 'false'
         run: echo 'No declared package input or verification path changed; package unit tests and compilation are inapplicable. No current package size measurement is claimed.' >> "$GITHUB_STEP_SUMMARY"

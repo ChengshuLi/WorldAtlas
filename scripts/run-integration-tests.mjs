@@ -2,8 +2,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawn, spawnSync} from 'node:child_process';
-import {createHash} from 'node:crypto';
-import {validateSelectedExpectations, SELECTED_SMOKE} from './integration-profile.mjs';
 import {compileHostedMigrations} from './compile-hosted-migrations.mjs';
 import {observeSetupPhase,measuredGitSetup} from './ci-setup-observations.mjs';
 
@@ -103,34 +101,6 @@ export function prepareIntegrationTests(files) {
   }
 }
 
-// Bind the reviewed source-side expectations before calling the actual generic
-// emitted-assets smoke. Missing selected/browser assets never become a skip.
-export async function selectedDeliverySmoke(expectationsPath) {
-  if (typeof expectationsPath !== 'string' || !/^coordination\/engineering\/[A-Za-z0-9_./-]+\/selected-delivery-expectations\.json$/.test(expectationsPath) ||
-      expectationsPath.split('/').some(part => !part || part.startsWith('.'))) throw Error('Missing reviewed selected expectations path');
-  const read = name => {
-    const stat = fs.lstatSync(name);
-    if (!stat.isFile() || stat.isSymbolicLink() || stat.size > 32 * 1024 * 1024) throw Error('Nonordinary selected data');
-    return fs.readFileSync(name);
-  };
-  const pinned = pin => {
-    if (!pin || typeof pin.path !== 'string' || pin.path.split('/').some(part => !part || part.startsWith('.')) || pin.path.includes('\\'))
-      throw Error('Invalid selected data pin');
-    const bytes = read(pin.path);
-    if (bytes.length !== pin.bytes || createHash('sha256').update(bytes).digest('hex') !== pin.sha256) throw Error('Selected data bytes differ');
-    return JSON.parse(bytes);
-  };
-  const selection = JSON.parse(read('data/ownership-selection.json'));
-  if (!selection.artifact_consumption || !selection.additive_release) throw Error('Missing actual selected artifact');
-  // Its successful readback was produced by the preceding mandatory build step.
-  read('.cache/native-normal-built-output.json');
-  const sidecar = pinned(selection.additive_release), ledgerPin = sidecar.logical_asset_map?.ledger;
-  validateSelectedExpectations(JSON.parse(read(expectationsPath)), pinned(ledgerPin), ledgerPin.sha256);
-  const {runSelectedDeliverySmoke} = await import('./selected-delivery-smoke.mjs');
-  return runSelectedDeliverySmoke({root: process.cwd(), emittedDirectory: path.resolve('dist/client'),
-    expectationsPath, outputPath: path.resolve('.cache/selected-delivery-smoke.json')});
-}
-
 // Stream diagnostics immediately; retain only a bounded tail for the final TAP
 // summary. Cancellation also reaches the test workers and their Python children.
 export async function streamTestProcess(args, {env = process.env,
@@ -218,8 +188,6 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     }
   }
   prepareIntegrationTests(files);
-  if (testSelection === 'selected-data') console.log(JSON.stringify({selected_delivery_smoke:
-    await selectedDeliverySmoke(process.env.SELECTED_EXPECTATIONS_PATH)}));
   console.log(JSON.stringify({profile, test_selection: testSelection, shard, files}));
   process.exitCode = await streamTestProcess(['--test','--test-reporter=tap','--test-concurrency=2', ...files], {
     env:{...process.env,...(profile==='full' && shard===0?{ATLAS_REQUIRE_STATIC:'1', ...(testSelection === 'selected-data' ? {ATLAS_REQUIRE_PREPARED:'1'} : {})}:{})}

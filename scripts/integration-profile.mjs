@@ -30,6 +30,8 @@ export function integrationProfile(branch, files, reservation = {}) {
   return 'full';
 }
 
+import fs from 'node:fs';
+import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {isDeepStrictEqual as same} from 'node:util';
 import {validatePackageInputs, PACKAGE_INPUT_FILE} from './package-inputs.mjs';
@@ -274,4 +276,32 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     if (error.planningNeeded) throw error; // Preserve the existing bounded capacity-planning retry.
     return null; // An unavailable/unknown boundary retains the full suite.
   }
+}
+
+// Bind the reviewed source-side expectations before calling the actual generic
+// emitted-assets smoke. Missing selected/browser assets never become a skip.
+export async function selectedDeliverySmoke(expectationsPath) {
+  if (typeof expectationsPath !== 'string' || !/^coordination\/engineering\/[A-Za-z0-9_./-]+\/selected-delivery-expectations\.json$/.test(expectationsPath) ||
+      expectationsPath.split('/').some(part => !part || part.startsWith('.'))) throw Error('Missing reviewed selected expectations path');
+  const read = name => {
+    const stat = fs.lstatSync(name);
+    if (!stat.isFile() || stat.isSymbolicLink() || stat.size > 32 * 1024 * 1024) throw Error('Nonordinary selected data');
+    return fs.readFileSync(name);
+  };
+  const pinned = pin => {
+    if (!pin || typeof pin.path !== 'string' || pin.path.split('/').some(part => !part || part.startsWith('.')) || pin.path.includes('\\'))
+      throw Error('Invalid selected data pin');
+    const bytes = read(pin.path);
+    if (bytes.length !== pin.bytes || createHash('sha256').update(bytes).digest('hex') !== pin.sha256) throw Error('Selected data bytes differ');
+    return JSON.parse(bytes);
+  };
+  const selection = JSON.parse(read('data/ownership-selection.json'));
+  if (!selection.artifact_consumption || !selection.additive_release) throw Error('Missing actual selected artifact');
+  // Its successful readback was produced by the preceding mandatory build step.
+  read('.cache/native-normal-built-output.json');
+  const sidecar = pinned(selection.additive_release), ledgerPin = sidecar.logical_asset_map?.ledger;
+  validateSelectedExpectations(JSON.parse(read(expectationsPath)), pinned(ledgerPin), ledgerPin.sha256);
+  const {runSelectedDeliverySmoke} = await import('./selected-delivery-smoke.mjs');
+  return runSelectedDeliverySmoke({root: process.cwd(), emittedDirectory: path.resolve('dist/client'),
+    expectationsPath, outputPath: path.resolve('.cache/selected-delivery-smoke.json')});
 }

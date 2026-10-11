@@ -220,7 +220,11 @@ jobs:
           INTEGRATION_SHARD: ${{ matrix.shard }}
           INTEGRATION_TEST_SELECTION: ${{ needs.prepare.outputs.test_selection }}
           SELECTED_EXPECTATIONS_PATH: ${{ needs.prepare.outputs.expectations_path }}
-        run: node scripts/run-integration-tests.mjs
+        run: |
+          if test "$INTEGRATION_TEST_SELECTION" = selected-data; then
+            node --input-type=module -e 'import {selectedDeliverySmoke} from "./scripts/integration-profile.mjs"; console.log(JSON.stringify({selected_delivery_smoke:await selectedDeliverySmoke(process.env.SELECTED_EXPECTATIONS_PATH)}));'
+          fi
+          node scripts/run-integration-tests.mjs
       - name: Retain native built-output readback
         if: always() && needs.prepare.outputs.profile == 'full' && matrix.shard == 0
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
