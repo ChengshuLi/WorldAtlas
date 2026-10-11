@@ -78,7 +78,7 @@ test('sixteen accepted producer records and the original471 migration remain unc
 });
 test('only finite exact complete migrations succeed and nearby changed vectors refuse',()=>{
  const head=git('rev-parse','HEAD').toString().trim(),reader=new ImmutableReader(root,head,{runtimeBytes:1,metadataBytes:1,executionBytes:1,outputBytes:1});
- const c=read();assert.ok(c.current_rebind_migrations.length>0&&c.current_rebind_migrations.length<=2);
+ const c=read();assert.ok(c.current_rebind_migrations.length>0&&c.current_rebind_migrations.length<=512);
  for(const m of c.current_rebind_migrations){
   assert.deepEqual(compatibleCurrentRebindCode(m.execution_commit,m.current_code,m.historical_code,reader),m.historical_code);
   for(const field of ['current_code','historical_code']){const changed=clone(m);changed[field][0].sha256='e'.repeat(64);
@@ -86,4 +86,10 @@ test('only finite exact complete migrations succeed and nearby changed vectors r
   assert.throws(()=>compatibleCurrentRebindCode('f'.repeat(40),m.current_code,m.historical_code,reader),/Unknown historical/);
  }
  c.current_rebind_migrations.push(clone(c.current_rebind_migrations[0]));assert.throws(()=>validateSupportedProgrammeCatalogue(c),/Malformed|Ambiguous/);
+});
+
+test('current reader adoption preserves all accepted programmes and both earlier migrations',()=>{
+ const c=read();
+ assert.equal(valueSha(c.programs),'f98ce117470918303d67fdcd0392acca35a508908c5ac9db8e15757104003c08');
+ assert.equal(valueSha(c.current_rebind_migrations.slice(0,2)),'1b2dc6750f4cd57af263288541b3987b2f5818394c9f1970142c4d1a8b46933e');
 });

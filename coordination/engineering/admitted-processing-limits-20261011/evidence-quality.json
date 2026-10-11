@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "issue": 1745,
+  "lane": "engineering",
+  "worker_id": "01a12c16-231d-72fb-a04c-977be81c301d",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "1098d766a9f5f90f04bdf5bbefc3f0cf8d5c7629",
+    "files": [
+      {
+        "path": "package.json",
+        "bytes": 1417,
+        "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "current-reader-admission",
+      "kind": "code",
+      "description": "Separately admit current reader resources while preserving historical producer authentication; scope completed serialization scratch and bind exact historical/current code vectors. Focused executable controls cover current allowance, shared accounting, reserve lifetime and finite historical mappings. Genuine corrected baseline/current13 proof remains required before integration.",
+      "software": "Node 24; Python 3",
+      "units": "bytes"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": []
+}
