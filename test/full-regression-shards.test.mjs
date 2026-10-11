@@ -47,3 +47,11 @@ test('test-runner edits and renames require actual full-suite validation', () =>
   }
   assert.equal(integrationProfile('engineering/example', [{filename:'docs/runner.md'}]), 'evidence');
 });
+test('selected-data inventory keeps complete asset/UI and focused consumers under full setup',()=>{
+  const selected=integrationTestFiles('full',0,'selected-data');
+  assert.equal(selected.length,14);assert.equal(new Set(selected).size,14);
+  for(const file of PACKAGED_ASSET_TESTS)assert(selected.includes(file));
+  for(const file of ['test/integration-proof.test.mjs','test/merge-integration.test.mjs','test/premerge-evidence.test.mjs'])assert(selected.includes(file));
+  for(const [profile,shard,selection] of [['evidence',0,'selected-data'],['full',1,'selected-data'],['full',0,'unknown']])
+    assert.throws(()=>integrationTestFiles(profile,shard,selection),/Invalid trusted test selection/);
+});

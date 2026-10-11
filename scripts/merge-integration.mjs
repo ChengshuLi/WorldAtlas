@@ -1,5 +1,5 @@
 import {collectGeographicApproval, bindingHash} from './geographic-adjudication-api.mjs';
-import {integrationProfile} from './integration-profile.mjs';
+import {integrationProfile, selectedDataCandidate, selectedDataSelection} from './integration-profile.mjs';
 import {integrationProof} from './integration-proof.mjs';
 import {githubPages, linkedPulls, verifyClaimForPR, workSpec} from './issue-claim-contract.mjs';
 import {validateIssuePRBody, validateLanePaths} from './check-handoff-scope.mjs';
@@ -7,9 +7,33 @@ import {checkPremergeEvidence} from './premerge-evidence.mjs';
 import {beginFinalPlanning, paceFinalValidation, finalRequestBudget} from './final-capacity.mjs';
 import {memoizeImmutableGitBlobs} from './immutable-git-blobs.mjs';
 import {evidenceRequirement} from './evidence-policy.mjs';
+import {validateGeographyProof} from './geographic-report-artifact.mjs';
 
 const need = (condition, message) => { if (!condition) throw Error(message); };
 const root = repo => `/repos/${repo}`;
+
+function checkGeographicReport(geography, baseline, candidate) {
+  need(geography?.version === 1 && geography.method_id === 'worldatlas-trusted-geography-check-v1' &&
+    geography.baseline_commit === baseline && geography.trusted_code_commit === baseline &&
+    geography.candidate_commit === candidate && geography.candidate_code_executed === false &&
+    geography.published === false && geography.source_approval === false && geography.gate_status === 'passed',
+    'Geographic report does not bind exact trusted combined check');
+  const ordinaryPass = ['not-applicable', 'no-footprint-change', 'no-new-regression'].includes(geography.status);
+  const waterPass = geography.status === 'regressions-found' &&
+    geography.adjudication?.status === 'all-findings-supported-and-reviewed' &&
+    geography.adjudication.unresolved_findings === 0;
+  need(ordinaryPass || waterPass, 'Combined geographic findings remain unresolved');
+  return waterPass;
+}
+
+function bindGeographyProof(source, {proof, number, head, baseline}) {
+  validateGeographyProof(source);
+  need(proof && source.run_id === proof.run_id && source.run_attempt === proof.run_attempt &&
+    source.job_id === proof.geography_job_id && source.tree === proof.tree &&
+    source.head === head && source.baseline === baseline &&
+    source.artifact_name === `proposed-geography-${number}-${proof.run_attempt}`,
+    'Original geographic proof no longer binds the exact tested tree and job');
+}
 export function checkCurrentChecks(checks, {evidenceRequired = false} = {}) {
   const latest = new Map();
   for (const check of checks) {
@@ -292,10 +316,30 @@ export async function prepareIntegration(options) {
     checkCandidateParents(integrated.object, fresh.base, state.pr.head.sha);
     checkReviewedTrees(state.files, authored.entries, integrated.entries);
     const profile = integrationProfile(state.pr.head.ref, state.files, state.reservation);
-    let proof = null;
-    try { proof = await integrationProof({...options, head: state.pr.head.sha, profile,
-      baseline: await tree(options.api, options.repo, state.base), authored, candidate: integrated}); } catch { /* unavailable proof requires isolated tests */ }
-    return {...state, candidate, profile, proof, candidate_refresh_attempts: fresh.attempts, candidate_ref: fresh.reference};
+    let baseline, selection = null;
+    if (profile === 'full' && selectedDataCandidate(state.pr.head.ref, state.files)) {
+      try {
+        baseline = await tree(options.api, options.repo, state.base);
+        selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files: state.files, baseline, authored});
+      } catch { /* Unknown applicability retains the complete suite. */ }
+    }
+    let proof = null, proofUnavailable = null;
+    try { proof = await integrationProof({...options, head: state.pr.head.sha, profile, testSelection: selection?.test_selection, onUnavailable: value => {proofUnavailable = value;},
+      baseline: baseline ?? await tree(options.api, options.repo, state.base), authored, candidate: integrated}); } catch { proofUnavailable = {reason: 'proof-read-unavailable'}; /* isolated tests remain required */ }
+    let geographyProof = null;
+    if (proof && options.geographyProofLoader) {
+      try {
+        const loaded = await options.geographyProofLoader({api: options.api, repo: options.repo,
+          number: options.number, head: state.pr.head.sha, baseline: state.base, proof});
+        if (loaded) {
+          bindGeographyProof(loaded.source, {proof, number: options.number, head: state.pr.head.sha, baseline: state.base});
+          checkGeographicReport(loaded.report, state.base, state.pr.head.sha);
+          geographyProof = loaded.source;
+        }
+      } catch { /* A missing original report never discards valid regression proof or waives fresh geography. */ }
+    }
+    return {...state, candidate, profile, ...selection, proof, proof_unavailable: proofUnavailable, geography_proof: geographyProof,
+      candidate_refresh_attempts: fresh.attempts, candidate_ref: fresh.reference};
   } catch (error) {
     if (fresh.reference) {
       try { await cleanupCandidate(options, fresh.reference, fresh.candidate); }
@@ -309,13 +353,25 @@ export async function completeIntegration(options) {
   try {
   options = {...options, ...(capacityBudget ? {capacityBudget} : {}),
     api: memoizeImmutableGitBlobs(capacityBudget?.api ?? options.api)};
+  const geographyProof = options.geographyProof ? validateGeographyProof(options.geographyProof) : null;
+  const geographyReady = geographyProof
+    ? options.geographyResult === 'skipped' && options.integrationResult === 'skipped' &&
+      options.proofRunId === geographyProof.run_id && options.proofRunAttempt === geographyProof.run_attempt &&
+      options.expectedHead === geographyProof.head && options.testedBase === geographyProof.baseline
+    : options.geographyResult === 'success';
+  if (geographyProof) options = {...options, artifactRunId: geographyProof.run_id};
   need(options.integrationResult === 'success' || options.integrationResult === 'skipped',
     'Integration tests failed or were cancelled; no merge performed');
   let capacity = null;
   if (options.finalCapacity) {
-    need(options.geographyResult === 'success', 'Trusted combined geography check missing, failed or cancelled; no merge performed');
+    need(geographyReady, 'Trusted combined geography check missing, failed or cancelled; no merge performed');
     options = await beginFinalPlanning(options);
-    const paced = await paceFinalValidation(options, {inspect: inspectMerge, admission: options.finalAdmission});
+    const proofApplicabilityInventory = async ({api, state}) => {
+      if (!selectedDataCandidate(state.pr.head.ref, state.files)) return;
+      const [baseline, authored] = await Promise.all([tree(api, options.repo, state.base), tree(api, options.repo, state.pr.head.sha)]);
+      await selectedDataSelection({...options, api, branch: state.pr.head.ref, files: state.files, baseline, authored});
+    };
+    const paced = await paceFinalValidation({...options, proofApplicabilityInventory}, {inspect: inspectMerge, admission: options.finalAdmission});
     options = {...options, api: paced.api}; capacity = paced.receipt;
   }
   // Rejection-only fast path: known stale base/head cannot benefit from the
@@ -330,34 +386,30 @@ export async function completeIntegration(options) {
   const state = await inspectMerge(options);
   if (state.replayed) return {accepted: true, replayed: true, merge_commit: state.pr.merge_commit_sha,
     head_cleanup: await cleanupMergedHead(options)};
-  need(options.geographyResult === 'success',
+  need(geographyReady,
     'Trusted combined geography check missing, failed or cancelled; no merge performed');
   need(options.integrationResult === 'success' || (options.integrationResult === 'skipped' && options.proofRunId),
     'An open PR requires successful isolated integration tests or revalidated trusted proof');
   need(state.base === options.testedBase, 'Main advanced after integration tests; resubmit unchanged head');
   need(typeof options.geographyReportLoader === 'function', 'Missing trusted geography report loader');
   const geography = await options.geographyReportLoader({api: options.api});
-  need(geography?.version === 1 && geography.method_id === 'worldatlas-trusted-geography-check-v1' &&
-    geography.baseline_commit === state.base && geography.trusted_code_commit === state.base &&
-    geography.candidate_commit === options.testedCandidate && geography.candidate_code_executed === false &&
-    geography.published === false && geography.source_approval === false && geography.gate_status === 'passed',
-    'Geographic report does not bind exact trusted combined check');
-  const ordinaryPass = ['not-applicable', 'no-footprint-change', 'no-new-regression'].includes(geography.status);
-  const waterPass = geography.status === 'regressions-found' &&
-    geography.adjudication?.status === 'all-findings-supported-and-reviewed' &&
-    geography.adjudication.unresolved_findings === 0;
-  need(ordinaryPass || waterPass, 'Combined geographic findings remain unresolved');
+  const waterPass = checkGeographicReport(geography, state.base,
+    geographyProof ? state.pr.head.sha : options.testedCandidate);
   const candidate = await tree(options.api, options.repo, options.testedCandidate);
   checkCandidateParents(candidate.object, state.base, state.pr.head.sha);
   const authored = await tree(options.api, options.repo, state.pr.head.sha);
   checkReviewedTrees(state.files, authored.entries, candidate.entries);
   let proof = null;
   if (options.proofRunId) {
+    const baseline = await tree(options.api, options.repo, state.base);
+    const selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files: state.files, baseline, authored});
     proof = await integrationProof({...options, runId: options.proofRunId, runAttempt: options.proofRunAttempt, head: state.pr.head.sha,
       profile: integrationProfile(state.pr.head.ref, state.files, state.reservation),
-      baseline: await tree(options.api, options.repo, state.base), authored, candidate});
+      testSelection: selection?.test_selection, baseline, authored, candidate});
     need(proof, 'Trusted integration proof is no longer valid; resubmit unchanged head');
   }
+  if (geographyProof) bindGeographyProof(geographyProof, {proof, number: options.number,
+    head: state.pr.head.sha, baseline: state.base});
   const currentPR = await options.api(`${root(options.repo)}/pulls/${options.number}`);
   const currentIssue = await options.api(`${root(options.repo)}/issues/${state.issue.number}`);
   need(currentPR.head.sha === state.pr.head.sha && currentPR.body === state.pr.body && currentPR.title === state.pr.title &&
@@ -387,8 +439,9 @@ export async function completeIntegration(options) {
   need(merged.merged, 'GitHub did not merge the PR');
   return {accepted: true, merge_commit: merged.sha, title: state.pr.title, github_issue: state.issue.number,
     ...(capacity ? {final_capacity: capacity} : {}),
-    geography: {status: 'passed', trusted_code_commit: state.base, candidate_commit: options.testedCandidate,
-      report_sha256: options.geographyReportHash, adjudication: geography.adjudication ?? null},
+    geography: {status: 'passed', trusted_code_commit: state.base, candidate_commit: geography.candidate_commit,
+      report_sha256: geographyProof?.report_sha256 ?? options.geographyReportHash, adjudication: geography.adjudication ?? null,
+      ...(geographyProof ? {execution: 'reused-original', source: geographyProof} : {})},
     tested_base: state.base, tested_candidate: options.testedCandidate, reviewed_head: state.pr.head.sha, evidence: state.evidence, proof,
     head_cleanup: await cleanupMergedHead(options)};
   } finally {capacityBudget?.dispose();}

@@ -82,6 +82,8 @@ export async function checkPRGates({event, repo, token, api, now = Date.now, pha
   const regression = phase === 'evidence' ? undefined : await selectIntegrationProfile({event: authoritativeEvent, repo, api: read, now: now()});
   const packageProfile = phase === 'evidence' ? undefined : await deploymentBudgetProfile({event: authoritativeEvent,
     eventName: 'pull_request', repository: repo, api: read});
+  if (regression?.test_selection === 'selected-data' && packageProfile?.full !== true)
+    throw Error('Selected-data requires the complete actual package job');
   if (packageProfile?.blocked) throw Object.assign(Error('Package classification deferred for quota'),
     {blocked: packageProfile, ...(packageProfile.api_error ? {github: packageProfile.api_error} : {})});
 
@@ -99,6 +101,7 @@ export async function checkPRGates({event, repo, token, api, now = Date.now, pha
   return {status: 'checked', phase, head_sha: scheduled.head.sha, trusted_base: scheduled.base?.sha,
     github_issue, pr_body: current.body ?? '', issue_binding: binding, evidence, linked,
     ...(regression ? {profile: regression.profile, shards: regression.shards,
+      ...(regression.test_selection ? {test_selection: regression.test_selection, expectations_path: regression.expectations_path} : {}),
       owned_paths: linked.owned_paths ?? [], package: packageProfile} : {})};
 }
 
@@ -144,5 +147,5 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   console.log(JSON.stringify(result));
   if (result.status !== 'checked') process.exitCode = 1;
   else if (phase !== 'evidence') fs.appendFileSync(process.env.GITHUB_OUTPUT,
-    `profile=${result.profile}\nshards=${JSON.stringify(result.shards)}\nowned_paths=${JSON.stringify(result.owned_paths)}\npr_body=${JSON.stringify(result.pr_body)}\nfull=${result.package.full}\nblocked=false\n`);
+    `profile=${result.profile}\nshards=${JSON.stringify(result.shards)}\ntest_selection=${result.test_selection ?? 'complete'}\nexpectations_path=${result.expectations_path ?? ''}\nowned_paths=${JSON.stringify(result.owned_paths)}\npr_body=${JSON.stringify(result.pr_body)}\nfull=${result.package.full}\nblocked=false\n`);
 }

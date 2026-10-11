@@ -248,8 +248,11 @@ Both preparation and final merge require that same FIFO ticket and dispatch
 attempt. All existing reviewed-head, authority, evidence, test, candidate-parent,
 base and SHA-guarded squash checks remain mandatory.
 
-GitHub retains only one pending concurrency run. A replaced scheduler tick loses
-no requests because their registrations already exist outside that group.
+GitHub defaults to one pending concurrency run, which lets a newer registration
+tick replace a completion wake. The short scheduler opts into `queue: max` so
+pending wakes remain queued without overlapping active scheduler jobs. GitHub
+allows at most 100 pending jobs in that group; excess runs can still be cancelled.
+Registrations remain durable outside the group, independent of wake retention.
 The workflow declares completion-triggered scheduler ticks and a five-minute
 scheduled fallback for cancelled execution, failed notification and ambiguous
 dispatch; provider delivery can be delayed or unavailable. Live,
@@ -271,6 +274,33 @@ dispatch. A failed or uncertain rejection write stops the tick before any later
 request can advance. Even a changed head retains the two-minute dispatch discovery
 window. Each API attempt still shares the actual job deadline and quota controls;
 no new registration, idle wake loop or completion-trigger guarantee is introduced.
+
+A separate, two-minute trusted worker-completion job sends one registration-free
+`workflow_dispatch` to the existing scheduler. It checks out the immutable
+executing workflow commit, runs no candidate code, and makes no automatic retry
+of the notification POST. Its process admits only a short bounded HTTP budget;
+quota refusal or transport uncertainty stays visible rather than authorizing
+another write. No startup job-metadata request is added to this notifier.
+
+The `wake_run_id` input is only an observation hint. The scheduler checks that it
+identifies a main-branch worker workflow and waits for that run to become terminal
+within its existing authenticated job deadline. It then performs normal complete
+live-run and FIFO admission; the hint cannot approve a merge, skip another live
+run or recreate a request. This closes the race where the notifier is still live
+when its scheduler starts. Requests arriving during that wait are read afterward.
+Mixed wake/registration inputs, unrelated runs and invalid hints refuse safely.
+An empty queue or duplicate wake causes no idle self-dispatch. The scheduler
+retains pending wake jobs so a later ordinary registration tick cannot replace
+the only tick that knows to wait for its still-live notifier.
+
+Cancellation before the notifier can run, runner loss, quota refusal and provider
+outages can still prevent notification; the existing completion event and
+five-minute fallback remain. Inspect existing durable requests before bounded
+manual recovery, never submit a duplicate. A workflow already running when this
+change lands keeps its original definition, so rollout may still need that normal
+recovery once. Hosted automatic advancement must be recorded separately from
+local simulated controls. Scheduler quota-floor refusals retain their observed
+numeric admission fields and retry time; they are not ordinary permission errors.
 
 The CLI observes for 65 minutes, then reports its request ID without cancelling
 anything. Resume read-only observation using
@@ -511,3 +541,50 @@ dependency/build work. It never reports package success or a source-only skip.
 Unknown non-quota inventories retain the conservative full-build fallback.
 Concurrent read batches finish their existing bounded requests before receipts
 are finalized, so a fast rejection cannot hide other already-started attempts.
+
+
+### Exact-tree delivery CI reuse
+
+The existing integration proof can also carry the original successful trusted
+geography job's report. Preparation authenticates its run/attempt, unique producer
+steps, job-log report hash/size, artifact ID/name/digest and complete tested tree.
+The final gate revalidates these bindings and current geography adjudication before
+merging. Its receipt preserves the original report candidate and labels reuse;
+it does not claim that a skipped queue geography job ran successfully. An absent
+usable original report causes a fresh geography job. A pinned proof that changes
+before merge is refused.
+
+For unchanged-method selected deliveries, the setup profile remains `full` while
+`test_selection=selected-data` declares the narrower inventory. This option is
+ineligible until the generic selected-delivery smoke exists unchanged on trusted
+main. Only the additive selection changes; all existing method/base authority and
+registry entries remain intact. New files must be ordinary inert data/evidence in
+the worker's own delivery directory. The package definition may only append exact
+new data file entries reachable through the fixed selected-reader roles, preserving
+all existing entries, order and other policy fields. Supporting JSON/log evidence
+cannot create package/import authority. Unknown boundaries retain all three full
+regression shards.
+
+Each such delivery adds exactly one `selected-delivery-expectations.json` under its
+owned delivery directory. Use the existing smoke's version 1 schema, authored from
+reviewed original authority/ledger inputs. Eligibility binds its ledger hash,
+complete active selected component roster (including zero-cell rows), targets,
+dispositions, geometries and cumulative native cells. Existing awaiting-evidence
+and rejected ledger rows remain unchanged; they are retained source records, not
+rendered selections. Reclassifying those old rows takes the full route. Do not derive expectations from emitted
+assets. Missing or ambiguous expectations retain full regression. Batch labels
+remain reviewed source-side statements, not a new independent source approval.
+
+Selected PR validation uses the existing package job once: all four package
+controls, real build and qualified native output readback, then the generic emitted
+asset smoke and all 14 focused/parity/UI test files. Queue fallback uses the same
+full setup and package responsibilities on shard 0. Chromium, actual selected
+GPU/Canvas tests, source/geography/current-authority gates and zero skipped tests
+remain required. The runner reports setup profile and actual test selection
+separately. Proof reuse requires every actual package/consumer step to succeed;
+the intentionally omitted generic regression job is only accepted for this mode.
+Final-capacity planning measures the applicable selector inventory, including
+cold metadata reads, rather than assuming overlap with evidence or reserving a
+blanket worst-case count. Hosted applicability, automatic next-ticket advancement
+and elapsed savings must be recorded when observed, not inferred from local
+controls or added parallel job durations.

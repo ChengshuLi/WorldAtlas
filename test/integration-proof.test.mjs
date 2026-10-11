@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {integrationProof, PROOF_PATHS, WORKFLOW_PATH} from '../scripts/integration-proof.mjs';
+import {integrationProof, PROOF_PATHS, WORKFLOW_PATH, successfulGeographyJob} from '../scripts/integration-proof.mjs';
 import {integrationProfile, COORDINATION_PATHS} from '../scripts/integration-profile.mjs';
 
 function fixture(profile = 'full') {
@@ -33,6 +33,24 @@ test('successful full and focused workflows prove exact tree and pinned current 
     assert.deepEqual(proof,{run_id:12,run_attempt:1,tree:'exact-complete-tree',profile});
     assert.deepEqual(await integrationProof({...f.options,runId:12,runAttempt:1}),proof);
   }
+});
+test('geography reuse requires one actual successful producer and every trusted step', async () => {
+  const geography = {id: 44, name: 'geography', status: 'completed', conclusion: 'success', steps: [
+    'Checkout trusted geographic checker', 'Install trusted geographic dependencies',
+    'Check proposed geography with trusted baseline code',
+    'Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02'
+  ].map(name => ({name, status: 'completed', conclusion: 'success'}))};
+  const f = fixture(); f.jobs.push(geography);
+  assert.equal((await integrationProof(f.options)).geography_job_id, 44);
+  for (const mutate of [job => {job.id = 0;}, job => {job.status = 'in_progress';},
+    job => {job.conclusion = 'failure';}, job => {job.steps.pop();},
+    job => {job.steps[2].conclusion = 'skipped';}, job => {job.steps.push({...job.steps[2]});}]) {
+    const job = structuredClone(geography); mutate(job); assert.equal(successfulGeographyJob([job]), null);
+  }
+  assert.equal(successfulGeographyJob([geography, structuredClone(geography)]), null);
+  f.jobs.push(structuredClone(geography));
+  assert.equal((await integrationProof(f.options)).geography_job_id, undefined,
+    'unusable geography must not discard valid application proof; a fresh geography job remains required');
 });
 function failOnlyEvidence(f) {
   f.run.conclusion = 'failure';
@@ -249,4 +267,53 @@ test('package CI coordination paths use focused tests while builders and runners
     assert.equal(integrationProfile('engineering/example', [{filename}]), 'full', filename);
   }
   assert.equal(integrationProfile('engineering/example', [{filename:'scripts/classify-deployment-budget.mjs', previous_filename:'src/main.js'}]), 'full');
+});
+
+const selectedPackageSteps = ['Checkout complete package inputs','Install package Node dependencies','Install package Python dependencies',
+  'Verify package controls','Build and enforce archive/file reserves without publishing','Read back qualified native build outputs when selected',
+  'Install selected-data browser dependencies','Run selected-data consumer checks'];
+function selectedProofFixture(failedEvidence = false) {
+  const f = fixture(); f.options.testSelection = 'selected-data';
+  f.jobs = [{name:'profile',status:'completed',conclusion:'success'},
+    {name:'regression',status:'completed',conclusion:'skipped'},
+    {name:'package',status:'completed',conclusion:'success',steps:selectedPackageSteps.map(name=>({name,status:'completed',conclusion:'success'}))},
+    ...['scope','geography','evidence'].map(name=>({name,status:'completed',conclusion:'success'}))];
+  if(failedEvidence){f.run.conclusion='failure';f.jobs.find(job=>job.name==='evidence').conclusion='failure';}
+  return f;
+}
+test('selected-data proves actual package/readback/browser/consumer steps and labels omitted regression truthfully',async()=>{
+  for(const failure of [false,true]){
+    const f=selectedProofFixture(failure),proof=await integrationProof(f.options);
+    assert.equal(proof.test_selection,'selected-data');assert.equal(proof.profile,'full');
+    assert.deepEqual(await integrationProof({...f.options,runId:12,runAttempt:1}),proof);
+    assert.equal(await integrationProof({...f.options,testSelection:'complete'}),null,'cannot relabel selected inventory full');
+    assert.equal(await integrationProof({...f.options,profile:'evidence'}),null,'cannot relabel full setup evidence');
+  }
+});
+test('selected-data refuses missing/failed/skipped/duplicate package consumers and unbound regression omission',async()=>{
+  for(const failure of [false,true])for(const name of selectedPackageSteps)for(const outcome of ['failure','skipped','missing','duplicate']){
+    const f=selectedProofFixture(failure),job=f.jobs.find(job=>job.name==='package');
+    if(outcome==='missing')job.steps=job.steps.filter(step=>step.name!==name);
+    else if(outcome==='duplicate')job.steps.push({...job.steps.find(step=>step.name===name)});
+    else job.steps.find(step=>step.name===name).conclusion=outcome;
+    assert.equal(await integrationProof(f.options),null,`${name}/${outcome}/${failure}`);
+  }
+  for(const mutate of [f=>f.jobs.push({...f.jobs.find(job=>job.name==='package')}),
+    f=>f.jobs.find(job=>job.name==='package').conclusion='failure',f=>f.jobs.find(job=>job.name==='regression').conclusion='success',
+    f=>f.jobs=f.jobs.filter(job=>job.name!=='regression'),f=>f.run.run_attempt=2,
+    f=>f.options.candidate.object.tree.sha='changed']){
+    const f=selectedProofFixture();mutate(f);assert.equal(await integrationProof({...f.options,runId:12,runAttempt:1}),null);
+  }
+});
+
+test('proof fallback reports existing allowlisted decisions without extra requests',async()=>{
+  for(const [reason,mutate] of [
+    ['tested-tree-mismatch',f=>f.options.candidate.object.tree.sha='different'],
+    ['trusted-checker-identity-changed',f=>f.options.authored.entries.get(PROOF_PATHS[1]).sha='different'],
+    ['run-identity-or-state',f=>f.run.run_attempt=2],
+    ['required-code-job-or-step',f=>f.jobs[1].steps.pop()]]){
+    const f=fixture();mutate(f);let observed;const calls=[];const api=f.options.api;
+    const proof=await integrationProof({...f.options,runId:12,runAttempt:1,api:async route=>{calls.push(route);return api(route);},onUnavailable:value=>{observed=value;}});
+    assert.equal(proof,null);assert.deepEqual(observed,{reason});assert(calls.length<=3);
+  }
 });

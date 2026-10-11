@@ -6,7 +6,7 @@ import {waitForFinalCapacity, capacityObservation, finalRequestBound, inventoryF
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
 import {githubAPI, renderClaim} from '../scripts/issue-claim-contract.mjs';
 import {loadGeographicReport} from '../scripts/geographic-report-artifact.mjs';
-import {inspectMerge, completeIntegration} from '../scripts/merge-integration.mjs';
+import {inspectMerge, prepareIntegration, completeIntegration} from '../scripts/merge-integration.mjs';
 import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
 import {assertAdmission, queueBody, executionTitle} from '../scripts/merge-scheduler.mjs';
 import {reviewContractBinding} from '../scripts/premerge-evidence.mjs';
@@ -194,6 +194,85 @@ test('hosted proof is rechecked after capacity inventory before any merge write'
     };
     await assert.rejects(f.complete(),/Trusted (?:integration )?proof/);assert.equal(f.writes.length,0);
   }
+});
+
+function geographyReuseFixture() {
+  const f = evidenceFailedProof(fixture());
+  f.pr.mergeable = true; f.pr.merge_commit_sha = f.candidate;
+  const job = f.proofJobs.find(job => job.name === 'geography');
+  Object.assign(job, {id: 55, steps: ['Checkout trusted geographic checker', 'Install trusted geographic dependencies',
+    'Check proposed geography with trusted baseline code',
+    'Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02']
+    .map(name => ({name, status: 'completed', conclusion: 'success'}))});
+  f.source = {run_id: 44, run_attempt: 1, job_id: 55, tree: '2'.repeat(40), head: f.head, baseline: f.base,
+    artifact_id: 77, artifact_name: 'proposed-geography-23-1', artifact_digest: 'a'.repeat(64), artifact_bytes: 100,
+    report_sha256: 'b'.repeat(64), report_bytes: 200};
+  f.report = {version: 1, method_id: 'worldatlas-trusted-geography-check-v1', baseline_commit: f.base,
+    trusted_code_commit: f.base, candidate_commit: f.head, candidate_code_executed: false,
+    published: false, source_approval: false, gate_status: 'passed', status: 'not-applicable'};
+  const original = f.api;
+  f.api = async (route, ...args) => route.includes('/actions/workflows/merge-integration-checks.yml/runs')
+    ? {workflow_runs: [structuredClone(f.proofRun)]} : original(route, ...args);
+  f.prepare = extra => prepareIntegration({...f.options(), geographyProofLoader: async () => ({source: f.source, report: f.report}), ...extra});
+  const complete = f.complete;
+  f.reuse = extra => complete({geographyResult: 'skipped', geographyProof: f.source,
+    geographyReportLoader: async () => structuredClone(f.report), ...extra});
+  return f;
+}
+
+test('prepare to actual final-capacity consumer reuses original geography with truthful identities', async () => {
+  const f = geographyReuseFixture(), prepared = await f.prepare();
+  assert.deepEqual(prepared.geography_proof, f.source); assert.equal(prepared.proof.geography_job_id, 55);
+  const result = await f.reuse({geographyProof: prepared.geography_proof});
+  assert.equal(result.accepted, true); assert.equal(result.final_capacity.status, 'observed-sufficient');
+  assert.equal(result.tested_candidate, f.candidate); assert.equal(result.geography.candidate_commit, f.head);
+  assert.equal(result.geography.execution, 'reused-original'); assert.deepEqual(result.geography.source, f.source);
+  assert(f.calls.some(call => call.route.includes('/actions/runs/44/artifacts?')));
+  assert(!f.calls.some(call => call.route.includes('/actions/runs/12/artifacts?')),
+    'capacity must inventory the pinned source run, not the current queue run');
+  assert.equal(f.writes.filter(row => row.route.endsWith('/merge')).length, 1);
+});
+
+test('unusable prepared report falls back to fresh geography without discarding application proof', async () => {
+  for (const change of ['missing', 'wrong-report', 'wrong-source', 'download-failed']) {
+    const f = geographyReuseFixture();
+    const prepared = await f.prepare({geographyProofLoader: async () => {
+      if (change === 'missing') return null;
+      if (change === 'download-failed') throw Error('bounded original log unavailable');
+      return {source: {...f.source, ...(change === 'wrong-source' ? {job_id: 66} : {})},
+        report: {...f.report, ...(change === 'wrong-report' ? {candidate_commit: f.candidate} : {})}};
+    }});
+    assert.equal(prepared.proof.run_id, 44); assert.equal(prepared.geography_proof, null);
+    await assert.rejects(f.reuse({geographyProof: null}), /Trusted combined geography check/);
+    assert.equal(f.writes.length, 0);
+  }
+});
+
+test('reused geography never accepts drift, unresolved science or failed current authority', async () => {
+  for (const mutate of [
+    f => {f.source.job_id++;}, f => {f.source.run_attempt++;}, f => {f.source.tree = '3'.repeat(40);},
+    f => {f.source.baseline = 'd'.repeat(40);}, f => {f.source.head = 'd'.repeat(40);},
+    f => {f.source.artifact_name = 'proposed-geography-24-1';},
+    f => {f.report.candidate_commit = f.candidate;}, f => {f.report.trusted_code_commit = 'd'.repeat(40);},
+    f => {f.report.status = 'regressions-found';}, f => {f.report.gate_status = 'blocked';},
+    f => {f.proofJobs.find(job => job.name === 'geography').steps[2].conclusion = 'skipped';},
+    f => {f.proofRun.run_attempt++;}, f => {f.checks = 'failure';},
+    f => {f.claim.expires_at = '2000-01-01T00:00:00Z';}
+  ]) {
+    const f = geographyReuseFixture(); await f.prepare(); mutate(f);
+    await assert.rejects(f.reuse()); assert.equal(f.writes.length, 0);
+  }
+});
+
+test('final geography source is revalidated after capacity waiting before any write', async () => {
+  const f = geographyReuseFixture(); await f.prepare(); const original = f.api;
+  f.api = async (route, ...args) => {
+    const result = await original(route, ...args);
+    if (route.endsWith('/actions/runs/44') && f.proofReads === 2)
+      f.proofJobs.find(job => job.name === 'geography').steps.pop();
+    return result;
+  };
+  await assert.rejects(f.reuse(), /Original geographic proof/); assert.equal(f.writes.length, 0);
 });
 
 test('real tree/path/vintage inventory includes nonadded originals and verified OID reuse', async () => {

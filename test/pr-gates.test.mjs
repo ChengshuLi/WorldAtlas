@@ -318,7 +318,8 @@ test('metadata-only draft readiness preserves code work and cannot replace its t
   const events = source.match(/types: \[([^\]]+)\]/)[1].split(',').map(x=>x.trim());
   const groupLine = source.split('\n').find(line=>line.trim().startsWith('group:'));
   const expression = [...groupLine.matchAll(/\$\{\{ (.*?) \}\}/g)].at(-1)[1];
-  const evaluate = (predicate, action) => Function('action', `return (${predicate.replaceAll('github.event.action','action')});`)(action);
+  const evaluate = (predicate, action, selection = 'complete') => Function('action', 'selection',
+    `return (${predicate.replaceAll('github.event.action','action').replaceAll('needs.profile.outputs.test_selection','selection')});`)(action, selection);
   const groups = Object.fromEntries(events.map(action=>[action,evaluate(expression,action)]));
   assert.equal(groups.opened, 'code');assert.equal(groups.synchronize, 'code');assert.equal(groups.reopened, 'code');
   assert.equal(groups.edited, 'metadata');assert.equal(groups.ready_for_review, 'metadata');

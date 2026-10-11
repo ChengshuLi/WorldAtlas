@@ -3,7 +3,9 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
+import {checkoutExecutionClosure} from '../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/artifact-checkout-execution.mjs';
 
 const repo=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const focused=['handoff-scope','issue-claims','worker-result','regional-research-gate','geography-worker-lane',
@@ -11,9 +13,56 @@ const focused=['handoff-scope','issue-claims','worker-result','regional-research
   'merge-integration-client','merge-integration-entrypoint','integration-proof'];
 const helper='scripts/canonical-restoration.mjs';
 
-function fixture(t,{full=false,helperBody,selectedHelperBody,omitSelectedHelper=false,skip=false}={}) {
+test('actual checkout authority matches the selected certificate role closure and critical bytes',()=>{
+  const closure=checkoutExecutionClosure(repo);
+  const gitBody=name=>{
+    const result=spawnSync('git',['show',`HEAD:${name}`],{cwd:repo});
+    assert.equal(result.status,0,result.stderr.toString());return result.stdout;
+  };
+  const pinned=pin=>{
+    const raw=gitBody(pin.path);assert.equal(raw.length,pin.bytes);
+    assert.equal(createHash('sha256').update(raw).digest('hex'),pin.sha256);
+    return JSON.parse(raw);
+  };
+  const selection=JSON.parse(gitBody('data/ownership-selection.json'));
+  const certificate=pinned(selection.artifact_consumption.certificate);
+  const code=pinned(certificate.application_consumer_code),entry='scripts/run-integration-tests.mjs';
+  const critical=[...code.critical_files,...code.entry_critical_files[entry]];
+  assert.deepEqual(closure,[...critical.map(pin=>pin.path),...Object.values(code.entry_roles[entry]).flat()].sort(),
+    'Complete actual execution role closure required by qualified-artifact-consumer');
+  for(const pin of critical){
+    const raw=fs.readFileSync(path.join(repo,pin.path));assert.equal(raw.length,pin.bytes);
+    assert.equal((fs.statSync(path.join(repo,pin.path)).mode&511)===493?'100755':'100644',pin.mode);
+    assert.equal(createHash('sha256').update(raw).digest('hex'),pin.sha256,'Reviewed critical consumer semantics changed');
+    assert.equal(createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex'),pin.git_blob);
+  }
+});
+
+test('actual checkout authority refuses concatenated relative imports and missing smoke dependencies',t=>{
+  const cache=path.join(repo,'.cache');fs.mkdirSync(cache,{recursive:true});
+  const root=fs.mkdtempSync(path.join(cache,'checkout-closure-boundary-'));
+  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  fs.mkdirSync(path.join(root,'scripts'));
+  fs.writeFileSync(path.join(root,'package.json'),'{"type":"module"}\n');
+  const entry=path.join(root,'scripts/run-integration-tests.mjs');
+  fs.writeFileSync(entry,"const smoke = await import('../' + 'scripts/selected-delivery-smoke.mjs');\n");
+  assert.throws(()=>checkoutExecutionClosure(root),{code:'ERR_ASSERTION'});
+  fs.writeFileSync(entry,"const smoke = await import('./selected-delivery-smoke.mjs');\n");
+  assert.throws(()=>checkoutExecutionClosure(root),{code:'ENOENT'});
+});
+
+function selectedWorkflowCommand(workflow='pr') {
+  const name=workflow==='pr'?'merge-integration-checks':'worker-merge';
+  const step=workflow==='pr'?'Run selected-data consumer checks':'Test applicable combined-tree invariants without publishing or live imports';
+  const yaml=fs.readFileSync(path.join(repo,`.github/workflows/${name}.yml`),'utf8');
+  const start=yaml.indexOf(`      - name: ${step}\n`);assert(start>=0);
+  const command=yaml.slice(start).split('\n      - ')[0].split('        run: |\n')[1];assert(command);
+  return command.trimEnd().split('\n').map(line=>line.slice(10)).join('\n');
+}
+
+function fixture(t,{full=false,helperBody,selectedHelperBody,omitSelectedHelper=false,skip=false,selected=false,smokeBody}={}) {
   // This is a tiny actual runner boundary fixture, not a scientific restoration.
-  const sources=['scripts/run-integration-tests.mjs','scripts/compile-hosted-migrations.mjs','scripts/ci-setup-observations.mjs'];
+  const sources=['scripts/run-integration-tests.mjs','scripts/integration-profile.mjs','scripts/package-inputs.mjs','scripts/compile-hosted-migrations.mjs','scripts/ci-setup-observations.mjs'];
   const bodies=sources.map(name=>{
     const p=path.join(repo,name),s=fs.lstatSync(p);
     assert.ok(s.isFile()&&!s.isSymbolicLink()&&s.size<64*1024);
@@ -25,7 +74,7 @@ function fixture(t,{full=false,helperBody,selectedHelperBody,omitSelectedHelper=
   function write(name,body) {const p=path.join(root,name);fs.mkdirSync(path.dirname(p),{recursive:true});fs.writeFileSync(p,body,{flag:'wx'});}
   write('package.json','{"type":"module"}\n');
   sources.forEach((name,i)=>write(name,bodies[i]));
-  const names=full?['probe']:focused;
+  const names=selected?[...focused,'compact-ownership','prepared-parity']:full?['probe']:focused;
   for(const name of names)write(`test/${name}.test.mjs`,
     `import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
 test('actual selected test',${skip?'{skip:true},':''}()=>{
@@ -36,17 +85,33 @@ test('actual selected test',${skip?'{skip:true},':''}()=>{
   if(full&&!omitSelectedHelper)write('coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/prepare-model-reader-checkout.mjs',selectedHelperBody??`import fs from 'node:fs';import assert from 'node:assert/strict';
 export function prepareModelReaderCheckout({root,profile,shard}){
  assert.equal(root,process.cwd());assert.equal(profile,'full');assert([0,1,2].includes(shard));
- assert.equal(fs.existsSync('data/ownership-selection.json'),false,'This tiny fixture has no selected artifact');
+ assert.equal(fs.existsSync('data/ownership-selection.json'),${selected},'This tiny fixture has no selected artifact');
  fs.writeFileSync('selected-checkout-fixture-reached.json','{"fixture_only":true}',{flag:'wx'});
  return {applicable:false,fixture_only:true};
 }
 `);
 
-  return {root,run(profile=full?'full':'evidence',shard='0') {
-    const env={...process.env,INTEGRATION_PROFILE:profile,INTEGRATION_SHARD:shard};
+  const expectations='coordination/engineering/fixture/selected-delivery-expectations.json';
+  if(selected){
+    const pin=(name,value)=>{const bytes=Buffer.from(JSON.stringify(value));write(name,bytes);return {path:name,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex')};};
+    const member={component_id:'component',target_id:'target',disposition:'assigned',geometry_sha256:'a'.repeat(64)};
+    const ledger=pin('coordination/engineering/fixture/ledger.json',{version:2,kind:'native-additive-repair-ledger-v2',rows:[{...member,native_cells:1}]});
+    const side=pin('coordination/engineering/fixture/sidecar.json',{logical_asset_map:{ledger}});
+    pin('data/ownership-selection.json',{artifact_consumption:{},additive_release:side});
+    pin(expectations,{version:1,selected_ledger_sha256:ledger.sha256,cumulative_native_cells:1,cohorts:[{original_batch_id:'original',component_ids:['component'],members:[member]}]});
+    write('dist/client/atlas-geography.json','{}');write('.cache/native-normal-built-output.json','{}');
+    write('scripts/selected-delivery-smoke.mjs',smokeBody??`import fs from 'node:fs';import assert from 'node:assert/strict';
+export async function runSelectedDeliverySmoke({root,expectationsPath,emittedDirectory,outputPath}){
+  assert.equal(root,process.cwd());assert.equal(process.env.INTEGRATION_PROFILE,'full');assert.equal(process.env.INTEGRATION_TEST_SELECTION,'selected-data');
+  assert(fs.existsSync(expectationsPath));assert(fs.existsSync(emittedDirectory+'/atlas-geography.json'));
+  fs.writeFileSync(outputPath,'{"fixture_only":true}',{flag:'wx'});return {fixture_only:true};
+}`);
+  }
+  return {root,expectations,run(profile=full?'full':'evidence',shard='0',workflow='pr') {
+    const env={...process.env,INTEGRATION_PROFILE:profile,INTEGRATION_SHARD:shard,...(selected?{INTEGRATION_TEST_SELECTION:'selected-data',SELECTED_EXPECTATIONS_PATH:expectations}:{})};
     // Match a plain CLI launch, rather than inheriting node:test's recursion tag.
     delete env.NODE_TEST_CONTEXT;
-    return spawnSync(process.execPath,['scripts/run-integration-tests.mjs'],{
+    return spawnSync(selected?'bash':process.execPath,selected?['-e','-o','pipefail','-c',selectedWorkflowCommand(workflow)]:['scripts/run-integration-tests.mjs'],{
       cwd:root,encoding:'utf8',timeout:30000,maxBuffer:1024*1024,
       env
     });
@@ -91,4 +156,26 @@ test('invalid profile rejects before either restoration or tests',t=>{
   const f=fixture(t),r=f.run('invalid');assert.notEqual(r.status,0);
   assert.match(r.stderr,/Invalid trusted integration test profile/);
   assert.ok(!fs.readdirSync(f.root).some(n=>n.startsWith('tests-reached-')));
+});
+
+const restored=`import fs from 'node:fs';export function prepareCanonicalCheckout(){fs.writeFileSync('restored-fixture.json','{}',{flag:'wx'});return {fixture_only:true};}`;
+test('actual PR and queue selected commands run smoke and genuine full setup before all retained tests',t=>{
+  for(const workflow of ['pr','queue']){
+    const f=fixture(t,{full:true,selected:true,helperBody:restored}),r=f.run('full','0',workflow);
+    assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/# skipped 0/);assert.match(r.stdout,/"test_selection":"selected-data"/);
+    assert.equal(fs.readdirSync(f.root).filter(n=>n.startsWith('tests-reached-')).length,14);
+    assert(fs.existsSync(path.join(f.root,'.cache/selected-delivery-smoke.json')));
+    assert(fs.existsSync(path.join(f.root,'selected-checkout-fixture-reached.json')));
+  }
+});
+for(const missing of ['dist/client/atlas-geography.json','.cache/native-normal-built-output.json','scripts/selected-delivery-smoke.mjs','coordination/engineering/fixture/selected-delivery-expectations.json'])
+ test('real selected-data entry refuses missing actual '+missing+' before tests',t=>{
+  const f=fixture(t,{full:true,selected:true,helperBody:restored});fs.unlinkSync(path.join(f.root,missing));const r=f.run();
+  assert.notEqual(r.status,0);assert(!fs.readdirSync(f.root).some(n=>n.startsWith('tests-reached-')));
+});
+test('real selected-data entry propagates generic smoke failure and refuses narrowed TAP skips',t=>{
+  for(const options of [{smokeBody:"export async function runSelectedDeliverySmoke(){throw Error('actual smoke refused');}"},{skip:true}]){
+    const f=fixture(t,{full:true,selected:true,helperBody:restored,...options}),r=f.run();assert.notEqual(r.status,0);
+    assert.match(r.stderr,options.skip?/zero skipped tests/:/actual smoke refused/);
+  }
 });

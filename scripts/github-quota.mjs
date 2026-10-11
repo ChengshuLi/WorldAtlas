@@ -43,7 +43,7 @@ export function requestAccounting(phase) {
     ...(first?{observed_repository_core:{first,last,lowest_remaining:lowest}}:{})};}};
 }
 export function copyAPIFeatures(target, source) {
-  for (const name of ['readRepositoryCapacity', 'prefetchGitBlobs', 'setHTTPAdmission', 'hasGitBlobs', 'artifactRedirect', 'recovery'])
+  for (const name of ['readRepositoryCapacity', 'prefetchGitBlobs', 'setHTTPAdmission', 'hasGitBlobs', 'artifactRedirect', 'jobLogRedirect', 'recovery'])
     if (typeof source[name] === 'function') target[name] = source[name].bind(source);
   return target;
 }

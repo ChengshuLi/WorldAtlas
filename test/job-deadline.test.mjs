@@ -3,9 +3,10 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import {spawnSync, execFileSync} from 'node:child_process';
+import {runMergeWake} from '../scripts/run-merge-wake.mjs';
 import {runScheduler, executingWorkflow} from '../scripts/run-merge-scheduler.mjs';
 import {githubAPI} from '../scripts/issue-claim-contract.mjs';
-import {queueBody} from '../scripts/merge-scheduler.mjs';
+import {queueBody, executionTitle} from '../scripts/merge-scheduler.mjs';
 import {schedulerJobMinutes, HTTP_ATTEMPT_MS, JOB_FINALIZATION_MS} from '../scripts/job-deadline.mjs';
 
 const workflow = fs.readFileSync(new URL('../.github/workflows/merge-scheduler.yml', import.meta.url), 'utf8');
@@ -20,9 +21,14 @@ const response = (status, payload, headers = {}) => new Response(JSON.stringify(
 async function execute({phase = 'register', elapsed = 0, rejection = [], requestMs = 0, bodyMs = 0,
   metadataMs = 0, editJobs = value => value, replay = false, ambiguousWrite = false,
   oversleepMs = 0, bootstrapReject = false, afterReadMs = 0, clockRollback = false, dispatchAfterQuota = false,
-  queue = null, terminalWriteMs = 0, terminalWriteFailure = null, afterTerminalQuota = false} = {}) {
-  let time = elapsed, wallOffset = 0, reads = 0, inventories = 0;
+  queue = null, terminalWriteMs = 0, terminalWriteFailure = null, afterTerminalQuota = false,
+  input = event.inputs, wakeRows = [], liveRuns = [], notifyFirst = false, capacity, recoveryFloor} = {}) {
+  let time = elapsed, wallOffset = 0, reads = 0, inventories = 0, wakeReads = 0;
   const calls = [], waits = [], posted = [];
+  const reply = (status, payload, headers = {}) => response(status, payload, {
+    ...(capacity !== undefined || notifyFirst ? {'x-ratelimit-limit': '1000',
+      'x-ratelimit-remaining': String(Math.max(0, (capacity ?? 1000) - calls.length)),
+      'x-ratelimit-reset': String((epoch + 600_000) / 1000), 'x-ratelimit-resource': 'core'} : {}), ...headers});
   const original = globalThis.fetch;
   globalThis.fetch = async (url, options) => {
     const route = new URL(url).pathname, method = options.method;
@@ -31,34 +37,41 @@ async function execute({phase = 'register', elapsed = 0, rejection = [], request
     calls.push({route, method, at: time});
     if (route.endsWith('/attempts/1/jobs')) {
       time += metadataMs;
-      if (bootstrapReject) return response(403, {message: 'secondary limit'}, {'retry-after': '180'});
-      return response(200, editJobs({total_count: 1, jobs: [{id: 20, name: phase, run_id: 10,
+      if (bootstrapReject) return reply(403, {message: 'secondary limit'}, {'retry-after': '180'});
+      return reply(200, editJobs({total_count: 1, jobs: [{id: 20, name: phase, run_id: 10,
         run_attempt: 1, status: 'in_progress', started_at: new Date(epoch).toISOString()}]}));
     }
-    if (phase === 'schedule' && route === '/repos/a/b') return response(200, {}, {
-      'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': dispatchAfterQuota || queue ? '1000' : '0',
+    if (phase === 'schedule' && route === '/repos/a/b') return reply(200, {}, {
+      'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': capacity !== undefined ? String(Math.max(0, capacity - calls.length)) : dispatchAfterQuota || queue ? '1000' : '0',
       'x-ratelimit-reset': String((epoch + 600_000) / 1000), 'x-ratelimit-resource': 'core'});
-    if ((dispatchAfterQuota || queue) && route.endsWith('/actions/workflows/worker-merge.yml/runs')) return response(200, {workflow_runs: []});
-    if (queue && route === '/repos/a/b/pulls') return response(200, queue.map(row => ({
+    if (route === '/repos/a/b/actions/runs/77') return reply(200, {id: 77,
+      repository: {full_name: 'a/b'}, path: '.github/workflows/worker-merge.yml',
+      event: 'workflow_dispatch', head_branch: 'main', status: 'completed',
+      ...wakeRows[Math.min(wakeReads++, wakeRows.length - 1)]});
+    if ((dispatchAfterQuota || queue) && route.endsWith('/actions/workflows/worker-merge.yml/runs')) {
+      const status = new URL(url).searchParams.get('status');
+      return reply(200, {workflow_runs: status ? liveRuns.filter(run => run.status === status) : liveRuns});
+    }
+    if (queue && route === '/repos/a/b/pulls') return reply(200, queue.map(row => ({
       number: row.request.pr_number, state: 'open', head: {sha: row.head ?? row.request.expected_head}})));
     if (dispatchAfterQuota && route === '/repos/a/b/pulls') {
-      if (++inventories === 1) return response(403, {}, {'retry-after': '5'});
-      return response(200, [{number: 2, state: 'open', head: {sha: request.expected_head}}]);
+      if (++inventories === 1) return reply(403, {}, {'retry-after': '5'});
+      return reply(200, [{number: 2, state: 'open', head: {sha: request.expected_head}}]);
     }
     if (method === 'POST') {
       posted.push(JSON.parse(options.body));
       if (posted.at(-1).body?.startsWith('**Merge result:**')) {
         time += terminalWriteMs;
         if (terminalWriteFailure === 'ambiguous') throw Error('uncertain terminal write');
-        if (terminalWriteFailure === 'quota') return response(403, {}, {'retry-after': '5'});
-      } else if (afterTerminalQuota && posted.length > 1) return response(403, {}, {'retry-after': '5'});
+        if (terminalWriteFailure === 'quota') return reply(403, {}, {'retry-after': '5'});
+      } else if (afterTerminalQuota && posted.length > 1) return reply(403, {}, {'retry-after': '5'});
       if (ambiguousWrite) throw Error('uncertain transport');
-      return response(201, {id: 30, body: posted.at(-1).body});
+      return reply(201, {id: 30, body: posted.at(-1).body});
     }
     if (queue && /\/issues\/\d+\/comments$/.test(route)) {
       const row = queue.find(row => route.endsWith(`/issues/${row.request.pr_number}/comments`));
       assert.ok(row);
-      return response(200, [{id: row.request.pr_number, user: {login: 'github-actions[bot]'},
+      return reply(200, [{id: row.request.pr_number, user: {login: 'github-actions[bot]'},
         body: queueBody({...row.request, kind: 'request'})}, ...(row.dispatch ? [{
         id: 100 + row.request.pr_number, user: {login: 'github-actions[bot]'},
         body: queueBody({...row.request, kind: 'dispatch', ...row.dispatch})}] : [])]);
@@ -67,25 +80,35 @@ async function execute({phase = 'register', elapsed = 0, rejection = [], request
       time += requestMs;
       if (clockRollback) wallOffset = -60_000;
       const rejected = rejection[reads++];
-      if (rejected) return response(rejected.status ?? 403, {message: rejected.message ?? 'rate limit exceeded'}, rejected.headers);
-      const r = response(200, {number: 2, state: 'open', head: {sha: request.expected_head}});
+      if (rejected) return reply(rejected.status ?? 403, {message: rejected.message ?? 'rate limit exceeded'}, rejected.headers);
+      const r = reply(200, {number: 2, state: 'open', head: {sha: request.expected_head}});
       if (bodyMs) {const json = r.json.bind(r);r.json = async () => {time += bodyMs;return json();};}
       return r;
     }
     if (route.endsWith('/issues/2/comments')) {
       time += afterReadMs;
-      return response(200, replay || dispatchAfterQuota ? [{id: 1, user: {login: 'github-actions[bot]'}, body: queueBody({...request, kind: 'request'})}] : []);
+      return reply(200, replay || dispatchAfterQuota ? [{id: 1, user: {login: 'github-actions[bot]'}, body: queueBody({...request, kind: 'request'})}] : []);
     }
     throw Error('Unexpected HTTP route: ' + route);
   };
   try {
-    const result = await runScheduler({event, workflow, readGit,
+    let notification;
+    if (notifyFirst) {
+      notification = await runMergeWake({env: {GH_TOKEN: 'synthetic-test-token', GITHUB_REPOSITORY: 'a/b',
+        GITHUB_REF: 'refs/heads/main', GITHUB_EVENT_NAME: 'workflow_dispatch', GITHUB_JOB: 'wake',
+        GITHUB_WORKFLOW_REF: 'a/b/.github/workflows/worker-merge.yml@refs/heads/main',
+        GITHUB_WORKFLOW_SHA: workflowSha, GITHUB_RUN_ID: '77'}, readHead: () => workflowSha,
+        wallNow: () => epoch + time, monotonicNow: () => time});
+      assert.equal(notification.failed, false);input = posted[0].inputs;
+    }
+    const result = await runScheduler({event: {inputs: input}, workflow, readGit,
+      apiFactory: (token, options) => githubAPI(token, {...options, ...(recoveryFloor === undefined ? {} : {minimumRemaining: recoveryFloor})}),
       env: {GH_TOKEN: 'synthetic-test-token', GITHUB_REF: 'refs/heads/main', GITHUB_REPOSITORY: 'a/b',
         GITHUB_WORKFLOW_SHA: workflowSha, GITHUB_WORKFLOW_REF: workflowRef,
-        GITHUB_RUN_ID: '10', GITHUB_RUN_ATTEMPT: '1', GITHUB_JOB: phase, QUEUE_PHASE: phase},
+        GITHUB_RUN_ID: '10', GITHUB_RUN_ATTEMPT: '1', GITHUB_JOB: phase, QUEUE_PHASE: phase, GITHUB_EVENT_NAME: 'workflow_dispatch'},
       wallNow: () => epoch + time + wallOffset, monotonicNow: () => time,
       sleep: async ms => {waits.push(ms);time += ms + oversleepMs;}});
-    return {result, calls, waits, posted, time};
+    return {result, notification, calls, waits, posted, time};
   } finally {globalThis.fetch = original;}
 }
 
@@ -307,4 +330,100 @@ test('one shared actual job deadline and quota budget still govern writes after 
   assert.equal(quota.posted.length, 2);assert.match(quota.posted[0].body, /Head changed/);
   assert.equal(quota.calls.filter(row => row.route.endsWith('/dispatches')).length, 0);
   assert.equal(quota.result.request_accounting.actual_http_attempts, 12);assert.deepEqual(quota.waits, []);
+});
+
+
+test('actual completion notifier reaches scheduler, waits for its still-live run and advances the original FIFO ticket', async () => {
+  const x = await execute({phase: 'schedule', queue: terminalQueue(), notifyFirst: true,
+    wakeRows: [{status: 'in_progress'}, {status: 'completed'}]});
+  assert.equal(x.result.failed, false);assert.equal(x.result.result.request_id, request.request_id);
+  assert.equal(x.result.result.status, 'dispatched');assert.deepEqual(x.waits, [5000]);
+  assert.deepEqual(x.posted[0], {ref: 'main', inputs: {wake_run_id: '77'}});
+  assert.match(x.posted[1].body, /Head changed/);assert.match(x.posted[2].body, /"kind":"dispatch"/);
+  assert.equal(x.posted[3].inputs.request_id, request.request_id);assert.equal(x.posted.length, 4);
+  assert.equal(x.notification.request_accounting.actual_http_attempts, 2);
+  assert.equal(x.result.request_accounting.actual_http_attempts, 15);
+  assert.equal(x.calls.find(row => row.route === '/repos/a/b/pulls').at, 5000);
+});
+test('completed wake hints never bypass another live worker or create idle requests', async () => {
+  for (const status of ['queued', 'in_progress', 'waiting', 'pending', 'requested']) {
+    const x = await execute({phase: 'schedule', queue: terminalQueue(), input: {wake_run_id: '77'},
+      liveRuns: [{id: 88, status}]});
+    assert.equal(x.result.failed, false);assert.equal(x.result.result.status, 'live');
+    assert.deepEqual(x.result.result.run_ids, [88]);assert.equal(x.posted.length, 0);
+  }
+  const empty = await execute({phase: 'schedule', queue: [], input: {wake_run_id: '77'}});
+  assert.equal(empty.result.result.status, 'empty');assert.equal(empty.posted.length, 0);assert.deepEqual(empty.waits, []);
+});
+test('duplicate wake after dispatch respects actual live inventory and never repeats registration or dispatch', async () => {
+  const first = await execute({phase: 'schedule', queue: [{request}], input: {wake_run_id: '77'}});
+  assert.equal(first.result.result.status, 'dispatched');assert.equal(first.posted.length, 2);
+  const duplicate = await execute({phase: 'schedule', queue: [{request}], input: {wake_run_id: '77'},
+    liveRuns: [{id: 88, status: 'queued'}]});
+  assert.equal(duplicate.result.result.status, 'live');assert.equal(duplicate.posted.length, 0);
+});
+test('success, failure and cancellation wake terminal runs through identical normal admission', async () => {
+  for (const conclusion of ['success', 'failure', 'cancelled']) {
+    const x = await execute({phase: 'schedule', queue: [{request}], input: {wake_run_id: '77'},
+      wakeRows: [{status: 'completed', conclusion}]});
+    assert.equal(x.result.result.status, 'dispatched');assert.equal(x.result.result.request_id, request.request_id);
+    assert.equal(x.posted.length, 2);
+  }
+});
+test('invalid or unrelated wake hints and mixed registration inputs refuse before any queue write', async () => {
+  for (const wake_run_id of ['0', '-1', '9007199254740992', 77, null, '77/other']) {
+    const x = await execute({phase: 'schedule', queue: [{request}], input: {wake_run_id}});
+    assert.equal(x.result.failed, true);assert.equal(x.calls.length, 0);assert.equal(x.posted.length, 0);
+  }
+  for (const input of [{wake_run_id: '77', ...request}, {}]) {
+    const x = await execute({phase: 'register', input});assert.equal(x.result.failed, true);assert.equal(x.calls.length, 0);
+  }
+  for (const row of [{id: 78}, {repository: {full_name: 'other/repo'}}, {path: '.github/workflows/other.yml'},
+    {event: 'pull_request'}, {head_branch: 'candidate'}, {status: 'unknown'}]) {
+    const x = await execute({phase: 'schedule', queue: [{request}], input: {wake_run_id: '77'}, wakeRows: [row]});
+    assert.equal(x.result.failed, true);assert.match(x.result.result.reason, /trusted-main worker run/);
+    assert.equal(x.posted.length, 0);assert.equal(x.calls.length, 2);
+  }
+});
+test('still-live wake observation spends only the existing job deadline and cannot advance on timeout or oversleep', async () => {
+  for (const oversleepMs of [0, 30_000]) {
+    const x = await execute({phase: 'schedule', queue: [{request}], input: {wake_run_id: '77'},
+      wakeRows: [{status: 'in_progress'}], elapsed: 540_000, oversleepMs});
+    assert.equal(x.result.failed, true);assert.equal(x.result.result.job_deadline_exhausted, true);
+    assert.equal(x.result.result.wake_run_id, 77);assert.equal(x.posted.length, 0);
+    assert.deepEqual(x.waits, [5000]);assert.ok(x.calls.length <= 3);
+    assert.equal(x.calls.filter(row => row.route === '/repos/a/b/pulls').length, 0);
+  }
+});
+test('real HTTP recovery-floor refusal retains retry time and admission diagnostics after terminal draining', async () => {
+  const queue = terminalQueue();queue[1].head = 'd'.repeat(40);
+  queue.push({request: {...request, pr_number: 3, request_id: 'deadline-third-request'}});
+  const x = await execute({phase: 'schedule', queue, capacity: 28, recoveryFloor: 16});
+  assert.equal(x.result.failed, true);assert.equal(x.result.result.retryable, true);
+  assert.equal(x.result.result.quota_admission.remaining, 16);
+  assert.equal(x.result.result.quota_admission.minimum_remaining, 16);
+  assert.equal(x.result.result.retry_at, new Date(epoch + 601_000).toISOString());
+  assert.equal(x.result.result.api_error, undefined);assert.equal(x.posted.length, 1);
+  assert.match(x.posted[0].body, /Head changed/);assert.equal(x.result.request_accounting.actual_http_attempts, 12);
+  assert.equal(x.calls.filter(row => row.route.endsWith('/dispatches')).length, 0);
+});
+
+test('a request arriving while the notifier is still live is discovered after terminal observation', async () => {
+  const queue = [];
+  const x = await execute({phase: 'schedule', queue, input: {wake_run_id: '77'},
+    wakeRows: [{status: 'in_progress'}, {get status() {queue.push({request});return 'completed';}}]});
+  assert.equal(x.result.result.status, 'dispatched');assert.equal(x.result.result.request_id, request.request_id);
+  assert.deepEqual(x.waits, [5000]);assert.equal(x.posted.length, 2);
+});
+test('a failed or cancelled worker without final receipt wakes only ordinary bounded retry of its same FIFO ticket', async () => {
+  for (const conclusion of ['failure', 'cancelled']) {
+    const x = await execute({phase: 'schedule', input: {wake_run_id: '77'},
+      queue: [{request, dispatch: {attempt: 1, dispatched_at: new Date(epoch).toISOString()}}],
+      wakeRows: [{status: 'completed', conclusion}],
+      liveRuns: [{id: 77, status: 'completed', conclusion, display_title: executionTitle(request, 1)}]});
+    assert.equal(x.result.result.status, 'dispatched');assert.equal(x.result.result.attempt, 2);
+    assert.equal(x.result.result.request_id, request.request_id);assert.equal(x.posted.length, 3);
+    assert.match(x.posted[0].body, /"observed_run_id":77/);
+    assert.equal(x.posted[2].inputs.queue_attempt, '2');
+  }
 });

@@ -25,6 +25,8 @@ jobs:
     outputs:
       profile: ${{ steps.select.outputs.profile }}
       shards: ${{ steps.select.outputs.shards }}
+      test_selection: ${{ steps.select.outputs.test_selection }}
+      expectations_path: ${{ steps.select.outputs.expectations_path }}
       owned_paths: ${{ steps.select.outputs.owned_paths }}
       pr_body: ${{ steps.select.outputs.pr_body }}
       full: ${{ steps.select.outputs.full }}
@@ -297,7 +299,7 @@ jobs:
           retention-days: 30
   regression:
     needs: profile
-    if: github.event.action != 'edited' && github.event.action != 'ready_for_review'
+    if: github.event.action != 'edited' && github.event.action != 'ready_for_review' && needs.profile.outputs.test_selection != 'selected-data'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     strategy:
@@ -419,11 +421,14 @@ jobs:
         with:
           python-version: '3.12'
           cache: pip
-      - run: npm ci --no-audit --no-fund
+      - name: Install package Node dependencies
+        run: npm ci --no-audit --no-fund
         if: needs.profile.outputs.full != 'false'
-      - run: python -m pip install -r requirements.txt
+      - name: Install package Python dependencies
+        run: python -m pip install -r requirements.txt
         if: needs.profile.outputs.full != 'false'
-      - run: node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs test/package-inputs.test.mjs test/package-build.test.mjs
+      - name: Verify package controls
+        run: node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs test/package-inputs.test.mjs test/package-build.test.mjs
         if: needs.profile.outputs.full != 'false'
       - name: Build and enforce archive/file reserves without publishing
         if: needs.profile.outputs.full != 'false'
@@ -451,6 +456,19 @@ jobs:
             if test "$status" -ne 3; then exit "$status"; fi
             echo 'No artifact selection: native built-output readback is inapplicable; no report claimed.'
           fi
+      - name: Install selected-data browser dependencies
+        if: needs.profile.outputs.test_selection == 'selected-data'
+        run: npx playwright install --with-deps chromium
+      - name: Run selected-data consumer checks
+        if: needs.profile.outputs.test_selection == 'selected-data'
+        env:
+          INTEGRATION_PROFILE: full
+          INTEGRATION_SHARD: '0'
+          INTEGRATION_TEST_SELECTION: selected-data
+          SELECTED_EXPECTATIONS_PATH: ${{ needs.profile.outputs.expectations_path }}
+        run: |
+          node --input-type=module -e 'import {selectedDeliverySmoke} from "./scripts/integration-profile.mjs"; console.log(JSON.stringify({selected_delivery_smoke:await selectedDeliverySmoke(process.env.SELECTED_EXPECTATIONS_PATH)}));'
+          node scripts/run-integration-tests.mjs
       - name: Record package rebuild inapplicability
         if: needs.profile.outputs.full == 'false'
         run: echo 'No declared package input or verification path changed; package unit tests and compilation are inapplicable. No current package size measurement is claimed.' >> "$GITHUB_STEP_SUMMARY"
@@ -461,6 +479,7 @@ jobs:
           name: package-input-build
           path: |
             .cache/package-input-build.json
+            .cache/selected-delivery-smoke.json
             .cache/native-normal-built-output.json
           include-hidden-files: true
           if-no-files-found: ignore

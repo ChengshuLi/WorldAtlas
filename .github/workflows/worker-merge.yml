@@ -45,8 +45,11 @@ jobs:
       base: ${{ steps.prepare.outputs.base }}
       profile: ${{ steps.prepare.outputs.profile }}
       shards: ${{ steps.prepare.outputs.shards }}
+      test_selection: ${{ steps.prepare.outputs.test_selection }}
+      expectations_path: ${{ steps.prepare.outputs.expectations_path }}
       proof_attempt: ${{ steps.prepare.outputs.proof_attempt }}
       proof_run: ${{ steps.prepare.outputs.proof_run }}
+      geography_proof: ${{ steps.prepare.outputs.geography_proof }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
@@ -75,7 +78,7 @@ jobs:
           retention-days: 30
   geography:
     needs: prepare
-    if: needs.prepare.outputs.candidate != ''
+    if: needs.prepare.outputs.candidate != '' && needs.prepare.outputs.geography_proof == ''
     runs-on: ubuntu-latest
     timeout-minutes: 25
     permissions:
@@ -176,10 +179,15 @@ jobs:
         env:
           INTEGRATION_PROFILE: ${{ needs.prepare.outputs.profile }}
           INTEGRATION_SHARD: ${{ matrix.shard }}
+          INTEGRATION_TEST_SELECTION: ${{ needs.prepare.outputs.test_selection }}
+          SELECTED_EXPECTATIONS_PATH: ${{ needs.prepare.outputs.expectations_path }}
         run: |
-          if node --input-type=module -e "import {integrationNeedsBrowser} from './scripts/run-integration-tests.mjs'; process.exit(integrationNeedsBrowser(process.env.INTEGRATION_PROFILE, Number(process.env.INTEGRATION_SHARD)) ? 0 : 1)"; then
+          if node --input-type=module -e "import {integrationNeedsBrowser} from './scripts/run-integration-tests.mjs'; process.exit(integrationNeedsBrowser(process.env.INTEGRATION_PROFILE, Number(process.env.INTEGRATION_SHARD), process.env.INTEGRATION_TEST_SELECTION || 'complete') ? 0 : 1)"; then
             npx playwright install --with-deps chromium
           fi
+      - name: Verify selected-data package controls
+        if: needs.prepare.outputs.test_selection == 'selected-data'
+        run: node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs test/package-inputs.test.mjs test/package-build.test.mjs
       - name: Build the combined application once before asset-dependent tests
         if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0
         run: npm run build:cloudflare
@@ -210,13 +218,21 @@ jobs:
         env:
           INTEGRATION_PROFILE: ${{ needs.prepare.outputs.profile }}
           INTEGRATION_SHARD: ${{ matrix.shard }}
-        run: node scripts/run-integration-tests.mjs
+          INTEGRATION_TEST_SELECTION: ${{ needs.prepare.outputs.test_selection }}
+          SELECTED_EXPECTATIONS_PATH: ${{ needs.prepare.outputs.expectations_path }}
+        run: |
+          if test "$INTEGRATION_TEST_SELECTION" = selected-data; then
+            node --input-type=module -e 'import {selectedDeliverySmoke} from "./scripts/integration-profile.mjs"; console.log(JSON.stringify({selected_delivery_smoke:await selectedDeliverySmoke(process.env.SELECTED_EXPECTATIONS_PATH)}));'
+          fi
+          node scripts/run-integration-tests.mjs
       - name: Retain native built-output readback
         if: always() && needs.prepare.outputs.profile == 'full' && matrix.shard == 0
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: native-built-output-${{ inputs.request_id }}
-          path: .cache/native-normal-built-output.json
+          path: |
+            .cache/native-normal-built-output.json
+            .cache/selected-delivery-smoke.json
           include-hidden-files: true
           if-no-files-found: ignore
   merge:
@@ -257,6 +273,7 @@ jobs:
           PROOF_RUN_ID: ${{ needs.prepare.outputs.proof_run }}
           INTEGRATION_RESULT: ${{ needs.integration.result }}
           GEOGRAPHY_RESULT: ${{ needs.geography.result }}
+          GEOGRAPHY_PROOF: ${{ needs.prepare.outputs.geography_proof }}
           GEOGRAPHY_REPORT_SHA256: ${{ needs.geography.outputs.report_sha256 }}
           GEOGRAPHY_ARTIFACT_NAME: ${{ needs.geography.outputs.artifact_name }}
         run: node scripts/run-worker-merge.mjs
@@ -266,3 +283,29 @@ jobs:
           name: merge-${{ inputs.request_id }}
           path: merge-result.json
           retention-days: 30
+
+  wake:
+    needs: [prepare, integration, geography, merge]
+    if: always() && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    permissions:
+      contents: read
+      actions: write
+    steps:
+      # This separate trusted job never checks out or executes candidate code.
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ github.workflow_sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            scripts
+            src
+            .github
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - name: Wake existing FIFO after this worker settles
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/run-merge-wake.mjs

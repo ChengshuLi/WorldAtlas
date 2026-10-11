@@ -270,6 +270,10 @@ export function githubAPI(token, {fetchImpl = fetch, onRequest = () => {}, readW
   if(!/^\/repos\/[\w.-]+\/[\w.-]+\/actions\/artifacts\/[1-9]\d*\/zip$/.test(route??''))throw Error('Invalid artifact redirect route');
   return request(route,'GET',undefined,()=>{},false,true);
  };
+ api.jobLogRedirect=route=>{
+  if(!/^\/repos\/[\w.-]+\/[\w.-]+\/actions\/jobs\/[1-9]\d*\/logs$/.test(route??''))throw Error('Invalid job log redirect route');
+  return request(route,'GET',undefined,()=>{},false,true);
+ };
  // The protected floor is usable only for bounded owned-candidate cleanup
  // and durable merge-result notification, not additional implementation reads.
  // Callers must prove exact ref ownership/SHA before deleting (cleanupCandidate).

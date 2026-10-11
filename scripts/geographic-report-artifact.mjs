@@ -5,10 +5,53 @@ import {githubAPI} from './issue-claim-contract.mjs';
 
 const MAX_REPORT = 32 * 1024 * 1024;
 const MAX_ARCHIVE = 40 * 1024 * 1024;
+const MAX_LOG = 2 * 1024 * 1024;
 const need = (ok, message) => { if (!ok) throw Error(message); };
 export const reportHash = raw => createHash('sha256').update(raw).digest('hex');
+const positive = n => Number.isSafeInteger(n) && n > 0;
+const hash = value => /^[a-f0-9]{64}$/.test(value ?? '');
+const commit = value => /^[a-f0-9]{40}$/.test(value ?? '');
 
-export function readReportArchive(raw, expectedHash) {
+// These are trusted prepare outputs, not a caller-selected replacement report.
+// Final validation still rechecks the original run/attempt/job, whole tree and
+// artifact. Keep the original report candidate instead of relabeling its JSON.
+export function validateGeographyProof(value) {
+  const keys = ['run_id','run_attempt','job_id','tree','head','baseline','artifact_id',
+    'artifact_name','artifact_digest','artifact_bytes','report_sha256','report_bytes'];
+  need(value && typeof value === 'object' && !Array.isArray(value) &&
+    Object.keys(value).sort().join() === [...keys].sort().join() &&
+    ['run_id','run_attempt','job_id','artifact_id','artifact_bytes','report_bytes'].every(key => positive(value[key])) &&
+    ['tree','head','baseline'].every(key => commit(value[key])) &&
+    hash(value.report_sha256) && hash(value.artifact_digest) && value.report_bytes <= MAX_REPORT &&
+    value.artifact_bytes <= MAX_ARCHIVE && /^proposed-geography-[1-9]\d*-[1-9]\d*$/.test(value.artifact_name),
+    'Invalid original geographic proof identity');
+  return value;
+}
+
+export function readGeographyJobReceipt(raw, artifactName) {
+  need(Buffer.isBuffer(raw) && raw.length > 0 && raw.length <= MAX_LOG &&
+    /^proposed-geography-[1-9]\d*-[1-9]\d*$/.test(artifactName ?? ''), 'Invalid bounded geography job log');
+  const lines = raw.toString('utf8').split(/\r?\n/).map(line => line.replace(/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d+Z /, ''));
+  const receipts = [];
+  for (const line of lines) {
+    if (!line.startsWith('{')) continue;
+    let value; try { value = JSON.parse(line); } catch { continue; }
+    if (Object.hasOwn(value, 'report_sha256') || Object.hasOwn(value, 'report_bytes')) receipts.push(value);
+  }
+  const uploads = lines.map(line => new RegExp(`^Artifact ${artifactName} has been successfully uploaded! Final size is ([1-9]\\d*) bytes\\. Artifact ID is ([1-9]\\d*)$`).exec(line)).filter(Boolean);
+  const digests = lines.map(line => /^SHA256 digest of uploaded artifact zip is ([a-f0-9]{64})$/.exec(line)).filter(Boolean);
+  need(receipts.length === 1 && uploads.length === 1 && digests.length === 1 &&
+    hash(receipts[0].report_sha256) && positive(receipts[0].report_bytes) && receipts[0].report_bytes <= MAX_REPORT,
+    'Missing, ambiguous or malformed original geographic job receipt');
+  const result = {artifact_name: artifactName, artifact_id: Number(uploads[0][2]),
+    artifact_bytes: Number(uploads[0][1]), artifact_digest: digests[0][1],
+    report_sha256: receipts[0].report_sha256, report_bytes: receipts[0].report_bytes};
+  need(positive(result.artifact_id) && positive(result.artifact_bytes) && result.artifact_bytes <= MAX_ARCHIVE,
+    'Invalid original geographic artifact receipt');
+  return result;
+}
+
+export function readReportArchive(raw, expectedHash, expectedBytes) {
   need(Buffer.isBuffer(raw) && raw.length >= 22 && raw.length <= MAX_ARCHIVE &&
     /^[a-f0-9]{64}$/.test(expectedHash ?? ''), 'Invalid report archive or trusted report digest');
   // EOCD must terminate the archive. ZIP64, multiple entries/disks and comments
@@ -51,28 +94,62 @@ export function readReportArchive(raw, expectedHash) {
   }
   const compressed = raw.subarray(start, start + packed);
   const report = method === 0 ? compressed : inflateRawSync(compressed, {maxOutputLength: MAX_REPORT});
-  need(report.length === size && crc32(report) === crc && reportHash(report) === expectedHash,
+  need(report.length === size && (expectedBytes === undefined || report.length === expectedBytes) &&
+    crc32(report) === crc && reportHash(report) === expectedHash,
     'Report archive bytes differ from trusted geography job digest');
   return JSON.parse(report.toString('utf8'));
 }
 
-async function boundedBody(response) {
+async function boundedBody(response, maximum = MAX_ARCHIVE) {
   need(response.ok && response.body, 'Geographic report download failed');
   const declared = response.headers.get('content-length');
-  need(declared === null || (/^\d+$/.test(declared) && Number(declared) <= MAX_ARCHIVE),
+  need(declared === null || (/^\d+$/.test(declared) && Number(declared) <= maximum),
     'Geographic report download exceeds archive budget');
   const chunks = []; let size = 0;
   for await (const chunk of response.body) {
     size += chunk.length;
-    if (size > MAX_ARCHIVE) { await response.body.cancel().catch(() => {}); throw Error('Geographic report download exceeds archive budget'); }
+    if (size > maximum) { throw Error('Geographic report download exceeds archive budget'); }
     chunks.push(Buffer.from(chunk));
   }
   return Buffer.concat(chunks, size);
 }
 
-export async function loadGeographicReport({api, repo, runId, artifactName, expectedHash, token, fetchImpl = fetch, onRequest = () => {}}) {
+async function downloadRedirect(response, fetchImpl, maximum = MAX_ARCHIVE) {
+  need(response.status === 302, 'Geographic artifact API did not return a download');
+  let destination;
+  try { destination = new URL(response.headers.get('location')); } catch { throw Error('Invalid geographic artifact delivery address'); }
+  need(destination.protocol === 'https:' && !destination.username && !destination.password &&
+    destination.hostname.endsWith('.blob.core.windows.net'), 'Unsupported geographic artifact delivery host');
+  try {
+    const delivery = await fetchImpl(destination.href, {redirect: 'error', signal: AbortSignal.timeout(30000)});
+    return await boundedBody(delivery, maximum);
+  } catch { throw Error('Geographic report delivery failed or exceeded bounded archive budget'); }
+}
+
+export async function prepareGeographyProof({api, repo, number, head, baseline, proof, token, fetchImpl = fetch}) {
+  if (!proof?.geography_job_id) return null;
+  need(/^[-\w.]+\/[-\w.]+$/.test(repo ?? '') && positive(number) && positive(proof.geography_job_id) &&
+    positive(proof.run_id) && positive(proof.run_attempt) && commit(proof.tree) && commit(head) && commit(baseline),
+    'Invalid original geography proof source');
+  const client = typeof api.jobLogRedirect === 'function' ? api : githubAPI(token, {fetchImpl});
+  const response = await client.jobLogRedirect(`/repos/${repo}/actions/jobs/${proof.geography_job_id}/logs`);
+  const receipt = readGeographyJobReceipt(await downloadRedirect(response, fetchImpl, MAX_LOG),
+    `proposed-geography-${number}-${proof.run_attempt}`);
+  const source = validateGeographyProof({run_id: proof.run_id, run_attempt: proof.run_attempt,
+    job_id: proof.geography_job_id, tree: proof.tree, head, baseline, ...receipt});
+  const report = await loadGeographicReport({api, repo, runId: source.run_id, artifactName: source.artifact_name,
+    expectedHash: source.report_sha256, source, token, fetchImpl});
+  return {source, report};
+}
+
+export async function loadGeographicReport({api, repo, runId, artifactName, expectedHash, source, token, fetchImpl = fetch, onRequest = () => {}}) {
+  if (source) {
+    validateGeographyProof(source);
+    need(Number(runId) === source.run_id && artifactName === source.artifact_name && expectedHash === source.report_sha256,
+      'Original geographic artifact outputs changed');
+  }
   need(/^[-\w.]+\/[-\w.]+$/.test(repo ?? '') && /^[1-9]\d*$/.test(String(runId)) &&
-    /^geography-[-a-zA-Z0-9]{16,100}-[1-9]\d*$/.test(artifactName ?? '') &&
+    (source || /^geography-[-a-zA-Z0-9]{16,100}-[1-9]\d*$/.test(artifactName ?? '')) &&
     /^[a-f0-9]{64}$/.test(expectedHash ?? '') && token, 'Missing trusted geographic artifact outputs');
   const matches = []; let total = 0;
   for (let page = 1; page <= 100; page++) {
@@ -88,19 +165,15 @@ export async function loadGeographicReport({api, repo, runId, artifactName, expe
   need(matches.length === 1 && !matches[0].expired && Number.isSafeInteger(matches[0].id) &&
     matches[0].id > 0 && matches[0].size_in_bytes > 0 && matches[0].size_in_bytes <= MAX_ARCHIVE,
     'Missing, duplicate, expired or oversized geographic artifact');
+  if (source) need(matches[0].id === source.artifact_id && matches[0].size_in_bytes === source.artifact_bytes &&
+    matches[0].digest === `sha256:${source.artifact_digest}` && matches[0].workflow_run?.id === source.run_id &&
+    matches[0].workflow_run?.head_sha === source.head, 'Original geographic artifact identity changed');
   // The initial fixed API host receives the token. Redirect delivery receives
   // no credentials, and its signed URL is never included in errors or logs.
   const client = typeof api.artifactRedirect === 'function' ? api : githubAPI(token, {fetchImpl, onRequest});
   const response = await client.artifactRedirect(`/repos/${repo}/actions/artifacts/${matches[0].id}/zip`);
-  need(response.status === 302, 'Geographic artifact API did not return a download');
-  let destination;
-  try { destination = new URL(response.headers.get('location')); } catch { throw Error('Invalid geographic artifact delivery address'); }
-  need(destination.protocol === 'https:' && !destination.username && !destination.password &&
-    destination.hostname.endsWith('.blob.core.windows.net'), 'Unsupported geographic artifact delivery host');
-  let bytes;
-  try {
-    const delivery = await fetchImpl(destination.href, {redirect: 'error', signal: AbortSignal.timeout(30000)});
-    bytes = await boundedBody(delivery);
-  } catch { throw Error('Geographic report delivery failed or exceeded bounded archive budget'); }
-  return readReportArchive(bytes, expectedHash);
+  const bytes = await downloadRedirect(response, fetchImpl);
+  if (source) need(bytes.length === source.artifact_bytes && reportHash(bytes) === source.artifact_digest,
+    'Original geographic archive differs from trusted upload receipt');
+  return readReportArchive(bytes, expectedHash, source?.report_bytes);
 }

@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "issue": 1709,
+  "lane": "engineering",
+  "worker_id": "01a12806-e666-7781-b612-e4af40560004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "663395c03fb5bc1357115e9fd9d65375f30e9983",
+    "files": [
+      {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 25043,
+        "sha256": "0e5b4065195e4ba8b358fbc1a396863e787187fd1a0fc054d5b99a661f3b4764",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/worker-merge.yml",
+        "bytes": 12030,
+        "sha256": "ea62234fa64ce05c5c6b1367279ab95bb885e9a8dcc41d38f4de212833c3a10b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-merge-scheduler.mjs",
+        "bytes": 4942,
+        "sha256": "b299418995a92e1c56836571fb347c4ac25d100b04895290705f7645e2b363e6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/integration-profile.mjs",
+        "bytes": 2443,
+        "sha256": "14cd71768884d7caa315b26a1d3afe34b6edd9f5b35717f226f63fdcf2c5d746",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-integration-tests.mjs",
+        "bytes": 10701,
+        "sha256": "f0e6be2203a13e46618599e74529d67564e967e66b0df62c7d99da4d8d4e6754",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/geographic-report-artifact.mjs",
+        "bytes": 7038,
+        "sha256": "9dcb0a4496ae821004440afa6c4d4530387f9fc6a8ef2b6f99062141d79134f2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/final-capacity.mjs",
+        "bytes": 21059,
+        "sha256": "0631b927b24c9ab04a2fd025b69f4f440af22ac0c68f28dadb8bc704d666cb92",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "existing-delivery-ci-throughput",
+      "kind": "code",
+      "description": "Actual selector, full-setup runner, pinned original geography artifact, final-capacity and final merge consumer controls retain code/scientific authority while eliminating exact-tree duplicate geography, redundant selected package builds and idle queue completion waits. Fixed-role selected data eligibility retains complete emitted/readback/parity/browser obligations.",
+      "software": "Node.js 24.19.0",
+      "units": "Not applicable: bounded control-flow, identity and coverage verification"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test --test-concurrency=1 test/job-deadline.test.mjs test/merge-wake.test.mjs test/integration-profile-restoration.test.mjs test/full-regression-shards.test.mjs test/selected-data-profile.test.mjs test/integration-proof.test.mjs test/merge-integration.test.mjs test/merge-integration-entrypoint.test.mjs test/merge-integration-client.test.mjs test/final-capacity.test.mjs test/geographic-report-artifact.test.mjs test/github-quota.test.mjs test/pr-gates.test.mjs"
+  ],
+  "limits": [
+    "329 focused controls passed with zero skips, followed by 119 proof-diagnostic controls and 51 selector/runner controls. Independent review passed 88 affected controls and 15 declared sparse-checkout probes. Hosted activation then exposed both the runner import scanner and the exact certified dependency-role boundary, which the earlier synthetic setup fixtures had not established. The corrected workflow runs explicit smoke before the genuine full runner without expanding its 51-path role set. 96 focused controls pass; the actual scanner closure and critical-body hashes match the original selected certificate, both actual PR/queue shell commands are exercised, and the prior expanded closure reproduces the refusal. No new scientific or local browser output is claimed.",
+    "No actual hosted selected-mode elapsed saving or automatic next-ticket wake is claimed. The accepted generic smoke prerequisite must be present on baseline; original full setup and all actual package/readback/smoke/parity/GPU/Canvas obligations remain.",
+    "Completed UKR generic smoke and native built-output readback have existing measured evidence; local Chromium execution is unavailable, so no successful local selected-suite wall time is claimed. Hosted full-profile UI coverage is distinct from selected-mode runtime.",
+    "Issue1326 retains its actual hosted next-ticket advancement acceptance. Original job/report candidate identity is preserved on geography reuse, and current source/adjudication/ownership/review are freshly validated."
+  ]
+}
