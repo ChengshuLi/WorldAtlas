@@ -1,6 +1,9 @@
 // Genuine v2 view/source-predicate functions; no issued SOURCE result or GIS.
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
+import {gunzipSync} from 'node:zlib';
 import {retainedAdministrativeSourcePremises, registeredAdministrativeViews, originalAdministrativeTargetHash} from '../../../../scripts/additive-gap-repair.mjs';
 const scope=JSON.parse(fs.readFileSync(new URL('../vintages/phl-source-handoff-003/source-handoff.json',import.meta.url)));
 const clone=()=>structuredClone(scope);
@@ -33,4 +36,25 @@ test('missing executable case is refused',()=>{const s=clone();s.candidate_sourc
 test('duplicate executable case is refused',()=>{const s=clone();s.candidate_source_native_bindings[1]=structuredClone(s.candidate_source_native_bindings[0]);assert.throws(()=>registeredAdministrativeViews(s,entry));});
 test('missing passive member is refused',()=>{const s=clone();s.original_gap_membership.members.pop();assert.throws(()=>registeredAdministrativeViews(s,entry));});
 test('extra fabricated passive member is refused',()=>{const s=clone();s.original_gap_membership.members.push({...s.original_gap_membership.members[0],component_id:'physical-component:foreign'});assert.throws(()=>registeredAdministrativeViews(s,entry));});
+test('complete reused source metadata has original native roster coverage',()=>{
+ const base='c3293051718839b08127db7b058536a87997a0c6';
+ const sha=raw=>createHash('sha256').update(raw).digest('hex');
+ function rows(path,encodedHash,decodedHash,encodedBytes,decodedBytes){
+  const raw=execFileSync('git',['show',base+':'+path],{maxBuffer:3*1024**2});
+  assert.equal(raw.length,encodedBytes);assert.equal(sha(raw),encodedHash);
+  const body=gunzipSync(raw,{maxOutputLength:9*1024**2});
+  assert.equal(body.length,decodedBytes);assert.equal(sha(body),decodedHash);
+  const result=body.toString().trimEnd().split('\n').map(JSON.parse);
+  assert.equal(new Set(result.map(r=>r.id)).size,result.length);return result;
+ }
+ const native=rows('coordination/engineering/gshhg-native-member-custody-20261007/results/records-000.jsonl.gz','888e0fbe4ff2c466a96e9bdf089cc9a796e807de5dd4782ad58e0c3ebdb4ab50','2270f64f3ed5b693df2466006902a58467f026d7260e55e8082058349facfe1b',1888476,8388394);
+ const original=rows('research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/sources-000.jsonl.gz','aaf5e4f099ab25c6e6f96632787f1654ba6054ed378fd591b360e36274ffc264','a75923307b24ff73fe3090307b2c8d6e590a22dbb91f4d43f92a52ac0fd23705',2173285,8388327);
+ assert.equal(native.length,11801);assert.equal(original.length,10746);
+ const byId=new Map(native.map(r=>[r.id,r]));
+ for(const r of original){const n=byId.get(r.id);assert.ok(n);
+  for(const [a,b] of [['id','id'],['native_offset','offset'],['native_record_bytes','record_bytes'],['ordinal','ordinal'],['n','n'],['header_native_values','header_int32'],['record_sha256','record_sha256'],['coordinate_bytes_sha256','coordinate_bytes_sha256']])assert.deepEqual(r[a],n[b]);
+ }
+ const originalIds=new Set(original.map(r=>r.id));
+ for(const c of scope.original_physical_comparison_bindings)for(const r of c.original_queried_source_metadata)assert.ok(originalIds.has(r.original_source_record_metadata.id));
+});
 console.log('1..'+count);
