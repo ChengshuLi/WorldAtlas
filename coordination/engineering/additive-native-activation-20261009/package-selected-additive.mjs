@@ -24,7 +24,7 @@ export function readBoundPublicationAssets(reader,roster,declared) {
   const copy=new ImmutableReader(reader.repo,reader.version,{
     runtimeBytes:reader.runtimeBytes,executionBytes:reader.executionBytes,
     metadataBytes:reader.metadataBytes+2*valueBytes([...reader.inventory.values()]).length,
-    outputBytes:reader.outputBytes,gitExecutable:reader.gitExecutable});
+    outputBytes:reader.outputBytes,gitExecutable:reader.gitExecutable,allowance:reader.allowance});
   const actual=roster.map(({pin})=>{
     demand(declared(pin.path),'Undeclared additive publication body');
     let version=pin.commit;try{copy.git('cat-file','-e',version+'^{commit}');}catch{version=copy.version;}

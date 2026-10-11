@@ -7,6 +7,7 @@ import {execFileSync,spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync} from 'node:zlib';
 import {ImmutableReader,NativeAssetImage,loadSelection,inspectSelected,compareIntervals,compareRepairLedgers,readArtifactConsumption,validateReleaseCatalogue,validateArtifactSourceMetadata,loadNativeRowTable,acquireNativeRows,validateNativeRowCarry} from '../scripts/check-effective-geographic-regression.mjs';
+import {assembleSupportedActivation} from '../coordination/engineering/additive-native-activation-20261009/assemble-supported-activation.mjs';
 import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
 import {assembleSupportedActivation} from '../coordination/engineering/additive-native-activation-20261009/assemble-supported-activation.mjs';
 import {valueBytes,valueSha,readOriginalRuleAuthority,selectedCoordinateShard,joinSelectedCoordinateCertificate,acceptColdCoordinateCertificate,selectedAffectedPlan,possibleNeighbors,compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
@@ -117,8 +118,8 @@ test('genuine detached receipts reopen both complete certificates and preserve a
 test('reopened complete carry and runtime admission refuse before any cold body open',()=>{
  const f=fixture();try{const {rect,install}=sourceSides(f),before=install(rect(0,1),rect(2,3),'before'),after=install(rect(0,1.5),rect(2,3),'after'),state=issueStages(f,before,after),receipts=[validate(f,state,before,0)];receipts.push(validate(f,state,after,1,receipts));
   const original=fs.readFileSync;let opens=0;fs.readFileSync=function(...args){opens++;return original.apply(this,args);};
-  try{assert.throws(()=>reopenCompleteColdPlan(native,helper,{repo:f.repo,baseline:before,candidate:after,...state,receipts,carriedBytes:268435456}),/Installed runtime\/metadata/);assert.equal(opens,0);
-   assert.throws(()=>reopenCompleteColdPlan(native,helper,{repo:f.repo,baseline:before,candidate:after,...state,receipts,carriedBytes:1048576,context:{...state.context,runtimeBytes:268435456}}),/Installed runtime\/metadata/);assert.equal(opens,0);
+  try{assert.throws(()=>reopenCompleteColdPlan(native,helper,{repo:f.repo,baseline:before,candidate:after,...state,receipts,carriedBytes:Number.MAX_SAFE_INTEGER}),/Installed runtime\/metadata/);assert.equal(opens,0);
+   assert.throws(()=>reopenCompleteColdPlan(native,helper,{repo:f.repo,baseline:before,candidate:after,...state,receipts,carriedBytes:1048576,context:{...state.context,runtimeBytes:Number.MAX_SAFE_INTEGER}}),/Installed runtime\/metadata/);assert.equal(opens,0);
    assert.throws(()=>reopenCompleteColdPlan(native,helper,{repo:f.repo,baseline:before,candidate:after,...state,receipts,carriedBytes:0}),/Incomplete reopened carry/);assert.equal(opens,0);
   }finally{fs.readFileSync=original;}
  }finally{f.cleanup();}
@@ -197,7 +198,7 @@ test('same-vintage multi-source custody loads once and preserves exact independe
    native.SelectedGeometrySources.prototype.read=function(...args){const result=original.apply(this,args);if(++reads===1)this.reader.version='f'.repeat(40);return result;};
    try{assert.throws(()=>acquireContinuousSources(native,helper,options),/selected side removed or rebound/);}finally{native.SelectedGeometrySources.prototype.read=original;}
    let opens=0;const blocked={...native,loadSelection(){opens++;throw Error('must not open');}};
-   assert.throws(()=>acquireContinuousSources(blocked,helper,{...options,carriedBytes:268435456}),/Installed runtime\/metadata/);assert.equal(opens,0);
+   assert.throws(()=>acquireContinuousSources(blocked,helper,{...options,carriedBytes:Number.MAX_SAFE_INTEGER}),/Installed runtime\/metadata/);assert.equal(opens,0);
   }
   assert.deepEqual(loads,[before,after]);assert.notEqual(readers[0],readers[1]);
  }finally{f.cleanup();}

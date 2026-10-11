@@ -3,8 +3,8 @@
 // This module cannot issue an operating certificate or select a release.
 import fs from 'node:fs';import path from 'node:path';
 import {ImmutableReader} from '../../../scripts/check-effective-geographic-regression.mjs';
-import {CURRENT_REBIND_CODE,admitCurrentRebindOutputFrame,normaliseRetainedRepairLedger,nativeBaseSelection,requirePriorAdditiveConservation,readRetainedRegistryAuthority,acquireCurrentRebindOperands,currentRebindSourceView,reclaimCompletedRebindFrame,valueBytes,valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
-const FILE=33554432,PHASE=268435456,PRODUCTS=8388608,prepared=new WeakSet(),completedPrior=new WeakMap();
+import {CURRENT_REBIND_CODE,validateCurrentRebindLimits,admitCurrentRebindOutputFrame,normaliseRetainedRepairLedger,nativeBaseSelection,requirePriorAdditiveConservation,readRetainedRegistryAuthority,acquireCurrentRebindOperands,currentRebindSourceView,reclaimCompletedRebindFrame,valueBytes,valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+const FILE=33554432,prepared=new WeakSet(),completedPrior=new WeakMap();
 const demand=(v,m)=>{if(!v)throw Error(m);},same=(a,b)=>valueBytes(a).equals(valueBytes(b));
 const exists=p=>{try{return fs.lstatSync(p);}catch(e){if(e.code==='ENOENT')return null;throw e;}};
 const ordinaryAncestors=p=>{let current=path.parse(p).root;for(const part of p.slice(current.length).split(path.sep)){if(!part)continue;current=path.join(current,part);const s=exists(current);demand(s&&s.isDirectory()&&!s.isSymbolicLink(),'Require ordinary existing output ancestor');}};
@@ -18,14 +18,14 @@ export function validateCurrentRebindPlan(plan,{executionCommit,baseSelection,re
  demand(plan&&Object.keys(plan).filter(k=>k!=='original_inputs').sort().join(',')==='authority_registry_sha256,base_selection,executed_code,execution_commit,kind,limits,original_patch_sha256s,original_rows_sha256,predecessor_proof,target_sources,version','Foreign actual issued rebind plan');
  if(explicit)demand(Array.isArray(plan.original_inputs)&&plan.original_inputs.length===2&&new Set(plan.original_inputs.map(p=>p?.path)).size===2&&plan.original_inputs.every(p=>p&&Object.keys(p).sort().join(',')==='bytes,commit,git_blob_oid,mode,path,sha256'&&p.mode==='100644'&&typeof p.path==='string'&&!p.path.includes('\\')&&!p.path.split('/').some(s=>!s||s==='.'||s==='..')&&/^[a-f0-9]{40}$/.test(p.commit)&&/^[a-f0-9]{40}$/.test(p.git_blob_oid)&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=FILE&&/^[a-f0-9]{64}$/.test(p.sha256)),'Missing complete original input descriptors');
  demand(plan.version===1&&plan.kind==='issued-current-rebind-acquisition-plan-v1'&&plan.execution_commit===executionCommit&&/^[a-f0-9]{40}$/.test(executionCommit)&&same(plan.base_selection,baseSelection)&&plan.authority_registry_sha256===valueSha(registry)&&plan.original_rows_sha256===valueSha(originalRows)&&same(plan.executed_code,executedCode)&&same(executedCode.map(p=>p.path),CURRENT_REBIND_CODE),'Actual planned source/method/selected identity differs');
- demand(plan.limits&&Object.keys(plan.limits).sort().join(',')==='complete_phase_bytes,descriptors,output_bytes,rss_bytes,sampled_stop_bytes,wall_seconds'&&Object.values(plan.limits).every(n=>Number.isSafeInteger(n)&&n>0)&&plan.limits.complete_phase_bytes<=PHASE&&plan.limits.descriptors<=512&&plan.limits.output_bytes<=PRODUCTS&&plan.limits.rss_bytes<=536870912&&plan.limits.sampled_stop_bytes<=402653184&&plan.limits.sampled_stop_bytes<=plan.limits.rss_bytes,'Planned complete phase/operating/output bounds differ');
+ validateCurrentRebindLimits(plan.limits);
  demand(Array.isArray(plan.target_sources)&&plan.target_sources.length>0&&Array.isArray(plan.original_patch_sha256s)&&plan.original_patch_sha256s.length===registry.entries.length,'Missing complete planned input roster');return plan;
 }
 // Exact canonical byte count without building a complete JSON string, graph or
 // Buffer. Key order changes no length. Refuse on the first over-budget scalar
 // or delimiter, before the whole-output representations can be allocated.
 export function boundedCurrentRebindProductBytes(bodies,limit){
- demand(Number.isSafeInteger(limit)&&limit>0&&limit<=PRODUCTS,'Bounded product byte limit required');
+ demand(Number.isSafeInteger(limit)&&limit>0,'Bounded product byte limit required');
  let total=0;const add=n=>{total+=n;demand(total<=limit,'Complete cold products exceed prospective output bound before writes');};
  const string=s=>{add(2);for(let i=0;i<s.length;i++){
   const c=s.charCodeAt(i);
@@ -51,7 +51,7 @@ export function boundedCurrentRebindProductBytes(bodies,limit){
 // All four encoded bodies remain charged by the output frame above. Refusal
 // happens before destination creation and never overwrites an earlier run.
 export function writeCurrentRebindProducts(destination,bodies,outputBytes){
- demand(prepared.has(destination)&&Number.isSafeInteger(outputBytes)&&outputBytes>0&&outputBytes<=PRODUCTS&&bodies&&Object.keys(bodies).sort().join(',')==='facts,publication,request,result','Complete bounded prepared product writer required');
+ demand(prepared.has(destination)&&Number.isSafeInteger(outputBytes)&&outputBytes>0&&bodies&&Object.keys(bodies).sort().join(',')==='facts,publication,request,result','Complete bounded prepared product writer required');
  const expected=boundedCurrentRebindProductBytes(bodies,outputBytes);
  const encoded=Object.entries(bodies).map(([name,b])=>({name,raw:valueBytes(b)})),combined=encoded.reduce((n,p)=>n+p.raw.length,0);
  demand(combined===expected,'Canonical product byte count differs');
@@ -100,7 +100,7 @@ export function completePriorConservationFrame(snapshot,registry,originalLedger,
  reader.metadataBytes=8*1048576+2*snapshot.metadataBytes+2*valueBytes({registry,originalLedger,executionMetadata,inventory:[...reader.inventory],phases:snapshot.acquisitionPhases}).length+4*PRIOR_MARKER_MAX+(snapshot.acquisition_buffer_bytes??0);reader.phase();
  const record={repo:reader.repo,commit:reader.version,selection_sha256:valueSha(snapshot.selection),manifest_sha256:valueSha(snapshot.manifest),owner_identity:priorOwnerIdentity(snapshot),registry_sha256:valueSha(registry),ledger_sha256:valueSha(originalLedger),prior_phases:structuredClone(snapshot.acquisitionPhases),prior_inventory:[...reader.inventory.values()].map(pin=>({...pin})),completion_phase_bytes:reader.used};
  const limit=executionMetadata.plan.limits.complete_phase_bytes;
- demand(Number.isSafeInteger(limit)&&limit>0&&limit<=PHASE&&record.prior_phases.length>0&&record.prior_phases.every(p=>Number.isSafeInteger(p.complete_phase_bytes)&&p.complete_phase_bytes>0&&p.complete_phase_bytes<=limit)&&record.completion_phase_bytes<=limit,'Completed prior phase exceeds issued child bound: '+JSON.stringify({limit,completion_phase_bytes:record.completion_phase_bytes,phases:record.prior_phases.map((p,index)=>({index,kind:p.kind,complete_phase_bytes:p.complete_phase_bytes}))}));
+ demand(Number.isSafeInteger(limit)&&limit>0&&record.prior_phases.length>0&&record.prior_phases.every(p=>Number.isSafeInteger(p.complete_phase_bytes)&&p.complete_phase_bytes>0&&p.complete_phase_bytes<=limit)&&record.completion_phase_bytes<=limit,'Completed prior phase exceeds issued child bound: '+JSON.stringify({limit,completion_phase_bytes:record.completion_phase_bytes,phases:record.prior_phases.map((p,index)=>({index,kind:p.kind,complete_phase_bytes:p.complete_phase_bytes}))}));
  const raw=valueBytes(record);demand(raw.length<=PRIOR_MARKER_MAX,'Complete private prior marker exceeds bound');
  const freeze=v=>{if(v&&typeof v==='object'){for(const child of Object.values(v))freeze(child);Object.freeze(v);}return v;};freeze(record);
  const token=Object.freeze({});completedPrior.set(token,{record,sha256:valueSha(record),bytes:raw.length});return token;
@@ -109,7 +109,7 @@ function consumeCompletedPrior(token,snapshot,registry,originalLedger,plan){
  const completed=completedPrior.get(token);demand(completed&&completed.bytes<=PRIOR_MARKER_MAX&&valueSha(completed.record)===completed.sha256,'Require unchanged privately completed prior conservation');
  currentRebindSourceView(snapshot);
  const p=completed.record;
- const limit=plan?.limits?.complete_phase_bytes;demand(Number.isSafeInteger(limit)&&limit>0&&limit<=PHASE&&p.prior_phases.every(p=>p.complete_phase_bytes<=limit)&&p.completion_phase_bytes<=limit,'Completed prior phase exceeds current issued child bound');
+ const limit=plan?.limits?.complete_phase_bytes;demand(Number.isSafeInteger(limit)&&limit>0&&p.prior_phases.every(p=>p.complete_phase_bytes<=limit)&&p.completion_phase_bytes<=limit,'Completed prior phase exceeds current issued child bound');
  demand(snapshot.reader.repo===p.repo&&snapshot.reader.version===p.commit&&valueSha(snapshot.selection)===p.selection_sha256&&valueSha(snapshot.manifest)===p.manifest_sha256&&same(priorOwnerIdentity(snapshot),p.owner_identity)&&valueSha(registry)===p.registry_sha256&&valueSha(originalLedger)===p.ledger_sha256,'Fresh base differs from completed prior conservation');
  return {record:p,carriedBytes:2*completed.bytes};
 }

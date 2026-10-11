@@ -2,7 +2,7 @@
 // Exactly the approved unchanged v6→v7 stage, followed by the two-target v7→v8 stage.
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import{execFile}from'node:child_process';import{gunzipSync}from'node:zlib';import{createHash}from'node:crypto';import{fileURLToPath}from'node:url';
 import{restoreWholeImage}from'../evidence/restore-whole-image.mjs';import{restoreCanonicalProducts,getRestoredCanonicalProducts,restoredContextMember,restoredContextPatch}from'../canonical-restoration.mjs';import{validateContextMigration}from'./validate-context-migration.mjs';
-import{candidateBudget,requirePlainExecution}from'./native-preparation-guards.mjs';import{repositoryReader,safeEvidencePath}from'../evidence-quality.mjs';
+import{candidateBudget,requirePlainExecution,preparationAllowance,preparationRequestAllowance}from'./native-preparation-guards.mjs';import{repositoryReader,safeEvidencePath}from'../evidence-quality.mjs';
 import{validateNativeSelectionReceipt}from'./require-verified-selection.mjs';
 import{BEFORE,AFTER,TARGETS}from'../../coordination/engineering/eastern-two-gap-repair-native-20261007/native-producer.mjs';
 import{isDeepStrictEqual,promisify}from'node:util';
@@ -65,26 +65,37 @@ export function authenticateSuccessorContextInventory(indexRaw,imageIndex,compar
   assert.equal(retained.original_binding.scientific_execution_commit,'5b32388df0501b013ac9a3ba97864932db493d59');assert.deepEqual(retained.original_binding.original_product,pin,'Original complete scientific context descriptor changed');
  }return index;
 }
+// Exact retained launch-option and current operational-budget migration; all other authored helper bytes
+// still require literal equality. This is not a future helper-code exemption.
+export function verifyPreparationBudgetCode(oldRaw,currentRaw,oldPin,currentPin){
+ assert.equal(oldPin.sha256,'6c4ea2f29f6bfed9176fa8c38dfde522d859442797e4a3cce76f250c69c75fb0','Foreign historical preparation guard');assert.equal(oldPin.bytes,6371);
+ assert.equal(currentPin.sha256,'c5b8ca1d3d1d773b0fafb79c613ce4b89532b01d08b8fda761a465755c16f694','Foreign current preparation guard');assert.equal(currentPin.bytes,8654);
+ assert.equal(oldRaw.length,oldPin.bytes);assert.equal(sha(oldRaw),oldPin.sha256);assert.equal(currentRaw.length,currentPin.bytes);assert.equal(sha(currentRaw),currentPin.sha256);
+ return currentPin.bytes-oldPin.bytes;
+}
 export function verifyAuthoredValidatorSources({stage,codeIndex,authored,currentFiles,currentRoot,charge=()=>{}}){
  const required=new Set(['package.json']);
  function visit(p){if(required.has(p))return;required.add(p);safeEvidencePath(p);const raw=fs.readFileSync(path.join(authored,p));for(const m of raw.toString('utf8').matchAll(/(?:from\s*|import\s*(?:\(\s*)?)['"]([^'"]+)['"]/g))if(m[1].startsWith('.'))visit(path.posix.normalize(path.posix.join(path.posix.dirname(p),m[1])));}
  visit('scripts/native-ownership/validate-build-context-stage.mjs');assert.deepEqual(stage.validator_sources.map(p=>p.path).sort(),[...required].sort(),'Complete authored validator import closure required');
+ const budgetAdaptations=[];
  const wrappers=new Set(['package.json','scripts/evidence-quality.mjs','scripts/native-ownership/validate-build-context-stage.mjs','coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs']);
  for(const pin of stage.validator_sources){const member=codeIndex.files.find(p=>p.path===pin.path);assert(member);assert.equal(member.bytes,pin.bytes);assert.equal(member.sha256,pin.sha256);const raw=fs.readFileSync(path.join(authored,pin.path));assert.equal(raw.length,pin.bytes);assert.equal(sha(raw),pin.sha256);charge(raw.length);
-  if(!wrappers.has(pin.path)){const current=currentFiles.find(p=>p.path===pin.path);assert(current);if(pin.path.endsWith('/restore-canonical-products.mjs')&&current.sha256!==pin.sha256){
+  if(!wrappers.has(pin.path)){let extraBytes=0;const current=currentFiles.find(p=>p.path===pin.path);assert(current);if(pin.path.endsWith('/restore-canonical-products.mjs')&&current.sha256!==pin.sha256){
    assert(currentRoot,'Exact current restoration extension source required');const extended=fs.readFileSync(path.join(currentRoot,pin.path));assert.equal(sha(extended),current.sha256);
    const start=extended.indexOf(Buffer.from('// Select an exact member')),end=extended.indexOf(Buffer.from('function checkoutMetadata'),start);assert(start>=0&&end>start);
    assert.equal(sha(extended.subarray(start,end)),'6563ec0357559af17da4d14de887e9f06426a73a5e67392cc739aac4188e7e6b','Only the exact reviewed selected-member extension is allowed');
-   assert.equal(sha(Buffer.concat([extended.subarray(0,start),extended.subarray(end)])),pin.sha256,'Entire original restoration module must remain byte-identical');
-  }else assert.equal(current.sha256,pin.sha256,'Historical numerical/helper algorithm changed; requalification required');assert.equal(current.bytes,pin.bytes+(current.sha256===pin.sha256?0:2525));assert.equal(current.mode,member.mode);}
+   assert.equal(sha(Buffer.concat([extended.subarray(0,start),extended.subarray(end)])),pin.sha256,'Entire original restoration module must remain byte-identical');extraBytes=2525;
+  }else if(pin.path==='scripts/native-ownership/native-preparation-guards.mjs'&&current.sha256!==pin.sha256){assert(currentRoot,'Exact current budgeting source required');extraBytes=verifyPreparationBudgetCode(raw,fs.readFileSync(path.join(currentRoot,pin.path)),pin,current);budgetAdaptations.push({path:pin.path,original_sha256:pin.sha256,current_sha256:current.sha256});}
+  else assert.equal(current.sha256,pin.sha256,'Historical numerical/helper algorithm changed; requalification required');assert.equal(current.bytes,pin.bytes+extraBytes);assert.equal(current.mode,member.mode);}
  }
- return {authored_files:stage.validator_sources.length,numerical_files_unchanged:stage.validator_sources.filter(p=>!wrappers.has(p.path)).length};
+ return {authored_files:stage.validator_sources.length,numerical_files_unchanged:stage.validator_sources.filter(p=>!wrappers.has(p.path)&&!budgetAdaptations.some(a=>a.path===p.path)).length,operational_budget_adaptations:budgetAdaptations};
 }
-export async function validateChainedBuildContext({root,expectedReference,stagePath,stageRaw,stage,readFile,currentExecution}){
+export async function validateChainedBuildContext({root,expectedReference,stagePath,stageRaw,stage,readFile,currentExecution,processingAllowance}){
+ const allowance=processingAllowance===undefined?preparationAllowance():preparationRequestAllowance(processingAllowance);
  requirePlainExecution();assert.equal(stage.version,2);assert.equal(stage.issue,1295);assert.equal(stage.kind,'retained-identity-context-continuation-v2');assert.equal(stage.lane,'engineering');
  assert.deepEqual(stage.subject_ids,[...TARGETS]);assert.equal(stage.prior_stage_sha256,FIXED_PRIOR_STAGE_SHA);
  const currentAdmission=admitCurrentExecution(currentExecution,[currentExecution.source_root,currentExecution.stage_root]);
- const ordinary=readFile??repositoryReader(root),budget=candidateBudget([],{reserveBytes:currentAdmission.installed_runtime_bytes+131072}),seen=new Map(),admitted=new Set();budget.add({bytes:stageRaw.length});
+ const ordinary=readFile??repositoryReader(root),budget=candidateBudget([],{reserveBytes:currentAdmission.installed_runtime_bytes+131072,allowance}),seen=new Map(),admitted=new Set();budget.add({bytes:stageRaw.length});
  function read(pin){safeEvidencePath(pin.path);assert(Number.isSafeInteger(pin.bytes)&&pin.bytes>0&&pin.bytes<=32*1024*1024&&/^[a-f0-9]{64}$/.test(pin.sha256));if(seen.has(pin.path))assert.deepEqual(pin,seen.get(pin.path));
   if(!admitted.has(pin.path)){budget.add({bytes:pin.bytes});admitted.add(pin.path);}
   const raw=ordinary(pin.path,'candidate');assert.equal(raw.length,pin.bytes);assert.equal(sha(raw),pin.sha256);if(!seen.has(pin.path))seen.set(pin.path,pin);return raw;}
