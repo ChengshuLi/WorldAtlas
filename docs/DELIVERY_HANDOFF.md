@@ -10,6 +10,29 @@ before preparation. Sparse checkouts need the two literal existing composition
 and selected-neighbor helper paths imported by the command; no dataset directory
 is required for the code. Missing immutable bodies fail with lazy fetch disabled.
 
+## New finite resource profiles
+
+New SOURCE/NATIVE issuance requires a `source-native-v2` request template and
+explicit `requested_resources`, either at config level or per group:
+`processing_allowance` contains positive safe integer `phaseBytes` and `rssBytes`;
+`operating_limits` contains positive safe integer `rss_bytes`, `wall_seconds`,
+`output_bytes`, `retained_bytes`, `log_bytes`, `monitor_bytes`, and `receipt_bytes`.
+The requested values replace only these resource fields. No old 256 MiB reader,
+1 GiB process, time, output, log or monitor limit is silently chosen by this tool.
+The request's existing output reserve and all finite cross-bounds must fit. The
+existing executing-code and supervisor descriptors, plus ordered
+`operating_runtime.support_code` entries for `scripts/local-workspace.mjs` and
+`scripts/worker-identity.mjs`, must match actual HEAD bytes. A new template must be
+captured against the reviewed v2 operator/runtime; this command does not upgrade
+old scientific code or claim that runtime/resource admission already happened.
+The existing supervisor performs actual available-resource and runtime admission.
+
+Historical examples explicitly select `compatibility: "literal-historical-v1"`.
+That mode preserves the complete literal historical fields and forbids requested
+resource overrides. It is for retained evidence/explicit compatibility, not the
+default for newly issued work. Final v2 scientific execution remains separately
+subject to the resource repair's acceptance and ordinary review.
+
 ## Configurations and explicit commit boundaries
 
 Each config has `version: 1`. Input pins contain exact `commit`, `path`, ordinary
@@ -31,9 +54,14 @@ No proposed input is called accepted merely because a hash matches.
    and operator `output` directory. The command requires successful exit, no refusal,
    no remaining owned process or termination event, and the actual request binding.
    It verifies every publication product, including declared decoded gzip bytes,
-   and joins published facts to that terminal/request. For rebind output, also supply
+   and joins published facts to that terminal/request. Actual JSONL records must
+   match complete issued scope/order/counts; SOURCE targets and source-case bindings
+   join the pinned whole handoff. Native retention requires the fixed complete asset
+   roster and actual inventory/ledger/envelope agreement. For rebind output, also supply
    `custody` local paths for `code_source`, `issued_plan`, `stderr`, and `stdout`;
-   these genuine bodies are retained for the subsequent committed operating phase.
+   raw code-source, issued-plan and stdout are joined to the immutable issued
+   execution contract before provisional retention. These bodies remain provisional
+   until the subsequent committed operating phase verifies full execution custody.
    Failed or partial runs remain
    failed. Originals are never overwritten. Commit retained bodies before the next
    phase; there are no fabricated future commit pins.
@@ -54,9 +82,14 @@ No proposed input is called accepted merely because a hash matches.
 5. Existing rebind issuance and supervision remain separate. `rebind-operating`
    accepts actual `request`, `publication`, `terminal` pins and complete
    `execution_custody` pins (`code_source`, `terminal`, `stderr`, `stdout`,
-   `issued_plan`). Commit its operating output. `rebind-certificate` adds actual
+   `issued_plan`), plus actual `facts` and `result` product pins. The existing
+   `verifyCurrentRebindExecution` checks the complete joined custody against the
+   independently pinned historical `CURRENT_REBIND_CODE` closure. Commit its
+   operating output. `rebind-certificate` adds actual
    `facts`, `result`, and committed `operating` pins and produces the existing
-   certificate shape. It does not create a successful terminal or execute a rebind.
+   certificate shape only when the complete operating record equals the genuine
+   terminal/custody and the shared execution validator accepts. It does not create a
+   successful terminal or execute a rebind.
    Existing selected assembly is still a separate admitted execution.
 6. `package`: supply composed `registry` and `ledger` pins, a `new_prefix` ending in
    `/`, optional `rebind` certificate, optional actual `selected_ledger`, and

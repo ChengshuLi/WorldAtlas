@@ -4,11 +4,12 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
+import {gzipSync} from 'node:zlib';
 import {candidateBudget} from '../scripts/native-ownership/native-preparation-guards.mjs';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
 import {subjectsHash} from '../scripts/evidence-quality.mjs';
 import {jsonBytes, digest, pinReader, publish, prepareRequests, retainProducts, nativeRequests,
-  composeAuthorities, packageProjection, rebindCustody, freezeReview} from '../scripts/prepare-delivery-handoff.mjs';
+  composeAuthorities, packageProjection, rebindCustody, requestProfile, freezeReview} from '../scripts/prepare-delivery-handoff.mjs';
 
 const commit = 'a'.repeat(40), prefix = 'coordination/engineering/control/';
 function memoryReader() {
@@ -29,11 +30,11 @@ function requestsFixture() {
   const registry = reader.add(prefix + 'registry.json', {version: 1, kind: 'accepted-administrative-handoffs-v1',
     entries: [{id: 'whole', cohort_ids: ids, target_ids: ['target'], accepted_source_commit, source}]});
   const request = {operation: 'retained-land-source-premises-v1', baseline: {pins: []}, destination: '.cache/native-grid-candidates/original',
-    output_reserve: 1000, operating_runtime: {version: 1}, source_rule: {profile: 'retained-consumed-administrative-source',
+    output_reserve: 1000, operating_runtime: {version: 1}, executed_code: [], installed_modules: [], parent: {components: 3}, report: reader.add('report.json', {}), source_rule: {profile: 'retained-consumed-administrative-source',
       inputs: [handoff], cases_path: handoff.path, outcomes_path: handoff.path, registry_path: registry.path,
       cohort_ids: ids, expected_ids: ids, geometry_scope: 'full-component', administrative_products: [], target_banks: ['bank']}};
   const template = reader.add(prefix + 'request.json', request);
-  const config = {version: 1, registry, component_ids: ids,
+  const config = {version: 1, compatibility: 'literal-historical-v1', registry, component_ids: ids,
     groups: [{id: 'actual-method', handoff_id: 'whole', template, component_ids: [...ids].reverse(), destination: '.cache/native-grid-candidates/prepared'}]};
   return {reader, config, request};
 }
@@ -87,14 +88,18 @@ test('combined read/output budget fails before creating destination', t => {
 
 function terminalFixture(root) {
   const {reader, request} = requestsFixture(); const requestPin = reader.add(prefix + 'source-request.json', request);
-  const facts = {execution_commit: commit, request: requestPin, source_rule: request.source_rule, operation: request.operation, runtime: {bytes: 100, sha256: 'b'.repeat(64)}};
-  const factRaw = jsonBytes(facts), inventory = Buffer.from('row\n');
-  const publication = {version: 1, complete: true, facts: {bytes: factRaw.length, sha256: digest(factRaw)}, inventory: {bytes: inventory.length, sha256: digest(inventory)}};
+  const facts = {execution_commit: commit, request: requestPin, source_rule: request.source_rule, components: 3, source_compatible: 3, assigned_cells: 0,
+    executed_code: request.executed_code, installed_modules: request.installed_modules, baseline: request.baseline, parent: request.parent,
+    input_descriptors: [request.report, ...request.source_rule.inputs, ...request.baseline.pins], operation: request.operation, runtime: {bytes: 100, sha256: 'b'.repeat(64)}};
+  const handoffPin = request.source_rule.inputs[0], cases = reader.json(handoffPin).candidate_source_native_bindings;
+  const factRaw = jsonBytes(facts), decoded = Buffer.concat(request.source_rule.expected_ids.map((component_id, ordinal) => jsonBytes({component_id, target_id: 'target', source_compatible: true,
+    source_case: {source: handoffPin, ordinal, row_sha256: digest(jsonBytes(cases[ordinal]))}}))), inventory = gzipSync(decoded);
+  const publication = {version: 1, complete: true, facts: {bytes: factRaw.length, sha256: digest(factRaw)}, inventory: {bytes: inventory.length, sha256: digest(inventory), uncompressed_bytes: decoded.length, uncompressed_sha256: digest(decoded)}};
   const terminal = {qualified: true, exit: {code: 0, signal: null}, refusal: null, execution_commit: commit,
     request_sha256: requestPin.sha256, destination: request.destination, owned_processes_remaining: [], termination_events: []};
   const config = {version: 1, request: requestPin, output: 'run', terminal: 'operating/receipt.json'};
   for (const [name, raw] of Object.entries({'run/facts.json': factRaw, 'run/inventory.jsonl.gz': inventory, 'run/publication.json': jsonBytes(publication), 'operating/receipt.json': jsonBytes(terminal)})) write(root, name, raw);
-  return {reader, config, request, facts, terminal, publication};
+  return {reader, config, request, facts, terminal, publication, inventory};
 }
 
 test('retention joins genuine terminal, request, facts and every published output; no completion from partial files', t => {
@@ -111,15 +116,19 @@ test('retention joins genuine terminal, request, facts and every published outpu
 test('native preparation requires committed genuine SOURCE products and preserves immutable runtime/resource fields', t => {
   const root = directory(t), f = terminalFixture(root), r = f.reader;
   const source = {request: f.config.request, facts: r.add(prefix + 'facts.json', f.facts), operating: r.add(prefix + 'operating.json', f.terminal),
-    publication: r.add(prefix + 'publication.json', f.publication), inventory: r.add(prefix + 'inventory.jsonl.gz', Buffer.from('row\n'))};
+    publication: r.add(prefix + 'publication.json', f.publication), inventory: r.add(prefix + 'inventory.jsonl.gz', f.inventory)};
   const additive = {source_profile: f.request.source_rule.profile, scope_ids: f.request.source_rule.expected_ids, inputs: Object.values(source)};
   for (const [key, value] of Object.entries({source_request_path: 'request', operating_path: 'operating', publication_path: 'publication', facts_path: 'facts', inventory_path: 'inventory'})) additive[key] = source[value].path;
   const template = r.add(prefix + 'native-template.json', {operation: 'unactivated-additive-native-batch-v1', baseline: f.request.baseline,
     destination: '.cache/native-grid-candidates/native-old', output_reserve: 123, additive});
-  const config = {groups: [{id: 'native', template, source, destination: '.cache/native-grid-candidates/native-new'}]};
+  const config = {compatibility: 'literal-historical-v1', groups: [{id: 'native', template, source, destination: '.cache/native-grid-candidates/native-new'}]};
   const actual = JSON.parse(nativeRequests(config, r)['native-native-request.json']);
   assert.equal(actual.output_reserve, 123); assert.deepEqual(actual.additive.scope_ids, f.request.source_rule.expected_ids);
   assert.equal(actual.additive.source_execution_commit, commit); assert.deepEqual(actual.additive.source_runtime, f.facts.runtime);
+  assert.deepEqual(actual.additive.inputs.find(p => p.path === actual.additive.source_request_path), f.facts.request);
+  const inventoryPin = actual.additive.inputs.find(p => p.path === actual.additive.inventory_path);
+  assert.equal(inventoryPin.uncompressed_bytes, f.publication.inventory.uncompressed_bytes);
+  assert.equal(inventoryPin.uncompressed_sha256, f.publication.inventory.uncompressed_sha256);
   source.operating = r.add(prefix + 'failed.json', {...f.terminal, qualified: false}); assert.throws(() => nativeRequests(config, r), /successful terminal/);
 });
 
@@ -209,8 +218,60 @@ test('rebind commit phases require complete custody and publication-matching res
     owned_processes_remaining: [], termination_events: [], request_sha256: request.sha256, publication_sha256: publication.sha256, lifetime_rss_bytes: 100, elapsed_seconds: 1});
   const execution_custody = {terminal, ...Object.fromEntries(['code_source', 'stderr', 'stdout', 'issued_plan'].map(k => [k, r.add(prefix + k + '.json', {})]))};
   const config = {request, publication, terminal, facts, result, execution_custody};
-  config.operating = r.add(prefix + 'operating.json', rebindCustody(config, r)['operating.json']);
-  assert.equal(JSON.parse(rebindCustody(config, r, true)['certificate.json']).kind, 'qualified-native-additive-current-bank-rebind-v1');
+  assert.throws(() => rebindCustody(config, r), /historical rebind code roster/);
   assert.throws(() => rebindCustody({...config, execution_custody: {terminal}}, r), /Complete external/);
-  assert.throws(() => rebindCustody({...config, result: r.add(prefix + 'wrong-result.json', {wrong: true})}, r, true), /output pin differs/);
+  assert.throws(() => rebindCustody({...config, result: r.add(prefix + 'wrong-result.json', {wrong: true})}, r), /output pin differs/);
+});
+
+test('new request issuance requires explicit finite v2 profiles and actual HEAD support/code pins', () => {
+  const reader = memoryReader(), code = reader.add('scripts/operator.mjs', Buffer.from('code'));
+  const support = ['scripts/local-workspace.mjs', 'scripts/worker-identity.mjs'].map(p => reader.add(p, Buffer.from('support')));
+  const template = {operating_profile: 'source-native-v2', output_reserve: 1000, executed_code: [code], operating_runtime: {supervisor: code, support_code: support}};
+  reader.git = () => Buffer.from(commit); reader.pin = (c, p) => [code, ...support].find(x => x.path === p);
+  const requested_resources = {processing_allowance: {phaseBytes: 600000000, rssBytes: 700000000}, operating_limits:
+    {rss_bytes: 800000000, wall_seconds: 1400, output_bytes: 2000000, retained_bytes: 3000000, log_bytes: 100000, monitor_bytes: 100000, receipt_bytes: 10000}};
+  const issued = requestProfile(template, {}, {requested_resources}, reader);
+  assert.deepEqual(issued.processing_allowance, requested_resources.processing_allowance); assert.equal(issued.operating_limits.wall_seconds, 1400);
+  assert.throws(() => requestProfile({...template, operating_profile: undefined}, {}, {}, reader), /v2/);
+  assert.throws(() => requestProfile(template, {}, {}, reader), /Explicit/);
+  for (const mutate of [x => x.operating_limits.rss_bytes = Infinity, x => x.operating_limits.wall_seconds = 0,
+    x => x.processing_allowance.phaseBytes = 900000000, x => x.operating_limits.output_bytes = 1,
+    x => x.operating_limits.retained_bytes = 1, x => x.operating_limits.log_bytes = 900000000,
+    x => x.operating_limits.monitor_bytes = 900000000, x => x.operating_limits.receipt_bytes = 900000000]) {
+    const bad = structuredClone(requested_resources); mutate(bad); assert.throws(() => requestProfile(template, {}, {requested_resources: bad}, reader));
+  }
+  const drift = structuredClone(template); drift.operating_runtime.support_code[0].sha256 = '0'.repeat(64);
+  assert.throws(() => requestProfile(drift, {}, {requested_resources}, reader), /actual HEAD/);
+});
+
+test('coherent SOURCE inventory changes and native preparation facts omissions are rejected against pinned scope/targets', t => {
+  const root = directory(t), f = terminalFixture(root);
+  const handoffPin = f.request.source_rule.inputs[0], cases = f.reader.json(handoffPin).candidate_source_native_bindings;
+  const originalRows = f.request.source_rule.expected_ids.map((component_id, ordinal) => ({component_id, target_id: 'target', source_compatible: true, source_case: {source: handoffPin, ordinal, row_sha256: digest(jsonBytes(cases[ordinal]))}}));
+  for (const rows of [[], originalRows.slice(1), [originalRows[0], originalRows[0], originalRows[2]],
+    [{...originalRows[0], component_id: 'foreign'}, ...originalRows.slice(1)], [{...originalRows[0], target_id: 'wrong'}, ...originalRows.slice(1)],
+    [{...originalRows[0], source_case: {...originalRows[0].source_case, ordinal: 2}}, ...originalRows.slice(1)]]) {
+    const decoded = Buffer.concat(rows.map(jsonBytes)), encoded = gzipSync(decoded), publication = structuredClone(f.publication);
+    publication.inventory = {bytes: encoded.length, sha256: digest(encoded), uncompressed_bytes: decoded.length, uncompressed_sha256: digest(decoded)};
+    write(root, 'run/inventory.jsonl.gz', encoded); write(root, 'run/publication.json', jsonBytes(publication));
+    assert.throws(() => retainProducts(f.config, root, f.reader), /inventory|Inventory|identity|SOURCE/);
+  }
+  const r = f.reader, corruptFacts = {...f.facts, components: 0, source_compatible: 0}, facts = r.add(prefix + 'coherent-facts.json', corruptFacts);
+  const publication = r.add(prefix + 'coherent-publication.json', {...f.publication, facts: {bytes: facts.bytes, sha256: facts.sha256}});
+  const source = {request: f.config.request, facts, publication, operating: r.add(prefix + 'operating.json', f.terminal), inventory: r.add(prefix + 'inventory.jsonl.gz', f.inventory)};
+  assert.throws(() => nativeRequests({groups: [{id: 'bad-source', source}]}, r), /scope\/order\/count/);
+});
+
+test('native retention rejects a publication that omits the required ledger asset', t => {
+  const root = directory(t), f = terminalFixture(root), r = f.reader;
+  const request = {...f.request, operation: 'unactivated-additive-native-batch-v1', additive: {scope_ids: f.request.source_rule.expected_ids, inputs: f.request.source_rule.inputs}};
+  const pin = r.add(prefix + 'native-request.json', request), facts = {...f.facts, request: pin, operation: request.operation, source_predecessor: request.additive};
+  const decoded = Buffer.concat(request.additive.scope_ids.map(component_id => jsonBytes({component_id, native_cells: 0, disposition: 'rejected'}))), encoded = gzipSync(decoded);
+  facts.assigned_cells = 0;
+  const factRaw = jsonBytes(facts), publication = {...f.publication, facts: {bytes: factRaw.length, sha256: digest(factRaw)},
+    inventory: {bytes: encoded.length, sha256: digest(encoded), uncompressed_bytes: decoded.length, uncompressed_sha256: digest(decoded)}, assets: []};
+  write(root, 'run/inventory.jsonl.gz', encoded);
+  write(root, 'run/facts.json', factRaw); write(root, 'run/publication.json', jsonBytes(publication));
+  write(root, f.config.terminal, jsonBytes({...f.terminal, request_sha256: pin.sha256}));
+  assert.throws(() => retainProducts({...f.config, request: pin}, root, r), /fixed native publication asset roster/);
 });

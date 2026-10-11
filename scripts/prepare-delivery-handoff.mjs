@@ -10,7 +10,7 @@ import {candidateBudget} from './native-ownership/native-preparation-guards.mjs'
 import {reviewContractBinding, reviewInventoryCommitment, checkPremergeEvidence} from './premerge-evidence.mjs';
 import {githubAPI, githubPages, readClaim, workSpec} from './issue-claim-contract.mjs';
 import {composeRetainedLedgers} from '../coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs';
-import {normaliseRetainedRepairLedger} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {normaliseRetainedRepairLedger, verifyCurrentRebindExecution, CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const need = (ok, message) => { if (!ok) throw Error(message); };
 const hex = (value, size) => typeof value === 'string' && new RegExp(`^[a-f0-9]{${size}}$`).test(value);
@@ -104,6 +104,40 @@ export function publish(root, destination, products, binding, resume = false, sh
   return {destination, resumed: false, binding};
 }
 
+export function requestProfile(template, group, config, reader) {
+  if (config.compatibility === 'literal-historical-v1') {
+    need(template.operating_profile === undefined && !group.requested_resources && !config.requested_resources,
+      'Historical compatibility preserves literal v1 resource/runtime fields only');
+    return template;
+  }
+  need(config.compatibility === undefined && template.operating_profile === 'source-native-v2',
+    'New issuance requires an admitted source-native-v2 template; historical v1 must be explicit compatibility');
+  const requested = group.requested_resources ?? config.requested_resources;
+  const allowance = requested?.processing_allowance, limits = requested?.operating_limits;
+  const keys = ['rss_bytes', 'wall_seconds', 'output_bytes', 'retained_bytes', 'log_bytes', 'monitor_bytes', 'receipt_bytes'];
+  need(allowance && same(Object.keys(allowance).sort(), ['phaseBytes', 'rssBytes'])
+    && limits && same(Object.keys(limits).sort(), keys.sort())
+    && [...Object.values(allowance), ...Object.values(limits)].every(v => Number.isSafeInteger(v) && v > 0)
+    && Number.isSafeInteger(limits.wall_seconds * 1000), 'Explicit positive finite requested reader/operating configuration required');
+  need(allowance.phaseBytes <= limits.rss_bytes && allowance.rssBytes <= limits.rss_bytes
+    && Number.isSafeInteger(template.output_reserve) && template.output_reserve > 0
+    && limits.output_bytes >= template.output_reserve + 131072
+    && Number.isSafeInteger(limits.output_bytes + limits.receipt_bytes)
+    && limits.output_bytes + limits.receipt_bytes <= limits.retained_bytes
+    && limits.log_bytes <= limits.retained_bytes && limits.log_bytes <= limits.rss_bytes
+    && limits.monitor_bytes <= limits.retained_bytes && limits.monitor_bytes <= limits.rss_bytes
+    && limits.receipt_bytes <= limits.rss_bytes, 'Requested reader/output/log/monitor resources exceed issued finite bounds');
+  const support = template.operating_runtime?.support_code;
+  need(same(support?.map(p => p.path), ['scripts/local-workspace.mjs', 'scripts/worker-identity.mjs']), 'Complete ordered v2 support-code pins required');
+  const head = reader.git('rev-parse', 'HEAD').toString().trim();
+  need(Array.isArray(template.executed_code) && template.executed_code.length && template.operating_runtime.supervisor, 'Current v2 code/runtime template required');
+  for (const pin of [...template.executed_code, template.operating_runtime.supervisor, ...support]) {
+    const actual = reader.pin(head, pin.path);
+    need(pin.bytes === actual.bytes && pin.sha256 === actual.sha256, 'New v2 template code differs from actual HEAD: ' + pin.path);
+  }
+  return {...template, processing_allowance: allowance, operating_limits: limits};
+}
+
 export function prepareRequests(config, reader) {
   const registry = reader.json(config.registry), outputs = {}, index = [], seen = new Set();
   need(registry.version === 1 && registry.kind === 'accepted-administrative-handoffs-v1', 'Existing accepted handoff registry required');
@@ -111,7 +145,7 @@ export function prepareRequests(config, reader) {
   for (const group of config.groups) {
     need(/^[a-z0-9-]+$/.test(group.id) && !seen.has(group.id) && unique(group.component_ids), 'Invalid/duplicate request group');
     seen.add(group.id);
-    const template = reader.json(group.template), rule = template.source_rule;
+    const template = requestProfile(reader.json(group.template), group, config, reader), rule = template.source_rule;
     need(template.operation === 'retained-land-source-premises-v1' && rule?.profile === 'retained-consumed-administrative-source', 'Use an existing admitted SOURCE request template');
     const entries = registry.entries.filter(entry => entry.id === group.handoff_id);
     need(entries.length === 1, 'Unknown/ambiguous accepted whole handoff');
@@ -134,7 +168,7 @@ export function prepareRequests(config, reader) {
     index.push({id: group.id, handoff: pin, component_ids: ordered, template: group.template, request: name,
       method_resource_sha256: digest(jsonBytes({profile: rule.profile, geometry_scope: rule.geometry_scope,
         administrative_products: rule.administrative_products, target_banks: rule.target_banks,
-        output_reserve: template.output_reserve, operating_runtime: template.operating_runtime})),
+        output_reserve: template.output_reserve, processing_allowance: template.processing_allowance, operating_limits: template.operating_limits, operating_runtime: template.operating_runtime})),
       next: 'Commit the request, run the existing supervisor separately, then retain real terminal products.'});
   }
   const scopes = index.flatMap(row => row.component_ids);
@@ -154,6 +188,94 @@ function qualifyTerminal(terminal, requestRaw, publicationRaw, request) {
   if (request.execution_commit !== undefined) need(terminal.execution_commit === request.execution_commit, 'Terminal execution commit differs');
   if (native) need(terminal.destination === request.destination, 'Terminal destination differs');
   else need(terminal.publication_sha256 === digest(publicationRaw), 'Terminal publication binding differs');
+}
+
+function readInventory(raw, descriptor, reader) {
+  need(Number.isSafeInteger(descriptor.uncompressed_bytes) && descriptor.uncompressed_bytes > 0 && descriptor.uncompressed_bytes <= 33554432,
+    'Nonempty bounded decoded inventory required');
+  reader.budget.add({bytes: descriptor.uncompressed_bytes});
+  const decoded = gunzipSync(raw, {maxOutputLength: 33554432});
+  need(decoded.length === descriptor.uncompressed_bytes && digest(decoded) === descriptor.uncompressed_sha256, 'Actual decoded inventory differs');
+  const lines = decoded.toString('utf8').split('\n'); need(lines.pop() === '' && lines.length && lines.every(Boolean), 'Incomplete/empty inventory JSONL');
+  const rows = lines.map(line => JSON.parse(line)); need(unique(rows.map(row => row.component_id)), 'Duplicate/missing inventory identity'); return rows;
+}
+
+function sourceNativeJoin(request, facts, publication, inventoryRaw, reader, products = null) {
+  const source = request.operation === 'retained-land-source-premises-v1';
+  need(source || request.operation === 'unactivated-additive-native-batch-v1', 'Unsupported retained operator contract');
+  const ids = source ? request.source_rule.expected_ids : request.additive.scope_ids;
+  const rows = readInventory(inventoryRaw, publication.inventory, reader);
+  need(unique(ids) && same(rows.map(row => row.component_id), ids) && facts.components === ids.length,
+    'Inventory does not match complete issued scope/order/count');
+  need(same(facts.executed_code, request.executed_code) && same(facts.installed_modules, request.installed_modules)
+    && same(facts.baseline, request.baseline) && same(facts.parent, request.parent), 'Published facts changed issued code/runtime/baseline/parent');
+  const stage = source ? request.source_rule : request.additive;
+  need(same(facts.input_descriptors, [request.report, ...stage.inputs, ...request.baseline.pins]), 'Published facts changed complete issued input closure');
+  if (source) {
+    need(same(facts.source_rule, stage) && facts.source_compatible === rows.filter(row => row.source_compatible === true).length
+      && facts.assigned_cells === 0, 'SOURCE facts/scope/compatibility counts differ from actual rows');
+    const pins = stage.inputs.filter(p => p.path === stage.cases_path); need(pins.length === 1, 'Complete SOURCE handoff pin required');
+    const handoff = reader.json(pins[0]), cases = handoff.candidate_source_native_bindings;
+    need(same(handoff.scopeIds, stage.cohort_ids) && same(cases?.map(row => row.component_id), stage.cohort_ids), 'SOURCE whole handoff scope changed');
+    const reference = new Map(cases.map(row => [row.component_id, row.retained_payload?.target_stable_location_id]));
+    need(rows.every(row => row.target_id === reference.get(row.component_id)), 'SOURCE inventory target differs from accepted handoff');
+    for (const row of rows) {
+      const ordinal = cases.findIndex(record => record.component_id === row.component_id);
+      need(row.source_case?.ordinal === ordinal && row.source_case.row_sha256 === digest(jsonBytes(cases[ordinal]))
+        && same(row.source_case.source, pins[0]), 'SOURCE inventory source-case identity differs from whole handoff');
+    }
+    need(!publication.assets?.length, 'SOURCE publication has foreign native assets');
+  } else {
+    need(same(facts.source_predecessor, stage), 'Native facts changed source predecessor');
+    need(rows.every(row => Number.isSafeInteger(row.native_cells) && row.native_cells >= 0), 'Native inventory has invalid measured cell count');
+    const cells = rows.reduce((sum, row) => sum + row.native_cells, 0);
+    need(Number.isSafeInteger(cells) && facts.assigned_cells === cells, 'Native facts assigned count differs from actual inventory');
+    const expected = ['base-native-manifest.json', 'ledger-batch.json', 'patch-batch.json', 'features.json', 'owners-batch.json.gz',
+      'release-envelope.json', 'owner-window.json', 'virtual-owner-window.json'].sort();
+    need(same(publication.assets?.map(p => p.path).sort(), expected), 'Incomplete fixed native publication asset roster');
+    if (products) {
+      const ledger = JSON.parse(products['ledger-batch.json']), patch = JSON.parse(products['patch-batch.json']), envelope = JSON.parse(products['release-envelope.json']);
+      need(same(ledger.scope_ids, ids) && same(ledger.rows?.map(row => row.component_id), ids), 'Native ledger omitted/reordered issued scope');
+      for (let i = 0; i < rows.length; i++) {
+        const actual = ledger.rows[i], record = rows[i];
+        need(actual.disposition === record.disposition && actual.native_cells === record.native_cells
+          && (!['assigned', 'zero-cell'].includes(actual.disposition) || actual.target_id === record.target_id), 'Native ledger/actual inventory differs');
+      }
+      need(ledger.assigned_cells === cells, 'Native ledger assigned count differs from actual inventory');
+      const ledgerHash = digest(products['ledger-batch.json']);
+      need(patch.ledger_sha256 === ledgerHash, 'Native patch is not bound to actual ledger');
+      for (const [role, name] of Object.entries({base_manifest: 'base-native-manifest.json', ledger: 'ledger-batch.json', patch: 'patch-batch.json', owner_roster: 'owners-batch.json.gz'})) {
+        const descriptor = envelope.additiveRelease?.[role];
+        need(descriptor?.bytes === products[name].length && descriptor.sha256 === digest(products[name]), 'Native envelope output join differs: ' + role);
+      }
+    }
+  }
+  return rows;
+}
+
+function historicalRebindCode(request, reader) {
+  need(same(request.executed_code?.map(p => p.path), CURRENT_REBIND_CODE), 'Complete historical rebind code roster required');
+  return CURRENT_REBIND_CODE.map(name => {
+    const pin = reader.pin(request.execution_commit, name); reader.read(pin);
+    return {path: name, bytes: pin.bytes, sha256: pin.sha256};
+  });
+}
+
+function localRebindJoin(request, terminal, publication, products, reader) {
+  const proof = JSON.parse(products['code-source.json']), plan = JSON.parse(products['issued-plan.json']), stdout = JSON.parse(products['stdout.json']);
+  need(terminal.code_source_sha256 === digest(products['code-source.json']) && same(proof.command, terminal.command)
+    && same(proof.command, request.execution?.command) && same(proof.pre_use, request.execution?.pre_use)
+    && same(proof.pre_use, proof.post_use) && proof.execution_commit === request.execution_commit,
+  'Rebind terminal/code-source/issued execution contract differs');
+  need(proof.pre_use.plan.bytes === products['issued-plan.json'].length && proof.pre_use.plan.sha256 === digest(products['issued-plan.json'])
+    && same(proof.pre_use.code, historicalRebindCode(request, reader)) && plan.execution_commit === request.execution_commit,
+  'Rebind actual issued plan/code bytes differ');
+  need(stdout.request_sha256 === terminal.request_sha256 && stdout.publication_sha256 === terminal.publication_sha256
+    && stdout.execution_commit === terminal.execution_commit && stdout.result_sha256 === digest(products['result.json'])
+    && publication.outputs.result.sha256 === stdout.result_sha256, 'Rebind actual stdout/product join differs');
+  need(Number.isSafeInteger(terminal.lifetime_rss_bytes) && terminal.lifetime_rss_bytes > 0 && terminal.lifetime_rss_bytes <= request.limits.rss_bytes
+    && Number.isFinite(terminal.elapsed_seconds) && terminal.elapsed_seconds >= 0 && terminal.elapsed_seconds <= request.limits.wall_seconds,
+  'Rebind actual terminal exceeds issued operating bounds');
 }
 
 export function retainProducts(config, root, reader) {
@@ -188,8 +310,10 @@ export function retainProducts(config, root, reader) {
     for (const [role, name] of Object.entries(custodyNames)) {
       const raw = ordinary(root, config.custody[role]); reader.budget.add({bytes: raw.length}); outputs[name] = raw;
     }
+    localRebindJoin(request, terminal, publication, outputs, reader);
   } else need(facts.request?.sha256 === digest(requestRaw) && facts.request.bytes === requestRaw.length
     && facts.operation === request.operation, 'Published facts are not joined to the actual terminal request');
+  if (!publication.outputs) sourceNativeJoin(request, facts, publication, outputs['inventory.jsonl.gz'], reader, outputs);
   return outputs;
 }
 
@@ -206,18 +330,25 @@ export function nativeRequests(config, reader) {
       && publication.facts.sha256 === group.source.facts.sha256 && publication.facts.bytes === group.source.facts.bytes
       && publication.inventory.sha256 === group.source.inventory.sha256 && publication.inventory.bytes === group.source.inventory.bytes,
     'Native request requires actual committed SOURCE publication products');
-    reader.read(group.source.inventory);
+    sourceNativeJoin(source, facts, publication, reader.read(group.source.inventory), reader);
     need(facts.execution_commit === terminal.execution_commit && facts.request?.sha256 === digest(sourceRaw)
       && same(facts.source_rule, source.source_rule), 'SOURCE facts/terminal/request mismatch');
-    const template = reader.json(group.template), additive = template.additive;
+    const template = requestProfile(reader.json(group.template), group, config, reader), additive = template.additive;
     need(template.operation === 'unactivated-additive-native-batch-v1' && additive?.source_profile === source.source_rule.profile
       && same(additive.scope_ids, source.source_rule.expected_ids) && same(template.baseline, source.baseline),
     'Native template method/scope/baseline differs from qualified source');
     need(unique(additive.scope_ids) && additive.scope_ids.every(id => !components.has(id)), 'Overlapping/duplicate native scopes');
     additive.scope_ids.forEach(id => components.add(id));
     need(Number.isSafeInteger(facts.runtime?.bytes) && facts.runtime.bytes > 0 && hex(facts.runtime.sha256, 64), 'Actual SOURCE runtime identity required');
-    const changes = {source_request_path: group.source.request, operating_path: group.source.operating,
-      publication_path: group.source.publication, facts_path: group.source.facts, inventory_path: group.source.inventory};
+    // Native's existing reader compares the literal issued request descriptor,
+    // not only an alias with equal bytes at a later retention commit.
+    const originalRequest = facts.request; reader.read(originalRequest);
+    need(originalRequest.path === group.source.request.path && originalRequest.bytes === sourceRaw.length
+      && originalRequest.sha256 === digest(sourceRaw), 'Original SOURCE request descriptor differs');
+    const inventoryPin = {...group.source.inventory, uncompressed_bytes: publication.inventory.uncompressed_bytes,
+      uncompressed_sha256: publication.inventory.uncompressed_sha256};
+    const changes = {source_request_path: originalRequest, operating_path: group.source.operating,
+      publication_path: group.source.publication, facts_path: group.source.facts, inventory_path: inventoryPin};
     const replaced = new Set(Object.keys(changes).map(key => additive[key]));
     need(replaced.size === 5 && [...replaced].every(name => additive.inputs.filter(p => p.path === name).length === 1), 'Native template lacks exact source input slots');
     const inputs = additive.inputs.filter(p => !replaced.has(p.path));
@@ -233,31 +364,29 @@ export function nativeRequests(config, reader) {
 }
 
 export function rebindCustody(config, reader, certificate = false) {
-  const request = reader.json(config.request), terminal = reader.json(config.terminal);
+  const request = reader.json(config.request), terminal = reader.json(config.terminal), publication = reader.json(config.publication);
   qualifyTerminal(terminal, reader.read(config.request), reader.read(config.publication), request);
-  if (certificate) {
-    const operating = reader.json(config.operating);
-    need(operating.execution_commit === terminal.execution_commit && operating.request_sha256 === config.request.sha256
-      && operating.publication_sha256 === config.publication.sha256, 'Operating/product commit binding differs');
-    const publication = reader.json(config.publication);
-    need(publication.execution_commit === request.execution_commit && publication.request_sha256 === config.request.sha256,
-      'Rebind publication request binding differs');
-    for (const role of ['facts', 'result']) {
-      reader.read(config[role]); const output = publication.outputs?.[role];
-      need(output && output.bytes === config[role].bytes && output.sha256 === config[role].sha256, 'Rebind output pin differs from actual publication');
-    }
-    return {'certificate.json': jsonBytes({version: 1, kind: 'qualified-native-additive-current-bank-rebind-v1',
-      execution_commit: request.execution_commit, base_selection: request.base_selection,
-      authority_registry_sha256: request.authority_registry_sha256,
-      request: config.request, facts: config.facts, publication: config.publication, result: config.result, operating: config.operating})};
-  }
   need(same(Object.keys(config.execution_custody).sort(), ['code_source', 'issued_plan', 'stderr', 'stdout', 'terminal']), 'Complete external execution custody required');
   need(same(config.execution_custody.terminal, config.terminal), 'Custody terminal differs');
-  for (const pin of Object.values(config.execution_custody)) reader.read(pin);
-  return {'operating.json': jsonBytes({version: 1, kind: 'native-additive-current-bank-rebind-operating-v1',
+  const expected = {version: 1, kind: 'native-additive-current-bank-rebind-operating-v1',
     execution_commit: terminal.execution_commit, request_sha256: config.request.sha256, publication_sha256: config.publication.sha256,
     exit_code: terminal.exit_code, signal: terminal.signal, owned_processes_remaining: terminal.owned_processes_remaining,
-    lifetime_rss_bytes: terminal.lifetime_rss_bytes, elapsed_seconds: terminal.elapsed_seconds, execution_custody: config.execution_custody})};
+    lifetime_rss_bytes: terminal.lifetime_rss_bytes, elapsed_seconds: terminal.elapsed_seconds, execution_custody: config.execution_custody};
+  const operating = certificate ? reader.json(config.operating) : expected;
+  need(same(operating, expected), 'Operating proof differs from exact genuine terminal/custody');
+  need(publication.execution_commit === request.execution_commit && publication.request_sha256 === config.request.sha256,
+    'Rebind publication request binding differs');
+  for (const role of ['facts', 'result']) {
+    reader.read(config[role]); const output = publication.outputs?.[role];
+    need(output && output.bytes === config[role].bytes && output.sha256 === config[role].sha256, 'Rebind output pin differs from actual publication');
+  }
+  const custody = Object.fromEntries(Object.entries(config.execution_custody).map(([role, pin]) => [role, reader.read(pin)]));
+  verifyCurrentRebindExecution({request, operating, expectedCode: historicalRebindCode(request, reader), custody: {...custody, result_sha256: config.result.sha256}});
+  if (!certificate) return {'operating.json': jsonBytes(operating)};
+  return {'certificate.json': jsonBytes({version: 1, kind: 'qualified-native-additive-current-bank-rebind-v1',
+    execution_commit: request.execution_commit, base_selection: request.base_selection,
+    authority_registry_sha256: request.authority_registry_sha256,
+    request: config.request, facts: config.facts, publication: config.publication, result: config.result, operating: config.operating})};
 }
 
 export function composeAuthorities(config, reader) {
