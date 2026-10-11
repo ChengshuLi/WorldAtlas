@@ -82,7 +82,7 @@ def main():
     if strict['baseline_commit'] != BASE or current['baseline'] != BASE or strict['scientific_or_publication_approval'] is not False:
         raise ValueError('Wrong current numerical premises')
     measured = {r['component_id']: r for r in strict['results']}
-    if any(measured[cid]['failed_predicates'] for cid in selected_ids):
+    if set(selected_ids).intersection(config['held_necessary_only_ids']) or any(measured[cid]['failed_predicates'] for cid in selected_ids):
         raise ValueError('Failed numerical case cannot enter producer handoff')
     # Reauthenticate whole original physical products, including nonselected rows.
     report = json.loads(read('coordination/engineering/global-physical-comparison-20261006/results/report.json', BASE))
@@ -161,7 +161,7 @@ def main():
         if cid in historical_results:
             row.update(disposition='retained-prior-strict-target-premise-failure-not-reexecuted', historical_observation=historical_results[cid], historical_checkpoint=config['historical_checkpoint'])
         elif cid in measured:
-            row.update(disposition='source-relative-supported-awaiting-independent-review' if cid in selected_ids else 'current-qualification-failed-or-held', current_numerical_observation=measured[cid])
+            row.update(disposition=('source-relative-supported-awaiting-independent-review' if cid in selected_ids else 'necessary-only-held-source-sufficiency' if cid in config['held_necessary_only_ids'] else 'current-target-positive-overlap-refused'), current_numerical_observation=measured[cid])
         all_dispositions.append(row)
     if len(all_dispositions) != 100 or {r['component_id'] for r in all_dispositions} != set(roster['candidate_ids']):
         raise ValueError('Incomplete full wave dispositions')
