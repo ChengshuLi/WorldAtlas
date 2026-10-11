@@ -18,10 +18,10 @@ newly added continuous map area. Incremental area remains unknown.
 The active handoff is 567,595 bytes, SHA-256
 `8fc69221771a60d516425009adfe0edf6bf2f1ac952b85a8d34c0bf54f5f59dd`.
 Its four-case v2 execution membership preserves passive original accounting.
-No scientific cases are fabricated for the other96 original members.
+No scientific cases are fabricated for the other 96 original members.
 The original one-case draft001 remains preserved and is superseded by002.
 
-The companion `all100-dispositions.json` preserves every original ID and outcome:
+The companion `all 100-dispositions.json` preserves every original ID and outcome:
 
 - 4 source-relative proposals under the reviewed existing literal-operation policy
 - 4 historical COD5 strict-target failures retained; current custody remains unqualified
@@ -82,9 +82,9 @@ The shared [literal-operation interpretation](https://github.com/ChengshuLi/Worl
 independently accepts the existing operation as OR of unchanged original primitives,
 not the dissolved replacements measured by those diagnostics. Same-intended-owner
 coverage remains with that owner; foreign-owner overlap remains forbidden. The
-identical3,786-byte policy body is retained in `literal-union-source-policy-v1.json`,
+identical 3,786-byte policy body is retained in `literal-union-source-policy-v1.json`,
 SHA-256 `21c143adcc3883046c9e93339201b945bad22210df41d481d0a727ab8ac6e967`.
-Its source is frozen at NOR commit05b118a8; this packet makes no accepted-ancestry
+Its source is frozen at NOR commit 05b118a8; this packet makes no accepted-ancestry
 claim or dependency on a separate source merge. No executable method changed.
 
 All four pass the genuine unchanged administrative SOURCE-premise entry point.
