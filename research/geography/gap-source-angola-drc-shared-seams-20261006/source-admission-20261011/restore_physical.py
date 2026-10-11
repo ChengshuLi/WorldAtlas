@@ -68,7 +68,7 @@ def main():
     names = ['components-021.jsonl.gz', 'components-059.jsonl.gz',
              'original-components.json', 'physical-records.json',
              'queried-source-metadata.json', 'receipt.json']
-    destination = ns['NewVintage'](base, OWN + '/', vintage, names)
+    destination = ns['NewVintage'](base, OWN.rsplit('/', 1)[0] + '/', vintage, names)
 
     def checked(raw, pin, decoded=False):
         prefix = 'uncompressed_' if decoded else ''
