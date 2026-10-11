@@ -1,8 +1,11 @@
 // Actual registered v2 and retained scientific-premise entry points only.
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
-import {retainedAdministrativeSourcePremises,registeredAdministrativeViews} from '../../../../scripts/additive-gap-repair.mjs';
-const scope=JSON.parse(fs.readFileSync(new URL('../vintages/source-handoff-001/source-handoff.json',import.meta.url)));
+import {execFileSync} from 'node:child_process';
+import {gunzipSync} from 'node:zlib';
+import {createHash} from 'node:crypto';
+import {retainedAdministrativeSourcePremises,registeredAdministrativeViews,registeredOriginalPhysicalProduct} from '../../../../scripts/additive-gap-repair.mjs';
+const scope=JSON.parse(fs.readFileSync(new URL('../vintages/source-handoff-002/source-handoff.json',import.meta.url)));
 const clone=()=>structuredClone(scope);
 const targetFor=(s,i=0)=>{const c=s.candidate_source_native_bindings[i];return s.current_neighbor_binding.rows.find(r=>r.component_id===c.component_id).candidate_neighbors.find(r=>r.feature.id===c.retained_payload.target_stable_location_id).feature;};
 function premise(s,i=0,target=targetFor(s,i)){const c=s.candidate_source_native_bindings[i],p=s.original_physical_comparison_bindings.find(r=>r.component_id===c.component_id);return retainedAdministrativeSourcePremises({record:p.physical_comparison.row,candidate:c.original_candidate_feature.geometry,sourceCase:c,sourceScope:s,target});}
@@ -20,4 +23,26 @@ test('missing admitted case refuses',()=>{const s=clone();s.candidate_source_nat
 test('duplicate admitted case refuses',()=>{const s=clone();s.candidate_source_native_bindings[1]=structuredClone(s.candidate_source_native_bindings[0]);assert.throws(()=>registeredAdministrativeViews(s,entry));});
 test('missing passive member refuses',()=>{const s=clone();s.original_gap_membership.members.pop();assert.throws(()=>registeredAdministrativeViews(s,entry));});
 test('fabricated passive member refuses',()=>{const s=clone();s.original_gap_membership.members.push({...s.original_gap_membership.members[0],component_id:'physical-component:foreign'});assert.throws(()=>registeredAdministrativeViews(s,entry));});
+// Expectations come independently from the immutable original report and actual
+// complete product bytes, not from the projected registration under test.
+const originalReport=JSON.parse(execFileSync('git',['show','6a99a7606b9c2d11ac8cd093610653d4cd5d1382:coordination/engineering/global-physical-comparison-20261006/results/report.json']));
+const productByPath=new Map(originalReport.products.map(p=>[p.path,p]));
+const names=['components-001.jsonl.gz','components-003.jsonl.gz','components-014.jsonl.gz','components-034.jsonl.gz','components-041.jsonl.gz','components-042.jsonl.gz','components-046.jsonl.gz','components-054.jsonl.gz','components-056.jsonl.gz','components-060.jsonl.gz','sources-000.jsonl.gz'];
+const sha=b=>createHash('sha256').update(b).digest('hex');
+let logical=0;
+for(const name of names)test('actual registered original product '+name,()=>{
+ const product=productByPath.get(name),part=name.split('-')[1].split('.')[0];
+ const encoded=name.startsWith('sources-')?execFileSync('git',['show','6a99a7606b9c2d11ac8cd093610653d4cd5d1382:research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/'+name],{maxBuffer:4*1024*1024}):fs.readFileSync(new URL('../vintages/physical-custody-'+part+'-001/'+name,import.meta.url));
+ const decoded=gunzipSync(encoded,{maxOutputLength:product.uncompressed_bytes+1});logical+=encoded.length+decoded.length;assert(logical<128*1024*1024);
+ assert.equal(encoded.length,product.bytes);assert.equal(sha(encoded),product.sha256);assert.equal(decoded.length,product.uncompressed_bytes);assert.equal(sha(decoded),product.uncompressed_sha256);
+ const rows=decoded.toString().trimEnd().split('\n').length;
+ assert.equal(registeredOriginalPhysicalProduct(scope,product,rows),true);assert.equal(registeredOriginalPhysicalProduct(scope,product,rows+1),false);
+});
+const first=productByPath.get(names[0]),registeredRows=scope.physical_restoration.restorations.find(p=>p.path===first.path).rows;
+for(const key of ['bytes','sha256','uncompressed_bytes','uncompressed_sha256'])test('altered original product '+key+' refuses',()=>{const product=structuredClone(first);product[key]=typeof product[key]==='number'?product[key]+1:'0'.repeat(64);assert.equal(registeredOriginalPhysicalProduct(scope,product,registeredRows),false);});
+test('altered declared complete row count refuses',()=>{const s=clone();s.physical_restoration.restorations[0].rows++;assert.equal(registeredOriginalPhysicalProduct(s,first,registeredRows),false);});
+test('duplicate whole product registration refuses',()=>{const s=clone();s.physical_restoration.restorations.push(structuredClone(s.physical_restoration.restorations[0]));assert.equal(registeredOriginalPhysicalProduct(s,first,registeredRows),false);});
+test('missing whole product registration refuses',()=>{const s=clone();s.physical_restoration.restorations=s.physical_restoration.restorations.filter(p=>p.path!==first.path);assert.equal(registeredOriginalPhysicalProduct(s,first,registeredRows),false);});
+test('historical receipt-list shape refuses',()=>{const s=clone();s.physical_restoration=s.physical_restoration_receipts;assert.equal(registeredOriginalPhysicalProduct(s,first,registeredRows),false);});
 console.log('1..'+count);
+console.log(JSON.stringify({original_product_logical_bytes:logical,peak_rss_bytes:process.resourceUsage().maxRSS*1024}));
