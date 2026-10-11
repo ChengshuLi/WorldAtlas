@@ -396,7 +396,7 @@ test('registered 533-role authority derives complete custody without raising act
   const codePin=rows.find(p=>p.copy==='code.json');fs.unlinkSync(path.join(f.repo,codePin.path));head=f.commit();assert.throws(()=>readArtifactConsumption(new ImmutableReader(f.repo,head),selection,manifest),/whole ordinary Git input/);f.write(codePin.path,read('code.json'));head=f.commit();
   // All complete source metadata is prospectively charged before code or
   // qualification body reads; distinguish declarations from actual opens.
-  const limited=new ImmutableReader(f.repo,head);const original=limited.git.bind(limited);let sourceOpens=0;
+  const limited=new ImmutableReader(f.repo,head,{allowance:{phaseBytes:256*1024*1024,rssBytes:1024*1024*1024}});const original=limited.git.bind(limited);let sourceOpens=0;
   limited.git=(...args)=>{if(args[0]==='cat-file'&&args[1]==='blob'&&[codePin.git_blob_oid,rows.find(p=>p.copy==='qualification.json.gz').git_blob_oid].includes(args[2]))sourceOpens++;return original(...args);};
   limited.used=256*1024*1024-5*1024*1024;
   assert.throws(()=>readArtifactConsumption(limited,selection,manifest),/prospective cap/);assert.equal(sourceOpens,0);
@@ -469,7 +469,7 @@ for(const [title,relative]of [['genuine Cloudflare authority retains complete 53
   const codePin=rows.find(p=>p.copy==='code.json');fs.unlinkSync(path.join(f.repo,codePin.path));head=f.commit();assert.throws(()=>readArtifactConsumption(new ImmutableReader(f.repo,head),selection,manifest),/whole ordinary Git input/);f.write(codePin.path,read('code.json'));head=f.commit();
   // All complete source metadata is prospectively charged before code or
   // qualification body reads; distinguish declarations from actual opens.
-  const limited=new ImmutableReader(f.repo,head);const original=limited.git.bind(limited);let sourceOpens=0;
+  const limited=new ImmutableReader(f.repo,head,{allowance:{phaseBytes:256*1024*1024,rssBytes:1024*1024*1024}});const original=limited.git.bind(limited);let sourceOpens=0;
   limited.git=(...args)=>{if(args[0]==='cat-file'&&args[1]==='blob'&&[codePin.git_blob_oid,rows.find(p=>p.copy==='qualification.json.gz').git_blob_oid].includes(args[2]))sourceOpens++;return original(...args);};
   limited.used=256*1024*1024-5*1024*1024;
   assert.throws(()=>readArtifactConsumption(limited,selection,manifest),/prospective cap/);assert.equal(sourceOpens,0);
