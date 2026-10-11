@@ -12,6 +12,16 @@ To inspect before building:
 
 For a caller that genuinely requires ancestry, supply repeated `--ancestor COMMIT`. Ordinary package CI is deliberately shallow; it does not acquire a new historical ancestry requirement. Existing immutable selected/source readers still authenticate historical custody. `--browser required` fails when installed Playwright cannot launch; `off` explicitly records that capability was not requested. No browser download or alternate executable is selected by this tool.
 
+## Package-entry correction and reproducible launch
+
+The initial hosted package run refused `Complete actual execution role closure required`: importing a new preflight module had expanded the existing immutable application-consumer role roster. The correction keeps the implementation inside the already-admitted `scripts/package-build.mjs`; the standalone preflight module only reexports that implementation. The existing role roster and retained consumer are unchanged. Before copying, preflight now checks that the actual static, hosted, or Cloudflare project-import closure exactly matches the already-authenticated critical/wrapper roles.
+
+Use plain Node with the explicitly selected complete Python environment and the existing locked npm cache. The following invocation performs no installation or hidden download (replace `PYTHON_ENV_BIN` with that environment's verified `bin` directory):
+
+    env -u NODE_OPTIONS -u NODE_PATH PATH="PYTHON_ENV_BIN:$PATH" GIT_NO_LAZY_FETCH=1 PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 npm run build:cloudflare
+
+The first corrective local invocation retained an inherited Node injection option and correctly refused `Current package execution must use plain Node`. Preflight now aggregates that exact requirement before copying as well. The corrected invocation at `658b6701c75df6dc97807d39c66ce62696b88398` completed the real full Cloudflare build in **232.32 seconds**, maximum RSS **2,635,564 KiB**, exit 0. The unchanged built-output reader then passed in **4.16 seconds**, maximum RSS **361,232 KiB**. This exercises the actual previously failing consumer and emitted assets. Thirteen preflight controls and nine package controls passed, including all three real entry-role rosters and extra/missing-role refusals. The prior failed hosted/local attempts remain part of the recorded history. No scientific producer was rerun for this correction.
+
 ## Check an actual emitted release
 
     node scripts/selected-delivery-smoke.mjs --root REPO --emitted-directory EMITTED_CLIENT --expectations EXPECTATIONS_JSON --output NEW_REPORT
