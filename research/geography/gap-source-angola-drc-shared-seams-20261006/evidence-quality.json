@@ -479,6 +479,72 @@
       "bytes": 885,
       "sha256": "f8826b81d380a22a26e90020559b277edcfed7de64067fb7b2a5583f72bb20dd",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/cohort100-source-handoff-003/all100-dispositions.json",
+      "bytes": 175191,
+      "sha256": "57be903e7bb63b76c2801eb4923204a93d29dddb6be5d9ae2bc11e2a1f147c2c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/cohort100-source-handoff-003/projection.json",
+      "bytes": 1973,
+      "sha256": "e105da429b411dfb891a3bef0c899e5c2b5c3844795caf17103cc82b1a70eed2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/cohort100-source-handoff-003/publication.json",
+      "bytes": 789,
+      "sha256": "b3b3c46359d48900e9c9ce9669c9ea29ea42f8e64a5d7a008d9116da8d2b7d4b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/cohort100-source-handoff-003/source-handoff.json",
+      "bytes": 526374,
+      "sha256": "e9c8f541cc64b3a36d6526c14b93a044faf63b52166f4edce041d40da44eeb8d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/cohort100-20261011/validation/full-source-join-result.json",
+      "bytes": 4163,
+      "sha256": "7eabc60006c18978f9c94ad458a5a7162147d2e7518b73769640cc385f807f79",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/cohort100-20261011/validation/full-source-join-executed.mjs.txt",
+      "bytes": 2467,
+      "sha256": "d3bcc36c8b27738abdf2c75d122f5ec16f2438f30d05dcc6f1fc57b27eb4a4eb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/cohort100-20261011/validation/ab011-python-feature.json",
+      "bytes": 6241,
+      "sha256": "3d0a03658cfff30847d0268e18842918cd5a20d2cbda7e5c0330a2546147b0f0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/cohort100-20261011/validation/ab011-python-geometry.json",
+      "bytes": 6086,
+      "sha256": "fa622c83f7ee36fdb6c4cb300f47f6fa887c7c8fedead76834b9bd314f71badc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/cohort100-20261011/validation/ab011-js-feature.json",
+      "bytes": 6239,
+      "sha256": "4ee88c2fcade2f3dc5f63407c63244235ada306d037138fdf96d24322534680a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/cohort100-20261011/validation/ab011-js-geometry.json",
+      "bytes": 6084,
+      "sha256": "924aaf5c412bee0834780b748d73d3d171f55c80c4940a69e88745353ee7ab10",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/cohort100-20261011/validation/premise-controls-three.txt",
+      "bytes": 1439,
+      "sha256": "21adae7eaccdc93767fb167133843febbc374f1b6108567059a34d8a115674b3",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
@@ -520,7 +586,7 @@
       "id": "v2-handoff-builder",
       "kind": "generator",
       "helper_version": "worldatlas-evidence-preparation-v1",
-      "description": "Frozen metadata-only joins and fresh-vintage output: four full original cases under the shared independently reviewed existing literal-OR interpretation; all100 dispositions remain separate. Original component/family/batch mapping and original canonical preimages are authenticated. Actual unchanged method15/v2 entry points and mutation controls pass.",
+      "description": "Four full original cases remain source-relative supported under the independently reviewed literal-OR interpretation. Fresh frozen metadata projection003 selects only three cases matching actual full-source JavaScript feature/geometry hashes. All scope-dependent case/canonical/membership arrays are filtered; complete original physical/current reports and all100 outcomes remain intact. ab011 is an explicit original-serialization hold, without coordinate/hash changes or GIS replay.",
       "software": "Python 3.12.14; Node 24.19.0; existing additive-gap-repair.mjs",
       "units": "complete case bindings and original accounting identities"
     },
@@ -570,15 +636,15 @@
       "value": 100,
       "unit": "original gap IDs",
       "vintage": "baseline",
-      "input_sha256": "d5c47dda878c15383b18f3f68858eaf8f3238e75a88b9b5a1068610a0bcf00b8",
+      "input_sha256": "57be903e7bb63b76c2801eb4923204a93d29dddb6be5d9ae2bc11e2a1f147c2c",
       "evaluation_commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382"
     },
     {
       "id": "proposed_source_members",
-      "value": 4,
+      "value": 3,
       "unit": "original gap IDs",
       "vintage": "baseline",
-      "input_sha256": "d5c47dda878c15383b18f3f68858eaf8f3238e75a88b9b5a1068610a0bcf00b8",
+      "input_sha256": "57be903e7bb63b76c2801eb4923204a93d29dddb6be5d9ae2bc11e2a1f147c2c",
       "evaluation_commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382"
     },
     {
@@ -636,6 +702,14 @@
       "vintage": "baseline",
       "input_sha256": "8d8e0bb5d85ca115cd344b0bb0f9c94682f5fe4b654fac1af8974afdae6fa64f",
       "evaluation_commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382"
+    },
+    {
+      "id": "source_relative_premise_members",
+      "value": 4,
+      "unit": "original gap IDs",
+      "vintage": "baseline",
+      "input_sha256": "57be903e7bb63b76c2801eb4923204a93d29dddb6be5d9ae2bc11e2a1f147c2c",
+      "evaluation_commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382"
     }
   ],
   "metric_bindings": [
@@ -661,13 +735,13 @@
     },
     {
       "metric_id": "wave_original_components",
-      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/cohort100-source-handoff-002/all100-dispositions.json",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/cohort100-source-handoff-003/all100-dispositions.json",
       "json_pointer": "/scope_count"
     },
     {
       "metric_id": "proposed_source_members",
-      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/cohort100-source-handoff-002/all100-dispositions.json",
-      "json_pointer": "/disposition_counts/literal-policy-source-supported-awaiting-independent-review"
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/cohort100-source-handoff-003/all100-dispositions.json",
+      "json_pointer": "/immediate_source_entry_count"
     },
     {
       "metric_id": "physical_elapsed_seconds",
@@ -703,6 +777,11 @@
       "metric_id": "publication_refusal_controls",
       "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/cohort100-20261011/validation/publication-controls.json",
       "json_pointer": "/passed"
+    },
+    {
+      "metric_id": "source_relative_premise_members",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/cohort100-source-handoff-003/all100-dispositions.json",
+      "json_pointer": "/source_relative_premise_count"
     }
   ],
   "summaries": [],
@@ -716,7 +795,7 @@
         "retained-necessary-predicates",
         "shared-literal-policy"
       ],
-      "text": "Complete100 original gaps remain accounted. Four complete candidates have full original physical/query/source custody, unique consumed administrative source support, valid current contexts and zero positive foreign-owner overlap. All4 pass the unchanged actual administrative premise; the reviewed existing literal-OR policy interprets same-owner overlap and dissolved diagnostics without rewriting failures. Handoff002 proposes these4 for independent source acceptance."
+      "text": "All100 original gaps remain accounted. Four complete candidates retain full original physical/query/source custody, unique consumed administrative source support, valid current contexts, zero positive foreign-owner overlap and unchanged pure administrative premise positives. Handoff003 proposes only8441/a207/fb03, whose actual full-source feature/geometry JavaScript hash joins pass. ab011 remains source-relative supported but is explicitly held because original Python source canonical bytes differ from SOURCE-stage JavaScript serialization; original hashes and geometry are unchanged."
     },
     {
       "status": "unresolved",
@@ -724,7 +803,7 @@
         "retained-necessary-predicates",
         "shared-literal-policy"
       ],
-      "text": "Other96 remain explicit:80 not full union-covered,10 multi-owner construction leads,2 unresolved bindings,4 preserved historical failures without current custody qualification. Every original strict/dissolve failure for the4 proposed cases remains unchanged. None has a full-current-coverage proof; incremental continuous area is unknown. Whole-gap completion waits for actual delivery gates."
+      "text": "Other97 outside immediate execution remain explicit:80 not full union-covered,10 multi-owner construction leads,2 unresolved bindings,4 historical failures without current custody qualification and1 source-relative-supported serialization hold. All strict/dissolve failures and prior001/002 handoffs remain unchanged. None of the4 measured cases has a full-current-coverage proof; incremental continuous area remains unknown. Actual SOURCE/NATIVE and selected delivery gates remain required."
     },
     {
       "status": "unresolved",
@@ -751,6 +830,7 @@
     "node research/geography/gap-source-angola-drc-shared-seams-20261006/cohort100-20261011/check_handoff.mjs",
     "PYTHONDONTWRITEBYTECODE=1 python research/geography/gap-source-angola-drc-shared-seams-20261006/cohort100-20261011/check_publication.py",
     "node scripts/evidence-quality.mjs research/geography/gap-source-angola-drc-shared-seams-20261006/evidence-quality.json",
-    "PYTHONDONTWRITEBYTECODE=1 python research/geography/gap-source-angola-drc-shared-seams-20261006/cohort100-20261011/build_handoff.py da4ad546348e645c5d2eeb516e49b81cd424b05f cohort100-source-handoff-002"
+    "PYTHONDONTWRITEBYTECODE=1 python research/geography/gap-source-angola-drc-shared-seams-20261006/cohort100-20261011/build_handoff.py da4ad546348e645c5d2eeb516e49b81cd424b05f cohort100-source-handoff-002",
+    "PYTHONDONTWRITEBYTECODE=1 python research/geography/gap-source-angola-drc-shared-seams-20261006/cohort100-20261011/project_compatible_handoff.py 5e9d0b222929e1c9c406f5cfa0860cf4d1738af1 cohort100-source-handoff-003"
   ]
 }

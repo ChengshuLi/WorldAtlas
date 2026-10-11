@@ -8,22 +8,23 @@ original 130-member batch and 44 across the other 11 batches.
 
 ## Result and current proposed handoff
 
-`../vintages/cohort100-source-handoff-002/source-handoff.json` proposes four
-complete original gaps for final independent source acceptance: `8441…`, `a207…`,
-`ab011…` and `fb03…`. Full IDs, source owners and original batch/family mappings
-are preserved in the handoff and `roster.json`. The first and fourth are
-microscopic components; the inherited detector areas must not be described as
-newly added continuous map area. Incremental area remains unknown.
+`../vintages/cohort100-source-handoff-003/source-handoff.json` proposes three
+complete original gaps for immediate execution: `8441…`, `a207…` and `fb03…`.
+Four cases remain source-relative supported under the reviewed literal-operation
+interpretation. The fourth, `ab011…`, is held because the earlier full-source
+SOURCE boundary hashes original numeric bytes differently in JavaScript. Original
+IDs, owners and passive batch/family mappings remain unchanged.
 
-The active handoff is 567,595 bytes, SHA-256
-`8fc69221771a60d516425009adfe0edf6bf2f1ac952b85a8d34c0bf54f5f59dd`.
-Its four-case v2 execution membership preserves passive original accounting.
-No scientific cases are fabricated for the other 96 original members.
-The original one-case draft001 remains preserved and is superseded by002.
+The active three-case handoff is 526,374 bytes, SHA-256
+`e9c8f541cc64b3a36d6526c14b93a044faf63b52166f4edce041d40da44eeb8d`.
+The one-case draft001 and four-case draft002 remain preserved. No held-case
+scientific binding is manufactured. The inherited detector areas are not newly
+added continuous map area; incremental area remains unknown.
 
-The companion `all 100-dispositions.json` preserves every original ID and outcome:
+The companion `all100-dispositions.json` preserves every original ID and outcome:
 
-- 4 source-relative proposals under the reviewed existing literal-operation policy
+- 3 source-relative proposals passing the actual full-source entry hash join
+- 1 source-relative-supported original-serialization hold (`ab011…`)
 - 4 historical COD5 strict-target failures retained; current custody remains unqualified
 - 10 collectively source-union-covered multi-owner construction leads
 - 2 full-union-covered cases with unresolved single-owner binding
@@ -93,6 +94,24 @@ actual selected part-5 source. Its parsed complete value equals the selected
 current target; preserving that preimage avoids confusing Python and JS numeric
 serialization domains. No coordinate or pointset normalization is performed.
 
+The later complete-source metadata preflight found that `ab011…` fails the
+SOURCE stage's earlier full-feature hash join despite its pure premise pass.
+The complete AGO product's original feature 120 uses coordinate `-8.0`; JavaScript
+serializes it as `-8`. Its original Python feature/geometry hashes authenticate,
+and neither original bytes nor hashes were replaced. The failed preflight,
+executed scratch-check text, and both canonical preimages are retained under
+`validation/`. The three other feature/geometry joins pass exactly. Independent
+four-case source-relative review remains relevant, but does not establish four-case
+SOURCE invocation compatibility. Explicit engineering preimage support and renewed
+gates are required for the held case.
+
+Frozen `project_compatible_handoff.py` selects the three compatible IDs from exact
+002 plus that preflight. It consumes 770,112 input bytes with 16,195,584-byte peak
+RSS under its 128 MiB logical guard. It preserves complete four-case physical and
+current-context receipts as four-case observations, filters every execution
+case/canonical/passive membership array, and preserves all 100 outcomes. No
+physical/source/current/GIS replay was needed.
+
 Actual SOURCE/NATIVE qualification must still subtract existing same-owner cells,
 refuse foreign occupancy/loss/reassignment, and pass current-neighbor, selected
 continuous and consumer gates. Source acceptance does not establish delivery or
@@ -116,7 +135,10 @@ bytes. The final metadata join uses 119,735,691 input bytes under a 128 MiB guar
 Actual receipts and `validation/execution-resources.json` and `validation/execution-resources-four.json` retain measured RSS,
 phase limits and execution identities.
 
-Sixteen controls use the actual administrative source-premise/v2 entry points,
+The retained four-case draft has sixteen actual premise/v2 controls. The final
+three-case packet has twenty controls, including the three actual whole-source
+feature/geometry joins, changed hash rejection and the preserved ab011 rejection.
+Other controls use the actual administrative source-premise/v2 entry points,
 including candidate, physical/water/query/native identity, target parent, unique
 source, scientific membership and passive membership mutations. Four actual
 producer entry-point controls refuse occupied destinations and dangling symlinks,
