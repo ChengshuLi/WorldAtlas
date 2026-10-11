@@ -1189,7 +1189,57 @@ def output_budget_transition(repo, baseline, candidate):
             'candidate_code_executed': False, 'candidate_scientific_qualification': False}
 
 
-def inspect(repo, baseline, candidate):
+def run_applicability_collector(command, env, timeout=120):
+    # Metadata acquisition may launch Git. A timeout must reap that owned group
+    # before ordinary prefetch/full checks can resume in the same object store.
+    if os.name != 'posix':
+        raise OSError('Owned applicability process groups unavailable')
+    child = subprocess.Popen(command, env=env, stdout=subprocess.PIPE,
+                             stderr=subprocess.PIPE, start_new_session=True)
+    try:
+        stdout, stderr = child.communicate(timeout=timeout)
+    finally:
+        try:
+            os.killpg(child.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        except OSError as error:
+            raise RuntimeError('Cannot terminate owned applicability process group') from error
+        try:
+            child.communicate(timeout=5)
+        except subprocess.TimeoutExpired as error:
+            raise RuntimeError('Applicability process group did not terminate') from error
+    return subprocess.CompletedProcess(command, child.returncode, stdout, stderr)
+
+
+def unchanged_selected_inputs(repo, baseline, candidate):
+    """Bounded applicability only; incomplete identity discovery keeps full checks."""
+    if baseline == candidate:
+        # Finite code transitions deliberately ask for a genuine baseline proof.
+        return None
+    env = dict(os.environ, GIT_NO_LAZY_FETCH='1', GIT_TERMINAL_PROMPT='0')
+    for name in ['NODE_OPTIONS', 'NODE_PATH']:
+        env.pop(name, None)
+    try:
+        result = run_applicability_collector([
+            env.get('NODE', 'node'), str(repo / 'scripts/check-unchanged-selected-geography.mjs'),
+            str(repo), baseline, candidate], env)
+        if result.returncode or len(result.stdout) > 2 * 1024 * 1024:
+            return None
+        proof = json.loads(result.stdout)
+        if (not isinstance(proof, dict) or proof.get('version') != 1
+                or proof.get('status') != 'unchanged-selected-inputs'
+                or proof.get('baseline_commit') != baseline
+                or proof.get('candidate_commit') != candidate
+                or proof.get('trusted_reader_policy_commit') != baseline
+                or proof.get('candidate_code_executed') is not False):
+            return None
+        return proof
+    except (OSError, ValueError, subprocess.TimeoutExpired):
+        return None
+
+
+def inspect(repo, baseline, candidate, *, prefetch=False):
     immutable_sha(baseline)
     immutable_sha(candidate)
     with stage_timing('trusted-checkout-inspect'):
@@ -1201,6 +1251,17 @@ def inspect(repo, baseline, candidate):
               'candidate_code_executed': False,
               'baseline_input_inventory': before, 'candidate_input_inventory': after,
               'published': False, 'source_approval': False}
+    if before == after and baseline != candidate:
+        with stage_timing('unchanged-selected-inputs'):
+            applicability = unchanged_selected_inputs(repo, baseline, candidate)
+        if applicability is not None:
+            return {**report, 'status': 'not-applicable', 'regressions': None,
+                    'unchanged_selected_inputs': applicability,
+                    'limits': ['Complete selected consumed-input and method identities are unchanged; applicability only, not fresh scientific validation or global gap clearance.',
+                               'Independent source quality, evidence, review and current combined-tree consumer gates remain required.']}
+    if prefetch:
+        with stage_timing('selected-prefetch'):
+            prefetch_declared_inputs(repo, baseline, candidate)
     transition = output_budget_transition(repo, baseline, candidate) or programme_registry_transition(repo, baseline, candidate) or linux_support_transition(repo, baseline, candidate)
     if transition is not None:
         if before != after:
@@ -1333,9 +1394,7 @@ def main():
     if args.fetch:
         with stage_timing('candidate-fetch'):
             fetch_candidate(repo, args.candidate)
-        with stage_timing('selected-prefetch'):
-            prefetch_declared_inputs(repo, args.baseline, args.candidate)
-    result = apply_adjudications(repo, args.candidate, inspect(repo, args.baseline, args.candidate))
+    result = apply_adjudications(repo, args.candidate, inspect(repo, args.baseline, args.candidate, prefetch=args.fetch))
     passed = result['status'] in ['not-applicable', 'no-footprint-change', 'no-new-regression'] or (
         result.get('adjudication', {}).get('status') == 'all-findings-supported-and-reviewed')
     result['gate_status'] = 'passed' if passed else 'blocked'

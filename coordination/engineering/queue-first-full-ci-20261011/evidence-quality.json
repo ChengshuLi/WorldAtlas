@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "issue": 1746,
+  "lane": "engineering",
+  "worker_id": "01a12c31-79bf-741f-b094-7fa0aa575029",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "6149104603dec4cc4967a10cba9bfb1e90a119b7",
+    "files": [
+      {
+        "path": "package.json",
+        "bytes": 1417,
+        "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-geographic-check.py",
+        "bytes": 84237,
+        "sha256": "f634daac63203d781dd4c8fa6791d27c115d9e776c722474c20b03a77e9e4448",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/check-effective-geographic-regression.mjs",
+        "bytes": 75074,
+        "sha256": "801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+        "bytes": 139553,
+        "sha256": "63745cc5d4f15bdd8c153787df07379d813ab037fc1e0734944a75568235e8aa",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+        "bytes": 24194,
+        "sha256": "84ddc84798fa371e37c0acbd6764a39ef79296f3b8a57ff09aa4ed416e7ae1b9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/linux-runner-portability-20261010/historical-code-vectors.json",
+        "bytes": 40034,
+        "sha256": "fcdef8074e30f7981d6089c59768e118a00ce0c419568e06685b313a4e31388b",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/queue-first-full-ci-20261011/cold-historical-1743-proof.json",
+      "bytes": 658926,
+      "sha256": "2744b02a5b98180c5732d5a48969ad184aed51bf35c28604af37d58913ffc13a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-first-full-ci-20261011/cold-historical-1743-timing.json",
+      "bytes": 3170,
+      "sha256": "0b6f21d2baf8cd6803fefc5c9e6bc0fe9b303ecc95c204b1021e6f843ab101ae",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-first-full-ci-20261011/focused-tests.log",
+      "bytes": 1276,
+      "sha256": "6669401ee36fbaf8f05a254866fd09763d47388a2ea43ae4c71247bdf7cb1787",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-first-full-ci-20261011/historical-1743-proof.json",
+      "bytes": 671986,
+      "sha256": "ba07c827040b6160a48cb954d102ae583226af64322749a9a4988f667e45d7b0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-first-full-ci-20261011/historical-1743-timing.json",
+      "bytes": 757,
+      "sha256": "7a1430230712551f471b314c96fd28b1e6730dd7227ebbbb2898d13c2937e622",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-first-full-ci-20261011/linux-fixture-tests.log",
+      "bytes": 414,
+      "sha256": "9edc4f4a45a4a5184cc1fe9374b882773e24e66454afb937a0e7d5c1bfd1450a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-first-full-ci-20261011/wrapper-final-tests.log",
+      "bytes": 235,
+      "sha256": "2dfc0692ffb82bdea4081ba5d33cc28afcc33842bf1aba964eb8b7f94f77ac5d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-first-full-ci-20261011/wrapper-replay-proof.json",
+      "bytes": 684178,
+      "sha256": "7685dfec3095950bf777dffa8ba8dd52027830ff0e0c946b2defd80fb9af1649",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-first-full-ci-20261011/wrapper-replay-timing.json",
+      "bytes": 1026,
+      "sha256": "1bc8977fd4420c6b9c1375f0484346fb4d894a476b60a17407c5aa4ab16f1e95",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-first-full-ci-20261011/wrapper-replay.log",
+      "bytes": 363,
+      "sha256": "f9f3018d8b3e42d4a79f4b95d23058870fffbfd2915aa54a6f19012c1fc35ea2",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "unchanged-selected-input-applicability",
+      "kind": "code",
+      "description": "Trusted typed routing-metadata identity closure before full geography prefetch/native/continuous checks, with audited reader versions and conservative fallback. No scientific authority was newly qualified.",
+      "software": "Node 24.19.0; Python 3.12.14; Git 2.52.0",
+      "units": "immutable Git identities; elapsed milliseconds"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "Source-only unchanged-geography applicability only. Unknown or changed dependency closures retain full checks; no new geographic, source, publication or consumer qualification.",
+      "status": "unresolved",
+      "source_ids": []
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/unchanged-selected-geography.test.mjs test/geography-prefetch.test.mjs",
+    "node --test test/trusted-geography-check.test.mjs",
+    "node --test --test-name-pattern=Linux test/additive-gap-repair.test.mjs",
+    "node scripts/check-unchanged-selected-geography.mjs ISOLATED_COLD_REPO 32103b9c717ae43e7e88b067a9c1dfe5a07e8c73 9231460981bf2cc7cfb574e762cd60ab0f6abb68"
+  ]
+}
