@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {retainedAdministrativeSourcePremises,registeredAdministrativeViews,registeredOriginalPhysicalProduct} from '../../../../scripts/additive-gap-repair.mjs';
-const scope=JSON.parse(fs.readFileSync(new URL('../vintages/source-handoff-002/source-handoff.json',import.meta.url)));
+const scope=JSON.parse(fs.readFileSync(new URL('../vintages/source-handoff-003/source-handoff.json',import.meta.url)));
 const clone=()=>structuredClone(scope);
 const targetFor=(s,i=0)=>{const c=s.candidate_source_native_bindings[i];return s.current_neighbor_binding.rows.find(r=>r.component_id===c.component_id).candidate_neighbors.find(r=>r.feature.id===c.retained_payload.target_stable_location_id).feature;};
 function premise(s,i=0,target=targetFor(s,i)){const c=s.candidate_source_native_bindings[i],p=s.original_physical_comparison_bindings.find(r=>r.component_id===c.component_id);return retainedAdministrativeSourcePremises({record:p.physical_comparison.row,candidate:c.original_candidate_feature.geometry,sourceCase:c,sourceScope:s,target});}
