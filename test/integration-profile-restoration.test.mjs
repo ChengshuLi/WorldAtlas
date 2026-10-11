@@ -5,12 +5,34 @@ import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
+import {checkoutExecutionClosure} from '../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/artifact-checkout-execution.mjs';
 
 const repo=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const focused=['handoff-scope','issue-claims','worker-result','regional-research-gate','geography-worker-lane',
   'evidence-quality','premerge-evidence','trusted-workflow-checkouts','merge-integration',
   'merge-integration-client','merge-integration-entrypoint','integration-proof'];
 const helper='scripts/canonical-restoration.mjs';
+
+test('actual checkout authority scans the complete production runner dependency tree',()=>{
+  const closure=checkoutExecutionClosure(repo);
+  for(const name of ['scripts/run-integration-tests.mjs','scripts/integration-profile.mjs',
+    'scripts/selected-delivery-smoke.mjs','src/ownership-assets.js','src/effective-footprint.js',
+    'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/prepare-model-reader-checkout.mjs'])
+    assert(closure.includes(name),`Missing authenticated runner dependency: ${name}`);
+});
+
+test('actual checkout authority refuses concatenated relative imports and missing smoke dependencies',t=>{
+  const cache=path.join(repo,'.cache');fs.mkdirSync(cache,{recursive:true});
+  const root=fs.mkdtempSync(path.join(cache,'checkout-closure-boundary-'));
+  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  fs.mkdirSync(path.join(root,'scripts'));
+  fs.writeFileSync(path.join(root,'package.json'),'{"type":"module"}\n');
+  const entry=path.join(root,'scripts/run-integration-tests.mjs');
+  fs.writeFileSync(entry,"const smoke = await import('../' + 'scripts/selected-delivery-smoke.mjs');\n");
+  assert.throws(()=>checkoutExecutionClosure(root),{code:'ERR_ASSERTION'});
+  fs.writeFileSync(entry,"const smoke = await import('./selected-delivery-smoke.mjs');\n");
+  assert.throws(()=>checkoutExecutionClosure(root),{code:'ENOENT'});
+});
 
 function fixture(t,{full=false,helperBody,selectedHelperBody,omitSelectedHelper=false,skip=false,selected=false,smokeBody}={}) {
   // This is a tiny actual runner boundary fixture, not a scientific restoration.

@@ -126,7 +126,7 @@ export async function selectedDeliverySmoke(expectationsPath) {
   read('.cache/native-normal-built-output.json');
   const sidecar = pinned(selection.additive_release), ledgerPin = sidecar.logical_asset_map?.ledger;
   validateSelectedExpectations(JSON.parse(read(expectationsPath)), pinned(ledgerPin), ledgerPin.sha256);
-  const {runSelectedDeliverySmoke} = await import('../' + SELECTED_SMOKE);
+  const {runSelectedDeliverySmoke} = await import('./selected-delivery-smoke.mjs');
   return runSelectedDeliverySmoke({root: process.cwd(), emittedDirectory: path.resolve('dist/client'),
     expectationsPath, outputPath: path.resolve('.cache/selected-delivery-smoke.json')});
 }
