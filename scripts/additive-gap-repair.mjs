@@ -1295,7 +1295,7 @@ function administrativeSourcePremiseStage(repo,request,report) {
     cohort_ids:rule.cohort_ids,geometry_scope:geometryScope,source_coverage_complete:geometryScope==='full-component',whole_gap_completion:false,
     ...(registration?{registered_handoff:{registry:get(rule.registry_path).pin,accepted_source_commit:registration.accepted_source_commit,canonical_main_commit:registrationMain}}:{}),
     original_batch_outcomes:get(rule.outcomes_path).pin,original_remainders:geometryScope==='supported-fragment'?get(jsonl327?rule.simplified_comparison_path:rule.remainders_path).pin:null,
-    unprocessed_cohort_ids:rule.cohort_ids.filter(id=>!rule.expected_ids.includes(id)),target_source_kind:'ordinary-HEAD-current-world-index-part',limits:(registration?scope.unknowns:scope.limits).concat(['Original dated/unapproved physical and administrative sources only.',
+    unprocessed_cohort_ids:rule.cohort_ids.filter(id=>!rule.expected_ids.includes(id)),target_source_kind:request.baseline?.version===2?'complete-authenticated-current-selected-target-bank':'ordinary-HEAD-current-world-index-part',limits:(registration?scope.unknowns:scope.limits).concat(['Original dated/unapproved physical and administrative sources only.',
       'Full-source rule retains exact empty residuals; supported-fragment rule retains literal nonempty remainder and never claims whole-gap completion.',
       'Current source-file equality is not selected-bank geometry applicability. Genuine current snapshot/rebind, full native/neighbor conservation and activation remain required.'])}};
 }
