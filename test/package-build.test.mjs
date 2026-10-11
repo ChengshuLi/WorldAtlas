@@ -6,6 +6,8 @@ import path from 'node:path';
 import {materializePackageInputs, runPackageBuild, verifyPackageDependencies, assertPackageStage} from '../scripts/package-build.mjs';
 import {execFileSync} from 'node:child_process';
 
+const fixturePreflight = async () => ({passed: true, errors: [], synthetic_package_boundary_fixture: true});
+
 async function fixture(t, {program, promoted = false} = {}) {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'atlas-package-boundary-'));
   t.after(() => fs.rm(root, {recursive: true, force: true}));
@@ -33,10 +35,10 @@ test('only declared files enter the source image; unrelated research cannot alte
   const stage = path.join(root, 'image');
   await materializePackageInputs({source: root, destination: stage, definition});
   await assert.rejects(fs.stat(path.join(stage, 'research/paper.json')), {code: 'ENOENT'});
-  const first = await runPackageBuild('static', {root});
+  const first = await runPackageBuild('static', {root, preflight: fixturePreflight});
   assert.equal(await fs.readFile(path.join(root, 'dist/value.json'), 'utf8'), '42');
   await fs.writeFile(path.join(root, 'research/paper.json'), '1000');
-  const second = await runPackageBuild('static', {root});
+  const second = await runPackageBuild('static', {root, preflight: fixturePreflight});
   assert.equal(await fs.readFile(path.join(root, 'dist/value.json'), 'utf8'), '42');
   assert.equal(first.source_bytes, second.source_bytes);
   assert.deepEqual((await fs.readdir(path.join(root, '.cache'))).filter(name => name.startsWith('package-input-image-')), []);
@@ -47,7 +49,7 @@ test('undeclared reads and imports fail before replacing caller outputs and clea
     const {root} = await fixture(t, {program: `import fs from 'node:fs'; ${statement}; fs.mkdirSync('dist');`});
     await fs.mkdir(path.join(root, 'dist'));
     await fs.writeFile(path.join(root, 'dist/previous'), 'preserved');
-    await assert.rejects(runPackageBuild('static', {root}), /build failed/);
+    await assert.rejects(runPackageBuild('static', {root, preflight: fixturePreflight}), /build failed/);
     assert.equal(await fs.readFile(path.join(root, 'dist/previous'), 'utf8'), 'preserved');
     assert.deepEqual(await fs.readdir(path.join(root, '.cache')), []);
   }
@@ -56,7 +58,7 @@ test('undeclared reads and imports fail before replacing caller outputs and clea
 test('explicit research promotion makes the same read available', async t => {
   const {root} = await fixture(t, {promoted: true,
     program: "import fs from 'node:fs'; fs.mkdirSync('dist'); fs.writeFileSync('dist/value.json', fs.readFileSync('research/paper.json'));"});
-  await runPackageBuild('static', {root});
+  await runPackageBuild('static', {root, preflight: fixturePreflight});
   assert.equal(await fs.readFile(path.join(root, 'dist/value.json'), 'utf8'), '99');
 });
 
@@ -92,7 +94,7 @@ test('dependency links must stay within the installed dependency tree', async t 
 test('output and cache ancestor links are rejected', async t => {
   const {root} = await fixture(t);
   await fs.symlink('research', path.join(root, '.cache'));
-  await assert.rejects(runPackageBuild('static', {root}), /cache must be/);
+  await assert.rejects(runPackageBuild('static', {root, preflight: fixturePreflight}), /cache must be/);
 });
 
 test('private builder requires the actual declared image identity', () => {

@@ -1,0 +1,389 @@
+{
+  "version": 1,
+  "kind": "actual-emitted-selected-consumer",
+  "passed": true,
+  "feature_count": 49625,
+  "selected_ledger_sha256": "72f5b366ab03e13274f5f682624c740a183eb09aa9f02d6b056cb7bda3f7bc6e",
+  "selected_patch_sha256": "920888d9f48c61c439a2109f776ae1849f747d9f413ed113e0e63dd7556688d4",
+  "cumulative_native_cells_picked_and_sampled": 353,
+  "stable_owner_controls": 262,
+  "expected_components_verified": 1,
+  "cohorts": [
+    {
+      "original_batch_id": "gap-operational-batch:b139696d47c4fa03f8f73dbe",
+      "members": [
+        {
+          "component_id": "physical-component:6fd25496ae4a7635eef229d0cfd1eb8dc7d9c10c252d3255fe8d42d186e706d1",
+          "target_id": "gb:UKR:ADM2:74538382B77535249747568",
+          "disposition": "zero-cell",
+          "geometry_sha256": "92fbd683db1eab874c905ff1bf95cbb291a5d917d9986f40349e23c5a4e77ca7",
+          "effective_primitive_verified": true
+        }
+      ]
+    }
+  ],
+  "limitation": "Production Node-compatible asset loader, effective primitive, picker and renderer-sampler entry points on actual emitted assets. GPU and Canvas execution still require hosted browser testing. Original batch IDs and complete rosters are supplied reviewed expectations, not independent source or whole-batch approval. Zero-cell inclusion is not visible-pixel gain; stable-owner controls sample one occupied cell per retained observed row.",
+  "expectations_sha256": "47820071d8d51a68fe38618acf40211d2e2b22158e88c061e19b30fc2eb8c606",
+  "inputs": [
+    {
+      "scope": "emitted",
+      "path": "additive-repairs/retained-activation-base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba"
+    },
+    {
+      "scope": "emitted",
+      "path": "additive-repairs/retained-activation-ledger.json",
+      "bytes": 486331,
+      "sha256": "72f5b366ab03e13274f5f682624c740a183eb09aa9f02d6b056cb7bda3f7bc6e"
+    },
+    {
+      "scope": "emitted",
+      "path": "additive-repairs/retained-activation-owners.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f"
+    },
+    {
+      "scope": "emitted",
+      "path": "additive-repairs/retained-activation-patch.json",
+      "bytes": 9691,
+      "sha256": "920888d9f48c61c439a2109f776ae1849f747d9f413ed113e0e63dd7556688d4"
+    },
+    {
+      "scope": "emitted",
+      "path": "atlas-geography.json",
+      "bytes": 10547772,
+      "sha256": "8ea595113202f5ea9a0febd1e778337e7333f1d4415047fc47322873f6bf6ddb"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-0.json.gz",
+      "bytes": 478423,
+      "sha256": "dadf3c7a1a9874bd5b8a1030915d27af7b16261a47cfd919ec46eb8b64e19eae"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-1.json.gz",
+      "bytes": 211536,
+      "sha256": "df5092922e4361ca4532126d882f2300a4d297e0d0a3e13814d7b888ec0a956b"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-10.json.gz",
+      "bytes": 206670,
+      "sha256": "f076dbdd6598cc2f8700bfbc4902f9e5b26da47fc38f7c526545d145a617a442"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-11.json.gz",
+      "bytes": 200965,
+      "sha256": "979c5fe8cea4a239d4faa4143f31dfdeadc114a8b33e1fd0323ec78129d8e2f8"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-12.json.gz",
+      "bytes": 204981,
+      "sha256": "b6a9246de9823cf2a1c2403916c7e6b753d2b941e5ff3b8fa46997e4fc9719a3"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-13.json.gz",
+      "bytes": 216770,
+      "sha256": "abc2c4e2143ae1c91d19491f722b045b7fb85db3481d661fea79d849b9e1593f"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-14.json.gz",
+      "bytes": 212402,
+      "sha256": "eda0f6139caeae858ea2e85964ec204d65b133f1e245383bf68c183d71417b05"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-15.json.gz",
+      "bytes": 218273,
+      "sha256": "c83987986f16d9d1f460b8c35283372c3406a1b826a1ae5d2afaf81a5b6a541a"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-16.json.gz",
+      "bytes": 202939,
+      "sha256": "da4316afefc6d7c766bbf0fbb388976c0c56136d62e6caf5c8bde36c4d135066"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-17.json.gz",
+      "bytes": 216876,
+      "sha256": "0637e422d4dcc99700e2192b71cfc1df7b66074aa4307455850d49e487b7ac45"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-18.json.gz",
+      "bytes": 206639,
+      "sha256": "17f4dde048990857e8c33dcc07755c2f5bdbd8034c65f25293a6889202b8f5d6"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-19.json.gz",
+      "bytes": 199032,
+      "sha256": "21424aa43a7cd7eb72140a68eb62a8eb98c46c8bfeca5d6d2779219f53508769"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-2.json.gz",
+      "bytes": 212428,
+      "sha256": "aa9679a751bbea737322a2405838fcf3152c413c22c4c3410bf5dcc21289938c"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-20.json.gz",
+      "bytes": 215842,
+      "sha256": "e7f020af9b5ae3b6cc60b6d7f5d61a8d8f2eb4ee7e0c95e600aae28a92f84164"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-21.json.gz",
+      "bytes": 202750,
+      "sha256": "869d7730f979f8aedcf7806745773ba84717225e0853456696602b7ca480bfef"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-22.json.gz",
+      "bytes": 212435,
+      "sha256": "39d572e058cdf1c203804250277a8c9dda6b0a4df9375ea3c66264a72aff2958"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-23.json.gz",
+      "bytes": 204918,
+      "sha256": "d037ad0ba290e617490e9f87c892d411f5a09e9068885d972dfb002577c4056e"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-24.json.gz",
+      "bytes": 219868,
+      "sha256": "525c3ab005836ba66b0739be4c6475d28f06740b11b1d4ca26bcd9a05fa97562"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-25.json.gz",
+      "bytes": 235167,
+      "sha256": "55ac56bb25ea2033948f07cab45a0a0c0db86885b9a632594ade7a956d5e2603"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-26.json.gz",
+      "bytes": 220934,
+      "sha256": "27bca8b5825545d26da35900a62113173b9d36c9fefc94305bb336293c535242"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-27.json.gz",
+      "bytes": 217321,
+      "sha256": "e137e4799b7e6a949af3a1310bc7aab938b7e4e837aa1583b4c74291569823fe"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-28.json.gz",
+      "bytes": 217364,
+      "sha256": "37d05fc1f7b358dcb0e865ece6d4bb7cbeaae05372878b8cd13fc57c4d27e02f"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-29.json.gz",
+      "bytes": 215362,
+      "sha256": "30741f54585ef8e312edc653fa8f7b6a5b6118b9eec21d74b91c9e42101f695f"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-3.json.gz",
+      "bytes": 251657,
+      "sha256": "1622a6d4564dc97306cedb27f7deec7dd70fab0662076bd6788d0613df808fa7"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-30.json.gz",
+      "bytes": 206778,
+      "sha256": "d157ebcea9c3a60bfa110c09c2149543ee0309b9d2408eeb44377cbfaeac757c"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-31.json.gz",
+      "bytes": 210626,
+      "sha256": "88cbf9174fc0581aabd1d555d1a6768aa93755ac6653c60ba69140e718fcbdd9"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-32.json.gz",
+      "bytes": 217646,
+      "sha256": "308412a0f12c61f873a66e084cba9346bab234c84b6c4faa6e22916107708549"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-33.json.gz",
+      "bytes": 22640,
+      "sha256": "b2fbd55937ef2b2e30242fa5ad078ed45eebf263b8158fc07d5e8d36ccad38d8"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-4.json.gz",
+      "bytes": 441707,
+      "sha256": "ebb1aba17e2c18669fdbebf29b98c4c9354e5e592781f5d43a2b25f0eb59fd75"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-5.json.gz",
+      "bytes": 208825,
+      "sha256": "2b1c31d12aa68e9721bc61ce1ed46197cab758a8b54435dc562e99b389861076"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-6.json.gz",
+      "bytes": 216773,
+      "sha256": "337c7809be02957740f1fcfd621fa95681ed93ca61407a996c8371e3c6199417"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-7.json.gz",
+      "bytes": 222024,
+      "sha256": "caee676dad83fbfb58c3767c9a8f75cbb01df96454664425e327eced17d25733"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-8.json.gz",
+      "bytes": 224481,
+      "sha256": "2e7e38a47b227dcd38d29f884eccd2875a13cf37c8228b65ff47101f5eb4f986"
+    },
+    {
+      "scope": "emitted",
+      "path": "geography/catalog-9.json.gz",
+      "bytes": 211932,
+      "sha256": "071230d76fc499ca3ea0ad6b7d493f5537e6bdc61c7416cb7a7e4f71a76a773d"
+    },
+    {
+      "scope": "emitted",
+      "path": "native-v1/ownership/rows-0.bin.gz",
+      "bytes": 306620,
+      "sha256": "89ed3564db641f992746bf4f6f01c1eed89cb470520734ac1b85ee95e9a70ba0"
+    },
+    {
+      "scope": "emitted",
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-0.bin.gz",
+      "bytes": 3854096,
+      "sha256": "5e73bd6ee306f3be021c7f89bf336c590ae3c02021df1c436d22088ed4284171"
+    },
+    {
+      "scope": "emitted",
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-12582912.bin.gz",
+      "bytes": 3478667,
+      "sha256": "01012dd358291a9e4ee51888a1d2b618ab2003e06a6eebd3a236392ecdbbc015"
+    },
+    {
+      "scope": "emitted",
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-16777216.bin.gz",
+      "bytes": 3289324,
+      "sha256": "d5ed4d7e1700fb60298a53cc37ad9943257f57f853e19cc786ef975ebc7f0cae"
+    },
+    {
+      "scope": "emitted",
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-20971520.bin.gz",
+      "bytes": 3146696,
+      "sha256": "198daba78eaeed9f316f088a86f8a7c4cf8f7e868253fc09487870eceddaf58a"
+    },
+    {
+      "scope": "emitted",
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-25165824.bin.gz",
+      "bytes": 3272873,
+      "sha256": "764a967753d010daa794b30ca597bee0503646e7cae6965b14df63f280b9c544"
+    },
+    {
+      "scope": "emitted",
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-29360128.bin.gz",
+      "bytes": 3296575,
+      "sha256": "ff29a1956ae0dd99e4db155c9cdabf96c72155a1a772210910d5119845759cf8"
+    },
+    {
+      "scope": "emitted",
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-33554432.bin.gz",
+      "bytes": 3521891,
+      "sha256": "826cffaf4b05286a68ae479bc6e6caba3b3b3993f7fa57eae08efe7f6089694b"
+    },
+    {
+      "scope": "emitted",
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-37748736.bin.gz",
+      "bytes": 3497645,
+      "sha256": "18472136ceb94b95a17918acdfba32c56d13a2979043c66fb74cf615d81551ee"
+    },
+    {
+      "scope": "emitted",
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-4194304.bin.gz",
+      "bytes": 3428397,
+      "sha256": "da6498fc3c898adca6231896e9b1f2c734153064d78431bc5a311fec768c18f9"
+    },
+    {
+      "scope": "emitted",
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-41943040.bin.gz",
+      "bytes": 3534601,
+      "sha256": "f4e7f8de92e3d709db9675386961fac934a8a21652bf6f34f8d122ed71c73c44"
+    },
+    {
+      "scope": "emitted",
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-46137344.bin.gz",
+      "bytes": 3556931,
+      "sha256": "bb9b1ba3ace6229a338eee6c903e1d5db637a765c46ed60f957ceb6e34346101"
+    },
+    {
+      "scope": "emitted",
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-50331648.bin.gz",
+      "bytes": 3397952,
+      "sha256": "09aaf4d9a115dea6a85ed2a853532045c627ea2408f259513ce9de8e616ef55d"
+    },
+    {
+      "scope": "emitted",
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-54525952.bin.gz",
+      "bytes": 2460609,
+      "sha256": "91bfddd9aa632dc18ecc2f487a71673b504f971d2795e7c4af9c9298f4fe4fbc"
+    },
+    {
+      "scope": "emitted",
+      "path": "ownership-vintages/d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba/native-v1/ownership/startup-runs-8388608.bin.gz",
+      "bytes": 3423683,
+      "sha256": "244e3da13a412b4a4ccbc652191a080495a5611df5d0ee2207c8d08ac27b929a"
+    },
+    {
+      "scope": "root",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/certificate.json",
+      "bytes": 3279,
+      "sha256": "a65e1de9564f66feaae87bcb0a6b6f2ee4a3e4eaaf815b23e3e2f050e84a2ea7"
+    },
+    {
+      "scope": "root",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/request.json",
+      "bytes": 1374262,
+      "sha256": "82e69acd7a3730c3c332508d98444a59e8a82f8810f5de88a41bcf97614b4588"
+    },
+    {
+      "scope": "root",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/result.json",
+      "bytes": 2177027,
+      "sha256": "6e2eebcc27e205440acb087439c5a2417fc756fe51352184f0e05f38097ec0e4"
+    },
+    {
+      "scope": "root",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-release-001/envelope.json",
+      "bytes": 1421,
+      "sha256": "f1d43db79da7430c6e7e3276849333a4d10d4c927e666f1b48c45621fa6d244c"
+    },
+    {
+      "scope": "root",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-release-001/selection-sidecar.json",
+      "bytes": 3594,
+      "sha256": "a107af05497045bb9ee2cb25082ba6e224f46cc7446559c31c354ba7cf73c1b5"
+    },
+    {
+      "scope": "root",
+      "path": "data/ownership-selection.json",
+      "bytes": 1623,
+      "sha256": "2b1a76c4acda2c6f349cb41a89ff761e900183f6861ee0f193efcab4877ded13"
+    }
+  ]
+}

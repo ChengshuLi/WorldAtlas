@@ -5,6 +5,7 @@ import {fileURLToPath} from 'node:url';
 import {spawn} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {loadPackageInputs, validatePackageInputs} from './package-inputs.mjs';
+import {preflightPackageBuild, requirePackagePreflight} from './package-build-preflight.mjs';
 import {issueCurrentExecution,authenticateCurrentExecution,requireCurrentExecution} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs';
 
 const entries = {static: 'scripts/build-static-inner.mjs', hosted: 'scripts/build-hosted-inner.mjs', cloudflare: 'scripts/build-cloudflare-inner.mjs'};
@@ -76,10 +77,14 @@ export function assertPackageStage(directory = repository) {
   if (!expected || path.resolve(expected) !== path.resolve(directory)) throw Error('Private builder requires a declared input image; use build:static, build:hosted or build:cloudflare');
 }
 
-export async function runPackageBuild(kind, {root = repository, execute} = {}) {
+// The programmatic injection is for synthetic boundary tests only. Ordinary
+// build entry points supply no override, and no environment flag disables it.
+export async function runPackageBuild(kind, {root = repository, execute, preflight = preflightPackageBuild} = {}) {
   if (!Object.hasOwn(entries, kind)) throw Error('Unknown package build');
   root = await fs.realpath(root);
   const definition = loadPackageInputs(root);
+  // Report all setup failures before copying the multi-gigabyte input image.
+  const readiness = requirePackagePreflight(await preflight({root, kind}));
   const dependencies = await verifyPackageDependencies(path.join(root, 'node_modules'));
   const cache = path.join(root, '.cache');
   const cacheStat = await fs.lstat(cache).catch(error => { if (error.code === 'ENOENT') return null; throw error; });
@@ -145,6 +150,7 @@ export async function runPackageBuild(kind, {root = repository, execute} = {}) {
       source_bytes: inventory.reduce((sum, row) => sum + row.bytes, 0), input_paths: definition.inputs,
       boundary: 'Build source contains only declared inputs and the installed dependencies; unpublished inputs are absent. This is not an OS security sandbox.'};
     if(currentExecution)receipt.current_context_execution=currentExecution;
+    receipt.preflight = readiness;
     await fs.writeFile(path.join(cache, 'package-input-build.json'), JSON.stringify(receipt, null, 2) + '\n');
     return receipt;
   } finally {
