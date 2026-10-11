@@ -1,0 +1,141 @@
+Metadata preparation checks only. No scientific operator, selected assembly, package build, review approval, queue submission or main advancement ran.
+
+$ node scripts/prepare-delivery-handoff.mjs requests coordination/engineering/delivery-handoff-20261011/current13-requests.json .cache/delivery-handoff/final-requests-001
+Elapsed wall seconds: 0.217811
+{"destination":".cache/delivery-handoff/final-requests-001","resumed":false,"binding":{"phase":"requests","config_sha256":"a52c9a584d48423b2a753fd1c56fde5b12a3f4ee45cd40bd4248ebb4b22f1c58"}}
+
+Exit code: 0
+
+$ explicit --resume for the preceding exact phase
+Elapsed wall seconds: 0.225787
+{"destination":".cache/delivery-handoff/final-requests-001","resumed":true,"binding":{"phase":"requests","config_sha256":"a52c9a584d48423b2a753fd1c56fde5b12a3f4ee45cd40bd4248ebb4b22f1c58"}}
+
+Exit code: 0
+
+$ node scripts/prepare-delivery-handoff.mjs native-requests coordination/engineering/delivery-handoff-20261011/current13-native-requests.json .cache/delivery-handoff/final-native-requests-001
+Elapsed wall seconds: 0.506678
+{"destination":".cache/delivery-handoff/final-native-requests-001","resumed":false,"binding":{"phase":"native-requests","config_sha256":"637da0600eba0507bf8470325377e813861d40f17731f93504921dadf445098f"}}
+
+Exit code: 0
+
+$ explicit --resume for the preceding exact phase
+Elapsed wall seconds: 0.435201
+{"destination":".cache/delivery-handoff/final-native-requests-001","resumed":true,"binding":{"phase":"native-requests","config_sha256":"637da0600eba0507bf8470325377e813861d40f17731f93504921dadf445098f"}}
+
+Exit code: 0
+
+$ node scripts/prepare-delivery-handoff.mjs compose coordination/engineering/delivery-handoff-20261011/current13-compose.json .cache/delivery-handoff/final-compose-001
+Elapsed wall seconds: 0.585127
+{"destination":".cache/delivery-handoff/final-compose-001","resumed":false,"binding":{"phase":"compose","config_sha256":"bf8e78b1b861022dea802b108dca1569399d1fd9e3954a09de2cb1cc10a46a22"}}
+
+Exit code: 0
+
+$ explicit --resume for the preceding exact phase
+Elapsed wall seconds: 0.565070
+{"destination":".cache/delivery-handoff/final-compose-001","resumed":true,"binding":{"phase":"compose","config_sha256":"bf8e78b1b861022dea802b108dca1569399d1fd9e3954a09de2cb1cc10a46a22"}}
+
+Exit code: 0
+
+$ node scripts/prepare-delivery-handoff.mjs package coordination/engineering/delivery-handoff-20261011/current13-package.json .cache/delivery-handoff/final-package-001
+Elapsed wall seconds: 1.540047
+{"destination":".cache/delivery-handoff/final-package-001","resumed":false,"binding":{"phase":"package","config_sha256":"83bbdd0ddd9238d944fa93786ef556f05934e20aa59433e49d398711045421dd"}}
+
+Exit code: 0
+
+$ explicit --resume for the preceding exact phase
+Elapsed wall seconds: 1.845470
+{"destination":".cache/delivery-handoff/final-package-001","resumed":true,"binding":{"phase":"package","config_sha256":"83bbdd0ddd9238d944fa93786ef556f05934e20aa59433e49d398711045421dd"}}
+
+Exit code: 0
+
+$ node scripts/prepare-delivery-handoff.mjs rebind-operating coordination/engineering/delivery-handoff-20261011/current003-custody.json .cache/delivery-handoff/final-rebind-operating-001
+Elapsed wall seconds: 0.285204
+{"destination":".cache/delivery-handoff/final-rebind-operating-001","resumed":false,"binding":{"phase":"rebind-operating","config_sha256":"8594c4df539054dcc33db9c76da1adb148b64f7fb8396b11817b29ba0c308c13"}}
+
+Exit code: 0
+
+$ explicit --resume for the preceding exact phase
+Elapsed wall seconds: 0.247243
+{"destination":".cache/delivery-handoff/final-rebind-operating-001","resumed":true,"binding":{"phase":"rebind-operating","config_sha256":"8594c4df539054dcc33db9c76da1adb148b64f7fb8396b11817b29ba0c308c13"}}
+
+Exit code: 0
+
+$ node scripts/prepare-delivery-handoff.mjs rebind-certificate coordination/engineering/delivery-handoff-20261011/current003-custody.json .cache/delivery-handoff/final-rebind-certificate-001
+Elapsed wall seconds: 0.251662
+{"destination":".cache/delivery-handoff/final-rebind-certificate-001","resumed":false,"binding":{"phase":"rebind-certificate","config_sha256":"8594c4df539054dcc33db9c76da1adb148b64f7fb8396b11817b29ba0c308c13"}}
+
+Exit code: 0
+
+$ explicit --resume for the preceding exact phase
+Elapsed wall seconds: 0.290209
+{"destination":".cache/delivery-handoff/final-rebind-certificate-001","resumed":true,"binding":{"phase":"rebind-certificate","config_sha256":"8594c4df539054dcc33db9c76da1adb148b64f7fb8396b11817b29ba0c308c13"}}
+
+Exit code: 0
+
+composed registry: byte-for-byte equal to 9e7b93f43f8a2dccffc23cb1c9e6cd60613f3b9c:combined-selected/authority-registry.json
+composed ledger: byte-for-byte equal to 9e7b93f43f8a2dccffc23cb1c9e6cd60613f3b9c:combined-selected/composed-original-ledger.json
+current003 certificate: byte-for-byte equal to ea64d1041d7378d1684fe4e25a70b8ce18059a6b:combined-selected/current-003/certificate.json
+current003 operating: byte-for-byte equal to 5b762164f0ce906d2b012c9c16d6e1081b700834:combined-selected/current-003/operating.json
+
+Real GRC SOURCE and current003 rebind retention entry points also completed against preserved genuine request/publication/terminal/facts/product bytes.
+Final selected ledger binding remains null in the package example; final reader inventory and real package/consumer checks are outside this metadata-only run.
+
+Final focused command: node --test test/delivery-handoff.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs
+✔ SOURCE preparation preserves handoff order, methods/resources and complete whole handoff pin (6.396537ms)
+✔ accepted whole handoff target/order drift fails even when its new pin is coherent (1.151058ms)
+✔ writer resumes only exact complete bytes and rejects collisions, dangling symlinks and changed bindings (3.055604ms)
+✔ combined read/output budget fails before creating destination (0.988367ms)
+✔ retention joins genuine terminal, request, facts and every published output; no completion from partial files (13.224844ms)
+✔ native preparation requires committed genuine SOURCE products and preserves immutable runtime/resource fields (2.319813ms)
+✔ composition invokes existing conservation logic and rejects duplicate original scope (16.586903ms)
+✔ immutable Git input reader rejects whole-body drift, missing objects and nonordinary pins (61.04116ms)
+✔ review handoff includes current bindings/complete rename scope and no approval; stale head/body/scope fail (15.513911ms)
+✔ rebind commit phases require complete custody and publication-matching result pins (1.972097ms)
+✔ verifies bytes without claiming factual correctness (3.750114ms)
+✔ schema-only validation reports unverified bytes (0.45125ms)
+✔ known broken pins, stale baseline, entry hashes and contradictory summaries fail (3.00578ms)
+✔ source access/license limits remain explicit; no unsafe retention (1.131959ms)
+✔ research cannot grant approval; supported conclusions need known sources (0.832445ms)
+✔ containing-file inventory verifies actual subject IDs, not optional properties.part (1.186861ms)
+✔ compressed vs uncompressed hashes and decompression budgets are checked (5.201408ms)
+✔ paths and symlinks cannot escape candidate reader (2.165553ms)
+✔ new identity registry is checked against retained prior roster without claiming source or geometry approval (0.987355ms)
+✔ prior inventory cannot accept invented subjects, candidate baselines or ambiguous authority (1.704739ms)
+✔ identity-only projection rejects duplicates, geometry and altered native IDs even with updated output hashes (1.480396ms)
+✔ declared gzip .bin containing files preserve complete mixed 45-component/eight-contact membership (6.514026ms)
+✔ subject gzip declaration does not accept unsupported bytes, wrong hashes or coherently missing subjects (6.556179ms)
+✔ actual subject decompression remains bounded for legacy gzip with small encoded bytes (1.316273ms)
+✔ prior inventory and candidate registry decode their declared gzip .bin descriptors at correct vintages (2.169629ms)
+✔ independent record bindings reject coherent wrong joins, incomplete and vacuous coverage (6.023509ms)
+✔ new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption (1.93396ms)
+✔ positive real-format ledger validates actual files and binds an independent review (8.682975ms)
+✔ regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail (3.17439ms)
+✔ full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence (1.429031ms)
+✔ coordinate/helper policies remain enforced without ceremonial control files (1.204397ms)
+✔ generator controls bind actual positive, negative and equal two-run output bytes (1.209014ms)
+✔ Washington-style generated narrative/table mismatch fails against the same numeric ledger (1.052471ms)
+✔ reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review (1.701165ms)
+✔ mock remote queue checks exact blobs/head/independent receipt with read-only requests (7.476725ms)
+✔ incomplete remote trees cannot become a passed byte check (0.553511ms)
+✔ remote decisions reject stale exact-head reviews and a later change request (1.380508ms)
+✔ unchanged authored evidence survives unrelated main advance, while current metrics require refresh (0.266365ms)
+✔ trusted hosted gate checks a new limited prior-evidence registry and still rejects nonancestor baselines (2.191212ms)
+✔ fresh remote review, head, tree/path and reservation checks reject after immutable bytes were reused (8.315519ms)
+✔ acceptance/disposition binding invalidates substantive changes but preserves JSON formatting and progress comments (1.777267ms)
+✔ binding activation preserves existing PRs and rejects unknown activation timestamps (0.212766ms)
+✔ compact review binds canonical complete inventory and preserves literal receipts (0.614001ms)
+✔ compact reviews refuse malformed, mixed, omitted, changed and renamed inventories (2.134638ms)
+✔ compact inventory does not weaken head, reviewer, contract, domain or limit authority (0.780979ms)
+✔ normal remote comment route admits a complete compact review beyond literal GitHub comment size (87.72063ms)
+✔ minimal manifests reuse Git change inventory but preserve evidence and independent review (0.739016ms)
+✔ omitting duplicate change receipts does not authorize replacing original scientific evidence (0.558629ms)
+✔ declared controls remain checked, not accepted merely because controls are optional (1.249785ms)
+✔ remote minimal manifests need no base-body copies for unrelated code changes (0.729272ms)
+ℹ tests 50
+ℹ suites 0
+ℹ pass 50
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 348.565988
