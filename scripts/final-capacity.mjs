@@ -222,7 +222,10 @@ export async function paceFinalValidation(options, {inspect, admission = async (
     const proofInventory = async api => {
       if (!options.proofRunId) return;
       const run = await api(`/repos/${options.repo}/actions/runs/${options.proofRunId}`);
-      need(run?.run_attempt === options.proofRunAttempt && run.status === 'completed' && run.conclusion === 'success',
+      // This pass budgets the proof inventory, not coverage. The later full
+      // integrationProof validator accepts only successful code jobs, including
+      // the evidence-only aggregate failure case, before any merge write.
+      need(run?.run_attempt === options.proofRunAttempt && run.status === 'completed' && ['success', 'failure'].includes(run.conclusion),
         'Trusted proof changed before final evidence; resubmit unchanged head');
       await githubPages(async route => (await api(route)).jobs,
         `/repos/${options.repo}/actions/runs/${options.proofRunId}/attempts/${options.proofRunAttempt}/jobs`);

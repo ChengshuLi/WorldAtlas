@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "issue": 1700,
+  "lane": "engineering",
+  "worker_id": "01a12806-e666-7781-b612-e4af40560004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "c28077da970ae39550e5edea790a266b060d3de5",
+    "files": [
+      {
+        "path": "scripts/integration-proof.mjs",
+        "bytes": 3876,
+        "sha256": "bcd873e6de93e79abe4cb9d677b95625b951f34d4982a040375ccdb73d0d523a",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "exact-tree-job-proof",
+      "kind": "code",
+      "description": "Reuse existing successful pinned regression jobs only after evidence-only aggregate failure; require all other observed jobs successful and current authority plus fresh combined geography. Focused positive and adverse controls exercise the proof selector and both merge phases. Hosted final-capacity inventory admits completed failure for inventory only; the full proof validator still decides coverage before merge. Real finalCapacity=true controls cover this consumer.",
+      "software": "Node.js 24.19.0",
+      "units": "Not applicable: control-flow verification, no geographic measurement"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/integration-proof.test.mjs test/merge-integration.test.mjs test/final-capacity.test.mjs"
+  ],
+  "limits": [
+    "Focused synthetic API controls do not measure post-rollout queue elapsed time. The original observed CI run is linked from issue 1700.",
+    "Historical geography artifact reuse is outside this correction; final merge still requires the fresh exact-combined report. No scientific result or source adjudication is changed."
+  ]
+}

@@ -31,9 +31,19 @@ export async function integrationProof({api, repo, number, head, profile, baseli
     if (!Number.isSafeInteger(run.id) || run.id < 1 || !Number.isSafeInteger(run.run_attempt) || run.run_attempt < 1 ||
         (runId !== undefined && (run.id !== runId || run.run_attempt !== runAttempt)) || run.head_sha !== head || run.event !== 'pull_request' || run.path !== WORKFLOW_PATH ||
         run.repository?.full_name !== repo || run.head_repository?.full_name !== repo ||
-        run.status !== 'completed' || run.conclusion !== 'success' ||
+        run.status !== 'completed' || !['success', 'failure'].includes(run.conclusion) ||
         !run.pull_requests?.some(pr => pr.number === number && pr.head?.sha === head)) continue;
     const jobs = await githubPages(async route => (await api(route)).jobs, `${prefix(repo)}/actions/runs/${run.id}/attempts/${run.run_attempt}/jobs`);
+    // A PR-body edit can invalidate this run's evidence job after all code
+    // checks finish. Current authority is checked independently by both merge
+    // phases. Reuse only that narrow failure; other failed/skipped jobs do not
+    // become coverage, and the combined geography check still runs separately.
+    if (run.conclusion === 'failure' && (
+      jobs.filter(job => job.name === 'evidence').length !== 1 ||
+      !jobs.some(job => job.name === 'evidence' && job.conclusion === 'failure') ||
+      !['scope', 'geography', 'package'].every(name => jobs.some(job => job.name === name)) ||
+      jobs.some(job => job.status !== 'completed' ||
+        job.conclusion !== (job.name === 'evidence' ? 'failure' : 'success')))) continue;
     const expected = profile === 'full' ? [0,1,2] : [0];
     const regression = jobs.filter(job => /^regression \(\d\)$/.test(job.name));
     if (regression.length !== expected.length) continue;

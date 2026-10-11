@@ -34,6 +34,66 @@ test('successful full and focused workflows prove exact tree and pinned current 
     assert.deepEqual(await integrationProof({...f.options,runId:12,runAttempt:1}),proof);
   }
 });
+function failOnlyEvidence(f) {
+  f.run.conclusion = 'failure';
+  f.jobs.push({name:'evidence',status:'completed',conclusion:'failure'},
+    ...['scope','geography','package'].map(name=>({name,status:'completed',conclusion:'success'})));
+  return f;
+}
+test('evidence-only failure reuses successful exact-tree code jobs for both profiles and pinned final reads', async()=>{
+  for (const profile of ['full','evidence']) {
+    const f=failOnlyEvidence(fixture(profile));
+    const proof=await integrationProof(f.options);
+    assert.deepEqual(proof,{run_id:12,run_attempt:1,tree:'exact-complete-tree',profile});
+    assert.deepEqual(await integrationProof({...f.options,runId:12,runAttempt:1}),proof);
+  }
+});
+test('later metadata-only runs do not hide an earlier completed code proof', async()=>{
+  const f=failOnlyEvidence(fixture()), api=f.options.api, calls=[];
+  const metadata={...f.run,id:13,conclusion:'success'};
+  f.options.api=async route=>{
+    calls.push(route);
+    if (route.includes('/actions/workflows/')) return {workflow_runs:[metadata,f.run]};
+    if (route.includes('/actions/runs/13/')) return {jobs:[{name:'profile',status:'completed',conclusion:'success'},
+      {name:'regression',status:'completed',conclusion:'skipped'}]};
+    return api(route);
+  };
+  assert.equal((await integrationProof(f.options)).run_id,12);
+  assert.ok(calls.some(route=>route.includes('/runs/12/attempts/1/jobs')));
+});
+test('evidence-only exception refuses failed, skipped, missing or incomplete code and science', async()=>{
+  for (const name of ['profile','scope','geography','package','regression (0)','regression (1)','regression (2)']) {
+    for (const outcome of ['failure','cancelled','skipped','neutral','missing','in_progress']) {
+      const f=failOnlyEvidence(fixture());
+      if (outcome==='missing') f.jobs=f.jobs.filter(job=>job.name!==name);
+      else if (outcome==='in_progress') f.jobs.find(job=>job.name===name).status=outcome;
+      else f.jobs.find(job=>job.name===name).conclusion=outcome;
+      assert.equal(await integrationProof(f.options),null,`${name}: ${outcome}`);
+    }
+  }
+  for (const mutate of [
+    f=>f.jobs.find(job=>job.name==='regression (0)').steps.pop(),
+    f=>f.jobs.find(job=>job.name==='regression (1)').steps[0].conclusion='skipped',
+    f=>f.jobs.find(job=>job.name==='evidence').status='in_progress',
+    f=>f.jobs.find(job=>job.name==='evidence').conclusion='success',
+    f=>f.jobs.push({name:'other-science',status:'completed',conclusion:'failure'}),
+    f=>f.jobs.push({name:'evidence',status:'completed',conclusion:'failure'})
+  ]) {
+    const f=failOnlyEvidence(fixture());mutate(f);assert.equal(await integrationProof(f.options),null);
+  }
+});
+test('evidence-only failure cannot relax tested tree, workflow identity or pinned attempt', async()=>{
+  for (const mutate of [
+    f=>f.options.candidate.object.tree.sha='changed-tree',
+    f=>f.options.authored.entries.get(WORKFLOW_PATH).sha='changed-workflow',
+    f=>f.run.run_attempt=2,
+    f=>f.run.status='in_progress',
+    f=>f.run.conclusion='cancelled'
+  ]) {
+    const f=failOnlyEvidence(fixture());mutate(f);
+    assert.equal(await integrationProof({...f.options,runId:12,runAttempt:1}),null);
+  }
+});
 test('head metadata without explicit reviewed-head checkout never proves tested tree', async()=>{
   const f=fixture();f.workflow='name: Complete regression shard\nname: Build hosted assets';
   assert.equal(await integrationProof(f.options),null);
