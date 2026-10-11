@@ -786,6 +786,30 @@
       "bytes": 48350,
       "sha256": "6db89852c5e0967102d4eaf206a07439e778cf316a9f751533650e89b1acaa12",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/grc12-original-source-20261011/validation/evidence-ci-001.json",
+      "bytes": 1741,
+      "sha256": "af2b3f9b1de9c374ef27aaa02ce88d70667a8e3d2fc10286ec8ff0461b603403",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/grc12-original-source-20261011/vintages/source-handoff-002/all12-dispositions.json",
+      "bytes": 50178,
+      "sha256": "0ee10262cbba274154fe7b35dd82975062899467ae2e606c992ca35d9e7ee788",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/grc12-original-source-20261011/vintages/source-handoff-002/publication.json",
+      "bytes": 499,
+      "sha256": "c3ec19e939909db32e36ac1e6355ecfe4a0a8ecae1425792b303343111ff62d9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/grc12-original-source-20261011/vintages/source-handoff-002/source-handoff.json",
+      "bytes": 729755,
+      "sha256": "d28022788eb4112f2d16f54db5ada4af00db718c3e48c8494800c8e4ce27e372",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
@@ -832,7 +856,7 @@
       "id": "source_compatible_count",
       "value": 10,
       "unit": "components",
-      "vintage": "current",
+      "vintage": "baseline",
       "evaluation_commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
       "input_sha256": "08f098f4f15d91a189830afe419d3c9fd757f645cad6a645b13077fb0ff80760"
     },
@@ -840,7 +864,7 @@
       "id": "proposed_handoff_count",
       "value": 10,
       "unit": "components",
-      "vintage": "current",
+      "vintage": "baseline",
       "evaluation_commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
       "input_sha256": "0ee10262cbba274154fe7b35dd82975062899467ae2e606c992ca35d9e7ee788"
     }
@@ -853,7 +877,7 @@
     },
     {
       "metric_id": "proposed_handoff_count",
-      "path": "research/geography/grc12-original-source-20261011/vintages/source-handoff-001/all12-dispositions.json",
+      "path": "research/geography/grc12-original-source-20261011/vintages/source-handoff-002/all12-dispositions.json",
       "json_pointer": "/proposed_count"
     }
   ],
@@ -886,7 +910,7 @@
     "See README.md for exact immutable stage interfaces, recorded execution heads and fresh-vintage requirements.",
     "node research/geography/grc12-original-source-20261011/tools/check_all_source_premises.mjs EXACT_HEAD FRESH_VINTAGE",
     "node scripts/evidence-quality.mjs research/geography/grc12-original-source-20261011/evidence-quality.json",
-    "python research/geography/grc12-original-source-20261011/tools/build_handoff.py ea5bbdf651ac3ce104c1b1eff77c444a3830167c SOURCE_HANDOFF_FRESH_VINTAGE",
+    "python research/geography/grc12-original-source-20261011/tools/build_handoff.py aa8da5ab6e2ccb1b2b8140d0bac737fe3c8a08a4 SOURCE_HANDOFF_FRESH_VINTAGE",
     "node research/geography/grc12-original-source-20261011/tools/check_handoff.mjs"
   ]
 }

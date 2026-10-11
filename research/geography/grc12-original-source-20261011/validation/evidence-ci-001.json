@@ -1,0 +1,61 @@
+{
+  "status": "incomplete-or-invalid",
+  "head_sha": "0a0cdb6d7353d207b0b3b373ea2c9343df9d91d8",
+  "reason": "Current metrics must use the actual PR-base vintage; use baseline/archived for older results",
+  "retryable": false,
+  "limits": [
+    "Trusted metadata/evidence gates remain unverified; no success or applicability skip is claimed"
+  ],
+  "job_deadline": {
+    "job_id": 114507609155,
+    "run_id": 38152141844,
+    "run_attempt": 1,
+    "phase": "evidence",
+    "started_at": "2026-10-11T15:38:51Z",
+    "timeout_minutes": 10,
+    "finalization_ms": 30000,
+    "metadata_reads": 1,
+    "metadata_wait_ms": 0,
+    "metadata_observations": []
+  },
+  "elapsed_ms": 10513,
+  "request_accounting": {
+    "phase": "pr-gates",
+    "actual_http_attempts": 19,
+    "counts": {
+      "GET:repository-authority:200": 2,
+      "GET:actions:200": 1,
+      "GET:pulls:200": 2,
+      "GET:issues:200": 2,
+      "GET:comments:200": 1,
+      "GET:immutable-metadata:200": 6,
+      "GET:immutable-blob:200": 1,
+      "GET:immutable-metadata:304": 4
+    },
+    "observed_repository_core": {
+      "first": {
+        "limit": 5000,
+        "remaining": 4917,
+        "reset": 1791734407
+      },
+      "last": {
+        "limit": 5000,
+        "remaining": 4897,
+        "reset": 1791734407
+      },
+      "lowest_remaining": {
+        "limit": 5000,
+        "remaining": 4896,
+        "reset": 1791734407
+      }
+    }
+  },
+  "immutable_transport": [
+    {
+      "blob_count": 106,
+      "decoded_bytes": 50436437
+    }
+  ],
+  "run_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/38152141844",
+  "correction": "Both historical count metrics are labeled baseline at actual unchanged 6a99a760, not current PR base. No scientific rerun."
+}

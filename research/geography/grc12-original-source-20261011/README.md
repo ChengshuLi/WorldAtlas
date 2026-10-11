@@ -124,5 +124,7 @@ unknown. The inherited detector total must not be presented as newly added area.
 
 Shared interpretation review: https://github.com/ChengshuLi/WorldAtlas/issues/1732#issuecomment-6110654265.
 The final proposed v2 handoff has ten cases. Actual registered v2 and SOURCE
-controls passed all 21 checks. Its acceptance still requires this packet's independent
+controls passed all 40 checks, including eleven exact whole original physical/source products and meaningful hash/count/duplicate/missing-registration refusals. Its acceptance still requires this packet's independent
 exact-head source and geometry review; native and selected delivery remain separate.
+
+The final consumer-ready metadata is `vintages/source-handoff-002/source-handoff.json`. Vintage 001 is preserved as the historical receipt-list shape, which the actual registered original-product consumer rejects. The corrected projection authenticates every original whole product and decoded row count against the original report; detailed per-shard receipts remain separately retained. The first evidence CI failure is preserved in `validation/evidence-ci-001.json`; count metrics describe the actual fixed baseline, not a later unrelated PR-base commit.
