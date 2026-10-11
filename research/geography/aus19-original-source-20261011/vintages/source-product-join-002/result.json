@@ -1,0 +1,574 @@
+{
+  "execution_commit": "c105edd2bd17cab79d8762048f7a0eeeb3668bf8",
+  "inputs": [
+    {
+      "commit": "c105edd2bd17cab79d8762048f7a0eeeb3668bf8",
+      "path": "research/geography/aus19-original-source-20261011/tools/check_source_product_join.mjs",
+      "bytes": 3721,
+      "sha256": "34898c080d74d8568fe7bb956fe2e85c1418172325575ee5b9569453ebcb7458"
+    },
+    {
+      "commit": "c105edd2bd17cab79d8762048f7a0eeeb3668bf8",
+      "path": "src/effective-footprint.js",
+      "bytes": 45330,
+      "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+    },
+    {
+      "commit": "c105edd2bd17cab79d8762048f7a0eeeb3668bf8",
+      "path": "scripts/additive-gap-repair.mjs",
+      "bytes": 184937,
+      "sha256": "c5cd30d32b15a461a186074a1704a64f8895e33199c34d982af0e97bf0615895"
+    },
+    {
+      "commit": "c105edd2bd17cab79d8762048f7a0eeeb3668bf8",
+      "path": "research/geography/aus19-original-source-20261011/vintages/administrative-custody-002/comparison-rows.json",
+      "bytes": 96341,
+      "sha256": "847a974e660321bfd12c7ae7672b76eab7b5b7f397daf6e3a11456ad250e48a6"
+    },
+    {
+      "commit": "c105edd2bd17cab79d8762048f7a0eeeb3668bf8",
+      "path": "research/geography/aus19-original-source-20261011/vintages/administrative-custody-002/consumed-source.geojson",
+      "bytes": 11066867,
+      "sha256": "69115100f6d6fa953651988ecb091b1c3a687a4a8a95782bfafaa950af66b3e4"
+    }
+  ],
+  "rows": [
+    {
+      "component_id": "physical-component:d23d0b3cb30b0de91369fd23732c356389e9df225271a84d25a03ab52731c9d7",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 250,
+            "feature_sha256": "b0ce68f8f0acb963777b3e906a89bb7eedbb19e2e207d4bc227dd154817eaef1",
+            "geometry_sha256": "754f04e327157fa6e631c8c4ab9f6785ed980a16c6dd7bea9662f62bf76f8d34",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:AUS:ADM2:25037944B90195923531970",
+                "original_feature_sha256": "91bcde8138adc87a9aa4c3e1eac6964b3c3eda9081e7292e13ed1eb78e87d951",
+                "original_parent_id": "framework:province:queensland:c14c54289f37",
+                "reference_year": "2022"
+              }
+            ],
+            "shapeID": "25037944B90195923531970",
+            "source_id": "gb:AUS:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "b0ce68f8f0acb963777b3e906a89bb7eedbb19e2e207d4bc227dd154817eaef1",
+            "geometry_sha256": "754f04e327157fa6e631c8c4ab9f6785ed980a16c6dd7bea9662f62bf76f8d34"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:0f132f659a1cd02c13cddb383b2d39a40134e249c0771a9b3dfc42b488755f35",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 277,
+            "feature_sha256": "15f75e67af3fe70e3fd4b4dff35b4383ea71cf137331fdb573181ca5001c2b0d",
+            "geometry_sha256": "9aac0336c838c3508d82d1503768d18742a5dfb5b73a02524d499da46c5c5dd6",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:AUS:ADM2:25037944B43303794043608",
+                "original_feature_sha256": "864a8eb9816764cf4e14514acb7414c8d212ebca47c8057c18e8bbc9d508ab93",
+                "original_parent_id": "framework:province:queensland:c14c54289f37",
+                "reference_year": "2022"
+              }
+            ],
+            "shapeID": "25037944B43303794043608",
+            "source_id": "gb:AUS:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "15f75e67af3fe70e3fd4b4dff35b4383ea71cf137331fdb573181ca5001c2b0d",
+            "geometry_sha256": "9aac0336c838c3508d82d1503768d18742a5dfb5b73a02524d499da46c5c5dd6"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:ea41656ef57f6a294406dba881c7d63e70460c1c060147692992137380cf7c8b",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 533,
+            "feature_sha256": "6cf613879d676bb545e62d0799f0e92291cc341092044090d495d11671d42894",
+            "geometry_sha256": "0b9b54c3f8b3c2c38f3d1f01e9dcd7dde975a82b0e9bf9ff85def568de3174ad",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:AUS:ADM2:25037944B47305351718046",
+                "original_feature_sha256": "267e1123685337dc57c9d063d98a6254fc5ac2822f1fee753b8a0891a444e9e7",
+                "original_parent_id": "framework:province:northern-territory:f0073829bfe4",
+                "reference_year": "2022"
+              }
+            ],
+            "shapeID": "25037944B47305351718046",
+            "source_id": "gb:AUS:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "6cf613879d676bb545e62d0799f0e92291cc341092044090d495d11671d42894",
+            "geometry_sha256": "0b9b54c3f8b3c2c38f3d1f01e9dcd7dde975a82b0e9bf9ff85def568de3174ad"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:ae546e54d7ddf21a006459eeec529ac90f1b030b9797bed032d21f5885126a7d",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 277,
+            "feature_sha256": "15f75e67af3fe70e3fd4b4dff35b4383ea71cf137331fdb573181ca5001c2b0d",
+            "geometry_sha256": "9aac0336c838c3508d82d1503768d18742a5dfb5b73a02524d499da46c5c5dd6",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:AUS:ADM2:25037944B43303794043608",
+                "original_feature_sha256": "864a8eb9816764cf4e14514acb7414c8d212ebca47c8057c18e8bbc9d508ab93",
+                "original_parent_id": "framework:province:queensland:c14c54289f37",
+                "reference_year": "2022"
+              }
+            ],
+            "shapeID": "25037944B43303794043608",
+            "source_id": "gb:AUS:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "15f75e67af3fe70e3fd4b4dff35b4383ea71cf137331fdb573181ca5001c2b0d",
+            "geometry_sha256": "9aac0336c838c3508d82d1503768d18742a5dfb5b73a02524d499da46c5c5dd6"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:dc85692f522c0fedaaacd434b39520bb84001ba0355441458cbc3b82e6c38a0a",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 256,
+            "feature_sha256": "83c6230dffcaf9f010fbf2f1e18252fc51b2ab8f3db425cbbffa95e8fcbee605",
+            "geometry_sha256": "24191468cf9d5a0ddd7454ab8234f24ab384108a3dd437914fa60102fafb31a9",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:AUS:ADM2:25037944B95382354250521",
+                "original_feature_sha256": "c94679e659f9980bdb06122de3eeba17b5ff657cfc5ab44aa50bf8bb87c4a252",
+                "original_parent_id": "framework:province:queensland:c14c54289f37",
+                "reference_year": "2022"
+              }
+            ],
+            "shapeID": "25037944B95382354250521",
+            "source_id": "gb:AUS:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "83c6230dffcaf9f010fbf2f1e18252fc51b2ab8f3db425cbbffa95e8fcbee605",
+            "geometry_sha256": "24191468cf9d5a0ddd7454ab8234f24ab384108a3dd437914fa60102fafb31a9"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:ee9d9768fca9795b3d5be1b865c72fe5e9cd2fba30b7b670a4efced1d23c8c74",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 28,
+            "feature_sha256": "d4e964b49fbd7cd1f84c84c1a74accdcf7c0fee08eca35790451d41e698de7de",
+            "geometry_sha256": "d85debac1c40c8bcdfe3039bb90ac47a43cb52fe762c8a0eb6848c57fd010f13",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:AUS:ADM2:25037944B11916296746250",
+                "original_feature_sha256": "246d0213cd1749d1ac053d32b977ef3226b4712422044cb6afa4692d5ae13556",
+                "original_parent_id": "framework:province:new-south-wales:319e780fcd36",
+                "reference_year": "2022"
+              }
+            ],
+            "shapeID": "25037944B11916296746250",
+            "source_id": "gb:AUS:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "d4e964b49fbd7cd1f84c84c1a74accdcf7c0fee08eca35790451d41e698de7de",
+            "geometry_sha256": "d85debac1c40c8bcdfe3039bb90ac47a43cb52fe762c8a0eb6848c57fd010f13"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:19f523ffe4951aaa8802fe1731f7befd6f48acda3d3d313fcaa31281e304374e",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 277,
+            "feature_sha256": "15f75e67af3fe70e3fd4b4dff35b4383ea71cf137331fdb573181ca5001c2b0d",
+            "geometry_sha256": "9aac0336c838c3508d82d1503768d18742a5dfb5b73a02524d499da46c5c5dd6",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:AUS:ADM2:25037944B43303794043608",
+                "original_feature_sha256": "864a8eb9816764cf4e14514acb7414c8d212ebca47c8057c18e8bbc9d508ab93",
+                "original_parent_id": "framework:province:queensland:c14c54289f37",
+                "reference_year": "2022"
+              }
+            ],
+            "shapeID": "25037944B43303794043608",
+            "source_id": "gb:AUS:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "15f75e67af3fe70e3fd4b4dff35b4383ea71cf137331fdb573181ca5001c2b0d",
+            "geometry_sha256": "9aac0336c838c3508d82d1503768d18742a5dfb5b73a02524d499da46c5c5dd6"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:1b59110d4416db7dfe722ce9451539f4b0bcb0bafdb029eb0b311844d155a187",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 277,
+            "feature_sha256": "15f75e67af3fe70e3fd4b4dff35b4383ea71cf137331fdb573181ca5001c2b0d",
+            "geometry_sha256": "9aac0336c838c3508d82d1503768d18742a5dfb5b73a02524d499da46c5c5dd6",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:AUS:ADM2:25037944B43303794043608",
+                "original_feature_sha256": "864a8eb9816764cf4e14514acb7414c8d212ebca47c8057c18e8bbc9d508ab93",
+                "original_parent_id": "framework:province:queensland:c14c54289f37",
+                "reference_year": "2022"
+              }
+            ],
+            "shapeID": "25037944B43303794043608",
+            "source_id": "gb:AUS:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "15f75e67af3fe70e3fd4b4dff35b4383ea71cf137331fdb573181ca5001c2b0d",
+            "geometry_sha256": "9aac0336c838c3508d82d1503768d18742a5dfb5b73a02524d499da46c5c5dd6"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:6e05d606a5ac09942295520893df259382c0634574213b6caea9c782076dae94",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 245,
+            "feature_sha256": "31a519876f15e6a9ecd215ab8d538611fc0b9ddda66f92f96919f4c72f0b2983",
+            "geometry_sha256": "1523be8f990c021536f7ad27ec7ecf0551a234e1b694f08a8804b521871c3f1c",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:AUS:ADM2:25037944B91391383703186",
+                "original_feature_sha256": "acae2926bbb8bcd7ed5836795966786199765b17d29b138bacacf4f6283610bf",
+                "original_parent_id": "framework:province:queensland:c14c54289f37",
+                "reference_year": "2022"
+              }
+            ],
+            "shapeID": "25037944B91391383703186",
+            "source_id": "gb:AUS:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "31a519876f15e6a9ecd215ab8d538611fc0b9ddda66f92f96919f4c72f0b2983",
+            "geometry_sha256": "1523be8f990c021536f7ad27ec7ecf0551a234e1b694f08a8804b521871c3f1c"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:9d53e507a92cc13f65caf2dc51679708b3fee6e5b87a670c5d5179e40019dbbe",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 385,
+            "feature_sha256": "8a4868573f4679b4a5677bed9c624b675731e3d96abef63bcf17969dbe509deb",
+            "geometry_sha256": "4f342ba04f93559faec9730f3d852fb5752db6db9daf8d209ee51612a42c1657",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:AUS:ADM2:25037944B17338277063313",
+                "original_feature_sha256": "d41ad99c469031ee458ba714c53b0da2b23763030d7135542a93ba56bf48c125",
+                "original_parent_id": "framework:province:other-territories:c15a4190f7ab",
+                "reference_year": "2022"
+              }
+            ],
+            "shapeID": "25037944B17338277063313",
+            "source_id": "gb:AUS:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "8a4868573f4679b4a5677bed9c624b675731e3d96abef63bcf17969dbe509deb",
+            "geometry_sha256": "4f342ba04f93559faec9730f3d852fb5752db6db9daf8d209ee51612a42c1657"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:c24dc1abe05ff8e61e1a6246bf0d7dd15b1201152989b26e80c6854b30abbae2",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 533,
+            "feature_sha256": "6cf613879d676bb545e62d0799f0e92291cc341092044090d495d11671d42894",
+            "geometry_sha256": "0b9b54c3f8b3c2c38f3d1f01e9dcd7dde975a82b0e9bf9ff85def568de3174ad",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:AUS:ADM2:25037944B47305351718046",
+                "original_feature_sha256": "267e1123685337dc57c9d063d98a6254fc5ac2822f1fee753b8a0891a444e9e7",
+                "original_parent_id": "framework:province:northern-territory:f0073829bfe4",
+                "reference_year": "2022"
+              }
+            ],
+            "shapeID": "25037944B47305351718046",
+            "source_id": "gb:AUS:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "6cf613879d676bb545e62d0799f0e92291cc341092044090d495d11671d42894",
+            "geometry_sha256": "0b9b54c3f8b3c2c38f3d1f01e9dcd7dde975a82b0e9bf9ff85def568de3174ad"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:a02d1bc4b12eaeb786305a63ee523a14fb785ff72e1263d0ce3399b42d38568d",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 533,
+            "feature_sha256": "6cf613879d676bb545e62d0799f0e92291cc341092044090d495d11671d42894",
+            "geometry_sha256": "0b9b54c3f8b3c2c38f3d1f01e9dcd7dde975a82b0e9bf9ff85def568de3174ad",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:AUS:ADM2:25037944B47305351718046",
+                "original_feature_sha256": "267e1123685337dc57c9d063d98a6254fc5ac2822f1fee753b8a0891a444e9e7",
+                "original_parent_id": "framework:province:northern-territory:f0073829bfe4",
+                "reference_year": "2022"
+              }
+            ],
+            "shapeID": "25037944B47305351718046",
+            "source_id": "gb:AUS:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "6cf613879d676bb545e62d0799f0e92291cc341092044090d495d11671d42894",
+            "geometry_sha256": "0b9b54c3f8b3c2c38f3d1f01e9dcd7dde975a82b0e9bf9ff85def568de3174ad"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:a44d1d9c6745adf29f14613802ab5525b8b9d7beb2c90fc3991ba4832bff2ff6",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 250,
+            "feature_sha256": "b0ce68f8f0acb963777b3e906a89bb7eedbb19e2e207d4bc227dd154817eaef1",
+            "geometry_sha256": "754f04e327157fa6e631c8c4ab9f6785ed980a16c6dd7bea9662f62bf76f8d34",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:AUS:ADM2:25037944B90195923531970",
+                "original_feature_sha256": "91bcde8138adc87a9aa4c3e1eac6964b3c3eda9081e7292e13ed1eb78e87d951",
+                "original_parent_id": "framework:province:queensland:c14c54289f37",
+                "reference_year": "2022"
+              }
+            ],
+            "shapeID": "25037944B90195923531970",
+            "source_id": "gb:AUS:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "b0ce68f8f0acb963777b3e906a89bb7eedbb19e2e207d4bc227dd154817eaef1",
+            "geometry_sha256": "754f04e327157fa6e631c8c4ab9f6785ed980a16c6dd7bea9662f62bf76f8d34"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:adbba6d33b360a3b72ddad4af7c3b7ef5d2241c8e7e023040edfdceda4801f38",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 220,
+            "feature_sha256": "72d1c97e8d6ade4dc84fce34d7f86f42285fcbba3a075842ef30df451b82e9fc",
+            "geometry_sha256": "d7254e4aabd8d69d37c9448f8f5bfcd2c1fbe640aa6a01b77d1a4cd994ffde64",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:AUS:ADM2:25037944B14025919363288",
+                "original_feature_sha256": "5ac8ebcaf6a23eb84c110cb6c47671b8d5575a1fd7748035f2e2a28e7aae93b5",
+                "original_parent_id": "framework:province:queensland:c14c54289f37",
+                "reference_year": "2022"
+              }
+            ],
+            "shapeID": "25037944B14025919363288",
+            "source_id": "gb:AUS:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "72d1c97e8d6ade4dc84fce34d7f86f42285fcbba3a075842ef30df451b82e9fc",
+            "geometry_sha256": "d7254e4aabd8d69d37c9448f8f5bfcd2c1fbe640aa6a01b77d1a4cd994ffde64"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:64efd5aee39eeef3fd2373469acb69007b90bf8532265298ea247da595a05d99",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 543,
+            "feature_sha256": "e5e826b5b62c49a22a05c662a1547b222347e4e6548d3197cbff505fe2392c90",
+            "geometry_sha256": "ceeb5208636f0ce98d01205a22d8895986a8763472f35af4399d6b0c86cbe32a",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:AUS:ADM2:25037944B73531494726593",
+                "original_feature_sha256": "1be7b59311b0d09ec71cb7ebc228e0cf5d1ad70d93624a06f70f8ec793ccac49",
+                "original_parent_id": "framework:province:northern-territory:f0073829bfe4",
+                "reference_year": "2022"
+              }
+            ],
+            "shapeID": "25037944B73531494726593",
+            "source_id": "gb:AUS:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "e5e826b5b62c49a22a05c662a1547b222347e4e6548d3197cbff505fe2392c90",
+            "geometry_sha256": "ceeb5208636f0ce98d01205a22d8895986a8763472f35af4399d6b0c86cbe32a"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:6aeef9d450464698868d758f9032b7bf4d17b17813e931e380a08cbff1a95a3c",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 245,
+            "feature_sha256": "31a519876f15e6a9ecd215ab8d538611fc0b9ddda66f92f96919f4c72f0b2983",
+            "geometry_sha256": "1523be8f990c021536f7ad27ec7ecf0551a234e1b694f08a8804b521871c3f1c",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:AUS:ADM2:25037944B91391383703186",
+                "original_feature_sha256": "acae2926bbb8bcd7ed5836795966786199765b17d29b138bacacf4f6283610bf",
+                "original_parent_id": "framework:province:queensland:c14c54289f37",
+                "reference_year": "2022"
+              }
+            ],
+            "shapeID": "25037944B91391383703186",
+            "source_id": "gb:AUS:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "31a519876f15e6a9ecd215ab8d538611fc0b9ddda66f92f96919f4c72f0b2983",
+            "geometry_sha256": "1523be8f990c021536f7ad27ec7ecf0551a234e1b694f08a8804b521871c3f1c"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:693f67a95c8dc115e9a678b873cf00272dca011feb1e980233100e32dd4e5d60",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 533,
+            "feature_sha256": "6cf613879d676bb545e62d0799f0e92291cc341092044090d495d11671d42894",
+            "geometry_sha256": "0b9b54c3f8b3c2c38f3d1f01e9dcd7dde975a82b0e9bf9ff85def568de3174ad",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:AUS:ADM2:25037944B47305351718046",
+                "original_feature_sha256": "267e1123685337dc57c9d063d98a6254fc5ac2822f1fee753b8a0891a444e9e7",
+                "original_parent_id": "framework:province:northern-territory:f0073829bfe4",
+                "reference_year": "2022"
+              }
+            ],
+            "shapeID": "25037944B47305351718046",
+            "source_id": "gb:AUS:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "6cf613879d676bb545e62d0799f0e92291cc341092044090d495d11671d42894",
+            "geometry_sha256": "0b9b54c3f8b3c2c38f3d1f01e9dcd7dde975a82b0e9bf9ff85def568de3174ad"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:db59475224c643d6cdb491488f2e7ce6280ca7be60726f1fa255f00c22749683",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 533,
+            "feature_sha256": "6cf613879d676bb545e62d0799f0e92291cc341092044090d495d11671d42894",
+            "geometry_sha256": "0b9b54c3f8b3c2c38f3d1f01e9dcd7dde975a82b0e9bf9ff85def568de3174ad",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:AUS:ADM2:25037944B47305351718046",
+                "original_feature_sha256": "267e1123685337dc57c9d063d98a6254fc5ac2822f1fee753b8a0891a444e9e7",
+                "original_parent_id": "framework:province:northern-territory:f0073829bfe4",
+                "reference_year": "2022"
+              }
+            ],
+            "shapeID": "25037944B47305351718046",
+            "source_id": "gb:AUS:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "6cf613879d676bb545e62d0799f0e92291cc341092044090d495d11671d42894",
+            "geometry_sha256": "0b9b54c3f8b3c2c38f3d1f01e9dcd7dde975a82b0e9bf9ff85def568de3174ad"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:ee44e2e0c39317375ed4a5ac5c4e5bf8056e65f8aced6609f07b3f5abc430915",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 533,
+            "feature_sha256": "6cf613879d676bb545e62d0799f0e92291cc341092044090d495d11671d42894",
+            "geometry_sha256": "0b9b54c3f8b3c2c38f3d1f01e9dcd7dde975a82b0e9bf9ff85def568de3174ad",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:AUS:ADM2:25037944B47305351718046",
+                "original_feature_sha256": "267e1123685337dc57c9d063d98a6254fc5ac2822f1fee753b8a0891a444e9e7",
+                "original_parent_id": "framework:province:northern-territory:f0073829bfe4",
+                "reference_year": "2022"
+              }
+            ],
+            "shapeID": "25037944B47305351718046",
+            "source_id": "gb:AUS:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "6cf613879d676bb545e62d0799f0e92291cc341092044090d495d11671d42894",
+            "geometry_sha256": "0b9b54c3f8b3c2c38f3d1f01e9dcd7dde975a82b0e9bf9ff85def568de3174ad"
+          }
+        }
+      ]
+    }
+  ],
+  "compatible_count": 19,
+  "limits": [
+    "Original whole-source product join only; no geometry operation or full SOURCE qualification.",
+    "Original Python hashes remain unchanged; incompatible JavaScript serialization is an explicit hold."
+  ]
+}
