@@ -1,0 +1,4087 @@
+{
+  "version": 1,
+  "issue": 1647,
+  "lane": "engineering",
+  "worker_id": "01a1276f-39af-7732-ac0f-727aade18023",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "version": 2,
+    "commit": "e94eb44e790f3c41e5b4e1ae4d45affa4f767e73",
+    "files": [
+      {
+        "path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/native-payloads-110-001/native-payloads-110.json",
+        "commit": "361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5",
+        "bytes": 349724,
+        "sha256": "1f7bec65878449856747f82801a816685727f83ddb1144350583344b032b9831",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/batch-outcomes-363-002/batch-outcomes-363-v2.json",
+        "commit": "361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5",
+        "bytes": 1050202,
+        "sha256": "e19ac2c7b9bb408845558facdd0b4457af73015ff93691f75d27d54c2ce05f21",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/source-comparison-capture-001/batch-source-comparisons.json",
+        "commit": "361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5",
+        "bytes": 1703412,
+        "sha256": "ac8cdc651035ccc2cb1ca643f9baebac08b1112420cfb95859b3f6f926573029",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/ncl-targeted-source-match-029-001/ncl-source-matches-029.json",
+        "commit": "361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5",
+        "bytes": 73731,
+        "sha256": "cd8adf21f59c2f8a8ed6c07f616862b778bde3bb47bf9e5b24fd19e68f62f659",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/source-remainders-084-001/source-remainders-084.json",
+        "commit": "361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5",
+        "bytes": 109916,
+        "sha256": "9372e82622369f29e4374d92d12c50944dce60f4468b7842ace4f41cf3f4873d",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/source-handoff-003/source-handoff.json",
+        "commit": "4171675cdf746a43d3e1dfc0ff9aee8dbaaf6646",
+        "bytes": 82015,
+        "sha256": "7fd3d6da63c1fc9890784a6db6e4a3e9fb55755d52bb3c3a45cf0ad8a7f32462",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "payloads_path_sha256": "1f7bec65878449856747f82801a816685727f83ddb1144350583344b032b9831",
+      "outcomes_path_sha256": "e19ac2c7b9bb408845558facdd0b4457af73015ff93691f75d27d54c2ce05f21",
+      "simplified_comparison_path_sha256": "ac8cdc651035ccc2cb1ca643f9baebac08b1112420cfb95859b3f6f926573029",
+      "generalized_comparison_path_sha256": "cd8adf21f59c2f8a8ed6c07f616862b778bde3bb47bf9e5b24fd19e68f62f659",
+      "remainders_path_sha256": "9372e82622369f29e4374d92d12c50944dce60f4468b7842ace4f41cf3f4873d"
+    },
+    "pin_files": {
+      "payloads_path_sha256": {
+        "path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/native-payloads-110-001/native-payloads-110.json",
+        "commit": "361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5"
+      },
+      "outcomes_path_sha256": {
+        "path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/batch-outcomes-363-002/batch-outcomes-363-v2.json",
+        "commit": "361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5"
+      },
+      "simplified_comparison_path_sha256": {
+        "path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/source-comparison-capture-001/batch-source-comparisons.json",
+        "commit": "361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5"
+      },
+      "generalized_comparison_path_sha256": {
+        "path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/ncl-targeted-source-match-029-001/ncl-source-matches-029.json",
+        "commit": "361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5"
+      },
+      "remainders_path_sha256": {
+        "path": "research/geography/melanesia-gap-batch-37ed51b2-20261009/vintages/source-remainders-084-001/source-remainders-084.json",
+        "commit": "361ae58a2e5dfb2ad9596dfef0c255fdd3c4a9f5"
+      }
+    },
+    "subject_files": {}
+  },
+  "sources": [
+    {
+      "id": "original-1639-administrative-corpus",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/pull/1639",
+      "role": "Retained original physical/query and administrative full/fragment source-relative evidence; no new source acquisition",
+      "vintage": "immutable original1639 source corpus",
+      "retrieved_at": "2026-10-10",
+      "license": {
+        "status": "unknown",
+        "terms": "Retained original edition-specific terms; no new rights assertion"
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Use the five exact original baseline descriptors and original product/edition pins retained in each issued request.",
+      "limit": "Source-relative predicates do not prove current truth, dates, rights, native eligibility, whole-gap completion or delivery.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "ukr-original-singleton-source-1699",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/pull/1699",
+      "role": "Accepted original singleton source, physical custody and complete current-neighbor evidence",
+      "vintage": "Original immutable source corpus; accepted handoff003",
+      "retrieved_at": "2026-10-11",
+      "license": {
+        "status": "unknown",
+        "terms": "Original edition-specific limitations retained; no new rights assertion"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Read the exact merged4171675 source-handoff003 and its complete original product pins; reuse source review6103065358.",
+      "limit": "Source-relative evidence and zero-cell native production do not establish current selected-neighbor qualification, geographic approval or whole-gap delivery.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "congo-ago-source-1723",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/pull/1723",
+      "role": "Two accepted whole COD/AGO source candidates and complete physical/current-neighbor custody",
+      "vintage": "Original immutable source corpus and merged accepted handoff003",
+      "retrieved_at": "2026-10-11",
+      "license": {
+        "status": "unknown",
+        "terms": "Original edition-specific limitations retained; no new rights assertion"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Use exact accepted source handoff and complete original restoration pins in the issued SOURCE requests.",
+      "limit": "Source-relative acceptance does not alone establish selected delivery or completion of original130/318-member batches.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "phl-nine-source-1724",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/pull/1724",
+      "role": "Nine accepted PHL source candidates, original physical custody and canonical serialization bindings",
+      "vintage": "Original immutable source corpus and merged accepted handoff003",
+      "retrieved_at": "2026-10-11",
+      "license": {
+        "status": "unknown",
+        "terms": "Original edition-specific limitations retained; no new rights assertion"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Use exact accepted source handoff and complete original restoration pins in the issued SOURCE requests.",
+      "limit": "Source-relative acceptance does not alone establish selected delivery or completion of original130/318-member batches.",
+      "temporal_status": "unknown"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operating/native004-derived-operating-view.json",
+      "bytes": 77949,
+      "sha256": "2dfb6b6fd300487dc3800450c9cc3a2ce2b9c5a07a9a626e8bf9dacebfa32965",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operating/native016-derived-operating-view.json",
+      "bytes": 75175,
+      "sha256": "25be8f081ea0f53130e9184c4e0f61b195c609c25afc812b6f8cd59f3b9255c1",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operating/native023-derived-operating-view.json",
+      "bytes": 81200,
+      "sha256": "0e276955630cc3705b9fb4da9cc769cfd0ed183db3631c12666eaff53b297301",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operating/native030-derived-operating-view.json",
+      "bytes": 76238,
+      "sha256": "61f4b07536351f3f9e7c2d408c3ac8e047a355f787754c461d2053f148b9e05d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operating/native036-derived-operating-view.json",
+      "bytes": 78264,
+      "sha256": "868878962c3e3d0894c2d35262295c4ebc1fb0ab254134e5a0c533ece5a8ff13",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operating/native044-derived-operating-view.json",
+      "bytes": 76626,
+      "sha256": "28377277756ec26d6b8698043ef63c62d9db4c1824bb65f81a2036228b74169b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operating/native050-derived-operating-view.json",
+      "bytes": 77704,
+      "sha256": "d1af251bea40504f0fbbe9dc48577fef070be7258f3d9c0d8cbc40b034c19029",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operating/native059-derived-operating-view.json",
+      "bytes": 86458,
+      "sha256": "922e33c6df7f1ec413e7ceee8865ba882df98c0945c8c71d7b9bad62516d9270",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operating/native062-derived-operating-view.json",
+      "bytes": 75391,
+      "sha256": "9acafe86796aae681d39b6de86d4360dba17e8ff83a9ed728516696e1e05b7c6",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operating/native063-derived-operating-view.json",
+      "bytes": 78737,
+      "sha256": "5b4dee87b4beeb645003024878e7e224186ae19697043cebf6ba6a73ee13a003",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operating/native067-derived-operating-view.json",
+      "bytes": 82036,
+      "sha256": "71e998f6556cfa7fc42c2242fa6d55e7d49c0d0f3b3e9825c0bd7253369cd18b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operating/native069-derived-operating-view.json",
+      "bytes": 76657,
+      "sha256": "050229bf497676624b6a89e879b0d7a67a9ec0a517dca122df375e7ed4faf0f2",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operating/native073-derived-operating-view.json",
+      "bytes": 81194,
+      "sha256": "2ee48166317537c434a739a929c2020b53b6af0206ac205ab8742d2e5b39b4ab",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operating/native074-derived-operating-view.json",
+      "bytes": 77617,
+      "sha256": "3be6f69727848c6863daac0033009d6dfc7f4c1f486a80ef3b6532bb532355dd",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operating/native093-derived-operating-view.json",
+      "bytes": 83728,
+      "sha256": "af9f37048d1303263d680aebb7282d4369cfc30124a96c283e38a5773f3987f8",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operating/native096-derived-operating-view.json",
+      "bytes": 83136,
+      "sha256": "962f10abe3ec68dbbe24c227cf47707ab867f1ac6a415592e364db5e84995381",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operating/native098-derived-operating-view.json",
+      "bytes": 79472,
+      "sha256": "c60c6cee9e7438d250b02d9d410cc87949354be70250071c984bb314f4f180fb",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operating/native107-derived-operating-view.json",
+      "bytes": 78892,
+      "sha256": "b12f7a03a2473e2cf74af1cae029a25b5bad9a7ad3497afd9d051a896a28a73f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/004/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/004/facts.json",
+      "bytes": 520282,
+      "sha256": "4bbf86437173889f8a5c5a528f0beb1b51ee8904975e6337df29cd9b9e1a50d4",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/004/features.json",
+      "bytes": 8362,
+      "sha256": "89ca43d488de3a26b32b0346015e82db5ece7d5450e1b082b920c5d2311622e4",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/004/inventory.jsonl.gz",
+      "bytes": 280,
+      "sha256": "031bc43a3544b627991fab4e42721e1836fad1eb07f1d92eb7c1b5c72ea75945",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/004/ledger-batch.json",
+      "bytes": 6710,
+      "sha256": "71e5ba8fbe7e9e20294a8e98d3384379edd5a302c4cb5767c7871f83e3e81d95",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/004/owner-window.json",
+      "bytes": 66956,
+      "sha256": "be576a3c8bb09b7eb55aba7d7458ef75891b696c79da5ab7ce069ec1fc4a4f5d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/004/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/004/patch-batch.json",
+      "bytes": 1276,
+      "sha256": "8007f1f473323b7058f56b629c4cb9863a21be67bee51e526e7c2624da19a221",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/004/publication.json",
+      "bytes": 1446,
+      "sha256": "0781381b375d78cd43f8dd3a72657db2e1cedbf73a1afa1139c6f0e9e5612e84",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/004/release-envelope.json",
+      "bytes": 1663,
+      "sha256": "b0cdfc66e5431baa517f29e1ad8b9203c6b17eb86c8e5fd9b2a29531b89c307d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/004/virtual-owner-window.json",
+      "bytes": 33427,
+      "sha256": "c831562b6de98f9c212ea481697f0dad136958ffac0ec110ed314e4e93cee592",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/016/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/016/facts.json",
+      "bytes": 520280,
+      "sha256": "7aa98a13267ce901adcdd5653583a8cd274385c76b2f20775c1a9a300624656f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/016/features.json",
+      "bytes": 5889,
+      "sha256": "bf564c5dbb232fe85363896979a8dc5abdba8c1c0419d47087436f9a32102bd2",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/016/inventory.jsonl.gz",
+      "bytes": 279,
+      "sha256": "d84bdc6b3b6f12e6395eb3522dcd4951bd2eb919bfdfb129dcc5195db2e352ac",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/016/ledger-batch.json",
+      "bytes": 4224,
+      "sha256": "1ffdc6092606c2e136cfbf652e6f75b3d068580437ca81ee350216212be4f04e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/016/owner-window.json",
+      "bytes": 107540,
+      "sha256": "3c52a2a948371a57d1840270c566ac46851e10d9c63d5528c9ecbec69fdb4086",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/016/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/016/patch-batch.json",
+      "bytes": 836,
+      "sha256": "5f415d1a318c9c212d5b851dfb8824e1d84ec8d3307db19d5e90a5a527c91b3c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/016/publication.json",
+      "bytes": 1445,
+      "sha256": "f2670a5d5da431dbc9b95dbf19ecef5bcbbf4b6d51ba02cffa5c5a433373c655",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/016/release-envelope.json",
+      "bytes": 1662,
+      "sha256": "097f7006fa7e5abcd01c700041a9c3355abaca934d738d7aff2ff28e55526206",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/016/virtual-owner-window.json",
+      "bytes": 3461,
+      "sha256": "ef58eb7514afce405b54053d24d99534d3db392cba2b8592544d1d9ed3700574",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/023/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/023/facts.json",
+      "bytes": 519147,
+      "sha256": "0d74b8bfa1eebaf4f3717e13e91cdf7e40b3f18bed7910ece1f875712a192cc6",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/023/features.json",
+      "bytes": 5173,
+      "sha256": "f829ad015a3e2803828dbb099a75e4bba7992a24e06141fd2e089f9fbbd4c8e0",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/023/inventory.jsonl.gz",
+      "bytes": 303,
+      "sha256": "da2bdd5355b600ca6e4a5345712deff6ef736ac4fac153650c021cdcdbc5e1ab",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/023/ledger-batch.json",
+      "bytes": 3701,
+      "sha256": "c7932e18017a0f246523aaf55727c11485f9c167b8fc6542448a2bb91cba1bec",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/023/owner-window.json",
+      "bytes": 24934,
+      "sha256": "0009c09b360b6ef501ab2591314bbafd6656c4ef56e139d19f97d00b9b6dd489",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/023/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/023/patch-batch.json",
+      "bytes": 836,
+      "sha256": "b461b344160b925773842f3cec18bb2e2de059d8d191bc683097cc1a0e0e568d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/023/publication.json",
+      "bytes": 1444,
+      "sha256": "49d0aa64803f6431b09cf8c30585f8f8541b50d4f6fe1f0ffab09965d837f3dd",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/023/release-envelope.json",
+      "bytes": 1662,
+      "sha256": "37169e9ce20f73084931d3a32a83f7b35c0402eb953af0cbab2ea5e4fb86a44c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/023/virtual-owner-window.json",
+      "bytes": 4164,
+      "sha256": "3a611e2aee8a13e5d5eb07095eed52caa420b40b1a2f38b88ec585f7e7763ffc",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/030/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/030/facts.json",
+      "bytes": 519153,
+      "sha256": "dfaa31644e6acf6b87102e9d194eb4ea550aa5cd0d8c5524a5b3d8ec1ea55b21",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/030/features.json",
+      "bytes": 4473,
+      "sha256": "e30b5c4bc3605a02889596934ccb1c565bc14a21fd0c5a871486ef961b16c9d2",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/030/inventory.jsonl.gz",
+      "bytes": 303,
+      "sha256": "3ab42089633c21849e3769224b24cd8a954f79c20599a4e84c8da14a1e7136d5",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/030/ledger-batch.json",
+      "bytes": 2789,
+      "sha256": "ddac3ba5c1c079436ca0e216bbf13315b99dac5436c1c2ec083e760b0b6bc49d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/030/owner-window.json",
+      "bytes": 21970,
+      "sha256": "df980858c5d41ef90be70c7d7fa2d11cef541f213a6a354f8a2250daf69874c6",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/030/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/030/patch-batch.json",
+      "bytes": 836,
+      "sha256": "d2f6d5722ceba376fd0bc0b74421205f85d029ef82b3550acd8ae8e30f089be7",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/030/publication.json",
+      "bytes": 1444,
+      "sha256": "2895552787e39f1d13cce450b5bcb1c0f84a73b7dffe5af3f83a007bb8c4f3e8",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/030/release-envelope.json",
+      "bytes": 1662,
+      "sha256": "c71beeb18644c21b2fa2bc3dddf4a8b23609072dc0069f6936bd71631ca1ecd9",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/030/virtual-owner-window.json",
+      "bytes": 4356,
+      "sha256": "5105172e8bc36aa1961c3e7268c8dc95bd786a905e25458a2b6acf8780165398",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/036/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/036/facts.json",
+      "bytes": 519150,
+      "sha256": "9efc6f94b6aeb21d6d518f69ebf7b0cfccf02cceec8dc4afbdfd6d48a0b7b677",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/036/features.json",
+      "bytes": 4109,
+      "sha256": "41ba80fafa10137b7714992db816cbcdf65786559bb198c2c331177153b3a257",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/036/inventory.jsonl.gz",
+      "bytes": 304,
+      "sha256": "a20fd896f6d9a5c200cf65ddbd2bb24a55a1136f0e58d35feef0f848db374cf1",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/036/ledger-batch.json",
+      "bytes": 2615,
+      "sha256": "e5eb4345e6ba3bf9dba2b0b3986abcb998da3bf6c65f91b99e05c0378a7ed876",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/036/owner-window.json",
+      "bytes": 32374,
+      "sha256": "7a32ecc6dbc997229d6de9624dbca5d4ecdbf2fbfce2b15216f905de709a9d21",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/036/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/036/patch-batch.json",
+      "bytes": 1188,
+      "sha256": "b96879fc43d0aecd33593b31de61603725694a15a92886ed3ee39f20854d47f4",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/036/publication.json",
+      "bytes": 1446,
+      "sha256": "ee3b34a66aedaf3eb1af78c4b997ff2936a8fd9f9e6ea0a70d5a00179e30a838",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/036/release-envelope.json",
+      "bytes": 1663,
+      "sha256": "9a60d82fc3fa99cbbb2dd918f4c3582fd9c17f6c77d9c4875fceaa222aea4760",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/036/virtual-owner-window.json",
+      "bytes": 22320,
+      "sha256": "fcc5e18b37ca97dc9885f0826e511c695a4faf6ecfe4d1c697959823c0b92820",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/044/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/044/facts.json",
+      "bytes": 525000,
+      "sha256": "621609265f8677fb9f57674e7c9dafe9b10a733828b4da8d0f9fc84ab693efb6",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/044/features.json",
+      "bytes": 10029,
+      "sha256": "fe5b97f9cc6a825622edef49846acac1dd92a48b196e7ee420f3b5ddd56f1419",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/044/inventory.jsonl.gz",
+      "bytes": 301,
+      "sha256": "0e814c200056f48b74086c00cd2a3e5aa8cd53a3fb4404673be58dc6ddc2bb05",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/044/ledger-batch.json",
+      "bytes": 10181,
+      "sha256": "91d9660349823617d769dd792f2324d5aafb3ff2d99a7528b822bfa42ae07c19",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/044/owner-window.json",
+      "bytes": 81764,
+      "sha256": "2e03cbe75a9899d601bf84005e4d7fa9b9f342724c0922a3144ff119fb44f828",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/044/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/044/patch-batch.json",
+      "bytes": 836,
+      "sha256": "9eeef6ec80af6e31d532a3d098bff33f446b35fda1d7f6d68d61706170a4ea87",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/044/publication.json",
+      "bytes": 1446,
+      "sha256": "bc8eefebb951b84048a45ca97c2676d7ac311aed3864462b932581e06c4afb59",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/044/release-envelope.json",
+      "bytes": 1663,
+      "sha256": "80a907ad917306da99160c977b3f19ba4d6cb6edd73d4b9009a96c8c7b823bb4",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/044/virtual-owner-window.json",
+      "bytes": 4530,
+      "sha256": "3a94bb59403b9ea8d37a231b4d3af40c17c8b62800fe90cb900ee8ddb4d6e682",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/050/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/050/facts.json",
+      "bytes": 527086,
+      "sha256": "75661728f116bb6e71f455fce6ee7b9ed75bcf8d7ad1d09cd25709a1bf4b7df9",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/050/features.json",
+      "bytes": 9248,
+      "sha256": "f45f6ca18ff78c86404e36d24ef25bfbbfd9a13ac04f3c03abf93aa905bf0012",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/050/inventory.jsonl.gz",
+      "bytes": 278,
+      "sha256": "7f9bf087616ec13a86e893f65ea1815422ea9d65bfd0b21479404cce383646e5",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/050/ledger-batch.json",
+      "bytes": 9749,
+      "sha256": "31e2adfafa6d39d3388e04f2ae614a4b5f078d9e359284ac9219bfa242e3bcf8",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/050/owner-window.json",
+      "bytes": 209271,
+      "sha256": "743c6d6a98765c361004915184d59aa1b8182efdeaed681a822075d4dae0740d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/050/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/050/patch-batch.json",
+      "bytes": 968,
+      "sha256": "b59bc4e6c42f4d9c994a702a78632fe212d6aa75a6cbfa9efe2e3a63f9ef609f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/050/publication.json",
+      "bytes": 1446,
+      "sha256": "3b89c1f22bad485773dc6e0fefdb30ad7a04c91a2e2ba89dd5e021c09d1da740",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/050/release-envelope.json",
+      "bytes": 1662,
+      "sha256": "3016916d2d99ac908927538a2c659d6618517d3f6082c89d1fdce8c80b6e5451",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/050/virtual-owner-window.json",
+      "bytes": 13862,
+      "sha256": "6b98099f97022ce9536188dc8cbec1dedc431203d7a302659f5b6e018ffdfe61",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/059/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/059/facts.json",
+      "bytes": 524999,
+      "sha256": "f867a57476122c6f40b10e4401626994a0eed73ad72299be5d27fe39ee02f297",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/059/features.json",
+      "bytes": 6933,
+      "sha256": "d064e5060ec5a86ca32b6df48c601051b6d07cd8e03c8e90469b0f0503617e41",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/059/inventory.jsonl.gz",
+      "bytes": 301,
+      "sha256": "555adcb466454f515ef2959e7035d82b0d4218b7c1b6759e7c220c142d336cac",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/059/ledger-batch.json",
+      "bytes": 6856,
+      "sha256": "80014248d3c441583c5ef7c8c67b7a6bf4884ca39d4042704317feba932a670e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/059/owner-window.json",
+      "bytes": 36392,
+      "sha256": "577884255474a79bd16ddeb16a86265c7d3da50baccba1034b6506fc72826acc",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/059/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/059/patch-batch.json",
+      "bytes": 836,
+      "sha256": "250455b3493c3ada23cae84d69b394893344451bdf7bde7720e90761c3dfe57a",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/059/publication.json",
+      "bytes": 1444,
+      "sha256": "966797407b52330be7ae0a7c7245cd9fd2fb6f436527313ad2311356d0dcdebc",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/059/release-envelope.json",
+      "bytes": 1662,
+      "sha256": "1d634494597e9bdf17f83255076b886f39c6458bb192c18d405fac9f8cd5ba18",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/059/virtual-owner-window.json",
+      "bytes": 4596,
+      "sha256": "dbb80db80311b85756e1e9b8f6f76209d92fb6f6ddfdcd054d041eab9acaf736",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/062/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/062/facts.json",
+      "bytes": 525000,
+      "sha256": "cffb4e1cca83311019b3f56ad42233bff69fc222fdb367f2c5f4a2bd6b708ce7",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/062/features.json",
+      "bytes": 7015,
+      "sha256": "0a6ba98a450d5edee0011c16590cb6d235d5b16c780de5f9d4015bc79ace17f6",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/062/inventory.jsonl.gz",
+      "bytes": 301,
+      "sha256": "4a475b1c957bdb5fc9d68a104f55dc588709869708ab05cbab5f2e52e6cec6f0",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/062/ledger-batch.json",
+      "bytes": 6996,
+      "sha256": "da18ba722a02cebb3270ba9e3b7c9f20da79903a8e8ce9f4719b4ec933e8064d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/062/owner-window.json",
+      "bytes": 100764,
+      "sha256": "60ccd07f4259844ec73c6a0c63e0ceaab35f470991bbf17c0075b85fd66105e1",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/062/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/062/patch-batch.json",
+      "bytes": 836,
+      "sha256": "97a940fe90604196972830d0a06f49ed2827a63618d2ce9a098467f7e6e385c5",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/062/publication.json",
+      "bytes": 1445,
+      "sha256": "bab8bb04cfa90255e0ceadab8378c0c562a2ee89e0a2503e64fa96791f3337bd",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/062/release-envelope.json",
+      "bytes": 1662,
+      "sha256": "3913254e8a98c38069bdda7989a07c42b93e346787a1417fa0e4bb63fc206706",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/062/virtual-owner-window.json",
+      "bytes": 3980,
+      "sha256": "33ea7b9db20cbb57b1236c76bf204b94aa9d5d31c0e2b227657c6ce26355de4f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/063/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/063/facts.json",
+      "bytes": 525005,
+      "sha256": "65950d3eae281e11bc7a2e9a1c463ade7defbd5b40602193462006f6dcbb060a",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/063/features.json",
+      "bytes": 4008,
+      "sha256": "bf889d2ae09b06f2fe10e1f48d156b3df77c273b09172d8fe85a83a0009869dd",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/063/inventory.jsonl.gz",
+      "bytes": 303,
+      "sha256": "88a4e3b1a7c56e958b3a87c2a0071957a81085cf84354f8893280ab634f746d5",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/063/ledger-batch.json",
+      "bytes": 3707,
+      "sha256": "3a15aba7900a018544cf11cf94298c0a3f28efc61444691165e831e52f4e4972",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/063/owner-window.json",
+      "bytes": 9167,
+      "sha256": "5a34ee0c9c4d9be244600ff092dd28c0539b0033524c44e9120716c52d26b85d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/063/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/063/patch-batch.json",
+      "bytes": 858,
+      "sha256": "a8979b3ebfc3dd248051289882e77c91bc8c95a1b7ca4ee65bb55e3f8a150166",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/063/publication.json",
+      "bytes": 1443,
+      "sha256": "1b46351a8e9e9e71429370fc77dd95481bbc298ade62a66e83a7dec392978706",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/063/release-envelope.json",
+      "bytes": 1662,
+      "sha256": "ae8db78dd7fd12b0605658ef1b69831e8052ad8e9f164cfeeae4e23b856ec9e5",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/063/virtual-owner-window.json",
+      "bytes": 3115,
+      "sha256": "fe68291afc78785cfd909e15e0203d93b40f6a0efeaacef7bf0f2c630d1a46cd",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/067/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/067/facts.json",
+      "bytes": 525000,
+      "sha256": "bebbf007ca44432f40aa7cadbd63938167a26917f870ef8c4c93cbb9e501810b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/067/features.json",
+      "bytes": 4820,
+      "sha256": "a1c6346b2caa1fecb4aeec697134596f4aff29dde65316ebccd8d9dc80338acd",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/067/inventory.jsonl.gz",
+      "bytes": 303,
+      "sha256": "ad2007fa0a0965620e028b4d2ee2507a26555b9fa145528c714d9ed6b3c16880",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/067/ledger-batch.json",
+      "bytes": 4860,
+      "sha256": "0f13bba7afb2cdd5da104d66505e07581ae9c3a2d86f7cfbef04efb1fd188015",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/067/owner-window.json",
+      "bytes": 91931,
+      "sha256": "b9d67da2378a568c88dd6ba7405757aa89c06ddc39beb63076e825bea77f2302",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/067/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/067/patch-batch.json",
+      "bytes": 1056,
+      "sha256": "73995a503caf024f9676a52a49f9a62d3c2e6e9b813b5139ac0183f2c77c6725",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/067/publication.json",
+      "bytes": 1446,
+      "sha256": "1be2fef2f6a981cda2ce2f44728bf48b0330480e39116d83a8065cdafb990ceb",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/067/release-envelope.json",
+      "bytes": 1663,
+      "sha256": "e807e5ba89794db2bbd0d46d2d1f9572a17b398f6566926d18fad65256ac0349",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/067/virtual-owner-window.json",
+      "bytes": 20480,
+      "sha256": "d792a55210c8242e8e491f4ca4ed0d1b9b495e6b9a52b84babf67b25029d768d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/069/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/069/facts.json",
+      "bytes": 525005,
+      "sha256": "81403d8748954e47f27753c6fd81ebfe0b4e196831b2480ae9ef059bd77bb7db",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/069/features.json",
+      "bytes": 3929,
+      "sha256": "d0a8d8a344d2eb769eb82cfc244034a6af5d9025542c96dc6dc23698f5cdcf6e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/069/inventory.jsonl.gz",
+      "bytes": 305,
+      "sha256": "3a26932930ceb4cfbe790910b9d86d5e6636844088f4d5d66bdf7aef723c5191",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/069/ledger-batch.json",
+      "bytes": 3627,
+      "sha256": "2194cc155b376c358ba21664833c492cf09211c06089784e61f371b4db08d180",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/069/owner-window.json",
+      "bytes": 40169,
+      "sha256": "c40a22c557ddeca0921579c85a5bb69137c940310613dcad8d53f6733f4f1e8c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/069/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/069/patch-batch.json",
+      "bytes": 924,
+      "sha256": "aea3897c98d9b7afbdb5961b1eb8411b7ed8bbeef6356ae714027d194fb22dac",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/069/publication.json",
+      "bytes": 1445,
+      "sha256": "f53b197047db4ddc8dd0e6dcded503f785790cd12bfdef423912cc2de441c53b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/069/release-envelope.json",
+      "bytes": 1662,
+      "sha256": "b410d544a255582dcb8ac3d52661e1d6ea3d53b90422a1393a3c94de42d03445",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/069/virtual-owner-window.json",
+      "bytes": 13319,
+      "sha256": "bfa8f683967ce609204e4b9a15249c54b2304eef3b2bd6491fc14bbf708831f4",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/073/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/073/facts.json",
+      "bytes": 525005,
+      "sha256": "110b46f812ec3c1bbfa378f595e35c3afbbb759117a1b08d037086db99515043",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/073/features.json",
+      "bytes": 4887,
+      "sha256": "16eb3c8370c36bb9550bcc0389c3941230cf23b1db0cf4936a3f0af4d578506d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/073/inventory.jsonl.gz",
+      "bytes": 304,
+      "sha256": "6499d534993cbeac4df8051585d2e2615079f5b11a0096beca3482fbe2a21cbc",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/073/ledger-batch.json",
+      "bytes": 4680,
+      "sha256": "97423cee702bea3b4715be6cc81b64c5bbf8a3730e19b74730f68463463080f6",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/073/owner-window.json",
+      "bytes": 13712,
+      "sha256": "a12602fa6dd6fc46a22da2fe604993e343c0463c46bdbcc4f67ee2cd60b478e3",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/073/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/073/patch-batch.json",
+      "bytes": 880,
+      "sha256": "2e11b7d4799a30c1fbbfc89437d6e78ea52a1090b7785bb278778fb3db4bc0fb",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/073/publication.json",
+      "bytes": 1444,
+      "sha256": "65fd4df5c6b3f05015754c15037b2591336902e650d0a22ee0d4760a8b7f8a0e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/073/release-envelope.json",
+      "bytes": 1662,
+      "sha256": "6ab1ba329c0c31a97c27f90ae05f21c632d95c9d3bf3ee255f6067ed76932451",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/073/virtual-owner-window.json",
+      "bytes": 5393,
+      "sha256": "790b6b6255cbf989f8b58473163fbe8d22e700eb2b3d08871a4fd0fee9d30e74",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/074/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/074/facts.json",
+      "bytes": 525012,
+      "sha256": "9b33411b7856cbf2519a50bb6ba94d76ac46054d54699bfcdb1c49c1c1a527eb",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/074/features.json",
+      "bytes": 12217,
+      "sha256": "69f6434185abb1566348b6ab65fc9012cede8bc28b9849702dbb9fe557748f5d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/074/inventory.jsonl.gz",
+      "bytes": 303,
+      "sha256": "759cfe481f739f99a3ea90627538e9ffa22d06406d7dc09cd0a6fe474404e0e4",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/074/ledger-batch.json",
+      "bytes": 12108,
+      "sha256": "ce78ceadecb533abe2dcc9b4a76f5ca73947f736e420ccfefc190e22aece395c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/074/owner-window.json",
+      "bytes": 60558,
+      "sha256": "478a6c39bce2c1e8ef7a161310d46f89eb30bacd370c4623045e0d6409170710",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/074/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/074/patch-batch.json",
+      "bytes": 1232,
+      "sha256": "13ce5fc52d5b93b001c63ddc3377b666664204145d82121ddd5dd087773ea988",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/074/publication.json",
+      "bytes": 1448,
+      "sha256": "762eab994b6ebc19dd6b4fbd790a9ac94b83a9902e6c86fe639ad4999ed74e91",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/074/release-envelope.json",
+      "bytes": 1664,
+      "sha256": "319f89e853b6e50e58d7931e872b33b36470f02d9426b0dd3bcd32d9f5b394ed",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/074/virtual-owner-window.json",
+      "bytes": 37987,
+      "sha256": "4d409564f75e7a6c9a157bd01192b369da0a00bb0b543412df4cdca19345cf55",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/093/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/093/facts.json",
+      "bytes": 525001,
+      "sha256": "aff39ffddd1866ea842347c679741c7cac114ad6176dabf180e95a5d1e4b741e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/093/features.json",
+      "bytes": 7377,
+      "sha256": "c6f4d857ad3f2438e37d2bf95d839ba8e02278b9edf6d3d8f1d02fe344ee7a56",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/093/inventory.jsonl.gz",
+      "bytes": 303,
+      "sha256": "c68832965f4e7471f56a06ebf2979aabf6ae59ab2954711bd4cd9baf4913fdcf",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/093/ledger-batch.json",
+      "bytes": 6675,
+      "sha256": "f4a2d834c95143a506dad63d7bfa204915837157e0224c9a3d71a3c7c9d2b10b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/093/owner-window.json",
+      "bytes": 15694,
+      "sha256": "6f508e1d44058bb1ff0382e6fb54ee4adad8befc5010b07f8e399ffbe69aec14",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/093/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/093/patch-batch.json",
+      "bytes": 836,
+      "sha256": "0c7023f24ea6419c5966ff3c97bd7b613352c257d7851a5df1e779fcaf425bd7",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/093/publication.json",
+      "bytes": 1444,
+      "sha256": "f123a2f6f195bad5a50096fd9e32f98783292aa0f33a2c293443e300577cc66e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/093/release-envelope.json",
+      "bytes": 1662,
+      "sha256": "1ecc5a8c2babc1502134b08c8aedf0b40942e4fd64003532650a2a0c17d4c96f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/093/virtual-owner-window.json",
+      "bytes": 3876,
+      "sha256": "cb98e5a0a2e31985e95dd47f0129f756037368760e99ca631dc2f919cc950b36",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/096/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/096/facts.json",
+      "bytes": 525002,
+      "sha256": "93c4342d3df1e6e6f2dd7afeb8db562913c8f9779e388cbbb076ab61e226bb3d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/096/features.json",
+      "bytes": 4281,
+      "sha256": "b4f50470aae9beb48a70046806a01f2e5988d382ed39a78384d91c392b3c7bc5",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/096/inventory.jsonl.gz",
+      "bytes": 303,
+      "sha256": "287391db749067483bee3a31a997dd256b1c77ca4005475f6c81ed48cab0f7fb",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/096/ledger-batch.json",
+      "bytes": 4256,
+      "sha256": "d0a748e333e7d16f5f006ac9f70e83f5e34ebd210aa0c5face1a9821ccf5d02d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/096/owner-window.json",
+      "bytes": 85220,
+      "sha256": "0c8658f701f9efc9f82b226df3f1c7cc8a54223a6f70c53817fcf67deff0fbfc",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/096/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/096/patch-batch.json",
+      "bytes": 1584,
+      "sha256": "77f7a1a753d95234de23e622eb60d3b98254e76c3a52c8895f32ab42a1fb8f25",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/096/publication.json",
+      "bytes": 1446,
+      "sha256": "ecbf4e6d43ca7371e84b6e94207cbd3ceeff34eccd7fe4b5a67b6de09f18d78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/096/release-envelope.json",
+      "bytes": 1663,
+      "sha256": "fd76bc2b061365460d4fd0d2bafdecd94c8e023b6b9e093684b4ad79028ce12b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/096/virtual-owner-window.json",
+      "bytes": 45709,
+      "sha256": "74e39814c00607f95e3c17d645d87d2f45151d0cc4fc8b43deee5093ed10f017",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/098/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/098/facts.json",
+      "bytes": 525009,
+      "sha256": "3975bb24360e6312454acc2dc395d4b3f953056d64693850ecbc12f23bb098f6",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/098/features.json",
+      "bytes": 4194,
+      "sha256": "bfbece282b9208535015f98a78112f94122c193d5d01648bdba53c0a7f3a490b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/098/inventory.jsonl.gz",
+      "bytes": 304,
+      "sha256": "dc0655001e92ca1790ea51dfb325915b4a6635bc609866e02cfb24f40e39c2f6",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/098/ledger-batch.json",
+      "bytes": 4393,
+      "sha256": "02e0191e66e8e1d68f3de96986a81926f978fdd85f502ab416b0d7f985876e40",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/098/owner-window.json",
+      "bytes": 36662,
+      "sha256": "20ebb46181a2cc29d2f409647452ecb5a292626ee9503964f80c60dd3f25debc",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/098/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/098/patch-batch.json",
+      "bytes": 924,
+      "sha256": "216c6bd85d19bd125fcb5ab6b44d3e8dbbe7ad68da498033eafd9e635f3f8200",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/098/publication.json",
+      "bytes": 1445,
+      "sha256": "b2459908b525cede421d4dac26bae317c4fb36d4d1778c0a9f461173299e0c67",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/098/release-envelope.json",
+      "bytes": 1662,
+      "sha256": "e058c9d093ea5d224c0c41b61f5ecd824d7c591f725243a05204e94c6d1e7793",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/098/virtual-owner-window.json",
+      "bytes": 13549,
+      "sha256": "0b0723f8988adf70a8aff684f555c6553201a2f863cc98de6a433491f503854d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/107/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/107/facts.json",
+      "bytes": 524999,
+      "sha256": "52fa41c79788ffdc501d7044e3a25c3988dd384c48e8484380044e8dcd8e9968",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/107/features.json",
+      "bytes": 5378,
+      "sha256": "ea25cdbf1f0dca901a25a94b0925c5fdfb606d82adf1888558948b590cb62db1",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/107/inventory.jsonl.gz",
+      "bytes": 301,
+      "sha256": "5f4adb087a2ffbc892479c32d11c8fd2302864c200e66b26f02b2fe8de4e0e1e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/107/ledger-batch.json",
+      "bytes": 5337,
+      "sha256": "89a444a89091bb361be0b45a7f2968d15c4ef81c9648f468f54d485e10500f0d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/107/owner-window.json",
+      "bytes": 13271,
+      "sha256": "66b50ad133737168d1df501f8b4a108f71159f28f114f704a9d65b7a95931b07",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/107/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/107/patch-batch.json",
+      "bytes": 924,
+      "sha256": "fccc46b1c8277934ad55585fdb74929128e34764bf11c80a710b4da11a102497",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/107/publication.json",
+      "bytes": 1444,
+      "sha256": "3e6455dfbb30248b84d36f18e34cd99b771a2411bf6e49f08af1ed737cef195e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/107/release-envelope.json",
+      "bytes": 1662,
+      "sha256": "c4805ebf16ec1434771a411bbbc53d328dec289fc2b6e9c70af2e46eb9159681",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/107/virtual-owner-window.json",
+      "bytes": 7932,
+      "sha256": "5d38e4ff0740c7575828d2033ee33020449a9397670611e815b6422a104d2701",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/envelope.json",
+      "bytes": 1421,
+      "sha256": "0c360176bcd8b7929a5c3e8dac9b14a11f4ea604ba236dcbe3f70a488aafd640",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/ledger.json",
+      "bytes": 358007,
+      "sha256": "95e5e1fee4f524d2e615b00b41b20944f2b52d63cf066979b876b536c93f146c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/patch.json",
+      "bytes": 6479,
+      "sha256": "b7318456da17d4e49823d1c3d711023fda105281661b6d6265f19bcaa82de707",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/qualification.json",
+      "bytes": 680,
+      "sha256": "e8aeb5b9e53a16223cee37d75108bbee3342c150697d8bba7d72b0cbcf189502",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-five/selection-sidecar.json",
+      "bytes": 3440,
+      "sha256": "3be2845d401e8fa8dd8c9cd65fdda7ae1998a4030a0a3a4fdce2b82faea031ad",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/envelope.json",
+      "bytes": 1421,
+      "sha256": "060c158d90f05b58111eee8ab0e31f6a20ddbffcf5020c4ddef3e667d8513c41",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/ledger.json",
+      "bytes": 482146,
+      "sha256": "f2822cfaac526eae21a10d688f8ec04b618c4fa5ee6d8b9226f7721f21512c37",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/owners.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/patch.json",
+      "bytes": 9691,
+      "sha256": "b8c0abf5fd5b49f974f92ae21d666b668e1503875b18c1a3e6c17ddd19af79f8",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/qualification.json",
+      "bytes": 677,
+      "sha256": "df38b81ecde598acfc31542999cfeec8ae2d8e599c9b7da4127e3a7e1c0d4348",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/release-next-eighteen/selection-sidecar.json",
+      "bytes": 3494,
+      "sha256": "b16fde4ec57ae2c8b520b842c2c01dc2212d4dc14d4bdb51ed9e64c6a075709b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/authority-registry.json",
+      "bytes": 24482,
+      "sha256": "255cbb1e806c7d5ee06e1d7c2961fe31edf76748bfe53fac441feb5ad630bc06",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/composed-original-ledger.json",
+      "bytes": 322433,
+      "sha256": "0126c5c4f16018292ebe9d6fb0ed0cd4e3334f8cbc0e907c8a4274242674a604",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/qualified-current/certificate.json",
+      "bytes": 3324,
+      "sha256": "e3a9bf56f580e18c67b60a072472756ed5452c1f0547612f9f335b9389c4b4b8",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/qualified-current/code-source.json",
+      "bytes": 51984,
+      "sha256": "5f621c58f4b699964c981c6932102cdcc76e930c5b709b9aceabc1c7dfea9948",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/qualified-current/facts.json",
+      "bytes": 5480,
+      "sha256": "e70e06638c08fb7e53a096b8a403ea58aec513dabd08c101998925a0d3ba3f3e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/qualified-current/issued-plan.json",
+      "bytes": 11365,
+      "sha256": "cc071058f0750ea6fa6205b86384e5bb2bf073556f3c34ffa6bc6ed1e994c71b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/qualified-current/operating.json",
+      "bytes": 2348,
+      "sha256": "dad543ac75e396cf24203166e583acc24a9141f2ae1ffeaf4845b57c48aa48cf",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/qualified-current/publication.json",
+      "bytes": 475,
+      "sha256": "0050fce233e36c399ec33358868a47c8ad572e87ceb1256bf0b8ceebe6a2d950",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/qualified-current/request.json",
+      "bytes": 1370421,
+      "sha256": "5c3f2fe982e194330201c73a276bffebcb1988996888151cbd90452416f7610d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/qualified-current/result.json",
+      "bytes": 2169280,
+      "sha256": "8b3e44e80e1da4e9347a9d1692abbae1c12016db0c2c2343b1f4eb0a29813a00",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/qualified-current/stderr.log",
+      "bytes": 777,
+      "sha256": "1a395cece2f6c6eb8b5a61dfd5cb59874d61ce5ec761471e52ea4f18b6486bff",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/qualified-current/stdout.json",
+      "bytes": 376,
+      "sha256": "2c68f1c4f14cb232024f378e93fa076d4a8dc59b6f3014648b85a7be478fad65",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/qualified-current/terminal.json",
+      "bytes": 1455,
+      "sha256": "8e90f8a722ca98fda889a6b987ab6fb842e7179c38e07312b642fe9927e03279",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/qualified-current/whole-output-conservation-readback.json",
+      "bytes": 471,
+      "sha256": "74edda5fea2267a37c3714ef29d5fe687e6a01668751c4b443dea57ebe92a8a8",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/selected-delivery-transition-proposed.json",
+      "bytes": 54344,
+      "sha256": "1ffbc4dfb3ac1f29f057ca31a217611228c2fe708618f389fbed73bd5c80a7e7",
+      "hash_kind": "file-bytes",
+      "role": "conditional-selected-delivery-disposition"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/004/authority-binding.json",
+      "bytes": 8125,
+      "sha256": "050cf1441d59dbbbc20514d7819f768b38a46869446585be746f1dcc88ec5e85",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/004/original-rule-preimage.json",
+      "bytes": 13012,
+      "sha256": "14fda5d5257997eb2818aab0d43ab89a909b78461e37366b129ae42496788329",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/016/authority-binding.json",
+      "bytes": 8124,
+      "sha256": "b89a24f6db36da923b30f90324f8e1af2fc5358953f536f3464f143bc878f582",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/016/original-rule-preimage.json",
+      "bytes": 13012,
+      "sha256": "c80a6bbe575811a0c691a298538dbb81ef326561ab3d009010d999911701ad24",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/023/authority-binding.json",
+      "bytes": 8123,
+      "sha256": "ae78875150312f5d4f9b34e2270bf0cd823278f611f027e93ab1fd89edf7a2b5",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/023/original-rule-preimage.json",
+      "bytes": 12534,
+      "sha256": "537a4be77c707d3d20b5398f09cdf71396665e82969ef04be079c65cee647827",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/030/authority-binding.json",
+      "bytes": 8123,
+      "sha256": "ddce991f7dc991ede9218653b71635711422adc65d246c2a5a25c441e1ac36ff",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/030/original-rule-preimage.json",
+      "bytes": 12540,
+      "sha256": "ea7f3537fd999312488a9c103c8de203dac7849f1693f5584afc8d3834789ab3",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/036/authority-binding.json",
+      "bytes": 8125,
+      "sha256": "32cf13976c49c2f16c138ae5bcf74272d57b7cf704d895731860262042f803ba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/036/original-rule-preimage.json",
+      "bytes": 12534,
+      "sha256": "8c6844a239319db64b3a6a856ab7b45b7c7167aca56d63d2318c708860c43bfb",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/044/authority-binding.json",
+      "bytes": 8130,
+      "sha256": "7506944bc4a4604d371e648582c034f669318f23c913ee2bd2c5ee3c20393bb3",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/044/original-rule-preimage.json",
+      "bytes": 15432,
+      "sha256": "7b4292c4182cef42e8bdc14007ebd0c7ae3e15f5bee8334cfcdbb2033542534d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/050/authority-binding.json",
+      "bytes": 8129,
+      "sha256": "35e245c988d5cce321762c8c1d5e4b3450510484502f98efc211ffee3f2e8dde",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/050/original-rule-preimage.json",
+      "bytes": 16522,
+      "sha256": "3d9b97a22aef0dbb3d876f09927029226cfa281473933de66cf437390cfc3c60",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/059/authority-binding.json",
+      "bytes": 8127,
+      "sha256": "dcca14729a8c2fe53ffcd0cf5ecfa5e3ffb7f1918a1f854f458d27a03a735920",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/059/original-rule-preimage.json",
+      "bytes": 15432,
+      "sha256": "a259311e33af022fa5b1d0fe354d9d1c4bd65a9119f6f9cef9cb5fd112ea2a19",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/062/authority-binding.json",
+      "bytes": 8128,
+      "sha256": "d9d88bc764ca1e2082ecd62f62eddf96bcfdb4a66b520384ea8e703789e0c68e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/062/original-rule-preimage.json",
+      "bytes": 15432,
+      "sha256": "fe679035161c8ee95eabcb99e1de4675ea02ecf1113ef7a54d4ea0eb09eec40c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/063/authority-binding.json",
+      "bytes": 8126,
+      "sha256": "32b7e18d7619663abb08da94b33fd7820b3b8906cae6131c289408a49c2a944f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/063/original-rule-preimage.json",
+      "bytes": 15438,
+      "sha256": "4138284b96568893e0a9ef7fb8387bf064390fffbdf17e0ae4fd3524415aaa48",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/067/authority-binding.json",
+      "bytes": 8129,
+      "sha256": "05d323b4064aead760adabe1d77167d7b6ed470aeee11f932d681326c2dcbd3d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/067/original-rule-preimage.json",
+      "bytes": 15432,
+      "sha256": "d4c0ebaa8a708fb229df9006bb0e5c01521422c02a2ebb4dcb613ef1fbfb7146",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/069/authority-binding.json",
+      "bytes": 8128,
+      "sha256": "133cd3fb8b8043a9de7024c76fe4062ea03c533f532ef0c8f3a11b02afed104c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/069/original-rule-preimage.json",
+      "bytes": 15438,
+      "sha256": "61043b09020f8071883231e5acfd63bec2306b27ed59e2ab005cce11f2ca3f93",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/073/authority-binding.json",
+      "bytes": 8127,
+      "sha256": "3db925f83f91c6360f286dad2a509915bc9c9a193c71814f0b3e10626991777f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/073/original-rule-preimage.json",
+      "bytes": 15438,
+      "sha256": "37172557eb3f7e06242c5c50c4b4a1020d2b12b7f0b867e7da0845fc9ce0a8e4",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/074/authority-binding.json",
+      "bytes": 8132,
+      "sha256": "4a5e077c9f21ae278450dd39eea54d20b9e8049ba802c64f5236a3ed049a7154",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/074/original-rule-preimage.json",
+      "bytes": 15442,
+      "sha256": "3a9f284a121cef6ecfbcaab86c4f36c0a8062e0b45e5c8471180d7a8df6c8c4f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/093/authority-binding.json",
+      "bytes": 8127,
+      "sha256": "ec0b07facb0d2512d27c14e68bc4ab53459853b3ccc608dbc1a6d4608d653247",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/093/original-rule-preimage.json",
+      "bytes": 15434,
+      "sha256": "2494ec48d765b58d78508587ffe37243a60e0b0b8a31d225d079d5412090a5c7",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/096/authority-binding.json",
+      "bytes": 8129,
+      "sha256": "b734cd75cd55a576b98386cb73ac38b82723d2ec783c84ad5e9667c25c397cdf",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/096/original-rule-preimage.json",
+      "bytes": 15432,
+      "sha256": "ded1fccc5e9834fa0e751460d2a2cf029e448284a31413aed64436a86b846963",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/098/authority-binding.json",
+      "bytes": 8128,
+      "sha256": "771219ead1eba153e0110a3e8201dc341937eacb2c69855c17592580179cb188",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/098/original-rule-preimage.json",
+      "bytes": 15442,
+      "sha256": "af461a4f54539c8ab54d0b709b6f391cd305003ef60666145a15ced38613e1f5",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/107/authority-binding.json",
+      "bytes": 8127,
+      "sha256": "dcca609f25d0e51f25662c6ca71a6b5a3567ccfe215fc18b7ecc10f211869d28",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/107/original-rule-preimage.json",
+      "bytes": 15432,
+      "sha256": "42fa672a54ad5aba38a19e069ce2e83fe6dd7cead5b7123b787d5471d9d88e96",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/prior260-current-programme-qualified/certificate.json",
+      "bytes": 3304,
+      "sha256": "3ebeb627a97d64d35a0ffae80d8ecb5733af4bb4031870d05cf89b04e22f7332",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/prior260-current-programme-qualified/code-source.json",
+      "bytes": 51958,
+      "sha256": "ae15236830d030cb6169e371d9b689f246d837a070f134ffaba6ee79967daeeb",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/prior260-current-programme-qualified/facts.json",
+      "bytes": 3984,
+      "sha256": "946e60a0fca9b8d080d47725d4165e53d20e75f10b1874824078bd367c1d37a2",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/prior260-current-programme-qualified/issued-plan.json",
+      "bytes": 9220,
+      "sha256": "7884f53ddd0524e22968d3d5ca9896870359bfd904832f1353b673c90deb4744",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/prior260-current-programme-qualified/operating.json",
+      "bytes": 2327,
+      "sha256": "9b323fa947b287b0a172e166cf16d7710d5362f2c65a13ab05cb610da85bcd65",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/prior260-current-programme-qualified/publication.json",
+      "bytes": 475,
+      "sha256": "0bfdd54306ed2f8a8bd9a18ffcdc69420fe575fa7d75363d36bb3490d2b787a4",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/prior260-current-programme-qualified/request.json",
+      "bytes": 1014317,
+      "sha256": "8167f3ec9fece57b32b8f4640c755e89acd65cf66e84cbeeee9f62b6c063b26f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/prior260-current-programme-qualified/result.json",
+      "bytes": 1549679,
+      "sha256": "d40baba62e2b8ad0276dab8943b0d8a198c55b2bc023bc86ebcdc073bd23b219",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/prior260-current-programme-qualified/stderr.log",
+      "bytes": 777,
+      "sha256": "f46adbe32966c8ad62ccbf877e8a0b808822517000882a887d0daae0c21df46d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/prior260-current-programme-qualified/stdout.json",
+      "bytes": 376,
+      "sha256": "771c580c117a8fee042d36f5d744cc9501c9627bb21e9ee61208a3f67ff9c7ea",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/prior260-current-programme-qualified/terminal.json",
+      "bytes": 1443,
+      "sha256": "c1e697d0fd374e45ed0d6f8d086dfa6c939e56756ce708f1eb88988ada4def18",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/selected353-compact-NCL-qualified/certificate.json",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand",
+      "bytes": 3289,
+      "sha256": "d10d67e5ff5ed24a21bd1c5535ec490e880ba3b08a398b2db92d296bb1c05dc2"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/selected353-compact-NCL-qualified/code-source.json",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand",
+      "bytes": 52008,
+      "sha256": "fa0507cf5dc62cfe6b1dcd6a811a4599da708e3d276a67ee9741f72b58907dc7"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/selected353-compact-NCL-qualified/facts.json",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand",
+      "bytes": 5480,
+      "sha256": "61cb2d0af61be7a79421e680927381189bb48fbe5fa99ea68683c1737bf3b6c4"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/selected353-compact-NCL-qualified/issued-plan.json",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand",
+      "bytes": 11365,
+      "sha256": "20f6cf12799a3214da4586c230c86cfbc63334b92b9968f5352d27e7d86e57ad"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/selected353-compact-NCL-qualified/operating.json",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand",
+      "bytes": 2313,
+      "sha256": "3632bffdb679f2eca53932973692a866a263138d272a1c4c499febc03e84a2d3"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/selected353-compact-NCL-qualified/publication.json",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand",
+      "bytes": 475,
+      "sha256": "38205aa377dc1cca2c4dcf6df31e4123eea08d45840b7d121a188b85b2751a0a"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/selected353-compact-NCL-qualified/request.json",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand",
+      "bytes": 1370439,
+      "sha256": "115124e85bf0adc2c14ea06c34a1920e5d3e2e4e697a88f589a86c72ae745071"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/selected353-compact-NCL-qualified/result.json",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand",
+      "bytes": 2169280,
+      "sha256": "8b3e44e80e1da4e9347a9d1692abbae1c12016db0c2c2343b1f4eb0a29813a00"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/selected353-compact-NCL-qualified/stderr.log",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand",
+      "bytes": 777,
+      "sha256": "6dead5b17e9d515ebf5d7e52f3a407c5b9b23e6955894318abeba40b3535a3d3"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/selected353-compact-NCL-qualified/stdout.json",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand",
+      "bytes": 376,
+      "sha256": "2ff5619550f5843889f14c5e5b75d788cffbe9882f43e140b3efb3c3e166fd20"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/selected353-compact-NCL-qualified/terminal.json",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand",
+      "bytes": 1467,
+      "sha256": "fb6c608587ef7a5ccc79b7f3d26718af1883273c68c835e3d75a6f2dc659da2c"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/004/facts.json",
+      "bytes": 443810,
+      "sha256": "592a091fb749ff073aa122948d87641a018e5fb4559e5cb4c4488d6bc813982e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/004/inventory.jsonl.gz",
+      "bytes": 1209,
+      "sha256": "fe37b1a8d26cec7970e5ac8d03a51487917c482ee25ee715465766ede994a64d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/004/publication.json",
+      "bytes": 349,
+      "sha256": "f135a3560a8458d2d12660ef1404a359c379c852642790736d7d4beaae3059f6",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/016/facts.json",
+      "bytes": 443810,
+      "sha256": "f0b54c168bc599deca93867551c01b2b76d8434610d6a25d717ea5e04c4a9a8d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/016/inventory.jsonl.gz",
+      "bytes": 1213,
+      "sha256": "0bdd2b4f7da1bdd4b2c17781580b914f504ab2efac03ca0f998fe9b920ddf309",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/016/publication.json",
+      "bytes": 349,
+      "sha256": "8dd37190b4acf11e21b22e03ccc69621b9895736fdce34907bc76cc75fcf604c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/023/facts.json",
+      "bytes": 443093,
+      "sha256": "7fc30a8ee8787146f4240833b8f6b2bd12e9a530c4a3f53871b73f06aef71ccd",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/023/inventory.jsonl.gz",
+      "bytes": 1212,
+      "sha256": "f577bd86f071dc64ffed53815d3e5b4f883572c5218ea0d5bc4c3c5a484c1912",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/023/publication.json",
+      "bytes": 349,
+      "sha256": "c63705992e8b58a46057965d8e25d9f4d6eb4d1b0d6be6eb6da7887c572ef85b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/030/facts.json",
+      "bytes": 443102,
+      "sha256": "21d174ce62d5d19c60f7d3925abf2e71ed88162b373994161d3df2efb63cd51a",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/030/inventory.jsonl.gz",
+      "bytes": 1210,
+      "sha256": "c772583deeaec7ddac5c58123878a94e6b0c2c5866d5ddc3825f7ff7231ccd98",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/030/publication.json",
+      "bytes": 349,
+      "sha256": "fe652a26c7914ba898e0c661afbe4bf7fdbcece9e6e2d2df4c52d5c49e3709a2",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/044/facts.json",
+      "bytes": 451493,
+      "sha256": "d9c24575af329f8fcb506232ed73c8ff2a0bfc6b8d952fb59759ec3bb62d238c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/044/inventory.jsonl.gz",
+      "bytes": 1798,
+      "sha256": "0077620c03527aec6fba13fa44748c0e12f106fec67c1be8c86438f5c8ee4899",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/044/publication.json",
+      "bytes": 349,
+      "sha256": "880331d951d086d405edb4545598163095524270490b644f0887829542f23c99",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/050/facts.json",
+      "bytes": 453299,
+      "sha256": "031494041b18a5817b7a81421e281ee3d11caf18ec6abe798f39be80651820ab",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/050/inventory.jsonl.gz",
+      "bytes": 2005,
+      "sha256": "53243f7ea6860e6c8935aa14621768a2b69dcd014290ac98064105f327e94270",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/050/publication.json",
+      "bytes": 349,
+      "sha256": "db68009ec0c9e536c66af44c39dc7b7d306d96227728d739d688537fcf957b89",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/059/facts.json",
+      "bytes": 451493,
+      "sha256": "0449c22b41698a1f476dfb952e1acc172caada7a6322765c489cce4b78f0441d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/059/inventory.jsonl.gz",
+      "bytes": 1694,
+      "sha256": "5696ef9c3fe4ff4899c31060b30003f4e50ee126ce2bfde7f5a92a95b7b70a14",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/059/publication.json",
+      "bytes": 349,
+      "sha256": "45ea008eebff7a2bb0ae6ba8df4ad1c22b456a30174b3e2d41bb6dca39ce95d0",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/062/facts.json",
+      "bytes": 451493,
+      "sha256": "7f333c66beaf2c41549ab519ea0abb3cad7e4ff58ebf80878f5c8c9872ada145",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/062/inventory.jsonl.gz",
+      "bytes": 1732,
+      "sha256": "f932a95e4d8b94890d009f45a004999b71fb341896d21ef9f3c4038cecedc815",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/062/publication.json",
+      "bytes": 349,
+      "sha256": "83fd8e2858c2e2bbc6a4c417dc7e88b6112614a627768b08ac3014395892ee12",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/063/facts.json",
+      "bytes": 451502,
+      "sha256": "23627d5d967c5411c3d61d54dbf35a207d9df1a6154aed558e3d5f1702227cf7",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/063/inventory.jsonl.gz",
+      "bytes": 1715,
+      "sha256": "6f4a31fa93f549f2d5068de532bdbae0afba38d59a5bdda0d343a51b1334e37d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/063/publication.json",
+      "bytes": 349,
+      "sha256": "bc8145bf96a5f4b91283cf321127514838aeb7d8fcd0eea327981b8023376bef",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/067/facts.json",
+      "bytes": 451493,
+      "sha256": "23f1c146ddbdf3ed77d90129c7ccf802f3d1ceb2b3d2b16396a5d052d4abeffe",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/067/inventory.jsonl.gz",
+      "bytes": 1757,
+      "sha256": "2e291ae9babb918603deeea7616bc05963c8349a8e65ad6ecb8b3157ad19b5af",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/067/publication.json",
+      "bytes": 349,
+      "sha256": "92f0b322425cf1aa7e99ca09f8e1b5f5fa41c49037509bc0dde6838137def667",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/069/facts.json",
+      "bytes": 451502,
+      "sha256": "b1da1e6c54d0c8ff9c54686632af1d0ca9acbb3b0c591d057846d770fda7a4c7",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/069/inventory.jsonl.gz",
+      "bytes": 1701,
+      "sha256": "9e5d9cbde899c00103ef2acea7231e7eb94c5d63e1085ed860fc94b19e1184bc",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/069/publication.json",
+      "bytes": 349,
+      "sha256": "1002578b80f7d334a75bbbaeb43852d22c97db3affe6196e81baccf4e7e27e27",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/073/facts.json",
+      "bytes": 451502,
+      "sha256": "5491213e09b5397930449f7720e43bf5dbf3a073644946e97d43e0b1441afb40",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/073/inventory.jsonl.gz",
+      "bytes": 1768,
+      "sha256": "ce887d52d9b1067e02c119b0023cf9003057cfac76812f8b6bc86d5d1f5c0b53",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/073/publication.json",
+      "bytes": 349,
+      "sha256": "06eef9ee0c6bb1e1ff5b17ae96f5695c8c42db6f968631c84436ed7d57e08409",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/074/facts.json",
+      "bytes": 451508,
+      "sha256": "30cb0f11ba3595b13b209368a70f0f2edb567b93fe9866e9ed9555b2febc87eb",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/074/inventory.jsonl.gz",
+      "bytes": 1908,
+      "sha256": "8bcd01828d79056f4fb635b249e8c39751e2a146d14d04cad78fbaadcfa3576b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/074/publication.json",
+      "bytes": 349,
+      "sha256": "a686f41572056a90fca4e8612bb826989109e80f7fbc8e9ae6f5734d34fc0f28",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/093/facts.json",
+      "bytes": 451496,
+      "sha256": "366dc779d45eaa30f1c0bf558befa7d6def56cdd711e3c5e8d4d93e69110fc73",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/093/inventory.jsonl.gz",
+      "bytes": 1712,
+      "sha256": "dc21a3d822dedfd8ed46b1cb053de2562f87b8a2653c92d8c8a6f1312f2718de",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/093/publication.json",
+      "bytes": 349,
+      "sha256": "5571799a79abf93bcecdaf690c986c4922e31c1dd056842e916a88e1a33acfe9",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/098/facts.json",
+      "bytes": 451508,
+      "sha256": "96f0e69304acba389beb807a9e9f2d0decd29a81c5cbf2a6de59f6449415bde2",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/098/inventory.jsonl.gz",
+      "bytes": 1924,
+      "sha256": "1e7c657358e73862b9cb470b19b45ed4fb69357a9cb46b8dacb554174fc74a53",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/098/publication.json",
+      "bytes": 349,
+      "sha256": "779d75564e68db55142ee892f7f8c410f6f560f489e869dbcda4402b3b0f24ac",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/107/facts.json",
+      "bytes": 451493,
+      "sha256": "247baf38f35d75f8583f64eedf897ee815ceaa1ff14ee5ca7083bb7567b9c646",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/107/inventory.jsonl.gz",
+      "bytes": 1728,
+      "sha256": "d0eea7d66520f6a892027c97a6125001edd4bef5628584b59b93f19060a6a128",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/107/publication.json",
+      "bytes": 349,
+      "sha256": "9cffcf6f3e3399e35fe03eabfa70525620c69f0de4f1dc0dc7a72400963e2660",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/README.md",
+      "bytes": 3596,
+      "sha256": "4c1ef34075454960190c1822bda7fb67119bdd1b53717b66f9ab1b6fd24de2aa",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/controls/caller-controls.log",
+      "bytes": 449,
+      "sha256": "6fbd6df7c1a828c0e8afc395bff1e11332eaa130bc5b6cec9de6d164db8d79e0",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/controls/direct-physical-product-controls.log",
+      "bytes": 559,
+      "sha256": "2e712083a0dbe6e8780b867a1a2e33bf35b14fc2c150c63040f2facd008bb82d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/controls/linux-controls.log",
+      "bytes": 1286,
+      "sha256": "c19e4b9f026080c4609d1fb594690fdfbe3a48d284a3cff8f3bcdc430725de77",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/controls/native-actual-registry-binding.log",
+      "bytes": 173,
+      "sha256": "26d1f14e87422b0c6b5edb160c9c8425a190b0a76677748bc3fdf7be514c2d74",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/controls/native-registry-controls.log",
+      "bytes": 320,
+      "sha256": "7c4780ec2597e7c8df8702bc5ca2ba6d640a54ef46f515b41443f4aacb3bf5bd",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/controls/one-gib-control-final.log",
+      "bytes": 512,
+      "sha256": "eba92ee7c817d78740fdad990ec643e103a884f378cdfb8fe45f89846acf242f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/controls/provenance.log",
+      "bytes": 213,
+      "sha256": "86ecebb47ab5e2a56a28a38761350d4b79386550e95c9303067db6c5542410ac",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-operating-002/samples.json",
+      "bytes": 69470,
+      "sha256": "67f56898aeedd6f82870110ad40a4ad08654f316c1ba7bfe629f7b9795317476",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-operating-002/stderr.txt",
+      "bytes": 1260,
+      "sha256": "ab82c6aff6ff02e93f6ff5b9988384474b3f11002ba6799f079acf76879bf43b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-operating-002/stdout.txt",
+      "bytes": 1441,
+      "sha256": "d5a9f40fa588976811328f0bf4a0d2272f564f5b9f086af96387c70423a6862d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-operating-002.json",
+      "bytes": 16149,
+      "sha256": "559311973dee9ff0106777fb69ff2d456613ff669bab26c220bdc4864583d547",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/facts.json",
+      "bytes": 657113,
+      "sha256": "dd3def1530ae5a7e74cb8b008da16ee24d8fc7d7110a662d917d4fcc2acb16e7",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/features.json",
+      "bytes": 4864,
+      "sha256": "306140a0bbb9bafb29f498f719f289f880fad67e390ae704d481b67b8045cf12",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/inventory.jsonl.gz",
+      "bytes": 310,
+      "sha256": "99838508a5dae530d40131509ce3824b487e000082bc5a9f268e6143a0c07d40",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/ledger-batch.json",
+      "bytes": 3017,
+      "sha256": "0d027ffcf23bfd465c76f36d8cbfaf48b59ffbd8c561615c282aaab6c520ac61",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/owner-window.json",
+      "bytes": 92792,
+      "sha256": "b539d2fb716c860590edcf7cb218263d7cd208d6092240a5d9fb9b871c231eb8",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/patch-batch.json",
+      "bytes": 793,
+      "sha256": "c9eb6d80990eff34c4e269639974e8ab287304e488a97551cff37a277a74ea08",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/publication.json",
+      "bytes": 1441,
+      "sha256": "27c67dcb23e80bad2c846517adce5d5ca69951a521f855de625d5a107a8f10fc",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/release-envelope.json",
+      "bytes": 1662,
+      "sha256": "4bc0ab9eda8339cebcaa3dda320d4fa5f79e8c804fcca60f4010d1c7ce05186a",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/virtual-owner-window.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-refusal-001-registry/receipt.json",
+      "bytes": 16150,
+      "sha256": "eb9aa58fd69b4faa200f113a3dbeeadc0a1be9306855d4cd0a248444b1145440",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-refusal-001-registry/samples.json",
+      "bytes": 79303,
+      "sha256": "0cba295cc4752fb1fec2f81c5c664ba75d13dd71bf4281b7b2d6233ee8e2903f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-refusal-001-registry/stderr.txt",
+      "bytes": 3302,
+      "sha256": "7cf2fb3699e280187150114e0d59e9bcb15e1151fc4d90ba2c1fd29c36116f47",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-refusal-001-registry/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-request-001.json",
+      "bytes": 21391,
+      "sha256": "e4f57a2259ef6594d31fb90b84618fdd658f5b3ae769bbd6f086c6553ad51a1e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-request-002.json",
+      "bytes": 21391,
+      "sha256": "192850d3aaff4dc34f66e93d4d3ec6142b80f802f714343513fc76855210ab8e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-operating-005/samples.json",
+      "bytes": 76683,
+      "sha256": "694110fda66797b62a6f48acb7b48007944585fa7d641ca93a3c008c86c3d3e7",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-operating-005/stderr.txt",
+      "bytes": 1261,
+      "sha256": "40b8693a5373ce0b6cc6f8d3b117cff00c574948a7674c58e6e54d353c6c8822",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-operating-005/stdout.txt",
+      "bytes": 349,
+      "sha256": "36e12458a993f9b88f47df3e4e92f21731fcbce958f8b6d24547c05be0cac322",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-operating-005.json",
+      "bytes": 16149,
+      "sha256": "e2b21d1e03d6d7f990ef0b2b5d8f6127d4de55671b9979e4e8b65de7eb71b995",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-qualified-005/facts.json",
+      "bytes": 648414,
+      "sha256": "c87732466eaded9eb6e98ae572daf30a87e262172a03aa907b21f0c58634e691",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-qualified-005/inventory.jsonl.gz",
+      "bytes": 1195,
+      "sha256": "6450fbdbf44ff86e60fe58fe5ce8a23f8b2f16fe4725c52fee7b26ee7ba0e6a5",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-qualified-005/publication.json",
+      "bytes": 349,
+      "sha256": "f2ef4f62b9b14d86d9c2914901c9295eda1d47086e1f306b61117ab1903fc45c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-001/receipt.json",
+      "bytes": 16095,
+      "sha256": "705385d01002c312ddf626c9b137ad18190de606832b686652246a86b1e70493",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-001/samples.json",
+      "bytes": 1274,
+      "sha256": "805fc82662cc2d120d67ad62c433bc986ccfcef1c8f54073c64d63208363120c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-001/stderr.txt",
+      "bytes": 3928,
+      "sha256": "f7281dcf133f192df20046afd660d67be44ca73e5fb8b5925675cdb44872da65",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-001/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-002/receipt.json",
+      "bytes": 16099,
+      "sha256": "4607ecf7ac30fc7d030163e8cb995bf4f7683b9c2b429984eed9dbdeffa072e5",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-002/samples.json",
+      "bytes": 2778,
+      "sha256": "b61fef82928ca835adc3ecb0bb2749f5c7ba86e006c1de0df26216add91417d9",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-002/stderr.txt",
+      "bytes": 3947,
+      "sha256": "175a49499e937645256ebf9e85bfd79dceeb3000ffda492cc54ac3a585b6bc0d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-002/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-003/receipt.json",
+      "bytes": 16098,
+      "sha256": "bf50bb9211ab8d2d5eefa1b6173c8db9a6d14871405974926401c45f8da5c65b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-003/samples.json",
+      "bytes": 3732,
+      "sha256": "7b408ab87e7c1f8f6b752551fc4781b9d86c895ac0159e633f855d9888d79773",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-003/stderr.txt",
+      "bytes": 3846,
+      "sha256": "6b8aeee4c008795a97e4b114d55f1f80597223ec7f35285f9a373a6e0cc5dd6e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-003/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-004/receipt.json",
+      "bytes": 16098,
+      "sha256": "67f608fe88ea844d6a4915b61ff43202ebba726b7c069b055884596138716419",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-004/samples.json",
+      "bytes": 4601,
+      "sha256": "92095a4ca78c354caa0f877516685d1a5cc98b6ca632ef46cee1bbb9f74621e0",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-004/stderr.txt",
+      "bytes": 4022,
+      "sha256": "292a03c9f3c77c46cfedb8eef1fb7841a579a17a36409aed5e78b60381bfa974",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-004/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-005/receipt.json",
+      "bytes": 16099,
+      "sha256": "4163945fcd03e3098d67825990a36b023f1e6779fba48c6300777fc681e29b7f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-005/samples.json",
+      "bytes": 60853,
+      "sha256": "40b7b76a60b527e4fbdb8cc3b22b77a856b7a4674a642c254b05cc7315a86145",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-005/stderr.txt",
+      "bytes": 3927,
+      "sha256": "7bf5cad5b7ec40ad8f0a772924bbfde527ed76dadb267808281754c734f1dc70",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-005/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-006-rss512/receipt.json",
+      "bytes": 16379,
+      "sha256": "ecb87f866a91136286d8ced45c7938b3d9cc7e3f72b2c8b128294f1b6cc521e4",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-006-rss512/samples.json",
+      "bytes": 64120,
+      "sha256": "9bc924dc22b9339c2391217a2729afd7d8dd090ae34ecc8a85c3a235f3ef4015",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-006-rss512/stderr.txt",
+      "bytes": 1289,
+      "sha256": "10601eb69fecc6b8e0976d96717dd6ebada169bd7686414c5fd0c1bd300c2cb2",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-006-rss512/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-007-shallow-main/receipt.json",
+      "bytes": 16150,
+      "sha256": "f8da38a9b1b84b89338047f7d955a22353feb1d062656efd042684cb100f66e2",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-007-shallow-main/samples.json",
+      "bytes": 65329,
+      "sha256": "0ac8f2e75aec3fb8139ca30c80780d88500e20b5d30b6354e56bc8107b8fe10e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-007-shallow-main/stderr.txt",
+      "bytes": 3141,
+      "sha256": "2465cb91c5322d7c118930b9251095f8da8db9b1608c1d66471e7daa74a3dc2a",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-007-shallow-main/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-008-direct-product-shape/receipt.json",
+      "bytes": 16150,
+      "sha256": "dced584d4a7a64c7bd69cf4f89e3395f70401884ddc879dba00f5d4ec0d4542f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-008-direct-product-shape/samples.json",
+      "bytes": 72815,
+      "sha256": "fb96e6be80df262790014e432df92ef78290dcdaa17ad4d5c06e8016d576f412",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-008-direct-product-shape/stderr.txt",
+      "bytes": 3080,
+      "sha256": "acaea2b724fdd890ddcdc2b2ad31680bb3158a05d40be1c23f5abc7197ddb031",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-refusal-008-direct-product-shape/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-request-001.json",
+      "bytes": 13147,
+      "sha256": "e99e6b5fac3c663706ad29434393319f27a3f8fb0b9521899b4a4f7f48be06ad",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-request-002.json",
+      "bytes": 13147,
+      "sha256": "ae105b85bd822bcb83c137d674ff459ad5ea67edc8a87a85afb0ac2f2f1848d1",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-request-003.json",
+      "bytes": 13147,
+      "sha256": "419c725ba1add4314a5e973afe29349e2726c196fe1907dde7b1b58df3b08df6",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-request-004.json",
+      "bytes": 13147,
+      "sha256": "786be2a8e63861a0b0ba7adbe642642649dfcdcad4a30d6997fc939e85e9a74d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-request-005.json",
+      "bytes": 13147,
+      "sha256": "b43f9d4bf6c5b5b9f8c957bb137e1a2eae06ab66f2fa79a0c501c405775eb768",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json",
+      "bytes": 3027,
+      "sha256": "7e0dd1272a7424d2349dfc2c940cfb2cb7182ebb7fe62a15a761f603c889f2fd",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operands/runs-17825792.bin.gz",
+      "bytes": 827000,
+      "sha256": "db80e08b03e5227657759f6000fcf710d3e1438590a64349c90f442151524e21",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/reviewed-programme.json",
+      "bytes": 6164,
+      "sha256": "d78033987121e5c7fefe417758f6fdcf83a866add63948f892214e7033753b45",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/controls/evidence-delta-validation.json",
+      "bytes": 12030,
+      "sha256": "1ee9472d77966b38c5d9be7015089051fe9b630ed1d26f4fdbf93278e9129a23",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/assembly-linux-controls.mjs",
+      "bytes": 4122,
+      "sha256": "01cf420210526224e43fd54cb1655c20233f883b6cd777554c5b80cbe8bab4f2",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/supervise-selected-assembly-linux.mjs",
+      "bytes": 9190,
+      "sha256": "bfee53a1661fec240dc781a4b14d5f8509476331eb34fa35e93b6032b923385d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs",
+      "bytes": 21827,
+      "sha256": "16f9e8b0eced81233f8217a8980f78364930f05fadded33c63ed91185db56e00",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/check-assembly-output-order.mjs",
+      "bytes": 2990,
+      "sha256": "92040baafa7c92ca2e4a66a8d7ab4211d0b55edf076288bfcd536ae7bcc9c294",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/controls/assembly-key-order-control.log",
+      "bytes": 210,
+      "sha256": "c74dd76996d026837685b6f2f6e5ed2e07359ef50e53680d195b53849ff72808",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/controls/assembly-linux-controls.log",
+      "bytes": 426,
+      "sha256": "6a55f94683b6b1d7a4064e0542513763affb47f68b3cfb97bb61348f8f1bc8f2",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-assembly-001/issued-parameters.json",
+      "bytes": 17270,
+      "sha256": "9bf514ce68107a1ade2329c3d655d4a2423ea83a926e342ea0d81ea0007bd8d8",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-assembly-001/output-order-readback.json",
+      "bytes": 3407,
+      "sha256": "95b2184cb245bc1ae5d5019f774d556c02a6b6bdf2aff802f057ee4eea5a9bd8",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-assembly-001/receipt.json",
+      "bytes": 35391,
+      "sha256": "6111963a8fbdef2eef39d7531f53e2b6d9bf5fc26a3e76314f22db002bd5ffb7",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-assembly-001/samples.json",
+      "bytes": 87511,
+      "sha256": "c6860206f30be7425f6f9ee638df6af164daa71ae8f298e794672282d9719dac",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-assembly-001/stderr.txt",
+      "bytes": 1310,
+      "sha256": "545ff6ae23c4371dc85d76acfc58eeaee74118764ddab6096d8546db9db93c46",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-assembly-001/stdout.txt",
+      "bytes": 1265,
+      "sha256": "19200a5519dcf326d9e24122d427451d9302eeee28d915ba49dd77496a463ecb",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-authority/authority-binding.json",
+      "bytes": 8734,
+      "sha256": "bb8a2f14c43624eb270e715126acf50842db7ef3877c7613f0653242acd4f651",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-authority/authority-registry.json",
+      "bytes": 25488,
+      "sha256": "bb3e0e747075d33231ee04708bc5d3571c8d82e4b796d1216e860bbcadfb6104",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-authority/composed-original-ledger.json",
+      "bytes": 324939,
+      "sha256": "7b43d925db055a3a7002b2c78f918283503847789ea4361bdb785c63f6edfd7e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-authority/original-rule-preimage.json",
+      "bytes": 8248,
+      "sha256": "d488224122051d2911669b56f2a052ae4a07e49c78db5c8e23d650124a1a717c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/certificate.json",
+      "bytes": 3279,
+      "sha256": "a65e1de9564f66feaae87bcb0a6b6f2ee4a3e4eaaf815b23e3e2f050e84a2ea7",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/code-source.json",
+      "bytes": 51195,
+      "sha256": "592f140c67d356c6c252528cf8c6a7ddfddc7ab0989e1c61aad2d0c49614ed0f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/facts.json",
+      "bytes": 5480,
+      "sha256": "c2f1c8f9d0cd8a9d5259bf825bb9fe36ef39e2a22be40aee8acdc147bedebe9d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/issued-plan.json",
+      "bytes": 11536,
+      "sha256": "3da47ad1c0db7a9bc31045814ab029461d2800b8daea937dc271b728aff87dd9",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/operating.json",
+      "bytes": 2304,
+      "sha256": "5770d9f318e18063a91a8904b78d9c109ee338371ecfb34de5330f3f9dc7723c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/publication.json",
+      "bytes": 475,
+      "sha256": "260fd606486665c0ec1f976456d41209378412a9618ca07166578bdcfe2bef8c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/request.json",
+      "bytes": 1374262,
+      "sha256": "82e69acd7a3730c3c332508d98444a59e8a82f8810f5de88a41bcf97614b4588",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/result.json",
+      "bytes": 2177027,
+      "sha256": "6e2eebcc27e205440acb087439c5a2417fc756fe51352184f0e05f38097ec0e4",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/samples.jsonl",
+      "bytes": 292950,
+      "sha256": "2eddf9cb7d7e3171f5b19323d7ed12f272eac41c7e1447936633ac52f6713247",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/stderr.log",
+      "bytes": 1346,
+      "sha256": "f1097b03bb17d6273fb36c926a83c4847a7225a0591ba83bf7470ce5c06d97c0",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/stdout.json",
+      "bytes": 376,
+      "sha256": "4dd4e8b486ef1b30409833044b268534028b936c1ab17b32404020ab00cadf8c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/terminal.json",
+      "bytes": 1410,
+      "sha256": "531b6915f4766a12d6e7497b36357dcc82cfcec36dc9931da9a6e308fa52dcac",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-release-001/envelope.json",
+      "bytes": 1421,
+      "sha256": "f1d43db79da7430c6e7e3276849333a4d10d4c927e666f1b48c45621fa6d244c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-release-001/ledger.json",
+      "bytes": 486331,
+      "sha256": "72f5b366ab03e13274f5f682624c740a183eb09aa9f02d6b056cb7bda3f7bc6e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-release-001/patch.json",
+      "bytes": 9691,
+      "sha256": "920888d9f48c61c439a2109f776ae1849f747d9f413ed113e0e63dd7556688d4",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-release-001/qualification.json",
+      "bytes": 675,
+      "sha256": "ac746b4ded8dfc0162a82f38b2ff45a0a4e94987ebc0c880b20da53fd176020a",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-release-001/selection-sidecar.json",
+      "bytes": 3594,
+      "sha256": "a107af05497045bb9ee2cb25082ba6e224f46cc7446559c31c354ba7cf73c1b5",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/SELECTED_DELIVERY.md",
+      "bytes": 6155,
+      "sha256": "1996bdc6a4b799cc08000e1101eef8416476ceac176efb6eb0c3b136df1c72e1",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/pointer-binding-controls.mjs",
+      "bytes": 2109,
+      "sha256": "667b1af5eb6f273bfae74979ceac5a2d84323fad1974d4a865581fbc507a7492",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/controls/pointer-binding-controls.json",
+      "bytes": 394,
+      "sha256": "6aec450c2eefd864502d3452d9741500bc09156c6915786d4521e599fa011ea3",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/ci-refusal-pointer-order-001/package.log",
+      "bytes": 59883,
+      "sha256": "94b8ec4c697afb436c8f8f0aab468d6eb9d7d86a47981ab85bdf89d29e201533",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/ci-refusal-pointer-order-001/regression0.log",
+      "bytes": 67511,
+      "sha256": "fb24e5b38bac94d2fcda2cdac2627c7ee1e43631cbc8b267c8486abc407966ba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/ci-refusal-pointer-order-001/geography.log",
+      "bytes": 40707,
+      "sha256": "ff5dd942b0a2caa7513785c74bea95781870535bf3082321c8806db1cd221130",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/package-delivery-001/build-stdout.log",
+      "bytes": 1296,
+      "sha256": "65e73f7b19920b73cb35573730b2ea41c6567dff29a5a672d67b55188c59ace0",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/package-delivery-001/built-output-readback.json",
+      "bytes": 162996,
+      "sha256": "ce6a44c5f4268687be50528060940dbdf3c79fa9b3f5e89c6d655d4d25491119",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/package-delivery-001/emitted-consumer.json",
+      "bytes": 837,
+      "sha256": "a053625ea8bbed43184cba12b4930061ef4eb74d758ec65603a19a19bba8d5f7",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/package-delivery-001/emitted-consumer.mjs",
+      "bytes": 3860,
+      "sha256": "7eddc387ec22cfc1eba4e0b4e007097c33bb1c34ff7c8da620f7b374e290b621",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/package-delivery-001/hosted-package-declaration-refusal.log",
+      "bytes": 65900,
+      "sha256": "9a62b0f167ef436887dda8ffac070ca4f738af0ef160d29e7538a9328268293c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/package-delivery-001/summary.json",
+      "bytes": 3222,
+      "sha256": "c103fe25cca080a808755fb443b4cfd4f938ffb904ff0ba120a0e95093413da6",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/shared-delivery-tooling-20261011/completed-ukr-expectations.json",
+      "bytes": 742,
+      "sha256": "47820071d8d51a68fe38618acf40211d2e2b22158e88c061e19b30fc2eb8c606",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/shared-delivery-tooling-20261011/completed-ukr-smoke.json",
+      "bytes": 15007,
+      "sha256": "4a08159ed1bc2e24f37bdfadfb07540b7e639d5e01b93d78bb06347de2f4c0fa",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/shared-delivery-tooling-20261011/programme-selected-readback.json",
+      "bytes": 51740,
+      "sha256": "f61bfcf96f50fcf7327f46d2a3d8ffef5a33747e7e2630af3adaa17d8dfe9737",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/source-qualified-002/publication.json",
+      "bytes": 349,
+      "sha256": "6b27b5623b255816c190fcab098fd2255a6072467439498fa316b131dea84b2d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/publication.json",
+      "bytes": 1449,
+      "sha256": "8aa8a88f8898e645be90d13f006187e74f709166d92ddfd337792459c119b73a",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/native-operating-001.json",
+      "bytes": 16079,
+      "sha256": "f02d6f4abd7958c2ff84420d1f6d7d170e814d3195e0bb2b8d88f99d4991812c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-004/publication.json",
+      "bytes": 349,
+      "sha256": "4145d42057811840a8a63c5bf06fa412939a537a5fa2612552e081ebdf05728b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-005/publication.json",
+      "bytes": 349,
+      "sha256": "30796b83c50139d1d511e9f83782090e971e4e1b28085b2a2b8b848435373f63",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/phl-source-qualified-006/publication.json",
+      "bytes": 349,
+      "sha256": "74dbe27d1f1351f1184502841796e44ce80c91b34606e2c7d8d18f8d4149383a",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/publication.json",
+      "bytes": 1443,
+      "sha256": "fc504e62075d550871426e055ffcd151eaa62ace52967546482b0013e2017a14",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/publication.json",
+      "bytes": 1441,
+      "sha256": "4a7dd3ace5aad80892b544f13c7954339c09305561c4319e75d80813c7f30961",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/publication.json",
+      "bytes": 1443,
+      "sha256": "24649559171f54f3011a5ef19a067c068f90aac97eb38228acf2a0973dd47e01",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-operating-001.json",
+      "bytes": 16075,
+      "sha256": "5c850adcc2f9639ac28829b128bce2037c84315f3a125d580f6e992bb2770d47",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-operating-002.json",
+      "bytes": 16075,
+      "sha256": "658cf02cfca0ef7dc56ee0421543daba2516d02e543cd9588eae4c838d5c5647",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-operating-003.json",
+      "bytes": 16075,
+      "sha256": "9f153e8c184c953cd7329f8253bd903742b3ad266a341b7925f9cf2db7fe1804",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/certificate.json",
+      "bytes": 3124,
+      "sha256": "a1d862204960e7b5051caa671834b709251d3ad81f1a9f154ad31ec25989f92b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/terminal.json",
+      "bytes": 1420,
+      "sha256": "709a2c1f4ef5083c6cb1c43cee2d6a49aaac08c84f158ff68a2cfc75df2d5369",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/issued-plan.json",
+      "bytes": 12611,
+      "sha256": "2b155a5b7d0b2f8743063b91eba8806778889d62e2dc91a52ced5cdba3b7ee68",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/result.json",
+      "bytes": 2455011,
+      "sha256": "88bbc7e6de89c00c02dca7e88f7b275109cdc744dd43d420df068b6d011e1830",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/ledger.json",
+      "bytes": 531308,
+      "sha256": "efffb06b7d531928ac0c748a1a79258dad9c3051b934201ed922a8dd7729480f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/patch.json",
+      "bytes": 10766,
+      "sha256": "0654d4653bce65e24d0f7c0ac279e6165d5cc075dcca2f5a0c2b78993cbbffb0",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/envelope.json",
+      "bytes": 1422,
+      "sha256": "6480398bd284301373756d8d55f88d34b560b69d0fbccd1ea158e6955cdf503f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/qualification.json",
+      "bytes": 645,
+      "sha256": "502a06951c662e4d237b8849cff4a73a9a55be9f20cf0ee9a32822b469edf3d9",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/selection-sidecar.json",
+      "bytes": 3461,
+      "sha256": "d2fb04e2a07016bf797218c0ddb1fc2e96acc0d2cff48a560a8757d765f7a5fb",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/assembly-001/receipt.json",
+      "bytes": 36951,
+      "sha256": "f387a81d912ab31a4b471d98b8509bedaa84dc997019c3fca19d3a8e96b610a1",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authority-registry.json",
+      "bytes": 29339,
+      "sha256": "3b0f66add74b8b231cca5374739e42fcd398de57d5ca60d846921667b6e642a5",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/composed-original-ledger.json",
+      "bytes": 356119,
+      "sha256": "31def3a1b57dd13b615d68f3f188bcfa9b370f4117a4e4649732de2b15911a0d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/original-patch-roster.json",
+      "bytes": 15320,
+      "sha256": "68595547459aad4e941cc29080e59b0a42ab090cdde62e325f0b5b9f44d45f93",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/built-output-readback.json",
+      "bytes": 162938,
+      "sha256": "a8baed920bab1e4efcaaadd03aef9c9b961a213e6f7804ed5132a471e014dfee",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/consumer-smoke.json",
+      "bytes": 36762,
+      "sha256": "2cbcba4cdec5157a4f2530536a029108e260b40a5aa4eed906be12ef7f39e252",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/selected-reader.json",
+      "bytes": 50613,
+      "sha256": "00b0c3d75447a83e5c0ba47bd58727473b963444abe0cd2d60aa16a59472bcb6",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/summary.json",
+      "bytes": 12853,
+      "sha256": "6a34f6528ac3e34b87596af69db466d3acd051bf1568c44f0f7583df2d83230e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/selected-delivery-expectations.json",
+      "bytes": 25769,
+      "sha256": "a7d4e7cff6cf895bb7eaa1d80fbb78d57333160e6026f1bf7e97c1f756476168",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/README.md",
+      "bytes": 3538,
+      "sha256": "23e20a13d7aef2851b24e38999c313268a29d92ba06100187e1d6680911053af",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "test/selected-data-profile.test.mjs",
+      "bytes": 45476,
+      "sha256": "690c715bc3e12ceaecfcf3881f43439674c604ddb6f168e6e7770e4c5f93b5ae",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    }
+  ],
+  "methods": [
+    {
+      "id": "retained-administrative-caller",
+      "kind": "code",
+      "description": "Select the already qualified and assembled353-cell additive release: preserve all260 prior owner-cell assignments and select93 distinct new pairs. Reuse literal original source/native products, genuine2c qualification and completed assembly; no scientific operators rerun.",
+      "software": "Node24 with exact issued bounded-heap argv; retained Python supervisor; unchanged native grid and scientific kernels",
+      "units": "Whole bytes, native cells, original component IDs"
+    },
+    {
+      "id": "registered-ukr-source-native-linux",
+      "kind": "code",
+      "description": "Reusable immutable original-batch registry and original-byte serialization adapter; genuine bounded SOURCE005 and NATIVE002 run the existing source predicates and native grid method, with distinct frozen producer vectors and full retained outputs. No selected activation in this PR.",
+      "software": "Node24.19.0 and genuine GNU time; exact code, installed module and operating-runtime vectors in issued requests and full operating receipts",
+      "units": "Whole bytes, original components and native cells"
+    },
+    {
+      "id": "ukr-original-selected-delivery",
+      "kind": "code",
+      "description": "One genuine unchanged-method current-bank qualification, complete prior authority/row conservation, genuine existing assembler and explicit corrected parsed-value output check; select the original complete UKR singleton continuous primitive with zero new native cells.",
+      "software": "Same trusted28-body method vector; genuine Linux Python issuer/supervisor and Node assembler with whole code/runtime custody",
+      "units": "Whole bytes, original components, native cells and seconds"
+    },
+    {
+      "id": "congo-phl-combined-selected-delivery",
+      "kind": "code",
+      "description": "Reuse accepted programme15; genuine COD2 and parallel PHL4/2/3 SOURCE/NATIVE phases followed by one complete current rebind, one assembly, full package and real emitted consumer. No method changes or duplicate scientific qualification.",
+      "software": "Frozen actual17/28 code and runtime vectors in requests/certificates; Node24, retained Python issuer and GNU time",
+      "units": "Whole bytes, original gap IDs, component geometries, native cells and seconds"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "new_deduplicated_cells",
+      "value": 93,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "5c3f2fe982e194330201c73a276bffebcb1988996888151cbd90452416f7610d",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/qualified-current/request.json"
+      },
+      "evaluation_commit": "2c8768d782fe33b8634a41e3941077259e2618c6"
+    },
+    {
+      "id": "prior_patch_cells_preserved",
+      "value": 260,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "5c3f2fe982e194330201c73a276bffebcb1988996888151cbd90452416f7610d",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/qualified-current/request.json"
+      },
+      "evaluation_commit": "2c8768d782fe33b8634a41e3941077259e2618c6"
+    },
+    {
+      "id": "old_nonzero_cells_preserved_in_affected_rows",
+      "value": 18451552,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "5c3f2fe982e194330201c73a276bffebcb1988996888151cbd90452416f7610d",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/qualified-current/request.json"
+      },
+      "evaluation_commit": "2c8768d782fe33b8634a41e3941077259e2618c6"
+    },
+    {
+      "id": "ukr_native002_components",
+      "value": 1,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "192850d3aaff4dc34f66e93d4d3ec6142b80f802f714343513fc76855210ab8e",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-request-002.json"
+      },
+      "evaluation_commit": "bc387dd5a75b6ca869c6bcd080822476715c7f81"
+    },
+    {
+      "id": "ukr_native002_zero_cell_components",
+      "value": 1,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "192850d3aaff4dc34f66e93d4d3ec6142b80f802f714343513fc76855210ab8e",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-request-002.json"
+      },
+      "evaluation_commit": "bc387dd5a75b6ca869c6bcd080822476715c7f81"
+    },
+    {
+      "id": "ukr_native002_assigned_cells",
+      "value": 0,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "192850d3aaff4dc34f66e93d4d3ec6142b80f802f714343513fc76855210ab8e",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-request-002.json"
+      },
+      "evaluation_commit": "bc387dd5a75b6ca869c6bcd080822476715c7f81"
+    },
+    {
+      "id": "ukr_native002_native_conflicts",
+      "value": 0,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "192850d3aaff4dc34f66e93d4d3ec6142b80f802f714343513fc76855210ab8e",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-request-002.json"
+      },
+      "evaluation_commit": "bc387dd5a75b6ca869c6bcd080822476715c7f81"
+    },
+    {
+      "id": "ukr_native002_removed_cells",
+      "value": 0,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "192850d3aaff4dc34f66e93d4d3ec6142b80f802f714343513fc76855210ab8e",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-request-002.json"
+      },
+      "evaluation_commit": "bc387dd5a75b6ca869c6bcd080822476715c7f81"
+    },
+    {
+      "id": "ukr_native002_reassigned_cells",
+      "value": 0,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "192850d3aaff4dc34f66e93d4d3ec6142b80f802f714343513fc76855210ab8e",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-request-002.json"
+      },
+      "evaluation_commit": "bc387dd5a75b6ca869c6bcd080822476715c7f81"
+    },
+    {
+      "id": "ukr_current_preserved_cells",
+      "value": 353,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "3da47ad1c0db7a9bc31045814ab029461d2800b8daea937dc271b728aff87dd9",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/issued-plan.json"
+      },
+      "evaluation_commit": "47170b8971aa4400b815335243f859cc67e2485d"
+    },
+    {
+      "id": "ukr_current_logical_phase",
+      "value": 235323328,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "3da47ad1c0db7a9bc31045814ab029461d2800b8daea937dc271b728aff87dd9",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/issued-plan.json"
+      },
+      "evaluation_commit": "47170b8971aa4400b815335243f859cc67e2485d"
+    },
+    {
+      "id": "ukr_current_lifetime_rss",
+      "value": 340054016,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "3da47ad1c0db7a9bc31045814ab029461d2800b8daea937dc271b728aff87dd9",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/issued-plan.json"
+      },
+      "evaluation_commit": "47170b8971aa4400b815335243f859cc67e2485d"
+    },
+    {
+      "id": "ukr_current_sampled_rss",
+      "value": 331055104,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "3da47ad1c0db7a9bc31045814ab029461d2800b8daea937dc271b728aff87dd9",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/issued-plan.json"
+      },
+      "evaluation_commit": "47170b8971aa4400b815335243f859cc67e2485d"
+    },
+    {
+      "id": "combined_native_cells",
+      "value": 1006,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "6a34f6528ac3e34b87596af69db466d3acd051bf1568c44f0f7583df2d83230e",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/summary.json"
+      },
+      "evaluation_commit": "54ad492561eda5569ee24f60f31214cd223a9a64"
+    },
+    {
+      "id": "combined_active_components",
+      "value": 47,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "6a34f6528ac3e34b87596af69db466d3acd051bf1568c44f0f7583df2d83230e",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/summary.json"
+      },
+      "evaluation_commit": "54ad492561eda5569ee24f60f31214cd223a9a64"
+    },
+    {
+      "id": "combined_new_native_cells",
+      "value": 653,
+      "unit": "cells",
+      "vintage": "archived",
+      "input_sha256": "6a34f6528ac3e34b87596af69db466d3acd051bf1568c44f0f7583df2d83230e",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/summary.json"
+      },
+      "evaluation_commit": "54ad492561eda5569ee24f60f31214cd223a9a64"
+    },
+    {
+      "id": "combined_package_seconds",
+      "value": 249.22,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "6a34f6528ac3e34b87596af69db466d3acd051bf1568c44f0f7583df2d83230e",
+      "input_file": {
+        "commit": "candidate",
+        "path": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/summary.json"
+      },
+      "evaluation_commit": "54ad492561eda5569ee24f60f31214cd223a9a64"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "new_deduplicated_cells",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/qualified-current/whole-output-conservation-readback.json",
+      "json_pointer": "/new_deduplicated_cells"
+    },
+    {
+      "metric_id": "prior_patch_cells_preserved",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/qualified-current/whole-output-conservation-readback.json",
+      "json_pointer": "/prior_patch_cells_preserved"
+    },
+    {
+      "metric_id": "old_nonzero_cells_preserved_in_affected_rows",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/combined-next-eighteen/qualified-current/whole-output-conservation-readback.json",
+      "json_pointer": "/old_nonzero_cells_preserved_in_affected_rows"
+    },
+    {
+      "metric_id": "ukr_native002_components",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/facts.json",
+      "json_pointer": "/components"
+    },
+    {
+      "metric_id": "ukr_native002_zero_cell_components",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/facts.json",
+      "json_pointer": "/zero_cell_components"
+    },
+    {
+      "metric_id": "ukr_native002_assigned_cells",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/facts.json",
+      "json_pointer": "/assigned_cells"
+    },
+    {
+      "metric_id": "ukr_native002_native_conflicts",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/facts.json",
+      "json_pointer": "/native_conflicts"
+    },
+    {
+      "metric_id": "ukr_native002_removed_cells",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/facts.json",
+      "json_pointer": "/removed_cells"
+    },
+    {
+      "metric_id": "ukr_native002_reassigned_cells",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/facts.json",
+      "json_pointer": "/reassigned_cells"
+    },
+    {
+      "metric_id": "ukr_current_preserved_cells",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/result.json",
+      "json_pointer": "/native/assigned_cells"
+    },
+    {
+      "metric_id": "ukr_current_logical_phase",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/facts.json",
+      "json_pointer": "/complete_phase_bytes"
+    },
+    {
+      "metric_id": "ukr_current_lifetime_rss",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/terminal.json",
+      "json_pointer": "/lifetime_rss_bytes"
+    },
+    {
+      "metric_id": "ukr_current_sampled_rss",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-current-001/terminal.json",
+      "json_pointer": "/sampled_group_peak_bytes"
+    },
+    {
+      "metric_id": "combined_native_cells",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/summary.json",
+      "json_pointer": "/cumulative_native_cells"
+    },
+    {
+      "metric_id": "combined_active_components",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/summary.json",
+      "json_pointer": "/active_components"
+    },
+    {
+      "metric_id": "combined_new_native_cells",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/summary.json",
+      "json_pointer": "/new_native_cells"
+    },
+    {
+      "metric_id": "combined_package_seconds",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/summary.json",
+      "json_pointer": "/package/seconds"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "This delivery selects the retained353-cell additive release, preserving all260 prior selected owner-cell pairs and adding93 distinct pairs across18 original components. Original13 partial remainders remain unresolved. Five full-component closures are eligible for credit only after required selected-output gates, serialized merge and immutable readback.",
+      "status": "supported",
+      "source_ids": [
+        "original-1639-administrative-corpus"
+      ]
+    },
+    {
+      "text": "Normal trusted native/continuous/package/render/picking, exact-head independent review and serialized integration remain required. Original363/327 obligations and all unsupported outcomes remain unfinished; source-era, rights and physical limitations are preserved.",
+      "status": "unresolved",
+      "source_ids": [
+        "original-1639-administrative-corpus"
+      ]
+    },
+    {
+      "text": "Archived producer milestone: the original UKR singleton genuinely qualified SOURCE005 and NATIVE002 with zero new native cells; those immutable outputs are reused in the subsequent selected-delivery evidence.",
+      "status": "supported",
+      "source_ids": [
+        "ukr-original-singleton-source-1699"
+      ]
+    },
+    {
+      "text": "The original complete UKR singleton has genuine current-rebind qualification and assembled selected assets. Existing353 native cells and all prior authorities/rows are preserved. The original assembly wrapper false refusal is retained alongside an independently reviewed corrected semantic post-check. Whole-batch completion remains conditional on normal trusted native/continuous/selected-output checks, exact-head review, serialized merge and immutable selected readback; no deployment or remaining363/327 closure is claimed.",
+      "status": "supported",
+      "source_ids": [
+        "ukr-original-singleton-source-1699"
+      ]
+    },
+    {
+      "text": "Eleven additional whole candidate primitives genuinely qualify and assemble: two COD/AGO components add653 native cells and nine PHL components are zero-cell. All353 prior native cells,26 authorities and44 rows are preserved. Final release has1006 cells and47 active components. Required hosted gates, exact-head review, merge and immutable readback remain pending; no complete130/318 original batch or deployment is claimed.",
+      "status": "supported",
+      "source_ids": [
+        "congo-ago-source-1723",
+        "phl-nine-source-1724"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node scripts/run-integration-tests.mjs (normal full-profile jobs, including production selected GPU/Canvas/picking)",
+    "python3 -I -B scripts/run-geographic-check.py --fetch --out .cache/geography-check.json (normal trusted native and continuous gate)",
+    "node scripts/evidence-quality.mjs coordination/engineering/melanesia363-additive-delivery-20261010/evidence-quality.json",
+    "node --test --test-name-pattern=\"registered native roster|registered handoff provenance\" test/additive-gap-repair.test.mjs",
+    "node coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/source-request-005.json (at original3bd1da0 with exact pinned runtime and complete admitted inputs)",
+    "node coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-request-002.json (at originalbc387dd with qualified SOURCE005 and exact pinned runtime)",
+    "Exact isolated Python current-rebind issuer and supervisor at47170b8971aa4400b815335243f859cc67e2485d; one genuine run with whole command/plan/terminal retained under selected-current-001.",
+    "Genuine Linux selected assembly at547a7c1778bc49d841ee619b23a4b8d545b915fc; original false output-order refusal preserved.",
+    "node coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/check-assembly-output-order.mjs (actual corrected readback of original assembly; no operator rerun)",
+    "npm run build:cloudflare",
+    "node coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/model-reader-call-boundary-controls.mjs --built-output-readback .cache/ukr-final-built-output.json",
+    "node coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/package-delivery-001/emitted-consumer.mjs .cache/ukr-emitted-consumer.json",
+    "npm run build:cloudflare",
+    "node coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/model-reader-call-boundary-controls.mjs --built-output-readback .cache/congo-package/built-output-readback.json",
+    "node scripts/selected-delivery-smoke.mjs --expectations coordination/engineering/congo-ago2018-delivery-20261011/selected-delivery-expectations.json --output .cache/congo-package/consumer-smoke.json --emitted-directory dist/client",
+    "node --test test/selected-data-profile.test.mjs"
+  ]
+}
