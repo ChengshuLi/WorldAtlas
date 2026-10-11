@@ -1,0 +1,243 @@
+{
+  "cohort": "cod",
+  "accepted_source_commit": "4d959ce9c97c01feb15fe9e1a7241f402c792da9",
+  "prior_registry_entries_preserved": 4,
+  "appended_entry": "congo-ago2018-cod2019-qualified-20261011",
+  "physical_copies": [
+    {
+      "source": {
+        "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/cohort100-physical-custody-001/components-036.jsonl.gz",
+        "commit": "4d959ce9c97c01feb15fe9e1a7241f402c792da9",
+        "mode": "100644",
+        "blob": "5023fc637cfbbfb29d51f61ceb330c1afa3b1a87",
+        "bytes": 1199208,
+        "sha256": "274a30c38f670072d902830cbc9eca678750d29409434b7cf4ec6df95b0716f9"
+      },
+      "destination": ".cache/additive-native-gap-repair/nor-grc-congo/cod/components-036.jsonl.gz"
+    },
+    {
+      "source": {
+        "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/cohort100-physical-custody-001/components-069.jsonl.gz",
+        "commit": "4d959ce9c97c01feb15fe9e1a7241f402c792da9",
+        "mode": "100644",
+        "blob": "313f971652e9dd9f2e4fd143472798c4f1ff29ec",
+        "bytes": 1190598,
+        "sha256": "f553b6c6727a780f0b8905df5558e9ce8766d2bb85018f1d0ff01ed5bde49c0a"
+      },
+      "destination": ".cache/additive-native-gap-repair/nor-grc-congo/cod/components-069.jsonl.gz"
+    },
+    {
+      "source": {
+        "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/sources-000.jsonl.gz",
+        "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+        "mode": "100644",
+        "blob": "c38da7eb06802cf9b23b6267a3c8f922cd426240",
+        "bytes": 2173285,
+        "sha256": "aaf5e4f099ab25c6e6f96632787f1654ba6054ed378fd591b360e36274ffc264"
+      },
+      "destination": ".cache/additive-native-gap-repair/nor-grc-congo/cod/sources-000.jsonl.gz"
+    },
+    {
+      "source": {
+        "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/cohort100-physical-custody-001/components-044.jsonl.gz",
+        "commit": "4d959ce9c97c01feb15fe9e1a7241f402c792da9",
+        "mode": "100644",
+        "blob": "34fd8e859dc08ac26b0fcd8c1765875c6fcd8ef2",
+        "bytes": 1174231,
+        "sha256": "2586019b1846c0fe50c3be1ee69b3169d0283803770cfa7917e2a0c17edb9126"
+      },
+      "destination": ".cache/additive-native-gap-repair/nor-grc-congo/cod/components-044.jsonl.gz"
+    }
+  ],
+  "native_operands": [
+    "coordination/engineering/nor-grc-congo-delivery-20261011/native-operands/runs-48234496.bin.gz"
+  ],
+  "method": {
+    "preimage_version": 3,
+    "source_profile": "retained-consumed-administrative-source",
+    "source_executed_code": [
+      {
+        "path": "package.json",
+        "bytes": 1417,
+        "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+      },
+      {
+        "path": "scripts/additive-gap-repair.mjs",
+        "bytes": 184937,
+        "sha256": "c5cd30d32b15a461a186074a1704a64f8895e33199c34d982af0e97bf0615895"
+      },
+      {
+        "path": "src/effective-footprint.js",
+        "bytes": 45330,
+        "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+      },
+      {
+        "path": "scripts/native-ownership/native-preparation-guards.mjs",
+        "bytes": 6580,
+        "sha256": "44901437d91c0ff8805030170abcd855aac3ac8354f10e4e67002f23e6a2ba31"
+      },
+      {
+        "path": "src/native-runtime.js",
+        "bytes": 3497,
+        "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+      },
+      {
+        "path": "scripts/native-ownership/compile-native-ownership.mjs",
+        "bytes": 4472,
+        "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+      },
+      {
+        "path": "src/native-grid.js",
+        "bytes": 6408,
+        "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+      },
+      {
+        "path": "src/ownership-codec.js",
+        "bytes": 2948,
+        "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+      },
+      {
+        "path": "scripts/audit-grid-intervals.mjs",
+        "bytes": 6777,
+        "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+      },
+      {
+        "path": "scripts/native-ownership/require-verified-selection.mjs",
+        "bytes": 4377,
+        "sha256": "20a8e3f472db4c06386ce2b7bd01330ea8acfd6d1ff414f6d2d32e8b1995d50c"
+      },
+      {
+        "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+        "bytes": 1540,
+        "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb"
+      },
+      {
+        "path": "scripts/native-ownership/verified-candidates.json",
+        "bytes": 1810,
+        "sha256": "080a481b71383bd6ba3388ad9b26138b25fced628a61830c3bb02a933562e40a"
+      },
+      {
+        "path": "scripts/evidence-quality.mjs",
+        "bytes": 28506,
+        "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97"
+      },
+      {
+        "path": "src/ownership-method.js",
+        "bytes": 3126,
+        "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df"
+      },
+      {
+        "path": "scripts/check-effective-geographic-regression.mjs",
+        "bytes": 75074,
+        "sha256": "801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039"
+      },
+      {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+        "bytes": 139553,
+        "sha256": "63745cc5d4f15bdd8c153787df07379d813ab037fc1e0734944a75568235e8aa"
+      },
+      {
+        "path": "package-lock.json",
+        "bytes": 246591,
+        "sha256": "471d035f92567ea447f221661db5fa8febfc7afc32af8ac975506ce9e0303255"
+      }
+    ],
+    "native_executed_code": [
+      {
+        "path": "package.json",
+        "bytes": 1417,
+        "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+      },
+      {
+        "path": "scripts/additive-gap-repair.mjs",
+        "bytes": 184937,
+        "sha256": "c5cd30d32b15a461a186074a1704a64f8895e33199c34d982af0e97bf0615895"
+      },
+      {
+        "path": "src/effective-footprint.js",
+        "bytes": 45330,
+        "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+      },
+      {
+        "path": "scripts/native-ownership/native-preparation-guards.mjs",
+        "bytes": 6580,
+        "sha256": "44901437d91c0ff8805030170abcd855aac3ac8354f10e4e67002f23e6a2ba31"
+      },
+      {
+        "path": "src/native-runtime.js",
+        "bytes": 3497,
+        "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+      },
+      {
+        "path": "scripts/native-ownership/compile-native-ownership.mjs",
+        "bytes": 4472,
+        "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+      },
+      {
+        "path": "src/native-grid.js",
+        "bytes": 6408,
+        "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+      },
+      {
+        "path": "src/ownership-codec.js",
+        "bytes": 2948,
+        "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+      },
+      {
+        "path": "scripts/audit-grid-intervals.mjs",
+        "bytes": 6777,
+        "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+      },
+      {
+        "path": "scripts/native-ownership/require-verified-selection.mjs",
+        "bytes": 4377,
+        "sha256": "20a8e3f472db4c06386ce2b7bd01330ea8acfd6d1ff414f6d2d32e8b1995d50c"
+      },
+      {
+        "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+        "bytes": 1540,
+        "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb"
+      },
+      {
+        "path": "scripts/native-ownership/verified-candidates.json",
+        "bytes": 1810,
+        "sha256": "080a481b71383bd6ba3388ad9b26138b25fced628a61830c3bb02a933562e40a"
+      },
+      {
+        "path": "scripts/evidence-quality.mjs",
+        "bytes": 28506,
+        "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97"
+      },
+      {
+        "path": "src/ownership-method.js",
+        "bytes": 3126,
+        "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df"
+      },
+      {
+        "path": "scripts/check-effective-geographic-regression.mjs",
+        "bytes": 75074,
+        "sha256": "801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039"
+      },
+      {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+        "bytes": 139553,
+        "sha256": "63745cc5d4f15bdd8c153787df07379d813ab037fc1e0734944a75568235e8aa"
+      },
+      {
+        "path": "package-lock.json",
+        "bytes": 246591,
+        "sha256": "471d035f92567ea447f221661db5fa8febfc7afc32af8ac975506ce9e0303255"
+      }
+    ],
+    "accepted_head": "440da14a05007f597b5f42d3bf67a68b098bc261",
+    "independent_review_comment": 6107898843
+  },
+  "scope_ids": [
+    "physical-component:8441fde5898d6f7db14840ed710f12785697897e45a863a5edd692e935866fc2",
+    "physical-component:a207016c2c38eebb7539f7f778ab83588c0fed4cd909656ec88ea9905e1205da",
+    "physical-component:fb03e785463b4a99a605ca297b6dd2a2bb27f3352e108844ad5ca147d9fc622c"
+  ],
+  "limitations": [
+    "Input preparation only; actual SOURCE/NATIVE remain pending."
+  ]
+}
