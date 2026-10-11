@@ -248,18 +248,81 @@ export function originalAdministrativeTargetHash({sourceScope,target,kind,expect
 
 // Original candidate identity keeps its original serialization domain. A
 // separately derived JS digest never replaces the recorded source hash.
-export function originalAdministrativeCandidateHash({sourceScope,componentId,candidate,expected}) {
+export function originalAdministrativeCandidateHash({sourceScope,componentId,candidate,expected,kind='feature'}) {
+  if(!['feature','geometry'].includes(kind))return false;
   if(typeof componentId!=='string'||!hex(expected))return false;
   const derived=sha(canonical(candidate));
   if(derived===expected)return true;
   const matches=sourceScope.original_candidate_canonical_bindings?.filter(row=>row.component_id===componentId);
   if(matches?.length!==1)return false;
-  const binding=matches[0],encoded=binding.feature_bytes_base64;
-  if(binding.feature_sha256!==expected||binding.derived_js_canonical_sha256!==derived||typeof encoded!=='string')return false;
+  const binding=matches[0],encoded=binding[kind+'_bytes_base64'];
+  const derivedKey=kind==='feature'?'derived_js_canonical_sha256':'derived_js_geometry_canonical_sha256';
+  if(binding[kind+'_sha256']!==expected||binding[derivedKey]!==derived||typeof encoded!=='string'
+    ||encoded.length>Math.ceil(32*1024*1024/3)*4)return false;
   const bytes=Buffer.from(encoded,'base64');
   if(bytes.length===0||bytes.length>32*1024*1024||sha(bytes)!==expected)return false;
   try{return JSON.stringify(canonicalValue(JSON.parse(bytes)))===JSON.stringify(canonicalValue(candidate));}
   catch{return false;}
+}
+
+// The request phase already charges the containing scope bytes. Charge every
+// newly decoded preimage plus parsed/canonical scratch to that SAME budget,
+// before any alias decode. Repeated native case checks retain their charges.
+export function admitAdministrativeOriginalPreimages(sourceScope,budget,{products=true,componentIds}={}) {
+  demand(budget&&typeof budget.add==='function','Missing original preimage phase budget');
+  const candidates=sourceScope.original_candidate_canonical_bindings??[];
+  const administrative=products?(sourceScope.original_administrative_canonical_bindings??[]):[];
+  demand(Array.isArray(candidates)&&Array.isArray(administrative),'Invalid original canonical binding roster');
+  const encoded=[];
+  for(const row of candidates)if(row.geometry_bytes_base64!==undefined&&(!componentIds||componentIds.includes(row.component_id)))encoded.push(row.geometry_bytes_base64);
+  for(const row of administrative)encoded.push(row.feature_bytes_base64,row.geometry_bytes_base64);
+  demand(encoded.length<=512,'Original preimage descriptor limit exceeded');
+  for(const value of encoded){
+    demand(typeof value==='string'&&value.length>0&&value.length<=Math.ceil(32*1024*1024/3)*4,
+      'Incomplete or oversized original administrative preimage');
+    const bytes=Math.floor(value.length*3/4)-(value.endsWith('==')?2:value.endsWith('=')?1:0);
+    demand(bytes>0&&bytes<=32*1024*1024,'Original preimage decoded byte limit exceeded');
+    for(let i=0;i<3;i++)budget.add({bytes});
+  }
+}
+
+// Aliases bind an ordinal of an already authenticated COMPLETE source product.
+// The old SHA must be proven by its whole original preimage, not by reformatting
+// numbers or accepting a hash declaration. Both complete parsed values must match.
+export function originalAdministrativeProductFeatures({sourceScope,pin,body}) {
+  demand(Buffer.isBuffer(body)&&body.length>0&&body.length<=32*1024*1024,'Original administrative product exceeds byte bounds');
+  const collection=JSON.parse(body);
+  demand(collection.type==='FeatureCollection'&&Array.isArray(collection.features),'Incomplete original administrative product');
+  const aliases=sourceScope.original_administrative_canonical_bindings??[];
+  demand(Array.isArray(aliases),'Invalid original administrative canonical bindings');
+  const relevant=aliases.filter(row=>row?.source_path===pin.path),seen=new Set(),sourceSha=sha(body);
+  const features=collection.features.map(feature=>({
+    feature_sha256:sha(canonical(feature)),geometry_sha256:sha(canonical(feature.geometry))}));
+  for(const binding of relevant){
+    const ordinal=binding.feature_index;
+    demand(binding.source_sha256===sourceSha&&Number.isSafeInteger(ordinal)&&ordinal>=0
+      &&ordinal<features.length&&!seen.has(ordinal),'Original administrative binding product/ordinal differs');
+    seen.add(ordinal);
+    const feature=collection.features[ordinal],original={};
+    for(const kind of ['feature','geometry']){
+      const expected=binding[kind+'_sha256'],encoded=binding[kind+'_bytes_base64'];
+      demand(hex(expected)&&typeof encoded==='string'&&encoded.length<=Math.ceil(32*1024*1024/3)*4,
+        'Incomplete or oversized original administrative preimage');
+      const bytes=Buffer.from(encoded,'base64');
+      demand(bytes.length>0&&bytes.length<=32*1024*1024&&sha(bytes)===expected,'Original administrative preimage hash differs');
+      const value=kind==='feature'?feature:feature.geometry;
+      demand(JSON.stringify(canonicalValue(JSON.parse(bytes)))===JSON.stringify(canonicalValue(value)),
+        'Original administrative preimage complete value differs');
+      original[kind+'_sha256']=expected;
+    }
+    features[ordinal].original=original;
+  }
+  return features;
+}
+
+export function originalAdministrativeProductMatch(feature,featureHash,geometryHash) {
+  return [feature,feature.original].some(value=>value?.feature_sha256===featureHash
+    &&value.geometry_sha256===geometryHash);
 }
 
 export function retainedAdministrativeSourcePremises({record,candidate,sourceCase,sourceScope,target}) {
@@ -273,7 +336,7 @@ export function retainedAdministrativeSourcePremises({record,candidate,sourceCas
   const empty=operation=>operation?.kind==='empty'&&operation.area_m2===0
     &&operation.planar_area===0&&completeEmptyGeometry(operation.geometry);
   premise('original-full-candidate-binding',originalAdministrativeCandidateHash({sourceScope,componentId:record.component_id,candidate:sourceCase.original_candidate_feature,expected:record.candidate_feature_sha256})
-    &&record.candidate_geometry_sha256===digest(candidate)
+    &&originalAdministrativeCandidateHash({sourceScope,componentId:record.component_id,candidate,expected:record.candidate_geometry_sha256,kind:'geometry'})
     &&wholePrimitivePointsetEqual(candidate,sourceCase.original_candidate_feature.geometry));
   premise('retained-whole-land-pointset',record.status==='mapped-land-support'
     &&support.mapped_land_support?.kind==='whole-operation-pointset'
@@ -377,7 +440,7 @@ export function retainedAdministrativeFragmentPremises({record,fragment,sourceCa
   const empty=operation=>operation?.kind==='empty'&&operation.area_m2===0
     &&operation.planar_area===0&&completeEmptyGeometry(operation.geometry);
   premise('original-full-candidate-binding',originalAdministrativeCandidateHash({sourceScope,componentId:record.component_id,candidate:sourceCase.original_candidate_feature,expected:record.candidate_feature_sha256})
-    &&record.candidate_geometry_sha256===digest(candidate)
+    &&originalAdministrativeCandidateHash({sourceScope,componentId:record.component_id,candidate,expected:record.candidate_geometry_sha256,kind:'geometry'})
     &&wholePrimitivePointsetEqual(candidate,sourceCase.original_candidate_feature.geometry));
   premise('retained-whole-land-pointset',record.status==='mapped-land-support'
     &&support.mapped_land_support?.kind==='whole-operation-pointset'
@@ -1155,7 +1218,7 @@ function administrativeHandoffFor(rule) {
   demand(matches.length===1,'Unknown/ambiguous accepted administrative batch roster');return matches[0];
 }
 
-function administrativeSourcePremiseStage(repo,request,report) {
+function administrativeSourcePremiseStage(repo,request,report,budget) {
   const rule=request.source_rule,profile='retained-consumed-administrative-source';
   demand(rule?.profile===profile&&rule.version===1&&Array.isArray(rule.expected_ids)
     &&rule.expected_ids.length>0&&new Set(rule.expected_ids).size===rule.expected_ids.length
@@ -1184,6 +1247,7 @@ function administrativeSourcePremiseStage(repo,request,report) {
       'Administrative comparison/outcome is outside the accepted original handoff');
   }
   const json=name=>JSON.parse(get(name).body),scope=json(rule.cases_path);
+  admitAdministrativeOriginalPreimages(scope,budget,{componentIds:rule.expected_ids});
   const views327=registration?registeredAdministrativeViews(scope,registration):(jsonl327?retainedAdministrative327Views({scope,geometryScope,operands:[...bodies.values()]}):null);
   const payloads=views327?.payloads??json(rule.payloads_path).additive_payloads,outcomes=views327?.outcomes??json(rule.outcomes_path).cases;
   const gb=views327?.gb??json(rule.simplified_comparison_path).cases,ncl=views327?.ncl??json(rule.generalized_comparison_path).cases;
@@ -1234,10 +1298,12 @@ function administrativeSourcePremiseStage(repo,request,report) {
   demand(manifest.original_assets.bounds.sha256===boundsPin.sha256&&Number.isSafeInteger(boundsPin.uncompressed_bytes),'Foreign original selected bounds');
   demand(get(rule.source_catalogue_path).pin.sha256==='d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9','Administrative source edition catalogue differs from retained corpus');
   const catalogue=json(rule.source_catalogue_path);
-  const products=rule.administrative_products.map(pin=>{const body=get(pin.path).body,collection=JSON.parse(body);
-    demand(collection.type==='FeatureCollection'&&Array.isArray(collection.features),'Incomplete original administrative product');
-    return {pin,original_bytes:body.length,original_sha256:sha(body),features:collection.features.map(feature=>({
-      feature_sha256:sha(canonical(feature)),geometry_sha256:sha(canonical(feature.geometry))}))};});
+  const administrativeBindings=scope.original_administrative_canonical_bindings??[];
+  demand(Array.isArray(administrativeBindings)&&administrativeBindings.every(binding=>rule.administrative_products.some(pin=>pin.path===binding?.source_path)),
+    'Original administrative binding names an unconsumed product');
+  const products=rule.administrative_products.map(pin=>{const body=get(pin.path).body;
+    return {pin,original_bytes:body.length,original_sha256:sha(body),
+      features:originalAdministrativeProductFeatures({sourceScope:scope,pin,body})};});
   // Full owner graph is needed only after original product hash acquisition.
   const bounds=json(rule.bounds_path),owners=new Map(bounds.map(row=>[row.id,row]));
   demand(bounds.length===49625&&owners.size===49625&&new Set(bounds.map(row=>row.index)).size===49625,'Incomplete selected owner roster');
@@ -1259,9 +1325,10 @@ function administrativeSourcePremiseStage(repo,request,report) {
     const operation=sourceCase.retained_source_operation_row;
     const hits=operation.positive_area_source_feature_intersections??operation.province_intersections.filter(row=>row.intersection_dimension==='area');
     for(const hit of hits){
-      const matches=products.flatMap(product=>product.features.filter(feature=>feature.feature_sha256===hit.feature_sha256||feature.feature_sha256===hit.source_feature_sha256)
+      const matches=products.flatMap(product=>product.features.filter(feature=>originalAdministrativeProductMatch(feature,
+        hit.feature_sha256??hit.source_feature_sha256,hit.geometry_sha256??hit.source_geometry_sha256))
         .map(feature=>({product,feature})));
-      demand(matches.length===1&&matches[0].feature.geometry_sha256===(hit.geometry_sha256??hit.source_geometry_sha256),
+      demand(matches.length===1,
         'Original administrative full feature/geometry omitted or rebound');
       if(hit.source_file_sha256)demand(matches[0].product.pin.sha256===hit.source_file_sha256,'Wrong generalized source body');
       else {const product=catalogue.products.filter(row=>row.key===hit.source_id);demand(product.length===1,'Missing original source edition');
@@ -1300,8 +1367,8 @@ function administrativeSourcePremiseStage(repo,request,report) {
       'Current source-file equality is not selected-bank geometry applicability. Genuine current snapshot/rebind, full native/neighbor conservation and activation remain required.'])}};
 }
 
-function sourcePremiseStage(repo,request,report) {
-  if(request.source_rule?.profile==='retained-consumed-administrative-source')return administrativeSourcePremiseStage(repo,request,report);
+function sourcePremiseStage(repo,request,report,budget) {
+  if(request.source_rule?.profile==='retained-consumed-administrative-source')return administrativeSourcePremiseStage(repo,request,report,budget);
   if(request.source_rule?.profile==='retained-USA-ADM2-counties-2018')return countySourcePremiseStage(repo,request);
   const rule=request.source_rule;
   demand(rule?.version===1&&Array.isArray(rule.inputs)&&rule.inputs.length===12&&Array.isArray(rule.expected_ids)
@@ -1704,6 +1771,7 @@ function administrativeBatchProposalStage(repo,request,resolutions,budget) {
       &&target.properties.parent_id===owner.province_id&&footprintValueSha256(target.geometry)===selected.target_geometry_sha256,'Stale batch target/owner join');
     const casePin=selected.source_case?.source;demand(casePin&&spec.inputs.some(pin=>equal(pin,casePin)),'Original full batch case omitted');
     const sourceScope=json(casePin.path),sourceCase=sourceScope.candidate_source_native_bindings[selected.source_case.ordinal];
+    admitAdministrativeOriginalPreimages(sourceScope,budget,{products:false,componentIds:[selected.component_id]});
     demand(sourceCase?.component_id===selected.component_id&&sha(canonical(sourceCase))===selected.source_case.row_sha256,'Original batch case drift');
     validateAdministrativeNativeCase({selected,sourceCase,sourceScope,target,owner,geometryScope:facts.geometry_scope});
     if(!selected.source_compatible)continue;
@@ -1899,7 +1967,7 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
     demand(resolutions,'Complete selected-bank reconciliation required');result=additiveProposalStage(sourceRoot,request);
   }else if(request.operation===SOURCE_PREMISES_VERSION){
     demand(resolutions,'Complete selected-bank reconciliation required');
-    result=sourcePremiseStage(sourceRoot,request,report);
+    result=sourcePremiseStage(sourceRoot,request,report,budget);
   }else if(request.operation===INVENTORY_VERSION){
   demand(/^components-[0-9]{3}\.jsonl\.gz$/.test(request.original_product_path), 'Only complete original component shards accepted');
   const product = report.products.find(pin=>pin.path === request.original_product_path);
