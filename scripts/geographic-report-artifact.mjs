@@ -1,7 +1,8 @@
 // Privileged merge jobs inspect bounded bytes in memory, never extract archives.
 import {inflateRawSync, crc32} from 'node:zlib';
 import {createHash} from 'node:crypto';
-import {githubAPI} from './issue-claim-contract.mjs';
+import {githubAPI, githubPages} from './issue-claim-contract.mjs';
+import {successfulGeographyJob, WORKFLOW_PATH} from './integration-proof.mjs';
 
 const MAX_REPORT = 32 * 1024 * 1024;
 const MAX_ARCHIVE = 40 * 1024 * 1024;
@@ -18,6 +19,8 @@ const commit = value => /^[a-f0-9]{40}$/.test(value ?? '');
 export function validateGeographyProof(value) {
   const keys = ['run_id','run_attempt','job_id','tree','head','baseline','artifact_id',
     'artifact_name','artifact_digest','artifact_bytes','report_sha256','report_bytes'];
+  const carried = value && (Object.hasOwn(value, 'current_run_attempt') || Object.hasOwn(value, 'current_job_id'));
+  if (carried) keys.push('current_run_attempt', 'current_job_id');
   need(value && typeof value === 'object' && !Array.isArray(value) &&
     Object.keys(value).sort().join() === [...keys].sort().join() &&
     ['run_id','run_attempt','job_id','artifact_id','artifact_bytes','report_bytes'].every(key => positive(value[key])) &&
@@ -25,12 +28,20 @@ export function validateGeographyProof(value) {
     hash(value.report_sha256) && hash(value.artifact_digest) && value.report_bytes <= MAX_REPORT &&
     value.artifact_bytes <= MAX_ARCHIVE && /^proposed-geography-[1-9]\d*-[1-9]\d*$/.test(value.artifact_name),
     'Invalid original geographic proof identity');
+  need(!carried || (positive(value.current_run_attempt) && positive(value.current_job_id) &&
+    value.run_attempt < value.current_run_attempt),
+    'Invalid carried geographic proof identity');
+  need(Number(value.artifact_name.split('-').at(-1)) === value.run_attempt,
+    'Original geographic artifact attempt differs from its producer');
   return value;
 }
 
-export function readGeographyJobReceipt(raw, artifactName) {
+export function readGeographyJobReceipt(raw, expected) {
+  const discover = expected && typeof expected === 'object';
+  const artifactName = discover ? null : expected;
   need(Buffer.isBuffer(raw) && raw.length > 0 && raw.length <= MAX_LOG &&
-    /^proposed-geography-[1-9]\d*-[1-9]\d*$/.test(artifactName ?? ''), 'Invalid bounded geography job log');
+    (discover ? positive(expected.number) && positive(expected.runAttempt) :
+      /^proposed-geography-[1-9]\d*-[1-9]\d*$/.test(artifactName ?? '')), 'Invalid bounded geography job log');
   const lines = raw.toString('utf8').split(/\r?\n/).map(line => line.replace(/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d+Z /, ''));
   const receipts = [];
   for (const line of lines) {
@@ -38,13 +49,16 @@ export function readGeographyJobReceipt(raw, artifactName) {
     let value; try { value = JSON.parse(line); } catch { continue; }
     if (Object.hasOwn(value, 'report_sha256') || Object.hasOwn(value, 'report_bytes')) receipts.push(value);
   }
-  const uploads = lines.map(line => new RegExp(`^Artifact ${artifactName} has been successfully uploaded! Final size is ([1-9]\\d*) bytes\\. Artifact ID is ([1-9]\\d*)$`).exec(line)).filter(Boolean);
+  const uploadLines = lines.filter(line => line.startsWith('Artifact proposed-geography-') && line.includes('has been successfully uploaded!'));
+  const uploads = uploadLines.map(line => /^Artifact (proposed-geography-([1-9]\d*)-([1-9]\d*)) has been successfully uploaded! Final size is ([1-9]\d*) bytes\. Artifact ID is ([1-9]\d*)$/.exec(line)).filter(Boolean);
   const digests = lines.map(line => /^SHA256 digest of uploaded artifact zip is ([a-f0-9]{64})$/.exec(line)).filter(Boolean);
-  need(receipts.length === 1 && uploads.length === 1 && digests.length === 1 &&
+  need(receipts.length === 1 && uploads.length === 1 && uploadLines.length === 1 && digests.length === 1 &&
+    (discover ? Number(uploads[0][2]) === expected.number && positive(Number(uploads[0][3])) &&
+      Number(uploads[0][3]) <= expected.runAttempt : uploads[0][1] === artifactName) &&
     hash(receipts[0].report_sha256) && positive(receipts[0].report_bytes) && receipts[0].report_bytes <= MAX_REPORT,
     'Missing, ambiguous or malformed original geographic job receipt');
-  const result = {artifact_name: artifactName, artifact_id: Number(uploads[0][2]),
-    artifact_bytes: Number(uploads[0][1]), artifact_digest: digests[0][1],
+  const result = {artifact_name: uploads[0][1], artifact_id: Number(uploads[0][5]),
+    artifact_bytes: Number(uploads[0][4]), artifact_digest: digests[0][1],
     report_sha256: receipts[0].report_sha256, report_bytes: receipts[0].report_bytes};
   need(positive(result.artifact_id) && positive(result.artifact_bytes) && result.artifact_bytes <= MAX_ARCHIVE,
     'Invalid original geographic artifact receipt');
@@ -126,6 +140,37 @@ async function downloadRedirect(response, fetchImpl, maximum = MAX_ARCHIVE) {
   } catch { throw Error('Geographic report delivery failed or exceeded bounded archive budget'); }
 }
 
+// Only the originating attempt named by an already authenticated job receipt is
+// inspected. A failed/cancelled code attempt can contain successful geography; its
+// actual unique geography job and all required steps must still be successful.
+async function readGeographyOriginJob({api, repo, number, source}) {
+  const route = `/repos/${repo}/actions/runs/${source.run_id}/attempts/${source.run_attempt}`;
+  const run = await api(route);
+  need(run.id === source.run_id && run.run_attempt === source.run_attempt && run.head_sha === source.head &&
+    run.event === 'pull_request' && run.path === WORKFLOW_PATH && run.repository?.full_name === repo &&
+    run.head_repository?.full_name === repo && run.status === 'completed' &&
+    Array.isArray(run.pull_requests) && (!run.pull_requests.length ||
+      run.pull_requests.some(pr => pr.number === number && pr.head?.sha === source.head)),
+    'Original geographic run identity or state changed');
+  // The current code proof already authenticates this run's PR. GitHub can
+  // omit historical PR links, and an aggregate cancellation says nothing about
+  // the completed geographic job. Authenticate that exact producer below.
+  const jobs = await githubPages(async path => (await api(path)).jobs, `${route}/jobs`);
+  const job = successfulGeographyJob(jobs);
+  need(job && job.run_id === source.run_id &&
+    job.run_attempt === source.run_attempt && job.head_sha === source.head,
+    'Original geographic job identity or successful steps changed');
+  return job;
+}
+
+export async function validateGeographyOrigin(options) {
+  const {source} = options;
+  validateGeographyProof(source);
+  if (!source.current_run_attempt) return;
+  const job = await readGeographyOriginJob(options);
+  need(job.id === source.job_id, 'Original geographic job identity changed');
+}
+
 export async function prepareGeographyProof({api, repo, number, head, baseline, proof, token, fetchImpl = fetch}) {
   if (!proof?.geography_job_id) return null;
   need(/^[-\w.]+\/[-\w.]+$/.test(repo ?? '') && positive(number) && positive(proof.geography_job_id) &&
@@ -134,9 +179,21 @@ export async function prepareGeographyProof({api, repo, number, head, baseline, 
   const client = typeof api.jobLogRedirect === 'function' ? api : githubAPI(token, {fetchImpl});
   const response = await client.jobLogRedirect(`/repos/${repo}/actions/jobs/${proof.geography_job_id}/logs`);
   const receipt = readGeographyJobReceipt(await downloadRedirect(response, fetchImpl, MAX_LOG),
-    `proposed-geography-${number}-${proof.run_attempt}`);
-  const source = validateGeographyProof({run_id: proof.run_id, run_attempt: proof.run_attempt,
-    job_id: proof.geography_job_id, tree: proof.tree, head, baseline, ...receipt});
+    {number, runAttempt: proof.run_attempt});
+  const originAttempt = Number(receipt.artifact_name.split('-').at(-1));
+  let jobId = proof.geography_job_id;
+  if (originAttempt !== proof.run_attempt) {
+    jobId = (await readGeographyOriginJob({api, repo, number, source: {run_id: proof.run_id,
+      run_attempt: originAttempt, head}})).id;
+  }
+  const source = validateGeographyProof({run_id: proof.run_id, run_attempt: originAttempt,
+    job_id: jobId, tree: proof.tree, head, baseline, ...receipt,
+    ...(originAttempt !== proof.run_attempt ? {current_run_attempt: proof.run_attempt, current_job_id: proof.geography_job_id} : {})});
+  if (source.current_run_attempt) {
+    const originalResponse = await client.jobLogRedirect(`/repos/${repo}/actions/jobs/${source.job_id}/logs`);
+    const original = readGeographyJobReceipt(await downloadRedirect(originalResponse, fetchImpl, MAX_LOG), source.artifact_name);
+    need(JSON.stringify(original) === JSON.stringify(receipt), 'Carried geographic receipt differs from its originating job');
+  }
   const report = await loadGeographicReport({api, repo, runId: source.run_id, artifactName: source.artifact_name,
     expectedHash: source.report_sha256, source, token, fetchImpl});
   return {source, report};

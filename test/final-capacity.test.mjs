@@ -1,11 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import {crc32} from 'node:zlib';
 import {waitForFinalCapacity, capacityObservation, finalRequestBound, inventoryFinalEvidence, paceFinalValidation,
   boundedFinalAPI, finalRequestBudget, beginFinalPlanning} from '../scripts/final-capacity.mjs';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
 import {githubAPI, renderClaim} from '../scripts/issue-claim-contract.mjs';
-import {loadGeographicReport} from '../scripts/geographic-report-artifact.mjs';
+import {loadGeographicReport, prepareGeographyProof, reportHash} from '../scripts/geographic-report-artifact.mjs';
 import {inspectMerge, prepareIntegration, completeIntegration} from '../scripts/merge-integration.mjs';
 import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
 import {assertAdmission, queueBody, executionTitle} from '../scripts/merge-scheduler.mjs';
@@ -516,4 +517,142 @@ test('capacity excludes blob REST requests only after exact transport proves the
   const value=await inventoryFinalEvidence({api:f.api,repo:f.repo,pr:f.pr,issue:f.issue,reservation:f.claim,files:f.files,policy:{version:1,mode:'enforce-new',activation_time:'2020-01-01T00:00:00Z'}});
   assert(rows.length>0);assert.equal(value.exact_git_transport,complete);assert.equal(value.blob_calls,complete?0:rows.length);
  }
+});
+
+
+// A real single-entry stored ZIP exercises the production report loader through
+// prepare, measured capacity waiting and final integration; no GIS is executed.
+function storedReportArchive(raw) {
+  const name = Buffer.from('geography-check.json'), crc = crc32(raw);
+  const local = Buffer.alloc(30); local.writeUInt32LE(0x04034b50); local.writeUInt16LE(20, 4);
+  local.writeUInt32LE(crc, 14); local.writeUInt32LE(raw.length, 18); local.writeUInt32LE(raw.length, 22);
+  local.writeUInt16LE(name.length, 26);
+  const central = Buffer.alloc(46); central.writeUInt32LE(0x02014b50); central.writeUInt16LE(20, 6);
+  central.writeUInt32LE(crc, 16); central.writeUInt32LE(raw.length, 20); central.writeUInt32LE(raw.length, 24);
+  central.writeUInt16LE(name.length, 28);
+  const end = Buffer.alloc(22); end.writeUInt32LE(0x06054b50); end.writeUInt16LE(1, 8); end.writeUInt16LE(1, 10);
+  end.writeUInt32LE(46 + name.length, 12); end.writeUInt32LE(30 + name.length + raw.length, 16);
+  return Buffer.concat([local, name, raw, central, name, end]);
+}
+function carriedGeographyFixture() {
+  const f = geographyReuseFixture();
+  f.originRun = {...structuredClone(f.proofRun), conclusion: 'cancelled', pull_requests: []};
+  f.originJobs = [structuredClone(f.proofJobs.find(job => job.name === 'geography'))];
+  Object.assign(f.originJobs[0], {run_id: 44, run_attempt: 1, head_sha: f.head});
+  f.proofRun.run_attempt = 2;
+  f.proofJobs.find(job => job.name === 'geography').id = 66;
+  f.publishReport = report => {
+  const raw = Buffer.from(JSON.stringify(report) + '\n');
+  f.zip = storedReportArchive(raw);
+  f.artifact = {id: 77, name: 'proposed-geography-23-1', expired: false, size_in_bytes: f.zip.length,
+    digest: 'sha256:' + reportHash(f.zip), workflow_run: {id: 44, head_sha: f.head}};
+  f.log = Buffer.from([JSON.stringify({report_bytes: raw.length, report_sha256: reportHash(raw)}),
+    'SHA256 digest of uploaded artifact zip is ' + reportHash(f.zip),
+    `Artifact proposed-geography-23-1 has been successfully uploaded! Final size is ${f.zip.length} bytes. Artifact ID is 77`].join('\n'));
+  };
+  f.publishReport(f.report);
+  const previous = f.api; f.transportCalls = []; let admission;
+  f.api = async (route, method = 'GET', body) => {
+    admission?.({route, method}); f.transportCalls.push(route);
+    if (route === '/rate_limit') {
+      f.capacityReads = (f.capacityReads ?? 0) + 1;
+      // Planning starts admitted, the final measured bound waits once, then
+      // receives exactly the observed requirement rather than arbitrary slack.
+      return quota(f.capacityReads === 2 ? 0 : f.capacityReads > 2 ? f.required : 2000);
+    }
+    if (route.endsWith('/actions/runs/44/attempts/1')) return structuredClone(f.originRun);
+    if (route.includes('/actions/runs/44/attempts/1/jobs')) return {jobs: structuredClone(f.originJobs)};
+    if (route.includes('/actions/runs/44/attempts/2/jobs')) return {jobs: structuredClone(f.proofJobs)};
+    if (route.includes('/actions/runs/44/artifacts?')) return {total_count: 1, artifacts: [structuredClone(f.artifact)]};
+    if (route.endsWith('/logs') || route.endsWith('/zip')) return new Response(null, {status: 302, headers: {
+      location: `https://results.blob.core.windows.net/${route.endsWith('/zip') ? 'zip' : route.includes('/55/') ? 'origin' : 'carried'}?fixture`
+    }});
+    return previous(route, method, body);
+  };
+  f.api.setHTTPAdmission = hook => {admission = hook; return () => {admission = null;};};
+  f.api.jobLogRedirect = route => f.api(route);
+  f.api.artifactRedirect = route => f.api(route);
+  f.fetchImpl = async (url, init) => {
+    assert.equal(init.headers, undefined); assert.equal(init.redirect, 'error');
+    return new Response(url.includes('/zip?') ? f.zip : url.includes('/origin?') ? f.originLog ?? f.log : f.log);
+  };
+  f.prepare = () => prepareIntegration({...f.options(), geographyProofLoader: args => prepareGeographyProof({
+    ...args, token: 'synthetic', fetchImpl: f.fetchImpl})});
+  f.reuse = (prepared, extra = {}) => completeIntegration({...f.options(), finalCapacity: true,
+    integrationResult: 'skipped', geographyResult: 'skipped', testedCandidate: f.candidate,
+    proofRunId: prepared.proof.run_id, proofRunAttempt: prepared.proof.run_attempt,
+    geographyProof: prepared.geography_proof,
+    capacityObserver: row => {if (row.phase === 'final-capacity') f.required = row.required;},
+    capacityTiming: {...clock(), sleep: async () => {f.phase = 'after'; f.mutateOnWait?.();}},
+    geographyReportLoader: ({api}) => loadGeographicReport({api, repo: f.repo, token: 'synthetic',
+      runId: prepared.geography_proof.run_id, artifactName: prepared.geography_proof.artifact_name,
+      expectedHash: prepared.geography_proof.report_sha256, source: prepared.geography_proof, fetchImpl: f.fetchImpl}), ...extra});
+  return f;
+}
+test('actual loaders preserve attempt-one geography through attempt-two code, measured capacity wait and merge', async () => {
+  const f = carriedGeographyFixture(), prepared = await f.prepare();
+  assert.equal(prepared.proof.run_attempt, 2); assert.equal(prepared.proof.geography_job_id, 66);
+  assert.equal(prepared.geography_proof.run_attempt, 1); assert.equal(prepared.geography_proof.job_id, 55);
+  assert.equal(prepared.geography_proof.current_run_attempt, 2); assert.equal(prepared.geography_proof.current_job_id, 66);
+  const result = await f.reuse(prepared);
+  assert.equal(result.accepted, true); assert.equal(result.proof.run_attempt, 2);
+  assert.equal(result.geography.source.run_attempt, 1); assert.equal(result.geography.source.job_id, 55);
+  assert.equal(result.geography.candidate_commit, f.head); assert.equal(result.tested_candidate, f.candidate);
+  assert.equal(result.final_capacity.remaining, result.final_capacity.required);
+  assert.equal(result.final_capacity.proof_calls, 4, 'two current-proof reads plus exact original run and jobs');
+  assert.equal(result.final_capacity.observations, 2);
+  assert.equal(f.transportCalls.filter(route => route.endsWith('/attempts/1')).length, 4,
+    'origin is authenticated at prepare, before and after capacity wait, and final validation');
+  assert.equal(f.writes.filter(row => row.route.endsWith('/merge')).length, 1);
+});
+
+test('actual carried prepare rejects missing, multiple, future and foreign receipts but keeps valid latest code', async () => {
+  for (const mutate of [
+    f => {f.log = Buffer.from('missing');},
+    f => {f.log = Buffer.concat([f.log, Buffer.from('\n'), f.log]);},
+    f => {f.log = Buffer.from(f.log.toString().replace('proposed-geography-23-1', 'proposed-geography-23-3'));},
+    f => {f.log = Buffer.from(f.log.toString().replace('proposed-geography-23-1', 'proposed-geography-24-1'));},
+    f => {f.originLog = Buffer.from(f.log.toString().replace('Artifact ID is 77', 'Artifact ID is 78'));},
+    f => {f.originJobs[0].steps.pop();}, f => {f.originRun.head_sha = 'e'.repeat(40);},
+    f => {f.publishReport({...f.report, baseline_commit: 'e'.repeat(40)});},
+    f => {f.publishReport({...f.report, trusted_code_commit: 'e'.repeat(40)});},
+    f => {f.publishReport({...f.report, candidate_commit: f.candidate});}
+  ]) {
+    const f = carriedGeographyFixture(); mutate(f); const prepared = await f.prepare();
+    assert.equal(prepared.proof.run_attempt, 2); assert.equal(prepared.geography_proof, null);
+    assert.equal(f.writes.length, 0);
+  }
+});
+
+test('actual final carried reuse rejects identity, source, artifact and report substitutions', async () => {
+  for (const mutate of [
+    (f, p) => {p.geography_proof.tree = 'e'.repeat(40);},
+    (f, p) => {p.geography_proof.head = 'e'.repeat(40);},
+    (f, p) => {p.geography_proof.baseline = 'e'.repeat(40);},
+    (f, p) => {p.geography_proof.current_job_id++;},
+    (f, p) => {p.geography_proof.job_id++;},
+    f => {f.originJobs[0].id++;}, f => {f.originJobs[0].run_id++;},
+    f => {f.originJobs[0].run_attempt++;}, f => {f.originJobs[0].head_sha = 'e'.repeat(40);},
+    f => {f.originRun.id++;}, f => {f.originRun.run_attempt++;},
+    f => {f.originRun.head_sha = 'e'.repeat(40);},
+    f => {f.originJobs[0].steps[2].conclusion = 'failure';},
+    f => {f.proofJobs.find(job => job.name === 'geography').conclusion = 'failure';},
+    f => {f.proofRun.run_attempt++;}, f => {f.artifact.expired = true;},
+    f => {f.artifact.id++;}, f => {f.artifact.workflow_run.head_sha = 'e'.repeat(40);},
+    f => {f.zip = storedReportArchive(Buffer.from('{}'));}
+  ]) {
+    const f = carriedGeographyFixture(), prepared = await f.prepare(); mutate(f, prepared);
+    await assert.rejects(f.reuse(prepared)); assert.equal(f.writes.length, 0);
+  }
+});
+
+test('origin identity and latest successful geography remain fresh across actual final capacity waiting', async () => {
+  for (const mutate of [f => {f.originJobs[0].id++;}, f => {f.originRun.head_sha = 'e'.repeat(40);},
+    f => {f.originJobs[0].steps.pop();}, f => {f.proofRun.run_attempt++;},
+    f => {f.proofJobs.find(job => job.name === 'geography').steps[2].conclusion = 'skipped';},
+    f => {f.artifact.expired = true;}]) {
+    const f = carriedGeographyFixture(), prepared = await f.prepare();
+    f.mutateOnWait = () => mutate(f);
+    await assert.rejects(f.reuse(prepared)); assert.equal(f.phase, 'after'); assert.equal(f.writes.length, 0);
+  }
 });

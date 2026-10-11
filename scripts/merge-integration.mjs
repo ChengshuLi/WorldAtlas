@@ -7,7 +7,7 @@ import {checkPremergeEvidence} from './premerge-evidence.mjs';
 import {beginFinalPlanning, paceFinalValidation, finalRequestBudget} from './final-capacity.mjs';
 import {memoizeImmutableGitBlobs} from './immutable-git-blobs.mjs';
 import {evidenceRequirement} from './evidence-policy.mjs';
-import {validateGeographyProof} from './geographic-report-artifact.mjs';
+import {validateGeographyProof, validateGeographyOrigin} from './geographic-report-artifact.mjs';
 
 const need = (condition, message) => { if (!condition) throw Error(message); };
 const root = repo => `/repos/${repo}`;
@@ -28,10 +28,10 @@ function checkGeographicReport(geography, baseline, candidate) {
 
 function bindGeographyProof(source, {proof, number, head, baseline}) {
   validateGeographyProof(source);
-  need(proof && source.run_id === proof.run_id && source.run_attempt === proof.run_attempt &&
-    source.job_id === proof.geography_job_id && source.tree === proof.tree &&
+  need(proof && source.run_id === proof.run_id && (source.current_run_attempt ?? source.run_attempt) === proof.run_attempt &&
+    (source.current_job_id ?? source.job_id) === proof.geography_job_id && source.tree === proof.tree &&
     source.head === head && source.baseline === baseline &&
-    source.artifact_name === `proposed-geography-${number}-${proof.run_attempt}`,
+    source.artifact_name === `proposed-geography-${number}-${source.run_attempt}`,
     'Original geographic proof no longer binds the exact tested tree and job');
 }
 export function checkCurrentChecks(checks, {evidenceRequired = false} = {}) {
@@ -356,7 +356,7 @@ export async function completeIntegration(options) {
   const geographyProof = options.geographyProof ? validateGeographyProof(options.geographyProof) : null;
   const geographyReady = geographyProof
     ? options.geographyResult === 'skipped' && options.integrationResult === 'skipped' &&
-      options.proofRunId === geographyProof.run_id && options.proofRunAttempt === geographyProof.run_attempt &&
+      options.proofRunId === geographyProof.run_id && options.proofRunAttempt === (geographyProof.current_run_attempt ?? geographyProof.run_attempt) &&
       options.expectedHead === geographyProof.head && options.testedBase === geographyProof.baseline
     : options.geographyResult === 'success';
   if (geographyProof) options = {...options, artifactRunId: geographyProof.run_id};
@@ -367,6 +367,7 @@ export async function completeIntegration(options) {
     need(geographyReady, 'Trusted combined geography check missing, failed or cancelled; no merge performed');
     options = await beginFinalPlanning(options);
     const proofApplicabilityInventory = async ({api, state}) => {
+      if (geographyProof) await validateGeographyOrigin({api, repo: options.repo, number: options.number, source: geographyProof});
       if (!selectedDataCandidate(state.pr.head.ref, state.files)) return;
       const [baseline, authored] = await Promise.all([tree(api, options.repo, state.base), tree(api, options.repo, state.pr.head.sha)]);
       await selectedDataSelection({...options, api, branch: state.pr.head.ref, files: state.files, baseline, authored});
@@ -408,8 +409,10 @@ export async function completeIntegration(options) {
       testSelection: selection?.test_selection, baseline, authored, candidate});
     need(proof, 'Trusted integration proof is no longer valid; resubmit unchanged head');
   }
-  if (geographyProof) bindGeographyProof(geographyProof, {proof, number: options.number,
-    head: state.pr.head.sha, baseline: state.base});
+  if (geographyProof) {
+    bindGeographyProof(geographyProof, {proof, number: options.number, head: state.pr.head.sha, baseline: state.base});
+    await validateGeographyOrigin({api: options.api, repo: options.repo, number: options.number, source: geographyProof});
+  }
   const currentPR = await options.api(`${root(options.repo)}/pulls/${options.number}`);
   const currentIssue = await options.api(`${root(options.repo)}/issues/${state.issue.number}`);
   need(currentPR.head.sha === state.pr.head.sha && currentPR.body === state.pr.body && currentPR.title === state.pr.title &&

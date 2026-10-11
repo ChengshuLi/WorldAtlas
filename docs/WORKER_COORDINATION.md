@@ -207,10 +207,16 @@ coverage. A run whose only failed job is `evidence` can retain that code proof
 when its profile, scope, geography, package and every required regression job
 completed successfully. This handles a PR-body metadata race without repeating
 unchanged code work. Both merge phases still require fresh successful current
-checks, evidence, ownership and exact-head review. The queue's combined geography
-job and its authenticated report remain mandatory; no historical geography report
-is reused by this exception. Cancelled runs or other failed/skipped jobs do not
-qualify. Preparation pins the run ID and attempt. The final serialized merge re-reads that run,
+checks, evidence, ownership and exact-head review. Geographic proof is separate:
+an authenticated successful geographic job may retain its original report only
+for that exact whole tree, head and trusted baseline. After a failed-job-only
+rerun, the successful carried job's single upload receipt identifies its true
+origin attempt; the queue authenticates that exact run/job, required steps,
+matching original receipt and artifact/report rather than scanning old artifacts
+or relabeling execution. The origin attempt may have failed/cancelled code while
+its geography succeeded. Latest code proof still requires its own successful
+coverage. Both identities are rechecked after capacity waiting and before merge;
+missing original proof requires fresh geography. Preparation pins the run ID and attempt. The final serialized merge re-reads that run,
 the same successful attempt/jobs and the usual exact-head review, evidence, ownership,
 checks, candidate parents and base guards. An unavailable/untrusted proof causes
 normal isolated tests; a proof revoked after preparation refuses the merge and
