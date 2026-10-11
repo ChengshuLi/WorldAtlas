@@ -3672,8 +3672,8 @@
     },
     {
       "path": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/summary.json",
-      "bytes": 3503,
-      "sha256": "0035e9f72dcc953b8cb53d68078ff67c3b4c64b98078417b815172b9fb3b56d4",
+      "bytes": 12013,
+      "sha256": "178d5278e64753b7b83b2d4fee02c888179568c6716e097502d5c5c2ab706d0a",
       "hash_kind": "file-bytes",
       "role": "retained-result-or-operand"
     },
@@ -3686,8 +3686,15 @@
     },
     {
       "path": "coordination/engineering/congo-ago2018-delivery-20261011/README.md",
-      "bytes": 2364,
-      "sha256": "1ab644f28a32ac95b1f40408c3b59eff275e4962acfee4c87c07daf02b0b88c8",
+      "bytes": 2982,
+      "sha256": "5c7274ad1907baf865ee6e81c4c20b016f7b8fa1a4e4d48daa6d792ed867049c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "test/selected-data-profile.test.mjs",
+      "bytes": 45476,
+      "sha256": "690c715bc3e12ceaecfcf3881f43439674c604ddb6f168e6e7770e4c5f93b5ae",
       "hash_kind": "file-bytes",
       "role": "retained-result-or-operand"
     }
@@ -3884,7 +3891,7 @@
       "value": 1006,
       "unit": "cells",
       "vintage": "archived",
-      "input_sha256": "0035e9f72dcc953b8cb53d68078ff67c3b4c64b98078417b815172b9fb3b56d4",
+      "input_sha256": "178d5278e64753b7b83b2d4fee02c888179568c6716e097502d5c5c2ab706d0a",
       "input_file": {
         "commit": "candidate",
         "path": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/summary.json"
@@ -3896,7 +3903,7 @@
       "value": 47,
       "unit": "components",
       "vintage": "archived",
-      "input_sha256": "0035e9f72dcc953b8cb53d68078ff67c3b4c64b98078417b815172b9fb3b56d4",
+      "input_sha256": "178d5278e64753b7b83b2d4fee02c888179568c6716e097502d5c5c2ab706d0a",
       "input_file": {
         "commit": "candidate",
         "path": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/summary.json"
@@ -3908,7 +3915,7 @@
       "value": 653,
       "unit": "cells",
       "vintage": "archived",
-      "input_sha256": "0035e9f72dcc953b8cb53d68078ff67c3b4c64b98078417b815172b9fb3b56d4",
+      "input_sha256": "178d5278e64753b7b83b2d4fee02c888179568c6716e097502d5c5c2ab706d0a",
       "input_file": {
         "commit": "candidate",
         "path": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/summary.json"
@@ -3920,7 +3927,7 @@
       "value": 249.22,
       "unit": "seconds",
       "vintage": "archived",
-      "input_sha256": "0035e9f72dcc953b8cb53d68078ff67c3b4c64b98078417b815172b9fb3b56d4",
+      "input_sha256": "178d5278e64753b7b83b2d4fee02c888179568c6716e097502d5c5c2ab706d0a",
       "input_file": {
         "commit": "candidate",
         "path": "coordination/engineering/congo-ago2018-delivery-20261011/package-delivery-001/summary.json"
@@ -4074,6 +4081,7 @@
     "node coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/package-delivery-001/emitted-consumer.mjs .cache/ukr-emitted-consumer.json",
     "npm run build:cloudflare",
     "node coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/model-reader-call-boundary-controls.mjs --built-output-readback .cache/congo-package/built-output-readback.json",
-    "node scripts/selected-delivery-smoke.mjs --expectations coordination/engineering/congo-ago2018-delivery-20261011/selected-delivery-expectations.json --output .cache/congo-package/consumer-smoke.json --emitted-directory dist/client"
+    "node scripts/selected-delivery-smoke.mjs --expectations coordination/engineering/congo-ago2018-delivery-20261011/selected-delivery-expectations.json --output .cache/congo-package/consumer-smoke.json --emitted-directory dist/client",
+    "node --test test/selected-data-profile.test.mjs"
   ]
 }

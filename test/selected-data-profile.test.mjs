@@ -330,11 +330,17 @@ function actualSourceSpecimen() {
   for(const row of issued.source_rule.administrative_products)raw(row.path);
   return sourceSpecimen={bodies,documents,entries,authority,issued,facts,registry,registration,handoff,catalogue,report,physical};
 }
-function retainedSourceFixture({format='v1',mutate=()=>{}}={}) {
+function retainedSourceFixture({format='v1',additionalRegistryEntries=[],mutate=()=>{}}={}) {
   const actual=actualSourceSpecimen(),documents=new Map([...actual.documents].map(([name,value])=>[name,structuredClone(value)]));
   const authority=structuredClone(actual.authority),issued=documents.get(authority.original_pins.source_request.path),
     facts=documents.get(authority.original_pins.source_facts.path),registry=documents.get(administrativePath),
     registration=registry.entries.find(row=>row.id===actual.registration.id),handoff=documents.get(registration.source.path);
+  // This historical UKR fixture models one registration appended to an empty
+  // registry, not the eligibility of every current or future HEAD registration.
+  // Keep its retained specimen isolated as unrelated real deliveries accumulate.
+  registry.entries.push(...structuredClone(additionalRegistryEntries));
+  assert.equal(registry.entries.filter(row=>row.id===registration.id).length,1);
+  registry.entries=[registration];
   const f=fixture({mutate:f=>{
     for(const [oid,bytes] of actual.bodies)f.blobs.set(oid,bytes);
     for(const [name,row] of actual.entries)if(!f.baseline.entries.has(name)){f.baseline.entries.set(name,{...row});f.authored.entries.set(name,{...row});}
@@ -411,6 +417,18 @@ test('retained complete v1 SOURCE graph admits registry append and exact already
 });
 test('explicit v2 schema fixture admits preserved original membership without claiming genuine v2 adoption',async()=>{
   assert.ok(await retainedSourceFixture({format:'v2'}).run());
+});
+
+for(const format of ['v1','v2'])test('historical SOURCE '+format+' fixture is isolated from unrelated HEAD registry growth',async()=>{
+  // An unrelated future schema/location must not silently become part of the
+  // UKR fixture. This does not assert fast-route eligibility for that new entry.
+  const unrelated={id:'unrelated-future-registration',format:'future-format',
+    source:{path:'coordination/engineering/other/handoff.json'}};
+  const f=retainedSourceFixture({format,additionalRegistryEntries:[unrelated]});
+  assert.deepEqual(f.sourceState.registry.entries,[f.sourceState.registration]);
+  const old=JSON.parse(f.blobs.get(f.baseline.entries.get(administrativePath).sha));
+  assert.deepEqual(old.entries,[]);
+  assert.ok(await f.run());
 });
 
 for(const [name,mutate] of Object.entries({
