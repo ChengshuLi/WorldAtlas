@@ -534,7 +534,7 @@
       "id": "literal-v2-handoff",
       "kind": "generator",
       "helper_version": "worldatlas-evidence-preparation-v1",
-      "description": "Frozen nineteen-case v2 join under the shared exact literal policy; reuses completed authenticated per-product inverse receipts and exact rows, projects original encoded/decoded descriptors and counts, authenticates complete original passive membership, and preserves all31 outcomes. Metadata assembly does not redundantly decode nineteen whole physical products.",
+      "description": "Frozen eighteen-case v2 join under the shared exact literal policy; reuses completed authenticated per-product inverse receipts and exact rows, projects original encoded/decoded descriptors and counts, authenticates complete original passive membership, and preserves all31 outcomes. Metadata assembly does not redundantly decode eighteen whole physical products.",
       "software": "Python3.12.14; unchanged NewVintage; actual registeredAdministrativeViews, registeredOriginalPhysicalProduct and SOURCE predicates",
       "units": "Whole original component identities, passive accounting and original source bindings"
     }
@@ -590,8 +590,8 @@
     },
     {
       "path": "research/geography/norway31-source-fit-20261011/tools/handoff-inputs.json",
-      "bytes": 1934,
-      "sha256": "bd3c8c0a099c4fbef385d3a7d401aaca7de6db10ec9f6a2f164621c8a65bd452",
+      "bytes": 1843,
+      "sha256": "7409045c0c23ec17b31615df287e89c795aa137e7ce870198068b252a8e7ebaf",
       "hash_kind": "file-bytes"
     },
     {
@@ -604,6 +604,12 @@
       "path": "research/geography/norway31-source-fit-20261011/vintages/controls-001/handoff-controls.log",
       "bytes": 4396,
       "sha256": "df73cd2d5b91e6d562ee3d2943874f67669cf047510f1c6a5077b9469e24c296",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/controls-002/handoff-controls.log",
+      "bytes": 4198,
+      "sha256": "34535902d12c9319d80fa965ac5714156224de3666a043be9bbf8338e4412c49",
       "hash_kind": "file-bytes"
     },
     {
@@ -1345,6 +1351,24 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/source-handoff-003/all31-dispositions.json",
+      "bytes": 148287,
+      "sha256": "0ba5716de3462adb4ae67763439bd76a6d2ab7bc8658f5494aa460a18b971cf7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/source-handoff-003/publication.json",
+      "bytes": 497,
+      "sha256": "63fb9e2fb88918d20f3f8264b6645e1a1346ab5f24239ef129be4ca888d95654",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/source-handoff-003/source-handoff.json",
+      "bytes": 1983918,
+      "sha256": "08db5fd397ebd75cca1b8f520989ac73bdf68a43d427e02d04092a6a9c04a054",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "research/geography/norway31-source-fit-20261011/vintages/source-premise-input-001/premise-input.json",
       "bytes": 1883779,
       "sha256": "a5464acb0e24480e6544a070db816275f09021e22f43f479e701d0234a635085",
@@ -1367,6 +1391,18 @@
       "bytes": 17768,
       "sha256": "28ce82b91be1b79bb79ec8d457144fb6b69e9b861bff0825938644a9285643ad",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/source-product-join-001/publication.json",
+      "bytes": 265,
+      "sha256": "d139d4c8e1f4261610ba3c53770f0ab4eb9598860a8f8af6c7772ae0a744a921",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/norway31-source-fit-20261011/vintages/source-product-join-001/result.json",
+      "bytes": 40117,
+      "sha256": "a8d97080da75bebbbd2b340d1308ad4d6382e5f8653baa21b4f52d2e5273c197",
+      "hash_kind": "file-bytes"
     }
   ],
   "metrics": [
@@ -1380,11 +1416,11 @@
     },
     {
       "id": "proposed_handoff_count",
-      "value": 19,
+      "value": 18,
       "unit": "components",
       "vintage": "baseline",
       "evaluation_commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
-      "input_sha256": "bd3c8c0a099c4fbef385d3a7d401aaca7de6db10ec9f6a2f164621c8a65bd452"
+      "input_sha256": "7409045c0c23ec17b31615df287e89c795aa137e7ce870198068b252a8e7ebaf"
     }
   ],
   "metric_bindings": [
@@ -1395,7 +1431,7 @@
     },
     {
       "metric_id": "proposed_handoff_count",
-      "path": "research/geography/norway31-source-fit-20261011/vintages/source-handoff-002/all31-dispositions.json",
+      "path": "research/geography/norway31-source-fit-20261011/vintages/source-handoff-003/all31-dispositions.json",
       "json_pointer": "/proposed_count"
     }
   ],
@@ -1408,7 +1444,7 @@
         "original-physical-reference",
         "current-selected-reference"
       ],
-      "text": "Nineteen original Norway components have complete source-relative custody and actual unchanged pure SOURCE premise support under the shared literal primitive interpretation. All31 original outcomes, original strict failures and dissolved diagnostics remain explicit."
+      "text": "Eighteen original Norway components have complete source-relative custody and actual unchanged pure SOURCE premise support under the shared literal primitive interpretation. All31 original outcomes, original strict failures and dissolved diagnostics remain explicit."
     },
     {
       "status": "unresolved",
@@ -1416,7 +1452,7 @@
         "original-physical-reference",
         "current-selected-reference"
       ],
-      "text": "Twelve cases remain held: eight mixed/unknown physical cases, three cases whose two complete physical inverse products cannot yet be reconstructed, and one original Python-versus-JS geometry hash mismatch. Downstream SOURCE/NATIVE operators, current rebind, actual native/continuous/consumer gates and selected integration remain mandatory. Incremental continuous area is unknown. Original detector area is not net newly added map area."
+      "text": "Thirteen cases remain held: eight mixed/unknown physical cases, three cases whose two complete physical inverse products cannot yet be reconstructed, and two original Python-versus-JS candidate or complete-source geometry hash mismatches. Downstream SOURCE/NATIVE operators, current rebind, actual native/continuous/consumer gates and selected integration remain mandatory. Incremental continuous area is unknown. Original detector area is not net newly added map area."
     }
   ],
   "stages": {
