@@ -32,7 +32,7 @@ export function validateSupportedProgrammeCatalogue(catalogue) {
  demand(catalogue&&Object.keys(catalogue).sort().join(',')==='current_rebind_migrations,kind,programs,version'
   &&catalogue.version===1&&catalogue.kind==='trusted-source-native-programmes-v1'
   &&Array.isArray(catalogue.programs)&&catalogue.programs.length>0&&catalogue.programs.length<=512
-  &&Array.isArray(catalogue.current_rebind_migrations)&&catalogue.current_rebind_migrations.length<=1,'Malformed trusted programme catalogue');
+  &&Array.isArray(catalogue.current_rebind_migrations)&&catalogue.current_rebind_migrations.length<=2,'Malformed trusted programme catalogue');
  const vector=rows=>{demand(Array.isArray(rows)&&rows.length>0&&rows.length<=28&&new Set(rows.map(p=>p?.path)).size===rows.length,'Incomplete/duplicate programme code vector');
   for(const p of rows)demand(p&&Object.keys(p).sort().join(',')==='bytes,path,sha256'&&typeof p.path==='string'&&!p.path.includes('\\')&&!p.path.split('/').some(s=>!s||s==='.'||s==='..')&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=FILE&&hash(p.sha256),'Malformed programme code descriptor');};
  const keys=new Set();
@@ -43,12 +43,14 @@ export function validateSupportedProgrammeCatalogue(catalogue) {
   vector(p.source_executed_code);vector(p.native_executed_code);
   const key=valueSha([p.preimage_version,p.source_profile,p.source_executed_code,p.native_executed_code]);demand(!keys.has(key),'Ambiguous programme registration');keys.add(key);
  }
+ const migrations=new Set();
  for(const p of catalogue.current_rebind_migrations){
   demand(p&&Object.keys(p).sort().join(',')==='current_code,execution_commit,historical_code,independent_review_comment'
    &&/^[a-f0-9]{40}$/.test(p.execution_commit)&&Number.isSafeInteger(p.independent_review_comment)&&p.independent_review_comment>0,'Malformed exact rebind migration');
   vector(p.historical_code);vector(p.current_code);
   demand(same(p.historical_code.map(p=>p.path),CURRENT_REBIND_CODE)&&same(p.current_code.map(p=>p.path),CURRENT_REBIND_CODE)
    &&!same(p.historical_code,p.current_code),'Incomplete/identity rebind migration');
+  const key=valueSha([p.execution_commit,p.historical_code,p.current_code]);demand(!migrations.has(key),'Ambiguous exact rebind migration');migrations.add(key);
  }
  return catalogue;
 }
@@ -851,7 +853,20 @@ export function reclaimCompletedRebindFrame() {
   demand(globalThis.gc===rebindGc,'Reclamation callable drift');
  }
 }
-export function acquireCurrentRebindOperands(snapshot,registry,originalRows,originalPatches,{targetSources,predecessorProof=null,carriedMetadataBytes=0}={}) {
+// Versioned bounded serialization correction: acquisition keeps its separate
+// 4 MiB result reserve. This completed-frame reset retains its last conservative
+// metadata charge (including the table and earlier rows), but no longer carries
+// the completed native input buffers. All returned/current output graphs and
+// canonical copies, UTF-16 JSON text and retained encoded buffers are reserved
+// here before constructing/hashing any final product. Seven bytes per admitted
+// UTF-8 byte is a conservative logical representation reserve, not measured RSS.
+export function admitCurrentRebindOutputFrame(reader,limits){
+ demand(reader instanceof ImmutableReader&&limits&&Number.isSafeInteger(limits.output_bytes)&&limits.output_bytes>0&&limits.output_bytes<=8388608&&Number.isSafeInteger(limits.complete_phase_bytes)&&limits.complete_phase_bytes>0&&limits.complete_phase_bytes<=PHASE,'Bounded complete product output frame required');
+ reader.outputBytes=7*limits.output_bytes;reader.phase();
+ demand(reader.used<=limits.complete_phase_bytes,'Complete retained product serialization frame exceeds issued child bound before products');
+ return reader.used;
+}
+export function acquireCurrentRebindOperands(snapshot,registry,originalRows,originalPatches,{targetSources,predecessorProof=null,carriedMetadataBytes=0,outputLimits=null}={}) {
  demand(snapshot?.reader instanceof ImmutableReader,'Require actual current selected reader');
  const resolver=currentRebindSourceView(snapshot),reader=snapshot.reader;
  demand(Number.isSafeInteger(carriedMetadataBytes)&&carriedMetadataBytes>=0&&carriedMetadataBytes<=PHASE,'Incomplete retained rebind reader metadata');
@@ -928,6 +943,16 @@ export function acquireCurrentRebindOperands(snapshot,registry,originalRows,orig
  currentRows.sort((a,b)=>a.y-b.y);
  const candidateIds=new Set(originalPatches.flatMap(p=>p.rows.map(row=>row.y))),candidateRows=currentRows.filter(row=>candidateIds.has(row.y));
  demand(predecessorRows.every(prior=>same(prior,currentRows.find(row=>row.y===prior.y))),'Current native bank loses/reassigns a complete earlier Arctic row');
+ // Input frames retain their original 4 MiB reserves. The complete result
+ // and its subsequent serialization have a different lifetime: table, groups,
+ // all current rows and earlier carried graphs are still live at this point.
+ // Reserve first before measuring the newly complete row/group carry, then
+ // admit that full measured carry before building the numerical result.
+ if(outputLimits){
+  admitCurrentRebindOutputFrame(reader,outputLimits);
+  reader.metadataBytes=retained()+table.byteLength+2*valueBytes({currentRows,groups:[...groups.values()]}).length;
+  admitCurrentRebindOutputFrame(reader,outputLimits);
+ }
  const result=currentRebindResult({baseSelection,registry,originalRows,originalPatches,currentTargets,currentRows:candidateRows,size:manifest.size});
  return freeze({base_selection:baseSelection,current_targets:currentTargets,current_rows:candidateRows,source_inputs:sourceInputs,acquisition:{version:1,kind:'complete-selected-rebind-inputs-v1',target_sources:targetSources,source_inputs:sourceInputs,native_inputs:nativeInputs,predecessor_proof:predecessorProof,predecessor_rows:predecessorRows,manifest_sha256:valueSha(manifest)},acquisition_phases:phases,input_inventory:[...reader.inventory.values()].map(pin=>({...pin})),result,
   limits:['Actual selected before-state acquisition and exact applicability only. Original registry/source/native authority must also be authenticated by the committed reader; no activation or physical approval.','External cold operating qualification and repeated whole outputs remain mandatory before publishing a current_rebind certificate.']});
@@ -961,6 +986,11 @@ export function compatibleCurrentRebindCode(executionCommit,currentCode,historic
 
 // A current rebind is complete data custody plus independently recomputed
 // applicability. It never replaces the original registry/source authority.
+// Preserve completed-frame peaks after a later complete phase resets used.
+export function retainCurrentRebindPhasePeak(reader,priorPhaseBytes,outputPhaseBytes,acquisitionPhases){
+ reader.used=Math.max(priorPhaseBytes,outputPhaseBytes,reader.used,...acquisitionPhases.map(p=>p.complete_phase_bytes));
+ return reader.used;
+}
 export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,originalRows,originalPatches,size,snapshot,carriedMetadataBytes=0}) {
  demand(reader instanceof ImmutableReader,'Require actual immutable custody reader');
  demand(snapshot?.reader===reader,'Current rebind custody requires the actual privately authenticated selected snapshot');
@@ -1008,13 +1038,15 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
  // Only these issued acquisition locators are needed during current word reads;
  // whole request/result bodies are reopened at their identical immutable pins
  // after the completed window frame, for the unchanged complete verifier.
- const acquisitionSpec={targetSources:bodies.request.acquisition?.target_sources,predecessorProof:bodies.request.acquisition?.predecessor_proof};
+ const acquisitionSpec={targetSources:bodies.request.acquisition?.target_sources,predecessorProof:bodies.request.acquisition?.predecessor_proof,outputLimits:bodies.request.limits};
  bodies.request=null;
  reclaimCompletedRebindFrame();
  const priorPhaseBytes=reader.used;
  const liveMetadata=carriedMetadataBytes+2*(valueBytes({certificate,bodies,acquisitionSpec,code,historicalCode,currentCode,originalCode,roster,externalRoster,...(issuedOriginalInputs===undefined?{}:{issuedOriginalInputs})}).length+externalBytes);
 
  const acquired=acquireCurrentRebindOperands(snapshot,registry,originalRows,originalPatches,{...acquisitionSpec,carriedMetadataBytes:liveMetadata});
+ // Preserve the complete live-table/result peak before the reopen frame resets.
+ const outputPhaseBytes=reader.used;
  // Complete raw row/run frames have returned. All acquired result/rows/targets,
  // source/native custody and the full selected snapshot stay live and charged.
  reclaimCompletedRebindFrame();
@@ -1030,7 +1062,7 @@ export function readCurrentRebindCustody(reader,pin,{baseSelection,registry,orig
  demand(Number.isSafeInteger(identityScratch)&&identityScratch<=FILE&&reader.used+identityScratch<=PHASE,'Complete native identity comparison scratch exceeds phase');reader.used+=identityScratch;
  const result=verifyCurrentRebindProducts({certificate,...bodies,baseSelection,registry,originalRows,originalPatches,size,expectedCode,acquired,executionCustody,bodyPins:Object.fromEntries(roster.map(({name,p})=>[name,p]))});
  // A sequential phase must never hide an earlier complete acquisition peak.
- reader.used=Math.max(priorPhaseBytes,reader.used,...acquired.acquisition_phases.map(p=>p.complete_phase_bytes));
+ retainCurrentRebindPhasePeak(reader,priorPhaseBytes,outputPhaseBytes,acquired.acquisition_phases);
  return result;
 }
 

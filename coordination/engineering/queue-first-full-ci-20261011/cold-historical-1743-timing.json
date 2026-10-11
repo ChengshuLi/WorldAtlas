@@ -1,0 +1,92 @@
+{
+  "measurement": "cold-routing-metadata-and-strict-graph-acquisition-on-original-immutable-pair",
+  "elapsed_ms": 66591,
+  "exit_code": 0,
+  "status": "unchanged-selected-inputs",
+  "reason": null,
+  "baseline_commit": "32103b9c717ae43e7e88b067a9c1dfe5a07e8c73",
+  "candidate_commit": "9231460981bf2cc7cfb574e762cd60ab0f6abb68",
+  "initial_object_types": {
+    "tree": 6539,
+    "commit": 696
+  },
+  "initial_setup": {
+    "fixture": "isolated cold Git metadata, no shared alternates",
+    "fetches": [
+      {
+        "role": "trusted-baseline",
+        "commit": "32103b9c717ae43e7e88b067a9c1dfe5a07e8c73",
+        "elapsed_ms": 4137,
+        "exit_code": 0
+      },
+      {
+        "role": "candidate",
+        "commit": "9231460981bf2cc7cfb574e762cd60ab0f6abb68",
+        "elapsed_ms": 3413,
+        "exit_code": 0
+      }
+    ],
+    "initial_object_types": {
+      "tree": 6539,
+      "commit": 696
+    },
+    "initial_disk_bytes": 3781363,
+    "count_objects": "count: 0\nsize: 0\nin-pack: 10532\npacks: 2\nsize-pack: 3625\nprune-packable: 0\ngarbage: 0\nsize-garbage: 0\n"
+  },
+  "executed_working_tree_code": [
+    {
+      "path": "scripts/check-unchanged-selected-geography.mjs",
+      "bytes": 28203,
+      "sha256": "8d5c267e968349daae7827e8e99a7026536ce30a82ac8861917582c8ea5a70c2"
+    },
+    {
+      "path": "scripts/geography-routing-metadata.mjs",
+      "bytes": 8328,
+      "sha256": "dc31815de10f0248405e32753d866e50c82a58fa13d171cb90f5e8a0cd1f2a88"
+    },
+    {
+      "path": "scripts/geography-prefetch.mjs",
+      "bytes": 13608,
+      "sha256": "19aba167eb32d5e7c08034a0e748db95e657d2ec0f10f8ee034cdeba9b2720a8"
+    }
+  ],
+  "shallow_marker_unchanged": true,
+  "metadata_bytes_read": 5199563,
+  "metadata_bodies_read": 178,
+  "metadata_acquisition": {
+    "scope": "explicit-routing-metadata-only",
+    "complete_scientific_closure": false,
+    "unique_objects": 112,
+    "declared_bytes": 4120159,
+    "verified_import_objects": 112,
+    "verified_import_bytes": 4120159,
+    "fetch_batches": 10,
+    "tree_metadata_ms": 0,
+    "fetch_ms": 37864,
+    "verification_ms": 405,
+    "declarations": 112,
+    "tree_metadata_bytes": 10191758,
+    "tree_metadata_requests": 2,
+    "discovery_batches": 10,
+    "strict_origin_commits": [
+      "0c38864ef3433a097c99fc8fa4c8ed962b8297e0",
+      "706110049de4b5910d9792557d487b66d6d2bfa1",
+      "86e5c2ac83474c159c1432848979776319c04fdd",
+      "89a0bcb0c4c5e03108904724456cf3cde2c2a208",
+      "93e99400dfb567fbd9ebe7b953eb608a611e43df",
+      "3436d678cef0ee6c5456780c357e9ae35bea6617"
+    ],
+    "strict_origin_fetch_batches": 2,
+    "strict_origin_fetch_ms": 6875,
+    "graph_metadata_imported_objects": 600,
+    "graph_metadata_imported_bytes": 1715409,
+    "unexpected_graph_blob_imports": 0,
+    "partial_import_possible": false,
+    "scientific_leaf_imports": 0
+  },
+  "final_disk_bytes": 10023585,
+  "limits": [
+    "Exact original historical pair, isolated object store initially containing zero blobs. No scientific source geometry/native arrays were decoded.",
+    "Collector boundary timing only, not whole hosted workflow. Initial metadata checkout/fetch time is reported separately."
+  ]
+}

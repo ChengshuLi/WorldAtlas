@@ -3,8 +3,8 @@
 // This module cannot issue an operating certificate or select a release.
 import fs from 'node:fs';import path from 'node:path';
 import {ImmutableReader} from '../../../scripts/check-effective-geographic-regression.mjs';
-import {CURRENT_REBIND_CODE,normaliseRetainedRepairLedger,nativeBaseSelection,requirePriorAdditiveConservation,readRetainedRegistryAuthority,acquireCurrentRebindOperands,currentRebindSourceView,reclaimCompletedRebindFrame,valueBytes,valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
-const FILE=33554432,PHASE=268435456,prepared=new WeakSet(),completedPrior=new WeakMap();
+import {CURRENT_REBIND_CODE,admitCurrentRebindOutputFrame,normaliseRetainedRepairLedger,nativeBaseSelection,requirePriorAdditiveConservation,readRetainedRegistryAuthority,acquireCurrentRebindOperands,currentRebindSourceView,reclaimCompletedRebindFrame,valueBytes,valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+const FILE=33554432,PHASE=268435456,PRODUCTS=8388608,prepared=new WeakSet(),completedPrior=new WeakMap();
 const demand=(v,m)=>{if(!v)throw Error(m);},same=(a,b)=>valueBytes(a).equals(valueBytes(b));
 const exists=p=>{try{return fs.lstatSync(p);}catch(e){if(e.code==='ENOENT')return null;throw e;}};
 const ordinaryAncestors=p=>{let current=path.parse(p).root;for(const part of p.slice(current.length).split(path.sep)){if(!part)continue;current=path.join(current,part);const s=exists(current);demand(s&&s.isDirectory()&&!s.isSymbolicLink(),'Require ordinary existing output ancestor');}};
@@ -18,8 +18,47 @@ export function validateCurrentRebindPlan(plan,{executionCommit,baseSelection,re
  demand(plan&&Object.keys(plan).filter(k=>k!=='original_inputs').sort().join(',')==='authority_registry_sha256,base_selection,executed_code,execution_commit,kind,limits,original_patch_sha256s,original_rows_sha256,predecessor_proof,target_sources,version','Foreign actual issued rebind plan');
  if(explicit)demand(Array.isArray(plan.original_inputs)&&plan.original_inputs.length===2&&new Set(plan.original_inputs.map(p=>p?.path)).size===2&&plan.original_inputs.every(p=>p&&Object.keys(p).sort().join(',')==='bytes,commit,git_blob_oid,mode,path,sha256'&&p.mode==='100644'&&typeof p.path==='string'&&!p.path.includes('\\')&&!p.path.split('/').some(s=>!s||s==='.'||s==='..')&&/^[a-f0-9]{40}$/.test(p.commit)&&/^[a-f0-9]{40}$/.test(p.git_blob_oid)&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=FILE&&/^[a-f0-9]{64}$/.test(p.sha256)),'Missing complete original input descriptors');
  demand(plan.version===1&&plan.kind==='issued-current-rebind-acquisition-plan-v1'&&plan.execution_commit===executionCommit&&/^[a-f0-9]{40}$/.test(executionCommit)&&same(plan.base_selection,baseSelection)&&plan.authority_registry_sha256===valueSha(registry)&&plan.original_rows_sha256===valueSha(originalRows)&&same(plan.executed_code,executedCode)&&same(executedCode.map(p=>p.path),CURRENT_REBIND_CODE),'Actual planned source/method/selected identity differs');
- demand(plan.limits&&Object.keys(plan.limits).sort().join(',')==='complete_phase_bytes,descriptors,output_bytes,rss_bytes,sampled_stop_bytes,wall_seconds'&&Object.values(plan.limits).every(n=>Number.isSafeInteger(n)&&n>0)&&plan.limits.complete_phase_bytes<=PHASE&&plan.limits.descriptors<=512&&plan.limits.output_bytes<=4194304&&plan.limits.rss_bytes<=536870912&&plan.limits.sampled_stop_bytes<=402653184&&plan.limits.sampled_stop_bytes<=plan.limits.rss_bytes,'Planned complete phase/operating/output bounds differ');
+ demand(plan.limits&&Object.keys(plan.limits).sort().join(',')==='complete_phase_bytes,descriptors,output_bytes,rss_bytes,sampled_stop_bytes,wall_seconds'&&Object.values(plan.limits).every(n=>Number.isSafeInteger(n)&&n>0)&&plan.limits.complete_phase_bytes<=PHASE&&plan.limits.descriptors<=512&&plan.limits.output_bytes<=PRODUCTS&&plan.limits.rss_bytes<=536870912&&plan.limits.sampled_stop_bytes<=402653184&&plan.limits.sampled_stop_bytes<=plan.limits.rss_bytes,'Planned complete phase/operating/output bounds differ');
  demand(Array.isArray(plan.target_sources)&&plan.target_sources.length>0&&Array.isArray(plan.original_patch_sha256s)&&plan.original_patch_sha256s.length===registry.entries.length,'Missing complete planned input roster');return plan;
+}
+// Exact canonical byte count without building a complete JSON string, graph or
+// Buffer. Key order changes no length. Refuse on the first over-budget scalar
+// or delimiter, before the whole-output representations can be allocated.
+export function boundedCurrentRebindProductBytes(bodies,limit){
+ demand(Number.isSafeInteger(limit)&&limit>0&&limit<=PRODUCTS,'Bounded product byte limit required');
+ let total=0;const add=n=>{total+=n;demand(total<=limit,'Complete cold products exceed prospective output bound before writes');};
+ const string=s=>{add(2);for(let i=0;i<s.length;i++){
+  const c=s.charCodeAt(i);
+  if(c===34||c===92||[8,9,10,12,13].includes(c))add(2);
+  else if(c<32)add(6);
+  else if(c<128)add(1);
+  else if(c<2048)add(2);
+  else if(c>=0xd800&&c<=0xdbff&&i+1<s.length&&s.charCodeAt(i+1)>=0xdc00&&s.charCodeAt(i+1)<=0xdfff){add(4);i++;}
+  else add(c>=0xd800&&c<=0xdfff?6:3);
+ }};
+ const visit=v=>{
+  if(typeof v==='string')return string(v);
+  if(v===null)return add(4);
+  if(typeof v==='boolean')return add(v?4:5);
+  if(typeof v==='number'){demand(Number.isFinite(v),'Nonfinite canonical product value');return add(JSON.stringify(v).length);}
+  demand(v&&typeof v==='object','Non-JSON canonical product value');
+  add(2);const array=Array.isArray(v),keys=array?null:Object.keys(v),length=array?v.length:keys.length;
+  for(let i=0;i<length;i++){if(i)add(1);if(!array){string(keys[i]);add(1);}visit(array?v[i]:v[keys[i]]);}
+ };
+ for(const body of Object.values(bodies)){visit(body);add(1);}return total;
+}
+// Actual producer writer, separately exercised with small faithful products.
+// All four encoded bodies remain charged by the output frame above. Refusal
+// happens before destination creation and never overwrites an earlier run.
+export function writeCurrentRebindProducts(destination,bodies,outputBytes){
+ demand(prepared.has(destination)&&Number.isSafeInteger(outputBytes)&&outputBytes>0&&outputBytes<=PRODUCTS&&bodies&&Object.keys(bodies).sort().join(',')==='facts,publication,request,result','Complete bounded prepared product writer required');
+ const expected=boundedCurrentRebindProductBytes(bodies,outputBytes);
+ const encoded=Object.entries(bodies).map(([name,b])=>({name,raw:valueBytes(b)})),combined=encoded.reduce((n,p)=>n+p.raw.length,0);
+ demand(combined===expected,'Canonical product byte count differs');
+ demand(encoded.every(p=>p.raw.length<=FILE)&&combined<=outputBytes,'Complete cold products exceed prospective output bound before writes: '+JSON.stringify({products:Object.fromEntries(encoded.map(p=>[p.name,p.raw.length])),combined_bytes:combined,output_bytes:outputBytes}));
+ demand(!exists(destination.destination),'Destination appeared during source acquisition');ordinaryAncestors(path.dirname(destination.destination));fs.mkdirSync(destination.destination,{mode:0o700});
+ for(const {name,raw}of encoded){const fd=fs.openSync(path.join(destination.destination,name+'.json'),fs.constants.O_WRONLY|fs.constants.O_CREAT|fs.constants.O_EXCL|fs.constants.O_NOFOLLOW,0o644);try{fs.writeFileSync(fd,raw);}finally{fs.closeSync(fd);}}
+ return combined;
 }
 // The complete source/native authority is authenticated before projection.
 // Only the already-proven selected-hook custody fields escape this completed
@@ -91,21 +130,21 @@ export function captureCurrentRebindProducts({destination,snapshot,plan,registry
  // The original-authority frame and complete row/patch checks have returned;
  // only needed rows, patches and compact custody remain live and charged.
  reclaimCompletedRebindFrame();
- const acquired=acquireCurrentRebindOperands(snapshot,registry,rows,patches,{targetSources:plan.target_sources,predecessorProof:plan.predecessor_proof,carriedMetadataBytes:priorCarryBytes+2*valueBytes({plan,proofs,originalLedger,executedCode,executionPreUse}).length});
+ const acquired=acquireCurrentRebindOperands(snapshot,registry,rows,patches,{targetSources:plan.target_sources,predecessorProof:plan.predecessor_proof,outputLimits:plan.limits,carriedMetadataBytes:priorCarryBytes+2*valueBytes({plan,proofs,originalLedger,executedCode,executionPreUse}).length});
  demand(acquired.acquisition_phases.every(p=>p.complete_phase_bytes<=plan.limits.complete_phase_bytes&&p.descriptors<=plan.limits.descriptors),'Actual acquisition exceeds admitted planned phase: '+JSON.stringify({limits:{complete_phase_bytes:plan.limits.complete_phase_bytes,descriptors:plan.limits.descriptors},phases:acquired.acquisition_phases.flatMap((p,index)=>p.complete_phase_bytes>plan.limits.complete_phase_bytes||p.descriptors>plan.limits.descriptors?[{index,kind:p.kind,complete_phase_bytes:p.complete_phase_bytes,descriptors:p.descriptors}]:[])}));
  // The complete acquisition/result helper has returned. Its table/group and
  // canonical scratch may be reclaimed; acquired proofs/snapshot stay live and charged.
  reclaimCompletedRebindFrame();
+ const outputPhaseBytes=admitCurrentRebindOutputFrame(snapshot.reader,plan.limits);
  const request={version:1,kind:'issued-native-additive-current-bank-rebind-v1',execution_commit:executionCommit,executed_code:executedCode,base_selection:nativeBaseSelection(snapshot.selection),authority_registry_sha256:valueSha(registry),original_rows:rows,original_patch_sha256s:patches.map(valueSha),current_targets:acquired.current_targets,current_rows:acquired.current_rows,acquisition:acquired.acquisition,execution:{command:executionPreUse.command,pre_use:executionPreUse.pre_use},size:snapshot.manifest.size,limits:plan.limits};
- const result=acquired.result,facts={version:1,kind:'native-additive-current-bank-rebind-facts-v1',execution_commit:executionCommit,request_sha256:valueSha(request),result_sha256:valueSha(result),complete_phase_bytes:Math.max(...acquired.acquisition_phases.map(p=>p.complete_phase_bytes)),descriptors:Math.max(...acquired.acquisition_phases.map(p=>p.descriptors)),acquisition_sha256:valueSha(acquired.acquisition),acquisition_phases:acquired.acquisition_phases};
+ const result=acquired.result;boundedCurrentRebindProductBytes({request,result},plan.limits.output_bytes);
+ const facts={version:1,kind:'native-additive-current-bank-rebind-facts-v1',execution_commit:executionCommit,request_sha256:valueSha(request),result_sha256:valueSha(result),complete_phase_bytes:Math.max(outputPhaseBytes,...acquired.acquisition_phases.map(p=>p.complete_phase_bytes)),descriptors:Math.max(...acquired.acquisition_phases.map(p=>p.descriptors)),acquisition_sha256:valueSha(acquired.acquisition),acquisition_phases:acquired.acquisition_phases};
  // These local output pins deliberately omit commit/OID: publication custody
  // is bound in a separate finished step after genuine Git retention. No future
  // or fabricated publication commit is claimed by a cold producer.
  const pin=(name,body)=>({path:name+'.json',bytes:valueBytes(body).length,sha256:valueSha(body)});
+ boundedCurrentRebindProductBytes({request,result,facts},plan.limits.output_bytes);
  const publication={version:1,kind:'native-additive-current-bank-rebind-publication-v1',execution_commit:executionCommit,request_sha256:valueSha(request),outputs:{facts:pin('facts',facts),result:pin('result',result)}};
- const bodies={request,result,facts,publication},encoded=Object.entries(bodies).map(([name,b])=>({name,raw:valueBytes(b)})),combined=encoded.reduce((n,p)=>n+p.raw.length,0);
- demand(encoded.every(p=>p.raw.length<=FILE)&&combined<=plan.limits.output_bytes,'Complete cold products exceed prospective output bound before writes');
- demand(!exists(destination.destination),'Destination appeared during source acquisition');ordinaryAncestors(path.dirname(destination.destination));fs.mkdirSync(destination.destination,{mode:0o700});
- for(const {name,raw}of encoded){const fd=fs.openSync(path.join(destination.destination,name+'.json'),fs.constants.O_WRONLY|fs.constants.O_CREAT|fs.constants.O_EXCL|fs.constants.O_NOFOLLOW,0o644);try{fs.writeFileSync(fd,raw);}finally{fs.closeSync(fd);}}
+ const bodies={request,result,facts,publication},combined=writeCurrentRebindProducts(destination,bodies,plan.limits.output_bytes);
  return {execution_commit:executionCommit,output_directory:destination.destination,products:Object.fromEntries(Object.entries(bodies).map(([name,b])=>[name,pin(name,b)])),combined_bytes:combined,acquisition_phases:acquired.acquisition_phases,source_inventory:acquired.input_inventory,limits:['Actual cold data acquisition/output only. External operating qualification, two-run equality and genuine immutable publication binding remain required. No selection or physical approval.']};
 }

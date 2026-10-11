@@ -13,7 +13,7 @@ let current=path.parse(p.path).root;for(const part of p.path.slice(current.lengt
 const stat=fs.lstatSync(p.path);demand(stat.isFile()&&stat.size===p.bytes&&(stat.mode&0o777)===p.mode,'Plan stat differs before read');
 const fd=fs.openSync(p.path,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);let raw;try{raw=fs.readFileSync(fd);const held=fs.fstatSync(fd),end=fs.lstatSync(p.path);for(const k of ['dev','ino','size','mode','mtimeMs','ctimeMs'])demand(stat[k]===held[k]&&held[k]===end[k],'Plan identity drift');}finally{fs.closeSync(fd);}
 demand(raw.length===p.bytes&&sha(raw)===p.sha256,'Whole raw plan differs');const plan=JSON.parse(raw);
-demand(plan.execution_commit===head&&plan.limits&&Number.isSafeInteger(plan.limits.complete_phase_bytes)&&plan.limits.complete_phase_bytes<=268435456&&Number.isSafeInteger(plan.limits.output_bytes)&&plan.limits.output_bytes<=4194304,'Actual injected plan/head/admission differs before imports');
+demand(plan.execution_commit===head&&plan.limits&&Number.isSafeInteger(plan.limits.complete_phase_bytes)&&plan.limits.complete_phase_bytes<=268435456&&Number.isSafeInteger(plan.limits.output_bytes)&&plan.limits.output_bytes>0&&plan.limits.output_bytes<=8388608,'Actual injected plan/head/admission differs before imports');
 const root=fs.realpathSync(process.cwd()),prefix='coordination/engineering/additive-native-gap-batch-20261008/composition-v2/';
 const {ImmutableReader,loadSelection,loadBaseSelection}=await import('../../../scripts/check-effective-geographic-regression.mjs');
 const {prepareCurrentRebindDestination,captureCurrentRebindProducts,validateCurrentRebindPlan,completePriorConservationFrame}=await import('./capture-current-rebind.mjs');
