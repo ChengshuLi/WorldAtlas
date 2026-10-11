@@ -57,7 +57,8 @@ No proposed input is called accepted merely because a hash matches.
    and joins published facts to that terminal/request. Actual JSONL records must
    match complete issued scope/order/counts; SOURCE targets and source-case bindings
    join the pinned whole handoff. Native retention requires the fixed complete asset
-   roster and actual inventory/ledger/envelope agreement. For rebind output, also supply
+   roster, an independent effective-target join through the immutable SOURCE
+   request and whole handoff, and actual inventory/ledger/patch/envelope agreement. For rebind output, also supply
    `custody` local paths for `code_source`, `issued_plan`, `stderr`, and `stdout`;
    raw code-source, issued-plan and stdout are joined to the immutable issued
    execution contract before provisional retention. These bodies remain provisional

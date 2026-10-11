@@ -264,8 +264,8 @@ test('coherent SOURCE inventory changes and native preparation facts omissions a
 
 test('native retention rejects a publication that omits the required ledger asset', t => {
   const root = directory(t), f = terminalFixture(root), r = f.reader;
-  const request = {...f.request, operation: 'unactivated-additive-native-batch-v1', additive: {scope_ids: f.request.source_rule.expected_ids, inputs: f.request.source_rule.inputs}};
-  const pin = r.add(prefix + 'native-request.json', request), facts = {...f.facts, request: pin, operation: request.operation, source_predecessor: request.additive};
+  const request = {...f.request, operation: 'unactivated-additive-native-batch-v1', additive: {scope_ids: f.request.source_rule.expected_ids, source_request_path: f.config.request.path, inputs: [...f.request.source_rule.inputs, f.config.request]}};
+  const pin = r.add(prefix + 'native-request.json', request), facts = {...f.facts, request: pin, operation: request.operation, source_predecessor: request.additive, input_descriptors: [request.report, ...request.additive.inputs, ...request.baseline.pins]};
   const decoded = Buffer.concat(request.additive.scope_ids.map(component_id => jsonBytes({component_id, native_cells: 0, disposition: 'rejected'}))), encoded = gzipSync(decoded);
   facts.assigned_cells = 0;
   const factRaw = jsonBytes(facts), publication = {...f.publication, facts: {bytes: factRaw.length, sha256: digest(factRaw)},
@@ -274,4 +274,31 @@ test('native retention rejects a publication that omits the required ledger asse
   write(root, 'run/facts.json', factRaw); write(root, 'run/publication.json', jsonBytes(publication));
   write(root, f.config.terminal, jsonBytes({...f.terminal, request_sha256: pin.sha256}));
   assert.throws(() => retainProducts({...f.config, request: pin}, root, r), /fixed native publication asset roster/);
+});
+
+test('native self-consistent target substitutions fail the independent immutable SOURCE join', t => {
+  const root = directory(t), f = terminalFixture(root), r = f.reader;
+  const request = {...f.request, operation: 'unactivated-additive-native-batch-v1', additive: {
+    scope_ids: f.request.source_rule.expected_ids, source_request_path: f.config.request.path, inputs: [...f.request.source_rule.inputs, f.config.request]}};
+  const pin = r.add(prefix + 'native-request.json', request);
+  function candidate(target) {
+    const rows = request.additive.scope_ids.map(component_id => ({component_id, target_id: target, disposition: 'assigned', native_cells: 1}));
+    const inventoryRaw = Buffer.concat(rows.map(jsonBytes)), inventory = gzipSync(inventoryRaw);
+    const ledger = {scope_ids: request.additive.scope_ids, rows: rows.map(row => ({...row, pixelIndex: 1})), assigned_cells: 3};
+    const products = {'base-native-manifest.json': jsonBytes({}), 'ledger-batch.json': jsonBytes(ledger),
+      'owners-batch.json.gz': gzipSync(Buffer.from('{}')), 'features.json': jsonBytes([]), 'owner-window.json': jsonBytes([]), 'virtual-owner-window.json': jsonBytes([])};
+    products['patch-batch.json'] = jsonBytes({ledger_sha256: digest(products['ledger-batch.json']), rows: [{y: 1, runs: [[0, 3, 1]]}]});
+    products['release-envelope.json'] = jsonBytes({additiveRelease: Object.fromEntries(Object.entries({base_manifest: 'base-native-manifest.json',
+      ledger: 'ledger-batch.json', patch: 'patch-batch.json', owner_roster: 'owners-batch.json.gz'}).map(([role, name]) => [role, {bytes: products[name].length, sha256: digest(products[name])}]))});
+    const facts = jsonBytes({...f.facts, request: pin, operation: request.operation, source_predecessor: request.additive, assigned_cells: 3,
+      input_descriptors: [request.report, ...request.additive.inputs, ...request.baseline.pins]});
+    const publication = {version: 1, complete: true, facts: {bytes: facts.length, sha256: digest(facts)},
+      inventory: {bytes: inventory.length, sha256: digest(inventory), uncompressed_bytes: inventoryRaw.length, uncompressed_sha256: digest(inventoryRaw)},
+      assets: Object.entries(products).map(([path, raw]) => ({path, bytes: raw.length, sha256: digest(raw)}))};
+    for (const [name, raw] of Object.entries({...products, 'facts.json': facts, 'inventory.jsonl.gz': inventory, 'publication.json': jsonBytes(publication)})) write(root, 'run/' + name, raw);
+    write(root, f.config.terminal, jsonBytes({...f.terminal, request_sha256: pin.sha256}));
+  }
+  candidate('target'); assert.ok(retainProducts({...f.config, request: pin}, root, r)['ledger-batch.json']);
+  candidate('foreign-native-target');
+  assert.throws(() => retainProducts({...f.config, request: pin}, root, r), /immutable SOURCE handoff/);
 });

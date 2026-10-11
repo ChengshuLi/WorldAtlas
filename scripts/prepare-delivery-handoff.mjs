@@ -227,6 +227,17 @@ function sourceNativeJoin(request, facts, publication, inventoryRaw, reader, pro
     need(!publication.assets?.length, 'SOURCE publication has foreign native assets');
   } else {
     need(same(facts.source_predecessor, stage), 'Native facts changed source predecessor');
+    const sourcePins = stage.inputs.filter(p => p.path === stage.source_request_path);
+    need(sourcePins.length === 1, 'Native output needs the immutable issued SOURCE request');
+    const issuedSource = reader.json(sourcePins[0]), sourceRule = issuedSource.source_rule;
+    need(issuedSource.operation === 'retained-land-source-premises-v1' && same(sourceRule?.expected_ids, ids), 'Native scope differs from immutable SOURCE scope');
+    const handoffPins = sourceRule.inputs.filter(p => p.path === sourceRule.cases_path);
+    need(handoffPins.length === 1, 'Native output needs the complete original SOURCE handoff');
+    const handoff = reader.json(handoffPins[0]), sourceCases = handoff.candidate_source_native_bindings;
+    need(same(handoff.scopeIds, sourceRule.cohort_ids) && same(sourceCases?.map(row => row.component_id), sourceRule.cohort_ids), 'Native original SOURCE handoff scope changed');
+    const targets = new Map(sourceCases.map(row => [row.component_id, row.retained_payload?.target_stable_location_id]));
+    need(rows.every(row => !['assigned', 'zero-cell'].includes(row.disposition) || row.target_id === targets.get(row.component_id)),
+      'Native effective target differs from immutable SOURCE handoff');
     need(rows.every(row => Number.isSafeInteger(row.native_cells) && row.native_cells >= 0), 'Native inventory has invalid measured cell count');
     const cells = rows.reduce((sum, row) => sum + row.native_cells, 0);
     need(Number.isSafeInteger(cells) && facts.assigned_cells === cells, 'Native facts assigned count differs from actual inventory');
@@ -244,6 +255,12 @@ function sourceNativeJoin(request, facts, publication, inventoryRaw, reader, pro
       need(ledger.assigned_cells === cells, 'Native ledger assigned count differs from actual inventory');
       const ledgerHash = digest(products['ledger-batch.json']);
       need(patch.ledger_sha256 === ledgerHash, 'Native patch is not bound to actual ledger');
+      const owners = new Set(ledger.rows.filter(row => ['assigned', 'zero-cell'].includes(row.disposition)).map(row => row.pixelIndex));
+      need(Array.isArray(patch.rows) && patch.rows.every(row => Array.isArray(row.runs) && row.runs.every(run =>
+        Array.isArray(run) && run.length === 3 && run.every(Number.isSafeInteger) && run[0] >= 0 && run[1] > run[0] && owners.has(run[2]))),
+      'Native patch owner/run differs from effective ledger');
+      need(patch.rows.reduce((sum, row) => sum + row.runs.reduce((n, run) => n + run[1] - run[0], 0), 0) === cells,
+        'Native patch measured cells differ from inventory/ledger');
       for (const [role, name] of Object.entries({base_manifest: 'base-native-manifest.json', ledger: 'ledger-batch.json', patch: 'patch-batch.json', owner_roster: 'owners-batch.json.gz'})) {
         const descriptor = envelope.additiveRelease?.[role];
         need(descriptor?.bytes === products[name].length && descriptor.sha256 === digest(products[name]), 'Native envelope output join differs: ' + role);
