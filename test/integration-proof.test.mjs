@@ -305,3 +305,15 @@ test('selected-data refuses missing/failed/skipped/duplicate package consumers a
     const f=selectedProofFixture();mutate(f);assert.equal(await integrationProof({...f.options,runId:12,runAttempt:1}),null);
   }
 });
+
+test('proof fallback reports existing allowlisted decisions without extra requests',async()=>{
+  for(const [reason,mutate] of [
+    ['tested-tree-mismatch',f=>f.options.candidate.object.tree.sha='different'],
+    ['trusted-checker-identity-changed',f=>f.options.authored.entries.get(PROOF_PATHS[1]).sha='different'],
+    ['run-identity-or-state',f=>f.run.run_attempt=2],
+    ['required-code-job-or-step',f=>f.jobs[1].steps.pop()]]){
+    const f=fixture();mutate(f);let observed;const calls=[];const api=f.options.api;
+    const proof=await integrationProof({...f.options,runId:12,runAttempt:1,api:async route=>{calls.push(route);return api(route);},onUnavailable:value=>{observed=value;}});
+    assert.equal(proof,null);assert.deepEqual(observed,{reason});assert(calls.length<=3);
+  }
+});

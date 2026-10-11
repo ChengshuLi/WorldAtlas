@@ -25,31 +25,35 @@ export function successfulGeographyJob(jobs) {
 // immutable blobs to main and the entire tested tree to the candidate connects
 // GitHub's run metadata to the bytes actually executed, rather than treating a
 // PR merge-ref run's head_sha as evidence that it tested the authored head.
-export async function integrationProof({api, repo, number, head, profile, testSelection = 'complete', baseline, authored, candidate, runId, runAttempt}) {
-  if (!['complete','selected-data'].includes(testSelection) || (testSelection === 'selected-data' && profile !== 'full')) return null;
+export async function integrationProof({api, repo, number, head, profile, testSelection = 'complete', baseline, authored, candidate, runId, runAttempt, onUnavailable = () => {}}) {
+  const unavailable = reason => {onUnavailable({reason});return null;};
+  let reason = 'no-completed-code-run';
+  if (!['complete','selected-data'].includes(testSelection) || (testSelection === 'selected-data' && profile !== 'full')) return unavailable('invalid-test-selection');
   if (runId !== undefined && (!Number.isSafeInteger(runId) || runId < 1 ||
-      !Number.isSafeInteger(runAttempt) || runAttempt < 1)) return null;
-  if (runAttempt !== undefined && runId === undefined) return null;
-  if (authored.object.tree.sha !== candidate.object.tree.sha) return null;
+      !Number.isSafeInteger(runAttempt) || runAttempt < 1)) return unavailable('invalid-run-pin');
+  if (runAttempt !== undefined && runId === undefined) return unavailable('invalid-run-pin');
+  if (authored.object.tree.sha !== candidate.object.tree.sha) return unavailable('tested-tree-mismatch');
   for (const path of PROOF_PATHS) {
     const approved = baseline.entries.get(path), tested = authored.entries.get(path);
     if (!approved || approved.type !== 'blob' || approved.mode !== '100644' ||
-        approved.sha !== tested?.sha || approved.mode !== tested?.mode) return null;
+        approved.sha !== tested?.sha || approved.mode !== tested?.mode) return unavailable('trusted-checker-identity-changed');
   }
   const workflow = await api(`${prefix(repo)}/git/blobs/${baseline.entries.get(WORKFLOW_PATH).sha}`);
   const text = Buffer.from(workflow.content, 'base64').toString('utf8');
   if (!text.includes('ref: ${{ github.event.pull_request.head.sha }}') ||
-      !text.includes('name: Complete regression shard') || !text.includes('name: Build hosted assets')) return null;
+      !text.includes('name: Complete regression shard') || !text.includes('name: Build hosted assets')) return unavailable('workflow-contract-unavailable');
   const runs = runId ? [await api(`${prefix(repo)}/actions/runs/${runId}`)] :
     (await api(`${prefix(repo)}/actions/workflows/merge-integration-checks.yml/runs?head_sha=${head}&event=pull_request&per_page=100`)).workflow_runs;
-  if (!Array.isArray(runs)) return null;
+  if (!Array.isArray(runs)) return unavailable('run-inventory-unavailable');
   for (const run of runs) {
+    reason = 'run-identity-or-state';
     if (!Number.isSafeInteger(run.id) || run.id < 1 || !Number.isSafeInteger(run.run_attempt) || run.run_attempt < 1 ||
         (runId !== undefined && (run.id !== runId || run.run_attempt !== runAttempt)) || run.head_sha !== head || run.event !== 'pull_request' || run.path !== WORKFLOW_PATH ||
         run.repository?.full_name !== repo || run.head_repository?.full_name !== repo ||
         run.status !== 'completed' || !['success', 'failure'].includes(run.conclusion) ||
         !run.pull_requests?.some(pr => pr.number === number && pr.head?.sha === head)) continue;
     const jobs = await githubPages(async route => (await api(route)).jobs, `${prefix(repo)}/actions/runs/${run.id}/attempts/${run.run_attempt}/jobs`);
+    reason = 'failure-outside-evidence';
     // A PR-body edit can invalidate this run's evidence job after all code
     // checks finish. Current authority is checked independently by both merge
     // phases. Reuse only that narrow failure; other failed/skipped jobs do not
@@ -62,6 +66,7 @@ export async function integrationProof({api, repo, number, head, profile, testSe
       jobs.some(job => job.status !== 'completed' ||
         job.conclusion !== (job.name === 'evidence' ? 'failure' :
           testSelection === 'selected-data' && /^regression(?: \(\d\))?$/.test(job.name) ? 'skipped' : 'success')))) continue;
+    reason = 'required-code-job-or-step';
     const expected = testSelection === 'selected-data' ? [] : profile === 'full' ? [0,1,2] : [0];
     if (testSelection === 'selected-data') {
       const skipped = jobs.filter(job => /^regression(?: \(\d\))?$/.test(job.name));
@@ -86,6 +91,7 @@ export async function integrationProof({api, repo, number, head, profile, testSe
       return job?.status === 'completed' && job.conclusion === 'success' &&
         required.every(name => job.steps?.some(step => step.name === name && step.status === 'completed' && step.conclusion === 'success'));
     })) continue;
+    reason = 'profile-job-unavailable';
     const selector = jobs.find(job => job.name === 'profile');
     if (selector?.conclusion !== 'success' || selector.status !== 'completed') continue;
     const geography = successfulGeographyJob(jobs);
@@ -93,5 +99,5 @@ export async function integrationProof({api, repo, number, head, profile, testSe
       ...(testSelection === 'selected-data' ? {test_selection: testSelection} : {}),
       ...(geography ? {geography_job_id: geography.id} : {})};
   }
-  return null;
+  return unavailable(reason);
 }

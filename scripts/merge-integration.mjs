@@ -323,9 +323,9 @@ export async function prepareIntegration(options) {
         selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files: state.files, baseline, authored});
       } catch { /* Unknown applicability retains the complete suite. */ }
     }
-    let proof = null;
-    try { proof = await integrationProof({...options, head: state.pr.head.sha, profile, testSelection: selection?.test_selection,
-      baseline: baseline ?? await tree(options.api, options.repo, state.base), authored, candidate: integrated}); } catch { /* unavailable proof requires isolated tests */ }
+    let proof = null, proofUnavailable = null;
+    try { proof = await integrationProof({...options, head: state.pr.head.sha, profile, testSelection: selection?.test_selection, onUnavailable: value => {proofUnavailable = value;},
+      baseline: baseline ?? await tree(options.api, options.repo, state.base), authored, candidate: integrated}); } catch { proofUnavailable = {reason: 'proof-read-unavailable'}; /* isolated tests remain required */ }
     let geographyProof = null;
     if (proof && options.geographyProofLoader) {
       try {
@@ -338,7 +338,7 @@ export async function prepareIntegration(options) {
         }
       } catch { /* A missing original report never discards valid regression proof or waives fresh geography. */ }
     }
-    return {...state, candidate, profile, ...selection, proof, geography_proof: geographyProof,
+    return {...state, candidate, profile, ...selection, proof, proof_unavailable: proofUnavailable, geography_proof: geographyProof,
       candidate_refresh_attempts: fresh.attempts, candidate_ref: fresh.reference};
   } catch (error) {
     if (fresh.reference) {
