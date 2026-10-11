@@ -106,10 +106,37 @@ def main():
     selected_fit = [r for r in fit['cases'] if r['source_product']['product_id'] == 'gb:PHL:ADM3']
     if fit['batch_id'] != BATCH or [r['component_id'] for r in selected_fit] != ids or len(ids) != 9:
         raise ValueError('Exact retained nine-case scope differs')
+    state_path = FIT.rsplit('/', 1)[0] + '/component-state-318.json'
+    family_path = FIT.rsplit('/', 1)[0] + '/family-roster-122.json'
+    state = json.loads(read(state_path, expected={'bytes': 505063, 'sha256': '8aaa5d4558eb5137775c159ec234d3dc2a9a90ae965aeaaf27086a63d0462cfd'}))
+    ledger = json.loads(read(family_path, expected={'bytes': 39180, 'sha256': 'acb22105b074fefca33b84488d0d0322ebdba3195a3eff4b0421f53668e651ef'}))
+    states, ledger_families = unique(state['rows'], 'component_id'), unique(ledger['families'], 'family_id')
+    if len(states) != 318 or len(ledger_families) != 122 or state['family_rows'] != ledger['families'] or state['batch_id'] != BATCH or ledger['batch_id'] != BATCH:
+        raise ValueError('Accepted unchanged source ledger differs')
+    ledger_ids = [cid for row in ledger_families.values() for cid in row['component_ids']]
+    if len(ledger_ids) != 318 or len(set(ledger_ids)) != 318 or set(ledger_ids) != set(states):
+        raise ValueError('Accepted ledger membership incomplete')
+    for row in selected_fit:
+        if row['component_id'] not in states or ledger_families[row['family_id']]['component_ids'].count(row['component_id']) != 1:
+            raise ValueError('Accepted source record escaped original ledger')
     current = json.loads(own('vintages/phl-current-neighbors-001/result.json'))
     if current['scopeIds'] != ids or current['complete_owner_rows'] != 49625 or current['complete_source_parts'] != 36:
         raise ValueError('Current selected context scope incomplete')
     contexts = unique(current['rows'], 'component_id')
+    # The Node-written context preserves numeric values, not Python's original
+    # 0.0/0 spelling. Recover preimages only from authenticated complete banks.
+    ordinary_targets = {}
+    for name in ['data/geography/part-18.json', 'data/geography/part-19.json']:
+        context_pin = next(p for p in current['inputs'] if p['path'] == name)
+        bank = unique(json.loads(read(name, expected=context_pin))['features'], 'id')
+        for retained in selected_fit:
+            identity = retained['compatible_recorded_subject']['record']['id']
+            if identity in bank:
+                if identity in ordinary_targets:
+                    raise ValueError('Duplicate ordinary target across banks')
+                ordinary_targets[identity] = bank[identity]
+    if len(ordinary_targets) != 9:
+        raise ValueError('Incomplete original target preimages')
     candidates, physical, native, restorations = [], [], [], []
     report = json.loads(read('coordination/engineering/global-physical-comparison-20261006/results/report.json'))
     report_products = unique(report['products'], 'path')
@@ -159,6 +186,8 @@ def main():
             families[identity] = rows[identity]
     if index['operational_batch_count'] != 594 or index['component_count'] != 95173 or len(batches) != 594 or batch['component_count'] != 318 or len(batch['fine_family_ids']) != 122 or set(families) != wanted_families:
         raise ValueError('Original programme membership differs')
+    if set(batch['fine_family_ids']) != set(ledger_families):
+        raise ValueError('Accepted ledger changed original dispatch families')
     members = []
     for row in selected_fit:
         family = families[row['family_id']]
@@ -189,8 +218,8 @@ def main():
             raise ValueError('Source/physical candidate identity differs')
         if len(context['candidate_neighbors']) != 1 or context['candidate_neighbors'][0]['feature']['id'] != subject['id'] or any(r['candidate_bbox_intersects'] for r in context['additive_geometry_screen']):
             raise ValueError('Unproven extra current possible neighbor')
-        target = context['candidate_neighbors'][0]['feature']
-        if sha(canon(target)) != subject['original_feature_sha256'] or target['properties']['parent_id'] != subject['original_parent_id']:
+        target = ordinary_targets[subject['id']]
+        if target != context['candidate_neighbors'][0]['feature'] or sha(canon(target)) != subject['original_feature_sha256'] or target['properties']['parent_id'] != subject['original_parent_id']:
             raise ValueError('Actual selected target or parent changed')
         hits = op['feature_intersections']
         if len(hits) != 1 or hits[0]['binding']['recorded_stable_subjects'] != [subject] or not hits[0]['source_feature_covers_entire_component']:
@@ -217,8 +246,12 @@ def main():
                       'retained_source_operation_row': {'source_comparison_record': op, 'positive_area_recorded_source_subject_ids': [target['id']], 'positive_area_source_feature_intersections': [hit['binding']]},
                       'original_source_rule_fit_record': retained})
         physical_bindings.append({'component_id': cid, 'physical_comparison': {'row': phys}, 'original_queried_source_metadata': [{'original_source_record_metadata': r} for r in metadata]})
-        target_bindings.append({'target_id': target['id'], 'feature_sha256': sha(canon(target)), 'feature_bytes_base64': base64.b64encode(canon(target)).decode(),
-                                'geometry_sha256': sha(canon(target['geometry'])), 'geometry_bytes_base64': base64.b64encode(canon(target['geometry'])).decode()})
+        certificate_entry = context['candidate_neighbors'][0]['certificate_entry']
+        if certificate_entry[6] != sha(canon(target)) or certificate_entry[7] != sha(canon(target['geometry'])):
+            target_bindings.append({'target_id': target['id'], 'feature_sha256': sha(canon(target)), 'feature_bytes_base64': base64.b64encode(canon(target)).decode(),
+                                    'geometry_sha256': sha(canon(target['geometry'])), 'geometry_bytes_base64': base64.b64encode(canon(target['geometry'])).decode()})
+    if {r['target_id'] for r in target_bindings} != {'gb:PHL:ADM3:30758251B13625365204801', 'gb:PHL:ADM3:30758251B36088332034654'}:
+        raise ValueError('Unexpected cross-language target alias set')
     scope = {'execution_cohort_id': COHORT, 'scopeIds': ids,
              'original_gap_membership': {'version': 1, 'index': pins[BASE + ':' + index_path], 'members': members},
              'original_membership_evidence': {'epoch': 'Immutable current-at-freeze dispatch view; passive provenance only.', 'original_batch_size': 318, 'original_family_count': 122, 'programme_batches': 594, 'programme_components': 95173},
@@ -228,6 +261,7 @@ def main():
              'current_neighbor_binding': current,
              'physical_restoration': {'restorations': restorations, 'source_metadata_reused': True, 'component_products_restored': 8},
              'source_rule_fit_binding': pins[BASE + ':' + FIT],
+             'accepted_ledger_bindings': [pins[BASE + ':' + state_path], pins[BASE + ':' + family_path]],
              'constructor_disposition': {'source_relative_premises_require_independent_review': True, 'literal_representation': 'Complete unchanged retained target plus complete original candidate primitive; no dissolve or coordinate normalization.'},
              'unknowns': ['Current physical/legal truth, observation dates, source registration accuracy, cause and repair authority remain unapproved.',
                           'Current complete envelopes identify only each intended target as a possible base neighbor; exact target overlap/gain predicates and native exclusion remain unexecuted here.',
