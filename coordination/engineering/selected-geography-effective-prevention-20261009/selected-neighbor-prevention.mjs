@@ -58,9 +58,9 @@ export function readSupportedProgrammeCatalogue(reader) {
  const version=execFileSync(reader.gitExecutable,['-c','core.hooksPath=/dev/null','-C',moduleRoot,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
  demand(/^[a-f0-9]{40}$/.test(version),'Missing executing trusted policy checkout');
  const modulePin=reader.descriptor(PROGRAMME_MODULE,version);
- demand(reader.used+2*modulePin.bytes<=PHASE,'Policy helper identity scratch exceeds complete phase');reader.used+=2*modulePin.bytes;
+ demand(reader.used+2*modulePin.bytes<=PHASE,'Policy helper identity scratch exceeds complete phase');reader.used+=modulePin.bytes;
  const moduleBody=fs.readFileSync(fileURLToPath(import.meta.url));
- demand(moduleBody.length===modulePin.bytes&&sha(moduleBody)===sha(reader.git('cat-file','blob',modulePin.git_blob_oid)),'Executing policy helper differs from trusted checkout');
+ demand(moduleBody.length===modulePin.bytes&&sha(moduleBody)===sha(reader.read(PROGRAMME_MODULE,{version})),'Executing policy helper differs from trusted checkout');
  const descriptor=reader.descriptor(PROGRAMME_CATALOGUE,version);
  demand(descriptor.mode==='100644'&&descriptor.bytes<=1048576&&reader.used+3*descriptor.bytes<=PHASE,'Trusted policy body exceeds complete phase');
  // Whole bytes plus parsed/canonical scratch are charged before parsing. The
@@ -74,6 +74,13 @@ export function matchSupportedProgramme(catalogue,{preimageVersion,sourceProfile
  const matches=catalogue.programs.filter(p=>p.preimage_version===preimageVersion&&p.source_profile===sourceProfile
   &&same(sourceCode,p.source_executed_code)&&same(nativeCode,p.native_executed_code));
  demand(matches.length===1,'Unknown/ambiguous original source/native policy program closure');return matches[0];
+}
+
+// Only the compact reviewed authority escapes. The full policy graph and
+// exact matching scratch finish before native member phases reset accounting.
+function completedProgrammeAuthority(reader,request) {
+ const policy=readSupportedProgrammeCatalogue(reader),supported=matchSupportedProgramme(policy.catalogue,request);
+ return {accepted_head:supported.accepted_head,independent_review_comment:supported.independent_review_comment,catalogue:policy.pin};
 }
 
 function pinCheck(p){
@@ -546,12 +553,13 @@ export function readRetainedRegistryAuthority(reader, entry) {
  demand(same(preimage,custody.rule_preimage)&&custody.rule_sha256===entry.rule_sha256,'Registry relabelled original executed rule');
  const original=originalAuthorities.get(custody).bodies;
  const codeIdentity=rows=>rows.map(p=>{demand(Object.keys(p).sort().join(',')==='bytes,path,sha256','Unsupported original complete code roster shape');return {path:p.path,bytes:p.bytes,sha256:p.sha256};});
- const policy=readSupportedProgrammeCatalogue(reader);
- const supported=matchSupportedProgramme(policy.catalogue,{preimageVersion:preimage.version,sourceProfile:custody.source_rule.profile??null,sourceCode:codeIdentity(original.source_request.executed_code),nativeCode:codeIdentity(original.native_request.executed_code)});
- demand(supported&&same(codeIdentity(original.source_request.executed_code),codeIdentity(supported.source_executed_code))&&same(codeIdentity(original.native_request.executed_code),codeIdentity(supported.native_executed_code)),'Unreviewed source/native policy program closure');
+ const programmeAuthority=completedProgrammeAuthority(reader,{preimageVersion:preimage.version,sourceProfile:custody.source_rule.profile??null,sourceCode:codeIdentity(original.source_request.executed_code),nativeCode:codeIdentity(original.native_request.executed_code)});
+ const programmeCarry=2*valueBytes(programmeAuthority).length;
+ demand(reader.used+programmeCarry<=PHASE,'Programme authority carry exceeds complete phase');
+ reader.metadataBytes+=programmeCarry;reader.used+=programmeCarry;
  const source=qualifyOriginalSourceAuthority(custody),native=qualifyOriginalNativeAuthority(custody,binding.native_proof);
  return freeze({version:1,kind:'authenticated-registry-source-custody-v1',authority_sha256:entry.authority_sha256,
-  rule_sha256:entry.rule_sha256,original_program_authority:{accepted_head:supported.accepted_head,independent_review_comment:supported.independent_review_comment,catalogue:policy.pin},policy_id:entry.policy_id,policy_version:entry.policy_version,
+  rule_sha256:entry.rule_sha256,original_program_authority:programmeAuthority,policy_id:entry.policy_id,policy_version:entry.policy_version,
   pins,original_pins:binding.original_pins,source_scope_ids:custody.source_scope_ids,
   source_rows:source.rows,native_proof:native,original_ledger:custody.ledger,complete_phase_bytes:reader.used,
   limitations:['Whole original preimage, issued requests and qualified source predecessor authenticated. Policy semantics and actual current selected-bank applicability remain separately required; this view cannot authorize selection.']});
