@@ -1,0 +1,445 @@
+UNREVIEWED, NOT ADOPTED: issue1745 deferred producer/issuer/supervisor work. This is a recovery checkpoint, not executable activation or proof. Consumer PR1751 stays isolated.
+
+diff --git a/coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs b/coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs
+index 83c2e7e0..9193afd5 100644
+--- a/coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs
++++ b/coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs
+@@ -4,7 +4,7 @@
+ import fs from 'node:fs';import path from 'node:path';
+ import {ImmutableReader} from '../../../scripts/check-effective-geographic-regression.mjs';
+ import {CURRENT_REBIND_CODE,admitCurrentRebindOutputFrame,normaliseRetainedRepairLedger,nativeBaseSelection,requirePriorAdditiveConservation,readRetainedRegistryAuthority,acquireCurrentRebindOperands,currentRebindSourceView,reclaimCompletedRebindFrame,valueBytes,valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+-const FILE=33554432,PHASE=268435456,PRODUCTS=8388608,prepared=new WeakSet(),completedPrior=new WeakMap();
++const FILE=33554432,prepared=new WeakSet(),completedPrior=new WeakMap();
+ const demand=(v,m)=>{if(!v)throw Error(m);},same=(a,b)=>valueBytes(a).equals(valueBytes(b));
+ const exists=p=>{try{return fs.lstatSync(p);}catch(e){if(e.code==='ENOENT')return null;throw e;}};
+ const ordinaryAncestors=p=>{let current=path.parse(p).root;for(const part of p.slice(current.length).split(path.sep)){if(!part)continue;current=path.join(current,part);const s=exists(current);demand(s&&s.isDirectory()&&!s.isSymbolicLink(),'Require ordinary existing output ancestor');}};
+@@ -18,14 +18,14 @@ export function validateCurrentRebindPlan(plan,{executionCommit,baseSelection,re
+  demand(plan&&Object.keys(plan).filter(k=>k!=='original_inputs').sort().join(',')==='authority_registry_sha256,base_selection,executed_code,execution_commit,kind,limits,original_patch_sha256s,original_rows_sha256,predecessor_proof,target_sources,version','Foreign actual issued rebind plan');
+  if(explicit)demand(Array.isArray(plan.original_inputs)&&plan.original_inputs.length===2&&new Set(plan.original_inputs.map(p=>p?.path)).size===2&&plan.original_inputs.every(p=>p&&Object.keys(p).sort().join(',')==='bytes,commit,git_blob_oid,mode,path,sha256'&&p.mode==='100644'&&typeof p.path==='string'&&!p.path.includes('\\')&&!p.path.split('/').some(s=>!s||s==='.'||s==='..')&&/^[a-f0-9]{40}$/.test(p.commit)&&/^[a-f0-9]{40}$/.test(p.git_blob_oid)&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=FILE&&/^[a-f0-9]{64}$/.test(p.sha256)),'Missing complete original input descriptors');
+  demand(plan.version===1&&plan.kind==='issued-current-rebind-acquisition-plan-v1'&&plan.execution_commit===executionCommit&&/^[a-f0-9]{40}$/.test(executionCommit)&&same(plan.base_selection,baseSelection)&&plan.authority_registry_sha256===valueSha(registry)&&plan.original_rows_sha256===valueSha(originalRows)&&same(plan.executed_code,executedCode)&&same(executedCode.map(p=>p.path),CURRENT_REBIND_CODE),'Actual planned source/method/selected identity differs');
+- demand(plan.limits&&Object.keys(plan.limits).sort().join(',')==='complete_phase_bytes,descriptors,output_bytes,rss_bytes,sampled_stop_bytes,wall_seconds'&&Object.values(plan.limits).every(n=>Number.isSafeInteger(n)&&n>0)&&plan.limits.complete_phase_bytes<=PHASE&&plan.limits.descriptors<=512&&plan.limits.output_bytes<=PRODUCTS&&plan.limits.rss_bytes<=536870912&&plan.limits.sampled_stop_bytes<=402653184&&plan.limits.sampled_stop_bytes<=plan.limits.rss_bytes,'Planned complete phase/operating/output bounds differ');
++ demand(plan.limits&&Object.keys(plan.limits).sort().join(',')==='complete_phase_bytes,descriptors,output_bytes,rss_bytes,sampled_stop_bytes,wall_seconds'&&Object.values(plan.limits).every(n=>Number.isSafeInteger(n)&&n>0)&&plan.limits.descriptors<=512&&plan.limits.sampled_stop_bytes<=plan.limits.rss_bytes,'Planned complete phase/operating/output bounds differ');
+  demand(Array.isArray(plan.target_sources)&&plan.target_sources.length>0&&Array.isArray(plan.original_patch_sha256s)&&plan.original_patch_sha256s.length===registry.entries.length,'Missing complete planned input roster');return plan;
+ }
+ // Exact canonical byte count without building a complete JSON string, graph or
+ // Buffer. Key order changes no length. Refuse on the first over-budget scalar
+ // or delimiter, before the whole-output representations can be allocated.
+ export function boundedCurrentRebindProductBytes(bodies,limit){
+- demand(Number.isSafeInteger(limit)&&limit>0&&limit<=PRODUCTS,'Bounded product byte limit required');
++ demand(Number.isSafeInteger(limit)&&limit>0,'Bounded product byte limit required');
+  let total=0;const add=n=>{total+=n;demand(total<=limit,'Complete cold products exceed prospective output bound before writes');};
+  const string=s=>{add(2);for(let i=0;i<s.length;i++){
+   const c=s.charCodeAt(i);
+@@ -51,7 +51,7 @@ export function boundedCurrentRebindProductBytes(bodies,limit){
+ // All four encoded bodies remain charged by the output frame above. Refusal
+ // happens before destination creation and never overwrites an earlier run.
+ export function writeCurrentRebindProducts(destination,bodies,outputBytes){
+- demand(prepared.has(destination)&&Number.isSafeInteger(outputBytes)&&outputBytes>0&&outputBytes<=PRODUCTS&&bodies&&Object.keys(bodies).sort().join(',')==='facts,publication,request,result','Complete bounded prepared product writer required');
++ demand(prepared.has(destination)&&Number.isSafeInteger(outputBytes)&&outputBytes>0&&bodies&&Object.keys(bodies).sort().join(',')==='facts,publication,request,result','Complete bounded prepared product writer required');
+  const expected=boundedCurrentRebindProductBytes(bodies,outputBytes);
+  const encoded=Object.entries(bodies).map(([name,b])=>({name,raw:valueBytes(b)})),combined=encoded.reduce((n,p)=>n+p.raw.length,0);
+  demand(combined===expected,'Canonical product byte count differs');
+@@ -100,7 +100,7 @@ export function completePriorConservationFrame(snapshot,registry,originalLedger,
+  reader.metadataBytes=8*1048576+2*snapshot.metadataBytes+2*valueBytes({registry,originalLedger,executionMetadata,inventory:[...reader.inventory],phases:snapshot.acquisitionPhases}).length+4*PRIOR_MARKER_MAX+(snapshot.acquisition_buffer_bytes??0);reader.phase();
+  const record={repo:reader.repo,commit:reader.version,selection_sha256:valueSha(snapshot.selection),manifest_sha256:valueSha(snapshot.manifest),owner_identity:priorOwnerIdentity(snapshot),registry_sha256:valueSha(registry),ledger_sha256:valueSha(originalLedger),prior_phases:structuredClone(snapshot.acquisitionPhases),prior_inventory:[...reader.inventory.values()].map(pin=>({...pin})),completion_phase_bytes:reader.used};
+  const limit=executionMetadata.plan.limits.complete_phase_bytes;
+- demand(Number.isSafeInteger(limit)&&limit>0&&limit<=PHASE&&record.prior_phases.length>0&&record.prior_phases.every(p=>Number.isSafeInteger(p.complete_phase_bytes)&&p.complete_phase_bytes>0&&p.complete_phase_bytes<=limit)&&record.completion_phase_bytes<=limit,'Completed prior phase exceeds issued child bound: '+JSON.stringify({limit,completion_phase_bytes:record.completion_phase_bytes,phases:record.prior_phases.map((p,index)=>({index,kind:p.kind,complete_phase_bytes:p.complete_phase_bytes}))}));
++ demand(Number.isSafeInteger(limit)&&limit>0&&record.prior_phases.length>0&&record.prior_phases.every(p=>Number.isSafeInteger(p.complete_phase_bytes)&&p.complete_phase_bytes>0&&p.complete_phase_bytes<=limit)&&record.completion_phase_bytes<=limit,'Completed prior phase exceeds issued child bound: '+JSON.stringify({limit,completion_phase_bytes:record.completion_phase_bytes,phases:record.prior_phases.map((p,index)=>({index,kind:p.kind,complete_phase_bytes:p.complete_phase_bytes}))}));
+  const raw=valueBytes(record);demand(raw.length<=PRIOR_MARKER_MAX,'Complete private prior marker exceeds bound');
+  const freeze=v=>{if(v&&typeof v==='object'){for(const child of Object.values(v))freeze(child);Object.freeze(v);}return v;};freeze(record);
+  const token=Object.freeze({});completedPrior.set(token,{record,sha256:valueSha(record),bytes:raw.length});return token;
+@@ -109,7 +109,7 @@ function consumeCompletedPrior(token,snapshot,registry,originalLedger,plan){
+  const completed=completedPrior.get(token);demand(completed&&completed.bytes<=PRIOR_MARKER_MAX&&valueSha(completed.record)===completed.sha256,'Require unchanged privately completed prior conservation');
+  currentRebindSourceView(snapshot);
+  const p=completed.record;
+- const limit=plan?.limits?.complete_phase_bytes;demand(Number.isSafeInteger(limit)&&limit>0&&limit<=PHASE&&p.prior_phases.every(p=>p.complete_phase_bytes<=limit)&&p.completion_phase_bytes<=limit,'Completed prior phase exceeds current issued child bound');
++ const limit=plan?.limits?.complete_phase_bytes;demand(Number.isSafeInteger(limit)&&limit>0&&p.prior_phases.every(p=>p.complete_phase_bytes<=limit)&&p.completion_phase_bytes<=limit,'Completed prior phase exceeds current issued child bound');
+  demand(snapshot.reader.repo===p.repo&&snapshot.reader.version===p.commit&&valueSha(snapshot.selection)===p.selection_sha256&&valueSha(snapshot.manifest)===p.manifest_sha256&&same(priorOwnerIdentity(snapshot),p.owner_identity)&&valueSha(registry)===p.registry_sha256&&valueSha(originalLedger)===p.ledger_sha256,'Fresh base differs from completed prior conservation');
+  return {record:p,carriedBytes:2*completed.bytes};
+ }
+diff --git a/coordination/engineering/additive-native-composition-20261009/execution-contract.py b/coordination/engineering/additive-native-composition-20261009/execution-contract.py
+index d82ebb45..25cc97ac 100644
+--- a/coordination/engineering/additive-native-composition-20261009/execution-contract.py
++++ b/coordination/engineering/additive-native-composition-20261009/execution-contract.py
+@@ -26,27 +26,52 @@ def authenticate_file(pin):
+  finally:os.close(fd)
+  return {k:pin[k] for k in ('path','bytes','sha256','mode')}
+ 
+-def admit(pins,extra=0,output=OUTPUT):
++def positive(value):
++ return type(value) is int and 0<value<=9007199254740991
++
++def execution_limits(limits):
++ assert isinstance(limits,dict) and set(limits)=={'complete_phase_bytes','descriptors','output_bytes','rss_bytes','sampled_stop_bytes','wall_seconds'}
++ assert all(positive(n) for n in limits.values()),'Positive finite issued limits required'
++ assert limits['descriptors']<=512 and limits['sampled_stop_bytes']<=limits['rss_bytes']
++ assert positive(7*limits['output_bytes']),'Serialization allowance overflows'
++ return limits
++
++def retained_output(limits):
++ execution_limits(limits)
++ value=limits['output_bytes']+4*1048576
++ assert positive(value)
++ return value
++
++def admit(pins,extra=0,output=OUTPUT,phase_bytes=PHASE):
+  assert type(extra) is int and extra>=0 and type(output) is int and output>=0
++ assert positive(phase_bytes)
+  seen={};total=META+extra+output
+  for p in pins:
+   stat_pin(p)
+   if p['path'] in seen:assert seen[p['path']]==p
+   else:seen[p['path']]=p;total+=p['bytes']
+- assert len(seen)<=512 and total<=PHASE,'Complete external admission exceeds phase BEFORE body opens'
++ assert len(seen)<=512 and total<=phase_bytes,'Complete external admission exceeds phase BEFORE body opens'
+  return total
+ 
+-def capture(root,head,pre):
++def capture(root,head,pre,phase_bytes=PHASE,output_bytes=OUTPUT,plan_bytes=None):
+  assert [p['path'] for p in pre['code']]==json.loads((pathlib.Path(__file__).parent/'execution-code-paths.json').read_bytes()),'Complete ordered current code roster required'
+  git=next(p['path'] for p in pre['runtime'] if p['role']=='git')
+  assert subprocess.check_output([git,'-C',str(root),'rev-parse','HEAD'],text=True).strip()==head
+  assert not subprocess.check_output([git,'-C',str(root),'status','--porcelain'],text=True).strip(),'Require frozen clean executing checkout'
+- pins=[*pre['runtime'],pre['entry'],pre['supervisor'],pre['plan']]
++ pins=[*pre['runtime'],pre['entry'],pre['supervisor']]
++ plan_extra=0
++ if plan_bytes is None:pins.append(pre['plan'])
++ else:
++  # The issuer authenticates a derived in-memory plan before creating its fresh
++  # file. The supervisor always reopens/authenticates that actual file at launch.
++  assert isinstance(plan_bytes,bytes) and len(plan_bytes)==pre['plan']['bytes']<=META and digest(plan_bytes)==pre['plan']['sha256']
++  plan_extra=len(plan_bytes)
++
+  code=[]
+  for p in pre['code']:
+   assert set(p)=={'path','bytes','sha256'} and 0<p['bytes']<=FILE and not pathlib.Path(p['path']).is_absolute() and '..' not in pathlib.Path(p['path']).parts
+   q=root/p['path'];code.append({**p,'path':str(q),'mode':0o644})
+- admit([*pins,*code],extra=sum(p['bytes'] for p in pre['code'])) # Whole Git plus FS code separately.
++ admit([*pins,*code],extra=sum(p['bytes'] for p in pre['code'])+plan_extra,phase_bytes=phase_bytes,output=output_bytes) # Whole Git plus FS code separately.
+  for p in [*pins,*code]:authenticate_file(p)
+  for p in pre['code']:
+   row=subprocess.check_output([git,'-C',str(root),'ls-tree','-z',head,'--',p['path']]).decode();assert row.startswith('100644 blob ') and row.endswith('\t'+p['path']+'\0')
+diff --git a/coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py b/coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py
+index a9c034d4..7781cdf1 100644
+--- a/coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py
++++ b/coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py
+@@ -114,6 +114,21 @@ def platform_runtime():
+  assert sys.platform=='linux','Unreviewed execution platform'
+  return [dict(p) for p in LINUX_RUNTIME],'-v'
+ 
++
++def automatic_limits(supply):
++ # A generous current-machine share, not a new fixed cohort ceiling. The
++ # coordinator serializes admission and accounts for other active reservations.
++ residual=supply.get('residual_reported_bytes',supply['supply_upper_bytes']-2147483648)
++ usable=residual-805306368
++ assert type(usable) is int and usable>0,'No current execution headroom'
++ rss=usable//2
++ limits={'complete_phase_bytes':rss,'descriptors':512,'output_bytes':contract.FILE,
++         'rss_bytes':rss,'sampled_stop_bytes':rss-rss//8,'wall_seconds':1200}
++ contract.execution_limits(limits)
++ assert 7*limits['output_bytes']<limits['complete_phase_bytes'],'Insufficient serialization headroom'
++ return limits
++
++
+ def issue(root,head,plan_path,destination,output):
+  assert root.is_absolute() and len(head)==40 and all(c in '0123456789abcdef' for c in head)
+  assert destination.is_relative_to(root/'.cache') and output.is_relative_to(root/'.cache')
+@@ -122,7 +137,21 @@ def issue(root,head,plan_path,destination,output):
+   for a in p.parents:assert not a.is_symlink() and a.is_dir()
+  assert not os.path.lexists(destination) and not os.path.lexists(output),'Fresh output custody/destination required'
+  stat=plan_path.stat();assert stat.st_size<=131072 and stat.st_mode&0o777==0o644
+- raw=plan_path.read_bytes();plan=json.loads(raw);assert plan['execution_commit']==head and 0<plan['limits']['complete_phase_bytes']<=contract.PHASE
++ raw=plan_path.read_bytes();plan=json.loads(raw);assert plan['execution_commit']==head
++ # Templates normally request auto; explicit smaller finite allowances remain
++ # supported. Never rewrite the template or reinterpret a historical receipt.
++ module_spec=importlib.util.spec_from_file_location('current_resource_supervisor',HERE/'supervise-current-rebind.py')
++ supervisor=importlib.util.module_from_spec(module_spec);module_spec.loader.exec_module(supervisor)
++ automatic=plan.get('limits') in (None,'auto')
++ if automatic:plan['limits']=automatic_limits(supervisor.fresh_host_supply(os.environ))
++ limits=contract.execution_limits(plan['limits'])
++ supervisor.fresh_host_supply(os.environ,limits['rss_bytes']+805306368)
++ output_reserve=contract.retained_output(limits)
++ if automatic:
++  raw=contract.canonical(plan);assert len(raw)<=131072
++  plan_path=output.with_name(output.name+'.plan.json')
++  assert not os.path.lexists(plan_path),'Fresh admitted plan required'
++
+  for name in ['mac-execution-runtime-original.json','run-current-rebind.mjs','supervise-current-rebind.py']:
+   assert (HERE/name).stat().st_size<=131072 and not (HERE/name).is_symlink()
+  assert [p['path'] for p in plan['executed_code']]==json.loads((HERE/'execution-code-paths.json').read_bytes())
+@@ -135,13 +164,22 @@ def issue(root,head,plan_path,destination,output):
+  def ordinary(p):s=p.stat();assert s.st_size<=contract.FILE and s.st_mode&0o777==0o644;return {'path':str(p),'bytes':s.st_size,'sha256':contract.digest(p.read_bytes()),'mode':0o644}
+  # Small entry/supervisor metadata bodies have their own fixed1MiB metadata
+  # admission. Full installed runtime is only opened by capture after union stats.
++ if automatic:
++  node=next(p['path'] for p in runtime if p['role']=='node')
++  stock=json.loads(contract.subprocess.check_output([node,str(root/'scripts/local-workspace.mjs'),'check'],cwd=root))
++  supervisor.require_stock_growth(stock,root,output_reserve+262144)
+  pre={'runtime':runtime,'code':plan['executed_code'],'entry':ordinary(HERE/'run-current-rebind.mjs'),'supervisor':ordinary(HERE/'supervise-current-rebind.py'),'plan':{'path':str(plan_path),'bytes':len(raw),'sha256':contract.digest(raw),'mode':0o644}}
+  python_extra=sum(p['bytes'] for p in runtime if p['role'] not in ('node','git','installed-dependency'))
+- operating=plan['limits']['complete_phase_bytes']+python_extra+contract.OUTPUT+contract.META
+- assert operating<=contract.PHASE,'Whole child carried union plus actual external runtime/output reserve exceeds operating phase'
+- contract.capture(root,head,pre)
++ operating=limits['complete_phase_bytes']+python_extra+output_reserve+contract.META
++ assert contract.positive(operating),'Whole operating allowance overflows'
++ contract.capture(root,head,pre,phase_bytes=operating,output_bytes=output_reserve,plan_bytes=raw if automatic else None)
++ if automatic:
++  fd=os.open(plan_path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o644)
++  try:os.write(fd,raw)
++  finally:os.close(fd)
++
+  command=[next(p['path'] for p in runtime if p['role']=='time'),time_option,next(p['path'] for p in runtime if p['role']=='node'),'--expose-gc',pre['entry']['path'],str(plan_path),str(destination)]
+- result={'version':1,'kind':'issued-current-rebind-execution-pre-use-v1','execution_commit':head,'root':str(root),'command':command,'pre_use':pre,'operating_phase_bytes':operating,'output_log_reserve_bytes':contract.OUTPUT}
++ result={'version':1,'kind':'issued-current-rebind-execution-pre-use-v1','execution_commit':head,'root':str(root),'command':command,'pre_use':pre,'operating_phase_bytes':operating,'output_log_reserve_bytes':output_reserve}
+  body=contract.canonical(result);assert len(body)<=131072
+  fd=os.open(output,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o644)
+  try:os.write(fd,body)
+diff --git a/coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs b/coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs
+index 77bf7b4b..876f7b5e 100644
+--- a/coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs
++++ b/coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs
+@@ -13,16 +13,17 @@ let current=path.parse(p.path).root;for(const part of p.path.slice(current.lengt
+ const stat=fs.lstatSync(p.path);demand(stat.isFile()&&stat.size===p.bytes&&(stat.mode&0o777)===p.mode,'Plan stat differs before read');
+ const fd=fs.openSync(p.path,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);let raw;try{raw=fs.readFileSync(fd);const held=fs.fstatSync(fd),end=fs.lstatSync(p.path);for(const k of ['dev','ino','size','mode','mtimeMs','ctimeMs'])demand(stat[k]===held[k]&&held[k]===end[k],'Plan identity drift');}finally{fs.closeSync(fd);}
+ demand(raw.length===p.bytes&&sha(raw)===p.sha256,'Whole raw plan differs');const plan=JSON.parse(raw);
+-demand(plan.execution_commit===head&&plan.limits&&Number.isSafeInteger(plan.limits.complete_phase_bytes)&&plan.limits.complete_phase_bytes<=268435456&&Number.isSafeInteger(plan.limits.output_bytes)&&plan.limits.output_bytes>0&&plan.limits.output_bytes<=8388608,'Actual injected plan/head/admission differs before imports');
++demand(plan.execution_commit===head&&plan.limits&&Number.isSafeInteger(plan.limits.complete_phase_bytes)&&plan.limits.complete_phase_bytes>0&&Number.isSafeInteger(plan.limits.output_bytes)&&plan.limits.output_bytes>0&&Number.isSafeInteger(plan.limits.rss_bytes)&&plan.limits.rss_bytes>0,'Actual injected plan/head/admission differs before imports');
+ const root=fs.realpathSync(process.cwd()),prefix='coordination/engineering/additive-native-gap-batch-20261008/composition-v2/';
+-const {ImmutableReader,loadSelection,loadBaseSelection}=await import('../../../scripts/check-effective-geographic-regression.mjs');
++const {processingAllowance,ImmutableReader,loadSelection,loadBaseSelection}=await import('../../../scripts/check-effective-geographic-regression.mjs');
+ const {prepareCurrentRebindDestination,captureCurrentRebindProducts,validateCurrentRebindPlan,completePriorConservationFrame}=await import('./capture-current-rebind.mjs');
+ const {nativeBaseSelection,valueSha,valueBytes,normaliseRetainedRepairLedger,reclaimCompletedRebindFrame}=await import('../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs');
+ demand(globalThis.gc===exposedGc,'Reclamation callable changed during trusted imports');
++const allowance=processingAllowance({phaseBytes:plan.limits.complete_phase_bytes,rssBytes:plan.limits.rss_bytes});
+ const token=prepareCurrentRebindDestination(root,command[6]);
+ const runtimeBytes=before.runtime.filter(p=>['node','git','time'].includes(p.role)).reduce((n,p)=>n+p.bytes,0),executionBytes=before.code.reduce((n,p)=>n+2*p.bytes,0)+before.entry.bytes;
+ function completedPriorFrame(){
+-const reader=new ImmutableReader(root,head,{runtimeBytes,executionBytes,metadataBytes:8*1048576+2*(raw.length+Buffer.byteLength(serialized)),outputBytes:4194304,gitExecutable:before.runtime.find(p=>p.role==='git').path});
++const reader=new ImmutableReader(root,head,{runtimeBytes,executionBytes,metadataBytes:8*1048576+2*(raw.length+Buffer.byteLength(serialized)),outputBytes:4194304,allowance,gitExecutable:before.runtime.find(p=>p.role==='git').path});
+ // Explicit original products are whole immutable plan operands. Historical
+ // plans retain their literal original paths and default selected revision.
+ // Future composition inputs are not needed to authenticate the selected bank.
+@@ -58,7 +59,7 @@ return {registry,originalLedger,marker,budget:reader.budget};
+ }
+ const {registry,originalLedger,marker:priorMarker,budget}=completedPriorFrame();
+ reclaimCompletedRebindFrame();
+-const freshReader=new ImmutableReader(root,head,{runtimeBytes,executionBytes,metadataBytes:8*1048576+2*(raw.length+Buffer.byteLength(serialized)+valueBytes(registry).length+valueBytes(originalLedger).length)+2097152,outputBytes:4194304,gitExecutable:before.runtime.find(p=>p.role==='git').path,budget});
++const freshReader=new ImmutableReader(root,head,{runtimeBytes,executionBytes,metadataBytes:8*1048576+2*(raw.length+Buffer.byteLength(serialized)+valueBytes(registry).length+valueBytes(originalLedger).length)+2097152,outputBytes:4194304,allowance,gitExecutable:before.runtime.find(p=>p.role==='git').path,budget});
+ freshReader.phase();
+ const snapshot=loadBaseSelection(freshReader);demand(snapshot,'Missing actual fresh base bank');
+ snapshot.acquisition_buffer_bytes=0;
+diff --git a/coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py b/coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py
+index 829e25e4..927b624d 100644
+--- a/coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py
++++ b/coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py
+@@ -25,14 +25,23 @@ def require_stock_growth(stock,root,output_bytes):
+  entries=[e for e in stock['entries'] if e['path']==str(root) and e['slot']=='work' and e['status']=='ready']
+  assert len(entries)==1,'Fresh owned allocator entry required'
+  reservation=entries[0]['reservation']
+- assert type(reservation) is int and reservation>0 and output_bytes<=reservation,'Positive complete growth reservation required'
++ assert type(reservation) is int and reservation>0,'Positive complete growth reservation required'
+  slots=[s for s in stock['worktrees'] if s['path']==str(root) and s['managed'] is True]
+  assert len(slots)==1,'Fresh measured owned allocator slot required'
+  footprint=slots[0]['bytes']
+- assert type(footprint) is int and footprint>=0 and footprint+output_bytes<=reservation,'Measured slot plus complete growth exceeds reservation'
++ assert type(footprint) is int and footprint>=0,'Invalid measured slot footprint'
+  # Allocation admitted the reservation before setup. Fresh launch admits this
+  # phase's complete growth against actual free space without reserving it twice.
+- assert free-output_bytes>=minimum,'Fresh current stock/growth admission refused'
++ # Already materialized bytes are reflected in free space. Reservations are
++ # future-growth estimates, not a hard quota on an existing managed checkout.
++ measured={row['path']:row['bytes'] for row in stock['worktrees']}
++ pending=0
++ for entry in stock['entries']:
++  reserved=entry['reservation'];used=measured.get(entry['path'],0)
++  assert type(reserved) is int and reserved>=0 and type(used) is int and used>=0
++  remaining=max(0,reserved-used)
++  pending+=max(remaining,output_bytes) if entry['path']==str(root) else remaining
++ assert free-pending>=minimum,'Fresh current stock/growth admission refused'
+ 
+ def platform_contract(pre):
+  # The literal issuer roster is already part of the unchanged 28-file closure.
+@@ -63,7 +72,7 @@ def bounded_resource_text(path,limit=65536):
+  finally:os.close(fd)
+  return raw.decode('ascii')
+ 
+-def evaluate_linux_supply(evidence):
++def evaluate_linux_supply(evidence,required_bytes=805306368):
+  # Reported prospective availability, matching the original Mac estimate.
+  # Unknown hidden limits are disclosed; exposed finite limits always tighten it.
+  values={}
+@@ -91,10 +100,11 @@ def evaluate_linux_supply(evidence):
+   usage=re.findall(r'^'+key+r':\s*(\d+) kB$',evidence['status'],re.M)
+   assert len(ceiling)==len(usage)==1,'Unknown process memory ceiling/usage'
+   if ceiling[0]!='unlimited':supply=min(supply,max(0,int(ceiling[0])-int(usage[0])*1024))
++ assert contract.positive(required_bytes)
+  residual=supply-headroom-reserved
+- assert residual>=805306368,'Fresh reported residual Linux supply refused'
++ assert residual>=required_bytes,'Fresh reported residual Linux supply refused'
+  return {'supply_upper_bytes':supply,'headroom_reserve_bytes':headroom,'concurrent_reserved_bytes':reserved,
+-         'residual_reported_bytes':residual,'required_bytes':805306368,'observations':evidence,
++         'residual_reported_bytes':residual,'required_bytes':required_bytes,'observations':evidence,
+          'uncertainty':'Prospective reported availability only; unexposed limits are unknown, not unlimited. No swap credit or guaranteed allocation.'}
+ 
+ def exposed_cgroup_headroom(cgroup,mountinfo):
+@@ -140,13 +150,13 @@ def exposed_cgroup_headroom(cgroup,mountinfo):
+  if not memberships:unknown.append('No memory cgroup membership exposed')
+  return rows,unknown
+ 
+-def fresh_host_supply(env):
++def fresh_host_supply(env,required_bytes=805306368):
+  if sys.platform=='darwin':
+   vm=subprocess.check_output(['/usr/bin/vm_stat'],text=True,env=env)
+   page=int(re.search(r'page size of (\d+) bytes',vm).group(1))
+   pages=sum(int(re.search(r'^Pages '+name+r':\s*(\d+)',vm,re.M).group(1)) for name in ['free','inactive','speculative'])
+-  assert pages*page>=805306368,'Fresh conservative host supply refused; reclaimability uncertain'
+-  return {'vm_stat':vm,'supply_upper_bytes':pages*page,'required_bytes':805306368,'uncertainty':'Inactive/speculative reclaimability is an upper estimate, not guaranteed availability.'}
++  assert pages*page>=required_bytes,'Fresh conservative host supply refused; reclaimability uncertain'
++  return {'vm_stat':vm,'supply_upper_bytes':pages*page,'required_bytes':required_bytes,'uncertainty':'Inactive/speculative reclaimability is an upper estimate, not guaranteed availability.'}
+  assert sys.platform=='linux','Unreviewed execution platform'
+  reservation=env.get('WORLDATLAS_CONCURRENT_RESERVED_BYTES','')
+  assert re.fullmatch(r'0|[1-9][0-9]*',reservation),'Fresh coordinator concurrent reservation is required'
+@@ -164,7 +174,7 @@ def fresh_host_supply(env):
+   rss+=int(fields[1])*1024
+  evidence.update(concurrent_reserved_bytes=int(reservation),observed_aggregate_rss_bytes=rss,aggregate_ps=ps)
+  assert len(contract.canonical(evidence))<=contract.META,'Resource observation metadata reserve exceeded'
+- return evaluate_linux_supply(evidence)
++ return evaluate_linux_supply(evidence,required_bytes)
+ 
+ def external_time_usage(text,option):
+  assert option in ('-l','-v')
+@@ -180,9 +190,9 @@ def external_time_usage(text,option):
+ 
+ def current_rebind_product_hashes(output,output_bytes):
+  # Stat the complete union before opening any body, including post-child reads.
+- assert type(output_bytes) is int and 0<output_bytes<=8388608
++ assert contract.positive(output_bytes)
+  paths={name:output/(name+'.json') for name in ['request','facts','result','publication']}
+- for q in paths.values():assert q.is_file() and not q.is_symlink() and 0<q.stat().st_size<=output_bytes
++ for q in paths.values():assert q.is_file() and not q.is_symlink() and 0<q.stat().st_size<=min(output_bytes,contract.FILE)
+  assert sum(q.stat().st_size for q in paths.values())<=output_bytes,'Complete current-rebind product union exceeds issued bound before reads'
+  return {name:contract.digest(q.read_bytes()) for name,q in paths.items()}
+ 
+@@ -202,17 +212,20 @@ def supervise(issued_path,issued_sha,operation):
+  assert len(bound_cmd)==6 and bound_cmd[0]==next(p['path'] for p in pre['runtime'] if p['role']=='time') and bound_cmd[1]==time_option and bound_cmd[2]==next(p['path'] for p in pre['runtime'] if p['role']=='node') and bound_cmd[3]==pre['entry']['path'] and bound_cmd[4]==pre['plan']['path']
+  output=pathlib.Path(bound_cmd[5]);assert output.is_relative_to(root/'.cache') and '..' not in output.parts and not os.path.lexists(output)
+  for a in output.parents:assert a.is_dir() and not a.is_symlink()
+- before=contract.capture(root,head,pre);plan=json.loads(pathlib.Path(pre['plan']['path']).read_bytes());limits=plan['limits']
++ contract.authenticate_file(pre['plan']);plan=json.loads(pathlib.Path(pre['plan']['path']).read_bytes());limits=contract.execution_limits(plan['limits'])
++ output_reserve=contract.retained_output(limits)
+  # Fresh original stock report and explicit prospective retained growth; no
+  # stale receipt or shell continuation can authorize the actual command.
+  guard_env={k:v for k,v in os.environ.items() if k not in ('NODE_OPTIONS','NODE_PATH','PYTHONPATH','PYTHONHOME','PYTHONSTARTUP','PYTHONINSPECT','PYTHONUSERBASE','__PYVENV_LAUNCHER__')}
+  guard_env.update(PATH=private_path,LC_ALL='C',LANG='C')
+  stock_raw=subprocess.check_output([cmd[2],str(root/'scripts/local-workspace.mjs'),'check'],cwd=root,env=guard_env)
+- stock=json.loads(stock_raw);require_stock_growth(stock,root,contract.OUTPUT)
+- supply=fresh_host_supply(guard_env)
++ stock=json.loads(stock_raw);require_stock_growth(stock,root,output_reserve)
++ supply=fresh_host_supply(guard_env,limits['rss_bytes']+805306368)
+  extra=sum(p['bytes'] for p in pre['runtime'] if p['role'] not in ('node','git','installed-dependency'))
+- assert issued['operating_phase_bytes']==limits['complete_phase_bytes']+extra+contract.OUTPUT+contract.META<=contract.PHASE
+- assert limits['sampled_stop_bytes']<=402653184 and limits['rss_bytes']<=536870912 and limits['wall_seconds']<=1200 and type(limits['output_bytes']) is int and 0<limits['output_bytes']<=8388608
++ operating=limits['complete_phase_bytes']+extra+output_reserve+contract.META
++ assert contract.positive(operating) and issued['operating_phase_bytes']==operating and issued['output_log_reserve_bytes']==output_reserve
++ before=contract.capture(root,head,pre,phase_bytes=operating,output_bytes=output_reserve)
++ # Actual issued finite values drive this job; historical defaults are not quotas.
+  # Whole helper bytes are already frozen/pre-use verified in the complete code
+  # roster. These literal historical mechanisms are not rewritten or relabeled.
+  loaders=[]
+@@ -245,7 +258,7 @@ def supervise(issued_path,issued_sha,operation):
+     if not logs():reason='whole raw log/sample bound'
+     elif rss>=limits['sampled_stop_bytes']:reason='sampled owned process group bound'
+     elif time.monotonic()-start>limits['wall_seconds']:reason='wall deadline'
+-    elif retained()>contract.OUTPUT:reason='complete retained output/log bound'
++    elif retained()>output_reserve:reason='complete retained output/log bound'
+     if reason:events=authority.cleanup();break
+     time.sleep(.25)
+    exit_code=p.wait()
+@@ -254,7 +267,7 @@ def supervise(issued_path,issued_sha,operation):
+    raise
+  survivors=[{'pid':pid,**row} for pid,row in termination.snapshot().items() if row['pgid']==p.pid]
+  if survivors:events+=authority.cleanup();reason=reason or 'owned descendants after natural exit';survivors=[{'pid':pid,**row} for pid,row in termination.snapshot().items() if row['pgid']==p.pid]
+- assert logs(),'Terminal log bounds';after=contract.capture(root,head,pre)
++ assert logs(),'Terminal log bounds';after=contract.capture(root,head,pre,phase_bytes=operating,output_bytes=output_reserve)
+  text=stderr.read_text();lifetime=None;raw_elapsed=None
+  try:lifetime,raw_elapsed=external_time_usage(text,time_option)
+  except (AssertionError,ValueError):reason=reason or 'raw external time usage malformed'
+@@ -273,7 +286,7 @@ def supervise(issued_path,issued_sha,operation):
+    request_sha=products['request'];publication_sha=products['publication']
+   except (AssertionError,FileNotFoundError,KeyError,ValueError):reason=reason or 'missing/foreign actual child products or stdout bindings'
+  terminal={'version':1,'kind':'current-rebind-external-terminal-v1','execution_commit':head,'command':cmd,'request_sha256':request_sha,'publication_sha256':publication_sha,'code_source_sha256':contract.digest(source_raw),'exit_code':exit_code,'signal':None if exit_code>=0 else -exit_code,'guard_reason':reason,'lifetime_rss_bytes':lifetime,'sampled_group_peak_bytes':peak,'sampled_stop_bytes':limits['sampled_stop_bytes'],'lifetime_ceiling_bytes':limits['rss_bytes'],'elapsed_seconds':elapsed,'wall_limit_seconds':limits['wall_seconds'],'owned_processes_remaining':survivors,'termination_events':events}
+- (operation/'terminal.json').write_bytes(contract.canonical(terminal));assert retained()<=contract.OUTPUT
++ (operation/'terminal.json').write_bytes(contract.canonical(terminal));assert retained()<=output_reserve
+  assert exit_code==0 and reason is None and not survivors,'Unqualified actual command; retained history, no retry'
+  return terminal
+ if __name__=='__main__':
+
+--- DEFERRED TEST SOURCE ---
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import {spawnSync} from 'node:child_process';
+import {processingAllowance,ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
+import {prepareCurrentRebindDestination,writeCurrentRebindProducts} from '../coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs';
+import {valueBytes,admitCurrentRebindOutputFrame} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+const MiB=1024**2,GiB=1024**3,root=path.resolve(import.meta.dirname,'..');
+const grant=()=>processingAllowance({availableBytes:8*GiB,concurrentReservedBytes:GiB,phaseBytes:512*MiB,rssBytes:GiB});
+const reader=allowance=>new ImmutableReader(root,'a'.repeat(40),{runtimeBytes:1,executionBytes:1,metadataBytes:300*MiB,outputBytes:1,allowance});
+test('normal allowance scales with current capacity instead of the former 256 MiB ceiling',()=>{
+ const small=processingAllowance({availableBytes:6*GiB,concurrentReservedBytes:GiB});
+ const large=processingAllowance({availableBytes:10*GiB,concurrentReservedBytes:GiB});
+ assert(small.phaseBytes>256*MiB);assert(large.phaseBytes>small.phaseBytes);
+ assert(large.rssBytes<10*GiB-GiB-2*GiB-768*MiB);
+ for(const availableBytes of [0,NaN,Infinity,-1,Number.MAX_SAFE_INTEGER+1])assert.throws(()=>processingAllowance({availableBytes}),/observations|memory/);
+ for(const concurrentReservedBytes of [-1,NaN,8*GiB])assert.throws(()=>processingAllowance({availableBytes:8*GiB,concurrentReservedBytes}),/observations|memory/);
+ assert.throws(()=>processingAllowance({availableBytes:8*GiB,rssBytes:7*GiB}),/admission/);
+});
+test('the actual reader admits the demonstrated >256 MiB logical frame with a finite current allowance',()=>{
+ const allowance=grant(),r=reader(allowance);assert.equal(r.used,300*MiB+3);
+ const nested=new ImmutableReader(root,'b'.repeat(40),{runtimeBytes:1,metadataBytes:1,outputBytes:1,budget:r.budget});
+ assert.equal(nested.allowance,allowance);assert.equal(nested.budget,r.budget);
+ r.admit({commit:'a'.repeat(40),path:'one.json',bytes:20*MiB});assert.equal(nested.used,r.used);
+ assert.throws(()=>reader({...allowance,phaseBytes:256*MiB}),/complete phase/);
+ assert.throws(()=>r.admit({commit:'a'.repeat(40),path:'oversized.json',bytes:1},32*MiB+1),/decoded member/);
+ assert.throws(()=>reader({...allowance,rssBytes:1}),/RSS/);
+});
+test('larger finite output allowance preserves actual scientific/result bytes and whole-member bounds',t=>{
+ const cache=path.join(root,'.cache');fs.mkdirSync(cache,{recursive:true});const dir=fs.mkdtempSync(path.join(cache,'processing-budget-'));t.after(()=>fs.rmSync(dir,{recursive:true}));
+ const products={request:{payload:'x'.repeat(13*MiB)},result:{rows:[{component:'unchanged',cells:97}]},facts:{},publication:{}};
+ const original=valueBytes(products.result);
+ for(const output_bytes of [14*MiB,16*MiB]){
+  const r=reader(grant());admitCurrentRebindOutputFrame(r,{output_bytes,complete_phase_bytes:r.phaseLimit});
+  const target=path.join(dir,String(output_bytes));writeCurrentRebindProducts(prepareCurrentRebindDestination(root,target),products,output_bytes);
+  assert.deepEqual(fs.readFileSync(path.join(target,'result.json')),original);
+ }
+ assert.throws(()=>admitCurrentRebindOutputFrame(reader(grant()),{output_bytes:100*MiB,complete_phase_bytes:512*MiB}),/complete phase/);
+});
+test('real Python admission honors requested RAM, concurrent reservations, cgroups and measured disk growth',()=>{
+ const code=`import pathlib,importlib.util,copy
+p=pathlib.Path(${JSON.stringify(path.join(root,'coordination/engineering/additive-native-composition-20261009'))})
+def load(name):
+ spec=importlib.util.spec_from_file_location(name.replace('-','_'),p/(name+'.py'));m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
+s=load('supervise-current-rebind');issuer=load('issue-current-rebind-execution');G=1024**3;M=1024**2
+e={'meminfo':'MemAvailable: 8388608 kB\\nMemTotal: 10485760 kB\\n','concurrent_reserved_bytes':G,'observed_aggregate_rss_bytes':G,'ancestors':[], 'limits':'Max address space unlimited unlimited bytes\\nMax data size unlimited unlimited bytes\\n','status':'VmSize: 1000 kB\\nVmData: 1000 kB\\n'}
+q=s.evaluate_linux_supply(e,2*G+768*M);assert q['required_bytes']==2*G+768*M
+limits=issuer.automatic_limits(q);assert limits['complete_phase_bytes']>256*M and limits['output_bytes']>8*M
+for bad in [dict(e,concurrent_reserved_bytes=7*G),dict(e,ancestors=[{'path':'cgroup','maximum':str(2*G),'current':str(G)}])]:
+ try:s.evaluate_linux_supply(bad,2*G+768*M)
+ except AssertionError:pass
+ else:raise AssertionError('unsafe memory admitted')
+stock={'limits':{'minimumFree':10*G},'freeBytes':14*G,'entries':[{'path':'/owned','slot':'work','status':'ready','reservation':G},{'path':'/other','slot':'work','status':'ready','reservation':2*G}], 'worktrees':[{'path':'/owned','managed':True,'bytes':3*G},{'path':'/other','managed':True,'bytes':G}]}
+s.require_stock_growth(stock,pathlib.Path('/owned'),32*M)
+for bad in [dict(stock,freeBytes=10*G+16*M),dict(stock,freeBytes=11*G)]:
+ try:s.require_stock_growth(bad,pathlib.Path('/owned'),32*M)
+ except AssertionError:pass
+ else:raise AssertionError('other reservation or disk growth ignored')
+for bad in [True,0,-1,1.5,9007199254740992]:
+ x=dict(limits,output_bytes=bad)
+ try:s.contract.execution_limits(x)
+ except AssertionError:pass
+ else:raise AssertionError('invalid issued limit accepted')
+`;
+ const result=spawnSync('python3',['-I','-B','-c',code],{encoding:'utf8',timeout:10000});assert.equal(result.status,0,result.stderr);
+});
