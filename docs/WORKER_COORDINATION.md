@@ -250,8 +250,9 @@ base and SHA-guarded squash checks remain mandatory.
 
 GitHub retains only one pending concurrency run. A replaced scheduler tick loses
 no requests because their registrations already exist outside that group.
-Completed worker runs trigger a scheduler tick; five-minute scheduled ticks also
-recover cancelled execution, failed notification and ambiguous dispatch. Live,
+The workflow declares completion-triggered scheduler ticks and a five-minute
+scheduled fallback for cancelled execution, failed notification and ambiguous
+dispatch; provider delivery can be delayed or unavailable. Live,
 queued, requested, waiting and pending executions of any age prevent redispatch;
 observation expiry never implies completion. Each execution attempt is recorded
 before dispatch, cancellation/conclusion observations remain on the PR, and an
@@ -262,6 +263,14 @@ condition. A failed test or authority rejection is terminal; changed heads requi
 new review and a new request. Main advancement remains a rejection requiring a
 fresh tested candidate with the same reviewed head. Closing a PR withdraws its
 request; its registrations/results remain preserved on the closed PR.
+
+Within one serialized tick, the scheduler records proven changed-head or exhausted-
+recovery rejections and continues through the existing finite FIFO snapshot. It
+stops on the first live execution, ambiguous-dispatch grace, quota wait or actual
+dispatch. A failed or uncertain rejection write stops the tick before any later
+request can advance. Even a changed head retains the two-minute dispatch discovery
+window. Each API attempt still shares the actual job deadline and quota controls;
+no new registration, idle wake loop or completion-trigger guarantee is introduced.
 
 The CLI observes for 65 minutes, then reports its request ID without cancelling
 anything. Resume read-only observation using

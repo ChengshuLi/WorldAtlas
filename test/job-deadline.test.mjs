@@ -19,7 +19,8 @@ const response = (status, payload, headers = {}) => new Response(JSON.stringify(
 
 async function execute({phase = 'register', elapsed = 0, rejection = [], requestMs = 0, bodyMs = 0,
   metadataMs = 0, editJobs = value => value, replay = false, ambiguousWrite = false,
-  oversleepMs = 0, bootstrapReject = false, afterReadMs = 0, clockRollback = false, dispatchAfterQuota = false} = {}) {
+  oversleepMs = 0, bootstrapReject = false, afterReadMs = 0, clockRollback = false, dispatchAfterQuota = false,
+  queue = null, terminalWriteMs = 0, terminalWriteFailure = null, afterTerminalQuota = false} = {}) {
   let time = elapsed, wallOffset = 0, reads = 0, inventories = 0;
   const calls = [], waits = [], posted = [];
   const original = globalThis.fetch;
@@ -35,17 +36,32 @@ async function execute({phase = 'register', elapsed = 0, rejection = [], request
         run_attempt: 1, status: 'in_progress', started_at: new Date(epoch).toISOString()}]}));
     }
     if (phase === 'schedule' && route === '/repos/a/b') return response(200, {}, {
-      'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': dispatchAfterQuota ? '1000' : '0',
+      'x-ratelimit-limit': '1000', 'x-ratelimit-remaining': dispatchAfterQuota || queue ? '1000' : '0',
       'x-ratelimit-reset': String((epoch + 600_000) / 1000), 'x-ratelimit-resource': 'core'});
-    if (dispatchAfterQuota && route.endsWith('/actions/workflows/worker-merge.yml/runs')) return response(200, {workflow_runs: []});
+    if ((dispatchAfterQuota || queue) && route.endsWith('/actions/workflows/worker-merge.yml/runs')) return response(200, {workflow_runs: []});
+    if (queue && route === '/repos/a/b/pulls') return response(200, queue.map(row => ({
+      number: row.request.pr_number, state: 'open', head: {sha: row.head ?? row.request.expected_head}})));
     if (dispatchAfterQuota && route === '/repos/a/b/pulls') {
       if (++inventories === 1) return response(403, {}, {'retry-after': '5'});
       return response(200, [{number: 2, state: 'open', head: {sha: request.expected_head}}]);
     }
     if (method === 'POST') {
       posted.push(JSON.parse(options.body));
+      if (posted.at(-1).body?.startsWith('**Merge result:**')) {
+        time += terminalWriteMs;
+        if (terminalWriteFailure === 'ambiguous') throw Error('uncertain terminal write');
+        if (terminalWriteFailure === 'quota') return response(403, {}, {'retry-after': '5'});
+      } else if (afterTerminalQuota && posted.length > 1) return response(403, {}, {'retry-after': '5'});
       if (ambiguousWrite) throw Error('uncertain transport');
       return response(201, {id: 30, body: posted.at(-1).body});
+    }
+    if (queue && /\/issues\/\d+\/comments$/.test(route)) {
+      const row = queue.find(row => route.endsWith(`/issues/${row.request.pr_number}/comments`));
+      assert.ok(row);
+      return response(200, [{id: row.request.pr_number, user: {login: 'github-actions[bot]'},
+        body: queueBody({...row.request, kind: 'request'})}, ...(row.dispatch ? [{
+        id: 100 + row.request.pr_number, user: {login: 'github-actions[bot]'},
+        body: queueBody({...row.request, kind: 'dispatch', ...row.dispatch})}] : [])]);
     }
     if (route.endsWith('/pulls/2')) {
       time += requestMs;
@@ -251,4 +267,44 @@ test('executing workflow commit rejects newer-main timeout and mixed-vintage che
   assert.match(workflow, /ref: \$\{\{ github.workflow_sha \}\}/);
   assert.doesNotMatch(workflow, /ref: main/);
   assert.equal(schedulerJobMinutes(executingWorkflow(env, readGit), 'register'), 5);
+});
+
+const terminalQueue = () => [
+  {request: {...request, pr_number: 1, request_id: 'deadline-terminal-request'}, head: 'c'.repeat(40)},
+  {request}
+];
+test('actual schedule entry point retires the stale head and dispatches the existing next ticket in one job', async () => {
+  const x = await execute({phase: 'schedule', queue: terminalQueue()});
+  assert.equal(x.result.failed, false);assert.equal(x.result.result.status, 'dispatched');
+  assert.equal(x.result.result.request_id, request.request_id);
+  assert.match(x.posted[0].body, /Head changed/);assert.match(x.posted[1].body, /"kind":"dispatch"/);
+  assert.deepEqual(x.posted[2].inputs, {pr_number: '2', expected_head: request.expected_head,
+    request_id: request.request_id, queue_attempt: '1'});
+  assert.equal(x.posted.length, 3);assert.equal(x.result.request_accounting.actual_http_attempts, 13);
+  assert.deepEqual(x.waits, []);
+});
+test('actual schedule entry point preserves ambiguous-dispatch grace even for a changed head', async () => {
+  const queue = terminalQueue();queue[0].dispatch = {attempt: 1, dispatched_at: new Date(epoch).toISOString()};
+  const x = await execute({phase: 'schedule', elapsed: 10_000, queue});
+  assert.equal(x.result.failed, false);assert.equal(x.result.result.status, 'awaiting-dispatch');
+  assert.equal(x.posted.length, 0);assert.equal(x.result.request_accounting.actual_http_attempts, 11);
+});
+test('actual scheduler refuses quota and ambiguous terminal writes once without advancing the next ticket', async () => {
+  for (const terminalWriteFailure of ['quota', 'ambiguous']) {
+    const x = await execute({phase: 'schedule', queue: terminalQueue(), terminalWriteFailure});
+    assert.equal(x.result.failed, true);assert.equal(x.result.result.retryable, terminalWriteFailure === 'quota');
+    assert.equal(x.posted.length, 1);assert.match(x.posted[0].body, /Head changed/);
+    assert.equal(x.calls.filter(row => row.route.endsWith('/dispatches')).length, 0);
+    assert.equal(x.result.request_accounting.actual_http_attempts, 11);assert.deepEqual(x.waits, []);
+  }
+});
+test('one shared actual job deadline and quota budget still govern writes after terminal draining', async () => {
+  const deadline = await execute({phase: 'schedule', queue: terminalQueue(), elapsed: 500_000, terminalWriteMs: 60_000});
+  assert.equal(deadline.result.failed, true);assert.equal(deadline.result.result.job_deadline_exhausted, true);
+  assert.equal(deadline.posted.length, 1);assert.equal(deadline.result.request_accounting.actual_http_attempts, 11);
+  const quota = await execute({phase: 'schedule', queue: terminalQueue(), afterTerminalQuota: true});
+  assert.equal(quota.result.failed, true);assert.equal(quota.result.result.retryable, true);
+  assert.equal(quota.posted.length, 2);assert.match(quota.posted[0].body, /Head changed/);
+  assert.equal(quota.calls.filter(row => row.route.endsWith('/dispatches')).length, 0);
+  assert.equal(quota.result.request_accounting.actual_http_attempts, 12);assert.deepEqual(quota.waits, []);
 });

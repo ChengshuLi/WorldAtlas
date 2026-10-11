@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "issue": 1326,
+  "lane": "engineering",
+  "worker_id": "01a12806-e666-7781-b612-e4af40560004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "24cb205820980ced522a736412b0d1cdaa79b50d",
+    "files": [
+      {
+        "path": "scripts/merge-scheduler.mjs",
+        "bytes": 8253,
+        "sha256": "f15eaeded7415a250e502f573656db31ed1fbe17c9a2986bd9ee692fe490584c",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "terminal-fifo-continuation",
+      "kind": "code",
+      "description": "Continue the existing serialized scheduler after a proven durable terminal rejection, preserving FIFO, ambiguous-dispatch grace, one-dispatch limit and failure refusal. Exercise the real runScheduler entry point with authenticated workflow/job timing and actual HTTP accounting under synthetic responses.",
+      "software": "Node.js 24.19.0",
+      "units": "Not applicable: queue control-flow verification"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test --test-concurrency=1 test/merge-scheduler.test.mjs test/job-deadline.test.mjs"
+  ],
+  "limits": [
+    "Synthetic HTTP controls establish the changed scheduler boundary, not actual hosted completion-trigger delivery or measured queue-time savings.",
+    "This partial repair leaves issue 1326 open: explicit completion/recovery wake design, provider trigger diagnosis and subsequent already-registered hosted advancement remain outstanding. No workflow trigger, candidate checks, scientific gate or credential changes."
+  ]
+}
