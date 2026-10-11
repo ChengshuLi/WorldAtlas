@@ -76,40 +76,51 @@ export async function scheduleNext({api, repo, now = Date.now(), clock = () => n
   // coalesce pending scheduler ticks; requests are separate durable comments.
   const live = await workerRuns(api, repo);
   if (live.length) return {status: 'live', run_ids: live.map(run => run.id)};
-  const entry = (await loadQueue(api, repo))[0];
-  if (!entry) return {status: 'empty'};
-  const {request, pr, dispatches} = entry;
-  if(entry.result?.quota_retry_at){
-    const retryAt=Date.parse(entry.result.quota_retry_at);
-    if(!Number.isFinite(retryAt))throw Error('Invalid durable quota recovery checkpoint');
-    if(retryAt>clock())return {status:'waiting-quota',request_id:request.request_id,retry_at:entry.result.quota_retry_at};
-  }
-  const finish = async reason => {
-    const result = {accepted: false, status: 'not-merged', retryable: false, ...request, reason};
-    await api(`/repos/${repo}/issues/${pr.number}/comments`, 'POST', {body: renderWorkerResult('merge', result)});
-    return result;
-  };
-  if (pr.head.sha !== request.expected_head) return finish('Head changed; obtain a fresh review and submit a new request');
-  const last = dispatches.at(-1);
-  if (last) {
-    // The title uniquely binds an execution to the durable attempt. A dispatch
-    // that returned an ambiguous failure is given time to appear before recovery.
-    const response = await api(`/repos/${repo}/actions/workflows/worker-merge.yml/runs?event=workflow_dispatch&per_page=100`);
-    const run = response.workflow_runs?.find(row => row.display_title === executionTitle(request, last.attempt));
-    if (run && run.status !== 'completed') return {status: 'live', run_ids: [run.id]};
-    if (!run && clock() - Date.parse(last.dispatched_at) < 120000) return {status: 'awaiting-dispatch', request_id: request.request_id};
-    if (run) {
-      // Preserve each cancelled/failed attempt even if its final job never ran.
-      await api(`/repos/${repo}/issues/${pr.number}/comments`, 'POST', {body: queueBody({...request, kind: 'dispatch',
-        attempt: last.attempt, dispatched_at: last.dispatched_at, observed_run_id: run.id, conclusion: run.conclusion})});
+  // Drain only this finite, ordered snapshot. Failed/uncertain receipt writes
+  // throw before advancing; a wait or the first dispatch ends this tick.
+  for (const entry of await loadQueue(api, repo)) {
+    const {request, pr, dispatches} = entry;
+    if(entry.result?.quota_retry_at){
+      const retryAt=Date.parse(entry.result.quota_retry_at);
+      if(!Number.isFinite(retryAt))throw Error('Invalid durable quota recovery checkpoint');
+      if(retryAt>clock())return {status:'waiting-quota',request_id:request.request_id,retry_at:entry.result.quota_retry_at};
     }
+    const finish = async reason => {
+      const result = {accepted: false, status: 'not-merged', retryable: false, ...request, reason};
+      await api(`/repos/${repo}/issues/${pr.number}/comments`, 'POST', {body: renderWorkerResult('merge', result)});
+      return result;
+    };
+    const last = dispatches.at(-1);
+    if (last) {
+      // The title uniquely binds an execution to the durable attempt. A dispatch
+      // that returned an ambiguous failure is given time to appear before recovery.
+      const response = await api(`/repos/${repo}/actions/workflows/worker-merge.yml/runs?event=workflow_dispatch&per_page=100`);
+      const run = response.workflow_runs?.find(row => row.display_title === executionTitle(request, last.attempt));
+      if (run && run.status !== 'completed') return {status: 'live', run_ids: [run.id]};
+      if (!run && clock() - Date.parse(last.dispatched_at) < 120000) return {status: 'awaiting-dispatch', request_id: request.request_id};
+      if (run) {
+        // Preserve each cancelled/failed attempt even if its final job never ran.
+        await api(`/repos/${repo}/issues/${pr.number}/comments`, 'POST', {body: queueBody({...request, kind: 'dispatch',
+          attempt: last.attempt, dispatched_at: last.dispatched_at, observed_run_id: run.id, conclusion: run.conclusion})});
+      }
+    }
+    // A changed head still waits for any recent/visible dispatch to settle above.
+    // A durable rejection is not a reason to strand the next FIFO request.
+    if (pr.head.sha !== request.expected_head) {
+      await finish('Head changed; obtain a fresh review and submit a new request');
+      continue;
+    }
+    const attempt = (last?.attempt ?? 0) + 1;
+    if (attempt > MAX_ATTEMPTS) {
+      await finish('Queue recovery exhausted three terminal/absent executions; inspect durable attempt receipts and resubmit unchanged reviewed head');
+      continue;
+    }
+    await api(`/repos/${repo}/issues/${pr.number}/comments`, 'POST', {body: queueBody({...request, kind: 'dispatch', attempt, dispatched_at: new Date(clock()).toISOString()})});
+    await api(`/repos/${repo}/actions/workflows/worker-merge.yml/dispatches`, 'POST', {ref: 'main', inputs: {
+      pr_number: String(pr.number), expected_head: request.expected_head, request_id: request.request_id, queue_attempt: String(attempt)}});
+    return {status: 'dispatched', request_id: request.request_id, attempt};
   }
-  const attempt = (last?.attempt ?? 0) + 1;
-  if (attempt > MAX_ATTEMPTS) return finish('Queue recovery exhausted three terminal/absent executions; inspect durable attempt receipts and resubmit unchanged reviewed head');
-  await api(`/repos/${repo}/issues/${pr.number}/comments`, 'POST', {body: queueBody({...request, kind: 'dispatch', attempt, dispatched_at: new Date(clock()).toISOString()})});
-  await api(`/repos/${repo}/actions/workflows/worker-merge.yml/dispatches`, 'POST', {ref: 'main', inputs: {
-    pr_number: String(pr.number), expected_head: request.expected_head, request_id: request.request_id, queue_attempt: String(attempt)}});
-  return {status: 'dispatched', request_id: request.request_id, attempt};
+  return {status: 'empty'};
 }
 export function executionTitle(request, attempt) { return `merge #${request.pr_number} ${request.request_id} attempt ${attempt}`; }
 export async function assertAdmission({api, repo, request, attempt, runId}) {
