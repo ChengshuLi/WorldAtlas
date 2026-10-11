@@ -523,6 +523,204 @@ class LinuxTransitionControls(unittest.TestCase):
                 g.inspect(self.repo, self.baseline, self.candidate)
 
 
+class ProgrammeMigrationControls(unittest.TestCase):
+    """Tiny real Git transitions; mocked baseline proofs test orchestration only."""
+    git = LinuxTransitionControls.git
+    write = LinuxTransitionControls.write
+    commit = LinuxTransitionControls.commit
+    pin = LinuxTransitionControls.pin
+    orchestrate = LinuxTransitionControls.orchestrate
+
+    def setUp(self):
+        import importlib.util
+        from unittest import mock
+        self.mock = mock
+        spec = importlib.util.spec_from_file_location('trusted_programme_migration_control', DRAFT)
+        self.gate = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(self.gate)
+        scratch = ROOT / '.cache/trusted-programme-migration-fixtures'
+        scratch.mkdir(parents=True, exist_ok=True)
+        self.temporary = tempfile.TemporaryDirectory(dir=scratch)
+        self.addCleanup(self.temporary.cleanup)
+        self.repo = Path(self.temporary.name)
+        self.git('init', '-q')
+        self.git('config', 'user.name', 'synthetic-control')
+        self.git('config', 'user.email', 'control@example.invalid')
+        # A metacharacter in an admitted name also checks literal exclusions.
+        self.helper = 'support/helper[1].py'
+        self.addition = 'test/programmes.test.py'
+        self.policy = 'support/catalogue.json'
+        self.paths = sorted([self.helper, self.addition, self.policy])
+        self.vector_paths = [self.helper, *[f'methods/method-{i:02}.py' for i in range(27)]]
+        for i, name in enumerate(self.vector_paths):
+            self.write(name, f'original-method-{i}\n'.encode())
+        self.write(self.policy, b'unchanged trusted policy\n')
+        self.write('data/ownership-selection.json', b'{}\n')
+        self.write('data/scientific-input.json', b'unchanged scientific bytes\n')
+        self.baseline = self.commit('synthetic trusted programme baseline')
+        vector = [{'path': name, 'bytes': (self.repo/name).stat().st_size,
+                   'sha256': hashlib.sha256((self.repo/name).read_bytes()).hexdigest()}
+                  for name in self.vector_paths]
+        before = {name: self.pin(self.baseline, name) for name in self.paths}
+        for name in [self.helper, self.addition]:
+            self.write(name, b"raise RuntimeError('candidate programme must never execute')\n")
+        self.candidate = self.commit('synthetic exact programme migration')
+        self.gate.PROGRAMME_MIGRATION_REFERENCE = [
+            {'path': name, 'before': before[name], 'after': self.pin(self.candidate, name)}
+            for name in self.paths]
+        self.gate.PROGRAMME_MIGRATION_OLD_VECTOR = vector
+        self.rehash()
+
+    def rehash(self):
+        g = self.gate
+        g.PROGRAMME_MIGRATION_REFERENCE_SHA256 = g.transition_digest(g.PROGRAMME_MIGRATION_REFERENCE)
+        g.PROGRAMME_MIGRATION_VECTOR_SHA256 = g.transition_digest(g.PROGRAMME_MIGRATION_OLD_VECTOR, newline=True)
+
+    def check(self, candidate=None, baseline=None):
+        return self.gate.programme_registry_transition(
+            self.repo, baseline or self.baseline, candidate or self.candidate)
+
+    def test_exact_real_git_programme_migration_never_executes_candidate(self):
+        proof = self.check()
+        self.assertEqual(proof['kind'], 'exact-reviewed-programme-registry-migration-v1')
+        self.assertEqual(proof['changed_paths'], 2)
+        self.assertEqual(proof['baseline_commit'], self.baseline)
+        self.assertEqual(proof['candidate_commit'], self.candidate)
+        self.assertEqual(proof['baseline_tree'], self.git('rev-parse', self.baseline + '^{tree}').decode().strip())
+        self.assertEqual(proof['candidate_tree'], self.git('rev-parse', self.candidate + '^{tree}').decode().strip())
+        self.assertTrue(proof['whole_tree_outside_exact_delta_equal'])
+        self.assertFalse(proof['candidate_code_executed'])
+        self.assertFalse(proof['candidate_scientific_qualification'])
+        self.assertIsNone(self.check(candidate=self.baseline))
+
+    def test_production_programme_contract_is_exact_and_authenticated(self):
+        namespace = {'__name__': 'non_cli_control'}
+        exec(compile(DRAFT.read_bytes(), str(DRAFT), 'exec'), namespace)
+        reference = namespace['PROGRAMME_MIGRATION_REFERENCE']
+        vector = namespace['PROGRAMME_MIGRATION_OLD_VECTOR']
+        prefix = 'coordination/engineering/selected-geography-effective-prevention-20261009/'
+        self.assertEqual([row['path'] for row in reference], [
+            prefix + 'selected-neighbor-prevention.mjs', prefix + 'supported-programs.json',
+            'test/supported-programs.test.mjs'])
+        self.assertEqual(reference[1]['before'], reference[1]['after'])
+        self.assertIsNone(reference[2]['before'])
+        self.assertEqual(sum(row['before'] != row['after'] for row in reference), 2)
+        self.assertEqual(namespace['transition_digest'](reference), namespace['PROGRAMME_MIGRATION_REFERENCE_SHA256'])
+        self.assertEqual(len(vector), 28)
+        self.assertEqual(len({row['path'] for row in vector}), 28)
+        self.assertEqual(namespace['transition_digest'](vector, newline=True), namespace['PROGRAMME_MIGRATION_VECTOR_SHA256'])
+
+    def test_programme_body_missing_addition_mode_directory_symlink_and_rename_refuse(self):
+        for alteration in ['body', 'missing', 'mode', 'directory', 'symlink', 'rename']:
+            with self.subTest(alteration=alteration):
+                self.git('checkout', '-q', '--detach', self.candidate)
+                p = self.repo/self.addition
+                if alteration == 'body':
+                    p.write_bytes(b'changed candidate body\n')
+                elif alteration == 'missing':
+                    p.unlink()
+                elif alteration == 'mode':
+                    p.chmod(0o755)
+                elif alteration == 'directory':
+                    p.unlink()
+                    p.mkdir()
+                    (p/'hidden-child.py').write_bytes(b'not admitted\n')
+                elif alteration == 'symlink':
+                    p.unlink()
+                    p.symlink_to('../data/scientific-input.json')
+                else:
+                    p.rename(self.repo/'renamed.py')
+                self.assertIsNone(self.check(self.commit(alteration)))
+        self.git('checkout', '-q', '--detach', self.baseline)
+        self.write(self.addition, self.git('show', self.candidate + ':' + self.addition))
+        self.assertIsNone(self.check(baseline=self.commit('addition already present')))
+
+    def test_extra_inputs_and_identical_policy_or_baseline_vector_drift_refuse(self):
+        for name in ['data/scientific-input.json', self.vector_paths[-1],
+                     'support/helper1.py', 'outside.py', self.policy]:
+            with self.subTest(candidate_path=name):
+                self.git('checkout', '-q', '--detach', self.candidate)
+                self.write(name, b'not admitted\n')
+                self.assertIsNone(self.check(self.commit('extra candidate drift')))
+        # Equality outside the delta is insufficient if both trees carry the
+        # same substituted policy or method. Authenticate actual baseline bodies.
+        for name in [self.policy, self.vector_paths[-1]]:
+            with self.subTest(both_versions=name):
+                self.git('checkout', '-q', '--detach', self.baseline)
+                self.write(name, b'equal but unauthenticated replacement\n')
+                baseline = self.commit('substituted baseline')
+                for changed in [self.helper, self.addition]:
+                    self.write(changed, self.git('show', self.candidate + ':' + changed))
+                self.assertIsNone(self.check(self.commit('substituted candidate'), baseline))
+
+    def test_programme_inventory_authentication_and_prospective_bounds_refuse(self):
+        g = self.gate
+        reference, vector = g.PROGRAMME_MIGRATION_REFERENCE, g.PROGRAMME_MIGRATION_OLD_VECTOR
+        for attribute, malformed in [
+                ('PROGRAMME_MIGRATION_REFERENCE', reference[::-1]),
+                ('PROGRAMME_MIGRATION_REFERENCE', reference[:-1]),
+                ('PROGRAMME_MIGRATION_OLD_VECTOR', vector[::-1]),
+                ('PROGRAMME_MIGRATION_OLD_VECTOR', vector[:-1])]:
+            with self.subTest(attribute=attribute, count=len(malformed)):
+                with self.mock.patch.object(g, attribute, malformed):
+                    with self.assertRaises(ValueError):
+                        self.check()
+        helper = next(row for row in reference if row['path'] == self.helper)['after']
+        original_bytes = helper['bytes']
+        for scope in ['one body', 'combined union']:
+            with self.subTest(scope=scope):
+                helper['bytes'] = g.MAX_BYTES + 1 if scope == 'one body' else original_bytes
+                if scope == 'combined union':
+                    # Descriptor-only admission probe; allocate no large bodies.
+                    g.PROGRAMME_MIGRATION_OLD_VECTOR = [{**row, 'bytes': g.MAX_BYTES} for row in vector]
+                self.rehash()
+                with self.mock.patch.object(g, 'git', side_effect=AssertionError('body opened before admission')):
+                    with self.assertRaisesRegex(ValueError, 'bounds'):
+                        self.check()
+
+    def test_programme_whole_tree_git_failure_and_timeout_do_not_pass(self):
+        from types import SimpleNamespace
+        original = self.gate.subprocess.run
+        def refusal(command, **kwargs):
+            return SimpleNamespace(returncode=128) if 'diff-tree' in command else original(command, **kwargs)
+        with self.mock.patch.object(self.gate.subprocess, 'run', side_effect=refusal):
+            with self.assertRaisesRegex(ValueError, 'equivalence unavailable'):
+                self.check()
+        def timeout(command, **kwargs):
+            if 'diff-tree' in command:
+                raise subprocess.TimeoutExpired('git', 30)
+            return original(command, **kwargs)
+        with self.mock.patch.object(self.gate.subprocess, 'run', side_effect=timeout):
+            with self.assertRaises(subprocess.TimeoutExpired):
+                self.check()
+
+    def test_programme_orchestration_keeps_baseline_proof_identities(self):
+        proof = {'status': 'not-applicable', 'regressions': None,
+                 'baseline_commit': self.baseline, 'candidate_commit': self.baseline,
+                 'selected_native_report': {'synthetic_proof': True},
+                 'selected_continuous_report': {'synthetic_proof': True}}
+        result = self.orchestrate(lambda *args: proof)
+        self.assertEqual(result['reviewed_code_transition']['kind'], 'exact-reviewed-programme-registry-migration-v1')
+        self.assertIs(result['reused_baseline_proof'], proof)
+        self.assertEqual(result['candidate_commit'], self.candidate)
+        self.assertEqual(result['reused_baseline_proof']['candidate_commit'], self.baseline)
+        self.assertFalse(result['candidate_code_executed'])
+
+    def test_programme_baseline_failure_and_input_mismatch_propagate(self):
+        with self.assertRaisesRegex(RuntimeError, 'original baseline failure'):
+            self.orchestrate(lambda *args: (_ for _ in ()).throw(RuntimeError('original baseline failure')))
+        with self.assertRaisesRegex(ValueError, 'baseline proof did not pass'):
+            self.orchestrate(lambda *args: {'status': 'native-regressions-found', 'regressions': 1})
+        g = self.gate
+        inspect = g.inspect
+        with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='synthetic-checkout'), \
+             self.mock.patch.object(g, 'inventory', side_effect=[['before'], ['after']]), \
+             self.mock.patch.object(g, 'inspect') as proof:
+            with self.assertRaisesRegex(ValueError, 'changed geographic inputs'):
+                inspect(self.repo, self.baseline, self.candidate)
+            proof.assert_not_called()
+
+
 if __name__ == '__main__':
     if '--receipts' in sys.argv:
         import argparse
