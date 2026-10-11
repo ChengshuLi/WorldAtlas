@@ -1,0 +1,299 @@
+{
+  "static_upper_bound": {
+    "whole_original_patch_bodies_bytes": 39711,
+    "current_target_polygon_groups": 218,
+    "geometry_diagnostic_upper_bytes": 327308,
+    "result_upper_bytes": 3490964,
+    "result_4MiB_headroom": 703340,
+    "remaining_metadata_reserve_bytes": 1048576,
+    "combined_upper_with_metadata_reserve_bytes": 6320871,
+    "combined_8MiB_headroom": 2067737,
+    "metadata_reserve_verified": true,
+    "derivation": "Exact retained arrays plus geometry diagnostics bounded by 24-byte finite JSON numbers, at most all current polygon groups as additions, 46 times all60 primitive four-number bounds. Native merged/additional interval serialization bounded by three times35 whole original patch bodies; fixed result metadata reserves64KiB. Separate1MiB request/facts/publication metadata reserve remains subject to caller verification.",
+    "metadata_bound": {
+      "request_metadata_upper_bytes": 201788,
+      "facts_upper_bytes": 130266,
+      "publication_upper_bytes": 4096,
+      "total_remaining_metadata_upper_bytes": 336150,
+      "reserve_headroom_bytes": 712426,
+      "all_native_asset_metadata_count": 56,
+      "all_native_asset_metadata_bytes": 92231,
+      "selected_source_metadata_count": 11,
+      "max_retained_complete_row_runs": 467,
+      "min_native_run_part_words": 994670,
+      "max_containing_parts_per_row": 2,
+      "maximum_native_group_count": 329,
+      "maximum_native_group_row_value": 999999,
+      "execution_metadata_reserve_bytes": 65536,
+      "reasoning": "All56 transport custody records upper-bound any actual native subset. All11 exact selected source descriptors retained. A complete row has at most2 containing run parts because its whole word length is below the smallest run part; at most329 requested+predecessor rows, charged as329 individual maximum-width phase records, upper-bound grouping. Actual issued execution metadata is padded to64KiB. Fixed publication has4KiB reserve. These are size templates only, not fabricated execution/result records.",
+      "inputs": [
+        {
+          "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+          "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/request.json",
+          "bytes": 1509405,
+          "sha256": "8140293e369e022152cbfafb1d3bc1828386ebd662f25952008273390a469041"
+        },
+        {
+          "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+          "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+          "bytes": 252447,
+          "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba"
+        },
+        {
+          "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+          "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/index.json",
+          "bytes": 21330,
+          "sha256": "91b868b66f52d3051a09b88a84411f7c70f38de9528a0166a8fb16dcdc71ba02"
+        },
+        {
+          "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+          "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json",
+          "bytes": 14656,
+          "sha256": "3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776"
+        }
+      ]
+    }
+  },
+  "version": 1,
+  "kind": "read-only-static-output-size-diagnosis-v1",
+  "execution_head": "e8d6de16f4902e2455b193a81696dd20394c37d4",
+  "admission": {
+    "measured_at": "2026-10-11T17:25:43.668Z",
+    "mem_available_bytes": 8587091968,
+    "parent_bytes": 2147483648,
+    "own_bytes": 536870912,
+    "other_bytes": 536870912,
+    "residual_bytes": 5365866496,
+    "minimum_residual_bytes": 805306368
+  },
+  "method": "Authenticate whole selected source products sequentially, select target geometry literals, normalize active original row metadata, and reuse complete base owner intervals from previously qualified retained NATIVE outputs. Only canonical JS serialization and exact identity joins; no producer, GIS, native conservation or qualification executed.",
+  "fields": {
+    "original_rows": {
+      "count": 60,
+      "bytes": 383117,
+      "sha256": "8864d0df21bf8467047cbacea53c5641aae6f4fa81f0ae8673748a289195a6d2"
+    },
+    "current_targets": {
+      "count": 46,
+      "bytes": 200535,
+      "sha256": "332c02972acd8cc84ebbf19c9efc20403c80c150048210b4bcc90ac995da08c8"
+    },
+    "current_rows": {
+      "count": 269,
+      "bytes": 1197628,
+      "sha256": "c6f81e8eedfa302701e1eb1bcfc42a67b5fa5c212a4fd23b80f5c6928e9b90dd"
+    }
+  },
+  "prior_request_fields": {
+    "original_rows": {
+      "count": 47,
+      "bytes": 346327
+    },
+    "current_targets": {
+      "count": 34,
+      "bytes": 174824
+    },
+    "current_rows": {
+      "count": 227,
+      "bytes": 897955
+    }
+  },
+  "request_three_field_payload_bytes": 1781331,
+  "result_retained_payload_lower_bound_bytes": 2978987,
+  "four_body_combined_lower_bound_bytes": 4760318,
+  "stock_output_limit_bytes": 4194304,
+  "proposed_8MiB_bytes": 8388608,
+  "headroom_to_8MiB_above_lower_bound": 3628290,
+  "largest_whole_decoded_source_bytes": 12932719,
+  "new_patch_run_count": 42,
+  "duplicate_rows_checked": 0,
+  "actual_failed_002_max_logical_phase_bytes": null,
+  "issued_complete_phase_bytes": 245679353,
+  "limits": [
+    "This is static size diagnosis, not a current rebind result. Full acquisition, geometry/native result details, facts, publication and execution metadata remain additional to the lower bound. Failed 002 wrote no facts from which its actual maximum logical phase could be recovered."
+  ],
+  "inputs": [
+    {
+      "commit": "e8d6de16f4902e2455b193a81696dd20394c37d4",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authority-registry.json",
+      "bytes": 34162,
+      "sha256": "95f649b62ec4dfd8f7a52ceb55d9daa0a53b65bb4f063c5bf812698ad39f46d1",
+      "git_blob_oid": "21d56ecec1da3319014377b3d717508e7d9ac25d"
+    },
+    {
+      "commit": "e8d6de16f4902e2455b193a81696dd20394c37d4",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/composed-original-ledger.json",
+      "bytes": 394027,
+      "sha256": "4385f08684810bb2eec132ac4c632cb5ae6c6b344f04453ee947adf94a8d3a6e",
+      "git_blob_oid": "3614039c3f4c4dbb8f33b22c5537e0141eb1ed24"
+    },
+    {
+      "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json",
+      "bytes": 14656,
+      "sha256": "3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776",
+      "git_blob_oid": "fd6d98e7cc62c97a21f80c122f43a528cfba5bdd"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-10.json",
+      "bytes": 5144571,
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2",
+      "git_blob_oid": "84b4cf537b801c7f6d3840173c49b7e4293a139d"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-18.json",
+      "bytes": 4909063,
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
+      "git_blob_oid": "59012653b56da5a394e7692209b257e27883eab8"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-19.json",
+      "bytes": 4583022,
+      "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+      "git_blob_oid": "306125db7012a9ac927bb4a169dea5166ef126e7"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-22.json",
+      "bytes": 4746385,
+      "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+      "git_blob_oid": "b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-25.json",
+      "bytes": 4525239,
+      "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+      "git_blob_oid": "16ba4f38251d1bd99ac85f0ae7cca2f0424470f8"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-26.json",
+      "bytes": 4608983,
+      "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
+      "git_blob_oid": "5d61478ece9042cbd0791eabd2536e1054e26341"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-27.json",
+      "bytes": 4863162,
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+      "git_blob_oid": "a6a359c8c566462b280a461b4a5e1591e1f486c4"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-28.json",
+      "bytes": 6613963,
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "git_blob_oid": "a9e03cb07194a73f643af85d1e6db94abe3b5fc9"
+    },
+    {
+      "commit": "ee684e3145079ff93f68520e3c17837789be5b0c",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz",
+      "bytes": 3353763,
+      "sha256": "d7665a1fdf68f0626c7e28da9ac0e40f4e35aaeacdf91bad4ab8e2d77221bc49",
+      "git_blob_oid": "d3f17ccd8eecca88b16f2bbbf075320b6d555aea"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-5.json",
+      "bytes": 5226173,
+      "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc",
+      "git_blob_oid": "cf59e69b02ab2c9ad7344ddbf309a221a8be587b"
+    },
+    {
+      "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "path": "data/geography/part-9.json",
+      "bytes": 5729632,
+      "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+      "git_blob_oid": "79a4f0cd17ca9f7007916be8419c2fa986fe7a61"
+    },
+    {
+      "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/request.json",
+      "bytes": 1509405,
+      "sha256": "8140293e369e022152cbfafb1d3bc1828386ebd662f25952008273390a469041",
+      "git_blob_oid": "d8087e5f3fcd706a79b02b7c54ac8999208396ba"
+    },
+    {
+      "commit": "e8d6de16f4902e2455b193a81696dd20394c37d4",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/patch-batch.json",
+      "bytes": 1320,
+      "sha256": "a5ffa9874faedec2a7677b303417f424a7d97f28d2bb877da58ee60d7fc474b1",
+      "git_blob_oid": "97696aef9c33148661cef07146082eafcdbcc4b4"
+    },
+    {
+      "commit": "e8d6de16f4902e2455b193a81696dd20394c37d4",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/owner-window.json",
+      "bytes": 164834,
+      "sha256": "8f0cb2d1b376c9fab68e95f08522ffa829f97b7154bc7eb9fa952ae7338e328d",
+      "git_blob_oid": "f3aaa13e3eccaa2be99e823b3b654cb991f02186"
+    },
+    {
+      "commit": "e8d6de16f4902e2455b193a81696dd20394c37d4",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/patch-batch.json",
+      "bytes": 1100,
+      "sha256": "51e5bc6a85485d55dc43da2d4fcb527a258d1c7fcebd2d3a9391197c07c3d8f9",
+      "git_blob_oid": "963babed868938c9469f5e46eabdc98e703d6e9c"
+    },
+    {
+      "commit": "e8d6de16f4902e2455b193a81696dd20394c37d4",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/owner-window.json",
+      "bytes": 149390,
+      "sha256": "f77d6e6a4245cc8ea49e5c28bc8ae74f75564cff11699f5eade5b198fc5329d9",
+      "git_blob_oid": "47466506110fbc9af73c97b0a775c05a53fc6554"
+    },
+    {
+      "commit": "e8d6de16f4902e2455b193a81696dd20394c37d4",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/patch-batch.json",
+      "bytes": 1010,
+      "sha256": "577844c97acceb6ad3b6e61b4e80687cb86346e14e94ecc9e57779a4ee2ecbd4",
+      "git_blob_oid": "36c3baffd86e8b7adabb5fd629e9c679a516a2bc"
+    },
+    {
+      "commit": "e8d6de16f4902e2455b193a81696dd20394c37d4",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/owner-window.json",
+      "bytes": 158060,
+      "sha256": "5af95b6bd90f8024f7b689115c4139220eff4118a013745fa488268a03f48b58",
+      "git_blob_oid": "93e970d99258528f27b7bd55f4d5a876e3f9b67e"
+    },
+    {
+      "commit": "e8d6de16f4902e2455b193a81696dd20394c37d4",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/native/patch-batch.json",
+      "bytes": 793,
+      "sha256": "10a4e419e1d5a390dac11d7ea8dee58d549213868ecc8f96df16b524e73a180d",
+      "git_blob_oid": "c7560d312d849e4b2d24bfe84b14c4f311f86e13"
+    },
+    {
+      "commit": "e8d6de16f4902e2455b193a81696dd20394c37d4",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/native/owner-window.json",
+      "bytes": 44754,
+      "sha256": "13efd32749df46b8dc3c5ec2aa478805bbb1218c5d380d6f4f04f75cc6ab546a",
+      "git_blob_oid": "c3a50368db6e35fe36d805bc6bd5251f8b730ee6"
+    },
+    {
+      "commit": "e8d6de16f4902e2455b193a81696dd20394c37d4",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/native/patch-batch.json",
+      "bytes": 1566,
+      "sha256": "29c62c62be249df19084a404f78c00284975276516b74f6dd4497764c3124492",
+      "git_blob_oid": "417d0aa21823c3c7eb089b313c73778a2aca2269"
+    },
+    {
+      "commit": "e8d6de16f4902e2455b193a81696dd20394c37d4",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/native/owner-window.json",
+      "bytes": 95740,
+      "sha256": "b363548efcd7078455b3743bfc4d80af870f0eae68e7ebb9b7db52924d2052a9",
+      "git_blob_oid": "134ad58bef109b0b8adeda74cc9b86cb11db7595"
+    },
+    {
+      "commit": "e8d6de16f4902e2455b193a81696dd20394c37d4",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/original-patch-roster.json",
+      "bytes": 17839,
+      "sha256": "9c4476196aa8f37239e51de63b4f1be0cb22f5a5d454319c9adc60188bd4596f",
+      "git_blob_oid": "dde40f19c5c9a44ee97686ed8ca032bd61113fe9"
+    }
+  ]
+}

@@ -551,6 +551,13 @@
       "role": "retained-result-or-operand"
     },
     {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/current-refused-002/static-sizing.json",
+      "bytes": 14386,
+      "sha256": "829fe2496835f2a80d884b859685b2d42d624c546163b68ebb81d0feb5087c8e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
       "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/current-refused-002/stderr.log",
       "bytes": 2596,
       "sha256": "a7571f83f7bf58ba2507d7347936bf7d15206b9a2e8bddf6f3b18c63b5e8072f",
@@ -2543,7 +2550,7 @@
       ]
     },
     {
-      "text": "Historical current-refused-001 stopped at the unchanged sampled process-group guard, produced no qualified request/publication, and reaped all owned processes. Complete raw sampling and execution custody remain retained.",
+      "text": "Historical current-refused-001 refused: Sampled owned process group bound exceeded. It produced no qualified request/publication and reaped all owned processes. Complete raw sampling and execution custody remain retained.",
       "status": "unresolved",
       "source_ids": [
         "prior-selected-delivery",
@@ -2552,7 +2559,7 @@
       ]
     },
     {
-      "text": "Historical current-refused-002 stopped at the unchanged sampled process-group guard, produced no qualified request/publication, and reaped all owned processes. Complete raw sampling and execution custody remain retained.",
+      "text": "Historical current-refused-002 refused: Complete cold products exceed prospective output bound before writes. It produced no qualified request/publication and reaped all owned processes. Complete raw sampling and execution custody remain retained.",
       "status": "unresolved",
       "source_ids": [
         "prior-selected-delivery",
