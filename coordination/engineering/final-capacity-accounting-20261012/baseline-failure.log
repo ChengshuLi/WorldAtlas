@@ -1,0 +1,45 @@
+✖ actual final HTTP fanout exceeds estimate with fresh quota and retained 304/retry guards: false (54.171335ms)
+✖ actual final HTTP fanout exceeds estimate with fresh quota and retained 304/retry guards: true (26.805351ms)
+✔ actual final high fanout stops on newly observed concurrent depletion and preserves recovery (13.721556ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 1
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 281.933248
+
+✖ failing tests:
+
+test at test/final-capacity.test.mjs:802:36
+✖ actual final HTTP fanout exceeds estimate with fresh quota and retained 304/retry guards: false (54.171335ms)
+  Error: Final inventory grew beyond safe request bound; bounded intervention required
+      at rejection (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/68f3f29f037c4471119edf37540386257754fcc1337f2ac632beafcf53e01c49/work/scripts/final-capacity.mjs:172:42)
+      at admit (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/68f3f29f037c4471119edf37540386257754fcc1337f2ac632beafcf53e01c49/work/scripts/final-capacity.mjs:178:35)
+      at performRequest (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/68f3f29f037c4471119edf37540386257754fcc1337f2ac632beafcf53e01c49/work/scripts/issue-claim-contract.mjs:169:18)
+      at request (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/68f3f29f037c4471119edf37540386257754fcc1337f2ac632beafcf53e01c49/work/scripts/issue-claim-contract.mjs:250:10)
+      at api (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/68f3f29f037c4471119edf37540386257754fcc1337f2ac632beafcf53e01c49/work/scripts/issue-claim-contract.mjs:255:21)
+      at wrapped (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/68f3f29f037c4471119edf37540386257754fcc1337f2ac632beafcf53e01c49/work/scripts/immutable-git-blobs.mjs:15:66)
+      at api (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/68f3f29f037c4471119edf37540386257754fcc1337f2ac632beafcf53e01c49/work/scripts/final-capacity.mjs:188:23)
+      at wrapped (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/68f3f29f037c4471119edf37540386257754fcc1337f2ac632beafcf53e01c49/work/scripts/immutable-git-blobs.mjs:15:66)
+      at file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/68f3f29f037c4471119edf37540386257754fcc1337f2ac632beafcf53e01c49/work/scripts/issue-claim-contract.mjs:134:40
+      at Array.map (<anonymous>) {
+    requestBudget: true
+  }
+
+test at test/final-capacity.test.mjs:802:36
+✖ actual final HTTP fanout exceeds estimate with fresh quota and retained 304/retry guards: true (26.805351ms)
+  Error: Final inventory grew beyond safe request bound; bounded intervention required
+      at rejection (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/68f3f29f037c4471119edf37540386257754fcc1337f2ac632beafcf53e01c49/work/scripts/final-capacity.mjs:172:42)
+      at admit (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/68f3f29f037c4471119edf37540386257754fcc1337f2ac632beafcf53e01c49/work/scripts/final-capacity.mjs:178:35)
+      at performRequest (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/68f3f29f037c4471119edf37540386257754fcc1337f2ac632beafcf53e01c49/work/scripts/issue-claim-contract.mjs:169:18)
+      at request (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/68f3f29f037c4471119edf37540386257754fcc1337f2ac632beafcf53e01c49/work/scripts/issue-claim-contract.mjs:250:10)
+      at api (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/68f3f29f037c4471119edf37540386257754fcc1337f2ac632beafcf53e01c49/work/scripts/issue-claim-contract.mjs:255:21)
+      at wrapped (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/68f3f29f037c4471119edf37540386257754fcc1337f2ac632beafcf53e01c49/work/scripts/immutable-git-blobs.mjs:15:66)
+      at api (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/68f3f29f037c4471119edf37540386257754fcc1337f2ac632beafcf53e01c49/work/scripts/final-capacity.mjs:188:23)
+      at wrapped (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/68f3f29f037c4471119edf37540386257754fcc1337f2ac632beafcf53e01c49/work/scripts/immutable-git-blobs.mjs:15:66)
+      at file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/68f3f29f037c4471119edf37540386257754fcc1337f2ac632beafcf53e01c49/work/scripts/issue-claim-contract.mjs:134:40
+      at Array.map (<anonymous>) {
+    requestBudget: true
+  }

@@ -495,7 +495,7 @@ test('same-token success capacity metadata never logs arbitrary bodies or header
   } finally {globalThis.fetch = fetchOriginal;}
 });
 
- test('real geographic artifact adapter cannot grow pagination outside final paid-call guard', async () => {
+for (const exactCapacity of [true, false]) test(`real geographic artifact growth retains quota and structural limits: ${exactCapacity}`, async () => {
   const f = fixture(), original = f.api; let loading = false, artifactCalls = 0, downloads = 0;
   f.api = async (...args) => {
     if (loading && args[0].includes('/artifacts?')) {
@@ -504,14 +504,20 @@ test('same-token success capacity metadata never logs arbitrary bodies or header
     }
     return original(...args);
   };
-  await assert.rejects(f.complete({geographyReportLoader: async ({api}) => {
+  let probes = 0, required;
+  f.api.readRepositoryCapacity = async () => ({limit: 2000, reset: 2,
+    remaining: ++probes === 1 || !exactCapacity ? 2000 : probes === 2 ? 0 : required});
+  await assert.rejects(f.complete({capacityObserver: row => {if (row.phase === 'final-capacity') required = row.required;},
+    geographyReportLoader: async ({api}) => {
     assert.equal(typeof api, 'function'); assert.notEqual(api, f.api);
     loading = true;
     return loadGeographicReport({api, repo: f.options().repo, runId: 12,
       artifactName: 'geography-durable-capacity-ticket-12', expectedHash: 'a'.repeat(64), token: 'fixture-token',
       fetchImpl: async () => {downloads++; throw Error('Unexpected download');}});
-  }}), /inventory grew beyond safe request bound/);
-  assert.ok(artifactCalls > 0 && artifactCalls < 100); assert.equal(downloads, 0);
+  }}), exactCapacity ? /inventory grew beyond safe request bound/ : /Missing, duplicate, expired or oversized/);
+  if (exactCapacity) assert.ok(artifactCalls > 0 && artifactCalls < 100);
+  else assert.equal(artifactCalls, 100, 'ordinary complete inventory remains bounded even with quota headroom');
+  assert.equal(downloads, 0);
   assert.equal(f.writes.filter(row => row.method === 'PUT').length, 0);
 });
 test('capacity excludes blob REST requests only after exact transport proves the entire bound inventory',async()=>{
@@ -754,4 +760,90 @@ test('origin identity and latest successful geography remain fresh across actual
     f.mutateOnWait = () => mutate(f);
     await assert.rejects(f.reuse(prepared)); assert.equal(f.phase, 'after'); assert.equal(f.writes.length, 0);
   }
+});
+
+
+// Real HTTP admission and ETag revalidation, with only the network replaced.
+// Closed linked PRs remain part of every fresh ownership inventory.
+function quotaCompletionFixture({fanout = 40, retry = false, deplete = false} = {}) {
+  const f = fixture(), original = f.api, timing = clock(), attempts = [], observations = [];
+  const linked = Array.from({length: fanout}, (_, i) => ({...structuredClone(f.pr), number: 100 + i,
+    state: 'closed', merged: true}));
+  let remaining = 2000, probes = 0, retried = false, validationStart = 0, finalTimeline = false;
+  const headers = () => ({'x-ratelimit-limit': '2000', 'x-ratelimit-remaining': String(remaining),
+    'x-ratelimit-reset': '3600', 'x-ratelimit-resource': 'core', etag: '"unchanged"'});
+  f.api = githubAPI('synthetic-quota-token', {...timing, minimumRemaining: 16, readWaitMs: 60000,
+    onRequest: row => attempts.push({route: row.route, status: row.status, remaining: row.capacity.remaining}),
+    fetchImpl: async (url, init) => {
+      const route = url.slice('https://api.github.com'.length), name = route.split('?')[0];
+      if (name === `/repos/${f.repo}`) {
+        probes++; remaining--; if (probes === 2) validationStart = attempts.length + 1;
+        return Response.json({}, {headers: headers()});
+      }
+      const validation = probes >= 2;
+      if (retry && validation && !retried && name.endsWith('/pulls/23')) {
+        retried = true; remaining--;
+        return Response.json({message: 'secondary rate limit'}, {status: 403,
+          headers: {...headers(), 'retry-after': '1'}});
+      }
+      if (validation && name.endsWith('/timeline')) {
+        finalTimeline = true;
+        if (deplete) remaining = 20; // Another consumer exhausted most shared capacity.
+      }
+      if (init.headers['If-None-Match']) return new Response(null, {status: 304, headers: headers()});
+      remaining--;
+      let value;
+      if (name.endsWith('/timeline')) value = linked.map(pr => ({source: {issue: {
+        number: pr.number, body: pr.body, pull_request: {url: 'fixture'}}}}));
+      else if (linked.some(pr => name.endsWith('/pulls/' + pr.number)))
+        value = structuredClone(linked.find(pr => name.endsWith('/pulls/' + pr.number)));
+      else value = await original(route, init.method, init.body ? JSON.parse(init.body) : undefined);
+      return Response.json(value, {headers: headers()});
+    }});
+  const complete = extra => f.complete({capacityTiming: timing, capacityObserver: row => observations.push(row), ...extra});
+  return {f, attempts, observations, complete, get validationAttempts() {return attempts.slice(validationStart);},
+    get remaining() {return remaining;}, get finalTimeline() {return finalTimeline;}};
+}
+
+for (const retry of [false, true]) test(`actual final HTTP fanout exceeds estimate with fresh quota and retained 304/retry guards: ${retry}`, async t => {
+  const q = quotaCompletionFixture({retry}), result = await q.complete();
+  const capacity = result.final_capacity;
+  assert.equal(result.accepted, true);
+  assert.equal(capacity.validation_call_bound, capacity.remaining - 16);
+  assert.equal(capacity.validation_call_bound_source, 'observed-remaining-minus-recovery-reserve');
+  assert.equal(capacity.recovery_call_reserve, 16);
+  assert(q.validationAttempts.length > capacity.required - 16, 'actual attempts must expose the former estimated cap');
+  assert(q.validationAttempts.length < capacity.validation_call_bound);
+  assert(q.validationAttempts.some(row => row.status === 304), 'authority was actually conditionally reread');
+  assert.equal(q.validationAttempts.filter(row => row.status === 403).length, retry ? 1 : 0);
+  assert.equal(q.f.writes.filter(row => row.method === 'PUT').length, 1);
+  assert(q.remaining >= 16);
+  t.diagnostic(JSON.stringify({estimated_required: capacity.required, observed_remaining: capacity.remaining,
+    validation_call_bound: capacity.validation_call_bound, actual_validation_attempts: q.validationAttempts.length,
+    conditional_revalidations: q.validationAttempts.filter(row => row.status === 304).length,
+    retry_rejections: q.validationAttempts.filter(row => row.status === 403).length}));
+});
+
+test('actual final high fanout stops on newly observed concurrent depletion and preserves recovery', async () => {
+  const q = quotaCompletionFixture({deplete: true});
+  await assert.rejects(q.complete(), error => error.quotaAdmission?.remaining === 16);
+  assert(q.finalTimeline, 'depletion must happen after final capacity observation');
+  assert.equal(q.f.writes.length, 0);
+  assert(q.validationAttempts.length < q.observations.at(-1).remaining - 16,
+    'live quota must refuse before the otherwise sufficient fixed attempt allowance');
+});
+
+
+test('direct pacing adapter also uses the observed finite allowance and retains exhaustion', async () => {
+  const f = fixture(); f.startCapacity = 2000;
+  const {api, receipt} = await paceFinalValidation(f.options(), {inspect: inspectMerge});
+  assert.equal(receipt.validation_call_bound, receipt.remaining - 16);
+  let reads = 0;
+  for (;;) {
+    try {await api(`/repos/${f.repo}/pulls/23`); reads++;}
+    catch (error) {assert.equal(error.requestBudget, true); break;}
+  }
+  assert(reads > receipt.required - 16);
+  assert(reads < receipt.validation_call_bound, 'fresh post-observation gates consume the same allowance');
+  assert.equal(f.writes.length, 0);
 });
