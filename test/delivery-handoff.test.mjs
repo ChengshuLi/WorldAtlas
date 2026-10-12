@@ -13,11 +13,12 @@ import {jsonBytes, digest, pinReader, publish, prepareRequests, retainProducts, 
 
 const commit = 'a'.repeat(40), prefix = 'coordination/engineering/control/';
 function memoryReader() {
-  const bodies = new Map(); let ordinal = 0;
+  const bodies = new Map(), pins = new Map(); let ordinal = 0;
   const reader = {budget: candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0}),
     add(name, value) { const raw = Buffer.isBuffer(value) ? value : jsonBytes(value); const pin = {path: name, commit,
       mode: '100644', blob: (++ordinal).toString(16).padStart(40, '0'), bytes: raw.length, sha256: digest(raw)};
-      bodies.set(pin.sha256, raw); return pin; },
+      bodies.set(pin.sha256, raw); pins.set(name, pin); return pin; },
+    pin(c, name) { assert.equal(c, commit); const pin = pins.get(name); assert.ok(pin, "missing fixture path"); return pin; },
     read(pin) { const raw = bodies.get(pin.sha256); assert.ok(raw, 'missing fixture pin'); assert.equal(raw.length, pin.bytes); return raw; },
     json(pin) { return JSON.parse(reader.read(pin)); }};
   return reader;
@@ -327,18 +328,19 @@ test('selector finalization preserves insertion order and repeat bytes, includin
   assert.throws(() => finalizedSelection(output, changed, pin), /complete original base/);
 });
 
-test('final package replacement preserves every foreign field and declaration order and validates overlaps', () => {
+test('final package appends preserve the entire accepted prefix and validate duplicates/overlaps', () => {
   const original = {version: 1, description: 'untouched', inputs: ['.github/package-inputs.json', 'z.json', prefix + 'obsolete.json', 'a.json'],
     optional_inputs: ['a.json'], verification_paths: ['test/check.mjs'], generated_outputs: ['dist/'], extra: {z: 1, a: 2}};
   const paths = [prefix + 'new-z.json', prefix + 'new-a.json'];
   const actual = finalizedPackageInputs(original, prefix, paths);
-  assert.deepEqual(actual.inputs, ['.github/package-inputs.json', 'z.json', ...paths.toSorted(), 'a.json']);
+  assert.deepEqual(actual.inputs, [...original.inputs, ...paths.toSorted()]);
+  assert.throws(() => finalizedPackageInputs(original, prefix, [paths[0], paths[0]]), /owned package/);
   assert.deepEqual(original.inputs, ['.github/package-inputs.json', 'z.json', prefix + 'obsolete.json', 'a.json']);
   assert.equal(JSON.stringify({...actual, inputs: []}), JSON.stringify({...original, inputs: []}));
   assert.equal(JSON.stringify(finalizedPackageInputs(actual, prefix, paths)), JSON.stringify(actual));
   assert.throws(() => finalizedPackageInputs(original, prefix, [prefix + '../bad']), /owned package/);
   assert.throws(() => finalizedPackageInputs({...original, inputs: [...original.inputs, 'coordination/engineering/']}, prefix, paths), /Overlapping/);
-  assert.throws(() => finalizedPackageInputs({...original, optional_inputs: [prefix + 'obsolete.json']}, prefix, paths), /Incomplete/);
+  assert.deepEqual(finalizedPackageInputs({...original, optional_inputs: [prefix + 'obsolete.json']}, prefix, paths).optional_inputs, [prefix + 'obsolete.json']);
 });
 
 function finalizationFixture() {
@@ -396,4 +398,14 @@ test('finalization rejects coherent foreign sidecar/base/ledger/envelope binding
     assert.throws(() => publish(root, '.cache/delivery-handoff/refused', finalizeDelivery(f.config,f.reader), {}), /differs|differ|preserve/);
     assert.equal(fs.existsSync(path.join(root,'.cache')),false);
   }
+});
+
+
+test('finalization refuses a new identity at an accepted package path', () => {
+  const {reader,config} = finalizationFixture();
+  const first = finalizeDelivery(config, reader);
+  const package_inputs = reader.add(config.package_inputs.path, first['package-inputs.json']);
+  const originalPin = reader.pin;
+  reader.pin = (c,p) => p === config.selected_ledger.path ? {...originalPin(c,p), sha256: '0'.repeat(64)} : originalPin(c,p);
+  assert.throws(() => finalizeDelivery({...config,package_inputs},reader), /conflicts with accepted path identity/);
 });

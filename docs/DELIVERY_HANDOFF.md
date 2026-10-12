@@ -104,7 +104,7 @@ No proposed input is called accepted merely because a hash matches.
    Preserve prior package declarations. Compare against the actual completed reader
    inventory and run the existing package and consumer checks before delivery.
 7. `finalize`: extend the package config with an immutable original `selector`
-   (`data/ownership-selection.json`), original `package_inputs`
+   (`data/ownership-selection.json`), accepted-baseline `package_inputs`
    (`.github/package-inputs.json`), real committed `sidecar`, `selected_ledger`
    and `rebind`. Choose the last known-good original selector; this phase preserves
    its base fields and nested insertion order rather than repairing an already
@@ -116,8 +116,10 @@ No proposed input is called accepted merely because a hash matches.
    through `outer_roles`. It stages `ownership-selection.json`,
    `package-inputs.json`, the fixed-role inventory and bound smoke expectations.
    It only replaces `additive_release` in the selector, preserving an already-final
-   body's bytes. It replaces only the owned package-prefix paths, keeping every
-   other field and declaration's relative order. The existing package definition
+   body's bytes. Keep the entire accepted package list verbatim as the prefix;
+   append only genuinely new owned paths in stable sorted order. Existing paths
+   retain their positions and must retain their exact accepted byte identities.
+   Never use a globally sorted candidate list as the accepted baseline. The existing package definition
    validator rejects overlaps, missing optional declarations and unsafe paths.
    No tracked selector or package file is written: inspect and adopt these staged
    files in the delivery owner's ordinary commit/review flow. Repeating from the
@@ -151,8 +153,10 @@ runtime or resource policy. The preparation checks need only their bounded exact
 metadata bodies, not physical/GIS replay inputs. The package example leaves final
 selection/assembly/reader checks pending. Do not call the prospective totals a
 completed delivery. The separate `current13-finalize.json` example is pinned to
-the later corrected 79157664 selector/package and genuine release metadata; it
-reproduces those staged bytes without rewriting the active delivery.
+the corrected 79157664 selector, genuine release metadata, and accepted
+9473d184 package baseline. The result preserves its exact 744-entry prefix and
+appends 117 roles, reproducing the corrected d37abcd5 package. The old 79157664
+sorted package remains historical build evidence, not an append-policy oracle.
 
 ```
 node scripts/prepare-delivery-handoff.mjs requests coordination/engineering/delivery-handoff-20261011/current13-requests.json .cache/delivery-handoff/source-example-001

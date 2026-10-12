@@ -508,13 +508,10 @@ export function finalizedPackageInputs(original, prefix, paths) {
   validatePackageInputs(original);
   need(safe(prefix.slice(0, -1)) && prefix.endsWith('/') && original.version === 1
     && unique(original.inputs) && unique(paths) && paths.every(p => safe(p) && p.startsWith(prefix)), 'Exact owned package paths required');
-  const inputs = original.inputs.filter(p => !p.startsWith(prefix));
-  let position = original.inputs.findIndex(p => p.startsWith(prefix));
-  if (position < 0) position = inputs.findIndex(p => p > prefix);
-  if (position < 0) position = inputs.length;
-  const replacement = [...inputs.slice(0, position), ...[...paths].sort(), ...inputs.slice(position)];
-  need(unique(replacement), 'Duplicate final package declaration');
-  return validatePackageInputs({...original, inputs: replacement});
+  // The selected-data classifier requires the complete accepted list as an
+  // unchanged prefix, not merely preserved relative order or an equal set.
+  const additions = paths.filter(p => !original.inputs.includes(p)).sort();
+  return validatePackageInputs({...original, inputs: [...original.inputs, ...additions]});
 }
 
 export function finalizeDelivery(config, reader) {
@@ -549,7 +546,12 @@ export function finalizeDelivery(config, reader) {
   const projection = JSON.parse(outputs['package-roles.json']);
   const paths = projection.paths.map(p => p.path);
   need(paths.every(p => p.startsWith(config.new_prefix)), 'Final package replacement escapes its owned prefix');
-  const packageInputs = finalizedPackageInputs(reader.json(config.package_inputs), config.new_prefix, paths);
+  const baselinePackage = reader.json(config.package_inputs);
+  for (const pin of projection.paths.filter(p => baselinePackage.inputs.includes(p.path))) {
+    const original = reader.pin(config.package_inputs.commit, pin.path);
+    need(original.bytes === pin.bytes && original.sha256 === pin.sha256, 'Final package role conflicts with accepted path identity: ' + pin.path);
+  }
+  const packageInputs = finalizedPackageInputs(baselinePackage, config.new_prefix, paths);
   const expectation = JSON.parse(outputs['selected-delivery-expectations.json']);
   // Preserve the established final smoke-expectation presentation as well.
   const expectations = {version: expectation.version, selected_ledger_sha256: expectation.selected_ledger_sha256,

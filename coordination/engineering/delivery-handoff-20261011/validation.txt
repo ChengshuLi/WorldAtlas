@@ -519,3 +519,90 @@ Final raw-pin correction: authenticate the retained encoded owner-roster whole G
 ℹ skipped 0
 ℹ todo 0
 ℹ duration_ms 343.839166
+
+Append-only package correction (2026-10-12): prior791 sorted-package equality was the wrong classifier oracle. Historical evidence above is preserved. Accepted9473d184 package is now the explicit config baseline. Exact744-entry prefix plus117 unique stable appends reproduces d37abcd5a85aa4b0cbfdb6b50222a0a4dedb2050 package, 84140 bytes, SHA256 f0de0ec4897b72fe78a6e66df1b6d2db47b5bb9ab22f9898854b6b26846bf41e. Selector and smoke expectations stay byte-identical to791; actual finalize CLI and exact resume passed.
+Accepted9473 and implementation integration-profile.mjs Git blob both ae77cdf2682668b9fa8de9a4a9d0e6196619473a. New test invokes actual selectedDataSelection: append succeeds; equal-set global sorting refuses. Already-declared path identities must match accepted bytes; duplicate/overlapping declarations refuse; repeated finalization adds nothing.
+$ node --test test/delivery-handoff.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs test/package-inputs.test.mjs
+✔ SOURCE preparation preserves handoff order, methods/resources and complete whole handoff pin (6.518124ms)
+✔ accepted whole handoff target/order drift fails even when its new pin is coherent (1.501314ms)
+✔ writer resumes only exact complete bytes and rejects collisions, dangling symlinks and changed bindings (7.343723ms)
+✔ combined read/output budget fails before creating destination (1.113329ms)
+✔ retention joins genuine terminal, request, facts and every published output; no completion from partial files (18.083875ms)
+✔ native preparation requires committed genuine SOURCE products and preserves immutable runtime/resource fields (41.102189ms)
+✔ composition invokes existing conservation logic and rejects duplicate original scope (29.376742ms)
+✔ immutable Git input reader rejects whole-body drift, missing objects and nonordinary pins (91.127575ms)
+✔ review handoff includes current bindings/complete rename scope and no approval; stale head/body/scope fail (13.461799ms)
+✔ rebind commit phases require complete custody and publication-matching result pins (1.938732ms)
+✔ new request issuance requires explicit finite v2 profiles and actual HEAD support/code pins (1.834948ms)
+✔ coherent SOURCE inventory changes and native preparation facts omissions are rejected against pinned scope/targets (6.582049ms)
+✔ native retention rejects a publication that omits the required ledger asset (1.887636ms)
+✔ native self-consistent target substitutions fail the independent immutable SOURCE join (6.426929ms)
+✔ selector finalization preserves insertion order and repeat bytes, including unsorted nested geography (0.986872ms)
+✔ final package appends preserve the entire accepted prefix and validate duplicates/overlaps (1.124716ms)
+✔ finalization joins genuine release metadata, stages fresh files, and repeats without changes (8.419406ms)
+✔ finalization rejects coherent foreign sidecar/base/ledger/envelope bindings before publication (18.10743ms)
+✔ finalization refuses a new identity at an accepted package path (2.142584ms)
+✔ verifies bytes without claiming factual correctness (3.2139ms)
+✔ schema-only validation reports unverified bytes (0.374435ms)
+✔ known broken pins, stale baseline, entry hashes and contradictory summaries fail (2.253788ms)
+✔ source access/license limits remain explicit; no unsafe retention (1.007152ms)
+✔ research cannot grant approval; supported conclusions need known sources (0.555843ms)
+✔ containing-file inventory verifies actual subject IDs, not optional properties.part (0.910568ms)
+✔ compressed vs uncompressed hashes and decompression budgets are checked (2.8761ms)
+✔ paths and symlinks cannot escape candidate reader (1.880686ms)
+✔ new identity registry is checked against retained prior roster without claiming source or geometry approval (1.241669ms)
+✔ prior inventory cannot accept invented subjects, candidate baselines or ambiguous authority (2.108674ms)
+✔ identity-only projection rejects duplicates, geometry and altered native IDs even with updated output hashes (1.688711ms)
+✔ declared gzip .bin containing files preserve complete mixed 45-component/eight-contact membership (6.25118ms)
+✔ subject gzip declaration does not accept unsupported bytes, wrong hashes or coherently missing subjects (8.877278ms)
+✔ actual subject decompression remains bounded for legacy gzip with small encoded bytes (11.62979ms)
+✔ prior inventory and candidate registry decode their declared gzip .bin descriptors at correct vintages (21.32823ms)
+✔ declaration uses literal paths, precise directory membership and approved outputs (140.955508ms)
+✔ independent record bindings reject coherent wrong joins, incomplete and vacuous coverage (2.875229ms)
+✔ new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption (1.245946ms)
+✔ positive real-format ledger validates actual files and binds an independent review (2.692277ms)
+✔ regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail (2.16047ms)
+✔ full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence (0.845413ms)
+✔ coordinate/helper policies remain enforced without ceremonial control files (0.753986ms)
+✔ generator controls bind actual positive, negative and equal two-run output bytes (1.107831ms)
+✔ Washington-style generated narrative/table mismatch fails against the same numeric ledger (1.397871ms)
+✔ reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review (1.668322ms)
+✔ mock remote queue checks exact blobs/head/independent receipt with read-only requests (18.323931ms)
+✔ incomplete remote trees cannot become a passed byte check (3.649325ms)
+✔ remote decisions reject stale exact-head reviews and a later change request (5.726351ms)
+✔ unchanged authored evidence survives unrelated main advance, while current metrics require refresh (4.931945ms)
+✔ trusted hosted gate checks a new limited prior-evidence registry and still rejects nonancestor baselines (16.005527ms)
+✔ fresh remote review, head, tree/path and reservation checks reject after immutable bytes were reused (36.495035ms)
+✔ acceptance/disposition binding invalidates substantive changes but preserves JSON formatting and progress comments (2.158617ms)
+✔ binding activation preserves existing PRs and rejects unknown activation timestamps (0.211313ms)
+✔ compact review binds canonical complete inventory and preserves literal receipts (0.652816ms)
+✔ compact reviews refuse malformed, mixed, omitted, changed and renamed inventories (3.239197ms)
+✔ compact inventory does not weaken head, reviewer, contract, domain or limit authority (0.971529ms)
+✔ normal remote comment route admits a complete compact review beyond literal GitHub comment size (79.182342ms)
+✔ minimal manifests reuse Git change inventory but preserve evidence and independent review (0.694769ms)
+✔ omitting duplicate change receipts does not authorize replacing original scientific evidence (4.07095ms)
+✔ declared controls remain checked, not accepted merely because controls are optional (0.786815ms)
+✔ remote minimal manifests need no base-body copies for unrelated code changes (1.433914ms)
+ℹ tests 60
+ℹ suites 0
+ℹ pass 60
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 395.299738
+$ node --test --test-name-pattern='delivery finalizer satisfies|selected-data falls back to full for package|selected-data uses full setup' test/selected-data-profile.test.mjs
+✔ selected-data uses full setup with one narrow selection, exact package appends and complete reviewed roster (10.881011ms)
+✔ selected-data falls back to full for package removal (1.100491ms)
+✔ selected-data falls back to full for package reordering (1.621703ms)
+✔ selected-data falls back to full for package policy rewrite (1.777503ms)
+✔ delivery finalizer satisfies actual append-only selected-data classifier and rejects global sorting (5.155909ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 199.873119
+Limit: an attempted unfiltered combined selected-data suite ran183 tests:163 passed,20 failed because existing fixed COD/PHL fixtures require unavailable retained Git bodies. First missing body was coordination/engineering/congo-ago2018-delivery-20261011/README.md, Git OID8e3e7f9c0b9bed0ab949a8b79f94496301ed4f42. No hydration or scientific execution attempted. The focused changed classifier controls above all ran and passed; this is not a full-suite pass.
