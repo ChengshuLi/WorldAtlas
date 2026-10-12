@@ -7,7 +7,20 @@
   "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "baseline": {
     "commit": "46438af8901acbad11a9b627828a9e9184018a77",
-    "files": [],
+    "files": [
+      {
+        "path": "data/ownership-selection.json",
+        "bytes": 1592,
+        "sha256": "a25491f253ab42129b9ec8cce19a6530dee7b861c7928ac07dd543e5f62c35ad",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+        "bytes": 193557,
+        "sha256": "40d282412f03e3f7b216b787879ecc3dd3961002e5c3635d2057378019a0d78d",
+        "hash_kind": "file-bytes"
+      }
+    ],
     "pins": {},
     "pin_files": {},
     "subject_files": {}
@@ -46,8 +59,8 @@
   "summaries": [],
   "conclusions": [],
   "stages": {
-    "research": "not-applicable",
-    "implementation": "partial",
+    "research": "partial",
+    "implementation": "proposed",
     "geographic_approval": "unapproved"
   },
   "commands": [
