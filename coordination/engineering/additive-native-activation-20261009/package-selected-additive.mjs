@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
-import {ImmutableReader,loadSelection} from '../../../scripts/check-effective-geographic-regression.mjs';
+import {ImmutableReader,loadSelection,processingAllowance} from '../../../scripts/check-effective-geographic-regression.mjs';
 import {loadPackageInputs,containsPackagePath} from '../../../scripts/package-inputs.mjs';
 import {valueBytes,valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
@@ -105,7 +105,7 @@ export async function preparePackageSelectedAdditive({root,currentExecution,cons
   const metadataBytes=8*1048576+inheritedBytes+2*valueBytes(execution).length;
   const reader=new ImmutableReader(execution.source_root,execution.source_commit,{
     runtimeBytes:execution.runtime.bytes+gitStat.size,executionBytes,
-    metadataBytes,outputBytes:0,gitExecutable:git});
+    metadataBytes,outputBytes:0,gitExecutable:git,...(assembling?{allowance:execution.allowance}:{})});
   bindPackageImmutableCommits(reader,name=>containsPackagePath(definition.inputs,name)||execution.files.some(p=>p.path===name));
   const wholeRead=reader.read.bind(reader);
   reader.read=(name,options)=>{
@@ -342,13 +342,14 @@ export function issuePackageAssemblyExecution({original,source,stage,executingRo
   const pendingInputs=assemblySourceAdmission(original,source);
   demand(path.resolve(process.argv[1])===path.join(executingRoot,'scripts/assemble-selected-package.mjs'),'Actual assembly driver required');
   const files=assemblyCode(source,executingRoot), executable=fs.realpathSync(process.execPath);
-  const runtimeStat=ordinary(executable);demand(runtimeStat.size+files.reduce((n,row)=>n+2*row.bytes,0)+metadataBytes+16*1048576<=256*1048576,'Complete assembly execution exceeds admission');
-  const runtime={...assemblyFile(path.dirname(executable),path.basename(executable),256*1048576),
+  const allowance=processingAllowance(),runtimeStat=ordinary(executable);
+  demand(runtimeStat.size+files.reduce((n,row)=>n+2*row.bytes,0)+metadataBytes+16*1048576<=allowance.phaseBytes&&process.memoryUsage().rss<allowance.rssBytes,'Complete assembly execution exceeds current resource admission');
+  const runtime={...assemblyFile(path.dirname(executable),path.basename(executable),allowance.phaseBytes),
     executable,version:process.version,versions:process.versions,platform:process.platform,arch:process.arch};
   delete runtime.path;
   const record=Object.freeze({kind:'current-selected-package-assembly',source_root:source,
     source_commit:assemblyGit(source,['rev-parse','HEAD']).trim(),source_tree:assemblyGit(source,['rev-parse','HEAD^{tree}']).trim(),
-    stage_root:stage,entry_point:'scripts/assemble-selected-package.mjs',files,runtime,original,inherited_metadata_bytes:metadataBytes,pending_selected_inputs:pendingInputs});
+    stage_root:stage,entry_point:'scripts/assemble-selected-package.mjs',files,runtime,allowance,original,inherited_metadata_bytes:metadataBytes,pending_selected_inputs:pendingInputs});
   currentAssemblies.set(record,{executingRoot,fingerprint:valueSha(record)});return record;
 }
 export function requirePackageAssemblyExecution(record) {
@@ -357,7 +358,7 @@ export function requirePackageAssemblyExecution(record) {
   demand(assemblyGit(record.source_root,['rev-parse','HEAD']).trim()===record.source_commit&&
     assemblyGit(record.source_root,['rev-parse','HEAD^{tree}']).trim()===record.source_tree,'Assembly source changed');
   demand(assemblySame(assemblyCode(record.source_root,held.executingRoot),record.files),'Assembly code changed');
-  const runtime=assemblyFile(path.dirname(record.runtime.executable),path.basename(record.runtime.executable),256*1048576);
+  const runtime=assemblyFile(path.dirname(record.runtime.executable),path.basename(record.runtime.executable),record.allowance.phaseBytes);
   demand(runtime.bytes===record.runtime.bytes&&runtime.sha256===record.runtime.sha256&&record.runtime.version===process.version,'Assembly runtime changed');
   return record;
 }

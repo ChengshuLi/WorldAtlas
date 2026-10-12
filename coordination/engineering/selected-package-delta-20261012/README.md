@@ -28,13 +28,18 @@ consumed inert selected inputs may change. Actual original input files are
 checked against the complete committed inventory, including untracked extras
 inside declared directories and optional absence. Installed Node, dependency
 bodies, and Python distribution bodies are compared, as well as versions,
-lockfile and build configuration. Python bytecode cache timestamp headers are
+lockfile and build configuration. Installed identity is captured before the original
+build/consumer suite, so generated Vite caches cannot masquerade as changed
+installed dependencies. Python bytecode cache timestamp headers are
 excluded from identity; executable bytecode and original source bytes remain
 hashed. Unknown or unavailable authority safely returns to the full build.
 
 Credential-bearing startup uses an API-authenticated trusted-base isolated
 Python bootstrap. It verifies source bytes/modes and Node package-resolution
-scopes against authenticated Git objects. Node's real parser, without evaluation
+scopes against authenticated Git objects. A candidate-only shallow checkout
+acquires missing trusted-base tree/blob metadata through authenticated API reads,
+verifies exact object hashes, and keeps it in memory without base data hydration.
+Node's real parser, without evaluation
 and with no credential environment, identifies the static startup graph. Static
 external modules, nested module resolution directories and startup injections
 are refused. The verified setup-node executable starts the driver, which removes
@@ -53,7 +58,9 @@ and receipt are staged and replaced together with rollback. Archive extraction
 rejects traversal, duplicate/extra/missing members, symlinks, encryption and
 hash/size drift. Output bytes are streamed in 1 MiB chunks; disk admission uses
 authenticated archive/decoded inventory and available capacity. The selected
-reader retains its 256 MiB complete-phase resource accounting. No arbitrary
+reader and assembly share the existing processing allowance derived from current
+OS/cgroup availability and concurrent reservations; code, runtime, metadata and
+reader payloads are charged against that actual allowance. No arbitrary
 32 MiB member or 1 GiB package-size cutoff defines scientific eligibility.
 
 ## Current versus retained tests
@@ -84,3 +91,16 @@ rollout comparison must be reported as such, not as changed-batch acceleration.
 The complete authenticated checkout still runs; its historical 146 seconds is
 not claimed saved. Artifact transfer/inventory overhead is not yet measured.
 No local full input hydration or full package build was performed for this work.
+
+## Browser scale-up follow-on
+
+The selected renderer test currently enumerates every cumulative repair cell in
+four GPU/Canvas × before/after passes. The before bank/catalog are invariant.
+The after bank is not a byte-identical renderer input: `applyAdditiveNativePatch`
+rebuilds packed row/run arrays, changing subsequent offsets, and `PixelGPU`
+uploads the complete arrays with length-dependent texture layout. Canvas also
+updates touched owners' composite bounds. Unchanged logical ownership alone
+does not permit reusing all old after observations. A future reduction must bind
+browser/runtime identity, actual packed-row/texture layout and touched-owner
+bounds, then cover newly changed/affected rows and layout boundaries. This PR
+keeps the complete current cumulative renderer test.

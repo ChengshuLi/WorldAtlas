@@ -25,6 +25,7 @@ bootstrap = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(bootstrap)
 SYSTEM_NODE = shutil.which('node')
 SYSTEM_GIT = shutil.which('git')
+OFFLINE_GIT_READ = subprocess.check_output
 
 class StartedNode(BaseException): pass
 
@@ -70,19 +71,87 @@ class BootstrapTests(unittest.TestCase):
     def trust_changes(self):
         self.git('add', '.'); self.git('commit', '-qm', 'Updated trusted fixture')
         self.env['SELECTED_PACKAGE_TRUSTED_BASE'] = self.git('rev-parse', 'HEAD').decode().strip()
+    def api_value(self, route):
+        authority=getattr(self,'authority_root',self.root)
+        def git(*args):
+            clean={k:v for k,v in os.environ.items() if not k.startswith('GIT_') and k not in ('GH_TOKEN','GITHUB_TOKEN')}
+            return OFFLINE_GIT_READ([SYSTEM_GIT,'-C',str(authority),'--no-replace-objects',*args],env=clean,stderr=subprocess.PIPE)
+        oid=route.rsplit('/',1)[1]
+        if '/commits/' in route:
+            return {'sha':oid,'tree':{'sha':git('rev-parse',oid+'^{tree}').decode().strip()}}
+        if '/blobs/' in route:
+            raw=git('cat-file','blob',oid)
+            return {'sha':oid,'encoding':'base64','size':len(raw),'content':base64.b64encode(raw).decode()}
+        rows=[]
+        for item in git('ls-tree','-z',oid).split(b'\0'):
+            if not item: continue
+            header,name=item.split(b'\t');mode,kind,child=header.decode().split()
+            rows.append({'path':name.decode(),'mode':mode,'type':kind,'sha':child})
+        return {'sha':oid,'truncated':False,'tree':rows}
+
     def run_bootstrap(self):
         def execve(program, args, env):
             self.started.append((program, args, dict(env))); raise StartedNode()
-        with patch.dict(os.environ, self.env, clear=True), patch.object(bootstrap.shutil, 'which', return_value=str(self.node)), patch.object(bootstrap.os, 'execve', side_effect=execve):
+        owner=self
+        class Opener:
+            def open(self, request, timeout):
+                owner.assertEqual(request.get_header('Authorization'),'Bearer synthetic-token-never-transmitted')
+                route=request.full_url.removeprefix('https://api.github.com/repos/ChengshuLi/WorldAtlas')
+                value=owner.api_value(route)
+                if hasattr(owner,'alter_api'): value=owner.alter_api(route,value)
+                return io.BytesIO(json.dumps(value).encode())
+        with patch.dict(os.environ, self.env, clear=True), patch.object(bootstrap.shutil, 'which', return_value=str(self.node)), patch.object(bootstrap.os, 'execve', side_effect=execve), patch.object(bootstrap.urllib.request,'build_opener',return_value=Opener()):
             bootstrap.main()
     def accepted(self):
         with self.assertRaises(StartedNode): self.run_bootstrap()
         self.assertEqual(len(self.started), 1)
         self.assertEqual(self.started[0][1], [str(self.node), 'scripts/assemble-selected-package.mjs'])
         self.assertEqual(self.started[0][2]['GH_TOKEN'], 'synthetic-token-never-transmitted')
+        self.assertEqual(self.started[0][2]['GIT_NO_REPLACE_OBJECTS'],'1')
+        self.assertNotIn('GITHUB_TOKEN',self.started[0][2])
+        self.assertNotIn('GIT_CONFIG_COUNT',self.started[0][2])
     def rejected(self, reason):
         with self.assertRaisesRegex(ValueError, reason): self.run_bootstrap()
         self.assertEqual(self.started, [])
+
+    def shallow_candidate(self):
+        self.authority_root=self.root
+        self.write('selected-new.json','new selected data')
+        self.git('add','.');self.git('commit','-qm','candidate only')
+        clone=Path(self.temp.name)/'shallow'
+        subprocess.check_call([SYSTEM_GIT,'clone','--quiet','--depth=1','file://'+str(self.root),str(clone)],stderr=subprocess.DEVNULL)
+        self.root=clone;os.chdir(clone)
+        absent=subprocess.run([SYSTEM_GIT,'cat-file','-e',self.base+'^{commit}'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        self.assertNotEqual(absent.returncode,0,'Fixture must really lack the base commit')
+    def test_accept_genuine_candidate_only_shallow_checkout(self):
+        self.shallow_candidate();self.accepted()
+    def test_reject_wrong_authenticated_base_commit(self):
+        self.alter_api=lambda route,value:{**value,'sha':'f'*40} if '/commits/' in route else value
+        self.rejected('Authenticated trusted-base commit')
+    def test_reject_corrupted_missing_base_tree(self):
+        self.shallow_candidate()
+        def alter(route,value):
+            if '/trees/' in route: value['tree'][0]['sha']='f'*40
+            return value
+        self.alter_api=alter;self.rejected('Trusted Git object body differs')
+    def test_reject_truncated_missing_base_tree(self):
+        self.shallow_candidate()
+        self.alter_api=lambda route,value:{**value,'truncated':True} if '/trees/' in route else value
+        self.rejected('Complete authenticated tree')
+
+    def missing_objects(self):
+        self.shallow_candidate()
+        objects=self.root/'.git/objects'
+        objects.rename(Path(self.temp.name)/'saved-objects');objects.mkdir()
+    def test_accept_missing_base_blob_metadata_without_hydration(self):
+        self.missing_objects();self.accepted()
+        self.assertEqual(list((self.root/'.git/objects').iterdir()),[],'API metadata must stay in memory')
+    def test_reject_corrupted_missing_base_blob(self):
+        self.missing_objects()
+        def alter(route,value):
+            if '/blobs/' in route: value['content']=base64.b64encode(b'corrupt').decode();value['size']=7
+            return value
+        self.alter_api=alter;self.rejected('Trusted Git object body differs')
 
     def test_accept_intact_transitive_static_closure(self): self.accepted()
     def test_reject_direct_source_edit(self):
@@ -145,9 +214,12 @@ class BootstrapTests(unittest.TestCase):
         self.write('scripts/child.mjs', "import/* comment */{value}from/* comment */'../coordination/deep/consumer.mjs';\n"); self.trust_changes(); self.write('coordination/deep/consumer.mjs','export const value=99;'); self.rejected('Actual source differs')
     def test_strip_credentials_and_git_config_from_all_subprocesses(self):
         self.env.update(GITHUB_TOKEN='synthetic-github-token',GIT_CONFIG_COUNT='1',GIT_CONFIG_KEY_0='some.setting',GIT_CONFIG_VALUE_0='injected')
-        original=bootstrap.subprocess.check_output; calls=[]
+        original=bootstrap.subprocess.check_output; original_run=bootstrap.subprocess.run; calls=[]
         def checked(*args, **kwargs): calls.append((args,kwargs)); return original(*args,**kwargs)
-        with patch.object(bootstrap.subprocess,'check_output',side_effect=checked): self.accepted()
+        def checked_run(*args,**kwargs):
+            if '-C' not in args[0]: calls.append((args,kwargs))
+            return original_run(*args,**kwargs)
+        with patch.object(bootstrap.subprocess,'check_output',side_effect=checked),patch.object(bootstrap.subprocess,'run',side_effect=checked_run): self.accepted()
         self.assertTrue(any('--experimental-vm-modules' in args[0] for args,kwargs in calls))
         for args,kwargs in calls:
             env=kwargs['env']

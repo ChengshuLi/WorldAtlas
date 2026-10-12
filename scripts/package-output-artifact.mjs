@@ -198,7 +198,8 @@ export function snapshotPackageOutputSource(root = process.cwd()) {
   need(same(actual,files),'Actual original source image differs from complete immutable inventory');
   const head = git(root, ['rev-parse','HEAD']).trim(), tree = git(root, ['rev-parse','HEAD^{tree}']).trim();
   return {head, tree, input_definition_sha256: sha(fs.readFileSync(path.join(root, '.github/package-inputs.json'))),
-    definition, files, programme: committedPackageProgramme(root), selection: readJSON(root, 'data/ownership-selection.json')};
+    definition, files, programme: committedPackageProgramme(root), selection: readJSON(root, 'data/ownership-selection.json'),
+    installed_runtime:installedPackageIdentity(root,fs.existsSync(path.join(root,'requirements.txt'))?['numpy','shapely','pyproj'].map(name=>({name})):[])};
 }
 
 export function createPackageOutputManifest(root = process.cwd()) {
@@ -218,7 +219,7 @@ export function createPackageOutputManifest(root = process.cwd()) {
     'Original pre-build source snapshot differs');
   const output = inventoryPackageOutput(root);
   const manifest = {version: 1, kind: 'original-cloudflare-package-output', source,
-    runtime: {installed: installedPackageIdentity(root,receipt.preflight.runtime?.python?.imports??[]), node: process.version, versions: process.versions, platform: process.platform, arch: process.arch,
+    runtime: {installed: source.installed_runtime, node: process.version, versions: process.versions, platform: process.platform, arch: process.arch,
       dependencies: streamedPackageFile(root, 'package-lock.json', MAX_METADATA).sha256,
       python: {version:receipt.preflight.runtime?.python?.version??null,imports:receipt.preflight.runtime?.python?.imports??[]}},
     configuration: packageBuildConfiguration(), output,

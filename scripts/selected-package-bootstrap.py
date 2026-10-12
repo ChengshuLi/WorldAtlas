@@ -1,11 +1,13 @@
 """Trusted-base, isolated standard-library startup for selected package reuse."""
 import hashlib
+import base64
 import json
 import os
 from pathlib import Path, PurePosixPath
 import re
 import shutil
 import subprocess
+import urllib.request
 
 
 def need(value, message):
@@ -25,15 +27,50 @@ def main():
         if key in ('GH_TOKEN', 'GITHUB_TOKEN') or key.startswith('GIT_CONFIG_') and key not in ('GIT_CONFIG_NOSYSTEM', 'GIT_CONFIG_GLOBAL'):
             env.pop(key)
 
+    class NoRedirect(urllib.request.HTTPRedirectHandler):
+        def redirect_request(self, *_):
+            raise ValueError('Git metadata redirects are not admitted')
+    opener = urllib.request.build_opener(NoRedirect())
+    def api(route):
+        request = urllib.request.Request('https://api.github.com/repos/ChengshuLi/WorldAtlas' + route,
+            headers={'Authorization': 'Bearer ' + os.environ['GH_TOKEN'], 'Accept': 'application/vnd.github+json'})
+        with opener.open(request, timeout=30) as response:
+            raw = response.read(8 * 1024 * 1024 + 1)
+        need(len(raw) <= 8 * 1024 * 1024, 'Bounded Git metadata required')
+        return json.loads(raw)
+
     def object_body(kind, oid):
         need(re.fullmatch('[a-f0-9]{40}', oid), 'Git object identity required')
-        raw = subprocess.check_output(['git', '--no-replace-objects', 'cat-file', kind, oid], env=env, timeout=20)
+        local = subprocess.run(['git', '--no-replace-objects', 'cat-file', kind, oid], env=env,
+            timeout=20, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        if local.returncode == 0:
+            raw = local.stdout
+        elif kind == 'blob':
+            value = api('/git/blobs/' + oid)
+            need(value.get('sha') == oid and value.get('encoding') == 'base64', 'Authenticated blob required')
+            raw = base64.b64decode(''.join(value['content'].split()), validate=True)
+            need(len(raw) == value['size'], 'Complete authenticated blob required')
+        else:
+            need(kind == 'tree', 'Only missing tree/blob metadata may be acquired')
+            value = api('/git/trees/' + oid)
+            need(value.get('sha') == oid and value.get('truncated') is False, 'Complete authenticated tree required')
+            rows = []
+            for row in value['tree']:
+                name, mode, child = row['path'], row['mode'], row['sha']
+                need(name not in ('', '.', '..') and '/' not in name and '\0' not in name and re.fullmatch('[a-f0-9]{40}', child), 'Safe tree member required')
+                need(mode in ('040000', '100644', '100755', '120000', '160000'), 'Known Git tree mode required')
+                encoded = name.encode()
+                rows.append((encoded + (b'/' if mode == '040000' else b'\0'), mode.lstrip('0').encode() + b' ' + encoded + b'\0' + bytes.fromhex(child)))
+            raw = b''.join(body for _, body in sorted(rows))
         need(len(raw) <= 32 * 1024 * 1024 and hashlib.sha1((kind + ' ' + str(len(raw)) + '\0').encode() + raw).hexdigest() == oid,
              'Trusted Git object body differs')
         return raw
 
-    commit = object_body('commit', base)
-    tree_oid = re.search(rb'^tree ([a-f0-9]{40})\n', commit).group(1).decode()
+    # A candidate-only shallow checkout need not contain its PR base. The
+    # authenticated API binds the base tree; missing metadata stays in memory.
+    commit = api('/git/commits/' + base)
+    need(commit.get('sha') == base and re.fullmatch('[a-f0-9]{40}', commit.get('tree', {}).get('sha', '')), 'Authenticated trusted-base commit required')
+    tree_oid = commit['tree']['sha']
     trees = {}
 
     def tree(oid):
@@ -116,7 +153,8 @@ def main():
                 external.add(spec)
     need(not external, 'External credential-bearing startup module is not admitted')
     verified('package-lock.json')
-    os.execve(node, [str(node), 'scripts/assemble-selected-package.mjs'], os.environ)
+    launch_env = dict(env, GH_TOKEN=os.environ['GH_TOKEN'])
+    os.execve(node, [str(node), 'scripts/assemble-selected-package.mjs'], launch_env)
 
 
 if __name__ == '__main__':

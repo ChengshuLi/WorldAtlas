@@ -4,10 +4,30 @@
   "worker_id": "01a1318e-30d9-7357-8b8d-6162a6b4b034",
   "status": "lightweight-controls-passed-real-output-proof-pending",
   "checks": [
-    {"command": "node --test test/package-output-artifact.test.mjs test/selected-package-assembly.test.mjs test/selected-package-bootstrap.test.mjs test/integration-profile-restoration.test.mjs", "tests": 34, "passed": 34, "skipped": 0},
-    {"command": "python3 -I -B test/selected-package-bootstrap-controls.py scripts/selected-package-bootstrap.py", "invoked_by": "test/selected-package-bootstrap.test.mjs", "tests": 34, "passed": 34},
-    {"command": "node --test test/package-build.test.mjs", "tests": 9, "passed": 9, "skipped": 0},
-    {"command": "node --test test/trusted-workflow-checkouts.test.mjs test/integration-profile.test.mjs", "tests": 29, "passed": 29, "skipped": 0}
+    {
+      "command": "node --test test/package-output-artifact.test.mjs test/selected-package-assembly.test.mjs test/selected-package-bootstrap.test.mjs test/integration-profile-restoration.test.mjs",
+      "tests": 35,
+      "passed": 35,
+      "skipped": 0
+    },
+    {
+      "command": "python3 -I -B test/selected-package-bootstrap-controls.py scripts/selected-package-bootstrap.py",
+      "invoked_by": "test/selected-package-bootstrap.test.mjs",
+      "tests": 40,
+      "passed": 40
+    },
+    {
+      "command": "node --test test/package-build.test.mjs",
+      "tests": 9,
+      "passed": 9,
+      "skipped": 0
+    },
+    {
+      "command": "node --test test/trusted-workflow-checkouts.test.mjs test/integration-profile.test.mjs",
+      "tests": 29,
+      "passed": 29,
+      "skipped": 0
+    }
   ],
   "independent_boundary_findings_corrected": [
     "Actual original input inventory now includes unexpected declared-directory members instead of trusting git diff alone",
@@ -16,7 +36,10 @@
     "Node's real parser replaces false-positive regex startup dependency discovery",
     "Nested dependency shadows and unexpected package scopes are rejected",
     "Current output and receipt publication stages both replacements and rolls back on failure",
-    "Duplicate YAML permissions mappings removed; semantic permission checks replace irrelevant textual adjacency"
+    "Duplicate YAML permissions mappings removed; semantic permission checks replace irrelevant textual adjacency",
+    "A genuine candidate-only shallow checkout now authenticates missing base tree/blob metadata without hydrating the base",
+    "Original installed dependency identity is captured before build/consumer-generated caches",
+    "Assembly and selected reader share the existing allowance derived from current OS/cgroup availability and reservations, rather than an arbitrary extra 256 MiB ceiling"
   ],
   "limitations": [
     "Synthetic authority and output fixtures do not establish scientific output equivalence",

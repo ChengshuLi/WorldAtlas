@@ -186,3 +186,12 @@ test('full-output comparison permits only the explicitly preserved original sour
   assembled.write('dist/client/atlas-geography.json',atlas(originalHead));assembled.write('dist/client/assets/a.js','different bytes');
   assert.throws(()=>compareSelectedPackageOutput(args),/Output bytes differ/);
 });
+
+
+test('original installed input identity is captured before generated consumer caches',t=>{
+  const f=fixture(t),before=JSON.parse(fs.readFileSync(path.join(f.root,'.cache/package-output-source.json'))).installed_runtime;
+  f.write('node_modules/.vite/deps/generated-cache.js','generated consumer cache');
+  const manifest=createPackageOutputManifest(f.root);
+  assert.deepEqual(manifest.runtime.installed,before);
+  assert.notDeepEqual(installedPackageIdentity(f.root),before,'Control establishes actual post-consumer tree differs');
+});
