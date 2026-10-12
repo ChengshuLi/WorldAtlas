@@ -96,6 +96,35 @@ applicability/admission dependency. Changes to it or its retained whole archive
 force proper reauthentication, including baseline-only changes during an
 otherwise source-only PR. Unchanged selectors alone do not waive this boundary.
 
+## Initial reviewed seed
+
+The first complete hosted artifact cannot depend on already having a hosted
+checkpoint. The initial rollout therefore adds one typed
+`accepted-derived-selected-checkpoint-v1` row to the existing executing trusted-main
+catalogue, after the combined joint implementation and its retained clean proof
+are actually accepted. This is a one-time bootstrap, not a per-batch registration
+step. The row pins the original certificate, continuous operands/facts, native
+and original strict result, successful operating receipt, exact executing policy,
+and complete inherited-plus-candidate route census. Historical proof bytes and
+provisional publications remain unchanged.
+
+The seed uses the same private derived-state admission as accepted artifacts,
+with `trusted-main-derived-selected-checkpoint-v1` lineage. It does not claim
+a hosted job receipt or cold acquisition. Current selectors, complete routes,
+consumed policy and current memory allowance are still checked. Candidate data
+cannot register itself in the executing catalogue.
+
+The first selected batch using that seed must pass both original consumers and
+the normal hosted job/merge boundary, which creates the first complete accepted
+artifact. The following selected batch uses that artifact's normal merge receipt
+and locator through `acquireAcceptedCheckpoint`; it requires no catalogue or
+executable change. Those two real batch handoffs establish bootstrap and generic
+advancement separately.
+
+Warm admission runs before any optional full-bank prefetch. Only an explicit
+legacy-cold decision starts that prefetch and the existing cold route. An
+authentication contradiction or access denial remains an error.
+
 ## Completion criterion
 
 Synthetic transport/adverse controls establish the changed boundaries only.
