@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "groups": [
+    {
+      "id": "nor18-north13-native-001",
+      "source": {
+        "request": {
+          "blob": "8cfc0d31e30081ed1d70a9e733a5f2f74c231043",
+          "bytes": 22614,
+          "commit": "37ee86aee1cf413ba7e1fcfec56b00d5f2da0d5c",
+          "mode": "100644",
+          "path": "coordination/engineering/nor18-selected-20261012/north13-requests-001/nor18-north13-001-source-request.json",
+          "sha256": "08fddf7ee1f0b9098fe97395f00897bf6cf3de1871ff1350081464d5d5a00458"
+        },
+        "publication": {
+          "path": "coordination/engineering/nor18-selected-20261012/north13-source-qualified-001/publication.json",
+          "commit": "77d5f6ac099fadcf680677361ead40005c461712",
+          "mode": "100644",
+          "blob": "b1d86ffc2bb84e5290feba15fd260af380db3907",
+          "bytes": 351,
+          "sha256": "ba5493258a8317702075cd8544f7d92148fcce6c134df9269c61f6425e92146a"
+        },
+        "operating": {
+          "path": "coordination/engineering/nor18-selected-20261012/north13-source-qualified-001/terminal.json",
+          "commit": "77d5f6ac099fadcf680677361ead40005c461712",
+          "mode": "100644",
+          "blob": "50c1c228917a445f685aea1a2d66e982c74cdbfa",
+          "bytes": 16304,
+          "sha256": "fefcb6a5938cd5734b57be85d533297934994597364a780f97e6139e14d4c3b8"
+        },
+        "facts": {
+          "path": "coordination/engineering/nor18-selected-20261012/north13-source-qualified-001/facts.json",
+          "commit": "77d5f6ac099fadcf680677361ead40005c461712",
+          "mode": "100644",
+          "blob": "3023848ce39d1d2a9cfe6b6ea5a85fd11b915227",
+          "bytes": 1330418,
+          "sha256": "c7a3a406c3598c49506d5d17cc120d3932a8b94326fb5ed6c0dc1a92c0dc5fd5"
+        },
+        "inventory": {
+          "path": "coordination/engineering/nor18-selected-20261012/north13-source-qualified-001/inventory.jsonl.gz",
+          "commit": "77d5f6ac099fadcf680677361ead40005c461712",
+          "mode": "100644",
+          "blob": "77b7cdfab793faa0f3dc31184eafbbe3675fee20",
+          "bytes": 5149,
+          "sha256": "12e5a107bcb6ea3558b2bbd66c5129b5f8de6384b672aa3b0689df19c153b885"
+        }
+      },
+      "template": {
+        "path": "coordination/engineering/nor18-selected-20261012/templates-002/north13-native-template.json",
+        "commit": "77d5f6ac099fadcf680677361ead40005c461712",
+        "mode": "100644",
+        "blob": "e7135bcc69cdbc35053aa9cc146049ab781980d1",
+        "bytes": 29261,
+        "sha256": "7d096a147e7f3b8b2a5ebfda18e681726b62d255d000f194aa5c36e42b632f57"
+      },
+      "destination": ".cache/native-grid-candidates/nor18-north13-native-001"
+    }
+  ],
+  "requested_resources": {
+    "processing_allowance": {
+      "phaseBytes": 536870912,
+      "rssBytes": 1073741824
+    },
+    "operating_limits": {
+      "log_bytes": 4194304,
+      "monitor_bytes": 8388608,
+      "output_bytes": 33554432,
+      "receipt_bytes": 1048576,
+      "retained_bytes": 50331648,
+      "rss_bytes": 1610612736,
+      "wall_seconds": 1200
+    }
+  }
+}
