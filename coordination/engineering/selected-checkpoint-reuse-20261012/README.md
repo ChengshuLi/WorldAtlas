@@ -93,7 +93,7 @@ execution or producer-code qualification.
 
 ## Verification and limits
 
-Run `node --test test/selected-checkpoint.test.mjs`. The 17 controls create an
+Run `node --test test/selected-checkpoint.test.mjs`. The 20 controls create an
 ordinary miniature trusted Git repository and invoke real catalogue, private
 state/transition, projection and budget boundaries.
 
@@ -111,8 +111,10 @@ for new-target authentication, five for the complete affected-neighbor projectio
 and zero for candidate-vintage pointset reuse. This is not zero source reads; it
 is zero complete world-source scans. Shared authentication and projections took
 26.66 seconds; the full supervised proof, retained output and comparisons took
-28.51 seconds, with 529 MB sampled group RSS and 708 MB maximum charged phase
-inside a 1 GiB current reader allowance. These are measured local boundaries,
+28.51 seconds, with 529 MB sampled group RSS and 710 MB derived final charged phase
+inside a 1 GiB current reader allowance. The original pre-admission sample was
+707,801,412 bytes; adding its final admitted request gives 709,678,830 bytes,
+with the full derivation retained in the summary. These are measured local boundaries,
 not a controlled hosted speedup or an integrated native/continuous checker run.
 
 Only the certificate's historical `complete_phase_bytes` accounting counter is
@@ -138,3 +140,15 @@ original execution head.
 Consumer integration, actual joint strict-predicate execution, and the one-load
 cold-candidate admission bridge remain unfinished. No activation, geographic
 approval or production delivery is claimed by this module.
+
+## Current-baseline policy identity and finite consumer preregistration
+
+Metadata-only inspection of the accepted Australia13 comparison established that the pre-AUS selector at `46438af8901acbad11a9b627828a9e9184018a77` exactly equals retained1771 candidate `791576647adc41241ce9b438f1bb0034088eed4e`. The complete source/owner/domain/release binding is unchanged. Of its 145 archived routes, the only later difference is the executing trusted `supported-programs.json` policy. That file is not selected geography. The qualifier retains and authenticates the complete archived census, independently reads the actual inventoried execution-policy body and current executing policy, and requires every old programme/migration record to remain exact. Removal or alteration returns explicit fallback. Only then is this exact policy path excluded from scientific-route equality; this initial append-only policy profile is intentionally conservative. Appended producer authority still reads the actual executing trusted catalogue, never candidate policy. Every source/native/alias/presence-absence route remains exact. Focused controls exercise policy evolution, forged candidate-only producer policy, census omission/corruption and neighboring input drift.
+
+Independent finite profile review: https://github.com/ChengshuLi/WorldAtlas/pull/1782#issuecomment-6120928599. This accepts code/profile preregistration, not a main merge or any new validation product.
+
+The coordinated preregistration derives one exact future SOURCE/NATIVE17 and CURRENT_REBIND28 vector from frozen combined `392b1cda6d529f13f8e9d5fc86efe8dc436386a3`. The native checker is exact reviewed `39792e02c603e262513dd0d9df4b63dc275e5a15`; allocator `fd20a0acfe97dcbffa2369a9dfba61e04832837a` is now accepted at `9b27b8405d85741e43184b5c25e1a6ac391d4449`. Only the native-checker position differs from the already registered allocator-aware vectors. All prior nineteen programmes and seven migrations remain unchanged. The only new historical mappings are the two actual rebind executions consumed by the successful accepted pre-AUS/AUS comparison: `85ca24519d87bb1d62a86d5cb142006e206cb2b8` and `40d792b2c67b18098c00cd71bce3cfd6a8e63a0b`. Preregistration does not activate runtime code, grant candidate policy authority, or alter the old scientific bodies.
+
+The runtime qualifier catalogue in this inactive PR continues to bind the existing native checker. The one-row native pin update belongs with coordinated runtime adoption in1784. The archived41a9 proof remains under its original execution identity; these corrections do not relabel it as a current-AUS or integrated proof. One subsequent admitted joint pre-AUS→AUS validation will retain genuine derived checkpoint products and compare all available accepted outputs. Automatic accepted-artifact advancement and the one-candidate cold bridge remain separate unfinished work.
+
+Final focused controls at `c95082fbdb1e092d6cada098e7b48dd4809140dd`: twenty checkpoint tests and fourteen catalogue tests passed, zero failures/skips. Both complete suites finished in 38.548 seconds; this test timing is not a batch-performance claim.

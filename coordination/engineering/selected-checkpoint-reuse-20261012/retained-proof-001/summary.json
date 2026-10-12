@@ -114,7 +114,6 @@
   "supervised_proof_seconds": 28.510528369995882,
   "sampled_group_rss_bytes": 529104896,
   "process_max_rss_bytes": 531333120,
-  "peak_charged_phase_bytes": 707801412,
   "profile_estimates_ms": {
     "inclusive": {
       "readRetainedRegistryAuthority": 7723.899,
@@ -143,7 +142,8 @@
     "Eight containing-source reads over five bodies: three new-target custody plus five complete affected-neighbor bodies; no second-vintage body read.",
     "Runtime/carry accounting counter complete_phase_bytes is the only certificate equality exclusion; both original historical values are preserved.",
     "Initial attempt stopped at over-broad historical-counter assertion. Corrected attempt retained complete products before assertions; both records are preserved.",
-    "Profiles are sampled inclusive/self estimates; times include profiling overhead and are not a controlled hosted speedup."
+    "Profiles are sampled inclusive/self estimates; times include profiling overhead and are not a controlled hosted speedup.",
+    "The raw peak_phase_bytes counter is sampled before read admission. Exact derived final charge is709678830 bytes; its unchanged raw pre-admission maximum is707801412 bytes. Both are below the admitted current allowance."
   ],
   "files": [
     {
@@ -256,5 +256,61 @@
       "bytes": 2724,
       "sha256": "d4a4d3976b1e90bc500fdbdd06cebd428c6d8727c07209fcd59315cf7f88510e"
     }
-  ]
+  ],
+  "maximum_observed_pre_admission_phase_bytes": 707801412,
+  "derived_final_charged_phase_bytes": 709678830,
+  "charge_derivation": {
+    "module_end": 355564283,
+    "comparison_carry_increase": 324570460,
+    "last_input_admissions": [
+      {
+        "name": "candidate/certificate.json.gz",
+        "encoded_bytes": 7515261,
+        "decoded_bytes": 18414414
+      },
+      {
+        "name": "operands.json.gz",
+        "encoded_bytes": 376920,
+        "decoded_bytes": 1356950
+      },
+      {
+        "name": "current-003/certificate.json",
+        "encoded_bytes": 3124,
+        "decoded_bytes": 0
+      },
+      {
+        "name": "current-003/request.json",
+        "encoded_bytes": 1877418,
+        "decoded_bytes": 0
+      }
+    ],
+    "raw_counter_limit": "checkMemory samples before the subsequent read.admit. The original reported peak_phase_bytes is a maximum observed pre-admission sample, not the exact final charge."
+  },
+  "containing_source_body_reads": 8,
+  "new_target_source_body_reads": 3,
+  "affected_neighbor_source_body_reads": 5,
+  "candidate_reuse_source_body_reads": 0,
+  "complete_source_inventory_count": 36,
+  "original_registry_counts": {
+    "baseline": 30,
+    "candidate": 35
+  },
+  "registry_identity_inputs": {
+    "baseline": {
+      "bytes": 29339,
+      "commit": "17b80a99f11193b2aa23c85c3d6e84f8183801ce",
+      "git_blob_oid": "61fe3e8d03febbf3e74bb7eed9bc190aa9724a47",
+      "mode": "100644",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authority-registry.json",
+      "sha256": "3b0f66add74b8b231cca5374739e42fcd398de57d5ca60d846921667b6e642a5"
+    },
+    "candidate": {
+      "bytes": 34162,
+      "commit": "9e7b93f43f8a2dccffc23cb1c9e6cd60613f3b9c",
+      "git_blob_oid": "21d56ecec1da3319014377b3d717508e7d9ac25d",
+      "mode": "100644",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authority-registry.json",
+      "sha256": "95f649b62ec4dfd8f7a52ceb55d9daa0a53b65bb4f063c5bf812698ad39f46d1"
+    }
+  }
 }
