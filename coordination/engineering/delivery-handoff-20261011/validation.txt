@@ -690,3 +690,36 @@ Accepted-base continuation: conflict-free ancestry merge includes ef834e2d90a9ca
 ℹ todo 0
 ℹ duration_ms 134.266849
 Observed delivery-lane limitation (not a new experiment by this task): complete425-path current13 structural classifier fell back to full CI at the16MiB aggregate supporting-JSON read budget after166 blobs/16,638,841 accounted bytes. This does not invalidate the focused append-only tests or establish full-tree selected-data adoption. Classifier redesign remains separate.
+
+Accepted-main metadata sequence replay (2026-10-12 UTC)
+Execution checkout d5540a6b4cc42a9975a5f79e45bdbe89fc21cba4 contains accepted ef834e2d90a9ca5d4cbd961a84a08dd156ae7944. Seven immutable preparation phases and three genuine retention cases each completed then resumed with exact output validation. No scientific operator was run. Hosted review preparation follows only after a real PR exists.
+PHASE requests
+{"destination":".cache/delivery-handoff/accepted-sequence-requests","resumed":false,"binding":{"phase":"requests","config_sha256":"d7c663ff71b72fa74a727cbc61b642dc05b0520da8cd85bbab11e10524793203"}}
+{"destination":".cache/delivery-handoff/accepted-sequence-requests","resumed":true,"binding":{"phase":"requests","config_sha256":"d7c663ff71b72fa74a727cbc61b642dc05b0520da8cd85bbab11e10524793203"}}
+PHASE native-requests
+{"destination":".cache/delivery-handoff/accepted-sequence-native-requests","resumed":false,"binding":{"phase":"native-requests","config_sha256":"1c03653aed937abfd8ce5da6cceeb70cab543d9dea6db1b92b741ac87e9ab845"}}
+{"destination":".cache/delivery-handoff/accepted-sequence-native-requests","resumed":true,"binding":{"phase":"native-requests","config_sha256":"1c03653aed937abfd8ce5da6cceeb70cab543d9dea6db1b92b741ac87e9ab845"}}
+PHASE compose
+{"destination":".cache/delivery-handoff/accepted-sequence-compose","resumed":false,"binding":{"phase":"compose","config_sha256":"bf8e78b1b861022dea802b108dca1569399d1fd9e3954a09de2cb1cc10a46a22"}}
+{"destination":".cache/delivery-handoff/accepted-sequence-compose","resumed":true,"binding":{"phase":"compose","config_sha256":"bf8e78b1b861022dea802b108dca1569399d1fd9e3954a09de2cb1cc10a46a22"}}
+PHASE package
+{"destination":".cache/delivery-handoff/accepted-sequence-package","resumed":false,"binding":{"phase":"package","config_sha256":"83bbdd0ddd9238d944fa93786ef556f05934e20aa59433e49d398711045421dd"}}
+{"destination":".cache/delivery-handoff/accepted-sequence-package","resumed":true,"binding":{"phase":"package","config_sha256":"83bbdd0ddd9238d944fa93786ef556f05934e20aa59433e49d398711045421dd"}}
+PHASE rebind-operating
+{"destination":".cache/delivery-handoff/accepted-sequence-rebind-operating","resumed":false,"binding":{"phase":"rebind-operating","config_sha256":"8594c4df539054dcc33db9c76da1adb148b64f7fb8396b11817b29ba0c308c13"}}
+{"destination":".cache/delivery-handoff/accepted-sequence-rebind-operating","resumed":true,"binding":{"phase":"rebind-operating","config_sha256":"8594c4df539054dcc33db9c76da1adb148b64f7fb8396b11817b29ba0c308c13"}}
+PHASE rebind-certificate
+{"destination":".cache/delivery-handoff/accepted-sequence-rebind-certificate","resumed":false,"binding":{"phase":"rebind-certificate","config_sha256":"8594c4df539054dcc33db9c76da1adb148b64f7fb8396b11817b29ba0c308c13"}}
+{"destination":".cache/delivery-handoff/accepted-sequence-rebind-certificate","resumed":true,"binding":{"phase":"rebind-certificate","config_sha256":"8594c4df539054dcc33db9c76da1adb148b64f7fb8396b11817b29ba0c308c13"}}
+PHASE finalize
+{"destination":".cache/delivery-handoff/accepted-sequence-finalize","resumed":false,"binding":{"phase":"finalize","config_sha256":"c0b8057e068d60971c6c1d17d668417a42d5424edf6c80c3a478e197ee1eab53"}}
+{"destination":".cache/delivery-handoff/accepted-sequence-finalize","resumed":true,"binding":{"phase":"finalize","config_sha256":"c0b8057e068d60971c6c1d17d668417a42d5424edf6c80c3a478e197ee1eab53"}}
+RETAIN source
+{"destination":".cache/delivery-handoff/accepted-retain-source","resumed":false,"binding":{"phase":"retain","config_sha256":"2835c100c5b73beeab1a641dcf4b85b8b09be6dcb1658e5b261640aacd7d869e"}}
+{"destination":".cache/delivery-handoff/accepted-retain-source","resumed":true,"binding":{"phase":"retain","config_sha256":"2835c100c5b73beeab1a641dcf4b85b8b09be6dcb1658e5b261640aacd7d869e"}}
+RETAIN native
+{"destination":".cache/delivery-handoff/accepted-retain-native","resumed":false,"binding":{"phase":"retain","config_sha256":"d061e40de4679195dfd4512baff966eb7b6c7607208d0dbaf864818f37a9f3f9"}}
+{"destination":".cache/delivery-handoff/accepted-retain-native","resumed":true,"binding":{"phase":"retain","config_sha256":"d061e40de4679195dfd4512baff966eb7b6c7607208d0dbaf864818f37a9f3f9"}}
+RETAIN rebind
+{"destination":".cache/delivery-handoff/accepted-retain-rebind","resumed":false,"binding":{"phase":"retain","config_sha256":"4e3f09337ffbc5bfe74b24bf505c3f89106ddd4ff34d84ff92725cd0216d99dc"}}
+{"destination":".cache/delivery-handoff/accepted-retain-rebind","resumed":true,"binding":{"phase":"retain","config_sha256":"4e3f09337ffbc5bfe74b24bf505c3f89106ddd4ff34d84ff92725cd0216d99dc"}}

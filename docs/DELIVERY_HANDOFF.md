@@ -190,3 +190,33 @@ evidence instead. Preserve every actually consumed role and required evidence.
 Reducing unnecessary reads and making the trusted classifier allowance
 configurable is a separately coordinated follow-on. This command does not
 change that bound, its per-input security/identity checks, or the current delivery.
+
+## What this automates and what still needs a decision
+
+The accepted current13 metadata was replayed on the #1753 accepted ancestry:
+ordered requests, native requests, composition, package projection, rebind
+operating/certificate and finalization, plus genuine SOURCE/native/rebind
+retention. Each phase completed and passed exact resume without executing an
+operator. The earlier byte-equality checks remain applicable because these
+command/test bodies and their immutable example inputs are unchanged.
+
+- Request, retention and composition preparation: automated from explicit accepted
+  whole pins and genuine terminal products. The caller supplies admitted method
+  groups and finite resource profiles; no source acceptance is inferred.
+- Package and selector finalization: automated, including literal accepted-prefix
+  preservation, selector insertion order, collisions and exact resume.
+- Review handoff: current contract, complete scope, required domains and existing
+  queue arguments are frozen together. The reviewer still performs substantive
+  review and posts their own receipt. The command never asks again for authority
+  it does not own, nor grants authority on behalf of that reviewer.
+- Grouping and parallel work: configs accept actual independent method/resource
+  groups. Scheduling, source readiness and selecting which groups can run in
+  parallel remain outside this command; it introduces no old-batch barrier.
+- End-to-end speed: retained command timings show metadata preparation cost, and
+  the delivery author used this CLI for two genuine v2 SOURCE request/retention
+  handoffs. This is not a measured improvement in global gap closures per hour.
+
+Actual immutable commit pins between phases, external scientific execution,
+independent source/review authority and the existing serialized queue are manual
+or existing-tool boundaries. No scheduler, automatic approval or queue submission
+is hidden in the preparation command.
