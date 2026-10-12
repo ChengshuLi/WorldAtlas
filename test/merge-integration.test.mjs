@@ -112,7 +112,16 @@ test('workflow separates untrusted candidate tests from write credentials and se
   assert.match(yaml.split('jobs:')[0],/concurrency:\n  group: worldatlas-main-integrate/);
   assert.doesNotMatch(integration,/concurrency:/);
   assert.match(integration,/permissions:\n      contents: read/);
-  assert.doesNotMatch(integration,/GH_TOKEN|secrets\.|contents: write|issues: write|pull-requests: write/);
+  assert.doesNotMatch(integration,/GH_TOKEN:|GITHUB_TOKEN:|secrets\.|contents: write|issues: write|pull-requests: write/);
+  const steps=integration.split(/\n(?=      - )/).slice(1);
+  const credentialSteps=steps.filter(step=>/WORLDATLAS_CHECKOUT_TOKEN:/.test(step));
+  assert.equal(credentialSteps.length,2,'read-only acquisition credentials have exactly two trusted consumers');
+  for(const step of credentialSteps)assert.match(step,/name: (Authenticate trusted full-checkout bootstrap|Acquire full checkout with authenticated bounded helper)/);
+  for(const step of steps.filter(step=>!credentialSteps.includes(step)))assert.doesNotMatch(step,/WORLDATLAS_CHECKOUT_TOKEN:/);
+  const verification=steps.filter(step=>/name: Checkout complete candidate for application regression\n/.test(step));
+  assert.equal(verification.length,1);assert.match(verification[0],/HEAD\^\{tree\}/);assert.doesNotMatch(verification[0],/uses: actions\/checkout/);
+  assert.match(credentialSteps[0],/CI_CHECKOUT_BASE: \$\{\{ needs.prepare.outputs.base \}\}/);
+  assert.doesNotMatch(credentialSteps[0],/github.workflow_sha/);
   assert.match(integration,/persist-credentials: false/);assert.match(integration,/node scripts\/run-integration-tests.mjs/);assert.match(integration,/run: npm run build:cloudflare/);assert.doesNotMatch(integration,/WORLDATLAS_PACKAGE_PROFILE|run: npm run build:hosted/);
   assert.match(yaml,/needs: \[prepare, integration, geography\]/);
 });

@@ -80,7 +80,11 @@ test('trusted wake job handles every settled worker path without candidate crede
   assert.match(wake, /persist-credentials: false/);assert.match(wake, /run: node scripts\/run-merge-wake.mjs/);
   assert.doesNotMatch(wake, /secrets\.|needs\.prepare\.outputs\.candidate/);
   const integration = worker.split('\n  integration:\n')[1].split('\n  merge:\n')[0];
-  assert.doesNotMatch(integration, /GH_TOKEN|actions: write|contents: write/);
+  // Credential bindings are forbidden; checking that those names are absent is required.
+  const forbidden = /\b(?:GH_TOKEN|GITHUB_TOKEN)['"]?\s*[:=]|actions: write|contents: write/;
+  assert.doesNotMatch(integration, forbidden);
+  for (const unsafe of ['GH_TOKEN: value', '"GITHUB_TOKEN": value', 'export GH_TOKEN=value', 'actions: write', 'contents: write'])
+    assert.match(unsafe, forbidden);
   assert.match(scheduler, /inputs.wake_run_id == ''/);
   const admission = scheduler.split('\njobs:\n')[1].split('\n  schedule:\n')[1];
   assert.match(admission, /group: worldatlas-merge-admission[\s\S]*?queue: max\n      cancel-in-progress: false/);

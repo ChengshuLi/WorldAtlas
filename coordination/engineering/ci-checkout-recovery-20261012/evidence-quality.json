@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "issue": 1787,
+  "lane": "engineering",
+  "worker_id": "01a12f2e-926e-741e-9f41-482643a48002",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "37af3d30031976e5166d28656c2053d45083a3f8",
+    "files": [
+      {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 30082,
+        "sha256": "18e8b2e702b30f3aa91d987c95fef72b137ea2aefdc7be14d259e49d3bee49aa",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/worker-merge.yml",
+        "bytes": 14247,
+        "sha256": "34934d5ece2478ecd90c75bae340f40c7d5a6341c8b0cf76fe391d78bf3993fe",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "bounded-ci-acquisition",
+      "kind": "code",
+      "description": "Original workflow inputs pin the existing acquisition, timeout, credential and proof-step contracts. Exact changed-code identity remains in Git and independent review. Bounded actual Git/process fixtures and extracted workflow bootstrap checks exercise acquisition, cleanup, identity and authority; no science or complete-job retry is part of this code validation. Historical checkout observations are cited on issue1787; cause of the long fetch remains unproven. Actual normal post-integration acquisition remains a separate rollout requirement.",
+      "software": "Python standard library; Git; Node repository test runner",
+      "units": "monotonic milliseconds and explicit seconds; immutable Git commit/tree/blob identities"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/ci-checkout.test.mjs test/trusted-workflow-checkouts.test.mjs test/merge-integration.test.mjs"
+  ]
+}
