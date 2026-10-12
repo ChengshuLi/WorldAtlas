@@ -171,3 +171,19 @@ hard-coded selected test count. The replacement asserts the exact semantic
 roster and the two explicitly inherited tests. Its observed setup-python
 `LD_LIBRARY_PATH` is stripped from Git/Node child environments rather than
 rejecting legitimate hosted setup; preload and Node startup hooks stay rejected.
+
+### Actual installed-file admission correction
+
+Author run 38309313893 stopped before the full build because the installed
+identity walker incorrectly applied the source-declaration path alphabet to npm
+`@scope` files. Installed file containment now checks actual ordinary relative
+segments, symlink ancestors and stable streamed file identity; public source and
+output members retain their declaration policy. A complete local `npm ci` yielded
+13,438 regular files plus 32 links, 638,881,892 logical bytes; 2,497 actual files
+were outside the declaration alphabet. The corrected identity walk passed in
+4,021 ms. The existing isolated Python dependency environment also passed the
+complete consumed-import identity walk across 1,707 distribution members. This local identity is not claimed equal to the hosted runtime.
+The captured actual 484-file output roster passed manifest admission again, and
+the actual Actions native-readback ZIP passed exact decoded report readback.
+No full output bytes or eligible original producer are inferred from these
+controls. The expanded focused suite passes 94 tests with zero skips.

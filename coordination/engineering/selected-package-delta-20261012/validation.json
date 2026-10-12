@@ -6,8 +6,8 @@
   "checks": [
     {
       "command": "node --test test/package-output-artifact.test.mjs test/selected-package-assembly.test.mjs test/selected-package-bootstrap.test.mjs test/integration-profile-restoration.test.mjs test/full-regression-shards.test.mjs test/selected-package-readback-proof.test.mjs",
-      "tests": 53,
-      "passed": 53,
+      "tests": 54,
+      "passed": 54,
       "skipped": 0
     },
     {
@@ -35,6 +35,33 @@
       "report_bytes": 162882,
       "report_sha256": "358a6fee44f5fcb670e82c81701133a490eb3be8f9144b299af30a4e570fd288",
       "status": "passed-container-control-only-not-eligible-producer"
+    },
+    {
+      "command": "npm ci with workspace-local cache; installedPackageIdentity over actual full installation",
+      "status": "passed",
+      "regular_files": 13438,
+      "members": 13470,
+      "logical_bytes": 638881892,
+      "outside_source_declaration_alphabet": 2497,
+      "elapsed_ms": 4021,
+      "limitation": "Local runtime identity is not claimed equal to hosted runtime; no build or source hydration."
+    },
+    {
+      "status": "passed-actual-inventory-only",
+      "files": 484,
+      "bytes": 331977520,
+      "largest": {
+        "path": "dist/client/geographic-migration-archive.json.gz",
+        "bytes": 10765139,
+        "sha256": "9e4ca20b4211795f90f1ab8cac59cfb1ff079396e22979bfb4d1fa9d3f5f55d1"
+      },
+      "manifest_metadata_bytes": 79446
+    },
+    {
+      "command": "installedPackageIdentity with existing shared isolated Python dependency environment and all three consumed import distributions",
+      "status": "passed",
+      "python_members": 1707,
+      "limitation": "Actual local runtime hashing control; exact hosted runtime equality is still required in reuse."
     }
   ],
   "independent_boundary_findings_corrected": [
@@ -54,7 +81,8 @@
     "Explicit hosted proof authenticates installer root inputs before candidate npm/pip execution and isolates pip from candidate module shadows",
     "Existing queue native readback supplies exhaustive actual full-output inventory; exact reconstructed atlas hash closes all unreported-field gaps",
     "Observed 10.5 MB atlas uses actual shared-memory admission rather than an inapplicable 8 MiB control-receipt cap",
-    "Disk checks follow actual archive, extraction, current publication and receipt allocations rather than a guessed package size"
+    "Disk checks follow actual archive, extraction, current publication and receipt allocations rather than a guessed package size",
+    "Installed npm and runtime file hashing uses actual ordinary relative-file containment rather than applying the declared source-path alphabet to legitimate @scopes and punctuation"
   ],
   "limitations": [
     "Synthetic authority and output fixtures do not establish scientific output equivalence",

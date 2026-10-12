@@ -277,3 +277,17 @@ test('original installed input identity is captured before generated consumer ca
   assert.deepEqual(manifest.runtime.installed,before);
   assert.notDeepEqual(installedPackageIdentity(f.root),before,'Control establishes actual post-consumer tree differs');
 });
+
+
+test('installed identity admits ordinary scoped and punctuated filenames without weakening package paths', t => {
+  const f=fixture(t);
+  for (const name of ['@scope/package/index.js','@scope/package/LICENSE (MIT).txt',
+    'example/Unicode-é+file.js','example/file#?.json']) f.write('node_modules/'+name, name);
+  const before=installedPackageIdentity(f.root);
+  assert.equal(before.dependencies.files, 5);
+  f.write('node_modules/@scope/package/index.js', 'changed scoped dependency');
+  assert.notEqual(installedPackageIdentity(f.root).dependencies.sha256,before.dependencies.sha256);
+  assert.throws(()=>streamedPackageFile(f.root,'node_modules/@scope/package/index.js'),/Safe ordinary package path/);
+  fs.symlinkSync('/tmp',path.join(f.root,'node_modules/escape'));
+  assert.throws(()=>installedPackageIdentity(f.root),/link escapes/);
+});

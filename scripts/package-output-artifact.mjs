@@ -24,7 +24,12 @@ export const PACKAGE_OUTPUT_LIMITS = Object.freeze({files: 20000, member_bytes: 
 const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 
 function ordinary(root, relative, directory = false) {
-  need(safePackagePath(relative) && !relative.endsWith('/'), 'Safe ordinary package path required');
+  // Installed npm members have ordinary names outside the source-declaration
+  // alphabet (notably @scopes). Filesystem containment, not that alphabet, is
+  // the security boundary here. Public package members retain their policy.
+  need(typeof relative === 'string' && !/[\\\0]/.test(relative) &&
+    relative.split('/').every(name => name && name !== '.' && name !== '..'),
+    'Safe ordinary relative path required');
   let at = fs.realpathSync(root);
   const names = relative.split('/');
   for (let i = 0; i < names.length; i++) {
@@ -37,6 +42,11 @@ function ordinary(root, relative, directory = false) {
 }
 
 export function streamedPackageFile(root, relative, maximum = PACKAGE_OUTPUT_LIMITS.member_bytes) {
+  need(safePackagePath(relative) && !relative.endsWith('/'), 'Safe ordinary package path required');
+  return streamedOrdinaryFile(root, relative, maximum);
+}
+
+function streamedOrdinaryFile(root, relative, maximum = PACKAGE_OUTPUT_LIMITS.member_bytes) {
   const file = ordinary(root, relative), before = fs.lstatSync(file);
   need(Number.isSafeInteger(before.size) && before.size >= 0 && before.size <= maximum, 'Package member exceeds admitted bytes');
   const fd = fs.openSync(file, fs.constants.O_RDONLY | fs.constants.O_NOFOLLOW), digest = createHash('sha256');
@@ -129,11 +139,11 @@ export function installedPackageIdentity(root, pythonImports = []) {
       for(const name of fs.readdirSync(file).sort())visit(relative+'/'+name);
     }else{
       need(stat.isFile(),'Ordinary installed dependency required');
-      rows.push({...streamedPackageFile(root,relative),mode:stat.mode&0o111?'100755':'100644'});
+      rows.push({...streamedOrdinaryFile(root,relative),mode:stat.mode&0o111?'100755':'100644'});
     }
   };
   visit('node_modules');
-  const runtime=streamedPackageFile(path.dirname(process.execPath),path.basename(process.execPath));
+  const runtime=streamedOrdinaryFile(path.dirname(process.execPath),path.basename(process.execPath));
   const python=pythonImports.length?JSON.parse(execFileSync('python3',['-I','-B','-c',`
 import hashlib,importlib.metadata,json,pathlib,re,sys
 rows=[]; seen=set(); pending=json.loads(sys.argv[1])
