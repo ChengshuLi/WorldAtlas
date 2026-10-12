@@ -43,6 +43,13 @@ that; otherwise include their exact paths. Verify required inputs are present.
 Use `--profile full` only when the actual build/test needs it, with an adequate
 `--reserve-gib` estimate. There is no allocation-time limit bypass.
 
+Allocation reads tree metadata before sizing only the selected blobs in bounded
+no-lazy-fetch batches. Excluded partial-clone blobs need not be present and are not
+hydrated for sizing. Missing selected blobs fail before a reservation, branch or
+checkout is created; acquire only the explicitly required inputs through the
+coordinated import path, then retry normal allocation. This also applies to full
+profiles, which select every file.
+
 ## Storage admission and ongoing checks
 
 Allocation is serialized across this repository by an exclusive local directory
