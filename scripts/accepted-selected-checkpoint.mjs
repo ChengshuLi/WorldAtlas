@@ -87,10 +87,10 @@ export async function acquireAcceptedCheckpoint({api, repo, locator, token, reta
     receipt.geography.candidate_commit === source.candidate_commit && source.head === locator.head &&
     commit(receipt.tested_candidate), 'Accepted checkpoint receipt/source identities differ');
   await validateGeographyOrigin({api, repo, number: locator.pr_number, source});
-  const [acceptedCommit, testedCommit] = await Promise.all([
-    api(`/repos/${repo}/git/commits/${receipt.merge_commit}`),
-    api(`/repos/${repo}/git/commits/${receipt.tested_candidate}`)
-  ]);
+  // Metadata admission reserves one bounded in-flight response. Keep these
+  // reads serial so simultaneous pages cannot exceed that prospective reserve.
+  const acceptedCommit = await api(`/repos/${repo}/git/commits/${receipt.merge_commit}`);
+  const testedCommit = await api(`/repos/${repo}/git/commits/${receipt.tested_candidate}`);
   need(acceptedCommit.sha === receipt.merge_commit && testedCommit.sha === receipt.tested_candidate &&
     acceptedCommit.tree?.sha === source.tree && testedCommit.tree?.sha === source.tree,
     'Accepted checkpoint tree differs from actual merge or tested candidate');

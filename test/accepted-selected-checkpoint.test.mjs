@@ -246,3 +246,29 @@ test('queue rerun carries its actual successful original attempt without relabel
   assert.equal(source.run_attempt,2);assert.equal(source.job_id,34);assert.equal(source.artifact_name,f.source.artifact_name);
   assert(!f.calls.some(route=>route.includes('/attempts/3/')));
 });
+
+test('accepted custody keeps bounded JSON metadata reads serial under one-page admission', async () => {
+  const f=acceptedFixture(), original=f.options.api; let active=0,peak=0;
+  const api=Object.assign(async (...args)=>{
+    active++;peak=Math.max(peak,active);
+    try {await new Promise(resolve=>setTimeout(resolve,1));return await original(...args);}
+    finally {active--;}
+  },{artifactRedirect:original.artifactRedirect,jobLogRedirect:original.jobLogRedirect});
+  const result=await acquireAcceptedCheckpoint({...f.options,api});
+  assert.equal(result.available,true);assert.equal(peak,1);releaseAcceptedCheckpoint(result.handle);
+});
+
+test('prospective metadata admission refuses before fetching the second large commit page', async () => {
+  const f=acceptedFixture(),original=f.options.api;let commitReads=0;
+  const api=Object.assign(async route=>{
+    if(route.includes('/git/commits/')) {
+      commitReads++;
+      return {sha:route.split('/').at(-1),tree:{sha:tree},message:'x'.repeat(2*1024*1024-1024)};
+    }
+    return original(route);
+  },{artifactRedirect:original.artifactRedirect,jobLogRedirect:original.jobLogRedirect});
+  await assert.rejects(acquireAcceptedCheckpoint({...f.options,api,admit:bytes=>{
+    if(bytes>24*1024*1024)throw Error('current allowance');
+  }}),/current allowance/);
+  assert.equal(commitReads,1);
+});
