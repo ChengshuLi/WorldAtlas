@@ -1,0 +1,224 @@
+{
+  "version": 1,
+  "issue": 1793,
+  "lane": "engineering",
+  "worker_id": "01a130ea-5f35-74b5-ac36-6523f529c01a",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "01240322929485f7baae32ed7c1d7535300d1d9f",
+    "files": [
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 60954,
+        "sha256": "f4a0ff9f760da7c820e9c7349b13159f67f4a28b74515740c1eef6674aff908c",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "outputs": [
+    {
+      "path": "coordination/engineering/metadata-regression-reuse-20261012/actual-1790-program-match.json",
+      "bytes": 1136,
+      "sha256": "b9a7383236835ab47f564695242b2dfc3cd28d34e15955b50a692e221be5f452",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/metadata-regression-reuse-20261012/current-program-qualification.json",
+      "bytes": 646,
+      "sha256": "a1aa2ea164cc5e105dbf505f08cbe507a186f2047dcaa8ddafd0a3e1bdf9522c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/metadata-regression-reuse-20261012/current-seed-entry.json",
+      "bytes": 96564,
+      "sha256": "596a11d63696face976d30e36e5bbd97b591dd49a8f685d49c93d9703f96c95c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/metadata-regression-reuse-20261012/current-seed-operating.json",
+      "bytes": 306,
+      "sha256": "1d2e6d864a66e9b62147494c0f3e89ab5635836876046050bdfb1c64fb3cdda2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/metadata-regression-reuse-20261012/focused-controls.log.gz",
+      "bytes": 7039,
+      "sha256": "4f2b3aa911bf667821606a5b60489b425740f3e76eed6ed65245b5ee0eddd9d4",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 20322,
+      "uncompressed_sha256": "c9fdff1c3ed99bf687ece43ebae2ecbf39483ec31b9c43574f5ed66cd998ea0a"
+    },
+    {
+      "path": "coordination/engineering/metadata-regression-reuse-20261012/fresh-controls.log.gz",
+      "bytes": 9181,
+      "sha256": "18356e056ea7bbea203ea951f3475f008b4a4d0604a70b2f5b0ece0905bb3c50",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 52463,
+      "uncompressed_sha256": "27ba11acc29f71a117465678dade69393ca6ecdc2fd8665251a3f6030aed130e"
+    },
+    {
+      "path": "coordination/engineering/metadata-regression-reuse-20261012/verification.json",
+      "bytes": 1244,
+      "sha256": "a2f808bb924567de3b5bea4f6c6235bdb02df0fb10f971c9226961648cb2d0cd",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "sources": [],
+  "methods": [
+    {
+      "id": "bounded-regression-reuse",
+      "kind": "code",
+      "description": "Exact finite audited-program and original successful computational producer admission with fresh current-head controls and queue revalidation.",
+      "software": "Node24.19.0; existing immutable Git and GitHub proof primitives",
+      "units": "file identity, execution identity, tests, milliseconds"
+    },
+    {
+      "id": "current-seed-entry",
+      "kind": "code",
+      "description": "Unchanged accepted attempt003 recipe with scientific body-open traps and bounded process-group supervisor.",
+      "software": "Pinned Python3.12 and Node24.19.0",
+      "units": "seconds and bytes"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "focused-tests",
+      "value": 201,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "e32aae02ada160e3bf8cb50bac105c94df658c00",
+      "input_sha256": "a2f808bb924567de3b5bea4f6c6235bdb02df0fb10f971c9226961648cb2d0cd"
+    },
+    {
+      "id": "focused-skipped",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "e32aae02ada160e3bf8cb50bac105c94df658c00",
+      "input_sha256": "a2f808bb924567de3b5bea4f6c6235bdb02df0fb10f971c9226961648cb2d0cd"
+    },
+    {
+      "id": "focused-duration_ms",
+      "value": 12684.029768,
+      "unit": "ms",
+      "vintage": "archived",
+      "evaluation_commit": "e32aae02ada160e3bf8cb50bac105c94df658c00",
+      "input_sha256": "a2f808bb924567de3b5bea4f6c6235bdb02df0fb10f971c9226961648cb2d0cd"
+    },
+    {
+      "id": "fresh-tests",
+      "value": 240,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "e32aae02ada160e3bf8cb50bac105c94df658c00",
+      "input_sha256": "a2f808bb924567de3b5bea4f6c6235bdb02df0fb10f971c9226961648cb2d0cd"
+    },
+    {
+      "id": "fresh-skipped",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "e32aae02ada160e3bf8cb50bac105c94df658c00",
+      "input_sha256": "a2f808bb924567de3b5bea4f6c6235bdb02df0fb10f971c9226961648cb2d0cd"
+    },
+    {
+      "id": "fresh-duration_ms",
+      "value": 40731.902403,
+      "unit": "ms",
+      "vintage": "archived",
+      "evaluation_commit": "e32aae02ada160e3bf8cb50bac105c94df658c00",
+      "input_sha256": "a2f808bb924567de3b5bea4f6c6235bdb02df0fb10f971c9226961648cb2d0cd"
+    },
+    {
+      "id": "seed-seconds",
+      "value": 8.665247306998936,
+      "unit": "s",
+      "vintage": "archived",
+      "evaluation_commit": "4d017885f63eb7dd08ab91a4c563d20f04fb7e9c",
+      "input_sha256": "a2f808bb924567de3b5bea4f6c6235bdb02df0fb10f971c9226961648cb2d0cd"
+    },
+    {
+      "id": "seed-peak_group_rss_bytes",
+      "value": 396165120,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "4d017885f63eb7dd08ab91a4c563d20f04fb7e9c",
+      "input_sha256": "a2f808bb924567de3b5bea4f6c6235bdb02df0fb10f971c9226961648cb2d0cd"
+    },
+    {
+      "id": "seed-source_native_body_opens",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "4d017885f63eb7dd08ab91a4c563d20f04fb7e9c",
+      "input_sha256": "a2f808bb924567de3b5bea4f6c6235bdb02df0fb10f971c9226961648cb2d0cd"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "focused-tests",
+      "path": "coordination/engineering/metadata-regression-reuse-20261012/verification.json",
+      "json_pointer": "/focused/tests"
+    },
+    {
+      "metric_id": "focused-skipped",
+      "path": "coordination/engineering/metadata-regression-reuse-20261012/verification.json",
+      "json_pointer": "/focused/skipped"
+    },
+    {
+      "metric_id": "focused-duration_ms",
+      "path": "coordination/engineering/metadata-regression-reuse-20261012/verification.json",
+      "json_pointer": "/focused/duration_ms"
+    },
+    {
+      "metric_id": "fresh-tests",
+      "path": "coordination/engineering/metadata-regression-reuse-20261012/verification.json",
+      "json_pointer": "/fresh/tests"
+    },
+    {
+      "metric_id": "fresh-skipped",
+      "path": "coordination/engineering/metadata-regression-reuse-20261012/verification.json",
+      "json_pointer": "/fresh/skipped"
+    },
+    {
+      "metric_id": "fresh-duration_ms",
+      "path": "coordination/engineering/metadata-regression-reuse-20261012/verification.json",
+      "json_pointer": "/fresh/duration_ms"
+    },
+    {
+      "metric_id": "seed-seconds",
+      "path": "coordination/engineering/metadata-regression-reuse-20261012/verification.json",
+      "json_pointer": "/seed/seconds"
+    },
+    {
+      "metric_id": "seed-peak_group_rss_bytes",
+      "path": "coordination/engineering/metadata-regression-reuse-20261012/verification.json",
+      "json_pointer": "/seed/peak_group_rss_bytes"
+    },
+    {
+      "metric_id": "seed-source_native_body_opens",
+      "path": "coordination/engineering/metadata-regression-reuse-20261012/verification.json",
+      "json_pointer": "/seed/source_native_body_opens"
+    }
+  ],
+  "limits": [
+    "Local controls do not establish actual subsequent hosted reuse or critical-path savings.",
+    "Historical applicability replay uses a new policy absent from original trusted main.",
+    "The local fresh-control measurement spans an anchor/README-only commit; current hosted acceptance remains required."
+  ],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node --test --test-concurrency=2 test/metadata-regression-reuse.test.mjs test/integration-proof.test.mjs test/final-capacity.test.mjs test/merge-integration.test.mjs test/trusted-workflow-checkouts.test.mjs test/geography-proof.test.mjs test/pr-geography-reuse.test.mjs",
+    "node scripts/run-metadata-regression-controls.mjs",
+    "Pinned Python runs unchanged accepted seed-admission/attempt-003/supervise.py in a fresh owned output directory"
+  ]
+}

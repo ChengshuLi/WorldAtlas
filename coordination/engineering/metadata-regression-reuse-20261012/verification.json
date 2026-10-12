@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "focused": {
+    "tests": 201,
+    "passed": 201,
+    "skipped": 0,
+    "duration_ms": 12684.029768,
+    "execution_start": "e32aae02ada160e3bf8cb50bac105c94df658c00"
+  },
+  "fresh": {
+    "tests": 240,
+    "passed": 240,
+    "skipped": 0,
+    "duration_ms": 40731.902403,
+    "execution_start": "e32aae02ada160e3bf8cb50bac105c94df658c00",
+    "execution_end": "4d017885f63eb7dd08ab91a4c563d20f04fb7e9c",
+    "limits": [
+      "The catalogue audit_anchor and new receiving README were committed while the four-file process was active. All executing code/test/data bytes were unchanged; this is a local subset measurement, not exact final-head hosted acceptance."
+    ]
+  },
+  "seed": {
+    "executing_commit": "4d017885f63eb7dd08ab91a4c563d20f04fb7e9c",
+    "seconds": 8.665247306998936,
+    "peak_group_rss_bytes": 396165120,
+    "source_native_body_opens": 0,
+    "recipe_commit": "de242847b3867045ee9301f49a1e5e53d6cb8e16",
+    "recipe_path": "coordination/engineering/accepted-checkpoint-advancement-20261012/seed-admission/attempt-003/",
+    "limits": [
+      "Existing unchanged recipe run against reachable current commit with hot pinned metadata/product objects; no hosted or scientific adoption claim."
+    ]
+  }
+}

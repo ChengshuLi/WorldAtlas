@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "status": "qualified-known-current-program",
+  "executing_commit": "e32aae02ada160e3bf8cb50bac105c94df658c00",
+  "program": {
+    "id": "metadata-regression-20261012",
+    "roles": 2579,
+    "vector_sha256": "babf85fe7d8b91ee152a94719f4671dd686129b55607334d581d9ed843535ae6",
+    "audit_anchor": "e32aae02ada160e3bf8cb50bac105c94df658c00"
+  },
+  "tree_entries": 30905,
+  "controls": [
+    "future-new-packet-metadata-positive",
+    "unknown-reader-negative",
+    "changed-current-test-negative",
+    "old-receiving-directory-negative"
+  ],
+  "full_tree_read": true,
+  "scientific_bodies_read": 0,
+  "hosted_adoption": false
+}
