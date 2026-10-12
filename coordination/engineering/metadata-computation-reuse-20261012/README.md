@@ -90,3 +90,28 @@ pinned Git trees. Process-group cleanup on an inner Git timeout remains unexecut
 the outer workflow deadline is bounded, but no orphan-free claim is made. Issue
 contracts using a literal branch-matched manifest path are supported; templated
 manifest paths conservatively fall back to fresh geography in this increment.
+
+## Bounded regression continuation measurement
+
+The four identified real-checkout controls (job-deadline, supported-programs,
+selected-data-profile and integration-profile-restoration) passed all 240 tests
+with zero skips in 52.514 seconds on accepted04c consumer versions, invoked
+directly with `node --test --test-concurrency=2`. The report and compressed
+complete output are retained beside this README. No full-profile setup, package
+build or native/polygon computation ran. Test peak RSS was 544,032 KiB.
+
+This is warm-fixture test time, not setup or hosted critical-path time. A large
+one-time batch restored 614,655,083 bytes of exact retained fixture bodies in
+107.101 seconds, with 214,836 KiB peak import RSS; other small setup batches are
+not included in that import duration. The complete setup is not claimed as a
+single measured operation. All restored bodies remain local and reusable.
+
+Future regression reuse needs a bounded known-programme matcher in addition to
+the predecessor/successor input comparison. Ordinary checkout/package import
+closures do not include all discovered tests, spawned helpers, extracted-code
+`new Function`/VM routes or the archived original validator. Their exact audited
+memberships must be included, using existing original inventories where present.
+Unknown readers fall back. The successful predecessor can bind changed scientific
+data, while current metadata/HEAD controls run fresh; programme identity must not
+silently expand to arbitrary new test or helper code. #1794 still enables only
+geography reuse; this measurement supports the next #1793 increment.

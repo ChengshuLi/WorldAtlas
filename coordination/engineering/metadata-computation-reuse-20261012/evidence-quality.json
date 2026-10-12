@@ -26,6 +26,20 @@
       "hash_kind": "file-bytes",
       "uncompressed_bytes": 866856,
       "uncompressed_sha256": "2246ff19d2f95d03f9aa15e5fb94de8ca09a247758106f4eb6a1b29616ed7f02"
+    },
+    {
+      "path": "coordination/engineering/metadata-computation-reuse-20261012/four-test-consumer-measurement.json",
+      "bytes": 2607,
+      "sha256": "41ff4da45974f43ac49a9ab54854ea228c56ca2e4f3e080ca09b4b2ec0545c4d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/metadata-computation-reuse-20261012/four-test-consumer-measurement.log.gz",
+      "bytes": 6903,
+      "sha256": "88acbc8d90378776da68be9a5b8f91267c6881f0b8a3e64945bc3779b0c6c4e1",
+      "uncompressed_bytes": 21994,
+      "uncompressed_sha256": "cb5f10a3be8c60d126d2c1de1162a17accc596cb54a68e055fd18c7d3856abff",
+      "hash_kind": "file-bytes"
     }
   ],
   "sources": [],
@@ -36,6 +50,13 @@
       "description": "Authenticate original successful scientific execution and recheck current unchanged consumed inputs under the existing audited collector. Current evidence and review remain separate fresh gates.",
       "software": "Node 24.19.0; trusted GitHub REST API and existing immutable Git route collector",
       "units": "exact immutable file identities and original execution provenance"
+    },
+    {
+      "id": "bounded-consumer-test-timing",
+      "kind": "code",
+      "description": "Direct fresh real-checkout consumer controls using unchanged accepted04c test files, without full-profile restoration or package/science execution.",
+      "software": "Node 24.19.0; Git; Python monotonic wall timer",
+      "units": "milliseconds and completed tests"
     }
   ],
   "metrics": [
@@ -70,6 +91,30 @@
       "vintage": "archived",
       "evaluation_commit": "b1cc388a9489385314d3282768eb9e850da37cf8",
       "input_sha256": "1366d4094db8ec402c05e34dbefafdc54b004a0c7f19728ae01c9be9fba9e8ba"
+    },
+    {
+      "id": "fresh-consumer-elapsed",
+      "value": 52514,
+      "unit": "ms",
+      "vintage": "archived",
+      "evaluation_commit": "859ad2d64512d96e2c8af3316bfdeba64e032791",
+      "input_sha256": "41ff4da45974f43ac49a9ab54854ea228c56ca2e4f3e080ca09b4b2ec0545c4d"
+    },
+    {
+      "id": "fresh-consumer-tests",
+      "value": 240,
+      "unit": "tests",
+      "vintage": "archived",
+      "evaluation_commit": "859ad2d64512d96e2c8af3316bfdeba64e032791",
+      "input_sha256": "41ff4da45974f43ac49a9ab54854ea228c56ca2e4f3e080ca09b4b2ec0545c4d"
+    },
+    {
+      "id": "fresh-consumer-skipped",
+      "value": 0,
+      "unit": "tests",
+      "vintage": "archived",
+      "evaluation_commit": "859ad2d64512d96e2c8af3316bfdeba64e032791",
+      "input_sha256": "41ff4da45974f43ac49a9ab54854ea228c56ca2e4f3e080ca09b4b2ec0545c4d"
     }
   ],
   "metric_bindings": [
@@ -92,6 +137,21 @@
       "metric_id": "scientific-leaf-imports",
       "path": "coordination/engineering/metadata-computation-reuse-20261012/actual-1790-input-equivalence.json.gz",
       "json_pointer": "/metadata_acquisition/scientific_leaf_imports"
+    },
+    {
+      "metric_id": "fresh-consumer-elapsed",
+      "path": "coordination/engineering/metadata-computation-reuse-20261012/four-test-consumer-measurement.json",
+      "json_pointer": "/elapsed_ms"
+    },
+    {
+      "metric_id": "fresh-consumer-tests",
+      "path": "coordination/engineering/metadata-computation-reuse-20261012/four-test-consumer-measurement.json",
+      "json_pointer": "/tests"
+    },
+    {
+      "metric_id": "fresh-consumer-skipped",
+      "path": "coordination/engineering/metadata-computation-reuse-20261012/four-test-consumer-measurement.json",
+      "json_pointer": "/skipped"
     }
   ],
   "limits": [
@@ -107,6 +167,7 @@
   },
   "commands": [
     "node --test test/pr-geography-reuse.test.mjs",
-    "node --test --test-name-pattern=receiving test/unchanged-selected-geography.test.mjs"
+    "node --test --test-name-pattern=receiving test/unchanged-selected-geography.test.mjs",
+    "node --test --test-concurrency=2 test/job-deadline.test.mjs test/supported-programs.test.mjs test/selected-data-profile.test.mjs test/integration-profile-restoration.test.mjs"
   ]
 }
