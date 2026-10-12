@@ -1,0 +1,37 @@
+file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/scripts/check-effective-geographic-regression.mjs:13
+const demand=(v,m)=>{if(!v)throw Error(m);};
+                                 ^
+
+Error: Complete phase exceeds prospective cap
+    at demand (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/scripts/check-effective-geographic-regression.mjs:13:34)
+    at ImmutableReader.admit (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/scripts/check-effective-geographic-regression.mjs:86:16)
+    at ImmutableReader.read (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/scripts/check-effective-geographic-regression.mjs:89:50)
+    at new SelectedGeometrySources (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/scripts/check-effective-geographic-regression.mjs:203:31)
+    at assembleSupportedActivation (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/coordination/engineering/additive-native-activation-20261009/assemble-supported-activation.mjs:18:18)
+    at file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/assemble-existing-five.mjs:19:17
+
+Node.js v24.19.0
+Command exited with non-zero status 1
+	Command being timed: "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node --expose-gc /workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/assemble-existing-five.mjs /workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/.cache/nor-grc-congo-current-003/assembly-parameters.json 6d534ee4f8167dc727a5f4d50377fffe46adfd72b4e9fdb896422ac2332558a8"
+	User time (seconds): 33.18
+	System time (seconds): 19.73
+	Percent of CPU this job got: 141%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:37.32
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 320464
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 16
+	Minor (reclaiming a frame) page faults: 5661740
+	Voluntary context switches: 43534
+	Involuntary context switches: 2322
+	Swaps: 0
+	File system inputs: 176992
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1

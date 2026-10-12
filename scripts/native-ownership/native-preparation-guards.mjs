@@ -15,22 +15,43 @@ export function requirePlainExecution({boundedHeap=false}={}) {
     throw Error('Native preparation requires the reviewed plain Node launch without loaders/preloads');
 }
 
-export function candidateBudget(inputs, {reserveBytes = 131072, reserveDescriptors = 16} = {}) {
-  const limitBytes = 256 * 1024 * 1024, limitDescriptors = 512;
+// Current operational admission, independent of literal historical receipts.
+// Kept in this existing low-level guard to avoid expanding native import rosters.
+export function preparationAllowance({availableBytes=process.availableMemory(),concurrentReservedBytes=Number(process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES??0),phaseBytes,rssBytes}={}) {
+  if (![availableBytes,concurrentReservedBytes].every(n=>Number.isSafeInteger(n)&&n>=0)) throw Error('Invalid current preparation resource observations');
+  const usable=availableBytes-concurrentReservedBytes-2*1024**3-768*1024**2;
+  if (usable<=0) throw Error('Insufficient current preparation memory after parent/concurrent headroom');
+  rssBytes??=Math.floor(usable/2);phaseBytes??=rssBytes;
+  if (![phaseBytes,rssBytes].every(n=>Number.isSafeInteger(n)&&n>0)||phaseBytes>usable||rssBytes>usable) throw Error('Requested preparation allowance exceeds current memory admission');
+  return Object.freeze({phaseBytes,rssBytes});
+}
+export function preparationRequestAllowance(value){
+  if(!value||typeof value!=='object'||Array.isArray(value)||Object.keys(value).sort().join(',')!=='phaseBytes,rssBytes'||![value.phaseBytes,value.rssBytes].every(n=>Number.isSafeInteger(n)&&n>0))throw Error('Explicit finite preparation request allowance required');
+  return preparationAllowance({phaseBytes:value.phaseBytes,rssBytes:value.rssBytes});
+}
+export function candidateBudget(inputs, {reserveBytes = 131072, reserveDescriptors = 16, allowance=preparationAllowance()} = {}) {
+  allowance=preparationRequestAllowance(allowance);
+  const limitBytes = allowance.phaseBytes, limitDescriptors = 512;
+  if (![limitBytes,allowance.rssBytes].every(n=>Number.isSafeInteger(n)&&n>0)) throw Error('Invalid current preparation allowance');
   if (!Number.isSafeInteger(reserveBytes) || reserveBytes < 0 || !Number.isInteger(reserveDescriptors) || reserveDescriptors < 0)
     throw Error('Invalid preparation budget reservation');
   let bytes = 0, descriptors = 0;
+  function check(){
+    if(process.memoryUsage().rss>=allowance.rssBytes)throw Error('Current preparation RSS allowance exceeded');
+    if(!Number.isSafeInteger(bytes+reserveBytes)||bytes+reserveBytes>limitBytes||descriptors+reserveDescriptors>limitDescriptors)throw Error('Aggregate evidence preparation budget exceeded');
+  }
   function add(item) {
+    check();
     if (!Number.isSafeInteger(item?.bytes) || item.bytes < 0 || item.bytes > 32 * 1024 * 1024)
       throw Error('Invalid whole-file admission');
-    if (bytes + item.bytes + reserveBytes > limitBytes || descriptors + 1 + reserveDescriptors > limitDescriptors)
+    if (!Number.isSafeInteger(bytes+item.bytes+reserveBytes)||bytes + item.bytes + reserveBytes > limitBytes || descriptors + 1 + reserveDescriptors > limitDescriptors)
       throw Error('Aggregate evidence preparation budget exceeded');
     bytes += item.bytes; descriptors++;
   }
-  for (const input of inputs) add(input);
-  return {add, snapshot: () => ({accounted_bytes: bytes, accounted_descriptors: descriptors,
+  check();for (const input of inputs) add(input);
+  return {add, allowance, snapshot: () => {check();return {accounted_bytes: bytes, accounted_descriptors: descriptors,
     reserved_review_bytes: reserveBytes, reserved_review_descriptors: reserveDescriptors, limit_bytes: limitBytes,
-    limit_descriptors: limitDescriptors, limits_include_reserve: true})};
+    rss_limit_bytes:allowance.rssBytes,limit_descriptors: limitDescriptors, limits_include_reserve: true};}};
 }
 
 export function originalCandidateAssets(repo, manifest) {

@@ -5,7 +5,7 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync} from 'node:zlib';
-const FILE=33554432,PHASE=268435456,ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../..');
+const FILE=33554432,ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../..');
 const P='coordination/engineering/selected-geography-effective-prevention-20261009/';
 const CODE=[P+'selected-continuous-entry.mjs',P+'selected-neighbor-prevention.mjs','scripts/check-effective-geographic-regression.mjs','src/ownership-codec.js','scripts/run-geographic-check.py','scripts/check-geographic-regression.py','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt'];
 const demand=(v,m)=>{if(!v)throw Error(m);},sha=b=>createHash('sha256').update(b).digest('hex');
@@ -32,7 +32,12 @@ function guard(repo,trusted){
  const git=(...a)=>execFileSync('git',['-c','core.hooksPath=/dev/null','-C',repo,...a],{maxBuffer:FILE+1,stdio:['ignore','pipe','pipe']});
  demand(git('rev-parse','HEAD').toString().trim()===trusted&&fs.realpathSync(repo)===fs.realpathSync(ROOT),'Cold checker must run from actual trusted checkout');
  const stats=CODE.map(name=>{const f=path.join(ROOT,name);ordinaryParents(f);const s=fs.lstatSync(f);demand(s.isFile()&&!s.isSymbolicLink()&&s.size<=FILE,'Nonordinary cold execution code');return {name,f,s};});
- demand(stats.reduce((n,r)=>n+r.s.size,0)+fs.statSync(process.execPath).size+8388608+FILE<PHASE,'Cold code/runtime admission before code body opens');
+ // Pre-import admission mirrors the shared current allowance; the authenticated
+ // reader independently rechecks current availability after these code opens.
+ const reserved=Number(process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES??0),available=process.availableMemory();
+ demand([reserved,available].every(n=>Number.isSafeInteger(n)&&n>=0),'Invalid cold current resource observations');
+ const phaseBytes=Math.floor((available-reserved-2*1024**3-768*1024**2)/2);
+ demand(phaseBytes>0&&stats.reduce((n,r)=>n+r.s.size,0)+fs.statSync(process.execPath).size+8388608+FILE<phaseBytes,'Cold code/runtime admission before code body opens');
  return stats.map(({name,f,s})=>{const row=git('ls-tree','-z',trusted,'--',name).toString();demand(/^100(644|755) blob [a-f0-9]{40}\t/.test(row)&&row.endsWith('\t'+name+'\0'),'Unbound cold execution code');const [mode,,oid]=row.slice(0,row.indexOf('\t')).split(' ');demand(Number(git('cat-file','-s',oid))===s.size,'Cold code size differs');const local=fs.readFileSync(f),raw=git('cat-file','blob',oid);demand(local.equals(raw)&&(s.mode&0o777)===(mode==='100755'?0o755:0o644),'Cold code whole body/mode differs');return {commit:trusted,path:name,mode,git_blob_oid:oid,bytes:raw.length,sha256:sha(raw)};});
 }
 export async function coordinateStage(repo,trusted,selected,destination,parentRuntimePath){
@@ -77,7 +82,7 @@ function readColdProduct(directory,ack,reader,helper){
  directory=path.resolve(directory);ordinaryParents(path.join(directory,'publication.json'));const directoryStat=fs.lstatSync(directory);demand(directoryStat.isDirectory()&&!directoryStat.isSymbolicLink(),'Nonordinary cold stage directory');
  const files=[{name:'publication.json',bytes:helper.valueBytes(ack.publication).length,sha256:sha(helper.valueBytes(ack.publication))},{name:'facts.json',...ack.publication.facts},{name:'certificate.json.gz',...ack.publication.certificate}];
  for(const p of files){demand(!p.name.includes('/')&&Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=FILE&&(p.decoded_bytes===undefined||Number.isSafeInteger(p.decoded_bytes)&&p.decoded_bytes>0&&p.decoded_bytes<=FILE),'Cold product ordinary cap');const f=path.join(directory,p.name),stat=fs.lstatSync(f);demand(stat.isFile()&&!stat.isSymbolicLink()&&stat.size===p.bytes&&(stat.mode&0o777)===0o644,'Cold product mode/whole length differs');}
- const charge=files.reduce((n,p)=>n+p.bytes+(p.decoded_bytes??0),0);demand(reader.used+charge<=PHASE,'Whole cold product phase exceeds cap before reads');reader.used+=charge;
+ const charge=files.reduce((n,p)=>n+p.bytes+(p.decoded_bytes??0),0);demand(reader.used+charge<=reader.phaseLimit,'Whole cold product phase exceeds cap before reads');reader.used+=charge;
  const bodies=files.map(p=>{const raw=fs.readFileSync(path.join(directory,p.name));demand(raw.length===p.bytes&&sha(raw)===p.sha256,'Whole cold product differs from issued child acknowledgement');return raw;});
  const decoded=gunzipSync(bodies[2],{maxOutputLength:files[2].decoded_bytes});demand(decoded.length===files[2].decoded_bytes&&sha(decoded)===files[2].decoded_sha256,'Whole cold certificate decoded inverse differs');
  return {publication:JSON.parse(bodies[0]),facts:JSON.parse(bodies[1]),certificate:JSON.parse(decoded),encoded_sha256:sha(bodies[2]),decoded_sha256:sha(decoded)};

@@ -1,0 +1,28 @@
+file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs:11
+const demand=(v,m)=>{if(!v)throw Error(m);},sha=b=>createHash('sha256').update(b).digest('hex');
+                                 ^
+
+Error: Cold checker must run from actual trusted checkout
+    at demand (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs:11:34)
+    at guard (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs:33:2)
+    at continuousOperandsStage (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs:171:162)
+    at file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs:222:138
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.19.0
+{"geography_stage": "selected-continuous-node-operands", "elapsed_ms": 110}
+Traceback (most recent call last):
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/.cache/recovery/run-corrected-continuous.py", line 11, in <module>
+    result=wrapper.selected_continuous(repo,sys.argv[2],sys.argv[3],detector)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/scripts/run-geographic-check.py", line 561, in selected_continuous
+    raw = subprocess.check_output([executable, str(entrypoint), 'continuous', str(repo), baseline,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['node', '/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs', 'continuous', '/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work', '6e5e7ec3c1f886232eaef782431a6d3afe608d6c', '6e5e7ec3c1f886232eaef782431a6d3afe608d6c', '791576647adc41241ce9b438f1bb0034088eed4e', '/tmp/trusted-selected-footprints-l02o3sx4/complete', '/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/.cache/build-runtime-cp312/bin/python']' returned non-zero exit status 1.

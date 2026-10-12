@@ -1,0 +1,17 @@
+file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/scripts/check-effective-geographic-regression.mjs:13
+const demand=(v,m)=>{if(!v)throw Error(m);};
+                                 ^
+
+Error: Complete phase exceeds prospective cap
+    at demand (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/scripts/check-effective-geographic-regression.mjs:13:34)
+    at ImmutableReader.admit (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/scripts/check-effective-geographic-regression.mjs:86:16)
+    at readCompletedMember (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:481:10)
+    at finishedMember (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:487:3)
+    at qualifyOriginalNativeAuthority (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:507:3)
+    at readRetainedRegistryAuthority (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:561:62)
+    at readSelectedAdditive (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:1125:15)
+    at loadSelection (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/scripts/check-effective-geographic-regression.mjs:467:23)
+    at inspectSelected (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/scripts/check-effective-geographic-regression.mjs:627:16)
+    at file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/scripts/check-effective-geographic-regression.mjs:703:88
+
+Node.js v24.19.0

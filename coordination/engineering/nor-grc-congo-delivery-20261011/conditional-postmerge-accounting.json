@@ -1,0 +1,397 @@
+{
+  "status": "conditional-preparation-only-not-delivered",
+  "baseline": {
+    "selected_commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+    "accepted_tracker": "https://github.com/ChengshuLi/WorldAtlas/issues/1202",
+    "whole_gaps": 33,
+    "original_gap_denominator": 95173,
+    "complete_original_batches": 1,
+    "original_batch_denominator": 594,
+    "native_cells": 1006,
+    "count_basis": "Inherited accepted tracker whole-gap count; no inference from 47 active primitives. Exact historical33 roster not reconstructed. New13 are disjoint from all55 prior selected-ledger rows and both1295 base IDs. The only intersecting baseline IDs in affected batches are the two accepted1726 Angola\u2013DRC closures."
+  },
+  "candidate_checkpoint": "dbda60ac426e30e430f8157794e5e7161f01a453",
+  "conditional_postmerge": {
+    "whole_gaps": 46,
+    "whole_gap_percentage": 0.048333035629853006,
+    "complete_original_batches": 1,
+    "native_cells": 1103,
+    "new_whole_gaps": 13,
+    "new_native_cells": 97,
+    "new_assigned_primitives": 10,
+    "new_zero_cell_primitives": 3,
+    "all_prior55_ledger_rows_preserved": true,
+    "total_ledger_rows": 68,
+    "total_active_primitives": 60,
+    "total_zero_cell_primitives": 13,
+    "inactive_rows": 8
+  },
+  "conditions": [
+    "Actual current-neighbor qualification and selected assembly.",
+    "Required native/continuous, emitted package and GPU/Canvas consumer acceptance.",
+    "Independent exact-head review, required CI, actual merge and exact merged selected readback."
+  ],
+  "new_components": [
+    {
+      "component_id": "physical-component:9b7d5477755d2307f881b42e2fce0de98b68b2ebf702183e7d4d16b296c7b8ea",
+      "original_batch_id": "gap-operational-batch:8eb6e7b9edc11bee59fdad66",
+      "original_family_id": "gap-source-batch:87b21d951da50a7898f47f09",
+      "cohort": "GRC",
+      "full_original_geometry_sha256": "a131ff15d22f9a8cfcad0422ebaf7ce6fb2bdbac07606ff61dfe389b7a1dc0c1",
+      "literal_full_geometry_matches": true,
+      "source_feature_covers_entire_component": true,
+      "target_id": "gb:GRC:ADM3:53547021B68771809691865",
+      "native_cells": 19,
+      "native_disposition": "assigned",
+      "conditional_whole_gap_credit": 1,
+      "retained_detector_area_m2": 264382.2136327998,
+      "incremental_continuous_area_m2": null
+    },
+    {
+      "component_id": "physical-component:cebfb84aae8af0e2534907a5a55f25e4f4acf41c36ce46563f9823e10597bc3f",
+      "original_batch_id": "gap-operational-batch:0d462b6ad8e2f7f9b8f38bad",
+      "original_family_id": "gap-source-batch:a2bc6d3e79e115c12b062975",
+      "cohort": "GRC",
+      "full_original_geometry_sha256": "a63b534fc22678a8eb30a94d686c44d2cc2f837ae1d980a3c318b5d8bdc2619a",
+      "literal_full_geometry_matches": true,
+      "source_feature_covers_entire_component": true,
+      "target_id": "gb:GRC:ADM3:53547021B72748856763578",
+      "native_cells": 13,
+      "native_disposition": "assigned",
+      "conditional_whole_gap_credit": 1,
+      "retained_detector_area_m2": 176500.62794352244,
+      "incremental_continuous_area_m2": null
+    },
+    {
+      "component_id": "physical-component:0bdf2ee153bf92a00d854efb144310b2aa0fb0f1c9cbee883ee186240aed83bf",
+      "original_batch_id": "gap-operational-batch:8eb6e7b9edc11bee59fdad66",
+      "original_family_id": "gap-source-batch:62980cba059d601811928abd",
+      "cohort": "GRC",
+      "full_original_geometry_sha256": "56a20b11b2bcd5dc9c54ff84bb385aec3555cd0f93582d375b347dc634d57690",
+      "literal_full_geometry_matches": true,
+      "source_feature_covers_entire_component": true,
+      "target_id": "gb:GRC:ADM3:53547021B48337850511986",
+      "native_cells": 5,
+      "native_disposition": "assigned",
+      "conditional_whole_gap_credit": 1,
+      "retained_detector_area_m2": 72579.2857606332,
+      "incremental_continuous_area_m2": null
+    },
+    {
+      "component_id": "physical-component:c4b517a90f05cceee501af2b3aab93b8042921f40c98696e991a54b2e8fb7930",
+      "original_batch_id": "gap-operational-batch:8eb6e7b9edc11bee59fdad66",
+      "original_family_id": "gap-source-batch:8728ba9fca37fe963ffea5fc",
+      "cohort": "GRC",
+      "full_original_geometry_sha256": "edd89b009223b63046fb7a68dd821473cf7b34a757432bee23473a23318c48aa",
+      "literal_full_geometry_matches": true,
+      "source_feature_covers_entire_component": true,
+      "target_id": "gb:GRC:ADM3:53547021B56133984364891",
+      "native_cells": 10,
+      "native_disposition": "assigned",
+      "conditional_whole_gap_credit": 1,
+      "retained_detector_area_m2": 66082.05513860134,
+      "incremental_continuous_area_m2": null
+    },
+    {
+      "component_id": "physical-component:0490e58431949470602032aabab032bc20b32e38f2e74705e63ee2c37ee16a07",
+      "original_batch_id": "gap-operational-batch:86a51f8d52e0c1a1f077e96f",
+      "original_family_id": "gap-source-batch:10af1c6a903f1cd705b12983",
+      "cohort": "GRC",
+      "full_original_geometry_sha256": "2e672a9d59aab4ad98b3b9098d69edc245e5b26c4d22e932aeea64e75761d18a",
+      "literal_full_geometry_matches": true,
+      "source_feature_covers_entire_component": true,
+      "target_id": "gb:GRC:ADM3:53547021B25533689161556",
+      "native_cells": 2,
+      "native_disposition": "assigned",
+      "conditional_whole_gap_credit": 1,
+      "retained_detector_area_m2": 43858.85243641483,
+      "incremental_continuous_area_m2": null
+    },
+    {
+      "component_id": "physical-component:342f765f469621d4aa95daa0e7db7e51afe5d86eee2c435fa110ddc7ee39a181",
+      "original_batch_id": "gap-operational-batch:8eb6e7b9edc11bee59fdad66",
+      "original_family_id": "gap-source-batch:62980cba059d601811928abd",
+      "cohort": "GRC",
+      "full_original_geometry_sha256": "605391103551abcc55aa75f53f7b6ed2d2ee6f76e1633a872d73ee1ea3706bca",
+      "literal_full_geometry_matches": true,
+      "source_feature_covers_entire_component": true,
+      "target_id": "gb:GRC:ADM3:53547021B25533689161556",
+      "native_cells": 3,
+      "native_disposition": "assigned",
+      "conditional_whole_gap_credit": 1,
+      "retained_detector_area_m2": 34990.10869372213,
+      "incremental_continuous_area_m2": null
+    },
+    {
+      "component_id": "physical-component:7db8df2e41af60ef6f5f5de963e97070cfea2d500225b061ca191e85cc08d882",
+      "original_batch_id": "gap-operational-batch:8eb6e7b9edc11bee59fdad66",
+      "original_family_id": "gap-source-batch:8728ba9fca37fe963ffea5fc",
+      "cohort": "GRC",
+      "full_original_geometry_sha256": "24cdd911c0be7735e6a399d2280644a91f86ec61630c444ddd0d13207e486103",
+      "literal_full_geometry_matches": true,
+      "source_feature_covers_entire_component": true,
+      "target_id": "gb:GRC:ADM3:53547021B4893314686518",
+      "native_cells": 2,
+      "native_disposition": "assigned",
+      "conditional_whole_gap_credit": 1,
+      "retained_detector_area_m2": 14808.358014322326,
+      "incremental_continuous_area_m2": null
+    },
+    {
+      "component_id": "physical-component:a98bad0e3cc4c2b5d61836e64aa6277a14762e4c7dfba2814c7f28c89cb2eee0",
+      "original_batch_id": "gap-operational-batch:8eb6e7b9edc11bee59fdad66",
+      "original_family_id": "gap-source-batch:99fc763b484b1239894b7b60",
+      "cohort": "GRC",
+      "full_original_geometry_sha256": "75d8e6ad2e4fe3b85bc6753d7b39b636c94ed81b094422b84f022c1dfa07e8a0",
+      "literal_full_geometry_matches": true,
+      "source_feature_covers_entire_component": true,
+      "target_id": "gb:GRC:ADM3:53547021B16404317109439",
+      "native_cells": 1,
+      "native_disposition": "assigned",
+      "conditional_whole_gap_credit": 1,
+      "retained_detector_area_m2": 8341.518524948775,
+      "incremental_continuous_area_m2": null
+    },
+    {
+      "component_id": "physical-component:da5add0c0b7b1622d62c5c2b0eb6cb1057a960ed99a5fc24ec44a73f79e7a8d7",
+      "original_batch_id": "gap-operational-batch:8eb6e7b9edc11bee59fdad66",
+      "original_family_id": "gap-source-batch:8728ba9fca37fe963ffea5fc",
+      "cohort": "GRC",
+      "full_original_geometry_sha256": "8dfcd4f6faf80c75a5a5ecebc1fe70a98e7b8dd543b05431efe57eb2af1a8d7c",
+      "literal_full_geometry_matches": true,
+      "source_feature_covers_entire_component": true,
+      "target_id": "gb:GRC:ADM3:53547021B16096881973590",
+      "native_cells": 1,
+      "native_disposition": "assigned",
+      "conditional_whole_gap_credit": 1,
+      "retained_detector_area_m2": 1624.3454177967042,
+      "incremental_continuous_area_m2": null
+    },
+    {
+      "component_id": "physical-component:97da0452499d074bc2acfcd26d2b16dcc409d13dcd3487c88818e683366de807",
+      "original_batch_id": "gap-operational-batch:86a51f8d52e0c1a1f077e96f",
+      "original_family_id": "gap-source-batch:59314f7347bec73bf7ac687b",
+      "cohort": "GRC",
+      "full_original_geometry_sha256": "e8d7a2d17b1013d44fb37f175ccd877f76d2c7ae68afeed7d16a9e630e9e9c49",
+      "literal_full_geometry_matches": true,
+      "source_feature_covers_entire_component": true,
+      "target_id": "gb:GRC:ADM3:53547021B22263739106563",
+      "native_cells": 0,
+      "native_disposition": "zero-cell",
+      "conditional_whole_gap_credit": 1,
+      "retained_detector_area_m2": 139.18629717725568,
+      "incremental_continuous_area_m2": null
+    },
+    {
+      "component_id": "physical-component:8441fde5898d6f7db14840ed710f12785697897e45a863a5edd692e935866fc2",
+      "original_batch_id": "gap-operational-batch:57d24f25acd1e6c525c9705c",
+      "original_family_id": "gap-source-batch:57a28deeb9be5f4614317592",
+      "cohort": "COD",
+      "full_original_geometry_sha256": "c8de497eaec497dfe8c9fc38678a156b2756dc1106f1d50975c4ffddc5e38fdf",
+      "literal_full_geometry_matches": true,
+      "source_feature_covers_entire_component": true,
+      "target_id": "gb:COD:ADM2:63176286B47015384768636",
+      "native_cells": 0,
+      "native_disposition": "zero-cell",
+      "conditional_whole_gap_credit": 1,
+      "retained_detector_area_m2": 3.598160935869288e-09,
+      "incremental_continuous_area_m2": null
+    },
+    {
+      "component_id": "physical-component:a207016c2c38eebb7539f7f778ab83588c0fed4cd909656ec88ea9905e1205da",
+      "original_batch_id": "gap-operational-batch:fd46e2f61cf28daed6ad024b",
+      "original_family_id": "gap-source-batch:920dbebbc1c5c93ba4ace6b9",
+      "cohort": "COD",
+      "full_original_geometry_sha256": "b2cc1405972f982c29f65de834d22438312e929c7b8b30f87e415623aa860f8d",
+      "literal_full_geometry_matches": true,
+      "source_feature_covers_entire_component": true,
+      "target_id": "gb:AGO:ADM2:16411231B92925110223694",
+      "native_cells": 41,
+      "native_disposition": "assigned",
+      "conditional_whole_gap_credit": 1,
+      "retained_detector_area_m2": 929499.7694106206,
+      "incremental_continuous_area_m2": null
+    },
+    {
+      "component_id": "physical-component:fb03e785463b4a99a605ca297b6dd2a2bb27f3352e108844ad5ca147d9fc622c",
+      "original_batch_id": "gap-operational-batch:a465122eb02ad7bb16bfa4cd",
+      "original_family_id": "gap-source-batch:d9e19d2031c04501158d5720",
+      "cohort": "COD",
+      "full_original_geometry_sha256": "f9d6326adc8ebdb6497c87f96e1b1f5dcfc4d322e02b02485352af469ee0b2a7",
+      "literal_full_geometry_matches": true,
+      "source_feature_covers_entire_component": true,
+      "target_id": "gb:COD:ADM2:63176286B33518015273847",
+      "native_cells": 0,
+      "native_disposition": "zero-cell",
+      "conditional_whole_gap_credit": 1,
+      "retained_detector_area_m2": 5.077262688057971e-08,
+      "incremental_continuous_area_m2": null
+    }
+  ],
+  "affected_original_batches": [
+    {
+      "original_batch_id": "gap-operational-batch:0d462b6ad8e2f7f9b8f38bad",
+      "original_component_count": 1394,
+      "baseline_selected_ids": [],
+      "baseline_whole_closures": 0,
+      "new_whole_closures_conditional": 1,
+      "postmerge_whole_closures_conditional": 1,
+      "remaining_original_ids_conditional": 1393,
+      "completes_original_batch": false
+    },
+    {
+      "original_batch_id": "gap-operational-batch:57d24f25acd1e6c525c9705c",
+      "original_component_count": 31,
+      "baseline_selected_ids": [],
+      "baseline_whole_closures": 0,
+      "new_whole_closures_conditional": 1,
+      "postmerge_whole_closures_conditional": 1,
+      "remaining_original_ids_conditional": 30,
+      "completes_original_batch": false
+    },
+    {
+      "original_batch_id": "gap-operational-batch:86a51f8d52e0c1a1f077e96f",
+      "original_component_count": 102,
+      "baseline_selected_ids": [],
+      "baseline_whole_closures": 0,
+      "new_whole_closures_conditional": 2,
+      "postmerge_whole_closures_conditional": 2,
+      "remaining_original_ids_conditional": 100,
+      "completes_original_batch": false
+    },
+    {
+      "original_batch_id": "gap-operational-batch:8eb6e7b9edc11bee59fdad66",
+      "original_component_count": 1700,
+      "baseline_selected_ids": [],
+      "baseline_whole_closures": 0,
+      "new_whole_closures_conditional": 7,
+      "postmerge_whole_closures_conditional": 7,
+      "remaining_original_ids_conditional": 1693,
+      "completes_original_batch": false
+    },
+    {
+      "original_batch_id": "gap-operational-batch:a465122eb02ad7bb16bfa4cd",
+      "original_component_count": 5,
+      "baseline_selected_ids": [],
+      "baseline_whole_closures": 0,
+      "new_whole_closures_conditional": 1,
+      "postmerge_whole_closures_conditional": 1,
+      "remaining_original_ids_conditional": 4,
+      "completes_original_batch": false
+    },
+    {
+      "original_batch_id": "gap-operational-batch:fd46e2f61cf28daed6ad024b",
+      "original_component_count": 130,
+      "baseline_selected_ids": [
+        "physical-component:4ceb0de66be41e24e9e2f640442ec3ae3690a7d134d73cfbe2a6ac01edf098d4",
+        "physical-component:d70ba927292a3f812f481885193f21b099328f0697ff13fea7585dac7a8118c2"
+      ],
+      "baseline_whole_closures": 2,
+      "new_whole_closures_conditional": 1,
+      "postmerge_whole_closures_conditional": 3,
+      "remaining_original_ids_conditional": 127,
+      "completes_original_batch": false
+    }
+  ],
+  "limits": [
+    "Whole-gap credit is accepted retained-source-relative full original component coverage, not current physical/legal truth.",
+    "Literal additive operation preserves unchanged base OR whole original candidate. Same intended-owner overlap is permitted; no foreign-owner overlap, loss or reassignment.",
+    "Zero new native cells does not mean no continuous primitive or no whole-component credit; all three zero-cell cases retain complete original geometry.",
+    "Retained detector areas are not incremental map area. Incremental continuous area is unknown, especially same-owner-overlapping a207.",
+    "No duplicate, partial-fragment, or no-edit ID is counted among new13. Historical source-time whole_gap_completion=false flags remain unchanged.",
+    "No source/operator/test reruns, tracker edits, issue closure, deployment, or publication performed."
+  ],
+  "source_pins": [
+    {
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/composed-original-ledger.json",
+      "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "bytes": 356119,
+      "sha256": "31def3a1b57dd13b615d68f3f188bcfa9b370f4117a4e4649732de2b15911a0d",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/6a99a7606b9c2d11ac8cd093610653d4cd5d1382/coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/composed-original-ledger.json"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/composed-original-ledger.json",
+      "commit": "dbda60ac426e30e430f8157794e5e7161f01a453",
+      "bytes": 394027,
+      "sha256": "4385f08684810bb2eec132ac4c632cb5ae6c6b344f04453ee947adf94a8d3a6e",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/dbda60ac426e30e430f8157794e5e7161f01a453/coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/composed-original-ledger.json"
+    },
+    {
+      "path": "research/geography/grc12-original-source-20261011/vintages/source-handoff-002/source-handoff.json",
+      "commit": "49a8405d5329d1db6cb9c1c2241572750d936169",
+      "bytes": 729755,
+      "sha256": "d28022788eb4112f2d16f54db5ada4af00db718c3e48c8494800c8e4ce27e372",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/49a8405d5329d1db6cb9c1c2241572750d936169/research/geography/grc12-original-source-20261011/vintages/source-handoff-002/source-handoff.json"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-source-native-results-001.json",
+      "commit": "dbda60ac426e30e430f8157794e5e7161f01a453",
+      "bytes": 11071,
+      "sha256": "b69a92f7f2a317aa6400275a404cc288c62b1190d24d036511229ae5f0806d66",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/dbda60ac426e30e430f8157794e5e7161f01a453/coordination/engineering/nor-grc-congo-delivery-20261011/grc-source-native-results-001.json"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/cohort100-source-handoff-003/source-handoff.json",
+      "commit": "4d959ce9c97c01feb15fe9e1a7241f402c792da9",
+      "bytes": 526374,
+      "sha256": "e9c8f541cc64b3a36d6526c14b93a044faf63b52166f4edce041d40da44eeb8d",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/4d959ce9c97c01feb15fe9e1a7241f402c792da9/research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/cohort100-source-handoff-003/source-handoff.json"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/cod-source-native-results-001.json",
+      "commit": "dbda60ac426e30e430f8157794e5e7161f01a453",
+      "bytes": 4979,
+      "sha256": "edd6459d80395dd12eb6ae8018418fbb275d5a6f54c384700cc9fe2e6beac72d",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/dbda60ac426e30e430f8157794e5e7161f01a453/coordination/engineering/nor-grc-congo-delivery-20261011/cod-source-native-results-001.json"
+    },
+    {
+      "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-operational-batches-000.json.gz",
+      "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "bytes": 343242,
+      "sha256": "ebce7a1993e62afc589e6e89ec8b9a082551f57d69a3eaf9364ec9dabc9c2efc",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/6a99a7606b9c2d11ac8cd093610653d4cd5d1382/coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-operational-batches-000.json.gz"
+    },
+    {
+      "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-000.json.gz",
+      "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "bytes": 1660397,
+      "sha256": "26e8bef1c066f00ad84a03a73505dba1daaeb65315de9419a24aaf9a6d08f722",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/6a99a7606b9c2d11ac8cd093610653d4cd5d1382/coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-000.json.gz"
+    },
+    {
+      "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-001.json.gz",
+      "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "bytes": 1674139,
+      "sha256": "7548a2b3ab10339e64ec6432afedda84e21502eb392ee94ace5b0e2f2e6e2de8",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/6a99a7606b9c2d11ac8cd093610653d4cd5d1382/coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-001.json.gz"
+    },
+    {
+      "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-002.json.gz",
+      "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "bytes": 1783037,
+      "sha256": "c5eadb68c3c9c03abf5568e7455777b9bea9774e13b9767da476bb8247bbe765",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/6a99a7606b9c2d11ac8cd093610653d4cd5d1382/coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-002.json.gz"
+    },
+    {
+      "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-003.json.gz",
+      "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "bytes": 1598911,
+      "sha256": "71ca9168a7c26f6aeee948f18600bbe00c2eeb5515ec22e0d8e9143551b4f7f7",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/6a99a7606b9c2d11ac8cd093610653d4cd5d1382/coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-003.json.gz"
+    },
+    {
+      "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-004.json.gz",
+      "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "bytes": 1694391,
+      "sha256": "1fd21e659e1bf23deab5f8970e0a1124ac3f3cf654e758f4a85eb27fba49fff6",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/6a99a7606b9c2d11ac8cd093610653d4cd5d1382/coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-004.json.gz"
+    },
+    {
+      "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-005.json.gz",
+      "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "bytes": 1029511,
+      "sha256": "4802ca960cf92d1546ae4348abe86e4b5588056c8f1581d11afcea68cb35b4e8",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/6a99a7606b9c2d11ac8cd093610653d4cd5d1382/coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-005.json.gz"
+    }
+  ]
+}

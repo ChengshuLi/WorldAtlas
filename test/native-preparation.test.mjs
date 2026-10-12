@@ -10,7 +10,7 @@ import {loadOwnershipAssets} from '../src/ownership-assets.js';
 import {ownershipRun,pickOwnership} from '../src/pixel-ownership.js';
 import {bindNativeTopology,TOPOLOGY_ROOT} from '../scripts/native-ownership/native-topology-binding.mjs';
 import {loadNativeSourceInputs} from '../scripts/native-ownership/native-only-inputs.mjs';
-import {candidateBudget,originalCandidateAssets,committedPreparationFiles} from '../scripts/native-ownership/native-preparation-guards.mjs';
+import {candidateBudget,preparationAllowance,originalCandidateAssets,committedPreparationFiles} from '../scripts/native-ownership/native-preparation-guards.mjs';
 import {compileNativeOwnership} from '../scripts/native-ownership/compile-native-ownership.mjs';
 import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
 
@@ -74,7 +74,8 @@ test('actual committed CLI fixture produces two identical complete offline candi
   const cli = path.join(repo, 'scripts/native-ownership/prepare-native-candidate.mjs');
   for (const vintage of ['one', 'two']) {
     const result = JSON.parse(execFileSync(process.execPath, [cli, '--repo', repo, '--baseline', baseline,
-      '--vintage', vintage], {encoding: 'utf8'}));
+      '--vintage', vintage, '--phase-bytes', String(256*1024**2),
+      '--rss-bytes', String(512*1024**2)], {encoding: 'utf8'}));
     assert.equal(result.checked_cells, 68731011556); assert.equal(result.owners, 1);
     assert.equal(result.installation_ready, false);
   }
@@ -125,6 +126,27 @@ test('actual committed CLI fixture produces two identical complete offline candi
   } finally {fs.unlinkSync(extra);}
   assert.equal(git(['status', '--short', '--untracked-files=no']), '', 'original tracked sources untouched');
 });
+test('actual CLI preserves scientific products under two explicit finite preparation allowances', () => {
+  const cli = path.join(repo, 'scripts/native-ownership/prepare-native-candidate.mjs');
+  const result = JSON.parse(execFileSync(process.execPath, [cli, '--repo', repo, '--baseline', baseline,
+    '--vintage', 'larger-budget', '--phase-bytes', String(512*1024**2),
+    '--rss-bytes', String(768*1024**2)], {encoding: 'utf8'}));
+  assert.equal(result.checked_cells, 68731011556); assert.equal(result.owners, 1);
+  const one = path.join(repo, '.cache/native-grid-candidates/one');
+  const larger = path.join(repo, '.cache/native-grid-candidates/larger-budget');
+  const scientific = directory => inventory(directory).filter(row => row.path !== 'preparation-budget.json');
+  assert.deepEqual(scientific(one), scientific(larger));
+  const smallBudget = JSON.parse(fs.readFileSync(path.join(one, 'preparation-budget.json')));
+  const largeBudget = JSON.parse(fs.readFileSync(path.join(larger, 'preparation-budget.json')));
+  assert.equal(smallBudget.limit_bytes, 256*1024**2);
+  assert.equal(smallBudget.rss_limit_bytes, 512*1024**2);
+  assert.equal(largeBudget.limit_bytes, 512*1024**2);
+  assert.equal(largeBudget.rss_limit_bytes, 768*1024**2);
+  assert.notDeepEqual(smallBudget, largeBudget);
+  const {limit_bytes: smallPhase, rss_limit_bytes: smallRss, ...smallAccounting} = smallBudget;
+  const {limit_bytes: largePhase, rss_limit_bytes: largeRss, ...largeAccounting} = largeBudget;
+  assert.deepEqual(smallAccounting, largeAccounting);
+});
 test('actual CLI refuses reused outputs and changed executed code before emitting a candidate', () => {
   const cli = path.join(repo, 'scripts/native-ownership/prepare-native-candidate.mjs');
   const args = vintage => [cli, '--repo', repo, '--baseline', baseline, '--vintage', vintage];
@@ -136,7 +158,7 @@ test('actual CLI refuses reused outputs and changed executed code before emittin
   assert.equal(fs.existsSync(path.join(repo, '.cache/native-grid-candidates/changed-code')), false);
 });
 test('aggregate byte/descriptor admission and explicit original identity references reject invalid contracts', () => {
-  assert.throws(() => candidateBudget(Array.from({length: 9}, () => ({bytes: 32 * 1024 * 1024}))), /Aggregate/);
+  assert.throws(() => candidateBudget(Array.from({length: 9}, () => ({bytes: 32 * 1024 * 1024})),{allowance:preparationAllowance({phaseBytes:256*1024**2,rssBytes:512*1024**2})}), /Aggregate/);
   assert.throws(() => candidateBudget(Array.from({length: 497}, () => ({bytes: 1}))), /Aggregate/);
   const budget = candidateBudget([{bytes: 1}], {reserveBytes: 0, reserveDescriptors: 0});
   assert.throws(() => budget.add({bytes: 33 * 1024 * 1024}), /whole-file/);

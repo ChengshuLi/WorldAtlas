@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "kind": "unmerged-reviewed-support-maintenance-diagnostic",
+  "native": {
+    "passed": true,
+    "baseline_commit": "6e5e7ec3c1f886232eaef782431a6d3afe608d6c",
+    "candidate_commit": "791576647adc41241ce9b438f1bb0034088eed4e",
+    "status": "no-new-native-loss",
+    "lost_or_reassigned_cells": 0,
+    "affected_rows": 269,
+    "elapsed_seconds": 96.06,
+    "max_rss_bytes": 434515968,
+    "preserved_authorities": 30,
+    "appended_authorities": 5
+  },
+  "continuous": {
+    "status": "pre-operand-launch-refusal",
+    "elapsed_seconds": 0.5,
+    "reason": "Actual checkout HEAD791 did not equal executing baseline6e5 required by strict cold entry. No continuous operands produced.",
+    "corrected_checkout_launch": "Running separately from actual frozen9473 support checkout; not claimed successful here."
+  },
+  "limitation": "Original trusted1098 gate failure remains preserved. This is reviewed unmerged support, not accepted main qualification."
+}
