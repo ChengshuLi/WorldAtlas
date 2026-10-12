@@ -94,18 +94,29 @@ function coldReader(native,context,selected,carriedBytes) {
  demand(Number.isSafeInteger(carriedBytes)&&carriedBytes>=0&&context&&Number.isSafeInteger(context.runtimeBytes)&&Number.isSafeInteger(context.executionBytes),'Incomplete installed-code/runtime/carry context');
  return new native.ImmutableReader(context.repo,selected,{runtimeBytes:context.runtimeBytes,executionBytes:context.executionBytes,gitExecutable:context.gitExecutable,metadataBytes:8388608+carriedBytes,outputBytes:FILE});
 }
-// A completed helper frame returns custody, never a selected snapshot/image.
-export function validatePersistedColdSide(native,helper,{repo,selected,parentRuntimePath,directory,ack,context,carriedState}) {
+function continuousSnapshotBytes(helper,snapshot,resolver) {
+ // Also cover the legacy resolver's own image, which may not be snapshot.image.
+ return 2*snapshot.metadataBytes+2*helper.valueBytes({bank:resolver.bank??null,paths:resolver.paths,sources:resolver.sources,release:resolver.release,
+  image:resolver.image?{index:resolver.image.index,map:resolver.image.map}:null}).length;
+}
+// Private acquisition may live only inside a validating/projecting helper frame.
+// Public completed helpers return custody and bounded projections, never readers.
+function validatedColdSnapshot(native,helper,{repo,selected,parentRuntimePath,directory,ack,context,carriedState}) {
  demand(carriedState&&Object.keys(carriedState).sort().join(',')==='ack,code,context,lifecycle,receipts'&&carriedState.context===context&&Array.isArray(carriedState.code)&&Array.isArray(carriedState.lifecycle)&&Array.isArray(carriedState.ack)&&carriedState.ack.includes(ack)&&Array.isArray(carriedState.receipts),'Incomplete cold carried metadata');
  const carriedBytes=2*helper.valueBytes(carriedState).length;
  const reader=coldReader(native,context,selected,carriedBytes);
  reader.metadataBytes=8388608+carriedBytes;reader.outputBytes=FILE;reader.phase();
- const snapshot=timedStage('persisted-selection',{selected},()=>native.loadSelection(reader));demand(snapshot,'Selected cold side removed or unsupported');
+ const snapshot=timedStage('persisted-selection',{selected},()=>native.loadSelection(reader));
+ demand(snapshot&&snapshot.reader===reader&&reader.version===selected,'Selected cold side removed or rebound');
  const resolver=snapshot.geometrySources??new native.SelectedGeometrySources(snapshot);
- reader.metadataBytes=8388608+carriedBytes+2*snapshot.metadataBytes;reader.phase();
+ reader.metadataBytes=8388608+carriedBytes+continuousSnapshotBytes(helper,snapshot,resolver);reader.phase();
  const product=readColdProduct(directory,ack,reader,helper);
  const certificate=helper.acceptColdCoordinateCertificate(resolver,product.certificate,{...product,expectedPublication:ack.publication});
- return helper.sealColdCoordinateCertificate(certificate,product);
+ const receipt=helper.sealColdCoordinateCertificate(certificate,product);
+ return {reader,snapshot,resolver,receipt};
+}
+export function validatePersistedColdSide(native,helper,options) {
+ return validatedColdSnapshot(native,helper,options).receipt;
 }
 export function reopenCompleteColdPlan(native,helper,{repo,baseline,candidate,parentRuntimePath,stagePaths,ack,receipts,context,carriedBytes}) {
  demand(Number.isSafeInteger(carriedBytes)&&carriedBytes>=2*helper.valueBytes({context,ack,receipts}).length,'Incomplete reopened carry');
@@ -149,14 +160,20 @@ export function acquireContinuousSources(native,helper,{repo,selected,parentRunt
  reader.metadataBytes=8388608+carriedBytes;reader.outputBytes=FILE;reader.phase();
  const snapshot=timedStage('required-side-selection',{selected,sources:names.length},()=>native.loadSelection(reader));
  demand(snapshot&&snapshot.reader===reader&&reader.version===selected,'Required selected side removed or rebound');
- const resolver=snapshot.geometrySources??new native.SelectedGeometrySources(snapshot),results=[];
+ const resolver=snapshot.geometrySources??new native.SelectedGeometrySources(snapshot);
+ return projectContinuousSources(helper,{reader,snapshot,resolver,selected,names,receipt,rows,inputs,carriedBytes});
+}
+// Both callers obtain this snapshot themselves through loadSelection. No public
+// supplied-snapshot fast path or persistent cache can skip that authentication.
+function projectContinuousSources(helper,{reader,snapshot,resolver,selected,names,receipt,rows,inputs,carriedBytes}) {
+ const results=[];
  for(const name of names){
   demand(snapshot.reader===reader&&resolver.reader===reader&&reader.version===selected,'Required selected side removed or rebound');
   demand(resolver.paths.includes(name),'Foreign required containing source');
   // Count the complete retained snapshot plus every prior projection/receipt and
   // the growing reader inventory before admitting another actual whole source.
   const retainedBytes=2*helper.valueBytes({results,inventory:[...reader.inventory.values()]}).length;
-  reader.metadataBytes=8388608+carriedBytes+2*snapshot.metadataBytes+retainedBytes;reader.phase();
+  reader.metadataBytes=8388608+carriedBytes+continuousSnapshotBytes(helper,snapshot,resolver)+retainedBytes;reader.phase();
   const result=timedStage('required-source',{selected,source:name},()=>projectContinuousSource(helper,{reader,snapshot,resolver,name,receipt,rows,inputs}));
   results.push({source:name,...result});
  }
@@ -166,6 +183,25 @@ export function acquireContinuousSources(native,helper,{repo,selected,parentRunt
 export function acquireContinuousSource(native,helper,options) {
  const [result]=acquireContinuousSources(native,helper,{...options,names:[options.name]});
  const {source,...projection}=result;return projection;
+}
+// The one candidate snapshot survives validation, complete plan construction,
+// and candidate projection in this explicit frame only. Every nested reader is
+// charged for it and its complete inventory. Baseline acquisition starts only
+// after this frame returns custody/required rows/projections, never a snapshot.
+export function acquireCandidateContinuousSources(native,helper,{repo,baseline,candidate,parentRuntimePath,stagePaths,ack,context,code,baselineReceipt,lifecycle}) {
+ demand(baselineReceipt?.facts?.selected_commit===baseline&&ack.length===2&&stagePaths.length===2,'Incomplete candidate-frame baseline custody');
+ const receipts=[baselineReceipt],carriedState={context,code,ack,receipts,lifecycle};
+ const {reader,snapshot,resolver,receipt}=validatedColdSnapshot(native,helper,{repo,selected:candidate,parentRuntimePath,directory:stagePaths[1],ack:ack[1],context,carriedState});
+ receipts.push(receipt);
+ const stages=[...lifecycle,{kind:'complete-snapshot-bound-cold-validation',vintage:'candidate',complete_phase_bytes:receipt.complete_phase_bytes}];
+ const custodyBytes=value=>2*helper.valueBytes(value).length;
+ const snapshotCarry=continuousSnapshotBytes(helper,snapshot,resolver)+custodyBytes([...reader.inventory.values()]);
+ const closure=timedStage('affected-plan',{},()=>reopenCompleteColdPlan(native,helper,{repo,baseline,candidate,parentRuntimePath,stagePaths,ack,receipts,context,
+  carriedBytes:custodyBytes({context,code,ack,receipts,lifecycle:stages})+snapshotCarry}));
+ stages.push({kind:'complete-both-vintage-neighbor-plan',complete_phase_bytes:closure.complete_phase_bytes});
+ const results=projectContinuousSources(helper,{reader,snapshot,resolver,selected:candidate,names:closure.plan.source_paths.candidate,receipt,rows:closure.rows.candidate,inputs:closure.inputs.candidate,
+  carriedBytes:custodyBytes({context,code,ack,receipts,closure,lifecycle:stages})});
+ return {receipts,lifecycle:stages,closure,results};
 }
 export async function continuousOperandsStage(repo,trusted,baseline,candidate,destination,parentRuntimePath){
  demand(commit(baseline)&&commit(candidate),'Missing immutable selected comparison commits');destination=path.resolve(destination);fresh(destination);const code=guard(repo,trusted);
@@ -189,25 +225,25 @@ export async function continuousOperandsStage(repo,trusted,baseline,candidate,de
   const raw=timedStage('coordinate-child',{selected},()=>execFileSync(process.execPath,['--expose-gc',fileURLToPath(import.meta.url),'coordinate',repo,trusted,selected,stagePaths[i],...(parentRuntimePath?[parentRuntimePath]:[])],{env,maxBuffer:1048576,stdio:['ignore','pipe','inherit']}));const value=JSON.parse(raw);demand(value.publication?.complete===true,'Cold coordinate child lacks complete acknowledgement');ack.push(value);
  }
  const custodyBytes=value=>2*helper.valueBytes(value).length;
- const receipts=[],lifecycle=[];
- for(const [i,selected]of [baseline,candidate].entries()){
-  const receipt=validatePersistedColdSide(native,helper,{repo,selected,parentRuntimePath,directory:stagePaths[i],ack:ack[i],context,carriedState:{context,code,ack,receipts,lifecycle}});
-  receipts.push(receipt);lifecycle.push({kind:'complete-snapshot-bound-cold-validation',vintage:i?'candidate':'baseline',complete_phase_bytes:receipt.complete_phase_bytes});
- }
- const closure=timedStage('affected-plan',{},()=>reopenCompleteColdPlan(native,helper,{repo,baseline,candidate,parentRuntimePath,stagePaths,ack,receipts,context,carriedBytes:custodyBytes({code,ack,receipts,lifecycle})}));
- lifecycle.push({kind:'complete-both-vintage-neighbor-plan',complete_phase_bytes:closure.complete_phase_bytes});
+ const baselineReceipt=validatePersistedColdSide(native,helper,{repo,selected:baseline,parentRuntimePath,directory:stagePaths[0],ack:ack[0],context,carriedState:{context,code,ack,receipts:[],lifecycle:[]}});
+ let completed=acquireCandidateContinuousSources(native,helper,{repo,baseline,candidate,parentRuntimePath,stagePaths,ack,context,code,baselineReceipt,
+  lifecycle:[{kind:'complete-snapshot-bound-cold-validation',vintage:'baseline',complete_phase_bytes:baselineReceipt.complete_phase_bytes}]});
+ const {receipts,lifecycle,closure}=completed;
+ let candidateResults=completed.results;completed=null;
  // Both whole certificates remain authenticated persisted outputs. Their full
 // scan has finished; retain every required row, release only unused live rows.
  const {plan,rows,inputs}=closure,outputs={baseline:{},candidate:{}},inverse=[];
  process.stderr.write(JSON.stringify({selected_continuous_stage:'required-source-count',baseline:plan.source_paths.baseline.length,candidate:plan.source_paths.candidate.length,changed_owners:plan.changed_ids.length,required_owners:plan.required_ids.length})+'\n');
  for(const [vintage,selected,i]of [['baseline',baseline,0],['candidate',candidate,1]]){
-  const results=acquireContinuousSources(native,helper,{repo,selected,parentRuntimePath,names:plan.source_paths[vintage],receipt:receipts[i],rows:rows[vintage],inputs:inputs[vintage],context,carriedBytes:custodyBytes({context,code,ack,receipts,plan,rows,inputs,outputs,inverse,lifecycle})});
+  const results=vintage==='candidate'?candidateResults:acquireContinuousSources(native,helper,{repo,selected,parentRuntimePath,names:plan.source_paths[vintage],receipt:receipts[i],rows:rows[vintage],inputs:inputs[vintage],context,
+   carriedBytes:custodyBytes({context,code,ack,receipts,plan,rows,inputs,outputs,inverse,lifecycle,candidateResults})});
   for(const result of results){
    Object.assign(outputs[vintage],result.features);inverse.push(...result.inverse.map(r=>({vintage,...r})));
    lifecycle.push({kind:'complete-required-containing-source',vintage,source:result.source,complete_phase_bytes:result.complete_phase_bytes,inputs:result.inputs});
   }
   demand(Object.keys(outputs[vintage]).sort().join('\0')===plan.required_ids.join('\0'),'Affected operand closure omitted owner');
  }
+ candidateResults=null;
  const effective_additions={baseline:receipts[0].effective_additions,candidate:receipts[1].effective_additions};
  const operands=helper.valueBytes({version:1,kind:'complete-selected-continuous-operands-v1',plan,effective_additions,...outputs}),encoded=gzipSync(operands,{level:9,mtime:0});
  const facts=helper.valueBytes({version:1,kind:'trusted-selected-continuous-comparison-v1',executing_commit:trusted,baseline_commit:baseline,candidate_commit:candidate,execution_code:code,runtime:context.identities,source_stages:ack.map(a=>a.publication),complete_cold_custody:receipts,lifecycle,plan,inverse,candidate_code_executed:false});
