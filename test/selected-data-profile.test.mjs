@@ -1021,10 +1021,10 @@ function real1770() {
     if(row.before)baseline.entries.set(row.filename,{...row.before});else baseline.entries.delete(row.filename);
     authored.entries.set(row.filename,{...row.after});
   }
-  const blobs=new Map(), reads=[],files=structuredClone(fixed.files);
+  const blobs=new Map(), reads=[], gitReads=[], files=structuredClone(fixed.files);
   const bytes=sha=>{
-    if(!blobs.has(sha))blobs.set(sha,execFileSync('git',['cat-file','blob',sha],{maxBuffer:32*1024*1024,
-      env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_TERMINAL_PROMPT:'0'}}));
+    if(!blobs.has(sha)) {gitReads.push(sha);blobs.set(sha,execFileSync('git',['cat-file','blob',sha],{maxBuffer:32*1024*1024,
+      env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_TERMINAL_PROMPT:'0'}}));}
     return blobs.get(sha);
   };
   for(const row of fixed.snapshots) {
@@ -1043,7 +1043,7 @@ function real1770() {
     blobs.set(sha,raw);const row={path:name,mode:'100644',type:'blob',sha,size:raw.length};authored.entries.set(name,row);if(old)baseline.entries.set(name,row);
     return {path:name,bytes:raw.length,sha256:digest(raw),mode:'100644',git_blob_oid:sha,commit:'a'.repeat(40)};};
   const f={fixed,files,branch:fixed.branch,ownedPaths:fixed.owned_paths,reservation:{mode:'engineering',owned_paths:fixed.owned_paths},
-    sourceState:{},baseline,authored,blobs,reads,api,put,document:name=>JSON.parse(bytes(authored.entries.get(name).sha))};
+    sourceState:{},baseline,authored,blobs,reads,gitReads,api,put,document:name=>JSON.parse(bytes(authored.entries.get(name).sha))};
   f.run=(options={})=>selectedDataSelection({api:f.api,repo:'owner/repo',branch:f.branch,files:f.files,baseline,authored,reservation:f.reservation,...options});
   return f;
 }
@@ -1056,6 +1056,10 @@ test('complete original PR1770 192-path diff selects the uniquely bound finalize
   assert.equal(result.expectations_path,'coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/advance-002/finalize/selected-delivery-expectations.json');
   assert.equal(stats.read_count,164);assert.equal(stats.read_bytes,21503703);assert.equal(stats.peak_admitted_bytes,21050649);
   for(const row of f.fixed.changed_rows)assert.deepEqual(f.authored.entries.get(row.filename),row.after);
+  const historicalManifest=f.fixed.snapshots.find(row=>row.path.endsWith('/evidence-quality.json'));
+  assert(historicalManifest,'final c753 changed the original added metadata blob');
+  assert(f.reads.includes(historicalManifest.git_blob_oid),'original manifest is actually validated');
+  for(const row of f.fixed.snapshots)assert(!f.gitReads.includes(row.git_blob_oid),'historical mutable metadata must not require shallow Git history');
 });
 test('actual PR1770 reaches authenticated author and cold queue proof with complete metadata planning', async () => {
   assert.equal((await gateFixture(real1770()).select()).test_selection,'selected-data');

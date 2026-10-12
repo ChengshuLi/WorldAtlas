@@ -12,8 +12,10 @@ evidence. The separate PR #1769 state/transport repair remains independently own
 The actual original PR #1770 diff is frozen in `pr1770.json` at
 `367d68214f8c88532949bf9d21539766491991ad` against
 `ad300bd5ffa73c226e591f037980d67d40f6acf3`. It includes every changed path and ordinary
-Git row. Only the modified global selection, package declaration and administrative
-registry bodies are snapshotted. Original data, receipts and supporting evidence
+Git row. The modified global selection, package declaration and administrative
+registry bodies are snapshotted, along with the original small evidence manifest
+whose unit strings changed at final c753. The test proves those historical bodies
+are supplied by authenticated snapshots without requiring shallow Git history. Original data, receipts and supporting evidence
 are read by immutable Git blob identity; no scientific calculation or duplicate
 scientific dataset is introduced. Later data-head metric-unit corrections do not
 relabel this original fixed-input experiment.
