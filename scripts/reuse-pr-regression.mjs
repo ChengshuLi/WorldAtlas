@@ -79,10 +79,18 @@ export function createMetadataRegressionProofLoader({token, directory = process.
     const key = JSON.stringify([options.baseline, options.candidate, options.trusted, options.metadataPaths]);
     if (saved?.key === key) return structuredClone(saved.value);
     need(typeof authority.api === 'function', 'metadata-proof-api-unavailable');
+    let acquisitionError;
     const acquisition = acquire({repo: directory, baseline: options.baseline, token,
       ...(options.limits ? {limits: options.limits} : {}),
-      loadTree: (root, recursive = true) => authority.api(`/repos/${authority.repo}/git/trees/${root}${recursive ? '?recursive=1' : ''}`)});
+      loadTree: async (root, recursive = true) => {
+        try { return await authority.api(`/repos/${authority.repo}/git/trees/${root}${recursive ? '?recursive=1' : ''}`); }
+        catch (error) { acquisitionError ??= error; throw error; }
+      }});
     const value = await inspect({...options, acquisition});
+    // The scientific applicability collector deliberately converts failures to
+    // fallback reports. Preserve transport/admission exceptions for the queue's
+    // existing request-budget replanning rather than losing their retry flags.
+    if (acquisitionError) throw acquisitionError;
     if (value?.status === 'unchanged-selected-inputs' && value.baseline_commit === options.baseline &&
       value.candidate_commit === options.candidate && value.trusted_reader_policy_commit === options.trusted &&
       value.candidate_code_executed === false && value.science_reexecuted === false &&

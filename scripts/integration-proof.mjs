@@ -95,7 +95,7 @@ export async function integrationProof({api, repo, number, head, profile, testSe
       if (typeof metadataProofLoader !== 'function') continue;
       let admitted;
       try { admitted = await metadataProofLoader({api, repo, number, head, baseline: baseline.object.sha}); }
-      catch { continue; }
+      catch (error) { if (error?.requestBudget || error?.planningNeeded) throw error; continue; }
       if (admitted?.status !== 'reused-original' || admitted.reviewed_head !== head ||
         admitted.trusted_baseline !== baseline.object.sha || admitted.candidate_tree !== authored.object.tree.sha ||
         !admitted.original_computation || !admitted.program) continue;

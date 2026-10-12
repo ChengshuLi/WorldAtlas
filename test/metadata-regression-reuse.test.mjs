@@ -198,3 +198,20 @@ test('cold routing tree reads use the current queue admitted API and preserve re
   await assert.rejects(loader({repo:'owner/repo'}),/metadata-proof-api-unavailable/);
   await assert.rejects(loader({repo:'owner/repo',api:async()=>{throw Error('quota-admission-refused');}}),/quota-admission-refused/);
 });
+
+
+test('collector fallback cannot swallow the queue admission error or its replan flags',async()=>{
+  const denied=Object.assign(Error('quota-admission-refused'),{planningNeeded:true,requestBudget:{remaining:3}});
+  const loader=createMetadataRegressionProofLoader({directory:'/fixture',
+    acquire:options=>({read:options.loadTree}),
+    inspect:async options=>{try {await options.acquisition.read(P);} catch {return {status:'full-check-required',reason:'quota-admission-refused'};}},
+    load:options=>options.inspect({baseline:P,candidate:H,trusted:B,metadataPaths:[manifest]})});
+  await assert.rejects(loader({repo:'owner/repo',api:async()=>{throw denied;}}),error=>error===denied&&error.planningNeeded===true);
+});
+
+
+test('integration proof preserves queue budget replanning instead of treating it as unavailable proof',async()=>{
+  const f=currentProofFixture(),error=Object.assign(Error('budget exhausted'),{requestBudget:true,planningNeeded:117});
+  f.proofOptions.metadataProofLoader=async()=>{throw error;};
+  await assert.rejects(integrationProof(f.proofOptions),value=>value===error);
+});
