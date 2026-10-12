@@ -37,7 +37,7 @@ The full fixture exposed two representation seams beyond the original 16 MiB
 cutoff. Supporting `.json.gz` / `.jsonl.gz` paths were already admitted by the path
 prefilter but rejected by the later loop. They now undergo bounded complete gzip
 decoding and JSON/JSONL validation. Concatenated members share the decoded-file
-limit; every JSONL record, including the final record, is checked. Two retained
+limit; every JSONL record, including the final record, is checked. All structural and supporting JSON rejects malformed UTF-8 before parsing; valid Unicode is preserved and the existing JSON BOM rejection stays unchanged. Two retained
 resource logs exceed 128 KiB. Free-form text still keeps that limit; larger `.log`
 files must be JSONL with each record at most 128 KiB and whole file at most 32 MiB.
 Unknown opaque archives, new executable/configuration paths and unsupported roles
@@ -64,7 +64,7 @@ The corrected full replay completes at 349 reads / 38,981,635 encoded bytes, wit
 13,352,331 retained bytes and 27,109,018 peak admitted raw/decoded bytes. The unit
 fixture succeeds with a 28 MiB operator allowance despite total read volume above
 that allowance. A 20 MiB allowance refuses during decoded-member admission.
-Observed elapsed time and process peak RSS are in the replay report; process peak
+The initial corrected replay remains in `after-replay.json`; the exact reviewed UTF-8 correction is measured separately in `after-utf8-replay.json`. Observed elapsed time and process peak RSS are in these replay reports; process peak
 includes the adapter/tree inventory, and is not a selector-only allocation measure.
 No hosted end-to-end saving or new scientific execution is inferred from this replay.
 

@@ -57,6 +57,7 @@ import {createHash} from 'node:crypto';
 import {isDeepStrictEqual as same} from 'node:util';
 import {getHeapStatistics} from 'node:v8';
 import {gunzipSync} from 'node:zlib';
+import {isUtf8} from 'node:buffer';
 import {validatePackageInputs, loadPackageInputs, packagePathRequired, safePackagePath, PACKAGE_INPUT_FILE} from './package-inputs.mjs';
 const SELECTION = 'data/ownership-selection.json';
 const ADMINISTRATIVE_REGISTRY = 'coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json';
@@ -203,13 +204,20 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       return cache.get(row.sha);
     };
     const read = (name, tree = authored, retain = true) => readRow(tree.entries.get(name), retain);
-    const json = async (name, tree, retain = true) => JSON.parse(await read(name, tree, retain));
+    const parseJSON = bytes => {
+      // Buffer.toString()/JSON.parse(Buffer) silently replace malformed UTF-8.
+      // Reject it before parsing; valid UTF-8 BOMs still follow JSON.parse's
+      // existing rejection rather than a decoder silently stripping the BOM.
+      needSelected(isUtf8(bytes), 'invalid UTF-8 metadata');
+      return JSON.parse(bytes);
+    };
+    const json = async (name, tree, retain = true) => parseJSON(await read(name, tree, retain));
     const jsonLines = (bytes, maximumRecordBytes = 32 * 1024 * 1024) => {
       needSelected(bytes.length > 0, 'empty supporting JSONL');
       for (let start = 0; start < bytes.length;) {
         const newline = bytes.indexOf(10, start), end = newline < 0 ? bytes.length : newline;
         needSelected(end - start <= maximumRecordBytes, 'supporting JSONL record exceeds bound');
-        JSON.parse(bytes.subarray(start, end));
+        parseJSON(bytes.subarray(start, end));
         start = end + 1;
       }
     };
@@ -245,7 +253,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     const pinnedJSON = async value => {
       const name = pin(value), bytes = await read(name);
       needSelected(sha256(bytes) === value.sha256, 'role content hash differs');
-      return JSON.parse(bytes);
+      return parseJSON(bytes);
     };
     // Only the two declared exceptions need this SOURCE inventory. Ordinary
     // selected deliveries keep their existing small fixed-role walk.
@@ -327,7 +335,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       unchanged(transport.index);
       const indexBytes = await read(transport.index.path);
       needSelected(sha256(indexBytes) === transport.index.sha256, 'native transport index differs');
-      const index = JSON.parse(indexBytes), manifestRoot = spec.manifest_path.slice(0, spec.manifest_path.lastIndexOf('/') + 1),
+      const index = parseJSON(indexBytes), manifestRoot = spec.manifest_path.slice(0, spec.manifest_path.lastIndexOf('/') + 1),
         bankRoot = transport.index.path.slice(0, transport.index.path.lastIndexOf('/') + 1);
       needSelected(index.version === 1 && index.kind === transport.kind && Array.isArray(index.files) && Array.isArray(index.parts),
         'unsupported native transport index');
@@ -384,7 +392,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       const registryBytes = await readRow({path: registryPin.path, mode: registryPin.mode, type: 'blob',
         sha: oid(registryPin), size: registryPin.bytes});
       needSelected(sha256(registryBytes) === registryPin.sha256, 'original SOURCE registry bytes differ');
-      const originalRegistry = registryEntries(JSON.parse(registryBytes));
+      const originalRegistry = registryEntries(parseJSON(registryBytes));
       needSelected(originalRegistry.length > 0 && same(originalRegistry, administrative.slice(0, originalRegistry.length)),
         'original SOURCE registry history differs');
       const source = unique(rule.inputs, row => row.path === rule.cases_path, 'registered SOURCE input');
@@ -401,7 +409,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       }
       const original = acceptedTrees.get(source.commit).entries.get(source.path);
       needSelected(ordinary(original) && original.sha === oid(source) && original.size === source.bytes, 'accepted SOURCE commit pin differs');
-      const handoff = JSON.parse(await acceptedSource(source)), cases = handoff.candidate_source_native_bindings;
+      const handoff = parseJSON(await acceptedSource(source)), cases = handoff.candidate_source_native_bindings;
       needSelected(Array.isArray(cases) && same(cases.map(row => row.component_id), entry.cohort_ids) &&
         same(handoff.scopeIds, entry.cohort_ids) && Array.isArray(handoff.unknowns) &&
         same([...new Set(cases.map(row => row.retained_payload?.target_stable_location_id))].sort(), [...entry.target_ids].sort()),
@@ -422,7 +430,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       usedRegistrations.add(entry.id);
       needSelected(rule.source_catalogue_path === SOURCE_CORPUS + 'catalogue.json', 'unknown SOURCE catalogue');
       const cataloguePin = unique(rule.inputs, row => row.path === rule.source_catalogue_path, 'SOURCE catalogue');
-      const catalogue = JSON.parse(await acceptedSource(cataloguePin));
+      const catalogue = parseJSON(await acceptedSource(cataloguePin));
       needSelected(Array.isArray(catalogue.products) && Array.isArray(rule.administrative_products) &&
         rule.administrative_products.length > 0 && rule.administrative_products.length <= 1024, 'missing administrative products');
       const fields = ['bytes','sha256','uncompressed_bytes','uncompressed_sha256'];
@@ -436,7 +444,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
           'administrative product identities differ');
         await acceptedSource(input, true);
       }
-      const report = JSON.parse(await acceptedSource(issued.report));
+      const report = parseJSON(await acceptedSource(issued.report));
       // The report binds a role, but cannot itself become a newly declared input.
       sourceDeclarations.delete(issued.report.path);
       // Metadata-only handoff assembly may retain a previously authenticated
@@ -480,13 +488,13 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     needSelected(oldHook && safe(oldHook.path), 'missing preceding selected release');
     const oldSideBytes = await read(oldHook.path, baseline);
     needSelected(oldSideBytes.length === oldHook.bytes && sha256(oldSideBytes) === oldHook.sha256, 'preceding sidecar differs');
-    const oldSide = JSON.parse(oldSideBytes), oldRegistryPin = oldSide.authority_registry;
+    const oldSide = parseJSON(oldSideBytes), oldRegistryPin = oldSide.authority_registry;
     const oldLedgerPin = oldSide.logical_asset_map?.ledger, oldLedgerBytes = await read(oldLedgerPin?.path, baseline);
     needSelected(oldLedgerBytes.length === oldLedgerPin.bytes && sha256(oldLedgerBytes) === oldLedgerPin.sha256, 'preceding ledger differs');
-    validateSelectedExpectations(await json(expectedPaths[0]), ledger, sidecar.logical_asset_map.ledger.sha256, JSON.parse(oldLedgerBytes));
+    validateSelectedExpectations(await json(expectedPaths[0]), ledger, sidecar.logical_asset_map.ledger.sha256, parseJSON(oldLedgerBytes));
     const oldRegistryBytes = await read(oldRegistryPin.path, baseline);
     needSelected(oldRegistryBytes.length === oldRegistryPin.bytes && sha256(oldRegistryBytes) === oldRegistryPin.sha256, 'preceding registry differs');
-    const oldRegistry = JSON.parse(oldRegistryBytes);
+    const oldRegistry = parseJSON(oldRegistryBytes);
     needSelected(Array.isArray(oldRegistry.entries) && oldRegistry.entries.every(old =>
       registry.entries.filter(entry => same(entry, old)).length === 1), 'existing authority changed or disappeared');
     const operating = async (value, current = false) => {
@@ -571,7 +579,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         diagnostics.decoded_bytes += decoded.length;
         diagnostics.peak_admitted_bytes = Math.max(diagnostics.peak_admitted_bytes,
           diagnostics.retained_bytes + bytes.length + decoded.length);
-        if (name.endsWith('.json.gz')) JSON.parse(decoded);
+        if (name.endsWith('.json.gz')) parseJSON(decoded);
         else jsonLines(decoded);
       }
       else {

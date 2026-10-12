@@ -851,3 +851,33 @@ test('real PR1753 required selected roster cannot omit a member or change its id
     const expected=f.document(name);mutate(expected);f.put(name,expected);assert.equal(await f.run(),null);
   }
 });
+
+for(const [label,invalid] of Object.entries({
+  'invalid leading byte':Buffer.from([0xff]),
+  'stray continuation':Buffer.from([0x80]),
+  'truncated multibyte sequence':Buffer.from([0xe2,0x82]),
+  'overlong encoding':Buffer.from([0xc0,0xaf]),
+}))test('strict metadata JSON rejects '+label+' in plain and compressed supporting records',async()=>{
+  const raw=Buffer.concat([Buffer.from('{"value":"'),invalid,Buffer.from('"}\n')]);
+  for(const suffix of ['json','json.gz','jsonl.gz']){
+    const f=fixture({mutate:f=>f.put(prefix+'support.'+suffix,suffix.endsWith('.gz')?gzipSync(raw):raw)}),stats={};
+    assert.equal(await f.run({metadataDiagnostics:stats}),null,suffix);
+    assert.match(stats.failure,/invalid UTF-8 metadata/,suffix);
+  }
+});
+test('strict JSON keeps legitimate Unicode and existing BOM rejection in every supporting representation',async()=>{
+  const raw=Buffer.from(JSON.stringify({value:'Ελλάδα 日本 🌍 e\u0301'})+'\n');
+  for(const suffix of ['json','json.gz','jsonl.gz']){
+    const f=fixture({mutate:f=>f.put(prefix+'support.'+suffix,suffix.endsWith('.gz')?gzipSync(raw):raw)});
+    assert.equal((await f.run()).test_selection,'selected-data',suffix);
+    const bom=Buffer.concat([Buffer.from([0xef,0xbb,0xbf]),raw]);
+    f.put(prefix+'support.'+suffix,suffix.endsWith('.gz')?gzipSync(bom):bom);assert.equal(await f.run(),null,suffix);
+  }
+});
+test('required role JSON uses the same strict UTF-8 boundary before shape or identity validation',async()=>{
+  const f=fixture(),name=prefix+'selected-delivery-expectations.json';
+  const bytes=Buffer.from(JSON.stringify(f.expected)),marker=Buffer.from('target-old'),at=bytes.indexOf(marker);
+  assert(at>=0);const bad=Buffer.concat([bytes.subarray(0,at),Buffer.from([0xff]),bytes.subarray(at+marker.length)]);
+  f.put(name,bad);const stats={};assert.equal(await f.run({metadataDiagnostics:stats}),null);
+  assert.match(stats.failure,/invalid UTF-8 metadata/);
+});

@@ -42,13 +42,19 @@
       "bytes": 32398,
       "sha256": "f96b1ab4eedec594dced6fcf48367d4a902089a62cddc0e00a843797d4218a94",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-metadata-admission-20261012/after-utf8-replay.json",
+      "bytes": 32398,
+      "sha256": "ff1c7b02baf9343fa9d3fde78aeafaf34fd008df0ac80e05eaded9932fc72ec3",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
     {
       "id": "incremental-selected-metadata",
       "kind": "code",
-      "description": "Fixed-role structural metadata retention with machine-derived configurable admission and complete sequential inert evidence validation. The complete original PR1753 fixture retains all 426 changed paths and scientific bytes. Bound gzip JSON/JSONL and structured resource-log representations without package/reader authority. Exact current/historical joins, old full-package negatives and malformed/resource/security controls remain mandatory. This is test selection only; no scientific or hosted performance claim.",
+      "description": "Fixed-role structural metadata retention with machine-derived configurable admission and complete sequential inert evidence validation. The complete original PR1753 fixture retains all 426 changed paths and scientific bytes. Bound gzip JSON/JSONL and structured resource-log representations without package/reader authority. Exact current/historical joins, old full-package negatives and malformed/resource/security controls remain mandatory. This is test selection only; no scientific or hosted performance claim. Strict byte-level UTF-8 applies to every structural/supporting JSON parse; BOM rejection remains unchanged.",
       "software": "Node.js 24; Git",
       "units": "authenticated raw and decoded bytes, complete metadata records and actual consumer assertions"
     }
