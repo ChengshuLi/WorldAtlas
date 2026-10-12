@@ -237,3 +237,30 @@ policy custody after the later shared-contract update; adding the actual origina
 copy and pin corrected the fixture, not the assertions. An inherited Node
 injection flag correctly caused a package preflight refusal; the clean plain-Node
 rerun passes. Both initial logs are preserved separately from the final results.
+
+## Final extracted-routing AUS proof 004
+
+The actual delivered routing was executed at
+`226336bd1b0f3cd10b8894bf0ce90c022f64b4a2` on 2026-10-12 10:16:17 UTC,
+after narrow independent moved-body/package review and fresh admission. It passed
+in **23.342 seconds** for the complete joint path and **24.329 seconds** supervised,
+with **540,028,928 bytes** sampled process-group peak. The original 2 GiB group cap,
+420-second deadline and 1.25 GiB reader floor were unchanged; actual fresh reader
+allowance was 1,421,211,648 bytes. Exit was zero, `complete: true`, no operating
+errors occurred, and both observed terminal process-group scans were empty.
+
+Complete strict JSON, operand descriptors, source bindings and required owners
+match the genuine accepted AUS result. The full 49,625-row certificate is exactly
+byte-identical to proof003, while new facts preserve the actual extracted routing
+and execution inventory. Coverage records one shared lifecycle and each consumer,
+and zero full selection/coordinate-shard calls. The native comparison uses the
+same 18 changed rows. Actual inventories retain 137 baseline and 103 candidate
+descriptors; source accounting remains five continuous inputs plus two target
+inputs across five distinct bodies, with explicit candidate feature reuse.
+
+All original outputs are retained in `retained-proof-004/`; `summary.json` derives
+its measurements and exact report-field comparisons from those outputs. The
+original proof003 and failed attempts are not rewritten. This verifies the final
+local routing and does not make the provisional checkpoint an accepted future
+root. Normal hosted CI, accepted dependency ancestry and whole-PR review still
+govern integration.
