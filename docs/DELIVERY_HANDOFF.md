@@ -264,6 +264,12 @@ scopes. Newly rebound request preparation is shown separately from the original
 requests that actually executed; retention and authorities always validate the
 latter. A historical replay is not new source acceptance or a new execution.
 
+Accepted source catalogues may be direct or nested under `original_source_custody`;
+simultaneous aliases must agree. Physical locators may come from consumed inputs or
+explicit `reused_whole_product_inputs` with `whole_body_consumed: false`. The original
+handoff preserves that prior-consumption limit; generated ordinary acquisition pins
+request later full-body reads. Conflicting source/product identities refuse.
+
 The recipe index emits one transport/acquisition identity per whole encoded and
 decoded body, with all compatible destinations. `advance` only prepares this plan.
 The explicit `materialize` phase consumes its actual committed index:
