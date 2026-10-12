@@ -1343,6 +1343,13 @@ export async function refreshDeliveryAuthorTree(journal, {main, validate, execut
   const branch = () => git(['symbolic-ref', '--quiet', 'HEAD']);
   const tree = commit => git(['rev-parse', '--verify', commit + '^{tree}']);
   const index = () => git(['write-tree']);
+  const mergeTree = (before, target) => {
+    let merged;
+    try { merged = git(['-c', 'merge.renames=false', 'merge-tree', '--write-tree', before, target]); }
+    catch { throw Error('Author refresh conflict or unavailable immutable Git objects; preserve original head and resolve explicitly'); }
+    need(sha(merged), 'Author refresh did not produce one complete merge tree');
+    return merged;
+  };
   const clean = () => {
     for (const row of git(['ls-files', '-v', '-z']).split('\0').filter(Boolean)) {
       need(!/^[a-z] /.test(row), 'Assume-unchanged index entries can hide edits; preserve them before author refresh');
@@ -1378,6 +1385,9 @@ export async function refreshDeliveryAuthorTree(journal, {main, validate, execut
     const raw = git(['cat-file', '-p', intent.head]);
     need(raw.startsWith(`tree ${intent.tree}\nparent ${intent.before}\nparent ${intent.main}\nauthor `)
       && git(['merge-base', intent.before, intent.main]) === intent.merge_base, 'Author refresh candidate ancestry changed');
+    // Valid parents and unchanged author postimages do not authenticate inherited
+    // main bytes. Reconstruct the exact original merge before any ref/index update.
+    need(mergeTree(intent.before, intent.main) === intent.tree, 'Author refresh candidate differs from the exact original merge tree');
     verifyPostimages(intent);
   } else {
     need(!fs.lstatSync(resultFile, {throwIfNoEntry: false}), 'Author refresh result has no original intent');
@@ -1388,10 +1398,7 @@ export async function refreshDeliveryAuthorTree(journal, {main, validate, execut
     if (merge_base === main) return {status: 'current', previous_head: before, head: before, main, elapsed_ms: performance.now() - started};
     need(index() === tree(before), 'Tracked index changed; preserve it before author refresh'); clean();
     await validate({head: before, branch: ref.slice('refs/heads/'.length), main, phase: 'prepare-author-refresh'});
-    let merged;
-    try { merged = git(['-c', 'merge.renames=false', 'merge-tree', '--write-tree', before, main]); }
-    catch { throw Error('Author refresh conflict or unavailable immutable Git objects; preserve original head and resolve explicitly'); }
-    need(sha(merged), 'Author refresh did not produce one complete merge tree');
+    const merged = mergeTree(before, main);
     const author = git(['var', 'GIT_AUTHOR_IDENT']), committer = git(['var', 'GIT_COMMITTER_IDENT']);
     need(!/[\r\n]/.test(author + committer), 'Invalid Git commit identity');
     const message = `tree ${merged}\nparent ${before}\nparent ${main}\nauthor ${author}\ncommitter ${committer}\n\nRefresh inherited main before delivery publication\n`;
@@ -1495,6 +1502,8 @@ export async function commitAdvanceStage(journal, stage, {validate, execute = ex
   const raw = Buffer.from(intent.raw ?? '');
   need(/^[a-f0-9]{40}$/.test(intent.head) && createHash('sha1').update(`commit ${raw.length}\0`).update(raw).digest('hex') === intent.head
     && raw.toString().startsWith(`tree ${intent.tree}\nparent ${intent.parent}\n`), 'Invalid durable commit object');
+  need(/^[a-f0-9]{40}$/.test(intent.parent) && intent.parent_tree === text(['rev-parse', '--verify', intent.parent + '^{tree}']),
+    'Commit recovery parent tree differs from the actual parent commit');
   const changed = text(['diff', '--name-only', '--no-renames', intent.parent, intent.tree, '--']).split('\n').filter(Boolean).sort();
   need(equal(changed, files.map(f => f.path).sort()), 'Commit tree changes undeclared paths');
   for (const file of files) need(text(['ls-tree', intent.tree, '--', file.path]) === `100644 blob ${file.oid}\t${file.path}`, 'Commit tree product differs');
@@ -1597,8 +1606,16 @@ export async function automaticAuthorGuard(root, config, api) {
   const entry = workspaceManager(root).ownedEntry(root);
   need(entry?.status === 'ready', 'Automatic delivery requires a ready managed author workspace');
   assertAuthorWorkerIdentity(entry.worker);
+  const validateWorkspace = () => {
+    const currentEntry = workspaceManager(root).ownedEntry(root);
+    need(currentEntry?.status === 'ready' && currentEntry.token === entry.token
+      && currentEntry.worker === entry.worker && currentEntry.branch === entry.branch
+      && currentEntry.path === entry.path, 'Automatic managed author ownership changed');
+    assertAuthorWorkerIdentity(currentEntry.worker);
+  };
   let identity;
   return async ({branch, paths = []}) => {
+    validateWorkspace();
     need(branch === entry.branch, 'Automatic delivery branch differs from managed ownership');
     const route = '/repos/ChengshuLi/WorldAtlas', number = config.automation.issue_number;
     const issue = await api(`${route}/issues/${number}`), spec = contract.workSpec(issue.body);
@@ -1615,6 +1632,7 @@ export async function automaticAuthorGuard(root, config, api) {
     identity = current;
     need(paths.every(p => safe(p.replace(/\/$/, '')) && reservation.owned_paths.some(owned =>
       p === owned || owned.endsWith('/') && p.startsWith(owned))), 'Automatic output exceeds current issue ownership');
+    validateWorkspace();
     return current;
   };
 }

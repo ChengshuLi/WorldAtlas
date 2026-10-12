@@ -40,7 +40,7 @@
   "commands": [
     "node --test test/claim-readiness-races.test.mjs test/issue-claims.test.mjs test/issue-claim-quota.test.mjs",
     "node --test test/premerge-evidence.test.mjs",
-    "node --test --test-name-pattern=\"automatic commit|automatic continuation|author refresh|accepted review\" test/delivery-handoff-advance.test.mjs",
+    "node --test --test-name-pattern=\"automatic|author refresh|accepted review\" test/delivery-handoff-advance.test.mjs",
     "node --test --test-name-pattern=\"typed evidence\" test/delivery-handoff.test.mjs"
   ]
 }

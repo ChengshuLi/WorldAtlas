@@ -1573,3 +1573,245 @@ test('automatic commit rejects hidden index edits and a forged tree outside decl
   await assert.rejects(commitAdvanceStage(j, 'recipe', {validate}), /undeclared paths/);
   assert.equal(git('rev-parse', 'HEAD'), intent.parent);
 });
+
+test('author refresh resume rejects a forged inherited selector despite valid parents and unchanged owned postimages', async t => {
+  const f = authorRefreshFixture(t), name = 'data/ownership-selection.json';
+  await assert.rejects(f.run({interrupt: where => { if (where === 'intent') throw Error('interrupted'); }}), /interrupted/);
+  const filename = path.join(f.j.target, 'author-tree-refresh.json'), intent = JSON.parse(fs.readFileSync(filename));
+  const originalIndex = f.git('write-tree'), originalSelector = fs.readFileSync(path.join(f.root, name));
+  const owned = 'coordination/engineering/fixture/receipt.json', originalOwned = fs.readFileSync(path.join(f.root, owned));
+  const originalTree = intent.tree;
+  const forge = (args, input) => execFileSync('git', args, {cwd: f.root, input, encoding: 'utf8',
+    env: {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_INDEX_FILE: path.join(f.root, '.git', 'refresh-adverse-index')}}).trim();
+  const blob = forge(['hash-object', '-w', '--stdin'], '{"selected":"forged"}\n');
+  forge(['read-tree', originalTree]);
+  forge(['update-index', '--index-info'], `100644 ${blob}\t${name}\n`);
+  intent.tree = forge(['write-tree']);
+  const raw = f.git('cat-file', '-p', intent.head).replace(`tree ${originalTree}\n`, `tree ${intent.tree}\n`) + '\n';
+  intent.head = forge(['hash-object', '-t', 'commit', '-w', '--stdin'], raw);
+  const forgedIntent = Buffer.from(JSON.stringify(intent) + '\n'); fs.writeFileSync(filename, forgedIntent);
+  assert.notEqual(intent.tree, originalTree);
+  assert.deepEqual(f.git('rev-list', '--parents', '-n', '1', intent.head).split(' '), [intent.head, f.before, f.main]);
+  assert.equal(f.git('ls-tree', intent.head, '--', owned), f.git('ls-tree', f.before, '--', owned));
+  assert.equal(f.git('show', intent.head + ':' + name), '{"selected":"forged"}');
+  await assert.rejects(f.run(), /candidate differs from the exact original merge tree/);
+  assert.equal(f.git('rev-parse', 'HEAD'), f.before); assert.equal(f.git('write-tree'), originalIndex);
+  assert.deepEqual(fs.readFileSync(path.join(f.root, name)), originalSelector);
+  assert.deepEqual(fs.readFileSync(path.join(f.root, owned)), originalOwned);
+  assert.deepEqual(fs.readFileSync(filename), forgedIntent);
+  assert.equal(f.calls.some(args => args.includes('update-ref')), false);
+  assert.equal(fs.existsSync(path.join(f.j.target, 'author-tree-refreshed.json')), false);
+});
+
+test('automatic commit recovery rejects forged parent-tree allowance and preserves unrelated staged contents', async t => {
+  const {j, git, validate} = automaticGitFixture(t);
+  await prepareAdvanceStage(j, 'recipe', 'recipe', {}, () => ({'recipe-index.json': Buffer.from('{}\n')}));
+  await assert.rejects(commitAdvanceStage(j, 'recipe', {validate, interrupt: point => {
+    if (point === 'intent') throw Error('interrupted');
+  }}), /interrupted/);
+  const filename = path.join(j.target, 'commit-recipe.json'), intent = JSON.parse(fs.readFileSync(filename));
+  const head = git('rev-parse', 'HEAD'), name = 'foreign-staged', foreign = Buffer.from('preserve staged contents\n');
+  fs.writeFileSync(path.join(j.root, name), foreign); git('add', name);
+  const stagedTree = git('write-tree'), stagedEntry = git('ls-files', '--stage', '--', name);
+  assert.notEqual(stagedTree, git('rev-parse', intent.parent + '^{tree}'));
+  intent.parent_tree = stagedTree;
+  const forgedIntent = Buffer.from(JSON.stringify(intent) + '\n'); fs.writeFileSync(filename, forgedIntent);
+  await assert.rejects(commitAdvanceStage(j, 'recipe', {validate}), /parent tree differs from the actual parent commit/);
+  assert.equal(git('rev-parse', 'HEAD'), head); assert.equal(git('write-tree'), stagedTree);
+  assert.equal(git('ls-files', '--stage', '--', name), stagedEntry);
+  assert.equal(git('show', ':' + name), foreign.toString().trim());
+  assert.deepEqual(fs.readFileSync(path.join(j.root, name)), foreign);
+  assert.deepEqual(fs.readFileSync(filename), forgedIntent);
+  assert.equal(fs.existsSync(path.join(j.target, 'committed-recipe.json')), false);
+});
+
+// Real author authority and default transition wiring; no operator execution.
+{
+const {default: test} = await import('node:test');
+const {default: assert} = await import('node:assert/strict');
+const {default: fs} = await import('node:fs');
+const {default: path} = await import('node:path');
+const {default: os} = await import('node:os');
+const {execFileSync} = await import('node:child_process');
+const {createHash} = await import('node:crypto');
+const {workspaceManager} = await import('../scripts/local-workspace.mjs');
+const {renderClaim} = await import('../scripts/issue-claim-contract.mjs');
+const {automaticAuthorGuard, openAdvanceJournal, runAutomaticDelivery, readAdvanceStatus, automaticDeliveryObservations} = await import('../scripts/delivery-handoff-advance.mjs');
+const {prepareRequests} = await import('../scripts/prepare-delivery-handoff.mjs');
+const hash = raw => createHash('sha256').update(raw).digest('hex'), clone = value => structuredClone(value);
+function managedAutomaticFixture(t) {
+  const outer = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'automatic-real-'))), seed = path.join(outer, 'seed');
+  fs.mkdirSync(seed); t.after(() => fs.rmSync(outer, {recursive: true, force: true}));
+  const run = (root, ...args) => execFileSync('git', ['-C', root, ...args], {encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'],
+    env: {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null',
+      GIT_AUTHOR_NAME: 'Fixture', GIT_AUTHOR_EMAIL: 'fixture@example.invalid', GIT_COMMITTER_NAME: 'Fixture', GIT_COMMITTER_EMAIL: 'fixture@example.invalid'}}).trim();
+  run(seed, 'init', '-q', '-b', 'main'); fs.writeFileSync(path.join(seed, 'original'), 'untouched\n');
+  run(seed, 'add', 'original'); run(seed, 'commit', '-qm', 'baseline');
+  run(seed, 'remote', 'add', 'origin', seed);
+  const worker = process.env.CODEX_THREAD_ID ?? 'non-codex-automatic-fixture';
+  const manager = workspaceManager(seed), entry = manager.allocate({worker, branch: 'engineering/automatic-real', reserveGiB: 0.001, include: ['coordination/engineering/automatic-real', 'coordination/engineering/melanesia363-additive-delivery-20261010']});
+  const root = entry.path, git = (...args) => run(root, ...args), prefix = 'coordination/engineering/automatic-real/';
+  const spec = {mode: 'engineering', max_prs: 1, depends_on: [99], owned_paths: [prefix], scope: 'Actual automatic handoff guard fixture',
+    evidence_quality: {version: 1, manifest_path: prefix + 'evidence-quality.json', subject_ids: [], pins: {}, review_kind: 'code'}};
+  const issue = {number: 100, state: 'open', created_at: '2026-10-10T00:00:00Z', labels: ['type:engineering', 'kind:work-item', 'status:ready']};
+  const claim = {version: 1, active: true, worker_id: worker, claim_id: 'automatic-real-claim', branch: entry.branch,
+    mode: 'engineering', expires_at: new Date(Date.now() + 3600000).toISOString()};
+  const control = {spec, issue, claim, dependency: {number: 99, state: 'closed'}, prs: [], blockers: []};
+  const api = async route => {
+    if (route.endsWith('/issues/100')) return {...clone(control.issue), body: `<!-- worldatlas-work:v1\n${JSON.stringify(control.spec)}\n-->`};
+    if (route.endsWith('/issues/99')) return clone(control.dependency);
+    if (route.includes('/issues/100/comments?')) return [{id: 1, user: {login: 'github-actions[bot]'}, body: renderClaim(control.claim)}, ...clone(control.blockers)];
+    if (route.includes('/issues/100/timeline?')) return control.prs.map(pr => ({source: {issue: {number: pr.number, body: 'Refs #100', pull_request: {url: 'fixture'}}}}));
+    const pr = control.prs.find(pr => route.endsWith('/pulls/' + pr.number)); if (pr) return clone(pr);
+    throw Error('Unexpected guard route: ' + route);
+  };
+  const config = {automation: {issue_number: 100}};
+  return {root, git, entry, manager, control, api, config, prefix};
+}
+
+test('real automatic author guard preserves live claim, ownership, dependency and open-PR guards', async t => {
+  const f = managedAutomaticFixture(t), guard = await automaticAuthorGuard(f.root, f.config, f.api);
+  const scope = {branch: f.entry.branch, paths: [f.prefix + 'advance/recipe.json']};
+  assert.equal((await guard(scope)).worker, process.env.CODEX_THREAD_ID ?? f.entry.worker);
+  const original = clone(f.control);
+  const cases = [
+    [c => { c.claim.active = false; }, /claim/], [c => { c.claim.expires_at = '2000-01-01T00:00:00Z'; }, /claim/],
+    [c => { c.claim.worker_id = 'foreign-worker'; }, /ownership/], [c => { c.claim.branch = 'engineering/foreign'; }, /claim/],
+    [c => { c.spec.owned_paths = ['coordination/engineering/foreign/']; }, /scope changed/],
+    [c => { c.prs = [{number: 101, state: 'open', head: {ref: 'engineering/foreign'}}]; }, /foreign open/],
+    [c => { c.dependency.state = 'open'; }, /dependency/],
+    [c => { c.blockers.push({id: 2, body: '<!-- worldatlas-blocker:v1\n{"id":"hold","active":true,"reason":"Investigate"}\n-->'}); }, /blocker/]
+  ];
+  for (const [mutate, expected] of cases) {
+    Object.assign(f.control, clone(original)); mutate(f.control); await assert.rejects(guard(scope), expected);
+  }
+  Object.assign(f.control, clone(original));
+  await assert.rejects(guard({...scope, branch: 'engineering/foreign'}), /managed ownership/);
+  await assert.rejects(guard({...scope, paths: ['coordination/engineering/foreign/output.json']}), /output exceeds/);
+  f.control.claim.expires_at = new Date(Date.now() + 7200000).toISOString();
+  assert.equal((await guard(scope)).claim, original.claim.claim_id);
+  f.control.prs = [{number: 101, state: 'open', head: {ref: f.entry.branch}}]; await guard(scope);
+});
+
+// This expected-refusal test exposes captured workspace authority surviving a
+// registry revocation. Restore the exact fixture registry before cleanup.
+test('real automatic author guard rereads current managed ownership before each mutation', async t => {
+  const f = managedAutomaticFixture(t); let changeDuringRead;
+  const guard = await automaticAuthorGuard(f.root, f.config, async route => {
+    const result = await f.api(route); if (route.includes('/timeline?')) changeDuringRead?.(); return result;
+  });
+  const scope = {branch: f.entry.branch, paths: [f.prefix + 'advance/recipe.json']}; await guard(scope);
+  const stateFile = path.join(f.manager.report().registry, 'state.json'), original = fs.readFileSync(stateFile);
+  try {
+    for (const mutate of [s => {s.entries[0].status = 'preparing';}, s => {s.entries[0].token = 'replacement-token';},
+      s => {s.entries[0].branch = 'engineering/foreign';}, s => {s.entries = [];}]) {
+      const state = JSON.parse(original); mutate(state); fs.writeFileSync(stateFile, JSON.stringify(state));
+      await assert.rejects(guard(scope), /managed|workspace|ownership/i);
+    }
+    for (const mutate of [s => {s.entries[0].status = 'preparing';}, s => {s.entries[0].token = 'replacement-token';}]) {
+      fs.writeFileSync(stateFile, original);
+      changeDuringRead = () => {const state = JSON.parse(original); mutate(state); fs.writeFileSync(stateFile, JSON.stringify(state));};
+      await assert.rejects(guard(scope), /managed|workspace|ownership/i);
+    }
+  } finally { fs.writeFileSync(stateFile, original); }
+});
+
+function realAutomaticRecipe(f){
+ const physicalBytes=2000,decodedBytes=5000,phase=4*1024*1024,legacy=false;
+ const supervisor='coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs';
+ const codePaths=['code.mjs','scripts/local-workspace.mjs','scripts/worker-identity.mjs',supervisor];
+ for(const name of codePaths){fs.mkdirSync(path.dirname(path.join(f.root,name)),{recursive:true});fs.writeFileSync(path.join(f.root,name),'// synthetic byte custody '+name+'\n');}
+ f.git('add','--',...codePaths);f.git('commit','-qm','fixture code custody');
+ const commit=f.git('rev-parse','HEAD');
+ let charged=0;
+ const budget={add({bytes}){assert.ok(Number.isSafeInteger(bytes)&&bytes>=0);charged+=bytes;assert.ok(charged<8*1024*1024,'bounded fixture accounting');}};
+ const reader={budget,git:(...args)=>Buffer.from(f.git(...args)),pin(c,name){
+   const line=f.git('ls-tree',c,'--',name),match=/^100644 blob ([a-f0-9]{40})\t/.exec(line);assert.ok(match,'ordinary committed input '+name);
+   const raw=execFileSync('git',['-C',f.root,'cat-file','blob',match[1]],{env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
+   assert.ok(raw.length<128*1024);budget.add({bytes:raw.length});
+   return {commit:c,path:name,mode:'100644',git_blob_oid:match[1],bytes:raw.length,sha256:hash(raw)};
+ },read(p){
+   const actual=this.pin(p.commit,p.path);assert.equal(actual.git_blob_oid,p.git_blob_oid??p.blob);assert.equal(actual.bytes,p.bytes);assert.equal(actual.sha256,p.sha256);
+   return execFileSync('git',['-C',f.root,'cat-file','blob',actual.git_blob_oid],{env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
+ },json(p){return JSON.parse(this.read(p));}};
+ const codePin=name=>{const p=reader.pin(commit,name);return {path:name,bytes:p.bytes,sha256:p.sha256};};
+ const files=new Map();
+ const pin=(path,bytes=123,extra={})=>({commit,path,mode:'100644',blob:hash(path).slice(0,40),bytes,sha256:hash(path),...extra});
+ const put=(name,body)=>{const raw=Buffer.from(JSON.stringify(body)+'\n');fs.writeFileSync(path.join(f.root,name),raw);f.git('add','--',name);f.git('commit','-qm','fixture '+name);const c=f.git('rev-parse','HEAD'),actual=reader.pin(c,name),{git_blob_oid,...rest}=actual,p={...rest,blob:git_blob_oid};files.set(name,{raw,body,pin:p});return {commit:c,path:name};};
+ const oldCode=codePin('code.mjs');
+ const support=['scripts/local-workspace.mjs','scripts/worker-identity.mjs'].map(codePin);
+ const runtime={version:1,platform:'linux',runtime:['git','node','process-inspector','time'].map(role=>({role,path:'/bin/'+role,mode:493,bytes:1000,sha256:hash(role)})),supervisor:codePin(supervisor),...(!legacy?{support_code:support}:{})};
+ const resources={processing_allowance:{phaseBytes:phase,rssBytes:8*1024*1024},output_reserve:131072,operating_limits:{rss_bytes:8*1024*1024,wall_seconds:30,output_bytes:262144,retained_bytes:600000,log_bytes:1000,monitor_bytes:1000,receipt_bytes:1000}};
+ const common={version:1,executed_code:[oldCode],installed_modules:[{...oldCode,path:'node_modules/module.js'}],report:pin('report.json'),parent:{components:3},baseline:{pins:[pin('selection.json')]},output_reserve:131072,operating_runtime:runtime,...(!legacy?{operating_profile:'source-native-v2',...resources}:{})};
+ const componentIds=['c-a','c-b','c-c'],targetIds=['t-one'];
+ const physicalPins=componentIds.map((id,i)=>pin('retained/components-00'+i+'.jsonl.gz',physicalBytes));
+ const sourceMeta=pin('retained/sources-000.jsonl.gz',100);
+ const admin=pin('admin.gz',100,{uncompressed_bytes:1000,uncompressed_sha256:hash('decoded-admin')});
+ const locator=put('locators.json',Object.fromEntries(componentIds.map((id,i)=>[id,{path:'components-00'+i+'.jsonl.gz'}])));
+ const handoff={scopeIds:componentIds,candidate_source_native_bindings:componentIds.map(component_id=>({component_id,retained_payload:{target_stable_location_id:'t-one'}})),
+  original_physical_comparison_bindings:componentIds.map(component_id=>({component_id,physical_comparison:{row:{component_id}},original_queried_source_metadata:[]})),
+  original_gap_membership:{members:componentIds.map((component_id,i)=>({component_id,original_batch_id:'unrelated-'+i}))},
+  consumed_inputs:[files.get(locator.path).pin,...physicalPins,sourceMeta],
+  consumed_source_bindings:[{source_id:'admin',catalogue_record:{parts:[{path:admin.path,bytes:admin.bytes,sha256:admin.sha256,uncompressed_bytes:admin.uncompressed_bytes,uncompressed_sha256:admin.uncompressed_sha256}]}}],
+  physical_restoration:{restorations:[...physicalPins.map((p,i)=>({path:'components-00'+i+'.jsonl.gz',whole_original_bytes:p.bytes,whole_original_sha256:p.sha256,decoded_bytes:decodedBytes,decoded_sha256:hash('decoded-'+i),rows:1})),{path:'sources-000.jsonl.gz',whole_original_bytes:100,whole_original_sha256:sourceMeta.sha256,decoded_bytes:500,decoded_sha256:hash('source-decoded'),rows:3}]}};
+ const handoffLocator=put('handoff.json',handoff),hp=files.get(handoffLocator.path).pin;
+ const {commit:_,...entrySource}=hp;
+ const registry=put('registry.json',{version:1,kind:'accepted-administrative-handoffs-v1',entries:[{id:'accepted-whole',accepted_source_commit:hp.commit,source:entrySource,cohort_ids:componentIds,target_ids:targetIds}]});
+ const rp=files.get(registry.path).pin,bank=pin('bank.json'),manifest=pin('manifest.json'),bounds=pin('bounds.gz',100,{uncompressed_bytes:1000,uncompressed_sha256:hash('bounds')}),catalogue=pin('catalogue.json');
+ const source={...clone(common),operation:'retained-land-source-premises-v1',destination:'.cache/native-grid-candidates/old-source',source_rule:{version:1,profile:'retained-consumed-administrative-source',geometry_scope:'full-component',cohort_ids:componentIds,expected_ids:componentIds,registry_path:rp.path,
+  ...Object.fromEntries(['cases_path','outcomes_path','payloads_path','simplified_comparison_path','generalized_comparison_path','remainders_path'].map(k=>[k,hp.path])),
+  administrative_products:[admin],original_products:[],target_banks:[bank.path],manifest_path:manifest.path,bounds_path:bounds.path,source_catalogue_path:catalogue.path,inputs:[hp,rp,admin,bank,manifest,bounds,catalogue]}};
+ const sourceTemplate=put('source-template.json',source),slots={source_request_path:files.get(sourceTemplate.path).pin,operating_path:pin('operating.json'),publication_path:pin('publication.json'),facts_path:pin('facts.json'),inventory_path:pin('inventory.gz',100,{uncompressed_bytes:1000,uncompressed_sha256:hash('inventory')})};
+ const owner=pin('native-owner.gz',200,{uncompressed_bytes:1000,uncompressed_sha256:hash('owner')}),lat=pin('latitudes.gz',50,{uncompressed_bytes:100,uncompressed_sha256:hash('lat')});
+ const native={...clone(common),operation:'unactivated-additive-native-batch-v1',destination:'.cache/native-grid-candidates/old-native',additive:{source_profile:source.source_rule.profile,scope_ids:componentIds,source_execution_commit:commit,source_runtime:{bytes:1000,sha256:hash('node')},manifest_path:manifest.path,bounds_path:bounds.path,latitudes_path:lat.path,original_bounds:{sha256:bounds.sha256},owner_parts:[{path:owner.path,manifest_path:'owner.bin',manifest_descriptor:{bytes:owner.bytes}}],...Object.fromEntries(Object.entries(slots).map(([k,p])=>[k,p.path])),inputs:[...source.source_rule.inputs,owner,lat,...Object.values(slots)]}};
+ const nativeTemplate=put('native-template.json',native);
+ const selection={handoff_id:'accepted-whole',source_template:sourceTemplate,source_resources:clone(resources),native_resources:clone(resources),physical_locator:{input:locator,format:'keyed-path'},targets:[{target_id:'t-one',bank_path:bank.path,native_template:nativeTemplate}],
+  predecessor_allowance:Object.fromEntries(Object.keys(slots).map(k=>[k,{bytes:k==='source_request_path'?131072:1000,...(k==='inventory_path'?{uncompressed_bytes:10000}:{})}])),native_request_bytes_bound:131072};
+ const recipe={version:1,id:'delivery',mode:'greedy-model',registry,destination_prefix:'.cache/native-grid-candidates/delivery',handoffs:[selection]};
+ const recipeLocator=put('recipe.json',recipe);return {reader,recipe,recipeLocator,budget,componentIds};
+}
+
+test('default automatic delivery commits actual recipe and issued SOURCE requests then preserves the terminal barrier', async t => {
+  const f = managedAutomaticFixture(t), input = realAutomaticRecipe(f);
+  const config = {...f.config, recipe: input.recipeLocator};
+  const journal = openAdvanceJournal(f.root, f.prefix + 'advance', config.recipe, {budget: input.budget});
+  const validate = await automaticAuthorGuard(f.root, config, f.api);
+  const parent = f.git('rev-parse', 'HEAD'), initialCount = Number(f.git('rev-list', '--count', 'HEAD'));
+  const result = await runAutomaticDelivery(journal, config, input.reader, {prepareRequests}, {validate});
+  assert.equal(result.kind, 'source-terminal'); assert.equal(result.stage, 'source-delivery-001');
+  assert.deepEqual(readAdvanceStatus(journal).completed, ['recipe', 'requests']);
+  assert.equal(Number(f.git('rev-list', '--count', 'HEAD')), initialCount + 2);
+  assert.equal(f.git('rev-parse', 'HEAD~2'), parent);
+  const observation = automaticDeliveryObservations(journal, config).observations;
+  const indexPath = journal.destination + '/recipe/recipe-index.json';
+  const index = input.reader.json(input.reader.pin(observation.template_commit, indexPath));
+  assert.equal(index.mode, 'greedy-model'); assert.deepEqual(index.groups[0].component_ids, input.componentIds);
+  const requestPath = journal.destination + '/requests/delivery-001-source-request.json';
+  const requestPin = input.reader.pin(f.git('rev-parse', 'HEAD'), requestPath), request = input.reader.json(requestPin);
+  assert.deepEqual(request.source_rule.expected_ids, input.componentIds);
+  assert.equal(request.operation, 'retained-land-source-premises-v1');
+  assert.equal(request.destination, '.cache/native-grid-candidates/delivery-delivery-001-source');
+  assert.equal(fs.existsSync(path.join(f.root, request.destination)), false);
+  const requestBytes = input.reader.read(requestPin), head = f.git('rev-parse', 'HEAD');
+  const repeated = await runAutomaticDelivery(journal, config, input.reader, {prepareRequests}, {validate});
+  assert.equal(repeated.kind, 'source-terminal'); assert.equal(f.git('rev-parse', 'HEAD'), head);
+  assert.deepEqual(input.reader.read(requestPin), requestBytes);
+  assert.equal(readAdvanceStatus(journal).waiting.kind, 'source-terminal');
+});
+test('default automatic delivery revalidates the real claim before committing newly prepared requests', async t => {
+  const f = managedAutomaticFixture(t), input = realAutomaticRecipe(f), config = {...f.config, recipe: input.recipeLocator};
+  const journal = openAdvanceJournal(f.root, f.prefix + 'advance', config.recipe, {budget: input.budget});
+  const validate = await automaticAuthorGuard(f.root, config, f.api);
+  const initialCount = Number(f.git('rev-list', '--count', 'HEAD'));
+  const adapters = {prepareRequests: (...args) => {const products = prepareRequests(...args); f.control.claim.active = false; return products;}};
+  await assert.rejects(runAutomaticDelivery(journal, config, input.reader, adapters, {validate}), /claim/);
+  assert.equal(Number(f.git('rev-list', '--count', 'HEAD')), initialCount + 1);
+  assert.deepEqual(readAdvanceStatus(journal).completed, ['recipe', 'requests']);
+  assert.equal(fs.existsSync(path.join(journal.target, 'committed-requests.json')), false);
+  const prepared = fs.readFileSync(path.join(journal.target, 'requests/delivery-001-source-request.json'));
+  f.control.claim.active = true;
+  const resumed = await runAutomaticDelivery(journal, config, input.reader, {prepareRequests}, {validate});
+  assert.equal(resumed.kind, 'source-terminal'); assert.equal(Number(f.git('rev-list', '--count', 'HEAD')), initialCount + 2);
+  assert.deepEqual(fs.readFileSync(path.join(journal.target, 'requests/delivery-001-source-request.json')), prepared);
+});
+}
