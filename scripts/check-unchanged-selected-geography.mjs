@@ -39,7 +39,7 @@ export const AUDITED_READERS = Object.freeze({
   // Candidate and single-vintage frame reuse change lifetime/accounting, not input routes.
   [PREFIX + 'selected-continuous-entry.mjs']: ['84ddc84798fa371e37c0acbd6764a39ef79296f3b8a57ff09aa4ed416e7ae1b9', '198817f84574d3d04b0ab2c4827eced98211533a79851ee43b97c59d80663c07',
     '7f23e383ba04ab2953758087eb6c2c69c777d103589f5f1e00076163f084aeac',
-    '80bd3037c94880d0da87b3acbfbf0fd8625cd74f2e82770cc9b8e0abf3c2920b']
+    '94379e0b99aefca7267cca7a84032b44cb637aa6150e362e194a72f7e9e44b85']
 });
 export const EXECUTION_CODE = Object.freeze([
   'scripts/run-geographic-check.py', 'scripts/check-geographic-regression.py',

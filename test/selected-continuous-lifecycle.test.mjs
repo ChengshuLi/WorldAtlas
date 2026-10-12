@@ -127,8 +127,12 @@ test('reopened complete carry and runtime admission refuse before any cold body 
 test('actual continuous entry emits full source inverses with independently ended acquisition stages',()=>{
  const f=fixture();try{const {rect,install}=sourceSides(f),before=install(rect(0,1),rect(2,3),'before'),after=install(rect(0,2.5),rect(2,3),'after');f.git('checkout',before);const env={...process.env};delete env.NODE_OPTIONS;delete env.NODE_PATH;
   const out=path.join(f.repo,'actual-continuous'),r=spawnSync(process.execPath,['--expose-gc',path.join(f.repo,P+'selected-continuous-entry.mjs'),'continuous',f.repo,before,before,after,out],{env,encoding:'utf8'});assert.equal(r.status,0,r.stderr);assert.match(r.stderr,/required-source-count/);assert.match(r.stderr,/coordinate-source/);assert.match(r.stderr,/required-side-selection/);const ack=JSON.parse(r.stdout),facts=JSON.parse(fs.readFileSync(path.join(out,'facts.json'))),body=JSON.parse(gunzipSync(fs.readFileSync(path.join(out,'operands.json.gz'))));
-  const selectionStages=r.stderr.split('\n').filter(Boolean).map(line=>JSON.parse(line)).filter(row=>row.event==='start'&&['coordinate-selection','persisted-selection','required-side-selection'].includes(row.selected_continuous_stage));
-  assert.equal(selectionStages.length,3);
+  const selectionStages=r.stderr.split('\n').filter(Boolean).map(line=>JSON.parse(line)).filter(row=>row.event==='start'&&row.selected_continuous_stage.endsWith('-selection'));
+  // This non-additive fixture attempts two shortcut loads before the full path.
+  // Count them honestly; additive comparisons skip that shortcut entirely.
+  assert.equal(selectionStages.length,5);
+  assert.equal(selectionStages.filter(row=>row.selected_continuous_stage.startsWith('shortcut-')).length,2);
+  assert.equal(selectionStages.filter(row=>!row.selected_continuous_stage.startsWith('shortcut-')).length,3);
   assert.deepEqual(selectionStages.filter(row=>row.selected_continuous_stage==='required-side-selection').map(row=>row.selected),[before]);
   assert.deepEqual(ack.affected_ids,['old-owner','other-owner']);assert.equal(facts.lifecycle.filter(p=>p.kind==='complete-snapshot-bound-cold-validation').length,2);assert.equal(facts.lifecycle.filter(p=>p.kind==='complete-required-containing-source').length,2);assert.equal(facts.inverse.length,4);assert.ok(facts.lifecycle.every(p=>p.complete_phase_bytes<=268435456));assert.deepEqual(Object.keys(body.baseline).sort(),ack.affected_ids);assert.deepEqual(Object.keys(body.candidate).sort(),ack.affected_ids);
   for(const side of ['baseline','candidate'])assert.equal(fs.existsSync(path.join(out,side,'certificate.json.gz')),true);
@@ -360,7 +364,7 @@ test('coordinate helper resets retain all external custody and inventory, and re
   const {rect,install}=sourceSides(f),before=install(rect(0,1),rect(2,3),'before',{split:true}),after=install(rect(0,2.5),rect(2,3),'after',{split:true});
   const result=completeFrameProbe(f,before,after,`
 const state=empty();state.code=[{retained:'x'.repeat(131072)}];let resets=0,joins=0,firstUsed;
-const observe=reader=>{const phase=reader.phase.bind(reader);reader.phase=function(){phase();const own=this.runtimeBytes+this.executionBytes+this.metadataBytes+this.outputBytes,carry=2*h.valueBytes({carriedState:state,inventory:[...this.inventory.values()]}).length;assert.equal(this.used,own+carry);assert(carry>262144);resets++;};};
+const observe=reader=>{const phase=reader.phase.bind(reader);reader.phase=function(){phase();const own=this.runtimeBytes+this.executionBytes+this.metadataBytes+this.outputBytes,carry=2*h.valueBytes({carriedState:state,inventory:[...this.inventory.values()]}).length+this.coordinateResolverBytes;assert.equal(this.used,own+carry);assert(carry>262144);resets++;};};
 const inspected={...h,selectedCoordinateShard(resolver,...args){if(!resets)observe(resolver.reader);const shard=h.selectedCoordinateShard(resolver,...args);if(firstUsed===undefined)firstUsed=shard.phases[0].complete_phase_bytes;else assert(shard.phases[0].complete_phase_bytes>firstUsed);return shard;},joinSelectedCoordinateCertificate(resolver,...args){const certificate=h.joinSelectedCoordinateCertificate(resolver,...args);joins++;return certificate;}};
 entry.acquireCompleteColdSide(n,inspected,options('accounted',state));assert(resets>=6);assert.equal(joins,1);
 let sourceOpens=0;const original=n.SelectedGeometrySources.prototype.read;n.SelectedGeometrySources.prototype.read=function(...args){sourceOpens++;return original.apply(this,args);};
@@ -368,8 +372,11 @@ try{
  const blocked={...h,selectedCoordinateShard(resolver,...args){const reader=resolver.reader,phase=reader.phase;reader.phase=function(){this.allowance=Object.freeze({phaseBytes:this.runtimeBytes+this.executionBytes+this.outputBytes+this.metadataBytes+1,rssBytes:this.allowance.rssBytes});return phase.call(this);};return h.selectedCoordinateShard(resolver,...args);}};
  assert.throws(()=>entry.acquireCompleteColdSide(n,blocked,options('blocked-carry',state)),/coordinate-frame carry/);assert.equal(sourceOpens,0);assert.equal(fs.existsSync(path.join(repo,'blocked-carry')),false);
 }finally{n.SelectedGeometrySources.prototype.read=original;}
-console.log('all shard/join resets carry complete metadata; external-only deficit refuses before source opens');`);
-  assert.match(result.stdout,/external-only deficit refuses/);
+const joinState=empty();let joinsBlocked=0;
+const joinBlocked={...h,joinSelectedCoordinateCertificate(resolver,...args){const reader=resolver.reader,phase=reader.phase;reader.phase=function(){const own=this.runtimeBytes+this.executionBytes+this.outputBytes+this.metadataBytes,external=2*h.valueBytes({carriedState:joinState,inventory:[...this.inventory.values()]}).length;assert(this.coordinateResolverBytes>0);this.allowance=Object.freeze({phaseBytes:own+external+1,rssBytes:this.allowance.rssBytes});joinsBlocked++;return phase.call(this);};return h.joinSelectedCoordinateCertificate(resolver,...args);}};
+assert.throws(()=>entry.acquireCompleteColdSide(n,joinBlocked,options('blocked-join-resolver',joinState)),/coordinate-frame carry/);assert.equal(joinsBlocked,1);assert.equal(fs.existsSync(path.join(repo,'blocked-join-resolver')),false);
+console.log('all shard/join resets carry complete metadata; external-only and join-resolver-only deficits refuse before publication');`);
+  assert.match(result.stdout,/join-resolver-only deficits refuse/);
  }finally{f.cleanup();}
 });
 
@@ -395,5 +402,26 @@ test('continuous entry requires its authenticated native-GC launch before output
   const output=path.join(f.repo,'no-native-gc'),env={...process.env};delete env.NODE_OPTIONS;delete env.NODE_PATH;
   const result=spawnSync(process.execPath,[path.join(f.repo,P+'selected-continuous-entry.mjs'),'continuous',f.repo,before,before,before,output],{env,encoding:'utf8'});
   assert.notEqual(result.status,0);assert.match(result.stderr,/authenticated native GC entry/);assert.equal(fs.existsSync(output),false);
+ }finally{f.cleanup();}
+});
+
+test('complete frame charges separate resolver image metadata at the actual join reset',()=>{
+ const f=fixture();try{
+  const {rect,install}=sourceSides(f),before=install(rect(0,1),rect(2,3),'before',{split:true});
+  const result=completeFrameProbe(f,before,before,`
+const joins=[];let number=0;
+for(const bytes of [0,131072]){
+ const image=bytes?{index:{padding:'x'.repeat(bytes)},map:{logical_targets:[]}}:null;
+ // Model the separate legacy image only after genuine immutable selection.
+ // This metadata probe does not claim a new StockImage/source qualification.
+ const modeled={...n,loadSelection(reader){const snapshot=n.loadSelection(reader),resolver=snapshot.geometrySources;
+  const proxy=new Proxy(resolver,{get(target,key,receiver){return key==='image'?image:Reflect.get(target,key,receiver);}});
+  return {...snapshot,geometrySources:proxy};}};
+ const observed={...h,joinSelectedCoordinateCertificate(resolver,...args){const certificate=h.joinSelectedCoordinateCertificate(resolver,...args);joins.push(certificate.complete_phase_bytes);return certificate;}};
+ entry.acquireCompleteColdSide(modeled,observed,options('image-'+number++,empty()));
+}
+assert(joins[1]-joins[0]>=2*131072,'separate live resolver image disappeared at join reset');
+console.log(JSON.stringify({join_bytes:joins,extra_live_image_characters:131072,charged_growth:joins[1]-joins[0]}));`);
+  assert.match(result.stdout,/charged_growth/);
  }finally{f.cleanup();}
 });

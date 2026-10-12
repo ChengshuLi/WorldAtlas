@@ -113,7 +113,7 @@ function coordinateFrameReader(native,helper,context,selected,carriedState) {
  class CoordinateFrameReader extends native.ImmutableReader {
   phase() {
    super.phase();
-   const carry=2*helper.valueBytes({carriedState,inventory:[...this.inventory.values()]}).length;
+   const carry=2*helper.valueBytes({carriedState,inventory:[...this.inventory.values()]}).length+(this.coordinateResolverBytes??0);
    demand(Number.isSafeInteger(carry)&&carry>=0&&this.used+carry<this.phaseLimit,'Complete coordinate-frame carry exceeds phase before body opens');
    this.used+=carry;
   }
@@ -131,6 +131,10 @@ function generatedColdSnapshot(native,helper,{repo,trusted,selected,destination,
  const snapshot=timedStage('coordinate-selection',{selected},()=>native.loadSelection(reader));
  demand(snapshot&&snapshot.reader===reader&&reader.version===selected,'Selected cold side removed or rebound');
  const resolver=snapshot.geometrySources??new native.SelectedGeometrySources(snapshot);
+ // Legacy source resolvers may own an image distinct from snapshot.image. The
+ // shared join omits that view when resetting its own metadata. Carry the whole
+ // resolver view numerically on every subsequent phase, without retaining it.
+ Object.defineProperty(reader,'coordinateResolverBytes',{value:continuousResolverBytes(helper,resolver)});
  reclaimCompletedSource();
  const ack=publishCoordinateSnapshot(helper,{repo,trusted,selected,destination,context,code:carriedState.code,reader,resolver});
  reclaimCompletedSource();
@@ -146,10 +150,13 @@ export function acquireCompleteColdSide(native,helper,options) {
  const {receipt,ack}=generatedColdSnapshot(native,helper,options);
  return {receipt,ack};
 }
-function continuousSnapshotBytes(helper,snapshot,resolver) {
+function continuousResolverBytes(helper,resolver) {
  // Also cover the legacy resolver's own image, which may not be snapshot.image.
- return 2*snapshot.metadataBytes+2*helper.valueBytes({bank:resolver.bank??null,paths:resolver.paths,sources:resolver.sources,release:resolver.release,
+ return 2*helper.valueBytes({bank:resolver.bank??null,paths:resolver.paths,sources:resolver.sources,release:resolver.release,
   image:resolver.image?{index:resolver.image.index,map:resolver.image.map}:null}).length;
+}
+function continuousSnapshotBytes(helper,snapshot,resolver) {
+ return 2*snapshot.metadataBytes+continuousResolverBytes(helper,resolver);
 }
 // Private acquisition may live only inside a validating/projecting helper frame.
 // Public completed helpers return custody and bounded projections, never readers.
