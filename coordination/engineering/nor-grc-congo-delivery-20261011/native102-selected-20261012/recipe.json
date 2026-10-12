@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "id": "native102-validation",
+  "mode": "completed-original-custody",
+  "new_prefix": "coordination/engineering/nor-grc-congo-delivery-20261011/native102-selected-20261012/",
+  "selector": {
+    "commit": "4278a6176e5530ccafe39f57bb1ab58a60992701",
+    "path": "data/ownership-selection.json"
+  },
+  "package_inputs": {
+    "commit": "4278a6176e5530ccafe39f57bb1ab58a60992701",
+    "path": ".github/package-inputs.json"
+  },
+  "retained_registries": [
+    {
+      "commit": "f47008e73386e9dac880b143f2d58708b4bc9045",
+      "path": "coordination/engineering/nor18-selected-20261012/north13-precompose-001/authority-registry.json"
+    }
+  ],
+  "groups": [
+    {
+      "id": "native102",
+      "component_ids": [
+        "physical-component:64621d74ca19d475b02d7c9144029019088f8734c068058fc5e8055d33426e15"
+      ],
+      "target_ids": [
+        "gb:SLB:ADM1:17018030B43755880178831"
+      ],
+      "source_publication": {
+        "commit": "0dfbb27b509e871d253f0a2572a7e57448171b59",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/102/publication.json"
+      },
+      "native_publication": {
+        "commit": "0dfbb27b509e871d253f0a2572a7e57448171b59",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/102/publication.json"
+      },
+      "native_operating": {
+        "commit": "0dfbb27b509e871d253f0a2572a7e57448171b59",
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-operating/native102-derived-operating-view.json"
+      }
+    }
+  ]
+}
