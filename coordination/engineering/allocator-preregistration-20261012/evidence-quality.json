@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "issue": 1779,
+  "lane": "engineering",
+  "worker_id": "01a12ee2-a67c-7431-8d7c-cef97a69201f",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "46438af8901acbad11a9b627828a9e9184018a77",
+    "files": [
+      {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+        "bytes": 193557,
+        "sha256": "40d282412f03e3f7b216b787879ecc3dd3961002e5c3635d2057378019a0d78d",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "exact-allocator-preregistration",
+      "kind": "code",
+      "description": "Derive complete CURRENT_REBIND_CODE vectors from frozen Git bodies at reviewed allocator head 7ddc81bc722b4fc16fdeb2674f1cd89d489f595f and retained execution commits 85ca24519d87bb1d62a86d5cb142006e206cb2b8 and 40d792b2c67b18098c00cd71bce3cfd6a8e63a0b. Add only these exact migrations under allocator review 6119154199, preserve every prior programme and migration, and test committed trusted-catalogue admission plus wrong, partial and tampered vector refusals. No executable helper is changed.",
+      "software": "Node v24.19.0; Git 2.52.0; Linux",
+      "units": "whole-file bytes and SHA-256"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "This catalogue preregistration does not execute scientific work or establish native Mac adoption, geographic approval, production delivery or deployment. The allocator PR still requires its own refreshed exact-head review and applicable CI after preregistration lands.",
+      "status": "unresolved",
+      "source_ids": []
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "GIT_NO_LAZY_FETCH=1 node --test test/supported-programs.test.mjs",
+    "GIT_NO_LAZY_FETCH=1 node scripts/evidence-quality.mjs coordination/engineering/allocator-preregistration-20261012/evidence-quality.json",
+    "git diff --check"
+  ]
+}
