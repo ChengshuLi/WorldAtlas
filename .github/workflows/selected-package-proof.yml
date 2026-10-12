@@ -118,6 +118,15 @@ jobs:
           assert len(body) == blob['size'] and hashlib.sha1(('blob ' + str(len(body)) + '\0').encode() + body).hexdigest() == blob['sha']
           exec(compile(body, '<authenticated trusted-base assembly bootstrap>', 'exec'), {'__name__':'__main__'})
           ASSEMBLY_PROOF
+      - name: Retain frozen child execution diagnostic
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: selected-package-child-diagnostic-${{ github.run_id }}-${{ github.run_attempt }}
+          path: candidate/.cache/selected-package-child-diagnostic.json
+          include-hidden-files: true
+          if-no-files-found: ignore
+          retention-days: 30
       - name: Read back actual assembled native output
         run: node coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/model-reader-call-boundary-controls.mjs --built-output-readback .cache/native-normal-built-output.json
       - name: Install current browser dependencies
