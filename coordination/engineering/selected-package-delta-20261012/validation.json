@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "issue": 1798,
+  "worker_id": "01a1318e-30d9-7357-8b8d-6162a6b4b034",
+  "status": "lightweight-controls-passed-real-output-proof-pending",
+  "checks": [
+    {"command": "node --test test/package-output-artifact.test.mjs test/selected-package-assembly.test.mjs test/selected-package-bootstrap.test.mjs test/integration-profile-restoration.test.mjs", "tests": 34, "passed": 34, "skipped": 0},
+    {"command": "python3 -I -B test/selected-package-bootstrap-controls.py scripts/selected-package-bootstrap.py", "invoked_by": "test/selected-package-bootstrap.test.mjs", "tests": 34, "passed": 34},
+    {"command": "node --test test/package-build.test.mjs", "tests": 9, "passed": 9, "skipped": 0},
+    {"command": "node --test test/trusted-workflow-checkouts.test.mjs test/integration-profile.test.mjs", "tests": 29, "passed": 29, "skipped": 0}
+  ],
+  "independent_boundary_findings_corrected": [
+    "Actual original input inventory now includes unexpected declared-directory members instead of trusting git diff alone",
+    "Installed dependency and runtime bodies are identified, rather than relying only on package versions",
+    "Trusted-base bootstrap verifies actual static startup code and Node resolution scopes before token-bearing execution",
+    "Node's real parser replaces false-positive regex startup dependency discovery",
+    "Nested dependency shadows and unexpected package scopes are rejected",
+    "Current output and receipt publication stages both replacements and rolls back on failure",
+    "Duplicate YAML permissions mappings removed; semantic permission checks replace irrelevant textual adjacency"
+  ],
+  "limitations": [
+    "Synthetic authority and output fixtures do not establish scientific output equivalence",
+    "The first eligible complete output will come from the implementation PR's required full hosted regression shard 0",
+    "No actual full-versus-assembled output comparison has yet run",
+    "No changed-batch wall-clock savings or retained output size is yet measured",
+    "Complete checkout remains unchanged; historical checkout time is not claimed saved",
+    "No local full package build, large input hydration or deployment was performed"
+  ]
+}

@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
 import {ImmutableReader,loadSelection} from '../../../scripts/check-effective-geographic-regression.mjs';
 import {loadPackageInputs,containsPackagePath} from '../../../scripts/package-inputs.mjs';
 import {valueBytes,valueSha} from '../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
@@ -57,7 +58,7 @@ export function bindPackageImmutableCommits(reader,declared){
 // Called before context/database allocations. The package issuer authenticates
 // its executing closure; the existing private selected reader authenticates all
 // source/rule/current-rebind authority. This bridge grants no new authority.
-export async function preparePackageSelectedAdditive({root,currentExecution,consumedContext,restoredReceipt,selectedGrid,geographicRelease}) {
+export async function preparePackageSelectedAdditive({root,currentExecution,consumedContext,restoredReceipt,selectedGrid,geographicRelease,originalPackage,assemblyExecution}) {
   const selectionPath=path.resolve(root,'data/ownership-selection.json');
   let stat;try{stat=ordinary(selectionPath);}catch(error){if(error.code==='ENOENT')return null;throw error;}
   demand(stat.size<=131072,'Bounded selection metadata required');
@@ -72,12 +73,22 @@ export async function preparePackageSelectedAdditive({root,currentExecution,cons
   }finally{fs.closeSync(selectionFd);}
   const selection=JSON.parse(selectionRaw);
   if(selection.additive_release===undefined)return null;
-  demand(consumedContext&&restoredReceipt,'Selected V4 artifact consumption and original restoration required');
-  const {requireConsumedArcticArtifacts}=await import('../arctic-three-retained-land-fit-repair-native-20261008/qualified-artifact-consumer.mjs');
-  const consumed=requireConsumedArcticArtifacts(consumedContext);
-  const {requireCurrentExecution:requireExecution}=await import('../eastern-two-gap-repair-native-20261007/current-execution.mjs');
-  if(currentExecution!==undefined)demand(currentExecution===consumed.currentExecution,'Foreign outer package execution');
-  const execution=requireExecution(consumed.currentExecution);
+  const assembling=originalPackage!==undefined;
+  let execution,requireExecution,original,consumed;
+  if(assembling){
+    demand(consumedContext===undefined&&restoredReceipt===undefined&&currentExecution===undefined,'Assembly cannot impersonate fresh base consumption');
+    original=requireOriginalPackageOutput(originalPackage);
+    execution=requirePackageAssemblyExecution(assemblyExecution);
+    requireExecution=requirePackageAssemblyExecution;
+    demand(execution.original===originalPackage,'Assembly execution belongs to another original package');
+  }else{
+    demand(consumedContext&&restoredReceipt,'Selected V4 artifact consumption and original restoration required');
+    const {requireConsumedArcticArtifacts}=await import('../arctic-three-retained-land-fit-repair-native-20261008/qualified-artifact-consumer.mjs');
+    consumed=requireConsumedArcticArtifacts(consumedContext);
+    const {requireCurrentExecution:requireCurrent}=await import('../eastern-two-gap-repair-native-20261007/current-execution.mjs');
+    if(currentExecution!==undefined)demand(currentExecution===consumed.currentExecution,'Foreign outer package execution');
+    requireExecution=requireCurrent;execution=requireExecution(consumed.currentExecution);
+  }
   demand(execution.stage_root===fs.realpathSync(root),'Additive bridge belongs to another package stage');
   const definition=loadPackageInputs(root);
   const git=process.platform==='darwin'?'/Library/Developer/CommandLineTools/usr/bin/git':'/usr/bin/git';
@@ -85,12 +96,12 @@ export async function preparePackageSelectedAdditive({root,currentExecution,cons
   // Literal original restorer saved state is {receipt,map,old,membershipImage}.
   // The whole member sizes come from its pinned canonical/prior indexes; the
   // membership index is retained whole. Index helpers themselves have returned.
-  demand(restoredReceipt.issue===1295&&restoredReceipt.canonical_index_sha256==='b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7876'
+  if(!assembling)demand(restoredReceipt.issue===1295&&restoredReceipt.canonical_index_sha256==='b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7876'
     &&restoredReceipt.prior_index_sha256==='ca1ab5fc3ef24470bcb79412f1d47a88281c6df0931461c5eb356079b75986fe'
     &&restoredReceipt.new_release_memberships?.index_sha256==='9e21c69da2d4eb68ff66a586c3efa716a71224ce9344338fb2c9da1b2d62989c',
     'Different inherited restoration requires an explicit complete carry catalogue');
-  const inheritedBytes=2*(461664+95064+235002+valueBytes(restoredReceipt).length
-    +valueBytes(consumedContext).length+valueBytes(consumed).length);
+  const inheritedBytes=assembling?execution.inherited_metadata_bytes:
+    2*(461664+95064+235002+valueBytes(restoredReceipt).length+valueBytes(consumedContext).length+valueBytes(consumed).length);
   const metadataBytes=8*1048576+inheritedBytes+2*valueBytes(execution).length;
   const reader=new ImmutableReader(execution.source_root,execution.source_commit,{
     runtimeBytes:execution.runtime.bytes+gitStat.size,executionBytes,
@@ -125,6 +136,8 @@ export async function preparePackageSelectedAdditive({root,currentExecution,cons
   reader.outputBytes=outputBytes;
   reader.metadataBytes+=snapshot.metadataBytes+2*valueBytes(view).length;reader.phase();
   const copied=readBoundPublicationAssets(reader,roster,name=>containsPackagePath(definition.inputs,name)||execution.files.some(p=>p.path===name));
+  if(assembling)demand(execution.pending_selected_inputs.every(name=>copied.input_inventory.some(pin=>pin.path===name)),
+    'Package addition was not consumed by genuine current selected authority');
   const bodies=copied.bodies;
   requireExecution(execution);
   const gitEnd=ordinary(git);for(const k of ['dev','ino','size','mode','mtimeMs','ctimeMs'])demand(gitEnd[k]===gitStat[k],'Git program pathname drift');
@@ -160,4 +173,197 @@ export function publishPackageSelectedAdditive(token,{root,destination='dist'}) 
     try{fs.writeFileSync(fd,retained.bodies[i]);fs.fsyncSync(fd);}finally{fs.closeSync(fd);}
   }
   publications.delete(token);return token;
+}
+
+// A distinct package assembly capability. Serialized build/context receipts
+// never enter the existing consumedContext or current-execution WeakMaps.
+const packageAssemblies = new WeakMap();
+const assemblyHash = bytes => createHash('sha256').update(bytes).digest('hex');
+const assemblySame = (a,b) => valueSha(a) === valueSha(b);
+const assemblySafe = value => typeof value === 'string' && /^[A-Za-z0-9_.\/-]+$/.test(value) &&
+  !value.startsWith('/') && value.split('/').every(part => part && part !== '.' && part !== '..');
+const assemblyCommit = value => /^[a-f0-9]{40}$/.test(value ?? '');
+const assemblyDigest = value => /^[a-f0-9]{64}$/.test(value ?? '');
+const assemblyPositive = value => Number.isSafeInteger(value) && value > 0;
+
+function assemblyFile(root, relative, maximum = Number.MAX_SAFE_INTEGER) {
+  demand(assemblySafe(relative),'Safe assembly member required');
+  const file = path.resolve(root,relative), stat = ordinary(file);
+  demand(stat.size <= maximum,'Assembly member exceeds admitted bytes');
+  const fd=fs.openSync(file,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW), hash=createHash('sha256');
+  const buffer=Buffer.alloc(1048576);let bytes=0;
+  try {
+    for(;;){const count=fs.readSync(fd,buffer,0,buffer.length,null);if(!count)break;
+      bytes+=count;demand(bytes<=stat.size,'Assembly member grew');hash.update(buffer.subarray(0,count));}
+    const held=fs.fstatSync(fd),end=ordinary(file);
+    demand(bytes===stat.size&&['dev','ino','size','mode','mtimeMs','ctimeMs'].every(key=>stat[key]===held[key]&&held[key]===end[key]),'Assembly member changed');
+  }finally{fs.closeSync(fd);}
+  return {path:relative,bytes,sha256:hash.digest('hex')};
+}
+
+async function assemblyJobLog(api,repo,job) {
+  demand(typeof api.jobLogRedirect==='function','Authenticated original job-log transport required');
+  const redirect=await api.jobLogRedirect(`/repos/${repo}/actions/jobs/${job}/logs`);
+  demand(redirect.status===302,'Original package job log unavailable');
+  const url=new URL(redirect.headers.get('location'));
+  demand(url.protocol==='https:'&&!url.username&&!url.password&&url.hostname.endsWith('.blob.core.windows.net'),'Unsupported original job-log transport');
+  const response=await fetch(url,{redirect:'error',signal:AbortSignal.timeout(30000)});
+  demand(response.ok&&response.body,'Original job log download failed');
+  const chunks=[];let bytes=0;
+  for await(const chunk of response.body){bytes+=chunk.length;demand(bytes<=8*1048576,'Original package job log exceeds admission');chunks.push(Buffer.from(chunk));}
+  return Buffer.concat(chunks,bytes).toString('utf8').split(/\r?\n/).map(line=>line.replace(/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d+Z /,''));
+}
+
+// Called only by the trusted assembly driver, using its authenticated GitHub
+// client. It authenticates the actual originating producer and log, rather than
+// accepting a caller-supplied success flag or a copied context certificate.
+export async function authenticateOriginalPackageOutput({api,repo,origin,root,manifestRaw}) {
+  demand(/^[-\w.]+\/[-\w.]+$/.test(repo??'')&&origin&&
+    ['run_id','run_attempt','job_id','artifact_id','artifact_bytes'].every(key=>assemblyPositive(origin[key]))&&
+    assemblyCommit(origin.head)&&assemblyDigest(origin.artifact_digest),'Exact original package origin required');
+  const artifactName=`cloudflare-package-output-${origin.run_id}-${origin.run_attempt}`;
+  demand(origin.artifact_name===artifactName&&Buffer.isBuffer(manifestRaw)&&manifestRaw.length>0&&manifestRaw.length<=8*1048576,'Bounded original package manifest required');
+  const run=await api(`/repos/${repo}/actions/runs/${origin.run_id}/attempts/${origin.run_attempt}`);
+  demand(run.id===origin.run_id&&run.run_attempt===origin.run_attempt&&run.head_sha===origin.head&&
+    run.event==='pull_request'&&run.path==='.github/workflows/merge-integration-checks.yml'&&run.status==='completed'&&
+    run.repository?.full_name===repo&&run.head_repository?.full_name===repo,'Original package run differs');
+  const job=await api(`/repos/${repo}/actions/jobs/${origin.job_id}`);
+  demand(job.id===origin.job_id&&job.run_id===origin.run_id&&job.run_attempt===origin.run_attempt&&job.head_sha===origin.head&&
+    job.status==='completed'&&job.conclusion==='success'&&Array.isArray(job.steps),'Original package producer did not succeed');
+  const step=name=>job.steps.filter(row=>row.name===name&&row.status==='completed'&&row.conclusion==='success').length===1;
+  const full=job.name==='regression (0)'&&['Snapshot original full-regression package inputs','Verify full-regression package controls',
+    'Build hosted assets','Read back qualified native build outputs when selected','Complete regression shard','Verify full-regression package receipt',
+    'Inventory original full-regression package output','Retain original full-regression package output'].every(step);
+  const selected=job.name==='package'&&['Snapshot original selected package inputs','Verify package controls',
+    'Build Cloudflare package without publishing','Read back qualified native build outputs when selected',
+    'Run selected-data consumer checks','Inventory original selected package output','Retain original selected package output'].every(step);
+  demand(full||selected,'Original package producer lacks required actual steps');
+  const artifact=await api(`/repos/${repo}/actions/artifacts/${origin.artifact_id}`);
+  demand(artifact.id===origin.artifact_id&&artifact.name===artifactName&&!artifact.expired&&artifact.size_in_bytes===origin.artifact_bytes&&
+    artifact.digest==='sha256:'+origin.artifact_digest&&artifact.workflow_run?.id===origin.run_id&&
+    artifact.workflow_run?.head_sha===origin.head,'Original package artifact differs');
+  const lines=await assemblyJobLog(api,repo,origin.job_id),receipts=[];
+  for(const line of lines){if(!line.startsWith('{'))continue;let value;try{value=JSON.parse(line);}catch{continue;}
+    if(Object.hasOwn(value,'package_output_manifest_sha256'))receipts.push(value);}
+  const uploads=lines.filter(line=>line.startsWith('Artifact '+artifactName+' has been successfully uploaded!'));
+  demand(receipts.length===1&&receipts[0].original_head===origin.head&&
+    receipts[0].package_output_manifest_sha256===assemblyHash(manifestRaw)&&receipts[0].package_output_manifest_bytes===manifestRaw.length&&
+    uploads.length===1&&uploads[0]===`Artifact ${artifactName} has been successfully uploaded! Final size is ${origin.artifact_bytes} bytes. Artifact ID is ${origin.artifact_id}`,
+    'Missing or ambiguous actual original package upload receipt');
+  // Other receipts may have their own archive digests. The exact output digest
+  // must occur once, and the artifact API independently binds it to this name.
+  demand(lines.filter(line=>line===`SHA256 digest of uploaded artifact zip is ${origin.artifact_digest}`).length===1,'Original package upload digest differs');
+  const manifest=JSON.parse(manifestRaw);
+  demand(manifest.version===1&&manifest.kind==='original-cloudflare-package-output'&&manifest.source?.head===origin.head&&
+    Array.isArray(manifest.output?.files)&&manifest.output.files.length>0&&manifest.output.files.length<=20000&&
+    assemblyPositive(manifest.output.bytes)&&Number.isSafeInteger(manifest.output.bytes),'Original package manifest differs');
+  root=fs.realpathSync(root);const expected=new Set();let bytes=0;
+  for(const pin of manifest.output.files){demand(assemblySafe(pin.path)&&/^dist\/(client|cloudflare)\//.test(pin.path)&&
+      !expected.has(pin.path)&&Number.isSafeInteger(pin.bytes)&&pin.bytes>=0&&Number.isSafeInteger(pin.bytes)&&assemblyDigest(pin.sha256),'Invalid original output roster');
+    expected.add(pin.path);bytes+=pin.bytes;demand(assemblySame(assemblyFile(root,pin.path),pin),'Original output member changed');}
+  demand(bytes===manifest.output.bytes,'Original output total differs');
+  const found=[];const visit=relative=>{const absolute=path.join(root,relative),stat=fs.lstatSync(absolute);
+    demand(!stat.isSymbolicLink(),'Original output cannot contain links');
+    if(stat.isDirectory())for(const name of fs.readdirSync(absolute))visit(relative+'/'+name);
+    else{demand(stat.isFile(),'Original output must be ordinary');found.push(relative);}};
+  visit('dist');demand(assemblySame(found.sort(),[...expected].sort()),'Original output complete inventory differs');
+  const token=Object.freeze({kind:'authenticated-original-cloudflare-output',source_head:origin.head});
+  packageAssemblies.set(token,{root,manifest,origin:structuredClone(origin),manifest_sha256:assemblyHash(manifestRaw),fingerprint:valueSha(manifest)});
+  return token;
+}
+
+export function requireOriginalPackageOutput(token) {
+  const value=packageAssemblies.get(token);
+  demand(value&&value.fingerprint===valueSha(value.manifest),'Privately authenticated original package output required');
+  return value;
+}
+
+const currentAssemblies=new WeakMap();
+function assemblyGit(root,args,input) {
+  return execFileSync('git',['-C',root,...args],{encoding:'utf8',input,maxBuffer:32*1048576,
+    env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_TERMINAL_PROMPT:'0'}});
+}
+function assemblyCode(source,executingRoot) {
+  const names=new Set(),files=[];let admitted=0;
+  const visit=name=>{
+    demand(assemblySafe(name),'Safe assembly code path required');if(names.has(name))return;names.add(name);
+    demand(names.size<=512,'Assembly code closure exceeds admission');
+    const stat=ordinary(path.join(executingRoot,name));admitted+=2*stat.size;
+    demand(stat.size<=32*1048576&&admitted<=32*1048576,'Assembly code bytes exceed admission');
+    const raw=fs.readFileSync(path.join(executingRoot,name)),mode=stat.mode&0o111?'100755':'100644';
+    const oid=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
+    demand(assemblyGit(source,['ls-tree','HEAD','--',name]).trim()===`${mode} blob ${oid}\t${name}`,'Executing assembly code differs from current source');
+    files.push({path:name,mode,bytes:raw.length,sha256:assemblyHash(raw),git_blob:oid});
+    for(const match of raw.toString('utf8').matchAll(/(?:from\s*|import\s*(?:\(\s*)?)['"]([^'"]+)['"]/g))
+      if(match[1].startsWith('.'))visit(path.posix.normalize(path.posix.join(path.posix.dirname(name),match[1])));
+  };
+  visit('scripts/assemble-selected-package.mjs');return files.sort((a,b)=>a.path.localeCompare(b.path,'en'));
+}
+
+function assemblySourceAdmission(original,source) {
+  const before=requireOriginalPackageOutput(original).manifest.source,definition=loadPackageInputs(source);
+  const read=name=>{
+    const file=path.join(source,name),stat=ordinary(file);demand(stat.size<=8*1048576,'Bounded assembly source metadata required');
+    const raw=fs.readFileSync(file),oid=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
+    demand(assemblyGit(source,['ls-tree','HEAD','--',name]).trim()===`100644 blob ${oid}\t${name}`,'Assembly metadata differs from actual Git source');return JSON.parse(raw);
+  };
+  demand(assemblySame(read('.github/package-inputs.json'),definition),'Current package definition drift');
+  const selection=read('data/ownership-selection.json');
+  const {inputs:oldInputs,...oldPolicy}=before.definition,{inputs:newInputs,...newPolicy}=definition;
+  demand(assemblySame(oldPolicy,newPolicy)&&assemblySame(oldInputs,newInputs.slice(0,oldInputs.length)),'Original package policy changed');
+  const {additive_release:oldHook,...oldBase}=before.selection,{additive_release:newHook,...newBase}=selection;
+  demand(oldHook&&newHook&&assemblySame(oldBase,newBase),'Original package base selection changed');
+  const all=assemblyGit(source,['ls-tree','-rz','--full-tree','HEAD']).split('\0').filter(Boolean).map(line=>{
+    const tab=line.indexOf('\t'),[mode,type,oid]=line.slice(0,tab).split(' ');return {path:line.slice(tab+1),mode,type,oid};
+  });
+  const programmePath=name=>name!=='.github/package-inputs.json'&&(!name.includes('/')||/^(?:scripts|test|src|hosted|\.github)\//.test(name)||/\.(?:mjs|cjs|js|py|sh)$/.test(name));
+  const rows=all.filter(row=>containsPackagePath(definition.inputs,row.path)||programmePath(row.path));
+  demand(rows.every(row=>row.type==='blob'&&['100644','100755'].includes(row.mode)),'Ordinary original input/programme roles required');
+  const plain=rows.map(({type,...row})=>row),programme=plain.filter(row=>programmePath(row.path)).sort((a,b)=>a.path.localeCompare(b.path,'en'));
+  demand(Array.isArray(before.programme)&&before.programme.length>0&&assemblySame(before.programme,programme),'Original producer/test/workflow programme changed');
+  const current=new Map(plain.filter(row=>containsPackagePath(definition.inputs,row.path)).map(row=>[row.path,row]));
+  const old=new Map(before.files.map(row=>[row.path,row])),exceptions=new Set(['.github/package-inputs.json','data/ownership-selection.json']);
+  demand(old.size===before.files.length&&old.size>0,'Complete unique original source inventory required');
+  for(const [name,row]of old)demand(current.has(name)&&(exceptions.has(name)||assemblySame(row,current.get(name))),'Original package input changed: '+name);
+  const added=newInputs.slice(oldInputs.length);
+  demand(added.every(name=>!name.endsWith('/')&&/^coordination\/engineering\/[^/]+\/.+\.(?:json|jsonl\.gz|json\.gz|log)$/.test(name)&&current.get(name)?.mode==='100644'),'Exact inert selected additions required');
+  for(const name of current.keys())demand(old.has(name)||added.includes(name),'New directory or optional package input is not invariant');
+  return added;
+}
+
+// Separate from package-issued full-build execution: this authenticates only the
+// actual small assembly programme and its immutable current source identities.
+export function issuePackageAssemblyExecution({original,source,stage,executingRoot,inheritedMetadata}) {
+  requireOriginalPackageOutput(original);
+  demand(Array.isArray(inheritedMetadata)&&inheritedMetadata.length===5,'Complete assembly metadata frame required');
+  const metadataBytes=2*valueBytes(inheritedMetadata).length;
+  demand(process.execArgv.length===0&&!process.env.NODE_OPTIONS?.trim()&&!process.env.NODE_PATH?.trim(),'Plain assembly Node execution required');
+  source=fs.realpathSync(source);stage=fs.realpathSync(stage);executingRoot=fs.realpathSync(executingRoot);
+  const pendingInputs=assemblySourceAdmission(original,source);
+  demand(path.resolve(process.argv[1])===path.join(executingRoot,'scripts/assemble-selected-package.mjs'),'Actual assembly driver required');
+  const files=assemblyCode(source,executingRoot), executable=fs.realpathSync(process.execPath);
+  const runtimeStat=ordinary(executable);demand(runtimeStat.size+files.reduce((n,row)=>n+2*row.bytes,0)+metadataBytes+16*1048576<=256*1048576,'Complete assembly execution exceeds admission');
+  const runtime={...assemblyFile(path.dirname(executable),path.basename(executable),256*1048576),
+    executable,version:process.version,versions:process.versions,platform:process.platform,arch:process.arch};
+  delete runtime.path;
+  const record=Object.freeze({kind:'current-selected-package-assembly',source_root:source,
+    source_commit:assemblyGit(source,['rev-parse','HEAD']).trim(),source_tree:assemblyGit(source,['rev-parse','HEAD^{tree}']).trim(),
+    stage_root:stage,entry_point:'scripts/assemble-selected-package.mjs',files,runtime,original,inherited_metadata_bytes:metadataBytes,pending_selected_inputs:pendingInputs});
+  currentAssemblies.set(record,{executingRoot,fingerprint:valueSha(record)});return record;
+}
+export function requirePackageAssemblyExecution(record) {
+  const held=currentAssemblies.get(record);demand(held&&held.fingerprint===valueSha(record),'Private current assembly execution required');
+  requireOriginalPackageOutput(record.original);
+  demand(assemblyGit(record.source_root,['rev-parse','HEAD']).trim()===record.source_commit&&
+    assemblyGit(record.source_root,['rev-parse','HEAD^{tree}']).trim()===record.source_tree,'Assembly source changed');
+  demand(assemblySame(assemblyCode(record.source_root,held.executingRoot),record.files),'Assembly code changed');
+  const runtime=assemblyFile(path.dirname(record.runtime.executable),path.basename(record.runtime.executable),256*1048576);
+  demand(runtime.bytes===record.runtime.bytes&&runtime.sha256===record.runtime.sha256&&record.runtime.version===process.version,'Assembly runtime changed');
+  return record;
+}
+
+export function packageSelectedPublicationInventory(token,{root}) {
+  const value=publications.get(token);
+  demand(value&&value.root===fs.realpathSync(root),'Authenticated publication inventory required');
+  return structuredClone(value.input_inventory);
 }

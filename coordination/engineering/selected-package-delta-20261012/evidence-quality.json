@@ -1,0 +1,272 @@
+{
+  "version": 1,
+  "issue": 1798,
+  "lane": "engineering",
+  "worker_id": "01a1318e-30d9-7357-8b8d-6162a6b4b034",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "cf11a9c434e798a2099ea406b29e842f27fe05ea",
+    "files": [
+      {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 51269,
+        "sha256": "cc46d314b93d641387257d734d92c0d3e173f2474201c35638b02c2f667ccf21",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs",
+        "bytes": 11700,
+        "sha256": "f8a0480892b495317860beb88fcb9902f53133ba0b359a6b15eea18e9f71fab6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-integration-tests.mjs",
+        "bytes": 11277,
+        "sha256": "4a924b15cfb02b5ec1168c67730bb4bbd1c75bf1e9c1b0e223735c1297840d43",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/compact-ownership.test.mjs",
+        "bytes": 29469,
+        "sha256": "dd4b2f73a8cb62918c9b65a34589e395ee8d27440c5c7b8fb765fb18eac374b6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/integration-profile-restoration.test.mjs",
+        "bytes": 13298,
+        "sha256": "87316b8a99c9b4ea68002ba27aea717011ee4aac7e87daecdfdc7287c18c39f8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/trusted-workflow-checkouts.test.mjs",
+        "bytes": 40558,
+        "sha256": "db765afaee775c1a3a47def0e19853c2f352abbc8922d788636f578425f3bc16",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "bytes": 56840,
+      "sha256": "43056c7fa2cddab8df26f79c2d16e2f9abf044014dd5490357127150617bba92",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs",
+      "bytes": 29253,
+      "sha256": "010eb38ec0794b5e812a5d9765b86eb44c1df7db06f5a902e07f198d7167b35e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-package-delta-20261012/README.md",
+      "bytes": 5313,
+      "sha256": "9cd864fa1f0b5fe15489aa4d6d3ec90f0674e964713f46e99e6c80a2cd8256c0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-package-delta-20261012/validation.json",
+      "bytes": 2212,
+      "sha256": "8389b5340a38e2d1ac5b66290dfe9683bdf07e746a2ae60c28295a547b082400",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/assemble-selected-package.mjs",
+      "bytes": 16844,
+      "sha256": "0aa25c7b43d1db1cd63cf5097d3f3cacae4cce303838af993fc791aa332a51f1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/compare-selected-package-output.mjs",
+      "bytes": 2599,
+      "sha256": "6d0d12c672993ebef078e724157ba15956e45fe4c4f3fe414678eb6570214c2e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/extract-package-output.py",
+      "bytes": 7268,
+      "sha256": "d6bf299cc388ad11c1752c66670cc633bb32bfc1d87381bd4c7d7ad03aa2f0b9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/package-output-artifact.mjs",
+      "bytes": 19840,
+      "sha256": "d91ca7446c33c9c7873a32afed99922fc77b656cf1bcfdfdc2b0c3d7c948e2ed",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "bytes": 13469,
+      "sha256": "3a2a1ef9c045b42eaced879114b1ca00d9300ae13d7beaaaa3c73dcc61800d27",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/selected-package-bootstrap.py",
+      "bytes": 5496,
+      "sha256": "6d72f3d5f3005160ffa1bfea3ef14838670203860b7cb5839a092dff81d35c9b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/canonical-compact-repack.test.mjs",
+      "bytes": 2417,
+      "sha256": "0d85b78b6621e6bfad29f896db0f2681f6df57541d79f849c5d956fbe219f181",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/compact-ownership.test.mjs",
+      "bytes": 28145,
+      "sha256": "6ce5b06ec48e68f1122c19c152803f356002123833244935960d8f9658a1590f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/integration-profile-restoration.test.mjs",
+      "bytes": 15137,
+      "sha256": "c87e7f045487102a9ce470a0f9df044a2f11c99ff5b5a709d6314534a01cc6b8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/package-output-artifact.test.mjs",
+      "bytes": 12478,
+      "sha256": "9f26757287443936841da2b8569f3d3f684b7a3fcadb47061158cddff26a9fb0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/selected-package-assembly.test.mjs",
+      "bytes": 7451,
+      "sha256": "61eb8a6b5106af3c8db64dfa028e2f8a4027edfc5385f2e3325ad80cf7ddd525",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/selected-package-bootstrap-controls.py",
+      "bytes": 16279,
+      "sha256": "11eeb68e0209d4df7fb2362c60f14792ed49bd02365227cc654dff5f2785284d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/selected-package-bootstrap.test.mjs",
+      "bytes": 501,
+      "sha256": "27efe91b2373986707df35cfcef1b7be934dfef82c7a9da68e61f981df217f12",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/trusted-workflow-checkouts.test.mjs",
+      "bytes": 42051,
+      "sha256": "6558cd857e3c1abcc3fedce0258771ad9a8290fa4f9bf49c72ad5a189e87d9e9",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "selected-package-authority-and-assembly",
+      "kind": "code",
+      "description": "Actual source/image, artifact custody, private authority, trusted startup and runner entry points are exercised with adversarial synthetic fixtures. Genuine full-output equivalence and changed-batch timing remain pending first retained hosted output.",
+      "software": "Node v24.19.0; Python standard library",
+      "units": "Actual file identities, executed checks and explicit inherited-proof scope"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/package-output-artifact.test.mjs test/selected-package-assembly.test.mjs test/selected-package-bootstrap.test.mjs test/integration-profile-restoration.test.mjs",
+    "node --test test/package-build.test.mjs",
+    "node --test test/trusted-workflow-checkouts.test.mjs test/integration-profile.test.mjs",
+    "git diff --check"
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "status": "modified",
+      "original_sha256": "cc46d314b93d641387257d734d92c0d3e173f2474201c35638b02c2f667ccf21"
+    },
+    {
+      "path": "coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs",
+      "status": "modified",
+      "original_sha256": "f8a0480892b495317860beb88fcb9902f53133ba0b359a6b15eea18e9f71fab6"
+    },
+    {
+      "path": "coordination/engineering/selected-package-delta-20261012/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/selected-package-delta-20261012/validation.json",
+      "status": "added"
+    },
+    {
+      "path": "scripts/assemble-selected-package.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/compare-selected-package-output.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/extract-package-output.py",
+      "status": "added"
+    },
+    {
+      "path": "scripts/package-output-artifact.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "status": "modified",
+      "original_sha256": "4a924b15cfb02b5ec1168c67730bb4bbd1c75bf1e9c1b0e223735c1297840d43"
+    },
+    {
+      "path": "scripts/selected-package-bootstrap.py",
+      "status": "added"
+    },
+    {
+      "path": "test/canonical-compact-repack.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/compact-ownership.test.mjs",
+      "status": "modified",
+      "original_sha256": "dd4b2f73a8cb62918c9b65a34589e395ee8d27440c5c7b8fb765fb18eac374b6"
+    },
+    {
+      "path": "test/integration-profile-restoration.test.mjs",
+      "status": "modified",
+      "original_sha256": "87316b8a99c9b4ea68002ba27aea717011ee4aac7e87daecdfdc7287c18c39f8"
+    },
+    {
+      "path": "test/package-output-artifact.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/selected-package-assembly.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/selected-package-bootstrap-controls.py",
+      "status": "added"
+    },
+    {
+      "path": "test/selected-package-bootstrap.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/trusted-workflow-checkouts.test.mjs",
+      "status": "modified",
+      "original_sha256": "db765afaee775c1a3a47def0e19853c2f352abbc8922d788636f578425f3bc16"
+    },
+    {
+      "path": "coordination/engineering/selected-package-delta-20261012/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [],
+  "validation": []
+}

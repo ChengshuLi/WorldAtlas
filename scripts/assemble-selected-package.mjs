@@ -1,0 +1,206 @@
+// Executed only after trusted selected-data classification proves this complete
+// programme is unchanged from the PR base. API credentials stay in trusted code;
+// subprocesses and the current scientific reader receive no token environment.
+import fs from 'node:fs';
+import fsp from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+import {githubAPI, githubPages} from './issue-claim-contract.mjs';
+import {integrationTree} from './integration-profile.mjs';
+import {loadPackageInputs, readPackageInputs, containsPackagePath} from './package-inputs.mjs';
+import {inspectPackageRuntime, verifyPackageDependencies} from './package-build.mjs';
+import {committedPackageInputs, committedPackageProgramme, packageProducerPath, packageBuildConfiguration,
+  validatePackageOutputManifest, admitPackageOutputTransition, streamedPackageFile, installedPackageIdentity} from './package-output-artifact.mjs';
+import {authenticateOriginalPackageOutput, issuePackageAssemblyExecution, preparePackageSelectedAdditive,
+  publishPackageSelectedAdditive, packageSelectedPublicationInventory, requirePackageAssemblyExecution}
+  from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
+
+const need=(ok,message)=>{if(!ok)throw Error(message);};
+const hash=raw=>createHash('sha256').update(raw).digest('hex');
+const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+const root=path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+const git=args=>execFileSync('git',['-C',root,...args],{encoding:'utf8',maxBuffer:32*1048576,
+  env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_TERMINAL_PROMPT:'0'}}).trim();
+const ordered=rows=>rows.sort((a,b)=>a.path.localeCompare(b.path,'en'));
+const treeRows=tree=>ordered([...tree.entries.values()].filter(row=>row.type==='blob').map(row=>({path:row.path,mode:row.mode,oid:row.sha})));
+
+async function blobJSON(api,repo,tree,name){
+  const row=tree.entries.get(name);need(row?.type==='blob'&&row.mode==='100644'&&row.size<=8*1048576,'Bounded ordinary original metadata required');
+  const blob=await api(`/repos/${repo}/git/blobs/${row.sha}`);need(blob.encoding==='base64','Original metadata body unavailable');
+  const raw=Buffer.from(blob.content,'base64');need(raw.length===row.size&&createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex')===row.sha,'Original metadata Git identity differs');
+  return JSON.parse(raw);
+}
+function sourceCompatible(before,current){
+  const {inputs:oldInputs,...oldPolicy}=before.definition,{inputs:newInputs,...newPolicy}=current.definition;
+  if(!same(oldPolicy,newPolicy)||!same(oldInputs,newInputs.slice(0,oldInputs.length)))return false;
+  const {additive_release:oldHook,...oldBase}=before.selection,{additive_release:newHook,...newBase}=current.selection;
+  if(!oldHook||!newHook||!same(oldBase,newBase)||!same(before.programme,current.programme))return false;
+  const now=new Map(current.files.map(row=>[row.path,row]));
+  return before.files.every(row=>now.has(row.path)&&(['.github/package-inputs.json','data/ownership-selection.json'].includes(row.path)||same(row,now.get(row.path))));
+}
+
+export async function findOriginalPackage({api,repo,current}){
+  // A small recent-result search is an optimization. Exhaustion means a full
+  // build, never a claim that no older result exists.
+  const response=await api(`/repos/${repo}/actions/workflows/merge-integration-checks.yml/runs?event=pull_request&per_page=20&page=1`);
+  need(Array.isArray(response.workflow_runs),'Original run discovery unavailable');
+  const seen=new Set();
+  for(const run of response.workflow_runs){
+    if(run.status!=='completed'||seen.has(run.head_sha)||run.repository?.full_name!==repo||run.head_repository?.full_name!==repo)continue;
+    seen.add(run.head_sha);
+    const tree=await integrationTree(api,repo,run.head_sha),all=treeRows(tree);
+    const programme=all.filter(row=>packageProducerPath(row.path));
+    if(!same(programme,current.programme))continue;
+    const definition=await readPackageInputs({route:`/repos/${repo}`,base:run.head_sha,api});
+    const source={head:run.head_sha,tree:tree.object.tree.sha,definition,programme,
+      files:all.filter(row=>containsPackagePath(definition.inputs,row.path)),
+      selection:await blobJSON(api,repo,tree,'data/ownership-selection.json')};
+    if(!sourceCompatible(source,current))continue;
+    const jobs=await githubPages(async route=>(await api(route)).jobs,
+      `/repos/${repo}/actions/runs/${run.id}/attempts/${run.run_attempt}/jobs`);
+    const candidates=jobs.filter(job=>job.status==='completed'&&job.conclusion==='success'&&
+      job.steps?.some(step=>['Retain original full-regression package output','Retain original selected package output'].includes(step.name)&&step.conclusion==='success'));
+    if(candidates.length!==1)continue;
+    const artifactName=`cloudflare-package-output-${run.id}-${run.run_attempt}`;
+    const inventory=await api(`/repos/${repo}/actions/runs/${run.id}/artifacts?per_page=100&page=1`);
+    if(!Array.isArray(inventory.artifacts)||inventory.total_count!==inventory.artifacts.length)continue;
+    const matches=inventory.artifacts.filter(row=>row.name===artifactName&&!row.expired);
+    if(matches.length!==1)continue;
+    const artifact=matches[0];
+    if(!/^sha256:[a-f0-9]{64}$/.test(artifact.digest??'')||!Number.isSafeInteger(artifact.size_in_bytes)||artifact.size_in_bytes<=0)continue;
+    return {source,origin:{run_id:run.id,run_attempt:run.run_attempt,job_id:candidates[0].id,head:run.head_sha,
+      artifact_id:artifact.id,artifact_name:artifactName,artifact_digest:artifact.digest.slice(7),artifact_bytes:artifact.size_in_bytes}};
+  }
+  return null;
+}
+
+async function downloadOriginal(api,repo,origin,destination){
+  const response=await api.artifactRedirect(`/repos/${repo}/actions/artifacts/${origin.artifact_id}/zip`);
+  need(response.status===302,'Original output artifact unavailable');
+  const url=new URL(response.headers.get('location'));
+  need(url.protocol==='https:'&&!url.username&&!url.password&&url.hostname.endsWith('.blob.core.windows.net'),'Unsupported original output delivery');
+  const delivery=await fetch(url,{redirect:'error',signal:AbortSignal.timeout(120000)});
+  need(delivery.ok&&delivery.body,'Original output delivery failed');
+  const fd=fs.openSync(destination,'wx',0o600),digest=createHash('sha256');let bytes=0;
+  try{for await(const chunk of delivery.body){bytes+=chunk.length;need(bytes<=origin.artifact_bytes,'Original archive exceeds authenticated bytes');digest.update(chunk);fs.writeSync(fd,chunk);}}
+  finally{fs.closeSync(fd);}
+  need(bytes===origin.artifact_bytes&&digest.digest('hex')===origin.artifact_digest,'Original output archive differs');
+}
+
+function currentSource(){
+  const definition=loadPackageInputs(root);
+  const actual=relative=>{
+    const raw=fs.readFileSync(path.join(root,relative)),row=git(['ls-tree','HEAD','--',relative]);
+    need(row===`100644 blob ${createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex')}\t${relative}`,'Current selected metadata differs from Git');return JSON.parse(raw);
+  };
+  need(same(actual('.github/package-inputs.json'),definition),'Current package declaration differs');
+  return {head:git(['rev-parse','HEAD']),tree:git(['rev-parse','HEAD^{tree}']),definition,
+    selection:actual('data/ownership-selection.json'),input_definition_sha256:hash(fs.readFileSync(path.join(root,'.github/package-inputs.json'))),
+    files:committedPackageInputs(root,definition),programme:committedPackageProgramme(root)};
+}
+
+export async function assembleSelectedPackage({api,repo,expectedHead}){
+  const started=performance.now(),current=currentSource();need(current.head===expectedHead,'Actual selected head changed');
+  const found=await findOriginalPackage({api,repo,current});if(!found)return {assembled:false,reason:'No applicable retained original output in bounded recent-result search'};
+  const runtime=inspectPackageRuntime(root);need(runtime.errors.length===0,'Current assembly runtime/dependency preflight failed');
+  await verifyPackageDependencies(path.join(root,'node_modules'));
+  const stat=fs.statfsSync(root),diskNeeded=2*found.origin.artifact_bytes+32*1048576;
+  need(Number.isSafeInteger(diskNeeded)&&stat.bavail*stat.bsize>=diskNeeded,'Insufficient disk for retained archive and fresh output');
+  const scratch=await fsp.mkdtemp(path.join(root,'.cache/selected-package-'));
+  let committed=false,preserveScratch=false;
+  try{
+    const archive=path.join(scratch,'original.zip'),manifestFile=path.join(scratch,'manifest.json');
+    await downloadOriginal(api,repo,found.origin,archive);
+    const pythonArgs=[path.join(root,'scripts/extract-package-output.py')];
+    execFileSync('python3',[...pythonArgs,'--manifest',archive,manifestFile,found.origin.artifact_digest],{stdio:'pipe',maxBuffer:1048576});
+    const manifestRaw=fs.readFileSync(manifestFile),manifest=validatePackageOutputManifest(JSON.parse(manifestRaw));
+    for(const key of ['head','tree','definition','files','programme','selection'])need(same(manifest.source[key],found.source[key]),'Retained manifest differs from original immutable source: '+key);
+    need(same(manifest.runtime.installed,installedPackageIdentity(root,runtime.python.imports))&&manifest.runtime.node===process.version&&manifest.runtime.platform===process.platform&&manifest.runtime.arch===process.arch&&
+      same(manifest.runtime.versions,process.versions)&&manifest.runtime.dependencies===runtime.package_lock_sha256&&
+      same(manifest.runtime.python,{version:runtime.python.version,imports:runtime.python.imports})&&
+      same(manifest.configuration,packageBuildConfiguration()),'Original runtime/dependencies/configuration differ');
+    const originalRoot=path.join(scratch,'original');
+    execFileSync('python3',[...pythonArgs,archive,manifestFile,originalRoot,found.origin.artifact_digest],{stdio:'pipe',maxBuffer:1048576});
+    const original=await authenticateOriginalPackageOutput({api,repo,origin:found.origin,root:originalRoot,manifestRaw});
+    const stage=path.join(scratch,'assembly');fs.mkdirSync(stage);
+    for(const name of ['.github/package-inputs.json','data/ownership-selection.json']){
+      fs.mkdirSync(path.dirname(path.join(stage,name)),{recursive:true});fs.copyFileSync(path.join(root,name),path.join(stage,name),fs.constants.COPYFILE_EXCL);
+    }
+    const atlasPath=path.join(originalRoot,'dist/client/atlas-geography.json');
+    need(fs.statSync(atlasPath).size<=8*1048576,'Atlas metadata exceeds assembly admission');
+    const atlas=JSON.parse(fs.readFileSync(atlasPath));need(atlas.additiveRelease?.base_reference,'Original additive base descriptor missing');
+    const execution=issuePackageAssemblyExecution({original,source:root,stage,executingRoot:root,
+      inheritedMetadata:[current,found.source,manifest,atlas,runtime]});
+    const publication=await preparePackageSelectedAdditive({root:stage,originalPackage:original,assemblyExecution:execution,
+      selectedGrid:{sha256:current.selection.sha256},geographicRelease:atlas.additiveRelease.base_reference});
+    need(publication,'Genuine current additive publication required');
+    const consumed=packageSelectedPublicationInventory(publication,{root:stage});
+    const transition=admitPackageOutputTransition(manifest,current,consumed.map(row=>row.path));
+    const oldAssets=['base_manifest','ledger','owner_roster','patch'].map(role=>atlas.additiveRelease[role]);
+    need(oldAssets.every(pin=>/^additive-repairs\/[A-Za-z0-9_.-]+$/.test(pin?.path??''))&&new Set(oldAssets.map(pin=>pin.path)).size===4,'Original four public additive assets required');
+    for(const pin of oldAssets)need(same(streamedPackageFile(originalRoot,'dist/client/'+pin.path),{path:'dist/client/'+pin.path,bytes:pin.bytes,sha256:pin.sha256}),'Original additive output differs');
+    const mutable=new Set(oldAssets.map(pin=>'dist/client/'+pin.path));mutable.add('dist/client/atlas-geography.json');
+    for(const role of ['base_manifest','ledger','owner_roster','patch']){
+      const name='dist/client/'+publication.additiveRelease[role].path;
+      need(!manifest.output.files.some(pin=>pin.path===name&&!mutable.has(name)),'New additive asset collides with invariant output');
+    }
+    fs.renameSync(path.join(originalRoot,'dist/client'),path.join(stage,'dist'));
+    for(const pin of oldAssets)fs.unlinkSync(path.join(stage,'dist',pin.path));
+    publishPackageSelectedAdditive(publication,{root:stage});
+    atlas.reference_release=publication.reference_release;atlas.additiveRelease=publication.additiveRelease;
+    fs.writeFileSync(path.join(stage,'dist/atlas-geography.json'),JSON.stringify(atlas));
+    fs.renameSync(path.join(stage,'dist'),path.join(stage,'client'));
+    fs.mkdirSync(path.join(stage,'dist'));fs.renameSync(path.join(stage,'client'),path.join(stage,'dist/client'));
+    fs.renameSync(path.join(originalRoot,'dist/cloudflare'),path.join(stage,'dist/cloudflare'));
+    for(const pin of manifest.output.files)if(!mutable.has(pin.path))need(same(streamedPackageFile(stage,pin.path),pin),'Invariant output changed during assembly');
+    requirePackageAssemblyExecution(execution);
+    const assembly={kind:'retained-original-output-plus-current-additive',origin:found.origin,
+      original_manifest_sha256:hash(manifestRaw),transition,current_execution:execution,
+      original_base_context_retained:true,base_restoration_invoked:false,invariant_build_invoked:false,
+      base_tests_reused:['test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs'],
+      current_selected_inputs:consumed,elapsed_seconds:(performance.now()-started)/1000};
+    const receipt={version:1,kind:'cloudflare',input_definition_sha256:current.input_definition_sha256,assembly,
+      preflight:{passed:true,errors:[],inputs:{head:current.head},runtime,
+        limitation:'Current assembly code, dependency and selected-source admission; original invariant build is reused, not reexecuted.'}};
+    const receiptRaw=Buffer.from(JSON.stringify(receipt,null,2)+'\n');
+    const receiptTarget=path.join(root,'.cache/package-input-build.json'),stagedReceipt=path.join(scratch,'receipt.json');
+    fs.writeFileSync(stagedReceipt,receiptRaw,{flag:'wx'});
+    const target=path.join(root,'dist'),backup=path.join(scratch,'previous-dist'),oldReceipt=path.join(scratch,'previous-receipt');
+    const existed=fs.existsSync(target),receiptExisted=fs.existsSync(receiptTarget);
+    let outputPublished=false,receiptPublished=false,outputSaved=false,receiptSaved=false;
+    try{
+      if(existed){fs.renameSync(target,backup);outputSaved=true;}
+      if(receiptExisted){fs.renameSync(receiptTarget,oldReceipt);receiptSaved=true;}
+      fs.renameSync(path.join(stage,'dist'),target);outputPublished=true;
+      fs.renameSync(stagedReceipt,receiptTarget);receiptPublished=true;
+    }catch(error){
+      try{
+        if(receiptPublished)fs.renameSync(receiptTarget,stagedReceipt);
+        if(outputPublished)fs.renameSync(target,path.join(stage,'dist'));
+        if(receiptSaved)fs.renameSync(oldReceipt,receiptTarget);
+        if(outputSaved)fs.renameSync(backup,target);
+      }catch(rollback){preserveScratch=true;throw new AggregateError([error,rollback],'Output rollback requires preserved scratch recovery');}
+      throw error;
+    }
+    committed=true;
+    return {assembled:true,receipt_sha256:hash(receiptRaw),origin:found.origin,elapsed_seconds:assembly.elapsed_seconds,
+      reused_output_files:manifest.output.files.length-mutable.size,current_additive_assets:4};
+  }finally{
+    if(!preserveScratch)try{await fsp.rm(scratch,{recursive:true,force:true});}
+    catch(error){if(!committed)throw error;console.warn('Committed selected output is valid; temporary output cleanup remains pending');}
+  }
+}
+
+if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
+  let result;
+  try{
+    need(process.argv.length===2&&process.env.GH_TOKEN&&process.env.GITHUB_REPOSITORY&&process.env.GITHUB_EVENT_PATH,'Trusted selected-data CI invocation required');
+    const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
+    const api=githubAPI(process.env.GH_TOKEN,{conditionalReads:false});delete process.env.GH_TOKEN;delete process.env.GITHUB_TOKEN;
+    result=await assembleSelectedPackage({api,repo:process.env.GITHUB_REPOSITORY,expectedHead:event.pull_request?.head?.sha});
+  }catch(error){result={assembled:false,reason:String(error.message).replace(/https?:\/\/\S+/g,'[delivery address]').slice(0,600)};}
+  console.log(JSON.stringify(result));
+  if(process.env.GITHUB_OUTPUT)fs.appendFileSync(process.env.GITHUB_OUTPUT,`assembled=${result.assembled}\nassembly_sha256=${result.receipt_sha256??''}\n`);
+}

@@ -541,6 +541,9 @@ jobs:
       - name: Verify full-regression package controls
         if: needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
         run: node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs test/package-inputs.test.mjs test/package-build.test.mjs
+      - name: Snapshot original full-regression package inputs
+        if: needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
+        run: node scripts/package-output-artifact.mjs --snapshot
       - name: Build hosted assets
         if: needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
         run: npm run build:cloudflare
@@ -604,6 +607,23 @@ jobs:
           }
           console.log('Actual reviewed-head Cloudflare package and applicable native readback receipts verified.');
           NODE
+      - name: Inventory original full-regression package output
+        if: success() && needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
+        run: node scripts/package-output-artifact.mjs
+      - name: Retain original full-regression package output
+        if: success() && needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: cloudflare-package-output-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            dist/client/
+            dist/cloudflare/
+            .cache/package-output-manifest.json
+            .cache/package-input-build.json
+          include-hidden-files: true
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 30
       - name: Retain native built-output readback
         if: always() && needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -631,6 +651,7 @@ jobs:
     timeout-minutes: 30
     permissions:
       contents: read
+      actions: read
       # Authenticate the original PR base/head before materializing trusted code.
       pull-requests: read
     steps:
@@ -817,8 +838,46 @@ jobs:
       - name: Verify package controls
         run: node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs test/package-inputs.test.mjs test/package-build.test.mjs
         if: needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete')
+      # The trusted profile admits selected-data only when every executable,
+      # workflow and test body is unchanged from trusted base. No newly proposed
+      # helper receives credentials; absent helpers simply retain the full build.
+      - name: Assemble selected output from authenticated original package
+        id: selected_package
+        if: needs.profile.outputs.test_selection == 'selected-data' && needs.profile.outputs.metadata_reuse != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SELECTED_PACKAGE_TRUSTED_BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          python3 -I -B - <<'ASSEMBLY_BOOTSTRAP'
+          import base64, hashlib, json, os, re, urllib.error, urllib.request
+          try:
+              base = os.environ['SELECTED_PACKAGE_TRUSTED_BASE']
+              assert re.fullmatch('[a-f0-9]{40}', base)
+              assert os.environ['GITHUB_REPOSITORY'] == 'ChengshuLi/WorldAtlas'
+              class NoRedirect(urllib.request.HTTPRedirectHandler):
+                  def redirect_request(self, *_): raise ValueError('Unexpected bootstrap redirect')
+              url = 'https://api.github.com/repos/ChengshuLi/WorldAtlas/contents/scripts/selected-package-bootstrap.py?ref=' + base
+              request = urllib.request.Request(url, headers={'Authorization': 'Bearer ' + os.environ['GH_TOKEN'], 'Accept':'application/vnd.github+json'})
+              with urllib.request.build_opener(NoRedirect()).open(request, timeout=30) as response:
+                  raw = response.read(262145)
+              assert len(raw) <= 262144
+              blob = json.loads(raw)
+              assert blob['type'] == 'file' and blob['encoding'] == 'base64' and blob['path'] == 'scripts/selected-package-bootstrap.py'
+              body = base64.b64decode(''.join(blob['content'].split()), validate=True)
+              assert len(body) == blob['size'] and hashlib.sha1(('blob ' + str(len(body)) + '\0').encode() + body).hexdigest() == blob['sha']
+              exec(compile(body, '<authenticated trusted-base assembly bootstrap>', 'exec'), {'__name__':'__main__'})
+          except Exception as error:
+              # Any absence, unsupported dependency or authentication failure
+              # retains the genuine full build. Never run a candidate fallback
+              # helper with the API credential.
+              print('Selected output reuse admission unavailable: ' + type(error).__name__)
+              with open(os.environ['GITHUB_OUTPUT'], 'a') as output: output.write('assembled=false\n')
+          ASSEMBLY_BOOTSTRAP
+      - name: Snapshot original selected package inputs
+        if: needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete') && needs.profile.outputs.metadata_reuse != 'true' && steps.selected_package.outputs.assembled != 'true'
+        run: node scripts/package-output-artifact.mjs --snapshot
       - name: Build Cloudflare package without publishing
-        if: needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete')
+        if: needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete') && steps.selected_package.outputs.assembled != 'true'
         run: npm run build:cloudflare
       - name: Read back qualified native build outputs when selected
         if: needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete')
@@ -851,11 +910,29 @@ jobs:
         env:
           INTEGRATION_PROFILE: full
           INTEGRATION_SHARD: '0'
-          INTEGRATION_TEST_SELECTION: selected-data
+          INTEGRATION_TEST_SELECTION: ${{ steps.selected_package.outputs.assembled == 'true' && 'selected-output' || 'selected-data' }}
+          SELECTED_PACKAGE_ASSEMBLY_SHA256: ${{ steps.selected_package.outputs.assembly_sha256 }}
           SELECTED_EXPECTATIONS_PATH: ${{ needs.profile.outputs.expectations_path }}
         run: |
           node --input-type=module -e 'import {selectedDeliverySmoke} from "./scripts/integration-profile.mjs"; console.log(JSON.stringify({selected_delivery_smoke:await selectedDeliverySmoke(process.env.SELECTED_EXPECTATIONS_PATH)}));'
           node scripts/run-integration-tests.mjs
+      - name: Inventory original selected package output
+        if: success() && needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete') && needs.profile.outputs.metadata_reuse != 'true' && steps.selected_package.outputs.assembled != 'true'
+        run: node scripts/package-output-artifact.mjs
+      - name: Retain original selected package output
+        if: success() && needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete') && needs.profile.outputs.metadata_reuse != 'true' && steps.selected_package.outputs.assembled != 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: cloudflare-package-output-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            dist/client/
+            dist/cloudflare/
+            .cache/package-output-manifest.json
+            .cache/package-input-build.json
+          include-hidden-files: true
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 30
       - name: Record package rebuild inapplicability
         if: needs.profile.outputs.full == 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete')
         run: echo 'No declared package input or verification path changed; package unit tests and compilation are inapplicable. No current package size measurement is claimed.' >> "$GITHUB_STEP_SUMMARY"

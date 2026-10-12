@@ -1,11 +1,12 @@
 import fs from 'node:fs';
+import {createHash} from 'node:crypto';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {spawn, spawnSync} from 'node:child_process';
 import {compileHostedMigrations} from './compile-hosted-migrations.mjs';
 import {observeSetupPhase,measuredGitSetup} from './ci-setup-observations.mjs';
 
-export const PACKAGED_ASSET_TESTS = ['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
+export const PACKAGED_ASSET_TESTS = ['test/compact-ownership.test.mjs','test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs'];
 
 // Both PR CI and the trusted queue's isolated candidate checkout are shallow.
 // Read-only regression requires these exact original source/code vintages.
@@ -77,14 +78,15 @@ export function fullRegressionShard(inventory, shard) {
 }
 
 export function integrationTestFiles(profile, shard, testSelection = 'complete') {
-  if (!['complete','selected-data'].includes(testSelection) ||
-      (testSelection === 'selected-data' && (profile !== 'full' || shard !== 0))) throw Error('Invalid trusted test selection');
+  if (!['complete','selected-data','selected-output'].includes(testSelection) ||
+      (testSelection !== 'complete' && (profile !== 'full' || shard !== 0))) throw Error('Invalid trusted test selection');
   if (!['full','evidence'].includes(profile) || !Number.isInteger(shard) || shard < 0 || shard > 2 ||
       (profile === 'evidence' && shard !== 0)) throw Error('Invalid trusted integration test profile');
   const focused = ['handoff-scope','issue-claims','worker-result','regional-research-gate','geography-worker-lane',
     'evidence-quality','premerge-evidence','trusted-workflow-checkouts','merge-integration','merge-integration-client','merge-integration-entrypoint','integration-proof'];
   const inventory = fs.readdirSync('test').filter(name => name.endsWith('.test.mjs')).sort().map(name=>`test/${name}`);
-  const files = testSelection === 'selected-data' ? [...focused.map(name => `test/${name}.test.mjs`), ...PACKAGED_ASSET_TESTS]
+  const files = testSelection === 'selected-output' ? [...focused.map(name => `test/${name}.test.mjs`), 'test/compact-ownership.test.mjs']
+    : testSelection === 'selected-data' ? [...focused.map(name => `test/${name}.test.mjs`), ...PACKAGED_ASSET_TESTS]
     : profile === 'full' ? fullRegressionShard(inventory, shard) : focused.map(name => `test/${name}.test.mjs`);
   if (!files.length || files.some(name => !fs.existsSync(name))) throw Error('Missing integration test inventory');
   return files;
@@ -164,16 +166,38 @@ export async function streamTestProcess(args, {env = process.env,
     process.off('SIGINT', onInt); process.off('SIGTERM', onTerm);
   }
 }
+// The digest arrives from the just-completed trusted assembly step, not from
+// candidate-selected JSON. The originating job actually ran these two tests;
+// the current output/closure admission preserves their complete base inputs.
+export function requireRetainedPackageTests({directory=process.cwd(),expected=process.env.SELECTED_PACKAGE_ASSEMBLY_SHA256}={}) {
+  if(!/^[a-f0-9]{64}$/.test(expected??''))throw Error('Trusted current package assembly digest required');
+  const file=path.join(directory,'.cache/package-input-build.json'),stat=fs.lstatSync(file);
+  if(!stat.isFile()||stat.isSymbolicLink()||stat.size>8*1024*1024)throw Error('Bounded ordinary assembly receipt required');
+  const raw=fs.readFileSync(file);
+  if(createHash('sha256').update(raw).digest('hex')!==expected)throw Error('Current assembly receipt digest differs');
+  const receipt=JSON.parse(raw),assembly=receipt.assembly;
+  const head=spawnSync('git',['-C',directory,'rev-parse','HEAD'],{encoding:'utf8'});
+  if(head.status!==0||receipt.kind!=='cloudflare'||assembly?.kind!=='retained-original-output-plus-current-additive'||
+    assembly.current_execution?.source_commit!==head.stdout.trim()||receipt.preflight?.inputs?.head!==head.stdout.trim()||
+    assembly.base_restoration_invoked!==false||assembly.invariant_build_invoked!==false||
+    JSON.stringify(assembly.base_tests_reused)!==JSON.stringify(['test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs']))
+    throw Error('Actual same-head assembly and explicit original base-test proof required');
+  return {origin:assembly.origin,base_tests_reused:assembly.base_tests_reused,
+    limitation:'Original successful base checks reused; current compact/coverage/selected GPU+Canvas checks remain actual execution.'};
+}
+
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const profile = process.env.INTEGRATION_PROFILE, shard = Number(process.env.INTEGRATION_SHARD);
   const testSelection = process.env.INTEGRATION_TEST_SELECTION || 'complete';
   const files = integrationTestFiles(profile, shard, testSelection);
+  const retained=testSelection==='selected-output'?requireRetainedPackageTests():null;
+  if(retained)console.log(JSON.stringify({retained_package_tests:retained}));
   const git=measuredGitSetup();
-  const nativeInputs=await observeSetupPhase('immutable-regression-inputs',()=>prepareNativeRegressionInputs(profile,{run:git.run}),{counters:git.snapshot});
+  const nativeInputs=await observeSetupPhase('immutable-regression-inputs',()=>prepareNativeRegressionInputs(retained?'evidence':profile,{run:git.run}),{counters:git.snapshot});
   console.log(JSON.stringify({native_inputs:nativeInputs}));
   // Only full checkout readers consume canonical products. The focused evidence
   // profile deliberately has no canonical namespace in its sparse checkout.
-  if (profile === 'full') {
+  if (profile === 'full' && !retained) {
     const canonicalCheckout=await observeSetupPhase('canonical-checkout',async()=>{
       const {prepareCanonicalCheckout}=await import('./canonical-restoration.mjs');
       return prepareCanonicalCheckout();
