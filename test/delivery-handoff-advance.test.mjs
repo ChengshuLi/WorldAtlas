@@ -1817,3 +1817,17 @@ test('default automatic delivery revalidates the real claim before committing ne
   assert.deepEqual(fs.readFileSync(path.join(journal.target, 'requests/delivery-001-source-request.json')), prepared);
 });
 }
+
+test('automatic delivery uses the shared conditional observer transport without widening repository access', () => {
+  const route = '/repos/ChengshuLi/WorldAtlas/issues/1/comments?per_page=100&page=1';
+  let reads = 0;
+  const api = deliveryQueueAPI({execute: (_command, args) => {
+    if (++reads === 1) return 'HTTP/2.0 200 OK\r\nETag: W/"same"\r\n\r\n[{"id":1}]';
+    assert.ok(args.includes('If-None-Match: W/"same"'));
+    throw Object.assign(Error('gh 304'), {status: 1, signal: null,
+      stdout: 'HTTP/2.0 304 Not Modified\r\nETag: "same"\r\n\r\n'});
+  }});
+  assert.deepEqual(api(route), [{id: 1}]); assert.deepEqual(api(route), [{id: 1}]);
+  assert.throws(() => api('/repos/other/repo/issues/1/comments'), /Invalid bounded queue read/);
+  assert.equal(reads, 2);
+});

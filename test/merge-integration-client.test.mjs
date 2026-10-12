@@ -16,7 +16,7 @@ function harness(handler, overrides = {}) {
   const calls = [], waits = [], submissions = [], progress = [];
   return {calls, waits, submissions, progress,
     run: () => runMergeQueueClient({repo: 'owner/repo', number: 2, head, requestId,
-      resuming: true, now: () => time, random: () => 0,
+      resuming: true, now: () => time, wallNow: () => time, random: () => 0,
       sleep: async ms => {waits.push(ms); time += ms;},
       api: async (route, options) => {calls.push({route, time, timeout: options.timeoutMs}); return handler(route, calls, time);},
       submit: async value => {submissions.push(value);}, progress: value => progress.push(value), ...overrides})};
@@ -191,7 +191,7 @@ function run(scenario, observe = false) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-queue-cli-'));
   const stateFile = path.join(directory, 'state.json'), clock = path.join(directory, 'clock.mjs');
   fs.writeFileSync(stateFile, JSON.stringify({scenario, calls: [], polls: 0, request: 'stable-client-request'}));
-  fs.writeFileSync(clock, `const native=Date.now;let elapsed=0;Date.now=()=>native()+elapsed;globalThis.setTimeout=(f,ms)=>{elapsed+=ms;f();};`);
+  fs.writeFileSync(clock, `const native=Date.now;let elapsed=0;Date.now=()=>native()+elapsed;Object.defineProperty(performance,'now',{value:()=>elapsed});globalThis.setTimeout=(f,ms)=>{elapsed+=ms;f();};`);
   fs.writeFileSync(path.join(directory, 'gh'), `#!${process.execPath}\n` + String.raw`
 import fs from 'node:fs';
 const file=process.env.WORLDATLAS_FAKE_GH_STATE,s=JSON.parse(fs.readFileSync(file)),args=process.argv.slice(2),route=args.at(-1);
@@ -263,4 +263,204 @@ test('CLI waiting timeout returns pending, avoids cleanup and has bounded reads'
   assert.match(result.stdout, /pending/);
   assert.doesNotMatch(result.stdout, /local_cleanup/);
   assert.ok(state.calls.length <= 18, state.calls.length);
+});
+
+import {mergeQueueAPI} from '../scripts/merge-queue-client.mjs';
+const http = (status, body, headers = {}) => `HTTP/2.0 ${status} Response\r\n` +
+  Object.entries(headers).map(([key, value]) => `${key}: ${value}\r\n`).join('') + '\r\n' + (body === undefined ? '' : JSON.stringify(body));
+// This exercises both real observer and its gh adapter. Only GitHub transport,
+// sleeping and clocks are simulated; no workflow or scientific run is launched.
+function conditionalHarness({readyAt = Infinity, timeoutMs = 65 * 60_000, jitter = 0,
+  pages = 1, cache = true, modify = () => {}, wallOffset = 0, oversleep = 0} = {}) {
+  let time = 0; const calls = [], waits = [], progress = [], responses = [];
+  const api = mergeQueueAPI({execute: (_command, args) => {
+    const route = args.at(-1), conditional = args.includes('-H');
+    calls.push({route, conditional, time});
+    const isPR = route.includes('/pulls/'), finalPage = route.endsWith(`page=${pages}`);
+    const body = isPR ? pr(time >= readyAt) : finalPage ? [...registered(), ...(time >= readyAt ? [receipt()] : [])] :
+      Array.from({length: 100}, (_, n) => bot('unrelated', n + 10));
+    const etag = `"${isPR ? 'pr' : finalPage ? 'last' : 'first'}-${time >= readyAt ? 'ready' : 'waiting'}"`;
+    const status = args.includes(`If-None-Match: ${etag}`) ? 304 : 200;
+    const response = {status, body, headers: {Date: new Date(time).toUTCString(),
+      'x-ratelimit-limit': '5000', 'x-ratelimit-remaining': '4900', 'x-ratelimit-reset': '3600',
+      'x-ratelimit-resource': 'core', ...(cache ? {ETag: etag, 'cache-control': 'private, max-age=60'} : {})}};
+    modify(response, {route, time, calls}); responses.push(response.status);
+    const stdout = http(response.status, response.status === 304 ? undefined : response.body, response.headers);
+    // Match actual gh: authenticated 304 exits 1, with complete response headers.
+    if (response.status >= 300) throw Object.assign(Error('gh response'), {status: 1, signal: null, stdout});
+    return stdout;
+  }});
+  return {calls, waits, progress, responses, time: () => time,
+    run: () => runMergeQueueClient({repo: 'owner/repo', number: 2, head, requestId, observeOnly: true,
+      api, now: () => time, wallNow: () => time + wallOffset, random: () => jitter, timeoutMs,
+      sleep: async ms => {waits.push(ms); time += ms + oversleep;},
+      submit: () => {throw Error('Unexpected duplicate submission');}, progress: row => progress.push(row)})};
+}
+test('conditional observer detects late completion in 30 seconds instead of the reproduced 210, with four changed reads', async () => {
+  const h = conditionalHarness({readyAt: 1_110_000});
+  assert.equal((await h.run()).status, 'merged');
+  assert.equal(h.time() - 1_110_000, 30_000);
+  assert.equal(h.calls.length, 22);
+  assert.equal(h.responses.filter(x => x === 200).length, 4);
+  assert.equal(h.responses.filter(x => x === 304).length, 18);
+  assert.ok(h.waits.every(ms => ms === 60_000));
+  assert.ok(h.calls.filter(c => c.route.includes('/comments') && c.time > 0).every(c => c.conditional));
+  assert.deepEqual(h.progress.filter(p => ['receipt-observed', 'merge-reconciled', 'observation-ended'].includes(p.status))
+    .map(p => p.status), ['receipt-observed', 'merge-reconciled', 'observation-ended']);
+  const ended = h.progress.at(-1);
+  assert.equal(ended.duration_clock, 'monotonic'); assert.equal(ended.sleep_ms, 1_140_000);
+  assert.equal(ended.read_ms, 0); assert.deepEqual(ended.http_status_counts, {'200': 4, '304': 18});
+});
+test('one-hour conditional waiting has 66 bounded serial reads and only two changed responses', async () => {
+  const h = conditionalHarness(); assert.equal((await h.run()).status, 'pending');
+  assert.equal(h.calls.length, 66); assert.equal(h.responses.filter(x => x === 200).length, 2);
+  assert.equal(h.responses.filter(x => x === 304).length, 64);
+  assert.equal(h.calls.filter(c => c.route.includes('/pulls/')).length, 1);
+});
+test('healthy jitter bounds terminal detection to 66 seconds without increasing request frequency', async () => {
+  for (const readyAt of [66_001, 420_001, 1_110_000, 1_188_001]) {
+    const h = conditionalHarness({readyAt, jitter: 1}); assert.equal((await h.run()).status, 'merged');
+    assert.ok(h.time() - readyAt <= 66_000); assert.ok(h.waits.every(ms => ms === 66_000));
+  }
+});
+test('conditional pagination revalidates every page and finds a changing last-page receipt', async () => {
+  const h = conditionalHarness({readyAt: 120_001, pages: 2});
+  assert.equal((await h.run()).status, 'merged'); assert.equal(h.time(), 180_000);
+  const comments = h.calls.filter(c => c.route.includes('/comments'));
+  assert.equal(comments.length, 8); assert.ok(comments.slice(2).every(c => c.conditional));
+});
+test('missing ETags retain conservative fallback, without assuming conditional quota savings', async () => {
+  const h = conditionalHarness({cache: false, readyAt: 1_110_000});
+  assert.equal((await h.run()).status, 'merged'); assert.equal(h.time() - 1_110_000, 210_000);
+  assert.equal(h.calls.length, 9); assert.ok(h.calls.every(c => !c.conditional));
+});
+test('provider poll/cache guidance is honored beyond the old five-minute cap', async () => {
+  for (const field of ['x-poll-interval', 'retry-after']) {
+    const h = conditionalHarness({readyAt: 100_000, modify: response => {response.headers[field] = '420';}});
+    assert.equal((await h.run()).status, 'merged'); assert.equal(h.waits[0], 420_000);
+  }
+  const h = conditionalHarness({readyAt: 100_000, modify: response => {response.headers['cache-control'] = 'private, max-age=120';}});
+  assert.equal((await h.run()).status, 'merged'); assert.equal(h.waits[0], 120_000);
+});
+test('successful exhausted quota pauses all reads, including terminal reconciliation, using the server clock', async () => {
+  const h = conditionalHarness({readyAt: 0, timeoutMs: 300_000, wallOffset: 86_400_000,
+    modify: (response, {route, time}) => {
+      response.headers['x-ratelimit-reset'] = '120';
+      if (route.includes('/comments') && time === 0) response.headers['x-ratelimit-remaining'] = '0';
+    }});
+  assert.equal((await h.run()).status, 'merged');
+  assert.deepEqual(h.waits, [122_000]); assert.equal(h.calls.at(-1).time, 122_000);
+  const blocked = conditionalHarness({readyAt: 0, timeoutMs: 60_000,
+    modify: (response, {route}) => {if (route.includes('/comments')) response.headers['x-ratelimit-remaining'] = '16';}});
+  assert.equal((await blocked.run()).status, 'pending'); assert.equal(blocked.calls.length, 2);
+});
+test('capacity sleep overrun cannot authorize a post-deadline read', async () => {
+  const h = conditionalHarness({timeoutMs: 180_000, oversleep: 100_000, modify: response => {
+    response.headers['x-ratelimit-remaining'] = '0'; response.headers['x-ratelimit-reset'] = '120';
+  }});
+  assert.equal((await h.run()).status, 'pending'); assert.equal(h.calls.length, 1);
+});
+test('actual primary supply paces conditional reads without assuming shared capacity is reserved', async () => {
+  const h = conditionalHarness({readyAt: 100_000, modify: response => {response.headers['x-ratelimit-remaining'] = '20';}});
+  assert.equal((await h.run()).status, 'merged'); assert.equal(h.waits[0], 900_500);
+});
+test('secondary and service rejection never authorize cached success or resubmit', async () => {
+  for (const status of [403, 429, 503]) {
+    let rejected = false;
+    const h = conditionalHarness({readyAt: 60_000, modify: (response, {route, time}) => {
+      if (route.includes('/comments') && time >= 60_000 && !rejected) {
+        rejected = true; response.status = status; response.body = {message: 'secondary rate limit'};
+        response.headers['retry-after'] = '180';
+      }
+    }});
+    assert.equal((await h.run()).status, 'merged');
+    assert.equal(h.waits[1], 180_000);
+    assert.equal(h.calls.filter(c => c.route.includes('/pulls/')).length, 2);
+  }
+});
+test('adapter rejects unbound/mismatched 304 and never recovers from transport failure using stale data', () => {
+  const route = '/repos/owner/repo/issues/2/comments?per_page=100&page=1';
+  for (const scenario of ['unbound', 'mismatch', 'timeout', 'no-store']) {
+    let calls = 0;
+    const api = mergeQueueAPI({execute: () => {
+      if (++calls === 1 && scenario !== 'unbound') return http(200, [{hello: 'world'}], {ETag: '"one"',
+        ...(scenario === 'no-store' ? {'cache-control': 'no-store'} : {})});
+      throw Object.assign(Error('gh'), {status: scenario === 'timeout' ? null : 1,
+        signal: scenario === 'timeout' ? 'SIGKILL' : null,
+        stdout: http(304, undefined, {ETag: scenario === 'mismatch' ? '"two"' : '"one"'})});
+    }});
+    if (scenario !== 'unbound') api(route);
+    assert.throws(() => api(route), scenario === 'timeout' ? /GitHub read failed/ : /Unbound conditional/);
+  }
+});
+test('weak/strong validators revalidate a fresh parsed value and bounded cache refusal is safe', () => {
+  const route = '/repos/owner/repo/issues/2/comments'; let calls = 0;
+  const api = mergeQueueAPI({execute: (_command, args) => {
+    if (++calls === 1) return http(200, [{value: 1}], {ETag: 'W/"same"'});
+    assert.ok(args.includes('If-None-Match: W/"same"'));
+    throw Object.assign(Error('304'), {status: 1, stdout: http(304, undefined, {ETag: '"same"'})});
+  }});
+  const one = api(route); one[0].value = 99; assert.deepEqual(api(route), [{value: 1}]);
+  let boundedCalls = 0;
+  const bounded = mergeQueueAPI({snapshotOptions: {maxBytes: 0}, execute: (_command, args) => {
+    boundedCalls++; assert.ok(!args.includes('-H')); return http(200, [], {ETag: '"x"'});
+  }});
+  bounded(route); bounded(route); assert.equal(boundedCalls, 2);
+});
+test('missing usable quota metadata does not activate the faster conditional path', async () => {
+  const h = conditionalHarness({readyAt: 1_110_000, modify: response => {delete response.headers['x-ratelimit-reset'];}});
+  assert.equal((await h.run()).status, 'merged'); assert.equal(h.time() - 1_110_000, 210_000);
+  assert.equal(h.calls.length, 9);
+  const exhausted = conditionalHarness({readyAt: 0, modify: response => {
+    response.headers['x-ratelimit-remaining'] = '0'; delete response.headers['x-ratelimit-reset'];
+  }});
+  await assert.rejects(exhausted.run(), /Exhausted GitHub quota lacks usable reset/);
+  assert.equal(exhausted.calls.length, 1);
+});
+test('returned timing separates receipt discovery from delayed authoritative verification', async () => {
+  let time = 0, wall = 1_000_000, pulls = 0;
+  const result = await runMergeQueueClient({repo: 'owner/repo', number: 2, head, requestId, observeOnly: true,
+    now: () => time, wallNow: () => wall, api: route => {
+      time += route.includes('/pulls/') ? (++pulls === 1 ? 10 : 500) : 30;
+      wall -= 50_000; // A backward wall-clock correction cannot change duration.
+      return route.includes('/pulls/') ? pr(pulls > 1) : [receipt()];
+    }, submit: () => {throw Error('Unexpected submission');}});
+  assert.equal(result.observation.receipt_observed_elapsed_ms, 40);
+  assert.equal(result.observation.merge_reconciled_elapsed_ms, 540);
+  assert.equal(result.observation.read_ms, 540); assert.equal(result.observation.elapsed_ms, 540);
+  assert.equal(result.observation.sleep_ms, 0); assert.equal(result.status, 'merged');
+});
+test('successful Retry-After applies before pagination and terminal reconciliation, with deadline refusal', async () => {
+  for (const pages of [1, 2]) {
+    const h = conditionalHarness({readyAt: 0, pages, modify: (response, {route, time}) => {
+      if (route.includes('/comments') && time === 0) response.headers['retry-after'] = '180';
+    }});
+    assert.equal((await h.run()).status, 'merged'); assert.equal(h.waits[0], 180_000);
+    assert.equal(h.calls[2].time, 180_000);
+  }
+  const h = conditionalHarness({readyAt: 0, timeoutMs: 180_000, modify: (response, {route}) => {
+    if (route.includes('/comments')) response.headers['retry-after'] = '180';
+  }});
+  assert.equal((await h.run()).status, 'pending'); assert.equal(h.calls.length, 2);
+});
+test('HTTP-date Retry-After honors the server clock for service, secondary and successful responses', async () => {
+  for (const status of [200, 403, 429, 503]) {
+    let rejected = false;
+    const h = conditionalHarness({readyAt: 0, wallOffset: 86_400_000, modify: (response, {route}) => {
+      if (route.includes('/comments') && !rejected) {
+        rejected = true; response.status = status;
+        response.headers['retry-after'] = new Date(180_000).toUTCString();
+        if (status !== 200) response.body = {message: 'secondary rate limit'};
+      }
+    }});
+    assert.equal((await h.run()).status, 'merged'); assert.equal(h.waits[0], 180_000);
+    assert.ok(h.calls.slice(2).every(c => c.time >= 180_000));
+  }
+});
+test('explicit poll interval on initial PR governs the same-route final reconciliation', async () => {
+  const h = conditionalHarness({readyAt: 0, modify: (response, {route}) => {
+    if (route.includes('/pulls/')) response.headers['x-poll-interval'] = '180';
+  }});
+  assert.equal((await h.run()).status, 'merged'); assert.deepEqual(h.waits, [180_000]);
+  assert.equal(h.calls.at(-1).time, 180_000);
 });
