@@ -962,7 +962,7 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
         with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='fixture'), \
              self.mock.patch.object(g, 'inventory', side_effect=[['before'], ['after']]), \
              self.mock.patch.object(g, 'unchanged_selected_inputs', side_effect=AssertionError('shortcut consulted')), \
-             self.mock.patch.object(g, 'prefetch_declared_inputs', side_effect=RuntimeError('full-check-reached')):
+             self.mock.patch.object(g, 'output_budget_transition', side_effect=RuntimeError('full-check-reached')):
             with self.assertRaisesRegex(RuntimeError, 'full-check-reached'):
                 g.inspect(ROOT, self.baseline, self.candidate, prefetch=True)
 
