@@ -1223,3 +1223,53 @@ test('checkpoint receipt carry and ZIP transport are admitted together before th
   assert(!f.reads.includes(f.authored.entries.get(f.checkpoint.archive).sha),'ZIP is refused before transport/materialization');
   assert(diagnostics.peak_admitted_bytes>=16*1024*1024,'prospective receipt admission is reported');
 });
+
+// Retained authority may precede the selected delivery of its original operands.
+// Keep its exact bytes in both trees while restoring the existing typed inputs.
+function retainFixedAuthorities(f) {
+  for (const {authority_path} of f.fixed.authorities) {
+    f.baseline.entries.set(authority_path,{...f.authored.entries.get(authority_path)});
+    f.files=f.files.filter(row=>row.filename!==authority_path);
+  }
+  return f;
+}
+test('retained original authority authenticates newly restored native operands',async()=>{
+  const f=retainFixedAuthorities(fixedDeliveryFixture({leanPackage:true})),stats={};
+  assert.equal((await f.run({metadataDiagnostics:stats}))?.test_selection,'selected-data',stats.failure);
+});
+for(const [label,mutate] of Object.entries({
+  'inverse':r=>r.additive.owner_parts.find(p=>p.path.includes('/congo-ago2018-')).containing_inverse.inverse_ranges[0].start++,
+  'encoded hash':r=>{r.additive.inputs.find(p=>p.path.includes('/congo-ago2018-')&&p.path.endsWith('.bin.gz')).sha256='0'.repeat(64);},
+  'facts roster':()=>{},
+}))test('retained native restoration refuses altered '+label,async()=>{
+  const f=fixedDeliveryFixture({leanPackage:true});
+  rewriteFixedNative(f,mutate,{factsMutate:facts=>{if(label==='facts roster')facts.input_descriptors.pop();}});
+  retainFixedAuthorities(f);assert.equal(await f.run(),null);
+});
+for(const [label,mutate] of Object.entries({
+  'changed authority':f=>{f.baseline.entries.get(f.fixed.authorities[0].authority_path).sha='0'.repeat(40);},
+  'changed original manifest':f=>{const r=f.document(f.fixed.authorities[0].native_request);f.baseline.entries.get(r.additive.manifest_path).sha='0'.repeat(40);},
+  'unbound opaque operand':f=>{const name='coordination/engineering/congo-ago2018-delivery-20261011/native-operands/runs-999.bin.gz';f.put(name,'unbound');f.files.push({filename:name,status:'added'});},
+  'inert evidence package consumption':f=>{const name='coordination/engineering/congo-ago2018-delivery-20261011/inert.json';f.put(name,{});f.files.push({filename:name,status:'added'});const p=f.document('.github/package-inputs.json');p.inputs.push(name);f.put('.github/package-inputs.json',p);},
+}))test('retained native restoration refuses '+label,async()=>{
+  const f=retainFixedAuthorities(fixedDeliveryFixture({leanPackage:true}));mutate(f);assert.equal(await f.run(),null);
+});
+
+test('new package declaration may consume exact unchanged authenticated original proof',async()=>{
+  const f=retainFixedAuthorities(fixedDeliveryFixture({leanPackage:true}));
+  const authority=f.document(f.fixed.authorities[0].authority_path),name=authority.native_proof.assets[0].path;
+  f.baseline.entries.set(name,{...f.authored.entries.get(name)});f.files=f.files.filter(row=>row.filename!==name);
+  const stats={};assert.equal((await f.run({metadataDiagnostics:stats}))?.test_selection,'selected-data',stats.failure);
+});
+for(const changed of [false,true])test('retained package refuses '+(changed?'changed original proof bytes':'unbound existing evidence'),async()=>{
+  const f=retainFixedAuthorities(fixedDeliveryFixture({leanPackage:true}));
+  if(changed){
+    const name=f.document(f.fixed.authorities[0].authority_path).native_proof.assets[0].path;
+    f.baseline.entries.set(name,{...f.authored.entries.get(name),sha:'0'.repeat(40)});
+    f.files=f.files.filter(row=>row.filename!==name);
+  }else{
+    const name='coordination/engineering/congo-ago2018-delivery-20261011/old-inert.json';f.put(name,{},true);
+    const p=f.document('.github/package-inputs.json');p.inputs.push(name);f.put('.github/package-inputs.json',p);
+  }
+  assert.equal(await f.run(),null);
+});

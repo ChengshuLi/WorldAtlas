@@ -275,7 +275,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         (value.mode === undefined || value.mode === row.mode) &&
         (value.git_blob_oid === undefined || value.git_blob_oid === row.sha), 'role differs from candidate tree');
       // Full pins are required for leaves whose bytes are not read here.
-      needSelected((value.git_blob_oid && value.mode === '100644' && /^[a-f0-9]{40}$/.test(value.commit ?? '')) || value === hook, 'role lacks exact tree identity');
+      needSelected((value.git_blob_oid && value.mode === '100644' && /^[a-f0-9]{40}$/.test(value.commit ?? '')) || value === hook, 'role lacks exact tree identity: ' + value.path);
       const identity = [value.bytes, value.sha256, row.sha];
       needSelected(!identities.has(value.path) || same(identities.get(value.path), identity), 'conflicting role identities');
       identities.set(value.path, identity);
@@ -558,11 +558,30 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       pin(plan.original_inputs[1]);
       originalLedger = plan.original_inputs[1];
     };
-    for (const entry of registry.entries) {
+    // Existing deliveries resolve new authority first; only unresolved native
+    // operands require a bounded second pass through retained custody.
+    const roleEntries = [...registry.entries].sort((a, b) => Number(added.has(b.source_authority?.path)) - Number(added.has(a.source_authority?.path)));
+    for (const entry of roleEntries) {
       needSelected(keys(entry, ['authority_sha256','policy_id','policy_version','rule_preimage','rule_sha256','source_authority']), 'foreign registry fields');
       pin(entry.rule_preimage); pin(entry.source_authority);
-      if (!added.has(entry.source_authority.path)) continue;
+      const retained = !added.has(entry.source_authority.path);
+      if (retained && ![...added].some(name => nativeOperandPath(name, branch, reservation) && !nativeOperands.has(name))) continue;
       const authority = await pinnedJSON(entry.source_authority);
+      let restoredRequest;
+      if (retained) {
+        // A previous selected delivery may retain original authority while
+        // omitting another cohort's operands. Revisit only an exact original
+        // request that actually names newly restored operands. This grants no
+        // opaque-file exception without the full nativeRoles custody checks.
+        const before = baseline.entries.get(entry.source_authority.path), after = authored.entries.get(entry.source_authority.path);
+        needSelected(ordinary(before) && before.sha === after.sha && before.size === after.size,
+          'retained native authority changed');
+        const requestPin = authority.original_pins?.native_request;
+        if (!requestPin || !authored.entries.has(requestPin.path) || requestPin.mode !== '100644' ||
+            !/^[a-f0-9]{40}$/.test(requestPin.git_blob_oid ?? '') || !/^[a-f0-9]{40}$/.test(requestPin.commit ?? '')) continue;
+        restoredRequest = await pinnedJSON(requestPin);
+        if (!restoredRequest.additive?.owner_parts?.some(part => added.has(part.path))) continue;
+      }
       needSelected(authority.version === 1 && authority.kind === 'original-issued-rule-source-custody-v1' &&
         keys(authority.original_pins, ['ledger','native_facts','native_manifest','native_request','source_facts','source_request']),
         'unsupported source authority');
@@ -583,7 +602,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
           'source alias rewrites original data');
         pin(alias.published);
       }
-      const nativeRequest = await pinnedJSON(authority.original_pins.native_request), spec = nativeRequest.additive;
+      const nativeRequest = restoredRequest ?? await pinnedJSON(authority.original_pins.native_request), spec = nativeRequest.additive;
       await nativeRoles(authority, nativeRequest);
       if (sourceExtension) await sourceRoles(authority);
       needSelected(Array.isArray(spec?.inputs) && spec.inputs.length <= 1024, 'missing source role inputs');
@@ -746,7 +765,14 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       needSelected(administrative && administrative.length > previous.length && same(previous, administrative.slice(0, previous.length)) &&
         administrative.slice(previous.length).every(entry => usedRegistrations.has(entry.id)), 'registry is not append-only selected SOURCE data');
     }
-    needSelected(packageAdditions.every(name => added.has(name) && reachable.has(name) || sourceDeclarations.has(name)),
+    const unchangedRole = name => {
+      const before = baseline.entries.get(name), after = authored.entries.get(name);
+      return ordinary(before) && ordinary(after) && before.sha === after.sha && before.size === after.size;
+    };
+    // Package declarations can introduce already accepted original proof roles.
+    // File creation time is not scientific authority: typed reachability plus
+    // exact unchanged Git identity is required for these retained leaves.
+    needSelected(packageAdditions.every(name => reachable.has(name) && (added.has(name) || unchangedRole(name)) || sourceDeclarations.has(name)),
       'package change is not append-only exact reachable data');
     return {test_selection: 'selected-data', expectations_path: expectationsPath, shards: [0]};
   } catch (error) {
