@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "issue": 1791,
+  "lane": "engineering",
+  "worker_id": "01a12fb5-76f8-762d-882d-81fe8b7c0018",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "a7bd8a1547ecf1271ebba8919b550cbea51b431d",
+    "files": [
+      {
+        "path": "scripts/merge-queue-client.mjs",
+        "bytes": 7513,
+        "sha256": "c9daeb6cfb5fb00f2a6cf47bdfb840cfb97090402aa1f4481e1865f0e085e362",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/queue-pr-merge.mjs",
+        "bytes": 3561,
+        "sha256": "b458e082e691a608849efdabef80e39a1957c00f8803fffcda77b188b1394c10",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/delivery-handoff-advance.mjs",
+        "bytes": 129541,
+        "sha256": "bedc2607f871538f74b4435e950f5244ff68827d76a24ca0e705d5f80717d525",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/github-snapshots.mjs",
+        "bytes": 1595,
+        "sha256": "eaf2ca029adae4319ff6b0f1ce9ba75b7f965aeeab7fa7fe72548fa888f22afe",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "conditional-observer",
+      "kind": "code",
+      "description": "Pinned original observers and existing snapshot helper establish the actual before-change implementation and cache contract. Exact code/tests/docs remain in Git. Fake-clock tests exercise the production observer and gh adapter, including actual complete-304/exit-1 semantics, controlled latency/read costs, quota and terminal reconciliation. Historical timing is qualified in issue1791 and documentation; no live workflow or scientific rerun establishes a claimed saving. Normal post-integration adoption remains open.",
+      "software": "Node 24; repository test runner; GitHub CLI existing authenticated read adapter",
+      "units": "monotonic milliseconds; HTTP requests/status counts; separate UTC wall-clock fields"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/merge-integration-client.test.mjs test/delivery-handoff-advance.test.mjs test/github-snapshots.test.mjs test/github-quota.test.mjs"
+  ]
+}

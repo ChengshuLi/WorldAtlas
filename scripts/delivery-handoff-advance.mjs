@@ -11,7 +11,7 @@ import {execFileSync} from 'node:child_process';
 import {createAcquisition} from './geography-prefetch.mjs';
 import {performance} from 'node:perf_hooks';
 import {candidateBudget} from './native-ownership/native-preparation-guards.mjs';
-import {runMergeQueueClient} from './merge-queue-client.mjs';
+import {runMergeQueueClient, mergeQueueAPI} from './merge-queue-client.mjs';
 import {checkPremergeEvidence, reviewContractBinding} from './premerge-evidence.mjs';
 import {githubPages, verifyClaimForPR, assertIssueReadiness, workSpec} from './issue-claim-contract.mjs';
 import {validateIssuePRBody} from './check-handoff-scope.mjs';
@@ -484,30 +484,13 @@ export async function acceptedReview(packet, api) {
     manifest_sha256: checked.manifest_sha256};
 }
 
-// Same bounded read adapter as queue-pr-merge.mjs. The queue client's second
-// argument is a read deadline, not githubAPI's HTTP-method argument.
+// Keep automatic delivery and the standalone observer on the same bounded,
+// authenticated conditional transport. The named-repository boundary remains.
 export function deliveryQueueAPI({execute = execFileSync} = {}) {
-  return (route, {timeoutMs = 20_000} = {}) => {
-    need(typeof route === 'string' && route.startsWith('/repos/ChengshuLi/WorldAtlas/')
-      && Number.isFinite(timeoutMs) && timeoutMs > 0, 'Invalid bounded queue read');
-    let output, failure;
-    try { output = execute('gh', ['api', '--include', route], {encoding: 'utf8',
-      maxBuffer: 16 * 1024 * 1024, timeout: timeoutMs, killSignal: 'SIGKILL'}); }
-    catch (error) { output = String(error.stdout ?? ''); failure = error; }
-    const separator = output.search(/\r?\n\r?\n/);
-    const headers = output.startsWith('HTTP/') && separator >= 0 ? output.slice(0, separator) : '';
-    if (failure) {
-      const error = Error(`GitHub read failed for ${route}; no merge claimed`);
-      const field = name => new RegExp(`^${name}:\\s*(\\d+)\\s*$`, 'im').exec(headers)?.[1];
-      let secondaryLimit = false;
-      try { secondaryLimit = /secondary rate limit/i.test(JSON.parse(headers ? output.slice(separator).trim() : output).message ?? ''); }
-      catch { /* Preserve HTTP rejection even when its body is incomplete. */ }
-      error.github = {http_status: Number(/^HTTP\/\S+\s+(\d+)/.exec(headers)?.[1]),
-        rate_remaining: field('x-ratelimit-remaining'), rate_reset: field('x-ratelimit-reset'),
-        retry_after: field('retry-after'), secondary_limit: secondaryLimit};
-      throw error;
-    }
-    return JSON.parse(headers ? output.slice(separator).trim() : output);
+  const read = mergeQueueAPI({execute});
+  return (route, options) => {
+    need(typeof route === 'string' && route.startsWith('/repos/ChengshuLi/WorldAtlas/'), 'Invalid bounded queue read');
+    return read(route, options);
   };
 }
 
