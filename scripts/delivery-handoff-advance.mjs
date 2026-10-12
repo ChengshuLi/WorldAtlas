@@ -13,7 +13,8 @@ import {performance} from 'node:perf_hooks';
 import {candidateBudget} from './native-ownership/native-preparation-guards.mjs';
 import {runMergeQueueClient} from './merge-queue-client.mjs';
 import {checkPremergeEvidence, reviewContractBinding} from './premerge-evidence.mjs';
-import {githubPages, readClaim} from './issue-claim-contract.mjs';
+import {githubPages, verifyClaimForPR, assertIssueReadiness, workSpec} from './issue-claim-contract.mjs';
+import {validateIssuePRBody} from './check-handoff-scope.mjs';
 import {createHash} from 'node:crypto';
 
 const need = (value, message) => { if (!value) throw Error(message); };
@@ -214,7 +215,7 @@ function stageNames(id) {
 export function readAdvanceStatus(journal) {
   const completed = [], waiting = [], refused = [];
   for (const name of fs.readdirSync(journal.target)) {
-    if (['advance.json', 'advance.lock', 'advance.acquire', 'queue-submission.json', 'pr-base-refresh.json'].includes(name) || /^observation-\d{6}\.json$/.test(name)
+    if (['advance.json', 'advance.lock', 'advance.acquire', 'queue-submission.json', 'pr-base-refresh.json', 'author-tree-refresh.json', 'author-tree-refreshed.json'].includes(name) || /^(?:commit|committed)-[a-z0-9-]+\.json$/.test(name) || /^observation-\d{6}\.json$/.test(name)
       || /^[a-z0-9-]+\.(intent|completed)\.json$/.test(name)) continue;
     need(/^[a-z0-9-]+$/.test(name) && fs.lstatSync(path.join(journal.target, name)).isDirectory()
       && fs.realpathSync(path.join(journal.target, name)) === path.join(journal.target, name)
@@ -273,6 +274,8 @@ export function readAdvanceStatus(journal) {
       api_wait_ms: completed.reduce((n, e) => n + (e.api_wait_ms ?? 0), 0),
       stages: completed.map(({stage, preparation_ms, api_wait_ms, completed_at}) => ({stage, preparation_ms, api_wait_ms, completed_at})),
       external_observations: events, waits, operator_durations: operatorDurations,
+      automatic_invocations: events.filter(e => e.kind === 'automatic-invocation'),
+      unobserved_interphase_time: 'Intervals outside recorded invocations/wait observations are unclassified, not proven idle.',
       limits: ['Preparation milliseconds are measured separately from external waits.',
         'Per-operator elapsed receipts are individual durations, never summed as parallel wall time.',
         'No gap-closures/hour claim follows from metadata preparation timing.']}};
@@ -443,23 +446,38 @@ export async function nextReviewStage(journal, review, reader, adapters) {
 // authored receipt. A local accepted:true field is never an approval input.
 export async function acceptedReview(packet, api) {
   const route = `/repos/${packet.repo}`, pr = await api(`${route}/pulls/${packet.pr_number}`);
-  need(pr.state === 'open' && !pr.draft && pr.head.sha === packet.head_sha && pr.base.sha === packet.base_sha,
-    'Review head/base/readiness changed');
+  const state = value => [value.number, value.state, value.draft, value.head.sha, value.head.ref, value.head.repo?.full_name,
+    value.base.sha, value.base.ref, value.base.repo?.full_name, value.changed_files];
+  need(pr.number === packet.pr_number && pr.state === 'open' && !pr.draft
+    && pr.head.sha === packet.head_sha && pr.base.sha === packet.base_sha
+    && pr.head.repo?.full_name === packet.repo && pr.base.repo?.full_name === packet.repo && pr.base.ref === 'main'
+    && validateIssuePRBody(pr.body).github_issue === packet.issue.number, 'Review head/base/readiness changed');
   const issue = await api(`${route}/issues/${packet.issue.number}`);
   need(equal(reviewContractBinding(issue, pr), {issue_contract_sha256: packet.issue_contract_sha256,
     pr_body_sha256: packet.pr_body_sha256}), 'Frozen review acceptance/body changed');
-  const reservation = readClaim(await githubPages(api, `${route}/issues/${issue.number}/comments`));
-  need(reservation?.active && reservation.worker_id === packet.author_worker_id && reservation.branch === pr.head.ref
-    && Date.parse(reservation.expires_at) > Date.now(), 'Current author claim changed');
+  const currentReservation = async (currentIssue, currentPR) => {
+    const comments = await githubPages(api, `${route}/issues/${currentIssue.number}/comments`);
+    const dependencies = await Promise.all(workSpec(currentIssue.body).depends_on.map(number => api(`${route}/issues/${number}`)));
+    assertIssueReadiness({issue: currentIssue, branch: currentPR.head.ref, comments, dependencies});
+    const reservation = verifyClaimForPR({branch: currentPR.head.ref, issue: currentIssue, comments});
+    need(reservation.worker_id === packet.author_worker_id, 'Current author claim changed');
+    return reservation;
+  };
+  // Engineering ownership is authenticated by the issue contract, not stored in
+  // the legacy raw claim. Use the same canonical scope consumed by the queue.
+  const reservation = await currentReservation(issue, pr);
   const files = await githubPages(api, `${route}/pulls/${pr.number}/files`);
   need(equal(files, packet.files) && files.length === pr.changed_files, 'Frozen review file inventory changed');
   const checked = await checkPremergeEvidence({api, repo: packet.repo, pr, issue, reservation, files, review: true});
   need(['bytes-verified', 'limited'].includes(checked.status) && checked.review?.comment_id
     && checked.manifest_sha256 === packet.manifest.sha256, 'Genuine independent acceptance required');
-  // Recheck the state after the potentially long evidence traversal.
+  // Recheck ownership, scope, blockers and dependencies after the potentially
+  // long evidence traversal. Benign lease renewals retain the canonical identity.
   const after = await api(`${route}/pulls/${pr.number}`), currentIssue = await api(`${route}/issues/${issue.number}`);
-  need(equal([after.state, after.draft, after.head.sha, after.base.sha, reviewContractBinding(currentIssue, after)],
-    [pr.state, pr.draft, pr.head.sha, pr.base.sha, reviewContractBinding(issue, pr)]), 'Review changed during queue preparation');
+  need(equal([state(after), reviewContractBinding(currentIssue, after)],
+    [state(pr), reviewContractBinding(issue, pr)]), 'Review changed during queue preparation');
+  const afterReservation = await currentReservation(currentIssue, after);
+  need(equal(afterReservation, reservation), 'Author claim/scope changed during queue preparation');
   return {review_comment_id: checked.review.comment_id, reviewer_worker_id: checked.review.reviewer,
     repo: packet.repo, pr_number: pr.number, head_sha: pr.head.sha, base_sha: pr.base.sha,
     issue_contract_sha256: packet.issue_contract_sha256, pr_body_sha256: packet.pr_body_sha256,
@@ -774,6 +792,7 @@ export async function nextDeliveryStage(journal, config, reader, adapters) {
   const sidecar = locate(reader, observed.sidecar), selected = reader.json(sidecar).logical_asset_map.ledger;
   const final = {...projection, sidecar, selected_ledger: selected, selector: locate(reader, recipe.selector), package_inputs: locate(reader, recipe.package_inputs)};
   if (!completed('finalize', final)) return prepare('finalize', 'finalize', final, () => adapters.finalizeDelivery(final, reader));
+  if (adapters.beforeReview) await adapters.beforeReview();
   if (!config.review) return wait('review', 'publication-review', 'Publish the actual author head/PR; provide repository and PR number.');
   return nextReviewStage(journal, config.review, reader, adapters);
 }
@@ -1306,3 +1325,296 @@ async function acquireDeliveryInputs(plan,root,{execute=execFileSync,token,onMat
 }
 return acquireDeliveryInputs;
 })();
+
+// Refresh inherited main state before first publication, preserving every owned
+// postimage. The caller captures fresh main and supplies the ordinary live claim
+// and managed-workspace authorization; this helper never fetches or broadens it.
+export async function refreshDeliveryAuthorTree(journal, {main, validate, execute = execFileSync, interrupt = () => {}}) {
+  need(/^[a-f0-9]{40}$/.test(main ?? '') && typeof validate === 'function', 'Fresh exact main and author validation required');
+  const started = performance.now(), intentFile = path.join(journal.target, 'author-tree-refresh.json');
+  const resultFile = path.join(journal.target, 'author-tree-refreshed.json');
+  const observed = result => observeAdvance(journal, {status: 'external', kind: 'author-tree-refresh',
+    result: result.status, previous_head: result.previous_head, head: result.head, main: result.main, elapsed_ms: result.elapsed_ms});
+  const git = (args, input) => execute('git', args, {
+    cwd: journal.root, env: {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_TERMINAL_PROMPT: '0'},
+    input, encoding: 'utf8', timeout: 60_000, maxBuffer: 16 * 1024 * 1024}).trim();
+  const sha = value => /^[a-f0-9]{40}$/.test(value ?? '');
+  const head = () => git(['rev-parse', '--verify', 'HEAD^{commit}']);
+  const branch = () => git(['symbolic-ref', '--quiet', 'HEAD']);
+  const tree = commit => git(['rev-parse', '--verify', commit + '^{tree}']);
+  const index = () => git(['write-tree']);
+  const clean = () => {
+    for (const row of git(['ls-files', '-v', '-z']).split('\0').filter(Boolean)) {
+      need(!/^[a-z] /.test(row), 'Assume-unchanged index entries can hide edits; preserve them before author refresh');
+      need(row[0] !== 'S' || !fs.lstatSync(path.join(journal.root, row.slice(2)), {throwIfNoEntry: false}),
+        'Materialized skip-worktree entry can hide edits; preserve it before author refresh');
+    }
+    need(!git(['diff-files', '--name-only', '-z', '--']), 'Tracked worktree changed; preserve it before author refresh');
+  };
+  const entries = (commit, names) => {
+    if (!names.length) return new Map();
+    need(names.reduce((n, name) => n + Buffer.byteLength(name) + 1, 0) <= 1024 * 1024, 'Author refresh path arguments exceed bounded admission');
+    return new Map(git(['ls-tree', '-z', commit, '--', ...names]).split('\0').filter(Boolean).map(row => {
+      const match = /^(\d{6}) (blob|tree|commit) ([a-f0-9]{40})\t([\s\S]+)$/.exec(row);
+      need(match, 'Incomplete author refresh tree inventory');
+      return [match[4], {mode: match[1], type: match[2], oid: match[3]}];
+    }));
+  };
+  const verifyPostimages = intent => {
+    const names = git(['diff', '--name-only', '--no-renames', '-z', intent.merge_base, intent.before, '--']).split('\0').filter(Boolean);
+    const before = entries(intent.before, names), after = entries(intent.head, names);
+    for (const name of names) need(equal(before.get(name) ?? null, after.get(name) ?? null),
+      'Author refresh changes an owned postimage: ' + name);
+    return names;
+  };
+  let intent;
+  if (fs.lstatSync(intentFile, {throwIfNoEntry: false})) {
+    intent = JSON.parse(journalFile(journal, intentFile));
+    need(intent.version === 1 && intent.kind === 'delivery-author-tree-refresh-v1' && intent.main === main
+      && [intent.before, intent.main, intent.merge_base, intent.head, intent.tree].every(sha)
+      && /^refs\/heads\/engineering\/[a-z0-9][a-z0-9-]{0,63}$/.test(intent.branch ?? '')
+      && Number.isFinite(Date.parse(intent.created_at)), 'Foreign or changed author refresh intent');
+    need(branch() === intent.branch, 'Author refresh branch changed');
+    const raw = git(['cat-file', '-p', intent.head]);
+    need(raw.startsWith(`tree ${intent.tree}\nparent ${intent.before}\nparent ${intent.main}\nauthor `)
+      && git(['merge-base', intent.before, intent.main]) === intent.merge_base, 'Author refresh candidate ancestry changed');
+    verifyPostimages(intent);
+  } else {
+    need(!fs.lstatSync(resultFile, {throwIfNoEntry: false}), 'Author refresh result has no original intent');
+    const before = head(), ref = branch();
+    need(/^refs\/heads\/engineering\/[a-z0-9][a-z0-9-]{0,63}$/.test(ref), 'Author refresh requires its engineering branch');
+    const merge_base = git(['merge-base', before, main]);
+    need(sha(merge_base), 'Author refresh needs a common main ancestor');
+    if (merge_base === main) return {status: 'current', previous_head: before, head: before, main, elapsed_ms: performance.now() - started};
+    need(index() === tree(before), 'Tracked index changed; preserve it before author refresh'); clean();
+    await validate({head: before, branch: ref.slice('refs/heads/'.length), main, phase: 'prepare-author-refresh'});
+    let merged;
+    try { merged = git(['-c', 'merge.renames=false', 'merge-tree', '--write-tree', before, main]); }
+    catch { throw Error('Author refresh conflict or unavailable immutable Git objects; preserve original head and resolve explicitly'); }
+    need(sha(merged), 'Author refresh did not produce one complete merge tree');
+    const author = git(['var', 'GIT_AUTHOR_IDENT']), committer = git(['var', 'GIT_COMMITTER_IDENT']);
+    need(!/[\r\n]/.test(author + committer), 'Invalid Git commit identity');
+    const message = `tree ${merged}\nparent ${before}\nparent ${main}\nauthor ${author}\ncommitter ${committer}\n\nRefresh inherited main before delivery publication\n`;
+    const candidate = git(['hash-object', '-t', 'commit', '-w', '--stdin'], message);
+    need(sha(candidate), 'Missing exact author refresh commit');
+    intent = {version: 1, kind: 'delivery-author-tree-refresh-v1', branch: ref, before, main, merge_base,
+      head: candidate, tree: merged, created_at: new Date(journal.now()).toISOString()};
+    verifyPostimages(intent);
+    need(head() === before && branch() === ref && index() === tree(before), 'Author state changed while deriving refresh'); clean();
+    // Dry-run reads only the applicable sparse checkout and refuses untracked
+    // collisions before the ref can advance. Missing bodies remain a barrier.
+    git(['read-tree', '--dry-run', '-u', '-m', before, candidate]);
+    writeJournal(journal, intentFile, bytes(intent));
+    interrupt('intent');
+  }
+  const actualHead = head(), actualIndex = index(), beforeTree = tree(intent.before);
+  need(branch() === intent.branch && [intent.before, intent.head].includes(actualHead), 'Foreign branch movement during author refresh');
+  need(actualIndex === beforeTree || actualHead === intent.head && actualIndex === intent.tree, 'Foreign index state during author refresh'); clean();
+  if (fs.lstatSync(resultFile, {throwIfNoEntry: false})) {
+    const result = JSON.parse(journalFile(journal, resultFile));
+    need(result.version === 1 && result.intent_sha256 === hash(bytes(intent)) && result.head === intent.head
+      && result.main === main && result.previous_head === intent.before && Number.isFinite(result.elapsed_ms) && result.elapsed_ms >= 0
+      && actualHead === intent.head && actualIndex === intent.tree, 'Completed author refresh changed');
+    observed(result);
+    return {...result, resumed: true};
+  }
+  await validate({head: actualHead, branch: intent.branch.slice('refs/heads/'.length), main, phase: 'apply-author-refresh'});
+  need(head() === actualHead && branch() === intent.branch && index() === actualIndex, 'Author state changed before refresh update'); clean();
+  if (actualIndex !== intent.tree) git(['read-tree', '--dry-run', '-u', '-m', intent.before, intent.head]);
+  if (actualHead === intent.before) git(['update-ref', intent.branch, intent.head, intent.before]);
+  interrupt('ref');
+  if (actualIndex !== intent.tree) git(['read-tree', '-u', '-m', intent.before, intent.head]);
+  interrupt('checkout');
+  need(head() === intent.head && branch() === intent.branch && index() === intent.tree, 'Author refresh reconciliation changed'); clean();
+  const result = {version: 1, status: 'refreshed', intent_sha256: hash(bytes(intent)), previous_head: intent.before,
+    head: intent.head, main, elapsed_ms: performance.now() - started, completed_at: new Date(journal.now()).toISOString()};
+  writeJournal(journal, resultFile, bytes(result));
+  observed(result);
+  return result;
+}
+
+
+
+// Commit only completed immutable products, never locks or mutable observations.
+// The commit object and expected parent are durable before the branch CAS. Resume
+// may reconcile that same object, but cannot manufacture a second commit.
+export async function commitAdvanceStage(journal, stage, {validate, execute = execFileSync, interrupt = () => {}} = {}) {
+  need(typeof validate === 'function', 'Automatic commits require current author authority');
+  need(journal.destination.startsWith('coordination/engineering/'), 'Automatic commits require an issue-owned tracked destination');
+  need(stage !== 'review' && readAdvanceStatus(journal).completed.includes(stage), 'Commit only completed non-review stages');
+  const started = performance.now(), intentPath = path.join(journal.target, `commit-${stage}.json`);
+  const resultPath = path.join(journal.target, `committed-${stage}.json`);
+  const env = {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_TERMINAL_PROMPT: '0'};
+  const git = (args, options = {}) => execute('git', args, {cwd: journal.root, env, maxBuffer: 32 * 1024 * 1024, ...options});
+  const text = args => git(args).toString().trim();
+  const visibleIndex = () => {
+    for (const row of git(['ls-files', '-vz']).toString().split('\0').filter(Boolean))
+      need(!/[a-z]/.test(row[0]) && !(row[0] === 'S' && fs.lstatSync(path.join(journal.root, row.slice(2)), {throwIfNoEntry: false})),
+        'Index trust flags can hide edits; reconcile before automatic commit');
+  };
+  visibleIndex();
+  const branch = text(['symbolic-ref', 'HEAD']);
+  need(/^refs\/heads\/engineering\/[a-z0-9-]+$/.test(branch), 'Automatic commits require the owned engineering branch');
+  const event = journalJSON(journal, '.', stageNames(stage).event);
+  const files = [...Object.keys(event.outputs), 'preparation.json'].sort().map(name => {
+    const relative = `${journal.destination}/${stage}/${name}`, raw = journalBody(journal, stage, name);
+    return {path: relative, bytes: raw.length, sha256: hash(raw), oid: createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex')};
+  });
+  let intent;
+  if (fs.existsSync(intentPath)) {
+    intent = JSON.parse(journalFile(journal, intentPath));
+    need(intent.version === 1 && intent.stage === stage && intent.branch === branch && equal(intent.files, files)
+      && equal(intent.binding, event.binding), 'Commit intent differs from the current completed stage');
+  } else {
+    const parent = text(['rev-parse', 'HEAD']), parentTree = text(['rev-parse', 'HEAD^{tree}']);
+    need(!text(['diff', '--name-only']) && !text(['diff', '--cached', '--name-only']), 'Preserve existing tracked/index edits before automatic commit');
+    await validate({branch: branch.slice(11), head: parent, paths: files.map(f => f.path), phase: 'commit-prepare'});
+    for (const file of files) need(!text(['ls-tree', parent, '--', file.path]), 'Completed stage path already exists in the parent');
+    const scratch = fs.mkdtempSync(path.join(journal.target, '.commit-index-'));
+    let tree;
+    try {
+      const indexEnv = {...env, GIT_INDEX_FILE: path.join(scratch, 'index')};
+      git(['read-tree', parent], {env: indexEnv});
+      for (const file of files) {
+        const raw = journalBody(journal, stage, path.posix.basename(file.path));
+        need(hash(raw) === file.sha256, 'Completed stage changed before commit');
+        need(git(['hash-object', '-w', '--stdin'], {input: raw}).toString().trim() === file.oid, 'Stored stage blob differs');
+      }
+      git(['update-index', '--index-info'], {env: indexEnv, input: files.map(f => `100644 ${f.oid}\t${f.path}\n`).join('')});
+      tree = git(['write-tree'], {env: indexEnv}).toString().trim();
+    } finally { fs.rmSync(scratch, {recursive: true}); }
+    const author = text(['var', 'GIT_AUTHOR_IDENT']), committer = text(['var', 'GIT_COMMITTER_IDENT']);
+    need(/^[^\n]+ <[^<>\n]+> \d+ [+-]\d{4}$/.test(author) && /^[^\n]+ <[^<>\n]+> \d+ [+-]\d{4}$/.test(committer), 'Complete existing Git commit identity required');
+    const request_id = randomUUID();
+    const raw = `tree ${tree}\nparent ${parent}\nauthor ${author}\ncommitter ${committer}\n\nPrepare delivery ${stage}\n\nWorldAtlas delivery operation: ${request_id}\n`;
+    const head = createHash('sha1').update(`commit ${Buffer.byteLength(raw)}\0`).update(raw).digest('hex');
+    intent = {version: 1, stage, branch, parent, parent_tree: parentTree, tree, head, raw, request_id, binding: event.binding, files};
+    writeJournal(journal, intentPath, bytes(intent));
+    interrupt('intent');
+  }
+  const raw = Buffer.from(intent.raw ?? '');
+  need(/^[a-f0-9]{40}$/.test(intent.head) && createHash('sha1').update(`commit ${raw.length}\0`).update(raw).digest('hex') === intent.head
+    && raw.toString().startsWith(`tree ${intent.tree}\nparent ${intent.parent}\n`), 'Invalid durable commit object');
+  const changed = text(['diff', '--name-only', '--no-renames', intent.parent, intent.tree, '--']).split('\n').filter(Boolean).sort();
+  need(equal(changed, files.map(f => f.path).sort()), 'Commit tree changes undeclared paths');
+  for (const file of files) need(text(['ls-tree', intent.tree, '--', file.path]) === `100644 blob ${file.oid}\t${file.path}`, 'Commit tree product differs');
+  const head = text(['rev-parse', 'HEAD']);
+  if (fs.existsSync(resultPath)) {
+    const result = JSON.parse(journalFile(journal, resultPath));
+    need(result.head === intent.head && result.request_id === intent.request_id && result.stage === stage, 'Committed stage observation differs');
+    git(['merge-base', '--is-ancestor', intent.head, head]);
+    for (const file of files) need(text(['ls-tree', intent.head, '--', file.path]) === `100644 blob ${file.oid}\t${file.path}`, 'Committed stage identity differs');
+    return {...result, resumed: true};
+  }
+  need(head === intent.parent || head === intent.head, 'Foreign branch movement during automatic commit');
+  const indexTree = text(['write-tree']);
+  need([intent.parent_tree, intent.tree].includes(indexTree) && !text(['diff', '--name-only']), 'Foreign index/worktree edits during commit recovery');
+  await validate({branch: branch.slice(11), head, paths: files.map(f => f.path), phase: 'commit-advance'});
+  visibleIndex();
+  need(text(['symbolic-ref', 'HEAD']) === branch && text(['rev-parse', 'HEAD']) === head && text(['write-tree']) === indexTree,
+    'Branch/index changed during author validation');
+  for (const file of files) need(hash(journalBody(journal, stage, path.posix.basename(file.path))) === file.sha256, 'Stage bytes changed during author validation');
+  need(git(['hash-object', '-t', 'commit', '-w', '--stdin'], {input: raw}).toString().trim() === intent.head, 'Commit object differs');
+  interrupt('object');
+  if (head === intent.parent) git(['update-ref', '-m', `delivery ${intent.request_id}`, branch, intent.head, intent.parent]);
+  interrupt('ref');
+  // Only the index changes: stage products already exist with authenticated bytes.
+  // No worktree reset, force checkout or unrelated file mutation is performed.
+  git(['read-tree', intent.head]);
+  need(text(['rev-parse', 'HEAD']) === intent.head && !text(['diff', '--name-only']), 'Commit/index reconciliation did not complete');
+  const result = {version: 1, stage, head: intent.head, parent: intent.parent, request_id: intent.request_id,
+    elapsed_ms: performance.now() - started, completed_at: new Date(journal.now()).toISOString()};
+  writeJournal(journal, resultPath, bytes(result));
+  observeAdvance(journal, {status: 'external', kind: 'commit', stage, head: intent.head, elapsed_ms: result.elapsed_ms});
+  return result;
+}
+
+export function automaticDeliveryObservations(journal, config) {
+  const generated = {}, authorities = [];
+  for (const name of fs.readdirSync(journal.target).filter(n => /^committed-[a-z0-9-]+\.json$/.test(n)).sort()) {
+    const result = JSON.parse(journalFile(journal, path.join(journal.target, name)));
+    const locator = file => ({commit: result.head, path: `${journal.destination}/${result.stage}/${file}`});
+    if (result.stage === 'recipe') generated.template_commit = result.head;
+    if (result.stage.startsWith('authority-')) authorities.push({rule_preimage: locator('original-rule-preimage.json'), source_authority: locator('authority-binding.json')});
+    if (result.stage === 'registry') generated.registry = locator('authority-registry.json');
+    if (result.stage === 'compose') generated.composition = locator('preparation.json');
+    if (result.stage === 'rebind-operating') generated.operating = locator('operating.json');
+    if (result.stage === 'rebind-certificate') generated.certificate = locator('certificate.json');
+  }
+  if (authorities.length) generated.authorities = authorities;
+  const supplied = config.observations ?? {};
+  for (const [key, value] of Object.entries(generated)) if (Object.hasOwn(supplied, key)) need(equal(supplied[key], value), 'Explicit observation conflicts with automatic stage commit: ' + key);
+  return {...config, observations: {...supplied, ...generated}};
+}
+
+// A finite sequence of the existing transitions, not a new execution scheduler.
+// Scientific terminals, assembly, independent review and permission stay gates.
+export async function runAutomaticDelivery(journal, config, reader, adapters, {validate, beforePublication, queue, nextStage = nextDeliveryStage,
+  commitStage = commitAdvanceStage, apiWaitMilliseconds = () => 0} = {}) {
+  need(typeof validate === 'function', 'Automatic delivery requires current author authority');
+  const started = performance.now(), startedAt = new Date(journal.now()).toISOString(), initialCompleted = new Set(readAdvanceStatus(journal).completed);
+  let prepared = 0, committed = 0, publicationChecked = false;
+  const checkPublication = async () => {
+    if (publicationChecked) return;
+    need(typeof beforePublication === 'function', 'Publication requires a current author-tree check');
+    await beforePublication(); publicationChecked = true;
+  };
+  try {
+  // Recover commits whose stage completed before an interrupted prior invocation.
+  for (const id of initialCompleted) if (id !== 'review') { await commitStage(journal, id, {validate}); committed++; }
+  while (true) {
+    const preparationStarted = performance.now(), apiBefore = apiWaitMilliseconds();
+    const effective = automaticDeliveryObservations(journal, config);
+    const next = await nextStage(journal, effective, reader, {...adapters, beforeReview: checkPublication});
+    if (next.waiting || next.queue) {
+      if (next.waiting?.kind === 'commit') throw Error('Unresolved automatic immutable commit boundary: ' + next.waiting.stage);
+      if (next.waiting?.kind === 'publication-review') {
+        await checkPublication();
+      }
+      observeAdvance(journal, {status: 'external', kind: 'automatic-invocation', started_at: startedAt, elapsed_ms: performance.now() - started,
+        prepared_stages: prepared, observed_commits: committed, barrier: next.waiting?.kind ?? 'independent-review-or-queue'});
+      return next.queue ? await queue(next.queue) : observeAdvance(journal, next.waiting);
+    }
+    need(!readAdvanceStatus(journal).completed.includes(next.id), 'Automatic transition failed to advance');
+    await prepareAdvanceStage(journal, next.id, next.phase, next.input, next.produce,
+      {preparationStarted, apiWaitMilliseconds: () => apiWaitMilliseconds() - apiBefore});
+    prepared++;
+    if (next.id !== 'review') { await commitStage(journal, next.id, {validate}); committed++; }
+  }
+  } catch (error) {
+    observeAdvance(journal, {status: 'refused', kind: 'automatic-invocation', started_at: startedAt,
+      elapsed_ms: performance.now() - started, prepared_stages: prepared, observed_commits: committed, reason: error.message});
+    throw error;
+  }
+}
+
+export async function automaticAuthorGuard(root, config, api) {
+  const {workspaceManager} = await import('./local-workspace.mjs');
+  const {assertAuthorWorkerIdentity} = await import('./worker-identity.mjs');
+  const contract = await import('./issue-claim-contract.mjs');
+  need(Number.isSafeInteger(config.automation?.issue_number) && config.automation.issue_number > 0,
+    'Automatic delivery requires automation.issue_number');
+  const entry = workspaceManager(root).ownedEntry(root);
+  need(entry?.status === 'ready', 'Automatic delivery requires a ready managed author workspace');
+  assertAuthorWorkerIdentity(entry.worker);
+  let identity;
+  return async ({branch, paths = []}) => {
+    need(branch === entry.branch, 'Automatic delivery branch differs from managed ownership');
+    const route = '/repos/ChengshuLi/WorldAtlas', number = config.automation.issue_number;
+    const issue = await api(`${route}/issues/${number}`), spec = contract.workSpec(issue.body);
+    const comments = await contract.githubPages(api, `${route}/issues/${number}/comments`);
+    const dependencies = await Promise.all(contract.readinessDependencyIds(spec).map(id => api(`${route}/issues/${id}`)));
+    const prs = await contract.linkedPulls(api, 'ChengshuLi/WorldAtlas', number);
+    contract.assertIssueReadiness({issue, branch, comments, dependencies, prs});
+    const reservation = contract.verifyClaimForPR({branch, issue, comments, prs});
+    need(reservation.worker_id === entry.worker && spec.mode === 'engineering'
+      && Array.isArray(reservation.owned_paths), 'Automatic delivery requires canonical scoped author ownership');
+    need(prs.filter(pr => pr.state === 'open').every(pr => pr.head?.ref === branch), 'Preserve foreign open issue PR');
+    const current = {worker: reservation.worker_id, claim: reservation.claim_id, paths: reservation.owned_paths};
+    if (identity) need(equal(current, identity), 'Automatic author identity or scope changed');
+    identity = current;
+    need(paths.every(p => safe(p.replace(/\/$/, '')) && reservation.owned_paths.some(owned =>
+      p === owned || owned.endsWith('/') && p.startsWith(owned))), 'Automatic output exceeds current issue ownership');
+    return current;
+  };
+}

@@ -1187,3 +1187,389 @@ if (process.env.WORLDATLAS_DELIVERY_FIXTURE === '1') test('real five new-only au
   assert.deepEqual(committedComposition(j, r, {composition}, registry), result);
   assert.deepEqual(fs.readFileSync(path.join(j.target, 'compose.intent.json')), before);
 });
+
+import {acceptedReview} from '../scripts/delivery-handoff-advance.mjs';
+import {renderClaim} from '../scripts/issue-claim-contract.mjs';
+import {checkPremergeEvidence, reviewContractBinding} from '../scripts/premerge-evidence.mjs';
+
+// Exercise the actual remote byte and distinct-review gates. Only GitHub
+// transport is mocked; the legacy claim intentionally has no owned_paths.
+function acceptedReviewFixture({nested = true} = {}) {
+  const repo = 'ChengshuLi/WorldAtlas', branch = 'engineering/advance-acceptance';
+  const prefix = nested ? 'coordination/engineering/retained/new-delivery/' : 'coordination/engineering/advance-acceptance/';
+  const manifestPath = prefix + 'evidence-quality.json', outputPath = prefix + 'results.json';
+  const baseline = Buffer.from('acceptance baseline\n'), output = Buffer.from('{"value":0.5}\n');
+  const descriptor = (name, raw) => ({path: name, bytes: raw.length, sha256: digest(raw), hash_kind: 'file-bytes'});
+  const spec = {mode: 'engineering', max_prs: 1, depends_on: [99], scope: 'Bounded delivery acceptance fixture',
+    ...(nested ? {owned_paths: [prefix]} : {}),
+    evidence_quality: {version: 1, manifest_path: manifestPath, subject_ids: [], pins: {}, review_kind: 'code'}};
+  const issue = {number: 100, state: 'open', labels: ['type:engineering', 'kind:work-item', 'status:ready'],
+    created_at: '2026-10-07T00:00:00Z', body: `Delivery acceptance.\n<!-- worldatlas-work:v1\n${JSON.stringify(spec)}\n-->`};
+  const files = [{filename: outputPath, status: 'added'}, {filename: manifestPath, status: 'added'}];
+  const pr = {number: 101, state: 'open', draft: false, created_at: issue.created_at, body: 'Refs #100\nScoped delivery.',
+    head: {sha: later, ref: branch, repo: {full_name: repo}}, base: {sha: commit, ref: 'main', repo: {full_name: repo}}, changed_files: files.length};
+  const claim = {version: 1, active: true, worker_id: 'author', claim_id: 'original-claim-001', branch, mode: 'engineering',
+    expires_at: new Date(Date.now() + 3600000).toISOString()};
+  const manifest = {version: 1, issue: issue.number, lane: 'engineering', worker_id: claim.worker_id,
+    subject_ids: [], subject_ids_sha256: digest('[]'), baseline: {commit, files: [descriptor('baseline.txt', baseline)], pins: {}},
+    sources: [], outputs: [descriptor(outputPath, output)],
+    methods: [{id: 'synthetic', kind: 'code', description: 'Synthetic numeric byte control', software: 'Node 24', units: 'fraction'}],
+    metrics: [{id: 'share', value: 0.5, unit: 'fraction', vintage: 'current', input_sha256: digest(baseline), evaluation_commit: commit}],
+    summaries: [{metric_id: 'share', value: 0.5, unit: 'fraction'}], conclusions: [],
+    stages: {research: 'complete', implementation: 'implemented', geographic_approval: 'not-requested'},
+    commands: ['node --test test/delivery-handoff-advance.test.mjs'],
+    metric_bindings: [{metric_id: 'share', path: outputPath, json_pointer: '/value'}]};
+  const manifestBytes = Buffer.from(JSON.stringify(manifest));
+  const receipt = {version: 1, pr_number: pr.number, head_sha: later, manifest_sha256: digest(manifestBytes),
+    author_worker_id: claim.worker_id, reviewer_worker_id: 'independent-reviewer', outcome: 'accepted', limits: [],
+    inspected_files: files.map(file => file.filename), evidence_hashes: [digest(baseline), digest(output)],
+    domains: {implementation: {outcome: 'accepted', scope: 'Actual fixture byte inventory and scoped ownership.', limits: []}},
+    ...reviewContractBinding(issue, pr)};
+  const packet = {repo, pr_number: pr.number, head_sha: later, base_sha: commit, issue: structuredClone(issue),
+    author_worker_id: claim.worker_id, manifest: {sha256: digest(manifestBytes)}, files: structuredClone(files), ...reviewContractBinding(issue, pr)};
+  const control = {issue, pr, claim, dependency: {number: 99, state: 'closed'}, blockers: [], receipt, reviewAssociation: 'OWNER',
+    calls: [], traversed: false, onEvidence: () => {}};
+  const oid = raw => createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
+  const contents = new Map([['baseline.txt', baseline], [outputPath, output], [manifestPath, manifestBytes]]);
+  const blobs = new Map([...contents.values()].map(raw => [oid(raw), raw]));
+  const tree = [...contents].map(([name, raw]) => ({path: name, type: 'blob', mode: '100644', size: raw.length, sha: oid(raw)}));
+  const api = async (route, method = 'GET') => {
+    control.calls.push(route); assert.equal(method, 'GET');
+    if (route === `/repos/${repo}/pulls/101`) return structuredClone(control.pr);
+    if (route === `/repos/${repo}/issues/100`) return structuredClone(control.issue);
+    if (route === `/repos/${repo}/issues/99`) return structuredClone(control.dependency);
+    if (route.includes('/pulls/101/files?')) return structuredClone(files);
+    if (route.includes('/issues/100/comments?')) return [{id: 1, user: {login: 'github-actions[bot]'}, body: renderClaim(control.claim)}, ...control.blockers];
+    if (route.includes('/issues/101/comments?')) {
+      const comments = control.receipt ? [{id: 2, author_association: control.reviewAssociation,
+        body: `<!-- worldatlas-review:v1\n${JSON.stringify(control.receipt)}\n-->`}] : [];
+      control.traversed = true; control.onEvidence(control); return comments;
+    }
+    if (route.includes('/git/commits/')) return {tree: {sha: 'fixture-tree'}};
+    if (route.includes('/git/trees/')) return {truncated: false, tree};
+    if (route.includes('/git/blobs/')) { const sha = route.split('/').pop(), raw = blobs.get(sha);
+      return {sha, size: raw.length, encoding: 'base64', content: raw.toString('base64')}; }
+    if (route.includes('/compare/')) return {status: 'identical'};
+    throw Error('Unexpected acceptance route: ' + route);
+  };
+  return {control, packet, api, run: () => acceptedReview(packet, api), rawCheck: () => checkPremergeEvidence({api, repo, pr, issue, reservation: claim, files, review: true})};
+}
+
+test('accepted review authenticates nested engineering ownership through real evidence and distinct receipt gates', async () => {
+  const f = acceptedReviewFixture();
+  await assert.rejects(f.rawCheck(), /preserve other lanes/); // Independent reproduction of the old raw-claim failure.
+  const accepted = await f.run();
+  assert.equal(accepted.review_comment_id, 2); assert.equal(accepted.reviewer_worker_id, 'independent-reviewer');
+  assert.equal(accepted.manifest_sha256, f.packet.manifest.sha256); assert.equal(f.control.traversed, true);
+  assert.equal(f.control.calls.filter(route => route.endsWith('/issues/99')).length, 2);
+  assert.equal((await acceptedReviewFixture({nested: false}).run()).review_comment_id, 2);
+});
+
+test('accepted review refuses revoked, foreign and expired claims before reading immutable evidence', async () => {
+  for (const mutate of [c => { c.claim.active = false; }, c => { c.claim.worker_id = 'foreign'; },
+    c => { c.claim.branch = 'engineering/foreign'; }, c => { c.claim.expires_at = '2000-01-01T00:00:00Z'; }]) {
+    const f = acceptedReviewFixture(); mutate(f.control);
+    await assert.rejects(f.run(), /claim/); assert.equal(f.control.traversed, false);
+  }
+});
+
+test('accepted review rejects claim, issue readiness and dependency changes during evidence traversal', async () => {
+  const blocker = {id: 3, body: '<!-- worldatlas-blocker:v1\n{"id":"hold","active":true,"reason":"Need review"}\n-->'};
+  const mutations = [c => { c.claim.active = false; }, c => { c.claim.worker_id = 'foreign'; },
+    c => { c.claim.claim_id = 'replacement-claim-002'; }, c => { c.claim.branch = 'engineering/foreign'; },
+    c => { c.claim.expires_at = '2000-01-01T00:00:00Z'; }, c => { c.issue.labels.push('status:blocked'); },
+    c => { c.issue.labels = c.issue.labels.filter(label => label !== 'status:ready'); }, c => { c.issue.state = 'closed'; },
+    c => { c.blockers.push(blocker); }, c => { c.dependency.state = 'open'; },
+    c => { c.issue.body = c.issue.body.replace('retained/new-delivery/', 'retained/foreign/'); },
+    c => { c.pr.head.ref = 'engineering/foreign'; }, c => { c.pr.base.ref = 'foreign'; },
+    c => { c.pr.head.repo.full_name = 'foreign/repo'; }, c => { c.pr.changed_files++; }];
+  for (const mutate of mutations) {
+    const f = acceptedReviewFixture(); f.control.onEvidence = mutate;
+    await assert.rejects(f.run()); assert.equal(f.control.traversed, true);
+  }
+  for (const mutate of [c => { c.blockers.push(blocker); }, c => { c.dependency.state = 'open'; }]) {
+    const f = acceptedReviewFixture(); mutate(f.control);
+    await assert.rejects(f.run(), /blocker|dependency/); assert.equal(f.control.traversed, false);
+  }
+});
+
+test('accepted review tolerates a same-owner lease renewal without weakening independent substantive review', async () => {
+  const f = acceptedReviewFixture(); f.control.onEvidence = c => {
+    c.claim.expires_at = new Date(Date.now() + 7200000).toISOString(); c.claim.request_id = 'benign-renewal-001';
+    c.issue.updated_at = new Date().toISOString();
+  };
+  assert.equal((await f.run()).review_comment_id, 2);
+  for (const mutate of [c => { c.receipt = null; }, c => { c.receipt.reviewer_worker_id = 'author'; },
+    c => { c.receipt.domains = {}; }, c => { c.reviewAssociation = 'NONE'; },
+    c => { c.receipt.manifest_sha256 = 'f'.repeat(64); }, c => { c.receipt.head_sha = commit; }]) {
+    const adverse = acceptedReviewFixture(); mutate(adverse.control); await assert.rejects(adverse.run(), /review|Review/);
+  }
+});
+
+import {refreshDeliveryAuthorTree} from '../scripts/delivery-handoff-advance.mjs';
+function authorRefreshFixture(t, {authorChange, mainChange} = {}) {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'delivery-author-refresh-'));
+  t.after(() => fs.rmSync(root, {recursive: true, force: true}));
+  const env = {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_CONFIG_NOSYSTEM: '1',
+    GIT_AUTHOR_NAME: 'Refresh fixture', GIT_AUTHOR_EMAIL: 'fixture@example.invalid',
+    GIT_COMMITTER_NAME: 'Refresh fixture', GIT_COMMITTER_EMAIL: 'fixture@example.invalid'};
+  const git = (...args) => execFileSync('git', args, {cwd: root, env, encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe']}).trim();
+  const put = (name, value) => { fs.mkdirSync(path.dirname(path.join(root, name)), {recursive: true}); fs.writeFileSync(path.join(root, name), value); };
+  git('init', '--quiet', '--initial-branch=main');
+  put('data/ownership-selection.json', '{"selected":"old"}\n');
+  put('coordination/engineering/fixture/receipt.json', '{"owned":"old"}\n');
+  put('shared.txt', 'first\nsecond\nthird\nfourth\nfifth\n');
+  put('rename.txt', 'rename me\n'); put('delete.txt', 'delete me\n'); put('mode.txt', 'mode\n');
+  git('add', '--all'); git('commit', '--quiet', '-m', 'Initial metadata');
+  const base = git('rev-parse', 'HEAD');
+  git('checkout', '--quiet', '-b', 'engineering/refresh-fixture');
+  put('coordination/engineering/fixture/receipt.json', '{"owned":"new"}\n');
+  authorChange?.({put, git, root});
+  git('add', '--all'); git('commit', '--quiet', '-m', 'Owned author change');
+  const before = git('rev-parse', 'HEAD');
+  git('checkout', '--quiet', 'main');
+  put('data/ownership-selection.json', '{"selected":"current"}\n');
+  mainChange?.({put, git, root});
+  git('add', '--all'); git('commit', '--quiet', '-m', 'Accepted main metadata');
+  const main = git('rev-parse', 'HEAD'); git('checkout', '--quiet', 'engineering/refresh-fixture');
+  // Isolate Git bookkeeping from scientific memory admission. The production
+  // journal/CLI still uses candidateBudget and its actual available-memory gate.
+  let accounted = 0, descriptors = 0;
+  const budget = {add({bytes = 0}) { accounted += bytes; descriptors++;
+    assert.ok(accounted <= 2 * 1024 * 1024 && descriptors <= 512, 'Bounded Git fixture journal'); }};
+  const j = openAdvanceJournal(root, '.cache/delivery-handoff/refresh', {commit: base, path: 'recipe.json'}, {budget});
+  const calls = [], validation = [];
+  const execute = (command, args, options) => {
+    assert.equal(options.env.GIT_NO_LAZY_FETCH, '1');
+    assert.equal(command, 'git'); calls.push(args);
+    return execFileSync(command, args, {...options, env: {...options.env, ...env}, stdio: ['pipe', 'pipe', 'pipe']});
+  };
+  const validate = async value => { validation.push(value); assert.equal(value.branch, 'engineering/refresh-fixture'); assert.equal(value.main, main); };
+  const run = options => refreshDeliveryAuthorTree(j, {main, validate, execute, ...options});
+  return {root, j, git, put, base, before, main, run, calls, validation};
+}
+
+test('author refresh inherits actual main selectors and preserves owned bytes, ancestry and untracked files', async t => {
+  const f = authorRefreshFixture(t);
+  f.put('untracked-sentinel.txt', 'keep me\n');
+  const owned = f.git('rev-parse', f.before + ':coordination/engineering/fixture/receipt.json');
+  const result = await f.run();
+  assert.equal(result.status, 'refreshed'); assert.equal(f.git('rev-parse', 'HEAD'), result.head);
+  assert.deepEqual(f.git('rev-list', '--parents', '-n', '1', result.head).split(' '), [result.head, f.before, f.main]);
+  assert.equal(f.git('rev-parse', result.head + ':coordination/engineering/fixture/receipt.json'), owned);
+  assert.equal(f.git('show', 'HEAD:data/ownership-selection.json'), '{"selected":"current"}');
+  assert.equal(fs.readFileSync(path.join(f.root, 'untracked-sentinel.txt'), 'utf8'), 'keep me\n');
+  assert.equal(f.git('status', '--porcelain', '--untracked-files=no'), '');
+  assert.equal((await f.run()).head, result.head);
+  assert.equal(f.calls.filter(args => args.includes('update-ref')).length, 1);
+  assert.equal(f.calls.some(args => args.includes('fetch') || args.includes('reset')), false);
+  const observations = readAdvanceStatus(f.j).timing.external_observations.filter(row => row.kind === 'author-tree-refresh');
+  assert.equal(observations.length, 1); assert.equal(observations[0].head, result.head);
+  assert.equal(observations[0].elapsed_ms, result.elapsed_ms);
+});
+
+test('author refresh resumes identical intent after interruption before ref, after ref and after checkout', async t => {
+  for (const point of ['intent', 'ref', 'checkout']) await t.test(point, async t => {
+    const f = authorRefreshFixture(t);
+    await assert.rejects(f.run({interrupt: where => { if (where === point) throw Error('interrupted ' + point); }}), /interrupted/);
+    const original = fs.readFileSync(path.join(f.j.target, 'author-tree-refresh.json'));
+    const intended = JSON.parse(original);
+    assert.equal(fs.existsSync(path.join(f.j.target, 'author-tree-refreshed.json')), false);
+    assert.equal(f.git('rev-parse', 'HEAD'), point === 'intent' ? f.before : intended.head);
+    const result = await f.run(); assert.equal(result.head, intended.head);
+    assert.deepEqual(fs.readFileSync(path.join(f.j.target, 'author-tree-refresh.json')), original);
+    assert.equal(f.git('status', '--porcelain', '--untracked-files=no'), '');
+    assert.equal(f.calls.filter(args => args.includes('update-ref')).length, 1);
+  });
+});
+
+test('author refresh refuses a genuine conflict before publication and preserves the original head', async t => {
+  const f = authorRefreshFixture(t, {authorChange: ({put}) => put('shared.txt', 'author\n'), mainChange: ({put}) => put('shared.txt', 'main\n')});
+  await assert.rejects(f.run(), /conflict or unavailable/);
+  assert.equal(f.git('rev-parse', 'HEAD'), f.before);
+  assert.equal(fs.readFileSync(path.join(f.root, 'shared.txt'), 'utf8'), 'author\n');
+  assert.equal(fs.existsSync(path.join(f.j.target, 'author-tree-refresh.json')), false);
+});
+
+test('author refresh refuses even a clean textual merge when it changes an owned postimage', async t => {
+  const f = authorRefreshFixture(t, {authorChange: ({put}) => put('shared.txt', 'author\nsecond\nthird\nfourth\nfifth\n'),
+    mainChange: ({put}) => put('shared.txt', 'first\nsecond\nthird\nfourth\nmain\n')});
+  await assert.rejects(f.run(), /owned postimage: shared.txt/);
+  assert.equal(f.git('rev-parse', 'HEAD'), f.before);
+  assert.equal(fs.existsSync(path.join(f.j.target, 'author-tree-refresh.json')), false);
+});
+
+test('author refresh preserves owned renames, deletions and file modes', async t => {
+  const f = authorRefreshFixture(t, {authorChange: ({git, root}) => {
+    git('mv', 'rename.txt', 'renamed.txt'); git('rm', '--quiet', 'delete.txt'); fs.chmodSync(path.join(root, 'mode.txt'), 0o755);
+  }});
+  const result = await f.run();
+  for (const name of ['rename.txt', 'renamed.txt', 'delete.txt', 'mode.txt'])
+    assert.equal(f.git('ls-tree', result.head, '--', name), f.git('ls-tree', f.before, '--', name));
+});
+
+test('author refresh refuses foreign index, worktree and untracked collisions without overwriting them', async t => {
+  for (const kind of ['index', 'worktree', 'untracked']) await t.test(kind, async t => {
+    const f = authorRefreshFixture(t, {mainChange: ({put}) => put('from-main.txt', 'accepted\n')});
+    const name = kind === 'untracked' ? 'from-main.txt' : 'shared.txt'; f.put(name, 'foreign\n');
+    if (kind === 'index') f.git('add', name);
+    await assert.rejects(f.run(), kind === 'index' ? /Tracked index/ : kind === 'worktree' ? /Tracked worktree/ : /overwritten|read-tree/);
+    assert.equal(f.git('rev-parse', 'HEAD'), f.before);
+    assert.equal(fs.readFileSync(path.join(f.root, name), 'utf8'), 'foreign\n');
+    assert.equal(fs.existsSync(path.join(f.j.target, 'author-tree-refresh.json')), false);
+  });
+});
+
+test('author refresh rejects revoked validation and foreign movement during validation', async t => {
+  const revoked = authorRefreshFixture(t);
+  await assert.rejects(revoked.run({validate: async () => { throw Error('claim revoked'); }}), /claim revoked/);
+  assert.equal(revoked.git('rev-parse', 'HEAD'), revoked.before);
+  const moved = authorRefreshFixture(t); let validations = 0;
+  await assert.rejects(moved.run({validate: async () => { if (++validations === 2) moved.git('update-ref', 'refs/heads/engineering/refresh-fixture', moved.main); }}), /Author state changed/);
+  assert.equal(moved.git('rev-parse', 'HEAD'), moved.main);
+  assert.equal(moved.calls.some(args => args.includes('update-ref')), false);
+});
+
+test('author refresh never chases a changed main or adopts foreign edits after interrupted ref update', async t => {
+  const f = authorRefreshFixture(t);
+  await assert.rejects(f.run({interrupt: where => { if (where === 'ref') throw Error('interrupted'); }}), /interrupted/);
+  const intended = JSON.parse(fs.readFileSync(path.join(f.j.target, 'author-tree-refresh.json')));
+  await assert.rejects(f.run({main: f.base}), /Foreign or changed author refresh intent/);
+  f.put('shared.txt', 'foreign after ref\n');
+  await assert.rejects(f.run(), /Tracked worktree/);
+  assert.equal(f.git('rev-parse', 'HEAD'), intended.head);
+  assert.equal(fs.readFileSync(path.join(f.root, 'shared.txt'), 'utf8'), 'foreign after ref\n');
+});
+
+import {commitAdvanceStage, automaticDeliveryObservations, runAutomaticDelivery} from '../scripts/delivery-handoff-advance.mjs';
+function automaticGitFixture(t) {
+  const root = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'delivery-auto-git-')));
+  t.after(() => fs.rmSync(root, {recursive: true, force: true}));
+  const git = (...args) => execFileSync('git', args, {cwd: root, env: {...process.env, GIT_NO_LAZY_FETCH: '1'}, encoding: 'utf8'}).trim();
+  git('init', '-q', '-b', 'engineering/automatic-control'); git('config', 'user.name', 'Fixture'); git('config', 'user.email', 'fixture@example.invalid');
+  fs.writeFileSync(path.join(root, 'original'), 'unchanged\n'); git('add', 'original'); git('commit', '-qm', 'baseline');
+  let charged = 0;
+  // Isolate journal/Git bookkeeping from production memory admission. The real
+  // CLI retains its ordinary resource gate and is verified only when admitted.
+  const budget = {add({bytes}) { charged += bytes; assert.ok(Number.isSafeInteger(bytes) && bytes >= 0 && charged < 2 * 1024 * 1024); }};
+  const j = openAdvanceJournal(root, 'coordination/engineering/automatic-control/advance', {commit: git('rev-parse', 'HEAD'), path: 'recipe.json'}, {budget});
+  const validate = async ({branch, paths}) => {assert.equal(branch, 'engineering/automatic-control'); assert.ok(paths.every(p => p.startsWith(j.destination + '/')));};
+  return {j, git, validate};
+}
+for (const stop of ['intent', 'object', 'ref']) test('automatic commit resumes the same Git object after ' + stop, async t => {
+  const {j, git, validate} = automaticGitFixture(t);
+  await prepareAdvanceStage(j, 'recipe', 'recipe', {}, () => ({'recipe-index.json': Buffer.from('{"groups":[]}\n')}));
+  const parent = git('rev-parse', 'HEAD');
+  await assert.rejects(commitAdvanceStage(j, 'recipe', {validate, interrupt: point => {if (point === stop) throw Error('interrupted ' + stop);}}), /interrupted/);
+  const intended = JSON.parse(fs.readFileSync(path.join(j.target, 'commit-recipe.json')));
+  const result = await commitAdvanceStage(j, 'recipe', {validate});
+  assert.equal(result.head, intended.head); assert.equal(git('rev-parse', 'HEAD^'), parent);
+  assert.equal(git('rev-list', '--count', 'HEAD'), '2');
+  assert.equal(git('show', 'HEAD:' + j.destination + '/recipe/recipe-index.json'), '{"groups":[]}');
+  assert.ok(!git('ls-tree', '-r', '--name-only', 'HEAD').includes('advance.lock'));
+  const again = await commitAdvanceStage(j, 'recipe', {validate}); assert.equal(again.resumed, true);
+  assert.equal(git('rev-list', '--count', 'HEAD'), '2'); assert.equal(git('diff', '--name-only'), '');
+});
+test('automatic commit preserves foreign staged files, claim refusal and changed completed outputs', async t => {
+  const {j, git, validate} = automaticGitFixture(t);
+  await prepareAdvanceStage(j, 'recipe', 'recipe', {}, () => ({'recipe-index.json': Buffer.from('{}\n')}));
+  const parent = git('rev-parse', 'HEAD');
+  fs.writeFileSync(path.join(j.root, 'foreign'), 'keep me'); git('add', 'foreign');
+  await assert.rejects(commitAdvanceStage(j, 'recipe', {validate}), /existing tracked\/index/);
+  assert.equal(git('show', ':foreign'), 'keep me'); assert.equal(git('rev-parse', 'HEAD'), parent);
+  git('reset', '-q', 'HEAD', '--', 'foreign');
+  await assert.rejects(commitAdvanceStage(j, 'recipe', {validate: async () => {throw Error('revoked claim');}}), /revoked claim/);
+  assert.equal(fs.existsSync(path.join(j.target, 'commit-recipe.json')), false);
+  fs.writeFileSync(path.join(j.target, 'recipe', 'recipe-index.json'), 'changed');
+  await assert.rejects(commitAdvanceStage(j, 'recipe', {validate}), /Completed metadata changed/);
+  assert.equal(git('rev-parse', 'HEAD'), parent); assert.equal(fs.readFileSync(path.join(j.root, 'foreign'), 'utf8'), 'keep me');
+});
+test('automatic commit refuses foreign branch movement and explicit observation substitution', async t => {
+  const {j, git, validate} = automaticGitFixture(t);
+  await prepareAdvanceStage(j, 'recipe', 'recipe', {}, () => ({'recipe-index.json': Buffer.from('{}\n')}));
+  await assert.rejects(commitAdvanceStage(j, 'recipe', {validate, interrupt: point => {if (point === 'intent') throw Error('stop');}}), /stop/);
+  git('commit', '--allow-empty', '-qm', 'foreign movement'); const foreign = git('rev-parse', 'HEAD');
+  await assert.rejects(commitAdvanceStage(j, 'recipe', {validate}), /Foreign branch movement/);
+  assert.equal(git('rev-parse', 'HEAD'), foreign);
+  const f = automaticGitFixture(t);
+  await prepareAdvanceStage(f.j, 'recipe', 'recipe', {}, () => ({'recipe-index.json': Buffer.from('{}\n')}));
+  const result = await commitAdvanceStage(f.j, 'recipe', {validate: f.validate});
+  assert.equal(automaticDeliveryObservations(f.j, {}).observations.template_commit, result.head);
+  assert.throws(() => automaticDeliveryObservations(f.j, {observations: {template_commit: 'f'.repeat(40)}}), /conflicts/);
+});
+test('automatic continuation commits and consumes several stages in one invocation then waits for a genuine terminal', async t => {
+  const {j, git, validate} = automaticGitFixture(t); let preparations = 0;
+  const nextStage = async (journal, config) => {
+    const done = readAdvanceStatus(journal).completed;
+    if (!done.includes('recipe')) return {id: 'recipe', phase: 'recipe', input: {}, produce: () => {preparations++;return {'recipe-index.json': Buffer.from('{}\n')};}};
+    assert.equal(git('show', config.observations.template_commit + ':' + j.destination + '/recipe/recipe-index.json'), '{}');
+    if (!done.includes('requests')) return {id: 'requests', phase: 'requests', input: {template: config.observations.template_commit},
+      produce: () => {preparations++;return {'request.json': Buffer.from('{"genuine_future_execution":false}\n')};}};
+    return {waiting: {status: 'waiting', stage: 'source-one', kind: 'source-terminal', detail: 'Actual supervisor result required'}};
+  };
+  const result = await runAutomaticDelivery(j, {}, {}, {}, {validate, nextStage});
+  assert.equal(result.kind, 'source-terminal'); assert.equal(preparations, 2); assert.equal(git('rev-list', '--count', 'HEAD'), '3');
+  const status = readAdvanceStatus(j); assert.equal(status.waiting.kind, 'source-terminal');
+  assert.equal(status.timing.external_observations.filter(e => e.kind === 'automatic-invocation').length, 1);
+  await runAutomaticDelivery(j, {}, {}, {}, {validate, nextStage});
+  assert.equal(preparations, 2); assert.equal(git('rev-list', '--count', 'HEAD'), '3');
+});
+
+test('author refresh preserves sparse checkout without materializing unrelated inherited bodies', async t => {
+  const f = authorRefreshFixture(t, {mainChange: ({put}) => put('unrelated/retained-body.txt', 'excluded metadata body\n')});
+  f.git('sparse-checkout', 'init', '--no-cone');
+  f.git('sparse-checkout', 'set', '--no-cone', '/data/ownership-selection.json', '/coordination/engineering/fixture/');
+  assert.equal(fs.existsSync(path.join(f.root, 'unrelated/retained-body.txt')), false);
+  const result = await f.run();
+  assert.equal(f.git('show', result.head + ':unrelated/retained-body.txt'), 'excluded metadata body');
+  assert.equal(fs.existsSync(path.join(f.root, 'unrelated/retained-body.txt')), false);
+  assert.equal(f.git('status', '--porcelain', '--untracked-files=no'), '');
+});
+
+test('author refresh already containing captured main performs no commit or ref mutation', async t => {
+  const f = authorRefreshFixture(t);
+  const result = await f.run({main: f.base});
+  assert.equal(result.status, 'current'); assert.equal(result.head, f.before);
+  assert.equal(f.calls.some(args => args.includes('hash-object') || args.includes('update-ref') || args.includes('read-tree')), false);
+  assert.equal(fs.existsSync(path.join(f.j.target, 'author-tree-refresh.json')), false);
+});
+
+test('author refresh respects an existing reference transaction hook refusal', async t => {
+  const f = authorRefreshFixture(t), hook = path.join(f.root, '.git/hooks/reference-transaction');
+  fs.writeFileSync(hook, '#!/bin/sh\nif [ "$1" = prepared ]; then exit 1; fi\nexit 0\n'); fs.chmodSync(hook, 0o755);
+  await assert.rejects(f.run(), /ref updates aborted by hook|update-ref/);
+  assert.equal(f.git('rev-parse', 'HEAD'), f.before);
+  assert.equal(fs.existsSync(path.join(f.j.target, 'author-tree-refreshed.json')), false);
+  assert.equal(f.git('status', '--porcelain', '--untracked-files=no'), '');
+});
+
+test('author refresh refuses assume-unchanged and materialized skip-worktree edits hidden from normal diff', async t => {
+  for (const kind of ['assume', 'skip']) await t.test(kind, async t => {
+    const f = authorRefreshFixture(t), name = 'data/ownership-selection.json';
+    f.git('update-index', kind === 'assume' ? '--assume-unchanged' : '--skip-worktree', name);
+    f.put(name, 'hidden foreign edit\n');
+    await assert.rejects(f.run(), kind === 'assume' ? /Assume-unchanged/ : /Materialized skip-worktree/);
+    assert.equal(f.git('rev-parse', 'HEAD'), f.before);
+    assert.equal(fs.readFileSync(path.join(f.root, name), 'utf8'), 'hidden foreign edit\n');
+    assert.equal(fs.existsSync(path.join(f.j.target, 'author-tree-refresh.json')), false);
+  });
+});
+
+test('automatic commit rejects hidden index edits and a forged tree outside declared products', async t => {
+  const {j, git, validate} = automaticGitFixture(t);
+  await prepareAdvanceStage(j, 'recipe', 'recipe', {}, () => ({'recipe-index.json': Buffer.from('{}\n')}));
+  git('update-index', '--assume-unchanged', 'original'); fs.writeFileSync(path.join(j.root, 'original'), 'hidden edit');
+  await assert.rejects(commitAdvanceStage(j, 'recipe', {validate}), /Index trust flags/);
+  assert.equal(fs.readFileSync(path.join(j.root, 'original'), 'utf8'), 'hidden edit');
+  git('update-index', '--no-assume-unchanged', 'original'); fs.writeFileSync(path.join(j.root, 'original'), 'unchanged\n');
+  await assert.rejects(commitAdvanceStage(j, 'recipe', {validate, interrupt: point => {if(point === 'intent') throw Error('stop');}}), /stop/);
+  const filename = path.join(j.target, 'commit-recipe.json'), intent = JSON.parse(fs.readFileSync(filename));
+  const originalTree = intent.tree;
+  git('read-tree', intent.tree); fs.writeFileSync(path.join(j.root, 'foreign'), 'forged'); git('add', 'foreign'); intent.tree = git('write-tree');
+  git('read-tree', intent.parent);
+  intent.raw = intent.raw.replace(originalTree, intent.tree);
+  intent.head = createHash('sha1').update(`commit ${Buffer.byteLength(intent.raw)}\0`).update(intent.raw).digest('hex');
+  fs.writeFileSync(filename, JSON.stringify(intent));
+  await assert.rejects(commitAdvanceStage(j, 'recipe', {validate}), /undeclared paths/);
+  assert.equal(git('rev-parse', 'HEAD'), intent.parent);
+});
