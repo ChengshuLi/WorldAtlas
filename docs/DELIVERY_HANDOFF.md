@@ -519,3 +519,78 @@ before and after evidence traversal. Revoked, foreign, expired or replaced claim
 and changed scope/readiness fail. A benign renewal does not replace ownership.
 The actual independent receipt, exact head/body/manifest and unresolved-review
 gates remain authoritative.
+
+### Explicit v2 subsets and immutable receipt continuation
+
+`advance` also accepts a recipe with `mode: "explicit-groups"`. Each group names
+`id`, `handoff_id`, ordered `component_ids`, unique `target_ids`, and exact
+`source_template` / `native_template` commit/path locators. The templates must
+already be genuine `source-native-v2` requests with precisely that subset. The
+whole accepted handoff remains pinned, while groups must be disjoint and their
+target IDs must equal the accepted rows' stable target IDs. Unlike historical
+`retained-groups`, a subset does not need to cover the entire accepted cohort.
+There is no `compatibility` override. The existing resource model and issuance
+checks still apply, including the actual HEAD code/support checks for new requests.
+
+This mode preserves each template's source/native destination. For new science,
+prepare templates with fresh candidate destinations and the admitted resource
+configuration; the driver does not silently rename historical requests or rerun
+operators. `destination_prefix` is used only by the existing greedy constructor.
+The ordinary automatic entry commits recipe/request metadata, then waits for the
+real external SOURCE and NATIVE terminals as before.
+
+For stages already prepared by the standalone commands, `prepared_stages` in the
+advance config can map an existing stage ID to:
+
+```json
+{
+  "config": {"commit": "EXACT_ORIGINAL_CONFIG_COMMIT", "path": "original-config.json"},
+  "receipt": {"commit": "EXACT_RECEIPT_COMMIT", "path": "original-stage/preparation.json"}
+}
+```
+
+Use the actual original raw config, including its original local output paths.
+The receipt's config hash is a hash of those bytes, not a newly serialized or
+repinned substitute. The driver authenticates every immutable product and runs
+the ordinary metadata constructor to establish applicability to the current
+transition. It compares the entire output inventory and bytes, then records only
+a reference in its local continuation journal. It neither copies the retained
+products nor commits a duplicate stage. Resume rereads the same receipt; changed
+or removed inputs, product drift, foreign stages and changed reuse bindings fail.
+Missing stages continue through the existing constructor. Review and queue
+decisions cannot be adopted. This route can reuse SOURCE/NATIVE retention receipts
+before composition, without launching any scientific operator.
+
+A retained stage whose regenerated metadata would differ is rejected, rather than
+called complete. This includes changed consumed code for request issuance and
+changed descriptor identities. Preserve the old evidence, supply its exact
+original observations when still applicable, or prepare only the affected stage
+in a fresh continuation. An explicitly supplied byte-identical commit alias for
+a reused output is authenticated but kept exactly as supplied; it is not silently
+repinned to the receipt's later commit.
+
+For an already finalized standalone delivery, set `resume_finalized` to the same
+config/receipt locator pair, referencing the existing `finalize` stage. Use an
+explicit-v2 recipe whose templates name the actual original issued requests;
+include its exact `selector`, `package_inputs`, `new_prefix` and retained registry
+locators. This route verifies the complete new subset against the retained
+SOURCE/NATIVE authorities, preserved registry entries, original composed rows,
+genuine rebind execution custody and every final output. It then enters the
+ordinary publication/independent-review boundary directly. No preceding stage
+files or scientific evidence are minted. Do not combine it with `prepared_stages`
+or the older `completed_delivery` discovery/replay option.
+
+Neither receipt route establishes new science, CI acceptance, review acceptance
+or actual subsequent delivery adoption. The frozen Norway B PR #1804 was checked
+read-only as a real compatibility fixture; it was not changed or replayed. The
+opt-in retained-object control is:
+
+```sh
+GIT_NO_LAZY_FETCH=1 WORLDATLAS_DELIVERY_V2_FIXTURE=1 node --test \
+  --test-name-pattern='frozen Norway B' test/delivery-handoff-advance.test.mjs
+```
+
+It requires the referenced immutable Git objects locally, performs no fetch or
+operator execution, and includes adverse scope/product controls. Default CI uses
+bounded synthetic and actual-Git orchestration fixtures. Real later automatic
+batch adoption and measured delivery timing remain open on issue #1785.

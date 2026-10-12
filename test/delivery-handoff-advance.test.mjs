@@ -329,6 +329,24 @@ test('retained replay preserves literal scopes and rejects incomplete handoff co
  f.files.get(f.sourceTemplate.path).body.source_rule.expected_ids=f.componentIds.slice(0,2);f.files.get(f.nativeTemplate.path).body.additive.scope_ids=f.componentIds.slice(0,2);assert.throws(()=>materializeRecipe(recipe,f.reader),/omitted accepted/);
 });
 
+test('explicit v2 groups admit a genuine disjoint ordered subset without exhaustive handoff coverage', () => {
+ const f=fixture(), subset=f.componentIds.slice(1);
+ f.source.source_rule.expected_ids=subset;f.native.additive.scope_ids=subset;
+ const recipe={version:1,id:'subset',mode:'explicit-groups',registry:f.registry,
+  destination_prefix:'.cache/native-grid-candidates/subset',groups:[{id:'north',handoff_id:'accepted-whole',
+   component_ids:subset,target_ids:['t-one'],source_template:f.sourceTemplate,native_template:f.nativeTemplate}]};
+ const original=clone(recipe),out=materializeRecipe(recipe,f.reader);
+ assert.deepEqual(out.groups[0].component_ids,subset);assert.equal(out.index.compatibility,undefined);
+ assert.equal(JSON.parse(out.products['north-source-template.json']).operating_profile,'source-native-v2');
+ assert.deepEqual(recipe,original);assert.deepEqual(out.groups[0].source_locator,f.sourceTemplate);
+ for(const mutate of [r=>r.groups.push({...r.groups[0],id:'overlap'}),r=>r.groups[0].component_ids.reverse(),
+  r=>r.groups[0].target_ids=['foreign-target'],r=>r.compatibility='literal-historical-v1']){
+  const bad=clone(recipe);mutate(bad);assert.throws(()=>materializeRecipe(bad,f.reader));
+ }
+ delete f.source.operating_profile;
+ assert.throws(()=>materializeRecipe(recipe,f.reader),/genuine v2/);
+});
+
 test('candidate request serialization can force a split before publication',()=>{
  const f=fixture();const whole=materializeRecipe(f.recipe,f.reader);f.selection.native_request_bytes_bound=whole.groups[0].models.native.request_bytes-200;
  const split=materializeRecipe(f.recipe,f.reader);assert.ok(split.groups.length>1);assert.ok(split.groups.every(g=>g.models.native.request_bytes<=f.selection.native_request_bytes_bound));
@@ -1718,7 +1736,7 @@ test('real automatic author guard rereads current managed ownership before each 
   } finally { fs.writeFileSync(stateFile, original); }
 });
 
-function realAutomaticRecipe(f){
+function realAutomaticRecipe(f,{explicit=false}={}){
  const physicalBytes=2000,decodedBytes=5000,phase=4*1024*1024,legacy=false;
  const supervisor='coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs';
  const codePaths=['code.mjs','scripts/local-workspace.mjs','scripts/worker-identity.mjs',supervisor];
@@ -1763,13 +1781,16 @@ function realAutomaticRecipe(f){
  const source={...clone(common),operation:'retained-land-source-premises-v1',destination:'.cache/native-grid-candidates/old-source',source_rule:{version:1,profile:'retained-consumed-administrative-source',geometry_scope:'full-component',cohort_ids:componentIds,expected_ids:componentIds,registry_path:rp.path,
   ...Object.fromEntries(['cases_path','outcomes_path','payloads_path','simplified_comparison_path','generalized_comparison_path','remainders_path'].map(k=>[k,hp.path])),
   administrative_products:[admin],original_products:[],target_banks:[bank.path],manifest_path:manifest.path,bounds_path:bounds.path,source_catalogue_path:catalogue.path,inputs:[hp,rp,admin,bank,manifest,bounds,catalogue]}};
+ if(explicit)source.source_rule.expected_ids=componentIds.slice(1);
  const sourceTemplate=put('source-template.json',source),slots={source_request_path:files.get(sourceTemplate.path).pin,operating_path:pin('operating.json'),publication_path:pin('publication.json'),facts_path:pin('facts.json'),inventory_path:pin('inventory.gz',100,{uncompressed_bytes:1000,uncompressed_sha256:hash('inventory')})};
  const owner=pin('native-owner.gz',200,{uncompressed_bytes:1000,uncompressed_sha256:hash('owner')}),lat=pin('latitudes.gz',50,{uncompressed_bytes:100,uncompressed_sha256:hash('lat')});
  const native={...clone(common),operation:'unactivated-additive-native-batch-v1',destination:'.cache/native-grid-candidates/old-native',additive:{source_profile:source.source_rule.profile,scope_ids:componentIds,source_execution_commit:commit,source_runtime:{bytes:1000,sha256:hash('node')},manifest_path:manifest.path,bounds_path:bounds.path,latitudes_path:lat.path,original_bounds:{sha256:bounds.sha256},owner_parts:[{path:owner.path,manifest_path:'owner.bin',manifest_descriptor:{bytes:owner.bytes}}],...Object.fromEntries(Object.entries(slots).map(([k,p])=>[k,p.path])),inputs:[...source.source_rule.inputs,owner,lat,...Object.values(slots)]}};
+ if(explicit)native.additive.scope_ids=componentIds.slice(1);
  const nativeTemplate=put('native-template.json',native);
  const selection={handoff_id:'accepted-whole',source_template:sourceTemplate,source_resources:clone(resources),native_resources:clone(resources),physical_locator:{input:locator,format:'keyed-path'},targets:[{target_id:'t-one',bank_path:bank.path,native_template:nativeTemplate}],
   predecessor_allowance:Object.fromEntries(Object.keys(slots).map(k=>[k,{bytes:k==='source_request_path'?131072:1000,...(k==='inventory_path'?{uncompressed_bytes:10000}:{})}])),native_request_bytes_bound:131072};
  const recipe={version:1,id:'delivery',mode:'greedy-model',registry,destination_prefix:'.cache/native-grid-candidates/delivery',handoffs:[selection]};
+ if(explicit){recipe.mode='explicit-groups';delete recipe.handoffs;recipe.groups=[{id:'subset',handoff_id:'accepted-whole',component_ids:componentIds.slice(1),target_ids:['t-one'],source_template:sourceTemplate,native_template:nativeTemplate}];}
  const recipeLocator=put('recipe.json',recipe);return {reader,recipe,recipeLocator,budget,componentIds};
 }
 
@@ -1800,6 +1821,23 @@ test('default automatic delivery commits actual recipe and issued SOURCE request
   assert.deepEqual(input.reader.read(requestPin), requestBytes);
   assert.equal(readAdvanceStatus(journal).waiting.kind, 'source-terminal');
 });
+test('default automatic entry issues a genuine v2 subset and stops only at its SOURCE terminal', async t => {
+  const f=managedAutomaticFixture(t),input=realAutomaticRecipe(f,{explicit:true});
+  const config={...f.config,recipe:input.recipeLocator};
+  const j=openAdvanceJournal(f.root,f.prefix+'advance-subset',config.recipe,{budget:input.budget});
+  const validate=await automaticAuthorGuard(f.root,config,f.api);
+  const result=await runAutomaticDelivery(j,config,input.reader,{prepareRequests},{validate});
+  assert.equal(result.kind,'source-terminal');assert.equal(result.stage,'source-subset');
+  const request=input.reader.json(input.reader.pin(f.git('rev-parse','HEAD'),j.destination+'/requests/subset-source-request.json'));
+  assert.equal(request.operating_profile,'source-native-v2');
+  assert.deepEqual(request.source_rule.expected_ids,input.componentIds.slice(1));
+  assert.deepEqual(request.source_rule.cohort_ids,input.componentIds);
+  assert.equal(fs.existsSync(path.join(f.root,request.destination)),false);
+  const head=f.git('rev-parse','HEAD');
+  await runAutomaticDelivery(j,config,input.reader,{prepareRequests},{validate});
+  assert.equal(f.git('rev-parse','HEAD'),head,'unchanged resumed requests do not get another commit');
+});
+
 test('default automatic delivery revalidates the real claim before committing newly prepared requests', async t => {
   const f = managedAutomaticFixture(t), input = realAutomaticRecipe(f), config = {...f.config, recipe: input.recipeLocator};
   const journal = openAdvanceJournal(f.root, f.prefix + 'advance', config.recipe, {budget: input.budget});
@@ -1830,4 +1868,152 @@ test('automatic delivery uses the shared conditional observer transport without 
   assert.deepEqual(api(route), [{id: 1}]); assert.deepEqual(api(route), [{id: 1}]);
   assert.throws(() => api('/repos/other/repo/issues/1/comments'), /Invalid bounded queue read/);
   assert.equal(reads, 2);
+});
+
+
+import {qualifiedPreparedReuse} from '../scripts/delivery-handoff-advance.mjs';
+test('qualified stage reuse preserves immutable products and records only references, with once-only resume', async t => {
+ const f=fixture(),j=journal(t);j.reader=f.reader;
+ const configPin=f.add(commit,'config.json',{original:'configuration'});
+ const receipt=f.stage(commit,'qualified','requests',{'request.json':{actual:'request'}});
+ const receiptPath=commit+':qualified/preparation.json';
+ const body=JSON.parse(f.files.get(receiptPath));body.binding.config_sha256=configPin.sha256;
+ f.add(commit,'qualified/preparation.json',body);
+ const adoption={config:{commit,path:'config.json'},receipt};
+ const products={'request.json':f.reader.read(f.reader.pin(commit,'qualified/request.json'))};
+ let calls=0;
+ await prepareAdvanceStage(j,'requests','requests',{derived:'same request'},()=>{calls++;return products;},{adoption});
+ assert.equal(calls,1);assert.deepEqual(readAdvanceStatus(j).completed,['requests']);
+ assert.equal(fs.existsSync(path.join(j.target,'requests')),false,'no copied evidence directory');
+ const event=fs.readFileSync(path.join(j.target,'requests.completed.json'));
+ await prepareAdvanceStage(j,'requests','requests',{derived:'same request'},()=>{throw Error('rerun');},{adoption});
+ assert.deepEqual(fs.readFileSync(path.join(j.target,'requests.completed.json')),event);
+ assert.throws(()=>qualifiedPreparedReuse(f.reader,adoption,'retain'),/phase/);
+ assert.throws(()=>qualifiedPreparedReuse(f.reader,adoption,'requests',{'request.json':Buffer.from('{}')}),/no longer matches/);
+ f.files.set(commit+':qualified/request.json',Buffer.from('corrupt'));
+ assert.throws(()=>readAdvanceStatus(j),/differs/);
+});
+
+test('stage reuse rejects wrong raw config, missing outputs and changed inputs before completion', async t => {
+ const f=fixture(),j=journal(t);j.reader=f.reader;
+ f.add(commit,'config.json',{original:true});
+ const receipt=f.stage(commit,'qualified','requests',{'request.json':{actual:true}});
+ const adoption={config:{commit,path:'config.json'},receipt};
+ const products={'request.json':f.reader.read(f.reader.pin(commit,'qualified/request.json'))};
+ await assert.rejects(prepareAdvanceStage(j,'requests','requests',{},()=>products,{adoption}),/raw config/);
+ assert.deepEqual(readAdvanceStatus(j).completed,[]);
+ assert.equal(fs.existsSync(path.join(j.target,'requests')),false);
+ await assert.rejects(prepareAdvanceStage(j,'requests','requests',{changed:true},()=>products,{adoption}),/Changed stage inputs/);
+});
+
+// Explicit read-only real-fixture suite. Requires the retained immutable Git
+// objects; never fetches science, launches operators, edits the frozen branch or
+// claims actual subsequent-batch adoption. Default CI uses the bounded controls.
+if (process.env.WORLDATLAS_DELIVERY_V2_FIXTURE === '1') {
+  test('frozen Norway B v2 subset resumes qualified final and earlier operator receipts without evidence copies', async t => {
+    const prep=await import('../scripts/prepare-delivery-handoff.mjs');
+    const flow=await import('../scripts/delivery-handoff-advance.mjs');
+    const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+    const r=prep.pinReader(root,{allowance:{phaseBytes:536870912,rssBytes:1073741824}});
+    const head='abf421fbca84da6673a6b0477acfefc9fd594ff4',prefix='coordination/engineering/nor18-selected-20261012/';
+    const loc=name=>({commit:head,path:prefix+name}),read=name=>r.json(r.pin(head,prefix+name));
+    const locator=p=>({commit:p.commit,path:p.path});
+    const final=read('north13-finalize-config-001.json'),requests=read('north13-requests-config-001.json'),composition=read('north13-compose-config-001.json');
+    const registry=r.json(final.registry),entry=registry.entries.find(e=>e.source_authority.path.includes('/north13-'));
+    const binding=r.json(entry.source_authority),source=r.json(binding.original_pins.source_request),ids=source.source_rule.expected_ids;
+    const accepted=r.json(requests.registry).entries.find(e=>e.id===requests.groups[0].handoff_id);
+    const handoff=r.json({...accepted.source,commit:accepted.accepted_source_commit});
+    const recipe={version:1,id:'nor13',mode:'explicit-groups',registry:locator(requests.registry),new_prefix:prefix,
+      destination_prefix:'.cache/native-grid-candidates/nor13-continuation',selector:locator(final.selector),package_inputs:locator(final.package_inputs),
+      retained_registries:[locator(composition.registries[0])],groups:[{id:'nor13',handoff_id:requests.groups[0].handoff_id,component_ids:ids,
+        target_ids:[...new Set(handoff.candidate_source_native_bindings.filter(row=>ids.includes(row.component_id)).map(row=>row.retained_payload.target_stable_location_id))],
+        source_template:locator(binding.original_pins.source_request),native_template:locator(binding.original_pins.native_request)}]};
+    assert.equal(accepted.cohort_ids.length,18);assert.equal(ids.length,13);
+    const adoption={config:loc('north13-finalize-config-001.json'),receipt:loc('north13-final-001/preparation.json')};
+    const adapters={composeAuthorities:prep.composeAuthorities,rebindCustody:prep.rebindCustody,finalizeDelivery:prep.finalizeDelivery,
+      authorityReader:()=>flow.deliveryAuthorityReader(root,r)};
+    const snapshot=r.read(r.pin(head,adoption.receipt.path));
+    const result=flow.qualifyFinalizedCheckpoint(recipe,adoption,r,adapters);
+    assert.deepEqual(result.component_ids,ids);assert.deepEqual(r.read(result.receipt),snapshot);
+    const bad=structuredClone(recipe);bad.groups[0].target_ids=['foreign-target'];
+    assert.throws(()=>flow.qualifyFinalizedCheckpoint(bad,adoption,r,adapters),/target identities/);
+    const omitted=structuredClone(recipe);omitted.retained_registries=[];
+    assert.throws(()=>flow.qualifyFinalizedCheckpoint(omitted,adoption,r,adapters),/foreign\/duplicate/);
+    assert.throws(()=>flow.qualifyFinalizedCheckpoint(recipe,adoption,r,{...adapters,finalizeDelivery:(...args)=>{
+      const out=prep.finalizeDelivery(...args);delete out['ownership-selection.json'];return out;
+    }}),/inventory differs/);
+    // Dry-run through the actual automatic fixed transition, using an in-memory
+    // recipe locator only. The original products all use the genuine Git reader.
+    const raw=prep.jsonBytes(recipe),pin={commit:head,path:'fixture-recipe.json',mode:'100644',git_blob_oid:'a'.repeat(40),bytes:raw.length,sha256:digest(raw)};
+    const reader={...r,pin:(c,p)=>p===pin.path&&c===head?pin:r.pin(c,p),read:p=>p.path===pin.path?raw:r.read(p),json:p=>p.path===pin.path?recipe:r.json(p)};
+    const j=journal(t);j.reader=reader;
+    const config={version:1,recipe:{commit:head,path:pin.path},resume_finalized:adoption};
+    let publicationChecks=0;
+    const outcome=await flow.runAutomaticDelivery(j,config,reader,adapters,{validate:async()=>{},beforePublication:async()=>{publicationChecks++;},
+      commitStage:()=>{throw Error('Frozen checkpoint tried to commit duplicate evidence');}});
+    assert.equal(outcome.kind,'publication-review');assert.equal(publicationChecks,1);
+    assert.deepEqual(readAdvanceStatus(j).completed,[]);
+    assert.equal(fs.readdirSync(j.target).some(name=>fs.lstatSync(path.join(j.target,name)).isDirectory()),false);
+    for(const kind of ['source','native']){
+      const observation={publication:loc('north13-'+kind+'-qualified-001/publication.json'),terminal:loc('north13-'+kind+'-qualified-001/terminal.json')};
+      const retained=flow.committedRetentionConfig(r,observation),products=prep.retainProducts(retained.config,root,r,retained.readLocal);
+      const cfg=kind==='source'?'north13-retain-config-001.json':'north13-native-retain-config-001.json';
+      const reuse={config:loc(cfg),receipt:loc('north13-'+kind+'-qualified-001/preparation.json')};
+      flow.qualifiedPreparedReuse(r,reuse,'retain',products);
+      j.reader=r;
+      await prepareAdvanceStage(j,kind+'-nor13','retain',observation,()=>products,{adoption:reuse});
+      assert.equal(fs.existsSync(path.join(j.target,kind+'-nor13')),false);
+    }
+    assert.deepEqual(readAdvanceStatus(j).completed,['native-nor13','source-nor13']);
+    assert.deepEqual(r.read(result.receipt),snapshot);
+  });
+}
+
+test('automatic receipt adoption never commits copied products, including repeated invocation', async t => {
+ const f=fixture(),j=journal(t);j.reader=f.reader;
+ const original=f.add(commit,'original-config.json',{scope:'unchanged'});
+ const receipt=f.stage(commit,'issued','requests',{'request.json':{scope:'unchanged'}});
+ const document=JSON.parse(f.files.get(commit+':issued/preparation.json'));document.binding.config_sha256=original.sha256;
+ f.add(commit,'issued/preparation.json',document);
+ const adoption={config:{commit,path:'original-config.json'},receipt};
+ const config={prepared_stages:{requests:adoption}},products={'request.json':f.reader.read(f.reader.pin(commit,'issued/request.json'))};
+ let preparations=0,commits=0;
+ const nextStage=async()=>readAdvanceStatus(j).completed.includes('requests')
+  ?{waiting:{status:'waiting',stage:'source-g',kind:'source-terminal',detail:'Genuine terminal absent'}}
+  :{id:'requests',phase:'requests',input:{scope:'unchanged'},produce:()=>{preparations++;return products;}};
+ const options={validate:async()=>{},nextStage,commitStage:()=>{commits++;throw Error('duplicate commit');}};
+ assert.equal((await runAutomaticDelivery(j,config,f.reader,{},options)).kind,'source-terminal');
+ assert.equal((await runAutomaticDelivery(j,config,f.reader,{},options)).kind,'source-terminal');
+ assert.equal(preparations,1);assert.equal(commits,0);assert.equal(fs.existsSync(path.join(j.target,'requests')),false);
+ await assert.rejects(prepareAdvanceStage(j,'requests','requests',{scope:'unchanged'},()=>products),/reuse binding changed/);
+ assert.throws(()=>qualifiedPreparedReuse(f.reader,adoption,'review'),/cannot be adopted/);
+});
+
+test('reused automatic observations preserve authenticated original aliases and reject foreign outputs', async t => {
+ const f=fixture(),j=journal(t);j.reader=f.reader;
+ const config=f.add(commit,'registry-config.json',{authorities:[]});
+ const receipt=f.stage(later,'published','registry',{'authority-registry.json':{version:1,entries:[]}});
+ const doc=JSON.parse(f.files.get(later+':published/preparation.json'));doc.binding.config_sha256=config.sha256;
+ f.add(later,'published/preparation.json',doc);
+ f.add(commit,'published/authority-registry.json',{version:1,entries:[]});
+ const adoption={config:{commit,path:'registry-config.json'},receipt};
+ const products={'authority-registry.json':f.reader.read(f.reader.pin(later,'published/authority-registry.json'))};
+ await prepareAdvanceStage(j,'registry','registry',{},()=>products,{adoption});
+ const original={commit,path:'published/authority-registry.json'};
+ assert.deepEqual(automaticDeliveryObservations(j,{observations:{registry:original}}).observations.registry,original);
+ f.add(commit,'published/authority-registry.json',{version:1,entries:['foreign']});
+ assert.throws(()=>automaticDeliveryObservations(j,{observations:{registry:original}}),/conflicts/);
+});
+
+
+test('reuse refuses an interrupted product directory without completing or changing its sentinel', async t => {
+ const f=fixture(),j=journal(t);j.reader=f.reader;
+ const products={'a.json':Buffer.from('{}\n')};
+ await assert.rejects(prepareAdvanceStage(j,'requests','requests',{},()=>products,{interrupt:()=>{throw Error('interruption');}}),/interruption/);
+ const sentinel=fs.readFileSync(path.join(j.target,'requests/a.json'));
+ let called=false;
+ await assert.rejects(prepareAdvanceStage(j,'requests','requests',{},()=>{called=true;return products;},
+  {adoption:{config:{commit,path:'unused.json'},receipt:{commit,path:'unused/preparation.json'}}}),/Cannot adopt/);
+ assert.equal(called,false);assert.deepEqual(fs.readFileSync(path.join(j.target,'requests/a.json')),sentinel);
+ assert.equal(fs.existsSync(path.join(j.target,'requests.completed.json')),false);
 });

@@ -49,6 +49,23 @@ export function readPreparedStage(reader, locator, expectedPhase) {
   return {pin, receipt, outputs};
 }
 
+// Reuse authenticates both the original raw configuration and every committed
+// output. The ordinary constructor below still establishes semantic applicability;
+// a matching hash or caller-written completion flag cannot skip that check.
+export function qualifiedPreparedReuse(reader, adoption, phase, products = null) {
+  need(['recipe', 'requests', 'native-requests', 'retain', 'authority', 'registry', 'compose', 'rebind-operating', 'rebind-certificate', 'package', 'finalize'].includes(phase), 'Review and queue decisions cannot be adopted');
+  need(adoption && equal(Object.keys(adoption).sort(), ['config', 'receipt']), 'Reuse requires original config and preparation receipt locators');
+  const stage = readPreparedStage(reader, adoption.receipt, phase);
+  const config = locate(reader, adoption.config);
+  need(hash(reader.read(config)) === stage.receipt.binding.config_sha256, 'Reused receipt does not bind its original raw config');
+  if (products) {
+    need(equal(Object.keys(products).sort(), Object.keys(stage.outputs).sort()), 'Reused stage output inventory differs');
+    for (const [name, raw] of Object.entries(products))
+      need(Buffer.isBuffer(raw) && reader.read(stage.outputs[name]).equals(raw), 'Reused stage no longer matches qualified inputs: ' + name);
+  }
+  return {...stage, config};
+}
+
 // `templates` and `retained` are produced by the admitted recipe/stage index.
 // They identify files, not component IDs, hashes, source acceptance or approvals.
 export function nativeConfigFromStages(reader, {requests, retained, templates, requested_resources, compatibility}) {
@@ -142,7 +159,7 @@ function exclusive(filename, raw) {
 // Immutable intent is created before outputs. It is a local resume aid, never a
 // scientific receipt or an authorization. Only an identical intent may fill an
 // interrupted metadata write; unknown files and changed bytes always refuse.
-export function openAdvanceJournal(root, destination, recipe, {resume = false, now = Date.now, budget = null} = {}) {
+export function openAdvanceJournal(root, destination, recipe, {resume = false, now = Date.now, budget = null, reader = null} = {}) {
   const target = directory(root, destination), intentPath = path.join(target, 'advance.json');
   budget ??= candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0});
   let intentRaw;
@@ -160,7 +177,7 @@ export function openAdvanceJournal(root, destination, recipe, {resume = false, n
   const intent = JSON.parse(intentRaw);
   need(intent.version === 1 && intent.kind === 'delivery-advance-v1' && equal(intent.recipe, recipe)
     && Number.isFinite(Date.parse(intent.started_at)), 'Foreign or changed advance intent');
-  return {root, target, destination, intent, now, budget, chargedJournalFiles: new Set([intentPath])};
+  return {root, target, destination, intent, now, budget, reader, chargedJournalFiles: new Set([intentPath])};
 }
 
 function journalFile(journal, filename) {
@@ -230,6 +247,13 @@ export function readAdvanceStatus(journal) {
       && hash(bytes(intent.config)) === event.binding.config_sha256
       && Number.isFinite(event.preparation_ms) && event.preparation_ms >= 0
       && Number.isFinite(Date.parse(event.completed_at)), 'Completed stage intent/timing differs');
+    if (event.adopted) {
+      need(journal.reader, 'Immutable reader required to authenticate reused stages');
+      const existing = qualifiedPreparedReuse(journal.reader, event.adopted, event.binding.phase);
+      need(equal(existing.receipt.outputs, event.outputs), 'Reused completion inventory differs');
+      need(!fs.lstatSync(path.join(journal.target, event.stage), {throwIfNoEntry: false}), 'Reused stage must not duplicate committed products');
+      completed.push(event); continue;
+    }
     const receipt = JSON.parse(journalFile(journal, path.join(journal.target, event.stage, 'preparation.json')));
     need(equal(receipt.binding, event.binding) && equal(receipt.outputs, event.outputs), 'Completion/whole inventory differs');
     const actualNames = fs.readdirSync(path.join(journal.target, event.stage)).sort();
@@ -291,7 +315,7 @@ export function observeAdvance(journal, observation) {
   return event;
 }
 
-export async function prepareAdvanceStage(journal, id, phase, config, produce, {interrupt = () => {}, preparationStarted = performance.now(), apiWaitMilliseconds = () => 0} = {}) {
+export async function prepareAdvanceStage(journal, id, phase, config, produce, {interrupt = () => {}, preparationStarted = performance.now(), apiWaitMilliseconds = () => 0, adoption = null} = {}) {
   const names = stageNames(id), binding = {phase, config_sha256: hash(bytes(config))};
   const intended = bytes({version: 1, stage: id, binding, config});
   const intentPath = path.join(journal.target, names.intent), eventPath = path.join(journal.target, names.event);
@@ -303,14 +327,28 @@ export async function prepareAdvanceStage(journal, id, phase, config, produce, {
   }
   if (fs.existsSync(eventPath)) {
     const status = readAdvanceStatus(journal); need(status.completed.includes(id), 'Missing completed stage');
+    const event = JSON.parse(journalFile(journal, eventPath));
+    need(equal(event.adopted ?? null, adoption), 'Completed stage reuse binding changed');
     return {stage: id, resumed: true};
   }
+  if (adoption) need(!fs.lstatSync(path.join(journal.target, names.directory), {throwIfNoEntry: false}),
+    'Cannot adopt over an interrupted or existing stage product directory');
   const products = await produce();
   const budget = journal.budget, outputs = {};
   need(Object.keys(products).length, 'Empty advancement cannot complete');
   for (const [name, raw] of Object.entries(products)) {
     need(safe(name) && !name.includes('/') && name !== 'preparation.json' && Buffer.isBuffer(raw), 'Plain metadata products required');
     budget.add({bytes: raw.length}); outputs[name] = {bytes: raw.length, sha256: hash(raw)};
+  }
+  if (adoption) {
+    need(journal.reader, 'Immutable reader required for stage reuse');
+    qualifiedPreparedReuse(journal.reader, adoption, phase, products);
+    const event = {version: 1, stage: id, binding, outputs, adopted: adoption,
+      preparation_ms: Math.max(0, performance.now() - preparationStarted), api_wait_ms: 0,
+      observations_seen: fs.readdirSync(journal.target).filter(n => /^observation-\d{6}\.json$/.test(n)).length,
+      completed_at: new Date(journal.now()).toISOString()};
+    writeJournal(journal, eventPath, bytes(event));
+    return {stage: id, resumed: false, reused: true, receipt: adoption.receipt};
   }
   const receipt = bytes({version: 1, binding, outputs});
   budget.add({bytes: receipt.length});
@@ -561,7 +599,21 @@ export function committedRetentionConfig(reader, observation) {
 }
 
 const locatorOf = pin => ({commit: pin.commit, path: pin.path});
-function journalBody(journal, stage, name) { return journalFile(journal, path.join(journal.target, stage, name)); }
+function journalBody(journal, stage, name) {
+  if (stage !== '.') {
+    const eventPath = path.join(journal.target, stageNames(stage).event);
+    if (fs.existsSync(eventPath)) {
+      const event = JSON.parse(journalFile(journal, eventPath));
+      if (event.adopted) {
+        const existing = qualifiedPreparedReuse(journal.reader, event.adopted, event.binding.phase);
+        const pin = name === 'preparation.json' ? existing.pin : existing.outputs[name];
+        need(pin, 'Missing reused stage member');
+        return journal.reader.read(pin);
+      }
+    }
+  }
+  return journalFile(journal, path.join(journal.target, stage, name));
+}
 function journalJSON(journal, stage, name) { return JSON.parse(journalBody(journal, stage, name)); }
 
 // Actual committed publication observations have no group IDs. Their original
@@ -659,25 +711,85 @@ export function observeCompletedDelivery(reader, {sidecar: sidecarLocator, compo
     operating: locatorOf(certificate.operating), certificate: locatorOf(selected.current_rebind), sidecar: sidecarLocator};
 }
 
+// A completed standalone finalize receipt is a late entry into the SAME fixed
+// delivery path. Validate its actual authority, composition, execution custody and
+// final products; do not recreate the preceding stages or publish copied evidence.
+export function qualifyFinalizedCheckpoint(recipe, adoption, reader, adapters) {
+  need(recipe.mode === 'explicit-groups', 'Finalized checkpoint requires an explicit v2 subset recipe');
+  const planned = materializeRecipe(recipe, reader);
+  const stage = qualifiedPreparedReuse(reader, adoption, 'finalize');
+  const final = reader.json(stage.config);
+  need(final.new_prefix === recipe.new_prefix
+    && equal(locatorOf(final.selector), recipe.selector)
+    && equal(locatorOf(final.package_inputs), recipe.package_inputs), 'Finalized checkpoint original selection/package context differs');
+  const registry = reader.json(final.registry), pairs = [], seen = new Set();
+  const retained = (recipe.retained_registries ?? []).flatMap(p => reader.json(locate(reader, p)).entries);
+  for (const entry of registry.entries) {
+    if (retained.some(old => equal(old, entry))) continue;
+    const binding = reader.json(entry.source_authority);
+    const source = reader.json(binding.original_pins.source_request);
+    const native = reader.json(binding.original_pins.native_request);
+    const group = planned.groups.find(g => equal(g.component_ids, source.source_rule?.expected_ids));
+    need(group && !seen.has(group.id), 'Finalized checkpoint has foreign/duplicate new component scope');
+    need(equal(source, reader.json(locate(reader, group.source_locator)))
+      && equal(native, reader.json(locate(reader, group.native_locator))), 'Finalized checkpoint original SOURCE/NATIVE identities differ from recipe');
+    seen.add(group.id);
+    pairs.push({rule_preimage: locatorOf(entry.rule_preimage), source_authority: locatorOf(entry.source_authority)});
+  }
+  need(seen.size === planned.groups.length && retained.every(old => registry.entries.some(e => equal(e, old))),
+    'Finalized checkpoint omitted requested or retained authority');
+  const qualified = JSON.parse(constructAuthorityRegistry(adapters.authorityReader(), pairs)['authority-registry.json']);
+  need(qualified.entries.every(e => registry.entries.some(actual => equal(actual, e))), 'Finalized checkpoint authority descriptor differs');
+  const composition = adapters.composeAuthorities(registryComposition(reader, [final.registry]), reader);
+  for (const [name, pin] of [['authority-registry.json', final.registry], ['composed-original-ledger.json', final.ledger]])
+    need(reader.read(pin).equals(composition[name]), 'Finalized checkpoint composition differs: ' + name);
+  const certificate = reader.json(final.rebind), operating = reader.json(certificate.operating);
+  const rebind = {version: 1, ...Object.fromEntries(['request', 'facts', 'publication', 'result', 'operating'].map(k => [k, certificate[k]])),
+    terminal: operating.execution_custody.terminal, execution_custody: operating.execution_custody};
+  need(reader.read(final.rebind).equals(adapters.rebindCustody(rebind, reader, true)['certificate.json']),
+    'Finalized checkpoint certificate differs from genuine execution custody');
+  qualifiedPreparedReuse(reader, adoption, 'finalize', adapters.finalizeDelivery(final, reader));
+  return {receipt: stage.pin, config: stage.config, component_ids: planned.groups.flatMap(g => g.component_ids),
+    limits: ['Immutable metadata and retained execution qualification only; no new science, delivery, CI or review acceptance.']};
+}
+
 // Fixed transitions, not a job graph. One invocation prepares the next available
 // metadata stage or states the actual missing external input. Repeating the same
 // command consumes saved indexes instead of handwritten result hashes or IDs.
 export async function nextDeliveryStage(journal, config, reader, adapters) {
+  journal.reader = reader;
   const recipePin = locate(reader, config.recipe), recipe = reader.json(recipePin);
+  if (config.resume_finalized) {
+    need(!config.completed_delivery && !config.prepared_stages, 'Choose one unambiguous receipt continuation route');
+    qualifyFinalizedCheckpoint(recipe, config.resume_finalized, reader, adapters);
+    if (adapters.beforeReview) await adapters.beforeReview();
+    if (!config.review) return {waiting: {status: 'waiting', stage: 'review', kind: 'publication-review',
+      detail: 'Existing finalized receipt qualified without replay; publish the actual author head/PR for independent review.'}};
+    return nextReviewStage(journal, config.review, reader, adapters);
+  }
   const status = readAdvanceStatus(journal), done = new Set(status.completed);
   const completed = (id, input) => {
     if (!done.has(id)) return false;
     need(equal(journalJSON(journal, '.', stageNames(id).intent).config, input), 'Completed stage inputs changed: ' + id);
+    const event = journalJSON(journal, '.', stageNames(id).event);
+    need(equal(event.adopted ?? null, config.prepared_stages?.[id] ?? null), 'Completed stage reuse binding changed: ' + id);
     return true;
   };
   const prepare = (id, phase, input, produce) => ({id, phase, input, produce});
   const wait = (stage, kind, detail) => ({waiting: {status: 'waiting', stage, kind, detail}});
   if (!done.has('recipe')) return prepare('recipe', 'recipe', {recipe: recipePin}, () => materializeRecipe(recipe, reader).products);
   const index = journalJSON(journal, 'recipe', 'recipe-index.json'), groups = index.groups;
+  if (config.prepared_stages) {
+    const allowed = new Set(['recipe', 'requests', 'native-requests', 'registry', 'compose', 'rebind-retain',
+      'rebind-operating', 'rebind-certificate', 'package', 'finalize',
+      ...groups.flatMap(g => ['source-', 'native-', 'authority-'].map(prefix => prefix + g.id))]);
+    need(typeof config.prepared_stages === 'object' && !Array.isArray(config.prepared_stages)
+      && Object.keys(config.prepared_stages).every(id => allowed.has(id)), 'Unknown or review stage cannot be reused');
+  }
   let observed = config.observations ?? {};
   if (config.completed_delivery) observed = {...observeCompletedDelivery(reader, config.completed_delivery), ...observed};
   const compatibility = index.compatibility ? {compatibility: index.compatibility} : {};
-  if (index.mode !== 'retained-groups' && !observed.template_commit)
+  if (index.mode === 'greedy-model' && !observed.template_commit)
     return wait('requests', 'commit', 'Commit the completed recipe templates and supply their actual commit.');
   const requestConfig = kind => ({version: 1, ...compatibility, ...(kind === 'source' ? {
     registry: index.registry, component_ids: groups.flatMap(g => g.component_ids)} : {}), groups: groups.map(group => {
@@ -937,8 +1049,8 @@ function nativeInvariant(request){const r=structuredClone(request);delete r.dest
 function sourceCommon(request){const r=request.source_rule,removed=new Set([...sourceKeys.map(k=>r[k]),r.registry_path,...r.original_products.map(p=>p.path),...r.administrative_products.map(p=>p.path),...r.target_banks]);return r.inputs.filter(p=>!removed.has(p.path));}
 
 function materializeRecipe(recipe,reader){
- need(recipe?.version===1&&['greedy-model','retained-groups'].includes(recipe.mode)&&/^[a-z0-9-]+$/.test(recipe.id),'Explicit admitted delivery recipe required');
- need(safe(recipe.destination_prefix)&&recipe.destination_prefix.startsWith('.cache/native-grid-candidates/'),'Fresh candidate destination prefix required');
+ need(recipe?.version===1&&['greedy-model','retained-groups','explicit-groups'].includes(recipe.mode)&&/^[a-z0-9-]+$/.test(recipe.id),'Explicit admitted delivery recipe required');
+ if(recipe.mode==='greedy-model')need(safe(recipe.destination_prefix)&&recipe.destination_prefix.startsWith('.cache/native-grid-candidates/'),'Fresh candidate destination prefix required');
  const registry=read(reader,recipe.registry);need(registry.body.version===1&&registry.body.kind==='accepted-administrative-handoffs-v1'&&Array.isArray(registry.body.entries),'Accepted registry required');
  const products={},groups=[],acquisitions=[],allIds=new Set();
  function emit(id,handoff,source,native,models,locators={}){
@@ -948,22 +1060,31 @@ function materializeRecipe(recipe,reader){
   const sourceName=id+'-source-template.json',nativeName=id+'-native-template.json';
   need(!products[sourceName],'Duplicate group label');products[sourceName]=bytes(source);products[nativeName]=bytes(native);
   const group={id,handoff_id:handoff.entry.id,component_ids,source_template:sourceName,native_template:nativeName,
-   source_destination:recipe.mode==='retained-groups'?source.destination:recipe.destination_prefix+'-'+id+'-source',native_destination:recipe.mode==='retained-groups'?native.destination:recipe.destination_prefix+'-'+id+'-native',...locators,models};
+   source_destination:recipe.mode!=='greedy-model'?source.destination:recipe.destination_prefix+'-'+id+'-source',native_destination:recipe.mode!=='greedy-model'?native.destination:recipe.destination_prefix+'-'+id+'-native',...locators,models};
   groups.push(group);
   for(const [stage,request] of [['source',source],['native',native]])for(const p of [request.report,...request.baseline.pins,...(request.source_rule??request.additive).inputs]){
    if(p.kind||(recipe.mode==='greedy-model'&&stage==='native'&&nativeKeys.some(k=>request.additive[k]===p.path)))continue;acquisitions.push({source:operatorPin(p),destination:p.path,role:stage+'-input'});}
  }
- if(recipe.mode==='retained-groups'){
-  need(recipe.compatibility==='literal-historical-v1'&&Array.isArray(recipe.groups)&&recipe.groups.length,'Explicit literal retained replay required');
+ if(recipe.mode!=='greedy-model'){
+  const explicit=recipe.mode==='explicit-groups';
+  need((explicit?recipe.compatibility===undefined:recipe.compatibility==='literal-historical-v1')&&Array.isArray(recipe.groups)&&recipe.groups.length,'Explicit admitted groups required');
   const cover=new Map();
-  for(const g of recipe.groups){need(/^[a-z0-9-]+$/.test(g.id)&&g.component_ids===undefined,'Replay IDs derive only from issued SOURCE');
+  for(const g of recipe.groups){need(/^[a-z0-9-]+$/.test(g.id)&&(explicit?unique(g.component_ids):g.component_ids===undefined),'Explicit unique subset or original replay scope required');
    const h=accepted(reader,registry,g),source=read(reader,g.source_template).body,native=read(reader,g.native_template).body,r=source.source_rule;
    need(source.operation==='retained-land-source-premises-v1'&&native.operation==='unactivated-additive-native-batch-v1'&&r?.profile==='retained-consumed-administrative-source'&&equal(r.cohort_ids,h.entry.cohort_ids)&&r.registry_path===registry.pin.path&&r.cases_path===h.pin.path&&equal(r.inputs.find(p=>p.path===r.cases_path),h.pin),'Replay template differs from accepted whole handoff');
    need(unique(r.expected_ids)&&equal(r.expected_ids,h.entry.cohort_ids.filter(id=>r.expected_ids.includes(id)))&&equal(native.baseline,source.baseline),'Replay original ordered scope differs');
+   if(explicit){
+    need(source.operating_profile==='source-native-v2'&&native.operating_profile==='source-native-v2'&&equal(g.component_ids,r.expected_ids),'Explicit groups require genuine v2 templates with the exact ordered subset');
+    need(equal(native.report,source.report)&&equal(native.parent,source.parent),'SOURCE/NATIVE report or parent identity differs');
+    const targets=[...new Set(h.rows.filter(row=>g.component_ids.includes(row.component_id)).map(row=>row.retained_payload.target_stable_location_id))].sort();
+    need(unique(g.target_ids)&&equal([...g.target_ids].sort(),targets),'Explicit subset target identities differ from accepted rows');
+    const models={source:modelRequestBudget(source),native:modelRequestBudget(native)};
+    need(models.source.fits&&models.native.fits,'Explicit group exceeds admitted resource bounds');
+   }
    const prior=cover.get(h.entry.id)??[];cover.set(h.entry.id,[...prior,...r.expected_ids]);
    emit(g.id,h,source,native,{source:modelRequestBudget(source),native:modelRequestBudget(native)},{source_locator:g.source_template,native_locator:g.native_template});
   }
-  for(const [id,ids]of cover){const entry=registry.body.entries.find(e=>e.id===id);need(equal([...ids].sort(),[...entry.cohort_ids].sort()),'Replay omitted accepted handoff components');}
+  if(!explicit)for(const [id,ids]of cover){const entry=registry.body.entries.find(e=>e.id===id);need(equal([...ids].sort(),[...entry.cohort_ids].sort()),'Replay omitted accepted handoff components');}
  }else{
   need(recipe.compatibility===undefined&&Array.isArray(recipe.handoffs)&&recipe.handoffs.length,'New admitted handoffs required');
   for(const selection of recipe.handoffs){
@@ -1522,10 +1643,21 @@ export async function commitAdvanceStage(journal, stage, {validate, execute = ex
 }
 
 export function automaticDeliveryObservations(journal, config) {
-  const generated = {}, authorities = [];
-  for (const name of fs.readdirSync(journal.target).filter(n => /^committed-[a-z0-9-]+\.json$/.test(n)).sort()) {
-    const result = JSON.parse(journalFile(journal, path.join(journal.target, name)));
-    const locator = file => ({commit: result.head, path: `${journal.destination}/${result.stage}/${file}`});
+  const generated = {}, authorities = [], adoptedKeys = new Set();
+  const reused = fs.readdirSync(journal.target).filter(n => n.endsWith('.completed.json'))
+    .map(name => JSON.parse(journalFile(journal, path.join(journal.target, name)))).filter(e => e.adopted);
+  const records = reused.map(e => ({stage: e.stage, adopted: true, head: e.adopted.receipt.commit,
+    prefix: path.posix.dirname(e.adopted.receipt.path)}));
+  for (const name of fs.readdirSync(journal.target).filter(n => /^committed-[a-z0-9-]+\.json$/.test(n)).sort())
+    records.push(JSON.parse(journalFile(journal, path.join(journal.target, name))));
+  for (const result of records) {
+    if (result.adopted) {
+      const key = {'recipe': 'template_commit', 'registry': 'registry', 'compose': 'composition',
+        'rebind-operating': 'operating', 'rebind-certificate': 'certificate'}[result.stage];
+      if (key) adoptedKeys.add(key);
+      if (result.stage.startsWith('authority-')) adoptedKeys.add('authorities');
+    }
+    const locator = file => ({commit: result.head, path: `${result.prefix ?? `${journal.destination}/${result.stage}`}/${file}`});
     if (result.stage === 'recipe') generated.template_commit = result.head;
     if (result.stage.startsWith('authority-')) authorities.push({rule_preimage: locator('original-rule-preimage.json'), source_authority: locator('authority-binding.json')});
     if (result.stage === 'registry') generated.registry = locator('authority-registry.json');
@@ -1535,7 +1667,22 @@ export function automaticDeliveryObservations(journal, config) {
   }
   if (authorities.length) generated.authorities = authorities;
   const supplied = config.observations ?? {};
-  for (const [key, value] of Object.entries(generated)) if (Object.hasOwn(supplied, key)) need(equal(supplied[key], value), 'Explicit observation conflicts with automatic stage commit: ' + key);
+  function samePublishedBody(a, b) {
+    if (a?.commit && b?.commit && a?.path && b?.path) {
+      const left = locate(journal.reader, a), right = locate(journal.reader, b);
+      return left.path === right.path && left.bytes === right.bytes && left.sha256 === right.sha256;
+    }
+    if (Array.isArray(a) && Array.isArray(b)) return a.length === b.length && a.every((row, i) => samePublishedBody(row, b[i]));
+    return a && b && typeof a === 'object' && typeof b === 'object'
+      && equal(Object.keys(a).sort(), Object.keys(b).sort()) && Object.keys(a).every(k => samePublishedBody(a[k], b[k]));
+  }
+  for (const [key, value] of Object.entries(generated)) if (Object.hasOwn(supplied, key)) {
+    need(equal(supplied[key], value) || adoptedKeys.has(key) && key !== 'template_commit'
+      && samePublishedBody(supplied[key], value), 'Explicit observation conflicts with automatic stage commit: ' + key);
+    // Preserve the exact original consumed descriptor, even when its receipt is
+    // being read at a later byte-identical commit. Do not silently repin it.
+    generated[key] = supplied[key];
+  }
   return {...config, observations: {...supplied, ...generated}};
 }
 
@@ -1543,6 +1690,7 @@ export function automaticDeliveryObservations(journal, config) {
 // Scientific terminals, assembly, independent review and permission stay gates.
 export async function runAutomaticDelivery(journal, config, reader, adapters, {validate, beforePublication, queue, nextStage = nextDeliveryStage,
   commitStage = commitAdvanceStage, apiWaitMilliseconds = () => 0} = {}) {
+  journal.reader = reader;
   need(typeof validate === 'function', 'Automatic delivery requires current author authority');
   const started = performance.now(), startedAt = new Date(journal.now()).toISOString(), initialCompleted = new Set(readAdvanceStatus(journal).completed);
   let prepared = 0, committed = 0, publicationChecked = false;
@@ -1553,7 +1701,7 @@ export async function runAutomaticDelivery(journal, config, reader, adapters, {v
   };
   try {
   // Recover commits whose stage completed before an interrupted prior invocation.
-  for (const id of initialCompleted) if (id !== 'review') { await commitStage(journal, id, {validate}); committed++; }
+  for (const id of initialCompleted) if (id !== 'review' && !journalJSON(journal, '.', stageNames(id).event).adopted) { await commitStage(journal, id, {validate}); committed++; }
   while (true) {
     const preparationStarted = performance.now(), apiBefore = apiWaitMilliseconds();
     const effective = automaticDeliveryObservations(journal, config);
@@ -1569,9 +1717,9 @@ export async function runAutomaticDelivery(journal, config, reader, adapters, {v
     }
     need(!readAdvanceStatus(journal).completed.includes(next.id), 'Automatic transition failed to advance');
     await prepareAdvanceStage(journal, next.id, next.phase, next.input, next.produce,
-      {preparationStarted, apiWaitMilliseconds: () => apiWaitMilliseconds() - apiBefore});
+      {preparationStarted, apiWaitMilliseconds: () => apiWaitMilliseconds() - apiBefore, adoption: config.prepared_stages?.[next.id]});
     prepared++;
-    if (next.id !== 'review') { await commitStage(journal, next.id, {validate}); committed++; }
+    if (next.id !== 'review' && !config.prepared_stages?.[next.id]) { await commitStage(journal, next.id, {validate}); committed++; }
   }
   } catch (error) {
     observeAdvance(journal, {status: 'refused', kind: 'automatic-invocation', started_at: startedAt,
