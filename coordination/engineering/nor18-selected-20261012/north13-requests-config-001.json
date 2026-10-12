@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "registry": {
+    "path": "coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json",
+    "commit": "c0da1d08bcb32f89872091c45eec5929e1e07055",
+    "mode": "100644",
+    "blob": "20b620803b9fc97527e67dc6bcb06f8a100a5966",
+    "bytes": 11775,
+    "sha256": "4e9279aec058855e135945dc56eeb2444fb750f80541017217d4550c461ec14c"
+  },
+  "component_ids": [
+    "physical-component:02503ad88ce4a8ba68be7b197491e3610b557016bdca2b3ae5692514603930a6",
+    "physical-component:040b81866ed44166ca5c08cebe436417e629b5eba0a263d9531288fc6416832d",
+    "physical-component:20314a1f10831597e31b841d5ab43b93e8b4fc2b99960ca8c1cc8b1bba85d06f",
+    "physical-component:270b5cc144fffa3af15d9538ecbb8665d52f98965fa9a61cb5be4b20a8c7243d",
+    "physical-component:375e55e26bfc017ffc1cc2966705822a4577dc94b3cb02f3d30803ccd34b2b5a",
+    "physical-component:3f1a462840f8fc7b9baff21c776d48f747f67ec7a71b4319218f2cf6c7aa5c50",
+    "physical-component:43d1d39fd50e54e8dcda3f70ec1eece46918fb1a987e4acc3c0d5bd811b3fa4f",
+    "physical-component:672f627ebc78de7674588907b30608503591f86e95e193142b800e547d18b377",
+    "physical-component:7e72874be89ff9107dc87c86aafe0ee2cfc7430e5a9f1688bdf556b2b284ef3b",
+    "physical-component:8c215cb7795d2616a7743a89e09a4f26fb1cd590fa6101e204348a4cf55212af",
+    "physical-component:990ff8dc7d906a734266e2a3ea0151bd77b5ed700b6c4ab1e45da915cc4f9dee",
+    "physical-component:abb4663da9c0480823953d8c8cccfe6d324a15bb1a92566503a85f4c7a79c4f6",
+    "physical-component:cb03679e20a514e86009ca5a936e6ec74b22fc6f2266028555870124ed23d47f"
+  ],
+  "groups": [
+    {
+      "id": "nor18-north13-001",
+      "handoff_id": "nor2013-original-eighteen-20261011",
+      "component_ids": [
+        "physical-component:02503ad88ce4a8ba68be7b197491e3610b557016bdca2b3ae5692514603930a6",
+        "physical-component:040b81866ed44166ca5c08cebe436417e629b5eba0a263d9531288fc6416832d",
+        "physical-component:20314a1f10831597e31b841d5ab43b93e8b4fc2b99960ca8c1cc8b1bba85d06f",
+        "physical-component:270b5cc144fffa3af15d9538ecbb8665d52f98965fa9a61cb5be4b20a8c7243d",
+        "physical-component:375e55e26bfc017ffc1cc2966705822a4577dc94b3cb02f3d30803ccd34b2b5a",
+        "physical-component:3f1a462840f8fc7b9baff21c776d48f747f67ec7a71b4319218f2cf6c7aa5c50",
+        "physical-component:43d1d39fd50e54e8dcda3f70ec1eece46918fb1a987e4acc3c0d5bd811b3fa4f",
+        "physical-component:672f627ebc78de7674588907b30608503591f86e95e193142b800e547d18b377",
+        "physical-component:7e72874be89ff9107dc87c86aafe0ee2cfc7430e5a9f1688bdf556b2b284ef3b",
+        "physical-component:8c215cb7795d2616a7743a89e09a4f26fb1cd590fa6101e204348a4cf55212af",
+        "physical-component:990ff8dc7d906a734266e2a3ea0151bd77b5ed700b6c4ab1e45da915cc4f9dee",
+        "physical-component:abb4663da9c0480823953d8c8cccfe6d324a15bb1a92566503a85f4c7a79c4f6",
+        "physical-component:cb03679e20a514e86009ca5a936e6ec74b22fc6f2266028555870124ed23d47f"
+      ],
+      "template": {
+        "path": "coordination/engineering/nor18-selected-20261012/templates-001/north13-source-template.json",
+        "commit": "c0da1d08bcb32f89872091c45eec5929e1e07055",
+        "mode": "100644",
+        "blob": "8cfc0d31e30081ed1d70a9e733a5f2f74c231043",
+        "bytes": 22614,
+        "sha256": "08fddf7ee1f0b9098fe97395f00897bf6cf3de1871ff1350081464d5d5a00458"
+      },
+      "destination": ".cache/native-grid-candidates/nor18-north13-source-001"
+    }
+  ],
+  "requested_resources": {
+    "processing_allowance": {
+      "phaseBytes": 536870912,
+      "rssBytes": 1073741824
+    },
+    "operating_limits": {
+      "log_bytes": 4194304,
+      "monitor_bytes": 8388608,
+      "output_bytes": 33554432,
+      "receipt_bytes": 1048576,
+      "retained_bytes": 50331648,
+      "rss_bytes": 1610612736,
+      "wall_seconds": 1200
+    }
+  }
+}
