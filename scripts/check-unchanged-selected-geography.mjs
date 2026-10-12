@@ -30,6 +30,11 @@ const joined = async promises => {
 // alone cannot prove this older collector complete for that new reader. Updating
 // these profiles therefore requires reviewing its reads and the adverse tests.
 export const AUDITED_READERS = Object.freeze({
+  // The joint route only reuses authenticated original selected inputs and products.
+  // These exact readers introduce no new scientific source outside that closure.
+  [PREFIX + 'selected-checkpoint.mjs']: ['4a0fa247dea370f5d21ba65163cb8fcf4f2383dca565419c0d4f344876c21249'],
+  [PREFIX + 'selected-checkpoint-continuous.mjs']: ['1c82e1bb619bc42353a573d0ef4f1989490e03b32d5137035cf890a3719c55dc'],
+  [PREFIX + 'selected-joint-entry.mjs']: ['1225887f50f9f87886618823b3f91b338fd169b906ad7bda01f53d39e0aaea5f'],
   'src/ownership-codec.js': ['64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d'],
   'scripts/check-effective-geographic-regression.mjs': ['801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039', '5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda'],
   // The second profile is reviewed stage-2 blob f8e4a88a6dbe3d3961d6b17d9b926ee4488561a8:
@@ -46,7 +51,9 @@ export const EXECUTION_CODE = Object.freeze([
   'scripts/check-effective-geographic-regression.mjs', 'src/ownership-codec.js',
   'scripts/evidence/immutable.py', 'scripts/evidence/geometry.py',
   'scripts/ellipsoidal_area.py', 'requirements.txt', 'package.json', 'package-lock.json',
-  PREFIX + 'selected-neighbor-prevention.mjs', PREFIX + 'selected-continuous-entry.mjs'
+  PREFIX + 'selected-neighbor-prevention.mjs', PREFIX + 'selected-continuous-entry.mjs',
+  PREFIX + 'selected-checkpoint.mjs', PREFIX + 'selected-checkpoint-continuous.mjs', PREFIX + 'selected-joint-entry.mjs',
+  'coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json'
 ]);
 export const REBIND_CODE = Object.freeze([
   'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs',

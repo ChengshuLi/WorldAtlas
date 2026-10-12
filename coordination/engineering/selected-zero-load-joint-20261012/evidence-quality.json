@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "issue": 1784,
+  "lane": "engineering",
+  "worker_id": "01a12f14-030c-704b-8f35-58e0a28e2004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "2f25e80412640f2a34681a7d487737739475c1d2",
+    "files": [
+      {
+        "path": "data/ownership-selection.json",
+        "bytes": 1598,
+        "sha256": "7daf909bc5f574d07a738d82ef2f40da80bbf2be06a35853e90e0ecf73ab5308",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+        "bytes": 193557,
+        "sha256": "40d282412f03e3f7b216b787879ecc3dd3961002e5c3635d2057378019a0d78d",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/README.md",
+      "bytes": 3327,
+      "sha256": "900c00da33cbb8f155a73a2a00e59f7f7b21f5c394445aad25d58561e9753a4f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/controls/consumer-entry.log",
+      "bytes": 1094,
+      "sha256": "0812b12e9a5a1504e5c6e423c7fdd0e4aef08ddfac332b8dfe9ac604add8395b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/controls/polygon-readback.log",
+      "bytes": 207,
+      "sha256": "41b15158929b72caaa3c58dc7fae70c898f181dcc3b6880ba6d401e284d29a47",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/controls/trusted-wrapper.log",
+      "bytes": 234,
+      "sha256": "6ec2884d5c974264f6e56adfedd389b1c6f0cc2fbee65471a09927c6b26b38c1",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "joint-selected-consumer",
+      "kind": "code",
+      "description": "Shared private checkpoint transition, native consumer and complete original continuous pointsets in one trusted invocation, preserving original Python numerical predicates. Focused authority, whole-product, carry, fallback and actual routing controls; genuine combined proof and dependency integration remain pending.",
+      "software": "Node 24.19; CPython 3.12; existing Shapely 2.1.2 and pyproj 3.7.2",
+      "units": "complete source identities, pointsets, native intervals and bytes"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node --test test/selected-checkpoint-continuous.test.mjs test/selected-joint-entry.test.mjs",
+    "node --test test/selected-joint-check.test.mjs test/trusted-geography-check.test.mjs",
+    "node --test test/unchanged-selected-geography.test.mjs"
+  ]
+}

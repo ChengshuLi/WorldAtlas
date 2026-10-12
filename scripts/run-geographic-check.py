@@ -72,7 +72,10 @@ TRUSTED_PATHS = ['scripts/run-geographic-check.py', 'scripts/check-geographic-re
                  'scripts/evidence/immutable.py', 'scripts/evidence/geometry.py',
                  'scripts/ellipsoidal_area.py', 'requirements.txt',
                  'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
-                 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs']
+                 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs',
+                 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs',
+                 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint-continuous.mjs',
+                 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs']
 PIN_PATHS = ['data/hierarchy.json', 'data/canonical-grid/manifest.json',
              'data/geographic-releases/index.json', 'data/geographic-releases/current-manifest.json']
 
@@ -562,91 +565,126 @@ def selected_continuous(repo, baseline, candidate, detector):
                                           baseline, candidate, str(destination), sys.executable], env=env)
         if len(raw) > MAX_BYTES:
             raise ValueError('Cold selected acknowledgement exceeds output cap')
+        return consume_selected_continuous(repo, baseline, candidate, detector, destination, json.loads(raw))
+
+
+def consume_selected_continuous(repo, baseline, candidate, detector, destination, issued, *, trusted=None):
+    if not isinstance(issued, dict) or issued.get('candidate_code_executed') is not False or issued.get('kind') != 'trusted-selected-continuous-comparison-v1':
+        raise ValueError('Unsupported selected continuous acknowledgement')
+    if issued.get('status') == 'selected-sources-unchanged':
+        return issued
+    import sys
+    env = {key: value for key, value in os.environ.items() if key not in ['NODE_OPTIONS', 'NODE_PATH']}
+    executable = os.environ.get('NODE', 'node')
+    publication = issued.get('publication')
+    if not isinstance(publication, dict) or publication.get('complete') is not True:
+        raise ValueError('Selected continuous source operands lack complete issued publication')
+    names = ['publication.json', publication['facts']['path'], publication['operands']['path']]
+    pins = [None, publication['facts'], publication['operands']]
+    total = 0
+    for name, pin in zip(names, pins):
+        if safe_path(name) != pathlib.Path(name).name:
+            raise ValueError('Foreign selected output path')
+        target = destination / name
+        stat = target.lstat()
+        if target.is_symlink() or not target.is_file() or stat.st_mode & 0o777 != 0o644 or stat.st_size > MAX_BYTES:
+            raise ValueError('Nonordinary whole selected output')
+        if pin is not None and (stat.st_size != pin['bytes'] or pin.get('decoded_bytes', 0) > MAX_BYTES):
+            raise ValueError('Whole selected output size exceeds original bound')
+        total += stat.st_size + (pin.get('decoded_bytes', 0) if pin else 0)
+    # Node has terminated. This is the actual Python consumer phase, with
+    # complete encoded+decoded operands and retained output/code allowance.
+    runtime_bytes = pathlib.Path(sys.executable).resolve().stat().st_size
+    code_bytes = sum((repo / name).stat().st_size for name in TRUSTED_PATHS)
+    # Re-observe current resources after the Node operand child has exited.
+    # Reuse the trusted reader's OS/cgroup-aware admission instead of an
+    # unrelated fixed historical phase ceiling. No candidate code is loaded.
+    allowance_raw = subprocess.check_output([
+        executable, '--input-type=module', '-e',
+        'const {processingAllowance}=await import(process.argv[1]);process.stdout.write(JSON.stringify(processingAllowance()));',
+        (repo / 'scripts/check-effective-geographic-regression.mjs').resolve().as_uri()],
+        env=env, timeout=30)
+    if len(allowance_raw) > 4096:
+        raise ValueError('Oversized current reader allowance')
+    allowance = json.loads(allowance_raw)
+    phase_limit = allowance.get('phaseBytes')
+    if type(phase_limit) is not int or not 0 < phase_limit <= 9007199254740991:
+        raise ValueError('Invalid current polygon consumer allowance')
+    if total + runtime_bytes + code_bytes + 2 * MAX_BYTES > phase_limit:
+        raise ValueError('Complete selected polygon consumer phase exceeds current allowance')
+    bodies = []
+    for name, pin in zip(names, pins):
+        body = (destination / name).read_bytes()
+        if pin is not None and (len(body) != pin['bytes'] or hashlib.sha256(body).hexdigest() != pin['sha256']):
+            raise ValueError('Whole selected output differs from issued trusted child')
+        bodies.append(body)
+    if json.loads(bodies[0]) != publication:
+        raise ValueError('Cold selected publication differs from live issued acknowledgement')
+    facts = json.loads(bodies[1])
+    if facts.get('executing_commit') != (trusted or baseline) or facts.get('baseline_commit') != baseline or facts.get('candidate_commit') != candidate or facts.get('candidate_code_executed') is not False:
+        raise ValueError('Foreign selected execution/input vintage')
+    pin = publication['operands']
+    decoded = gzip.decompress(bodies[2])
+    if len(decoded) != pin['decoded_bytes'] or hashlib.sha256(decoded).hexdigest() != pin['decoded_sha256']:
+        raise ValueError('Whole selected operand decoded inverse differs')
+    operands = json.loads(decoded)
+    plan = operands.get('plan')
+    if operands.get('kind') != 'complete-selected-continuous-operands-v1' or not isinstance(plan, dict):
+        raise ValueError('Unsupported complete selected operand domain')
+    ids = plan['required_ids']
+    if ids != sorted(set(ids)) or sorted(operands['baseline']) != ids or sorted(operands['candidate']) != ids or plan['changed_ids'] != issued['changed_ids']:
+        raise ValueError('Selected affected operand closure omitted/reordered owners')
+    additions = operands.get('effective_additions', {'baseline': [], 'candidate': []})
+    if sorted(additions) != ['baseline', 'candidate'] or any(not isinstance(v, list) for v in additions.values()):
+        raise ValueError('Incomplete effective primitive operand domain')
+    base_hashes = {'baseline': {}, 'candidate': {}}
+    for row in facts['inverse']:
+        vintage, identity = row['vintage'], row['id']
+        if vintage not in base_hashes or identity in base_hashes[vintage] or not re.fullmatch('[a-f0-9]{64}', row['geometry_sha256']):
+            raise ValueError('Foreign/duplicate complete source geometry inverse')
+        base_hashes[vintage][identity] = row['geometry_sha256']
+    if any(sorted(v) != ids for v in base_hashes.values()):
+        raise ValueError('Complete source geometry inverse scope differs')
+    with stage_timing('selected-continuous-python-compare'):
+        result = compare_effective_primitives(detector, operands['baseline'], operands['candidate'], additions, base_hashes)
+    if result['changed_location_ids'] != plan['changed_ids']:
+        raise ValueError('Original polygon operator changed-ID closure differs from complete certificate')
+    return {'version': 1, 'kind': 'trusted-selected-continuous-comparison-v1',
+            'candidate_code_executed': False, 'issued_publication': publication,
+            'source_binding': plan['source_bindings'], 'complete_owners': issued['complete_owners'],
+            'required_ids': ids, 'original_strict_polygon_result': result,
+            'status': result['status'], 'regressions': result['regressions'],
+            'limits': ['Complete coordinate-derived exclusion and full affected source pointsets; original coverage/overlap predicates are unchanged.',
+                       'No physical water/admin/history approval, repair assignment, release activation or deployment.']}
+
+
+def selected_joint(repo, baseline, candidate, detector, *, trusted=None):
+    env = {key: value for key, value in os.environ.items() if key not in ['NODE_OPTIONS', 'NODE_PATH']}
+    entrypoint = repo / 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs'
+    with tempfile.TemporaryDirectory(prefix='trusted-selected-joint-') as temporary:
+        destination = pathlib.Path(temporary).resolve() / 'complete'
+        raw = subprocess.check_output([os.environ.get('NODE', 'node'), '--expose-gc', str(entrypoint),
+                                       str(repo), trusted or baseline, baseline, candidate, str(destination), sys.executable], env=env)
+        if len(raw) > MAX_BYTES:
+            raise ValueError('Joint selected acknowledgement exceeds output cap')
         issued = json.loads(raw)
-        if issued.get('candidate_code_executed') is not False or issued.get('kind') != 'trusted-selected-continuous-comparison-v1':
-            raise ValueError('Unsupported selected continuous acknowledgement')
-        if issued.get('status') == 'selected-sources-unchanged':
+        if issued.get('kind') != 'trusted-selected-joint-comparison-v1' or issued.get('candidate_code_executed') is not False:
+            raise ValueError('Unsupported joint selected acknowledgement')
+        if issued.get('mode') == 'legacy-cold-required':
+            decision = issued.get('reuse_unavailable')
+            if not isinstance(decision, dict) or decision.get('cold') not in ['candidate', 'baseline-and-candidate'] or not decision.get('reason'):
+                raise ValueError('Joint fallback omitted its unavailable custody decision')
             return issued
-        publication = issued.get('publication')
-        if not isinstance(publication, dict) or publication.get('complete') is not True:
-            raise ValueError('Selected continuous source operands lack complete issued publication')
-        names = ['publication.json', publication['facts']['path'], publication['operands']['path']]
-        pins = [None, publication['facts'], publication['operands']]
-        total = 0
-        for name, pin in zip(names, pins):
-            if safe_path(name) != pathlib.Path(name).name:
-                raise ValueError('Foreign selected output path')
-            target = destination / name
-            stat = target.lstat()
-            if target.is_symlink() or not target.is_file() or stat.st_mode & 0o777 != 0o644 or stat.st_size > MAX_BYTES:
-                raise ValueError('Nonordinary whole selected output')
-            if pin is not None and (stat.st_size != pin['bytes'] or pin.get('decoded_bytes', 0) > MAX_BYTES):
-                raise ValueError('Whole selected output size exceeds original bound')
-            total += stat.st_size + (pin.get('decoded_bytes', 0) if pin else 0)
-        # Node has terminated. This is the actual Python consumer phase, with
-        # complete encoded+decoded operands and retained output/code allowance.
-        runtime_bytes = pathlib.Path(sys.executable).resolve().stat().st_size
-        code_bytes = sum((repo / name).stat().st_size for name in TRUSTED_PATHS)
-        # Re-observe current resources after the Node operand child has exited.
-        # Reuse the trusted reader's OS/cgroup-aware admission instead of an
-        # unrelated fixed historical phase ceiling. No candidate code is loaded.
-        allowance_raw = subprocess.check_output([
-            executable, '--input-type=module', '-e',
-            'const {processingAllowance}=await import(process.argv[1]);process.stdout.write(JSON.stringify(processingAllowance()));',
-            (repo / 'scripts/check-effective-geographic-regression.mjs').resolve().as_uri()],
-            env=env, timeout=30)
-        if len(allowance_raw) > 4096:
-            raise ValueError('Oversized current reader allowance')
-        allowance = json.loads(allowance_raw)
-        phase_limit = allowance.get('phaseBytes')
-        if type(phase_limit) is not int or not 0 < phase_limit <= 9007199254740991:
-            raise ValueError('Invalid current polygon consumer allowance')
-        if total + runtime_bytes + code_bytes + 2 * MAX_BYTES > phase_limit:
-            raise ValueError('Complete selected polygon consumer phase exceeds current allowance')
-        bodies = []
-        for name, pin in zip(names, pins):
-            body = (destination / name).read_bytes()
-            if pin is not None and (len(body) != pin['bytes'] or hashlib.sha256(body).hexdigest() != pin['sha256']):
-                raise ValueError('Whole selected output differs from issued trusted child')
-            bodies.append(body)
-        if json.loads(bodies[0]) != publication:
-            raise ValueError('Cold selected publication differs from live issued acknowledgement')
-        facts = json.loads(bodies[1])
-        if facts.get('executing_commit') != baseline or facts.get('baseline_commit') != baseline or facts.get('candidate_commit') != candidate or facts.get('candidate_code_executed') is not False:
-            raise ValueError('Foreign selected execution/input vintage')
-        pin = publication['operands']
-        decoded = gzip.decompress(bodies[2])
-        if len(decoded) != pin['decoded_bytes'] or hashlib.sha256(decoded).hexdigest() != pin['decoded_sha256']:
-            raise ValueError('Whole selected operand decoded inverse differs')
-        operands = json.loads(decoded)
-        plan = operands.get('plan')
-        if operands.get('kind') != 'complete-selected-continuous-operands-v1' or not isinstance(plan, dict):
-            raise ValueError('Unsupported complete selected operand domain')
-        ids = plan['required_ids']
-        if ids != sorted(set(ids)) or sorted(operands['baseline']) != ids or sorted(operands['candidate']) != ids or plan['changed_ids'] != issued['changed_ids']:
-            raise ValueError('Selected affected operand closure omitted/reordered owners')
-        additions = operands.get('effective_additions', {'baseline': [], 'candidate': []})
-        if sorted(additions) != ['baseline', 'candidate'] or any(not isinstance(v, list) for v in additions.values()):
-            raise ValueError('Incomplete effective primitive operand domain')
-        base_hashes = {'baseline': {}, 'candidate': {}}
-        for row in facts['inverse']:
-            vintage, identity = row['vintage'], row['id']
-            if vintage not in base_hashes or identity in base_hashes[vintage] or not re.fullmatch('[a-f0-9]{64}', row['geometry_sha256']):
-                raise ValueError('Foreign/duplicate complete source geometry inverse')
-            base_hashes[vintage][identity] = row['geometry_sha256']
-        if any(sorted(v) != ids for v in base_hashes.values()):
-            raise ValueError('Complete source geometry inverse scope differs')
-        with stage_timing('selected-continuous-python-compare'):
-            result = compare_effective_primitives(detector, operands['baseline'], operands['candidate'], additions, base_hashes)
-        if result['changed_location_ids'] != plan['changed_ids']:
-            raise ValueError('Original polygon operator changed-ID closure differs from complete certificate')
-        return {'version': 1, 'kind': 'trusted-selected-continuous-comparison-v1',
-                'candidate_code_executed': False, 'issued_publication': publication,
-                'source_binding': plan['source_bindings'], 'complete_owners': issued['complete_owners'],
-                'required_ids': ids, 'original_strict_polygon_result': result,
-                'status': result['status'], 'regressions': result['regressions'],
-                'limits': ['Complete coordinate-derived exclusion and full affected source pointsets; original coverage/overlap predicates are unchanged.',
-                           'No physical water/admin/history approval, repair assignment, release activation or deployment.']}
+        if issued.get('mode') != 'authenticated-checkpoint-append-v1' or not isinstance(issued.get('native'), dict):
+            raise ValueError('Joint selected comparison did not complete native validation')
+        native = issued['native']
+        if native.get('candidate_code_executed') is not False or native.get('status') not in ['native-regressions-found', 'no-new-native-loss']:
+            raise ValueError('Joint native comparison result is incomplete')
+        if native['status'] == 'native-regressions-found':
+            return issued
+        issued['continuous_result'] = consume_selected_continuous(repo, baseline, candidate, detector,
+                                                                  destination, issued.get('continuous'), trusted=trusted)
+        return issued
 
 
 
@@ -1317,33 +1355,39 @@ def inspect(repo, baseline, candidate, *, prefetch=False):
                 'limits': ['Exact reviewed finite code/policy migration only; all other tree inputs and methods are unchanged.',
                            'Genuine baseline proof is reused under separately authenticated candidate-input equivalence.',
                            'Candidate code was not executed; no new qualification, gap clearance, source approval or publication.']}
-    selected = any(git(repo, 'ls-tree', '-z', version, '--', 'data/ownership-selection.json')
-                   for version in [baseline, candidate])
-    if selected:
-        import sys
-        env = dict(os.environ)
-        for name in ['NODE_OPTIONS', 'NODE_PATH']:
-            env.pop(name, None)
-        with stage_timing('selected-native'):
-            native_raw = subprocess.check_output([
-                os.environ.get('NODE', 'node'), str(repo / 'scripts/check-effective-geographic-regression.mjs'),
-                str(repo), baseline, candidate, sys.executable], stderr=subprocess.PIPE, env=env)
-        if len(native_raw) > MAX_BYTES:
-            raise ValueError('Selected native report exceeds bounded output')
-        native = json.loads(native_raw)
-        report['selected_native_report'] = native
-        if native['status'] == 'native-regressions-found':
-            return {**report, 'status': 'native-regressions-found',
-                    'regressions': len(native['intervals']),
-                    'limits': ['Existing owner loss/reassignment has no automatic water or political exception. The raw polygon gate is preserved.']}
     import sys
     sys.path.insert(0, str(repo / 'scripts'))
     spec = importlib.util.spec_from_file_location('trusted_geographic_detector', repo / 'scripts/check-geographic-regression.py')
     detector = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(detector)
+    selected = any(git(repo, 'ls-tree', '-z', version, '--', 'data/ownership-selection.json')
+                   for version in [baseline, candidate])
+    joint = None
+    if selected:
+        with stage_timing('selected-joint'):
+            joint = selected_joint(repo, baseline, candidate, detector)
+        import sys
+        env = dict(os.environ)
+        for name in ['NODE_OPTIONS', 'NODE_PATH']:
+            env.pop(name, None)
+        if joint['mode'] == 'authenticated-checkpoint-append-v1':
+            native = joint['native']
+        else:
+            with stage_timing('selected-native'):
+                native_raw = subprocess.check_output([
+                    os.environ.get('NODE', 'node'), str(repo / 'scripts/check-effective-geographic-regression.mjs'),
+                    str(repo), baseline, candidate, sys.executable], stderr=subprocess.PIPE, env=env)
+            if len(native_raw) > MAX_BYTES:
+                raise ValueError('Selected native report exceeds bounded output')
+            native = json.loads(native_raw)
+        report['selected_native_report'] = native
+        if native['status'] == 'native-regressions-found':
+            return {**report, 'status': 'native-regressions-found',
+                    'regressions': len(native['intervals']),
+                    'limits': ['Existing owner loss/reassignment has no automatic water or political exception. The raw polygon gate is preserved.']}
     if selected:
         with stage_timing('selected-continuous'):
-            continuous = selected_continuous(repo, baseline, candidate, detector)
+            continuous = joint['continuous_result'] if joint['mode'] == 'authenticated-checkpoint-append-v1' else selected_continuous(repo, baseline, candidate, detector)
         report['selected_continuous_report'] = continuous
         if continuous.get('regressions') not in [None, 0] or str(continuous.get('status', '')).startswith('blocked-'):
             return {**report, 'status': continuous['status'], 'regressions': continuous['regressions'],

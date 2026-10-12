@@ -37,6 +37,9 @@ class Fixture:
                      'scripts/evidence/geometry.py', 'scripts/ellipsoidal_area.py', 'requirements.txt',
                      'package.json', '.github/evidence-policy.json', 'src/regional-import-gate.js',
                      'coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs',
+                     'coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs',
+                     'coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint-continuous.mjs',
+                     'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs',
                      'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs']:
             target = self.repo / name
             target.parent.mkdir(parents=True, exist_ok=True)
