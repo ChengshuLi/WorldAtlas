@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import {spawnSync} from 'node:child_process';
+import {spawnSync, execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {checkoutExecutionClosure} from '../coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/artifact-checkout-execution.mjs';
@@ -74,7 +74,7 @@ function fixture(t,{full=false,helperBody,selectedHelperBody,omitSelectedHelper=
   function write(name,body) {const p=path.join(root,name);fs.mkdirSync(path.dirname(p),{recursive:true});fs.writeFileSync(p,body,{flag:'wx'});}
   write('package.json','{"type":"module"}\n');
   sources.forEach((name,i)=>write(name,bodies[i]));
-  const names=selected?[...focused,'compact-ownership','prepared-parity']:full?['probe']:focused;
+  const names=selected?[...focused,'compact-ownership','canonical-compact-repack','prepared-parity']:full?['probe']:focused;
   for(const name of names)write(`test/${name}.test.mjs`,
     `import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
 test('actual selected test',${skip?'{skip:true},':''}()=>{
@@ -163,7 +163,7 @@ test('actual PR and queue selected commands run smoke and genuine full setup bef
   for(const workflow of ['pr','queue']){
     const f=fixture(t,{full:true,selected:true,helperBody:restored}),r=f.run('full','0',workflow);
     assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/# skipped 0/);assert.match(r.stdout,/"test_selection":"selected-data"/);
-    assert.equal(fs.readdirSync(f.root).filter(n=>n.startsWith('tests-reached-')).length,14);
+    assert.equal(fs.readdirSync(f.root).filter(n=>n.startsWith('tests-reached-')).length,15);
     assert(fs.existsSync(path.join(f.root,'.cache/selected-delivery-smoke.json')));
     assert(fs.existsSync(path.join(f.root,'selected-checkout-fixture-reached.json')));
   }
@@ -178,4 +178,27 @@ test('real selected-data entry propagates generic smoke failure and refuses narr
     const f=fixture(t,{full:true,selected:true,helperBody:restored,...options}),r=f.run();assert.notEqual(r.status,0);
     assert.match(r.stderr,options.skip?/zero skipped tests/:/actual smoke refused/);
   }
+});
+
+
+test('actual retained-output runner executes current tests without any model restoration helper',t=>{
+  const f=fixture(t,{selected:true});
+  const git=(...args)=>execFileSync('git',['-C',f.root,...args],{encoding:'utf8'}).trim();
+  git('init','-q');git('add','.');git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','fixture');
+  const head=git('rev-parse','HEAD');
+  const receipt=JSON.stringify({kind:'cloudflare',preflight:{inputs:{head}},assembly:{
+    kind:'retained-original-output-plus-current-additive',current_execution:{source_commit:head},
+    base_restoration_invoked:false,invariant_build_invoked:false,
+    base_tests_reused:['test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs'],origin:{run_id:17}}});
+  fs.writeFileSync(path.join(f.root,'.cache/package-input-build.json'),receipt);
+  const env={...process.env,INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:'0',INTEGRATION_TEST_SELECTION:'selected-output',
+    SELECTED_PACKAGE_ASSEMBLY_SHA256:createHash('sha256').update(receipt).digest('hex')};
+  delete env.NODE_TEST_CONTEXT;
+  const result=spawnSync(process.execPath,['scripts/run-integration-tests.mjs'],{cwd:f.root,env,encoding:'utf8',timeout:30000});
+  assert.equal(result.status,0,result.stderr);assert.match(result.stdout,/# skipped 0/);
+  assert.equal(fs.readdirSync(f.root).filter(name=>name.startsWith('tests-reached-')).length,focused.length+1);
+  assert(fs.existsSync(path.join(f.root,'tests-reached-compact-ownership')));
+  assert(!fs.existsSync(path.join(f.root,'tests-reached-canonical-compact-repack')));
+  assert(!fs.existsSync(path.join(f.root,'tests-reached-prepared-parity')));
+  assert(!result.stdout.includes('selected_model_reader_checkout'));assert(!result.stdout.includes('canonical_checkout'));
 });

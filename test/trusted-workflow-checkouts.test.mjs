@@ -205,7 +205,7 @@ function workflowCondition(expression, context, {success=true,cancelled=false}={
 }
 function packageContext({profile='full',selection='complete',full='true',action='synchronize',result='success'}={}) {
   return {needs:{profile:{result:'success',outputs:{profile,test_selection:selection,full,blocked:'false'}},regression:{result}},
-    github:{event:{action}},matrix:{shard:0}};
+    github:{event:{action}},matrix:{shard:0},steps:{selected_package:{outputs:{assembled:'false'}}}};
 }
 function packageStep(job,name){const found=job.steps.filter(step=>step.name===name);assert.equal(found.length,1,name);return found[0];}
 
@@ -249,7 +249,7 @@ test('selected-data skipped regression still executes every existing real packag
     'Build Cloudflare package without publishing','Read back qualified native build outputs when selected','Install selected-data browser dependencies','Run selected-data consumer checks'])
     assert.equal(workflowCondition(packageStep(w.package,name).condition,ctx),true,name);
   const consumer=packageStep(w.package,'Run selected-data consumer checks');
-  assert.match(consumer.text,/INTEGRATION_TEST_SELECTION: selected-data/);
+  assert.match(consumer.text,/INTEGRATION_TEST_SELECTION:.*assembled.*selected-output.*selected-data/);
   assert.match(consumer.run,/selectedDeliverySmoke/);assert.match(consumer.run,/node scripts\/run-integration-tests.mjs/);
   assert.equal(w.package.steps.filter(step=>step.run==='npm run build:cloudflare'&&workflowCondition(step.condition,ctx)).length,1);
   assert.equal(workflowCondition(packageStep(w.package,'Retain declared input build receipt').condition,ctx),true);
@@ -459,7 +459,9 @@ test('full-checkout inline bootstrap refuses authentication, completeness, ident
 });
 
 test('full-checkout routing retains exactly one successful canonical verification and acquisition-only credentials',()=>{
-  const w=packageWorkflow();assert.match(w.package.header,/contents: read\n      # Authenticate[^\n]+\n      pull-requests: read/);
+  const w=packageWorkflow();
+  assert.equal((w.package.header.match(/^    permissions:/gm)||[]).length,1);
+  for(const permission of ['contents','pull-requests','actions'])assert.match(w.package.header,new RegExp('^      '+permission+': read$','m'));
   for(const job of [w.regression,w.package])for(const mode of ['helper','legacy']){
     const ctx=packageContext({selection:job===w.package?'selected-data':'complete'});ctx.steps={checkout_bootstrap:{outputs:{mode}}};
     const canonical=job===w.package?'Checkout complete package inputs':'Checkout reviewed head';
@@ -548,4 +550,19 @@ test('missing or declined predecessor admission retains ordinary full work and c
   }
   const helper=fs.readFileSync(path.join(root,'scripts/run-metadata-regression-controls.mjs'),'utf8');
   assert.match(helper,/streamTestProcess/);assert.doesNotMatch(helper,/prepareNativeRegressionInputs|prepareCanonicalCheckout|prepareModelReaderCheckout/);
+});
+
+test('authenticated selected assembly skips only invariant production and attributes retained base tests',()=>{
+ const w=packageWorkflow(),ctx=packageContext({selection:'selected-data',result:'skipped'});
+ ctx.steps.selected_package.outputs.assembled='true';
+ assert.equal(workflowCondition(packageStep(w.package,'Build Cloudflare package without publishing').condition,ctx),false);
+ assert.equal(workflowCondition(packageStep(w.package,'Retain original selected package output').condition,ctx),false);
+ for(const name of ['Read back qualified native build outputs when selected','Install selected-data browser dependencies','Run selected-data consumer checks'])
+  assert.equal(workflowCondition(packageStep(w.package,name).condition,ctx),true,name);
+ const consumer=packageStep(w.package,'Run selected-data consumer checks');
+ assert.match(consumer.text,/SELECTED_PACKAGE_ASSEMBLY_SHA256:.*assembly_sha256/);
+ assert.match(consumer.run,/selectedDeliverySmoke/);
+ ctx.needs.profile.outputs.metadata_reuse='true';
+ assert.equal(workflowCondition(packageStep(w.package,'Assemble selected output from authenticated original package').condition,ctx),false);
+ assert.equal(workflowCondition(packageStep(w.regression,'Retain original full-regression package output').condition,ctx),false);
 });

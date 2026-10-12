@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "issue": 1798,
+  "worker_id": "01a1318e-30d9-7357-8b8d-6162a6b4b034",
+  "status": "lightweight-controls-passed-real-output-proof-pending",
+  "checks": [
+    {
+      "command": "node --test test/package-output-artifact.test.mjs test/selected-package-assembly.test.mjs test/selected-package-bootstrap.test.mjs test/integration-profile-restoration.test.mjs test/full-regression-shards.test.mjs test/selected-package-readback-proof.test.mjs",
+      "tests": 54,
+      "passed": 54,
+      "skipped": 0
+    },
+    {
+      "command": "python3 -I -B test/selected-package-bootstrap-controls.py scripts/selected-package-bootstrap.py",
+      "invoked_by": "test/selected-package-bootstrap.test.mjs",
+      "tests": 48,
+      "passed": 48
+    },
+    {
+      "command": "node --test test/package-build.test.mjs",
+      "tests": 9,
+      "passed": 9,
+      "skipped": 0
+    },
+    {
+      "command": "node --test test/trusted-workflow-checkouts.test.mjs test/integration-profile.test.mjs",
+      "tests": 31,
+      "passed": 31,
+      "skipped": 0
+    },
+    {
+      "command": "Actual Actions native-readback ZIP passed fixed-member extraction with authenticated recorded bytes/hash",
+      "artifact_id": 11772216172,
+      "archive_bytes": 41163,
+      "report_bytes": 162882,
+      "report_sha256": "358a6fee44f5fcb670e82c81701133a490eb3be8f9144b299af30a4e570fd288",
+      "status": "passed-container-control-only-not-eligible-producer"
+    },
+    {
+      "command": "npm ci with workspace-local cache; installedPackageIdentity over actual full installation",
+      "status": "passed",
+      "regular_files": 13438,
+      "members": 13470,
+      "logical_bytes": 638881892,
+      "outside_source_declaration_alphabet": 2497,
+      "elapsed_ms": 4021,
+      "limitation": "Local runtime identity is not claimed equal to hosted runtime; no build or source hydration."
+    },
+    {
+      "status": "passed-actual-inventory-only",
+      "files": 484,
+      "bytes": 331977520,
+      "largest": {
+        "path": "dist/client/geographic-migration-archive.json.gz",
+        "bytes": 10765139,
+        "sha256": "9e4ca20b4211795f90f1ab8cac59cfb1ff079396e22979bfb4d1fa9d3f5f55d1"
+      },
+      "manifest_metadata_bytes": 79446
+    },
+    {
+      "command": "installedPackageIdentity with existing shared isolated Python dependency environment and all three consumed import distributions",
+      "status": "passed",
+      "python_members": 1707,
+      "limitation": "Actual local runtime hashing control; exact hosted runtime equality is still required in reuse."
+    }
+  ],
+  "independent_boundary_findings_corrected": [
+    "Actual original input inventory now includes unexpected declared-directory members instead of trusting git diff alone",
+    "Installed dependency and runtime bodies are identified, rather than relying only on package versions",
+    "Trusted-base bootstrap verifies actual static startup code and Node resolution scopes before token-bearing execution",
+    "Node's real parser replaces false-positive regex startup dependency discovery",
+    "Nested dependency shadows and unexpected package scopes are rejected",
+    "Current output and receipt publication stages both replacements and rolls back on failure",
+    "Duplicate YAML permissions mappings removed; semantic permission checks replace irrelevant textual adjacency",
+    "A genuine candidate-only shallow checkout now authenticates missing base tree/blob metadata without hydrating the base",
+    "Original installed dependency identity is captured before build/consumer-generated caches",
+    "Assembly and selected reader share the existing allowance derived from current OS/cgroup availability and reservations, rather than an arbitrary extra 256 MiB ceiling",
+    "Changed declaration comparison independently binds both exact descriptors to Git snapshots and the genuine current delta, preserving every other scientific context field",
+    "Selected consumer roster checks exact semantic membership instead of an obsolete hard-coded count",
+    "Official setup-python LD_LIBRARY_PATH is removed from Node and Git child environments instead of rejecting legitimate runner setup",
+    "Explicit hosted proof authenticates installer root inputs before candidate npm/pip execution and isolates pip from candidate module shadows",
+    "Existing queue native readback supplies exhaustive actual full-output inventory; exact reconstructed atlas hash closes all unreported-field gaps",
+    "Observed 10.5 MB atlas uses actual shared-memory admission rather than an inapplicable 8 MiB control-receipt cap",
+    "Disk checks follow actual archive, extraction, current publication and receipt allocations rather than a guessed package size",
+    "Installed npm and runtime file hashing uses actual ordinary relative-file containment rather than applying the declared source-path alphabet to legitimate @scopes and punctuation"
+  ],
+  "limitations": [
+    "Synthetic authority and output fixtures do not establish scientific output equivalence",
+    "The first eligible complete output will come from the implementation PR's required full hosted regression shard 0",
+    "No actual full-versus-assembled output comparison has yet run",
+    "No changed-batch wall-clock savings or retained output size is yet measured",
+    "Complete checkout remains unchanged; historical checkout time is not claimed saved",
+    "No local full package build, large input hydration or deployment was performed"
+  ],
+  "hosted_prior_head": {
+    "head": "fe33a71572762c86a82d2d267986a63757951a36",
+    "run_id": 38303346505,
+    "regression_0": {
+      "passed": 981,
+      "failed": 1,
+      "skipped": 0,
+      "failure": "Obsolete selected-data roster count (14 vs 15), corrected by exact semantic membership checks"
+    },
+    "other_gates": "profile, evidence, scope, geography, regression 1 and regression 2 passed",
+    "output_retention": "Not reached after regression failure; no eligible artifact or size measured"
+  },
+  "rebased_on": "800dede9da634f4f7e95c6365fd31a7086f17f9b",
+  "observed_output": {
+    "source_head": "fe33a71572762c86a82d2d267986a63757951a36",
+    "eligible_for_reuse": false,
+    "files": 484,
+    "bytes": 331977520,
+    "largest_member_bytes": 10765139,
+    "atlas_bytes": 10547753,
+    "source_snapshot_metadata_bytes": 1766026,
+    "output_inventory_metadata_bytes": 72640,
+    "original_full_code_files": 93,
+    "original_full_code_bytes": 1121126
+  }
+}

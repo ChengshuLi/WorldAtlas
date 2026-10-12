@@ -49,7 +49,13 @@ test('test-runner edits and renames require actual full-suite validation', () =>
 });
 test('selected-data inventory keeps complete asset/UI and focused consumers under full setup',()=>{
   const selected=integrationTestFiles('full',0,'selected-data');
-  assert.equal(selected.length,14);assert.equal(new Set(selected).size,14);
+  const focused=integrationTestFiles('evidence',0);
+  assert.deepEqual(selected,[...focused,...PACKAGED_ASSET_TESTS]);
+  assert.equal(new Set(selected).size,selected.length);
+  const reused=integrationTestFiles('full',0,'selected-output');
+  assert.deepEqual(reused,[...focused,'test/compact-ownership.test.mjs']);
+  assert.deepEqual(selected.filter(file=>!reused.includes(file)).sort(),
+    ['test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs']);
   for(const file of PACKAGED_ASSET_TESTS)assert(selected.includes(file));
   for(const file of ['test/integration-proof.test.mjs','test/merge-integration.test.mjs','test/premerge-evidence.test.mjs'])assert(selected.includes(file));
   for(const [profile,shard,selection] of [['evidence',0,'selected-data'],['full',1,'selected-data'],['full',0,'unknown']])
