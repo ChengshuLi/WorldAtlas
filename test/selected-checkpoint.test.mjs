@@ -232,3 +232,18 @@ test('coherently copied malformed geography references still fail exact fast-pat
  const reader=new f.native.ImmutableReader(f.root,candidate,{allowance:f.reader.allowance,budget:f.reader.budget});
  assert.throws(()=>f.api.qualifyTransition({state,reader,budget:f.budget}),/complete effective reference/);
 });
+
+
+test('consumer admission authenticates the private complete transition rather than a forged scope wrapper',async t=>{
+ const f=await trustedFixture(t),{state}=f.api.qualifyCheckpoint({reader:f.reader,budget:f.budget});
+ const reader=new f.native.ImmutableReader(f.root,f.selected,{allowance:f.reader.allowance,budget:f.reader.budget});
+ const transition=f.api.qualifyTransition({state,reader,budget:f.budget});
+ assert.equal(transition.available,true);
+ assert.equal(f.api.authenticateTransition({transition,budget:f.budget}),transition);
+ assert.throws(()=>transition.changedNativeRows.push(1),TypeError);
+ assert.throws(()=>transition.plan.required_ids.push('omitted-neighbor'),TypeError);
+ for(const forged of [{...transition},{...transition,plan:{...transition.plan,required_ids:[],pairs:[]}},{...transition,changedNativeRows:[]},JSON.parse(JSON.stringify(transition))])
+  assert.throws(()=>f.api.authenticateTransition({transition:forged,budget:f.budget}),/private qualified selected transition/);
+ f.api.releaseCheckpoint(state);
+ assert.throws(()=>f.api.authenticateTransition({transition,budget:f.budget}),/private qualified selected transition/);
+});

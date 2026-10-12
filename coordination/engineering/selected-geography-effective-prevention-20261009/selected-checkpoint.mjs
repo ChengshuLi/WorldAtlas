@@ -17,7 +17,7 @@ const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
 const MODULE = 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const CATALOGUE = 'coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
 const FIELDS = ['id','index','parent_id','parent_index','source','ordinal','whole_feature_sha256','geometry_sha256','effective_geometry_sha256','boxes'];
-const states = new WeakMap(), projections = new WeakMap();
+const states = new WeakMap(), projections = new WeakMap(), transitions = new WeakMap();
 const demand = (ok, message) => { if (!ok) throw Error(message); };
 const sha = body => createHash('sha256').update(body).digest('hex');
 const same = (a,b) => a === undefined || b === undefined ? a === b : valueSha(a) === valueSha(b);
@@ -734,11 +734,24 @@ export function qualifyTransition({state,reader,budget}) {
     const changedNativeRows=[...new Set([...oldNative.keys(),...newNative.keys()])].sort((a,b) => a-b)
       .filter(y => !same(oldNative.get(y)??[],newNative.get(y)??[]));
     retain(session,{entries:certificate.entries.filter(row => changedIds.has(row[0])),additions,plan,changedNativeRows});
-    return Object.freeze({available:true,baseline:state,candidate,changedIds:plan.changed_ids,changedNativeRows,plan});
+    const transition=freeze({available:true,baseline:state,candidate,changedIds:plan.changed_ids,changedNativeRows,plan});
+    transitions.set(transition,session); return transition;
   } catch (error) {
     if (error.reuseUnavailable) return unavailable(error.message,state);
     throw error;
   }
+}
+
+/** Consumer admission of the complete internally derived two-vintage scope.
+ * Genuine state handles inside a caller-created wrapper do not authenticate its
+ * changed-owner/neighbor plan. This is constant-time, not a repeated scan. */
+export function authenticateTransition({transition,budget}) {
+  const session=transitions.get(transition);
+  demand(session && !session.closed, 'Missing private qualified selected transition');
+  demand(getState(transition.baseline,undefined,budget).session===session
+    && getState(transition.candidate,undefined,budget).session===session,
+  'Foreign transition state or invocation');
+  return transition;
 }
 
 // Pure arithmetic only. This function cannot mint a checkpoint, projector or

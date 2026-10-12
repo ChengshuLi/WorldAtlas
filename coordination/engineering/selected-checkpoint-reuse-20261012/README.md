@@ -27,7 +27,11 @@ activate a selection, or replace geometric predicates.
    throws. Neither outcome is a successful no-change result.
 5. Native and continuous consumers use those same private states in one trusted
    Node invocation. Do not serialize the objects to independent children or
-   repeat qualification for each consumer. Each consumer may project only its
+   repeat qualification for each consumer. Each public consumer calls
+   `authenticateTransition({transition, budget})` to admit the genuine private
+   transition and complete scope; caller-created wrappers cannot omit a neighbor
+   even when they contain real state capabilities. This lookup does not rescan
+   coordinate rows. Each consumer may project only its
    complete required scope, then apply its existing strict predicates.
 6. Call `releaseCheckpoint(state)` once, in the joint caller's `finally`, after
    both consumers finish. This invalidates every related private capability.
@@ -89,10 +93,48 @@ execution or producer-code qualification.
 
 ## Verification and limits
 
-Run `node --test test/selected-checkpoint.test.mjs`. Tests create a miniature
-ordinary trusted Git repository and invoke the real catalogue, private state,
-projection and transition boundaries. Synthetic controls do not prove the real
-geographic result or establish a speedup. No real selected equivalence execution
-has been run for this module yet. One coordinated retained-input equivalence run
-is planned after independent contract/code review. No old SOURCE/NATIVE science
-rerun is needed or authorized by this implementation.
+Run `node --test test/selected-checkpoint.test.mjs`. The 17 controls create an
+ordinary miniature trusted Git repository and invoke real catalogue, private
+state/transition, projection and budget boundaries.
+
+The admitted retained proof in `retained-proof-001/summary.json` executed shared
+module commit `41a9e8c003e57914f5fe03afe62f3ce177d46a93`. Complete scientific
+certificate fields for all 49,625 owners equal the genuine retained candidate.
+The full 54-owner continuous operands, additions and neighbor plan have the exact
+retained SHA-256 `949622e24a0431c707ebc1b9cfaaee21db768bc165aad17ba9e04534b4bb048e`.
+All 42 changed native BASE rows equal their complete genuine retained request.
+Coverage records zero `loadSelection` calls and five authority qualifications,
+matching exactly the registry's 30-to-35 append. No old SOURCE/NATIVE science ran.
+
+Eight whole containing source bodies were read over five distinct sources: three
+for new-target authentication, five for the complete affected-neighbor projection,
+and zero for candidate-vintage pointset reuse. This is not zero source reads; it
+is zero complete world-source scans. Shared authentication and projections took
+26.66 seconds; the full supervised proof, retained output and comparisons took
+28.51 seconds, with 529 MB sampled group RSS and 708 MB maximum charged phase
+inside a 1 GiB current reader allowance. These are measured local boundaries,
+not a controlled hosted speedup or an integrated native/continuous checker run.
+
+Only the certificate's historical `complete_phase_bytes` accounting counter is
+excluded from semantic equality. Both old values are retained in the summary;
+no scientific binding, row, source identity or polygon is excluded. A derived
+certificate retains its original checkpoint's historical counter; current
+permission is always the joint reader budget, never this old number.
+
+The first comparator attempt and corrected successful attempt are both retained,
+including complete successful actual products before comparisons. Their original
+supervisor emitted an empty `owned_processes_remaining` array without a terminal
+scan. The summary explicitly supersedes that unsupported field: cleanup-at-exit
+was not measured. The later process observation records present visibility only.
+Do not reuse the original supervisor as a lifecycle verifier without correcting
+and testing its terminal check.
+
+After that proof, only constant-time private transition admission and freezing of
+the returned native-row scope were added for public consumer safety. Numerical
+projection/qualification algorithms did not change. The new wrapper must be
+reviewed with its forged/expired controls; this does not relabel the proof's
+original execution head.
+
+Consumer integration, actual joint strict-predicate execution, and the one-load
+cold-candidate admission bridge remain unfinished. No activation, geographic
+approval or production delivery is claimed by this module.
