@@ -1,4 +1,5 @@
 import {readFileSync} from 'node:fs';
+import {gzipSync} from 'node:zlib';
 import {isDeepStrictEqual as same} from "node:util";
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -8,13 +9,13 @@ import {selectIntegrationProfile} from '../scripts/check-integration-profile.mjs
 import {prepareIntegration, completeIntegration} from '../scripts/merge-integration.mjs';
 import {PROOF_PATHS, WORKFLOW_PATH} from '../scripts/integration-proof.mjs';
 import {checkPRGates} from '../scripts/check-pr-gates.mjs';
-import {selectedDataSelection, selectedDataCandidate, validateSelectedExpectations, SELECTED_SMOKE} from '../scripts/integration-profile.mjs';
+import {selectedDataSelection, selectedDataCandidate, validateSelectedExpectations, selectedMetadataAdmission, SELECTED_SMOKE} from '../scripts/integration-profile.mjs';
 const prefix = 'coordination/engineering/fixture-delivery/';
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 function fixture({mutate = () => {}} = {}) {
   const blobs = new Map(), baseline = {entries:new Map()}, authored = {entries:new Map()}, reads=[];
   const put = (name, value, old=false) => {
-    const bytes = Buffer.from(typeof value === 'string' ? value : JSON.stringify(value));
+    const bytes = Buffer.isBuffer(value) ? value : Buffer.from(typeof value === 'string' ? value : JSON.stringify(value));
     const sha = createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
     blobs.set(sha,bytes); const row={path:name,type:'blob',mode:'100644',size:bytes.length,sha};
     authored.entries.set(name,row); if(old)baseline.entries.set(name,row);
@@ -61,7 +62,7 @@ function fixture({mutate = () => {}} = {}) {
   mutate(f);
   f.files=[...authored.entries].filter(([name,row])=>baseline.entries.get(name)?.sha!==row.sha).map(([filename])=>({filename,status:baseline.entries.has(filename)?'modified':'added'}));
   f.api=async route=>{const oid=route.split('/').at(-1),bytes=blobs.get(oid);assert(bytes,route);reads.push(oid);return {sha:oid,size:bytes.length,encoding:'base64',content:bytes.toString('base64')};};
-  f.run=()=>selectedDataSelection({api:f.api,repo:'owner/repo',branch:'engineering/fixture-delivery',files:f.files,baseline,authored});
+  f.run=(options={})=>selectedDataSelection({api:f.api,repo:'owner/repo',branch:'engineering/fixture-delivery',files:f.files,baseline,authored,...options});
   return f;
 }
 function refreshPins(f, {planMutate = () => {}} = {}) {
@@ -518,8 +519,8 @@ test('real SOURCE metadata entry and cold final-capacity proof include every add
 // Only mutable global metadata is snapshotted. Original delivery vintages stay
 // in their retained repository paths and are checked against actual Git bodies.
 const fixedRows=new Map(),fixedBlobs=new Map();
-function fixedDeliveryFixture({leanPackage=false}={}) {
-  const fixed=JSON.parse(readFileSync(new URL('./fixtures/selected-native-role-ci-1726.json',import.meta.url))),
+function fixedDeliveryFixture({leanPackage=false,fixtureName='selected-native-role-ci-1726.json'}={}) {
+  const fixed=JSON.parse(readFileSync(new URL('./fixtures/'+fixtureName,import.meta.url))),
     files=structuredClone(fixed.files),added=new Set(files.filter(row=>row.status==='added').map(row=>row.filename)),
     blobs=new Map(fixedBlobs),reads=[],root='/repos/owner/repo';
   const git=(...args)=>execFileSync('git',args,{maxBuffer:32*1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
@@ -530,7 +531,7 @@ function fixedDeliveryFixture({leanPackage=false}={}) {
     if(rows.has(name))return rows.get(name);
     const raw=git('ls-tree','HEAD','--',name).toString('utf8').trim(),match=/^(\d+) (\w+) ([a-f0-9]+)\t(.+)$/.exec(raw);
     if(!match)return undefined;
-    const row={path:match[4],mode:match[1],type:match[2],sha:match[3],size:Number(git('cat-file','-s',match[3]).toString())};rows.set(name,row);return row;
+    const row={path:match[4],mode:match[1],type:match[2],sha:match[3],size:fixed.retained_tree_rows?.find(row=>row.path===name&&row.sha===match[3])?.size??Number(git('cat-file','-s',match[3]).toString())};rows.set(name,row);return row;
   };
   class RoleTree extends Map {
     constructor(commit){super();this.commit=commit;}
@@ -559,7 +560,7 @@ function fixedDeliveryFixture({leanPackage=false}={}) {
   }
   const document=name=>{const row=authored.entries.get(name);if(!blobs.has(row.sha)){const raw=git('cat-file','blob',row.sha);blobs.set(row.sha,raw);fixedBlobs.set(row.sha,raw);}return JSON.parse(blobs.get(row.sha));};
   const f={fixed,files,branch:fixed.branch,baseline,authored,blobs,reads,api,put,document,sourceState:{}};
-  f.run=()=>selectedDataSelection({api:f.api,repo:'owner/repo',branch:f.branch,files:f.files,baseline,authored});return f;
+  f.run=(options={})=>selectedDataSelection({api:f.api,repo:'owner/repo',branch:f.branch,files:f.files,baseline,authored,...options});return f;
 }
 test('fixed complete COD/PHL package preparation declarations correctly retain full CI',async()=>{
   const f=fixedDeliveryFixture();assert.equal(selectedDataCandidate(f.branch,f.files),true);
@@ -595,12 +596,62 @@ test('unchanged SOURCE opaque leaves retain exact baseline/candidate Git body an
     assert.equal(await f.run(),null,mutation);
   }
 });
-test('selected structural eligibility retains its metadata byte and body-count limits',async()=>{
-  const bytes=fixture({mutate:f=>f.put(prefix+'oversized-evidence.json',JSON.stringify('x'.repeat(16*1024*1024)))});
-  assert.equal(await bytes.run(),null);
-  assert(!bytes.reads.includes(bytes.authored.entries.get(prefix+'oversized-evidence.json').sha),'over-budget body was fetched');
-  const count=fixture({mutate:f=>{for(let n=0;n<256;n++)f.put(prefix+'evidence-'+n+'.json',{n});}});
-  assert.equal(await count.run(),null);assert.equal(new Set(count.reads).size,256);
+test('metadata admission uses finite machine headroom and an optional lower operator budget',()=>{
+  assert.deepEqual(selectedMetadataAdmission({availableBytes:8000,heapBytes:16000}),{limit_bytes:1000,machine_bytes:1000});
+  assert.equal(selectedMetadataAdmission({availableBytes:8000,heapBytes:16000,budgetBytes:'600'}).limit_bytes,600);
+  assert.equal(selectedMetadataAdmission({availableBytes:8000,heapBytes:16000,budgetBytes:2000}).limit_bytes,1000);
+  for(const budgetBytes of [0,-1,Infinity,NaN,'','0','1.5','oops'])
+    assert.throws(()=>selectedMetadataAdmission({availableBytes:8000,heapBytes:16000,budgetBytes}));
+  assert.throws(()=>selectedMetadataAdmission({availableBytes:0,heapBytes:16000}));
+});
+test('supporting records are validated incrementally without retaining cumulative evidence volume',async()=>{
+  const plain=fixture(),ordinary={};assert(await plain.run({metadataDiagnostics:ordinary}));
+  const f=fixture({mutate:f=>{for(let n=0;n<400;n++)f.put(prefix+'evidence-'+n+'.json',{n,body:'x'.repeat(48*1024)});}}),stats={};
+  assert.equal((await f.run({metadataBudgetBytes:128*1024,metadataDiagnostics:stats})).test_selection,'selected-data');
+  assert(stats.read_bytes>16*1024*1024);assert(stats.read_count>256);
+  assert.equal(stats.retained_bytes,ordinary.retained_bytes);assert.equal(stats.retained_count,ordinary.retained_count);
+  assert(stats.peak_admitted_bytes<=128*1024);assert.equal(stats.transient_read_count,400);
+  // A late bad record must still refuse after the other records have been checked.
+  f.put(prefix+'evidence-399.json','{"unfinished":');assert.equal(await f.run({metadataBudgetBytes:128*1024}),null);
+});
+test('required metadata and current transient file share one finite phase admission',async()=>{
+  const f=fixture(),stats={};assert(await f.run({metadataDiagnostics:stats}));
+  const exhausted={};assert.equal(await f.run({metadataBudgetBytes:stats.retained_bytes-1,metadataDiagnostics:exhausted}),null);
+  assert.match(exhausted.failure,/metadata memory admission exceeded/);
+  const large=fixture({mutate:f=>f.put(prefix+'large.json',JSON.stringify('x'.repeat(128*1024)))}),transient={};
+  assert.equal(await large.run({metadataBudgetBytes:128*1024,metadataDiagnostics:transient}),null);
+  assert(!large.reads.includes(large.authored.entries.get(prefix+'large.json').sha));
+  for(const budget of [0,Infinity,'invalid'])assert.equal(await fixture().run({metadataBudgetBytes:budget}),null);
+});
+test('ordinary encoded member limit remains 32 MiB before any supporting read',async()=>{
+  const f=fixture({mutate:f=>{f.put(prefix+'oversized.json',{});f.authored.entries.get(prefix+'oversized.json').size=32*1024*1024+1;}});
+  assert.equal(await f.run(),null);assert.equal(f.reads.length,0);
+});
+test('inert supporting gzip validates every decoded JSONL record without granting package authority',async()=>{
+  const f=fixture({mutate:f=>{
+    f.put(prefix+'support.json.gz',gzipSync(JSON.stringify({inert:true})));
+    f.put(prefix+'support.jsonl.gz',gzipSync('{"first":1}\n{"last":2}\n'));
+  }}),stats={};
+  assert.equal((await f.run({metadataDiagnostics:stats})).test_selection,'selected-data');assert(stats.decoded_bytes>0);
+  f.definition.inputs.push(prefix+'support.jsonl.gz');f.put('.github/package-inputs.json',f.definition);
+  assert.equal(await f.run(),null);
+});
+for(const [label,bytes] of Object.entries({
+  'invalid gzip':Buffer.from('not a gzip body'),
+  'malformed last JSONL record':gzipSync('{"first":1}\n{"last":'),
+  'empty JSONL':gzipSync(''),
+  'code in JSONL':gzipSync('{"first":1}\nprocess.exit()\n'),
+  'blank interior record':gzipSync('{}\n\n{}\n'),
+}))test('supporting gzip refuses '+label,async()=>{
+  assert.equal(await fixture({mutate:f=>f.put(prefix+'support.jsonl.gz',bytes)}).run(),null);
+});
+test('supporting decompression observes both complete decoded-member security and phase resource admission',async()=>{
+  const limited=fixture({mutate:f=>f.put(prefix+'support.json.gz',gzipSync(JSON.stringify('x'.repeat(100*1024))))});
+  assert.equal(await limited.run({metadataBudgetBytes:80*1024}),null);
+  // Concatenated members must not reset the decoded-file limit.
+  const part=gzipSync(JSON.stringify('x'.repeat(17*1024*1024))+'\n');
+  const oversized=fixture({mutate:f=>f.put(prefix+'support.jsonl.gz',Buffer.concat([part,part]))});
+  assert.equal(await oversized.run(),null);
 });
 
 
@@ -740,4 +791,63 @@ for(const [label,mutate] of Object.entries({
   'same-list duplicate':(s,r)=>{s.handoff.reused_whole_product_inputs.push({...r});},
 }))test('explicit reused physical role refuses '+label,async()=>{
   const f=retainedSourceFixture({mutate:s=>mutate(s,reusePhysicalRole(s))});assert.equal(await f.run(),null);
+});
+
+const real1753=()=>fixedDeliveryFixture({fixtureName:'../../coordination/engineering/selected-metadata-admission-20261012/pr1753.json'});
+test('complete unmodified merged PR1753 takes selected-data with all original evidence and role joins',async()=>{
+  const f=real1753(),stats={};
+  assert.equal(f.fixed.base,'7eb3293b739631f4e69d7e676c7a77ae7c22c107');
+  assert.equal(f.fixed.head,'1d67abb09f5b9d3009da115c06170678aa5cdf3f');
+  assert.equal(f.files.length,426);assert.deepEqual(f.files,f.fixed.changed_rows.map(({filename,status})=>({filename,status})));
+  for(const row of f.fixed.changed_rows){
+    assert.deepEqual(f.authored.entries.get(row.filename),row.after);
+    assert.deepEqual(f.baseline.entries.get(row.filename)??null,row.before);
+  }
+  const result=await f.run({metadataBudgetBytes:28*1024*1024,metadataDiagnostics:stats});assert(result,JSON.stringify(stats));assert.equal(result.test_selection,'selected-data');
+  assert.equal(stats.read_count,349);assert.equal(stats.read_bytes,38981635);
+  assert.equal(stats.retained_count,51);assert.equal(stats.retained_bytes,13352331);
+  assert.equal(stats.transient_read_count,298);assert.equal(stats.decoded_bytes,22197550);
+  assert.equal(stats.peak_admitted_bytes,27109018);
+  // The budget here deliberately lies below total encoded evidence volume.
+  assert(stats.read_bytes>stats.limit_bytes);assert(stats.peak_admitted_bytes<=stats.limit_bytes);
+});
+test('real PR1753 keeps one aggregate admission and refuses exhaustion rather than returning a partial selection',async()=>{
+  const f=real1753(),stats={};
+  assert.equal(await f.run({metadataBudgetBytes:20*1024*1024,metadataDiagnostics:stats}),null);
+  assert(stats.peak_admitted_bytes<=stats.limit_bytes);assert(stats.read_count>51,JSON.stringify(stats));
+});
+test('complete PR1753 record walk rejects malformed unconsumed preparation metadata',async()=>{
+  const f=real1753();
+  // Pick an independently confirmed unconsumed preparation record rather than a
+  // pinned selected role, so stale outer pins cannot account for this rejection.
+  const supporting=f.fixed.changed_rows.find(row=>row.filename.endsWith('/publication-preflight-001/classification.json')).filename;
+  const original=f.document(supporting);assert(original);
+  f.put(supporting,'{"unfinished":');assert.equal(await f.run(),null);
+});
+test('large structured logs retain whole-body identity, finite records and ordinary free-form limit',async()=>{
+  const lines=Array.from({length:400},(_,i)=>JSON.stringify({i,sample:'x'.repeat(400)})).join('\n')+'\n';
+  const f=fixture({mutate:f=>f.put(prefix+'samples.log',lines)});
+  assert.equal((await f.run()).test_selection,'selected-data');
+  for(const body of [lines+'unexpected trailing text',lines+'{"unfinished":',JSON.stringify('x'.repeat(128*1024)),
+    'unstructured '.repeat(13000),lines+'\0']){
+    f.put(prefix+'samples.log',body);assert.equal(await f.run(),null);
+  }
+  f.put(prefix+'samples.log',lines);
+  const row=f.authored.entries.get(prefix+'samples.log');f.blobs.set(row.sha,Buffer.from(lines.replace('sample','tamper')));
+  assert.equal(await f.run(),null);
+});
+test('real PR1753 selection reaches author profile and cold final-capacity validation',async()=>{
+  const ready=async()=>{const f=real1753();assert.equal((await f.run()).test_selection,'selected-data');f.reads.length=0;return f;};
+  const gate=gateFixture(await ready()),selection=await gate.gate();
+  assert.equal(selection.test_selection,'selected-data');assert.equal(selection.profile,'full');assert.equal(selection.package.full,true);
+  const cold=mergeFixture({selectedFixture:await ready()}),result=await cold.complete();
+  assert.equal(result.accepted,true);assert(result.final_capacity.proof_calls>300);
+  const exact=mergeFixture({capacity:result.final_capacity.required,selectedFixture:await ready()}),accepted=await exact.complete();
+  assert.equal(accepted.accepted,true);assert(exact.afterCalls<=accepted.final_capacity.validation_call_bound);
+});
+test('real PR1753 required selected roster cannot omit a member or change its identity',async()=>{
+  for(const mutate of [expected=>expected.cohorts[0].members.pop(),expected=>{expected.cohorts[0].members[0].target_id='foreign';}]){
+    const f=real1753(),name=f.files.find(row=>row.filename.endsWith('/selected-delivery-expectations.json')).filename;
+    const expected=f.document(name);mutate(expected);f.put(name,expected);assert.equal(await f.run(),null);
+  }
 });

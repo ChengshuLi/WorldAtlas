@@ -1,0 +1,33 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "selected-metadata-admission-20261012",
+  "branch": "engineering/selected-metadata-admission-20261012",
+  "base_main_commit": "ef834e2d90a9ca5d4cbd961a84a08dd156ae7944",
+  "github_issue": 1754,
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Bound selected-data metadata retention and validate full unmodified PR1753"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-12T01:12:00Z",
+  "completed": [
+    "Fixed-role metadata cache and sequential inert supporting-record validation",
+    "Complete unmodified426-file PR1753 selected-data replay"
+  ],
+  "checks": [],
+  "deployment": "No deployment or scientific changes",
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "coordination/engineering/selected-metadata-admission-20261012/evidence-quality.json"
+  ],
+  "blockers": [],
+  "next_action": "Independent exact-head review, required CI, serialized merge",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}

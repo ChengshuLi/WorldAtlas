@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "issue": 1754,
+  "lane": "engineering",
+  "worker_id": "01a12d97-ce7d-71f5-93f1-9c678829803e",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "ef834e2d90a9ca5d4cbd961a84a08dd156ae7944",
+    "files": [
+      {
+        "path": "scripts/integration-profile.mjs",
+        "bytes": 44542,
+        "sha256": "c94deac2c0b0dc0fd10d97fd03aba109e7aedd70c668e852a1f9f140ba155617",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/selected-data-profile.test.mjs",
+        "bytes": 63771,
+        "sha256": "9118587c00c00c439f9670b3f85e713d2710b2fe188cbd964f8b03543b530712",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/selected-metadata-admission-20261012/pr1753.json",
+      "bytes": 595181,
+      "sha256": "ebacc8fceb4847d99c2ec1fa57ccacf663d8c6e11f6967cbbec4dead8662b566",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-metadata-admission-20261012/before-replay.json",
+      "bytes": 15370,
+      "sha256": "b1511f9df96928c0aada3337e4bcb2b083d5892924c55cb083f1f125907c99a1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-metadata-admission-20261012/after-replay.json",
+      "bytes": 32398,
+      "sha256": "f96b1ab4eedec594dced6fcf48367d4a902089a62cddc0e00a843797d4218a94",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "incremental-selected-metadata",
+      "kind": "code",
+      "description": "Fixed-role structural metadata retention with machine-derived configurable admission and complete sequential inert evidence validation. The complete original PR1753 fixture retains all 426 changed paths and scientific bytes. Bound gzip JSON/JSONL and structured resource-log representations without package/reader authority. Exact current/historical joins, old full-package negatives and malformed/resource/security controls remain mandatory. This is test selection only; no scientific or hosted performance claim.",
+      "software": "Node.js 24; Git",
+      "units": "authenticated raw and decoded bytes, complete metadata records and actual consumer assertions"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/selected-data-profile.test.mjs test/pr-gates.test.mjs test/integration-proof.test.mjs test/deployment-budget-scope.test.mjs",
+    "node coordination/engineering/selected-metadata-admission-20261012/reproduce-pr1753.mjs FRESH_REPORT.json"
+  ],
+  "metric_bindings": []
+}

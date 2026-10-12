@@ -55,6 +55,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {isDeepStrictEqual as same} from 'node:util';
+import {getHeapStatistics} from 'node:v8';
+import {gunzipSync} from 'node:zlib';
 import {validatePackageInputs, loadPackageInputs, packagePathRequired, safePackagePath, PACKAGE_INPUT_FILE} from './package-inputs.mjs';
 const SELECTION = 'data/ownership-selection.json';
 const ADMINISTRATIVE_REGISTRY = 'coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json';
@@ -70,6 +72,21 @@ const needSelected = (value, message) => { if (!value) throw Error('Selected-dat
 const keys = (value, names) => value && typeof value === 'object' && !Array.isArray(value) &&
   same(Object.keys(value).sort(), [...names].sort());
 const text = value => typeof value === 'string' && value.length > 0 && value.length < 1024;
+
+// Resource policy, not an input-security allowance. Keep headroom for base64,
+// UTF-8/JSON representations and the rest of the running gate. The trusted
+// operator may lower this raw-byte allowance; individual/schema bounds below
+// remain unchanged. This is cooperative admission, not an OS memory quota.
+export function selectedMetadataAdmission({budgetBytes = process.env.WORLDATLAS_SELECTED_METADATA_BYTES,
+  availableBytes = process.availableMemory(), heapBytes = getHeapStatistics().total_available_size} = {}) {
+  needSelected([availableBytes, heapBytes].every(value => Number.isFinite(value) && value > 0),
+    'metadata memory observation unavailable');
+  const machineBytes = Math.floor(Math.min(availableBytes, heapBytes) / 8);
+  const configured = budgetBytes === undefined ? machineBytes : Number(budgetBytes);
+  needSelected((budgetBytes === undefined || typeof budgetBytes === 'number' || typeof budgetBytes === 'string' && /^[1-9][0-9]*$/.test(budgetBytes)) &&
+    Number.isSafeInteger(configured) && configured > 0 && machineBytes > 0, 'invalid metadata admission policy');
+  return {limit_bytes: Math.min(configured, machineBytes), machine_bytes: machineBytes};
+}
 
 // Expectations are reviewed source-side data. Require the WHOLE selected roster,
 // including zero-cell members. Held/rejected rows remain in the ledger but
@@ -143,9 +160,14 @@ export async function integrationTree(api, repo, commit) {
 // fixed reader roles, stop at unchanged authorities, and never follow arbitrary
 // input/config/code pin objects. Existing package/readback/geography do the full
 // source, method, decoded-body, current-neighbor and no-loss validation.
-export async function selectedDataSelection({api, repo, branch, files, baseline, authored, base, head}) {
+export async function selectedDataSelection({api, repo, branch, files, baseline, authored, base, head,
+  metadataBudgetBytes, metadataDiagnostics}) {
   if (!selectedDataCandidate(branch, files)) return null;
+  const diagnostics = metadataDiagnostics ?? {};
+  Object.assign(diagnostics, {read_count: 0, read_bytes: 0, retained_bytes: 0, retained_count: 0,
+    transient_read_count: 0, transient_read_bytes: 0, decoded_bytes: 0, peak_admitted_bytes: 0});
   try {
+    Object.assign(diagnostics, selectedMetadataAdmission({budgetBytes: metadataBudgetBytes}));
     baseline ??= await integrationTree(api, repo, base);
     authored ??= await integrationTree(api, repo, head);
     const approved = baseline.entries.get(SELECTED_SMOKE), candidate = authored.entries.get(SELECTED_SMOKE);
@@ -156,23 +178,41 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       [...added].every(name => !baseline.entries.has(name)), 'nonordinary or overwritten data');
     const expectedPaths = [...added].filter(name => name.endsWith('/selected-delivery-expectations.json'));
     needSelected(expectedPaths.length === 1, 'one reviewed expectations file required');
-    const cache = new Map(); let readBytes = 0;
-    const readRow = async row => {
+    const cache = new Map();
+    const readRow = async (row, retain = true) => {
       needSelected(ordinary(row), 'missing ordinary role');
       if (!cache.has(row.sha)) {
-        needSelected(readBytes + row.size <= 16 * 1024 * 1024 && cache.size < 256, 'metadata read budget exceeded');
-        readBytes += row.size;
+        // All required metadata shares this phase's cache. Supporting evidence
+        // is checked one complete member at a time and never accumulates here.
+        const admitted = diagnostics.retained_bytes + row.size;
+        needSelected(admitted <= diagnostics.limit_bytes, 'metadata memory admission exceeded');
+        diagnostics.peak_admitted_bytes = Math.max(diagnostics.peak_admitted_bytes, admitted);
         const blob = await api(`/repos/${repo}/git/blobs/${row.sha}`);
         needSelected(blob.encoding === 'base64' && typeof blob.content === 'string', 'missing blob bytes');
         const bytes = Buffer.from(blob.content, 'base64');
         needSelected(bytes.length === row.size && createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex') === row.sha,
           'blob identity differs');
+        diagnostics.read_count++; diagnostics.read_bytes += bytes.length;
+        if (!retain) {
+          diagnostics.transient_read_count++; diagnostics.transient_read_bytes += bytes.length;
+          return bytes;
+        }
         cache.set(row.sha, bytes);
+        diagnostics.retained_bytes += bytes.length; diagnostics.retained_count = cache.size;
       }
       return cache.get(row.sha);
     };
-    const read = (name, tree = authored) => readRow(tree.entries.get(name));
-    const json = async (name, tree) => JSON.parse(await read(name, tree));
+    const read = (name, tree = authored, retain = true) => readRow(tree.entries.get(name), retain);
+    const json = async (name, tree, retain = true) => JSON.parse(await read(name, tree, retain));
+    const jsonLines = (bytes, maximumRecordBytes = 32 * 1024 * 1024) => {
+      needSelected(bytes.length > 0, 'empty supporting JSONL');
+      for (let start = 0; start < bytes.length;) {
+        const newline = bytes.indexOf(10, start), end = newline < 0 ? bytes.length : newline;
+        needSelected(end - start <= maximumRecordBytes, 'supporting JSONL record exceeds bound');
+        JSON.parse(bytes.subarray(start, end));
+        start = end + 1;
+      }
+    };
     let packageAdditions = [];
     if (files.some(file => file.filename === PACKAGE_INPUT_FILE)) {
       const {inputs: before, ...oldPolicy} = validatePackageInputs(await json(PACKAGE_INPUT_FILE, baseline));
@@ -510,18 +550,37 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       if (name === `coordination/engineering/${branch.slice('engineering/'.length)}/README.md`) {
         needSelected(!reachable.has(name) && !sourceDeclarations.has(name) &&
           !packagePathRequired(name, validatePackageInputs(await json(PACKAGE_INPUT_FILE))), 'README is a consumed role');
-        const bytes = await read(name);
+        needSelected(authored.entries.get(name).size <= 128 * 1024, 'nontext packet README');
+        const bytes = await read(name, authored, false);
         needSelected(bytes.length <= 128 * 1024 && !bytes.includes(0) && Buffer.from(bytes.toString('utf8')).equals(bytes), 'nontext packet README');
         continue;
       }
       if (reachable.has(name) || name === expectedPaths[0] || name === manifest) continue;
       // Non-consumed supporting evidence cannot become package input. It must
-      // still be ordinary inert JSON/text, never a module, configuration or archive.
-      if (name.endsWith('.json')) await json(name);
+      // still be ordinary inert JSON/text, never a module, configuration or opaque archive.
+      // Validate syntax, then discard it: arbitrary preparation records confer no
+      // reader/package role and must not consume retained structural-metadata space.
+      if (name.endsWith('.json')) await json(name, authored, false);
+      else if (/\.jsonl?\.gz$/.test(name)) {
+        const bytes = await read(name, authored, false);
+        const remaining = diagnostics.limit_bytes - diagnostics.retained_bytes - bytes.length;
+        needSelected(remaining > 0, 'metadata memory admission exceeded');
+        // Bound actual complete decoded output, including concatenated gzip
+        // members. The trailer's untrusted ISIZE cannot grant extra admission.
+        const decoded = gunzipSync(bytes, {maxOutputLength: Math.min(32 * 1024 * 1024, remaining)});
+        diagnostics.decoded_bytes += decoded.length;
+        diagnostics.peak_admitted_bytes = Math.max(diagnostics.peak_admitted_bytes,
+          diagnostics.retained_bytes + bytes.length + decoded.length);
+        if (name.endsWith('.json.gz')) JSON.parse(decoded);
+        else jsonLines(decoded);
+      }
       else {
         needSelected(name.endsWith('.log'), 'unknown opaque evidence type');
-        const bytes = await read(name);
-        needSelected(bytes.length <= 128 * 1024 && !bytes.includes(0) && Buffer.from(bytes.toString('utf8')).equals(bytes), 'nontext evidence log');
+        const bytes = await read(name, authored, false);
+        needSelected(!bytes.includes(0) && Buffer.from(bytes.toString('utf8')).equals(bytes), 'nontext evidence log');
+        // Larger retained resource-sampling logs have a bounded structured
+        // representation. Free-form text keeps its existing 128 KiB limit.
+        if (bytes.length > 128 * 1024) jsonLines(bytes, 128 * 1024);
       }
     }
     if (registryChanged) {
@@ -533,8 +592,12 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       'package change is not append-only exact reachable data');
     return {test_selection: 'selected-data', expectations_path: expectedPaths[0], shards: [0]};
   } catch (error) {
-    if (error.planningNeeded) throw error; // Preserve the existing bounded capacity-planning retry.
+    diagnostics.failure = typeof error?.message === 'string' && error.message.startsWith('Selected-data: ') ? error.message : 'Invalid or unavailable selected metadata';
+    if (error?.planningNeeded) throw error; // Preserve the existing bounded capacity-planning retry.
     return null; // An unavailable/unknown boundary retains the full suite.
+  } finally {
+    diagnostics.heap_used_bytes = process.memoryUsage().heapUsed;
+    diagnostics.process_peak_rss_bytes = process.resourceUsage().maxRSS * 1024;
   }
 }
 
