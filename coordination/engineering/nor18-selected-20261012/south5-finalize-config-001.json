@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "registry": {
+    "bytes": 36104,
+    "commit": "9f2ac9533427ccf41fa9648bb182fc97bffbb58a",
+    "git_blob_oid": "b69321256f504446aaa69ef247baefc65259e08d",
+    "mode": "100644",
+    "path": "coordination/engineering/nor18-selected-20261012/south5-precompose-001/authority-registry.json",
+    "sha256": "5ee7de45e95b9f74d92af6e7fa6913d5cf5cdc7d28ef52db59406809730fa3ab"
+  },
+  "ledger": {
+    "path": "coordination/engineering/nor18-selected-20261012/south5-precompose-001/composed-original-ledger.json",
+    "commit": "07d9c4c3c50cad7dcf5f05b4cef18a7fbbb71dfe",
+    "mode": "100644",
+    "bytes": 714950,
+    "sha256": "81aec2b40f759d7ff258c8d98d5c8f776b1adb984434d28c5efab153db5eab15",
+    "git_blob_oid": "4c6b8d2d96c05415494927008907a60a33916768"
+  },
+  "rebind": {
+    "bytes": 3070,
+    "commit": "24be14b3c76beb20d71b2880cdffecb064e15661",
+    "git_blob_oid": "a7a0488d696588e50209501cfb94d57f642415e2",
+    "mode": "100644",
+    "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-certificate-001/certificate.json",
+    "sha256": "2addc143c8dbb2a9330c9c496c7c61cb96806a8a1da23ae988be7f5c9d7160df"
+  },
+  "new_prefix": "coordination/engineering/nor18-selected-20261012/",
+  "sidecar": {
+    "path": "coordination/engineering/nor18-selected-20261012/south5-release-001/selection-sidecar.json",
+    "commit": "07d9c4c3c50cad7dcf5f05b4cef18a7fbbb71dfe",
+    "mode": "100644",
+    "bytes": 3404,
+    "sha256": "53072b1c2d7fbdf73910048143dee1d9d33eb6c274cf82cf59146cbffd530779",
+    "git_blob_oid": "5ea2f448cadee78d72cd1984224cce15a9d8b6f4"
+  },
+  "selected_ledger": {
+    "bytes": 1143909,
+    "commit": "9f2ac9533427ccf41fa9648bb182fc97bffbb58a",
+    "git_blob_oid": "8a642e30fec5d540e418b78bfcc270b7d70365d1",
+    "mode": "100644",
+    "path": "coordination/engineering/nor18-selected-20261012/south5-assembly-001/ledger.json",
+    "sha256": "04ef548202af86f5b8b2dc6ee8356310ad8af1899d1f24288ec865a4f372aeb2"
+  },
+  "selector": {
+    "path": "data/ownership-selection.json",
+    "commit": "07d9c4c3c50cad7dcf5f05b4cef18a7fbbb71dfe",
+    "mode": "100644",
+    "bytes": 1598,
+    "sha256": "7daf909bc5f574d07a738d82ef2f40da80bbf2be06a35853e90e0ecf73ab5308",
+    "git_blob_oid": "7f47360d24c989b3c10728962963b7124b7d3683"
+  },
+  "package_inputs": {
+    "path": ".github/package-inputs.json",
+    "commit": "07d9c4c3c50cad7dcf5f05b4cef18a7fbbb71dfe",
+    "mode": "100644",
+    "bytes": 88795,
+    "sha256": "2ea201f2725697e385e8130d1d5b582d1620d594c84543e2f51ab69bf955ca67",
+    "git_blob_oid": "ef871d5735a0458f703465c2ad6c2fe4a61e09eb"
+  },
+  "preparation_allowance": {
+    "phaseBytes": 536870912,
+    "rssBytes": 1073741824
+  }
+}

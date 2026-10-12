@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "groups": [
+    {
+      "id": "nor18-south5-native-001",
+      "source": {
+        "request": {
+          "blob": "acc6cb456969790fbf9ccf3cde0d1b4d08e2ad82",
+          "bytes": 16101,
+          "commit": "4bf7e8c7b4f0550176640ad45b0f2ffab016339f",
+          "mode": "100644",
+          "path": "coordination/engineering/nor18-selected-20261012/south5-requests-004/nor18-south5-004-source-request.json",
+          "sha256": "aacb4d806862a381898655460fc0e42c0202dd6129db6e4d85d6e686404c3d97"
+        },
+        "publication": {
+          "path": "coordination/engineering/nor18-selected-20261012/south5-source-qualified-004/publication.json",
+          "commit": "b51e64dd7c3d08e563b2d805252188708a6239cf",
+          "mode": "100644",
+          "blob": "991bc2592427337645fa2ee534e48aa2c1e21e84",
+          "bytes": 351,
+          "sha256": "7e8c8b054121919b41de055696a427b654bfc346fa17bb6a2fc4a179b6a8b676"
+        },
+        "operating": {
+          "path": "coordination/engineering/nor18-selected-20261012/south5-source-qualified-004/terminal.json",
+          "commit": "b51e64dd7c3d08e563b2d805252188708a6239cf",
+          "mode": "100644",
+          "blob": "1b16b786465c6ff3772022fc8d8bdb0e4b176a8e",
+          "bytes": 16302,
+          "sha256": "49ddd7407880d454910c220ac5308b0c1a49aff8a488c1531564f92afa33e992"
+        },
+        "facts": {
+          "path": "coordination/engineering/nor18-selected-20261012/south5-source-qualified-004/facts.json",
+          "commit": "b51e64dd7c3d08e563b2d805252188708a6239cf",
+          "mode": "100644",
+          "blob": "b9a66d087ae432d15a8f4cef3b7db97140c18bb6",
+          "bytes": 1320309,
+          "sha256": "b98292ec267528306dbd34b094687186abe67c88b7f3028aff59beb915dde287"
+        },
+        "inventory": {
+          "path": "coordination/engineering/nor18-selected-20261012/south5-source-qualified-004/inventory.jsonl.gz",
+          "commit": "b51e64dd7c3d08e563b2d805252188708a6239cf",
+          "mode": "100644",
+          "blob": "bac8a83965fb30151593ba1d1de27c3ee69a511b",
+          "bytes": 2658,
+          "sha256": "3ffb321c27a5f71c8602e84d5d0bea61184e5ffacf37252fdd193987d8e9713e"
+        }
+      },
+      "template": {
+        "path": "coordination/engineering/nor18-selected-20261012/templates-001/south5-native-template.json",
+        "commit": "b51e64dd7c3d08e563b2d805252188708a6239cf",
+        "mode": "100644",
+        "blob": "45dba9fef9022748be1142ed9f2f39130c8bf4d5",
+        "bytes": 22338,
+        "sha256": "400fdca428a51bb8836ff7456e1f9e0e87cec3acf64dd98cff75a6d1563489c7"
+      },
+      "destination": ".cache/native-grid-candidates/nor18-south5-native-001"
+    }
+  ],
+  "requested_resources": {
+    "processing_allowance": {
+      "phaseBytes": 536870912,
+      "rssBytes": 1073741824
+    },
+    "operating_limits": {
+      "log_bytes": 4194304,
+      "monitor_bytes": 8388608,
+      "output_bytes": 33554432,
+      "receipt_bytes": 1048576,
+      "retained_bytes": 50331648,
+      "rss_bytes": 1610612736,
+      "wall_seconds": 1200
+    }
+  }
+}

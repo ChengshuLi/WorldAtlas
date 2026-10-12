@@ -1,0 +1,1484 @@
+{
+  "version": 1,
+  "issue": 1796,
+  "lane": "engineering",
+  "worker_id": "01a13113-dee9-71c7-8aa9-58bec4e9f02b",
+  "subject_ids": [
+    "physical-component:02503ad88ce4a8ba68be7b197491e3610b557016bdca2b3ae5692514603930a6",
+    "physical-component:040b81866ed44166ca5c08cebe436417e629b5eba0a263d9531288fc6416832d",
+    "physical-component:20314a1f10831597e31b841d5ab43b93e8b4fc2b99960ca8c1cc8b1bba85d06f",
+    "physical-component:270b5cc144fffa3af15d9538ecbb8665d52f98965fa9a61cb5be4b20a8c7243d",
+    "physical-component:375e55e26bfc017ffc1cc2966705822a4577dc94b3cb02f3d30803ccd34b2b5a",
+    "physical-component:3f1a462840f8fc7b9baff21c776d48f747f67ec7a71b4319218f2cf6c7aa5c50",
+    "physical-component:43d1d39fd50e54e8dcda3f70ec1eece46918fb1a987e4acc3c0d5bd811b3fa4f",
+    "physical-component:46e0f6b1de7155d2722cac7669ae89b1f8bda954c298884f5dc239ac5237de8a",
+    "physical-component:51621e475e003e83e6b23203827a0b255ec5f7b4fe4af550148fb486c36695ca",
+    "physical-component:672f627ebc78de7674588907b30608503591f86e95e193142b800e547d18b377",
+    "physical-component:7e72874be89ff9107dc87c86aafe0ee2cfc7430e5a9f1688bdf556b2b284ef3b",
+    "physical-component:8c215cb7795d2616a7743a89e09a4f26fb1cd590fa6101e204348a4cf55212af",
+    "physical-component:990ff8dc7d906a734266e2a3ea0151bd77b5ed700b6c4ab1e45da915cc4f9dee",
+    "physical-component:abb4663da9c0480823953d8c8cccfe6d324a15bb1a92566503a85f4c7a79c4f6",
+    "physical-component:c1d5e49737e17af6a5a2dcbc5467b7d3bad9d895115dbb7ef374ef76295c8e4d",
+    "physical-component:cb03679e20a514e86009ca5a936e6ec74b22fc6f2266028555870124ed23d47f",
+    "physical-component:d183bad00349d708a7d8ff8a052555c6a944b82ec9dd05eaca6469001556c6c7",
+    "physical-component:df2cf8877fd9e127728b71547dd7d87368ba90db73d5484a0ad321446275551d"
+  ],
+  "subject_ids_sha256": "23c016782130c6aa3d485ea1bf99c511a81d425a60f9f81ff5acab7bbfccd2af",
+  "baseline": {
+    "version": 2,
+    "commit": "de242847b3867045ee9301f49a1e5e53d6cb8e16",
+    "files": [
+      {
+        "path": "research/geography/norway31-source-fit-20261011/vintages/source-handoff-003/source-handoff.json",
+        "bytes": 1983918,
+        "sha256": "08db5fd397ebd75cca1b8f520989ac73bdf68a43d427e02d04092a6a9c04a054",
+        "hash_kind": "file-bytes",
+        "role": "accepted-source-or-selection",
+        "commit": "de242847b3867045ee9301f49a1e5e53d6cb8e16"
+      },
+      {
+        "path": "research/geography/norway31-source-fit-20261011/policy/literal-union-source-policy-v1.json",
+        "bytes": 3786,
+        "sha256": "21c143adcc3883046c9e93339201b945bad22210df41d481d0a727ab8ac6e967",
+        "hash_kind": "file-bytes",
+        "role": "accepted-source-or-selection",
+        "commit": "de242847b3867045ee9301f49a1e5e53d6cb8e16"
+      },
+      {
+        "path": "data/ownership-selection.json",
+        "bytes": 1598,
+        "sha256": "7daf909bc5f574d07a738d82ef2f40da80bbf2be06a35853e90e0ecf73ab5308",
+        "hash_kind": "file-bytes",
+        "role": "accepted-source-or-selection",
+        "commit": "de242847b3867045ee9301f49a1e5e53d6cb8e16"
+      },
+      {
+        "path": ".github/package-inputs.json",
+        "bytes": 88795,
+        "sha256": "2ea201f2725697e385e8130d1d5b582d1620d594c84543e2f51ab69bf955ca67",
+        "hash_kind": "file-bytes",
+        "role": "accepted-source-or-selection",
+        "commit": "de242847b3867045ee9301f49a1e5e53d6cb8e16"
+      },
+      {
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/precompose-001/authority-registry.json",
+        "bytes": 35189,
+        "sha256": "5164033e8b5767778ebcda861fd265d82ac8b2f919a4ff6f3bb98eac0bcc20e7",
+        "hash_kind": "file-bytes",
+        "role": "prior-selected-custody",
+        "commit": "de242847b3867045ee9301f49a1e5e53d6cb8e16"
+      },
+      {
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/assembly-001/ledger.json",
+        "bytes": 1127479,
+        "sha256": "e0201860f77ee240fa6e76ea24d21fbbb15ca5f970f2311c9a1e48ee1beaa30b",
+        "hash_kind": "file-bytes",
+        "role": "prior-selected-custody",
+        "commit": "de242847b3867045ee9301f49a1e5e53d6cb8e16"
+      },
+      {
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/assembly-001/patch.json",
+        "bytes": 13368,
+        "sha256": "7b4931921fdb471748ef397e5a3ba14b90186555b35220901153712a7082b4fb",
+        "hash_kind": "file-bytes",
+        "role": "prior-selected-custody",
+        "commit": "de242847b3867045ee9301f49a1e5e53d6cb8e16"
+      }
+    ],
+    "pins": {
+      "source_handoff": "08db5fd397ebd75cca1b8f520989ac73bdf68a43d427e02d04092a6a9c04a054",
+      "literal_source_policy": "21c143adcc3883046c9e93339201b945bad22210df41d481d0a727ab8ac6e967"
+    },
+    "pin_files": {
+      "source_handoff": {
+        "path": "research/geography/norway31-source-fit-20261011/vintages/source-handoff-003/source-handoff.json",
+        "commit": "de242847b3867045ee9301f49a1e5e53d6cb8e16"
+      },
+      "literal_source_policy": {
+        "path": "research/geography/norway31-source-fit-20261011/policy/literal-union-source-policy-v1.json",
+        "commit": "de242847b3867045ee9301f49a1e5e53d6cb8e16"
+      }
+    }
+  },
+  "sources": [
+    {
+      "id": "prior-selected",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/commit/de242847b3867045ee9301f49a1e5e53d6cb8e16",
+      "role": "Accepted prior selected source, native assignments and authority custody",
+      "vintage": "Accepted immutable repository edition",
+      "retrieved_at": "2026-10-12",
+      "license": {
+        "status": "unknown",
+        "terms": "Preserve exact original source and edition-specific rights; no new rights assertion."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore complete original bodies through their retained immutable source and publication pins.",
+      "limit": "Prior source-relative limitations remain; no new physical, legal, water or date truth.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "nor18-source",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/pull/1738#issuecomment-6129150153",
+      "role": "Accepted complete eighteen-component Norway source handoff and all original31 dispositions",
+      "vintage": "Accepted immutable repository edition",
+      "retrieved_at": "2026-10-12",
+      "license": {
+        "status": "unknown",
+        "terms": "Preserve exact original source and edition-specific rights; no new rights assertion."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore complete original bodies through their retained immutable source and publication pins.",
+      "limit": "Only eighteen supported whole original candidates; excluded holds and original denominators remain unchanged.",
+      "temporal_status": "unknown"
+    }
+  ],
+  "outputs": [
+    {
+      "path": ".github/package-inputs.json",
+      "bytes": 92514,
+      "sha256": "4f4f84572fac2681d6dcb9abe928689ff884e04442221bf0ba7470235fe27e3f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json",
+      "bytes": 11775,
+      "sha256": "4e9279aec058855e135945dc56eeb2444fb750f80541017217d4550c461ec14c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/README.md",
+      "bytes": 2101,
+      "sha256": "824978b84ef1ef1b50ef26d05bc20c357ca990a3230ce3923cbddd74d3e8d6ff",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/delivery-scope.json",
+      "bytes": 16338,
+      "sha256": "bf336667301ca69a397b76821d007652368196ccd9116988e4270c8dd3ae0d3f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/native-transport-001/preparation.json",
+      "bytes": 478,
+      "sha256": "98210a3592b5d395b8a297f7f30cb0d13b278dcaafeb9076a4974400af3e51b9",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/native-transport-001/runs-5242880.bin.gz",
+      "bytes": 868549,
+      "sha256": "295247e4a865b866070e6747a13dc816d0c7f76573e72ab3519dbb8cd8c33e9a",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/native-transport-001/runs-6291456.bin.gz",
+      "bytes": 851783,
+      "sha256": "eca1667dfc637570231ba2a1174e8cc52f34e599a35259915145ebe1045e4663",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/native-transport-001/transport.json",
+      "bytes": 6503,
+      "sha256": "2ffcdd8df7fcb653402298fd00fe0e79ced98c4998bdfe111f5b68f454d885bc",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-authority-001/authority-binding.json",
+      "bytes": 6013,
+      "sha256": "2d2d13786a97c1908df52efdac47de9404fe0517fdd923b09564ae50f4fe7d90",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-authority-001/inputs.json",
+      "bytes": 534,
+      "sha256": "2b09e3142eee6c8f12db6dcd92c30a043c4846f0ad9d9136928e8de0e6adbaad",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-authority-001/original-rule-preimage.json",
+      "bytes": 19548,
+      "sha256": "0737cf37b42d52b83ac184cd9a403b7bfaebfcfbbaa1c8f8411458a6377cabce",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-authority-001/preparation.json",
+      "bytes": 471,
+      "sha256": "cb834a0a598debfc00c1cfabac02b444908969da33368014800d7449ed395ca2",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-native-config-001.json",
+      "bytes": 3054,
+      "sha256": "c0f7ff4c00011c320d6f9bd8f3b3711fba12e1b9c7e52885ace6a4fe6dc490bf",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-native-qualified-001/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-native-qualified-001/facts.json",
+      "bytes": 1340887,
+      "sha256": "6d0a9611b37896cd2a7b0ec90e5fd83a7a21d9302cb9e97016fbdf00fc5b3023",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-native-qualified-001/features.json",
+      "bytes": 54392,
+      "sha256": "09c8d97c182f4b422a6c63dd6fd540f3534aae058978115eebdb70e84d80de73",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-native-qualified-001/inventory.jsonl.gz",
+      "bytes": 954,
+      "sha256": "a630c84cf960dbe9031abcec5905026839d77e73c337bc3a0b76fcb338574c63",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-native-qualified-001/ledger-batch.json",
+      "bytes": 47379,
+      "sha256": "3072faba803ee6cb2c4a50c5d8a76ea3a65829edb3f93172f2c43e0d119565bd",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-native-qualified-001/owner-window.json",
+      "bytes": 220229,
+      "sha256": "fb69b742f6fb1d608e747b5833d169bb5bac0bb1a73f2b6759dd337f4fec380c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-native-qualified-001/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-native-qualified-001/patch-batch.json",
+      "bytes": 3200,
+      "sha256": "b9739545e94537875d0fe3f524c08cc82583cd6b71b9494339f25bf5a8d7f4ed",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-native-qualified-001/preparation.json",
+      "bytes": 1598,
+      "sha256": "3d169dbbc3929bb228c9d35fb8573f05489273ef83b92fa0987dffe3727d4370",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-native-qualified-001/publication.json",
+      "bytes": 1452,
+      "sha256": "659c040ff31c4446e1c3a4338019ee24b3366543d5ce535bd61f6f4b07e9c3d2",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-native-qualified-001/release-envelope.json",
+      "bytes": 1664,
+      "sha256": "1f40502621ef771298ea4f5447314665f6dd8cc9c27f9b9c93ce003045db92b6",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-native-qualified-001/request.json",
+      "bytes": 29681,
+      "sha256": "2658f39bf17f18c5382099b15e469d22c27f04761cc1e30c3dc267a1da84ad85",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-native-qualified-001/terminal.json",
+      "bytes": 16309,
+      "sha256": "dbfeddb2f765726793f8ef2f2bb55d1bd7120c19925b0a6024f61fa09a0fb291",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-native-qualified-001/virtual-owner-window.json",
+      "bytes": 113101,
+      "sha256": "70b98b139e469855d2d0bf09b8b5f83a39b11845ef4c023a3a3814715a456565",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-native-requests-001/nor18-north13-native-001-native-request.json",
+      "bytes": 29681,
+      "sha256": "2658f39bf17f18c5382099b15e469d22c27f04761cc1e30c3dc267a1da84ad85",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-native-requests-001/preparation.json",
+      "bytes": 286,
+      "sha256": "6ad8237fef03be96c641a2019cf3ff1212f3ec9447129bbdee3ea11d840494b9",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-native-retain-config-001.json",
+      "bytes": 576,
+      "sha256": "662d47abd23b87d5c0033d63054657e5fb4cf9a89296a8f2a60381278b1b62cd",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-native-transport-001/preparation.json",
+      "bytes": 478,
+      "sha256": "8417ed550d4cd5bd6c4a70f06cad1600b14b11c14f065e3d4922e0103499505a",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-native-transport-001/transport.json",
+      "bytes": 6512,
+      "sha256": "f4f2045c3339ee72d052197e9c65c8c18bb55ac4046f2afbb55620411be989a1",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-prepared-operands.json",
+      "bytes": 1256,
+      "sha256": "cdb2390535405803663d646081796b9668a6e5d84d982516c293a6411b84b005",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-requests-001/nor18-north13-001-source-request.json",
+      "bytes": 22614,
+      "sha256": "08fddf7ee1f0b9098fe97395f00897bf6cf3de1871ff1350081464d5d5a00458",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-requests-001/preparation.json",
+      "bytes": 379,
+      "sha256": "e977e800184825046e1c8d0759649b4ca8cbfea6d300a0e8e47a3c5dbf1956bb",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-requests-001/requests.json",
+      "bytes": 2214,
+      "sha256": "4610f2c6ae175f452e2ba9ac75392018ff41c656bb48798a1af1ce7b9979e89d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-requests-config-001.json",
+      "bytes": 3845,
+      "sha256": "c01f7e2d13c36080f41884e8127fa6ac23d786cec0a1a30aa96332c0f92ec1b3",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-retain-config-001.json",
+      "bytes": 555,
+      "sha256": "e846e5dc7da7ca63c004e013f27dad8546bac33f8ea75371fa1cda17b0ccbbcb",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-source-qualified-001/facts.json",
+      "bytes": 1330418,
+      "sha256": "c7a3a406c3598c49506d5d17cc120d3932a8b94326fb5ed6c0dc1a92c0dc5fd5",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-source-qualified-001/inventory.jsonl.gz",
+      "bytes": 5149,
+      "sha256": "12e5a107bcb6ea3558b2bbd66c5129b5f8de6384b672aa3b0689df19c153b885",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-source-qualified-001/preparation.json",
+      "bytes": 681,
+      "sha256": "7863def38ec8b3175b77ddf3d60a40bacc1ae6cbb47fa1d90ff4b27ef0a55137",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-source-qualified-001/publication.json",
+      "bytes": 351,
+      "sha256": "ba5493258a8317702075cd8544f7d92148fcce6c134df9269c61f6425e92146a",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-source-qualified-001/request.json",
+      "bytes": 22614,
+      "sha256": "08fddf7ee1f0b9098fe97395f00897bf6cf3de1871ff1350081464d5d5a00458",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-source-qualified-001/terminal.json",
+      "bytes": 16304,
+      "sha256": "fefcb6a5938cd5734b57be85d533297934994597364a780f97e6139e14d4c3b8",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/preserved-refusals/native-001/receipt.json",
+      "bytes": 16308,
+      "sha256": "3f4abeac56bb6da15ed0d43aefc1da5f147ae5fdb9bd7e0eb39038b9fd8b76e8",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/preserved-refusals/native-001/samples.json",
+      "bytes": 199388,
+      "sha256": "0d933ab37f2bab3bc56b82e286b9bbcccf037c8b0f7a33ee4a44f6029ad4bef7",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/preserved-refusals/native-001/stderr.txt",
+      "bytes": 2491,
+      "sha256": "04608196f51ffb177b0a94be20e7724267680390cd6d98f8f692584055b55048",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/preserved-refusals/native-001/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/preserved-refusals/source-001/receipt.json",
+      "bytes": 16290,
+      "sha256": "6692e3b2d541f04b68cacb5d54d07b5aa5598f7d962d79c98665536f907b2c66",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/preserved-refusals/source-001/samples.json",
+      "bytes": 4504,
+      "sha256": "489ef3d3887b2be1e29139f87704af46eb8bdf86f94f4e72c43bddd291f28bd4",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/preserved-refusals/source-001/stderr.txt",
+      "bytes": 4007,
+      "sha256": "1580ae2d4aebec47a32da692a7c1a6e0c724b80b8da753af7ad298a302d4fa43",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/preserved-refusals/source-001/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/preserved-refusals/source-002/receipt.json",
+      "bytes": 16289,
+      "sha256": "6774b3a3c02203733d2e8855ceaf781868f5111bb0fffdde9c4b2af3a785fcf5",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/preserved-refusals/source-002/samples.json",
+      "bytes": 16993,
+      "sha256": "00664d7e4c263293b0a09d39f86735f09106f3523a005e60f71e33f6411e0f83",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/preserved-refusals/source-002/stderr.txt",
+      "bytes": 4207,
+      "sha256": "a43d5cb9b726c445493d590640a2b53e5727371cd41ccb26fb6efe6065103820",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/preserved-refusals/source-002/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/preserved-refusals/source-003/receipt.json",
+      "bytes": 16290,
+      "sha256": "5b6e0ccea858af4d320ec8091e5d7c1492b1f5dd99ac0fbc89cdc6806561ebb1",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/preserved-refusals/source-003/samples.json",
+      "bytes": 321926,
+      "sha256": "429a7e2b8fe11c7f289875024810737e3515b3876ae87233b9ac9d604625be8c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/preserved-refusals/source-003/stderr.txt",
+      "bytes": 3968,
+      "sha256": "12650344d47f0f969b344b500a695d7483fc068a6dc93b6de16864b4037cf90a",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/preserved-refusals/source-003/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-assembly-001/envelope.json",
+      "bytes": 1423,
+      "sha256": "f0819781b91dae960d7080858a3cc4ace5bc2e921fa485619b147f20f0b6469d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-assembly-001/issued-parameters.json",
+      "bytes": 20945,
+      "sha256": "1ed8e2bd77b82e36e287664a8959301f685af4861000ffd402c8e69d8c94b38c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-assembly-001/ledger.json",
+      "bytes": 1143909,
+      "sha256": "04ef548202af86f5b8b2dc6ee8356310ad8af1899d1f24288ec865a4f372aeb2",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-assembly-001/patch.json",
+      "bytes": 13884,
+      "sha256": "50c1ef9ecc764d51cb5710a91ae463400fbed74740505214f08b92944602fd08",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-assembly-001/preparation.json",
+      "bytes": 1197,
+      "sha256": "70cf5e632675fafd92914ce1244170de640c07389fd9d61e086e3a5b87f17702",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-assembly-001/qualification.json",
+      "bytes": 637,
+      "sha256": "78d84f0b02beeb67cbb669a4b36e377b805b0488397d135ce9a787a1088a61a0",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-assembly-001/samples.json",
+      "bytes": 251591,
+      "sha256": "053c4a39d396b77e461810265f8300a1f05d86fc4bc40571ce052a2af8599130",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-assembly-001/stderr.txt",
+      "bytes": 1355,
+      "sha256": "e69d0c04f4dd6eeab1b87d580169a2d85ccbdfb054b54810523742b0cf4084db",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-assembly-001/stdout.txt",
+      "bytes": 1479,
+      "sha256": "cef43f0b0e0f02423e152b48ec181b7d1e4b7ec1119e5dc590b6be7bbbdc4567",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-assembly-001/terminal.json",
+      "bytes": 38042,
+      "sha256": "5d9cc64fd7f70106c83f6c85da1b0cbb41db3c57dd788aef7addebaab046896f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-authority-001/authority-binding.json",
+      "bytes": 5992,
+      "sha256": "8034686b5e13c5ca50917c8d6dc0dc4580b556c2a54361a92b51e396502f7667",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-authority-001/inputs.json",
+      "bytes": 531,
+      "sha256": "315cc2be2e84a771b191518923c90d31a07e60ea9b032944a1a478002dd57109",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-authority-001/original-rule-preimage.json",
+      "bytes": 13036,
+      "sha256": "61795e27d15a6da9d2eb9e361d0797e0ca5df083c886aaec1169b076b3126d56",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-authority-001/preparation.json",
+      "bytes": 471,
+      "sha256": "4d4c26e8dfac47fbf902bc76af23c688f528f7391cc13ad00247fd54eb204f81",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-authority-registry-001/authority-registry.json",
+      "bytes": 986,
+      "sha256": "0519c24d19293c189312bc4a3a211e763f8016f2188ffe0e122d66fa488e4bd1",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-authority-registry-001/preparation.json",
+      "bytes": 245,
+      "sha256": "b41b33803d79cd2d788ea59af23e43d506a0aaa22fc040d9cdbf811073670cfc",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-compose-config-001.json",
+      "bytes": 15331,
+      "sha256": "1d4ff30a5814c00026672a812a9b63d48ba00aa1ef777139864f3ab106d4e022",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-compose-config-002.json",
+      "bytes": 15331,
+      "sha256": "1d4ff30a5814c00026672a812a9b63d48ba00aa1ef777139864f3ab106d4e022",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-composition-aliases.json",
+      "bytes": 172,
+      "sha256": "14beebb0ad1888a9fbc9b315f83ae5ba960d3bcc7b367f5fcf16e7f9d7ac96d8",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-final-001/ownership-selection.json",
+      "bytes": 1573,
+      "sha256": "636ec1c12d6be527f7d0aaa3194ece3f69c2c22b37a7a8c69d3cb05e52b18b20",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-final-001/package-inputs.json",
+      "bytes": 92514,
+      "sha256": "4f4f84572fac2681d6dcb9abe928689ff884e04442221bf0ba7470235fe27e3f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-final-001/package-roles.json",
+      "bytes": 13929,
+      "sha256": "2a04dac43c806508ec2d5021996322a8bd9ffab73ebb799e3b642fcd9f7196b0",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-final-001/preparation.json",
+      "bytes": 615,
+      "sha256": "2a55a05018b46e864272852ad1f48e801f07a1d3ab9ed6ebc220e2ed8e613439",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-final-001/selected-delivery-expectations.json",
+      "bytes": 40267,
+      "sha256": "6851e877ff6bf46d42f9443f1cf20d4336992088a6afe54544c6c637a0615bdf",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-finalize-config-001.json",
+      "bytes": 2675,
+      "sha256": "db30e6472ee590c5572486cfc26ddaac85b83df75a40f25c4ccc283824ce57aa",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-native-config-001.json",
+      "bytes": 3045,
+      "sha256": "c0bb3bb30499022534a1b8236ff34c6d0e0f0c00346caaa34e1153ec3ab32a73",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-native-config-002.json",
+      "bytes": 3045,
+      "sha256": "d5f164da35b74e90b9edd77a7a459ad766ca0314a150a8a571d87781f922c925",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-native-qualified-002/base-native-manifest.json",
+      "bytes": 252447,
+      "sha256": "d9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-native-qualified-002/facts.json",
+      "bytes": 1329801,
+      "sha256": "c4bb9d625fb0b6e46d37991f095a77927528775664d29b424017569a45da5719",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-native-qualified-002/features.json",
+      "bytes": 20902,
+      "sha256": "001bcd6689f46531a0cfa0e26536c709345a4df4f12656841c43b0e1989779e5",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-native-qualified-002/inventory.jsonl.gz",
+      "bytes": 558,
+      "sha256": "fa598186a3a4cc5fb0c17e369ad636c3bf0d40fb55584a84014e444b79762ace",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-native-qualified-002/ledger-batch.json",
+      "bytes": 10142,
+      "sha256": "e4680b1b4c79c0481e69a81ee4e9147f113143fd4109f87d305ffdfd754412a6",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-native-qualified-002/owner-window.json",
+      "bytes": 95730,
+      "sha256": "9890613c9605e6161dc692f0da05f1462cbeb2ed5665668efbe813f7b3738d4f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-native-qualified-002/owners-batch.json.gz",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-native-qualified-002/patch-batch.json",
+      "bytes": 1308,
+      "sha256": "2500fa36e794d0f28cf7dd513bc39c6429d026c77f06765a60d468f4202365a4",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-native-qualified-002/preparation.json",
+      "bytes": 1596,
+      "sha256": "520411673faed1307840da826b8824d60bc66b26099f6831e2baf45b2e4505c3",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-native-qualified-002/publication.json",
+      "bytes": 1450,
+      "sha256": "27fc99c8ca78b646dfd9735fbae1ecbf23018724b65a297e58e4cf3bba5bb9c7",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-native-qualified-002/release-envelope.json",
+      "bytes": 1664,
+      "sha256": "15c787cbddaa21a522a6f3e1cb029a0698b497b5c664a9dec89b97a8f519524b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-native-qualified-002/request.json",
+      "bytes": 22747,
+      "sha256": "2ad601cc9835e0e8fa31effe9f4229d77845eef8ef5fb044d1c8024ca1363910",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-native-qualified-002/terminal.json",
+      "bytes": 16314,
+      "sha256": "3d703840a4363258db56ec3681a749091423e79cc5e03601787d6ae3ea733aff",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-native-qualified-002/virtual-owner-window.json",
+      "bytes": 47277,
+      "sha256": "f6008fdf95093cbb32dbc2bb8ca2fe6bf1f50d0ef3983ad00c2a8197b0bd52ba",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-native-requests-001/nor18-south5-native-001-native-request.json",
+      "bytes": 22746,
+      "sha256": "8e7655bf8ff249412b309154b287e0bd3c6fd13fc356a2c9bc73ec531b47a69b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-native-requests-001/preparation.json",
+      "bytes": 285,
+      "sha256": "4725fc1a2254722a6797957a671d16670cc620661296ed5582092bacac5dfd60",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-native-requests-002/nor18-south5-native-002-native-request.json",
+      "bytes": 22747,
+      "sha256": "2ad601cc9835e0e8fa31effe9f4229d77845eef8ef5fb044d1c8024ca1363910",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-native-requests-002/preparation.json",
+      "bytes": 285,
+      "sha256": "4b61cb5a0a6b93fc75a2e2312d0a579f91c22d597232c73d9c6bee0a6539b0a1",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-native-retain-config-002.json",
+      "bytes": 572,
+      "sha256": "e1529aafb64fe3ae73b3d76c04565a20f477966fc72e0b26e5174cfa99f4e3d7",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-precompose-001/authority-registry.json",
+      "bytes": 36104,
+      "sha256": "5ee7de45e95b9f74d92af6e7fa6913d5cf5cdc7d28ef52db59406809730fa3ab",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-precompose-001/composed-original-ledger.json",
+      "bytes": 714950,
+      "sha256": "81aec2b40f759d7ff258c8d98d5c8f776b1adb984434d28c5efab153db5eab15",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-precompose-001/preparation.json",
+      "bytes": 382,
+      "sha256": "dc1b6a7c1eb5840b122f0973de4a14c4147a668e17729dd236f5132ecdada860",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-certificate-001/certificate.json",
+      "bytes": 3070,
+      "sha256": "2addc143c8dbb2a9330c9c496c7c61cb96806a8a1da23ae988be7f5c9d7160df",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-certificate-001/preparation.json",
+      "bytes": 260,
+      "sha256": "6c8847f1b2a265dd3967c993607c533dad5c05e19d2235382e53d4608abb88e6",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-certificate-config-001.json",
+      "bytes": 4204,
+      "sha256": "87c8eefd22edcd4f7522c939d8ce09258fd4a587ac5af6af3e9a87be798942ef",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-execution-001/code-source.json",
+      "bytes": 51518,
+      "sha256": "2a272511f8e826c7bc55f8c05ee9409aa98093f310f0a3bb6f18a356398ae4c6",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-execution-001/facts.json",
+      "bytes": 7544,
+      "sha256": "bec9c4c6dcc36c79658e6d9c0a82685f161c81d515f9172676f4a2d4d2114b47",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-execution-001/issued-plan.json",
+      "bytes": 15255,
+      "sha256": "2ab68f3c812b743aa7624be2f579c7f137e1995b05e48ea099844f05347e558e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-execution-001/preparation.json",
+      "bytes": 1111,
+      "sha256": "03b056868b852d43f1a4484e42f92f5eb16a82f3f97939129569c8cf01babeec",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-execution-001/publication.json",
+      "bytes": 475,
+      "sha256": "cbd8500095875b580a3718fb1ecee6327b7808bddbf7e2c512a52c3ea45e48e5",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-execution-001/request.json",
+      "bytes": 2533685,
+      "sha256": "e3f8e0143cac6b5de6cd3d000bf7a72d53242ce5d7cfbbdce11fcb064e7d0e32",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-execution-001/result.json",
+      "bytes": 4080050,
+      "sha256": "957a4134596e8417eafc5c4063bf0a60400aa7d5987c7f61e611222f70c1980a",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-execution-001/stderr.log",
+      "bytes": 1418,
+      "sha256": "1a12286830867aaabfb88d5f79a1fd024ff1cd477161a2ea1f97f35c87ddab92",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-execution-001/stdout.json",
+      "bytes": 376,
+      "sha256": "65d9e56f3b50db4996ac5930734d895bd4e639c77e5049e4c6560673a7453f8d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-execution-001/terminal.json",
+      "bytes": 1471,
+      "sha256": "af7427bc0ad5ad2aae73dd4398295cd698471e94614ac82be8a4590cd9381a82",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-operating-001/operating.json",
+      "bytes": 2094,
+      "sha256": "34eec1fce7b43a9ed65cfc18ca72ac2b464d48d0f59b59e47905bf291e9ff024",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-operating-001/preparation.json",
+      "bytes": 256,
+      "sha256": "6ac7e959755cb0e40041859998e97cf871198bf1b870658eee718e10136dd180",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-operating-config-001.json",
+      "bytes": 3831,
+      "sha256": "a85c55b6150817cef31dd31d347728590f6947bb0647e65c2aa142ce6583d515",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-retain-config-001.json",
+      "bytes": 1045,
+      "sha256": "efb9e922d1336d9d241bb5af8df44c87a989140b3038fdc4b41b16924166c08f",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-retained-001/code-source.json",
+      "bytes": 51518,
+      "sha256": "2a272511f8e826c7bc55f8c05ee9409aa98093f310f0a3bb6f18a356398ae4c6",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-retained-001/facts.json",
+      "bytes": 7544,
+      "sha256": "bec9c4c6dcc36c79658e6d9c0a82685f161c81d515f9172676f4a2d4d2114b47",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-retained-001/issued-plan.json",
+      "bytes": 15255,
+      "sha256": "2ab68f3c812b743aa7624be2f579c7f137e1995b05e48ea099844f05347e558e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-retained-001/preparation.json",
+      "bytes": 1105,
+      "sha256": "1cfcc701e80b953f57dfe4be2b765a5415adcd674a8e57f25c15f6115c8d2b9e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-retained-001/publication.json",
+      "bytes": 475,
+      "sha256": "cbd8500095875b580a3718fb1ecee6327b7808bddbf7e2c512a52c3ea45e48e5",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-retained-001/request.json",
+      "bytes": 2533685,
+      "sha256": "e3f8e0143cac6b5de6cd3d000bf7a72d53242ce5d7cfbbdce11fcb064e7d0e32",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-retained-001/result.json",
+      "bytes": 4080050,
+      "sha256": "957a4134596e8417eafc5c4063bf0a60400aa7d5987c7f61e611222f70c1980a",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-retained-001/stderr.log",
+      "bytes": 1418,
+      "sha256": "1a12286830867aaabfb88d5f79a1fd024ff1cd477161a2ea1f97f35c87ddab92",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-retained-001/stdout.json",
+      "bytes": 376,
+      "sha256": "65d9e56f3b50db4996ac5930734d895bd4e639c77e5049e4c6560673a7453f8d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-rebind-retained-001/terminal.json",
+      "bytes": 1471,
+      "sha256": "af7427bc0ad5ad2aae73dd4398295cd698471e94614ac82be8a4590cd9381a82",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-release-001/preparation.json",
+      "bytes": 258,
+      "sha256": "aea5b07d060f8343d41455b35159054f71acab1242d310f836e02f146a97b624",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-release-001/selection-sidecar.json",
+      "bytes": 3404,
+      "sha256": "53072b1c2d7fbdf73910048143dee1d9d33eb6c274cf82cf59146cbffd530779",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-requests-001/nor18-south5-001-source-request.json",
+      "bytes": 16101,
+      "sha256": "14aaddeeb6f2da67db3733622ce2e1fe7161208c9a51ede4118d691218e42186",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-requests-001/preparation.json",
+      "bytes": 378,
+      "sha256": "2e8947ecce75aa5a4840a2baa09faaaf1c31c9f3921b2cdc2e80f2ee82ec72b5",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-requests-001/requests.json",
+      "bytes": 1523,
+      "sha256": "dff71dc45bd2a1914a55bcfc655666d08ce2a8830ae1aa4f80b193886a6b3db6",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-requests-002/nor18-south5-002-source-request.json",
+      "bytes": 16101,
+      "sha256": "21b9e7e755b98adc2353cb2a401028c1c19960915b7474c9291264be06974db8",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-requests-002/preparation.json",
+      "bytes": 378,
+      "sha256": "a5bf67d3c13bcb416135e5270e52b77586830a5a4c430a2cedcaf6ec0b30545b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-requests-002/requests.json",
+      "bytes": 1523,
+      "sha256": "e82986017c2c9fd7c220b208aa0dfede8300031dc76ce63fbe6bccecd327fb23",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-requests-003/nor18-south5-003-source-request.json",
+      "bytes": 16101,
+      "sha256": "835ee02639c12fb06907247cd4be71f4e6f4dad554b41be619875ef1d3a3441d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-requests-003/preparation.json",
+      "bytes": 378,
+      "sha256": "e3f01b25f7fdd886e9f82736273cc33fba9210c086fbb3c38000293a4ea430ed",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-requests-003/requests.json",
+      "bytes": 1523,
+      "sha256": "2fd23aaf8f4b1dc60600fb46ec2bfffc9d0a8e06c859746c1d3dee1d17074ea9",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-requests-004/nor18-south5-004-source-request.json",
+      "bytes": 16101,
+      "sha256": "aacb4d806862a381898655460fc0e42c0202dd6129db6e4d85d6e686404c3d97",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-requests-004/preparation.json",
+      "bytes": 378,
+      "sha256": "7896b3eca7e62f9996df859a6cd9d0031633ee330cfc67af1491b46a56e4ccfd",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-requests-004/requests.json",
+      "bytes": 1523,
+      "sha256": "e4a82535950e5fdd32fb5e7909e5fd17f41e9e75ef9a45836a95d2bed410801e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-requests-config-001.json",
+      "bytes": 2354,
+      "sha256": "10a7f760aac3a63eadd5e88452b9935ed0a5b8621815e5c65e73a58486dfe4f1",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-requests-config-002.json",
+      "bytes": 2354,
+      "sha256": "5663f504786ece75881c450e99f514de9ff6d46bdb5fc2342c728f2dc56a6dc2",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-requests-config-003.json",
+      "bytes": 2354,
+      "sha256": "2b54a6f062e80d5e1f2a9f91dcb55742214720ebd4c1d11e1ee6a939620fe677",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-requests-config-004.json",
+      "bytes": 2354,
+      "sha256": "beda3aa40aced057e3d575726575525df1c0707c3dd29ab277fc63b92f6b77cc",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-retain-config-004.json",
+      "bytes": 559,
+      "sha256": "e7c4f13e4b42f84ea8b7d8be3a6a1fea05aebc9f6a4b23402755fd72d228c105",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-selected-validation-001/0.stderr.log",
+      "bytes": 550,
+      "sha256": "ec735b37ff6b2425195439147d7e42666b3fd6c7fcaeb40a3539428995273215",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-selected-validation-001/0.stdout.log",
+      "bytes": 159,
+      "sha256": "708e6f0e4ae80736cab0b31967efa397d751888d1a0e3a5003598d5a0ca8922a",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-selected-validation-001/checkpoint-routes.json",
+      "bytes": 68200,
+      "sha256": "04c684c66a8787fd52728531d3b2df80667e1ad51678b5aef8795e44891d168b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-selected-validation-001/derived-certificate.json.gz",
+      "bytes": 7515237,
+      "sha256": "8e06288e8b9adef0e45a5c62ed7a619b6a9ae5e4ab5e6f4e2a3b0afbdee1d0f9",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-selected-validation-001/derived-facts.json",
+      "bytes": 415754,
+      "sha256": "7f9b4a87ea191f68f5b346962f85648466cff3b5f720fcde98e5cd8965140359",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-selected-validation-001/derived-publication.json",
+      "bytes": 678,
+      "sha256": "8b455b4963271ce70715e6caca454b489bff8cb0a6114ae13ae3f848b8ed3065",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-selected-validation-001/facts.json",
+      "bytes": 110623,
+      "sha256": "22ccc38394e30ff35fff4c30e0768861f2f39de20a44da858958ada836b4a00e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-selected-validation-001/geography-check.json",
+      "bytes": 111311,
+      "sha256": "0441932cda7064c37ab9d12f6c58cc7361e6b8f9c3462cb4d22a35843e2f821d",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-selected-validation-001/invocation.json",
+      "bytes": 1234,
+      "sha256": "fff85719ce13074d859fc782d04d374b8d05c244a6313d4a67d0af485e0b7631",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-selected-validation-001/operands.json.gz",
+      "bytes": 468549,
+      "sha256": "eabb5715a83cc10d43b1f82cb81437e6160e8cf602e7c1c45944ad39d4dad7fa",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-selected-validation-001/operating.json",
+      "bytes": 1151,
+      "sha256": "87ffdebe52f700b8313902c5d4f39310b63a2601d0e783d7ba6e8aca916f78d0",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-selected-validation-001/original-supervise.py.txt",
+      "bytes": 2220,
+      "sha256": "0321d1f42a69b42996bf4e882c8bd21e959e96dd0ef9b3042c7aa5d5fb932ce1",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-selected-validation-001/preparation.json",
+      "bytes": 1922,
+      "sha256": "629a9a45b420184b8da68d46bd487b9f1b5c01c840517df6c1033f207bf86216",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-selected-validation-001/publication.json",
+      "bytes": 440,
+      "sha256": "b219f017f2b60e09508a44e3af397e19fe93c378b75c37d71200f54c63360f13",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-selected-validation-001/supervise.py.txt",
+      "bytes": 3184,
+      "sha256": "816ca5e72452f5c73e958a4c05c0c409463b6131c19ccd86cd9a3f53e84ab8c7",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-source-qualified-004/facts.json",
+      "bytes": 1320309,
+      "sha256": "b98292ec267528306dbd34b094687186abe67c88b7f3028aff59beb915dde287",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-source-qualified-004/inventory.jsonl.gz",
+      "bytes": 2658,
+      "sha256": "3ffb321c27a5f71c8602e84d5d0bea61184e5ffacf37252fdd193987d8e9713e",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-source-qualified-004/preparation.json",
+      "bytes": 681,
+      "sha256": "e22cf9cd891789a9dc140444be5926f92143aed5b0fc155a28bdc6429975394b",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-source-qualified-004/publication.json",
+      "bytes": 351,
+      "sha256": "7e8c8b054121919b41de055696a427b654bfc346fa17bb6a2fc4a179b6a8b676",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-source-qualified-004/request.json",
+      "bytes": 16101,
+      "sha256": "aacb4d806862a381898655460fc0e42c0202dd6129db6e4d85d6e686404c3d97",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-source-qualified-004/terminal.json",
+      "bytes": 16302,
+      "sha256": "49ddd7407880d454910c220ac5308b0c1a49aff8a488c1531564f92afa33e992",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/templates-001/north13-acquisition-plan.json",
+      "bytes": 14859,
+      "sha256": "ff0b9b44ad2764fba87d779cd1524926aedce17a75f422423266e187c1998e3c",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/templates-001/north13-source-template.json",
+      "bytes": 22614,
+      "sha256": "08fddf7ee1f0b9098fe97395f00897bf6cf3de1871ff1350081464d5d5a00458",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/templates-001/south5-acquisition-plan.json",
+      "bytes": 9131,
+      "sha256": "969c9e0d6f8358846e8750646320d4efd5cda434e115846f566c204a94c39158",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/templates-001/south5-native-template.json",
+      "bytes": 22338,
+      "sha256": "400fdca428a51bb8836ff7456e1f9e0e87cec3acf64dd98cff75a6d1563489c7",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/templates-001/south5-source-template.json",
+      "bytes": 16101,
+      "sha256": "14aaddeeb6f2da67db3733622ce2e1fe7161208c9a51ede4118d691218e42186",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/templates-002/north13-native-template.json",
+      "bytes": 29261,
+      "sha256": "7d096a147e7f3b8b2a5ebfda18e681726b62d255d000f194aa5c36e42b632f57",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/templates-002/south5-native-template.json",
+      "bytes": 22339,
+      "sha256": "ecf9230ecefd9798eea920fc19d5c3439829dcbb6f950e4a10767af5233ffb76",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "data/ownership-selection.json",
+      "bytes": 1573,
+      "sha256": "636ec1c12d6be527f7d0aaa3194ece3f69c2c22b37a7a8c69d3cb05e52b18b20",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/south5-selected-validation-001/retained-file-aliases.json",
+      "bytes": 2318,
+      "sha256": "862f37a51ca963f29f687c35807587d0818789efaf9c7ea6131ebcc8b3ab2e8c",
+      "hash_kind": "file-bytes",
+      "role": "retained-reproduction-file-aliases"
+    }
+  ],
+  "methods": [
+    {
+      "id": "existing-method15-producers",
+      "kind": "code",
+      "description": "Existing requests-phase SOURCE/NATIVE and authenticated original authority construction; full original geometry and exact target identities. Genuine bounded rebind/assembly retain all prior rows and native cells. Complete executed vectors and runtime custody reside in actual retained requests and publications.",
+      "software": "Node24.19.0 and isolated Python3.13; exact original executed code and module pins in producer requests.",
+      "units": "Whole original components, native cells, bytes and seconds"
+    },
+    {
+      "id": "actual-trusted-selected-admission",
+      "kind": "code",
+      "description": "Normal accepted trusted run-geographic-check.py entry authenticated the one-time selected checkpoint, compared genuine A native assignments and executed the original strict continuous comparison. Candidate code was not executed. Complete route census and checkpoint products retain their provisional unaccepted status until normal hosted acceptance.",
+      "software": "Accepted de242847b3867045ee9301f49a1e5e53d6cb8e16; pinned Python3.12 and trusted joint Node runtime; exact inventory and versions retained in actual facts.",
+      "units": "Original primitives, native cells, zero regressions and measured process bytes/seconds"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "record_checks": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "Both cohorts completed genuine SOURCE/NATIVE; south5 completed current-bank rebind and assembly. Only south5 is selected in this first candidate. North13 producer results remain unselected supporting evidence pending accepted A and final B rebind. No accepted repaired-gap credit is claimed by this preparation. Actual trusted selected admission against accepted #1795 completed: authenticated checkpoint append, native no loss/reassignment, original strict continuous zero regressions and five gained-coverage features. Genuine complete report and checkpoint members are retained.",
+      "status": "supported",
+      "source_ids": [
+        "prior-selected",
+        "nor18-source"
+      ]
+    },
+    {
+      "text": "Exact-head hosted package/build/browser/drawing/picking gates, independent final review and accepted selected readback remain pending. Source-only qualification and native yield do not establish physical/legal authority, incremental continuous area, or original whole-batch completion.",
+      "status": "unresolved",
+      "source_ids": [
+        "prior-selected",
+        "nor18-source"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs COMMITTED_REQUEST",
+    "python3.13 -I -B coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py ISSUED ISSUED_SHA OPERATING",
+    "node coordination/engineering/melanesia363-additive-delivery-20261010/supervise-selected-assembly-linux.mjs PARAMETERS PARAMETERS_SHA",
+    "node scripts/prepare-delivery-handoff.mjs evidence CONFIG FRESH_DIRECTORY",
+    "PINNED_PYTHON -I -B scripts/run-geographic-check.py --repo TRUSTED_ACCEPTED_CHECKOUT --baseline de242847b3867045ee9301f49a1e5e53d6cb8e16 --candidate 4f2498185a7febb20d9a07395b6fc743c0806c6c --out FRESH/geography-check.json"
+  ]
+}

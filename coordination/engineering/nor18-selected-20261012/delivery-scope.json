@@ -1,0 +1,294 @@
+{
+  "version": 1,
+  "issue": 1796,
+  "accepted_source_merge": "fd7e242f3659cc258a48867294abb19587747653",
+  "accepted_source_receipt": "https://github.com/ChengshuLi/WorldAtlas/pull/1738#issuecomment-6129150153",
+  "source_handoff": {
+    "path": "research/geography/norway31-source-fit-20261011/vintages/source-handoff-003/source-handoff.json",
+    "mode": "100644",
+    "blob": "e7351b112de8bad01b693ee191ef988d382b35fe",
+    "bytes": 1983918,
+    "sha256": "08db5fd397ebd75cca1b8f520989ac73bdf68a43d427e02d04092a6a9c04a054"
+  },
+  "execution_cohort_id": "nor2013-original-eighteen-20261011",
+  "batches": [
+    {
+      "id": "A",
+      "geographic_group": "southern Norway 62.7\u201365N",
+      "component_count": 5,
+      "components": [
+        {
+          "component_id": "physical-component:46e0f6b1de7155d2722cac7669ae89b1f8bda954c298884f5dc239ac5237de8a",
+          "target_id": "gb:NOR:ADM2:86288312B43880270832618",
+          "original_gap_membership": {
+            "component_id": "physical-component:46e0f6b1de7155d2722cac7669ae89b1f8bda954c298884f5dc239ac5237de8a",
+            "original_batch_id": "gap-operational-batch:87f17a22ad6c2b0e8eb802dc",
+            "original_family_id": "gap-source-batch:83fb0b12a0c86e23c212ca1e"
+          },
+          "retained_physical_status": "mapped-land-support",
+          "retained_uncovered_is_empty": false,
+          "retained_detector_area_m2_not_incremental_area": 513.2639325262014,
+          "native_gain": null,
+          "current_selected_qualification": null
+        },
+        {
+          "component_id": "physical-component:51621e475e003e83e6b23203827a0b255ec5f7b4fe4af550148fb486c36695ca",
+          "target_id": "gb:NOR:ADM2:86288312B46732094957179",
+          "original_gap_membership": {
+            "component_id": "physical-component:51621e475e003e83e6b23203827a0b255ec5f7b4fe4af550148fb486c36695ca",
+            "original_batch_id": "gap-operational-batch:87f17a22ad6c2b0e8eb802dc",
+            "original_family_id": "gap-source-batch:9e843d11f4c589e07ce0069f"
+          },
+          "retained_physical_status": "mapped-land-support",
+          "retained_uncovered_is_empty": false,
+          "retained_detector_area_m2_not_incremental_area": 1152.6566566694146,
+          "native_gain": null,
+          "current_selected_qualification": null
+        },
+        {
+          "component_id": "physical-component:c1d5e49737e17af6a5a2dcbc5467b7d3bad9d895115dbb7ef374ef76295c8e4d",
+          "target_id": "gb:NOR:ADM2:86288312B40278854732862",
+          "original_gap_membership": {
+            "component_id": "physical-component:c1d5e49737e17af6a5a2dcbc5467b7d3bad9d895115dbb7ef374ef76295c8e4d",
+            "original_batch_id": "gap-operational-batch:12a6b291876ddd4b9ac26b36",
+            "original_family_id": "gap-source-batch:0470b78399835557e4fc66e6"
+          },
+          "retained_physical_status": "mapped-land-support",
+          "retained_uncovered_is_empty": false,
+          "retained_detector_area_m2_not_incremental_area": 8452.512233700018,
+          "native_gain": null,
+          "current_selected_qualification": null
+        },
+        {
+          "component_id": "physical-component:d183bad00349d708a7d8ff8a052555c6a944b82ec9dd05eaca6469001556c6c7",
+          "target_id": "gb:NOR:ADM2:86288312B81438149454650",
+          "original_gap_membership": {
+            "component_id": "physical-component:d183bad00349d708a7d8ff8a052555c6a944b82ec9dd05eaca6469001556c6c7",
+            "original_batch_id": "gap-operational-batch:12a6b291876ddd4b9ac26b36",
+            "original_family_id": "gap-source-batch:0470b78399835557e4fc66e6"
+          },
+          "retained_physical_status": "mapped-land-support",
+          "retained_uncovered_is_empty": false,
+          "retained_detector_area_m2_not_incremental_area": 692.4222042735936,
+          "native_gain": null,
+          "current_selected_qualification": null
+        },
+        {
+          "component_id": "physical-component:df2cf8877fd9e127728b71547dd7d87368ba90db73d5484a0ad321446275551d",
+          "target_id": "gb:NOR:ADM2:86288312B80976394887598",
+          "original_gap_membership": {
+            "component_id": "physical-component:df2cf8877fd9e127728b71547dd7d87368ba90db73d5484a0ad321446275551d",
+            "original_batch_id": "gap-operational-batch:12a6b291876ddd4b9ac26b36",
+            "original_family_id": "gap-source-batch:0470b78399835557e4fc66e6"
+          },
+          "retained_physical_status": "mapped-land-support",
+          "retained_uncovered_is_empty": false,
+          "retained_detector_area_m2_not_incremental_area": 231822.63581143913,
+          "native_gain": null,
+          "current_selected_qualification": null
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "geographic_group": "northern Norway 69.3\u201370.7N",
+      "component_count": 13,
+      "components": [
+        {
+          "component_id": "physical-component:02503ad88ce4a8ba68be7b197491e3610b557016bdca2b3ae5692514603930a6",
+          "target_id": "gb:NOR:ADM2:86288312B92584171254866",
+          "original_gap_membership": {
+            "component_id": "physical-component:02503ad88ce4a8ba68be7b197491e3610b557016bdca2b3ae5692514603930a6",
+            "original_batch_id": "gap-operational-batch:87f17a22ad6c2b0e8eb802dc",
+            "original_family_id": "gap-source-batch:977838f6272d195db800e1d8"
+          },
+          "retained_physical_status": "mapped-land-support",
+          "retained_uncovered_is_empty": false,
+          "retained_detector_area_m2_not_incremental_area": 5223.2445285085005,
+          "native_gain": null,
+          "current_selected_qualification": null
+        },
+        {
+          "component_id": "physical-component:040b81866ed44166ca5c08cebe436417e629b5eba0a263d9531288fc6416832d",
+          "target_id": "gb:NOR:ADM2:86288312B28845238871652",
+          "original_gap_membership": {
+            "component_id": "physical-component:040b81866ed44166ca5c08cebe436417e629b5eba0a263d9531288fc6416832d",
+            "original_batch_id": "gap-operational-batch:12a6b291876ddd4b9ac26b36",
+            "original_family_id": "gap-source-batch:3f720fcaef56025032fc164f"
+          },
+          "retained_physical_status": "mapped-land-support",
+          "retained_uncovered_is_empty": false,
+          "retained_detector_area_m2_not_incremental_area": 58778.56114264924,
+          "native_gain": null,
+          "current_selected_qualification": null
+        },
+        {
+          "component_id": "physical-component:20314a1f10831597e31b841d5ab43b93e8b4fc2b99960ca8c1cc8b1bba85d06f",
+          "target_id": "gb:NOR:ADM2:86288312B98224162040661",
+          "original_gap_membership": {
+            "component_id": "physical-component:20314a1f10831597e31b841d5ab43b93e8b4fc2b99960ca8c1cc8b1bba85d06f",
+            "original_batch_id": "gap-operational-batch:12a6b291876ddd4b9ac26b36",
+            "original_family_id": "gap-source-batch:3f720fcaef56025032fc164f"
+          },
+          "retained_physical_status": "mapped-land-support",
+          "retained_uncovered_is_empty": false,
+          "retained_detector_area_m2_not_incremental_area": 354.8541716360521,
+          "native_gain": null,
+          "current_selected_qualification": null
+        },
+        {
+          "component_id": "physical-component:270b5cc144fffa3af15d9538ecbb8665d52f98965fa9a61cb5be4b20a8c7243d",
+          "target_id": "gb:NOR:ADM2:86288312B24070411232655",
+          "original_gap_membership": {
+            "component_id": "physical-component:270b5cc144fffa3af15d9538ecbb8665d52f98965fa9a61cb5be4b20a8c7243d",
+            "original_batch_id": "gap-operational-batch:12a6b291876ddd4b9ac26b36",
+            "original_family_id": "gap-source-batch:3f720fcaef56025032fc164f"
+          },
+          "retained_physical_status": "mapped-land-support",
+          "retained_uncovered_is_empty": false,
+          "retained_detector_area_m2_not_incremental_area": 69768.35108660148,
+          "native_gain": null,
+          "current_selected_qualification": null
+        },
+        {
+          "component_id": "physical-component:375e55e26bfc017ffc1cc2966705822a4577dc94b3cb02f3d30803ccd34b2b5a",
+          "target_id": "gb:NOR:ADM2:86288312B61529177731516",
+          "original_gap_membership": {
+            "component_id": "physical-component:375e55e26bfc017ffc1cc2966705822a4577dc94b3cb02f3d30803ccd34b2b5a",
+            "original_batch_id": "gap-operational-batch:87f17a22ad6c2b0e8eb802dc",
+            "original_family_id": "gap-source-batch:977838f6272d195db800e1d8"
+          },
+          "retained_physical_status": "mapped-land-support",
+          "retained_uncovered_is_empty": false,
+          "retained_detector_area_m2_not_incremental_area": 249.35520712832118,
+          "native_gain": null,
+          "current_selected_qualification": null
+        },
+        {
+          "component_id": "physical-component:3f1a462840f8fc7b9baff21c776d48f747f67ec7a71b4319218f2cf6c7aa5c50",
+          "target_id": "gb:NOR:ADM2:86288312B39619690303479",
+          "original_gap_membership": {
+            "component_id": "physical-component:3f1a462840f8fc7b9baff21c776d48f747f67ec7a71b4319218f2cf6c7aa5c50",
+            "original_batch_id": "gap-operational-batch:206241e0532effcbd0ee78ec",
+            "original_family_id": "gap-source-batch:d24ed6dc81a8b273df2b448c"
+          },
+          "retained_physical_status": "mapped-land-support",
+          "retained_uncovered_is_empty": false,
+          "retained_detector_area_m2_not_incremental_area": 8221.467203739001,
+          "native_gain": null,
+          "current_selected_qualification": null
+        },
+        {
+          "component_id": "physical-component:43d1d39fd50e54e8dcda3f70ec1eece46918fb1a987e4acc3c0d5bd811b3fa4f",
+          "target_id": "gb:NOR:ADM2:86288312B12055584821312",
+          "original_gap_membership": {
+            "component_id": "physical-component:43d1d39fd50e54e8dcda3f70ec1eece46918fb1a987e4acc3c0d5bd811b3fa4f",
+            "original_batch_id": "gap-operational-batch:206241e0532effcbd0ee78ec",
+            "original_family_id": "gap-source-batch:d24ed6dc81a8b273df2b448c"
+          },
+          "retained_physical_status": "mapped-land-support",
+          "retained_uncovered_is_empty": false,
+          "retained_detector_area_m2_not_incremental_area": 8.842542629759054,
+          "native_gain": null,
+          "current_selected_qualification": null
+        },
+        {
+          "component_id": "physical-component:672f627ebc78de7674588907b30608503591f86e95e193142b800e547d18b377",
+          "target_id": "gb:NOR:ADM2:86288312B75737452629522",
+          "original_gap_membership": {
+            "component_id": "physical-component:672f627ebc78de7674588907b30608503591f86e95e193142b800e547d18b377",
+            "original_batch_id": "gap-operational-batch:206241e0532effcbd0ee78ec",
+            "original_family_id": "gap-source-batch:d24ed6dc81a8b273df2b448c"
+          },
+          "retained_physical_status": "mapped-land-support",
+          "retained_uncovered_is_empty": false,
+          "retained_detector_area_m2_not_incremental_area": 2346.1812948815073,
+          "native_gain": null,
+          "current_selected_qualification": null
+        },
+        {
+          "component_id": "physical-component:7e72874be89ff9107dc87c86aafe0ee2cfc7430e5a9f1688bdf556b2b284ef3b",
+          "target_id": "gb:NOR:ADM2:86288312B39619690303479",
+          "original_gap_membership": {
+            "component_id": "physical-component:7e72874be89ff9107dc87c86aafe0ee2cfc7430e5a9f1688bdf556b2b284ef3b",
+            "original_batch_id": "gap-operational-batch:12a6b291876ddd4b9ac26b36",
+            "original_family_id": "gap-source-batch:3f720fcaef56025032fc164f"
+          },
+          "retained_physical_status": "mapped-land-support",
+          "retained_uncovered_is_empty": false,
+          "retained_detector_area_m2_not_incremental_area": 20562.542027614905,
+          "native_gain": null,
+          "current_selected_qualification": null
+        },
+        {
+          "component_id": "physical-component:8c215cb7795d2616a7743a89e09a4f26fb1cd590fa6101e204348a4cf55212af",
+          "target_id": "gb:NOR:ADM2:86288312B98224162040661",
+          "original_gap_membership": {
+            "component_id": "physical-component:8c215cb7795d2616a7743a89e09a4f26fb1cd590fa6101e204348a4cf55212af",
+            "original_batch_id": "gap-operational-batch:87f17a22ad6c2b0e8eb802dc",
+            "original_family_id": "gap-source-batch:977838f6272d195db800e1d8"
+          },
+          "retained_physical_status": "mapped-land-support",
+          "retained_uncovered_is_empty": false,
+          "retained_detector_area_m2_not_incremental_area": 8830.835605417285,
+          "native_gain": null,
+          "current_selected_qualification": null
+        },
+        {
+          "component_id": "physical-component:990ff8dc7d906a734266e2a3ea0151bd77b5ed700b6c4ab1e45da915cc4f9dee",
+          "target_id": "gb:NOR:ADM2:86288312B75737452629522",
+          "original_gap_membership": {
+            "component_id": "physical-component:990ff8dc7d906a734266e2a3ea0151bd77b5ed700b6c4ab1e45da915cc4f9dee",
+            "original_batch_id": "gap-operational-batch:12a6b291876ddd4b9ac26b36",
+            "original_family_id": "gap-source-batch:3f720fcaef56025032fc164f"
+          },
+          "retained_physical_status": "mapped-land-support",
+          "retained_uncovered_is_empty": false,
+          "retained_detector_area_m2_not_incremental_area": 149004.7070894663,
+          "native_gain": null,
+          "current_selected_qualification": null
+        },
+        {
+          "component_id": "physical-component:abb4663da9c0480823953d8c8cccfe6d324a15bb1a92566503a85f4c7a79c4f6",
+          "target_id": "gb:NOR:ADM2:86288312B25142202859534",
+          "original_gap_membership": {
+            "component_id": "physical-component:abb4663da9c0480823953d8c8cccfe6d324a15bb1a92566503a85f4c7a79c4f6",
+            "original_batch_id": "gap-operational-batch:87f17a22ad6c2b0e8eb802dc",
+            "original_family_id": "gap-source-batch:977838f6272d195db800e1d8"
+          },
+          "retained_physical_status": "mapped-land-support",
+          "retained_uncovered_is_empty": false,
+          "retained_detector_area_m2_not_incremental_area": 18090.907471662744,
+          "native_gain": null,
+          "current_selected_qualification": null
+        },
+        {
+          "component_id": "physical-component:cb03679e20a514e86009ca5a936e6ec74b22fc6f2266028555870124ed23d47f",
+          "target_id": "gb:NOR:ADM2:86288312B39619690303479",
+          "original_gap_membership": {
+            "component_id": "physical-component:cb03679e20a514e86009ca5a936e6ec74b22fc6f2266028555870124ed23d47f",
+            "original_batch_id": "gap-operational-batch:12a6b291876ddd4b9ac26b36",
+            "original_family_id": "gap-source-batch:3f720fcaef56025032fc164f"
+          },
+          "retained_physical_status": "mapped-land-support",
+          "retained_uncovered_is_empty": false,
+          "retained_detector_area_m2_not_incremental_area": 8169.703460538856,
+          "native_gain": null,
+          "current_selected_qualification": null
+        }
+      ]
+    }
+  ],
+  "status": "source-native-complete-south5-assembled-pending-selected-validation-and-acceptance",
+  "original_source_scope_count": 31,
+  "whole_gap_completion": false,
+  "native_gain": null,
+  "limits": [
+    "The component records retain the original planning snapshot; null gains and selected qualification fields do not describe later producer results. See retained SOURCE/NATIVE publications and README.md for executed preparation.",
+    "Source PR #1738 is accepted, issue #1796 is claimed, and both bounded cohorts completed SOURCE/NATIVE. South5 current-bank rebind and assembly completed; actual selected validation and hosted acceptance remain pending.",
+    "No new repaired-gap credit is claimed before accepted selected delivery. North13 final rebind and selected delivery require the actual accepted south5 receipt and artifact.",
+    "Keep original31 dispositions and all original batch/family denominators.",
+    "Same-owner literal overlap allowed under existing policy; foreign-owner overlap rejects.",
+    "Incremental continuous area remains unmeasured; native producer yields are retained separately. No invented physical/legal authority."
+  ]
+}

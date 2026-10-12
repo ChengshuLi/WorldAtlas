@@ -1,0 +1,37 @@
+file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/8544607139ecf28ad8d6de4b07da3d3d151d98e8219f30a7cfcd71044034919d/work/scripts/additive-gap-repair.mjs:25
+function demand(value, message) { if (!value) throw Error(message); }
+                                                    ^
+
+Error: Complete outputs exceed prospective reserve
+    at demand (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/8544607139ecf28ad8d6de4b07da3d3d151d98e8219f30a7cfcd71044034919d/work/scripts/additive-gap-repair.mjs:25:53)
+    at inventoryCommand (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/8544607139ecf28ad8d6de4b07da3d3d151d98e8219f30a7cfcd71044034919d/work/scripts/additive-gap-repair.mjs:2018:3)
+    at file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/8544607139ecf28ad8d6de4b07da3d3d151d98e8219f30a7cfcd71044034919d/work/scripts/additive-gap-repair.mjs:2041:23
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.19.0
+Command exited with non-zero status 1
+	Command being timed: "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/additive-gap-repair.mjs /workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/8544607139ecf28ad8d6de4b07da3d3d151d98e8219f30a7cfcd71044034919d/work a9e098dc30fed82bcedecb977aa205e8ac69ebd9 coordination/engineering/nor18-selected-20261012/south5-native-requests-001/nor18-south5-native-001-native-request.json 8e7655bf8ff249412b309154b287e0bd3c6fd13fc356a2c9bc73ec531b47a69b .cache/native-grid-candidates/nor18-south5-native-001"
+	User time (seconds): 25.94
+	System time (seconds): 38.00
+	Percent of CPU this job got: 106%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:00.29
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 432052
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 10
+	Minor (reclaiming a frame) page faults: 6004355
+	Voluntary context switches: 35868
+	Involuntary context switches: 2503
+	Swaps: 0
+	File system inputs: 139416
+	File system outputs: 16
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1

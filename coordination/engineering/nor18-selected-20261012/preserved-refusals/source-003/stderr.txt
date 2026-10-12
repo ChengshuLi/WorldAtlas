@@ -1,0 +1,68 @@
+node:internal/errors:985
+  const err = new Error(message);
+              ^
+
+Error: Command failed: git -c core.hooksPath=/dev/null -C /workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/8544607139ecf28ad8d6de4b07da3d3d151d98e8219f30a7cfcd71044034919d/work cat-file -s c5aed6daf655e39dc8bd7044a505a5abb655497e
+fatal: git cat-file: could not get object info
+
+    at genericNodeError (node:internal/errors:985:15)
+    at wrappedFn (node:internal/errors:539:14)
+    at checkExecSyncError (node:child_process:942:11)
+    at execFileSync (node:child_process:978:15)
+    at ImmutableReader.git (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/8544607139ecf28ad8d6de4b07da3d3d151d98e8219f30a7cfcd71044034919d/work/scripts/check-effective-geographic-regression.mjs:85:23)
+    at ImmutableReader.descriptor (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/8544607139ecf28ad8d6de4b07da3d3d151d98e8219f30a7cfcd71044034919d/work/scripts/check-effective-geographic-regression.mjs:90:84)
+    at file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/8544607139ecf28ad8d6de4b07da3d3d151d98e8219f30a7cfcd71044034919d/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:1036:60
+    at Array.map (<anonymous>)
+    at file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/8544607139ecf28ad8d6de4b07da3d3d151d98e8219f30a7cfcd71044034919d/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:1036:43
+    at withCurrentRebindOutputReserve (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/8544607139ecf28ad8d6de4b07da3d3d151d98e8219f30a7cfcd71044034919d/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:1008:13) {
+  status: 128,
+  signal: null,
+  output: [
+    null,
+    Buffer(0) [Uint8Array] [],
+    Buffer(47) [Uint8Array] [
+      102,  97, 116, 97, 108,  58,  32, 103, 105,
+      116,  32,  99, 97, 116,  45, 102, 105, 108,
+      101,  58,  32, 99, 111, 117, 108, 100,  32,
+      110, 111, 116, 32, 103, 101, 116,  32, 111,
+       98, 106, 101, 99, 116,  32, 105, 110, 102,
+      111,  10
+    ]
+  ],
+  pid: 7454,
+  stdout: Buffer(0) [Uint8Array] [],
+  stderr: Buffer(47) [Uint8Array] [
+    102,  97, 116, 97, 108,  58,  32, 103, 105,
+    116,  32,  99, 97, 116,  45, 102, 105, 108,
+    101,  58,  32, 99, 111, 117, 108, 100,  32,
+    110, 111, 116, 32, 103, 101, 116,  32, 111,
+     98, 106, 101, 99, 116,  32, 105, 110, 102,
+    111,  10
+  ]
+}
+
+Node.js v24.19.0
+Command exited with non-zero status 1
+	Command being timed: "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/additive-gap-repair.mjs /workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/8544607139ecf28ad8d6de4b07da3d3d151d98e8219f30a7cfcd71044034919d/work 8c1d33b256bd2762936f7880cfacaee8bb1bfeef coordination/engineering/nor18-selected-20261012/south5-requests-003/nor18-south5-003-source-request.json 835ee02639c12fb06907247cd4be71f4e6f4dad554b41be619875ef1d3a3441d .cache/native-grid-candidates/nor18-south5-source-003"
+	User time (seconds): 21.52
+	System time (seconds): 71.94
+	Percent of CPU this job got: 102%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:30.87
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 309592
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 169
+	Minor (reclaiming a frame) page faults: 5635919
+	Voluntary context switches: 35182
+	Involuntary context switches: 3112
+	Swaps: 0
+	File system inputs: 43816
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1
