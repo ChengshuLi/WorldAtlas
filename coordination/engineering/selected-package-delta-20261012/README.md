@@ -81,9 +81,23 @@ consumer-roster and runner boundaries with synthetic fixtures; those fixtures
 are not scientific proof. The normal full implementation PR must produce the
 first eligible retained output. `compare-selected-package-output.mjs` compares
 all output paths and every file byte except the atlas metadata file, whose
-complete semantic value must match except the single original source-head
-provenance scalar. Runtime, code closure, scientific counters and additive
-fields are not normalized away. Any additional difference is a failed proof.
+complete semantic value must match except the preserved original source head
+and the exact `.github/package-inputs.json` code-closure descriptor. Both
+declaration descriptors are independently checked against actual Git bytes at
+the original/current source commits. The original manifest is bound to the
+assembly receipt; current consumed delta pins are checked against immutable
+source trees and the existing append-only transition is rerun. Runtime, every
+other code descriptor, scientific counters and additive fields remain exact.
+Missing/duplicate declaration descriptors, forged snapshots, unrelated code
+changes and mismatched delta receipts fail closed.
+
+Run the comparison with `FULL_ROOT ASSEMBLED_ROOT ORIGINAL_HEAD CURRENT_HEAD
+SOURCE_REPO ORIGINAL_MANIFEST`. The assembled root includes its genuine
+`.cache/package-input-build.json`; the original manifest comes from the
+authenticated retained artifact. Source Git metadata for the two snapshots and
+the actual consumed immutable commits must be available. The comparison verifies actual consumed selected members using one streamed
+temporary member at a time, admitted by its actual size and available disk;
+it does not restore or rebuild the invariant base.
 
 The actual full-versus-assembled output proof and changed-batch wall-clock
 measurement remain open until genuine retained output is available. A same-state
@@ -104,3 +118,9 @@ does not permit reusing all old after observations. A future reduction must bind
 browser/runtime identity, actual packed-row/texture layout and touched-owner
 bounds, then cover newly changed/affected rows and layout boundaries. This PR
 keeps the complete current cumulative renderer test.
+
+The first hosted run passed 981 regression-0 controls and exposed one stale
+hard-coded selected test count. The replacement asserts the exact semantic
+roster and the two explicitly inherited tests. Its observed setup-python
+`LD_LIBRARY_PATH` is stripped from Git/Node child environments rather than
+rejecting legitimate hosted setup; preload and Node startup hooks stay rejected.

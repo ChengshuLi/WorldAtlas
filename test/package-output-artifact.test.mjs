@@ -6,7 +6,7 @@ import os from 'node:os';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {createPackageOutputManifest, snapshotPackageOutputSource, inventoryPackageOutput, validatePackageOutputManifest,
-  verifyPackageOutput, streamedPackageFile, PACKAGE_OUTPUT_LIMITS, installedPackageIdentity} from '../scripts/package-output-artifact.mjs';
+  verifyPackageOutput, streamedPackageFile, PACKAGE_OUTPUT_LIMITS, installedPackageIdentity, admitPackageOutputTransition} from '../scripts/package-output-artifact.mjs';
 
 import {compareSelectedPackageOutput} from '../scripts/compare-selected-package-output.mjs';
 
@@ -174,16 +174,80 @@ test('installed identity detects dependency body substitution under unchanged lo
 });
 
 
-test('full-output comparison permits only the explicitly preserved original source head',t=>{
-  const full=fixture(t),assembled=fixture(t),originalHead='a'.repeat(40),currentHead='b'.repeat(40);
-  const atlas=head=>({nativeContextInputStage:{current_execution:{source_head:head,runtime:{sha256:'c'.repeat(64)}},consumed_input_bytes:{encoded:42}},additiveRelease:{ledger:'current'}});
-  full.write('dist/client/atlas-geography.json',atlas(currentHead));assembled.write('dist/client/atlas-geography.json',atlas(originalHead));
-  const args={full:full.root,assembled:assembled.root,originalHead,currentHead};
-  assert.equal(compareSelectedPackageOutput(args).exact_byte_files,3);
-  const changed=atlas(originalHead);changed.nativeContextInputStage.consumed_input_bytes.encoded++;
-  assembled.write('dist/client/atlas-geography.json',changed);
-  assert.throws(()=>compareSelectedPackageOutput(args),/beyond preserved original/);
-  assembled.write('dist/client/atlas-geography.json',atlas(originalHead));assembled.write('dist/client/assets/a.js','different bytes');
+test('changed-declaration full-output comparison authenticates both sources and the actual current delta',t=>{
+  const source=fixture(t),full=fixture(t),assembled=fixture(t);
+  const declaration='.github/package-inputs.json',added='coordination/engineering/next/selected.json';
+  const definition=JSON.parse(fs.readFileSync(path.join(source.root,declaration)));
+  const commit=()=>source.git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','selection');
+  source.write('data/ownership-selection.json',{version:1,additive_release:{state:'original'}});
+  source.git('add','data/ownership-selection.json');commit();
+  const originalHead=source.git('rev-parse','HEAD');
+  const descriptor=head=>{
+    const raw=execFileSync('git',['-C',source.root,'show',head+':'+declaration]);
+    return {path:declaration,mode:'100644',bytes:raw.length,sha256:hash(raw),
+      git_blob:createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex')};
+  };
+  const atlas=(head,pin)=>({nativeContextInputStage:{current_execution:{source_head:head,
+    runtime:{sha256:'c'.repeat(64)},full_code_closure:[pin,{path:'scripts/invariant.mjs',sha256:'d'.repeat(64)}]},
+    consumed_input_bytes:{encoded:42}},additiveRelease:{ledger:'current'}});
+  source.write('.cache/package-input-build.json',{version:1,kind:'cloudflare',input_definition_sha256:descriptor(originalHead).sha256,
+    preflight:{passed:true,errors:[],inputs:{head:originalHead}}});
+  source.write('.cache/package-output-source.json',snapshotPackageOutputSource(source.root));
+  const manifest=createPackageOutputManifest(source.root),originalManifest=path.join(source.root,'.cache/original.json');
+  source.write('.cache/original.json',manifest);const manifestSha=hash(fs.readFileSync(originalManifest));
+  source.write(declaration,{...definition,inputs:[...definition.inputs,added]});source.write(added,{selected:true});
+  source.write('data/ownership-selection.json',{version:1,additive_release:{state:'current'}});
+  source.git('add',declaration,added,'data/ownership-selection.json');commit();
+  const currentHead=source.git('rev-parse','HEAD'),current=snapshotPackageOutputSource(source.root);
+  const pin={commit:currentHead,path:added,mode:'100644',git_blob_oid:source.git('rev-parse','HEAD:'+added),
+    bytes:fs.statSync(path.join(source.root,added)).size,sha256:hash(fs.readFileSync(path.join(source.root,added))),whole_body_consumed:true};
+  const receipt={version:1,kind:'cloudflare',input_definition_sha256:descriptor(currentHead).sha256,
+    preflight:{passed:true,errors:[],inputs:{head:currentHead}},assembly:{kind:'retained-original-output-plus-current-additive',
+      origin:{head:originalHead},original_manifest_sha256:manifestSha,
+      current_execution:{source_commit:currentHead,source_tree:current.tree},
+      original_base_context_retained:true,base_restoration_invoked:false,invariant_build_invoked:false,
+      transition:admitPackageOutputTransition(manifest,current,[added]),current_selected_inputs:[pin]}};
+  const originalAtlas=atlas(originalHead,descriptor(originalHead)),currentAtlas=atlas(currentHead,descriptor(currentHead));
+  const reset=()=>{full.write('dist/client/atlas-geography.json',currentAtlas);
+    assembled.write('dist/client/atlas-geography.json',originalAtlas);assembled.write('.cache/package-input-build.json',receipt);};
+  const args={full:full.root,assembled:assembled.root,originalHead,currentHead,sourceRoot:source.root,originalManifest};
+  reset();assert.equal(compareSelectedPackageOutput(args).exact_byte_files,3);
+  for(const mutate of [
+    value=>value.nativeContextInputStage.consumed_input_bytes.encoded++,
+    value=>value.nativeContextInputStage.current_execution.runtime.sha256='e'.repeat(64),
+    value=>value.nativeContextInputStage.current_execution.full_code_closure[1].sha256='e'.repeat(64),
+    value=>value.nativeContextInputStage.current_execution.full_code_closure[0].sha256='e'.repeat(64),
+    value=>value.nativeContextInputStage.current_execution.full_code_closure.shift(),
+    value=>value.nativeContextInputStage.current_execution.full_code_closure.push(value.nativeContextInputStage.current_execution.full_code_closure[0])]){
+    reset();const changed=structuredClone(originalAtlas);mutate(changed);assembled.write('dist/client/atlas-geography.json',changed);
+    assert.throws(()=>compareSelectedPackageOutput(args));
+  }
+  for(const mutate of [value=>value.assembly.original_manifest_sha256='0'.repeat(64),
+    value=>value.assembly.current_selected_inputs[0].git_blob_oid='0'.repeat(40),
+    value=>value.assembly.current_selected_inputs[0].bytes++,
+    value=>value.assembly.current_selected_inputs[0].sha256='0'.repeat(64),
+    value=>value.assembly.current_selected_inputs[0].whole_body_consumed=false,
+    value=>value.assembly.current_selected_inputs=[],value=>value.assembly.transition.added_selected_inputs=[],
+    value=>value.assembly.current_execution.source_tree='0'.repeat(40)]){
+    reset();const changed=structuredClone(receipt);mutate(changed);assembled.write('.cache/package-input-build.json',changed);
+    assert.throws(()=>compareSelectedPackageOutput(args));
+  }
+  reset();const alteredManifest=structuredClone(manifest);
+  alteredManifest.source.definition.inputs.push('coordination/engineering/forged/source.json');
+  source.write('.cache/original.json',alteredManifest);
+  const alteredReceipt=structuredClone(receipt);alteredReceipt.assembly.original_manifest_sha256=hash(fs.readFileSync(originalManifest));
+  assembled.write('.cache/package-input-build.json',alteredReceipt);
+  assert.throws(()=>compareSelectedPackageOutput(args),/immutable Git/);
+  source.write('.cache/original.json',manifest);
+  reset();source.write('scripts/unrelated.mjs','export const changed = true;');source.git('add','scripts/unrelated.mjs');commit();
+  const changedHead=source.git('rev-parse','HEAD'),changedFull=structuredClone(currentAtlas),changedReceipt=structuredClone(receipt);
+  changedFull.nativeContextInputStage.current_execution.source_head=changedHead;
+  changedReceipt.preflight.inputs.head=changedHead;changedReceipt.assembly.current_execution.source_commit=changedHead;
+  changedReceipt.assembly.current_execution.source_tree=source.git('rev-parse','HEAD^{tree}');
+  changedReceipt.assembly.transition.current_head=changedHead;
+  full.write('dist/client/atlas-geography.json',changedFull);assembled.write('.cache/package-input-build.json',changedReceipt);
+  assert.throws(()=>compareSelectedPackageOutput({...args,currentHead:changedHead}),/programme changed/);
+  reset();assembled.write('dist/client/assets/a.js','different bytes');
   assert.throws(()=>compareSelectedPackageOutput(args),/Output bytes differ/);
 });
 

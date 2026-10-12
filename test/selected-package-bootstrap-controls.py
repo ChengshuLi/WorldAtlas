@@ -193,7 +193,7 @@ class BootstrapTests(unittest.TestCase):
     def test_reject_deep_nested_dependency_directory(self):
         self.write('coordination/node_modules/x.js', ''); self.rejected('Unexpected nested module resolution directory')
     def test_reject_startup_injection(self):
-        for key in ('NODE_OPTIONS','NODE_PATH','LD_PRELOAD','LD_LIBRARY_PATH','DYLD_INSERT_LIBRARIES'):
+        for key in ('NODE_OPTIONS','NODE_PATH','LD_PRELOAD','DYLD_INSERT_LIBRARIES'):
             with self.subTest(key=key):
                 self.env[key]='injected'; self.rejected('Startup injection'); self.env.pop(key)
     def test_reject_node_outside_toolcache(self):
@@ -213,17 +213,18 @@ class BootstrapTests(unittest.TestCase):
     def test_parser_follows_commented_static_import_despite_edit(self):
         self.write('scripts/child.mjs', "import/* comment */{value}from/* comment */'../coordination/deep/consumer.mjs';\n"); self.trust_changes(); self.write('coordination/deep/consumer.mjs','export const value=99;'); self.rejected('Actual source differs')
     def test_strip_credentials_and_git_config_from_all_subprocesses(self):
-        self.env.update(GITHUB_TOKEN='synthetic-github-token',GIT_CONFIG_COUNT='1',GIT_CONFIG_KEY_0='some.setting',GIT_CONFIG_VALUE_0='injected')
+        self.env.update(LD_LIBRARY_PATH='/opt/hostedtoolcache/Python/3.12.15/x64/lib',GITHUB_TOKEN='synthetic-github-token',GIT_CONFIG_COUNT='1',GIT_CONFIG_KEY_0='some.setting',GIT_CONFIG_VALUE_0='injected')
         original=bootstrap.subprocess.check_output; original_run=bootstrap.subprocess.run; calls=[]
         def checked(*args, **kwargs): calls.append((args,kwargs)); return original(*args,**kwargs)
         def checked_run(*args,**kwargs):
             if '-C' not in args[0]: calls.append((args,kwargs))
             return original_run(*args,**kwargs)
         with patch.object(bootstrap.subprocess,'check_output',side_effect=checked),patch.object(bootstrap.subprocess,'run',side_effect=checked_run): self.accepted()
+        self.assertNotIn('LD_LIBRARY_PATH',self.started[-1][2])
         self.assertTrue(any('--experimental-vm-modules' in args[0] for args,kwargs in calls))
         for args,kwargs in calls:
             env=kwargs['env']
-            for key in ('GH_TOKEN','GITHUB_TOKEN','GIT_CONFIG_COUNT','GIT_CONFIG_KEY_0','GIT_CONFIG_VALUE_0'): self.assertNotIn(key,env)
+            for key in ('GH_TOKEN','GITHUB_TOKEN','LD_LIBRARY_PATH','GIT_CONFIG_COUNT','GIT_CONFIG_KEY_0','GIT_CONFIG_VALUE_0'): self.assertNotIn(key,env)
             self.assertEqual(env['GIT_NO_REPLACE_OBJECTS'],'1'); self.assertEqual(env['GIT_CONFIG_GLOBAL'],'/dev/null')
     def test_accept_real_repository_static_closure(self):
         # Copy Node's independently parsed static graph, without evaluating modules.

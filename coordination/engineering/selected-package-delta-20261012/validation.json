@@ -5,9 +5,9 @@
   "status": "lightweight-controls-passed-real-output-proof-pending",
   "checks": [
     {
-      "command": "node --test test/package-output-artifact.test.mjs test/selected-package-assembly.test.mjs test/selected-package-bootstrap.test.mjs test/integration-profile-restoration.test.mjs",
-      "tests": 35,
-      "passed": 35,
+      "command": "node --test test/package-output-artifact.test.mjs test/selected-package-assembly.test.mjs test/selected-package-bootstrap.test.mjs test/integration-profile-restoration.test.mjs test/full-regression-shards.test.mjs",
+      "tests": 41,
+      "passed": 41,
       "skipped": 0
     },
     {
@@ -39,7 +39,10 @@
     "Duplicate YAML permissions mappings removed; semantic permission checks replace irrelevant textual adjacency",
     "A genuine candidate-only shallow checkout now authenticates missing base tree/blob metadata without hydrating the base",
     "Original installed dependency identity is captured before build/consumer-generated caches",
-    "Assembly and selected reader share the existing allowance derived from current OS/cgroup availability and reservations, rather than an arbitrary extra 256 MiB ceiling"
+    "Assembly and selected reader share the existing allowance derived from current OS/cgroup availability and reservations, rather than an arbitrary extra 256 MiB ceiling",
+    "Changed declaration comparison independently binds both exact descriptors to Git snapshots and the genuine current delta, preserving every other scientific context field",
+    "Selected consumer roster checks exact semantic membership instead of an obsolete hard-coded count",
+    "Official setup-python LD_LIBRARY_PATH is removed from Node and Git child environments instead of rejecting legitimate runner setup"
   ],
   "limitations": [
     "Synthetic authority and output fixtures do not establish scientific output equivalence",
@@ -48,5 +51,17 @@
     "No changed-batch wall-clock savings or retained output size is yet measured",
     "Complete checkout remains unchanged; historical checkout time is not claimed saved",
     "No local full package build, large input hydration or deployment was performed"
-  ]
+  ],
+  "hosted_prior_head": {
+    "head": "fe33a71572762c86a82d2d267986a63757951a36",
+    "run_id": 38303346505,
+    "regression_0": {
+      "passed": 981,
+      "failed": 1,
+      "skipped": 0,
+      "failure": "Obsolete selected-data roster count (14 vs 15), corrected by exact semantic membership checks"
+    },
+    "other_gates": "profile, evidence, scope, geography, regression 1 and regression 2 passed",
+    "output_retention": "Not reached after regression failure; no eligible artifact or size measured"
+  }
 }

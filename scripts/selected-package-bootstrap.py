@@ -19,12 +19,14 @@ def main():
     root = Path.cwd()
     base = os.environ['SELECTED_PACKAGE_TRUSTED_BASE']
     need(re.fullmatch('[a-f0-9]{40}', base), 'Exact trusted base required')
-    for key in ('NODE_OPTIONS', 'NODE_PATH', 'LD_PRELOAD', 'LD_LIBRARY_PATH', 'DYLD_INSERT_LIBRARIES'):
+    for key in ('NODE_OPTIONS', 'NODE_PATH', 'LD_PRELOAD', 'DYLD_INSERT_LIBRARIES'):
         need(not os.environ.get(key), 'Startup injection is not admitted')
     env = dict(os.environ, GIT_NO_REPLACE_OBJECTS='1', GIT_CONFIG_NOSYSTEM='1',
                GIT_CONFIG_GLOBAL='/dev/null', GIT_NO_LAZY_FETCH='1', GIT_TERMINAL_PROMPT='0')
     for key in list(env):
-        if key in ('GH_TOKEN', 'GITHUB_TOKEN') or key.startswith('GIT_CONFIG_') and key not in ('GIT_CONFIG_NOSYSTEM', 'GIT_CONFIG_GLOBAL'):
+        # setup-python supplies LD_LIBRARY_PATH for its own interpreter. Never
+        # propagate that loader search path to Git, the parser or credential-bearing Node.
+        if key in ('GH_TOKEN', 'GITHUB_TOKEN', 'LD_LIBRARY_PATH') or key.startswith('GIT_CONFIG_') and key not in ('GIT_CONFIG_NOSYSTEM', 'GIT_CONFIG_GLOBAL'):
             env.pop(key)
 
     class NoRedirect(urllib.request.HTTPRedirectHandler):
