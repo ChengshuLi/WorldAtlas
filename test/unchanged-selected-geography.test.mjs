@@ -654,4 +654,3 @@ test('receiving metadata cannot exempt either filename when it is a selected cur
     }
   } finally { f.close(); }
 });
-

@@ -79,3 +79,14 @@ owned by #1788 and rebasing onto its accepted workflow. Current PR and queue
 science are never cancelled to activate this increment. Full-regression/build
 reuse, real subsequent hosted adoption and measured critical-path reduction
 remain open on #1793. No source approval, live import or publication is granted.
+
+Independent review found and corrected a producer-log compatibility defect:
+ordinary fresh jobs must retain only their original geography artifact, because
+the existing authenticated receipt parser requires one unambiguous upload digest.
+The separate equivalence artifact is therefore uploaded only on successful reuse.
+A real-format one-upload positive/two-upload negative control guards that boundary.
+Independent review also matched all retained replay descriptors against their
+pinned Git trees. Process-group cleanup on an inner Git timeout remains unexecuted;
+the outer workflow deadline is bounded, but no orphan-free claim is made. Issue
+contracts using a literal branch-matched manifest path are supported; templated
+manifest paths conservatively fall back to fresh geography in this increment.

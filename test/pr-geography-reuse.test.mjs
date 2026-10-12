@@ -4,6 +4,7 @@ import {createHash} from 'node:crypto';
 import fs from 'node:fs';
 import {readGeographyReuseTree, receivingMetadataDelta, ordinaryOriginalGeography, reusePRGeography, acquireGeographyReuseGraphs} from '../scripts/reuse-pr-geography.mjs';
 import {WORKFLOW_PATH, successfulGeographyJob} from '../scripts/integration-proof.mjs';
+import {readGeographyJobReceipt} from '../scripts/geographic-report-artifact.mjs';
 
 const H = 'a'.repeat(40), P = 'b'.repeat(40), B = 'c'.repeat(40);
 const PREFIX = 'coordination/engineering/example/';
@@ -169,6 +170,7 @@ test('workflow keeps source report upload separate and never advertises reused e
   assert.match(geography, /timeout --kill-after=5s 180s node scripts\/reuse-pr-geography\.mjs/);
   assert.match(geography, /name: Check proposed geography with trusted baseline code\n\s+if: steps\.metadata_reuse\.outputs\.reused != 'true'/);
   assert.match(geography, /if: always\(\) && steps\.metadata_reuse\.outputs\.reused != 'true'/);
+  assert.match(geography, /name: Retain predecessor geography equivalence\n\s+if: steps\.metadata_reuse\.outputs\.reused == 'true'/);
   assert.match(geography, /path: geography-reuse\.json/);
   assert.match(geography, /name: reused-geography-/);
   const f = fixture(); f.job.steps[2].conclusion = 'skipped';
@@ -202,4 +204,20 @@ test('graph acquisition proves warm parent/complete trees and scopes cold fetch 
   assert.equal(fetch.options.timeout, 30000);
   assert.equal(fetch.options.env.GIT_CONFIG_KEY_0, 'http.https://github.com/.extraheader');
   assert(!fetch.args.some(arg => arg.includes('fixture-token')));
+});
+
+
+test('ordinary producer retains one unambiguous artifact digest; a second diagnostic upload is not accepted', () => {
+  const original = [
+    JSON.stringify({report_sha256: '1'.repeat(64), report_bytes: 123}),
+    'SHA256 digest of uploaded artifact zip is ' + '2'.repeat(64),
+    'Artifact proposed-geography-7-1 has been successfully uploaded! Final size is 456 bytes. Artifact ID is 789'
+  ];
+  const log = lines => Buffer.from(lines.map(line => '2026-10-12T16:00:00.000Z ' + line).join('\n'));
+  assert.equal(readGeographyJobReceipt(log(original), 'proposed-geography-7-1').artifact_id, 789);
+  const diagnostic = [
+    'SHA256 digest of uploaded artifact zip is ' + '3'.repeat(64),
+    'Artifact reused-geography-7-' + H + '-1 has been successfully uploaded! Final size is 80 bytes. Artifact ID is 790'
+  ];
+  assert.throws(() => readGeographyJobReceipt(log([...original, ...diagnostic]), 'proposed-geography-7-1'), /ambiguous/);
 });
