@@ -46,9 +46,10 @@ coverage loss and altered scopes/products. Separate routing probes establish
 that the normal wrapper does not launch duplicate old children on joint success.
 Synthetic controls do not establish real selected geographic equivalence.
 
-This implementation is being developed against the reviewed shared module from
-PR #1782 and the native consumer owned by PR #1783. The diagnostic branch carries
-those unmerged dependencies explicitly. The exact native API at `39792e02c603e262513dd0d9df4b63dc275e5a15` is integrated
+This implementation uses the reviewed shared module from PR #1782. The exact
+frozen native consumer from PR #1783 is incorporated by the coordinated issue 1774
+→ issue 1784 handoff, preserving its original authorship, proof and reviews. The
+shared dependency remains explicit until accepted on the integration baseline. The exact native API at `39792e02c603e262513dd0d9df4b63dc275e5a15` is integrated
 in this diagnostic tree. A genuine miniature joint CLI control verifies one
 shared bootstrap, checkpoint, transition, native comparison, continuous consumer
 and release, and zero complete selections or coordinate shards, using actual V8
@@ -172,7 +173,7 @@ records, V8 coverage, exact consumed policy/catalogue/routes, full provisional
 derived certificate, and summary/comparison products. The original certificate
 publication remains provisional; neither this local proof nor serialization
 authorizes future checkpoint admission. Generic normal hosted artifact retention
-and accepted-root advancement is the separate issue1788 follow-on.
+and accepted-root advancement is the separate issue 1788 follow-on.
 
 Attempt002 finished both scientific consumers successfully, then failed its
 archival comparison because a live Shapely tuple was compared directly with a
@@ -181,3 +182,19 @@ decoded JSON list. Its complete original receipt remains `complete: false` in
 products. The genuine small `report_feature` control verifies this representation
 difference and rejects an altered coordinate. The clean run uses JSON-to-JSON
 comparison and persists timing before its assertions; no science predicate changed.
+
+## Native consumer handoff
+
+The combined PR incorporates the six native paths at frozen head
+`39792e02c603e262513dd0d9df4b63dc275e5a15`: the native checker, its checkpoint
+consumer test, and four files under `native-effective-row-delta-20261012/`.
+The original native evidence manifest continues to name issue 1774 and its author;
+it is retained unchanged and bound by this receiving manifest. The exact native
+checker and consumer test remain byte-identical to that head. Only the separate
+owner-approved historical fixture-copy list is amended in this integration.
+
+Shared PR #1782 precedes the combined PR #1790. A separate dormant native-export
+merge is unnecessary: its matching qualifier row and joint caller activate in the
+same reviewed tree. Issue1774 remains open until the combined change is accepted;
+this transfer does not convert the old native-only retained projection into a
+full-path execution. The genuine clean proof003 supplies that integrated evidence.
