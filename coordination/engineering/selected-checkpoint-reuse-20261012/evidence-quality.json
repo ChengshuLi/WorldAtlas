@@ -419,6 +419,38 @@
       "vintage": "archived",
       "input_sha256": "17451d9fb8374d1f3036ef2c1482dee8ed466fb7fbb70fc18863ed60dc7741fa",
       "evaluation_commit": "41a9e8c003e57914f5fe03afe62f3ce177d46a93"
+    },
+    {
+      "id": "preregistration-preserved-programmes",
+      "value": 19,
+      "unit": "records",
+      "vintage": "archived",
+      "input_sha256": "f9e108924ab69ad37fe8ab9452afe7babc6657904fdd0dc3291f8df29c0d6b97",
+      "evaluation_commit": "392b1cda6d529f13f8e9d5fc86efe8dc436386a3"
+    },
+    {
+      "id": "preregistration-preserved-migrations",
+      "value": 7,
+      "unit": "records",
+      "vintage": "archived",
+      "input_sha256": "f9e108924ab69ad37fe8ab9452afe7babc6657904fdd0dc3291f8df29c0d6b97",
+      "evaluation_commit": "392b1cda6d529f13f8e9d5fc86efe8dc436386a3"
+    },
+    {
+      "id": "preregistration-added-programmes",
+      "value": 1,
+      "unit": "records",
+      "vintage": "archived",
+      "input_sha256": "f9e108924ab69ad37fe8ab9452afe7babc6657904fdd0dc3291f8df29c0d6b97",
+      "evaluation_commit": "392b1cda6d529f13f8e9d5fc86efe8dc436386a3"
+    },
+    {
+      "id": "preregistration-added-migrations",
+      "value": 2,
+      "unit": "records",
+      "vintage": "archived",
+      "input_sha256": "f9e108924ab69ad37fe8ab9452afe7babc6657904fdd0dc3291f8df29c0d6b97",
+      "evaluation_commit": "392b1cda6d529f13f8e9d5fc86efe8dc436386a3"
     }
   ],
   "summaries": [
@@ -556,6 +588,26 @@
       "metric_id": "git-spawn-profile",
       "value": 18143.331,
       "unit": "milliseconds"
+    },
+    {
+      "metric_id": "preregistration-preserved-programmes",
+      "value": 19,
+      "unit": "records"
+    },
+    {
+      "metric_id": "preregistration-preserved-migrations",
+      "value": 7,
+      "unit": "records"
+    },
+    {
+      "metric_id": "preregistration-added-programmes",
+      "value": 1,
+      "unit": "records"
+    },
+    {
+      "metric_id": "preregistration-added-migrations",
+      "value": 2,
+      "unit": "records"
     }
   ],
   "conclusions": [],
@@ -704,6 +756,26 @@
       "metric_id": "git-spawn-profile",
       "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/summary.json",
       "json_pointer": "/profile_estimates_ms/self/spawnSync"
+    },
+    {
+      "metric_id": "preregistration-preserved-programmes",
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/native-consumer-preregistration.json",
+      "json_pointer": "/preserved_programmes"
+    },
+    {
+      "metric_id": "preregistration-preserved-migrations",
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/native-consumer-preregistration.json",
+      "json_pointer": "/preserved_migrations"
+    },
+    {
+      "metric_id": "preregistration-added-programmes",
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/native-consumer-preregistration.json",
+      "json_pointer": "/added_programmes"
+    },
+    {
+      "metric_id": "preregistration-added-migrations",
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/native-consumer-preregistration.json",
+      "json_pointer": "/added_migrations"
     }
   ]
 }
