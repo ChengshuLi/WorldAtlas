@@ -1,0 +1,192 @@
+{
+  "kind": "accepted-aus-producer-metadata-control-v1",
+  "certificate": {
+    "commit": "6ceb3f33931c97db6fc063882b61f724b57df528",
+    "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/advance-002/rebind-certificate/certificate.json",
+    "mode": "100644",
+    "git_blob_oid": "d96ead9ee1db64b4b2ecb443d4c7d1bf5939d3a5",
+    "bytes": 3171,
+    "sha256": "1b4e5c600515c6a6c02b451f15c097e0cca7f41e016757be9e7e3465cedc7a8b"
+  },
+  "actual_combined_code": "0920aec93902d963488bfc9958a373d28251c95d",
+  "producer_execution": "40d792b2c67b18098c00cd71bce3cfd6a8e63a0b",
+  "limits": {
+    "complete_phase_bytes": 536870912,
+    "descriptors": 512,
+    "monitor_bytes": 4194304,
+    "output_bytes": 16777216,
+    "rss_bytes": 805306368,
+    "sampled_stop_bytes": 704643072,
+    "stderr_bytes": 40960,
+    "stdout_bytes": 8192,
+    "wall_seconds": 1200
+  },
+  "checked_keys": {
+    "certificate": [
+      "authority_registry_sha256",
+      "base_selection",
+      "execution_commit",
+      "facts",
+      "kind",
+      "operating",
+      "publication",
+      "request",
+      "result",
+      "version"
+    ],
+    "request": [
+      "acquisition",
+      "authority_registry_sha256",
+      "base_selection",
+      "current_rows",
+      "current_targets",
+      "executed_code",
+      "execution",
+      "execution_commit",
+      "kind",
+      "limits",
+      "original_patch_sha256s",
+      "original_rows",
+      "size",
+      "version"
+    ],
+    "facts": [
+      "acquisition_phases",
+      "acquisition_sha256",
+      "complete_phase_bytes",
+      "descriptors",
+      "execution_commit",
+      "kind",
+      "request_sha256",
+      "result_sha256",
+      "version"
+    ],
+    "publication": [
+      "execution_commit",
+      "kind",
+      "outputs",
+      "request_sha256",
+      "version"
+    ],
+    "operating": [
+      "elapsed_seconds",
+      "execution_commit",
+      "execution_custody",
+      "exit_code",
+      "kind",
+      "lifetime_rss_bytes",
+      "owned_processes_remaining",
+      "publication_sha256",
+      "request_sha256",
+      "signal",
+      "version"
+    ],
+    "acquisition": [
+      "kind",
+      "manifest_sha256",
+      "native_inputs",
+      "predecessor_proof",
+      "predecessor_rows",
+      "source_inputs",
+      "target_sources",
+      "version"
+    ]
+  },
+  "inputs": [
+    {
+      "commit": "6ceb3f33931c97db6fc063882b61f724b57df528",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/advance-002/rebind-certificate/certificate.json",
+      "mode": "100644",
+      "git_blob_oid": "d96ead9ee1db64b4b2ecb443d4c7d1bf5939d3a5",
+      "bytes": 3171,
+      "sha256": "1b4e5c600515c6a6c02b451f15c097e0cca7f41e016757be9e7e3465cedc7a8b"
+    },
+    {
+      "bytes": 2467782,
+      "commit": "5483b908dad9edcaa7548db4029a62c8ece3e857",
+      "git_blob_oid": "ba7c04c749f6411eabe291d0251a732dbd24097b",
+      "mode": "100644",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/current-001/request.json",
+      "sha256": "fcd3654f3f611bc7620dbcb0c64a65598ba7fa949a46328ea9b05b654250ba78"
+    },
+    {
+      "bytes": 7186,
+      "commit": "5483b908dad9edcaa7548db4029a62c8ece3e857",
+      "git_blob_oid": "c91a294ab07de5f4abf1b53a24c673f36fcbcad8",
+      "mode": "100644",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/current-001/facts.json",
+      "sha256": "dcc44a3fc090c0c2917c4a316ea5acb30308a291164831befd01b8fe5bbd5eb2"
+    },
+    {
+      "bytes": 475,
+      "commit": "5483b908dad9edcaa7548db4029a62c8ece3e857",
+      "git_blob_oid": "93e4f5651732fb793beb5eb08241156ab1063b73",
+      "mode": "100644",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/current-001/publication.json",
+      "sha256": "a8648b4fb90715cd6f277ed629725457c816d1d69dfb658d7dd47dc801271b03"
+    },
+    {
+      "bytes": 2179,
+      "commit": "d1d0664a09082678f22614529c7b75676436aa61",
+      "git_blob_oid": "e31f1f7767ae6e143a5e613e4453458b4bee50a5",
+      "mode": "100644",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/advance-002/rebind-operating/operating.json",
+      "sha256": "95b4d03de29689828101b3ec49a63e6881e24f3829cac9ce673f2e38c8e5dddc"
+    },
+    {
+      "bytes": 3923538,
+      "commit": "5483b908dad9edcaa7548db4029a62c8ece3e857",
+      "git_blob_oid": "659f479a6ed32157396ef70be1e1e7d34d923d3b",
+      "mode": "100644",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/current-001/result.json",
+      "sha256": "1a8b08dadb704d2dccf1dd657ba3da00d77cf5f6d1411fcce4166f0c54feefc5"
+    },
+    {
+      "bytes": 51287,
+      "commit": "5483b908dad9edcaa7548db4029a62c8ece3e857",
+      "git_blob_oid": "7b0d2e3337ab29b1e28753124f59cced0838b8f3",
+      "mode": "100644",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/current-001/code-source.json",
+      "sha256": "5cdc05c7c28d15f1d40427dc8801b935867180a0d085bfa54573179a17fc944e"
+    },
+    {
+      "bytes": 1456,
+      "commit": "5483b908dad9edcaa7548db4029a62c8ece3e857",
+      "git_blob_oid": "814487247da71f40bc1c6b1ebc1cd3cba5c893f5",
+      "mode": "100644",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/current-001/terminal.json",
+      "sha256": "b3a02237ba23ff2abb1b182adf8fecca10dc2606b4ce1a1126669681d5cd5702"
+    },
+    {
+      "bytes": 1400,
+      "commit": "5483b908dad9edcaa7548db4029a62c8ece3e857",
+      "git_blob_oid": "3a977021cbe342890d50a4db9073684d968c2f79",
+      "mode": "100644",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/current-001/stderr.log",
+      "sha256": "8d0fdee261a196a347f2e14a9ee16ea770dedbdefc781e13c898c32782d84859"
+    },
+    {
+      "bytes": 376,
+      "commit": "5483b908dad9edcaa7548db4029a62c8ece3e857",
+      "git_blob_oid": "aea50f95a7c80ccfbc5d3a51da8bfff6e011cd54",
+      "mode": "100644",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/current-001/stdout.json",
+      "sha256": "4712e3406b7356686cf794d88b032b7a77a3deb8f2673ba4dae2770bdb5e641a"
+    },
+    {
+      "bytes": 14793,
+      "commit": "5483b908dad9edcaa7548db4029a62c8ece3e857",
+      "git_blob_oid": "2e1eaef9fde6ede86422ff7e0e3e5bcb77a5272f",
+      "mode": "100644",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/current-001/issued-plan.json",
+      "sha256": "35da376b5b6f7d27dd2abb86e34b13f4989c3f38b46802370d68b6570897ec67"
+    }
+  ],
+  "execution_custody_verified": true,
+  "finite_code_compatibility_verified": true,
+  "output_publication_verified": true,
+  "loadSelection": 0,
+  "source_body_reads": 0,
+  "native_body_reads": 0,
+  "limits_notice": "Metadata/execution custody only; no selected projection, numerical rebind or joint predicate execution."
+}

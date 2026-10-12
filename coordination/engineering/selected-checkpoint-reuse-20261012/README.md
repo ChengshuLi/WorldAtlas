@@ -93,7 +93,7 @@ execution or producer-code qualification.
 
 ## Verification and limits
 
-Run `node --test test/selected-checkpoint.test.mjs`. The 21 controls create an
+Run `node --test test/selected-checkpoint.test.mjs`. The 22 controls create an
 ordinary miniature trusted Git repository and invoke real catalogue, private
 state/transition, projection and budget boundaries.
 
@@ -154,3 +154,9 @@ The runtime qualifier catalogue in this inactive PR continues to bind the existi
 Final focused controls at `c95082fbdb1e092d6cada098e7b48dd4809140dd`: twenty checkpoint tests and fourteen catalogue tests passed, zero failures/skips. Both complete suites finished in 38.548 seconds; this test timing is not a batch-performance claim.
 
 A final custody-only correction shares each temporary archive/authority reader inventory with its invocation parent. This retains every actual consumed pin for the joint publication without rereading it or exposing a new authority API. A focused real-Git test confirms whole archived pin retention and separate invocation inventories/lifetimes; prior numerical and policy controls remain reusable. The original41a9 proof is not relabelled.
+
+## Accepted AUS optional producer limits
+
+The first joint current-AUS attempt in1784 stopped during authentication: the accepted producer request includes bounded `stdout_bytes`, `stderr_bytes` and `monitor_bytes`, while this module duplicated an obsolete six-field limit schema. No native/continuous comparison ran. The correction reuses the existing cold producer's `validateCurrentRebindLimits` required/optional schema and retains the ordinary output cap. Unknown fields, missing required bounds, unsafe/nonpositive limits, excessive descriptors/log bounds and a stop threshold above RSS still reject. Original complete plan/limits equality remains authenticated by `verifyCurrentRebindExecution`.
+
+The real accepted limit schema and adverse controls pass. The retained metadata-only `accepted-aus-producer-envelope-control` authenticates the complete actual certificate, products and external execution custody, checks the remaining request/facts/publication/operating/acquisition shapes, current/historical code compatibility, and exact output/admission bindings. It performs no source/native projection, numerical rebind or selected reconstruction. The failed actual invocation and its measured operating outcome remain in1784's packet; this control is not joint-equivalence acceptance.
