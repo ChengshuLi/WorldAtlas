@@ -131,10 +131,10 @@ was not measured. The later process observation records present visibility only.
 Do not reuse the original supervisor as a lifecycle verifier without correcting
 and testing its terminal check.
 
-After that proof, only constant-time private transition admission and freezing of
-the returned native-row scope were added for public consumer safety. Numerical
-projection/qualification algorithms did not change. The new wrapper must be
-reviewed with its forged/expired controls; this does not relabel the proof's
+The initial post-proof delta added constant-time private transition admission
+and freezing of the returned native-row scope for consumer safety. The later
+policy-continuity and scientific-route correction is documented below and has
+its own focused controls/review. Neither change relabels the archived proof's
 original execution head.
 
 Consumer integration, actual joint strict-predicate execution, and the one-load
