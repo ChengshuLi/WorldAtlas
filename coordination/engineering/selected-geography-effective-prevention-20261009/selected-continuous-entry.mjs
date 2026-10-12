@@ -17,7 +17,7 @@ function timedStage(name, details, run) {
  finally { process.stderr.write(JSON.stringify({selected_continuous_stage:name,event:'end',...details,elapsed_ms:Math.round(performance.now()-start)})+'\n'); }
 }
 // An additive hook can only disable the old shortcut. It grants no acceptance;
-// the independent coordinate children still validate both complete selections.
+// complete coordinate acquisition still validates both immutable selections.
 export function mayUseNonAdditiveShortcut(beforeReader,afterReader) {
  const selectors=[beforeReader,afterReader].map(reader=>reader.json('data/ownership-selection.json'));
  return !selectors.some(value=>value!==null&&typeof value==='object'&&Object.hasOwn(value,'additive_release'));
@@ -46,12 +46,18 @@ export async function coordinateStage(repo,trusted,selected,destination,parentRu
  const native=await import('../../../scripts/check-effective-geographic-regression.mjs');
  const helper=await import('./selected-neighbor-prevention.mjs');
  const startup=native.selectedBootstrap(repo,selected,selected,{parentRuntimePath});
- startup.beforeReader.outputBytes=FILE;startup.beforeReader.phase();
- const snapshot=timedStage('coordinate-selection',{selected},()=>native.loadSelection(startup.beforeReader));demand(snapshot,'Selected continuous certificate requires a committed native selection');
- // Completed metadata helper frames no longer retain raw decoded containers.
- // The complete authenticated snapshot remains live and charged below.
- checkColdReclaimer();coldGc();
- const resolver=snapshot.geometrySources??new native.SelectedGeometrySources(snapshot),shards=[];
+ const context=bootstrapContext(repo,startup);
+ return acquireCompleteColdSide(native,helper,{repo,trusted,selected,destination,context,
+  carriedState:{context,code,ack:[],receipts:[],lifecycle:[]}}).ack;
+}
+function bootstrapContext(repo,startup) {
+ return {repo,runtimeBytes:startup.beforeReader.runtimeBytes,executionBytes:startup.beforeReader.executionBytes,
+  gitExecutable:startup.beforeReader.gitExecutable,identities:startup.identities};
+}
+// This frame publishes only compact custody. Shards, decoded/encoded certificate
+// buffers and the original whole source collections cannot escape to readback.
+function publishCoordinateSnapshot(helper,{repo,trusted,selected,destination,context,code,reader,resolver}) {
+ const shards=[];
  // The issued footprint value is once-qualified historical authority. This
  // separate certificate authenticates every actual selected whole source body,
  // full unique owner roster and per-record pointsets; it does not recompute the
@@ -65,8 +71,8 @@ export async function coordinateStage(repo,trusted,selected,destination,parentRu
  demand(decoded.length<=FILE,'Complete certificate ordinary decoded cap');
  const encoded=gzipSync(decoded,{level:9,mtime:0});
  const facts={version:1,kind:'trusted-selected-coordinate-stage-v1',executing_commit:trusted,selected_commit:selected,execution_code:code,
-  runtime:startup.identities,runtime_argv:process.execArgv,source_lifecycle:'whole-containing-body-authenticate-extract-discard-native-gc',source_certificate_domain:'complete-selected-source-pointsets:v1',historical_footprint_authority:{value:resolver.release.footprints_sha256,release:resolver.release,recomputed:false},binding:certificate.binding,complete_owners:certificate.entries.length,complete_sources:resolver.paths.length,
-  inputs:[...startup.beforeReader.inventory.values()],acquisition_phases:shards.flatMap(s=>s.phases),join_phase_bytes:certificate.complete_phase_bytes,
+  runtime:context.identities,runtime_argv:process.execArgv,source_lifecycle:'whole-containing-body-authenticate-extract-discard-native-gc',source_certificate_domain:'complete-selected-source-pointsets:v1',historical_footprint_authority:{value:resolver.release.footprints_sha256,release:resolver.release,recomputed:false},binding:certificate.binding,complete_owners:certificate.entries.length,complete_sources:resolver.paths.length,
+  inputs:[...reader.inventory.values()],acquisition_phases:shards.flatMap(s=>s.phases),join_phase_bytes:certificate.complete_phase_bytes,
   limits:certificate.limitations,candidate_code_executed:false};
  const factsBody=helper.valueBytes(facts),publication={version:1,complete:true,kind:facts.kind,
   certificate:{path:'certificate.json.gz',bytes:encoded.length,sha256:sha(encoded),decoded_bytes:decoded.length,decoded_sha256:sha(decoded)},
@@ -93,6 +99,52 @@ function readColdProduct(directory,ack,reader,helper){
 function coldReader(native,context,selected,carriedBytes) {
  demand(Number.isSafeInteger(carriedBytes)&&carriedBytes>=0&&context&&Number.isSafeInteger(context.runtimeBytes)&&Number.isSafeInteger(context.executionBytes),'Incomplete installed-code/runtime/carry context');
  return new native.ImmutableReader(context.repo,selected,{runtimeBytes:context.runtimeBytes,executionBytes:context.executionBytes,gitExecutable:context.gitExecutable,metadataBytes:8388608+carriedBytes,outputBytes:FILE});
+}
+// Shared coordinate helpers reset their own metadata at each real acquisition
+// boundary. A private subclass adds the enclosing invocation's complete custody
+// and growing inventory to EVERY such phase, before any body can be opened.
+// It preserves the ordinary reader's runtime, output, file, RSS and phase limits;
+// no scientific helper body or historical programme identity is changed.
+function coordinateFrameReader(native,helper,context,selected,carriedState) {
+ demand(carriedState&&Object.keys(carriedState).sort().join(',')==='ack,code,context,lifecycle,receipts'
+  &&carriedState.context===context&&Array.isArray(carriedState.code)&&Array.isArray(carriedState.ack)
+  &&Array.isArray(carriedState.receipts)&&Array.isArray(carriedState.lifecycle),'Incomplete coordinate-frame carried metadata');
+ demand(context&&Number.isSafeInteger(context.runtimeBytes)&&Number.isSafeInteger(context.executionBytes),'Incomplete coordinate-frame runtime context');
+ class CoordinateFrameReader extends native.ImmutableReader {
+  phase() {
+   super.phase();
+   const carry=2*helper.valueBytes({carriedState,inventory:[...this.inventory.values()]}).length;
+   demand(Number.isSafeInteger(carry)&&carry>=0&&this.used+carry<this.phaseLimit,'Complete coordinate-frame carry exceeds phase before body opens');
+   this.used+=carry;
+  }
+ }
+ return new CoordinateFrameReader(context.repo,selected,{runtimeBytes:context.runtimeBytes,executionBytes:context.executionBytes,
+  gitExecutable:context.gitExecutable,metadataBytes:8388608,outputBytes:FILE});
+}
+// The same genuine selected snapshot independently checks the persisted product
+// against its issued acknowledgement. Publication readback, full owner/source
+// joins and private receipt issuance remain mandatory; no serialized proof can
+// manufacture a new selected authority.
+function generatedColdSnapshot(native,helper,{repo,trusted,selected,destination,context,carriedState}) {
+ fresh(destination);checkColdReclaimer();
+ const reader=coordinateFrameReader(native,helper,context,selected,carriedState);
+ const snapshot=timedStage('coordinate-selection',{selected},()=>native.loadSelection(reader));
+ demand(snapshot&&snapshot.reader===reader&&reader.version===selected,'Selected cold side removed or rebound');
+ const resolver=snapshot.geometrySources??new native.SelectedGeometrySources(snapshot);
+ reclaimCompletedSource();
+ const ack=publishCoordinateSnapshot(helper,{repo,trusted,selected,destination,context,code:carriedState.code,reader,resolver});
+ reclaimCompletedSource();
+ demand(snapshot.reader===reader&&resolver.reader===reader&&reader.version===selected,'Selected cold side removed or rebound');
+ reader.metadataBytes=8388608+continuousSnapshotBytes(helper,snapshot,resolver)+2*helper.valueBytes(ack).length;
+ reader.outputBytes=FILE;reader.phase();
+ const product=readColdProduct(destination,ack,reader,helper);
+ const certificate=helper.acceptColdCoordinateCertificate(resolver,product.certificate,{...product,expectedPublication:ack.publication});
+ const receipt=helper.sealColdCoordinateCertificate(certificate,product);
+ return {reader,snapshot,resolver,receipt,ack};
+}
+export function acquireCompleteColdSide(native,helper,options) {
+ const {receipt,ack}=generatedColdSnapshot(native,helper,options);
+ return {receipt,ack};
 }
 function continuousSnapshotBytes(helper,snapshot,resolver) {
  // Also cover the legacy resolver's own image, which may not be snapshot.image.
@@ -192,6 +244,16 @@ export function acquireCandidateContinuousSources(native,helper,{repo,baseline,c
  demand(baselineReceipt?.facts?.selected_commit===baseline&&ack.length===2&&stagePaths.length===2,'Incomplete candidate-frame baseline custody');
  const receipts=[baselineReceipt],carriedState={context,code,ack,receipts,lifecycle};
  const {reader,snapshot,resolver,receipt}=validatedColdSnapshot(native,helper,{repo,selected:candidate,parentRuntimePath,directory:stagePaths[1],ack:ack[1],context,carriedState});
+ return projectCandidateFrame(native,helper,{repo,baseline,candidate,parentRuntimePath,stagePaths,ack,context,code,receipts,lifecycle,reader,snapshot,resolver,receipt});
+}
+export function acquireCompleteCandidateSources(native,helper,{repo,trusted,baseline,candidate,parentRuntimePath,stagePaths,ack,context,code,baselineReceipt,lifecycle}) {
+ demand(baselineReceipt?.facts?.selected_commit===baseline&&ack.length===1&&stagePaths.length===2,'Incomplete candidate-frame baseline custody');
+ const receipts=[baselineReceipt],carriedState={context,code,ack,receipts,lifecycle};
+ const completed=generatedColdSnapshot(native,helper,{repo,trusted,selected:candidate,destination:stagePaths[1],context,carriedState});
+ const {ack:issued,...frame}=completed;ack.push(issued);
+ return projectCandidateFrame(native,helper,{repo,baseline,candidate,parentRuntimePath,stagePaths,ack,context,code,receipts,lifecycle,...frame});
+}
+function projectCandidateFrame(native,helper,{repo,baseline,candidate,parentRuntimePath,stagePaths,ack,context,code,receipts,lifecycle,reader,snapshot,resolver,receipt}) {
  receipts.push(receipt);
  const stages=[...lifecycle,{kind:'complete-snapshot-bound-cold-validation',vintage:'candidate',complete_phase_bytes:receipt.complete_phase_bytes}];
  const custodyBytes=value=>2*helper.valueBytes(value).length;
@@ -204,7 +266,7 @@ export function acquireCandidateContinuousSources(native,helper,{repo,baseline,c
  return {receipts,lifecycle:stages,closure,results};
 }
 export async function continuousOperandsStage(repo,trusted,baseline,candidate,destination,parentRuntimePath){
- demand(commit(baseline)&&commit(candidate),'Missing immutable selected comparison commits');destination=path.resolve(destination);fresh(destination);const code=guard(repo,trusted);
+ demand(commit(baseline)&&commit(candidate),'Missing immutable selected comparison commits');destination=path.resolve(destination);fresh(destination);checkColdReclaimer();const code=guard(repo,trusted);
  const native=await import('../../../scripts/check-effective-geographic-regression.mjs'),helper=await import('./selected-neighbor-prevention.mjs');
  let startup=native.selectedBootstrap(repo,baseline,candidate,{parentRuntimePath});
  if(mayUseNonAdditiveShortcut(startup.beforeReader,startup.afterReader)){
@@ -217,19 +279,19 @@ export async function continuousOperandsStage(repo,trusted,baseline,candidate,de
  }
  // Bootstrap selectors and any non-additive shortcut snapshots end here. Only
  // runtime context survives into independent complete coordinate acquisitions.
- const context={repo,runtimeBytes:startup.beforeReader.runtimeBytes,executionBytes:startup.beforeReader.executionBytes,gitExecutable:startup.beforeReader.gitExecutable,identities:startup.identities};
- startup=null;
+ const context=bootstrapContext(repo,startup);
+ startup=null;reclaimCompletedSource();
  fs.mkdirSync(destination);const stagePaths=[path.join(destination,'baseline'),path.join(destination,'candidate')],ack=[];
- const env={...process.env};delete env.NODE_OPTIONS;delete env.NODE_PATH;
- for(const [i,selected]of [baseline,candidate].entries()){
-  const raw=timedStage('coordinate-child',{selected},()=>execFileSync(process.execPath,['--expose-gc',fileURLToPath(import.meta.url),'coordinate',repo,trusted,selected,stagePaths[i],...(parentRuntimePath?[parentRuntimePath]:[])],{env,maxBuffer:1048576,stdio:['ignore','pipe','inherit']}));const value=JSON.parse(raw);demand(value.publication?.complete===true,'Cold coordinate child lacks complete acknowledgement');ack.push(value);
- }
  const custodyBytes=value=>2*helper.valueBytes(value).length;
- const baselineReceipt=validatePersistedColdSide(native,helper,{repo,selected:baseline,parentRuntimePath,directory:stagePaths[0],ack:ack[0],context,carriedState:{context,code,ack,receipts:[],lifecycle:[]}});
- let completed=acquireCandidateContinuousSources(native,helper,{repo,baseline,candidate,parentRuntimePath,stagePaths,ack,context,code,baselineReceipt,
+ const baselineSide=acquireCompleteColdSide(native,helper,{repo,trusted,selected:baseline,destination:stagePaths[0],context,
+  carriedState:{context,code,ack,receipts:[],lifecycle:[]}});
+ ack.push(baselineSide.ack);const baselineReceipt=baselineSide.receipt;
+ // The baseline frame has ended: no snapshot or source resolver survives here.
+ reclaimCompletedSource();
+ let completed=acquireCompleteCandidateSources(native,helper,{repo,trusted,baseline,candidate,parentRuntimePath,stagePaths,ack,context,code,baselineReceipt,
   lifecycle:[{kind:'complete-snapshot-bound-cold-validation',vintage:'baseline',complete_phase_bytes:baselineReceipt.complete_phase_bytes}]});
  const {receipts,lifecycle,closure}=completed;
- let candidateResults=completed.results;completed=null;
+ let candidateResults=completed.results;completed=null;reclaimCompletedSource();
  // Both whole certificates remain authenticated persisted outputs. Their full
 // scan has finished; retain every required row, release only unused live rows.
  const {plan,rows,inputs}=closure,outputs={baseline:{},candidate:{}},inverse=[];

@@ -558,7 +558,7 @@ def selected_continuous(repo, baseline, candidate, detector):
     with tempfile.TemporaryDirectory(prefix='trusted-selected-footprints-') as temporary:
         destination = pathlib.Path(temporary).resolve() / 'complete'
         with stage_timing('selected-continuous-node-operands'):
-            raw = subprocess.check_output([executable, str(entrypoint), 'continuous', str(repo), baseline,
+            raw = subprocess.check_output([executable, '--expose-gc', str(entrypoint), 'continuous', str(repo), baseline,
                                           baseline, candidate, str(destination), sys.executable], env=env)
         if len(raw) > MAX_BYTES:
             raise ValueError('Cold selected acknowledgement exceeds output cap')

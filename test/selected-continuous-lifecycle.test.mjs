@@ -126,9 +126,9 @@ test('reopened complete carry and runtime admission refuse before any cold body 
 
 test('actual continuous entry emits full source inverses with independently ended acquisition stages',()=>{
  const f=fixture();try{const {rect,install}=sourceSides(f),before=install(rect(0,1),rect(2,3),'before'),after=install(rect(0,2.5),rect(2,3),'after');f.git('checkout',before);const env={...process.env};delete env.NODE_OPTIONS;delete env.NODE_PATH;
-  const out=path.join(f.repo,'actual-continuous'),r=spawnSync(process.execPath,[path.join(f.repo,P+'selected-continuous-entry.mjs'),'continuous',f.repo,before,before,after,out],{env,encoding:'utf8'});assert.equal(r.status,0,r.stderr);assert.match(r.stderr,/required-source-count/);assert.match(r.stderr,/coordinate-source/);assert.match(r.stderr,/required-side-selection/);const ack=JSON.parse(r.stdout),facts=JSON.parse(fs.readFileSync(path.join(out,'facts.json'))),body=JSON.parse(gunzipSync(fs.readFileSync(path.join(out,'operands.json.gz'))));
+  const out=path.join(f.repo,'actual-continuous'),r=spawnSync(process.execPath,['--expose-gc',path.join(f.repo,P+'selected-continuous-entry.mjs'),'continuous',f.repo,before,before,after,out],{env,encoding:'utf8'});assert.equal(r.status,0,r.stderr);assert.match(r.stderr,/required-source-count/);assert.match(r.stderr,/coordinate-source/);assert.match(r.stderr,/required-side-selection/);const ack=JSON.parse(r.stdout),facts=JSON.parse(fs.readFileSync(path.join(out,'facts.json'))),body=JSON.parse(gunzipSync(fs.readFileSync(path.join(out,'operands.json.gz'))));
   const selectionStages=r.stderr.split('\n').filter(Boolean).map(line=>JSON.parse(line)).filter(row=>row.event==='start'&&['coordinate-selection','persisted-selection','required-side-selection'].includes(row.selected_continuous_stage));
-  assert.equal(selectionStages.length,5);
+  assert.equal(selectionStages.length,3);
   assert.deepEqual(selectionStages.filter(row=>row.selected_continuous_stage==='required-side-selection').map(row=>row.selected),[before]);
   assert.deepEqual(ack.affected_ids,['old-owner','other-owner']);assert.equal(facts.lifecycle.filter(p=>p.kind==='complete-snapshot-bound-cold-validation').length,2);assert.equal(facts.lifecycle.filter(p=>p.kind==='complete-required-containing-source').length,2);assert.equal(facts.inverse.length,4);assert.ok(facts.lifecycle.every(p=>p.complete_phase_bytes<=268435456));assert.deepEqual(Object.keys(body.baseline).sort(),ack.affected_ids);assert.deepEqual(Object.keys(body.candidate).sort(),ack.affected_ids);
   for(const side of ['baseline','candidate'])assert.equal(fs.existsSync(path.join(out,side,'certificate.json.gz')),true);
@@ -219,7 +219,7 @@ test('immutable additive selector only disables the shortcut and malformed hooks
   f.write('data/ownership-selection.json',{...selected,additive_release:{forged:true}});
   assert.equal(mayUseNonAdditiveShortcut(reader(before),reader(before)),true);
   f.git('checkout','--','data/ownership-selection.json');f.git('checkout',before);
-  const r=spawnSync(process.execPath,[path.join(f.repo,P+'selected-continuous-entry.mjs'),'continuous',f.repo,before,before,after,path.join(f.repo,'malformed-additive')],{encoding:'utf8'});
+  const r=spawnSync(process.execPath,['--expose-gc',path.join(f.repo,P+'selected-continuous-entry.mjs'),'continuous',f.repo,before,before,after,path.join(f.repo,'malformed-additive')],{encoding:'utf8'});
   assert.notEqual(r.status,0);assert.match(r.stderr,/Unsupported committed additive hook/);assert.equal(r.stdout,'');
   assert.doesNotMatch(r.stderr,/shortcut-baseline-selection/);assert.match(r.stderr,/coordinate-selection/);
  }finally{f.cleanup();}
@@ -310,5 +310,90 @@ const {closure,receipts}=completed,results=acquireContinuousSources(n,h,{repo,se
 assert.equal(results.length,1);assert.equal(completed.results.length,1);console.log('candidate snapshot/resolver collected before baseline acquisition; projections retained');`;
   const file=path.join(f.repo,'candidate-frame-lifetime.mjs');fs.writeFileSync(file,code,{flag:'wx'});
   const result=spawnSync(process.execPath,['--expose-gc',file,f.repo,before,after,JSON.stringify(state)],{encoding:'utf8'});assert.equal(result.status,0,result.stderr);assert.match(result.stdout,/candidate snapshot\/resolver collected before baseline acquisition/);
+ }finally{f.cleanup();}
+});
+
+function completeFrameProbe(f,before,after,body) {
+ f.git('checkout',before);
+ const file=path.join(f.repo,'complete-frame-probe.mjs');
+ const imports=`import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';
+import * as n from ${JSON.stringify(path.join(f.repo,'scripts/check-effective-geographic-regression.mjs'))};
+import * as h from ${JSON.stringify(path.join(f.repo,P+'selected-neighbor-prevention.mjs'))};
+import * as entry from ${JSON.stringify(path.join(f.repo,P+'selected-continuous-entry.mjs'))};
+const [repo,before,after]=process.argv.slice(2),startup=n.selectedBootstrap(repo,before,after),r=startup.beforeReader;
+const context={repo,runtimeBytes:r.runtimeBytes,executionBytes:r.executionBytes,gitExecutable:r.gitExecutable,identities:startup.identities};
+const options=(destination,carriedState)=>({repo,trusted:before,selected:before,destination:path.join(repo,destination),context,carriedState});
+const empty=()=>({context,code:[],ack:[],receipts:[],lifecycle:[]});
+`;
+ fs.writeFileSync(file,imports+body,{flag:'wx'});
+ const env={...process.env};delete env.NODE_OPTIONS;delete env.NODE_PATH;
+ const result=spawnSync(process.execPath,['--expose-gc',file,f.repo,before,after],{env,encoding:'utf8'});
+ assert.equal(result.status,0,result.stderr);return result;
+}
+
+test('complete single-vintage frames load once, preserve independent operands, and release each snapshot',()=>{
+ const f=fixture();try{
+  const {rect,install}=sourceSides(f),before=install(rect(0,1),rect(2,3),'before',{split:true}),after=install(rect(0,2.5),rect(2,3),'after',{split:true});
+  const result=completeFrameProbe(f,before,after,`
+const loads=[],weak=[];const counted={...n,loadSelection(reader){const snapshot=n.loadSelection(reader);loads.push(reader.version);weak.push([new WeakRef(snapshot),new WeakRef(snapshot.geometrySources)]);return snapshot;}};
+const stagePaths=[path.join(repo,'complete-before'),path.join(repo,'complete-after')];
+const old=entry.acquireCompleteColdSide(counted,h,options('complete-before',empty()));
+assert.deepEqual(Object.keys(old).sort(),['ack','receipt']);
+async function collected(index){await new Promise(resolve=>setImmediate(resolve));for(let i=0;i<3;i++){globalThis.gc();await new Promise(resolve=>setImmediate(resolve));}for(const ref of weak[index])assert.equal(ref.deref(),undefined,'completed single-vintage snapshot/resolver retained');}
+await collected(0);
+const ack=[old.ack],completed=entry.acquireCompleteCandidateSources(counted,h,{repo,trusted:before,baseline:before,candidate:after,stagePaths,ack,context,code:[],baselineReceipt:old.receipt,lifecycle:[]});
+assert.deepEqual(loads,[before,after]);assert.equal(ack.length,2);await collected(1);
+const {closure,receipts}=completed;
+const independently=entry.acquireContinuousSources(n,h,{repo,selected:after,names:closure.plan.source_paths.candidate,receipt:receipts[1],rows:closure.rows.candidate,inputs:closure.inputs.candidate,context,carriedBytes:2*h.valueBytes(completed).length});
+assert.deepEqual(completed.results.map(row=>row.features),independently.map(row=>row.features));assert.deepEqual(completed.results.map(row=>row.inverse),independently.map(row=>row.inverse));
+const oldClosure=entry.reopenCompleteColdPlan(n,h,{repo,baseline:before,candidate:after,stagePaths,ack,receipts,context,carriedBytes:2*h.valueBytes({context,ack,receipts}).length});
+assert.deepEqual(closure.plan,oldClosure.plan);assert.deepEqual(closure.rows,oldClosure.rows);
+const baseline=entry.acquireContinuousSources(counted,h,{repo,selected:before,names:closure.plan.source_paths.baseline,receipt:receipts[0],rows:closure.rows.baseline,inputs:closure.inputs.baseline,context,carriedBytes:2*h.valueBytes(completed).length});
+assert.deepEqual(loads,[before,after,before]);assert.equal(baseline.length,2);assert.equal(completed.results.length,2);
+console.log('three real acquisitions; complete independent operands equal; both snapshot frames collected');`);
+  assert.match(result.stdout,/three real acquisitions/);
+ }finally{f.cleanup();}
+});
+
+test('coordinate helper resets retain all external custody and inventory, and refuse missing headroom before sources',()=>{
+ const f=fixture();try{
+  const {rect,install}=sourceSides(f),before=install(rect(0,1),rect(2,3),'before',{split:true}),after=install(rect(0,2.5),rect(2,3),'after',{split:true});
+  const result=completeFrameProbe(f,before,after,`
+const state=empty();state.code=[{retained:'x'.repeat(131072)}];let resets=0,joins=0,firstUsed;
+const observe=reader=>{const phase=reader.phase.bind(reader);reader.phase=function(){phase();const own=this.runtimeBytes+this.executionBytes+this.metadataBytes+this.outputBytes,carry=2*h.valueBytes({carriedState:state,inventory:[...this.inventory.values()]}).length;assert.equal(this.used,own+carry);assert(carry>262144);resets++;};};
+const inspected={...h,selectedCoordinateShard(resolver,...args){if(!resets)observe(resolver.reader);const shard=h.selectedCoordinateShard(resolver,...args);if(firstUsed===undefined)firstUsed=shard.phases[0].complete_phase_bytes;else assert(shard.phases[0].complete_phase_bytes>firstUsed);return shard;},joinSelectedCoordinateCertificate(resolver,...args){const certificate=h.joinSelectedCoordinateCertificate(resolver,...args);joins++;return certificate;}};
+entry.acquireCompleteColdSide(n,inspected,options('accounted',state));assert(resets>=6);assert.equal(joins,1);
+let sourceOpens=0;const original=n.SelectedGeometrySources.prototype.read;n.SelectedGeometrySources.prototype.read=function(...args){sourceOpens++;return original.apply(this,args);};
+try{
+ const blocked={...h,selectedCoordinateShard(resolver,...args){const reader=resolver.reader,phase=reader.phase;reader.phase=function(){this.allowance=Object.freeze({phaseBytes:this.runtimeBytes+this.executionBytes+this.outputBytes+this.metadataBytes+1,rssBytes:this.allowance.rssBytes});return phase.call(this);};return h.selectedCoordinateShard(resolver,...args);}};
+ assert.throws(()=>entry.acquireCompleteColdSide(n,blocked,options('blocked-carry',state)),/coordinate-frame carry/);assert.equal(sourceOpens,0);assert.equal(fs.existsSync(path.join(repo,'blocked-carry')),false);
+}finally{n.SelectedGeometrySources.prototype.read=original;}
+console.log('all shard/join resets carry complete metadata; external-only deficit refuses before source opens');`);
+  assert.match(result.stdout,/external-only deficit refuses/);
+ }finally{f.cleanup();}
+});
+
+test('same-snapshot persisted custody refuses changed readback, selected identity and missing owners',()=>{
+ const f=fixture();try{
+  const {rect,install}=sourceSides(f),before=install(rect(0,1),rect(2,3),'before'),after=install(rect(0,2.5),rect(2,3),'after');
+  const result=completeFrameProbe(f,before,after,`
+const read=fs.readFileSync;let tampered=0;
+fs.readFileSync=function(file,...args){const result=read.call(this,file,...args);if(String(file).endsWith('/tampered/certificate.json.gz')){tampered++;const copy=Buffer.from(result);copy[copy.length-1]^=1;return copy;}return result;};
+try{assert.throws(()=>entry.acquireCompleteColdSide(n,h,options('tampered',empty())),/Whole cold product differs/);assert.equal(tampered,1);}finally{fs.readFileSync=read;}
+const drifted={...h,joinSelectedCoordinateCertificate(resolver,...args){const result=h.joinSelectedCoordinateCertificate(resolver,...args);resolver.reader.version=after;return result;}};
+assert.throws(()=>entry.acquireCompleteColdSide(n,drifted,options('drifted',empty())),/Selected cold side removed or rebound/);
+const readSource=n.SelectedGeometrySources.prototype.read;n.SelectedGeometrySources.prototype.read=function(...args){const result=readSource.apply(this,args);result.collection.features.pop();return result;};
+try{assert.throws(()=>entry.acquireCompleteColdSide(n,h,options('omitted',empty())),/Incomplete canonical source.owner roster/);assert.equal(fs.existsSync(path.join(repo,'omitted')),false);}finally{n.SelectedGeometrySources.prototype.read=readSource;}
+console.log('actual generated custody rejects persisted tamper, commit drift, and missing whole-source owner');`);
+  assert.match(result.stdout,/actual generated custody rejects/);
+ }finally{f.cleanup();}
+});
+
+test('continuous entry requires its authenticated native-GC launch before output mutation',()=>{
+ const f=fixture();try{
+  const {rect,install}=sourceSides(f),before=install(rect(0,1),rect(2,3),'before');f.git('checkout',before);
+  const output=path.join(f.repo,'no-native-gc'),env={...process.env};delete env.NODE_OPTIONS;delete env.NODE_PATH;
+  const result=spawnSync(process.execPath,[path.join(f.repo,P+'selected-continuous-entry.mjs'),'continuous',f.repo,before,before,before,output],{env,encoding:'utf8'});
+  assert.notEqual(result.status,0);assert.match(result.stderr,/authenticated native GC entry/);assert.equal(fs.existsSync(output),false);
  }finally{f.cleanup();}
 });

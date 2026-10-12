@@ -36,9 +36,10 @@ export const AUDITED_READERS = Object.freeze({
   // catalogue/admission/peak accounting changes; all input routes are identical.
   [PREFIX + 'selected-neighbor-prevention.mjs']: ['63745cc5d4f15bdd8c153787df07379d813ab037fc1e0734944a75568235e8aa',
     '6da5919c63822393959afc8f2499c76470aa6b51d6e29664d372e9eee79ae4b1', '1ebc1415f9c18cf8639734073313667bbc0e831317484c48fcafbc6f6d7f1216'],
-  // Candidate-frame reuse changes custody lifetime/accounting, not input routes.
+  // Candidate and single-vintage frame reuse change lifetime/accounting, not input routes.
   [PREFIX + 'selected-continuous-entry.mjs']: ['84ddc84798fa371e37c0acbd6764a39ef79296f3b8a57ff09aa4ed416e7ae1b9', '198817f84574d3d04b0ab2c4827eced98211533a79851ee43b97c59d80663c07',
-    '7f23e383ba04ab2953758087eb6c2c69c777d103589f5f1e00076163f084aeac']
+    '7f23e383ba04ab2953758087eb6c2c69c777d103589f5f1e00076163f084aeac',
+    '80bd3037c94880d0da87b3acbfbf0fd8625cd74f2e82770cc9b8e0abf3c2920b']
 });
 export const EXECUTION_CODE = Object.freeze([
   'scripts/run-geographic-check.py', 'scripts/check-geographic-regression.py',
