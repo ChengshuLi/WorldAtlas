@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import {gunzipSync} from 'node:zlib';
+import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {trustedFixture} from './helpers/selected-joint-fixture.mjs';
 
@@ -70,6 +72,22 @@ test('actual joint CLI qualifies once, runs both real consumers and releases onc
   assert.equal(report.continuous.complete_owners, 3);
   const publication = JSON.parse(fs.readFileSync(path.join(f.root, 'complete/publication.json')));
   assert.deepEqual(report.continuous.publication, publication);
+  const derived = JSON.parse(fs.readFileSync(path.join(f.root, 'complete/derived-publication.json')));
+  assert.deepEqual(report.continuous.derived_checkpoint, derived);
+  assert.equal(derived.accepted_checkpoint, false);
+  assert.equal(derived.validation_stage, 'native-passed-continuous-pending');
+  assert.equal(derived.kind, 'derived-selected-checkpoint-candidate-v1');
+  const encoded = fs.readFileSync(path.join(f.root, 'complete', derived.certificate.path));
+  const decoded = gunzipSync(encoded), certificate = JSON.parse(decoded);
+  assert.equal(createHash('sha256').update(encoded).digest('hex'), derived.certificate.sha256);
+  assert.equal(createHash('sha256').update(decoded).digest('hex'), derived.certificate.decoded_sha256);
+  assert.equal(certificate.entries.length, 3);
+  const derivedFacts = JSON.parse(fs.readFileSync(path.join(f.root, 'complete', derived.facts.path)));
+  assert.equal(derivedFacts.baseline_commit, f.selected);
+  assert.equal(derivedFacts.candidate_commit, f.selected);
+  assert.deepEqual(derivedFacts.candidate_selection, f.selection);
+  assert.deepEqual(derivedFacts.certificate, derived.certificate);
+  assert.equal(Object.hasOwn(derivedFacts, 'complete_cold_custody'), false);
   const counts = new Map();
   for (const file of fs.readdirSync(coverage)) for (const script of JSON.parse(fs.readFileSync(path.join(coverage, file))).result) {
     if (!script.url.startsWith('file://' + f.root + '/')) continue;
@@ -79,4 +97,16 @@ test('actual joint CLI qualifies once, runs both real consumers and releases onc
     assert.equal(counts.get(name), 1, name);
   assert.equal(counts.get('loadSelection'), 0);
   assert.equal(counts.get('selectedCoordinateShard'), 0);
+});
+
+
+test('derived output union is admitted before complete serialization or compression', async t => {
+  const f = await trustedFixture(t);
+  const certificate = {entries:[['unicode \uD800 \uD83C\uDF0D', 1, null, true, '\n\\"']]};
+  const facts = {kind:'tiny-provisional-control'};
+  const plan = f.joint.planDerivedOutput(certificate, facts, 30, 4096);
+  assert.equal(plan.decodedBytes, Buffer.byteLength(JSON.stringify(certificate) + '\n'));
+  assert(plan.encodedLimit > 0 && plan.encodedLimit < 4096);
+  assert.throws(() => f.joint.planDerivedOutput(certificate, facts, 30, 50), /before serialization/);
+  assert.throws(() => f.joint.planDerivedOutput(certificate, facts, 4096, 4096), /prospective/);
 });

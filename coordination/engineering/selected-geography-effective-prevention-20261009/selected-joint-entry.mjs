@@ -33,6 +33,53 @@ function fresh(destination) {
   try { fs.lstatSync(destination); } catch (error) { if (error.code === 'ENOENT') return; throw error; }
   throw Error('Joint output already exists');
 }
+// Count canonical JSON bytes without constructing the complete serialized graph.
+// Ordering changes no byte count. Only ordinary JSON products are supported.
+function jsonBytes(value, limit) {
+  let total = 1; // valueBytes adds one terminal newline.
+  const add = bytes => { total += bytes; demand(total <= limit, 'Derived output union exceeds admitted reserve before serialization'); };
+  function string(text) {
+    let bytes = 2 + Buffer.byteLength(text);
+    for (let i = 0; i < text.length; i++) {
+      const c = text.charCodeAt(i);
+      if (c === 34 || c === 92) bytes++;
+      else if (c < 32) bytes += [8, 9, 10, 12, 13].includes(c) ? 1 : 5;
+      else if (c >= 0xd800 && c <= 0xdbff && text.charCodeAt(i + 1) >= 0xdc00 && text.charCodeAt(i + 1) <= 0xdfff) i++;
+      else if (c >= 0xd800 && c <= 0xdfff) bytes += 3;
+    }
+    add(bytes);
+  }
+  function visit(item) {
+    if (item === null) return add(4);
+    if (typeof item === 'string') return string(item);
+    if (typeof item === 'boolean') return add(item ? 4 : 5);
+    if (typeof item === 'number') { demand(Number.isFinite(item), 'Nonfinite derived JSON'); return add(String(item).length); }
+    demand(item && typeof item === 'object', 'Non-JSON derived product');
+    if (Array.isArray(item)) {
+      add(2 + Math.max(0, item.length - 1));
+      for (const child of item) visit(child);
+    } else {
+      const names = Object.keys(item); add(2 + Math.max(0, names.length - 1));
+      for (const name of names) { string(name); add(1); visit(item[name]); }
+    }
+  }
+  visit(value); return total;
+}
+export function planDerivedOutput(certificate, facts, baseBytes, limit = FILE) {
+  demand(Number.isSafeInteger(baseBytes) && baseBytes >= 0 && Number.isSafeInteger(limit) && limit > baseBytes,
+    'Invalid prospective derived output allowance');
+  const decodedBytes = jsonBytes(certificate, limit - baseBytes);
+  const placeholder = {path:'derived-certificate.json.gz', bytes:limit, sha256:'0'.repeat(64),
+    decoded_bytes:decodedBytes, decoded_sha256:'0'.repeat(64)};
+  const factsBytes = jsonBytes({...facts, certificate:placeholder}, limit);
+  const publicationBytes = jsonBytes({version:1, complete:true, kind:'derived-selected-checkpoint-candidate-v1',
+    accepted_checkpoint:false, validation_stage:'native-passed-continuous-pending', certificate:placeholder,
+    facts:{path:'derived-facts.json', bytes:limit, sha256:'0'.repeat(64)}}, limit);
+  const encodedLimit = limit - baseBytes - decodedBytes - 2 * factsBytes - publicationBytes;
+  demand(encodedLimit > 0, 'Derived output union exceeds admitted reserve before serialization');
+  return {decodedBytes, encodedLimit};
+}
+
 function executionGuard(repo, trusted) {
   demand(commit(trusted) && fs.realpathSync(repo) === fs.realpathSync(ROOT), 'Joint entry requires its actual trusted checkout');
   demand(process.execArgv.length === 1 && process.execArgv[0] === '--expose-gc'
@@ -70,7 +117,7 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
   const native = await import('../../../scripts/check-effective-geographic-regression.mjs');
   const checkpoint = await import('./selected-checkpoint.mjs');
   const {checkpointContinuousOperands} = await import('./selected-checkpoint-continuous.mjs');
-  const {valueBytes} = await import('./selected-neighbor-prevention.mjs');
+  const {valueBytes, valueSha} = await import('./selected-neighbor-prevention.mjs');
   const startup = native.selectedBootstrap(repo, baseline, candidate, {parentRuntimePath});
   const {beforeReader, afterReader} = startup;
   // The genuine bootstrap binds installed Node/Git/Python once. Add the actual
@@ -105,15 +152,44 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
       operands:{path:'operands.json.gz', bytes:encoded.length, sha256:sha(encoded), decoded_bytes:operands.length, decoded_sha256:sha(operands)},
       facts:{path:'facts.json', bytes:facts.length, sha256:sha(facts)}};
     const publicationBody = valueBytes(publication);
-    demand(operands.length + encoded.length + 2 * facts.length + publicationBody.length < FILE,
-      'Joint continuous complete output exceeds original reserve');
+    // The continuous consumer has already admitted 7 * FILE for the complete
+    // serialized output union. Reauthenticate before retaining the genuine
+    // derived certificate, and keep both output families inside that same cap.
+    // These bytes are a provisional candidate, never a newly minted capability.
+    const genuine = checkpoint.authenticateTransition({transition, budget});
+    const derivedFactsBase = {version:1, kind:'derived-selected-checkpoint-candidate-v1',
+      validation_stage:'native-passed-continuous-pending', accepted_checkpoint:false,
+      executing_commit:trusted, execution_code:code, runtime:startup.identities,
+      baseline_accepted_execution:genuine.baseline.accepted_execution,
+      baseline_commit:baseline, candidate_commit:candidate,
+      baseline_selection:genuine.baseline.selection, candidate_selection:genuine.candidate.selection,
+      candidate_bindings:{ledger_sha256:valueSha(genuine.candidate.ledger), registry_sha256:valueSha(genuine.candidate.registry),
+        patch_sha256:valueSha(genuine.candidate.patch), manifest_sha256:valueSha(genuine.candidate.manifest)},
+      transition_plan:genuine.plan, native_result_sha256:valueSha(nativeReport),
+      continuous_publication:publication, candidate_code_executed:false};
+    const baseBytes = operands.length + encoded.length + 2 * facts.length + publicationBody.length;
+    const archivePlan = planDerivedOutput(genuine.candidate.certificate, derivedFactsBase, baseBytes);
+    const certificate = valueBytes(genuine.candidate.certificate);
+    demand(certificate.length === archivePlan.decodedBytes, 'Derived certificate serialization size drift');
+    const certificateEncoded = gzipSync(certificate, {level:9, mtime:0, maxOutputLength:archivePlan.encodedLimit});
+    const certificatePin = {path:'derived-certificate.json.gz', bytes:certificateEncoded.length,
+      sha256:sha(certificateEncoded), decoded_bytes:certificate.length, decoded_sha256:sha(certificate)};
+    const derivedFacts = valueBytes({...derivedFactsBase, certificate:certificatePin});
+    const derivedPublication = {version:1, complete:true, kind:'derived-selected-checkpoint-candidate-v1',
+      accepted_checkpoint:false, validation_stage:'native-passed-continuous-pending', certificate:certificatePin,
+      facts:{path:'derived-facts.json', bytes:derivedFacts.length, sha256:sha(derivedFacts)}};
+    const derivedPublicationBody = valueBytes(derivedPublication);
+    demand(operands.length + encoded.length + 2 * facts.length + publicationBody.length
+      + certificate.length + certificateEncoded.length + 2 * derivedFacts.length + derivedPublicationBody.length < FILE,
+      'Joint continuous and derived checkpoint complete outputs exceed original reserve');
     checkpoint.authenticateTransition({transition, budget});
     executionGuard(repo, trusted); fresh(destination); fs.mkdirSync(destination);
-    for (const [name, body] of [['operands.json.gz', encoded], ['facts.json', facts], ['publication.json', publicationBody]])
+    for (const [name, body] of [['operands.json.gz', encoded], ['facts.json', facts], ['derived-certificate.json.gz', certificateEncoded],
+      ['derived-facts.json', derivedFacts], ['derived-publication.json', derivedPublicationBody], ['publication.json', publicationBody]])
       fs.writeFileSync(path.join(destination, name), body, {flag:'wx', mode:0o644});
     return result(nativeReport, {version:1, kind:publication.kind,
       status:transition.changedIds.length ? 'selected-operands-complete' : 'no-selected-footprint-change',
-      publication, changed_ids:transition.changedIds, complete_owners:product.complete_owners,
+      publication, derived_checkpoint:derivedPublication, changed_ids:transition.changedIds, complete_owners:product.complete_owners,
       affected_ids:transition.plan.required_ids, candidate_code_executed:false});
   } finally {
     if (state) checkpoint.releaseCheckpoint(state);

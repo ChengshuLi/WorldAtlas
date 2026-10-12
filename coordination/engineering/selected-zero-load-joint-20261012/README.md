@@ -78,3 +78,30 @@ historical complete results, and checks V8 lifecycle call counts. Its temporary
 directory lifetime is retained solely for archival readback. Before execution,
 normal fresh resource admission and the coordinated single heavy window remain
 required; this recipe is not an execution claim.
+
+## Derived checkpoint candidate retention
+
+The joint output also retains the genuine complete candidate certificate with a
+separate `derived-selected-checkpoint-candidate-v1` publication. It is explicitly
+provisional (`native-passed-continuous-pending`, `accepted_checkpoint: false`),
+with baseline accepted execution, actual selectors/commits, current code/runtime,
+transition plan, native report digest and candidate ledger/registry/patch hashes.
+It is not cold acquisition custody and does not mint authority. Independent
+acceptance of the actual Python strict result and operating proof must precede
+any later catalogue admission.
+
+All continuous and derived outputs share the already-admitted 7 × 32 MiB output
+reserve. Before serializing the complete certificate, a bounded JSON byte count
+admits its exact decoded size and the complete facts/publication union; the
+remaining admitted capacity becomes the gzip maximum output length. The final
+union checks both encoded/decoded bodies and metadata copies. A tiny adverse
+control rejects an insufficient union before serialization, including Unicode
+and escape-aware byte-count verification. Actual joint CLI controls verify the
+provisional whole-file publication and its lineage.
+
+The planned single integrated comparison now uses accepted pre-AUS→AUS, matching
+original CI run 38214372428 and its retained genuine artifact under
+`accepted-reference/`. Complete original strict/native results and encoded/decoded
+operand hashes are available. Historical facts/inverse bodies are not available,
+so their equality is not claimed. The proof remains unexecuted until the exact
+shared policy-route correction and final combined profiles pass review.
