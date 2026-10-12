@@ -749,8 +749,23 @@ function physicalProduct(handoff,name,report,acquisitions){
  const matches=handoff.scope.physical_restoration?.restorations?.filter(p=>p.path===name);
  need(matches?.length===1&&/^(components|sources)-\d{3}\.jsonl\.gz$/.test(name),'Missing/ambiguous restored physical product: '+name);
  const r=matches[0];
- const sources=handoff.scope.consumed_inputs.filter(p=>p.bytes===r.whole_original_bytes&&p.sha256===r.whole_original_sha256);
- need(sources.length>0,'No consumed whole physical product pin: '+name);
+ const reused=handoff.scope.reused_whole_product_inputs===undefined?[]:handoff.scope.reused_whole_product_inputs;
+ need(Array.isArray(reused)&&reused.every(p=>p?.whole_body_consumed===false),'Malformed reused whole physical product custody');
+ // The unchanged handoff retains its honest prior-consumption annotations.
+ // These ordinary pins request future acquisition of the actual whole bodies.
+ const declared=[...handoff.scope.consumed_inputs,...reused];
+ const paths=new Set(declared.filter(p=>p.bytes===r.whole_original_bytes&&p.sha256===r.whole_original_sha256).map(p=>p.path));
+ const candidates=declared.filter(p=>paths.has(p.path));
+ need(candidates.every(p=>p.blob===undefined||p.git_blob_oid===undefined||p.blob===p.git_blob_oid),
+ 'Conflicting physical product blob aliases: '+name);
+ const sources=uniquePins(candidates.map(p=>({...identity(p),
+  ...(p.uncompressed_bytes===undefined?{}:{uncompressed_bytes:p.uncompressed_bytes}),
+  ...(p.uncompressed_sha256===undefined?{}:{uncompressed_sha256:p.uncompressed_sha256})})));
+ need(sources.length>0,'No exact whole physical product pin: '+name);
+ sources.forEach(pinCosts);
+ need(sources.every(p=>(p.uncompressed_bytes===undefined||p.uncompressed_bytes===r.decoded_bytes)
+  &&(p.uncompressed_sha256===undefined||p.uncompressed_sha256===r.decoded_sha256)),
+ 'Conflicting decoded physical product identity: '+name);
  const source=operatorPin(sources[0]);pinCosts(source);
  const destination='.cache/additive-native-gap-repair/delivery/'+source.sha256+'/'+name;
  acquisitions.push({source,destination,role:'physical-product'});
@@ -760,9 +775,22 @@ function physicalProduct(handoff,name,report,acquisitions){
 function adminProducts(handoff,pool){
  const records=handoff.scope.consumed_source_bindings;need(Array.isArray(records)&&records.length,'Missing consumed administrative source bindings');
  const result=[];
- for(const record of records){need(Array.isArray(record.catalogue_record?.parts)&&record.catalogue_record.parts.length,'Incomplete administrative product parts');
-  for(const part of record.catalogue_record.parts){const found=pool.filter(p=>p.path===part.path&&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(k=>p[k]===part[k]));
-   need(found.length&&found.every(p=>equal(p,found[0])),'Missing/ambiguous exact administrative input pin: '+part.path);result.push(found[0]);}}
+ for(const record of records){
+  need(typeof record?.source_id==='string'&&record.source_id.length,'Missing administrative source identity');
+  const custody=record.original_source_custody;
+  need(custody===undefined||(custody&&typeof custody==='object'&&!Array.isArray(custody)
+   &&custody.source_id===record.source_id&&custody.catalogue_record!==undefined),'Conflicting administrative source custody identity');
+  const catalogues=[record.catalogue_record,custody?.catalogue_record].filter(value=>value!==undefined);
+  need(catalogues.length&&catalogues.every(value=>value&&typeof value==='object'&&!Array.isArray(value)
+   &&Array.isArray(value.parts)&&value.parts.length),'Incomplete administrative product parts');
+  need(catalogues.every(value=>equal(value,catalogues[0])),'Conflicting administrative catalogue aliases');
+  const catalogue=catalogues[0];
+  need((catalogue.key===undefined||catalogue.key===record.source_id)
+   &&(record.whole_bytes===undefined||record.whole_bytes===catalogue.original_bytes)
+   &&(record.whole_sha256===undefined||record.whole_sha256===catalogue.original_sha256),
+  'Conflicting administrative catalogue source identity');
+  for(const part of catalogue.parts){const found=pool.filter(p=>p.path===part?.path&&['bytes','sha256','uncompressed_bytes','uncompressed_sha256'].every(k=>p[k]===part[k]));
+   need(found.length&&found.every(p=>equal(p,found[0])),'Missing/ambiguous exact administrative input pin: '+part?.path);result.push(found[0]);}}
  return uniquePins(result);
 }
 const sourceKeys=['cases_path','outcomes_path','payloads_path','simplified_comparison_path','generalized_comparison_path','remainders_path'];
