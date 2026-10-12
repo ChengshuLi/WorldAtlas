@@ -587,8 +587,22 @@ def selected_continuous(repo, baseline, candidate, detector):
         # complete encoded+decoded operands and retained output/code allowance.
         runtime_bytes = pathlib.Path(sys.executable).resolve().stat().st_size
         code_bytes = sum((repo / name).stat().st_size for name in TRUSTED_PATHS)
-        if total + runtime_bytes + code_bytes + 2 * MAX_BYTES > 256 * 1024 * 1024:
-            raise ValueError('Complete selected polygon consumer phase exceeds prospective cap')
+        # Re-observe current resources after the Node operand child has exited.
+        # Reuse the trusted reader's OS/cgroup-aware admission instead of an
+        # unrelated fixed historical phase ceiling. No candidate code is loaded.
+        allowance_raw = subprocess.check_output([
+            executable, '--input-type=module', '-e',
+            'const {processingAllowance}=await import(process.argv[1]);process.stdout.write(JSON.stringify(processingAllowance()));',
+            (repo / 'scripts/check-effective-geographic-regression.mjs').resolve().as_uri()],
+            env=env, timeout=30)
+        if len(allowance_raw) > 4096:
+            raise ValueError('Oversized current reader allowance')
+        allowance = json.loads(allowance_raw)
+        phase_limit = allowance.get('phaseBytes')
+        if type(phase_limit) is not int or not 0 < phase_limit <= 9007199254740991:
+            raise ValueError('Invalid current polygon consumer allowance')
+        if total + runtime_bytes + code_bytes + 2 * MAX_BYTES > phase_limit:
+            raise ValueError('Complete selected polygon consumer phase exceeds current allowance')
         bodies = []
         for name, pin in zip(names, pins):
             body = (destination / name).read_bytes()

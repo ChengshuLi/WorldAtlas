@@ -115,7 +115,7 @@ test('full ledger comparison retains zero-cell primitives and rejects coherent o
 });
 
 test('aggregate admission rejects before any actual body read',()=>{
- const reader=new ImmutableReader('.', '1'.repeat(40),{runtimeBytes:256*1024*1024-100,metadataBytes:0,outputBytes:0});let bodies=0;
+ const reader=new ImmutableReader('.', '1'.repeat(40),{runtimeBytes:256*1024*1024-100,metadataBytes:0,outputBytes:0,allowance:{phaseBytes:256*1024*1024,rssBytes:1024**3}});let bodies=0;
  reader.descriptor=()=>({commit:'1'.repeat(40),path:'input',bytes:101});reader.git=()=>{bodies++;return Buffer.alloc(101);};
  assert.throws(()=>reader.read('input'),/prospective cap/);assert.equal(bodies,0);
  assert.throws(()=>reader.admit({commit:'1'.repeat(40),path:'input',bytes:1},32*1024*1024+1),/decoded member/);assert.equal(bodies,0);
@@ -124,7 +124,7 @@ test('aggregate admission rejects before any actual body read',()=>{
 
 test('complete bootstrap admission precedes runtime opens and trusted code reads',()=>{
  const stat=fs.statSync,open=fs.openSync,read=fs.readFileSync;let opens=0,reads=0;const node=fs.realpathSync(process.execPath);
- try{fs.statSync=(name,...args)=>{const value=stat(name,...args);return name===node?new Proxy(value,{get:(target,key)=>key==='size'?256*1024*1024-100:typeof target[key]==='function'?target[key].bind(target):target[key]}):value;};fs.openSync=(...args)=>{opens++;return open(...args);};fs.readFileSync=(...args)=>{reads++;return read(...args);};
+ try{fs.statSync=(name,...args)=>{const value=stat(name,...args);return name===node?new Proxy(value,{get:(target,key)=>key==='size'?Number.MAX_SAFE_INTEGER:typeof target[key]==='function'?target[key].bind(target):target[key]}):value;};fs.openSync=(...args)=>{opens++;return open(...args);};fs.readFileSync=(...args)=>{reads++;return read(...args);};
   assert.throws(()=>inspectSelected('.', '1'.repeat(40),'1'.repeat(40)),/bootstrap exceeds prospective phase/);assert.equal(opens,0);assert.equal(reads,0);
  }finally{fs.statSync=stat;fs.openSync=open;fs.readFileSync=read;}
 });
@@ -155,7 +155,7 @@ test('manifest-bound immutable native transport restores full cross-fragment ori
   assert.throws(()=>new NativeAssetImage(new ImmutableReader(f.repo,version),{...manifest,native_asset_transport:{...manifest.native_asset_transport,logical_assets:1}},'native/manifest.json'),/roster/);
   const changed={...index,files:[{...members[0],sha256:'0'.repeat(64)},members[1]]};const raw=f.write('bank/index.json',changed),coherent=f.commit();
   assert.throws(()=>new NativeAssetImage(new ImmutableReader(f.repo,coherent),{...manifest,native_asset_transport:{...manifest.native_asset_transport,index:{path:'bank/index.json',bytes:raw.length,sha256:sha(raw)}}},'native/manifest.json'),/Foreign\/rebound/);
-  reader.phase();reader.used=256*1024*1024;let reads=0;const git=reader.git.bind(reader);reader.git=(...args)=>{if(args[0]==='cat-file'&&args[1]==='blob')reads++;return git(...args);};
+  reader.phase();reader.used=reader.phaseLimit;let reads=0;const git=reader.git.bind(reader);reader.git=(...args)=>{if(args[0]==='cat-file'&&args[1]==='blob')reads++;return git(...args);};
   assert.throws(()=>image.logical('native/'+members[0].path,members[0]),/prospective cap/);assert.equal(reads,0,'whole containing fragments must be admitted before any body read');
  }finally{f.cleanup();}
 });
@@ -275,7 +275,7 @@ test('whole original rule custody derives actual issued preimage and refuses reb
   const result=readOriginalRuleAuthority(open(),pins);assert.equal(result.rule_sha256,valueSha(preimage));assert.equal(result.ledger.rows[0].native_cells,0);
   const wrong=structuredClone(pins);wrong.source_request.sha256='0'.repeat(64);assert.throws(()=>readOriginalRuleAuthority(open(),wrong),/Whole immutable input differs/);
   f.write('native/facts.json',{...native,executed_code:[]});const rebound=f.commit();assert.throws(()=>readOriginalRuleAuthority(new ImmutableReader(f.repo,rebound),{...pins,native_facts:pin('native/facts.json',rebound)}),/executed code differs/);
-  const limited=new ImmutableReader(f.repo,head,{runtimeBytes:268435455,metadataBytes:0,outputBytes:0});let opens=0;const git=limited.git.bind(limited);limited.git=(...args)=>{if(args[0]==='cat-file'&&args[1]==='blob')opens++;return git(...args);};assert.throws(()=>readOriginalRuleAuthority(limited,pins),/complete phase/i);assert.equal(opens,0);
+  const limited=new ImmutableReader(f.repo,head,{runtimeBytes:268435455,metadataBytes:0,outputBytes:0,allowance:{phaseBytes:256*1024*1024,rssBytes:1024**3}});let opens=0;const git=limited.git.bind(limited);limited.git=(...args)=>{if(args[0]==='cat-file'&&args[1]==='blob')opens++;return git(...args);};assert.throws(()=>readOriginalRuleAuthority(limited,pins),/complete phase/i);assert.equal(opens,0);
   const missing={...pins};delete missing.source_request;assert.throws(()=>readOriginalRuleAuthority(open(),missing),/exact original rule body roster/);
  }finally{f.cleanup();}
 });
@@ -396,7 +396,7 @@ test('registered 533-role authority derives complete custody without raising act
   const codePin=rows.find(p=>p.copy==='code.json');fs.unlinkSync(path.join(f.repo,codePin.path));head=f.commit();assert.throws(()=>readArtifactConsumption(new ImmutableReader(f.repo,head),selection,manifest),/whole ordinary Git input/);f.write(codePin.path,read('code.json'));head=f.commit();
   // All complete source metadata is prospectively charged before code or
   // qualification body reads; distinguish declarations from actual opens.
-  const limited=new ImmutableReader(f.repo,head);const original=limited.git.bind(limited);let sourceOpens=0;
+  const limited=new ImmutableReader(f.repo,head,{allowance:{phaseBytes:256*1024*1024,rssBytes:1024*1024*1024}});const original=limited.git.bind(limited);let sourceOpens=0;
   limited.git=(...args)=>{if(args[0]==='cat-file'&&args[1]==='blob'&&[codePin.git_blob_oid,rows.find(p=>p.copy==='qualification.json.gz').git_blob_oid].includes(args[2]))sourceOpens++;return original(...args);};
   limited.used=256*1024*1024-5*1024*1024;
   assert.throws(()=>readArtifactConsumption(limited,selection,manifest),/prospective cap/);assert.equal(sourceOpens,0);
@@ -469,7 +469,7 @@ for(const [title,relative]of [['genuine Cloudflare authority retains complete 53
   const codePin=rows.find(p=>p.copy==='code.json');fs.unlinkSync(path.join(f.repo,codePin.path));head=f.commit();assert.throws(()=>readArtifactConsumption(new ImmutableReader(f.repo,head),selection,manifest),/whole ordinary Git input/);f.write(codePin.path,read('code.json'));head=f.commit();
   // All complete source metadata is prospectively charged before code or
   // qualification body reads; distinguish declarations from actual opens.
-  const limited=new ImmutableReader(f.repo,head);const original=limited.git.bind(limited);let sourceOpens=0;
+  const limited=new ImmutableReader(f.repo,head,{allowance:{phaseBytes:256*1024*1024,rssBytes:1024*1024*1024}});const original=limited.git.bind(limited);let sourceOpens=0;
   limited.git=(...args)=>{if(args[0]==='cat-file'&&args[1]==='blob'&&[codePin.git_blob_oid,rows.find(p=>p.copy==='qualification.json.gz').git_blob_oid].includes(args[2]))sourceOpens++;return original(...args);};
   limited.used=256*1024*1024-5*1024*1024;
   assert.throws(()=>readArtifactConsumption(limited,selection,manifest),/prospective cap/);assert.equal(sourceOpens,0);
@@ -520,7 +520,7 @@ test('complete side runtime and carried projection admission refuses before whol
   const reader=new ImmutableReader(f.repo,version),snapshot=loadSelection(reader);reader.phase();const table=loadNativeRowTable(snapshot);
   let opens=0;const actual=reader.git.bind(reader);reader.git=(...args)=>{if(args[0]==='cat-file'&&args[1]==='blob')opens++;return actual(...args);};
   assert.throws(()=>acquireNativeRows(snapshot,table,[0,1],{carry:{bytes:256*1024*1024}}),/authenticated native carry/);assert.equal(opens,0);
-  reader.runtimeBytes=256*1024*1024-1;
+  reader.runtimeBytes=reader.phaseLimit-1;
   assert.throws(()=>acquireNativeRows(snapshot,table,[0,1]),/prospective cap/);assert.equal(opens,0);
  }finally{f.cleanup();}
 });
@@ -532,12 +532,12 @@ test('real complete side acquisition fits bounded carry where simultaneous whole
   const reader=new ImmutableReader(f.repo,version),snapshot=loadSelection(reader);reader.phase();const table=loadNativeRowTable(snapshot);
   const original=acquireNativeRows(snapshot,table,[0,1]);
   const sideBytes=original.custody.phase_bytes-(reader.runtimeBytes+reader.executionBytes+reader.metadataBytes+reader.outputBytes);
-  reader.runtimeBytes=256*1024*1024-reader.executionBytes-reader.metadataBytes-reader.outputBytes-sideBytes-original.bytes-16;
+  reader.runtimeBytes=reader.phaseLimit-reader.executionBytes-reader.metadataBytes-reader.outputBytes-sideBytes-original.bytes-16;
   const base=reader.runtimeBytes+reader.executionBytes+reader.metadataBytes+reader.outputBytes;
-  assert.ok(base+2*sideBytes>256*1024*1024);
+  assert.ok(base+2*sideBytes>reader.phaseLimit);
   const before=acquireNativeRows(snapshot,table,[0,1]);const after=acquireNativeRows(snapshot,table,[0,1],{carry:before});
   validateNativeRowCarry(before,snapshot,[0,1]);validateNativeRowCarry(after,snapshot,[0,1]);assert.deepEqual([...before.words],[...after.words]);
-  assert.ok(after.custody.phase_bytes<=256*1024*1024);
+  assert.ok(after.custody.phase_bytes<=reader.phaseLimit);
   reader.runtimeBytes+=32;
   let opens=0;const actual=reader.git.bind(reader);reader.git=(...args)=>{if(args[0]==='cat-file'&&args[1]==='blob')opens++;return actual(...args);};
   assert.throws(()=>acquireNativeRows(snapshot,table,[0,1],{carry:before}),/prospective cap/);assert.equal(opens,0);
@@ -563,10 +563,10 @@ test('one complete row spanning two whole native members uses genuine bounded me
   const reader=new ImmutableReader(f.repo,version),snapshot=loadSelection(reader);reader.phase();const table=loadNativeRowTable(snapshot);
   const initial=acquireNativeRows(snapshot,table,[0]);assert.equal(initial.custody.member_phases.length,2);assert.deepEqual([...initial.words],[0,1,1,1,2,2]);
   const sideCost=initial.custody.phase_bytes-reader.runtimeBytes-reader.executionBytes-reader.metadataBytes-reader.outputBytes;
-  reader.runtimeBytes=256*1024*1024-reader.executionBytes-reader.metadataBytes-reader.outputBytes-sideCost-8;
+  reader.runtimeBytes=reader.phaseLimit-reader.executionBytes-reader.metadataBytes-reader.outputBytes-sideCost-8;
   let memberReads=0;const actual=reader.read.bind(reader);reader.read=(name,options)=>{if(name.includes('/runs-'))memberReads++;return actual(name,options);};
   const complete=acquireNativeRows(snapshot,table,[0]);assert.equal(memberReads,2);assert.equal(complete.custody.member_phases.length,2);validateNativeRowCarry(complete,snapshot,[0]);assert.deepEqual([...complete.words],[0,1,1,1,2,2]);
-  for(const phase of complete.custody.member_phases)assert.ok(phase.phase_bytes<=256*1024*1024);
+  for(const phase of complete.custody.member_phases)assert.ok(phase.phase_bytes<=reader.phaseLimit);
  }finally{f.cleanup();}
 });
 

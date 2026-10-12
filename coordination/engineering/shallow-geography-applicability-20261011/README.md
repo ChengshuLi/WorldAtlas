@@ -25,3 +25,9 @@ The observed interval from redirected output-file creation immediately before pr
 Reproduction uses an empty isolated bare Git fixture, `fetch --depth=1 --filter=blob:none` of the exact baseline, then `fetch --filter=blob:none` of the exact candidate, without changing the shallow file. Run the committed collector with that repository and the two immutable commits. The replay had a120-second process limit and the initial diagnostic harness a128MiB disk bound; existing collector transport and identity guards remain unchanged. Do not use a warm shared object store to claim a cold measurement.
 
 Required author CI, exact-head review and current combined-tree integration are separate merge gates. This PR will not be queued ahead of an already-frozen priority delivery without coordination. No source approval, scientific qualification, geographic publication or consumer validation is asserted by applicability.
+
+## Accepted resource-baseline refresh
+
+On2026-10-11 (America/Los_Angeles), refreshed ancestry onto accepted #1751 main7eb3293b739631f4e69d7e676c7a77ae7c22c107 after original author run38178266635 passed all non-geography checks but failed the known old native phase reserve. The automatic merge was conflict-free. All three newly audited reader profiles and the accepted resource/custody changes remain intact; this repair's shallow ordering and bounded diagnostics are unchanged. Original cold measurements above retain their original executed-code pins and are not relabeled as new executions. The evidence baseline descriptors now bind7eb. Fresh focused controls and full author/current-tree checks apply to the refreshed implementation.
+
+Fresh combined control run passed all17 Node entries (16 collector cases plus the wrapper entry authenticating all52 Python controls), zero skipped,81.221s. The actual output is retained as refreshed-controls.log.

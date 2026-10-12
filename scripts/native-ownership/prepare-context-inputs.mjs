@@ -6,9 +6,11 @@ import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync} from 'node:zlib';
 import {loadNativeSourceInputs} from './native-only-inputs.mjs';
 import {compactContextInputs} from './compact-context-inputs.mjs';
-import {committedPreparationFiles,requirePlainExecution,candidateBudget} from './native-preparation-guards.mjs';
+import {committedPreparationFiles,requirePlainExecution,candidateBudget,preparationAllowance} from './native-preparation-guards.mjs';
 requirePlainExecution();
-const [baseline,vintage]=process.argv.slice(2);
+const [baseline,vintage,...resourceArgs]=process.argv.slice(2),requested={};
+for(let i=0;i<resourceArgs.length;i+=2){const k=resourceArgs[i];if(!['--phase-bytes','--rss-bytes'].includes(k)||resourceArgs[i+1]===undefined||requested[k]!==undefined)throw Error('Explicit finite preparation resource arguments required');requested[k]=Number(resourceArgs[i+1]);}
+const allowance=preparationAllowance({phaseBytes:requested['--phase-bytes'],rssBytes:requested['--rss-bytes']});
 if(!/^[a-f0-9]{40}$/.test(baseline??'')||!/^[a-zA-Z0-9_-]+$/.test(vintage??''))throw Error('Use IMMUTABLE-BASELINE FRESH-VINTAGE');
 const repo=fs.realpathSync('.'),head=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
 const code=committedPreparationFiles(repo,head,['package.json',
@@ -26,7 +28,7 @@ const read=name=>{
 const world=read('data/world-index.json'),features=[];
 for(const part of world.parts)features.push(...read('data/'+part).features);
 const compact=compactContextInputs(features,inputs.bounds,inputs.manifest.footprints_sha256);
-const admission=candidateBudget([...inputs.sourceFiles,...code],{reserveBytes:131072,reserveDescriptors:16});
+const admission=candidateBudget([...inputs.sourceFiles,...code],{reserveBytes:131072,reserveDescriptors:16,allowance});
 const directory=path.join('.cache/native-context-inputs',vintage);
 fs.mkdirSync('.cache/native-context-inputs',{recursive:true});
 if(fs.realpathSync('.cache/native-context-inputs')!==path.join(repo,'.cache/native-context-inputs'))throw Error('Ordinary owned output parent required');

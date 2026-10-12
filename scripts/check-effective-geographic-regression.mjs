@@ -8,7 +8,7 @@ import {fileURLToPath} from 'node:url';
 import {unshuffleOwnershipBytes} from '../src/ownership-codec.js';
 import {readSelectedAdditive,selectedAdditiveRows,compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
-const FILE=32*1024*1024, PHASE=256*1024*1024, OUTPUT=4*1024*1024;
+const FILE=32*1024*1024, OUTPUT=4*1024*1024;
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const demand=(v,m)=>{if(!v)throw Error(m);};
 const hash=v=>typeof v==='string'&&/^[a-f0-9]{64}$/.test(v);
@@ -50,7 +50,7 @@ export function selectedGeometrySourceAlias(snapshot) {
 function runtimeIdentity(executable=process.execPath) {
   const executablePath=fs.realpathSync(executable);
   if(installedRuntimes.has(executablePath))return installedRuntimes.get(executablePath);
-  const stat=fs.statSync(executablePath);demand(stat.isFile()&&stat.size<PHASE,'Installed execution runtime exceeds phase');
+  const stat=fs.statSync(executablePath);demand(stat.isFile()&&Number.isSafeInteger(stat.size)&&stat.size>0,'Invalid installed execution runtime');
   const fd=fs.openSync(executablePath,'r'),hasher=createHash('sha256'),buffer=Buffer.alloc(1024*1024);let bytes=0;
   try{for(let n;(n=fs.readSync(fd,buffer,0,buffer.length,null));){hasher.update(buffer.subarray(0,n));bytes+=n;}const end=fs.fstatSync(fd);demand(end.size===stat.size&&end.ino===stat.ino&&bytes===stat.size,'Installed runtime changed during complete read');}finally{fs.closeSync(fd);}
   const runtime={path:executablePath,bytes,mode:stat.mode&0o777,sha256:hasher.digest('hex'),version:executable===process.execPath?process.version:null};installedRuntimes.set(executablePath,runtime);return runtime;
@@ -58,12 +58,28 @@ function runtimeIdentity(executable=process.execPath) {
 const NS='coordination/engineering/eastern-two-gap-repair-native-20261007/canonical-products';
 const STOCK_INDEX='b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7876';
 
+// The allowance belongs to this execution, never to a historical certificate.
+// Availability includes the runtime's exposed OS/cgroup constraints. Reservations
+// are coordinator supplied; admission is cooperative, not a kernel memory quota.
+export function processingAllowance({availableBytes=process.availableMemory(), concurrentReservedBytes=Number(process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES??0), phaseBytes, rssBytes}={}) {
+  demand([availableBytes,concurrentReservedBytes].every(n=>Number.isSafeInteger(n)&&n>=0),'Invalid current resource observations');
+  const usable=availableBytes-concurrentReservedBytes-2*1024**3-768*1024**2;
+  demand(usable>0,'Insufficient current memory after parent/concurrent headroom');
+  rssBytes??=Math.floor(usable/2);
+  phaseBytes??=rssBytes;
+  demand([phaseBytes,rssBytes].every(n=>Number.isSafeInteger(n)&&n>0)&&rssBytes<=usable&&phaseBytes<=usable,'Requested processing allowance exceeds current memory admission');
+  return Object.freeze({phaseBytes,rssBytes});
+}
+
 export class ImmutableReader {
-  constructor(repo,version,{runtimeBytes=fs.statSync(process.execPath).size,metadataBytes=8*1024*1024,executionBytes=0,outputBytes=OUTPUT,gitExecutable='git',budget}={}) {
+  constructor(repo,version,{runtimeBytes=fs.statSync(process.execPath).size,metadataBytes=8*1024*1024,executionBytes=0,outputBytes=OUTPUT,gitExecutable='git',budget,allowance}={}) {
     demand(commit(version),'Require immutable input commit');
     this.repo=repo;this.version=version;this.runtimeBytes=runtimeBytes;this.metadataBytes=metadataBytes;
-    this.executionBytes=executionBytes;this.outputBytes=outputBytes;this.gitExecutable=gitExecutable;this.inventory=new Map();this.budget=budget??{};if(!budget)this.phase();
+    this.allowance=allowance??budget?.allowance??processingAllowance();demand(Number.isSafeInteger(this.allowance.phaseBytes)&&this.allowance.phaseBytes>0&&Number.isSafeInteger(this.allowance.rssBytes)&&this.allowance.rssBytes>0,'Invalid current reader allowance');
+    this.executionBytes=executionBytes;this.outputBytes=outputBytes;this.gitExecutable=gitExecutable;this.inventory=new Map();this.budget=budget??{allowance:this.allowance};demand(this.budget.allowance===this.allowance,'Shared readers require the same current allowance');if(!budget)this.phase();
   }
+  get phaseLimit(){return this.allowance.phaseBytes;}
+  checkMemory(){demand(process.memoryUsage().rss<this.allowance.rssBytes,'Current reader RSS exceeds admitted process allowance');}
   get used(){return this.budget.used;} set used(value){this.budget.used=value;}
   get charged(){return this.budget.charged;} set charged(value){this.budget.charged=value;}
   git(...args){return execFileSync(this.gitExecutable,['-c','core.hooksPath=/dev/null','-C',this.repo,...args],{maxBuffer:FILE+1,stdio:['ignore','pipe','pipe']});}
@@ -78,12 +94,13 @@ export class ImmutableReader {
     if(previous){demand(previous.git_blob_oid===blob&&previous.bytes===bytes&&previous.mode===mode,'Immutable descriptor drift');return previous;}
     this.inventory.set(key,pin);return pin;
   }
-  phase(){this.used=this.runtimeBytes+this.executionBytes+this.metadataBytes+this.outputBytes;this.charged=new Map();demand(this.used<PHASE,'Installed runtime/metadata exceeds complete phase');}
+  phase(){this.checkMemory();this.used=this.runtimeBytes+this.executionBytes+this.metadataBytes+this.outputBytes;this.charged=new Map();demand(this.used<this.phaseLimit,'Installed runtime/metadata exceeds complete phase');}
   admit(pin,decoded=0) {
+    this.checkMemory();
     demand(Number.isSafeInteger(decoded)&&decoded>=0&&decoded<=FILE,'Whole decoded member exceeds ordinary cap');
     const key=pin.commit+':'+pin.path,prior=this.charged.get(key);
     demand(!prior||prior===pin.bytes+decoded,'Ambiguous phase input accounting');
-    if(!prior){demand(this.charged.size<512&&this.used+pin.bytes+decoded<=PHASE,'Complete phase exceeds prospective cap');this.charged.set(key,pin.bytes+decoded);this.used+=pin.bytes+decoded;}
+    if(!prior){demand(this.charged.size<512,'Complete phase descriptor limit exceeded');if(!(this.used+pin.bytes+decoded<=this.phaseLimit))throw Error('Complete phase exceeds prospective cap: '+JSON.stringify({used:this.used,encoded_bytes:pin.bytes,decoded_bytes:decoded,limit:this.phaseLimit,descriptors:this.charged.size}));this.charged.set(key,pin.bytes+decoded);this.used+=pin.bytes+decoded;}
   }
   read(name,{version=this.version,expected,decoded=0}={}) {
     const pin=this.descriptor(name,version);this.admit(pin,decoded);
@@ -116,7 +133,7 @@ class StockImage {
     const containing=this.index.parts.filter(p=>p.offset<pin.offset+pin.bytes&&pin.offset<p.offset+p.decoded_bytes);
     const descriptors=containing.map(p=>({p,d:this.reader.descriptor(NS+'/'+p.path)}));
     for(const {p,d}of descriptors)this.reader.admit(d,p.decoded_bytes);
-    demand(pin.bytes<=FILE&&this.reader.used+pin.bytes<=PHASE,'Complete member reconstruction phase exceeds cap');
+    demand(pin.bytes<=FILE&&this.reader.used+pin.bytes<=this.reader.phaseLimit,'Complete member reconstruction phase exceeds cap');
     // Reconstructed logical member is a real decoded consumer, charged separately.
     this.reader.used+=pin.bytes;
     const chunks=[];let bytes=0;
@@ -161,7 +178,7 @@ export class NativeAssetImage {
     const containing=this.index.parts.filter(p=>p.offset<member.offset+member.bytes&&member.offset<p.offset+p.decoded_bytes);
     const descriptors=containing.map(p=>({p,d:this.reader.descriptor(path.posix.join(this.directory,p.path))}));
     for(const {p,d}of descriptors)this.reader.admit(d,p.decoded_bytes);
-    demand(member.bytes<=FILE&&this.reader.used+member.bytes<=PHASE,'Native complete member reconstruction exceeds phase');this.reader.used+=member.bytes;
+    demand(member.bytes<=FILE&&this.reader.used+member.bytes<=this.reader.phaseLimit,'Native complete member reconstruction exceeds phase');this.reader.used+=member.bytes;
     const chunks=[];let bytes=0;for(const {p}of descriptors){const encoded=this.reader.read(path.posix.join(this.directory,p.path),{expected:p.sha256,decoded:p.decoded_bytes});demand(encoded.length===p.bytes&&encoded.readUInt32LE(encoded.length-4)===p.decoded_bytes,'Native fragment declared decoded size differs before inflate');
       const raw=gunzipSync(encoded,{maxOutputLength:p.decoded_bytes});demand(raw.length===p.decoded_bytes&&sha(raw)===p.decoded_sha256,'Whole native fragment decoded body differs');
       const start=Math.max(member.offset,p.offset),end=Math.min(member.offset+member.bytes,p.offset+raw.length);chunks.push(raw.subarray(start-p.offset,end-p.offset));bytes+=end-start;
@@ -476,7 +493,7 @@ function asset(snapshot,pin) {
   const {reader,selection}=snapshot,name=path.posix.join(path.posix.dirname(selection.manifest_path),pin.path);
   const exists=reader.git('ls-tree','-z',reader.version,'--',name).length;
   const decodedReserve=pin.decoded_bytes*(exists?2:3);
-  demand(reader.used+decodedReserve<=PHASE,'Complete shuffled/canonical native representations exceed cap');reader.used+=decodedReserve;
+  demand(reader.used+decodedReserve<=reader.phaseLimit,'Complete shuffled/canonical native representations exceed cap');reader.used+=decodedReserve;
   let raw;
   if(exists)raw=reader.read(name,{expected:pin.sha256,decoded:pin.decoded_bytes});
   else {
@@ -504,6 +521,7 @@ export function loadNativeRowTable(snapshot) {
   const table=asset(snapshot,pins[0]);nativeTables.set(table,{snapshot,sha256:sha(Buffer.from(table.buffer,table.byteOffset,table.byteLength))});return table;
 }
 function sidePlan(snapshot,table,rows) {
+  const reader=snapshot.reader;
   const tableProof=nativeTables.get(table);demand(selectedSnapshots.has(snapshot)&&tableProof?.snapshot===snapshot&&sha(Buffer.from(table.buffer,table.byteOffset,table.byteLength))===tableProof.sha256,'Require authenticated unchanged selected row table');
   demand(rows.length>0&&rows.every((y,i)=>Number.isSafeInteger(y)&&y>=0&&y<snapshot.manifest.size&&(!i||rows[i-1]<y)),'Missing/duplicate/foreign planned native row');
   const pins=[...new Map(rows.flatMap(y=>nativeParts(snapshot,table,y)).map(p=>[p.path,p])).values()];
@@ -530,7 +548,7 @@ function sidePlan(snapshot,table,rows) {
   const intervals=rows.reduce((n,y)=>n+table[y*2+1],0);
   demand(Number.isSafeInteger(intervals)&&intervals>=0,'Invalid complete projected interval count');
   const completeInputs=list=>list.map(p=>({...p.pin,sha256:'0'.repeat(64),whole_body_consumed:true}));
-  const custodyBytes=2*Buffer.byteLength(JSON.stringify({selection:snapshot.selection.sha256,rows,whole_parts:pins,whole_inputs:completeInputs([...inputs.values()]),member_phases:members.map(m=>({part:m.pin.path,whole_inputs:completeInputs(m.inputs),phase_bytes:PHASE})),phase_bytes:PHASE,planned_phase_bytes:PHASE}));
+  const custodyBytes=2*Buffer.byteLength(JSON.stringify({selection:snapshot.selection.sha256,rows,whole_parts:pins,whole_inputs:completeInputs([...inputs.values()]),member_phases:members.map(m=>({part:m.pin.path,whole_inputs:completeInputs(m.inputs),phase_bytes:reader.phaseLimit})),phase_bytes:reader.phaseLimit,planned_phase_bytes:reader.phaseLimit}));
   const projectionBytes=intervals*12+rows.length*12+4+custodyBytes+512;
   return {rows,pins,inputs:[...inputs.values()],members,intervals,projectionBytes,custodyBytes};
 }
@@ -538,7 +556,7 @@ function sideAdmission(snapshot,plan,carriedBytes) {
   const reader=snapshot.reader;
   demand(Number.isSafeInteger(carriedBytes)&&carriedBytes>=0,'Missing complete native carried-state admission');
   const bytes=reader.runtimeBytes+reader.executionBytes+reader.metadataBytes+reader.outputBytes+carriedBytes+plan.projectionBytes+Math.max(0,...plan.members.map(m=>m.buffers+m.inputs.reduce((n,p)=>n+p.pin.bytes+p.decoded,0))); 
-  demand(plan.inputs.length<=512&&bytes<=PHASE,'Complete native side/carry phase exceeds prospective cap');return bytes;
+  demand(plan.inputs.length<=512&&bytes<=reader.phaseLimit,'Complete native side/carry phase exceeds prospective cap');return bytes;
 }
 export function acquireNativeRows(snapshot,table,rows,options={}) {
   demand(Object.keys(options).every(k=>k==='carry'),'Undeclared native carried state');
@@ -601,6 +619,7 @@ export function compareIntervals(before,after,{row,ownersBefore,ownersAfter}) {
 }
 
 export function selectedBootstrap(repo,baseline,candidate,{parentRuntimePath}={}) {
+  const allowance=processingAllowance();
   const runtimePaths=[fs.realpathSync(process.execPath),...(parentRuntimePath?[fs.realpathSync(parentRuntimePath)]:[])];
   const codeRoot=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
   const codePaths=['scripts/run-geographic-check.py','scripts/check-geographic-regression.py','scripts/check-effective-geographic-regression.mjs','src/ownership-codec.js','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt','coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs'];
@@ -609,13 +628,13 @@ export function selectedBootstrap(repo,baseline,candidate,{parentRuntimePath}={}
   const launchGit=(process.env.PATH??'').split(path.delimiter).map(p=>path.join(p,'git')).find(p=>{try{return fs.statSync(p).isFile();}catch{return false;}});
   demand(launchGit,'Missing installed Git');runtimePaths.push(fs.realpathSync(launchGit));
   const admittedRuntime=()=>[...new Set(runtimePaths)].reduce((n,p)=>{const stat=fs.statSync(p);demand(stat.isFile()&&stat.size>0,'Nonordinary installed execution runtime');return n+stat.size;},0);
-  demand(admittedRuntime()+executionBytes+8*1024*1024+OUTPUT<PHASE,'Complete bootstrap exceeds prospective phase before runtime/code opens');
+  demand(admittedRuntime()+executionBytes+8*1024*1024+OUTPUT<allowance.phaseBytes,'Complete bootstrap exceeds prospective phase before runtime/code opens');
   // Resolve the full Git implementation (including macOS command-line shim)
   // only after admitting the launcher and its bounded metadata reply.
   const execPath=execFileSync(runtimePaths.at(-1),['--exec-path'],{maxBuffer:4096}).toString().trim();
   const gitExecutable=fs.realpathSync(path.resolve(execPath,'../../bin/git'));runtimePaths.push(gitExecutable);
   const runtimeBytes=admittedRuntime();
-  const beforeReader=new ImmutableReader(repo,baseline,{runtimeBytes,executionBytes,gitExecutable}),afterReader=new ImmutableReader(repo,candidate,{runtimeBytes,executionBytes,gitExecutable,budget:beforeReader.budget});
+  const beforeReader=new ImmutableReader(repo,baseline,{runtimeBytes,executionBytes,gitExecutable,allowance}),afterReader=new ImmutableReader(repo,candidate,{runtimeBytes,executionBytes,gitExecutable,budget:beforeReader.budget});
   const identities=[...new Set(runtimePaths)].map(p=>runtimeIdentity(p));
   const runtime=identities.find(p=>p.path===fs.realpathSync(process.execPath)),callerRuntime=parentRuntimePath?identities.find(p=>p.path===fs.realpathSync(parentRuntimePath)):null;
   const executionCode=codeStats.map(({name,file,stat})=>{const body=fs.readFileSync(file);demand(body.length===stat.size,'Trusted execution code changed during whole read');return {path:name,bytes:body.length,mode:stat.mode&0o777,sha256:sha(body)};});
@@ -647,7 +666,7 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
   // Both complete row tables and both complete reconstructed interval rows stay
   // live while containing run cohorts are consumed; they are not free aliases.
   beforeReader.metadataBytes=afterReader.metadataBytes=metadataBytes+oldRows.byteLength+newRows.byteLength+largestRow*24;
-  demand(beforeReader.runtimeBytes+beforeReader.executionBytes+beforeReader.metadataBytes+beforeReader.outputBytes<PHASE,'Retained metadata/whole interval rows exceed phase cap');
+  demand(beforeReader.runtimeBytes+beforeReader.executionBytes+beforeReader.metadataBytes+beforeReader.outputBytes<beforeReader.phaseLimit,'Retained metadata/whole interval rows exceed phase cap');
   const runs=snapshot=>snapshot.manifest.parts.filter(p=>p.kind==='runs');
   const oldParts=runs(before),newParts=runs(after);
   let offset=0;for(let y=0;y<a.size;y++){demand(oldRows[y*2]===offset,'Baseline row partition incomplete');offset+=oldRows[y*2+1];}demand(offset*2===a.runWords,'Baseline rows omitted runs');

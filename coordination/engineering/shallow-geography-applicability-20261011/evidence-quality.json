@@ -6,18 +6,18 @@
   "subject_ids": [],
   "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "baseline": {
-    "commit": "1098d766a9f5f90f04bdf5bbefc3f0cf8d5c7629",
+    "commit": "7eb3293b739631f4e69d7e676c7a77ae7c22c107",
     "files": [
       {
         "path": "scripts/check-unchanged-selected-geography.mjs",
-        "bytes": 28203,
-        "sha256": "8d5c267e968349daae7827e8e99a7026536ce30a82ac8861917582c8ea5a70c2",
+        "bytes": 28407,
+        "sha256": "dbbd9a4aca67377828c2b049131f3ebdd31f291bd2f0f8c8d35a66fd3888dee6",
         "hash_kind": "file-bytes"
       },
       {
         "path": "scripts/run-geographic-check.py",
-        "bytes": 87343,
-        "sha256": "2e4d1026280458bf46a7683fd385c9890e74e9edf2540d190409a37b4dc30af4",
+        "bytes": 88301,
+        "sha256": "8a4be28ed2cee0c4748f80dd59108b44a6f8f608a656fc2f73cf276705a0633b",
         "hash_kind": "file-bytes"
       }
     ],
@@ -67,6 +67,12 @@
       "path": "coordination/engineering/shallow-geography-applicability-20261011/wrapper-tests.log",
       "bytes": 235,
       "sha256": "706293cc6e574982c40402dfc3b1748157cf852727bf8107372914aa837e1f7b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/shallow-geography-applicability-20261011/refreshed-controls.log",
+      "bytes": 1861,
+      "sha256": "43000ebca50fbd751dedfbb8750887767ae0416f232b4c7cfeb85508183dbab8",
       "hash_kind": "file-bytes"
     }
   ],
