@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "qualified": false,
+  "exit": {
+    "code": 1,
+    "signal": null
+  },
+  "refusal": null,
+  "command": [
+    "/workspace/scratch/127991fc8b8e/cloud-tools/gnu-time/time-1.9-0.2-amd64/usr/bin/time",
+    "-v",
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "scripts/additive-gap-repair.mjs",
+    "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/8544607139ecf28ad8d6de4b07da3d3d151d98e8219f30a7cfcd71044034919d/work",
+    "8c1d33b256bd2762936f7880cfacaee8bb1bfeef",
+    "coordination/engineering/nor18-selected-20261012/south5-requests-003/nor18-south5-003-source-request.json",
+    "835ee02639c12fb06907247cd4be71f4e6f4dad554b41be619875ef1d3a3441d",
+    ".cache/native-grid-candidates/nor18-south5-source-003"
+  ],
+  "owned_root_identity": {
+    "pid": 28,
+    "pgid": 28,
+    "started_ticks": "7943014",
+    "ppid": 5,
+    "rss_bytes": 634880,
+    "started": "Mon Oct 12 10:47:27 2026"
+  },
+  "owned_processes_remaining": [],
+  "elapsed_seconds": 90.929,
+  "rss_cap_bytes": 1610612736,
+  "wall_deadline_seconds": 1200,
+  "peak_sampled_group_rss_bytes": 422203392,
+  "peak_supervisor_rss_bytes": 56188928,
+  "time_lifetime_max_rss_bytes": 317022208,
+  "conservative_lifetime_and_supervisor_bound_bytes": 373211136,
+  "termination_events": [],
+  "monitoring_limits": "Complete isolated-group samples plus GNU time child lifetime and conservative separate parent peak; not kernel enforcement.",
+  "operating_limits": {
+    "log_bytes": 4194304,
+    "monitor_bytes": 8388608,
+    "output_bytes": 33554432,
+    "receipt_bytes": 1048576,
+    "retained_bytes": 50331648,
+    "rss_bytes": 1610612736,
+    "wall_seconds": 1200
+  },
+  "execution_commit": "8c1d33b256bd2762936f7880cfacaee8bb1bfeef",
+  "request_sha256": "835ee02639c12fb06907247cd4be71f4e6f4dad554b41be619875ef1d3a3441d",
+  "destination": ".cache/native-grid-candidates/nor18-south5-source-003",
+  "resource_admission": {
+    "supply_upper_bytes": 9160355840,
+    "residual_reported_bytes": 5402259456,
+    "headroom_reserve_bytes": 2147483648,
+    "process_peak_reservation_bytes": 1610612736,
+    "required_bytes": 805306368,
+    "observations": {
+      "reserved": 0,
+      "ancestors": [],
+      "unknown_limits": [
+        "No exposed cgroup2 memory mount"
+      ],
+      "meminfo": "MemTotal:       10230316 kB\nMemFree:         8595572 kB\nMemAvailable:    8945660 kB\nBuffers:            3624 kB\nCached:           649896 kB\nSwapCached:            0 kB\nActive:           526696 kB\nInactive:         586836 kB\nActive(anon):      94664 kB\nInactive(anon):   490080 kB\nActive(file):     432032 kB\nInactive(file):    96756 kB\nUnevictable:       29920 kB\nMlocked:               0 kB\nSwapTotal:             0 kB\nSwapFree:              0 kB\nDirty:            287460 kB\nWriteback:             0 kB\nAnonPages:        489932 kB\nMapped:           349456 kB\nShmem:             94848 kB\nKReclaimable:     100984 kB\nSlab:             169340 kB\nSReclaimable:     100984 kB\nSUnreclaim:        68356 kB\nKernelStack:        8684 kB\nPageTables:        20996 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:     5115156 kB\nCommitted_AS:    5110116 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       10020 kB\nVmallocChunk:          0 kB\nPercpu:             2880 kB\nAnonHugePages:         0 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nBalloon:               0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      542720 kB\nDirectMap2M:     9547776 kB\nDirectMap1G:    16777216 kB\n",
+      "cgroup": "0::/\n",
+      "mountinfo": "208 105 0:80 /newroot / ro,nosuid,nodev,relatime - tmpfs tmpfs rw,uid=1000,gid=1000\n209 208 0:27 /usr /usr ro,nosuid,nodev,relatime - overlay overlay rw,lowerdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/lower-0,upperdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/upper,workdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/work,index=off,metacopy=off,fsync=volatile\n210 208 0:27 /opt /opt ro,nosuid,nodev,relatime - overlay overlay rw,lowerdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/lower-0,upperdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/upper,workdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/work,index=off,metacopy=off,fsync=volatile\n211 208 0:27 /etc /etc ro,nosuid,nodev,relatime - overlay overlay rw,lowerdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/lower-0,upperdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/upper,workdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/work,index=off,metacopy=off,fsync=volatile\n212 208 0:81 / /proc ro,nosuid,nodev,noexec,relatime - proc proc rw\n213 208 0:82 / /dev ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=755,uid=1000,gid=1000\n214 213 0:31 /null /dev/null ro,nosuid,nodev - tmpfs tmpfs rw,size=65536k,mode=755\n215 213 0:31 /zero /dev/zero ro,nosuid,nodev - tmpfs tmpfs rw,size=65536k,mode=755\n216 213 0:31 /full /dev/full ro,nosuid,nodev - tmpfs tmpfs rw,size=65536k,mode=755\n217 213 0:31 /random /dev/random ro,nosuid,nodev - tmpfs tmpfs rw,size=65536k,mode=755\n218 213 0:31 /urandom /dev/urandom ro,nosuid,nodev - tmpfs tmpfs rw,size=65536k,mode=755\n219 213 0:31 /tty /dev/tty ro,nosuid,nodev - tmpfs tmpfs rw,size=65536k,mode=755\n220 213 0:79 / /dev/pts ro,nosuid,nodev,noexec,relatime - devpts devpts rw,mode=620,ptmxmode=666\n221 213 0:83 / /dev/shm ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=755,uid=1000,gid=1000\n222 208 0:84 / /tmp ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=755,uid=1000,gid=1000\n223 208 0:85 / /run ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=755,uid=1000,gid=1000\n224 208 0:86 / /home/agent ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=755,uid=1000,gid=1000\n225 224 0:87 / /home/agent/.codex ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=755,uid=1000,gid=1000\n226 225 0:27 /home/agent/.codex/config.toml /home/agent/.codex/config.toml ro,nosuid,nodev,relatime - overlay overlay rw,lowerdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/lower-0,upperdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/upper,workdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/work,index=off,metacopy=off,fsync=volatile\n227 225 0:27 /home/agent/.codex/skills /home/agent/.codex/skills ro,nosuid,nodev,relatime - overlay overlay rw,lowerdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/lower-0,upperdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/upper,workdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/work,index=off,metacopy=off,fsync=volatile\n228 225 0:27 /home/agent/.codex/plugins /home/agent/.codex/plugins ro,nosuid,nodev,relatime - overlay overlay rw,lowerdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/lower-0,upperdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/upper,workdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/work,index=off,metacopy=off,fsync=volatile\n229 225 0:27 /home/agent/.codex/auth.json /home/agent/.codex/auth.json ro,nosuid,nodev,relatime - overlay overlay rw,lowerdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/lower-0,upperdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/upper,workdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/work,index=off,metacopy=off,fsync=volatile\n230 225 0:51 / /home/agent/.codex/tmp ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=755,uid=1000,gid=1000\n231 208 0:27 /workspace /workspace ro,nosuid,nodev,relatime - overlay overlay rw,lowerdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/lower-0,upperdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/upper,workdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/work,index=off,metacopy=off,fsync=volatile\n232 213 0:54 / /dev rw,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=755,uid=1000,gid=1000\n233 232 0:31 /null /dev/null rw,nosuid - tmpfs tmpfs rw,size=65536k,mode=755\n234 232 0:31 /zero /dev/zero rw,nosuid - tmpfs tmpfs rw,size=65536k,mode=755\n235 232 0:31 /full /dev/full rw,nosuid - tmpfs tmpfs rw,size=65536k,mode=755\n236 232 0:31 /random /dev/random rw,nosuid - tmpfs tmpfs rw,size=65536k,mode=755\n237 232 0:31 /urandom /dev/urandom rw,nosuid - tmpfs tmpfs rw,size=65536k,mode=755\n238 232 0:31 /tty /dev/tty rw,nosuid - tmpfs tmpfs rw,size=65536k,mode=755\n239 232 0:55 / /dev/pts rw,nosuid,noexec,relatime - devpts devpts rw,mode=620,ptmxmode=666\n240 222 0:56 / /tmp/codex-daemon-1000 ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=000,uid=1000,gid=1000\n241 222 0:84 / /tmp rw,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=755,uid=1000,gid=1000\n242 241 0:57 / /tmp/codex-daemon-1000 ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=000,uid=1000,gid=1000\n243 241 0:58 / /tmp/.git ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=555,uid=1000,gid=1000\n244 241 0:59 / /tmp/.agents ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=555,uid=1000,gid=1000\n245 241 0:61 / /tmp/.codex ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=555,uid=1000,gid=1000\n246 241 0:62 / /tmp/.aws ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=555,uid=1000,gid=1000\n247 241 0:84 /codex-bwrap-synthetic-mount-targets-1000 /tmp/codex-bwrap-synthetic-mount-targets-1000 ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=755,uid=1000,gid=1000\n248 231 0:27 /workspace/scratch/127991fc8b8e /workspace/scratch/127991fc8b8e rw,nosuid,nodev,relatime - overlay overlay rw,lowerdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/lower-0,upperdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/upper,workdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/work,index=off,metacopy=off,fsync=volatile\n249 248 0:63 / /workspace/scratch/127991fc8b8e/.git ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=555,uid=1000,gid=1000\n250 248 0:64 / /workspace/scratch/127991fc8b8e/.agents ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=555,uid=1000,gid=1000\n252 248 0:65 / /workspace/scratch/127991fc8b8e/.codex ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=555,uid=1000,gid=1000\n253 248 0:66 / /workspace/scratch/127991fc8b8e/.aws ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=555,uid=1000,gid=1000\n310 212 0:89 / /proc rw,nosuid,nodev,noexec,relatime - proc proc rw\n",
+      "limits": "Limit                     Soft Limit           Hard Limit           Units     \nMax cpu time              unlimited            unlimited            seconds   \nMax file size             unlimited            unlimited            bytes     \nMax data size             unlimited            unlimited            bytes     \nMax stack size            8388608              unlimited            bytes     \nMax core file size        0                    unlimited            bytes     \nMax resident set          unlimited            unlimited            bytes     \nMax processes             39885                39885                processes \nMax open files            16384                16384                files     \nMax locked memory         8388608              8388608              bytes     \nMax address space         unlimited            unlimited            bytes     \nMax file locks            unlimited            unlimited            locks     \nMax pending signals       39885                39885                signals   \nMax msgqueue size         819200               819200               bytes     \nMax nice priority         0                    0                    \nMax realtime priority     0                    0                    \nMax realtime timeout      unlimited            unlimited            us        \n",
+      "status": "Name:\tMainThread\nUmask:\t0022\nState:\tR (running)\nTgid:\t5\nNgid:\t0\nPid:\t5\nPPid:\t2\nTracerPid:\t0\nUid:\t1000\t1000\t1000\t1000\nGid:\t1000\t1000\t1000\t1000\nFDSize:\t64\nGroups:\t \nNStgid:\t5\nNSpid:\t5\nNSpgid:\t1\nNSsid:\t1\nKthread:\t0\nVmPeak:\t 1545696 kB\nVmSize:\t 1492316 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   41960 kB\nVmRSS:\t   41960 kB\nRssAnon:\t   19928 kB\nRssFile:\t   22032 kB\nRssShmem:\t       0 kB\nVmData:\t  595788 kB\nVmStk:\t     136 kB\nVmExe:\t   43776 kB\nVmLib:\t    3488 kB\nVmPTE:\t     820 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffffff\nThreads:\t7\nSigQ:\t0/39885\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000001001000\nSigCgt:\t0000000100004602\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t0000000000000000\nCapAmb:\t0000000000000000\nNoNewPrivs:\t1\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tvulnerable\nSpeculationIndirectBranch:\talways enabled\nCpus_allowed:\t1ff\nCpus_allowed_list:\t0-8\nMems_allowed:\t00000000,00000001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t45\nnonvoluntary_ctxt_switches:\t20\n",
+      "aggregate_rss": 62529536
+    },
+    "uncertainty": "Reported availability only; unexposed limits remain unknown, not unlimited. No swap credit or guaranteed allocation."
+  },
+  "operating_runtime": {
+    "platform": "linux",
+    "runtime": [
+      {
+        "bytes": 4082768,
+        "mode": 493,
+        "path": "/usr/bin/git",
+        "role": "git",
+        "sha256": "356db14e102d68a1a37d8a1ac577dfd678d45d46e92f468bef8b7154e7bfdc60"
+      },
+      {
+        "bytes": 125989464,
+        "mode": 493,
+        "path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "role": "node",
+        "sha256": "bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12"
+      },
+      {
+        "bytes": 154552,
+        "mode": 493,
+        "path": "/usr/bin/ps",
+        "role": "process-inspector",
+        "sha256": "43b8d2d049183e9ebc409c86b89150b5a4a68fa19fe1815b16bed5561921a9c3"
+      },
+      {
+        "bytes": 27384,
+        "mode": 493,
+        "path": "/workspace/scratch/127991fc8b8e/cloud-tools/gnu-time/time-1.9-0.2-amd64/usr/bin/time",
+        "role": "time",
+        "sha256": "efc0d1112e36ec76c14bf7508e287935cf1631d9d0d91fb532802d07aef51cea"
+      }
+    ],
+    "supervisor": {
+      "bytes": 30700,
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs",
+      "sha256": "5ee0e1412990e84048fae88b05a49261088ec5b5b201579d7adbfdf284a1f37d"
+    },
+    "support_code": [
+      {
+        "bytes": 14901,
+        "path": "scripts/local-workspace.mjs",
+        "sha256": "40b33be2e40c4d840b8ca3921eab36d2d899c638ff0d94ddde9e3016402b896c"
+      },
+      {
+        "bytes": 548,
+        "path": "scripts/worker-identity.mjs",
+        "sha256": "e31ef3d286c3250f7f69e23f455edd896cfa96b8eb6438026aa4374da57128bd"
+      }
+    ],
+    "version": 1
+  },
+  "supervisor": {
+    "path": "coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs",
+    "bytes": 30700,
+    "sha256": "5ee0e1412990e84048fae88b05a49261088ec5b5b201579d7adbfdf284a1f37d",
+    "runtime_shared_with_child": true
+  },
+  "profile": "source-native-v2",
+  "processing_allowance": {
+    "phaseBytes": 536870912,
+    "rssBytes": 1073741824
+  },
+  "storage_admission": {
+    "free_bytes": 30127235072,
+    "minimum_free_bytes": 10737418240,
+    "own_remaining_reservation_bytes": 1048264704,
+    "peer_remaining_reservation_bytes": 2082156544,
+    "issued_growth_bytes": 50331648,
+    "admitted_growth_bytes": 1048264704,
+    "residual_bytes": 26996813824
+  }
+}
