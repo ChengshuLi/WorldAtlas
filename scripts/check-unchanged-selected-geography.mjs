@@ -33,7 +33,7 @@ const joined = async promises => {
 export const AUDITED_READERS = Object.freeze({
   // The joint route only reuses authenticated original selected inputs and products.
   // These exact readers introduce no new scientific source outside that closure.
-  [PREFIX + 'selected-checkpoint.mjs']: ['37452db96703ce198d37ef1e8fb261b727ead053922eca3c3a2f292c63a02fd8'],
+  [PREFIX + 'selected-checkpoint.mjs']: ['aaa4782773e94a88fcf1c966ef549c6ab5fe084cd2243a43dab206ac6d185c5f'],
   [PREFIX + 'selected-checkpoint-continuous.mjs']: ['1c82e1bb619bc42353a573d0ef4f1989490e03b32d5137035cf890a3719c55dc'],
   [PREFIX + 'selected-joint-entry.mjs']: ['ccac64cb442d68aaba456fb0b06c1e31116ab979b03d6e9255a179cbf6915137'],
   'src/ownership-codec.js': ['64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d'],
