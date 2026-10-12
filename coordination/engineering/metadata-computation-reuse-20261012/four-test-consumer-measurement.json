@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "kind": "bounded-metadata-consumer-test-measurement",
+  "tested_head": "859ad2d64512d96e2c8af3316bfdeba64e032791",
+  "accepted_consumer_base": "04cfa575c98915fa50cc9ef17e1d00ca1579b3d5",
+  "consumer_files": [
+    {
+      "path": "test/job-deadline.test.mjs",
+      "bytes": 30985,
+      "sha256": "0f47e4d626729e9a0c3719a947f0cd42dad34cc221b602523a8b1c251c554e43",
+      "git_blob_oid": "0cadc7548113086e06eef5680c017cfc16f0a550"
+    },
+    {
+      "path": "test/supported-programs.test.mjs",
+      "bytes": 13557,
+      "sha256": "4c912ca14a1f46f17919af3d97f8c370713fab8aea46820819d23ea4a24be224",
+      "git_blob_oid": "288f08a0f8e219103743555caa9e3b2830cc51af"
+    },
+    {
+      "path": "test/selected-data-profile.test.mjs",
+      "bytes": 93618,
+      "sha256": "bf3a09ee4ae32a424a1b22df02215853797b3bdd02ce013b066a08e67bc20c7c",
+      "git_blob_oid": "c110d28091589d7a88a711d39aec2aa5784c032c"
+    },
+    {
+      "path": "test/integration-profile-restoration.test.mjs",
+      "bytes": 13298,
+      "sha256": "87316b8a99c9b4ea68002ba27aea717011ee4aac7e87daecdfdc7287c18c39f8",
+      "git_blob_oid": "d2dd14779c8a7795b4138285a303ef5e5dc51601"
+    }
+  ],
+  "command": [
+    "node",
+    "--test",
+    "--test-concurrency=2",
+    "test/job-deadline.test.mjs",
+    "test/supported-programs.test.mjs",
+    "test/selected-data-profile.test.mjs",
+    "test/integration-profile-restoration.test.mjs"
+  ],
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "linux",
+    "GIT_NO_LAZY_FETCH": "1"
+  },
+  "passed": true,
+  "tests": 240,
+  "failures": 0,
+  "skipped": 0,
+  "elapsed_ms": 52514,
+  "max_rss_kib": 544032,
+  "setup_excluded": true,
+  "large_fixture_import_batch": {
+    "decoded_bytes": 614655083,
+    "elapsed_ms": 107101,
+    "max_rss_kib": 214836,
+    "complete_setup_measurement": false
+  },
+  "full_profile_setup_executed": false,
+  "package_build_executed": false,
+  "native_or_polygon_recomputed": false,
+  "output": {
+    "path": "coordination/engineering/metadata-computation-reuse-20261012/four-test-consumer-measurement.log.gz",
+    "bytes": 6903,
+    "sha256": "88acbc8d90378776da68be9a5b8f91267c6881f0b8a3e64945bc3779b0c6c4e1",
+    "uncompressed_bytes": 21994,
+    "uncompressed_sha256": "cb5f10a3be8c60d126d2c1de1162a17accc596cb54a68e055fd18c7d3856abff"
+  },
+  "limits": [
+    "Cloud workspace timing, not hosted adoption or end-to-end saving.",
+    "Existing retained fixture bodies were restored before timing; import/setup is separate.",
+    "These fresh controls do not authorize arbitrary programme versions; unknown readers require full fallback."
+  ]
+}

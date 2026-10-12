@@ -345,7 +345,7 @@ async function checkpointRoutes(reader, selection, trusted) {
   }
 }
 
-async function collect(reader, {baseline, candidate, trusted}) {
+async function collect(reader, {baseline, candidate, trusted, metadataPaths}) {
   // This is an eligibility bound, not input equivalence. Compare the authored
   // diff from its real merge base; all consumed identities below still compare
   // the exact supplied baseline and candidate, including baseline-only changes.
@@ -354,12 +354,28 @@ async function collect(reader, {baseline, candidate, trusted}) {
   const mergeBase = reader.mergeBase().toString().trim();
   demand(oid(mergeBase), 'source-scope-merge-base-unavailable');
   const changed = reader.git('diff-tree', '--no-commit-id', '--name-only', '-r', '-z', '--no-renames', mergeBase, candidate).toString().split('\0').filter(Boolean);
-  demand(changed.length > 0 && changed.length <= 512 && changed.every(name => safe(name)
-    && (name.startsWith('research/geography/') || name.startsWith('data/regional-review/'))), 'outside-source-publication-scope');
-  for (const name of changed) {
-    // Addition/deletion are permitted only as ordinary source-packet entries.
-    reader.descriptor(mergeBase, name, true);
-    reader.descriptor(candidate, name, true);
+  if (metadataPaths !== undefined) {
+    // The trusted PR caller separately binds the issue-owned receiving packet,
+    // complete tree delta and original successful report. This option only
+    // widens scope admission: EVERY audited consumed route below still must
+    // have identical ordinary immutable bytes, including fallback absences.
+    demand(Array.isArray(metadataPaths) && metadataPaths.length > 0 && metadataPaths.length <= 2 &&
+      new Set(metadataPaths).size === metadataPaths.length && metadataPaths.every(name =>
+        /^coordination\/engineering\/[A-Za-z0-9_-]+\/(?:README\.md|evidence-quality\.json)$/.test(name)) &&
+      new Set(metadataPaths.map(name => name.slice(0, name.lastIndexOf('/')))).size === 1 &&
+      mergeBase === baseline && same([...changed].sort(), [...metadataPaths].sort()), 'outside-receiving-metadata-scope');
+    for (const name of changed) {
+      const before = reader.descriptor(baseline, name), after = reader.descriptor(candidate, name);
+      demand(before.mode === '100644' && after.mode === '100644', 'nonordinary-receiving-metadata');
+    }
+  } else {
+    demand(changed.length > 0 && changed.length <= 512 && changed.every(name => safe(name)
+      && (name.startsWith('research/geography/') || name.startsWith('data/regional-review/'))), 'outside-source-publication-scope');
+    for (const name of changed) {
+      // Addition/deletion are permitted only as ordinary source-packet entries.
+      reader.descriptor(mergeBase, name, true);
+      reader.descriptor(candidate, name, true);
+    }
   }
   for (const name of EXECUTION_CODE) reader.equalCurrent(name);
   // Routing hints never authorize science, but any changed locator or retained
@@ -461,7 +477,7 @@ async function collect(reader, {baseline, candidate, trusted}) {
   }
 }
 
-export async function inspectUnchangedSelectedGeography({repo, baseline, candidate, trusted = baseline, acquisition, limits = {member: FILE, metadata: METADATA, entries: ENTRIES}}) {
+export async function inspectUnchangedSelectedGeography({repo, baseline, candidate, trusted = baseline, acquisition, metadataPaths, limits = {member: FILE, metadata: METADATA, entries: ENTRIES}}) {
   const report = {version: 1, kind: 'trusted-unchanged-selected-geography-v1', baseline_commit: baseline,
     candidate_commit: candidate, trusted_reader_policy_commit: trusted, candidate_code_executed: false,
     science_reexecuted: false, source_approval: false, published: false};
@@ -471,7 +487,7 @@ export async function inspectUnchangedSelectedGeography({repo, baseline, candida
     acquisition ??= createRoutingMetadataAcquisition({repo, baseline, limits});
     const reader = createReader({repo, baseline, candidate, trusted, limits, acquisition});
     for (let round = 0; ; round++) {
-      try { await collect(reader, {baseline, candidate, trusted}); break; }
+      try { await collect(reader, {baseline, candidate, trusted, metadataPaths}); break; }
       catch (error) {
         if (!String(error.message).startsWith('missing-strict-historical-commit:') || round >= 8) throw error;
         acquisition.acquireOrigins([...reader.missingOrigins].sort());

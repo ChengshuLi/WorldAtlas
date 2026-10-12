@@ -223,6 +223,19 @@ normal isolated tests; a proof revoked after preparation refuses the merge and
 requires resubmission. A rerun after preparation invalidates the proof even if it succeeds. An altered
 workflow/runner first passes ordinary integration.
 
+The normal PR geography job separately admits a bounded direct metadata successor:
+only the issue-owned receiving manifest and packet-root README may change as
+ordinary modified files. It authenticates the original successful geography job,
+report and unchanged trusted baseline, then uses the existing audited selected
+input collector to prove unchanged execution code and every current/historical/
+fallback scientific route. Filename admission alone never proves non-consumption.
+Unavailable proof, changed consumed metadata or timeout runs normal geography.
+Current ownership, scope, evidence and exact-head review still run. The separate
+geography-reuse.json records original execution and current applicability without
+rewriting the report or granting transferable geography/checkpoint authority.
+The merge queue still runs fresh exact-candidate geography; full regression and
+its hosted build are not waived by this first metadata-reuse path.
+
 This is cooperative GitHub Actions evidence, not independent authenticated worker
 identity or a native GitHub merge queue. The existing final base check and guarded
 head merge remain; outside writers must honor the same serialized queue. A green
