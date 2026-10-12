@@ -294,3 +294,18 @@ test('removed or changed trusted producer eligibility cannot silently reuse acce
   const result=f.api.qualifyCheckpoint({reader,budget});assert.equal(result.available,false);assert.match(result.reason,/preserves accepted eligibility/);
  }
 });
+
+
+test('archived child custody is retained in its actual parent inventory without crossing invocations',async t=>{
+ const f=await trustedFixture(t), first=f.api.qualifyCheckpoint({reader:f.reader,budget:f.budget});assert.equal(first.available,true);
+ for(const p of [f.rootRow.facts,f.rootRow.certificate,f.rootRow.custody,f.rootRow.routes]){
+  const actual=f.reader.inventory.get(p.commit+':'+p.path);assert.ok(actual?.whole_body_consumed);assert.equal(actual.sha256,p.sha256);
+ }
+ assert.ok([...f.reader.inventory.values()].some(p=>p.path===CATALOGUE&&p.whole_body_consumed));
+ const secondReader=new f.native.ImmutableReader(f.root,f.selected,{allowance:f.reader.allowance});
+ assert.notStrictEqual(secondReader.inventory,f.reader.inventory);assert.equal(secondReader.inventory.size,0);
+ const secondBudget={shared:secondReader.budget,carriedBytes:0};
+ const second=f.api.qualifyCheckpoint({reader:secondReader,budget:secondBudget});assert.equal(second.available,true);
+ assert.notStrictEqual(secondReader.inventory,f.reader.inventory);
+ f.api.releaseCheckpoint(first.state);assert.deepEqual(f.api.projectNativeRows({state:second.state,rows:[1],budget:secondBudget}).rows,[{y:1,runs:[[0,1,2]]}]);
+});
