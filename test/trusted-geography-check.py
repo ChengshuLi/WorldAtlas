@@ -67,14 +67,14 @@ class Fixture:
         self.git('commit', '-qm', message)
         return self.git('rev-parse', 'HEAD')
 
-    def run(self, candidate, rewind=True):
+    def run(self, candidate, rewind=True, extra_env=None):
         if rewind:
             self.git('checkout', '-q', '--detach', self.baseline)
         output = self.repo / 'geography-check.json'
         result = subprocess.run([PYTHON, '-I', '-B', str(self.repo / 'scripts/run-geographic-check.py'),
                                  '--repo', str(self.repo), '--baseline', self.baseline,
                                  '--candidate', candidate, '--out', str(output)],
-                                capture_output=True, text=True, env={k: v for k, v in os.environ.items() if k != 'GH_TOKEN'})
+                                capture_output=True, text=True, env={**{k: v for k, v in os.environ.items() if k != 'GH_TOKEN'}, **(extra_env or {})})
         return result, json.loads(output.read_bytes()) if output.exists() else None
 
     def close(self):
@@ -303,6 +303,49 @@ class TrustedCheckControls(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIsNone(report)
         self.assertIn('pointer hash mismatch', result.stderr)
+
+
+    def parallel_candidate(self):
+        fork = self.f.baseline
+        self.f.write('author-note.json', {'authored': True})
+        head = self.f.commit('authored-on-old-main')
+        self.f.git('checkout', '-q', '--detach', fork)
+        self.f.write('data/geography/part.json', collection(1.1, 1.1))
+        self.f.baseline = self.f.commit('parallel-main-geography')
+        self.f.git('merge', '--no-ff', '-qm', 'actual-proposed-composition', head)
+        return head, self.f.git('rev-parse', 'HEAD')
+
+    def test_parallel_main_candidate_preserves_actual_geography(self):
+        head, candidate = self.parallel_candidate()
+        result, report = self.f.run(candidate, extra_env={
+            'GEOGRAPHY_COMPARISON': 'pull-request-merge-v1', 'GEOGRAPHY_REVIEWED_HEAD': head})
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(report['baseline_commit'], self.f.baseline)
+        self.assertEqual(report['trusted_code_commit'], self.f.baseline)
+        self.assertEqual(report['candidate_commit'], candidate)
+        self.assertEqual(report['gate_status'], 'passed')
+        self.assertEqual(json.loads(result.stdout.splitlines()[-1])['candidate_commit'], candidate)
+        self.assertEqual(self.f.git('show', candidate + ':data/geography/part.json'),
+                         self.f.git('show', self.f.baseline + ':data/geography/part.json'))
+        self.assertEqual(self.f.git('show', candidate + ':author-note.json'),
+                         self.f.git('show', head + ':author-note.json'))
+
+    def test_raw_author_head_rejected_before_comparing_parallel_main(self):
+        head, candidate = self.parallel_candidate()
+        result, report = self.f.run(head, extra_env={
+            'GEOGRAPHY_COMPARISON': 'pull-request-merge-v1', 'GEOGRAPHY_REVIEWED_HEAD': head})
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIsNone(report)
+        self.assertIn('exact event base and reviewed head', result.stderr)
+        self.assertNotIn('selected-prefetch', result.stderr)
+
+    def test_substituted_reviewed_head_rejected_before_geography(self):
+        head, candidate = self.parallel_candidate()
+        result, report = self.f.run(candidate, extra_env={
+            'GEOGRAPHY_COMPARISON': 'pull-request-merge-v1', 'GEOGRAPHY_REVIEWED_HEAD': self.f.baseline})
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIsNone(report)
+        self.assertIn('exact event base and reviewed head', result.stderr)
 
 
 def receipt_run(directory):

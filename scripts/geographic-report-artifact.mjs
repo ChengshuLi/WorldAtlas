@@ -69,6 +69,10 @@ export function readGeographyJobReceipt(raw, expected) {
     report_sha256: receipts[0].report_sha256, report_bytes: receipts[0].report_bytes};
   need(positive(result.artifact_id) && positive(result.artifact_bytes) && result.artifact_bytes <= MAX_ARCHIVE,
     'Invalid original geographic artifact receipt');
+  if (Object.hasOwn(receipts[0], 'candidate_commit')) {
+    need(commit(receipts[0].candidate_commit), 'Invalid geographic candidate receipt');
+    result.candidate_commit = receipts[0].candidate_commit;
+  }
   return result;
 }
 
@@ -274,12 +278,24 @@ async function readGeographyOriginJob({api, repo, number, source}) {
   return job;
 }
 
+// New PR producers test a merge commit while code CI still tests reviewed head.
+// The retained source tree is the actual geographic candidate tree; reuse is
+// allowed only when the receiving proof independently establishes that tree.
+export async function validatePRGeographyCandidate({api, repo, source}) {
+  if (source.workflow_path !== WORKFLOW_PATH || !source.candidate_commit || source.candidate_commit === source.head) return;
+  const candidate = await api(`/repos/${repo}/git/commits/${source.candidate_commit}`);
+  need(candidate.sha === source.candidate_commit && candidate.tree?.sha === source.tree &&
+    candidate.parents?.length === 2 && candidate.parents[0].sha === source.baseline &&
+    candidate.parents[1].sha === source.head, 'Original geographic candidate parents or tree differ');
+}
+
 export async function validateGeographyOrigin(options) {
   const {source} = options;
   validateGeographyProof(source);
   if (!source.current_run_attempt && !source.workflow_path) return;
   const job = await readGeographyOriginJob(options);
   need(job.id === source.job_id, 'Original geographic job identity changed');
+  await validatePRGeographyCandidate(options);
 }
 
 export async function prepareGeographyProof({api, repo, number, head, baseline, proof, token, fetchImpl = fetch}) {
@@ -301,6 +317,7 @@ export async function prepareGeographyProof({api, repo, number, head, baseline, 
     job_id: jobId, tree: proof.tree, head, baseline, workflow_path: WORKFLOW_PATH,
     event: 'pull_request', workflow_head: head, candidate_commit: head, ...receipt,
     ...(originAttempt !== proof.run_attempt ? {current_run_attempt: proof.run_attempt, current_job_id: proof.geography_job_id} : {})});
+  await validatePRGeographyCandidate({api, repo, source});
   if (source.current_run_attempt) {
     const originalResponse = await client.jobLogRedirect(`/repos/${repo}/actions/jobs/${source.job_id}/logs`);
     const original = readGeographyJobReceipt(await downloadRedirect(originalResponse, fetchImpl, MAX_LOG), source.artifact_name);
@@ -308,6 +325,7 @@ export async function prepareGeographyProof({api, repo, number, head, baseline, 
   }
   const report = await loadGeographicReport({api, repo, runId: source.run_id, artifactName: source.artifact_name,
     expectedHash: source.report_sha256, source, token, fetchImpl});
+  if (receipt.candidate_commit) checkGeographicReport(report, baseline, source.candidate_commit);
   return {source, report};
 }
 

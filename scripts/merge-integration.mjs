@@ -320,7 +320,7 @@ export async function prepareIntegration(options) {
           number: options.number, head: state.pr.head.sha, baseline: state.base, proof});
         if (loaded) {
           bindGeographyProof(loaded.source, {proof, number: options.number, head: state.pr.head.sha, baseline: state.base});
-          checkGeographicReport(loaded.report, state.base, state.pr.head.sha);
+          checkGeographicReport(loaded.report, state.base, loaded.source.candidate_commit ?? state.pr.head.sha);
           geographyProof = loaded.source;
         }
       } catch { /* A missing original report never discards valid regression proof or waives fresh geography. */ }
@@ -386,7 +386,7 @@ export async function completeIntegration(options) {
   need(typeof options.geographyReportLoader === 'function', 'Missing trusted geography report loader');
   const geography = await options.geographyReportLoader({api: options.api});
   const waterPass = checkGeographicReport(geography, state.base,
-    geographyProof ? state.pr.head.sha : options.testedCandidate);
+    geographyProof ? geographyProof.candidate_commit ?? state.pr.head.sha : options.testedCandidate);
   const candidate = await tree(options.api, options.repo, options.testedCandidate);
   checkCandidateParents(candidate.object, state.base, state.pr.head.sha);
   const geographicSource = geographyProof ?? geographicReportProducts(geography)?.source;

@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "issue": 1801,
+  "lane": "engineering",
+  "worker_id": "01a131c0-8b58-70b6-8e2c-52240f11e03f",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "cf11a9c434e798a2099ea406b29e842f27fe05ea",
+    "files": [
+      {
+        "path": "scripts/run-geographic-check.py",
+        "bytes": 95814,
+        "sha256": "427e01e11a4dc6efe0b293136351b9078aab0ae203120382ab1195c8d32fe831",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/geographic-report-artifact.mjs",
+        "bytes": 27523,
+        "sha256": "8023bccb096c2f6099b421ca25c0eec85b87cf1360d818b090fb551028c3b26a",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "parallel-main-comparison",
+      "kind": "code",
+      "description": "Authenticate proposed merge parents and preserve exact original producer identities; exercise actual Git forks, immutable authority comparisons, runner CLI and final queue consumers.",
+      "software": "Node 24 and Python 3.12",
+      "units": "synthetic controls"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/parallel-geography-comparison.test.mjs test/trusted-geography-check.test.mjs test/geographic-report-artifact.test.mjs test/pr-geography-reuse.test.mjs test/merge-integration.test.mjs test/final-capacity.test.mjs test/integration-proof.test.mjs test/trusted-workflow-checkouts.test.mjs"
+  ]
+}

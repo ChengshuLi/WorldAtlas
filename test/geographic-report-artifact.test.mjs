@@ -272,3 +272,46 @@ test('completed cancelled origin retains its actually successful geography even 
   const result = await prepareGeographyProof(f.options);
   assert.equal(result.source.run_attempt, 1); assert.equal(result.source.job_id, 55);
 });
+
+function combinedTransport(changeReport = value => value) {
+  const f = originalTransport(), candidate = 'd'.repeat(40);
+  const body = Buffer.from(JSON.stringify(changeReport({version: 1, method_id: 'worldatlas-trusted-geography-check-v1',
+    baseline_commit: f.options.baseline, trusted_code_commit: f.options.baseline, candidate_commit: candidate,
+    candidate_code_executed: false, published: false, source_approval: false, gate_status: 'passed', status: 'not-applicable'})));
+  f.zip = archive(body); f.artifact.size_in_bytes = f.zip.length; f.artifact.digest = `sha256:${reportHash(f.zip)}`;
+  f.log = Buffer.from([JSON.stringify({status: 'not-applicable', regressions: null,
+    candidate_commit: candidate, report_bytes: body.length, report_sha256: reportHash(body)}),
+    `SHA256 digest of uploaded artifact zip is ${reportHash(f.zip)}`,
+    `Artifact ${f.artifact.name} has been successfully uploaded! Final size is ${f.zip.length} bytes. Artifact ID is 12`].join('\n'));
+  f.commit = {sha: candidate, tree: {sha: f.options.proof.tree}, parents: [{sha: f.options.baseline}, {sha: f.options.head}]};
+  const original = f.options.api;
+  f.options.api = async route => route.endsWith(`/git/commits/${candidate}`) ? structuredClone(f.commit) : original(route);
+  f.options.api.jobLogRedirect = original.jobLogRedirect;
+  f.options.api.artifactRedirect = original.artifactRedirect;
+  return f;
+}
+test('original combined-candidate receipt keeps reviewed head separate through authenticated report', async () => {
+  const f = combinedTransport(), result = await prepareGeographyProof(f.options);
+  assert.equal(result.source.candidate_commit, f.commit.sha);
+  assert.equal(result.report.candidate_commit, f.commit.sha);
+  assert.equal(result.source.head, f.options.head);
+  assert.equal(result.source.workflow_head, f.options.head);
+  assert.equal(result.source.tree, f.commit.tree.sha);
+  assert.equal(result.source.baseline, f.options.baseline);
+  assert.notEqual(result.source.head, result.source.candidate_commit);
+});
+test('combined geography receipt rejects foreign tree, stale parents and relabeled report', async () => {
+  for (const mutate of [f => {f.commit.sha = 'e'.repeat(40);}, f => {f.commit.tree.sha = 'e'.repeat(40);},
+    f => {f.commit.parents.reverse();}, f => {f.commit.parents.pop();},
+    f => {f.commit.parents[0].sha = 'e'.repeat(40);}, f => {f.commit.parents[1].sha = 'e'.repeat(40); }]) {
+    const f = combinedTransport(); mutate(f);
+    await assert.rejects(prepareGeographyProof(f.options), /candidate parents or tree/);
+    assert(!f.requests.some(row => row.url.includes('/artifacts?')));
+  }
+  for (const key of ['baseline_commit', 'trusted_code_commit', 'candidate_commit']) {
+    const f = combinedTransport(report => ({...report, [key]: 'e'.repeat(40)}));
+    await assert.rejects(prepareGeographyProof(f.options), /exact trusted combined check/);
+  }
+  const f = combinedTransport(); f.log = Buffer.from(f.log.toString().replace('"candidate_commit":"' + f.commit.sha + '"', '"candidate_commit":"invalid"'));
+  assert.throws(() => readGeographyJobReceipt(f.log, f.artifact.name), /candidate receipt/);
+});

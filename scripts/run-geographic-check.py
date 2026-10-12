@@ -1496,6 +1496,19 @@ def fetch_candidate(repo, candidate):
     git(repo, 'fetch', '--quiet', '--no-tags', '--no-write-fetch-head', '--filter=blob:none', 'origin', candidate)
 
 
+def verify_pr_candidate(repo, baseline, candidate, head):
+    """Authenticate the proposed merge before any scientific inputs are read."""
+    for value in [baseline, candidate, head]:
+        immutable_sha(value)
+    # Read the actual commit object, not rev-list: shallow checkout boundaries
+    # do not erase its real parent identities.
+    raw = git(repo, 'cat-file', '-p', candidate).decode()
+    header = raw.split('\n\n', 1)[0].splitlines()
+    parents = [line[7:] for line in header if line.startswith('parent ')]
+    if parents != [baseline, head]:
+        raise ValueError('Proposed geographic candidate must bind exact event base and reviewed head')
+
+
 def main():
     import sys
     if not sys.flags.isolated or not sys.dont_write_bytecode:
@@ -1523,6 +1536,11 @@ def main():
     if args.fetch:
         with stage_timing('candidate-fetch'):
             fetch_candidate(repo, args.candidate)
+    comparison = os.environ.get('GEOGRAPHY_COMPARISON')
+    if comparison is not None:
+        if comparison != 'pull-request-merge-v1':
+            raise ValueError('Unsupported geographic comparison')
+        verify_pr_candidate(repo, args.baseline, args.candidate, os.environ.get('GEOGRAPHY_REVIEWED_HEAD'))
     result = apply_adjudications(repo, args.candidate, inspect(repo, args.baseline, args.candidate, prefetch=args.fetch,
         checkpoint_destination=args.out.absolute().parent))
     passed = result['status'] in ['not-applicable', 'no-footprint-change', 'no-new-regression'] or (
@@ -1540,7 +1558,8 @@ def main():
         with open(os.environ['GITHUB_OUTPUT'], 'a') as stream:
             stream.write('report_sha256=' + digest + '\n')
     print(json.dumps({'status': result['status'], 'regressions': result['regressions'],
-                      'report_bytes': len(raw), 'report_sha256': hashlib.sha256(raw).hexdigest()}))
+                      'report_bytes': len(raw), 'report_sha256': hashlib.sha256(raw).hexdigest(),
+                      **({'candidate_commit': args.candidate} if comparison else {})}))
     return 0 if passed else 1
 
 
