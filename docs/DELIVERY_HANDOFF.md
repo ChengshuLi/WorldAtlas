@@ -349,8 +349,12 @@ approval regardless of its size.
 
 Run ordinary controls with `node --test test/delivery-handoff.test.mjs
 test/delivery-handoff-advance.test.mjs`. The opt-in
-`WORLDATLAS_DELIVERY_FIXTURE=1` additionally uses the already-retained immutable
+`WORLDATLAS_DELIVERY_FIXTURE=1` explicitly registers the additional retained-fixture
+suite rather than creating skipped tests in the default zero-skip regression. It
+uses the already-retained immutable
 current13 bodies for exact authority reproduction and the new 10+3 metadata
 partition control. This requires only the named metadata commits/bodies, not a
-scientific cache or GIS operands. Absence of those bodies is a fixture availability
-limit, never a successful replay.
+scientific cache or GIS operands. Acceptance or revalidation relying on the
+retained current13 proof must run `WORLDATLAS_DELIVERY_FIXTURE=1` and establish
+zero skips; ordinary CI alone does not establish that proof. Absence of those
+bodies is a fixture availability limit, never a successful replay.

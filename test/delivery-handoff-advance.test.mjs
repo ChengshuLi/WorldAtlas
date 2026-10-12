@@ -272,7 +272,8 @@ function deriveCurrent13Fixture(repo = REPO) {
   return {registry, authorities};
 }
 const current13 = realFixture ? deriveCurrent13Fixture() : null;
-const fixtureTest = (name, fn) => test(name, {skip: !realFixture}, fn);
+// Retained offline metadata is an explicit suite, not skipped default-CI work.
+const fixtureTest = (name, fn) => { if (realFixture) test(name, fn); };
 const byGroup = group => {
   const item = current13.authorities.find(a => a.committed.source_authority.path.includes('/' + group.toUpperCase() + '/'));
   assert.ok(item); return structuredClone(item);
@@ -525,8 +526,8 @@ if(writeResult)fs.writeFileSync(path.join(scratch,'recipe-current13-greedy-resul
 const summary={result:writeResult?path.join(scratch,'recipe-current13-greedy-result.json'):null,groups:result.groups.map(g=>({id:g.id,n:g.components,source:g.source_phase_bytes,native:g.native_phase_bytes,limit:g.phase_limit})),relabel_unchanged:true,transport:result.transport.map(({identities,...r})=>r),metadata_bytes:readLog.reduce((n,p)=>n+p.bytes,0)};
 return {result,summary};
 }
-test('real13 greedy model ignores original batch labels and deduplicates physical/admin/native transport',
-  {skip: process.env.WORLDATLAS_DELIVERY_FIXTURE !== '1'}, async t => {
+if (process.env.WORLDATLAS_DELIVERY_FIXTURE === '1') test('real13 greedy model ignores original batch labels and deduplicates physical/admin/native transport',
+  async t => {
     const scratch = fs.mkdtempSync(path.join(os.tmpdir(), 'delivery-greedy-'));
     t.after(() => fs.rmSync(scratch, {recursive: true, force: true}));
     const {result} = await current13GreedyProbe({root: path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'), scratch});

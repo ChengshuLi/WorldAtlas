@@ -154,3 +154,481 @@ Retained replay provenance: historical requests keep their original executed pin
 
 Actual18ab repeat observation from the unchanged historical metadata transforms:
 {"completed": ["authority-cod-001", "authority-cod-002", "authority-grc-001", "authority-grc-002", "authority-grc-003", "compose", "finalize", "native-cod-001", "native-cod-002", "native-grc-001", "native-grc-002", "native-grc-003", "native-requests", "package", "rebind-certificate", "rebind-operating", "rebind-retain", "recipe", "registry", "requests", "source-cod-001", "source-cod-002", "source-grc-001", "source-grc-002", "source-grc-003"], "last_refusal": null, "timing": {"api_wait_ms": 0, "overall_wall_ms": 1367401, "preparation_ms": 95955.06851}, "waiting": {"detail": "Publish the actual author head/PR; provide repository and PR number.", "kind": "publication-review", "observed_at": "2026-10-12T02:22:23.562Z", "stage": "review", "status": "waiting"}}
+
+Hosted default-regression registration correction
+The original cab61536 author run38197346790 regression(1), job114642910426, failed the existing zero-skip wrapper after668 tests:658 pass,0 fail,10 skipped. The ten skips were the explicitly opt-in retained-metadata suite. Original failure is retained at https://github.com/ChengshuLi/WorldAtlas/actions/runs/38197346790/job/114642910426 .
+The test-only registration fix registers those same unchanged callbacks only when WORLDATLAS_DELIVERY_FIXTURE=1. Ordinary assertions remain unconditional. Acceptance relying on current13 must still execute the explicit fixture suite and prove zero skips; ordinary CI alone cannot establish it. No regression wrapper, scientific predicate, fixture assertion or admission limit was weakened.
+Actual default entry-boundary command imports streamTestProcess from scripts/run-integration-tests.mjs and invokes its existing zero-skip enforcement with ['--test','--test-reporter=tap','test/delivery-handoff.test.mjs','test/delivery-handoff-advance.test.mjs'], WORLDATLAS_DELIVERY_FIXTURE unset:
+TAP version 13
+# Subtest: locators derive descriptors and refuse handwritten hashes
+ok 1 - locators derive descriptors and refuse handwritten hashes
+  ---
+  duration_ms: 4.375431
+  type: 'test'
+  ...
+# Subtest: committed completion inventory authenticates whole bytes and phase
+ok 2 - committed completion inventory authenticates whole bytes and phase
+  ---
+  duration_ms: 1.319057
+  type: 'test'
+  ...
+# Subtest: native transition takes original request identity and group order from saved index
+ok 3 - native transition takes original request identity and group order from saved index
+  ---
+  duration_ms: 4.933559
+  type: 'test'
+  ...
+# Subtest: interrupted metadata resumes identical postimages and only completes once
+ok 4 - interrupted metadata resumes identical postimages and only completes once
+  ---
+  duration_ms: 10.896365
+  type: 'test'
+  ...
+# Subtest: partial collision, changed bytes, symlink and foreign recipe refuse without replacement
+ok 5 - partial collision, changed bytes, symlink and foreign recipe refuse without replacement
+  ---
+  duration_ms: 2.353021
+  type: 'test'
+  ...
+# Subtest: status validates completed bytes and observations distinguish wait from preparation
+ok 6 - status validates completed bytes and observations distinguish wait from preparation
+  ---
+  duration_ms: 2.767876
+  type: 'test'
+  ...
+# Subtest: queue identity is durable before uncertain submit and resume can never dispatch twice
+ok 7 - queue identity is durable before uncertain submit and resume can never dispatch twice
+  ---
+  duration_ms: 1.851767
+  type: 'test'
+  ...
+# Subtest: missing independent acceptance never writes a queue identity
+ok 8 - missing independent acceptance never writes a queue identity
+  ---
+  duration_ms: 0.72825
+  type: 'test'
+  ...
+# Subtest: derives ordered scopes across original batch boundaries and real templates without component lists
+ok 9 - derives ordered scopes across original batch boundaries and real templates without component lists
+  ---
+  duration_ms: 32.149044
+  type: 'test'
+  ...
+# Subtest: models constructed encoded and decoded input closure before greedy split; transport alone deduplicates
+ok 10 - models constructed encoded and decoded input closure before greedy split; transport alone deduplicates
+  ---
+  duration_ms: 11.999432
+  type: 'test'
+  ...
+# Subtest: singleton overflow fails rather than silently narrowing scope or raising allowance
+ok 11 - singleton overflow fails rather than silently narrowing scope or raising allowance
+  ---
+  duration_ms: 4.050399
+  type: 'test'
+  ...
+# Subtest: the request body is charged twice and runtime/log/monitor/receipt/support are counted
+ok 12 - the request body is charged twice and runtime/log/monitor/receipt/support are counted
+  ---
+  duration_ms: 1.32111
+  type: 'test'
+  ...
+# Subtest: native reservations include encoded and decoded predecessor bytes; real output is exactly re-admitted
+ok 13 - native reservations include encoded and decoded predecessor bytes; real output is exactly re-admitted
+  ---
+  duration_ms: 1.9207
+  type: 'test'
+  ...
+# Subtest: requires genuine pinned locator join, exact mapping and handoff roster
+ok 14 - requires genuine pinned locator join, exact mapping and handoff roster
+  ---
+  duration_ms: 2.834465
+  type: 'test'
+  ...
+# Subtest: supports keyed metadata and components comparison-product metadata without product reads
+ok 15 - supports keyed metadata and components comparison-product metadata without product reads
+  ---
+  duration_ms: 4.968381
+  type: 'test'
+  ...
+# Subtest: retained replay preserves literal scopes and rejects incomplete handoff coverage
+ok 16 - retained replay preserves literal scopes and rejects incomplete handoff coverage
+  ---
+  duration_ms: 1.886969
+  type: 'test'
+  ...
+# Subtest: candidate request serialization can force a split before publication
+ok 17 - candidate request serialization can force a split before publication
+  ---
+  duration_ms: 8.692425
+  type: 'test'
+  ...
+# Subtest: unowned empty stage directories and foreign root inventory are never adopted
+ok 18 - unowned empty stage directories and foreign root inventory are never adopted
+  ---
+  duration_ms: 1.033413
+  type: 'test'
+  ...
+# Subtest: completed stages resolve their wait and subsequent successful preparation resolves refusal
+ok 19 - completed stages resolve their wait and subsequent successful preparation resolves refusal
+  ---
+  duration_ms: 3.199016
+  type: 'test'
+  ...
+# Subtest: advance publisher includes whole receipt in finite aggregate accounting without a fixed4KiB cap
+ok 20 - advance publisher includes whole receipt in finite aggregate accounting without a fixed4KiB cap
+  ---
+  duration_ms: 5.618966
+  type: 'test'
+  ...
+# Subtest: status charges complete journal reads against the same admitted phase
+ok 21 - status charges complete journal reads against the same admitted phase
+  ---
+  duration_ms: 1.13229
+  type: 'test'
+  ...
+# Subtest: stale lock recovery serializes competing acquisition and refuses ambiguous acquisition guards
+ok 22 - stale lock recovery serializes competing acquisition and refuses ambiguous acquisition guards
+  ---
+  duration_ms: 1.463512
+  type: 'test'
+  ...
+# Subtest: initial advance intent is charged before mutation and on read-only reopening
+ok 23 - initial advance intent is charged before mutation and on read-only reopening
+  ---
+  duration_ms: 0.886956
+  type: 'test'
+  ...
+# Subtest: real advance CLI refuses an oversized admitted config before reading recipe or creating destination
+ok 24 - real advance CLI refuses an oversized admitted config before reading recipe or creating destination
+  ---
+  duration_ms: 248.994141
+  type: 'test'
+  ...
+# Subtest: actual queue read adapter forwards remaining timeout and preserves rate-limit metadata
+ok 25 - actual queue read adapter forwards remaining timeout and preserves rate-limit metadata
+  ---
+  duration_ms: 0.878734
+  type: 'test'
+  ...
+# Subtest: journal writes and queue intent reads share admission before dispatch
+ok 26 - journal writes and queue intent reads share admission before dispatch
+  ---
+  duration_ms: 1.158719
+  type: 'test'
+  ...
+# Subtest: materialization report preflight refuses late collisions and changed postimages
+ok 27 - materialization report preflight refuses late collisions and changed postimages
+  ---
+  duration_ms: 1.830907
+  type: 'test'
+  ...
+# Subtest: actual missing Git objects and repeated identities acquire once; complete aliases are materialized once
+ok 28 - actual missing Git objects and repeated identities acquire once; complete aliases are materialized once
+  ---
+  duration_ms: 123.00048
+  type: 'test'
+  ...
+# Subtest: caller-derived complete byte and destination allowances fail before acquisition
+ok 29 - caller-derived complete byte and destination allowances fail before acquisition
+  ---
+  duration_ms: 307.960502
+  type: 'test'
+  ...
+# Subtest: interrupted real import resumes from actual object state without fetching the completed identity again
+ok 30 - interrupted real import resumes from actual object state without fetching the completed identity again
+  ---
+  duration_ms: 91.655151
+  type: 'test'
+  ...
+# Subtest: the actual shared candidateBudget admits complete transport costs alongside existing metadata and reserves
+ok 31 - the actual shared candidateBudget admits complete transport costs alongside existing metadata and reserves
+  ---
+  duration_ms: 71.846761
+  type: 'test'
+  ...
+# Subtest: interruption after a complete file resumes without another fetch or overwriting the completed alias
+ok 32 - interruption after a complete file resumes without another fetch or overwriting the completed alias
+  ---
+  duration_ms: 85.279782
+  type: 'test'
+  ...
+# Subtest: partial, corrupted and symlinked aliases are preserved and refused before any fetch
+ok 33 - partial, corrupted and symlinked aliases are preserved and refused before any fetch
+  ---
+  duration_ms: 88.682782
+  type: 'test'
+  ...
+# Subtest: wrong whole bytes or decoded gzip identities cannot produce a materialized receipt
+ok 34 - wrong whole bytes or decoded gzip identities cannot produce a materialized receipt
+  ---
+  duration_ms: 191.098204
+  type: 'test'
+  ...
+# Subtest: identity, destination and whole-file admission failures occur before object fetches
+ok 35 - identity, destination and whole-file admission failures occur before object fetches
+  ---
+  duration_ms: 156.103045
+  type: 'test'
+  ...
+# Subtest: plain materialize CLI authenticates a saved recipe index and resumes with identical receipt and zero writes
+ok 36 - plain materialize CLI authenticates a saved recipe index and resumes with identical receipt and zero writes
+  ---
+  duration_ms: 443.441787
+  type: 'test'
+  ...
+# Subtest: cold acquisition reuses gh login ephemerally; warm and non-fetch reads never request credentials
+ok 37 - cold acquisition reuses gh login ephemerally; warm and non-fetch reads never request credentials
+  ---
+  duration_ms: 92.446525
+  type: 'test'
+  ...
+# Subtest: SOURCE preparation preserves handoff order, methods/resources and complete whole handoff pin
+ok 38 - SOURCE preparation preserves handoff order, methods/resources and complete whole handoff pin
+  ---
+  duration_ms: 7.644471
+  type: 'test'
+  ...
+# Subtest: accepted whole handoff target/order drift fails even when its new pin is coherent
+ok 39 - accepted whole handoff target/order drift fails even when its new pin is coherent
+  ---
+  duration_ms: 2.423455
+  type: 'test'
+  ...
+# Subtest: writer resumes only exact complete bytes and rejects collisions, dangling symlinks and changed bindings
+ok 40 - writer resumes only exact complete bytes and rejects collisions, dangling symlinks and changed bindings
+  ---
+  duration_ms: 8.701719
+  type: 'test'
+  ...
+# Subtest: combined read/output budget fails before creating destination
+ok 41 - combined read/output budget fails before creating destination
+  ---
+  duration_ms: 0.938963
+  type: 'test'
+  ...
+# Subtest: retention joins genuine terminal, request, facts and every published output; no completion from partial files
+ok 42 - retention joins genuine terminal, request, facts and every published output; no completion from partial files
+  ---
+  duration_ms: 7.574767
+  type: 'test'
+  ...
+# Subtest: native preparation requires committed genuine SOURCE products and preserves immutable runtime/resource fields
+ok 43 - native preparation requires committed genuine SOURCE products and preserves immutable runtime/resource fields
+  ---
+  duration_ms: 3.108832
+  type: 'test'
+  ...
+# Subtest: composition invokes existing conservation logic and rejects duplicate original scope
+ok 44 - composition invokes existing conservation logic and rejects duplicate original scope
+  ---
+  duration_ms: 19.088738
+  type: 'test'
+  ...
+# Subtest: immutable Git input reader rejects whole-body drift, missing objects and nonordinary pins
+ok 45 - immutable Git input reader rejects whole-body drift, missing objects and nonordinary pins
+  ---
+  duration_ms: 75.239846
+  type: 'test'
+  ...
+# Subtest: review handoff includes current bindings/complete rename scope and no approval; stale head/body/scope fail
+ok 46 - review handoff includes current bindings/complete rename scope and no approval; stale head/body/scope fail
+  ---
+  duration_ms: 15.246724
+  type: 'test'
+  ...
+# Subtest: rebind commit phases require complete custody and publication-matching result pins
+ok 47 - rebind commit phases require complete custody and publication-matching result pins
+  ---
+  duration_ms: 1.256344
+  type: 'test'
+  ...
+# Subtest: new request issuance requires explicit finite v2 profiles and actual HEAD support/code pins
+ok 48 - new request issuance requires explicit finite v2 profiles and actual HEAD support/code pins
+  ---
+  duration_ms: 1.378715
+  type: 'test'
+  ...
+# Subtest: coherent SOURCE inventory changes and native preparation facts omissions are rejected against pinned scope/targets
+ok 49 - coherent SOURCE inventory changes and native preparation facts omissions are rejected against pinned scope/targets
+  ---
+  duration_ms: 6.608624
+  type: 'test'
+  ...
+# Subtest: native retention rejects a publication that omits the required ledger asset
+ok 50 - native retention rejects a publication that omits the required ledger asset
+  ---
+  duration_ms: 1.986968
+  type: 'test'
+  ...
+# Subtest: native self-consistent target substitutions fail the independent immutable SOURCE join
+ok 51 - native self-consistent target substitutions fail the independent immutable SOURCE join
+  ---
+  duration_ms: 7.085011
+  type: 'test'
+  ...
+# Subtest: selector finalization preserves insertion order and repeat bytes, including unsorted nested geography
+ok 52 - selector finalization preserves insertion order and repeat bytes, including unsorted nested geography
+  ---
+  duration_ms: 0.810783
+  type: 'test'
+  ...
+# Subtest: final package appends preserve the entire accepted prefix and validate duplicates/overlaps
+ok 53 - final package appends preserve the entire accepted prefix and validate duplicates/overlaps
+  ---
+  duration_ms: 1.259729
+  type: 'test'
+  ...
+# Subtest: finalization joins genuine release metadata, stages fresh files, and repeats without changes
+ok 54 - finalization joins genuine release metadata, stages fresh files, and repeats without changes
+  ---
+  duration_ms: 8.357379
+  type: 'test'
+  ...
+# Subtest: finalization rejects coherent foreign sidecar/base/ledger/envelope bindings before publication
+ok 55 - finalization rejects coherent foreign sidecar/base/ledger/envelope bindings before publication
+  ---
+  duration_ms: 15.025101
+  type: 'test'
+  ...
+# Subtest: finalization refuses a new identity at an accepted package path
+ok 56 - finalization refuses a new identity at an accepted package path
+  ---
+  duration_ms: 1.569669
+  type: 'test'
+  ...
+1..56
+# tests 56
+# suites 0
+# pass 56
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2233.734849
+
+Actual renewed opt-in command: WORLDATLAS_DELIVERY_FIXTURE=1 node --test test/delivery-handoff.test.mjs test/delivery-handoff-advance.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs test/merge-queue-client.test.mjs test/geography-prefetch.test.mjs
+✔ locators derive descriptors and refuse handwritten hashes (8.587601ms)
+✔ committed completion inventory authenticates whole bytes and phase (0.980404ms)
+✔ native transition takes original request identity and group order from saved index (1.834792ms)
+✔ interrupted metadata resumes identical postimages and only completes once (8.950087ms)
+✔ partial collision, changed bytes, symlink and foreign recipe refuse without replacement (2.729189ms)
+✔ status validates completed bytes and observations distinguish wait from preparation (3.031818ms)
+✔ queue identity is durable before uncertain submit and resume can never dispatch twice (2.203989ms)
+✔ missing independent acceptance never writes a queue identity (0.926314ms)
+✔ derives ordered scopes across original batch boundaries and real templates without component lists (24.25311ms)
+✔ models constructed encoded and decoded input closure before greedy split; transport alone deduplicates (14.233701ms)
+✔ singleton overflow fails rather than silently narrowing scope or raising allowance (2.122609ms)
+✔ the request body is charged twice and runtime/log/monitor/receipt/support are counted (1.589087ms)
+✔ native reservations include encoded and decoded predecessor bytes; real output is exactly re-admitted (2.397327ms)
+✔ requires genuine pinned locator join, exact mapping and handoff roster (4.591637ms)
+✔ supports keyed metadata and components comparison-product metadata without product reads (6.268339ms)
+✔ retained replay preserves literal scopes and rejects incomplete handoff coverage (2.721287ms)
+✔ candidate request serialization can force a split before publication (12.989345ms)
+✔ real GRC-001 authority bytes replay exactly from three locators using unchanged custody qualifiers (1512.471241ms)
+✔ same immutable inputs replay deterministic authority output on a fresh reader (2568.649663ms)
+✔ registry derives exact accepted entry after the generated authority bodies are committed (1098.167061ms)
+✔ wrong real SOURCE/NATIVE joins and wrong qualified operating proof fail (3010.304879ms)
+✔ missing inputs, handwritten derived fields and uncommitted or partial bodies fail (215.777592ms)
+✔ coherently committed failed terminal cannot produce an authority (1101.596585ms)
+✔ registry rejects duplicate, cross-rule and coherently drifted source-authority joins (2232.492337ms)
+✔ all five current13 authorities replay exact bodies and registry from discovered accepted locators (13552.449423ms)
+✔ registry phase transitions preserve another live reader shared-budget reservation (5595.257443ms)
+✔ unowned empty stage directories and foreign root inventory are never adopted (3.524679ms)
+✔ completed stages resolve their wait and subsequent successful preparation resolves refusal (5.894274ms)
+✔ advance publisher includes whole receipt in finite aggregate accounting without a fixed4KiB cap (7.390304ms)
+✔ status charges complete journal reads against the same admitted phase (1.899137ms)
+✔ real13 greedy model ignores original batch labels and deduplicates physical/admin/native transport (1655.401614ms)
+✔ stale lock recovery serializes competing acquisition and refuses ambiguous acquisition guards (2.479208ms)
+✔ initial advance intent is charged before mutation and on read-only reopening (1.729896ms)
+✔ real advance CLI refuses an oversized admitted config before reading recipe or creating destination (213.887389ms)
+✔ actual queue read adapter forwards remaining timeout and preserves rate-limit metadata (1.04444ms)
+✔ journal writes and queue intent reads share admission before dispatch (1.875573ms)
+✔ materialization report preflight refuses late collisions and changed postimages (3.157069ms)
+✔ actual missing Git objects and repeated identities acquire once; complete aliases are materialized once (225.423986ms)
+✔ caller-derived complete byte and destination allowances fail before acquisition (636.788366ms)
+✔ interrupted real import resumes from actual object state without fetching the completed identity again (173.306977ms)
+✔ the actual shared candidateBudget admits complete transport costs alongside existing metadata and reserves (153.041731ms)
+✔ interruption after a complete file resumes without another fetch or overwriting the completed alias (135.312315ms)
+✔ partial, corrupted and symlinked aliases are preserved and refused before any fetch (161.899582ms)
+✔ wrong whole bytes or decoded gzip identities cannot produce a materialized receipt (359.981014ms)
+✔ identity, destination and whole-file admission failures occur before object fetches (347.194609ms)
+✔ plain materialize CLI authenticates a saved recipe index and resumes with identical receipt and zero writes (760.492538ms)
+✔ cold acquisition reuses gh login ephemerally; warm and non-fetch reads never request credentials (212.555294ms)
+✔ SOURCE preparation preserves handoff order, methods/resources and complete whole handoff pin (6.480404ms)
+✔ accepted whole handoff target/order drift fails even when its new pin is coherent (2.226844ms)
+✔ writer resumes only exact complete bytes and rejects collisions, dangling symlinks and changed bindings (8.28382ms)
+✔ combined read/output budget fails before creating destination (0.96402ms)
+✔ retention joins genuine terminal, request, facts and every published output; no completion from partial files (6.408176ms)
+✔ native preparation requires committed genuine SOURCE products and preserves immutable runtime/resource fields (2.706305ms)
+✔ composition invokes existing conservation logic and rejects duplicate original scope (14.941727ms)
+✔ immutable Git input reader rejects whole-body drift, missing objects and nonordinary pins (67.223388ms)
+✔ review handoff includes current bindings/complete rename scope and no approval; stale head/body/scope fail (12.747551ms)
+✔ rebind commit phases require complete custody and publication-matching result pins (1.448079ms)
+✔ new request issuance requires explicit finite v2 profiles and actual HEAD support/code pins (1.368901ms)
+✔ coherent SOURCE inventory changes and native preparation facts omissions are rejected against pinned scope/targets (6.502146ms)
+✔ native retention rejects a publication that omits the required ledger asset (2.419239ms)
+✔ native self-consistent target substitutions fail the independent immutable SOURCE join (7.181494ms)
+✔ selector finalization preserves insertion order and repeat bytes, including unsorted nested geography (0.966173ms)
+✔ final package appends preserve the entire accepted prefix and validate duplicates/overlaps (1.261021ms)
+✔ finalization joins genuine release metadata, stages fresh files, and repeats without changes (8.756711ms)
+✔ finalization rejects coherent foreign sidecar/base/ledger/envelope bindings before publication (23.190213ms)
+✔ finalization refuses a new identity at an accepted package path (2.352109ms)
+✔ verifies bytes without claiming factual correctness (3.218675ms)
+✔ schema-only validation reports unverified bytes (0.657486ms)
+✔ known broken pins, stale baseline, entry hashes and contradictory summaries fail (2.670071ms)
+✔ source access/license limits remain explicit; no unsafe retention (1.005542ms)
+✔ research cannot grant approval; supported conclusions need known sources (0.613581ms)
+✔ containing-file inventory verifies actual subject IDs, not optional properties.part (0.926174ms)
+✔ compressed vs uncompressed hashes and decompression budgets are checked (2.71682ms)
+✔ paths and symlinks cannot escape candidate reader (1.972406ms)
+✔ new identity registry is checked against retained prior roster without claiming source or geometry approval (1.140482ms)
+✔ prior inventory cannot accept invented subjects, candidate baselines or ambiguous authority (1.500246ms)
+✔ identity-only projection rejects duplicates, geometry and altered native IDs even with updated output hashes (1.524762ms)
+✔ declared gzip .bin containing files preserve complete mixed 45-component/eight-contact membership (6.014949ms)
+✔ subject gzip declaration does not accept unsupported bytes, wrong hashes or coherently missing subjects (8.618726ms)
+✔ actual subject decompression remains bounded for legacy gzip with small encoded bytes (0.953535ms)
+✔ prior inventory and candidate registry decode their declared gzip .bin descriptors at correct vintages (1.36213ms)
+✔ GitHub commit-valued envelopes require requesting the exact local root tree (181.697169ms)
+✔ real missing-object fetches are batched, shared OIDs deduplicate, and candidate-only bytes arrive (572.153821ms)
+✔ wrong tree, mode, size, OID and hash are not accepted as scoped completion (186.426526ms)
+✔ duplicate OIDs cannot bypass the independent declaration-count limit (144.976352ms)
+✔ member, entry and aggregate admission precede any object fetch (141.255553ms)
+✔ failed transport remains unavailable and redacts subprocess errors (131.673245ms)
+✔ wrong local object type and corrupted acquired bytes refuse completion (179.458296ms)
+✔ direct native and additive historical aliases are scoped acquisitions (434.611737ms)
+✔ an unsupported source bank cannot return a completed acquisition (0.691596ms)
+✔ real timeout and failed launcher stop descendants before fallback, with honest summaries (1101.889446ms)
+✔ unconfirmed process-group cleanup blocks checker continuation (58.204718ms)
+✔ independent record bindings reject coherent wrong joins, incomplete and vacuous coverage (4.827616ms)
+✔ new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption (1.542668ms)
+✔ positive real-format ledger validates actual files and binds an independent review (4.012603ms)
+✔ regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail (2.989515ms)
+✔ full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence (1.391995ms)
+✔ coordinate/helper policies remain enforced without ceremonial control files (1.114463ms)
+✔ generator controls bind actual positive, negative and equal two-run output bytes (1.444393ms)
+✔ Washington-style generated narrative/table mismatch fails against the same numeric ledger (1.059171ms)
+✔ reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review (1.930595ms)
+✔ mock remote queue checks exact blobs/head/independent receipt with read-only requests (8.21652ms)
+✔ incomplete remote trees cannot become a passed byte check (0.587632ms)
+✔ remote decisions reject stale exact-head reviews and a later change request (1.640654ms)
+✔ unchanged authored evidence survives unrelated main advance, while current metrics require refresh (0.267737ms)
+✔ trusted hosted gate checks a new limited prior-evidence registry and still rejects nonancestor baselines (2.58164ms)
+✔ fresh remote review, head, tree/path and reservation checks reject after immutable bytes were reused (11.617345ms)
+✔ acceptance/disposition binding invalidates substantive changes but preserves JSON formatting and progress comments (2.54755ms)
+✔ binding activation preserves existing PRs and rejects unknown activation timestamps (0.333309ms)
+✔ compact review binds canonical complete inventory and preserves literal receipts (0.890741ms)
+✔ compact reviews refuse malformed, mixed, omitted, changed and renamed inventories (3.57227ms)
+✔ compact inventory does not weaken head, reviewer, contract, domain or limit authority (1.234522ms)
+✔ normal remote comment route admits a complete compact review beyond literal GitHub comment size (83.252808ms)
+✔ minimal manifests reuse Git change inventory but preserve evidence and independent review (0.826657ms)
+✔ omitting duplicate change receipts does not authorize replacing original scientific evidence (1.912237ms)
+✔ declared controls remain checked, not accepted merely because controls are optional (0.454144ms)
+✔ remote minimal manifests need no base-body copies for unrelated code changes (1.114153ms)
+ℹ tests 117
+ℹ suites 0
+ℹ pass 117
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 36656.213259
