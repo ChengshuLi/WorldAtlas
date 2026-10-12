@@ -1,0 +1,71 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import os from 'node:os';
+import {spawnSync} from 'node:child_process';
+import {gzipSync} from 'node:zlib';
+import {reportHash} from '../scripts/geographic-report-artifact.mjs';
+const modulePath=path.resolve('scripts/geographic_checkpoint_products.py');
+const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'?Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value;
+const bytes=value=>Buffer.from(JSON.stringify(canonical(value))+'\n');
+function fixture(t) {
+  const root=fs.mkdtempSync(path.join(os.tmpdir(),'checkpoint-retention-'));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  const source=path.join(root,'source'),out=path.join(root,'out');fs.mkdirSync(source);fs.mkdirSync(out);
+  const put=(name,raw)=>{fs.writeFileSync(path.join(source,name),raw,{mode:0o644});return {path:name,bytes:raw.length,sha256:reportHash(raw)};};
+  const gzip=(name,value)=>{const raw=bytes(value);return {...put(name,gzipSync(raw)),decoded_bytes:raw.length,decoded_sha256:reportHash(raw)};};
+  const publication={version:1,complete:true,kind:'trusted-selected-continuous-comparison-v1',
+    operands:gzip('operands.json.gz',{baseline:{},candidate:{}}),facts:put('facts.json',bytes({candidate_code_executed:false}))};
+  const native={status:'no-new-native-loss',candidate_code_executed:false,intervals:[],lost_or_reassigned_cells:0};
+  const facts={continuous_publication:publication,native_result_sha256:reportHash(bytes(native))};
+  const derived={version:1,complete:true,kind:'derived-selected-checkpoint-candidate-v1',accepted_checkpoint:false,
+    validation_stage:'native-passed-continuous-pending',certificate:gzip('derived-certificate.json.gz',{version:1,entries:[]}),
+    facts:put('derived-facts.json',bytes(facts))};
+  put('publication.json',bytes(publication));put('derived-publication.json',bytes(derived));put('checkpoint-routes.json',bytes([]));
+  const issued={native:{...native,runtime:{notPartOfInnerHash:true}},continuous:{publication,derived_checkpoint:derived},
+    continuous_result:{candidate_code_executed:false,issued_publication:publication,
+      original_strict_polygon_result:{status:'no-new-regression',regressions:0}}};
+  return {root,source,out,issued,put};
+}
+function run(f,action='retain',extra='') {
+  const input=JSON.stringify(f.issued);
+  const code=`import json,runpy,sys\nm=runpy.run_path(sys.argv[1])\nissued=json.loads(sys.argv[4])\n${extra}\nresult=m['${action==='retain'?'retain_checkpoint_products':'admit_checkpoint_destination'}'](${action==='retain'?'sys.argv[2],sys.argv[3],issued':'sys.argv[3]'})\nprint(json.dumps(result) if isinstance(result,dict) else str(result))`;
+  const env={...process.env};delete env.GH_TOKEN;delete env.GITHUB_TOKEN;
+  return spawnSync(process.env.PYTHON??'python3',['-I','-B','-c',code,modulePath,f.source,f.out,input],{encoding:'utf8',env});
+}
+test('actual Python retention binds whole provisional copies and preserves native/strict outcomes', t=>{
+  const f=fixture(t),result=run(f);assert.equal(result.status,0,result.stderr);
+  const descriptor=JSON.parse(result.stdout);assert.equal(descriptor.members.length,7);
+  for(const row of descriptor.members) assert(fs.readFileSync(path.join(f.out,row.name)).equals(fs.readFileSync(path.join(f.source,row.name))));
+  assert.equal(JSON.parse(fs.readFileSync(path.join(f.out,'derived-publication.json'))).accepted_checkpoint,false);
+});
+test('ordinary and dangling-symlink collisions refuse before writing and preserve original sentinels',t=>{
+  for(const symbolic of [false,true]) {
+    const f=fixture(t),target=path.join(f.out,'facts.json');
+    if(symbolic)fs.symlinkSync(path.join(f.root,'missing'),target);else fs.writeFileSync(target,'original sentinel');
+    const result=run(f);assert.notEqual(result.status,0);assert.match(result.stderr,/already exists/);
+    assert.equal(fs.readdirSync(f.out).length,1);
+    if(symbolic)assert(fs.lstatSync(target).isSymbolicLink());else assert.equal(fs.readFileSync(target,'utf8'),'original sentinel');
+  }
+});
+test('failed/missing strict result, forged native result, incomplete publication and extra files refuse',t=>{
+  for(const alter of [f=>f.issued.continuous_result.original_strict_polygon_result.regressions=1,
+    f=>delete f.issued.continuous_result.original_strict_polygon_result,f=>f.issued.native.lost_or_reassigned_cells=1,
+    f=>f.issued.continuous.derived_checkpoint.accepted_checkpoint=true,f=>f.put('extra.json',bytes({})),
+    f=>fs.unlinkSync(path.join(f.source,'checkpoint-routes.json'))]) {
+    const f=fixture(t);alter(f);const result=run(f);assert.notEqual(result.status,0);assert.deepEqual(fs.readdirSync(f.out),[]);
+  }
+});
+test('bounded gzip reader rejects trailer size lies before trusting inflated bodies',t=>{
+  const f=fixture(t),file=path.join(f.source,'operands.json.gz'),body=fs.readFileSync(file);body.writeUInt32LE(1,body.length-4);fs.writeFileSync(file,body);
+  const result=run(f);assert.notEqual(result.status,0);assert.deepEqual(fs.readdirSync(f.out),[]);
+});
+test('complete union admission precedes product reads and output creation',t=>{
+  const f=fixture(t),result=run(f,'retain',"original=m['retain_checkpoint_products']\nm['retain_checkpoint_products']=lambda *args: original(*args,allowance=1)");
+  assert.notEqual(result.status,0);assert.match(result.stderr,/current allowance/);assert.deepEqual(fs.readdirSync(f.out),[]);
+});
+test('partial write failure yields no completion descriptor and preserves failed output evidence',t=>{
+  const f=fixture(t);const code=`import pathlib\noriginal=pathlib.Path.open\ndef fail(self,*args,**kwargs):\n    if self.parent==pathlib.Path(sys.argv[3]) and self.name=='facts.json': raise OSError('injected write failure')\n    return original(self,*args,**kwargs)\npathlib.Path.open=fail`;
+  const result=run(f,'retain',code);assert.notEqual(result.status,0);assert.match(result.stderr,/injected write failure/);
+  assert.equal(result.stdout,'');assert(fs.readdirSync(f.out).length>0);assert(!fs.existsSync(path.join(f.out,'geography-check.json')));
+});

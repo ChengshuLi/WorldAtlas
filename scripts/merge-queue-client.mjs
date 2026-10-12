@@ -1,6 +1,6 @@
 import {githubPages} from './issue-claim-contract.mjs';
 import {queueRows} from './merge-scheduler.mjs';
-import {readWorkerResult} from './worker-result.mjs';
+import {readWorkerResult, verifyAcceptedMergeResult} from './worker-result.mjs';
 import {execFileSync} from 'node:child_process';
 import {conditionalSnapshots} from './github-snapshots.mjs';
 
@@ -190,14 +190,9 @@ export async function runMergeQueueClient({api, submit, repo, number, head,
       receiptAt = now() - started;
       emit({status: 'receipt-observed', accepted: result.accepted});
       if (!result.accepted) return finish(result);
-      if (result.status !== 'merged' || !/^[a-f0-9]{40}$/.test(result.merge_commit ?? '') ||
-        (result.expected_head !== undefined && result.expected_head !== head) ||
-        (result.reviewed_head !== undefined && result.reviewed_head !== head))
-        throw Error('Malformed or mismatched accepted merge receipt');
       const merged = await read(`/repos/${repo}/pulls/${number}`);
       if (expired) return pending();
-      if (!merged.merged || merged.head?.sha !== head || merged.merge_commit_sha !== result.merge_commit)
-        throw Error('Merge receipt differs from actual PR state');
+      verifyAcceptedMergeResult(result, merged, head);
       reconciledAt = now() - started;
       emit({status: 'merge-reconciled', merge_commit: result.merge_commit});
       return finish(result);

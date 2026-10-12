@@ -6,6 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {createRoutingMetadataAcquisition} from './geography-routing-metadata.mjs';
+import {ACCEPTED_CHECKPOINT_LOCATOR, ACCEPTED_CHECKPOINT_CODE, validateAcceptedCheckpointLocator} from './accepted-selected-checkpoint.mjs';
 
 const PREFIX = 'coordination/engineering/selected-geography-effective-prevention-20261009/';
 const POLICY = PREFIX + 'supported-programs.json';
@@ -55,7 +56,7 @@ export const EXECUTION_CODE = Object.freeze([
   'scripts/ellipsoidal_area.py', 'requirements.txt', 'package.json', 'package-lock.json',
   PREFIX + 'selected-neighbor-prevention.mjs', PREFIX + 'selected-continuous-entry.mjs',
   PREFIX + 'selected-checkpoint.mjs', PREFIX + 'selected-checkpoint-continuous.mjs', PREFIX + 'selected-joint-entry.mjs',
-  CHECKPOINTS
+  CHECKPOINTS, ...ACCEPTED_CHECKPOINT_CODE, 'scripts/geographic_checkpoint_products.py'
 ]);
 export const REBIND_CODE = Object.freeze([
   'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs',
@@ -341,6 +342,13 @@ async function collect(reader, {baseline, candidate, trusted}) {
     reader.descriptor(candidate, name, true);
   }
   for (const name of EXECUTION_CODE) reader.equalCurrent(name);
+  // A locator is not a scientific source, but changed root/copy custody must
+  // reenter authenticated acquisition rather than inherit an unchanged skip.
+  const checkpointLocator = reader.equalCurrent(ACCEPTED_CHECKPOINT_LOCATOR, true);
+  if (checkpointLocator) {
+    const locator = validateAcceptedCheckpointLocator(await reader.jsonAt(checkpointLocator));
+    if (locator.retained_artifact) reader.equalCurrent(locator.retained_artifact.path, true);
+  }
   for (const name of ['scripts/check-unchanged-selected-geography.mjs', 'scripts/geography-routing-metadata.mjs']) reader.equalCurrent(name, true);
   reader.equalCurrent('scripts/geography-prefetch.mjs');
   await joined([...Object.keys(AUDITED_READERS).map(name => reader.body(reader.descriptor(trusted, name))),

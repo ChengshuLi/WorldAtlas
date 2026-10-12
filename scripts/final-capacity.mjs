@@ -118,12 +118,12 @@ export function finalRequestBound({inventory, metadataCalls, admissionCalls = 0,
     'Cannot establish a finite final request bound');
   // Two metadata passes: fresh rejection gates after waiting and full final
   // inspection. Additional source authority includes its fresh rechecks. The
-  // 48 additional calls allocate 16 to bounded cleanup/receipt, 20 to final
+  // 52 additional calls allocate 16 to bounded cleanup/receipt, 20 to final
   // mutable guards/guarded merge, 8 to candidate/proof trees and 4 to artifact
-  // download/notification. This logical inventory is a minimum admission estimate,
+  // download/notification, plus 4 for fresh geographic run/job/log/tree custody. This logical inventory is a minimum admission estimate,
   // not an upper bound on actual attempts: mutable fanout and HTTP retries may
   // exceed it. The separate quota-derived attempt bound preserves recovery.
-  const required = inventory.blob_calls + metadataCalls * (inventory.water ? 5 : 2) + admissionCalls + proofCalls + artifactPages + 48;
+  const required = inventory.blob_calls + metadataCalls * (inventory.water ? 5 : 2) + admissionCalls + proofCalls + artifactPages + 52;
   need(Number.isSafeInteger(required) && required > 0, 'Cannot establish a finite final request bound');
   return required;
 }

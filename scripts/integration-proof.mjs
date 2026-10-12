@@ -4,14 +4,17 @@ export const PROOF_PATHS = ['.github/workflows/merge-integration-checks.yml',
   'scripts/run-integration-tests.mjs', 'scripts/integration-profile.mjs', 'scripts/check-integration-profile.mjs',
   'scripts/check-pr-gates.mjs'];
 export const WORKFLOW_PATH = PROOF_PATHS[0];
+export const QUEUE_WORKFLOW_PATH = '.github/workflows/worker-merge.yml';
 const prefix = repo => `/repos/${repo}`;
 
-export function successfulGeographyJob(jobs) {
+export function successfulGeographyJob(jobs, workflow = WORKFLOW_PATH) {
+  if (![WORKFLOW_PATH, QUEUE_WORKFLOW_PATH].includes(workflow)) return null;
   const matches = jobs.filter(job => job.name === 'geography');
   if (matches.length !== 1) return null;
   const job = matches[0];
   const required = ['Checkout trusted geographic checker', 'Install trusted geographic dependencies',
-    'Check proposed geography with trusted baseline code',
+    workflow === WORKFLOW_PATH ? 'Check proposed geography with trusted baseline code' :
+      'Check exact combined geography with trusted baseline code',
     'Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02'];
   if (!Number.isSafeInteger(job.id) || job.id < 1 || job.status !== 'completed' || job.conclusion !== 'success' ||
       !required.every(name => {

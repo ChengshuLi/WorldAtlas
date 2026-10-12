@@ -223,6 +223,7 @@ jobs:
     timeout-minutes: 25
     permissions:
       contents: read
+      actions: read
       pull-requests: read
       issues: read
     steps:
@@ -237,6 +238,7 @@ jobs:
             src
             .github
             coordination/engineering/selected-geography-effective-prevention-20261009
+            coordination/engineering/selected-checkpoint-reuse-20261012
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
           node-version: '24'
@@ -295,7 +297,16 @@ jobs:
         if: always()
         with:
           name: proposed-geography-${{ github.event.pull_request.number }}-${{ github.run_attempt }}
-          path: geography-check.json
+          path: |
+            geography-check.json
+            derived-certificate.json.gz
+            derived-facts.json
+            derived-publication.json
+            facts.json
+            operands.json.gz
+            publication.json
+            checkpoint-routes.json
+            operating.json
           retention-days: 30
   regression:
     needs: profile
