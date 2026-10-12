@@ -618,6 +618,65 @@ export function compareIntervals(before,after,{row,ownersBefore,ownersAfter}) {
   return losses;
 }
 
+// Numerical consumers of complete row projections. These helpers do not issue
+// selection/checkpoint authority: the trusted shared reader must authenticate
+// each vintage, scope, owner/parent binding and complete native input custody.
+function effectiveNativeRows(rows,size,owners) {
+  demand(Number.isSafeInteger(size)&&size>0&&Number.isSafeInteger(size*size),'Invalid effective native domain');
+  demand(Array.isArray(rows)&&Array.isArray(owners)&&owners.length>0,'Missing complete effective native projections');
+  const indexed=new Map();let previous=-1;
+  for(const row of rows){
+    demand(row&&Number.isSafeInteger(row.y)&&row.y>previous&&row.y<size&&Array.isArray(row.runs),'Duplicate/foreign/unordered effective native row');
+    previous=row.y;let end=0;
+    for(const run of row.runs){
+      demand(Array.isArray(run)&&run.length===3&&run.every(Number.isSafeInteger)&&run[0]>=end&&run[1]>run[0]&&run[1]<=size&&run[2]>0
+        &&typeof owners[run[2]-1]?.id==='string'&&owners[run[2]-1].id.length>0,'Invalid complete effective native interval/owner');
+      end=run[1];
+    }
+    indexed.set(row.y,row);
+  }
+  return indexed;
+}
+
+export function deriveEffectiveNativeRowDelta(beforeRows,afterRows,{size,ownersBefore,ownersAfter}) {
+  const before=effectiveNativeRows(beforeRows,size,ownersBefore),after=effectiveNativeRows(afterRows,size,ownersAfter);
+  const rows=[...new Set([...before.keys(),...after.keys()])].sort((a,b)=>a-b);
+  return rows.filter(y=>{
+    const old=before.get(y),next=after.get(y);
+    if(!old||!next||!same(old.runs,next.runs))return true;
+    // Stable indices are independently checked by the acquisition boundary;
+    // do not let this pure helper hide an ID change behind an equal run count.
+    return old.runs.some(run=>ownersBefore[run[2]-1].id!==ownersAfter[run[2]-1].id);
+  });
+}
+
+export function compareEffectiveNativeRows(beforeRows,afterRows,{size,ownersBefore,ownersAfter,rows}) {
+  const before=effectiveNativeRows(beforeRows,size,ownersBefore),after=effectiveNativeRows(afterRows,size,ownersAfter);
+  demand(Array.isArray(rows)&&rows.every((y,i)=>Number.isSafeInteger(y)&&y>=0&&y<size&&(!i||y>rows[i-1])),'Duplicate/foreign/unordered requested native row');
+  demand(same([...before.keys()],rows)&&same([...after.keys()],rows),'Incomplete complete native projection scope');
+  const intervals=[];let lostCells=0;
+  for(const y of rows)for(const loss of compareIntervals(before.get(y).runs,after.get(y).runs,{row:y,ownersBefore,ownersAfter})){
+    demand(intervals.length<65536,'Exact native finding output exceeds bounded receipt; refuse acceptance');
+    lostCells+=loss.end-loss.start;demand(Number.isSafeInteger(lostCells),'Native loss count exceeds exact integer domain');intervals.push(loss);
+  }
+  demand(Buffer.byteLength(JSON.stringify(intervals))<=OUTPUT,'Native finding receipt exceeds admitted output reserve');
+  return {checked_rows:rows.length,lost_or_reassigned_cells:lostCells,intervals};
+}
+
+// Finished planning frame: row maps/sets do not survive into native body
+// acquisition. Both snapshots were fully qualified by loadSelection already.
+function effectiveAdditiveRowScope(before,after,size) {
+  const rows=new Set([...(before.additive?.patch.rows??[]),...(after.additive?.patch.rows??[])].map(row=>row.y));
+  const historical=rows.size,oldNative=before.additive?.current_rebind?.native,newNative=after.additive?.current_rebind?.native;
+  if(oldNative&&newNative){
+    const delta=new Set(deriveEffectiveNativeRowDelta(oldNative.effective_rows,newNative.effective_rows,{size,ownersBefore:before.owners,ownersAfter:after.owners}));
+    const oldBase=new Map(oldNative.current_rows.map(row=>[row.y,row])),newBase=new Map(newNative.current_rows.map(row=>[row.y,row]));
+    for(const y of rows)if(!delta.has(y)&&oldBase.has(y)&&newBase.has(y)&&same(oldBase.get(y).runs,newBase.get(y).runs))rows.delete(y);
+  }
+  return {rows,receipt:{historical_additive_rows:historical,unchanged_effective_additive_rows:historical-rows.size,
+    proof:oldNative&&newNative?'authenticated-complete-current-rebind-rows':'legacy-additive-union'}};
+}
+
 export function selectedBootstrap(repo,baseline,candidate,{parentRuntimePath}={}) {
   const allowance=processingAllowance();
   const runtimePaths=[fs.realpathSync(process.execPath),...(parentRuntimePath?[fs.realpathSync(parentRuntimePath)]:[])];
@@ -673,7 +732,17 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
   offset=0;for(let y=0;y<b.size;y++){demand(newRows[y*2]===offset,'Candidate row partition incomplete');offset+=newRows[y*2+1];}demand(offset*2===b.runWords,'Candidate rows omitted runs');
   const bodyChanged=(p,snapshot,other)=>{const ownPath=path.posix.join(path.posix.dirname(snapshot.selection.manifest_path),p.path),otherPath=path.posix.join(path.posix.dirname(other.selection.manifest_path),p.path),own=snapshot.reader.inventory.get(snapshot.reader.version+':'+ownPath),prior=other.reader.inventory.get(other.reader.version+':'+otherPath);return !!own!==!!prior||!!own&&(own.mode!==prior.mode||own.git_blob_oid!==prior.git_blob_oid);};
   const changed=oldParts.filter(p=>!newParts.some(q=>same(p,q))||bodyChanged(p,before,after)).concat(newParts.filter(p=>!oldParts.some(q=>same(p,q))||bodyChanged(p,after,before)));
-  const additiveRows=new Set([...(before.additive?.patch.rows??[]),...(after.additive?.patch.rows??[])].map(r=>r.y));
+  // Current rebind acquisition has already checked full native rows and
+  // exclusion of every original addition. Legacy patches retain their union.
+  // Prospectively charge the planning maps/comparison scratch while live;
+  // this finished frame releases them before any native body reacquisition.
+  const planningMetadata=beforeReader.metadataBytes;
+  const planningScratch=2*((before.additive?.metadata_bytes??0)+(after.additive?.metadata_bytes??0));
+  beforeReader.metadataBytes=afterReader.metadataBytes=planningMetadata+planningScratch;
+  beforeReader.phase();
+  const additiveScope=effectiveAdditiveRowScope(before,after,a.size);
+  const additiveRows=additiveScope.rows,nativeRowScope=additiveScope.receipt;
+  beforeReader.metadataBytes=afterReader.metadataBytes=planningMetadata+additiveRows.size*64+2*Buffer.byteLength(JSON.stringify(nativeRowScope));
   let additiveConservation=null;if(before.additive){demand(after.additive,'Previously selected additive repair ledger removed');additiveConservation=compareVersionedRepairLedgers(before.additive.ledger,after.additive.ledger,{beforeRegistry:before.additive.registry,afterRegistry:after.additive.registry});}
   const affected=[];for(let y=0;y<a.size;y++){const spans=[[oldRows[y*2]*2,(oldRows[y*2]+oldRows[y*2+1])*2],[newRows[y*2]*2,(newRows[y*2]+newRows[y*2+1])*2]];if(additiveRows.has(y)||oldRows[y*2]!==newRows[y*2]||oldRows[y*2+1]!==newRows[y*2+1]||spans.some(([s,e])=>changed.some(p=>s<p.offset+p.words&&p.offset<e)))affected.push(y);}
   // Plan consecutive identical containing rosters, splitting by the actual
@@ -715,7 +784,7 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
     demand(Buffer.byteLength(JSON.stringify(phases))+Buffer.byteLength(JSON.stringify(losses))<=OUTPUT,'Native phase/finding receipt exceeds admitted output reserve');
   }
   demand(checkedRows===affected.length&&groups.flat().every((y,i)=>y===affected[i]),'Incomplete affected native row comparison');
-  return {version:1,method:'selected-native-owner-conservation-v1',status:losses.length?'native-regressions-found':'no-new-native-loss',baseline_selection:before.selection,candidate_selection:after.selection,baseline_receipt_provenance:before.receiptProvenance,candidate_receipt_provenance:after.receiptProvenance,additive_conservation:additiveConservation,affected_rows:affected.length,lost_or_reassigned_cells:lostCells,intervals:losses,phases,runtime,caller_runtime:callerRuntime,execution_runtimes:identities,execution_code_inventory:executionCode,output_reserve_bytes:OUTPUT,input_inventory:[...beforeReader.inventory.values(),...afterReader.inventory.values()],candidate_code_executed:false,limits:['Native owner conservation is not sub-cell polygon coverage or source authority approval.','Only explicit authenticated committed additive hooks are consumed; proposal files never select a release. Continuous primitive-set coverage is enforced separately.']};
+  return {version:1,method:'selected-native-owner-conservation-v1',status:losses.length?'native-regressions-found':'no-new-native-loss',baseline_selection:before.selection,candidate_selection:after.selection,baseline_receipt_provenance:before.receiptProvenance,candidate_receipt_provenance:after.receiptProvenance,additive_conservation:additiveConservation,native_row_scope:nativeRowScope,affected_rows:affected.length,lost_or_reassigned_cells:lostCells,intervals:losses,phases,runtime,caller_runtime:callerRuntime,execution_runtimes:identities,execution_code_inventory:executionCode,output_reserve_bytes:OUTPUT,input_inventory:[...beforeReader.inventory.values(),...afterReader.inventory.values()],candidate_code_executed:false,limits:['Native owner conservation is not sub-cell polygon coverage or source authority approval.','Only explicit authenticated committed additive hooks are consumed; proposal files never select a release. Continuous primitive-set coverage is enforced separately.']};
 }
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
