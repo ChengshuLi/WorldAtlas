@@ -86,7 +86,7 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
     const transition = checkpoint.qualifyTransition({state, reader:afterReader, budget});
     if (!transition.available) return coldDecision(transition);
     checkpoint.authenticateTransition({transition, budget});
-    const nativeReport = native.compareSelectedCheckpointNative({transition, budget});
+    const nativeReport = await native.compareSelectedCheckpointNative({transition, budget});
     demand(nativeReport && ['native-regressions-found', 'no-new-native-loss'].includes(nativeReport.status),
       'Joint native consumer did not complete an actual comparison');
     demand(valueBytes(nativeReport).length <= OUTPUT, 'Joint native report exceeds original output reserve');
