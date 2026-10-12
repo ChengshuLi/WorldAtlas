@@ -81,6 +81,36 @@ export function readClaim(comments){
  if(claim.mode==='geography')validateGeographyOwnedPaths(claim.owned_paths);
  return {comment_id:comment.id,...claim};
 }
+// Keep the two-read mutation guard aligned with the authority consumed below.
+// GitHub activity timestamps, ordinary discussion and PR presentation fields are
+// not reservation authority. Parsed canonical records remain fail-closed.
+export function claimDecisionSnapshot({issue,comments=[],dependencies=[],prs=[],otherIssues=[],action}) {
+ const labels=value=>(value.labels??[]).map(x=>typeof x==='string'?x:x.name);
+ const relevantLabels=value=>labels(value).filter(x=>x?.startsWith('type:')||x?.startsWith('kind:')||
+  ['status:ready','status:blocked','status:claimed','coordination:recovery-approved'].includes(x)).sort();
+ const canonical=value=>{
+  if(Array.isArray(value))return value.map(canonical);
+  if(value&&typeof value==='object')return Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])]));
+  return value;
+ };
+ const inventory=rows=>rows.map(canonical).sort((a,b)=>JSON.stringify(a).localeCompare(JSON.stringify(b)));
+ const authority=(category,read)=>{try{return read();}catch(error){throw Object.assign(error,{claim_category:category});}};
+ const spec=action==='release'?null:authority('readiness',()=>workSpec(issue.body));
+ const endpoint=value=>({ref:value?.ref,sha:value?.sha,repo_id:value?.repo?.id,repository:value?.repo?.full_name});
+ const snapshot={
+  readiness:{number:issue.number,state:issue.state,pull_request:Boolean(issue.pull_request),
+   created_at:action==='release'?undefined:issue.created_at,labels:relevantLabels(issue),spec},
+  claim:authority('claim',()=>readClaim(comments)),
+  blockers:action==='release'?[]:authority('blockers',()=>inventory(activeIssueBlockers(comments))),
+  dependencies:inventory(dependencies.map(d=>({number:d.number,state:d.state,pull_request:Boolean(d.pull_request)}))),
+  linked_prs:inventory(prs.map(pr=>({number:pr.number,state:pr.state,head:endpoint(pr.head),base:{ref:pr.base?.ref,repo_id:pr.base?.repo?.id,repository:pr.base?.repo?.full_name},
+   merged:Boolean(pr.merged_at)}))),
+  ownership:spec?.mode==='geography'?authority('ownership',()=>inventory(otherIssues.filter(other=>other.number!==issue.number&&
+   other.state==='open'&&!other.pull_request&&labels(other).includes('type:geography')&&!labels(other).includes('kind:umbrella'))
+   .map(other=>({number:other.number,owned_paths:workSpec(other.body).owned_paths})))):[]
+ };
+ return Object.fromEntries(Object.entries(snapshot).map(([category,value])=>[category,JSON.stringify(canonical(value))]));
+}
 export function renderClaim(claim){
  const state={...claim};delete state.comment_id;
  return `**Worker reservation:** ${claim.active?'claimed':'released'} · ${claim.worker_id}\n\nBranch: \`${claim.branch}\` · lease expires: ${claim.expires_at} · live work pending: ${Boolean(claim.live_work)}\n\n<!-- ${claimMarker}\n${JSON.stringify(state)}\n-->`;

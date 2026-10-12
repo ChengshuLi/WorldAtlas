@@ -9,12 +9,12 @@ import {candidateBudget} from '../scripts/native-ownership/native-preparation-gu
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
 import {subjectsHash} from '../scripts/evidence-quality.mjs';
 import {jsonBytes, digest, pinReader, publish, prepareRequests, retainProducts, nativeRequests,
-  composeAuthorities, packageProjection, rebindCustody, requestProfile, finalizedSelection, finalizedPackageInputs, finalizeDelivery, freezeReview} from '../scripts/prepare-delivery-handoff.mjs';
+  composeAuthorities, packageProjection, rebindCustody, requestProfile, finalizedSelection, finalizedPackageInputs, finalizeDelivery, prepareEvidence, freezeReview} from '../scripts/prepare-delivery-handoff.mjs';
 
 const commit = 'a'.repeat(40), prefix = 'coordination/engineering/control/';
-function memoryReader() {
+function memoryReader({admit = true} = {}) {
   const bodies = new Map(), pins = new Map(); let ordinal = 0;
-  const reader = {budget: candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0}),
+  const reader = {budget: admit ? candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0}) : null,
     add(name, value) { const raw = Buffer.isBuffer(value) ? value : jsonBytes(value); const pin = {path: name, commit,
       mode: '100644', blob: (++ordinal).toString(16).padStart(40, '0'), bytes: raw.length, sha256: digest(raw)};
       bodies.set(pin.sha256, raw); pins.set(name, pin); return pin; },
@@ -428,6 +428,128 @@ test('review freeze binds refreshed PR state before reading evidence and detects
   const draft = prepare(); draft.pr.draft = true; draft.expectedPR = structuredClone(draft.pr);
   const packet = JSON.parse((await freezeReview(draft))['review-packet.json']);
   assert.equal(packet.pr.draft, true); assert.equal(packet.kind, 'review-preparation-only');
+});
+
+// Scalar extraction from the reviewed AUS facts/evidence at
+// c753c65a72e51718b453883a941fc22e148b5fbb, merged as 94d7016a6e12ec5c5414db24202e95d5dd9e4459:
+// coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/
+// retained-002/native/facts.json and evidence-quality.json. These small controls
+// exercise report transfer, not geographic computation or original byte identity.
+const ausNativeScalars = {components: 13, assigned_cells: 20, assigned_components: 7,
+  zero_cell_components: 6, native_conflicts: 0, removed_cells: 0, reassigned_cells: 0, source_exceptions: 0,
+  candidate_cell_contributions: 20, shared_same_owner_cells: 0};
+const ausSourceEvaluation = 'ad32930dc368c1b4b1cb46cc0484649053d44762';
+const ausNativeEvaluation = '5d287b5f78c9219b1d9202d20d8824ef2ef7898b';
+function evidenceFixture(reader = memoryReader({admit: false})) {
+  const descriptor = pin => ({path: pin.path, bytes: pin.bytes, sha256: pin.sha256, hash_kind: 'file-bytes'});
+  const baseline = reader.add('baseline.json', {retained: true});
+  const input = reader.add(prefix + 'native-request.json', {operation: 'unactivated-additive-native-batch-v1'});
+  const facts = {...ausNativeScalars, execution_commit: ausNativeEvaluation, request: input};
+  const measurement = reader.add(prefix + 'native-facts.json', facts);
+  const sourceInput = reader.add(prefix + 'source-request.json', {operation: 'retained-land-source-premises-v1'});
+  const sourceFacts = reader.add(prefix + 'source-facts.json', {components: 13, source_compatible: 13,
+    execution_commit: ausSourceEvaluation, request: sourceInput});
+  const manifest = {version: 1, issue: 1785, lane: 'engineering', worker_id: 'fixture', subject_ids: [], subject_ids_sha256: subjectsHash([]),
+    baseline: {version: 2, commit, files: [{...descriptor(baseline), commit}], pins: {}}, sources: [],
+    outputs: [input, measurement, sourceInput, sourceFacts].map(descriptor),
+    methods: [{id: 'delivery', kind: 'code', description: 'Retained delivery measurements', software: 'Node 24', units: 'components, native cells'}],
+    metrics: [], summaries: [], conclusions: [], stages: {research: 'complete', implementation: 'implemented', geographic_approval: 'not-requested'}, commands: []};
+  const source = {measurement, input, input_file: {path: input.path, commit: 'candidate'}, evaluation_commit: ausNativeEvaluation,
+    vintage: 'archived', fields: Object.keys(ausNativeScalars).map(field => ({id: 'aus-native-' + field, field}))};
+  const config = {version: 1, template: reader.add(prefix + 'template.json', manifest), metric_sources: [source,
+    {measurement: sourceFacts, input: sourceInput, input_file: {path: sourceInput.path, commit: 'candidate'}, evaluation_commit: ausSourceEvaluation,
+      vintage: 'archived', fields: ['components', 'source_compatible'].map(field => ({id: 'aus-source-' + field, field}))}]};
+  return {reader, config, manifest, source, facts};
+}
+
+test('typed evidence transfers actual AUS counts and explicit request/evaluation vintages', () => {
+  const f = evidenceFixture(), manifest = JSON.parse(prepareEvidence(f.config, f.reader)['evidence-quality.json']);
+  for (const [field, value] of Object.entries(ausNativeScalars)) {
+    const metric = manifest.metrics.find(row => row.id === 'aus-native-' + field);
+    assert.equal(metric.value, value);
+    assert.equal(metric.unit, ['assigned_cells', 'removed_cells', 'reassigned_cells', 'candidate_cell_contributions', 'shared_same_owner_cells'].includes(field) ? 'native cells' : 'components');
+    assert.equal(metric.input_sha256, f.source.input.sha256);
+    assert.deepEqual(metric.input_file, f.source.input_file);
+    assert.equal(metric.evaluation_commit, ausNativeEvaluation); assert.equal(metric.vintage, 'archived');
+    assert.deepEqual(manifest.metric_bindings.find(row => row.metric_id === metric.id),
+      {metric_id: metric.id, path: f.source.measurement.path, json_pointer: '/' + field});
+  }
+  assert.equal(manifest.metrics.find(row => row.id === 'aus-source-source_compatible').value, 13);
+  assert.equal(manifest.metrics.find(row => row.id === 'aus-source-components').evaluation_commit, ausSourceEvaluation);
+});
+
+test('typed evidence supports the concrete elapsed/bytes/emitted delivery measurements', () => {
+  const f = evidenceFixture();
+  const values = {elapsed_seconds: 54.003, complete_phase_bytes: 289834589, expected_components_verified: 73,
+    cumulative_native_cells_picked_and_sampled: 1123, stable_owner_controls: 347};
+  const measurement = f.reader.add(prefix + 'measured.json', values);
+  f.manifest.outputs.push({path: measurement.path, bytes: measurement.bytes, sha256: measurement.sha256, hash_kind: 'file-bytes'});
+  f.config.template = f.reader.add(prefix + 'template-extra.json', f.manifest);
+  f.config.metric_sources.push({...f.source, measurement, fields: Object.keys(values).map(field => ({id: field, field}))});
+  const result = JSON.parse(prepareEvidence(f.config, f.reader)['evidence-quality.json']);
+  for (const [field, unit] of Object.entries({elapsed_seconds: 'seconds', complete_phase_bytes: 'bytes', expected_components_verified: 'components',
+    cumulative_native_cells_picked_and_sampled: 'native cells', stable_owner_controls: 'sampled occupied row controls'})) {
+    assert.equal(result.metrics.find(row => row.id === field).unit, unit);
+    assert.equal(result.metrics.find(row => row.id === field).value, values[field]);
+  }
+});
+
+test('typed evidence refuses wrong units/types, missing values and changed consumed/evaluation bindings', () => {
+  for (const mutate of [f => f.source.fields[0].field = 'unknown_cells', f => f.source.fields[0].unit = 'native cells',
+    f => f.source.fields[0].type = 'number', f => f.source.fields.push({...f.source.fields[0]}),
+    f => f.source.evaluation_commit = commit, f => f.source.input_file.path = 'foreign.json',
+    f => f.source.input_file.commit = 'b'.repeat(40), f => f.source.vintage = 'current', f => f.source.fields = []]) {
+    const f = evidenceFixture(); mutate(f); assert.throws(() => prepareEvidence(f.config, f.reader));
+  }
+  for (const value of [undefined, null, '6', true, -1, 0.5, Number.MAX_SAFE_INTEGER + 1]) {
+    const f = evidenceFixture(), facts = {...f.facts, zero_cell_components: value};
+    f.source.measurement = f.reader.add(prefix + 'bad-facts.json', facts);
+    f.manifest.outputs.push({path: f.source.measurement.path, bytes: f.source.measurement.bytes,
+      sha256: f.source.measurement.sha256, hash_kind: 'file-bytes'});
+    f.config.template = f.reader.add(prefix + 'bad-template.json', f.manifest);
+    assert.throws(() => prepareEvidence(f.config, f.reader), /Missing\/invalid measured value/);
+  }
+  const f = evidenceFixture(); f.source.input = f.reader.add(prefix + 'foreign-request.json', {other: true});
+  f.source.input_file.path = f.source.input.path;
+  assert.throws(() => prepareEvidence(f.config, f.reader), /Consumed input differs/);
+  const stale = evidenceFixture(); stale.source.measurement.sha256 = '0'.repeat(64);
+  assert.throws(() => prepareEvidence(stale.config, stale.reader), /missing fixture pin/);
+});
+
+test('evidence CLI authenticates Git inputs and refuses malformed metrics before publication; immutable resume', t => {
+  const root = directory(t), git = (...args) => execFileSync('git', args, {cwd: root, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
+  git('init'); git('config', 'user.name', 'Fixture'); git('config', 'user.email', 'fixture@example.invalid');
+  const memory = evidenceFixture();
+  for (const pin of [memory.config.template, ...memory.config.metric_sources.flatMap(source => [source.input, source.measurement])])
+    write(root, pin.path, memory.reader.read(pin));
+  write(root, 'baseline.json', jsonBytes({retained: true})); git('add', '.'); git('commit', '-m', 'Pinned fixture');
+  const reader = pinReader(root), head = git('rev-parse', 'HEAD'), config = structuredClone(memory.config);
+  const manifest = memory.manifest; manifest.baseline.commit = head; manifest.baseline.files[0].commit = head;
+  // Actual fixture request descriptors are frozen in the measured bytes above;
+  // the constructor joins their content hashes without relabeling evaluation.
+  write(root, memory.config.template.path, jsonBytes(manifest)); git('add', '.'); git('commit', '-m', 'Pinned template');
+  config.template = reader.pin(git('rev-parse', 'HEAD'), memory.config.template.path);
+  for (const source of config.metric_sources) {
+    source.input = reader.pin(head, source.input.path); source.measurement = reader.pin(head, source.measurement.path);
+  }
+  const script = new URL('../scripts/prepare-delivery-handoff.mjs', import.meta.url).pathname;
+  const run = (destination, ...flags) => JSON.parse(execFileSync(process.execPath,
+    [script, 'evidence', 'config.json', destination, ...flags], {cwd: root, env: {...process.env, GIT_NO_LAZY_FETCH: '1'}, stdio: ['pipe', 'pipe', 'pipe']}).toString());
+  write(root, 'config.json', jsonBytes(config)); const destination = '.cache/delivery-handoff/evidence';
+  assert.equal(run(destination).resumed, false);
+  const original = fs.readFileSync(path.join(root, destination, 'evidence-quality.json'));
+  assert.equal(JSON.parse(original).metrics.find(row => row.id === 'aus-native-zero_cell_components').unit, 'components');
+  assert.equal(run(destination, '--resume').resumed, true);
+  assert.throws(() => run(destination), /Occupied destination/);
+  for (const change of [c => c.metric_sources[0].fields.find(row => row.field === 'zero_cell_components').unit = 'native cells',
+    c => c.metric_sources[0].fields.find(row => row.field === 'native_conflicts').unit = 'native cells',
+    c => c.metric_sources[0].fields[0].field = 'unrecognized', c => c.metric_sources[0].fields[0].type = 'number',
+    c => c.metric_sources[0].measurement.sha256 = '0'.repeat(64)]) {
+    const invalid = structuredClone(config); change(invalid); write(root, 'config.json', jsonBytes(invalid));
+    assert.throws(() => run('.cache/delivery-handoff/refused'));
+    assert.equal(fs.existsSync(path.join(root, '.cache/delivery-handoff/refused')), false);
+    assert.deepEqual(fs.readFileSync(path.join(root, destination, 'evidence-quality.json')), original);
+  }
 });
 
 test('review freeze authenticates current issue scope for an owned nested manifest', async () => {

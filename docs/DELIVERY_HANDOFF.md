@@ -1,9 +1,9 @@
 # Prepare a delivery without rebuilding its coordination
 
 `node scripts/prepare-delivery-handoff.mjs PHASE CONFIG DESTINATION [--resume]`
-prepares immutable metadata in a managed checkout. The nine preparation phases
+prepares immutable metadata in a managed checkout. The individual preparation phases
 never run a scientific operator, accept a source, submit a review, commit, queue
-or merge. The later explicit `advance --submit-queue` option uses the existing
+or merge. The optional automatic continuation below commits completed metadata. The later explicit `advance --submit-queue` option uses the existing
 queue client only after genuine independent acceptance. The
 existing issue claim, source/native supervisor, rebind issuer, selected reader,
 evidence gate, independent reviewer and serialized queue retain their authority.
@@ -419,3 +419,103 @@ receipt. The combined output preserves all original rows and exact accepted
 registry bytes. This is metadata-transition proof, not another scientific run.
 The need was found by tracing the current AUS continuation; no actual AUS refusal
 was run, and its already-supported standalone compose route remains valid.
+
+## Automatic mechanical continuation
+
+```sh
+node scripts/prepare-delivery-handoff.mjs advance CONFIG OWNED_DESTINATION --automatic
+node scripts/prepare-delivery-handoff.mjs advance CONFIG OWNED_DESTINATION --automatic --resume
+```
+
+Add `automation: {"issue_number": YOUR_ISSUE}` to the existing config. The
+existing recipe and observations remain authoritative. Automatic mode requires
+the current chat's ready managed author workspace, exact engineering branch,
+canonical unexpired claim, ready issue/dependencies and declared output ownership.
+Use an issue-owned `coordination/engineering/.../` destination; `.cache` products
+are never silently committed as repository evidence.
+
+One invocation prepares and commits available stages, derives actual immutable
+locators, and continues. Generated observations are `template_commit`, authority
+pairs, registry, composition, operating and certificate. Explicit contradictory
+observations refuse. SOURCE/NATIVE/rebind terminals and assembly still require
+genuine outputs from their admitted existing tools; no future receipt, scientific
+acceptance or operator execution is invented. The command reports the exact
+missing input. A commit pause with available authenticated metadata is handled
+automatically, rather than returned to the operator.
+
+Commits contain only the complete authenticated stage products and preparation
+receipt. Lock files and evolving journal observations are excluded. A durable
+intent binds the parent, tree, complete ordinary-file inventory, Git identity and
+operation ID before an atomic branch-ref update. Interruption after intent,
+object creation or ref advancement resumes the same commit. Foreign branch/index
+movement, hidden index edits, changed outputs and undeclared tree changes refuse;
+unrelated files are preserved. The ordinary author claim is revalidated before
+mutation. No worktree reset, automatic conflict resolution or credential/setup
+change is performed.
+
+Before the publication/review boundary, automatic mode fetches main with blobs
+excluded and performs a cheap inherited-tree check. A needed refresh is an
+ancestry-preserving two-parent merge whose tree must retain every author-changed
+postimage, including deletions and modes. Conflicts, missing immutable objects,
+untracked collisions and changes to an owned postimage stop publication. Exact
+refresh intent/result and elapsed time are retained. A resume requires that same
+captured main and head; changed targets require a fresh vintage or explicit
+reconciliation. This is separate from the optional PR base-metadata PATCH.
+
+Publication must use the actual refreshed head. If a PR is supplied but still
+names an older head, review freezing refuses before evidence traversal. Creating
+or updating the PR, installing final selection outputs and scientific operators
+remain outside this metadata continuation. Independent substantive reviewer
+acceptance remains mandatory; automatic continuation never approves itself.
+Use the existing explicit `--submit-queue` only after that acceptance. An existing
+queue submission ID still makes every resumed invocation observation-only.
+
+Timing includes each automatic invocation's start, measured elapsed duration,
+prepared-stage count and observed commit count, plus commit/refresh work and
+explicit barrier reasons. API time is measured separately for each stage.
+Unobserved interphase wall time remains unclassified, not proven idle. Do not add
+overlapping wait/operator durations or infer gap closures per hour from controls.
+Actual later batch adoption and end-to-end elapsed outcomes must be recorded on
+the original issue.
+
+## Typed measured evidence construction
+
+```sh
+node scripts/prepare-delivery-handoff.mjs evidence CONFIG DESTINATION
+```
+
+This uses the existing manifest and metric-binding schema. Supply a pinned
+manifest `template` with baseline version 2 and empty `metrics`/`metric_bindings`,
+plus nonempty `metric_sources`. Each source contains pinned `measurement` and
+consumed `input`, the manifest's exact `input_file` selector, original
+`evaluation_commit`, `vintage`, and explicit `fields` entries:
+
+```json
+{"id":"aus-native-zero_cell_components","field":"zero_cell_components","unit":"components","type":"integer"}
+```
+
+The fixed producer-field contract assigns components to `components`,
+`source_compatible`, `assigned_components`, `zero_cell_components`,
+`native_conflicts` and `source_exceptions`. Cell quantities use `native cells`;
+elapsed values use seconds and byte quantities use bytes. Field-name substrings
+never determine units. Optional unit/type assertions must match the fixed
+contract. Unknown fields, missing/nonfinite/negative values, noninteger counts,
+wrong units and conflicting input/result/evaluation bindings refuse before the
+existing exclusive publication writer creates output. Original metric vintages
+remain intact. This validates reporting, not the underlying geographic result.
+
+## Claim and accepted-review stability
+
+Claim mutation rereads compare parsed canonical reservation and blocker authority,
+readiness/work contract, dependency state, linked PR identity/head/state/target,
+and applicable geography ownership. Cosmetic timestamps, ordinary comments and
+PR presentation fields do not invalidate a stable decision. A refusal names the
+changed categories; it does not guess which field caused an older incident.
+Fresh transition guards still enforce exclusivity and all existing readiness.
+
+The accepted-review step uses the canonical scoped reservation, including
+engineering `owned_paths`, with shared readiness/dependency/blocker validation
+before and after evidence traversal. Revoked, foreign, expired or replaced claims
+and changed scope/readiness fail. A benign renewal does not replace ownership.
+The actual independent receipt, exact head/body/manifest and unresolved-review
+gates remain authoritative.
