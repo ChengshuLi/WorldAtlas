@@ -29,8 +29,8 @@
   "outputs": [
     {
       "path": "coordination/engineering/selected-zero-load-joint-20261012/README.md",
-      "bytes": 17296,
-      "sha256": "027c33162e191c8a41b8b6341d4c24e0587858c12d94b8ffb8e410926725ad48",
+      "bytes": 18960,
+      "sha256": "f9f40fbe6f4db699900edc922857bbbee9f81b9f9fc9f4925fe5267f6bb823d5",
       "hash_kind": "file-bytes"
     },
     {
@@ -602,13 +602,209 @@
       "bytes": 440,
       "sha256": "ebb4e8383ebe4bc85167782e00edcc5014665c53bc84e9ced9aee0445fecdda6",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/baseline-routes.json",
+      "bytes": 27657,
+      "sha256": "750affb66823b6d247cbc638f4da9e655449cce4b40b9c1989a32d784348ad51",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/candidate-routes.json",
+      "bytes": 27663,
+      "sha256": "067cf176f83fe5a9623da306a09cd491d4addf2b213b6991d3becff70c17b453",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/admission.json",
+      "bytes": 408,
+      "sha256": "8aa93183187322caf28e94720c14eefe4c935e02a8d5b588293a7f6df2a88a92",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/coverage.json.gz",
+      "bytes": 73569,
+      "sha256": "c6ca9ee5cdfcaee33218eb1799b545352e2ca8c64b6ecfbd5557d9d5195cdb57",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 590617,
+      "uncompressed_sha256": "3cfa03afb3dcb631408f4bd37bbd9de9c3ac87ab9236a8f63ce71457810fa3b3"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/operating.json",
+      "bytes": 2392,
+      "sha256": "58e37f6fee065b93b0795a67269679a009aadfe95e122ad0226cd05972f6f4b7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/probe.mjs",
+      "bytes": 5714,
+      "sha256": "6eca9f28dce172a6531cbb04d9adb884f249499c6cf57380932ff5854fc5f0ca",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/profiles.cpuprofile.gz",
+      "bytes": 91864,
+      "sha256": "0e908e3fb3633b97f80e948e5d1712e681429257645cddd175c654d7a1604be7",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 871507,
+      "uncompressed_sha256": "5be0ba00a9bb0306fd5d79baa26aa543bd03f8252fd1cd474bb47a726cc1c220"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/result.json",
+      "bytes": 97828,
+      "sha256": "3458088ec1b985e0edddc050cf58ef1913eb0c5e855b3ba428bfddd987d814b3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/stderr.log",
+      "bytes": 186381,
+      "sha256": "f499760525c78722f7ec7f756afb18fcbbec81b61b49d982fd928638fe65beac",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/supervisor.py",
+      "bytes": 2569,
+      "sha256": "b9f1f101247c858644ffd5b2b36d1737bcfb4275a15b6c1ffad1c7b2ded33041",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/actual-products.json.gz",
+      "bytes": 8569685,
+      "sha256": "e49599405275c926081ad6a5003231c376e17398a10b95f81e8f4afb7688efac",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 20695395,
+      "uncompressed_sha256": "4473bec9599623134c3e65db87a3c0d79dfe2781c9d8fc9728935590e30e9462"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/admission.json",
+      "bytes": 408,
+      "sha256": "8e1feaa219346f7abb3a4726ffb6f431f35c39f5ea61f4fca05ae5e17e309316",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/coverage.json.gz",
+      "bytes": 73064,
+      "sha256": "e872f21a0a30394c6551e26d7b6fc3e74e79e3de99b5598d4ea24fd0168fbfbf",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 588020,
+      "uncompressed_sha256": "2687dd10ccba58df653abacd4989b4c3637357a3dbc102efb34e09636f2e0343"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/operating.json",
+      "bytes": 2236,
+      "sha256": "6556d0853ce574f1d6c9ba0a844a41ddfd7d15fe346adf48d2a38716b1968bfb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/precomparison-metrics.json",
+      "bytes": 96146,
+      "sha256": "39c239136e08f296aff718fcb2790d587761a4368dcd6ec567a1f205fb6e47f9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/probe.mjs",
+      "bytes": 6403,
+      "sha256": "3e2aa8083dac99a14c57b5321329253e3d3a1c230a88a77dbaa0447385119af6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/profiles.cpuprofile.gz",
+      "bytes": 85341,
+      "sha256": "8478435b9f95e8d5d078220f9168316c8ec247e59bad28f3cb3c411ed8219597",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 866409,
+      "uncompressed_sha256": "56306e372dc18b87c8e683e90acad4c83d977cc915c1b69169fee5af05de89e4"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/result.json",
+      "bytes": 98281,
+      "sha256": "da981ad9eed65242f51f39630dc2d3428355d3180289064b9be2fbd6d7c70bc3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/stdout.log",
+      "bytes": 878,
+      "sha256": "c70f0a54cca4a65c6b7833f444bf7b201f0129c0354e9b7a38ce9ee9ba6f01e8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/supervisor.py",
+      "bytes": 2724,
+      "sha256": "d4a4d3976b1e90bc500fdbdd06cebd428c6d8727c07209fcd59315cf7f88510e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/summary.json",
+      "bytes": 12566,
+      "sha256": "17451d9fb8374d1f3036ef2c1482dee8ed466fb7fbb70fc18863ed60dc7741fa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/native-consumer-preregistration.json",
+      "bytes": 9980,
+      "sha256": "f9e108924ab69ad37fe8ab9452afe7babc6657904fdd0dc3291f8df29c0d6b97",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+      "bytes": 252214,
+      "sha256": "633bf569788c97c2aa52c27c4cb919c7dd1021eb1cd78fc7b326fc7369d475a8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/accepted-aus-producer-envelope-control.mjs",
+      "bytes": 5636,
+      "sha256": "251d4f5dd49bafb6332270ec49a1a80a4edf3c2bfdca17226ab0f717197c637a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/accepted-aus-producer-envelope-control.json",
+      "bytes": 7015,
+      "sha256": "9c5dbf99d4e4f527dce9929d881bb1eeaf94534a665472e9eed4c8f256a9bd79",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/evidence-quality.json",
+      "bytes": 29664,
+      "sha256": "c7332b3e2328993619590b899f13990ab6cfb38fd195251d4d1c106c68e020e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/README.md",
+      "bytes": 13783,
+      "sha256": "9b1b909a8a0fd4e6c16a7a99b7c2bf4e9f8fd24943d932e0d5e2af57df36712b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs",
+      "bytes": 58597,
+      "sha256": "aaa4782773e94a88fcf1c966ef549c6ab5fe084cd2243a43dab206ac6d185c5f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/selected-checkpoint.test.mjs",
+      "bytes": 33780,
+      "sha256": "3b09785d8f20229936331cf0791aa550fff13a810ed9607269b4841ebd884d2d",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
     {
       "id": "joint-selected-consumer",
       "kind": "code",
-      "description": "Shared private checkpoint transition, native consumer and complete original continuous pointsets in one trusted invocation, preserving original Python numerical predicates. Genuine accepted-AUS complete joint equivalence passes with zero full selected loads; full actual products and two prior attempts are preserved. Hosted dependency integration and generic future accepted-artifact advancement remain open.",
+      "description": "Shared private checkpoint transition, native consumer and complete original continuous pointsets in one trusted invocation, preserving original Python numerical predicates. Genuine accepted-AUS complete joint equivalence passes with zero full selected loads; full actual products and two prior attempts are preserved. The complete reviewed shared and native scopes are incorporated by coordinated owner handoff; hosted combined integration and generic future accepted-artifact advancement remain open.",
       "software": "Node 24.19; CPython 3.12; existing Shapely 2.1.2 and pyproj 3.7.2",
       "units": "complete source identities, pointsets, native intervals and bytes"
     }

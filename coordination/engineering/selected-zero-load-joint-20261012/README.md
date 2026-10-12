@@ -46,10 +46,12 @@ coverage loss and altered scopes/products. Separate routing probes establish
 that the normal wrapper does not launch duplicate old children on joint success.
 Synthetic controls do not establish real selected geographic equivalence.
 
-This implementation uses the reviewed shared module from PR #1782. The exact
-frozen native consumer from PR #1783 is incorporated by the coordinated issue 1774
-→ issue 1784 handoff, preserving its original authorship, proof and reviews. The
-shared dependency remains explicit until accepted on the integration baseline. The original native API at `39792e02c603e262513dd0d9df4b63dc275e5a15` underlies
+This implementation incorporates the reviewed shared module and complete original
+packet from PR #1782 by the coordinated issue 1778 → issue 1784 handoff, together
+with the native consumer from PR #1783 by the completed issue 1774 → issue 1784
+handoff. Original authorship, proofs and reviews remain intact. One combined
+PR #1790 receives final whole-scope review and ordinary queued integration.
+The original native API at `39792e02c603e262513dd0d9df4b63dc275e5a15` underlies
 the retained proof. The final package-boundary correction moves those exact
 numerical function bodies into a dedicated joint-only module, as detailed below. A genuine miniature joint CLI control verifies one
 shared bootstrap, checkpoint, transition, native comparison, continuous consumer
@@ -196,8 +198,8 @@ numerical function body and assertion. The historical fixture-copy list includes
 the joint modules, and the native fixture now supplies the original programme
 policy copy/pin required by the final shared authentication contract.
 
-Shared PR #1782 precedes the combined PR #1790. A separate dormant native-export
-merge is unnecessary: the joint-only consumer and caller activate together. The
+The shared qualifier, joint-only consumer and caller are incorporated in the
+single combined PR #1790 and activate together after whole-scope review. The
 legacy checker and original shared qualifier row remain exact accepted bytes. Issue1774 remains open until the combined change is accepted;
 this transfer does not convert the old native-only retained projection into a
 full-path execution. The genuine clean proof003 supplies that integrated evidence.
@@ -264,3 +266,29 @@ original proof003 and failed attempts are not rewritten. This verifies the final
 local routing and does not make the provisional checkpoint an accepted future
 root. Normal hosted CI, accepted dependency ancestry and whole-PR review still
 govern integration.
+
+## Complete shared-module handoff
+
+The original issue 1778 holder, `01a12ee1-d5d6-7600-aafc-a43e2fe48013`,
+explicitly transferred the complete reviewed shared scope at
+`14414389157d6dd7fbcaca11eed4e424efe5681b` into issue 1784 / PR #1790.
+The receiving author remains `01a12f14-030c-704b-8f35-58e0a28e2004` under its
+existing canonical claim. The exact shared review is
+https://github.com/ChengshuLi/WorldAtlas/pull/1782#issuecomment-6127694859.
+
+All 32 transferred files are retained at their original exact bytes: the complete
+29-file `selected-checkpoint-reuse-20261012/` packet, `selected-checkpoint.mjs`,
+`supported-programs.json`, and `test/selected-checkpoint.test.mjs`. The receiving
+manifest binds every file, including the unchanged original issue 1778 manifest,
+README, code and tests; its 28 original output descriptors retain their original
+identity. No original metric, execution, author or provisional publication is
+relabeled. The receiving manifest has 127 whole output descriptors and retains
+its 16 existing actual-result metric bindings.
+
+The shared PR closes as incorporated after verified receiving-scope publication;
+its original claim is released through the normal holder-authorized client.
+Issue 1778 stays open until the combined PR is actually accepted and its original
+acceptance is reconciled, as does incorporated issue 1774. There is no separate
+shared-module queue submission. Final exact-head whole-PR review and ordinary CI
+remain required. This metadata handoff changes no code or scientific input and
+reuses proof004 at its original immutable execution.
