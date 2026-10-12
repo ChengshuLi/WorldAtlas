@@ -141,14 +141,23 @@ function exclusive(filename, raw) {
 // interrupted metadata write; unknown files and changed bytes always refuse.
 export function openAdvanceJournal(root, destination, recipe, {resume = false, now = Date.now, budget = null} = {}) {
   const target = directory(root, destination), intentPath = path.join(target, 'advance.json');
+  budget ??= candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0});
+  let intentRaw;
   if (!fs.existsSync(target)) {
+    intentRaw = bytes({version: 1, kind: 'delivery-advance-v1', recipe, started_at: new Date(now()).toISOString()});
+    budget.add({bytes: intentRaw.length});
     fs.mkdirSync(path.dirname(target), {recursive: true}); fs.mkdirSync(target);
-    exclusive(intentPath, bytes({version: 1, kind: 'delivery-advance-v1', recipe, started_at: new Date(now()).toISOString()}));
-  } else need(resume, 'Occupied advance destination; explicit resume required');
-  const intent = JSON.parse(ordinaryFile(intentPath));
+    exclusive(intentPath, intentRaw);
+  } else {
+    need(resume, 'Occupied advance destination; explicit resume required');
+    const stat = fs.lstatSync(intentPath);
+    need(stat.isFile() && fs.realpathSync(intentPath) === intentPath, 'Nonordinary advance intent');
+    budget.add({bytes: stat.size}); intentRaw = ordinaryFile(intentPath);
+  }
+  const intent = JSON.parse(intentRaw);
   need(intent.version === 1 && intent.kind === 'delivery-advance-v1' && equal(intent.recipe, recipe)
     && Number.isFinite(Date.parse(intent.started_at)), 'Foreign or changed advance intent');
-  return {root, target, destination, intent, now, budget: budget ?? candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0}), chargedJournalFiles: new Set()};
+  return {root, target, destination, intent, now, budget, chargedJournalFiles: new Set([intentPath])};
 }
 
 function journalFile(journal, filename) {

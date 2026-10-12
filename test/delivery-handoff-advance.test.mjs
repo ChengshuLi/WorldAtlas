@@ -557,3 +557,29 @@ test('stale lock recovery serializes competing acquisition and refuses ambiguous
   assert.throws(() => withAdvanceLock(j, () => { ran = true; }), /inspect its owner/);
   assert.equal(ran, false); assert.deepEqual(fs.readFileSync(path.join(j.target, 'advance.acquire')), raw);
 });
+
+test('initial advance intent is charged before mutation and on read-only reopening', t => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'delivery-intent-'));
+  t.after(() => fs.rmSync(root, {recursive: true, force: true}));
+  const allowance = {phaseBytes: 100, rssBytes: 1024 ** 3};
+  assert.throws(() => openAdvanceJournal(root, '.cache/delivery-handoff/small', {commit, path: 'recipe.json'},
+    {budget: candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0, allowance})}), /Aggregate/);
+  assert.equal(fs.existsSync(path.join(root, '.cache/delivery-handoff/small')), false);
+  const j = openAdvanceJournal(root, '.cache/delivery-handoff/full', {commit, path: 'recipe.json'});
+  const before = fs.readFileSync(path.join(j.target, 'advance.json'));
+  assert.throws(() => openAdvanceJournal(root, j.destination, j.intent.recipe, {resume: true,
+    budget: candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0, allowance})}), /Aggregate/);
+  assert.deepEqual(fs.readFileSync(path.join(j.target, 'advance.json')), before);
+});
+test('real advance CLI refuses an oversized admitted config before reading recipe or creating destination', t => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'delivery-config-'));
+  t.after(() => fs.rmSync(root, {recursive: true, force: true}));
+  fs.writeFileSync(path.join(root, 'config.json'), JSON.stringify({version: 1, recipe: {commit, path: 'recipe.json'},
+    preparation_allowance: {phaseBytes: 100, rssBytes: 1024 ** 3}, extra: 'x'.repeat(1000)}));
+  const script = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../scripts/prepare-delivery-handoff.mjs');
+  const env = {...process.env}; delete env.NODE_OPTIONS; delete env.NODE_PATH;
+  for (const phase of ['advance', 'status']) assert.throws(() => execFileSync(process.execPath,
+    [script, phase, 'config.json', '.cache/delivery-handoff/blocked'], {cwd: root, env, stdio: ['ignore', 'pipe', 'pipe']}),
+  error => error.stderr.toString().includes('Aggregate evidence preparation budget exceeded'));
+  assert.equal(fs.existsSync(path.join(root, '.cache')), false);
+});

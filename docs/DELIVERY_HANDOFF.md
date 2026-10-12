@@ -1,8 +1,10 @@
 # Prepare a delivery without rebuilding its coordination
 
 `node scripts/prepare-delivery-handoff.mjs PHASE CONFIG DESTINATION [--resume]`
-prepares immutable metadata in a managed checkout. It never runs a scientific
-operator, accepts a source, submits a review, commits, queues or merges. The
+prepares immutable metadata in a managed checkout. The nine preparation phases
+never run a scientific operator, accept a source, submit a review, commit, queue
+or merge. The later explicit `advance --submit-queue` option uses the existing
+queue client only after genuine independent acceptance. The
 existing issue claim, source/native supervisor, rebind issuer, selected reader,
 evidence gate, independent reviewer and serialized queue retain their authority.
 Use Node 24 without loaders/preloads. Check storage with `local-workspace.mjs`
@@ -218,8 +220,9 @@ command/test bodies and their immutable example inputs are unchanged.
 
 Actual immutable commit pins between phases, external scientific execution,
 independent source/review authority and the existing serialized queue are manual
-or existing-tool boundaries. No scheduler, automatic approval or queue submission
-is hidden in the preparation command.
+or existing-tool boundaries. No scheduler or automatic approval is hidden in the
+preparation command. The explicit continuation below binds these existing tools;
+queue submission still needs the normal live authority and explicit option.
 
 ## Admitted recipe continuation (`advance` / `status`)
 

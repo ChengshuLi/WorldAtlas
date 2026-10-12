@@ -606,7 +606,9 @@ async function main(args) {
     need(configFile && destination && flags.every(f => ['--resume', '--submit-queue'].includes(f))
       && new Set(flags).size === flags.length && !(phase === 'status' && flags.includes('--submit-queue')), 'Use advance|status CONFIG DESTINATION [--resume] [--submit-queue]');
     need(!process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node launch required');
-    const root = fs.realpathSync(process.cwd()), config = JSON.parse(ordinary(root, configFile)), reader = pinReader(root, {allowance: config.preparation_allowance});
+    const root = fs.realpathSync(process.cwd()), configRaw = ordinary(root, configFile), config = JSON.parse(configRaw);
+    const reader = pinReader(root, {allowance: config.preparation_allowance});
+    reader.budget.add({bytes: configRaw.length});
     need(config.version === 1, 'Versioned advance configuration required');
     const flow = await import('./delivery-handoff-advance.mjs');
     const recipe = flow.locate(reader, config.recipe);
