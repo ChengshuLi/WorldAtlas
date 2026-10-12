@@ -1,3 +1,4 @@
+import {createMetadataRegressionProofLoader} from './reuse-pr-regression.mjs';
 import {gitBlobTransport} from './git-blob-transport.mjs';
 import {quotaDelay,requestAccounting} from './github-quota.mjs';
 import {loadGeographicReport, prepareGeographyProof, validateGeographyProof} from './geographic-report-artifact.mjs';
@@ -18,6 +19,7 @@ const accounting=requestAccounting(phase);
 const transport=gitBlobTransport(githubAPI(process.env.GH_TOKEN,{onRequest:accounting.observe,readWaitMs:phase==='merge'?61*60*1000:8*60*1000}),{repo,token:process.env.GH_TOKEN,directory:process.cwd(),onFetch:row=>console.log(JSON.stringify({phase,immutable_transport:row}))});
 const api = transport.api, options = {api, repo, number, expectedHead: input.expected_head, policy: loadEvidencePolicy(),
   geographyProofLoader: args => prepareGeographyProof({...args, token: process.env.GH_TOKEN}),
+  metadataProofLoader: createMetadataRegressionProofLoader({token: process.env.GH_TOKEN, directory: process.cwd()}),
   prepareFallback: process.env.PREPARE_FALLBACK === 'true',
   integrationRequestId: input.request_id + (process.env.GITHUB_RUN_ID ? `-${process.env.GITHUB_RUN_ID}` : '')};
 let result = {accepted: false, request_id: input.request_id, pr_number: number, phase, ...(input.queue_attempt ? {queue_attempt: Number(input.queue_attempt)} : {})};

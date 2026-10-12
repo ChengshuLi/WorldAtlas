@@ -24,11 +24,38 @@ export function successfulGeographyJob(jobs, workflow = WORKFLOW_PATH) {
   return job;
 }
 
+const complete = value => value?.status === 'completed' && value.conclusion === 'success';
+const positive = value => Number.isSafeInteger(value) && value > 0;
+
+export function successfulMetadataRegressionJobs(jobs, {run, attempt, head}) {
+  if (!Array.isArray(jobs)) return null;
+  const regression = jobs.filter(job => /^regression(?: \(\d+\))?$/.test(job.name));
+  if (regression.length !== 1 || regression[0].name !== 'regression (0)') return null;
+  const required = new Map([
+    ['profile', ['Validate ownership and focused CI applicability', 'Authenticate predecessor regression inputs']],
+    ['regression (0)', ['Install Node dependencies', 'Run current-head regression consumers']],
+    ['package', ['Use authenticated predecessor package verification']]
+  ]);
+  for (const [name, steps] of required) {
+    const matches = jobs.filter(job => job.name === name), job = matches[0];
+    if (matches.length !== 1 || !positive(job.id) || !complete(job) || job.run_id !== run || job.run_attempt !== attempt || job.head_sha !== head) return null;
+    if (!steps.every(name => {const rows = job.steps?.filter(step => step.name === name) ?? [];return rows.length === 1 && complete(rows[0]);})) return null;
+  }
+  const checkout = regression[0].steps?.filter(step => step.name === 'Checkout reviewed head') ?? [];
+  if (checkout.length !== 2 || checkout.filter(complete).length !== 1 ||
+    checkout.filter(step => step.status === 'completed' && step.conclusion === 'skipped').length !== 1) return null;
+  for (const name of ['Complete regression shard', 'Build hosted assets']) {
+    const rows = regression[0].steps?.filter(step => step.name === name) ?? [];
+    if (rows.length !== 1 || rows[0].status !== 'completed' || rows[0].conclusion !== 'skipped') return null;
+  }
+  return {job_id: regression[0].id};
+}
+
 // The approved workflow explicitly checks out the reviewed head. Matching its
 // immutable blobs to main and the entire tested tree to the candidate connects
 // GitHub's run metadata to the bytes actually executed, rather than treating a
 // PR merge-ref run's head_sha as evidence that it tested the authored head.
-export async function integrationProof({api, repo, number, head, profile, testSelection = 'complete', baseline, authored, candidate, runId, runAttempt, onUnavailable = () => {}}) {
+export async function integrationProof({api, repo, number, head, profile, testSelection = 'complete', baseline, authored, candidate, runId, runAttempt, metadataProofLoader, onUnavailable = () => {}}) {
   const unavailable = reason => {onUnavailable({reason});return null;};
   let reason = 'no-completed-code-run';
   if (!['complete','selected-data'].includes(testSelection) || (testSelection === 'selected-data' && profile !== 'full')) return unavailable('invalid-test-selection');
@@ -56,6 +83,26 @@ export async function integrationProof({api, repo, number, head, profile, testSe
         run.status !== 'completed' || !['success', 'failure'].includes(run.conclusion) ||
         !run.pull_requests?.some(pr => pr.number === number && pr.head?.sha === head)) continue;
     const jobs = await githubPages(async route => (await api(route)).jobs, `${prefix(repo)}/actions/runs/${run.id}/attempts/${run.run_attempt}/jobs`);
+    const currentMetadata = profile === 'full' && testSelection === 'complete' &&
+      successfulMetadataRegressionJobs(jobs, {run: run.id, attempt: run.run_attempt, head});
+    if (currentMetadata) {
+      reason = 'metadata-predecessor-proof-unavailable';
+      // Only the narrow existing current evidence failure can be disregarded.
+      // Scope and all computational/current-control jobs remain successful.
+      if (run.conclusion === 'failure' && (jobs.filter(job => job.name === 'evidence').length !== 1 ||
+        !jobs.some(job => job.name === 'evidence' && job.conclusion === 'failure') ||
+        jobs.some(job => job.status !== 'completed' || job.conclusion !== (job.name === 'evidence' ? 'failure' : 'success')))) continue;
+      if (typeof metadataProofLoader !== 'function') continue;
+      let admitted;
+      try { admitted = await metadataProofLoader({api, repo, number, head, baseline: baseline.object.sha}); }
+      catch { continue; }
+      if (admitted?.status !== 'reused-original' || admitted.reviewed_head !== head ||
+        admitted.trusted_baseline !== baseline.object.sha || admitted.candidate_tree !== authored.object.tree.sha ||
+        !admitted.original_computation || !admitted.program) continue;
+      return {run_id: run.id, run_attempt: run.run_attempt, tree: authored.object.tree.sha, profile,
+        metadata_regression: {current_controls_job_id: currentMetadata.job_id, program: admitted.program,
+          original_computation: admitted.original_computation}};
+    }
     reason = 'failure-outside-evidence';
     // A PR-body edit can invalidate this run's evidence job after all code
     // checks finish. Current authority is checked independently by both merge

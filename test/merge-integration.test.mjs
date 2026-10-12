@@ -630,3 +630,50 @@ test('candidate waiting rechecks changed claim/check/review/head after caching i
   assert.equal(blobs,1);assert.equal(f.writes.length,0);
  }
 });
+
+function addMetadataProof(f) {
+  addTrustedProof(f);
+  const prior=f.options,step=(name,conclusion='success')=>({name,status:'completed',conclusion});
+  const job=(name,steps,id)=>({id,run_id:12,run_attempt:1,head_sha:f.head,name,status:'completed',conclusion:'success',steps});
+  f.metadataJobs=[
+    job('profile',['Validate ownership and focused CI applicability','Authenticate predecessor regression inputs'].map(n=>step(n)),1),
+    job('regression (0)',[step('Checkout reviewed head'),step('Checkout reviewed head','skipped'),step('Install Node dependencies'),
+      step('Run current-head regression consumers'),step('Complete regression shard','skipped'),step('Build hosted assets','skipped')],2),
+    job('package',[step('Use authenticated predecessor package verification')],3)
+  ];
+  f.metadataLoads=0;
+  f.options=()=>{const options=prior();return {...options,
+    api:async(route,...args)=>{
+      if(route.includes('/jobs'))return {jobs:f.metadataJobs};
+      const value=await options.api(route,...args);
+      if(route.includes('/git/commits/'))return {...value,sha:route.split('/').at(-1)};
+      return value;
+    },
+    metadataProofLoader:async({head,baseline})=>{
+      f.metadataLoads++;assert.equal(head,f.head);assert.equal(baseline,f.base);
+      if(f.sourceInvalid)throw Error('original producer changed');
+      return {status:'reused-original',reviewed_head:f.head,trusted_baseline:f.base,candidate_tree:'authored',
+        program:{id:'audited-fixture'},original_computation:{head:sha('d'),tree:'original-tree',run_id:91,run_attempt:1}};
+    },
+    geographyProofLoader:async({proof})=>{assert.equal(proof.geography_job_id,undefined);return null;}
+  };};
+}
+
+test('metadata reuse crosses actual queue prepare and final boundaries with current controls and fresh queue geography',async()=>{
+  const f=fixture();addMetadataProof(f);
+  const prepared=await prepareIntegration(f.options());
+  assert.equal(prepared.proof.run_id,12);assert.equal(prepared.proof.metadata_regression.original_computation.run_id,91);
+  assert.equal(prepared.geography_proof,null);assert.equal(f.metadataLoads,1);
+  const result=await f.complete({integrationResult:'skipped',proofRunId:12,proofRunAttempt:1});
+  assert.equal(f.metadataLoads,2);assert.equal(result.proof.run_id,12);assert.equal(f.writes.length,1);
+});
+
+test('queue refuses changed predecessor authority or failed fresh geography after metadata prepare',async()=>{
+  for(const kind of ['source','geography']){
+    const f=fixture();addMetadataProof(f);assert.ok((await prepareIntegration(f.options())).proof);
+    if(kind==='source')f.sourceInvalid=true;
+    await assert.rejects(f.complete({integrationResult:'skipped',proofRunId:12,proofRunAttempt:1,
+      ...(kind==='geography'?{geographyResult:'failure'}:{})}));
+    assert.equal(f.writes.length,0);
+  }
+});

@@ -847,3 +847,17 @@ test('direct pacing adapter also uses the observed finite allowance and retains 
   assert(reads < receipt.validation_call_bound, 'fresh post-observation gates consume the same allowance');
   assert.equal(f.writes.length, 0);
 });
+
+test('predecessor applicability retains authenticated redirect capabilities and budgets each log/archive read',async()=>{
+  const f=evidenceFailedProof(fixture());f.startCapacity=2000;const redirects=[];let inventories=0;
+  for(const name of ['artifactRedirect','jobLogRedirect'])f.api[name]=async route=>{redirects.push({name,route});return {status:302,location:'https://example.invalid/fixture'};};
+  const options={...f.options(),proofRunId:44,proofRunAttempt:1,
+    proofApplicabilityInventory:async({api,run,jobs})=>{
+      inventories++;assert.equal(run.id,44);assert.ok(Array.isArray(jobs));
+      await api.jobLogRedirect(`/repos/${f.repo}/actions/jobs/7/logs`);
+      await api.artifactRedirect(`/repos/${f.repo}/actions/artifacts/9/zip`);
+    }};
+  const result=await paceFinalValidation(options,{inspect:inspectMerge,admission:options.finalAdmission});
+  assert.equal(inventories,2);assert.equal(redirects.length,4);
+  assert.equal(result.receipt.proof_calls,4,'run, jobs, original log and original archive are budgeted');
+});

@@ -1,6 +1,6 @@
 import {collectGeographicApproval, bindingHash} from './geographic-adjudication-api.mjs';
 import {integrationProfile, selectedDataCandidate, selectedDataSelection} from './integration-profile.mjs';
-import {integrationProof} from './integration-proof.mjs';
+import {integrationProof, successfulMetadataRegressionJobs} from './integration-proof.mjs';
 import {githubPages, linkedPulls, verifyClaimForPR, workSpec} from './issue-claim-contract.mjs';
 import {validateIssuePRBody, validateLanePaths} from './check-handoff-scope.mjs';
 import {checkPremergeEvidence} from './premerge-evidence.mjs';
@@ -353,7 +353,11 @@ export async function completeIntegration(options) {
   if (options.finalCapacity) {
     need(geographyReady, 'Trusted combined geography check missing, failed or cancelled; no merge performed');
     options = await beginFinalPlanning(options);
-    const proofApplicabilityInventory = async ({api, state}) => {
+    const proofApplicabilityInventory = async ({api, state, run, jobs}) => {
+      if (successfulMetadataRegressionJobs(jobs, {run: run?.id, attempt: run?.run_attempt, head: state.pr.head.sha})) {
+        need(typeof options.metadataProofLoader === 'function', 'Metadata predecessor proof loader unavailable');
+        await options.metadataProofLoader({api, repo: options.repo, number: options.number, head: state.pr.head.sha, baseline: state.base});
+      }
       if (geographyProof) await validateGeographyOrigin({api, repo: options.repo, number: options.number, source: geographyProof});
       if (!selectedDataCandidate(state.pr.head.ref, state.files, state.reservation)) return;
       const [baseline, authored] = await Promise.all([tree(api, options.repo, state.base), tree(api, options.repo, state.pr.head.sha)]);

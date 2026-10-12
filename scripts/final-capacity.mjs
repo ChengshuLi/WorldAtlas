@@ -228,11 +228,11 @@ export async function paceFinalValidation(options, {inspect, admission = async (
       // the evidence-only aggregate failure case, before any merge write.
       need(run?.run_attempt === options.proofRunAttempt && run.status === 'completed' && ['success', 'failure'].includes(run.conclusion),
         'Trusted proof changed before final evidence; resubmit unchanged head');
-      await githubPages(async route => (await api(route)).jobs,
+      const jobs = await githubPages(async route => (await api(route)).jobs,
         `/repos/${options.repo}/actions/runs/${options.proofRunId}/attempts/${options.proofRunAttempt}/jobs`);
       // Measure only the applicable selector reads; do not reserve a blanket
       // worst-case inventory or assume every blob overlaps evidence transport.
-      if (options.proofApplicabilityInventory) await options.proofApplicabilityInventory({api, state});
+      if (options.proofApplicabilityInventory) await options.proofApplicabilityInventory({api, state, run, jobs});
     };
     let before;
     for (let planningAttempt = 1; planningAttempt <= 3; planningAttempt++) {
@@ -248,7 +248,12 @@ export async function paceFinalValidation(options, {inspect, admission = async (
         before = await inspect({...options, api: counted, evidenceCheck: inventoryFinalEvidence});
         if (before.replayed) return {api: options.capacityAPI ?? options.api, receipt: {...receipt, status: 'already-merged'}};
         need(before.base === options.testedBase, 'Main advanced before capacity wait; resubmit unchanged head');
-        await proofInventory(async (...args) => {proofCalls++; return options.api(...args);}, before);
+        const proofAPI = copyAPIFeatures(async (...args) => {proofCalls++; return options.api(...args);}, options.api);
+        // Predecessor admission uses the existing authenticated job-log/archive
+        // redirects. Keep their original HTTP admission and count these reads.
+        for (const name of ['artifactRedirect', 'jobLogRedirect']) if (typeof options.api[name] === 'function')
+          proofAPI[name] = (...args) => {proofCalls++; return options.api[name](...args);};
+        await proofInventory(proofAPI, before);
         need(Number.isSafeInteger(options.artifactRunId) && options.artifactRunId > 0,
           'Cannot bound final geographic artifact inventory');
         for (let page = 1, seen = 0; page <= 100; page++) {
