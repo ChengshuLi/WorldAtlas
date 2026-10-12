@@ -30,3 +30,15 @@ export function confirmReservation(comments,request,now=Date.now()){
  if(!exact||!expectedState)throw Error('Reservation is not confirmed in current canonical state; do not begin work. Inspect the issue/workflow.');
  return {...(result??{accepted:true,request_id:request.request_id,issue_number:request.issue_number,result_source:'canonical-comment'}),claim};
 }
+
+// Shared by queue observation and accepted-checkpoint acquisition. A comment is
+// insufficient: its reviewed head and merge identity must match the actual PR.
+export function verifyAcceptedMergeResult(result, merged, head) {
+  if (result?.accepted !== true || result.status !== 'merged' || !/^[a-f0-9]{40}$/.test(result.merge_commit ?? '') ||
+      (result.expected_head !== undefined && result.expected_head !== head) ||
+      (result.reviewed_head !== undefined && result.reviewed_head !== head))
+    throw Error('Malformed or mismatched accepted merge receipt');
+  if (!merged?.merged || merged.head?.sha !== head || merged.merge_commit_sha !== result.merge_commit)
+    throw Error('Merge receipt differs from actual PR state');
+  return result;
+}

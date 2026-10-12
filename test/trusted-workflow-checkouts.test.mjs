@@ -12,7 +12,7 @@ const workflows = ['issue-claims.yml', 'worker-merge.yml', 'merge-integration-ch
 
 // Reproduce each declared sparse tree, including cone-mode root files. Load
 // trusted modules without executing workflow entrypoints or contacting GitHub.
-function probe(directories, {geography = false} = {}) {
+function probe(directories, {geography = false, checkoutTests = false} = {}) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'worldatlas-checkout-'));
   try {
     fs.copyFileSync(path.join(root, 'package.json'), path.join(directory, 'package.json'));
@@ -22,7 +22,7 @@ function probe(directories, {geography = false} = {}) {
       fs.mkdirSync(path.dirname(destination), {recursive: true});
       fs.cpSync(source, destination, {recursive: true});
     }
-    return spawnSync(process.execPath, ['--input-type=module', '-e',
+    return spawnSync(process.execPath, checkoutTests ? ['--test', '--test-concurrency=1', '--test-name-pattern', 'actual sparse declarations include trusted module dependencies', 'test/trusted-workflow-checkouts.test.mjs'] : ['--input-type=module', '-e',
       "await import('./scripts/issue-claim-contract.mjs'); await import('./scripts/premerge-evidence.mjs'); await import('./scripts/queue-readiness-audit.mjs'); await import('./scripts/merge-scheduler.mjs'); await import('./scripts/check-pr-gates.mjs');" +
       (geography ? "await import('./scripts/check-effective-geographic-regression.mjs'); await import('./coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs'); console.log('complete trusted geography closure imported');" : '')],
     {cwd: directory, encoding: 'utf8', env: {PATH: process.env.PATH}});
@@ -123,6 +123,20 @@ test('actual scope candidate sparse declaration contains cold-checkout test impo
   assert.equal(qualified.status, 0, qualified.stderr);
   const missing = probe(directories.filter(row => !row.startsWith('coordination/')), {geography: true});
   assert.notEqual(missing.status, 0);assert.match(missing.stderr, /selected-geography-effective-prevention-20261009/);
+});
+
+test('scope candidate includes the inputs of its nested actual-checkout probes', () => {
+  const source = fs.readFileSync(path.join(root, '.github/workflows/merge-integration-checks.yml'), 'utf8');
+  const scope = source.split('  scope:\n')[1].split('  geography:\n')[0];
+  const candidate = scope.match(/path: candidate[\s\S]*?sparse-checkout: \|\n((?:            .+\n)+)/);
+  assert.ok(candidate);
+  const directories = candidate[1].trim().split('\n').map(row => row.trim());
+  const result = probe(directories, {checkoutTests: true});
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  const missing = probe(directories.filter(row => !row.includes('selected-checkpoint-reuse-20261012')), {checkoutTests: true});
+  assert.notEqual(missing.status, 0);
+  assert.match(missing.stdout + missing.stderr, /ENOENT/);
+  assert.match(missing.stdout + missing.stderr, /selected-checkpoint-reuse-20261012/);
 });
 
 for (const [workflow, expected] of [['merge-integration-checks.yml', 2], ['worker-merge.yml', 1]]) {

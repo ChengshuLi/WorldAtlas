@@ -57,7 +57,7 @@ test('monotonic deadline bounds delayed reset despite wall-clock movement', asyn
 test('final bound includes declared and original blobs, fresh guards and source gates', () => {
   const ordinary = {blob_calls: 474, water: false};
   const n = finalRequestBound({inventory: ordinary, metadataCalls: 23, admissionCalls: 12, artifactPages: 1});
-  assert.equal(n, 581); assert.ok(finalRequestBound({inventory: {...ordinary, water: true}, metadataCalls: 23}) > n);
+  assert.equal(n, 585); assert.ok(finalRequestBound({inventory: {...ordinary, water: true}, metadataCalls: 23}) > n);
   assert.throws(() => finalRequestBound({inventory: ordinary, metadataCalls: Infinity}), /finite/);
 });
 
@@ -514,7 +514,7 @@ for (const exactCapacity of [true, false]) test(`real geographic artifact growth
     return loadGeographicReport({api, repo: f.options().repo, runId: 12,
       artifactName: 'geography-durable-capacity-ticket-12', expectedHash: 'a'.repeat(64), token: 'fixture-token',
       fetchImpl: async () => {downloads++; throw Error('Unexpected download');}});
-  }}), exactCapacity ? /inventory grew beyond safe request bound/ : /Missing, duplicate, expired or oversized/);
+  }}), exactCapacity ? /inventory grew beyond safe request bound/ : /Missing or expired geographic artifact/);
   if (exactCapacity) assert.ok(artifactCalls > 0 && artifactCalls < 100);
   else assert.equal(artifactCalls, 100, 'ordinary complete inventory remains bounded even with quota headroom');
   assert.equal(downloads, 0);

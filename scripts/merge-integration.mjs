@@ -7,24 +7,11 @@ import {checkPremergeEvidence} from './premerge-evidence.mjs';
 import {beginFinalPlanning, paceFinalValidation, finalRequestBudget} from './final-capacity.mjs';
 import {memoizeImmutableGitBlobs} from './immutable-git-blobs.mjs';
 import {evidenceRequirement} from './evidence-policy.mjs';
-import {validateGeographyProof, validateGeographyOrigin} from './geographic-report-artifact.mjs';
+import {checkGeographicReport, geographicReportProducts, validateGeographyProof, validateGeographyOrigin} from './geographic-report-artifact.mjs';
 
 const need = (condition, message) => { if (!condition) throw Error(message); };
 const root = repo => `/repos/${repo}`;
 
-function checkGeographicReport(geography, baseline, candidate) {
-  need(geography?.version === 1 && geography.method_id === 'worldatlas-trusted-geography-check-v1' &&
-    geography.baseline_commit === baseline && geography.trusted_code_commit === baseline &&
-    geography.candidate_commit === candidate && geography.candidate_code_executed === false &&
-    geography.published === false && geography.source_approval === false && geography.gate_status === 'passed',
-    'Geographic report does not bind exact trusted combined check');
-  const ordinaryPass = ['not-applicable', 'no-footprint-change', 'no-new-regression'].includes(geography.status);
-  const waterPass = geography.status === 'regressions-found' &&
-    geography.adjudication?.status === 'all-findings-supported-and-reviewed' &&
-    geography.adjudication.unresolved_findings === 0;
-  need(ordinaryPass || waterPass, 'Combined geographic findings remain unresolved');
-  return waterPass;
-}
 
 function bindGeographyProof(source, {proof, number, head, baseline}) {
   validateGeographyProof(source);
@@ -398,6 +385,11 @@ export async function completeIntegration(options) {
     geographyProof ? state.pr.head.sha : options.testedCandidate);
   const candidate = await tree(options.api, options.repo, options.testedCandidate);
   checkCandidateParents(candidate.object, state.base, state.pr.head.sha);
+  const geographicSource = geographyProof ?? geographicReportProducts(geography)?.source;
+  if (geographicSource) need(geographicSource.tree === candidate.object.tree.sha &&
+    geographicSource.head === state.pr.head.sha && geographicSource.baseline === state.base &&
+    (!geographicSource.candidate_commit || geographicSource.candidate_commit === geography.candidate_commit),
+    'Geographic source differs from accepted candidate identities');
   const authored = await tree(options.api, options.repo, state.pr.head.sha);
   checkReviewedTrees(state.files, authored.entries, candidate.entries);
   let proof = null;
@@ -444,7 +436,7 @@ export async function completeIntegration(options) {
     ...(capacity ? {final_capacity: capacity} : {}),
     geography: {status: 'passed', trusted_code_commit: state.base, candidate_commit: geography.candidate_commit,
       report_sha256: geographyProof?.report_sha256 ?? options.geographyReportHash, adjudication: geography.adjudication ?? null,
-      ...(geographyProof ? {execution: 'reused-original', source: geographyProof} : {})},
+      ...(geographicSource ? {execution: geographyProof ? 'reused-original' : 'fresh-queue', source: geographicSource} : {})},
     tested_base: state.base, tested_candidate: options.testedCandidate, reviewed_head: state.pr.head.sha, evidence: state.evidence, proof,
     head_cleanup: await cleanupMergedHead(options)};
   } finally {capacityBudget?.dispose();}

@@ -8,6 +8,7 @@ import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync} from 'node:zlib';
 import {ImmutableReader,NativeAssetImage,loadSelection,inspectSelected,compareIntervals,compareRepairLedgers,readArtifactConsumption,validateReleaseCatalogue,validateArtifactSourceMetadata,loadNativeRowTable,acquireNativeRows,validateNativeRowCarry} from '../scripts/check-effective-geographic-regression.mjs';
 import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
+import {JOINT_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs';
 import {valueBytes,valueSha,readOriginalRuleAuthority,selectedCoordinateShard,joinSelectedCoordinateCertificate,acceptColdCoordinateCertificate,selectedAffectedPlan,possibleNeighbors,compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
 const sha=b=>createHash('sha256').update(b).digest('hex'),root=process.cwd();
@@ -22,7 +23,7 @@ function fixture(){
  const issued=[];
  const commit=()=>{git('add','.');git('commit','-m','Whole immutable synthetic fixture');const head=git('rev-parse','HEAD');issued.push(head);return head;};
  // Copy only real executing namespaces; no dependencies, datasets or checkout.
- for(const name of ['scripts/selected-checkpoint-native.mjs','scripts/run-geographic-check.py','scripts/check-effective-geographic-regression.mjs','scripts/check-geographic-regression.py','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','src/ownership-codec.js','coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs','coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs','coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint-continuous.mjs','coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs','coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json'])write(name,fs.readFileSync(name));
+ for(const name of [...JOINT_CODE,'coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json'])write(name,fs.readFileSync(name));
  for(const name of ['package.json','requirements.txt','.github/evidence-policy.json'])write(name,fs.readFileSync(name));
  write('data/world-index.json',{parts:['geography/fixture.json']});write('data/geography/fixture.json',{type:'FeatureCollection',features:[]});
  write('data/hierarchy.json',[]);write('data/canonical-grid/manifest.json',{version:1});write('data/geographic-releases/index.json',{});
