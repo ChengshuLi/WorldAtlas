@@ -224,6 +224,24 @@
       "bytes": 3145,
       "sha256": "4e16d6c5c05200e1ab8cf43f3f7bcd2ad88b055eea3b9afd1e7c3e8e071265bc",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/controls/corrected-ci-allowance-final.log",
+      "bytes": 201,
+      "sha256": "0c835a17649ac83a22d4cbdf15eddb0ad23b15cef8a403de2fbde879aba70990",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/controls/corrected-ci-allowance.log",
+      "bytes": 201,
+      "sha256": "8285fb4febb561c406e706ede3a076ecb5657443fbfe8db6e475e587d6cba74b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/controls/hosted-3868-regression-1-failure.log",
+      "bytes": 407342,
+      "sha256": "412e8c8ae1a4ff642aa8346ca2b6918cd3a9a5ce3061abac35021bd6818c0e46",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
@@ -344,7 +362,8 @@
     "node --test --test-concurrency=1 --test-name-pattern=continuous test/effective-geographic-regression.test.mjs",
     "python coordination/engineering/continuous-single-vintage-20261012/supervise.py --control-orphan-cleanup",
     "WORLDATLAS_CONCURRENT_RESERVED_BYTES=536870912 python coordination/engineering/continuous-single-vintage-20261012/supervise.py 8b3d8265309d4f6104cca03d78f72a8f48d0f3d2",
-    "python coordination/engineering/continuous-single-vintage-20261012/compare.py .cache/1767/retained-proof-001"
+    "python coordination/engineering/continuous-single-vintage-20261012/compare.py .cache/1767/retained-proof-001",
+    "WORLDATLAS_CONCURRENT_RESERVED_BYTES=536870912 node --test --test-concurrency=1 test/current-ci-allowance.test.mjs"
   ],
   "limits": [
     "Initial353b retained test logs are distinguished from corrected invariant controls; they do not independently establish the closed resolver-image accounting invariant.",
@@ -353,7 +372,8 @@
     "No new source authority, geographic approval, selected release, import or deployment.",
     "One real-input local execution compared with retained historical runs, not a controlled same-time or hosted speedup benchmark.",
     "Both sampled process-group peaks use 50 ms observations and can miss shorter peaks.",
-    "The unchanged original strict polygon result is reused only after complete encoded/decoded operand, source binding, affected plan and inverse equality; it was not rerun."
+    "The unchanged original strict polygon result is reused only after complete encoded/decoded operand, source binding, affected plan and inverse equality; it was not rerun.",
+    "Hosted initial final-evidence head386878d4 exposed an outdated adjacent launch mock; the failed log is preserved and a corrected new control vintage passes. Production code and the actual8b3d proof remain unchanged."
   ],
   "metric_bindings": [
     {
