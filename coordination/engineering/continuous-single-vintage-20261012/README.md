@@ -74,6 +74,41 @@ an actual join-only deficit rejection and a separate-image growth control.
 
 The corrected actual-entry test counts every selection stage. Its non-additive
 fixture uses five total acquisitions, including two attempted shortcut loads.
-Three acquisitions overall applies to the retained additive path, whose actual
-proof remains a separate required result. The focused correction log and explicit
+Three acquisitions overall applies to the retained additive path, now confirmed
+by the separately admitted actual execution below. The focused correction log and explicit
 orphan-child cleanup result are retained independently of the initial controls.
+
+## Actual retained-input proof
+
+The exact independently reviewed implementation at
+`8b3d8265309d4f6104cca03d78f72a8f48d0f3d2` ran once with all 131 required original
+input blobs already present. It completed in **205.435 seconds**, with exactly
+**three total selected-state acquisitions** taking 145,547 ms. The retained PR1764
+execution had five acquisitions and took 317.145 seconds (257,359 ms acquiring).
+These are separate local runs, not a controlled or hosted benchmark.
+
+The 50 ms sampled aggregate process-group peak was **518,189,056 bytes** under the
+unchanged 2 GiB process reservation. Parent exit and the complete owned process
+group were clean; no survivors remained. `admission.json` retains fresh memory,
+concurrent reservation, wall/RSS limits, original selected commits and exact command.
+
+Both complete encoded (376,920 bytes) and decoded (1,356,950 bytes) operands match
+PR1764's actual retained bytes and the original issued publication exactly. Both
+complete 49,625-owner, 36-source coordinate certificates match every semantic field;
+only the deliberately increased `complete_phase_bytes` accounting field differs.
+The complete affected plan, inverse provenance, original source bindings and all
+54 required owners match too. The original zero-regression strict polygon result
+is therefore reused without a redundant scientific replay.
+
+`compare.py retained-proof-001` reproduces these output-only comparisons from this
+repository, writing a new `comparison.json` only in a fresh ordinary run directory.
+The retained output already contains that file, so reproducing the comparison
+requires a fresh copy omitting only that generated comparison. Existing/dangling
+output and symlink-parent refusals are retained in the comparator controls. The
+comparator binds the top-level publication to this invocation's stdout acknowledgement,
+and hashes every compared operand/certificate against its issued descriptors.
+
+Independent corrected-head review retained 17 lifecycle and two actual continuous
+Node/Python passes. The reviewer also independently exercised supervisor clean exit,
+orphan cleanup, wall timeout, RSS refusal and existing/dangling-output preservation.
+The exact audited reader profile is `94379e0b99aefca7267cca7a84032b44cb637aa6150e362e194a72f7e9e44b85`.

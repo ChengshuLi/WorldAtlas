@@ -1,0 +1,90 @@
+{
+  "kind": "single-vintage-retained-operand-comparison",
+  "execution_commit": "8b3d8265309d4f6104cca03d78f72a8f48d0f3d2",
+  "baseline_commit": "9473d184683ee8ff8546300f2313779c3cba1d2b",
+  "candidate_commit": "791576647adc41241ce9b438f1bb0034088eed4e",
+  "retained_at": "dd7db1d22823427b21afeeecab932d36d8728f76",
+  "retained_original": {
+    "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/corrected-continuous-002/continuous.json",
+    "bytes": 377504,
+    "sha256": "c155745caec52604d73dca515ea3a22446014162ce1830b566925c125391b07f"
+  },
+  "prior_comparison_path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/comparison.json",
+  "whole_operands_equal": true,
+  "complete_plan_equal": true,
+  "complete_inverse_equal": true,
+  "publication_matches_invocation_acknowledgement": true,
+  "certificate_comparisons": [
+    {
+      "vintage": "baseline",
+      "complete_semantic_certificate_equal": true,
+      "excluded_fields": [
+        "complete_phase_bytes"
+      ],
+      "complete_owners": 49625,
+      "complete_sources": 36,
+      "complete_phase_bytes": 296375567,
+      "historical_complete_phase_bytes": 296201140
+    },
+    {
+      "vintage": "candidate",
+      "complete_semantic_certificate_equal": true,
+      "excluded_fields": [
+        "complete_phase_bytes"
+      ],
+      "complete_owners": 49625,
+      "complete_sources": 36,
+      "complete_phase_bytes": 299113571,
+      "historical_complete_phase_bytes": 297938796
+    }
+  ],
+  "original_source_bindings_equal": true,
+  "operands": {
+    "bytes": 376920,
+    "decoded_bytes": 1356950,
+    "decoded_sha256": "949622e24a0431c707ebc1b9cfaaee21db768bc165aad17ba9e04534b4bb048e",
+    "path": "operands.json.gz",
+    "sha256": "f3dade45a89f7b432168e4e75ebd852e6ce9864389e2ef2f8f9579d8336774b2"
+  },
+  "selection_load_count": 3,
+  "selection_loads": [
+    {
+      "selected_continuous_stage": "coordinate-selection",
+      "event": "end",
+      "selected": "9473d184683ee8ff8546300f2313779c3cba1d2b",
+      "elapsed_ms": 43721
+    },
+    {
+      "selected_continuous_stage": "coordinate-selection",
+      "event": "end",
+      "selected": "791576647adc41241ce9b438f1bb0034088eed4e",
+      "elapsed_ms": 52955
+    },
+    {
+      "selected_continuous_stage": "required-side-selection",
+      "event": "end",
+      "selected": "9473d184683ee8ff8546300f2313779c3cba1d2b",
+      "sources": 5,
+      "elapsed_ms": 48871
+    }
+  ],
+  "selection_load_elapsed_ms": 145547,
+  "complete_owners": 49625,
+  "required_owners": 54,
+  "changed_owners": 12,
+  "node_elapsed_seconds": 205.435,
+  "sampled_process_group_peak_rss_bytes": 518189056,
+  "historical_execution_commit": "1933d49ce3840d0d10bd76ba30e1d849e56c5233",
+  "historical_node_elapsed_seconds": 317.145,
+  "historical_selection_load_count": 5,
+  "historical_selection_load_elapsed_ms": 257359,
+  "historical_sampled_process_group_peak_rss_bytes": 741392384,
+  "original_polygon_result_reused": true,
+  "original_status": "no-new-regression",
+  "original_regressions": 0,
+  "limits": [
+    "One real-input local execution compared with retained historical runs, not a controlled same-time or hosted speedup benchmark.",
+    "Both sampled process-group peaks use 50 ms observations and can miss shorter peaks.",
+    "The unchanged original strict polygon result is reused only after complete encoded/decoded operand, source binding, affected plan and inverse equality; it was not rerun."
+  ]
+}

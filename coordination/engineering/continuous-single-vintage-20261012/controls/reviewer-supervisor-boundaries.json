@@ -1,0 +1,42 @@
+{
+  "clean": {
+    "exit_code": 0,
+    "parent_exit_code": 0,
+    "elapsed_seconds": 0.051,
+    "sampled_process_group_peak_rss_bytes": 167936,
+    "sampling_interval_ms": 50,
+    "samples": 1,
+    "stopped": null,
+    "subreaper": true,
+    "survivors_at_parent_terminal": [],
+    "reaped_descendants": [],
+    "survivors_after_cleanup": []
+  },
+  "timeout": {
+    "exit_code": -15,
+    "parent_exit_code": -15,
+    "elapsed_seconds": 0.052,
+    "sampled_process_group_peak_rss_bytes": 6569984,
+    "sampling_interval_ms": 50,
+    "samples": 2,
+    "stopped": "wall-timeout",
+    "subreaper": true,
+    "survivors_at_parent_terminal": [],
+    "reaped_descendants": [],
+    "survivors_after_cleanup": []
+  },
+  "rss": {
+    "exit_code": -15,
+    "parent_exit_code": -15,
+    "elapsed_seconds": 0.002,
+    "sampled_process_group_peak_rss_bytes": 221184,
+    "sampling_interval_ms": 50,
+    "samples": 1,
+    "stopped": "aggregate-rss-limit",
+    "subreaper": true,
+    "survivors_at_parent_terminal": [],
+    "reaped_descendants": [],
+    "survivors_after_cleanup": []
+  },
+  "existing_and_dangling_refused_preserved": true
+}
