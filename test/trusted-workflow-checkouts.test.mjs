@@ -521,3 +521,31 @@ test('full-checkout bootstrap real wall alarm interrupts a continuously tricklin
   assert.equal(result.outputs.mode,undefined);assert.ok(result.calls.filter(value=>value==='trickle-chunk').length>=2);
   assert.ok(Date.now()-started<3000,'real SIGALRM interrupts socket read despite continuous incoming bytes');
 });
+
+test('authenticated metadata path keeps current checkout and controls but never repeats or relabels the original build',()=>{
+  const w=packageWorkflow(),ctx=packageContext();ctx.needs.profile.outputs.metadata_reuse='true';
+  for(const name of ['Verify full-regression package controls','Build hosted assets','Read back qualified native build outputs when selected',
+    'Complete regression shard','Verify full-regression package receipt','Retain full-regression package receipt','Install Python dependencies',
+    'Install browser dependencies only for tests that use Playwright'])
+    assert.equal(workflowCondition(packageStep(w.regression,name).condition,ctx),false,name);
+  for(const name of ['Install Node dependencies','Run current-head regression consumers'])
+    assert.equal(workflowCondition(packageStep(w.regression,name).condition,ctx),true,name);
+  assert.equal(packageStep(w.regression,'Run current-head regression consumers').run,'node scripts/run-metadata-regression-controls.mjs');
+  assert.equal(workflowCondition(packageStep(w.package,'Use full-regression package verification').condition,ctx),false);
+  const reused=packageStep(w.package,'Use authenticated predecessor package verification');
+  assert.equal(workflowCondition(reused.condition,ctx),true);assert.match(reused.run,/test "\$REGRESSION_RESULT" = success/);
+  assert.match(reused.run,/no new build is claimed/);
+  assert.match(w.source,/shards: \$\{\{ steps\.metadata_regression\.outputs\.reused == 'true' && '\[0\]' \|\| steps\.select\.outputs\.shards \}\}/);
+});
+
+test('missing or declined predecessor admission retains ordinary full work and cannot run current-controls-only',()=>{
+  const w=packageWorkflow();for(const reused of [undefined,'false','',null]){
+    const ctx=packageContext();ctx.needs.profile.outputs.metadata_reuse=reused;
+    assert.equal(workflowCondition(packageStep(w.regression,'Complete regression shard').condition,ctx),true);
+    assert.equal(workflowCondition(packageStep(w.regression,'Build hosted assets').condition,ctx),true);
+    assert.equal(workflowCondition(packageStep(w.regression,'Run current-head regression consumers').condition,ctx),false);
+    assert.equal(workflowCondition(packageStep(w.package,'Use full-regression package verification').condition,ctx),true);
+  }
+  const helper=fs.readFileSync(path.join(root,'scripts/run-metadata-regression-controls.mjs'),'utf8');
+  assert.match(helper,/streamTestProcess/);assert.doesNotMatch(helper,/prepareNativeRegressionInputs|prepareCanonicalCheckout|prepareModelReaderCheckout/);
+});

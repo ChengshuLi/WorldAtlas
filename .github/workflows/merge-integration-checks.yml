@@ -24,7 +24,11 @@ jobs:
       actions: read
     outputs:
       profile: ${{ steps.select.outputs.profile }}
-      shards: ${{ steps.select.outputs.shards }}
+      shards: ${{ steps.metadata_regression.outputs.reused == 'true' && '[0]' || steps.select.outputs.shards }}
+      metadata_reuse: ${{ steps.metadata_regression.outputs.reused }}
+      original_run: ${{ steps.metadata_regression.outputs.source_run }}
+      original_attempt: ${{ steps.metadata_regression.outputs.source_attempt }}
+      original_head: ${{ steps.metadata_regression.outputs.source_head }}
       test_selection: ${{ steps.select.outputs.test_selection }}
       expectations_path: ${{ steps.select.outputs.expectations_path }}
       owned_paths: ${{ steps.select.outputs.owned_paths }}
@@ -72,6 +76,17 @@ jobs:
           if (packageProfile.blocked) throw Error('Activation package classification is quota-blocked');
           fs.appendFileSync(process.env.GITHUB_OUTPUT, `profile=${regression.profile}\nshards=${JSON.stringify(regression.shards)}\nowned_paths=${JSON.stringify(linked.owned_paths ?? [])}\npr_body=${JSON.stringify(pr.body ?? '')}\nfull=${packageProfile.full}\nblocked=false\n`);
           NODE
+          fi
+      - name: Authenticate predecessor regression inputs
+        id: metadata_regression
+        if: steps.select.outputs.profile == 'full' && steps.select.outputs.test_selection != 'selected-data'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if test -f scripts/reuse-pr-regression.mjs; then
+            timeout --kill-after=5s 180s node scripts/reuse-pr-regression.mjs || echo 'reused=false' >> "$GITHUB_OUTPUT"
+          else
+            echo 'reused=false' >> "$GITHUB_OUTPUT"
           fi
       - name: Diagnose failed API read without changing validation outcome
         if: failure()
@@ -512,9 +527,10 @@ jobs:
         if: needs.profile.outputs.profile == 'full'
         run: npm ci --no-audit --no-fund
       - name: Install Python dependencies
-        if: needs.profile.outputs.profile == 'full'
+        if: needs.profile.outputs.profile == 'full' && needs.profile.outputs.metadata_reuse != 'true'
         run: python -m pip install -r requirements.txt
       - name: Install browser dependencies only for tests that use Playwright
+        if: needs.profile.outputs.metadata_reuse != 'true'
         env:
           INTEGRATION_PROFILE: ${{ needs.profile.outputs.profile }}
           INTEGRATION_SHARD: ${{ matrix.shard }}
@@ -523,13 +539,13 @@ jobs:
             npx playwright install --with-deps chromium
           fi
       - name: Verify full-regression package controls
-        if: needs.profile.outputs.profile == 'full' && matrix.shard == 0
+        if: needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
         run: node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs test/package-inputs.test.mjs test/package-build.test.mjs
       - name: Build hosted assets
-        if: needs.profile.outputs.profile == 'full' && matrix.shard == 0
+        if: needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
         run: npm run build:cloudflare
       - name: Read back qualified native build outputs when selected
-        if: needs.profile.outputs.profile == 'full' && matrix.shard == 0
+        if: needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
         run: |
           if node --input-type=module -e '
             import fs from "node:fs";
@@ -551,13 +567,17 @@ jobs:
             if test "$status" -ne 3; then exit "$status"; fi
             echo 'No artifact selection: native built-output readback is inapplicable; no report claimed.'
           fi
+      - name: Run current-head regression consumers
+        if: needs.profile.outputs.metadata_reuse == 'true'
+        run: node scripts/run-metadata-regression-controls.mjs
       - name: Complete regression shard
+        if: needs.profile.outputs.metadata_reuse != 'true'
         env:
           INTEGRATION_PROFILE: ${{ needs.profile.outputs.profile }}
           INTEGRATION_SHARD: ${{ matrix.shard }}
         run: node scripts/run-integration-tests.mjs
       - name: Verify full-regression package receipt
-        if: needs.profile.outputs.profile == 'full' && matrix.shard == 0
+        if: needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
         env:
           PACKAGE_REVIEWED_HEAD: ${{ github.event.pull_request.head.sha }}
         run: |
@@ -585,7 +605,7 @@ jobs:
           console.log('Actual reviewed-head Cloudflare package and applicable native readback receipts verified.');
           NODE
       - name: Retain native built-output readback
-        if: always() && needs.profile.outputs.profile == 'full' && matrix.shard == 0
+        if: always() && needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: native-built-output-regression-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}
@@ -593,7 +613,7 @@ jobs:
           include-hidden-files: true
           if-no-files-found: ignore
       - name: Retain full-regression package receipt
-        if: always() && needs.profile.outputs.profile == 'full' && matrix.shard == 0
+        if: always() && needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: package-input-build
@@ -615,12 +635,23 @@ jobs:
       pull-requests: read
     steps:
       - name: Use full-regression package verification
-        if: needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete'
+        if: needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete' && needs.profile.outputs.metadata_reuse != 'true'
         env:
           REGRESSION_RESULT: ${{ needs.regression.result }}
         run: |
           test "$REGRESSION_RESULT" = success
           echo 'Cloudflare package controls, actual build, applicable native readback and retained package receipt passed in regression (0) in this run. No second build or Sites reserve measurement is claimed.' >> "$GITHUB_STEP_SUMMARY"
+      - name: Use authenticated predecessor package verification
+        if: needs.profile.outputs.metadata_reuse == 'true'
+        env:
+          REGRESSION_RESULT: ${{ needs.regression.result }}
+          ORIGINAL_RUN: ${{ needs.profile.outputs.original_run }}
+          ORIGINAL_ATTEMPT: ${{ needs.profile.outputs.original_attempt }}
+          ORIGINAL_HEAD: ${{ needs.profile.outputs.original_head }}
+        run: |
+          test "$REGRESSION_RESULT" = success
+          test -n "$ORIGINAL_RUN" && test -n "$ORIGINAL_ATTEMPT" && test -n "$ORIGINAL_HEAD"
+          printf 'Original build and consumers: run %s attempt %s at %s. Current-head controls passed; no new build is claimed.\n' "$ORIGINAL_RUN" "$ORIGINAL_ATTEMPT" "$ORIGINAL_HEAD" >> "$GITHUB_STEP_SUMMARY"
       - name: Refuse package verification while Actions API quota is unavailable
         if: needs.profile.outputs.blocked == 'true'
         run: |

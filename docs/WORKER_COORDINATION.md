@@ -233,8 +233,20 @@ Unavailable proof, changed consumed metadata or timeout runs normal geography.
 Current ownership, scope, evidence and exact-head review still run. The separate
 geography-reuse.json records original execution and current applicability without
 rewriting the report or granting transferable geography/checkpoint authority.
-The merge queue still runs fresh exact-candidate geography; full regression and
-its hosted build are not waived by this first metadata-reuse path.
+The merge queue still runs fresh exact-candidate geography.
+
+Regression/build reuse additionally requires an exact trusted known-program
+catalogue match, successful original full regression shards and package jobs,
+and absence of the entire receiving packet from the trusted base. The programme
+vector binds complete test discovery, execution namespaces, policy selectors
+and archived executable images. Unknown programmes use ordinary full checks.
+The current head runs the four audited real-checkout consumer files afresh;
+normal ownership, scope, evidence and exact-head review remain required. Reuse
+records retain the original run, attempt, head and successful job identities.
+They do not claim a new build or relabel the old report. The queue authenticates
+that predecessor again against its actual baseline and current control job,
+including after capacity waiting and before merge. Only immutable input
+collection is cached within that queue process; live authority is reread.
 
 This is cooperative GitHub Actions evidence, not independent authenticated worker
 identity or a native GitHub merge queue. The existing final base check and guarded

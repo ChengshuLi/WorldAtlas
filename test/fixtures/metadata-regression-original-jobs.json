@@ -1,0 +1,693 @@
+{
+  "source": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/38237899123",
+  "jobs": [
+    {
+      "id": 114773008654,
+      "run_id": 38237899123,
+      "run_attempt": 1,
+      "head_sha": "fe3b14d9584fe0afa6e28437a99a0b8326413376",
+      "name": "profile",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Validate ownership and focused CI applicability",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Diagnose failed API read without changing validation outcome",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Retain trusted gate result and applicability",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114773009040,
+      "run_id": 38237899123,
+      "run_attempt": 1,
+      "head_sha": "fe3b14d9584fe0afa6e28437a99a0b8326413376",
+      "name": "evidence",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Validate exact-head evidence with trusted code",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Retain trusted evidence result",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114773123787,
+      "run_id": 38237899123,
+      "run_attempt": 1,
+      "head_sha": "fe3b14d9584fe0afa6e28437a99a0b8326413376",
+      "name": "regression (1)",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Authenticate trusted full-checkout bootstrap",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Acquire full checkout with authenticated bounded helper",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Legacy full checkout only for proven trusted-helper absence",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Checkout reviewed head",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Checkout reviewed head",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install Node dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install Python dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install browser dependencies only for tests that use Playwright",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify full-regression package controls",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Build hosted assets",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Read back qualified native build outputs when selected",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Complete regression shard",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify full-regression package receipt",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Retain native built-output readback",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Retain full-regression package receipt",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114773123806,
+      "run_id": 38237899123,
+      "run_attempt": 1,
+      "head_sha": "fe3b14d9584fe0afa6e28437a99a0b8326413376",
+      "name": "regression (2)",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Authenticate trusted full-checkout bootstrap",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Acquire full checkout with authenticated bounded helper",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Legacy full checkout only for proven trusted-helper absence",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Checkout reviewed head",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Checkout reviewed head",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install Node dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install Python dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install browser dependencies only for tests that use Playwright",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify full-regression package controls",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Build hosted assets",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Read back qualified native build outputs when selected",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Complete regression shard",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify full-regression package receipt",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Retain native built-output readback",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Retain full-regression package receipt",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114773123812,
+      "run_id": 38237899123,
+      "run_attempt": 1,
+      "head_sha": "fe3b14d9584fe0afa6e28437a99a0b8326413376",
+      "name": "scope",
+      "status": "completed",
+      "conclusion": "failure",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check exact head paths with trusted code and authenticated issue ownership",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "name": "Check worker reservations and regional content gates",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114773123816,
+      "run_id": 38237899123,
+      "run_attempt": 1,
+      "head_sha": "fe3b14d9584fe0afa6e28437a99a0b8326413376",
+      "name": "regression (0)",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Authenticate trusted full-checkout bootstrap",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Acquire full checkout with authenticated bounded helper",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Legacy full checkout only for proven trusted-helper absence",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Checkout reviewed head",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Checkout reviewed head",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install Node dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install Python dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install browser dependencies only for tests that use Playwright",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify full-regression package controls",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build hosted assets",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Read back qualified native build outputs when selected",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete regression shard",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify full-regression package receipt",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Retain native built-output readback",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Retain full-regression package receipt",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114773123979,
+      "run_id": 38237899123,
+      "run_attempt": 1,
+      "head_sha": "fe3b14d9584fe0afa6e28437a99a0b8326413376",
+      "name": "geography",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Checkout trusted geographic checker",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install trusted geographic dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check proposed geography with trusted baseline code",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Checkout trusted geographic checker",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 114779872466,
+      "run_id": 38237899123,
+      "run_attempt": 1,
+      "head_sha": "fe3b14d9584fe0afa6e28437a99a0b8326413376",
+      "name": "package",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Use full-regression package verification",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Refuse package verification while Actions API quota is unavailable",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Authenticate trusted full-checkout bootstrap",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Acquire full checkout with authenticated bounded helper",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Legacy full checkout only for proven trusted-helper absence",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Checkout complete package inputs",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Install package Node dependencies",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Install package Python dependencies",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Verify package controls",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Build Cloudflare package without publishing",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Read back qualified native build outputs when selected",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Install selected-data browser dependencies",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Run selected-data consumer checks",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Record package rebuild inapplicability",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Retain declared input build receipt",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ]
+}

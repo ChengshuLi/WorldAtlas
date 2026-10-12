@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "status": "actual-historical-program-match",
+  "source": "fe3b14d9584fe0afa6e28437a99a0b8326413376",
+  "current": "b1cc388a9489385314d3282768eb9e850da37cf8",
+  "trusted": "a7bd8a1547ecf1271ebba8919b550cbea51b431d",
+  "branch": "engineering/selected-zero-load-joint-20261012",
+  "changed": [
+    "coordination/engineering/selected-zero-load-joint-20261012/README.md",
+    "coordination/engineering/selected-zero-load-joint-20261012/evidence-quality.json"
+  ],
+  "program": {
+    "id": "observed-1790-fe3b",
+    "roles": 2544,
+    "vector_sha256": "bf21b10019dd91da5e115359010d7cad8962ed4098253bc312b214d290ab18e4",
+    "fresh_tests": [
+      "test/job-deadline.test.mjs",
+      "test/supported-programs.test.mjs",
+      "test/selected-data-profile.test.mjs",
+      "test/integration-profile-restoration.test.mjs"
+    ],
+    "receiving_prefix": "coordination/engineering/selected-zero-load-joint-20261012/"
+  },
+  "limits": [
+    "Offline replay under the new audited catalogue; old trusted main did not carry this new policy.",
+    "Original PR is merged; no live current authority or hosted reuse is claimed."
+  ]
+}
