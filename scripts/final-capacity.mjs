@@ -120,8 +120,9 @@ export function finalRequestBound({inventory, metadataCalls, admissionCalls = 0,
   // inspection. Additional source authority includes its fresh rechecks. The
   // 48 additional calls allocate 16 to bounded cleanup/receipt, 20 to final
   // mutable guards/guarded merge, 8 to candidate/proof trees and 4 to artifact
-  // download/notification. The paid-call guard preserves the 16-call recovery
-  // portion outside validation and rejects unexpected pagination growth.
+  // download/notification. This logical inventory is a minimum admission estimate,
+  // not an upper bound on actual attempts: mutable fanout and HTTP retries may
+  // exceed it. The separate quota-derived attempt bound preserves recovery.
   const required = inventory.blob_calls + metadataCalls * (inventory.water ? 5 : 2) + admissionCalls + proofCalls + artifactPages + 48;
   need(Number.isSafeInteger(required) && required > 0, 'Cannot establish a finite final request bound');
   return required;
@@ -288,10 +289,16 @@ export async function paceFinalValidation(options, {inspect, admission = async (
         receipt = {...receipt, ...observation}; options.capacityObserver?.(observation);
       }});
     receipt = {...receipt, ...capacity, status: 'observed-sufficient'};
-    options.capacityBudget?.setLimit(required - 16);
+    // Fresh observed quota, not the logical estimate, bounds actual attempts.
+    // Every retry and 304 still counts; live response-header admission can stop
+    // earlier when other consumers deplete quota. No future reset grants credit.
+    const validationCallBound = capacity.remaining - 16;
+    options.capacityBudget?.setLimit(validationCallBound);
     options.capacityBudget?.setDeadline(() => options.capacityDeadlineRemaining() + VALIDATION_MARGIN_MS);
-    const api = options.capacityBudget ? options.capacityAPI : boundedFinalAPI(options.capacityAPI ?? options.api, required - 16);
-    receipt.validation_call_bound = required - 16;
+    const api = options.capacityBudget ? options.capacityAPI : boundedFinalAPI(options.capacityAPI ?? options.api, validationCallBound);
+    receipt.validation_call_bound = validationCallBound;
+    receipt.validation_call_bound_source = 'observed-remaining-minus-recovery-reserve';
+    receipt.recovery_call_reserve = 16;
     // Re-read every mutable rejection gate after waiting. These are not reused
     // by the normal completeIntegration inspection and full evidence validator.
     await admission(api);

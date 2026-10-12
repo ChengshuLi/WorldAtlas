@@ -93,3 +93,48 @@ test('current reader adoption preserves all accepted programmes and both earlier
  assert.equal(valueSha(c.programs.slice(0,17)),'f98ce117470918303d67fdcd0392acca35a508908c5ac9db8e15757104003c08');
  assert.equal(valueSha(c.current_rebind_migrations.slice(0,2)),'1b2dc6750f4cd57af263288541b3987b2f5818394c9f1970142c4d1a8b46933e');
 });
+
+test('allocator preregistration preserves all nineteen programmes and five earlier migrations',()=>{
+ const c=read();
+ assert.equal(valueSha(c.programs.slice(0,19)),'436b2e83c9fb4f7bf5b9e408383a5405b36a5b2434bed823e3d952a5921204fb');
+ assert.equal(valueSha(c.current_rebind_migrations.slice(0,5)),'8282c68f153fc9459a3d2955ea429e4afa035c21b248f46d3ffe65e59ec06913');
+});
+
+test('reviewed allocator admits only the two exact complete retained-consumer vectors',()=>{
+ // All three complete vectors were derived from frozen Git bodies at these
+ // execution commits and independently reviewed allocator head 7ddc81bc722b4fc16fdeb2674f1cd89d489f595f.
+ // Keep literal identities without downloading unrelated history during CI.
+ const expected=[
+  ['85ca24519d87bb1d62a86d5cb142006e206cb2b8','11487b4d1ad7c12f2d22c6c324d136da555c82cd6c962178767d672cdf0ded1a'],
+  ['40d792b2c67b18098c00cd71bce3cfd6a8e63a0b','0e1976f823dcdaf3f843a760ca9f9aa866073d8ae5ecebd67f7588579dcc36d7']
+ ];
+ const head=git('rev-parse','HEAD').toString().trim();
+ const reader=new ImmutableReader(root,head,{runtimeBytes:1,metadataBytes:1,executionBytes:1,outputBytes:1});
+ const migrations=read().current_rebind_migrations.slice(5,7);assert.equal(migrations.length,2);
+ for(const [index,m]of migrations.entries()){
+  assert.equal(m.execution_commit,expected[index][0]);
+  assert.equal(valueSha(m.historical_code),expected[index][1]);
+  assert.equal(valueSha(m.current_code),'1f616649e45b736ee23c1397f933bcd6c9f73a59b05130a387c48573ed82b2a4');
+  assert.equal(m.independent_review_comment,6119154199);
+  assert.deepEqual(m.current_code.map(p=>p.path),CURRENT_REBIND_CODE);
+  assert.deepEqual(m.historical_code.map(p=>p.path),CURRENT_REBIND_CODE);
+  assert.deepEqual(compatibleCurrentRebindCode(m.execution_commit,m.current_code,m.historical_code,reader),m.historical_code);
+  assert.throws(()=>compatibleCurrentRebindCode(expected[1-index][0],m.current_code,m.historical_code,reader),/Unknown historical/);
+  // Authority comes from the committed trusted catalogue, not a caller's own
+  // vector or a candidate-only registration. Missing authority still refuses.
+  assert.throws(()=>compatibleCurrentRebindCode(m.execution_commit,m.current_code,m.historical_code),/Unknown historical/);
+  for(const field of ['current_code','historical_code']){
+   for(const member of ['scripts/local-workspace.mjs','src/native-grid.js']){
+    for(const property of ['bytes','sha256']){
+     const changed=clone(m),descriptor=changed[field].find(p=>p.path===member);assert.ok(descriptor);
+     descriptor[property]=property==='bytes'?descriptor.bytes+1:sha('unreviewed '+member);
+     assert.throws(()=>compatibleCurrentRebindCode(m.execution_commit,changed.current_code,changed.historical_code,reader),/Unknown historical/);
+    }
+   }
+   const partial=clone(m);partial[field].splice(26,1);
+   assert.throws(()=>compatibleCurrentRebindCode(m.execution_commit,partial.current_code,partial.historical_code,reader),/Incomplete current\/historical/);
+   const duplicate=clone(m);duplicate[field][26]=clone(duplicate[field][25]);
+   assert.throws(()=>compatibleCurrentRebindCode(m.execution_commit,duplicate.current_code,duplicate.historical_code,reader),/Incomplete current\/historical/);
+  }
+ }
+});

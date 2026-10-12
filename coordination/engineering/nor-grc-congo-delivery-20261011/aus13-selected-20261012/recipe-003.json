@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "id": "aus13-selected-002",
+  "mode": "greedy-model",
+  "registry": {
+    "commit": "83e1ddef1c43baedb0c6759483f8e066fb113c71",
+    "path": "coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json"
+  },
+  "destination_prefix": ".cache/native-grid-candidates/aus13-selected-20261012-002",
+  "handoffs": [
+    {
+      "handoff_id": "aus13-original-administrative-20261011",
+      "source_template": {
+        "commit": "83e1ddef1c43baedb0c6759483f8e066fb113c71",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/exemplars-001/source-template.json"
+      },
+      "source_resources": {
+        "operating_limits": {
+          "log_bytes": 4194304,
+          "monitor_bytes": 8388608,
+          "output_bytes": 33554432,
+          "receipt_bytes": 1048576,
+          "retained_bytes": 50331648,
+          "rss_bytes": 1610612736,
+          "wall_seconds": 1200
+        },
+        "output_reserve": 8388608,
+        "processing_allowance": {
+          "phaseBytes": 536870912,
+          "rssBytes": 1073741824
+        }
+      },
+      "native_resources": {
+        "operating_limits": {
+          "log_bytes": 4194304,
+          "monitor_bytes": 8388608,
+          "output_bytes": 33554432,
+          "receipt_bytes": 1048576,
+          "retained_bytes": 50331648,
+          "rss_bytes": 1610612736,
+          "wall_seconds": 1200
+        },
+        "output_reserve": 16777216,
+        "processing_allowance": {
+          "phaseBytes": 536870912,
+          "rssBytes": 1073741824
+        }
+      },
+      "physical_locator": {
+        "input": {
+          "commit": "6ed97794d10bba5844922360b38191b4e7146c36",
+          "path": "research/geography/aus19-original-source-20261011/physical-locators.json"
+        },
+        "format": "keyed-path"
+      },
+      "targets": [
+        {
+          "target_id": "gb:AUS:ADM2:25037944B11916296746250",
+          "bank_path": "data/geography/part-0.json",
+          "native_template": {
+            "commit": "83e1ddef1c43baedb0c6759483f8e066fb113c71",
+            "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/exemplars-001/native-target-01.json"
+          }
+        },
+        {
+          "target_id": "gb:AUS:ADM2:25037944B17338277063313",
+          "bank_path": "data/geography/part-1.json",
+          "native_template": {
+            "commit": "83e1ddef1c43baedb0c6759483f8e066fb113c71",
+            "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/exemplars-001/native-target-02.json"
+          }
+        },
+        {
+          "target_id": "gb:AUS:ADM2:25037944B43303794043608",
+          "bank_path": "data/geography/part-0.json",
+          "native_template": {
+            "commit": "83e1ddef1c43baedb0c6759483f8e066fb113c71",
+            "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/exemplars-001/native-target-03.json"
+          }
+        },
+        {
+          "target_id": "gb:AUS:ADM2:25037944B47305351718046",
+          "bank_path": "data/geography/part-1.json",
+          "native_template": {
+            "commit": "83e1ddef1c43baedb0c6759483f8e066fb113c71",
+            "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/exemplars-001/native-target-04.json"
+          }
+        },
+        {
+          "target_id": "gb:AUS:ADM2:25037944B73531494726593",
+          "bank_path": "data/geography/part-1.json",
+          "native_template": {
+            "commit": "83e1ddef1c43baedb0c6759483f8e066fb113c71",
+            "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/exemplars-001/native-target-05.json"
+          }
+        },
+        {
+          "target_id": "gb:AUS:ADM2:25037944B91391383703186",
+          "bank_path": "data/geography/part-0.json",
+          "native_template": {
+            "commit": "83e1ddef1c43baedb0c6759483f8e066fb113c71",
+            "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/exemplars-001/native-target-06.json"
+          }
+        },
+        {
+          "target_id": "gb:AUS:ADM2:25037944B95382354250521",
+          "bank_path": "data/geography/part-0.json",
+          "native_template": {
+            "commit": "83e1ddef1c43baedb0c6759483f8e066fb113c71",
+            "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/exemplars-001/native-target-07.json"
+          }
+        }
+      ],
+      "predecessor_allowance": {
+        "source_request_path": {
+          "bytes": 131072
+        },
+        "operating_path": {
+          "bytes": 1048576
+        },
+        "publication_path": {
+          "bytes": 262144
+        },
+        "facts_path": {
+          "bytes": 8388608
+        },
+        "inventory_path": {
+          "bytes": 2097152,
+          "uncompressed_bytes": 8388608
+        }
+      },
+      "native_request_bytes_bound": 131072
+    }
+  ],
+  "retained_registries": [
+    {
+      "commit": "9e7b93f43f8a2dccffc23cb1c9e6cd60613f3b9c",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authority-registry.json"
+    }
+  ],
+  "new_prefix": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/",
+  "selector": {
+    "commit": "dd7db1d22823427b21afeeecab932d36d8728f76",
+    "path": "data/ownership-selection.json"
+  },
+  "package_inputs": {
+    "commit": "dd7db1d22823427b21afeeecab932d36d8728f76",
+    "path": ".github/package-inputs.json"
+  }
+}

@@ -1,0 +1,435 @@
+{
+  "version": 1,
+  "issue": 1767,
+  "lane": "engineering",
+  "worker_id": "01a12e64-dce6-7000-946f-432c5ff29033",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "dd7db1d22823427b21afeeecab932d36d8728f76",
+    "files": [
+      {
+        "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/comparison.json",
+        "bytes": 4190,
+        "sha256": "d2519e56e58fb561a52f6c3eb1b6a791eb74a6b42dd2e8d0e61df185dfedd184",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/complete/publication.json",
+        "bytes": 441,
+        "sha256": "e5df96ff84ef4bcf2cc01f15e3927a893c42aa07801a882c33a0f3a5d1c0c637",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/complete/operands.json.gz",
+        "bytes": 376920,
+        "sha256": "f3dade45a89f7b432168e4e75ebd852e6ce9864389e2ef2f8f9579d8336774b2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/process-group.json",
+        "bytes": 172,
+        "sha256": "dc690c21f31b01e4d3fbcd7e8b101f03685c3d652018c4ecf36bb8f0cf43fd88",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/corrected-continuous-002/continuous.json",
+        "bytes": 377504,
+        "sha256": "c155745caec52604d73dca515ea3a22446014162ce1830b566925c125391b07f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/complete/facts.json",
+        "bytes": 1545496,
+        "sha256": "c2c1424eda90866afb15a45cebf4186218bba918115d63fdcae3058af07829e0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/complete/baseline/publication.json",
+        "bytes": 442,
+        "sha256": "1c339e86eab5dd228237bb7ae11ca2d02ec14fe44df1ab73657fa42fe436c8bb",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/complete/baseline/certificate.json.gz",
+        "bytes": 7515255,
+        "sha256": "e1a07b5d87561f115eec4660a4a914c3961ac83e142c1026ebf57d7690a5455f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/complete/candidate/publication.json",
+        "bytes": 442,
+        "sha256": "4b0ee4f072f70327f1a277656bb8110aa73943fb637dd8318b6b26cc2fb91723",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/complete/candidate/certificate.json.gz",
+        "bytes": 7515259,
+        "sha256": "c609a418afe05125b72a43784401c729d4703cc13ef2eaba3bb349c9ac22558a",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/controls/comparator-output-boundaries.json",
+      "bytes": 437,
+      "sha256": "32335d20add1ca1305924d2fc4b0f21b00a22cc8fea310de7cf93f2b29142340",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/controls/corrected-carry-entry.log",
+      "bytes": 463,
+      "sha256": "627a568d273a188cb7d7e007c35e1366cb493eaad6e880c2df61c8235b299aae",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/controls/initial-353b-lifecycle-routing.log",
+      "bytes": 21825,
+      "sha256": "46cf16696622a0679079f706f6b792066302964531c8814ae254e115cd65805e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/controls/initial-353b-strict-entry.log",
+      "bytes": 353,
+      "sha256": "82a929af8844429555f35ff750fc10afcbafa06ef8079df3e3de3da54bffca9c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/controls/reviewer-corrected-lifecycle.log",
+      "bytes": 20305,
+      "sha256": "1c4d49453ad0e7f852a38a5f15297e3c3c578622229a031aee8fdc63ea1af16b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/controls/reviewer-corrected-strict.log",
+      "bytes": 352,
+      "sha256": "90cd8378957be02cbf58fb842fb9ea1365cd08cfe1505c17b06f9b615210825b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/controls/reviewer-corrected-supervisor.log",
+      "bytes": 384,
+      "sha256": "5d97c19e42a241a77b9c8bf4e77525ab626a104db772c2b411529f8a4f84f1f1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/controls/reviewer-initial-own-image.log",
+      "bytes": 347,
+      "sha256": "015204b7d1eba870397606795ee23d7e9290f989e840e5e92e95ff550cf5dd7e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/controls/reviewer-supervisor-boundaries.json",
+      "bytes": 1125,
+      "sha256": "82f834976ced213d1befac79dbd1689193c7bda3982ec1f285468fc18f25f04a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/controls/supervisor-orphan-cleanup.json",
+      "bytes": 459,
+      "sha256": "7becd0804d216d66b001521c888e6dfe7293fdc6b205f55b802f798df8c3946f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/admission.json",
+      "bytes": 1377,
+      "sha256": "3b34c2656b08bfa280647fce788298ae75caa098eaf7b3d3c2c70fe8afd10340",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/comparison.json",
+      "bytes": 3481,
+      "sha256": "4e160a5b36d2aaa8c3c3b9ce22035ebe5144c2b0350ae1660522a1dfcc0e5db1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/complete/baseline/certificate.json.gz",
+      "bytes": 7515251,
+      "sha256": "df8ea3b52db8e5ded8b0c355af4bdda185d12543e50ce0171d18a3cd3cf69756",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/complete/baseline/facts.json",
+      "bytes": 82759,
+      "sha256": "cba22e8591b3e392c6881a38a840294d82ec9106d49a61e39947448bc970f333",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/complete/baseline/publication.json",
+      "bytes": 442,
+      "sha256": "9db23ae7224a7908077fdf7fa7eefb9faeb5103fd9636a6376f6d0c241bf5c2a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/complete/candidate/certificate.json.gz",
+      "bytes": 7515261,
+      "sha256": "5851a08b930d55f0f0d795d803d85935023504022b6204543d4a104c088d7e10",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/complete/candidate/facts.json",
+      "bytes": 82762,
+      "sha256": "574f1b2a3dbbb6a1d0f0a5a6aa04d859c947abdb852bbe2f714c89aca19cd93a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/complete/candidate/publication.json",
+      "bytes": 442,
+      "sha256": "0966943761c71243a31bfc6446f732aa1781a3d36c821fa83ed68b901350f77b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/complete/facts.json",
+      "bytes": 1594592,
+      "sha256": "78e98cead42049f1f7df8a01052081d5df3f29f508b9c5ee7f69f8603c4c3ac7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/complete/operands.json.gz",
+      "bytes": 376920,
+      "sha256": "f3dade45a89f7b432168e4e75ebd852e6ce9864389e2ef2f8f9579d8336774b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/complete/publication.json",
+      "bytes": 441,
+      "sha256": "33244181033c5115ad24145a0ebd82d4dd885a03de7b65381c731690cd9165f1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/input-presence.json",
+      "bytes": 51774,
+      "sha256": "6db96c318f54434eacedfb158e0d66e7f231504c6e3ac6c67044851c77e42a11",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/process-group.json",
+      "bytes": 317,
+      "sha256": "912e0194ab074d87d8c70ea8ed8df18580c4c18b962bb5e23b305839c6f000b8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/stderr.log",
+      "bytes": 28470,
+      "sha256": "1a4bc47c61ef62265679fa67dde4c7f8de0057ea44607634921e26722ee1ee78",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/stdout.log",
+      "bytes": 3145,
+      "sha256": "4e16d6c5c05200e1ab8cf43f3f7bcd2ad88b055eea3b9afd1e7c3e8e071265bc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/controls/corrected-ci-allowance-final.log",
+      "bytes": 201,
+      "sha256": "0c835a17649ac83a22d4cbdf15eddb0ad23b15cef8a403de2fbde879aba70990",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/controls/corrected-ci-allowance.log",
+      "bytes": 201,
+      "sha256": "8285fb4febb561c406e706ede3a076ecb5657443fbfe8db6e475e587d6cba74b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-single-vintage-20261012/controls/hosted-3868-regression-1-failure.log",
+      "bytes": 407342,
+      "sha256": "412e8c8ae1a4ff642aa8346ca2b6918cd3a9a5ce3061abac35021bd6818c0e46",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "single-vintage-lifecycle",
+      "kind": "code",
+      "description": "Actual immutable fixture entry and complete custody/projection equality, adverse resource/identity/readback controls, resolver collectability and original Python operator path. Exact initial/corrected code applicability is distinguished in README.",
+      "software": "Node.js v24.19.0; Python 3.12",
+      "units": "whole-file bytes, records, actual acquisitions"
+    },
+    {
+      "id": "retained-real-input-comparison",
+      "kind": "measurement",
+      "description": "One admitted actual Node operand execution, full encoded/decoded equality to retained original and stage timings with sampled aggregate process-group memory and terminal cleanup.",
+      "software": "Node.js v24.19.0; Python 3.12 supervisor",
+      "units": "seconds, milliseconds, bytes, actual acquisitions"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "node_elapsed_seconds",
+      "value": 205.435,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "4e160a5b36d2aaa8c3c3b9ce22035ebe5144c2b0350ae1660522a1dfcc0e5db1",
+      "evaluation_commit": "8b3d8265309d4f6104cca03d78f72a8f48d0f3d2"
+    },
+    {
+      "id": "historical_node_elapsed_seconds",
+      "value": 317.145,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "4e160a5b36d2aaa8c3c3b9ce22035ebe5144c2b0350ae1660522a1dfcc0e5db1",
+      "evaluation_commit": "1933d49ce3840d0d10bd76ba30e1d849e56c5233"
+    },
+    {
+      "id": "selection_load_count",
+      "value": 3,
+      "unit": "loads",
+      "vintage": "archived",
+      "input_sha256": "4e160a5b36d2aaa8c3c3b9ce22035ebe5144c2b0350ae1660522a1dfcc0e5db1",
+      "evaluation_commit": "8b3d8265309d4f6104cca03d78f72a8f48d0f3d2"
+    },
+    {
+      "id": "historical_selection_load_count",
+      "value": 5,
+      "unit": "loads",
+      "vintage": "archived",
+      "input_sha256": "4e160a5b36d2aaa8c3c3b9ce22035ebe5144c2b0350ae1660522a1dfcc0e5db1",
+      "evaluation_commit": "1933d49ce3840d0d10bd76ba30e1d849e56c5233"
+    },
+    {
+      "id": "selection_load_elapsed_ms",
+      "value": 145547,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "4e160a5b36d2aaa8c3c3b9ce22035ebe5144c2b0350ae1660522a1dfcc0e5db1",
+      "evaluation_commit": "8b3d8265309d4f6104cca03d78f72a8f48d0f3d2"
+    },
+    {
+      "id": "historical_selection_load_elapsed_ms",
+      "value": 257359,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "4e160a5b36d2aaa8c3c3b9ce22035ebe5144c2b0350ae1660522a1dfcc0e5db1",
+      "evaluation_commit": "1933d49ce3840d0d10bd76ba30e1d849e56c5233"
+    },
+    {
+      "id": "sampled_process_group_peak_rss_bytes",
+      "value": 518189056,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "4e160a5b36d2aaa8c3c3b9ce22035ebe5144c2b0350ae1660522a1dfcc0e5db1",
+      "evaluation_commit": "8b3d8265309d4f6104cca03d78f72a8f48d0f3d2"
+    },
+    {
+      "id": "historical_sampled_process_group_peak_rss_bytes",
+      "value": 741392384,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "4e160a5b36d2aaa8c3c3b9ce22035ebe5144c2b0350ae1660522a1dfcc0e5db1",
+      "evaluation_commit": "1933d49ce3840d0d10bd76ba30e1d849e56c5233"
+    },
+    {
+      "id": "complete_owners",
+      "value": 49625,
+      "unit": "owners",
+      "vintage": "archived",
+      "input_sha256": "4e160a5b36d2aaa8c3c3b9ce22035ebe5144c2b0350ae1660522a1dfcc0e5db1",
+      "evaluation_commit": "8b3d8265309d4f6104cca03d78f72a8f48d0f3d2"
+    },
+    {
+      "id": "required_owners",
+      "value": 54,
+      "unit": "owners",
+      "vintage": "archived",
+      "input_sha256": "4e160a5b36d2aaa8c3c3b9ce22035ebe5144c2b0350ae1660522a1dfcc0e5db1",
+      "evaluation_commit": "8b3d8265309d4f6104cca03d78f72a8f48d0f3d2"
+    },
+    {
+      "id": "changed_owners",
+      "value": 12,
+      "unit": "owners",
+      "vintage": "archived",
+      "input_sha256": "4e160a5b36d2aaa8c3c3b9ce22035ebe5144c2b0350ae1660522a1dfcc0e5db1",
+      "evaluation_commit": "8b3d8265309d4f6104cca03d78f72a8f48d0f3d2"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test --test-concurrency=1 test/selected-continuous-lifecycle.test.mjs test/unchanged-selected-geography.test.mjs",
+    "node --test --test-concurrency=1 --test-name-pattern=continuous test/effective-geographic-regression.test.mjs",
+    "python coordination/engineering/continuous-single-vintage-20261012/supervise.py --control-orphan-cleanup",
+    "WORLDATLAS_CONCURRENT_RESERVED_BYTES=536870912 python coordination/engineering/continuous-single-vintage-20261012/supervise.py 8b3d8265309d4f6104cca03d78f72a8f48d0f3d2",
+    "python coordination/engineering/continuous-single-vintage-20261012/compare.py .cache/1767/retained-proof-001",
+    "WORLDATLAS_CONCURRENT_RESERVED_BYTES=536870912 node --test --test-concurrency=1 test/current-ci-allowance.test.mjs"
+  ],
+  "limits": [
+    "Initial353b retained test logs are distinguished from corrected invariant controls; they do not independently establish the closed resolver-image accounting invariant.",
+    "The tiny separate-image probe models live metadata around genuine selected source bodies; it does not qualify a new legacy source bank.",
+    "Non-additive fixture has two shortcut attempts plus three full-path acquisitions; the actual additive retained-input execution independently demonstrates exactly three total acquisitions.",
+    "No new source authority, geographic approval, selected release, import or deployment.",
+    "One real-input local execution compared with retained historical runs, not a controlled same-time or hosted speedup benchmark.",
+    "Both sampled process-group peaks use 50 ms observations and can miss shorter peaks.",
+    "The unchanged original strict polygon result is reused only after complete encoded/decoded operand, source binding, affected plan and inverse equality; it was not rerun.",
+    "Hosted initial final-evidence head386878d4 exposed an outdated adjacent launch mock; the failed log is preserved and a corrected new control vintage passes. Production code and the actual8b3d proof remain unchanged."
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "node_elapsed_seconds",
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/comparison.json",
+      "json_pointer": "/node_elapsed_seconds"
+    },
+    {
+      "metric_id": "historical_node_elapsed_seconds",
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/comparison.json",
+      "json_pointer": "/historical_node_elapsed_seconds"
+    },
+    {
+      "metric_id": "selection_load_count",
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/comparison.json",
+      "json_pointer": "/selection_load_count"
+    },
+    {
+      "metric_id": "historical_selection_load_count",
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/comparison.json",
+      "json_pointer": "/historical_selection_load_count"
+    },
+    {
+      "metric_id": "selection_load_elapsed_ms",
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/comparison.json",
+      "json_pointer": "/selection_load_elapsed_ms"
+    },
+    {
+      "metric_id": "historical_selection_load_elapsed_ms",
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/comparison.json",
+      "json_pointer": "/historical_selection_load_elapsed_ms"
+    },
+    {
+      "metric_id": "sampled_process_group_peak_rss_bytes",
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/comparison.json",
+      "json_pointer": "/sampled_process_group_peak_rss_bytes"
+    },
+    {
+      "metric_id": "historical_sampled_process_group_peak_rss_bytes",
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/comparison.json",
+      "json_pointer": "/historical_sampled_process_group_peak_rss_bytes"
+    },
+    {
+      "metric_id": "complete_owners",
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/comparison.json",
+      "json_pointer": "/complete_owners"
+    },
+    {
+      "metric_id": "required_owners",
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/comparison.json",
+      "json_pointer": "/required_owners"
+    },
+    {
+      "metric_id": "changed_owners",
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/comparison.json",
+      "json_pointer": "/changed_owners"
+    }
+  ]
+}
