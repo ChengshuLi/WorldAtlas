@@ -310,8 +310,19 @@ Observations supply only actual commit/path locators, not derived hashes:
 - `sources` / `natives`: arrays of `{publication, terminal}` locators. Original
   facts determine request identity and saved group scope; unknown/duplicate groups fail.
 - `authorities`: committed `{rule_preimage, source_authority}` locator pairs.
-- `registry`, `composed_ledger`, `operating`, `certificate`, `sidecar`: actual
-  committed products. Each is joined to the deterministic preceding output.
+- `registry`: the committed registry input to composition. Keep this locator
+  unchanged after the compose intent freezes, even when it contains only the new
+  authorities and composition adds declared retained authorities.
+- `composition`: the actual commit/path of the completed compose stage's
+  `preparation.json`. Its authenticated receipt derives both combined-registry and
+  composed-ledger pins and must match the original frozen input binding and whole
+  output inventory. Commit the completed compose directory, then supply this one
+  locator before rebind; no standalone composition command is needed.
+- Historical configurations with an already-combined `registry` may retain their
+  existing `composed_ledger` locator. It must match the saved composition bytes.
+  If both forms are supplied, the legacy ledger must name the same derived pin.
+- `operating`, `certificate`, `sidecar`: actual committed products. Each is joined
+  to the deterministic preceding output.
 - `rebind`: actual `publication`, `request`, `terminal` locators and complete
   `custody` locators for code_source, issued_plan, stdout and stderr.
 - `review: {repo, pr_number}` is a top-level config field. The current head is
@@ -364,3 +375,47 @@ scientific cache or GIS operands. Acceptance or revalidation relying on the
 retained current13 proof must run `WORLDATLAS_DELIVERY_FIXTURE=1` and establish
 zero skips; ordinary CI alone does not establish that proof. Absence of those
 bodies is a fixture availability limit, never a successful replay.
+
+## Optional same-target PR base metadata refresh
+
+For a genuine refresh of an existing PR, set `review.refresh_base_metadata: true`
+alongside its existing `repo` and `pr_number` in the advance config. The same
+`advance` invocation then compares GitHub's reported PR base to one actual
+`refs/heads/main` snapshot before freezing a new review packet. An already-current
+base needs no write. A stale base permits one ordinary `PATCH {base: "main"}` only
+for a complete open same-repository PR already targeting main. Exact head SHA,
+head/target branch and repository identities, body and draft/ready state are
+checked immediately before the call, in an independent readback and throughout
+review freezing. This option cannot mark a draft ready, edit source branches,
+change main or authorize the existing independent review/queue gates.
+
+The existing advance journal writes `pr-base-refresh.json` before the external
+call and records its outcome in its ordinary observations. Every invocation with
+that intent is observation-only, including interruption before dispatch or loss
+of the response. A complete readback may establish the intended state even when
+the PATCH response was lost; it does not prove which actor changed the metadata.
+Missing readback, state drift or a changed captured main refuses without another
+PATCH. Preserve the original journal and reconcile the external outcome before
+deciding on any new attempt. `status` remains read-only and reports the retained
+intent and last observed outcome. Removing the opt-in does not turn an existing
+intent into permission to retry.
+
+A completed review packet is never silently rebound by this option. Its ordinary
+frozen bindings and live queue checks still apply; a changed review vintage needs
+fresh preparation and any required independent review. The PR API has no atomic
+multi-field compare-and-swap guard, so the before/after checks rely on the existing
+cooperative owner protocol and cannot exclude an out-of-band writer in between.
+
+The retained PR #1762 fixture exercises the actually observed stale metadata
+shape, plus exact draft preservation, denied/uncertain responses, interruption,
+foreign targets, state drift and frozen-packet preservation. These controls do
+not mutate a live PR or measure delivery throughput. Record adoption only when
+the option handles the next genuinely required refresh.
+
+The fresh-composition control uses the actual retained five new authority entries
+and thirty predecessor entries as separate immutable inputs, then commits the
+ordinary composer output and derives both pins from its genuine completion
+receipt. The combined output preserves all original rows and exact accepted
+registry bytes. This is metadata-transition proof, not another scientific run.
+The need was found by tracing the current AUS continuation; no actual AUS refusal
+was run, and its already-supported standalone compose route remains valid.

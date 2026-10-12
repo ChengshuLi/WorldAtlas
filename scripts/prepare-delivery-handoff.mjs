@@ -577,10 +577,13 @@ export function finalizeDelivery(config, reader) {
     'selected-delivery-expectations.json': orderedBytes(expectations)};
 }
 
-export async function freezeReview({repo, number, expectedHead, api, reader}) {
+export async function freezeReview({repo, number, expectedHead, expectedPR, api, reader}) {
   need(/^[\w.-]+\/[\w.-]+$/.test(repo) && Number.isSafeInteger(number) && number > 0 && hex(expectedHead, 40), 'Exact PR/repository/head required');
   const route = `/repos/${repo}`, pr = await api(`${route}/pulls/${number}`);
   need(pr.state === 'open' && pr.head.sha === expectedHead, 'Current PR head/state differs');
+  const state = value => [value.number, value.state, value.draft, value.head.sha, value.head.ref, value.head.repo?.full_name,
+    value.base.sha, value.base.ref, value.base.repo?.full_name, value.body, value.changed_files];
+  if (expectedPR) need(same(state(pr), state(expectedPR)), 'PR state changed after review preparation');
   const refs = [...pr.body.matchAll(/^(?:Refs|Closes) #(\d+)\s*$/gm)]; need(refs.length === 1, 'Exactly one original issue linkage required');
   const issue = await api(`${route}/issues/${refs[0][1]}`), spec = workSpec(issue.body);
   const claim = readClaim(await githubPages(api, `${route}/issues/${issue.number}/comments`));
@@ -600,8 +603,8 @@ export async function freezeReview({repo, number, expectedHead, api, reader}) {
   const currentPr = await api(`${route}/pulls/${number}`), currentIssue = await api(`${route}/issues/${issue.number}`);
   const currentClaim = readClaim(await githubPages(api, `${route}/issues/${issue.number}/comments`));
   need(same(currentClaim, claim), 'Author claim changed while freezing');
-  need(same([currentPr.head.sha, currentPr.base.sha, currentPr.body, currentPr.changed_files, currentPr.state],
-    [pr.head.sha, pr.base.sha, pr.body, pr.changed_files, pr.state]) && same(reviewContractBinding(issue, pr), reviewContractBinding(currentIssue, currentPr)), 'Review head/base/scope/body changed while freezing');
+  need(same(state(currentPr), state(pr)) && same(reviewContractBinding(issue, pr), reviewContractBinding(currentIssue, currentPr)),
+    'Review head/base/target/draft/scope/body changed while freezing');
   const packet = {version: 1, kind: 'review-preparation-only', repo, pr_number: number, head_sha: expectedHead, base_sha: pr.base.sha,
     author_worker_id: claim.worker_id, manifest: manifestPin, ...reviewContractBinding(issue, pr),
     inventory_commitment: reviewInventoryCommitment({files, manifest}), required_domains: [...domains].sort(),
@@ -648,16 +651,17 @@ async function main(args) {
     const journal = flow.openAdvanceJournal(root, destination, recipe, {resume: phase === 'status' || flags.includes('--resume'), budget: reader.budget});
     if (phase === 'status') { console.log(JSON.stringify(flow.readAdvanceStatus(journal))); return; }
     let api, apiWait = 0;
-    const liveAPI = async route => {
+    const liveAPI = async (route, method = 'GET', body) => {
       api ??= githubAPI(execFileSync('gh', ['auth', 'token'], {encoding: 'utf8', maxBuffer: 16384}).trim());
       const started = performance.now();
-      try { return await api(route); } finally { apiWait += performance.now() - started; }
+      try { return await api(route, method, body); } finally { apiWait += performance.now() - started; }
     };
     await flow.withAdvanceLock(journal, async () => {
       try {
         const preparationStarted = performance.now();
         const next = await flow.nextDeliveryStage(journal, config, reader, {prepareRequests, nativeRequests, retainProducts,
           composeAuthorities, rebindCustody, packageProjection, finalizeDelivery, freezeReview, api: liveAPI,
+          refreshBase: flow.deliveryBaseRefreshAPI(liveAPI),
           authorityReader: () => flow.deliveryAuthorityReader(root, reader)});
         let result;
         if (next.waiting) result = flow.observeAdvance(journal, next.waiting);

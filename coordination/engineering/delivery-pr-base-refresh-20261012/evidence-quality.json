@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "issue": 1768,
+  "lane": "engineering",
+  "worker_id": "01a12e65-3ab3-71e8-a084-e99f2053a02a",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "dd7db1d22823427b21afeeecab932d36d8728f76",
+    "files": [
+      {
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authority-registry.json",
+        "bytes": 34162,
+        "sha256": "95f649b62ec4dfd8f7a52ceb55d9daa0a53b65bb4f063c5bf812698ad39f46d1",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/delivery-pr-base-refresh-20261012/validation.txt",
+      "bytes": 12800,
+      "sha256": "0dd63d49201a675e09a19be4d094d34ccbbf2e6381ee1ee1479bf28161a923b4",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "delivery-continuation-boundaries",
+      "kind": "code",
+      "description": "Opt-in same-target main PR-base metadata refresh with durable observation-only recovery, plus exact committed composition-receipt binding of the original deterministic combined registry and ledger. API fixtures and retained metadata controls preserve draft state, original inputs and frozen stages; no live PR mutation, scientific run or delivery-throughput claim.",
+      "software": "Node24; existing advance command, journal, composition and review entry points",
+      "units": "exact byte/value equality and API call counts"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "WORLDATLAS_DELIVERY_FIXTURE=1 node --test --test-concurrency=1 test/delivery-handoff.test.mjs test/delivery-handoff-advance.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs"
+  ]
+}

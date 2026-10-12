@@ -214,7 +214,7 @@ function stageNames(id) {
 export function readAdvanceStatus(journal) {
   const completed = [], waiting = [], refused = [];
   for (const name of fs.readdirSync(journal.target)) {
-    if (['advance.json', 'advance.lock', 'advance.acquire', 'queue-submission.json'].includes(name) || /^observation-\d{6}\.json$/.test(name)
+    if (['advance.json', 'advance.lock', 'advance.acquire', 'queue-submission.json', 'pr-base-refresh.json'].includes(name) || /^observation-\d{6}\.json$/.test(name)
       || /^[a-z0-9-]+\.(intent|completed)\.json$/.test(name)) continue;
     need(/^[a-z0-9-]+$/.test(name) && fs.lstatSync(path.join(journal.target, name)).isDirectory()
       && fs.realpathSync(path.join(journal.target, name)) === path.join(journal.target, name)
@@ -262,7 +262,11 @@ export function readAdvanceStatus(journal) {
   });
   const queuePath = path.join(journal.target, 'queue-submission.json');
   const queue_submission = fs.existsSync(queuePath) ? JSON.parse(journalFile(journal, queuePath)) : null;
-  return {version: 1, queue_submission, completed: completed.map(e => e.stage), waiting: !resolved && last?.status === 'waiting' ? last : null,
+  const refreshPath = path.join(journal.target, 'pr-base-refresh.json');
+  const refresh = fs.lstatSync(refreshPath, {throwIfNoEntry: false}) ? readBaseRefreshIntent(journal, refreshPath) : null;
+  const pr_base_refresh = refresh ? {repo: refresh.repo, pr_number: refresh.pr_number, head_sha: refresh.before.head.sha,
+    main_sha: refresh.main_sha, last_observation: events.filter(e => e.kind === 'pr-base-refresh').at(-1) ?? null} : null;
+  return {version: 1, queue_submission, pr_base_refresh, completed: completed.map(e => e.stage), waiting: !resolved && last?.status === 'waiting' ? last : null,
     last_refusal: !resolved && last?.status === 'refused' ? last : null,
     timing: {overall_wall_ms: Math.max(0, journal.now() - Date.parse(journal.intent.started_at)),
       preparation_ms: completed.reduce((n, e) => n + e.preparation_ms, 0),
@@ -327,6 +331,112 @@ export async function prepareAdvanceStage(journal, id, phase, config, produce, {
     completed_at: new Date(journal.now()).toISOString()};
   writeJournal(journal, eventPath, bytes(event));
   return {stage: id, resumed: false};
+}
+
+function refreshSnapshot(pr, repo, number) {
+  need(repo === 'ChengshuLi/WorldAtlas' && Number.isSafeInteger(number) && number > 0
+    && pr?.number === number && pr.state === 'open' && typeof pr.draft === 'boolean' && typeof pr.body === 'string'
+    && /^[a-f0-9]{40}$/.test(pr.head?.sha ?? '') && typeof pr.head?.ref === 'string' && pr.head.ref.length > 0
+    && pr.head.repo?.full_name === repo && /^[a-f0-9]{40}$/.test(pr.base?.sha ?? '')
+    && pr.base.ref === 'main' && pr.base.repo?.full_name === repo,
+  'Base refresh requires a complete open same-repository PR already targeting main');
+  return {number, state: pr.state, draft: pr.draft, body: pr.body,
+    head: {sha: pr.head.sha, ref: pr.head.ref, repo: {full_name: pr.head.repo.full_name}},
+    base: {sha: pr.base.sha, ref: pr.base.ref, repo: {full_name: pr.base.repo.full_name}}};
+}
+
+function readBaseRefreshIntent(journal, filename) {
+  const intent = JSON.parse(journalFile(journal, filename));
+  need(intent.version === 1 && intent.kind === 'delivery-pr-base-refresh-v1'
+    && /^[a-f0-9]{40}$/.test(intent.main_sha ?? '') && Number.isFinite(Date.parse(intent.created_at))
+    && equal(refreshSnapshot(intent.before, intent.repo, intent.pr_number), intent.before)
+    && intent.before.base.sha !== intent.main_sha, 'Invalid original base refresh intent');
+  return intent;
+}
+
+// A durable intent permits exactly one PATCH attempt in its creating invocation.
+// Existing intents are always read-only, including a crash before the call. The
+// ordinary API cannot atomically guard all PR fields: verify them immediately
+// before and after, and never claim protection against out-of-band writers.
+export async function refreshReviewBase(journal, review, {api, refresh, interrupt = () => {}}) {
+  need(review?.repo === 'ChengshuLi/WorldAtlas' && Number.isSafeInteger(review.pr_number) && review.pr_number > 0,
+    'Exact named repository and PR required for base refresh');
+  readAdvanceStatus(journal);
+  const route = `/repos/${review.repo}`, filename = path.join(journal.target, 'pr-base-refresh.json');
+  const resuming = Boolean(fs.lstatSync(filename, {throwIfNoEntry: false}));
+  let intent = resuming ? readBaseRefreshIntent(journal, filename) : null;
+  if (intent) need(intent.repo === review.repo && intent.pr_number === review.pr_number,
+    'Existing base refresh intent belongs to another PR');
+  else need(review.refresh_base_metadata === true, 'Explicit review.refresh_base_metadata is required');
+  const initial = await api(`${route}/pulls/${review.pr_number}`);
+  const before = refreshSnapshot(initial, review.repo, review.pr_number);
+  // Capture actual main once. Never chase a moving target or infer it from the PR.
+  const target = await api(`${route}/git/ref/heads/main`);
+  need(target?.ref === 'refs/heads/main' && target.object?.type === 'commit'
+    && /^[a-f0-9]{40}$/.test(target.object.sha ?? ''), 'Cannot prove the actual target-main ref');
+  const main = target.object.sha;
+  const observation = (result, mutation) => ({status: 'external', kind: 'pr-base-refresh', repo: review.repo,
+    pr_number: review.pr_number, head_sha: intent?.before.head.sha ?? before.head.sha, main_sha: intent?.main_sha ?? main,
+    ...(intent ? {intent_sha256: hash(bytes(intent))} : {}), result, mutation});
+  if (intent) {
+    const expected = {...intent.before, base: {...intent.before.base, sha: intent.main_sha}};
+    const verified = main === intent.main_sha && equal(before, expected);
+    observeAdvance(journal, observation(verified ? 'verified' : 'unresolved', 'observation-only'));
+    need(verified, 'Original base refresh is unresolved or PR/main state changed; preserve intent and reconcile without another PATCH');
+    return initial;
+  }
+  if (before.base.sha === main) {
+    observeAdvance(journal, observation('unchanged', 'none'));
+    return initial;
+  }
+  need(typeof refresh === 'function', 'Authorized base refresh adapter is unavailable');
+  const current = await api(`${route}/pulls/${review.pr_number}`);
+  need(equal(refreshSnapshot(current, review.repo, review.pr_number), before), 'PR state changed before base refresh');
+  intent = {version: 1, kind: 'delivery-pr-base-refresh-v1', repo: review.repo, pr_number: review.pr_number,
+    before, main_sha: main, created_at: new Date(journal.now()).toISOString()};
+  // Reserve the bounded outcome before dispatch; its actual durable write is
+  // also accounted by the ordinary observation writer. Full API responses are
+  // excluded; the intent retains only the exact identity/body fields above.
+  journal.budget.add({bytes: bytes({...observation('unresolved', 'observation-only'), observed_at: intent.created_at}).length});
+  writeJournal(journal, filename, bytes(intent));
+  interrupt('intent');
+  let mutation = 'returned';
+  try { await refresh(review.repo, review.pr_number); } catch { mutation = 'uncertain'; }
+  interrupt('mutation');
+  let after, verified = false;
+  try {
+    after = await api(`${route}/pulls/${review.pr_number}`);
+    verified = equal(refreshSnapshot(after, review.repo, review.pr_number), {...before, base: {...before.base, sha: main}});
+  } catch { /* An incomplete readback is an unresolved external outcome. */ }
+  observeAdvance(journal, observation(verified ? 'verified' : 'unresolved', mutation));
+  need(verified, 'Base refresh readback could not prove unchanged PR state and exact captured main; reconcile without another PATCH');
+  return after;
+}
+
+// Only this narrow opt-in adapter supplies a write method, with no readiness,
+// branch, title or body fields. The existing queue read adapter is unchanged.
+export function deliveryBaseRefreshAPI(api) {
+  return (repo, number) => {
+    need(repo === 'ChengshuLi/WorldAtlas' && Number.isSafeInteger(number) && number > 0, 'Invalid base refresh target');
+    return api(`/repos/${repo}/pulls/${number}`, 'PATCH', {base: 'main'});
+  };
+}
+
+export async function nextReviewStage(journal, review, reader, adapters) {
+  need(review && (review.refresh_base_metadata === undefined || typeof review.refresh_base_metadata === 'boolean'),
+    'review.refresh_base_metadata must be an explicit boolean');
+  const done = readAdvanceStatus(journal).completed.includes('review');
+  const hasIntent = Boolean(fs.lstatSync(path.join(journal.target, 'pr-base-refresh.json'), {throwIfNoEntry: false}));
+  const pr = !done && (review.refresh_base_metadata === true || hasIntent)
+    ? await refreshReviewBase(journal, review, {api: adapters.api, refresh: adapters.refreshBase})
+    : await adapters.api(`/repos/${review.repo}/pulls/${review.pr_number}`);
+  const input = {repo: review.repo, number: review.pr_number, expectedHead: pr.head.sha};
+  if (done) {
+    need(equal(journalJSON(journal, '.', stageNames('review').intent).config, input), 'Completed stage inputs changed: review');
+    return {queue: journalJSON(journal, 'review', 'review-packet.json')};
+  }
+  return {id: 'review', phase: 'review', input,
+    produce: () => adapters.freezeReview({...input, expectedPR: pr, api: adapters.api, reader})};
 }
 
 // The same live evidence gate used by the queue resolves the independently
@@ -494,6 +604,34 @@ function registryComposition(reader, registryPins) {
   return {version: 1, registries: registryPins, ledgers: [...ledgerPins.values()]};
 }
 
+// The original registry remains the immutable compose input. A committed
+// completion receipt derives both output pins without replacing that input.
+// Historical callers already supplying the combined registry keep their route.
+export function committedComposition(journal, reader, observed, registryPin) {
+  need(readAdvanceStatus(journal).completed.includes('compose'), 'Require a completed original composition stage');
+  let registry = registryPin, ledger;
+  if (observed.composition) {
+    const stage = readPreparedStage(reader, observed.composition, 'compose');
+    const expected = journalJSON(journal, 'compose', 'preparation.json');
+    need(equal(stage.receipt.binding, expected.binding) && equal(stage.receipt.outputs, expected.outputs),
+      'Committed composition receipt differs from the frozen input/output binding');
+    registry = stage.outputs['authority-registry.json']; ledger = stage.outputs['composed-original-ledger.json'];
+    need(registry && ledger, 'Committed composition is missing registry or ledger');
+    if (observed.composed_ledger) need(equal(locate(reader, observed.composed_ledger), ledger),
+      'Conflicting composition and legacy composed-ledger locators');
+  } else {
+    if (!observed.composed_ledger) return null;
+    ledger = locate(reader, observed.composed_ledger);
+    need(reader.read(ledger).equals(journalBody(journal, 'compose', 'composed-original-ledger.json')),
+      'Committed composition ledger differs from the completed whole bytes');
+    if (!reader.read(registry).equals(journalBody(journal, 'compose', 'authority-registry.json'))) return null;
+  }
+  need(reader.read(registry).equals(journalBody(journal, 'compose', 'authority-registry.json'))
+    && reader.read(ledger).equals(journalBody(journal, 'compose', 'composed-original-ledger.json')),
+    'Committed composition registry/ledger differs from the completed whole bytes');
+  return {registry, ledger};
+}
+
 // Discovery from an existing selected release is only a metadata replay input.
 // Each later phase still invokes its ordinary genuine terminal/custody checks.
 export function observeCompletedDelivery(reader, {sidecar: sidecarLocator, composed_ledger, new_prefix}) {
@@ -612,6 +750,9 @@ export async function nextDeliveryStage(journal, config, reader, adapters) {
     const input = composition;
     return prepare('compose', 'compose', input, () => adapters.composeAuthorities(input, reader));
   }
+  const composed = committedComposition(journal, reader, observed, registryPin);
+  if (!composed) return wait('rebind-retain', 'commit',
+    'Commit the completed compose directory and supply observations.composition as its actual commit/preparation.json locator; keep the original registry input unchanged.');
   if (!observed.rebind) return wait('rebind-retain', 'rebind-terminal', 'Run the existing rebind wrapper externally; supply its genuine committed publication, request and complete custody.');
   const reb = committedRetentionConfig(reader, observed.rebind);
   if (!completed('rebind-retain', observed.rebind)) return prepare('rebind-retain', 'retain', observed.rebind,
@@ -624,22 +765,17 @@ export async function nextDeliveryStage(journal, config, reader, adapters) {
   rebind.operating = locate(reader, observed.operating);
   need(reader.read(rebind.operating).equals(journalBody(journal, 'rebind-operating', 'operating.json')), 'Committed operating body differs');
   if (!completed('rebind-certificate', rebind)) return prepare('rebind-certificate', 'rebind-certificate', rebind, () => adapters.rebindCustody(rebind, reader, true));
-  if (!observed.certificate || !observed.composed_ledger) return wait('package', 'commit', 'Supply actual committed certificate and composed-ledger locators.');
-  const certificate = locate(reader, observed.certificate), ledger = locate(reader, observed.composed_ledger);
-  need(reader.read(certificate).equals(journalBody(journal, 'rebind-certificate', 'certificate.json'))
-    && reader.read(ledger).equals(journalBody(journal, 'compose', 'composed-original-ledger.json'))
-    && reader.read(registryPin).equals(journalBody(journal, 'compose', 'authority-registry.json')), 'Committed final authority/ledger/certificate differs');
-  const projection = {version: 1, registry: registryPin, ledger, rebind: certificate, new_prefix: recipe.new_prefix};
+  if (!observed.certificate) return wait('package', 'commit', 'Supply the actual committed rebind certificate locator.');
+  const certificate = locate(reader, observed.certificate);
+  need(reader.read(certificate).equals(journalBody(journal, 'rebind-certificate', 'certificate.json')), 'Committed final certificate differs');
+  const projection = {version: 1, registry: composed.registry, ledger: composed.ledger, rebind: certificate, new_prefix: recipe.new_prefix};
   if (!completed('package', projection)) return prepare('package', 'package', projection, () => adapters.packageProjection(projection, reader));
   if (!observed.sidecar) return wait('finalize', 'assembly', 'Existing assembly/release preparation must supply the actual committed sidecar.');
   const sidecar = locate(reader, observed.sidecar), selected = reader.json(sidecar).logical_asset_map.ledger;
   const final = {...projection, sidecar, selected_ledger: selected, selector: locate(reader, recipe.selector), package_inputs: locate(reader, recipe.package_inputs)};
   if (!completed('finalize', final)) return prepare('finalize', 'finalize', final, () => adapters.finalizeDelivery(final, reader));
   if (!config.review) return wait('review', 'publication-review', 'Publish the actual author head/PR; provide repository and PR number.');
-  const pr = await adapters.api(`/repos/${config.review.repo}/pulls/${config.review.pr_number}`);
-  const reviewConfig = {repo: config.review.repo, number: config.review.pr_number, expectedHead: pr.head.sha};
-  if (!completed('review', reviewConfig)) return prepare('review', 'review', reviewConfig, () => adapters.freezeReview({...reviewConfig, api: adapters.api, reader}));
-  return {queue: journalJSON(journal, 'review', 'review-packet.json')};
+  return nextReviewStage(journal, config.review, reader, adapters);
 }
 
 // Existing-contract constructor, scoped to avoid mixing scientific identities.

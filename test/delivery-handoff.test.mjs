@@ -409,3 +409,23 @@ test('finalization refuses a new identity at an accepted package path', () => {
   reader.pin = (c,p) => p === config.selected_ledger.path ? {...originalPin(c,p), sha256: '0'.repeat(64)} : originalPin(c,p);
   assert.throws(() => finalizeDelivery({...config,package_inputs},reader), /conflicts with accepted path identity/);
 });
+
+test('review freeze binds refreshed PR state before reading evidence and detects target/readiness drift', async () => {
+  const prepare = () => {
+    const f = reviewFixture(); f.pr.draft = false;
+    f.pr.head.repo = {full_name: f.repo}; f.pr.base.ref = 'main'; f.pr.base.repo = {full_name: f.repo};
+    return f;
+  };
+  for (const drift of [p => { p.draft = true; }, p => { p.base.ref = 'other'; },
+    p => { p.head.ref = 'engineering/other'; }, p => { p.base.repo.full_name = 'foreign/repo'; },
+    p => { p.head.repo.full_name = 'foreign/repo'; }, p => { p.body += 'Changed'; }]) {
+    const f = prepare(); f.expectedPR = structuredClone(f.pr); drift(f.pr);
+    await assert.rejects(freezeReview(f), /state changed after review preparation/);
+    const g = prepare(), original = g.api; let reads = 0;
+    g.api = async route => { const result = await original(route); if (route.endsWith('/pulls/43') && ++reads === 2) drift(result); return result; };
+    await assert.rejects(freezeReview(g), /changed while freezing/);
+  }
+  const draft = prepare(); draft.pr.draft = true; draft.expectedPR = structuredClone(draft.pr);
+  const packet = JSON.parse((await freezeReview(draft))['review-packet.json']);
+  assert.equal(packet.pr.draft, true); assert.equal(packet.kind, 'review-preparation-only');
+});

@@ -719,7 +719,7 @@ test('journal writes and queue intent reads share admission before dispatch', as
   assert.equal(submitted, false);
 });
 
-import {admitPublication} from '../scripts/prepare-delivery-handoff.mjs';
+import {admitPublication, pinReader} from '../scripts/prepare-delivery-handoff.mjs';
 test('materialization report preflight refuses late collisions and changed postimages', t => {
   const j = journal(t), destination = '.cache/delivery-handoff/report';
   const products = {'materialized-inputs.json': Buffer.from('{}\n')};
@@ -887,3 +887,303 @@ test('cold acquisition reuses gh login ephemerally; warm and non-fetch reads nev
 });
 
 }
+
+// Genuine PR1762 shape, with only state required by the transition retained.
+import {refreshReviewBase, deliveryBaseRefreshAPI, nextReviewStage} from '../scripts/delivery-handoff-advance.mjs';
+const refreshRecord = JSON.parse(fs.readFileSync(new URL('./fixtures/delivery-pr-base-refresh.json', import.meta.url)));
+function baseRefreshFixture(t) {
+  const j = journal(t), repo = 'ChengshuLi/WorldAtlas', number = refreshRecord.before.number;
+  const control = {pr: structuredClone(refreshRecord.before), main: refreshRecord.after.base.sha,
+    reads: 0, refs: 0, writes: [], onRead: () => {}, patch: null};
+  const api = async (route, method = 'GET', body) => {
+    if (method === 'PATCH') {
+      assert.equal(route, `/repos/${repo}/pulls/${number}`);
+      assert.deepEqual(body, {base: 'main'}); control.writes.push({route, method, body});
+      if (control.patch) return control.patch(control);
+      control.pr.base.sha = control.main; return structuredClone(control.pr);
+    }
+    assert.equal(method, 'GET'); assert.equal(body, undefined);
+    if (route === `/repos/${repo}/git/ref/heads/main`) {
+      control.refs++; return {ref: 'refs/heads/main', object: {type: 'commit', sha: control.main}};
+    }
+    assert.equal(route, `/repos/${repo}/pulls/${number}`);
+    const pr = structuredClone(control.pr); control.onRead(pr, ++control.reads); return pr;
+  };
+  const review = {repo, pr_number: number, refresh_base_metadata: true};
+  const adapters = {api, refresh: deliveryBaseRefreshAPI(api)};
+  return {j, control, review, adapters,
+    run: options => withAdvanceLock(j, () => refreshReviewBase(j, review, {...adapters, ...options}))};
+}
+
+test('real retained stale-base shape refreshes once with exact draft/ready and body preservation', async t => {
+  assert.equal(createHash('sha256').update(refreshRecord.before.body).digest('hex'), refreshRecord.body_sha256);
+  assert.equal(refreshRecord.before.head.sha, '9f2f4108589bf772f30a8e4edf1838e953191daa');
+  assert.equal(refreshRecord.before.base.sha, '7446e4bcf19825698f544a5fa2809b3a78f88a25');
+  for (const draft of [false, true]) {
+    const f = baseRefreshFixture(t); f.control.pr.draft = draft;
+    const original = structuredClone(f.control.pr), result = await f.run();
+    assert.deepEqual(result, {...original, base: {...original.base, sha: refreshRecord.after.base.sha}});
+    assert.equal(f.control.writes.length, 1); assert.equal(f.control.refs, 1);
+    const intent = fs.readFileSync(path.join(f.j.target, 'pr-base-refresh.json'));
+    assert.equal(readAdvanceStatus(f.j).pr_base_refresh.last_observation.result, 'verified');
+    await f.run();
+    assert.equal(f.control.writes.length, 1); assert.equal(f.control.refs, 2);
+    assert.deepEqual(fs.readFileSync(path.join(f.j.target, 'pr-base-refresh.json')), intent);
+    assert.equal(readAdvanceStatus(f.j).pr_base_refresh.last_observation.mutation, 'observation-only');
+  }
+});
+
+test('current base and absent opt-in cannot issue a refresh mutation', async t => {
+  const f = baseRefreshFixture(t); f.control.pr = structuredClone(refreshRecord.after);
+  await f.run(); assert.equal(f.control.writes.length, 0); assert.equal(f.control.refs, 1);
+  assert.equal(fs.existsSync(path.join(f.j.target, 'pr-base-refresh.json')), false);
+  const g = baseRefreshFixture(t); delete g.review.refresh_base_metadata;
+  await assert.rejects(g.run(), /Explicit/); assert.equal(g.control.writes.length, 0); assert.equal(g.control.reads, 0);
+});
+
+const refreshDrifts = [
+  p => { p.head.sha = 'c'.repeat(40); }, p => { p.head.ref = 'engineering/other'; },
+  p => { p.head.repo.full_name = 'foreign/repo'; }, p => { p.base.ref = 'foreign-target'; },
+  p => { p.base.repo.full_name = 'foreign/repo'; }, p => { p.body += '\nChanged acceptance'; },
+  p => { p.draft = !p.draft; }, p => { p.state = 'closed'; }, p => { delete p.draft; },
+];
+test('foreign or incomplete targets and every exact-state drift refuse before PATCH', async t => {
+  for (const drift of refreshDrifts) {
+    const f = baseRefreshFixture(t); f.control.onRead = (pr, read) => { if (read === 2) drift(pr); };
+    await assert.rejects(f.run(), /state changed|complete open/);
+    assert.equal(f.control.writes.length, 0); assert.equal(fs.existsSync(path.join(f.j.target, 'pr-base-refresh.json')), false);
+  }
+  const foreign = baseRefreshFixture(t); foreign.control.pr.base.ref = 'other';
+  await assert.rejects(foreign.run(), /already targeting main/); assert.equal(foreign.control.refs, 0);
+  const noMain = baseRefreshFixture(t); noMain.control.main = undefined;
+  await assert.rejects(noMain.run(), /actual target-main/); assert.equal(noMain.control.writes.length, 0);
+});
+
+test('post-PATCH drift stays unresolved and never authorizes a second mutation', async t => {
+  for (const drift of refreshDrifts) {
+    const f = baseRefreshFixture(t);
+    f.control.patch = control => { control.pr.base.sha = control.main; drift(control.pr); return structuredClone(control.pr); };
+    await assert.rejects(f.run(), /readback could not prove/);
+    assert.equal(readAdvanceStatus(f.j).pr_base_refresh.last_observation.result, 'unresolved');
+    await assert.rejects(f.run(), /unresolved|complete open/); assert.equal(f.control.writes.length, 1);
+  }
+});
+
+test('denied and uncertain writes reconcile actual state without blind retries', async t => {
+  const denied = baseRefreshFixture(t); denied.control.pr.draft = true;
+  denied.control.patch = () => { throw Error('403 denied'); };
+  await assert.rejects(denied.run(), /readback could not prove/);
+  await assert.rejects(denied.run(), /unresolved/);
+  assert.equal(denied.control.writes.length, 1); assert.equal(denied.control.pr.draft, true);
+  const uncertain = baseRefreshFixture(t);
+  uncertain.control.patch = control => { control.pr.base.sha = control.main; throw Error('response lost'); };
+  assert.equal((await uncertain.run()).base.sha, uncertain.control.main);
+  assert.equal(readAdvanceStatus(uncertain.j).pr_base_refresh.last_observation.mutation, 'uncertain');
+  await uncertain.run(); assert.equal(uncertain.control.writes.length, 1);
+});
+
+test('interruption before dispatch is observation-only; interruption after dispatch proves readback', async t => {
+  for (const phase of ['intent', 'mutation']) {
+    const f = baseRefreshFixture(t);
+    await assert.rejects(f.run({interrupt: event => { if (event === phase) throw Error('interruption'); }}), /interruption/);
+    assert.equal(f.control.writes.length, phase === 'intent' ? 0 : 1);
+    if (phase === 'intent') await assert.rejects(f.run(), /unresolved/);
+    else await f.run();
+    assert.equal(f.control.writes.length, phase === 'intent' ? 0 : 1);
+  }
+});
+
+test('failed readback, moving main and foreign resumption cannot chase a new target', async t => {
+  const f = baseRefreshFixture(t); f.control.onRead = (_pr, read) => { if (read === 3) throw Error('read unavailable'); };
+  await assert.rejects(f.run(), /readback could not prove/); await f.run(); assert.equal(f.control.writes.length, 1);
+  f.control.main = 'd'.repeat(40); await assert.rejects(f.run(), /unresolved/); assert.equal(f.control.writes.length, 1);
+  f.review.pr_number++; await assert.rejects(f.run(), /another PR/); assert.equal(f.control.writes.length, 1);
+});
+
+test('journal admission, foreign inventory and dangling intent preserve originals before dispatch', async t => {
+  const budget = baseRefreshFixture(t), admitted = budget.j.budget; let additions = 0;
+  budget.j.budget = {add: item => { if (++additions === 3) throw Error('Aggregate admission'); admitted.add(item); }};
+  await assert.rejects(budget.run(), /Aggregate/); assert.equal(budget.control.writes.length, 0);
+  assert.equal(fs.existsSync(path.join(budget.j.target, 'pr-base-refresh.json')), false);
+  const foreign = baseRefreshFixture(t), sentinel = path.join(foreign.j.target, 'foreign.txt');
+  fs.writeFileSync(sentinel, 'original', {flag: 'wx'});
+  await assert.rejects(foreign.run(), /Foreign advance/); assert.equal(fs.readFileSync(sentinel, 'utf8'), 'original');
+  assert.equal(foreign.control.reads, 0);
+  const linked = baseRefreshFixture(t), intent = path.join(linked.j.target, 'pr-base-refresh.json');
+  fs.symlinkSync('missing-intent', intent); await assert.rejects(linked.run(), /Nonordinary/);
+  assert.equal(fs.readlinkSync(intent), 'missing-intent'); assert.equal(linked.control.reads, 0);
+});
+
+test('actual narrow write adapter cannot modify another route or include readiness/body fields', async () => {
+  const calls = [], patch = deliveryBaseRefreshAPI((...args) => { calls.push(args); });
+  await patch('ChengshuLi/WorldAtlas', 1762);
+  assert.deepEqual(calls, [['/repos/ChengshuLi/WorldAtlas/pulls/1762', 'PATCH', {base: 'main'}]]);
+  assert.throws(() => patch('foreign/repo', 1762), /Invalid/); assert.throws(() => patch('ChengshuLi/WorldAtlas', '1762'), /Invalid/);
+  assert.equal(calls.length, 1);
+});
+
+test('actual review transition freezes verified state and never silently rebinds a completed packet', async t => {
+  const f = baseRefreshFixture(t); let freezes = 0;
+  const adapters = {api: f.adapters.api, refreshBase: f.adapters.refresh, freezeReview: async input => {
+    freezes++; assert.deepEqual(input.expectedPR, f.control.pr);
+    return {'review-packet.json': Buffer.from(JSON.stringify({head_sha: input.expectedHead, base_sha: input.expectedPR.base.sha}))};
+  }};
+  const next = await nextReviewStage(f.j, f.review, {}, adapters);
+  assert.equal(next.id, 'review'); await prepareAdvanceStage(f.j, next.id, next.phase, next.input, next.produce);
+  const original = fs.readFileSync(path.join(f.j.target, 'review', 'review-packet.json'));
+  f.control.pr.base.sha = refreshRecord.before.base.sha; // GitHub later reports stale metadata again.
+  const repeated = await nextReviewStage(f.j, f.review, {}, adapters);
+  assert.equal(repeated.queue.base_sha, refreshRecord.after.base.sha);
+  assert.equal(f.control.writes.length, 1); assert.equal(f.control.refs, 1); assert.equal(freezes, 1);
+  assert.deepEqual(fs.readFileSync(path.join(f.j.target, 'review', 'review-packet.json')), original);
+  f.control.pr.head.sha = 'd'.repeat(40);
+  await assert.rejects(nextReviewStage(f.j, f.review, {}, adapters), /Completed stage inputs changed/);
+});
+
+test('plain status CLI observes a retained base refresh without credentials, API calls or journal writes', async t => {
+  const f = baseRefreshFixture(t), root = f.j.root;
+  const git = (...args) => execFileSync('git', args, {cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe']}).trim();
+  git('init'); git('config', 'user.name', 'Fixture'); git('config', 'user.email', 'fixture@example.invalid');
+  fs.writeFileSync(path.join(root, 'recipe.json'), '{}\n', {flag: 'wx'});
+  git('add', 'recipe.json'); git('commit', '-m', 'Fixture');
+  const head = git('rev-parse', 'HEAD'), recipe = pinReader(root).pin(head, 'recipe.json');
+  const j = openAdvanceJournal(root, '.cache/delivery-handoff/status-control', recipe);
+  await withAdvanceLock(j, () => refreshReviewBase(j, f.review, f.adapters));
+  const snapshot = () => fs.readdirSync(j.target).sort().map(name => [name, fs.readFileSync(path.join(j.target, name)).toString('base64')]);
+  const before = snapshot(), bin = path.join(root, 'bin'); fs.mkdirSync(bin);
+  fs.writeFileSync(path.join(bin, 'gh'), '#!/bin/sh\necho unexpected-gh >&2\nexit 88\n', {flag: 'wx', mode: 0o755});
+  fs.writeFileSync(path.join(root, 'config.json'), JSON.stringify({version: 1, recipe: {commit: head, path: 'recipe.json'}}), {flag: 'wx'});
+  const env = {...process.env, PATH: bin + path.delimiter + process.env.PATH};
+  for (const key of ['NODE_OPTIONS', 'NODE_PATH', 'GH_TOKEN', 'GITHUB_TOKEN']) delete env[key];
+  const script = fileURLToPath(new URL('../scripts/prepare-delivery-handoff.mjs', import.meta.url));
+  const status = JSON.parse(execFileSync(process.execPath, [script, 'status', 'config.json', j.destination],
+    {cwd: root, env, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe']}));
+  assert.equal(status.pr_base_refresh.main_sha, refreshRecord.after.base.sha);
+  assert.equal(status.pr_base_refresh.last_observation.result, 'verified');
+  assert.deepEqual(snapshot(), before); assert.equal(f.control.writes.length, 1);
+});
+
+import {committedComposition} from '../scripts/delivery-handoff-advance.mjs';
+import {composeAuthorities, jsonBytes} from '../scripts/prepare-delivery-handoff.mjs';
+function compositionRepository(t, originalObjects) {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'delivery-composition-'));
+  t.after(() => fs.rmSync(root, {recursive: true, force: true}));
+  const env = {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0',
+    GIT_AUTHOR_NAME: 'Fixture', GIT_AUTHOR_EMAIL: 'fixture@example.invalid', GIT_COMMITTER_NAME: 'Fixture', GIT_COMMITTER_EMAIL: 'fixture@example.invalid'};
+  const git = (args, input) => execFileSync('git', ['-c', 'core.hooksPath=/dev/null', '-C', root, ...args],
+    {env, input, encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe']}).trim();
+  git(['init', '-q']);
+  if (originalObjects) fs.writeFileSync(path.join(root, '.git/objects/info/alternates'), originalObjects + '\n', {flag: 'wx'});
+  return {root, reader: pinReader(root), commit(files) {
+    const rows = Object.entries(files).map(([name, raw]) => {
+      assert.ok(!name.includes('/'));
+      return '100644 blob ' + git(['hash-object', '-w', '--stdin'], Buffer.isBuffer(raw) ? raw : jsonBytes(raw)) + '\t' + name + '\n';
+    });
+    const tree = git(['mktree'], rows.sort().join(''));
+    const outer = git(['mktree'], '040000 tree ' + tree + '\tcomposition\n');
+    return git(['commit-tree', outer], 'Bounded composition fixture\n');
+  }};
+}
+function commitComposition(f, j, changes = {}) {
+  const names = ['authority-registry.json', 'composed-original-ledger.json', 'preparation.json'];
+  const files = Object.fromEntries(names.map(name => [name, fs.readFileSync(path.join(j.target, 'compose', name))]));
+  const commit = f.commit({...files, ...changes});
+  return {commit, path: 'composition/preparation.json'};
+}
+async function freshCompositionFixture(t) {
+  const f = compositionRepository(t), r = f.reader, j = journal(t);
+  const inputs = f.commit({'rule-new.json': {fixture: 'new'}, 'rule-old.json': {fixture: 'old'}, 'source.json': {fixture: 'binding'}});
+  const entry = name => {
+    const rule = r.pin(inputs, `composition/rule-${name}.json`), source = r.pin(inputs, 'composition/source.json');
+    const body = {policy_id: 'retained-source-literal-additions', policy_version: 1, rule_sha256: rule.sha256,
+      rule_preimage: rule, source_authority: source};
+    return {authority_sha256: digest(jsonBytes(body)), ...body};
+  };
+  const entries = ['new', 'old'].map(entry), registry = item => ({version: 1, kind: 'retained-rule-authority-registry-v1', entries: [item]});
+  const geometry = {type: 'Polygon', coordinates: [[[0, 0], [1, 0], [0, 1], [0, 0]]]};
+  const ledger = (item, index) => ({version: 1, kind: 'native-additive-repair-ledger-v1', rule_sha256: item.rule_sha256,
+    parent_inventory: {total: 2}, scope_ids: ['component:' + index], rows: [{component_id: 'component:' + index, target_id: 'target',
+      pixelIndex: index + 1, base_geometry_sha256: 'b'.repeat(64), geometry_sha256: digest(jsonBytes(geometry)), source_receipt_sha256: 'c'.repeat(64),
+      geometry, native_cells: index + 1, disposition: 'assigned'}]});
+  const original = f.commit({'new-only.json': registry(entries[0]), 'retained.json': registry(entries[1]),
+    'new-ledger.json': ledger(entries[0], 0), 'old-ledger.json': ledger(entries[1], 1)});
+  const pin = name => r.pin(original, 'composition/' + name);
+  const config = {version: 1, registries: [pin('new-only.json'), pin('retained.json')], ledgers: [pin('new-ledger.json'), pin('old-ledger.json')]};
+  await prepareAdvanceStage(j, 'compose', 'compose', config, () => composeAuthorities(config, r));
+  return {f, r, j, config, registry: pin('new-only.json')};
+}
+
+test('fresh new-only composition derives both committed output pins while preserving frozen input', async t => {
+  const {f, r, j, config, registry} = await freshCompositionFixture(t);
+  const original = fs.readFileSync(path.join(j.target, 'compose.intent.json'));
+  assert.equal(r.json(registry).entries.length, 1);
+  assert.equal(committedComposition(j, r, {}, registry), null);
+  const composition = commitComposition(f, j);
+  const result = committedComposition(j, r, {composition}, registry);
+  assert.equal(r.json(result.registry).entries.length, 2);
+  assert.deepEqual(r.json(result.ledger).scope_ids, ['component:0', 'component:1']);
+  assert.equal(r.json(result.ledger).authority_registry_sha256, result.registry.sha256);
+  assert.equal(committedComposition(j, r, {composed_ledger: {commit: result.ledger.commit, path: result.ledger.path}}, registry), null);
+  assert.deepEqual(committedComposition(j, r, {composed_ledger: {commit: result.ledger.commit, path: result.ledger.path}}, result.registry), result);
+  assert.deepEqual(fs.readFileSync(path.join(j.target, 'compose.intent.json')), original);
+  await assert.rejects(prepareAdvanceStage(j, 'compose', 'compose', {...config, registries: [result.registry]}, () => {
+    throw Error('A completed composition must not rerun');
+  }), /Changed stage inputs/);
+  assert.deepEqual(fs.readFileSync(path.join(j.target, 'compose.intent.json')), original);
+  await prepareAdvanceStage(j, 'package', 'package', result, () => ({'projection.json': jsonBytes(result)}));
+  const receipt = fs.readFileSync(path.join(j.target, 'compose', 'preparation.json'));
+  const equivalent = commitComposition(f, j, {'preparation.json': Buffer.concat([receipt, Buffer.from('\n')])});
+  const changedPin = committedComposition(j, r, {composition: equivalent}, registry);
+  assert.notEqual(changedPin.registry.commit, result.registry.commit);
+  await assert.rejects(prepareAdvanceStage(j, 'package', 'package', changedPin, () => ({'projection.json': jsonBytes(changedPin)})), /Changed stage inputs/);
+});
+
+test('composition rejects changed committed members, refreshed false receipts, foreign bindings and conflicting legacy pins', async t => {
+  const {f, r, j, registry} = await freshCompositionFixture(t), composition = commitComposition(f, j);
+  const original = fs.readFileSync(path.join(j.target, 'compose', 'authority-registry.json'));
+  const receipt = JSON.parse(fs.readFileSync(path.join(j.target, 'compose', 'preparation.json')));
+  const body = JSON.parse(fs.readFileSync(path.join(j.target, 'compose', 'authority-registry.json')));
+  body.entries.pop(); const changed = jsonBytes(body);
+  const wrongMember = commitComposition(f, j, {'authority-registry.json': changed});
+  assert.throws(() => committedComposition(j, r, {composition: wrongMember}, registry), /output differs/);
+  const coherent = structuredClone(receipt); coherent.outputs['authority-registry.json'] = {bytes: changed.length, sha256: digest(changed)};
+  const falseReceipt = commitComposition(f, j, {'authority-registry.json': changed, 'preparation.json': jsonBytes(coherent)});
+  assert.throws(() => committedComposition(j, r, {composition: falseReceipt}, registry), /frozen input\/output/);
+  const wrongBinding = structuredClone(receipt); wrongBinding.binding.config_sha256 = 'd'.repeat(64);
+  const foreign = commitComposition(f, j, {'preparation.json': jsonBytes(wrongBinding)});
+  assert.throws(() => committedComposition(j, r, {composition: foreign}, registry), /frozen input\/output/);
+  assert.throws(() => committedComposition(j, r, {composition, composed_ledger: {commit: registry.commit, path: registry.path}}, registry), /Conflicting/);
+  assert.throws(() => committedComposition(j, r, {composed_ledger: {commit: registry.commit, path: registry.path}}, registry), /ledger differs/);
+  assert.throws(() => committedComposition(j, r, {composition: {...composition, sha256: 'd'.repeat(64)}}, registry), /handwritten/);
+  assert.deepEqual(fs.readFileSync(path.join(j.target, 'compose', 'authority-registry.json')), original);
+  assert.equal(r.json(committedComposition(j, r, {composition}, registry).registry).entries.length, 2);
+  fs.writeFileSync(path.join(j.target, 'compose', 'authority-registry.json'), 'changed saved stage');
+  assert.throws(() => committedComposition(j, r, {composition}, registry), /Completed metadata changed/);
+  assert.equal(fs.readFileSync(path.join(j.target, 'compose', 'authority-registry.json'), 'utf8'), 'changed saved stage');
+});
+
+if (process.env.WORLDATLAS_DELIVERY_FIXTURE === '1') test('real five new-only authorities compose with the thirty retained authorities through a fresh committed receipt', async t => {
+  const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+  const env = {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0'};
+  const objects = execFileSync('git', ['rev-parse', '--path-format=absolute', '--git-path', 'objects'], {cwd: repo, env, encoding: 'utf8'}).trim();
+  const f = compositionRepository(t, objects), r = f.reader, j = journal(t);
+  const acceptedCommit = '9e7b93f43f8a2dccffc23cb1c9e6cd60613f3b9c';
+  const accepted = r.pin(acceptedCommit, 'coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authority-registry.json');
+  const complete = r.json(accepted), prefix = 'coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authorities/';
+  const fresh = complete.entries.filter(e => e.source_authority.path.startsWith(prefix));
+  const retained = complete.entries.filter(e => !e.source_authority.path.startsWith(prefix));
+  assert.equal(fresh.length, 5); assert.equal(retained.length, 30);
+  const committed = f.commit({'new-only.json': {...complete, entries: fresh}, 'retained-only.json': {...complete, entries: retained}});
+  const registry = r.pin(committed, 'composition/new-only.json');
+  const config = {version: 1, registries: [registry, r.pin(committed, 'composition/retained-only.json')],
+    ledgers: complete.entries.map(e => r.json(e.source_authority).original_pins.ledger)};
+  await prepareAdvanceStage(j, 'compose', 'compose', config, () => composeAuthorities(config, r));
+  const composition = commitComposition(f, j), result = committedComposition(j, r, {composition}, registry);
+  assert.deepEqual(r.read(result.registry), r.read(accepted));
+  const expectedIds = config.ledgers.flatMap(p => r.json(p).scope_ids).sort();
+  assert.deepEqual(r.json(result.ledger).scope_ids, expectedIds);
+  assert.equal(r.json(result.ledger).authority_registry_sha256, accepted.sha256);
+  const before = fs.readFileSync(path.join(j.target, 'compose.intent.json'));
+  assert.deepEqual(committedComposition(j, r, {composition}, registry), result);
+  assert.deepEqual(fs.readFileSync(path.join(j.target, 'compose.intent.json')), before);
+});
