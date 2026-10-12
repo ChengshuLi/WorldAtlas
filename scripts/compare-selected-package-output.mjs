@@ -110,6 +110,54 @@ export function compareSelectedPackageOutput({full,assembled,originalHead,curren
       'nativeContextInputStage.current_execution.full_code_closure[.github/package-inputs.json]'],
     limitation:'Authenticated original source/declaration provenance is preserved; every other atlas field and output byte matches.'};
 }
+// The queue already records exhaustive actual output hashes. A genuine full
+// reference need not be downloaded or rebuilt merely to compare its bytes.
+// The caller must authenticate this existing readback through its run/job/log/
+// artifact chain. This function cannot issue original-package reuse authority.
+export function compareSelectedPackageReadback({assembled,readback,originalHead,currentHead,sourceRoot,originalManifest}) {
+  assert.equal(readback.kind,'ordinary-cloudflare-built-output-readback');
+  assert.equal(readback.head,currentHead,'Full readback must belong to actual current source');
+  assert.match(originalHead,/^[a-f0-9]{40}$/);assert.match(currentHead,/^[a-f0-9]{40}$/);
+  const current=inventoryPackageOutput(assembled),expected=[];
+  for(const [prefix,rows] of [['client',readback.static_assets?.files],['cloudflare',readback.worker_bundle_files]]){
+    assert.ok(Array.isArray(rows)&&rows.length>0,'Complete actual reference inventory required');
+    for(const row of rows){
+      assert.ok(safePackagePath(row.path)&&!row.path.endsWith('/'));
+      assert.ok(Number.isSafeInteger(row.bytes)&&row.bytes>=0);assert.match(row.sha256,/^[a-f0-9]{64}$/);
+      assert.deepEqual(Object.keys(row).sort(),['bytes','path','sha256']);
+      expected.push({...row,path:'dist/'+prefix+'/'+row.path});
+    }
+  }
+  assert.equal(new Set(expected.map(row=>row.path)).size,expected.length,'Duplicate reference output member');
+  assert.equal(readback.static_assets.count,readback.static_assets.files.length);
+  assert.equal(readback.static_assets.bytes,readback.static_assets.files.reduce((sum,row)=>sum+row.bytes,0));
+  expected.sort((a,b)=>a.path.localeCompare(b.path,'en'));
+  assert.deepEqual(current.files.map(row=>row.path),expected.map(row=>row.path),'Complete output member sets differ');
+  const atlasPath='dist/client/atlas-geography.json',atlas=JSON.parse(fs.readFileSync(path.join(assembled,atlasPath)));
+  assert.equal(atlas.nativeContextInputStage?.current_execution?.source_head,originalHead);
+  assert.equal(readback.nativeContextInputStage?.current_execution?.source_head,currentHead);
+  const originalCurrentStage=structuredClone(readback.nativeContextInputStage),normalizedStage=structuredClone(originalCurrentStage);
+  const transition=bindDeclarationTransition({sourceRoot,originalManifest,assembled,originalHead,currentHead,
+    fullContext:normalizedStage.current_execution,assembledContext:atlas.nativeContextInputStage.current_execution});
+  normalizedStage.current_execution.source_head=originalHead;
+  assert.deepEqual(normalizedStage,atlas.nativeContextInputStage,'Scientific context differs beyond authenticated provenance');
+  // Preserve the builder's actual compact JSON ordering. A different field,
+  // order, encoding or value fails the full reference's exact SHA-256 check.
+  atlas.nativeContextInputStage=originalCurrentStage;
+  const normalized=Buffer.from(JSON.stringify(atlas));let exactBytes=0;
+  for(let index=0;index<current.files.length;index++){
+    const actual=current.files[index],reference=expected[index];
+    if(actual.path===atlasPath)assert.deepEqual({path:atlasPath,bytes:normalized.length,sha256:digest(normalized)},reference,
+      'Complete atlas bytes differ beyond authenticated provenance');
+    else{assert.deepEqual(actual,reference,'Output bytes differ: '+actual.path);exactBytes+=actual.bytes;}
+  }
+  return {version:1,kind:'actual-full-readback-versus-assembled-output-comparison',original_head:originalHead,current_head:currentHead,
+    files:current.files.length,exact_byte_files:current.files.length-1,exact_bytes:exactBytes,
+    atlas_exact_after_authenticated_provenance:true,transition,
+    explicit_provenance_differences:['nativeContextInputStage.current_execution.source_head',
+      'nativeContextInputStage.current_execution.full_code_closure[.github/package-inputs.json]'],
+    limitation:'Uses authenticated exhaustive full-build readback; no additional full build or inherited consumer claim is made.'};
+}
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   assert.equal(process.argv.length,8,'Usage: node scripts/compare-selected-package-output.mjs FULL_ROOT ASSEMBLED_ROOT ORIGINAL_HEAD CURRENT_HEAD SOURCE_REPO ORIGINAL_MANIFEST');
   console.log(JSON.stringify(compareSelectedPackageOutput({full:process.argv[2],assembled:process.argv[3],originalHead:process.argv[4],currentHead:process.argv[5],sourceRoot:process.argv[6],originalManifest:process.argv[7]})));

@@ -8,7 +8,7 @@ import {createHash} from 'node:crypto';
 import {createPackageOutputManifest, snapshotPackageOutputSource, inventoryPackageOutput, validatePackageOutputManifest,
   verifyPackageOutput, streamedPackageFile, PACKAGE_OUTPUT_LIMITS, installedPackageIdentity, admitPackageOutputTransition} from '../scripts/package-output-artifact.mjs';
 
-import {compareSelectedPackageOutput} from '../scripts/compare-selected-package-output.mjs';
+import {compareSelectedPackageOutput,compareSelectedPackageReadback} from '../scripts/compare-selected-package-output.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 function fixture(t) {
@@ -212,6 +212,24 @@ test('changed-declaration full-output comparison authenticates both sources and 
     assembled.write('dist/client/atlas-geography.json',originalAtlas);assembled.write('.cache/package-input-build.json',receipt);};
   const args={full:full.root,assembled:assembled.root,originalHead,currentHead,sourceRoot:source.root,originalManifest};
   reset();assert.equal(compareSelectedPackageOutput(args).exact_byte_files,3);
+  const fullInventory=inventoryPackageOutput(full.root).files;
+  const client=fullInventory.filter(row=>row.path.startsWith('dist/client/')).map(row=>({...row,path:row.path.slice('dist/client/'.length)}));
+  const readback={version:1,kind:'ordinary-cloudflare-built-output-readback',head:currentHead,
+    static_assets:{files:client,count:client.length,bytes:client.reduce((sum,row)=>sum+row.bytes,0)},
+    worker_bundle_files:fullInventory.filter(row=>row.path.startsWith('dist/cloudflare/')).map(row=>({...row,path:row.path.slice('dist/cloudflare/'.length)})),
+    nativeContextInputStage:structuredClone(currentAtlas.nativeContextInputStage)};
+  assert.equal(compareSelectedPackageReadback({...args,readback}).atlas_exact_after_authenticated_provenance,true);
+  for(const mutate of [value=>value.head=originalHead,value=>value.static_assets.files.pop(),
+    value=>value.static_assets.files.push(value.static_assets.files[0]),value=>value.static_assets.files[0].sha256='0'.repeat(64),
+    value=>value.worker_bundle_files[0].bytes++,value=>value.nativeContextInputStage.consumed_input_bytes.encoded++,
+    value=>value.static_assets.files[0].path='../escape',value=>value.static_assets.bytes++]){
+    const changed=structuredClone(readback);mutate(changed);assert.throws(()=>compareSelectedPackageReadback({...args,readback:changed}));
+  }
+  const unknownField=structuredClone(originalAtlas);unknownField.unreported_extra_field='must still fail exact full atlas hash';
+  assembled.write('dist/client/atlas-geography.json',unknownField);
+  assert.throws(()=>compareSelectedPackageReadback({...args,readback}),/Complete atlas bytes/);
+  reset();
+
   for(const mutate of [
     value=>value.nativeContextInputStage.consumed_input_bytes.encoded++,
     value=>value.nativeContextInputStage.current_execution.runtime.sha256='e'.repeat(64),

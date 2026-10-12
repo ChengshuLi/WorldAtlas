@@ -192,6 +192,22 @@ class BootstrapTests(unittest.TestCase):
         (self.root / 'scripts/node_modules').symlink_to('missing', target_is_directory=True); self.rejected('Unexpected nested module resolution directory')
     def test_reject_deep_nested_dependency_directory(self):
         self.write('coordination/node_modules/x.js', ''); self.rejected('Unexpected nested module resolution directory')
+    def test_preinstall_authenticates_root_inputs_without_launching_node(self):
+        self.env['SELECTED_PACKAGE_PREFLIGHT']='install'
+        self.write('package-lock.json','{"lockfileVersion":3}')
+        self.write('requirements.txt','numpy==2.3.5\n')
+        self.trust_changes(); self.run_bootstrap();self.assertEqual(self.started,[])
+        for name in ['package-lock.json','requirements.txt']:
+            original=(self.root/name).read_bytes();self.write(name,'modified installer input')
+            with self.assertRaisesRegex(ValueError,'Actual source differs'):self.run_bootstrap()
+            self.write(name,original)
+        self.write('.npmrc','script-shell=untrusted\n')
+        with self.assertRaisesRegex(ValueError,'Unexpected installer root configuration'):self.run_bootstrap()
+    def test_preinstall_refuses_unreviewed_project_lifecycle_even_on_trusted_base(self):
+        self.env['SELECTED_PACKAGE_PREFLIGHT']='install'
+        self.write('package.json','{"type":"module","scripts":{"prepare":"node candidate.mjs"}}')
+        self.trust_changes()
+        with self.assertRaisesRegex(ValueError,'Project installer hooks'):self.run_bootstrap()
     def test_reject_startup_injection(self):
         for key in ('NODE_OPTIONS','NODE_PATH','LD_PRELOAD','DYLD_INSERT_LIBRARIES'):
             with self.subTest(key=key):
@@ -279,5 +295,32 @@ class WorkflowBootstrapTests(unittest.TestCase):
         self.env['GITHUB_REPOSITORY']='other/repo'; self.invoke(); self.assert_fallback(); self.assertFalse(self.requests)
     def test_nonexact_base_falls_back_before_token_request(self):
         self.env['SELECTED_PACKAGE_TRUSTED_BASE']='main'; self.invoke(); self.assert_fallback(); self.assertFalse(self.requests)
+
+class ProofWorkflowBootstrapTests(WorkflowBootstrapTests):
+    def setUp(self):
+        super().setUp()
+        workflow=(SOURCE_ROOT/'.github/workflows/selected-package-proof.yml').read_text()
+        self.assertIn("python3 -I -B - <<'ASSEMBLY_PROOF'",workflow)
+        self.code=textwrap.dedent(workflow.split("<<'ASSEMBLY_PROOF'\n",1)[1].split('          ASSEMBLY_PROOF',1)[0])
+        self.assertNotIn('npm run build',workflow)
+        self.assertIn('python -I -m pip install -r requirements.txt',workflow)
+        self.assertLess(workflow.index('Authenticate installer inputs'),workflow.index('npm ci'))
+        self.assertNotIn('write',workflow.split('    permissions:',1)[1].split('    steps:',1)[0])
+        for text in ['persist-credentials: false','SELECTED_PACKAGE_ASSEMBLY_SHA256:',
+                     'node scripts/run-integration-tests.mjs','selectedDeliverySmoke','--built-output-readback']:
+            self.assertIn(text,workflow)
+    def assert_rejected(self, error=None):
+        with self.assertRaises(Exception): self.invoke(error)
+        self.assertFalse(self.marker.exists());self.assertFalse(self.output.exists())
+    def test_missing_trusted_helper_falls_back_without_candidate_execution(self):
+        self.assert_rejected(urllib.error.HTTPError('https://api.github.com',404,'Not Found',None,None))
+    def test_bad_blob_identity_falls_back(self):
+        self.blob['sha']='0'*40; self.assert_rejected()
+    def test_nonordinary_trusted_path_falls_back(self):
+        self.blob['type']='symlink'; self.assert_rejected()
+    def test_wrong_repository_falls_back_before_token_request(self):
+        self.env['GITHUB_REPOSITORY']='other/repo'; self.assert_rejected();self.assertFalse(self.requests)
+    def test_nonexact_base_falls_back_before_token_request(self):
+        self.env['SELECTED_PACKAGE_TRUSTED_BASE']='main'; self.assert_rejected();self.assertFalse(self.requests)
 
 if __name__=='__main__': unittest.main(verbosity=2)

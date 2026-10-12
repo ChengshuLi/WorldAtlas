@@ -64,6 +64,12 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": ".github/workflows/selected-package-proof.yml",
+      "bytes": 6555,
+      "sha256": "03909f82fbd1304ac4c96a906c5416b37b118a21ee0bb13c9072762afe2899c4",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs",
       "bytes": 29466,
       "sha256": "da259812be3f9bab89027b3c6b5e704389141a539c432d5519e1b8560bc08a2e",
@@ -71,26 +77,26 @@
     },
     {
       "path": "coordination/engineering/selected-package-delta-20261012/README.md",
-      "bytes": 7989,
-      "sha256": "ca043487379c004aba43044e8bd789bc8226f5afb097ee341efd9cea1c229d24",
+      "bytes": 10923,
+      "sha256": "ca476ca4b606a48f2882fc88577430151ce7a76c5df967eb9ba53d880d1b9510",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/selected-package-delta-20261012/validation.json",
-      "bytes": 3759,
-      "sha256": "501997918faae4c4ce43ba7418069e735d3a104b5849a86461e7642536d126e1",
+      "bytes": 5152,
+      "sha256": "d9a88476d541dd4e7a0e983c480f91c5997f1c5742a507fdd7d0f5ce33919643",
       "hash_kind": "file-bytes"
     },
     {
       "path": "scripts/assemble-selected-package.mjs",
-      "bytes": 16844,
-      "sha256": "0aa25c7b43d1db1cd63cf5097d3f3cacae4cce303838af993fc791aa332a51f1",
+      "bytes": 20878,
+      "sha256": "65d43b459492eb0921c233a92dd1b92bc2b048fa189aca7415d2dbc323ec6cbf",
       "hash_kind": "file-bytes"
     },
     {
       "path": "scripts/compare-selected-package-output.mjs",
-      "bytes": 9288,
-      "sha256": "23a15bf753c4bf27be2fa63eef198aa7cc5c2a2ad9e412e8b5e26fb1224b1a9e",
+      "bytes": 13286,
+      "sha256": "74e2e8fc217ca6d87e228d27ecec420cdc02e57717d1845f25017828d2c723e0",
       "hash_kind": "file-bytes"
     },
     {
@@ -113,8 +119,14 @@
     },
     {
       "path": "scripts/selected-package-bootstrap.py",
-      "bytes": 8104,
-      "sha256": "d2aad8c89250c8c5502443f65f03ab631cfdb0a5443bf6d9e8ac63d3cffc0b59",
+      "bytes": 9767,
+      "sha256": "e8504e99f520ee3c02d0a52b040b0facab77c526bb118ee2903cef59b8ef210e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/selected-package-readback-proof.mjs",
+      "bytes": 16237,
+      "sha256": "069d5344533e5268c69828a115dafb22daf5b9da2666615ba1a5dc52fdec2541",
       "hash_kind": "file-bytes"
     },
     {
@@ -143,26 +155,32 @@
     },
     {
       "path": "test/package-output-artifact.test.mjs",
-      "bytes": 18613,
-      "sha256": "c1d3445e9782595e03f1587aa8caa8d49253f3d7c6715e3711ef462e19f5e211",
+      "bytes": 20292,
+      "sha256": "f4d485501ba053cb83c30bd3560580110abc660fece80e129f70191e58aee249",
       "hash_kind": "file-bytes"
     },
     {
       "path": "test/selected-package-assembly.test.mjs",
-      "bytes": 7451,
-      "sha256": "61eb8a6b5106af3c8db64dfa028e2f8a4027edfc5385f2e3325ad80cf7ddd525",
+      "bytes": 8838,
+      "sha256": "29335499edcb233e47aec62e1320bd2a296f3c5a94d6b4177c296a7a410b3c80",
       "hash_kind": "file-bytes"
     },
     {
       "path": "test/selected-package-bootstrap-controls.py",
-      "bytes": 20768,
-      "sha256": "7c7ad3c69730c42d86860ccfa0628d0f15cf615969eeababc94a60a6fd95e1b0",
+      "bytes": 23842,
+      "sha256": "4f2f613bbdff5b0ce7da0c30d911514e1ff0708b42188a58aaf0a63e403ec85e",
       "hash_kind": "file-bytes"
     },
     {
       "path": "test/selected-package-bootstrap.test.mjs",
       "bytes": 501,
       "sha256": "27efe91b2373986707df35cfcef1b7be934dfef82c7a9da68e61f981df217f12",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/selected-package-readback-proof.test.mjs",
+      "bytes": 14926,
+      "sha256": "300cde4ad393a686098959c94cb6c4a097087f8fb94f3ba0f436738f7732917d",
       "hash_kind": "file-bytes"
     },
     {
@@ -190,7 +208,7 @@
     "geographic_approval": "not-requested"
   },
   "commands": [
-    "node --test test/package-output-artifact.test.mjs test/selected-package-assembly.test.mjs test/selected-package-bootstrap.test.mjs test/integration-profile-restoration.test.mjs test/full-regression-shards.test.mjs",
+    "node --test test/package-output-artifact.test.mjs test/selected-package-assembly.test.mjs test/selected-package-bootstrap.test.mjs test/integration-profile-restoration.test.mjs test/full-regression-shards.test.mjs test/selected-package-readback-proof.test.mjs",
     "node --test test/package-build.test.mjs",
     "node --test test/trusted-workflow-checkouts.test.mjs test/integration-profile.test.mjs",
     "git diff --check"
@@ -200,6 +218,10 @@
       "path": ".github/workflows/merge-integration-checks.yml",
       "status": "modified",
       "original_sha256": "b8f4c74903b3a31f0326b10a2f3e17b56bd75cec3d349969d47e76063699fbe2"
+    },
+    {
+      "path": ".github/workflows/selected-package-proof.yml",
+      "status": "added"
     },
     {
       "path": "coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs",
@@ -240,6 +262,10 @@
       "status": "added"
     },
     {
+      "path": "scripts/selected-package-readback-proof.mjs",
+      "status": "added"
+    },
+    {
       "path": "test/canonical-compact-repack.test.mjs",
       "status": "added"
     },
@@ -272,6 +298,10 @@
     },
     {
       "path": "test/selected-package-bootstrap.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/selected-package-readback-proof.test.mjs",
       "status": "added"
     },
     {

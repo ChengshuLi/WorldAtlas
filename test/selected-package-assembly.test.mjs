@@ -7,7 +7,8 @@ import {createHash} from 'node:crypto';
 import {authenticateOriginalPackageOutput, requireOriginalPackageOutput,
   requirePackageAssemblyExecution} from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
 import {requireRetainedPackageTests, integrationTestFiles} from '../scripts/run-integration-tests.mjs';
-import {execFileSync} from 'node:child_process';
+import {admitAssemblyAtlasMetadata} from '../scripts/assemble-selected-package.mjs';
+import {execFileSync,spawnSync} from 'node:child_process';
 
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
 function original(t){
@@ -100,4 +101,23 @@ test('consumer reduction binds actual current head and trusted assembly receipt 
   fs.appendFileSync(file,' ');assert.throws(()=>requireRetainedPackageTests({directory:root,expected}),/digest differs/);
   receipt.assembly.current_execution.source_commit='f'.repeat(40);
   assert.throws(()=>requireRetainedPackageTests({directory:root,expected:write(receipt)}),/same-head/);
+});
+
+test('actual emitted atlas admission follows observed size and shared memory rather than a control-receipt cap',()=>{
+  const observed=10547753;
+  assert.equal(admitAssemblyAtlasMetadata(observed,{phaseBytes:2*observed}),observed);
+  assert.throws(()=>admitAssemblyAtlasMetadata(observed,{phaseBytes:2*observed-1}),/current metadata allocation/);
+  for(const bytes of [0,-1,NaN,Number.MAX_SAFE_INTEGER+1])assert.throws(()=>admitAssemblyAtlasMetadata(bytes,{phaseBytes:Infinity}));
+});
+
+test('explicit hosted proof cannot silently report normal fallback success',t=>{
+  const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-proof-invocation-'));
+  t.after(()=>fs.rmSync(temporary,{recursive:true,force:true}));
+  for(const [event,status] of [['workflow_dispatch',1],['pull_request',0]]){
+    const result=spawnSync(process.execPath,['scripts/assemble-selected-package.mjs'],{
+      env:{...process.env,GH_TOKEN:'',GITHUB_TOKEN:'',GITHUB_EVENT_NAME:event,
+        GITHUB_WORKFLOW:'Selected package equivalence proof',GITHUB_OUTPUT:path.join(temporary,event)},encoding:'utf8'});
+    assert.equal(result.status,status,result.stderr);assert.equal(JSON.parse(result.stdout).assembled,false);
+    assert.match(fs.readFileSync(path.join(temporary,event),'utf8'),/^assembled=false\n/);
+  }
 });

@@ -118,6 +118,30 @@ def main():
         need(file.read_bytes() == raw and ('100755' if file.stat().st_mode & 0o111 else '100644') == row[0], 'Actual source differs from trusted base')
         return raw
 
+    if os.environ.get('SELECTED_PACKAGE_PREFLIGHT') == 'install':
+        # Dispatch accepts an exact source commit, not a selected-data PR
+        # classification. Authenticate installer inputs before any candidate
+        # npm/pip command can alter a runtime used by the later token step.
+        roots = {name: row for name, row in tree(tree_oid).items() if row[0] != '40000'}
+        current = subprocess.check_output(['git', '--no-replace-objects', 'ls-tree', '-z', 'HEAD'], env=env)
+        current_roots = {}
+        for line in current.split(b'\0'):
+            if not line: continue
+            header, name = line.split(b'\t', 1)
+            mode, kind, oid = header.decode().split()
+            if kind != 'tree': current_roots[name.decode()] = (mode, oid)
+        need(current_roots == roots, 'Installer root programme differs from trusted base')
+        ordinary_roots = {file.name for file in root.iterdir() if file.name != '.git' and (file.is_file() or file.is_symlink())}
+        need(ordinary_roots == set(roots), 'Unexpected installer root configuration')
+        for name in roots: verified(name)
+        package = json.loads(verified('package.json'))
+        lifecycle = {'preinstall', 'install', 'postinstall', 'prepublish', 'preprepare', 'prepare', 'postprepare'}
+        need(not lifecycle.intersection(package.get('scripts', {})), 'Project installer hooks require explicit programme review')
+        # Root inputs (including lock, requirements and any npm configuration)
+        # are identical. Dependency install scripts are those of the trusted
+        # lock; there is no candidate project lifecycle code to execute.
+        return
+
     node = Path(shutil.which('node')).absolute()
     cache = Path(os.environ['RUNNER_TOOL_CACHE']).resolve()
     need(node.is_file() and not node.is_symlink() and node.resolve().is_relative_to(cache / 'node'), 'Verified setup-node executable required')
