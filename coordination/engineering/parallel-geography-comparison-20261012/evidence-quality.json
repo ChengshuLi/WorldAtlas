@@ -56,6 +56,13 @@
       "description": "Authenticate proposed merge parents and preserve original producer identities; integrate explicitly handed-off accepted-checkpoint structural eligibility and bounded metadata responses; verify unchanged original custody and current method/program applicability. Authenticate restored original NATIVE operand roles and unchanged retained package proof roles without file-age assumptions; preserve unbound/changed input rejection.",
       "software": "Node 24 and Python 3.12",
       "units": "synthetic controls"
+    },
+    {
+      "id": "completed-original-custody",
+      "kind": "code",
+      "description": "Continue authenticated completed original SOURCE/NATIVE custody through the existing authority-to-review suffix without new issuance or fictitious completed stages; preserve full original corpus, issued subset and fragment remainder.",
+      "software": "Node 24",
+      "units": "metadata controls"
     }
   ],
   "metrics": [],
@@ -70,6 +77,9 @@
     "node --test test/parallel-geography-comparison.test.mjs test/trusted-geography-check.test.mjs test/geographic-report-artifact.test.mjs test/pr-geography-reuse.test.mjs test/merge-integration.test.mjs test/final-capacity.test.mjs test/integration-proof.test.mjs test/trusted-workflow-checkouts.test.mjs",
     "node --test test/unchanged-selected-geography.test.mjs test/effective-geographic-regression.test.mjs",
     "node --test test/selected-data-profile.test.mjs test/github-quota.test.mjs test/metadata-regression-reuse.test.mjs",
-    "node --test test/integration-profile-restoration.test.mjs"
+    "node --test test/integration-profile-restoration.test.mjs",
+    "node --test test/delivery-handoff-advance.test.mjs test/delivery-handoff.test.mjs",
+    "GIT_NO_LAZY_FETCH=1 WORLDATLAS_DELIVERY_V2_FIXTURE=1 node --test --test-name-pattern=\"frozen Norway B\" test/delivery-handoff-advance.test.mjs",
+    "GIT_NO_LAZY_FETCH=1 WORLDATLAS_DELIVERY_ORIGINAL_FIXTURE=1 node --test --test-name-pattern=\"completed custody|real Native102\" test/delivery-handoff-advance.test.mjs"
   ]
 }

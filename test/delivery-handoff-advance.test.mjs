@@ -2017,3 +2017,145 @@ test('reuse refuses an interrupted product directory without completing or chang
  assert.equal(called,false);assert.deepEqual(fs.readFileSync(path.join(j.target,'requests/a.json')),sentinel);
  assert.equal(fs.existsSync(path.join(j.target,'requests.completed.json')),false);
 });
+
+import {qualifyCompletedCustody} from '../scripts/delivery-handoff-advance.mjs';
+function completedCustodyRecipe() {
+ const original=JSON.parse(fs.readFileSync(new URL('./fixtures/native102-original-custody.json',import.meta.url)));
+ const loc=name=>({commit:original.publication_commit,path:original.prefix+original[name]});
+ return {version:1,id:'retained-original',mode:'completed-original-custody',new_prefix:'coordination/engineering/original-custody-fixture/',
+  selector:{commit:original.context_commit,path:'data/ownership-selection.json'},
+  package_inputs:{commit:original.context_commit,path:'.github/package-inputs.json'},retained_registries:[],
+  groups:[{id:'original',component_ids:[original.component_id],target_ids:[original.target_id],
+   source_publication:loc('source_publication'),native_publication:loc('native_publication'),native_operating:loc('native_operating')}]};
+}
+for(const [label,change] of Object.entries({
+ 'foreign route':r=>{r.mode='retained-groups';},
+ 'nonliteral recipe identity':r=>{r.id=['retained-original'];},
+ 'unbounded groups':r=>{r.groups=Array(33).fill(r.groups[0]);},
+ 'invented issuing resources':r=>{r.operating_profile='source-native-v2';},
+ 'foreign selection context':r=>{r.selector.path='other.json';},
+ 'unsafe destination':r=>{r.new_prefix='../foreign/';},
+}))test('completed custody refuses '+label+' before reading historical evidence',()=>{
+ const recipe=completedCustodyRecipe();change(recipe);
+ assert.throws(()=>qualifyCompletedCustody(recipe,{pin(){throw Error('unexpected historical read');}},{}),
+  /Explicit bounded|selection\/package\/retained context/);
+});
+
+// Explicit offline suite, never a skipped default gate or an implicit download.
+// Exact original bodies are supplied by the retained fixture, not recreated
+// singleton SOURCE data, v2 templates or an invented operating terminal.
+if(process.env.WORLDATLAS_DELIVERY_ORIGINAL_FIXTURE==='1') {
+ test('real Native102 completed custody preserves whole original scope and reaches only genuine later barriers',async t=>{
+  const prep=await import('../scripts/prepare-delivery-handoff.mjs'),flow=await import('../scripts/delivery-handoff-advance.mjs');
+  const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+  const original=JSON.parse(fs.readFileSync(new URL('./fixtures/native102-original-custody.json',import.meta.url)));
+  const allowance={phaseBytes:268435456,rssBytes:536870912};
+  const make=()=>{const r=prep.pinReader(root,{allowance});return {r,adapters:{authorityReader:()=>flow.deliveryAuthorityReader(root,r)}};};
+  const recipe=completedCustodyRecipe(),{r,adapters}=make(),qualified=qualifyCompletedCustody(recipe,r,adapters);
+  assert.deepEqual(qualified.component_ids,[original.component_id]);
+  const group=qualified.groups[0],preimage=JSON.parse(group.qualified_products['original-rule-preimage.json']);
+  assert.equal(preimage.source_rule.cohort_ids.length,original.source_cohort_count);
+  assert.deepEqual(preimage.source_rule.expected_ids,[original.component_id]);
+  assert.equal(preimage.source_rule.geometry_scope,'supported-fragment');assert.equal(preimage.source_rule.registry_path,undefined);
+  assert.notEqual(preimage.source_rule.cases_path,preimage.source_rule.outcomes_path);
+  assert.equal(digest(group.qualified_products['original-rule-preimage.json']),original.rule_sha256);
+  const binding=JSON.parse(group.qualified_products['authority-binding.json']),ledger=r.json(binding.original_pins.ledger);
+  assert.equal(binding.original_pins.ledger.sha256,original.ledger_sha256);
+  assert.equal(ledger.assigned_cells,original.assigned_cells);assert.equal(ledger.rows[0].whole_gap_completion,false);
+  assert.equal(ledger.rows[0].original_remainder?.is_empty??ledger.rows[0].remainder?.is_empty,false);
+  for(const [label,change,pattern] of [
+   ['foreign component',q=>q.groups[0].component_ids=['foreign-component'],/component\/target scope/],
+   ['foreign target',q=>q.groups[0].target_ids=['foreign-target'],/component\/target scope/],
+   ['extra authority',q=>q.groups.push({...q.groups[0],id:'duplicate'}),/Overlapping/],
+   ['missing terminal',q=>q.groups[0].native_operating={...q.groups[0].native_operating,path:original.prefix+'missing-terminal.json'},/whole ordinary Git input/],
+   ['changed terminal',q=>q.groups[0].native_operating=q.groups[0].native_publication,/Unqualified original native operating|operating/],
+  ]) await t.test(label,()=>{const f=make(),q=structuredClone(recipe);change(q);assert.throws(()=>qualifyCompletedCustody(q,f.r,f.adapters),pattern);});
+  await t.test('coherently changed committed original terminal refuses',()=>{
+   const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'changed-original-terminal-'));
+   t.after(()=>fs.rmSync(temporary,{recursive:true,force:true}));
+   const git=(args,input)=>execFileSync('git',['-c','core.hooksPath=/dev/null','-C',temporary,...args],{input,encoding:'utf8'}).trim();
+   git(['init','-q']);fs.mkdirSync(path.join(temporary,'.git/objects/info'),{recursive:true});
+   const objects=execFileSync('git',['-C',root,'rev-parse','--path-format=absolute','--git-path','objects'],{encoding:'utf8'}).trim();
+   fs.writeFileSync(path.join(temporary,'.git/objects/info/alternates'),objects+'\n');
+   git(['update-ref','refs/heads/main',original.context_commit]);git(['symbolic-ref','HEAD','refs/heads/main']);
+   const operating=r.json(r.pin(recipe.groups[0].native_operating.commit,recipe.groups[0].native_operating.path));
+   operating.qualified=false;
+   const oid=git(['hash-object','-w','--stdin'],prep.jsonBytes(operating));
+   const tree=git(['mktree'],'100644 blob '+oid+'\tchanged-operating.json\n');
+   const changed=git(['-c','user.name=Fixture','-c','user.email=fixture@example.test','commit-tree',tree], 'Synthetic changed terminal control\n');
+   const local=prep.pinReader(temporary,{allowance}),q=structuredClone(recipe);
+   q.groups[0].native_operating={commit:changed,path:'changed-operating.json'};
+   assert.throws(()=>qualifyCompletedCustody(q,local,{authorityReader:()=>flow.deliveryAuthorityReader(temporary,local)}),/Unqualified original native operating/);
+  });
+  const raw=prep.jsonBytes(recipe),pin={commit:original.publication_commit,path:'fixture-recipe.json',mode:'100644',git_blob_oid:'a'.repeat(40),bytes:raw.length,sha256:digest(raw)};
+  const reader={...r,pin:(c,p)=>p===pin.path&&c===pin.commit?pin:r.pin(c,p),read:p=>p.path===pin.path?raw:r.read(p),json:p=>p.path===pin.path?recipe:r.json(p)};
+  const j=journal(t);j.reader=reader;
+  const config={version:1,recipe:{commit:pin.commit,path:pin.path}};
+  const noIssuance={...adapters,prepareRequests:()=>{throw Error('SOURCE issuance must not run');},nativeRequests:()=>{throw Error('NATIVE issuance must not run');}};
+  let next=await flow.nextDeliveryStage(j,config,reader,noIssuance);
+  assert.equal(next.id,'authority-original');assert.equal(next.phase,'authority');
+  await assert.rejects(prepareAdvanceStage(j,next.id,next.phase,next.input,next.produce,{interrupt:()=>{throw Error('interrupted original authority');}}),/interrupted original authority/);
+  assert.deepEqual(readAdvanceStatus(j).completed,[]);
+  const changed=structuredClone(config);changed.observations={sources:[]};
+  await assert.rejects(flow.nextDeliveryStage(j,changed,reader,noIssuance),/substitute execution observations/);
+  next=await flow.nextDeliveryStage(j,config,reader,noIssuance);
+  await prepareAdvanceStage(j,next.id,next.phase,next.input,next.produce);
+  const receipt=fs.readFileSync(path.join(j.target,'authority-original.completed.json'));
+  next=await flow.nextDeliveryStage(j,config,reader,noIssuance);
+  assert.equal(next.waiting.kind,'commit');assert.equal(next.waiting.stage,'registry');
+  assert.deepEqual(readAdvanceStatus(j).completed,['authority-original']);
+  assert.deepEqual(fs.readFileSync(path.join(j.target,'authority-original.completed.json')),receipt);
+  assert.equal(fs.existsSync(path.join(j.target,'recipe')),false);assert.equal(fs.existsSync(path.join(j.target,'requests')),false);
+  assert.equal(fs.existsSync(path.join(j.target,'native-requests')),false);
+  await t.test('actual automatic Git continuation commits original custody once and stops at current rebind',async()=>{
+   const f=automaticGitFixture(t),localRoot=f.j.root;
+   fs.mkdirSync(path.join(localRoot,'.git/objects/info'),{recursive:true});
+   fs.writeFileSync(path.join(localRoot,'.git/objects/info/alternates'),execFileSync('git',
+    ['-C',root,'rev-parse','--path-format=absolute','--git-path','objects'],{encoding:'utf8'}));
+   fs.writeFileSync(path.join(localRoot,'original-recipe.json'),prep.jsonBytes(recipe));
+   f.git('add','original-recipe.json');f.git('commit','-qm','original custody recipe');
+   const head=f.git('rev-parse','HEAD'),local=prep.pinReader(localRoot,{allowance});
+   const config={version:1,recipe:{commit:head,path:'original-recipe.json'}};
+   const j=openAdvanceJournal(localRoot,'coordination/engineering/automatic-native102/advance',config.recipe,{budget:local.budget});
+   const adapters={authorityReader:()=>flow.deliveryAuthorityReader(localRoot,local),composeAuthorities:prep.composeAuthorities,
+    prepareRequests:()=>{throw Error('SOURCE issuance must not run');},nativeRequests:()=>{throw Error('NATIVE issuance must not run');}};
+   const validate=async({branch,paths})=>{assert.equal(branch,'engineering/automatic-control');assert.ok(paths.every(p=>p.startsWith(j.destination+'/')));};
+   await assert.rejects(flow.runAutomaticDelivery(j,config,local,adapters,{validate,
+    commitStage:(journal,id,options)=>flow.commitAdvanceStage(journal,id,{...options,interrupt:point=>{if(point==='ref')throw Error('interrupted authority ref');}})}),/interrupted authority ref/);
+   const intended=JSON.parse(fs.readFileSync(path.join(j.target,'commit-authority-original.json')));
+   assert.equal(f.git('rev-parse','HEAD'),intended.head);
+   const result=await flow.runAutomaticDelivery(j,config,local,adapters,{validate});
+   assert.equal(result.kind,'rebind-terminal');
+   assert.deepEqual(readAdvanceStatus(j).completed,['authority-original','compose','registry']);
+   assert.equal(f.git('rev-list','--count',head+'..HEAD'),'3');
+   const final=f.git('rev-parse','HEAD'),observed=flow.automaticDeliveryObservations(j,config).observations;
+   assert.equal(observed.authorities.length,1);assert.ok(observed.registry&&observed.composition);assert.equal(observed.rebind,undefined);
+   const repeated=await flow.runAutomaticDelivery(j,config,local,adapters,{validate});
+   assert.equal(repeated.kind,'rebind-terminal');assert.equal(f.git('rev-parse','HEAD'),final);
+   assert.equal(fs.existsSync(path.join(j.target,'recipe')),false);assert.equal(fs.existsSync(path.join(j.target,'requests')),false);
+   assert.equal(fs.existsSync(path.join(j.target,'native-requests')),false);
+  });
+  await t.test('actual advance CLI prepares original authority once and resumes at immutable commit barrier',()=>{
+   const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'original-custody-cli-'));
+   t.after(()=>fs.rmSync(temporary,{recursive:true,force:true}));
+   const git=(args,input)=>execFileSync('git',['-c','core.hooksPath=/dev/null','-C',temporary,...args],{input,encoding:'utf8'}).trim();
+   git(['init','-q']);fs.mkdirSync(path.join(temporary,'.git/objects/info'),{recursive:true});
+   fs.writeFileSync(path.join(temporary,'.git/objects/info/alternates'),execFileSync('git',['-C',root,'rev-parse','--path-format=absolute','--git-path','objects'],{encoding:'utf8'}));
+   git(['read-tree',original.context_commit]);
+   const blob=git(['hash-object','-w','--stdin'],prep.jsonBytes(recipe));
+   git(['update-index','--add','--cacheinfo','100644,'+blob+',original-recipe.json']);
+   const tree=git(['write-tree']),head=git(['-c','user.name=Fixture','-c','user.email=fixture@example.test','commit-tree',tree,'-p',original.context_commit],'Immutable original custody recipe fixture\n');
+   git(['update-ref','refs/heads/main',head]);git(['symbolic-ref','HEAD','refs/heads/main']);
+   fs.writeFileSync(path.join(temporary,'config.json'),prep.jsonBytes({version:1,recipe:{commit:head,path:'original-recipe.json'},preparation_allowance:allowance}));
+   const env={...process.env,GIT_NO_LAZY_FETCH:'1'};delete env.NODE_PATH;
+   const args=[path.join(root,'scripts/prepare-delivery-handoff.mjs'),'advance','config.json','.cache/delivery-handoff/original'];
+   const first=JSON.parse(execFileSync(process.execPath,args,{cwd:temporary,env,encoding:'utf8'}));
+   assert.equal(first.result.stage,'authority-original');
+   const dir=path.join(temporary,'.cache/delivery-handoff/original'),before=fs.readFileSync(path.join(dir,'authority-original.completed.json'));
+   const second=JSON.parse(execFileSync(process.execPath,[...args,'--resume'],{cwd:temporary,env,encoding:'utf8'}));
+   assert.equal(second.waiting.kind,'commit');assert.equal(second.waiting.stage,'registry');
+   assert.deepEqual(fs.readFileSync(path.join(dir,'authority-original.completed.json')),before);
+   assert.deepEqual(fs.readdirSync(dir).filter(n=>n.endsWith('.completed.json')),['authority-original.completed.json']);
+  });
+ });
+}

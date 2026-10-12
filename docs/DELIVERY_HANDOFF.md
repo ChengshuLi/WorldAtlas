@@ -594,3 +594,36 @@ It requires the referenced immutable Git objects locally, performs no fetch or
 operator execution, and includes adverse scope/product controls. Default CI uses
 bounded synthetic and actual-Git orchestration fixtures. Real later automatic
 batch adoption and measured delivery timing remain open on issue #1785.
+
+### Continue completed original SOURCE/NATIVE custody
+
+A completed historical pair is not a new issuance recipe. The `advance` entry
+also accepts a committed recipe with `mode: "completed-original-custody"`,
+`version: 1`, an `id`, and the existing exact `selector`, `package_inputs`,
+`retained_registries` and `new_prefix` context. Its nonempty `groups` contain only
+`id`, ordered `component_ids`, `target_ids`, and exact commit/path locators named
+`source_publication`, `native_publication` and `native_operating`.
+
+Each continuation invokes the unchanged original-authority constructor on the
+complete original publications, issued requests, facts, inventories, operating
+custody and native assets. Declared component and target scopes must equal the
+qualified original ledger. A literal historical request keeps its complete
+source rule, original cohort roster, issued subset, resource/code identities,
+geometry scope and remainder. There is no v1-to-v2 conversion, singleton source
+fabrication or inference of whole-gap completion.
+
+This route enters directly at real authority metadata preparation. It neither
+issues SOURCE/NATIVE requests nor marks recipe, request or operator stages as
+completed. It uses the existing interruption-safe journal and automatic commit
+path for metadata actually prepared, then shares the ordinary authority registry,
+composition, genuine current rebind, package/finalize, independent review and
+queue barriers. It cannot be mixed with `resume_finalized`, `completed_delivery`
+or `prepared_stages`; execution observations cannot replace its pinned custody.
+Original qualification alone is never current selection approval.
+
+The opt-in `WORLDATLAS_DELIVERY_ORIGINAL_FIXTURE=1` control reads the genuine
+retained Native102 singleton within its original69-member corpus and preserves
+its supported fragment, two original cells and nonempty remainder. Run with
+`GIT_NO_LAZY_FETCH=1` and the exact objects already present. It performs no
+SOURCE/NATIVE/rebind execution and claims no subsequent-batch adoption. Default
+CI retains its bounded contract controls without fetching historical science.

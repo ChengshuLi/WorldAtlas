@@ -753,20 +753,48 @@ export function qualifyFinalizedCheckpoint(recipe, adoption, reader, adapters) {
     limits: ['Immutable metadata and retained execution qualification only; no new science, delivery, CI or review acceptance.']};
 }
 
-// Fixed transitions, not a job graph. One invocation prepares the next available
-// metadata stage or states the actual missing external input. Repeating the same
-// command consumes saved indexes instead of handwritten result hashes or IDs.
-export async function nextDeliveryStage(journal, config, reader, adapters) {
-  journal.reader = reader;
-  const recipePin = locate(reader, config.recipe), recipe = reader.json(recipePin);
-  if (config.resume_finalized) {
-    need(!config.completed_delivery && !config.prepared_stages, 'Choose one unambiguous receipt continuation route');
-    qualifyFinalizedCheckpoint(recipe, config.resume_finalized, reader, adapters);
-    if (adapters.beforeReview) await adapters.beforeReview();
-    if (!config.review) return {waiting: {status: 'waiting', stage: 'review', kind: 'publication-review',
-      detail: 'Existing finalized receipt qualified without replay; publish the actual author head/PR for independent review.'}};
-    return nextReviewStage(journal, config.review, reader, adapters);
+// A historical completed SOURCE/NATIVE pair is not a new issuance template.
+// Authenticate its whole original custody, including literal v1 scope, then
+// enter at actual authority preparation. Never invent earlier completed stages.
+export function qualifyCompletedCustody(recipe, reader, adapters) {
+  const unique = values => Array.isArray(values) && values.length > 0 && values.length <= 512
+    && values.every(v => typeof v === 'string' && v.length > 0) && new Set(values).size === values.length;
+  need(recipe?.version === 1 && recipe.mode === 'completed-original-custody' && typeof recipe.id === 'string' && /^[a-z0-9-]+$/.test(recipe.id)
+    && equal(Object.keys(recipe).sort(), ['groups', 'id', 'mode', 'new_prefix', 'package_inputs', 'retained_registries', 'selector', 'version'])
+    && Array.isArray(recipe.groups) && recipe.groups.length > 0 && recipe.groups.length <= 32,
+    'Explicit bounded completed-original custody recipe required');
+  need(typeof recipe.new_prefix === 'string' && recipe.new_prefix.endsWith('/') && safe(recipe.new_prefix.slice(0, -1))
+    && recipe.selector?.path === 'data/ownership-selection.json' && recipe.package_inputs?.path === '.github/package-inputs.json'
+    && Array.isArray(recipe.retained_registries) && recipe.retained_registries.length <= 512,
+    'Completed-original selection/package/retained context required');
+  locate(reader, recipe.selector); locate(reader, recipe.package_inputs);
+  const retained = recipe.retained_registries.map(p => locate(reader, p));
+  need(new Set(retained.map(p => p.commit + ':' + p.path)).size === retained.length, 'Duplicate retained registry context');
+  const ids = new Set(), components = new Set(), groups = [];
+  for (const group of recipe.groups) {
+    need(equal(Object.keys(group).sort(), ['component_ids', 'id', 'native_operating', 'native_publication', 'source_publication', 'target_ids'])
+      && typeof group.id === 'string' && /^[a-z0-9-]+$/.test(group.id) && !ids.has(group.id) && unique(group.component_ids) && unique(group.target_ids),
+      'Explicit unique completed-original group scope required');
+    ids.add(group.id);
+    const input = {source_publication: group.source_publication, native_publication: group.native_publication,
+      native_operating: group.native_operating};
+    const qualified = constructOriginalAuthority(adapters.authorityReader(), input);
+    const ledger = reader.json(qualified.ledger), targets = [...new Set(ledger.rows.map(row => row.target_id))].sort();
+    need(equal(group.component_ids, qualified.component_ids) && equal(ledger.scope_ids, qualified.component_ids)
+      && unique(targets) && equal([...group.target_ids].sort(), targets), 'Completed-original component/target scope differs');
+    need(qualified.component_ids.every(id => !components.has(id)), 'Overlapping completed-original component scope');
+    qualified.component_ids.forEach(id => components.add(id));
+    // Products remain live while groups are qualified; charge that metadata to
+    // the existing shared phase rather than granting a new resource allowance.
+    need(typeof reader.budget?.add === 'function', 'Completed-original shared metadata budget required');
+    reader.budget.add({bytes: 2 * Object.values(qualified.products).reduce((n, raw) => n + raw.length, 0)});
+    groups.push({id: group.id, component_ids: [...qualified.component_ids], target_ids: targets,
+      authority_input: input, qualified_products: qualified.products});
   }
+  return {groups, component_ids: [...components], limits: ['Original completed custody only; current rebind, selection, independent review and queue remain required.']};
+}
+
+function deliveryTransitions(journal, config) {
   const status = readAdvanceStatus(journal), done = new Set(status.completed);
   const completed = (id, input) => {
     if (!done.has(id)) return false;
@@ -777,6 +805,34 @@ export async function nextDeliveryStage(journal, config, reader, adapters) {
   };
   const prepare = (id, phase, input, produce) => ({id, phase, input, produce});
   const wait = (stage, kind, detail) => ({waiting: {status: 'waiting', stage, kind, detail}});
+  return {done, completed, prepare, wait};
+}
+
+// Fixed transitions, not a job graph. One invocation prepares the next available
+// metadata stage or states the actual missing external input. Repeating the same
+// command consumes saved indexes instead of handwritten result hashes or IDs.
+export async function nextDeliveryStage(journal, config, reader, adapters) {
+  journal.reader = reader;
+  const recipePin = locate(reader, config.recipe), recipe = reader.json(recipePin);
+  if (recipe.mode === 'completed-original-custody') {
+    need(!config.resume_finalized && !config.completed_delivery && !config.prepared_stages,
+      'Choose one unambiguous completed-original custody route');
+    const qualified = qualifyCompletedCustody(recipe, reader, adapters);
+    const observed = config.observations ?? {};
+    need(Object.keys(observed).every(key => ['authorities', 'registry', 'composition', 'rebind', 'operating', 'certificate', 'sidecar'].includes(key)),
+      'Completed-original custody cannot substitute execution observations');
+    return nextAuthorityDelivery(journal, config, reader, adapters, recipe, qualified.groups, observed,
+      new Map(qualified.groups.map(group => [group.id, group.qualified_products])));
+  }
+  if (config.resume_finalized) {
+    need(!config.completed_delivery && !config.prepared_stages, 'Choose one unambiguous receipt continuation route');
+    qualifyFinalizedCheckpoint(recipe, config.resume_finalized, reader, adapters);
+    if (adapters.beforeReview) await adapters.beforeReview();
+    if (!config.review) return {waiting: {status: 'waiting', stage: 'review', kind: 'publication-review',
+      detail: 'Existing finalized receipt qualified without replay; publish the actual author head/PR for independent review.'}};
+    return nextReviewStage(journal, config.review, reader, adapters);
+  }
+  const {done, completed, prepare, wait} = deliveryTransitions(journal, config);
   if (!done.has('recipe')) return prepare('recipe', 'recipe', {recipe: recipePin}, () => materializeRecipe(recipe, reader).products);
   const index = journalJSON(journal, 'recipe', 'recipe-index.json'), groups = index.groups;
   if (config.prepared_stages) {
@@ -833,12 +889,20 @@ export async function nextDeliveryStage(journal, config, reader, adapters) {
     return prepare(id, 'retain', row.observation, () => adapters.retainProducts(row.retained.config, journal.root, reader, row.retained.readLocal));
   }
   need(natives.size === groups.length, 'Previously completed NATIVE observation was removed');
+  return nextAuthorityDelivery(journal, config, reader, adapters, recipe, groups.map(group => ({...group,
+    authority_input: {source_publication: sources.get(group.id).observation.publication,
+      native_publication: natives.get(group.id).observation.publication, native_operating: natives.get(group.id).observation.terminal}})), observed);
+}
+
+// Both new execution and qualified historical execution share these unchanged
+// authority/compose/current-rebind/review barriers. There is no second pipeline.
+async function nextAuthorityDelivery(journal, config, reader, adapters, recipe, groups, observed, qualifiedProducts = null) {
+  const {completed, prepare, wait} = deliveryTransitions(journal, config);
   for (const group of groups) {
     const id = 'authority-' + group.id;
-    const input = {source_publication: sources.get(group.id).observation.publication,
-      native_publication: natives.get(group.id).observation.publication, native_operating: natives.get(group.id).observation.terminal};
+    const input = group.authority_input;
     if (completed(id, input)) continue;
-    return prepare(id, 'authority', input, () => constructOriginalAuthority(adapters.authorityReader(), input).products);
+    return prepare(id, 'authority', input, () => qualifiedProducts?.get(group.id) ?? constructOriginalAuthority(adapters.authorityReader(), input).products);
   }
   if (!observed.authorities) return wait('registry', 'commit', 'Commit each completed authority pair and provide its actual pair locators.');
   need(Array.isArray(observed.authorities) && observed.authorities.length === groups.length, 'Missing/extra committed authority pair');
