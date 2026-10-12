@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "batch": "B-north13",
+  "issue": 1796,
+  "accepted_predecessor": {
+    "pr_number": 1797,
+    "merge": "cf11a9c434e798a2099ea406b29e842f27fe05ea",
+    "request_id": "88f03bb0-955b-42b9-ae6b-d766f64f7b11",
+    "reviewed_head": "ef1bf2c691b6f554c32885daf5a6dd35a451c9ff",
+    "receipt_comment_id": 6131698870,
+    "artifact_id": 11769163595,
+    "artifact_bytes": 8065660,
+    "artifact_sha256": "d0d28b67d9e3f87f45cce6945ee403847a65bd8ce1f36e2660fa95cdf444f932",
+    "run_id": 38299822728,
+    "job_id": 114980084609
+  },
+  "original_preparation": {
+    "source_execution": "37ee86aee1cf413ba7e1fcfec56b00d5f2da0d5c",
+    "native_execution": "3c42bb28b5be67f3a001c451cbb298b7338c4024",
+    "source_components": 13,
+    "assigned_cells": 125,
+    "assigned_components": 10,
+    "zero_cell_components": 3,
+    "native_conflicts": 0,
+    "source_exceptions": 0
+  },
+  "current_rebind": {
+    "execution": "e6b971d37ab80a9510745b2e0b8fc315b7dfed09",
+    "seconds": 153.34288441100216,
+    "sampled_group_peak_bytes": 384724992,
+    "exit_code": 0,
+    "owned_processes_remaining": []
+  },
+  "limits": [
+    "Original source-relative limits and all excluded candidates remain unchanged.",
+    "Zero-native geometry is distinct from repaired native cells.",
+    "No original whole-batch completion is inferred from source-local grouping.",
+    "B selected admission, hosted gates, independent review and actual acceptance remain pending at preparation."
+  ]
+}
