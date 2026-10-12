@@ -1890,7 +1890,7 @@
     {
       "path": ".github/package-inputs.json",
       "bytes": 84140,
-      "sha256": "4f34b4a63685a3f4edc820f82e5904d6bbec03373568afdd29573563378e38ad",
+      "sha256": "f0de0ec4897b72fe78a6e66df1b6d2db47b5bb9ab22f9898854b6b26846bf41e",
       "hash_kind": "file-bytes",
       "role": "retained-result-or-operand"
     },
@@ -2318,6 +2318,13 @@
       "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/trusted-maintenance-refusals/final.log",
       "bytes": 42472,
       "sha256": "29df430302b7252cd2486580996c11d272e235012d320358d40ebdefb5b77e86",
+      "hash_kind": "file-bytes",
+      "role": "retained-result-or-operand"
+    },
+    {
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/package-proof-002/declared-inputs.json",
+      "bytes": 84140,
+      "sha256": "4f34b4a63685a3f4edc820f82e5904d6bbec03373568afdd29573563378e38ad",
       "hash_kind": "file-bytes",
       "role": "retained-result-or-operand"
     }
@@ -3302,7 +3309,7 @@
       "input_sha256": "4f34b4a63685a3f4edc820f82e5904d6bbec03373568afdd29573563378e38ad",
       "input_file": {
         "commit": "candidate",
-        "path": ".github/package-inputs.json"
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/package-proof-002/declared-inputs.json"
       },
       "evaluation_commit": "791576647adc41241ce9b438f1bb0034088eed4e"
     },
@@ -3314,7 +3321,7 @@
       "input_sha256": "4f34b4a63685a3f4edc820f82e5904d6bbec03373568afdd29573563378e38ad",
       "input_file": {
         "commit": "candidate",
-        "path": ".github/package-inputs.json"
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/package-proof-002/declared-inputs.json"
       },
       "evaluation_commit": "791576647adc41241ce9b438f1bb0034088eed4e"
     },
@@ -3326,7 +3333,7 @@
       "input_sha256": "4f34b4a63685a3f4edc820f82e5904d6bbec03373568afdd29573563378e38ad",
       "input_file": {
         "commit": "candidate",
-        "path": ".github/package-inputs.json"
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/package-proof-002/declared-inputs.json"
       },
       "evaluation_commit": "791576647adc41241ce9b438f1bb0034088eed4e"
     },
@@ -3338,7 +3345,7 @@
       "input_sha256": "4f34b4a63685a3f4edc820f82e5904d6bbec03373568afdd29573563378e38ad",
       "input_file": {
         "commit": "candidate",
-        "path": ".github/package-inputs.json"
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/package-proof-002/declared-inputs.json"
       },
       "evaluation_commit": "791576647adc41241ce9b438f1bb0034088eed4e"
     },
@@ -4082,6 +4089,15 @@
     },
     {
       "text": "The stale root progress snapshot is omitted from the final tip and preserved in its published ancestry. Two diagnostic rebind monitor logs are published as samples.log with unchanged raw JSONL bytes; original cache files and execution receipts retain their authentic names. Neither change affects a selected-reader or package input.",
+      "status": "supported",
+      "source_ids": [
+        "prior-selected-delivery",
+        "grc2010-original-ten-20261011",
+        "congo-ago2018-cod2019-qualified-20261011"
+      ]
+    },
+    {
+      "text": "The final package declaration preserves the accepted744-entry baseline order and appends the same117 new inputs. The successful791 build used exactly the same861 input paths and unchanged policy/code; its exact original declaration bytes remain retained in package-proof-002/declared-inputs.json. Build metrics bind that authentic archived body, not the reordered final policy.",
       "status": "supported",
       "source_ids": [
         "prior-selected-delivery",
