@@ -43,11 +43,12 @@ started = time.monotonic()
 result = wrapper.selected_joint(ROOT, BASE, CANDIDATE, detector, trusted=TRUSTED)
 complete_seconds = time.monotonic() - started
 (OUTPUT / 'joint-result.json').write_bytes(canonical(result))
+(OUTPUT / 'execution-timing.json').write_bytes(canonical({'complete_joint_seconds':complete_seconds}))
 assert result['mode'] == 'authenticated-checkpoint-append-v1', result
 native = result['native']; continuous = result['continuous_result']
 assert native['status'] == 'no-new-native-loss' and native['lost_or_reassigned_cells'] == 0
 assert continuous['status'] == 'no-new-regression' and continuous['regressions'] == 0
-assert continuous['original_strict_polygon_result'] == reference_continuous['original_strict_polygon_result']
+assert canonical(continuous['original_strict_polygon_result']) == canonical(reference_continuous['original_strict_polygon_result'])
 for key in ['status', 'lost_or_reassigned_cells', 'intervals', 'baseline_selection', 'candidate_selection']:
     assert native[key] == reference_native[key], key
 for key in ['complete_owners', 'required_ids', 'source_binding']:
