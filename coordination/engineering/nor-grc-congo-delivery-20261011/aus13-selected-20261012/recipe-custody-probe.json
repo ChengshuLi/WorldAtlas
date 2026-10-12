@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "id": "aus13-custody-probe",
+  "mode": "greedy-model",
+  "registry": {
+    "commit": "a30cdcf2ac7ed020e489a13a3db6034fda5f403e",
+    "path": "coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json"
+  },
+  "destination_prefix": ".cache/native-grid-candidates/aus13-custody-probe",
+  "diagnostic_limit": "Metadata custody-boundary probe only. Retains existing immutable current13 v2 exemplar operands; these are not issued AUS scientific requests and must not be executed. Native mapping must be completed separately before genuine recipe preparation.",
+  "handoffs": [
+    {
+      "handoff_id": "aus13-original-administrative-20261011",
+      "source_template": {
+        "commit": "005a122e3680fc2bbccf754058409b8d037a7336",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/resource-budget-controls-001/templates/a-source-template.json"
+      },
+      "source_resources": {
+        "processing_allowance": {
+          "phaseBytes": 402653184,
+          "rssBytes": 671088640
+        },
+        "output_reserve": 4194304,
+        "operating_limits": {
+          "log_bytes": 4194304,
+          "monitor_bytes": 8388608,
+          "output_bytes": 33554432,
+          "receipt_bytes": 1048576,
+          "retained_bytes": 50331648,
+          "rss_bytes": 1073741824,
+          "wall_seconds": 600
+        }
+      },
+      "native_resources": {
+        "processing_allowance": {
+          "phaseBytes": 402653184,
+          "rssBytes": 671088640
+        },
+        "output_reserve": 16000000,
+        "operating_limits": {
+          "log_bytes": 4194304,
+          "monitor_bytes": 8388608,
+          "output_bytes": 33554432,
+          "receipt_bytes": 1048576,
+          "retained_bytes": 50331648,
+          "rss_bytes": 1073741824,
+          "wall_seconds": 600
+        }
+      },
+      "physical_locator": {
+        "input": {
+          "commit": "6ed97794d10bba5844922360b38191b4e7146c36",
+          "path": "research/geography/aus19-original-source-20261011/physical-locators.json"
+        },
+        "format": "keyed-path"
+      },
+      "targets": [
+        {
+          "target_id": "gb:AUS:ADM2:25037944B11916296746250",
+          "bank_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz",
+          "native_template": {
+            "commit": "005a122e3680fc2bbccf754058409b8d037a7336",
+            "path": "coordination/engineering/nor-grc-congo-delivery-20261011/resource-budget-controls-001/templates/a-native-template.json"
+          }
+        },
+        {
+          "target_id": "gb:AUS:ADM2:25037944B17338277063313",
+          "bank_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz",
+          "native_template": {
+            "commit": "005a122e3680fc2bbccf754058409b8d037a7336",
+            "path": "coordination/engineering/nor-grc-congo-delivery-20261011/resource-budget-controls-001/templates/a-native-template.json"
+          }
+        },
+        {
+          "target_id": "gb:AUS:ADM2:25037944B43303794043608",
+          "bank_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz",
+          "native_template": {
+            "commit": "005a122e3680fc2bbccf754058409b8d037a7336",
+            "path": "coordination/engineering/nor-grc-congo-delivery-20261011/resource-budget-controls-001/templates/a-native-template.json"
+          }
+        },
+        {
+          "target_id": "gb:AUS:ADM2:25037944B47305351718046",
+          "bank_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz",
+          "native_template": {
+            "commit": "005a122e3680fc2bbccf754058409b8d037a7336",
+            "path": "coordination/engineering/nor-grc-congo-delivery-20261011/resource-budget-controls-001/templates/a-native-template.json"
+          }
+        },
+        {
+          "target_id": "gb:AUS:ADM2:25037944B73531494726593",
+          "bank_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz",
+          "native_template": {
+            "commit": "005a122e3680fc2bbccf754058409b8d037a7336",
+            "path": "coordination/engineering/nor-grc-congo-delivery-20261011/resource-budget-controls-001/templates/a-native-template.json"
+          }
+        },
+        {
+          "target_id": "gb:AUS:ADM2:25037944B91391383703186",
+          "bank_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz",
+          "native_template": {
+            "commit": "005a122e3680fc2bbccf754058409b8d037a7336",
+            "path": "coordination/engineering/nor-grc-congo-delivery-20261011/resource-budget-controls-001/templates/a-native-template.json"
+          }
+        },
+        {
+          "target_id": "gb:AUS:ADM2:25037944B95382354250521",
+          "bank_path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz",
+          "native_template": {
+            "commit": "005a122e3680fc2bbccf754058409b8d037a7336",
+            "path": "coordination/engineering/nor-grc-congo-delivery-20261011/resource-budget-controls-001/templates/a-native-template.json"
+          }
+        }
+      ],
+      "predecessor_allowance": {
+        "source_request_path": {
+          "bytes": 131072
+        },
+        "operating_path": {
+          "bytes": 1048576
+        },
+        "publication_path": {
+          "bytes": 131072
+        },
+        "facts_path": {
+          "bytes": 4194304
+        },
+        "inventory_path": {
+          "bytes": 4194304,
+          "uncompressed_bytes": 8388608
+        }
+      },
+      "native_request_bytes_bound": 131072
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/d99e6df59670859f5cc9033bf34cdc6ab19936fbe2a408f07cac2522e627b6e2/work/scripts/additive-gap-repair.mjs:25
+function demand(value, message) { if (!value) throw Error(message); }
+                                                    ^
+
+Error: Actual installed module drift
+    at demand (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/d99e6df59670859f5cc9033bf34cdc6ab19936fbe2a408f07cac2522e627b6e2/work/scripts/additive-gap-repair.mjs:25:53)
+    at file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/d99e6df59670859f5cc9033bf34cdc6ab19936fbe2a408f07cac2522e627b6e2/work/scripts/additive-gap-repair.mjs:1942:5
+    at Array.forEach (<anonymous>)
+    at verifyModules (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/d99e6df59670859f5cc9033bf34cdc6ab19936fbe2a408f07cac2522e627b6e2/work/scripts/additive-gap-repair.mjs:1940:57)
+    at inventoryCommand (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/d99e6df59670859f5cc9033bf34cdc6ab19936fbe2a408f07cac2522e627b6e2/work/scripts/additive-gap-repair.mjs:1970:3)
+    at file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/d99e6df59670859f5cc9033bf34cdc6ab19936fbe2a408f07cac2522e627b6e2/work/scripts/additive-gap-repair.mjs:2041:23
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.19.0
+Command exited with non-zero status 1
+	Command being timed: "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/additive-gap-repair.mjs /workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/d99e6df59670859f5cc9033bf34cdc6ab19936fbe2a408f07cac2522e627b6e2/work be61ebb379fcf4f9d9bff9b50eda4b24d569093c coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/advance-001/requests/aus13-selected-001-source-request.json 08aabfcf4fb0cefe22e01fc91e93afd216e486d318314a6a1fa3915775332c28 .cache/native-grid-candidates/aus13-selected-20261012-aus13-selected-001-source"
+	User time (seconds): 0.26
+	System time (seconds): 0.20
+	Percent of CPU this job got: 102%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.45
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 42440
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 2
+	Minor (reclaiming a frame) page faults: 54760
+	Voluntary context switches: 352
+	Involuntary context switches: 13
+	Swaps: 0
+	File system inputs: 3992
+	File system outputs: 8
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1

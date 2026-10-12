@@ -1,0 +1,29 @@
+✔ actual CLI checks complete mixed assigned/zero-cell cohort, every new cell and stable rows (385.361273ms)
+✔ smoke rejects wrong ledger hash without creating output (40.729073ms)
+✔ smoke rejects wrong cumulative count without creating output (183.661288ms)
+✔ smoke rejects duplicate member without creating output (36.643244ms)
+✔ smoke rejects missing member without creating output (26.074269ms)
+✔ smoke rejects duplicate roster without creating output (28.81091ms)
+✔ smoke rejects duplicate batch without creating output (28.033747ms)
+✔ smoke rejects wrong target without creating output (177.045333ms)
+✔ smoke rejects wrong disposition without creating output (114.297636ms)
+✔ smoke rejects wrong geometry without creating output (112.324838ms)
+✔ smoke rejects empty cohorts without creating output (28.173564ms)
+✔ smoke rejects undeclared field without creating output (22.489518ms)
+✔ actual kernel rejects missing/duplicate selected rows, target drift and omitted effective primitive (527.571691ms)
+✔ controls reject changed stable owner, vacuous rows and conflicting duplicate rows (760.079629ms)
+✔ rebind summary and actual loaded target custody must agree with consumed assets (195.245135ms)
+✔ actual loader rejects additions over already occupied native cells (70.307528ms)
+✔ whole-file checks reject corrupted assets, absent assets, path traversal and symlinks (224.876742ms)
+✔ every output collision and symlink rejects before work and preserves originals (93.004379ms)
+✔ CLI fails on missing required arguments and duplicate/unknown options (418.825459ms)
+✔ genuine startup native descriptor without encoded bytes passes with actual whole-file hash and size (150.823697ms)
+✔ genuine startup native descriptor still rejects wrong encoded SHA and missing selected custody bytes (113.206441ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4003.351754
