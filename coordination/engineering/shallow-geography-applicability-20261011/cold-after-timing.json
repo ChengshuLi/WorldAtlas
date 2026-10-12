@@ -1,0 +1,28 @@
+{
+  "baseline": "8a346ba7c957220b34c5cc3368d5d835de533ad4",
+  "candidate": "47680888460cb772da6eb7cbab4a05f6b8474fa0",
+  "measurement_boundary": "Redirected output file creation immediately before collector launch to final JSON write; not monotonic process timing or whole hosted wrapper/job",
+  "output_created_at": "2026-10-11 14:49:52.256062095 -0700",
+  "output_written_at": "2026-10-11 14:50:44.663862665 -0700",
+  "elapsed_seconds": 52.4078,
+  "initial_state": "Exact unchanged failed-before fixture: zero blobs,693 commits,6561 trees,real shallow marker at baseline; no alternatives or shared object store",
+  "shallow_after": "8a346ba7c957220b34c5cc3368d5d835de533ad4\n",
+  "disk_bytes_after": 10031047,
+  "executed_code": [
+    {
+      "path": "scripts/check-unchanged-selected-geography.mjs",
+      "bytes": 28730,
+      "sha256": "34c060b275a99829f1ade97caa71c0e731cb728a7b5a4da0828bca7f66fe71e6"
+    },
+    {
+      "path": "scripts/geography-routing-metadata.mjs",
+      "bytes": 8328,
+      "sha256": "dc31815de10f0248405e32753d866e50c82a58fa13d171cb90f5e8a0cd1f2a88"
+    },
+    {
+      "path": "scripts/geography-prefetch.mjs",
+      "bytes": 13608,
+      "sha256": "19aba167eb32d5e7c08034a0e748db95e657d2ec0f10f8ee034cdeba9b2720a8"
+    }
+  ]
+}

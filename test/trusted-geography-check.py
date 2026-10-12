@@ -886,6 +886,42 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
             with self.mock.patch.object(self.g, 'run_applicability_collector', side_effect=error):
                 self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate))
 
+    def test_decline_diagnostic_preserves_safe_category_and_operation_only(self):
+        import io
+        reason = 'immutable-object-unavailable:merge-base:' + self.baseline + ':secret-value'
+        proof = {**self.proof, 'status': 'full-check-required', 'reason': reason}
+        stream = io.StringIO()
+        with self.mock.patch.object(self.g, 'run_applicability_collector', return_value=
+                subprocess.CompletedProcess([], 0, json.dumps(proof).encode(), b'secret stderr')), \
+             self.mock.patch.object(self.g.sys, 'stderr', stream):
+            self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate))
+        diagnostic = json.loads(stream.getvalue())['geography_applicability']
+        self.assertEqual(diagnostic, {'status': 'full-check-required', 'reason': 'collector-declined',
+                         'collector_reason': 'immutable-object-unavailable', 'operation': 'merge-base'})
+        self.assertNotIn('secret', stream.getvalue())
+        self.assertNotIn(self.baseline, stream.getvalue())
+
+    def test_decline_diagnostics_bound_unknown_text_timeout_and_invalid_binding(self):
+        import io
+        cases = [({**self.proof, 'status': 'full-check-required', 'reason': 'secret-' * 10000}, 'collector-declined'),
+                 ({**self.proof, 'baseline_commit': self.candidate}, 'collector-binding-invalid')]
+        for proof, expected in cases:
+            stream = io.StringIO()
+            with self.mock.patch.object(self.g, 'run_applicability_collector', return_value=
+                    subprocess.CompletedProcess([], 0, json.dumps(proof).encode(), b'secret stderr')), \
+                 self.mock.patch.object(self.g.sys, 'stderr', stream):
+                self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate))
+            self.assertEqual(json.loads(stream.getvalue())['geography_applicability']['reason'], expected)
+            self.assertLess(len(stream.getvalue()), 256)
+            self.assertNotIn('secret', stream.getvalue())
+        stream = io.StringIO()
+        with self.mock.patch.object(self.g, 'run_applicability_collector',
+                                   side_effect=subprocess.TimeoutExpired('secret-command', 120)), \
+             self.mock.patch.object(self.g.sys, 'stderr', stream):
+            self.assertIsNone(self.g.unchanged_selected_inputs(ROOT, self.baseline, self.candidate))
+        self.assertEqual(json.loads(stream.getvalue())['geography_applicability']['reason'], 'collector-timeout')
+        self.assertNotIn('secret', stream.getvalue())
+
     def test_metadata_timeout_reaps_owned_git_group_before_fallback(self):
         child = self.mock.Mock(pid=123456, returncode=-9)
         child.communicate.side_effect = [subprocess.TimeoutExpired('node', 60), (b'', b'')]

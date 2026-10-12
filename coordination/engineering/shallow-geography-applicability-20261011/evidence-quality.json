@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "issue": 1749,
+  "lane": "engineering",
+  "worker_id": "01a12c31-79bf-741f-b094-7fa0aa575029",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "7eb3293b739631f4e69d7e676c7a77ae7c22c107",
+    "files": [
+      {
+        "path": "scripts/check-unchanged-selected-geography.mjs",
+        "bytes": 28407,
+        "sha256": "dbbd9a4aca67377828c2b049131f3ebdd31f291bd2f0f8c8d35a66fd3888dee6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-geographic-check.py",
+        "bytes": 88301,
+        "sha256": "8a4be28ed2cee0c4748f80dd59108b44a6f8f608a656fc2f73cf276705a0633b",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/shallow-geography-applicability-20261011/cold-after-proof.json",
+      "bytes": 669822,
+      "sha256": "3b4394c50d91aa264c256aa28b77b86f4741ce13ebaffccc7d8c3d45d5191ee9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/shallow-geography-applicability-20261011/cold-after-timing.json",
+      "bytes": 1259,
+      "sha256": "8e6230255cd59f18c22cd80490a5832e661309a46655ff48406c44d952f7b6cd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/shallow-geography-applicability-20261011/cold-before-proof.json",
+      "bytes": 1131,
+      "sha256": "cfd8199c13a373d93eddb47ee1e6b70b26eb3d5d02709c7dc1ff0524c357a598",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/shallow-geography-applicability-20261011/cold-before-timing.json",
+      "bytes": 716,
+      "sha256": "3a23e1a2b3ed7a4e6707b7d9cc41c733f4b3cd9839b97487319ea3fa0bdbd3f9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/shallow-geography-applicability-20261011/collector-tests.log",
+      "bytes": 1742,
+      "sha256": "4e69e857427b50ca211a2194f35c9540758910413c35d53c1dcc92cd69931d04",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/shallow-geography-applicability-20261011/hosted-before-stages.log",
+      "bytes": 1582,
+      "sha256": "c3b76b2d6ade0501cdcc42ed25baf7b06fae7473bdaf89bf46e5f532f81ba00e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/shallow-geography-applicability-20261011/wrapper-tests.log",
+      "bytes": 235,
+      "sha256": "706293cc6e574982c40402dfc3b1748157cf852727bf8107372914aa837e1f7b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/shallow-geography-applicability-20261011/refreshed-controls.log",
+      "bytes": 1861,
+      "sha256": "43000ebca50fbd751dedfbb8750887767ae0416f232b4c7cfeb85508183dbab8",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "shallow-applicability-correction",
+      "kind": "code",
+      "description": "Preserve normal shallow merge-base; bounded safe decline diagnostics; exact cold source-only replay and adverse controls.",
+      "software": "Node24; Python3.12; Git2.52",
+      "units": "immutable identities; seconds"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "Correct cold applicability only; no scientific or hosted-latency guarantee.",
+      "status": "unresolved",
+      "source_ids": []
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/unchanged-selected-geography.test.mjs",
+    "node --test test/trusted-geography-check.test.mjs",
+    "node scripts/check-unchanged-selected-geography.mjs ISOLATED_COLD_REPO 8a346ba7c957220b34c5cc3368d5d835de533ad4 47680888460cb772da6eb7cbab4a05f6b8474fa0"
+  ]
+}

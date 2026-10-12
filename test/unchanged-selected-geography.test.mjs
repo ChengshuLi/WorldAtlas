@@ -250,8 +250,17 @@ function coldFixture(f, options = {}) {
   f.git(['config', 'uploadpack.allowFilter', 'true']);
   f.git(['update-ref', 'refs/heads/fixture', f.candidate]);
   f.git(['symbolic-ref', 'HEAD', 'refs/heads/fixture']);
-  execFileSync('git', ['clone', '--bare', '--filter=blob:none', '--no-local', pathToFileURL(f.directory).href, destination],
-    {env: f.env, stdio: ['ignore', 'pipe', 'pipe']});
+  if (options.shallowStart) {
+    execFileSync('git', ['init', '--bare', destination], {env: f.env, stdio: ['ignore', 'pipe', 'pipe']});
+    for (const args of [['--depth=1', f.baseline], [f.candidate]]) {
+      execFileSync('git', ['-C', destination, 'fetch', '--filter=blob:none', '--no-tags', '--no-write-fetch-head',
+        ...(args.length === 2 ? [args[0]] : []), pathToFileURL(f.directory).href, args.at(-1)],
+        {env: f.env, stdio: ['ignore', 'pipe', 'pipe']});
+    }
+  } else {
+    execFileSync('git', ['clone', '--bare', '--filter=blob:none', '--no-local', pathToFileURL(f.directory).href, destination],
+      {env: f.env, stdio: ['ignore', 'pipe', 'pipe']});
+  }
   const git = (args, input) => execFileSync('git', ['-C', destination, ...args],
     {env: f.env, input, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
   const requests = [], batches = [], originBatches = [];
@@ -317,6 +326,40 @@ test('clean blob:none clone acquires only routing metadata in bounded discovery 
     const count = cold.batches.length;
     const warm = await f.inspect(f.candidate, f.baseline, {repo: cold.destination, acquisition: cold.acquisition});
     assert.equal(warm.status, 'unchanged-selected-inputs', warm.reason); assert.equal(cold.batches.length, count);
+  } finally { f.close(); }
+});
+
+test('shallow descendant admits its baseline without traversing an absent parent', async () => {
+  const f = fixture(); try {
+    const cold = coldFixture(f, {shallowStart: true});
+    const parent = f.git(['rev-parse', f.baseline + '^']);
+    assert.equal(cold.git(['cat-file', '--batch-check'], parent + '\n'), parent + ' missing');
+    assert.equal(cold.git(['merge-base', f.baseline, f.candidate]), f.baseline);
+    assert.throws(() => execFileSync('git', ['-C', cold.destination, 'merge-base', f.baseline, f.candidate],
+      {env: {...f.env, GIT_SHALLOW_FILE: '/dev/null'}, stdio: ['ignore', 'pipe', 'pipe']}));
+    const result = await f.inspect(f.candidate, f.baseline, {repo: cold.destination, acquisition: cold.acquisition});
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    assert.equal(result.metadata_acquisition.scientific_leaf_imports, 0);
+    assert.equal(fs.readFileSync(path.join(cold.destination, 'shallow'), 'utf8'), f.baseline + '\n');
+  } finally { f.close(); }
+});
+
+test('divergent shallow heads use present ancestry only and missing ancestry declines', async () => {
+  const f = fixture(); try {
+    const baseline = f.commit({...f.files, 'research/geography/baseline-only/readme': body('unrelated')}, f.baseline);
+    fs.writeFileSync(path.join(f.directory, 'shallow'), baseline + '\n');
+    assert.throws(() => f.git(['merge-base', baseline, f.candidate]));
+    const result = await f.inspect(f.candidate, baseline);
+    assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+    // The fixture writes loose objects only. Remove the needed common ancestor,
+    // not a real repository object; neither query may fetch missing history.
+    const ancestor = path.join(f.directory, 'objects', f.baseline.slice(0, 2), f.baseline.slice(2));
+    assert(fs.existsSync(ancestor)); fs.unlinkSync(ancestor);
+    const missing = await f.inspect(f.candidate, baseline);
+    assert.equal(missing.status, 'full-check-required');
+    assert.match(missing.reason, /^immutable-object-unavailable:merge-base:/);
+    assert.equal(missing.metadata_acquisition.fetch_batches, 0);
+    assert.equal(fs.readFileSync(path.join(f.directory, 'shallow'), 'utf8'), baseline + '\n');
   } finally { f.close(); }
 });
 
