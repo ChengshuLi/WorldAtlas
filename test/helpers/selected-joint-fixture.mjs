@@ -85,4 +85,3 @@ export async function trustedFixture(t,{incompleteNative=false}={}){
  const reader=new native.ImmutableReader(root,selected,{allowance:{phaseBytes:512*1024**2,rssBytes:512*1024**2}}),budget={shared:reader.budget,carriedBytes:1024};
  return {api,native,continuous,joint,reader,budget,selected,root,git,save,commit,pin,ledger,patch,sidecar,envelope,selection,rootRow};
 }
-

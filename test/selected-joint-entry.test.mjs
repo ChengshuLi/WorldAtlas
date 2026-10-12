@@ -58,3 +58,25 @@ test('joint launcher authenticates its additional consumer module before importi
   assert.doesNotMatch(result.stderr, /Error: unauthenticated consumer executed/);
   assert.equal(fs.existsSync(path.join(f.root, 'complete')), false);
 });
+
+test('actual joint CLI qualifies once, runs both real consumers and releases once', async t => {
+  const f = await trustedFixture(t), coverage = path.join(f.root, 'coverage');
+  const result = run(f, f.selected, f.selected, path.join(f.root, 'complete'), {NODE_V8_COVERAGE:coverage});
+  assert.equal(result.status, 0, result.stderr);
+  const report = JSON.parse(result.stdout);
+  assert.equal(report.mode, 'authenticated-checkpoint-append-v1');
+  assert.equal(report.native.status, 'no-new-native-loss');
+  assert.equal(report.continuous.status, 'no-selected-footprint-change');
+  assert.equal(report.continuous.complete_owners, 3);
+  const publication = JSON.parse(fs.readFileSync(path.join(f.root, 'complete/publication.json')));
+  assert.deepEqual(report.continuous.publication, publication);
+  const counts = new Map();
+  for (const file of fs.readdirSync(coverage)) for (const script of JSON.parse(fs.readFileSync(path.join(coverage, file))).result) {
+    if (!script.url.startsWith('file://' + f.root + '/')) continue;
+    for (const fn of script.functions) counts.set(fn.functionName, (counts.get(fn.functionName) ?? 0) + fn.ranges[0].count);
+  }
+  for (const name of ['selectedBootstrap', 'qualifyCheckpoint', 'qualifyTransition', 'compareSelectedCheckpointNative', 'checkpointContinuousOperands', 'releaseCheckpoint'])
+    assert.equal(counts.get(name), 1, name);
+  assert.equal(counts.get('loadSelection'), 0);
+  assert.equal(counts.get('selectedCoordinateShard'), 0);
+});
