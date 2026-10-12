@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "issue": 1778,
+  "lane": "engineering",
+  "worker_id": "01a12ee1-d5d6-7600-aafc-a43e2fe48013",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "46438af8901acbad11a9b627828a9e9184018a77",
+    "files": [
+      {
+        "path": "data/ownership-selection.json",
+        "bytes": 1592,
+        "sha256": "a25491f253ab42129b9ec8cce19a6530dee7b861c7928ac07dd543e5f62c35ad",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+        "bytes": 193557,
+        "sha256": "40d282412f03e3f7b216b787879ecc3dd3961002e5c3635d2057378019a0d78d",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json",
+      "bytes": 6449,
+      "sha256": "04ebdbbd0c990469eb82fff4eb8a05abbec568d0b21f87cc7d44522f56949da1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/baseline-routes.json",
+      "bytes": 27657,
+      "sha256": "750affb66823b6d247cbc638f4da9e655449cce4b40b9c1989a32d784348ad51",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/candidate-routes.json",
+      "bytes": 27663,
+      "sha256": "067cf176f83fe5a9623da306a09cd491d4addf2b213b6991d3becff70c17b453",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "selected-checkpoint",
+      "kind": "code",
+      "description": "Qualify fixed trusted-main accepted products; conserve complete original scopes and project actual affected operands with one invocation budget. Synthetic controls exercise the real ordinary Git catalogue boundary. Retained geographic equivalence and consumer activation remain pending independent review.",
+      "software": "Node 24; existing immutable reader, geometry and ownership codecs",
+      "units": "complete identities, rows, intervals and bytes"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node --check coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs",
+    "node --test test/selected-checkpoint.test.mjs"
+  ]
+}
