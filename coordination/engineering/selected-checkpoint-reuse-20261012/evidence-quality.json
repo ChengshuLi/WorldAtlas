@@ -30,7 +30,7 @@
     {
       "path": "coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json",
       "bytes": 6449,
-      "sha256": "04ebdbbd0c990469eb82fff4eb8a05abbec568d0b21f87cc7d44522f56949da1",
+      "sha256": "15841b620820acf914a715acdd15a26dd61bdad0a6505d61e5f07d5e923696cc",
       "hash_kind": "file-bytes"
     },
     {
@@ -44,13 +44,149 @@
       "bytes": 27663,
       "sha256": "067cf176f83fe5a9623da306a09cd491d4addf2b213b6991d3becff70c17b453",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/admission.json",
+      "bytes": 408,
+      "sha256": "8aa93183187322caf28e94720c14eefe4c935e02a8d5b588293a7f6df2a88a92",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/coverage.json.gz",
+      "bytes": 73569,
+      "sha256": "c6ca9ee5cdfcaee33218eb1799b545352e2ca8c64b6ecfbd5557d9d5195cdb57",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 590617,
+      "uncompressed_sha256": "3cfa03afb3dcb631408f4bd37bbd9de9c3ac87ab9236a8f63ce71457810fa3b3"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/operating.json",
+      "bytes": 2392,
+      "sha256": "58e37f6fee065b93b0795a67269679a009aadfe95e122ad0226cd05972f6f4b7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/probe.mjs",
+      "bytes": 5714,
+      "sha256": "6eca9f28dce172a6531cbb04d9adb884f249499c6cf57380932ff5854fc5f0ca",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/profiles.cpuprofile.gz",
+      "bytes": 91864,
+      "sha256": "0e908e3fb3633b97f80e948e5d1712e681429257645cddd175c654d7a1604be7",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 871507,
+      "uncompressed_sha256": "5be0ba00a9bb0306fd5d79baa26aa543bd03f8252fd1cd474bb47a726cc1c220"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/result.json",
+      "bytes": 97828,
+      "sha256": "3458088ec1b985e0edddc050cf58ef1913eb0c5e855b3ba428bfddd987d814b3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/stderr.log",
+      "bytes": 186381,
+      "sha256": "f499760525c78722f7ec7f756afb18fcbbec81b61b49d982fd928638fe65beac",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/supervisor.py",
+      "bytes": 2569,
+      "sha256": "b9f1f101247c858644ffd5b2b36d1737bcfb4275a15b6c1ffad1c7b2ded33041",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/actual-products.json.gz",
+      "bytes": 8569685,
+      "sha256": "e49599405275c926081ad6a5003231c376e17398a10b95f81e8f4afb7688efac",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 20695395,
+      "uncompressed_sha256": "4473bec9599623134c3e65db87a3c0d79dfe2781c9d8fc9728935590e30e9462"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/admission.json",
+      "bytes": 408,
+      "sha256": "8e1feaa219346f7abb3a4726ffb6f431f35c39f5ea61f4fca05ae5e17e309316",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/coverage.json.gz",
+      "bytes": 73064,
+      "sha256": "e872f21a0a30394c6551e26d7b6fc3e74e79e3de99b5598d4ea24fd0168fbfbf",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 588020,
+      "uncompressed_sha256": "2687dd10ccba58df653abacd4989b4c3637357a3dbc102efb34e09636f2e0343"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/operating.json",
+      "bytes": 2236,
+      "sha256": "6556d0853ce574f1d6c9ba0a844a41ddfd7d15fe346adf48d2a38716b1968bfb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/precomparison-metrics.json",
+      "bytes": 96146,
+      "sha256": "39c239136e08f296aff718fcb2790d587761a4368dcd6ec567a1f205fb6e47f9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/probe.mjs",
+      "bytes": 6403,
+      "sha256": "3e2aa8083dac99a14c57b5321329253e3d3a1c230a88a77dbaa0447385119af6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/profiles.cpuprofile.gz",
+      "bytes": 85341,
+      "sha256": "8478435b9f95e8d5d078220f9168316c8ec247e59bad28f3cb3c411ed8219597",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 866409,
+      "uncompressed_sha256": "56306e372dc18b87c8e683e90acad4c83d977cc915c1b69169fee5af05de89e4"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/result.json",
+      "bytes": 98281,
+      "sha256": "da981ad9eed65242f51f39630dc2d3428355d3180289064b9be2fbd6d7c70bc3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/stdout.log",
+      "bytes": 878,
+      "sha256": "c70f0a54cca4a65c6b7833f444bf7b201f0129c0354e9b7a38ce9ee9ba6f01e8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/supervisor.py",
+      "bytes": 2724,
+      "sha256": "d4a4d3976b1e90bc500fdbdd06cebd428c6d8727c07209fcd59315cf7f88510e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/summary.json",
+      "bytes": 10335,
+      "sha256": "17428677c15791239c534fec5c1184cfb55d4c5cef6c910c82d797dbcfaafc6b",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
     {
       "id": "selected-checkpoint",
       "kind": "code",
-      "description": "Qualify fixed trusted-main accepted products; conserve complete original scopes and project actual affected operands with one invocation budget. Synthetic controls exercise the real ordinary Git catalogue boundary. Retained geographic equivalence and consumer activation remain pending independent review.",
+      "description": "Invocation-scoped trusted accepted checkpoint and exact append-only qualification; genuine retained candidate coordinates, whole affected operands and native base rows reproduce accepted products with zero full selected acquisition. Complete raw successful outputs, failed comparator attempt, profiles and explicit lifecycle evidence limits are retained. Consumer activation and one-load cold bridge remain unfinished.",
       "software": "Node 24; existing immutable reader, geometry and ownership codecs",
       "units": "complete identities, rows, intervals and bytes"
     }

@@ -1,0 +1,260 @@
+{
+  "version": 1,
+  "kind": "shared-selected-checkpoint-retained-equivalence-v1",
+  "executing_code_head": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+  "accepted_reference_head": "a0ca24a30653f8e04baf23e6a788b140fc4b1cc0",
+  "accepted_reference_main": "2f25e80412640f2a34681a7d487737739475c1d2",
+  "original_execution_commit": "8b3d8265309d4f6104cca03d78f72a8f48d0f3d2",
+  "baseline": "9473d184683ee8ff8546300f2313779c3cba1d2b",
+  "candidate": "791576647adc41241ce9b438f1bb0034088eed4e",
+  "equivalence": {
+    "complete_coordinate_rows": 49625,
+    "complete_operand_sha256": "949622e24a0431c707ebc1b9cfaaee21db768bc165aad17ba9e04534b4bb048e",
+    "expected_operand_sha256": "949622e24a0431c707ebc1b9cfaaee21db768bc165aad17ba9e04534b4bb048e",
+    "old_components": 47,
+    "candidate_components": 60,
+    "changed_owners": 12,
+    "required_owners": 54,
+    "changed_native_rows": 42,
+    "native_base_rows_equal_retained_request": true,
+    "shared_pointset_identity": true
+  },
+  "historical_phase_counters": {
+    "derived_baseline": 296375567,
+    "retained_cold_candidate": 299113571,
+    "excluded_from_semantic_equality_only": [
+      "complete_phase_bytes"
+    ]
+  },
+  "function_coverage": {
+    "loadSelection": {
+      "calls": 0,
+      "source": "scripts/check-effective-geographic-regression.mjs"
+    },
+    "readRetainedRegistryAuthority": {
+      "calls": 5,
+      "source": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs"
+    },
+    "currentRebindResult": {
+      "calls": 1,
+      "source": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs"
+    }
+  },
+  "source_body_reads": [
+    {
+      "phase": "qualify_transition",
+      "path": "data/geography/part-5.json",
+      "version": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "bytes": 5226173,
+      "elapsed_ms": 208.72790899999745
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "data/geography/part-9.json",
+      "version": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "bytes": 5729632,
+      "elapsed_ms": 50.84907000000021
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz",
+      "version": "ee684e3145079ff93f68520e3c17837789be5b0c",
+      "bytes": 3353763,
+      "elapsed_ms": 44.40445099999852
+    },
+    {
+      "phase": "project_source_baseline",
+      "path": "data/geography/part-0.json",
+      "version": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "bytes": 8539839,
+      "elapsed_ms": 77.30072199999995
+    },
+    {
+      "phase": "project_source_baseline",
+      "path": "data/geography/part-5.json",
+      "version": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "bytes": 5226173,
+      "elapsed_ms": 105.08698300000106
+    },
+    {
+      "phase": "project_source_baseline",
+      "path": "data/geography/part-9.json",
+      "version": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "bytes": 5729632,
+      "elapsed_ms": 73.22529399999985
+    },
+    {
+      "phase": "project_source_baseline",
+      "path": "data/geography/part-28.json",
+      "version": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "bytes": 6613963,
+      "elapsed_ms": 73.66654500000004
+    },
+    {
+      "phase": "project_source_baseline",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz",
+      "version": "ee684e3145079ff93f68520e3c17837789be5b0c",
+      "bytes": 3353763,
+      "elapsed_ms": 47.7031730000017
+    }
+  ],
+  "complete_world_source_scans": 0,
+  "distinct_containing_source_bodies": 5,
+  "timings_ms": {
+    "qualify_baseline": 8039.308917000001,
+    "qualify_transition": 17328.482915,
+    "project_native": 0.8834630000019388,
+    "project_source_baseline": 1264.0169079999978,
+    "reuse_source_candidate": 26.180200000002515,
+    "admit_comparison_carry": 27.50551500000074,
+    "read_retained_candidate_certificate": 302.0477479999972,
+    "read_retained_complete_operands": 64.76585300000079
+  },
+  "module_total_ms": 26659.788033,
+  "supervised_proof_seconds": 28.510528369995882,
+  "sampled_group_rss_bytes": 529104896,
+  "process_max_rss_bytes": 531333120,
+  "peak_charged_phase_bytes": 707801412,
+  "profile_estimates_ms": {
+    "inclusive": {
+      "readRetainedRegistryAuthority": 7723.899,
+      "authenticateProducerExecution": 2519.131,
+      "qualifyProjectedRebind": 6030.315,
+      "currentRebindResult": 229.034,
+      "deriveCoordinateDelta": 1140.991,
+      "treeRoute": 2244.209
+    },
+    "self": {
+      "spawnSync": 18143.331
+    }
+  },
+  "lifecycle_correction": {
+    "supersedes_fields": [
+      "initial-comparator-failure/operating.json:owned_processes_remaining",
+      "successful-comparison/operating.json:owned_processes_remaining"
+    ],
+    "historical_terminal_group_scan": "not performed; emitted empty arrays do not establish cleanup-at-exit",
+    "later_observation": "2026-10-12T07:51:13Z: executor ps inspection had no visible Node, checkpoint-proof or Git cat-file/ls-tree process other than observation command; this is present visibility only"
+  },
+  "limits": [
+    "Inactive shared-module operand equivalence, not integrated native/continuous predicate execution or production activation.",
+    "One-load cold-candidate bridge remains unimplemented.",
+    "No SOURCE/NATIVE scientific producer was rerun. Exactly five appended authority qualifications ran; old30authorities reused accepted custody.",
+    "Eight containing-source reads over five bodies: three new-target custody plus five complete affected-neighbor bodies; no second-vintage body read.",
+    "Runtime/carry accounting counter complete_phase_bytes is the only certificate equality exclusion; both original historical values are preserved.",
+    "Initial attempt stopped at over-broad historical-counter assertion. Corrected attempt retained complete products before assertions; both records are preserved.",
+    "Profiles are sampled inclusive/self estimates; times include profiling overhead and are not a controlled hosted speedup."
+  ],
+  "files": [
+    {
+      "path": "initial-comparator-failure/admission.json",
+      "bytes": 408,
+      "sha256": "8aa93183187322caf28e94720c14eefe4c935e02a8d5b588293a7f6df2a88a92"
+    },
+    {
+      "path": "initial-comparator-failure/coverage.json.gz",
+      "bytes": 73569,
+      "sha256": "c6ca9ee5cdfcaee33218eb1799b545352e2ca8c64b6ecfbd5557d9d5195cdb57",
+      "decoded_bytes": 590617,
+      "decoded_sha256": "3cfa03afb3dcb631408f4bd37bbd9de9c3ac87ab9236a8f63ce71457810fa3b3"
+    },
+    {
+      "path": "initial-comparator-failure/operating.json",
+      "bytes": 2392,
+      "sha256": "58e37f6fee065b93b0795a67269679a009aadfe95e122ad0226cd05972f6f4b7"
+    },
+    {
+      "path": "initial-comparator-failure/probe.mjs",
+      "bytes": 5714,
+      "sha256": "6eca9f28dce172a6531cbb04d9adb884f249499c6cf57380932ff5854fc5f0ca"
+    },
+    {
+      "path": "initial-comparator-failure/profiles.cpuprofile.gz",
+      "bytes": 91864,
+      "sha256": "0e908e3fb3633b97f80e948e5d1712e681429257645cddd175c654d7a1604be7",
+      "decoded_bytes": 871507,
+      "decoded_sha256": "5be0ba00a9bb0306fd5d79baa26aa543bd03f8252fd1cd474bb47a726cc1c220"
+    },
+    {
+      "path": "initial-comparator-failure/result.json",
+      "bytes": 97828,
+      "sha256": "3458088ec1b985e0edddc050cf58ef1913eb0c5e855b3ba428bfddd987d814b3"
+    },
+    {
+      "path": "initial-comparator-failure/stderr.log",
+      "bytes": 186381,
+      "sha256": "f499760525c78722f7ec7f756afb18fcbbec81b61b49d982fd928638fe65beac"
+    },
+    {
+      "path": "initial-comparator-failure/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "initial-comparator-failure/supervisor.py",
+      "bytes": 2569,
+      "sha256": "b9f1f101247c858644ffd5b2b36d1737bcfb4275a15b6c1ffad1c7b2ded33041"
+    },
+    {
+      "path": "successful-comparison/actual-products.json.gz",
+      "bytes": 8569685,
+      "sha256": "e49599405275c926081ad6a5003231c376e17398a10b95f81e8f4afb7688efac",
+      "decoded_bytes": 20695395,
+      "decoded_sha256": "4473bec9599623134c3e65db87a3c0d79dfe2781c9d8fc9728935590e30e9462"
+    },
+    {
+      "path": "successful-comparison/admission.json",
+      "bytes": 408,
+      "sha256": "8e1feaa219346f7abb3a4726ffb6f431f35c39f5ea61f4fca05ae5e17e309316"
+    },
+    {
+      "path": "successful-comparison/coverage.json.gz",
+      "bytes": 73064,
+      "sha256": "e872f21a0a30394c6551e26d7b6fc3e74e79e3de99b5598d4ea24fd0168fbfbf",
+      "decoded_bytes": 588020,
+      "decoded_sha256": "2687dd10ccba58df653abacd4989b4c3637357a3dbc102efb34e09636f2e0343"
+    },
+    {
+      "path": "successful-comparison/operating.json",
+      "bytes": 2236,
+      "sha256": "6556d0853ce574f1d6c9ba0a844a41ddfd7d15fe346adf48d2a38716b1968bfb"
+    },
+    {
+      "path": "successful-comparison/precomparison-metrics.json",
+      "bytes": 96146,
+      "sha256": "39c239136e08f296aff718fcb2790d587761a4368dcd6ec567a1f205fb6e47f9"
+    },
+    {
+      "path": "successful-comparison/probe.mjs",
+      "bytes": 6403,
+      "sha256": "3e2aa8083dac99a14c57b5321329253e3d3a1c230a88a77dbaa0447385119af6"
+    },
+    {
+      "path": "successful-comparison/profiles.cpuprofile.gz",
+      "bytes": 85341,
+      "sha256": "8478435b9f95e8d5d078220f9168316c8ec247e59bad28f3cb3c411ed8219597",
+      "decoded_bytes": 866409,
+      "decoded_sha256": "56306e372dc18b87c8e683e90acad4c83d977cc915c1b69169fee5af05de89e4"
+    },
+    {
+      "path": "successful-comparison/result.json",
+      "bytes": 98281,
+      "sha256": "da981ad9eed65242f51f39630dc2d3428355d3180289064b9be2fbd6d7c70bc3"
+    },
+    {
+      "path": "successful-comparison/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "successful-comparison/stdout.log",
+      "bytes": 878,
+      "sha256": "c70f0a54cca4a65c6b7833f444bf7b201f0129c0354e9b7a38ce9ee9ba6f01e8"
+    },
+    {
+      "path": "successful-comparison/supervisor.py",
+      "bytes": 2724,
+      "sha256": "d4a4d3976b1e90bc500fdbdd06cebd428c6d8727c07209fcd59315cf7f88510e"
+    }
+  ]
+}

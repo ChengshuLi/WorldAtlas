@@ -1,0 +1,2373 @@
+{
+  "module_head": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+  "kind": "retained-checkpoint-append-equivalence",
+  "limits": {
+    "phase_bytes": 1073741824,
+    "rss_bytes": 1073741824
+  },
+  "timings_ms": {
+    "qualify_baseline": 8039.308917000001,
+    "qualify_transition": 17328.482915,
+    "project_native": 0.8834630000019388,
+    "project_source_baseline": 1264.0169079999978,
+    "reuse_source_candidate": 26.180200000002515,
+    "admit_comparison_carry": 27.50551500000074
+  },
+  "reads": [
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 6449,
+      "elapsed_ms": 16.61605400000002
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 56255,
+      "elapsed_ms": 18.071270999999996
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 144181,
+      "elapsed_ms": 24.220934999999997
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 77142,
+      "elapsed_ms": 16.42648200000002
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "src/ownership-codec.js",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 2948,
+      "elapsed_ms": 14.545997
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "data/ownership-selection.json",
+      "version": "9473d184683ee8ff8546300f2313779c3cba1d2b",
+      "bytes": 1592,
+      "elapsed_ms": 12.042986999999982
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/selection-sidecar.json",
+      "version": "9473d184683ee8ff8546300f2313779c3cba1d2b",
+      "bytes": 3461,
+      "elapsed_ms": 13.254738000000032
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authority-registry.json",
+      "version": "17b80a99f11193b2aa23c85c3d6e84f8183801ce",
+      "bytes": 29339,
+      "elapsed_ms": 13.932054999999991
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/ledger.json",
+      "version": "007fd02906bfcebd96fb5cfb39417f78a3013aa8",
+      "bytes": 531308,
+      "elapsed_ms": 52.12860900000004
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/patch.json",
+      "version": "007fd02906bfcebd96fb5cfb39417f78a3013aa8",
+      "bytes": 10766,
+      "elapsed_ms": 15.516668999999979
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/release-001/envelope.json",
+      "version": "007fd02906bfcebd96fb5cfb39417f78a3013aa8",
+      "bytes": 1422,
+      "elapsed_ms": 17.96821299999999
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/complete/baseline/facts.json",
+      "version": "a0ca24a30653f8e04baf23e6a788b140fc4b1cc0",
+      "bytes": 82759,
+      "elapsed_ms": 16.68044000000009
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/complete/baseline/publication.json",
+      "version": "a0ca24a30653f8e04baf23e6a788b140fc4b1cc0",
+      "bytes": 442,
+      "elapsed_ms": 16.701459999999997
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/complete/baseline/certificate.json.gz",
+      "version": "a0ca24a30653f8e04baf23e6a788b140fc4b1cc0",
+      "bytes": 7515251,
+      "elapsed_ms": 103.21196499999996
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/complete/facts.json",
+      "version": "a0ca24a30653f8e04baf23e6a788b140fc4b1cc0",
+      "bytes": 1594592,
+      "elapsed_ms": 32.42782699999998
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/certificate.json",
+      "version": "3436d678cef0ee6c5456780c357e9ae35bea6617",
+      "bytes": 3124,
+      "elapsed_ms": 29.16878799999995
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/request.json",
+      "version": "6baedae538ae464bc0ecd7bb3d6828977c1d11c6",
+      "bytes": 1509405,
+      "elapsed_ms": 43.13908000000015
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/facts.json",
+      "version": "6baedae538ae464bc0ecd7bb3d6828977c1d11c6",
+      "bytes": 5783,
+      "elapsed_ms": 19.427381000000196
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/publication.json",
+      "version": "6baedae538ae464bc0ecd7bb3d6828977c1d11c6",
+      "bytes": 475,
+      "elapsed_ms": 21.11676699999998
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/operating.json",
+      "version": "145dfeff884a12f89b4257b32d78783e0d478d1b",
+      "bytes": 2149,
+      "elapsed_ms": 21.11787900000013
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/current-001/result.json",
+      "version": "6baedae538ae464bc0ecd7bb3d6828977c1d11c6",
+      "bytes": 2455011,
+      "elapsed_ms": 46.049800000000005
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json",
+      "version": "9473d184683ee8ff8546300f2313779c3cba1d2b",
+      "bytes": 252447,
+      "elapsed_ms": 27.83446099999992
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/baseline-routes.json",
+      "version": "04777d3d7f0aaac6fa76f336e53d3cb2d119e6d8",
+      "bytes": 27657,
+      "elapsed_ms": 19.09083099999998
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/060/authority-binding.json",
+      "version": "4197bd9175ee946c535338d76269544d67d32d0c",
+      "bytes": 8123,
+      "elapsed_ms": 19.01574900000014
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/publication.json",
+      "version": "d85ffcffc3c74e2a85564a281de0ad6561cc1a32",
+      "bytes": 1445,
+      "elapsed_ms": 20.607911999999942
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/060/patch-batch.json",
+      "version": "d85ffcffc3c74e2a85564a281de0ad6561cc1a32",
+      "bytes": 924,
+      "elapsed_ms": 21.113738000000012
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/selected-authority/authority-binding.json",
+      "version": "72405058bdc8332c935470031f0487b4fb4eeb0a",
+      "bytes": 8734,
+      "elapsed_ms": 24.803505999999743
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/publication.json",
+      "version": "0c38864ef3433a097c99fc8fa4c8ed962b8297e0",
+      "bytes": 1441,
+      "elapsed_ms": 23.95155100000011
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/ukraine-original-batch-20261010/native-qualified-002/patch-batch.json",
+      "version": "0c38864ef3433a097c99fc8fa4c8ed962b8297e0",
+      "bytes": 793,
+      "elapsed_ms": 18.8751400000001
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/080/authority-binding.json",
+      "version": "4197bd9175ee946c535338d76269544d67d32d0c",
+      "bytes": 8123,
+      "elapsed_ms": 26.334560999999667
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/publication.json",
+      "version": "d85ffcffc3c74e2a85564a281de0ad6561cc1a32",
+      "bytes": 1445,
+      "elapsed_ms": 20.839215000000422
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/080/patch-batch.json",
+      "version": "d85ffcffc3c74e2a85564a281de0ad6561cc1a32",
+      "bytes": 968,
+      "elapsed_ms": 19.79957000000013
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/059/authority-binding.json",
+      "version": "81b945b9ffbdfa204a2576377b78cb9888f8807b",
+      "bytes": 8127,
+      "elapsed_ms": 19.839668999999958
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/059/publication.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1444,
+      "elapsed_ms": 20.834813000000395
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/059/patch-batch.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 836,
+      "elapsed_ms": 25.87284600000021
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/065/authority-binding.json",
+      "version": "4197bd9175ee946c535338d76269544d67d32d0c",
+      "bytes": 10998,
+      "elapsed_ms": 29.708784999999807
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/publication.json",
+      "version": "706110049de4b5910d9792557d487b66d6d2bfa1",
+      "bytes": 1448,
+      "elapsed_ms": 15.230508999999984
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/065/patch-batch.json",
+      "version": "706110049de4b5910d9792557d487b66d6d2bfa1",
+      "bytes": 2156,
+      "elapsed_ms": 15.725024999999732
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/069/authority-binding.json",
+      "version": "81b945b9ffbdfa204a2576377b78cb9888f8807b",
+      "bytes": 8128,
+      "elapsed_ms": 17.15401800000018
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/069/publication.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1445,
+      "elapsed_ms": 28.738098999999238
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/069/patch-batch.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 924,
+      "elapsed_ms": 13.234282999999778
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/073/authority-binding.json",
+      "version": "81b945b9ffbdfa204a2576377b78cb9888f8807b",
+      "bytes": 8127,
+      "elapsed_ms": 16.93862700000045
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/073/publication.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1444,
+      "elapsed_ms": 19.491170999999667
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/073/patch-batch.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 880,
+      "elapsed_ms": 18.454766000000745
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/074/authority-binding.json",
+      "version": "81b945b9ffbdfa204a2576377b78cb9888f8807b",
+      "bytes": 8132,
+      "elapsed_ms": 20.499525000000176
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/074/publication.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1448,
+      "elapsed_ms": 16.462004999999408
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/074/patch-batch.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1232,
+      "elapsed_ms": 15.861372000000301
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/004/authority-binding.json",
+      "version": "81b945b9ffbdfa204a2576377b78cb9888f8807b",
+      "bytes": 8125,
+      "elapsed_ms": 16.413362999999663
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/004/publication.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1446,
+      "elapsed_ms": 17.879015999999865
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/004/patch-batch.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1276,
+      "elapsed_ms": 20.822024000000056
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/044/authority-binding.json",
+      "version": "81b945b9ffbdfa204a2576377b78cb9888f8807b",
+      "bytes": 8130,
+      "elapsed_ms": 23.161074999999983
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/044/publication.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1446,
+      "elapsed_ms": 22.677449999999226
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/044/patch-batch.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 836,
+      "elapsed_ms": 16.301024999999754
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/063/authority-binding.json",
+      "version": "81b945b9ffbdfa204a2576377b78cb9888f8807b",
+      "bytes": 8126,
+      "elapsed_ms": 21.14412699999957
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/063/publication.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1443,
+      "elapsed_ms": 19.803384999999253
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/063/patch-batch.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 858,
+      "elapsed_ms": 23.9384
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/050/authority-binding.json",
+      "version": "81b945b9ffbdfa204a2576377b78cb9888f8807b",
+      "bytes": 8129,
+      "elapsed_ms": 22.28041100000064
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/050/publication.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1446,
+      "elapsed_ms": 18.29274599999917
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/050/patch-batch.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 968,
+      "elapsed_ms": 21.641381000000365
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/036/authority-binding.json",
+      "version": "81b945b9ffbdfa204a2576377b78cb9888f8807b",
+      "bytes": 8125,
+      "elapsed_ms": 19.06977999999981
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/036/publication.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1446,
+      "elapsed_ms": 21.043297000000166
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/036/patch-batch.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1188,
+      "elapsed_ms": 34.42134400000032
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/062/authority-binding.json",
+      "version": "81b945b9ffbdfa204a2576377b78cb9888f8807b",
+      "bytes": 8128,
+      "elapsed_ms": 32.20121899999958
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/062/publication.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1445,
+      "elapsed_ms": 30.9342859999997
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/062/patch-batch.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 836,
+      "elapsed_ms": 21.980774999999994
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-002/authority-binding.json",
+      "version": "78e4cc0e58a00a42f0b4855de73156871de1f23c",
+      "bytes": 7942,
+      "elapsed_ms": 33.6997709999996
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/publication.json",
+      "version": "7efbb48e220e4cb7a6da11b74ff95e1044d1821b",
+      "bytes": 1441,
+      "elapsed_ms": 18.852176000000327
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-002/patch-batch.json",
+      "version": "7efbb48e220e4cb7a6da11b74ff95e1044d1821b",
+      "bytes": 793,
+      "elapsed_ms": 17.375246999999945
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/alaska-thirteen-source-custody.json",
+      "version": "381d8733e2f105ac16e764c20bb800c40cafea3a",
+      "bytes": 6001,
+      "elapsed_ms": 25.72975299999962
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/publication.json",
+      "version": "ea8614305fbf1488a4ec32aecb7cd96e761635de",
+      "bytes": 1451,
+      "elapsed_ms": 24.494952000000012
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/batch-proposal-v1-run1/patch-batch.json",
+      "version": "ea8614305fbf1488a4ec32aecb7cd96e761635de",
+      "bytes": 3457,
+      "elapsed_ms": 18.204744000000574
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/093/authority-binding.json",
+      "version": "81b945b9ffbdfa204a2576377b78cb9888f8807b",
+      "bytes": 8127,
+      "elapsed_ms": 26.680771000000277
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/093/publication.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1444,
+      "elapsed_ms": 25.61658499999976
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/093/patch-batch.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 836,
+      "elapsed_ms": 21.398255000000063
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-003/authority-binding.json",
+      "version": "78e4cc0e58a00a42f0b4855de73156871de1f23c",
+      "bytes": 7944,
+      "elapsed_ms": 20.23143700000037
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/publication.json",
+      "version": "7efbb48e220e4cb7a6da11b74ff95e1044d1821b",
+      "bytes": 1443,
+      "elapsed_ms": 17.854247999999643
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-003/patch-batch.json",
+      "version": "7efbb48e220e4cb7a6da11b74ff95e1044d1821b",
+      "bytes": 793,
+      "elapsed_ms": 20.19358999999986
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/016/authority-binding.json",
+      "version": "81b945b9ffbdfa204a2576377b78cb9888f8807b",
+      "bytes": 8124,
+      "elapsed_ms": 18.674793000000136
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/016/publication.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1445,
+      "elapsed_ms": 16.109867000000122
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/016/patch-batch.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 836,
+      "elapsed_ms": 20.62993800000004
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/COD/authority-binding.json",
+      "version": "78e4cc0e58a00a42f0b4855de73156871de1f23c",
+      "bytes": 7898,
+      "elapsed_ms": 18.673987000000125
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/publication.json",
+      "version": "89a0bcb0c4c5e03108904724456cf3cde2c2a208",
+      "bytes": 1449,
+      "elapsed_ms": 16.92760200000066
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/native-qualified-001/patch-batch.json",
+      "version": "89a0bcb0c4c5e03108904724456cf3cde2c2a208",
+      "bytes": 1867,
+      "elapsed_ms": 21.00068900000042
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/030/authority-binding.json",
+      "version": "81b945b9ffbdfa204a2576377b78cb9888f8807b",
+      "bytes": 8123,
+      "elapsed_ms": 25.642173000000184
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/030/publication.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1444,
+      "elapsed_ms": 28.657078000000183
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/030/patch-batch.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 836,
+      "elapsed_ms": 17.34193199999936
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/067/authority-binding.json",
+      "version": "81b945b9ffbdfa204a2576377b78cb9888f8807b",
+      "bytes": 8129,
+      "elapsed_ms": 17.546284999999443
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/067/publication.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1446,
+      "elapsed_ms": 21.161925000000338
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/067/patch-batch.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1056,
+      "elapsed_ms": 20.744292999999743
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/084/authority-binding.json",
+      "version": "4197bd9175ee946c535338d76269544d67d32d0c",
+      "bytes": 8125,
+      "elapsed_ms": 20.213564000000588
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/publication.json",
+      "version": "d85ffcffc3c74e2a85564a281de0ad6561cc1a32",
+      "bytes": 1447,
+      "elapsed_ms": 21.853266000000076
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/084/patch-batch.json",
+      "version": "d85ffcffc3c74e2a85564a281de0ad6561cc1a32",
+      "bytes": 1540,
+      "elapsed_ms": 19.072964999999385
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/107/authority-binding.json",
+      "version": "81b945b9ffbdfa204a2576377b78cb9888f8807b",
+      "bytes": 8127,
+      "elapsed_ms": 22.600848000000042
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/107/publication.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1444,
+      "elapsed_ms": 24.171290999999655
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/107/patch-batch.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 924,
+      "elapsed_ms": 17.05139500000041
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/combined-selected/authorities/PHL-001/authority-binding.json",
+      "version": "78e4cc0e58a00a42f0b4855de73156871de1f23c",
+      "bytes": 7944,
+      "elapsed_ms": 17.597893000000113
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/publication.json",
+      "version": "7efbb48e220e4cb7a6da11b74ff95e1044d1821b",
+      "bytes": 1443,
+      "elapsed_ms": 15.228205000000344
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/congo-ago2018-delivery-20261011/phl-native-qualified-001/patch-batch.json",
+      "version": "7efbb48e220e4cb7a6da11b74ff95e1044d1821b",
+      "bytes": 793,
+      "elapsed_ms": 16.0593259999996
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/098/authority-binding.json",
+      "version": "81b945b9ffbdfa204a2576377b78cb9888f8807b",
+      "bytes": 8128,
+      "elapsed_ms": 17.727449999999408
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/098/publication.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1445,
+      "elapsed_ms": 12.608987999999954
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/098/patch-batch.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 924,
+      "elapsed_ms": 16.207330999999613
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/policy-provenance/pilot-add031-source-custody.json",
+      "version": "381d8733e2f105ac16e764c20bb800c40cafea3a",
+      "bytes": 5808,
+      "elapsed_ms": 20.052209999999832
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/publication.json",
+      "version": "ea8614305fbf1488a4ec32aecb7cd96e761635de",
+      "bytes": 1322,
+      "elapsed_ms": 23.021216999999524
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/additive-native-gap-repair-20261008/add031-release-proposal-v3-run1/patch-add031.json",
+      "version": "ea8614305fbf1488a4ec32aecb7cd96e761635de",
+      "bytes": 1072,
+      "elapsed_ms": 19.331629000000248
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/096/authority-binding.json",
+      "version": "81b945b9ffbdfa204a2576377b78cb9888f8807b",
+      "bytes": 8129,
+      "elapsed_ms": 16.118217999999615
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/096/publication.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1446,
+      "elapsed_ms": 19.782360000000153
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/096/patch-batch.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1584,
+      "elapsed_ms": 20.19911299999967
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/048/authority-binding.json",
+      "version": "4197bd9175ee946c535338d76269544d67d32d0c",
+      "bytes": 8124,
+      "elapsed_ms": 20.949644000000262
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/publication.json",
+      "version": "d85ffcffc3c74e2a85564a281de0ad6561cc1a32",
+      "bytes": 1446,
+      "elapsed_ms": 16.644140000000334
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/048/patch-batch.json",
+      "version": "d85ffcffc3c74e2a85564a281de0ad6561cc1a32",
+      "bytes": 1100,
+      "elapsed_ms": 14.94362799999999
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/next-eighteen/023/authority-binding.json",
+      "version": "81b945b9ffbdfa204a2576377b78cb9888f8807b",
+      "bytes": 8123,
+      "elapsed_ms": 16.506019999999808
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/023/publication.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 1444,
+      "elapsed_ms": 18.427465000000666
+    },
+    {
+      "phase": "qualify_baseline",
+      "path": "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/023/patch-batch.json",
+      "version": "52a721df6955f567642f12873101ae4553e79916",
+      "bytes": 836,
+      "elapsed_ms": 20.302762000000257
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "data/ownership-selection.json",
+      "version": "791576647adc41241ce9b438f1bb0034088eed4e",
+      "bytes": 1592,
+      "elapsed_ms": 21.582202000001416
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/release-001/selection-sidecar.json",
+      "version": "791576647adc41241ce9b438f1bb0034088eed4e",
+      "bytes": 3464,
+      "elapsed_ms": 25.39227000000028
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authority-registry.json",
+      "version": "9e7b93f43f8a2dccffc23cb1c9e6cd60613f3b9c",
+      "bytes": 34162,
+      "elapsed_ms": 18.29529100000036
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/assembly-003/ledger.json",
+      "version": "79f89d2c9a47c348d2fa631a21a16b1d35974dde",
+      "bytes": 594927,
+      "elapsed_ms": 43.738687999999456
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/assembly-003/patch.json",
+      "version": "79f89d2c9a47c348d2fa631a21a16b1d35974dde",
+      "bytes": 12594,
+      "elapsed_ms": 26.689118000000235
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/assembly-003/envelope.json",
+      "version": "79f89d2c9a47c348d2fa631a21a16b1d35974dde",
+      "bytes": 1422,
+      "elapsed_ms": 22.29415500000141
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authorities/GRC-003/original-rule-preimage.json",
+      "version": "ea0ebba9927996750ee640fed6db779f0fd5de40",
+      "bytes": 10982,
+      "elapsed_ms": 21.097026999999798
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authorities/GRC-003/authority-binding.json",
+      "version": "ea0ebba9927996750ee640fed6db779f0fd5de40",
+      "bytes": 7942,
+      "elapsed_ms": 18.356155999999828
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/ledger-batch.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 7197,
+      "elapsed_ms": 19.437729999999647
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/facts.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 717960,
+      "elapsed_ms": 23.248779000001377
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/base-native-manifest.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 252447,
+      "elapsed_ms": 25.13975500000015
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-003-native-request-001.json",
+      "version": "91b27e02d1e7068d1a53474ffa25842352f0670a",
+      "bytes": 26506,
+      "elapsed_ms": 25.870406000000003
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/source/facts.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 708026,
+      "elapsed_ms": 24.039615000001504
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-003-source-request-001.json",
+      "version": "1af6adfec2b6ea2f6ab2c58211ca09ac68b086a9",
+      "bytes": 16354,
+      "elapsed_ms": 19.32523200000105
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/source/facts.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 708026,
+      "elapsed_ms": 29.806155000000217
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/source/publication.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 349,
+      "elapsed_ms": 19.136317000000417
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/source/inventory.jsonl.gz",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 2264,
+      "elapsed_ms": 19.49576100000013
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 144181,
+      "elapsed_ms": 19.256129999999757
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 193557,
+      "elapsed_ms": 17.444156999999905
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/source/publication.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 349,
+      "elapsed_ms": 22.51895499999955
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/source/inventory.jsonl.gz",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 2264,
+      "elapsed_ms": 18.54994599999918
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-003-source-operating-001.json",
+      "version": "45f4711d168999f3a8131c06d462726397e6e83f",
+      "bytes": 16083,
+      "elapsed_ms": 19.75858700000026
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/publication.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 1449,
+      "elapsed_ms": 31.51510099999905
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/inventory.jsonl.gz",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 510,
+      "elapsed_ms": 27.724347000001217
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-003-native-operating-001.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 16078,
+      "elapsed_ms": 29.473791000000347
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/base-native-manifest.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 252447,
+      "elapsed_ms": 33.86707100000058
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/ledger-batch.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 7197,
+      "elapsed_ms": 26.182253999999375
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/patch-batch.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 1010,
+      "elapsed_ms": 30.810739000000467
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/features.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 15626,
+      "elapsed_ms": 25.872628999999506
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/owners-batch.json.gz",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 2663523,
+      "elapsed_ms": 81.36115099999915
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/release-envelope.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 1663,
+      "elapsed_ms": 33.68821500000013
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/owner-window.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 158060,
+      "elapsed_ms": 36.4027700000006
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-003/native/virtual-owner-window.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 44773,
+      "elapsed_ms": 39.93401300000005
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authorities/GRC-002/original-rule-preimage.json",
+      "version": "ea0ebba9927996750ee640fed6db779f0fd5de40",
+      "bytes": 10982,
+      "elapsed_ms": 26.899360000001252
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authorities/GRC-002/authority-binding.json",
+      "version": "ea0ebba9927996750ee640fed6db779f0fd5de40",
+      "bytes": 7942,
+      "elapsed_ms": 45.23103100000117
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/ledger-batch.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 7944,
+      "elapsed_ms": 17.718855999999505
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/facts.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 714986,
+      "elapsed_ms": 31.577432000000044
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/base-native-manifest.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 252447,
+      "elapsed_ms": 20.821105999999418
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-002-native-request-001.json",
+      "version": "91b27e02d1e7068d1a53474ffa25842352f0670a",
+      "bytes": 23071,
+      "elapsed_ms": 23.419287000000622
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/source/facts.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 708026,
+      "elapsed_ms": 24.875090999999884
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-002-source-request-001.json",
+      "version": "1af6adfec2b6ea2f6ab2c58211ca09ac68b086a9",
+      "bytes": 16354,
+      "elapsed_ms": 21.507815999999366
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/source/facts.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 708026,
+      "elapsed_ms": 23.05097999999998
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/source/publication.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 349,
+      "elapsed_ms": 27.541674999998577
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/source/inventory.jsonl.gz",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 2268,
+      "elapsed_ms": 18.493351999999504
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 144181,
+      "elapsed_ms": 22.39987800000017
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 193557,
+      "elapsed_ms": 23.37628399999994
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/source/publication.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 349,
+      "elapsed_ms": 37.96029499999895
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/source/inventory.jsonl.gz",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 2268,
+      "elapsed_ms": 32.063460999999734
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-002-source-operating-001.json",
+      "version": "45f4711d168999f3a8131c06d462726397e6e83f",
+      "bytes": 16082,
+      "elapsed_ms": 25.904546999998274
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/publication.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 1449,
+      "elapsed_ms": 25.479369999999108
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/inventory.jsonl.gz",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 478,
+      "elapsed_ms": 22.5475320000005
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-002-native-operating-001.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 16077,
+      "elapsed_ms": 19.358602000000246
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/base-native-manifest.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 252447,
+      "elapsed_ms": 24.447464999999283
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/ledger-batch.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 7944,
+      "elapsed_ms": 18.936455999999453
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/patch-batch.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 1100,
+      "elapsed_ms": 23.017295999999988
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/features.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 16333,
+      "elapsed_ms": 21.074702999998408
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/owners-batch.json.gz",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 2663523,
+      "elapsed_ms": 46.23360700000012
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/release-envelope.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 1663,
+      "elapsed_ms": 22.265407999999297
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/owner-window.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 149390,
+      "elapsed_ms": 29.938647999999375
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-002/native/virtual-owner-window.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 61696,
+      "elapsed_ms": 28.96153400000003
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authorities/GRC-001/original-rule-preimage.json",
+      "version": "ea0ebba9927996750ee640fed6db779f0fd5de40",
+      "bytes": 9578,
+      "elapsed_ms": 37.78783900000053
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authorities/GRC-001/authority-binding.json",
+      "version": "ea0ebba9927996750ee640fed6db779f0fd5de40",
+      "bytes": 7941,
+      "elapsed_ms": 17.800828000001275
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/ledger-batch.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 3233,
+      "elapsed_ms": 19.679989000000205
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/facts.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 713070,
+      "elapsed_ms": 25.479550000000017
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/base-native-manifest.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 252447,
+      "elapsed_ms": 21.51839199999995
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-001-native-request-001.json",
+      "version": "91b27e02d1e7068d1a53474ffa25842352f0670a",
+      "bytes": 21719,
+      "elapsed_ms": 18.38683299999866
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/source/facts.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 705836,
+      "elapsed_ms": 28.308038999999553
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-001-source-request-001.json",
+      "version": "1af6adfec2b6ea2f6ab2c58211ca09ac68b086a9",
+      "bytes": 14660,
+      "elapsed_ms": 17.92345899999964
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/source/facts.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 705836,
+      "elapsed_ms": 28.877290000000357
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/source/publication.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 349,
+      "elapsed_ms": 19.490077999998903
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/source/inventory.jsonl.gz",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 1584,
+      "elapsed_ms": 20.534043999999994
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 144181,
+      "elapsed_ms": 15.328387999999904
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 193557,
+      "elapsed_ms": 16.85316799999964
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/source/publication.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 349,
+      "elapsed_ms": 15.081044999998994
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/source/inventory.jsonl.gz",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 1584,
+      "elapsed_ms": 17.15983899999992
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-001-source-operating-001.json",
+      "version": "45f4711d168999f3a8131c06d462726397e6e83f",
+      "bytes": 16084,
+      "elapsed_ms": 18.274681999999302
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/publication.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 1448,
+      "elapsed_ms": 17.684753999999884
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/inventory.jsonl.gz",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 372,
+      "elapsed_ms": 23.526561999999103
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-001-native-operating-001.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 16078,
+      "elapsed_ms": 25.783552000000782
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/base-native-manifest.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 252447,
+      "elapsed_ms": 19.954518000000462
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/ledger-batch.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 3233,
+      "elapsed_ms": 17.627900999999838
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/patch-batch.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 1320,
+      "elapsed_ms": 20.628786000001128
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/features.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 7100,
+      "elapsed_ms": 27.47772900000018
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/owners-batch.json.gz",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 2663523,
+      "elapsed_ms": 36.8586720000003
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/release-envelope.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 1663,
+      "elapsed_ms": 42.837298000000374
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/owner-window.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 164834,
+      "elapsed_ms": 29.683286999999837
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/grc-001/native/virtual-owner-window.json",
+      "version": "5735ce1e6d91fba7d8b3b8e1efcf09a0f7ef4dc4",
+      "bytes": 115857,
+      "elapsed_ms": 28.80162299999938
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authorities/COD-001/original-rule-preimage.json",
+      "version": "b23e8a2c8c9bdbee9e4fb76b0aeabba553787a8b",
+      "bytes": 10011,
+      "elapsed_ms": 25.00158999999985
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authorities/COD-001/authority-binding.json",
+      "version": "b23e8a2c8c9bdbee9e4fb76b0aeabba553787a8b",
+      "bytes": 7937,
+      "elapsed_ms": 18.723053000001528
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/native/ledger-batch.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 11873,
+      "elapsed_ms": 17.31670199999826
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/native/facts.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 715819,
+      "elapsed_ms": 31.287107000000105
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/native/base-native-manifest.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 252447,
+      "elapsed_ms": 21.597685000000638
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/cod-001-native-request-001.json",
+      "version": "9ca69e7ef5bb7ab27089abd6903f53087934ee5b",
+      "bytes": 25738,
+      "elapsed_ms": 23.748982999999498
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/source/facts.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 705944,
+      "elapsed_ms": 33.82812299999932
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/cod-001-source-request-001.json",
+      "version": "899f07ec110e4590d69d90d5cb0490afd9198d83",
+      "bytes": 15232,
+      "elapsed_ms": 24.612199999999575
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/source/facts.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 705944,
+      "elapsed_ms": 31.979045000000042
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/source/publication.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 349,
+      "elapsed_ms": 31.139853000000585
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/source/inventory.jsonl.gz",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 1617,
+      "elapsed_ms": 28.134105000001
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 144181,
+      "elapsed_ms": 25.701078999998572
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 193557,
+      "elapsed_ms": 25.078770000000077
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/source/publication.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 349,
+      "elapsed_ms": 27.625244000000748
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/source/inventory.jsonl.gz",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 1617,
+      "elapsed_ms": 28.184650000001056
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/cod-001-source-operating-001.json",
+      "version": "7786926dcc6fcab154890f75e8dbb34486161722",
+      "bytes": 16077,
+      "elapsed_ms": 23.493177000000287
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/native/publication.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 1443,
+      "elapsed_ms": 18.412767000001622
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/native/inventory.jsonl.gz",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 372,
+      "elapsed_ms": 23.37124600000061
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/cod-001-native-operating-001.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 16078,
+      "elapsed_ms": 21.16235299999971
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/native/base-native-manifest.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 252447,
+      "elapsed_ms": 27.589641000000483
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/native/ledger-batch.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 11873,
+      "elapsed_ms": 16.2108189999999
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/native/patch-batch.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 793,
+      "elapsed_ms": 19.08671299999878
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/native/features.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 16608,
+      "elapsed_ms": 18.676158000000214
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/native/owners-batch.json.gz",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 2663523,
+      "elapsed_ms": 33.33475900000121
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/native/release-envelope.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 1663,
+      "elapsed_ms": 19.539065999999366
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/native/owner-window.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 44754,
+      "elapsed_ms": 19.755096000000776
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/native/virtual-owner-window.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 3,
+      "elapsed_ms": 19.23055199999908
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authorities/COD-002/original-rule-preimage.json",
+      "version": "b23e8a2c8c9bdbee9e4fb76b0aeabba553787a8b",
+      "bytes": 9626,
+      "elapsed_ms": 23.703198999999586
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authorities/COD-002/authority-binding.json",
+      "version": "b23e8a2c8c9bdbee9e4fb76b0aeabba553787a8b",
+      "bytes": 7940,
+      "elapsed_ms": 22.800202000000354
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/native/ledger-batch.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 8884,
+      "elapsed_ms": 20.53956300000027
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/native/facts.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 712294,
+      "elapsed_ms": 27.336445000000822
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/native/base-native-manifest.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 252447,
+      "elapsed_ms": 26.49256400000013
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/cod-002-native-request-001.json",
+      "version": "9ca69e7ef5bb7ab27089abd6903f53087934ee5b",
+      "bytes": 21842,
+      "elapsed_ms": 21.257258999999976
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/source/facts.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 705384,
+      "elapsed_ms": 31.89747299999908
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/cod-002-source-request-001.json",
+      "version": "899f07ec110e4590d69d90d5cb0490afd9198d83",
+      "bytes": 14722,
+      "elapsed_ms": 21.47494700000061
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/source/facts.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 705384,
+      "elapsed_ms": 29.725524999999834
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/source/publication.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 349,
+      "elapsed_ms": 33.409520000001066
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/source/inventory.jsonl.gz",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 1234,
+      "elapsed_ms": 22.912884000001213
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 144181,
+      "elapsed_ms": 19.075371999999334
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 193557,
+      "elapsed_ms": 25.369485999999597
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/source/publication.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 349,
+      "elapsed_ms": 20.129477000002225
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/source/inventory.jsonl.gz",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 1234,
+      "elapsed_ms": 21.57404999999926
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/cod-002-source-operating-001.json",
+      "version": "7786926dcc6fcab154890f75e8dbb34486161722",
+      "bytes": 16077,
+      "elapsed_ms": 19.240160999997897
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/native/publication.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 1447,
+      "elapsed_ms": 22.46839800000089
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/native/inventory.jsonl.gz",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 304,
+      "elapsed_ms": 33.876720000000205
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/cod-002-native-operating-001.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 16077,
+      "elapsed_ms": 24.168744999999035
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/native/base-native-manifest.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 252447,
+      "elapsed_ms": 28.341152000000875
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/native/ledger-batch.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 8884,
+      "elapsed_ms": 36.32948000000033
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/native/patch-batch.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 1566,
+      "elapsed_ms": 106.84737400000085
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/native/features.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 10316,
+      "elapsed_ms": 29.102319000001444
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/native/owners-batch.json.gz",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 2663523,
+      "elapsed_ms": 35.36554799999794
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/native/release-envelope.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 1663,
+      "elapsed_ms": 22.66607799999838
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/native/owner-window.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 95740,
+      "elapsed_ms": 19.628177999999025
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/native/virtual-owner-window.json",
+      "version": "f197a9b0b439d4d9bc62a0fe64027c0e8ffc1f5a",
+      "bytes": 78327,
+      "elapsed_ms": 20.762527999999293
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/current-003/certificate.json",
+      "version": "ea64d1041d7378d1684fe4e25a70b8ce18059a6b",
+      "bytes": 3124,
+      "elapsed_ms": 18.406286999997974
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/current-003/request.json",
+      "version": "fe49b28b648db2c62deb24025df7ed82b9ab4c4c",
+      "bytes": 1877418,
+      "elapsed_ms": 51.67816700000185
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/current-003/facts.json",
+      "version": "fe49b28b648db2c62deb24025df7ed82b9ab4c4c",
+      "bytes": 6647,
+      "elapsed_ms": 22.009992999999668
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/current-003/publication.json",
+      "version": "fe49b28b648db2c62deb24025df7ed82b9ab4c4c",
+      "bytes": 475,
+      "elapsed_ms": 21.71902499999851
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/current-003/operating.json",
+      "version": "5b762164f0ce906d2b012c9c16d6e1081b700834",
+      "bytes": 2148,
+      "elapsed_ms": 34.49934399999984
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/current-003/result.json",
+      "version": "fe49b28b648db2c62deb24025df7ed82b9ab4c4c",
+      "bytes": 3200420,
+      "elapsed_ms": 45.50184699999954
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 2279,
+      "elapsed_ms": 22.069671000001108
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 242,
+      "elapsed_ms": 22.516295000001264
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind.mjs",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 317,
+      "elapsed_ms": 21.14292900000146
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 144181,
+      "elapsed_ms": 29.6108490000006
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "src/effective-footprint.js",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 45330,
+      "elapsed_ms": 21.11914799999795
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 77142,
+      "elapsed_ms": 22.274955999997474
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "src/ownership-codec.js",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 2948,
+      "elapsed_ms": 24.811827000001358
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "package.json",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 1417,
+      "elapsed_ms": 16.201410000001488
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "src/native-runtime.js",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 3497,
+      "elapsed_ms": 24.896155999998882
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "scripts/native-ownership/compile-native-ownership.mjs",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 4472,
+      "elapsed_ms": 15.886747000000469
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "src/native-grid.js",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 6408,
+      "elapsed_ms": 22.438435000000027
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/package.json",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 2799,
+      "elapsed_ms": 18.74477499999921
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/sha2.js",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 16773,
+      "elapsed_ms": 19.25680099999954
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_md.js",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 5615,
+      "elapsed_ms": 16.59560000000056
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_u64.js",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 3081,
+      "elapsed_ms": 75.62401800000225
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/utils.js",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 9356,
+      "elapsed_ms": 22.530009999998583
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "scripts/audit-grid-intervals.mjs",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 6777,
+      "elapsed_ms": 31.431400000001304
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 17977,
+      "elapsed_ms": 22.361770999999862
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 8823,
+      "elapsed_ms": 27.987671999999293
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 25823,
+      "elapsed_ms": 26.631521999999677
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 22240,
+      "elapsed_ms": 18.495279000002483
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-composition-20261009/execution-contract.py",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 4874,
+      "elapsed_ms": 21.173650000000634
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-composition-20261009/owned-group-original.py",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 2201,
+      "elapsed_ms": 22.958042000002024
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-composition-20261009/owned-child-termination-original.py",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 2596,
+      "elapsed_ms": 32.05821199999991
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-composition-20261009/mac-execution-runtime-original.json",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 22001,
+      "elapsed_ms": 17.264719999999215
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-composition-20261009/execution-code-paths.json",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 2197,
+      "elapsed_ms": 16.86423400000058
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "scripts/local-workspace.mjs",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 13365,
+      "elapsed_ms": 29.06311099999948
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "scripts/worker-identity.mjs",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 548,
+      "elapsed_ms": 25.371218000000226
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 2279,
+      "elapsed_ms": 21.573519000001397
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 242,
+      "elapsed_ms": 21.32043799999883
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind.mjs",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 317,
+      "elapsed_ms": 20.893198999998276
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 142012,
+      "elapsed_ms": 26.37618199999997
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "src/effective-footprint.js",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 45330,
+      "elapsed_ms": 25.999218000000837
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 75074,
+      "elapsed_ms": 23.189760999997816
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "src/ownership-codec.js",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 2948,
+      "elapsed_ms": 21.67493899999681
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "package.json",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 1417,
+      "elapsed_ms": 23.48870999999781
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "src/native-runtime.js",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 3497,
+      "elapsed_ms": 26.16304499999751
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "scripts/native-ownership/compile-native-ownership.mjs",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 4472,
+      "elapsed_ms": 24.155752999999095
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "src/native-grid.js",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 6408,
+      "elapsed_ms": 27.040979999997944
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/package.json",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 2799,
+      "elapsed_ms": 19.501690000000963
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/sha2.js",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 16773,
+      "elapsed_ms": 20.33936999999787
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_md.js",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 5615,
+      "elapsed_ms": 24.465237000000343
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_u64.js",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 3081,
+      "elapsed_ms": 21.122317999997904
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/utils.js",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 9356,
+      "elapsed_ms": 22.208482999998523
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "scripts/audit-grid-intervals.mjs",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 6777,
+      "elapsed_ms": 28.28224400000181
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 18526,
+      "elapsed_ms": 17.103455000000395
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 8642,
+      "elapsed_ms": 16.563608000000386
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 23671,
+      "elapsed_ms": 21.26101000000199
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 21045,
+      "elapsed_ms": 20.325314000001526
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-composition-20261009/execution-contract.py",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 3169,
+      "elapsed_ms": 18.085089000000153
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-composition-20261009/owned-group-original.py",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 2201,
+      "elapsed_ms": 20.743850999999268
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-composition-20261009/owned-child-termination-original.py",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 2596,
+      "elapsed_ms": 19.743134000000282
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-composition-20261009/mac-execution-runtime-original.json",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 22001,
+      "elapsed_ms": 20.352900000001682
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/additive-native-composition-20261009/execution-code-paths.json",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 2197,
+      "elapsed_ms": 27.224952999997186
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "scripts/local-workspace.mjs",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 13365,
+      "elapsed_ms": 21.37913000000117
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "scripts/worker-identity.mjs",
+      "version": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "bytes": 548,
+      "elapsed_ms": 21.87679500000013
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 144181,
+      "elapsed_ms": 31.84440899999754
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+      "version": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "bytes": 193557,
+      "elapsed_ms": 20.937729000001127
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/current-003/code-source.json",
+      "version": "fe49b28b648db2c62deb24025df7ed82b9ab4c4c",
+      "bytes": 51231,
+      "elapsed_ms": 22.814298000001145
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/current-003/terminal.json",
+      "version": "fe49b28b648db2c62deb24025df7ed82b9ab4c4c",
+      "bytes": 1427,
+      "elapsed_ms": 22.174417999998695
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/current-003/stderr.log",
+      "version": "fe49b28b648db2c62deb24025df7ed82b9ab4c4c",
+      "bytes": 1373,
+      "elapsed_ms": 23.2510829999992
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/current-003/stdout.json",
+      "version": "fe49b28b648db2c62deb24025df7ed82b9ab4c4c",
+      "bytes": 376,
+      "elapsed_ms": 25.282467000000906
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/current-003/issued-plan.json",
+      "version": "fe49b28b648db2c62deb24025df7ed82b9ab4c4c",
+      "bytes": 14002,
+      "elapsed_ms": 19.54735299999811
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "data/geography/part-5.json",
+      "version": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "bytes": 5226173,
+      "elapsed_ms": 208.72790899999745
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "data/geography/part-9.json",
+      "version": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "bytes": 5729632,
+      "elapsed_ms": 50.84907000000021
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz",
+      "version": "ee684e3145079ff93f68520e3c17837789be5b0c",
+      "bytes": 3353763,
+      "elapsed_ms": 44.40445099999852
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/index.json",
+      "version": "791576647adc41241ce9b438f1bb0034088eed4e",
+      "bytes": 21330,
+      "elapsed_ms": 23.303178999998636
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-00/part-000.bin.gz",
+      "version": "791576647adc41241ce9b438f1bb0034088eed4e",
+      "bytes": 16773351,
+      "elapsed_ms": 185.66507700000147
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-00/part-000.bin.gz",
+      "version": "791576647adc41241ce9b438f1bb0034088eed4e",
+      "bytes": 16773351,
+      "elapsed_ms": 183.14443500000198
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-00/part-000.bin.gz",
+      "version": "791576647adc41241ce9b438f1bb0034088eed4e",
+      "bytes": 16773351,
+      "elapsed_ms": 140.90822599999956
+    },
+    {
+      "phase": "qualify_transition",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/assets-bank/run-1/chunk-01/part-000.bin.gz",
+      "version": "791576647adc41241ce9b438f1bb0034088eed4e",
+      "bytes": 16775548,
+      "elapsed_ms": 97.07536999999866
+    },
+    {
+      "phase": "project_source_baseline",
+      "path": "data/geography/part-0.json",
+      "version": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "bytes": 8539839,
+      "elapsed_ms": 77.30072199999995
+    },
+    {
+      "phase": "project_source_baseline",
+      "path": "data/geography/part-5.json",
+      "version": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "bytes": 5226173,
+      "elapsed_ms": 105.08698300000106
+    },
+    {
+      "phase": "project_source_baseline",
+      "path": "data/geography/part-9.json",
+      "version": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "bytes": 5729632,
+      "elapsed_ms": 73.22529399999985
+    },
+    {
+      "phase": "project_source_baseline",
+      "path": "data/geography/part-28.json",
+      "version": "ffa32416fd946ac89da621d02b554ca27733e688",
+      "bytes": 6613963,
+      "elapsed_ms": 73.66654500000004
+    },
+    {
+      "phase": "project_source_baseline",
+      "path": "coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz",
+      "version": "ee684e3145079ff93f68520e3c17837789be5b0c",
+      "bytes": 3353763,
+      "elapsed_ms": 47.7031730000017
+    }
+  ],
+  "peak_phase_bytes": 680134743,
+  "module_total_ms": 26659.788033,
+  "module_complete_phase_bytes": 355564283
+}
