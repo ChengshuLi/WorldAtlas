@@ -24,8 +24,8 @@
     },
     {
       "command": "node --test test/trusted-workflow-checkouts.test.mjs test/integration-profile.test.mjs",
-      "tests": 29,
-      "passed": 29,
+      "tests": 31,
+      "passed": 31,
       "skipped": 0
     }
   ],
@@ -63,5 +63,6 @@
     },
     "other_gates": "profile, evidence, scope, geography, regression 1 and regression 2 passed",
     "output_retention": "Not reached after regression failure; no eligible artifact or size measured"
-  }
+  },
+  "rebased_on": "800dede9da634f4f7e95c6365fd31a7086f17f9b"
 }

@@ -6,12 +6,12 @@
   "subject_ids": [],
   "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "baseline": {
-    "commit": "cf11a9c434e798a2099ea406b29e842f27fe05ea",
+    "commit": "800dede9da634f4f7e95c6365fd31a7086f17f9b",
     "files": [
       {
         "path": ".github/workflows/merge-integration-checks.yml",
-        "bytes": 51269,
-        "sha256": "cc46d314b93d641387257d734d92c0d3e173f2474201c35638b02c2f667ccf21",
+        "bytes": 53615,
+        "sha256": "b8f4c74903b3a31f0326b10a2f3e17b56bd75cec3d349969d47e76063699fbe2",
         "hash_kind": "file-bytes"
       },
       {
@@ -33,6 +33,12 @@
         "hash_kind": "file-bytes"
       },
       {
+        "path": "test/full-regression-shards.test.mjs",
+        "bytes": 3663,
+        "sha256": "bd526c9523ee48f8602c8862988b4384fdaf6a098ffa727f711c02a903592e4e",
+        "hash_kind": "file-bytes"
+      },
+      {
         "path": "test/integration-profile-restoration.test.mjs",
         "bytes": 13298,
         "sha256": "87316b8a99c9b4ea68002ba27aea717011ee4aac7e87daecdfdc7287c18c39f8",
@@ -40,8 +46,8 @@
       },
       {
         "path": "test/trusted-workflow-checkouts.test.mjs",
-        "bytes": 40558,
-        "sha256": "db765afaee775c1a3a47def0e19853c2f352abbc8922d788636f578425f3bc16",
+        "bytes": 43115,
+        "sha256": "19860fe7b748a3a9f55d9c7dd4a5707585f208a04549dee6ec6f0413d08628f0",
         "hash_kind": "file-bytes"
       }
     ],
@@ -53,8 +59,8 @@
   "outputs": [
     {
       "path": ".github/workflows/merge-integration-checks.yml",
-      "bytes": 56840,
-      "sha256": "43056c7fa2cddab8df26f79c2d16e2f9abf044014dd5490357127150617bba92",
+      "bytes": 59186,
+      "sha256": "12f87e40f83b104ee68a5586dafbbdbe82857a534e4e65f26bb7cfce64ee2667",
       "hash_kind": "file-bytes"
     },
     {
@@ -65,14 +71,14 @@
     },
     {
       "path": "coordination/engineering/selected-package-delta-20261012/README.md",
-      "bytes": 6611,
-      "sha256": "063b4ed10b598caeb0a997da0cba013bfb16c5569125f8edb6d09e8e135b5f34",
+      "bytes": 7989,
+      "sha256": "ca043487379c004aba43044e8bd789bc8226f5afb097ee341efd9cea1c229d24",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/selected-package-delta-20261012/validation.json",
-      "bytes": 2729,
-      "sha256": "d89db9a7c5c14be5eef328bacdba148cfbcfec2fd744a4ccc58147bc8cb57192",
+      "bytes": 3759,
+      "sha256": "501997918faae4c4ce43ba7418069e735d3a104b5849a86461e7642536d126e1",
       "hash_kind": "file-bytes"
     },
     {
@@ -83,8 +89,8 @@
     },
     {
       "path": "scripts/compare-selected-package-output.mjs",
-      "bytes": 2599,
-      "sha256": "6d0d12c672993ebef078e724157ba15956e45fe4c4f3fe414678eb6570214c2e",
+      "bytes": 9288,
+      "sha256": "23a15bf753c4bf27be2fa63eef198aa7cc5c2a2ad9e412e8b5e26fb1224b1a9e",
       "hash_kind": "file-bytes"
     },
     {
@@ -107,8 +113,8 @@
     },
     {
       "path": "scripts/selected-package-bootstrap.py",
-      "bytes": 7934,
-      "sha256": "61dab06a0305cee889d2f7a183a3a04fd85d9a468982685538dcad23e544d03b",
+      "bytes": 8104,
+      "sha256": "d2aad8c89250c8c5502443f65f03ab631cfdb0a5443bf6d9e8ac63d3cffc0b59",
       "hash_kind": "file-bytes"
     },
     {
@@ -124,6 +130,12 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "test/full-regression-shards.test.mjs",
+      "bytes": 4056,
+      "sha256": "77dca02b0eaedf6e81851951c3fae07a9a19eed16a18507d260aecd8c237a262",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "test/integration-profile-restoration.test.mjs",
       "bytes": 15137,
       "sha256": "c87e7f045487102a9ce470a0f9df044a2f11c99ff5b5a709d6314534a01cc6b8",
@@ -131,8 +143,8 @@
     },
     {
       "path": "test/package-output-artifact.test.mjs",
-      "bytes": 13018,
-      "sha256": "6975657c0935854d141f27277faae75160eb4a0a69a3d91e7e02e464d9214503",
+      "bytes": 18613,
+      "sha256": "c1d3445e9782595e03f1587aa8caa8d49253f3d7c6715e3711ef462e19f5e211",
       "hash_kind": "file-bytes"
     },
     {
@@ -143,8 +155,8 @@
     },
     {
       "path": "test/selected-package-bootstrap-controls.py",
-      "bytes": 20642,
-      "sha256": "25238a4f6b0f1479e2f3477a70f72b89ac88fda3fe324a6820143d22244555e4",
+      "bytes": 20768,
+      "sha256": "7c7ad3c69730c42d86860ccfa0628d0f15cf615969eeababc94a60a6fd95e1b0",
       "hash_kind": "file-bytes"
     },
     {
@@ -155,8 +167,8 @@
     },
     {
       "path": "test/trusted-workflow-checkouts.test.mjs",
-      "bytes": 42051,
-      "sha256": "6558cd857e3c1abcc3fedce0258771ad9a8290fa4f9bf49c72ad5a189e87d9e9",
+      "bytes": 44607,
+      "sha256": "fffe8301782aaf98ff4d250671f08a6c040fe4f0054af7398cd93cf7f0303e91",
       "hash_kind": "file-bytes"
     }
   ],
@@ -178,7 +190,7 @@
     "geographic_approval": "not-requested"
   },
   "commands": [
-    "node --test test/package-output-artifact.test.mjs test/selected-package-assembly.test.mjs test/selected-package-bootstrap.test.mjs test/integration-profile-restoration.test.mjs",
+    "node --test test/package-output-artifact.test.mjs test/selected-package-assembly.test.mjs test/selected-package-bootstrap.test.mjs test/integration-profile-restoration.test.mjs test/full-regression-shards.test.mjs",
     "node --test test/package-build.test.mjs",
     "node --test test/trusted-workflow-checkouts.test.mjs test/integration-profile.test.mjs",
     "git diff --check"
@@ -187,7 +199,7 @@
     {
       "path": ".github/workflows/merge-integration-checks.yml",
       "status": "modified",
-      "original_sha256": "cc46d314b93d641387257d734d92c0d3e173f2474201c35638b02c2f667ccf21"
+      "original_sha256": "b8f4c74903b3a31f0326b10a2f3e17b56bd75cec3d349969d47e76063699fbe2"
     },
     {
       "path": "coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs",
@@ -237,6 +249,11 @@
       "original_sha256": "dd4b2f73a8cb62918c9b65a34589e395ee8d27440c5c7b8fb765fb18eac374b6"
     },
     {
+      "path": "test/full-regression-shards.test.mjs",
+      "status": "modified",
+      "original_sha256": "bd526c9523ee48f8602c8862988b4384fdaf6a098ffa727f711c02a903592e4e"
+    },
+    {
       "path": "test/integration-profile-restoration.test.mjs",
       "status": "modified",
       "original_sha256": "87316b8a99c9b4ea68002ba27aea717011ee4aac7e87daecdfdc7287c18c39f8"
@@ -260,7 +277,7 @@
     {
       "path": "test/trusted-workflow-checkouts.test.mjs",
       "status": "modified",
-      "original_sha256": "db765afaee775c1a3a47def0e19853c2f352abbc8922d788636f578425f3bc16"
+      "original_sha256": "19860fe7b748a3a9f55d9c7dd4a5707585f208a04549dee6ec6f0413d08628f0"
     },
     {
       "path": "coordination/engineering/selected-package-delta-20261012/evidence-quality.json",
