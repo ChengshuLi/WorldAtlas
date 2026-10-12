@@ -1645,7 +1645,9 @@ function managedAutomaticFixture(t) {
   const run = (root, ...args) => execFileSync('git', ['-C', root, ...args], {encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'],
     env: {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null',
       GIT_AUTHOR_NAME: 'Fixture', GIT_AUTHOR_EMAIL: 'fixture@example.invalid', GIT_COMMITTER_NAME: 'Fixture', GIT_COMMITTER_EMAIL: 'fixture@example.invalid'}}).trim();
-  run(seed, 'init', '-q', '-b', 'main'); fs.writeFileSync(path.join(seed, 'original'), 'untouched\n');
+  run(seed, 'init', '-q', '-b', 'main');
+  run(seed, 'config', 'user.name', 'Fixture'); run(seed, 'config', 'user.email', 'fixture@example.invalid');
+  fs.writeFileSync(path.join(seed, 'original'), 'untouched\n');
   run(seed, 'add', 'original'); run(seed, 'commit', '-qm', 'baseline');
   run(seed, 'remote', 'add', 'origin', seed);
   const worker = process.env.CODEX_THREAD_ID ?? 'non-codex-automatic-fixture';
