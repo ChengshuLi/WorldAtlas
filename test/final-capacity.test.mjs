@@ -2,6 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {crc32} from 'node:zlib';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {execFileSync} from 'node:child_process';
+import {gitBlobTransport} from '../scripts/git-blob-transport.mjs';
 import {waitForFinalCapacity, capacityObservation, finalRequestBound, inventoryFinalEvidence, paceFinalValidation,
   boundedFinalAPI, finalRequestBudget, beginFinalPlanning} from '../scripts/final-capacity.mjs';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
@@ -519,6 +524,100 @@ test('capacity excludes blob REST requests only after exact transport proves the
  }
 });
 
+
+// Execute the actual transport and final wrappers, substituting only the network
+// fetch with exact fixture blobs written into the disposable bare Git store.
+function finalTransportFixture(mode = 'complete', f = fixture()) {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'final-planning-transport-'));
+  const origin = f.api, events = []; let admission, fetches = 0;
+  const http = async (route, method = 'GET', ...args) => {
+    admission?.({route, method}); events.push({kind: 'http', route});
+    return origin(route, method, ...args);
+  };
+  http.setHTTPAdmission = hook => {admission = hook; return () => {admission = null;};};
+  const transport = gitBlobTransport(http, {repo: f.repo, token: 'synthetic-transport-token', directory,
+    execute: (command, args, options) => {
+      if (!args.includes('fetch')) return execFileSync(command, args, options);
+      fetches++; events.push({kind: 'fetch'});
+      const requested = args.slice(args.indexOf('https://github.com/' + f.repo + '.git') + 1);
+      for (const sha of mode === 'incomplete' ? requested.slice(0, -1) : requested) {
+        const blob = f.blobs.get(sha); assert.ok(blob, 'fetch must request only the tree-bound inventory');
+        execFileSync('git', [args[0], 'hash-object', '-w', '--stdin'],
+          {input: Buffer.from(blob.content, 'base64'), env: options.env});
+      }
+      return Buffer.alloc(0);
+    }});
+  f.api = (...args) => transport.api(...args);
+  for (const name of ['setHTTPAdmission', 'prefetchGitBlobs', 'hasGitBlobs']) {
+    if (mode === 'missing' && name !== 'setHTTPAdmission') continue;
+    f.api[name] = function (...args) {
+      assert.equal(this, f.api, `${name} must preserve its original receiver through every wrapper`);
+      if (mode === 'declined' && name === 'prefetchGitBlobs') return;
+      if (mode === 'declined' && name === 'hasGitBlobs') return false;
+      return transport.api[name](...args);
+    };
+  }
+  return {f, events, get fetches() {return fetches;}, close() {
+    transport.close(); assert.deepEqual(fs.readdirSync(directory), []); fs.rmdirSync(directory);
+  }};
+}
+
+test('real pacing prefetches complete bound blobs before proof classifier reads without losing call accounting', async () => {
+  const t = finalTransportFixture('complete', evidenceFailedProof(fixture())), {f} = t;
+  f.startCapacity = 2000; let classifierReads = 0;
+  const output = f.authored.find(row => row.path.endsWith('/result.json'));
+  try {
+    const options = {...f.options(), proofRunId: 44, proofRunAttempt: 1,
+      proofApplicabilityInventory: async ({api}) => {
+        classifierReads++; assert.equal(t.fetches, 1, 'initial inventory must prefetch before the classifier');
+        const before = t.events.length;
+        assert.equal((await api(`/repos/${f.repo}/git/blobs/${output.sha}`)).sha, output.sha);
+        assert.equal(t.events.length, before, 'classifier must reuse authenticated transport without REST');
+      }};
+    const result = await paceFinalValidation(options, {inspect: inspectMerge, admission: options.finalAdmission});
+    assert.equal(classifierReads, 2); assert.equal(t.fetches, 1);
+    assert.equal(result.receipt.inventory.exact_git_transport, true);
+    assert.equal(result.receipt.inventory.blob_calls, 0);
+    assert.equal(result.receipt.proof_calls, 3, 'run, jobs and classifier logical reads remain counted');
+    assert.ok(result.receipt.metadata_calls > 0); assert.ok(result.receipt.admission_calls > 0);
+    assert.equal(t.events.filter(row => row.kind === 'http' && row.route.includes('/git/blobs/')).length, 1,
+      'only the manifest is fetched by REST before the complete inventory is known');
+    assert.ok(f.calls.filter(row => row.route.endsWith('/pulls/23')).length >= 3,
+      'mutable PR authority is reread after capacity observation');
+    assert.equal(f.writes.length, 0, 'pacing alone does not merge');
+  } finally {t.close();}
+});
+
+test('actual final completion retains bulk prefetch across planning retry and declines absent/incomplete capability', async () => {
+  for (const mode of ['complete', 'missing', 'declined']) {
+    const t = finalTransportFixture(mode), {f} = t;
+    f.startCapacity = 24;
+    try {
+      const result = await f.complete();
+      assert.equal(result.accepted, true); assert.equal(result.final_capacity.planning_attempts, 2);
+      const inventory = result.final_capacity.inventory;
+      assert.equal(inventory.exact_git_transport, mode === 'complete');
+      assert.equal(inventory.blob_calls, mode === 'complete' ? 0 : f.blobs.size);
+      assert.equal(t.fetches, mode === 'complete' ? 1 : 0);
+      assert.equal(t.events.filter(row => row.kind === 'http' && row.route.includes('/git/blobs/')).length,
+        mode === 'complete' ? 1 : f.blobs.size);
+      assert.equal(f.writes.filter(row => row.route.endsWith('/merge')).length, 1);
+    } finally {t.close();}
+  }
+});
+
+test('incomplete actual transport and changed mutable authority cannot reach merge after feature forwarding', async () => {
+  for (const mode of ['incomplete', 'complete']) {
+    const t = finalTransportFixture(mode), {f} = t;
+    f.startCapacity = 2000;
+    try {
+      await assert.rejects(f.complete({capacityObserver: row => {
+        if (mode === 'complete' && row.phase === 'final-capacity') f.issue.body += '\nChanged acceptance';
+      }}), mode === 'incomplete' ? /Exact immutable Git transport failed/ : /Authority or tested base changed/);
+      assert.equal(t.fetches, 1); assert.equal(f.writes.length, 0);
+    } finally {t.close();}
+  }
+});
 
 // A real single-entry stored ZIP exercises the production report loader through
 // prepare, measured capacity waiting and final integration; no GIS is executed.

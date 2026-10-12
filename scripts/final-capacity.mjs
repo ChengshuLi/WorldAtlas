@@ -215,7 +215,7 @@ export async function beginFinalPlanning(options) {
 
 export async function paceFinalValidation(options, {inspect, admission = async () => {}}) {
   let metadataCalls = 0, admissionCalls = 0, proofCalls = 0, artifactPages = 0;
-  const counted = async (...args) => {metadataCalls++; return options.api(...args);};
+  const counted = copyAPIFeatures(async (...args) => {metadataCalls++; return options.api(...args);}, options.api);
   const admissionAPI = async (...args) => {admissionCalls++; return options.api(...args);};
   let receipt = {phase: 'final-capacity', reserved: false, ...(options.planningCapacity ? {planning: options.planningCapacity} : {})};
   try {
