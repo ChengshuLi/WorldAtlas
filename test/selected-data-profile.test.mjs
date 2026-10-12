@@ -1,5 +1,6 @@
 import {readFileSync} from 'node:fs';
 import {gzipSync} from 'node:zlib';
+import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
 import {isDeepStrictEqual as same} from "node:util";
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -880,4 +881,35 @@ test('required role JSON uses the same strict UTF-8 boundary before shape or ide
   assert(at>=0);const bad=Buffer.concat([bytes.subarray(0,at),Buffer.from([0xff]),bytes.subarray(at+marker.length)]);
   f.put(name,bad);const stats={};assert.equal(await f.run({metadataDiagnostics:stats}),null);
   assert.match(stats.failure,/invalid UTF-8 metadata/);
+});
+
+test('actual immutable transport retains required metadata but not cumulative supporting evidence',async()=>{
+ const f=fixture({mutate:f=>{for(let n=0;n<400;n++)f.put(prefix+'support-'+n+'.json',{n,body:'x'.repeat(48*1024)});}});
+ f.api=memoizeImmutableGitBlobs(f.api);const stats={},original=process.availableMemory;
+ process.availableMemory=()=>1024*1024;
+ try {assert.equal((await f.run({metadataDiagnostics:stats})).test_selection,'selected-data');}
+ finally {process.availableMemory=original;}
+ assert.equal(stats.limit_bytes,128*1024);assert(stats.read_bytes>16*1024*1024);
+ let before=f.reads.length;
+ for(let n=0;n<400;n++)await f.api('/repos/owner/repo/git/blobs/'+f.authored.entries.get(prefix+'support-'+n+'.json').sha,'GET',undefined,{retainImmutableBlob:false});
+ assert.equal(f.reads.length-before,400,'transient responses must not survive in the actual consumer cache');
+ before=f.reads.length;
+ await f.api('/repos/owner/repo/git/blobs/'+f.authored.entries.get(prefix+'registry.json').sha);
+ assert.equal(f.reads.length,before,'required-role reuse is preserved');
+});
+test('machine observations tighten admission during reads and immediately before decoding',async()=>{
+ for(const pressure of ['read','decode','zero','invalid']){
+  const name=prefix+'support.json.gz',f=fixture({mutate:f=>f.put(name,gzipSync(JSON.stringify('x'.repeat(64*1024))))});
+  const original=process.availableMemory,api=f.api,stats={};let observed=1024*1024;
+  f.api=memoizeImmutableGitBlobs(async(...args)=>{
+   const response=await api(...args);
+   if(pressure==='read'&&f.reads.length===1)observed=8;
+   if(args[0].endsWith(f.authored.entries.get(name).sha))observed=pressure==='zero'?0:pressure==='invalid'?NaN:64*1024;
+   return response;
+  });
+  process.availableMemory=()=>observed;
+  try {assert.equal(await f.run({metadataDiagnostics:stats}),null,pressure);assert.match(stats.failure,/metadata (memory|admission)/);}
+  finally {process.availableMemory=original;}
+  assert(stats.peak_admitted_bytes<=stats.limit_bytes);
+ }
 });

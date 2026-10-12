@@ -19,6 +19,12 @@
         "bytes": 63771,
         "sha256": "9118587c00c00c439f9670b3f85e713d2710b2fe188cbd964f8b03543b530712",
         "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/immutable-git-blobs.mjs",
+        "bytes": 2368,
+        "sha256": "36aeb2bc33eceb3782982b63e8d02199fd65893c0bc52781b7907f6915645645",
+        "hash_kind": "file-bytes"
       }
     ],
     "pins": {}
@@ -48,13 +54,19 @@
       "bytes": 32398,
       "sha256": "ff1c7b02baf9343fa9d3fde78aeafaf34fd008df0ac80e05eaded9932fc72ec3",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-metadata-admission-20261012/after-transport-replay.json",
+      "bytes": 32530,
+      "sha256": "1370acbfa30e66e50bd5b3f77179d2a05e43b52c659b614d76e79435166ec944",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
     {
       "id": "incremental-selected-metadata",
       "kind": "code",
-      "description": "Fixed-role structural metadata retention with machine-derived configurable admission and complete sequential inert evidence validation. The complete original PR1753 fixture retains all 426 changed paths and scientific bytes. Bound gzip JSON/JSONL and structured resource-log representations without package/reader authority. Exact current/historical joins, old full-package negatives and malformed/resource/security controls remain mandatory. This is test selection only; no scientific or hosted performance claim. Strict byte-level UTF-8 applies to every structural/supporting JSON parse; BOM rejection remains unchanged.",
+      "description": "Fixed-role structural metadata retention with machine-derived configurable admission and complete sequential inert evidence validation. The complete original PR1753 fixture retains all 426 changed paths and scientific bytes. Bound gzip JSON/JSONL and structured resource-log representations without package/reader authority. Exact current/historical joins, old full-package negatives and malformed/resource/security controls remain mandatory. This is test selection only; no scientific or hosted performance claim. Strict byte-level UTF-8 applies to every structural/supporting JSON parse; BOM rejection remains unchanged. Transient supporting reads bypass insertion into existing immutable transport caches while retaining byte authentication, HTTP accounting and required-role reuse. Current Node/V8 headroom is re-observed before reads and decompression; the allowance can only tighten. The complete replay uses the actual memoized consumer.",
       "software": "Node.js 24; Git",
       "units": "authenticated raw and decoded bytes, complete metadata records and actual consumer assertions"
     }

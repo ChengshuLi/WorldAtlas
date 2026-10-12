@@ -167,8 +167,18 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
   const diagnostics = metadataDiagnostics ?? {};
   Object.assign(diagnostics, {read_count: 0, read_bytes: 0, retained_bytes: 0, retained_count: 0,
     transient_read_count: 0, transient_read_bytes: 0, decoded_bytes: 0, peak_admitted_bytes: 0});
+  delete diagnostics.failure;
   try {
     Object.assign(diagnostics, selectedMetadataAdmission({budgetBytes: metadataBudgetBytes}));
+    diagnostics.minimum_live_limit_bytes = diagnostics.limit_bytes;
+    const admitBytes = bytes => {
+      // Observe allocations by the enclosing transport/gate too. A read may
+      // never enlarge the initial/operator allowance as machine load changes.
+      const observed = selectedMetadataAdmission({budgetBytes: diagnostics.limit_bytes}).limit_bytes;
+      diagnostics.minimum_live_limit_bytes = Math.min(diagnostics.minimum_live_limit_bytes, observed);
+      needSelected(bytes <= diagnostics.minimum_live_limit_bytes, 'metadata memory admission exceeded');
+      return diagnostics.minimum_live_limit_bytes;
+    };
     baseline ??= await integrationTree(api, repo, base);
     authored ??= await integrationTree(api, repo, head);
     const approved = baseline.entries.get(SELECTED_SMOKE), candidate = authored.entries.get(SELECTED_SMOKE);
@@ -186,9 +196,9 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         // All required metadata shares this phase's cache. Supporting evidence
         // is checked one complete member at a time and never accumulates here.
         const admitted = diagnostics.retained_bytes + row.size;
-        needSelected(admitted <= diagnostics.limit_bytes, 'metadata memory admission exceeded');
+        admitBytes(admitted);
         diagnostics.peak_admitted_bytes = Math.max(diagnostics.peak_admitted_bytes, admitted);
-        const blob = await api(`/repos/${repo}/git/blobs/${row.sha}`);
+        const blob = await api(`/repos/${repo}/git/blobs/${row.sha}`, 'GET', undefined, {retainImmutableBlob: retain});
         needSelected(blob.encoding === 'base64' && typeof blob.content === 'string', 'missing blob bytes');
         const bytes = Buffer.from(blob.content, 'base64');
         needSelected(bytes.length === row.size && createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex') === row.sha,
@@ -571,11 +581,17 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       if (name.endsWith('.json')) await json(name, authored, false);
       else if (/\.jsonl?\.gz$/.test(name)) {
         const bytes = await read(name, authored, false);
-        const remaining = diagnostics.limit_bytes - diagnostics.retained_bytes - bytes.length;
+        const remaining = admitBytes(diagnostics.retained_bytes + bytes.length) - diagnostics.retained_bytes - bytes.length;
         needSelected(remaining > 0, 'metadata memory admission exceeded');
         // Bound actual complete decoded output, including concatenated gzip
         // members. The trailer's untrusted ISIZE cannot grant extra admission.
-        const decoded = gunzipSync(bytes, {maxOutputLength: Math.min(32 * 1024 * 1024, remaining)});
+        let decoded;
+        try { decoded = gunzipSync(bytes, {maxOutputLength: Math.min(32 * 1024 * 1024, remaining)}); }
+        catch (error) {
+          if (error.code === 'ERR_BUFFER_TOO_LARGE') needSelected(false, remaining < 32 * 1024 * 1024
+            ? 'metadata memory admission exceeded' : 'decoded metadata member exceeds 32 MiB');
+          throw error;
+        }
         diagnostics.decoded_bytes += decoded.length;
         diagnostics.peak_admitted_bytes = Math.max(diagnostics.peak_admitted_bytes,
           diagnostics.retained_bytes + bytes.length + decoded.length);

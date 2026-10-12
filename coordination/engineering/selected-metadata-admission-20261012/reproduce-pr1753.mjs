@@ -5,6 +5,7 @@ import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {selectedDataCandidate, selectedDataSelection} from '../../../scripts/integration-profile.mjs';
+import {memoizeImmutableGitBlobs} from '../../../scripts/immutable-git-blobs.mjs';
 const fixture=JSON.parse(fs.readFileSync(new URL('./pr1753.json',import.meta.url)));
 const {base,head,branch}=fixture, output=process.argv[2];
 if(!output||process.argv.length!==3)throw Error('Supply one fresh output JSON path');
@@ -34,10 +35,11 @@ const api=async route=>{
   if(part?.startsWith('compare/')){const [old,current]=part.slice(8).split('...');git('merge-base','--is-ancestor',old,current);return {status:old===current?'identical':'ahead'};}
   throw Error('Unexpected immutable replay route');
 };
-const diagnostics={},start=performance.now(),result=await selectedDataSelection({api,repo:'ChengshuLi/WorldAtlas',branch,files,
+const diagnostics={},start=performance.now(),result=await selectedDataSelection({api:memoizeImmutableGitBlobs(api),repo:'ChengshuLi/WorldAtlas',branch,files,
   baseline:tree(base),authored:tree(head),base,head,metadataDiagnostics:diagnostics});
 const report={base,head,files:files.length,prefilter:selectedDataCandidate(branch,files),result,
   metadata_blob_reads:reads.length,metadata_bytes:reads.reduce((total,row)=>total+row.bytes,0),elapsed_ms:performance.now()-start,
+  memoizer_sha256:createHash('sha256').update(fs.readFileSync(new URL('../../../scripts/immutable-git-blobs.mjs',import.meta.url))).digest('hex'),
   classifier_sha256:createHash('sha256').update(fs.readFileSync(new URL('../../../scripts/integration-profile.mjs',import.meta.url))).digest('hex'),diagnostics,reads};
 fs.writeFileSync(output,JSON.stringify(report,null,2)+'\n',{flag:'wx'});
 console.log(JSON.stringify({...report,reads:undefined}));

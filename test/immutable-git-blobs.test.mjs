@@ -103,3 +103,17 @@ test('actual failure-only workflow diagnostic uses one bounded read and redacts 
   for(const forbidden of ['actual-known-secret','github_pat_example','other-secret','never retained','authorization','set-cookie','unknown'])assert.ok(!result.stdout.includes(forbidden));
  } finally {fs.rmSync(dir,{recursive:true,force:true});}
 });
+
+test('transient immutable reads authenticate without retention across nested caches',async()=>{
+ const first=blob('required'),transient=blob('one-shot evidence'),calls=[];
+ const origin=async(...args)=>{calls.push(args);return args[0]===route(first)?first:transient;};
+ const api=memoizeImmutableGitBlobs(memoizeImmutableGitBlobs(origin));
+ await api(route(first));
+ for(let i=0;i<3;i++)await api(route(transient),'GET',undefined,{retainImmutableBlob:false});
+ assert.equal(calls.filter(args=>args[0]===route(transient)).length,3);
+ await api(route(first),'GET',undefined,{retainImmutableBlob:false});assert.equal(calls.filter(args=>args[0]===route(first)).length,1);
+ await api(route(transient));await api(route(transient));assert.equal(calls.filter(args=>args[0]===route(transient)).length,4);
+ const corrupt=memoizeImmutableGitBlobs(async()=>({...transient,content:blob('wrong').content}));
+ await assert.rejects(corrupt(route(transient),'GET',undefined,{retainImmutableBlob:false}));
+ assert(calls.filter(args=>args[0]===route(transient)).slice(0,3).every(args=>args[3].retainImmutableBlob===false));
+});

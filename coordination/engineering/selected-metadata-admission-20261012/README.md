@@ -18,8 +18,7 @@ claim that their bytes or malformed contents can be ignored. This trades a bound
 sequential scan for the old cumulative retention cutoff.
 
 Default raw-byte admission is one eighth of the lesser of Node's observed available
-process memory and V8's available heap at entry. This leaves representation and
-other gate headroom. `WORLDATLAS_SELECTED_METADATA_BYTES` may set a positive decimal
+process memory and V8's available heap at entry, re-observed before each new read and decompression. Observations can only tighten the initial/operator allowance. This leaves headroom for concurrent raw buffers, base64 transport strings, decoded strings/records and other gate allocations; it is not an exact V8 object-size formula. `WORLDATLAS_SELECTED_METADATA_BYTES` may set a positive decimal
 byte allowance no greater than that machine-derived ceiling. Invalid configuration,
 missing resource observations or exhaustion conservatively retain full regression.
 The optional function arguments support bounded probes and diagnostic observations;
@@ -30,8 +29,7 @@ Admission includes retained required bodies plus the current encoded supporting
 body and its actual decoded body. Supporting volume does not accumulate. The
 32 MiB encoded/decoded-member security bounds, role/schema bounds, exact Git body
 identity, historical pins and full required-record validation remain independent
-and mandatory. The ordinary API transport and its own cache/request bounds are
-unchanged. No aggregate-byte allowance grants a package or reader role.
+and mandatory. The existing immutable API memoizer accepts a per-read non-retaining hint for transient supporting bodies. It still authenticates every byte, forwards the hint through nested wrappers and preserves existing required-body reuse. Its 272 MiB/512-entry caps, disk transport and request accounting are unchanged. A record already retained by another required check can still be reused; current live-headroom observation includes that enclosing work. No aggregate-byte allowance grants a package or reader role.
 
 The full fixture exposed two representation seams beyond the original 16 MiB
 cutoff. Supporting `.json.gz` / `.jsonl.gz` paths were already admitted by the path
@@ -49,7 +47,7 @@ From a checkout with the pinned Git commits and consumed bodies present:
 
 ```
 node coordination/engineering/selected-metadata-admission-20261012/reproduce-pr1753.mjs FRESH_REPORT.json
-node --test test/selected-data-profile.test.mjs test/pr-gates.test.mjs test/integration-proof.test.mjs test/deployment-budget-scope.test.mjs
+node --test test/selected-data-profile.test.mjs test/pr-gates.test.mjs test/integration-proof.test.mjs test/deployment-budget-scope.test.mjs test/immutable-git-blobs.test.mjs test/final-capacity.test.mjs
 ```
 
 The reproducer uses the complete actual Git diff and actual complete trees. It
@@ -64,7 +62,7 @@ The corrected full replay completes at 349 reads / 38,981,635 encoded bytes, wit
 13,352,331 retained bytes and 27,109,018 peak admitted raw/decoded bytes. The unit
 fixture succeeds with a 28 MiB operator allowance despite total read volume above
 that allowance. A 20 MiB allowance refuses during decoded-member admission.
-The initial corrected replay remains in `after-replay.json`; the exact reviewed UTF-8 correction is measured separately in `after-utf8-replay.json`. Observed elapsed time and process peak RSS are in these replay reports; process peak
+The initial corrected replay remains in `after-replay.json`; the UTF-8 correction is measured separately in `after-utf8-replay.json`; `after-transport-replay.json` binds the final classifier and actual immutable memoizer. Observed elapsed time and process peak RSS are in these replay reports; process peak
 includes the adapter/tree inventory, and is not a selector-only allocation measure.
 No hosted end-to-end saving or new scientific execution is inferred from this replay.
 
@@ -75,3 +73,5 @@ records, malformed/concatenated/oversized gzip, resource-limited decode, structu
 log record bounds, trailing content, body substitution, and unconsumed evidence
 wrongly appended to package inputs. Normal exact-head review, CI and merge queue
 remain required. Publication is unaffected.
+
+Independent cache-lifetime controls use the actual nested immutable memoizer with 400 unique 48 KiB supporting records. Subsequent reads prove all transient responses were released while required metadata remained cached. Simulated decreasing/zero/invalid live-memory observations refuse before the next read/decode. This is bounded pressure simulation, not a destructive OOM experiment.
