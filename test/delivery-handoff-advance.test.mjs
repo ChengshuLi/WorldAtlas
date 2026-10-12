@@ -631,7 +631,7 @@ test('materialization report preflight refuses late collisions and changed posti
 });
 
 import {gzipSync} from 'node:zlib';
-import {acquireDeliveryInputs} from '../scripts/delivery-handoff-advance.mjs';
+import {acquireDeliveryInputs, deliveryAcquisitionExecute} from '../scripts/delivery-handoff-advance.mjs';
 {
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const canonical=v=>Array.isArray(v)?v.map(canonical):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canonical(v[k])])):v;
@@ -760,4 +760,26 @@ test('plain materialize CLI authenticates a saved recipe index and resumes with 
     assert.throws(() => run(), error => error.stderr.toString().includes('Occupied destination'));
   } finally { f.close(); }
 });
+
+test('cold acquisition reuses gh login ephemerally; warm and non-fetch reads never request credentials', async () => {
+  const f = fixture(); let tokenReads = 0, authenticatedFetches = 0;
+  try {
+    const execute = deliveryAcquisitionExecute({readToken: () => { tokenReads++; return 'local-fixture-token'; },
+      execute: (command, args, options) => {
+        if (args.includes('fetch')) {
+          authenticatedFetches++; assert.equal(options.env.GIT_CONFIG_COUNT, '3');
+          assert.equal(options.env.GIT_CONFIG_KEY_2, 'http.https://github.com/.extraheader');
+          assert.equal(options.env.GIT_CONFIG_VALUE_2, 'AUTHORIZATION: basic ' + Buffer.from('x-access-token:local-fixture-token').toString('base64'));
+        } else assert.notEqual(options.env?.GIT_CONFIG_COUNT, '3');
+        return f.execute(command, args, options);
+      }});
+    await acquireDeliveryInputs(f.plan, f.destination, {...f.options, execute});
+    assert.equal(tokenReads, 1); assert.equal(authenticatedFetches, 1);
+    await acquireDeliveryInputs(f.plan, f.destination, {...f.options, execute});
+    assert.equal(tokenReads, 1); assert.equal(authenticatedFetches, 1);
+    assert.throws(() => execute('git', ['fetch', 'https://example.invalid/repository'], {env: {}}), /Unexpected acquisition/);
+    assert.equal(tokenReads, 1);
+  } finally { f.close(); }
+});
+
 }

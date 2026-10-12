@@ -630,7 +630,7 @@ async function main(args) {
       recipe_index: pin, identities: [...new Set(plan.products.map(p => p.identity))], status: 'complete'})};
     const publishComplete = admitPublication(root, destination, products, {phase, config_sha256: digest(raw)}, flags.includes('--resume'), reader.budget);
     const started = performance.now();
-    const result = await flow.acquireDeliveryInputs(plan, root, {budget: reader.budget});
+    const result = await flow.acquireDeliveryInputs(plan, root, {budget: reader.budget, token: '', execute: flow.deliveryAcquisitionExecute()});
     console.log(JSON.stringify({...publishComplete(), acquisition: result, acquisition_ms: performance.now() - started}));
     return;
   }

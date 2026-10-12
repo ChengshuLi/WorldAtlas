@@ -1020,6 +1020,25 @@ export function deliveryAuthorityReader(root, pinReader) {
     allowance: pinReader.budget.allowance, metadataBytes: 8 * 1024 * 1024 + outer.accounted_bytes});
 }
 
+// Reuse the already authenticated gh account only at an actual cold fetch.
+// The token stays in this one subprocess environment; no credential is created
+// or persisted, and warm verification never consults account credentials.
+export function deliveryAcquisitionExecute({execute = execFileSync,
+  readToken = () => execFileSync('gh', ['auth', 'token'], {encoding: 'utf8', maxBuffer: 16384, timeout: 20_000}).trim()} = {}) {
+  let token;
+  return (command, args, options) => {
+    if (command === 'git' && args.includes('fetch')) {
+      need(args.includes('https://github.com/ChengshuLi/WorldAtlas.git'), 'Unexpected acquisition repository');
+      token ??= readToken(); need(typeof token === 'string' && token.trim(), 'Existing gh login required for cold acquisition');
+      const env = {...options.env, GIT_CONFIG_COUNT: '3',
+        GIT_CONFIG_KEY_2: 'http.https://github.com/.extraheader',
+        GIT_CONFIG_VALUE_2: 'AUTHORIZATION: basic ' + Buffer.from('x-access-token:' + token).toString('base64')};
+      return execute(command, args, {...options, env});
+    }
+    return execute(command, args, options);
+  };
+}
+
 // Exact-body acquisition reuses the existing prefetch importer and ordinary writer.
 export const acquireDeliveryInputs = (() => {
 // Thin adapter for the existing exact Git object acquisition. It does not

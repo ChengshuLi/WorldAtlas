@@ -279,7 +279,9 @@ rssBytes}`. It authenticates that whole index, reserves its deterministic comple
 report/receipt, then shares the same budget across encoded/decoded inputs and
 unique physical placements. Use the normal shared Git import/storage window for
 actual acquisition. The existing exact-object prefetch importer retrieves missing
-Git bodies once; tracked source paths are never written. Only declared aliases
+Git bodies once, consulting the existing `gh auth token` login ephemerally only
+when a cold fetch occurs. Tokens are not persisted or printed; warm verification
+needs no login lookup. Tracked source paths are never written. Only declared aliases
 under `.cache/additive-native-gap-repair/delivery/<sha256>/` may be materialized.
 Actual tree/OID/size/SHA and decoded identities are checked. Completed aliases are
 reauthenticated and preserved on resume; corrupt or partially written aliases are
