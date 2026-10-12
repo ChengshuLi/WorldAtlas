@@ -14,7 +14,8 @@ const safeInclude = value => typeof value === 'string' && /^(data|research|coord
 
 // No shell, background mutations, timeout retries, or automatic lock breaking.
 export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
-  const git = (...args) => execFileSync('git', ['-C', repo, ...args], {encoding: 'utf8', maxBuffer: 32 * 1024 * 1024});
+  const noLazyFetch = {...process.env, GIT_NO_LAZY_FETCH: '1'};
+  const git = (...args) => execFileSync('git', ['-C', repo, ...args], {encoding: 'utf8', maxBuffer: 32 * 1024 * 1024, env: noLazyFetch});
   const common = fs.realpathSync(git('rev-parse', '--path-format=absolute', '--git-common-dir').trim());
   const registry = path.join(common, 'worldatlas-local-workspaces');
   const root = path.resolve(common, '../../.worldatlas-workspaces', createHash('sha256').update(common).digest('hex').slice(0, 16));
@@ -94,16 +95,35 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     if (slot === 'work') git('fetch', 'origin', 'main');
     const head = git('rev-parse', '--verify', `${slot === 'work' ? 'origin/main' : commit}^{commit}`).trim();
     const selected = [...support, ...include];
-    const tree = git('ls-tree', '-rlz', head).split('\0').filter(Boolean);
-    let estimated = 0;
-    for (const line of tree) {
+    // Tree metadata needs no blob contents. Global -l sizing can fetch excluded
+    // promisor blobs, or abort on them before sparse filtering on some Git versions.
+    const tree = git('ls-tree', '-rz', head).split('\0').filter(Boolean).map(line => {
       const separator = line.indexOf('\t');
-      const name = line.slice(separator + 1);
-      if (profile === 'full' || !name.includes('/') || selected.some(prefix => name === prefix || name.startsWith(prefix + '/'))) {
-        const size = line.slice(0, separator).trim().split(/\s+/)[3];
-        if (size === '-') throw Error('Submodule inputs need a separate bounded plan');
-        if (!Number.isSafeInteger(Number(size))) throw Error('Unknown input size');
+      const [mode, type, oid] = line.slice(0, separator).split(' ');
+      if (separator < 0 || !/^[0-7]{6}$/.test(mode) || !/^[a-f0-9]{40,64}$/.test(oid)) throw Error('Unknown tree entry');
+      return {type, oid, name: line.slice(separator + 1)};
+    });
+    const inputs = tree.filter(({name}) => profile === 'full' || !name.includes('/')
+      || selected.some(prefix => name === prefix || name.startsWith(prefix + '/')));
+    for (const {type} of inputs) {
+      if (type === 'commit') throw Error('Submodule inputs need a separate bounded plan');
+      if (type !== 'blob') throw Error('Unknown input type');
+    }
+    let estimated = 0;
+    // Bound each request/response, not the overall admitted input count. Repeated
+    // OIDs still count once per selected path, matching materialized checkout bytes.
+    for (let offset = 0; offset < inputs.length; offset += 1024) {
+      const batch = inputs.slice(offset, offset + 1024);
+      const sizes = execFileSync('git', ['-C', repo, 'cat-file', '--batch-check=%(objectname) %(objecttype) %(objectsize)'], {
+        input: batch.map(({oid}) => oid).join('\n') + '\n', encoding: 'utf8', maxBuffer: 128 * 1024, env: noLazyFetch
+      }).trimEnd().split('\n');
+      if (sizes.length !== batch.length) throw Error('Unknown input size');
+      for (let index = 0; index < batch.length; index++) {
+        const [oid, type, size, extra] = sizes[index].split(' ');
+        if (oid !== batch[index].oid || type !== 'blob' || extra !== undefined || !/^\d+$/.test(size)
+          || !Number.isSafeInteger(Number(size))) throw Error('Unknown input size; selected blobs must be available locally');
         estimated += Number(size);
+        if (!Number.isSafeInteger(estimated)) throw Error('Reserve and selected inputs must represent a safe finite byte count');
       }
     }
     const reservation = Math.max(Math.ceil(reserveGiB * GiB), estimated);
@@ -118,7 +138,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     git('worktree', 'add', '--no-checkout', ...(slot === 'work' ? ['-b', branch] : ['--detach']), destination, head);
     if (profile === 'sparse') {
       execFileSync('git', ['-C', destination, 'sparse-checkout', 'set', '--no-cone', '--stdin'], {
-        input: ['/*', '!/*/', ...selected.map(prefix => `/${prefix}${tree.some(line => line.slice(line.indexOf('\t') + 1).startsWith(prefix + '/')) ? '/' : ''}`)].join('\n') + '\n', encoding: 'utf8'});
+        input: ['/*', '!/*/', ...selected.map(prefix => `/${prefix}${tree.some(({name}) => name.startsWith(prefix + '/')) ? '/' : ''}`)].join('\n') + '\n', encoding: 'utf8'});
     }
     execFileSync('git', ['-C', destination, 'read-tree', '-mu', 'HEAD']);
     entry.status = 'ready';
