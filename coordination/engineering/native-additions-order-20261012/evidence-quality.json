@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "issue": 1755,
+  "lane": "engineering",
+  "worker_id": "01a12d95-06fd-71a0-ac55-5061b58c2002",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "ef834e2d90a9ca5d4cbd961a84a08dd156ae7944",
+    "files": [
+      {
+        "path": "research/geography/aus19-original-source-20261011/vintages/source-handoff-001/source-handoff.json",
+        "bytes": 1998089,
+        "sha256": "a86d07773cb98ac2e3b747b700eb07f845fb33da79da45c904927a2fa3b610b0",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+        "bytes": 186672,
+        "sha256": "520d312e9c4762c459deaef5b1b3d01beff5d4ad50ea7825f018451214470778",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/native-additions-order-20261012/proposed-caller17.json",
+      "bytes": 2784,
+      "sha256": "7bf2ad6a0add00fd3bca3535c22ded864bd1c85058894aa5832ae3e766dcaed3",
+      "hash_kind": "file-bytes",
+      "role": "proposed-code-vector"
+    },
+    {
+      "path": "coordination/engineering/native-additions-order-20261012/controls.tap",
+      "bytes": 3873,
+      "sha256": "ef6940ef5e427dfd480a163c54f10509e5d0cffcf1572dfa564ad11a4e57ec86",
+      "hash_kind": "file-bytes",
+      "role": "test-output"
+    }
+  ],
+  "methods": [
+    {
+      "id": "derived-additions-order",
+      "kind": "code",
+      "description": "Execute both actual NATIVE feature-construction blocks with the preserved complete AUS handoff identities and geometries; compare legacy failure/canonical success, unchanged source and ledger order, already-canonical equality, duplicate refusal, and synthetic native accounting. No SOURCE/NATIVE geographic qualification is executed.",
+      "software": "Node 24.19.0; pinned @noble/hashes 2.0.1",
+      "units": "component identities and literal geometries; synthetic native cells only"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test --test-reporter=tap test/native-additions-order.test.mjs test/effective-footprint.test.mjs test/native-grid.test.mjs"
+  ]
+}

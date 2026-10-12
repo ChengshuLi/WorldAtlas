@@ -1,0 +1,36 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "native-additions-order-20261012",
+  "branch": "engineering/native-additions-order-20261012",
+  "base_main_commit": "ef834e2d90a9ca5d4cbd961a84a08dd156ae7944",
+  "github_issue": 1755,
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Canonical ordering of the two derived per-target NATIVE additions arrays; preserve source scope, ledger order, IDs, duplicate rejection and all scientific predicates."
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-12T01:06:06.514Z",
+  "completed": [
+    "Two production sort calls only; authentic retained AUS13 constructor-boundary controls and unchanged native numerical controls."
+  ],
+  "checks": [
+    "15 focused tests passed; no SOURCE/NATIVE scientific replay."
+  ],
+  "deployment": "No deployment, selected release or source qualification.",
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "coordination/engineering/native-additions-order-20261012/evidence-quality.json",
+    "coordination/engineering/native-additions-order-20261012/controls.tap",
+    "coordination/engineering/native-additions-order-20261012/proposed-caller17.json"
+  ],
+  "blockers": [],
+  "next_action": "Independent exact-head code review, then append one new/new caller17 programme registration using its genuine review comment and renew final review/CI before the normal queue.",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}

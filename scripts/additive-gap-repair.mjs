@@ -1662,7 +1662,7 @@ function countyBatchProposalStage(repo,request) {
   const ledgerBody=canonical(ledger),ledgerSha=sha(ledgerBody),features=[];
   for(const targetId of [...new Set(ledgerRows.filter(row=>['assigned','zero-cell'].includes(row.disposition)).map(row=>row.target_id))].sort()){
     const target=targets.get(targetId),additions=ledgerRows.filter(row=>row.target_id===targetId).map(row=>({component_id:row.component_id,geometry:row.geometry,
-      geometry_sha256:row.geometry_sha256,source_receipt_sha256:receiptSha}));
+      geometry_sha256:row.geometry_sha256,source_receipt_sha256:receiptSha})).sort((a,b)=>a.component_id<b.component_id?-1:a.component_id>b.component_id?1:0);
     features.push({...target,additiveFootprint:{version:1,kind:'retained-base-plus-additions',baseline_release_sha256:baseReference.footprints_sha256,
       base_geometry_sha256:footprintValueSha256(target.geometry),ledger_sha256:ledgerSha,rule_sha256:ruleSha,additions}});}
   const effectiveReference={...baseReference,id:'geography:additive:'+ledgerSha,footprints_sha256:additiveReleaseFootprintDigest(baseReference,features)};
@@ -1821,7 +1821,7 @@ function administrativeBatchProposalStage(repo,request,resolutions,budget) {
   const ledgerBody=canonical(ledger),ledgerSha=sha(ledgerBody),features=[];
   for(const targetId of [...new Set(ledgerRows.filter(row=>['assigned','zero-cell'].includes(row.disposition)).map(row=>row.target_id))].sort()){
     const target=targets.get(targetId),additions=ledgerRows.filter(row=>row.target_id===targetId).map(row=>({component_id:row.component_id,geometry:row.geometry,
-      geometry_sha256:row.geometry_sha256,source_receipt_sha256:receiptSha}));
+      geometry_sha256:row.geometry_sha256,source_receipt_sha256:receiptSha})).sort((a,b)=>a.component_id<b.component_id?-1:a.component_id>b.component_id?1:0);
     features.push({...target,pixelIndex:owners.get(targetId).index,additiveFootprint:{version:1,kind:'retained-base-plus-additions',baseline_release_sha256:baseReference.footprints_sha256,
       base_geometry_sha256:footprintValueSha256(target.geometry),ledger_sha256:ledgerSha,rule_sha256:ruleSha,additions}});}
   const effectiveReference={...baseReference,id:'geography:additive:'+ledgerSha,footprints_sha256:additiveReleaseFootprintDigest(baseReference,features)};
