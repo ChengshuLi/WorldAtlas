@@ -70,3 +70,38 @@ test('partial write failure yields no completion descriptor and preserves failed
   const result=run(f,'retain',code);assert.notEqual(result.status,0);assert.match(result.stderr,/injected write failure/);
   assert.equal(result.stdout,'');assert(fs.readdirSync(f.out).length>0);assert(!fs.existsSync(path.join(f.out,'geography-check.json')));
 });
+test('actual joint Python parent retains products before its temporary directory closes',t=>{
+  for(const regressions of [0,1]) {
+    const f=fixture(t),runner=path.resolve('scripts/run-geographic-check.py');
+    f.issued.kind='trusted-selected-joint-comparison-v1';f.issued.mode='authenticated-checkpoint-append-v1';f.issued.candidate_code_executed=false;
+    f.issued.continuous_result.original_strict_polygon_result.regressions=regressions;
+    if(regressions)f.issued.continuous_result.original_strict_polygon_result.status='regressions-found';
+    const code=`import importlib.util,json,pathlib,shutil,sys\nspec=importlib.util.spec_from_file_location('joint_parent',sys.argv[1]);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)\nissued=json.loads(sys.argv[5]);destinations=[]\ndef child(command,**kwargs):\n    destination=pathlib.Path(command[-2]);shutil.copytree(sys.argv[3],destination);destinations.append(destination);return json.dumps(issued).encode()\nm.subprocess.check_output=child\nm.consume_selected_continuous=lambda *args,**kwargs: issued['continuous_result']\nm.selected_consumer_allowance=lambda repo: 256*1024*1024\nresult=m.selected_joint(pathlib.Path(sys.argv[2]),'a'*40,'b'*40,None,checkpoint_destination=pathlib.Path(sys.argv[4]))\nassert all(not p.exists() for p in destinations)\nprint(json.dumps(result))`;
+    const result=spawnSync(process.env.PYTHON??'python3',['-I','-B','-c',code,runner,process.cwd(),f.source,f.out,JSON.stringify(f.issued)],{encoding:'utf8'});
+    assert.equal(result.status,0,result.stderr);const actual=JSON.parse(result.stdout);
+    if(regressions){assert.equal(actual.checkpoint,undefined);assert.deepEqual(fs.readdirSync(f.out),[]);}
+    else {assert.equal(actual.checkpoint.members.length,7);assert(fs.existsSync(path.join(f.out,'derived-certificate.json.gz')));}
+  }
+});
+test('joint parent collision admission runs before launching its scientific child',t=>{
+  for(const symbolic of [false,true]) {
+    const f=fixture(t),target=path.join(f.out,'facts.json');
+    if(symbolic)fs.symlinkSync(path.join(f.root,'missing'),target);else fs.writeFileSync(target,'original sentinel');
+    const runner=path.resolve('scripts/run-geographic-check.py');
+    const code=`import importlib.util,pathlib,sys\nspec=importlib.util.spec_from_file_location('joint_parent',sys.argv[1]);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)\ndef child(*args,**kwargs): raise AssertionError('scientific child started before collision admission')\nm.subprocess.check_output=child\nm.selected_joint(pathlib.Path(sys.argv[2]),'a'*40,'b'*40,None,checkpoint_destination=pathlib.Path(sys.argv[3]))`;
+    const result=spawnSync(process.env.PYTHON??'python3',['-I','-B','-c',code,runner,process.cwd(),f.out],{encoding:'utf8'});
+    assert.notEqual(result.status,0);assert.match(result.stderr,/Checkpoint output already exists/);assert.doesNotMatch(result.stderr,/scientific child started/);
+    if(symbolic)assert(fs.lstatSync(target).isSymbolicLink());else assert.equal(fs.readFileSync(target,'utf8'),'original sentinel');
+  }
+});
+test('runner reserves optional full-bank prefetch for the explicit legacy cold route',t=>{
+  for(const cold of [false,true]) {
+    const f=fixture(t),runner=path.resolve('scripts/run-geographic-check.py');
+    fs.mkdirSync(path.join(f.root,'scripts'));
+    fs.writeFileSync(path.join(f.root,'scripts/check-geographic-regression.py'),"def inspect(*args): return {'status':'no-new-regression','regressions':0}\n");
+    const code=`import importlib.util,json,pathlib,sys\nspec=importlib.util.spec_from_file_location('joint_parent',sys.argv[1]);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)\nissued=json.loads(sys.argv[3]);cold=sys.argv[4]=='true';calls=[]\nm.verify_trusted_checkout=lambda *args:'verified-fixture'\nm.inventory=lambda repo,version: {'fixture':version}\nm.git=lambda *args:b'present'\nm.output_budget_transition=m.programme_registry_transition=m.linux_support_transition=lambda *args:None\ndef joint(*args,**kwargs):\n    calls.append('joint');return {'mode':'legacy-cold-required'} if cold else {'mode':'authenticated-checkpoint-append-v1','native':issued['native'],'continuous_result':issued['continuous_result']}\nm.selected_joint=joint\nm.prefetch_declared_inputs=lambda *args:calls.append('prefetch')\ndef native(*args,**kwargs):\n    calls.append('native');return json.dumps(issued['native']).encode()\nm.subprocess.check_output=native\ndef continuous(*args):\n    calls.append('continuous');return issued['continuous_result']\nm.selected_continuous=continuous\nm.inspect(pathlib.Path(sys.argv[2]),'a'*40,'b'*40,prefetch=True)\nprint(json.dumps(calls))`;
+    const result=spawnSync(process.env.PYTHON??'python3',['-I','-B','-c',code,runner,f.root,JSON.stringify(f.issued),String(cold)],{encoding:'utf8'});
+    assert.equal(result.status,0,result.stderr);
+    assert.deepEqual(JSON.parse(result.stdout),cold?['joint','prefetch','native','continuous']:['joint']);
+  }
+});

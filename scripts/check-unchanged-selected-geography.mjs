@@ -32,12 +32,16 @@ const joined = async promises => {
 // alone cannot prove this older collector complete for that new reader. Updating
 // these profiles therefore requires reviewing its reads and the adverse tests.
 export const AUDITED_READERS = Object.freeze({
+  // Accepted artifact routing and fixed output retention are part of this collector profile.
+  'scripts/accepted-selected-checkpoint.mjs': ['54e78c5ea3316612b4605579808a8ec3863b69401e6e57da71e8d8070aee97ec'],
+  'scripts/geographic-report-artifact.mjs': ['8023bccb096c2f6099b421ca25c0eec85b87cf1360d818b090fb551028c3b26a'],
+  'scripts/geographic_checkpoint_products.py': ['24c692ee5f9e985b50ceb173cd6bf6c46ccfbe5b9505c519a51e1135d1f49434'],
   // The joint route only reuses authenticated original selected inputs and products.
   // These exact readers introduce no new scientific source outside that closure.
   'scripts/selected-checkpoint-native.mjs': ['1372180d776e33227410aaeb4ef5526cd5cc84e4dca3950cc6eaa6210bad04ca'],
-  [PREFIX + 'selected-checkpoint.mjs']: ['aaa4782773e94a88fcf1c966ef549c6ab5fe084cd2243a43dab206ac6d185c5f'],
+  [PREFIX + 'selected-checkpoint.mjs']: ['54131d4459c6dd3074998377ac4bec985aae21963fa9010add87ff34b803de22'],
   [PREFIX + 'selected-checkpoint-continuous.mjs']: ['1c82e1bb619bc42353a573d0ef4f1989490e03b32d5137035cf890a3719c55dc'],
-  [PREFIX + 'selected-joint-entry.mjs']: ['de49264769b6dd942c1e1eaad6a8aec6548b9a81c3789fbddda9b7325d971496'],
+  [PREFIX + 'selected-joint-entry.mjs']: ['ce1c4513ecf130452c07bdf4e516019e7ac85c0ee14c14b44203f3b23a16ae6d'],
   'src/ownership-codec.js': ['64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d'],
   'scripts/check-effective-geographic-regression.mjs': ['85ed6815060c98973ecc4043f0872398a6b8e474130d1663b5940eefd9f8baf4', '801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039', '5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda'],
   // The second profile is reviewed stage-2 blob f8e4a88a6dbe3d3961d6b17d9b926ee4488561a8:
@@ -267,7 +271,8 @@ async function checkpointRoutes(reader, selection, trusted) {
   demand(catalogue.version === 1 && catalogue.kind === 'accepted-selected-checkpoints-v1', 'unsupported-checkpoint-catalogue');
   const methods = [PREFIX + 'selected-checkpoint.mjs', PREFIX + 'selected-neighbor-prevention.mjs',
     'scripts/check-effective-geographic-regression.mjs', 'src/ownership-codec.js'];
-  demand(same(array(catalogue.qualifier_code, 'checkpoint-methods').map(p => p.path), methods), 'unsupported-checkpoint-methods');
+  const declaredMethods = array(catalogue.qualifier_code, 'checkpoint-methods').map(p => p.path);
+  demand(same(declaredMethods, methods) || same(declaredMethods, [...methods, ...ACCEPTED_CHECKPOINT_CODE]), 'unsupported-checkpoint-methods');
   for (const p of catalogue.qualifier_code) {
     keys(p, 'path,bytes,sha256', 'checkpoint-method');
     demand(Number.isSafeInteger(p.bytes) && p.bytes > 0 && hash(p.sha256), 'unsupported-checkpoint-method');
@@ -284,21 +289,30 @@ async function checkpointRoutes(reader, selection, trusted) {
   // whose complete inputs are collected below. Do not invent checkpoint trust.
   if (!matches.length) return;
   const root = matches[0];
-  keys(root, 'id,accepted_head,selected_commit,selection_sha256,execution_commit,execution_code_sha256,runtime_sha256,facts,certificate,publication,custody,routes', 'checkpoint-root');
+  const derived = root.kind === 'accepted-derived-selected-checkpoint-v1';
+  const common = 'id,accepted_head,selected_commit,selection_sha256,execution_commit,execution_code_sha256,runtime_sha256,facts,certificate,publication,routes';
+  keys(root, common + (derived ? ',kind,continuous_facts,operands,continuous_publication,joint_result,operating,executing_policy' : ',custody'), 'checkpoint-root');
   demand(typeof root.id === 'string' && root.id && [root.accepted_head, root.selected_commit, root.execution_commit].every(oid)
     && [root.selection_sha256, root.execution_code_sha256, root.runtime_sha256].every(hash), 'unsupported-checkpoint-root');
-  for (const role of ['facts', 'certificate', 'publication', 'custody', 'routes']) reader.pinned(root[role], {fallbackCommit: trusted});
+  const roles = ['facts', 'certificate', 'publication', 'routes', ...(derived
+    ? ['continuous_facts', 'operands', 'continuous_publication', 'joint_result', 'operating', 'executing_policy'] : ['custody'])];
+  for (const role of roles) reader.pinned(root[role], {fallbackCommit: trusted});
   // Scientific certificate/operand bodies stay opaque. Their original whole
   // pins bind all nested contents; this authenticated routing metadata covers
   // the module's complete present/absent inventory and source/native alternatives.
   // The qualifier also reads the archived execution's programme policy. Its
   // current alias belongs only to the trusted checkout, never the candidate.
-  const custody = await reader.pinnedJson(root.custody, {fallbackCommit: trusted});
-  const retained = array(custody.complete_cold_custody, 'checkpoint-custody').filter(p => p.facts?.selected_commit === root.selected_commit);
-  demand(retained.length === 1, 'ambiguous-checkpoint-policy-custody');
-  const policyPins = array(retained[0].inventory, 'checkpoint-inventory').filter(p => p.path === POLICY);
-  demand(policyPins.length === 1, 'incomplete-checkpoint-policy-custody');
-  const priorPolicy = await reader.pinnedJson(policyPins[0], {fallbackCommit: trusted, currentAlias:false});
+  let policyPin;
+  if (derived) policyPin = root.executing_policy;
+  else {
+    const custody = await reader.pinnedJson(root.custody, {fallbackCommit: trusted});
+    const retained = array(custody.complete_cold_custody, 'checkpoint-custody').filter(p => p.facts?.selected_commit === root.selected_commit);
+    demand(retained.length === 1, 'ambiguous-checkpoint-policy-custody');
+    const policyPins = array(retained[0].inventory, 'checkpoint-inventory').filter(p => p.path === POLICY);
+    demand(policyPins.length === 1, 'incomplete-checkpoint-policy-custody');
+    policyPin = policyPins[0];
+  }
+  const priorPolicy = await reader.pinnedJson(policyPin, {fallbackCommit: trusted, currentAlias:false});
   const currentPolicy = await reader.trustedJson(POLICY);
   for (const policy of [priorPolicy, currentPolicy]) {
     keys(policy, 'version,kind,programs,current_rebind_migrations', 'checkpoint-programme-policy');
@@ -309,7 +323,13 @@ async function checkpointRoutes(reader, selection, trusted) {
     demand(array(priorPolicy[role], 'checkpoint-policy-records', 0).every(p => current.has(JSON.stringify(canonical(p)))),
       'checkpoint-policy-eligibility-removed');
   }
-  const routes = await reader.pinnedJson(root.routes, {fallbackCommit: trusted});
+  const census = await reader.pinnedJson(root.routes, {fallbackCommit: trusted});
+  if (derived) {
+    keys(census, 'version,kind,candidate_commit,candidate_selection,predecessor_paths,routes', 'derived-checkpoint-census');
+    demand(census.version === 1 && census.kind === 'selected-checkpoint-scientific-routes-v1'
+      && census.candidate_commit === root.selected_commit && same(census.candidate_selection, selection), 'unsupported-derived-checkpoint-census');
+  }
+  const routes = derived ? census.routes : census;
   demand(Array.isArray(routes) && routes.length > 0 && routes.length <= ENTRIES, 'unsupported-checkpoint-routes');
   let previous = '';
   for (const route of routes) {
@@ -318,7 +338,7 @@ async function checkpointRoutes(reader, selection, trusted) {
     previous = route.path;
     // Its original census row is preserved; current policy is independently
     // bound by trustedJson(POLICY), not selected-vintage scientific equality.
-    if (route.path === POLICY) continue;
+    if (route.path === POLICY || route.path === ACCEPTED_CHECKPOINT_LOCATOR) continue;
     const actual = reader.equalCurrent(route.path, true);
     const tree = actual ? `${actual.mode} blob ${actual.git_blob_oid}\t${actual.path}\0` : '';
     demand(route.tree === tree, 'checkpoint-route-identity:' + route.path);
@@ -342,8 +362,8 @@ async function collect(reader, {baseline, candidate, trusted}) {
     reader.descriptor(candidate, name, true);
   }
   for (const name of EXECUTION_CODE) reader.equalCurrent(name);
-  // A locator is not a scientific source, but changed root/copy custody must
-  // reenter authenticated acquisition rather than inherit an unchanged skip.
+  // Routing hints never authorize science, but any changed locator or retained
+  // archive must reenter authenticated acquisition instead of inheriting a skip.
   const checkpointLocator = reader.equalCurrent(ACCEPTED_CHECKPOINT_LOCATOR, true);
   if (checkpointLocator) {
     const locator = validateAcceptedCheckpointLocator(await reader.jsonAt(checkpointLocator));

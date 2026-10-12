@@ -4,8 +4,8 @@
   "qualifier_code": [
     {
       "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs",
-      "bytes": 58597,
-      "sha256": "aaa4782773e94a88fcf1c966ef549c6ab5fe084cd2243a43dab206ac6d185c5f"
+      "bytes": 86946,
+      "sha256": "54131d4459c6dd3074998377ac4bec985aae21963fa9010add87ff34b803de22"
     },
     {
       "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
@@ -21,6 +21,71 @@
       "path": "src/ownership-codec.js",
       "bytes": 2948,
       "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+    },
+    {
+      "path": "scripts/accepted-selected-checkpoint.mjs",
+      "bytes": 12134,
+      "sha256": "54e78c5ea3316612b4605579808a8ec3863b69401e6e57da71e8d8070aee97ec"
+    },
+    {
+      "path": "scripts/check-handoff-scope.mjs",
+      "bytes": 8679,
+      "sha256": "cfe108be6abf62a9db1a3720c3d8caaec75383b4af06fcafd9ae532ab5e1c145"
+    },
+    {
+      "path": "scripts/evidence-policy.mjs",
+      "bytes": 2126,
+      "sha256": "a6b2d154c234d16321ab1841a69b681a739b45ac63e98bbeb6def295e1c6c11f"
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "bytes": 28506,
+      "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97"
+    },
+    {
+      "path": "scripts/geographic-report-artifact.mjs",
+      "bytes": 27523,
+      "sha256": "8023bccb096c2f6099b421ca25c0eec85b87cf1360d818b090fb551028c3b26a"
+    },
+    {
+      "path": "scripts/github-quota.mjs",
+      "bytes": 3378,
+      "sha256": "ba8503e32145f5563857f1015fb1516b1e65dcc451164a39930867e3a8d032b2"
+    },
+    {
+      "path": "scripts/github-snapshots.mjs",
+      "bytes": 1595,
+      "sha256": "eaf2ca029adae4319ff6b0f1ce9ba75b7f965aeeab7fa7fe72548fa888f22afe"
+    },
+    {
+      "path": "scripts/integration-proof.mjs",
+      "bytes": 8927,
+      "sha256": "cc4340acef4521062b32645b143e238ca01aea2ed6c705024e1744cf0df2ed1b"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "bytes": 26868,
+      "sha256": "426097a0b4396c171f5b38991a83d4779d0a92c8abe824aa683e49a7ac087c26"
+    },
+    {
+      "path": "scripts/job-deadline.mjs",
+      "bytes": 8192,
+      "sha256": "1951d3995bd231e28350accdf7825f3020b9b6d4557bc8014c754a21cc3cd710"
+    },
+    {
+      "path": "scripts/research-import-gate.mjs",
+      "bytes": 335,
+      "sha256": "0079ee16f5cf1068a09be8d5b416ed6a22e33c33b0605b203cc213f4f6198905"
+    },
+    {
+      "path": "scripts/worker-result.mjs",
+      "bytes": 2982,
+      "sha256": "c60d85a3284fe9ab9fb88adb323c67d9f164efaa1e681a7b6e3fd121ba28a03c"
+    },
+    {
+      "path": "src/regional-import-gate.js",
+      "bytes": 7292,
+      "sha256": "83215f326c85b6f95c21f5560c7f0477c581b1e37a1a4f52de4ef39741dabf7d"
     }
   ],
   "checkpoints": [
@@ -124,6 +189,100 @@
         "git_blob_oid": "49379eb149ffb6150bacba8db9868823454b0d7f",
         "bytes": 27663,
         "sha256": "067cf176f83fe5a9623da306a09cd491d4addf2b213b6991d3becff70c17b453"
+      }
+    },
+    {
+      "kind": "accepted-derived-selected-checkpoint-v1",
+      "id": "accepted-1790-clean004-current-aus",
+      "accepted_head": "04cfa575c98915fa50cc9ef17e1d00ca1579b3d5",
+      "selected_commit": "95a3d3dcb76bf0c61a4f8ada504f3f346df18466",
+      "selection_sha256": "90d9305e1c17d9e19a0777707b2fa418c6c3d3328f9e36bb4b549c7b3e5a3c92",
+      "execution_commit": "226336bd1b0f3cd10b8894bf0ce90c022f64b4a2",
+      "execution_code_sha256": "2785ef8ce3dfb3921cd89fc6a0b935a989e72957d7ddc4964e4419ba5610a6d5",
+      "runtime_sha256": "fff3709ca022c8fe1fdc0e0b359d3f40e871c2269c4241b2979b92c6b0e5566c",
+      "facts": {
+        "commit": "04cfa575c98915fa50cc9ef17e1d00ca1579b3d5",
+        "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/trusted-selected-joint-bdl3wfd7/complete/derived-facts.json",
+        "mode": "100644",
+        "git_blob_oid": "bb44ba7d2e0973e405552335e551f82d1a8bed9f",
+        "bytes": 139556,
+        "sha256": "d366c989c6d0a8dd145b45c56c5dff518c583fee3fb4d4fed1728f94b8ef0a42"
+      },
+      "certificate": {
+        "commit": "04cfa575c98915fa50cc9ef17e1d00ca1579b3d5",
+        "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/trusted-selected-joint-bdl3wfd7/complete/derived-certificate.json.gz",
+        "mode": "100644",
+        "git_blob_oid": "2a59c46009a780cd5f8cb6037fa4e50664a888ec",
+        "bytes": 7515261,
+        "sha256": "82ed823e1968222c6e0ca760a4fd5567a5c7949f2cb5b7422f75806661b0a0e2",
+        "decoded_bytes": 18414420,
+        "decoded_sha256": "b1caaaa2ba0b7fb54dc75d0f3dd2414d53da6fa32d40793435d799ccd6357ef4"
+      },
+      "publication": {
+        "commit": "04cfa575c98915fa50cc9ef17e1d00ca1579b3d5",
+        "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/trusted-selected-joint-bdl3wfd7/complete/derived-publication.json",
+        "mode": "100644",
+        "git_blob_oid": "6ab63b417cf964c46e27c2bce2359b9fd01c6dc7",
+        "bytes": 545,
+        "sha256": "a55d09b39564611017bb04b59172718a53c9a74499298f38453cb4a474fb30aa"
+      },
+      "continuous_facts": {
+        "commit": "04cfa575c98915fa50cc9ef17e1d00ca1579b3d5",
+        "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/trusted-selected-joint-bdl3wfd7/complete/facts.json",
+        "mode": "100644",
+        "git_blob_oid": "8999faf7d43a042aba8031dd25ba9acc68ba8f01",
+        "bytes": 138676,
+        "sha256": "3c024899d7be3e8726179eb22609ebc07854cb35c86b84baa02943d9020bb2a9"
+      },
+      "operands": {
+        "commit": "04cfa575c98915fa50cc9ef17e1d00ca1579b3d5",
+        "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/trusted-selected-joint-bdl3wfd7/complete/operands.json.gz",
+        "mode": "100644",
+        "git_blob_oid": "71fcf77f032b63d65bb51b2fffa7928513b18942",
+        "bytes": 667895,
+        "sha256": "05c17d36c59d736e6ee8c7d00eb8ab995ab129643373b0e73707eedcee65accf",
+        "decoded_bytes": 2430031,
+        "decoded_sha256": "d73b656012fbe687e6bed15e4e4f4ee7197e3d17979c1ce7fad071d85b785a85"
+      },
+      "continuous_publication": {
+        "commit": "04cfa575c98915fa50cc9ef17e1d00ca1579b3d5",
+        "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/trusted-selected-joint-bdl3wfd7/complete/publication.json",
+        "mode": "100644",
+        "git_blob_oid": "1c5d5c901ff88091a9350ea44ef48106337d96af",
+        "bytes": 440,
+        "sha256": "ebb4e8383ebe4bc85167782e00edcc5014665c53bc84e9ced9aee0445fecdda6"
+      },
+      "joint_result": {
+        "commit": "04cfa575c98915fa50cc9ef17e1d00ca1579b3d5",
+        "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/joint-result.json",
+        "mode": "100644",
+        "git_blob_oid": "ab2a7f563e8177d13bab13fc8933e20e661290b5",
+        "bytes": 659152,
+        "sha256": "5c1d76bd09e2819d5f2f76e2f830b0f770856cac78e3f1b07a53f589e4ed5682"
+      },
+      "operating": {
+        "commit": "04cfa575c98915fa50cc9ef17e1d00ca1579b3d5",
+        "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/operating.json",
+        "mode": "100644",
+        "git_blob_oid": "7fdd1a3104b616ae8e22c5e01f3cbeb2d8dad728",
+        "bytes": 16179,
+        "sha256": "25c5642327c49cddfa55e522c9acf4585691da2d78265c4cde45da8e622b8bf3"
+      },
+      "executing_policy": {
+        "commit": "04cfa575c98915fa50cc9ef17e1d00ca1579b3d5",
+        "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/executing-policy.json",
+        "mode": "100644",
+        "git_blob_oid": "08c1f42ab8d9e9f894e64c8d1f0eee11a973dfe7",
+        "bytes": 252214,
+        "sha256": "633bf569788c97c2aa52c27c4cb919c7dd1021eb1cd78fc7b326fc7369d475a8"
+      },
+      "routes": {
+        "commit": "5f867f597a74b83ca7cf0f1f9dd73a89f34a0484",
+        "path": "coordination/engineering/accepted-checkpoint-advancement-20261012/checkpoint-routes-004.json",
+        "mode": "100644",
+        "git_blob_oid": "0408fcd24f12c80e5d8f63c35460ebfbb1edba2d",
+        "bytes": 54285,
+        "sha256": "edf24d771eb936897304a91801ce821a9211d828a37476e9fa5d70f223b9dc6e"
       }
     }
   ]

@@ -18,6 +18,21 @@ const MODULE = 'coordination/engineering/selected-geography-effective-prevention
 const CATALOGUE = 'coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
 const FIELDS = ['id','index','parent_id','parent_index','source','ordinal','whole_feature_sha256','geometry_sha256','effective_geometry_sha256','boxes'];
 const states = new WeakMap(), projections = new WeakMap(), transitions = new WeakMap();
+const LOCATOR = 'data/selected-checkpoint.json';
+const ACCEPTED_CODE = ['scripts/accepted-selected-checkpoint.mjs','scripts/check-handoff-scope.mjs',
+  'scripts/evidence-policy.mjs','scripts/evidence-quality.mjs','scripts/geographic-report-artifact.mjs',
+  'scripts/github-quota.mjs','scripts/github-snapshots.mjs','scripts/integration-proof.mjs',
+  'scripts/issue-claim-contract.mjs','scripts/job-deadline.mjs','scripts/research-import-gate.mjs',
+  'scripts/worker-result.mjs','src/regional-import-gate.js'];
+const JOINT_CODE = ['scripts/run-geographic-check.py','scripts/check-geographic-regression.py',
+  'scripts/check-effective-geographic-regression.mjs','src/ownership-codec.js',
+  'scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt',
+  'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
+  'coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs',
+  MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint-continuous.mjs',
+  'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs'];
+const JOINT_NATIVE_CODE=[...JOINT_CODE.slice(0,3),'scripts/selected-checkpoint-native.mjs',...JOINT_CODE.slice(3)];
+const DERIVED_CODE=[...JOINT_NATIVE_CODE,...ACCEPTED_CODE,'scripts/geographic_checkpoint_products.py'];
 const demand = (ok, message) => { if (!ok) throw Error(message); };
 const sha = body => createHash('sha256').update(body).digest('hex');
 // Policy is rooted in the executing trusted checkout, independently of the
@@ -120,10 +135,15 @@ function readNamed(session, reader, name, expected) {
   const p = reader.descriptor(name);
   charge(session,reader,7*p.bytes);
   const body = reader.read(name,{expected});
+  if (name===PROGRAMME_POLICY && reader.version===session.trusted && !session.executingPolicy) {
+    charge(session,reader,2*body.length);
+    session.executingPolicy=freeze({pin:{...reader.inventory.get(reader.version+':'+name)},body:body.toString('utf8')});
+    retain(session,session.executingPolicy);
+  }
   session.floor = reader.used;
   return JSON.parse(body);
 }
-function rootCatalogue(session, reader) {
+function rootCatalogue(session, reader, {accepted = false} = {}) {
   const trusted = reader.git('-C',ROOT,'rev-parse', '--verify', 'HEAD').toString().trim();
   // Do not derive trust from reader.version or a caller-supplied trusted SHA.
   const executing = new ImmutableReader(ROOT, trusted, {runtimeBytes:reader.runtimeBytes,
@@ -140,7 +160,9 @@ function rootCatalogue(session, reader) {
   const expectedPaths = [MODULE,
     'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
     'scripts/check-effective-geographic-regression.mjs','src/ownership-codec.js'];
-  demand(same(catalogue.qualifier_code.map(p => p.path), expectedPaths), 'Unknown checkpoint method closure');
+  const paths = catalogue.qualifier_code.map(p => p.path);
+  demand(same(paths,[...expectedPaths,...ACCEPTED_CODE]) || !accepted && same(paths,expectedPaths),
+    'Unknown or incomplete checkpoint method closure');
   for (const p of catalogue.qualifier_code) {
     const actual = executing.descriptor(p.path), local = path.join(ROOT,p.path);
     demand(actual.bytes === p.bytes && actual.mode === '100644', 'Checkpoint method identity differs');
@@ -277,6 +299,8 @@ export function qualifyCheckpoint({reader,checkpointId,budget}) {
       && root.selection_sha256 === valueSha(selected.selection));
     supported(matches.length === 1, 'No unique accepted checkpoint for the actual complete selector');
     const root = matches[0];
+    if (root.kind==='accepted-derived-selected-checkpoint-v1')
+      return admitTrustedDerivedSeed(session,reader,archiveReader,root,catalogue);
     keys(root,'id,accepted_head,selected_commit,selection_sha256,execution_commit,execution_code_sha256,runtime_sha256,facts,certificate,publication,custody,routes','Unknown accepted checkpoint registration');
     demand(commit(root.accepted_head) && commit(root.selected_commit) && commit(root.execution_commit), 'Incomplete original acceptance/execution identity');
     const facts = readBody(session,archiveReader,root.facts), publication = readBody(session,archiveReader,root.publication);
@@ -337,36 +361,387 @@ export function qualifyCheckpoint({reader,checkpointId,budget}) {
         historical_selected_commit:root.selected_commit,checkpoint_id:root.id,trusted_catalogue_commit:trusted},
       selection:selected.selection,baseSelection:nativeBaseSelection(selected.selection),certificate,
       additions,ledger:selected.ledger,registry:selected.registry,patch:selected.patch,manifest};
-    const oldAuthorities = new Map();
-    // Read only original small patch products already accepted by the checkpoint.
-    // No original source/native qualification or selected acquisition is repeated.
-    for (const entry of selected.registry.entries) {
-      const binding = readBody(session,reader,entry.source_authority);
-      const publication = readBody(session,reader,binding.native_proof.publication);
-      demand(publication.assets.length === binding.native_proof.assets.length, 'Accepted native asset roster differs');
-      const patches = [];
-      for (let i=0;i<publication.assets.length;i++) if (publication.assets[i].path.startsWith('patch-')) {
-        const p = binding.native_proof.assets[i], q = publication.assets[i];
-        demand(p.path.endsWith('/'+q.path) && p.sha256 === q.sha256 && p.bytes === q.bytes,
-          'Accepted original native patch alias differs');
-        patches.push(readBody(session,reader,p));
-      }
-      demand(patches.length > 0, 'Accepted native authority has no complete patches');
-      oldAuthorities.set(entry.authority_sha256,{entry,patches});
-    }
-    const originalPatches = [...oldAuthorities.values()].flatMap(p => p.patches);
-    const nativeRows = new Map(rebind.request.current_rows.map(p => [p.y,p]));
-    for (const row of rebind.request.acquisition.predecessor_rows) nativeRows.set(row.y,row);
-    demand(same(originalPatches.map(valueSha),rebind.request.original_patch_sha256s), 'Accepted complete original patch denominator differs');
-    retain(session,{data,routes,rebind,originalPatches});
-    const state = newState(session,data,{reader,routes,rebind,oldAuthorities,selected,root,
-      nativeRows,sourceTargets:new Map(rebind.request.current_targets.map(p => [p.target_id,p]))});
-    return Object.freeze({available:true,state});
+    return finishCheckpoint(session,reader,{data,routes,rebind,selected,root});
   } catch (error) {
     session.closed = true;
     if (error.reuseUnavailable) return unavailable(error.message);
     throw error;
   }
+}
+
+function finishCheckpoint(session,reader,{data,routes,rebind,selected,root,carriedCertificate=false}) {
+  const oldAuthorities = new Map();
+  // Read only original small patch products already accepted by the checkpoint.
+  // No original source/native qualification or selected acquisition is repeated.
+  for (const entry of selected.registry.entries) {
+    const binding = readBody(session,reader,entry.source_authority);
+    const publication = readBody(session,reader,binding.native_proof.publication);
+    demand(publication.assets.length === binding.native_proof.assets.length, 'Accepted native asset roster differs');
+    const patches = [];
+    for (let i=0;i<publication.assets.length;i++) if (publication.assets[i].path.startsWith('patch-')) {
+      const p = binding.native_proof.assets[i], q = publication.assets[i];
+      demand(p.path.endsWith('/'+q.path) && p.sha256 === q.sha256 && p.bytes === q.bytes,
+        'Accepted original native patch alias differs');
+      patches.push(readBody(session,reader,p));
+    }
+    demand(patches.length > 0, 'Accepted native authority has no complete patches');
+    oldAuthorities.set(entry.authority_sha256,{entry,patches});
+  }
+  const originalPatches = [...oldAuthorities.values()].flatMap(p => p.patches);
+  const nativeRows = new Map(rebind.request.current_rows.map(p => [p.y,p]));
+  for (const row of rebind.request.acquisition.predecessor_rows) nativeRows.set(row.y,row);
+  demand(same(originalPatches.map(valueSha),rebind.request.original_patch_sha256s), 'Accepted complete original patch denominator differs');
+  if (carriedCertificate) {
+    const {certificate,...newData}=data;
+    retain(session,{data:newData,rebind,originalPatches});
+  } else retain(session,{data,routes,rebind,originalPatches});
+  const state = newState(session,data,{reader,routes,rebind,oldAuthorities,selected,root,
+    nativeRows,sourceTargets:new Map(rebind.request.current_targets.map(p => [p.target_id,p]))});
+  return Object.freeze({available:true,state});
+}
+
+// The accepted report is authority only after the transport module has verified
+// the existing bot merge receipt, actual merged tree, trusted job and archive.
+// Keep the legacy synchronous entry independent of this optional async boundary.
+export async function qualifyAcceptedCheckpoint({reader,acceptedHandle,budget}) {
+  budgetCheck(reader,budget);
+  const session={reader,budget,callerCarry:budget.carriedBytes,closed:false,handles:new Set(),residentBytes:0,
+    initialMetadata:reader.metadataBytes,initialOutput:reader.outputBytes,floor:reader.used};
+  charge(session,reader,budget.carriedBytes);
+  try {
+    const {trusted,archiveReader}=rootCatalogue(session,reader,{accepted:true});
+    session.trusted=trusted;
+    const {readAcceptedCheckpoint}=await import('../../../scripts/accepted-selected-checkpoint.mjs');
+    const accepted=readAcceptedCheckpoint(acceptedHandle);
+    demand(Number.isSafeInteger(accepted.admitted_bytes) && accepted.admitted_bytes>0
+      && budget.carriedBytes>=accepted.admitted_bytes, 'Accepted archive complete live carry is undercharged');
+    return admitDerivedCheckpoint(session,reader,archiveReader,accepted);
+  } catch (error) {
+    session.closed=true;
+    if (error.reuseUnavailable) return unavailable(error.message);
+    throw error;
+  }
+}
+
+// A single reviewed main-tree seed reuses the existing catalogue trust root.
+// It is never relabelled as a hosted job or a cold-coordinate execution.
+function admitTrustedDerivedSeed(session,reader,archiveReader,root,catalogue) {
+  keys(root,'kind,id,accepted_head,selected_commit,selection_sha256,execution_commit,execution_code_sha256,runtime_sha256,facts,certificate,publication,continuous_facts,operands,continuous_publication,joint_result,operating,routes,executing_policy',
+    'Unknown trusted derived checkpoint registration');
+  demand(commit(root.accepted_head) && commit(root.selected_commit) && commit(root.execution_commit)
+    && hash(root.selection_sha256) && hash(root.execution_code_sha256) && hash(root.runtime_sha256),
+  'Incomplete trusted derived acceptance/execution identity');
+  const roles={facts:'derived-facts.json',certificate:'derived-certificate.json.gz',publication:'derived-publication.json',
+    continuous_facts:'facts.json',operands:'operands.json.gz',continuous_publication:'publication.json',routes:'checkpoint-routes.json'};
+  const products={},members=[];
+  for (const [role,name] of Object.entries(roles)) {
+    const p=root[role]; products[name]=readBody(session,archiveReader,p);
+    // Repository evidence may gzip an originally plain canonical JSON product.
+    // Keep its original logical publication identity without relabelling bytes.
+    members.push(name.endsWith('.gz')?{name,bytes:p.bytes,sha256:p.sha256,
+      decoded_bytes:p.decoded_bytes,decoded_sha256:p.decoded_sha256}
+      :{name,bytes:p.decoded_bytes??p.bytes,sha256:p.decoded_sha256??p.sha256});
+  }
+  const facts=products['derived-facts.json'], joint=readBody(session,archiveReader,root.joint_result);
+  const predecessor=catalogue.checkpoints.find(p=>p.id===facts.baseline_accepted_execution?.checkpoint_id);
+  demand(predecessor && !predecessor.kind && predecessor.id!==root.id
+    && predecessor.accepted_head===facts.baseline_accepted_execution.accepted_head
+    && predecessor.execution_commit===facts.baseline_accepted_execution.execution_commit
+    && predecessor.selected_commit===facts.baseline_accepted_execution.historical_selected_commit,
+  'Trusted seed predecessor acceptance differs');
+  const inherited=readBody(session,archiveReader,predecessor.routes);
+  demand(Array.isArray(inherited) && inherited.every(validRoute)
+    && same(products['checkpoint-routes.json'].predecessor_paths,inherited.map(p=>p.path)),
+  'Trusted seed omitted its complete inherited route census');
+  const operating=readBody(session,archiveReader,root.operating);
+  demand(facts.executing_commit===root.execution_commit && facts.candidate_commit===root.selected_commit
+    && valueSha(facts.candidate_selection)===root.selection_sha256
+    && valueSha(facts.execution_code)===root.execution_code_sha256 && valueSha(facts.runtime)===root.runtime_sha256,
+  'Trusted derived original execution/code/runtime differs');
+  demand(joint.version===1 && joint.kind==='trusted-selected-joint-comparison-v1'
+    && joint.mode==='authenticated-checkpoint-append-v1' && joint.candidate_code_executed===false,
+  'Trusted seed lacks its original joint completion');
+  demand(operating.complete===true && operating.returncode===0 && operating.failure===null
+    && same(operating.errors,[]) && same(operating.terminal_group_scan?.members,[])
+    && same(operating.cleanup_group_scan?.members,[]), 'Trusted seed lacks measured successful terminal custody');
+  // This internal view is not a fabricated geographic report or acceptance
+  // receipt. The only authority is the already authenticated trusted catalogue.
+  const report={gate_status:'passed',selected_native_report:joint.native,selected_continuous_report:joint.continuous_result};
+  retain(session,{certificate:products['derived-certificate.json.gz'],routes:products['checkpoint-routes.json'].routes});
+  return admitDerivedCheckpoint(session,reader,archiveReader,{seedRoot:root,products,member_pins:members,report,
+    source:{executing_commit:root.execution_commit,baseline:facts.baseline_commit,candidate_commit:root.selected_commit}});
+}
+
+function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
+  const {source,receipt,report,products,member_pins,seedRoot}=accepted;
+  const trusted=session.trusted;
+  const facts=products['derived-facts.json'], certificate=products['derived-certificate.json.gz'];
+  const publication=products['derived-publication.json'], continuousFacts=products['facts.json'];
+  const continuousPublication=products['publication.json'], operands=products['operands.json.gz'];
+  const census=products['checkpoint-routes.json'];
+  const members=new Map(member_pins.map(p=>[p.name,p]));
+  const published=(name,p)=>{
+    const actual=members.get(name);
+    demand(actual && p?.path===name && p.bytes===actual.bytes && p.sha256===actual.sha256
+      && p.decoded_bytes===actual.decoded_bytes && p.decoded_sha256===actual.decoded_sha256
+      && valueSha(products[name])===(actual.decoded_sha256??actual.sha256),
+    'Accepted whole checkpoint publication/member differs: '+name);
+  };
+  const factKeys='version,kind,validation_stage,accepted_checkpoint,executing_commit,execution_code,runtime,baseline_accepted_execution,executing_authority_pins,actual_reader_inventories,baseline_commit,candidate_commit,baseline_selection,candidate_selection,candidate_bindings,transition_plan,native_result_sha256,continuous_publication,candidate_code_executed,certificate,checkpoint_routes,executing_policy';
+  const expectedFactKeys=seedRoot?factKeys.split(',').filter(key=>!['checkpoint_routes','executing_policy'].includes(key) || Object.hasOwn(facts??{},key)).join(','):factKeys;
+  keys(facts, expectedFactKeys+(Object.hasOwn(facts??{},'checkpoint_transport_inputs')?',checkpoint_transport_inputs':''),
+    'Unknown accepted derived checkpoint facts');
+  demand(facts.version===1 && facts.kind==='derived-selected-checkpoint-candidate-v1'
+    && facts.validation_stage==='native-passed-continuous-pending' && facts.accepted_checkpoint===false
+    && facts.candidate_code_executed===false && facts.executing_commit===(source.executing_commit??source.baseline)
+    && facts.baseline_commit===source.baseline && facts.candidate_commit===source.candidate_commit,
+  'Accepted derived execution/selected vintage differs');
+  keys(publication,'version,complete,kind,accepted_checkpoint,validation_stage,certificate,facts'+(!seedRoot || Object.hasOwn(publication??{},'routes')?',routes':''),
+    'Unknown accepted derived publication');
+  demand(publication.version===1 && publication.complete===true && publication.kind===facts.kind
+    && publication.accepted_checkpoint===false && publication.validation_stage===facts.validation_stage,
+  'Accepted derived publication completion differs');
+  published('derived-facts.json',publication.facts); published('derived-certificate.json.gz',publication.certificate);
+  if (!seedRoot || publication.routes) {
+    published('checkpoint-routes.json',publication.routes);
+    demand(same(facts.checkpoint_routes,publication.routes), 'Accepted complete route publication differs');
+  }
+  demand(same(facts.certificate,publication.certificate), 'Accepted candidate certificate pin differs');
+  published('facts.json',continuousPublication?.facts); published('operands.json.gz',continuousPublication?.operands);
+  demand(continuousPublication.version===1 && continuousPublication.complete===true
+    && continuousPublication.kind==='trusted-selected-continuous-comparison-v1'
+    && same(facts.continuous_publication,continuousPublication), 'Accepted continuous publication differs');
+  const native=report.selected_native_report, continuous=report.selected_continuous_report;
+  const {runtime:outerRuntime,caller_runtime:outerCaller,execution_runtimes:outerRuntimes,
+    execution_code_inventory:outerCode,...nativeInverse}=native??{};
+  demand(report.gate_status==='passed' && native?.status==='no-new-native-loss'
+    && native.method==='selected-native-owner-conservation-v1' && native.candidate_code_executed===false
+    && native.lost_or_reassigned_cells===0 && same(native.intervals,[])
+    && valueSha(nativeInverse)===facts.native_result_sha256
+    && same(native.baseline_selection,facts.baseline_selection) && same(native.candidate_selection,facts.candidate_selection),
+  'Accepted checkpoint lacks its complete successful native result');
+  const outer=[outerRuntime,outerCaller,outerRuntimes,outerCode];
+  demand(outer.every(p=>p===undefined) || outer.every(p=>p!==undefined)
+    && same(outerRuntime,facts.runtime[0]) && same(outerCaller,facts.runtime[1])
+    && same(outerRuntimes,facts.runtime) && same(outerCode,facts.execution_code),
+  'Accepted native wrapper execution/runtime differs');
+  const strict=continuous?.original_strict_polygon_result;
+  demand(continuous?.kind===continuousPublication.kind && continuous.candidate_code_executed===false
+    && ['no-new-regression','no-footprint-change'].includes(continuous.status)
+    && (continuous.regressions===0 || continuous.status==='no-footprint-change' && continuous.regressions===null)
+    && strict && strict.status===continuous.status && strict.regressions===continuous.regressions
+    && same(strict.findings,{type:'FeatureCollection',features:[]}) && same(strict.geometry_errors,[])
+    && same(continuous.issued_publication,continuousPublication),
+  'Accepted checkpoint lacks its original successful strict polygon result');
+  const codePaths=facts.execution_code?.map(p=>p.path);
+  supported(seedRoot && same(codePaths,JOINT_NATIVE_CODE) || same(codePaths,DERIVED_CODE),
+    'Unsupported accepted joint method closure');
+  for (const p of facts.execution_code) {
+    pin(p); demand(p.commit===facts.executing_commit, 'Accepted executing code was rebound');
+    // The original trusted accepted execution already authenticated these exact
+    // complete code bodies. Preserve its pins; do not reacquire that old method.
+  }
+  demand(Array.isArray(facts.runtime) && facts.runtime.length===3
+    && new Set(facts.runtime.map(p=>p.path)).size===3 && facts.runtime.every(p=>typeof p.path==='string'
+      && Number.isSafeInteger(p.bytes) && p.bytes>0 && Number.isSafeInteger(p.mode) && hash(p.sha256)),
+  'Incomplete accepted execution runtime identities');
+  keys(continuousFacts,'version,kind,baseline_commit,candidate_commit,executing_commit,execution_code,runtime,plan,inverse,checkpoint_custody,source_custody,validation_route,candidate_code_executed',
+    'Unknown complete accepted continuous facts');
+  demand(commit(facts.baseline_accepted_execution?.accepted_head)
+    && commit(facts.baseline_accepted_execution?.execution_commit)
+    && commit(facts.baseline_accepted_execution?.historical_selected_commit)
+    && same(continuousFacts.checkpoint_custody?.baseline,facts.baseline_accepted_execution)
+    && same(continuousFacts.checkpoint_custody?.candidate,facts.baseline_accepted_execution),
+  'Accepted complete predecessor checkpoint custody differs');
+  demand(same(continuousFacts.execution_code,facts.execution_code) && same(continuousFacts.runtime,facts.runtime)
+    && continuousFacts.kind===continuousPublication.kind && continuousFacts.executing_commit===facts.executing_commit
+    && continuousFacts.baseline_commit===facts.baseline_commit && continuousFacts.candidate_commit===facts.candidate_commit
+    && continuousFacts.candidate_code_executed===false && continuousFacts.validation_route==='authenticated-checkpoint-append-v1',
+  'Accepted continuous execution/custody differs');
+  const selected=readSelection(session,reader);
+  supported(same(selected.selection,facts.candidate_selection), 'Accepted checkpoint does not cover the actual complete selector');
+  const manifest=readNamed(session,reader,selected.selection.manifest_path,selected.selection.sha256);
+  demand(same(facts.candidate_bindings,{ledger_sha256:valueSha(selected.ledger),registry_sha256:valueSha(selected.registry),
+    patch_sha256:valueSha(selected.patch),manifest_sha256:valueSha(manifest)}),
+  'Accepted checkpoint changed the complete ledger/registry/patch/manifest');
+  const rebind=rebindProducts(session,reader,selected.ledger);
+  demand(same(rebind.request.base_selection,nativeBaseSelection(selected.selection))
+    && rebind.request.authority_registry_sha256===valueSha(selected.registry)
+    && same(rebind.result.native.rows,selected.patch.rows)
+    && same(selected.ledger.current_targets,rebind.request.current_targets),
+  'Accepted checkpoint current-base/native/target roster differs');
+  const additions=[...selected.normalized.rows.values()].map(row=>{
+    const target=rebind.request.current_targets.find(p=>p.target_id===row.target_id);
+    demand(target && target.pixelIndex===row.pixelIndex, 'Accepted current target identity omitted');
+    return {...row,base_geometry:target.geometry,base_geometry_sha256:target.geometry_sha256};
+  });
+  demand(same(operands.effective_additions?.candidate,additions), 'Accepted complete current primitives differ');
+  coordinateCheck(certificate,{binding:certificate.binding,complete_owners:continuous.complete_owners,
+    complete_sources:certificate.binding.sources.length},additions);
+  demand(same(certificate.inputs.map(p=>p.source),certificate.binding.sources), 'Accepted complete source binding inventory differs');
+  demand(same(certificate.binding.selection,selected.selection), 'Accepted certificate selected binding differs');
+  completeRows(selected.patch.rows,manifest.size,certificate.entries.length);
+  completeRows(rebind.request.current_rows,manifest.size,certificate.entries.length);
+  completeRows(rebind.request.acquisition.predecessor_rows,manifest.size,certificate.entries.length);
+  const plan=facts.transition_plan, ids=plan?.required_ids;
+  demand(plan?.kind==='complete-selected-continuous-plan-v1' && plan.version===1
+    && Array.isArray(ids) && same(ids,[...new Set(ids)].sort())
+    && same(plan,continuousFacts.plan) && same(plan,operands.plan)
+    && same(plan.source_bindings,continuous.source_binding) && same(ids,continuous.required_ids)
+    && same(plan.changed_ids,strict.changed_location_ids)
+    && same(plan.source_bindings.candidate,certificate.binding)
+    && same(plan.source_bindings.baseline.selection,facts.baseline_selection),
+  'Accepted complete two-vintage continuous scope differs');
+  demand(operands.version===1 && operands.kind==='complete-selected-continuous-operands-v1'
+    && same(Object.keys(operands.baseline).sort(),ids) && same(Object.keys(operands.candidate).sort(),ids),
+  'Accepted whole source operand scope differs');
+  const sourceCustody=continuousFacts.source_custody;
+  keys(sourceCustody,'baseline,candidate,source_features_reused','Incomplete accepted whole-source custody');
+  demand(sourceCustody.source_features_reused===true, 'Unsupported accepted source projection method');
+  for (const vintage of ['baseline','candidate']) {
+    const side=sourceCustody[vintage];
+    demand(same(side?.state_binding,plan.source_bindings[vintage]) && Array.isArray(side.inputs)
+      && same(side.inputs.map(p=>p.path),plan.source_paths[vintage]) && Array.isArray(side.actual_inputs)
+      && side.actual_inputs.length===side.inputs.length, 'Accepted complete source input custody differs');
+    for (const input of side.inputs) {
+      const actual=side.actual_inputs.filter(p=>p.path===input.source.path);
+      demand(same(input,certificate.inputs.find(p=>p.path===input.path)) && actual.length===1
+        && actual[0].whole_body_consumed===true && actual[0].mode===input.source.mode
+        && actual[0].git_blob_oid===input.source.git_blob_oid && actual[0].bytes===input.source.bytes
+        && actual[0].sha256===input.source.sha256, 'Accepted source body mode/OID/hash differs');
+    }
+  }
+  const entries=new Map(certificate.entries.map(row=>[row[0],row]));
+  const inverse=continuousFacts.inverse;
+  demand(Array.isArray(inverse) && inverse.length===2*ids.length, 'Accepted complete source inverse omitted rows');
+  for (const vintage of ['baseline','candidate']) {
+    const rows=inverse.filter(row=>row.vintage===vintage);
+    demand(same(rows.map(row=>row.id).sort(),ids), 'Accepted source inverse repeats/omits an owner');
+    for (const row of rows) {
+      const expected=entries.get(row.id), feature=operands[vintage][row.id];
+      demand(expected && row.source===expected[4] && row.ordinal===expected[5]
+        && row.whole_feature_sha256===expected[6] && row.geometry_sha256===expected[7]
+        && row.whole_source_sha256===certificate.inputs.find(p=>p.path===row.source)?.whole_body_sha256
+        && valueSha(feature)===row.whole_feature_sha256 && valueSha(feature.geometry)===row.geometry_sha256,
+      'Accepted whole original feature/geometry inverse differs');
+    }
+  }
+  const inventories=facts.actual_reader_inventories;
+  keys(inventories,'baseline,candidate','Missing complete accepted reader inventories');
+  for (const inventory of Object.values(inventories)) {
+    demand(Array.isArray(inventory) && new Set(inventory.map(p=>p.commit+':'+p.path)).size===inventory.length,
+      'Duplicate accepted reader inventory identity');
+    for (const p of inventory) {
+      demand(commit(p.commit) && safe(p.path) && ['100644','100755'].includes(p.mode)
+        && /^[a-f0-9]{40}$/.test(p.git_blob_oid) && Number.isSafeInteger(p.bytes) && p.bytes>=0 && p.bytes<=FILE,
+      'Incomplete accepted reader descriptor');
+      if (p.whole_body_consumed) demand(p.whole_body_consumed===true && hash(p.sha256)
+        && (p.decoded_bytes===undefined || Number.isSafeInteger(p.decoded_bytes) && p.decoded_bytes>=0
+          && p.decoded_bytes<=FILE && hash(p.decoded_sha256)), 'Incomplete accepted consumed-body identity');
+      else demand(p.whole_body_consumed===undefined && (p.sha256===undefined || hash(p.sha256)),
+        'Ambiguous accepted body-consumption identity');
+    }
+  }
+  keys(census,'version,kind,candidate_commit,candidate_selection,predecessor_paths,routes',
+    'Unknown complete accepted scientific route census');
+  demand(census.version===1 && census.kind==='selected-checkpoint-scientific-routes-v1'
+    && census.candidate_commit===facts.candidate_commit && same(census.candidate_selection,selected.selection)
+    && Array.isArray(census.predecessor_paths)
+    && same(census.predecessor_paths,[...new Set(census.predecessor_paths)].sort())
+    && census.predecessor_paths.every(safe), 'Accepted route predecessor/selection identity differs');
+  const expectedPaths=scientificRoutePaths(census.predecessor_paths,inventories.candidate,manifest,certificate,selected.selection);
+  demand(Array.isArray(census.routes) && same(census.routes.map(p=>p.path),expectedPaths)
+    && census.routes.every(validRoute), 'Incomplete accepted present/absent route census');
+  const policyPins=facts.executing_authority_pins;
+  demand(Array.isArray(policyPins) && same(policyPins.map(p=>p.path),[PROGRAMME_POLICY,CATALOGUE])
+    && policyPins.every(p=>p.commit===facts.executing_commit && p.whole_body_consumed===true),
+  'Incomplete accepted executing policy custody');
+  for (const p of policyPins) {
+    pin(p);
+    demand(same(p,inventories.baseline.find(q=>q.commit===p.commit && q.path===p.path)),
+      'Accepted executing policy/catalogue pin differs from complete consumed inventory');
+  }
+  let priorPolicy;
+  if (seedRoot) {
+    const p=seedRoot.executing_policy;
+    demand((p.decoded_bytes??p.bytes)===policyPins[0].bytes
+      && (p.decoded_sha256??p.sha256)===policyPins[0].sha256,
+    'Trusted seed policy alias differs from original executing policy');
+    priorPolicy=validateSupportedProgrammeCatalogue(readBody(session,archiveReader,p));
+  } else {
+    const policy=facts.executing_policy;
+    keys(policy,'pin,body','Missing exact accepted programme policy body');
+    demand(same(policy.pin,policyPins[0]) && typeof policy.body==='string'
+      && Buffer.byteLength(policy.body)===policy.pin.bytes, 'Accepted programme policy identity differs');
+    charge(session,reader,8*policy.pin.bytes);
+    demand(sha(Buffer.from(policy.body))===policy.pin.sha256, 'Accepted original programme policy body differs');
+    priorPolicy=validateSupportedProgrammeCatalogue(JSON.parse(policy.body));
+  }
+  const currentPolicy=validateSupportedProgrammeCatalogue(readNamed(session,archiveReader,PROGRAMME_POLICY));
+  for (const key of ['programs','current_rebind_migrations']) {
+    const current=new Set(currentPolicy[key].map(valueSha));
+    supported(priorPolicy[key].every(row=>current.has(valueSha(row))),
+      'Trusted producer policy no longer preserves accepted eligibility');
+  }
+  supported(sameScientificRoutes(reader,census.routes), 'Accepted checkpoint input or routing alternative changed');
+  const data={version:1,kind:'verified-selected-state-v1',selected_commit:reader.version,
+    accepted_execution:seedRoot?{kind:'trusted-main-derived-selected-checkpoint-v1',checkpoint_id:seedRoot.id,
+      accepted_head:seedRoot.accepted_head,execution_commit:facts.executing_commit,
+      historical_selected_commit:facts.candidate_commit,trusted_catalogue_commit:trusted}
+      :{kind:'accepted-selected-checkpoint-artifact-v1',accepted_head:receipt.merge_commit,
+      reviewed_head:receipt.reviewed_head,request_id:receipt.request_id,pr_number:receipt.pr_number,
+      execution_commit:facts.executing_commit,historical_selected_commit:facts.candidate_commit,
+      source,report_sha256:source.report_sha256,trusted_catalogue_commit:trusted},
+    selection:selected.selection,baseSelection:nativeBaseSelection(selected.selection),certificate,
+    additions,ledger:selected.ledger,registry:selected.registry,patch:selected.patch,manifest};
+  // accepted products already belong to the explicitly carried transport
+  // allowance. Retain only newly acquired state/patch products, not a resolver.
+  return finishCheckpoint(session,reader,{data,routes:census.routes,rebind,selected,root:null,carriedCertificate:true});
+}
+
+/** Exact already-consumed executing policy, for durable successor custody. */
+export function checkpointExecutingPolicy({transition,budget}) {
+  authenticateTransition({transition,budget});
+  const session=transitions.get(transition);
+  demand(session.executingPolicy, 'Missing consumed executing programme policy');
+  return session.executingPolicy;
+}
+
+const scientificPath=name=>safe(name) && !/\.(mjs|py)$/.test(name)
+  && !['requirements.txt','data/ownership-selection.json',LOCATOR].includes(name);
+function scientificRoutePaths(predecessor,inventory,manifest,certificate,selection) {
+  const paths=new Set(predecessor.filter(name=>name!==LOCATOR));
+  for (const p of inventory) if (scientificPath(p.path)) paths.add(p.path);
+  for (const p of manifest.parts) paths.add(path.posix.join(path.posix.dirname(selection.manifest_path),p.path));
+  for (const input of certificate.inputs) { paths.add(input.path); paths.add(input.source.path); }
+  return [...paths].sort();
+}
+function validRoute(p) {
+  if (!p || !safe(p.path) || typeof p.tree!=='string') return false;
+  return p.tree==='' || /^100(644|755) blob [a-f0-9]{40}\t/.test(p.tree)
+    && p.tree.endsWith('\t'+p.path+'\0') && p.tree.split('\0').length===2;
+}
+/** Complete candidate routing, including inherited unchanged bodies/absences.
+ * Caller arrays, changed-owner lists and locator JSON cannot restrict the scope. */
+export function checkpointRouteCensus({transition,budget}) {
+  const genuine=authenticateTransition({transition,budget});
+  const before=states.get(genuine.baseline), after=states.get(genuine.candidate), {session,reader}=after;
+  const predecessor=before.routes.map(p=>p.path);
+  const names=scientificRoutePaths(predecessor,[...reader.inventory.values()],genuine.candidate.manifest,
+    genuine.candidate.certificate,genuine.candidate.selection);
+  // Every new ls-tree row is either absent or one ordinary file; reserve its
+  // path, full identity, both route-name arrays and canonical output copies.
+  const reserve=7*(names.reduce((n,name)=>n+2*Buffer.byteLength(name)+192,0)
+    +valueBytes(genuine.candidate.selection).length+1024);
+  beginFrame(session,reader,reserve);
+  const old=new Map(before.routes.map(p=>[p.path,p.tree]));
+  const routes=names.map(name=>({path:name,tree:old.has(name) && name!==PROGRAMME_POLICY
+    ? old.get(name) : treeRoute(reader,name)}));
+  demand(routes.every(validRoute), 'Unsupported scientific route entry');
+  const result=freeze({version:1,kind:'selected-checkpoint-scientific-routes-v1',candidate_commit:reader.version,
+    candidate_selection:genuine.candidate.selection,predecessor_paths:[...predecessor].sort(),routes});
+  demand(7*valueBytes(result).length<=reserve, 'Complete route output exceeded prospective admission');
+  retain(session,result); beginFrame(session,reader); return result;
 }
 
 function planFor(before,after) {
@@ -511,7 +886,7 @@ export function releaseCheckpoint(state) {
   const proof = states.get(state); demand(proof && !proof.session.closed, 'Checkpoint already released or foreign');
   const session = proof.session; session.closed = true;
   for (const handle of session.handles) states.delete(handle);
-  session.handles.clear();
+  session.handles.clear(); session.executingPolicy=null;
 }
 
 function mergePatchRows(patches, size, ownerCount) {
