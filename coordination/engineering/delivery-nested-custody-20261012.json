@@ -1,0 +1,37 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "delivery-nested-custody-20261012",
+  "branch": "engineering/delivery-nested-custody-20261012",
+  "base_main_commit": "dd7db1d22823427b21afeeecab932d36d8728f76",
+  "github_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/1765",
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Constructor-only compatibility for accepted nested administrative catalogues and honestly reused physical-product custody"
+  ],
+  "dependencies": [
+    1759
+  ],
+  "updated_at_utc": "2026-10-12T04:30:26.169549+00:00",
+  "completed": [
+    "Original accepted source metadata inspected; constructor and adjacent controls implemented; actual complete AUS metadata recipe passed"
+  ],
+  "checks": [
+    "Focused delivery/evidence suite actual log retained"
+  ],
+  "deployment": "No production change or scientific operator execution",
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": "Metadata constructor only"
+  },
+  "evidence_paths": [
+    "coordination/engineering/delivery-nested-custody-20261012/evidence-quality.json",
+    "coordination/engineering/delivery-nested-custody-20261012/validation.txt"
+  ],
+  "blockers": [],
+  "next_action": "Independent exact-head code review, ordinary CI and serialized queue; actual AUS scientific delivery remains with issue1647 owner.",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}

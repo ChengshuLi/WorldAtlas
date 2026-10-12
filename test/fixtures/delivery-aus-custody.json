@@ -1,0 +1,336 @@
+{
+  "source": {
+    "commit": "edd0002c4a822c80b97d7a051b01add3c31ad75a",
+    "path": "research/geography/aus19-original-source-20261011/vintages/source-handoff-001/source-handoff.json",
+    "bytes": 1998089,
+    "sha256": "a86d07773cb98ac2e3b747b700eb07f845fb33da79da45c904927a2fa3b610b0"
+  },
+  "consumed_source_bindings": [
+    {
+      "feature_count": 547,
+      "original_source_custody": {
+        "catalogue_record": {
+          "advertised_feature_count": 547,
+          "cohort": "administrative-registry",
+          "feature_count": 547,
+          "key": "gb:AUS:ADM2",
+          "metadata_sha256": "bcda4e2cd915c4ed62688cae18bfbefb85d50f3c14cc2981c376d742c967b025",
+          "original_bytes": 11066867,
+          "original_metadata_file": "data/administrative-sources.json",
+          "original_sha256": "69115100f6d6fa953651988ecb091b1c3a687a4a8a95782bfafaa950af66b3e4",
+          "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+          "parts": [
+            {
+              "bytes": 3462640,
+              "hash_kind": "file-bytes",
+              "offset": 0,
+              "ordinal": 0,
+              "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-AUS-ADM2-000.bin.gz",
+              "sha256": "17e2fd8c2c4dc112bd3c37516394d8f0f23a87a102f7dc8cc25e653be53a8c4c",
+              "uncompressed_bytes": 11066867,
+              "uncompressed_sha256": "69115100f6d6fa953651988ecb091b1c3a687a4a8a95782bfafaa950af66b3e4"
+            }
+          ],
+          "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2_simplified.geojson",
+          "recorded_license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+          "source_represented_year_claim": "2022"
+        },
+        "registry_record": {
+          "Continent": "Oceania",
+          "UNSDG-region": "Australia/New Zealand",
+          "UNSDG-subregion": "Australia/New Zealand",
+          "admUnitCount": "547",
+          "boundaryCanonical": "Local Government Areas",
+          "boundaryID": "AUS-ADM2-25037944",
+          "boundaryISO": "AUS",
+          "boundaryLicense": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+          "boundaryName": "Australia",
+          "boundarySource": "Australian Bureau of Statistics",
+          "boundarySourceURL": "www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files/LGA_2022_AUST_GDA94_SHP.zip",
+          "boundaryType": "ADM2",
+          "boundaryYearRepresented": "2022",
+          "buildDate": "Dec 12, 2023",
+          "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2.geojson",
+          "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2-PREVIEW.png",
+          "licenseDetail": "nan",
+          "licenseSource": "www.abs.gov.au/website-privacy-copyright-and-disclaimer#copyright-and-creative-commons",
+          "maxAreaSqKM": "619430.4072286466",
+          "maxPerimeterLengthKM": "8378.607221804292",
+          "maxVertices": "101163",
+          "meanAreaSqKM": "14055.018375903514",
+          "meanPerimeterLengthKM": "591.5836333611597",
+          "meanVertices": "6269.0",
+          "minAreaSqKM": "0.7447997236174267",
+          "minPerimeterLengthKM": "4.393080567464444",
+          "minVertices": "17",
+          "sha256": "69115100f6d6fa953651988ecb091b1c3a687a4a8a95782bfafaa950af66b3e4",
+          "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2_simplified.geojson",
+          "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+          "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2-all.zip",
+          "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/AUS/ADM2/geoBoundaries-AUS-ADM2.topojson",
+          "worldBankIncomeGroup": "High-income Countries"
+        },
+        "source_id": "gb:AUS:ADM2"
+      },
+      "source_id": "gb:AUS:ADM2",
+      "whole_bytes": 11066867,
+      "whole_sha256": "69115100f6d6fa953651988ecb091b1c3a687a4a8a95782bfafaa950af66b3e4"
+    }
+  ],
+  "reused_whole_product_inputs": [
+    {
+      "blob": "e7c580a4ed10114c64822409b088d3db2472e1ca",
+      "bytes": 1218035,
+      "commit": "6ed97794d10bba5844922360b38191b4e7146c36",
+      "consumption_basis": "Authenticated completed per-product inverse; metadata assembly does not reread whole body.",
+      "mode": "100644",
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-004-002/components-004.jsonl.gz",
+      "sha256": "c15da2ba94b4333ffb03c96396e67950efb580ebd8b09724cfd76e29cdbbb583",
+      "whole_body_consumed": false
+    },
+    {
+      "blob": "3199eafcaccf7995a4a0a0e6b1671f817914f5f9",
+      "bytes": 1187214,
+      "commit": "6ed97794d10bba5844922360b38191b4e7146c36",
+      "consumption_basis": "Authenticated completed per-product inverse; metadata assembly does not reread whole body.",
+      "mode": "100644",
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-007-002/components-007.jsonl.gz",
+      "sha256": "2177f6396d7e22ea5e0abae4ceba7dd5cccc3eacbf68a398c476d7dab14cfa92",
+      "whole_body_consumed": false
+    },
+    {
+      "blob": "1e1f5cb0f1e7a122a0ffe8c3fb1124d2aff5a938",
+      "bytes": 1185446,
+      "commit": "6ed97794d10bba5844922360b38191b4e7146c36",
+      "consumption_basis": "Authenticated completed per-product inverse; metadata assembly does not reread whole body.",
+      "mode": "100644",
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-027-002/components-027.jsonl.gz",
+      "sha256": "5344a5df2e2d9f101ef96bc3c07fdf0301d4fd08eb45b9666310555ceba2d90d",
+      "whole_body_consumed": false
+    },
+    {
+      "blob": "f3cd58abde66b4732639f7fbaa7f40d2b20bce5d",
+      "bytes": 1211367,
+      "commit": "4d959ce9c97c01feb15fe9e1a7241f402c792da9",
+      "consumption_basis": "Authenticated completed per-product inverse; metadata assembly does not reread whole body.",
+      "mode": "100644",
+      "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/physical-second/components-028.jsonl.gz",
+      "sha256": "583a2ab684718b5266c70a739218920f95d3adedd168e5ff29575f8ed654b14a",
+      "whole_body_consumed": false
+    },
+    {
+      "blob": "6e94b69aacb1690667cb3226a88bd3ea4e2ca742",
+      "bytes": 1196438,
+      "commit": "4d959ce9c97c01feb15fe9e1a7241f402c792da9",
+      "consumption_basis": "Authenticated completed per-product inverse; metadata assembly does not reread whole body.",
+      "mode": "100644",
+      "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/physical-second/components-029.jsonl.gz",
+      "sha256": "1d36ff160857dbfd504ae9b2757fd4283db6650f0895f499b118fa95092ef12b",
+      "whole_body_consumed": false
+    },
+    {
+      "blob": "f6789fb1992ccf95eb7b42900d1a200fb9abebd8",
+      "bytes": 1196109,
+      "commit": "4d959ce9c97c01feb15fe9e1a7241f402c792da9",
+      "consumption_basis": "Authenticated completed per-product inverse; metadata assembly does not reread whole body.",
+      "mode": "100644",
+      "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/physical-second/components-030.jsonl.gz",
+      "sha256": "22363c332379d6dc16354b6079bf59766abf4cb9e7b20b111c7528e7c757fde8",
+      "whole_body_consumed": false
+    },
+    {
+      "blob": "c8cc6fa1b013db98fe237d70844aa40bdc8fccec",
+      "bytes": 1224451,
+      "commit": "6ed97794d10bba5844922360b38191b4e7146c36",
+      "consumption_basis": "Authenticated completed per-product inverse; metadata assembly does not reread whole body.",
+      "mode": "100644",
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-043-002/components-043.jsonl.gz",
+      "sha256": "92cc54b70c66cfc4fa0202a8190bf69399a206c910f514a98da2e3f42fea135d",
+      "whole_body_consumed": false
+    },
+    {
+      "blob": "34fd8e859dc08ac26b0fcd8c1765875c6fcd8ef2",
+      "bytes": 1174231,
+      "commit": "4d959ce9c97c01feb15fe9e1a7241f402c792da9",
+      "consumption_basis": "Authenticated completed per-product inverse; metadata assembly does not reread whole body.",
+      "mode": "100644",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/cohort100-physical-custody-001/components-044.jsonl.gz",
+      "sha256": "2586019b1846c0fe50c3be1ee69b3169d0283803770cfa7917e2a0c17edb9126",
+      "whole_body_consumed": false
+    },
+    {
+      "blob": "90d8353ac62a51f8458c204aa27c53dff6812c0e",
+      "bytes": 1187023,
+      "commit": "4d959ce9c97c01feb15fe9e1a7241f402c792da9",
+      "consumption_basis": "Authenticated completed per-product inverse; metadata assembly does not reread whole body.",
+      "mode": "100644",
+      "path": "research/geography/gap-source-angola-drc-shared-seams-20261006/vintages/cohort100-physical-custody-001/components-047.jsonl.gz",
+      "sha256": "e418e6cf92971f0afc047b2782fcb035e1f6305c136969469cb8be085089e82d",
+      "whole_body_consumed": false
+    },
+    {
+      "blob": "5b6c0faf6eafb88c9fce612454d0dc88065d6521",
+      "bytes": 1207888,
+      "commit": "6ed97794d10bba5844922360b38191b4e7146c36",
+      "consumption_basis": "Authenticated completed per-product inverse; metadata assembly does not reread whole body.",
+      "mode": "100644",
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-053-002/components-053.jsonl.gz",
+      "sha256": "0a8dcae7cd00ff3db0ffe770eadfc78b5e0b171e06791a94e15e5b83eed5d81e",
+      "whole_body_consumed": false
+    },
+    {
+      "blob": "8b65c6f410c5727e4f904e8c46d1143ac4525b42",
+      "bytes": 1205763,
+      "commit": "4d959ce9c97c01feb15fe9e1a7241f402c792da9",
+      "consumption_basis": "Authenticated completed per-product inverse; metadata assembly does not reread whole body.",
+      "mode": "100644",
+      "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/physical-second/components-061.jsonl.gz",
+      "sha256": "73bded55db2ff68063b8c30e226d462580cd2d02afaddc3d064e2ec04b3f88f1",
+      "whole_body_consumed": false
+    },
+    {
+      "blob": "0077a922755e0d754445a6bd96732726582d3633",
+      "bytes": 1183462,
+      "commit": "4d959ce9c97c01feb15fe9e1a7241f402c792da9",
+      "consumption_basis": "Authenticated completed per-product inverse; metadata assembly does not reread whole body.",
+      "mode": "100644",
+      "path": "research/geography/kazakhstan-russia-nineteen-gap-family-source-fitness-20261007/inputs/physical-second/components-064.jsonl.gz",
+      "sha256": "ae612a399a03ca3bfee771c22dc680d050aacaed6f9f52194459544ae119fde3",
+      "whole_body_consumed": false
+    },
+    {
+      "blob": "785787c03871ba21c16bddc1e616ff1f779d2a24",
+      "bytes": 1193900,
+      "commit": "6ed97794d10bba5844922360b38191b4e7146c36",
+      "consumption_basis": "Authenticated completed per-product inverse; metadata assembly does not reread whole body.",
+      "mode": "100644",
+      "path": "research/geography/aus19-original-source-20261011/vintages/physical-custody-065-002/components-065.jsonl.gz",
+      "sha256": "561fe5fc5c3cf0d70ea9be10eb4f741e34411dc348e4fedbaab1da8106414ced",
+      "whole_body_consumed": false
+    },
+    {
+      "blob": "c38da7eb06802cf9b23b6267a3c8f922cd426240",
+      "bytes": 2173285,
+      "commit": "6a99a7606b9c2d11ac8cd093610653d4cd5d1382",
+      "consumption_basis": "Authenticated reused source whole product in every completed inverse.",
+      "mode": "100644",
+      "path": "research/geography/ukraine-original-singleton-source-fit-20261010/vintages/physical-restoration-001/sources-000.jsonl.gz",
+      "sha256": "aaf5e4f099ab25c6e6f96632787f1654ba6054ed378fd591b360e36274ffc264",
+      "whole_body_consumed": false
+    }
+  ],
+  "restorations": [
+    {
+      "decoded_bytes": 8370154,
+      "decoded_sha256": "09d428e4755cf6b17fb1be21394ee7ac33a94e2db8959b3a79f7e2d107d59616",
+      "path": "components-004.jsonl.gz",
+      "rows": 1343,
+      "whole_original_bytes": 1218035,
+      "whole_original_sha256": "c15da2ba94b4333ffb03c96396e67950efb580ebd8b09724cfd76e29cdbbb583"
+    },
+    {
+      "decoded_bytes": 8387775,
+      "decoded_sha256": "581b660a545248eb0c85aa3469b89f300e57a7e2083933d4e340faba4dc464be",
+      "path": "components-007.jsonl.gz",
+      "rows": 1369,
+      "whole_original_bytes": 1187214,
+      "whole_original_sha256": "2177f6396d7e22ea5e0abae4ceba7dd5cccc3eacbf68a398c476d7dab14cfa92"
+    },
+    {
+      "decoded_bytes": 8383754,
+      "decoded_sha256": "db870cd9ba120736513fe46a76f1814b86541104fae5d5cf6eb975edc34e944c",
+      "path": "components-027.jsonl.gz",
+      "rows": 1390,
+      "whole_original_bytes": 1185446,
+      "whole_original_sha256": "5344a5df2e2d9f101ef96bc3c07fdf0301d4fd08eb45b9666310555ceba2d90d"
+    },
+    {
+      "decoded_bytes": 8381803,
+      "decoded_sha256": "d563fce1a05e5115eeeae2ee3fdfa64608f11d172dd9e42b582a93dd1cb1b77d",
+      "path": "components-028.jsonl.gz",
+      "rows": 1335,
+      "whole_original_bytes": 1211367,
+      "whole_original_sha256": "583a2ab684718b5266c70a739218920f95d3adedd168e5ff29575f8ed654b14a"
+    },
+    {
+      "decoded_bytes": 8370872,
+      "decoded_sha256": "4d8386c059891f7243c91515f2b48bdd9b034c49656aa33fcbe1848d5f4a8ae1",
+      "path": "components-029.jsonl.gz",
+      "rows": 1373,
+      "whole_original_bytes": 1196438,
+      "whole_original_sha256": "1d36ff160857dbfd504ae9b2757fd4283db6650f0895f499b118fa95092ef12b"
+    },
+    {
+      "decoded_bytes": 8376604,
+      "decoded_sha256": "05a242b39ebd98bd0f4a7b49515f50376e48c012e9e4561d22b455f5c04d6ae8",
+      "path": "components-030.jsonl.gz",
+      "rows": 1326,
+      "whole_original_bytes": 1196109,
+      "whole_original_sha256": "22363c332379d6dc16354b6079bf59766abf4cb9e7b20b111c7528e7c757fde8"
+    },
+    {
+      "decoded_bytes": 8383119,
+      "decoded_sha256": "2984717927a26d0f012afb86102b513b6527249c56083e9501a12c6301aee17c",
+      "path": "components-043.jsonl.gz",
+      "rows": 1305,
+      "whole_original_bytes": 1224451,
+      "whole_original_sha256": "92cc54b70c66cfc4fa0202a8190bf69399a206c910f514a98da2e3f42fea135d"
+    },
+    {
+      "decoded_bytes": 8312070,
+      "decoded_sha256": "5313882e3511deb2347ad4adca8d0e1c789eae09a5c8bd26e700917bb7fbc790",
+      "path": "components-044.jsonl.gz",
+      "rows": 1407,
+      "whole_original_bytes": 1174231,
+      "whole_original_sha256": "2586019b1846c0fe50c3be1ee69b3169d0283803770cfa7917e2a0c17edb9126"
+    },
+    {
+      "decoded_bytes": 8384762,
+      "decoded_sha256": "4c592e19b5d3fb42a2a539235999fb2e1a089cd5cde4219e37c5324c9af4438e",
+      "path": "components-047.jsonl.gz",
+      "rows": 1380,
+      "whole_original_bytes": 1187023,
+      "whole_original_sha256": "e418e6cf92971f0afc047b2782fcb035e1f6305c136969469cb8be085089e82d"
+    },
+    {
+      "decoded_bytes": 8386661,
+      "decoded_sha256": "3f92e355ecfbb4146b0dea5e32d634ed1baed2da965f6c266d01592cff79a075",
+      "path": "components-053.jsonl.gz",
+      "rows": 1345,
+      "whole_original_bytes": 1207888,
+      "whole_original_sha256": "0a8dcae7cd00ff3db0ffe770eadfc78b5e0b171e06791a94e15e5b83eed5d81e"
+    },
+    {
+      "decoded_bytes": 8385313,
+      "decoded_sha256": "9125bd62d7652a86686779cb923c9db067bd1aca134162aecd36719f1bc2bd94",
+      "path": "components-061.jsonl.gz",
+      "rows": 1393,
+      "whole_original_bytes": 1205763,
+      "whole_original_sha256": "73bded55db2ff68063b8c30e226d462580cd2d02afaddc3d064e2ec04b3f88f1"
+    },
+    {
+      "decoded_bytes": 8385225,
+      "decoded_sha256": "f4d3744a0ca9ab71531ab41bef9dc07c299f835795c13b4eee3cf2053963e739",
+      "path": "components-064.jsonl.gz",
+      "rows": 1371,
+      "whole_original_bytes": 1183462,
+      "whole_original_sha256": "ae612a399a03ca3bfee771c22dc680d050aacaed6f9f52194459544ae119fde3"
+    },
+    {
+      "decoded_bytes": 8373751,
+      "decoded_sha256": "df749723a52e7e6eb77cbe90274796ed6a5879f1e930bae264c5642e19016c50",
+      "path": "components-065.jsonl.gz",
+      "rows": 1361,
+      "whole_original_bytes": 1193900,
+      "whole_original_sha256": "561fe5fc5c3cf0d70ea9be10eb4f741e34411dc348e4fedbaab1da8106414ced"
+    },
+    {
+      "decoded_bytes": 8388327,
+      "decoded_sha256": "a75923307b24ff73fe3090307b2c8d6e590a22dbb91f4d43f92a52ac0fd23705",
+      "path": "sources-000.jsonl.gz",
+      "rows": 10746,
+      "whole_original_bytes": 2173285,
+      "whole_original_sha256": "aaf5e4f099ab25c6e6f96632787f1654ba6054ed378fd591b360e36274ffc264"
+    }
+  ]
+}

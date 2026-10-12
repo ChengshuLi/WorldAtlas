@@ -1,0 +1,132 @@
+Bounded constructor validation, 2026-10-11 America/Los_Angeles
+
+No SOURCE/NATIVE/GIS execution, full product acquisition or new source approval.
+
+Original owner diagnostic: recipe abd2aac64318513a9bdbd3b51be9c76cc1c9615e, path coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/recipe-custody-probe.json.
+Plain advance CLI at original merged005a refused exit1:
+Incomplete administrative product parts
+
+Patched plain advance CLI using that unchanged historical diagnostic exemplar refused exit1 at its genuinely missing AUS admin input:
+Missing/ambiguous exact administrative input pin: coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-AUS-ADM2-000.bin.gz
+
+Actual complete owner recipe configuration (no scientific operator executed):
+{"version":1,"recipe":{"commit":"0801b37b27e3ce7a77532384d3492082d53035c6","path":"coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/recipe-001.json"},"preparation_allowance":{"phaseBytes":134217728,"rssBytes":402653184}}
+
+env -u NODE_OPTIONS -u NODE_PATH -u GH_TOKEN -u GITHUB_TOKEN GIT_NO_LAZY_FETCH=1 GIT_CONFIG_NOSYSTEM=1 GIT_CONFIG_GLOBAL=/dev/null GIT_TERMINAL_PROMPT=0 node scripts/prepare-delivery-handoff.mjs advance .cache/delivery-nested-custody/actual-complete-config.json .cache/delivery-handoff/aus13-complete-corrected-001
+Exit0 actual stdout:
+{"result":{"stage":"recipe","resumed":false},"version":1,"queue_submission":null,"completed":["recipe"],"waiting":null,"last_refusal":null,"timing":{"overall_wall_ms":604,"preparation_ms":598.915701,"api_wait_ms":0,"stages":[{"stage":"recipe","preparation_ms":598.915701,"api_wait_ms":0,"completed_at":"2026-10-12T04:27:57.875Z"}],"external_observations":[],"waits":[],"operator_durations":[],"limits":["Preparation milliseconds are measured separately from external waits.","Per-operator elapsed receipts are individual durations, never summed as parallel wall time.","No gap-closures/hour claim follows from metadata preparation timing."]}}
+Actual stderr:
+
+Whole accepted source original remains a86d07773cb98ac2e3b747b700eb07f845fb33da79da45c904927a2fa3b610b0. Independent parent review compared every excerpt to the whole original and checks actual complete metadata output. No code/geometry/runtime vector was rehashed to grant new scientific authority.
+
+env -u NODE_OPTIONS -u NODE_PATH -u GH_TOKEN -u GITHUB_TOKEN node --test --test-concurrency=1 test/delivery-handoff.test.mjs test/delivery-handoff-advance.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs
+Actual focused suite output:
+✔ locators derive descriptors and refuse handwritten hashes (5.563379ms)
+✔ committed completion inventory authenticates whole bytes and phase (0.848249ms)
+✔ native transition takes original request identity and group order from saved index (2.138915ms)
+✔ interrupted metadata resumes identical postimages and only completes once (9.726189ms)
+✔ partial collision, changed bytes, symlink and foreign recipe refuse without replacement (2.35777ms)
+✔ status validates completed bytes and observations distinguish wait from preparation (2.392522ms)
+✔ queue identity is durable before uncertain submit and resume can never dispatch twice (1.815616ms)
+✔ missing independent acceptance never writes a queue identity (0.810514ms)
+✔ accepted AUS custody schema resolves complete administrative and reused physical identities without mutation (23.660205ms)
+✔ equal direct and nested catalogue aliases preserve the same complete request bytes (35.113482ms)
+✔ catalogue normalization refuses malformed, missing and conflicting aliases or source identities (15.904255ms)
+✔ reused physical custody refuses missing, malformed and contradictory product identities (13.376818ms)
+✔ existing exact physical transport aliases remain valid without erasing reuse provenance (18.66934ms)
+✔ derives ordered scopes across original batch boundaries and real templates without component lists (11.313204ms)
+✔ models constructed encoded and decoded input closure before greedy split; transport alone deduplicates (8.956817ms)
+✔ singleton overflow fails rather than silently narrowing scope or raising allowance (1.593306ms)
+✔ the request body is charged twice and runtime/log/monitor/receipt/support are counted (1.078892ms)
+✔ native reservations include encoded and decoded predecessor bytes; real output is exactly re-admitted (1.39479ms)
+✔ requires genuine pinned locator join, exact mapping and handoff roster (3.86691ms)
+✔ supports keyed metadata and components comparison-product metadata without product reads (7.317063ms)
+✔ retained replay preserves literal scopes and rejects incomplete handoff coverage (2.756042ms)
+✔ candidate request serialization can force a split before publication (12.848735ms)
+✔ unowned empty stage directories and foreign root inventory are never adopted (1.500828ms)
+✔ completed stages resolve their wait and subsequent successful preparation resolves refusal (3.806481ms)
+✔ advance publisher includes whole receipt in finite aggregate accounting without a fixed4KiB cap (10.100004ms)
+✔ status charges complete journal reads against the same admitted phase (5.780086ms)
+✔ stale lock recovery serializes competing acquisition and refuses ambiguous acquisition guards (1.338177ms)
+✔ initial advance intent is charged before mutation and on read-only reopening (5.26138ms)
+✔ real advance CLI refuses an oversized admitted config before reading recipe or creating destination (277.851635ms)
+✔ actual queue read adapter forwards remaining timeout and preserves rate-limit metadata (1.266891ms)
+✔ journal writes and queue intent reads share admission before dispatch (1.781835ms)
+✔ materialization report preflight refuses late collisions and changed postimages (2.365041ms)
+✔ actual missing Git objects and repeated identities acquire once; complete aliases are materialized once (143.503345ms)
+✔ caller-derived complete byte and destination allowances fail before acquisition (273.02866ms)
+✔ interrupted real import resumes from actual object state without fetching the completed identity again (89.353228ms)
+✔ the actual shared candidateBudget admits complete transport costs alongside existing metadata and reserves (68.626048ms)
+✔ interruption after a complete file resumes without another fetch or overwriting the completed alias (85.167735ms)
+✔ partial, corrupted and symlinked aliases are preserved and refused before any fetch (98.83923ms)
+✔ wrong whole bytes or decoded gzip identities cannot produce a materialized receipt (115.292251ms)
+✔ identity, destination and whole-file admission failures occur before object fetches (158.796709ms)
+✔ plain materialize CLI authenticates a saved recipe index and resumes with identical receipt and zero writes (573.945566ms)
+✔ cold acquisition reuses gh login ephemerally; warm and non-fetch reads never request credentials (83.952555ms)
+✔ SOURCE preparation preserves handoff order, methods/resources and complete whole handoff pin (8.695319ms)
+✔ accepted whole handoff target/order drift fails even when its new pin is coherent (3.294521ms)
+✔ writer resumes only exact complete bytes and rejects collisions, dangling symlinks and changed bindings (6.974735ms)
+✔ combined read/output budget fails before creating destination (0.839376ms)
+✔ retention joins genuine terminal, request, facts and every published output; no completion from partial files (7.956472ms)
+✔ native preparation requires committed genuine SOURCE products and preserves immutable runtime/resource fields (2.51952ms)
+✔ composition invokes existing conservation logic and rejects duplicate original scope (11.857463ms)
+✔ immutable Git input reader rejects whole-body drift, missing objects and nonordinary pins (51.739915ms)
+✔ review handoff includes current bindings/complete rename scope and no approval; stale head/body/scope fail (14.200892ms)
+✔ rebind commit phases require complete custody and publication-matching result pins (1.352287ms)
+✔ new request issuance requires explicit finite v2 profiles and actual HEAD support/code pins (1.287772ms)
+✔ coherent SOURCE inventory changes and native preparation facts omissions are rejected against pinned scope/targets (6.107938ms)
+✔ native retention rejects a publication that omits the required ledger asset (3.123246ms)
+✔ native self-consistent target substitutions fail the independent immutable SOURCE join (6.386862ms)
+✔ selector finalization preserves insertion order and repeat bytes, including unsorted nested geography (0.675673ms)
+✔ final package appends preserve the entire accepted prefix and validate duplicates/overlaps (0.955738ms)
+✔ finalization joins genuine release metadata, stages fresh files, and repeats without changes (5.717167ms)
+✔ finalization rejects coherent foreign sidecar/base/ledger/envelope bindings before publication (14.816256ms)
+✔ finalization refuses a new identity at an accepted package path (2.313284ms)
+✔ verifies bytes without claiming factual correctness (2.807398ms)
+✔ schema-only validation reports unverified bytes (0.43755ms)
+✔ known broken pins, stale baseline, entry hashes and contradictory summaries fail (1.705092ms)
+✔ source access/license limits remain explicit; no unsafe retention (0.745136ms)
+✔ research cannot grant approval; supported conclusions need known sources (0.791545ms)
+✔ containing-file inventory verifies actual subject IDs, not optional properties.part (0.726759ms)
+✔ compressed vs uncompressed hashes and decompression budgets are checked (2.333053ms)
+✔ paths and symlinks cannot escape candidate reader (1.855204ms)
+✔ new identity registry is checked against retained prior roster without claiming source or geometry approval (1.035467ms)
+✔ prior inventory cannot accept invented subjects, candidate baselines or ambiguous authority (1.886651ms)
+✔ identity-only projection rejects duplicates, geometry and altered native IDs even with updated output hashes (1.661687ms)
+✔ declared gzip .bin containing files preserve complete mixed 45-component/eight-contact membership (4.296639ms)
+✔ subject gzip declaration does not accept unsupported bytes, wrong hashes or coherently missing subjects (5.23445ms)
+✔ actual subject decompression remains bounded for legacy gzip with small encoded bytes (0.980866ms)
+✔ prior inventory and candidate registry decode their declared gzip .bin descriptors at correct vintages (0.744645ms)
+✔ independent record bindings reject coherent wrong joins, incomplete and vacuous coverage (3.712541ms)
+✔ new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption (1.078091ms)
+✔ positive real-format ledger validates actual files and binds an independent review (2.825384ms)
+✔ regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail (1.79199ms)
+✔ full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence (0.924372ms)
+✔ coordinate/helper policies remain enforced without ceremonial control files (1.107354ms)
+✔ generator controls bind actual positive, negative and equal two-run output bytes (1.314612ms)
+✔ Washington-style generated narrative/table mismatch fails against the same numeric ledger (1.072542ms)
+✔ reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review (1.739042ms)
+✔ mock remote queue checks exact blobs/head/independent receipt with read-only requests (6.124202ms)
+✔ incomplete remote trees cannot become a passed byte check (0.541013ms)
+✔ remote decisions reject stale exact-head reviews and a later change request (1.448841ms)
+✔ unchanged authored evidence survives unrelated main advance, while current metrics require refresh (0.327507ms)
+✔ trusted hosted gate checks a new limited prior-evidence registry and still rejects nonancestor baselines (1.850858ms)
+✔ fresh remote review, head, tree/path and reservation checks reject after immutable bytes were reused (8.484606ms)
+✔ acceptance/disposition binding invalidates substantive changes but preserves JSON formatting and progress comments (1.626465ms)
+✔ binding activation preserves existing PRs and rejects unknown activation timestamps (0.132997ms)
+✔ compact review binds canonical complete inventory and preserves literal receipts (0.901017ms)
+✔ compact reviews refuse malformed, mixed, omitted, changed and renamed inventories (2.296419ms)
+✔ compact inventory does not weaken head, reviewer, contract, domain or limit authority (0.914328ms)
+✔ normal remote comment route admits a complete compact review beyond literal GitHub comment size (58.641986ms)
+✔ minimal manifests reuse Git change inventory but preserve evidence and independent review (0.656454ms)
+✔ omitting duplicate change receipts does not authorize replacing original scientific evidence (4.044384ms)
+✔ declared controls remain checked, not accepted merely because controls are optional (0.45831ms)
+✔ remote minimal manifests need no base-body copies for unrelated code changes (0.837774ms)
+ℹ tests 101
+ℹ suites 0
+ℹ pass 101
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3008.562711

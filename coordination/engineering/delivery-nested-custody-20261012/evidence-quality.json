@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "issue": 1765,
+  "lane": "engineering",
+  "worker_id": "01a12e53-64a5-7213-ab8b-e460997ba02d",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "dd7db1d22823427b21afeeecab932d36d8728f76",
+    "files": [
+      {
+        "path": "research/geography/aus19-original-source-20261011/vintages/source-handoff-001/source-handoff.json",
+        "bytes": 1998089,
+        "sha256": "a86d07773cb98ac2e3b747b700eb07f845fb33da79da45c904927a2fa3b610b0",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/delivery-nested-custody-20261012/validation.txt",
+      "bytes": 13296,
+      "sha256": "e316ae8e6ceda7c5ca1f853696e0beb5897434f8b0217104ede80181729aeb39",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "custody-normalization",
+      "kind": "code",
+      "description": "Normalize already retained administrative catalogue and reused physical-product metadata at the admitted recipe constructor, preserving whole handoff identity, ordinary future acquisition pins and explicit scientific limits.",
+      "software": "Node24; existing recipe constructor and plain delivery advance CLI",
+      "units": "metadata identities and exact byte/value equality"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test --test-concurrency=1 test/delivery-handoff.test.mjs test/delivery-handoff-advance.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs"
+  ]
+}

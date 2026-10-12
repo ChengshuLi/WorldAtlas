@@ -171,6 +171,109 @@ function fixture({physicalBytes=2000,decodedBytes=5000,phase=4*1024*1024,legacy=
  return {reader,recipe,files,put,pin,selection,resources,source,native,sourceTemplate,nativeTemplate,componentIds,handoff,locator,registry};
 }
 
+// Exact metadata excerpts from the accepted AUS handoff. No geometry/body reads
+// or new scientific acceptance are represented by this constructor fixture.
+const ausCustody=JSON.parse(fs.readFileSync(new URL('./fixtures/delivery-aus-custody.json',import.meta.url)));
+function ausCustodyFixture(){
+ const f=fixture({phase:128*1024*1024}),h=f.files.get('handoff.json').body;
+ h.consumed_source_bindings=clone(ausCustody.consumed_source_bindings);
+ h.reused_whole_product_inputs=clone(ausCustody.reused_whole_product_inputs);
+ h.consumed_inputs=h.consumed_inputs.filter(p=>p.path==='locators.json');
+ h.physical_restoration.restorations=clone(ausCustody.restorations);
+ const componentProducts=ausCustody.restorations.filter(p=>p.path.startsWith('components-'));
+ f.put('locators.json',Object.fromEntries(f.componentIds.map((id,i)=>[id,{path:componentProducts[i].path}])));
+ h.consumed_inputs=[f.files.get('locators.json').pin];
+ const part=h.consumed_source_bindings[0].original_source_custody.catalogue_record.parts[0];
+ const admin={...f.pin(part.path,part.bytes),sha256:part.sha256,
+  uncompressed_bytes:part.uncompressed_bytes,uncompressed_sha256:part.uncompressed_sha256};
+ for(const request of [f.source,f.native]){
+  const stage=request.source_rule??request.additive;
+  stage.inputs=stage.inputs.filter(p=>p.path!=='admin.gz');stage.inputs.push(admin);
+ }
+ f.source.source_rule.administrative_products=[admin];
+ for(const resources of [f.selection.source_resources,f.selection.native_resources]){
+  resources.processing_allowance.rssBytes=256*1024*1024;
+  resources.operating_limits.rss_bytes=256*1024*1024;
+ }
+ return {...f,h,admin,componentProducts};
+}
+
+test('accepted AUS custody schema resolves complete administrative and reused physical identities without mutation',()=>{
+ const f=ausCustodyFixture(),before=clone(f.h),out=materializeRecipe(f.recipe,f.reader);
+ const source=JSON.parse(out.products[out.groups[0].source_template]);
+ assert.deepEqual(source.source_rule.administrative_products,[f.admin]);
+ const physical=out.acquisition_plan.products.filter(p=>p.uses.includes('physical-product'));
+ const wanted=[...f.componentProducts.slice(0,f.componentIds.length).map(p=>p.path),'sources-000.jsonl.gz'];
+ assert.equal(physical.length,wanted.length);
+ for(const name of wanted){
+  const restoration=ausCustody.restorations.find(p=>p.path===name);
+  const original=ausCustody.reused_whole_product_inputs.find(p=>p.sha256===restoration.whole_original_sha256);
+  const planned=physical.find(p=>p.destinations.some(d=>d.endsWith('/'+name)));
+  const {consumption_basis,whole_body_consumed,...pin}=original;
+  assert.deepEqual(planned.source,pin);
+  assert.equal(whole_body_consumed,false);assert.ok(consumption_basis);
+  const input=source.source_rule.inputs.find(p=>p.original_product_path===name);
+  assert.equal(input.uncompressed_bytes,restoration.decoded_bytes);
+  assert.equal(input.uncompressed_sha256,restoration.decoded_sha256);
+ }
+ assert.deepEqual(f.h,before);
+});
+
+test('equal direct and nested catalogue aliases preserve the same complete request bytes',()=>{
+ const f=ausCustodyFixture(),nested=materializeRecipe(f.recipe,f.reader);
+ const record=f.h.consumed_source_bindings[0];
+ record.catalogue_record=clone(record.original_source_custody.catalogue_record);
+ assert.deepEqual(materializeRecipe(f.recipe,f.reader).products,nested.products);
+ delete record.original_source_custody;
+ assert.deepEqual(materializeRecipe(f.recipe,f.reader).products,nested.products);
+});
+
+test('catalogue normalization refuses malformed, missing and conflicting aliases or source identities',()=>{
+ const changes=[
+  r=>{delete r.original_source_custody;},
+  r=>{r.original_source_custody=null;},
+  r=>{r.original_source_custody.catalogue_record=null;},
+  r=>{r.original_source_custody.catalogue_record.parts=[];},
+  r=>{r.original_source_custody.catalogue_record.parts=[null];},
+  r=>{r.catalogue_record=clone(r.original_source_custody.catalogue_record);delete r.original_source_custody.catalogue_record;},
+  r=>{r.catalogue_record={...clone(r.original_source_custody.catalogue_record),recorded_license:'foreign'};},
+  r=>{r.catalogue_record=null;},
+  r=>{r.original_source_custody.source_id='foreign';},
+  r=>{r.original_source_custody.catalogue_record.key='foreign';},
+  r=>{r.whole_sha256='0'.repeat(64);},
+  r=>{r.whole_bytes++;},
+  r=>{delete r.source_id;},
+  r=>{r.original_source_custody.catalogue_record.parts[0].uncompressed_sha256='0'.repeat(64);},
+ ];
+ for(const change of changes){const f=ausCustodyFixture();change(f.h.consumed_source_bindings[0]);
+  assert.throws(()=>materializeRecipe(f.recipe,f.reader),/administrative/);}
+});
+
+test('reused physical custody refuses missing, malformed and contradictory product identities',()=>{
+ const changes=[
+  h=>{delete h.reused_whole_product_inputs;},
+  h=>{h.reused_whole_product_inputs={};},
+  h=>{h.reused_whole_product_inputs[0].whole_body_consumed=true;},
+  h=>{h.reused_whole_product_inputs[0].bytes++;},
+  h=>{h.reused_whole_product_inputs[0].uncompressed_sha256='0'.repeat(64);},
+  h=>{h.consumed_inputs.push({...h.reused_whole_product_inputs[0],commit:'b'.repeat(40)});},
+  h=>{h.consumed_inputs.push({...h.reused_whole_product_inputs[0],sha256:'b'.repeat(64)});},
+  h=>{h.reused_whole_product_inputs[0].git_blob_oid='b'.repeat(40);},
+ ];
+ for(const change of changes){const f=ausCustodyFixture();change(f.h);
+  assert.throws(()=>materializeRecipe(f.recipe,f.reader),/physical|Conflicting input path/);}
+});
+
+test('existing exact physical transport aliases remain valid without erasing reuse provenance',()=>{
+ const f=ausCustodyFixture(),before=materializeRecipe(f.recipe,f.reader);
+ const original=f.h.reused_whole_product_inputs[0],{whole_body_consumed,consumption_basis,...pin}=original;
+ f.h.consumed_inputs.push(pin);
+ assert.deepEqual(materializeRecipe(f.recipe,f.reader).products,before.products);
+ f.h.consumed_inputs.push({...pin,path:'another/exact-physical-alias.gz'});
+ assert.deepEqual(materializeRecipe(f.recipe,f.reader).products,before.products);
+ assert.equal(original.whole_body_consumed,false);
+});
+
 test('derives ordered scopes across original batch boundaries and real templates without component lists',()=>{
  const f=fixture(),out=materializeRecipe(f.recipe,f.reader);assert.equal(out.groups.length,1);assert.deepEqual(out.groups[0].component_ids,f.componentIds);
  const s=JSON.parse(out.products[out.groups[0].source_template]),n=JSON.parse(out.products[out.groups[0].native_template]);
