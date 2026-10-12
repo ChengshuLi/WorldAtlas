@@ -9,7 +9,7 @@ import {ImmutableReader, NativeAssetImage} from '../../../scripts/check-effectiv
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 import {valueBytes, valueSha, coordinateBounds, nativeBaseSelection,
   normaliseRetainedRepairLedger, readRetainedRegistryAuthority, validateSupportedProgrammeCatalogue,
-  compatibleCurrentRebindCode, CURRENT_REBIND_CODE, verifyCurrentRebindExecution,
+  compatibleCurrentRebindCode, CURRENT_REBIND_CODE, verifyCurrentRebindExecution, validateCurrentRebindLimits,
   currentRebindResult, currentRebindAcquisitionIdentity, retainedArcticNativeRows} from './selected-neighbor-prevention.mjs';
 
 const FILE = 33554432;
@@ -583,10 +583,10 @@ function authenticateProducerExecution(session,reader,products,bodyPins) {
   const historical=CURRENT_REBIND_CODE.map(name => { const p=reader.descriptor(name,certificate.execution_commit); return {path:name,bytes:p.bytes,sha256:sha(reader.read(name,{version:certificate.execution_commit}))}; });
   const expectedCode=compatibleCurrentRebindCode(certificate.execution_commit,code,historical,reader);
   demand(same(request.executed_code,expectedCode),'Unknown complete current producer programme');
-  keys(request.limits,'complete_phase_bytes,descriptors,output_bytes,rss_bytes,sampled_stop_bytes,wall_seconds','Unknown producer limits');
-  demand(Object.values(request.limits).every(n => Number.isSafeInteger(n) && n>0)
-    && request.limits.descriptors<=512 && request.limits.output_bytes<=FILE
-    && request.limits.sampled_stop_bytes<=request.limits.rss_bytes, 'Invalid original producer resource contract');
+  // Reuse the accepted producer's exact required/optional bounded contract.
+  // Its complete limits remain bound to the authenticated original issued plan.
+  validateCurrentRebindLimits(request.limits);
+  demand(request.limits.output_bytes<=FILE, 'Invalid original producer resource contract');
   keys(facts,'version,kind,execution_commit,request_sha256,result_sha256,complete_phase_bytes,descriptors,acquisition_sha256,acquisition_phases','Unknown producer facts');
   keys(publication,'version,kind,execution_commit,request_sha256,outputs','Unknown producer publication');
   keys(operating,'version,kind,execution_commit,request_sha256,publication_sha256,exit_code,signal,owned_processes_remaining,lifetime_rss_bytes,elapsed_seconds,execution_custody','Unknown producer operating proof');

@@ -7,7 +7,7 @@ import {execFileSync} from 'node:child_process';
 import {gzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
 import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
-import {valueBytes,valueSha,coordinateBounds} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {valueBytes,valueSha,coordinateBounds,validateCurrentRebindLimits} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {deriveCoordinateDelta,projectSourceFeatures,projectNativeRows,qualifyTransition} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const MODULE='coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
@@ -308,4 +308,21 @@ test('archived child custody is retained in its actual parent inventory without 
  const second=f.api.qualifyCheckpoint({reader:secondReader,budget:secondBudget});assert.equal(second.available,true);
  assert.notStrictEqual(secondReader.inventory,f.reader.inventory);
  f.api.releaseCheckpoint(first.state);assert.deepEqual(f.api.projectNativeRows({state:second.state,rows:[1],budget:secondBudget}).rows,[{y:1,runs:[[0,1,2]]}]);
+});
+
+
+test('accepted AUS producer limits retain canonical optional log bounds and reject nearby unsupported admission',()=>{
+ // Exact limits from accepted40d792b2 request, pinned by the AUS advance-002
+ // rebind certificate1b4e5c60. The ordinary output cap is checked at the call.
+ const limits={complete_phase_bytes:536870912,descriptors:512,monitor_bytes:4194304,
+  output_bytes:16777216,rss_bytes:805306368,sampled_stop_bytes:704643072,
+  stderr_bytes:40960,stdout_bytes:8192,wall_seconds:1200};
+ assert.strictEqual(validateCurrentRebindLimits(limits),limits);
+ const legacy={...limits};delete legacy.monitor_bytes;delete legacy.stderr_bytes;delete legacy.stdout_bytes;
+ assert.strictEqual(validateCurrentRebindLimits(legacy),legacy);
+ for(const edit of [x=>{x.unreviewed_bytes=1;},x=>{delete x.complete_phase_bytes;},x=>{x.monitor_bytes=0;},
+  x=>{x.stderr_bytes=33554433;},x=>{x.stdout_bytes=1.5;},x=>{x.descriptors=513;},
+  x=>{x.sampled_stop_bytes=x.rss_bytes+1;},x=>{x.output_bytes=Number.MAX_SAFE_INTEGER;}]){
+  const bad={...limits};edit(bad);assert.throws(()=>validateCurrentRebindLimits(bad));
+ }
 });
