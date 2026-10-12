@@ -1,0 +1,725 @@
+Metadata-only corrected final checks. No scientific operator, selected assembly, package build, review approval, queue submission or main advancement ran.
+SOURCE/NATIVE historical examples explicitly use literal-historical-v1; current v2 finite requested-profile construction is exercised in the focused tests. No live v2 scientific execution is claimed.
+
+$ node scripts/prepare-delivery-handoff.mjs requests coordination/engineering/delivery-handoff-20261011/current13-requests.json .cache/delivery-handoff/corrected-requests-001
+Elapsed wall seconds: 0.219589
+{"destination":".cache/delivery-handoff/corrected-requests-001","resumed":false,"binding":{"phase":"requests","config_sha256":"d7c663ff71b72fa74a727cbc61b642dc05b0520da8cd85bbab11e10524793203"}}
+
+Exit code: 0
+
+$ node scripts/prepare-delivery-handoff.mjs requests coordination/engineering/delivery-handoff-20261011/current13-requests.json .cache/delivery-handoff/corrected-requests-001 --resume
+Elapsed wall seconds: 0.262876
+{"destination":".cache/delivery-handoff/corrected-requests-001","resumed":true,"binding":{"phase":"requests","config_sha256":"d7c663ff71b72fa74a727cbc61b642dc05b0520da8cd85bbab11e10524793203"}}
+
+Exit code: 0
+
+$ node scripts/prepare-delivery-handoff.mjs native-requests coordination/engineering/delivery-handoff-20261011/current13-native-requests.json .cache/delivery-handoff/corrected-native-requests-001
+Elapsed wall seconds: 0.608655
+{"destination":".cache/delivery-handoff/corrected-native-requests-001","resumed":false,"binding":{"phase":"native-requests","config_sha256":"1c03653aed937abfd8ce5da6cceeb70cab543d9dea6db1b92b741ac87e9ab845"}}
+
+Exit code: 0
+
+$ node scripts/prepare-delivery-handoff.mjs native-requests coordination/engineering/delivery-handoff-20261011/current13-native-requests.json .cache/delivery-handoff/corrected-native-requests-001 --resume
+Elapsed wall seconds: 0.648479
+{"destination":".cache/delivery-handoff/corrected-native-requests-001","resumed":true,"binding":{"phase":"native-requests","config_sha256":"1c03653aed937abfd8ce5da6cceeb70cab543d9dea6db1b92b741ac87e9ab845"}}
+
+Exit code: 0
+
+$ node scripts/prepare-delivery-handoff.mjs compose coordination/engineering/delivery-handoff-20261011/current13-compose.json .cache/delivery-handoff/corrected-compose-001
+Elapsed wall seconds: 0.589796
+{"destination":".cache/delivery-handoff/corrected-compose-001","resumed":false,"binding":{"phase":"compose","config_sha256":"bf8e78b1b861022dea802b108dca1569399d1fd9e3954a09de2cb1cc10a46a22"}}
+
+Exit code: 0
+
+$ node scripts/prepare-delivery-handoff.mjs compose coordination/engineering/delivery-handoff-20261011/current13-compose.json .cache/delivery-handoff/corrected-compose-001 --resume
+Elapsed wall seconds: 0.630931
+{"destination":".cache/delivery-handoff/corrected-compose-001","resumed":true,"binding":{"phase":"compose","config_sha256":"bf8e78b1b861022dea802b108dca1569399d1fd9e3954a09de2cb1cc10a46a22"}}
+
+Exit code: 0
+
+$ node scripts/prepare-delivery-handoff.mjs package coordination/engineering/delivery-handoff-20261011/current13-package.json .cache/delivery-handoff/corrected-package-001
+Elapsed wall seconds: 1.539299
+{"destination":".cache/delivery-handoff/corrected-package-001","resumed":false,"binding":{"phase":"package","config_sha256":"83bbdd0ddd9238d944fa93786ef556f05934e20aa59433e49d398711045421dd"}}
+
+Exit code: 0
+
+$ node scripts/prepare-delivery-handoff.mjs package coordination/engineering/delivery-handoff-20261011/current13-package.json .cache/delivery-handoff/corrected-package-001 --resume
+Elapsed wall seconds: 1.491782
+{"destination":".cache/delivery-handoff/corrected-package-001","resumed":true,"binding":{"phase":"package","config_sha256":"83bbdd0ddd9238d944fa93786ef556f05934e20aa59433e49d398711045421dd"}}
+
+Exit code: 0
+
+$ node scripts/prepare-delivery-handoff.mjs rebind-operating coordination/engineering/delivery-handoff-20261011/current003-custody.json .cache/delivery-handoff/corrected-rebind-operating-001
+Elapsed wall seconds: 0.798400
+{"destination":".cache/delivery-handoff/corrected-rebind-operating-001","resumed":false,"binding":{"phase":"rebind-operating","config_sha256":"8594c4df539054dcc33db9c76da1adb148b64f7fb8396b11817b29ba0c308c13"}}
+
+Exit code: 0
+
+$ node scripts/prepare-delivery-handoff.mjs rebind-operating coordination/engineering/delivery-handoff-20261011/current003-custody.json .cache/delivery-handoff/corrected-rebind-operating-001 --resume
+Elapsed wall seconds: 0.724153
+{"destination":".cache/delivery-handoff/corrected-rebind-operating-001","resumed":true,"binding":{"phase":"rebind-operating","config_sha256":"8594c4df539054dcc33db9c76da1adb148b64f7fb8396b11817b29ba0c308c13"}}
+
+Exit code: 0
+
+$ node scripts/prepare-delivery-handoff.mjs rebind-certificate coordination/engineering/delivery-handoff-20261011/current003-custody.json .cache/delivery-handoff/corrected-rebind-certificate-001
+Elapsed wall seconds: 0.853364
+{"destination":".cache/delivery-handoff/corrected-rebind-certificate-001","resumed":false,"binding":{"phase":"rebind-certificate","config_sha256":"8594c4df539054dcc33db9c76da1adb148b64f7fb8396b11817b29ba0c308c13"}}
+
+Exit code: 0
+
+$ node scripts/prepare-delivery-handoff.mjs rebind-certificate coordination/engineering/delivery-handoff-20261011/current003-custody.json .cache/delivery-handoff/corrected-rebind-certificate-001 --resume
+Elapsed wall seconds: 0.844853
+{"destination":".cache/delivery-handoff/corrected-rebind-certificate-001","resumed":true,"binding":{"phase":"rebind-certificate","config_sha256":"8594c4df539054dcc33db9c76da1adb148b64f7fb8396b11817b29ba0c308c13"}}
+
+Exit code: 0
+
+$ node scripts/prepare-delivery-handoff.mjs retain .cache/delivery-handoff/real-retain-inputs/source-config.json .cache/delivery-handoff/corrected-retain-source-001
+Elapsed wall seconds: 0.148004
+{"destination":".cache/delivery-handoff/corrected-retain-source-001","resumed":false,"binding":{"phase":"retain","config_sha256":"2835c100c5b73beeab1a641dcf4b85b8b09be6dcb1658e5b261640aacd7d869e"}}
+
+Exit code: 0
+
+$ node scripts/prepare-delivery-handoff.mjs retain .cache/delivery-handoff/native-retain-inputs/config.json .cache/delivery-handoff/corrected-retain-native-001
+Elapsed wall seconds: 0.239940
+{"destination":".cache/delivery-handoff/corrected-retain-native-001","resumed":false,"binding":{"phase":"retain","config_sha256":"d061e40de4679195dfd4512baff966eb7b6c7607208d0dbaf864818f37a9f3f9"}}
+
+Exit code: 0
+
+$ node scripts/prepare-delivery-handoff.mjs retain .cache/delivery-handoff/real-retain-inputs/rebind-config.json .cache/delivery-handoff/corrected-retain-rebind-001
+Elapsed wall seconds: 0.797293
+{"destination":".cache/delivery-handoff/corrected-retain-rebind-001","resumed":false,"binding":{"phase":"retain","config_sha256":"4e3f09337ffbc5bfe74b24bf505c3f89106ddd4ff34d84ff92725cd0216d99dc"}}
+
+Exit code: 0
+
+composed registry: byte-for-byte equal to 9e7b93f43f8a2dccffc23cb1c9e6cd60613f3b9c:combined-selected/authority-registry.json
+composed ledger: byte-for-byte equal to 9e7b93f43f8a2dccffc23cb1c9e6cd60613f3b9c:combined-selected/composed-original-ledger.json
+current003 certificate: byte-for-byte equal to ea64d1041d7378d1684fe4e25a70b8ce18059a6b:combined-selected/current-003/certificate.json
+current003 operating: byte-for-byte equal to 5b762164f0ce906d2b012c9c16d6e1081b700834:combined-selected/current-003/operating.json
+
+Final selected ledger binding remains null in package example; completed reader inventory and actual package/consumer checks remain pending.
+
+Independent native-target delta: the real GRC-001 native retention entry point passed after joining effective targets to the immutable SOURCE handoff and checking patch owners/cell counts. Focused controls reject a candidate whose inventory, ledger, patch, envelope and publication are coherently refreshed around a foreign target. Prior unchanged metadata phase outputs/byte comparisons above are retained.
+
+Final focused command: node --test test/delivery-handoff.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs
+✔ SOURCE preparation preserves handoff order, methods/resources and complete whole handoff pin (9.189432ms)
+✔ accepted whole handoff target/order drift fails even when its new pin is coherent (1.833688ms)
+✔ writer resumes only exact complete bytes and rejects collisions, dangling symlinks and changed bindings (4.413783ms)
+✔ combined read/output budget fails before creating destination (5.764806ms)
+✔ retention joins genuine terminal, request, facts and every published output; no completion from partial files (6.400628ms)
+✔ native preparation requires committed genuine SOURCE products and preserves immutable runtime/resource fields (2.901631ms)
+✔ composition invokes existing conservation logic and rejects duplicate original scope (12.142959ms)
+✔ immutable Git input reader rejects whole-body drift, missing objects and nonordinary pins (58.694848ms)
+✔ review handoff includes current bindings/complete rename scope and no approval; stale head/body/scope fail (15.390743ms)
+✔ rebind commit phases require complete custody and publication-matching result pins (1.494144ms)
+✔ new request issuance requires explicit finite v2 profiles and actual HEAD support/code pins (1.239848ms)
+✔ coherent SOURCE inventory changes and native preparation facts omissions are rejected against pinned scope/targets (7.581273ms)
+✔ native retention rejects a publication that omits the required ledger asset (2.244838ms)
+✔ native self-consistent target substitutions fail the independent immutable SOURCE join (4.403237ms)
+✔ verifies bytes without claiming factual correctness (2.971464ms)
+✔ schema-only validation reports unverified bytes (0.254658ms)
+✔ known broken pins, stale baseline, entry hashes and contradictory summaries fail (2.118851ms)
+✔ source access/license limits remain explicit; no unsafe retention (0.845934ms)
+✔ research cannot grant approval; supported conclusions need known sources (0.367785ms)
+✔ containing-file inventory verifies actual subject IDs, not optional properties.part (0.745766ms)
+✔ compressed vs uncompressed hashes and decompression budgets are checked (3.081493ms)
+✔ paths and symlinks cannot escape candidate reader (1.930822ms)
+✔ new identity registry is checked against retained prior roster without claiming source or geometry approval (1.329ms)
+✔ prior inventory cannot accept invented subjects, candidate baselines or ambiguous authority (2.271146ms)
+✔ identity-only projection rejects duplicates, geometry and altered native IDs even with updated output hashes (1.614323ms)
+✔ declared gzip .bin containing files preserve complete mixed 45-component/eight-contact membership (5.358142ms)
+✔ subject gzip declaration does not accept unsupported bytes, wrong hashes or coherently missing subjects (8.939831ms)
+✔ actual subject decompression remains bounded for legacy gzip with small encoded bytes (1.226388ms)
+✔ prior inventory and candidate registry decode their declared gzip .bin descriptors at correct vintages (1.212217ms)
+✔ independent record bindings reject coherent wrong joins, incomplete and vacuous coverage (3.943676ms)
+✔ new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption (1.365194ms)
+✔ positive real-format ledger validates actual files and binds an independent review (5.823553ms)
+✔ regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail (3.837207ms)
+✔ full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence (2.00338ms)
+✔ coordinate/helper policies remain enforced without ceremonial control files (2.087694ms)
+✔ generator controls bind actual positive, negative and equal two-run output bytes (1.40317ms)
+✔ Washington-style generated narrative/table mismatch fails against the same numeric ledger (1.062274ms)
+✔ reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review (1.730044ms)
+✔ mock remote queue checks exact blobs/head/independent receipt with read-only requests (7.361587ms)
+✔ incomplete remote trees cannot become a passed byte check (0.767157ms)
+✔ remote decisions reject stale exact-head reviews and a later change request (1.384702ms)
+✔ unchanged authored evidence survives unrelated main advance, while current metrics require refresh (0.333895ms)
+✔ trusted hosted gate checks a new limited prior-evidence registry and still rejects nonancestor baselines (2.238719ms)
+✔ fresh remote review, head, tree/path and reservation checks reject after immutable bytes were reused (10.834755ms)
+✔ acceptance/disposition binding invalidates substantive changes but preserves JSON formatting and progress comments (1.886657ms)
+✔ binding activation preserves existing PRs and rejects unknown activation timestamps (0.135301ms)
+✔ compact review binds canonical complete inventory and preserves literal receipts (0.504398ms)
+✔ compact reviews refuse malformed, mixed, omitted, changed and renamed inventories (2.132291ms)
+✔ compact inventory does not weaken head, reviewer, contract, domain or limit authority (2.655787ms)
+✔ normal remote comment route admits a complete compact review beyond literal GitHub comment size (61.454519ms)
+✔ minimal manifests reuse Git change inventory but preserve evidence and independent review (1.214481ms)
+✔ omitting duplicate change receipts does not authorize replacing original scientific evidence (2.150333ms)
+✔ declared controls remain checked, not accepted merely because controls are optional (0.515554ms)
+✔ remote minimal manifests need no base-body copies for unrelated code changes (1.152828ms)
+ℹ tests 54
+ℹ suites 0
+ℹ pass 54
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 333.973634
+
+Final public resource schema compatibility: 512c100efbb4c6334b39cefaabac2d30ec2c7823.
+Matched SOURCE/NATIVE output reserve minimum, phase allowance and safe arithmetic. Overflow fixture uses an explicit finite allowance and fills its declared limit before attempting any write. No resource helper changed.
+$ node --test test/delivery-handoff.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs
+✔ SOURCE preparation preserves handoff order, methods/resources and complete whole handoff pin (7.770934ms)
+✔ accepted whole handoff target/order drift fails even when its new pin is coherent (2.113574ms)
+✔ writer resumes only exact complete bytes and rejects collisions, dangling symlinks and changed bindings (5.430483ms)
+✔ combined read/output budget fails before creating destination (4.970932ms)
+✔ retention joins genuine terminal, request, facts and every published output; no completion from partial files (8.123737ms)
+✔ native preparation requires committed genuine SOURCE products and preserves immutable runtime/resource fields (3.27692ms)
+✔ composition invokes existing conservation logic and rejects duplicate original scope (16.644774ms)
+✔ immutable Git input reader rejects whole-body drift, missing objects and nonordinary pins (73.264197ms)
+✔ review handoff includes current bindings/complete rename scope and no approval; stale head/body/scope fail (14.102008ms)
+✔ rebind commit phases require complete custody and publication-matching result pins (2.037641ms)
+✔ new request issuance requires explicit finite v2 profiles and actual HEAD support/code pins (3.754097ms)
+✔ coherent SOURCE inventory changes and native preparation facts omissions are rejected against pinned scope/targets (14.104972ms)
+✔ native retention rejects a publication that omits the required ledger asset (3.202049ms)
+✔ native self-consistent target substitutions fail the independent immutable SOURCE join (6.013283ms)
+✔ verifies bytes without claiming factual correctness (3.859994ms)
+✔ schema-only validation reports unverified bytes (0.456997ms)
+✔ known broken pins, stale baseline, entry hashes and contradictory summaries fail (2.836357ms)
+✔ source access/license limits remain explicit; no unsafe retention (1.337924ms)
+✔ research cannot grant approval; supported conclusions need known sources (0.709442ms)
+✔ containing-file inventory verifies actual subject IDs, not optional properties.part (1.281821ms)
+✔ compressed vs uncompressed hashes and decompression budgets are checked (4.221931ms)
+✔ paths and symlinks cannot escape candidate reader (2.460198ms)
+✔ new identity registry is checked against retained prior roster without claiming source or geometry approval (1.28765ms)
+✔ prior inventory cannot accept invented subjects, candidate baselines or ambiguous authority (5.935462ms)
+✔ identity-only projection rejects duplicates, geometry and altered native IDs even with updated output hashes (2.465907ms)
+✔ declared gzip .bin containing files preserve complete mixed 45-component/eight-contact membership (10.091465ms)
+✔ subject gzip declaration does not accept unsupported bytes, wrong hashes or coherently missing subjects (11.561295ms)
+✔ actual subject decompression remains bounded for legacy gzip with small encoded bytes (1.66579ms)
+✔ prior inventory and candidate registry decode their declared gzip .bin descriptors at correct vintages (1.804947ms)
+✔ independent record bindings reject coherent wrong joins, incomplete and vacuous coverage (3.759125ms)
+✔ new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption (1.369191ms)
+✔ positive real-format ledger validates actual files and binds an independent review (3.710913ms)
+✔ regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail (2.976294ms)
+✔ full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence (1.656977ms)
+✔ coordinate/helper policies remain enforced without ceremonial control files (1.076386ms)
+✔ generator controls bind actual positive, negative and equal two-run output bytes (1.262853ms)
+✔ Washington-style generated narrative/table mismatch fails against the same numeric ledger (1.734402ms)
+✔ reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review (1.84747ms)
+✔ mock remote queue checks exact blobs/head/independent receipt with read-only requests (11.572346ms)
+✔ incomplete remote trees cannot become a passed byte check (0.820747ms)
+✔ remote decisions reject stale exact-head reviews and a later change request (1.808512ms)
+✔ unchanged authored evidence survives unrelated main advance, while current metrics require refresh (0.32376ms)
+✔ trusted hosted gate checks a new limited prior-evidence registry and still rejects nonancestor baselines (3.243299ms)
+✔ fresh remote review, head, tree/path and reservation checks reject after immutable bytes were reused (16.859091ms)
+✔ acceptance/disposition binding invalidates substantive changes but preserves JSON formatting and progress comments (4.452754ms)
+✔ binding activation preserves existing PRs and rejects unknown activation timestamps (0.2498ms)
+✔ compact review binds canonical complete inventory and preserves literal receipts (1.180851ms)
+✔ compact reviews refuse malformed, mixed, omitted, changed and renamed inventories (6.304135ms)
+✔ compact inventory does not weaken head, reviewer, contract, domain or limit authority (3.979265ms)
+✔ normal remote comment route admits a complete compact review beyond literal GitHub comment size (91.351466ms)
+✔ minimal manifests reuse Git change inventory but preserve evidence and independent review (0.926624ms)
+✔ omitting duplicate change receipts does not authorize replacing original scientific evidence (1.733991ms)
+✔ declared controls remain checked, not accepted merely because controls are optional (0.688571ms)
+✔ remote minimal manifests need no base-body copies for unrelated code changes (0.78223ms)
+ℹ tests 54
+ℹ suites 0
+ℹ pass 54
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 356.595929
+
+Order-preserving finalization delta. Existing selected consumer compares selected_geography with JSON.stringify; canonical key sorting changes its contract. No consumer predicate or active delivery file changed.
+Initial preparation from 79f89d2c original selector/package: 2.09 seconds, 84604 KiB max RSS; selector and smoke expectations exactly equal corrected 79157664; package declaration set equal, untouched declaration order preserved.
+$ finalize current13-finalize.json finalized-002
+{"destination":".cache/delivery-handoff/finalized-002","resumed":false,"binding":{"phase":"finalize","config_sha256":"b0046e313d454fe4143e562c736e57c3007e062b0c692e2d1a411c97d92408d4"}}
+elapsed_seconds=2.27 max_rss_kb=84728
+$ same command --resume
+{"destination":".cache/delivery-handoff/finalized-002","resumed":true,"binding":{"phase":"finalize","config_sha256":"b0046e313d454fe4143e562c736e57c3007e062b0c692e2d1a411c97d92408d4"}}
+elapsed_seconds=2.04 max_rss_kb=85384
+ownership-selection.json: exact public byte equality, 1592 bytes, SHA256 a25491f253ab42129b9ec8cce19a6530dee7b861c7928ac07dd543e5f62c35ad
+package-inputs.json: exact public byte equality, 84140 bytes, SHA256 4f34b4a63685a3f4edc820f82e5904d6bbec03373568afdd29573563378e38ad
+selected-delivery-expectations.json: exact public byte equality, 32243 bytes, SHA256 0260439991c24db01ea589b4b678569bdcbe5838dd7920778bd9f73a4b508aec
+Derived owned role paths: 117; no unrelated declaration changed.
+Prior 79f89d2c preparation also preserves all untouched declaration order; same final declaration set. Original-to-final selector/expectation bytes match 79157664.
+$ node --test test/delivery-handoff.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs test/package-inputs.test.mjs
+✔ SOURCE preparation preserves handoff order, methods/resources and complete whole handoff pin (23.896294ms)
+✔ accepted whole handoff target/order drift fails even when its new pin is coherent (3.171175ms)
+✔ writer resumes only exact complete bytes and rejects collisions, dangling symlinks and changed bindings (9.014763ms)
+✔ combined read/output budget fails before creating destination (0.839215ms)
+✔ retention joins genuine terminal, request, facts and every published output; no completion from partial files (8.130331ms)
+✔ native preparation requires committed genuine SOURCE products and preserves immutable runtime/resource fields (2.814045ms)
+✔ composition invokes existing conservation logic and rejects duplicate original scope (16.633725ms)
+✔ immutable Git input reader rejects whole-body drift, missing objects and nonordinary pins (68.986106ms)
+✔ review handoff includes current bindings/complete rename scope and no approval; stale head/body/scope fail (10.99455ms)
+✔ rebind commit phases require complete custody and publication-matching result pins (2.675589ms)
+✔ new request issuance requires explicit finite v2 profiles and actual HEAD support/code pins (1.167342ms)
+✔ coherent SOURCE inventory changes and native preparation facts omissions are rejected against pinned scope/targets (8.323707ms)
+✔ native retention rejects a publication that omits the required ledger asset (1.790896ms)
+✔ native self-consistent target substitutions fail the independent immutable SOURCE join (4.326338ms)
+✔ selector finalization preserves insertion order and repeat bytes, including unsorted nested geography (0.605688ms)
+✔ final package replacement preserves every foreign field and declaration order and validates overlaps (1.028606ms)
+✔ finalization joins genuine release metadata, stages fresh files, and repeats without changes (5.151012ms)
+✔ finalization rejects coherent foreign sidecar/base/ledger/envelope bindings before publication (8.719034ms)
+✔ verifies bytes without claiming factual correctness (3.018958ms)
+✔ schema-only validation reports unverified bytes (0.444139ms)
+✔ known broken pins, stale baseline, entry hashes and contradictory summaries fail (2.339901ms)
+✔ source access/license limits remain explicit; no unsafe retention (1.312136ms)
+✔ research cannot grant approval; supported conclusions need known sources (0.723263ms)
+✔ containing-file inventory verifies actual subject IDs, not optional properties.part (1.267831ms)
+✔ compressed vs uncompressed hashes and decompression budgets are checked (3.675923ms)
+✔ paths and symlinks cannot escape candidate reader (2.065204ms)
+✔ new identity registry is checked against retained prior roster without claiming source or geometry approval (1.372226ms)
+✔ prior inventory cannot accept invented subjects, candidate baselines or ambiguous authority (2.627057ms)
+✔ identity-only projection rejects duplicates, geometry and altered native IDs even with updated output hashes (2.576773ms)
+✔ declared gzip .bin containing files preserve complete mixed 45-component/eight-contact membership (8.54763ms)
+✔ subject gzip declaration does not accept unsupported bytes, wrong hashes or coherently missing subjects (10.304976ms)
+✔ actual subject decompression remains bounded for legacy gzip with small encoded bytes (1.649126ms)
+✔ prior inventory and candidate registry decode their declared gzip .bin descriptors at correct vintages (2.153514ms)
+✔ declaration uses literal paths, precise directory membership and approved outputs (95.568069ms)
+✔ independent record bindings reject coherent wrong joins, incomplete and vacuous coverage (8.007909ms)
+✔ new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption (1.72618ms)
+✔ positive real-format ledger validates actual files and binds an independent review (5.682119ms)
+✔ regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail (3.712548ms)
+✔ full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence (1.719701ms)
+✔ coordinate/helper policies remain enforced without ceremonial control files (1.967309ms)
+✔ generator controls bind actual positive, negative and equal two-run output bytes (1.553204ms)
+✔ Washington-style generated narrative/table mismatch fails against the same numeric ledger (1.506024ms)
+✔ reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review (2.434682ms)
+✔ mock remote queue checks exact blobs/head/independent receipt with read-only requests (10.572214ms)
+✔ incomplete remote trees cannot become a passed byte check (0.612999ms)
+✔ remote decisions reject stale exact-head reviews and a later change request (1.344965ms)
+✔ unchanged authored evidence survives unrelated main advance, while current metrics require refresh (0.261809ms)
+✔ trusted hosted gate checks a new limited prior-evidence registry and still rejects nonancestor baselines (1.930934ms)
+✔ fresh remote review, head, tree/path and reservation checks reject after immutable bytes were reused (9.966314ms)
+✔ acceptance/disposition binding invalidates substantive changes but preserves JSON formatting and progress comments (5.492603ms)
+✔ binding activation preserves existing PRs and rejects unknown activation timestamps (0.282529ms)
+✔ compact review binds canonical complete inventory and preserves literal receipts (1.147462ms)
+✔ compact reviews refuse malformed, mixed, omitted, changed and renamed inventories (4.291587ms)
+✔ compact inventory does not weaken head, reviewer, contract, domain or limit authority (2.016352ms)
+✔ normal remote comment route admits a complete compact review beyond literal GitHub comment size (85.098173ms)
+✔ minimal manifests reuse Git change inventory but preserve evidence and independent review (0.655842ms)
+✔ omitting duplicate change receipts does not authorize replacing original scientific evidence (1.651811ms)
+✔ declared controls remain checked, not accepted merely because controls are optional (0.317421ms)
+✔ remote minimal manifests need no base-body copies for unrelated code changes (1.028966ms)
+ℹ tests 59
+ℹ suites 0
+ℹ pass 59
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 378.555924
+
+Focused review correction: independently bind final base-manifest SHA to the unchanged selector and final owner-roster SHA to original native bounds; compare envelope encoded/decoded tuples. Coherent foreign manifest and roster substitutions, plus decoded descriptor drift, are now exercised. These are metadata joins, not private graph/scientific acceptance.
+✔ SOURCE preparation preserves handoff order, methods/resources and complete whole handoff pin (8.611826ms)
+✔ accepted whole handoff target/order drift fails even when its new pin is coherent (2.102198ms)
+✔ writer resumes only exact complete bytes and rejects collisions, dangling symlinks and changed bindings (6.705067ms)
+✔ combined read/output budget fails before creating destination (0.770603ms)
+✔ retention joins genuine terminal, request, facts and every published output; no completion from partial files (6.529016ms)
+✔ native preparation requires committed genuine SOURCE products and preserves immutable runtime/resource fields (3.185646ms)
+✔ composition invokes existing conservation logic and rejects duplicate original scope (17.614543ms)
+✔ immutable Git input reader rejects whole-body drift, missing objects and nonordinary pins (58.75084ms)
+✔ review handoff includes current bindings/complete rename scope and no approval; stale head/body/scope fail (14.065197ms)
+✔ rebind commit phases require complete custody and publication-matching result pins (3.503738ms)
+✔ new request issuance requires explicit finite v2 profiles and actual HEAD support/code pins (1.69885ms)
+✔ coherent SOURCE inventory changes and native preparation facts omissions are rejected against pinned scope/targets (8.448464ms)
+✔ native retention rejects a publication that omits the required ledger asset (2.403515ms)
+✔ native self-consistent target substitutions fail the independent immutable SOURCE join (6.54497ms)
+✔ selector finalization preserves insertion order and repeat bytes, including unsorted nested geography (1.067714ms)
+✔ final package replacement preserves every foreign field and declaration order and validates overlaps (1.653624ms)
+✔ finalization joins genuine release metadata, stages fresh files, and repeats without changes (10.856216ms)
+✔ finalization rejects coherent foreign sidecar/base/ledger/envelope bindings before publication (16.029711ms)
+✔ verifies bytes without claiming factual correctness (4.133212ms)
+✔ schema-only validation reports unverified bytes (0.473713ms)
+✔ known broken pins, stale baseline, entry hashes and contradictory summaries fail (3.002544ms)
+✔ source access/license limits remain explicit; no unsafe retention (1.04518ms)
+✔ research cannot grant approval; supported conclusions need known sources (0.560862ms)
+✔ containing-file inventory verifies actual subject IDs, not optional properties.part (1.431433ms)
+✔ compressed vs uncompressed hashes and decompression budgets are checked (4.359017ms)
+✔ paths and symlinks cannot escape candidate reader (2.275286ms)
+✔ new identity registry is checked against retained prior roster without claiming source or geometry approval (1.463862ms)
+✔ prior inventory cannot accept invented subjects, candidate baselines or ambiguous authority (1.858978ms)
+✔ identity-only projection rejects duplicates, geometry and altered native IDs even with updated output hashes (2.268966ms)
+✔ declared gzip .bin containing files preserve complete mixed 45-component/eight-contact membership (7.649408ms)
+✔ subject gzip declaration does not accept unsupported bytes, wrong hashes or coherently missing subjects (8.333393ms)
+✔ actual subject decompression remains bounded for legacy gzip with small encoded bytes (1.447357ms)
+✔ prior inventory and candidate registry decode their declared gzip .bin descriptors at correct vintages (1.877195ms)
+✔ declaration uses literal paths, precise directory membership and approved outputs (92.708188ms)
+✔ independent record bindings reject coherent wrong joins, incomplete and vacuous coverage (4.649418ms)
+✔ new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption (1.492294ms)
+✔ positive real-format ledger validates actual files and binds an independent review (4.403182ms)
+✔ regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail (3.684627ms)
+✔ full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence (1.784989ms)
+✔ coordinate/helper policies remain enforced without ceremonial control files (1.416251ms)
+✔ generator controls bind actual positive, negative and equal two-run output bytes (1.479314ms)
+✔ Washington-style generated narrative/table mismatch fails against the same numeric ledger (1.294641ms)
+✔ reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review (2.104432ms)
+✔ mock remote queue checks exact blobs/head/independent receipt with read-only requests (8.446ms)
+✔ incomplete remote trees cannot become a passed byte check (0.661ms)
+✔ remote decisions reject stale exact-head reviews and a later change request (1.844576ms)
+✔ unchanged authored evidence survives unrelated main advance, while current metrics require refresh (0.427374ms)
+✔ trusted hosted gate checks a new limited prior-evidence registry and still rejects nonancestor baselines (2.545767ms)
+✔ fresh remote review, head, tree/path and reservation checks reject after immutable bytes were reused (17.130464ms)
+✔ acceptance/disposition binding invalidates substantive changes but preserves JSON formatting and progress comments (2.578715ms)
+✔ binding activation preserves existing PRs and rejects unknown activation timestamps (0.243811ms)
+✔ compact review binds canonical complete inventory and preserves literal receipts (0.948897ms)
+✔ compact reviews refuse malformed, mixed, omitted, changed and renamed inventories (4.166161ms)
+✔ compact inventory does not weaken head, reviewer, contract, domain or limit authority (2.097933ms)
+✔ normal remote comment route admits a complete compact review beyond literal GitHub comment size (95.658915ms)
+✔ minimal manifests reuse Git change inventory but preserve evidence and independent review (0.916119ms)
+✔ omitting duplicate change receipts does not authorize replacing original scientific evidence (1.890715ms)
+✔ declared controls remain checked, not accepted merely because controls are optional (0.461365ms)
+✔ remote minimal manifests need no base-body copies for unrelated code changes (1.132951ms)
+ℹ tests 59
+ℹ suites 0
+ℹ pass 59
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 377.217675
+Real finalization --resume after alias correction passed, preserving all previously measured bytes.
+
+Final baseline join: envelope base release ID/footprints/hierarchy now match the unchanged selector and its authenticated native manifest. Added coherent patch+envelope mutations for each baseline identity field. Real791 exact --resume still passed with unchanged output bytes.
+✔ SOURCE preparation preserves handoff order, methods/resources and complete whole handoff pin (8.504343ms)
+✔ accepted whole handoff target/order drift fails even when its new pin is coherent (2.110117ms)
+✔ writer resumes only exact complete bytes and rejects collisions, dangling symlinks and changed bindings (6.17418ms)
+✔ combined read/output budget fails before creating destination (0.720044ms)
+✔ retention joins genuine terminal, request, facts and every published output; no completion from partial files (6.827556ms)
+✔ native preparation requires committed genuine SOURCE products and preserves immutable runtime/resource fields (3.03252ms)
+✔ composition invokes existing conservation logic and rejects duplicate original scope (16.814118ms)
+✔ immutable Git input reader rejects whole-body drift, missing objects and nonordinary pins (65.322241ms)
+✔ review handoff includes current bindings/complete rename scope and no approval; stale head/body/scope fail (12.741251ms)
+✔ rebind commit phases require complete custody and publication-matching result pins (2.839144ms)
+✔ new request issuance requires explicit finite v2 profiles and actual HEAD support/code pins (1.457713ms)
+✔ coherent SOURCE inventory changes and native preparation facts omissions are rejected against pinned scope/targets (7.524304ms)
+✔ native retention rejects a publication that omits the required ledger asset (4.231701ms)
+✔ native self-consistent target substitutions fail the independent immutable SOURCE join (6.307366ms)
+✔ selector finalization preserves insertion order and repeat bytes, including unsorted nested geography (0.840502ms)
+✔ final package replacement preserves every foreign field and declaration order and validates overlaps (1.223477ms)
+✔ finalization joins genuine release metadata, stages fresh files, and repeats without changes (8.926015ms)
+✔ finalization rejects coherent foreign sidecar/base/ledger/envelope bindings before publication (18.354462ms)
+✔ verifies bytes without claiming factual correctness (3.783199ms)
+✔ schema-only validation reports unverified bytes (0.462664ms)
+✔ known broken pins, stale baseline, entry hashes and contradictory summaries fail (2.523708ms)
+✔ source access/license limits remain explicit; no unsafe retention (1.111511ms)
+✔ research cannot grant approval; supported conclusions need known sources (0.546117ms)
+✔ containing-file inventory verifies actual subject IDs, not optional properties.part (1.107476ms)
+✔ compressed vs uncompressed hashes and decompression budgets are checked (3.234768ms)
+✔ paths and symlinks cannot escape candidate reader (1.678259ms)
+✔ new identity registry is checked against retained prior roster without claiming source or geometry approval (0.915672ms)
+✔ prior inventory cannot accept invented subjects, candidate baselines or ambiguous authority (1.581135ms)
+✔ identity-only projection rejects duplicates, geometry and altered native IDs even with updated output hashes (1.706851ms)
+✔ declared gzip .bin containing files preserve complete mixed 45-component/eight-contact membership (7.102551ms)
+✔ subject gzip declaration does not accept unsupported bytes, wrong hashes or coherently missing subjects (6.983976ms)
+✔ actual subject decompression remains bounded for legacy gzip with small encoded bytes (1.318648ms)
+✔ prior inventory and candidate registry decode their declared gzip .bin descriptors at correct vintages (1.373569ms)
+✔ declaration uses literal paths, precise directory membership and approved outputs (94.724494ms)
+✔ independent record bindings reject coherent wrong joins, incomplete and vacuous coverage (4.054549ms)
+✔ new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption (1.073145ms)
+✔ positive real-format ledger validates actual files and binds an independent review (4.658041ms)
+✔ regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail (3.306534ms)
+✔ full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence (1.619673ms)
+✔ coordinate/helper policies remain enforced without ceremonial control files (1.224348ms)
+✔ generator controls bind actual positive, negative and equal two-run output bytes (1.352878ms)
+✔ Washington-style generated narrative/table mismatch fails against the same numeric ledger (1.222636ms)
+✔ reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review (1.872125ms)
+✔ mock remote queue checks exact blobs/head/independent receipt with read-only requests (8.141617ms)
+✔ incomplete remote trees cannot become a passed byte check (0.883565ms)
+✔ remote decisions reject stale exact-head reviews and a later change request (1.524272ms)
+✔ unchanged authored evidence survives unrelated main advance, while current metrics require refresh (0.381383ms)
+✔ trusted hosted gate checks a new limited prior-evidence registry and still rejects nonancestor baselines (2.169054ms)
+✔ fresh remote review, head, tree/path and reservation checks reject after immutable bytes were reused (11.029081ms)
+✔ acceptance/disposition binding invalidates substantive changes but preserves JSON formatting and progress comments (2.147281ms)
+✔ binding activation preserves existing PRs and rejects unknown activation timestamps (0.217231ms)
+✔ compact review binds canonical complete inventory and preserves literal receipts (0.80566ms)
+✔ compact reviews refuse malformed, mixed, omitted, changed and renamed inventories (5.177179ms)
+✔ compact inventory does not weaken head, reviewer, contract, domain or limit authority (1.546744ms)
+✔ normal remote comment route admits a complete compact review beyond literal GitHub comment size (76.242437ms)
+✔ minimal manifests reuse Git change inventory but preserve evidence and independent review (0.867506ms)
+✔ omitting duplicate change receipts does not authorize replacing original scientific evidence (1.606663ms)
+✔ declared controls remain checked, not accepted merely because controls are optional (0.377137ms)
+✔ remote minimal manifests need no base-body copies for unrelated code changes (0.962342ms)
+ℹ tests 59
+ℹ suites 0
+ℹ pass 59
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 349.153996
+
+Final raw-pin correction: authenticate the retained encoded owner-roster whole Git body as well as its independent original-bounds hash. No decoding or graph/scientific computation. Existing missing-path reader control and explicit owner read assertion pass. Real finalization --resume remains byte-identical.
+✔ SOURCE preparation preserves handoff order, methods/resources and complete whole handoff pin (8.605248ms)
+✔ accepted whole handoff target/order drift fails even when its new pin is coherent (1.501344ms)
+✔ writer resumes only exact complete bytes and rejects collisions, dangling symlinks and changed bindings (7.153918ms)
+✔ combined read/output budget fails before creating destination (0.649062ms)
+✔ retention joins genuine terminal, request, facts and every published output; no completion from partial files (6.240575ms)
+✔ native preparation requires committed genuine SOURCE products and preserves immutable runtime/resource fields (2.462007ms)
+✔ composition invokes existing conservation logic and rejects duplicate original scope (16.654262ms)
+✔ immutable Git input reader rejects whole-body drift, missing objects and nonordinary pins (71.033367ms)
+✔ review handoff includes current bindings/complete rename scope and no approval; stale head/body/scope fail (15.95087ms)
+✔ rebind commit phases require complete custody and publication-matching result pins (3.090899ms)
+✔ new request issuance requires explicit finite v2 profiles and actual HEAD support/code pins (1.615784ms)
+✔ coherent SOURCE inventory changes and native preparation facts omissions are rejected against pinned scope/targets (16.162914ms)
+✔ native retention rejects a publication that omits the required ledger asset (3.606803ms)
+✔ native self-consistent target substitutions fail the independent immutable SOURCE join (8.90971ms)
+✔ selector finalization preserves insertion order and repeat bytes, including unsorted nested geography (0.832373ms)
+✔ final package replacement preserves every foreign field and declaration order and validates overlaps (1.294548ms)
+✔ finalization joins genuine release metadata, stages fresh files, and repeats without changes (10.155164ms)
+✔ finalization rejects coherent foreign sidecar/base/ledger/envelope bindings before publication (16.753109ms)
+✔ verifies bytes without claiming factual correctness (4.148196ms)
+✔ schema-only validation reports unverified bytes (0.461113ms)
+✔ known broken pins, stale baseline, entry hashes and contradictory summaries fail (3.081255ms)
+✔ source access/license limits remain explicit; no unsafe retention (1.344722ms)
+✔ research cannot grant approval; supported conclusions need known sources (0.868817ms)
+✔ containing-file inventory verifies actual subject IDs, not optional properties.part (1.374186ms)
+✔ compressed vs uncompressed hashes and decompression budgets are checked (3.763004ms)
+✔ paths and symlinks cannot escape candidate reader (2.162914ms)
+✔ new identity registry is checked against retained prior roster without claiming source or geometry approval (1.322469ms)
+✔ prior inventory cannot accept invented subjects, candidate baselines or ambiguous authority (2.279617ms)
+✔ identity-only projection rejects duplicates, geometry and altered native IDs even with updated output hashes (2.331914ms)
+✔ declared gzip .bin containing files preserve complete mixed 45-component/eight-contact membership (9.421538ms)
+✔ subject gzip declaration does not accept unsupported bytes, wrong hashes or coherently missing subjects (23.455994ms)
+✔ actual subject decompression remains bounded for legacy gzip with small encoded bytes (1.327166ms)
+✔ prior inventory and candidate registry decode their declared gzip .bin descriptors at correct vintages (1.70799ms)
+✔ declaration uses literal paths, precise directory membership and approved outputs (85.286663ms)
+✔ independent record bindings reject coherent wrong joins, incomplete and vacuous coverage (3.869402ms)
+✔ new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption (1.288079ms)
+✔ positive real-format ledger validates actual files and binds an independent review (3.332657ms)
+✔ regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail (3.289603ms)
+✔ full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence (1.213137ms)
+✔ coordinate/helper policies remain enforced without ceremonial control files (1.976979ms)
+✔ generator controls bind actual positive, negative and equal two-run output bytes (1.981565ms)
+✔ Washington-style generated narrative/table mismatch fails against the same numeric ledger (1.285064ms)
+✔ reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review (2.172398ms)
+✔ mock remote queue checks exact blobs/head/independent receipt with read-only requests (11.352699ms)
+✔ incomplete remote trees cannot become a passed byte check (0.744844ms)
+✔ remote decisions reject stale exact-head reviews and a later change request (1.853696ms)
+✔ unchanged authored evidence survives unrelated main advance, while current metrics require refresh (0.273425ms)
+✔ trusted hosted gate checks a new limited prior-evidence registry and still rejects nonancestor baselines (2.572641ms)
+✔ fresh remote review, head, tree/path and reservation checks reject after immutable bytes were reused (10.229204ms)
+✔ acceptance/disposition binding invalidates substantive changes but preserves JSON formatting and progress comments (2.143565ms)
+✔ binding activation preserves existing PRs and rejects unknown activation timestamps (0.277841ms)
+✔ compact review binds canonical complete inventory and preserves literal receipts (1.149974ms)
+✔ compact reviews refuse malformed, mixed, omitted, changed and renamed inventories (3.58462ms)
+✔ compact inventory does not weaken head, reviewer, contract, domain or limit authority (1.76177ms)
+✔ normal remote comment route admits a complete compact review beyond literal GitHub comment size (97.934013ms)
+✔ minimal manifests reuse Git change inventory but preserve evidence and independent review (2.906987ms)
+✔ omitting duplicate change receipts does not authorize replacing original scientific evidence (9.572091ms)
+✔ declared controls remain checked, not accepted merely because controls are optional (0.80997ms)
+✔ remote minimal manifests need no base-body copies for unrelated code changes (1.321257ms)
+ℹ tests 59
+ℹ suites 0
+ℹ pass 59
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 343.839166
+
+Append-only package correction (2026-10-12): prior791 sorted-package equality was the wrong classifier oracle. Historical evidence above is preserved. Accepted9473d184 package is now the explicit config baseline. Exact744-entry prefix plus117 unique stable appends reproduces d37abcd5a85aa4b0cbfdb6b50222a0a4dedb2050 package, 84140 bytes, SHA256 f0de0ec4897b72fe78a6e66df1b6d2db47b5bb9ab22f9898854b6b26846bf41e. Selector and smoke expectations stay byte-identical to791; actual finalize CLI and exact resume passed.
+Accepted9473 and implementation integration-profile.mjs Git blob both ae77cdf2682668b9fa8de9a4a9d0e6196619473a. New test invokes actual selectedDataSelection: append succeeds; equal-set global sorting refuses. Already-declared path identities must match accepted bytes; duplicate/overlapping declarations refuse; repeated finalization adds nothing.
+$ node --test test/delivery-handoff.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs test/package-inputs.test.mjs
+✔ SOURCE preparation preserves handoff order, methods/resources and complete whole handoff pin (6.518124ms)
+✔ accepted whole handoff target/order drift fails even when its new pin is coherent (1.501314ms)
+✔ writer resumes only exact complete bytes and rejects collisions, dangling symlinks and changed bindings (7.343723ms)
+✔ combined read/output budget fails before creating destination (1.113329ms)
+✔ retention joins genuine terminal, request, facts and every published output; no completion from partial files (18.083875ms)
+✔ native preparation requires committed genuine SOURCE products and preserves immutable runtime/resource fields (41.102189ms)
+✔ composition invokes existing conservation logic and rejects duplicate original scope (29.376742ms)
+✔ immutable Git input reader rejects whole-body drift, missing objects and nonordinary pins (91.127575ms)
+✔ review handoff includes current bindings/complete rename scope and no approval; stale head/body/scope fail (13.461799ms)
+✔ rebind commit phases require complete custody and publication-matching result pins (1.938732ms)
+✔ new request issuance requires explicit finite v2 profiles and actual HEAD support/code pins (1.834948ms)
+✔ coherent SOURCE inventory changes and native preparation facts omissions are rejected against pinned scope/targets (6.582049ms)
+✔ native retention rejects a publication that omits the required ledger asset (1.887636ms)
+✔ native self-consistent target substitutions fail the independent immutable SOURCE join (6.426929ms)
+✔ selector finalization preserves insertion order and repeat bytes, including unsorted nested geography (0.986872ms)
+✔ final package appends preserve the entire accepted prefix and validate duplicates/overlaps (1.124716ms)
+✔ finalization joins genuine release metadata, stages fresh files, and repeats without changes (8.419406ms)
+✔ finalization rejects coherent foreign sidecar/base/ledger/envelope bindings before publication (18.10743ms)
+✔ finalization refuses a new identity at an accepted package path (2.142584ms)
+✔ verifies bytes without claiming factual correctness (3.2139ms)
+✔ schema-only validation reports unverified bytes (0.374435ms)
+✔ known broken pins, stale baseline, entry hashes and contradictory summaries fail (2.253788ms)
+✔ source access/license limits remain explicit; no unsafe retention (1.007152ms)
+✔ research cannot grant approval; supported conclusions need known sources (0.555843ms)
+✔ containing-file inventory verifies actual subject IDs, not optional properties.part (0.910568ms)
+✔ compressed vs uncompressed hashes and decompression budgets are checked (2.8761ms)
+✔ paths and symlinks cannot escape candidate reader (1.880686ms)
+✔ new identity registry is checked against retained prior roster without claiming source or geometry approval (1.241669ms)
+✔ prior inventory cannot accept invented subjects, candidate baselines or ambiguous authority (2.108674ms)
+✔ identity-only projection rejects duplicates, geometry and altered native IDs even with updated output hashes (1.688711ms)
+✔ declared gzip .bin containing files preserve complete mixed 45-component/eight-contact membership (6.25118ms)
+✔ subject gzip declaration does not accept unsupported bytes, wrong hashes or coherently missing subjects (8.877278ms)
+✔ actual subject decompression remains bounded for legacy gzip with small encoded bytes (11.62979ms)
+✔ prior inventory and candidate registry decode their declared gzip .bin descriptors at correct vintages (21.32823ms)
+✔ declaration uses literal paths, precise directory membership and approved outputs (140.955508ms)
+✔ independent record bindings reject coherent wrong joins, incomplete and vacuous coverage (2.875229ms)
+✔ new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption (1.245946ms)
+✔ positive real-format ledger validates actual files and binds an independent review (2.692277ms)
+✔ regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail (2.16047ms)
+✔ full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence (0.845413ms)
+✔ coordinate/helper policies remain enforced without ceremonial control files (0.753986ms)
+✔ generator controls bind actual positive, negative and equal two-run output bytes (1.107831ms)
+✔ Washington-style generated narrative/table mismatch fails against the same numeric ledger (1.397871ms)
+✔ reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review (1.668322ms)
+✔ mock remote queue checks exact blobs/head/independent receipt with read-only requests (18.323931ms)
+✔ incomplete remote trees cannot become a passed byte check (3.649325ms)
+✔ remote decisions reject stale exact-head reviews and a later change request (5.726351ms)
+✔ unchanged authored evidence survives unrelated main advance, while current metrics require refresh (4.931945ms)
+✔ trusted hosted gate checks a new limited prior-evidence registry and still rejects nonancestor baselines (16.005527ms)
+✔ fresh remote review, head, tree/path and reservation checks reject after immutable bytes were reused (36.495035ms)
+✔ acceptance/disposition binding invalidates substantive changes but preserves JSON formatting and progress comments (2.158617ms)
+✔ binding activation preserves existing PRs and rejects unknown activation timestamps (0.211313ms)
+✔ compact review binds canonical complete inventory and preserves literal receipts (0.652816ms)
+✔ compact reviews refuse malformed, mixed, omitted, changed and renamed inventories (3.239197ms)
+✔ compact inventory does not weaken head, reviewer, contract, domain or limit authority (0.971529ms)
+✔ normal remote comment route admits a complete compact review beyond literal GitHub comment size (79.182342ms)
+✔ minimal manifests reuse Git change inventory but preserve evidence and independent review (0.694769ms)
+✔ omitting duplicate change receipts does not authorize replacing original scientific evidence (4.07095ms)
+✔ declared controls remain checked, not accepted merely because controls are optional (0.786815ms)
+✔ remote minimal manifests need no base-body copies for unrelated code changes (1.433914ms)
+ℹ tests 60
+ℹ suites 0
+ℹ pass 60
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 395.299738
+$ node --test --test-name-pattern='delivery finalizer satisfies|selected-data falls back to full for package|selected-data uses full setup' test/selected-data-profile.test.mjs
+✔ selected-data uses full setup with one narrow selection, exact package appends and complete reviewed roster (10.881011ms)
+✔ selected-data falls back to full for package removal (1.100491ms)
+✔ selected-data falls back to full for package reordering (1.621703ms)
+✔ selected-data falls back to full for package policy rewrite (1.777503ms)
+✔ delivery finalizer satisfies actual append-only selected-data classifier and rejects global sorting (5.155909ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 199.873119
+Limit: an attempted unfiltered combined selected-data suite ran183 tests:163 passed,20 failed because existing fixed COD/PHL fixtures require unavailable retained Git bodies. First missing body was coordination/engineering/congo-ago2018-delivery-20261011/README.md, Git OID8e3e7f9c0b9bed0ab949a8b79f94496301ed4f42. No hydration or scientific execution attempted. The focused changed classifier controls above all ran and passed; this is not a full-suite pass.
+
+Accepted-base continuation: conflict-free ancestry merge includes ef834e2d90a9ca5d4cbd961a84a08dd156ae7944 and reviewed abadc80b0d683e526331f6ecfee6730fe66fb902. No scientific run or delivery-tree materialization. Finalization and exact resume passed with the merged resource helpers.
+✔ SOURCE preparation preserves handoff order, methods/resources and complete whole handoff pin (7.840438ms)
+✔ accepted whole handoff target/order drift fails even when its new pin is coherent (1.936632ms)
+✔ writer resumes only exact complete bytes and rejects collisions, dangling symlinks and changed bindings (6.354404ms)
+✔ combined read/output budget fails before creating destination (0.840306ms)
+✔ retention joins genuine terminal, request, facts and every published output; no completion from partial files (6.890248ms)
+✔ native preparation requires committed genuine SOURCE products and preserves immutable runtime/resource fields (3.033549ms)
+✔ composition invokes existing conservation logic and rejects duplicate original scope (15.297617ms)
+✔ immutable Git input reader rejects whole-body drift, missing objects and nonordinary pins (67.026536ms)
+✔ review handoff includes current bindings/complete rename scope and no approval; stale head/body/scope fail (13.535584ms)
+✔ rebind commit phases require complete custody and publication-matching result pins (1.478993ms)
+✔ new request issuance requires explicit finite v2 profiles and actual HEAD support/code pins (1.242683ms)
+✔ coherent SOURCE inventory changes and native preparation facts omissions are rejected against pinned scope/targets (7.338233ms)
+✔ native retention rejects a publication that omits the required ledger asset (2.883236ms)
+✔ native self-consistent target substitutions fail the independent immutable SOURCE join (7.014964ms)
+✔ selector finalization preserves insertion order and repeat bytes, including unsorted nested geography (0.743502ms)
+✔ final package appends preserve the entire accepted prefix and validate duplicates/overlaps (1.352475ms)
+✔ finalization joins genuine release metadata, stages fresh files, and repeats without changes (5.300902ms)
+✔ finalization rejects coherent foreign sidecar/base/ledger/envelope bindings before publication (12.201486ms)
+✔ finalization refuses a new identity at an accepted package path (1.391203ms)
+✔ verifies bytes without claiming factual correctness (4.121052ms)
+✔ schema-only validation reports unverified bytes (0.449627ms)
+✔ known broken pins, stale baseline, entry hashes and contradictory summaries fail (3.00721ms)
+✔ source access/license limits remain explicit; no unsafe retention (1.36898ms)
+✔ research cannot grant approval; supported conclusions need known sources (0.750583ms)
+✔ containing-file inventory verifies actual subject IDs, not optional properties.part (1.207922ms)
+✔ compressed vs uncompressed hashes and decompression budgets are checked (3.689752ms)
+✔ paths and symlinks cannot escape candidate reader (2.086634ms)
+✔ new identity registry is checked against retained prior roster without claiming source or geometry approval (1.222182ms)
+✔ prior inventory cannot accept invented subjects, candidate baselines or ambiguous authority (1.927488ms)
+✔ identity-only projection rejects duplicates, geometry and altered native IDs even with updated output hashes (2.327201ms)
+✔ declared gzip .bin containing files preserve complete mixed 45-component/eight-contact membership (9.205403ms)
+✔ subject gzip declaration does not accept unsupported bytes, wrong hashes or coherently missing subjects (9.564655ms)
+✔ actual subject decompression remains bounded for legacy gzip with small encoded bytes (1.397582ms)
+✔ prior inventory and candidate registry decode their declared gzip .bin descriptors at correct vintages (1.965996ms)
+✔ declaration uses literal paths, precise directory membership and approved outputs (127.68957ms)
+✔ independent record bindings reject coherent wrong joins, incomplete and vacuous coverage (4.546543ms)
+✔ new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption (1.634334ms)
+✔ positive real-format ledger validates actual files and binds an independent review (4.2553ms)
+✔ regressions: stale vintage, entry hash, wrong source/path and conflicting generated result fail (3.543996ms)
+✔ full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence (1.579803ms)
+✔ coordinate/helper policies remain enforced without ceremonial control files (1.407707ms)
+✔ generator controls bind actual positive, negative and equal two-run output bytes (1.399546ms)
+✔ Washington-style generated narrative/table mismatch fails against the same numeric ledger (1.277394ms)
+✔ reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review (1.938565ms)
+✔ mock remote queue checks exact blobs/head/independent receipt with read-only requests (9.181216ms)
+✔ incomplete remote trees cannot become a passed byte check (0.601442ms)
+✔ remote decisions reject stale exact-head reviews and a later change request (1.804326ms)
+✔ unchanged authored evidence survives unrelated main advance, while current metrics require refresh (0.400825ms)
+✔ trusted hosted gate checks a new limited prior-evidence registry and still rejects nonancestor baselines (2.725041ms)
+✔ fresh remote review, head, tree/path and reservation checks reject after immutable bytes were reused (12.614157ms)
+✔ acceptance/disposition binding invalidates substantive changes but preserves JSON formatting and progress comments (2.208616ms)
+✔ binding activation preserves existing PRs and rejects unknown activation timestamps (0.187348ms)
+✔ compact review binds canonical complete inventory and preserves literal receipts (0.743002ms)
+✔ compact reviews refuse malformed, mixed, omitted, changed and renamed inventories (4.745268ms)
+✔ compact inventory does not weaken head, reviewer, contract, domain or limit authority (1.797295ms)
+✔ normal remote comment route admits a complete compact review beyond literal GitHub comment size (75.615524ms)
+✔ minimal manifests reuse Git change inventory but preserve evidence and independent review (0.565749ms)
+✔ omitting duplicate change receipts does not authorize replacing original scientific evidence (1.226128ms)
+✔ declared controls remain checked, not accepted merely because controls are optional (0.307416ms)
+✔ remote minimal manifests need no base-body copies for unrelated code changes (0.703364ms)
+ℹ tests 60
+ℹ suites 0
+ℹ pass 60
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 354.532852
+✔ selected-data uses full setup with one narrow selection, exact package appends and complete reviewed roster (7.178406ms)
+✔ selected-data falls back to full for package removal (0.763823ms)
+✔ selected-data falls back to full for package reordering (0.788339ms)
+✔ selected-data falls back to full for package policy rewrite (0.644586ms)
+✔ delivery finalizer satisfies actual append-only selected-data classifier and rejects global sorting (2.599054ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 134.266849
+Observed delivery-lane limitation (not a new experiment by this task): complete425-path current13 structural classifier fell back to full CI at the16MiB aggregate supporting-JSON read budget after166 blobs/16,638,841 accounted bytes. This does not invalidate the focused append-only tests or establish full-tree selected-data adoption. Classifier redesign remains separate.
+
+Accepted-main metadata sequence replay (2026-10-12 UTC)
+Execution checkout d5540a6b4cc42a9975a5f79e45bdbe89fc21cba4 contains accepted ef834e2d90a9ca5d4cbd961a84a08dd156ae7944. Seven immutable preparation phases and three genuine retention cases each completed then resumed with exact output validation. No scientific operator was run. Hosted review preparation follows only after a real PR exists.
+PHASE requests
+{"destination":".cache/delivery-handoff/accepted-sequence-requests","resumed":false,"binding":{"phase":"requests","config_sha256":"d7c663ff71b72fa74a727cbc61b642dc05b0520da8cd85bbab11e10524793203"}}
+{"destination":".cache/delivery-handoff/accepted-sequence-requests","resumed":true,"binding":{"phase":"requests","config_sha256":"d7c663ff71b72fa74a727cbc61b642dc05b0520da8cd85bbab11e10524793203"}}
+PHASE native-requests
+{"destination":".cache/delivery-handoff/accepted-sequence-native-requests","resumed":false,"binding":{"phase":"native-requests","config_sha256":"1c03653aed937abfd8ce5da6cceeb70cab543d9dea6db1b92b741ac87e9ab845"}}
+{"destination":".cache/delivery-handoff/accepted-sequence-native-requests","resumed":true,"binding":{"phase":"native-requests","config_sha256":"1c03653aed937abfd8ce5da6cceeb70cab543d9dea6db1b92b741ac87e9ab845"}}
+PHASE compose
+{"destination":".cache/delivery-handoff/accepted-sequence-compose","resumed":false,"binding":{"phase":"compose","config_sha256":"bf8e78b1b861022dea802b108dca1569399d1fd9e3954a09de2cb1cc10a46a22"}}
+{"destination":".cache/delivery-handoff/accepted-sequence-compose","resumed":true,"binding":{"phase":"compose","config_sha256":"bf8e78b1b861022dea802b108dca1569399d1fd9e3954a09de2cb1cc10a46a22"}}
+PHASE package
+{"destination":".cache/delivery-handoff/accepted-sequence-package","resumed":false,"binding":{"phase":"package","config_sha256":"83bbdd0ddd9238d944fa93786ef556f05934e20aa59433e49d398711045421dd"}}
+{"destination":".cache/delivery-handoff/accepted-sequence-package","resumed":true,"binding":{"phase":"package","config_sha256":"83bbdd0ddd9238d944fa93786ef556f05934e20aa59433e49d398711045421dd"}}
+PHASE rebind-operating
+{"destination":".cache/delivery-handoff/accepted-sequence-rebind-operating","resumed":false,"binding":{"phase":"rebind-operating","config_sha256":"8594c4df539054dcc33db9c76da1adb148b64f7fb8396b11817b29ba0c308c13"}}
+{"destination":".cache/delivery-handoff/accepted-sequence-rebind-operating","resumed":true,"binding":{"phase":"rebind-operating","config_sha256":"8594c4df539054dcc33db9c76da1adb148b64f7fb8396b11817b29ba0c308c13"}}
+PHASE rebind-certificate
+{"destination":".cache/delivery-handoff/accepted-sequence-rebind-certificate","resumed":false,"binding":{"phase":"rebind-certificate","config_sha256":"8594c4df539054dcc33db9c76da1adb148b64f7fb8396b11817b29ba0c308c13"}}
+{"destination":".cache/delivery-handoff/accepted-sequence-rebind-certificate","resumed":true,"binding":{"phase":"rebind-certificate","config_sha256":"8594c4df539054dcc33db9c76da1adb148b64f7fb8396b11817b29ba0c308c13"}}
+PHASE finalize
+{"destination":".cache/delivery-handoff/accepted-sequence-finalize","resumed":false,"binding":{"phase":"finalize","config_sha256":"c0b8057e068d60971c6c1d17d668417a42d5424edf6c80c3a478e197ee1eab53"}}
+{"destination":".cache/delivery-handoff/accepted-sequence-finalize","resumed":true,"binding":{"phase":"finalize","config_sha256":"c0b8057e068d60971c6c1d17d668417a42d5424edf6c80c3a478e197ee1eab53"}}
+RETAIN source
+{"destination":".cache/delivery-handoff/accepted-retain-source","resumed":false,"binding":{"phase":"retain","config_sha256":"2835c100c5b73beeab1a641dcf4b85b8b09be6dcb1658e5b261640aacd7d869e"}}
+{"destination":".cache/delivery-handoff/accepted-retain-source","resumed":true,"binding":{"phase":"retain","config_sha256":"2835c100c5b73beeab1a641dcf4b85b8b09be6dcb1658e5b261640aacd7d869e"}}
+RETAIN native
+{"destination":".cache/delivery-handoff/accepted-retain-native","resumed":false,"binding":{"phase":"retain","config_sha256":"d061e40de4679195dfd4512baff966eb7b6c7607208d0dbaf864818f37a9f3f9"}}
+{"destination":".cache/delivery-handoff/accepted-retain-native","resumed":true,"binding":{"phase":"retain","config_sha256":"d061e40de4679195dfd4512baff966eb7b6c7607208d0dbaf864818f37a9f3f9"}}
+RETAIN rebind
+{"destination":".cache/delivery-handoff/accepted-retain-rebind","resumed":false,"binding":{"phase":"retain","config_sha256":"4e3f09337ffbc5bfe74b24bf505c3f89106ddd4ff34d84ff92725cd0216d99dc"}}
+{"destination":".cache/delivery-handoff/accepted-retain-rebind","resumed":true,"binding":{"phase":"retain","config_sha256":"4e3f09337ffbc5bfe74b24bf505c3f89106ddd4ff34d84ff92725cd0216d99dc"}}
