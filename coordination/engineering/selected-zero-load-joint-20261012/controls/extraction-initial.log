@@ -1,0 +1,129 @@
+✔ synthetic exact unchanged complete rows yield zero numerical delta (4.604746ms)
+✔ synthetic append derives only actual new rows and preserves prior owners (0.560042ms)
+✔ synthetic same-count reassignment and mutation cannot hide behind counts (0.421275ms)
+✔ synthetic removals require symmetric row delta and explicit empty projection (0.678668ms)
+✔ synthetic absent versus explicit empty row remains a presence delta (0.580903ms)
+✔ synthetic split intervals preserve owners while exact content delta remains visible (0.356669ms)
+✔ synthetic repeated, unordered and foreign rows are rejected on both sides (0.827128ms)
+✔ synthetic complete interval validation rejects malformed or foreign ownership (1.594978ms)
+✔ synthetic requested scope rejects omission, clipping, unknown IDs and duplicate rows (0.907858ms)
+✔ synthetic owner identity changes cannot be classified as unchanged (0.491069ms)
+✔ synthetic missing owner rosters and owner identities fail complete projections (0.772026ms)
+✔ synthetic exhaustive three-cell oracle independently checks 729 conservation pairs (23.920517ms)
+✔ synthetic cumulative before and candidate patches each apply once to original native rows (1.713939ms)
+✔ synthetic repeated cumulative application rejects same-owner assignments (0.385622ms)
+✔ synthetic additive overlap rejects identical, partial, contained and enclosing runs for either owner (0.479763ms)
+✔ synthetic complete cumulative patch validates rows even outside requested projection scope (0.58653ms)
+✔ synthetic additive intervals validate all raw bounds and ownership before scope selection (1.410935ms)
+✔ synthetic out-of-scope valid patch rows do not invent native projections (0.472111ms)
+✔ synthetic missing native row remains missing while explicit empty rows accept additive cells (0.405272ms)
+✔ synthetic returned rows and intervals do not alias original base or cumulative patch (0.480082ms)
+✔ synthetic no-additive state preserves complete native rows with fresh copies (0.420505ms)
+✖ actual native consumer authenticates zero delta without a full selection or native body read (1334.978533ms)
+✖ actual native consumer rejects forged, foreign-budget and expired zero-delta transitions (1113.09946ms)
+✖ actual unchanged native rows cannot hide missing complete ledger exceptions (1267.941116ms)
+✖ actual changed transport bytes with unchanged declarations require explicit cold validation (1128.729451ms)
+✖ actual native consumer admits caller carry before returning an empty success (1248.12612ms)
+✔ real private transition carries complete unchanged primitives and exact vintage bindings (1709.670937ms)
+✔ actual whole-feature projections join by identity rather than positional scope order (1793.248052ms)
+✔ real states cannot authorize forged, omitted-neighbor or reordered transition wrappers (1593.307326ms)
+✔ complete external output carry is admitted before opening source bodies (1644.024288ms)
+✔ the continuous consumer refuses another budget and an invocation released by its joint owner (1637.433148ms)
+✔ actual joint CLI reports unseeded baseline as explicit cold validation, never unchanged success (1427.640206ms)
+✔ actual joint CLI preserves a qualified baseline but requires cold validation of unsupported candidate (2128.223595ms)
+✔ joint output collision and dangling symlink fail before qualification and preserve originals (976.50711ms)
+✔ joint launcher authenticates its additional consumer module before importing it (1116.995806ms)
+✔ actual joint CLI qualifies once, runs both real consumers and releases once (2196.575311ms)
+✔ derived output union is admitted before complete serialization or compression (699.909707ms)
+✔ complete typed closure accepts a source-only addition without scientific leaf reads (3754.042748ms)
+✔ checkpoint roots and complete present/absent route aliases are collected without scientific decoding (9794.738624ms)
+✔ checkpoint execution policy evolves independently while its original custody remains bound (9115.496525ms)
+✔ checkpoint trust is executing catalogue authority and rejects unknown roots, vectors and route schemas (15294.693142ms)
+✔ unchanged same-path fallbacks and strict administrative selector splits are covered (7949.454728ms)
+✔ every nested current/fallback custody family rejects changed retained aliases (20322.372688ms)
+✔ native materialization absence, source map, transport and selected registry changes reject (8541.345884ms)
+✔ baseline-only relevant code differs even when candidate authored scope is only source (4326.864775ms)
+✔ baseline-only unused programme-copy and source support changes do not alter actual consumed code (3987.605046ms)
+✔ unknown trusted reader profile, unsafe modes, limits and identical commits decline (4188.735389ms)
+✔ CLI emits bounded explicit full fallback for invalid or engineering inputs (3202.901599ms)
+✔ receipt fallback requires an absent commit, not a missing path in an existing commit (5718.802211ms)
+✔ unknown routing layouts decline even when their before/after blobs are equal (4407.693578ms)
+✔ clean blob:none clone acquires only routing metadata in bounded discovery batches (7304.80088ms)
+✔ shallow descendant admits its baseline without traversing an absent parent (6198.367988ms)
+✔ divergent shallow heads use present ancestry only and missing ancestry declines (4696.66316ms)
+✔ cold absent historical origins retain fallback versus strict semantics (9352.105834ms)
+✔ cold remote metadata identity and size limits decline before object acquisition (11301.5461ms)
+✔ strict graph imports refuse unexpected blobs and aggregate metadata growth (10657.38463ms)
+ℹ tests 56
+ℹ suites 0
+ℹ pass 51
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 173791.156828
+
+✖ failing tests:
+
+test at test/native-checkpoint-consumer.test.mjs:400:1
+✖ actual native consumer authenticates zero delta without a full selection or native body read (1334.978533ms)
+  Error: Missing complete accepted programme policy custody
+      at demand (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/.checkpoint-test-Qb8AN2/coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs:21:50)
+      at Module.qualifyCheckpoint (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/.checkpoint-test-Qb8AN2/coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs:325:5)
+      at nativeTransition (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/test/native-checkpoint-consumer.test.mjs:393:24)
+      at TestContext.<anonymous> (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/test/native-checkpoint-consumer.test.mjs:401:60)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at test/native-checkpoint-consumer.test.mjs:414:1
+✖ actual native consumer rejects forged, foreign-budget and expired zero-delta transitions (1113.09946ms)
+  Error: Missing complete accepted programme policy custody
+      at demand (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/.checkpoint-test-JOpuZB/coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs:21:50)
+      at Module.qualifyCheckpoint (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/.checkpoint-test-JOpuZB/coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs:325:5)
+      at nativeTransition (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/test/native-checkpoint-consumer.test.mjs:393:24)
+      at TestContext.<anonymous> (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/test/native-checkpoint-consumer.test.mjs:415:53)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at test/native-checkpoint-consumer.test.mjs:427:1
+✖ actual unchanged native rows cannot hide missing complete ledger exceptions (1267.941116ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /Old complete ledger/. Input:
+  
+  'Error: Missing complete accepted programme policy custody'
+  
+      at async TestContext.<anonymous> (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/test/native-checkpoint-consumer.test.mjs:430:2)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: Missing complete accepted programme policy custody
+        at demand (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/.checkpoint-test-EuXU2w/coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs:21:50)
+        at Module.qualifyCheckpoint (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/.checkpoint-test-EuXU2w/coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs:325:5)
+        at nativeTransition (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/test/native-checkpoint-consumer.test.mjs:393:24)
+        at TestContext.<anonymous> (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/test/native-checkpoint-consumer.test.mjs:430:23)
+        at async Test.run (node:internal/test_runner/test:1389:7)
+        at async Test.processPendingSubtests (node:internal/test_runner/test:960:7),
+    expected: /Old complete ledger/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at test/native-checkpoint-consumer.test.mjs:433:1
+✖ actual changed transport bytes with unchanged declarations require explicit cold validation (1128.729451ms)
+  Error: Missing complete accepted programme policy custody
+      at demand (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/.checkpoint-test-vtYG5u/coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs:21:50)
+      at Module.qualifyCheckpoint (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/.checkpoint-test-vtYG5u/coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs:325:5)
+      at nativeTransition (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/test/native-checkpoint-consumer.test.mjs:393:24)
+      at TestContext.<anonymous> (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/test/native-checkpoint-consumer.test.mjs:436:27)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+
+test at test/native-checkpoint-consumer.test.mjs:443:1
+✖ actual native consumer admits caller carry before returning an empty success (1248.12612ms)
+  Error: Missing complete accepted programme policy custody
+      at demand (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/.checkpoint-test-T4zb7f/coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs:21:50)
+      at Module.qualifyCheckpoint (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/.checkpoint-test-T4zb7f/coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs:325:5)
+      at nativeTransition (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/test/native-checkpoint-consumer.test.mjs:393:24)
+      at TestContext.<anonymous> (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/test/native-checkpoint-consumer.test.mjs:444:53)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)

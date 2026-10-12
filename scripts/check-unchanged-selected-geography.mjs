@@ -33,9 +33,10 @@ const joined = async promises => {
 export const AUDITED_READERS = Object.freeze({
   // The joint route only reuses authenticated original selected inputs and products.
   // These exact readers introduce no new scientific source outside that closure.
+  'scripts/selected-checkpoint-native.mjs': ['1372180d776e33227410aaeb4ef5526cd5cc84e4dca3950cc6eaa6210bad04ca'],
   [PREFIX + 'selected-checkpoint.mjs']: ['aaa4782773e94a88fcf1c966ef549c6ab5fe084cd2243a43dab206ac6d185c5f'],
   [PREFIX + 'selected-checkpoint-continuous.mjs']: ['1c82e1bb619bc42353a573d0ef4f1989490e03b32d5137035cf890a3719c55dc'],
-  [PREFIX + 'selected-joint-entry.mjs']: ['ccac64cb442d68aaba456fb0b06c1e31116ab979b03d6e9255a179cbf6915137'],
+  [PREFIX + 'selected-joint-entry.mjs']: ['de49264769b6dd942c1e1eaad6a8aec6548b9a81c3789fbddda9b7325d971496'],
   'src/ownership-codec.js': ['64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d'],
   'scripts/check-effective-geographic-regression.mjs': ['85ed6815060c98973ecc4043f0872398a6b8e474130d1663b5940eefd9f8baf4', '801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039', '5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda'],
   // The second profile is reviewed stage-2 blob f8e4a88a6dbe3d3961d6b17d9b926ee4488561a8:
@@ -49,7 +50,7 @@ export const AUDITED_READERS = Object.freeze({
 });
 export const EXECUTION_CODE = Object.freeze([
   'scripts/run-geographic-check.py', 'scripts/check-geographic-regression.py',
-  'scripts/check-effective-geographic-regression.mjs', 'src/ownership-codec.js',
+  'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs', 'src/ownership-codec.js',
   'scripts/evidence/immutable.py', 'scripts/evidence/geometry.py',
   'scripts/ellipsoidal_area.py', 'requirements.txt', 'package.json', 'package-lock.json',
   PREFIX + 'selected-neighbor-prevention.mjs', PREFIX + 'selected-continuous-entry.mjs',

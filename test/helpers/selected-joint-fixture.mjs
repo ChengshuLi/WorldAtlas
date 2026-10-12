@@ -24,7 +24,7 @@ function addition(id,target,index,base,x){const geometry=polygon(x);return {comp
 
 const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
 const PREFIX = 'coordination/engineering/selected-geography-effective-prevention-20261009/';
-const EXTRA_CODE = ['scripts/run-geographic-check.py','scripts/check-geographic-regression.py',
+const EXTRA_CODE = ['scripts/selected-checkpoint-native.mjs','scripts/run-geographic-check.py','scripts/check-geographic-regression.py',
  'scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt',
  PREFIX+'selected-continuous-entry.mjs',PREFIX+'selected-checkpoint-continuous.mjs',PREFIX+'selected-joint-entry.mjs'];
 export async function trustedFixture(t,{incompleteNative=false}={}){

@@ -9,7 +9,7 @@ import {valueBytes,valueSha,coordinateBounds} from '../coordination/engineering/
 import {deriveCoordinateDelta} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {applyNativeAdditiveRows,deriveEffectiveNativeRowDelta,compareEffectiveNativeRows} from '../scripts/check-effective-geographic-regression.mjs';
+import {applyNativeAdditiveRows,deriveEffectiveNativeRowDelta,compareEffectiveNativeRows} from '../scripts/selected-checkpoint-native.mjs';
 
 // Synthetic numerical controls only. These helpers neither authenticate a
 // selected snapshot nor establish producer/checkpoint custody or applicability.
@@ -307,6 +307,7 @@ test('synthetic no-additive state preserves complete native rows with fresh copi
 // production private admission; no synthetic handle or authority hook exists.
 const MODULE='coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const CATALOGUE='coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
+const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
 const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/check-effective-geographic-regression.mjs','src/ownership-codec.js'];
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const polygon=(x,y=0)=>({type:'Polygon',coordinates:[[[x,y],[x+.2,y],[x+.2,y+.2],[x,y+.2],[x,y]]]});
@@ -327,7 +328,7 @@ async function trustedFixture(t,{incompleteNative=false}={}){
  const git=(...a)=>execFileSync('git',['-c','core.hooksPath=/dev/null','-c','user.name=Checkpoint fixture','-c','user.email=checkpoint@example.invalid','-C',root,...a],{env:{...process.env,GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_NO_LAZY_FETCH:'1'},stdio:['ignore','pipe','pipe']});
  const save=(name,value)=>{const f=path.join(root,name);fs.mkdirSync(path.dirname(f),{recursive:true});fs.writeFileSync(f,Buffer.isBuffer(value)?value:valueBytes(value));};
  const commit=()=>{git('add','.');git('commit','-qm','Checkpoint fixture');return git('rev-parse','HEAD').toString().trim();};
- git('init','-q');for(const name of CODE)save(name,fs.readFileSync(name));save('package.json',{type:'module'});
+ git('init','-q');save(PROGRAMME,fs.readFileSync(PROGRAMME));for(const name of [...CODE,'scripts/selected-checkpoint-native.mjs'])save(name,fs.readFileSync(name));save('package.json',{type:'module'});
  const {features,certificate}=fixtures(), source={type:'FeatureCollection',features};save('data/source.json',source);
  const reference={id:'geography:fixture',hierarchy_sha256:'a'.repeat(64),footprints_sha256:'b'.repeat(64)};
  const encode=(name,kind,values)=>{const words=Uint32Array.from(values),canonical=Buffer.from(words.buffer),encoded=gzipSync(shuffleOwnershipBytes(words));save('data/'+name,encoded);return {path:name,kind,offset:0,bytes:encoded.length,sha256:sha(encoded),decoded_bytes:canonical.length,decoded_sha256:sha(canonical),words:words.length,encoding:'byte-shuffle'};};
@@ -369,12 +370,12 @@ async function trustedFixture(t,{incompleteNative=false}={}){
  const facts={version:1,kind:'trusted-selected-coordinate-stage-v1',candidate_code_executed:false,selected_commit:selected,executing_commit:one,execution_code,runtime,binding:full.binding,complete_owners:3,complete_sources:1};
  const compressed=gzipSync(valueBytes(full));save('accepted/certificate.json.gz',compressed);save('accepted/facts.json',facts);
  const publication={version:1,kind:facts.kind,complete:true,facts:{path:'facts.json',bytes:valueBytes(facts).length,sha256:valueSha(facts)},certificate:{path:'certificate.json.gz',bytes:compressed.length,sha256:sha(compressed),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)}};save('accepted/publication.json',publication);
- const inventory=['data/source.json','data/manifest.json','data/owners.json','data/registry.json','data/ledger.json','data/patch.json','data/sidecar.json','data/envelope.json','data/native/rows.bin.gz','data/native/runs.bin.gz'].map(name=>pin(name,selected));
+ const inventory=[PROGRAMME,'data/source.json','data/manifest.json','data/owners.json','data/registry.json','data/ledger.json','data/patch.json','data/sidecar.json','data/envelope.json','data/native/rows.bin.gz','data/native/runs.bin.gz'].map(name=>pin(name,selected));
  save('accepted/custody.json',{complete_cold_custody:[{facts,publication,effective_additions:additions,inventory}]});
  save('accepted/routes.json',inventory.map(p=>p.path).sort().map(name=>({path:name,tree:git('ls-tree','-z',selected,'--',name).toString()})));const accepted=commit();
  const rootRow={id:'fixture',accepted_head:accepted,selected_commit:selected,selection_sha256:valueSha(selection),execution_commit:one,execution_code_sha256:valueSha(execution_code),runtime_sha256:valueSha(runtime),facts:pin('accepted/facts.json'),certificate:{...pin('accepted/certificate.json.gz'),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)},publication:pin('accepted/publication.json'),custody:pin('accepted/custody.json'),routes:pin('accepted/routes.json')};
  save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',qualifier_code:CODE.map(name=>{const p=pin(name);return {path:name,bytes:p.bytes,sha256:p.sha256};}),checkpoints:[rootRow]});commit();
- const api=await import(pathToFileURL(path.join(root,MODULE))),native=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
+ const api=await import(pathToFileURL(path.join(root,MODULE))),native={...await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs'))),...await import(pathToFileURL(path.join(root,'scripts/selected-checkpoint-native.mjs')))};
  const reader=new native.ImmutableReader(root,selected,{allowance:{phaseBytes:512*1024**2,rssBytes:512*1024**2}}),budget={shared:reader.budget,carriedBytes:1024};
  return {api,native,reader,budget,selected,root,git,save,commit,pin,ledger,patch,sidecar,envelope,selection,rootRow};
 }

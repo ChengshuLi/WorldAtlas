@@ -49,8 +49,9 @@ Synthetic controls do not establish real selected geographic equivalence.
 This implementation uses the reviewed shared module from PR #1782. The exact
 frozen native consumer from PR #1783 is incorporated by the coordinated issue 1774
 → issue 1784 handoff, preserving its original authorship, proof and reviews. The
-shared dependency remains explicit until accepted on the integration baseline. The exact native API at `39792e02c603e262513dd0d9df4b63dc275e5a15` is integrated
-in this diagnostic tree. A genuine miniature joint CLI control verifies one
+shared dependency remains explicit until accepted on the integration baseline. The original native API at `39792e02c603e262513dd0d9df4b63dc275e5a15` underlies
+the retained proof. The final package-boundary correction moves those exact
+numerical function bodies into a dedicated joint-only module, as detailed below. A genuine miniature joint CLI control verifies one
 shared bootstrap, checkpoint, transition, native comparison, continuous consumer
 and release, and zero complete selections or coordinate shards, using actual V8
 coverage. The real accepted-AUS joint proof is retained below. Final result review and normal
@@ -189,12 +190,50 @@ The combined PR incorporates the six native paths at frozen head
 `39792e02c603e262513dd0d9df4b63dc275e5a15`: the native checker, its checkpoint
 consumer test, and four files under `native-effective-row-delta-20261012/`.
 The original native evidence manifest continues to name issue 1774 and its author;
-it is retained unchanged and bound by this receiving manifest. The exact native
-checker and consumer test remain byte-identical to that head. Only the separate
-owner-approved historical fixture-copy list is amended in this integration.
+it is retained unchanged and bound by this receiving manifest. The original native files stay archived at that immutable head. The final
+package-boundary correction changes placement and test imports, preserving every
+numerical function body and assertion. The historical fixture-copy list includes
+the joint modules, and the native fixture now supplies the original programme
+policy copy/pin required by the final shared authentication contract.
 
 Shared PR #1782 precedes the combined PR #1790. A separate dormant native-export
-merge is unnecessary: its matching qualifier row and joint caller activate in the
-same reviewed tree. Issue1774 remains open until the combined change is accepted;
+merge is unnecessary: the joint-only consumer and caller activate together. The
+legacy checker and original shared qualifier row remain exact accepted bytes. Issue1774 remains open until the combined change is accepted;
 this transfer does not convert the old native-only retained projection into a
 full-path execution. The genuine clean proof003 supplies that integrated evidence.
+
+## Package import boundary correction
+
+Native review comment 6121820092 identified a real package integration defect:
+placing a literal checkpoint import in the legacy checker expanded the actual
+static/hosted/Cloudflare import closure beyond its immutable reviewed role roster.
+A package-input declaration alone would still fail downstream exact-role custody.
+
+The correction restores `scripts/check-effective-geographic-regression.mjs` to
+its exact original 77,142-byte SHA256
+`5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda`.
+There is no new import or re-export there. The full 8,854-byte native helper and
+consumer block from 39792 is copied unchanged into
+`scripts/selected-checkpoint-native.mjs`; its block SHA256 is
+`226438eae159af1aca0848431d1a509485bad2bf2798dfa05ecc1b18af88060e`.
+It uses the same original exported interval predicate and exact local constants.
+The actual joint launcher, Python trusted list and audited closure explicitly
+include this dedicated module. Existing shared qualifier/current-producer profiles
+already recognize the restored checker, so no new programme registration is added.
+
+All three actual package entries must match their original complete role roster.
+An adverse fixture reinstates a literal joint import in the cold checker and
+requires both undeclared-import and exact-role failures. No historical package
+certificate, role record or scientific source custody is rewritten. Original
+native-only reproduction remains bound to its archived execution; the retained
+clean003 result stays at execution 0294 and is not relabelled as this routing split.
+
+The extraction's final focused controls pass: 26 native consumer controls,
+13 package preflight controls and three actual package/extraction boundary
+controls (42 total); the 11 joint/continuous and 19 applicability controls also
+pass. Both Python suites pass (12 joint/readback cases and 52 existing wrapper
+cases). The initial native fixture failures were missing original programme
+policy custody after the later shared-contract update; adding the actual original
+copy and pin corrected the fixture, not the assertions. An inherited Node
+injection flag correctly caused a package preflight refusal; the clean plain-Node
+rerun passes. Both initial logs are preserved separately from the final results.

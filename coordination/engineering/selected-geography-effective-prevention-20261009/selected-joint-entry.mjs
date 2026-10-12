@@ -11,7 +11,7 @@ const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
 const P = 'coordination/engineering/selected-geography-effective-prevention-20261009/';
 export const JOINT_CODE = Object.freeze([
   'scripts/run-geographic-check.py', 'scripts/check-geographic-regression.py',
-  'scripts/check-effective-geographic-regression.mjs', 'src/ownership-codec.js',
+  'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs', 'src/ownership-codec.js',
   'scripts/evidence/immutable.py', 'scripts/evidence/geometry.py',
   'scripts/ellipsoidal_area.py', 'requirements.txt',
   P + 'selected-neighbor-prevention.mjs', P + 'selected-continuous-entry.mjs',
@@ -115,6 +115,7 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
   destination = path.resolve(destination); fresh(destination);
   const code = executionGuard(repo, trusted);
   const native = await import('../../../scripts/check-effective-geographic-regression.mjs');
+  const {compareSelectedCheckpointNative} = await import('../../../scripts/selected-checkpoint-native.mjs');
   const checkpoint = await import('./selected-checkpoint.mjs');
   const {checkpointContinuousOperands} = await import('./selected-checkpoint-continuous.mjs');
   const {valueBytes, valueSha} = await import('./selected-neighbor-prevention.mjs');
@@ -133,7 +134,7 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
     const transition = checkpoint.qualifyTransition({state, reader:afterReader, budget});
     if (!transition.available) return coldDecision(transition);
     checkpoint.authenticateTransition({transition, budget});
-    const nativeReport = await native.compareSelectedCheckpointNative({transition, budget});
+    const nativeReport = await compareSelectedCheckpointNative({transition, budget});
     demand(nativeReport && ['native-regressions-found', 'no-new-native-loss'].includes(nativeReport.status),
       'Joint native consumer did not complete an actual comparison');
     demand(valueBytes(nativeReport).length <= OUTPUT, 'Joint native report exceeds original output reserve');
