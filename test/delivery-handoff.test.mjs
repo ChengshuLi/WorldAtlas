@@ -173,11 +173,11 @@ test('immutable Git input reader rejects whole-body drift, missing objects and n
   assert.throws(() => r.read({...pin, mode: '120000'}), /identity/); assert.throws(() => r.read({...pin, path: '../input.json'}), /safe/);
 });
 
-function reviewFixture() {
-  const head = 'b'.repeat(40), manifestPath = prefix + 'evidence-quality.json';
-  const spec = {mode: 'engineering', max_prs: 1, depends_on: [], scope: 'Bounded fixture', evidence_quality: {version: 1,
+function reviewFixture({packetPrefix = prefix, ownedPaths} = {}) {
+  const head = 'b'.repeat(40), manifestPath = packetPrefix + 'evidence-quality.json';
+  const spec = {mode: 'engineering', max_prs: 1, depends_on: [], scope: 'Bounded fixture', ...(ownedPaths ? {owned_paths:ownedPaths} : {}), evidence_quality: {version: 1,
     manifest_path: manifestPath, subject_ids: [], pins: {}, review_kind: 'code'}};
-  const issue = {number: 42, created_at: '2026-10-10T00:00:00Z', body: 'Original acceptance\n<!-- worldatlas-work:v1\n' + JSON.stringify(spec) + '\n-->'};
+  const issue = {number: 42, state: 'open', labels: ['type:engineering', 'kind:work-item', 'status:ready'], created_at: '2026-10-10T00:00:00Z', body: 'Original acceptance\n<!-- worldatlas-work:v1\n' + JSON.stringify(spec) + '\n-->'};
   const files = [{filename: 'scripts/renamed.mjs', previous_filename: 'scripts/identity-old.mjs', status: 'renamed'}, {filename: manifestPath, status: 'added'}];
   const pr = {number: 43, state: 'open', body: 'Refs #42\n', head: {sha: head, ref: 'engineering/control'}, base: {sha: commit}, changed_files: files.length};
   const claim = {version: 1, active: true, worker_id: 'author', claim_id: 'fixture-claim', request_id: 'fixture-request', issue_number: 42, mode: 'engineering', max_prs: 1, live_work: false, branch: pr.head.ref, expires_at: '2099-01-01T00:00:00Z'};
@@ -196,7 +196,7 @@ function reviewFixture() {
     if (url.includes('/compare/')) return {status: 'ahead'};
     throw Error('Unexpected API: ' + url);
   };
-  return {pr, issue, files, api, reader: r, repo: 'fixture/repo', number: 43, expectedHead: head};
+  return {pr, issue, claim, spec, files, api, reader: r, repo: 'fixture/repo', number: 43, expectedHead: head};
 }
 
 test('review handoff includes current bindings/complete rename scope and no approval; stale head/body/scope fail', async () => {
@@ -549,5 +549,26 @@ test('evidence CLI authenticates Git inputs and refuses malformed metrics before
     assert.throws(() => run('.cache/delivery-handoff/refused'));
     assert.equal(fs.existsSync(path.join(root, '.cache/delivery-handoff/refused')), false);
     assert.deepEqual(fs.readFileSync(path.join(root, destination, 'evidence-quality.json')), original);
+  }
+});
+
+test('review freeze authenticates current issue scope for an owned nested manifest', async () => {
+  const options={packetPrefix:'coordination/engineering/retained/new-delivery/',ownedPaths:['coordination/engineering/retained/','scripts/renamed.mjs','scripts/identity-old.mjs']};
+  const f=reviewFixture(options), packet=JSON.parse((await freezeReview(f))['review-packet.json']);
+  assert.equal(packet.manifest.path,options.packetPrefix+'evidence-quality.json');
+  for(const mutate of [f=>delete f.spec.owned_paths,f=>f.spec.owned_paths=['coordination/engineering/foreign/'],
+    f=>f.claim.active=false,f=>f.claim.branch='engineering/other',f=>f.claim.expires_at='2000-01-01T00:00:00Z',
+    f=>f.claim.issue_number=41,f=>f.issue.number=41,f=>f.issue.labels.push('status:blocked')]) {
+    const g=reviewFixture(options);mutate(g);g.issue.body='Original acceptance\n<!-- worldatlas-work:v1\n'+JSON.stringify(g.spec)+'\n-->';
+    await assert.rejects(freezeReview(g));
+  }
+});
+
+test('review freeze rechecks current issue readiness and owned scope after reading evidence', async () => {
+  for(const mutation of [issue=>issue.labels.push('status:blocked'),issue=>issue.labels.splice(2,1),
+    issue=>issue.body=issue.body.replace('coordination/engineering/retained/','coordination/engineering/foreign/')]) {
+    const f=reviewFixture({packetPrefix:'coordination/engineering/retained/nested/',ownedPaths:['coordination/engineering/retained/']}), original=f.api;let reads=0;
+    f.api=async url=>{const value=await original(url);if(url.endsWith('/issues/42')&&++reads===2)mutation(value);return value;};
+    await assert.rejects(freezeReview(f));
   }
 });

@@ -1,0 +1,51 @@
+{
+  "accepted": true,
+  "request_id": "b59e0441-1ef1-4f23-abbf-d173f1281433",
+  "issue_number": 1772,
+  "claim": {
+    "comment_id": 6118351397,
+    "version": 1,
+    "active": true,
+    "worker_id": "01a12e93-a7cb-708b-a96e-94be9924e03e",
+    "claim_id": "6e8a6e60-5acf-4c53-abae-1c670c6d2185",
+    "branch": "engineering/selected-owned-scope-20261012",
+    "request_id": "b59e0441-1ef1-4f23-abbf-d173f1281433",
+    "issue_number": 1772,
+    "claimed_at": "2026-10-12T05:30:42.267Z",
+    "updated_at": "2026-10-12T07:17:46.178Z",
+    "expires_at": "2026-10-13T07:17:46.178Z",
+    "live_work": false,
+    "mode": "engineering",
+    "max_prs": 1
+  },
+  "replayed": false,
+  "result_source": "github-comment",
+  "result_comment_id": 6119588601,
+  "logical_observation_reads": 1,
+  "request_accounting": {
+    "phase": "claim-observer",
+    "actual_http_attempts": 3,
+    "counts": {
+      "GET:repository-authority:200": 1,
+      "POST:actions:204": 1,
+      "GET:comments:200": 1
+    },
+    "observed_repository_core": {
+      "first": {
+        "limit": 5000,
+        "remaining": 4909,
+        "reset": 1791792291
+      },
+      "last": {
+        "limit": 5000,
+        "remaining": 4908,
+        "reset": 1791792291
+      },
+      "lowest_remaining": {
+        "limit": 5000,
+        "remaining": 4908,
+        "reset": 1791792291
+      }
+    }
+  }
+}
