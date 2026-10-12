@@ -197,3 +197,38 @@ test('actual transition refuses a stale base and preserves the usable baseline f
  const transition=f.api.qualifyTransition({state:result.state,reader,budget:f.budget});
  assert.equal(transition.available,false);assert.equal(transition.cold,'candidate');assert.strictEqual(transition.baseline,result.state);
 });
+
+test('private source reuse snapshots caller scope and admits each external carry increase before returning',async t=>{
+ const f=await trustedFixture(t),{state}=f.api.qualifyCheckpoint({reader:f.reader,budget:f.budget});
+ const ids=['A'],projection=f.api.projectSourceFeatures({state,ids,budget:f.budget});
+ ids[0]='B';assert.throws(()=>f.api.projectSourceFeatures({state,ids:['B'],budget:f.budget,reuse:projection}),/incomplete source projection reuse/);
+ const initial=f.budget.carriedBytes;f.budget.carriedBytes+=4096;
+ const used=f.reader.used;
+ const reused=f.api.projectSourceFeatures({state,ids:['A'],budget:f.budget,reuse:projection});
+ assert.equal(reused.features[0].id,'A');assert.equal(f.reader.used,used+4096);
+ f.budget.carriedBytes=initial;
+ assert.throws(()=>f.api.projectSourceFeatures({state,ids:['A'],budget:f.budget,reuse:projection}),/reset or undercharged/);
+ f.budget.carriedBytes=f.reader.phaseLimit;
+ assert.throws(()=>f.api.projectSourceFeatures({state,ids:['A'],budget:f.budget,reuse:projection}),/External carried-state increase/);
+});
+test('fast selection admission rejects unknown patch fields and malformed complete effective references',async t=>{
+ const f=await trustedFixture(t),{state}=f.api.qualifyCheckpoint({reader:f.reader,budget:f.budget});
+ const candidate=candidateProducts(f,{patch:{...f.patch,unexpected_permission:true}});
+ const reader=new f.native.ImmutableReader(f.root,candidate,{allowance:f.reader.allowance,budget:f.reader.budget});
+ assert.throws(()=>f.api.qualifyTransition({state,reader,budget:f.budget}),/complete native patch schema/);
+});
+
+test('an unchanged accepted current-rebind proof cannot excuse a coherently repinned omitted target roster',async t=>{
+ const f=await trustedFixture(t),{state}=f.api.qualifyCheckpoint({reader:f.reader,budget:f.budget});
+ const candidate=candidateProducts(f,{ledger:{...f.ledger,current_targets:[]}});
+ const reader=new f.native.ImmutableReader(f.root,candidate,{allowance:f.reader.allowance,budget:f.reader.budget});
+ assert.throws(()=>f.api.qualifyTransition({state,reader,budget:f.budget}),/Ledger complete current target roster differs/);
+});
+test('coherently copied malformed geography references still fail exact fast-path admission',async t=>{
+ const f=await trustedFixture(t),{state}=f.api.qualifyCheckpoint({reader:f.reader,budget:f.budget});
+ const effective={...f.patch.effective_reference};delete effective.id;
+ f.envelope={...f.envelope,effective_reference:effective};
+ const candidate=candidateProducts(f,{patch:{...f.patch,effective_reference:effective}});
+ const reader=new f.native.ImmutableReader(f.root,candidate,{allowance:f.reader.allowance,budget:f.reader.budget});
+ assert.throws(()=>f.api.qualifyTransition({state,reader,budget:f.budget}),/complete effective reference/);
+});

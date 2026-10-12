@@ -44,6 +44,12 @@ function budgetCheck(reader, budget, session) {
     'Foreign, expired or independently budgeted checkpoint invocation');
     demand(reader.used >= session.floor && budget.carriedBytes >= session.callerCarry,
       'Checkpoint live-state budget was reset or undercharged');
+    const additionalCarry=budget.carriedBytes-session.callerCarry;
+    demand(reader.used+additionalCarry<=reader.phaseLimit,
+      'External carried-state increase exceeds current allowance before projection reuse');
+    reader.used+=additionalCarry;
+    session.floor=Math.max(session.floor,reader.used);
+    session.callerCarry=budget.carriedBytes;
   }
   reader.checkMemory();
 }
@@ -173,6 +179,14 @@ function readSelection(session, reader) {
       && (p.decoded_sha256 ?? p.sha256) === (q.decoded_sha256 ?? q.sha256), 'Runtime additive asset differs: '+role);
     resolvePin(reader,p);
   }
+  const reference = r => {
+    keys(r,'id,hierarchy_sha256,footprints_sha256','Unknown complete effective reference');
+    demand(typeof r.id==='string' && r.id.startsWith('geography:') && hash(r.hierarchy_sha256)
+      && hash(r.footprints_sha256), 'Invalid complete effective reference identity');
+  };
+  reference(envelope.base_reference); reference(envelope.effective_reference);
+  keys(patch,'version,kind,authority_registry_sha256,base_reference,effective_reference,ledger_sha256,rows',
+    'Unknown complete native patch schema');
   const normalized = normaliseRetainedRepairLedger(ledger,registry);
   demand(patch.kind === 'unassigned-native-cells-v1' && patch.authority_registry_sha256 === valueSha(registry)
     && patch.ledger_sha256 === sidecar.logical_asset_map.ledger.sha256
@@ -352,7 +366,7 @@ function planFor(before,after) {
     source_paths:{baseline:[...new Set([...needed].map(id => old.get(id)[4]))].sort(),
       candidate:[...new Set([...needed].map(id => next.get(id)[4]))].sort()},
     source_bindings:{baseline:before.binding,candidate:after.binding},
-    limits:['Coordinate exclusion only; compare every required whole polygon with the unchanged strict predicates.']});
+    limits:['Coordinate exclusion only. All required full original polygons and unchanged strict coverage/overlap predicates remain mandatory.']});
 }
 
 /** Projects exact whole original features, never certificate boxes. Pass a prior
@@ -391,7 +405,7 @@ export function projectSourceFeatures({state,ids,budget,reuse}) {
   }
   demand(features.length === ids.length, 'Source projection omitted requested features');
   const result = freeze({features,inverse,inputs,custody:{actual_inputs:actualInputs},state_binding:state.certificate.binding,complete_phase_bytes:reader.used});
-  projections.set(result,{session,kind:'source',ids,sourceIdentity:state.certificate.binding.sources});
+  projections.set(result,{session,kind:'source',ids:Object.freeze([...ids]),sourceIdentity:state.certificate.binding.sources});
   retain(session,{inverse,inputs,actualInputs}); beginFrame(session,reader);
   return result;
 }
@@ -691,12 +705,14 @@ export function qualifyTransition({state,reader,budget}) {
     const operandState=newState(session,{...state,selected_commit:reader.version},{...proof});
     const operandProof=states.get(operandState); operandProof.state=operandState;
     let currentTargets;
-    if (addedEntries.length===0 && same(selected.ledger,state.ledger) && same(selected.patch,state.patch)) currentTargets=baseProof.rebind.request.current_targets;
+    if (addedEntries.length===0 && same(selected.registry,state.registry)
+      && same(selected.ledger.current_rebind,state.ledger.current_rebind)) currentTargets=baseProof.rebind.request.current_targets;
     else {
       const products=rebindProducts(session,reader,selected.ledger); retain(session,products);
       currentTargets=qualifyProjectedRebind(operandProof,selected,authorities,products).currentTargets;
       operandProof.rebind=products;
     }
+    demand(same(selected.ledger.current_targets,currentTargets), 'Ledger complete current target roster differs from qualified operands');
     const additions=[...selected.normalized.rows.values()].map(row => {
       const target=currentTargets.find(p => p.target_id===row.target_id);
       demand(target && target.pixelIndex===row.pixelIndex,'Appended owner identity or actual base geometry missing');

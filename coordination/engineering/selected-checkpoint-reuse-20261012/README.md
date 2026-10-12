@@ -19,7 +19,11 @@ activate a selection, or replace geometric predicates.
 4. Call `qualifyTransition({state, reader: candidateReader, budget})` once. The
    module derives all changes from actual committed products. Reuse-unavailable
    returns the still-qualified baseline and `cold: "candidate"`; absence of a
-   qualified baseline returns `cold: "baseline-and-candidate"`. Corrupt custody
+   qualified baseline returns `cold: "baseline-and-candidate"`. The current module
+   returns this fallback decision only. A one-acquisition cold-candidate admission
+   bridge and the shared consumer orchestration are not implemented here yet;
+   legacy callers must not claim they already realize the one-acquisition path.
+   Corrupt custody
    throws. Neither outcome is a successful no-change result.
 5. Native and continuous consumers use those same private states in one trusted
    Node invocation. Do not serialize the objects to independent children or
@@ -35,7 +39,8 @@ when the complete source bindings and requested IDs match; each result retains
 its actual vintage's `state_binding`.
 
 `projectNativeRows({state, rows, budget})` returns `{y, runs}` for every requested
-row, including empty rows. Intervals have the actual half-open native x domain
+row, including empty rows. These are selected-base intervals; consumers apply
+the qualified state's cumulative `patch` exactly once. Intervals have the actual half-open native x domain
 and owner indices. Accepted full rows are reused only under the same complete
 base and routing identities; missing rows are reconstructed from complete
 containing native members with full row-table/range checks. Results report
@@ -62,8 +67,9 @@ index. Root products remain in their original retained packet; they are not
 copied here or relabelled as new execution.
 
 The initial catalogue indexes both genuine sides of PR #1771's frozen retained
-execution. Acceptance/activation of this new boundary must wait for that PR's
-actual acceptance and the new boundary's independent review. Its historical
+execution. PR #1771 was accepted at main commit
+`2f25e80412640f2a34681a7d487737739475c1d2`; activation of this new boundary
+still requires its independent review. Its historical
 execution is `8b3d8265309d4f6104cca03d78f72a8f48d0f3d2`, and selected commits are
 `9473d184683ee8ff8546300f2313779c3cba1d2b` and
 `791576647adc41241ce9b438f1bb0034088eed4e`. Those original vintages stay explicit.
