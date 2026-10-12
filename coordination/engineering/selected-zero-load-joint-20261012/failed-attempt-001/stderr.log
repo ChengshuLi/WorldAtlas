@@ -1,0 +1,27 @@
+file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs:21
+const demand = (ok, message) => { if (!ok) throw Error(message); };
+                                                 ^
+
+Error: Unknown producer limits
+    at demand (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs:21:50)
+    at keys (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs:33:40)
+    at authenticateProducerExecution (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs:586:3)
+    at qualifyProjectedRebind (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs:613:3)
+    at Module.qualifyTransition (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs:732:22)
+    at selectedJointStage (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs:133:35)
+    at async file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs:219:18
+
+Node.js v24.19.0
+Traceback (most recent call last):
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/coordination/engineering/selected-zero-load-joint-20261012/reproduction/probe.py", line 43, in <module>
+    result = wrapper.selected_joint(ROOT, BASE, CANDIDATE, detector, trusted=TRUSTED)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/scripts/run-geographic-check.py", line 666, in selected_joint
+    raw = subprocess.check_output([os.environ.get('NODE', 'node'), '--expose-gc', str(entrypoint),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['node', '--expose-gc', '/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs', '/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work', '0920aec93902d963488bfc9958a373d28251c95d', '46438af8901acbad11a9b627828a9e9184018a77', '95a3d3dcb76bf0c61a4f8ada504f3f346df18466', '/tmp/selected-joint-aus-proof-001/trusted-selected-joint-nn561hwr/complete', '/workspace/shared/worldatlas-current13-completed-author-cache/cache/build-runtime-cp312/bin/python']' returned non-zero exit status 1.

@@ -122,3 +122,18 @@ four documented outer runtime/code decorations, then retains the actual consumed
 policy/catalogue and original complete route index by their immutable pins.
 Automatic hosted retention/accepted-artifact advancement remains a separate
 explicit follow-on; this one proof preserves the current AUS seed.
+
+
+## Actual AUS attempt 001
+
+The admitted run at execution `0920aec93902d963488bfc9958a373d28251c95d`
+started 2026-10-12 09:14:37 UTC and failed closed after 15.60 seconds in shared
+producer-envelope authentication (`Unknown producer limits`). Native and
+continuous consumers were never called. Actual V8 coverage records one shared
+bootstrap, qualification attempt, transition attempt and release, zero full
+selections/coordinate shards, and zero consumer invocations. There is no
+scientific equivalence result from this attempt. Sampled owned-group peak was
+409,935,872 bytes; both observed terminal scans were empty. Original admission,
+operating evidence and complete stderr are retained in `failed-attempt-001/`.
+The module owner is correcting this demonstrated accepted-AUS envelope mismatch;
+any continuation needs its narrow exact-head review and fresh resource admission.

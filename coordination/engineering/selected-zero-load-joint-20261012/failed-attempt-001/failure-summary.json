@@ -1,0 +1,17 @@
+{
+  "kind": "failed-closed-accepted-aus-attempt-v1",
+  "execution_commit": "0920aec93902d963488bfc9958a373d28251c95d",
+  "status": "no-equivalence-result",
+  "failure": "Unknown producer limits",
+  "actual_v8_call_counts": {
+    "selectedBootstrap": 1,
+    "qualifyCheckpoint": 1,
+    "qualifyTransition": 1,
+    "compareSelectedCheckpointNative": 0,
+    "checkpointContinuousOperands": 0,
+    "releaseCheckpoint": 1,
+    "loadSelection": 0,
+    "selectedCoordinateShard": 0,
+    "authenticateProducerExecution": 1
+  }
+}
