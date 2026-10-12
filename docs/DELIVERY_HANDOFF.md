@@ -173,3 +173,20 @@ as the Python `NewVintage` helper, with explicit byte-verified resume. Focused
 controls cover that adapter; they do not establish geographic truth or operating
 safety of a new scientific run. Unchanged original source/native/rebind validators
 must still admit the final requests and results.
+
+## Observed full-tree classifier limit
+
+The current13 delivery merged separately as PR #1753 at
+`ef834e2d90a9ca5d4cbd961a84a08dd156ae7944`. Its real 425-path tree passed
+the path prefilter and runtime-role checks, but the complete selected-data
+classifier reached its 16 MiB aggregate metadata admission bound while reading
+added supporting JSON: 166 blobs and 16,638,841 bytes had been accounted. It
+therefore used truthful full CI. The small finalizer/classifier controls here
+prove their tested boundaries, not selected-data adoption by that complete tree.
+
+Future handoffs should avoid copying unconsumed resource-control, preparation or
+refusal JSON solely as bookkeeping; reference applicable retained immutable
+evidence instead. Preserve every actually consumed role and required evidence.
+Reducing unnecessary reads and making the trusted classifier allowance
+configurable is a separately coordinated follow-on. This command does not
+change that bound, its per-input security/identity checks, or the current delivery.
