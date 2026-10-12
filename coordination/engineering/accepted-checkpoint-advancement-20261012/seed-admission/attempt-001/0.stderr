@@ -1,0 +1,20 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Unplanned body open: coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json
+    at ImmutableReader.read (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/6365eb7fbd75d81d69297e6934324886dcb5f27001d62fe9b874a1ff43ea4a9f/work/.checkpoint-integration-001/seed-smoke-001/check.mjs:16:2)
+    at readNamed (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/6365eb7fbd75d81d69297e6934324886dcb5f27001d62fe9b874a1ff43ea4a9f/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs:137:23)
+    at admitDerivedCheckpoint (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/6365eb7fbd75d81d69297e6934324886dcb5f27001d62fe9b874a1ff43ea4a9f/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs:563:18)
+    at admitTrustedDerivedSeed (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/6365eb7fbd75d81d69297e6934324886dcb5f27001d62fe9b874a1ff43ea4a9f/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs:471:10)
+    at qualifyCheckpoint (file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/6365eb7fbd75d81d69297e6934324886dcb5f27001d62fe9b874a1ff43ea4a9f/work/coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs:303:14)
+    at file:///workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/6365eb7fbd75d81d69297e6934324886dcb5f27001d62fe9b874a1ff43ea4a9f/work/.checkpoint-integration-001/seed-smoke-001/check.mjs:28:15 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

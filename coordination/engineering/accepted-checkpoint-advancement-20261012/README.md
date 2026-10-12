@@ -54,3 +54,23 @@ the normal entry point with measured timing and no per-batch code/catalogue chan
 Issue #1788 stays open until that boundary is demonstrated.
 
 See [the operating instructions](../../../docs/ACCEPTED_SELECTED_CHECKPOINTS.md).
+
+## Retained actual admission
+
+`seed-admission/` preserves original recipes and outputs for all three bounded
+local attempts. Attempt001 stopped on a missing manifest in the harness allowlist;
+attempt002 exposed the genuine five-source ordering mismatch; attempt003 succeeds
+at execution `83bc30a7cfaaadd097e40587b620762e3035fe1d`. No original record is rewritten.
+The existing manifest binds the published measurements directly to original JSON
+scalars. Its archived execution identity is separate from the actual accepted seed
+identity and from the later evidence-only commit.
+
+The scripts are preserved at their original bytes, including their original relative
+imports and output paths. To reproduce, use a normally allocated checkout of that
+execution commit, restore the declared immutable metadata/product inputs without
+scientific leaves, place the original scripts at `.checkpoint-integration-001/seed-smoke-003/`,
+and the retained metadata roster at `.checkpoint-integration-001/smoke-metadata-import.json`.
+Use a fresh output directory and a current coordinator-admitted 1 GiB reservation.
+Set the requirements-pinned Python path for that machine in a new supervisor copy;
+retain the original supervisor unchanged. This is a functional seed qualification
+check only; it does not execute the native/continuous consumers or establish A→B adoption.
