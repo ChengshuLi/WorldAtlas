@@ -291,8 +291,10 @@ The destination contains immutable stage intents, ordinary preparation receipts,
 completion observations and timings. An identical partial metadata write can
 resume only after its exact intent and every existing byte agree. Foreign files,
 changed recipe/observations, symlinks and altered completed bytes refuse. A crash
-lock is recovered only when its same-host process is gone; a live or foreign
-owner is never displaced. `status` checks completed inventories without mutation.
+lock is recovered only when its same-host process is gone, with inspection and
+new acquisition serialized by an exclusive short guard. A process killed inside
+that guard leaves an explicit owner-reconciliation refusal; the guard is never
+automatically reaped. A live or foreign owner is never displaced. `status` checks completed inventories without mutation.
 Timings report preparation, API wait, observed external wait and individual
 operator-receipt durations separately. Parallel operator durations are not added
 and called wall time; metadata speed is not global gap-closures/hour.
@@ -305,3 +307,20 @@ an existing submission intent is observation-only, including a crash before an
 uncertain POST. Missing registration never authorizes another submission. Follow
 `MERGE_QUEUE_CLIENT.md` for explicit reconciliation; no approval is inferred from
 local records, an unchanged head, or successful metadata preparation.
+
+Optional `preparation_allowance: {phaseBytes, rssBytes}` in either command config
+requests a finite metadata phase allowance, checked against current available
+memory by the shared guard. Inputs, decoded representations, journal reads,
+outputs and the completion receipt share admission. The authority reader carries
+still-live outer metadata into its existing bounded qualification phases. There
+is no separate 4KiB receipt cutoff; the ordinary whole-member bound and configured
+aggregate budget apply to receipts as to other metadata. A receipt does not grant
+approval regardless of its size.
+
+Run ordinary controls with `node --test test/delivery-handoff.test.mjs
+test/delivery-handoff-advance.test.mjs`. The opt-in
+`WORLDATLAS_DELIVERY_FIXTURE=1` additionally uses the already-retained immutable
+current13 bodies for exact authority reproduction and the new 10+3 metadata
+partition control. This requires only the named metadata commits/bodies, not a
+scientific cache or GIS operands. Absence of those bodies is a fixture availability
+limit, never a successful replay.

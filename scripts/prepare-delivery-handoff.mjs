@@ -26,8 +26,8 @@ const safe = name => typeof name === 'string' && /^[a-zA-Z0-9_./-]+$/.test(name)
 const unique = values => Array.isArray(values) && values.length > 0 && values.every(v => typeof v === 'string' && v) && new Set(values).size === values.length;
 const environment = () => ({...process.env, GIT_NO_LAZY_FETCH: '1', GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0'});
 
-export function pinReader(root) {
-  const budget = candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0}), cache = new Map();
+export function pinReader(root, {allowance} = {}) {
+  const budget = candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0, ...(allowance ? {allowance} : {})}), cache = new Map();
   const git = (...args) => execFileSync('git', args, {cwd: root, env: environment(), maxBuffer: 33554433});
   function descriptor(commit, name) {
     need(hex(commit, 40) && safe(name), 'Exact commit and safe whole-file path required');
@@ -92,7 +92,7 @@ export function publish(root, destination, products, binding, resume = false, sh
   need(Object.keys(products).length > 0, 'No empty completion');
   const outputs = Object.fromEntries(Object.entries(products).map(([name, raw]) => [name, {bytes: raw.length, sha256: digest(raw)}]));
   const receipt = jsonBytes({version: 1, binding, outputs});
-  need(receipt.length <= 4096, 'Preparation receipt cap'); budget.add({bytes: receipt.length});
+  budget.add({bytes: receipt.length}); // Receipt is included in the same finite whole-file/aggregate admission.
   if (fs.existsSync(target)) {
     need(resume, 'Occupied destination; use explicit --resume to verify an identical completed phase');
     need(same(fs.readdirSync(target).sort(), [...Object.keys(products), 'preparation.json'].sort()), 'Incomplete or foreign resumed output inventory');
@@ -606,12 +606,12 @@ async function main(args) {
     need(configFile && destination && flags.every(f => ['--resume', '--submit-queue'].includes(f))
       && new Set(flags).size === flags.length && !(phase === 'status' && flags.includes('--submit-queue')), 'Use advance|status CONFIG DESTINATION [--resume] [--submit-queue]');
     need(!process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node launch required');
-    const root = fs.realpathSync(process.cwd()), config = JSON.parse(ordinary(root, configFile)), reader = pinReader(root);
+    const root = fs.realpathSync(process.cwd()), config = JSON.parse(ordinary(root, configFile)), reader = pinReader(root, {allowance: config.preparation_allowance});
     need(config.version === 1, 'Versioned advance configuration required');
     const flow = await import('./delivery-handoff-advance.mjs');
     const recipe = flow.locate(reader, config.recipe);
     if (phase === 'status') need(fs.existsSync(path.join(root, destination, 'advance.json')), 'No existing advance to observe');
-    const journal = flow.openAdvanceJournal(root, destination, recipe, {resume: phase === 'status' || flags.includes('--resume')});
+    const journal = flow.openAdvanceJournal(root, destination, recipe, {resume: phase === 'status' || flags.includes('--resume'), budget: reader.budget});
     if (phase === 'status') { console.log(JSON.stringify(flow.readAdvanceStatus(journal))); return; }
     let api, apiWait = 0;
     const liveAPI = async route => {
@@ -624,7 +624,7 @@ async function main(args) {
         const preparationStarted = performance.now();
         const next = await flow.nextDeliveryStage(journal, config, reader, {prepareRequests, nativeRequests, retainProducts,
           composeAuthorities, rebindCustody, packageProjection, finalizeDelivery, freezeReview, api: liveAPI,
-          authorityReader: () => flow.deliveryAuthorityReader(root, reader.git)});
+          authorityReader: () => flow.deliveryAuthorityReader(root, reader)});
         let result;
         if (next.waiting) result = flow.observeAdvance(journal, next.waiting);
         else if (next.queue) result = await flow.advanceQueue(journal, next.queue, {api: liveAPI,
@@ -644,7 +644,7 @@ async function main(args) {
     'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|package|finalize|review CONFIG DESTINATION [--resume]');
   need(!process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node launch required');
   const root = fs.realpathSync(process.cwd()); admitDestination(root, destination, flags.includes('--resume'));
-  const raw = ordinary(root, configFile), config = JSON.parse(raw), reader = pinReader(root);
+  const raw = ordinary(root, configFile), config = JSON.parse(raw), reader = pinReader(root, {allowance: config.preparation_allowance});
   reader.budget.add({bytes: raw.length}); need(config.version === 1, 'Versioned preparation config required');
   let outputs;
   if (phase === 'requests') outputs = prepareRequests(config, reader);

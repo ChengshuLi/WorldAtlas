@@ -400,3 +400,160 @@ test('unowned empty stage directories and foreign root inventory are never adopt
   assert.equal(fs.existsSync(path.join(j.target, 'requests.intent.json')), false);
   assert.throws(() => readAdvanceStatus(j), /Foreign advance inventory/);
 });
+
+import {candidateBudget} from '../scripts/native-ownership/native-preparation-guards.mjs';
+test('completed stages resolve their wait and subsequent successful preparation resolves refusal', async t => {
+  const j = journal(t); observeAdvance(j, {status: 'waiting', kind: 'commit', stage: 'requests'}); j.tick(10);
+  await prepareAdvanceStage(j, 'requests', 'requests', {}, () => ({'one.json': Buffer.from('{}\n')}));
+  assert.equal(readAdvanceStatus(j).waiting, null); assert.equal(readAdvanceStatus(j).timing.waits[0].ongoing, false);
+  observeAdvance(j, {status: 'refused', reason: 'actual interrupted transition'}); j.tick(10);
+  assert.ok(readAdvanceStatus(j).last_refusal);
+  await prepareAdvanceStage(j, 'native-requests', 'native-requests', {}, () => ({'one.json': Buffer.from('{}\n')}));
+  assert.equal(readAdvanceStatus(j).last_refusal, null);
+});
+test('advance publisher includes whole receipt in finite aggregate accounting without a fixed4KiB cap', async t => {
+  const j = journal(t);
+  j.budget = candidateBudget([{bytes: 4000}], {reserveBytes: 0, reserveDescriptors: 0,
+    allowance: {phaseBytes: 5000, rssBytes: 1024 ** 3}});
+  await assert.rejects(prepareAdvanceStage(j, 'requests', 'requests', {}, () => ({'large.json': Buffer.alloc(2000)})), /Aggregate/);
+  assert.equal(fs.existsSync(path.join(j.target, 'requests')), false);
+  const other = journal(t);
+  await prepareAdvanceStage(other, 'recipe', 'recipe', {}, () => Object.fromEntries(
+    Array.from({length: 50}, (_, i) => ['product-' + i + '.json', Buffer.from('{}\n')])));
+  assert.ok(fs.statSync(path.join(other.target, 'recipe', 'preparation.json')).size > 4096);
+  assert.deepEqual(readAdvanceStatus(other).completed, ['recipe']);
+});
+test('status charges complete journal reads against the same admitted phase', async t => {
+  const j = journal(t);
+  await prepareAdvanceStage(j, 'requests', 'requests', {}, () => ({'one.json': Buffer.alloc(2000)}));
+  j.chargedJournalFiles = new Set();
+  j.budget = candidateBudget([{bytes: 4000}], {reserveBytes: 0, reserveDescriptors: 0,
+    allowance: {phaseBytes: 5000, rssBytes: 1024 ** 3}});
+  assert.throws(() => readAdvanceStatus(j), /Aggregate/);
+});
+
+// Actual accepted13 new-partition model; bulk scientific products are not read.
+async function current13GreedyProbe({root,scratch,writeResult=false}) {
+const implementationFile=path.join(root,'scripts/delivery-handoff-advance.mjs');
+const implementationWorktreeSha=createHash('sha256').update(fs.readFileSync(implementationFile)).digest('hex');
+const {materializeRecipe}=await import(implementationFile);
+const env={...process.env,GIT_NO_LAZY_FETCH:'1',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_TERMINAL_PROMPT:'0'};
+const git=(cwd,...args)=>execFileSync('git',['-c','core.hooksPath=/dev/null',...args],{cwd,env,maxBuffer:4*1024*1024});
+const sha=raw=>createHash('sha256').update(raw).digest('hex');
+const canonical=v=>Array.isArray(v)?v.map(canonical):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canonical(v[k])])):v;
+const json=v=>Buffer.from(JSON.stringify(canonical(v))+'\n');
+const exact=(a,b)=>json(a).equals(json(b));
+const production='512c100efbb4c6334b39cefaabac2d30ec2c7823',dataCommit='dbda60ac426e30e430f8157794e5e7161f01a453';
+const templateCommit=git(root,'rev-parse','HEAD').toString().trim();
+const fixture=fs.mkdtempSync(scratch+'/greedy-fixture-');git(fixture,'init','--template=','--quiet');
+const fixtureCommits=new Set(),cache=new Map(),readLog=[],cachedPaths=new Map();
+function put(name,value){fs.writeFileSync(path.join(fixture,name),json(value),{flag:'wx'});}
+function commit(){git(fixture,'add','--all');git(fixture,'-c','user.name=Metadata fixture','-c','user.email=metadata-fixture@example.invalid','commit','--quiet','-m','Metadata-only recipe fixture');const c=git(fixture,'rev-parse','HEAD').toString().trim();fixtureCommits.add(c);return c;}
+function descriptor(commit,name){const repo=fixtureCommits.has(commit)?fixture:root;const line=git(repo,'ls-tree','-z',commit,'--',name).toString();const m=/^100644 blob ([a-f0-9]{40})\t([^\0]+)\0$/.exec(line);assert.ok(m&&m[2]===name,'Missing ordinary metadata path '+name);return {repo,commit,path:name,mode:'100644',git_blob_oid:m[1]};}
+function body(pin){if(cache.has(pin.git_blob_oid))return cache.get(pin.git_blob_oid);const local=cachedPaths.get(pin.git_blob_oid);let raw;
+ if(local)raw=fs.readFileSync(local);else {const size=Number(git(pin.repo,'cat-file','-s',pin.git_blob_oid));assert.ok(size<=1048576,'Metadata cap '+pin.path);raw=git(pin.repo,'cat-file','blob',pin.git_blob_oid);}
+ assert.equal(createHash('sha1').update(Buffer.from('blob '+raw.length+'\0')).update(raw).digest('hex'),pin.git_blob_oid);
+ readLog.push({commit:pin.commit,path:pin.path,bytes:raw.length,sha256:sha(raw),source:local?'verified prior literal':'warm Git metadata'});assert.ok(readLog.reduce((n,p)=>n+p.bytes,0)<20*1048576);cache.set(pin.git_blob_oid,raw);return raw;
+}
+const reader={pin(commit,path){const d=descriptor(commit,path),raw=body(d);const {repo,...p}=d;return {...p,bytes:raw.length,sha256:sha(raw)};},read(p){const actual=this.pin(p.commit,p.path);assert.equal(actual.git_blob_oid,p.git_blob_oid??p.blob);assert.equal(actual.bytes,p.bytes);assert.equal(actual.sha256,p.sha256);return cache.get(actual.git_blob_oid);},json(p){return JSON.parse(this.read(p));}};
+const load=(commit,path)=>reader.json(reader.pin(commit,path));
+const prefix='coordination/engineering/nor-grc-congo-delivery-20261011/';
+const current='coordination/engineering/delivery-handoff-20261011/';
+const sourceConfig=load(templateCommit,current+'current13-requests.json'),nativeConfig=load(templateCommit,current+'current13-native-requests.json');
+const registryPin=sourceConfig.registry,registry=reader.json(registryPin),ids=[...new Set(sourceConfig.groups.map(g=>g.handoff_id))];
+const entries=ids.map(id=>registry.entries.find(e=>e.id===id));
+const handoffs=entries.map(e=>({entry:e,pin:{commit:e.accepted_source_commit,...e.source},body:load(e.accepted_source_commit,e.source.path)}));
+const locatorPins=[];
+for(const h of handoffs){const pins=h.body.consumed_inputs.filter(p=>p.path.endsWith('/physical-locators.json')||p.path.endsWith('/physical-inputs.json'));assert.equal(pins.length,1);const p=pins[0];
+ const original=descriptor(p.commit,p.path);assert.equal(original.git_blob_oid,p.blob);const raw=body(original);assert.equal(raw.length,p.bytes);assert.equal(sha(raw),p.sha256);locatorPins.push(p);}
+const v2Source=load(templateCommit,prefix+'resource-budget-controls-001/templates/a-source-template.json'),v2Native=load(templateCommit,prefix+'resource-budget-controls-001/templates/a-native-template.json');
+const code=v2Source.executed_code.map(p=>{const actual=reader.pin(production,p.path);return {path:p.path,bytes:actual.bytes,sha256:actual.sha256};});
+const operating=structuredClone(v2Source.operating_runtime);
+for(const item of [operating.supervisor,...operating.support_code]){const actual=reader.pin(production,item.path);item.bytes=actual.bytes;item.sha256=actual.sha256;}
+const replaceRuntime=request=>({...structuredClone(request),operating_profile:'source-native-v2',executed_code:code,installed_modules:structuredClone(v2Source.installed_modules),operating_runtime:structuredClone(operating)});
+const sourceRequests=new Map(sourceConfig.groups.map(g=>[g.id,reader.json(g.template)]));
+const nativeRequests=new Map(nativeConfig.groups.map(g=>[g.id,reader.json(g.template)]));
+const resources=request=>({processing_allowance:{phaseBytes:384*1024*1024,rssBytes:640*1024*1024},output_reserve:request.output_reserve,operating_limits:structuredClone(v2Source.operating_limits)});
+const physicalChecks=[],selectionDrafts=[];
+const locator=(commit,path)=>({commit,path});
+for(const [hi,h] of handoffs.entries()){
+ const sameHandoff=sourceConfig.groups.filter(g=>g.handoff_id===h.entry.id);assert.ok(sameHandoff.length);
+ const source=replaceRuntime(sourceRequests.get(sameHandoff[0].id));Object.assign(source,resources(source));put('source-'+hi+'.json',source);
+ const targetRows=[];
+ for(const [ti,targetId] of h.entry.target_ids.entries()){
+  const components=h.body.candidate_source_native_bindings.filter(r=>r.retained_payload.target_stable_location_id===targetId).map(r=>r.component_id);
+  const oldGroups=sameHandoff.filter(g=>sourceRequests.get(g.id).source_rule.expected_ids.some(id=>components.includes(id)));
+  assert.ok(oldGroups.length);const exemplar=replaceRuntime(nativeRequests.get(oldGroups[0].id));Object.assign(exemplar,resources(exemplar));
+  const parts=new Map(),inputs=new Map(exemplar.additive.inputs.map(p=>[p.path,p]));let bank;
+  for(const g of oldGroups){const original=nativeRequests.get(g.id),banks=sourceRequests.get(g.id).source_rule.target_banks;assert.equal(banks.length,1);assert.ok(!bank||bank===banks[0]);bank=banks[0];
+   for(const p of original.additive.owner_parts){if(parts.has(p.path))assert.ok(exact(parts.get(p.path),p),'Native containing identity conflict '+p.path);parts.set(p.path,p);const pin=original.additive.inputs.find(x=>x.path===p.path);assert.ok(pin);if(inputs.has(pin.path))assert.ok(exact(inputs.get(pin.path),pin));inputs.set(pin.path,pin);}}
+  exemplar.additive.owner_parts=[...parts.values()];exemplar.additive.inputs=[...inputs.values()];const filename='native-'+hi+'-'+ti+'.json';put(filename,exemplar);targetRows.push({target_id:targetId,bank_path:bank,filename});
+ }
+ for(const r of h.body.physical_restoration.restorations){const matches=h.body.consumed_inputs.filter(p=>p.bytes===r.whole_original_bytes&&p.sha256===r.whole_original_sha256);assert.equal(matches.length,1);physicalChecks.push({handoff_id:h.entry.id,original_product:r.path,source:matches[0]});}
+ selectionDrafts.push({handoff_id:h.entry.id,source_filename:'source-'+hi+'.json',source_resources:resources(source),native_resources:resources(v2Native),physical_locator:{input:locator(locatorPins[hi].commit,locatorPins[hi].path),format:locatorPins[hi].path.endsWith('/physical-locators.json')?'keyed-path':'components-comparison-product'},targets:targetRows,
+ predecessor_allowance:{source_request_path:{bytes:131072},operating_path:{bytes:1048576},publication_path:{bytes:131072},facts_path:{bytes:4194304},inventory_path:{bytes:4194304,uncompressed_bytes:8388608}},native_request_bytes_bound:131072});
+}
+const derivedCommit=commit();
+const recipe={version:1,id:'actual-current13',mode:'greedy-model',registry:locator(registryPin.commit,registryPin.path),destination_prefix:'.cache/native-grid-candidates/current13-greedy-metadata',handoffs:selectionDrafts.map(s=>{const {source_filename,targets,...rest}=s;return {...rest,source_template:locator(derivedCommit,source_filename),targets:targets.map(t=>{const {filename,...target}=t;return {...target,native_template:locator(derivedCommit,filename)};})};})};
+put('recipe.json',recipe);const recipeCommit=commit();
+const implementationPin=reader.pin(templateCommit,'scripts/delivery-handoff-advance.mjs');assert.equal(sha(fs.readFileSync(implementationFile)),implementationWorktreeSha);
+const implementationMatchesHead=implementationWorktreeSha===implementationPin.sha256;
+const output=materializeRecipe(recipe,reader);
+const expected=handoffs.flatMap(h=>h.entry.cohort_ids);assert.deepEqual(output.groups.flatMap(g=>g.component_ids),expected);assert.equal(new Set(expected).size,13);assert.ok(output.groups.every(g=>g.models.source.fits&&g.models.native.fits));
+const mutants=[];
+for(const [i,h] of handoffs.entries()){const changed=structuredClone(h.body);assert.ok(changed.original_gap_membership?.members.length);for(const [j,row]of changed.original_gap_membership.members.entries()){assert.equal(typeof row.original_batch_id,'string');row.original_batch_id='r'.repeat(row.original_batch_id.length);}put('relabeled-handoff-'+i+'.json',changed);mutants.push({h,filename:'relabeled-handoff-'+i+'.json'});}
+const mutantCommit=commit();const mutatedRegistry=structuredClone(registry);
+for(const {h,filename} of mutants){const pin=reader.pin(mutantCommit,filename),entry=mutatedRegistry.entries.find(e=>e.id===h.entry.id);entry.accepted_source_commit=mutantCommit;entry.source={path:pin.path,mode:pin.mode,blob:pin.git_blob_oid,bytes:pin.bytes,sha256:pin.sha256};}
+put('relabeled-registry.json',mutatedRegistry);const registryCommit=commit();
+const control=materializeRecipe({...recipe,registry:locator(registryCommit,'relabeled-registry.json')},reader);
+assert.deepEqual(control.groups.map(g=>g.component_ids),output.groups.map(g=>g.component_ids));
+const unchangedBodies=plan=>plan.products.filter(p=>p.uses.includes('physical-product')||p.source.path.includes('/payloads/')||p.source.path.includes('/native-operands/')).map(p=>[p.source.bytes,p.source.sha256].join(':')).sort();
+assert.deepEqual(unchangedBodies(control.acquisition_plan),unchangedBodies(output.acquisition_plan));
+assert.ok(readLog.every(p=>!(/\.(bin|gz|geojson)$/.test(p.path))),'Unexpected product body read');
+const products=output.acquisition_plan.products,bodyKey=p=>[p.mode,p.bytes,p.sha256].join(':');assert.equal(new Set(products.map(p=>p.identity)).size,products.length);
+function category(role,predicate){const rows=products.filter(p=>predicate(p));const occurrences=[];for(const g of output.groups){for(const filename of [g.source_template,g.native_template]){const r=JSON.parse(output.products[filename]);for(const p of (r.source_rule??r.additive).inputs)if(rows.some(x=>x.source.sha256===p.sha256&&x.source.bytes===p.bytes))occurrences.push(p);}}
+ assert.ok(rows.length>0);assert.equal(new Set(rows.map(p=>bodyKey(p.source))).size,rows.length);return {role,unique_bodies:rows.length,phase_occurrences:occurrences.length,unique_encoded_bytes:rows.reduce((n,p)=>n+p.source.bytes,0),phase_encoded_bytes:occurrences.reduce((n,p)=>n+p.bytes,0),identities:rows.map(p=>({bytes:p.source.bytes,sha256:p.source.sha256,destinations:p.destinations}))};}
+const physical=category('physical',p=>p.uses.includes('physical-product'));
+const admin=category('administrative',p=>p.source.path.includes('original-geography-source-corpus')&&p.source.path.includes('/payloads/'));
+const native=category('native',p=>p.source.path.includes('/native-operands/'));
+const result={version:1,kind:'actual-current13-greedy-metadata-probe',implementation_base_commit:templateCommit,implementation_worktree_sha256:implementationWorktreeSha,implementation_matches_head:implementationMatchesHead,implementation_pin:implementationMatchesHead?implementationPin:null,production_code_commit:production,derived_fixture_commit:derivedCommit,recipe_fixture_commit:recipeCommit,recipe_fixture_path:path.join(fixture,'recipe.json'),component_count:13,ordered_complete_disjoint:true,
+ groups:output.groups.map(g=>({id:g.id,components:g.component_ids.length,component_ids:g.component_ids,source_phase_bytes:g.models.source.total_bytes,native_phase_bytes:g.models.native.total_bytes,source_descriptors:g.models.source.descriptors,native_descriptors:g.models.native.descriptors,phase_limit:g.models.source.phase_bytes,source_fits:g.models.source.fits,native_fits:g.models.native.fits})),
+ old_batch_relabel_control:{changed_field:'original_gap_membership.members[].original_batch_id',all_labels_replaced:true,partitions_unchanged:true,physical_admin_native_transport_identities_unchanged:true,mutant_fixture_commit:mutantCommit},no_bulk_product_body_reads:true,physical_original_pin_checks:physicalChecks,transport:[physical,admin,native],all_unique_transport_bodies:products.length,all_unique_encoded_bytes:output.acquisition_plan.unique_encoded_bytes,metadata_reads:readLog,
+ limits:['Metadata recipe test only; no SOURCE/NATIVE/GIS execution or new source admission.','Actual production handoff/locator bytes were read and verified; derived v2 test template commits are isolated scratch fixtures.','Relabeled handoff/registry fixtures are metamorphic controls, not accepted source authority.','Deduplication applies to acquisition planning only; every independent SOURCE/NATIVE phase still includes full inputs and costs.','Prospective request budget excludes live supply and subsequent runtime acquisition accounting, which existing operators retain.']};
+assert.equal(sha(fs.readFileSync(implementationFile)),implementationWorktreeSha,'Implementation changed during probe');
+if(writeResult)fs.writeFileSync(path.join(scratch,'recipe-current13-greedy-result.json'),json(result));
+const summary={result:writeResult?path.join(scratch,'recipe-current13-greedy-result.json'):null,groups:result.groups.map(g=>({id:g.id,n:g.components,source:g.source_phase_bytes,native:g.native_phase_bytes,limit:g.phase_limit})),relabel_unchanged:true,transport:result.transport.map(({identities,...r})=>r),metadata_bytes:readLog.reduce((n,p)=>n+p.bytes,0)};
+return {result,summary};
+}
+test('real13 greedy model ignores original batch labels and deduplicates physical/admin/native transport',
+  {skip: process.env.WORLDATLAS_DELIVERY_FIXTURE !== '1'}, async t => {
+    const scratch = fs.mkdtempSync(path.join(os.tmpdir(), 'delivery-greedy-'));
+    t.after(() => fs.rmSync(scratch, {recursive: true, force: true}));
+    const {result} = await current13GreedyProbe({root: path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'), scratch});
+    assert.equal(result.component_count, 13);
+    assert.deepEqual(result.groups.map(g => g.components), [10, 3]);
+    assert.ok(result.groups.every(g => g.source_phase_bytes <= g.phase_limit && g.native_phase_bytes <= g.phase_limit));
+    assert.deepEqual(result.transport.map(r => r.unique_bodies), [14, 3, 7]);
+  });
+
+test('stale lock recovery serializes competing acquisition and refuses ambiguous acquisition guards', async t => {
+  const j = journal(t), lockPath = path.join(j.target, 'advance.lock');
+  const raw = Buffer.from(JSON.stringify({host: os.hostname(), pid: 2147483647, nonce: 'dead',
+    intent_sha256: digest(Buffer.from(JSON.stringify({kind: j.intent.kind, recipe: j.intent.recipe,
+      started_at: j.intent.started_at, version: j.intent.version}) + '\n'))}) + '\n');
+  // The journal recipe uses commit/path in that canonical order.
+  fs.writeFileSync(lockPath, raw);
+  const unlink = fs.unlinkSync; let blocked = false, ran = false;
+  fs.unlinkSync = function(filename) {
+    if (filename === lockPath && !blocked) {
+      blocked = true;
+      assert.throws(() => withAdvanceLock(j, () => { ran = true; }), /acquisition is occupied/);
+    }
+    return unlink(filename);
+  };
+  try { await withAdvanceLock(j, () => { assert.equal(ran, false); }); } finally { fs.unlinkSync = unlink; }
+  assert.equal(blocked, true); assert.equal(ran, false);
+  fs.writeFileSync(path.join(j.target, 'advance.acquire'), raw);
+  assert.throws(() => withAdvanceLock(j, () => { ran = true; }), /inspect its owner/);
+  assert.equal(ran, false); assert.deepEqual(fs.readFileSync(path.join(j.target, 'advance.acquire')), raw);
+});

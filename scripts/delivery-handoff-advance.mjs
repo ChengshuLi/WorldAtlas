@@ -139,7 +139,7 @@ function exclusive(filename, raw) {
 // Immutable intent is created before outputs. It is a local resume aid, never a
 // scientific receipt or an authorization. Only an identical intent may fill an
 // interrupted metadata write; unknown files and changed bytes always refuse.
-export function openAdvanceJournal(root, destination, recipe, {resume = false, now = Date.now} = {}) {
+export function openAdvanceJournal(root, destination, recipe, {resume = false, now = Date.now, budget = null} = {}) {
   const target = directory(root, destination), intentPath = path.join(target, 'advance.json');
   if (!fs.existsSync(target)) {
     fs.mkdirSync(path.dirname(target), {recursive: true}); fs.mkdirSync(target);
@@ -148,22 +148,41 @@ export function openAdvanceJournal(root, destination, recipe, {resume = false, n
   const intent = JSON.parse(ordinaryFile(intentPath));
   need(intent.version === 1 && intent.kind === 'delivery-advance-v1' && equal(intent.recipe, recipe)
     && Number.isFinite(Date.parse(intent.started_at)), 'Foreign or changed advance intent');
-  return {root, target, destination, intent, now};
+  return {root, target, destination, intent, now, budget: budget ?? candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0}), chargedJournalFiles: new Set()};
+}
+
+function journalFile(journal, filename) {
+  if (!journal.chargedJournalFiles.has(filename)) {
+    const stat = fs.lstatSync(filename);
+    need(stat.isFile() && fs.realpathSync(filename) === filename, 'Nonordinary journal body');
+    journal.budget.add({bytes: stat.size}); journal.chargedJournalFiles.add(filename);
+  }
+  return ordinaryFile(filename);
 }
 
 export function withAdvanceLock(journal, action) {
   const filename = path.join(journal.target, 'advance.lock');
-  if (fs.existsSync(filename) || fs.lstatSync(filename, {throwIfNoEntry: false})) {
-    const original = ordinaryFile(filename), lock = JSON.parse(original);
-    need(lock.host === os.hostname() && Number.isSafeInteger(lock.pid) && lock.pid > 0
-      && lock.intent_sha256 === hash(bytes(journal.intent)), 'Foreign advance lock');
-    let gone = false;
-    try { process.kill(lock.pid, 0); } catch (error) { if (error.code === 'ESRCH') gone = true; else throw error; }
-    need(gone && ordinaryFile(filename).equals(original), 'Another advance process owns this destination');
-    fs.unlinkSync(filename);
-  }
+  const guard = path.join(journal.target, 'advance.acquire');
   const raw = bytes({host: os.hostname(), pid: process.pid, nonce: randomUUID(), intent_sha256: hash(bytes(journal.intent))});
-  exclusive(filename, raw);
+  // All cooperating resumers serialize stale inspection AND creation. A dead
+  // acquisition guard is deliberately not auto-reaped: its ambiguous owner must
+  // be reconciled explicitly, rather than introducing another compare/unlink race.
+  need(!fs.lstatSync(guard, {throwIfNoEntry: false}), 'Advance acquisition is occupied; inspect its owner before recovery');
+  exclusive(guard, raw);
+  try {
+    if (fs.existsSync(filename) || fs.lstatSync(filename, {throwIfNoEntry: false})) {
+      const original = ordinaryFile(filename), lock = JSON.parse(original);
+      need(lock.host === os.hostname() && Number.isSafeInteger(lock.pid) && lock.pid > 0
+        && lock.intent_sha256 === hash(bytes(journal.intent)), 'Foreign advance lock');
+      let gone = false;
+      try { process.kill(lock.pid, 0); } catch (error) { if (error.code === 'ESRCH') gone = true; else throw error; }
+      need(gone && ordinaryFile(filename).equals(original), 'Another advance process owns this destination');
+      fs.unlinkSync(filename);
+    }
+    exclusive(filename, raw);
+  } finally {
+    need(ordinaryFile(guard).equals(raw), 'Advance acquisition ownership changed'); fs.unlinkSync(guard);
+  }
   return Promise.resolve().then(action).finally(() => {
     need(ordinaryFile(filename).equals(raw), 'Advance lock ownership changed'); fs.unlinkSync(filename);
   });
@@ -177,7 +196,7 @@ function stageNames(id) {
 export function readAdvanceStatus(journal) {
   const completed = [], waiting = [], refused = [];
   for (const name of fs.readdirSync(journal.target)) {
-    if (['advance.json', 'advance.lock', 'queue-submission.json'].includes(name) || /^observation-\d{6}\.json$/.test(name)
+    if (['advance.json', 'advance.lock', 'advance.acquire', 'queue-submission.json'].includes(name) || /^observation-\d{6}\.json$/.test(name)
       || /^[a-z0-9-]+\.(intent|completed)\.json$/.test(name)) continue;
     need(/^[a-z0-9-]+$/.test(name) && fs.lstatSync(path.join(journal.target, name)).isDirectory()
       && fs.realpathSync(path.join(journal.target, name)) === path.join(journal.target, name)
@@ -185,31 +204,34 @@ export function readAdvanceStatus(journal) {
   }
   for (const name of fs.readdirSync(journal.target).sort()) {
     if (!name.endsWith('.completed.json')) continue;
-    const event = JSON.parse(ordinaryFile(path.join(journal.target, name)));
+    const event = JSON.parse(journalFile(journal, path.join(journal.target, name)));
     need(event.version === 1 && name === stageNames(event.stage).event, 'Malformed completed stage');
-    const intent = JSON.parse(ordinaryFile(path.join(journal.target, stageNames(event.stage).intent)));
+    const intent = JSON.parse(journalFile(journal, path.join(journal.target, stageNames(event.stage).intent)));
     need(intent.stage === event.stage && equal(intent.binding, event.binding)
       && hash(bytes(intent.config)) === event.binding.config_sha256
       && Number.isFinite(event.preparation_ms) && event.preparation_ms >= 0
       && Number.isFinite(Date.parse(event.completed_at)), 'Completed stage intent/timing differs');
-    const receipt = JSON.parse(ordinaryFile(path.join(journal.target, event.stage, 'preparation.json')));
+    const receipt = JSON.parse(journalFile(journal, path.join(journal.target, event.stage, 'preparation.json')));
     need(equal(receipt.binding, event.binding) && equal(receipt.outputs, event.outputs), 'Completion/whole inventory differs');
     const actualNames = fs.readdirSync(path.join(journal.target, event.stage)).sort();
     need(equal(actualNames, [...Object.keys(receipt.outputs), 'preparation.json'].sort()), 'Foreign completed output');
     for (const [file, pin] of Object.entries(receipt.outputs)) {
       need(safe(file) && !file.includes('/'), 'Unsafe completed filename');
-      const raw = ordinaryFile(path.join(journal.target, event.stage, file));
+      const raw = journalFile(journal, path.join(journal.target, event.stage, file));
       need(raw.length === pin.bytes && hash(raw) === pin.sha256, 'Completed metadata changed: ' + file);
     }
     completed.push(event);
   }
   const events = fs.readdirSync(journal.target).filter(n => /^observation-\d{6}\.json$/.test(n)).sort()
-    .map(name => JSON.parse(ordinaryFile(path.join(journal.target, name))));
+    .map(name => JSON.parse(journalFile(journal, path.join(journal.target, name))));
   for (const event of events) {
     if (event.status === 'waiting') waiting.push(event);
     if (event.status === 'refused') refused.push(event);
   }
   const last = events.at(-1);
+  const resolved = last && completed.some(e => (e.observations_seen === undefined
+    ? Date.parse(e.completed_at) > Date.parse(last.observed_at) : e.observations_seen >= events.length)
+    && (last.status === 'refused' || e.stage === last.stage));
   const waits = waiting.map(event => {
     const start = Date.parse(event.observed_at), next = completed.find(row => row.stage === event.stage && Date.parse(row.completed_at) >= start);
     return {stage: event.stage, kind: event.kind, started_at: event.observed_at,
@@ -220,8 +242,8 @@ export function readAdvanceStatus(journal) {
     return {stage: e.stage, elapsed_seconds: Number.isFinite(terminal.elapsed_seconds) ? terminal.elapsed_seconds : null, execution_commit: terminal.execution_commit,
       terminal_sha256: e.outputs['terminal.json'].sha256};
   });
-  return {version: 1, completed: completed.map(e => e.stage), waiting: last?.status === 'waiting' ? last : null,
-    last_refusal: last?.status === 'refused' ? last : null,
+  return {version: 1, completed: completed.map(e => e.stage), waiting: !resolved && last?.status === 'waiting' ? last : null,
+    last_refusal: !resolved && last?.status === 'refused' ? last : null,
     timing: {overall_wall_ms: Math.max(0, journal.now() - Date.parse(journal.intent.started_at)),
       preparation_ms: completed.reduce((n, e) => n + e.preparation_ms, 0),
       api_wait_ms: completed.reduce((n, e) => n + (e.api_wait_ms ?? 0), 0),
@@ -235,7 +257,7 @@ export function readAdvanceStatus(journal) {
 export function observeAdvance(journal, observation) {
   need(['waiting', 'refused', 'external'].includes(observation.status), 'Unknown delivery observation');
   const names = fs.readdirSync(journal.target).filter(n => /^observation-\d{6}\.json$/.test(n)).sort();
-  const prior = names.length ? JSON.parse(ordinaryFile(path.join(journal.target, names.at(-1)))) : null;
+  const prior = names.length ? JSON.parse(journalFile(journal, path.join(journal.target, names.at(-1)))) : null;
   if (prior) { const {observed_at, ...value} = prior; if (equal(value, observation)) return prior; }
   const event = {...observation, observed_at: new Date(journal.now()).toISOString()};
   exclusive(path.join(journal.target, 'observation-' + String(names.length).padStart(6, '0') + '.json'), bytes(event));
@@ -246,7 +268,7 @@ export async function prepareAdvanceStage(journal, id, phase, config, produce, {
   const names = stageNames(id), binding = {phase, config_sha256: hash(bytes(config))};
   const intended = bytes({version: 1, stage: id, binding, config});
   const intentPath = path.join(journal.target, names.intent), eventPath = path.join(journal.target, names.event);
-  if (fs.existsSync(intentPath)) need(ordinaryFile(intentPath).equals(intended), 'Changed stage inputs; preserve prior vintage');
+  if (fs.existsSync(intentPath)) need(journalFile(journal, intentPath).equals(intended), 'Changed stage inputs; preserve prior vintage');
   else {
     need(!fs.lstatSync(path.join(journal.target, names.directory), {throwIfNoEntry: false})
       && !fs.lstatSync(eventPath, {throwIfNoEntry: false}), 'Unowned stage collision');
@@ -257,19 +279,20 @@ export async function prepareAdvanceStage(journal, id, phase, config, produce, {
     return {stage: id, resumed: true};
   }
   const products = await produce();
-  const budget = candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0}), outputs = {};
+  const budget = journal.budget, outputs = {};
   need(Object.keys(products).length, 'Empty advancement cannot complete');
   for (const [name, raw] of Object.entries(products)) {
     need(safe(name) && !name.includes('/') && name !== 'preparation.json' && Buffer.isBuffer(raw), 'Plain metadata products required');
     budget.add({bytes: raw.length}); outputs[name] = {bytes: raw.length, sha256: hash(raw)};
   }
-  const receipt = bytes({version: 1, binding, outputs}); budget.add({bytes: receipt.length});
+  const receipt = bytes({version: 1, binding, outputs});
+  budget.add({bytes: receipt.length});
   const target = path.join(journal.target, names.directory);
   if (fs.existsSync(target) || fs.lstatSync(target, {throwIfNoEntry: false})) {
     need(fs.lstatSync(target).isDirectory() && fs.realpathSync(target) === target, 'Foreign stage destination');
     const expected = {...products, 'preparation.json': receipt};
     for (const name of fs.readdirSync(target)) need(Object.hasOwn(expected, name)
-      && ordinaryFile(path.join(target, name)).equals(expected[name]), 'Interrupted stage contains foreign/changed bytes');
+      && journalFile(journal, path.join(target, name)).equals(expected[name]), 'Interrupted stage contains foreign/changed bytes');
     if (fs.existsSync(path.join(target, 'preparation.json')))
       need(fs.readdirSync(target).length === Object.keys(expected).length, 'Incomplete completed inventory');
   } else fs.mkdirSync(target);
@@ -280,6 +303,7 @@ export async function prepareAdvanceStage(journal, id, phase, config, produce, {
   const api_wait_ms = apiWaitMilliseconds();
   need(Number.isFinite(api_wait_ms) && api_wait_ms >= 0, 'Invalid observed API wait');
   const event = {version: 1, stage: id, binding, outputs, preparation_ms: Math.max(0, performance.now() - preparationStarted - api_wait_ms), api_wait_ms,
+    observations_seen: fs.readdirSync(journal.target).filter(n => /^observation-\d{6}\.json$/.test(n)).length,
     completed_at: new Date(journal.now()).toISOString()};
   exclusive(eventPath, bytes(event));
   return {stage: id, resumed: false};
@@ -379,7 +403,7 @@ export function committedRetentionConfig(reader, observation) {
 }
 
 const locatorOf = pin => ({commit: pin.commit, path: pin.path});
-function journalBody(journal, stage, name) { return ordinaryFile(path.join(journal.target, stage, name)); }
+function journalBody(journal, stage, name) { return journalFile(journal, path.join(journal.target, stage, name)); }
 function journalJSON(journal, stage, name) { return JSON.parse(journalBody(journal, stage, name)); }
 
 // Actual committed publication observations have no group IDs. Their original
@@ -935,7 +959,16 @@ function constructAuthorityRegistry(reader, authorities) {
 return {constructOriginalAuthority, constructAuthorityRegistry};
 })();
 
-export function deliveryAuthorityReader(root, git) {
-  class DeliveryReader extends ImmutableReader { git(...args) { return git(...args); } }
-  return new DeliveryReader(root, git('rev-parse', 'HEAD').toString().trim());
+export function deliveryAuthorityReader(root, pinReader) {
+  const outer = pinReader.budget.snapshot(), git = pinReader.git;
+  class DeliveryReader extends ImmutableReader {
+    git(...args) { return git(...args); }
+    admit(pin, decoded = 0) {
+      const extra = this.charged.has(pin.commit + ':' + pin.path) ? 0 : 1;
+      need(outer.accounted_descriptors + this.charged.size + extra <= 512, 'Shared delivery/authority descriptor budget exceeded');
+      super.admit(pin, decoded);
+    }
+  }
+  return new DeliveryReader(root, git('rev-parse', 'HEAD').toString().trim(), {
+    allowance: pinReader.budget.allowance, metadataBytes: 8 * 1024 * 1024 + outer.accounted_bytes});
 }
