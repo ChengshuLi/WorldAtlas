@@ -52,9 +52,9 @@ those unmerged dependencies explicitly. The exact native API at `39792e02c603e26
 in this diagnostic tree. A genuine miniature joint CLI control verifies one
 shared bootstrap, checkpoint, transition, native comparison, continuous consumer
 and release, and zero complete selections or coordinate shards, using actual V8
-coverage. The integrated genuine retained-input comparison, final combined code
-profiles, renewed independent review and normal integration remain pending. No complete-path timing or zero-load
-scientific execution is claimed by these focused controls.
+coverage. The real accepted-AUS joint proof is retained below. Final result review and normal
+dependency integration remain pending; focused controls and actual proof are
+reported separately.
 
 ## Applicability closure
 
@@ -99,12 +99,12 @@ control rejects an insufficient union before serialization, including Unicode
 and escape-aware byte-count verification. Actual joint CLI controls verify the
 provisional whole-file publication and its lineage.
 
-The planned single integrated comparison now uses accepted pre-AUS→AUS, matching
+The integrated comparison uses accepted pre-AUS→AUS, matching
 original CI run 38214372428 and its retained genuine artifact under
 `accepted-reference/`. Complete original strict/native results and encoded/decoded
 operand hashes are available. Historical facts/inverse bodies are not available,
-so their equality is not claimed. The proof remains unexecuted until the exact
-shared policy-route correction and final combined profiles pass review.
+so their equality is not claimed. The exact shared policy-route correction and combined execution profiles passed
+independent review before the admitted runs.
 
 The archived programme policy is an execution input, not a selected scientific
 route. Its exact historical pin is followed from the matching retained custody
@@ -135,5 +135,49 @@ selections/coordinate shards, and zero consumer invocations. There is no
 scientific equivalence result from this attempt. Sampled owned-group peak was
 409,935,872 bytes; both observed terminal scans were empty. Original admission,
 operating evidence and complete stderr are retained in `failed-attempt-001/`.
-The module owner is correcting this demonstrated accepted-AUS envelope mismatch;
-any continuation needs its narrow exact-head review and fresh resource admission.
+The module owner corrected this accepted-AUS envelope mismatch at reviewed
+`14414389157d6dd7fbcaca11eed4e424efe5681b`; subsequent runs used that exact body.
+
+## Actual successful AUS joint proof 003
+
+The clean run at `0294ae06eb8934e1461d07d44d137529d6b31266` started
+2026-10-12 09:32:18 UTC. The complete actual joint path, including runtime and
+checkpoint authentication, both consumers, output serialization and the original
+strict Python readback, took **24.066 seconds**. The supervised invocation with
+archival comparisons took **25.190 seconds**, sampled **540,454,912 bytes** peak
+process-group RSS, exited zero and reported `complete: true`. Both actual final
+process-group scans were empty. Fresh reader allowance was 1,462,315,008 bytes
+under a 2 GiB group cap and 420-second deadline. This is a local complete-path
+measurement, not a controlled hosted speedup claim.
+
+Actual V8 coverage records one bootstrap, checkpoint, transition, native consumer,
+continuous consumer and release, and **zero `loadSelection` or complete coordinate
+shard calls**. Complete 49,625-owner certificate and two-vintage scope produce
+seven changed owners and 53 required owners. The new native consumer compares
+18 changed rows using authenticated base intervals and each cumulative patch once;
+the old cold report compared all 287 additive rows. Native status, losses, interval
+results and selectors match. Full reports preserve their intentionally different
+row scope, custody, code/runtime and accounting.
+
+The entire original strict polygon result is equal in canonical JSON with no
+omitted fields. Complete encoded/decoded operand descriptors, source bindings
+and required IDs exactly equal accepted AUS CI run 38214372428. Actual inventories
+contain two new-target source inputs and five affected continuous source inputs
+across five distinct bodies. Candidate continuous features are explicitly reused,
+so that projection adds no source reread. These phase counts derive from consumed
+inventories and the authenticated reuse identity, not a separate syscall probe.
+
+`retained-proof-003/` preserves whole outputs, original admission and operating
+records, V8 coverage, exact consumed policy/catalogue/routes, full provisional
+derived certificate, and summary/comparison products. The original certificate
+publication remains provisional; neither this local proof nor serialization
+authorizes future checkpoint admission. Generic normal hosted artifact retention
+and accepted-root advancement is the separate issue1788 follow-on.
+
+Attempt002 finished both scientific consumers successfully, then failed its
+archival comparison because a live Shapely tuple was compared directly with a
+decoded JSON list. Its complete original receipt remains `complete: false` in
+`retained-attempt-002/`. A retained-only comparison confirms identical full JSON
+products. The genuine small `report_feature` control verifies this representation
+difference and rejects an altered coordinate. The clean run uses JSON-to-JSON
+comparison and persists timing before its assertions; no science predicate changed.

@@ -1,0 +1,6 @@
+{"geography_stage": "selected-continuous-python-compare", "elapsed_ms": 538}
+Traceback (most recent call last):
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/30ed6b233028335abc1579444dfaf26b5ea4369bc6be515505200ea05781cbd4/work/coordination/engineering/selected-zero-load-joint-20261012/reproduction/probe.py", line 50, in <module>
+    assert continuous['original_strict_polygon_result'] == reference_continuous['original_strict_polygon_result']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
