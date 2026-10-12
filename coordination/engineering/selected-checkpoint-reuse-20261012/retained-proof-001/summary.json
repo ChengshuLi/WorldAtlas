@@ -114,7 +114,6 @@
   "supervised_proof_seconds": 28.510528369995882,
   "sampled_group_rss_bytes": 529104896,
   "process_max_rss_bytes": 531333120,
-  "peak_charged_phase_bytes": 707801412,
   "profile_estimates_ms": {
     "inclusive": {
       "readRetainedRegistryAuthority": 7723.899,
@@ -143,7 +142,8 @@
     "Eight containing-source reads over five bodies: three new-target custody plus five complete affected-neighbor bodies; no second-vintage body read.",
     "Runtime/carry accounting counter complete_phase_bytes is the only certificate equality exclusion; both original historical values are preserved.",
     "Initial attempt stopped at over-broad historical-counter assertion. Corrected attempt retained complete products before assertions; both records are preserved.",
-    "Profiles are sampled inclusive/self estimates; times include profiling overhead and are not a controlled hosted speedup."
+    "Profiles are sampled inclusive/self estimates; times include profiling overhead and are not a controlled hosted speedup.",
+    "The raw peak_phase_bytes counter is sampled before read admission. Exact derived final charge is709678830 bytes; its unchanged raw pre-admission maximum is707801412 bytes. Both are below the admitted current allowance."
   ],
   "files": [
     {
@@ -256,5 +256,34 @@
       "bytes": 2724,
       "sha256": "d4a4d3976b1e90bc500fdbdd06cebd428c6d8727c07209fcd59315cf7f88510e"
     }
-  ]
+  ],
+  "maximum_observed_pre_admission_phase_bytes": 707801412,
+  "derived_final_charged_phase_bytes": 709678830,
+  "charge_derivation": {
+    "module_end": 355564283,
+    "comparison_carry_increase": 324570460,
+    "last_input_admissions": [
+      {
+        "name": "candidate/certificate.json.gz",
+        "encoded_bytes": 7515261,
+        "decoded_bytes": 18414414
+      },
+      {
+        "name": "operands.json.gz",
+        "encoded_bytes": 376920,
+        "decoded_bytes": 1356950
+      },
+      {
+        "name": "current-003/certificate.json",
+        "encoded_bytes": 3124,
+        "decoded_bytes": 0
+      },
+      {
+        "name": "current-003/request.json",
+        "encoded_bytes": 1877418,
+        "decoded_bytes": 0
+      }
+    ],
+    "raw_counter_limit": "checkMemory samples before the subsequent read.admit. The original reported peak_phase_bytes is a maximum observed pre-admission sample, not the exact final charge."
+  }
 }

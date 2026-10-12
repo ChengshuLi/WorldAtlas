@@ -111,8 +111,10 @@ for new-target authentication, five for the complete affected-neighbor projectio
 and zero for candidate-vintage pointset reuse. This is not zero source reads; it
 is zero complete world-source scans. Shared authentication and projections took
 26.66 seconds; the full supervised proof, retained output and comparisons took
-28.51 seconds, with 529 MB sampled group RSS and 708 MB maximum charged phase
-inside a 1 GiB current reader allowance. These are measured local boundaries,
+28.51 seconds, with 529 MB sampled group RSS and 710 MB derived final charged phase
+inside a 1 GiB current reader allowance. The original pre-admission sample was
+707,801,412 bytes; adding its final admitted request gives 709,678,830 bytes,
+with the full derivation retained in the summary. These are measured local boundaries,
 not a controlled hosted speedup or an integrated native/continuous checker run.
 
 Only the certificate's historical `complete_phase_bytes` accounting counter is
