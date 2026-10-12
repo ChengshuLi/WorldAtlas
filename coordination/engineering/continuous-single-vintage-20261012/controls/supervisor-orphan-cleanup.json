@@ -1,0 +1,24 @@
+{
+  "exit_code": 1,
+  "parent_exit_code": 0,
+  "elapsed_seconds": 0.102,
+  "sampled_process_group_peak_rss_bytes": 94208,
+  "sampling_interval_ms": 50,
+  "samples": 1,
+  "stopped": "orphaned-owned-descendants",
+  "subreaper": true,
+  "survivors_at_parent_terminal": [
+    {
+      "pid": 8,
+      "state": "S",
+      "rss": 3375104
+    }
+  ],
+  "reaped_descendants": [
+    {
+      "pid": 8,
+      "wait_status": 15
+    }
+  ],
+  "survivors_after_cleanup": []
+}
