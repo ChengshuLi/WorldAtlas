@@ -54,3 +54,13 @@ This is original-custody/metadata proof only: no new SOURCE, NATIVE or rebind wa
 executed, no missing old terminal was invented, and no current selection or
 whole-gap completion is claimed. The original mixed-program approval and later
 current-bank obligations remain separate.
+
+## Git-native promisor fixture
+
+The package queue exposed a test-only assumption that source Git objects remain
+loose. Ordinary Git maintenance can pack them. The fixture now transfers exact
+blob bytes through `cat-file` and `hash-object`, asserting identical object IDs.
+A forced-packed-source control preserves missing excluded objects and no-fetch
+checks. All 22 local-workspace controls passed after integration. This changes
+no production workspace behavior or package assembly. The final combined
+regression-programme vector still includes this changed test identity.

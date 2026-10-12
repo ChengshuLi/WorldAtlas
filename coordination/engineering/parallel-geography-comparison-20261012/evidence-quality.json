@@ -63,6 +63,13 @@
       "description": "Continue authenticated completed original SOURCE/NATIVE custody through the existing authority-to-review suffix without new issuance or fictitious completed stages; preserve full original corpus, issued subset and fragment remainder.",
       "software": "Node 24",
       "units": "metadata controls"
+    },
+    {
+      "id": "git-native-promisor-fixture",
+      "kind": "code",
+      "description": "Seed exact blob bytes through Git, preserving object identity independently of loose or packed source storage; exercise actual packed-source sparse allocation and existing missing/no-fetch controls.",
+      "software": "Git and Node 24",
+      "units": "synthetic controls"
     }
   ],
   "metrics": [],
@@ -80,6 +87,7 @@
     "node --test test/integration-profile-restoration.test.mjs",
     "node --test test/delivery-handoff-advance.test.mjs test/delivery-handoff.test.mjs",
     "GIT_NO_LAZY_FETCH=1 WORLDATLAS_DELIVERY_V2_FIXTURE=1 node --test --test-name-pattern=\"frozen Norway B\" test/delivery-handoff-advance.test.mjs",
-    "GIT_NO_LAZY_FETCH=1 WORLDATLAS_DELIVERY_ORIGINAL_FIXTURE=1 node --test --test-name-pattern=\"completed custody|real Native102\" test/delivery-handoff-advance.test.mjs"
+    "GIT_NO_LAZY_FETCH=1 WORLDATLAS_DELIVERY_ORIGINAL_FIXTURE=1 node --test --test-name-pattern=\"completed custody|real Native102\" test/delivery-handoff-advance.test.mjs",
+    "node --test test/local-workspace.test.mjs"
   ]
 }
