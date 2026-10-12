@@ -14,7 +14,8 @@ import {checkPRGates} from '../scripts/check-pr-gates.mjs';
 import {selectedDataSelection, selectedDataCandidate, validateSelectedExpectations, selectedMetadataAdmission, SELECTED_SMOKE} from '../scripts/integration-profile.mjs';
 const prefix = 'coordination/engineering/fixture-delivery/';
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
-function fixture({mutate = () => {}} = {}) {
+function fixture({mutate = () => {}, packetPrefix = prefix} = {}) {
+  const prefix = packetPrefix;
   const blobs = new Map(), baseline = {entries:new Map()}, authored = {entries:new Map()}, reads=[];
   const put = (name, value, old=false) => {
     const bytes = Buffer.isBuffer(value) ? value : Buffer.from(typeof value === 'string' ? value : JSON.stringify(value));
@@ -125,7 +126,7 @@ test('whole-ledger expectation check rejects duplicate batches/members and forei
 function gateFixture(f=fixture()) {
   const base='b'.repeat(40), head='c'.repeat(40), root='/repos/owner/repo';
   const issue={number:10,state:'open',created_at:'2020-01-01T00:00:00Z',labels:['type:engineering','kind:work-item','status:ready'],
-    body:'<!-- worldatlas-work:v1\n'+JSON.stringify({max_prs:2,depends_on:[],mode:'engineering',scope:'Exact unchanged-method selected data',...(f.sourceState?{owned_paths:[administrativePath]}:{})})+'\n-->'};
+    body:'<!-- worldatlas-work:v1\n'+JSON.stringify({max_prs:2,depends_on:[],mode:'engineering',scope:'Exact unchanged-method selected data',...(f.ownedPaths || f.sourceState ? {owned_paths:f.ownedPaths ?? [administrativePath]} : {})})+'\n-->'};
   const claim={version:1,active:true,issue_number:10,worker_id:'author',claim_id:'selected-claim',branch:f.branch??'engineering/fixture-delivery',mode:'engineering',expires_at:'2099-01-01T00:00:00Z'};
   const pr={number:20,state:'open',changed_files:f.files.length,body:'Refs #10',head:{sha:head,ref:claim.branch,repo:{full_name:'owner/repo'}},
     base:{sha:base,ref:'main',repo:{full_name:'owner/repo'}}};
@@ -924,4 +925,179 @@ test('delivery finalizer satisfies actual append-only selected-data classifier a
   assert.deepEqual(await f.run(),{test_selection:'selected-data',expectations_path:prefix+'selected-delivery-expectations.json',shards:[0]});
   f.put('.github/package-inputs.json',{...definition,inputs:definition.inputs.toSorted()});
   assert.equal(await f.run(),null,'the same globally sorted input set must not pass the accepted-prefix classifier');
+});
+
+function ownedFixture({mutate = () => {}} = {}) {
+  const packetPrefix = 'coordination/engineering/retained-delivery/new-packet/';
+  const f = fixture({packetPrefix, mutate});
+  f.branch = 'engineering/rotated-delivery'; f.ownedPaths = ['coordination/engineering/retained-delivery/'];
+  f.reservation = {mode:'engineering', owned_paths:f.ownedPaths}; f.packetPrefix = packetPrefix;
+  f.run = (options = {}) => selectedDataSelection({api:f.api, repo:'owner/repo', branch:f.branch, files:f.files,
+    baseline:f.baseline, authored:f.authored, reservation:f.reservation, ...options});
+  return f;
+}
+test('retained nested delivery needs authenticated current issue scope through PR, prepare and cold final gates', async () => {
+  const f = ownedFixture();
+  assert.equal(selectedDataCandidate(f.branch, f.files), false);
+  assert.equal(selectedDataCandidate(f.branch, f.files, f.reservation), true);
+  assert.equal((await f.run()).test_selection, 'selected-data');
+  assert.equal((await gateFixture(ownedFixture()).select()).test_selection, 'selected-data');
+  const prepared = await prepareIntegration(mergeFixture({selectedFixture:ownedFixture()}).options);
+  assert.equal(prepared.test_selection, 'selected-data');
+  const final = mergeFixture({selectedFixture:ownedFixture()});
+  const result = await final.complete(); assert.equal(result.accepted, true); assert.equal(final.writes.length, 1);
+  assert(result.final_capacity.proof_calls > 10, 'cold selected metadata reads are capacity-planned');
+});
+for (const [name, change] of Object.entries({
+  'missing current scope':f => f.issue.body = f.issue.body.replace(/,"owned_paths":\[[^\]]*\]/, ''),
+  'expired claim':f => f.claim.expires_at = '2000-01-01T00:00:00Z',
+  'inactive claim':f => f.claim.active = false,
+  'wrong branch':f => f.claim.branch = 'engineering/other',
+  'wrong issue':f => f.claim.issue_number = 11,
+  'wrong lane':f => f.issue.labels[0] = 'type:geography',
+  'blocked issue':f => f.issue.labels.push('status:blocked'),
+})) test('retained selected metadata refuses ' + name, async () => {
+  const f = gateFixture(ownedFixture()); change(f);
+  if (name === 'missing current scope') assert.deepEqual(await f.select(), {profile:'full', shards:[0,1,2]});
+  else await assert.rejects(f.select());
+});
+for (const owned_paths of [['coordination/engineering/'], ['coordination/engineering/retained-delivery/../'],
+  ['coordination/engineering/other/'], ['coordination/engineering/retained-delivery/new-packet/registry.json']]) {
+  test('retained selected scope rejects unsafe/foreign/non-prefix ownership ' + owned_paths[0], async () => {
+    const f=ownedFixture(); assert.equal(await f.run({reservation:{mode:'engineering',owned_paths}}), null);
+  });
+}
+test('retained inert text stays ordinary, bounded, unconsumed and outside package inputs', async () => {
+  for (const name of ['README.md','CHECKPOINT.md','diagnostic.txt','refusals/stderr.txt']) {
+    const f=ownedFixture({mutate:f=>f.put('coordination/engineering/retained-delivery/new-packet/'+name,'retained text\n')});
+    assert.equal((await f.run()).test_selection,'selected-data');
+    f.definition.inputs.push(f.packetPrefix+name); f.put('.github/package-inputs.json',f.definition);
+    assert.equal(await f.run(),null);
+  }
+  for (const [name, raw] of [['CHECKPOINT.md','x\0y'],['diagnostic.txt',Buffer.from([0xff])],
+    ['README.md','x'.repeat(128*1024+1)],['requirements.txt','some-package'],['notes.md','unknown doc'],['code.mjs','export default 1']]) {
+    assert.equal(await ownedFixture({mutate:f=>f.put('coordination/engineering/retained-delivery/new-packet/'+name,raw)}).run(),null,name);
+  }
+});
+function templateFixture(change = () => {}) {
+  return ownedFixture({mutate:f=>{
+    const root='coordination/engineering/retained-delivery/new-packet/', directory=root+'prospective';
+    const expected={...f.expected, selected_ledger_sha256:null};
+    const config={version:1, registry:f.registry, ledger:f.leaf('composed-original-ledger.json'),
+      rebind:f.ledgerBody.current_rebind, new_prefix:root};
+    const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'
+      ? Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value;
+    const binding={phase:'package',config_sha256:digest(Buffer.from(JSON.stringify(canonical(config))+'\n'))};
+    const intent={version:1,stage:'package',binding,config};
+    const template=f.put(directory+'/selected-delivery-expectations.json',expected), roles=f.put(directory+'/package-roles.json',{version:1});
+    const descriptor=pin=>({bytes:pin.bytes,sha256:pin.sha256});
+    const receipt={version:1,binding,outputs:{'package-roles.json':descriptor(roles),'selected-delivery-expectations.json':descriptor(template)}};
+    f.put(directory+'.intent.json',intent); f.put(directory+'/preparation.json',receipt);
+    change({f,root,directory,expected,config,intent,receipt});
+  }});
+}
+test('one current-bound expectation disambiguates an exact unconsumed package template with preparation custody', async () => {
+  const f=templateFixture(), result=await f.run();
+  assert.equal(result.expectations_path,f.packetPrefix+'selected-delivery-expectations.json');
+  assert.equal((await gateFixture(templateFixture()).select()).test_selection,'selected-data');
+});
+for (const [name,change] of Object.entries({
+  'two authoritative candidates':({f,directory})=>f.put(directory+'/selected-delivery-expectations.json',f.expected),
+  'incorrect current ledger binding':({f,root})=>f.put(root+'selected-delivery-expectations.json',{...f.expected,selected_ledger_sha256:'f'.repeat(64)}),
+  'no authoritative candidate':({f,root})=>f.authored.entries.delete(root+'selected-delivery-expectations.json'),
+  'missing preparation intent':({f,directory})=>f.authored.entries.delete(directory+'.intent.json'),
+  'missing whole-file receipt':({f,directory})=>f.authored.entries.delete(directory+'/preparation.json'),
+  'template roster omission':({f,directory,expected})=>{expected.cohorts[0].members.pop();expected.cohorts[0].component_ids.pop();f.put(directory+'/selected-delivery-expectations.json',expected);},
+  'template authority substitution':({f,directory,intent})=>{intent.config.registry=f.leaf('foreign.json');f.put(directory+'.intent.json',intent);},
+  'template publication bytes drift':({f,directory,receipt})=>{receipt.outputs['selected-delivery-expectations.json'].bytes++;f.put(directory+'/preparation.json',receipt);},
+  'template becomes a package input':({f,directory})=>{f.definition.inputs.push(directory+'/selected-delivery-expectations.json');f.put('.github/package-inputs.json',f.definition);},
+})) test('prospective expectation disambiguation rejects '+name,async()=>assert.equal(await templateFixture(change).run(),null));
+
+function real1770() {
+  const fixed=JSON.parse(readFileSync(new URL('../coordination/engineering/selected-owned-scope-20261012/pr1770.json',import.meta.url)));
+  const baseline={object:{sha:fixed.base},entries:new Map(fixed.retained_tree_rows.map(row=>[row.path,{...row}]))};
+  const authored={object:{sha:fixed.head},entries:new Map(fixed.retained_tree_rows.map(row=>[row.path,{...row}]))};
+  for(const row of fixed.changed_rows) {
+    if(row.before)baseline.entries.set(row.filename,{...row.before});else baseline.entries.delete(row.filename);
+    authored.entries.set(row.filename,{...row.after});
+  }
+  const blobs=new Map(), reads=[],files=structuredClone(fixed.files);
+  const bytes=sha=>{
+    if(!blobs.has(sha))blobs.set(sha,execFileSync('git',['cat-file','blob',sha],{maxBuffer:32*1024*1024,
+      env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_TERMINAL_PROMPT:'0'}}));
+    return blobs.get(sha);
+  };
+  for(const row of fixed.snapshots) {
+    const raw=Buffer.from(row.body);assert.equal(raw.length,row.bytes);assert.equal(digest(raw),row.sha256);
+    assert.equal(createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex'),row.git_blob_oid);
+    blobs.set(row.git_blob_oid,raw);
+  }
+  const api=async route=>{
+    if(route.includes('/git/blobs/')){const sha=route.split('/').at(-1),raw=bytes(sha);reads.push(sha);return {sha,size:raw.length,encoding:'base64',content:raw.toString('base64')};}
+    if(route.includes('/compare/')) {assert(fixed.accepted_sources.some(row=>route.endsWith(row.commit+'...'+baseline.object.sha)));return {status:'ahead'};}
+    if(route.includes('/git/commits/')) {const row=fixed.accepted_sources.find(row=>route.endsWith('/'+row.commit));assert(row,route);return {sha:row.commit,tree:{sha:row.tree}};}
+    if(route.includes('/git/trees/')) {const row=fixed.accepted_sources.find(row=>route.endsWith('/'+row.tree+'?recursive=1'));assert(row,route);return {truncated:false,tree:[row.entry]};}
+    throw Error('Unexpected actual fixture route '+route);
+  };
+  const put=(name,value,old=false)=>{const raw=Buffer.from(typeof value==='string'?value:JSON.stringify(value)),sha=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
+    blobs.set(sha,raw);const row={path:name,mode:'100644',type:'blob',sha,size:raw.length};authored.entries.set(name,row);if(old)baseline.entries.set(name,row);
+    return {path:name,bytes:raw.length,sha256:digest(raw),mode:'100644',git_blob_oid:sha,commit:'a'.repeat(40)};};
+  const f={fixed,files,branch:fixed.branch,ownedPaths:fixed.owned_paths,reservation:{mode:'engineering',owned_paths:fixed.owned_paths},
+    sourceState:{},baseline,authored,blobs,reads,api,put,document:name=>JSON.parse(bytes(authored.entries.get(name).sha))};
+  f.run=(options={})=>selectedDataSelection({api:f.api,repo:'owner/repo',branch:f.branch,files:f.files,baseline,authored,reservation:f.reservation,...options});
+  return f;
+}
+test('complete original PR1770 192-path diff selects the uniquely bound finalized expectation without changing data', async () => {
+  const f=real1770(),stats={};
+  assert.equal(f.fixed.base,'ad300bd5ffa73c226e591f037980d67d40f6acf3');
+  assert.equal(f.fixed.head,'367d68214f8c88532949bf9d21539766491991ad');assert.equal(f.files.length,192);
+  assert.equal(selectedDataCandidate(f.branch,f.files),false);assert.equal(selectedDataCandidate(f.branch,f.files,f.reservation),true);
+  const result=await f.run({metadataBudgetBytes:24*1024*1024,metadataDiagnostics:stats});assert(result,JSON.stringify(stats));
+  assert.equal(result.expectations_path,'coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/advance-002/finalize/selected-delivery-expectations.json');
+  assert.equal(stats.read_count,164);assert.equal(stats.read_bytes,21503703);assert.equal(stats.peak_admitted_bytes,21050649);
+  for(const row of f.fixed.changed_rows)assert.deepEqual(f.authored.entries.get(row.filename),row.after);
+});
+test('actual PR1770 reaches authenticated author and cold queue proof with complete metadata planning', async () => {
+  assert.equal((await gateFixture(real1770()).select()).test_selection,'selected-data');
+  const prep=await prepareIntegration(mergeFixture({selectedFixture:real1770()}).options);assert.equal(prep.test_selection,'selected-data');
+  const final=mergeFixture({selectedFixture:real1770()}), result=await final.complete();
+  assert.equal(result.accepted,true);assert.equal(final.writes.length,1);assert(result.final_capacity.proof_calls>100);
+});
+for(const [label,mutate] of Object.entries({
+  'two authoritative expectations':f=>{const names=f.files.filter(row=>row.filename.endsWith('/selected-delivery-expectations.json')).map(row=>row.filename);const final=names.find(name=>f.document(name).selected_ledger_sha256);f.put(names.find(name=>name!==final),f.document(final));},
+  'incorrect current binding':f=>{const name=f.files.find(row=>row.filename.endsWith('/finalize/selected-delivery-expectations.json')).filename;f.put(name,{...f.document(name),selected_ledger_sha256:'f'.repeat(64)});},
+  'contradictory template roster':f=>{const name=f.files.find(row=>row.filename.endsWith('/package/selected-delivery-expectations.json')).filename,body=f.document(name);body.cohorts[0].members[0].target_id='wrong';f.put(name,body);},
+  'forged null-template provenance':f=>{const name=f.files.find(row=>row.filename.endsWith('/package.intent.json')).filename,body=f.document(name);body.config.registry.path='coordination/engineering/foreign/registry.json';f.put(name,body);},
+  'foreign ownership':f=>f.reservation.owned_paths=['coordination/engineering/foreign/'],
+  'consumed diagnostic text':f=>{const policy=f.document('.github/package-inputs.json');policy.inputs.push(f.files.find(row=>row.filename.endsWith('/stderr.txt')).filename);f.put('.github/package-inputs.json',policy);},
+  'native-path alias drift':f=>{const file=f.files.find(row=>row.filename.endsWith('.bin.gz')),old=file.filename,next=old.replace(/runs-\d+/, 'rows-1');const row=f.authored.entries.get(old);f.authored.entries.delete(old);file.filename=next;f.authored.entries.set(next,{...row,path:next});},
+  'unknown executable':f=>{const filename='coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/extra.mjs';f.put(filename,'export default 1');f.files.push({filename,status:'added'});},
+}))test('actual PR1770 retains full fallback for '+label,async()=>{const f=real1770();mutate(f);assert.equal(await f.run(),null);});
+
+test('coherently rebound prospective custody still cannot substitute consumed roles or original cohort labels', async () => {
+  for(const field of ['registry','ledger','rebind','new_prefix','cohort']) {
+    const f=templateFixture(({f,directory,expected,intent,receipt})=>{
+      if(field==='cohort') {expected.cohorts[0].original_batch_id='foreign batch';const pin=f.put(directory+'/selected-delivery-expectations.json',expected);
+        receipt.outputs['selected-delivery-expectations.json']={bytes:pin.bytes,sha256:pin.sha256};}
+      else if(field==='new_prefix')intent.config.new_prefix='coordination/';
+      else intent.config[field]=f.leaf('foreign-role.json');
+      const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'
+        ? Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value;
+      intent.binding.config_sha256=digest(Buffer.from(JSON.stringify(canonical(intent.config))+'\n'));
+      receipt.binding={...intent.binding};f.put(directory+'.intent.json',intent);f.put(directory+'/preparation.json',receipt);
+    });
+    assert.equal(await f.run(),null,field);
+  }
+});
+test('retained native basename alias drift fails fixed manifest custody after all outer pins are rebound', async () => {
+  const f=fixedDeliveryFixture({leanPackage:true});
+  const reservation={mode:'engineering',owned_paths:['coordination/engineering/congo-ago2018-delivery-20261011/']};
+  rewriteFixedNative(f,request=>{
+    const part=request.additive.owner_parts.find(p=>p.path.includes('/congo-ago2018-'));
+    const input=request.additive.inputs.find(p=>p.path===part.path), old=part.path, name=old.replace(/\/(rows|runs)-\d+\.bin\.gz$/, '/runs-1.bin.gz');
+    const row=f.authored.entries.get(old);f.authored.entries.set(name,{...row,path:name});
+    f.files.push({filename:name,status:'added'});input.path=part.path=name;
+  });
+  const stats={};assert.equal(await f.run({reservation,metadataDiagnostics:stats}),null);
+  assert.equal(stats.failure,'Selected-data: native operand identities differ');
 });

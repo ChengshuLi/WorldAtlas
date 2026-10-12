@@ -18,6 +18,14 @@ export const COORDINATION_PATHS = new Set([
     'evidence-quality','premerge-evidence','trusted-workflow-checkouts','merge-integration',
     'merge-integration-client','merge-integration-entrypoint','integration-proof'].map(name=>`test/${name}.test.mjs`)
 ]);
+// Callers supply the current linked issue's scope only after exact-branch claim
+// validation. Candidate metadata is never an ownership source.
+function engineeringOwnedScopes(reservation) {
+  return reservation.mode === 'engineering' && Array.isArray(reservation.owned_paths)
+    ? reservation.owned_paths.filter(prefix => typeof prefix === 'string' &&
+      /^coordination\/engineering\/[^/]+\/(?:[^/]+\/)*$/.test(prefix) &&
+      prefix.slice(0, -1).split('/').every(part => /^[a-zA-Z0-9_.-]+$/.test(part) && part !== '.' && part !== '..')) : [];
+}
 export function integrationProfile(branch, files, reservation = {}) {
   const names = files.flatMap(file => [file.filename, ...(file.previous_filename ? [file.previous_filename] : [])]);
   if (!names.length) return 'full';
@@ -31,10 +39,7 @@ export function integrationProfile(branch, files, reservation = {}) {
     if (names.every(legacy)) return 'evidence';
     // A verified retained scope permits new packets, not edits to its existing
     // methods. Keep the original branch-matched policy above unchanged.
-    const scopes = reservation.mode === 'engineering' && Array.isArray(reservation.owned_paths)
-      ? reservation.owned_paths.filter(prefix => typeof prefix === 'string' &&
-        /^coordination\/engineering\/[^/]+\/(?:[^/]+\/)*$/.test(prefix) &&
-        prefix.slice(0, -1).split('/').every(part => /^[a-zA-Z0-9_.-]+$/.test(part) && part !== '.' && part !== '..')) : [];
+    const scopes = engineeringOwnedScopes(reservation);
     if (!scopes.length) return 'full';
     let definition;
     try { definition = loadPackageInputs(); } catch { return 'full'; }
@@ -139,15 +144,28 @@ export function validateSelectedExpectations(expected, ledger, ledgerHash, previ
   return expected;
 }
 
+const branchScope = branch => `coordination/engineering/${branch.slice('engineering/'.length)}/`;
+const inScope = (name, scopes) => scopes.some(prefix => name.startsWith(prefix));
+function supportingText(name, branch, reservation) {
+  return name === branchScope(branch) + 'README.md' ||
+    inScope(name, engineeringOwnedScopes(reservation)) &&
+      (/\/(?:README|CHECKPOINT)\.md$/.test(name) || name.endsWith('.txt') &&
+        !/\/(?:requirements|constraints)(?:[.-].*)?\.txt$/i.test(name));
+}
+function nativeOperandPath(name, branch, reservation) {
+  return /^(?:rows|runs)-[0-9]+\.bin\.gz$/.test(name.split('/').at(-1)) &&
+    (name === branchScope(branch) + 'native-operands/' + name.split('/').at(-1) ||
+      inScope(name, engineeringOwnedScopes(reservation)));
+}
 // Fast prefilter avoids any extra tree/blob requests for ordinary code PRs.
-export function selectedDataCandidate(branch, files) {
-  const owned = `coordination/engineering/${branch.slice('engineering/'.length)}/`;
+export function selectedDataCandidate(branch, files, reservation = {}) {
+  const scopes = [branchScope(branch), ...engineeringOwnedScopes(reservation)];
   return branch.startsWith('engineering/') && files.length > 1 && files.length <= 1024 &&
     files.some(file => file.filename === SELECTION && file.status === 'modified') &&
     files.every(file => !file.previous_filename && ([SELECTION, PACKAGE_INPUT_FILE, ADMINISTRATIVE_REGISTRY].includes(file.filename)
-      ? file.status === 'modified' : file.status === 'added' && file.filename.startsWith(owned) && safe(file.filename) &&
-        (/\.(?:json|jsonl\.gz|json\.gz|log)$/.test(file.filename) || file.filename === owned + 'README.md' ||
-          new RegExp('^' + owned + 'native-operands/(?:rows|runs)-[0-9]+\\.bin\\.gz$').test(file.filename)) &&
+      ? file.status === 'modified' : file.status === 'added' && inScope(file.filename, scopes) && safe(file.filename) &&
+        (/\.(?:json|jsonl\.gz|json\.gz|log)$/.test(file.filename) || supportingText(file.filename, branch, reservation) ||
+          nativeOperandPath(file.filename, branch, reservation)) &&
         !/(?:^|\/)(?:package(?:-lock)?|tsconfig|jsconfig|binding|deno|composer)\.json$/.test(file.filename)));
 }
 export async function integrationTree(api, repo, commit) {
@@ -162,8 +180,8 @@ export async function integrationTree(api, repo, commit) {
 // input/config/code pin objects. Existing package/readback/geography do the full
 // source, method, decoded-body, current-neighbor and no-loss validation.
 export async function selectedDataSelection({api, repo, branch, files, baseline, authored, base, head,
-  metadataBudgetBytes, metadataDiagnostics}) {
-  if (!selectedDataCandidate(branch, files)) return null;
+  metadataBudgetBytes, metadataDiagnostics, reservation = {}}) {
+  if (!selectedDataCandidate(branch, files, reservation)) return null;
   const diagnostics = metadataDiagnostics ?? {};
   Object.assign(diagnostics, {read_count: 0, read_bytes: 0, retained_bytes: 0, retained_count: 0,
     transient_read_count: 0, transient_read_bytes: 0, decoded_bytes: 0, peak_admitted_bytes: 0});
@@ -188,7 +206,8 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     needSelected(files.every(file => ordinary(authored.entries.get(file.filename))) &&
       [...added].every(name => !baseline.entries.has(name)), 'nonordinary or overwritten data');
     const expectedPaths = [...added].filter(name => name.endsWith('/selected-delivery-expectations.json'));
-    needSelected(expectedPaths.length === 1, 'one reviewed expectations file required');
+    needSelected(expectedPaths.length > 0, 'one reviewed expectations file required');
+    let expectationsPath;
     const cache = new Map();
     const readRow = async (row, retain = true) => {
       needSelected(ordinary(row), 'missing ordinary role');
@@ -353,11 +372,10 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         const input = unique(spec.inputs, row => row.path === part.path, 'native operand input');
         const descriptor = unique(manifest.parts, row => row.path === part.manifest_path, 'native manifest part');
         const inverse = part.containing_inverse, member = unique(index.files, row => row.path === descriptor.path, 'native bank member');
-        const owned = `coordination/engineering/${branch.slice('engineering/'.length)}/native-operands/`;
         needSelected(['rows','runs'].includes(descriptor.kind) && descriptor.encoding === 'byte-shuffle' &&
           Number.isSafeInteger(descriptor.offset) && descriptor.offset >= 0 && Number.isSafeInteger(descriptor.words) && descriptor.words > 0 &&
           descriptor.path === `native-v1/ownership/${descriptor.kind}-${descriptor.offset}.bin.gz` &&
-          part.path === owned + descriptor.path.split('/').at(-1) && input.mode === '100644' &&
+          nativeOperandPath(part.path, branch, reservation) && part.path.split('/').at(-1) === descriptor.path.split('/').at(-1) && input.mode === '100644' &&
           same(part.manifest_descriptor, descriptor) && same(inverse?.manifest_descriptor, descriptor) &&
           inverse.logical_path === manifestRoot + descriptor.path && same(inverse.bank_member, member) &&
           ['bytes','sha256'].every(key => input[key] === descriptor[key] && member[key] === descriptor[key]) &&
@@ -501,12 +519,29 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     const oldSide = parseJSON(oldSideBytes), oldRegistryPin = oldSide.authority_registry;
     const oldLedgerPin = oldSide.logical_asset_map?.ledger, oldLedgerBytes = await read(oldLedgerPin?.path, baseline);
     needSelected(oldLedgerBytes.length === oldLedgerPin.bytes && sha256(oldLedgerBytes) === oldLedgerPin.sha256, 'preceding ledger differs');
-    validateSelectedExpectations(await json(expectedPaths[0]), ledger, sidecar.logical_asset_map.ledger.sha256, parseJSON(oldLedgerBytes));
+    const templates = [];
+    for (const name of expectedPaths) {
+      const expected = await json(name);
+      if (expected.selected_ledger_sha256 === null) {
+        // A prospective package projection is not the authoritative smoke input.
+        // Its complete roster must still agree, and its fixed preparation custody
+        // is checked below against the actually consumed original/current roles.
+        validateSelectedExpectations({...expected, selected_ledger_sha256: sidecar.logical_asset_map.ledger.sha256},
+          ledger, sidecar.logical_asset_map.ledger.sha256, parseJSON(oldLedgerBytes));
+        templates.push(name);
+      } else {
+        validateSelectedExpectations(expected, ledger, sidecar.logical_asset_map.ledger.sha256, parseJSON(oldLedgerBytes));
+        needSelected(!expectationsPath, 'multiple authoritative expectations');
+        expectationsPath = name;
+      }
+    }
+    needSelected(expectationsPath, 'one reviewed expectations file required');
     const oldRegistryBytes = await read(oldRegistryPin.path, baseline);
     needSelected(oldRegistryBytes.length === oldRegistryPin.bytes && sha256(oldRegistryBytes) === oldRegistryPin.sha256, 'preceding registry differs');
     const oldRegistry = parseJSON(oldRegistryBytes);
     needSelected(Array.isArray(oldRegistry.entries) && oldRegistry.entries.every(old =>
       registry.entries.filter(entry => same(entry, old)).length === 1), 'existing authority changed or disappeared');
+    let originalLedger;
     const operating = async (value, current = false) => {
       pin(value);
       if (!added.has(value.path)) return;
@@ -519,6 +554,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         ['path','mode','bytes','sha256','git_blob_oid'].every(key => plan.original_inputs[0]?.[key] === sidecar.authority_registry[key]) &&
         plan.original_inputs[1].path?.endsWith('/composed-original-ledger.json'), 'unsupported original data inputs');
       pin(plan.original_inputs[1]);
+      originalLedger = plan.original_inputs[1];
     };
     for (const entry of registry.entries) {
       needSelected(keys(entry, ['authority_sha256','policy_id','policy_version','rule_preimage','rule_sha256','source_authority']), 'foreign registry fields');
@@ -563,17 +599,48 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       'unsupported current rebind');
     for (const role of ['request','facts','publication','result']) pin(certificate[role]);
     await operating(certificate.operating, true);
+    for (const name of templates) {
+      // The existing package producer's null template has an exact intent and
+      // whole-file publication binding. It cannot grant a package/reader role.
+      const directory = name.slice(0, name.lastIndexOf('/'));
+      const intentPath = directory + '.intent.json', receiptPath = directory + '/preparation.json';
+      needSelected([name, intentPath, receiptPath].every(path => added.has(path) &&
+        inScope(path, engineeringOwnedScopes(reservation)) && !reachable.has(path) && !packageAdditions.includes(path)),
+        'unbound prospective expectations');
+      const template = await json(name), finalized = await json(expectationsPath);
+      needSelected(same({...template, selected_ledger_sha256: finalized.selected_ledger_sha256}, finalized),
+        'prospective and finalized expectations differ');
+      const intent = await json(intentPath), receipt = await json(receiptPath), config = intent.config;
+      const canonical = value => Array.isArray(value) ? value.map(canonical) : value && typeof value === 'object'
+        ? Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])])) : value;
+      const binding = {phase: 'package', config_sha256: sha256(Buffer.from(JSON.stringify(canonical(config)) + '\n'))};
+      needSelected(keys(intent, ['version','stage','binding','config']) && intent.version === 1 && intent.stage === 'package' &&
+        keys(config, ['version','registry','ledger','rebind','new_prefix']) && config.version === 1 &&
+        same(config.registry, sidecar.authority_registry) && same(config.ledger, originalLedger) &&
+        same(config.rebind, ledger.current_rebind) && typeof config.new_prefix === 'string' &&
+        config.new_prefix.endsWith('/') && safe(config.new_prefix.slice(0, -1)) &&
+        inScope(config.new_prefix, engineeringOwnedScopes(reservation)) && name.startsWith(config.new_prefix) &&
+        same(intent.binding, binding) && keys(receipt, ['version','binding','outputs']) && receipt.version === 1 &&
+        same(receipt.binding, binding) && keys(receipt.outputs, ['package-roles.json','selected-delivery-expectations.json']),
+        'prospective expectations preparation differs');
+      for (const [filename, descriptor] of Object.entries(receipt.outputs)) {
+        const member = directory + '/' + filename;
+        needSelected(added.has(member) && keys(descriptor, ['bytes','sha256']), 'missing prospective preparation member');
+        const bytes = await read(member);
+        needSelected(descriptor.bytes === bytes.length && descriptor.sha256 === sha256(bytes), 'prospective preparation bytes differ');
+      }
+    }
     const manifest = `coordination/engineering/${branch.slice('engineering/'.length)}/evidence-quality.json`;
     for (const name of added) {
-      if (name === `coordination/engineering/${branch.slice('engineering/'.length)}/README.md`) {
+      if (supportingText(name, branch, reservation)) {
         needSelected(!reachable.has(name) && !sourceDeclarations.has(name) &&
-          !packagePathRequired(name, validatePackageInputs(await json(PACKAGE_INPUT_FILE))), 'README is a consumed role');
-        needSelected(authored.entries.get(name).size <= 128 * 1024, 'nontext packet README');
+          !packagePathRequired(name, validatePackageInputs(await json(PACKAGE_INPUT_FILE))), 'supporting text is a consumed role');
+        needSelected(authored.entries.get(name).size <= 128 * 1024, 'nontext packet documentation');
         const bytes = await read(name, authored, false);
-        needSelected(bytes.length <= 128 * 1024 && !bytes.includes(0) && Buffer.from(bytes.toString('utf8')).equals(bytes), 'nontext packet README');
+        needSelected(bytes.length <= 128 * 1024 && !bytes.includes(0) && Buffer.from(bytes.toString('utf8')).equals(bytes), 'nontext packet documentation');
         continue;
       }
-      if (reachable.has(name) || name === expectedPaths[0] || name === manifest) continue;
+      if (reachable.has(name) || name === expectationsPath || name === manifest) continue;
       // Non-consumed supporting evidence cannot become package input. It must
       // still be ordinary inert JSON/text, never a module, configuration or opaque archive.
       // Validate syntax, then discard it: arbitrary preparation records confer no
@@ -614,7 +681,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     }
     needSelected(packageAdditions.every(name => added.has(name) && reachable.has(name) || sourceDeclarations.has(name)),
       'package change is not append-only exact reachable data');
-    return {test_selection: 'selected-data', expectations_path: expectedPaths[0], shards: [0]};
+    return {test_selection: 'selected-data', expectations_path: expectationsPath, shards: [0]};
   } catch (error) {
     diagnostics.failure = typeof error?.message === 'string' && error.message.startsWith('Selected-data: ') ? error.message : 'Invalid or unavailable selected metadata';
     if (error?.planningNeeded) throw error; // Preserve the existing bounded capacity-planning retry.

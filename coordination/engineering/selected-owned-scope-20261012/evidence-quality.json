@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "issue": 1772,
+  "lane": "engineering",
+  "worker_id": "01a12e93-a7cb-708b-a96e-94be9924e03e",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "ad300bd5ffa73c226e591f037980d67d40f6acf3",
+    "files": [
+      {
+        "path": "scripts/integration-profile.mjs",
+        "bytes": 50315,
+        "sha256": "45255150c5cd1b73d6d15fc6186b29cfb96e959f1bac7e017cbdb4b00cfc47c8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/prepare-delivery-handoff.mjs",
+        "bytes": 58122,
+        "sha256": "76a92ad67808b2fc1a780688ebd2863b785ece98ed8542a26b949dd03dc27487",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/selected-owned-scope-20261012/pr1770.json",
+      "bytes": 412812,
+      "sha256": "5c1fce6d1fcfc3486bbb0c7801dec47a497e3d9bfce35974dc776874d0f00b99",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-owned-scope-20261012/actual-diff.json",
+      "bytes": 897,
+      "sha256": "53ee9f5d1dead6737f7356c3ba0eeadbffddbf427020cbb11aa8c239cf9e791a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-owned-scope-20261012/focused-tests.log",
+      "bytes": 36629,
+      "sha256": "a309c0facab72ad9112ec0a0eff95e854d87d246c738c5763214a3e513b2f955",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "authenticated-selected-owned-scope",
+      "kind": "code",
+      "description": "Reuse current issue/exact-claim authenticated retained ownership across selected-data callers and durable review preparation. Preserve fixed selected/native/SOURCE identities, strict inert supporting text, exactly one finalized expectation and null-template preparation bindings, original resource/schema limits and conservative full fallback. Actual complete original PR1770 metadata replay and positive/adverse caller tests establish structural eligibility only; no scientific execution, repair credit, hosted timing, deployment or publication claim.",
+      "software": "Node.js 24; Git",
+      "units": "whole immutable bytes, exact roles and caller assertions"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/selected-data-profile.test.mjs test/delivery-handoff.test.mjs test/pr-gates.test.mjs test/integration-proof.test.mjs test/merge-integration.test.mjs test/delivery-handoff-advance.test.mjs"
+  ],
+  "metric_bindings": []
+}
