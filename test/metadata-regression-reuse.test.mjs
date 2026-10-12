@@ -53,6 +53,20 @@ function fixture() {
   return f;
 }
 
+test('trusted program catalogue authenticates exact ordinary bounded Git blob bytes',async()=>{
+  const f=fixture(),args={api:f.api,repo:f.repo,trusted:f.trusted};
+  assert.deepEqual(await readMetadataRegressionCatalogue(args),f.catalogue);
+  for(const change of [entry=>{entry.mode='120000';},entry=>{entry.type='tree';},entry=>{entry.size=65537;},entry=>{entry.size=0;}]){
+    const g=fixture();change(g.trusted.entries.get(METADATA_PROGRAMS));
+    await assert.rejects(readMetadataRegressionCatalogue({api:g.api,repo:g.repo,trusted:g.trusted}),/catalogue-unavailable/);
+  }
+  for(const change of [body=>{body.sha='0'.repeat(40);},body=>{body.encoding='utf8';},body=>{body.size++;},
+    body=>{body.content=Buffer.from('altered catalogue').toString('base64');}]){
+    const api=async route=>{const body=await f.api(route);change(body);return body;};
+    await assert.rejects(readMetadataRegressionCatalogue({...args,api}),/catalogue-(?:body-unavailable|integrity)/);
+  }
+});
+
 test('actual scope-failed original full jobs remain successful computation with original immutable identities',()=>{
   const pin={run:RUN,attempt:1,head:P};assert.equal(actualJobs.find(j=>j.name==='scope').conclusion,'failure');
   assert.equal(originalFullRegressionJobs(actualJobs,pin).length,5);
