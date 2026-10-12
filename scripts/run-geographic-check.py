@@ -587,8 +587,22 @@ def selected_continuous(repo, baseline, candidate, detector):
         # complete encoded+decoded operands and retained output/code allowance.
         runtime_bytes = pathlib.Path(sys.executable).resolve().stat().st_size
         code_bytes = sum((repo / name).stat().st_size for name in TRUSTED_PATHS)
-        if total + runtime_bytes + code_bytes + 2 * MAX_BYTES > 256 * 1024 * 1024:
-            raise ValueError('Complete selected polygon consumer phase exceeds prospective cap')
+        # Re-observe current resources after the Node operand child has exited.
+        # Reuse the trusted reader's OS/cgroup-aware admission instead of an
+        # unrelated fixed historical phase ceiling. No candidate code is loaded.
+        allowance_raw = subprocess.check_output([
+            executable, '--input-type=module', '-e',
+            'const {processingAllowance}=await import(process.argv[1]);process.stdout.write(JSON.stringify(processingAllowance()));',
+            (repo / 'scripts/check-effective-geographic-regression.mjs').resolve().as_uri()],
+            env=env, timeout=30)
+        if len(allowance_raw) > 4096:
+            raise ValueError('Oversized current reader allowance')
+        allowance = json.loads(allowance_raw)
+        phase_limit = allowance.get('phaseBytes')
+        if type(phase_limit) is not int or not 0 < phase_limit <= 9007199254740991:
+            raise ValueError('Invalid current polygon consumer allowance')
+        if total + runtime_bytes + code_bytes + 2 * MAX_BYTES > phase_limit:
+            raise ValueError('Complete selected polygon consumer phase exceeds current allowance')
         bodies = []
         for name, pin in zip(names, pins):
             body = (destination / name).read_bytes()
@@ -1212,6 +1226,25 @@ def run_applicability_collector(command, env, timeout=120):
     return subprocess.CompletedProcess(command, child.returncode, stdout, stderr)
 
 
+def applicability_decline(reason, collector_reason=None):
+    # Emit only fixed reason/operation categories, never child stderr, raw error
+    # text, locators, environment values or candidate-supplied metadata.
+    diagnostic = {'status': 'full-check-required', 'reason': reason}
+    if isinstance(collector_reason, str):
+        category, _, operation = collector_reason.partition(':')
+        if category in {'immutable-object-unavailable', 'missing-strict-historical-commit',
+                        'outside-source-publication-scope', 'source-scope-merge-base-unavailable',
+                        'routing-strict-origin-acquisition-failed', 'routing-strict-graph-growth-limit',
+                        'routing-strict-fetch-imported-blobs', 'invalid-routing-metadata',
+                        'unsupported-reader-profile', 'identity-entry-limit', 'metadata-byte-limit'}:
+            diagnostic['collector_reason'] = category
+        if category == 'immutable-object-unavailable' and operation.split(':')[0] in {
+                'merge-base', 'ls-tree', 'cat-file', 'diff-tree', 'rev-parse'}:
+            diagnostic['operation'] = operation.split(':')[0]
+    print(json.dumps({'geography_applicability': diagnostic}), file=sys.stderr, flush=True)
+    return None
+
+
 def unchanged_selected_inputs(repo, baseline, candidate):
     """Bounded applicability only; incomplete identity discovery keeps full checks."""
     if baseline == candidate:
@@ -1224,19 +1257,26 @@ def unchanged_selected_inputs(repo, baseline, candidate):
         result = run_applicability_collector([
             env.get('NODE', 'node'), str(repo / 'scripts/check-unchanged-selected-geography.mjs'),
             str(repo), baseline, candidate], env)
-        if result.returncode or len(result.stdout) > 2 * 1024 * 1024:
-            return None
+        if result.returncode:
+            return applicability_decline('collector-process-failed')
+        if len(result.stdout) > 2 * 1024 * 1024:
+            return applicability_decline('collector-output-limit')
         proof = json.loads(result.stdout)
         if (not isinstance(proof, dict) or proof.get('version') != 1
-                or proof.get('status') != 'unchanged-selected-inputs'
                 or proof.get('baseline_commit') != baseline
                 or proof.get('candidate_commit') != candidate
                 or proof.get('trusted_reader_policy_commit') != baseline
                 or proof.get('candidate_code_executed') is not False):
-            return None
+            return applicability_decline('collector-binding-invalid')
+        if proof.get('status') != 'unchanged-selected-inputs':
+            return applicability_decline('collector-declined', proof.get('reason'))
         return proof
-    except (OSError, ValueError, subprocess.TimeoutExpired):
-        return None
+    except subprocess.TimeoutExpired:
+        return applicability_decline('collector-timeout')
+    except OSError:
+        return applicability_decline('collector-unavailable')
+    except ValueError:
+        return applicability_decline('collector-output-invalid')
 
 
 def inspect(repo, baseline, candidate, *, prefetch=False):

@@ -1,0 +1,72 @@
+✖ selected assembly reuses its privately authenticated source view without duplicate acquisition (306.083635ms)
+✖ selected assembly refuses an unauthenticated snapshot before any source acquisition (265.784573ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 709.312122
+
+✖ failing tests:
+
+test at test/selected-continuous-lifecycle.test.mjs:225:1
+✖ selected assembly reuses its privately authenticated source view without duplicate acquisition (306.083635ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /Require actual selected Arctic successor/. Input:
+  
+  'AssertionError [ERR_ASSERTION]: Duplicate selected source acquisition'
+  
+      at TestContext.<anonymous> (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/test/selected-continuous-lifecycle.test.mjs:235:11)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: AssertionError [ERR_ASSERTION]: Duplicate selected source acquisition
+        at reader.read (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/test/selected-continuous-lifecycle.test.mjs:230:49)
+        at ImmutableReader.json (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/scripts/check-effective-geographic-regression.mjs:95:45)
+        at new SelectedGeometrySources (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/scripts/check-effective-geographic-regression.mjs:184:29)
+        at assembleSupportedActivation (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/coordination/engineering/additive-native-activation-20261009/assemble-supported-activation.mjs:18:18)
+        at file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/test/selected-continuous-lifecycle.test.mjs:235:22
+        at getActual (node:assert:611:5)
+        at strict.throws (node:assert:759:24)
+        at TestContext.<anonymous> (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/test/selected-continuous-lifecycle.test.mjs:235:11)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1382:25),
+    expected: /Require actual selected Arctic successor/,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at test/selected-continuous-lifecycle.test.mjs:243:1
+✖ selected assembly refuses an unauthenticated snapshot before any source acquisition (265.784573ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /Require unchanged privately authenticated selected base/. Input:
+  
+  'Error: Require authenticated selected snapshot'
+  
+      at TestContext.<anonymous> (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/test/selected-continuous-lifecycle.test.mjs:250:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: Require authenticated selected snapshot
+        at demand (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/scripts/check-effective-geographic-regression.mjs:13:34)
+        at new SelectedGeometrySources (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/scripts/check-effective-geographic-regression.mjs:177:5)
+        at assembleSupportedActivation (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/coordination/engineering/additive-native-activation-20261009/assemble-supported-activation.mjs:18:18)
+        at file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/test/selected-continuous-lifecycle.test.mjs:250:23
+        at getActual (node:assert:611:5)
+        at strict.throws (node:assert:759:24)
+        at TestContext.<anonymous> (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/test/selected-continuous-lifecycle.test.mjs:250:12)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1382:25)
+        at Test.processPendingSubtests (node:internal/test_runner/test:960:18),
+    expected: /Require unchanged privately authenticated selected base/,
+    operator: 'throws',
+    diff: 'simple'
+  }

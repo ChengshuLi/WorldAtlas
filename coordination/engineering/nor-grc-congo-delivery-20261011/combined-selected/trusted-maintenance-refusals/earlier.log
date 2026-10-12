@@ -1,0 +1,491 @@
+﻿2026-10-11T23:23:46.6157463Z Current runner version: '2.337.0'
+2026-10-11T23:23:46.6179864Z ##[group]Runner Image Provisioner
+2026-10-11T23:23:46.6180460Z Hosted Compute Agent
+2026-10-11T23:23:46.6180841Z Version: 20261002.596
+2026-10-11T23:23:46.6181282Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+2026-10-11T23:23:46.6181740Z Build Date: 2026-10-02T22:28:27Z
+2026-10-11T23:23:46.6182195Z Worker ID: {331112ff-1f1d-48e1-951c-deca1ae1e978}
+2026-10-11T23:23:46.6182686Z Region: centralus
+2026-10-11T23:23:46.6183073Z Cloud: Azure
+2026-10-11T23:23:46.6183457Z ##[endgroup]
+2026-10-11T23:23:46.6184290Z ##[group]Operating System
+2026-10-11T23:23:46.6184694Z Ubuntu
+2026-10-11T23:23:46.6185081Z 24.04.5
+2026-10-11T23:23:46.6185411Z LTS
+2026-10-11T23:23:46.6185916Z ##[endgroup]
+2026-10-11T23:23:46.6186276Z ##[group]Runner Image
+2026-10-11T23:23:46.6186712Z Image: ubuntu-24.04
+2026-10-11T23:23:46.6187139Z Version: 20261004.327.1
+2026-10-11T23:23:46.6187942Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-11T23:23:46.6188899Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+2026-10-11T23:23:46.6189519Z ##[endgroup]
+2026-10-11T23:23:46.6190386Z ##[group]GITHUB_TOKEN Permissions
+2026-10-11T23:23:46.6191706Z Contents: read
+2026-10-11T23:23:46.6192136Z Issues: read
+2026-10-11T23:23:46.6192521Z Metadata: read
+2026-10-11T23:23:46.6192909Z PullRequests: read
+2026-10-11T23:23:46.6193289Z ##[endgroup]
+2026-10-11T23:23:46.6194777Z Secret source: Actions
+2026-10-11T23:23:46.6195410Z Cache mode: write
+2026-10-11T23:23:46.6196014Z Prepare workflow directory
+2026-10-11T23:23:46.6465052Z Prepare all required actions
+2026-10-11T23:23:46.6516413Z Getting action download info
+2026-10-11T23:23:46.8817077Z Download action repository 'actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+2026-10-11T23:23:46.9749094Z Download action repository 'actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38' (SHA:249970729cb0ef3589644e2896645e5dc5ba9c38)
+2026-10-11T23:23:47.2166457Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-10-11T23:23:47.3029464Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-10-11T23:23:47.5421121Z Complete job name: geography
+2026-10-11T23:23:47.5918705Z ##[group]Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+2026-10-11T23:23:47.5919277Z with:
+2026-10-11T23:23:47.5919570Z   ref: 1098d766a9f5f90f04bdf5bbefc3f0cf8d5c7629
+2026-10-11T23:23:47.5919941Z   persist-credentials: false
+2026-10-11T23:23:47.5920530Z   sparse-checkout: scripts
+src
+.github
+coordination/engineering/selected-geography-effective-prevention-20261009
+
+2026-10-11T23:23:47.5921157Z   repository: ChengshuLi/WorldAtlas
+2026-10-11T23:23:47.5923560Z   token: ***
+2026-10-11T23:23:47.5923821Z   ssh-strict: true
+2026-10-11T23:23:47.5924126Z   ssh-user: git
+2026-10-11T23:23:47.5924396Z   clean: true
+2026-10-11T23:23:47.5924667Z   sparse-checkout-cone-mode: true
+2026-10-11T23:23:47.5924983Z   fetch-depth: 1
+2026-10-11T23:23:47.5925248Z   fetch-tags: false
+2026-10-11T23:23:47.5925790Z   show-progress: true
+2026-10-11T23:23:47.5926075Z   lfs: false
+2026-10-11T23:23:47.5926328Z   submodules: false
+2026-10-11T23:23:47.5926788Z   set-safe-directory: true
+2026-10-11T23:23:47.5927136Z   allow-unsafe-pr-checkout: false
+2026-10-11T23:23:47.5927570Z ##[endgroup]
+2026-10-11T23:23:47.6723199Z Syncing repository: ChengshuLi/WorldAtlas
+2026-10-11T23:23:47.6725361Z ##[group]Getting Git version info
+2026-10-11T23:23:47.6726274Z Working directory is '/home/runner/work/WorldAtlas/WorldAtlas'
+2026-10-11T23:23:47.6727404Z [command]/usr/bin/git version
+2026-10-11T23:23:47.6804335Z git version 2.55.0
+2026-10-11T23:23:47.6816085Z ##[endgroup]
+2026-10-11T23:23:47.6828937Z Temporarily overriding HOME='/home/runner/work/_temp/73ed7ece-968c-43b6-b456-2e28ee41fcb1' before making global git config changes
+2026-10-11T23:23:47.6830728Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-11T23:23:47.6833444Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/WorldAtlas/WorldAtlas
+2026-10-11T23:23:47.6879017Z Deleting the contents of '/home/runner/work/WorldAtlas/WorldAtlas'
+2026-10-11T23:23:47.6908092Z ##[group]Determining repository object format
+2026-10-11T23:23:47.6909651Z ##[endgroup]
+2026-10-11T23:23:47.6910097Z ##[group]Initializing the repository
+2026-10-11T23:23:47.6913126Z [command]/usr/bin/git init /home/runner/work/WorldAtlas/WorldAtlas
+2026-10-11T23:23:47.6995404Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-11T23:23:47.6996975Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-11T23:23:47.6998133Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-11T23:23:47.6998991Z hint: call:
+2026-10-11T23:23:47.6999448Z hint:
+2026-10-11T23:23:47.6999966Z hint: 	git config --global init.defaultBranch <name>
+2026-10-11T23:23:47.7000424Z hint:
+2026-10-11T23:23:47.7000773Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-11T23:23:47.7001331Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-11T23:23:47.7001773Z hint:
+2026-10-11T23:23:47.7002040Z hint: 	git branch -m <name>
+2026-10-11T23:23:47.7002327Z hint:
+2026-10-11T23:23:47.7002702Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-11T23:23:47.7003334Z Initialized empty Git repository in /home/runner/work/WorldAtlas/WorldAtlas/.git/
+2026-10-11T23:23:47.7005731Z [command]/usr/bin/git remote add origin https://github.com/ChengshuLi/WorldAtlas
+2026-10-11T23:23:47.7070793Z ##[endgroup]
+2026-10-11T23:23:47.7071700Z ##[group]Disabling automatic garbage collection
+2026-10-11T23:23:47.7072437Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-11T23:23:47.7105312Z ##[endgroup]
+2026-10-11T23:23:47.7106613Z ##[group]Setting up auth
+2026-10-11T23:23:47.7107288Z Removing SSH command configuration
+2026-10-11T23:23:47.7114498Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-11T23:23:47.7152288Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-11T23:23:47.7469393Z Removing HTTP extra header
+2026-10-11T23:23:47.7470226Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-11T23:23:47.7472468Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-11T23:23:47.7661350Z Removing includeIf entries pointing to credentials config files
+2026-10-11T23:23:47.7662193Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-11T23:23:47.7693363Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-11T23:23:47.7889729Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-3b6d8628-e7ea-4d10-b493-2a7b0e33f4a5.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-11T23:23:47.7924638Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git.path /home/runner/work/_temp/git-credentials-3b6d8628-e7ea-4d10-b493-2a7b0e33f4a5.config
+2026-10-11T23:23:47.7957339Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-3b6d8628-e7ea-4d10-b493-2a7b0e33f4a5.config
+2026-10-11T23:23:47.7990158Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-3b6d8628-e7ea-4d10-b493-2a7b0e33f4a5.config
+2026-10-11T23:23:47.8026032Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-3b6d8628-e7ea-4d10-b493-2a7b0e33f4a5.config
+2026-10-11T23:23:47.8052029Z ##[endgroup]
+2026-10-11T23:23:47.8052622Z ##[group]Fetching the repository
+2026-10-11T23:23:47.8058864Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --filter=blob:none --depth=1 origin 1098d766a9f5f90f04bdf5bbefc3f0cf8d5c7629
+2026-10-11T23:23:48.3179270Z From https://github.com/ChengshuLi/WorldAtlas
+2026-10-11T23:23:48.3181558Z  * branch            1098d766a9f5f90f04bdf5bbefc3f0cf8d5c7629 -> FETCH_HEAD
+2026-10-11T23:23:48.3189735Z [command]/usr/bin/git rev-parse --verify --quiet 1098d766a9f5f90f04bdf5bbefc3f0cf8d5c7629^{object}
+2026-10-11T23:23:48.3217652Z 1098d766a9f5f90f04bdf5bbefc3f0cf8d5c7629
+2026-10-11T23:23:48.3221976Z ##[endgroup]
+2026-10-11T23:23:48.3223197Z ##[group]Determining the checkout info
+2026-10-11T23:23:48.3224286Z ##[endgroup]
+2026-10-11T23:23:48.3225408Z ##[group]Setting up sparse checkout
+2026-10-11T23:23:48.3227525Z [command]/usr/bin/git sparse-checkout set scripts src .github coordination/engineering/selected-geography-effective-prevention-20261009
+2026-10-11T23:23:48.3268677Z ##[endgroup]
+2026-10-11T23:23:48.3269669Z ##[group]Checking out the ref
+2026-10-11T23:23:48.3271085Z [command]/usr/bin/git checkout --progress --force 1098d766a9f5f90f04bdf5bbefc3f0cf8d5c7629
+2026-10-11T23:23:49.4996955Z Updating files:   0% (1/582)
+2026-10-11T23:23:49.4998722Z Updating files:   1% (6/582)
+2026-10-11T23:23:49.5001220Z Updating files:   2% (12/582)
+2026-10-11T23:23:49.5003137Z Updating files:   3% (18/582)
+2026-10-11T23:23:49.5007950Z Updating files:   4% (24/582)
+2026-10-11T23:23:49.5010138Z Updating files:   5% (30/582)
+2026-10-11T23:23:49.5013288Z Updating files:   6% (35/582)
+2026-10-11T23:23:49.5016067Z Updating files:   7% (41/582)
+2026-10-11T23:23:49.5018309Z Updating files:   8% (47/582)
+2026-10-11T23:23:49.5031932Z Updating files:   9% (53/582)
+2026-10-11T23:23:49.5054399Z Updating files:  10% (59/582)
+2026-10-11T23:23:49.5067550Z Updating files:  11% (65/582)
+2026-10-11T23:23:49.5069262Z Updating files:  12% (70/582)
+2026-10-11T23:23:49.5071342Z Updating files:  13% (76/582)
+2026-10-11T23:23:49.5075132Z Updating files:  14% (82/582)
+2026-10-11T23:23:49.5081851Z Updating files:  15% (88/582)
+2026-10-11T23:23:49.5140427Z Updating files:  16% (94/582)
+2026-10-11T23:23:49.5196619Z Updating files:  17% (99/582)
+2026-10-11T23:23:49.5198316Z Updating files:  18% (105/582)
+2026-10-11T23:23:49.5200345Z Updating files:  19% (111/582)
+2026-10-11T23:23:49.5202252Z Updating files:  20% (117/582)
+2026-10-11T23:23:49.5203799Z Updating files:  21% (123/582)
+2026-10-11T23:23:49.5205339Z Updating files:  22% (129/582)
+2026-10-11T23:23:49.5207188Z Updating files:  23% (134/582)
+2026-10-11T23:23:49.5208905Z Updating files:  24% (140/582)
+2026-10-11T23:23:49.5210580Z Updating files:  25% (146/582)
+2026-10-11T23:23:49.5212586Z Updating files:  26% (152/582)
+2026-10-11T23:23:49.5214753Z Updating files:  27% (158/582)
+2026-10-11T23:23:49.5223706Z Updating files:  28% (163/582)
+2026-10-11T23:23:49.5231505Z Updating files:  29% (169/582)
+2026-10-11T23:23:49.5233580Z Updating files:  30% (175/582)
+2026-10-11T23:23:49.5237644Z Updating files:  31% (181/582)
+2026-10-11T23:23:49.5239586Z Updating files:  32% (187/582)
+2026-10-11T23:23:49.5245969Z Updating files:  33% (193/582)
+2026-10-11T23:23:49.5254349Z Updating files:  34% (198/582)
+2026-10-11T23:23:49.5259559Z Updating files:  35% (204/582)
+2026-10-11T23:23:49.5265966Z Updating files:  36% (210/582)
+2026-10-11T23:23:49.5270442Z Updating files:  37% (216/582)
+2026-10-11T23:23:49.5273004Z Updating files:  38% (222/582)
+2026-10-11T23:23:49.5277017Z Updating files:  39% (227/582)
+2026-10-11T23:23:49.5280669Z Updating files:  40% (233/582)
+2026-10-11T23:23:49.5283570Z Updating files:  41% (239/582)
+2026-10-11T23:23:49.5288497Z Updating files:  42% (245/582)
+2026-10-11T23:23:49.5294495Z Updating files:  43% (251/582)
+2026-10-11T23:23:49.5297122Z Updating files:  44% (257/582)
+2026-10-11T23:23:49.5300374Z Updating files:  45% (262/582)
+2026-10-11T23:23:49.5303587Z Updating files:  46% (268/582)
+2026-10-11T23:23:49.5306636Z Updating files:  47% (274/582)
+2026-10-11T23:23:49.5309949Z Updating files:  48% (280/582)
+2026-10-11T23:23:49.5313790Z Updating files:  49% (286/582)
+2026-10-11T23:23:49.5317966Z Updating files:  50% (291/582)
+2026-10-11T23:23:49.5321217Z Updating files:  51% (297/582)
+2026-10-11T23:23:49.5324258Z Updating files:  52% (303/582)
+2026-10-11T23:23:49.5328495Z Updating files:  53% (309/582)
+2026-10-11T23:23:49.5332470Z Updating files:  54% (315/582)
+2026-10-11T23:23:49.5334649Z Updating files:  55% (321/582)
+2026-10-11T23:23:49.5342262Z Updating files:  56% (326/582)
+2026-10-11T23:23:49.5346492Z Updating files:  57% (332/582)
+2026-10-11T23:23:49.5350605Z Updating files:  58% (338/582)
+2026-10-11T23:23:49.5353909Z Updating files:  59% (344/582)
+2026-10-11T23:23:49.5356366Z Updating files:  60% (350/582)
+2026-10-11T23:23:49.5358596Z Updating files:  61% (356/582)
+2026-10-11T23:23:49.5362688Z Updating files:  62% (361/582)
+2026-10-11T23:23:49.5365632Z Updating files:  63% (367/582)
+2026-10-11T23:23:49.5368570Z Updating files:  64% (373/582)
+2026-10-11T23:23:49.5373003Z Updating files:  65% (379/582)
+2026-10-11T23:23:49.5378281Z Updating files:  66% (385/582)
+2026-10-11T23:23:49.5381299Z Updating files:  67% (390/582)
+2026-10-11T23:23:49.5386345Z Updating files:  68% (396/582)
+2026-10-11T23:23:49.5391021Z Updating files:  69% (402/582)
+2026-10-11T23:23:49.5394458Z Updating files:  70% (408/582)
+2026-10-11T23:23:49.5398024Z Updating files:  71% (414/582)
+2026-10-11T23:23:49.5399983Z Updating files:  72% (420/582)
+2026-10-11T23:23:49.5403664Z Updating files:  73% (425/582)
+2026-10-11T23:23:49.5407284Z Updating files:  74% (431/582)
+2026-10-11T23:23:49.5410321Z Updating files:  75% (437/582)
+2026-10-11T23:23:49.5413430Z Updating files:  76% (443/582)
+2026-10-11T23:23:49.5415751Z Updating files:  77% (449/582)
+2026-10-11T23:23:49.5420048Z Updating files:  78% (454/582)
+2026-10-11T23:23:49.5425591Z Updating files:  79% (460/582)
+2026-10-11T23:23:49.5429714Z Updating files:  80% (466/582)
+2026-10-11T23:23:49.5433129Z Updating files:  81% (472/582)
+2026-10-11T23:23:49.5437059Z Updating files:  82% (478/582)
+2026-10-11T23:23:49.5439744Z Updating files:  83% (484/582)
+2026-10-11T23:23:49.5444010Z Updating files:  84% (489/582)
+2026-10-11T23:23:49.5446460Z Updating files:  85% (495/582)
+2026-10-11T23:23:49.5449366Z Updating files:  86% (501/582)
+2026-10-11T23:23:49.5452581Z Updating files:  87% (507/582)
+2026-10-11T23:23:49.5454676Z Updating files:  88% (513/582)
+2026-10-11T23:23:49.5458474Z Updating files:  89% (518/582)
+2026-10-11T23:23:49.5462906Z Updating files:  90% (524/582)
+2026-10-11T23:23:49.5466912Z Updating files:  91% (530/582)
+2026-10-11T23:23:49.5469594Z Updating files:  92% (536/582)
+2026-10-11T23:23:49.5472631Z Updating files:  93% (542/582)
+2026-10-11T23:23:49.5474728Z Updating files:  94% (548/582)
+2026-10-11T23:23:49.5477606Z Updating files:  95% (553/582)
+2026-10-11T23:23:49.5479909Z Updating files:  96% (559/582)
+2026-10-11T23:23:49.5482042Z Updating files:  97% (565/582)
+2026-10-11T23:23:49.5485105Z Updating files:  98% (571/582)
+2026-10-11T23:23:49.5487179Z Updating files:  99% (577/582)
+2026-10-11T23:23:49.5487523Z Updating files: 100% (582/582)
+2026-10-11T23:23:49.5487830Z Updating files: 100% (582/582), done.
+2026-10-11T23:23:49.5672215Z Note: switching to '1098d766a9f5f90f04bdf5bbefc3f0cf8d5c7629'.
+2026-10-11T23:23:49.5672401Z 
+2026-10-11T23:23:49.5672528Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-11T23:23:49.5672793Z changes and commit them, and you can discard any commits you make in this
+2026-10-11T23:23:49.5673132Z state without impacting any branches by switching back to a branch.
+2026-10-11T23:23:49.5673286Z 
+2026-10-11T23:23:49.5673390Z If you want to create a new branch to retain commits you create, you may
+2026-10-11T23:23:49.5673830Z do so (now or later) by using -c with the switch command. Example:
+2026-10-11T23:23:49.5673973Z 
+2026-10-11T23:23:49.5674043Z   git switch -c <new-branch-name>
+2026-10-11T23:23:49.5674142Z 
+2026-10-11T23:23:49.5674206Z Or undo this operation with:
+2026-10-11T23:23:49.5674297Z 
+2026-10-11T23:23:49.5674352Z   git switch -
+2026-10-11T23:23:49.5674427Z 
+2026-10-11T23:23:49.5674557Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-11T23:23:49.5674726Z 
+2026-10-11T23:23:49.5674860Z HEAD is now at 1098d76 Activate bounded current-rebind output budget
+2026-10-11T23:23:49.5689010Z ##[endgroup]
+2026-10-11T23:23:49.5729389Z [command]/usr/bin/git log -1 --format=%H
+2026-10-11T23:23:49.5752376Z 1098d766a9f5f90f04bdf5bbefc3f0cf8d5c7629
+2026-10-11T23:23:49.5759907Z ##[group]Removing auth
+2026-10-11T23:23:49.5760110Z Removing SSH command configuration
+2026-10-11T23:23:49.5763771Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-11T23:23:49.5791034Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-11T23:23:49.5993657Z Removing HTTP extra header
+2026-10-11T23:23:49.5996983Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-11T23:23:49.6024889Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-11T23:23:49.6228314Z Removing includeIf entries pointing to credentials config files
+2026-10-11T23:23:49.6228981Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-11T23:23:49.6253514Z includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git.path
+2026-10-11T23:23:49.6253967Z includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git/worktrees/*.path
+2026-10-11T23:23:49.6254313Z includeif.gitdir:/github/workspace/.git.path
+2026-10-11T23:23:49.6254515Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-11T23:23:49.6264743Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git.path
+2026-10-11T23:23:49.6286377Z /home/runner/work/_temp/git-credentials-3b6d8628-e7ea-4d10-b493-2a7b0e33f4a5.config
+2026-10-11T23:23:49.6292598Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git.path /home/runner/work/_temp/git-credentials-3b6d8628-e7ea-4d10-b493-2a7b0e33f4a5.config
+2026-10-11T23:23:49.6323283Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git/worktrees/*.path
+2026-10-11T23:23:49.6344697Z /home/runner/work/_temp/git-credentials-3b6d8628-e7ea-4d10-b493-2a7b0e33f4a5.config
+2026-10-11T23:23:49.6350684Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/WorldAtlas/WorldAtlas/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-3b6d8628-e7ea-4d10-b493-2a7b0e33f4a5.config
+2026-10-11T23:23:49.6386080Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-10-11T23:23:49.6408337Z /github/runner_temp/git-credentials-3b6d8628-e7ea-4d10-b493-2a7b0e33f4a5.config
+2026-10-11T23:23:49.6413176Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-3b6d8628-e7ea-4d10-b493-2a7b0e33f4a5.config
+2026-10-11T23:23:49.6443307Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-11T23:23:49.6463217Z /github/runner_temp/git-credentials-3b6d8628-e7ea-4d10-b493-2a7b0e33f4a5.config
+2026-10-11T23:23:49.6467968Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-3b6d8628-e7ea-4d10-b493-2a7b0e33f4a5.config
+2026-10-11T23:23:49.6495568Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-11T23:23:49.6688375Z Removing credentials config '/home/runner/work/_temp/git-credentials-3b6d8628-e7ea-4d10-b493-2a7b0e33f4a5.config'
+2026-10-11T23:23:49.6695799Z ##[endgroup]
+2026-10-11T23:23:49.6876350Z ##[group]Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+2026-10-11T23:23:49.6876576Z with:
+2026-10-11T23:23:49.6876692Z   node-version: 24
+2026-10-11T23:23:49.6876817Z   check-latest: false
+2026-10-11T23:23:49.6878286Z   token: ***
+2026-10-11T23:23:49.6878487Z   package-manager-cache: true
+2026-10-11T23:23:49.6878704Z ##[endgroup]
+2026-10-11T23:23:49.7788639Z Found in cache @ /opt/hostedtoolcache/node/24.21.0/x64
+2026-10-11T23:23:49.7791046Z ##[group]Environment details
+2026-10-11T23:23:53.7970004Z node: v24.21.0
+2026-10-11T23:23:53.7970299Z npm: 11.19.0
+2026-10-11T23:23:53.7970681Z yarn: 1.22.22
+2026-10-11T23:23:53.7971740Z ##[endgroup]
+2026-10-11T23:23:53.8111903Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+2026-10-11T23:23:53.8112270Z with:
+2026-10-11T23:23:53.8112514Z   python-version: 3.12
+2026-10-11T23:23:53.8112712Z   check-latest: false
+2026-10-11T23:23:53.8114276Z   token: ***
+2026-10-11T23:23:53.8114470Z   update-environment: true
+2026-10-11T23:23:53.8114660Z   allow-prereleases: false
+2026-10-11T23:23:53.8114790Z   freethreaded: false
+2026-10-11T23:23:53.8114912Z ##[endgroup]
+2026-10-11T23:23:53.9047316Z ##[group]Installed versions
+2026-10-11T23:23:53.9111971Z (node:2209) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-11T23:23:53.9113222Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-11T23:23:53.9113721Z Successfully set up CPython (3.12.15)
+2026-10-11T23:23:53.9114161Z ##[endgroup]
+2026-10-11T23:23:53.9273455Z ##[group]Run python -m pip install -r requirements.txt
+2026-10-11T23:23:53.9273900Z [36;1mpython -m pip install -r requirements.txt[0m
+2026-10-11T23:23:53.9783495Z shell: /usr/bin/bash -e {0}
+2026-10-11T23:23:53.9783725Z env:
+2026-10-11T23:23:53.9783931Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T23:23:53.9784252Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-11T23:23:53.9784552Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T23:23:53.9784830Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T23:23:53.9785120Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T23:23:53.9785394Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-11T23:23:53.9785949Z ##[endgroup]
+2026-10-11T23:23:56.9221540Z Collecting numpy==2.3.5 (from -r requirements.txt (line 2))
+2026-10-11T23:23:57.0128620Z   Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+2026-10-11T23:23:57.0937439Z Collecting shapely==2.1.2 (from -r requirements.txt (line 3))
+2026-10-11T23:23:57.1091371Z   Downloading shapely-2.1.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (6.8 kB)
+2026-10-11T23:23:57.1598700Z Collecting pyproj==3.7.2 (from -r requirements.txt (line 4))
+2026-10-11T23:23:57.1789136Z   Downloading pyproj-3.7.2-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (31 kB)
+2026-10-11T23:23:57.2441274Z Collecting rasterio==1.4.3 (from -r requirements.txt (line 5))
+2026-10-11T23:23:57.2616734Z   Downloading rasterio-1.4.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.1 kB)
+2026-10-11T23:23:57.3421776Z Collecting scipy==1.17.0 (from -r requirements.txt (line 6))
+2026-10-11T23:23:57.3583925Z   Downloading scipy-1.17.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+2026-10-11T23:23:57.3982165Z Collecting certifi (from pyproj==3.7.2->-r requirements.txt (line 4))
+2026-10-11T23:23:57.4131174Z   Downloading certifi-2026.7.22-py3-none-any.whl.metadata (2.5 kB)
+2026-10-11T23:23:57.4354274Z Collecting affine (from rasterio==1.4.3->-r requirements.txt (line 5))
+2026-10-11T23:23:57.4546377Z   Downloading affine-3.0.1-py3-none-any.whl.metadata (4.5 kB)
+2026-10-11T23:23:57.4779599Z Collecting attrs (from rasterio==1.4.3->-r requirements.txt (line 5))
+2026-10-11T23:23:57.4930392Z   Downloading attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
+2026-10-11T23:23:57.5171453Z Collecting click>=4.0 (from rasterio==1.4.3->-r requirements.txt (line 5))
+2026-10-11T23:23:57.5320807Z   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+2026-10-11T23:23:57.5524029Z Collecting cligj>=0.5 (from rasterio==1.4.3->-r requirements.txt (line 5))
+2026-10-11T23:23:57.5691130Z   Downloading cligj-0.7.2-py3-none-any.whl.metadata (5.0 kB)
+2026-10-11T23:23:57.5904741Z Collecting click-plugins (from rasterio==1.4.3->-r requirements.txt (line 5))
+2026-10-11T23:23:57.6055730Z   Downloading click_plugins-1.1.1.2-py2.py3-none-any.whl.metadata (6.5 kB)
+2026-10-11T23:23:57.6323135Z Collecting pyparsing (from rasterio==1.4.3->-r requirements.txt (line 5))
+2026-10-11T23:23:57.6472905Z   Downloading pyparsing-3.3.3-py3-none-any.whl.metadata (5.9 kB)
+2026-10-11T23:23:57.6682459Z Downloading numpy-2.3.5-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)
+2026-10-11T23:23:57.9216875Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.6/16.6 MB 72.7 MB/s  0:00:00
+2026-10-11T23:23:57.9392367Z Downloading shapely-2.1.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (3.1 MB)
+2026-10-11T23:23:57.9538717Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 222.1 MB/s  0:00:00
+2026-10-11T23:23:57.9712260Z Downloading pyproj-3.7.2-cp312-cp312-manylinux_2_28_x86_64.whl (9.6 MB)
+2026-10-11T23:23:58.0553946Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.6/9.6 MB 112.8 MB/s  0:00:00
+2026-10-11T23:23:58.0716954Z Downloading rasterio-1.4.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (22.3 MB)
+2026-10-11T23:23:58.2749094Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 22.3/22.3 MB 109.1 MB/s  0:00:00
+2026-10-11T23:23:58.2931954Z Downloading scipy-1.17.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (35.0 MB)
+2026-10-11T23:23:58.5833536Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.0/35.0 MB 120.5 MB/s  0:00:00
+2026-10-11T23:23:58.5985193Z Downloading click-8.5.0-py3-none-any.whl (125 kB)
+2026-10-11T23:23:58.6152546Z Downloading cligj-0.7.2-py3-none-any.whl (7.1 kB)
+2026-10-11T23:23:58.6322566Z Downloading affine-3.0.1-py3-none-any.whl (10 kB)
+2026-10-11T23:23:58.6492278Z Downloading attrs-26.1.0-py3-none-any.whl (67 kB)
+2026-10-11T23:23:58.6672204Z Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+2026-10-11T23:23:58.6842548Z Downloading click_plugins-1.1.1.2-py2.py3-none-any.whl (11 kB)
+2026-10-11T23:23:58.7005433Z Downloading pyparsing-3.3.3-py3-none-any.whl (126 kB)
+2026-10-11T23:23:58.9291705Z Installing collected packages: pyparsing, numpy, click, certifi, attrs, shapely, scipy, pyproj, cligj, click-plugins, affine, rasterio
+2026-10-11T23:24:03.7149992Z 
+2026-10-11T23:24:03.7162018Z Successfully installed affine-3.0.1 attrs-26.1.0 certifi-2026.7.22 click-8.5.0 click-plugins-1.1.1.2 cligj-0.7.2 numpy-2.3.5 pyparsing-3.3.3 pyproj-3.7.2 rasterio-1.4.3 scipy-1.17.0 shapely-2.1.2
+2026-10-11T23:24:03.7983790Z ##[group]Run if test -f scripts/run-geographic-check.py; then
+2026-10-11T23:24:03.7984110Z [36;1mif test -f scripts/run-geographic-check.py; then[0m
+2026-10-11T23:24:03.7984350Z [36;1m  python -I -B - --fetch --out geography-check.json <<'PY'[0m
+2026-10-11T23:24:03.7984569Z [36;1mimport runpy, subprocess, sys[0m
+2026-10-11T23:24:03.7984722Z [36;1mtry:[0m
+2026-10-11T23:24:03.7984918Z [36;1m    runpy.run_path('scripts/run-geographic-check.py', run_name='__main__')[0m
+2026-10-11T23:24:03.7985187Z [36;1mexcept subprocess.CalledProcessError as error:[0m
+2026-10-11T23:24:03.7985375Z [36;1m    if error.stderr:[0m
+2026-10-11T23:24:03.7985780Z [36;1m        sys.stderr.buffer.write(error.stderr)[0m
+2026-10-11T23:24:03.7986097Z [36;1m        sys.stderr.buffer.flush()[0m
+2026-10-11T23:24:03.7986251Z [36;1m    raise[0m
+2026-10-11T23:24:03.7986371Z [36;1mPY[0m
+2026-10-11T23:24:03.7986483Z [36;1melse[0m
+2026-10-11T23:24:03.7986687Z [36;1m  # Only this named activation branch can report bootstrap absence,[0m
+2026-10-11T23:24:03.7986956Z [36;1m  # and only after trusted API code proves it changes no live data.[0m
+2026-10-11T23:24:03.7987182Z [36;1m  node --input-type=module <<'NODE'[0m
+2026-10-11T23:24:03.7987348Z [36;1mimport fs from 'node:fs';[0m
+2026-10-11T23:24:03.7987577Z [36;1mimport {githubAPI, githubPages} from './scripts/issue-claim-contract.mjs';[0m
+2026-10-11T23:24:03.7987911Z [36;1mconst event = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8'));[0m
+2026-10-11T23:24:03.7988243Z [36;1mconst repo = process.env.GITHUB_REPOSITORY, number = event.pull_request?.number;[0m
+2026-10-11T23:24:03.7988615Z [36;1mif (!/^[-\w.]+\/[-\w.]+$/.test(repo ?? '') || !Number.isSafeInteger(number)) throw Error('Invalid bootstrap event');[0m
+2026-10-11T23:24:03.7988965Z [36;1mconst api = githubAPI(process.env.GH_TOKEN), root = `/repos/${repo}`;[0m
+2026-10-11T23:24:03.7989219Z [36;1mconst pr = await api(`${root}/pulls/${number}`);[0m
+2026-10-11T23:24:03.7989447Z [36;1mif (pr.head.sha !== process.env.GEOGRAPHY_CANDIDATE ||[0m
+2026-10-11T23:24:03.7989710Z [36;1m    pr.head.ref !== 'engineering/geographic-gate-920-20261005-local04' ||[0m
+2026-10-11T23:24:03.7989984Z [36;1m    pr.head.repo?.full_name !== repo || pr.base.ref !== 'main' ||[0m
+2026-10-11T23:24:03.7990306Z [36;1m    !Number.isSafeInteger(pr.changed_files) || pr.changed_files < 1 || pr.changed_files > 3000) {[0m
+2026-10-11T23:24:03.7990658Z [36;1m  throw Error('Geographic checker unavailable outside the bounded activation PR');[0m
+2026-10-11T23:24:03.7990892Z [36;1m}[0m
+2026-10-11T23:24:03.7991071Z [36;1mconst files = await githubPages(api, `${root}/pulls/${number}/files`);[0m
+2026-10-11T23:24:03.7991399Z [36;1mif (files.length !== pr.changed_files || new Set(files.map(f => f.filename)).size !== files.length ||[0m
+2026-10-11T23:24:03.7991804Z [36;1m    files.some(f => [f.filename, f.previous_filename].filter(Boolean).some(name => name.startsWith('data/')))) {[0m
+2026-10-11T23:24:03.7992186Z [36;1m  throw Error('Bootstrap cannot waive changed live data or an incomplete inventory');[0m
+2026-10-11T23:24:03.7992422Z [36;1m}[0m
+2026-10-11T23:24:03.7992643Z [36;1mfs.writeFileSync('geography-check.json', JSON.stringify({status: 'bootstrap-unavailable',[0m
+2026-10-11T23:24:03.7992977Z [36;1m  geometry_validated: false, live_data_changed: false, head_sha: pr.head.sha,[0m
+2026-10-11T23:24:03.7993326Z [36;1m  limits: ['Only the named activation PR; the combined check becomes mandatory after merge.']}) + '\n');[0m
+2026-10-11T23:24:03.7993587Z [36;1mNODE[0m
+2026-10-11T23:24:03.7993693Z [36;1mfi[0m
+2026-10-11T23:24:03.8048847Z shell: /usr/bin/bash -e {0}
+2026-10-11T23:24:03.8048996Z env:
+2026-10-11T23:24:03.8049149Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T23:24:03.8049399Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-11T23:24:03.8049638Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T23:24:03.8050017Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T23:24:03.8050232Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T23:24:03.8050451Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-11T23:24:03.8052074Z   GH_TOKEN: ***
+2026-10-11T23:24:03.8052199Z   GEOGRAPHY_PR_NUMBER: 1751
+2026-10-11T23:24:03.8052389Z   GEOGRAPHY_REVIEWED_HEAD: 6e5e7ec3c1f886232eaef782431a6d3afe608d6c
+2026-10-11T23:24:03.8052630Z   GEOGRAPHY_BASELINE: 1098d766a9f5f90f04bdf5bbefc3f0cf8d5c7629
+2026-10-11T23:24:03.8052861Z   GEOGRAPHY_CANDIDATE: 6e5e7ec3c1f886232eaef782431a6d3afe608d6c
+2026-10-11T23:24:03.8053055Z ##[endgroup]
+2026-10-11T23:24:04.3772677Z {"geography_stage": "trusted-checkout-initial", "elapsed_ms": 526}
+2026-10-11T23:24:04.8677941Z {"geography_stage": "candidate-fetch", "elapsed_ms": 490}
+2026-10-11T23:24:05.3798810Z {"geography_stage": "trusted-checkout-inspect", "elapsed_ms": 512}
+2026-10-11T23:24:06.1018710Z {"geography_stage": "unchanged-selected-inputs", "elapsed_ms": 37}
+2026-10-11T23:24:30.4586585Z {"geography_prefetch": {"scope": "declared-selected-bank-and-direct-additive-assets", "complete_scientific_closure": false, "unique_objects": 57, "declared_bytes": 246339322, "verified_import_objects": 53, "verified_import_bytes": 245816424, "fetch_batches": 6, "tree_metadata_ms": 2323, "fetch_ms": 19656, "verification_ms": 1366, "declarations": 116, "selected_commits": ["1098d766a9f5f90f04bdf5bbefc3f0cf8d5c7629", "6e5e7ec3c1f886232eaef782431a6d3afe608d6c"], "status": "scoped-prefetch-completed", "limits": ["No scientific or full dependency-closure claim. Deeper historical authority/rebind inputs and unknown formats retain the unchanged checker acquisition."], "elapsed_ms": 24286}}
+2026-10-11T23:24:30.4588197Z {"geography_stage": "selected-prefetch", "elapsed_ms": 24357}
+2026-10-11T23:29:09.0206635Z {"geography_stage": "selected-native", "elapsed_ms": 278554}
+2026-10-11T23:29:09.0209284Z file:///home/runner/work/WorldAtlas/WorldAtlas/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:16
+2026-10-11T23:29:09.0210000Z const demand=(v,m)=>{if(!v)throw Error(m);};
+2026-10-11T23:29:09.0210285Z                                  ^
+2026-10-11T23:29:09.0210433Z 
+2026-10-11T23:29:09.0210630Z Error: Unknown historical rebind qualification generation
+2026-10-11T23:29:09.0211503Z     at demand (file:///home/runner/work/WorldAtlas/WorldAtlas/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:16:34)
+2026-10-11T23:29:09.0212791Z     at compatibleCurrentRebindCode (file:///home/runner/work/WorldAtlas/WorldAtlas/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:970:2)
+2026-10-11T23:29:09.0214153Z     at readCurrentRebindCustody (file:///home/runner/work/WorldAtlas/WorldAtlas/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:1014:21)
+2026-10-11T23:29:09.0216661Z     at readSelectedAdditive (file:///home/runner/work/WorldAtlas/WorldAtlas/coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs:1172:10)
+2026-10-11T23:29:09.0217705Z     at loadSelection (file:///home/runner/work/WorldAtlas/WorldAtlas/scripts/check-effective-geographic-regression.mjs:467:23)
+2026-10-11T23:29:09.0218613Z     at inspectSelected (file:///home/runner/work/WorldAtlas/WorldAtlas/scripts/check-effective-geographic-regression.mjs:632:15)
+2026-10-11T23:29:09.0219400Z     at file:///home/runner/work/WorldAtlas/WorldAtlas/scripts/check-effective-geographic-regression.mjs:703:88
+2026-10-11T23:29:09.0219961Z     at ModuleJob.run (node:internal/modules/esm/module_job:561:25)
+2026-10-11T23:29:09.0220352Z     at async node:internal/modules/esm/loader:647:26
+2026-10-11T23:29:09.0220790Z     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+2026-10-11T23:29:09.0221093Z 
+2026-10-11T23:29:09.0221178Z Node.js v24.21.0
+2026-10-11T23:29:09.0221850Z Traceback (most recent call last):
+2026-10-11T23:29:09.0222147Z   File "<stdin>", line 3, in <module>
+2026-10-11T23:29:09.0222469Z   File "<frozen runpy>", line 287, in run_path
+2026-10-11T23:29:09.0222812Z   File "<frozen runpy>", line 98, in _run_module_code
+2026-10-11T23:29:09.0223143Z   File "<frozen runpy>", line 88, in _run_code
+2026-10-11T23:29:09.0223520Z   File "scripts/run-geographic-check.py", line 1418, in <module>
+2026-10-11T23:29:09.0223856Z     raise SystemExit(main())
+2026-10-11T23:29:09.0224071Z                      ^^^^^^
+2026-10-11T23:29:09.0224377Z   File "scripts/run-geographic-check.py", line 1397, in main
+2026-10-11T23:29:09.0224984Z     result = apply_adjudications(repo, args.candidate, inspect(repo, args.baseline, args.candidate, prefetch=args.fetch))
+2026-10-11T23:29:09.0226043Z                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-11T23:29:09.0226485Z   File "scripts/run-geographic-check.py", line 1288, in inspect
+2026-10-11T23:29:09.0226846Z     native_raw = subprocess.check_output([
+2026-10-11T23:29:09.0227118Z                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-11T23:29:09.0227623Z   File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/subprocess.py", line 466, in check_output
+2026-10-11T23:29:09.0398269Z     return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+2026-10-11T23:29:09.0398546Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-11T23:29:09.0398872Z   File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/subprocess.py", line 571, in run
+2026-10-11T23:29:09.0456488Z     raise CalledProcessError(retcode, process.args,
+2026-10-11T23:29:09.0457633Z subprocess.CalledProcessError: Command '['node', '/home/runner/work/WorldAtlas/WorldAtlas/scripts/check-effective-geographic-regression.mjs', '/home/runner/work/WorldAtlas/WorldAtlas', '1098d766a9f5f90f04bdf5bbefc3f0cf8d5c7629', '6e5e7ec3c1f886232eaef782431a6d3afe608d6c', '/opt/hostedtoolcache/Python/3.12.15/x64/bin/python']' returned non-zero exit status 1.
+2026-10-11T23:29:09.0537298Z ##[error]Process completed with exit code 1.
+2026-10-11T23:29:09.0598251Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+2026-10-11T23:29:09.0598480Z with:
+2026-10-11T23:29:09.0598606Z   name: proposed-geography-1751-1
+2026-10-11T23:29:09.0598767Z   path: geography-check.json
+2026-10-11T23:29:09.0598904Z   retention-days: 30
+2026-10-11T23:29:09.0599027Z   if-no-files-found: warn
+2026-10-11T23:29:09.0599155Z   compression-level: 6
+2026-10-11T23:29:09.0599274Z   overwrite: false
+2026-10-11T23:29:09.0599396Z   include-hidden-files: false
+2026-10-11T23:29:09.0599528Z env:
+2026-10-11T23:29:09.0599674Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T23:29:09.0599929Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-11T23:29:09.0600169Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T23:29:09.0600383Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T23:29:09.0600594Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-11T23:29:09.0600829Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-11T23:29:09.0601012Z ##[endgroup]
+2026-10-11T23:29:09.1710479Z (node:18975) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-11T23:29:09.1710961Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-11T23:29:09.1732818Z ##[warning]No files were found with the provided path: geography-check.json. No artifacts will be uploaded.
+2026-10-11T23:29:09.1931830Z Post job cleanup.
+2026-10-11T23:29:09.2534480Z [command]/usr/bin/git version
+2026-10-11T23:29:09.2567080Z git version 2.55.0
+2026-10-11T23:29:09.2594150Z Temporarily overriding HOME='/home/runner/work/_temp/e0bd422d-d486-48ad-8b44-25d4dff1fded' before making global git config changes
+2026-10-11T23:29:09.2595083Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-11T23:29:09.2598601Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/WorldAtlas/WorldAtlas
+2026-10-11T23:29:09.2629502Z Removing SSH command configuration
+2026-10-11T23:29:09.2634783Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-11T23:29:09.2666295Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-11T23:29:09.2901643Z Removing HTTP extra header
+2026-10-11T23:29:09.2907776Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-11T23:29:09.2942811Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-11T23:29:09.3169492Z Removing includeIf entries pointing to credentials config files
+2026-10-11T23:29:09.3175622Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-11T23:29:09.3208264Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-11T23:29:09.3582774Z Cleaning up orphan processes
+2026-10-11T23:29:09.3803228Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

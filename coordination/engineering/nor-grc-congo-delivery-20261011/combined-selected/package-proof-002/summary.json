@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "kind": "unmerged-reviewed-support-current13-package-proof",
+  "execution_commit": "791576647adc41241ce9b438f1bb0034088eed4e",
+  "build": {
+    "passed": true,
+    "elapsed_seconds": 310.98,
+    "max_rss_bytes": 2749202432,
+    "declared_source_files": 8634,
+    "declared_source_bytes": 2743349802,
+    "authenticated_execution_files": 93
+  },
+  "emitted_consumer": {
+    "passed": true,
+    "elapsed_seconds": 7.79,
+    "max_rss_bytes": 1160372224,
+    "active_components": 60,
+    "assigned_components": 47,
+    "zero_cell_components": 13,
+    "native_cells_picked_and_sampled": 1103,
+    "stable_owner_controls": 329
+  },
+  "same_owner_foreign_owner_controls": {
+    "passed": true,
+    "tests": 3,
+    "initial_missing_sparse_fixture_refusal_preserved": true
+  },
+  "limits": [
+    "Actual normal locked build and emitted production loader/effective primitive/picker/sampler paths were executed.",
+    "GPU and Canvas execution still requires hosted browser tests.",
+    "Support remains an explicitly reviewed unmerged generation; original trusted1098 refusal is retained."
+  ]
+}

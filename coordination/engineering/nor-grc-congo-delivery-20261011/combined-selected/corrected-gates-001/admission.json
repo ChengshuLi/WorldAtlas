@@ -1,0 +1,68 @@
+{
+  "started_at": "2026-10-11T23:42:56.183884+00:00",
+  "kind": "unmerged-reviewed-support-maintenance-diagnostic",
+  "baseline_commit": "6e5e7ec3c1f886232eaef782431a6d3afe608d6c",
+  "candidate_commit": "791576647adc41241ce9b438f1bb0034088eed4e",
+  "execution_commit": "791576647adc41241ce9b438f1bb0034088eed4e",
+  "mem_available_bytes": 9193664512,
+  "groups": 2,
+  "reserved_bytes_per_group": 2684354560,
+  "concurrent_reserved_bytes_per_group": 2684354560,
+  "parent_reserved_bytes": 2147483648,
+  "residual_bytes": 1677471744,
+  "free_disk_bytes": 25892544512,
+  "wall_seconds_per_group": 1200,
+  "code_equal_to_corrected_baseline": [
+    {
+      "path": "scripts/run-geographic-check.py",
+      "bytes": 88301,
+      "sha256": "8a4be28ed2cee0c4748f80dd59108b44a6f8f608a656fc2f73cf276705a0633b"
+    },
+    {
+      "path": "scripts/check-geographic-regression.py",
+      "bytes": 15589,
+      "sha256": "07057a490035ac5376868b0ce8258c2e64917779830498ec311278df1340f75b"
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "bytes": 77142,
+      "sha256": "5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda"
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+    },
+    {
+      "path": "scripts/evidence/immutable.py",
+      "bytes": 17414,
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+    },
+    {
+      "path": "scripts/evidence/geometry.py",
+      "bytes": 8846,
+      "sha256": "4b016a4efccf8a1080b048f350c0db94ac14343b40e0ed890c2ce4d2300436a9"
+    },
+    {
+      "path": "scripts/ellipsoidal_area.py",
+      "bytes": 1953,
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 146,
+      "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 144181,
+      "sha256": "1ebc1415f9c18cf8639734073313667bbc0e831317484c48fcafbc6f6d7f1216"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "bytes": 24674,
+      "sha256": "198817f84574d3d04b0ab2c4827eced98211533a79851ee43b97c59d80663c07"
+    }
+  ],
+  "python": "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/.cache/build-runtime-cp312/bin/python"
+}

@@ -13,16 +13,17 @@ let current=path.parse(p.path).root;for(const part of p.path.slice(current.lengt
 const stat=fs.lstatSync(p.path);demand(stat.isFile()&&stat.size===p.bytes&&(stat.mode&0o777)===p.mode,'Plan stat differs before read');
 const fd=fs.openSync(p.path,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);let raw;try{raw=fs.readFileSync(fd);const held=fs.fstatSync(fd),end=fs.lstatSync(p.path);for(const k of ['dev','ino','size','mode','mtimeMs','ctimeMs'])demand(stat[k]===held[k]&&held[k]===end[k],'Plan identity drift');}finally{fs.closeSync(fd);}
 demand(raw.length===p.bytes&&sha(raw)===p.sha256,'Whole raw plan differs');const plan=JSON.parse(raw);
-demand(plan.execution_commit===head&&plan.limits&&Number.isSafeInteger(plan.limits.complete_phase_bytes)&&plan.limits.complete_phase_bytes<=268435456&&Number.isSafeInteger(plan.limits.output_bytes)&&plan.limits.output_bytes<=4194304,'Actual injected plan/head/admission differs before imports');
+demand(plan.execution_commit===head&&plan.limits&&Number.isSafeInteger(plan.limits.complete_phase_bytes)&&plan.limits.complete_phase_bytes>0&&Number.isSafeInteger(plan.limits.output_bytes)&&plan.limits.output_bytes>0&&Number.isSafeInteger(plan.limits.rss_bytes)&&plan.limits.rss_bytes>0,'Actual injected plan/head/admission differs before imports');
 const root=fs.realpathSync(process.cwd()),prefix='coordination/engineering/additive-native-gap-batch-20261008/composition-v2/';
-const {ImmutableReader,loadSelection,loadBaseSelection}=await import('../../../scripts/check-effective-geographic-regression.mjs');
+const {processingAllowance,ImmutableReader,loadSelection,loadBaseSelection}=await import('../../../scripts/check-effective-geographic-regression.mjs');
 const {prepareCurrentRebindDestination,captureCurrentRebindProducts,validateCurrentRebindPlan,completePriorConservationFrame}=await import('./capture-current-rebind.mjs');
 const {nativeBaseSelection,valueSha,valueBytes,normaliseRetainedRepairLedger,reclaimCompletedRebindFrame}=await import('../selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs');
 demand(globalThis.gc===exposedGc,'Reclamation callable changed during trusted imports');
+const allowance=processingAllowance({phaseBytes:plan.limits.complete_phase_bytes,rssBytes:plan.limits.rss_bytes});
 const token=prepareCurrentRebindDestination(root,command[6]);
 const runtimeBytes=before.runtime.filter(p=>['node','git','time'].includes(p.role)).reduce((n,p)=>n+p.bytes,0),executionBytes=before.code.reduce((n,p)=>n+2*p.bytes,0)+before.entry.bytes;
 function completedPriorFrame(){
-const reader=new ImmutableReader(root,head,{runtimeBytes,executionBytes,metadataBytes:8*1048576+2*(raw.length+Buffer.byteLength(serialized)),outputBytes:4194304,gitExecutable:before.runtime.find(p=>p.role==='git').path});
+const reader=new ImmutableReader(root,head,{runtimeBytes,executionBytes,metadataBytes:8*1048576+2*(raw.length+Buffer.byteLength(serialized)),outputBytes:4194304,allowance,gitExecutable:before.runtime.find(p=>p.role==='git').path});
 // Explicit original products are whole immutable plan operands. Historical
 // plans retain their literal original paths and default selected revision.
 // Future composition inputs are not needed to authenticate the selected bank.
@@ -58,7 +59,7 @@ return {registry,originalLedger,marker,budget:reader.budget};
 }
 const {registry,originalLedger,marker:priorMarker,budget}=completedPriorFrame();
 reclaimCompletedRebindFrame();
-const freshReader=new ImmutableReader(root,head,{runtimeBytes,executionBytes,metadataBytes:8*1048576+2*(raw.length+Buffer.byteLength(serialized)+valueBytes(registry).length+valueBytes(originalLedger).length)+2097152,outputBytes:4194304,gitExecutable:before.runtime.find(p=>p.role==='git').path,budget});
+const freshReader=new ImmutableReader(root,head,{runtimeBytes,executionBytes,metadataBytes:8*1048576+2*(raw.length+Buffer.byteLength(serialized)+valueBytes(registry).length+valueBytes(originalLedger).length)+2097152,outputBytes:4194304,allowance,gitExecutable:before.runtime.find(p=>p.role==='git').path,budget});
 freshReader.phase();
 const snapshot=loadBaseSelection(freshReader);demand(snapshot,'Missing actual fresh base bank');
 snapshot.acquisition_buffer_bytes=0;

@@ -31,12 +31,12 @@ const joined = async promises => {
 // these profiles therefore requires reviewing its reads and the adverse tests.
 export const AUDITED_READERS = Object.freeze({
   'src/ownership-codec.js': ['64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d'],
-  'scripts/check-effective-geographic-regression.mjs': ['801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039'],
+  'scripts/check-effective-geographic-regression.mjs': ['801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039', '5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda'],
   // The second profile is reviewed stage-2 blob f8e4a88a6dbe3d3961d6b17d9b926ee4488561a8:
   // catalogue/admission/peak accounting changes; all input routes are identical.
   [PREFIX + 'selected-neighbor-prevention.mjs']: ['63745cc5d4f15bdd8c153787df07379d813ab037fc1e0734944a75568235e8aa',
-    '6da5919c63822393959afc8f2499c76470aa6b51d6e29664d372e9eee79ae4b1'],
-  [PREFIX + 'selected-continuous-entry.mjs']: ['84ddc84798fa371e37c0acbd6764a39ef79296f3b8a57ff09aa4ed416e7ae1b9']
+    '6da5919c63822393959afc8f2499c76470aa6b51d6e29664d372e9eee79ae4b1', '1ebc1415f9c18cf8639734073313667bbc0e831317484c48fcafbc6f6d7f1216'],
+  [PREFIX + 'selected-continuous-entry.mjs']: ['84ddc84798fa371e37c0acbd6764a39ef79296f3b8a57ff09aa4ed416e7ae1b9', '198817f84574d3d04b0ab2c4827eced98211533a79851ee43b97c59d80663c07']
 });
 export const EXECUTION_CODE = Object.freeze([
   'scripts/run-geographic-check.py', 'scripts/check-geographic-regression.py',
@@ -65,11 +65,23 @@ function createReader({repo, baseline, candidate, trusted, limits, acquisition})
   const env = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('GIT_')));
   Object.assign(env, {GIT_NO_LAZY_FETCH: '1', GIT_NO_REPLACE_OBJECTS: '1', GIT_CONFIG_NOSYSTEM: '1',
     GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0', GIT_OPTIONAL_LOCKS: '0'});
-  const git = (...args) => {
+  const runGit = (args, ignoreShallow = false) => {
     try { return execFileSync('git', ['--no-replace-objects', '-c', 'core.hooksPath=/dev/null', '-c', 'credential.helper=', '-C', repo, ...args],
-      {env: args[0] === 'merge-base' ? {...env, GIT_SHALLOW_FILE: '/dev/null'} : env, maxBuffer: limits.member + 1024, timeout: 30000, stdio: ['ignore', 'pipe', 'pipe']}); }
+      {env: ignoreShallow ? {...env, GIT_SHALLOW_FILE: '/dev/null'} : env, maxBuffer: limits.member + 1024, timeout: 30000, stdio: ['ignore', 'pipe', 'pipe']}); }
     catch { throw Error('immutable-object-unavailable:' + args.slice(0, 4).join(':')); }
   };
+  const git = (...args) => runGit(args);
+  function mergeBase() {
+    // A shallow baseline is already a valid common ancestor of a fresh source
+    // branch. Do not traverse its intentionally absent parent in that case.
+    try { return git('merge-base', baseline, candidate); }
+    catch {
+      // Divergent historical heads may already supply the hidden parents. This
+      // read-only fallback succeeds only with the necessary objects present;
+      // no ancestry fetch or shallow-file mutation is authorized here.
+      return runGit(['merge-base', baseline, candidate], true);
+    }
+  }
   const descriptors = new Map(), metadata = new Map(), origins = new Map(), current = new Map();
   let metadataBytes = 0;
   const missingOrigins = new Set();
@@ -151,7 +163,7 @@ function createReader({repo, baseline, candidate, trusted, limits, acquisition})
     demand(value.mode === undefined || value.mode === p.mode, 'current-pin-mode');
     return p;
   }
-  return {git, descriptor, equalCurrent, currentJson, currentPin, pinned, pinnedJson, jsonAt, body, originExists,
+  return {git, mergeBase, descriptor, equalCurrent, currentJson, currentPin, pinned, pinnedJson, jsonAt, body, originExists,
     missingOrigins,
     resetOrigins() { origins.clear(); missingOrigins.clear(); },
     trustedJson(name) { return jsonAt(descriptor(trusted, name)); },
@@ -237,10 +249,9 @@ async function collect(reader, {baseline, candidate, trusted}) {
   // This is an eligibility bound, not input equivalence. Compare the authored
   // diff from its real merge base; all consumed identities below still compare
   // the exact supplied baseline and candidate, including baseline-only changes.
-  // A depth-one baseline may hide a parent already present via candidate
-  // ancestry. Ignore only the shallow boundary for this read-only query; never
-  // hydrate a graph. Missing required ancestor objects still decline.
-  const mergeBase = reader.git('merge-base', baseline, candidate).toString().trim();
+  // Prefer Git's real shallow boundary; consult already-present hidden ancestry
+  // only if the normal query fails. Missing required history still declines.
+  const mergeBase = reader.mergeBase().toString().trim();
   demand(oid(mergeBase), 'source-scope-merge-base-unavailable');
   const changed = reader.git('diff-tree', '--no-commit-id', '--name-only', '-r', '-z', '--no-renames', mergeBase, candidate).toString().split('\0').filter(Boolean);
   demand(changed.length > 0 && changed.length <= 512 && changed.every(name => safe(name)

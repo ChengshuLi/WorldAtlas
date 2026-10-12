@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import {gunzipSync} from 'node:zlib';
 import {validateContextInputStage,CONTEXT_STAGE_PATH} from './validate-context-input-stage.mjs';
 import {validateContextMigration} from './validate-context-migration.mjs';
-import {candidateBudget} from './native-preparation-guards.mjs';
+import {candidateBudget,preparationAllowance,preparationRequestAllowance} from './native-preparation-guards.mjs';
 import {readPinnedBuildFile} from './read-pinned-build-file.mjs';
 import {repositoryReader,safeEvidencePath,sha256} from '../evidence-quality.mjs';
 import {validateChainedBuildContext} from './chained-build-context.mjs';
@@ -23,20 +23,21 @@ export const BUILD_CONTEXT_VALIDATOR_SOURCES=[
 ];
 const fail=(ok,message)=>{if(!ok)throw Error(message);};
 export async function validateBuildContextStage({root=process.cwd(),expectedReference,
- stagePath=BUILD_CONTEXT_STAGE_PATH,readFile,currentExecution}={}) {
+ stagePath=BUILD_CONTEXT_STAGE_PATH,readFile,currentExecution,processingAllowance}={}) {
+ const allowance=processingAllowance===undefined?preparationAllowance():preparationRequestAllowance(processingAllowance);
  safeEvidencePath(stagePath);
  if(!fs.existsSync(path.join(root,stagePath))&&!readFile){
   const receipt=await validateContextInputStage({root,expectedReference});
   return {receipt};
  }
  const ordinary=readFile??repositoryReader(root),stageRaw=ordinary(stagePath,'candidate'),stage=JSON.parse(stageRaw);
- if(stage.version===2)return validateChainedBuildContext({root,expectedReference,stagePath,stageRaw,stage,readFile,currentExecution});
+ if(stage.version===2)return validateChainedBuildContext({root,expectedReference,stagePath,stageRaw,stage,readFile,currentExecution,processingAllowance:allowance});
  fail(stage.version===1&&Number.isSafeInteger(stage.issue)&&stage.issue>0&&stage.lane==='engineering'&&stage.kind==='retained-identity-context-migration-v1'&&!stage.input_stages,
   'Unsupported build context migration stage');
  fail(stage.original_stage?.path===CONTEXT_STAGE_PATH,'Wrong mandatory original context stage');
  assert.deepEqual(stage.validator_sources.map(p=>p.path).sort(),[...BUILD_CONTEXT_VALIDATOR_SOURCES].sort(),
   'Incomplete or duplicate migrated context validator closure');
- const budget=candidateBudget([]),checked=new Map();budget.add({bytes:stageRaw.length});
+ const budget=candidateBudget([],{allowance}),checked=new Map();budget.add({bytes:stageRaw.length});
  const read=pin=>{
   safeEvidencePath(pin?.path);fail(Number.isSafeInteger(pin.bytes)&&pin.bytes>=0&&/^[a-f0-9]{64}$/.test(pin.sha256??''),'Invalid context stage byte pin');
   if(checked.has(pin.path)){assert.deepEqual(checked.get(pin.path),pin,'Conflicting context stage pin');return ordinary(pin.path,'candidate');}

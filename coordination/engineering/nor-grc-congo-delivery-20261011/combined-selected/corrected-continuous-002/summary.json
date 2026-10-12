@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "kind": "unmerged-reviewed-support-maintenance-diagnostic",
+  "execution_commit": "9473d184683ee8ff8546300f2313779c3cba1d2b",
+  "baseline_commit": "9473d184683ee8ff8546300f2313779c3cba1d2b",
+  "candidate_commit": "791576647adc41241ce9b438f1bb0034088eed4e",
+  "passed": true,
+  "status": "no-new-regression",
+  "regressions": 0,
+  "geometry_errors": 0,
+  "complete_owners": 49625,
+  "required_owners": 54,
+  "changed_locations": 12,
+  "elapsed_seconds": 335.59,
+  "max_rss_bytes": 541163520,
+  "node_operand_elapsed_ms": 335013,
+  "python_compare_elapsed_ms": 119,
+  "limits": [
+    "Executed from the actual frozen support checkout, with exact support HEAD equal to the command executing commit.",
+    "Baseline selected bytes are identical to6e5; all ten checker bodies are unchanged.",
+    "Original trusted1098 failure and earlier checkout-identity refusal remain retained.",
+    "This is a reviewed unmerged-support proof; it is not support merge, selected delivery integration, source authority approval or deployment."
+  ]
+}

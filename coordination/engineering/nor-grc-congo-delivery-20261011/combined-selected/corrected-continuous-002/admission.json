@@ -1,0 +1,24 @@
+{
+  "started_at": "2026-10-11T23:45:18.074787+00:00",
+  "kind": "unmerged-reviewed-support-maintenance-diagnostic",
+  "baseline_commit": "9473d184683ee8ff8546300f2313779c3cba1d2b",
+  "candidate_commit": "791576647adc41241ce9b438f1bb0034088eed4e",
+  "execution_commit": "9473d184683ee8ff8546300f2313779c3cba1d2b",
+  "execution_checkout": "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/82d9887b495755e562da904ce54badee6ddfaff3ea310221e99f34ac4db02fa5/work",
+  "execution_head_matches_command": true,
+  "baseline_selection_identical_to_6e5": true,
+  "ten_code_bodies_identical_to_6e5": true,
+  "mem_available_bytes": 9172459520,
+  "reserved_bytes": 4294967296,
+  "concurrent_reserved_bytes": 0,
+  "parent_reserved_bytes": 2147483648,
+  "residual_bytes": 2730008576,
+  "wall_seconds": 1200,
+  "python": "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/.cache/build-runtime-cp312/bin/python",
+  "recording_correction": {
+    "field": "python",
+    "original_recorded_value": "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/build-runtime-cp312/bin/python",
+    "reason": "Scheduling-note path construction omitted .cache. The actual command used the pinned venv path shown here and in continuous.time.log; the operator did not consume this scheduling note.",
+    "original_note_sha256": "70e1dcc48be6baab5dfa07205d2db98ce0dd77ebac9013ac99fe4f41836a7873"
+  }
+}

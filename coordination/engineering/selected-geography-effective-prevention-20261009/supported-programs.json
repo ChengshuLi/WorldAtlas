@@ -2836,6 +2836,366 @@
       ],
       "accepted_head": "e2a1061921b1917ed48f0578940ee0494d02dc90",
       "independent_review_comment": 6111057198
+    },
+    {
+      "preimage_version": 3,
+      "source_profile": "retained-consumed-administrative-source",
+      "source_executed_code": [
+        {
+          "bytes": 1417,
+          "path": "package.json",
+          "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+        },
+        {
+          "bytes": 189585,
+          "path": "scripts/additive-gap-repair.mjs",
+          "sha256": "2c17159bfda4ef65f1a13348c5ad3ffdacd243927ae7a49f8c3f160483216a87"
+        },
+        {
+          "bytes": 45330,
+          "path": "src/effective-footprint.js",
+          "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+        },
+        {
+          "bytes": 6580,
+          "path": "scripts/native-ownership/native-preparation-guards.mjs",
+          "sha256": "44901437d91c0ff8805030170abcd855aac3ac8354f10e4e67002f23e6a2ba31"
+        },
+        {
+          "bytes": 3497,
+          "path": "src/native-runtime.js",
+          "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+        },
+        {
+          "bytes": 4472,
+          "path": "scripts/native-ownership/compile-native-ownership.mjs",
+          "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+        },
+        {
+          "bytes": 6408,
+          "path": "src/native-grid.js",
+          "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+        },
+        {
+          "bytes": 2948,
+          "path": "src/ownership-codec.js",
+          "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+        },
+        {
+          "bytes": 6777,
+          "path": "scripts/audit-grid-intervals.mjs",
+          "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+        },
+        {
+          "bytes": 4377,
+          "path": "scripts/native-ownership/require-verified-selection.mjs",
+          "sha256": "20a8e3f472db4c06386ce2b7bd01330ea8acfd6d1ff414f6d2d32e8b1995d50c"
+        },
+        {
+          "bytes": 1540,
+          "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+          "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb"
+        },
+        {
+          "bytes": 1810,
+          "path": "scripts/native-ownership/verified-candidates.json",
+          "sha256": "080a481b71383bd6ba3388ad9b26138b25fced628a61830c3bb02a933562e40a"
+        },
+        {
+          "bytes": 28506,
+          "path": "scripts/evidence-quality.mjs",
+          "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97"
+        },
+        {
+          "bytes": 3126,
+          "path": "src/ownership-method.js",
+          "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df"
+        },
+        {
+          "bytes": 75074,
+          "path": "scripts/check-effective-geographic-regression.mjs",
+          "sha256": "801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039"
+        },
+        {
+          "bytes": 142012,
+          "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+          "sha256": "6da5919c63822393959afc8f2499c76470aa6b51d6e29664d372e9eee79ae4b1"
+        },
+        {
+          "bytes": 246591,
+          "path": "package-lock.json",
+          "sha256": "471d035f92567ea447f221661db5fa8febfc7afc32af8ac975506ce9e0303255"
+        }
+      ],
+      "native_executed_code": [
+        {
+          "bytes": 1417,
+          "path": "package.json",
+          "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+        },
+        {
+          "bytes": 189585,
+          "path": "scripts/additive-gap-repair.mjs",
+          "sha256": "2c17159bfda4ef65f1a13348c5ad3ffdacd243927ae7a49f8c3f160483216a87"
+        },
+        {
+          "bytes": 45330,
+          "path": "src/effective-footprint.js",
+          "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+        },
+        {
+          "bytes": 6580,
+          "path": "scripts/native-ownership/native-preparation-guards.mjs",
+          "sha256": "44901437d91c0ff8805030170abcd855aac3ac8354f10e4e67002f23e6a2ba31"
+        },
+        {
+          "bytes": 3497,
+          "path": "src/native-runtime.js",
+          "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+        },
+        {
+          "bytes": 4472,
+          "path": "scripts/native-ownership/compile-native-ownership.mjs",
+          "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+        },
+        {
+          "bytes": 6408,
+          "path": "src/native-grid.js",
+          "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+        },
+        {
+          "bytes": 2948,
+          "path": "src/ownership-codec.js",
+          "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+        },
+        {
+          "bytes": 6777,
+          "path": "scripts/audit-grid-intervals.mjs",
+          "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+        },
+        {
+          "bytes": 4377,
+          "path": "scripts/native-ownership/require-verified-selection.mjs",
+          "sha256": "20a8e3f472db4c06386ce2b7bd01330ea8acfd6d1ff414f6d2d32e8b1995d50c"
+        },
+        {
+          "bytes": 1540,
+          "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+          "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb"
+        },
+        {
+          "bytes": 1810,
+          "path": "scripts/native-ownership/verified-candidates.json",
+          "sha256": "080a481b71383bd6ba3388ad9b26138b25fced628a61830c3bb02a933562e40a"
+        },
+        {
+          "bytes": 28506,
+          "path": "scripts/evidence-quality.mjs",
+          "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97"
+        },
+        {
+          "bytes": 3126,
+          "path": "src/ownership-method.js",
+          "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df"
+        },
+        {
+          "bytes": 75074,
+          "path": "scripts/check-effective-geographic-regression.mjs",
+          "sha256": "801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039"
+        },
+        {
+          "bytes": 142012,
+          "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+          "sha256": "6da5919c63822393959afc8f2499c76470aa6b51d6e29664d372e9eee79ae4b1"
+        },
+        {
+          "bytes": 246591,
+          "path": "package-lock.json",
+          "sha256": "471d035f92567ea447f221661db5fa8febfc7afc32af8ac975506ce9e0303255"
+        }
+      ],
+      "accepted_head": "8fe910edd0dba95b45ae8ecd910d6c9486976341",
+      "independent_review_comment": 6111799461
+    },
+    {
+      "preimage_version": 3,
+      "source_profile": "retained-consumed-administrative-source",
+      "source_executed_code": [
+        {
+          "path": "package.json",
+          "bytes": 1417,
+          "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+        },
+        {
+          "path": "scripts/additive-gap-repair.mjs",
+          "bytes": 192403,
+          "sha256": "27582c56dfcc1341c952366a9eec0bb47e3f83b0a79c31d4a85a674df25bbebb"
+        },
+        {
+          "path": "src/effective-footprint.js",
+          "bytes": 45330,
+          "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+        },
+        {
+          "path": "scripts/native-ownership/native-preparation-guards.mjs",
+          "bytes": 8654,
+          "sha256": "c5b8ca1d3d1d773b0fafb79c613ce4b89532b01d08b8fda761a465755c16f694"
+        },
+        {
+          "path": "src/native-runtime.js",
+          "bytes": 3497,
+          "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+        },
+        {
+          "path": "scripts/native-ownership/compile-native-ownership.mjs",
+          "bytes": 4472,
+          "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+        },
+        {
+          "path": "src/native-grid.js",
+          "bytes": 6408,
+          "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+        },
+        {
+          "path": "src/ownership-codec.js",
+          "bytes": 2948,
+          "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+        },
+        {
+          "path": "scripts/audit-grid-intervals.mjs",
+          "bytes": 6777,
+          "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+        },
+        {
+          "path": "scripts/native-ownership/require-verified-selection.mjs",
+          "bytes": 4377,
+          "sha256": "20a8e3f472db4c06386ce2b7bd01330ea8acfd6d1ff414f6d2d32e8b1995d50c"
+        },
+        {
+          "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+          "bytes": 1540,
+          "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb"
+        },
+        {
+          "path": "scripts/native-ownership/verified-candidates.json",
+          "bytes": 1810,
+          "sha256": "080a481b71383bd6ba3388ad9b26138b25fced628a61830c3bb02a933562e40a"
+        },
+        {
+          "path": "scripts/evidence-quality.mjs",
+          "bytes": 28506,
+          "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97"
+        },
+        {
+          "path": "src/ownership-method.js",
+          "bytes": 3126,
+          "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df"
+        },
+        {
+          "path": "scripts/check-effective-geographic-regression.mjs",
+          "bytes": 77142,
+          "sha256": "5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda"
+        },
+        {
+          "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+          "bytes": 144181,
+          "sha256": "1ebc1415f9c18cf8639734073313667bbc0e831317484c48fcafbc6f6d7f1216"
+        },
+        {
+          "path": "package-lock.json",
+          "bytes": 246591,
+          "sha256": "471d035f92567ea447f221661db5fa8febfc7afc32af8ac975506ce9e0303255"
+        }
+      ],
+      "native_executed_code": [
+        {
+          "path": "package.json",
+          "bytes": 1417,
+          "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+        },
+        {
+          "path": "scripts/additive-gap-repair.mjs",
+          "bytes": 192403,
+          "sha256": "27582c56dfcc1341c952366a9eec0bb47e3f83b0a79c31d4a85a674df25bbebb"
+        },
+        {
+          "path": "src/effective-footprint.js",
+          "bytes": 45330,
+          "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+        },
+        {
+          "path": "scripts/native-ownership/native-preparation-guards.mjs",
+          "bytes": 8654,
+          "sha256": "c5b8ca1d3d1d773b0fafb79c613ce4b89532b01d08b8fda761a465755c16f694"
+        },
+        {
+          "path": "src/native-runtime.js",
+          "bytes": 3497,
+          "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+        },
+        {
+          "path": "scripts/native-ownership/compile-native-ownership.mjs",
+          "bytes": 4472,
+          "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+        },
+        {
+          "path": "src/native-grid.js",
+          "bytes": 6408,
+          "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+        },
+        {
+          "path": "src/ownership-codec.js",
+          "bytes": 2948,
+          "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+        },
+        {
+          "path": "scripts/audit-grid-intervals.mjs",
+          "bytes": 6777,
+          "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+        },
+        {
+          "path": "scripts/native-ownership/require-verified-selection.mjs",
+          "bytes": 4377,
+          "sha256": "20a8e3f472db4c06386ce2b7bd01330ea8acfd6d1ff414f6d2d32e8b1995d50c"
+        },
+        {
+          "path": "scripts/native-ownership/read-pinned-build-file.mjs",
+          "bytes": 1540,
+          "sha256": "7633087e97d7fbceeaf87c0e5f0225c2c456a7141f534b7fb53f4312222166cb"
+        },
+        {
+          "path": "scripts/native-ownership/verified-candidates.json",
+          "bytes": 1810,
+          "sha256": "080a481b71383bd6ba3388ad9b26138b25fced628a61830c3bb02a933562e40a"
+        },
+        {
+          "path": "scripts/evidence-quality.mjs",
+          "bytes": 28506,
+          "sha256": "8950701f659808b0f1aa527d1d79dbdaa06921abd601bef80a6b030963eb0d97"
+        },
+        {
+          "path": "src/ownership-method.js",
+          "bytes": 3126,
+          "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df"
+        },
+        {
+          "path": "scripts/check-effective-geographic-regression.mjs",
+          "bytes": 77142,
+          "sha256": "5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda"
+        },
+        {
+          "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+          "bytes": 144181,
+          "sha256": "1ebc1415f9c18cf8639734073313667bbc0e831317484c48fcafbc6f6d7f1216"
+        },
+        {
+          "path": "package-lock.json",
+          "bytes": 246591,
+          "sha256": "471d035f92567ea447f221661db5fa8febfc7afc32af8ac975506ce9e0303255"
+        }
+      ],
+      "accepted_head": "512c100efbb4c6334b39cefaabac2d30ec2c7823",
+      "independent_review_comment": 6114941914
     }
   ],
   "current_rebind_migrations": [
@@ -3126,6 +3486,1158 @@
         }
       ],
       "independent_review_comment": 6105261214
+    },
+    {
+      "execution_commit": "17b80a99f11193b2aa23c85c3d6e84f8183801ce",
+      "historical_code": [
+        {
+          "bytes": 2279,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+          "sha256": "f4d5480d23ba6ae097a559d066b2a244ce388ba81aa6c486331e731be23e1813"
+        },
+        {
+          "bytes": 242,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs",
+          "sha256": "704b8a224f09943b4290d0c39514c480d041de946683253f36ef86dcf4f92f7c"
+        },
+        {
+          "bytes": 317,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind.mjs",
+          "sha256": "a0aecb8720ff295df16e5bef6bb5f527ed002380c6cb64a514242f79614c8cb0"
+        },
+        {
+          "bytes": 139553,
+          "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+          "sha256": "63745cc5d4f15bdd8c153787df07379d813ab037fc1e0734944a75568235e8aa"
+        },
+        {
+          "bytes": 45330,
+          "path": "src/effective-footprint.js",
+          "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+        },
+        {
+          "bytes": 75074,
+          "path": "scripts/check-effective-geographic-regression.mjs",
+          "sha256": "801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039"
+        },
+        {
+          "bytes": 2948,
+          "path": "src/ownership-codec.js",
+          "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+        },
+        {
+          "bytes": 1417,
+          "path": "package.json",
+          "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+        },
+        {
+          "bytes": 3497,
+          "path": "src/native-runtime.js",
+          "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+        },
+        {
+          "bytes": 4472,
+          "path": "scripts/native-ownership/compile-native-ownership.mjs",
+          "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+        },
+        {
+          "bytes": 6408,
+          "path": "src/native-grid.js",
+          "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+        },
+        {
+          "bytes": 2799,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/package.json",
+          "sha256": "ceb30ba96a14786c419db53f2b8d3d59ece7ac5221c198ac03def462cf96ef23"
+        },
+        {
+          "bytes": 16773,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/sha2.js",
+          "sha256": "3ddc587c588283cbceed4dd9929cefcce06a0c231b54d4c6f0f99c478c686c00"
+        },
+        {
+          "bytes": 5615,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_md.js",
+          "sha256": "a112f0fe1b15db00f2638618c436a17be1c5e13baf19d02fcc29016ae1db2233"
+        },
+        {
+          "bytes": 3081,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_u64.js",
+          "sha256": "e48c0cfc10810439a4807b46db136ce603a3fa09b62584f513ef2f3ca496af54"
+        },
+        {
+          "bytes": 9356,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/utils.js",
+          "sha256": "11319ec0a8132a0c2ced8c98af33ae9274c001d6baf4f4709c4a6115e031a3c5"
+        },
+        {
+          "bytes": 6777,
+          "path": "scripts/audit-grid-intervals.mjs",
+          "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+        },
+        {
+          "bytes": 15742,
+          "path": "coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs",
+          "sha256": "7af853f9ff63a221f83db831200b7d4943b7006e97bd872a72eccbbe2aef6930"
+        },
+        {
+          "bytes": 8614,
+          "path": "coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs",
+          "sha256": "8115ad748fab6ba9b829510db5f020b1b070138ea80ad96be93d515597b3a738"
+        },
+        {
+          "bytes": 23671,
+          "path": "coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py",
+          "sha256": "37d6e02607204302fc01c5d3d6652c89a937e5e84acaa71fb25f5ddc7bcdf5e8"
+        },
+        {
+          "bytes": 20660,
+          "path": "coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py",
+          "sha256": "5be26c44ef36a097a24c82dab89a91693c94065278f5e15aeb57b0d295755345"
+        },
+        {
+          "bytes": 3169,
+          "path": "coordination/engineering/additive-native-composition-20261009/execution-contract.py",
+          "sha256": "8bdc08d55830a7a3d95bce5ad20044f0ce5de08bcd5e514b51570bd19e8b114a"
+        },
+        {
+          "bytes": 2201,
+          "path": "coordination/engineering/additive-native-composition-20261009/owned-group-original.py",
+          "sha256": "9ac8aeca9c721968bf33e69e219dbfb103875263b994dff1bd2e94402d0750ce"
+        },
+        {
+          "bytes": 2596,
+          "path": "coordination/engineering/additive-native-composition-20261009/owned-child-termination-original.py",
+          "sha256": "00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61"
+        },
+        {
+          "bytes": 22001,
+          "path": "coordination/engineering/additive-native-composition-20261009/mac-execution-runtime-original.json",
+          "sha256": "3b4c62732d123b00c436f724387f3fec67390b205223561b70787b0e2d44d4f5"
+        },
+        {
+          "bytes": 2197,
+          "path": "coordination/engineering/additive-native-composition-20261009/execution-code-paths.json",
+          "sha256": "9173f3eb7a6c9dfe6c6aaf4524229db6c7caec296a09ed41347b0c43c6145708"
+        },
+        {
+          "bytes": 13365,
+          "path": "scripts/local-workspace.mjs",
+          "sha256": "74c390efa3360b4431d047f89ab99986da697e58716000f44a4b284760e2a373"
+        },
+        {
+          "bytes": 548,
+          "path": "scripts/worker-identity.mjs",
+          "sha256": "e31ef3d286c3250f7f69e23f455edd896cfa96b8eb6438026aa4374da57128bd"
+        }
+      ],
+      "current_code": [
+        {
+          "bytes": 2279,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+          "sha256": "f4d5480d23ba6ae097a559d066b2a244ce388ba81aa6c486331e731be23e1813"
+        },
+        {
+          "bytes": 242,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs",
+          "sha256": "704b8a224f09943b4290d0c39514c480d041de946683253f36ef86dcf4f92f7c"
+        },
+        {
+          "bytes": 317,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind.mjs",
+          "sha256": "a0aecb8720ff295df16e5bef6bb5f527ed002380c6cb64a514242f79614c8cb0"
+        },
+        {
+          "bytes": 142012,
+          "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+          "sha256": "6da5919c63822393959afc8f2499c76470aa6b51d6e29664d372e9eee79ae4b1"
+        },
+        {
+          "bytes": 45330,
+          "path": "src/effective-footprint.js",
+          "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+        },
+        {
+          "bytes": 75074,
+          "path": "scripts/check-effective-geographic-regression.mjs",
+          "sha256": "801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039"
+        },
+        {
+          "bytes": 2948,
+          "path": "src/ownership-codec.js",
+          "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+        },
+        {
+          "bytes": 1417,
+          "path": "package.json",
+          "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+        },
+        {
+          "bytes": 3497,
+          "path": "src/native-runtime.js",
+          "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+        },
+        {
+          "bytes": 4472,
+          "path": "scripts/native-ownership/compile-native-ownership.mjs",
+          "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+        },
+        {
+          "bytes": 6408,
+          "path": "src/native-grid.js",
+          "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+        },
+        {
+          "bytes": 2799,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/package.json",
+          "sha256": "ceb30ba96a14786c419db53f2b8d3d59ece7ac5221c198ac03def462cf96ef23"
+        },
+        {
+          "bytes": 16773,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/sha2.js",
+          "sha256": "3ddc587c588283cbceed4dd9929cefcce06a0c231b54d4c6f0f99c478c686c00"
+        },
+        {
+          "bytes": 5615,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_md.js",
+          "sha256": "a112f0fe1b15db00f2638618c436a17be1c5e13baf19d02fcc29016ae1db2233"
+        },
+        {
+          "bytes": 3081,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_u64.js",
+          "sha256": "e48c0cfc10810439a4807b46db136ce603a3fa09b62584f513ef2f3ca496af54"
+        },
+        {
+          "bytes": 9356,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/utils.js",
+          "sha256": "11319ec0a8132a0c2ced8c98af33ae9274c001d6baf4f4709c4a6115e031a3c5"
+        },
+        {
+          "bytes": 6777,
+          "path": "scripts/audit-grid-intervals.mjs",
+          "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+        },
+        {
+          "bytes": 18526,
+          "path": "coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs",
+          "sha256": "ddb9f9ef10b8f5c470e3fe40267dece5cb7b39cdb773e9fa12bec80c9a694157"
+        },
+        {
+          "bytes": 8642,
+          "path": "coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs",
+          "sha256": "fb9e0899c08a71f336118cea8dfe8607aac6bb44bd0f4073a4207874113c697d"
+        },
+        {
+          "bytes": 23671,
+          "path": "coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py",
+          "sha256": "37d6e02607204302fc01c5d3d6652c89a937e5e84acaa71fb25f5ddc7bcdf5e8"
+        },
+        {
+          "bytes": 21045,
+          "path": "coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py",
+          "sha256": "3744c6e04d90d822ffdd291ddc542e87ba39984f9e4b9947b26b589b8da79674"
+        },
+        {
+          "bytes": 3169,
+          "path": "coordination/engineering/additive-native-composition-20261009/execution-contract.py",
+          "sha256": "8bdc08d55830a7a3d95bce5ad20044f0ce5de08bcd5e514b51570bd19e8b114a"
+        },
+        {
+          "bytes": 2201,
+          "path": "coordination/engineering/additive-native-composition-20261009/owned-group-original.py",
+          "sha256": "9ac8aeca9c721968bf33e69e219dbfb103875263b994dff1bd2e94402d0750ce"
+        },
+        {
+          "bytes": 2596,
+          "path": "coordination/engineering/additive-native-composition-20261009/owned-child-termination-original.py",
+          "sha256": "00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61"
+        },
+        {
+          "bytes": 22001,
+          "path": "coordination/engineering/additive-native-composition-20261009/mac-execution-runtime-original.json",
+          "sha256": "3b4c62732d123b00c436f724387f3fec67390b205223561b70787b0e2d44d4f5"
+        },
+        {
+          "bytes": 2197,
+          "path": "coordination/engineering/additive-native-composition-20261009/execution-code-paths.json",
+          "sha256": "9173f3eb7a6c9dfe6c6aaf4524229db6c7caec296a09ed41347b0c43c6145708"
+        },
+        {
+          "bytes": 13365,
+          "path": "scripts/local-workspace.mjs",
+          "sha256": "74c390efa3360b4431d047f89ab99986da697e58716000f44a4b284760e2a373"
+        },
+        {
+          "bytes": 548,
+          "path": "scripts/worker-identity.mjs",
+          "sha256": "e31ef3d286c3250f7f69e23f455edd896cfa96b8eb6438026aa4374da57128bd"
+        }
+      ],
+      "independent_review_comment": 6111799461
+    },
+    {
+      "execution_commit": "47170b8971aa4400b815335243f859cc67e2485d",
+      "historical_code": [
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+          "bytes": 2279,
+          "sha256": "f4d5480d23ba6ae097a559d066b2a244ce388ba81aa6c486331e731be23e1813"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs",
+          "bytes": 242,
+          "sha256": "704b8a224f09943b4290d0c39514c480d041de946683253f36ef86dcf4f92f7c"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind.mjs",
+          "bytes": 317,
+          "sha256": "a0aecb8720ff295df16e5bef6bb5f527ed002380c6cb64a514242f79614c8cb0"
+        },
+        {
+          "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+          "bytes": 192325,
+          "sha256": "800e5ab768e9f0f66aea52062611494a1edd3bcc7c4795cbac2bf8459ddff53e"
+        },
+        {
+          "path": "src/effective-footprint.js",
+          "bytes": 45330,
+          "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+        },
+        {
+          "path": "scripts/check-effective-geographic-regression.mjs",
+          "bytes": 75074,
+          "sha256": "801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039"
+        },
+        {
+          "path": "src/ownership-codec.js",
+          "bytes": 2948,
+          "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+        },
+        {
+          "path": "package.json",
+          "bytes": 1417,
+          "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+        },
+        {
+          "path": "src/native-runtime.js",
+          "bytes": 3497,
+          "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+        },
+        {
+          "path": "scripts/native-ownership/compile-native-ownership.mjs",
+          "bytes": 4472,
+          "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+        },
+        {
+          "path": "src/native-grid.js",
+          "bytes": 6408,
+          "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/package.json",
+          "bytes": 2799,
+          "sha256": "ceb30ba96a14786c419db53f2b8d3d59ece7ac5221c198ac03def462cf96ef23"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/sha2.js",
+          "bytes": 16773,
+          "sha256": "3ddc587c588283cbceed4dd9929cefcce06a0c231b54d4c6f0f99c478c686c00"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_md.js",
+          "bytes": 5615,
+          "sha256": "a112f0fe1b15db00f2638618c436a17be1c5e13baf19d02fcc29016ae1db2233"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_u64.js",
+          "bytes": 3081,
+          "sha256": "e48c0cfc10810439a4807b46db136ce603a3fa09b62584f513ef2f3ca496af54"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/utils.js",
+          "bytes": 9356,
+          "sha256": "11319ec0a8132a0c2ced8c98af33ae9274c001d6baf4f4709c4a6115e031a3c5"
+        },
+        {
+          "path": "scripts/audit-grid-intervals.mjs",
+          "bytes": 6777,
+          "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs",
+          "bytes": 15742,
+          "sha256": "7af853f9ff63a221f83db831200b7d4943b7006e97bd872a72eccbbe2aef6930"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs",
+          "bytes": 8614,
+          "sha256": "8115ad748fab6ba9b829510db5f020b1b070138ea80ad96be93d515597b3a738"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py",
+          "bytes": 23671,
+          "sha256": "37d6e02607204302fc01c5d3d6652c89a937e5e84acaa71fb25f5ddc7bcdf5e8"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py",
+          "bytes": 20660,
+          "sha256": "5be26c44ef36a097a24c82dab89a91693c94065278f5e15aeb57b0d295755345"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/execution-contract.py",
+          "bytes": 3169,
+          "sha256": "8bdc08d55830a7a3d95bce5ad20044f0ce5de08bcd5e514b51570bd19e8b114a"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/owned-group-original.py",
+          "bytes": 2201,
+          "sha256": "9ac8aeca9c721968bf33e69e219dbfb103875263b994dff1bd2e94402d0750ce"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/owned-child-termination-original.py",
+          "bytes": 2596,
+          "sha256": "00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/mac-execution-runtime-original.json",
+          "bytes": 22001,
+          "sha256": "3b4c62732d123b00c436f724387f3fec67390b205223561b70787b0e2d44d4f5"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/execution-code-paths.json",
+          "bytes": 2197,
+          "sha256": "9173f3eb7a6c9dfe6c6aaf4524229db6c7caec296a09ed41347b0c43c6145708"
+        },
+        {
+          "path": "scripts/local-workspace.mjs",
+          "bytes": 13365,
+          "sha256": "74c390efa3360b4431d047f89ab99986da697e58716000f44a4b284760e2a373"
+        },
+        {
+          "path": "scripts/worker-identity.mjs",
+          "bytes": 548,
+          "sha256": "e31ef3d286c3250f7f69e23f455edd896cfa96b8eb6438026aa4374da57128bd"
+        }
+      ],
+      "current_code": [
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+          "bytes": 2279,
+          "sha256": "f4d5480d23ba6ae097a559d066b2a244ce388ba81aa6c486331e731be23e1813"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs",
+          "bytes": 242,
+          "sha256": "704b8a224f09943b4290d0c39514c480d041de946683253f36ef86dcf4f92f7c"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind.mjs",
+          "bytes": 317,
+          "sha256": "a0aecb8720ff295df16e5bef6bb5f527ed002380c6cb64a514242f79614c8cb0"
+        },
+        {
+          "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+          "bytes": 144181,
+          "sha256": "1ebc1415f9c18cf8639734073313667bbc0e831317484c48fcafbc6f6d7f1216"
+        },
+        {
+          "path": "src/effective-footprint.js",
+          "bytes": 45330,
+          "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+        },
+        {
+          "path": "scripts/check-effective-geographic-regression.mjs",
+          "bytes": 77142,
+          "sha256": "5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda"
+        },
+        {
+          "path": "src/ownership-codec.js",
+          "bytes": 2948,
+          "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+        },
+        {
+          "path": "package.json",
+          "bytes": 1417,
+          "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+        },
+        {
+          "path": "src/native-runtime.js",
+          "bytes": 3497,
+          "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+        },
+        {
+          "path": "scripts/native-ownership/compile-native-ownership.mjs",
+          "bytes": 4472,
+          "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+        },
+        {
+          "path": "src/native-grid.js",
+          "bytes": 6408,
+          "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/package.json",
+          "bytes": 2799,
+          "sha256": "ceb30ba96a14786c419db53f2b8d3d59ece7ac5221c198ac03def462cf96ef23"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/sha2.js",
+          "bytes": 16773,
+          "sha256": "3ddc587c588283cbceed4dd9929cefcce06a0c231b54d4c6f0f99c478c686c00"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_md.js",
+          "bytes": 5615,
+          "sha256": "a112f0fe1b15db00f2638618c436a17be1c5e13baf19d02fcc29016ae1db2233"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_u64.js",
+          "bytes": 3081,
+          "sha256": "e48c0cfc10810439a4807b46db136ce603a3fa09b62584f513ef2f3ca496af54"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/utils.js",
+          "bytes": 9356,
+          "sha256": "11319ec0a8132a0c2ced8c98af33ae9274c001d6baf4f4709c4a6115e031a3c5"
+        },
+        {
+          "path": "scripts/audit-grid-intervals.mjs",
+          "bytes": 6777,
+          "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs",
+          "bytes": 17977,
+          "sha256": "99e9a5f2508cea0a830480d7ff01af85654f04a972e49ee2391b3e0b2c3d3c68"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs",
+          "bytes": 8823,
+          "sha256": "319744feb3c73f2b51deed68222e43c2241dbb28557c917a15a4f9010273b614"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py",
+          "bytes": 25823,
+          "sha256": "372e020108f6ddbf6cecefc5522b31105ebdf81e2bf9e6fe0a459a19fd561669"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py",
+          "bytes": 22240,
+          "sha256": "538c5d85f69345f6436d1cf34dca3c78bd0cef13fec1c7271a5ba9f19b0bb0ea"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/execution-contract.py",
+          "bytes": 4874,
+          "sha256": "6caf8f51ce4516c7a9ca8c407c06c522dac7676a26eb91999c8f25170aa1fc13"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/owned-group-original.py",
+          "bytes": 2201,
+          "sha256": "9ac8aeca9c721968bf33e69e219dbfb103875263b994dff1bd2e94402d0750ce"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/owned-child-termination-original.py",
+          "bytes": 2596,
+          "sha256": "00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/mac-execution-runtime-original.json",
+          "bytes": 22001,
+          "sha256": "3b4c62732d123b00c436f724387f3fec67390b205223561b70787b0e2d44d4f5"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/execution-code-paths.json",
+          "bytes": 2197,
+          "sha256": "9173f3eb7a6c9dfe6c6aaf4524229db6c7caec296a09ed41347b0c43c6145708"
+        },
+        {
+          "path": "scripts/local-workspace.mjs",
+          "bytes": 13365,
+          "sha256": "74c390efa3360b4431d047f89ab99986da697e58716000f44a4b284760e2a373"
+        },
+        {
+          "path": "scripts/worker-identity.mjs",
+          "bytes": 548,
+          "sha256": "e31ef3d286c3250f7f69e23f455edd896cfa96b8eb6438026aa4374da57128bd"
+        }
+      ],
+      "independent_review_comment": 6114941914
+    },
+    {
+      "execution_commit": "17b80a99f11193b2aa23c85c3d6e84f8183801ce",
+      "historical_code": [
+        {
+          "bytes": 2279,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+          "sha256": "f4d5480d23ba6ae097a559d066b2a244ce388ba81aa6c486331e731be23e1813"
+        },
+        {
+          "bytes": 242,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs",
+          "sha256": "704b8a224f09943b4290d0c39514c480d041de946683253f36ef86dcf4f92f7c"
+        },
+        {
+          "bytes": 317,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind.mjs",
+          "sha256": "a0aecb8720ff295df16e5bef6bb5f527ed002380c6cb64a514242f79614c8cb0"
+        },
+        {
+          "bytes": 139553,
+          "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+          "sha256": "63745cc5d4f15bdd8c153787df07379d813ab037fc1e0734944a75568235e8aa"
+        },
+        {
+          "bytes": 45330,
+          "path": "src/effective-footprint.js",
+          "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+        },
+        {
+          "bytes": 75074,
+          "path": "scripts/check-effective-geographic-regression.mjs",
+          "sha256": "801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039"
+        },
+        {
+          "bytes": 2948,
+          "path": "src/ownership-codec.js",
+          "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+        },
+        {
+          "bytes": 1417,
+          "path": "package.json",
+          "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+        },
+        {
+          "bytes": 3497,
+          "path": "src/native-runtime.js",
+          "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+        },
+        {
+          "bytes": 4472,
+          "path": "scripts/native-ownership/compile-native-ownership.mjs",
+          "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+        },
+        {
+          "bytes": 6408,
+          "path": "src/native-grid.js",
+          "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+        },
+        {
+          "bytes": 2799,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/package.json",
+          "sha256": "ceb30ba96a14786c419db53f2b8d3d59ece7ac5221c198ac03def462cf96ef23"
+        },
+        {
+          "bytes": 16773,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/sha2.js",
+          "sha256": "3ddc587c588283cbceed4dd9929cefcce06a0c231b54d4c6f0f99c478c686c00"
+        },
+        {
+          "bytes": 5615,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_md.js",
+          "sha256": "a112f0fe1b15db00f2638618c436a17be1c5e13baf19d02fcc29016ae1db2233"
+        },
+        {
+          "bytes": 3081,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_u64.js",
+          "sha256": "e48c0cfc10810439a4807b46db136ce603a3fa09b62584f513ef2f3ca496af54"
+        },
+        {
+          "bytes": 9356,
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/utils.js",
+          "sha256": "11319ec0a8132a0c2ced8c98af33ae9274c001d6baf4f4709c4a6115e031a3c5"
+        },
+        {
+          "bytes": 6777,
+          "path": "scripts/audit-grid-intervals.mjs",
+          "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+        },
+        {
+          "bytes": 15742,
+          "path": "coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs",
+          "sha256": "7af853f9ff63a221f83db831200b7d4943b7006e97bd872a72eccbbe2aef6930"
+        },
+        {
+          "bytes": 8614,
+          "path": "coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs",
+          "sha256": "8115ad748fab6ba9b829510db5f020b1b070138ea80ad96be93d515597b3a738"
+        },
+        {
+          "bytes": 23671,
+          "path": "coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py",
+          "sha256": "37d6e02607204302fc01c5d3d6652c89a937e5e84acaa71fb25f5ddc7bcdf5e8"
+        },
+        {
+          "bytes": 20660,
+          "path": "coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py",
+          "sha256": "5be26c44ef36a097a24c82dab89a91693c94065278f5e15aeb57b0d295755345"
+        },
+        {
+          "bytes": 3169,
+          "path": "coordination/engineering/additive-native-composition-20261009/execution-contract.py",
+          "sha256": "8bdc08d55830a7a3d95bce5ad20044f0ce5de08bcd5e514b51570bd19e8b114a"
+        },
+        {
+          "bytes": 2201,
+          "path": "coordination/engineering/additive-native-composition-20261009/owned-group-original.py",
+          "sha256": "9ac8aeca9c721968bf33e69e219dbfb103875263b994dff1bd2e94402d0750ce"
+        },
+        {
+          "bytes": 2596,
+          "path": "coordination/engineering/additive-native-composition-20261009/owned-child-termination-original.py",
+          "sha256": "00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61"
+        },
+        {
+          "bytes": 22001,
+          "path": "coordination/engineering/additive-native-composition-20261009/mac-execution-runtime-original.json",
+          "sha256": "3b4c62732d123b00c436f724387f3fec67390b205223561b70787b0e2d44d4f5"
+        },
+        {
+          "bytes": 2197,
+          "path": "coordination/engineering/additive-native-composition-20261009/execution-code-paths.json",
+          "sha256": "9173f3eb7a6c9dfe6c6aaf4524229db6c7caec296a09ed41347b0c43c6145708"
+        },
+        {
+          "bytes": 13365,
+          "path": "scripts/local-workspace.mjs",
+          "sha256": "74c390efa3360b4431d047f89ab99986da697e58716000f44a4b284760e2a373"
+        },
+        {
+          "bytes": 548,
+          "path": "scripts/worker-identity.mjs",
+          "sha256": "e31ef3d286c3250f7f69e23f455edd896cfa96b8eb6438026aa4374da57128bd"
+        }
+      ],
+      "current_code": [
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+          "bytes": 2279,
+          "sha256": "f4d5480d23ba6ae097a559d066b2a244ce388ba81aa6c486331e731be23e1813"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs",
+          "bytes": 242,
+          "sha256": "704b8a224f09943b4290d0c39514c480d041de946683253f36ef86dcf4f92f7c"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind.mjs",
+          "bytes": 317,
+          "sha256": "a0aecb8720ff295df16e5bef6bb5f527ed002380c6cb64a514242f79614c8cb0"
+        },
+        {
+          "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+          "bytes": 144181,
+          "sha256": "1ebc1415f9c18cf8639734073313667bbc0e831317484c48fcafbc6f6d7f1216"
+        },
+        {
+          "path": "src/effective-footprint.js",
+          "bytes": 45330,
+          "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+        },
+        {
+          "path": "scripts/check-effective-geographic-regression.mjs",
+          "bytes": 77142,
+          "sha256": "5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda"
+        },
+        {
+          "path": "src/ownership-codec.js",
+          "bytes": 2948,
+          "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+        },
+        {
+          "path": "package.json",
+          "bytes": 1417,
+          "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+        },
+        {
+          "path": "src/native-runtime.js",
+          "bytes": 3497,
+          "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+        },
+        {
+          "path": "scripts/native-ownership/compile-native-ownership.mjs",
+          "bytes": 4472,
+          "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+        },
+        {
+          "path": "src/native-grid.js",
+          "bytes": 6408,
+          "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/package.json",
+          "bytes": 2799,
+          "sha256": "ceb30ba96a14786c419db53f2b8d3d59ece7ac5221c198ac03def462cf96ef23"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/sha2.js",
+          "bytes": 16773,
+          "sha256": "3ddc587c588283cbceed4dd9929cefcce06a0c231b54d4c6f0f99c478c686c00"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_md.js",
+          "bytes": 5615,
+          "sha256": "a112f0fe1b15db00f2638618c436a17be1c5e13baf19d02fcc29016ae1db2233"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_u64.js",
+          "bytes": 3081,
+          "sha256": "e48c0cfc10810439a4807b46db136ce603a3fa09b62584f513ef2f3ca496af54"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/utils.js",
+          "bytes": 9356,
+          "sha256": "11319ec0a8132a0c2ced8c98af33ae9274c001d6baf4f4709c4a6115e031a3c5"
+        },
+        {
+          "path": "scripts/audit-grid-intervals.mjs",
+          "bytes": 6777,
+          "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs",
+          "bytes": 17977,
+          "sha256": "99e9a5f2508cea0a830480d7ff01af85654f04a972e49ee2391b3e0b2c3d3c68"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs",
+          "bytes": 8823,
+          "sha256": "319744feb3c73f2b51deed68222e43c2241dbb28557c917a15a4f9010273b614"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py",
+          "bytes": 25823,
+          "sha256": "372e020108f6ddbf6cecefc5522b31105ebdf81e2bf9e6fe0a459a19fd561669"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py",
+          "bytes": 22240,
+          "sha256": "538c5d85f69345f6436d1cf34dca3c78bd0cef13fec1c7271a5ba9f19b0bb0ea"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/execution-contract.py",
+          "bytes": 4874,
+          "sha256": "6caf8f51ce4516c7a9ca8c407c06c522dac7676a26eb91999c8f25170aa1fc13"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/owned-group-original.py",
+          "bytes": 2201,
+          "sha256": "9ac8aeca9c721968bf33e69e219dbfb103875263b994dff1bd2e94402d0750ce"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/owned-child-termination-original.py",
+          "bytes": 2596,
+          "sha256": "00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/mac-execution-runtime-original.json",
+          "bytes": 22001,
+          "sha256": "3b4c62732d123b00c436f724387f3fec67390b205223561b70787b0e2d44d4f5"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/execution-code-paths.json",
+          "bytes": 2197,
+          "sha256": "9173f3eb7a6c9dfe6c6aaf4524229db6c7caec296a09ed41347b0c43c6145708"
+        },
+        {
+          "path": "scripts/local-workspace.mjs",
+          "bytes": 13365,
+          "sha256": "74c390efa3360b4431d047f89ab99986da697e58716000f44a4b284760e2a373"
+        },
+        {
+          "path": "scripts/worker-identity.mjs",
+          "bytes": 548,
+          "sha256": "e31ef3d286c3250f7f69e23f455edd896cfa96b8eb6438026aa4374da57128bd"
+        }
+      ],
+      "independent_review_comment": 6114941914
+    },
+    {
+      "execution_commit": "85ca24519d87bb1d62a86d5cb142006e206cb2b8",
+      "historical_code": [
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+          "bytes": 2279,
+          "sha256": "f4d5480d23ba6ae097a559d066b2a244ce388ba81aa6c486331e731be23e1813"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs",
+          "bytes": 242,
+          "sha256": "704b8a224f09943b4290d0c39514c480d041de946683253f36ef86dcf4f92f7c"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind.mjs",
+          "bytes": 317,
+          "sha256": "a0aecb8720ff295df16e5bef6bb5f527ed002380c6cb64a514242f79614c8cb0"
+        },
+        {
+          "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+          "bytes": 142012,
+          "sha256": "6da5919c63822393959afc8f2499c76470aa6b51d6e29664d372e9eee79ae4b1"
+        },
+        {
+          "path": "src/effective-footprint.js",
+          "bytes": 45330,
+          "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+        },
+        {
+          "path": "scripts/check-effective-geographic-regression.mjs",
+          "bytes": 75074,
+          "sha256": "801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039"
+        },
+        {
+          "path": "src/ownership-codec.js",
+          "bytes": 2948,
+          "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+        },
+        {
+          "path": "package.json",
+          "bytes": 1417,
+          "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+        },
+        {
+          "path": "src/native-runtime.js",
+          "bytes": 3497,
+          "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+        },
+        {
+          "path": "scripts/native-ownership/compile-native-ownership.mjs",
+          "bytes": 4472,
+          "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+        },
+        {
+          "path": "src/native-grid.js",
+          "bytes": 6408,
+          "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/package.json",
+          "bytes": 2799,
+          "sha256": "ceb30ba96a14786c419db53f2b8d3d59ece7ac5221c198ac03def462cf96ef23"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/sha2.js",
+          "bytes": 16773,
+          "sha256": "3ddc587c588283cbceed4dd9929cefcce06a0c231b54d4c6f0f99c478c686c00"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_md.js",
+          "bytes": 5615,
+          "sha256": "a112f0fe1b15db00f2638618c436a17be1c5e13baf19d02fcc29016ae1db2233"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_u64.js",
+          "bytes": 3081,
+          "sha256": "e48c0cfc10810439a4807b46db136ce603a3fa09b62584f513ef2f3ca496af54"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/utils.js",
+          "bytes": 9356,
+          "sha256": "11319ec0a8132a0c2ced8c98af33ae9274c001d6baf4f4709c4a6115e031a3c5"
+        },
+        {
+          "path": "scripts/audit-grid-intervals.mjs",
+          "bytes": 6777,
+          "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs",
+          "bytes": 18526,
+          "sha256": "ddb9f9ef10b8f5c470e3fe40267dece5cb7b39cdb773e9fa12bec80c9a694157"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs",
+          "bytes": 8642,
+          "sha256": "fb9e0899c08a71f336118cea8dfe8607aac6bb44bd0f4073a4207874113c697d"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py",
+          "bytes": 23671,
+          "sha256": "37d6e02607204302fc01c5d3d6652c89a937e5e84acaa71fb25f5ddc7bcdf5e8"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py",
+          "bytes": 21045,
+          "sha256": "3744c6e04d90d822ffdd291ddc542e87ba39984f9e4b9947b26b589b8da79674"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/execution-contract.py",
+          "bytes": 3169,
+          "sha256": "8bdc08d55830a7a3d95bce5ad20044f0ce5de08bcd5e514b51570bd19e8b114a"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/owned-group-original.py",
+          "bytes": 2201,
+          "sha256": "9ac8aeca9c721968bf33e69e219dbfb103875263b994dff1bd2e94402d0750ce"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/owned-child-termination-original.py",
+          "bytes": 2596,
+          "sha256": "00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/mac-execution-runtime-original.json",
+          "bytes": 22001,
+          "sha256": "3b4c62732d123b00c436f724387f3fec67390b205223561b70787b0e2d44d4f5"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/execution-code-paths.json",
+          "bytes": 2197,
+          "sha256": "9173f3eb7a6c9dfe6c6aaf4524229db6c7caec296a09ed41347b0c43c6145708"
+        },
+        {
+          "path": "scripts/local-workspace.mjs",
+          "bytes": 13365,
+          "sha256": "74c390efa3360b4431d047f89ab99986da697e58716000f44a4b284760e2a373"
+        },
+        {
+          "path": "scripts/worker-identity.mjs",
+          "bytes": 548,
+          "sha256": "e31ef3d286c3250f7f69e23f455edd896cfa96b8eb6438026aa4374da57128bd"
+        }
+      ],
+      "current_code": [
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+          "bytes": 2279,
+          "sha256": "f4d5480d23ba6ae097a559d066b2a244ce388ba81aa6c486331e731be23e1813"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs",
+          "bytes": 242,
+          "sha256": "704b8a224f09943b4290d0c39514c480d041de946683253f36ef86dcf4f92f7c"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind.mjs",
+          "bytes": 317,
+          "sha256": "a0aecb8720ff295df16e5bef6bb5f527ed002380c6cb64a514242f79614c8cb0"
+        },
+        {
+          "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+          "bytes": 144181,
+          "sha256": "1ebc1415f9c18cf8639734073313667bbc0e831317484c48fcafbc6f6d7f1216"
+        },
+        {
+          "path": "src/effective-footprint.js",
+          "bytes": 45330,
+          "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+        },
+        {
+          "path": "scripts/check-effective-geographic-regression.mjs",
+          "bytes": 77142,
+          "sha256": "5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda"
+        },
+        {
+          "path": "src/ownership-codec.js",
+          "bytes": 2948,
+          "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+        },
+        {
+          "path": "package.json",
+          "bytes": 1417,
+          "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+        },
+        {
+          "path": "src/native-runtime.js",
+          "bytes": 3497,
+          "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+        },
+        {
+          "path": "scripts/native-ownership/compile-native-ownership.mjs",
+          "bytes": 4472,
+          "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+        },
+        {
+          "path": "src/native-grid.js",
+          "bytes": 6408,
+          "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/package.json",
+          "bytes": 2799,
+          "sha256": "ceb30ba96a14786c419db53f2b8d3d59ece7ac5221c198ac03def462cf96ef23"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/sha2.js",
+          "bytes": 16773,
+          "sha256": "3ddc587c588283cbceed4dd9929cefcce06a0c231b54d4c6f0f99c478c686c00"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_md.js",
+          "bytes": 5615,
+          "sha256": "a112f0fe1b15db00f2638618c436a17be1c5e13baf19d02fcc29016ae1db2233"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_u64.js",
+          "bytes": 3081,
+          "sha256": "e48c0cfc10810439a4807b46db136ce603a3fa09b62584f513ef2f3ca496af54"
+        },
+        {
+          "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/utils.js",
+          "bytes": 9356,
+          "sha256": "11319ec0a8132a0c2ced8c98af33ae9274c001d6baf4f4709c4a6115e031a3c5"
+        },
+        {
+          "path": "scripts/audit-grid-intervals.mjs",
+          "bytes": 6777,
+          "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs",
+          "bytes": 17977,
+          "sha256": "99e9a5f2508cea0a830480d7ff01af85654f04a972e49ee2391b3e0b2c3d3c68"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs",
+          "bytes": 8823,
+          "sha256": "319744feb3c73f2b51deed68222e43c2241dbb28557c917a15a4f9010273b614"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py",
+          "bytes": 25823,
+          "sha256": "372e020108f6ddbf6cecefc5522b31105ebdf81e2bf9e6fe0a459a19fd561669"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py",
+          "bytes": 22240,
+          "sha256": "538c5d85f69345f6436d1cf34dca3c78bd0cef13fec1c7271a5ba9f19b0bb0ea"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/execution-contract.py",
+          "bytes": 4874,
+          "sha256": "6caf8f51ce4516c7a9ca8c407c06c522dac7676a26eb91999c8f25170aa1fc13"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/owned-group-original.py",
+          "bytes": 2201,
+          "sha256": "9ac8aeca9c721968bf33e69e219dbfb103875263b994dff1bd2e94402d0750ce"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/owned-child-termination-original.py",
+          "bytes": 2596,
+          "sha256": "00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/mac-execution-runtime-original.json",
+          "bytes": 22001,
+          "sha256": "3b4c62732d123b00c436f724387f3fec67390b205223561b70787b0e2d44d4f5"
+        },
+        {
+          "path": "coordination/engineering/additive-native-composition-20261009/execution-code-paths.json",
+          "bytes": 2197,
+          "sha256": "9173f3eb7a6c9dfe6c6aaf4524229db6c7caec296a09ed41347b0c43c6145708"
+        },
+        {
+          "path": "scripts/local-workspace.mjs",
+          "bytes": 13365,
+          "sha256": "74c390efa3360b4431d047f89ab99986da697e58716000f44a4b284760e2a373"
+        },
+        {
+          "path": "scripts/worker-identity.mjs",
+          "bytes": 548,
+          "sha256": "e31ef3d286c3250f7f69e23f455edd896cfa96b8eb6438026aa4374da57128bd"
+        }
+      ],
+      "independent_review_comment": 6114941914
     }
   ]
 }
