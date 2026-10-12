@@ -317,10 +317,10 @@ export async function prepareIntegration(options) {
     checkReviewedTrees(state.files, authored.entries, integrated.entries);
     const profile = integrationProfile(state.pr.head.ref, state.files, state.reservation);
     let baseline, selection = null;
-    if (profile === 'full' && selectedDataCandidate(state.pr.head.ref, state.files)) {
+    if (profile === 'full' && selectedDataCandidate(state.pr.head.ref, state.files, state.reservation)) {
       try {
         baseline = await tree(options.api, options.repo, state.base);
-        selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files: state.files, baseline, authored});
+        selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files: state.files, reservation: state.reservation, baseline, authored});
       } catch { /* Unknown applicability retains the complete suite. */ }
     }
     let proof = null, proofUnavailable = null;
@@ -368,9 +368,9 @@ export async function completeIntegration(options) {
     options = await beginFinalPlanning(options);
     const proofApplicabilityInventory = async ({api, state}) => {
       if (geographyProof) await validateGeographyOrigin({api, repo: options.repo, number: options.number, source: geographyProof});
-      if (!selectedDataCandidate(state.pr.head.ref, state.files)) return;
+      if (!selectedDataCandidate(state.pr.head.ref, state.files, state.reservation)) return;
       const [baseline, authored] = await Promise.all([tree(api, options.repo, state.base), tree(api, options.repo, state.pr.head.sha)]);
-      await selectedDataSelection({...options, api, branch: state.pr.head.ref, files: state.files, baseline, authored});
+      await selectedDataSelection({...options, api, branch: state.pr.head.ref, files: state.files, reservation: state.reservation, baseline, authored});
     };
     const paced = await paceFinalValidation({...options, proofApplicabilityInventory}, {inspect: inspectMerge, admission: options.finalAdmission});
     options = {...options, api: paced.api}; capacity = paced.receipt;
@@ -403,7 +403,7 @@ export async function completeIntegration(options) {
   let proof = null;
   if (options.proofRunId) {
     const baseline = await tree(options.api, options.repo, state.base);
-    const selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files: state.files, baseline, authored});
+    const selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files: state.files, reservation: state.reservation, baseline, authored});
     proof = await integrationProof({...options, runId: options.proofRunId, runAttempt: options.proofRunAttempt, head: state.pr.head.sha,
       profile: integrationProfile(state.pr.head.ref, state.files, state.reservation),
       testSelection: selection?.test_selection, baseline, authored, candidate});

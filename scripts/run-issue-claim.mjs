@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {requestAccounting, quotaDelay, completeReads} from './github-quota.mjs';
-import {githubAPI,githubPages,linkedPulls,transitionClaim,renderClaim,workSpec,canonicalIssueNumber,readinessDependencyIds} from './issue-claim-contract.mjs';
+import {githubAPI,githubPages,linkedPulls,transitionClaim,renderClaim,workSpec,canonicalIssueNumber,readinessDependencyIds,claimDecisionSnapshot} from './issue-claim-contract.mjs';
 import {evidenceRequirement,loadEvidencePolicy} from './evidence-policy.mjs';
 
 export async function runIssueClaim({event, env=process.env, apiFactory=githubAPI, wallNow=Date.now}) {
@@ -22,24 +22,27 @@ try{
  const ids=readinessDependencyIds(spec,geographyGate);
  const dependencies=await completeReads([...ids].map(id=>api(`/repos/${repo}/issues/${id}`)));
  const otherIssues=spec?.mode==='geography'?await githubPages(api,`/repos/${repo}/issues?state=open&labels=type%3Ageography`):[];
+ const before=claimDecisionSnapshot({issue,comments,dependencies,prs,otherIssues,action:input.action});
  const [freshIssue,freshComments,freshDependencies,freshPRs,freshOtherIssues]=await completeReads([
   api(`/repos/${repo}/issues/${number}`),githubPages(api,`/repos/${repo}/issues/${number}/comments`),
   completeReads(ids.map(id=>api(`/repos/${repo}/issues/${id}`))),linkedPulls(api,repo,number),
   spec?.mode==='geography'?githubPages(api,`/repos/${repo}/issues?state=open&labels=type%3Ageography`):[]]);
- const snapshot=value=>JSON.stringify([value.number,value.state,value.body,value.updated_at,(value.labels??[]).map(x=>x.name??x).sort()]);
- const commentSnapshot=rows=>JSON.stringify(rows.map(c=>[c.id,c.body,c.user?.login]));
- if(snapshot(freshIssue)!==snapshot(issue)||commentSnapshot(freshComments)!==commentSnapshot(comments)||
-  JSON.stringify(freshDependencies.map(snapshot))!==JSON.stringify(dependencies.map(snapshot))||JSON.stringify(freshPRs)!==JSON.stringify(prs)||
-  JSON.stringify(freshOtherIssues.map(snapshot))!==JSON.stringify(otherIssues.map(snapshot)))throw Error('Issue, ownership, dependencies or linked PR state changed during claim; reread before retry');
+ let after;
+ try{after=claimDecisionSnapshot({issue:freshIssue,comments:freshComments,dependencies:freshDependencies,
+  prs:freshPRs,otherIssues:freshOtherIssues,action:input.action});}
+ catch(error){if(error.claim_category)error.changed_categories=[error.claim_category];throw error;}
+ const changedCategories=Object.keys(before).filter(category=>before[category]!==after[category]);
+ if(changedCategories.length)throw Object.assign(Error(`Issue, ownership, dependencies or linked PR state changed during claim (${changedCategories.join(', ')}); reread before retry`),
+  {changed_categories:changedCategories});
  const next=transitionClaim({issue:freshIssue,comments:freshComments,prs:freshPRs,dependencies:freshDependencies,geographyGate,otherIssues:freshOtherIssues,request:{...input,live_work:input.live_work==='true'}}),claim=next.claim;
  // The canonical bot comment is authority; labels are a repairable display projection.
  mutationAttempted=true; // A lost write response requires reconciliation, never blind replay.
  if(claim.comment_id)await api(`/repos/${repo}/issues/comments/${claim.comment_id}`,'PATCH',{body:renderClaim(claim)});
  else claim.comment_id=(await api(`/repos/${repo}/issues/${number}/comments`,'POST',{body:renderClaim(claim)})).id;
- const hasClaimLabel=issue.labels.some(l=>l.name==='status:claimed');
+ const hasClaimLabel=freshIssue.labels.some(l=>l.name==='status:claimed');
  if(claim.active&&!hasClaimLabel)await api(`/repos/${repo}/issues/${number}/labels`,'POST',{labels:['status:claimed']});
  if(!claim.active&&hasClaimLabel)await api(`/repos/${repo}/issues/${number}/labels/${encodeURIComponent('status:claimed')}`,'DELETE');
- if(input.action==='recover'&&issue.labels.some(l=>l.name==='coordination:recovery-approved'))await api(`/repos/${repo}/issues/${number}/labels/${encodeURIComponent('coordination:recovery-approved')}`,'DELETE');
+ if(input.action==='recover'&&freshIssue.labels.some(l=>l.name==='coordination:recovery-approved'))await api(`/repos/${repo}/issues/${number}/labels/${encodeURIComponent('coordination:recovery-approved')}`,'DELETE');
  if(input.action!=='renew'||next.previous?.branch!==claim.branch)await api(`/repos/${repo}/issues/${number}/comments`,'POST',{body:`Worker coordination: ${input.action} by \`${claim.worker_id}\`, branch \`${claim.branch}\`, lease ${claim.expires_at}. Request \`${input.request_id}\`.${next.previous?` Previous branch retained: \`${next.previous.branch}\`.`:''}${input.reason?` Reason: ${input.reason}`:''}`});
  Object.assign(result,{accepted:true,claim,replayed:Boolean(next.replayed)});
 }catch(error){
@@ -47,6 +50,7 @@ try{
  Object.assign(result,{reason:error.message,mutation_attempted:mutationAttempted,
    reconcile_required:mutationAttempted,retryable:delay!==null,
    ...(error.github?{api_error:error.github}:{}),
+   ...(error.changed_categories?{changed_categories:error.changed_categories}:{}),
    ...(delay!==null?{retry_at:new Date(wallNow()+delay).toISOString()}:{} )});
 }
 // A known quota refusal cannot deliver another API comment before reset. The

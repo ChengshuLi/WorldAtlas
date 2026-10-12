@@ -45,7 +45,7 @@ export async function selectIntegrationProfile({event, repo, api, now = Date.now
   // trusted event-base checkout. A newer PR base needs its own classification.
   if (needsEngineeringScope && profile === 'evidence' && pr.base.sha !== scheduled.base?.sha) profile = 'full';
   const selection = profile === 'full' ? await selectedDataSelection({api, repo, branch: pr.head.ref, files,
-    base: pr.base.sha, head: pr.head.sha}) : null;
+    base: pr.base.sha, head: pr.head.sha, reservation}) : null;
   return {profile, shards: profile === 'full' ? [0, 1, 2] : [0], ...selection};
 }
 

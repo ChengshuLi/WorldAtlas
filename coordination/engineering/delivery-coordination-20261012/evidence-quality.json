@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "issue": 1785,
+  "lane": "engineering",
+  "worker_id": "01a12f2e-926e-741e-9f41-482643a48002",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "94d7016a6e12ec5c5414db24202e95d5dd9e4459",
+    "files": [
+      {
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/retained-002/native/facts.json",
+        "bytes": 812354,
+        "sha256": "d92dbb082ca2adce310d501702ab2bd2d50bd9dce6e2d42e859139e5e15677eb",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "delivery-coordination-controls",
+      "kind": "code",
+      "description": "Existing claim/evidence/review entry points and bounded actual-Git fixtures exercise coordination reporting, ownership, interruption and preservation. AUS scalar fields were read from the retained whole original fact body; no geography was recomputed. Production memory admission refused broader delivery/CLI execution on this Mac. Actual later batch adoption remains open on issue1785.",
+      "software": "Node 24.21.0; Git; repository test runner",
+      "units": "components, native cells, seconds, bytes as explicit producer fields; Git identities and coordination decisions"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/claim-readiness-races.test.mjs test/issue-claims.test.mjs test/issue-claim-quota.test.mjs",
+    "node --test test/premerge-evidence.test.mjs",
+    "node --test --test-name-pattern=\"automatic|author refresh|accepted review\" test/delivery-handoff-advance.test.mjs",
+    "node --test --test-name-pattern=\"typed evidence\" test/delivery-handoff.test.mjs"
+  ]
+}

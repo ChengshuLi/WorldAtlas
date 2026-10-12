@@ -9,8 +9,9 @@ import {fileURLToPath} from 'node:url';
 import {gunzipSync} from 'node:zlib';
 import {candidateBudget} from './native-ownership/native-preparation-guards.mjs';
 import {validatePackageInputs} from './package-inputs.mjs';
+import {baselineFiles, validateEvidence} from './evidence-quality.mjs';
 import {reviewContractBinding, reviewInventoryCommitment, checkPremergeEvidence} from './premerge-evidence.mjs';
-import {githubAPI, githubPages, readClaim, workSpec} from './issue-claim-contract.mjs';
+import {githubAPI, githubPages, readClaim, workSpec, verifyClaimForPR} from './issue-claim-contract.mjs';
 import {composeRetainedLedgers} from '../coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs';
 import {normaliseRetainedRepairLedger, verifyCurrentRebindExecution, CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
@@ -118,6 +119,80 @@ export function admitPublication(root, destination, products, binding, resume = 
 
 export function publish(root, destination, products, binding, resume = false, sharedBudget = null) {
   return admitPublication(root, destination, products, binding, resume, sharedBudget)();
+}
+
+// These are producer fields, not guesses from names: additive-gap-repair counts
+// rejected/zero-cell components separately from assigned native cells. Keep this
+// roster limited to measured delivery outputs; new measurements need a reviewed
+// producer contract before this constructor can publish them.
+const deliveryMetricFields = Object.freeze({
+  components: {type: 'integer', unit: 'components'},
+  source_compatible: {type: 'integer', unit: 'components'},
+  assigned_components: {type: 'integer', unit: 'components'},
+  zero_cell_components: {type: 'integer', unit: 'components'},
+  native_conflicts: {type: 'integer', unit: 'components'},
+  source_exceptions: {type: 'integer', unit: 'components'},
+  assigned_cells: {type: 'integer', unit: 'native cells'},
+  removed_cells: {type: 'integer', unit: 'native cells'},
+  reassigned_cells: {type: 'integer', unit: 'native cells'},
+  candidate_cell_contributions: {type: 'integer', unit: 'native cells'},
+  shared_same_owner_cells: {type: 'integer', unit: 'native cells'},
+  elapsed_seconds: {type: 'number', unit: 'seconds'},
+  complete_phase_bytes: {type: 'integer', unit: 'bytes'},
+  expected_components_verified: {type: 'integer', unit: 'components'},
+  cumulative_native_cells_picked_and_sampled: {type: 'integer', unit: 'native cells'},
+  stable_owner_controls: {type: 'integer', unit: 'sampled occupied row controls'}
+});
+
+export function prepareEvidence(config, reader) {
+  const manifest = reader.json(config.template);
+  need(manifest.baseline?.version === 2 && Array.isArray(manifest.metrics) && !manifest.metrics.length
+    && (!manifest.metric_bindings || Array.isArray(manifest.metric_bindings) && !manifest.metric_bindings.length),
+  'Evidence construction requires a v2-baseline template with empty metrics/bindings');
+  need(Array.isArray(config.metric_sources) && config.metric_sources.length, 'Explicit measured delivery sources required');
+  manifest.metric_bindings = [];
+  const ids = new Set();
+  for (const source of config.metric_sources) {
+    const measured = reader.json(source.measurement);
+    // Authenticate the actual consumed input as well as the measured result.
+    reader.read(source.input);
+    need(hex(source.evaluation_commit, 40) && ['baseline', 'current', 'archived'].includes(source.vintage),
+      'Explicit measured evaluation commit/vintage required');
+    need(source.input_file?.path === source.input.path
+      && ['candidate', source.input.commit].includes(source.input_file.commit), 'Metric input selector differs from pinned input');
+    const inputs = [...baselineFiles(manifest), ...manifest.outputs.map(file => ({...file, commit: 'candidate'})),
+      ...manifest.sources.filter(source => source.retention === 'retained').flatMap(source => source.files ?? []).map(file => ({...file, commit: 'candidate'}))]
+      .filter(file => file.path === source.input_file.path && file.commit === source.input_file.commit);
+    need(inputs.length === 1 && inputs[0].bytes === source.input.bytes && inputs[0].sha256 === source.input.sha256,
+      'Consumed input differs from declared metric input');
+    const output = manifest.outputs?.filter(file => file.path === source.measurement.path);
+    need(output?.length === 1 && output[0].bytes === source.measurement.bytes && output[0].sha256 === source.measurement.sha256,
+      'Measured body differs from declared output');
+    if (measured.execution_commit !== undefined) need(measured.execution_commit === source.evaluation_commit, 'Measured evaluation commit differs');
+    if (measured.request !== undefined) need(measured.request.sha256 === source.input.sha256
+      && measured.request.bytes === source.input.bytes, 'Measured request differs from consumed input');
+    if (measured.request_sha256 !== undefined) need(measured.request_sha256 === source.input.sha256, 'Measured request hash differs from consumed input');
+    need(Array.isArray(source.fields) && source.fields.length, 'Explicit measured fields required');
+    const fields = new Set();
+    for (const entry of source.fields) {
+      need(entry && typeof entry.field === 'string' && Object.hasOwn(deliveryMetricFields, entry.field), 'Unknown delivery metric field');
+      const contract = deliveryMetricFields[entry.field];
+      need(entry.unit === undefined || entry.unit === contract.unit, 'Delivery metric unit differs: ' + entry.field);
+      need(entry.type === undefined || entry.type === contract.type, 'Delivery metric type differs: ' + entry.field);
+      need(typeof entry.id === 'string' && entry.id.trim() && !ids.has(entry.id) && !fields.has(entry.field), 'Duplicate/empty delivery metric identity or field');
+      const value = measured[entry.field];
+      need(Object.hasOwn(measured, entry.field) && Number.isFinite(value) && value >= 0
+        && (contract.type !== 'integer' || Number.isSafeInteger(value)), 'Missing/invalid measured value: ' + entry.field);
+      ids.add(entry.id); fields.add(entry.field);
+      manifest.metrics.push({id: entry.id, value, unit: contract.unit, vintage: source.vintage,
+        input_sha256: source.input.sha256, input_file: {...source.input_file}, evaluation_commit: source.evaluation_commit});
+      manifest.metric_bindings.push({metric_id: entry.id, path: source.measurement.path, json_pointer: '/' + entry.field});
+    }
+  }
+  // Shared schema validation includes exact input selectors, vintages and any
+  // summaries. Full byte/review/claim gates still run at the existing boundary.
+  validateEvidence(manifest);
+  return {'evidence-quality.json': jsonBytes(manifest)};
 }
 
 export function requestProfile(template, group, config, reader) {
@@ -586,11 +661,12 @@ export async function freezeReview({repo, number, expectedHead, expectedPR, api,
   if (expectedPR) need(same(state(pr), state(expectedPR)), 'PR state changed after review preparation');
   const refs = [...pr.body.matchAll(/^(?:Refs|Closes) #(\d+)\s*$/gm)]; need(refs.length === 1, 'Exactly one original issue linkage required');
   const issue = await api(`${route}/issues/${refs[0][1]}`), spec = workSpec(issue.body);
-  const claim = readClaim(await githubPages(api, `${route}/issues/${issue.number}/comments`));
-  need(claim?.active && claim.branch === pr.head.ref && Date.parse(claim.expires_at) > Date.now(), 'Current exact-branch author claim required');
+  const comments = await githubPages(api, `${route}/issues/${issue.number}/comments`), claim = readClaim(comments);
+  need(issue.number === Number(refs[0][1]) && claim?.issue_number === issue.number, 'Reservation must belong to the linked issue');
+  const reservation = verifyClaimForPR({branch: pr.head.ref, issue, comments});
   const files = await githubPages(api, `${route}/pulls/${number}/files`);
   need(files.length === pr.changed_files && files.length > 0 && new Set(files.map(f => f.filename)).size === files.length, 'Incomplete/duplicate PR file scope');
-  const checked = await checkPremergeEvidence({api, repo, pr, issue, reservation: claim, files, review: false});
+  const checked = await checkPremergeEvidence({api, repo, pr, issue, reservation, files, review: false});
   need(['bytes-verified', 'limited'].includes(checked.status), 'Current premerge evidence did not pass');
   const manifestPath = spec.evidence_quality.manifest_path.replace('{job}', pr.head.ref.split('/').slice(1).join('/'));
   const manifestPin = reader.pin(expectedHead, manifestPath), manifest = reader.json(manifestPin);
@@ -601,10 +677,12 @@ export async function freezeReview({repo, number, expectedHead, expectedPR, api,
   if (manifest.methods.some(m => m.kind === 'geography') || files.some(f => /(?:hierarchy|world-index|crosswalk|ellipsoidal|geometry)/.test(f.filename))) domains.add('geometry');
   if (files.some(f => /(?:release|migration|identity|regional-approval)/.test(f.filename))) domains.add('release');
   const currentPr = await api(`${route}/pulls/${number}`), currentIssue = await api(`${route}/issues/${issue.number}`);
-  const currentClaim = readClaim(await githubPages(api, `${route}/issues/${issue.number}/comments`));
+  const currentComments = await githubPages(api, `${route}/issues/${issue.number}/comments`), currentClaim = readClaim(currentComments);
   need(same(currentClaim, claim), 'Author claim changed while freezing');
   need(same(state(currentPr), state(pr)) && same(reviewContractBinding(issue, pr), reviewContractBinding(currentIssue, currentPr)),
     'Review head/base/target/draft/scope/body changed while freezing');
+  need(same(verifyClaimForPR({branch: currentPr.head.ref, issue: currentIssue, comments: currentComments}), reservation),
+    'Author scope changed while freezing');
   const packet = {version: 1, kind: 'review-preparation-only', repo, pr_number: number, head_sha: expectedHead, base_sha: pr.base.sha,
     author_worker_id: claim.worker_id, manifest: manifestPin, ...reviewContractBinding(issue, pr),
     inventory_commitment: reviewInventoryCommitment({files, manifest}), required_domains: [...domains].sort(),
@@ -638,8 +716,8 @@ async function main(args) {
     return;
   }
   if (['advance', 'status'].includes(phase)) {
-    need(configFile && destination && flags.every(f => ['--resume', '--submit-queue'].includes(f))
-      && new Set(flags).size === flags.length && !(phase === 'status' && flags.includes('--submit-queue')), 'Use advance|status CONFIG DESTINATION [--resume] [--submit-queue]');
+    need(configFile && destination && flags.every(f => ['--resume', '--submit-queue', '--automatic'].includes(f))
+      && new Set(flags).size === flags.length && !(phase === 'status' && flags.some(f => f !== '--resume')), 'Use advance|status CONFIG DESTINATION [--resume] [--submit-queue]');
     need(!process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node launch required');
     const root = fs.realpathSync(process.cwd()), configRaw = ordinary(root, configFile), config = JSON.parse(configRaw);
     const reader = pinReader(root, {allowance: config.preparation_allowance});
@@ -658,6 +736,34 @@ async function main(args) {
     };
     await flow.withAdvanceLock(journal, async () => {
       try {
+        if (flags.includes('--automatic')) {
+          const validate = await flow.automaticAuthorGuard(root, config, liveAPI);
+          const branch = execFileSync('git', ['symbolic-ref', '--short', 'HEAD'], {cwd: root, env: environment(), encoding: 'utf8'}).trim();
+          await validate({branch, paths: [destination + '/']});
+          const result = await flow.runAutomaticDelivery(journal, config, reader,
+            {prepareRequests, nativeRequests, retainProducts, composeAuthorities, rebindCustody, packageProjection,
+              finalizeDelivery, freezeReview, api: liveAPI, refreshBase: flow.deliveryBaseRefreshAPI(liveAPI),
+              authorityReader: () => flow.deliveryAuthorityReader(root, reader)},
+            {validate, apiWaitMilliseconds: () => apiWait,
+              beforePublication: async () => {
+                execFileSync('git', ['fetch', '--filter=blob:none', 'origin', 'main'], {cwd: root, env: environment(), maxBuffer: 1048576});
+                const main = execFileSync('git', ['rev-parse', 'origin/main'], {cwd: root, env: environment(), encoding: 'utf8'}).trim();
+                const refreshed = await flow.refreshDeliveryAuthorTree(journal, {main, validate});
+                if (config.review) {
+                  const pr = await liveAPI(`/repos/${config.review.repo}/pulls/${config.review.pr_number}`);
+                  need(pr.head?.sha === refreshed.head && pr.head?.ref === branch,
+                    'Publish the actual refreshed author head before freezing immutable review evidence');
+                }
+                return refreshed;
+              },
+              queue: packet => flow.advanceQueue(journal, packet, {api: liveAPI,
+                queueAPI: flow.deliveryQueueAPI(), authorizeSubmission: flags.includes('--submit-queue'),
+                submit: ({number, head, requestId, timeoutMs}) => execFileSync('gh',
+                  ['workflow', 'run', 'merge-scheduler.yml', '--repo', packet.repo, '--ref', 'main',
+                    '-f', `pr_number=${number}`, '-f', `expected_head=${head}`, '-f', `request_id=${requestId}`],
+                  {encoding: 'utf8', timeout: timeoutMs, maxBuffer: 1048576})})});
+          console.log(JSON.stringify({result, ...flow.readAdvanceStatus(journal)})); return;
+        }
         const preparationStarted = performance.now();
         const next = await flow.nextDeliveryStage(journal, config, reader, {prepareRequests, nativeRequests, retainProducts,
           composeAuthorities, rebindCustody, packageProjection, finalizeDelivery, freezeReview, api: liveAPI,
@@ -678,8 +784,8 @@ async function main(args) {
     });
     return;
   }
-  need(['requests', 'native-requests', 'retain', 'rebind-operating', 'rebind-certificate', 'compose', 'package', 'finalize', 'review'].includes(phase) && configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
-    'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|package|finalize|review CONFIG DESTINATION [--resume]');
+  need(['requests', 'native-requests', 'retain', 'rebind-operating', 'rebind-certificate', 'compose', 'package', 'finalize', 'evidence', 'review'].includes(phase) && configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
+    'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|package|finalize|evidence|review CONFIG DESTINATION [--resume]');
   need(!process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node launch required');
   const root = fs.realpathSync(process.cwd()); admitDestination(root, destination, flags.includes('--resume'));
   const raw = ordinary(root, configFile), config = JSON.parse(raw), reader = pinReader(root, {allowance: config.preparation_allowance});
@@ -692,6 +798,7 @@ async function main(args) {
   if (phase === 'compose') outputs = composeAuthorities(config, reader);
   if (phase === 'package') outputs = packageProjection(config, reader);
   if (phase === 'finalize') outputs = finalizeDelivery(config, reader);
+  if (phase === 'evidence') outputs = prepareEvidence(config, reader);
   if (phase === 'review') {
     const token = execFileSync('gh', ['auth', 'token'], {encoding: 'utf8', maxBuffer: 16384}).trim();
     outputs = await freezeReview({repo: config.repo, number: config.pr_number, expectedHead: config.head_sha, api: githubAPI(token), reader});
