@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {deriveEffectiveNativeRowDelta,compareEffectiveNativeRows} from '../scripts/check-effective-geographic-regression.mjs';
+import {applyNativeAdditiveRows,deriveEffectiveNativeRowDelta,compareEffectiveNativeRows} from '../scripts/check-effective-geographic-regression.mjs';
 
 // Synthetic numerical controls only. These helpers neither authenticate a
 // selected snapshot nor establish producer/checkpoint custody or applicability.
@@ -164,5 +164,131 @@ test('synthetic exhaustive three-cell oracle independently checks 729 conservati
   assert.equal(result.lost_or_reassigned_cells,expected.length);
   assert.ok(result.intervals.every(loss=>loss.row===1));
   assert.deepEqual(actual,expected);
+ }
+});
+
+
+const apply=(base,patch,extra={})=>applyNativeAdditiveRows(base,patch,{size:16,owners,...extra});
+const freeze=value=>{
+ if(value&&typeof value==='object'){Object.values(value).forEach(freeze);Object.freeze(value);}
+ return value;
+};
+const assignedCells=rows=>rows.reduce((sum,{runs})=>sum+runs.reduce((n,[start,end])=>n+end-start,0),0);
+
+test('synthetic cumulative before and candidate patches each apply once to original native rows',()=>{
+ const base=freeze([row(2,[[0,2,1],[12,16,2]]),row(6)]);
+ const beforePatch=freeze({rows:[row(2,[[4,6,1]])]});
+ const candidatePatch=freeze({rows:[row(2,[[4,6,1],[8,10,2]]),row(6,[[1,3,1]])]});
+ const original=clone({base,beforePatch,candidatePatch});
+ const before=apply(base,beforePatch),candidate=apply(base,candidatePatch);
+ assert.deepEqual(before,[row(2,[[0,2,1],[4,6,1],[12,16,2]]),row(6)]);
+ assert.deepEqual(candidate,[row(2,[[0,2,1],[4,6,1],[8,10,2],[12,16,2]]),row(6,[[1,3,1]])]);
+ assert.equal(assignedCells(before),8);
+ assert.equal(assignedCells(candidate),12);
+ assert.deepEqual(delta(before,candidate),[2,6]);
+ assert.deepEqual(compare(before,candidate,[2,6]),noLoss(2));
+ assert.deepEqual({base,beforePatch,candidatePatch},original);
+});
+
+test('synthetic repeated cumulative application rejects same-owner assignments',()=>{
+ const base=[row(2,[[0,2,1]])],patch={rows:[row(2,[[4,6,1]])]};
+ const once=apply(base,patch);
+ assert.equal(assignedCells(once),4);
+ assert.throws(()=>apply(once,patch));
+ // A candidate cumulative patch must start from original native rows, too.
+ assert.throws(()=>apply(once,{rows:[row(2,[[4,6,1],[8,10,2]])]}));
+});
+
+test('synthetic additive overlap rejects identical, partial, contained and enclosing runs for either owner',()=>{
+ const base=freeze([row(3,[[4,8,1]])]);
+ for(const owner of [1,2])for(const [start,end] of [[4,8],[2,5],[7,10],[5,7],[2,10]]){
+  assert.throws(()=>apply(base,freeze({rows:[row(3,[[start,end,owner]])]})));
+ }
+ // Touching endpoints are legal, including assignments to a different owner.
+ const adjacent=apply(base,{rows:[row(3,[[2,4,2],[8,10,2]])]});
+ assert.deepEqual(adjacent,[row(3,[[2,4,2],[4,8,1],[8,10,2]])]);
+ assert.equal(assignedCells(adjacent),8);
+});
+
+test('synthetic complete cumulative patch validates rows even outside requested projection scope',()=>{
+ const base=[row(2,[[0,2,1]])];
+ const invalidRows=[null,{},[row(1),row(1)],[row(3),row(1)],
+  [row(-1)],[row(16)],[row(1.5)],[row(Number.NaN)],
+  [null],[{y:1}],[{y:1,runs:null}]];
+ for(const rows of invalidRows){
+  assert.throws(()=>apply(base,{rows}));
+  assert.throws(()=>apply(rows,{rows:[]}));
+ }
+ for(const patch of [{}, {rows:undefined}])assert.throws(()=>apply(base,patch));
+});
+
+test('synthetic additive intervals validate all raw bounds and ownership before scope selection',()=>{
+ const invalidRuns=[null,{},[[0,1]],[[0,1,1,4]],[[0,0,1]],[[2,1,1]],
+  [[-1,1,1]],[[0,17,1]],[[0,1.5,1]],[[0,1,0]],[[0,1,-1]],
+  [[0,1,3]],[[0,1,1.5]],[[0,1,Number.NaN]],
+  [[0,3,1],[2,4,2]],[[5,7,1],[1,2,2]]];
+ for(const runs of invalidRuns){
+  assert.throws(()=>apply([row(2)],{rows:[row(2,runs)]}));
+  assert.throws(()=>apply([row(2)],{rows:[row(1,runs)]}));
+  assert.throws(()=>apply([row(2,runs)],{rows:[]}));
+ }
+ for(const size of [0,-1,1.5,Number.NaN,Number.POSITIVE_INFINITY,'16']){
+  assert.throws(()=>apply([],{rows:[]},{size}));
+ }
+ for(const roster of [null,{},[],[null],[{}],[{id:''}],[{id:7}]]){
+  assert.throws(()=>apply([row(2,[[0,1,1]])],{rows:[]},{owners:roster}));
+  assert.throws(()=>apply([row(2)],{rows:[row(2,[[0,1,1]])]},{owners:roster}));
+ }
+});
+
+test('synthetic out-of-scope valid patch rows do not invent native projections',()=>{
+ const patch=freeze({rows:[row(1,[[2,4,1]]),row(7,[[8,10,2]])]});
+ assert.deepEqual(apply([],patch),[]);
+ assert.deepEqual(apply([row(3,[[0,16,2]])],patch),[row(3,[[0,16,2]])]);
+ const scoped=apply([row(1),row(3,[[0,16,2]])],patch);
+ assert.deepEqual(scoped,[row(1,[[2,4,1]]),row(3,[[0,16,2]])]);
+ assert.equal(assignedCells(scoped),18);
+});
+
+test('synthetic missing native row remains missing while explicit empty rows accept additive cells',()=>{
+ const patch={rows:[row(5,[[2,4,1]])]};
+ const missing=apply([],patch),explicit=apply([row(5)],patch);
+ assert.deepEqual(missing,[]);
+ assert.deepEqual(explicit,[row(5,[[2,4,1]])]);
+ assert.deepEqual(apply([row(5)],{rows:[]}),[row(5)]);
+ assert.throws(()=>compare(missing,explicit,[5]));
+ assert.deepEqual(compare([row(5)],explicit,[5]),noLoss(1));
+});
+
+test('synthetic returned rows and intervals do not alias original base or cumulative patch',()=>{
+ const base=freeze([row(1,[[0,2,1]]),row(3,[[8,10,2]]),row(5)]);
+ const patch=freeze({rows:[row(1,[[4,6,2]])]});
+ const original=clone({base,patch});
+ const result=apply(base,patch);
+ assert.notStrictEqual(result,base);
+ for(let i=0;i<base.length;i++){
+  assert.notStrictEqual(result[i],base[i]);
+  assert.notStrictEqual(result[i].runs,base[i].runs);
+ }
+ result[0].runs[0][0]=1;
+ result[0].runs[1][0]=5;
+ result[1].runs[0][0]=9;
+ result[2].runs.push([1,2,1]);
+ assert.deepEqual({base,patch},original);
+});
+
+
+test('synthetic no-additive state preserves complete native rows with fresh copies',()=>{
+ const base=freeze([row(1,[[0,2,1],[4,6,2]]),row(3)]);
+ for(const patch of [null,undefined]){
+  const result=apply(base,patch);
+  assert.deepEqual(result,base);
+  assert.notStrictEqual(result,base);
+  for(let i=0;i<base.length;i++){
+   assert.notStrictEqual(result[i],base[i]);
+   assert.notStrictEqual(result[i].runs,base[i].runs);
+   for(let j=0;j<base[i].runs.length;j++)assert.notStrictEqual(result[i].runs[j],base[i].runs[j]);
+  }
+  assert.throws(()=>apply([row(1,[[0,17,1]])],patch));
  }
 });

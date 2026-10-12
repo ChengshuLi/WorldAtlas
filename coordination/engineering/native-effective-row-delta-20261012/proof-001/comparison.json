@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "role": "measured-projection-proof",
+  "kind": "bounded-real-retained-native-interval-comparison",
+  "baseline": "ad300bd5ffa73c226e591f037980d67d40f6acf3",
+  "candidate": "c753c65a72e51718b453883a941fc22e148b5fbb",
+  "node": "v24.19.0",
+  "code": {
+    "path": "scripts/check-effective-geographic-regression.mjs",
+    "bytes": 82023,
+    "sha256": "42f3b364bc9633ff0b855d4283315229f351529a5addafb1d8ccf94b9b5480fd",
+    "unchanged_during_run": true
+  },
+  "data_pins": [
+    {
+      "name": "baseline_result",
+      "bytes": 3200420,
+      "sha256": "80420ed4cd173fc975f795cf9790bde6d4c32b0dd9c1331921eb3d1f2a615e22",
+      "git_blob_oid": "894c9d7a79345bf85a8469325162cd6bdddfecbc"
+    },
+    {
+      "name": "candidate_result",
+      "bytes": 3923538,
+      "sha256": "1a8b08dadb704d2dccf1dd657ba3da00d77cf5f6d1411fcce4166f0c54feefc5",
+      "git_blob_oid": "659f479a6ed32157396ef70be1e1e7d34d923d3b"
+    },
+    {
+      "name": "baseline_request",
+      "bytes": 1877418,
+      "sha256": "f105a3069c2d6caca5ce89f4c1ae7e197d40e9c0ae198604cd2ea7877bfa01c3",
+      "git_blob_oid": "07ec865ed6617e51b4e50e54afa5fe4be1bc4887"
+    },
+    {
+      "name": "candidate_request",
+      "bytes": 2467782,
+      "sha256": "fcd3654f3f611bc7620dbcb0c64a65598ba7fa949a46328ea9b05b654250ba78",
+      "git_blob_oid": "ba7c04c749f6411eabe291d0251a732dbd24097b"
+    },
+    {
+      "name": "owners_encoded",
+      "bytes": 2663523,
+      "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+      "git_blob_oid": "9c44513df64995d417dd3832ae604c703e84a506"
+    }
+  ],
+  "owners": {
+    "decoded_bytes": 11096191,
+    "decoded_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428",
+    "rows": 49625
+  },
+  "scope": {
+    "union_rows": 287,
+    "original_before_rows": 269,
+    "original_after_rows": 287,
+    "filled_before_from_authenticated_common_base": 18,
+    "filled_after_from_authenticated_common_base": 0,
+    "delta_rows": [
+      138227,
+      138418,
+      138419,
+      138420,
+      138421,
+      138424,
+      138425,
+      139996,
+      139997,
+      139998,
+      140068,
+      140069,
+      143396,
+      143397,
+      148366,
+      153495,
+      153496,
+      153497
+    ],
+    "shared_native_input_identities": 15
+  },
+  "result": {
+    "checked_rows": 18,
+    "lost_or_reassigned_cells": 0,
+    "intervals": []
+  },
+  "timing": {
+    "derive_ms": 11.885833000000048,
+    "compare_ms": 1.464166999999975,
+    "algorithm_total_ms": 13.350000000000023,
+    "repetitions": 1,
+    "excludes": "downloads, JSON parsing, owner decode, module import and provenance assertions"
+  },
+  "limitations": [
+    "Retained interval numerical comparison only; no selected full-entry or original external operating custody replay.",
+    "Immutable artifact body checks and common declared native custody identity equality do not themselves authenticate present runtime transport availability/absence.",
+    "No native/source operator rerun; no hosted speedup or full-gate elapsed claim."
+  ]
+}

@@ -638,6 +638,21 @@ function effectiveNativeRows(rows,size,owners) {
   return indexed;
 }
 
+// Shared projectNativeRows returns ORIGINAL base intervals. Its privately
+// qualified state's cumulative patch must be applied once, never cached twice.
+export function applyNativeAdditiveRows(baseRows,patch,{size,owners}) {
+  const base=effectiveNativeRows(baseRows,size,owners);
+  const additions=effectiveNativeRows(patch==null?[]:patch.rows,size,owners);
+  const rows=[];
+  for(const [y,row]of base){
+    const runs=[...row.runs.map(run=>[...run]),...(additions.get(y)?.runs??[]).map(run=>[...run])].sort((a,b)=>a[0]-b[0]);
+    let end=0;
+    for(const run of runs){demand(run[0]>=end,'Selected additive delta overlaps preexisting assigned native cells');end=run[1];}
+    rows.push({y,runs});
+  }
+  return rows;
+}
+
 export function deriveEffectiveNativeRowDelta(beforeRows,afterRows,{size,ownersBefore,ownersAfter}) {
   const before=effectiveNativeRows(beforeRows,size,ownersBefore),after=effectiveNativeRows(afterRows,size,ownersAfter);
   const rows=[...new Set([...before.keys(),...after.keys()])].sort((a,b)=>a-b);
