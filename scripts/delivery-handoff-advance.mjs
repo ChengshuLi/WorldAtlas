@@ -331,6 +331,8 @@ export async function prepareAdvanceStage(journal, id, phase, config, produce, {
     need(equal(event.adopted ?? null, adoption), 'Completed stage reuse binding changed');
     return {stage: id, resumed: true};
   }
+  if (adoption) need(!fs.lstatSync(path.join(journal.target, names.directory), {throwIfNoEntry: false}),
+    'Cannot adopt over an interrupted or existing stage product directory');
   const products = await produce();
   const budget = journal.budget, outputs = {};
   need(Object.keys(products).length, 'Empty advancement cannot complete');

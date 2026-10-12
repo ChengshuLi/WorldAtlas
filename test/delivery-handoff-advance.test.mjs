@@ -2004,3 +2004,16 @@ test('reused automatic observations preserve authenticated original aliases and 
  f.add(commit,'published/authority-registry.json',{version:1,entries:['foreign']});
  assert.throws(()=>automaticDeliveryObservations(j,{observations:{registry:original}}),/conflicts/);
 });
+
+
+test('reuse refuses an interrupted product directory without completing or changing its sentinel', async t => {
+ const f=fixture(),j=journal(t);j.reader=f.reader;
+ const products={'a.json':Buffer.from('{}\n')};
+ await assert.rejects(prepareAdvanceStage(j,'requests','requests',{},()=>products,{interrupt:()=>{throw Error('interruption');}}),/interruption/);
+ const sentinel=fs.readFileSync(path.join(j.target,'requests/a.json'));
+ let called=false;
+ await assert.rejects(prepareAdvanceStage(j,'requests','requests',{},()=>{called=true;return products;},
+  {adoption:{config:{commit,path:'unused.json'},receipt:{commit,path:'unused/preparation.json'}}}),/Cannot adopt/);
+ assert.equal(called,false);assert.deepEqual(fs.readFileSync(path.join(j.target,'requests/a.json')),sentinel);
+ assert.equal(fs.existsSync(path.join(j.target,'requests.completed.json')),false);
+});
