@@ -176,7 +176,7 @@ export function githubAPI(token, {fetchImpl = fetch, onRequest = () => {}, readW
  let capacityState,initialRequest,recoveryAttempts=0;
  const refuse=(floor=minimumRemaining)=>Object.assign(Error('GitHub request deferred to preserve core recovery capacity'),{
   quotaAdmission:{...capacityState,minimum_remaining:floor}});
- const performRequest = async(route,method='GET',body,observeCapacity=()=>{},capacityProbe=false,artifactRedirect=false,recovery=false)=>{
+ const performRequest = async(route,method='GET',body,observeCapacity=()=>{},capacityProbe=false,artifactRedirect=false,recovery=false,maxResponseBytes)=>{
   admit();
   const floor=recovery?0:minimumRemaining;
   if(minimumRemaining>0){
@@ -186,13 +186,13 @@ export function githubAPI(token, {fetchImpl = fetch, onRequest = () => {}, readW
     const repository=/^\/repos\/([\w.-]+\/[\w.-]+)(?:\/|\?|$)/.exec(route)?.[1];
     if(!repository)throw refuse(floor);
     if(!capacityProbe){
-     await performRequest(`/repos/${repository}`,'GET',undefined,()=>{},true,false,recovery);
+     await performRequest(`/repos/${repository}`,'GET',undefined,()=>{},true,false,recovery,maxResponseBytes);
      if(capacityState.remaining<=floor)throw refuse(floor);
     }
    }else if(!capacityState&&method!=='GET'&&!capacityProbe){
     const repository=/^\/repos\/([\w.-]+\/[\w.-]+)(?:\/|\?|$)/.exec(route)?.[1];
     if(!repository)throw Error('Cannot authenticate write capacity outside a repository');
-    await performRequest(`/repos/${repository}`,'GET',undefined,()=>{},true,false,recovery);
+    await performRequest(`/repos/${repository}`,'GET',undefined,()=>{},true,false,recovery,maxResponseBytes);
     if(capacityState.remaining<=floor)throw refuse(floor);
    }
   }
@@ -204,7 +204,7 @@ export function githubAPI(token, {fetchImpl = fetch, onRequest = () => {}, readW
   // Actions may retain a queued snapshot while the same job starts. Always
   // read this mutable inventory afresh; other authority routes retain ETags.
   const jobInventory=/^\/repos\/[^/]+\/[^/]+\/actions\/runs\/\d+\/attempts\/\d+\/jobs(?:\?|$)/.test(route);
-  const conditional=!jobInventory&&!artifactRedirect&&conditionalReads&&method==='GET'&&body===undefined&&!capacityProbe&&route!=='/rate_limit'&&!/\/git\/blobs\//.test(route);
+  const conditional=maxResponseBytes===undefined&&!jobInventory&&!artifactRedirect&&conditionalReads&&method==='GET'&&body===undefined&&!capacityProbe&&route!=='/rate_limit'&&!/\/git\/blobs\//.test(route);
   const snapshot=conditional?snapshots.get(route):undefined;
   // Charge the possible paid attempt conservatively. A genuine 304 refunds it;
   // stale/higher response counters cannot repeatedly mint new request capacity.
@@ -213,6 +213,16 @@ export function githubAPI(token, {fetchImpl = fetch, onRequest = () => {}, readW
   if(usesRecovery)recoveryAttempts++;
   try {response=await fetchImpl('https://api.github.com'+route,{method,headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(snapshot?{'If-None-Match':snapshot.etag}:{}),...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(HTTP_ATTEMPT_MS),redirect:artifactRedirect?'manual':'error'});}
   catch(error){onRequest({route,method,status:'transport-error'});throw error;}
+  // Optional caller-owned phase admission. Cap the actual stream before JSON
+  // allocation; never revalidate a larger cached representation for this read.
+  if(maxResponseBytes!==undefined&&response.body){
+   let bytes=0;
+   const bounded=response.body.pipeThrough(new TransformStream({transform(chunk,controller){
+    bytes+=chunk.length;if(bytes>maxResponseBytes)throw Error('GitHub response exceeds caller byte allowance');
+    controller.enqueue(chunk);
+   }}));
+   response=new Response(bounded,{status:response.status,statusText:response.statusText,headers:response.headers});
+  }
   const headerNumber = name => {const value=response.headers.get(name);return /^\d{1,13}$/.test(value??'')?Number(value):undefined;};
   const capacity={limit:headerNumber('x-ratelimit-limit'),remaining:headerNumber('x-ratelimit-remaining'),reset:headerNumber('x-ratelimit-reset'),resource:response.headers.get('x-ratelimit-resource')};
   onRequest({route,method,status:response.status,capacity});
@@ -279,10 +289,12 @@ export function githubAPI(token, {fetchImpl = fetch, onRequest = () => {}, readW
   }
   return performRequest(...args);
  };
- const api = async(route, method='GET', body) => {
+ const api = async(route, method='GET', body, {maxResponseBytes} = {}) => {
+  if(maxResponseBytes!==undefined&&(!Number.isSafeInteger(maxResponseBytes)||maxResponseBytes<=0||method!=='GET'||body!==undefined))
+   throw Error('Invalid caller response-byte admission');
   let lastQuota;
   for(let attempt=0;;attempt++){
-   try{return await request(route,method,body);}
+   try{return await request(route,method,body,undefined,false,false,false,maxResponseBytes);}
    catch(error){
     if((error.requestBudget||error.jobDeadline)&&lastQuota)error.quotaCause=lastQuota;
     const delay=quotaDelay(error,now());

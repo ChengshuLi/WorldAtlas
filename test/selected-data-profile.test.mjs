@@ -1,6 +1,8 @@
 import {finalizedPackageInputs} from '../scripts/prepare-delivery-handoff.mjs';
 import {readFileSync} from 'node:fs';
-import {gzipSync} from 'node:zlib';
+import {gzipSync, crc32} from 'node:zlib';
+import {CHECKPOINT_MEMBERS} from '../scripts/geographic-report-artifact.mjs';
+import {renderWorkerResult} from '../scripts/worker-result.mjs';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
 import {isDeepStrictEqual as same} from "node:util";
 import test from 'node:test';
@@ -14,6 +16,23 @@ import {checkPRGates} from '../scripts/check-pr-gates.mjs';
 import {selectedDataSelection, selectedDataCandidate, validateSelectedExpectations, selectedMetadataAdmission, SELECTED_SMOKE} from '../scripts/integration-profile.mjs';
 const prefix = 'coordination/engineering/fixture-delivery/';
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
+// Real ordinary ZIP records exercise the existing authenticated fixed-member
+// parser. These small products establish only structural profile eligibility.
+function checkpointZip(members) {
+  const locals=[],centrals=[];let offset=0;
+  for(const [name,body] of members){
+    const n=Buffer.from(name),l=Buffer.alloc(30),c=Buffer.alloc(46),crc=crc32(body);
+    l.writeUInt32LE(0x04034b50);l.writeUInt16LE(20,4);l.writeUInt32LE(crc,14);
+    l.writeUInt32LE(body.length,18);l.writeUInt32LE(body.length,22);l.writeUInt16LE(n.length,26);
+    c.writeUInt32LE(0x02014b50);c.writeUInt16LE(0x0314,4);c.writeUInt16LE(20,6);c.writeUInt32LE(crc,16);
+    c.writeUInt32LE(body.length,20);c.writeUInt32LE(body.length,24);c.writeUInt16LE(n.length,28);c.writeUInt32LE(offset,42);
+    locals.push(l,n,body);centrals.push(c,n);offset+=l.length+n.length+body.length;
+  }
+  const central=Buffer.concat(centrals),end=Buffer.alloc(22);end.writeUInt32LE(0x06054b50);
+  end.writeUInt16LE(members.length,8);end.writeUInt16LE(members.length,10);
+  end.writeUInt32LE(central.length,12);end.writeUInt32LE(offset,16);
+  return Buffer.concat([...locals,central,end]);
+}
 function fixture({mutate = () => {}, packetPrefix = prefix} = {}) {
   const prefix = packetPrefix;
   const blobs = new Map(), baseline = {entries:new Map()}, authored = {entries:new Map()}, reads=[];
@@ -1108,4 +1127,99 @@ test('retained native basename alias drift fails fixed manifest custody after al
   });
   const stats={};assert.equal(await f.run({reservation,metadataDiagnostics:stats}),null);
   assert.equal(stats.failure,'Selected-data: native operand identities differ');
+});
+
+function checkpointProfileFixture() {
+  const f=fixture(), locatorPath='data/selected-checkpoint.json', archive=prefix+'accepted-predecessor/geography-artifact.zip';
+  const head='a'.repeat(40), before='1'.repeat(40), candidate='2'.repeat(40), merged='d'.repeat(40), tree='e'.repeat(40);
+  const request='01234567-abcd-4321-aaaa-123456789012', json=value=>Buffer.from(JSON.stringify(value)+'\n');
+  const oldSelection=JSON.parse(f.blobs.get(f.baseline.entries.get('data/ownership-selection.json').sha));
+  const facts={candidate_commit:candidate,candidate_selection:oldSelection};
+  const locator={version:1,kind:'accepted-selected-checkpoint-locator-v1',acceptance:{pr_number:7,request_id:request,head},retained_artifact:{path:archive}};
+  const report={version:1,method_id:'worldatlas-trusted-geography-check-v1',baseline_commit:before,candidate_commit:candidate,
+    trusted_code_commit:before,candidate_code_executed:false,published:false,source_approval:false,gate_status:'passed',status:'not-applicable'};
+  const source={run_id:12,run_attempt:2,job_id:34,tree,head,baseline:before,candidate_commit:candidate,
+    workflow_path:'.github/workflows/worker-merge.yml',event:'workflow_dispatch',workflow_head:'f'.repeat(40),
+    artifact_id:56,artifact_name:`geography-${request}-2`};
+  const receipt={accepted:true,status:'merged',request_id:request,pr_number:7,merge_commit:merged,reviewed_head:head,
+    tested_base:before,tested_candidate:candidate,geography:{status:'passed',trusted_code_commit:before,candidate_commit:candidate,source}};
+  const pr={number:7,merged:true,head:{sha:head,repo:{full_name:'owner/repo'}},base:{ref:'main',repo:{full_name:'owner/repo'}},merge_commit_sha:merged};
+  // Match genuine A's envelope/status and alphabetic product roster, retained
+  // at ef1bf2c691b6f554c32885daf5a6dd35a451c9ff:south5-selected-validation-001.
+  // Only tiny operand bodies/identities are substituted for this profile control.
+  const c=f.checkpoint={locatorPath,archive,locator,report,source,receipt,pr,facts,tree,bot:'github-actions[bot]',calls:[],names:[...CHECKPOINT_MEMBERS].sort()};
+  c.rebuild=()=>{
+    const members=c.names.map(name=>{const body=json(name==='derived-facts.json'?facts:{member:name});
+      return {name,decoded:body,raw:name.endsWith('.gz')?gzipSync(body):body};});
+    report.checkpoint={version:1,kind:'selected-checkpoint-products-v1',members:members.map(({name,raw,decoded})=>({name,bytes:raw.length,sha256:digest(raw),
+      ...(name.endsWith('.gz')?{decoded_bytes:decoded.length,decoded_sha256:digest(decoded)}:{})}))};
+    const root=json(report),zip=checkpointZip([['geography-check.json',root],...members.map(({name,raw})=>[name,raw])]);
+    Object.assign(source,{artifact_digest:digest(zip),artifact_bytes:zip.length,report_sha256:digest(root),report_bytes:root.length});
+    receipt.geography.report_sha256=source.report_sha256;f.put(archive,zip);f.put(locatorPath,locator);
+  };
+  c.refresh=()=>{f.files=[...f.authored.entries].filter(([name,row])=>f.baseline.entries.get(name)?.sha!==row.sha)
+    .map(([filename])=>({filename,status:f.baseline.entries.has(filename)?'modified':'added'}));};
+  c.rebuild();c.refresh();const blobs=f.api;
+  f.api=async (...args)=>{
+    const [route]=args;c.calls.push(route);
+    if(route==='/repos/owner/repo/issues/7/comments?per_page=100&page=1')return [{id:11,user:{login:c.bot},body:renderWorkerResult('merge',receipt)}];
+    if(route==='/repos/owner/repo/pulls/7')return pr;
+    if(route.includes('/git/commits/'))return {sha:route.split('/').at(-1),tree:{sha:c.tree}};
+    return blobs(...args);
+  };
+  return f;
+}
+
+test('actual profile entry keeps a complete accepted predecessor ZIP and locator in selected-data custody',async()=>{
+  const f=checkpointProfileFixture(),g=gateFixture(f),result=await g.select();
+  assert.equal(result.test_selection,'selected-data');assert.deepEqual(result.shards,[0]);
+  assert(f.reads.includes(f.authored.entries.get(f.checkpoint.archive).sha));
+  assert(f.checkpoint.calls.some(route=>route.endsWith('/pulls/7')));
+  assert(!f.checkpoint.calls.some(route=>route.includes('/actions/')),'classification does not reacquire or mint scientific authority');
+  assert.equal(f.checkpoint.source.head,'a'.repeat(40));assert.equal(f.checkpoint.source.workflow_head,'f'.repeat(40));
+});
+test('a successor may replace the locator while retaining its predecessor archive unchanged',async()=>{
+  const f=checkpointProfileFixture(),c=f.checkpoint;
+  f.baseline.entries.set(c.locatorPath,{...f.authored.entries.get(c.locatorPath),sha:'9'.repeat(40)});c.refresh();
+  assert.equal(f.files.find(p=>p.filename===c.locatorPath).status,'modified');
+  assert.equal((await f.run()).test_selection,'selected-data');
+});
+for(const [name,mutate] of Object.entries({
+  'unbound ZIP':(f,c)=>f.authored.entries.delete(c.locatorPath),
+  'foreign ZIP':(f,c)=>{c.locator.retained_artifact.path='coordination/engineering/foreign/geography-artifact.zip';f.put(c.locatorPath,c.locator);},
+  'extra ZIP':(f,c)=>f.put(prefix+'extra/geography-artifact.zip',f.blobs.get(f.authored.entries.get(c.archive).sha)),
+  'missing ZIP':(f,c)=>f.authored.entries.delete(c.archive),
+  'symlink ZIP':(f,c)=>f.authored.entries.get(c.archive).mode='120000',
+  'rewritten ZIP':(f,c)=>f.baseline.entries.set(c.archive,{...f.authored.entries.get(c.archive),sha:'9'.repeat(40)}),
+  'package-consumed custody':(f,c)=>{f.definition.inputs.push(c.archive);f.put('.github/package-inputs.json',f.definition);},
+  'forged locator fields':(f,c)=>{c.locator.approved=true;f.put(c.locatorPath,c.locator);},
+  'candidate-only digest':(f,c)=>f.put(c.archive,Buffer.from('locally recomputed bytes are not acceptance')),
+  'fake receipt author':(f,c)=>{c.bot='attacker';},
+  'unaccepted receipt':(f,c)=>{c.receipt.accepted=false;},
+  'unmerged PR':(f,c)=>{c.pr.merged=false;},
+  'foreign repository':(f,c)=>{c.pr.base.repo.full_name='foreign/repo';},
+  'wrong accepted tree':(f,c)=>{c.tree='8'.repeat(40);},
+  'wrong report root':(f,c)=>{c.source.report_sha256='9'.repeat(64);c.receipt.geography.report_sha256=c.source.report_sha256;},
+  'incomplete product roster':(f,c)=>{c.names.pop();c.rebuild();},
+  'failed original gate':(f,c)=>{c.report.gate_status='blocked';c.rebuild();},
+  'coherent unrelated baseline':(f,c)=>{c.facts.candidate_selection={unrelated:true};c.rebuild();},
+  'coherent wrong producer':(f,c)=>{c.facts.candidate_commit='9'.repeat(40);c.rebuild();},
+  'added code':f=>f.put('scripts/new-reader.mjs','throw Error("not inert custody")'),
+}))test('checkpoint custody retains full regression for '+name,async()=>{
+  const f=checkpointProfileFixture();mutate(f,f.checkpoint);f.checkpoint.refresh();assert.equal(await f.run(),null);
+});
+test('checkpoint custody respects current metadata admission before opening archive bytes',async()=>{
+  const f=checkpointProfileFixture(),diagnostics={};
+  assert.equal(await f.run({metadataBudgetBytes:8*1024*1024,metadataDiagnostics:diagnostics}),null);
+  assert.match(diagnostics.failure,/metadata memory admission/);
+  assert(!f.reads.includes(f.authored.entries.get(f.checkpoint.archive).sha));
+});
+test('checkpoint receipt carry and ZIP transport are admitted together before the actual blob API',async()=>{
+  const f=checkpointProfileFixture(),diagnostics={};
+  f.checkpoint.facts.padding='x'.repeat(11*1024*1024);f.checkpoint.rebuild();f.checkpoint.refresh();
+  assert.equal(await f.run({metadataBudgetBytes:20*1024*1024,metadataDiagnostics:diagnostics}),null);
+  assert.match(diagnostics.failure,/metadata memory admission/);
+  assert(f.checkpoint.calls.some(route=>route.endsWith('/pulls/7')),'complete accepted metadata was read first');
+  assert(!f.reads.includes(f.authored.entries.get(f.checkpoint.archive).sha),'ZIP is refused before transport/materialization');
+  assert(diagnostics.peak_admitted_bytes>=16*1024*1024,'prospective receipt admission is reported');
 });

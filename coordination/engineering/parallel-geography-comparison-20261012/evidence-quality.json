@@ -6,7 +6,7 @@
   "subject_ids": [],
   "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "baseline": {
-    "commit": "cf11a9c434e798a2099ea406b29e842f27fe05ea",
+    "commit": "800dede9da634f4f7e95c6365fd31a7086f17f9b",
     "files": [
       {
         "path": "scripts/run-geographic-check.py",
@@ -28,8 +28,20 @@
       },
       {
         "path": "coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json",
-        "bytes": 13841,
-        "sha256": "28863442fb63462e5d532a76f8f89897eaaa368f1c991289076a19f4cda17765",
+        "bytes": 13842,
+        "sha256": "b0e1e16ebf364df0cfdf62efe7c55193429684789c09da76d4e3eee184c238d7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/integration-profile.mjs",
+        "bytes": 54884,
+        "sha256": "e688028a7dbf6b79dedbd4d5834920af1ff5ce6f57bda3b3156dc8e8b0d7ea0d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/issue-claim-contract.mjs",
+        "bytes": 26868,
+        "sha256": "426097a0b4396c171f5b38991a83d4779d0a92c8abe824aa683e49a7ac087c26",
         "hash_kind": "file-bytes"
       }
     ],
@@ -41,7 +53,7 @@
     {
       "id": "parallel-main-comparison",
       "kind": "code",
-      "description": "Authenticate proposed merge parents and preserve exact original producer identities; exercise actual Git forks, immutable authority comparisons, runner CLI and final queue consumers.",
+      "description": "Authenticate proposed merge parents and preserve original producer identities; integrate explicitly handed-off accepted-checkpoint structural eligibility and bounded metadata responses; verify unchanged original custody and current method/program applicability.",
       "software": "Node 24 and Python 3.12",
       "units": "synthetic controls"
     }
@@ -56,6 +68,8 @@
   },
   "commands": [
     "node --test test/parallel-geography-comparison.test.mjs test/trusted-geography-check.test.mjs test/geographic-report-artifact.test.mjs test/pr-geography-reuse.test.mjs test/merge-integration.test.mjs test/final-capacity.test.mjs test/integration-proof.test.mjs test/trusted-workflow-checkouts.test.mjs",
-    "node --test test/unchanged-selected-geography.test.mjs test/effective-geographic-regression.test.mjs"
+    "node --test test/unchanged-selected-geography.test.mjs test/effective-geographic-regression.test.mjs",
+    "node --test test/selected-data-profile.test.mjs test/github-quota.test.mjs test/metadata-regression-reuse.test.mjs",
+    "node --test test/integration-profile-restoration.test.mjs"
   ]
 }

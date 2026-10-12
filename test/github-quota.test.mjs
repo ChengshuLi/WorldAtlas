@@ -115,3 +115,35 @@ test('deployment transport ambiguity counts its attempt without inventing quota 
  assert.equal(attempts,1);assert.equal(accounting.receipt().actual_http_attempts,1);
  assert.equal(accounting.receipt().counts['GET:repository-authority:transport-error'],1);
 });
+
+test('caller response admission bounds the real JSON stream while preserving request accounting',async()=>{
+  const accounting=requestAccounting('bounded-metadata');let cancelled=false,pulls=0;
+  const api=githubAPI('fixture',{onRequest:accounting.observe,fetchImpl:async()=>new Response(new ReadableStream({
+    pull(controller){pulls++;controller.enqueue(Buffer.alloc(8,32));},cancel(){cancelled=true;}
+  }),{headers:{etag:'"bounded"'}})});
+  await assert.rejects(api('/repos/a/b/issues/1/comments','GET',undefined,{maxResponseBytes:16}),/caller byte allowance/);
+  await new Promise(resolve=>setImmediate(resolve));
+  assert(cancelled);assert(pulls<=5);assert.equal(accounting.receipt().actual_http_attempts,1);
+});
+test('bounded metadata reads cannot use larger ETag snapshots or grant writes an admission bypass',async()=>{
+  const seen=[];const api=githubAPI('fixture',{fetchImpl:async(url,init)=>{
+    seen.push(init.headers);return new Response(JSON.stringify({value:'x'.repeat(64)}),{headers:{etag:'"large"'}});
+  }});
+  await api('/repos/a/b/pulls/1');
+  await assert.rejects(api('/repos/a/b/pulls/1','GET',undefined,{maxResponseBytes:16}),/caller byte allowance/);
+  assert.equal(seen.length,2);assert.equal(seen[1]['If-None-Match'],undefined);
+  for(const value of [0,-1,NaN,Infinity,'16'])await assert.rejects(api('/repos/a/b','GET',undefined,{maxResponseBytes:value}),/response-byte admission/);
+  await assert.rejects(api('/repos/a/b','POST',{}, {maxResponseBytes:16}),/response-byte admission/);
+  assert.equal(seen.length,2);
+  assert.deepEqual(await api('/repos/a/b/pulls/1','GET',undefined,{maxResponseBytes:128}),{value:'x'.repeat(64)});
+});
+test('a capped read keeps its byte allowance through the actual reset-capacity probe',async()=>{
+  let now=0;const routes=[];
+  const api=githubAPI('fixture',{minimumRemaining:16,now:()=>now,fetchImpl:async url=>{
+    routes.push(url);return new Response(routes.length===1?'{}':JSON.stringify({large:'x'.repeat(64)}),{
+      headers:{'x-ratelimit-resource':'core','x-ratelimit-limit':'5000','x-ratelimit-remaining':routes.length===1?'0':'5000','x-ratelimit-reset':'1'}});
+  }});
+  await api('/repos/a/b/pulls/1');now=2000;
+  await assert.rejects(api('/repos/a/b/pulls/2','GET',undefined,{maxResponseBytes:16}),/caller byte allowance/);
+  assert.deepEqual(routes,['https://api.github.com/repos/a/b/pulls/1','https://api.github.com/repos/a/b']);
+});
