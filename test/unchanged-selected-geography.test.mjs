@@ -15,6 +15,8 @@ const CHECKPOINTS = 'coordination/engineering/selected-checkpoint-reuse-20261012
 const CHECKPOINT_METHODS = ['selected-checkpoint.mjs', 'selected-neighbor-prevention.mjs'].map(p => 'coordination/engineering/selected-geography-effective-prevention-20261009/' + p).concat(['scripts/check-effective-geographic-regression.mjs', 'src/ownership-codec.js']);
 const canonical = value => Array.isArray(value) ? value.map(canonical) : value && typeof value === 'object' ? Object.fromEntries(Object.keys(value).sort().map(k => [k, canonical(value[k])])) : value;
 const HANDOFFS = 'coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json';
+const RECEIVING = 'coordination/engineering/receiving-metadata-fixture/';
+const METADATA = [RECEIVING + 'README.md', RECEIVING + 'evidence-quality.json'];
 const body = value => Buffer.isBuffer(value) ? value : Buffer.from(typeof value === 'string' ? value : JSON.stringify(value));
 const sha = value => createHash('sha256').update(body(value)).digest('hex');
 
@@ -52,7 +54,17 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
     const raw = commits.get(at)[name];
     return {commit: at, path: name, mode: '100644', git_blob_oid: git(['hash-object', '--stdin'], raw), bytes: raw.length, sha256: sha(raw), ...extra};
   };
-  for (const name of new Set([...EXECUTION_CODE, ...REBIND_CODE, 'scripts/geography-prefetch.mjs'])) put(name, Object.hasOwn(AUDITED_READERS, name) ? fs.readFileSync(path.join(ROOT, name)) : 'trusted code leaf');
+  const auditedReader = name => {
+    try { return fs.readFileSync(path.join(ROOT, name)); }
+    catch (error) {
+      if (error.code !== 'ENOENT') throw error;
+      // Sparse checkouts may omit these small audited helpers. Read only an
+      // already-local HEAD blob; never hydrate their surrounding evidence bank.
+      return execFileSync('git', ['--no-replace-objects', '-C', ROOT, 'show', 'HEAD:' + name],
+        {env, maxBuffer: 1024 * 1024, timeout: 30000, stdio: ['ignore', 'pipe', 'pipe']});
+    }
+  };
+  for (const name of new Set([...EXECUTION_CODE, ...REBIND_CODE, 'scripts/geography-prefetch.mjs'])) put(name, Object.hasOwn(AUDITED_READERS, name) ? auditedReader(name) : 'trusted code leaf');
   const catalogue = {version: 1, kind: 'accepted-selected-checkpoints-v1', qualifier_code: CHECKPOINT_METHODS.map(path => ({path, bytes: files[path].length, sha256: sha(files[path])})), checkpoints: []};
   put(CHECKPOINTS, catalogue);
   put(POLICY, fs.readFileSync(path.join(ROOT, POLICY)));
@@ -144,6 +156,8 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
       ...Object.fromEntries(['facts', 'certificate', 'publication', 'custody', 'routes'].map(role => [role, pin(P + 'checkpoint-' + role, retained)]))});
     put(CHECKPOINTS, catalogue);
   }
+  put(METADATA[0], 'Receiving packet description.\n');
+  put(METADATA[1], {version: 1, description: 'Receiving packet metadata.'});
   const baseline = commit(files, assets), candidateFiles = {...files, 'research/geography/new-packet/source.json': body('unactivated source publication')};
   const candidate = commit(candidateFiles, baseline);
   const inspect = (head = candidate, base = baseline, options = {}) => inspectUnchangedSelectedGeography({repo: directory, baseline: base, candidate: head, ...options});
@@ -511,3 +525,133 @@ test('accepted checkpoint locator and retained whole-member custody remain appli
     assert.equal((await f.inspect(candidate,absentBase)).status,'full-check-required');
   }finally{f.close();}
 });
+test('receiving metadata admits exact inert modifications without executing science', async () => {
+  const f = fixture(); try {
+    for (const metadataPaths of [[METADATA[0]], [METADATA[1]], [...METADATA].reverse()]) {
+      const files = {...f.files, ...Object.fromEntries(metadataPaths.map(name => [name, body('updated inert metadata')]))};
+      const candidate = f.commit(files, f.baseline);
+      const result = await f.inspect(candidate, f.baseline, {metadataPaths});
+      assert.equal(result.status, 'unchanged-selected-inputs', result.reason);
+      assert.equal(result.candidate_code_executed, false);
+      assert.equal(result.science_reexecuted, false);
+      assert.equal(result.source_approval, false);
+      assert.equal(result.published, false);
+      assert.equal(result.trusted_reader_policy_commit, f.baseline);
+      assert(result.current_and_absent_alternatives.some(p => p.path === P + 'native/absent.bin.gz' && p.absent));
+      assert(result.immutable_descriptors.some(p => p.path === P + 'issued-plan.json'));
+      assert(result.metadata_bytes_read < 1024 * 1024);
+      for (const name of metadataPaths) {
+        const pins = result.immutable_descriptors.filter(p => p.path === name);
+        assert.deepEqual(pins.map(p => p.commit).sort(), [f.baseline, candidate].sort());
+        assert(pins.every(p => p.mode === '100644'));
+        assert.notEqual(pins[0].git_blob_oid, pins[1].git_blob_oid);
+      }
+      assert.match((await f.inspect(candidate)).reason, /outside-source-publication-scope/);
+    }
+  } finally { f.close(); }
+});
+
+test('receiving metadata refuses malformed, foreign, mixed or incomplete changed-path scope', async () => {
+  const f = fixture(); try {
+    const candidate = f.commit({...f.files, [METADATA[0]]: body('updated')}, f.baseline);
+    const invalid = [null, METADATA[0], [], [METADATA[0], METADATA[0]], [...METADATA, RECEIVING + 'extra.json'],
+      [METADATA[1]], [METADATA[0], METADATA[1]], ['README.md'], ['research/geography/packet/README.md'],
+      ['coordination/engineering/job.with.dots/README.md'], [RECEIVING + 'nested/README.md'],
+      [RECEIVING + '../README.md'], [RECEIVING + 'README.md/'], [RECEIVING + 'readme.md'],
+      [METADATA[0], 'coordination/engineering/another-packet/evidence-quality.json']];
+    for (const metadataPaths of invalid) {
+      const result = await f.inspect(candidate, f.baseline, {metadataPaths});
+      assert.equal(result.status, 'full-check-required', JSON.stringify(metadataPaths));
+      assert.match(result.reason, /outside-receiving-metadata-scope/);
+    }
+    for (const extra of ['coordination/engineering/another-packet/README.md', RECEIVING + 'extra.json',
+      'research/geography/new-packet/source.json', 'scripts/run-geographic-check.py',
+      'data/geography/source.json', P + 'native-bank/fragment.gz']) {
+      const head = f.commit({...f.files, [METADATA[0]]: body('updated'), [extra]: body('changed extra input')}, f.baseline);
+      const result = await f.inspect(head, f.baseline, {metadataPaths: [METADATA[0]]});
+      assert.equal(result.status, 'full-check-required', extra);
+      assert.match(result.reason, /outside-receiving-metadata-scope/);
+    }
+    const mixed = 'coordination/engineering/another-packet/evidence-quality.json';
+    const head = f.commit({...f.files, [METADATA[0]]: body('updated'), [mixed]: body('other packet')}, f.baseline);
+    assert.match((await f.inspect(head, f.baseline, {metadataPaths: [METADATA[0], mixed]})).reason,
+      /outside-receiving-metadata-scope/);
+  } finally { f.close(); }
+});
+
+test('receiving metadata requires modifications of ordinary non-executable files', async () => {
+  const f = fixture(); try {
+    for (const target of METADATA) {
+      const absent = {...f.files}; delete absent[target];
+      const addedBase = f.commit(absent, f.baseline);
+      const added = f.commit(f.files, addedBase);
+      assert.match((await f.inspect(added, addedBase, {metadataPaths: [target]})).reason, /missing-required-input/);
+      const deleted = f.commit(absent, f.baseline);
+      assert.match((await f.inspect(deleted, f.baseline, {metadataPaths: [target]})).reason, /missing-required-input/);
+      for (const mode of ['100755', '120000']) {
+        const candidate = f.commit(f.files, f.baseline, {[target]: mode});
+        assert.match((await f.inspect(candidate, f.baseline, {metadataPaths: [target]})).reason, /nonordinary/);
+        const baseline = f.commit(f.files, f.baseline, {[target]: mode});
+        const restored = f.commit(f.files, baseline);
+        assert.match((await f.inspect(restored, baseline, {metadataPaths: [target]})).reason, /nonordinary/);
+      }
+    }
+  } finally { f.close(); }
+});
+
+test('receiving metadata requires the supplied baseline to be the actual merge base', async () => {
+  const f = fixture(); try {
+    const candidate = f.commit({...f.files, [METADATA[0]]: body('updated')}, f.baseline);
+    const baseline = f.commit({...f.files, 'unrelated-baseline.txt': body('baseline-only change')}, f.baseline);
+    assert.equal(f.git(['merge-base', baseline, candidate]), f.baseline);
+    const result = await f.inspect(candidate, baseline, {metadataPaths: [METADATA[0]]});
+    assert.equal(result.status, 'full-check-required');
+    assert.match(result.reason, /outside-receiving-metadata-scope/);
+  } finally { f.close(); }
+});
+
+test('receiving metadata cannot exempt either filename when it is a selected current or historical route', async () => {
+  const f = fixture(); try {
+    for (const target of METADATA) {
+      for (const route of ['source-map', 'native-manifest', 'historical-source', 'fallback-source', 'historical-receipt', 'fallback-receipt']) {
+        const files = {...f.files}, selection = JSON.parse(files['data/ownership-selection.json']);
+        const other = METADATA.find(name => name !== target);
+        if (route === 'source-map') {
+          files[target] = files[selection.selected_geography.path];
+          selection.selected_geography = {...selection.selected_geography, path: target};
+        } else if (route === 'native-manifest') {
+          files[target] = files[selection.manifest_path];
+          selection.manifest_path = target;
+        } else {
+          files[target] = body('opaque consumed historical leaf');
+          const original = f.commit(files, f.baseline);
+          const commit = route.startsWith('fallback-') ? 'd'.repeat(40) : original;
+          if (route.endsWith('-source')) {
+            const name = selection.selected_geography.path, bank = JSON.parse(files[name]);
+            bank.unchanged_files.push({commit, path: target, mode: '100644',
+              git_blob_oid: f.git(['hash-object', '--stdin'], files[target]), bytes: files[target].length, sha256: sha(files[target])});
+            files[name] = body(bank);
+            selection.selected_geography = {...selection.selected_geography, bytes: files[name].length, sha256: sha(files[name])};
+          } else {
+            const name = 'scripts/native-ownership/verified-candidates.json', verified = JSON.parse(files[name]);
+            verified.candidates[selection.sha256] = {...verified.candidates[selection.sha256], commit, path: target};
+            files[name] = body(verified);
+          }
+        }
+        files['data/ownership-selection.json'] = body(selection);
+        const baseline = f.commit(files, f.baseline);
+        // First prove this exact relocated route is supported, so malformed
+        // fixture routing cannot make the changed-input rejection vacuous.
+        const control = f.commit({...files, [other]: body('inert metadata control')}, baseline);
+        const accepted = await f.inspect(control, baseline, {metadataPaths: [other]});
+        assert.equal(accepted.status, 'unchanged-selected-inputs', `${target} ${route}: ${accepted.reason}`);
+        assert(accepted.current_and_absent_alternatives.some(p => p.path === target && !p.absent));
+        const candidate = f.commit({...files, [target]: body('changed consumed scientific route')}, baseline);
+        const result = await f.inspect(candidate, baseline, {metadataPaths: [target]});
+        assert.equal(result.status, 'full-check-required', `${target} ${route}`);
+        assert.equal(result.reason, 'changed-current-input:' + target);
+      }
+    }
+  } finally { f.close(); }
+});
+
