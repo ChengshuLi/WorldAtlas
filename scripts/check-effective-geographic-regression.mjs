@@ -678,18 +678,69 @@ export function compareEffectiveNativeRows(beforeRows,afterRows,{size,ownersBefo
   return {checked_rows:rows.length,lost_or_reassigned_cells:lostCells,intervals};
 }
 
-// Finished planning frame: row maps/sets do not survive into native body
-// acquisition. Both snapshots were fully qualified by loadSelection already.
-function effectiveAdditiveRowScope(before,after,size) {
-  const rows=new Set([...(before.additive?.patch.rows??[]),...(after.additive?.patch.rows??[])].map(row=>row.y));
-  const historical=rows.size,oldNative=before.additive?.current_rebind?.native,newNative=after.additive?.current_rebind?.native;
-  if(oldNative&&newNative){
-    const delta=new Set(deriveEffectiveNativeRowDelta(oldNative.effective_rows,newNative.effective_rows,{size,ownersBefore:before.owners,ownersAfter:after.owners}));
-    const oldBase=new Map(oldNative.current_rows.map(row=>[row.y,row])),newBase=new Map(newNative.current_rows.map(row=>[row.y,row]));
-    for(const y of rows)if(!delta.has(y)&&oldBase.has(y)&&newBase.has(y)&&same(oldBase.get(y).runs,newBase.get(y).runs))rows.delete(y);
+// The joint launcher qualifies both states in one invocation and owns release.
+// Authentication stays in the shared projector, including the zero-row path.
+export async function compareSelectedCheckpointNative({transition,budget}) {
+  const {authenticateTransition,projectNativeRows}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs');
+  const {baseline,candidate,changedNativeRows}=authenticateTransition({transition,budget});
+  const size=baseline.manifest.size,oldEntries=baseline.certificate.entries,newEntries=candidate.certificate.entries;
+  demand(size===candidate.manifest.size&&oldEntries.length===newEntries.length,'Checkpoint native domain or complete owner roster differs');
+  for(let i=0;i<oldEntries.length;i++)for(let k=0;k<4;k++)
+    demand(oldEntries[i][k]===newEntries[i][k],'Checkpoint original stable owner/index/parent rebound');
+  // Reserve caller objects before allocating them. The shared projector checks
+  // actual RSS and consumes this monotone carry against the same live allowance.
+  const reserve=bytes=>{
+    demand(Number.isSafeInteger(bytes)&&bytes>=0&&Number.isSafeInteger(budget.carriedBytes+bytes)
+      &&budget.shared.used+bytes<budget.shared.allowance.phaseBytes,'Checkpoint native consumer carry exceeds current allowance');
+    budget.carriedBytes+=bytes;
+    authenticateTransition({transition,budget});
+  };
+  // The private transition already derives the complete symmetric patch delta
+  // from actual authenticated bodies. Caller-created wrappers cannot select it.
+  const expected=changedNativeRows;
+  const patchRuns=baseline.patch.rows.reduce((n,row)=>n+row.runs.length,0)+candidate.patch.rows.reduce((n,row)=>n+row.runs.length,0);
+  reserve(7*OUTPUT+(expected.length?oldEntries.length*256+patchRuns*192+(baseline.patch.rows.length+candidate.patch.rows.length)*1024:0));
+  // qualifyTransition proves identical base selection and all native routes;
+  // its candidate cache already contains newly qualified original base rows.
+  // Project once, then apply the two cumulative patches to that SAME base.
+  demand(same(baseline.baseSelection,candidate.baseSelection)&&baseline.selection.sha256===candidate.selection.sha256,
+    'Checkpoint original native base/manifest binding differs');
+  const projection=projectNativeRows({state:candidate,rows:expected,budget});
+  let result={checked_rows:0,lost_or_reassigned_cells:0,intervals:[]};
+  if(expected.length){
+    const projectionRuns=2*projection.rows.reduce((n,row)=>n+row.runs.length,0);
+    reserve(projectionRuns*192+expected.length*1024+Math.min(65536,2*(projectionRuns+patchRuns))*256);
+    const owners=oldEntries.map(row=>({id:row[0],index:row[1],province_id:row[2],province_index:row[3]}));
+    const oldRows=applyNativeAdditiveRows(projection.rows,baseline.patch,{size,owners});
+    const newRows=applyNativeAdditiveRows(projection.rows,candidate.patch,{size,owners});
+    result=compareEffectiveNativeRows(oldRows,newRows,{size,ownersBefore:owners,ownersAfter:owners,rows:expected});
   }
-  return {rows,receipt:{historical_additive_rows:historical,unchanged_effective_additive_rows:historical-rows.size,
-    proof:oldNative&&newNative?'authenticated-complete-current-rebind-rows':'legacy-additive-union'}};
+  const report={version:1,method:'selected-native-owner-conservation-v1',
+    status:result.intervals.length?'native-regressions-found':'no-new-native-loss',
+    baseline_selection:baseline.selection,candidate_selection:candidate.selection,
+    affected_rows:result.checked_rows,lost_or_reassigned_cells:result.lost_or_reassigned_cells,intervals:result.intervals,
+    native_row_scope:{proof:'shared-qualified-complete-base-and-cumulative-patch',changed_rows:expected,
+      shared_base_reused_rows:projection.reused_rows,shared_base_acquired_rows:projection.acquired_rows},
+    phases:[{kind:'selected-checkpoint-native-retained-frame',retained_phase_bytes:budget.shared.used,caller_carried_bytes:budget.carriedBytes}],
+    checkpoint_custody:{baseline_checkpoint:baseline.accepted_execution,shared_base:projection.custody},
+    output_reserve_bytes:OUTPUT,candidate_code_executed:false,
+    limits:['Shared qualification and transition authenticate complete selection, registry, ledger, source and native custody before this consumer.',
+      'Native interval conservation is not sub-cell polygon coverage or source authority approval; continuous coverage is checked by the same joint invocation.',
+      'The retained-frame byte count is not an acquisition or process peak.']};
+  // Bound the complete report before creating JSON/string/buffer copies. The
+  // conservative seven-representation reserve above remains live for the writer.
+  let bound=0;
+  const count=value=>{
+    if(value===null||typeof value==='boolean')bound+=5;
+    else if(typeof value==='number')bound+=32;
+    else if(typeof value==='string')bound+=2+6*value.length;
+    else if(Array.isArray(value)){bound+=2+value.length;for(const item of value)count(item);}
+    else {bound+=2;for(const [key,item]of Object.entries(value)){bound+=4+6*key.length;count(item);}}
+    demand(bound<=OUTPUT,'Complete native checkpoint report exceeds admitted output reserve');
+  };
+  count(report);
+  demand(Buffer.byteLength(JSON.stringify(report))<=OUTPUT,'Complete native checkpoint report exceeds admitted output reserve');
+  return report;
 }
 
 export function selectedBootstrap(repo,baseline,candidate,{parentRuntimePath}={}) {
@@ -747,17 +798,7 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
   offset=0;for(let y=0;y<b.size;y++){demand(newRows[y*2]===offset,'Candidate row partition incomplete');offset+=newRows[y*2+1];}demand(offset*2===b.runWords,'Candidate rows omitted runs');
   const bodyChanged=(p,snapshot,other)=>{const ownPath=path.posix.join(path.posix.dirname(snapshot.selection.manifest_path),p.path),otherPath=path.posix.join(path.posix.dirname(other.selection.manifest_path),p.path),own=snapshot.reader.inventory.get(snapshot.reader.version+':'+ownPath),prior=other.reader.inventory.get(other.reader.version+':'+otherPath);return !!own!==!!prior||!!own&&(own.mode!==prior.mode||own.git_blob_oid!==prior.git_blob_oid);};
   const changed=oldParts.filter(p=>!newParts.some(q=>same(p,q))||bodyChanged(p,before,after)).concat(newParts.filter(p=>!oldParts.some(q=>same(p,q))||bodyChanged(p,after,before)));
-  // Current rebind acquisition has already checked full native rows and
-  // exclusion of every original addition. Legacy patches retain their union.
-  // Prospectively charge the planning maps/comparison scratch while live;
-  // this finished frame releases them before any native body reacquisition.
-  const planningMetadata=beforeReader.metadataBytes;
-  const planningScratch=2*((before.additive?.metadata_bytes??0)+(after.additive?.metadata_bytes??0));
-  beforeReader.metadataBytes=afterReader.metadataBytes=planningMetadata+planningScratch;
-  beforeReader.phase();
-  const additiveScope=effectiveAdditiveRowScope(before,after,a.size);
-  const additiveRows=additiveScope.rows,nativeRowScope=additiveScope.receipt;
-  beforeReader.metadataBytes=afterReader.metadataBytes=planningMetadata+additiveRows.size*64+2*Buffer.byteLength(JSON.stringify(nativeRowScope));
+  const additiveRows=new Set([...(before.additive?.patch.rows??[]),...(after.additive?.patch.rows??[])].map(r=>r.y));
   let additiveConservation=null;if(before.additive){demand(after.additive,'Previously selected additive repair ledger removed');additiveConservation=compareVersionedRepairLedgers(before.additive.ledger,after.additive.ledger,{beforeRegistry:before.additive.registry,afterRegistry:after.additive.registry});}
   const affected=[];for(let y=0;y<a.size;y++){const spans=[[oldRows[y*2]*2,(oldRows[y*2]+oldRows[y*2+1])*2],[newRows[y*2]*2,(newRows[y*2]+newRows[y*2+1])*2]];if(additiveRows.has(y)||oldRows[y*2]!==newRows[y*2]||oldRows[y*2+1]!==newRows[y*2+1]||spans.some(([s,e])=>changed.some(p=>s<p.offset+p.words&&p.offset<e)))affected.push(y);}
   // Plan consecutive identical containing rosters, splitting by the actual
@@ -799,7 +840,7 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
     demand(Buffer.byteLength(JSON.stringify(phases))+Buffer.byteLength(JSON.stringify(losses))<=OUTPUT,'Native phase/finding receipt exceeds admitted output reserve');
   }
   demand(checkedRows===affected.length&&groups.flat().every((y,i)=>y===affected[i]),'Incomplete affected native row comparison');
-  return {version:1,method:'selected-native-owner-conservation-v1',status:losses.length?'native-regressions-found':'no-new-native-loss',baseline_selection:before.selection,candidate_selection:after.selection,baseline_receipt_provenance:before.receiptProvenance,candidate_receipt_provenance:after.receiptProvenance,additive_conservation:additiveConservation,native_row_scope:nativeRowScope,affected_rows:affected.length,lost_or_reassigned_cells:lostCells,intervals:losses,phases,runtime,caller_runtime:callerRuntime,execution_runtimes:identities,execution_code_inventory:executionCode,output_reserve_bytes:OUTPUT,input_inventory:[...beforeReader.inventory.values(),...afterReader.inventory.values()],candidate_code_executed:false,limits:['Native owner conservation is not sub-cell polygon coverage or source authority approval.','Only explicit authenticated committed additive hooks are consumed; proposal files never select a release. Continuous primitive-set coverage is enforced separately.']};
+  return {version:1,method:'selected-native-owner-conservation-v1',status:losses.length?'native-regressions-found':'no-new-native-loss',baseline_selection:before.selection,candidate_selection:after.selection,baseline_receipt_provenance:before.receiptProvenance,candidate_receipt_provenance:after.receiptProvenance,additive_conservation:additiveConservation,affected_rows:affected.length,lost_or_reassigned_cells:lostCells,intervals:losses,phases,runtime,caller_runtime:callerRuntime,execution_runtimes:identities,execution_code_inventory:executionCode,output_reserve_bytes:OUTPUT,input_inventory:[...beforeReader.inventory.values(),...afterReader.inventory.values()],candidate_code_executed:false,limits:['Native owner conservation is not sub-cell polygon coverage or source authority approval.','Only explicit authenticated committed additive hooks are consumed; proposal files never select a release. Continuous primitive-set coverage is enforced separately.']};
 }
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) {
