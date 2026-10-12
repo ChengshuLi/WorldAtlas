@@ -17,11 +17,12 @@ function fixture(t) {
   const publication={version:1,complete:true,kind:'trusted-selected-continuous-comparison-v1',
     operands:gzip('operands.json.gz',{baseline:{},candidate:{}}),facts:put('facts.json',bytes({candidate_code_executed:false}))};
   const native={status:'no-new-native-loss',candidate_code_executed:false,intervals:[],lost_or_reassigned_cells:0};
-  const facts={continuous_publication:publication,native_result_sha256:reportHash(bytes(native))};
+  const routes=put('checkpoint-routes.json',bytes([]));
+  const facts={continuous_publication:publication,native_result_sha256:reportHash(bytes(native)),checkpoint_routes:routes};
   const derived={version:1,complete:true,kind:'derived-selected-checkpoint-candidate-v1',accepted_checkpoint:false,
     validation_stage:'native-passed-continuous-pending',certificate:gzip('derived-certificate.json.gz',{version:1,entries:[]}),
-    facts:put('derived-facts.json',bytes(facts))};
-  put('publication.json',bytes(publication));put('derived-publication.json',bytes(derived));put('checkpoint-routes.json',bytes([]));
+    facts:put('derived-facts.json',bytes(facts)),routes};
+  put('publication.json',bytes(publication));put('derived-publication.json',bytes(derived));
   const issued={native:{...native,runtime:{notPartOfInnerHash:true}},continuous:{publication,derived_checkpoint:derived},
     continuous_result:{candidate_code_executed:false,issued_publication:publication,
       original_strict_polygon_result:{status:'no-new-regression',regressions:0}}};

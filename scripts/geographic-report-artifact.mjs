@@ -174,7 +174,10 @@ export function readReportArchive(raw, expectedHash, expectedBytes, {admit = () 
   // Include transport, decoded report, UTF-16 parsing and conservative live JSON
   // room in the same phase. Each remaining member is admitted before allocation.
   let admitted = 2 * raw.length + 8 * root.size;
-  need(admitted <= MAX_PHASE, 'Geographic checkpoint combined budget exceeded');
+  // Preserve the legacy single-report 32 MiB contract. The tighter complete
+  // product phase applies only to checkpoint bundles; caller admission still
+  // observes the real root representation charge before any decoding.
+  need(entries.size === 1 || admitted <= MAX_PHASE, 'Geographic checkpoint combined budget exceeded');
   admit(admitted);
   const reportBytes = decodeMember(raw, root);
   need((expectedBytes === undefined || reportBytes.length === expectedBytes) && reportHash(reportBytes) === expectedHash,

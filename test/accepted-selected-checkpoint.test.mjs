@@ -56,6 +56,13 @@ for (const descriptor of [false, true]) for (const method of [0, 8]) test(`fixed
   for (const [name, body] of f.bodies) assert(products.members.get(name).equals(body));
   assert.equal(products.admitted_bytes, observed.at(-1)); assert(observed.at(-1) > zip.length);
 });
+test('legacy report-only archives retain the full original 32 MiB report bound', () => {
+  const raw=Buffer.alloc(32*1024*1024,32); raw.write('{}');
+  const archive=zipMembers([['geography-check.json',raw]]),charges=[];
+  const report=readReportArchive(archive,reportHash(raw),raw.length,{admit:bytes=>charges.push(bytes)});
+  assert.deepEqual(report,{});assert.equal(geographicReportProducts(report).members.size,0);
+  assert(charges[0]>256*1024*1024); // Current caller admission still sees every representation.
+});
 test('root authentication precedes untrusted descriptor and checkpoint member interpretation', () => {
   const f = checkpoint(), good = encode(f); f.report.checkpoint = {malicious: true};
   const altered = encode(f);

@@ -121,6 +121,8 @@ def retain_checkpoint_products(source, destination, issued, *, allowance=PHASE):
             or issued.get('continuous', {}).get('derived_checkpoint') != derived
             or not _matches(derived.get('certificate'), 'derived-certificate.json.gz', descriptors)
             or not _matches(derived.get('facts'), 'derived-facts.json', descriptors)
+            or not _matches(derived.get('routes'), 'checkpoint-routes.json', descriptors)
+            or facts.get('checkpoint_routes') != derived.get('routes')
             or facts.get('continuous_publication') != publication):
         raise ValueError('Checkpoint complete publications or member bindings differ')
     # Match the producer's pre-wrapper native report without changing either
