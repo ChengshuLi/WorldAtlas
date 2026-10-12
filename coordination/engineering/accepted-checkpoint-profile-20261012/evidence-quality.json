@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "issue": 1788,
+  "lane": "engineering",
+  "worker_id": "01a12f61-09b5-77fa-87ea-2e346bf6b03e",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "01240322929485f7baae32ed7c1d7535300d1d9f",
+    "files": [
+      {
+        "path": "scripts/integration-profile.mjs",
+        "bytes": 54884,
+        "sha256": "e688028a7dbf6b79dedbd4d5834920af1ff5ce6f57bda3b3156dc8e8b0d7ea0d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/issue-claim-contract.mjs",
+        "bytes": 26868,
+        "sha256": "426097a0b4396c171f5b38991a83d4779d0a92c8abe824aa683e49a7ac087c26",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "accepted-checkpoint-selected-profile",
+      "kind": "code",
+      "description": "Admit only exact accepted checkpoint archive/locator custody to structural selected-data CI while preserving package/code exclusions, fixed archive validation, actual baseline selection and fresh scientific geography qualification. The existing API enforces optional caller-owned response-byte admission before JSON allocation.",
+      "software": "Node 24; Git; existing GitHub receipt/archive validators",
+      "units": "whole-file identities, complete path membership and current byte admission"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "limits": [
+    "Structural CI eligibility does not mint checkpoint authority, approve geography or establish hosted A-to-B adoption.",
+    "Original accepted seed/scientific products and historical execution identities are unchanged.",
+    "Actual B hosted delivery remains required; ordinary full CI stays the fallback for unavailable or unsupported custody."
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node --test --test-concurrency=1 test/selected-data-profile.test.mjs test/integration-profile-restoration.test.mjs test/github-quota.test.mjs test/github-admission.test.mjs test/github-snapshots.test.mjs test/issue-claim-quota.test.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/accepted-checkpoint-profile-20261012/evidence-quality.json"
+  ]
+}
