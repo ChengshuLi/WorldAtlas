@@ -6,6 +6,11 @@ import {conditionalSnapshots} from './github-snapshots.mjs';
 
 const MIN_POLL = 60_000, MAX_POLL = 300_000;
 const RECOVERY_RESERVE = 16;
+const retryDelay = (value, reference) => {
+  if (/^\d+$/.test(value ?? '') && Number.isSafeInteger(Number(value) * 1000)) return Number(value) * 1000;
+  const date = Date.parse(value);
+  return Number.isFinite(date) ? Math.max(0, date - reference) : 0;
+};
 
 // gh retains its existing authentication. Snapshots live only in this process,
 // are bounded, and never authorize a result without a fresh conditional GET.
@@ -49,7 +54,7 @@ export function mergeQueueAPI({execute = execFileSync, snapshotOptions} = {}) {
       && Number.isSafeInteger(Number(seconds) * 1000) ? Number(seconds) * 1000 : 0;
     onResponse({http_status: status, conditional: Boolean(snapshot), cacheable: Boolean(snapshots.get(route)),
       poll_ms: milliseconds(integer('x-poll-interval')), cache_ms: milliseconds(maxAge),
-      retry_ms: milliseconds(integer('retry-after')), server_date_ms: Date.parse(field('date')),
+      retry_after: field('retry-after'), server_date_ms: Date.parse(field('date')),
       capacity: {limit: integer('x-ratelimit-limit'), remaining: integer('x-ratelimit-remaining'),
         reset: integer('x-ratelimit-reset'), resource: field('x-ratelimit-resource')}});
     return value;
@@ -65,6 +70,8 @@ export async function runMergeQueueClient({api, submit, repo, number, head,
   random = Math.random, timeoutMs = 65 * 60_000, progress = () => {}}) {
   const started = now(), deadline = started + timeoutMs, startedAt = new Date(wallNow()).toISOString();
   let readRequests = 0, readMs = 0, sleepMs = 0, capacity, resetAt = 0, commentHints = [];
+  let retryAt = 0;
+  const pollAt = new Map();
   let receiptAt, reconciledAt;
   const statuses = {};
   const emit = value => progress({request_id: requestId, elapsed_ms: now() - started,
@@ -96,10 +103,12 @@ export async function runMergeQueueClient({api, submit, repo, number, head,
       if (now() >= deadline) { expired = true; return undefined; }
       // Even a successful response can exhaust the shared primary allowance.
       // A cached page might change next time; 304 is not a quota reservation.
-      if (capacity?.remaining <= RECOVERY_RESERVE && resetAt > now()) {
-        if (resetAt >= deadline) { expired = true; return undefined; }
-        await wait(resetAt - now(), 'primary-capacity');
-        capacity = undefined;
+      const quotaAt = capacity?.remaining <= RECOVERY_RESERVE ? resetAt : 0;
+      const notBefore = Math.max(quotaAt, retryAt, pollAt.get(route) ?? 0);
+      if (notBefore > now()) {
+        if (notBefore >= deadline) { expired = true; return undefined; }
+        await wait(notBefore - now(), notBefore === quotaAt ? 'primary-capacity' : 'provider-guidance');
+        if (capacity?.remaining <= RECOVERY_RESERVE && now() >= resetAt) capacity = undefined;
         if (now() >= deadline) { expired = true; return undefined; }
       }
       const readStarted = now();
@@ -111,6 +120,11 @@ export async function runMergeQueueClient({api, submit, repo, number, head,
         readMs += now() - readStarted;
         const key = response?.http_status ?? 'unreported'; statuses[key] = (statuses[key] ?? 0) + 1;
         accounted = true;
+        if (response) {
+          const reference = Number.isFinite(response.server_date_ms) ? response.server_date_ms : wallNow();
+          retryAt = Math.max(retryAt, now() + retryDelay(response.retry_after, reference));
+          if (response.poll_ms > 0) pollAt.set(route, now() + response.poll_ms);
+        }
         const c = response?.capacity;
         if (c?.resource === 'core' && ['limit', 'remaining', 'reset'].every(name => Number.isSafeInteger(c[name]))
           && c.limit > 0 && c.remaining >= 0 && c.remaining <= c.limit && c.reset > 0) {
@@ -138,17 +152,19 @@ export async function runMergeQueueClient({api, submit, repo, number, head,
         let delay;
         if (limited) {
           const reset = Number(detail.rate_reset) * 1000;
-          const retry = Number(detail.retry_after) * 1000;
+          const retry = retryDelay(detail.retry_after,
+            Number.isFinite(detail.server_date_ms) ? detail.server_date_ms : wallNow());
           const primary = Number(detail.rate_remaining) === 0;
           if (!primary && ++secondaryRetries > 3)
             throw Error('Secondary API rate limit persisted after three bounded retries; inspect the same request later. No merge claimed.');
           delay = Math.max(primary ? 60_000 : 60_000 * 2 ** (secondaryRetries - 1),
             primary && Number.isFinite(reset) ? reset -
               (Number.isFinite(detail.server_date_ms) ? detail.server_date_ms : wallNow()) + 2000 : 0,
-            Number.isFinite(retry) ? retry : 0);
+            retry);
           emit({status: 'rate-limited', retry_at: new Date(wallNow() + delay).toISOString()});
         } else if (detail.http_status >= 500 && detail.http_status <= 599 && serviceRetries++ < 2) {
-          delay = 60_000 * serviceRetries;
+          delay = Math.max(60_000 * serviceRetries, retryDelay(detail.retry_after,
+            Number.isFinite(detail.server_date_ms) ? detail.server_date_ms : wallNow()));
         } else throw error;
         if (now() + delay >= deadline) { expired = true; return undefined; }
         await wait(delay, limited ? 'rate-limit' : 'service-retry');
@@ -233,8 +249,8 @@ export async function runMergeQueueClient({api, submit, repo, number, head,
       && capacity?.remaining > RECOVERY_RESERVE;
     // Retain the existing one-minute floor. Healthy conditional reads follow
     // GitHub's cache/poll guidance instead of slowing simply because CI is old.
-    const providerDelay = Math.max(0, ...commentHints.map(hint => Math.max(hint?.poll_ms ?? 0,
-      hint?.cache_ms ?? 0, hint?.retry_ms ?? 0)));
+    const providerDelay = Math.max(0, retryAt - now(), ...commentHints.map(hint => Math.max(hint?.poll_ms ?? 0,
+      hint?.cache_ms ?? 0)));
     const quotaPace = capacity?.remaining > RECOVERY_RESERVE
       ? Math.max(0, resetAt - now()) * commentHints.length / (capacity.remaining - RECOVERY_RESERVE) : 0;
     const normal = cacheReady ? MIN_POLL : interval;

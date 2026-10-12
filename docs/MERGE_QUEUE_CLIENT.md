@@ -46,7 +46,9 @@ or lost response cannot report success. The adapter handles gh's actual complete
 With cacheable result pages and usable core quota signals, normal waits stay at
 the existing one-minute floor plus 0–10% jitter, rather than growing with CI age.
 The observer honors longer X-Poll-Interval, Cache-Control max-age and Retry-After
-signals. It also paces pages against observed remaining quota/reset, preserving
+signals. Retry-After (seconds or HTTP-date) gates every subsequent read, including
+pagination, service retries and final verification. X-Poll-Interval gates repeats
+of its exact route, including the final PR reread. It also paces pages against observed remaining quota/reset, preserving
 the existing 16-call recovery allowance; that allowance is not reserved against
 other clients. Missing cache/quota support retains the conservative one/two/four/
 five-minute fallback. Every page is still read, in sequence. No extra quota probe,
@@ -62,8 +64,8 @@ returns exit 3; rejected receipts exit 2; confirmed accepted receipts exit 0.
 
 Controlled fake-clock tests reproduce the old 210-second terminal delay with nine
 reads, then detect the same synthetic completion after 30 seconds using 22 reads:
-four changed 200 responses and 18 authenticated 304s. A full 65-minute unchanged
-window uses 66 reads, including two 200s and 64 304s. These are deterministic test
+four changed 200 responses and 18 authenticated 304s. An unchanged 65-minute observation
+budget uses 66 reads, including two 200s and 64 304s. These are deterministic test
 results, not measured hosted speedups. Authenticated 304s save primary quota;
 secondary limits still apply. See [GitHub's polling and conditional-request guidance](https://docs.github.com/en/rest/using-the-rest-api/best-practices-for-using-the-rest-api).
 

@@ -374,7 +374,7 @@ test('secondary and service rejection never authorize cached success or resubmit
       }
     }});
     assert.equal((await h.run()).status, 'merged');
-    assert.equal(h.waits[1], status === 503 ? 60_000 : 180_000);
+    assert.equal(h.waits[1], 180_000);
     assert.equal(h.calls.filter(c => c.route.includes('/pulls/')).length, 2);
   }
 });
@@ -429,4 +429,38 @@ test('returned timing separates receipt discovery from delayed authoritative ver
   assert.equal(result.observation.merge_reconciled_elapsed_ms, 540);
   assert.equal(result.observation.read_ms, 540); assert.equal(result.observation.elapsed_ms, 540);
   assert.equal(result.observation.sleep_ms, 0); assert.equal(result.status, 'merged');
+});
+test('successful Retry-After applies before pagination and terminal reconciliation, with deadline refusal', async () => {
+  for (const pages of [1, 2]) {
+    const h = conditionalHarness({readyAt: 0, pages, modify: (response, {route, time}) => {
+      if (route.includes('/comments') && time === 0) response.headers['retry-after'] = '180';
+    }});
+    assert.equal((await h.run()).status, 'merged'); assert.equal(h.waits[0], 180_000);
+    assert.equal(h.calls[2].time, 180_000);
+  }
+  const h = conditionalHarness({readyAt: 0, timeoutMs: 180_000, modify: (response, {route}) => {
+    if (route.includes('/comments')) response.headers['retry-after'] = '180';
+  }});
+  assert.equal((await h.run()).status, 'pending'); assert.equal(h.calls.length, 2);
+});
+test('HTTP-date Retry-After honors the server clock for service, secondary and successful responses', async () => {
+  for (const status of [200, 403, 429, 503]) {
+    let rejected = false;
+    const h = conditionalHarness({readyAt: 0, wallOffset: 86_400_000, modify: (response, {route}) => {
+      if (route.includes('/comments') && !rejected) {
+        rejected = true; response.status = status;
+        response.headers['retry-after'] = new Date(180_000).toUTCString();
+        if (status !== 200) response.body = {message: 'secondary rate limit'};
+      }
+    }});
+    assert.equal((await h.run()).status, 'merged'); assert.equal(h.waits[0], 180_000);
+    assert.ok(h.calls.slice(2).every(c => c.time >= 180_000));
+  }
+});
+test('explicit poll interval on initial PR governs the same-route final reconciliation', async () => {
+  const h = conditionalHarness({readyAt: 0, modify: (response, {route}) => {
+    if (route.includes('/pulls/')) response.headers['x-poll-interval'] = '180';
+  }});
+  assert.equal((await h.run()).status, 'merged'); assert.deepEqual(h.waits, [180_000]);
+  assert.equal(h.calls.at(-1).time, 180_000);
 });
