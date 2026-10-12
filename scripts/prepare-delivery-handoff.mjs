@@ -1,5 +1,5 @@
-// Metadata-only preparation. Existing operators, source authority, review and
-// queue admission remain authoritative. No operator or GitHub write is invoked.
+// Metadata preparation and explicit body acquisition/queue transitions. Existing
+// operators, source authority and independent review remain authoritative.
 import fs from 'node:fs';
 import {performance} from 'node:perf_hooks';
 import path from 'node:path';
@@ -82,7 +82,7 @@ function admitDestination(root, destination, resume) {
 // Equivalent to the shared new-vintage writer for this JS metadata adapter:
 // validate whole destination before mutation, exclusive creation, receipt last.
 // Resume means checking every immutable byte; partial output is never repaired.
-export function publish(root, destination, products, binding, resume = false, sharedBudget = null) {
+export function admitPublication(root, destination, products, binding, resume = false, sharedBudget = null) {
   const target = admitDestination(root, destination, resume);
   const budget = sharedBudget ?? candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0});
   for (const [name, raw] of Object.entries(products)) {
@@ -92,18 +92,32 @@ export function publish(root, destination, products, binding, resume = false, sh
   need(Object.keys(products).length > 0, 'No empty completion');
   const outputs = Object.fromEntries(Object.entries(products).map(([name, raw]) => [name, {bytes: raw.length, sha256: digest(raw)}]));
   const receipt = jsonBytes({version: 1, binding, outputs});
-  budget.add({bytes: receipt.length}); // Receipt is included in the same finite whole-file/aggregate admission.
-  if (fs.existsSync(target)) {
-    need(resume, 'Occupied destination; use explicit --resume to verify an identical completed phase');
+  budget.add({bytes: receipt.length});
+  const inspectExisting = () => {
+    admitDestination(root, destination, resume);
+    if (!fs.existsSync(target)) return false;
     need(same(fs.readdirSync(target).sort(), [...Object.keys(products), 'preparation.json'].sort()), 'Incomplete or foreign resumed output inventory');
     for (const [name, raw] of Object.entries({...products, 'preparation.json': receipt}))
       need(ordinary(root, destination + '/' + name).equals(raw), 'Resumed bytes/binding changed: ' + name);
-    return {destination, resumed: true, binding};
-  }
-  fs.mkdirSync(path.dirname(target), {recursive: true});
-  fs.mkdirSync(target);
-  for (const [name, raw] of Object.entries({...products, 'preparation.json': receipt})) fs.writeFileSync(path.join(target, name), raw, {flag: 'wx'});
-  return {destination, resumed: false, binding};
+    return true;
+  };
+  inspectExisting();
+  // A caller may do admitted acquisition between preflight and publication.
+  // Recheck the destination after that boundary; never adopt a new collision.
+  return () => {
+    need(same(Object.keys(products).sort(), Object.keys(outputs).sort())
+      && Object.entries(products).every(([name, raw]) => raw.length === outputs[name].bytes && digest(raw) === outputs[name].sha256),
+      'Admitted products changed before publication');
+    if (inspectExisting()) return {destination, resumed: true, binding};
+    fs.mkdirSync(path.dirname(target), {recursive: true});
+    fs.mkdirSync(target);
+    for (const [name, raw] of Object.entries({...products, 'preparation.json': receipt})) fs.writeFileSync(path.join(target, name), raw, {flag: 'wx'});
+    return {destination, resumed: false, binding};
+  };
+}
+
+export function publish(root, destination, products, binding, resume = false, sharedBudget = null) {
+  return admitPublication(root, destination, products, binding, resume, sharedBudget)();
 }
 
 export function requestProfile(template, group, config, reader) {
@@ -602,6 +616,24 @@ export async function freezeReview({repo, number, expectedHead, api, reader}) {
 
 async function main(args) {
   const [phase, configFile, destination, ...flags] = args;
+  if (phase === 'materialize') {
+    need(configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
+      'Use materialize CONFIG DESTINATION [--resume]');
+    need(!process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node launch required');
+    const root = fs.realpathSync(process.cwd()), raw = ordinary(root, configFile), config = JSON.parse(raw);
+    need(config.version === 1 && config.preparation_allowance, 'Explicit finite materialization configuration required');
+    const reader = pinReader(root, {allowance: config.preparation_allowance}); reader.budget.add({bytes: raw.length});
+    const flow = await import('./delivery-handoff-advance.mjs');
+    const pin = flow.locate(reader, config.recipe_index), index = reader.json(pin), plan = index.acquisition_plan;
+    need(index.version === 1 && plan?.products?.length, 'Completed recipe index with acquisition plan required');
+    const products = {'materialized-inputs.json': jsonBytes({version: 1, kind: 'authenticated-delivery-inputs',
+      recipe_index: pin, identities: [...new Set(plan.products.map(p => p.identity))], status: 'complete'})};
+    const publishComplete = admitPublication(root, destination, products, {phase, config_sha256: digest(raw)}, flags.includes('--resume'), reader.budget);
+    const started = performance.now();
+    const result = await flow.acquireDeliveryInputs(plan, root, {budget: reader.budget});
+    console.log(JSON.stringify({...publishComplete(), acquisition: result, acquisition_ms: performance.now() - started}));
+    return;
+  }
   if (['advance', 'status'].includes(phase)) {
     need(configFile && destination && flags.every(f => ['--resume', '--submit-queue'].includes(f))
       && new Set(flags).size === flags.length && !(phase === 'status' && flags.includes('--submit-queue')), 'Use advance|status CONFIG DESTINATION [--resume] [--submit-queue]');
@@ -630,7 +662,7 @@ async function main(args) {
         let result;
         if (next.waiting) result = flow.observeAdvance(journal, next.waiting);
         else if (next.queue) result = await flow.advanceQueue(journal, next.queue, {api: liveAPI,
-          authorizeSubmission: flags.includes('--submit-queue'), submit: ({number, head, requestId, timeoutMs}) =>
+          queueAPI: flow.deliveryQueueAPI(), authorizeSubmission: flags.includes('--submit-queue'), submit: ({number, head, requestId, timeoutMs}) =>
             execFileSync('gh', ['workflow', 'run', 'merge-scheduler.yml', '--repo', next.queue.repo, '--ref', 'main',
               '-f', `pr_number=${number}`, '-f', `expected_head=${head}`, '-f', `request_id=${requestId}`],
             {encoding: 'utf8', timeout: timeoutMs, maxBuffer: 1048576})});

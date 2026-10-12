@@ -7,6 +7,8 @@ import path from 'node:path';
 import fs from 'node:fs';
 import os from 'node:os';
 import {randomUUID} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+import {createAcquisition} from './geography-prefetch.mjs';
 import {performance} from 'node:perf_hooks';
 import {candidateBudget} from './native-ownership/native-preparation-guards.mjs';
 import {runMergeQueueClient} from './merge-queue-client.mjs';
@@ -169,6 +171,11 @@ function journalFile(journal, filename) {
   return ordinaryFile(filename);
 }
 
+function writeJournal(journal, filename, raw) {
+  journal.budget.add({bytes: raw.length});
+  exclusive(filename, raw); journal.chargedJournalFiles.add(filename);
+}
+
 export function withAdvanceLock(journal, action) {
   const filename = path.join(journal.target, 'advance.lock');
   const guard = path.join(journal.target, 'advance.acquire');
@@ -177,10 +184,12 @@ export function withAdvanceLock(journal, action) {
   // acquisition guard is deliberately not auto-reaped: its ambiguous owner must
   // be reconciled explicitly, rather than introducing another compare/unlink race.
   need(!fs.lstatSync(guard, {throwIfNoEntry: false}), 'Advance acquisition is occupied; inspect its owner before recovery');
+  journal.budget.add({bytes: raw.length});
+  journal.budget.add({bytes: raw.length});
   exclusive(guard, raw);
   try {
     if (fs.existsSync(filename) || fs.lstatSync(filename, {throwIfNoEntry: false})) {
-      const original = ordinaryFile(filename), lock = JSON.parse(original);
+      const original = journalFile(journal, filename), lock = JSON.parse(original);
       need(lock.host === os.hostname() && Number.isSafeInteger(lock.pid) && lock.pid > 0
         && lock.intent_sha256 === hash(bytes(journal.intent)), 'Foreign advance lock');
       let gone = false;
@@ -251,7 +260,9 @@ export function readAdvanceStatus(journal) {
     return {stage: e.stage, elapsed_seconds: Number.isFinite(terminal.elapsed_seconds) ? terminal.elapsed_seconds : null, execution_commit: terminal.execution_commit,
       terminal_sha256: e.outputs['terminal.json'].sha256};
   });
-  return {version: 1, completed: completed.map(e => e.stage), waiting: !resolved && last?.status === 'waiting' ? last : null,
+  const queuePath = path.join(journal.target, 'queue-submission.json');
+  const queue_submission = fs.existsSync(queuePath) ? JSON.parse(journalFile(journal, queuePath)) : null;
+  return {version: 1, queue_submission, completed: completed.map(e => e.stage), waiting: !resolved && last?.status === 'waiting' ? last : null,
     last_refusal: !resolved && last?.status === 'refused' ? last : null,
     timing: {overall_wall_ms: Math.max(0, journal.now() - Date.parse(journal.intent.started_at)),
       preparation_ms: completed.reduce((n, e) => n + e.preparation_ms, 0),
@@ -269,7 +280,7 @@ export function observeAdvance(journal, observation) {
   const prior = names.length ? JSON.parse(journalFile(journal, path.join(journal.target, names.at(-1)))) : null;
   if (prior) { const {observed_at, ...value} = prior; if (equal(value, observation)) return prior; }
   const event = {...observation, observed_at: new Date(journal.now()).toISOString()};
-  exclusive(path.join(journal.target, 'observation-' + String(names.length).padStart(6, '0') + '.json'), bytes(event));
+  writeJournal(journal, path.join(journal.target, 'observation-' + String(names.length).padStart(6, '0') + '.json'), bytes(event));
   return event;
 }
 
@@ -281,7 +292,7 @@ export async function prepareAdvanceStage(journal, id, phase, config, produce, {
   else {
     need(!fs.lstatSync(path.join(journal.target, names.directory), {throwIfNoEntry: false})
       && !fs.lstatSync(eventPath, {throwIfNoEntry: false}), 'Unowned stage collision');
-    exclusive(intentPath, intended);
+    writeJournal(journal, intentPath, intended);
   }
   if (fs.existsSync(eventPath)) {
     const status = readAdvanceStatus(journal); need(status.completed.includes(id), 'Missing completed stage');
@@ -314,7 +325,7 @@ export async function prepareAdvanceStage(journal, id, phase, config, produce, {
   const event = {version: 1, stage: id, binding, outputs, preparation_ms: Math.max(0, performance.now() - preparationStarted - api_wait_ms), api_wait_ms,
     observations_seen: fs.readdirSync(journal.target).filter(n => /^observation-\d{6}\.json$/.test(n)).length,
     completed_at: new Date(journal.now()).toISOString()};
-  exclusive(eventPath, bytes(event));
+  writeJournal(journal, eventPath, bytes(event));
   return {stage: id, resumed: false};
 }
 
@@ -345,16 +356,43 @@ export async function acceptedReview(packet, api) {
     manifest_sha256: checked.manifest_sha256};
 }
 
+// Same bounded read adapter as queue-pr-merge.mjs. The queue client's second
+// argument is a read deadline, not githubAPI's HTTP-method argument.
+export function deliveryQueueAPI({execute = execFileSync} = {}) {
+  return (route, {timeoutMs = 20_000} = {}) => {
+    need(typeof route === 'string' && route.startsWith('/repos/ChengshuLi/WorldAtlas/')
+      && Number.isFinite(timeoutMs) && timeoutMs > 0, 'Invalid bounded queue read');
+    let output, failure;
+    try { output = execute('gh', ['api', '--include', route], {encoding: 'utf8',
+      maxBuffer: 16 * 1024 * 1024, timeout: timeoutMs, killSignal: 'SIGKILL'}); }
+    catch (error) { output = String(error.stdout ?? ''); failure = error; }
+    const separator = output.search(/\r?\n\r?\n/);
+    const headers = output.startsWith('HTTP/') && separator >= 0 ? output.slice(0, separator) : '';
+    if (failure) {
+      const error = Error(`GitHub read failed for ${route}; no merge claimed`);
+      const field = name => new RegExp(`^${name}:\\s*(\\d+)\\s*$`, 'im').exec(headers)?.[1];
+      let secondaryLimit = false;
+      try { secondaryLimit = /secondary rate limit/i.test(JSON.parse(headers ? output.slice(separator).trim() : output).message ?? ''); }
+      catch { /* Preserve HTTP rejection even when its body is incomplete. */ }
+      error.github = {http_status: Number(/^HTTP\/\S+\s+(\d+)/.exec(headers)?.[1]),
+        rate_remaining: field('x-ratelimit-remaining'), rate_reset: field('x-ratelimit-reset'),
+        retry_after: field('retry-after'), secondary_limit: secondaryLimit};
+      throw error;
+    }
+    return JSON.parse(headers ? output.slice(separator).trim() : output);
+  };
+}
+
 // Submission identity reaches durable disk before the existing queue client can
 // write. Any existing intent is observation-only, even if the original process
 // died before POST. That ambiguity is reported, never turned into a retry.
 export async function advanceQueue(journal, packet, {api, submit, authorizeSubmission = false,
-  checkReview = acceptedReview, client = runMergeQueueClient, clientOptions = {}}) {
+  checkReview = acceptedReview, client = runMergeQueueClient, clientOptions = {}, queueAPI = api}) {
   need(packet.repo === 'ChengshuLi/WorldAtlas', 'Use the existing named-repository queue');
   const filename = path.join(journal.target, 'queue-submission.json');
   let intent, resuming = false;
   if (fs.existsSync(filename)) {
-    intent = JSON.parse(ordinaryFile(filename)); resuming = true;
+    intent = JSON.parse(journalFile(journal, filename)); resuming = true;
     need(intent.repo === packet.repo && intent.pr_number === packet.pr_number && intent.head_sha === packet.head_sha
       && /^[-a-zA-Z0-9]{16,100}$/.test(intent.request_id), 'Existing submission identity belongs to another target');
   } else {
@@ -362,10 +400,10 @@ export async function advanceQueue(journal, packet, {api, submit, authorizeSubmi
     if (!authorizeSubmission) return {status: 'ready-for-queue', acceptance,
       next: 'Use advance with --submit-queue for this exact independently accepted head.'};
     intent = {version: 1, ...acceptance, request_id: randomUUID(), created_at: new Date(journal.now()).toISOString()};
-    exclusive(filename, bytes(intent));
+    writeJournal(journal, filename, bytes(intent));
   }
   const started = journal.now();
-  const result = await client({...clientOptions, api, submit, repo: intent.repo, number: intent.pr_number,
+  const result = await client({...clientOptions, api: queueAPI, submit, repo: intent.repo, number: intent.pr_number,
     head: intent.head_sha, requestId: intent.request_id, observeOnly: resuming, resuming,
     progress: value => clientOptions.progress?.(value)});
   observeAdvance(journal, {status: 'external', kind: 'queue', request_id: intent.request_id,
@@ -981,3 +1019,107 @@ export function deliveryAuthorityReader(root, pinReader) {
   return new DeliveryReader(root, git('rev-parse', 'HEAD').toString().trim(), {
     allowance: pinReader.budget.allowance, metadataBytes: 8 * 1024 * 1024 + outer.accounted_bytes});
 }
+
+// Exact-body acquisition reuses the existing prefetch importer and ordinary writer.
+export const acquireDeliveryInputs = (() => {
+// Thin adapter for the existing exact Git object acquisition. It does not
+// decode scientific records, restore logical products or execute operators.
+const CAP=33554432;
+const need=(v,m)=>{if(!v)throw Error(m);};
+const sha=raw=>createHash('sha256').update(raw).digest('hex');
+const oid=raw=>createHash('sha1').update('blob '+raw.length+'\0').update(raw).digest('hex');
+const hex=(s,n)=>typeof s==='string'&&new RegExp(`^[a-f0-9]{${n}}$`).test(s);
+const canonical=v=>Array.isArray(v)?v.map(canonical):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canonical(v[k])])):v;
+const bytes=v=>Buffer.from(JSON.stringify(canonical(v))+'\n');
+const safe=s=>typeof s==='string'&&!path.isAbsolute(s)&&/^[A-Za-z0-9_.\/-]+$/.test(s)&&s.split('/').every(x=>x&&x!=='.'&&x!=='..');
+const bodyIdentity=p=>({mode:p.mode,bytes:p.bytes,sha256:p.sha256,uncompressed_bytes:p.uncompressed_bytes??null,uncompressed_sha256:p.uncompressed_sha256??null});
+
+// Narrow extraction of canonical-restoration.mjs ordinary/read/writeExactObject:
+// an existing destination is reauthenticated, never overwritten. Interrupted
+// incomplete members remain a refusal; completed members are safe to resume.
+function ordinaryPath(root,relative){
+ need(safe(relative)&&path.isAbsolute(root)&&fs.realpathSync(root)===root,'Ordinary acquisition root/path required');
+ let current=root;for(const part of relative.split('/')){current=path.join(current,part);const stat=fs.lstatSync(current,{throwIfNoEntry:false});if(stat)need(!stat.isSymbolicLink()&&(current===path.join(root,relative)?stat.isFile():stat.isDirectory()),'Nonordinary acquisition destination');}return current;
+}
+function readExactFile(root,relative,pin){
+ const name=ordinaryPath(root,relative),stat=fs.lstatSync(name,{throwIfNoEntry:false});if(!stat)return null;
+ need(stat.isFile()&&stat.size===pin.bytes&&(stat.mode&0o777)===0o644,'Existing acquisition body size/mode differs');
+ const fd=fs.openSync(name,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);
+ try{const opened=fs.fstatSync(fd);need(opened.isFile()&&opened.dev===stat.dev&&opened.ino===stat.ino&&opened.size===stat.size,'Acquisition file identity drift');const raw=Buffer.alloc(pin.bytes+1);let n=0;
+  while(n<raw.length){const count=fs.readSync(fd,raw,n,raw.length-n,null);if(!count)break;n+=count;}
+  const after=fs.fstatSync(fd),current=fs.lstatSync(name);need(n===pin.bytes&&after.size===stat.size&&after.mtimeMs===opened.mtimeMs&&after.ctimeMs===opened.ctimeMs&&current.dev===opened.dev&&current.ino===opened.ino&&!current.isSymbolicLink(),'Acquisition file changed during read');
+  const body=raw.subarray(0,n);need(sha(body)===pin.sha256&&oid(body)===(pin.git_blob_oid??pin.blob),'Existing acquisition body hash differs');return body;
+ }finally{fs.closeSync(fd);}
+}
+function writeExactFile(root,relative,pin,raw){
+ need(raw.length===pin.bytes&&sha(raw)===pin.sha256&&oid(raw)===(pin.git_blob_oid??pin.blob),'Materialized source bytes differ');
+ if(readExactFile(root,relative,pin))return false;
+ const file=ordinaryPath(root,relative);fs.mkdirSync(path.dirname(file),{recursive:true});ordinaryPath(root,relative);
+ fs.writeFileSync(file,raw,{flag:'wx',mode:0o644});readExactFile(root,relative,pin);return true;
+}
+
+async function acquireDeliveryInputs(plan,root,{execute=execFileSync,token,onMaterialized=()=>{},limits,budget}={}){
+ let sharedBefore=null;
+ if(budget){need(typeof budget.add==='function'&&typeof budget.snapshot==='function','Existing candidate budget required');sharedBefore=budget.snapshot();
+  need(['limit_bytes','accounted_bytes','reserved_review_bytes'].every(k=>Number.isSafeInteger(sharedBefore[k])&&sharedBefore[k]>=0),'Finite shared acquisition allowance required');
+  limits={...limits,total:Math.min(limits?.total??Number.MAX_SAFE_INTEGER,sharedBefore.limit_bytes-sharedBefore.accounted_bytes-sharedBefore.reserved_review_bytes)};
+ }
+ need(limits&&typeof limits==='object'&&!Array.isArray(limits)&&Object.keys(limits).every(k=>['member','total','entries','destinations'].includes(k)),'Explicit acquisition allowance required');
+ const allowance={member:CAP,entries:512,destinations:512,...limits};
+ for(const value of Object.values(allowance))need(Number.isSafeInteger(value)&&value>=0,'Acquisition allowance must be finite');
+ need(Number.isSafeInteger(allowance.total)&&allowance.member<=CAP&&allowance.entries<=512,'Existing whole-member and descriptor limits required');
+ need(plan?.version===1&&plan.kind==='transport-only-deduplicated-input-plan'&&Array.isArray(plan.products)&&plan.products.length>0&&plan.products.length<=allowance.entries,'Bounded delivery acquisition plan required');
+ need(path.isAbsolute(root)&&fs.realpathSync(root)===root,'Actual ordinary acquisition root required');
+ const rows=[],objects=new Map(),destinations=new Map(),descriptors=new Map();let declared=0,decodedTotal=0,materializedTotal=0;
+ for(const item of plan.products){
+  const p=item.source;need(p&&safe(p.path)&&hex(p.commit,40)&&p.mode==='100644'&&hex(p.git_blob_oid??p.blob,40)&&hex(p.sha256,64)&&Number.isSafeInteger(p.bytes)&&p.bytes>=0&&p.bytes<=allowance.member,'Complete immutable acquisition pin required');
+  need(p.git_blob_oid===undefined||p.blob===undefined||p.git_blob_oid===p.blob,'Conflicting acquisition object aliases');
+  need((p.uncompressed_bytes===undefined)===(p.uncompressed_sha256===undefined),'Incomplete decoded acquisition identity');
+  if(p.uncompressed_bytes!==undefined){need(Number.isSafeInteger(p.uncompressed_bytes)&&p.uncompressed_bytes>=0&&p.uncompressed_bytes<=allowance.member&&hex(p.uncompressed_sha256,64),'Bounded decoded acquisition identity required');decodedTotal+=p.uncompressed_bytes;need(Number.isSafeInteger(decodedTotal),'Complete decoded acquisition bound');}
+  need(item.identity===sha(bytes(bodyIdentity(p)))&&Array.isArray(item.destinations)&&item.destinations.length>0&&item.destinations.length<=512,'Acquisition identity/destination inventory differs');
+  declared+=p.bytes;need(Number.isSafeInteger(declared)&&declared<=allowance.total,'Complete declared acquisition bound');
+  const key=p.git_blob_oid??p.blob,old=objects.get(key);
+  need(!old||(old.pin.bytes===p.bytes&&old.pin.sha256===p.sha256&&old.pin.mode===p.mode),'Conflicting immutable acquisition body');
+  const group=old??{pin:p,pins:[],destinations:new Set()};group.pins.push(p);objects.set(key,group);
+  const descriptorKey=p.commit+':'+p.path,prior=descriptors.get(descriptorKey);
+  need(!prior||(prior.git_blob_oid??prior.blob)===key,'Conflicting immutable acquisition path');descriptors.set(descriptorKey,p);
+  for(const destination of item.destinations){
+   need(safe(destination),'Unsafe acquisition destination');
+   if(destination===p.path)continue; // Immutable consumers read this from Git.
+   need(destination.startsWith('.cache/additive-native-gap-repair/delivery/'+p.sha256+'/'),'Only content-addressed physical aliases may be materialized');
+   const before=destinations.get(destination);need(!before||before===key,'Conflicting materialization destination');
+   if(!before){materializedTotal+=p.bytes;need(Number.isSafeInteger(materializedTotal)&&destinations.size<allowance.destinations,'Complete physical alias acquisition bound');}
+   destinations.set(destination,key);group.destinations.add(destination);
+  }
+  rows.push(p);
+ }
+ need(plan.unique_encoded_bytes===declared,'Declared acquisition aggregate differs');
+ const totalModeled=declared+decodedTotal+materializedTotal;
+ need(Number.isSafeInteger(totalModeled)&&totalModeled<=allowance.total,'Encoded + decoded + physical placement exceeds explicit acquisition allowance');
+ // The CLI's existing budget already includes config, plan and reserved receipts.
+ // Admit this entire body inventory before any body read, fetch or file write.
+ if(budget){for(const p of rows){budget.add({bytes:p.bytes});if(p.uncompressed_bytes!==undefined)budget.add({bytes:p.uncompressed_bytes});}
+  for(const [destination,key]of destinations)budget.add({bytes:objects.get(key).pin.bytes});budget.snapshot();
+ }
+ for(const [destination,key]of destinations)readExactFile(root,destination,objects.get(key).pin);
+ const acquisition=createAcquisition({repo:root,token,execute,limits:{member:allowance.member,total:allowance.total,entries:allowance.entries},loadDescriptor:async(version,name)=>{const p=descriptors.get(version+':'+name);need(p,'Undeclared acquisition metadata');return {type:'blob',mode:p.mode,sha:p.git_blob_oid??p.blob,size:p.bytes};}});
+ const admitted=[];
+ for(const p of rows)admitted.push(await acquisition.descriptor(p.commit,p.path,{mode:p.mode,git_blob_oid:p.git_blob_oid??p.blob,bytes:p.bytes,sha256:p.sha256}));
+ acquisition.acquire(admitted); // Existing import checks and missing-OID resume.
+ const gitEnv=Object.fromEntries(Object.entries(process.env).filter(([key])=>!key.startsWith('GIT_')));
+ Object.assign(gitEnv,{GIT_NO_LAZY_FETCH:'1',GIT_NO_REPLACE_OBJECTS:'1',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_TERMINAL_PROMPT:'0'});
+ const outcomes=[];let bodyReads=0;
+ for(const [key,group] of objects){
+  const raw=execute('git',['-c','core.hooksPath=/dev/null','-C',root,'cat-file','blob',key],{env:gitEnv,maxBuffer:CAP+1,timeout:60000,stdio:['ignore','pipe','pipe']});bodyReads++;
+  need(Buffer.isBuffer(raw)&&raw.length===group.pin.bytes&&sha(raw)===group.pin.sha256&&oid(raw)===key,'Acquired body changed before materialization');
+  const decodedPins=group.pins.filter(p=>p.uncompressed_bytes!==undefined);
+  if(decodedPins.length){const decoded=gunzipSync(raw,{maxOutputLength:Math.max(1,allowance.member)});for(const p of decodedPins)need(decoded.length===p.uncompressed_bytes&&sha(decoded)===p.uncompressed_sha256,'Acquired decoded identity differs');}
+  for(const destination of group.destinations){const created=writeExactFile(root,destination,group.pin,raw);outcomes.push({path:destination,bytes:raw.length,sha256:group.pin.sha256,created});if(created)onMaterialized({path:destination,bytes:raw.length,sha256:group.pin.sha256});}
+ }
+ return {version:1,kind:'materialized-delivery-inputs-v1',plan_sha256:sha(bytes(plan)),status:'complete',...acquisition.stats,
+  materialization_body_reads:bodyReads,materialized_files:outcomes.filter(p=>p.created).length,resumed_files:outcomes.filter(p=>!p.created).length,files:outcomes,
+  admission:{limits:allowance,declared_encoded_bytes:declared,declared_decoded_bytes:decodedTotal,physical_alias_bytes:materializedTotal,physical_aliases:destinations.size,total_modeled_bytes:totalModeled,...(budget?{shared_budget:budget.snapshot()}:{})},
+  limits:['Transport and exact-byte physical aliases only. Every scientific operator still authenticates and accounts for its own complete inputs.','Completed objects/files resume by their actual identities; partial or corrupted destination files are refused and preserved.']};
+}
+return acquireDeliveryInputs;
+})();

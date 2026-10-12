@@ -265,8 +265,33 @@ requests that actually executed; retention and authorities always validate the
 latter. A historical replay is not new source acceptance or a new execution.
 
 The recipe index emits one transport/acquisition identity per whole encoded and
-decoded body, with all compatible destinations. This deduplicates the plan; it
-neither downloads bodies nor removes mandatory SOURCE/NATIVE authentication.
+decoded body, with all compatible destinations. `advance` only prepares this plan.
+The explicit `materialize` phase consumes its actual committed index:
+
+```sh
+node scripts/prepare-delivery-handoff.mjs materialize CONFIG DESTINATION
+node scripts/prepare-delivery-handoff.mjs materialize CONFIG DESTINATION --resume
+```
+
+Its config contains `version: 1`, `recipe_index: {commit, path}` for the saved
+`recipe-index.json`, and explicit finite `preparation_allowance: {phaseBytes,
+rssBytes}`. It authenticates that whole index, reserves its deterministic completion
+report/receipt, then shares the same budget across encoded/decoded inputs and
+unique physical placements. Use the normal shared Git import/storage window for
+actual acquisition. The existing exact-object prefetch importer retrieves missing
+Git bodies once; tracked source paths are never written. Only declared aliases
+under `.cache/additive-native-gap-repair/delivery/<sha256>/` may be materialized.
+Actual tree/OID/size/SHA and decoded identities are checked. Completed aliases are
+reauthenticated and preserved on resume; corrupt or partially written aliases are
+refused without repair. No source approval follows from successful acquisition.
+
+The returned observation records actual fetch/import/write/resume counters and
+acquisition milliseconds separately. The durable completion report is deterministic
+and repeats byte-for-byte; it does not rewrite the first observation's counters.
+Tests invoke actual local Git fetches with repeated immutable identities and
+interrupted import/placement, as well as the plain-Node CLI. These small local
+fixtures prove acquisition reuse, not a new fetch of the current13 GIS products.
+Every scientific phase still authenticates and accounts for its complete inputs.
 Physical-product paths come from the accepted handoff's original comparison or
 its exact consumed locator metadata. Missing joins refuse, rather than guessing
 from country names, old batches, or incomplete source records.
@@ -298,7 +323,7 @@ lock is recovered only when its same-host process is gone, with inspection and
 new acquisition serialized by an exclusive short guard. A process killed inside
 that guard leaves an explicit owner-reconciliation refusal; the guard is never
 automatically reaped. A live or foreign owner is never displaced. `status` checks completed inventories without mutation.
-Timings report preparation, API wait, observed external wait and individual
+Timings report preparation, acquisition, API wait, observed external wait and individual
 operator-receipt durations separately. Parallel operator durations are not added
 and called wall time; metadata speed is not global gap-closures/hour.
 

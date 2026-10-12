@@ -583,3 +583,181 @@ test('real advance CLI refuses an oversized admitted config before reading recip
   error => error.stderr.toString().includes('Aggregate evidence preparation budget exceeded'));
   assert.equal(fs.existsSync(path.join(root, '.cache')), false);
 });
+
+import {deliveryQueueAPI} from '../scripts/delivery-handoff-advance.mjs';
+test('actual queue read adapter forwards remaining timeout and preserves rate-limit metadata', () => {
+  const route = '/repos/ChengshuLi/WorldAtlas/pulls/1';
+  const api = deliveryQueueAPI({execute: (command, args, options) => {
+    assert.equal(command, 'gh'); assert.deepEqual(args, ['api', '--include', route]);
+    assert.equal(options.timeout, 1234); assert.equal(options.killSignal, 'SIGKILL');
+    return 'HTTP/2.0 200 OK\r\ncontent-type: application/json\r\n\r\n{"real":true}';
+  }});
+  assert.deepEqual(api(route, {timeoutMs: 1234}), {real: true});
+  const refused = deliveryQueueAPI({execute: () => { throw Object.assign(Error('gh failure'), {
+    stdout: 'HTTP/2.0 403 Forbidden\r\nx-ratelimit-remaining: 4\r\nretry-after: 90\r\n\r\n{"message":"secondary rate limit"}'}); }});
+  assert.throws(() => refused(route, {timeoutMs: 567}), error => error.github.http_status === 403
+    && error.github.rate_remaining === '4' && error.github.retry_after === '90' && error.github.secondary_limit);
+});
+test('journal writes and queue intent reads share admission before dispatch', async t => {
+  const j = journal(t), packet = {repo: 'ChengshuLi/WorldAtlas', pr_number: 1, head_sha: commit};
+  const budget = () => candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0,
+    allowance: {phaseBytes: 100, rssBytes: 1024 ** 3}});
+  j.budget = budget();
+  assert.throws(() => observeAdvance(j, {status: 'waiting', kind: 'commit', detail: 'x'.repeat(200)}), /Aggregate/);
+  assert.equal(fs.readdirSync(j.target).length, 1);
+  j.budget = budget(); let submitted = false;
+  await assert.rejects(advanceQueue(j, packet, {authorizeSubmission: true, checkReview: async () => packet,
+    client: async () => { submitted = true; }}), /Aggregate/);
+  assert.equal(submitted, false); assert.equal(fs.existsSync(path.join(j.target, 'queue-submission.json')), false);
+  fs.writeFileSync(path.join(j.target, 'queue-submission.json'), JSON.stringify({...packet, request_id: 'a'.repeat(36)}));
+  j.budget = budget();
+  await assert.rejects(advanceQueue(j, packet, {client: async () => { submitted = true; }}), /Aggregate/);
+  assert.equal(submitted, false);
+});
+
+import {admitPublication} from '../scripts/prepare-delivery-handoff.mjs';
+test('materialization report preflight refuses late collisions and changed postimages', t => {
+  const j = journal(t), destination = '.cache/delivery-handoff/report';
+  const products = {'materialized-inputs.json': Buffer.from('{}\n')};
+  const commit = admitPublication(j.root, destination, products, {phase: 'materialize'}, false, j.budget);
+  assert.equal(fs.existsSync(path.join(j.root, destination)), false);
+  fs.mkdirSync(path.join(j.root, destination)); fs.writeFileSync(path.join(j.root, destination, 'sentinel'), 'preserve');
+  assert.throws(commit, /Occupied destination/);
+  assert.equal(fs.readFileSync(path.join(j.root, destination, 'sentinel'), 'utf8'), 'preserve');
+  const second = admitPublication(j.root, destination + '-second', products, {phase: 'materialize'}, false, j.budget);
+  products['materialized-inputs.json'][0] = 65;
+  assert.throws(second, /changed before publication/);
+  assert.equal(fs.existsSync(path.join(j.root, destination + '-second')), false);
+});
+
+import {gzipSync} from 'node:zlib';
+import {acquireDeliveryInputs} from '../scripts/delivery-handoff-advance.mjs';
+{
+const sha=b=>createHash('sha256').update(b).digest('hex');
+const canonical=v=>Array.isArray(v)?v.map(canonical):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canonical(v[k])])):v;
+const json=v=>Buffer.from(JSON.stringify(canonical(v))+'\n');
+function fixture(){
+ const directory=fs.mkdtempSync(path.join(os.tmpdir(),'delivery-input-materializer-')),origin=path.join(directory,'origin'),destination=path.join(directory,'destination');
+ const env={...process.env,GIT_NO_LAZY_FETCH:'1',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_TERMINAL_PROMPT:'0',GIT_AUTHOR_NAME:'fixture',GIT_AUTHOR_EMAIL:'fixture@example.invalid',GIT_COMMITTER_NAME:'fixture',GIT_COMMITTER_EMAIL:'fixture@example.invalid'};
+ const git=(cwd,args,input)=>execFileSync('git',['-c','core.hooksPath=/dev/null','-C',cwd,...args],{env,input,stdio:['pipe','pipe','pipe']});
+ for(const repo of [origin,destination]){fs.mkdirSync(repo);git(repo,['init','--bare','--template=']);}
+ const decoded=Buffer.from('one complete immutable fixture row\n'),rawA=gzipSync(decoded,{mtime:0}),rawB=Buffer.from('second immutable body\n');
+ const oidA=git(origin,['hash-object','-w','--stdin'],rawA).toString().trim(),oidB=git(origin,['hash-object','-w','--stdin'],rawB).toString().trim();
+ const tree=git(origin,['mktree'],`100644 blob ${oidA}\talias-a.gz\n100644 blob ${oidA}\tsource-a.gz\n100644 blob ${oidB}\tsource-b.txt\n`).toString().trim();
+ const commit=git(origin,['commit-tree',tree],'fixture\n').toString().trim();git(origin,['update-ref','refs/heads/main',commit]);
+ // The destination has actual immutable tree/commit metadata and no file bodies.
+ for(const [type,id]of [['tree',tree],['commit',commit]])git(destination,['hash-object','-w','-t',type,'--stdin'],git(origin,['cat-file',type,id]));
+ const pin=(name,body,oid,extra={})=>({commit,path:name,mode:'100644',blob:oid,bytes:body.length,sha256:sha(body),...extra});
+ const a=pin('source-a.gz',rawA,oidA,{uncompressed_bytes:decoded.length,uncompressed_sha256:sha(decoded)}),alias={...a,path:'alias-a.gz'},b=pin('source-b.txt',rawB,oidB);
+ const destA='.cache/additive-native-gap-repair/delivery/'+a.sha256+'/sources-000.jsonl.gz',destB='.cache/additive-native-gap-repair/delivery/'+b.sha256+'/components-001.jsonl.gz';
+ const product=(p,destination)=>({identity:sha(json({mode:p.mode,bytes:p.bytes,sha256:p.sha256,uncompressed_bytes:p.uncompressed_bytes??null,uncompressed_sha256:p.uncompressed_sha256??null})),source:p,destinations:[p.path,destination],uses:['source-input','native-input','physical-product']});
+ const plan={version:1,kind:'transport-only-deduplicated-input-plan',products:[product(a,destA),product(alias,destA),product(b,destB)],unique_encoded_bytes:a.bytes+alias.bytes+b.bytes};
+ const fetchCalls=[],importedOids=[],writes=[],bodyReads=[],control={interruptFetch:false,interruptFile:false,corruptRead:false};
+ const execute=(command,args,options)=>{
+  assert.equal(command,'git');assert.equal(options.env.GIT_NO_LAZY_FETCH,'1');
+  if(args.includes('fetch')){
+   const requested=options.input.trim().split('\n');fetchCalls.push(requested);assert.equal(new Set(requested).size,requested.length);
+   args=args.map(a=>a==='https://github.com/ChengshuLi/WorldAtlas.git'?origin:a);
+   if(control.interruptFetch){control.interruptFetch=false;const first=requested[0];execFileSync(command,args,{...options,input:first+'\n'});importedOids.push(first);throw Error('fixture interruption after real first-object import');}
+   const out=execFileSync(command,args,options);importedOids.push(...requested);return out;
+  }
+  if(args.includes('cat-file')&&args.includes('blob'))bodyReads.push(args.at(-1));
+  const raw=execFileSync(command,args,options);
+  if(control.corruptRead&&args.includes('cat-file')&&args.includes('blob'))return Buffer.from('wrong bytes');return raw;
+ };
+ const options={execute,token:'',limits:{total:plan.unique_encoded_bytes+2*decoded.length+rawA.length+rawB.length},onMaterialized(event){writes.push(event.path);if(control.interruptFile){control.interruptFile=false;throw Error('fixture interruption after completed alias');}}};
+ return {directory,origin,destination,plan,options,execute,control,fetchCalls,importedOids,writes,bodyReads,git,rawA,rawB,a,b,destA,destB,oidA,oidB,close(){fs.rmSync(directory,{recursive:true,force:true});}};
+}
+
+test('actual missing Git objects and repeated identities acquire once; complete aliases are materialized once',async()=>{
+ const f=fixture();try{
+  const sourceSentinel=Buffer.from('Existing ordinary source-tree path is not a materialization target.\n');
+  fs.writeFileSync(path.join(f.destination,f.a.path),sourceSentinel);
+  const result=await acquireDeliveryInputs(f.plan,f.destination,f.options);assert.equal(result.status,'complete');assert.equal(result.unique_objects,2);assert.equal(result.declarations,3);assert.equal(result.verified_import_objects,2);assert.equal(result.materialized_files,2);assert.equal(result.materialization_body_reads,2);assert.equal(f.bodyReads.length,4);
+  assert.equal(f.fetchCalls.length,1);assert.deepEqual(new Set(f.importedOids),new Set([f.oidA,f.oidB]));assert.equal(f.importedOids.length,2);assert.equal(f.writes.length,2);
+  assert.deepEqual(fs.readFileSync(path.join(f.destination,f.destA)),f.rawA);assert.deepEqual(fs.readFileSync(path.join(f.destination,f.destB)),f.rawB);
+  for(let i=0;i<2;i++){const warm=await acquireDeliveryInputs(f.plan,f.destination,f.options);assert.equal(warm.verified_import_objects,0);assert.equal(warm.materialized_files,0);assert.equal(warm.resumed_files,2);assert.equal(warm.materialization_body_reads,2);}
+  assert.equal(f.bodyReads.length,12); // Complete per-invocation reauthentication is retained.
+  assert.equal(f.fetchCalls.length,1);assert.equal(f.importedOids.length,2);assert.equal(f.writes.length,2);
+  assert.deepEqual(fs.readFileSync(path.join(f.destination,f.a.path)),sourceSentinel);assert.equal(fs.existsSync(path.join(f.destination,f.b.path)),false);
+ }finally{f.close();}
+});
+
+test('caller-derived complete byte and destination allowances fail before acquisition',async()=>{
+ for(const limits of [{member:1},{total:1},{entries:2},{destinations:1},{total:Infinity},{total:-1},{unknown:1}]){const f=fixture();try{
+  await assert.rejects(acquireDeliveryInputs(f.plan,f.destination,{...f.options,limits:{...f.options.limits,...limits}}));assert.equal(f.fetchCalls.length,0);assert.equal(f.writes.length,0);assert.equal(f.bodyReads.length,0);
+ }finally{f.close();}}
+ const f=fixture();try{
+  await assert.rejects(acquireDeliveryInputs(f.plan,f.destination,{...f.options,limits:undefined}),/Explicit acquisition/);
+  await assert.rejects(acquireDeliveryInputs(f.plan,f.destination,{...f.options,limits:{total:f.options.limits.total-1}}),/Encoded \+ decoded \+ physical placement/);assert.equal(f.fetchCalls.length,0);assert.equal(f.writes.length,0);
+  const limits={member:Math.max(f.a.bytes,f.a.uncompressed_bytes,f.b.bytes),total:f.options.limits.total,entries:3,destinations:2};
+  const result=await acquireDeliveryInputs(f.plan,f.destination,{...f.options,limits});assert.deepEqual(result.admission.limits,limits);assert.equal(result.admission.total_modeled_bytes,limits.total);assert.equal(result.materialized_files,2);
+ }finally{f.close();}
+});
+
+test('interrupted real import resumes from actual object state without fetching the completed identity again',async()=>{
+ const f=fixture();try{
+  f.control.interruptFetch=true;await assert.rejects(acquireDeliveryInputs(f.plan,f.destination,f.options),/acquisition failed/);assert.equal(f.importedOids.length,1);assert.equal(f.writes.length,0);
+  const before=f.git(f.destination,['cat-file','--batch-check'],f.oidA+'\n'+f.oidB+'\n').toString();assert.equal(before.split('\n').filter(line=>line.endsWith(' missing')).length,1);
+  const resumed=await acquireDeliveryInputs(f.plan,f.destination,f.options);assert.equal(resumed.status,'complete');assert.equal(f.fetchCalls.length,2);assert.equal(f.fetchCalls[1].length,1);assert.notEqual(f.fetchCalls[1][0],f.importedOids[0]);assert.equal(new Set(f.importedOids).size,2);assert.equal(f.importedOids.length,2);assert.equal(f.writes.length,2);
+ }finally{f.close();}
+});
+
+test('the actual shared candidateBudget admits complete transport costs alongside existing metadata and reserves',async()=>{
+ const f=fixture();try{
+  const makeBudget=delta=>candidateBudget([{bytes:17}],{reserveBytes:11,reserveDescriptors:1,allowance:{phaseBytes:f.options.limits.total+28+delta,rssBytes:640*1024*1024}});
+  await assert.rejects(acquireDeliveryInputs(f.plan,f.destination,{...f.options,limits:undefined,budget:makeBudget(-1)}),/Encoded \+ decoded \+ physical placement/);assert.equal(f.fetchCalls.length,0);assert.equal(f.writes.length,0);assert.equal(f.bodyReads.length,0);
+  const budget=makeBudget(0);const result=await acquireDeliveryInputs(f.plan,f.destination,{...f.options,limits:undefined,budget});
+  assert.equal(result.admission.shared_budget.accounted_bytes,17+f.options.limits.total);assert.equal(result.admission.shared_budget.accounted_descriptors,8);assert.equal(result.admission.shared_budget.reserved_review_bytes,11);assert.equal(f.fetchCalls.length,1);assert.equal(f.writes.length,2);
+ }finally{f.close();}
+});
+
+test('interruption after a complete file resumes without another fetch or overwriting the completed alias',async()=>{
+ const f=fixture();try{
+  f.control.interruptFile=true;await assert.rejects(acquireDeliveryInputs(f.plan,f.destination,f.options),/completed alias/);assert.equal(f.fetchCalls.length,1);assert.equal(f.writes.length,1);const first=path.join(f.destination,f.writes[0]),before=fs.statSync(first);
+  const resumed=await acquireDeliveryInputs(f.plan,f.destination,f.options);assert.equal(resumed.materialized_files,1);assert.equal(resumed.resumed_files,1);assert.equal(f.fetchCalls.length,1);assert.equal(f.writes.length,2);const after=fs.statSync(first);assert.equal(after.ino,before.ino);assert.equal(after.mtimeMs,before.mtimeMs);
+ }finally{f.close();}
+});
+
+test('partial, corrupted and symlinked aliases are preserved and refused before any fetch',async()=>{
+ for(const mode of ['partial','corrupt','symlink']){const f=fixture();try{const destination=path.join(f.destination,f.destA);fs.mkdirSync(path.dirname(destination),{recursive:true});let sentinel;
+  if(mode==='symlink'){sentinel=path.join(f.directory,'sentinel');fs.writeFileSync(sentinel,f.rawA);fs.symlinkSync(sentinel,destination);}else fs.writeFileSync(destination,mode==='partial'?f.rawA.subarray(0,3):Buffer.alloc(f.rawA.length,1));
+  const before=mode==='symlink'?fs.readFileSync(sentinel):fs.readFileSync(destination);
+  await assert.rejects(acquireDeliveryInputs(f.plan,f.destination,f.options),/Nonordinary|differs/);assert.equal(f.fetchCalls.length,0);assert.equal(f.writes.length,0);assert.deepEqual(mode==='symlink'?fs.readFileSync(sentinel):fs.readFileSync(destination),before);
+ }finally{f.close();}}
+});
+
+test('wrong whole bytes or decoded gzip identities cannot produce a materialized receipt',async()=>{
+ let f=fixture();try{f.control.corruptRead=true;await assert.rejects(acquireDeliveryInputs(f.plan,f.destination,f.options),/does not match tree/);assert.equal(f.writes.length,0);}finally{f.close();}
+ f=fixture();try{const changed=structuredClone(f.plan);for(const p of changed.products.filter(p=>p.source.blob===f.oidA)){p.source.uncompressed_sha256='0'.repeat(64);p.identity=sha(json({mode:p.source.mode,bytes:p.source.bytes,sha256:p.source.sha256,uncompressed_bytes:p.source.uncompressed_bytes,uncompressed_sha256:p.source.uncompressed_sha256}));}
+ await assert.rejects(acquireDeliveryInputs(changed,f.destination,f.options),/decoded identity/);assert.equal(f.writes.length,0);
+ }finally{f.close();}
+});
+
+test('identity, destination and whole-file admission failures occur before object fetches',async()=>{
+ for(const edit of [p=>p.products[0].identity='0'.repeat(64),p=>p.products[0].destinations.push('../escape'),p=>p.products[0].destinations.push('data/unowned.json'),p=>p.products[0].source.bytes=33554433,p=>p.unique_encoded_bytes++]){const f=fixture();try{const bad=structuredClone(f.plan);edit(bad);await assert.rejects(acquireDeliveryInputs(bad,f.destination,f.options));assert.equal(f.fetchCalls.length,0);assert.equal(f.writes.length,0);}finally{f.close();}}
+});
+
+test('plain materialize CLI authenticates a saved recipe index and resumes with identical receipt and zero writes', () => {
+  const f = fixture();
+  try {
+    const index = json({version: 1, acquisition_plan: f.plan});
+    const blob = f.git(f.origin, ['hash-object', '-w', '--stdin'], index).toString().trim();
+    const tree = f.git(f.origin, ['mktree'], `100644 blob ${blob}\trecipe-index.json\n`).toString().trim();
+    const commit = f.git(f.origin, ['commit-tree', tree], 'saved recipe index\n').toString().trim();
+    fs.writeFileSync(path.join(f.origin, 'config.json'), JSON.stringify({version: 1,
+      recipe_index: {commit, path: 'recipe-index.json'}, preparation_allowance: {phaseBytes: 1024 * 1024, rssBytes: 1024 ** 3}}));
+    const script = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../scripts/prepare-delivery-handoff.mjs');
+    const env = {...process.env}; delete env.NODE_OPTIONS; delete env.NODE_PATH;
+    const run = (...flags) => JSON.parse(execFileSync(process.execPath, [script, 'materialize', 'config.json',
+      '.cache/delivery-handoff/materialized', ...flags], {cwd: f.origin, env, stdio: ['ignore', 'pipe', 'pipe']}));
+    const first = run(); assert.equal(first.acquisition.materialized_files, 2); assert.equal(first.acquisition.fetch_batches, 0);
+    const receiptPath = path.join(f.origin, '.cache/delivery-handoff/materialized/preparation.json');
+    const original = fs.readFileSync(receiptPath), before = fs.statSync(path.join(f.origin, f.destA));
+    const second = run('--resume'); assert.equal(second.resumed, true); assert.equal(second.acquisition.materialized_files, 0);
+    assert.equal(second.acquisition.resumed_files, 2); assert.equal(second.acquisition.fetch_batches, 0);
+    assert.deepEqual(fs.readFileSync(receiptPath), original); assert.equal(fs.statSync(path.join(f.origin, f.destA)).ino, before.ino);
+    assert.throws(() => run(), error => error.stderr.toString().includes('Occupied destination'));
+  } finally { f.close(); }
+});
+}
