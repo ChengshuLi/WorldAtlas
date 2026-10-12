@@ -1,0 +1,23 @@
+file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/.cache/package-input-image-CKJIsW/scripts/check-effective-geographic-regression.mjs:13
+const demand=(v,m)=>{if(!v)throw Error(m);};
+                                 ^
+
+Error: Selected source/policy/qualification binding differs
+    at demand (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/.cache/package-input-image-CKJIsW/scripts/check-effective-geographic-regression.mjs:13:34)
+    at readArtifactConsumption (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/.cache/package-input-image-CKJIsW/scripts/check-effective-geographic-regression.mjs:405:3)
+    at loadBaseSelection (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/.cache/package-input-image-CKJIsW/scripts/check-effective-geographic-regression.mjs:432:29)
+    at loadSelection (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/.cache/package-input-image-CKJIsW/scripts/check-effective-geographic-regression.mjs:475:18)
+    at preparePackageSelectedAdditive (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/.cache/package-input-image-CKJIsW/coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs:110:18)
+    at async file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/.cache/package-input-image-CKJIsW/scripts/build-static-inner.mjs:106:23
+
+Node.js v24.19.0
+file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/scripts/package-build.mjs:325
+      child.on('exit', (code, signal) => code === 0 ? resolve() : reject(Error(`Package ${kind} build failed (${signal ?? code}); prior outputs retained`)));
+                                                                         ^
+
+Error: Package cloudflare build failed (1); prior outputs retained
+    at ChildProcess.<anonymous> (file:///workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/scripts/package-build.mjs:325:74)
+    at ChildProcess.emit (node:events:509:28)
+    at ChildProcess._handle.onexit (node:internal/child_process:295:12)
+
+Node.js v24.19.0

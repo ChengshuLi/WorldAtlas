@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py", line 282, in <module>
+    print(json.dumps(supervise(pathlib.Path(sys.argv[1]),sys.argv[2],pathlib.Path(sys.argv[3]))))
+                     ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py", line 211, in supervise
+    stock=json.loads(stock_raw);require_stock_growth(stock,root,contract.OUTPUT)
+                                ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py", line 32, in require_stock_growth
+    assert type(footprint) is int and footprint>=0 and footprint+output_bytes<=reservation,'Measured slot plus complete growth exceeds reservation'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Measured slot plus complete growth exceeds reservation

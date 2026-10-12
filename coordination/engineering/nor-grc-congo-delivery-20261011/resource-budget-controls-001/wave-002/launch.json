@@ -1,0 +1,40 @@
+{
+  "execution_commit": "4951bca68f6dc57453344e736ff57305c1b317c0",
+  "fresh_mem_available_bytes": 9275637760,
+  "aggregate_group_reservation_bytes": 3221225472,
+  "parent_reserved_bytes": 2147483648,
+  "residual_bytes": 3906928640,
+  "environment": {
+    "WORLDATLAS_CONCURRENT_RESERVED_BYTES": "2147483648",
+    "MALLOC_ARENA_MAX": "2",
+    "MALLOC_TRIM_THRESHOLD_": "131072",
+    "MALLOC_MMAP_THRESHOLD_": "131072"
+  },
+  "jobs": [
+    {
+      "id": "native-a",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs",
+        "coordination/engineering/nor-grc-congo-delivery-20261011/resource-budget-controls-001/native-a/cod-002-a-native-request.json"
+      ]
+    },
+    {
+      "id": "native-b",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs",
+        "coordination/engineering/nor-grc-congo-delivery-20261011/resource-budget-controls-001/native-b/cod-002-b-native-request.json"
+      ]
+    },
+    {
+      "id": "assembly-003",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "coordination/engineering/melanesia363-additive-delivery-20261010/supervise-selected-assembly-linux.mjs",
+        "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/078ea13efbac7fd59128295319badff16810b72e582c5cb860c688ad4314cae6/work/.cache/nor-grc-congo-current-003/assembly-parameters-003.json",
+        "3a3cfbcfb40a4e63d2f3a3aabb281c6402fb84a9fa2b99beaa1821e6687e435e"
+      ]
+    }
+  ]
+}

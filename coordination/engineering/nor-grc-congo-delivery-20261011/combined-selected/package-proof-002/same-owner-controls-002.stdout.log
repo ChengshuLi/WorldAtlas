@@ -1,0 +1,11 @@
+✔ same-owner additions are aggregated and shared cells counted once, independent of candidate order (4.084689ms)
+✔ complete old owners survive virtual interval split/merge; only previously empty cells are emitted (0.764884ms)
+✔ continuous different-owner overlap is refused even when no native cell is sampled; same-owner primitive sets may overlap (0.990839ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 213.598136

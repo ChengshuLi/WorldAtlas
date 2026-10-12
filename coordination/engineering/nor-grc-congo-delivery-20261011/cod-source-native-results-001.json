@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "phases": [
+    {
+      "phase": "cod-001",
+      "source_execution_commit": "899f07ec110e4590d69d90d5cb0490afd9198d83",
+      "native_execution_commit": "9ca69e7ef5bb7ab27089abd6903f53087934ee5b",
+      "source_request": "coordination/engineering/nor-grc-congo-delivery-20261011/cod-001-source-request-001.json",
+      "native_request": "coordination/engineering/nor-grc-congo-delivery-20261011/cod-001-native-request-001.json",
+      "source_operating": "coordination/engineering/nor-grc-congo-delivery-20261011/cod-001-source-operating-001.json",
+      "native_operating": "coordination/engineering/nor-grc-congo-delivery-20261011/cod-001-native-operating-001.json",
+      "source_output_prefix": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/source",
+      "native_output_prefix": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-001/native",
+      "scope_ids": [
+        "physical-component:8441fde5898d6f7db14840ed710f12785697897e45a863a5edd692e935866fc2",
+        "physical-component:fb03e785463b4a99a605ca297b6dd2a2bb27f3352e108844ad5ca147d9fc622c"
+      ],
+      "facts": {
+        "components": 2,
+        "assigned_cells": 0,
+        "assigned_components": 0,
+        "zero_cell_components": 2,
+        "source_exceptions": 0,
+        "native_conflicts": 0,
+        "removed_cells": 0,
+        "reassigned_cells": 0,
+        "qualification": false,
+        "native_authority": false,
+        "continuous_qualified": false,
+        "whole_gap_completion": false
+      },
+      "outcomes": [
+        {
+          "activation": false,
+          "applicability_disposition": "held-pending-current-selected-neighbor-qualification",
+          "component_id": "physical-component:8441fde5898d6f7db14840ed710f12785697897e45a863a5edd692e935866fc2",
+          "disposition": "zero-cell",
+          "failed_premises": [],
+          "native_cells": 0,
+          "native_conflicts": [],
+          "qualification": false,
+          "reason_kind": "positive-geometry-no-new-native-cells",
+          "target_id": "gb:COD:ADM2:63176286B47015384768636",
+          "whole_gap_completion": false
+        },
+        {
+          "activation": false,
+          "applicability_disposition": "held-pending-current-selected-neighbor-qualification",
+          "component_id": "physical-component:fb03e785463b4a99a605ca297b6dd2a2bb27f3352e108844ad5ca147d9fc622c",
+          "disposition": "zero-cell",
+          "failed_premises": [],
+          "native_cells": 0,
+          "native_conflicts": [],
+          "qualification": false,
+          "reason_kind": "positive-geometry-no-new-native-cells",
+          "target_id": "gb:COD:ADM2:63176286B33518015273847",
+          "whole_gap_completion": false
+        }
+      ]
+    },
+    {
+      "phase": "cod-002",
+      "source_execution_commit": "899f07ec110e4590d69d90d5cb0490afd9198d83",
+      "native_execution_commit": "9ca69e7ef5bb7ab27089abd6903f53087934ee5b",
+      "source_request": "coordination/engineering/nor-grc-congo-delivery-20261011/cod-002-source-request-001.json",
+      "native_request": "coordination/engineering/nor-grc-congo-delivery-20261011/cod-002-native-request-001.json",
+      "source_operating": "coordination/engineering/nor-grc-congo-delivery-20261011/cod-002-source-operating-001.json",
+      "native_operating": "coordination/engineering/nor-grc-congo-delivery-20261011/cod-002-native-operating-001.json",
+      "source_output_prefix": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/source",
+      "native_output_prefix": "coordination/engineering/nor-grc-congo-delivery-20261011/retained/cod-002/native",
+      "scope_ids": [
+        "physical-component:a207016c2c38eebb7539f7f778ab83588c0fed4cd909656ec88ea9905e1205da"
+      ],
+      "facts": {
+        "components": 1,
+        "assigned_cells": 41,
+        "assigned_components": 1,
+        "zero_cell_components": 0,
+        "source_exceptions": 0,
+        "native_conflicts": 0,
+        "removed_cells": 0,
+        "reassigned_cells": 0,
+        "qualification": false,
+        "native_authority": false,
+        "continuous_qualified": false,
+        "whole_gap_completion": false
+      },
+      "outcomes": [
+        {
+          "activation": false,
+          "applicability_disposition": "held-pending-current-selected-neighbor-qualification",
+          "component_id": "physical-component:a207016c2c38eebb7539f7f778ab83588c0fed4cd909656ec88ea9905e1205da",
+          "disposition": "assigned",
+          "failed_premises": [],
+          "native_cells": 41,
+          "native_conflicts": [],
+          "qualification": false,
+          "reason_kind": "new-unowned-native-cells",
+          "target_id": "gb:AGO:ADM2:16411231B92925110223694",
+          "whole_gap_completion": false
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Unactivated native candidates only; current-selected neighbor qualification, consumers, merge and delivery remain pending."
+  ]
+}

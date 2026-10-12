@@ -1,0 +1,11 @@
+{
+  "kind": "retained-package-metadata-refusal",
+  "execution_commit": "ef1d6e046dd7c7ec0d014cf2231fbd6889aba164",
+  "qualified": false,
+  "exit_code": 1,
+  "reason": "Selected source/policy/qualification binding differs",
+  "cause": "The authored selector serialization reordered the unchanged selected_geography object keys; the existing artifact-consumption reader compares JSON.stringify order. Original values and all source/policy/code/qualification hashes are unchanged.",
+  "correction": "Preserve the complete original base selector object order and replace only its additive_release pin.",
+  "scientific_operators_reexecuted": false,
+  "source_native_current003_assembly_retained": true
+}
