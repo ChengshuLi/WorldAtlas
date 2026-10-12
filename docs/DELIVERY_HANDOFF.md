@@ -1,8 +1,10 @@
 # Prepare a delivery without rebuilding its coordination
 
 `node scripts/prepare-delivery-handoff.mjs PHASE CONFIG DESTINATION [--resume]`
-prepares immutable metadata in a managed checkout. It never runs a scientific
-operator, accepts a source, submits a review, commits, queues or merges. The
+prepares immutable metadata in a managed checkout. The nine preparation phases
+never run a scientific operator, accept a source, submit a review, commit, queue
+or merge. The later explicit `advance --submit-queue` option uses the existing
+queue client only after genuine independent acceptance. The
 existing issue claim, source/native supervisor, rebind issuer, selected reader,
 evidence gate, independent reviewer and serialized queue retain their authority.
 Use Node 24 without loaders/preloads. Check storage with `local-workspace.mjs`
@@ -218,5 +220,141 @@ command/test bodies and their immutable example inputs are unchanged.
 
 Actual immutable commit pins between phases, external scientific execution,
 independent source/review authority and the existing serialized queue are manual
-or existing-tool boundaries. No scheduler, automatic approval or queue submission
-is hidden in the preparation command.
+or existing-tool boundaries. No scheduler or automatic approval is hidden in the
+preparation command. The explicit continuation below binds these existing tools;
+queue submission still needs the normal live authority and explicit option.
+
+## Admitted recipe continuation (`advance` / `status`)
+
+The same command can prepare the next supported metadata transition without
+copying derived hashes, component IDs, or authority records between configs:
+
+```sh
+node scripts/prepare-delivery-handoff.mjs advance CONFIG DESTINATION
+node scripts/prepare-delivery-handoff.mjs advance CONFIG DESTINATION --resume
+node scripts/prepare-delivery-handoff.mjs status CONFIG DESTINATION
+```
+
+`CONFIG` has `version: 1`, an immutable `recipe: {commit, path}`, and optional
+`observations`. Each invocation completes one available preparation stage or
+reports the exact external input it is waiting for. Repeat the same command after
+recording genuine publication/commit results. It never runs SOURCE, NATIVE,
+rebind, assembly, builds, Git commits, or a reviewer. The finite sequence is recipe,
+requests, SOURCE retention, native requests/retention, authority pairs/registry,
+composition, rebind custody/certificate, package, finalization, live review
+preparation and the existing merge queue. Actual operators and their required
+per-phase input authentication remain separate.
+
+Initial method admission is explicit. A `greedy-model` recipe supplies the
+accepted registry locator, handoff IDs, admitted v2 SOURCE/NATIVE exemplar
+locators, exact target-bank/native-operand mapping, physical locator metadata,
+finite SOURCE/NATIVE resources, predecessor output allowances and the native
+request byte allowance. It derives each ordered component scope from the whole
+accepted handoff. It ignores old operational-batch labels. Whole encoded/decoded
+inputs, code/modules, runtime/supervisor/support, both request copies and reserved
+outputs/monitoring are modeled before splitting; singleton overflow refuses.
+Native requests are modeled again after genuine SOURCE outputs replace reserved
+predecessor slots. This prospective model does not replace current live memory,
+installed runtime, acquisition or scientific operator admission.
+
+`retained-groups` with `compatibility: literal-historical-v1` is explicitly a
+historical replay. Its groups give immutable issued SOURCE/NATIVE exemplar
+locators, never copied component lists. It preserves original destinations and
+scopes. Newly rebound request preparation is shown separately from the original
+requests that actually executed; retention and authorities always validate the
+latter. A historical replay is not new source acceptance or a new execution.
+
+The recipe index emits one transport/acquisition identity per whole encoded and
+decoded body, with all compatible destinations. `advance` only prepares this plan.
+The explicit `materialize` phase consumes its actual committed index:
+
+```sh
+node scripts/prepare-delivery-handoff.mjs materialize CONFIG DESTINATION
+node scripts/prepare-delivery-handoff.mjs materialize CONFIG DESTINATION --resume
+```
+
+Its config contains `version: 1`, `recipe_index: {commit, path}` for the saved
+`recipe-index.json`, and explicit finite `preparation_allowance: {phaseBytes,
+rssBytes}`. It authenticates that whole index, reserves its deterministic completion
+report/receipt, then shares the same budget across encoded/decoded inputs and
+unique physical placements. Use the normal shared Git import/storage window for
+actual acquisition. The existing exact-object prefetch importer retrieves missing
+Git bodies once, consulting the existing `gh auth token` login ephemerally only
+when a cold fetch occurs. Tokens are not persisted or printed; warm verification
+needs no login lookup. Tracked source paths are never written. Only declared aliases
+under `.cache/additive-native-gap-repair/delivery/<sha256>/` may be materialized.
+Actual tree/OID/size/SHA and decoded identities are checked. Completed aliases are
+reauthenticated and preserved on resume; corrupt or partially written aliases are
+refused without repair. No source approval follows from successful acquisition.
+
+The returned observation records actual fetch/import/write/resume counters and
+acquisition milliseconds separately. The durable completion report is deterministic
+and repeats byte-for-byte; it does not rewrite the first observation's counters.
+Tests invoke actual local Git fetches with repeated immutable identities and
+interrupted import/placement, as well as the plain-Node CLI. These small local
+fixtures prove acquisition reuse, not a new fetch of the current13 GIS products.
+Every scientific phase still authenticates and accounts for its complete inputs.
+Physical-product paths come from the accepted handoff's original comparison or
+its exact consumed locator metadata. Missing joins refuse, rather than guessing
+from country names, old batches, or incomplete source records.
+
+Observations supply only actual commit/path locators, not derived hashes:
+
+- `template_commit`: actual commit containing generated recipe templates (new recipes).
+- `sources` / `natives`: arrays of `{publication, terminal}` locators. Original
+  facts determine request identity and saved group scope; unknown/duplicate groups fail.
+- `authorities`: committed `{rule_preimage, source_authority}` locator pairs.
+- `registry`, `composed_ledger`, `operating`, `certificate`, `sidecar`: actual
+  committed products. Each is joined to the deterministic preceding output.
+- `rebind`: actual `publication`, `request`, `terminal` locators and complete
+  `custody` locators for code_source, issued_plan, stdout and stderr.
+- `review: {repo, pr_number}` is a top-level config field. The current head is
+  read from GitHub, then the existing exact-head review packet is frozen.
+
+For an already completed delivery, top-level `completed_delivery` supplies its
+sidecar locator, composed-ledger locator and owned prefix. The command discovers
+its original publications, authority pairs and current rebind custody from the
+actual selected release. Every corresponding ordinary validator still runs.
+The committed current13 recipe/config exercise this mode without scientific work.
+
+The destination contains immutable stage intents, ordinary preparation receipts,
+completion observations and timings. An identical partial metadata write can
+resume only after its exact intent and every existing byte agree. Foreign files,
+changed recipe/observations, symlinks and altered completed bytes refuse. A crash
+lock is recovered only when its same-host process is gone, with inspection and
+new acquisition serialized by an exclusive short guard. A process killed inside
+that guard leaves an explicit owner-reconciliation refusal; the guard is never
+automatically reaped. A live or foreign owner is never displaced. `status` checks completed inventories without mutation.
+Timings report preparation, acquisition, API wait, observed external wait and individual
+operator-receipt durations separately. Parallel operator durations are not added
+and called wall time; metadata speed is not global gap-closures/hour.
+
+Queue preparation requires the existing live independent review/evidence gate,
+including current scope/body/manifest/claim bindings and unresolved refusals.
+Only explicit `advance ... --resume --submit-queue` invokes the existing queue
+client. Its submission ID is durably written before POST. Every invocation with
+an existing submission intent is observation-only, including a crash before an
+uncertain POST. Missing registration never authorizes another submission. Follow
+`MERGE_QUEUE_CLIENT.md` for explicit reconciliation; no approval is inferred from
+local records, an unchanged head, or successful metadata preparation.
+
+Optional `preparation_allowance: {phaseBytes, rssBytes}` in either command config
+requests a finite metadata phase allowance, checked against current available
+memory by the shared guard. Inputs, decoded representations, journal reads,
+outputs and the completion receipt share admission. The authority reader carries
+still-live outer metadata into its existing bounded qualification phases. There
+is no separate 4KiB receipt cutoff; the ordinary whole-member bound and configured
+aggregate budget apply to receipts as to other metadata. A receipt does not grant
+approval regardless of its size.
+
+Run ordinary controls with `node --test test/delivery-handoff.test.mjs
+test/delivery-handoff-advance.test.mjs`. The opt-in
+`WORLDATLAS_DELIVERY_FIXTURE=1` explicitly registers the additional retained-fixture
+suite rather than creating skipped tests in the default zero-skip regression. It
+uses the already-retained immutable
+current13 bodies for exact authority reproduction and the new 10+3 metadata
+partition control. This requires only the named metadata commits/bodies, not a
+scientific cache or GIS operands. Acceptance or revalidation relying on the
+retained current13 proof must run `WORLDATLAS_DELIVERY_FIXTURE=1` and establish
+zero skips; ordinary CI alone does not establish that proof. Absence of those
+bodies is a fixture availability limit, never a successful replay.

@@ -1,6 +1,7 @@
-// Metadata-only preparation. Existing operators, source authority, review and
-// queue admission remain authoritative. No operator or GitHub write is invoked.
+// Metadata preparation and explicit body acquisition/queue transitions. Existing
+// operators, source authority and independent review remain authoritative.
 import fs from 'node:fs';
+import {performance} from 'node:perf_hooks';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
@@ -25,8 +26,8 @@ const safe = name => typeof name === 'string' && /^[a-zA-Z0-9_./-]+$/.test(name)
 const unique = values => Array.isArray(values) && values.length > 0 && values.every(v => typeof v === 'string' && v) && new Set(values).size === values.length;
 const environment = () => ({...process.env, GIT_NO_LAZY_FETCH: '1', GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: '/dev/null', GIT_TERMINAL_PROMPT: '0'});
 
-export function pinReader(root) {
-  const budget = candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0}), cache = new Map();
+export function pinReader(root, {allowance} = {}) {
+  const budget = candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0, ...(allowance ? {allowance} : {})}), cache = new Map();
   const git = (...args) => execFileSync('git', args, {cwd: root, env: environment(), maxBuffer: 33554433});
   function descriptor(commit, name) {
     need(hex(commit, 40) && safe(name), 'Exact commit and safe whole-file path required');
@@ -81,7 +82,7 @@ function admitDestination(root, destination, resume) {
 // Equivalent to the shared new-vintage writer for this JS metadata adapter:
 // validate whole destination before mutation, exclusive creation, receipt last.
 // Resume means checking every immutable byte; partial output is never repaired.
-export function publish(root, destination, products, binding, resume = false, sharedBudget = null) {
+export function admitPublication(root, destination, products, binding, resume = false, sharedBudget = null) {
   const target = admitDestination(root, destination, resume);
   const budget = sharedBudget ?? candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0});
   for (const [name, raw] of Object.entries(products)) {
@@ -91,18 +92,32 @@ export function publish(root, destination, products, binding, resume = false, sh
   need(Object.keys(products).length > 0, 'No empty completion');
   const outputs = Object.fromEntries(Object.entries(products).map(([name, raw]) => [name, {bytes: raw.length, sha256: digest(raw)}]));
   const receipt = jsonBytes({version: 1, binding, outputs});
-  need(receipt.length <= 4096, 'Preparation receipt cap'); budget.add({bytes: receipt.length});
-  if (fs.existsSync(target)) {
-    need(resume, 'Occupied destination; use explicit --resume to verify an identical completed phase');
+  budget.add({bytes: receipt.length});
+  const inspectExisting = () => {
+    admitDestination(root, destination, resume);
+    if (!fs.existsSync(target)) return false;
     need(same(fs.readdirSync(target).sort(), [...Object.keys(products), 'preparation.json'].sort()), 'Incomplete or foreign resumed output inventory');
     for (const [name, raw] of Object.entries({...products, 'preparation.json': receipt}))
       need(ordinary(root, destination + '/' + name).equals(raw), 'Resumed bytes/binding changed: ' + name);
-    return {destination, resumed: true, binding};
-  }
-  fs.mkdirSync(path.dirname(target), {recursive: true});
-  fs.mkdirSync(target);
-  for (const [name, raw] of Object.entries({...products, 'preparation.json': receipt})) fs.writeFileSync(path.join(target, name), raw, {flag: 'wx'});
-  return {destination, resumed: false, binding};
+    return true;
+  };
+  inspectExisting();
+  // A caller may do admitted acquisition between preflight and publication.
+  // Recheck the destination after that boundary; never adopt a new collision.
+  return () => {
+    need(same(Object.keys(products).sort(), Object.keys(outputs).sort())
+      && Object.entries(products).every(([name, raw]) => raw.length === outputs[name].bytes && digest(raw) === outputs[name].sha256),
+      'Admitted products changed before publication');
+    if (inspectExisting()) return {destination, resumed: true, binding};
+    fs.mkdirSync(path.dirname(target), {recursive: true});
+    fs.mkdirSync(target);
+    for (const [name, raw] of Object.entries({...products, 'preparation.json': receipt})) fs.writeFileSync(path.join(target, name), raw, {flag: 'wx'});
+    return {destination, resumed: false, binding};
+  };
+}
+
+export function publish(root, destination, products, binding, resume = false, sharedBudget = null) {
+  return admitPublication(root, destination, products, binding, resume, sharedBudget)();
 }
 
 export function requestProfile(template, group, config, reader) {
@@ -297,10 +312,10 @@ function localRebindJoin(request, terminal, publication, products, reader) {
   'Rebind actual terminal exceeds issued operating bounds');
 }
 
-export function retainProducts(config, root, reader) {
+export function retainProducts(config, root, reader, readLocal = ordinary) {
   const requestRaw = reader.read(config.request), request = JSON.parse(requestRaw);
-  const terminalRaw = ordinary(root, config.terminal), terminal = JSON.parse(terminalRaw); reader.budget.add({bytes: terminalRaw.length});
-  const publicationRaw = ordinary(root, config.output + '/publication.json'), publication = JSON.parse(publicationRaw); reader.budget.add({bytes: publicationRaw.length});
+  const terminalRaw = readLocal(root, config.terminal), terminal = JSON.parse(terminalRaw); reader.budget.add({bytes: terminalRaw.length});
+  const publicationRaw = readLocal(root, config.output + '/publication.json'), publication = JSON.parse(publicationRaw); reader.budget.add({bytes: publicationRaw.length});
   qualifyTerminal(terminal, requestRaw, publicationRaw, request);
   const rows = publication.outputs ? Object.values(publication.outputs) : publication.complete === true
     ? [{path: 'facts.json', ...publication.facts}, {path: 'inventory.jsonl.gz', ...publication.inventory}, ...(publication.assets ?? [])] : [];
@@ -308,7 +323,7 @@ export function retainProducts(config, root, reader) {
   const outputs = {'request.json': requestRaw, 'terminal.json': terminalRaw, 'publication.json': publicationRaw};
   for (const row of rows) {
     need(safe(row.path) && !row.path.includes('/') && !Object.hasOwn(outputs, row.path), 'Unsafe/duplicate publication path');
-    const raw = ordinary(root, config.output + '/' + row.path); reader.budget.add({bytes: raw.length});
+    const raw = readLocal(root, config.output + '/' + row.path); reader.budget.add({bytes: raw.length});
     need(raw.length === row.bytes && digest(raw) === row.sha256, 'Incomplete actual publication output: ' + row.path);
     if (row.uncompressed_bytes !== undefined) {
       need(Number.isSafeInteger(row.uncompressed_bytes) && row.uncompressed_bytes <= 33554432, 'Decoded output cap');
@@ -327,7 +342,7 @@ export function retainProducts(config, root, reader) {
     const custodyNames = {code_source: 'code-source.json', issued_plan: 'issued-plan.json', stderr: 'stderr.log', stdout: 'stdout.json'};
     need(config.custody && same(Object.keys(config.custody).sort(), Object.keys(custodyNames).sort()), 'Complete real rebind execution custody required');
     for (const [role, name] of Object.entries(custodyNames)) {
-      const raw = ordinary(root, config.custody[role]); reader.budget.add({bytes: raw.length}); outputs[name] = raw;
+      const raw = readLocal(root, config.custody[role]); reader.budget.add({bytes: raw.length}); outputs[name] = raw;
     }
     localRebindJoin(request, terminal, publication, outputs, reader);
   } else need(facts.request?.sha256 === digest(requestRaw) && facts.request.bytes === requestRaw.length
@@ -601,11 +616,69 @@ export async function freezeReview({repo, number, expectedHead, api, reader}) {
 
 async function main(args) {
   const [phase, configFile, destination, ...flags] = args;
+  if (phase === 'materialize') {
+    need(configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
+      'Use materialize CONFIG DESTINATION [--resume]');
+    need(!process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node launch required');
+    const root = fs.realpathSync(process.cwd()), raw = ordinary(root, configFile), config = JSON.parse(raw);
+    need(config.version === 1 && config.preparation_allowance, 'Explicit finite materialization configuration required');
+    const reader = pinReader(root, {allowance: config.preparation_allowance}); reader.budget.add({bytes: raw.length});
+    const flow = await import('./delivery-handoff-advance.mjs');
+    const pin = flow.locate(reader, config.recipe_index), index = reader.json(pin), plan = index.acquisition_plan;
+    need(index.version === 1 && plan?.products?.length, 'Completed recipe index with acquisition plan required');
+    const products = {'materialized-inputs.json': jsonBytes({version: 1, kind: 'authenticated-delivery-inputs',
+      recipe_index: pin, identities: [...new Set(plan.products.map(p => p.identity))], status: 'complete'})};
+    const publishComplete = admitPublication(root, destination, products, {phase, config_sha256: digest(raw)}, flags.includes('--resume'), reader.budget);
+    const started = performance.now();
+    const result = await flow.acquireDeliveryInputs(plan, root, {budget: reader.budget, token: '', execute: flow.deliveryAcquisitionExecute()});
+    console.log(JSON.stringify({...publishComplete(), acquisition: result, acquisition_ms: performance.now() - started}));
+    return;
+  }
+  if (['advance', 'status'].includes(phase)) {
+    need(configFile && destination && flags.every(f => ['--resume', '--submit-queue'].includes(f))
+      && new Set(flags).size === flags.length && !(phase === 'status' && flags.includes('--submit-queue')), 'Use advance|status CONFIG DESTINATION [--resume] [--submit-queue]');
+    need(!process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node launch required');
+    const root = fs.realpathSync(process.cwd()), configRaw = ordinary(root, configFile), config = JSON.parse(configRaw);
+    const reader = pinReader(root, {allowance: config.preparation_allowance});
+    reader.budget.add({bytes: configRaw.length});
+    need(config.version === 1, 'Versioned advance configuration required');
+    const flow = await import('./delivery-handoff-advance.mjs');
+    const recipe = flow.locate(reader, config.recipe);
+    if (phase === 'status') need(fs.existsSync(path.join(root, destination, 'advance.json')), 'No existing advance to observe');
+    const journal = flow.openAdvanceJournal(root, destination, recipe, {resume: phase === 'status' || flags.includes('--resume'), budget: reader.budget});
+    if (phase === 'status') { console.log(JSON.stringify(flow.readAdvanceStatus(journal))); return; }
+    let api, apiWait = 0;
+    const liveAPI = async route => {
+      api ??= githubAPI(execFileSync('gh', ['auth', 'token'], {encoding: 'utf8', maxBuffer: 16384}).trim());
+      const started = performance.now();
+      try { return await api(route); } finally { apiWait += performance.now() - started; }
+    };
+    await flow.withAdvanceLock(journal, async () => {
+      try {
+        const preparationStarted = performance.now();
+        const next = await flow.nextDeliveryStage(journal, config, reader, {prepareRequests, nativeRequests, retainProducts,
+          composeAuthorities, rebindCustody, packageProjection, finalizeDelivery, freezeReview, api: liveAPI,
+          authorityReader: () => flow.deliveryAuthorityReader(root, reader)});
+        let result;
+        if (next.waiting) result = flow.observeAdvance(journal, next.waiting);
+        else if (next.queue) result = await flow.advanceQueue(journal, next.queue, {api: liveAPI,
+          queueAPI: flow.deliveryQueueAPI(), authorizeSubmission: flags.includes('--submit-queue'), submit: ({number, head, requestId, timeoutMs}) =>
+            execFileSync('gh', ['workflow', 'run', 'merge-scheduler.yml', '--repo', next.queue.repo, '--ref', 'main',
+              '-f', `pr_number=${number}`, '-f', `expected_head=${head}`, '-f', `request_id=${requestId}`],
+            {encoding: 'utf8', timeout: timeoutMs, maxBuffer: 1048576})});
+        else result = await flow.prepareAdvanceStage(journal, next.id, next.phase, next.input, next.produce, {preparationStarted, apiWaitMilliseconds: () => apiWait});
+        console.log(JSON.stringify({result, ...flow.readAdvanceStatus(journal)}));
+      } catch (error) {
+        flow.observeAdvance(journal, {status: 'refused', reason: error.message}); throw error;
+      }
+    });
+    return;
+  }
   need(['requests', 'native-requests', 'retain', 'rebind-operating', 'rebind-certificate', 'compose', 'package', 'finalize', 'review'].includes(phase) && configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
     'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|package|finalize|review CONFIG DESTINATION [--resume]');
   need(!process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node launch required');
   const root = fs.realpathSync(process.cwd()); admitDestination(root, destination, flags.includes('--resume'));
-  const raw = ordinary(root, configFile), config = JSON.parse(raw), reader = pinReader(root);
+  const raw = ordinary(root, configFile), config = JSON.parse(raw), reader = pinReader(root, {allowance: config.preparation_allowance});
   reader.budget.add({bytes: raw.length}); need(config.version === 1, 'Versioned preparation config required');
   let outputs;
   if (phase === 'requests') outputs = prepareRequests(config, reader);

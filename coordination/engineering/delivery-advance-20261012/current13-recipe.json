@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "id": "current13",
+  "mode": "retained-groups",
+  "compatibility": "literal-historical-v1",
+  "destination_prefix": ".cache/native-grid-candidates/current13-replay",
+  "registry": {
+    "commit": "dbda60ac426e30e430f8157794e5e7161f01a453",
+    "path": "coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json"
+  },
+  "groups": [
+    {
+      "id": "grc-001",
+      "handoff_id": "grc2010-original-ten-20261011",
+      "source_template": {
+        "commit": "dbda60ac426e30e430f8157794e5e7161f01a453",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-001-source-request-001.json"
+      },
+      "native_template": {
+        "commit": "dbda60ac426e30e430f8157794e5e7161f01a453",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-001-native-request-001.json"
+      }
+    },
+    {
+      "id": "grc-002",
+      "handoff_id": "grc2010-original-ten-20261011",
+      "source_template": {
+        "commit": "dbda60ac426e30e430f8157794e5e7161f01a453",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-002-source-request-001.json"
+      },
+      "native_template": {
+        "commit": "dbda60ac426e30e430f8157794e5e7161f01a453",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-002-native-request-001.json"
+      }
+    },
+    {
+      "id": "grc-003",
+      "handoff_id": "grc2010-original-ten-20261011",
+      "source_template": {
+        "commit": "dbda60ac426e30e430f8157794e5e7161f01a453",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-003-source-request-001.json"
+      },
+      "native_template": {
+        "commit": "dbda60ac426e30e430f8157794e5e7161f01a453",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/grc-003-native-request-001.json"
+      }
+    },
+    {
+      "id": "cod-001",
+      "handoff_id": "congo-ago2018-cod2019-qualified-20261011",
+      "source_template": {
+        "commit": "dbda60ac426e30e430f8157794e5e7161f01a453",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/cod-001-source-request-001.json"
+      },
+      "native_template": {
+        "commit": "dbda60ac426e30e430f8157794e5e7161f01a453",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/cod-001-native-request-001.json"
+      }
+    },
+    {
+      "id": "cod-002",
+      "handoff_id": "congo-ago2018-cod2019-qualified-20261011",
+      "source_template": {
+        "commit": "dbda60ac426e30e430f8157794e5e7161f01a453",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/cod-002-source-request-001.json"
+      },
+      "native_template": {
+        "commit": "dbda60ac426e30e430f8157794e5e7161f01a453",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/cod-002-native-request-001.json"
+      }
+    }
+  ],
+  "new_prefix": "coordination/engineering/nor-grc-congo-delivery-20261011/",
+  "selector": {
+    "commit": "791576647adc41241ce9b438f1bb0034088eed4e",
+    "path": "data/ownership-selection.json"
+  },
+  "package_inputs": {
+    "commit": "9473d184683ee8ff8546300f2313779c3cba1d2b",
+    "path": ".github/package-inputs.json"
+  },
+  "retained_registries": [
+    {
+      "commit": "9e7b93f43f8a2dccffc23cb1c9e6cd60613f3b9c",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/authority-registry.json"
+    }
+  ]
+}
