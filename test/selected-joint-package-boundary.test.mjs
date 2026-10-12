@@ -5,6 +5,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {inspectPackageExecutionInputs, validatePackageExecutionRoles} from '../scripts/package-build.mjs';
 import {loadPackageInputs} from '../scripts/package-inputs.mjs';
+import {ACCEPTED_CHECKPOINT_CODE} from '../scripts/accepted-selected-checkpoint.mjs';
 import * as cold from '../scripts/check-effective-geographic-regression.mjs';
 import {compareSelectedCheckpointNative} from '../scripts/selected-checkpoint-native.mjs';
 
@@ -42,7 +43,7 @@ test('a literal joint import in the cold checker still fails actual declaration 
  assert.deepEqual(actual.errors,[]);
  const root=fs.mkdtempSync(path.join(ROOT,'.joint-package-boundary-'));
  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
- const inputs=new Set([...actual.files,NATIVE,SHARED,'data/native-context-migration/manifest.json',
+ const inputs=new Set([...actual.files,NATIVE,SHARED,...ACCEPTED_CHECKPOINT_CODE,'data/native-context-migration/manifest.json',
   PREFIX+'context-stage-v9.json',PREFIX+'qualified-artifacts/consumption-certificate.json',ROLES]);
  for(const name of inputs){const target=path.join(root,name);fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(path.join(ROOT,name),target,fs.constants.COPYFILE_EXCL);}
  fs.appendFileSync(path.join(root,COLD),"\nawait import('./selected-checkpoint-native.mjs');\n");

@@ -492,3 +492,22 @@ test('strict graph imports refuse unexpected blobs and aggregate metadata growth
     } finally { f.close(); }
   }
 });
+
+test('accepted checkpoint locator and retained whole-member custody remain applicability dependencies', async () => {
+  const f=fixture();try {
+    const locatorPath='data/selected-checkpoint.json', archivePath='coordination/engineering/next-batch/accepted-a/geography-artifact.zip';
+    const locator={version:1,kind:'accepted-selected-checkpoint-locator-v1',acceptance:{pr_number:7,
+      request_id:'01234567-abcd-4321-aaaa-123456789012',head:'a'.repeat(40)},retained_artifact:{path:archivePath}};
+    const files={...f.files,[locatorPath]:body(locator),[archivePath]:body('opaque accepted artifact body')};
+    const base=f.commit(files,f.baseline), candidate=f.commit({...files,'research/geography/new-packet/source.json':body('source addition')},base);
+    const unchanged=await f.inspect(candidate,base);assert.equal(unchanged.status,'unchanged-selected-inputs',unchanged.reason);
+    assert(unchanged.current_and_absent_alternatives.some(p=>p.path===archivePath));
+    for(const target of [locatorPath,archivePath]) {
+      const nextBase=f.commit({...files,[target]:body('changed acceptance or member custody')},base);
+      const result=await f.inspect(candidate,nextBase);
+      assert.equal(result.status,'full-check-required');assert.match(result.reason,/changed-current-input/);
+    }
+    const absent={...files};delete absent[archivePath];const absentBase=f.commit(absent,base);
+    assert.equal((await f.inspect(candidate,absentBase)).status,'full-check-required');
+  }finally{f.close();}
+});

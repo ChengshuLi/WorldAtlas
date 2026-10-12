@@ -15,7 +15,12 @@ export const JOINT_CODE = Object.freeze([
   'scripts/evidence/immutable.py', 'scripts/evidence/geometry.py',
   'scripts/ellipsoidal_area.py', 'requirements.txt',
   P + 'selected-neighbor-prevention.mjs', P + 'selected-continuous-entry.mjs',
-  P + 'selected-checkpoint.mjs', P + 'selected-checkpoint-continuous.mjs', P + 'selected-joint-entry.mjs'
+  P + 'selected-checkpoint.mjs', P + 'selected-checkpoint-continuous.mjs', P + 'selected-joint-entry.mjs',
+  'scripts/accepted-selected-checkpoint.mjs', 'scripts/check-handoff-scope.mjs',
+  'scripts/evidence-policy.mjs', 'scripts/evidence-quality.mjs', 'scripts/geographic-report-artifact.mjs',
+  'scripts/github-quota.mjs', 'scripts/github-snapshots.mjs', 'scripts/integration-proof.mjs',
+  'scripts/issue-claim-contract.mjs', 'scripts/job-deadline.mjs', 'scripts/research-import-gate.mjs',
+  'scripts/worker-result.mjs', 'src/regional-import-gate.js', 'scripts/geographic_checkpoint_products.py'
 ]);
 const FILE = 32 * 1024 * 1024, OUTPUT = 4 * 1024 * 1024;
 const sha = body => createHash('sha256').update(body).digest('hex');
@@ -74,10 +79,36 @@ export function planDerivedOutput(certificate, facts, baseBytes, limit = FILE) {
   const factsBytes = jsonBytes({...facts, certificate:placeholder}, limit);
   const publicationBytes = jsonBytes({version:1, complete:true, kind:'derived-selected-checkpoint-candidate-v1',
     accepted_checkpoint:false, validation_stage:'native-passed-continuous-pending', certificate:placeholder,
-    facts:{path:'derived-facts.json', bytes:limit, sha256:'0'.repeat(64)}}, limit);
+    facts:{path:'derived-facts.json', bytes:limit, sha256:'0'.repeat(64)}, ...(facts.checkpoint_routes ? {routes:facts.checkpoint_routes} : {})}, limit);
   const encodedLimit = limit - baseBytes - decodedBytes - 2 * factsBytes - publicationBytes;
   demand(encodedLimit > 0, 'Derived output union exceeds admitted reserve before serialization');
   return {decodedBytes, encodedLimit};
+}
+
+// Transport hints are immutable candidate data, separate from scientific routes.
+// The acceptance reader authenticates their contents; these descriptors never
+// mint authority and stay explicit applicability/admission dependencies.
+export function checkpointTransportInput(reader, name, maximum, admit, {consume = true} = {}) {
+  demand(typeof name === 'string' && !path.posix.isAbsolute(name) && !name.includes('\\')
+    && !name.includes('\0') && name.split('/').every(p => p && p !== '.' && p !== '..'),
+  'Unsafe checkpoint transport path');
+  demand(Number.isSafeInteger(maximum) && maximum > 0 && maximum <= FILE && typeof admit === 'function',
+    'Bounded checkpoint transport admission required');
+  reader.checkMemory();
+  const tree = reader.git('ls-tree', '-z', reader.version, '--', name).toString();
+  if (!tree) return {pin:{commit:reader.version, path:name, present:false, whole_body_consumed:false}, body:null};
+  demand(/^100644 blob [a-f0-9]{40}\t/.test(tree) && tree.endsWith('\t' + name + '\0'),
+    'Checkpoint transport input is not an ordinary Git file');
+  const oid = tree.slice(12, 52), bytes = Number(reader.git('cat-file', '-s', oid));
+  demand(Number.isSafeInteger(bytes) && bytes > 0 && bytes <= maximum, 'Checkpoint transport input exceeds ordinary cap');
+  const pin = {commit:reader.version, path:name, present:true, mode:'100644', git_blob_oid:oid,
+    bytes, whole_body_consumed:consume};
+  if (!consume) return {pin, body:null};
+  admit(bytes);
+  const body = reader.git('cat-file', 'blob', oid);
+  demand(body.length === bytes, 'Checkpoint transport changed after admission');
+  pin.sha256 = sha(body);
+  return {pin, body};
 }
 
 function executionGuard(repo, trusted) {
@@ -126,9 +157,46 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
   beforeReader.executionBytes = afterReader.executionBytes = code.reduce((sum, item) => sum + item.bytes, 0);
   beforeReader.phase();
   const budget = {shared:beforeReader.budget, carriedBytes:7 * valueBytes({code, identities:startup.identities}).length + 7 * OUTPUT};
-  let state;
+  let state, acceptedHandle;
+  const accepted = await import('../../../scripts/accepted-selected-checkpoint.mjs');
+  const transportInputs = [], originalCarry = budget.carriedBytes;
+  let metadataCarry = 0, acquisitionCarry = 0;
+  const admit = () => {
+    const bytes = originalCarry + metadataCarry + acquisitionCarry;
+    beforeReader.checkMemory();
+    demand(Number.isSafeInteger(bytes) && beforeReader.used + bytes <= beforeReader.phaseLimit,
+      'Complete accepted checkpoint transport exceeds current shared-reader allowance');
+    budget.carriedBytes = bytes;
+  };
   try {
-    const qualified = checkpoint.qualifyCheckpoint({reader:beforeReader, budget});
+    const locatorInput = checkpointTransportInput(afterReader, accepted.ACCEPTED_CHECKPOINT_LOCATOR, 4096,
+      bytes => { metadataCarry += 8 * bytes; admit(); });
+    transportInputs.push(locatorInput.pin);
+    let qualified;
+    if (locatorInput.body) {
+      const locator = accepted.validateAcceptedCheckpointLocator(JSON.parse(locatorInput.body));
+      const archiveName = locator.retained_artifact?.path;
+      let archiveIndex;
+      if (archiveName) {
+        archiveIndex = transportInputs.length;
+        transportInputs.push(checkpointTransportInput(afterReader, archiveName, FILE, () => {}, {consume:false}).pin);
+      }
+      const token = process.env.GH_TOKEN;
+      if (!token) return coldDecision({cold:'baseline-and-candidate', reason:'Accepted checkpoint authenticated API access unavailable'});
+      const proof = await accepted.acquireAcceptedCheckpoint({repo:process.env.GITHUB_REPOSITORY ?? 'ChengshuLi/WorldAtlas',
+        locator:locator.acceptance, token,
+        admit:bytes => { acquisitionCarry = Math.max(acquisitionCarry, bytes); admit(); },
+        retainedArchive:archiveName ? maximum => {
+          // The acquisition callback already admitted both complete ZIP copies.
+          const input = checkpointTransportInput(afterReader, archiveName, maximum, () => admit());
+          transportInputs[archiveIndex] = input.pin;
+          demand(input.body, 'Declared retained checkpoint archive is absent');
+          return input.body;
+        } : undefined});
+      if (!proof.available) return coldDecision({cold:'baseline-and-candidate', reason:proof.reason});
+      acceptedHandle = proof.handle;
+      qualified = await checkpoint.qualifyAcceptedCheckpoint({reader:beforeReader, acceptedHandle, budget});
+    } else qualified = checkpoint.qualifyCheckpoint({reader:beforeReader, budget});
     if (!qualified.available) return coldDecision(qualified);
     state = qualified.state;
     const transition = checkpoint.qualifyTransition({state, reader:afterReader, budget});
@@ -163,13 +231,17 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
     const authorityPins = authorityPaths.map(name => beforeReader.inventory.get(trusted + ':' + name));
     demand(authorityPins.every(pin => pin?.whole_body_consumed && /^[a-f0-9]{64}$/.test(pin.sha256)),
       'Derived custody requires actual consumed executing authority pins');
+    const executingPolicy = checkpoint.checkpointExecutingPolicy({transition, budget});
     const inventory = reader => [...reader.inventory.values()].sort((a,b) =>
       (a.commit + ':' + a.path).localeCompare(b.commit + ':' + b.path));
+    const routes = valueBytes(checkpoint.checkpointRouteCensus({transition, budget}));
+    const routePin = {path:'checkpoint-routes.json', bytes:routes.length, sha256:sha(routes)};
     const derivedFactsBase = {version:1, kind:'derived-selected-checkpoint-candidate-v1',
       validation_stage:'native-passed-continuous-pending', accepted_checkpoint:false,
       executing_commit:trusted, execution_code:code, runtime:startup.identities,
       baseline_accepted_execution:genuine.baseline.accepted_execution,
-      executing_authority_pins:authorityPins,
+      executing_authority_pins:authorityPins, executing_policy:executingPolicy,
+      checkpoint_transport_inputs:transportInputs, checkpoint_routes:routePin,
       actual_reader_inventories:{baseline:inventory(beforeReader), candidate:inventory(afterReader)},
       baseline_commit:baseline, candidate_commit:candidate,
       baseline_selection:genuine.baseline.selection, candidate_selection:genuine.candidate.selection,
@@ -177,7 +249,7 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
         patch_sha256:valueSha(genuine.candidate.patch), manifest_sha256:valueSha(genuine.candidate.manifest)},
       transition_plan:genuine.plan, native_result_sha256:valueSha(nativeReport),
       continuous_publication:publication, candidate_code_executed:false};
-    const baseBytes = operands.length + encoded.length + 2 * facts.length + publicationBody.length;
+    const baseBytes = operands.length + encoded.length + 2 * facts.length + publicationBody.length + 2 * routes.length;
     const archivePlan = planDerivedOutput(genuine.candidate.certificate, derivedFactsBase, baseBytes);
     const certificate = valueBytes(genuine.candidate.certificate);
     demand(certificate.length === archivePlan.decodedBytes, 'Derived certificate serialization size drift');
@@ -187,15 +259,15 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
     const derivedFacts = valueBytes({...derivedFactsBase, certificate:certificatePin});
     const derivedPublication = {version:1, complete:true, kind:'derived-selected-checkpoint-candidate-v1',
       accepted_checkpoint:false, validation_stage:'native-passed-continuous-pending', certificate:certificatePin,
-      facts:{path:'derived-facts.json', bytes:derivedFacts.length, sha256:sha(derivedFacts)}};
+      facts:{path:'derived-facts.json', bytes:derivedFacts.length, sha256:sha(derivedFacts)}, routes:routePin};
     const derivedPublicationBody = valueBytes(derivedPublication);
     demand(operands.length + encoded.length + 2 * facts.length + publicationBody.length
-      + certificate.length + certificateEncoded.length + 2 * derivedFacts.length + derivedPublicationBody.length < FILE,
+      + certificate.length + certificateEncoded.length + 2 * derivedFacts.length + derivedPublicationBody.length + 2 * routes.length < FILE,
       'Joint continuous and derived checkpoint complete outputs exceed original reserve');
     checkpoint.authenticateTransition({transition, budget});
     executionGuard(repo, trusted); fresh(destination); fs.mkdirSync(destination);
     for (const [name, body] of [['operands.json.gz', encoded], ['facts.json', facts], ['derived-certificate.json.gz', certificateEncoded],
-      ['derived-facts.json', derivedFacts], ['derived-publication.json', derivedPublicationBody], ['publication.json', publicationBody]])
+      ['derived-facts.json', derivedFacts], ['checkpoint-routes.json', routes], ['derived-publication.json', derivedPublicationBody], ['publication.json', publicationBody]])
       fs.writeFileSync(path.join(destination, name), body, {flag:'wx', mode:0o644});
     return result(nativeReport, {version:1, kind:publication.kind,
       status:transition.changedIds.length ? 'selected-operands-complete' : 'no-selected-footprint-change',
@@ -203,6 +275,7 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
       affected_ids:transition.plan.required_ids, candidate_code_executed:false});
   } finally {
     if (state) checkpoint.releaseCheckpoint(state);
+    if (acceptedHandle) accepted.releaseAcceptedCheckpoint(acceptedHandle);
   }
   function coldDecision(decision) {
     return {version:1, kind:'trusted-selected-joint-comparison-v1', mode:'legacy-cold-required',

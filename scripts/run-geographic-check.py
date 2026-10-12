@@ -75,7 +75,21 @@ TRUSTED_PATHS = ['scripts/run-geographic-check.py', 'scripts/check-geographic-re
                  'coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs',
                  'coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs',
                  'coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint-continuous.mjs',
-                 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs']
+                 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs',
+                 'scripts/geographic_checkpoint_products.py',
+                 'scripts/accepted-selected-checkpoint.mjs',
+                 'scripts/check-handoff-scope.mjs',
+                 'scripts/evidence-policy.mjs',
+                 'scripts/evidence-quality.mjs',
+                 'scripts/geographic-report-artifact.mjs',
+                 'scripts/github-quota.mjs',
+                 'scripts/github-snapshots.mjs',
+                 'scripts/integration-proof.mjs',
+                 'scripts/issue-claim-contract.mjs',
+                 'scripts/job-deadline.mjs',
+                 'scripts/research-import-gate.mjs',
+                 'scripts/worker-result.mjs',
+                 'src/regional-import-gate.js']
 PIN_PATHS = ['data/hierarchy.json', 'data/canonical-grid/manifest.json',
              'data/geographic-releases/index.json', 'data/geographic-releases/current-manifest.json']
 
@@ -568,6 +582,41 @@ def selected_continuous(repo, baseline, candidate, detector):
         return consume_selected_continuous(repo, baseline, candidate, detector, destination, json.loads(raw))
 
 
+def checkpoint_products_module(repo):
+    # Called only after the trusted checkout namespace has been authenticated.
+    spec = importlib.util.spec_from_file_location('trusted_checkpoint_products', repo / 'scripts/geographic_checkpoint_products.py')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def selected_consumer_allowance(repo):
+    # Node has terminated. Admit the actual parent phase with current resources,
+    # installed runtime/code, and the complete retained report/output reserve.
+    env = {key: value for key, value in os.environ.items() if key not in ['NODE_OPTIONS', 'NODE_PATH']}
+    executable = os.environ.get('NODE', 'node')
+    runtime_bytes = pathlib.Path(sys.executable).resolve().stat().st_size
+    code_bytes = sum((repo / name).stat().st_size for name in TRUSTED_PATHS)
+    # Re-observe current resources after the Node operand child has exited.
+    # Reuse the trusted reader's OS/cgroup-aware admission instead of an
+    # unrelated fixed historical phase ceiling. No candidate code is loaded.
+    allowance_raw = subprocess.check_output([
+        executable, '--input-type=module', '-e',
+        'const {processingAllowance}=await import(process.argv[1]);process.stdout.write(JSON.stringify(processingAllowance()));',
+        (repo / 'scripts/check-effective-geographic-regression.mjs').resolve().as_uri()],
+        env=env, timeout=30)
+    if len(allowance_raw) > 4096:
+        raise ValueError('Oversized current reader allowance')
+    allowance = json.loads(allowance_raw)
+    phase_limit = allowance.get('phaseBytes')
+    if type(phase_limit) is not int or not 0 < phase_limit <= 9007199254740991:
+        raise ValueError('Invalid current polygon consumer allowance')
+    remaining = phase_limit - runtime_bytes - code_bytes - 2 * MAX_BYTES
+    if remaining <= 0:
+        raise ValueError('Complete selected consumer has no current product allowance')
+    return remaining
+
+
 def consume_selected_continuous(repo, baseline, candidate, detector, destination, issued, *, trusted=None):
     if not isinstance(issued, dict) or issued.get('candidate_code_executed') is not False or issued.get('kind') != 'trusted-selected-continuous-comparison-v1':
         raise ValueError('Unsupported selected continuous acknowledgement')
@@ -592,25 +641,7 @@ def consume_selected_continuous(repo, baseline, candidate, detector, destination
         if pin is not None and (stat.st_size != pin['bytes'] or pin.get('decoded_bytes', 0) > MAX_BYTES):
             raise ValueError('Whole selected output size exceeds original bound')
         total += stat.st_size + (pin.get('decoded_bytes', 0) if pin else 0)
-    # Node has terminated. This is the actual Python consumer phase, with
-    # complete encoded+decoded operands and retained output/code allowance.
-    runtime_bytes = pathlib.Path(sys.executable).resolve().stat().st_size
-    code_bytes = sum((repo / name).stat().st_size for name in TRUSTED_PATHS)
-    # Re-observe current resources after the Node operand child has exited.
-    # Reuse the trusted reader's OS/cgroup-aware admission instead of an
-    # unrelated fixed historical phase ceiling. No candidate code is loaded.
-    allowance_raw = subprocess.check_output([
-        executable, '--input-type=module', '-e',
-        'const {processingAllowance}=await import(process.argv[1]);process.stdout.write(JSON.stringify(processingAllowance()));',
-        (repo / 'scripts/check-effective-geographic-regression.mjs').resolve().as_uri()],
-        env=env, timeout=30)
-    if len(allowance_raw) > 4096:
-        raise ValueError('Oversized current reader allowance')
-    allowance = json.loads(allowance_raw)
-    phase_limit = allowance.get('phaseBytes')
-    if type(phase_limit) is not int or not 0 < phase_limit <= 9007199254740991:
-        raise ValueError('Invalid current polygon consumer allowance')
-    if total + runtime_bytes + code_bytes + 2 * MAX_BYTES > phase_limit:
+    if total > selected_consumer_allowance(repo):
         raise ValueError('Complete selected polygon consumer phase exceeds current allowance')
     bodies = []
     for name, pin in zip(names, pins):
@@ -658,7 +689,10 @@ def consume_selected_continuous(repo, baseline, candidate, detector, destination
                        'No physical water/admin/history approval, repair assignment, release activation or deployment.']}
 
 
-def selected_joint(repo, baseline, candidate, detector, *, trusted=None):
+def selected_joint(repo, baseline, candidate, detector, *, trusted=None, checkpoint_destination=None):
+    products = checkpoint_products_module(repo) if checkpoint_destination is not None else None
+    if products is not None:
+        products.admit_checkpoint_destination(checkpoint_destination)
     env = {key: value for key, value in os.environ.items() if key not in ['NODE_OPTIONS', 'NODE_PATH']}
     entrypoint = repo / 'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs'
     with tempfile.TemporaryDirectory(prefix='trusted-selected-joint-') as temporary:
@@ -684,6 +718,11 @@ def selected_joint(repo, baseline, candidate, detector, *, trusted=None):
             return issued
         issued['continuous_result'] = consume_selected_continuous(repo, baseline, candidate, detector,
                                                                   destination, issued.get('continuous'), trusted=trusted)
+        original = issued['continuous_result'].get('original_strict_polygon_result', {})
+        if (checkpoint_destination is not None and original.get('status') in ['no-footprint-change', 'no-new-regression']
+                and original.get('regressions') in [None, 0]):
+            issued['checkpoint'] = products.retain_checkpoint_products(destination, checkpoint_destination, issued,
+                allowance=min(products.PHASE, selected_consumer_allowance(repo)))
         return issued
 
 
@@ -1317,7 +1356,7 @@ def unchanged_selected_inputs(repo, baseline, candidate):
         return applicability_decline('collector-output-invalid')
 
 
-def inspect(repo, baseline, candidate, *, prefetch=False):
+def inspect(repo, baseline, candidate, *, prefetch=False, checkpoint_destination=None):
     immutable_sha(baseline)
     immutable_sha(candidate)
     with stage_timing('trusted-checkout-inspect'):
@@ -1337,9 +1376,6 @@ def inspect(repo, baseline, candidate, *, prefetch=False):
                     'unchanged_selected_inputs': applicability,
                     'limits': ['Complete selected consumed-input and method identities are unchanged; applicability only, not fresh scientific validation or global gap clearance.',
                                'Independent source quality, evidence, review and current combined-tree consumer gates remain required.']}
-    if prefetch:
-        with stage_timing('selected-prefetch'):
-            prefetch_declared_inputs(repo, baseline, candidate)
     transition = output_budget_transition(repo, baseline, candidate) or programme_registry_transition(repo, baseline, candidate) or linux_support_transition(repo, baseline, candidate)
     if transition is not None:
         if before != after:
@@ -1365,7 +1401,7 @@ def inspect(repo, baseline, candidate, *, prefetch=False):
     joint = None
     if selected:
         with stage_timing('selected-joint'):
-            joint = selected_joint(repo, baseline, candidate, detector)
+            joint = selected_joint(repo, baseline, candidate, detector, checkpoint_destination=checkpoint_destination)
         import sys
         env = dict(os.environ)
         for name in ['NODE_OPTIONS', 'NODE_PATH']:
@@ -1373,6 +1409,13 @@ def inspect(repo, baseline, candidate, *, prefetch=False):
         if joint['mode'] == 'authenticated-checkpoint-append-v1':
             native = joint['native']
         else:
+            # Eager whole-bank transport helps the legacy cold consumers, but
+            # needlessly downloads sources/native assets for a qualified warm
+            # checkpoint. The genuine joint entry has already made an explicit
+            # unavailable decision; no error or access denial reaches this path.
+            if prefetch:
+                with stage_timing('selected-prefetch'):
+                    prefetch_declared_inputs(repo, baseline, candidate)
             with stage_timing('selected-native'):
                 native_raw = subprocess.check_output([
                     os.environ.get('NODE', 'node'), str(repo / 'scripts/check-effective-geographic-regression.mjs'),
@@ -1389,6 +1432,8 @@ def inspect(repo, baseline, candidate, *, prefetch=False):
         with stage_timing('selected-continuous'):
             continuous = joint['continuous_result'] if joint['mode'] == 'authenticated-checkpoint-append-v1' else selected_continuous(repo, baseline, candidate, detector)
         report['selected_continuous_report'] = continuous
+        if joint.get('checkpoint') is not None:
+            report['checkpoint'] = joint['checkpoint']
         if continuous.get('regressions') not in [None, 0] or str(continuous.get('status', '')).startswith('blocked-'):
             return {**report, 'status': continuous['status'], 'regressions': continuous['regressions'],
                     'differential_report': continuous['original_strict_polygon_result'],
@@ -1478,7 +1523,8 @@ def main():
     if args.fetch:
         with stage_timing('candidate-fetch'):
             fetch_candidate(repo, args.candidate)
-    result = apply_adjudications(repo, args.candidate, inspect(repo, args.baseline, args.candidate, prefetch=args.fetch))
+    result = apply_adjudications(repo, args.candidate, inspect(repo, args.baseline, args.candidate, prefetch=args.fetch,
+        checkpoint_destination=args.out.absolute().parent))
     passed = result['status'] in ['not-applicable', 'no-footprint-change', 'no-new-regression'] or (
         result.get('adjudication', {}).get('status') == 'all-findings-supported-and-reviewed')
     result['gate_status'] = 'passed' if passed else 'blocked'

@@ -7,6 +7,7 @@ import {gzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
 import {shuffleOwnershipBytes} from '../../src/ownership-codec.js';
 import {valueBytes,valueSha,coordinateBounds} from '../../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
+import {JOINT_CODE} from '../../coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs';
 import {deriveCoordinateDelta,projectSourceFeatures,projectNativeRows,qualifyTransition} from '../../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const MODULE='coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const CATALOGUE='coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
@@ -24,9 +25,7 @@ function addition(id,target,index,base,x){const geometry=polygon(x);return {comp
 
 const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
 const PREFIX = 'coordination/engineering/selected-geography-effective-prevention-20261009/';
-const EXTRA_CODE = ['scripts/selected-checkpoint-native.mjs','scripts/run-geographic-check.py','scripts/check-geographic-regression.py',
- 'scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt',
- PREFIX+'selected-continuous-entry.mjs',PREFIX+'selected-checkpoint-continuous.mjs',PREFIX+'selected-joint-entry.mjs'];
+const EXTRA_CODE = JOINT_CODE.filter(name => !CODE.includes(name));
 export async function trustedFixture(t,{incompleteNative=false}={}){
  const root=fs.mkdtempSync(path.join(process.cwd(),'.checkpoint-test-'));
  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
