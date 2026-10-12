@@ -114,6 +114,22 @@ def platform_runtime():
  assert sys.platform=='linux','Unreviewed execution platform'
  return [dict(p) for p in LINUX_RUNTIME],'-v'
 
+
+def automatic_limits(supply):
+ # A generous current-machine share, not a new fixed cohort ceiling. The
+ # coordinator serializes admission and accounts for other active reservations.
+ residual=supply.get('residual_reported_bytes',supply['supply_upper_bytes']-2147483648)
+ usable=residual-805306368
+ assert type(usable) is int and usable>0,'No current execution headroom'
+ rss=usable//2
+ limits={'complete_phase_bytes':rss,'descriptors':512,'output_bytes':contract.FILE,
+         'rss_bytes':rss,'sampled_stop_bytes':rss-rss//8,'wall_seconds':1200,
+         'stdout_bytes':8192,'stderr_bytes':40960,'monitor_bytes':4*1048576}
+ contract.execution_limits(limits)
+ assert 7*limits['output_bytes']<limits['complete_phase_bytes'],'Insufficient serialization headroom'
+ return limits
+
+
 def issue(root,head,plan_path,destination,output):
  assert root.is_absolute() and len(head)==40 and all(c in '0123456789abcdef' for c in head)
  assert destination.is_relative_to(root/'.cache') and output.is_relative_to(root/'.cache')
@@ -122,7 +138,22 @@ def issue(root,head,plan_path,destination,output):
   for a in p.parents:assert not a.is_symlink() and a.is_dir()
  assert not os.path.lexists(destination) and not os.path.lexists(output),'Fresh output custody/destination required'
  stat=plan_path.stat();assert stat.st_size<=131072 and stat.st_mode&0o777==0o644
- raw=plan_path.read_bytes();plan=json.loads(raw);assert plan['execution_commit']==head and 0<plan['limits']['complete_phase_bytes']<=contract.PHASE
+ raw=plan_path.read_bytes();plan=json.loads(raw);assert plan['execution_commit']==head
+ # Templates normally request auto; explicit smaller finite allowances remain
+ # supported. Never rewrite the template or reinterpret a historical receipt.
+ module_spec=importlib.util.spec_from_file_location('current_resource_supervisor',HERE/'supervise-current-rebind.py')
+ supervisor=importlib.util.module_from_spec(module_spec);module_spec.loader.exec_module(supervisor)
+ automatic=plan.get('limits') in (None,'auto')
+ if automatic:plan['limits']=automatic_limits(supervisor.fresh_host_supply(os.environ))
+ limits=contract.execution_limits(plan['limits'])
+ supply=supervisor.fresh_host_supply(os.environ,limits['rss_bytes']+805306368)
+ assert limits['complete_phase_bytes']<=supply['residual_reported_bytes']-805306368,'Current logical allowance exceeds admitted machine share'
+ output_reserve=contract.retained_output(limits)
+ if automatic:
+  raw=contract.canonical(plan);assert len(raw)<=131072
+  plan_path=output.with_name(output.name+'.plan.json')
+  assert not os.path.lexists(plan_path),'Fresh admitted plan required'
+
  for name in ['mac-execution-runtime-original.json','run-current-rebind.mjs','supervise-current-rebind.py']:
   assert (HERE/name).stat().st_size<=131072 and not (HERE/name).is_symlink()
  assert [p['path'] for p in plan['executed_code']]==json.loads((HERE/'execution-code-paths.json').read_bytes())
@@ -135,13 +166,21 @@ def issue(root,head,plan_path,destination,output):
  def ordinary(p):s=p.stat();assert s.st_size<=contract.FILE and s.st_mode&0o777==0o644;return {'path':str(p),'bytes':s.st_size,'sha256':contract.digest(p.read_bytes()),'mode':0o644}
  # Small entry/supervisor metadata bodies have their own fixed1MiB metadata
  # admission. Full installed runtime is only opened by capture after union stats.
+ node=next(p['path'] for p in runtime if p['role']=='node')
+ stock=json.loads(contract.subprocess.check_output([node,str(root/'scripts/local-workspace.mjs'),'check'],cwd=root))
+ supervisor.require_stock_growth(stock,root,output_reserve+262144)
  pre={'runtime':runtime,'code':plan['executed_code'],'entry':ordinary(HERE/'run-current-rebind.mjs'),'supervisor':ordinary(HERE/'supervise-current-rebind.py'),'plan':{'path':str(plan_path),'bytes':len(raw),'sha256':contract.digest(raw),'mode':0o644}}
  python_extra=sum(p['bytes'] for p in runtime if p['role'] not in ('node','git','installed-dependency'))
- operating=plan['limits']['complete_phase_bytes']+python_extra+contract.OUTPUT+contract.META
- assert operating<=contract.PHASE,'Whole child carried union plus actual external runtime/output reserve exceeds operating phase'
- contract.capture(root,head,pre)
+ operating=limits['complete_phase_bytes']+python_extra+output_reserve+contract.META
+ assert contract.positive(operating),'Whole operating allowance overflows'
+ contract.capture(root,head,pre,phase_bytes=operating,output_bytes=output_reserve,plan_bytes=raw if automatic else None)
+ if automatic:
+  fd=os.open(plan_path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o644)
+  try:os.write(fd,raw)
+  finally:os.close(fd)
+
  command=[next(p['path'] for p in runtime if p['role']=='time'),time_option,next(p['path'] for p in runtime if p['role']=='node'),'--expose-gc',pre['entry']['path'],str(plan_path),str(destination)]
- result={'version':1,'kind':'issued-current-rebind-execution-pre-use-v1','execution_commit':head,'root':str(root),'command':command,'pre_use':pre,'operating_phase_bytes':operating,'output_log_reserve_bytes':contract.OUTPUT}
+ result={'version':1,'kind':'issued-current-rebind-execution-pre-use-v1','execution_commit':head,'root':str(root),'command':command,'pre_use':pre,'operating_phase_bytes':operating,'output_log_reserve_bytes':output_reserve}
  body=contract.canonical(result);assert len(body)<=131072
  fd=os.open(output,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o644)
  try:os.write(fd,body)

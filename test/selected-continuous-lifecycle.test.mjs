@@ -7,6 +7,7 @@ import {execFileSync,spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync} from 'node:zlib';
 import {ImmutableReader,NativeAssetImage,loadSelection,inspectSelected,compareIntervals,compareRepairLedgers,readArtifactConsumption,validateReleaseCatalogue,validateArtifactSourceMetadata,loadNativeRowTable,acquireNativeRows,validateNativeRowCarry} from '../scripts/check-effective-geographic-regression.mjs';
+import {assembleSupportedActivation} from '../coordination/engineering/additive-native-activation-20261009/assemble-supported-activation.mjs';
 import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
 import {valueBytes,valueSha,readOriginalRuleAuthority,selectedCoordinateShard,joinSelectedCoordinateCertificate,acceptColdCoordinateCertificate,selectedAffectedPlan,possibleNeighbors,compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
@@ -116,8 +117,8 @@ test('genuine detached receipts reopen both complete certificates and preserve a
 test('reopened complete carry and runtime admission refuse before any cold body open',()=>{
  const f=fixture();try{const {rect,install}=sourceSides(f),before=install(rect(0,1),rect(2,3),'before'),after=install(rect(0,1.5),rect(2,3),'after'),state=issueStages(f,before,after),receipts=[validate(f,state,before,0)];receipts.push(validate(f,state,after,1,receipts));
   const original=fs.readFileSync;let opens=0;fs.readFileSync=function(...args){opens++;return original.apply(this,args);};
-  try{assert.throws(()=>reopenCompleteColdPlan(native,helper,{repo:f.repo,baseline:before,candidate:after,...state,receipts,carriedBytes:268435456}),/Installed runtime\/metadata/);assert.equal(opens,0);
-   assert.throws(()=>reopenCompleteColdPlan(native,helper,{repo:f.repo,baseline:before,candidate:after,...state,receipts,carriedBytes:1048576,context:{...state.context,runtimeBytes:268435456}}),/Installed runtime\/metadata/);assert.equal(opens,0);
+  try{assert.throws(()=>reopenCompleteColdPlan(native,helper,{repo:f.repo,baseline:before,candidate:after,...state,receipts,carriedBytes:Number.MAX_SAFE_INTEGER}),/Installed runtime\/metadata/);assert.equal(opens,0);
+   assert.throws(()=>reopenCompleteColdPlan(native,helper,{repo:f.repo,baseline:before,candidate:after,...state,receipts,carriedBytes:1048576,context:{...state.context,runtimeBytes:Number.MAX_SAFE_INTEGER}}),/Installed runtime\/metadata/);assert.equal(opens,0);
    assert.throws(()=>reopenCompleteColdPlan(native,helper,{repo:f.repo,baseline:before,candidate:after,...state,receipts,carriedBytes:0}),/Incomplete reopened carry/);assert.equal(opens,0);
   }finally{fs.readFileSync=original;}
  }finally{f.cleanup();}
@@ -196,7 +197,7 @@ test('same-vintage multi-source custody loads once and preserves exact independe
    native.SelectedGeometrySources.prototype.read=function(...args){const result=original.apply(this,args);if(++reads===1)this.reader.version='f'.repeat(40);return result;};
    try{assert.throws(()=>acquireContinuousSources(native,helper,options),/selected side removed or rebound/);}finally{native.SelectedGeometrySources.prototype.read=original;}
    let opens=0;const blocked={...native,loadSelection(){opens++;throw Error('must not open');}};
-   assert.throws(()=>acquireContinuousSources(blocked,helper,{...options,carriedBytes:268435456}),/Installed runtime\/metadata/);assert.equal(opens,0);
+   assert.throws(()=>acquireContinuousSources(blocked,helper,{...options,carriedBytes:Number.MAX_SAFE_INTEGER}),/Installed runtime\/metadata/);assert.equal(opens,0);
   }
   assert.deepEqual(loads,[before,after]);assert.notEqual(readers[0],readers[1]);
  }finally{f.cleanup();}
@@ -218,5 +219,37 @@ test('immutable additive selector only disables the shortcut and malformed hooks
   const r=spawnSync(process.execPath,[path.join(f.repo,P+'selected-continuous-entry.mjs'),'continuous',f.repo,before,before,after,path.join(f.repo,'malformed-additive')],{encoding:'utf8'});
   assert.notEqual(r.status,0);assert.match(r.stderr,/Unsupported committed additive hook/);assert.equal(r.stdout,'');
   assert.doesNotMatch(r.stderr,/shortcut-baseline-selection/);assert.match(r.stderr,/coordinate-selection/);
+ }finally{f.cleanup();}
+});
+
+test('selected assembly reuses its privately authenticated source view without duplicate acquisition',()=>{
+ const f=fixture();try{
+  const {rect,install}=sourceSides(f),selected=install(rect(0,1),rect(2,3),'assembly-source-alias');
+  const reader=new native.ImmutableReader(f.repo,selected),snapshot=native.loadSelection(reader);
+  const before={used:reader.used,metadataBytes:reader.metadataBytes,inventory:[...reader.inventory]};
+  const read=reader.read;reader.read=()=>assert.fail('Duplicate selected source acquisition');
+  try{
+   assert.equal(helper.currentRebindSourceView(snapshot),snapshot.geometrySources);
+   // The authentic four-cell fixture must reach the unchanged Arctic-only
+   // guard. It is not a production activation or a fabricated large snapshot.
+   assert.throws(()=>assembleSupportedActivation({snapshot,
+    baseAssets:{base_manifest:{},owner_roster:{}},logicalPaths:{ledger:'ledger.json',patch:'patch.json'}}),
+   /Require actual selected Arctic successor/);
+   assert.deepEqual({used:reader.used,metadataBytes:reader.metadataBytes,inventory:[...reader.inventory]},before);
+  }finally{reader.read=read;}
+ }finally{f.cleanup();}
+});
+
+test('selected assembly refuses an unauthenticated snapshot before any source acquisition',()=>{
+ const f=fixture();try{
+  const {rect,install}=sourceSides(f),selected=install(rect(0,1),rect(2,3),'assembly-source-forgery');
+  const reader=new native.ImmutableReader(f.repo,selected),snapshot=native.loadSelection(reader);
+  const read=reader.read;reader.read=()=>assert.fail('Unauthenticated source acquisition');
+  try{
+   for(const forged of [{...snapshot},{...snapshot,geometrySources:{...snapshot.geometrySources}}])
+    assert.throws(()=>assembleSupportedActivation({snapshot:forged,
+     baseAssets:{base_manifest:{},owner_roster:{}},logicalPaths:{ledger:'ledger.json',patch:'patch.json'}}),
+    /Require unchanged privately authenticated selected base/);
+  }finally{reader.read=read;}
  }finally{f.cleanup();}
 });

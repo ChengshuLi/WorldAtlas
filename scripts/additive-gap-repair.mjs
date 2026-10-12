@@ -7,7 +7,7 @@ import {gunzipSync, gzipSync} from 'node:zlib';
 import {validateNativeSelectionReceipt} from './native-ownership/require-verified-selection.mjs';
 import verifiedCandidates from './native-ownership/verified-candidates.json' with {type:'json'};
 import {canonicalValue, footprintValueSha256, polygonParts, additiveReleaseFootprintDigest} from '../src/effective-footprint.js';
-import {candidateBudget, committedPreparationFiles, createNativeCandidateOutput, requirePlainExecution} from './native-ownership/native-preparation-guards.mjs';
+import {candidateBudget, preparationAllowance, preparationRequestAllowance, committedPreparationFiles, createNativeCandidateOutput, requirePlainExecution} from './native-ownership/native-preparation-guards.mjs';
 
 import {ImmutableReader, loadSelection} from './check-effective-geographic-regression.mjs';
 import {nativePolygonIntervals} from '../src/native-grid.js';
@@ -895,7 +895,7 @@ export function requireCurrentAdministrativeTargetBank(resolver,name,expected) {
     'Current encoded administrative target inverse differs');
   return source;
 }
-export function readCurrentBaselineResolutions(repo,baseline,{request,report,project,installedModules,runtimeBytes,outputReserve}) {
+export function readCurrentBaselineResolutions(repo,baseline,{request,report,project,installedModules,runtimeBytes,outputReserve,allowance}) {
   demand(baseline?.version===2&&baseline.kind==='current-selected-native-baseline-v1'
     &&Object.keys(baseline).sort().join(',')==='kind,pins,version'
     &&Array.isArray(baseline.pins)&&baseline.pins.length===1,'Missing explicit current baseline declaration');
@@ -909,7 +909,7 @@ export function readCurrentBaselineResolutions(repo,baseline,{request,report,pro
   // acquisition; future whole source containers have not yet been opened.
   const carriedBytes=2*(canonical(request).length+canonical(report).length)+selectedRaw.length;
   const head=execFileSync('git',['-C',repo,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
-  const reader=new ImmutableReader(repo,head,{runtimeBytes,executionBytes:codeBytes,
+  const reader=new ImmutableReader(repo,head,{allowance,runtimeBytes,executionBytes:codeBytes,
     metadataBytes:8*1024*1024+carriedBytes,outputBytes:outputReserve});
   const admit=reader.admit.bind(reader),carriedDescriptors=project.length+installedModules.length+2;
   reader.admit=(descriptor,decoded=0)=>{
@@ -1872,12 +1872,35 @@ export function externalOperatingReserve(request, requestBytes) {
     &&Number.isSafeInteger(requestBytes)&&requestBytes>0&&requestBytes<=131072,'Invalid operating supervisor/request binding');
   // Node is already charged by the scientific child. The rest is the external
   // executable closure, parent request/code, and bounded raw monitoring output.
+  let operatingOutputs=13*1024*1024;
+  if(request.operating_profile==='source-native-v2'){
+    const l=request.operating_limits;
+    demand(l&&Object.keys(l).sort().join(',')==='log_bytes,monitor_bytes,output_bytes,receipt_bytes,retained_bytes,rss_bytes,wall_seconds'
+      &&Object.values(l).every(n=>Number.isSafeInteger(n)&&n>0)&&Number.isSafeInteger(l.wall_seconds*1000),'Complete finite source/native operating limits required');
+    demand(Number.isSafeInteger(l.output_bytes+l.receipt_bytes)&&l.output_bytes+l.receipt_bytes<=l.retained_bytes&&l.log_bytes<=l.retained_bytes&&l.monitor_bytes<=l.retained_bytes
+      &&l.log_bytes<=l.rss_bytes&&l.monitor_bytes<=l.rss_bytes&&l.receipt_bytes<=l.rss_bytes
+      &&Number.isSafeInteger(request.output_reserve+131072)&&l.output_bytes>=request.output_reserve+131072,'Source/native output/operating reserve differs');
+    demand(request.processing_allowance?.phaseBytes<=l.rss_bytes&&request.processing_allowance?.rssBytes<=l.rss_bytes,'Source/native reader exceeds issued group allowance');
+    const names=['scripts/local-workspace.mjs','scripts/worker-identity.mjs'];demand(Array.isArray(operating.support_code)&&JSON.stringify(operating.support_code.map(p=>p.path))===JSON.stringify(names)&&operating.support_code.every(p=>Number.isSafeInteger(p.bytes)&&p.bytes>0&&p.bytes<=32*1024*1024&&hex(p.sha256)),'Complete source/native operating support pins required');
+    operatingOutputs=l.log_bytes+l.monitor_bytes+l.receipt_bytes+2*operating.support_code.reduce((n,p)=>n+p.bytes,0);demand(Number.isSafeInteger(operatingOutputs),'Source/native operating reserve overflow');
+  }else demand(request.operating_profile===undefined&&request.operating_limits===undefined&&request.processing_allowance===undefined&&operating.support_code===undefined,'Foreign historical operating profile');
   return operating.runtime.filter(p=>p.role!=='node').reduce((n,p)=>n+p.bytes,0)
-    +supervisor.bytes+requestBytes+13*1024*1024;
+    +supervisor.bytes+requestBytes+operatingOutputs;
+}
+
+export function inventoryResourceAdmission(request,bootstrapAllowance=preparationAllowance()){
+  const allowance=request.processing_allowance===undefined
+    ?(request.operating_runtime?preparationAllowance({phaseBytes:256*1024*1024,rssBytes:1024**3}):bootstrapAllowance)
+    :preparationRequestAllowance(request.processing_allowance);
+  const outputReserve = request.output_reserve;
+  demand(Number.isSafeInteger(outputReserve) && outputReserve >= 131072 && outputReserve <= allowance.phaseBytes, 'Explicit admitted output reserve required');
+  if(request.operating_runtime&&request.operating_profile===undefined)demand(outputReserve<=96*1024*1024,'Literal historical output reserve exceeded');
+  return {allowance,outputReserve};
 }
 
 export function inventoryCommand({repo, commit, requestPin, destination}) {
   requirePlainExecution({boundedHeap:true});
+  const bootstrapAllowance=preparationAllowance();
   const sourceRoot = admitInventoryDestination(repo,destination);
   demand(execFileSync('git',['-C',sourceRoot,'rev-parse','HEAD'],{encoding:'utf8'}).trim() === commit,
     'Executing immutable head differs');
@@ -1893,11 +1916,12 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
     'node_modules/@noble/hashes/package.json'];
   const projectNames = codeNames.filter(name=>!name.startsWith('node_modules/')).concat('package-lock.json');
   const projectSizes = projectNames.map(name=>({bytes:fs.lstatSync(path.join(sourceRoot,name)).size}));
-  candidateBudget([...projectSizes,...pinCost(requestPin)],{reserveBytes:runtimeStat.size+131072});
+  candidateBudget([...projectSizes,...pinCost(requestPin)],{reserveBytes:runtimeStat.size+131072,allowance:bootstrapAllowance});
   const project = committedPreparationFiles(sourceRoot,commit,projectNames);
-  const requestBudget = candidateBudget([...project, ...pinCost(requestPin)],{reserveBytes:runtimeStat.size+131072});
+  const requestBudget = candidateBudget([...project, ...pinCost(requestPin)],{reserveBytes:runtimeStat.size+131072,allowance:bootstrapAllowance});
   const request = JSON.parse(readPin(sourceRoot,requestPin));
   const operatingReserve=externalOperatingReserve(request,requestPin.bytes);
+  if(request.operating_profile==='source-native-v2')demand(process.execArgv.length===0,'Current source/native profile requires plain Node launch');
   demand(!process.execArgv.length || (request.operation===SOURCE_PREMISES_VERSION
     &&request.source_rule?.profile==='retained-consumed-administrative-source')
     ||(request.operation===ADDITIVE_BATCH_PROPOSAL_VERSION
@@ -1908,8 +1932,7 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
     'Foreign request operation/head');
   demand(typeof destination === 'string' && destination === request.destination
     && (request.operation!==INVENTORY_VERSION || Array.isArray(request.expected_ids) || request.scope === 'whole-original-report-shard'), 'Foreign output/scope');
-  const outputReserve = request.output_reserve;
-  demand(Number.isSafeInteger(outputReserve) && outputReserve >= 131072 && outputReserve <= 96*1024*1024, 'Explicit output reserve required');
+  const {allowance,outputReserve}=inventoryResourceAdmission(request,bootstrapAllowance);
   const dependencyNames = ['package.json','sha2.js','_md.js','_u64.js','utils.js'].map(name=>'node_modules/@noble/hashes/'+name);
   demand(Array.isArray(request.installed_modules) && request.installed_modules.length === dependencyNames.length
     && request.installed_modules.every((pin,i)=>pin.path === dependencyNames[i] && hex(pin.sha256)
@@ -1923,7 +1946,7 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
   demand(Array.isArray(stagePins) && stagePins.length>0 && stagePins.length<=213, 'Missing complete child body roster');
   const baselinePins=[INVENTORY_VERSION,SOURCE_PREMISES_VERSION,ADDITIVE_PROPOSAL_VERSION,ADDITIVE_BATCH_PROPOSAL_VERSION].includes(request.operation)?(request.baseline?.pins??[]):[];
   const inputs = [...project,...request.installed_modules,...pinCost(requestPin),...pinCost(request.report),...stagePins.flatMap(pinCost),...baselinePins.flatMap(pinCost)];
-  const budget = candidateBudget(inputs,{reserveBytes:runtimeStat.size+outputReserve+131072+operatingReserve});
+  const budget = candidateBudget(inputs,{reserveBytes:runtimeStat.size+outputReserve+131072+operatingReserve,allowance});
   const runtimeRead=()=>{
     const before=fs.lstatSync(process.execPath);
     demand(before.isFile() && !before.isSymbolicLink() && before.size===runtimeStat.size
@@ -1956,7 +1979,7 @@ export function inventoryCommand({repo, commit, requestPin, destination}) {
     ||(request.operation===ADDITIVE_BATCH_PROPOSAL_VERSION&&request.additive?.source_profile==='retained-consumed-administrative-source'),
     'Current baseline route is limited to administrative source/native stages');
   const resolutions=baselinePins.length?(currentBaseline
-    ?readCurrentBaselineResolutions(sourceRoot,request.baseline,{request,report,project,installedModules:request.installed_modules,runtimeBytes:runtimeStat.size,outputReserve:outputReserve+operatingReserve})
+    ?readCurrentBaselineResolutions(sourceRoot,request.baseline,{request,report,project,installedModules:request.installed_modules,runtimeBytes:runtimeStat.size,outputReserve:outputReserve+operatingReserve,allowance})
     :readBaselineResolutions(sourceRoot,request.baseline)):undefined;
   const baselineCustody=currentBaselineViews.get(resolutions);
   if(baselineCustody)budget.add({bytes:2*canonical(baselineCustody).length});
