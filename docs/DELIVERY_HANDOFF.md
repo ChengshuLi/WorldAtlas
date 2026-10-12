@@ -220,3 +220,88 @@ Actual immutable commit pins between phases, external scientific execution,
 independent source/review authority and the existing serialized queue are manual
 or existing-tool boundaries. No scheduler, automatic approval or queue submission
 is hidden in the preparation command.
+
+## Admitted recipe continuation (`advance` / `status`)
+
+The same command can prepare the next supported metadata transition without
+copying derived hashes, component IDs, or authority records between configs:
+
+```sh
+node scripts/prepare-delivery-handoff.mjs advance CONFIG DESTINATION
+node scripts/prepare-delivery-handoff.mjs advance CONFIG DESTINATION --resume
+node scripts/prepare-delivery-handoff.mjs status CONFIG DESTINATION
+```
+
+`CONFIG` has `version: 1`, an immutable `recipe: {commit, path}`, and optional
+`observations`. Each invocation completes one available preparation stage or
+reports the exact external input it is waiting for. Repeat the same command after
+recording genuine publication/commit results. It never runs SOURCE, NATIVE,
+rebind, assembly, builds, Git commits, or a reviewer. The finite sequence is recipe,
+requests, SOURCE retention, native requests/retention, authority pairs/registry,
+composition, rebind custody/certificate, package, finalization, live review
+preparation and the existing merge queue. Actual operators and their required
+per-phase input authentication remain separate.
+
+Initial method admission is explicit. A `greedy-model` recipe supplies the
+accepted registry locator, handoff IDs, admitted v2 SOURCE/NATIVE exemplar
+locators, exact target-bank/native-operand mapping, physical locator metadata,
+finite SOURCE/NATIVE resources, predecessor output allowances and the native
+request byte allowance. It derives each ordered component scope from the whole
+accepted handoff. It ignores old operational-batch labels. Whole encoded/decoded
+inputs, code/modules, runtime/supervisor/support, both request copies and reserved
+outputs/monitoring are modeled before splitting; singleton overflow refuses.
+Native requests are modeled again after genuine SOURCE outputs replace reserved
+predecessor slots. This prospective model does not replace current live memory,
+installed runtime, acquisition or scientific operator admission.
+
+`retained-groups` with `compatibility: literal-historical-v1` is explicitly a
+historical replay. Its groups give immutable issued SOURCE/NATIVE exemplar
+locators, never copied component lists. It preserves original destinations and
+scopes. Newly rebound request preparation is shown separately from the original
+requests that actually executed; retention and authorities always validate the
+latter. A historical replay is not new source acceptance or a new execution.
+
+The recipe index emits one transport/acquisition identity per whole encoded and
+decoded body, with all compatible destinations. This deduplicates the plan; it
+neither downloads bodies nor removes mandatory SOURCE/NATIVE authentication.
+Physical-product paths come from the accepted handoff's original comparison or
+its exact consumed locator metadata. Missing joins refuse, rather than guessing
+from country names, old batches, or incomplete source records.
+
+Observations supply only actual commit/path locators, not derived hashes:
+
+- `template_commit`: actual commit containing generated recipe templates (new recipes).
+- `sources` / `natives`: arrays of `{publication, terminal}` locators. Original
+  facts determine request identity and saved group scope; unknown/duplicate groups fail.
+- `authorities`: committed `{rule_preimage, source_authority}` locator pairs.
+- `registry`, `composed_ledger`, `operating`, `certificate`, `sidecar`: actual
+  committed products. Each is joined to the deterministic preceding output.
+- `rebind`: actual `publication`, `request`, `terminal` locators and complete
+  `custody` locators for code_source, issued_plan, stdout and stderr.
+- `review: {repo, pr_number}` is a top-level config field. The current head is
+  read from GitHub, then the existing exact-head review packet is frozen.
+
+For an already completed delivery, top-level `completed_delivery` supplies its
+sidecar locator, composed-ledger locator and owned prefix. The command discovers
+its original publications, authority pairs and current rebind custody from the
+actual selected release. Every corresponding ordinary validator still runs.
+The committed current13 recipe/config exercise this mode without scientific work.
+
+The destination contains immutable stage intents, ordinary preparation receipts,
+completion observations and timings. An identical partial metadata write can
+resume only after its exact intent and every existing byte agree. Foreign files,
+changed recipe/observations, symlinks and altered completed bytes refuse. A crash
+lock is recovered only when its same-host process is gone; a live or foreign
+owner is never displaced. `status` checks completed inventories without mutation.
+Timings report preparation, API wait, observed external wait and individual
+operator-receipt durations separately. Parallel operator durations are not added
+and called wall time; metadata speed is not global gap-closures/hour.
+
+Queue preparation requires the existing live independent review/evidence gate,
+including current scope/body/manifest/claim bindings and unresolved refusals.
+Only explicit `advance ... --resume --submit-queue` invokes the existing queue
+client. Its submission ID is durably written before POST. Every invocation with
+an existing submission intent is observation-only, including a crash before an
+uncertain POST. Missing registration never authorizes another submission. Follow
+`MERGE_QUEUE_CLIENT.md` for explicit reconciliation; no approval is inferred from
+local records, an unchanged head, or successful metadata preparation.
