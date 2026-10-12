@@ -93,7 +93,7 @@ execution or producer-code qualification.
 
 ## Verification and limits
 
-Run `node --test test/selected-checkpoint.test.mjs`. The 20 controls create an
+Run `node --test test/selected-checkpoint.test.mjs`. The 21 controls create an
 ordinary miniature trusted Git repository and invoke real catalogue, private
 state/transition, projection and budget boundaries.
 
@@ -152,3 +152,5 @@ The coordinated preregistration derives one exact future SOURCE/NATIVE17 and CUR
 The runtime qualifier catalogue in this inactive PR continues to bind the existing native checker. The one-row native pin update belongs with coordinated runtime adoption in1784. The archived41a9 proof remains under its original execution identity; these corrections do not relabel it as a current-AUS or integrated proof. One subsequent admitted joint pre-AUS→AUS validation will retain genuine derived checkpoint products and compare all available accepted outputs. Automatic accepted-artifact advancement and the one-candidate cold bridge remain separate unfinished work.
 
 Final focused controls at `c95082fbdb1e092d6cada098e7b48dd4809140dd`: twenty checkpoint tests and fourteen catalogue tests passed, zero failures/skips. Both complete suites finished in 38.548 seconds; this test timing is not a batch-performance claim.
+
+A final custody-only correction shares each temporary archive/authority reader inventory with its invocation parent. This retains every actual consumed pin for the joint publication without rereading it or exposing a new authority API. A focused real-Git test confirms whole archived pin retention and separate invocation inventories/lifetimes; prior numerical and policy controls remain reusable. The original41a9 proof is not relabelled.

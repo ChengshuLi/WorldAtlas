@@ -129,6 +129,7 @@ function rootCatalogue(session, reader) {
   const executing = new ImmutableReader(ROOT, trusted, {runtimeBytes:reader.runtimeBytes,
     executionBytes:reader.executionBytes, budget:reader.budget, allowance:reader.allowance,
     gitExecutable:reader.gitExecutable});
+  executing.inventory=reader.inventory; // one invocation's complete archived custody survives the child
   demand(executing.git('rev-parse','HEAD').toString().trim() === trusted,
     'Checkpoint repo differs from the actual trusted execution checkout');
   const catalogue = readNamed(session, executing, CATALOGUE);
@@ -536,6 +537,7 @@ function appendAuthority(session, reader, entry) {
   const child = new ImmutableReader(reader.repo,reader.version,{runtimeBytes:reader.runtimeBytes,
     executionBytes:reader.executionBytes,metadataBytes:session.initialMetadata+session.budget.carriedBytes+session.residentBytes,
     outputBytes:session.initialOutput,gitExecutable:reader.gitExecutable,budget:reader.budget,allowance:reader.allowance});
+  child.inventory=reader.inventory; // retain actual appended-producer inputs without reopening them
   const proof = readRetainedRegistryAuthority(child,entry);
   session.floor = reader.used;
   return {entry,patches:proof.native_proof.native_patches,ledger:proof.original_ledger,
