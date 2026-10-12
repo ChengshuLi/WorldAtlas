@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "registry": {
+    "path": "coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json",
+    "commit": "c0da1d08bcb32f89872091c45eec5929e1e07055",
+    "mode": "100644",
+    "blob": "20b620803b9fc97527e67dc6bcb06f8a100a5966",
+    "bytes": 11775,
+    "sha256": "4e9279aec058855e135945dc56eeb2444fb750f80541017217d4550c461ec14c"
+  },
+  "component_ids": [
+    "physical-component:46e0f6b1de7155d2722cac7669ae89b1f8bda954c298884f5dc239ac5237de8a",
+    "physical-component:51621e475e003e83e6b23203827a0b255ec5f7b4fe4af550148fb486c36695ca",
+    "physical-component:c1d5e49737e17af6a5a2dcbc5467b7d3bad9d895115dbb7ef374ef76295c8e4d",
+    "physical-component:d183bad00349d708a7d8ff8a052555c6a944b82ec9dd05eaca6469001556c6c7",
+    "physical-component:df2cf8877fd9e127728b71547dd7d87368ba90db73d5484a0ad321446275551d"
+  ],
+  "groups": [
+    {
+      "id": "nor18-south5-003",
+      "handoff_id": "nor2013-original-eighteen-20261011",
+      "component_ids": [
+        "physical-component:46e0f6b1de7155d2722cac7669ae89b1f8bda954c298884f5dc239ac5237de8a",
+        "physical-component:51621e475e003e83e6b23203827a0b255ec5f7b4fe4af550148fb486c36695ca",
+        "physical-component:c1d5e49737e17af6a5a2dcbc5467b7d3bad9d895115dbb7ef374ef76295c8e4d",
+        "physical-component:d183bad00349d708a7d8ff8a052555c6a944b82ec9dd05eaca6469001556c6c7",
+        "physical-component:df2cf8877fd9e127728b71547dd7d87368ba90db73d5484a0ad321446275551d"
+      ],
+      "template": {
+        "path": "coordination/engineering/nor18-selected-20261012/templates-001/south5-source-template.json",
+        "commit": "c0da1d08bcb32f89872091c45eec5929e1e07055",
+        "mode": "100644",
+        "blob": "23045edfd44a6b5a32f009da86f32a68c0912c7d",
+        "bytes": 16101,
+        "sha256": "14aaddeeb6f2da67db3733622ce2e1fe7161208c9a51ede4118d691218e42186"
+      },
+      "destination": ".cache/native-grid-candidates/nor18-south5-source-003"
+    }
+  ],
+  "requested_resources": {
+    "processing_allowance": {
+      "phaseBytes": 536870912,
+      "rssBytes": 1073741824
+    },
+    "operating_limits": {
+      "log_bytes": 4194304,
+      "monitor_bytes": 8388608,
+      "output_bytes": 33554432,
+      "receipt_bytes": 1048576,
+      "retained_bytes": 50331648,
+      "rss_bytes": 1610612736,
+      "wall_seconds": 1200
+    }
+  }
+}
