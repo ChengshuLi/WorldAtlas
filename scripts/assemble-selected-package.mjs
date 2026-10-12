@@ -58,6 +58,7 @@ export async function findOriginalPackage({api,repo,current,originalRunId}){
   const response=originalRunId===undefined?await api(`/repos/${repo}/actions/workflows/merge-integration-checks.yml/runs?event=pull_request&per_page=20&page=1`):
     {workflow_runs:[await api(`/repos/${repo}/actions/runs/${originalRunId}`)]};
   need(Array.isArray(response.workflow_runs),'Original run discovery unavailable');
+  if(originalRunId!==undefined)need(response.workflow_runs.length===1&&response.workflow_runs[0]?.id===originalRunId,'Pinned original run identity differs');
   const seen=new Set();
   for(const run of response.workflow_runs){
     if(run.status!=='completed'||seen.has(run.head_sha)||run.repository?.full_name!==repo||run.head_repository?.full_name!==repo)continue;
