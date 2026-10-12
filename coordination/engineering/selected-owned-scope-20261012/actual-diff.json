@@ -1,0 +1,30 @@
+{
+  "base": "ad300bd5ffa73c226e591f037980d67d40f6acf3",
+  "head": "367d68214f8c88532949bf9d21539766491991ad",
+  "changed_files": 192,
+  "prefilter": true,
+  "result": {
+    "test_selection": "selected-data",
+    "expectations_path": "coordination/engineering/nor-grc-congo-delivery-20261011/aus13-selected-20261012/advance-002/finalize/selected-delivery-expectations.json",
+    "shards": [
+      0
+    ]
+  },
+  "reads": 164,
+  "bytes": 21503703,
+  "diagnostics": {
+    "read_count": 164,
+    "read_bytes": 21503703,
+    "retained_bytes": 7297592,
+    "retained_count": 31,
+    "transient_read_count": 133,
+    "transient_read_bytes": 14206111,
+    "decoded_bytes": 11133891,
+    "peak_admitted_bytes": 21050649,
+    "limit_bytes": 285524553,
+    "machine_bytes": 285524553,
+    "minimum_live_limit_bytes": 274974948,
+    "heap_used_bytes": 147260968,
+    "process_peak_rss_bytes": 317132800
+  }
+}
