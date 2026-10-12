@@ -48,7 +48,33 @@ Synthetic controls do not establish real selected geographic equivalence.
 
 This implementation is being developed against the reviewed shared module from
 PR #1782 and the native consumer owned by PR #1783. The diagnostic branch carries
-those unmerged dependencies explicitly. The integrated genuine retained-input
-comparison, final native API, exact combined code profiles, independent review
-and normal integration remain pending. No complete-path timing or zero-load
+those unmerged dependencies explicitly. The exact native API at `39792e02c603e262513dd0d9df4b63dc275e5a15` is integrated
+in this diagnostic tree. A genuine miniature joint CLI control verifies one
+shared bootstrap, checkpoint, transition, native comparison, continuous consumer
+and release, and zero complete selections or coordinate shards, using actual V8
+coverage. The integrated genuine retained-input comparison, final combined code
+profiles, renewed independent review and normal integration remain pending. No complete-path timing or zero-load
 scientific execution is claimed by these focused controls.
+
+## Applicability closure
+
+The checkpoint path introduces five immutable retained-output roots and a trusted
+present/absent route census that the former selected-bank collector did not read.
+An unchanged selector alone therefore cannot justify skipping the reader if one
+of these retained aliases changes. The collector now reads the executing trusted
+catalogue, verifies its complete four-member qualifier vector, matches the exact
+canonical complete selector, preserves every original root pin and fallback
+alias, then authenticates and compares the entire ordered route census. It never
+uses candidate catalogue contents as trust. Complete scientific certificates and
+source bodies remain opaque. Source-scoped adverse controls change each root and
+routed present/absent alias; unknown roots, vectors and route schemas decline.
+
+The one integrated measurement is reproduced by `reproduction/supervise.py` and
+`reproduction/probe.py` from the exact combined executing checkout with the pinned
+GIS interpreter. The supervisor bounds the real process group and records actual
+terminal membership scans. The probe invokes the actual joint wrapper and strict
+Python consumer, retains original output bytes, compares them against immutable
+historical complete results, and checks V8 lifecycle call counts. Its temporary
+directory lifetime is retained solely for archival readback. Before execution,
+normal fresh resource admission and the coordinated single heavy window remain
+required; this recipe is not an execution claim.
