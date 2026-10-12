@@ -153,12 +153,12 @@ function createReader({repo, baseline, candidate, trusted, limits, acquisition})
     }
     return origins.get(commit);
   }
-  function pinned(value, {fallback = true, fallbackCommit = baseline} = {}) {
+  function pinned(value, {fallback = true, fallbackCommit = baseline, currentAlias = true} = {}) {
     demand(value && oid(value.commit) && safe(value.path) && ['100644', '100755'].includes(value.mode)
       && oid(value.git_blob_oid ?? value.blob) && Number.isSafeInteger(value.bytes) && value.bytes > 0 && value.bytes <= limits.member && hash(value.sha256), 'unsupported-historical-pin');
     // Protect even the currently unused retained alias, including its absence.
     // A later object hydration must not expose a candidate-only alternative.
-    if (fallback) equalCurrent(value.path, true);
+    if (fallback && currentAlias) equalCurrent(value.path, true);
     const version = originExists(value.commit) ? value.commit : fallback ? fallbackCommit : null;
     if (!version) requireOrigin(value.commit);
     const actual = descriptor(version, value.path);
@@ -289,6 +289,24 @@ async function checkpointRoutes(reader, selection, trusted) {
   // Scientific certificate/operand bodies stay opaque. Their original whole
   // pins bind all nested contents; this authenticated routing metadata covers
   // the module's complete present/absent inventory and source/native alternatives.
+  // The qualifier also reads the archived execution's programme policy. Its
+  // current alias belongs only to the trusted checkout, never the candidate.
+  const custody = await reader.pinnedJson(root.custody, {fallbackCommit: trusted});
+  const retained = array(custody.complete_cold_custody, 'checkpoint-custody').filter(p => p.facts?.selected_commit === root.selected_commit);
+  demand(retained.length === 1, 'ambiguous-checkpoint-policy-custody');
+  const policyPins = array(retained[0].inventory, 'checkpoint-inventory').filter(p => p.path === POLICY);
+  demand(policyPins.length === 1, 'incomplete-checkpoint-policy-custody');
+  const priorPolicy = await reader.pinnedJson(policyPins[0], {fallbackCommit: trusted, currentAlias:false});
+  const currentPolicy = await reader.trustedJson(POLICY);
+  for (const policy of [priorPolicy, currentPolicy]) {
+    keys(policy, 'version,kind,programs,current_rebind_migrations', 'checkpoint-programme-policy');
+    demand(policy.version === 1 && policy.kind === 'trusted-source-native-programmes-v1', 'unsupported-checkpoint-programme-policy');
+  }
+  for (const role of ['programs', 'current_rebind_migrations']) {
+    const current = new Set(array(currentPolicy[role], 'checkpoint-policy-records', 0).map(p => JSON.stringify(canonical(p))));
+    demand(array(priorPolicy[role], 'checkpoint-policy-records', 0).every(p => current.has(JSON.stringify(canonical(p)))),
+      'checkpoint-policy-eligibility-removed');
+  }
   const routes = await reader.pinnedJson(root.routes, {fallbackCommit: trusted});
   demand(Array.isArray(routes) && routes.length > 0 && routes.length <= ENTRIES, 'unsupported-checkpoint-routes');
   let previous = '';
@@ -296,6 +314,9 @@ async function checkpointRoutes(reader, selection, trusted) {
     keys(route, 'path,tree', 'checkpoint-route');
     demand(safe(route.path) && route.path > previous && typeof route.tree === 'string', 'unsupported-checkpoint-route-order');
     previous = route.path;
+    // Its original census row is preserved; current policy is independently
+    // bound by trustedJson(POLICY), not selected-vintage scientific equality.
+    if (route.path === POLICY) continue;
     const actual = reader.equalCurrent(route.path, true);
     const tree = actual ? `${actual.mode} blob ${actual.git_blob_oid}\t${actual.path}\0` : '';
     demand(route.tree === tree, 'checkpoint-route-identity:' + route.path);

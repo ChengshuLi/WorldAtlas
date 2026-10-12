@@ -105,3 +105,11 @@ original CI run 38214372428 and its retained genuine artifact under
 operand hashes are available. Historical facts/inverse bodies are not available,
 so their equality is not claimed. The proof remains unexecuted until the exact
 shared policy-route correction and final combined profiles pass review.
+
+The archived programme policy is an execution input, not a selected scientific
+route. Its exact historical pin is followed from the matching retained custody
+inventory, with fallback only at the trusted executing checkout. Before ignoring
+that one route, applicability checks that every complete archived programme and
+rebind migration survives unchanged in the current trusted policy. Missing or
+altered eligibility declines. Candidate policy does not provide authority, and
+all adjacent source/native present/absent aliases retain their exact comparison.

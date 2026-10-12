@@ -55,7 +55,7 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
   for (const name of new Set([...EXECUTION_CODE, ...REBIND_CODE, 'scripts/geography-prefetch.mjs'])) put(name, Object.hasOwn(AUDITED_READERS, name) ? fs.readFileSync(path.join(ROOT, name)) : 'trusted code leaf');
   const catalogue = {version: 1, kind: 'accepted-selected-checkpoints-v1', qualifier_code: CHECKPOINT_METHODS.map(path => ({path, bytes: files[path].length, sha256: sha(files[path])})), checkpoints: []};
   put(CHECKPOINTS, catalogue);
-  put(POLICY, {version: 1, kind: 'trusted-source-native-programmes-v1'});
+  put(POLICY, fs.readFileSync(path.join(ROOT, POLICY)));
   const world = {parts: ['geography/source.json']};
   put('data/world-index.json', world);
   for (const name of ['data/geography/source.json', 'data/canonical-grid/bounds.json.gz', 'data/hierarchy.json', 'data/canonical-grid/manifest.json', 'data/geographic-releases/index.json', 'data/geographic-releases/current.json.gz']) put(name, 'opaque complete scientific leaf');
@@ -132,12 +132,13 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
   if (checkpoint) {
     // Opaque complete products must remain unread: only their original pins and
     // the explicitly authenticated route metadata are needed for applicability.
-    for (const role of ['facts', 'certificate', 'publication', 'custody', 'routed']) put(P + 'checkpoint-' + role, 'opaque checkpoint ' + role);
-    const routes = [{path: P + 'checkpoint-absent', tree: ''}, {path: P + 'checkpoint-routed',
+    for (const role of ['facts', 'certificate', 'publication', 'routed']) put(P + 'checkpoint-' + role, 'opaque checkpoint ' + role);
+    put(P + 'checkpoint-custody', {complete_cold_custody:[{facts:{selected_commit:original}, inventory:[pin(POLICY, original)]}]});
+    const routes = [{path: POLICY, tree: `100644 blob ${git(['hash-object', '--stdin'], files[POLICY])}\t${POLICY}\0`}, {path: P + 'checkpoint-absent', tree: ''}, {path: P + 'checkpoint-routed',
       tree: `100644 blob ${git(['hash-object', '--stdin'], files[P + 'checkpoint-routed'])}\t${P}checkpoint-routed\0`}];
     put(P + 'checkpoint-routes', routes);
     const retained = commit(files, assets);
-    catalogue.checkpoints.push({id: 'ordinary-retained-root', accepted_head: retained, selected_commit: retained,
+    catalogue.checkpoints.push({id: 'ordinary-retained-root', accepted_head: retained, selected_commit: original,
       selection_sha256: sha(JSON.stringify(canonical(selection)) + '\n'), execution_commit: original,
       execution_code_sha256: 'a'.repeat(64), runtime_sha256: 'b'.repeat(64),
       ...Object.fromEntries(['facts', 'certificate', 'publication', 'custody', 'routes'].map(role => [role, pin(P + 'checkpoint-' + role, retained)]))});
@@ -176,6 +177,26 @@ test('checkpoint roots and complete present/absent route aliases are collected w
       const rejected = await f.inspect(candidate);
       assert.equal(rejected.status, 'full-check-required', role);
       assert.match(rejected.reason, /changed-current-input/, role);
+    }
+  } finally { f.close(); }
+});
+
+test('checkpoint execution policy evolves independently while its original custody remains bound', async () => {
+  const f = fixture({checkpoint:true}); try {
+    const files = {...f.files, [POLICY]:body({...JSON.parse(f.files[POLICY]), programs:[...JSON.parse(f.files[POLICY]).programs, {new_accepted_record:'trusted-only'}]})};
+    const baseline = f.commit(files, f.baseline), candidate = f.commit({...files, 'research/geography/new-packet/source.json':body('source')}, baseline);
+    const accepted = await f.inspect(candidate, baseline);
+    assert.equal(accepted.status, 'unchanged-selected-inputs', accepted.reason);
+    assert(accepted.immutable_descriptors.some(p => p.path === POLICY && p.commit === f.original));
+    assert(accepted.immutable_descriptors.some(p => p.path === POLICY && p.commit === baseline));
+    assert(!accepted.immutable_descriptors.some(p => p.path === POLICY && p.commit === candidate));
+    const altered = f.commit({...files, [P + 'checkpoint-routed']:body('adjacent scientific drift')}, baseline);
+    assert.match((await f.inspect(altered, baseline)).reason, /changed-current-input/);
+    for (const mutate of [p => p.programs.pop(), p => p.current_rebind_migrations.pop(), p => { p.programs[0].accepted_head = 'f'.repeat(40); }]) {
+      const policy = JSON.parse(f.files[POLICY]); mutate(policy);
+      const changedFiles = {...f.files, [POLICY]:body(policy)}, changedBase = f.commit(changedFiles, f.baseline);
+      const changedCandidate = f.commit({...changedFiles, 'research/geography/new-packet/source.json':body('source')}, changedBase);
+      assert.match((await f.inspect(changedCandidate, changedBase)).reason, /checkpoint-policy-eligibility-removed/);
     }
   } finally { f.close(); }
 });

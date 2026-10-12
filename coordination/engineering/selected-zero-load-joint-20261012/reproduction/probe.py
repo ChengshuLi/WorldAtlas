@@ -71,6 +71,8 @@ assert facts['executing_commit'] == TRUSTED and facts['baseline_commit'] == BASE
 assert facts['candidate_selection'] == native['candidate_selection'] and facts['baseline_selection'] == native['baseline_selection']
 assert facts['continuous_publication'] == publication and facts['certificate'] == pin
 assert facts['candidate_code_executed'] is False and 'complete_cold_custody' not in facts
+native_core = {key:value for key,value in native.items() if key not in ['runtime', 'caller_runtime', 'execution_runtimes', 'execution_code_inventory']}
+assert facts['native_result_sha256'] == digest(canonical(native_core))
 counts = {}
 for coverage in (OUTPUT/'coverage').glob('*.json'):
     for script in json.loads(coverage.read_bytes())['result']:
@@ -93,7 +95,7 @@ summary = {'kind':'actual-joint-selected-accepted-aus-equivalence', 'execution_c
            'whole_encoded_and_decoded_operand_hashes_equal':True, 'whole_source_bindings_and_required_ids_equal':True,
            'complete_owners':continuous['complete_owners'], 'required_owners':len(continuous['required_ids']),
            'changed_owners':len(continuous['original_strict_polygon_result']['changed_location_ids']),
-           'derived_checkpoint_publication':derived_publication, 'archive_directory':retained_directories[0].name,
+           'derived_checkpoint_publication':derived_publication, 'derived_native_report_inverse_verified':True, 'archive_directory':retained_directories[0].name,
            'limits':['Actual local joint path, including output serialization and strict Python readback; not a controlled hosted timing benchmark.',
                      'Original accepted CI operand hashes are available; historical facts/inverse bodies are unavailable and are not claimed equal.',
                      'Derived candidate certificate has distinct provisional transition lineage; no new checkpoint authority is minted by serialization.',
