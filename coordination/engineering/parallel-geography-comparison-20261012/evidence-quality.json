@@ -45,6 +45,12 @@
         "hash_kind": "file-bytes"
       },
       {
+        "path": "scripts/assemble-selected-package.mjs",
+        "bytes": 21036,
+        "sha256": "9098d6366a179125e73108de5a425aaff43ae28ce6ee22429f1fb09ae71fd12a",
+        "hash_kind": "file-bytes"
+      },
+      {
         "path": "scripts/check-unchanged-selected-geography.mjs",
         "bytes": 38733,
         "sha256": "9b1ecaa8dfb18ef857784f128afb004a5d9746b88f8fb6dfad25c42986d8f567",
@@ -153,6 +159,12 @@
         "hash_kind": "file-bytes"
       },
       {
+        "path": "test/selected-package-assembly.test.mjs",
+        "bytes": 8838,
+        "sha256": "29335499edcb233e47aec62e1320bd2a296f3c5a94d6b4177c296a7a410b3c80",
+        "hash_kind": "file-bytes"
+      },
+      {
         "path": "test/selected-package-bootstrap-controls.py",
         "bytes": 23842,
         "sha256": "4f2f613bbdff5b0ce7da0c30d911514e1ff0708b42188a58aaf0a63e403ec85e",
@@ -209,6 +221,13 @@
       "description": "Authenticate separate current observer and frozen accepted production graph; preserve and record genuine frozen CLI legacy comparison failure, then independently authenticate committed assembly, original manifest and exhaustive B reference. Normalize only the exact unique declaration encoded-read delta; fresh hosted consumers and actual equivalence remain pending.",
       "software": "Node 24 and Python 3.12",
       "units": "synthetic controls and original readback accounting"
+    },
+    {
+      "id": "fresh-assembly-scratch",
+      "kind": "code",
+      "description": "Create ordinary current assembly scratch on fresh checkouts, rejecting symlink/dangling/non-directory targets; preserve frozen A/B production source and evidence.",
+      "software": "Node 24",
+      "units": "synthetic controls"
     }
   ],
   "metrics": [],
@@ -228,6 +247,7 @@
     "GIT_NO_LAZY_FETCH=1 WORLDATLAS_DELIVERY_V2_FIXTURE=1 node --test --test-name-pattern=\"frozen Norway B\" test/delivery-handoff-advance.test.mjs",
     "GIT_NO_LAZY_FETCH=1 WORLDATLAS_DELIVERY_ORIGINAL_FIXTURE=1 node --test --test-name-pattern=\"completed custody|real Native102\" test/delivery-handoff-advance.test.mjs",
     "node --test test/local-workspace.test.mjs",
-    "node --test test/package-output-artifact.test.mjs test/selected-package-bootstrap.test.mjs test/selected-package-proof-driver.test.mjs"
+    "node --test test/package-output-artifact.test.mjs test/selected-package-bootstrap.test.mjs test/selected-package-proof-driver.test.mjs",
+    "node --test test/selected-package-assembly.test.mjs"
   ]
 }

@@ -94,3 +94,12 @@ readback preflight measured 92,514 versus 96,272 declaration bytes, with all
 accounting preflight, not actual assembly equivalence. Frozen A/B identities
 remain separate from the proof-code identity; issue #1798 retains the genuine
 hosted proof and timing obligation after this code is accepted.
+
+The same handoff includes the demonstrated ordinary fresh-checkout scratch fix:
+the current assembler creates an ordinary `.cache` before unique allocation,
+and refuses symlink, dangling-link or non-directory targets. Eight focused
+controls passed, preserving target sentinels. The separate proof continues to
+execute the unchanged frozen assembler. The new proof boundary passed 31 Node
+controls including 72 Python bootstrap controls; the initial local bootstrap
+attempt required restoring one exact 29,466-byte sparse code helper, then passed
+without changing the code under test.
