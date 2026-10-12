@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "issue": 1763,
+  "lane": "engineering",
+  "worker_id": "01a12e01-3e8e-76f0-a1d3-cd026226a030",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "7446e4bcf19825698f544a5fa2809b3a78f88a25",
+    "files": [
+      {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+        "bytes": 24674,
+        "sha256": "198817f84574d3d04b0ab2c4827eced98211533a79851ee43b97c59d80663c07",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-geographic-check.py",
+        "bytes": 90000,
+        "sha256": "9991597747f5be6480605d58c4e079a36302b02e112362b49bac62bcafb95691",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/controls/focused-process-group.json",
+      "bytes": 294,
+      "sha256": "f938705dcd7aa53e2816a73bef2c0bcb88d1dccba4cb1f7e2a2191dbdcfd15b5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/controls/focused.log",
+      "bytes": 19738,
+      "sha256": "8f76d2337c946d0d13ce0e04772766a19b971fc5be18e4d293b4627661004830",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "bounded-candidate-frame",
+      "kind": "code",
+      "description": "Retain only the candidate authenticated selected snapshot inside one complete validation/planning/source-projection frame; charge complete snapshot, resolver-own-image metadata, inventory and outputs at every phase. Drop the snapshot before baseline acquisition. Preserve original child isolation and all scientific predicates and historical program pins.",
+      "software": "Node.js 24; Git",
+      "units": "selection acquisitions, bytes"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test --test-concurrency=1 test/selected-continuous-lifecycle.test.mjs"
+  ],
+  "limits": [
+    "Synthetic immutable fixtures establish exact phase identity, complete projection equality, lifetime and adverse refusals; they are not fresh geographic qualification.",
+    "The initial review has no real-data corrected timing. Any subsequent admitted retained-input proof must preserve the actual execution HEAD independently from baseline/candidate input commits and compare whole operands before reusing original strict-polygon evidence.",
+    "Shared scientific helper, programme catalogue and native-GC child launch are unchanged. No geography approval, content import or deployment."
+  ]
+}

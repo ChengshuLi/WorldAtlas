@@ -64,7 +64,7 @@ function fixture(){
 
 import * as native from '../scripts/check-effective-geographic-regression.mjs';
 import * as helper from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
-import {validatePersistedColdSide,reopenCompleteColdPlan,acquireContinuousSources,acquireContinuousSource,mayUseNonAdditiveShortcut} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs';
+import {validatePersistedColdSide,reopenCompleteColdPlan,acquireContinuousSources,acquireContinuousSource,acquireCandidateContinuousSources,mayUseNonAdditiveShortcut} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs';
 const P='coordination/engineering/selected-geography-effective-prevention-20261009/';
 function sourceSides(f){
  const rect=(a,b)=>({type:'Polygon',coordinates:[[[a,0],[b,0],[b,1],[a,1],[a,0]]]});
@@ -127,6 +127,9 @@ test('reopened complete carry and runtime admission refuse before any cold body 
 test('actual continuous entry emits full source inverses with independently ended acquisition stages',()=>{
  const f=fixture();try{const {rect,install}=sourceSides(f),before=install(rect(0,1),rect(2,3),'before'),after=install(rect(0,2.5),rect(2,3),'after');f.git('checkout',before);const env={...process.env};delete env.NODE_OPTIONS;delete env.NODE_PATH;
   const out=path.join(f.repo,'actual-continuous'),r=spawnSync(process.execPath,[path.join(f.repo,P+'selected-continuous-entry.mjs'),'continuous',f.repo,before,before,after,out],{env,encoding:'utf8'});assert.equal(r.status,0,r.stderr);assert.match(r.stderr,/required-source-count/);assert.match(r.stderr,/coordinate-source/);assert.match(r.stderr,/required-side-selection/);const ack=JSON.parse(r.stdout),facts=JSON.parse(fs.readFileSync(path.join(out,'facts.json'))),body=JSON.parse(gunzipSync(fs.readFileSync(path.join(out,'operands.json.gz'))));
+  const selectionStages=r.stderr.split('\n').filter(Boolean).map(line=>JSON.parse(line)).filter(row=>row.event==='start'&&['coordinate-selection','persisted-selection','required-side-selection'].includes(row.selected_continuous_stage));
+  assert.equal(selectionStages.length,5);
+  assert.deepEqual(selectionStages.filter(row=>row.selected_continuous_stage==='required-side-selection').map(row=>row.selected),[before]);
   assert.deepEqual(ack.affected_ids,['old-owner','other-owner']);assert.equal(facts.lifecycle.filter(p=>p.kind==='complete-snapshot-bound-cold-validation').length,2);assert.equal(facts.lifecycle.filter(p=>p.kind==='complete-required-containing-source').length,2);assert.equal(facts.inverse.length,4);assert.ok(facts.lifecycle.every(p=>p.complete_phase_bytes<=268435456));assert.deepEqual(Object.keys(body.baseline).sort(),ack.affected_ids);assert.deepEqual(Object.keys(body.candidate).sort(),ack.affected_ids);
   for(const side of ['baseline','candidate'])assert.equal(fs.existsSync(path.join(out,side,'certificate.json.gz')),true);
  }finally{f.cleanup();}
@@ -251,5 +254,61 @@ test('selected assembly refuses an unauthenticated snapshot before any source ac
      baseAssets:{base_manifest:{},owner_roster:{}},logicalPaths:{ledger:'ledger.json',patch:'patch.json'}}),
     /Require unchanged privately authenticated selected base/);
   }finally{reader.read=read;}
+ }finally{f.cleanup();}
+});
+
+
+test('candidate frame reuses exactly one snapshot and preserves independent complete projections',()=>{
+ const f=fixture();try{
+  const {rect,install}=sourceSides(f),before=install(rect(0,1),rect(2,3),'before',{split:true}),after=install(rect(0,2.5),rect(2,3),'after',{split:true}),state=issueStages(f,before,after),baselineReceipt=validate(f,state,before,0);
+  const loads=[],readers=[],snapshotBytes=[],counted={...native,loadSelection(reader){loads.push(reader.version);readers.push(reader);const snapshot=native.loadSelection(reader);snapshotBytes.push(snapshot.metadataBytes);return snapshot;}};
+  const options={repo:f.repo,baseline:before,candidate:after,...state,code:[],baselineReceipt,lifecycle:[]};
+  const completed=acquireCandidateContinuousSources(counted,helper,options);
+  assert.deepEqual(loads,[after]);assert.equal(completed.receipts[0],baselineReceipt);
+  assert.deepEqual(Object.keys(completed).sort(),['closure','lifecycle','receipts','results']);
+  const {closure,receipts}=completed;
+  const independentlyLoaded=acquireContinuousSources(native,helper,{repo:f.repo,selected:after,names:closure.plan.source_paths.candidate,receipt:receipts[1],rows:closure.rows.candidate,inputs:closure.inputs.candidate,context:state.context,carriedBytes:2*valueBytes({closure,receipts}).length});
+  assert.deepEqual(completed.results.map(r=>r.features),independentlyLoaded.map(r=>r.features));
+  assert.deepEqual(completed.results.map(r=>r.inverse),independentlyLoaded.map(r=>r.inverse));
+  const oldClosure=reopenCompleteColdPlan(native,helper,{repo:f.repo,baseline:before,candidate:after,...state,receipts,carriedBytes:2*valueBytes({context:state.context,ack:state.ack,receipts}).length});
+  assert.deepEqual(closure.plan,oldClosure.plan);assert.deepEqual(closure.rows,oldClosure.rows);assert.deepEqual(closure.inputs,oldClosure.inputs);
+  assert(closure.complete_phase_bytes-oldClosure.complete_phase_bytes>=2*snapshotBytes[0],'complete candidate snapshot must be charged during both-certificate planning');
+  assert(completed.results[1].complete_phase_bytes>completed.results[0].complete_phase_bytes,'prior projection and growing inventory must remain charged');
+  assert.throws(()=>acquireCandidateContinuousSources(native,helper,{...options,candidate:before}),/Foreign cold certificate/);
+  assert.throws(()=>acquireCandidateContinuousSources(native,helper,{...options,baseline:after}),/baseline custody/);
+  const missing=structuredClone(state.ack);missing.pop();assert.throws(()=>acquireCandidateContinuousSources(native,helper,{...options,ack:missing}),/baseline custody/);
+  let sourceOpens=0;const original=native.SelectedGeometrySources.prototype.read;
+  native.SelectedGeometrySources.prototype.read=function(...args){sourceOpens++;return original.apply(this,args);};
+  try{
+   const lowBudget={...native,ImmutableReader:class extends native.ImmutableReader{constructor(...args){super(...args);this.allowance=Object.freeze({phaseBytes:1,rssBytes:this.allowance.rssBytes});}}};
+   assert.throws(()=>acquireCandidateContinuousSources(lowBudget,helper,options),/Installed runtime\/metadata/);assert.equal(sourceOpens,0);
+   const blockedPlan={...helper,selectedCertificateAffectedPlan(...args){const result=helper.selectedCertificateAffectedPlan(...args);readers.at(-1).allowance=Object.freeze({phaseBytes:1,rssBytes:readers.at(-1).allowance.rssBytes});return result;}};
+   assert.throws(()=>acquireCandidateContinuousSources(counted,blockedPlan,options),/Installed runtime\/metadata/);assert.equal(sourceOpens,0);
+   const rebound={...helper,selectedCertificateAffectedPlan(...args){const result=helper.selectedCertificateAffectedPlan(...args);readers.at(-1).version=before;return result;}};
+   assert.throws(()=>acquireCandidateContinuousSources(counted,rebound,options),/selected side removed or rebound/);assert.equal(sourceOpens,0);
+  }finally{native.SelectedGeometrySources.prototype.read=original;}
+  for(const alteration of ['whole-source','feature','geometry']){
+   const altered={...helper,selectedCertificateAffectedPlan(...args){return helper.selectedCertificateAffectedPlan(...args);}};
+   native.SelectedGeometrySources.prototype.read=function(...args){const result=original.apply(this,args);if(alteration==='whole-source')result.whole_sha256='0'.repeat(64);else if(alteration==='feature')result.collection.features[0].properties.forged=true;else result.collection.features[0].geometry.coordinates[0][1][0]+=0.125;return result;};
+   try{assert.throws(()=>acquireCandidateContinuousSources(native,altered,options),/Complete affected containing input|Whole affected source record inverse/);}finally{native.SelectedGeometrySources.prototype.read=original;}
+  }
+ }finally{f.cleanup();}
+});
+
+
+test('candidate frame releases its snapshot and resolver before independent baseline acquisition',()=>{
+ const f=fixture();try{
+  const {rect,install}=sourceSides(f),before=install(rect(0,1),rect(2,3),'before'),after=install(rect(0,2.5),rect(2,3),'after'),state=issueStages(f,before,after);
+  const code=`import assert from 'node:assert/strict';import * as n from ${JSON.stringify(path.join(f.repo,'scripts/check-effective-geographic-regression.mjs'))};import * as h from ${JSON.stringify(path.join(f.repo,P+'selected-neighbor-prevention.mjs'))};import {validatePersistedColdSide,acquireCandidateContinuousSources,acquireContinuousSources} from ${JSON.stringify(path.join(f.repo,P+'selected-continuous-entry.mjs'))};
+const [repo,before,after,stateJson]=process.argv.slice(2),state=JSON.parse(stateJson),context=state.context;
+const baselineReceipt=validatePersistedColdSide(n,h,{repo,selected:before,directory:state.stagePaths[0],ack:state.ack[0],context,carriedState:{context,code:[],ack:state.ack,receipts:[],lifecycle:[]}});
+let weakSnapshot,weakResolver;const counted={...n,loadSelection(reader){const snapshot=n.loadSelection(reader);weakSnapshot=new WeakRef(snapshot);weakResolver=new WeakRef(snapshot.geometrySources);return snapshot;}};
+const completed=acquireCandidateContinuousSources(counted,h,{repo,baseline:before,candidate:after,...state,code:[],baselineReceipt,lifecycle:[]});
+await new Promise(r=>setImmediate(r));for(let i=0;i<3;i++){globalThis.gc();await new Promise(r=>setImmediate(r));}
+assert.equal(weakSnapshot.deref(),undefined,'candidate frame retained selected snapshot');assert.equal(weakResolver.deref(),undefined,'candidate frame retained resolver');
+const {closure,receipts}=completed,results=acquireContinuousSources(n,h,{repo,selected:before,names:closure.plan.source_paths.baseline,receipt:receipts[0],rows:closure.rows.baseline,inputs:closure.inputs.baseline,context,carriedBytes:2*h.valueBytes(completed).length});
+assert.equal(results.length,1);assert.equal(completed.results.length,1);console.log('candidate snapshot/resolver collected before baseline acquisition; projections retained');`;
+  const file=path.join(f.repo,'candidate-frame-lifetime.mjs');fs.writeFileSync(file,code,{flag:'wx'});
+  const result=spawnSync(process.execPath,['--expose-gc',file,f.repo,before,after,JSON.stringify(state)],{encoding:'utf8'});assert.equal(result.status,0,result.stderr);assert.match(result.stdout,/candidate snapshot\/resolver collected before baseline acquisition/);
  }finally{f.cleanup();}
 });

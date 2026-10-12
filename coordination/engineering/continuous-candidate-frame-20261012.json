@@ -1,0 +1,51 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "continuous-candidate-frame-20261012",
+  "branch": "engineering/continuous-candidate-frame-20261012",
+  "base_main_commit": "7446e4bcf19825698f544a5fa2809b3a78f88a25",
+  "github_issue": 1763,
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Invocation-local candidate snapshot reuse in continuous selected validation",
+    "Complete phase carry, identity/source/operand refusals and bounded lifetime controls"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-12T03:02:47.218221+00:00",
+  "completed": [
+    "Entry-local bounded candidate frame implemented; original public helper APIs preserved",
+    "Focused lifecycle controls and actual-entry acquisition count assertions added"
+  ],
+  "checks": [
+    {
+      "command": "node --test --test-concurrency=1 test/selected-continuous-lifecycle.test.mjs",
+      "result": "passed",
+      "evidence": "coordination/engineering/continuous-candidate-frame-20261012/controls/focused.log"
+    },
+    {
+      "command": "node scripts/evidence-quality.mjs coordination/engineering/continuous-candidate-frame-20261012/evidence-quality.json",
+      "result": "bytes-verified; does not replace trusted hosted gate or independent review"
+    }
+  ],
+  "deployment": null,
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "coordination/engineering/continuous-candidate-frame-20261012/evidence-quality.json",
+    "coordination/engineering/continuous-candidate-frame-20261012/controls/focused.log",
+    "coordination/engineering/continuous-candidate-frame-20261012/controls/focused-process-group.json"
+  ],
+  "blockers": [],
+  "next_action": "Finish final-code controls, independent exact-head review and focused CI; admit at most one retained-input proof before claiming measured improvement.",
+  "pull_request": null,
+  "claim": {
+    "claim_id": "acb46624-5f02-4d96-b3cf-bdcebce0171a",
+    "request_id": "aef1893b-cedd-4d7d-b149-97daf8ed45c1",
+    "result_comment_id": 6116895642
+  },
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}
