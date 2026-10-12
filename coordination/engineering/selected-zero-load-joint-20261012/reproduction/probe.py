@@ -73,6 +73,27 @@ assert facts['continuous_publication'] == publication and facts['certificate'] =
 assert facts['candidate_code_executed'] is False and 'complete_cold_custody' not in facts
 native_core = {key:value for key,value in native.items() if key not in ['runtime', 'caller_runtime', 'execution_runtimes', 'execution_code_inventory']}
 assert facts['native_result_sha256'] == digest(canonical(native_core))
+# Preserve the already-consumed execution roots and complete archived routing
+# index by their actual immutable pins, without reacquiring any scientific body.
+custody_outputs = []
+def archive_pin(pin, name):
+    assert pin.get('whole_body_consumed') is True
+    raw = subprocess.check_output(['git', 'cat-file', 'blob', pin['git_blob_oid']])
+    assert len(raw) == pin['bytes'] and digest(raw) == pin['sha256']
+    (OUTPUT/name).write_bytes(raw)
+    custody_outputs.append({'path':name, 'bytes':len(raw), 'sha256':digest(raw), 'original_pin':pin})
+    return json.loads(raw)
+policy_pin, catalogue_pin = facts['executing_authority_pins']
+assert policy_pin['path'].endswith('/supported-programs.json') and catalogue_pin['path'].endswith('/accepted-checkpoints.json')
+archive_pin(policy_pin, 'executing-policy.json')
+catalogue = archive_pin(catalogue_pin, 'executing-checkpoints.json')
+roots = [root for root in catalogue['checkpoints'] if root['id'] == facts['baseline_accepted_execution']['checkpoint_id']]
+assert len(roots) == 1
+route = roots[0]['routes']
+actual_routes = [pin for pin in facts['actual_reader_inventories']['baseline'] if pin['path'] == route['path'] and pin['git_blob_oid'] == route['git_blob_oid']]
+assert len(actual_routes) == 1
+archive_pin(actual_routes[0], 'accepted-baseline-routes.json')
+(OUTPUT/'archived-custody-publication.json').write_bytes(canonical({'version':1, 'kind':'retained-actual-execution-authority-v1', 'files':custody_outputs}))
 counts = {}
 for coverage in (OUTPUT/'coverage').glob('*.json'):
     for script in json.loads(coverage.read_bytes())['result']:

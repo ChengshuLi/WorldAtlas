@@ -113,3 +113,12 @@ that one route, applicability checks that every complete archived programme and
 rebind migration survives unchanged in the current trusted policy. Missing or
 altered eligibility declines. Candidate policy does not provide authority, and
 all adjacent source/native present/absent aliases retain their exact comparison.
+
+Final derived facts also preserve the actual baseline/candidate reader inventory
+maps, including consumed archive/producer child inputs, and exact consumed
+executing policy/catalogue pins. No extra metadata read is needed in the joint
+path. The archival probe verifies the native-report hash by removing only the
+four documented outer runtime/code decorations, then retains the actual consumed
+policy/catalogue and original complete route index by their immutable pins.
+Automatic hosted retention/accepted-artifact advancement remains a separate
+explicit follow-on; this one proof preserves the current AUS seed.
