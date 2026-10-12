@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/research/geography/norway31-source-fit-20261011/tools/restore_physical.py", line 86, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/c540a1760c6f0ab5be912b38244d13fcb47b352971ade2b20bfeb54b88a1131c/work/research/geography/norway31-source-fit-20261011/tools/restore_physical.py", line 59, in main
+    if set(features)!=needed:raise ValueError('Incomplete full inverse candidate closure')
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Incomplete full inverse candidate closure

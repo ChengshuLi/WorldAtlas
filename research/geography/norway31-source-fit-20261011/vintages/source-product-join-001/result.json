@@ -1,0 +1,910 @@
+{
+  "execution_commit": "f3c8ecddff787f33e2b07de1fa36f4365abfc9df",
+  "inputs": [
+    {
+      "commit": "f3c8ecddff787f33e2b07de1fa36f4365abfc9df",
+      "path": "research/geography/norway31-source-fit-20261011/tools/check_source_product_join.mjs",
+      "bytes": 3766,
+      "sha256": "c9566e155cbeccd4e6f95bac062256d2b77ae4b41cfa77ea0c3108ee3ee22606"
+    },
+    {
+      "commit": "f3c8ecddff787f33e2b07de1fa36f4365abfc9df",
+      "path": "src/effective-footprint.js",
+      "bytes": 45330,
+      "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+    },
+    {
+      "commit": "f3c8ecddff787f33e2b07de1fa36f4365abfc9df",
+      "path": "scripts/additive-gap-repair.mjs",
+      "bytes": 184937,
+      "sha256": "c5cd30d32b15a461a186074a1704a64f8895e33199c34d982af0e97bf0615895"
+    },
+    {
+      "commit": "f3c8ecddff787f33e2b07de1fa36f4365abfc9df",
+      "path": "research/geography/norway31-source-fit-20261011/vintages/nor31-original-classification-001/original-comparison-rows.json",
+      "bytes": 156213,
+      "sha256": "51fc104cb7d1cd65e99040998acd463a5ee20b4b7f76586c7ead5f40ec0723b6"
+    },
+    {
+      "commit": "f3c8ecddff787f33e2b07de1fa36f4365abfc9df",
+      "path": "research/geography/norway31-source-fit-20261011/sources/administrative/gb-NOR-ADM2-consumed-simplified.geojson",
+      "bytes": 4724258,
+      "sha256": "ab294b0b1dadfb937daa07963aa5995544fd8a16a6c9eb6261a82bb66401d90e"
+    }
+  ],
+  "rows": [
+    {
+      "component_id": "physical-component:02503ad88ce4a8ba68be7b197491e3610b557016bdca2b3ae5692514603930a6",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 385,
+            "feature_sha256": "e5d83c75fc1ea3ea5b1af0b179029f8a84ca8735773676f73374c42540719ff4",
+            "geometry_sha256": "b2909d58fff04c03abf9a52c68406fed504e023abf7b25116cc393b88e1bcce4",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B92584171254866",
+                "original_feature_sha256": "c80c5804a66afc8fdaf344a74827d06a807915fbf0a06951b6a08a37223ac03f",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B92584171254866",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "e5d83c75fc1ea3ea5b1af0b179029f8a84ca8735773676f73374c42540719ff4",
+            "geometry_sha256": "b2909d58fff04c03abf9a52c68406fed504e023abf7b25116cc393b88e1bcce4"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:03ac6ae7206cd8b5ab4379505067d8bda444a1513146d69434a519522cc32b19",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 14,
+            "feature_sha256": "89935ae15b13115225471847f79be9f67f404059f85c1b76c60b9af920a5f2a2",
+            "geometry_sha256": "7db82a6741674e5af9f3f33ac3bb55eb0b6cdd3eaa838628a9aa448964eed2bd",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B40106717450016",
+                "original_feature_sha256": "c0c4392f191cea2121da238bdbffbe41463e779edf433ca0956c75407b58c9fd",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B40106717450016",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "89935ae15b13115225471847f79be9f67f404059f85c1b76c60b9af920a5f2a2",
+            "geometry_sha256": "7db82a6741674e5af9f3f33ac3bb55eb0b6cdd3eaa838628a9aa448964eed2bd"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:040b81866ed44166ca5c08cebe436417e629b5eba0a263d9531288fc6416832d",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 11,
+            "feature_sha256": "1ed098443ea869679ffdcf3faf69fdedc5598af11b860bee10fe536f032022c3",
+            "geometry_sha256": "7b8a46c22bd6972b7b91adcefb3791c188dc8ddead279d2b6080bd1ba3ad2a34",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B28845238871652",
+                "original_feature_sha256": "7f361359bd78a24bc4d358279287447e7627f3d375f0ab16b759fd70336fd287",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B28845238871652",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "1ed098443ea869679ffdcf3faf69fdedc5598af11b860bee10fe536f032022c3",
+            "geometry_sha256": "7b8a46c22bd6972b7b91adcefb3791c188dc8ddead279d2b6080bd1ba3ad2a34"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:20314a1f10831597e31b841d5ab43b93e8b4fc2b99960ca8c1cc8b1bba85d06f",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 415,
+            "feature_sha256": "a7560bab245a0e305ecae18aec7801ed66353a712cd75386bf5623a5396412a2",
+            "geometry_sha256": "e76fa9e8848a89e49362c6eab1d6025cbc564e5ca3138484a7fb48539f6a3ee6",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B98224162040661",
+                "original_feature_sha256": "c5bada201306006faa9d8db1831147f9f63f80d10c0f7b7b27bedeb2e7f0a3ca",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B98224162040661",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "a7560bab245a0e305ecae18aec7801ed66353a712cd75386bf5623a5396412a2",
+            "geometry_sha256": "e76fa9e8848a89e49362c6eab1d6025cbc564e5ca3138484a7fb48539f6a3ee6"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:270b5cc144fffa3af15d9538ecbb8665d52f98965fa9a61cb5be4b20a8c7243d",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 238,
+            "feature_sha256": "11028b63b860296fa0fd2a88935319fbea02c0c4763582ec7be04a3cbc6a7863",
+            "geometry_sha256": "af9928a134aabd832d26db72731af39c9aeb83e7f87c68fa2ff0a14ad97a1a40",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B24070411232655",
+                "original_feature_sha256": "b0ec9ea184e9fce0ec6b0f25848cfcec2f66bfd6ef8feccfdd2ede4d3ae5f533",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B24070411232655",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "11028b63b860296fa0fd2a88935319fbea02c0c4763582ec7be04a3cbc6a7863",
+            "geometry_sha256": "af9928a134aabd832d26db72731af39c9aeb83e7f87c68fa2ff0a14ad97a1a40"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:375e55e26bfc017ffc1cc2966705822a4577dc94b3cb02f3d30803ccd34b2b5a",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 13,
+            "feature_sha256": "08c320acdcd4ae79d04d1df458cf972eee060b4099eb2ef6e7d2942b7d3b203d",
+            "geometry_sha256": "300d421bd89afaaf3c2704bd3e13410fb1a58854b88b6609e84dd578e159d28e",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B61529177731516",
+                "original_feature_sha256": "cc7987964138bd1c18a949d98ab329dd777897540a5f94b23b27812cf11001a4",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B61529177731516",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "08c320acdcd4ae79d04d1df458cf972eee060b4099eb2ef6e7d2942b7d3b203d",
+            "geometry_sha256": "300d421bd89afaaf3c2704bd3e13410fb1a58854b88b6609e84dd578e159d28e"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:3f1a462840f8fc7b9baff21c776d48f747f67ec7a71b4319218f2cf6c7aa5c50",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 15,
+            "feature_sha256": "12de169107e6ad007a4b7d65d160857defb7f91007ef6b085cb7ff29b6008de7",
+            "geometry_sha256": "82282bff9a25f6a73995c2ab94535e80114e9489d15699c2599e35fd3800357e",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B39619690303479",
+                "original_feature_sha256": "120143fd64843aee9b577105f76ee288bed99212c8f3038be545127dbf09adab",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B39619690303479",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "12de169107e6ad007a4b7d65d160857defb7f91007ef6b085cb7ff29b6008de7",
+            "geometry_sha256": "82282bff9a25f6a73995c2ab94535e80114e9489d15699c2599e35fd3800357e"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:4081abe76b91d1659f15dc3acc3345ebe5f244538d434535010aa65731b6a7bb",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 16,
+            "feature_sha256": "b885b56f6d462dcb4c52e1e1ef0ea572dc47d1029723d06074b6449575aeab2d",
+            "geometry_sha256": "9f3a97aca9345fb18ca8a0036b7632c2a2bbffe117570365820dc7a44ef6b53f",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B12055584821312",
+                "original_feature_sha256": "bcfeaa942ee41dc567a13c82283714700b32ae664bdf7f234d7b0499f8690056",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B12055584821312",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "b885b56f6d462dcb4c52e1e1ef0ea572dc47d1029723d06074b6449575aeab2d",
+            "geometry_sha256": "9f3a97aca9345fb18ca8a0036b7632c2a2bbffe117570365820dc7a44ef6b53f"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:43d1d39fd50e54e8dcda3f70ec1eece46918fb1a987e4acc3c0d5bd811b3fa4f",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 16,
+            "feature_sha256": "b885b56f6d462dcb4c52e1e1ef0ea572dc47d1029723d06074b6449575aeab2d",
+            "geometry_sha256": "9f3a97aca9345fb18ca8a0036b7632c2a2bbffe117570365820dc7a44ef6b53f",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B12055584821312",
+                "original_feature_sha256": "bcfeaa942ee41dc567a13c82283714700b32ae664bdf7f234d7b0499f8690056",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B12055584821312",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "b885b56f6d462dcb4c52e1e1ef0ea572dc47d1029723d06074b6449575aeab2d",
+            "geometry_sha256": "9f3a97aca9345fb18ca8a0036b7632c2a2bbffe117570365820dc7a44ef6b53f"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:460d3a728fdb443a33d47749701ee293777149845d461831ada31b0df73530b7",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 421,
+            "feature_sha256": "9caff67fb8bae39046dd97efd428fd6fa60753fc916a63af154f631b4644b1ed",
+            "geometry_sha256": "8706ab64ef99ed2cbecb4a2bc1789f65da2355772004a44ae8a20ffb84ccc618",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B48399951224278",
+                "original_feature_sha256": "c23577d79b10961399cfcb9d4172d5c62fb61a8ba08eccad62a1184c494aec4a",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B48399951224278",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "9caff67fb8bae39046dd97efd428fd6fa60753fc916a63af154f631b4644b1ed",
+            "geometry_sha256": "8706ab64ef99ed2cbecb4a2bc1789f65da2355772004a44ae8a20ffb84ccc618"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:46e0f6b1de7155d2722cac7669ae89b1f8bda954c298884f5dc239ac5237de8a",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 158,
+            "feature_sha256": "1b80a255bdd5544cb311ec9e31705b651e7c9315ee8c9b1a5ce8dfe767f33be1",
+            "geometry_sha256": "5a4361934f3751e403eb889015cec7411d5979d941ad26ea43633d795300ce0d",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B43880270832618",
+                "original_feature_sha256": "92b7c431626a624bf4504501a675e3ddd3e512f942a6d5c28b7cf2af2a0ca4b1",
+                "original_parent_id": "framework:province:trndelag:0abd0d542177",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B43880270832618",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "1b80a255bdd5544cb311ec9e31705b651e7c9315ee8c9b1a5ce8dfe767f33be1",
+            "geometry_sha256": "5a4361934f3751e403eb889015cec7411d5979d941ad26ea43633d795300ce0d"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:4ad46689db771c990a36f19cc00ceba2b6a856f3a0da4d4b47c024e9b69d4dea",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 13,
+            "feature_sha256": "08c320acdcd4ae79d04d1df458cf972eee060b4099eb2ef6e7d2942b7d3b203d",
+            "geometry_sha256": "300d421bd89afaaf3c2704bd3e13410fb1a58854b88b6609e84dd578e159d28e",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B61529177731516",
+                "original_feature_sha256": "cc7987964138bd1c18a949d98ab329dd777897540a5f94b23b27812cf11001a4",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B61529177731516",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "08c320acdcd4ae79d04d1df458cf972eee060b4099eb2ef6e7d2942b7d3b203d",
+            "geometry_sha256": "300d421bd89afaaf3c2704bd3e13410fb1a58854b88b6609e84dd578e159d28e"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:51621e475e003e83e6b23203827a0b255ec5f7b4fe4af550148fb486c36695ca",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 173,
+            "feature_sha256": "3ab379d58d226752b58aff62fafbd768e0a55349c72d7b31e49a73cd7da7c699",
+            "geometry_sha256": "7dc3690a4f77455d405d8b2bd32bfaaa747cbd4934de3c983f2019e7a96acb10",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B46732094957179",
+                "original_feature_sha256": "2ea3f84295050e6ff0f6a3af40872efee6bfc898718a7b0828bdd202fc8bd24b",
+                "original_parent_id": "framework:province:mre-og-romsdal:c1ad2f2985f8",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B46732094957179",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "3ab379d58d226752b58aff62fafbd768e0a55349c72d7b31e49a73cd7da7c699",
+            "geometry_sha256": "7dc3690a4f77455d405d8b2bd32bfaaa747cbd4934de3c983f2019e7a96acb10"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:53a483cd884d8485caa8b0407d5f502cd4e04dffffb764644c36f7ffcfb8464a",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 386,
+            "feature_sha256": "20e1a3873dad00526b8e4d3b3c07b5e54d5434fecafcc55daff1e3c09eab9c92",
+            "geometry_sha256": "145cfe84af9845da58fd771f15dd87442074856900147f6c907d13b1f42cebf2",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B75737452629522",
+                "original_feature_sha256": "e6a2a0104153ba5a21dd9bdcd62f6cc44c7b94042330308e3cc41044ae47189b",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B75737452629522",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "20e1a3873dad00526b8e4d3b3c07b5e54d5434fecafcc55daff1e3c09eab9c92",
+            "geometry_sha256": "145cfe84af9845da58fd771f15dd87442074856900147f6c907d13b1f42cebf2"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:637dcec04c36985cb0f74b8b90c2643c1275f038639aa297a1ae53d05241e279",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 13,
+            "feature_sha256": "08c320acdcd4ae79d04d1df458cf972eee060b4099eb2ef6e7d2942b7d3b203d",
+            "geometry_sha256": "300d421bd89afaaf3c2704bd3e13410fb1a58854b88b6609e84dd578e159d28e",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B61529177731516",
+                "original_feature_sha256": "cc7987964138bd1c18a949d98ab329dd777897540a5f94b23b27812cf11001a4",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B61529177731516",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "08c320acdcd4ae79d04d1df458cf972eee060b4099eb2ef6e7d2942b7d3b203d",
+            "geometry_sha256": "300d421bd89afaaf3c2704bd3e13410fb1a58854b88b6609e84dd578e159d28e"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:64171b5abfce1a9bc1fd39092e8fc94edc3ed571216ab9a1be5d89550c3c139e",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 261,
+            "feature_sha256": "649f6d7fff4290f4d7ff5f02208466739fbb3d10689574fa86cae8ac1e24abb0",
+            "geometry_sha256": "9beb0cdfacaa92786b71cd487073c84cf525795082b0c60c0fcf06208f46ce9d",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B50454164159248",
+                "original_feature_sha256": "d96605c356d1a3811bf3444a8c9d19c72c40bad7febd66738b1bb48cb062997c",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B50454164159248",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "649f6d7fff4290f4d7ff5f02208466739fbb3d10689574fa86cae8ac1e24abb0",
+            "geometry_sha256": "9beb0cdfacaa92786b71cd487073c84cf525795082b0c60c0fcf06208f46ce9d"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:672f627ebc78de7674588907b30608503591f86e95e193142b800e547d18b377",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 386,
+            "feature_sha256": "20e1a3873dad00526b8e4d3b3c07b5e54d5434fecafcc55daff1e3c09eab9c92",
+            "geometry_sha256": "145cfe84af9845da58fd771f15dd87442074856900147f6c907d13b1f42cebf2",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B75737452629522",
+                "original_feature_sha256": "e6a2a0104153ba5a21dd9bdcd62f6cc44c7b94042330308e3cc41044ae47189b",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B75737452629522",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "20e1a3873dad00526b8e4d3b3c07b5e54d5434fecafcc55daff1e3c09eab9c92",
+            "geometry_sha256": "145cfe84af9845da58fd771f15dd87442074856900147f6c907d13b1f42cebf2"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:7e72874be89ff9107dc87c86aafe0ee2cfc7430e5a9f1688bdf556b2b284ef3b",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 15,
+            "feature_sha256": "12de169107e6ad007a4b7d65d160857defb7f91007ef6b085cb7ff29b6008de7",
+            "geometry_sha256": "82282bff9a25f6a73995c2ab94535e80114e9489d15699c2599e35fd3800357e",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B39619690303479",
+                "original_feature_sha256": "120143fd64843aee9b577105f76ee288bed99212c8f3038be545127dbf09adab",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B39619690303479",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "12de169107e6ad007a4b7d65d160857defb7f91007ef6b085cb7ff29b6008de7",
+            "geometry_sha256": "82282bff9a25f6a73995c2ab94535e80114e9489d15699c2599e35fd3800357e"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:8276ef5ecbc96485527b4ea6440b4767884c1b3df442c8c194b0ba2edae4315c",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 238,
+            "feature_sha256": "11028b63b860296fa0fd2a88935319fbea02c0c4763582ec7be04a3cbc6a7863",
+            "geometry_sha256": "af9928a134aabd832d26db72731af39c9aeb83e7f87c68fa2ff0a14ad97a1a40",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B24070411232655",
+                "original_feature_sha256": "b0ec9ea184e9fce0ec6b0f25848cfcec2f66bfd6ef8feccfdd2ede4d3ae5f533",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B24070411232655",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "11028b63b860296fa0fd2a88935319fbea02c0c4763582ec7be04a3cbc6a7863",
+            "geometry_sha256": "af9928a134aabd832d26db72731af39c9aeb83e7f87c68fa2ff0a14ad97a1a40"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:8c215cb7795d2616a7743a89e09a4f26fb1cd590fa6101e204348a4cf55212af",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 415,
+            "feature_sha256": "a7560bab245a0e305ecae18aec7801ed66353a712cd75386bf5623a5396412a2",
+            "geometry_sha256": "e76fa9e8848a89e49362c6eab1d6025cbc564e5ca3138484a7fb48539f6a3ee6",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B98224162040661",
+                "original_feature_sha256": "c5bada201306006faa9d8db1831147f9f63f80d10c0f7b7b27bedeb2e7f0a3ca",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B98224162040661",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "a7560bab245a0e305ecae18aec7801ed66353a712cd75386bf5623a5396412a2",
+            "geometry_sha256": "e76fa9e8848a89e49362c6eab1d6025cbc564e5ca3138484a7fb48539f6a3ee6"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:9870535a638523dd87ea5eaf44ab2f0db3d12cba27db6c31a33773e669cf4215",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 70,
+            "feature_sha256": "01ba1f5cc8d3d21da944ff022db190f6633c4317c97f33dc69b036cea52e3343",
+            "geometry_sha256": "fcdab5f570a14a6c19f68d95631f9559d8e776cfba09b0b52979139dbc04bdfc",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B81169350398117",
+                "original_feature_sha256": "272f26a5db8e054cd2ce04e67ef4a9b30659e53c0bd4c537e2c15c88d02160ef",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B81169350398117",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "01ba1f5cc8d3d21da944ff022db190f6633c4317c97f33dc69b036cea52e3343",
+            "geometry_sha256": "fcdab5f570a14a6c19f68d95631f9559d8e776cfba09b0b52979139dbc04bdfc"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:990ff8dc7d906a734266e2a3ea0151bd77b5ed700b6c4ab1e45da915cc4f9dee",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 386,
+            "feature_sha256": "20e1a3873dad00526b8e4d3b3c07b5e54d5434fecafcc55daff1e3c09eab9c92",
+            "geometry_sha256": "145cfe84af9845da58fd771f15dd87442074856900147f6c907d13b1f42cebf2",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B75737452629522",
+                "original_feature_sha256": "e6a2a0104153ba5a21dd9bdcd62f6cc44c7b94042330308e3cc41044ae47189b",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B75737452629522",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "20e1a3873dad00526b8e4d3b3c07b5e54d5434fecafcc55daff1e3c09eab9c92",
+            "geometry_sha256": "145cfe84af9845da58fd771f15dd87442074856900147f6c907d13b1f42cebf2"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:a9d29e29f262e4fcb640f56b9c571c13ed7b0b41c21d9a591e3c18a4f2ce46c7",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 261,
+            "feature_sha256": "649f6d7fff4290f4d7ff5f02208466739fbb3d10689574fa86cae8ac1e24abb0",
+            "geometry_sha256": "9beb0cdfacaa92786b71cd487073c84cf525795082b0c60c0fcf06208f46ce9d",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B50454164159248",
+                "original_feature_sha256": "d96605c356d1a3811bf3444a8c9d19c72c40bad7febd66738b1bb48cb062997c",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B50454164159248",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "649f6d7fff4290f4d7ff5f02208466739fbb3d10689574fa86cae8ac1e24abb0",
+            "geometry_sha256": "9beb0cdfacaa92786b71cd487073c84cf525795082b0c60c0fcf06208f46ce9d"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:abb4663da9c0480823953d8c8cccfe6d324a15bb1a92566503a85f4c7a79c4f6",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 127,
+            "feature_sha256": "2c8007b75a2231f78100223b58baeb6da9db68e747197e385175cc408cb769d1",
+            "geometry_sha256": "367c04e27560ed8202cc27134322692cc657cfec1532bfe961b276a6b4534681",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B25142202859534",
+                "original_feature_sha256": "94f2b0646ec2c6c55b8215e6379e5076875ecc41e83bd1ec3b5287b33e91e479",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B25142202859534",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "2c8007b75a2231f78100223b58baeb6da9db68e747197e385175cc408cb769d1",
+            "geometry_sha256": "367c04e27560ed8202cc27134322692cc657cfec1532bfe961b276a6b4534681"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:c1d5e49737e17af6a5a2dcbc5467b7d3bad9d895115dbb7ef374ef76295c8e4d",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 1,
+            "feature_sha256": "3c9aca28c25083f427f96628153bea79d80da8b3edb55786038e06a1ba97301c",
+            "geometry_sha256": "be4aeae00f67da78eb515f9238683f78da4ec58eeff23aeeaf48672242796746",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B40278854732862",
+                "original_feature_sha256": "41932d274b420a80f6e4beaba43dfc97db0c569061b3309df3e1f02ae2078fce",
+                "original_parent_id": "framework:province:trndelag:0abd0d542177",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B40278854732862",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "3c9aca28c25083f427f96628153bea79d80da8b3edb55786038e06a1ba97301c",
+            "geometry_sha256": "be4aeae00f67da78eb515f9238683f78da4ec58eeff23aeeaf48672242796746"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:cb03679e20a514e86009ca5a936e6ec74b22fc6f2266028555870124ed23d47f",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 15,
+            "feature_sha256": "12de169107e6ad007a4b7d65d160857defb7f91007ef6b085cb7ff29b6008de7",
+            "geometry_sha256": "82282bff9a25f6a73995c2ab94535e80114e9489d15699c2599e35fd3800357e",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B39619690303479",
+                "original_feature_sha256": "120143fd64843aee9b577105f76ee288bed99212c8f3038be545127dbf09adab",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B39619690303479",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "12de169107e6ad007a4b7d65d160857defb7f91007ef6b085cb7ff29b6008de7",
+            "geometry_sha256": "82282bff9a25f6a73995c2ab94535e80114e9489d15699c2599e35fd3800357e"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:d122c9b2ee9a4c78f9355a0b2cd76f00e0ca427da739759d68e4aa86e87267a9",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 70,
+            "feature_sha256": "01ba1f5cc8d3d21da944ff022db190f6633c4317c97f33dc69b036cea52e3343",
+            "geometry_sha256": "fcdab5f570a14a6c19f68d95631f9559d8e776cfba09b0b52979139dbc04bdfc",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B81169350398117",
+                "original_feature_sha256": "272f26a5db8e054cd2ce04e67ef4a9b30659e53c0bd4c537e2c15c88d02160ef",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B81169350398117",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "01ba1f5cc8d3d21da944ff022db190f6633c4317c97f33dc69b036cea52e3343",
+            "geometry_sha256": "fcdab5f570a14a6c19f68d95631f9559d8e776cfba09b0b52979139dbc04bdfc"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:d183bad00349d708a7d8ff8a052555c6a944b82ec9dd05eaca6469001556c6c7",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 249,
+            "feature_sha256": "bf633c2e1693054716292bf98512c18e3d5d3f192f35cd6523c7628d4044ed45",
+            "geometry_sha256": "5b06ae75518724e01c1ed34686ed836da39e6884eecb3a6328e550e070cf3d82",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B81438149454650",
+                "original_feature_sha256": "f1d76ef72273ddb2670515d985942efddddb0b570089dbc370fd15dad8f335b6",
+                "original_parent_id": "framework:province:trndelag:0abd0d542177",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B81438149454650",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "bf633c2e1693054716292bf98512c18e3d5d3f192f35cd6523c7628d4044ed45",
+            "geometry_sha256": "5b06ae75518724e01c1ed34686ed836da39e6884eecb3a6328e550e070cf3d82"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:dcd32a8588db0f27d571bbbd99d33c80ae6b8e9e7dad89458f22c1a4af03c699",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 238,
+            "feature_sha256": "11028b63b860296fa0fd2a88935319fbea02c0c4763582ec7be04a3cbc6a7863",
+            "geometry_sha256": "af9928a134aabd832d26db72731af39c9aeb83e7f87c68fa2ff0a14ad97a1a40",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B24070411232655",
+                "original_feature_sha256": "b0ec9ea184e9fce0ec6b0f25848cfcec2f66bfd6ef8feccfdd2ede4d3ae5f533",
+                "original_parent_id": "framework:province:troms-og-finnmark:38859f82963b",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B24070411232655",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "11028b63b860296fa0fd2a88935319fbea02c0c4763582ec7be04a3cbc6a7863",
+            "geometry_sha256": "af9928a134aabd832d26db72731af39c9aeb83e7f87c68fa2ff0a14ad97a1a40"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:df2cf8877fd9e127728b71547dd7d87368ba90db73d5484a0ad321446275551d",
+      "source_product_compatible": true,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 397,
+            "feature_sha256": "021167bb9888f489e21b9e7761fca9aa48c29127494542ecbe4f2fe843b4dd3c",
+            "geometry_sha256": "8be1436b84c8ed20e69fbaa4b3f000b67158ee94cd4d1c643c1f3f337809a284",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B80976394887598",
+                "original_feature_sha256": "1680532fa08ab894825fd8234bc1b774ec53c133ac07734c3166b0a74be98bbd",
+                "original_parent_id": "framework:province:trndelag:0abd0d542177",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B80976394887598",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "021167bb9888f489e21b9e7761fca9aa48c29127494542ecbe4f2fe843b4dd3c",
+            "geometry_sha256": "8be1436b84c8ed20e69fbaa4b3f000b67158ee94cd4d1c643c1f3f337809a284"
+          }
+        }
+      ]
+    },
+    {
+      "component_id": "physical-component:fd74f968ce9574878d1555b5a76881c363e71ccef85efd01aa0d570cca1edf33",
+      "source_product_compatible": false,
+      "bindings": [
+        {
+          "original": {
+            "feature_index": 128,
+            "feature_sha256": "db4fcd8531dc5931884db4d0657fdec34db43aae6fa4d6869b7b957bda0a2d27",
+            "geometry_sha256": "3bc1da72053faad31bc2b427ca756e7ead13839beaadfc78bcfffe4162e215ef",
+            "recorded_stable_subjects": [
+              {
+                "id": "gb:NOR:ADM2:86288312B32212303283583",
+                "original_feature_sha256": "18fcc3eca4be08ef01e9171c41a4cb5c89f7d0884ea9114920d7399300031b17",
+                "original_parent_id": "framework:province:trndelag:0abd0d542177",
+                "reference_year": "2013"
+              }
+            ],
+            "shapeID": "86288312B32212303283583",
+            "source_id": "gb:NOR:ADM2",
+            "valid_polygon": true
+          },
+          "actual_indexed_hashes": {
+            "feature_sha256": "f126d30b354be1c467eb171860e8e5a1469ce22b0aedaabae538bd0ab6e1012a",
+            "geometry_sha256": "2e5e7694a43e2226312160ed02c65f735ec442a121b94ba217e80f84347fb155"
+          }
+        }
+      ]
+    }
+  ],
+  "compatible_count": 30,
+  "limits": [
+    "Original whole-source product join only; no geometry operation or full SOURCE qualification.",
+    "Original Python hashes remain unchanged; incompatible JavaScript serialization is an explicit hold."
+  ]
+}
