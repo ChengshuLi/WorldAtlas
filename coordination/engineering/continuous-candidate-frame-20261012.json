@@ -11,10 +11,12 @@
     "Complete phase carry, identity/source/operand refusals and bounded lifetime controls"
   ],
   "dependencies": [],
-  "updated_at_utc": "2026-10-12T03:02:47.218221+00:00",
+  "updated_at_utc": "2026-10-12T03:18:08.249865+00:00",
   "completed": [
     "Entry-local bounded candidate frame implemented; original public helper APIs preserved",
-    "Focused lifecycle controls and actual-entry acquisition count assertions added"
+    "Focused lifecycle controls and actual-entry acquisition count assertions added",
+    "One admitted historical-input proof emitted byte-identical complete encoded/decoded operands; prior strict-polygon result reused without rerun",
+    "Exact new audited routing reader profile added; prior profiles preserved"
   ],
   "checks": [
     {
@@ -25,6 +27,16 @@
     {
       "command": "node scripts/evidence-quality.mjs coordination/engineering/continuous-candidate-frame-20261012/evidence-quality.json",
       "result": "bytes-verified; does not replace trusted hosted gate or independent review"
+    },
+    {
+      "command": "node --test --test-concurrency=1 test/unchanged-selected-geography.test.mjs",
+      "result": "passed",
+      "evidence": "coordination/engineering/continuous-candidate-frame-20261012/controls/routing.log"
+    },
+    {
+      "command": "Retained exact Node continuous invocation at 1933d49ce3840d0d10bd76ba30e1d849e56c5233",
+      "result": "passed with byte-identical complete operands; historical timing comparison only",
+      "evidence": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/comparison.json"
     }
   ],
   "deployment": null,
@@ -36,11 +48,13 @@
   "evidence_paths": [
     "coordination/engineering/continuous-candidate-frame-20261012/evidence-quality.json",
     "coordination/engineering/continuous-candidate-frame-20261012/controls/focused.log",
-    "coordination/engineering/continuous-candidate-frame-20261012/controls/focused-process-group.json"
+    "coordination/engineering/continuous-candidate-frame-20261012/controls/focused-process-group.json",
+    "coordination/engineering/continuous-candidate-frame-20261012/controls/routing.log",
+    "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/comparison.json"
   ],
   "blockers": [],
-  "next_action": "Finish final-code controls, independent exact-head review and focused CI; admit at most one retained-input proof before claiming measured improvement.",
-  "pull_request": null,
+  "next_action": "Obtain final exact-head review and applicable CI, submit normal serialized merge, verify actual integration, then reconcile issue and release reservation.",
+  "pull_request": 1764,
   "claim": {
     "claim_id": "acb46624-5f02-4d96-b3cf-bdcebce0171a",
     "request_id": "aef1893b-cedd-4d7d-b149-97daf8ed45c1",

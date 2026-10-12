@@ -47,4 +47,23 @@ custody accounting in those shared scientific bodies, a supported-program migrat
 and a changed parent native-GC launch/lifecycle contract. This patch preserves those
 boundaries rather than silently omitting their live state.
 
-No corrected hosted speedup or geographic result is claimed by this initial patch.
+## Retained real-input proof
+
+The retained proof uses the actual frozen code checkout at `1933d49ce3840d0d10bd76ba30e1d849e56c5233`
+and explicitly distinct historical selected baseline/candidate commits. Its complete
+encoded and decoded operand hashes and lengths exactly match the retained genuine
+comparison. The original strict-polygon result is reused, not relabelled as a fresh
+scientific execution. See `retained-proof-001/comparison.json`, actual child stage
+clocks, complete publications and sampled process-group observations.
+
+The corrected local run is shorter than the retained historical Node run, but these
+are separate executions rather than a controlled concurrent benchmark. No hosted
+saving is claimed. Current sampled aggregate RSS and the historical single-process
+maximum measure different things and must not be compared as a memory reduction.
+
+The independently reviewed routing collector also needs this exact new reader hash
+in `AUDITED_READERS`; earlier audited hashes are preserved. The new frame adds no
+input route. Omitting this coupled update would force later source-only checks back
+onto the full geography path. A possible future cheap preflight could flag changed
+audited-reader hashes for explicit review, but must never automatically approve an
+unknown input route. No new preflight framework is introduced here.

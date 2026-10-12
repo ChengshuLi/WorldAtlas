@@ -19,6 +19,24 @@
         "bytes": 90000,
         "sha256": "9991597747f5be6480605d58c4e079a36302b02e112362b49bac62bcafb95691",
         "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/corrected-continuous-002/continuous.json",
+        "bytes": 377504,
+        "sha256": "c155745caec52604d73dca515ea3a22446014162ce1830b566925c125391b07f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/corrected-continuous-002/summary.json",
+        "bytes": 1051,
+        "sha256": "8c82615377cefbd8d111815dfa90d57a66fe807b7c4505fabd263a53ff6e1063",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/corrected-continuous-002/continuous.stderr.log",
+        "bytes": 29951,
+        "sha256": "f6d96ffacddcca54ed4f70cb6759f664d30853f6274b29e7eb238e9bf232381b",
+        "hash_kind": "file-bytes"
       }
     ],
     "pins": {},
@@ -38,18 +56,177 @@
       "bytes": 19738,
       "sha256": "8f76d2337c946d0d13ce0e04772766a19b971fc5be18e4d293b4627661004830",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/controls/routing-process-group.json",
+      "bytes": 294,
+      "sha256": "8fa36f289f8b74e4ff6deac138d5f18dbde22b4ef644d1a7e9314d4958174c97",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/controls/routing.log",
+      "bytes": 1740,
+      "sha256": "e6d883892a1563fc8c848f655460c498f1189c3c669f8cdaf6aa932f9d320e2e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/admission.json",
+      "bytes": 1476,
+      "sha256": "a101ba122bdae3b96e22aa48b45d601b02586ec931e201d68a26175a77335e07",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/comparison.json",
+      "bytes": 4190,
+      "sha256": "d2519e56e58fb561a52f6c3eb1b6a791eb74a6b42dd2e8d0e61df185dfedd184",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/complete/baseline/certificate.json.gz",
+      "bytes": 7515255,
+      "sha256": "e1a07b5d87561f115eec4660a4a914c3961ac83e142c1026ebf57d7690a5455f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/complete/baseline/facts.json",
+      "bytes": 82759,
+      "sha256": "31381ef8af3654212dfdf256902493ef817a60b8375d8456e860aa794b341b0b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/complete/baseline/publication.json",
+      "bytes": 442,
+      "sha256": "1c339e86eab5dd228237bb7ae11ca2d02ec14fe44df1ab73657fa42fe436c8bb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/complete/candidate/certificate.json.gz",
+      "bytes": 7515259,
+      "sha256": "c609a418afe05125b72a43784401c729d4703cc13ef2eaba3bb349c9ac22558a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/complete/candidate/facts.json",
+      "bytes": 82762,
+      "sha256": "62276f91845de55f4e96ec743e496c10efca1ad0919e5ff91972283cb4308d5f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/complete/candidate/publication.json",
+      "bytes": 442,
+      "sha256": "4b0ee4f072f70327f1a277656bb8110aa73943fb637dd8318b6b26cc2fb91723",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/complete/facts.json",
+      "bytes": 1545496,
+      "sha256": "c2c1424eda90866afb15a45cebf4186218bba918115d63fdcae3058af07829e0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/complete/operands.json.gz",
+      "bytes": 376920,
+      "sha256": "f3dade45a89f7b432168e4e75ebd852e6ce9864389e2ef2f8f9579d8336774b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/complete/publication.json",
+      "bytes": 441,
+      "sha256": "e5df96ff84ef4bcf2cc01f15e3927a893c42aa07801a882c33a0f3a5d1c0c637",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/process-group.json",
+      "bytes": 172,
+      "sha256": "dc690c21f31b01e4d3fbcd7e8b101f03685c3d652018c4ecf36bb8f0cf43fd88",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/stderr.log",
+      "bytes": 29505,
+      "sha256": "21c2d724c0d18876f8260623bf57c12ba1af94172ea47ef8979a88bc90c6ab50",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/stdout.log",
+      "bytes": 3145,
+      "sha256": "87cb77717a38140f65a2315d8c0d7af9c2cd8213c274d96d9f34046aa732a0fa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/supervise.py",
+      "bytes": 2795,
+      "sha256": "44ddcb1134df14e530e5a90944bd436c14493b29cf8042d5a2005787bbb44444",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
     {
       "id": "bounded-candidate-frame",
       "kind": "code",
-      "description": "Retain only the candidate authenticated selected snapshot inside one complete validation/planning/source-projection frame; charge complete snapshot, resolver-own-image metadata, inventory and outputs at every phase. Drop the snapshot before baseline acquisition. Preserve original child isolation and all scientific predicates and historical program pins.",
+      "description": "Retain only the candidate authenticated selected snapshot inside one complete validation/planning/source-projection frame; charge complete snapshot, resolver-own-image metadata, inventory and outputs at every phase. Drop the snapshot before baseline acquisition. Preserve original child isolation and all scientific predicates and historical program pins. The routing collector explicitly admits this reviewed new exact reader hash without adding input routes; prior profiles remain.",
       "software": "Node.js 24; Git",
       "units": "selection acquisitions, bytes"
     }
   ],
-  "metrics": [],
+  "metrics": [
+    {
+      "id": "node_elapsed_seconds",
+      "value": 317.145,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "d2519e56e58fb561a52f6c3eb1b6a791eb74a6b42dd2e8d0e61df185dfedd184",
+      "evaluation_commit": "1933d49ce3840d0d10bd76ba30e1d849e56c5233"
+    },
+    {
+      "id": "historical_node_elapsed_seconds",
+      "value": 335.013,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "d2519e56e58fb561a52f6c3eb1b6a791eb74a6b42dd2e8d0e61df185dfedd184",
+      "evaluation_commit": "9473d184683ee8ff8546300f2313779c3cba1d2b"
+    },
+    {
+      "id": "selection_load_count",
+      "value": 5,
+      "unit": "loads",
+      "vintage": "archived",
+      "input_sha256": "d2519e56e58fb561a52f6c3eb1b6a791eb74a6b42dd2e8d0e61df185dfedd184",
+      "evaluation_commit": "1933d49ce3840d0d10bd76ba30e1d849e56c5233"
+    },
+    {
+      "id": "historical_selection_load_count",
+      "value": 6,
+      "unit": "loads",
+      "vintage": "archived",
+      "input_sha256": "d2519e56e58fb561a52f6c3eb1b6a791eb74a6b42dd2e8d0e61df185dfedd184",
+      "evaluation_commit": "9473d184683ee8ff8546300f2313779c3cba1d2b"
+    },
+    {
+      "id": "sampled_process_group_peak_rss_bytes",
+      "value": 741392384,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "d2519e56e58fb561a52f6c3eb1b6a791eb74a6b42dd2e8d0e61df185dfedd184",
+      "evaluation_commit": "1933d49ce3840d0d10bd76ba30e1d849e56c5233"
+    },
+    {
+      "id": "selection_load_elapsed_ms",
+      "value": 257359,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "d2519e56e58fb561a52f6c3eb1b6a791eb74a6b42dd2e8d0e61df185dfedd184",
+      "evaluation_commit": "1933d49ce3840d0d10bd76ba30e1d849e56c5233"
+    },
+    {
+      "id": "historical_selection_load_elapsed_ms",
+      "value": 278382,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "input_sha256": "d2519e56e58fb561a52f6c3eb1b6a791eb74a6b42dd2e8d0e61df185dfedd184",
+      "evaluation_commit": "9473d184683ee8ff8546300f2313779c3cba1d2b"
+    }
+  ],
   "summaries": [],
   "conclusions": [],
   "stages": {
@@ -58,11 +235,51 @@
     "geographic_approval": "not-requested"
   },
   "commands": [
-    "node --test --test-concurrency=1 test/selected-continuous-lifecycle.test.mjs"
+    "node --test --test-concurrency=1 test/selected-continuous-lifecycle.test.mjs",
+    "Exact Node continuous invocation and bounded supervisor are retained in retained-proof-001/admission.json and supervise.py",
+    "node --test --test-concurrency=1 test/unchanged-selected-geography.test.mjs"
   ],
   "limits": [
-    "Synthetic immutable fixtures establish exact phase identity, complete projection equality, lifetime and adverse refusals; they are not fresh geographic qualification.",
-    "The initial review has no real-data corrected timing. Any subsequent admitted retained-input proof must preserve the actual execution HEAD independently from baseline/candidate input commits and compare whole operands before reusing original strict-polygon evidence.",
+    "Synthetic immutable fixtures establish identity, complete projection equality, collectability and adverse refusals, not fresh geographic qualification.",
+    "One real historical-input operand execution at code HEAD 1933d49ce3840d0d10bd76ba30e1d849e56c5233 is compared with retained original evidence; both complete encoded/decoded operands are byte-identical. The original unchanged Python polygon result is reused without rerunning it.",
+    "Historical and corrected timings are separate local executions, not a controlled same-time benchmark or hosted saving. Current RSS is a sampled simultaneous process-group peak; retained historical RSS is a single-process maximum and is not directly comparable.",
     "Shared scientific helper, programme catalogue and native-GC child launch are unchanged. No geography approval, content import or deployment."
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "node_elapsed_seconds",
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/comparison.json",
+      "json_pointer": "/node_elapsed_seconds"
+    },
+    {
+      "metric_id": "historical_node_elapsed_seconds",
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/comparison.json",
+      "json_pointer": "/historical_node_elapsed_seconds"
+    },
+    {
+      "metric_id": "selection_load_count",
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/comparison.json",
+      "json_pointer": "/selection_load_count"
+    },
+    {
+      "metric_id": "historical_selection_load_count",
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/comparison.json",
+      "json_pointer": "/historical_selection_load_count"
+    },
+    {
+      "metric_id": "sampled_process_group_peak_rss_bytes",
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/comparison.json",
+      "json_pointer": "/sampled_process_group_peak_rss_bytes"
+    },
+    {
+      "metric_id": "selection_load_elapsed_ms",
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/comparison.json",
+      "json_pointer": "/selection_load_elapsed_ms"
+    },
+    {
+      "metric_id": "historical_selection_load_elapsed_ms",
+      "path": "coordination/engineering/continuous-candidate-frame-20261012/retained-proof-001/comparison.json",
+      "json_pointer": "/historical_selection_load_elapsed_ms"
+    }
   ]
 }

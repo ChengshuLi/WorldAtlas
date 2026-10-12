@@ -1,0 +1,114 @@
+{
+  "kind": "bounded-candidate-frame-retained-operand-comparison",
+  "execution_commit": "1933d49ce3840d0d10bd76ba30e1d849e56c5233",
+  "baseline_commit": "9473d184683ee8ff8546300f2313779c3cba1d2b",
+  "candidate_commit": "791576647adc41241ce9b438f1bb0034088eed4e",
+  "retained_original": {
+    "retained_at": "7446e4bcf19825698f544a5fa2809b3a78f88a25",
+    "path": "coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/corrected-continuous-002/continuous.json",
+    "bytes": 377504,
+    "sha256": "c155745caec52604d73dca515ea3a22446014162ce1830b566925c125391b07f",
+    "original_execution_commit": "9473d184683ee8ff8546300f2313779c3cba1d2b"
+  },
+  "whole_operands_equal": true,
+  "operands": {
+    "bytes": 376920,
+    "decoded_bytes": 1356950,
+    "decoded_sha256": "949622e24a0431c707ebc1b9cfaaee21db768bc165aad17ba9e04534b4bb048e",
+    "path": "operands.json.gz",
+    "sha256": "f3dade45a89f7b432168e4e75ebd852e6ce9864389e2ef2f8f9579d8336774b2"
+  },
+  "selection_load_count": 5,
+  "selection_loads": [
+    {
+      "selected_continuous_stage": "coordinate-selection",
+      "event": "end",
+      "selected": "9473d184683ee8ff8546300f2313779c3cba1d2b",
+      "elapsed_ms": 49664
+    },
+    {
+      "selected_continuous_stage": "coordinate-selection",
+      "event": "end",
+      "selected": "791576647adc41241ce9b438f1bb0034088eed4e",
+      "elapsed_ms": 48548
+    },
+    {
+      "selected_continuous_stage": "persisted-selection",
+      "event": "end",
+      "selected": "9473d184683ee8ff8546300f2313779c3cba1d2b",
+      "elapsed_ms": 43847
+    },
+    {
+      "selected_continuous_stage": "persisted-selection",
+      "event": "end",
+      "selected": "791576647adc41241ce9b438f1bb0034088eed4e",
+      "elapsed_ms": 57832
+    },
+    {
+      "selected_continuous_stage": "required-side-selection",
+      "event": "end",
+      "selected": "9473d184683ee8ff8546300f2313779c3cba1d2b",
+      "sources": 5,
+      "elapsed_ms": 57468
+    }
+  ],
+  "complete_owners": 49625,
+  "required_owners": 54,
+  "changed_owners": 12,
+  "node_elapsed_seconds": 317.145,
+  "sampled_process_group_peak_rss_bytes": 741392384,
+  "historical_node_elapsed_seconds": 335.013,
+  "historical_full_continuous_elapsed_seconds": 335.59,
+  "historical_max_single_process_rss_bytes": 541163520,
+  "original_polygon_result_reused": true,
+  "original_status": "no-new-regression",
+  "original_regressions": 0,
+  "limits": [
+    "One corrected local operand execution compared with a retained historical run; timings are not a same-time controlled benchmark or a hosted speedup claim.",
+    "The current RSS is a 50ms sampled simultaneous process-group peak; the historical RSS is a single-process maximum. They are not comparable measures.",
+    "The unchanged original Python strict-polygon result is reused because complete encoded and decoded operands are byte-identical; it was not rerun."
+  ],
+  "historical_selection_load_count": 6,
+  "historical_selection_loads": [
+    {
+      "selected_continuous_stage": "coordinate-selection",
+      "event": "end",
+      "selected": "9473d184683ee8ff8546300f2313779c3cba1d2b",
+      "elapsed_ms": 41818
+    },
+    {
+      "selected_continuous_stage": "coordinate-selection",
+      "event": "end",
+      "selected": "791576647adc41241ce9b438f1bb0034088eed4e",
+      "elapsed_ms": 46054
+    },
+    {
+      "selected_continuous_stage": "persisted-selection",
+      "event": "end",
+      "selected": "9473d184683ee8ff8546300f2313779c3cba1d2b",
+      "elapsed_ms": 36582
+    },
+    {
+      "selected_continuous_stage": "persisted-selection",
+      "event": "end",
+      "selected": "791576647adc41241ce9b438f1bb0034088eed4e",
+      "elapsed_ms": 48093
+    },
+    {
+      "selected_continuous_stage": "required-side-selection",
+      "event": "end",
+      "selected": "9473d184683ee8ff8546300f2313779c3cba1d2b",
+      "sources": 5,
+      "elapsed_ms": 49711
+    },
+    {
+      "selected_continuous_stage": "required-side-selection",
+      "event": "end",
+      "selected": "791576647adc41241ce9b438f1bb0034088eed4e",
+      "sources": 5,
+      "elapsed_ms": 56124
+    }
+  ],
+  "selection_load_elapsed_ms": 257359,
+  "historical_selection_load_elapsed_ms": 278382
+}
