@@ -18,9 +18,9 @@ const CODE=[MODULE,'coordination/engineering/selected-geography-effective-preven
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const polygon=(x,y=0)=>({type:'Polygon',coordinates:[[[x,y],[x+.2,y],[x+.2,y+.2],[x,y+.2],[x,y]]]});
 const feature=(id,x)=>({type:'Feature',id,properties:{id,parent_id:'parent'},geometry:polygon(x)});
-function fixtures(){
- const features=[feature('A',0),feature('B',1),feature('C',5)];
- const rows=features.map((f,i)=>[f.id,i+1,'parent',1,'data/source.json',i,valueSha(f),valueSha(f.geometry),valueSha({base_geometry_sha256:valueSha(f.geometry),additions:[]}),coordinateBounds(f.geometry)]);
+function fixtures(sourcePaths){
+ const features=sourcePaths?sourcePaths.map((_,i)=>feature(String.fromCharCode(65+i),i*2)):[feature('A',0),feature('B',1),feature('C',5)];
+ const rows=features.map((f,i)=>[f.id,i+1,'parent',1,sourcePaths?.[i]??'data/source.json',sourcePaths?0:i,valueSha(f),valueSha(f.geometry),valueSha({base_geometry_sha256:valueSha(f.geometry),additions:[]}),coordinateBounds(f.geometry)]);
  return {features,certificate:{version:2,kind:'selected-coordinate-neighbor-certificate-v2',entry_fields:['id','index','parent_id','parent_index','source','ordinal','whole_feature_sha256','geometry_sha256','effective_geometry_sha256','boxes'],binding:{selection:{old:true},sources:[],owners_sha256:valueSha(rows.map(r=>r.slice(0,4)))},entries:rows,inputs:[]}};
 }
 function addition(id,target,index,base,x){const geometry=polygon(x);return {component_id:id,target_id:target,pixelIndex:index,base_geometry_sha256:base,geometry,geometry_sha256:valueSha(geometry)};}
@@ -28,14 +28,15 @@ function addition(id,target,index,base,x){const geometry=polygon(x);return {comp
 // This is a fresh miniature trusted repository, not a test-only authority hook.
 // The real entry reads its ordinary committed catalogue and products exactly as
 // production does. Candidate edits never control that executing catalogue.
-async function trustedFixture(t,{incompleteNative=false}={}){
+async function trustedFixture(t,{incompleteNative=false,sourcePaths}={}){
  const root=fs.mkdtempSync(path.join(process.cwd(),'.checkpoint-test-'));
  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
  const git=(...a)=>execFileSync('git',['-c','core.hooksPath=/dev/null','-c','user.name=Checkpoint fixture','-c','user.email=checkpoint@example.invalid','-C',root,...a],{env:{...process.env,GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_NO_LAZY_FETCH:'1'},stdio:['ignore','pipe','pipe']});
  const save=(name,value)=>{const f=path.join(root,name);fs.mkdirSync(path.dirname(f),{recursive:true});fs.writeFileSync(f,Buffer.isBuffer(value)?value:valueBytes(value));};
  const commit=()=>{git('add','.');git('commit','-qm','Checkpoint fixture');return git('rev-parse','HEAD').toString().trim();};
  git('init','-q');save(PROGRAMME,fs.readFileSync(PROGRAMME));for(const name of CODE)save(name,fs.readFileSync(name));save('package.json',{type:'module'});
- const {features,certificate}=fixtures(), source={type:'FeatureCollection',features};save('data/source.json',source);
+ const {features,certificate}=fixtures(sourcePaths), paths=sourcePaths??['data/source.json'];
+ for(const name of paths)save(name,{type:'FeatureCollection',features:features.filter((_,i)=>certificate.entries[i][4]===name)});
  const reference={id:'geography:fixture',hierarchy_sha256:'a'.repeat(64),footprints_sha256:'b'.repeat(64)};
  const encode=(name,kind,values)=>{const words=Uint32Array.from(values),canonical=Buffer.from(words.buffer),encoded=gzipSync(shuffleOwnershipBytes(words));save('data/'+name,encoded);return {path:name,kind,offset:0,bytes:encoded.length,sha256:sha(encoded),decoded_bytes:canonical.length,decoded_sha256:sha(canonical),words:words.length,encoding:'byte-shuffle'};};
  const parts=[encode('native/rows.bin.gz','rows',[0,1,incompleteNative?2:1,1,2,1,3,0]),encode('native/runs.bin.gz','runs',[4,0,8,0,13,1])];
@@ -43,7 +44,7 @@ async function trustedFixture(t,{incompleteNative=false}={}){
  save('data/transport/fragment.gz',fragment);
  const index={version:1,kind:'ordered-exact-original-byte-fragments',whole_bytes:whole.length,whole_sha256:sha(whole),files:parts.map((p,i)=>({path:p.path,mode:'100644',offset:i?parts[0].bytes:0,bytes:p.bytes,sha256:p.sha256})),parts:[{path:'fragment.gz',offset:0,bytes:fragment.length,sha256:sha(fragment),decoded_bytes:whole.length,decoded_sha256:sha(whole)}]};save('data/transport/index.json',index);
  const manifest={version:1,size:4,coordinateBits:2,method:'native-linear-evenodd-first-owner-v1',native_latitudes:[],hierarchy_sha256:reference.hierarchy_sha256,original_assets:{},parts,runWords:6,native_asset_transport:{version:1,kind:index.kind,index:{path:'data/transport/index.json',bytes:valueBytes(index).length,sha256:valueSha(index)},logical_assets:2,original_compressed_bytes:whole.length}};
- save('data/manifest.json',manifest);save('data/owners.json',[{id:'A',index:1},{id:'B',index:2},{id:'C',index:3}]);
+ save('data/manifest.json',manifest);save('data/owners.json',features.map((f,i)=>({id:f.id,index:i+1})));
  const primitive=addition('old','A',1,certificate.entries[0][7],.3);
  const literal={...primitive,base_geometry:features[0].geometry,disposition:'assigned',native_cells:1,source_receipt_sha256:'c'.repeat(64)};
  const originalPatch={version:1,kind:'unassigned-native-cells-v1',rows:[{y:1,runs:[[2,3,1]]}]};
@@ -68,15 +69,15 @@ async function trustedFixture(t,{incompleteNative=false}={}){
  const envelope={version:2,kind:'retained-native-base-plus-delta-v2',base_reference:reference,effective_reference:effective,...assets};save('data/envelope.json',envelope);const eight=commit();
  const sidecar={version:2,kind:'retained-native-additive-selection-v2',base_selection:baseSelection,authority_registry:pin('data/registry.json',four),logical_asset_map:assets,runtime_envelope:pin('data/envelope.json',eight)};save('data/sidecar.json',sidecar);const nine=commit();
  const selection={...baseSelection,additive_release:{path:'data/sidecar.json',bytes:pin('data/sidecar.json',nine).bytes,sha256:pin('data/sidecar.json',nine).sha256}};save('data/ownership-selection.json',selection);const selected=commit();
- const sourcePin={...pin('data/source.json',one),kind:'ordinary-immutable-git-source'};
+ const sourcePins=paths.map(name=>({...pin(name,one),kind:'ordinary-immutable-git-source'}));
  const additions=normalized.map(row=>({...row,base_geometry:target.geometry,base_geometry_sha256:target.geometry_sha256}));
  const derived=deriveCoordinateDelta({certificate,oldAdditions:[],additions,selection}).certificate;
- const full={...derived,binding:{...derived.binding,release:reference,sources:[sourcePin]},inputs:[{path:'data/source.json',source:sourcePin,whole_body_sha256:sourcePin.sha256,bytes:sourcePin.bytes}]};
+ const full={...derived,binding:{...derived.binding,release:reference,sources:sourcePins},inputs:sourcePins.map(source=>({path:source.path,source,whole_body_sha256:source.sha256,bytes:source.bytes}))};
  const execution_code=CODE.map(name=>pin(name,one)),runtime=[{path:process.execPath,bytes:fs.statSync(process.execPath).size,sha256:'f'.repeat(64)}];
- const facts={version:1,kind:'trusted-selected-coordinate-stage-v1',candidate_code_executed:false,selected_commit:selected,executing_commit:one,execution_code,runtime,binding:full.binding,complete_owners:3,complete_sources:1};
+ const facts={version:1,kind:'trusted-selected-coordinate-stage-v1',candidate_code_executed:false,selected_commit:selected,executing_commit:one,execution_code,runtime,binding:full.binding,complete_owners:features.length,complete_sources:paths.length};
  const compressed=gzipSync(valueBytes(full));save('accepted/certificate.json.gz',compressed);save('accepted/facts.json',facts);
  const publication={version:1,kind:facts.kind,complete:true,facts:{path:'facts.json',bytes:valueBytes(facts).length,sha256:valueSha(facts)},certificate:{path:'certificate.json.gz',bytes:compressed.length,sha256:sha(compressed),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)}};save('accepted/publication.json',publication);
- const inventory=[PROGRAMME,'data/source.json','data/manifest.json','data/owners.json','data/registry.json','data/ledger.json','data/patch.json','data/sidecar.json','data/envelope.json','data/native/rows.bin.gz','data/native/runs.bin.gz'].map(name=>pin(name,selected));
+ const inventory=[PROGRAMME,...paths,'data/manifest.json','data/owners.json','data/registry.json','data/ledger.json','data/patch.json','data/sidecar.json','data/envelope.json','data/native/rows.bin.gz','data/native/runs.bin.gz'].map(name=>pin(name,selected));
  save('accepted/custody.json',{complete_cold_custody:[{facts,publication,effective_additions:additions,inventory}]});
  save('accepted/routes.json',inventory.map(p=>p.path).sort().map(name=>({path:name,tree:git('ls-tree','-z',selected,'--',name).toString()})));const accepted=commit();
  const rootRow={id:'fixture',accepted_head:accepted,selected_commit:selected,selection_sha256:valueSha(selection),execution_commit:one,execution_code_sha256:valueSha(execution_code),runtime_sha256:valueSha(runtime),facts:pin('accepted/facts.json'),certificate:{...pin('accepted/certificate.json.gz'),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)},publication:pin('accepted/publication.json'),custody:pin('accepted/custody.json'),routes:pin('accepted/routes.json')};
@@ -238,8 +239,8 @@ const JOINT=['scripts/run-geographic-check.py','scripts/check-geographic-regress
   ...ACCEPTED_CHECKPOINT_CODE,'scripts/geographic_checkpoint_products.py'];
 const MEMBERS=['derived-certificate.json.gz','derived-facts.json','derived-publication.json','facts.json',
   'operands.json.gz','publication.json','checkpoint-routes.json'];
-async function acceptedProducts(t) {
-  const f=await trustedFixture(t);
+async function acceptedProducts(t,{sourcePaths}={}) {
+  const f=await trustedFixture(t,{sourcePaths});
   for(const name of JOINT)f.save(name,fs.readFileSync(name));
   const code=[...CODE,...ACCEPTED_CHECKPOINT_CODE].map(name=>({path:name,bytes:fs.statSync(path.join(f.root,name)).size,
     sha256:sha(fs.readFileSync(path.join(f.root,name)))}));
@@ -252,15 +253,21 @@ async function acceptedProducts(t) {
   const transition=f.api.qualifyTransition({state,reader:afterReader,budget});
   const census=f.api.checkpointRouteCensus({transition,budget});
   const certificate=transition.candidate.certificate;
+  // A conservative complete superset exercises real nonempty source projection
+  // and inverse custody without inventing a producer repair in this small repo.
+  const plan=sourcePaths?{...transition.plan,required_ids:certificate.entries.map(r=>r[0]).sort(),
+    source_paths:{baseline:[...sourcePaths].sort(),candidate:[...sourcePaths].sort()}}:transition.plan;
+  const before=f.api.projectSourceFeatures({state,ids:plan.required_ids,budget});
+  const after=f.api.projectSourceFeatures({state:transition.candidate,ids:plan.required_ids,budget,reuse:before});
+  const sourceCustody=p=>({state_binding:p.state_binding,inputs:p.inputs,...p.custody});
   const inventory=r=>[...r.inventory.values()].sort((a,b)=>(a.commit+':'+a.path).localeCompare(b.commit+':'+b.path));
   const runtime=[0,1,2].map(i=>({path:'/fixture/runtime-'+i,mode:493,bytes:100+i,sha256:String(i+1).repeat(64),version:null}));
   const native={...structuredClone(REAL004.native),baseline_selection:state.selection,candidate_selection:state.selection,
     affected_rows:0,native_row_scope:{...REAL004.native.native_row_scope,changed_rows:[],shared_base_acquired_rows:[],shared_base_reused_rows:[]}};
   const continuousFacts={version:1,kind:'trusted-selected-continuous-comparison-v1',baseline_commit:trusted,
     candidate_commit:trusted,executing_commit:trusted,execution_code:JOINT.map(name=>f.pin(name,trusted)),runtime,
-    plan:transition.plan,inverse:[],checkpoint_custody:{baseline:state.accepted_execution,candidate:state.accepted_execution},
-    source_custody:{baseline:{state_binding:transition.plan.source_bindings.baseline,inputs:[],actual_inputs:[]},
-      candidate:{state_binding:transition.plan.source_bindings.candidate,inputs:[],actual_inputs:[]},source_features_reused:true},
+    plan,inverse:[...before.inverse.map(r=>({vintage:'baseline',...r})),...after.inverse.map(r=>({vintage:'candidate',...r}))],checkpoint_custody:{baseline:state.accepted_execution,candidate:state.accepted_execution},
+    source_custody:{baseline:sourceCustody(before),candidate:sourceCustody(after),source_features_reused:true},
     candidate_code_executed:false,validation_route:'authenticated-checkpoint-append-v1'};
   const facts={version:1,kind:'derived-selected-checkpoint-candidate-v1',validation_stage:'native-passed-continuous-pending',
     accepted_checkpoint:false,executing_commit:trusted,execution_code:continuousFacts.execution_code,runtime,
@@ -270,11 +277,12 @@ async function acceptedProducts(t) {
     baseline_commit:trusted,candidate_commit:trusted,baseline_selection:state.selection,candidate_selection:state.selection,
     candidate_bindings:{ledger_sha256:valueSha(state.ledger),registry_sha256:valueSha(state.registry),
       patch_sha256:valueSha(state.patch),manifest_sha256:valueSha(state.manifest)},
-    transition_plan:transition.plan,native_result_sha256:valueSha(native),candidate_code_executed:false,executing_policy:f.api.checkpointExecutingPolicy({transition,budget})};
-  const operands={version:1,kind:'complete-selected-continuous-operands-v1',plan:transition.plan,
-    effective_additions:{baseline:state.additions,candidate:state.additions},baseline:{},candidate:{}};
-  const continuous={version:1,kind:continuousFacts.kind,candidate_code_executed:false,complete_owners:3,
-    source_binding:transition.plan.source_bindings,required_ids:[],status:'no-footprint-change',regressions:0,
+    transition_plan:plan,native_result_sha256:valueSha(native),candidate_code_executed:false,executing_policy:f.api.checkpointExecutingPolicy({transition,budget})};
+  const operands={version:1,kind:'complete-selected-continuous-operands-v1',plan,
+    effective_additions:{baseline:state.additions,candidate:state.additions},
+    baseline:Object.fromEntries(before.features.map(f=>[f.id,f])),candidate:Object.fromEntries(after.features.map(f=>[f.id,f]))};
+  const continuous={version:1,kind:continuousFacts.kind,candidate_code_executed:false,complete_owners:certificate.entries.length,
+    source_binding:plan.source_bindings,required_ids:plan.required_ids,status:'no-footprint-change',regressions:0,
     original_strict_polygon_result:{...structuredClone(REAL004.strict),status:'no-footprint-change',changed_location_ids:[],changed_primitive_ids:[]}};
   const products=structuredClone({facts,certificate,census,continuousFacts,operands,native,continuous});
   f.api.releaseCheckpoint(state);
@@ -480,4 +488,24 @@ test('accepted embedded policy still detects changed current eligibility without
  const policy=JSON.parse(fs.readFileSync(path.join(f.root,PROGRAMME)));policy.programs.pop();
  f.save(PROGRAMME,policy);f.commit();
  const result=await qualify(f,a);assert.equal(result.available,false);assert.match(result.reason,/preserves accepted eligibility/);
+});
+
+// Exact clean004 logical path roster/order, from facts.json SHA256
+// 3c024899d7be3e8726179eb22609ebc07854cb35c86b84baa02943d9020bb2a9.
+// Body identities below come from the miniature repository's actual reads.
+test('accepted five-source custody joins complete real-order projections to lexical plan paths',async t=>{
+  const sourcePaths=[0,1,8,19,28].map(n=>`data/geography/part-${n}.json`);
+  const f=await acceptedProducts(t,{sourcePaths});
+  assert.deepEqual(f.products.continuousFacts.source_custody.baseline.inputs.map(p=>p.path),sourcePaths);
+  assert.deepEqual(f.products.facts.transition_plan.source_paths.baseline,[...sourcePaths].sort());
+  const accepted=await acquire(f);const result=await qualify(f,accepted);assert.equal(result.available,true);
+  f.api.releaseCheckpoint(result.state);f.transport.releaseAcceptedCheckpoint(accepted.handle);
+  for(const mutate of [
+    p=>p.continuousFacts.source_custody.baseline.inputs.pop(),
+    p=>{const side=p.continuousFacts.source_custody.baseline;side.inputs[4]=side.inputs[0];},
+    p=>{const side=p.continuousFacts.source_custody.baseline;side.actual_inputs[4]=side.actual_inputs[0];},
+    p=>p.continuousFacts.source_custody.candidate.actual_inputs[0].sha256='0'.repeat(64),
+    p=>p.continuousFacts.source_custody.baseline.actual_inputs[0].whole_body_consumed=false,
+  ]){const a=await acquire(f,mutate);await assert.rejects(qualify(f,a),/source (input custody|body mode\/OID\/hash)/);
+    f.transport.releaseAcceptedCheckpoint(a.handle);}
 });

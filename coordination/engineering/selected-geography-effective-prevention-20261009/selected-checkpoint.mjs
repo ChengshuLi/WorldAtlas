@@ -599,9 +599,12 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
   keys(sourceCustody,'baseline,candidate,source_features_reused','Incomplete accepted whole-source custody');
   demand(sourceCustody.source_features_reused===true, 'Unsupported accepted source projection method');
   for (const vintage of ['baseline','candidate']) {
-    const side=sourceCustody[vintage];
-    demand(same(side?.state_binding,plan.source_bindings[vintage]) && Array.isArray(side.inputs)
-      && same(side.inputs.map(p=>p.path),plan.source_paths[vintage]) && Array.isArray(side.actual_inputs)
+    const side=sourceCustody[vintage], planned=plan.source_paths[vintage];
+    // Plans sort path sets; whole projections preserve certificate source order.
+    // Join the complete unique roster, not these unrelated iteration orders.
+    demand(Array.isArray(planned) && same(planned,[...new Set(planned)].sort())
+      && same(side?.state_binding,plan.source_bindings[vintage]) && Array.isArray(side.inputs)
+      && same(side.inputs.map(p=>p.path).sort(),planned) && Array.isArray(side.actual_inputs)
       && side.actual_inputs.length===side.inputs.length, 'Accepted complete source input custody differs');
     for (const input of side.inputs) {
       const actual=side.actual_inputs.filter(p=>p.path===input.source.path);

@@ -39,7 +39,7 @@ export const AUDITED_READERS = Object.freeze({
   // The joint route only reuses authenticated original selected inputs and products.
   // These exact readers introduce no new scientific source outside that closure.
   'scripts/selected-checkpoint-native.mjs': ['1372180d776e33227410aaeb4ef5526cd5cc84e4dca3950cc6eaa6210bad04ca'],
-  [PREFIX + 'selected-checkpoint.mjs']: ['54131d4459c6dd3074998377ac4bec985aae21963fa9010add87ff34b803de22'],
+  [PREFIX + 'selected-checkpoint.mjs']: ['d96d0414b2c246b456c00a7878511652ff2ce2df77586bfa36d88d01247463d1'],
   [PREFIX + 'selected-checkpoint-continuous.mjs']: ['1c82e1bb619bc42353a573d0ef4f1989490e03b32d5137035cf890a3719c55dc'],
   [PREFIX + 'selected-joint-entry.mjs']: ['ce1c4513ecf130452c07bdf4e516019e7ac85c0ee14c14b44203f3b23a16ae6d'],
   'src/ownership-codec.js': ['64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d'],
