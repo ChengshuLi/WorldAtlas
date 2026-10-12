@@ -42,6 +42,30 @@
       "bytes": 36659,
       "sha256": "b322cc4eaededff0f7a950751870f6db8178e0b17356caaf11eb4fbc50bc30fb",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-owned-scope-20261012/after-refresh-focused.log",
+      "bytes": 38149,
+      "sha256": "711216f1be4b350310d54331acdbf796473751af57eda13da67ba64f4cc26a88",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-owned-scope-20261012/after-refresh-capacity.log",
+      "bytes": 6063,
+      "sha256": "0f95b8cd05498a6c7e9518fba9a548643cb72acfacf621d2d68f76080e740263",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-owned-scope-20261012/shallow-availability.log",
+      "bytes": 246,
+      "sha256": "f30116fcad8788c651a860981553078bca2bfe84362436e3db4301657d2627f7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-owned-scope-20261012/reservation-002.json",
+      "bytes": 1353,
+      "sha256": "cf6174d210af63b7230c37f735e7ae566cb8c04dd7a35313aa804f5eb6430afe",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
@@ -62,7 +86,9 @@
     "geographic_approval": "not-requested"
   },
   "commands": [
-    "node --test test/selected-data-profile.test.mjs test/delivery-handoff.test.mjs test/pr-gates.test.mjs test/integration-proof.test.mjs test/merge-integration.test.mjs test/delivery-handoff-advance.test.mjs"
+    "node --test test/selected-data-profile.test.mjs test/delivery-handoff.test.mjs test/pr-gates.test.mjs test/integration-proof.test.mjs test/merge-integration.test.mjs test/delivery-handoff-advance.test.mjs",
+    "node --test test/final-capacity.test.mjs",
+    "node --test --test-name-pattern='^complete original PR1770' test/selected-data-profile.test.mjs"
   ],
   "metric_bindings": []
 }

@@ -1060,6 +1060,10 @@ test('complete original PR1770 192-path diff selects the uniquely bound finalize
   assert(historicalManifest,'final c753 changed the original added metadata blob');
   assert(f.reads.includes(historicalManifest.git_blob_oid),'original manifest is actually validated');
   for(const row of f.fixed.snapshots)assert(!f.gitReads.includes(row.git_blob_oid),'historical mutable metadata must not require shallow Git history');
+  const reachable=new Set(execFileSync('git',['ls-tree','-r','HEAD'],{encoding:'utf8',maxBuffer:16*1024*1024,
+    env:{...process.env,GIT_NO_LAZY_FETCH:'1',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_TERMINAL_PROMPT:'0'}})
+    .trim().split('\n').map(line=>line.split('\t')[0].split(' ')[2]));
+  for(const oid of f.gitReads)assert(reachable.has(oid),'every unsnapshotted original body must be reachable in shallow HEAD: '+oid);
 });
 test('actual PR1770 reaches authenticated author and cold queue proof with complete metadata planning', async () => {
   assert.equal((await gateFixture(real1770()).select()).test_selection,'selected-data');

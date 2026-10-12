@@ -7,7 +7,8 @@ prepare/capacity/final proof callers pass the reservation returned by the curren
 linked-issue and exact-branch claim validator. Candidate metadata never supplies
 ownership. Durable review preparation now uses that same validator, preserves the
 canonical claim drift check and rechecks current readiness/scope after reading
-evidence. The separate PR #1769 state/transport repair remains independently owned.
+evidence. The accepted PR #1769 state/transport repair remains intact, including its full
+PR-state comparison before the added scope recheck.
 
 The actual original PR #1770 diff is frozen in `pr1770.json` at
 `367d68214f8c88532949bf9d21539766491991ad` against
@@ -25,7 +26,8 @@ text, native-path and expectation-role boundaries too. The complete unchanged
 packet passes the corrected structural selector, including its exact native
 transport operand. This does not establish source/geographic truth, new repair
 credit, package/rendering success, hosted applicability or elapsed-time savings.
-The active data delivery continues its already-selected full CI normally.
+The original data delivery completed its already-selected full CI and merged
+separately at 94d7016a6e12ec5c5414db24202e95d5dd9e4459.
 
 ## Exactly one authoritative expectation
 
@@ -73,8 +75,13 @@ Run from the repository root with Node 24 and GIT_NO_LAZY_FETCH=1:
 
     node --test test/selected-data-profile.test.mjs test/delivery-handoff.test.mjs test/pr-gates.test.mjs test/integration-proof.test.mjs test/merge-integration.test.mjs test/delivery-handoff-advance.test.mjs
 
-The original PR1770 blobs must be available in the Git store. Hosted replay is
-intended after that delivery is on main; missing bytes fail rather than fetching
+The final author refresh is based on accepted main
+94d7016a6e12ec5c5414db24202e95d5dd9e4459, preserving PR #1769 and the PR #1775
+capacity correction. `after-refresh-focused.log` records the refreshed six-suite
+pass; `after-refresh-capacity.log` separately records the capacity suite.
+`shallow-availability.log` repeats the complete actual fixture with an added
+assertion that every unsnapshotted blob it reads is reachable in current HEAD.
+Historical snapshots bypass Git reads, and missing bytes fail without fetching
 or skipping. Exact-head independent review, normal CI and serialized integration
 remain required. This issue changes no delivery data, scientific method, source
 policy, byte/schema ceiling, deployment or publication authority.
