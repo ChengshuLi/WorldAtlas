@@ -178,9 +178,23 @@ test('queue caches only identical immutable operand equivalence while repeating 
     inspect:async options=>{inspections++;return {status:'unchanged-selected-inputs',baseline_commit:options.baseline,
       candidate_commit:options.candidate,trusted_reader_policy_commit:options.trusted,candidate_code_executed:false,science_reexecuted:false,rows:['original']};},
     load:async options=>{loads++;return options.inspect({baseline:options.source,candidate:options.head,trusted:options.baseline,metadataPaths:options.paths});}});
-  const options={source:P,head:H,baseline:B,paths:[manifest]};
+  const options={api:async()=>({}),repo:'owner/repo',source:P,head:H,baseline:B,paths:[manifest]};
   const first=await loader(options);first.rows.push('caller mutation');
   assert.deepEqual((await loader(options)).rows,['original']);assert.equal(inspections,1);assert.equal(loads,2);
   for(const changed of [{...options,source:B},{...options,head:P},{...options,baseline:P},{...options,paths:[PREFIX+'README.md']}])await loader(changed);
   assert.equal(inspections,5);assert.equal(loads,6);
+});
+
+
+test('cold routing tree reads use the current queue admitted API and preserve recursive identity',async()=>{
+  const calls=[];
+  const loader=createMetadataRegressionProofLoader({directory:'/fixture',
+    acquire:options=>({read:options.loadTree}),
+    inspect:async options=>{await options.acquisition.read(P,true);await options.acquisition.read(B,false);return {status:'full-check-required'};},
+    load:options=>options.inspect({baseline:P,candidate:H,trusted:B,metadataPaths:[manifest]})});
+  const api=async route=>{calls.push(route);return {};};
+  await loader({api,repo:'owner/repo'});
+  assert.deepEqual(calls,[`/repos/owner/repo/git/trees/${P}?recursive=1`,`/repos/owner/repo/git/trees/${B}`]);
+  await assert.rejects(loader({repo:'owner/repo'}),/metadata-proof-api-unavailable/);
+  await assert.rejects(loader({repo:'owner/repo',api:async()=>{throw Error('quota-admission-refused');}}),/quota-admission-refused/);
 });

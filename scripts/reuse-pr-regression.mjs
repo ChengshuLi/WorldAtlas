@@ -10,6 +10,7 @@ import {prepareGeographyProof} from './geographic-report-artifact.mjs';
 import {METADATA_PROGRAMS, matchMetadataRegressionProgram} from './metadata-regression-program.mjs';
 import {originalFullRegressionJobs} from './regression-proof-jobs.mjs';
 import {inspectUnchangedSelectedGeography} from './check-unchanged-selected-geography.mjs';
+import {createRoutingMetadataAcquisition} from './geography-routing-metadata.mjs';
 const need = (value, reason) => {if (!value) throw Error(reason);};
 
 export async function readMetadataRegressionCatalogue({api, repo, trusted}) {
@@ -71,19 +72,24 @@ export async function loadMetadataRegressionProof({api, repo, number, head, base
 // planning and final validation. Cache only that immutable collector result;
 // PR/issue/run/job/artifact authority and program admission are always reread.
 export function createMetadataRegressionProofLoader({token, directory = process.cwd(),
-  inspect = inspectUnchangedSelectedGeography, load = loadMetadataRegressionProof}) {
+  inspect = inspectUnchangedSelectedGeography, load = loadMetadataRegressionProof,
+  acquire = createRoutingMetadataAcquisition}) {
   let saved;
-  const immutableInspect = async options => {
+  const immutableInspect = async (options, authority) => {
     const key = JSON.stringify([options.baseline, options.candidate, options.trusted, options.metadataPaths]);
     if (saved?.key === key) return structuredClone(saved.value);
-    const value = await inspect(options);
+    need(typeof authority.api === 'function', 'metadata-proof-api-unavailable');
+    const acquisition = acquire({repo: directory, baseline: options.baseline, token,
+      ...(options.limits ? {limits: options.limits} : {}),
+      loadTree: (root, recursive = true) => authority.api(`/repos/${authority.repo}/git/trees/${root}${recursive ? '?recursive=1' : ''}`)});
+    const value = await inspect({...options, acquisition});
     if (value?.status === 'unchanged-selected-inputs' && value.baseline_commit === options.baseline &&
       value.candidate_commit === options.candidate && value.trusted_reader_policy_commit === options.trusted &&
       value.candidate_code_executed === false && value.science_reexecuted === false &&
       Buffer.byteLength(JSON.stringify(value)) <= 32 * 1024 * 1024) saved = {key, value: structuredClone(value)};
     return value;
   };
-  return options => load({...options, token, directory, inspect: immutableInspect});
+  return options => load({...options, token, directory, inspect: input => immutableInspect(input, options)});
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
