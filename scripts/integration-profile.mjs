@@ -65,6 +65,7 @@ import {gunzipSync} from 'node:zlib';
 import {isUtf8} from 'node:buffer';
 import {validatePackageInputs, loadPackageInputs, packagePathRequired, safePackagePath, PACKAGE_INPUT_FILE} from './package-inputs.mjs';
 const SELECTION = 'data/ownership-selection.json';
+const CHECKPOINT_LOCATOR = 'data/selected-checkpoint.json';
 const ADMINISTRATIVE_REGISTRY = 'coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json';
 const SOURCE_CORPUS = 'coordination/engineering/original-geography-source-corpus-20261006/';
 export const SELECTED_SMOKE = 'scripts/selected-delivery-smoke.mjs';
@@ -162,10 +163,11 @@ export function selectedDataCandidate(branch, files, reservation = {}) {
   const scopes = [branchScope(branch), ...engineeringOwnedScopes(reservation)];
   return branch.startsWith('engineering/') && files.length > 1 && files.length <= 1024 &&
     files.some(file => file.filename === SELECTION && file.status === 'modified') &&
-    files.every(file => !file.previous_filename && ([SELECTION, PACKAGE_INPUT_FILE, ADMINISTRATIVE_REGISTRY].includes(file.filename)
+    files.every(file => !file.previous_filename && (file.filename === CHECKPOINT_LOCATOR
+      ? ['added', 'modified'].includes(file.status) : [SELECTION, PACKAGE_INPUT_FILE, ADMINISTRATIVE_REGISTRY].includes(file.filename)
       ? file.status === 'modified' : file.status === 'added' && inScope(file.filename, scopes) && safe(file.filename) &&
         (/\.(?:json|jsonl\.gz|json\.gz|log)$/.test(file.filename) || supportingText(file.filename, branch, reservation) ||
-          nativeOperandPath(file.filename, branch, reservation)) &&
+          nativeOperandPath(file.filename, branch, reservation) || file.filename.endsWith('/geography-artifact.zip')) &&
         !/(?:^|\/)(?:package(?:-lock)?|tsconfig|jsconfig|binding|deno|composer)\.json$/.test(file.filename)));
 }
 export async function integrationTree(api, repo, commit) {
@@ -273,7 +275,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         (value.mode === undefined || value.mode === row.mode) &&
         (value.git_blob_oid === undefined || value.git_blob_oid === row.sha), 'role differs from candidate tree');
       // Full pins are required for leaves whose bytes are not read here.
-      needSelected((value.git_blob_oid && value.mode === '100644' && /^[a-f0-9]{40}$/.test(value.commit ?? '')) || value === hook, 'role lacks exact tree identity');
+      needSelected((value.git_blob_oid && value.mode === '100644' && /^[a-f0-9]{40}$/.test(value.commit ?? '')) || value === hook, 'role lacks exact tree identity: ' + value.path);
       const identity = [value.bytes, value.sha256, row.sha];
       needSelected(!identities.has(value.path) || same(identities.get(value.path), identity), 'conflicting role identities');
       identities.set(value.path, identity);
@@ -556,11 +558,30 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       pin(plan.original_inputs[1]);
       originalLedger = plan.original_inputs[1];
     };
-    for (const entry of registry.entries) {
+    // Existing deliveries resolve new authority first; only unresolved native
+    // operands require a bounded second pass through retained custody.
+    const roleEntries = [...registry.entries].sort((a, b) => Number(added.has(b.source_authority?.path)) - Number(added.has(a.source_authority?.path)));
+    for (const entry of roleEntries) {
       needSelected(keys(entry, ['authority_sha256','policy_id','policy_version','rule_preimage','rule_sha256','source_authority']), 'foreign registry fields');
       pin(entry.rule_preimage); pin(entry.source_authority);
-      if (!added.has(entry.source_authority.path)) continue;
+      const retained = !added.has(entry.source_authority.path);
+      if (retained && ![...added].some(name => nativeOperandPath(name, branch, reservation) && !nativeOperands.has(name))) continue;
       const authority = await pinnedJSON(entry.source_authority);
+      let restoredRequest;
+      if (retained) {
+        // A previous selected delivery may retain original authority while
+        // omitting another cohort's operands. Revisit only an exact original
+        // request that actually names newly restored operands. This grants no
+        // opaque-file exception without the full nativeRoles custody checks.
+        const before = baseline.entries.get(entry.source_authority.path), after = authored.entries.get(entry.source_authority.path);
+        needSelected(ordinary(before) && before.sha === after.sha && before.size === after.size,
+          'retained native authority changed');
+        const requestPin = authority.original_pins?.native_request;
+        if (!requestPin || !authored.entries.has(requestPin.path) || requestPin.mode !== '100644' ||
+            !/^[a-f0-9]{40}$/.test(requestPin.git_blob_oid ?? '') || !/^[a-f0-9]{40}$/.test(requestPin.commit ?? '')) continue;
+        restoredRequest = await pinnedJSON(requestPin);
+        if (!restoredRequest.additive?.owner_parts?.some(part => added.has(part.path))) continue;
+      }
       needSelected(authority.version === 1 && authority.kind === 'original-issued-rule-source-custody-v1' &&
         keys(authority.original_pins, ['ledger','native_facts','native_manifest','native_request','source_facts','source_request']),
         'unsupported source authority');
@@ -581,7 +602,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
           'source alias rewrites original data');
         pin(alias.published);
       }
-      const nativeRequest = await pinnedJSON(authority.original_pins.native_request), spec = nativeRequest.additive;
+      const nativeRequest = restoredRequest ?? await pinnedJSON(authority.original_pins.native_request), spec = nativeRequest.additive;
       await nativeRoles(authority, nativeRequest);
       if (sourceExtension) await sourceRoles(authority);
       needSelected(Array.isArray(spec?.inputs) && spec.inputs.length <= 1024, 'missing source role inputs');
@@ -630,6 +651,71 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         needSelected(descriptor.bytes === bytes.length && descriptor.sha256 === sha256(bytes), 'prospective preparation bytes differ');
       }
     }
+    const transport = new Set(), archives = [...added].filter(name => name.endsWith('.zip'));
+    if (files.some(file => file.filename === CHECKPOINT_LOCATOR) || archives.length) {
+      // This admits inert custody to the selected-data test inventory, not a
+      // checkpoint capability. The unchanged real geography job still performs
+      // original-job authentication and complete private scientific admission.
+      const {ACCEPTED_CHECKPOINT_LOCATOR, validateAcceptedCheckpointLocator} = await import('./accepted-selected-checkpoint.mjs');
+      const {githubPages} = await import('./issue-claim-contract.mjs');
+      const {readWorkerResult, verifyAcceptedMergeResult} = await import('./worker-result.mjs');
+      const {validateGeographyProof, readReportArchive, geographicReportProducts, checkGeographicReport} = await import('./geographic-report-artifact.mjs');
+      needSelected(CHECKPOINT_LOCATOR === ACCEPTED_CHECKPOINT_LOCATOR, 'unsupported checkpoint locator route');
+      const locator = validateAcceptedCheckpointLocator(await json(ACCEPTED_CHECKPOINT_LOCATOR));
+      const archive = locator.retained_artifact?.path;
+      needSelected(files.some(file => file.filename === ACCEPTED_CHECKPOINT_LOCATOR) &&
+        archives.length === 1 && archives[0] === archive &&
+        inScope(archive, [branchScope(branch), ...engineeringOwnedScopes(reservation)]), 'unbound checkpoint archive');
+      const definition = validatePackageInputs(await json(PACKAGE_INPUT_FILE));
+      needSelected([ACCEPTED_CHECKPOINT_LOCATOR, archive].every(name => !reachable.has(name) &&
+        !sourceDeclarations.has(name) && !packagePathRequired(name, definition)), 'checkpoint custody is a consumed package role');
+      // Reuse accepted receipt and actual merged-PR checks. The archive's hash
+      // comes from that bot receipt, never from the locator or a local digest.
+      let metadataBytes = 0;
+      const acceptedAPI = async (...args) => {
+        const prospective = diagnostics.retained_bytes + 8 * (metadataBytes + 2 * 1024 * 1024);
+        admitBytes(prospective); diagnostics.peak_admitted_bytes = Math.max(diagnostics.peak_admitted_bytes, prospective);
+        const value = await api(args[0], 'GET', undefined, {maxResponseBytes: 2 * 1024 * 1024});
+        const bytes = Buffer.byteLength(JSON.stringify(value));
+        needSelected(bytes <= 2 * 1024 * 1024 && metadataBytes + bytes <= 8 * 1024 * 1024,
+          'checkpoint receipt metadata exceeds bound');
+        metadataBytes += bytes; return value;
+      };
+      const acceptance = locator.acceptance;
+      const comments = await githubPages(acceptedAPI, `/repos/${repo}/issues/${acceptance.pr_number}/comments`);
+      const receipt = readWorkerResult(comments, 'merge', acceptance.request_id, acceptance.pr_number);
+      const merged = await acceptedAPI(`/repos/${repo}/pulls/${acceptance.pr_number}`);
+      verifyAcceptedMergeResult(receipt, merged, acceptance.head);
+      needSelected(merged.number === acceptance.pr_number && merged.base?.ref === 'main' &&
+        merged.base.repo?.full_name === repo && merged.head.repo?.full_name === repo &&
+        receipt.reviewed_head === acceptance.head, 'foreign checkpoint acceptance');
+      const source = validateGeographyProof(receipt.geography?.source);
+      const candidateCommit = source.candidate_commit ?? source.head;
+      needSelected(source.head === acceptance.head && receipt.geography.status === 'passed' &&
+        receipt.geography.report_sha256 === source.report_sha256 &&
+        receipt.geography.trusted_code_commit === source.baseline && receipt.tested_base === source.baseline &&
+        receipt.geography.candidate_commit === candidateCommit, 'checkpoint receipt/source differs');
+      for (const commit of [receipt.merge_commit, receipt.tested_candidate]) {
+        needSelected(/^[a-f0-9]{40}$/.test(commit ?? ''), 'missing accepted checkpoint commit');
+        const object = await acceptedAPI(`/repos/${repo}/git/commits/${commit}`);
+        needSelected(object.sha === commit && object.tree?.sha === source.tree, 'checkpoint accepted/tested tree differs');
+      }
+      const transportBytes = diagnostics.retained_bytes + 8 * metadataBytes + 2 * authored.entries.get(archive).size;
+      admitBytes(transportBytes); diagnostics.peak_admitted_bytes = Math.max(diagnostics.peak_admitted_bytes, transportBytes);
+      const raw = await read(archive, authored, false);
+      needSelected(raw.length === source.artifact_bytes && sha256(raw) === source.artifact_digest,
+        'checkpoint archive differs from accepted artifact digest');
+      const report = readReportArchive(raw, source.report_sha256, source.report_bytes, {admit: bytes => {
+        const complete = diagnostics.retained_bytes + 8 * metadataBytes + bytes;
+        admitBytes(complete); diagnostics.peak_admitted_bytes = Math.max(diagnostics.peak_admitted_bytes, complete);
+      }});
+      checkGeographicReport(report, source.baseline, candidateCommit);
+      needSelected(report.checkpoint, 'legacy report has no checkpoint custody');
+      const facts = parseJSON(geographicReportProducts(report).members.get('derived-facts.json'));
+      needSelected(facts.candidate_commit === candidateCommit && same(facts.candidate_selection, oldSelection),
+        'checkpoint does not supply selected baseline');
+      transport.add(ACCEPTED_CHECKPOINT_LOCATOR); transport.add(archive);
+    }
     const manifest = `coordination/engineering/${branch.slice('engineering/'.length)}/evidence-quality.json`;
     for (const name of added) {
       if (supportingText(name, branch, reservation)) {
@@ -640,7 +726,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         needSelected(bytes.length <= 128 * 1024 && !bytes.includes(0) && Buffer.from(bytes.toString('utf8')).equals(bytes), 'nontext packet documentation');
         continue;
       }
-      if (reachable.has(name) || name === expectationsPath || name === manifest) continue;
+      if (reachable.has(name) || transport.has(name) || name === expectationsPath || name === manifest) continue;
       // Non-consumed supporting evidence cannot become package input. It must
       // still be ordinary inert JSON/text, never a module, configuration or opaque archive.
       // Validate syntax, then discard it: arbitrary preparation records confer no
@@ -679,7 +765,14 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       needSelected(administrative && administrative.length > previous.length && same(previous, administrative.slice(0, previous.length)) &&
         administrative.slice(previous.length).every(entry => usedRegistrations.has(entry.id)), 'registry is not append-only selected SOURCE data');
     }
-    needSelected(packageAdditions.every(name => added.has(name) && reachable.has(name) || sourceDeclarations.has(name)),
+    const unchangedRole = name => {
+      const before = baseline.entries.get(name), after = authored.entries.get(name);
+      return ordinary(before) && ordinary(after) && before.sha === after.sha && before.size === after.size;
+    };
+    // Package declarations can introduce already accepted original proof roles.
+    // File creation time is not scientific authority: typed reachability plus
+    // exact unchanged Git identity is required for these retained leaves.
+    needSelected(packageAdditions.every(name => reachable.has(name) && (added.has(name) || unchangedRole(name)) || sourceDeclarations.has(name)),
       'package change is not append-only exact reachable data');
     return {test_selection: 'selected-data', expectations_path: expectationsPath, shards: [0]};
   } catch (error) {

@@ -228,8 +228,12 @@ test('assume-unchanged cannot hide unique tracked bytes from cleanup', t => {
 
 // Actual local blobless clone: commit/tree objects arrive via Git's promisor
 // protocol; selected fixture blobs are seeded locally without warming exclusions.
-function partialFixture(t, missing) {
+function partialFixture(t, missing, {packSource = false} = {}) {
   const source = fixture(t);
+  if (packSource) {
+    source.git('repack', '-ad');
+    assert.match(source.git('count-objects', '-v'), /^count: 0$/m, 'packed source has no loose objects');
+  }
   source.git('config', 'uploadpack.allowFilter', 'true');
   const repo = path.join(source.temporary, 'partial');
   execFileSync('git', ['clone', '--filter=blob:none', '--no-checkout', pathToFileURL(source.repo).href, repo], {stdio: 'pipe'});
@@ -241,9 +245,14 @@ function partialFixture(t, missing) {
   for (const line of source.git('ls-tree', '-rz', 'HEAD').split('\0').filter(Boolean)) {
     const oid = line.slice(0, line.indexOf('\t')).split(' ')[2];
     if (oid === absent) continue;
-    const relative = path.join(oid.slice(0, 2), oid.slice(2));
-    fs.mkdirSync(path.dirname(path.join(repo, '.git/objects', relative)), {recursive: true});
-    fs.copyFileSync(path.join(source.repo, '.git/objects', relative), path.join(repo, '.git/objects', relative));
+    // Git may pack source objects during ordinary maintenance. Transfer the
+    // exact blob bytes through Git rather than assuming loose-object storage.
+    const env = {...process.env, GIT_NO_LAZY_FETCH: '1'};
+    const bytes = execFileSync('git', ['-C', source.repo, 'cat-file', 'blob', oid], {env});
+    const written = execFileSync('git', ['-C', repo, 'hash-object', '-w', '--stdin'], {
+      input: bytes, encoding: 'utf8', env
+    }).trim();
+    assert.equal(written, oid, 'seeded blob preserves its exact object identity');
   }
   const objectState = () => fs.readdirSync(path.join(repo, '.git/objects'), {recursive: true}).sort();
   const objects = objectState();
@@ -288,6 +297,16 @@ test('actual promisor clone allocates selected sparse inputs without sizing or f
   checkUnfetched();
   manager.release({worker: 'partial', slot: 'review', token: entry.token});
   assert.equal(execFileSync('git', ['-C', repo, 'worktree', 'list', '--porcelain'], {encoding: 'utf8'}).match(/^worktree /gm).length, 1);
+});
+
+test('packed-source promisor fixture preserves selected blobs and leaves excluded blobs missing', t => {
+  const {run, manager, checkUnfetched} = partialFixture(t, 'data/other/large.json', {packSource: true});
+  const entry = JSON.parse(run({include: ['data/needed', 'data/one.json']}));
+  assert.equal(fs.readFileSync(path.join(entry.path, 'data/needed/input.json'), 'utf8'), 'input');
+  assert.equal(fs.readFileSync(path.join(entry.path, 'data/one.json'), 'utf8'), 'individual');
+  assert.ok(!fs.existsSync(path.join(entry.path, 'data/other')));
+  checkUnfetched();
+  manager.release({worker: 'partial', slot: 'review', token: entry.token});
 });
 
 test('actual promisor clone rejects missing root, support and explicitly selected blobs before allocation', t => {

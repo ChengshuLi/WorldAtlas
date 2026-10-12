@@ -7,7 +7,7 @@ import {createHash} from 'node:crypto';
 import {authenticateOriginalPackageOutput, requireOriginalPackageOutput,
   requirePackageAssemblyExecution} from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
 import {requireRetainedPackageTests, integrationTestFiles} from '../scripts/run-integration-tests.mjs';
-import {admitAssemblyAtlasMetadata} from '../scripts/assemble-selected-package.mjs';
+import {admitAssemblyAtlasMetadata,createPackageAssemblyScratch} from '../scripts/assemble-selected-package.mjs';
 import {execFileSync,spawnSync} from 'node:child_process';
 
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
@@ -120,4 +120,28 @@ test('explicit hosted proof cannot silently report normal fallback success',t=>{
     assert.equal(result.status,status,result.stderr);assert.equal(JSON.parse(result.stdout).assembled,false);
     assert.match(fs.readFileSync(path.join(temporary,event),'utf8'),/^assembled=false\n/);
   }
+});
+
+
+test('fresh selected assembly creates owned ordinary scratch without depending on a previous build',async t=>{
+  const root=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-fresh-assembly-'));
+  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  const first=await createPackageAssemblyScratch(root),second=await createPackageAssemblyScratch(root);
+  assert.ok(fs.lstatSync(path.join(root,'.cache')).isDirectory());
+  for(const dir of [first,second]){
+    assert.equal(path.dirname(dir),path.join(root,'.cache'));
+    assert.match(path.basename(dir),/^selected-package-/);assert.ok(fs.lstatSync(dir).isDirectory());
+  }
+  assert.notEqual(first,second);
+});
+test('selected assembly rejects symlink, dangling-link and non-directory scratch without touching targets',async t=>{
+  const root=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-hostile-scratch-'));
+  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  const cache=path.join(root,'.cache'),outside=path.join(root,'outside');fs.mkdirSync(outside);
+  fs.writeFileSync(path.join(outside,'sentinel'),'preserve');
+  for(const target of [outside,path.join(root,'absent')]){
+    fs.symlinkSync(target,cache);await assert.rejects(createPackageAssemblyScratch(root),/Ordinary package assembly scratch/);fs.unlinkSync(cache);
+  }
+  fs.writeFileSync(cache,'preserve cache');await assert.rejects(createPackageAssemblyScratch(root),/Ordinary package assembly scratch/);
+  assert.equal(fs.readFileSync(cache,'utf8'),'preserve cache');assert.deepEqual(fs.readdirSync(outside),['sentinel']);
 });

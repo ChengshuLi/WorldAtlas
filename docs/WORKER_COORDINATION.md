@@ -248,6 +248,20 @@ that predecessor again against its actual baseline and current control job,
 including after capacity waiting and before merge. Only immutable input
 collection is cached within that queue process; live authority is reread.
 
+PR geography compares the event's authenticated merge commit against its exact
+trusted event base, not the raw author head against a newer base. The checker
+verifies ordered parents `[event base, reviewed head]` before reading scientific
+inputs. This preserves unrelated authority added by parallel main while still
+rejecting real proposed removals/rebindings. The report keeps the executing base
+and actual candidate; its original upload receipt also records that candidate.
+Reuse readers verify its immutable parents/tree and preserve the reviewed head,
+workflow head and original candidate separately. Legacy raw-head receipts retain
+their original meaning. The transition PR may execute the older trusted checker;
+its report cannot be relabeled as raw-head proof and falls back to queue geography.
+Code-proof reuse still needs whole-tree equality, and the final queue independently
+checks current main plus its actual combined candidate. No main advance alone
+requires rewriting the author's branch merely to make geography comparable.
+
 This is cooperative GitHub Actions evidence, not independent authenticated worker
 identity or a native GitHub merge queue. The existing final base check and guarded
 head merge remain; outside writers must honor the same serialized queue. A green

@@ -284,7 +284,10 @@ jobs:
           GEOGRAPHY_PR_NUMBER: ${{ github.event.pull_request.number }}
           GEOGRAPHY_REVIEWED_HEAD: ${{ github.event.pull_request.head.sha }}
           GEOGRAPHY_BASELINE: ${{ github.event.pull_request.base.sha }}
-          GEOGRAPHY_CANDIDATE: ${{ github.event.pull_request.head.sha }}
+          # This event merge commit includes parallel main additions. Raw head
+          # against current base would invent deletions that the PR never made.
+          GEOGRAPHY_CANDIDATE: ${{ github.sha }}
+          GEOGRAPHY_COMPARISON: pull-request-merge-v1
         run: |
           if test -f scripts/run-geographic-check.py; then
             python -I -B - --fetch --out geography-check.json <<'PY'

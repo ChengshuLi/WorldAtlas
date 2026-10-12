@@ -148,7 +148,7 @@ export async function reusePRGeography({event, repo, api, token, directory = pro
     if (!job || job.run_id !== run.id || job.head_sha !== head || job.run_attempt !== run.run_attempt) continue;
     const proof = {run_id: run.id, run_attempt: run.run_attempt, geography_job_id: job.id, tree: source.object.tree.sha};
     const loaded = await loadProof({api, repo, number, head, baseline, proof, token});
-    if (!loaded || !ordinaryOriginalGeography(loaded.report, {baseline, head})) continue;
+    if (!loaded || !ordinaryOriginalGeography(loaded.report, {baseline, head: loaded.source.candidate_commit ?? head})) continue;
     const origin = validateGeographyProof(loaded.source);
     need(origin.run_id === run.id && (origin.current_run_attempt ?? origin.run_attempt) === run.run_attempt &&
       (origin.current_job_id ?? origin.job_id) === job.id && origin.head === head && origin.baseline === baseline &&

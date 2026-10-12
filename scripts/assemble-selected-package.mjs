@@ -30,6 +30,13 @@ export function admitAssemblyAtlasMetadata(bytes,allowance=processingAllowance()
   need(Number.isSafeInteger(bytes)&&bytes>0&&2*bytes<=allowance.phaseBytes,'Actual atlas exceeds current metadata allocation');
   return bytes;
 }
+export async function createPackageAssemblyScratch(sourceRoot){
+  const cache=path.join(sourceRoot,'.cache');
+  let stat;try{stat=await fsp.lstat(cache);}catch(error){if(error.code!=='ENOENT')throw error;}
+  need(!stat||stat.isDirectory()&&!stat.isSymbolicLink(),'Ordinary package assembly scratch directory required');
+  if(!stat)await fsp.mkdir(cache,{mode:0o700});
+  return fsp.mkdtemp(path.join(cache,'selected-package-'));
+}
 function admitDisk(bytes,label){
   const disk=fs.statfsSync(root);
   need(Number.isSafeInteger(bytes)&&bytes>=0&&disk.bavail*disk.bsize>=bytes,'Insufficient disk for '+label);
@@ -120,7 +127,7 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
   const runtime=inspectPackageRuntime(root);need(runtime.errors.length===0,'Current assembly runtime/dependency preflight failed');
   await verifyPackageDependencies(path.join(root,'node_modules'));
   admitDisk(found.origin.artifact_bytes,'the actual authenticated original archive');
-  const scratch=await fsp.mkdtemp(path.join(root,'.cache/selected-package-'));
+  const scratch=await createPackageAssemblyScratch(root);
   let committed=false,preserveScratch=false;
   try{
     const archive=path.join(scratch,'original.zip'),manifestFile=path.join(scratch,'manifest.json');

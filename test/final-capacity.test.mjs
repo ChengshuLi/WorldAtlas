@@ -861,3 +861,27 @@ test('predecessor applicability retains authenticated redirect capabilities and 
   assert.equal(inventories,2);assert.equal(redirects.length,4);
   assert.equal(result.receipt.proof_calls,4,'run, jobs, original log and original archive are budgeted');
 });
+
+test('original PR merge candidate survives prepare and final acceptance without becoming reviewed head', async () => {
+  const f = geographyReuseFixture(), originCandidate = 'e'.repeat(40), original = f.api;
+  Object.assign(f.source, {workflow_path: WORKFLOW_PATH, event: 'pull_request', workflow_head: f.head,
+    candidate_commit: originCandidate});
+  f.report.candidate_commit = originCandidate;
+  Object.assign(f.proofJobs.find(job => job.name === 'geography'), {run_id: 44, run_attempt: 1, head_sha: f.head});
+  f.api = async (route, ...args) => {
+    if (route.endsWith('/actions/runs/44/attempts/1')) return structuredClone(f.proofRun);
+    if (route.endsWith(`/git/commits/${originCandidate}`)) return {sha: originCandidate,
+      tree: {sha: f.source.tree}, parents: [{sha: f.base}, {sha: f.head}]};
+    return original(route, ...args);
+  };
+  const prepared = await f.prepare();
+  assert.equal(prepared.geography_proof.candidate_commit, originCandidate);
+  const result = await f.reuse({geographyProof: prepared.geography_proof});
+  assert.equal(result.accepted, true);
+  assert.equal(result.reviewed_head, f.head);
+  assert.equal(result.tested_candidate, f.candidate);
+  assert.equal(result.geography.candidate_commit, originCandidate);
+  assert.equal(result.geography.source.candidate_commit, originCandidate);
+  assert.equal(result.geography.source.head, f.head);
+  assert.equal(f.writes.filter(row => row.route.endsWith('/merge')).length, 1);
+});
