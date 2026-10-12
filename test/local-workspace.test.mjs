@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import {pathToFileURL} from 'node:url';
 import {execFileSync, spawn} from 'node:child_process';
 import {workspaceManager, cleanupCompletedWorkspace, GiB} from '../scripts/local-workspace.mjs';
 
@@ -223,4 +224,141 @@ test('assume-unchanged cannot hide unique tracked bytes from cleanup', t => {
   assert.throws(() => manager.release({worker: 'one', token: entry.token}), /trust flags/);
   assert.equal(cleanupCompletedWorkspace(entry.path, head).status, 'pending');
   assert.equal(fs.readFileSync(path.join(entry.path, 'README.md'), 'utf8'), 'unique hidden work');
+});
+
+// Actual local blobless clone: commit/tree objects arrive via Git's promisor
+// protocol; selected fixture blobs are seeded locally without warming exclusions.
+function partialFixture(t, missing) {
+  const source = fixture(t);
+  source.git('config', 'uploadpack.allowFilter', 'true');
+  const repo = path.join(source.temporary, 'partial');
+  execFileSync('git', ['clone', '--filter=blob:none', '--no-checkout', pathToFileURL(source.repo).href, repo], {stdio: 'pipe'});
+  const git = (...args) => execFileSync('git', ['-C', repo, ...args], {
+    encoding: 'utf8', stdio: 'pipe', env: {...process.env, GIT_NO_LAZY_FETCH: '1'}
+  });
+  assert.equal(git('config', '--get', 'remote.origin.promisor').trim(), 'true');
+  const absent = source.git('rev-parse', `HEAD:${missing}`).trim();
+  for (const line of source.git('ls-tree', '-rz', 'HEAD').split('\0').filter(Boolean)) {
+    const oid = line.slice(0, line.indexOf('\t')).split(' ')[2];
+    if (oid === absent) continue;
+    const relative = path.join(oid.slice(0, 2), oid.slice(2));
+    fs.mkdirSync(path.dirname(path.join(repo, '.git/objects', relative)), {recursive: true});
+    fs.copyFileSync(path.join(source.repo, '.git/objects', relative), path.join(repo, '.git/objects', relative));
+  }
+  const objectState = () => fs.readdirSync(path.join(repo, '.git/objects'), {recursive: true}).sort();
+  const objects = objectState();
+  const trace = path.join(source.temporary, 'partial-git-trace.log');
+  const run = options => {
+    const moduleURL = new URL('../scripts/local-workspace.mjs', import.meta.url).href;
+    const code = `import {workspaceManager,GiB} from ${JSON.stringify(moduleURL)};
+      try { console.log(JSON.stringify(workspaceManager(${JSON.stringify(repo)},{freeBytes:()=>100*GiB}).allocate(${JSON.stringify({worker: 'partial', slot: 'review', commit: source.head, ...options})}))); }
+      catch(error) { console.error(error.message); process.exitCode=1; }`;
+    // Deliberately permit lazy fetch in the caller: allocator sizing must disable
+    // it itself. Any accidental fetch is observable, even if Git recovers.
+    return execFileSync(process.execPath, ['--input-type=module', '-e', code], {
+      encoding: 'utf8', stdio: 'pipe', env: {...process.env, GIT_NO_LAZY_FETCH: '0', GIT_TRACE: trace}
+    });
+  };
+  const checkUnfetched = (allowMainFetch = false) => {
+    let log = fs.readFileSync(trace, 'utf8');
+    if (allowMainFetch) {
+      assert.equal(log.match(/built-in: git fetch origin main/g)?.length, 1, 'only the ordinary main refresh is allowed');
+      log = log.split('\n').filter(line => !line.includes('built-in: git fetch origin main')).join('\n');
+    }
+    assert.doesNotMatch(log, /(?:built-in: git|run_command:) .*fetch/);
+    assert.match(log, /ls-tree -rz/);
+    assert.doesNotMatch(log, /ls-tree -rlz/);
+    assert.deepEqual(objectState(), objects, 'sizing/checkout must not hydrate an excluded or missing blob');
+    const response = execFileSync('git', ['-C', repo, 'cat-file', '--batch-check'], {
+      input: absent + '\n', encoding: 'utf8', env: {...process.env, GIT_NO_LAZY_FETCH: '1'}
+    });
+    assert.equal(response.trim(), `${absent} missing`);
+  };
+  return {...source, repo, git, trace, run, checkUnfetched,
+    manager: workspaceManager(repo, {freeBytes: () => 100 * GiB})};
+}
+
+test('actual promisor clone allocates selected sparse inputs without sizing or fetching excluded missing blobs', t => {
+  const {run, repo, manager, checkUnfetched} = partialFixture(t, 'data/other/large.json');
+  const entry = JSON.parse(run({include: ['data/needed', 'data/one.json']}));
+  assert.equal(fs.readFileSync(path.join(entry.path, 'data/needed/input.json'), 'utf8'), 'input');
+  assert.equal(fs.readFileSync(path.join(entry.path, 'data/one.json'), 'utf8'), 'individual');
+  assert.equal(fs.readFileSync(path.join(entry.path, 'scripts/tool.mjs'), 'utf8'), 'tool');
+  assert.ok(!fs.existsSync(path.join(entry.path, 'data/other')));
+  checkUnfetched();
+  manager.release({worker: 'partial', slot: 'review', token: entry.token});
+  assert.equal(execFileSync('git', ['-C', repo, 'worktree', 'list', '--porcelain'], {encoding: 'utf8'}).match(/^worktree /gm).length, 1);
+});
+
+test('actual promisor clone rejects missing root, support and explicitly selected blobs before allocation', t => {
+  for (const missing of ['README.md', 'scripts/tool.mjs', 'data/one.json']) {
+    const {run, manager, git, checkUnfetched} = partialFixture(t, missing);
+    const before = git('worktree', 'list', '--porcelain');
+    const refs = git('show-ref');
+    assert.throws(() => run({include: ['data/one.json']}), error => /Unknown input size/.test(error.stderr));
+    assert.equal(git('worktree', 'list', '--porcelain'), before);
+    assert.equal(git('show-ref'), refs);
+    assert.deepEqual(manager.report().entries, []);
+    assert.ok(!fs.existsSync(manager.report().root), 'no checkout directory is created');
+    assert.ok(!fs.existsSync(path.join(manager.report().registry, 'state.json')), 'no reservation is written');
+    checkUnfetched();
+  }
+});
+
+test('author allocation refreshes main but missing selected blobs create no branch, reservation or checkout', t => {
+  const {run, manager, git, checkUnfetched} = partialFixture(t, 'scripts/tool.mjs');
+  const before = git('worktree', 'list', '--porcelain');
+  assert.throws(() => run({slot: 'work', commit: undefined, branch: 'engineering/missing-selected'}),
+    error => /Unknown input size/.test(error.stderr));
+  assert.equal(git('worktree', 'list', '--porcelain'), before);
+  assert.throws(() => git('rev-parse', '--verify', 'refs/heads/engineering/missing-selected'));
+  assert.deepEqual(manager.report().entries, []);
+  assert.ok(!fs.existsSync(manager.report().root));
+  assert.ok(!fs.existsSync(path.join(manager.report().registry, 'state.json')));
+  checkUnfetched(true);
+});
+
+test('full profile requires every promisor blob and fails before reservation or checkout', t => {
+  const {run, manager, git, checkUnfetched} = partialFixture(t, 'data/other/large.json');
+  const before = git('worktree', 'list', '--porcelain');
+  assert.throws(() => run({profile: 'full'}), error => /Unknown input size/.test(error.stderr));
+  assert.equal(git('worktree', 'list', '--porcelain'), before);
+  assert.deepEqual(manager.report().entries, []);
+  assert.ok(!fs.existsSync(manager.report().root));
+  checkUnfetched();
+});
+
+test('bounded selected batches count duplicate blob paths, empty files and full-profile bytes exactly', t => {
+  const {repo, git, manager} = fixture(t);
+  const blob = git('rev-parse', 'HEAD:README.md').trim();
+  const rows = Array.from({length: 2100}, (_, i) => `100644 ${blob}\tscripts/duplicate-${i}.txt\n`).join('');
+  execFileSync('git', ['-C', repo, 'update-index', '--index-info'], {input: rows});
+  fs.writeFileSync(path.join(repo, 'empty.txt'), '');
+  git('add', 'empty.txt'); git('commit', '-m', 'multiple size batches');
+  const head = git('rev-parse', 'HEAD').trim();
+  for (const profile of ['sparse', 'full']) {
+    const include = ['data/needed', 'data/one.json'];
+    const expected = git('ls-tree', '-rlz', head).split('\0').filter(Boolean).reduce((total, line) => {
+      const [metadata, name] = line.split('\t');
+      return total + (profile === 'full' || !name.includes('/') || name.startsWith('scripts/') || name.startsWith('docs/')
+        || name.startsWith('data/needed/') || name === 'data/one.json' ? Number(metadata.trim().split(/\s+/)[3]) : 0);
+    }, 0);
+    const entry = manager.allocate({worker: profile, slot: 'review', commit: head, profile, include, reserveGiB: 1 / GiB});
+    assert.equal(entry.reservation, expected);
+    assert.equal(fs.readFileSync(path.join(entry.path, 'scripts/duplicate-2099.txt'), 'utf8'), 'root');
+    manager.release({worker: profile, slot: 'review', token: entry.token});
+  }
+});
+
+test('selected submodules remain refused while excluded submodule metadata is harmless', t => {
+  const {repo, git, manager, head} = fixture(t);
+  execFileSync('git', ['-C', repo, 'update-index', '--add', '--cacheinfo', `160000,${head},data/vendor`]);
+  git('commit', '-m', 'submodule fixture');
+  const commit = git('rev-parse', 'HEAD').trim();
+  const entry = manager.allocate({worker: 'excluded', slot: 'review', commit});
+  manager.release({worker: 'excluded', slot: 'review', token: entry.token});
+  for (const options of [{include: ['data/vendor']}, {profile: 'full'}]) {
+    assert.throws(() => manager.allocate({worker: 'selected', slot: 'review', commit, ...options}), /Submodule/);
+    assert.deepEqual(manager.report().entries, []);
+  }
 });

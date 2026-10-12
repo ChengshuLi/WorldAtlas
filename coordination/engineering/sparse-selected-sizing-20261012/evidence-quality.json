@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "issue": 1776,
+  "lane": "engineering",
+  "worker_id": "01a12ecd-41ab-75f5-b7e3-d229df104025",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "1cbd8ece2a0e1f66e6124de7fbc45294e7d64051",
+    "files": [
+      {
+        "path": "scripts/local-workspace.mjs",
+        "bytes": 13365,
+        "sha256": "74c390efa3360b4431d047f89ab99986da697e58716000f44a4b284760e2a373",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "selected-blob-sizing",
+      "kind": "code",
+      "description": "Read the complete Git tree without blob sizes, preserve existing sparse selection, and measure only selected blob OIDs with bounded no-lazy batch checks before storage admission. Actual local file-transport blobless promisor clones exercise absent excluded, selected and full-profile inputs, main refresh, no-fetch traces, object inventory preservation, exact repeated-blob byte accounting and submodule refusal. Existing allocator safety and worker identity tests remain required.",
+      "software": "Node v24.19.0; Git 2.52.0; Linux",
+      "units": "selected materialized bytes"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "Actual Apple Git allocation and desktop adoption are not established by the Linux fixtures; no geographic, production or deployment result is claimed.",
+      "status": "unresolved",
+      "source_ids": []
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "GIT_NO_LAZY_FETCH=1 node --test test/local-workspace.test.mjs test/worker-identity.test.mjs",
+    "GIT_NO_LAZY_FETCH=1 node scripts/evidence-quality.mjs coordination/engineering/sparse-selected-sizing-20261012/evidence-quality.json",
+    "git diff --check"
+  ]
+}
