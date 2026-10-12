@@ -8,7 +8,7 @@ import {gunzipSync} from 'node:zlib';
 import {ImmutableReader, NativeAssetImage} from '../../../scripts/check-effective-geographic-regression.mjs';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 import {valueBytes, valueSha, coordinateBounds, nativeBaseSelection,
-  normaliseRetainedRepairLedger, readRetainedRegistryAuthority,
+  normaliseRetainedRepairLedger, readRetainedRegistryAuthority, validateSupportedProgrammeCatalogue,
   compatibleCurrentRebindCode, CURRENT_REBIND_CODE, verifyCurrentRebindExecution,
   currentRebindResult, currentRebindAcquisitionIdentity, retainedArcticNativeRows} from './selected-neighbor-prevention.mjs';
 
@@ -20,6 +20,11 @@ const FIELDS = ['id','index','parent_id','parent_index','source','ordinal','whol
 const states = new WeakMap(), projections = new WeakMap(), transitions = new WeakMap();
 const demand = (ok, message) => { if (!ok) throw Error(message); };
 const sha = body => createHash('sha256').update(body).digest('hex');
+// Policy is rooted in the executing trusted checkout, independently of the
+// selected scientific vintage. Keep its archived census entry, but do not make
+// accepted programme additions look like changed source/native input bytes.
+const PROGRAMME_POLICY = 'coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
+const sameScientificRoutes = (reader,routes) => routes.every(p => p.path === PROGRAMME_POLICY || treeRoute(reader,p.path) === p.tree);
 const same = (a,b) => a === undefined || b === undefined ? a === b : valueSha(a) === valueSha(b);
 const hash = x => typeof x === 'string' && /^[a-f0-9]{64}$/.test(x);
 const commit = x => typeof x === 'string' && /^[a-f0-9]{40}$/.test(x);
@@ -311,7 +316,20 @@ export function qualifyCheckpoint({reader,checkpointId,budget}) {
     for (const input of certificate.inputs) { paths.add(input.path); paths.add(input.source.path); }
     demand(Array.isArray(routes) && same(routes.map(p => p.path),[...paths].sort())
       && routes.every(p => typeof p.tree === 'string'), 'Incomplete trusted present/absent route census');
-    supported(routes.every(p => treeRoute(reader,p.path) === p.tree), 'Accepted checkpoint input or routing alternative changed');
+    // Policy eligibility is not revoked by silently dropping its old file from
+    // route equality. Authenticate the actual accepted execution's catalogue
+    // and require its complete records to survive in the executing policy.
+    // This is two small policy bodies, not any old source/native qualification.
+    const policyPins=retained.inventory.filter(p => p.path===PROGRAMME_POLICY);
+    demand(policyPins.length===1, 'Missing complete accepted programme policy custody');
+    const priorPolicy=validateSupportedProgrammeCatalogue(readBody(session,archiveReader,policyPins[0]));
+    const currentPolicy=validateSupportedProgrammeCatalogue(readNamed(session,archiveReader,PROGRAMME_POLICY));
+    for (const key of ['programs','current_rebind_migrations']) {
+      const current=new Set(currentPolicy[key].map(valueSha));
+      supported(priorPolicy[key].every(row => current.has(valueSha(row))),
+        'Trusted producer policy no longer preserves accepted eligibility');
+    }
+    supported(sameScientificRoutes(reader,routes), 'Accepted checkpoint input or routing alternative changed');
     // All genuine old complete records remain in the state, including exceptions.
     const data = {version:1,kind:'verified-selected-state-v1',selected_commit:reader.version,
       accepted_execution:{accepted_head:root.accepted_head,execution_commit:root.execution_commit,
@@ -661,7 +679,7 @@ export function qualifyTransition({state,reader,budget}) {
     beginFrame(session,reader);
     const selected=readSelection(session,reader);
     supported(same(nativeBaseSelection(selected.selection),state.baseSelection), 'Selected native/source/domain/owner base changed');
-    supported(baseProof.routes.every(p => treeRoute(reader,p.path)===p.tree), 'Selected input or present/absent route changed');
+    supported(sameScientificRoutes(reader,baseProof.routes), 'Selected input or present/absent route changed');
     for (const role of ['base_manifest','owner_roster'])
       supported(same(selected.sidecar.logical_asset_map[role],baseProof.selected.sidecar.logical_asset_map[role]), 'Selected original manifest/owner alias changed');
     demand(same(selected.ledger.parent_inventory,state.ledger.parent_inventory), 'Complete original source/scope denominator changed');

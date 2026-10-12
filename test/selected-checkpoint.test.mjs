@@ -10,6 +10,7 @@ import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
 import {valueBytes,valueSha,coordinateBounds} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {deriveCoordinateDelta,projectSourceFeatures,projectNativeRows,qualifyTransition} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const MODULE='coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
+const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
 const CATALOGUE='coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
 const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/check-effective-geographic-regression.mjs','src/ownership-codec.js'];
 const sha=b=>createHash('sha256').update(b).digest('hex');
@@ -60,7 +61,7 @@ async function trustedFixture(t,{incompleteNative=false}={}){
  const git=(...a)=>execFileSync('git',['-c','core.hooksPath=/dev/null','-c','user.name=Checkpoint fixture','-c','user.email=checkpoint@example.invalid','-C',root,...a],{env:{...process.env,GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_NO_LAZY_FETCH:'1'},stdio:['ignore','pipe','pipe']});
  const save=(name,value)=>{const f=path.join(root,name);fs.mkdirSync(path.dirname(f),{recursive:true});fs.writeFileSync(f,Buffer.isBuffer(value)?value:valueBytes(value));};
  const commit=()=>{git('add','.');git('commit','-qm','Checkpoint fixture');return git('rev-parse','HEAD').toString().trim();};
- git('init','-q');for(const name of CODE)save(name,fs.readFileSync(name));save('package.json',{type:'module'});
+ git('init','-q');save(PROGRAMME,fs.readFileSync(PROGRAMME));for(const name of CODE)save(name,fs.readFileSync(name));save('package.json',{type:'module'});
  const {features,certificate}=fixtures(), source={type:'FeatureCollection',features};save('data/source.json',source);
  const reference={id:'geography:fixture',hierarchy_sha256:'a'.repeat(64),footprints_sha256:'b'.repeat(64)};
  const encode=(name,kind,values)=>{const words=Uint32Array.from(values),canonical=Buffer.from(words.buffer),encoded=gzipSync(shuffleOwnershipBytes(words));save('data/'+name,encoded);return {path:name,kind,offset:0,bytes:encoded.length,sha256:sha(encoded),decoded_bytes:canonical.length,decoded_sha256:sha(canonical),words:words.length,encoding:'byte-shuffle'};};
@@ -102,7 +103,7 @@ async function trustedFixture(t,{incompleteNative=false}={}){
  const facts={version:1,kind:'trusted-selected-coordinate-stage-v1',candidate_code_executed:false,selected_commit:selected,executing_commit:one,execution_code,runtime,binding:full.binding,complete_owners:3,complete_sources:1};
  const compressed=gzipSync(valueBytes(full));save('accepted/certificate.json.gz',compressed);save('accepted/facts.json',facts);
  const publication={version:1,kind:facts.kind,complete:true,facts:{path:'facts.json',bytes:valueBytes(facts).length,sha256:valueSha(facts)},certificate:{path:'certificate.json.gz',bytes:compressed.length,sha256:sha(compressed),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)}};save('accepted/publication.json',publication);
- const inventory=['data/source.json','data/manifest.json','data/owners.json','data/registry.json','data/ledger.json','data/patch.json','data/sidecar.json','data/envelope.json','data/native/rows.bin.gz','data/native/runs.bin.gz'].map(name=>pin(name,selected));
+ const inventory=[PROGRAMME,'data/source.json','data/manifest.json','data/owners.json','data/registry.json','data/ledger.json','data/patch.json','data/sidecar.json','data/envelope.json','data/native/rows.bin.gz','data/native/runs.bin.gz'].map(name=>pin(name,selected));
  save('accepted/custody.json',{complete_cold_custody:[{facts,publication,effective_additions:additions,inventory}]});
  save('accepted/routes.json',inventory.map(p=>p.path).sort().map(name=>({path:name,tree:git('ls-tree','-z',selected,'--',name).toString()})));const accepted=commit();
  const rootRow={id:'fixture',accepted_head:accepted,selected_commit:selected,selection_sha256:valueSha(selection),execution_commit:one,execution_code_sha256:valueSha(execution_code),runtime_sha256:valueSha(runtime),facts:pin('accepted/facts.json'),certificate:{...pin('accepted/certificate.json.gz'),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)},publication:pin('accepted/publication.json'),custody:pin('accepted/custody.json'),routes:pin('accepted/routes.json')};
@@ -246,4 +247,50 @@ test('consumer admission authenticates the private complete transition rather th
   assert.throws(()=>f.api.authenticateTransition({transition:forged,budget:f.budget}),/private qualified selected transition/);
  f.api.releaseCheckpoint(state);
  assert.throws(()=>f.api.authenticateTransition({transition,budget:f.budget}),/private qualified selected transition/);
+});
+
+
+test('trusted programme policy evolves independently of unchanged selected scientific routes',async t=>{
+ const f=await trustedFixture(t), originalPolicy=JSON.parse(fs.readFileSync(path.join(f.root,PROGRAMME)));
+ const extra=structuredClone(originalPolicy.programs.at(-1));extra.source_profile='reviewed-fixture-policy';
+ f.save(PROGRAMME,{...originalPolicy,programs:[...originalPolicy.programs,extra]});const newer=f.commit();
+ const reader=new f.native.ImmutableReader(f.root,newer,{allowance:f.reader.allowance}),budget={shared:reader.budget,carriedBytes:0};
+ const result=f.api.qualifyCheckpoint({reader,budget});assert.equal(result.available,true);
+ const forged=structuredClone(extra);forged.source_profile='candidate-only-unknown-producer';
+ f.save(PROGRAMME,{...originalPolicy,programs:[...originalPolicy.programs,extra,forged]});const candidate=f.commit();
+ f.git('checkout','-q',newer);
+ const after=new f.native.ImmutableReader(f.root,candidate,{allowance:reader.allowance,budget:reader.budget});
+ const transition=f.api.qualifyTransition({state:result.state,reader:after,budget});assert.equal(transition.available,true);
+ assert.deepEqual(transition.changedIds,[]);
+ const helper=await import(pathToFileURL(path.join(f.root,CODE[1])));
+ assert.throws(()=>helper.readSupportedProgrammeAuthority(after,{preimageVersion:forged.preimage_version,
+  sourceProfile:forged.source_profile,sourceCode:forged.source_executed_code,nativeCode:forged.native_executed_code}),/Unknown\/ambiguous/);
+});
+test('policy-route exception never permits an incomplete archived census or adjacent input drift',async t=>{
+ const f=await trustedFixture(t), original=f.git('rev-parse','HEAD').toString().trim();
+ const routes=JSON.parse(f.git('show',f.rootRow.routes.commit+':'+f.rootRow.routes.path));
+ f.save('accepted/routes.json',routes.filter(p=>p.path!==PROGRAMME));const incomplete=f.commit();
+ const code=CODE.map(name=>{const p=f.pin(name);return {path:name,bytes:p.bytes,sha256:p.sha256};});
+ f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',qualifier_code:code,
+  checkpoints:[{...f.rootRow,routes:f.pin('accepted/routes.json',incomplete)}]});f.commit();
+ assert.throws(()=>f.api.qualifyCheckpoint({reader:f.reader,budget:f.budget}),/Incomplete trusted present\/absent route census/);
+ f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',qualifier_code:code,
+  checkpoints:[{...f.rootRow,routes:{...f.rootRow.routes,sha256:'0'.repeat(64)}}]});f.commit();
+ const corruptReader=new f.native.ImmutableReader(f.root,f.selected,{allowance:f.reader.allowance});
+ assert.throws(()=>f.api.qualifyCheckpoint({reader:corruptReader,budget:{shared:corruptReader.budget,carriedBytes:0}}),/Whole immutable input differs/);
+ f.git('checkout','-q',original);
+ f.save('data/owners.json',[{id:'B',index:1},{id:'A',index:2},{id:'C',index:3}]);const changed=f.commit();
+ const reader=new f.native.ImmutableReader(f.root,changed,{allowance:f.reader.allowance}),budget={shared:reader.budget,carriedBytes:0};
+ const result=f.api.qualifyCheckpoint({reader,budget});assert.equal(result.available,false);assert.match(result.reason,/routing alternative changed/);
+});
+
+
+test('removed or changed trusted producer eligibility cannot silently reuse accepted policy',async t=>{
+ const f=await trustedFixture(t), original=f.git('rev-parse','HEAD').toString().trim();
+ const policy=JSON.parse(fs.readFileSync(path.join(f.root,PROGRAMME)));
+ for(const edit of [p=>p.programs.pop(),p=>p.current_rebind_migrations.pop(),p=>{p.programs[0].source_executed_code[0].sha256='0'.repeat(64);}]){
+  f.git('checkout','-q',original);const changed=structuredClone(policy);edit(changed);f.save(PROGRAMME,changed);f.commit();
+  const reader=new f.native.ImmutableReader(f.root,f.selected,{allowance:f.reader.allowance}),budget={shared:reader.budget,carriedBytes:0};
+  const result=f.api.qualifyCheckpoint({reader,budget});assert.equal(result.available,false);assert.match(result.reason,/preserves accepted eligibility/);
+ }
 });

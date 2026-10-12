@@ -30,7 +30,7 @@
     {
       "path": "coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json",
       "bytes": 6449,
-      "sha256": "15841b620820acf914a715acdd15a26dd61bdad0a6505d61e5f07d5e923696cc",
+      "sha256": "f08ebf672c5ac4963962a59dd7485afaa39f28441698cae6d91004019af4df0c",
       "hash_kind": "file-bytes"
     },
     {
@@ -180,13 +180,25 @@
       "bytes": 12566,
       "sha256": "17451d9fb8374d1f3036ef2c1482dee8ed466fb7fbb70fc18863ed60dc7741fa",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/native-consumer-preregistration.json",
+      "bytes": 9980,
+      "sha256": "f9e108924ab69ad37fe8ab9452afe7babc6657904fdd0dc3291f8df29c0d6b97",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+      "bytes": 252214,
+      "sha256": "633bf569788c97c2aa52c27c4cb919c7dd1021eb1cd78fc7b326fc7369d475a8",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
     {
       "id": "selected-checkpoint",
       "kind": "code",
-      "description": "Invocation-scoped trusted accepted checkpoint and exact append-only qualification; genuine retained candidate coordinates, whole affected operands and native base rows reproduce accepted products with zero full selected acquisition. Complete raw successful outputs, failed comparator attempt, profiles and explicit lifecycle evidence limits are retained. Consumer activation and one-load cold bridge remain unfinished.",
+      "description": "Invocation-scoped trusted accepted checkpoint and exact append-only qualification; genuine retained candidate coordinates, whole affected operands and native base rows reproduce accepted products with zero full selected acquisition. Complete raw successful outputs, failed comparator attempt, profiles and explicit lifecycle evidence limits are retained. Consumer activation and one-load cold bridge remain unfinished. Later narrow correction separates actual trusted programme policy from selected scientific routes while preserving all inventoried accepted eligibility; finite exact native/allocator preregistration is independently reviewed. Archived proof retains its original executing head.",
       "software": "Node 24; existing immutable reader, geometry and ownership codecs",
       "units": "complete identities, rows, intervals and bytes"
     }
@@ -554,7 +566,8 @@
   },
   "commands": [
     "node --check coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs",
-    "node --test test/selected-checkpoint.test.mjs"
+    "node --test test/selected-checkpoint.test.mjs",
+    "node --test test/supported-programs.test.mjs"
   ],
   "metric_bindings": [
     {

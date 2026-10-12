@@ -138,3 +138,39 @@ test('reviewed allocator admits only the two exact complete retained-consumer ve
   }
  }
 });
+
+test('native checkpoint preregistration preserves every prior programme and migration',()=>{
+ const c=read();
+ assert.equal(valueSha(c.programs.slice(0,19)),'436b2e83c9fb4f7bf5b9e408383a5405b36a5b2434bed823e3d952a5921204fb');
+ assert.equal(valueSha(c.current_rebind_migrations.slice(0,7)),'0d8b3270702433ee1158add45771b2e95466519c64ea65a91a88ea80e59be9b2');
+ const p=c.programs[19];assert.ok(p);
+ assert.equal(p.accepted_head,'392b1cda6d529f13f8e9d5fc86efe8dc436386a3');assert.equal(p.independent_review_comment,6120928599);
+ assert.equal(valueSha(p.source_executed_code),'997be89cc71a802b318b427b925da37cfd4126d15b2f23d1937f3eaf79a7c6f7');
+ assert.deepEqual(p.native_executed_code,p.source_executed_code);
+ assert.deepEqual(matchSupportedProgramme(c,request(p)),p);
+ for(const changedPath of ['scripts/check-effective-geographic-regression.mjs','src/native-grid.js']){
+  const q=request(clone(p)),body=q.nativeCode.find(row=>row.path===changedPath);assert.ok(body);body.bytes++;
+  assert.throws(()=>matchSupportedProgramme(c,q),/Unknown\/ambiguous/);
+ }
+});
+test('future native and allocator vectors admit only both genuinely consumed historical rebinds',()=>{
+ const head=git('rev-parse','HEAD').toString().trim(),reader=new ImmutableReader(root,head,{runtimeBytes:1,metadataBytes:1,executionBytes:1,outputBytes:1});
+ const expected=[
+  ['85ca24519d87bb1d62a86d5cb142006e206cb2b8','11487b4d1ad7c12f2d22c6c324d136da555c82cd6c962178767d672cdf0ded1a'],
+  ['40d792b2c67b18098c00cd71bce3cfd6a8e63a0b','0e1976f823dcdaf3f843a760ca9f9aa866073d8ae5ecebd67f7588579dcc36d7']
+ ];
+ const c=read(),migrations=c.current_rebind_migrations.slice(7,9);assert.equal(migrations.length,2);
+ for(const [i,m]of migrations.entries()){
+  assert.equal(m.execution_commit,expected[i][0]);assert.equal(valueSha(m.historical_code),expected[i][1]);
+  assert.equal(valueSha(m.current_code),'5ea2ddd77337a59a775c761d7d4eee9d81bad75b39b003d4d8e0708972bcf1c7');
+  assert.equal(m.independent_review_comment,6120928599);
+  assert.deepEqual(m.current_code.map(p=>p.path),CURRENT_REBIND_CODE);
+  assert.deepEqual(compatibleCurrentRebindCode(m.execution_commit,m.current_code,m.historical_code,reader),m.historical_code);
+  assert.throws(()=>compatibleCurrentRebindCode(m.execution_commit,m.current_code,m.historical_code),/Unknown historical/);
+  assert.throws(()=>compatibleCurrentRebindCode(expected[1-i][0],m.current_code,m.historical_code,reader),/Unknown historical/);
+  for(const field of ['historical_code','current_code'])for(const name of ['scripts/check-effective-geographic-regression.mjs','scripts/local-workspace.mjs','src/native-grid.js']){
+   const changed=clone(m);changed[field].find(p=>p.path===name).sha256='e'.repeat(64);
+   assert.throws(()=>compatibleCurrentRebindCode(m.execution_commit,changed.current_code,changed.historical_code,reader),/Unknown historical/);
+  }
+ }
+});
