@@ -1,0 +1,26 @@
+{
+  "started_at": "2026-10-12T03:08:26.554796+00:00",
+  "execution_commit": "1933d49ce3840d0d10bd76ba30e1d849e56c5233",
+  "baseline_commit": "9473d184683ee8ff8546300f2313779c3cba1d2b",
+  "candidate_commit": "791576647adc41241ce9b438f1bb0034088eed4e",
+  "execution_checkout": "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/4befa0585ae75168feba6e64375b4a89948f20facf0d91664690012b619bbb98/work",
+  "command": [
+    "node",
+    "coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+    "continuous",
+    "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/4befa0585ae75168feba6e64375b4a89948f20facf0d91664690012b619bbb98/work",
+    "1933d49ce3840d0d10bd76ba30e1d849e56c5233",
+    "9473d184683ee8ff8546300f2313779c3cba1d2b",
+    "791576647adc41241ce9b438f1bb0034088eed4e",
+    "/workspace/shared/.worldatlas-workspaces/6c7ad910030d4818/4befa0585ae75168feba6e64375b4a89948f20facf0d91664690012b619bbb98/work/.scratch-1763/retained-proof-001/complete",
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12"
+  ],
+  "mem_available_bytes": 9106808832,
+  "job_reserved_bytes": 4294967296,
+  "parent_reserved_bytes": 2147483648,
+  "concurrent_reserved_bytes": 0,
+  "minimum_residual_bytes": 805306368,
+  "wall_seconds": 1200,
+  "sampling_interval_ms": 50,
+  "scope": "Node continuous operands only; exact retained operand equality permits unchanged prior Python polygon result reuse."
+}

@@ -1,0 +1,14 @@
+{
+  "command": [
+    "node",
+    "--test",
+    "--test-concurrency=1",
+    "test/selected-continuous-lifecycle.test.mjs"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 23.679,
+  "sampled_process_group_peak_rss_bytes": 207327232,
+  "sampling_interval_ms": 50,
+  "samples": 464,
+  "stopped": null
+}
