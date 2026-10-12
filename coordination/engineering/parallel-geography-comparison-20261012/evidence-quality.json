@@ -19,6 +19,18 @@
         "bytes": 27523,
         "sha256": "8023bccb096c2f6099b421ca25c0eec85b87cf1360d818b090fb551028c3b26a",
         "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/check-unchanged-selected-geography.mjs",
+        "bytes": 38733,
+        "sha256": "9b1ecaa8dfb18ef857784f128afb004a5d9746b88f8fb6dfad25c42986d8f567",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json",
+        "bytes": 13841,
+        "sha256": "28863442fb63462e5d532a76f8f89897eaaa368f1c991289076a19f4cda17765",
+        "hash_kind": "file-bytes"
       }
     ],
     "pins": {}
@@ -43,6 +55,7 @@
     "geographic_approval": "not-requested"
   },
   "commands": [
-    "node --test test/parallel-geography-comparison.test.mjs test/trusted-geography-check.test.mjs test/geographic-report-artifact.test.mjs test/pr-geography-reuse.test.mjs test/merge-integration.test.mjs test/final-capacity.test.mjs test/integration-proof.test.mjs test/trusted-workflow-checkouts.test.mjs"
+    "node --test test/parallel-geography-comparison.test.mjs test/trusted-geography-check.test.mjs test/geographic-report-artifact.test.mjs test/pr-geography-reuse.test.mjs test/merge-integration.test.mjs test/final-capacity.test.mjs test/integration-proof.test.mjs test/trusted-workflow-checkouts.test.mjs",
+    "node --test test/unchanged-selected-geography.test.mjs test/effective-geographic-regression.test.mjs"
   ]
 }
