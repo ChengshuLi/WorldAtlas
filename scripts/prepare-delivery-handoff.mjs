@@ -726,7 +726,7 @@ async function main(args) {
     const flow = await import('./delivery-handoff-advance.mjs');
     const recipe = flow.locate(reader, config.recipe);
     if (phase === 'status') need(fs.existsSync(path.join(root, destination, 'advance.json')), 'No existing advance to observe');
-    const journal = flow.openAdvanceJournal(root, destination, recipe, {resume: phase === 'status' || flags.includes('--resume'), budget: reader.budget});
+    const journal = flow.openAdvanceJournal(root, destination, recipe, {resume: phase === 'status' || flags.includes('--resume'), budget: reader.budget, reader});
     if (phase === 'status') { console.log(JSON.stringify(flow.readAdvanceStatus(journal))); return; }
     let api, apiWait = 0;
     const liveAPI = async (route, method = 'GET', body) => {
@@ -776,7 +776,7 @@ async function main(args) {
             execFileSync('gh', ['workflow', 'run', 'merge-scheduler.yml', '--repo', next.queue.repo, '--ref', 'main',
               '-f', `pr_number=${number}`, '-f', `expected_head=${head}`, '-f', `request_id=${requestId}`],
             {encoding: 'utf8', timeout: timeoutMs, maxBuffer: 1048576})});
-        else result = await flow.prepareAdvanceStage(journal, next.id, next.phase, next.input, next.produce, {preparationStarted, apiWaitMilliseconds: () => apiWait});
+        else result = await flow.prepareAdvanceStage(journal, next.id, next.phase, next.input, next.produce, {preparationStarted, apiWaitMilliseconds: () => apiWait, adoption: config.prepared_stages?.[next.id]});
         console.log(JSON.stringify({result, ...flow.readAdvanceStatus(journal)}));
       } catch (error) {
         flow.observeAdvance(journal, {status: 'refused', reason: error.message}); throw error;

@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "issue": 1785,
+  "lane": "engineering",
+  "worker_id": "01a131d1-c1a1-72df-b654-bb7b84f40013",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "cf11a9c434e798a2099ea406b29e842f27fe05ea",
+    "files": [
+      {
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json",
+        "bytes": 11775,
+        "sha256": "4e9279aec058855e135945dc56eeb2444fb750f80541017217d4550c461ec14c",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "v2-subset-receipt-continuation",
+      "kind": "code",
+      "description": "Existing driver accepts ordered disjoint source-native-v2 subsets and reuses qualified immutable preparation receipts without copying products. Actual retained Norway B is a read-only opt-in compatibility fixture; no science, frozen delivery changes, new delivery acceptance or throughput gains are claimed. Prior issue1785 evidence remains unchanged in evidence-quality.json.",
+      "software": "Node 24; Git; existing metadata constructors and authority/custody validators",
+      "units": "exact component and stable target identities, raw configuration and whole-file product bytes"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/delivery-handoff-advance.test.mjs test/delivery-handoff.test.mjs",
+    "GIT_NO_LAZY_FETCH=1 WORLDATLAS_DELIVERY_V2_FIXTURE=1 node --test --test-name-pattern=\"frozen Norway B\" test/delivery-handoff-advance.test.mjs"
+  ]
+}
