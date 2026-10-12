@@ -157,10 +157,19 @@ export async function selectedJointStage(repo, trusted, baseline, candidate, des
     // derived certificate, and keep both output families inside that same cap.
     // These bytes are a provisional candidate, never a newly minted capability.
     const genuine = checkpoint.authenticateTransition({transition, budget});
+    const authorityPaths = [P + 'supported-programs.json',
+      'coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json'];
+    const authorityPins = authorityPaths.map(name => beforeReader.inventory.get(trusted + ':' + name));
+    demand(authorityPins.every(pin => pin?.whole_body_consumed && /^[a-f0-9]{64}$/.test(pin.sha256)),
+      'Derived custody requires actual consumed executing authority pins');
+    const inventory = reader => [...reader.inventory.values()].sort((a,b) =>
+      (a.commit + ':' + a.path).localeCompare(b.commit + ':' + b.path));
     const derivedFactsBase = {version:1, kind:'derived-selected-checkpoint-candidate-v1',
       validation_stage:'native-passed-continuous-pending', accepted_checkpoint:false,
       executing_commit:trusted, execution_code:code, runtime:startup.identities,
       baseline_accepted_execution:genuine.baseline.accepted_execution,
+      executing_authority_pins:authorityPins,
+      actual_reader_inventories:{baseline:inventory(beforeReader), candidate:inventory(afterReader)},
       baseline_commit:baseline, candidate_commit:candidate,
       baseline_selection:genuine.baseline.selection, candidate_selection:genuine.candidate.selection,
       candidate_bindings:{ledger_sha256:valueSha(genuine.candidate.ledger), registry_sha256:valueSha(genuine.candidate.registry),

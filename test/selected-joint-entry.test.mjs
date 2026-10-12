@@ -88,6 +88,15 @@ test('actual joint CLI qualifies once, runs both real consumers and releases onc
   assert.deepEqual(derivedFacts.candidate_selection, f.selection);
   assert.deepEqual(derivedFacts.certificate, derived.certificate);
   assert.equal(Object.hasOwn(derivedFacts, 'complete_cold_custody'), false);
+  assert.equal(derivedFacts.executing_authority_pins.length, 2);
+  for (const pin of derivedFacts.executing_authority_pins) {
+    assert.equal(pin.commit, derivedFacts.executing_commit);
+    const body = f.git('show', pin.commit + ':' + pin.path);
+    assert.equal(createHash('sha256').update(body).digest('hex'), pin.sha256);
+    assert.equal(body.length, pin.bytes);
+  }
+  assert(derivedFacts.actual_reader_inventories.baseline.some(pin => pin.path === 'accepted/certificate.json.gz' && pin.whole_body_consumed));
+  assert(Array.isArray(derivedFacts.actual_reader_inventories.candidate));
   const counts = new Map();
   for (const file of fs.readdirSync(coverage)) for (const script of JSON.parse(fs.readFileSync(path.join(coverage, file))).result) {
     if (!script.url.startsWith('file://' + f.root + '/')) continue;
