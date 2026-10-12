@@ -8,7 +8,7 @@ import {createHash} from 'node:crypto';
 import {createPackageOutputManifest, snapshotPackageOutputSource, inventoryPackageOutput, validatePackageOutputManifest,
   verifyPackageOutput, streamedPackageFile, PACKAGE_OUTPUT_LIMITS, installedPackageIdentity, admitPackageOutputTransition} from '../scripts/package-output-artifact.mjs';
 
-import {compareSelectedPackageOutput,compareSelectedPackageReadback} from '../scripts/compare-selected-package-output.mjs';
+import {compareSelectedPackageOutput,compareSelectedPackageReadback,normalizeDeclarationReadAccounting} from '../scripts/compare-selected-package-output.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 function fixture(t) {
@@ -189,7 +189,7 @@ test('changed-declaration full-output comparison authenticates both sources and 
   };
   const atlas=(head,pin)=>({nativeContextInputStage:{current_execution:{source_head:head,
     runtime:{sha256:'c'.repeat(64)},full_code_closure:[pin,{path:'scripts/invariant.mjs',sha256:'d'.repeat(64)}]},
-    consumed_input_bytes:{encoded:42}},additiveRelease:{ledger:'current'}});
+    consumed_input_bytes:{encoded:42+pin.bytes,decoded:80}},additiveRelease:{ledger:'current'}});
   source.write('.cache/package-input-build.json',{version:1,kind:'cloudflare',input_definition_sha256:descriptor(originalHead).sha256,
     preflight:{passed:true,errors:[],inputs:{head:originalHead}}});
   source.write('.cache/package-output-source.json',snapshotPackageOutputSource(source.root));
@@ -222,6 +222,7 @@ test('changed-declaration full-output comparison authenticates both sources and 
   for(const mutate of [value=>value.head=originalHead,value=>value.static_assets.files.pop(),
     value=>value.static_assets.files.push(value.static_assets.files[0]),value=>value.static_assets.files[0].sha256='0'.repeat(64),
     value=>value.worker_bundle_files[0].bytes++,value=>value.nativeContextInputStage.consumed_input_bytes.encoded++,
+    value=>value.nativeContextInputStage.consumed_input_bytes.decoded++,
     value=>value.static_assets.files[0].path='../escape',value=>value.static_assets.bytes++]){
     const changed=structuredClone(readback);mutate(changed);assert.throws(()=>compareSelectedPackageReadback({...args,readback:changed}));
   }
@@ -232,6 +233,7 @@ test('changed-declaration full-output comparison authenticates both sources and 
 
   for(const mutate of [
     value=>value.nativeContextInputStage.consumed_input_bytes.encoded++,
+    value=>value.nativeContextInputStage.consumed_input_bytes.decoded++,
     value=>value.nativeContextInputStage.current_execution.runtime.sha256='e'.repeat(64),
     value=>value.nativeContextInputStage.current_execution.full_code_closure[1].sha256='e'.repeat(64),
     value=>value.nativeContextInputStage.current_execution.full_code_closure[0].sha256='e'.repeat(64),
@@ -290,4 +292,22 @@ test('installed identity admits ordinary scoped and punctuated filenames without
   assert.throws(()=>streamedPackageFile(f.root,'node_modules/@scope/package/index.js'),/Safe ordinary package path/);
   fs.symlinkSync('/tmp',path.join(f.root,'node_modules/escape'));
   assert.throws(()=>installedPackageIdentity(f.root),/link escapes/);
+});
+
+
+test('declaration accounting preserves actual observations and every nondeclaration byte', () => {
+  const original={consumed_input_bytes:{encoded:321352440,decoded:192828074}};
+  const current={consumed_input_bytes:{encoded:321356198,decoded:192828074}};
+  const a={bytes:92514},b={bytes:96272};
+  const observed=structuredClone(current),result=normalizeDeclarationReadAccounting(current,original,b,a);
+  assert.deepEqual(current,observed);assert.deepEqual(result.normalized,original);
+  assert.equal(result.accounting.unchanged_other_encoded_bytes,321259926);
+  for (const delta of [-1,1,3758]) {
+    const wrong=structuredClone(current);wrong.consumed_input_bytes.encoded+=delta;
+    assert.throws(()=>normalizeDeclarationReadAccounting(wrong,original,b,a),/Consumed bytes/);
+  }
+  for (const descriptor of [{bytes:0},{bytes:96273},{bytes:96271},{bytes:0.5}])
+    assert.throws(()=>normalizeDeclarationReadAccounting(current,original,descriptor,a));
+  const changedDecoded=structuredClone(current);changedDecoded.consumed_input_bytes.decoded++;
+  assert.notDeepEqual(normalizeDeclarationReadAccounting(changedDecoded,original,b,a).normalized,original);
 });

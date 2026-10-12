@@ -6,18 +6,42 @@
   "subject_ids": [],
   "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
   "baseline": {
-    "commit": "800dede9da634f4f7e95c6365fd31a7086f17f9b",
+    "commit": "3e3e3e73e1006617d005ec1965d3698ad9453cd8",
     "files": [
       {
-        "path": "scripts/run-geographic-check.py",
-        "bytes": 95814,
-        "sha256": "427e01e11a4dc6efe0b293136351b9078aab0ae203120382ab1195c8d32fe831",
+        "path": ".github/metadata-regression-programs.json",
+        "bytes": 550,
+        "sha256": "e939ef932c1526f2042c8a66ccdd993c0738ae5eec35fd73aef8303b92922070",
         "hash_kind": "file-bytes"
       },
       {
-        "path": "scripts/geographic-report-artifact.mjs",
-        "bytes": 27523,
-        "sha256": "8023bccb096c2f6099b421ca25c0eec85b87cf1360d818b090fb551028c3b26a",
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 59186,
+        "sha256": "12f87e40f83b104ee68a5586dafbbdbe82857a534e4e65f26bb7cfce64ee2667",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/selected-package-proof.yml",
+        "bytes": 6555,
+        "sha256": "03909f82fbd1304ac4c96a906c5416b37b118a21ee0bb13c9072762afe2899c4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json",
+        "bytes": 13842,
+        "sha256": "b0e1e16ebf364df0cfdf62efe7c55193429684789c09da76d4e3eee184c238d7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/DELIVERY_HANDOFF.md",
+        "bytes": 35323,
+        "sha256": "1137e139b491b971c42d2a755d0774e729a7f4c8d70cbee79390d46e2b6cd4e2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 61792,
+        "sha256": "2be527c2c7e1ecc580d70e1b6649934ea0817d6561db4138665de1defac9272a",
         "hash_kind": "file-bytes"
       },
       {
@@ -27,9 +51,21 @@
         "hash_kind": "file-bytes"
       },
       {
-        "path": "coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json",
-        "bytes": 13842,
-        "sha256": "b0e1e16ebf364df0cfdf62efe7c55193429684789c09da76d4e3eee184c238d7",
+        "path": "scripts/compare-selected-package-output.mjs",
+        "bytes": 13286,
+        "sha256": "74e2e8fc217ca6d87e228d27ecec420cdc02e57717d1845f25017828d2c723e0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/delivery-handoff-advance.mjs",
+        "bytes": 128351,
+        "sha256": "7989645aff42f46e0dc8e327aa6b2151faa4ff3d0ff82d0bbbbfc63c33460088",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/geographic-report-artifact.mjs",
+        "bytes": 27523,
+        "sha256": "8023bccb096c2f6099b421ca25c0eec85b87cf1360d818b090fb551028c3b26a",
         "hash_kind": "file-bytes"
       },
       {
@@ -42,6 +78,102 @@
         "path": "scripts/issue-claim-contract.mjs",
         "bytes": 26868,
         "sha256": "426097a0b4396c171f5b38991a83d4779d0a92c8abe824aa683e49a7ac087c26",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/merge-integration.mjs",
+        "bytes": 31318,
+        "sha256": "ec09dcebe5a7887a031e7a057b36132df661f2362864591953c0d3ef9dd1a93a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/prepare-delivery-handoff.mjs",
+        "bytes": 66759,
+        "sha256": "3cdc58eb44875e235931e733bb6267e6d344497c9853274e177f25461928cf44",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/reuse-pr-geography.mjs",
+        "bytes": 14322,
+        "sha256": "f20344e53a39373ee787827eb54f0c317672511d53108c1271c72db2045071e7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-geographic-check.py",
+        "bytes": 95814,
+        "sha256": "427e01e11a4dc6efe0b293136351b9078aab0ae203120382ab1195c8d32fe831",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/selected-package-bootstrap.py",
+        "bytes": 9767,
+        "sha256": "e8504e99f520ee3c02d0a52b040b0facab77c526bb118ee2903cef59b8ef210e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/delivery-handoff-advance.test.mjs",
+        "bytes": 157528,
+        "sha256": "58fd951e9d614e7c7c3ad835efee6741bf63e4791a6fdfcb1657ed782d84a5bd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/final-capacity.test.mjs",
+        "bytes": 57685,
+        "sha256": "bf3819aca1275789cfedd9aaa686f6a9233a81f1c2987e1bf39ce6762a81b672",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/geographic-report-artifact.test.mjs",
+        "bytes": 19482,
+        "sha256": "83db5ab096a17af06e440a8054a754483a9f2884fd45f73018852834e759e85e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/github-quota.test.mjs",
+        "bytes": 8815,
+        "sha256": "e57f96f5bf340a0420adbf74edcbbe4917f07e8a07f451aa655a5459c37e4456",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/local-workspace.test.mjs",
+        "bytes": 21904,
+        "sha256": "dfa78fafef32f0c0f379affc2138eb7ce1dc7c048b352acada298903a50ee093",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/package-output-artifact.test.mjs",
+        "bytes": 21141,
+        "sha256": "8c9960592ff9ab7955d30c07c13b8b54479ff229250eab49794ee5872da6ed4c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/selected-data-profile.test.mjs",
+        "bytes": 93618,
+        "sha256": "bf3a09ee4ae32a424a1b22df02215853797b3bdd02ce013b066a08e67bc20c7c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/selected-package-bootstrap-controls.py",
+        "bytes": 23842,
+        "sha256": "4f2f613bbdff5b0ce7da0c30d911514e1ff0708b42188a58aaf0a63e403ec85e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/selected-package-bootstrap.test.mjs",
+        "bytes": 501,
+        "sha256": "27efe91b2373986707df35cfcef1b7be934dfef82c7a9da68e61f981df217f12",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/trusted-geography-check.py",
+        "bytes": 60478,
+        "sha256": "38fd71e0b9f2e1d5fc862cdf0c7af1efde99a6c4eb4deecb9f202d37ba436b44",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/trusted-geography-check.test.mjs",
+        "bytes": 520,
+        "sha256": "3c4214ccf3231fdcf6f1282980ce60b959d1a1b53a08072ebc3482f47081748f",
         "hash_kind": "file-bytes"
       }
     ],
@@ -70,6 +202,13 @@
       "description": "Seed exact blob bytes through Git, preserving object identity independently of loose or packed source storage; exercise actual packed-source sparse allocation and existing missing/no-fetch controls.",
       "software": "Git and Node 24",
       "units": "synthetic controls"
+    },
+    {
+      "id": "separate-frozen-package-proof",
+      "kind": "code",
+      "description": "Authenticate separate current observer and frozen accepted production graph; preserve and record genuine frozen CLI legacy comparison failure, then independently authenticate committed assembly, original manifest and exhaustive B reference. Normalize only the exact unique declaration encoded-read delta; fresh hosted consumers and actual equivalence remain pending.",
+      "software": "Node 24 and Python 3.12",
+      "units": "synthetic controls and original readback accounting"
     }
   ],
   "metrics": [],
@@ -88,6 +227,7 @@
     "node --test test/delivery-handoff-advance.test.mjs test/delivery-handoff.test.mjs",
     "GIT_NO_LAZY_FETCH=1 WORLDATLAS_DELIVERY_V2_FIXTURE=1 node --test --test-name-pattern=\"frozen Norway B\" test/delivery-handoff-advance.test.mjs",
     "GIT_NO_LAZY_FETCH=1 WORLDATLAS_DELIVERY_ORIGINAL_FIXTURE=1 node --test --test-name-pattern=\"completed custody|real Native102\" test/delivery-handoff-advance.test.mjs",
-    "node --test test/local-workspace.test.mjs"
+    "node --test test/local-workspace.test.mjs",
+    "node --test test/package-output-artifact.test.mjs test/selected-package-bootstrap.test.mjs test/selected-package-proof-driver.test.mjs"
   ]
 }

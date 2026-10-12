@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Offline actual-module tests: python3 this.py /path/to/selected-package-bootstrap.py."""
 import base64
+import contextlib
 import hashlib
 import importlib.util
 import io
@@ -26,6 +27,16 @@ spec.loader.exec_module(bootstrap)
 SYSTEM_NODE = shutil.which('node')
 SYSTEM_GIT = shutil.which('git')
 OFFLINE_GIT_READ = subprocess.check_output
+
+def actual_static_graph(source_root, entry_point):
+    # Node parses these bodies without linking or evaluating them. This test
+    # observes the true graph instead of maintaining a parallel regex allowlist.
+    walker="import fs from 'node:fs';import path from 'node:path';import vm from 'node:vm';const root=process.argv[1],q=[process.argv[2]],seen=new Set();while(q.length){const n=q.pop();if(seen.has(n))continue;seen.add(n);for(const s of new vm.SourceTextModule(fs.readFileSync(path.join(root,n),'utf8')).dependencySpecifiers)if(s.startsWith('.'))q.push(path.posix.normalize(path.posix.join(path.posix.dirname(n),s)));}process.stdout.write(JSON.stringify([...seen]));"
+    result=subprocess.run([SYSTEM_NODE,'--experimental-vm-modules','--input-type=module','-e',walker,str(source_root),entry_point],
+                          stdout=subprocess.PIPE,stderr=subprocess.PIPE,check=False)
+    if result.returncode:
+        raise AssertionError('Actual static graph could not be read: '+result.stderr.decode())
+    return json.loads(result.stdout)
 
 class StartedNode(BaseException): pass
 
@@ -57,7 +68,7 @@ class BootstrapTests(unittest.TestCase):
         os.link(self.tool, self.node)
         self.env = dict(os.environ)
         for key in list(self.env):
-            if key.startswith(('GIT_', 'NODE_', 'PYTHON', 'LD_', 'DYLD_')) or key in ('GH_TOKEN', 'GITHUB_TOKEN'):
+            if key.startswith(('GIT_', 'NODE_', 'PYTHON', 'LD_', 'DYLD_', 'SELECTED_PACKAGE_')) or key in ('GH_TOKEN', 'GITHUB_TOKEN'):
                 self.env.pop(key)
         self.env.update(SELECTED_PACKAGE_TRUSTED_BASE=self.base, RUNNER_TOOL_CACHE=str(self.cache), GH_TOKEN='synthetic-token-never-transmitted')
         self.started = []
@@ -105,7 +116,7 @@ class BootstrapTests(unittest.TestCase):
     def accepted(self):
         with self.assertRaises(StartedNode): self.run_bootstrap()
         self.assertEqual(len(self.started), 1)
-        self.assertEqual(self.started[0][1], [str(self.node), 'scripts/assemble-selected-package.mjs'])
+        self.assertEqual(self.started[0][1], [str(self.node), self.env.get('SELECTED_PACKAGE_ENTRY_POINT','scripts/assemble-selected-package.mjs')])
         self.assertEqual(self.started[0][2]['GH_TOKEN'], 'synthetic-token-never-transmitted')
         self.assertEqual(self.started[0][2]['GIT_NO_REPLACE_OBJECTS'],'1')
         self.assertNotIn('GITHUB_TOKEN',self.started[0][2])
@@ -113,6 +124,105 @@ class BootstrapTests(unittest.TestCase):
     def rejected(self, reason):
         with self.assertRaisesRegex(ValueError, reason): self.run_bootstrap()
         self.assertEqual(self.started, [])
+
+    def proof_fixture(self):
+        self.write('scripts/run-selected-package-proof.mjs', "import './proof-child.mjs';\n")
+        self.write('scripts/proof-child.mjs', "import '../coordination/deep/consumer.mjs';\n")
+        # These bodies must be authenticated as bytes, never executed by admission.
+        self.write('scripts/selected-package-bootstrap.py', "raise RuntimeError('verifier helper must not execute')\n")
+        self.write('scripts/extract-package-output.py', "raise RuntimeError('extractor helper must not execute')\n")
+        self.trust_changes()
+        self.env['SELECTED_PACKAGE_ENTRY_POINT']='scripts/run-selected-package-proof.mjs'
+    def verified_only(self, entry_point='scripts/assemble-selected-package.mjs'):
+        self.env['SELECTED_PACKAGE_ENTRY_POINT']=entry_point
+        self.env['SELECTED_PACKAGE_VERIFY_ONLY']='true'
+        output=io.StringIO()
+        with contextlib.redirect_stdout(output): self.run_bootstrap()
+        self.assertEqual(self.started,[], 'Verification must never launch the authenticated programme')
+        receipt=json.loads(output.getvalue())
+        self.assertEqual(receipt['kind'],'authenticated-package-startup-closure')
+        self.assertEqual(receipt['trusted_base'],self.env['SELECTED_PACKAGE_TRUSTED_BASE'])
+        self.assertEqual(receipt['entry_point'],entry_point)
+        self.assertEqual(receipt['files'],sorted(set(receipt['files'])))
+        self.assertIn(entry_point,receipt['files'])
+        self.assertNotIn('synthetic-token',output.getvalue())
+        return receipt
+
+    def test_explicit_assembly_entry_point_launches_only_assembly(self):
+        self.env['SELECTED_PACKAGE_ENTRY_POINT']='scripts/assemble-selected-package.mjs';self.accepted()
+    def test_proof_entry_point_launches_only_authenticated_observer(self):
+        self.proof_fixture();self.accepted()
+    def test_reject_unlisted_entry_points_even_in_verify_only_mode(self):
+        for name in ['scripts/untrusted.mjs','../scripts/assemble-selected-package.mjs',
+                     '/tmp/run-selected-package-proof.mjs','file:scripts/run-selected-package-proof.mjs',
+                     'scripts/run-selected-package-proof.mjs --resolve-frozen','']:
+            with self.subTest(entry_point=name):
+                self.env.update(SELECTED_PACKAGE_ENTRY_POINT=name,SELECTED_PACKAGE_VERIFY_ONLY='true')
+                self.rejected('Unknown trusted package entry point')
+    def test_verify_only_assembly_returns_exact_static_closure_without_launch(self):
+        receipt=self.verified_only()
+        self.assertEqual(receipt['files'],['coordination/deep/consumer.mjs','scripts/assemble-selected-package.mjs','scripts/child.mjs'])
+        self.assertFalse((self.root/'scripts/selected-package-bootstrap.py').exists(),
+                         'Frozen assembly verification must not require current observer helpers')
+    def test_verify_only_proof_returns_observer_closure_without_launch(self):
+        self.proof_fixture();receipt=self.verified_only('scripts/run-selected-package-proof.mjs')
+        self.assertEqual(receipt['files'],['coordination/deep/consumer.mjs','scripts/proof-child.mjs','scripts/run-selected-package-proof.mjs'])
+        self.assertNotIn('scripts/assemble-selected-package.mjs',receipt['files'])
+    def test_verify_only_cannot_bypass_source_authentication(self):
+        self.env['SELECTED_PACKAGE_VERIFY_ONLY']='true'
+        self.write('coordination/deep/consumer.mjs','export const value=99;');self.rejected('Actual source differs')
+    def test_verify_only_cannot_bypass_external_module_rejection(self):
+        self.write('scripts/child.mjs',"import 'untrusted-package';\n");self.trust_changes()
+        self.env['SELECTED_PACKAGE_VERIFY_ONLY']='true';self.rejected('External credential-bearing startup module')
+    def test_verify_only_does_not_evaluate_static_module_bodies(self):
+        self.write('scripts/child.mjs',"import fs from 'node:fs';fs.writeFileSync('MUST_NOT_EXECUTE','bad');throw Error('not evaluated');\n")
+        self.trust_changes();self.verified_only();self.assertFalse((self.root/'MUST_NOT_EXECUTE').exists())
+    def test_verify_only_remains_credential_free_for_git_and_parser_children(self):
+        original_run=bootstrap.subprocess.run;calls=[]
+        def checked_run(*args,**kwargs):
+            if '-C' not in args[0]: calls.append((args,kwargs))
+            return original_run(*args,**kwargs)
+        with patch.object(bootstrap.subprocess,'run',side_effect=checked_run):self.verified_only()
+        self.assertTrue(calls)
+        for args,kwargs in calls:
+            self.assertNotIn('GH_TOKEN',kwargs['env']);self.assertNotIn('GITHUB_TOKEN',kwargs['env'])
+    def test_proof_mode_authenticates_both_python_helper_bodies(self):
+        self.proof_fixture()
+        for helper in ['scripts/selected-package-bootstrap.py','scripts/extract-package-output.py']:
+            with self.subTest(helper=helper):
+                original=(self.root/helper).read_bytes();self.write(helper,b'# substituted helper\n')
+                self.rejected('Actual source differs');self.write(helper,original)
+    def test_proof_verify_only_authenticates_both_python_helper_bodies(self):
+        self.proof_fixture();self.env['SELECTED_PACKAGE_VERIFY_ONLY']='true'
+        for helper in ['scripts/selected-package-bootstrap.py','scripts/extract-package-output.py']:
+            with self.subTest(helper=helper):
+                original=(self.root/helper).read_bytes();self.write(helper,b'# substituted helper\n')
+                self.rejected('Actual source differs');self.write(helper,original)
+    def test_proof_mode_rejects_missing_helper_files(self):
+        self.proof_fixture()
+        for helper in ['scripts/selected-package-bootstrap.py','scripts/extract-package-output.py']:
+            with self.subTest(helper=helper):
+                original=(self.root/helper).read_bytes();(self.root/helper).unlink()
+                self.rejected('Actual source member missing');self.write(helper,original)
+    def test_proof_mode_rejects_untrusted_untracked_helper(self):
+        self.write('scripts/run-selected-package-proof.mjs',"import './child.mjs';\n");self.trust_changes()
+        self.write('scripts/selected-package-bootstrap.py','# untracked verifier\n')
+        self.write('scripts/extract-package-output.py','# untracked extractor\n')
+        self.env['SELECTED_PACKAGE_ENTRY_POINT']='scripts/run-selected-package-proof.mjs'
+        self.rejected('Trusted source member missing')
+    def test_proof_mode_rejects_helper_symlinks_and_executable_bit_changes(self):
+        self.proof_fixture()
+        for helper in ['scripts/selected-package-bootstrap.py','scripts/extract-package-output.py']:
+            with self.subTest(helper=helper):
+                file=self.root/helper;original=file.read_bytes()
+                file.chmod(0o755);self.rejected('Actual source differs');file.chmod(0o644)
+                target=self.write('helper-copy.py',original);file.unlink();file.symlink_to(target)
+                self.rejected('Source link');file.unlink();self.write(helper,original)
+    def test_proof_helpers_remain_bound_despite_git_replacement(self):
+        self.proof_fixture();helper='scripts/extract-package-output.py'
+        original=self.git('rev-parse','HEAD:'+helper).decode().strip();raw=b'# replaced helper\n'
+        altered=self.git('hash-object','-w','--stdin',input=raw).decode().strip()
+        self.git('replace',original,altered);self.write(helper,raw);self.rejected('Actual source differs')
 
     def shallow_candidate(self):
         self.authority_root=self.root
@@ -244,13 +354,22 @@ class BootstrapTests(unittest.TestCase):
             self.assertEqual(env['GIT_NO_REPLACE_OBJECTS'],'1'); self.assertEqual(env['GIT_CONFIG_GLOBAL'],'/dev/null')
     def test_accept_real_repository_static_closure(self):
         # Copy Node's independently parsed static graph, without evaluating modules.
-        walker="import fs from 'node:fs';import path from 'node:path';import vm from 'node:vm';const root=process.argv[1],q=['scripts/assemble-selected-package.mjs'],seen=new Set();while(q.length){const n=q.pop();if(seen.has(n))continue;seen.add(n);for(const s of new vm.SourceTextModule(fs.readFileSync(path.join(root,n),'utf8')).dependencySpecifiers)if(s.startsWith('.'))q.push(path.posix.normalize(path.posix.join(path.posix.dirname(n),s)));}process.stdout.write(JSON.stringify([...seen]));"
-        names=json.loads(subprocess.check_output([SYSTEM_NODE,'--experimental-vm-modules','--input-type=module','-e',walker,str(SOURCE_ROOT)],stderr=subprocess.PIPE))
-        self.assertGreater(len(names),10)
+        names=actual_static_graph(SOURCE_ROOT, 'scripts/assemble-selected-package.mjs')
+        self.assertIn('scripts/assemble-selected-package.mjs',names)
         for name in names: self.write(name,(SOURCE_ROOT/name).read_bytes())
         self.write('package.json',(SOURCE_ROOT/'package.json').read_bytes()); self.trust_changes(); self.accepted()
         cli=(SOURCE_ROOT/'scripts/assemble-selected-package.mjs').read_text()
         self.assertLess(cli.index('delete process.env.GH_TOKEN;delete process.env.GITHUB_TOKEN;'),cli.index('result=await assembleSelectedPackage('))
+
+    def test_accept_real_proof_observer_closure_and_explicit_python_helpers(self):
+        names=actual_static_graph(SOURCE_ROOT, 'scripts/run-selected-package-proof.mjs')
+        self.assertIn('scripts/run-selected-package-proof.mjs',names)
+        self.assertNotIn('scripts/assemble-selected-package.mjs',names,
+                         'Frozen assembly is imported only after its separate authentication')
+        for name in names+['scripts/selected-package-bootstrap.py','scripts/extract-package-output.py','package.json']:
+            self.write(name,(SOURCE_ROOT/name).read_bytes())
+        self.trust_changes();receipt=self.verified_only('scripts/run-selected-package-proof.mjs')
+        self.assertEqual(receipt['files'],sorted(names))
 
 class WorkflowBootstrapTests(unittest.TestCase):
     def setUp(self):
@@ -260,7 +379,7 @@ class WorkflowBootstrapTests(unittest.TestCase):
         self.temp=tempfile.TemporaryDirectory(prefix='worldatlas-inline-bootstrap-'); self.addCleanup(self.temp.cleanup)
         self.root=Path(self.temp.name); oldcwd=Path.cwd(); os.chdir(self.root); self.addCleanup(os.chdir,oldcwd)
         self.output=self.root/'output'; self.marker=self.root/'marker'
-        self.base='a'*40
+        self.base='a'*40;self.bootstrap_ref=self.base
         self.env=dict(os.environ,GH_TOKEN='synthetic-token-never-transmitted',GITHUB_REPOSITORY='ChengshuLi/WorldAtlas',SELECTED_PACKAGE_TRUSTED_BASE=self.base,GITHUB_OUTPUT=str(self.output),BOOTSTRAP_TEST_MARKER=str(self.marker))
         self.body=b"import os\nwith open(os.environ['BOOTSTRAP_TEST_MARKER'],'w') as out: out.write('trusted base helper')\n"
         self.blob={'type':'file','encoding':'base64','path':'scripts/selected-package-bootstrap.py','content':base64.b64encode(self.body).decode(),'size':len(self.body),'sha':hashlib.sha1(b'blob '+str(len(self.body)).encode()+b'\0'+self.body).hexdigest()}
@@ -281,7 +400,7 @@ class WorkflowBootstrapTests(unittest.TestCase):
         candidate=self.root/'scripts/selected-package-bootstrap.py'; candidate.parent.mkdir(); candidate.write_text("raise RuntimeError('candidate helper must never execute')")
         self.invoke(); self.assertEqual(self.marker.read_text(),'trusted base helper'); self.assertFalse(self.output.exists())
         request,timeout=self.requests[0]
-        self.assertEqual(request.full_url,'https://api.github.com/repos/ChengshuLi/WorldAtlas/contents/scripts/selected-package-bootstrap.py?ref='+self.base)
+        self.assertEqual(request.full_url,'https://api.github.com/repos/ChengshuLi/WorldAtlas/contents/scripts/selected-package-bootstrap.py?ref='+self.bootstrap_ref)
         self.assertEqual(request.get_header('Authorization'),'Bearer synthetic-token-never-transmitted'); self.assertEqual(timeout,30)
         self.assertEqual(len(self.handlers),1)
         with self.assertRaises(ValueError): self.handlers[0].redirect_request(None,None,None,None,None,None)
@@ -301,14 +420,33 @@ class ProofWorkflowBootstrapTests(WorkflowBootstrapTests):
         super().setUp()
         workflow=(SOURCE_ROOT/'.github/workflows/selected-package-proof.yml').read_text()
         self.assertIn("python3 -I -B - <<'ASSEMBLY_PROOF'",workflow)
+        self.bootstrap_ref='b'*40;self.env['GITHUB_SHA']=self.bootstrap_ref
         self.code=textwrap.dedent(workflow.split("<<'ASSEMBLY_PROOF'\n",1)[1].split('          ASSEMBLY_PROOF',1)[0])
         self.assertNotIn('npm run build',workflow)
-        self.assertIn('python -I -m pip install -r requirements.txt',workflow)
         self.assertLess(workflow.index('Authenticate installer inputs'),workflow.index('npm ci'))
         self.assertNotIn('write',workflow.split('    permissions:',1)[1].split('    steps:',1)[0])
         for text in ['persist-credentials: false','SELECTED_PACKAGE_ASSEMBLY_SHA256:',
                      'node scripts/run-integration-tests.mjs','selectedDeliverySmoke','--built-output-readback']:
             self.assertIn(text,workflow)
+    def test_observer_checkout_contains_actual_static_closure_and_python_helpers(self):
+        workflow=(SOURCE_ROOT/'.github/workflows/selected-package-proof.yml').read_text()
+        checkout=workflow.split('- name: Checkout current proof implementation separately',1)[1].split('      - ',1)[0]
+        self.assertIn('path: proof-tools',checkout)
+        self.assertIn('ref: ${{ github.sha }}',checkout)
+        sparse=re.search(r'(?m)^          sparse-checkout: \|\n((?:            [^\n]+\n)+)',checkout)
+        if sparse:
+            roots=[line.strip().rstrip('/') for line in sparse[1].splitlines()]
+            closure=actual_static_graph(SOURCE_ROOT,'scripts/run-selected-package-proof.mjs')
+            closure+=['scripts/selected-package-bootstrap.py','scripts/extract-package-output.py']
+            absent=[name for name in closure if '/' in name and not any(name==root or name.startswith(root+'/') for root in roots)]
+            self.assertEqual(absent,[], 'Sparse observer checkout omits actually executed or authenticated files')
+        else:
+            self.assertNotIn('sparse-checkout:',checkout,'Unsupported sparse declaration must be reviewed')
+        assembly=workflow.split('- name: Assemble frozen production source and compare with current proof implementation',1)[1].split('      - ',1)[0]
+        self.assertIn('working-directory: proof-tools',assembly)
+        self.assertIn('SELECTED_PACKAGE_TRUSTED_BASE: ${{ github.sha }}',assembly)
+        self.assertIn('SELECTED_PACKAGE_ENTRY_POINT: scripts/run-selected-package-proof.mjs',assembly)
+
     def assert_rejected(self, error=None):
         with self.assertRaises(Exception): self.invoke(error)
         self.assertFalse(self.marker.exists());self.assertFalse(self.output.exists())
@@ -322,5 +460,15 @@ class ProofWorkflowBootstrapTests(WorkflowBootstrapTests):
         self.env['GITHUB_REPOSITORY']='other/repo'; self.assert_rejected();self.assertFalse(self.requests)
     def test_nonexact_base_falls_back_before_token_request(self):
         self.env['SELECTED_PACKAGE_TRUSTED_BASE']='main'; self.assert_rejected();self.assertFalse(self.requests)
+
+class ProofInstallerBootstrapTests(ProofWorkflowBootstrapTests):
+    def setUp(self):
+        super().setUp()
+        workflow=(SOURCE_ROOT/'.github/workflows/selected-package-proof.yml').read_text()
+        self.assertIn("python3 -I -B - <<'INSTALLER_PREFLIGHT'",workflow)
+        self.code=textwrap.dedent(workflow.split("<<'INSTALLER_PREFLIGHT'\n",1)[1].split('          INSTALLER_PREFLIGHT',1)[0])
+        self.env['SELECTED_PACKAGE_PREFLIGHT']='install'
+        self.assertNotEqual(self.env['SELECTED_PACKAGE_TRUSTED_BASE'],self.env['GITHUB_SHA'],
+                            'Installer fixture distinguishes frozen source from current verifier implementation')
 
 if __name__=='__main__': unittest.main(verbosity=2)

@@ -64,3 +64,33 @@ A forced-packed-source control preserves missing excluded objects and no-fetch
 checks. All 22 local-workspace controls passed after integration. This changes
 no production workspace behavior or package assembly. The final combined
 regression-programme vector still includes this changed test identity.
+
+## Accepted integration context
+
+The final integration is rebased on accepted package PR #1802 at
+`3e3e3e73e1006617d005ec1965d3698ad9453cd8`, authenticated by queue receipt
+6133941535. Its complete tree is exactly the locally prepared candidate
+`7b87dca91cb12399ccc498ad9c2db25b2b0c5129` tree
+`07764665adf7b1b75ee82c2ed3b308de7aecf9cc`; the final rebase preserved the
+complete combined tree. On those bytes, 686 focused Node controls passed across
+the main run, a targeted Python-interpreter correction and 68 retention controls.
+The first Python-wrapper attempt lacked Shapely; the unchanged 55 controls
+passed using the already-retained immutable Python environment. Independent
+review repeated 154 driver/workspace controls and all nine genuine Native102
+controls. These local results remain separate from final hosted acceptance.
+
+## Separate observer for frozen package proof
+
+Eight explicitly handed-off proof files preserve the accepted PR #1802
+production programme while running a separately identified current observer.
+The genuine frozen CLI reaches committed output and then reports its known
+legacy comparison failure; that failure is retained honestly. A successful
+current proof requires independent authentication of the committed receipt,
+original manifest and exhaustive B readback, exact output member conservation,
+and fresh native/browser/smoke consumers. Only the independently derived
+package-declaration encoded-read delta is normalized. The actual original
+readback preflight measured 92,514 versus 96,272 declaration bytes, with all
+321,259,926 other encoded bytes and 192,828,074 decoded bytes unchanged. This is
+accounting preflight, not actual assembly equivalence. Frozen A/B identities
+remain separate from the proof-code identity; issue #1798 retains the genuine
+hosted proof and timing obligation after this code is accepted.

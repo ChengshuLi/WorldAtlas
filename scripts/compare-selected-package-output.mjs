@@ -42,6 +42,24 @@ function sourceSnapshot(root, head) {
     input_definition_sha256:digest(raw),files:committedPackageInputs(root,definition,head),
     programme:committedPackageProgramme(root,head),selection:JSON.parse(git('show',head+':data/ownership-selection.json'))}};
 }
+export function normalizeDeclarationReadAccounting(fullStage, assembledStage, currentDescriptor, originalDescriptor) {
+  // The qualified consumer reads this unique issued code descriptor once via
+  // its ordinary reader. Its bytes contribute to encoded reads, not decoded
+  // scientific payload. Keep both original observations; normalize only a copy.
+  for (const [stage, descriptor] of [[fullStage,currentDescriptor],[assembledStage,originalDescriptor]]) {
+    assert.ok(Number.isSafeInteger(descriptor.bytes) && descriptor.bytes > 0);
+    assert.ok(Number.isSafeInteger(stage.consumed_input_bytes?.encoded) &&
+      stage.consumed_input_bytes.encoded >= descriptor.bytes, 'Invalid actual encoded input accounting');
+  }
+  const currentRemainder=fullStage.consumed_input_bytes.encoded-currentDescriptor.bytes;
+  const originalRemainder=assembledStage.consumed_input_bytes.encoded-originalDescriptor.bytes;
+  assert.equal(currentRemainder,originalRemainder,'Consumed bytes differ beyond the authenticated declaration read');
+  const normalized=structuredClone(fullStage);
+  normalized.consumed_input_bytes.encoded=assembledStage.consumed_input_bytes.encoded;
+  return {normalized, accounting:{original_declaration_bytes:originalDescriptor.bytes,
+    current_declaration_bytes:currentDescriptor.bytes, unchanged_other_encoded_bytes:originalRemainder}};
+}
+
 function bindDeclarationTransition({sourceRoot,originalManifest,assembled,originalHead,currentHead,fullContext,assembledContext}) {
   assert.ok(sourceRoot&&originalManifest,'Actual Git source and authenticated original manifest required');
   const raw=fs.readFileSync(originalManifest),manifest=validatePackageOutputManifest(JSON.parse(raw));
@@ -83,7 +101,7 @@ function bindDeclarationTransition({sourceRoot,originalManifest,assembled,origin
     assert.deepEqual(matches[0],snapshot.descriptor,'Package declaration descriptor differs from actual source bytes');
   }
   fullContext.full_code_closure=fullContext.full_code_closure.map(row=>row.path==='.github/package-inputs.json'?original.descriptor:row);
-  return transition;
+  return {transition,originalDescriptor:original.descriptor,currentDescriptor:current.descriptor};
 }
 export function compareSelectedPackageOutput({full,assembled,originalHead,currentHead,sourceRoot,originalManifest}) {
   assert.match(originalHead,/^[a-f0-9]{40}$/);assert.match(currentHead,/^[a-f0-9]{40}$/);
@@ -98,16 +116,20 @@ export function compareSelectedPackageOutput({full,assembled,originalHead,curren
   const a=read(full),b=read(assembled);
   assert.equal(a.nativeContextInputStage?.current_execution?.source_head,currentHead,'Full output must record actual current build head');
   assert.equal(b.nativeContextInputStage?.current_execution?.source_head,originalHead,'Assembly must preserve original context head');
-  const transition=bindDeclarationTransition({sourceRoot,originalManifest,assembled,originalHead,currentHead,
+  const binding=bindDeclarationTransition({sourceRoot,originalManifest,assembled,originalHead,currentHead,
     fullContext:a.nativeContextInputStage.current_execution,assembledContext:b.nativeContextInputStage.current_execution});
   // Only independently authenticated source head and declaration provenance may
-  // differ. All other code, runtime, scientific counters and atlas fields match.
+  // differ. Only its exact encoded read delta is normalized; scientific bytes and all other fields match.
+  const {normalized,accounting}=normalizeDeclarationReadAccounting(a.nativeContextInputStage,b.nativeContextInputStage,
+    binding.currentDescriptor,binding.originalDescriptor);
+  a.nativeContextInputStage=normalized;
   a.nativeContextInputStage.current_execution.source_head=originalHead;
   assert.deepEqual(a,b,'Atlas content differs beyond preserved original source provenance');
   return {version:1,kind:'actual-full-versus-assembled-output-comparison',original_head:originalHead,current_head:currentHead,
     files:before.files.length,exact_byte_files:exactFiles,exact_bytes:exactBytes,atlas_semantic_equal:true,
-    transition,explicit_provenance_differences:['nativeContextInputStage.current_execution.source_head',
-      'nativeContextInputStage.current_execution.full_code_closure[.github/package-inputs.json]'],
+    transition:binding.transition,declaration_read_accounting:accounting,explicit_provenance_differences:['nativeContextInputStage.current_execution.source_head',
+      'nativeContextInputStage.current_execution.full_code_closure[.github/package-inputs.json]',
+      'nativeContextInputStage.consumed_input_bytes.encoded[authenticated declaration bytes]'],
     limitation:'Authenticated original source/declaration provenance is preserved; every other atlas field and output byte matches.'};
 }
 // The queue already records exhaustive actual output hashes. A genuine full
@@ -137,10 +159,12 @@ export function compareSelectedPackageReadback({assembled,readback,originalHead,
   assert.equal(atlas.nativeContextInputStage?.current_execution?.source_head,originalHead);
   assert.equal(readback.nativeContextInputStage?.current_execution?.source_head,currentHead);
   const originalCurrentStage=structuredClone(readback.nativeContextInputStage),normalizedStage=structuredClone(originalCurrentStage);
-  const transition=bindDeclarationTransition({sourceRoot,originalManifest,assembled,originalHead,currentHead,
+  const binding=bindDeclarationTransition({sourceRoot,originalManifest,assembled,originalHead,currentHead,
     fullContext:normalizedStage.current_execution,assembledContext:atlas.nativeContextInputStage.current_execution});
-  normalizedStage.current_execution.source_head=originalHead;
-  assert.deepEqual(normalizedStage,atlas.nativeContextInputStage,'Scientific context differs beyond authenticated provenance');
+  const {normalized:accountedStage,accounting}=normalizeDeclarationReadAccounting(normalizedStage,atlas.nativeContextInputStage,
+    binding.currentDescriptor,binding.originalDescriptor);
+  accountedStage.current_execution.source_head=originalHead;
+  assert.deepEqual(accountedStage,atlas.nativeContextInputStage,'Scientific context differs beyond authenticated provenance');
   // Preserve the builder's actual compact JSON ordering. A different field,
   // order, encoding or value fails the full reference's exact SHA-256 check.
   atlas.nativeContextInputStage=originalCurrentStage;
@@ -153,9 +177,10 @@ export function compareSelectedPackageReadback({assembled,readback,originalHead,
   }
   return {version:1,kind:'actual-full-readback-versus-assembled-output-comparison',original_head:originalHead,current_head:currentHead,
     files:current.files.length,exact_byte_files:current.files.length-1,exact_bytes:exactBytes,
-    atlas_exact_after_authenticated_provenance:true,transition,
+    atlas_exact_after_authenticated_provenance:true,transition:binding.transition,declaration_read_accounting:accounting,
     explicit_provenance_differences:['nativeContextInputStage.current_execution.source_head',
-      'nativeContextInputStage.current_execution.full_code_closure[.github/package-inputs.json]'],
+      'nativeContextInputStage.current_execution.full_code_closure[.github/package-inputs.json]',
+      'nativeContextInputStage.consumed_input_bytes.encoded[authenticated declaration bytes]'],
     limitation:'Uses authenticated exhaustive full-build readback; no additional full build or inherited consumer claim is made.'};
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
