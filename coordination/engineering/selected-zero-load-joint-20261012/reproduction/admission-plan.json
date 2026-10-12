@@ -1,0 +1,31 @@
+{
+  "kind": "actual-aus-joint-prospective-admission-plan-v1",
+  "minimum_fresh_reader_phase_bytes": 1342177280,
+  "owned_process_group_reservation_bytes": 2147483648,
+  "concurrent_reserved_bytes": 3221225472,
+  "parent_reserve_bytes": 2147483648,
+  "overlap_margin_bytes": 805306368,
+  "wall_limit_seconds": 420,
+  "sample_interval_seconds": 0.2,
+  "continuous_and_derived_output_union_bytes": 33554432,
+  "prospective_output_representation_multiplier": 7,
+  "static_input_roster": {
+    "path": "coordination/engineering/selected-zero-load-joint-20261012/accepted-reference/static-union-inputs.json",
+    "bytes": 44672,
+    "sha256": "3931faa405ada0d88316b765b4438c94204d7576b0d0e3dc97097e1c05937d30"
+  },
+  "planning_basis": {
+    "earlier_same_shared_module_measured_peak_phase_bytes": 707801412,
+    "earlier_comparison_head": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+    "complete_joint_caller_estimate_bytes": 325058560,
+    "additional_conservative_actual_aus_input_allowance_bytes": 112479346,
+    "additional_trusted_policy_allowance_bytes": 4194304,
+    "sum_bytes": 1149533622,
+    "explanation": "Use the earlier genuine shared-state peak as a measured planning anchor, add 310 MiB for complete native/joint/continuous caller carry, and additionally charge seven times the entire actual AUS request, result, ledger, facts, publication, operating and largest containing source, plus two small trusted policy bodies. This intentionally overcounts shared categories. Require a fresh 1.25 GiB phase before launching, then all actual reads/output phases still enforce their current complete prospective allowance. This is a planning bound, not a new measured peak."
+  },
+  "limits": [
+    "Fresh OS/cgroup observation is required immediately before execution; this static plan is not an admission receipt.",
+    "Do not launch if the current phase is below the minimum; do not tighten margins to force admission.",
+    "The single 2 GiB process-group window is coordinated with engineering; no concurrent heavy proof is admitted."
+  ]
+}

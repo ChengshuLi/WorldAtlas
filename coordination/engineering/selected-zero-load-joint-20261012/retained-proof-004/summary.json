@@ -1,0 +1,165 @@
+{
+  "kind": "complete-actual-joint-proof-summary-v1",
+  "execution_commit": "226336bd1b0f3cd10b8894bf0ce90c022f64b4a2",
+  "selected_pair": {
+    "baseline": "46438af8901acbad11a9b627828a9e9184018a77",
+    "candidate": "95a3d3dcb76bf0c61a4f8ada504f3f346df18466"
+  },
+  "complete_joint_seconds": 23.342238393001026,
+  "supervised_seconds": 24.328940886000055,
+  "sampled_group_peak_rss_bytes": 540028928,
+  "complete": true,
+  "returncode": 0,
+  "terminal_members": [],
+  "cleanup_members": [],
+  "v8_call_counts": {
+    "checkpointContinuousOperands": 1,
+    "compareSelectedCheckpointNative": 1,
+    "loadSelection": 0,
+    "qualifyCheckpoint": 1,
+    "qualifyTransition": 1,
+    "releaseCheckpoint": 1,
+    "selectedBootstrap": 1,
+    "selectedCoordinateShard": 0
+  },
+  "complete_owners": 49625,
+  "required_owners": 53,
+  "changed_owners": 7,
+  "native_changed_rows": 18,
+  "prior_native_all_additive_rows": 287,
+  "scientific_comparison": {
+    "whole_strict_polygon_result_equal": true,
+    "whole_operand_descriptor_equal": true,
+    "whole_source_binding_and_scope_equal": true,
+    "native_equal_fields": [
+      "baseline_selection",
+      "candidate_code_executed",
+      "candidate_selection",
+      "intervals",
+      "lost_or_reassigned_cells",
+      "method",
+      "output_reserve_bytes",
+      "status",
+      "version"
+    ],
+    "native_different_report_fields": [
+      "additive_conservation",
+      "affected_rows",
+      "baseline_receipt_provenance",
+      "caller_runtime",
+      "candidate_receipt_provenance",
+      "checkpoint_custody",
+      "execution_code_inventory",
+      "execution_runtimes",
+      "input_inventory",
+      "limits",
+      "native_row_scope",
+      "phases",
+      "runtime"
+    ],
+    "native_limits": "Full native reports retained. The optimized report certifies 18 complete changed rows under the shared accepted base and cumulative patches; old cold report covers all 287 additive rows. Custody, code/runtime, inventories, conservation proof and phase accounting intentionally differ; no claim of byte-equal reports."
+  },
+  "source_accounting": {
+    "baseline_continuous_whole_inputs": [
+      {
+        "bytes": 8539839,
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "git_blob_oid": "85bdc3171a740db0bc756460dab5a50c6c54518d",
+        "mode": "100644",
+        "path": "data/geography/part-0.json",
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "whole_body_consumed": true
+      },
+      {
+        "bytes": 8060108,
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "git_blob_oid": "471e45dcd13904489bc434ae5115105fadba7ab9",
+        "mode": "100644",
+        "path": "data/geography/part-1.json",
+        "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7",
+        "whole_body_consumed": true
+      },
+      {
+        "bytes": 4583022,
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "git_blob_oid": "306125db7012a9ac927bb4a169dea5166ef126e7",
+        "mode": "100644",
+        "path": "data/geography/part-19.json",
+        "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+        "whole_body_consumed": true
+      },
+      {
+        "bytes": 6613963,
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "git_blob_oid": "a9e03cb07194a73f643af85d1e6db94abe3b5fc9",
+        "mode": "100644",
+        "path": "data/geography/part-28.json",
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "whole_body_consumed": true
+      },
+      {
+        "bytes": 5097739,
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "git_blob_oid": "eec7163a536245c0249d1821fe81590aba2a1ded",
+        "mode": "100644",
+        "path": "data/geography/part-8.json",
+        "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1",
+        "whole_body_consumed": true
+      }
+    ],
+    "candidate_new_target_whole_inputs": [
+      {
+        "bytes": 8539839,
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "git_blob_oid": "85bdc3171a740db0bc756460dab5a50c6c54518d",
+        "mode": "100644",
+        "path": "data/geography/part-0.json",
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "whole_body_consumed": true
+      },
+      {
+        "bytes": 8060108,
+        "commit": "ffa32416fd946ac89da621d02b554ca27733e688",
+        "git_blob_oid": "471e45dcd13904489bc434ae5115105fadba7ab9",
+        "mode": "100644",
+        "path": "data/geography/part-1.json",
+        "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7",
+        "whole_body_consumed": true
+      }
+    ],
+    "candidate_continuous_features_reused": true,
+    "phase_distinct_source_inputs": 7,
+    "unique_containing_source_bodies": 5,
+    "candidate_continuous_rereads": 0,
+    "limits": "Phase source counts are derived from actual consumed inventories plus the authenticated explicit reuse identity, not an independent syscall counter. Complete inventories are retained."
+  },
+  "actual_inventory_descriptors": {
+    "baseline": 137,
+    "candidate": 103
+  },
+  "derived_checkpoint": {
+    "accepted_checkpoint": false,
+    "certificate": {
+      "bytes": 7515261,
+      "decoded_bytes": 18414420,
+      "decoded_sha256": "b1caaaa2ba0b7fb54dc75d0f3dd2414d53da6fa32d40793435d799ccd6357ef4",
+      "path": "derived-certificate.json.gz",
+      "sha256": "82ed823e1968222c6e0ca760a4fd5567a5c7949f2cb5b7422f75806661b0a0e2"
+    },
+    "complete": true,
+    "facts": {
+      "bytes": 139556,
+      "path": "derived-facts.json",
+      "sha256": "d366c989c6d0a8dd145b45c56c5dff518c583fee3fb4d4fed1728f94b8ef0a42"
+    },
+    "kind": "derived-selected-checkpoint-candidate-v1",
+    "validation_stage": "native-passed-continuous-pending",
+    "version": 1
+  },
+  "limits": [
+    "Local admitted proof, not controlled hosted speedup measurement.",
+    "The clean result proves the final extracted routing; the provisional derived publication does not grant accepted checkpoint authority.",
+    "Normal hosted retention and accepted-artifact advancement remains issue 1788 follow-on.",
+    "Proof003 at execution0294 and both earlier failures remain unchanged."
+  ]
+}

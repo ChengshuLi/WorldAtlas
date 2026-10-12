@@ -9,6 +9,7 @@ import {createRoutingMetadataAcquisition} from './geography-routing-metadata.mjs
 
 const PREFIX = 'coordination/engineering/selected-geography-effective-prevention-20261009/';
 const POLICY = PREFIX + 'supported-programs.json';
+const CHECKPOINTS = 'coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
 const HANDOFFS = 'coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json';
 const FILE = 32 * 1024 * 1024, METADATA = 64 * 1024 * 1024, ENTRIES = 4096;
 const sha = body => createHash('sha256').update(body).digest('hex');
@@ -30,8 +31,14 @@ const joined = async promises => {
 // alone cannot prove this older collector complete for that new reader. Updating
 // these profiles therefore requires reviewing its reads and the adverse tests.
 export const AUDITED_READERS = Object.freeze({
+  // The joint route only reuses authenticated original selected inputs and products.
+  // These exact readers introduce no new scientific source outside that closure.
+  'scripts/selected-checkpoint-native.mjs': ['1372180d776e33227410aaeb4ef5526cd5cc84e4dca3950cc6eaa6210bad04ca'],
+  [PREFIX + 'selected-checkpoint.mjs']: ['aaa4782773e94a88fcf1c966ef549c6ab5fe084cd2243a43dab206ac6d185c5f'],
+  [PREFIX + 'selected-checkpoint-continuous.mjs']: ['1c82e1bb619bc42353a573d0ef4f1989490e03b32d5137035cf890a3719c55dc'],
+  [PREFIX + 'selected-joint-entry.mjs']: ['de49264769b6dd942c1e1eaad6a8aec6548b9a81c3789fbddda9b7325d971496'],
   'src/ownership-codec.js': ['64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d'],
-  'scripts/check-effective-geographic-regression.mjs': ['801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039', '5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda'],
+  'scripts/check-effective-geographic-regression.mjs': ['85ed6815060c98973ecc4043f0872398a6b8e474130d1663b5940eefd9f8baf4', '801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039', '5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda'],
   // The second profile is reviewed stage-2 blob f8e4a88a6dbe3d3961d6b17d9b926ee4488561a8:
   // catalogue/admission/peak accounting changes; all input routes are identical.
   [PREFIX + 'selected-neighbor-prevention.mjs']: ['63745cc5d4f15bdd8c153787df07379d813ab037fc1e0734944a75568235e8aa',
@@ -43,10 +50,12 @@ export const AUDITED_READERS = Object.freeze({
 });
 export const EXECUTION_CODE = Object.freeze([
   'scripts/run-geographic-check.py', 'scripts/check-geographic-regression.py',
-  'scripts/check-effective-geographic-regression.mjs', 'src/ownership-codec.js',
+  'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs', 'src/ownership-codec.js',
   'scripts/evidence/immutable.py', 'scripts/evidence/geometry.py',
   'scripts/ellipsoidal_area.py', 'requirements.txt', 'package.json', 'package-lock.json',
-  PREFIX + 'selected-neighbor-prevention.mjs', PREFIX + 'selected-continuous-entry.mjs'
+  PREFIX + 'selected-neighbor-prevention.mjs', PREFIX + 'selected-continuous-entry.mjs',
+  PREFIX + 'selected-checkpoint.mjs', PREFIX + 'selected-checkpoint-continuous.mjs', PREFIX + 'selected-joint-entry.mjs',
+  CHECKPOINTS
 ]);
 export const REBIND_CODE = Object.freeze([
   'coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs',
@@ -145,13 +154,13 @@ function createReader({repo, baseline, candidate, trusted, limits, acquisition})
     }
     return origins.get(commit);
   }
-  function pinned(value, {fallback = true} = {}) {
+  function pinned(value, {fallback = true, fallbackCommit = baseline, currentAlias = true} = {}) {
     demand(value && oid(value.commit) && safe(value.path) && ['100644', '100755'].includes(value.mode)
       && oid(value.git_blob_oid ?? value.blob) && Number.isSafeInteger(value.bytes) && value.bytes > 0 && value.bytes <= limits.member && hash(value.sha256), 'unsupported-historical-pin');
     // Protect even the currently unused retained alias, including its absence.
     // A later object hydration must not expose a candidate-only alternative.
-    if (fallback) equalCurrent(value.path, true);
-    const version = originExists(value.commit) ? value.commit : fallback ? baseline : null;
+    if (fallback && currentAlias) equalCurrent(value.path, true);
+    const version = originExists(value.commit) ? value.commit : fallback ? fallbackCommit : null;
     if (!version) requireOrigin(value.commit);
     const actual = descriptor(version, value.path);
     demand(actual.mode === value.mode && actual.git_blob_oid === (value.git_blob_oid ?? value.blob), 'historical-pin-identity');
@@ -248,6 +257,73 @@ async function currentRebind(reader, pin, sourcePaths) {
   // selected source bank; it cannot introduce another physical input locator.
 }
 
+// The checkpoint reader adds retained complete-output roots and a finite route
+// census beyond the selected source/native bank. A same-selector source change
+// must not alter one of those aliases while the old collector silently skips it.
+async function checkpointRoutes(reader, selection, trusted) {
+  const catalogue = await reader.trustedJson(CHECKPOINTS);
+  keys(catalogue, 'version,kind,qualifier_code,checkpoints', 'checkpoint-catalogue');
+  demand(catalogue.version === 1 && catalogue.kind === 'accepted-selected-checkpoints-v1', 'unsupported-checkpoint-catalogue');
+  const methods = [PREFIX + 'selected-checkpoint.mjs', PREFIX + 'selected-neighbor-prevention.mjs',
+    'scripts/check-effective-geographic-regression.mjs', 'src/ownership-codec.js'];
+  demand(same(array(catalogue.qualifier_code, 'checkpoint-methods').map(p => p.path), methods), 'unsupported-checkpoint-methods');
+  for (const p of catalogue.qualifier_code) {
+    keys(p, 'path,bytes,sha256', 'checkpoint-method');
+    demand(Number.isSafeInteger(p.bytes) && p.bytes > 0 && hash(p.sha256), 'unsupported-checkpoint-method');
+    const actual = reader.descriptor(trusted, p.path);
+    demand(actual.mode === '100644', 'unsupported-checkpoint-method-mode');
+    await reader.body(actual, p);
+  }
+  const roots = array(catalogue.checkpoints, 'checkpoint-roots', 0);
+  demand(new Set(roots.map(p => p.id)).size === roots.length, 'duplicate-checkpoint-identity');
+  const selectedHash = sha(Buffer.from(JSON.stringify(canonical(selection)) + '\n'));
+  const matches = roots.filter(p => p.selection_sha256 === selectedHash);
+  demand(matches.length <= 1, 'ambiguous-checkpoint-selection');
+  // No registration means the genuine joint entry takes its existing cold path,
+  // whose complete inputs are collected below. Do not invent checkpoint trust.
+  if (!matches.length) return;
+  const root = matches[0];
+  keys(root, 'id,accepted_head,selected_commit,selection_sha256,execution_commit,execution_code_sha256,runtime_sha256,facts,certificate,publication,custody,routes', 'checkpoint-root');
+  demand(typeof root.id === 'string' && root.id && [root.accepted_head, root.selected_commit, root.execution_commit].every(oid)
+    && [root.selection_sha256, root.execution_code_sha256, root.runtime_sha256].every(hash), 'unsupported-checkpoint-root');
+  for (const role of ['facts', 'certificate', 'publication', 'custody', 'routes']) reader.pinned(root[role], {fallbackCommit: trusted});
+  // Scientific certificate/operand bodies stay opaque. Their original whole
+  // pins bind all nested contents; this authenticated routing metadata covers
+  // the module's complete present/absent inventory and source/native alternatives.
+  // The qualifier also reads the archived execution's programme policy. Its
+  // current alias belongs only to the trusted checkout, never the candidate.
+  const custody = await reader.pinnedJson(root.custody, {fallbackCommit: trusted});
+  const retained = array(custody.complete_cold_custody, 'checkpoint-custody').filter(p => p.facts?.selected_commit === root.selected_commit);
+  demand(retained.length === 1, 'ambiguous-checkpoint-policy-custody');
+  const policyPins = array(retained[0].inventory, 'checkpoint-inventory').filter(p => p.path === POLICY);
+  demand(policyPins.length === 1, 'incomplete-checkpoint-policy-custody');
+  const priorPolicy = await reader.pinnedJson(policyPins[0], {fallbackCommit: trusted, currentAlias:false});
+  const currentPolicy = await reader.trustedJson(POLICY);
+  for (const policy of [priorPolicy, currentPolicy]) {
+    keys(policy, 'version,kind,programs,current_rebind_migrations', 'checkpoint-programme-policy');
+    demand(policy.version === 1 && policy.kind === 'trusted-source-native-programmes-v1', 'unsupported-checkpoint-programme-policy');
+  }
+  for (const role of ['programs', 'current_rebind_migrations']) {
+    const current = new Set(array(currentPolicy[role], 'checkpoint-policy-records', 0).map(p => JSON.stringify(canonical(p))));
+    demand(array(priorPolicy[role], 'checkpoint-policy-records', 0).every(p => current.has(JSON.stringify(canonical(p)))),
+      'checkpoint-policy-eligibility-removed');
+  }
+  const routes = await reader.pinnedJson(root.routes, {fallbackCommit: trusted});
+  demand(Array.isArray(routes) && routes.length > 0 && routes.length <= ENTRIES, 'unsupported-checkpoint-routes');
+  let previous = '';
+  for (const route of routes) {
+    keys(route, 'path,tree', 'checkpoint-route');
+    demand(safe(route.path) && route.path > previous && typeof route.tree === 'string', 'unsupported-checkpoint-route-order');
+    previous = route.path;
+    // Its original census row is preserved; current policy is independently
+    // bound by trustedJson(POLICY), not selected-vintage scientific equality.
+    if (route.path === POLICY) continue;
+    const actual = reader.equalCurrent(route.path, true);
+    const tree = actual ? `${actual.mode} blob ${actual.git_blob_oid}\t${actual.path}\0` : '';
+    demand(route.tree === tree, 'checkpoint-route-identity:' + route.path);
+  }
+}
+
 async function collect(reader, {baseline, candidate, trusted}) {
   // This is an eligibility bound, not input equivalence. Compare the authored
   // diff from its real merge base; all consumed identities below still compare
@@ -268,7 +344,7 @@ async function collect(reader, {baseline, candidate, trusted}) {
   for (const name of ['scripts/check-unchanged-selected-geography.mjs', 'scripts/geography-routing-metadata.mjs']) reader.equalCurrent(name, true);
   reader.equalCurrent('scripts/geography-prefetch.mjs');
   await joined([...Object.keys(AUDITED_READERS).map(name => reader.body(reader.descriptor(trusted, name))),
-    reader.trustedJson(POLICY), ...[HANDOFFS, 'data/world-index.json', 'data/geographic-releases/current-manifest.json',
+    reader.trustedJson(POLICY), reader.trustedJson(CHECKPOINTS), ...[HANDOFFS, 'data/world-index.json', 'data/geographic-releases/current-manifest.json',
       'data/ownership-selection.json', 'scripts/native-ownership/verified-candidates.json'].map(name => reader.currentJson(name))]);
   for (const [name, allowed] of Object.entries(AUDITED_READERS)) {
     const raw = await reader.body(reader.descriptor(trusted, name));
@@ -293,6 +369,7 @@ async function collect(reader, {baseline, candidate, trusted}) {
   const selection = await reader.currentJson('data/ownership-selection.json');
   keys(selection, 'manifest_path,method,release_id,sha256,version' + ['selected_geography', 'additive_release', 'artifact_consumption'].filter(k => Object.hasOwn(selection, k)).map(k => ',' + k).join(''), 'selection');
   demand(selection.version === 1 && selection.method === 'native-linear-evenodd-first-owner-v1' && safe(selection.manifest_path), 'unsupported-selection');
+  await checkpointRoutes(reader, selection, trusted);
   await joined([reader.currentJson(selection.manifest_path, {sha256: selection.sha256}),
     ...(selection.selected_geography ? [reader.currentJson(selection.selected_geography.path, selection.selected_geography)] : []),
     ...(selection.additive_release ? [reader.jsonAt(reader.currentPin(selection.additive_release), selection.additive_release)] : []),

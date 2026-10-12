@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "issue": 1774,
+  "lane": "engineering",
+  "worker_id": "01a12ebd-03db-7105-9a08-75a5f045a000",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "46438af8901acbad11a9b627828a9e9184018a77",
+    "files": [
+      {
+        "path": "data/ownership-selection.json",
+        "bytes": 1592,
+        "sha256": "a25491f253ab42129b9ec8cce19a6530dee7b861c7928ac07dd543e5f62c35ad",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [
+    {
+      "id": "retained-australia-projections",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/pull/1770",
+      "role": "Pinned retained native interval products and original owner roster, inspected only for numerical conservation",
+      "vintage": "ad300bd5ffa73c226e591f037980d67d40f6acf3 / c753c65a72e51718b453883a941fc22e148b5fbb",
+      "retrieved_at": "2026-10-12",
+      "license": {
+        "status": "unknown",
+        "terms": "Original source and product custody remains authoritative; no new reuse or physical-source approval is asserted."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore the five public exact Git blob OIDs and whole length/SHA256 pins from proof-001/comparison.json; preserve original data and commits.",
+      "limit": "Whole retained product bytes and interval arithmetic only; no complete selected/operating-custody replay or current transport/routing verification.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/native-effective-row-delta-20261012/proof-001/comparison.json",
+      "bytes": 3045,
+      "sha256": "2cafc60dc1b02c36dd7c3639a27d970589b952603090ce6bd050053ecded03f1",
+      "hash_kind": "file-bytes",
+      "role": "validation-evidence"
+    }
+  ],
+  "methods": [
+    {
+      "id": "retained-native-row-comparison",
+      "kind": "code",
+      "description": "Derive symmetric actual full interval-row delta after exact retained base/owner/custody checks, then use original interval conservation. Numerical snapshot 8a45982a; input pair historical and candidate unmerged.",
+      "software": "Node.js v24.19.0 on Darwin arm64; exact source and product hashes recorded in comparison.json.",
+      "units": "rows, native cells and milliseconds"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "union_rows",
+      "value": 287,
+      "unit": "rows",
+      "vintage": "archived",
+      "evaluation_commit": "8a45982a6462cce2bc5f9259823c75a86edacca5",
+      "input_sha256": "2cafc60dc1b02c36dd7c3639a27d970589b952603090ce6bd050053ecded03f1"
+    },
+    {
+      "id": "checked_rows",
+      "value": 18,
+      "unit": "rows",
+      "vintage": "archived",
+      "evaluation_commit": "8a45982a6462cce2bc5f9259823c75a86edacca5",
+      "input_sha256": "2cafc60dc1b02c36dd7c3639a27d970589b952603090ce6bd050053ecded03f1"
+    },
+    {
+      "id": "lost_cells",
+      "value": 0,
+      "unit": "native cells",
+      "vintage": "archived",
+      "evaluation_commit": "8a45982a6462cce2bc5f9259823c75a86edacca5",
+      "input_sha256": "2cafc60dc1b02c36dd7c3639a27d970589b952603090ce6bd050053ecded03f1"
+    },
+    {
+      "id": "derive_ms",
+      "value": 11.885833000000048,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "8a45982a6462cce2bc5f9259823c75a86edacca5",
+      "input_sha256": "2cafc60dc1b02c36dd7c3639a27d970589b952603090ce6bd050053ecded03f1"
+    },
+    {
+      "id": "compare_ms",
+      "value": 1.464166999999975,
+      "unit": "milliseconds",
+      "vintage": "archived",
+      "evaluation_commit": "8a45982a6462cce2bc5f9259823c75a86edacca5",
+      "input_sha256": "2cafc60dc1b02c36dd7c3639a27d970589b952603090ce6bd050053ecded03f1"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "union_rows",
+      "path": "coordination/engineering/native-effective-row-delta-20261012/proof-001/comparison.json",
+      "json_pointer": "/scope/union_rows"
+    },
+    {
+      "metric_id": "checked_rows",
+      "path": "coordination/engineering/native-effective-row-delta-20261012/proof-001/comparison.json",
+      "json_pointer": "/result/checked_rows"
+    },
+    {
+      "metric_id": "lost_cells",
+      "path": "coordination/engineering/native-effective-row-delta-20261012/proof-001/comparison.json",
+      "json_pointer": "/result/lost_or_reassigned_cells"
+    },
+    {
+      "metric_id": "derive_ms",
+      "path": "coordination/engineering/native-effective-row-delta-20261012/proof-001/comparison.json",
+      "json_pointer": "/timing/derive_ms"
+    },
+    {
+      "metric_id": "compare_ms",
+      "path": "coordination/engineering/native-effective-row-delta-20261012/proof-001/comparison.json",
+      "json_pointer": "/timing/compare_ms"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/native-checkpoint-consumer.test.mjs",
+    "node coordination/engineering/native-effective-row-delta-20261012/compare-retained-projections.mjs REPOSITORY INPUT_DIRECTORY"
+  ]
+}

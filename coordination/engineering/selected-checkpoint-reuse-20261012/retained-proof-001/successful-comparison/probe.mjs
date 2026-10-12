@@ -1,0 +1,52 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {performance} from 'node:perf_hooks';
+import {gunzipSync} from 'node:zlib';
+import {pathToFileURL} from 'node:url';
+const output=process.env.PROOF_DIR; assert(output);
+const root=process.cwd(), mod=p=>import(pathToFileURL(root+'/'+p));
+const {ImmutableReader}=await mod('scripts/check-effective-geographic-regression.mjs');
+const api=await mod('coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs');
+const {valueSha,valueBytes}=await mod('coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs');
+const metrics={module_head:'41a9e8c003e57914f5fe03afe62f3ce177d46a93',kind:'retained-checkpoint-append-equivalence',limits:{phase_bytes:1024**3,rss_bytes:1024**3},timings_ms:{},reads:[],peak_phase_bytes:0};
+let phase='qualify_baseline';const start=performance.now(),read=ImmutableReader.prototype.read,check=ImmutableReader.prototype.checkMemory;
+ImmutableReader.prototype.read=function(name,options){const t=performance.now();const body=read.call(this,name,options);metrics.reads.push({phase,path:name,version:options?.version??this.version,bytes:body.length,elapsed_ms:performance.now()-t});return body;};
+ImmutableReader.prototype.checkMemory=function(){metrics.peak_phase_bytes=Math.max(metrics.peak_phase_bytes,this.used??0);return check.call(this);};
+const allowance={phaseBytes:metrics.limits.phase_bytes,rssBytes:metrics.limits.rss_bytes};
+const before=new ImmutableReader(root,'9473d184683ee8ff8546300f2313779c3cba1d2b',{allowance});
+const budget={shared:before.budget,carriedBytes:1024*1024};
+let state;
+function timed(name,fn){phase=name;const t=performance.now();const r=fn();metrics.timings_ms[name]=performance.now()-t;return r;}
+try{
+ const q=timed('qualify_baseline',()=>api.qualifyCheckpoint({reader:before,budget}));assert.equal(q.available,true,q.reason);state=q.state;
+ const reader=new ImmutableReader(root,'791576647adc41241ce9b438f1bb0034088eed4e',{allowance,budget:before.budget});
+ const transition=timed('qualify_transition',()=>api.qualifyTransition({state,reader,budget}));assert.equal(transition.available,true,transition.reason);
+ const {candidate,plan}=transition;
+ const native=timed('project_native',()=>api.projectNativeRows({state:candidate,rows:transition.changedNativeRows,budget}));
+ const sourceBefore=timed('project_source_baseline',()=>api.projectSourceFeatures({state,ids:plan.required_ids,budget}));
+ const sourceAfter=timed('reuse_source_candidate',()=>api.projectSourceFeatures({state:candidate,ids:plan.required_ids,budget,reuse:sourceBefore}));
+ metrics.module_total_ms=performance.now()-start;metrics.module_complete_phase_bytes=before.used;
+ const actual={version:1,kind:'complete-selected-continuous-operands-v1',baseline:Object.fromEntries(sourceBefore.features.map(f=>[f.id??f.properties.id,f])),candidate:Object.fromEntries(sourceAfter.features.map(f=>[f.id??f.properties.id,f])),effective_additions:{baseline:state.additions,candidate:candidate.additions},plan};
+ // Independent comparison products are caller state, reserved before reading.
+ budget.carriedBytes+=7*(18414414+1356950+4000000)+8*(18414414+1356950);
+ timed('admit_comparison_carry',()=>api.projectSourceFeatures({state:candidate,ids:plan.required_ids,budget,reuse:sourceAfter}));
+ const retained={certificate:candidate.certificate,operands:actual,native,ledger:candidate.ledger};
+ fs.writeFileSync(output+'/actual-products.json',valueBytes(retained));
+ fs.writeFileSync(output+'/precomparison-metrics.json',JSON.stringify(metrics,null,2)+'\n');
+ const expectedReader=new ImmutableReader(root,'a0ca24a30653f8e04baf23e6a788b140fc4b1cc0',{allowance,budget:before.budget});
+ const p='coordination/engineering/continuous-single-vintage-20261012/retained-proof-001/complete/';
+ const expected=timed('read_retained_candidate_certificate',()=>JSON.parse(gunzipSync(expectedReader.read(p+'candidate/certificate.json.gz',{decoded:18414414}))));
+ const {complete_phase_bytes:derivedHistoricalPhase,...actualScientific}=candidate.certificate;
+ const {complete_phase_bytes:coldHistoricalPhase,...expectedScientific}=expected;
+ metrics.historical_phase_counters={derived_baseline:derivedHistoricalPhase,retained_cold_candidate:coldHistoricalPhase,excluded_from_semantic_equality_only:['complete_phase_bytes']};
+ assert.equal(valueSha(actualScientific),valueSha(expectedScientific),'Complete scientific certificate differs');
+ const operands=timed('read_retained_complete_operands',()=>JSON.parse(gunzipSync(expectedReader.read(p+'operands.json.gz',{decoded:1356950}))));
+ assert.equal(valueSha(actual),valueSha(operands),'Complete canonical operands differ');
+ const cert=candidate.ledger.current_rebind;
+ const rebindCert=typeof cert.path==='string'?JSON.parse(reader.read(cert.path,{version:cert.commit,expected:cert.sha256})):cert;
+ const req=JSON.parse(reader.read(rebindCert.request.path,{version:rebindCert.request.commit,expected:rebindCert.request.sha256}));
+ assert.deepEqual(native.rows,req.current_rows.filter(row=>transition.changedNativeRows.includes(row.y)));
+ metrics.equivalence={complete_coordinate_rows:candidate.certificate.entries.length,complete_operand_sha256:valueSha(actual),expected_operand_sha256:valueSha(operands),old_components:state.additions.length,candidate_components:candidate.additions.length,changed_owners:transition.changedIds.length,required_owners:plan.required_ids.length,changed_native_rows:transition.changedNativeRows.length,native_base_rows_equal_retained_request:true,shared_pointset_identity:sourceBefore.features===sourceAfter.features};
+ metrics.elapsed_ms=performance.now()-start;metrics.rss_bytes=process.memoryUsage().rss;metrics.max_rss_bytes=process.resourceUsage().maxRSS*1024;
+ fs.writeFileSync(output+'/result.json',JSON.stringify(metrics,null,2)+'\n');console.log(JSON.stringify({status:'passed',...metrics.equivalence,timings_ms:metrics.timings_ms,module_total_ms:metrics.module_total_ms,peak_phase_bytes:metrics.peak_phase_bytes,max_rss_bytes:metrics.max_rss_bytes}));
+}catch(e){metrics.failure={phase,message:e.message,stack:e.stack};metrics.elapsed_ms=performance.now()-start;metrics.max_rss_bytes=process.resourceUsage().maxRSS*1024;fs.writeFileSync(output+'/result.json',JSON.stringify(metrics,null,2)+'\n');throw e;}finally{if(state)api.releaseCheckpoint(state);}

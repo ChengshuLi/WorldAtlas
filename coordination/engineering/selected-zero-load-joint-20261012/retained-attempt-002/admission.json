@@ -1,0 +1,125 @@
+{
+  "observed_at": "2026-10-12T09:26:56.881Z",
+  "execution_commit": "077067ab65b5281db11c01039972e51d1dcc41b4",
+  "available_bytes": 9199276032,
+  "reader_allowance": {
+    "phaseBytes": 1512630272,
+    "rssBytes": 1512630272
+  },
+  "free_disk_bytes": 23402803200,
+  "plan": {
+    "kind": "actual-aus-joint-prospective-admission-plan-v1",
+    "minimum_fresh_reader_phase_bytes": 1342177280,
+    "owned_process_group_reservation_bytes": 2147483648,
+    "concurrent_reserved_bytes": 3221225472,
+    "parent_reserve_bytes": 2147483648,
+    "overlap_margin_bytes": 805306368,
+    "wall_limit_seconds": 420,
+    "sample_interval_seconds": 0.2,
+    "continuous_and_derived_output_union_bytes": 33554432,
+    "prospective_output_representation_multiplier": 7,
+    "static_input_roster": {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/accepted-reference/static-union-inputs.json",
+      "bytes": 44672,
+      "sha256": "3931faa405ada0d88316b765b4438c94204d7576b0d0e3dc97097e1c05937d30"
+    },
+    "planning_basis": {
+      "earlier_same_shared_module_measured_peak_phase_bytes": 707801412,
+      "earlier_comparison_head": "41a9e8c003e57914f5fe03afe62f3ce177d46a93",
+      "complete_joint_caller_estimate_bytes": 325058560,
+      "additional_conservative_actual_aus_input_allowance_bytes": 112479346,
+      "additional_trusted_policy_allowance_bytes": 4194304,
+      "sum_bytes": 1149533622,
+      "explanation": "Use the earlier genuine shared-state peak as a measured planning anchor, add 310 MiB for complete native/joint/continuous caller carry, and additionally charge seven times the entire actual AUS request, result, ledger, facts, publication, operating and largest containing source, plus two small trusted policy bodies. This intentionally overcounts shared categories. Require a fresh 1.25 GiB phase before launching, then all actual reads/output phases still enforce their current complete prospective allowance. This is a planning bound, not a new measured peak."
+    },
+    "limits": [
+      "Fresh OS/cgroup observation is required immediately before execution; this static plan is not an admission receipt.",
+      "Do not launch if the current phase is below the minimum; do not tighten margins to force admission.",
+      "The single 2 GiB process-group window is coordinated with engineering; no concurrent heavy proof is admitted."
+    ]
+  },
+  "runtime": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "shapely": "2.1.2",
+    "pyproj": "3.7.2"
+  },
+  "node": "v24.19.0",
+  "execution_code": [
+    {
+      "path": "scripts/run-geographic-check.py",
+      "bytes": 93036,
+      "sha256": "d2c1f3427e70f16b841b9796a2694e5241c00d36eb663b12cd6ca8c4f170201c"
+    },
+    {
+      "path": "scripts/check-geographic-regression.py",
+      "bytes": 15589,
+      "sha256": "07057a490035ac5376868b0ce8258c2e64917779830498ec311278df1340f75b"
+    },
+    {
+      "path": "scripts/check-effective-geographic-regression.mjs",
+      "bytes": 85996,
+      "sha256": "85ed6815060c98973ecc4043f0872398a6b8e474130d1663b5940eefd9f8baf4"
+    },
+    {
+      "path": "src/ownership-codec.js",
+      "bytes": 2948,
+      "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+    },
+    {
+      "path": "scripts/evidence/immutable.py",
+      "bytes": 17414,
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+    },
+    {
+      "path": "scripts/evidence/geometry.py",
+      "bytes": 8846,
+      "sha256": "4b016a4efccf8a1080b048f350c0db94ac14343b40e0ed890c2ce4d2300436a9"
+    },
+    {
+      "path": "scripts/ellipsoidal_area.py",
+      "bytes": 1953,
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 146,
+      "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+      "bytes": 144181,
+      "sha256": "1ebc1415f9c18cf8639734073313667bbc0e831317484c48fcafbc6f6d7f1216"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs",
+      "bytes": 32235,
+      "sha256": "94379e0b99aefca7267cca7a84032b44cb637aa6150e362e194a72f7e9e44b85"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs",
+      "bytes": 58597,
+      "sha256": "aaa4782773e94a88fcf1c966ef549c6ab5fe084cd2243a43dab206ac6d185c5f"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint-continuous.mjs",
+      "bytes": 3607,
+      "sha256": "1c82e1bb619bc42353a573d0ef4f1989490e03b32d5137035cf890a3719c55dc"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs",
+      "bytes": 15415,
+      "sha256": "ccac64cb442d68aaba456fb0b06c1e31116ab979b03d6e9255a179cbf6915137"
+    }
+  ],
+  "command": [
+    "/workspace/shared/worldatlas-current13-completed-author-cache/cache/build-runtime-cp312/bin/python",
+    "-I",
+    "-B",
+    "coordination/engineering/selected-zero-load-joint-20261012/reproduction/supervise.py",
+    "/tmp/selected-joint-aus-proof-002",
+    "/workspace/shared/worldatlas-current13-completed-author-cache/cache/build-runtime-cp312/bin/python",
+    "-I",
+    "-B",
+    "coordination/engineering/selected-zero-load-joint-20261012/reproduction/probe.py"
+  ]
+}

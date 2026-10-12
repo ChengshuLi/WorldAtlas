@@ -1,0 +1,4521 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+... Skipped lines
+
+  {
+    binding: {
+      coordinate_domain: 'complete-original-pointset-bounds:v1',
+      kind: 'selected-complete-coordinate-binding-v1',
+      owners_sha256: 'b4cc900fac67d6db66265ffc76a29f37c6b73085e348cb992d78703c309a54a5',
+...
+    },
++   complete_phase_bytes: 296375567,
+-   complete_phase_bytes: 299113571,
+    entries: [
+      [
+        'ABW-5150',
+        1,
+        'framework:province:aruba:062a8eed8a63',
+
+    at file:///tmp/selected-checkpoint-real-proof.mjs:35:9 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: {
+    binding: {
+      coordinate_domain: 'complete-original-pointset-bounds:v1',
+      kind: 'selected-complete-coordinate-binding-v1',
+      owners_sha256: 'b4cc900fac67d6db66265ffc76a29f37c6b73085e348cb992d78703c309a54a5',
+      release: {
+        changes_sha256: '73a129575a91d50b6700d91d1bd7f673b91c3cdd56d6d2437ee5e4f437e9e53e',
+        expected_counts: {
+          area: 480,
+          continent: 6,
+          location: 49625,
+          province: 5137,
+          region: 81,
+          subcontinent: 29
+        },
+        footprints_sha256: '2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9',
+        hierarchy_sha256: '568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b',
+        id: 'geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb',
+        location_ids_sha256: 'b8eb3ab175f84531156e4f61297aca4205cefe63a660909b0a5db79fed36e8d1',
+        membership_sha256: '3e2e7b48166d503a510a5554be751119b6f00c41fe090ad27cc2f5ea3eab328d',
+        metadata: {
+          decision_sha256: {
+            'africa.json': '5d40bf508409b004368b6f77456ed60a1e76caa8a0528f7294f46f7c6cb904f7',
+            'asia.json': 'a66b5e57b1c8c54dc9480360c61e0f91752c6fc6a0b710dfdf5131abc9dd6807',
+            'europe.json': 'c936e3a251bedc827f7861345edbfd15b7da2ca4030966b702ba1c21ed2f0c6f',
+            'north-america.json': '0c66d322180fecc0ec978e98cadfd031cf11f4b24058cd18b6bd1ce4187e07a1',
+            'oceania.json': '48326f9de56a3700b4b7ab33499dcf00bd4258fdfe7b081c3ce97f2d645ace34',
+            'south-america.json': 'f3621775ce1d21d873ff16972bbf37639c1b72aa32ea8e880e44a82fa11221f6'
+          },
+          geometry_migration: {
+            after_footprints_sha256: '2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9',
+            before_footprints_sha256: 'b9a3c8bf375217dba3a50d1a022ec7e4ac6c6f1cdedff22845da953c805b7433',
+            commit: '9b212c585583dc218a961b4c7ee1056a64b54726',
+            history_transfer: 'none',
+            path: 'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/migration-receipt.json',
+            sha256: 'fbcdc93980b55dd679cf7343da7c22e5ef8b7f37278f340f932a70b3770014b6'
+          },
+          geometry_proof_sha256: {
+            'geometry-0': [Object],
+            'geometry-1': [Object],
+            'geometry-2': [Object],
+            'geometry-3': [Object],
+            'geometry-4': [Object]
+          },
+          historical_membership_not_asserted: true,
+          metadata_migration_sha256: {
+            'metadata-0': 'cac2a3ce614d913a4d16e7434739a0e1f7be02b0cdab2f5063d311a629c64ba5',
+            'metadata-1': '290a21230e5371d635e38cf1f760cb77b1c1f03fc8f366f6e965e3f3b3e24937',
+            'metadata-2': '5057ddb926e859a148487e89894b11e365cf015f0a659f43049ef9aadeda9468',
+            'metadata-3': '09eb32e599c29f960f9b1965e17d5ded3700bad4fcbab66f93fb1af0372e241f',
+            'metadata-4': 'ddf8546553aaeb32905d6d60fbe3d001876f40b41b0c6f337f55978776c2367f',
+            'metadata-5': 'a87cb569e4394aa5ac4b722dc41625d8310e8c994a35b14b7eeafbe5a1c32f0f'
+          },
+          migration_sha256: '8ded9175b78142d2e56dc5dc3f91ae830049409190bd9dc9a158dd14f1006324',
+          original_geometry_proposal_commit: '859ca4643d61d472650dbda5a7c3682556ab78a4',
+          original_registry_preserved: true,
+          physical_reference_correction: {
+            historical_cause_approval: false,
+            issue: 1520,
+            legal_administrative_authority: false,
+            source_role: 'Independently reviewed AAFC named-envelope and retained GSHHG source fit',
+            subjects: [Array],
+            water_classification: false
+          },
+          predecessor_manifest_sha256: '10052f88a3ecdd42d555f05a2d5672c212d2ca9196cff383f8ce7a4cccd7652e',
+          predecessor_release_id: 'geography:review:896bf79dd6e5661dfbbffba60da96fa987b9971af2b884cf52347189861ebe9e',
+          reference_only: true,
+          registered_identity_manifest_sha256: {
+            '082167093c95839c141e63a8e414016b3f24f755cc471bb380e57158ff5c8b7b': 'geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e',
+            '0b7060d963f5c5ecef5ae2bde33b521a3d51bf9490d57ad41eb56cff1554a766': 'geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e',
+            f7d2fd73cdffa5e73ed68033f3c97732a106423106c9a21315c3365187feeebd: 'geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e'
+          }
+        },
+        reference_date: '2026-10-09',
+        source_id: 'source:atlas:geographic-review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb',
+        version: 9
+      },
+      selection: {
+        artifact_consumption: {
+          certificate: {
+            bytes: 68158,
+            mode: '100644',
+            path: 'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/consumption-certificate.json',
+            sha256: '26b505e3131a2513badc45d1552bcf603c24c565bdfb21b0f623fe4e6c7d4070'
+          },
+          review: {
+            bytes: 7379,
+            mode: '100644',
+            path: 'coordination/engineering/additive-native-activation-20261009/independent-native-consumption-wrapper-self-pin-review.json',
+            sha256: '87ab56e1354dd8a8fda532bfa008436abd35c6c506f0e0685eaa2f2f07f59a8a'
+          }
+        },
+        manifest_path: 'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json',
+        method: 'native-linear-evenodd-first-owner-v1',
+        release_id: 'geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb',
+        selected_geography: {
+          version: 1,
+          kind: 'complete-world-index-with-exact-encoded-overrides',
+          path: 'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json',
+          bytes: 14656,
+          sha256: '3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776'
+        },
+        sha256: 'd9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba',
+        version: 1,
+        additive_release: {
+          path: 'coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/release-001/selection-sidecar.json',
+          bytes: 3464,
+          sha256: '61976a2bf242a02990d60593a7f77d9053ac771abfd91f863df1b2d12aa3df0f'
+        }
+      },
+      sources: [
+        {
+          bytes: 8539839,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '85bdc3171a740db0bc756460dab5a50c6c54518d',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-0.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3'
+        },
+        {
+          bytes: 8060108,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '471e45dcd13904489bc434ae5115105fadba7ab9',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-1.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7'
+        },
+        {
+          bytes: 6259307,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '389e463dd5e44894fd221f53db584f55fff330d1',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-2.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf'
+        },
+        {
+          bytes: 5153118,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'e41c8f549f1cb2162f5adb30029bf4800e86c848',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-3.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617'
+        },
+        {
+          bytes: 4835479,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'ccdefbb55c62b317f11e6078cd9291dae5339693',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-4.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c'
+        },
+        {
+          bytes: 5226173,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'cf59e69b02ab2c9ad7344ddbf309a221a8be587b',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-5.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc'
+        },
+        {
+          bytes: 4607953,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '4be02d1d055a66c4e1606bab4f23ecda90350f34',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-6.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a'
+        },
+        {
+          bytes: 4257402,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'c88539c7899a0c257c48fc1a555895904832f0cc',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-7.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387'
+        },
+        {
+          bytes: 5097739,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'eec7163a536245c0249d1821fe81590aba2a1ded',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-8.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1'
+        },
+        {
+          bytes: 5729632,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '79a4f0cd17ca9f7007916be8419c2fa986fe7a61',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-9.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6'
+        },
+        {
+          bytes: 5144571,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '84b4cf537b801c7f6d3840173c49b7e4293a139d',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-10.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2'
+        },
+        {
+          bytes: 5133018,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'fd7d6f9f564a4b9b0ae7a56a2d7eb27e920017d8',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-11.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'd1b2fb15c9427497de740eb33a529ef382b58cb319028f2aa38f5878de4c9b02'
+        },
+        {
+          bytes: 4489493,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'e8360aa55a8398d0fa841b5331febcabdc8588a2',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-12.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7'
+        },
+        {
+          bytes: 5709487,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '44f886df47aa3e313f0c2ce98faea045e2eba8ed',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-13.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1'
+        },
+        {
+          bytes: 4355198,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '2cd05a870d730c598eb463ac8be2300ca5be6e66',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-14.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0'
+        },
+        {
+          bytes: 5180426,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '4ef51307797f81b8cf7a647495f037a089f8b368',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-15.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df'
+        },
+        {
+          bytes: 5213846,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '02d53ca01dc014a3c9481eb1017a89487fc2bd89',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-16.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797'
+        },
+        {
+          bytes: 4948066,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'a2dc24c477fb10da8ebd5a1cff4765a8f34bd22a',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-17.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '1ae1a9ef25c1f71b66084aadf57933132383d4271b888ab38866905da5678af3'
+        },
+        {
+          bytes: 4909063,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '59012653b56da5a394e7692209b257e27883eab8',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-18.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123'
+        },
+        {
+          bytes: 4583022,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '306125db7012a9ac927bb4a169dea5166ef126e7',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-19.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269'
+        },
+        {
+          bytes: 6570767,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'efda4099740c3ef131ef631cdc6b6ecf345f226a',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-20.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f'
+        },
+        {
+          bytes: 6737781,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '28619c3c39b5808aae4b3f459b97c39de8b073b2',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-21.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'd7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7'
+        },
+        {
+          bytes: 4746385,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-22.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3'
+        },
+        {
+          bytes: 4962410,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '371e95033d9c542bbf07c42afe7111074e35f246',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-23.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'd61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2'
+        },
+        {
+          bytes: 4816899,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '4110c75d7d0f5282e0a2bd263b430e8c1e78f0eb',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-24.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c'
+        },
+        {
+          bytes: 4525239,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '16ba4f38251d1bd99ac85f0ae7cca2f0424470f8',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-25.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394'
+        },
+        {
+          bytes: 4608983,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '5d61478ece9042cbd0791eabd2536e1054e26341',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-26.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632'
+        },
+        {
+          bytes: 4863162,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'a6a359c8c566462b280a461b4a5e1591e1f486c4',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-27.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758'
+        },
+        {
+          bytes: 6613963,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'a9e03cb07194a73f643af85d1e6db94abe3b5fc9',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-28.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d'
+        },
+        {
+          bytes: 3353763,
+          commit: 'ee684e3145079ff93f68520e3c17837789be5b0c',
+          decoded_bytes: 12932719,
+          decoded_sha256: '723d16eb63b7f2dcd8260a516eac6571a7ef1eaaf9bff3c926e0c63235b98fd3',
+          encoding: 'gzip',
+          git_blob_oid: 'd3f17ccd8eecca88b16f2bbbf075320b6d555aea',
+          kind: 'selected-exact-encoded-override',
+          logical_path: 'data/geography/part-29.json',
+          mode: '100644',
+          path: 'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz',
+          sha256: 'd7665a1fdf68f0626c7e28da9ac0e40f4e35aaeacdf91bad4ab8e2d77221bc49'
+        },
+        {
+          bytes: 11979437,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '0deb9748357a854c5e7e6179f42d77a47a09ca9a',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-30.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'd575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a'
+        },
+        {
+          bytes: 10086485,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '1b89d7aef660ba0536acdb9b9f7a574b028ea01a',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-31.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e'
+        },
+        {
+          bytes: 10211739,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '6cf41fabbeddb18bbe426038251b86171c715ef7',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-32.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64'
+        },
+        {
+          bytes: 607984,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'e8a8a8e8015cfc31005e85daa49fc2552ef1df9e',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-33.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'd928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe'
+        },
+        {
+          bytes: 1573576,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '18989f4f6b2789057a00eeda6c5c7e51f06e3caf',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/source-restoration-additions.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9'
+        },
+        {
+          bytes: 11393,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '8f0e144d92e52ea473eecc7c2358c3464c648009',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/macro-loose-ends-v5-additions.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1'
+        }
+      ],
+      version: 1
+    },
+    complete_phase_bytes: 296375567,
+    entries: [
+      [
+        'ABW-5150',
+        1,
+        'framework:province:aruba:062a8eed8a63',
+        663,
+        'data/geography/part-28.json',
+        1162,
+        '5bb11dd32fdb444ac06392feb388be1a013611432fe30a117d8283e41da409b0',
+        '0ed7d1dbc3dcce09471b96c66ba8b862bef9d7c494a4f9b43d725742d68c57d5',
+        '6f8b8a8bc511c2a773ba30b2e36ba459a015eeb4358a0de96d9e2d63b629ac4e',
+        [ [ -70.0611, 12.4177, -69.8768, 12.6321 ] ]
+      ],
+      [
+        'ASM-4998',
+        2,
+        'framework:province:eastern:d7fd8ac945aa',
+        1636,
+        'data/geography/part-28.json',
+        1205,
+        '83118400daf403378428ba5afd840f2b782a6cd92af1c5fbbc2df71cd3442223',
+        'a31e86adc7fc7b41b4da097cb82b3a4eb52caf72475a2ce6089c4557143cd348',
+        '6e970d614c49998063b89158088ee4e0cb996cb2fe997cf5fafb73c6699509b8',
+        [ [ -170.7436, -14.331, -170.5521, -14.2296 ] ]
+      ],
+      [
+        'ASM-4999',
+        3,
+        'framework:province:manu-s:2bfa7d96db32',
+        2882,
+        'data/geography/part-28.json',
+        1206,
+        '0223d1589a65f383c27efae13b2b73067d3e7547d3ec7a0addd058996eb55c04',
+        '29c116078c29195508e3a304e693b6dc42b1725beb679cb4a704e17709de2157',
+        '1c0499fc54cb4ce491557b43042f819952ee6e737a864edce50091a2eff3ffd8',
+        [ [ -169.6873, -14.2722, -169.4188, -14.1574 ] ]
+      ],
+      [
+        'ASM-5000',
+        4,
+        'framework:province:rose-atoll:d2143af2cd95',
+        3975,
+        'data/geography/part-28.json',
+        1207,
+        '977bda06dc9283092cdf4ec1eb33a95448eeb871fa77674a380662dd1d1deebd',
+        '0f287a05ff426f20ba7e3f7cf726b77831b89b92d6332f5f31f4fff9fd08d4f0',
+        '210ff0df795b99a1136dee7a556d211aa3714b4fc3bd4c10e4c29dc560c28a00',
+        [ [ -168.1731, -14.5495, -168.1397, -14.5209 ] ]
+      ],
+      [
+        'ASM-5001',
+        5,
+        'framework:province:swain-s-island:069443c54686',
+        4448,
+        'data/geography/part-28.json',
+        1208,
+        '99dbe57cd99f028f37e60a3a2462db38c0cc19627cbc41de088535137ab88c44',
+        '6ea2f9a3e35fa87810f6525864b412a5043d9d0f48f55468f3eb586f749fd56c',
+        '2cfb1074776bf28dfc0bba76134839e8d81231d4cc35da170e248c3fb5bf2a1f',
+        [ [ -171.0896, -11.0661, -171.0661, -11.0469 ] ]
+      ],
+      [
+        'ASM-5002',
+        6,
+        'framework:province:western:6b808b7a2306',
+        4943,
+        'data/geography/part-28.json',
+        1204,
+        '1b08699d3662cebcbfc753de694447416361274f6866437d1d76eedabe0f5333',
+        '9ed12385dca29371d55dbd90ee3519ad5a8a486122801865fc9594263afb7ea3',
+        'c39a2371b8bdbfc0ba08beaf34970a12285987b012d313d2618234724d32d9ed',
+        [ [ -170.8469, -14.3747, -170.6926, -14.289 ] ]
+      ],
+      [
+        'atlas:city:ARG-5493',
+        7,
+        'framework:province:ciudad-de-buenos-aires:bd2311b3ca38',
+        1334,
+        'data/geography/part-28.json',
+        1311,
+        '39747dafc7df28dc287ba24f7127ed67b7228cb9d168ba9a56d1d5d91a1a3a76',
+        'd2ee82025fca8e83e9c426933dbdd37abeb48ba902357c36febab9774f45cb34',
+        '55587f52f96694af62a1435a44d1e7b2f05c5b363a6de017313dd0bcc54eeb78',
+        [ [ -58.5304, -34.7455, -58.2794, -34.5278 ] ]
+      ],
+      [
+        'atlas:city:CHN-1819',
+        8,
+        'framework:province:shanghai-municipality:fdd8da3fb214',
+        4190,
+        'data/geography/part-28.json',
+        1288,
+        '4f018c36a6a5ab607b519bfd94fc43b522f52358b3c1bca96b38a58b6eb332e2',
+        '14b4abaf2078b6e2c51b4ff39e3c8c24235fa1045b3fe421fb4a39e27d9e4f31',
+        '2a566da3e25e6aa554be14b48dd56f0aeb007a3706604ff93151b87764ca54e8',
+        [ [ 120.8298, 30.6784, 121.8808, 31.8348 ] ]
+      ],
+      [
+        'atlas:city:DEU-1578',
+        9,
+        'framework:province:hamburg:8537d1580ff0',
+        1970,
+        'data/geography/part-28.json',
+        1301,
+        '285e8507492fb579faefd399182e637d9be21261114c3397d795600b825ab29c',
+        'a11191c94d1d034a450742fe3359abb60ca27c8a52febbf31ed516e64e07b6fc',
+        '740d04db4605b17bcfc4848ab75eec9426b88fb0386b9d6b9db19c8bcc1a285a',
+        [ [ 9.7301, 53.3953, 10.326, 53.7374 ] ]
+      ],
+      [
+        'atlas:city:EGY-1533',
+        10,
+        'framework:province:cairo:10f94c7924c4',
+        1136,
+        'data/geography/part-28.json',
+        1291,
+        'c55caae6eeedb558f40c70442074a40150230daf51c08d2d20b02cd513c7d44c',
+        'd85274ce857334fe1eab1db187c8e56646bff01f02ce5ab14ea775b0c9e3c56a',
+        'dd64a797f8abebd05aa6833049e717c882014f43c731f9dc9949cc6a92e66932',
+        [ [ 31.2276, 29.7337, 31.907, 30.2727 ] ]
+      ],
+      [
+        'atlas:city:EGY-1543',
+        11,
+        'framework:province:alexandria-governorate:ca2b074a8661',
+        530,
+        'data/geography/part-28.json',
+        1294,
+        'ae7618700ef8d68a4df705c0b811366302e363a3c1c79040729975c710b28a59',
+        '600ba6b1bf5b6416bb78ee13d4df7496a440bd583fcab94c4180d8f54b508000',
+        '14c3f6973812e60ee4f10141242ea03bb7767206ba0354df7beccc0932a77d15',
+        [ [ 29.5181, 30.2628, 30.0885, 31.3117 ] ]
+      ],
+      [
+        'atlas:city:ETH-3133',
+        12,
+        'framework:province:addis-ababa:bbd5c61c9691',
+        428,
+        'data/geography/part-29.json',
+        1470,
+        '24ed62fe712869d808095312cac385caaeae5339bcbdb14e19c5d7968527104a',
+        '2a096eeae598993093b319034f41dc22149d837e4c3d020a1999bfb6aeb7ce8e',
+        'fb20de56d44638091f57c41d0e56d1fedc33d0818a8c7a306bb6a3b99047dc13',
+        [ [ 38.6437, 8.8345, 38.9071, 9.0992 ] ]
+      ],
+      [
+        'atlas:city:GBR-Greater London',
+        13,
+        'framework:province:greater-london:c32997736242',
+        1888,
+        'data/geography/part-28.json',
+        1295,
+        '1143fc397d85d3876ab7ba83825fdc70ed6bfa364865da65ce8f029c0ccb2492',
+        '7a4de539a7e2d7617ad3a34da5f9a19443b69684cb08a017ae9bf9d6a51f3a88',
+        '89bc1f9276abb925944cdaa561b8b817f48281eb382aa5c3c8cf6f6c2ef101e2',
+        [ [ -0.5097, 51.2868, 0.334, 51.6919 ] ]
+      ],
+      [
+        'atlas:city:GMB-2153',
+        14,
+        'framework:province:banjul:c80b5ee73d87',
+        795,
+        'data/geography/part-28.json',
+        1313,
+        'f2c14dc79522136bd6e325badfc50b926db85bae8076fb9063a780d309677d29',
+        '982a5562d618022213fba947fa7171ca76665e11e240dd8f3bde587906acd1cd',
+        'ed591101b54aa98d71342f20a8228e46c8752146a9190aa476c4bf581894ab7b',
+        [ [ -16.7968, 13.3184, -16.5715, 13.4846 ] ]
+      ],
+      [
+        'atlas:city:HRV-1589',
+        15,
+        'framework:province:grad-zagreb:99f12226102e',
+        1869,
+        'data/geography/part-28.json',
+        1302,
+        '3991ab45f6eb3d02447c93b85a680a3c9771db6ecf82450eb8cb3f7b64a9ff78',
+        'e7318750ad158c8aa3dc67f46749d7609d95c111effc3a94febba94b434c0b87',
+        '817588fdf11e8ff714a223e28f250e6891f1394ee021a8bf6ff6ee4436bbfb7b',
+        [ [ 15.7722, 45.6146, 16.2406, 45.969 ] ]
+      ],
+      [
+        'atlas:city:HUN-3160',
+        16,
+        'framework:province:pest:69a3c0d745ac',
+        3629,
+        'data/geography/part-28.json',
+        1305,
+        'bf291f2da61100fdebf6771b9b1d5926860ec14b8f3e4fa4de1c5c2453e00ad1',
+        'f81e35a6df0e994698e65a8081faf9899d2171d4d25d35bb8c899931329d465d',
+        'd136aeadbf487caf2f35745235c2a7d4cb6ce283b330faf9ea7115a7aa9c1da2',
+        [ [ 18.9288, 47.3497, 19.3349, 47.6131 ] ]
+      ],
+      [
+        'atlas:city:IDN-1227',
+        17,
+        'framework:province:jakarta-special-capital-region:533c2d0c0661',
+        2210,
+        'data/geography/part-28.json',
+        1304,
+        '23e6cb3c1567226fc90f88f844fdbc0203a43133fa4f1d48bfcc2c7ba8dd19f7',
+        'd0169aa62ab3620c2b3ff0c2f4fbd399a79370b1d9e3d427af317b1b80444370',
+        '0885f15dec040ef85e8b81abc59ac570b2918ef29cb0ec37a5762be352cb0539',
+        [ [ 106.6862, -6.3708, 106.9719, -6.0892 ] ]
+      ],
+      [
+        'atlas:city:IND-2428',
+        18,
+        'framework:province:delhi:9f27daae7fac',
+        1471,
+        'data/geography/part-28.json',
+        1297,
+        '9d5a23a16e06ce1a9362927325cf90567abcc9bc2005426ffca2f4416b2d4a96',
+        'f1d0a9f354eddb7d502deec02fff09054f37521ffc9af095eec623da7e933b94',
+        'ab154e9779fe05552f01766015000bae154828053a4823871011ac520112f5e1',
+        [ [ 76.8395, 28.4045, 77.3435, 28.8754 ] ]
+      ],
+      [
+        'atlas:city:IND-Mumbai',
+        19,
+        'atlas:province:atlas:city:IND-Mumbai',
+        390,
+        'data/geography/part-28.json',
+        1280,
+        '998fde7c938b8842981424a47ac0f00bfefeb4d898e619a2a2cc3a327b54df6b',
+        '7980e7644f3717052a1f462c8979c00fc282df26f14cc0fddb7ddf74fd87a8ff',
+        '24c9a821482644f15804e2c2cfd9e1c58bfc8c8f9597d702f22ed4abc1b5a3bb',
+        [ [ 72.7759, 18.8942, 72.984, 19.2693 ] ]
+      ],
+      [
+        'atlas:city:JPN-11100',
+        20,
+        'framework:province:saitama:242145162816',
+        4023,
+        'data/geography/part-28.json',
+        1320,
+        '92f5641a0231093ec3e73e376a6b1934db30508c59f1b871cd97b2dae04190a4',
+        '1f26126680871a3783323fb06e27f3dada745d21ae507f49a855ca6f409f6d23',
+        'a184dd4221db4379605abef6ca2de885e00588e264263a55de82fbd9e4d03d9b',
+        [ [ 139.5411, 35.829, 139.7545, 35.999 ] ]
+      ],
+      [
+        'atlas:city:JPN-12204',
+        21,
+        'framework:province:chiba:998c7e444a8b',
+        1288,
+        'data/geography/part-28.json',
+        1321,
+        'a89536eb5f670146ccb27e6eb4ecec0a146e9e8f0373aeb22abe0b71e76d1e6d',
+        '471f0ea528ddb91a731826dd01c64ffaff2647e726d3be569466446741f99ebf',
+        'c5e045121277620294b838a9b43029ba449fd8be31de74cac921b1ae88b756f1',
+        [ [ 139.957, 35.6638, 140.0896, 35.7997 ] ]
+      ],
+      [
+        'atlas:city:JPN-1860',
+        22,
+        'framework:province:tokyo:c68d8c85dd27',
+        4622,
+        'data/geography/part-28.json',
+        1296,
+        'faca0c281a388bda1ebf74fd944720d4e4d97611496693401b79086e2f6f8739',
+        '289de1d78fe0e0d3b6585b30654bad3c84202abdc42f47030a64495c828960d5',
+        '843eb0de6c9381497d2c586abbf68ef7594a4bc77817e0113abb9b8c09bd631b',
+        [ [ 138.9439, 35.5024, 139.9187, 35.8972 ] ]
+      ],
+      [
+        'atlas:city:KEN-1196',
+        23,
+        'framework:province:nairobi:c44fc76c13bc',
+        3166,
+        'data/geography/part-28.json',
+        1306,
+        '470b058186a6b74f4e237d626e9ee199c48a919fac06c84baf1a9b1642033682',
+        '421c3decdeac1dafe4c173c1947f9a4d62f1f9740f9317f2f17cd3aa8e44321c',
+        'bbc73814f3df469680195db709361d522a6354e5d92a6140c83623914d96bc42',
+        [ [ 36.666, -1.4305, 37.1021, -1.1582 ] ]
+      ],
+      [
+        'atlas:city:KOR-10',
+        24,
+        'framework:province:busan:ab3a002fd5bb',
+        1106,
+        'data/geography/part-28.json',
+        1281,
+        '47872695b9808fcb5b37116bd75d2d0d6bd14e13754a3d6f47d5fd04d4510b45',
+        'e8eabfb2d93531c336ab36b9beece77596cbd7740911557709fefce35a45a526',
+        '5a72047d9a8de802e83eda0ab2e74fafd2b475faa771c1dc7a18c1ca6512efff',
+        [ [ 128.7892, 35.0116, 129.294, 35.3795 ] ]
+      ],
+      [
+        'atlas:city:KOR-11',
+        25,
+        'framework:province:seoul:58f28921848c',
+        4179,
+        'data/geography/part-28.json',
+        1282,
+        '0c4e5ae6d0e19498b88e99609d4d199d811c5b7e66a636d058cd1266af96af31',
+        '4c4165d33c6ea0b6eac12e799a216b65260ac699d5522fed5c09677a2986e3dd',
+        '5c293ae99c71799a2a8b184592bd5f3259c2183f67d88b72d4759ffca4018b02',
+        [ [ 126.7701, 37.415, 127.1834, 37.6906 ] ]
+      ],
+      [
+        'atlas:city:KOR-12',
+        26,
+        'framework:province:incheon:67b65b635e5a',
+        2157,
+        'data/geography/part-28.json',
+        1283,
+        '939c81dd6b18dc2fc096aa3b8590c2cbbfc73c7b44f08b28136894c759a29f7c',
+        'ff25c3c979434b656b567655651e8b09374c427c745c6b52b84e598bbc6cec97',
+        '53e1662c3107f113442df300d7bcf400cafa89d01757ba9b99d42d4a5d856a6b',
+        [ [ 124.6127, 37.0854, 126.7855, 37.9834 ] ]
+      ],
+      [
+        'atlas:city:KOR-15',
+        27,
+        'framework:province:daegu:b353f3bd8b8b',
+        1424,
+        'data/geography/part-28.json',
+        1284,
+        '5ba6619ec6b7f6a80566d9cdddc8e844045ab2e39091863b85330df5f9c1c055',
+        'b75a113aebcb1ccded2ca70b3b6900e9cf3915eae4c6f316aa86cd243234c40f',
+        'd92ae5763f54b78398a3f9675e87e64c826ff2bc93e62f639b61be2e340325c4',
+        [ [ 128.3492, 35.6078, 128.7651, 36.0133 ] ]
+      ],
+      [
+        'atlas:city:KOR-18',
+        28,
+        'framework:province:gwangju:442ef0b1f925',
+        1940,
+        'data/geography/part-28.json',
+        1285,
+        '6e996984c82a7b15f77639d794616aecec55c4f4bfd498bc914d0a486f26b8da',
+        'a7a7b99d9ebba6fc66c6fc60c7d2982a67506ce2b5519fb0c3bc47c5acc9fd03',
+        '1c9303198602f45df7a1a834a7591fc79d1538085ea1cc68e022298d672260b8',
+        [ [ 126.6557, 35.0508, 127.019, 35.2542 ] ]
+      ],
+      [
+        'atlas:city:KOR-19',
+        29,
+        'framework:province:daejeon:635fedd987e7',
+        1425,
+        'data/geography/part-28.json',
+        1286,
+        '4cd4c78498ff70448304915dcdf77ece838f929cc047aa12ae92296d63aded19',
+        '6b3eed2694470bac088904dae40f00db7556816c1f52888d1e7b9f4515a7bfab',
+        '3e912017b6d56cc1729f75d7320c2bd80151b3bfe5ff68e8a0d720fb7d8126f1',
+        [ [ 127.2525, 36.1786, 127.5615, 36.489 ] ]
+      ],
+      [
+        'atlas:city:KOR-21',
+        30,
+        'framework:province:ulsan:b9b11edfa612',
+        4709,
+        'data/geography/part-28.json',
+        1287,
+        '1929a00379ff16e94b3f92fe96d64cc8ebecf70869d11c853da79555a58180e0',
+        'f5c26d868a2b5857399345134ca9c9de0cfec112f5381af176f687315936eef1',
+        '6ce2dc8da532eef1f87b377d8417ebd63dd4b2050ca0aaa69d077a4b9e339611',
+        [ [ 128.9771, 35.3227, 129.4636, 35.7127 ] ]
+      ],
+      [
+        'atlas:city:LAO-3283',
+        31,
+        'framework:province:vientiane-capital:1213542d199f',
+        4819,
+        'data/geography/part-28.json',
+        1290,
+        '7b8235fb4edd8743e9bf44bf8e001eaac1635594c5f4ebebc38efa51c220ef01',
+        'b819d5532a8c6c02c8468af69d4f59e65bd8d5b8806d34c66a5967d5db5450c4',
+        'cd352a0daeeb162a4b1853c899649a20927f93e889843ce2add825f6a3b6ddd6',
+        [ [ 102.0116, 17.8048, 103.1527, 18.4391 ] ]
+      ],
+      [
+        'atlas:city:MDV-5234',
+        32,
+        'framework:province:male:5100c2277c07',
+        2852,
+        'data/geography/part-28.json',
+        1319,
+        '511bbc9718618ff28783628896fa3a438431240819094544c983052979c889cc',
+        '97f9b5fff076bc92666e1b6ca37644289b54deba6e2449cf7030955048b56fa3',
+        '49c37a5fc96b941c354433875e1779da0426d9ce186956e344b462b7d67e85a7',
+        [ [ 73.5006, 4.1707, 73.5469, 4.2211 ] ]
+      ],
+      [
+        'atlas:city:MEX-2727',
+        33,
+        'framework:province:distrito-federal:06d2ec7bc220',
+        1538,
+        'data/geography/part-28.json',
+        1300,
+        'fee90f16f6fcff26abe798271840b2f1abe0dfab68ed01a534764123e1c6caca',
+        '05d140f52a0ebcf103b8c4ffb4d42524787f36662a26418607081784df8e5755',
+        '08d2faf4e7203698ebd218a547bd85e64c2358dd8e43a7d16377466368cb8f17',
+        [ [ -99.3649, 19.0487, -98.9458, 19.5928 ] ]
+      ],
+      [
+        'atlas:city:NER-94',
+        34,
+        'framework:province:niamey:680755f862f3',
+        3266,
+        'data/geography/part-28.json',
+        1309,
+        '4ded511bf34777ff802a1ba5802c45e4f460dab39f7874702c80db4dabc9c398',
+        '9a12603d1d15889c46436f6ed7e683f8fa995debd041c437001632db542d154f',
+        '6989a184816c383c494f9c97bf410148c9fc068c8ccf66850ca08d7b9f77a1c1',
+        [ [ 1.9604, 13.3929, 2.2813, 13.6457 ] ]
+      ],
+      [
+        'atlas:city:PHL-5522',
+        35,
+        'framework:province:cebu:0f4ebfdeecb5',
+        1204,
+        'data/geography/part-28.json',
+        1318,
+        '592cb3e29f3123a904d602395c33436383ec6b2fb20b7b0f380af5ab2e341f45',
+        '83a03a10074cd484b2c41f5f06bd0fc05f43d057f8d79216eacc75806bb6131a',
+        '1f96fa43f7ff3985332894396561930e8b991fbb469a7c24069bb51d62c1681f',
+        [ [ 123.5878, 10.1785, 124.0738, 10.6536 ] ]
+      ],
+      [
+        'atlas:city:PHL-5526',
+        36,
+        'framework:province:iloilo:c31be84998f3',
+        2148,
+        'data/geography/part-28.json',
+        1316,
+        'f995b8902555375654573bf2c001cb1a0668f05426235e8b47e4eae0235d15d3',
+        'd18c2036c8884e9b0030ea6a617a38ac5ba0e7d19b6e32edb9946dbe3771641a',
+        '793f212e9a44d0d7c7003943d4d4612a7bc41f3754ebfff3451cc224f7399a99',
+        [ [ 122.201, 10.6561, 122.7898, 11.0581 ] ]
+      ],
+      [
+        'atlas:city:PHL-5527',
+        37,
+        'framework:province:cotabato:3f9d63fbbfbf',
+        1388,
+        'data/geography/part-28.json',
+        1317,
+        '913037ce3d84c464e0086d978cf9db7f0db8793f54215abab7407907386cf688',
+        '36b26ad9e56a87d1269f563b329199d93732110e702b23e8f4b30a4db6378186',
+        '9dbbf79fbfb4ddd6645470dbe3d906710beb07dedb3c44caace3c2543e2b7056',
+        [ [ 124.1713, 7.0296, 124.6441, 7.4386 ] ]
+      ],
+      [
+        'atlas:city:PHL-5531',
+        38,
+        'framework:province:misamis-oriental:ddbfce422dc1',
+        3046,
+        'data/geography/part-28.json',
+        1310,
+        '83bf845bc17861d4f5f00a345f3bc307afc76e172e3ecc43c0f87104ae5c9623',
+        '760b5f0043dd794be1d50a87cb64638ba442d46a28812ab8408ffc0943f346f9',
+        '6b8f5f158b1b8b52d569469d7c1a609a62c4f92c5ff0f344ea2b4e0fa7c55ac6',
+        [ [ 124.4607, 8.1601, 124.847, 8.5636 ] ]
+      ],
+      [
+        'atlas:city:PHL-5536',
+        39,
+        'framework:province:camarines-sur:53c332ac9f2e',
+        1146,
+        'data/geography/part-28.json',
+        1315,
+        '33c2044a01ef3d08da628037322fb24722a146a55bd635805aa74a5bfe2459b5',
+        '204989e2118e9978bce495836c6c4bdd2c0884f986d5996fed565eea0eadf638',
+        '6c816e961775aa114eadd10ec76aeb593afee2b9d7e6addeab703e293a3153e9',
+        [ [ 123.1372, 13.5696, 123.3765, 13.6744 ] ]
+      ],
+      [
+        'atlas:city:PHL-5537',
+        40,
+        'framework:province:isabela:7369f63e7720',
+        2180,
+        'data/geography/part-28.json',
+        1312,
+        'b5f1bd4d1bf173e4db672e0cc3c3a2f8e4896252c26d9c2a04dbf8f092e5c9fe',
+        'c238da8ad0696bdff9e382a97210ab8d077228997c895d9b7789c557e49313a7',
+        'ab5e1a4fb90d3d4db05ed2376c6747fb318b38d9f17d7a5ca1b3c578f7947d93',
+        [ [ 121.3387, 16.5758, 121.6109, 16.8389 ] ]
+      ],
+      [
+        'atlas:city:PHL-National Capital Region',
+        41,
+        'framework:province:metro-manila:a6942e7523bb',
+        3008,
+        'data/geography/part-28.json',
+        1308,
+        '67baec28c3ea70428104f7fe75c0cbb523d39077dfffe76fcaadc8ca80f251ec',
+        '7d2c62f277f00dcf7fba8806ce0fa48ed9c6fd4aa1e973ee6a773d1e08ca8bca',
+        '238ca2883e9b8130c6612ae8a52054eba4ad00c3a0e947e885572725e7d4868f',
+        [ [ 120.9065, 14.3518, 121.1501, 14.7826 ] ]
+      ],
+      [
+        'atlas:city:PRK-3305',
+        42,
+        'framework:province:p-yongyang:a859bb70265d',
+        3550,
+        'data/geography/part-28.json',
+        1293,
+        'c1250c6189b7e2b1377b6336c159447ba6db2f433d9b6da7d14cecf4b93ac92e',
+        '06893a712536760b32c16fc9ac6ea1e06ef20e72b3bf9015648fdc25d9e1f626',
+        '72c7963aacc5e7d89adec6c29ba21a5aefbc8b55b861c0de5102d9dc83a738b1',
+        [ [ 125.5219, 38.7044, 126.3894, 39.2814 ] ]
+      ],
+      [
+        'atlas:city:PRY-4837',
+        43,
+        'framework:province:asuncion:5f1c1189a91b',
+        681,
+        'data/geography/part-28.json',
+        1314,
+        'edbeddf14bbcddd070c68ca0c4fa788587d48c0bdb9f7b62573c1944c98aabec',
+        '537db0c30e7dcbe9b657d44de37d5b894b875366225b65c93ffb801b76815527',
+        '3473f8feb823c62b4440d4afd1051ac12eb5c33c896283f7e857ec53b16b609f',
+        [ [ -57.6739, -25.4018, -57.5164, -25.2239 ] ]
+      ],
+      [
+        'atlas:city:RWA-3495',
+        44,
+        'framework:province:city-of-kigali:e6f892da1ad7',
+        1330,
+        'data/geography/part-29.json',
+        1471,
+        '5149d789d2ff8d1b530ea4b53e06b7435e717a8b985d195f3565952f51fde43a',
+        'e485321cc50d1c06c3d5aa191b275498e98a80cdea2b5c76f141a1f4d350599f',
+        '3bf467d44601467fcc57e2a9c5df1943c16b87432d68577126eca1c4951cf5d3',
+        [ [ 29.98, -2.0756, 30.2772, -1.7839 ] ]
+      ],
+      [
+        'atlas:city:THA-416',
+        45,
+        'framework:province:bangkok:380e2af3a4cf',
+        792,
+        'data/geography/part-28.json',
+        1298,
+        'bc09414deae67d9243129dca5d684f30e2412897152ec97e283052fc97bcffe6',
+        '2d7cedf1244463469101a3002c044f8fe07d947e87c59ec62fa835adf4091bc1',
+        'c3119f6145ed64fb9ee35a733d98868011df8b2d804a4c8578e82c0ef6e9b388',
+        [ [ 100.3279, 13.4934, 100.9385, 13.9546 ] ]
+      ],
+      [
+        'atlas:city:TUR-2265',
+        46,
+        'framework:province:istanbul:e5fc55544189',
+        2192,
+        'data/geography/part-28.json',
+        1289,
+        '3ff25fc912e6275e4369efd16b9dd9286bf58a94fb436b390c1f30315ea58482',
+        '2a6503dcbb5b98debd3fb2fa1362e07ebd616fab2c825c86e175b9ecd6b8d527',
+        '4a682bb9602ee996250b83d1eeab548ffd06f7ce1e4ec8596e8a37d49bff2f60',
+        [ [ 27.9724, 40.9067, 29.4014, 41.5906 ] ]
+      ],
+      [
+        'atlas:city:TWN-1156',
+        47,
+        'framework:province:kaohsiung:9ac7f809e02d',
+        2344,
+        'data/geography/part-29.json',
+        1477,
+        'e9cea8d4506d331002783df6eb1bb39d2ed678e82b991dbbc111c77e9649c450',
+        '34c4aab0df3f6730c5246fb36d212b8f817e7282151292a60f9e34fb9805ea80',
+        '158cf3bd9325ced0cd1fb7d9a234731ea7d4d9e7bfed7b319173efeaa5064470',
+        [ [ 120.1751, 22.4769, 121.0488, 23.4717 ] ]
+      ],
+      [
+        'atlas:city:TWN-1160',
+        48,
+        'framework:province:tainan:daa3787a9508',
+        4472,
+        'data/geography/part-29.json',
+        1476,
+        '07f30a8b7c40be9eeed3d2efd2dbf83d7b0a4380cfd3ad506bb214abedc533d4',
+        '66156addd301412200def5a4edf12a4536379dc28f38132ca3585cb789004918',
+        '9d5e1f2121c34701792a6cc33ed07e87a9fefa157e3552daa8b7bc6c15999a8b',
+        [ [ 120.0369, 22.8882, 120.6535, 23.4137 ] ]
+      ],
+      [
+        'atlas:city:TWN-1161',
+        49,
+        'framework:province:hsinchu:943def688ae1',
+        2080,
+        'data/geography/part-29.json',
+        1479,
+        '60c0e5300be9c47d31c4530f95451498385b7081178b6077077f81b9135110c0',
+        '5a565e336db941f15d28e26842d78a73aaeb6466d733ac628396585969580997',
+        '2942cce62ad4d0a59de6d2c1eee1800bb680fdc6b4ae583f3d0436212e51c952',
+        [ [ 120.8794, 24.7126, 121.0297, 24.8532 ] ]
+      ],
+      [
+        'atlas:city:TWN-1164',
+        50,
+        'framework:province:keelung:f52fdf90454b',
+        2393,
+        'data/geography/part-29.json',
+        1478,
+        'c93989f9d61bd0b376805ccd343f39911c38c8a1775018954810e523cfe4a546',
+        '38314f8d61d883d92e5bf00389092f42e1a1a101514a9ee66842257f1ba3fc9e',
+        'e31c4404e4a7b6eab3c156b9b44a9f910b4646f11eaa85b3f2114e1574a3376b',
+        [ [ 121.6269, 25.0531, 121.8071, 25.1768 ] ]
+      ],
+      [
+        'atlas:city:TWN-1166',
+        51,
+        'framework:province:taipei:ce89ac0665e5',
+        4473,
+        'data/geography/part-29.json',
+        1472,
+        'a87c9d2cc36dacfd446fa1428cc552d13a77295c0fcccc8fa26b9fed0d006a44',
+        '321270807bd7fae148a7df173620b9bff725c61cc0a20de2992377e7800654a2',
+        '60f5224dff7b793aedf29ff1b3c627f8f4a48f5f2197e63a63c805fad77d5e10',
+        [ [ 121.4589, 24.9603, 121.6659, 25.2102 ] ]
+      ],
+      [
+        'atlas:city:TWN-1167',
+        52,
+        'framework:province:new-taipei:e9d6b183bd3a',
+        3245,
+        'data/geography/part-29.json',
+        1473,
+        '4990fdaf3b5951889b938d8f39ebe329f6099914e70d915175b69ca78d1aa108',
+        '27337fc0c877ac00d01cb4b03ae8516b6699621b7756791655eb689f04778cdf',
+        '85992ec2efb540e1beca8b72ab9d6c35c8d505fda3cc1a0052d1fe0c3b2e45be',
+        [ [ 121.2827, 24.6732, 122.0047, 25.2985 ] ]
+      ],
+      [
+        'atlas:city:TWN-1168',
+        53,
+        'framework:province:taoyuan:37d804afabb2',
+        4501,
+        'data/geography/part-29.json',
+        1474,
+        '2c45103abb32901d70432abf1960a74e6a2b867407074ebf1b3d6433364e7f13',
+        'd0b13bde108c8fa6621c3c41a71ce7c155c447ea9249d233c024109e91066a8b',
+        '9e3b9a09ebc5bb7eb012e2a8efa3ef1b4c8633c7b03291c064d3785d3f471c09',
+        [ [ 120.9858, 24.5866, 121.4799, 25.1221 ] ]
+      ],
+      [
+        'atlas:city:TWN-1171',
+        54,
+        'framework:province:chiayi:bd88e85c404b',
+        1287,
+        'data/geography/part-29.json',
+        1480,
+        'e52072042ca9e36e4c7a3a0fa391a7457c3dffd987ae4d3b1f5bf603d1a45e9d',
+        'f1f4c3e41b2c8d243cf21936c8f9080f0e52d3d5fdb3c0767480d52f76ba036f',
+        'ad611f0723a548c2f309622cb09b6a74b3bccd9545597eb0e9a556b637447c25',
+        [ [ 120.3894, 23.4396, 120.5094, 23.5183 ] ]
+      ],
+      [
+        'atlas:city:TWN-1174',
+        55,
+        'framework:province:taichung:77b1f26a61a3',
+        4471,
+        'data/geography/part-29.json',
+        1475,
+        '2943c6c1b6ac58ce7567bab41e3e5fbf66fd753efa693118cbce68c893ef4e51',
+        '62d429b78c17294e57920fdceef6912cfc3d644d0cde0860db2981e24d6f645e',
+        '71e7c925bd93aa97e68a6d7ac6ffe19e12487cf3dc454a5e7b87a56372f8653b',
+        [ [ 120.4683, 23.9986, 121.451, 24.4415 ] ]
+      ],
+      [
+        'atlas:city:USA-New-York-City',
+        56,
+        'framework:province:new-york:918b3a796b53',
+        3247,
+        'data/geography/part-28.json',
+        1279,
+        'f3332e227a9547005226599b409ce1b3c7bb1260d002596884e5becc43bc1b7e',
+        'aba661c0d67b02558293bb1326d9b089f4836fb25be872afc412a590e5d8d8a0',
+        '4fbf5f9d6b627978a8ec31252018c61177e127c6f8e6e50b7ecdaa6d7666b804',
+        [ [ -74.2606, 40.4961, -73.7016, 40.9176 ] ]
+      ],
+      [
+        'atlas:city:VNM-462',
+        57,
+        'framework:province:hanoi:eb9b6537031b',
+        1976,
+        'data/geography/part-28.json',
+        1292,
+        '620aebeca6a5a199d7cff102710641e073f0f7b827d64b2c4c671df27ab225e0',
+        'eb4924a15382711828968f836c60d2a5e8695b9a26f500d24d8413e2dcd529c9',
+        '4fedb053f99716360cb7d8c223efeb7cc62a799b3ae5f8f64c170743e76461d9',
+        [ [ 105.2849, 20.5653, 106.0388, 21.4201 ] ]
+      ],
+      [
+        'atlas:city:VNM-491',
+        58,
+        'framework:province:a-nang:34a2c90f7741',
+        406,
+        'data/geography/part-28.json',
+        1307,
+        'd9321e6cb4921901ee54a60427f349a75d15a26ba918503bc17f3971395e5263',
+        '84ebcf97607e7e77c28858be3f49b57751fd2556c7c3d8f70dada8d34341c3f1',
+        'c35af7418df8a9b57059ae7a24f8c310ac3d21c4efd77d995709ae9b591fa4a3',
+        [ [ 107.8188, 15.9189, 108.338, 16.2143 ] ]
+      ],
+      [
+        'atlas:city:VNM-501',
+        59,
+        'framework:province:ho-chi-minh:5519045dae44',
+        2055,
+        'data/geography/part-28.json',
+        1299,
+        'f7db6034facebafd663e06fb6000f1f5c67abc8e78d8ca4e9875fb695292b3e9',
+        '6321340805973c06075395a6ccb3d7f463c9921d4457cf296ed6e43c32b63cf7',
+        '85fbc5a8af976e34a25c0a4ce2c01030ff9ae73faa1a79965817821b0a972c09',
+        [ [ 106.3568, 10.5762, 106.8818, 11.1425 ] ]
+      ],
+      [
+        'atlas:city:ZWE-525',
+        60,
+        'framework:province:harare:8fab9cec64d9',
+        1979,
+        'data/geography/part-28.json',
+        1303,
+        '4989ba69d29d70b9894f1466c8d084fb3e467ebe718bb28546ff9ee9c408e50c',
+        '5c90e0e843d00bf0cebe22a1c54bb742463d56b06c3b9f2096f1bd9899f06fb7',
+        '18e3ff77e35bfdb837ca385c24992aef5aeaa83d27dd931b0049e9959278a3eb',
+        [ [ 30.8774, -18.0498, 31.2203, -17.6656 ] ]
+      ],
+      [
+        'atlas:coverage:ATC+00?',
+        61,
+        'framework:province:ashmore-and-cartier-islands:47246a593bce',
+        673,
+        'data/geography/part-28.json',
+        1249,
+        '395d92394a6d040776011758de0fbd343b0cd0c54f41a16211804af324b50e2b',
+        'f22700d701850892442919998873bf32f08fa0942609c32900a9c7a2f03c7b55',
+        'e99b3b0082d7482db4ac71957fc8376ca90b536308f1da033a5447e44a4b1ee1',
+        [ [ 123.575043, -12.438572, 123.597748, -12.426609 ] ]
+      ],
+      [
+        'atlas:coverage:ATF-5916',
+        62,
+        'framework:province:archipel-des-kerguelen:0186c2974b8f',
+        636,
+        'data/geography/part-28.json',
+        1228,
+        '0bc766fa25b88cf06292c3187533f778dc14de3ad69fe828b1cf9a8a63968904',
+        '92edcc33555dd9fc1d2cabffcdb13f5979b65a529e030651ebc3c895107c7703',
+        '7d10af79ae99cf53a251f2e8723b6fa53748050c13a454806e7e3d67ce3659f0',
+        [ [ 68.610118, -49.721612, 70.568533, -48.566664 ] ]
+      ],
+      [
+        'atlas:coverage:ATF-5917',
+        63,
+        'framework:province:archipel-des-crozet:13fab451c57f',
+        635,
+        'data/geography/part-28.json',
+        1229,
+        'bf270b206e87cf217c30396449ef69ebe4471e100139fbb8be3b009585945115',
+        'dd8cd653e579f99283e2efab87535b1ec6c814222aaf65088bb7bca822d4ca0e',
+        '060989f44e0ffd469dbe2d60aae1c033d03d1b50dcb58e5c64c9e76d4b541bf4',
+        [ [ 50.175548, -46.451267, 51.868175, -46.043715 ] ]
+      ],
+      [
+        'atlas:coverage:ATF-5918',
+        64,
+        'framework:province:iles-saint-paul-et-nouvelle-amsterdam:ecadfbb105a4',
+        2137,
+        'data/geography/part-28.json',
+        1243,
+        '471168cec18f0924e35774e0f7a65e6ca7adb7e1652eef96f0a0cce5d9758872',
+        '74a13914d681edafcbaec57a46262fac9f50a658d90210f1880860925d9ab85b',
+        '14416e3e33de127a3c96cf3f7038c52b6f068e013990084d3ed81791057629eb',
+        [ [ 77.487559, -38.738458, 77.585216, -37.820245 ] ]
+      ],
+      [
+        'atlas:coverage:ATF-5919',
+        65,
+        'framework:province:iles-eparses-de-l-ocean-indien:1900b2fa0555',
+        2135,
+        'data/geography/part-28.json',
+        1221,
+        '2149e5073e67d5025fc181e6092513aaa76a375102f08947352c6e43f1ecf879',
+        '39623b93b81489e16a42dc484ee3ef3f589f041f292da0243090a1247dc91a5c',
+        '69686f18ad89e5f11dbf0bff721e45fcff63704c08ab64d6cc102edb4d034a9f',
+        [ [ 39.69394, -22.365492, 54.521332, -11.550632 ] ]
+      ],
+      [
+        'atlas:coverage:AUS+00?',
+        66,
+        'framework:province:macquarie-island:cf88d81e9793',
+        2807,
+        'data/geography/part-28.json',
+        1234,
+        '1b107ff5840d1cc133b62e9863f749e9fa83bcbb66a89918d338d795fa0c964e',
+        '8cc95cc14c312e05108be186c98fcd022abfe5797c68eb5d49251eb09471ebca',
+        'dd9f3c0730d5461674c11b0c3341b061f0ed2f800d1cfd286856675ff0b811d9',
+        [ [ 158.832042, -54.750421, 158.963227, -54.469334 ] ]
+      ],
+      [
+        'atlas:coverage:BVT+00?',
+        67,
+        'framework:province:bouvet-island:f25adb7c3670',
+        1014,
+        'data/geography/part-28.json',
+        1242,
+        '66add0f58b704aedf2ffe51aee9bc07a36a03693d014785dbe0f1c070a6158fc',
+        'a681062d14d1a6bcf31bf6c437df587781328493033bd3ee05a8900347739406',
+        '9ecb755d00584a510a0adad684742572c2b17655b13ce14e29ef7628f4c1f2ef',
+        [ [ 3.345551, -54.462498, 3.486664, -54.380141 ] ]
+      ],
+      [
+        'atlas:coverage:CLP+00?',
+        68,
+        'framework:province:clipperton-island:aa74e13af537',
+        1337,
+        'data/geography/part-28.json',
+        1246,
+        '95c3c49393333541e272225c6487bc15bcebea8f358c503ec572edf31de14aa1',
+        'ec6d452f63377ce1e719279b94eba0ce807cc1e369385e9c3ccdde42d908eaa9',
+        '219473e643f3f02f33b2160ddc1beab360dc64530c09bf89fb3750266583e679',
+        [ [ -109.234242, 10.281562, -109.210357, 10.311021 ] ]
+      ],
+      [
+        'atlas:coverage:CSI+00?',
+        69,
+        'framework:province:coral-sea-islands:a8388a18de40',
+        1371,
+        'data/geography/part-28.json',
+        1244,
+        '2e7654954c038846cf75a825fff1c3ee959de46cc4d98aee48eca0d5873e51ca',
+        '7e4783500731f4f2a9dba5498771cd4d8dfebb4f8da36920aad3044207afe35d',
+        '43cc6c97a04485dc96e4b080554a123ddad09beef97c770e2522ea32005c3e41',
+        [ [ 147.879893, -22.202732, 155.801036, -16.132989 ] ]
+      ],
+      [
+        'atlas:coverage:FRA-1442',
+        70,
+        'framework:province:martinique:cb3c652b0a00',
+        2916,
+        'data/geography/part-28.json',
+        1224,
+        'be0d6755f5310d2f02cbbb5040122cafd411ec3144223c43edcfdbfed4dbaad9',
+        'f1aa74b8488cb308cf57d39ff71579a269985f909a968c2cf15795801a6a667f',
+        '4778569888346adcaf132af76f9bbb8a36a0e301122dc4937bc4d606ab2ab8c9',
+        [ [ -61.228831, 14.408108, -60.810414, 14.876899 ] ]
+      ],
+      [
+        'atlas:coverage:FRA-4601',
+        71,
+        'framework:province:la-reunion:31f4268e6f50',
+        2588,
+        'data/geography/part-28.json',
+        1230,
+        '3aae9d1c65b85b0c6bb11b2c649975333ff5e9eade6285f1251ce2c969dac00e',
+        'd4ee91252fd839d2a36308d0c03ce689a97f5e14ec64906366d4277e15db6f1d',
+        '2bfb3a3caf47715367efc5c5b3b7c518bc92e708ca8131c4b3720efbdcae8908',
+        [ [ 55.225434, -21.370782, 55.854503, -20.861423 ] ]
+      ],
+      [
+        'atlas:coverage:FRA-4602',
+        72,
+        'framework:province:mayotte:fa15b20853d8',
+        2965,
+        'data/geography/part-28.json',
+        1231,
+        'b5caeafa5f315780f1be29b0bbdabac5770a1519c1748d9539ca83eb0f75783f',
+        'e00317dbf9f497759b2005d1ac1e895a2a3bb93c9007ad5075f553fa6cba15c3',
+        '45b6a1c603eb24991e580159c6f9153ddf1814f3d355cfd390b906a5223c5ebe',
+        [ [ 45.042491, -12.98919, 45.290863, -12.647231 ] ]
+      ],
+      [
+        'atlas:coverage:FRA-4603',
+        73,
+        'framework:province:guadeloupe:8b5057d93441',
+        1898,
+        'data/geography/part-28.json',
+        1225,
+        '75b6a055d76c9a970b84339cbc92b2885a2868d88af1eb6978a45850ecb55a38',
+        'faa15c596624294dfc8d03128c6ac0fd4a5265e6366fdb097fc84bb2343674b4',
+        '254264c73911864c6fc88511c904c21fd5acac48a04c661ff782ba041c34eaa0',
+        [ [ -61.797841, 15.846991, -60.989247, 16.513088 ] ]
+      ],
+      [
+        'atlas:coverage:HMD+00?',
+        74,
+        'framework:province:heard-island-and-mcdonald-islands:489abffe1bdc',
+        2021,
+        'data/geography/part-28.json',
+        1227,
+        'e523903c38cf8dcab90e752155ba8663034ba375177c3eccb57ab94388690041',
+        'eeb31d0187b1eecdb82f6698ba119259d10c880f6914f9c45756f437f39461f6',
+        '2e38f0d53d2e293cd4ff9b924da018a3422912273ca4b43bea496b79fadba13a',
+        [ [ 73.236013, -53.19256, 73.812185, -52.961602 ] ]
+      ],
+      [
+        'atlas:coverage:KGZ-1115',
+        75,
+        'framework:province:bishkek:f4cf32098768',
+        935,
+        'data/geography/part-29.json',
+        1255,
+        '4224e4b328444166335b3b5cd89496fc75ff5783532284eb5e015bf050cee99d',
+        '24a02ccd274f18ed4c64f9df16173709295ce655f3b8ea1cd9d7c47dd42cc427',
+        '3b21ec81d38d3a798bc7c850e2481691e056c679596d726d2a13d058f291c2e5',
+        [ [ 74.503701, 42.7874, 74.671753, 42.937793 ] ]
+      ],
+      [
+        'atlas:coverage:MDV-5230',
+        76,
+        'framework:province:kaafu:dac51ec4edb4',
+        2286,
+        'data/geography/part-28.json',
+        1240,
+        'e92e5cb9346263ac82937f74f5ec8153723d1255b46b3e99366fe74139e9684b',
+        'a92fcb7ad492b5baf86b2ae2b443694bf417773fa732146e9e02d16ed525230b',
+        'ee97ccc4be364ab6c1b359a6476c0f96b018b716a6395f260c35a9a6c8a3da41',
+        [ [ 73.341482, 3.841702, 73.70281, 4.974921 ] ]
+      ],
+      [
+        'atlas:coverage:MDV-5240',
+        77,
+        'framework:province:gaafu-alifu:e49ba20ab328',
+        1765,
+        'data/geography/part-28.json',
+        1239,
+        '24bc82f099ef5f3eb010c0acd3db91ac1f00522026e7593cf1f338953bbb947f',
+        '26b7bc6b505ff3bc13c8fd7e7ede6104e44c7889e2855fe5f41f7ef6a8b91ad3',
+        '40ea3d52c279eb1e79dd39f483a34edfddbd39d3c611c2f83c01fe596e4c97dd',
+        [ [ 73.349783, 0.380561, 73.513438, 0.847724 ] ]
+      ],
+      [
+        'atlas:coverage:MDV-5241',
+        78,
+        'framework:province:gaafu-dhaalu:a19c1da7c151',
+        1767,
+        'data/geography/part-28.json',
+        1238,
+        '81f436c43608f6ecac15459198faec17c35d80fc942cfa45baeeb13f37b2a8ff',
+        '50315617e2ff79d5048fc9c0f42de7a3f27259d24b7bfdb21cdcad4d96d6f899',
+        '867a001b6f88fa5c566df68b08d3ba494a6ecaaf17aa5c6010b79ab0839f6cc5',
+        [ [ 72.937022, 0.213446, 73.37908, 0.496324 ] ]
+      ],
+      [
+        'atlas:coverage:MUS-5180',
+        79,
+        'framework:province:agalega:65fe675f0572',
+        439,
+        'data/geography/part-28.json',
+        1232,
+        '051bdd5839c48e1cf8787a99b200040df06f23c78a7be5b6020a30bdbb1542ab',
+        '5c8f5369897e19b922560dd4cb07faffe3b6b74fa68249d00264bc73963ab35f',
+        'ad2e79f76581826890b055507df14341c46978ab08d729aa46488cceaa8a6554',
+        [ [ 56.524181, -10.406508, 56.569347, -10.323907 ] ]
+      ],
+      [
+        'atlas:coverage:NLD-5147',
+        80,
+        'framework:province:saba:ce82cdcf95ca',
+        4000,
+        'data/geography/part-28.json',
+        1247,
+        '379a7c5feefcbef5c1644cc434bc2eef8be0d0f0584bdf4f613454a09593c108',
+        'bc677a6e5a2e647a5271c20325d13532ad285179215cb947bc284e21670caf05',
+        'f9f8b4f288a94e4a61b9e599985cf36285e8e11758a723b7e5e028ec7558c048',
+        [ [ -63.251332, 17.614691, -63.223704, 17.646918 ] ]
+      ],
+      [
+        'atlas:coverage:NLD-5148',
+        81,
+        'framework:province:st-eustatius:e6518ccedeff',
+        4390,
+        'data/geography/part-28.json',
+        1226,
+        '2afc7f4e8993af3e37b0fdb9566e14c5dff6fb25f8ac187de2bd3f63927c11ee',
+        '6c4a5cd37085f720941f2f20a09edf865da40e666a644b5e17a25df42a895eb0',
+        'efd690f93d3f85d4df252a80025a35348982dfa4e69237c95d6a4676e2077e83',
+        [ [ -62.997141, 17.464571, -62.945065, 17.525621 ] ]
+      ],
+      [
+        'atlas:coverage:NLD-5149',
+        82,
+        'framework:province:bonaire:a5bc5f24d2f6',
+        979,
+        'data/geography/part-28.json',
+        1223,
+        '8872b95b289dff0eb6f18afc7d8e1d93be41ffa1a0beacc0f4d9e2b98c0824ea',
+        'ada23c054255c2fdef8feb8c126d0bc1cafc69a3463122795ba872f6e127243e',
+        'a839c817331b3e98fc99dd3f8da3bbaacdf75857083c40614da3132f3489f9f9',
+        [ [ -68.417388, 12.02204, -68.190012, 12.310207 ] ]
+      ],
+      [
+        'atlas:coverage:NOR-901',
+        83,
+        'framework:province:svalbard:62609ce92018',
+        4443,
+        'data/geography/part-28.json',
+        1233,
+        '99a075aa0b78e48cc7f4f617784699c6a296d5e4f1d8e18250469cc087f49b37',
+        '9be262d771e8d85968eff533970687d704a6432531a63383c538aa73cb52f1ff',
+        '03016684a7f665fce8dcde38f7a3799c053268d3692d0c5831a66aa2b17c7f4b',
+        [ [ 10.484386, 74.347357, 33.640391, 80.770087 ] ]
+      ],
+      [
+        'atlas:coverage:NZL-5471',
+        84,
+        'framework:province:kermadec-islands:ea65c933d173',
+        2416,
+        'data/geography/part-28.json',
+        1237,
+        'edd2454107f279256acac69320e034cb8b20fc6bcf0f391530f139e306d1c3c2',
+        'f7f51218339da5f528d463ef236eba80ea750f81e04d29e435a08b330606fb32',
+        'f22d396cc5cbdf94fbebbdf386131f7df94feaf0da2d702cc96de5cda88754ab',
+        [ [ -177.957997, -29.292169, -177.848134, -29.221938 ] ]
+      ],
+      [
+        'atlas:coverage:NZL-5472',
+        85,
+        'framework:province:tokelau:4cc7d2b1e7cf',
+        4620,
+        'data/geography/part-28.json',
+        1245,
+        '419d14b4f36216b2c15c87e40b7e1e37fe592823e9a3dd41c0ff85f72cf20379',
+        '2d55a23f081b7de69dc1d671d20d25fd7e989b857b4c05888efaaa786feea421',
+        '187af9c4fa337f881d85a2a23f1c7e4993290849d02d4713f15fa21237a34034',
+        [ [ -172.502553, -9.361749, -171.185658, -8.543227 ] ]
+      ],
+      [
+        'atlas:coverage:NZL-5477',
+        86,
+        'framework:province:antipodes-islands:e93eea73105f',
+        609,
+        'data/geography/part-28.json',
+        1236,
+        '266ecd78642239670d9b57473cbb9d9393306e73402899fc922c21d4588993ca',
+        'e97e752e4d4868fe8bdf9979e035ee92fe3e1802428f2078c49b9cd85d411ef4',
+        '589930472ff5d8feafda1b17ac9db36e70e41c77a253ce98d44e9d1c2bf2eefd',
+        [ [ 178.717621, -49.720798, 178.843923, -49.614923 ] ]
+      ],
+      [
+        'atlas:coverage:NZL-5478',
+        87,
+        'framework:province:campbell-islands:c5f0eac962f2',
+        1149,
+        'data/geography/part-28.json',
+        1235,
+        'd9750c5cd9a969134efd33e06a2fe00158ef936cc9b38d447f9d7a8fa2a44084',
+        '6763c9dfe3af8de7d351f200426b31d0ca4d08d968395c0a71cf2eed8778b217',
+        'c99c53c97629fc96d3a07576a59aad8c73279305471343f1aeb4f86aa16c1d98',
+        [ [ 169.015391, -52.600313, 169.293524, -52.469188 ] ]
+      ],
+      [
+        'atlas:coverage:NZL-5479',
+        88,
+        'framework:province:auckland-islands:b0e2653306e1',
+        698,
+        'data/geography/part-28.json',
+        1219,
+        'b6baf852dfdfb524e120f8e8414b174fa3742b9a64c219a1b3f958a5e6821447',
+        'cb99754f0ab0744b09a8e4f4bde664f1ea31792034d47a68200368b59bf168cf',
+        '03bf812b58cd6101af5f5457a038e99f6784c7186931805f38573344b04ff8b9',
+        [ [ 165.886485, -50.912042, 166.302013, -50.522231 ] ]
+      ],
+      [
+        'atlas:coverage:NZL-5480',
+        89,
+        'framework:province:the-snares:f256c6697d41',
+        4583,
+        'data/geography/part-28.json',
+        1248,
+        '267c267826f4f7693480b8dddbdd3c047eacbd942c94c4b9b7b6551cc3a64986',
+        '57a63b65513e867dcc58408f380c7daa292320006da74d624f0a772c04762d17',
+        '0e9f94f7e8ba6725a45e1c3fba4fbebe2c18eb898514d494dd489d381c412bbd',
+        [ [ 166.56837, -48.062433, 166.637462, -47.993585 ] ]
+      ],
+      [
+        'atlas:coverage:RUS-2337',
+        90,
+        'framework:province:city-of-st-petersburg:9cd033ab714b',
+        1331,
+        'data/geography/part-28.json',
+        1220,
+        'fea4e2884bb08f56480576f1b14699f8a75f8680e6c16a96ab6ecabf08317a96',
+        '5f30f1ce02b5cd386850a8b27a22811eef142c38855f997e89e8094865f82a1e',
+        'ad711ad02d8b36bb7f26686fdb36035340c3e09cde44ba14cf4c838dfa1df1f5',
+        [ [ 29.4298, 59.6394, 30.75147788615966, 60.2422 ] ]
+      ],
+      [
+        'atlas:coverage:RUS-2365',
+        91,
+        'framework:province:moskva:21adb849da11',
+        3106,
+        'data/geography/part-28.json',
+        1250,
+        'a5db8deb55d033f4b35b1bd6729ae051635e3f730f33817c8e33c47d5ca36b56',
+        '5c628e9680380abecc9cb8f159bc917581b54d9bacd8531e476870f4ddaa0484',
+        '1f59b33386e1309c665b06bb3d545c5f1f353fa6265ca42352af2beeab70adb4',
+        [ [ 36.91292688886405, 55.1422, 37.88177266131545, 56.0212 ] ]
+      ],
+      [
+        'atlas:coverage:SGS+00?',
+        92,
+        'framework:province:south-georgia-and-the-south-sandwich-islands:170c3c7a36d3',
+        4331,
+        'data/geography/part-28.json',
+        1241,
+        '518cda82f58fe65285296f2e4b6e7a956c453140461564616a0b587110fc53cf',
+        '8967eca00b22514b3f7542454ecbd9a0d119d9926ab2b9d026318d62e28471e3',
+        'db7aac19e12f56fcdca71802e4bfa72770ce529fee824a0045368703ac4e9fef',
+        [ [ -42.119008, -59.472752, -26.239329, -53.457127 ] ]
+      ],
+      [
+        'atlas:coverage:VEN-44',
+        93,
+        'framework:province:dependencias-federales:695997acaa98',
+        1497,
+        'data/geography/part-28.json',
+        1222,
+        '03dacc755056045357a71a587d524da9a60c42edd43c270988a0483e97694f76',
+        'cc5431614b58e5bad9e4db8f6e6f390c595093148679e78113a0ce836233991f',
+        '1a198c0892968fefa626175417496aa33b73718820e89c61e443048bead01ab5',
+        [ [ -67.688832, 10.884955, -64.552154, 12.068996 ] ]
+      ],
+      [
+        'atlas:district:BRA-110001:BZN',
+        94,
+        'framework:province:porto-velho:702839f33fbd',
+        3708,
+        'data/geography/part-29.json',
+        167,
+        '4fee9bbebca85d88e422a0db7875ced636a9e34b2e182aed0287f10c047159ee',
+        '1d24e45123dbf0596119605379b6c06e05a74ac22685cdfa2812c492734d86c8',
+        '48d0a6638e506c8b9d39eb554ccbe61ae11c3790fbf9c2fb21aa7760a727d5e4',
+        [ [ -65.4296, -12.215464976627112, -62.6284, -8.5004 ] ]
+      ],
+      [
+        'atlas:district:BRA-110002:BZN',
+        95,
+        'framework:province:porto-velho:702839f33fbd',
+        3708,
+        'data/geography/part-29.json',
+        164,
+        '763c8787368214f2398fa04a721642e709c725dae7902b5acc9afd75b4f0cc0b',
+        '2c3f86b2bf68d3028ed855aaa88c0e310de7473adc64cb3d07276bbec0a3dd0f',
+        'f9f89e47d4a9ea4101794ae7f39107cad11bc3a0f0e6cb5026d62f05ec913829',
+        [ [ -64.3466, -10.8417, -62.2958, -8.7318 ] ]
+      ],
+      [
+        'atlas:district:BRA-110003:BZN',
+        96,
+        'framework:province:porto-velho:702839f33fbd',
+        3708,
+        'data/geography/part-29.json',
+        168,
+        '21227d0ee709c60b7720e34fd99838a39bd87b35eb7a3a7ada49d36b8c01b06c',
+        'b5a7936a1c88dd970206cf138fec15c9ec3f342bcfc4d86b6a005b91f2d0f1ad',
+        '25342aa7dd478cc5e0bfeba3a9db7c0e77331f40379101012b0b18ca88541bf4',
+        [ [ -63.6237, -11.1524, -61.4692, -8.5757 ] ]
+      ],
+      [
+        'atlas:district:BRA-110004:BZN',
+        97,
+        'framework:province:ji-parana:370434110ac1',
+        2235,
+        'data/geography/part-29.json',
+        166,
+        '663a5eeb29594f9d8db343ea6f10a5665f555b2f2a36fc82cc0112d740e6d803',
+        '07f876188d69db4b40c229264615f2425eb84edd4f3e5ef1508637c039c652d4',
+        '3a28debbebfed39248c60eb33b9d4c3adb5a6400df7cd90f722470a9014ba5ed',
+        [ [ -64.5936, -12.9266, -61.4621, -9.6843 ] ]
+      ],
+      [
+        'atlas:district:BRA-110005:BZN',
+        98,
+        'framework:province:ji-parana:370434110ac1',
+        2235,
+        'data/geography/part-29.json',
+        163,
+        'ec1d4aa3a4fde329f8f57bb81c2836d3b87efd3f9c7389ad4e96867f68cc11ed',
+        'e58f9b6fbf1fe7fe60e42ada4fa247bfe1a34afa063ddd6b0dd72463dbafd5df',
+        'bad7bdd537bf4982d4622a3b0c4c6a55dc9ca475f5c807c30c366dfe17227164',
+        [ [ -62.8937, -13.1787, -60.3022, -10.9861 ] ]
+      ],
+      [
+        'atlas:district:BRA-110006:BZN',
+        99,
+        'framework:province:ji-parana:370434110ac1',
+        2235,
+        'data/geography/part-29.json',
+        165,
+        '337cd470403c173a3425e864e213144907edf47ff409cb52bca288cbbf516197',
+        '6b944bc7d17189212fcf5ddbd5ee7d8412e5b3aad443d578589b35e8645420aa',
+        '49e473f543a21107401e392f4d50e179e6b3a3c801ca1306ce8d9aa3334948c5',
+        [ [ -62.1177, -13.6907, -59.7755, -10.9898 ] ]
+      ],
+      [
+        'atlas:district:BRA-120001:BZN',
+        100,
+        'framework:province:rio-branco:6281470bd8fd',
+        3943,
+        'data/geography/part-29.json',
+        169,
+        '1bc3b83aaa4dfed43503a77b5b446c7ad597552dc476ff57ce0bc0e0f72421f1',
+        'c2412a8999104e3a1faa4e00f41cc9bcf388f16bacb32600650f3b8966400679',
+        '0a56b98034dfd623a4baad90b257a51027037d6cd27222a7c2d8c932f032b18d',
+        [ [ -68.455, -10.711038307030128, -66.6266, -9.2437 ] ]
+      ],
+      ... 49525 more items
+    ],
+    entry_fields: [
+      'id',
+      'index',
+      'parent_id',
+      'parent_index',
+      'source',
+      'ordinal',
+      'whole_feature_sha256',
+      'geometry_sha256',
+      'effective_geometry_sha256',
+      'boxes'
+    ],
+    inputs: [
+      {
+        bytes: 8539839,
+        path: 'data/geography/part-0.json',
+        source: {
+          bytes: 8539839,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '85bdc3171a740db0bc756460dab5a50c6c54518d',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-0.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3'
+        },
+        whole_body_sha256: 'bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3'
+      },
+      {
+        bytes: 8060108,
+        path: 'data/geography/part-1.json',
+        source: {
+          bytes: 8060108,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '471e45dcd13904489bc434ae5115105fadba7ab9',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-1.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7'
+        },
+        whole_body_sha256: '4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7'
+      },
+      {
+        bytes: 6259307,
+        path: 'data/geography/part-2.json',
+        source: {
+          bytes: 6259307,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '389e463dd5e44894fd221f53db584f55fff330d1',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-2.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf'
+        },
+        whole_body_sha256: '93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf'
+      },
+      {
+        bytes: 5153118,
+        path: 'data/geography/part-3.json',
+        source: {
+          bytes: 5153118,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'e41c8f549f1cb2162f5adb30029bf4800e86c848',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-3.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617'
+        },
+        whole_body_sha256: 'e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617'
+      },
+      {
+        bytes: 4835479,
+        path: 'data/geography/part-4.json',
+        source: {
+          bytes: 4835479,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'ccdefbb55c62b317f11e6078cd9291dae5339693',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-4.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c'
+        },
+        whole_body_sha256: 'e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c'
+      },
+      {
+        bytes: 5226173,
+        path: 'data/geography/part-5.json',
+        source: {
+          bytes: 5226173,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'cf59e69b02ab2c9ad7344ddbf309a221a8be587b',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-5.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc'
+        },
+        whole_body_sha256: '20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc'
+      },
+      {
+        bytes: 4607953,
+        path: 'data/geography/part-6.json',
+        source: {
+          bytes: 4607953,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '4be02d1d055a66c4e1606bab4f23ecda90350f34',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-6.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a'
+        },
+        whole_body_sha256: 'dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a'
+      },
+      {
+        bytes: 4257402,
+        path: 'data/geography/part-7.json',
+        source: {
+          bytes: 4257402,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'c88539c7899a0c257c48fc1a555895904832f0cc',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-7.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387'
+        },
+        whole_body_sha256: '1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387'
+      },
+      {
+        bytes: 5097739,
+        path: 'data/geography/part-8.json',
+        source: {
+          bytes: 5097739,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'eec7163a536245c0249d1821fe81590aba2a1ded',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-8.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1'
+        },
+        whole_body_sha256: '2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1'
+      },
+      {
+        bytes: 5729632,
+        path: 'data/geography/part-9.json',
+        source: {
+          bytes: 5729632,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '79a4f0cd17ca9f7007916be8419c2fa986fe7a61',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-9.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6'
+        },
+        whole_body_sha256: '9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6'
+      },
+      {
+        bytes: 5144571,
+        path: 'data/geography/part-10.json',
+        source: {
+          bytes: 5144571,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '84b4cf537b801c7f6d3840173c49b7e4293a139d',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-10.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2'
+        },
+        whole_body_sha256: 'ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2'
+      },
+      {
+        bytes: 5133018,
+        path: 'data/geography/part-11.json',
+        source: {
+          bytes: 5133018,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'fd7d6f9f564a4b9b0ae7a56a2d7eb27e920017d8',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-11.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'd1b2fb15c9427497de740eb33a529ef382b58cb319028f2aa38f5878de4c9b02'
+        },
+        whole_body_sha256: 'd1b2fb15c9427497de740eb33a529ef382b58cb319028f2aa38f5878de4c9b02'
+      },
+      {
+        bytes: 4489493,
+        path: 'data/geography/part-12.json',
+        source: {
+          bytes: 4489493,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'e8360aa55a8398d0fa841b5331febcabdc8588a2',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-12.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7'
+        },
+        whole_body_sha256: '24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7'
+      },
+      {
+        bytes: 5709487,
+        path: 'data/geography/part-13.json',
+        source: {
+          bytes: 5709487,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '44f886df47aa3e313f0c2ce98faea045e2eba8ed',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-13.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1'
+        },
+        whole_body_sha256: '90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1'
+      },
+      {
+        bytes: 4355198,
+        path: 'data/geography/part-14.json',
+        source: {
+          bytes: 4355198,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '2cd05a870d730c598eb463ac8be2300ca5be6e66',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-14.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0'
+        },
+        whole_body_sha256: 'c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0'
+      },
+      {
+        bytes: 5180426,
+        path: 'data/geography/part-15.json',
+        source: {
+          bytes: 5180426,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '4ef51307797f81b8cf7a647495f037a089f8b368',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-15.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df'
+        },
+        whole_body_sha256: '6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df'
+      },
+      {
+        bytes: 5213846,
+        path: 'data/geography/part-16.json',
+        source: {
+          bytes: 5213846,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '02d53ca01dc014a3c9481eb1017a89487fc2bd89',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-16.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797'
+        },
+        whole_body_sha256: 'b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797'
+      },
+      {
+        bytes: 4948066,
+        path: 'data/geography/part-17.json',
+        source: {
+          bytes: 4948066,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'a2dc24c477fb10da8ebd5a1cff4765a8f34bd22a',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-17.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '1ae1a9ef25c1f71b66084aadf57933132383d4271b888ab38866905da5678af3'
+        },
+        whole_body_sha256: '1ae1a9ef25c1f71b66084aadf57933132383d4271b888ab38866905da5678af3'
+      },
+      {
+        bytes: 4909063,
+        path: 'data/geography/part-18.json',
+        source: {
+          bytes: 4909063,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '59012653b56da5a394e7692209b257e27883eab8',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-18.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123'
+        },
+        whole_body_sha256: 'ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123'
+      },
+      {
+        bytes: 4583022,
+        path: 'data/geography/part-19.json',
+        source: {
+          bytes: 4583022,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '306125db7012a9ac927bb4a169dea5166ef126e7',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-19.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269'
+        },
+        whole_body_sha256: 'baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269'
+      },
+      {
+        bytes: 6570767,
+        path: 'data/geography/part-20.json',
+        source: {
+          bytes: 6570767,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'efda4099740c3ef131ef631cdc6b6ecf345f226a',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-20.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f'
+        },
+        whole_body_sha256: '9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f'
+      },
+      {
+        bytes: 6737781,
+        path: 'data/geography/part-21.json',
+        source: {
+          bytes: 6737781,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '28619c3c39b5808aae4b3f459b97c39de8b073b2',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-21.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'd7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7'
+        },
+        whole_body_sha256: 'd7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7'
+      },
+      {
+        bytes: 4746385,
+        path: 'data/geography/part-22.json',
+        source: {
+          bytes: 4746385,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-22.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3'
+        },
+        whole_body_sha256: 'f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3'
+      },
+      {
+        bytes: 4962410,
+        path: 'data/geography/part-23.json',
+        source: {
+          bytes: 4962410,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '371e95033d9c542bbf07c42afe7111074e35f246',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-23.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'd61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2'
+        },
+        whole_body_sha256: 'd61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2'
+      },
+      {
+        bytes: 4816899,
+        path: 'data/geography/part-24.json',
+        source: {
+          bytes: 4816899,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '4110c75d7d0f5282e0a2bd263b430e8c1e78f0eb',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-24.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c'
+        },
+        whole_body_sha256: 'b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c'
+      },
+      {
+        bytes: 4525239,
+        path: 'data/geography/part-25.json',
+        source: {
+          bytes: 4525239,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '16ba4f38251d1bd99ac85f0ae7cca2f0424470f8',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-25.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394'
+        },
+        whole_body_sha256: 'dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394'
+      },
+      {
+        bytes: 4608983,
+        path: 'data/geography/part-26.json',
+        source: {
+          bytes: 4608983,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '5d61478ece9042cbd0791eabd2536e1054e26341',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-26.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632'
+        },
+        whole_body_sha256: '44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632'
+      },
+      {
+        bytes: 4863162,
+        path: 'data/geography/part-27.json',
+        source: {
+          bytes: 4863162,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'a6a359c8c566462b280a461b4a5e1591e1f486c4',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-27.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758'
+        },
+        whole_body_sha256: 'e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758'
+      },
+      {
+        bytes: 6613963,
+        path: 'data/geography/part-28.json',
+        source: {
+          bytes: 6613963,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'a9e03cb07194a73f643af85d1e6db94abe3b5fc9',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-28.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d'
+        },
+        whole_body_sha256: '2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d'
+      },
+      {
+        bytes: 12932719,
+        path: 'data/geography/part-29.json',
+        source: {
+          bytes: 3353763,
+          commit: 'ee684e3145079ff93f68520e3c17837789be5b0c',
+          decoded_bytes: 12932719,
+          decoded_sha256: '723d16eb63b7f2dcd8260a516eac6571a7ef1eaaf9bff3c926e0c63235b98fd3',
+          encoding: 'gzip',
+          git_blob_oid: 'd3f17ccd8eecca88b16f2bbbf075320b6d555aea',
+          kind: 'selected-exact-encoded-override',
+          logical_path: 'data/geography/part-29.json',
+          mode: '100644',
+          path: 'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz',
+          sha256: 'd7665a1fdf68f0626c7e28da9ac0e40f4e35aaeacdf91bad4ab8e2d77221bc49'
+        },
+        whole_body_sha256: '723d16eb63b7f2dcd8260a516eac6571a7ef1eaaf9bff3c926e0c63235b98fd3'
+      },
+      {
+        bytes: 11979437,
+        path: 'data/geography/part-30.json',
+        source: {
+          bytes: 11979437,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '0deb9748357a854c5e7e6179f42d77a47a09ca9a',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-30.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'd575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a'
+        },
+        whole_body_sha256: 'd575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a'
+      },
+      {
+        bytes: 10086485,
+        path: 'data/geography/part-31.json',
+        source: {
+          bytes: 10086485,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '1b89d7aef660ba0536acdb9b9f7a574b028ea01a',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-31.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e'
+        },
+        whole_body_sha256: '44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e'
+      },
+      {
+        bytes: 10211739,
+        path: 'data/geography/part-32.json',
+        source: {
+          bytes: 10211739,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '6cf41fabbeddb18bbe426038251b86171c715ef7',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-32.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64'
+        },
+        whole_body_sha256: '00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64'
+      },
+      {
+        bytes: 607984,
+        path: 'data/geography/part-33.json',
+        source: {
+          bytes: 607984,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'e8a8a8e8015cfc31005e85daa49fc2552ef1df9e',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-33.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'd928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe'
+        },
+        whole_body_sha256: 'd928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe'
+      },
+      {
+        bytes: 1573576,
+        path: 'data/geography/source-restoration-additions.json',
+        source: {
+          bytes: 1573576,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '18989f4f6b2789057a00eeda6c5c7e51f06e3caf',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/source-restoration-additions.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9'
+        },
+        whole_body_sha256: '04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9'
+      },
+      {
+        bytes: 11393,
+        path: 'data/geography/macro-loose-ends-v5-additions.json',
+        source: {
+          bytes: 11393,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '8f0e144d92e52ea473eecc7c2358c3464c648009',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/macro-loose-ends-v5-additions.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1'
+        },
+        whole_body_sha256: '8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1'
+      }
+    ],
+    kind: 'selected-coordinate-neighbor-certificate-v2',
+    limitations: [
+      'Certificate projects complete owner identity/index/parent tuples and merged coordinate bounds. Full original camera metadata remains authenticated source custody and charged carried state; it is not duplicated as certificate geometry.',
+      'Conservative exclusion only. Actual whole geometry and original polygon predicates are mandatory for every possible neighbor.'
+    ],
+    version: 2
+  },
+  expected: {
+    binding: {
+      coordinate_domain: 'complete-original-pointset-bounds:v1',
+      kind: 'selected-complete-coordinate-binding-v1',
+      owners_sha256: 'b4cc900fac67d6db66265ffc76a29f37c6b73085e348cb992d78703c309a54a5',
+      release: {
+        changes_sha256: '73a129575a91d50b6700d91d1bd7f673b91c3cdd56d6d2437ee5e4f437e9e53e',
+        expected_counts: {
+          area: 480,
+          continent: 6,
+          location: 49625,
+          province: 5137,
+          region: 81,
+          subcontinent: 29
+        },
+        footprints_sha256: '2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9',
+        hierarchy_sha256: '568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b',
+        id: 'geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb',
+        location_ids_sha256: 'b8eb3ab175f84531156e4f61297aca4205cefe63a660909b0a5db79fed36e8d1',
+        membership_sha256: '3e2e7b48166d503a510a5554be751119b6f00c41fe090ad27cc2f5ea3eab328d',
+        metadata: {
+          decision_sha256: {
+            'africa.json': '5d40bf508409b004368b6f77456ed60a1e76caa8a0528f7294f46f7c6cb904f7',
+            'asia.json': 'a66b5e57b1c8c54dc9480360c61e0f91752c6fc6a0b710dfdf5131abc9dd6807',
+            'europe.json': 'c936e3a251bedc827f7861345edbfd15b7da2ca4030966b702ba1c21ed2f0c6f',
+            'north-america.json': '0c66d322180fecc0ec978e98cadfd031cf11f4b24058cd18b6bd1ce4187e07a1',
+            'oceania.json': '48326f9de56a3700b4b7ab33499dcf00bd4258fdfe7b081c3ce97f2d645ace34',
+            'south-america.json': 'f3621775ce1d21d873ff16972bbf37639c1b72aa32ea8e880e44a82fa11221f6'
+          },
+          geometry_migration: {
+            after_footprints_sha256: '2deeff1457ff9238cb3dbe599e9a858dcce29d8ba88e2a66abe2785ddec0aed9',
+            before_footprints_sha256: 'b9a3c8bf375217dba3a50d1a022ec7e4ac6c6f1cdedff22845da953c805b7433',
+            commit: '9b212c585583dc218a961b4c7ee1056a64b54726',
+            history_transfer: 'none',
+            path: 'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/migration-receipt.json',
+            sha256: 'fbcdc93980b55dd679cf7343da7c22e5ef8b7f37278f340f932a70b3770014b6'
+          },
+          geometry_proof_sha256: {
+            'geometry-0': [Object],
+            'geometry-1': [Object],
+            'geometry-2': [Object],
+            'geometry-3': [Object],
+            'geometry-4': [Object]
+          },
+          historical_membership_not_asserted: true,
+          metadata_migration_sha256: {
+            'metadata-0': 'cac2a3ce614d913a4d16e7434739a0e1f7be02b0cdab2f5063d311a629c64ba5',
+            'metadata-1': '290a21230e5371d635e38cf1f760cb77b1c1f03fc8f366f6e965e3f3b3e24937',
+            'metadata-2': '5057ddb926e859a148487e89894b11e365cf015f0a659f43049ef9aadeda9468',
+            'metadata-3': '09eb32e599c29f960f9b1965e17d5ded3700bad4fcbab66f93fb1af0372e241f',
+            'metadata-4': 'ddf8546553aaeb32905d6d60fbe3d001876f40b41b0c6f337f55978776c2367f',
+            'metadata-5': 'a87cb569e4394aa5ac4b722dc41625d8310e8c994a35b14b7eeafbe5a1c32f0f'
+          },
+          migration_sha256: '8ded9175b78142d2e56dc5dc3f91ae830049409190bd9dc9a158dd14f1006324',
+          original_geometry_proposal_commit: '859ca4643d61d472650dbda5a7c3682556ab78a4',
+          original_registry_preserved: true,
+          physical_reference_correction: {
+            historical_cause_approval: false,
+            issue: 1520,
+            legal_administrative_authority: false,
+            source_role: 'Independently reviewed AAFC named-envelope and retained GSHHG source fit',
+            subjects: [Array],
+            water_classification: false
+          },
+          predecessor_manifest_sha256: '10052f88a3ecdd42d555f05a2d5672c212d2ca9196cff383f8ce7a4cccd7652e',
+          predecessor_release_id: 'geography:review:896bf79dd6e5661dfbbffba60da96fa987b9971af2b884cf52347189861ebe9e',
+          reference_only: true,
+          registered_identity_manifest_sha256: {
+            '082167093c95839c141e63a8e414016b3f24f755cc471bb380e57158ff5c8b7b': 'geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e',
+            '0b7060d963f5c5ecef5ae2bde33b521a3d51bf9490d57ad41eb56cff1554a766': 'geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e',
+            f7d2fd73cdffa5e73ed68033f3c97732a106423106c9a21315c3365187feeebd: 'geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e'
+          }
+        },
+        reference_date: '2026-10-09',
+        source_id: 'source:atlas:geographic-review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb',
+        version: 9
+      },
+      selection: {
+        additive_release: {
+          bytes: 3464,
+          path: 'coordination/engineering/nor-grc-congo-delivery-20261011/combined-selected/release-001/selection-sidecar.json',
+          sha256: '61976a2bf242a02990d60593a7f77d9053ac771abfd91f863df1b2d12aa3df0f'
+        },
+        artifact_consumption: {
+          certificate: {
+            bytes: 68158,
+            mode: '100644',
+            path: 'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/qualified-artifacts/consumption-certificate.json',
+            sha256: '26b505e3131a2513badc45d1552bcf603c24c565bdfb21b0f623fe4e6c7d4070'
+          },
+          review: {
+            bytes: 7379,
+            mode: '100644',
+            path: 'coordination/engineering/additive-native-activation-20261009/independent-native-consumption-wrapper-self-pin-review.json',
+            sha256: '87ab56e1354dd8a8fda532bfa008436abd35c6c506f0e0685eaa2f2f07f59a8a'
+          }
+        },
+        manifest_path: 'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/native-v9/manifest.json',
+        method: 'native-linear-evenodd-first-owner-v1',
+        release_id: 'geography:review:dbb133d7b123bacd1d38253c467891bff656d011000a9f11d369ac9262302bfb',
+        selected_geography: {
+          bytes: 14656,
+          kind: 'complete-world-index-with-exact-encoded-overrides',
+          path: 'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography-bank.json',
+          sha256: '3750f72a48bb9fd498ca129e20e299904239bfe1b4191919fbc89b636234c776',
+          version: 1
+        },
+        sha256: 'd9954fa51d18e4ce785679f920e4b6ac1ebd3cf07ce03fa7e7e674cb2a42faba',
+        version: 1
+      },
+      sources: [
+        {
+          bytes: 8539839,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '85bdc3171a740db0bc756460dab5a50c6c54518d',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-0.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3'
+        },
+        {
+          bytes: 8060108,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '471e45dcd13904489bc434ae5115105fadba7ab9',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-1.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7'
+        },
+        {
+          bytes: 6259307,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '389e463dd5e44894fd221f53db584f55fff330d1',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-2.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf'
+        },
+        {
+          bytes: 5153118,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'e41c8f549f1cb2162f5adb30029bf4800e86c848',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-3.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617'
+        },
+        {
+          bytes: 4835479,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'ccdefbb55c62b317f11e6078cd9291dae5339693',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-4.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c'
+        },
+        {
+          bytes: 5226173,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'cf59e69b02ab2c9ad7344ddbf309a221a8be587b',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-5.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc'
+        },
+        {
+          bytes: 4607953,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '4be02d1d055a66c4e1606bab4f23ecda90350f34',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-6.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a'
+        },
+        {
+          bytes: 4257402,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'c88539c7899a0c257c48fc1a555895904832f0cc',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-7.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387'
+        },
+        {
+          bytes: 5097739,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'eec7163a536245c0249d1821fe81590aba2a1ded',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-8.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1'
+        },
+        {
+          bytes: 5729632,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '79a4f0cd17ca9f7007916be8419c2fa986fe7a61',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-9.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6'
+        },
+        {
+          bytes: 5144571,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '84b4cf537b801c7f6d3840173c49b7e4293a139d',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-10.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2'
+        },
+        {
+          bytes: 5133018,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'fd7d6f9f564a4b9b0ae7a56a2d7eb27e920017d8',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-11.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'd1b2fb15c9427497de740eb33a529ef382b58cb319028f2aa38f5878de4c9b02'
+        },
+        {
+          bytes: 4489493,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'e8360aa55a8398d0fa841b5331febcabdc8588a2',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-12.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7'
+        },
+        {
+          bytes: 5709487,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '44f886df47aa3e313f0c2ce98faea045e2eba8ed',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-13.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1'
+        },
+        {
+          bytes: 4355198,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '2cd05a870d730c598eb463ac8be2300ca5be6e66',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-14.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0'
+        },
+        {
+          bytes: 5180426,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '4ef51307797f81b8cf7a647495f037a089f8b368',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-15.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df'
+        },
+        {
+          bytes: 5213846,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '02d53ca01dc014a3c9481eb1017a89487fc2bd89',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-16.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797'
+        },
+        {
+          bytes: 4948066,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'a2dc24c477fb10da8ebd5a1cff4765a8f34bd22a',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-17.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '1ae1a9ef25c1f71b66084aadf57933132383d4271b888ab38866905da5678af3'
+        },
+        {
+          bytes: 4909063,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '59012653b56da5a394e7692209b257e27883eab8',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-18.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123'
+        },
+        {
+          bytes: 4583022,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '306125db7012a9ac927bb4a169dea5166ef126e7',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-19.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269'
+        },
+        {
+          bytes: 6570767,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'efda4099740c3ef131ef631cdc6b6ecf345f226a',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-20.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f'
+        },
+        {
+          bytes: 6737781,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '28619c3c39b5808aae4b3f459b97c39de8b073b2',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-21.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'd7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7'
+        },
+        {
+          bytes: 4746385,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-22.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3'
+        },
+        {
+          bytes: 4962410,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '371e95033d9c542bbf07c42afe7111074e35f246',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-23.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'd61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2'
+        },
+        {
+          bytes: 4816899,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '4110c75d7d0f5282e0a2bd263b430e8c1e78f0eb',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-24.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c'
+        },
+        {
+          bytes: 4525239,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '16ba4f38251d1bd99ac85f0ae7cca2f0424470f8',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-25.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394'
+        },
+        {
+          bytes: 4608983,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '5d61478ece9042cbd0791eabd2536e1054e26341',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-26.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632'
+        },
+        {
+          bytes: 4863162,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'a6a359c8c566462b280a461b4a5e1591e1f486c4',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-27.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758'
+        },
+        {
+          bytes: 6613963,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'a9e03cb07194a73f643af85d1e6db94abe3b5fc9',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-28.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d'
+        },
+        {
+          bytes: 3353763,
+          commit: 'ee684e3145079ff93f68520e3c17837789be5b0c',
+          decoded_bytes: 12932719,
+          decoded_sha256: '723d16eb63b7f2dcd8260a516eac6571a7ef1eaaf9bff3c926e0c63235b98fd3',
+          encoding: 'gzip',
+          git_blob_oid: 'd3f17ccd8eecca88b16f2bbbf075320b6d555aea',
+          kind: 'selected-exact-encoded-override',
+          logical_path: 'data/geography/part-29.json',
+          mode: '100644',
+          path: 'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz',
+          sha256: 'd7665a1fdf68f0626c7e28da9ac0e40f4e35aaeacdf91bad4ab8e2d77221bc49'
+        },
+        {
+          bytes: 11979437,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '0deb9748357a854c5e7e6179f42d77a47a09ca9a',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-30.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'd575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a'
+        },
+        {
+          bytes: 10086485,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '1b89d7aef660ba0536acdb9b9f7a574b028ea01a',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-31.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e'
+        },
+        {
+          bytes: 10211739,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '6cf41fabbeddb18bbe426038251b86171c715ef7',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-32.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64'
+        },
+        {
+          bytes: 607984,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'e8a8a8e8015cfc31005e85daa49fc2552ef1df9e',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-33.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'd928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe'
+        },
+        {
+          bytes: 1573576,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '18989f4f6b2789057a00eeda6c5c7e51f06e3caf',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/source-restoration-additions.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9'
+        },
+        {
+          bytes: 11393,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '8f0e144d92e52ea473eecc7c2358c3464c648009',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/macro-loose-ends-v5-additions.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1'
+        }
+      ],
+      version: 1
+    },
+    complete_phase_bytes: 299113571,
+    entries: [
+      [
+        'ABW-5150',
+        1,
+        'framework:province:aruba:062a8eed8a63',
+        663,
+        'data/geography/part-28.json',
+        1162,
+        '5bb11dd32fdb444ac06392feb388be1a013611432fe30a117d8283e41da409b0',
+        '0ed7d1dbc3dcce09471b96c66ba8b862bef9d7c494a4f9b43d725742d68c57d5',
+        '6f8b8a8bc511c2a773ba30b2e36ba459a015eeb4358a0de96d9e2d63b629ac4e',
+        [ [ -70.0611, 12.4177, -69.8768, 12.6321 ] ]
+      ],
+      [
+        'ASM-4998',
+        2,
+        'framework:province:eastern:d7fd8ac945aa',
+        1636,
+        'data/geography/part-28.json',
+        1205,
+        '83118400daf403378428ba5afd840f2b782a6cd92af1c5fbbc2df71cd3442223',
+        'a31e86adc7fc7b41b4da097cb82b3a4eb52caf72475a2ce6089c4557143cd348',
+        '6e970d614c49998063b89158088ee4e0cb996cb2fe997cf5fafb73c6699509b8',
+        [ [ -170.7436, -14.331, -170.5521, -14.2296 ] ]
+      ],
+      [
+        'ASM-4999',
+        3,
+        'framework:province:manu-s:2bfa7d96db32',
+        2882,
+        'data/geography/part-28.json',
+        1206,
+        '0223d1589a65f383c27efae13b2b73067d3e7547d3ec7a0addd058996eb55c04',
+        '29c116078c29195508e3a304e693b6dc42b1725beb679cb4a704e17709de2157',
+        '1c0499fc54cb4ce491557b43042f819952ee6e737a864edce50091a2eff3ffd8',
+        [ [ -169.6873, -14.2722, -169.4188, -14.1574 ] ]
+      ],
+      [
+        'ASM-5000',
+        4,
+        'framework:province:rose-atoll:d2143af2cd95',
+        3975,
+        'data/geography/part-28.json',
+        1207,
+        '977bda06dc9283092cdf4ec1eb33a95448eeb871fa77674a380662dd1d1deebd',
+        '0f287a05ff426f20ba7e3f7cf726b77831b89b92d6332f5f31f4fff9fd08d4f0',
+        '210ff0df795b99a1136dee7a556d211aa3714b4fc3bd4c10e4c29dc560c28a00',
+        [ [ -168.1731, -14.5495, -168.1397, -14.5209 ] ]
+      ],
+      [
+        'ASM-5001',
+        5,
+        'framework:province:swain-s-island:069443c54686',
+        4448,
+        'data/geography/part-28.json',
+        1208,
+        '99dbe57cd99f028f37e60a3a2462db38c0cc19627cbc41de088535137ab88c44',
+        '6ea2f9a3e35fa87810f6525864b412a5043d9d0f48f55468f3eb586f749fd56c',
+        '2cfb1074776bf28dfc0bba76134839e8d81231d4cc35da170e248c3fb5bf2a1f',
+        [ [ -171.0896, -11.0661, -171.0661, -11.0469 ] ]
+      ],
+      [
+        'ASM-5002',
+        6,
+        'framework:province:western:6b808b7a2306',
+        4943,
+        'data/geography/part-28.json',
+        1204,
+        '1b08699d3662cebcbfc753de694447416361274f6866437d1d76eedabe0f5333',
+        '9ed12385dca29371d55dbd90ee3519ad5a8a486122801865fc9594263afb7ea3',
+        'c39a2371b8bdbfc0ba08beaf34970a12285987b012d313d2618234724d32d9ed',
+        [ [ -170.8469, -14.3747, -170.6926, -14.289 ] ]
+      ],
+      [
+        'atlas:city:ARG-5493',
+        7,
+        'framework:province:ciudad-de-buenos-aires:bd2311b3ca38',
+        1334,
+        'data/geography/part-28.json',
+        1311,
+        '39747dafc7df28dc287ba24f7127ed67b7228cb9d168ba9a56d1d5d91a1a3a76',
+        'd2ee82025fca8e83e9c426933dbdd37abeb48ba902357c36febab9774f45cb34',
+        '55587f52f96694af62a1435a44d1e7b2f05c5b363a6de017313dd0bcc54eeb78',
+        [ [ -58.5304, -34.7455, -58.2794, -34.5278 ] ]
+      ],
+      [
+        'atlas:city:CHN-1819',
+        8,
+        'framework:province:shanghai-municipality:fdd8da3fb214',
+        4190,
+        'data/geography/part-28.json',
+        1288,
+        '4f018c36a6a5ab607b519bfd94fc43b522f52358b3c1bca96b38a58b6eb332e2',
+        '14b4abaf2078b6e2c51b4ff39e3c8c24235fa1045b3fe421fb4a39e27d9e4f31',
+        '2a566da3e25e6aa554be14b48dd56f0aeb007a3706604ff93151b87764ca54e8',
+        [ [ 120.8298, 30.6784, 121.8808, 31.8348 ] ]
+      ],
+      [
+        'atlas:city:DEU-1578',
+        9,
+        'framework:province:hamburg:8537d1580ff0',
+        1970,
+        'data/geography/part-28.json',
+        1301,
+        '285e8507492fb579faefd399182e637d9be21261114c3397d795600b825ab29c',
+        'a11191c94d1d034a450742fe3359abb60ca27c8a52febbf31ed516e64e07b6fc',
+        '740d04db4605b17bcfc4848ab75eec9426b88fb0386b9d6b9db19c8bcc1a285a',
+        [ [ 9.7301, 53.3953, 10.326, 53.7374 ] ]
+      ],
+      [
+        'atlas:city:EGY-1533',
+        10,
+        'framework:province:cairo:10f94c7924c4',
+        1136,
+        'data/geography/part-28.json',
+        1291,
+        'c55caae6eeedb558f40c70442074a40150230daf51c08d2d20b02cd513c7d44c',
+        'd85274ce857334fe1eab1db187c8e56646bff01f02ce5ab14ea775b0c9e3c56a',
+        'dd64a797f8abebd05aa6833049e717c882014f43c731f9dc9949cc6a92e66932',
+        [ [ 31.2276, 29.7337, 31.907, 30.2727 ] ]
+      ],
+      [
+        'atlas:city:EGY-1543',
+        11,
+        'framework:province:alexandria-governorate:ca2b074a8661',
+        530,
+        'data/geography/part-28.json',
+        1294,
+        'ae7618700ef8d68a4df705c0b811366302e363a3c1c79040729975c710b28a59',
+        '600ba6b1bf5b6416bb78ee13d4df7496a440bd583fcab94c4180d8f54b508000',
+        '14c3f6973812e60ee4f10141242ea03bb7767206ba0354df7beccc0932a77d15',
+        [ [ 29.5181, 30.2628, 30.0885, 31.3117 ] ]
+      ],
+      [
+        'atlas:city:ETH-3133',
+        12,
+        'framework:province:addis-ababa:bbd5c61c9691',
+        428,
+        'data/geography/part-29.json',
+        1470,
+        '24ed62fe712869d808095312cac385caaeae5339bcbdb14e19c5d7968527104a',
+        '2a096eeae598993093b319034f41dc22149d837e4c3d020a1999bfb6aeb7ce8e',
+        'fb20de56d44638091f57c41d0e56d1fedc33d0818a8c7a306bb6a3b99047dc13',
+        [ [ 38.6437, 8.8345, 38.9071, 9.0992 ] ]
+      ],
+      [
+        'atlas:city:GBR-Greater London',
+        13,
+        'framework:province:greater-london:c32997736242',
+        1888,
+        'data/geography/part-28.json',
+        1295,
+        '1143fc397d85d3876ab7ba83825fdc70ed6bfa364865da65ce8f029c0ccb2492',
+        '7a4de539a7e2d7617ad3a34da5f9a19443b69684cb08a017ae9bf9d6a51f3a88',
+        '89bc1f9276abb925944cdaa561b8b817f48281eb382aa5c3c8cf6f6c2ef101e2',
+        [ [ -0.5097, 51.2868, 0.334, 51.6919 ] ]
+      ],
+      [
+        'atlas:city:GMB-2153',
+        14,
+        'framework:province:banjul:c80b5ee73d87',
+        795,
+        'data/geography/part-28.json',
+        1313,
+        'f2c14dc79522136bd6e325badfc50b926db85bae8076fb9063a780d309677d29',
+        '982a5562d618022213fba947fa7171ca76665e11e240dd8f3bde587906acd1cd',
+        'ed591101b54aa98d71342f20a8228e46c8752146a9190aa476c4bf581894ab7b',
+        [ [ -16.7968, 13.3184, -16.5715, 13.4846 ] ]
+      ],
+      [
+        'atlas:city:HRV-1589',
+        15,
+        'framework:province:grad-zagreb:99f12226102e',
+        1869,
+        'data/geography/part-28.json',
+        1302,
+        '3991ab45f6eb3d02447c93b85a680a3c9771db6ecf82450eb8cb3f7b64a9ff78',
+        'e7318750ad158c8aa3dc67f46749d7609d95c111effc3a94febba94b434c0b87',
+        '817588fdf11e8ff714a223e28f250e6891f1394ee021a8bf6ff6ee4436bbfb7b',
+        [ [ 15.7722, 45.6146, 16.2406, 45.969 ] ]
+      ],
+      [
+        'atlas:city:HUN-3160',
+        16,
+        'framework:province:pest:69a3c0d745ac',
+        3629,
+        'data/geography/part-28.json',
+        1305,
+        'bf291f2da61100fdebf6771b9b1d5926860ec14b8f3e4fa4de1c5c2453e00ad1',
+        'f81e35a6df0e994698e65a8081faf9899d2171d4d25d35bb8c899931329d465d',
+        'd136aeadbf487caf2f35745235c2a7d4cb6ce283b330faf9ea7115a7aa9c1da2',
+        [ [ 18.9288, 47.3497, 19.3349, 47.6131 ] ]
+      ],
+      [
+        'atlas:city:IDN-1227',
+        17,
+        'framework:province:jakarta-special-capital-region:533c2d0c0661',
+        2210,
+        'data/geography/part-28.json',
+        1304,
+        '23e6cb3c1567226fc90f88f844fdbc0203a43133fa4f1d48bfcc2c7ba8dd19f7',
+        'd0169aa62ab3620c2b3ff0c2f4fbd399a79370b1d9e3d427af317b1b80444370',
+        '0885f15dec040ef85e8b81abc59ac570b2918ef29cb0ec37a5762be352cb0539',
+        [ [ 106.6862, -6.3708, 106.9719, -6.0892 ] ]
+      ],
+      [
+        'atlas:city:IND-2428',
+        18,
+        'framework:province:delhi:9f27daae7fac',
+        1471,
+        'data/geography/part-28.json',
+        1297,
+        '9d5a23a16e06ce1a9362927325cf90567abcc9bc2005426ffca2f4416b2d4a96',
+        'f1d0a9f354eddb7d502deec02fff09054f37521ffc9af095eec623da7e933b94',
+        'ab154e9779fe05552f01766015000bae154828053a4823871011ac520112f5e1',
+        [ [ 76.8395, 28.4045, 77.3435, 28.8754 ] ]
+      ],
+      [
+        'atlas:city:IND-Mumbai',
+        19,
+        'atlas:province:atlas:city:IND-Mumbai',
+        390,
+        'data/geography/part-28.json',
+        1280,
+        '998fde7c938b8842981424a47ac0f00bfefeb4d898e619a2a2cc3a327b54df6b',
+        '7980e7644f3717052a1f462c8979c00fc282df26f14cc0fddb7ddf74fd87a8ff',
+        '24c9a821482644f15804e2c2cfd9e1c58bfc8c8f9597d702f22ed4abc1b5a3bb',
+        [ [ 72.7759, 18.8942, 72.984, 19.2693 ] ]
+      ],
+      [
+        'atlas:city:JPN-11100',
+        20,
+        'framework:province:saitama:242145162816',
+        4023,
+        'data/geography/part-28.json',
+        1320,
+        '92f5641a0231093ec3e73e376a6b1934db30508c59f1b871cd97b2dae04190a4',
+        '1f26126680871a3783323fb06e27f3dada745d21ae507f49a855ca6f409f6d23',
+        'a184dd4221db4379605abef6ca2de885e00588e264263a55de82fbd9e4d03d9b',
+        [ [ 139.5411, 35.829, 139.7545, 35.999 ] ]
+      ],
+      [
+        'atlas:city:JPN-12204',
+        21,
+        'framework:province:chiba:998c7e444a8b',
+        1288,
+        'data/geography/part-28.json',
+        1321,
+        'a89536eb5f670146ccb27e6eb4ecec0a146e9e8f0373aeb22abe0b71e76d1e6d',
+        '471f0ea528ddb91a731826dd01c64ffaff2647e726d3be569466446741f99ebf',
+        'c5e045121277620294b838a9b43029ba449fd8be31de74cac921b1ae88b756f1',
+        [ [ 139.957, 35.6638, 140.0896, 35.7997 ] ]
+      ],
+      [
+        'atlas:city:JPN-1860',
+        22,
+        'framework:province:tokyo:c68d8c85dd27',
+        4622,
+        'data/geography/part-28.json',
+        1296,
+        'faca0c281a388bda1ebf74fd944720d4e4d97611496693401b79086e2f6f8739',
+        '289de1d78fe0e0d3b6585b30654bad3c84202abdc42f47030a64495c828960d5',
+        '843eb0de6c9381497d2c586abbf68ef7594a4bc77817e0113abb9b8c09bd631b',
+        [ [ 138.9439, 35.5024, 139.9187, 35.8972 ] ]
+      ],
+      [
+        'atlas:city:KEN-1196',
+        23,
+        'framework:province:nairobi:c44fc76c13bc',
+        3166,
+        'data/geography/part-28.json',
+        1306,
+        '470b058186a6b74f4e237d626e9ee199c48a919fac06c84baf1a9b1642033682',
+        '421c3decdeac1dafe4c173c1947f9a4d62f1f9740f9317f2f17cd3aa8e44321c',
+        'bbc73814f3df469680195db709361d522a6354e5d92a6140c83623914d96bc42',
+        [ [ 36.666, -1.4305, 37.1021, -1.1582 ] ]
+      ],
+      [
+        'atlas:city:KOR-10',
+        24,
+        'framework:province:busan:ab3a002fd5bb',
+        1106,
+        'data/geography/part-28.json',
+        1281,
+        '47872695b9808fcb5b37116bd75d2d0d6bd14e13754a3d6f47d5fd04d4510b45',
+        'e8eabfb2d93531c336ab36b9beece77596cbd7740911557709fefce35a45a526',
+        '5a72047d9a8de802e83eda0ab2e74fafd2b475faa771c1dc7a18c1ca6512efff',
+        [ [ 128.7892, 35.0116, 129.294, 35.3795 ] ]
+      ],
+      [
+        'atlas:city:KOR-11',
+        25,
+        'framework:province:seoul:58f28921848c',
+        4179,
+        'data/geography/part-28.json',
+        1282,
+        '0c4e5ae6d0e19498b88e99609d4d199d811c5b7e66a636d058cd1266af96af31',
+        '4c4165d33c6ea0b6eac12e799a216b65260ac699d5522fed5c09677a2986e3dd',
+        '5c293ae99c71799a2a8b184592bd5f3259c2183f67d88b72d4759ffca4018b02',
+        [ [ 126.7701, 37.415, 127.1834, 37.6906 ] ]
+      ],
+      [
+        'atlas:city:KOR-12',
+        26,
+        'framework:province:incheon:67b65b635e5a',
+        2157,
+        'data/geography/part-28.json',
+        1283,
+        '939c81dd6b18dc2fc096aa3b8590c2cbbfc73c7b44f08b28136894c759a29f7c',
+        'ff25c3c979434b656b567655651e8b09374c427c745c6b52b84e598bbc6cec97',
+        '53e1662c3107f113442df300d7bcf400cafa89d01757ba9b99d42d4a5d856a6b',
+        [ [ 124.6127, 37.0854, 126.7855, 37.9834 ] ]
+      ],
+      [
+        'atlas:city:KOR-15',
+        27,
+        'framework:province:daegu:b353f3bd8b8b',
+        1424,
+        'data/geography/part-28.json',
+        1284,
+        '5ba6619ec6b7f6a80566d9cdddc8e844045ab2e39091863b85330df5f9c1c055',
+        'b75a113aebcb1ccded2ca70b3b6900e9cf3915eae4c6f316aa86cd243234c40f',
+        'd92ae5763f54b78398a3f9675e87e64c826ff2bc93e62f639b61be2e340325c4',
+        [ [ 128.3492, 35.6078, 128.7651, 36.0133 ] ]
+      ],
+      [
+        'atlas:city:KOR-18',
+        28,
+        'framework:province:gwangju:442ef0b1f925',
+        1940,
+        'data/geography/part-28.json',
+        1285,
+        '6e996984c82a7b15f77639d794616aecec55c4f4bfd498bc914d0a486f26b8da',
+        'a7a7b99d9ebba6fc66c6fc60c7d2982a67506ce2b5519fb0c3bc47c5acc9fd03',
+        '1c9303198602f45df7a1a834a7591fc79d1538085ea1cc68e022298d672260b8',
+        [ [ 126.6557, 35.0508, 127.019, 35.2542 ] ]
+      ],
+      [
+        'atlas:city:KOR-19',
+        29,
+        'framework:province:daejeon:635fedd987e7',
+        1425,
+        'data/geography/part-28.json',
+        1286,
+        '4cd4c78498ff70448304915dcdf77ece838f929cc047aa12ae92296d63aded19',
+        '6b3eed2694470bac088904dae40f00db7556816c1f52888d1e7b9f4515a7bfab',
+        '3e912017b6d56cc1729f75d7320c2bd80151b3bfe5ff68e8a0d720fb7d8126f1',
+        [ [ 127.2525, 36.1786, 127.5615, 36.489 ] ]
+      ],
+      [
+        'atlas:city:KOR-21',
+        30,
+        'framework:province:ulsan:b9b11edfa612',
+        4709,
+        'data/geography/part-28.json',
+        1287,
+        '1929a00379ff16e94b3f92fe96d64cc8ebecf70869d11c853da79555a58180e0',
+        'f5c26d868a2b5857399345134ca9c9de0cfec112f5381af176f687315936eef1',
+        '6ce2dc8da532eef1f87b377d8417ebd63dd4b2050ca0aaa69d077a4b9e339611',
+        [ [ 128.9771, 35.3227, 129.4636, 35.7127 ] ]
+      ],
+      [
+        'atlas:city:LAO-3283',
+        31,
+        'framework:province:vientiane-capital:1213542d199f',
+        4819,
+        'data/geography/part-28.json',
+        1290,
+        '7b8235fb4edd8743e9bf44bf8e001eaac1635594c5f4ebebc38efa51c220ef01',
+        'b819d5532a8c6c02c8468af69d4f59e65bd8d5b8806d34c66a5967d5db5450c4',
+        'cd352a0daeeb162a4b1853c899649a20927f93e889843ce2add825f6a3b6ddd6',
+        [ [ 102.0116, 17.8048, 103.1527, 18.4391 ] ]
+      ],
+      [
+        'atlas:city:MDV-5234',
+        32,
+        'framework:province:male:5100c2277c07',
+        2852,
+        'data/geography/part-28.json',
+        1319,
+        '511bbc9718618ff28783628896fa3a438431240819094544c983052979c889cc',
+        '97f9b5fff076bc92666e1b6ca37644289b54deba6e2449cf7030955048b56fa3',
+        '49c37a5fc96b941c354433875e1779da0426d9ce186956e344b462b7d67e85a7',
+        [ [ 73.5006, 4.1707, 73.5469, 4.2211 ] ]
+      ],
+      [
+        'atlas:city:MEX-2727',
+        33,
+        'framework:province:distrito-federal:06d2ec7bc220',
+        1538,
+        'data/geography/part-28.json',
+        1300,
+        'fee90f16f6fcff26abe798271840b2f1abe0dfab68ed01a534764123e1c6caca',
+        '05d140f52a0ebcf103b8c4ffb4d42524787f36662a26418607081784df8e5755',
+        '08d2faf4e7203698ebd218a547bd85e64c2358dd8e43a7d16377466368cb8f17',
+        [ [ -99.3649, 19.0487, -98.9458, 19.5928 ] ]
+      ],
+      [
+        'atlas:city:NER-94',
+        34,
+        'framework:province:niamey:680755f862f3',
+        3266,
+        'data/geography/part-28.json',
+        1309,
+        '4ded511bf34777ff802a1ba5802c45e4f460dab39f7874702c80db4dabc9c398',
+        '9a12603d1d15889c46436f6ed7e683f8fa995debd041c437001632db542d154f',
+        '6989a184816c383c494f9c97bf410148c9fc068c8ccf66850ca08d7b9f77a1c1',
+        [ [ 1.9604, 13.3929, 2.2813, 13.6457 ] ]
+      ],
+      [
+        'atlas:city:PHL-5522',
+        35,
+        'framework:province:cebu:0f4ebfdeecb5',
+        1204,
+        'data/geography/part-28.json',
+        1318,
+        '592cb3e29f3123a904d602395c33436383ec6b2fb20b7b0f380af5ab2e341f45',
+        '83a03a10074cd484b2c41f5f06bd0fc05f43d057f8d79216eacc75806bb6131a',
+        '1f96fa43f7ff3985332894396561930e8b991fbb469a7c24069bb51d62c1681f',
+        [ [ 123.5878, 10.1785, 124.0738, 10.6536 ] ]
+      ],
+      [
+        'atlas:city:PHL-5526',
+        36,
+        'framework:province:iloilo:c31be84998f3',
+        2148,
+        'data/geography/part-28.json',
+        1316,
+        'f995b8902555375654573bf2c001cb1a0668f05426235e8b47e4eae0235d15d3',
+        'd18c2036c8884e9b0030ea6a617a38ac5ba0e7d19b6e32edb9946dbe3771641a',
+        '793f212e9a44d0d7c7003943d4d4612a7bc41f3754ebfff3451cc224f7399a99',
+        [ [ 122.201, 10.6561, 122.7898, 11.0581 ] ]
+      ],
+      [
+        'atlas:city:PHL-5527',
+        37,
+        'framework:province:cotabato:3f9d63fbbfbf',
+        1388,
+        'data/geography/part-28.json',
+        1317,
+        '913037ce3d84c464e0086d978cf9db7f0db8793f54215abab7407907386cf688',
+        '36b26ad9e56a87d1269f563b329199d93732110e702b23e8f4b30a4db6378186',
+        '9dbbf79fbfb4ddd6645470dbe3d906710beb07dedb3c44caace3c2543e2b7056',
+        [ [ 124.1713, 7.0296, 124.6441, 7.4386 ] ]
+      ],
+      [
+        'atlas:city:PHL-5531',
+        38,
+        'framework:province:misamis-oriental:ddbfce422dc1',
+        3046,
+        'data/geography/part-28.json',
+        1310,
+        '83bf845bc17861d4f5f00a345f3bc307afc76e172e3ecc43c0f87104ae5c9623',
+        '760b5f0043dd794be1d50a87cb64638ba442d46a28812ab8408ffc0943f346f9',
+        '6b8f5f158b1b8b52d569469d7c1a609a62c4f92c5ff0f344ea2b4e0fa7c55ac6',
+        [ [ 124.4607, 8.1601, 124.847, 8.5636 ] ]
+      ],
+      [
+        'atlas:city:PHL-5536',
+        39,
+        'framework:province:camarines-sur:53c332ac9f2e',
+        1146,
+        'data/geography/part-28.json',
+        1315,
+        '33c2044a01ef3d08da628037322fb24722a146a55bd635805aa74a5bfe2459b5',
+        '204989e2118e9978bce495836c6c4bdd2c0884f986d5996fed565eea0eadf638',
+        '6c816e961775aa114eadd10ec76aeb593afee2b9d7e6addeab703e293a3153e9',
+        [ [ 123.1372, 13.5696, 123.3765, 13.6744 ] ]
+      ],
+      [
+        'atlas:city:PHL-5537',
+        40,
+        'framework:province:isabela:7369f63e7720',
+        2180,
+        'data/geography/part-28.json',
+        1312,
+        'b5f1bd4d1bf173e4db672e0cc3c3a2f8e4896252c26d9c2a04dbf8f092e5c9fe',
+        'c238da8ad0696bdff9e382a97210ab8d077228997c895d9b7789c557e49313a7',
+        'ab5e1a4fb90d3d4db05ed2376c6747fb318b38d9f17d7a5ca1b3c578f7947d93',
+        [ [ 121.3387, 16.5758, 121.6109, 16.8389 ] ]
+      ],
+      [
+        'atlas:city:PHL-National Capital Region',
+        41,
+        'framework:province:metro-manila:a6942e7523bb',
+        3008,
+        'data/geography/part-28.json',
+        1308,
+        '67baec28c3ea70428104f7fe75c0cbb523d39077dfffe76fcaadc8ca80f251ec',
+        '7d2c62f277f00dcf7fba8806ce0fa48ed9c6fd4aa1e973ee6a773d1e08ca8bca',
+        '238ca2883e9b8130c6612ae8a52054eba4ad00c3a0e947e885572725e7d4868f',
+        [ [ 120.9065, 14.3518, 121.1501, 14.7826 ] ]
+      ],
+      [
+        'atlas:city:PRK-3305',
+        42,
+        'framework:province:p-yongyang:a859bb70265d',
+        3550,
+        'data/geography/part-28.json',
+        1293,
+        'c1250c6189b7e2b1377b6336c159447ba6db2f433d9b6da7d14cecf4b93ac92e',
+        '06893a712536760b32c16fc9ac6ea1e06ef20e72b3bf9015648fdc25d9e1f626',
+        '72c7963aacc5e7d89adec6c29ba21a5aefbc8b55b861c0de5102d9dc83a738b1',
+        [ [ 125.5219, 38.7044, 126.3894, 39.2814 ] ]
+      ],
+      [
+        'atlas:city:PRY-4837',
+        43,
+        'framework:province:asuncion:5f1c1189a91b',
+        681,
+        'data/geography/part-28.json',
+        1314,
+        'edbeddf14bbcddd070c68ca0c4fa788587d48c0bdb9f7b62573c1944c98aabec',
+        '537db0c30e7dcbe9b657d44de37d5b894b875366225b65c93ffb801b76815527',
+        '3473f8feb823c62b4440d4afd1051ac12eb5c33c896283f7e857ec53b16b609f',
+        [ [ -57.6739, -25.4018, -57.5164, -25.2239 ] ]
+      ],
+      [
+        'atlas:city:RWA-3495',
+        44,
+        'framework:province:city-of-kigali:e6f892da1ad7',
+        1330,
+        'data/geography/part-29.json',
+        1471,
+        '5149d789d2ff8d1b530ea4b53e06b7435e717a8b985d195f3565952f51fde43a',
+        'e485321cc50d1c06c3d5aa191b275498e98a80cdea2b5c76f141a1f4d350599f',
+        '3bf467d44601467fcc57e2a9c5df1943c16b87432d68577126eca1c4951cf5d3',
+        [ [ 29.98, -2.0756, 30.2772, -1.7839 ] ]
+      ],
+      [
+        'atlas:city:THA-416',
+        45,
+        'framework:province:bangkok:380e2af3a4cf',
+        792,
+        'data/geography/part-28.json',
+        1298,
+        'bc09414deae67d9243129dca5d684f30e2412897152ec97e283052fc97bcffe6',
+        '2d7cedf1244463469101a3002c044f8fe07d947e87c59ec62fa835adf4091bc1',
+        'c3119f6145ed64fb9ee35a733d98868011df8b2d804a4c8578e82c0ef6e9b388',
+        [ [ 100.3279, 13.4934, 100.9385, 13.9546 ] ]
+      ],
+      [
+        'atlas:city:TUR-2265',
+        46,
+        'framework:province:istanbul:e5fc55544189',
+        2192,
+        'data/geography/part-28.json',
+        1289,
+        '3ff25fc912e6275e4369efd16b9dd9286bf58a94fb436b390c1f30315ea58482',
+        '2a6503dcbb5b98debd3fb2fa1362e07ebd616fab2c825c86e175b9ecd6b8d527',
+        '4a682bb9602ee996250b83d1eeab548ffd06f7ce1e4ec8596e8a37d49bff2f60',
+        [ [ 27.9724, 40.9067, 29.4014, 41.5906 ] ]
+      ],
+      [
+        'atlas:city:TWN-1156',
+        47,
+        'framework:province:kaohsiung:9ac7f809e02d',
+        2344,
+        'data/geography/part-29.json',
+        1477,
+        'e9cea8d4506d331002783df6eb1bb39d2ed678e82b991dbbc111c77e9649c450',
+        '34c4aab0df3f6730c5246fb36d212b8f817e7282151292a60f9e34fb9805ea80',
+        '158cf3bd9325ced0cd1fb7d9a234731ea7d4d9e7bfed7b319173efeaa5064470',
+        [ [ 120.1751, 22.4769, 121.0488, 23.4717 ] ]
+      ],
+      [
+        'atlas:city:TWN-1160',
+        48,
+        'framework:province:tainan:daa3787a9508',
+        4472,
+        'data/geography/part-29.json',
+        1476,
+        '07f30a8b7c40be9eeed3d2efd2dbf83d7b0a4380cfd3ad506bb214abedc533d4',
+        '66156addd301412200def5a4edf12a4536379dc28f38132ca3585cb789004918',
+        '9d5e1f2121c34701792a6cc33ed07e87a9fefa157e3552daa8b7bc6c15999a8b',
+        [ [ 120.0369, 22.8882, 120.6535, 23.4137 ] ]
+      ],
+      [
+        'atlas:city:TWN-1161',
+        49,
+        'framework:province:hsinchu:943def688ae1',
+        2080,
+        'data/geography/part-29.json',
+        1479,
+        '60c0e5300be9c47d31c4530f95451498385b7081178b6077077f81b9135110c0',
+        '5a565e336db941f15d28e26842d78a73aaeb6466d733ac628396585969580997',
+        '2942cce62ad4d0a59de6d2c1eee1800bb680fdc6b4ae583f3d0436212e51c952',
+        [ [ 120.8794, 24.7126, 121.0297, 24.8532 ] ]
+      ],
+      [
+        'atlas:city:TWN-1164',
+        50,
+        'framework:province:keelung:f52fdf90454b',
+        2393,
+        'data/geography/part-29.json',
+        1478,
+        'c93989f9d61bd0b376805ccd343f39911c38c8a1775018954810e523cfe4a546',
+        '38314f8d61d883d92e5bf00389092f42e1a1a101514a9ee66842257f1ba3fc9e',
+        'e31c4404e4a7b6eab3c156b9b44a9f910b4646f11eaa85b3f2114e1574a3376b',
+        [ [ 121.6269, 25.0531, 121.8071, 25.1768 ] ]
+      ],
+      [
+        'atlas:city:TWN-1166',
+        51,
+        'framework:province:taipei:ce89ac0665e5',
+        4473,
+        'data/geography/part-29.json',
+        1472,
+        'a87c9d2cc36dacfd446fa1428cc552d13a77295c0fcccc8fa26b9fed0d006a44',
+        '321270807bd7fae148a7df173620b9bff725c61cc0a20de2992377e7800654a2',
+        '60f5224dff7b793aedf29ff1b3c627f8f4a48f5f2197e63a63c805fad77d5e10',
+        [ [ 121.4589, 24.9603, 121.6659, 25.2102 ] ]
+      ],
+      [
+        'atlas:city:TWN-1167',
+        52,
+        'framework:province:new-taipei:e9d6b183bd3a',
+        3245,
+        'data/geography/part-29.json',
+        1473,
+        '4990fdaf3b5951889b938d8f39ebe329f6099914e70d915175b69ca78d1aa108',
+        '27337fc0c877ac00d01cb4b03ae8516b6699621b7756791655eb689f04778cdf',
+        '85992ec2efb540e1beca8b72ab9d6c35c8d505fda3cc1a0052d1fe0c3b2e45be',
+        [ [ 121.2827, 24.6732, 122.0047, 25.2985 ] ]
+      ],
+      [
+        'atlas:city:TWN-1168',
+        53,
+        'framework:province:taoyuan:37d804afabb2',
+        4501,
+        'data/geography/part-29.json',
+        1474,
+        '2c45103abb32901d70432abf1960a74e6a2b867407074ebf1b3d6433364e7f13',
+        'd0b13bde108c8fa6621c3c41a71ce7c155c447ea9249d233c024109e91066a8b',
+        '9e3b9a09ebc5bb7eb012e2a8efa3ef1b4c8633c7b03291c064d3785d3f471c09',
+        [ [ 120.9858, 24.5866, 121.4799, 25.1221 ] ]
+      ],
+      [
+        'atlas:city:TWN-1171',
+        54,
+        'framework:province:chiayi:bd88e85c404b',
+        1287,
+        'data/geography/part-29.json',
+        1480,
+        'e52072042ca9e36e4c7a3a0fa391a7457c3dffd987ae4d3b1f5bf603d1a45e9d',
+        'f1f4c3e41b2c8d243cf21936c8f9080f0e52d3d5fdb3c0767480d52f76ba036f',
+        'ad611f0723a548c2f309622cb09b6a74b3bccd9545597eb0e9a556b637447c25',
+        [ [ 120.3894, 23.4396, 120.5094, 23.5183 ] ]
+      ],
+      [
+        'atlas:city:TWN-1174',
+        55,
+        'framework:province:taichung:77b1f26a61a3',
+        4471,
+        'data/geography/part-29.json',
+        1475,
+        '2943c6c1b6ac58ce7567bab41e3e5fbf66fd753efa693118cbce68c893ef4e51',
+        '62d429b78c17294e57920fdceef6912cfc3d644d0cde0860db2981e24d6f645e',
+        '71e7c925bd93aa97e68a6d7ac6ffe19e12487cf3dc454a5e7b87a56372f8653b',
+        [ [ 120.4683, 23.9986, 121.451, 24.4415 ] ]
+      ],
+      [
+        'atlas:city:USA-New-York-City',
+        56,
+        'framework:province:new-york:918b3a796b53',
+        3247,
+        'data/geography/part-28.json',
+        1279,
+        'f3332e227a9547005226599b409ce1b3c7bb1260d002596884e5becc43bc1b7e',
+        'aba661c0d67b02558293bb1326d9b089f4836fb25be872afc412a590e5d8d8a0',
+        '4fbf5f9d6b627978a8ec31252018c61177e127c6f8e6e50b7ecdaa6d7666b804',
+        [ [ -74.2606, 40.4961, -73.7016, 40.9176 ] ]
+      ],
+      [
+        'atlas:city:VNM-462',
+        57,
+        'framework:province:hanoi:eb9b6537031b',
+        1976,
+        'data/geography/part-28.json',
+        1292,
+        '620aebeca6a5a199d7cff102710641e073f0f7b827d64b2c4c671df27ab225e0',
+        'eb4924a15382711828968f836c60d2a5e8695b9a26f500d24d8413e2dcd529c9',
+        '4fedb053f99716360cb7d8c223efeb7cc62a799b3ae5f8f64c170743e76461d9',
+        [ [ 105.2849, 20.5653, 106.0388, 21.4201 ] ]
+      ],
+      [
+        'atlas:city:VNM-491',
+        58,
+        'framework:province:a-nang:34a2c90f7741',
+        406,
+        'data/geography/part-28.json',
+        1307,
+        'd9321e6cb4921901ee54a60427f349a75d15a26ba918503bc17f3971395e5263',
+        '84ebcf97607e7e77c28858be3f49b57751fd2556c7c3d8f70dada8d34341c3f1',
+        'c35af7418df8a9b57059ae7a24f8c310ac3d21c4efd77d995709ae9b591fa4a3',
+        [ [ 107.8188, 15.9189, 108.338, 16.2143 ] ]
+      ],
+      [
+        'atlas:city:VNM-501',
+        59,
+        'framework:province:ho-chi-minh:5519045dae44',
+        2055,
+        'data/geography/part-28.json',
+        1299,
+        'f7db6034facebafd663e06fb6000f1f5c67abc8e78d8ca4e9875fb695292b3e9',
+        '6321340805973c06075395a6ccb3d7f463c9921d4457cf296ed6e43c32b63cf7',
+        '85fbc5a8af976e34a25c0a4ce2c01030ff9ae73faa1a79965817821b0a972c09',
+        [ [ 106.3568, 10.5762, 106.8818, 11.1425 ] ]
+      ],
+      [
+        'atlas:city:ZWE-525',
+        60,
+        'framework:province:harare:8fab9cec64d9',
+        1979,
+        'data/geography/part-28.json',
+        1303,
+        '4989ba69d29d70b9894f1466c8d084fb3e467ebe718bb28546ff9ee9c408e50c',
+        '5c90e0e843d00bf0cebe22a1c54bb742463d56b06c3b9f2096f1bd9899f06fb7',
+        '18e3ff77e35bfdb837ca385c24992aef5aeaa83d27dd931b0049e9959278a3eb',
+        [ [ 30.8774, -18.0498, 31.2203, -17.6656 ] ]
+      ],
+      [
+        'atlas:coverage:ATC+00?',
+        61,
+        'framework:province:ashmore-and-cartier-islands:47246a593bce',
+        673,
+        'data/geography/part-28.json',
+        1249,
+        '395d92394a6d040776011758de0fbd343b0cd0c54f41a16211804af324b50e2b',
+        'f22700d701850892442919998873bf32f08fa0942609c32900a9c7a2f03c7b55',
+        'e99b3b0082d7482db4ac71957fc8376ca90b536308f1da033a5447e44a4b1ee1',
+        [ [ 123.575043, -12.438572, 123.597748, -12.426609 ] ]
+      ],
+      [
+        'atlas:coverage:ATF-5916',
+        62,
+        'framework:province:archipel-des-kerguelen:0186c2974b8f',
+        636,
+        'data/geography/part-28.json',
+        1228,
+        '0bc766fa25b88cf06292c3187533f778dc14de3ad69fe828b1cf9a8a63968904',
+        '92edcc33555dd9fc1d2cabffcdb13f5979b65a529e030651ebc3c895107c7703',
+        '7d10af79ae99cf53a251f2e8723b6fa53748050c13a454806e7e3d67ce3659f0',
+        [ [ 68.610118, -49.721612, 70.568533, -48.566664 ] ]
+      ],
+      [
+        'atlas:coverage:ATF-5917',
+        63,
+        'framework:province:archipel-des-crozet:13fab451c57f',
+        635,
+        'data/geography/part-28.json',
+        1229,
+        'bf270b206e87cf217c30396449ef69ebe4471e100139fbb8be3b009585945115',
+        'dd8cd653e579f99283e2efab87535b1ec6c814222aaf65088bb7bca822d4ca0e',
+        '060989f44e0ffd469dbe2d60aae1c033d03d1b50dcb58e5c64c9e76d4b541bf4',
+        [ [ 50.175548, -46.451267, 51.868175, -46.043715 ] ]
+      ],
+      [
+        'atlas:coverage:ATF-5918',
+        64,
+        'framework:province:iles-saint-paul-et-nouvelle-amsterdam:ecadfbb105a4',
+        2137,
+        'data/geography/part-28.json',
+        1243,
+        '471168cec18f0924e35774e0f7a65e6ca7adb7e1652eef96f0a0cce5d9758872',
+        '74a13914d681edafcbaec57a46262fac9f50a658d90210f1880860925d9ab85b',
+        '14416e3e33de127a3c96cf3f7038c52b6f068e013990084d3ed81791057629eb',
+        [ [ 77.487559, -38.738458, 77.585216, -37.820245 ] ]
+      ],
+      [
+        'atlas:coverage:ATF-5919',
+        65,
+        'framework:province:iles-eparses-de-l-ocean-indien:1900b2fa0555',
+        2135,
+        'data/geography/part-28.json',
+        1221,
+        '2149e5073e67d5025fc181e6092513aaa76a375102f08947352c6e43f1ecf879',
+        '39623b93b81489e16a42dc484ee3ef3f589f041f292da0243090a1247dc91a5c',
+        '69686f18ad89e5f11dbf0bff721e45fcff63704c08ab64d6cc102edb4d034a9f',
+        [ [ 39.69394, -22.365492, 54.521332, -11.550632 ] ]
+      ],
+      [
+        'atlas:coverage:AUS+00?',
+        66,
+        'framework:province:macquarie-island:cf88d81e9793',
+        2807,
+        'data/geography/part-28.json',
+        1234,
+        '1b107ff5840d1cc133b62e9863f749e9fa83bcbb66a89918d338d795fa0c964e',
+        '8cc95cc14c312e05108be186c98fcd022abfe5797c68eb5d49251eb09471ebca',
+        'dd9f3c0730d5461674c11b0c3341b061f0ed2f800d1cfd286856675ff0b811d9',
+        [ [ 158.832042, -54.750421, 158.963227, -54.469334 ] ]
+      ],
+      [
+        'atlas:coverage:BVT+00?',
+        67,
+        'framework:province:bouvet-island:f25adb7c3670',
+        1014,
+        'data/geography/part-28.json',
+        1242,
+        '66add0f58b704aedf2ffe51aee9bc07a36a03693d014785dbe0f1c070a6158fc',
+        'a681062d14d1a6bcf31bf6c437df587781328493033bd3ee05a8900347739406',
+        '9ecb755d00584a510a0adad684742572c2b17655b13ce14e29ef7628f4c1f2ef',
+        [ [ 3.345551, -54.462498, 3.486664, -54.380141 ] ]
+      ],
+      [
+        'atlas:coverage:CLP+00?',
+        68,
+        'framework:province:clipperton-island:aa74e13af537',
+        1337,
+        'data/geography/part-28.json',
+        1246,
+        '95c3c49393333541e272225c6487bc15bcebea8f358c503ec572edf31de14aa1',
+        'ec6d452f63377ce1e719279b94eba0ce807cc1e369385e9c3ccdde42d908eaa9',
+        '219473e643f3f02f33b2160ddc1beab360dc64530c09bf89fb3750266583e679',
+        [ [ -109.234242, 10.281562, -109.210357, 10.311021 ] ]
+      ],
+      [
+        'atlas:coverage:CSI+00?',
+        69,
+        'framework:province:coral-sea-islands:a8388a18de40',
+        1371,
+        'data/geography/part-28.json',
+        1244,
+        '2e7654954c038846cf75a825fff1c3ee959de46cc4d98aee48eca0d5873e51ca',
+        '7e4783500731f4f2a9dba5498771cd4d8dfebb4f8da36920aad3044207afe35d',
+        '43cc6c97a04485dc96e4b080554a123ddad09beef97c770e2522ea32005c3e41',
+        [ [ 147.879893, -22.202732, 155.801036, -16.132989 ] ]
+      ],
+      [
+        'atlas:coverage:FRA-1442',
+        70,
+        'framework:province:martinique:cb3c652b0a00',
+        2916,
+        'data/geography/part-28.json',
+        1224,
+        'be0d6755f5310d2f02cbbb5040122cafd411ec3144223c43edcfdbfed4dbaad9',
+        'f1aa74b8488cb308cf57d39ff71579a269985f909a968c2cf15795801a6a667f',
+        '4778569888346adcaf132af76f9bbb8a36a0e301122dc4937bc4d606ab2ab8c9',
+        [ [ -61.228831, 14.408108, -60.810414, 14.876899 ] ]
+      ],
+      [
+        'atlas:coverage:FRA-4601',
+        71,
+        'framework:province:la-reunion:31f4268e6f50',
+        2588,
+        'data/geography/part-28.json',
+        1230,
+        '3aae9d1c65b85b0c6bb11b2c649975333ff5e9eade6285f1251ce2c969dac00e',
+        'd4ee91252fd839d2a36308d0c03ce689a97f5e14ec64906366d4277e15db6f1d',
+        '2bfb3a3caf47715367efc5c5b3b7c518bc92e708ca8131c4b3720efbdcae8908',
+        [ [ 55.225434, -21.370782, 55.854503, -20.861423 ] ]
+      ],
+      [
+        'atlas:coverage:FRA-4602',
+        72,
+        'framework:province:mayotte:fa15b20853d8',
+        2965,
+        'data/geography/part-28.json',
+        1231,
+        'b5caeafa5f315780f1be29b0bbdabac5770a1519c1748d9539ca83eb0f75783f',
+        'e00317dbf9f497759b2005d1ac1e895a2a3bb93c9007ad5075f553fa6cba15c3',
+        '45b6a1c603eb24991e580159c6f9153ddf1814f3d355cfd390b906a5223c5ebe',
+        [ [ 45.042491, -12.98919, 45.290863, -12.647231 ] ]
+      ],
+      [
+        'atlas:coverage:FRA-4603',
+        73,
+        'framework:province:guadeloupe:8b5057d93441',
+        1898,
+        'data/geography/part-28.json',
+        1225,
+        '75b6a055d76c9a970b84339cbc92b2885a2868d88af1eb6978a45850ecb55a38',
+        'faa15c596624294dfc8d03128c6ac0fd4a5265e6366fdb097fc84bb2343674b4',
+        '254264c73911864c6fc88511c904c21fd5acac48a04c661ff782ba041c34eaa0',
+        [ [ -61.797841, 15.846991, -60.989247, 16.513088 ] ]
+      ],
+      [
+        'atlas:coverage:HMD+00?',
+        74,
+        'framework:province:heard-island-and-mcdonald-islands:489abffe1bdc',
+        2021,
+        'data/geography/part-28.json',
+        1227,
+        'e523903c38cf8dcab90e752155ba8663034ba375177c3eccb57ab94388690041',
+        'eeb31d0187b1eecdb82f6698ba119259d10c880f6914f9c45756f437f39461f6',
+        '2e38f0d53d2e293cd4ff9b924da018a3422912273ca4b43bea496b79fadba13a',
+        [ [ 73.236013, -53.19256, 73.812185, -52.961602 ] ]
+      ],
+      [
+        'atlas:coverage:KGZ-1115',
+        75,
+        'framework:province:bishkek:f4cf32098768',
+        935,
+        'data/geography/part-29.json',
+        1255,
+        '4224e4b328444166335b3b5cd89496fc75ff5783532284eb5e015bf050cee99d',
+        '24a02ccd274f18ed4c64f9df16173709295ce655f3b8ea1cd9d7c47dd42cc427',
+        '3b21ec81d38d3a798bc7c850e2481691e056c679596d726d2a13d058f291c2e5',
+        [ [ 74.503701, 42.7874, 74.671753, 42.937793 ] ]
+      ],
+      [
+        'atlas:coverage:MDV-5230',
+        76,
+        'framework:province:kaafu:dac51ec4edb4',
+        2286,
+        'data/geography/part-28.json',
+        1240,
+        'e92e5cb9346263ac82937f74f5ec8153723d1255b46b3e99366fe74139e9684b',
+        'a92fcb7ad492b5baf86b2ae2b443694bf417773fa732146e9e02d16ed525230b',
+        'ee97ccc4be364ab6c1b359a6476c0f96b018b716a6395f260c35a9a6c8a3da41',
+        [ [ 73.341482, 3.841702, 73.70281, 4.974921 ] ]
+      ],
+      [
+        'atlas:coverage:MDV-5240',
+        77,
+        'framework:province:gaafu-alifu:e49ba20ab328',
+        1765,
+        'data/geography/part-28.json',
+        1239,
+        '24bc82f099ef5f3eb010c0acd3db91ac1f00522026e7593cf1f338953bbb947f',
+        '26b7bc6b505ff3bc13c8fd7e7ede6104e44c7889e2855fe5f41f7ef6a8b91ad3',
+        '40ea3d52c279eb1e79dd39f483a34edfddbd39d3c611c2f83c01fe596e4c97dd',
+        [ [ 73.349783, 0.380561, 73.513438, 0.847724 ] ]
+      ],
+      [
+        'atlas:coverage:MDV-5241',
+        78,
+        'framework:province:gaafu-dhaalu:a19c1da7c151',
+        1767,
+        'data/geography/part-28.json',
+        1238,
+        '81f436c43608f6ecac15459198faec17c35d80fc942cfa45baeeb13f37b2a8ff',
+        '50315617e2ff79d5048fc9c0f42de7a3f27259d24b7bfdb21cdcad4d96d6f899',
+        '867a001b6f88fa5c566df68b08d3ba494a6ecaaf17aa5c6010b79ab0839f6cc5',
+        [ [ 72.937022, 0.213446, 73.37908, 0.496324 ] ]
+      ],
+      [
+        'atlas:coverage:MUS-5180',
+        79,
+        'framework:province:agalega:65fe675f0572',
+        439,
+        'data/geography/part-28.json',
+        1232,
+        '051bdd5839c48e1cf8787a99b200040df06f23c78a7be5b6020a30bdbb1542ab',
+        '5c8f5369897e19b922560dd4cb07faffe3b6b74fa68249d00264bc73963ab35f',
+        'ad2e79f76581826890b055507df14341c46978ab08d729aa46488cceaa8a6554',
+        [ [ 56.524181, -10.406508, 56.569347, -10.323907 ] ]
+      ],
+      [
+        'atlas:coverage:NLD-5147',
+        80,
+        'framework:province:saba:ce82cdcf95ca',
+        4000,
+        'data/geography/part-28.json',
+        1247,
+        '379a7c5feefcbef5c1644cc434bc2eef8be0d0f0584bdf4f613454a09593c108',
+        'bc677a6e5a2e647a5271c20325d13532ad285179215cb947bc284e21670caf05',
+        'f9f8b4f288a94e4a61b9e599985cf36285e8e11758a723b7e5e028ec7558c048',
+        [ [ -63.251332, 17.614691, -63.223704, 17.646918 ] ]
+      ],
+      [
+        'atlas:coverage:NLD-5148',
+        81,
+        'framework:province:st-eustatius:e6518ccedeff',
+        4390,
+        'data/geography/part-28.json',
+        1226,
+        '2afc7f4e8993af3e37b0fdb9566e14c5dff6fb25f8ac187de2bd3f63927c11ee',
+        '6c4a5cd37085f720941f2f20a09edf865da40e666a644b5e17a25df42a895eb0',
+        'efd690f93d3f85d4df252a80025a35348982dfa4e69237c95d6a4676e2077e83',
+        [ [ -62.997141, 17.464571, -62.945065, 17.525621 ] ]
+      ],
+      [
+        'atlas:coverage:NLD-5149',
+        82,
+        'framework:province:bonaire:a5bc5f24d2f6',
+        979,
+        'data/geography/part-28.json',
+        1223,
+        '8872b95b289dff0eb6f18afc7d8e1d93be41ffa1a0beacc0f4d9e2b98c0824ea',
+        'ada23c054255c2fdef8feb8c126d0bc1cafc69a3463122795ba872f6e127243e',
+        'a839c817331b3e98fc99dd3f8da3bbaacdf75857083c40614da3132f3489f9f9',
+        [ [ -68.417388, 12.02204, -68.190012, 12.310207 ] ]
+      ],
+      [
+        'atlas:coverage:NOR-901',
+        83,
+        'framework:province:svalbard:62609ce92018',
+        4443,
+        'data/geography/part-28.json',
+        1233,
+        '99a075aa0b78e48cc7f4f617784699c6a296d5e4f1d8e18250469cc087f49b37',
+        '9be262d771e8d85968eff533970687d704a6432531a63383c538aa73cb52f1ff',
+        '03016684a7f665fce8dcde38f7a3799c053268d3692d0c5831a66aa2b17c7f4b',
+        [ [ 10.484386, 74.347357, 33.640391, 80.770087 ] ]
+      ],
+      [
+        'atlas:coverage:NZL-5471',
+        84,
+        'framework:province:kermadec-islands:ea65c933d173',
+        2416,
+        'data/geography/part-28.json',
+        1237,
+        'edd2454107f279256acac69320e034cb8b20fc6bcf0f391530f139e306d1c3c2',
+        'f7f51218339da5f528d463ef236eba80ea750f81e04d29e435a08b330606fb32',
+        'f22d396cc5cbdf94fbebbdf386131f7df94feaf0da2d702cc96de5cda88754ab',
+        [ [ -177.957997, -29.292169, -177.848134, -29.221938 ] ]
+      ],
+      [
+        'atlas:coverage:NZL-5472',
+        85,
+        'framework:province:tokelau:4cc7d2b1e7cf',
+        4620,
+        'data/geography/part-28.json',
+        1245,
+        '419d14b4f36216b2c15c87e40b7e1e37fe592823e9a3dd41c0ff85f72cf20379',
+        '2d55a23f081b7de69dc1d671d20d25fd7e989b857b4c05888efaaa786feea421',
+        '187af9c4fa337f881d85a2a23f1c7e4993290849d02d4713f15fa21237a34034',
+        [ [ -172.502553, -9.361749, -171.185658, -8.543227 ] ]
+      ],
+      [
+        'atlas:coverage:NZL-5477',
+        86,
+        'framework:province:antipodes-islands:e93eea73105f',
+        609,
+        'data/geography/part-28.json',
+        1236,
+        '266ecd78642239670d9b57473cbb9d9393306e73402899fc922c21d4588993ca',
+        'e97e752e4d4868fe8bdf9979e035ee92fe3e1802428f2078c49b9cd85d411ef4',
+        '589930472ff5d8feafda1b17ac9db36e70e41c77a253ce98d44e9d1c2bf2eefd',
+        [ [ 178.717621, -49.720798, 178.843923, -49.614923 ] ]
+      ],
+      [
+        'atlas:coverage:NZL-5478',
+        87,
+        'framework:province:campbell-islands:c5f0eac962f2',
+        1149,
+        'data/geography/part-28.json',
+        1235,
+        'd9750c5cd9a969134efd33e06a2fe00158ef936cc9b38d447f9d7a8fa2a44084',
+        '6763c9dfe3af8de7d351f200426b31d0ca4d08d968395c0a71cf2eed8778b217',
+        'c99c53c97629fc96d3a07576a59aad8c73279305471343f1aeb4f86aa16c1d98',
+        [ [ 169.015391, -52.600313, 169.293524, -52.469188 ] ]
+      ],
+      [
+        'atlas:coverage:NZL-5479',
+        88,
+        'framework:province:auckland-islands:b0e2653306e1',
+        698,
+        'data/geography/part-28.json',
+        1219,
+        'b6baf852dfdfb524e120f8e8414b174fa3742b9a64c219a1b3f958a5e6821447',
+        'cb99754f0ab0744b09a8e4f4bde664f1ea31792034d47a68200368b59bf168cf',
+        '03bf812b58cd6101af5f5457a038e99f6784c7186931805f38573344b04ff8b9',
+        [ [ 165.886485, -50.912042, 166.302013, -50.522231 ] ]
+      ],
+      [
+        'atlas:coverage:NZL-5480',
+        89,
+        'framework:province:the-snares:f256c6697d41',
+        4583,
+        'data/geography/part-28.json',
+        1248,
+        '267c267826f4f7693480b8dddbdd3c047eacbd942c94c4b9b7b6551cc3a64986',
+        '57a63b65513e867dcc58408f380c7daa292320006da74d624f0a772c04762d17',
+        '0e9f94f7e8ba6725a45e1c3fba4fbebe2c18eb898514d494dd489d381c412bbd',
+        [ [ 166.56837, -48.062433, 166.637462, -47.993585 ] ]
+      ],
+      [
+        'atlas:coverage:RUS-2337',
+        90,
+        'framework:province:city-of-st-petersburg:9cd033ab714b',
+        1331,
+        'data/geography/part-28.json',
+        1220,
+        'fea4e2884bb08f56480576f1b14699f8a75f8680e6c16a96ab6ecabf08317a96',
+        '5f30f1ce02b5cd386850a8b27a22811eef142c38855f997e89e8094865f82a1e',
+        'ad711ad02d8b36bb7f26686fdb36035340c3e09cde44ba14cf4c838dfa1df1f5',
+        [ [ 29.4298, 59.6394, 30.75147788615966, 60.2422 ] ]
+      ],
+      [
+        'atlas:coverage:RUS-2365',
+        91,
+        'framework:province:moskva:21adb849da11',
+        3106,
+        'data/geography/part-28.json',
+        1250,
+        'a5db8deb55d033f4b35b1bd6729ae051635e3f730f33817c8e33c47d5ca36b56',
+        '5c628e9680380abecc9cb8f159bc917581b54d9bacd8531e476870f4ddaa0484',
+        '1f59b33386e1309c665b06bb3d545c5f1f353fa6265ca42352af2beeab70adb4',
+        [ [ 36.91292688886405, 55.1422, 37.88177266131545, 56.0212 ] ]
+      ],
+      [
+        'atlas:coverage:SGS+00?',
+        92,
+        'framework:province:south-georgia-and-the-south-sandwich-islands:170c3c7a36d3',
+        4331,
+        'data/geography/part-28.json',
+        1241,
+        '518cda82f58fe65285296f2e4b6e7a956c453140461564616a0b587110fc53cf',
+        '8967eca00b22514b3f7542454ecbd9a0d119d9926ab2b9d026318d62e28471e3',
+        'db7aac19e12f56fcdca71802e4bfa72770ce529fee824a0045368703ac4e9fef',
+        [ [ -42.119008, -59.472752, -26.239329, -53.457127 ] ]
+      ],
+      [
+        'atlas:coverage:VEN-44',
+        93,
+        'framework:province:dependencias-federales:695997acaa98',
+        1497,
+        'data/geography/part-28.json',
+        1222,
+        '03dacc755056045357a71a587d524da9a60c42edd43c270988a0483e97694f76',
+        'cc5431614b58e5bad9e4db8f6e6f390c595093148679e78113a0ce836233991f',
+        '1a198c0892968fefa626175417496aa33b73718820e89c61e443048bead01ab5',
+        [ [ -67.688832, 10.884955, -64.552154, 12.068996 ] ]
+      ],
+      [
+        'atlas:district:BRA-110001:BZN',
+        94,
+        'framework:province:porto-velho:702839f33fbd',
+        3708,
+        'data/geography/part-29.json',
+        167,
+        '4fee9bbebca85d88e422a0db7875ced636a9e34b2e182aed0287f10c047159ee',
+        '1d24e45123dbf0596119605379b6c06e05a74ac22685cdfa2812c492734d86c8',
+        '48d0a6638e506c8b9d39eb554ccbe61ae11c3790fbf9c2fb21aa7760a727d5e4',
+        [ [ -65.4296, -12.215464976627112, -62.6284, -8.5004 ] ]
+      ],
+      [
+        'atlas:district:BRA-110002:BZN',
+        95,
+        'framework:province:porto-velho:702839f33fbd',
+        3708,
+        'data/geography/part-29.json',
+        164,
+        '763c8787368214f2398fa04a721642e709c725dae7902b5acc9afd75b4f0cc0b',
+        '2c3f86b2bf68d3028ed855aaa88c0e310de7473adc64cb3d07276bbec0a3dd0f',
+        'f9f89e47d4a9ea4101794ae7f39107cad11bc3a0f0e6cb5026d62f05ec913829',
+        [ [ -64.3466, -10.8417, -62.2958, -8.7318 ] ]
+      ],
+      [
+        'atlas:district:BRA-110003:BZN',
+        96,
+        'framework:province:porto-velho:702839f33fbd',
+        3708,
+        'data/geography/part-29.json',
+        168,
+        '21227d0ee709c60b7720e34fd99838a39bd87b35eb7a3a7ada49d36b8c01b06c',
+        'b5a7936a1c88dd970206cf138fec15c9ec3f342bcfc4d86b6a005b91f2d0f1ad',
+        '25342aa7dd478cc5e0bfeba3a9db7c0e77331f40379101012b0b18ca88541bf4',
+        [ [ -63.6237, -11.1524, -61.4692, -8.5757 ] ]
+      ],
+      [
+        'atlas:district:BRA-110004:BZN',
+        97,
+        'framework:province:ji-parana:370434110ac1',
+        2235,
+        'data/geography/part-29.json',
+        166,
+        '663a5eeb29594f9d8db343ea6f10a5665f555b2f2a36fc82cc0112d740e6d803',
+        '07f876188d69db4b40c229264615f2425eb84edd4f3e5ef1508637c039c652d4',
+        '3a28debbebfed39248c60eb33b9d4c3adb5a6400df7cd90f722470a9014ba5ed',
+        [ [ -64.5936, -12.9266, -61.4621, -9.6843 ] ]
+      ],
+      [
+        'atlas:district:BRA-110005:BZN',
+        98,
+        'framework:province:ji-parana:370434110ac1',
+        2235,
+        'data/geography/part-29.json',
+        163,
+        'ec1d4aa3a4fde329f8f57bb81c2836d3b87efd3f9c7389ad4e96867f68cc11ed',
+        'e58f9b6fbf1fe7fe60e42ada4fa247bfe1a34afa063ddd6b0dd72463dbafd5df',
+        'bad7bdd537bf4982d4622a3b0c4c6a55dc9ca475f5c807c30c366dfe17227164',
+        [ [ -62.8937, -13.1787, -60.3022, -10.9861 ] ]
+      ],
+      [
+        'atlas:district:BRA-110006:BZN',
+        99,
+        'framework:province:ji-parana:370434110ac1',
+        2235,
+        'data/geography/part-29.json',
+        165,
+        '337cd470403c173a3425e864e213144907edf47ff409cb52bca288cbbf516197',
+        '6b944bc7d17189212fcf5ddbd5ee7d8412e5b3aad443d578589b35e8645420aa',
+        '49e473f543a21107401e392f4d50e179e6b3a3c801ca1306ce8d9aa3334948c5',
+        [ [ -62.1177, -13.6907, -59.7755, -10.9898 ] ]
+      ],
+      [
+        'atlas:district:BRA-120001:BZN',
+        100,
+        'framework:province:rio-branco:6281470bd8fd',
+        3943,
+        'data/geography/part-29.json',
+        169,
+        '1bc3b83aaa4dfed43503a77b5b446c7ad597552dc476ff57ce0bc0e0f72421f1',
+        'c2412a8999104e3a1faa4e00f41cc9bcf388f16bacb32600650f3b8966400679',
+        '0a56b98034dfd623a4baad90b257a51027037d6cd27222a7c2d8c932f032b18d',
+        [ [ -68.455, -10.711038307030128, -66.6266, -9.2437 ] ]
+      ],
+      ... 49525 more items
+    ],
+    entry_fields: [
+      'id',
+      'index',
+      'parent_id',
+      'parent_index',
+      'source',
+      'ordinal',
+      'whole_feature_sha256',
+      'geometry_sha256',
+      'effective_geometry_sha256',
+      'boxes'
+    ],
+    inputs: [
+      {
+        bytes: 8539839,
+        path: 'data/geography/part-0.json',
+        source: {
+          bytes: 8539839,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '85bdc3171a740db0bc756460dab5a50c6c54518d',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-0.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3'
+        },
+        whole_body_sha256: 'bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3'
+      },
+      {
+        bytes: 8060108,
+        path: 'data/geography/part-1.json',
+        source: {
+          bytes: 8060108,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '471e45dcd13904489bc434ae5115105fadba7ab9',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-1.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7'
+        },
+        whole_body_sha256: '4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7'
+      },
+      {
+        bytes: 6259307,
+        path: 'data/geography/part-2.json',
+        source: {
+          bytes: 6259307,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '389e463dd5e44894fd221f53db584f55fff330d1',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-2.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf'
+        },
+        whole_body_sha256: '93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf'
+      },
+      {
+        bytes: 5153118,
+        path: 'data/geography/part-3.json',
+        source: {
+          bytes: 5153118,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'e41c8f549f1cb2162f5adb30029bf4800e86c848',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-3.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617'
+        },
+        whole_body_sha256: 'e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617'
+      },
+      {
+        bytes: 4835479,
+        path: 'data/geography/part-4.json',
+        source: {
+          bytes: 4835479,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'ccdefbb55c62b317f11e6078cd9291dae5339693',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-4.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c'
+        },
+        whole_body_sha256: 'e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c'
+      },
+      {
+        bytes: 5226173,
+        path: 'data/geography/part-5.json',
+        source: {
+          bytes: 5226173,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'cf59e69b02ab2c9ad7344ddbf309a221a8be587b',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-5.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc'
+        },
+        whole_body_sha256: '20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc'
+      },
+      {
+        bytes: 4607953,
+        path: 'data/geography/part-6.json',
+        source: {
+          bytes: 4607953,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '4be02d1d055a66c4e1606bab4f23ecda90350f34',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-6.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a'
+        },
+        whole_body_sha256: 'dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a'
+      },
+      {
+        bytes: 4257402,
+        path: 'data/geography/part-7.json',
+        source: {
+          bytes: 4257402,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'c88539c7899a0c257c48fc1a555895904832f0cc',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-7.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387'
+        },
+        whole_body_sha256: '1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387'
+      },
+      {
+        bytes: 5097739,
+        path: 'data/geography/part-8.json',
+        source: {
+          bytes: 5097739,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'eec7163a536245c0249d1821fe81590aba2a1ded',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-8.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1'
+        },
+        whole_body_sha256: '2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1'
+      },
+      {
+        bytes: 5729632,
+        path: 'data/geography/part-9.json',
+        source: {
+          bytes: 5729632,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '79a4f0cd17ca9f7007916be8419c2fa986fe7a61',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-9.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6'
+        },
+        whole_body_sha256: '9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6'
+      },
+      {
+        bytes: 5144571,
+        path: 'data/geography/part-10.json',
+        source: {
+          bytes: 5144571,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '84b4cf537b801c7f6d3840173c49b7e4293a139d',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-10.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2'
+        },
+        whole_body_sha256: 'ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2'
+      },
+      {
+        bytes: 5133018,
+        path: 'data/geography/part-11.json',
+        source: {
+          bytes: 5133018,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'fd7d6f9f564a4b9b0ae7a56a2d7eb27e920017d8',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-11.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'd1b2fb15c9427497de740eb33a529ef382b58cb319028f2aa38f5878de4c9b02'
+        },
+        whole_body_sha256: 'd1b2fb15c9427497de740eb33a529ef382b58cb319028f2aa38f5878de4c9b02'
+      },
+      {
+        bytes: 4489493,
+        path: 'data/geography/part-12.json',
+        source: {
+          bytes: 4489493,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'e8360aa55a8398d0fa841b5331febcabdc8588a2',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-12.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7'
+        },
+        whole_body_sha256: '24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7'
+      },
+      {
+        bytes: 5709487,
+        path: 'data/geography/part-13.json',
+        source: {
+          bytes: 5709487,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '44f886df47aa3e313f0c2ce98faea045e2eba8ed',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-13.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1'
+        },
+        whole_body_sha256: '90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1'
+      },
+      {
+        bytes: 4355198,
+        path: 'data/geography/part-14.json',
+        source: {
+          bytes: 4355198,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '2cd05a870d730c598eb463ac8be2300ca5be6e66',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-14.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0'
+        },
+        whole_body_sha256: 'c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0'
+      },
+      {
+        bytes: 5180426,
+        path: 'data/geography/part-15.json',
+        source: {
+          bytes: 5180426,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '4ef51307797f81b8cf7a647495f037a089f8b368',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-15.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df'
+        },
+        whole_body_sha256: '6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df'
+      },
+      {
+        bytes: 5213846,
+        path: 'data/geography/part-16.json',
+        source: {
+          bytes: 5213846,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '02d53ca01dc014a3c9481eb1017a89487fc2bd89',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-16.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797'
+        },
+        whole_body_sha256: 'b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797'
+      },
+      {
+        bytes: 4948066,
+        path: 'data/geography/part-17.json',
+        source: {
+          bytes: 4948066,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'a2dc24c477fb10da8ebd5a1cff4765a8f34bd22a',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-17.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '1ae1a9ef25c1f71b66084aadf57933132383d4271b888ab38866905da5678af3'
+        },
+        whole_body_sha256: '1ae1a9ef25c1f71b66084aadf57933132383d4271b888ab38866905da5678af3'
+      },
+      {
+        bytes: 4909063,
+        path: 'data/geography/part-18.json',
+        source: {
+          bytes: 4909063,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '59012653b56da5a394e7692209b257e27883eab8',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-18.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123'
+        },
+        whole_body_sha256: 'ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123'
+      },
+      {
+        bytes: 4583022,
+        path: 'data/geography/part-19.json',
+        source: {
+          bytes: 4583022,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '306125db7012a9ac927bb4a169dea5166ef126e7',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-19.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269'
+        },
+        whole_body_sha256: 'baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269'
+      },
+      {
+        bytes: 6570767,
+        path: 'data/geography/part-20.json',
+        source: {
+          bytes: 6570767,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'efda4099740c3ef131ef631cdc6b6ecf345f226a',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-20.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f'
+        },
+        whole_body_sha256: '9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f'
+      },
+      {
+        bytes: 6737781,
+        path: 'data/geography/part-21.json',
+        source: {
+          bytes: 6737781,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '28619c3c39b5808aae4b3f459b97c39de8b073b2',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-21.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'd7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7'
+        },
+        whole_body_sha256: 'd7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7'
+      },
+      {
+        bytes: 4746385,
+        path: 'data/geography/part-22.json',
+        source: {
+          bytes: 4746385,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'b3b5cdd9c566e84bd32a2f64867e2bfe8986be2f',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-22.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3'
+        },
+        whole_body_sha256: 'f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3'
+      },
+      {
+        bytes: 4962410,
+        path: 'data/geography/part-23.json',
+        source: {
+          bytes: 4962410,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '371e95033d9c542bbf07c42afe7111074e35f246',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-23.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'd61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2'
+        },
+        whole_body_sha256: 'd61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2'
+      },
+      {
+        bytes: 4816899,
+        path: 'data/geography/part-24.json',
+        source: {
+          bytes: 4816899,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '4110c75d7d0f5282e0a2bd263b430e8c1e78f0eb',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-24.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c'
+        },
+        whole_body_sha256: 'b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c'
+      },
+      {
+        bytes: 4525239,
+        path: 'data/geography/part-25.json',
+        source: {
+          bytes: 4525239,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '16ba4f38251d1bd99ac85f0ae7cca2f0424470f8',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-25.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394'
+        },
+        whole_body_sha256: 'dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394'
+      },
+      {
+        bytes: 4608983,
+        path: 'data/geography/part-26.json',
+        source: {
+          bytes: 4608983,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '5d61478ece9042cbd0791eabd2536e1054e26341',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-26.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632'
+        },
+        whole_body_sha256: '44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632'
+      },
+      {
+        bytes: 4863162,
+        path: 'data/geography/part-27.json',
+        source: {
+          bytes: 4863162,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'a6a359c8c566462b280a461b4a5e1591e1f486c4',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-27.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758'
+        },
+        whole_body_sha256: 'e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758'
+      },
+      {
+        bytes: 6613963,
+        path: 'data/geography/part-28.json',
+        source: {
+          bytes: 6613963,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'a9e03cb07194a73f643af85d1e6db94abe3b5fc9',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-28.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d'
+        },
+        whole_body_sha256: '2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d'
+      },
+      {
+        bytes: 12932719,
+        path: 'data/geography/part-29.json',
+        source: {
+          bytes: 3353763,
+          commit: 'ee684e3145079ff93f68520e3c17837789be5b0c',
+          decoded_bytes: 12932719,
+          decoded_sha256: '723d16eb63b7f2dcd8260a516eac6571a7ef1eaaf9bff3c926e0c63235b98fd3',
+          encoding: 'gzip',
+          git_blob_oid: 'd3f17ccd8eecca88b16f2bbbf075320b6d555aea',
+          kind: 'selected-exact-encoded-override',
+          logical_path: 'data/geography/part-29.json',
+          mode: '100644',
+          path: 'coordination/engineering/arctic-three-retained-land-fit-repair-native-20261008/selected-geography/part-29-application.json.gz',
+          sha256: 'd7665a1fdf68f0626c7e28da9ac0e40f4e35aaeacdf91bad4ab8e2d77221bc49'
+        },
+        whole_body_sha256: '723d16eb63b7f2dcd8260a516eac6571a7ef1eaaf9bff3c926e0c63235b98fd3'
+      },
+      {
+        bytes: 11979437,
+        path: 'data/geography/part-30.json',
+        source: {
+          bytes: 11979437,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '0deb9748357a854c5e7e6179f42d77a47a09ca9a',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-30.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'd575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a'
+        },
+        whole_body_sha256: 'd575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a'
+      },
+      {
+        bytes: 10086485,
+        path: 'data/geography/part-31.json',
+        source: {
+          bytes: 10086485,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '1b89d7aef660ba0536acdb9b9f7a574b028ea01a',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-31.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e'
+        },
+        whole_body_sha256: '44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e'
+      },
+      {
+        bytes: 10211739,
+        path: 'data/geography/part-32.json',
+        source: {
+          bytes: 10211739,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '6cf41fabbeddb18bbe426038251b86171c715ef7',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-32.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64'
+        },
+        whole_body_sha256: '00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64'
+      },
+      {
+        bytes: 607984,
+        path: 'data/geography/part-33.json',
+        source: {
+          bytes: 607984,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: 'e8a8a8e8015cfc31005e85daa49fc2552ef1df9e',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/part-33.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: 'd928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe'
+        },
+        whole_body_sha256: 'd928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe'
+      },
+      {
+        bytes: 1573576,
+        path: 'data/geography/source-restoration-additions.json',
+        source: {
+          bytes: 1573576,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '18989f4f6b2789057a00eeda6c5c7e51f06e3caf',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/source-restoration-additions.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9'
+        },
+        whole_body_sha256: '04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9'
+      },
+      {
+        bytes: 11393,
+        path: 'data/geography/macro-loose-ends-v5-additions.json',
+        source: {
+          bytes: 11393,
+          commit: 'ffa32416fd946ac89da621d02b554ca27733e688',
+          git_blob_oid: '8f0e144d92e52ea473eecc7c2358c3464c648009',
+          kind: 'ordinary-immutable-git-source',
+          mode: '100644',
+          path: 'data/geography/macro-loose-ends-v5-additions.json',
+          role: 'current-v8-unchanged-source-body',
+          sha256: '8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1'
+        },
+        whole_body_sha256: '8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1'
+      }
+    ],
+    kind: 'selected-coordinate-neighbor-certificate-v2',
+    limitations: [
+      'Certificate projects complete owner identity/index/parent tuples and merged coordinate bounds. Full original camera metadata remains authenticated source custody and charged carried state; it is not duplicated as certificate geometry.',
+      'Conservative exclusion only. Actual whole geometry and original polygon predicates are mandatory for every possible neighbor.'
+    ],
+    version: 2
+  },
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

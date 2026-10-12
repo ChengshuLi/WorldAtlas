@@ -1,0 +1,1037 @@
+{
+  "version": 1,
+  "issue": 1784,
+  "lane": "engineering",
+  "worker_id": "01a12f14-030c-704b-8f35-58e0a28e2004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "2f25e80412640f2a34681a7d487737739475c1d2",
+    "files": [
+      {
+        "path": "data/ownership-selection.json",
+        "bytes": 1598,
+        "sha256": "7daf909bc5f574d07a738d82ef2f40da80bbf2be06a35853e90e0ecf73ab5308",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+        "bytes": 193557,
+        "sha256": "40d282412f03e3f7b216b787879ecc3dd3961002e5c3635d2057378019a0d78d",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/README.md",
+      "bytes": 18960,
+      "sha256": "f9f40fbe6f4db699900edc922857bbbee9f81b9f9fc9f4925fe5267f6bb823d5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/controls/consumer-entry.log",
+      "bytes": 1094,
+      "sha256": "0812b12e9a5a1504e5c6e423c7fdd0e4aef08ddfac332b8dfe9ac604add8395b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/controls/polygon-readback.log",
+      "bytes": 207,
+      "sha256": "41b15158929b72caaa3c58dc7fae70c898f181dcc3b6880ba6d401e284d29a47",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/controls/trusted-wrapper.log",
+      "bytes": 234,
+      "sha256": "6ec2884d5c974264f6e56adfedd389b1c6f0cc2fbee65471a09927c6b26b38c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/controls/checkpoint-applicability.log",
+      "bytes": 1991,
+      "sha256": "288fe2c772878e3b1e3b0cda69bbef14620c22431baaeb403c0b69a40d32e46a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/controls/joint-entry.log",
+      "bytes": 659,
+      "sha256": "125608be38413044e9e42db1be29678030c5d155e0113c7cbc0da1add632e606",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/reproduction/probe.py",
+      "bytes": 9321,
+      "sha256": "bc8951f790ccb2048efc4fcfd3962c1161c15def87bb02eaa555d96302fbdcd0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/reproduction/supervise.py",
+      "bytes": 3495,
+      "sha256": "a4b9693e46438d0c6853c33a2cc5f60a11c5d5ce83cc43d0599830b30af1dbc1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/controls/supervisor.log",
+      "bytes": 100,
+      "sha256": "ca0185f2086a132a803215a8bff574e3d84e26a4e59e9031a16c017bd9fb7333",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/controls/checkpoint-trust.log",
+      "bytes": 240,
+      "sha256": "a84a4a551c3b8981764f1a19fcac8c645be5ac144a0ac4b922e0fcc32bf138e3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/reproduction/supervise-controls.py",
+      "bytes": 2377,
+      "sha256": "290f1cc3ada6dd57d95c30025576faf0894f5095c4c14083df1cb8381349a6e5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/controls/joint-derived-entry.log",
+      "bytes": 759,
+      "sha256": "04f26b987f34c85e95815d0d5993ef5df37251e8d9753c90d7996a22e958e8b1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/accepted-reference/geography.zip",
+      "bytes": 149930,
+      "sha256": "b5538dbf7c5ca49fc1852f514c09e7c6194210e54c0609b0fc9c0e644bfae9c9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/accepted-reference/provenance.json",
+      "bytes": 976,
+      "sha256": "a1c3ba6c8fbe12f3b554b21de9677956fe624538d716ec92a22c096031997115",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/controls/checkpoint-policy-routing.log",
+      "bytes": 472,
+      "sha256": "cfd89f540a45cf666e163d80ebefd4f03915af2427fdb024c4f86b23c25ce3c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/accepted-reference/static-union-inputs.json",
+      "bytes": 44672,
+      "sha256": "3931faa405ada0d88316b765b4438c94204d7576b0d0e3dc97097e1c05937d30",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/controls/final-custody.log",
+      "bytes": 1288,
+      "sha256": "185549e898ed6e9042198e75c7bf489168649ab53815c0221dfb1b57802fa7f5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/controls/checkpoint-policy-subset.log",
+      "bytes": 229,
+      "sha256": "e751b1cf7dd96da545f36fd9ad8910ccf75ccadc0f52e5707f108c16f1b58c61",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/reproduction/admission-plan.json",
+      "bytes": 2049,
+      "sha256": "a45ca280d74ea612ed8d7454b9efeae9f226422b78437414b3adc429b8499c80",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json",
+      "bytes": 6449,
+      "sha256": "4fc15af06a0060e695552d439ede55481b1fb82f995a4ec284c3838a984e498b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/failed-attempt-001/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/failed-attempt-001/failure-summary.json",
+      "bytes": 521,
+      "sha256": "76659d3fc4d2e7b432eff2d1897023ea3d8604b0ba6f1caa6192e9ba65ba0440",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/failed-attempt-001/stderr.log",
+      "bytes": 4308,
+      "sha256": "e0bda05d6fb4d1903e120c3f57b35e2d5820f5f0c3c365680625459e362bc52c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/failed-attempt-001/operating.json",
+      "bytes": 10810,
+      "sha256": "6b64b1aeef2d983b683742a92718afcb7ce06b969a95924ef49a84bd07c84dad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/failed-attempt-001/admission.json",
+      "bytes": 5579,
+      "sha256": "37b191162fee82e5f8ee6f859fbb824523823add24c87325adc652a35bfecf05",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/controls/native-final.log",
+      "bytes": 2860,
+      "sha256": "c15aeedd96279e2cbfb8d17201125d4c0d1b2147c3763b69945b060ce74932e7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/controls/applicability-final.log",
+      "bytes": 2100,
+      "sha256": "0368fc7f5b3c4aeb435d3eedd65f2035d623e441f6a4bf5ed2409ad57734c054",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/reproduction/compare-retained.py",
+      "bytes": 10711,
+      "sha256": "8f8820520ed369dd6f3c0cd1cbbd3665183311b299291843e8ff1e708be3ada9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/reproduction/comparator-controls.py",
+      "bytes": 1063,
+      "sha256": "821da87514a2dc674b4dde5860764409929c9f0aa576ded81d5139ceb7da64a3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/controls/comparator-wire.log",
+      "bytes": 98,
+      "sha256": "1f5a4d2c44bb7155b43927e2dc345c215702e55bae8e697533c3703978b70fd1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-attempt-002/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-attempt-002/executing-policy.json",
+      "bytes": 252214,
+      "sha256": "633bf569788c97c2aa52c27c4cb919c7dd1021eb1cd78fc7b326fc7369d475a8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-attempt-002/comparison.json",
+      "bytes": 52404,
+      "sha256": "99df34b3c48cbc3f45c0980745df73dc45f10103af0f05ef5a6ab0701ca7c9e1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-attempt-002/joint-result.json",
+      "bytes": 658887,
+      "sha256": "dfdbea2ce8a4d0c553a82a6fb612f948384abdd31458dc9efbc6feda26e52883",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-attempt-002/executing-checkpoints.json",
+      "bytes": 6449,
+      "sha256": "224f307b1ee4d10b7e1740b496520811a4c98ccff36fc2ac1d3c87eb7cf36048",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-attempt-002/archived-custody-publication.json",
+      "bytes": 1527,
+      "sha256": "450d109c7b0ea49788a3a3a8253d96166448ac1a0ba82db302dd116f64cc0d48",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-attempt-002/stderr.log",
+      "bytes": 595,
+      "sha256": "971f8f86c9af2210a39fa30225715e4b803c9b7e538b10ca1deca3380263be5c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-attempt-002/operating.json",
+      "bytes": 17200,
+      "sha256": "4932941cc67b6ed69a57e18357f359286abbad33b22d177db5f3309865c00ef3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-attempt-002/admission.json",
+      "bytes": 5579,
+      "sha256": "30051f1402c5a03f724e4ac1fbfc7b4c3b38c4635d4e9114f6989285f4ee8099",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-attempt-002/accepted-baseline-routes.json",
+      "bytes": 27663,
+      "sha256": "067cf176f83fe5a9623da306a09cd491d4addf2b213b6991d3becff70c17b453",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-attempt-002/coverage/coverage-55-1791797241905-0.json",
+      "bytes": 590765,
+      "sha256": "40f5c830668d2d7e2b27266ec3e4a1b20a68207e47ba95c2b19bc2cd6afb3ec7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-attempt-002/coverage/coverage-2053-1791797242076-0.json",
+      "bytes": 521276,
+      "sha256": "c9609eb047cc32975bc5f4aa30d2d84ca8f94c024eb0801af26314326975db68",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-attempt-002/trusted-selected-joint-6vvp9tss/complete/publication.json",
+      "bytes": 440,
+      "sha256": "801c2422638e1b34129bd1d0ade09750fc6ee5745eeae67169056bdb19c3b629",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-attempt-002/trusted-selected-joint-6vvp9tss/complete/derived-publication.json",
+      "bytes": 545,
+      "sha256": "870bf4cb69a8d0b924868c44e4ff96e5bcc16031a4977bc97d596d723f169c08",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-attempt-002/trusted-selected-joint-6vvp9tss/complete/operands.json.gz",
+      "bytes": 667895,
+      "sha256": "05c17d36c59d736e6ee8c7d00eb8ab995ab129643373b0e73707eedcee65accf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-attempt-002/trusted-selected-joint-6vvp9tss/complete/facts.json",
+      "bytes": 138411,
+      "sha256": "9287ad7b9a8f8fa53d7842f5e0ddfd248866b7ee0fad4d19bd9150d1fdbde7bd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-attempt-002/trusted-selected-joint-6vvp9tss/complete/derived-certificate.json.gz",
+      "bytes": 7515261,
+      "sha256": "82ed823e1968222c6e0ca760a4fd5567a5c7949f2cb5b7422f75806661b0a0e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-attempt-002/trusted-selected-joint-6vvp9tss/complete/derived-facts.json",
+      "bytes": 139291,
+      "sha256": "b876c65eaf028c930e0516e5b12219e021bfa731f1e0c67c320a2c3760bb8558",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/stdout.log",
+      "bytes": 3152,
+      "sha256": "9c4b2098f483d9ef73e96b3dc24c340a92f0aaa38a9911b9aaf8bbdcb28e9b5a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/executing-policy.json",
+      "bytes": 252214,
+      "sha256": "633bf569788c97c2aa52c27c4cb919c7dd1021eb1cd78fc7b326fc7369d475a8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/comparison.json",
+      "bytes": 3031,
+      "sha256": "3abc76a6986ca02c2fbc63a0d84bf536dd2ec1bb35b09feffc121b7ccc72ffd1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/joint-result.json",
+      "bytes": 658887,
+      "sha256": "0a85c70f758687f3c1ec4a1c32fe163a5410856b8b607c06316bc2741e727eb3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/execution-timing.json",
+      "bytes": 45,
+      "sha256": "1ab8d82079d62c25bd184661490bd7cda42ee72c4a8f5aa9c82c3d5c140c058e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/executing-checkpoints.json",
+      "bytes": 6449,
+      "sha256": "224f307b1ee4d10b7e1740b496520811a4c98ccff36fc2ac1d3c87eb7cf36048",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/archived-custody-publication.json",
+      "bytes": 1527,
+      "sha256": "33559fb889c053d73f46230c40d10bb575650453c4bcf3ce336830de4173a7ea",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/stderr.log",
+      "bytes": 77,
+      "sha256": "4ba8289da62963d63f676cf5893bd5ed271ea0b4004d6327646f6a375b91f78e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/summary.json",
+      "bytes": 6314,
+      "sha256": "57da52545e95b6e1378dc6bf083867b8532c4083d09c66476627ee7ae4beadf1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/operating.json",
+      "bytes": 16708,
+      "sha256": "eab4416638a37de551dfa13df9009fe580401a56a7e2357b29ca0d6657dd990b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/admission.json",
+      "bytes": 5579,
+      "sha256": "835bcdd7de1e20b83a7aacece9bf49edfd79fddbfca73ecda69e07767cfa2e2d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/accepted-baseline-routes.json",
+      "bytes": 27663,
+      "sha256": "067cf176f83fe5a9623da306a09cd491d4addf2b213b6991d3becff70c17b453",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/coverage/coverage-56-1791797561961-0.json",
+      "bytes": 590765,
+      "sha256": "fef8b72607fe317bc9d5fcb2325a530b70706984a605114029ba3e3c881e41f8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/coverage/coverage-2047-1791797562108-0.json",
+      "bytes": 521276,
+      "sha256": "e56ba3c5d550a8fac6b51c9bb2f70ba1518611899ac0dfd0b837fd6684ee4ef6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/trusted-selected-joint-z2pe4t_q/complete/publication.json",
+      "bytes": 440,
+      "sha256": "c82108338e164dd8042961d2937f0b6cdfb42a682eb23ded4d9849230254bec2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/trusted-selected-joint-z2pe4t_q/complete/derived-publication.json",
+      "bytes": 545,
+      "sha256": "1f391d1799a2d5a0c4e1840d181857527e2f9d9d511dcd98640adc0d45aebcb4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/trusted-selected-joint-z2pe4t_q/complete/operands.json.gz",
+      "bytes": 667895,
+      "sha256": "05c17d36c59d736e6ee8c7d00eb8ab995ab129643373b0e73707eedcee65accf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/trusted-selected-joint-z2pe4t_q/complete/facts.json",
+      "bytes": 138411,
+      "sha256": "2edbdaad9e450238c03faf96a65796f8b152e5d10d992cce57cbb835beff3dfa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/trusted-selected-joint-z2pe4t_q/complete/derived-certificate.json.gz",
+      "bytes": 7515261,
+      "sha256": "82ed823e1968222c6e0ca760a4fd5567a5c7949f2cb5b7422f75806661b0a0e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/trusted-selected-joint-z2pe4t_q/complete/derived-facts.json",
+      "bytes": 139291,
+      "sha256": "492b82f2a4abedd6b4c2c7acc2bc6bf42e570a7a9d8609387bf9654ed516bdb7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-effective-row-delta-20261012/README.md",
+      "bytes": 5610,
+      "sha256": "ae5c77983b06801a17c643a03da66f09006e5d524d9b9a727d23bdce10fe03fc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-effective-row-delta-20261012/compare-retained-projections.mjs",
+      "bytes": 6109,
+      "sha256": "ea7e0cac2d805cebe6314749a21e30aaa52da055e4ec0b4a1adc8372573c2448",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-effective-row-delta-20261012/evidence-quality.json",
+      "bytes": 5294,
+      "sha256": "9f94b9b633d338e25c5ddd2cd7a0bcb8b01ae69b99e821a69aa3ef1f96c6afe1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-effective-row-delta-20261012/proof-001/comparison.json",
+      "bytes": 3045,
+      "sha256": "2cafc60dc1b02c36dd7c3639a27d970589b952603090ce6bd050053ecded03f1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/controls/extraction-initial.log",
+      "bytes": 13441,
+      "sha256": "01c55950dea76c727facd88c296b1ad87522ec9edcf70f3040942a96be180c01",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/controls/extraction-ambient-refusal.log",
+      "bytes": 5113,
+      "sha256": "9cf3033c10d450b2bd7448f3ee6bc04f158f8dcb5ec1609ace6d8308601b7223",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/controls/extraction-native-package.log",
+      "bytes": 4250,
+      "sha256": "d136a34a93cac90eabe1da7719ec4562eadb0b4c6f25abc21098326ad8015eb1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/controls/extraction-python.log",
+      "bytes": 326,
+      "sha256": "16ea6bb91549242bcb327587597d51c711bca2718b2098e641df04627c6f9e53",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/accepted-baseline-routes.json",
+      "bytes": 27663,
+      "sha256": "067cf176f83fe5a9623da306a09cd491d4addf2b213b6991d3becff70c17b453",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/admission.json",
+      "bytes": 5752,
+      "sha256": "6a7394e9f13035256d695999e99dc7ef5796540670fd89e015c0dae3ddec181a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/archived-custody-publication.json",
+      "bytes": 1527,
+      "sha256": "647ee185cf9ebf8be99fa2aa7e4cd471f1ad8e30e668455e5e5982c398cd3237",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/comparison.json",
+      "bytes": 3032,
+      "sha256": "2d979d4026711d3c56fb528c4048f64b2f0d6e3d69199bd1a5d55accb168a2d5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/coverage/coverage-2050-1791800200318-0.json",
+      "bytes": 520623,
+      "sha256": "93913a4f03f5d7c3a6cbfa7a038ea72e383dd0ff819f95e23bd1d3001c931d52",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/coverage/coverage-57-1791800199813-0.json",
+      "bytes": 591262,
+      "sha256": "5445e9b97ce6558f48dab8e66662577b2cfc0ccdbee2893f9072c2286cbcdbb8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/executing-checkpoints.json",
+      "bytes": 6449,
+      "sha256": "4fc15af06a0060e695552d439ede55481b1fb82f995a4ec284c3838a984e498b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/executing-policy.json",
+      "bytes": 252214,
+      "sha256": "633bf569788c97c2aa52c27c4cb919c7dd1021eb1cd78fc7b326fc7369d475a8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/execution-timing.json",
+      "bytes": 46,
+      "sha256": "fb9e71558c14df7d5b858e2d2ba6e1022d8085208704a4cf04c672c657fcbfac",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/joint-result.json",
+      "bytes": 659152,
+      "sha256": "5c1d76bd09e2819d5f2f76e2f830b0f770856cac78e3f1b07a53f589e4ed5682",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/operating.json",
+      "bytes": 16179,
+      "sha256": "25c5642327c49cddfa55e522c9acf4585691da2d78265c4cde45da8e622b8bf3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/stderr.log",
+      "bytes": 77,
+      "sha256": "dcb3e43c17056d006db739adbd5529135e739a06f255d022431127c1470959fa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/stdout.log",
+      "bytes": 3153,
+      "sha256": "992b750324880c6f94e81ed51f2bbc320b54308645ef00d066ad3cae82fd83b1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/summary.json",
+      "bytes": 6322,
+      "sha256": "18f5b39c1eb16c6b995a6e935f1ef7ab524c56adbb992d8378066c2cf77cba5e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/trusted-selected-joint-bdl3wfd7/complete/derived-certificate.json.gz",
+      "bytes": 7515261,
+      "sha256": "82ed823e1968222c6e0ca760a4fd5567a5c7949f2cb5b7422f75806661b0a0e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/trusted-selected-joint-bdl3wfd7/complete/derived-facts.json",
+      "bytes": 139556,
+      "sha256": "d366c989c6d0a8dd145b45c56c5dff518c583fee3fb4d4fed1728f94b8ef0a42",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/trusted-selected-joint-bdl3wfd7/complete/derived-publication.json",
+      "bytes": 545,
+      "sha256": "a55d09b39564611017bb04b59172718a53c9a74499298f38453cb4a474fb30aa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/trusted-selected-joint-bdl3wfd7/complete/facts.json",
+      "bytes": 138676,
+      "sha256": "3c024899d7be3e8726179eb22609ebc07854cb35c86b84baa02943d9020bb2a9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/trusted-selected-joint-bdl3wfd7/complete/operands.json.gz",
+      "bytes": 667895,
+      "sha256": "05c17d36c59d736e6ee8c7d00eb8ab995ab129643373b0e73707eedcee65accf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/trusted-selected-joint-bdl3wfd7/complete/publication.json",
+      "bytes": 440,
+      "sha256": "ebb4e8383ebe4bc85167782e00edcc5014665c53bc84e9ced9aee0445fecdda6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/baseline-routes.json",
+      "bytes": 27657,
+      "sha256": "750affb66823b6d247cbc638f4da9e655449cce4b40b9c1989a32d784348ad51",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/candidate-routes.json",
+      "bytes": 27663,
+      "sha256": "067cf176f83fe5a9623da306a09cd491d4addf2b213b6991d3becff70c17b453",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/admission.json",
+      "bytes": 408,
+      "sha256": "8aa93183187322caf28e94720c14eefe4c935e02a8d5b588293a7f6df2a88a92",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/coverage.json.gz",
+      "bytes": 73569,
+      "sha256": "c6ca9ee5cdfcaee33218eb1799b545352e2ca8c64b6ecfbd5557d9d5195cdb57",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 590617,
+      "uncompressed_sha256": "3cfa03afb3dcb631408f4bd37bbd9de9c3ac87ab9236a8f63ce71457810fa3b3"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/operating.json",
+      "bytes": 2392,
+      "sha256": "58e37f6fee065b93b0795a67269679a009aadfe95e122ad0226cd05972f6f4b7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/probe.mjs",
+      "bytes": 5714,
+      "sha256": "6eca9f28dce172a6531cbb04d9adb884f249499c6cf57380932ff5854fc5f0ca",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/profiles.cpuprofile.gz",
+      "bytes": 91864,
+      "sha256": "0e908e3fb3633b97f80e948e5d1712e681429257645cddd175c654d7a1604be7",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 871507,
+      "uncompressed_sha256": "5be0ba00a9bb0306fd5d79baa26aa543bd03f8252fd1cd474bb47a726cc1c220"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/result.json",
+      "bytes": 97828,
+      "sha256": "3458088ec1b985e0edddc050cf58ef1913eb0c5e855b3ba428bfddd987d814b3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/stderr.log",
+      "bytes": 186381,
+      "sha256": "f499760525c78722f7ec7f756afb18fcbbec81b61b49d982fd928638fe65beac",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/initial-comparator-failure/supervisor.py",
+      "bytes": 2569,
+      "sha256": "b9f1f101247c858644ffd5b2b36d1737bcfb4275a15b6c1ffad1c7b2ded33041",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/actual-products.json.gz",
+      "bytes": 8569685,
+      "sha256": "e49599405275c926081ad6a5003231c376e17398a10b95f81e8f4afb7688efac",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 20695395,
+      "uncompressed_sha256": "4473bec9599623134c3e65db87a3c0d79dfe2781c9d8fc9728935590e30e9462"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/admission.json",
+      "bytes": 408,
+      "sha256": "8e1feaa219346f7abb3a4726ffb6f431f35c39f5ea61f4fca05ae5e17e309316",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/coverage.json.gz",
+      "bytes": 73064,
+      "sha256": "e872f21a0a30394c6551e26d7b6fc3e74e79e3de99b5598d4ea24fd0168fbfbf",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 588020,
+      "uncompressed_sha256": "2687dd10ccba58df653abacd4989b4c3637357a3dbc102efb34e09636f2e0343"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/operating.json",
+      "bytes": 2236,
+      "sha256": "6556d0853ce574f1d6c9ba0a844a41ddfd7d15fe346adf48d2a38716b1968bfb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/precomparison-metrics.json",
+      "bytes": 96146,
+      "sha256": "39c239136e08f296aff718fcb2790d587761a4368dcd6ec567a1f205fb6e47f9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/probe.mjs",
+      "bytes": 6403,
+      "sha256": "3e2aa8083dac99a14c57b5321329253e3d3a1c230a88a77dbaa0447385119af6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/profiles.cpuprofile.gz",
+      "bytes": 85341,
+      "sha256": "8478435b9f95e8d5d078220f9168316c8ec247e59bad28f3cb3c411ed8219597",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 866409,
+      "uncompressed_sha256": "56306e372dc18b87c8e683e90acad4c83d977cc915c1b69169fee5af05de89e4"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/result.json",
+      "bytes": 98281,
+      "sha256": "da981ad9eed65242f51f39630dc2d3428355d3180289064b9be2fbd6d7c70bc3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/stdout.log",
+      "bytes": 878,
+      "sha256": "c70f0a54cca4a65c6b7833f444bf7b201f0129c0354e9b7a38ce9ee9ba6f01e8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/successful-comparison/supervisor.py",
+      "bytes": 2724,
+      "sha256": "d4a4d3976b1e90bc500fdbdd06cebd428c6d8727c07209fcd59315cf7f88510e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/retained-proof-001/summary.json",
+      "bytes": 12566,
+      "sha256": "17451d9fb8374d1f3036ef2c1482dee8ed466fb7fbb70fc18863ed60dc7741fa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/native-consumer-preregistration.json",
+      "bytes": 9980,
+      "sha256": "f9e108924ab69ad37fe8ab9452afe7babc6657904fdd0dc3291f8df29c0d6b97",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json",
+      "bytes": 252214,
+      "sha256": "633bf569788c97c2aa52c27c4cb919c7dd1021eb1cd78fc7b326fc7369d475a8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/accepted-aus-producer-envelope-control.mjs",
+      "bytes": 5636,
+      "sha256": "251d4f5dd49bafb6332270ec49a1a80a4edf3c2bfdca17226ab0f717197c637a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/accepted-aus-producer-envelope-control.json",
+      "bytes": 7015,
+      "sha256": "9c5dbf99d4e4f527dce9929d881bb1eeaf94534a665472e9eed4c8f256a9bd79",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/evidence-quality.json",
+      "bytes": 29664,
+      "sha256": "c7332b3e2328993619590b899f13990ab6cfb38fd195251d4d1c106c68e020e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-checkpoint-reuse-20261012/README.md",
+      "bytes": 13783,
+      "sha256": "9b1b909a8a0fd4e6c16a7a99b7c2bf4e9f8fd24943d932e0d5e2af57df36712b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs",
+      "bytes": 58597,
+      "sha256": "aaa4782773e94a88fcf1c966ef549c6ab5fe084cd2243a43dab206ac6d185c5f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/selected-checkpoint.test.mjs",
+      "bytes": 33780,
+      "sha256": "3b09785d8f20229936331cf0791aa550fff13a810ed9607269b4841ebd884d2d",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "joint-selected-consumer",
+      "kind": "code",
+      "description": "Shared private checkpoint transition, native consumer and complete original continuous pointsets in one trusted invocation, preserving original Python numerical predicates. Genuine accepted-AUS complete joint equivalence passes with zero full selected loads; full actual products and two prior attempts are preserved. The complete reviewed shared and native scopes are incorporated by coordinated owner handoff; hosted combined integration and generic future accepted-artifact advancement remain open.",
+      "software": "Node 24.19; CPython 3.12; existing Shapely 2.1.2 and pyproj 3.7.2",
+      "units": "complete source identities, pointsets, native intervals and bytes"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "owners",
+      "value": 49625,
+      "unit": "owners",
+      "vintage": "archived",
+      "input_sha256": "57da52545e95b6e1378dc6bf083867b8532c4083d09c66476627ee7ae4beadf1",
+      "evaluation_commit": "0294ae06eb8934e1461d07d44d137529d6b31266"
+    },
+    {
+      "id": "required-owners",
+      "value": 53,
+      "unit": "owners",
+      "vintage": "archived",
+      "input_sha256": "57da52545e95b6e1378dc6bf083867b8532c4083d09c66476627ee7ae4beadf1",
+      "evaluation_commit": "0294ae06eb8934e1461d07d44d137529d6b31266"
+    },
+    {
+      "id": "changed-owners",
+      "value": 7,
+      "unit": "owners",
+      "vintage": "archived",
+      "input_sha256": "57da52545e95b6e1378dc6bf083867b8532c4083d09c66476627ee7ae4beadf1",
+      "evaluation_commit": "0294ae06eb8934e1461d07d44d137529d6b31266"
+    },
+    {
+      "id": "native-rows",
+      "value": 18,
+      "unit": "rows",
+      "vintage": "archived",
+      "input_sha256": "57da52545e95b6e1378dc6bf083867b8532c4083d09c66476627ee7ae4beadf1",
+      "evaluation_commit": "0294ae06eb8934e1461d07d44d137529d6b31266"
+    },
+    {
+      "id": "joint-seconds",
+      "value": 24.06645932799438,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "57da52545e95b6e1378dc6bf083867b8532c4083d09c66476627ee7ae4beadf1",
+      "evaluation_commit": "0294ae06eb8934e1461d07d44d137529d6b31266"
+    },
+    {
+      "id": "supervised-seconds",
+      "value": 25.18979377699725,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "57da52545e95b6e1378dc6bf083867b8532c4083d09c66476627ee7ae4beadf1",
+      "evaluation_commit": "0294ae06eb8934e1461d07d44d137529d6b31266"
+    },
+    {
+      "id": "group-rss",
+      "value": 540454912,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "57da52545e95b6e1378dc6bf083867b8532c4083d09c66476627ee7ae4beadf1",
+      "evaluation_commit": "0294ae06eb8934e1461d07d44d137529d6b31266"
+    },
+    {
+      "id": "full-loads",
+      "value": 0,
+      "unit": "calls",
+      "vintage": "archived",
+      "input_sha256": "57da52545e95b6e1378dc6bf083867b8532c4083d09c66476627ee7ae4beadf1",
+      "evaluation_commit": "0294ae06eb8934e1461d07d44d137529d6b31266"
+    },
+    {
+      "id": "final-owners",
+      "value": 49625,
+      "unit": "owners",
+      "vintage": "archived",
+      "input_sha256": "18f5b39c1eb16c6b995a6e935f1ef7ab524c56adbb992d8378066c2cf77cba5e",
+      "evaluation_commit": "226336bd1b0f3cd10b8894bf0ce90c022f64b4a2"
+    },
+    {
+      "id": "final-required-owners",
+      "value": 53,
+      "unit": "owners",
+      "vintage": "archived",
+      "input_sha256": "18f5b39c1eb16c6b995a6e935f1ef7ab524c56adbb992d8378066c2cf77cba5e",
+      "evaluation_commit": "226336bd1b0f3cd10b8894bf0ce90c022f64b4a2"
+    },
+    {
+      "id": "final-changed-owners",
+      "value": 7,
+      "unit": "owners",
+      "vintage": "archived",
+      "input_sha256": "18f5b39c1eb16c6b995a6e935f1ef7ab524c56adbb992d8378066c2cf77cba5e",
+      "evaluation_commit": "226336bd1b0f3cd10b8894bf0ce90c022f64b4a2"
+    },
+    {
+      "id": "final-native-rows",
+      "value": 18,
+      "unit": "rows",
+      "vintage": "archived",
+      "input_sha256": "18f5b39c1eb16c6b995a6e935f1ef7ab524c56adbb992d8378066c2cf77cba5e",
+      "evaluation_commit": "226336bd1b0f3cd10b8894bf0ce90c022f64b4a2"
+    },
+    {
+      "id": "final-joint-seconds",
+      "value": 23.342238393001026,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "18f5b39c1eb16c6b995a6e935f1ef7ab524c56adbb992d8378066c2cf77cba5e",
+      "evaluation_commit": "226336bd1b0f3cd10b8894bf0ce90c022f64b4a2"
+    },
+    {
+      "id": "final-supervised-seconds",
+      "value": 24.328940886000055,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "18f5b39c1eb16c6b995a6e935f1ef7ab524c56adbb992d8378066c2cf77cba5e",
+      "evaluation_commit": "226336bd1b0f3cd10b8894bf0ce90c022f64b4a2"
+    },
+    {
+      "id": "final-group-rss",
+      "value": 540028928,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "18f5b39c1eb16c6b995a6e935f1ef7ab524c56adbb992d8378066c2cf77cba5e",
+      "evaluation_commit": "226336bd1b0f3cd10b8894bf0ce90c022f64b4a2"
+    },
+    {
+      "id": "final-full-loads",
+      "value": 0,
+      "unit": "calls",
+      "vintage": "archived",
+      "input_sha256": "18f5b39c1eb16c6b995a6e935f1ef7ab524c56adbb992d8378066c2cf77cba5e",
+      "evaluation_commit": "226336bd1b0f3cd10b8894bf0ce90c022f64b4a2"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node --test test/selected-checkpoint-continuous.test.mjs test/selected-joint-entry.test.mjs",
+    "node --test test/selected-joint-check.test.mjs test/trusted-geography-check.test.mjs",
+    "node --test test/unchanged-selected-geography.test.mjs",
+    "node --test test/native-checkpoint-consumer.test.mjs test/package-preflight.test.mjs test/selected-joint-package-boundary.test.mjs"
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "owners",
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/summary.json",
+      "json_pointer": "/complete_owners"
+    },
+    {
+      "metric_id": "required-owners",
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/summary.json",
+      "json_pointer": "/required_owners"
+    },
+    {
+      "metric_id": "changed-owners",
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/summary.json",
+      "json_pointer": "/changed_owners"
+    },
+    {
+      "metric_id": "native-rows",
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/summary.json",
+      "json_pointer": "/native_changed_rows"
+    },
+    {
+      "metric_id": "joint-seconds",
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/summary.json",
+      "json_pointer": "/complete_joint_seconds"
+    },
+    {
+      "metric_id": "supervised-seconds",
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/summary.json",
+      "json_pointer": "/supervised_seconds"
+    },
+    {
+      "metric_id": "group-rss",
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/summary.json",
+      "json_pointer": "/sampled_group_peak_rss_bytes"
+    },
+    {
+      "metric_id": "full-loads",
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-003/summary.json",
+      "json_pointer": "/v8_call_counts/loadSelection"
+    },
+    {
+      "metric_id": "final-owners",
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/summary.json",
+      "json_pointer": "/complete_owners"
+    },
+    {
+      "metric_id": "final-required-owners",
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/summary.json",
+      "json_pointer": "/required_owners"
+    },
+    {
+      "metric_id": "final-changed-owners",
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/summary.json",
+      "json_pointer": "/changed_owners"
+    },
+    {
+      "metric_id": "final-native-rows",
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/summary.json",
+      "json_pointer": "/native_changed_rows"
+    },
+    {
+      "metric_id": "final-joint-seconds",
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/summary.json",
+      "json_pointer": "/complete_joint_seconds"
+    },
+    {
+      "metric_id": "final-supervised-seconds",
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/summary.json",
+      "json_pointer": "/supervised_seconds"
+    },
+    {
+      "metric_id": "final-group-rss",
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/summary.json",
+      "json_pointer": "/sampled_group_peak_rss_bytes"
+    },
+    {
+      "metric_id": "final-full-loads",
+      "path": "coordination/engineering/selected-zero-load-joint-20261012/retained-proof-004/summary.json",
+      "json_pointer": "/v8_call_counts/loadSelection"
+    }
+  ]
+}
