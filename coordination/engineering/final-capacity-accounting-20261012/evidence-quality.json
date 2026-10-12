@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "issue": 1773,
+  "lane": "engineering",
+  "worker_id": "01a12eba-b665-7602-a8bb-0d46c58a6030",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "1cbd8ece2a0e1f66e6124de7fbc45294e7d64051",
+    "files": [
+      {
+        "path": "scripts/final-capacity.mjs",
+        "bytes": 21375,
+        "sha256": "a9e2f6626108783fdfbe23c6e983c0b088ab1dc04e96271cb8a39d44b77eb4a7",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/final-capacity-accounting-20261012/baseline-failure.log",
+      "bytes": 4516,
+      "sha256": "1d1dc342522458fb5f38793a90616cfeda7546e3a2f31aee80dda1ff92aa3ba2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/final-capacity-accounting-20261012/regression.log",
+      "bytes": 17312,
+      "sha256": "249f14b6f046bca2358d697d6da6929bbc444aed0f515f0e3e86c224b5a9b5f2",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "final-capacity-accounting",
+      "kind": "code",
+      "description": "Real githubAPI and completeIntegration with synthetic network responses demonstrate the former estimated-cap refusal, successful fresh-quota attempt admission, genuine conditional revalidation and retry execution, and live-header shared-quota depletion refusal. Retained adjacent tests exercise immutable transport, deadlines, evidence and authority gates. No scientific or live provider execution.",
+      "software": "v24.19.0",
+      "units": "test assertions"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test --test-name-pattern=\"actual final HTTP fanout|actual final high fanout\" test/final-capacity.test.mjs (unchanged baseline code; expected failure)",
+    "node --test test/final-capacity.test.mjs test/git-blob-transport.test.mjs test/github-admission.test.mjs test/github-quota.test.mjs test/immutable-git-blobs.test.mjs test/merge-integration.test.mjs test/premerge-evidence.test.mjs"
+  ]
+}
