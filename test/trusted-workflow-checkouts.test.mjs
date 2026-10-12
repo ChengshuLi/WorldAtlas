@@ -5,6 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {spawnSync, execFileSync} from 'node:child_process';
 import {checkGitScope} from '../scripts/check-handoff-scope.mjs';
+import {createHash} from 'node:crypto';
 
 const root = path.resolve(import.meta.dirname, '..');
 const workflows = ['issue-claims.yml', 'worker-merge.yml', 'merge-integration-checks.yml', 'queue-readiness-audit.yml', 'merge-scheduler.yml'];
@@ -185,8 +186,8 @@ function packageWorkflow() {
 }
 function workflowCondition(expression, context, {success=true,cancelled=false}={}) {
   if(expression&&!/\b(?:always|success|failure|cancelled)\(/.test(expression)&&!success)return false;
-  return expression?Boolean(new Function('needs','github','matrix','always','cancelled','success','failure',
-    `return (${expression});`)(context.needs,context.github,context.matrix,()=>true,()=>cancelled,()=>success,()=>!success)):success;
+  return expression?Boolean(new Function('needs','github','matrix','steps','always','cancelled','success','failure',
+    `return (${expression});`)(context.needs,context.github,context.matrix,context.steps??{},()=>true,()=>cancelled,()=>success,()=>!success)):success;
 }
 function packageContext({profile='full',selection='complete',full='true',action='synchronize',result='success'}={}) {
   return {needs:{profile:{result:'success',outputs:{profile,test_selection:selection,full,blocked:'false'}},regression:{result}},
@@ -204,7 +205,8 @@ test('full PR co-locates actual package work on shard zero without changing the 
   assert.equal(packageStep(w.package,'Verify package controls').run,controls);
   assert.equal(packageStep(w.regression,'Build hosted assets').run,'npm run build:cloudflare');
   assert.equal(packageStep(w.regression,'Complete regression shard').run,'node scripts/run-integration-tests.mjs');
-  assert.match(w.regression.steps.find(step=>step.name==='Checkout reviewed head').text,/ref: \$\{\{ github.event.pull_request.head.sha \}\}/);
+  assert.match(packageStep(w.regression,'Authenticate trusted full-checkout bootstrap').text,/CI_CHECKOUT_SHA: \$\{\{ github.event.pull_request.head.sha \}\}/);
+  assert.match(w.regression.steps.find(step=>step.name==='Checkout reviewed head').text,/CI_CHECKOUT_SHA: \$\{\{ steps.checkout_bootstrap.outputs.sha \}\}/);
   for(const full of ['true','false'])for(const shard of [0,1,2]){
     ctx.needs.profile.outputs.full=full;ctx.matrix.shard=shard;
     const producer=['Verify full-regression package controls','Build hosted assets','Read back qualified native build outputs when selected',
@@ -303,4 +305,205 @@ test('Cloudflare label and artifacts do not claim the separate Sites reserve mea
   assert.doesNotMatch(w.source,/path: \.cache\/deployment-budget.json/);
   assert.equal(packageStep(w.package,'Build Cloudflare package without publishing').run,'npm run build:cloudflare');
   assert.match(site,/run: npm run build:hosted/);assert.match(site,/path: \.cache\/deployment-budget.json/);
+});
+
+function checkoutBootstrapBodies() {
+  return ['merge-integration-checks.yml','worker-merge.yml'].flatMap(workflow => {
+    const source=fs.readFileSync(path.join(root,'.github/workflows',workflow),'utf8');
+    return [...source.matchAll(/python3 -I -B - <<'CHECKOUT_BOOTSTRAP'\n([\s\S]*?)          CHECKOUT_BOOTSTRAP/g)]
+      .map(match=>({workflow,body:match[1].split('\n').map(line=>line.slice(10)).join('\n')}));
+  });
+}
+function checkoutBootstrapFixture({absence=false,helperMode='100644'}={}) {
+  const object=(kind,raw)=>createHash('sha1').update(Buffer.from(kind+' '+raw.length+'\0')).update(raw).digest('hex');
+  const raw=Buffer.from("print('authenticated baseline helper')\n"),helper=object('blob',raw),repo='ChengshuLi/WorldAtlas';
+  const base='a'.repeat(40),sha='b'.repeat(40),candidateTree='c'.repeat(40),routes={};
+  const entry=(path,mode,type,sha)=>({path,mode,type,sha});
+  const makeTree=rows=>{
+    const sorted=[...rows].sort((a,b)=>Buffer.compare(Buffer.from(a.path+(a.type==='tree'?'/':'\0')),Buffer.from(b.path+(b.type==='tree'?'/':'\0'))));
+    const raw=Buffer.concat(sorted.map(row=>Buffer.concat([Buffer.from(row.mode.replace(/^0+/,'')+' '+row.path+'\0'),Buffer.from(row.sha,'hex')])));
+    const hash=object('tree',raw);routes['/git/trees/'+hash]={sha:hash,truncated:false,tree:rows};return hash;
+  };
+  const scripts=makeTree([entry('a.py','100644','blob','1'.repeat(40)),...(absence?[]:[entry('acquire-ci-checkout.py',helperMode,'blob',helper)]),entry('é.py','100644','blob','2'.repeat(40))]);
+  // Directory ordering uses a slash, and raw tree mode drops API's leading zero.
+  const baseTree=makeTree([entry('scripts','040000','tree',scripts),entry('scripts.txt','100644','blob','3'.repeat(40)),entry('submodule','160000','commit','4'.repeat(40))]);
+  routes['/pulls/17']={number:17,state:'open',base:{sha:base,ref:'main',repo:{full_name:repo}},head:{sha,ref:'engineering/fixture',repo:{full_name:repo}}};
+  routes['/git/commits/'+base]={sha:base,tree:{sha:baseTree}};routes['/git/commits/'+sha]={sha,tree:{sha:candidateTree}};
+  routes['/git/blobs/'+helper]={sha:helper,size:raw.length,encoding:'base64',content:raw.toString('base64')+'\n'};
+  return {routes,raw,helper,base,sha,baseTree,scripts,candidateTree,repo};
+}
+function runCheckoutBootstrap(body,fixture,{queue=false,failure='',failureRoute='',rawRoute='',rawResponse='',symlinkTemp=false}={}) {
+  const temporary=fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(),'atlas-checkout-bootstrap-')));
+  try {
+    const runner=path.join(temporary,'runner');fs.mkdirSync(runner);
+    const temp=symlinkTemp?path.join(temporary,'runner-link'):runner;if(symlinkTemp)fs.symlinkSync(runner,temp);
+    const source=path.join(temporary,'bootstrap.py'),input=path.join(temporary,'fixture.json'),output=path.join(temporary,'output'),trace=path.join(temporary,'trace.json');
+    fs.writeFileSync(source,body);fs.writeFileSync(input,JSON.stringify({...fixture,failure,failureRoute,rawRoute,rawResponse}));
+    const wrapper=`import io,json,os,sys,urllib.request,urllib.error,signal,time,threading,http.server,socketserver
+fixture=json.load(open(sys.argv[2])); calls=[]; servers=[]
+real_open=urllib.request.build_opener().open
+if fixture['failure']=='trickle':
+ original_timer=signal.setitimer
+ def bounded_timer(which,seconds):
+  assert seconds in (0,60)
+  return original_timer(which,0.25 if seconds else 0)
+ signal.setitimer=bounded_timer
+class Trickle(http.server.BaseHTTPRequestHandler):
+ def log_message(self,*args): pass
+ def do_GET(self):
+  self.send_response(200); self.send_header('Content-Length','100000'); self.end_headers()
+  try:
+   while True:
+    self.wfile.write(b' '); self.wfile.flush(); calls.append('trickle-chunk'); time.sleep(0.04)
+  except (BrokenPipeError,ConnectionResetError): pass
+class TrickleServer(http.server.ThreadingHTTPServer):
+ daemon_threads=True
+ block_on_close=False
+ def server_bind(self):
+  socketserver.TCPServer.server_bind(self); self.server_name='fixture'; self.server_port=self.server_address[1]
+class Response:
+ status=200
+ def __init__(self,raw): self.body=io.BytesIO(raw)
+ def __enter__(self): return self
+ def __exit__(self,*args): pass
+ def read(self,limit): return self.body.read(limit)
+class Opener:
+ def open(self,request,timeout):
+  assert request.full_url.startswith('https://api.github.com/repos/ChengshuLi/WorldAtlas/')
+  assert request.get_header('Authorization')=='Bearer fixture-secret-never-print'
+  assert 0 < timeout <= 20
+  route=request.full_url.split('/WorldAtlas',1)[1]; calls.append(route)
+  if route==fixture['failureRoute']:
+   if fixture['failure']=='trickle':
+    server=TrickleServer(('127.0.0.1',0),Trickle); servers.append(server)
+    threading.Thread(target=server.serve_forever,daemon=True).start()
+    return real_open('http://127.0.0.1:'+str(server.server_port)+'/',timeout=20)
+   if fixture['failure']=='timeout': raise TimeoutError('fixture-secret-never-print')
+   raise urllib.error.HTTPError(request.full_url,int(fixture['failure']),'fixture-secret-never-print',None,None)
+  raw=fixture['rawResponse'].encode() if route==fixture['rawRoute'] else json.dumps(fixture['routes'][route]).encode()
+  return Response(raw)
+urllib.request.build_opener=lambda *handlers: Opener()
+try: exec(compile(open(sys.argv[1]).read(),sys.argv[1],'exec'),{'__name__':'__main__'})
+finally:
+ for server in servers: server.server_close()
+ json.dump(calls,open(sys.argv[3],'w'))
+`;
+    const result=spawnSync('python3',['-I','-B','-c',wrapper,source,input,trace],{encoding:'utf8',timeout:10000,
+      env:{...process.env,WORLDATLAS_CHECKOUT_TOKEN:'fixture-secret-never-print',CI_CHECKOUT_REPOSITORY:fixture.repo,
+        CI_CHECKOUT_BASE:fixture.base,CI_CHECKOUT_SHA:fixture.sha,CI_CHECKOUT_PR:queue?'':'17',CI_CHECKOUT_HEAD_REF:'engineering/fixture',RUNNER_TEMP:temp,GITHUB_OUTPUT:output}});
+    const outputs=Object.fromEntries((fs.existsSync(output)?fs.readFileSync(output,'utf8'):'').trim().split('\n').filter(Boolean).map(row=>{const split=row.indexOf('=');return[row.slice(0,split),row.slice(split+1)];}));
+    const materialized=outputs.helper?fs.readFileSync(outputs.helper):null;
+    assert.doesNotMatch(result.stdout+result.stderr,/fixture-secret-never-print/,'failures must not log credentials');
+    return {...result,outputs,materialized,calls:fs.existsSync(trace)?JSON.parse(fs.readFileSync(trace)):[]};
+  } finally {fs.rmSync(temporary,{recursive:true,force:true});}
+}
+
+test('full-checkout inline bootstrap authenticates base trees and helper bytes before exposing immutable candidate identity',()=>{
+  const bodies=checkoutBootstrapBodies();assert.equal(bodies.length,3);
+  assert.equal(new Set(bodies.map(row=>row.body)).size,1,'three full acquisition boundaries share identical authentication');
+  for(const {body,workflow} of bodies){
+    const f=checkoutBootstrapFixture(),result=runCheckoutBootstrap(body,f,{queue:workflow==='worker-merge.yml'});
+    assert.equal(result.status,0,result.stderr);assert.equal(result.outputs.mode,'helper');
+    assert.equal(result.outputs.sha,f.sha);assert.equal(result.outputs.tree,f.candidateTree);assert.deepEqual(result.materialized,f.raw);
+    assert.ok(Number(result.outputs.elapsed)>=0&&Number(result.outputs.elapsed)<60);
+    assert.equal(result.calls.includes('/pulls/17'),workflow!=='worker-merge.yml');
+    assert.deepEqual(result.calls.filter(route=>route.startsWith('/git/blobs/')),['/git/blobs/'+f.helper]);
+    assert.match(body,/signal.setitimer\(signal.ITIMER_REAL, 60\)/);assert.match(body,/consumed <= 8 \* 1024 \* 1024/);
+    assert(body.indexOf('os.fsync(output.fileno())')<body.indexOf('elapsed = time.monotonic() - started'));
+  }
+});
+
+test('full-checkout inline bootstrap permits legacy only after positively verified ordinary tree absence',()=>{
+  for(const {body} of checkoutBootstrapBodies()){
+    const f=checkoutBootstrapFixture({absence:true}),result=runCheckoutBootstrap(body,f);
+    assert.equal(result.status,0,result.stderr);assert.equal(result.outputs.mode,'legacy');assert.equal(result.materialized,null);
+    assert.equal(result.calls.some(route=>route.startsWith('/git/blobs/')),false);
+  }
+});
+
+test('full-checkout inline bootstrap refuses authentication, completeness, identity and transport errors without fallback',()=>{
+  const body=checkoutBootstrapBodies()[0].body;
+  for(const kind of ['base-ref','base-repo','head-ref','head-drift','commit-sha','candidate-tree','tree-hash','truncated','helper-mode','blob-sha','blob-size','blob-hash','malformed','oversized','404','401','timeout','symlink-temp']){
+    const f=checkoutBootstrapFixture({helperMode:kind==='helper-mode'?'120000':'100644'}),options={};
+    if(kind==='base-ref')f.routes['/pulls/17'].base.ref='other';
+    if(kind==='base-repo')f.routes['/pulls/17'].base.repo.full_name='foreign/repo';
+    if(kind==='head-ref')f.routes['/pulls/17'].head.ref='engineering/foreign';
+    if(kind==='head-drift')f.routes['/pulls/17'].head.sha='d'.repeat(40);
+    if(kind==='commit-sha')f.routes['/git/commits/'+f.base].sha='d'.repeat(40);
+    if(kind==='candidate-tree')f.routes['/git/commits/'+f.sha].tree.sha='not-a-tree';
+    if(kind==='tree-hash')f.routes['/git/trees/'+f.scripts].tree=f.routes['/git/trees/'+f.scripts].tree.filter(row=>row.path!=='acquire-ci-checkout.py');
+    if(kind==='truncated')f.routes['/git/trees/'+f.scripts].truncated=true;
+    if(kind==='blob-sha')f.routes['/git/blobs/'+f.helper].sha='d'.repeat(40);
+    if(kind==='blob-size')f.routes['/git/blobs/'+f.helper].size++;
+    if(kind==='blob-hash')f.routes['/git/blobs/'+f.helper].content=Buffer.from('x'.repeat(f.raw.length)).toString('base64');
+    if(['malformed','oversized'].includes(kind)){options.rawRoute='/git/trees/'+f.scripts;options.rawResponse=kind==='malformed'?'{bad':'x'.repeat(2*1024*1024+1);}
+    if(['404','401','timeout'].includes(kind)){options.failureRoute='/git/blobs/'+f.helper;options.failure=kind;}
+    if(kind==='symlink-temp')options.symlinkTemp=true;
+    const result=runCheckoutBootstrap(body,f,options);assert.notEqual(result.status,0,kind);assert.equal(result.outputs.mode,undefined,kind);
+    assert.match(result.stderr,/no legacy fallback authorized/,kind);
+  }
+});
+
+test('full-checkout routing retains exactly one successful canonical verification and acquisition-only credentials',()=>{
+  const w=packageWorkflow();assert.match(w.package.header,/contents: read\n      # Authenticate[^\n]+\n      pull-requests: read/);
+  for(const job of [w.regression,w.package])for(const mode of ['helper','legacy']){
+    const ctx=packageContext({selection:job===w.package?'selected-data':'complete'});ctx.steps={checkout_bootstrap:{outputs:{mode}}};
+    const canonical=job===w.package?'Checkout complete package inputs':'Checkout reviewed head';
+    assert.equal(job.steps.filter(step=>step.name===canonical&&workflowCondition(step.condition,ctx)).length,1);
+    const helper=packageStep(job,'Acquire full checkout with authenticated bounded helper'),legacy=packageStep(job,'Legacy full checkout only for proven trusted-helper absence');
+    assert.equal(workflowCondition(helper.condition,ctx),mode==='helper');assert.equal(workflowCondition(legacy.condition,ctx),mode==='legacy');
+    for(const step of [helper,legacy,...job.steps.filter(step=>step.name===canonical)])assert.equal(workflowCondition(step.condition,ctx,{success:false}),false);
+    assert.match(helper.run,/--fetch-timeout-seconds 240 --total-timeout-seconds 420 --max-attempts 2 --elapsed-seconds/);
+    const tokenSteps=job.steps.filter(step=>/WORLDATLAS_CHECKOUT_TOKEN:/.test(step.text));assert.equal(tokenSteps.length,2);
+    for(const step of tokenSteps)assert.ok(['Authenticate trusted full-checkout bootstrap','Acquire full checkout with authenticated bounded helper'].includes(step.name));
+    const verify=job.steps.find(step=>step.name===canonical&&workflowCondition(step.condition,ctx));
+    assert.match(verify.run,/HEAD\^\{tree\}/);assert.match(verify.run,/symbolic-ref/);assert.match(verify.run,/extraheader/);assert.doesNotMatch(verify.text,/WORLDATLAS_CHECKOUT_TOKEN:/);
+  }
+  const evidence=packageContext({profile:'evidence'});
+  assert.equal(w.regression.steps.filter(step=>step.name==='Checkout reviewed head'&&workflowCondition(step.condition,evidence)).length,1);
+  assert.match(w.regression.steps.find(step=>step.name==='Checkout reviewed head'&&workflowCondition(step.condition,evidence)).text,/sparse-checkout-cone-mode: false/);
+});
+
+test('full-checkout bootstrap accepts live main movement while authenticating only the original frozen helper base',()=>{
+  for(const {body} of checkoutBootstrapBodies()){
+    const f=checkoutBootstrapFixture();f.routes['/pulls/17'].base.sha='d'.repeat(40);
+    const result=runCheckoutBootstrap(body,f);
+    assert.equal(result.status,0,result.stderr);assert.equal(result.outputs.mode,'helper');
+    assert.deepEqual(result.materialized,f.raw);assert.ok(result.calls.includes('/git/commits/'+f.base));
+    assert.equal(result.calls.includes('/git/commits/'+'d'.repeat(40)),false);
+  }
+});
+
+test('full-checkout canonical verification executes against real Git and refuses mismatched identity or retained credentials',()=>{
+  const bodies=['merge-integration-checks.yml','worker-merge.yml'].flatMap(workflow=>
+    [...fs.readFileSync(path.join(root,'.github/workflows',workflow),'utf8').matchAll(/python3 -I -B - <<'CHECKOUT_VERIFY'\n([\s\S]*?)          CHECKOUT_VERIFY/g)]
+      .map(match=>match[1].split('\n').map(line=>line.slice(10)).join('\n')));
+  assert.equal(bodies.length,3);assert.equal(new Set(bodies).size,1);
+  for(const kind of ['valid','wrong-head','wrong-tree','attached','header','credential-helper','remote-credential','inherited-token']){
+    const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-checkout-verification-'));
+    try{
+      const git=(...args)=>execFileSync('git',args,{cwd:directory,encoding:'utf8',stdio:['pipe','pipe','pipe']}).trim();
+      git('init','-q','-b','fixture');git('config','user.name','Fixture');git('config','user.email','fixture@example.invalid');
+      fs.writeFileSync(path.join(directory,'input'),'bounded metadata\n');git('add','input');git('commit','-qm','fixture');
+      const sha=git('rev-parse','HEAD'),tree=git('rev-parse','HEAD^{tree}');
+      if(kind!=='attached')git('checkout','--detach','-q',sha);
+      git('remote','add','origin','https://github.com/ChengshuLi/WorldAtlas.git');
+      if(kind==='header')git('config','http.https://github.com/.extraheader','fixture-secret-never-print');
+      if(kind==='credential-helper')git('config','credential.helper','fixture-secret-never-print');
+      if(kind==='remote-credential')git('remote','set-url','origin','https://fixture-secret-never-print@github.com/ChengshuLi/WorldAtlas.git');
+      const env={...process.env,CI_CHECKOUT_REPOSITORY:'ChengshuLi/WorldAtlas',CI_CHECKOUT_SHA:kind==='wrong-head'?'a'.repeat(40):sha,CI_CHECKOUT_TREE:kind==='wrong-tree'?'b'.repeat(40):tree};
+      for(const key of ['WORLDATLAS_CHECKOUT_TOKEN','GH_TOKEN','GITHUB_TOKEN'])delete env[key];
+      if(kind==='inherited-token')env.WORLDATLAS_CHECKOUT_TOKEN='fixture-secret-never-print';
+      const result=spawnSync('python3',['-I','-B','-c',bodies[0]],{cwd:directory,env,encoding:'utf8',timeout:10000});
+      assert.equal(result.status===0,kind==='valid',kind+': '+result.stderr);assert.doesNotMatch(result.stdout+result.stderr,/fixture-secret-never-print/);
+    }finally{fs.rmSync(directory,{recursive:true,force:true});}
+  }
+});
+
+test('full-checkout bootstrap real wall alarm interrupts a continuously trickling HTTP body',()=>{
+  const f=checkoutBootstrapFixture(),started=Date.now();
+  const result=runCheckoutBootstrap(checkoutBootstrapBodies()[0].body,f,{failure:'trickle',failureRoute:'/git/blobs/'+f.helper});
+  assert.notEqual(result.status,0);assert.match(result.stderr,/no legacy fallback authorized/);
+  assert.equal(result.outputs.mode,undefined);assert.ok(result.calls.filter(value=>value==='trickle-chunk').length>=2);
+  assert.ok(Date.now()-started<3000,'real SIGALRM interrupts socket read despite continuous incoming bytes');
 });
