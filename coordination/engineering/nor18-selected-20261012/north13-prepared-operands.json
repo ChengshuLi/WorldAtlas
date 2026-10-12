@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "kind": "prepared-successor-whole-native-operands-retention",
+  "status": "prepared-unselected-awaiting-accepted-predecessor",
+  "accepted_predecessor": null,
+  "restore_before_successor_selection": [
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-native-transport-001/runs-2097152.bin.gz",
+      "commit": "0392b6ad1e608ad59d73ce768feb89e0e554e989",
+      "mode": "100644",
+      "blob": "6047d17c8328741d713c727e6656caf02f9d2723",
+      "bytes": 967519,
+      "sha256": "fca2e7d5f30a1914d370ebf660c69bdb5b872af41e528a7f0bebde08de6644ea"
+    },
+    {
+      "path": "coordination/engineering/nor18-selected-20261012/north13-native-transport-001/runs-3145728.bin.gz",
+      "commit": "0392b6ad1e608ad59d73ce768feb89e0e554e989",
+      "mode": "100644",
+      "blob": "a665bbadfd08dc24c55bc6fdb6c1788cd4aac9b9",
+      "bytes": 903226,
+      "sha256": "51a2e4a95b922856870e644fcf1c2ec6685fc36d49a1ad684708d6df8e42b47b"
+    }
+  ],
+  "reason": "The first selected delivery consumes only south5. Unselected north13 whole run files remain immutable in committed Git history and will be restored byte-identically for the successor, keeping each selected file projection within its authenticated consumer roles."
+}
