@@ -48,7 +48,9 @@ export const AUDITED_READERS = Object.freeze({
   // The second profile is reviewed stage-2 blob f8e4a88a6dbe3d3961d6b17d9b926ee4488561a8:
   // catalogue/admission/peak accounting changes; all input routes are identical.
   [PREFIX + 'selected-neighbor-prevention.mjs']: ['63745cc5d4f15bdd8c153787df07379d813ab037fc1e0734944a75568235e8aa',
-    '6da5919c63822393959afc8f2499c76470aa6b51d6e29664d372e9eee79ae4b1', '1ebc1415f9c18cf8639734073313667bbc0e831317484c48fcafbc6f6d7f1216'],
+    '6da5919c63822393959afc8f2499c76470aa6b51d6e29664d372e9eee79ae4b1', '1ebc1415f9c18cf8639734073313667bbc0e831317484c48fcafbc6f6d7f1216',
+    // Independent historical admission preserves all input routes.
+    '1593aad902a1c7010c5ffde21b2af2d39edd2093c82fac6973ed207e3b365847'],
   // Candidate and single-vintage frame reuse change lifetime/accounting, not input routes.
   [PREFIX + 'selected-continuous-entry.mjs']: ['84ddc84798fa371e37c0acbd6764a39ef79296f3b8a57ff09aa4ed416e7ae1b9', '198817f84574d3d04b0ab2c4827eced98211533a79851ee43b97c59d80663c07',
     '7f23e383ba04ab2953758087eb6c2c69c777d103589f5f1e00076163f084aeac',
