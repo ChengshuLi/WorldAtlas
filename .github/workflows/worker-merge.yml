@@ -41,6 +41,7 @@ jobs:
       candidate_ref: ${{ steps.prepare.outputs.candidate_ref }}
       base: ${{ steps.prepare.outputs.base }}
       profile: ${{ steps.prepare.outputs.profile }}
+      geography_software: ${{ steps.prepare.outputs.geography_software }}
       shards: ${{ steps.prepare.outputs.shards }}
       test_selection: ${{ steps.prepare.outputs.test_selection }}
       expectations_path: ${{ steps.prepare.outputs.expectations_path }}
@@ -86,11 +87,12 @@ jobs:
       report_sha256: ${{ steps.check.outputs.report_sha256 }}
       artifact_name: ${{ steps.check.outputs.artifact_name }}
     steps:
-      # Trusted baseline code reads candidate blobs; candidate code never runs.
+      # Full software runs the exact candidate checker without credentials.
+      # Selected data and source-only work retain the trusted baseline checker.
       - name: Checkout trusted geographic checker
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
-          ref: ${{ needs.prepare.outputs.base }}
+          ref: ${{ (needs.prepare.outputs.geography_software == 'true') && needs.prepare.outputs.candidate || needs.prepare.outputs.base }}
           persist-credentials: false
           sparse-checkout: |
             scripts
@@ -109,11 +111,15 @@ jobs:
       - name: Check exact combined geography with trusted baseline code
         id: check
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ !(needs.prepare.outputs.geography_software == 'true') && github.token || '' }}
           GEOGRAPHY_PR_NUMBER: ${{ inputs.pr_number }}
           GEOGRAPHY_REVIEWED_HEAD: ${{ inputs.expected_head }}
           GEOGRAPHY_ARTIFACT_NAME: geography-${{ inputs.request_id }}-${{ github.run_attempt }}
           GEOGRAPHY_BASELINE: ${{ needs.prepare.outputs.base }}
+          GIT_CONFIG_NOSYSTEM: '1'
+          GIT_CONFIG_GLOBAL: /dev/null
+          GIT_TERMINAL_PROMPT: '0'
+          GEOGRAPHY_CODE_COMMIT: ${{ (needs.prepare.outputs.geography_software == 'true') && needs.prepare.outputs.candidate || needs.prepare.outputs.base }}
           GEOGRAPHY_CANDIDATE: ${{ needs.prepare.outputs.candidate }}
         run: |
           python -I -B scripts/run-geographic-check.py --fetch --out geography-check.json

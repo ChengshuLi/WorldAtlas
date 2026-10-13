@@ -93,7 +93,7 @@ export async function checkPRGates({event, repo, token, api, phase = 'all'}) {
   verifyIssueScope({branch: settled.head.ref, issue: finalIssue});
   return {status: 'checked', phase, head_sha: scheduled.head.sha, trusted_base: scheduled.base?.sha,
     github_issue, pr_body: current.body ?? '', evidence, linked,
-    ...(regression ? {profile: regression.profile, shards: regression.shards,
+    ...(regression ? {profile: regression.profile, shards: regression.shards, geography_software: regression.geography_software,
       ...(regression.test_selection ? {test_selection: regression.test_selection, expectations_path: regression.expectations_path} : {}),
       owned_paths: linked.owned_paths ?? [], package: packageProfile} : {})};
 }
@@ -140,5 +140,5 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   console.log(JSON.stringify(result));
   if (result.status !== 'checked') process.exitCode = 1;
   else if (phase !== 'evidence') fs.appendFileSync(process.env.GITHUB_OUTPUT,
-    `profile=${result.profile}\nshards=${JSON.stringify(result.shards)}\ntest_selection=${result.test_selection ?? 'complete'}\nexpectations_path=${result.expectations_path ?? ''}\nowned_paths=${JSON.stringify(result.owned_paths)}\npr_body=${JSON.stringify(result.pr_body)}\nfull=${result.package.full}\nblocked=false\n`);
+    `geography_software=${result.geography_software}\nprofile=${result.profile}\nshards=${JSON.stringify(result.shards)}\ntest_selection=${result.test_selection ?? 'complete'}\nexpectations_path=${result.expectations_path ?? ''}\nowned_paths=${JSON.stringify(result.owned_paths)}\npr_body=${JSON.stringify(result.pr_body)}\nfull=${result.package.full}\nblocked=false\n`);
 }

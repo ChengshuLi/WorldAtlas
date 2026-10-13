@@ -24,6 +24,7 @@ jobs:
       actions: read
     outputs:
       profile: ${{ steps.select.outputs.profile }}
+      geography_software: ${{ steps.select.outputs.geography_software }}
       shards: ${{ steps.metadata_regression.outputs.reused == 'true' && '[0]' || steps.select.outputs.shards }}
       metadata_reuse: ${{ steps.metadata_regression.outputs.reused }}
       original_run: ${{ steps.metadata_regression.outputs.source_run }}
@@ -287,11 +288,12 @@ jobs:
           with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
               output.write('baseline=' + baseline + '\n')
           PYTHON
-      # Trusted baseline code reads candidate blobs; candidate code never runs.
+      # Full software runs the exact candidate checker without credentials.
+      # Selected data and source-only work retain the trusted baseline checker.
       - name: Checkout trusted geographic checker
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
-          ref: ${{ steps.geographic_parent.outputs.baseline }}
+          ref: ${{ (needs.profile.outputs.geography_software == 'true') && github.sha || steps.geographic_parent.outputs.baseline }}
           persist-credentials: false
           sparse-checkout: |
             scripts
@@ -304,7 +306,7 @@ jobs:
           node-version: '24'
       - name: Reuse original geography only for unchanged consumed inputs
         id: metadata_reuse
-        if: steps.geographic_parent.outputs.baseline == github.event.pull_request.base.sha
+        if: needs.profile.outputs.geography_software != 'true' && steps.geographic_parent.outputs.baseline == github.event.pull_request.base.sha
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -325,10 +327,14 @@ jobs:
       - name: Check proposed geography with trusted baseline code
         if: steps.metadata_reuse.outputs.reused != 'true'
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ !(needs.profile.outputs.geography_software == 'true') && github.token || '' }}
           GEOGRAPHY_PR_NUMBER: ${{ github.event.pull_request.number }}
           GEOGRAPHY_REVIEWED_HEAD: ${{ github.event.pull_request.head.sha }}
           GEOGRAPHY_BASELINE: ${{ steps.geographic_parent.outputs.baseline }}
+          GIT_CONFIG_NOSYSTEM: '1'
+          GIT_CONFIG_GLOBAL: /dev/null
+          GIT_TERMINAL_PROMPT: '0'
+          GEOGRAPHY_CODE_COMMIT: ${{ (needs.profile.outputs.geography_software == 'true') && github.sha || steps.geographic_parent.outputs.baseline }}
           # This event merge commit includes parallel main additions. Raw head
           # against current base would invent deletions that the PR never made.
           GEOGRAPHY_CANDIDATE: ${{ github.sha }}

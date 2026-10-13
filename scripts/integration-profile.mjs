@@ -56,6 +56,20 @@ export function integrationProfile(branch, files, reservation = {}) {
   return 'full';
 }
 
+// Route executable checker/producer changes through actual candidate science.
+// This is conservative path classification, not a programme/hash exemption.
+// Data-only full checks still use baseline code and authenticated adjudication.
+export function candidateGeographyCode(profile, files, testSelection) {
+  if (profile !== 'full' || testSelection === 'selected-data') return false;
+  return files.some(file => [file.filename, file.previous_filename].filter(Boolean).some(name =>
+    /^scripts\/.*\.(?:[cm]?js|[cm]?ts|py|wasm)$/.test(name) ||
+    /^src\/(?:native-|effective-footprint\.|ownership-codec\.|regional-import-gate\.)/.test(name) ||
+    /^coordination\/engineering\/.*\.(?:[cm]?js|[cm]?ts|py|wasm)$/.test(name) ||
+    /(?:^|\/)(?:requirements\.txt|package(?:-lock)?\.json)$/.test(name) ||
+    name === 'coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json' ||
+    /^coordination\/engineering\/additive-native-composition-20261009\/(?:execution-code-paths|mac-execution-runtime-original)\.json$/.test(name)));
+}
+
 import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
