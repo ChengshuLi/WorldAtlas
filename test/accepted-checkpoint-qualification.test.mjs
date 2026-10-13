@@ -81,7 +81,7 @@ async function trustedFixture(t,{incompleteNative=false,sourcePaths}={}){
  save('accepted/custody.json',{complete_cold_custody:[{facts,publication,effective_additions:additions,inventory}]});
  save('accepted/routes.json',inventory.map(p=>p.path).sort().map(name=>({path:name,tree:git('ls-tree','-z',selected,'--',name).toString()})));const accepted=commit();
  const rootRow={id:'fixture',accepted_head:accepted,selected_commit:selected,selection_sha256:valueSha(selection),execution_commit:one,execution_code_sha256:valueSha(execution_code),runtime_sha256:valueSha(runtime),facts:pin('accepted/facts.json'),certificate:{...pin('accepted/certificate.json.gz'),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)},publication:pin('accepted/publication.json'),custody:pin('accepted/custody.json'),routes:pin('accepted/routes.json')};
- save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',qualifier_code:CODE.map(name=>{const p=pin(name);return {path:name,bytes:p.bytes,sha256:p.sha256};}),checkpoints:[rootRow]});commit();
+ save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[rootRow]});commit();
  const api=await import(pathToFileURL(path.join(root,MODULE))),native=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
  const reader=new native.ImmutableReader(root,selected,{allowance:{phaseBytes:512*1024**2,rssBytes:512*1024**2}}),budget={shared:reader.budget,carriedBytes:1024};
  return {api,native,reader,budget,selected,root,git,save,commit,pin,ledger,patch,sidecar,envelope,selection,rootRow};
@@ -242,9 +242,7 @@ const MEMBERS=['derived-certificate.json.gz','derived-facts.json','derived-publi
 async function acceptedProducts(t,{sourcePaths}={}) {
   const f=await trustedFixture(t,{sourcePaths});
   for(const name of JOINT)f.save(name,fs.readFileSync(name));
-  const code=[...CODE,...ACCEPTED_CHECKPOINT_CODE].map(name=>({path:name,bytes:fs.statSync(path.join(f.root,name)).size,
-    sha256:sha(fs.readFileSync(path.join(f.root,name)))}));
-  f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',qualifier_code:code,checkpoints:[f.rootRow]});
+  f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[f.rootRow]});
   const trusted=f.commit();
   const reader=new f.native.ImmutableReader(f.root,trusted,{allowance:f.reader.allowance});
   const budget={shared:reader.budget,carriedBytes:1024};
@@ -287,7 +285,7 @@ async function acceptedProducts(t,{sourcePaths}={}) {
   const products=structuredClone({facts,certificate,census,continuousFacts,operands,native,continuous});
   f.api.releaseCheckpoint(state);
   const transport=await import(pathToFileURL(path.join(f.root,'scripts/accepted-selected-checkpoint.mjs')));
-  return {...f,trusted,transport,products,code};
+  return {...f,trusted,transport,products};
 }
 function pack(f,mutate=()=>{}) {
   const p=structuredClone(f.products);mutate(p);
@@ -350,7 +348,7 @@ async function qualify(f,a) {return f.api.qualifyAcceptedCheckpoint({reader:a.re
 test('accepted original archive admits a private successor without a catalogue row for that selector',async t=>{
   const f=await acceptedProducts(t),a=await acquire(f);
   // Remove all static roots. Only current method authentication remains.
-  f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',qualifier_code:f.code,checkpoints:[]});f.commit();
+  f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[]});f.commit();
   const result=await qualify(f,a);assert.equal(result.available,true);
   assert.equal(result.state.accepted_execution.kind,'accepted-selected-checkpoint-artifact-v1');
   assert.equal(result.state.ledger.rows.length,2);assert.equal(result.state.ledger.rows[1].disposition,'rejected');
@@ -394,11 +392,19 @@ test('coherently rehashed omitted routes, stale selectors, old exception drift a
   const a=await acquire(f,p=>p.facts.candidate_selection.release_id='geography:stale');
   const result=await qualify(f,a);assert.equal(result.available,false);assert.match(result.reason,/complete selector/);
 });
-test('archive carry and current method closure remain necessary at accepted admission',async t=>{
+test('accepted admission authenticates committed helper edits without repinning historical science',async t=>{
+  const f=await acceptedProducts(t),catalogue=fs.readFileSync(path.join(f.root,CATALOGUE));
+  fs.appendFileSync(path.join(f.root,'scripts/evidence-policy.mjs'),'\n// reviewed policy maintenance\n');f.commit();
+  const a=await acquire(f),result=await qualify(f,a);
+  assert.equal(result.available,true);
+  assert.deepEqual(fs.readFileSync(path.join(f.root,CATALOGUE)),catalogue);
+  f.transport.releaseAcceptedCheckpoint(a.handle);
+});
+test('archive carry and actual executing code remain necessary at accepted admission',async t=>{
   const f=await acceptedProducts(t),a=await acquire(f);a.budget.carriedBytes=0;
   await assert.rejects(qualify(f,a),/carry is undercharged/);
-  f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',qualifier_code:f.code.slice(0,4),checkpoints:[f.rootRow]});f.commit();
-  const b=await acquire(f);await assert.rejects(qualify(f,b),/method closure/);
+  fs.appendFileSync(path.join(f.root,'scripts/evidence-policy.mjs'),'\n// uncommitted executable drift\n');
+  const b=await acquire(f);await assert.rejects(qualify(f,b),/changed executing checkpoint method/);
 });
 test('census retains complete unchanged/absent routes and rejects public transition wrappers',async t=>{
   const f=await acceptedProducts(t),a=await acquire(f),{state}=await qualify(f,a);
@@ -463,7 +469,7 @@ async function installSeed(f,{failedOperating=false,omitRoute=false,omitInherite
     if(name.endsWith('.gz')){const body=name.startsWith('derived')?copy.certificate:copy.operands;
       Object.assign(root[role],{decoded_bytes:valueBytes(body).length,decoded_sha256:valueSha(body)});}
   }
-  f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',qualifier_code:f.code,checkpoints:[f.rootRow,root]});f.commit();
+  f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[f.rootRow,root]});f.commit();
   const reader=new f.native.ImmutableReader(f.root,f.trusted,{allowance:f.reader.allowance});
   return {reader,checkpointId:root.id,budget:{shared:reader.budget,carriedBytes:0}};
 }
