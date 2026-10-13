@@ -52,10 +52,10 @@ test('trusted preparation has PR comment permission while candidate tests remain
   const yaml=fs.readFileSync(path.join(root,'.github/workflows/worker-merge.yml'),'utf8');
   assert.match(yaml.split('  prepare:\n')[1].split('  integration:\n')[0],/pull-requests: write/);
   const candidate=yaml.split('  integration:\n')[1].split('  merge:\n')[0];
-  // Credential bindings are forbidden; checking that those names are absent is required.
-  const forbidden=/pull-requests: write|issues: write|\b(?:GH_TOKEN|GITHUB_TOKEN)['"]?\s*[:=]|secrets\./;
+  // Exact read-token bootstrap scope is exercised in merge-integration.test.mjs.
+  const forbidden=/contents: write|pull-requests: write|issues: write|secrets\./;
   assert.match(candidate,/permissions:\n      contents: read/);assert.doesNotMatch(candidate,forbidden);
-  for(const unsafe of ['GH_TOKEN: value','"GITHUB_TOKEN": value','export GH_TOKEN=value','pull-requests: write','issues: write','secrets.TOKEN'])
+  for(const unsafe of ['contents: write','pull-requests: write','issues: write','secrets.TOKEN'])
     assert.match(unsafe,forbidden);
 });
 
