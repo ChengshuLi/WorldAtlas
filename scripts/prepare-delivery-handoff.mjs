@@ -54,6 +54,10 @@ export function pinReader(root, {allowance} = {}) {
     return raw;
   }
   return {git, read, json: pin => JSON.parse(read(pin)), budget,
+    hasPath(commit, name) {
+      need(hex(commit, 40) && safe(name), 'Exact commit and safe whole-file path required');
+      return git('ls-tree', '-z', commit, '--', name).length > 0;
+    },
     pin(commit, name) { const p = descriptor(commit, name);
       if (!cache.has(p.git_blob_oid)) { budget.add(p); cache.set(p.git_blob_oid, git('cat-file', 'blob', p.git_blob_oid)); }
       return {...p, sha256: digest(cache.get(p.git_blob_oid))}; }};
@@ -598,13 +602,21 @@ export function finalizedPackageInputs(original, prefix, paths) {
   validatePackageInputs(original);
   need(safe(prefix.slice(0, -1)) && prefix.endsWith('/') && original.version === 1
     && unique(original.inputs) && unique(paths) && paths.every(p => safe(p) && p.startsWith(prefix)), 'Exact owned package paths required');
-  // The selected-data classifier requires the complete accepted list as an
-  // unchanged prefix, not merely preserved relative order or an equal set.
-  const additions = paths.filter(p => !original.inputs.includes(p)).sort();
+  return appendPackageReadPaths(original, paths);
+}
+
+function appendPackageReadPaths(original, paths) {
+  validatePackageInputs(original);
+  need(unique(paths) && paths.every(safe), 'Exact package read paths required');
+  // Preserve the complete accepted declaration prefix. Already-covered roles
+  // need no redundant narrower declaration beneath an accepted directory.
+  const additions = paths.filter(p => !original.inputs.some(old => old === p || old.endsWith('/') && p.startsWith(old))).sort();
   return validatePackageInputs({...original, inputs: [...original.inputs, ...additions]});
 }
 
 export function finalizeDelivery(config, reader) {
+  need(typeof config.new_prefix === 'string' && config.new_prefix.endsWith('/')
+    && safe(config.new_prefix.slice(0, -1)), 'Exact owned output prefix required');
   need(config.selector?.path === 'data/ownership-selection.json' && config.package_inputs?.path === '.github/package-inputs.json'
     && config.sidecar?.path.startsWith(config.new_prefix) && config.selected_ledger && config.rebind && !config.outer_roles,
   'Finalization requires original selector/package, actual sidecar/ledger/rebind and derived outer roles');
@@ -635,13 +647,38 @@ export function finalizeDelivery(config, reader) {
   const outputs = packageProjection({...config, outer_roles: [assets.patch, sidecar.runtime_envelope, config.sidecar]}, reader);
   const projection = JSON.parse(outputs['package-roles.json']);
   const paths = projection.paths.map(p => p.path);
-  need(paths.every(p => p.startsWith(config.new_prefix)), 'Final package replacement escapes its owned prefix');
   const baselinePackage = reader.json(config.package_inputs);
-  for (const pin of projection.paths.filter(p => baselinePackage.inputs.includes(p.path))) {
-    const original = reader.pin(config.package_inputs.commit, pin.path);
-    need(original.bytes === pin.bytes && original.sha256 === pin.sha256, 'Final package role conflicts with accepted path identity: ' + pin.path);
+  validatePackageInputs(baselinePackage);
+  const covered = name => baselinePackage.inputs.some(p => p === name || p.endsWith('/') && name.startsWith(p));
+  // This is a closed consumed-role traversal, never caller-granted write scope.
+  // Restorations are reads of already committed, byte-identical original roles;
+  // ordinary issue/claim/PR guards separately authorize their actual writes.
+  const restored = config.restored_read_roles;
+  if (restored) need(same(Object.keys(restored).sort(), ['commit', 'paths'])
+    && hex(restored.commit, 40) && unique(restored.paths) && restored.paths.every(safe)
+    && typeof reader.hasPath === 'function', 'Exact committed restored read-role inventory required');
+  const requested = new Set(restored?.paths ?? []), matched = new Set(), conflicts = [];
+  const identity = (a, b) => a.mode === '100644' && a.mode === b.mode
+    && (a.git_blob_oid ?? a.blob) === (b.git_blob_oid ?? b.blob)
+    && a.bytes === b.bytes && a.sha256 === b.sha256;
+  for (const pin of projection.paths.filter(p => !p.path.startsWith(config.new_prefix) || covered(p.path))) {
+    try {
+      const absent = requested.has(pin.path) && !reader.hasPath(config.package_inputs.commit, pin.path);
+      if (absent) {
+        const snapshot = reader.pin(restored.commit, pin.path);
+        need(identity(snapshot, pin), 'Restored snapshot differs from original consumed role');
+        matched.add(pin.path);
+      } else {
+        const original = reader.pin(config.package_inputs.commit, pin.path);
+        need(identity(original, pin), 'Original consumed role differs from accepted path');
+        need(!requested.has(pin.path), 'Restoration would overwrite an existing accepted path');
+      }
+    } catch (error) { conflicts.push({path: pin.path, reason: error.message}); }
   }
-  const packageInputs = finalizedPackageInputs(baselinePackage, config.new_prefix, paths);
+  for (const name of requested) if (!matched.has(name) && !conflicts.some(row => row.path === name))
+    conflicts.push({path: name, reason: 'Unbound or non-restorable role in restoration inventory'});
+  need(!conflicts.length, 'Final package role conflicts with accepted path identity: ' + JSON.stringify(conflicts));
+  const packageInputs = appendPackageReadPaths(baselinePackage, paths);
   const expectation = JSON.parse(outputs['selected-delivery-expectations.json']);
   // Preserve the established final smoke-expectation presentation as well.
   const expectations = {version: expectation.version, selected_ledger_sha256: expectation.selected_ledger_sha256,
@@ -725,8 +762,7 @@ async function main(args) {
     need(config.version === 1, 'Versioned advance configuration required');
     const flow = await import('./delivery-handoff-advance.mjs');
     const recipe = flow.locate(reader, config.recipe);
-    if (phase === 'status') need(fs.existsSync(path.join(root, destination, 'advance.json')), 'No existing advance to observe');
-    const journal = flow.openAdvanceJournal(root, destination, recipe, {resume: phase === 'status' || flags.includes('--resume'), budget: reader.budget, reader});
+    const journal = flow.openAdvanceJournal(root, destination, recipe, {resume: phase === 'status' || flags.includes('--resume'), existingOnly: phase === 'status', budget: reader.budget, reader});
     if (phase === 'status') { console.log(JSON.stringify(flow.readAdvanceStatus(journal))); return; }
     let api, apiWait = 0;
     const liveAPI = async (route, method = 'GET', body) => {
@@ -734,12 +770,18 @@ async function main(args) {
       const started = performance.now();
       try { return await api(route, method, body); } finally { apiWait += performance.now() - started; }
     };
+    // Authenticate the owned author boundary before legacy runtime retirement.
+    let automaticContext;
+    if (flags.includes('--automatic')) {
+      const validate = await flow.automaticAuthorGuard(root, config, liveAPI);
+      const branch = execFileSync('git', ['symbolic-ref', '--short', 'HEAD'], {cwd: root, env: environment(), encoding: 'utf8'}).trim();
+      await validate({branch, paths: [destination + '/']});
+      automaticContext = {validate, branch};
+    }
     await flow.withAdvanceLock(journal, async () => {
       try {
-        if (flags.includes('--automatic')) {
-          const validate = await flow.automaticAuthorGuard(root, config, liveAPI);
-          const branch = execFileSync('git', ['symbolic-ref', '--short', 'HEAD'], {cwd: root, env: environment(), encoding: 'utf8'}).trim();
-          await validate({branch, paths: [destination + '/']});
+        if (automaticContext) {
+          const {validate, branch} = automaticContext;
           const result = await flow.runAutomaticDelivery(journal, config, reader,
             {prepareRequests, nativeRequests, retainProducts, composeAuthorities, rebindCustody, packageProjection,
               finalizeDelivery, freezeReview, api: liveAPI, refreshBase: flow.deliveryBaseRefreshAPI(liveAPI),

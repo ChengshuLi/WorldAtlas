@@ -621,17 +621,20 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     for (const role of ['request','facts','publication','result']) pin(certificate[role]);
     await operating(certificate.operating, true);
     for (const name of templates) {
-      // The existing package producer's null template has an exact intent and
-      // whole-file publication binding. It cannot grant a package/reader role.
+      // A null template needs immutable input/output provenance, never mutable
+      // runtime journal state. Legacy published intent pairs remain supported.
       const directory = name.slice(0, name.lastIndexOf('/'));
       const intentPath = directory + '.intent.json', receiptPath = directory + '/preparation.json';
-      needSelected([name, intentPath, receiptPath].every(path => added.has(path) &&
+      const receipt = await json(receiptPath), embedded = Object.hasOwn(receipt, 'input');
+      needSelected([name, receiptPath, ...(embedded ? [] : [intentPath])].every(path => added.has(path) &&
         inScope(path, engineeringOwnedScopes(reservation)) && !reachable.has(path) && !packageAdditions.includes(path)),
         'unbound prospective expectations');
       const template = await json(name), finalized = await json(expectationsPath);
       needSelected(same({...template, selected_ledger_sha256: finalized.selected_ledger_sha256}, finalized),
         'prospective and finalized expectations differ');
-      const intent = await json(intentPath), receipt = await json(receiptPath), config = intent.config;
+      const intent = embedded ? {version: 1, stage: 'package', binding: receipt.binding, config: receipt.input} : await json(intentPath);
+      if (embedded && added.has(intentPath)) needSelected(same(await json(intentPath), intent), 'Conflicting legacy package input');
+      const config = intent.config;
       const canonical = value => Array.isArray(value) ? value.map(canonical) : value && typeof value === 'object'
         ? Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])])) : value;
       const binding = {phase: 'package', config_sha256: sha256(Buffer.from(JSON.stringify(canonical(config)) + '\n'))};
@@ -641,7 +644,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         same(config.rebind, ledger.current_rebind) && typeof config.new_prefix === 'string' &&
         config.new_prefix.endsWith('/') && safe(config.new_prefix.slice(0, -1)) &&
         inScope(config.new_prefix, engineeringOwnedScopes(reservation)) && name.startsWith(config.new_prefix) &&
-        same(intent.binding, binding) && keys(receipt, ['version','binding','outputs']) && receipt.version === 1 &&
+        same(intent.binding, binding) && keys(receipt, ['version','binding','outputs', ...(embedded ? ['input'] : [])]) && receipt.version === 1 &&
         same(receipt.binding, binding) && keys(receipt.outputs, ['package-roles.json','selected-delivery-expectations.json']),
         'prospective expectations preparation differs');
       for (const [filename, descriptor] of Object.entries(receipt.outputs)) {

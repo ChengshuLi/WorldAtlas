@@ -5,8 +5,11 @@ on:
       source_head:
         description: Exact candidate commit from the successful full queue readback
         required: true
+      source_pull_request:
+        description: Accepted selected-data PR whose complete merged tree matches source_head
+        required: true
       original_run_id:
-        description: Successful A producer with retained original package output
+        description: Successful unchanged-base producer with retained original package output
         required: true
       readback_run_id:
         description: Worker-merge run with a successful full B producer
@@ -15,7 +18,7 @@ on:
         description: Exact successful B run attempt
         required: true
       expectations_path:
-        description: Reviewed B selected-delivery-expectations.json path
+        description: Reviewed current selected-delivery-expectations.json path
         required: true
 permissions: {}
 jobs:
@@ -70,7 +73,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           SELECTED_PACKAGE_TRUSTED_BASE: ${{ steps.frozen.outputs.programme_sha }}
         run: |
-          python3 -I -B - <<'INSTALLER_PREFLIGHT'
+          python3 -I -S -B - <<'INSTALLER_PREFLIGHT'
           import base64, hashlib, json, os, re, urllib.request
           base = os.environ['SELECTED_PACKAGE_TRUSTED_BASE']
           assert re.fullmatch('[a-f0-9]{40}', base)
@@ -100,7 +103,7 @@ jobs:
           SELECTED_PACKAGE_TRUSTED_BASE: ${{ github.sha }}
           SELECTED_PACKAGE_ENTRY_POINT: scripts/run-selected-package-proof.mjs
         run: |
-          python3 -I -B - <<'ASSEMBLY_PROOF'
+          python3 -I -S -B - <<'ASSEMBLY_PROOF'
           import base64, hashlib, json, os, re, urllib.request
           base = os.environ['SELECTED_PACKAGE_TRUSTED_BASE']
           assert re.fullmatch('[a-f0-9]{40}', base)
@@ -123,7 +126,9 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: selected-package-child-diagnostic-${{ github.run_id }}-${{ github.run_attempt }}
-          path: candidate/.cache/selected-package-child-diagnostic.json
+          path: |
+            candidate/.cache/selected-package-child-diagnostic.json
+            candidate/.cache/package-runtime-comparison.json
           include-hidden-files: true
           if-no-files-found: ignore
           retention-days: 30
@@ -148,6 +153,7 @@ jobs:
           name: selected-package-proof-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
             candidate/.cache/selected-package-proof.json
+            candidate/.cache/selected-package-child-proof.json
             candidate/.cache/selected-package-original-manifest.json
             candidate/.cache/package-input-build.json
             candidate/.cache/native-normal-built-output.json

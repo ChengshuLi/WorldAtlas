@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import {materializePackageInputs, runPackageBuild, verifyPackageDependencies, assertPackageStage} from '../scripts/package-build.mjs';
+import {materializePackageInputs, runPackageBuild, verifyPackageDependencies, assertPackageStage, inspectPackageRuntime} from '../scripts/package-build.mjs';
 import {execFileSync} from 'node:child_process';
 
 const fixturePreflight = async () => ({passed: true, errors: [], synthetic_package_boundary_fixture: true});
@@ -109,4 +109,33 @@ test('private builder requires the actual declared image identity', () => {
     if (previous === undefined) delete process.env.WORLDATLAS_PACKAGE_STAGE;
     else process.env.WORLDATLAS_PACKAGE_STAGE = previous;
   }
+});
+
+
+test('producer and selected runtime probes genuinely import without Python startup hooks',async t=>{
+  const prior=new Map(['NODE_OPTIONS','NODE_PATH'].map(name=>[name,process.env[name]]));
+  for(const name of prior.keys())delete process.env[name];
+  t.after(()=>{for(const [name,value]of prior)value===undefined?delete process.env[name]:process.env[name]=value;});
+  const {root}=await fixture(t),venv=path.join(root,'venv'),marker=path.join(root,'startup-hook-ran');
+  execFileSync('python3',['-I','-S','-B','-m','venv','--without-pip',venv],{stdio:'pipe'});
+  const python=path.join(venv,'bin/python3');
+  const version=execFileSync(python,['-I','-S','-B','-c','import sys;print(str(sys.version_info.major)+"."+str(sys.version_info.minor))'],{encoding:'utf8'}).trim();
+  const site=path.join(venv,'lib','python'+version,'site-packages');await fs.mkdir(site,{recursive:true});
+  for(const name of ['numpy','shapely','pyproj'])await fs.writeFile(path.join(site,name+'.py'),'__version__="1.0"\n');
+  const hook='import pathlib;pathlib.Path('+JSON.stringify(marker)+').write_text("executed")\n';
+  await fs.writeFile(path.join(site,'probe.pth'),hook);await fs.writeFile(path.join(site,'sitecustomize.py'),hook);
+  await fs.writeFile(path.join(root,'requirements.txt'),'numpy==1.0\nshapely==1.0\npyproj==1.0\n');
+  await fs.writeFile(path.join(root,'package.json'),JSON.stringify({engines:{node:'>=24'}}));
+  const lock=JSON.stringify({lockfileVersion:3,packages:{}});
+  await fs.writeFile(path.join(root,'package-lock.json'),lock);await fs.writeFile(path.join(root,'node_modules/.package-lock.json'),lock);
+  await fs.copyFile(new URL('../scripts/package-python-runtime.py',import.meta.url),path.join(root,'scripts/package-python-runtime.py'));
+  const isolated=inspectPackageRuntime(root,{python,isolatedPython:true});
+  assert.deepEqual(isolated.errors,[]);assert.equal(isolated.python.imports.length,3);
+  assert.ok(isolated.python.imports.every(row=>row.actual==='1.0'));
+  await assert.rejects(fs.stat(marker),{code:'ENOENT'});
+  assert.deepEqual(inspectPackageRuntime(root,{python}).errors,[]);
+  await assert.rejects(fs.stat(marker),{code:'ENOENT'});
+  // Genuine ordinary startup proves the hostile fixture is active.
+  execFileSync(python,['-c','pass']);
+  assert.equal(await fs.readFile(marker,'utf8'),'executed');
 });

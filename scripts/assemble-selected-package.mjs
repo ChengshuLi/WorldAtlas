@@ -14,7 +14,7 @@ import {integrationTree} from './integration-profile.mjs';
 import {loadPackageInputs, readPackageInputs, containsPackagePath} from './package-inputs.mjs';
 import {inspectPackageRuntime, verifyPackageDependencies} from './package-build.mjs';
 import {committedPackageInputs, committedPackageProgramme, packageProducerPath, packageBuildConfiguration,
-  validatePackageOutputManifest, admitPackageOutputTransition, streamedPackageFile, installedPackageIdentity} from './package-output-artifact.mjs';
+  validatePackageOutputManifest, admitPackageOutputTransition, streamedPackageFile, installedPackageIdentity, installedPackageDifferences, declaredPackagePythonRoots} from './package-output-artifact.mjs';
 import {authenticateOriginalPackageOutput, issuePackageAssemblyExecution, preparePackageSelectedAdditive,
   publishPackageSelectedAdditive, packageSelectedPublicationInventory, requirePackageAssemblyExecution}
   from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
@@ -124,7 +124,6 @@ function currentSource(){
 export async function assembleSelectedPackage({api,repo,expectedHead,originalRunId,proofReadback}){
   const started=performance.now(),current=currentSource();need(current.head===expectedHead,'Actual selected head changed');
   const found=await findOriginalPackage({api,repo,current,originalRunId});if(!found)return {assembled:false,reason:'No applicable retained original output in bounded recent-result search'};
-  const runtime=inspectPackageRuntime(root);need(runtime.errors.length===0,'Current assembly runtime/dependency preflight failed');
   await verifyPackageDependencies(path.join(root,'node_modules'));
   admitDisk(found.origin.artifact_bytes,'the actual authenticated original archive');
   const scratch=await createPackageAssemblyScratch(root);
@@ -132,17 +131,36 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
   try{
     const archive=path.join(scratch,'original.zip'),manifestFile=path.join(scratch,'manifest.json');
     await downloadOriginal(api,repo,found.origin,archive);
-    const pythonArgs=[path.join(root,'scripts/extract-package-output.py')];
+    const pythonArgs=['-I','-S','-B',path.join(root,'scripts/extract-package-output.py')];
     execFileSync('python3',[...pythonArgs,'--manifest',archive,manifestFile,found.origin.artifact_digest],{stdio:'pipe',maxBuffer:1048576});
     const manifestRaw=fs.readFileSync(manifestFile),manifest=validatePackageOutputManifest(JSON.parse(manifestRaw));
     for(const key of ['head','tree','definition','files','programme','selection'])need(same(manifest.source[key],found.source[key]),'Retained manifest differs from original immutable source: '+key);
-    need(same(manifest.runtime.installed,installedPackageIdentity(root,runtime.python.imports))&&manifest.runtime.node===process.version&&manifest.runtime.platform===process.platform&&manifest.runtime.arch===process.arch&&
-      same(manifest.runtime.versions,process.versions)&&manifest.runtime.dependencies===runtime.package_lock_sha256&&
-      same(manifest.runtime.python,{version:runtime.python.version,imports:runtime.python.imports})&&
-      same(manifest.configuration,packageBuildConfiguration()),'Original runtime/dependencies/configuration differ');
+    need(manifest.runtime.installed?.version===2&&manifest.runtime.installed.python?.parser,
+      'Version 2 original installed parser evidence required; legacy aggregate evidence requires a full build');
     const originalRoot=path.join(scratch,'original');
     execFileSync('python3',[...pythonArgs,archive,manifestFile,originalRoot,found.origin.artifact_digest],{stdio:'pipe',maxBuffer:1048576});
     const original=await authenticateOriginalPackageOutput({api,repo,origin:found.origin,root:originalRoot,manifestRaw});
+    const installed=installedPackageIdentity(root,declaredPackagePythonRoots(root),{expectedParser:manifest.runtime.installed.python.parser,expectedExecutable:manifest.runtime.installed.python.executable_sha256});
+    const differences=installedPackageDifferences(manifest.runtime.installed,installed);
+    const recordAndRequireRuntime=()=>{
+      fs.writeFileSync(path.join(root,'.cache/package-runtime-comparison.json'),JSON.stringify({version:2,
+        original_manifest_sha256:hash(manifestRaw),current:installed,differences})+'\n',{flag:'wx'});
+      need(differences.length===0,'Original runtime incompatibility: '+JSON.stringify(differences.map(row=>
+        ({component:row.component,...(row.changed_components?{changed_components:row.changed_components}:{}),...(row.changed_files?{changed_files:row.changed_files.slice(0,10),changed_file_count:row.changed_files.length}: {})}))));
+    };
+    if(differences.length)recordAndRequireRuntime();
+    // Actual scientific imports run only after original custody and complete
+    // installed-byte admission, with the same no-site startup as measurement.
+    const runtime=inspectPackageRuntime(root);
+    if(runtime.errors.length){differences.push({component:'runtime.preflight',errors:runtime.errors});recordAndRequireRuntime();}
+    const actualRuntime={node:process.version,platform:process.platform,arch:process.arch,
+      versions:process.versions,dependencies:runtime.package_lock_sha256,
+      python:{version:runtime.python.version,imports:runtime.python.imports}};
+    for(const [component,value] of Object.entries(actualRuntime))if(!same(manifest.runtime[component],value))
+      differences.push({component:'runtime.'+component,original:manifest.runtime[component],current:value});
+    if(!same(manifest.configuration,packageBuildConfiguration()))differences.push({component:'configuration',
+      original:manifest.configuration,current:packageBuildConfiguration()});
+    recordAndRequireRuntime();
     const stage=path.join(scratch,'assembly');fs.mkdirSync(stage);
     for(const name of ['.github/package-inputs.json','data/ownership-selection.json']){
       fs.mkdirSync(path.dirname(path.join(stage,name)),{recursive:true});fs.copyFileSync(path.join(root,name),path.join(stage,name),fs.constants.COPYFILE_EXCL);
@@ -184,7 +202,7 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
     for(const pin of manifest.output.files)if(!mutable.has(pin.path))need(same(streamedPackageFile(stage,pin.path),pin),'Invariant output changed during assembly');
     requirePackageAssemblyExecution(execution);
     const assembly={kind:'retained-original-output-plus-current-additive',origin:found.origin,
-      original_manifest_sha256:hash(manifestRaw),transition,current_execution:execution,
+      original_manifest_sha256:hash(manifestRaw),runtime_identity_version:2,transition,current_execution:execution,
       original_base_context_retained:true,base_restoration_invoked:false,invariant_build_invoked:false,
       base_tests_reused:['test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs'],
       current_selected_inputs:consumed,elapsed_seconds:(performance.now()-started)/1000};

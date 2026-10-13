@@ -39,6 +39,8 @@ export function readPreparedStage(reader, locator, expectedPhase) {
     && /^[a-f0-9]{64}$/.test(receipt.binding.config_sha256)
     && receipt.outputs && Object.keys(receipt.outputs).length,
   'Missing completed preparation phase');
+  need(!Object.hasOwn(receipt, 'input') || expectedPhase === 'package'
+    && hash(bytes(receipt.input)) === receipt.binding.config_sha256, 'Committed package input binding differs');
   const prefix = path.posix.dirname(pin.path), outputs = {};
   for (const [name, declared] of Object.entries(receipt.outputs)) {
     need(safe(name) && !name.includes('/') && name !== 'preparation.json', 'Unsafe prepared output');
@@ -159,14 +161,31 @@ function exclusive(filename, raw) {
 // Immutable intent is created before outputs. It is a local resume aid, never a
 // scientific receipt or an authorization. Only an identical intent may fill an
 // interrupted metadata write; unknown files and changed bytes always refuse.
-export function openAdvanceJournal(root, destination, recipe, {resume = false, now = Date.now, budget = null, reader = null} = {}) {
-  const target = directory(root, destination), intentPath = path.join(target, 'advance.json');
+const stateName = name => ['advance.json', 'advance.lock', 'advance.acquire', 'queue-submission.json', 'pr-base-refresh.json', 'author-tree-refresh.json', 'author-tree-refreshed.json'].includes(name)
+  || /^(?:commit|committed)-[a-z0-9-]+\.json$/.test(name) || /^observation-\d{6}\.json$/.test(name)
+  || /^[a-z0-9-]+\.(intent|completed)\.json$/.test(name);
+const migrationName = 'runtime-migration.json', migratedName = 'runtime-migrated.json';
+const exists = filename => Boolean(fs.lstatSync(filename, {throwIfNoEntry: false}));
+const runtimeDestination = destination => '.cache/delivery-handoff/runtime/' + hash(Buffer.from(destination));
+
+export function openAdvanceJournal(root, destination, recipe, {resume = false, existingOnly = false, now = Date.now, budget = null, reader = null} = {}) {
+  root = fs.realpathSync(root);
+  const target = directory(root, destination), split = destination.startsWith('coordination/engineering/');
+  const runtimeTarget = split ? directory(root, runtimeDestination(destination)) : target;
+  const legacy = split && exists(path.join(target, 'advance.json'));
+  const cached = exists(path.join(runtimeTarget, 'advance.json'));
+  if (legacy && cached) need(exists(path.join(runtimeTarget, migrationName)), 'Conflicting old and runtime journals');
+  const stateTarget = legacy && !cached ? target : runtimeTarget;
+  const intentPath = path.join(stateTarget, 'advance.json');
   budget ??= candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0});
   let intentRaw;
-  if (!fs.existsSync(target)) {
-    intentRaw = bytes({version: 1, kind: 'delivery-advance-v1', recipe, started_at: new Date(now()).toISOString()});
+  if (!exists(intentPath)) {
+    need(!existingOnly, 'No existing advance to observe');
+    need(!exists(stateTarget) && (!exists(target) || fs.readdirSync(target).length === 0), 'Occupied advance destination; preserve existing state');
+    intentRaw = bytes({version: 1, kind: 'delivery-advance-v1', recipe,
+      ...(split ? {product_destination: destination} : {}), started_at: new Date(now()).toISOString()});
     budget.add({bytes: intentRaw.length});
-    fs.mkdirSync(path.dirname(target), {recursive: true}); fs.mkdirSync(target);
+    fs.mkdirSync(target, {recursive: true}); fs.mkdirSync(stateTarget, {recursive: true});
     exclusive(intentPath, intentRaw);
   } else {
     need(resume, 'Occupied advance destination; explicit resume required');
@@ -176,8 +195,9 @@ export function openAdvanceJournal(root, destination, recipe, {resume = false, n
   }
   const intent = JSON.parse(intentRaw);
   need(intent.version === 1 && intent.kind === 'delivery-advance-v1' && equal(intent.recipe, recipe)
+    && (intent.product_destination === undefined || intent.product_destination === destination)
     && Number.isFinite(Date.parse(intent.started_at)), 'Foreign or changed advance intent');
-  return {root, target, destination, intent, now, budget, reader, chargedJournalFiles: new Set([intentPath])};
+  return {root, target, stateTarget, runtimeTarget, destination, intent, now, budget, reader, chargedJournalFiles: new Set([intentPath])};
 }
 
 function journalFile(journal, filename) {
@@ -194,9 +214,101 @@ function writeJournal(journal, filename, raw) {
   exclusive(filename, raw); journal.chargedJournalFiles.add(filename);
 }
 
-export function withAdvanceLock(journal, action) {
-  const filename = path.join(journal.target, 'advance.lock');
-  const guard = path.join(journal.target, 'advance.acquire');
+function validateRuntimeMigration(journal, raw) {
+  const migration = JSON.parse(raw), names = migration.files?.map(row => row.name);
+  need(migration.version === 1 && migration.kind === 'delivery-runtime-relocation-v1'
+    && migration.destination === journal.destination && migration.intent_sha256 === hash(bytes(journal.intent))
+    && Array.isArray(names) && names.includes('advance.json') && equal([...new Set(names)].sort(), names)
+    && migration.files.every(row => stateName(row.name) && !['advance.lock', 'advance.acquire'].includes(row.name)
+      && Number.isSafeInteger(row.bytes) && row.bytes >= 0 && row.bytes <= 33554432
+      && /^[a-f0-9]{64}$/.test(row.sha256) && typeof row.tracked === 'boolean'), 'Foreign runtime migration inventory');
+  return migration;
+}
+
+// One-time layout transfer, using the same exclusive-file and stale-owner rules
+// as ordinary continuation. This does not reinterpret any scientific receipt.
+function migrateRuntimeState(old, current, interrupt) {
+  const filename = path.join(current.stateTarget, migrationName);
+  const completion = path.join(current.stateTarget, migratedName);
+  const git = args => execFileSync('git', args, {cwd: old.root,
+    env: {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_TERMINAL_PROMPT: '0'}, maxBuffer: 32 * 1024 * 1024});
+  const tracked = (name, raw) => {
+    const relative = `${old.destination}/${name}`, row = git(['ls-files', '--stage', '--', relative]).toString().trim();
+    if (!row) return false;
+    const match = row.match(/^100644 ([a-f0-9]{40}) 0\t(.+)$/);
+    need(match && match[2] === relative && git(['cat-file', 'blob', match[1]]).equals(raw)
+      && git(['ls-tree', 'HEAD', '--', relative]).toString().trim() === `100644 blob ${match[1]}\t${relative}`,
+    'Preserve unchanged published runtime records');
+    return true;
+  };
+  let raw;
+  if (exists(filename)) raw = journalFile(current, filename);
+  else {
+    need(fs.readdirSync(current.stateTarget).every(name => ['advance.lock', 'advance.acquire'].includes(name)), 'Occupied runtime migration destination');
+    readAdvanceStatus(old);
+    const files = fs.readdirSync(old.target).filter(name => stateName(name) && !['advance.lock', 'advance.acquire'].includes(name)).sort().map(name => {
+      const body = journalFile(old, path.join(old.target, name));
+      return {name, bytes: body.length, sha256: hash(body), tracked: tracked(name, body)};
+    });
+    raw = bytes({version: 1, kind: 'delivery-runtime-relocation-v1', destination: old.destination,
+      intent_sha256: hash(bytes(old.intent)), files});
+    writeJournal(current, filename, raw); interrupt('migration-intent');
+  }
+  const migration = validateRuntimeMigration(current, raw), names = migration.files.map(row => row.name);
+  for (const name of fs.readdirSync(current.stateTarget))
+    need(names.includes(name) || [migrationName, migratedName, 'advance.lock', 'advance.acquire'].includes(name), 'Foreign runtime migration member');
+  for (const name of fs.readdirSync(old.target)) if (stateName(name) && !['advance.lock', 'advance.acquire'].includes(name))
+    need(names.includes(name), 'Legacy runtime changed during migration');
+  const authenticate = (journal, file, row) => {
+    const body = journalFile(journal, file);
+    need(body.length === row.bytes && hash(body) === row.sha256, 'Runtime migration bytes changed'); return body;
+  };
+  // Verify every surviving source and retained copy before retiring any source.
+  for (const row of migration.files) {
+    const source = path.join(old.target, row.name), destination = path.join(current.stateTarget, row.name);
+    let body;
+    if (exists(source)) { body = authenticate(old, source, row); need(tracked(row.name, body) === row.tracked, 'Runtime tracking changed during migration'); }
+    else need(!row.tracked && exists(destination), 'Missing original runtime migration member');
+    if (exists(destination)) authenticate(current, destination, row);
+    else { need(body, 'Missing runtime migration source'); writeJournal(current, destination, body); }
+    interrupt('copied:' + row.name);
+  }
+  readAdvanceStatus(current); // Same complete stage/product joins after transfer.
+  for (const row of migration.files) if (!row.tracked) {
+    const source = path.join(old.target, row.name);
+    if (exists(source)) {
+      const body = authenticate(old, source, row); need(!tracked(row.name, body), 'Never remove a published runtime record');
+      fs.unlinkSync(source);
+    }
+    interrupt('retired:' + row.name);
+  }
+  const result = bytes({version: 1, migration_sha256: hash(raw)});
+  if (exists(completion)) need(journalFile(current, completion).equals(result), 'Changed runtime migration completion');
+  else writeJournal(current, completion, result);
+  interrupt('migration-complete');
+}
+
+export function withAdvanceLock(journal, action, {interrupt = () => {}} = {}) {
+  const relocating = journal.runtimeTarget !== journal.target && (journal.stateTarget === journal.target
+    || exists(path.join(journal.runtimeTarget, migrationName)) && !exists(path.join(journal.runtimeTarget, migratedName)));
+  if (!relocating) return withJournalLock(journal, action);
+  const old = {...journal, stateTarget: journal.target};
+  directory(journal.root, runtimeDestination(journal.destination));
+  fs.mkdirSync(journal.runtimeTarget, {recursive: true});
+  const current = {...journal, stateTarget: journal.runtimeTarget, legacyLockHeld: true};
+  // Current callers always acquire cache then legacy. Retire the old lock before
+  // action(), while the destination-wide cache lock still protects continuation.
+  return withJournalLock(current, async () => {
+    await withJournalLock(old, () => migrateRuntimeState(old, current, interrupt));
+    delete current.legacyLockHeld;
+    Object.assign(journal, current);
+    return action();
+  });
+}
+
+function withJournalLock(journal, action) {
+  const filename = path.join(journal.stateTarget, 'advance.lock');
+  const guard = path.join(journal.stateTarget, 'advance.acquire');
   const raw = bytes({host: os.hostname(), pid: process.pid, nonce: randomUUID(), intent_sha256: hash(bytes(journal.intent))});
   // All cooperating resumers serialize stale inspection AND creation. A dead
   // acquisition guard is deliberately not auto-reaped: its ambiguous owner must
@@ -231,18 +343,36 @@ function stageNames(id) {
 
 export function readAdvanceStatus(journal) {
   const completed = [], waiting = [], refused = [];
-  for (const name of fs.readdirSync(journal.target)) {
-    if (['advance.json', 'advance.lock', 'advance.acquire', 'queue-submission.json', 'pr-base-refresh.json', 'author-tree-refresh.json', 'author-tree-refreshed.json'].includes(name) || /^(?:commit|committed)-[a-z0-9-]+\.json$/.test(name) || /^observation-\d{6}\.json$/.test(name)
-      || /^[a-z0-9-]+\.(intent|completed)\.json$/.test(name)) continue;
+  const migration = exists(path.join(journal.stateTarget, migrationName))
+    ? validateRuntimeMigration(journal, journalFile(journal, path.join(journal.stateTarget, migrationName))) : null;
+  if (exists(path.join(journal.stateTarget, migratedName))) {
+    need(migration && journalFile(journal, path.join(journal.stateTarget, migratedName)).equals(bytes({version: 1,
+      migration_sha256: hash(journalFile(journal, path.join(journal.stateTarget, migrationName)))})), 'Changed runtime migration completion');
+  }
+  for (const name of fs.readdirSync(journal.stateTarget)) {
+    if (stateName(name) || [migrationName, migratedName].includes(name)) continue;
+    need(journal.stateTarget === journal.target && /^[a-z0-9-]+$/.test(name)
+      && fs.lstatSync(path.join(journal.target, name)).isDirectory()
+      && fs.realpathSync(path.join(journal.target, name)) === path.join(journal.target, name)
+      && exists(path.join(journal.stateTarget, stageNames(name).intent)), 'Foreign advance inventory');
+  }
+  if (journal.stateTarget !== journal.target) for (const name of fs.readdirSync(journal.target)) {
+    if (journal.legacyLockHeld && ['advance.lock', 'advance.acquire'].includes(name)) continue;
+    if (stateName(name)) {
+      const row = migration?.files?.find(row => row.name === name), raw = journalFile(journal, path.join(journal.target, name));
+      need(row && raw.length === row.bytes && hash(raw) === row.sha256
+        && (!exists(path.join(journal.stateTarget, migratedName)) || row.tracked), 'Changed or unretired legacy runtime record');
+      continue;
+    }
     need(/^[a-z0-9-]+$/.test(name) && fs.lstatSync(path.join(journal.target, name)).isDirectory()
       && fs.realpathSync(path.join(journal.target, name)) === path.join(journal.target, name)
-      && fs.existsSync(path.join(journal.target, stageNames(name).intent)), 'Foreign advance inventory');
+      && exists(path.join(journal.stateTarget, stageNames(name).intent)), 'Foreign advance product inventory');
   }
-  for (const name of fs.readdirSync(journal.target).sort()) {
+  for (const name of fs.readdirSync(journal.stateTarget).sort()) {
     if (!name.endsWith('.completed.json')) continue;
-    const event = JSON.parse(journalFile(journal, path.join(journal.target, name)));
+    const event = JSON.parse(journalFile(journal, path.join(journal.stateTarget, name)));
     need(event.version === 1 && name === stageNames(event.stage).event, 'Malformed completed stage');
-    const intent = JSON.parse(journalFile(journal, path.join(journal.target, stageNames(event.stage).intent)));
+    const intent = JSON.parse(journalFile(journal, path.join(journal.stateTarget, stageNames(event.stage).intent)));
     need(intent.stage === event.stage && equal(intent.binding, event.binding)
       && hash(bytes(intent.config)) === event.binding.config_sha256
       && Number.isFinite(event.preparation_ms) && event.preparation_ms >= 0
@@ -255,7 +385,9 @@ export function readAdvanceStatus(journal) {
       completed.push(event); continue;
     }
     const receipt = JSON.parse(journalFile(journal, path.join(journal.target, event.stage, 'preparation.json')));
-    need(equal(receipt.binding, event.binding) && equal(receipt.outputs, event.outputs), 'Completion/whole inventory differs');
+    need(equal(receipt.binding, event.binding) && equal(receipt.outputs, event.outputs)
+      && (!Object.hasOwn(receipt, 'input') || event.binding.phase === 'package' && equal(receipt.input, intent.config)),
+      'Completion/whole inventory differs');
     const actualNames = fs.readdirSync(path.join(journal.target, event.stage)).sort();
     need(equal(actualNames, [...Object.keys(receipt.outputs), 'preparation.json'].sort()), 'Foreign completed output');
     for (const [file, pin] of Object.entries(receipt.outputs)) {
@@ -265,8 +397,8 @@ export function readAdvanceStatus(journal) {
     }
     completed.push(event);
   }
-  const events = fs.readdirSync(journal.target).filter(n => /^observation-\d{6}\.json$/.test(n)).sort()
-    .map(name => JSON.parse(journalFile(journal, path.join(journal.target, name))));
+  const events = fs.readdirSync(journal.stateTarget).filter(n => /^observation-\d{6}\.json$/.test(n)).sort()
+    .map(name => JSON.parse(journalFile(journal, path.join(journal.stateTarget, name))));
   for (const event of events) {
     if (event.status === 'waiting') waiting.push(event);
     if (event.status === 'refused') refused.push(event);
@@ -285,9 +417,9 @@ export function readAdvanceStatus(journal) {
     return {stage: e.stage, elapsed_seconds: Number.isFinite(terminal.elapsed_seconds) ? terminal.elapsed_seconds : null, execution_commit: terminal.execution_commit,
       terminal_sha256: e.outputs['terminal.json'].sha256};
   });
-  const queuePath = path.join(journal.target, 'queue-submission.json');
+  const queuePath = path.join(journal.stateTarget, 'queue-submission.json');
   const queue_submission = fs.existsSync(queuePath) ? JSON.parse(journalFile(journal, queuePath)) : null;
-  const refreshPath = path.join(journal.target, 'pr-base-refresh.json');
+  const refreshPath = path.join(journal.stateTarget, 'pr-base-refresh.json');
   const refresh = fs.lstatSync(refreshPath, {throwIfNoEntry: false}) ? readBaseRefreshIntent(journal, refreshPath) : null;
   const pr_base_refresh = refresh ? {repo: refresh.repo, pr_number: refresh.pr_number, head_sha: refresh.before.head.sha,
     main_sha: refresh.main_sha, last_observation: events.filter(e => e.kind === 'pr-base-refresh').at(-1) ?? null} : null;
@@ -307,18 +439,18 @@ export function readAdvanceStatus(journal) {
 
 export function observeAdvance(journal, observation) {
   need(['waiting', 'refused', 'external'].includes(observation.status), 'Unknown delivery observation');
-  const names = fs.readdirSync(journal.target).filter(n => /^observation-\d{6}\.json$/.test(n)).sort();
-  const prior = names.length ? JSON.parse(journalFile(journal, path.join(journal.target, names.at(-1)))) : null;
+  const names = fs.readdirSync(journal.stateTarget).filter(n => /^observation-\d{6}\.json$/.test(n)).sort();
+  const prior = names.length ? JSON.parse(journalFile(journal, path.join(journal.stateTarget, names.at(-1)))) : null;
   if (prior) { const {observed_at, ...value} = prior; if (equal(value, observation)) return prior; }
   const event = {...observation, observed_at: new Date(journal.now()).toISOString()};
-  writeJournal(journal, path.join(journal.target, 'observation-' + String(names.length).padStart(6, '0') + '.json'), bytes(event));
+  writeJournal(journal, path.join(journal.stateTarget, 'observation-' + String(names.length).padStart(6, '0') + '.json'), bytes(event));
   return event;
 }
 
 export async function prepareAdvanceStage(journal, id, phase, config, produce, {interrupt = () => {}, preparationStarted = performance.now(), apiWaitMilliseconds = () => 0, adoption = null} = {}) {
   const names = stageNames(id), binding = {phase, config_sha256: hash(bytes(config))};
   const intended = bytes({version: 1, stage: id, binding, config});
-  const intentPath = path.join(journal.target, names.intent), eventPath = path.join(journal.target, names.event);
+  const intentPath = path.join(journal.stateTarget, names.intent), eventPath = path.join(journal.stateTarget, names.event);
   if (fs.existsSync(intentPath)) need(journalFile(journal, intentPath).equals(intended), 'Changed stage inputs; preserve prior vintage');
   else {
     need(!fs.lstatSync(path.join(journal.target, names.directory), {throwIfNoEntry: false})
@@ -345,14 +477,19 @@ export async function prepareAdvanceStage(journal, id, phase, config, produce, {
     qualifiedPreparedReuse(journal.reader, adoption, phase, products);
     const event = {version: 1, stage: id, binding, outputs, adopted: adoption,
       preparation_ms: Math.max(0, performance.now() - preparationStarted), api_wait_ms: 0,
-      observations_seen: fs.readdirSync(journal.target).filter(n => /^observation-\d{6}\.json$/.test(n)).length,
+      observations_seen: fs.readdirSync(journal.stateTarget).filter(n => /^observation-\d{6}\.json$/.test(n)).length,
       completed_at: new Date(journal.now()).toISOString()};
     writeJournal(journal, eventPath, bytes(event));
     return {stage: id, resumed: false, reused: true, receipt: adoption.receipt};
   }
-  const receipt = bytes({version: 1, binding, outputs});
-  budget.add({bytes: receipt.length});
   const target = path.join(journal.target, names.directory);
+  // Package templates need immutable input provenance after runtime state moves
+  // to cache. Preserve already-written legacy receipts exactly on recovery.
+  const oldReceiptPath = path.join(target, 'preparation.json');
+  const legacyReceipt = fs.existsSync(oldReceiptPath)
+    && !Object.hasOwn(JSON.parse(journalFile(journal, oldReceiptPath)), 'input');
+  const receipt = bytes({version: 1, binding, outputs, ...(phase === 'package' && !legacyReceipt ? {input: config} : {})});
+  budget.add({bytes: receipt.length});
   if (fs.existsSync(target) || fs.lstatSync(target, {throwIfNoEntry: false})) {
     need(fs.lstatSync(target).isDirectory() && fs.realpathSync(target) === target, 'Foreign stage destination');
     const expected = {...products, 'preparation.json': receipt};
@@ -368,7 +505,7 @@ export async function prepareAdvanceStage(journal, id, phase, config, produce, {
   const api_wait_ms = apiWaitMilliseconds();
   need(Number.isFinite(api_wait_ms) && api_wait_ms >= 0, 'Invalid observed API wait');
   const event = {version: 1, stage: id, binding, outputs, preparation_ms: Math.max(0, performance.now() - preparationStarted - api_wait_ms), api_wait_ms,
-    observations_seen: fs.readdirSync(journal.target).filter(n => /^observation-\d{6}\.json$/.test(n)).length,
+    observations_seen: fs.readdirSync(journal.stateTarget).filter(n => /^observation-\d{6}\.json$/.test(n)).length,
     completed_at: new Date(journal.now()).toISOString()};
   writeJournal(journal, eventPath, bytes(event));
   return {stage: id, resumed: false};
@@ -403,7 +540,7 @@ export async function refreshReviewBase(journal, review, {api, refresh, interrup
   need(review?.repo === 'ChengshuLi/WorldAtlas' && Number.isSafeInteger(review.pr_number) && review.pr_number > 0,
     'Exact named repository and PR required for base refresh');
   readAdvanceStatus(journal);
-  const route = `/repos/${review.repo}`, filename = path.join(journal.target, 'pr-base-refresh.json');
+  const route = `/repos/${review.repo}`, filename = path.join(journal.stateTarget, 'pr-base-refresh.json');
   const resuming = Boolean(fs.lstatSync(filename, {throwIfNoEntry: false}));
   let intent = resuming ? readBaseRefreshIntent(journal, filename) : null;
   if (intent) need(intent.repo === review.repo && intent.pr_number === review.pr_number,
@@ -467,7 +604,7 @@ export async function nextReviewStage(journal, review, reader, adapters) {
   need(review && (review.refresh_base_metadata === undefined || typeof review.refresh_base_metadata === 'boolean'),
     'review.refresh_base_metadata must be an explicit boolean');
   const done = readAdvanceStatus(journal).completed.includes('review');
-  const hasIntent = Boolean(fs.lstatSync(path.join(journal.target, 'pr-base-refresh.json'), {throwIfNoEntry: false}));
+  const hasIntent = Boolean(fs.lstatSync(path.join(journal.stateTarget, 'pr-base-refresh.json'), {throwIfNoEntry: false}));
   const pr = !done && (review.refresh_base_metadata === true || hasIntent)
     ? await refreshReviewBase(journal, review, {api: adapters.api, refresh: adapters.refreshBase})
     : await adapters.api(`/repos/${review.repo}/pulls/${review.pr_number}`);
@@ -538,7 +675,7 @@ export function deliveryQueueAPI({execute = execFileSync} = {}) {
 export async function advanceQueue(journal, packet, {api, submit, authorizeSubmission = false,
   checkReview = acceptedReview, client = runMergeQueueClient, clientOptions = {}, queueAPI = api}) {
   need(packet.repo === 'ChengshuLi/WorldAtlas', 'Use the existing named-repository queue');
-  const filename = path.join(journal.target, 'queue-submission.json');
+  const filename = path.join(journal.stateTarget, 'queue-submission.json');
   let intent, resuming = false;
   if (fs.existsSync(filename)) {
     intent = JSON.parse(journalFile(journal, filename)); resuming = true;
@@ -601,7 +738,7 @@ export function committedRetentionConfig(reader, observation) {
 const locatorOf = pin => ({commit: pin.commit, path: pin.path});
 function journalBody(journal, stage, name) {
   if (stage !== '.') {
-    const eventPath = path.join(journal.target, stageNames(stage).event);
+    const eventPath = path.join(journal.stateTarget, stageNames(stage).event);
     if (fs.existsSync(eventPath)) {
       const event = JSON.parse(journalFile(journal, eventPath));
       if (event.adopted) {
@@ -612,7 +749,7 @@ function journalBody(journal, stage, name) {
       }
     }
   }
-  return journalFile(journal, path.join(journal.target, stage, name));
+  return journalFile(journal, path.join(stage === '.' ? journal.stateTarget : journal.target, stage, name));
 }
 function journalJSON(journal, stage, name) { return JSON.parse(journalBody(journal, stage, name)); }
 
@@ -819,7 +956,7 @@ export async function nextDeliveryStage(journal, config, reader, adapters) {
       'Choose one unambiguous completed-original custody route');
     const qualified = qualifyCompletedCustody(recipe, reader, adapters);
     const observed = config.observations ?? {};
-    need(Object.keys(observed).every(key => ['authorities', 'registry', 'composition', 'rebind', 'operating', 'certificate', 'sidecar'].includes(key)),
+    need(Object.keys(observed).every(key => ['authorities', 'registry', 'composition', 'rebind', 'operating', 'certificate', 'sidecar', 'restored_read_roles'].includes(key)),
       'Completed-original custody cannot substitute execution observations');
     return nextAuthorityDelivery(journal, config, reader, adapters, recipe, qualified.groups, observed,
       new Map(qualified.groups.map(group => [group.id, group.qualified_products])));
@@ -950,6 +1087,7 @@ async function nextAuthorityDelivery(journal, config, reader, adapters, recipe, 
   if (!observed.sidecar) return wait('finalize', 'assembly', 'Existing assembly/release preparation must supply the actual committed sidecar.');
   const sidecar = locate(reader, observed.sidecar), selected = reader.json(sidecar).logical_asset_map.ledger;
   const final = {...projection, sidecar, selected_ledger: selected, selector: locate(reader, recipe.selector), package_inputs: locate(reader, recipe.package_inputs)};
+  if (observed.restored_read_roles) final.restored_read_roles = observed.restored_read_roles;
   if (!completed('finalize', final)) return prepare('finalize', 'finalize', final, () => adapters.finalizeDelivery(final, reader));
   if (adapters.beforeReview) await adapters.beforeReview();
   if (!config.review) return wait('review', 'publication-review', 'Publish the actual author head/PR; provide repository and PR number.');
@@ -1499,8 +1637,8 @@ return acquireDeliveryInputs;
 // and managed-workspace authorization; this helper never fetches or broadens it.
 export async function refreshDeliveryAuthorTree(journal, {main, validate, execute = execFileSync, interrupt = () => {}}) {
   need(/^[a-f0-9]{40}$/.test(main ?? '') && typeof validate === 'function', 'Fresh exact main and author validation required');
-  const started = performance.now(), intentFile = path.join(journal.target, 'author-tree-refresh.json');
-  const resultFile = path.join(journal.target, 'author-tree-refreshed.json');
+  const started = performance.now(), intentFile = path.join(journal.stateTarget, 'author-tree-refresh.json');
+  const resultFile = path.join(journal.stateTarget, 'author-tree-refreshed.json');
   const observed = result => observeAdvance(journal, {status: 'external', kind: 'author-tree-refresh',
     result: result.status, previous_head: result.previous_head, head: result.head, main: result.main, elapsed_ms: result.elapsed_ms});
   const git = (args, input) => execute('git', args, {
@@ -1617,8 +1755,8 @@ export async function commitAdvanceStage(journal, stage, {validate, execute = ex
   need(typeof validate === 'function', 'Automatic commits require current author authority');
   need(journal.destination.startsWith('coordination/engineering/'), 'Automatic commits require an issue-owned tracked destination');
   need(stage !== 'review' && readAdvanceStatus(journal).completed.includes(stage), 'Commit only completed non-review stages');
-  const started = performance.now(), intentPath = path.join(journal.target, `commit-${stage}.json`);
-  const resultPath = path.join(journal.target, `committed-${stage}.json`);
+  const started = performance.now(), intentPath = path.join(journal.stateTarget, `commit-${stage}.json`);
+  const resultPath = path.join(journal.stateTarget, `committed-${stage}.json`);
   const env = {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_TERMINAL_PROMPT: '0'};
   const git = (args, options = {}) => execute('git', args, {cwd: journal.root, env, maxBuffer: 32 * 1024 * 1024, ...options});
   const text = args => git(args).toString().trim();
@@ -1656,7 +1794,7 @@ export async function commitAdvanceStage(journal, stage, {validate, execute = ex
     need(!text(['diff', '--name-only']) && !text(['diff', '--cached', '--name-only']), 'Preserve existing tracked/index edits before automatic commit');
     await validate({branch: branch.slice(11), head: parent, paths: files.map(f => f.path), phase: 'commit-prepare'});
     for (const file of files) need(!text(['ls-tree', parent, '--', file.path]), 'Completed stage path already exists in the parent');
-    const scratch = fs.mkdtempSync(path.join(journal.target, '.commit-index-'));
+    const scratch = fs.mkdtempSync(path.join(journal.stateTarget, '.commit-index-'));
     let tree;
     try {
       const indexEnv = {...env, GIT_INDEX_FILE: path.join(scratch, 'index')};
@@ -1715,12 +1853,12 @@ export async function commitAdvanceStage(journal, stage, {validate, execute = ex
 
 export function automaticDeliveryObservations(journal, config) {
   const generated = {}, authorities = [], adoptedKeys = new Set();
-  const reused = fs.readdirSync(journal.target).filter(n => n.endsWith('.completed.json'))
-    .map(name => JSON.parse(journalFile(journal, path.join(journal.target, name)))).filter(e => e.adopted);
+  const reused = fs.readdirSync(journal.stateTarget).filter(n => n.endsWith('.completed.json'))
+    .map(name => JSON.parse(journalFile(journal, path.join(journal.stateTarget, name)))).filter(e => e.adopted);
   const records = reused.map(e => ({stage: e.stage, adopted: true, head: e.adopted.receipt.commit,
     prefix: path.posix.dirname(e.adopted.receipt.path)}));
-  for (const name of fs.readdirSync(journal.target).filter(n => /^committed-[a-z0-9-]+\.json$/.test(n)).sort())
-    records.push(JSON.parse(journalFile(journal, path.join(journal.target, name))));
+  for (const name of fs.readdirSync(journal.stateTarget).filter(n => /^committed-[a-z0-9-]+\.json$/.test(n)).sort())
+    records.push(JSON.parse(journalFile(journal, path.join(journal.stateTarget, name))));
   for (const result of records) {
     if (result.adopted) {
       const key = {'recipe': 'template_commit', 'registry': 'registry', 'compose': 'composition',

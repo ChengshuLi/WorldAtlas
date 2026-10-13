@@ -162,7 +162,7 @@ jobs:
           CI_CHECKOUT_PR: ''
           CI_CHECKOUT_HEAD_REF: ''
         run: |
-          python3 -I -B - <<'CHECKOUT_BOOTSTRAP'
+          python3 -I -S -B - <<'CHECKOUT_BOOTSTRAP'
           import base64, hashlib, json, os, pathlib, re, signal, tempfile, time, urllib.request
           started = time.monotonic()
           signal.signal(signal.SIGALRM, lambda *_: (_ for _ in ()).throw(TimeoutError()))
@@ -259,7 +259,7 @@ jobs:
           CI_CHECKOUT_TREE: ${{ steps.checkout_bootstrap.outputs.tree }}
           CI_BOOTSTRAP_ELAPSED: ${{ steps.checkout_bootstrap.outputs.elapsed }}
         run: |
-          python3 -I -B "$CI_CHECKOUT_HELPER" --repository ChengshuLi/WorldAtlas \
+          python3 -I -S -B "$CI_CHECKOUT_HELPER" --repository ChengshuLi/WorldAtlas \
             --sha "$CI_CHECKOUT_SHA" --tree "$CI_CHECKOUT_TREE" --workspace "$GITHUB_WORKSPACE" \
             --fetch-timeout-seconds 240 --total-timeout-seconds 420 --max-attempts 2 --elapsed-seconds "$CI_BOOTSTRAP_ELAPSED"
       - name: Legacy full checkout only for proven trusted-helper absence
@@ -275,7 +275,7 @@ jobs:
           CI_CHECKOUT_SHA: ${{ steps.checkout_bootstrap.outputs.sha }}
           CI_CHECKOUT_TREE: ${{ steps.checkout_bootstrap.outputs.tree }}
         run: |
-          python3 -I -B - <<'CHECKOUT_VERIFY'
+          python3 -I -S -B - <<'CHECKOUT_VERIFY'
           import os, re, subprocess, urllib.parse
           sha, tree, repo = (os.environ[key] for key in ('CI_CHECKOUT_SHA', 'CI_CHECKOUT_TREE', 'CI_CHECKOUT_REPOSITORY'))
           assert re.fullmatch('[0-9a-f]{40}', sha) and re.fullmatch('[0-9a-f]{40}', tree) and repo == 'ChengshuLi/WorldAtlas'

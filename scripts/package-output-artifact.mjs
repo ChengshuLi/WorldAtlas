@@ -5,6 +5,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
+import {installedNodeIdentity, effectiveNodeDependencyInventory, validateNodeIdentity} from './package-node-runtime.mjs';
 import {loadPackageInputs, validatePackageInputs, containsPackagePath, safePackagePath} from './package-inputs.mjs';
 
 export const OUTPUT_MANIFEST = '.cache/package-output-manifest.json';
@@ -127,54 +128,87 @@ export function committedPackageProgramme(root, head = 'HEAD') {
   }).sort((a,b)=>a.path.localeCompare(b.path,'en'));
 }
 
-export function installedPackageIdentity(root, pythonImports = []) {
-  const rows=[];
-  const visit=relative=>{
-    const file=path.join(root,relative),stat=fs.lstatSync(file);
-    if(stat.isSymbolicLink()){
-      const target=fs.realpathSync(file),base=fs.realpathSync(path.join(root,'node_modules'));
-      need(target.startsWith(base+path.sep),'Installed dependency link escapes installation');
-      rows.push({path:relative,link:fs.readlinkSync(file)});
-    }else if(stat.isDirectory()){
-      for(const name of fs.readdirSync(file).sort())visit(relative+'/'+name);
-    }else{
-      need(stat.isFile(),'Ordinary installed dependency required');
-      rows.push({...streamedOrdinaryFile(root,relative),mode:stat.mode&0o111?'100755':'100644'});
+// Identity v2 retains raw evidence separately from narrowly proven relocation
+// metadata. Old aggregate-only evidence remains valid history, but cannot prove
+// equivalence under this policy and therefore takes the ordinary full-build path.
+export function resolvePackagePythonExecutable(expectedSha256) {
+  let executable;
+  for(const directory of (process.env.PATH??'').split(path.delimiter)){
+    if(!directory||!path.isAbsolute(directory))continue;
+    const candidate=path.join(directory,'python3');
+    try{fs.accessSync(candidate,fs.constants.X_OK);if(fs.statSync(candidate).isFile()){executable=candidate;break;}}catch{}
+  }
+  need(executable,'Ordinary Python executable unavailable on explicit PATH');
+  const real=fs.realpathSync(executable),identity=streamedOrdinaryFile(path.dirname(real),path.basename(real));
+  need(expectedSha256===undefined||identity.sha256===expectedSha256,'Python executable differs from authenticated original');
+  return {executable,sha256:identity.sha256};
+}
+function packagePythonIdentity(args,input,expectedExecutable) {
+  try {
+    const python=resolvePackagePythonExecutable(expectedExecutable);
+    const result=JSON.parse(execFileSync(python.executable,['-I','-S','-B',fileURLToPath(new URL('./package-python-runtime.py',import.meta.url)),...args],
+      {input,encoding:'utf8',maxBuffer:MAX_METADATA,env:{...process.env,PYTHONDONTWRITEBYTECODE:'1'}}));
+    need(result.valid===true||result.executable_sha256===python.sha256,'Python reported executable differs from independently observed bytes');
+    return result;
+  } catch(error) {
+    const detail=String(error.stderr??'').trim().split('\n').at(-1)||error.code||error.message;
+    throw Error('Python installed identity failed: '+String(detail).slice(0,1000));
+  }
+}
+export function installedPackageIdentity(root, pythonImports = [], {expectedParser,expectedExecutable} = {}) {
+  const node = installedNodeIdentity(root);
+  const python = pythonImports.length ? packagePythonIdentity([JSON.stringify(pythonImports),
+    ...(expectedParser===undefined?[]:['--expected-parser'])],expectedParser===undefined?undefined:JSON.stringify(expectedParser),expectedExecutable) : null;
+  return {version:2,...node,python};
+}
+
+export function declaredPackagePythonRoots(root) {
+  const file=path.join(root,'requirements.txt');
+  if(!fs.existsSync(file))return [];
+  return fs.readFileSync(file,'utf8').split(/\r?\n/).map(line=>line.trim()).filter(line=>line&&!line.startsWith('#')).map(line=>{
+    const match=/^([A-Za-z0-9_.-]+)==([^\s;]+)$/.exec(line);
+    need(match,'Exact pinned scientific dependency declaration required');
+    return {name:match[1],version:match[2]};
+  });
+}
+
+export function validateInstalledPackageIdentity(value) {
+  need(value?.version===2,'Version 2 installed inventory required');
+  need(same(Object.keys(value).sort(),['dependencies','node','python','version']),'Exact versioned installed identity fields required');
+  validateNodeIdentity({node:value.node,dependencies:value.dependencies});
+  need(Object.hasOwn(value,'python'),'Explicit installed Python identity required');
+  if(value.python!==null){
+    const result=packagePythonIdentity(['--validate'],JSON.stringify(value.python));
+    need(result.valid===true,'Complete bound Python inventory required');
+  }
+  return value;
+}
+
+export function installedPackageDifferences(original,current) {
+  validateInstalledPackageIdentity(current);
+  if(original?.version!==2||current?.version!==2)return [{component:'identity-policy',reason:'Version 2 raw and effective installed evidence required'}];
+  validateInstalledPackageIdentity(original);
+  const differences=[];
+  for(const component of ['node','dependencies','python']) {
+    const before=original[component],after=current[component];
+    const identity=value=>component==='node'?value:value===null?null:
+      {sha256:value?.sha256,files:value?.files,...(component==='python'?{executable_sha256:value?.executable_sha256}:{} )};
+    if(same(identity(before),identity(after)))continue;
+    const row={component,original:identity(before),current:identity(after)};
+    if(component==='python'&&before&&after){
+      row.changed_components=['interpreter','roots','distributions','parser'].filter(key=>!same(
+        key==='parser'?{provider:before.parser?.provider,sha256:before.parser?.sha256}:before[key],
+        key==='parser'?{provider:after.parser?.provider,sha256:after.parser?.sha256}:after[key]));
     }
-  };
-  visit('node_modules');
-  const runtime=streamedOrdinaryFile(path.dirname(process.execPath),path.basename(process.execPath));
-  const python=pythonImports.length?JSON.parse(execFileSync('python3',['-I','-B','-c',`
-import hashlib,importlib.metadata,json,pathlib,re,sys
-rows=[]; seen=set(); pending=json.loads(sys.argv[1])
-def digest(file,bytecode=False):
- h=hashlib.sha256()
- with open(file,'rb') as source:
-  if bytecode: source.read(16)
-  while True:
-   chunk=source.read(1048576)
-   if not chunk: break
-   h.update(chunk)
- return h.hexdigest()
-while pending:
- name=pending.pop().lower().replace('_','-')
- if name in seen: continue
- seen.add(name); distribution=importlib.metadata.distribution(name)
- for dependency in distribution.requires or []:
-  child=re.match(r'[A-Za-z0-9_.-]+',dependency).group()
-  try: importlib.metadata.distribution(child); pending.append(child)
-  except importlib.metadata.PackageNotFoundError: pass
- for member in distribution.files or []:
-  file=pathlib.Path(distribution.locate_file(member))
-  if not file.is_file(): raise ValueError('Installed Python member missing')
-  # Cache header timestamps are transport metadata; the actual marshalled
-  # executable bytecode is still hashed, along with every original source file.
-  rows.append([name,str(member),file.stat().st_size,digest(file,str(member).endswith('.pyc'))])
-rows.sort(); binary=pathlib.Path(sys.executable).resolve()
-print(json.dumps({'executable_sha256':digest(binary),'files':len(rows),'sha256':hashlib.sha256(json.dumps(rows,separators=(',',':')).encode()).hexdigest()}))
-`,JSON.stringify(pythonImports.map(row=>row.name))],{encoding:'utf8',maxBuffer:1048576,env:{...process.env,PYTHONDONTWRITEBYTECODE:'1'}})):null;
-  return {node:{bytes:runtime.bytes,sha256:runtime.sha256},dependencies:{files:rows.length,
-    bytes:rows.reduce((n,row)=>n+(row.bytes??0),0),sha256:sha(JSON.stringify(rows))},python};
+    const inventory=value=>component==='dependencies'?effectiveNodeDependencyInventory({dependencies:value}):
+      (value?.inventory??[]).map(member=>({path:(member.distribution??'')+':'+member.path,identity:member.effective}));
+    if(component!=='node'){
+      const old=new Map(inventory(before).map(member=>[member.path,member])),now=new Map(inventory(after).map(member=>[member.path,member]));
+      row.changed_files=[...new Set([...old.keys(),...now.keys()])].sort().filter(name=>!same(old.get(name),now.get(name)));
+    }
+    differences.push(row);
+  }
+  return differences;
 }
 
 export function snapshotPackageOutputSource(root = process.cwd()) {
@@ -209,7 +243,7 @@ export function snapshotPackageOutputSource(root = process.cwd()) {
   const head = git(root, ['rev-parse','HEAD']).trim(), tree = git(root, ['rev-parse','HEAD^{tree}']).trim();
   return {head, tree, input_definition_sha256: sha(fs.readFileSync(path.join(root, '.github/package-inputs.json'))),
     definition, files, programme: committedPackageProgramme(root), selection: readJSON(root, 'data/ownership-selection.json'),
-    installed_runtime:installedPackageIdentity(root,fs.existsSync(path.join(root,'requirements.txt'))?['numpy','shapely','pyproj'].map(name=>({name})):[])};
+    installed_runtime:installedPackageIdentity(root,declaredPackagePythonRoots(root))};
 }
 
 export function createPackageOutputManifest(root = process.cwd()) {
@@ -228,8 +262,9 @@ export function createPackageOutputManifest(root = process.cwd()) {
     same(source.programme, committedPackageProgramme(root)),
     'Original pre-build source snapshot differs');
   const output = inventoryPackageOutput(root);
-  const manifest = {version: 1, kind: 'original-cloudflare-package-output', source,
-    runtime: {installed: source.installed_runtime, node: process.version, versions: process.versions, platform: process.platform, arch: process.arch,
+  const {installed_runtime,...manifestSource}=source;
+  const manifest = {version: 1, kind: 'original-cloudflare-package-output', source:manifestSource,
+    runtime: {installed: installed_runtime, node: process.version, versions: process.versions, platform: process.platform, arch: process.arch,
       dependencies: streamedPackageFile(root, 'package-lock.json', MAX_METADATA).sha256,
       python: {version:receipt.preflight.runtime?.python?.version??null,imports:receipt.preflight.runtime?.python?.imports??[]}},
     configuration: packageBuildConfiguration(), output,
@@ -251,6 +286,7 @@ export function validatePackageOutputManifest(value) {
     hash(value.runtime.installed?.node?.sha256) && hash(value.runtime.installed?.dependencies?.sha256) &&
     value.configuration && typeof value.configuration === 'object' && !Array.isArray(value.configuration) &&
     Object.values(value.configuration).every(item => typeof item === 'string'), 'Missing original runtime/configuration');
+  if(value.runtime.installed?.version===2)validateInstalledPackageIdentity(value.runtime.installed);
   const sources = new Set();
   for (const row of value.source.files) {
     need(safePackagePath(row.path) && !sources.has(row.path) && ['100644','100755'].includes(row.mode) && commit(row.oid),

@@ -182,6 +182,8 @@ def main():
                 external.add(spec)
     need(not external, 'External credential-bearing startup module is not admitted')
     verified('package-lock.json')
+    if 'scripts/package-output-artifact.mjs' in seen:
+        verified('scripts/package-python-runtime.py')
     if entry_point == 'scripts/run-selected-package-proof.mjs':
         # This current observer is separately checked out. It reuses this same
         # verifier before importing the frozen, unchanged assembly programme.
