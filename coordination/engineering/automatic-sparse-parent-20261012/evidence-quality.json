@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "issue": 1785,
+  "lane": "engineering",
+  "worker_id": "01a131c0-8b58-70b6-8e2c-52240f11e03f",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "4278a6176e5530ccafe39f57bb1ab58a60992701",
+    "files": [
+      {
+        "path": ".github/metadata-regression-programs.json",
+        "bytes": 550,
+        "sha256": "f4608696e666af5afd5c1cc892e79ef07e80961c9ff51490638a40f0efd8407e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/selected-package-proof.yml",
+        "bytes": 7608,
+        "sha256": "e69b0ba94c024f1796eea7c4076b14c478c0ec7aab25cd85c75095b21af38dfa",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/delivery-handoff-advance.mjs",
+        "bytes": 144668,
+        "sha256": "2c93f2bb130747199014911b6689448cf0c3376df2e1b4410c095c04acdc95e1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-selected-package-proof.mjs",
+        "bytes": 14673,
+        "sha256": "c10b52ac0b64f6fa6f630c367f378eeb07cc4fef7cfbf7e40c55621079705554",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/delivery-handoff-advance.test.mjs",
+        "bytes": 185623,
+        "sha256": "26c9470af92347eabf45bd4da30aaff13d306903ce8524bdb63f819d6de606a8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/selected-package-proof-driver.test.mjs",
+        "bytes": 22636,
+        "sha256": "af1d12407936d7539b971aa9b561701bc2a34944075474d7ea35a9a94ab1f768",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "sparse-parent-stage-commit",
+      "kind": "code",
+      "description": "Preserve exact inherited tree entries without requiring absent inherited bodies; authenticate and store every new output on initial and resumed commits; preserve sparse index state and once-only recovery.",
+      "software": "Git and Node 24",
+      "units": "synthetic metadata controls"
+    },
+    {
+      "id": "truthful-frozen-child-diagnostics",
+      "kind": "code",
+      "description": "Retain bounded sanitized subprocess first cause before receipt access without weakening frozen source, assembly or exhaustive output proof admissions.",
+      "software": "Node 24",
+      "units": "synthetic subprocess controls"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/delivery-handoff-advance.test.mjs test/delivery-handoff.test.mjs test/selected-package-proof-driver.test.mjs"
+  ]
+}

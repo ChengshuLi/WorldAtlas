@@ -51,11 +51,43 @@ export function prepareFreshAssemblyScratch(sourceRoot){
   need(!existing||existing.isDirectory()&&!existing.isSymbolicLink(),'Ordinary assembly scratch directory required');
   if(!existing)fs.mkdirSync(cache,{mode:0o700});
   const receiptPath=path.join(cache,'package-input-build.json');
-  for(const target of [path.join(sourceRoot,'dist'),receiptPath,path.join(cache,'selected-package-proof.json'),path.join(cache,'frozen-cli-output')]){
+  for(const target of [path.join(sourceRoot,'dist'),receiptPath,path.join(cache,'selected-package-proof.json'),path.join(cache,'frozen-cli-output'),path.join(cache,'selected-package-child-diagnostic.json')]){
     let prior;try{prior=fs.lstatSync(target);}catch(error){if(error.code!=='ENOENT')throw error;}
     need(!prior,'Fresh frozen proof checkout required; prior output is not evidence');
   }
   return receiptPath;
+}
+export function recordFrozenChildDiagnostic({child,sourceRoot,secret='',log=message=>console.error(message)}){
+  // Observe the real child before touching its optional post-commit receipt.
+  // Never serialize its spawn options, full environment or API credential.
+  const sanitize=value=>{
+    let text=String(value??'');
+    if(secret)text=text.split(secret).join('[redacted]');
+    text=text.replace(/\b(?:gh[pousr]_[A-Za-z0-9_]+|github_pat_[A-Za-z0-9_]+)\b/g,'[redacted]')
+      .replace(/Bearer\s+[^\s'"<>]+/gi,'Bearer [redacted]')
+      .replace(/https?:\/\/[^\s'"<>]+/g,'[delivery address]');
+    // Keep useful tail diagnostics without unbounded hosted logs/artifacts.
+    return {text:text.length>8192?text.slice(0,4096)+'\n[...diagnostic middle omitted...]\n'+text.slice(-4096):text,
+      original_characters:String(value??'').length,truncated:text.length>8192};
+  };
+  const diagnostic={version:1,kind:'frozen-package-child-execution-diagnostic',
+    status:child.status??null,signal:child.signal??null,
+    error_code:/^[A-Z0-9_]+$/.test(child.error?.code??'')?child.error.code:null,error:sanitize(child.error?.message),
+    stdout:sanitize(child.stdout),stderr:sanitize(child.stderr),
+    semantics:'Child observation only; does not establish assembly, equivalence or consumer success.'};
+  const file=path.join(sourceRoot,'.cache/selected-package-child-diagnostic.json');
+  log('Frozen package child diagnostic: '+JSON.stringify(diagnostic));
+  try{fs.writeFileSync(file,JSON.stringify(diagnostic,null,2)+'\n',{flag:'wx',mode:0o600});}
+  catch(error){
+    const code=/^[A-Z0-9_]+$/.test(error.code??'')?error.code:'UNKNOWN';
+    log('Frozen child diagnostic persistence failed: '+JSON.stringify({code,error:sanitize(error.message)}));
+    throw Error('Unable to retain frozen child diagnostic ('+code+'); original child observation logged above');
+  }
+  const receiptPath=path.join(sourceRoot,'.cache/package-input-build.json');
+  let stat;try{stat=fs.lstatSync(receiptPath);}catch(error){if(error.code!=='ENOENT')throw error;}
+  need(stat?.isFile()&&!stat.isSymbolicLink(),
+    'Frozen assembly did not publish an ordinary receipt; see the retained child diagnostic above');
+  return fs.readFileSync(receiptPath);
 }
 export function requireActualAssembly(child,receiptRaw,sourceHead,originalRunId){
   need(child?.status===1&&!child.error&&child.signal===null,'Known post-commit legacy comparison failure required');
@@ -130,7 +162,7 @@ async function main(){
     cwd:sourceRoot,env:{...cleanEnvironment(),GH_TOKEN:token,SELECTED_PACKAGE_TRUSTED_BASE:frozen.accepted_commit,
       SELECTED_PACKAGE_ENTRY_POINT:'scripts/assemble-selected-package.mjs',SELECTED_PACKAGE_VERIFY_ONLY:'false',
       GITHUB_OUTPUT:path.join(sourceRoot,'.cache/frozen-cli-output')},encoding:'utf8',maxBuffer:8*1048576});
-  const receiptRaw=fs.readFileSync(receiptPath);
+  const receiptRaw=recordFrozenChildDiagnostic({child,sourceRoot,secret:token});
   const committed=requireActualAssembly(child,receiptRaw,input.source_head,Number(input.original_run_id));
   const {receipt}=committed;
   const directory=fs.mkdtempSync(path.join(proofRoot,'.cache-proof-'));

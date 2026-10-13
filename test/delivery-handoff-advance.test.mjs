@@ -2159,3 +2159,103 @@ if(process.env.WORLDATLAS_DELIVERY_ORIGINAL_FIXTURE==='1') {
   });
  });
 }
+
+
+function sparseAutomaticGitFixture(t) {
+  const base = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), 'delivery-promisor-')));
+  t.after(() => fs.rmSync(base, {recursive: true, force: true}));
+  const source = path.join(base, 'source'), root = path.join(base, 'work'); fs.mkdirSync(source);
+  const run = (cwd, args, extra = {}) => execFileSync('git', args, {cwd, env: {...process.env, GIT_NO_LAZY_FETCH: '1'}, ...extra});
+  const seed = (...args) => run(source, args).toString().trim();
+  seed('init', '-q', '-b', 'engineering/automatic-control');
+  seed('config', 'user.name', 'Fixture'); seed('config', 'user.email', 'fixture@example.invalid');
+  seed('config', 'uploadpack.allowFilter', 'true');
+  const inherited = ['unrelated/deep/body', 'coordination/engineering/automatic-control/retained/body'];
+  for (const name of ['original', ...inherited]) {
+    fs.mkdirSync(path.dirname(path.join(source, name)), {recursive: true}); fs.writeFileSync(path.join(source, name), 'retained ' + name + '\n');
+  }
+  seed('add', '.'); seed('commit', '-qm', 'original sparse parent');
+  run(base, ['-c', 'protocol.file.allow=always', 'clone', '-q', '--filter=blob:none', '--no-checkout', 'file://' + source, root]);
+  const git = (...args) => run(root, args).toString().trim();
+  git('config', 'user.name', 'Fixture'); git('config', 'user.email', 'fixture@example.invalid'); git('config', 'gc.auto', '0');
+  git('sparse-checkout', 'init', '--no-cone');
+  git('sparse-checkout', 'set', '--no-cone', '/original', '/coordination/engineering/automatic-control/advance/');
+  run(root, ['-c', 'protocol.file.allow=always', 'checkout', '-q'], {env: {...process.env, GIT_NO_LAZY_FETCH: '0'}});
+  git('remote', 'set-url', 'origin', path.join(base, 'unavailable-origin'));
+  const absent = inherited.map(name => ({name, oid: git('rev-parse', 'HEAD:' + name)}));
+  const missing = oid => assert.throws(() => run(root, ['cat-file', '-e', oid], {stdio: 'pipe'}));
+  absent.forEach(({oid}) => missing(oid));
+  let charged = 0;
+  const budget = {add({bytes}) {charged += bytes; assert.ok(charged < 2 * 1024 * 1024);}};
+  const j = openAdvanceJournal(root, 'coordination/engineering/automatic-control/advance', {commit: git('rev-parse', 'HEAD'), path: 'recipe.json'}, {budget});
+  const validate = async ({branch, paths}) => {assert.equal(branch, 'engineering/automatic-control'); assert.ok(paths.every(p => p.startsWith(j.destination + '/')));};
+  return {j, git, run, root, absent, missing, validate};
+}
+for (const stop of [null, 'intent', 'object', 'ref']) test('automatic commit preserves absent inherited promisor bodies through ' + (stop ?? 'completion'), async t => {
+  const f = sparseAutomaticGitFixture(t), parent = f.git('rev-parse', 'HEAD');
+  const oldTree = f.git('ls-tree', '-r', parent);
+  await prepareAdvanceStage(f.j, 'recipe', 'recipe', {}, () => ({'recipe-index.json': Buffer.from('{"groups":[]}\n')}));
+  if (stop) {
+    await assert.rejects(commitAdvanceStage(f.j, 'recipe', {validate: f.validate, interrupt: point => {if (point === stop) throw Error('interrupted');}}), /interrupted/);
+    const intent = JSON.parse(fs.readFileSync(path.join(f.j.target, 'commit-recipe.json')));
+    // The newly hash-object-written fixture product is loose; remove just that
+    // known fixture object to exercise authenticated recovery, never parent data.
+    const oid = intent.files[0].oid, objects = f.git('rev-parse', '--git-path', 'objects');
+    const loose = path.resolve(f.root, objects, oid.slice(0, 2), oid.slice(2));
+    assert.ok(fs.lstatSync(loose).isFile()); fs.unlinkSync(loose); f.missing(oid);
+  }
+  const result = await commitAdvanceStage(f.j, 'recipe', {validate: f.validate});
+  const intent = JSON.parse(fs.readFileSync(path.join(f.j.target, 'commit-recipe.json')));
+  assert.equal(result.head, intent.head); assert.equal(f.git('rev-parse', 'HEAD^'), parent);
+  assert.equal(f.git('rev-list', '--count', 'HEAD'), '2');
+  const added = new Set(intent.files.map(file => file.path));
+  const inherited = f.git('ls-tree', '-r', 'HEAD').split('\n').filter(row => !added.has(row.split('\t')[1])).join('\n');
+  assert.equal(inherited, oldTree);
+  for (const file of intent.files) {
+    assert.equal(f.git('cat-file', '-t', file.oid), 'blob');
+    assert.deepEqual(f.run(f.root, ['cat-file', 'blob', file.oid]), fs.readFileSync(path.join(f.root, file.path)));
+  }
+  f.absent.forEach(({name, oid}) => {f.missing(oid); assert.equal(fs.existsSync(path.join(f.root, name)), false);});
+  assert.equal((await commitAdvanceStage(f.j, 'recipe', {validate: f.validate})).resumed, true);
+  assert.equal(f.git('rev-list', '--count', 'HEAD'), '2');
+});
+test('automatic sparse commit rejects unstored new products despite missing-ok inherited entries', async t => {
+  const f = sparseAutomaticGitFixture(t), before = f.git('rev-parse', 'HEAD');
+  await prepareAdvanceStage(f.j, 'recipe', 'recipe', {}, () => ({'recipe-index.json': Buffer.from('{}\n')}));
+  const execute = (command, args, options) => {
+    if (command === 'git' && args[0] === 'hash-object' && args.includes('-w'))
+      return execFileSync(command, args.filter(arg => arg !== '-w'), options);
+    return execFileSync(command, args, options);
+  };
+  await assert.rejects(commitAdvanceStage(f.j, 'recipe', {validate: f.validate, execute}), /cat-file|could not|Not a valid/);
+  assert.equal(f.git('rev-parse', 'HEAD'), before);
+  assert.equal(fs.existsSync(path.join(f.j.target, 'commit-recipe.json')), false);
+});
+
+
+test('original strict scratch writer reproduces the missing inherited object failure', async t => {
+  const f = sparseAutomaticGitFixture(t), before = f.git('rev-parse', 'HEAD');
+  await prepareAdvanceStage(f.j, 'recipe', 'recipe', {}, () => ({'recipe-index.json': Buffer.from('{}\n')}));
+  const execute = (command, args, options) => execFileSync(command,
+    args[0] === 'write-tree' && options.env.GIT_INDEX_FILE ? args.filter(arg => arg !== '--missing-ok') : args, options);
+  await assert.rejects(commitAdvanceStage(f.j, 'recipe', {validate: f.validate, execute}), /write-tree|missing|invalid|could not/);
+  assert.equal(f.git('rev-parse', 'HEAD'), before);
+  f.absent.forEach(({oid}) => f.missing(oid));
+});
+test('sparse automatic recovery rejects changed or deleted inherited entries in any subtree', async t => {
+  for (const change of ['modify', 'delete']) for (const target of ['unrelated/deep/body', 'coordination/engineering/automatic-control/retained/body']) await t.test(change + ':' + target, async t => {
+    const f = sparseAutomaticGitFixture(t), before = f.git('rev-parse', 'HEAD');
+    await prepareAdvanceStage(f.j, 'recipe', 'recipe', {}, () => ({'recipe-index.json': Buffer.from('{}\n')}));
+    await assert.rejects(commitAdvanceStage(f.j, 'recipe', {validate: f.validate, interrupt: point => {if (point === 'intent') throw Error('stop');}}), /stop/);
+    const file = path.join(f.j.target, 'commit-recipe.json'), intent = JSON.parse(fs.readFileSync(file));
+    const env = {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_INDEX_FILE: path.join(f.root, 'adversarial-index')};
+    f.run(f.root, ['read-tree', intent.tree], {env});
+    f.run(f.root, ['update-index', '--index-info'], {env, input: change === 'modify' ? `100644 ${intent.files[0].oid}\t${target}\n` : `0 ${'0'.repeat(40)}\t${target}\n`});
+    intent.tree = f.run(f.root, ['write-tree', '--missing-ok'], {env}).toString().trim();
+    intent.raw = intent.raw.replace(/^tree [a-f0-9]+/, 'tree ' + intent.tree);
+    intent.head = createHash('sha1').update(`commit ${Buffer.byteLength(intent.raw)}\0`).update(intent.raw).digest('hex');
+    fs.writeFileSync(file, JSON.stringify(intent));
+    await assert.rejects(commitAdvanceStage(f.j, 'recipe', {validate: f.validate}), /undeclared paths/);
+    assert.equal(f.git('rev-parse', 'HEAD'), before); f.absent.forEach(({oid}) => f.missing(oid));
+  });
+});
