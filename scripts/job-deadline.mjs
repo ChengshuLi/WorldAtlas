@@ -20,7 +20,7 @@ export function workflowJobMinutes(workflow, phase) {
   need(Number.isSafeInteger(minutes) && minutes <= 360, 'Invalid workflow phase timeout');
   // These jobs use their ID as the displayed name. A future named/matrix job
   // must deliberately update the binding rather than guessing a matching row.
-  need(!/^    (?:name|strategy):/m.test(blocks[0][2]), 'Unsupported scheduler job naming');
+  need(!/^    (?:name|strategy):/m.test(blocks[0][2]), 'Unsupported deadline job naming');
   return minutes;
 }
 
@@ -129,11 +129,3 @@ export async function loadJobDeadline({api, repo, phase, workflow, env = process
 }
 
 // Preserve the existing scheduler interface and its deliberately bounded phases.
-export function schedulerJobMinutes(workflow, phase) {
-  need(['register', 'schedule'].includes(phase), 'Invalid scheduler phase');
-  return workflowJobMinutes(workflow, phase);
-}
-export function loadSchedulerDeadline(options) {
-  need(['register', 'schedule'].includes(options.phase), 'Invalid scheduler phase');
-  return loadJobDeadline(options);
-}

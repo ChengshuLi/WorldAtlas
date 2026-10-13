@@ -14,7 +14,6 @@ import {githubAPI, renderClaim} from '../scripts/issue-claim-contract.mjs';
 import {loadGeographicReport, prepareGeographyProof, reportHash} from '../scripts/geographic-report-artifact.mjs';
 import {inspectMerge, prepareIntegration, completeIntegration} from '../scripts/merge-integration.mjs';
 import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
-import {assertAdmission, queueBody, executionTitle} from '../scripts/merge-scheduler.mjs';
 import {reviewContractBinding} from '../scripts/premerge-evidence.mjs';
 import {PROOF_PATHS, WORKFLOW_PATH} from '../scripts/integration-proof.mjs';
 
@@ -56,8 +55,8 @@ test('monotonic deadline bounds delayed reset despite wall-clock movement', asyn
 });
 test('final bound includes declared and original blobs, fresh guards and source gates', () => {
   const ordinary = {blob_calls: 474, water: false};
-  const n = finalRequestBound({inventory: ordinary, metadataCalls: 23, admissionCalls: 12, artifactPages: 1});
-  assert.equal(n, 585); assert.ok(finalRequestBound({inventory: {...ordinary, water: true}, metadataCalls: 23}) > n);
+  const n = finalRequestBound({inventory: ordinary, metadataCalls: 23, artifactPages: 1});
+  assert.equal(n, 573); assert.ok(finalRequestBound({inventory: {...ordinary, water: true}, metadataCalls: 23}) > n);
   assert.throws(() => finalRequestBound({inventory: ordinary, metadataCalls: Infinity}), /finite/);
 });
 
@@ -92,15 +91,11 @@ function fixture() {
   });
   const authored = tree([['README.md', baselineRaw], [outputPath, outputRaw], [manifestPath, manifestRaw]]), baseline = tree([['README.md', baselineRaw]]);
   const f = {repo, head, base, candidate, issue, pr, files, claim, review, manifest, blobs, authored, baseline, calls: [], writes: [], phase: 'before', checks: 'success'};
-  const request = {pr_number: 23, expected_head: head, request_id: 'durable-capacity-ticket'};
   f.api = async (route, method = 'GET', body) => {
     f.calls.push({route, method, phase: f.phase}); const name = route.split('?')[0];
     if (method !== 'GET') {f.writes.push({route, method, body}); return {merged: true, sha: 'd'.repeat(40)};}
     if (name === '/rate_limit') return quota(f.phase === 'before' ? f.startCapacity ?? 0 : 2000, 2);
     if (name === `/repos/${repo}/pulls`) return [structuredClone(f.pr)];
-    if (name.endsWith('/actions/workflows/worker-merge.yml/runs')) return {workflow_runs:
-      new URLSearchParams(route.split('?')[1]).get('status') === 'in_progress' ?
-        [{id: 12, status: 'in_progress', display_title: executionTitle(request, 1)}] : []};
     if (name === `/repos/${repo}/pulls/23`) return structuredClone(f.pr);
     if (name === `/repos/${repo}/issues/1183`) return structuredClone(f.issue);
     if (name === `/repos/${repo}/issues/1183/comments`) return [{user: {login: 'github-actions[bot]'}, body: renderClaim(f.claim)}];
@@ -110,9 +105,7 @@ function fixture() {
     if (name.endsWith('/status')) return {statuses: []};
     if (name === `/repos/${repo}/git/ref/heads/main`) return {object: {sha: f.base}};
     if (name === `/repos/${repo}/issues/23/comments`) return [
-      {id: 1, author_association: 'OWNER', body: `<!-- worldatlas-review:v1\n${JSON.stringify(f.review)}\n-->`},
-      ...['request', 'dispatch'].map((kind, i) => ({id: i + 2, user: {login: 'github-actions[bot]'},
-        body: queueBody({...request, kind, ...(kind === 'dispatch' ? {attempt: 1} : {})})}))];
+      {id: 1, author_association: 'OWNER', body: `<!-- worldatlas-review:v1\n${JSON.stringify(f.review)}\n-->`}];
     if (name.includes('/git/commits/')) {
       const commit = name.split('/').at(-1);
       return {tree: {sha: commit === base ? '1'.repeat(40) : '2'.repeat(40)}, parents: [{sha: base}, {sha: head}]};
@@ -125,7 +118,7 @@ function fixture() {
   };
   f.options = () => ({api: memoizeImmutableGitBlobs(f.api), repo, number: 23, expectedHead: head,
     policy: {version: 1, mode: 'enforce-new', activation_time: '2026-01-01T00:00:00Z'}, testedBase: base,
-    artifactRunId: 12, finalAdmission: api => assertAdmission({api, repo, request, attempt: 1, runId: 12}),
+    artifactRunId: 12,
     capacityTiming: {...clock(), sleep: async () => {f.phase = 'after';}}});
   f.complete = (extra = {}) => completeIntegration({...f.options(), finalCapacity: true, integrationResult: 'success',
     geographyResult: 'success', testedCandidate: f.candidate,
@@ -404,10 +397,10 @@ test('costly evidence inventory requires current issue and disposition bindings 
   await assert.rejects(inventory(), /Missing current exact-head review/);
   assert.equal(f.writes.length, 0);
 });
-test('capacity wait preserves same live ticket and invokes fresh FIFO authority', async () => {
-  const f = fixture(); let admissionReads = 0;
-  const result = await paceFinalValidation(f.options(), {inspect: inspectMerge, admission: async () => {admissionReads++;}});
-  assert.equal(admissionReads, 2); assert.equal(result.receipt.reserved, false); assert.equal(result.receipt.status, 'observed-sufficient');
+test('capacity wait rechecks actual claim authority without scheduler admission', async () => {
+  const f = fixture();
+  const result = await paceFinalValidation(f.options(), {inspect: inspectMerge});
+  assert.equal(result.receipt.reserved, false); assert.equal(result.receipt.status, 'observed-sufficient');
   assert.equal(f.writes.length, 0); assert.ok(f.calls.some(row => row.phase === 'after' && row.route.includes('/issues/1183/comments')));
 });
 for (const mutation of ['claim', 'claim-id', 'review', 'head', 'base', 'checks', 'contract', 'tree-mode', 'tree-path']) test(`changed ${mutation} while waiting rejects before costly output blobs`, async () => {
@@ -464,7 +457,7 @@ test('complete final still validates every evidence byte after waiting and rejec
   assert.equal(f.writes.filter(row => row.method === 'PUT').length, 1);
   assert.ok(f.calls.filter(row => row.phase === 'before').every(row => row.route === '/rate_limit'),
     'zero capacity must wait before the first repository GET');
-  assert.ok(f.calls.some(row => row.phase === 'after' && row.route.includes('/worker-merge.yml/runs')));
+  assert.ok(!f.calls.some(row => row.route.includes('/worker-merge.yml/runs')), 'No scheduler inventory');
 });
 test('modest planning capacity restarts the entire fresh inventory after observed reset in the same ticket', async () => {
   const f = fixture(); f.startCapacity = 24;
@@ -580,12 +573,12 @@ test('real pacing prefetches complete bound blobs before proof classifier reads 
         assert.equal((await api(`/repos/${f.repo}/git/blobs/${output.sha}`)).sha, output.sha);
         assert.equal(t.events.length, before, 'classifier must reuse authenticated transport without REST');
       }};
-    const result = await paceFinalValidation(options, {inspect: inspectMerge, admission: options.finalAdmission});
+    const result = await paceFinalValidation(options, {inspect: inspectMerge});
     assert.equal(classifierReads, 2); assert.equal(t.fetches, 1);
     assert.equal(result.receipt.inventory.exact_git_transport, true);
     assert.equal(result.receipt.inventory.blob_calls, 0);
     assert.equal(result.receipt.proof_calls, 3, 'run, jobs and classifier logical reads remain counted');
-    assert.ok(result.receipt.metadata_calls > 0); assert.ok(result.receipt.admission_calls > 0);
+    assert.ok(result.receipt.metadata_calls > 0); assert.equal(Object.hasOwn(result.receipt, 'admission_calls'), false);
     assert.equal(t.events.filter(row => row.kind === 'http' && row.route.includes('/git/blobs/')).length, 1,
       'only the manifest is fetched by REST before the complete inventory is known');
     assert.ok(f.calls.filter(row => row.route.endsWith('/pulls/23')).length >= 3,
@@ -857,7 +850,7 @@ test('predecessor applicability retains authenticated redirect capabilities and 
       await api.jobLogRedirect(`/repos/${f.repo}/actions/jobs/7/logs`);
       await api.artifactRedirect(`/repos/${f.repo}/actions/artifacts/9/zip`);
     }};
-  const result=await paceFinalValidation(options,{inspect:inspectMerge,admission:options.finalAdmission});
+  const result=await paceFinalValidation(options,{inspect:inspectMerge});
   assert.equal(inventories,2);assert.equal(redirects.length,4);
   assert.equal(result.receipt.proof_calls,4,'run, jobs, original log and original archive are budgeted');
 });

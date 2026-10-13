@@ -10,7 +10,7 @@ import {checkoutExecutionClosure} from '../coordination/engineering/arctic-three
 const repo=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const focused=['handoff-scope','issue-claims','worker-result','regional-research-gate','geography-worker-lane',
   'evidence-quality','premerge-evidence','trusted-workflow-checkouts','merge-integration',
-  'merge-integration-client','merge-integration-entrypoint','integration-proof'];
+  'merge-integration-entrypoint','integration-proof'];
 const helper='scripts/canonical-restoration.mjs';
 
 test('actual checkout authority matches the selected certificate role closure and critical bytes',()=>{

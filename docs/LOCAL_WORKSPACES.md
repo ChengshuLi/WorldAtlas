@@ -86,14 +86,15 @@ cache paths and ownership tokens stay out of committed evidence.
 
 ## Finish and release
 
-Cleanup is the primary lifecycle rule. After verifying actual GitHub merge state,
-`queue-pr-merge.mjs` automatically attempts release of its current managed author
-slot, only if the checkout still has the reviewed head and branch. Its result
-includes `local_cleanup`; pending cleanup never invalidates a successful merge.
-Before queueing, stop local servers/reproduction processes, push required evidence
-and leave the slot clean. Record durable handoff before queueing; after automatic
-release, continue from the primary checkout to release the issue claim and allocate
-the next job. Legacy/unmanaged checkouts are retained for explicit inspection.
+Cleanup is the primary lifecycle rule. After a fresh PR API read verifies actual
+merged state, the exact reviewed head and its squash commit, explicitly release
+the owned managed author slot. `gh run watch` and the native merge workflow do not
+perform local cleanup. Preserve the run URL, request ID, head and merge commit on
+the original issue before release. Stop local servers/reproduction processes,
+push required evidence, preserve unique scratch and leave the slot clean. Continue
+from the primary checkout to release the issue claim and allocate the next job.
+A release failure does not invalidate an already verified merge. Legacy/unmanaged
+checkouts are retained for explicit inspection.
 
 Reviewers must release their local review slot immediately after durably posting
 the review; no waiting for the author to merge. Failed/blocked tasks first preserve

@@ -113,8 +113,8 @@ export async function inventoryFinalEvidence({api, repo, pr, issue, reservation,
     original_count: originals.length, immutable_oids: oids.size, cache_fit: fitsCache, exact_git_transport: transported, review_pages: pages(comments)};
 }
 
-export function finalRequestBound({inventory, metadataCalls, admissionCalls = 0, proofCalls = 0, artifactPages = 1}) {
-  need([metadataCalls, admissionCalls, proofCalls, artifactPages, inventory.blob_calls].every(n => Number.isSafeInteger(n) && n >= 0),
+export function finalRequestBound({inventory, metadataCalls, proofCalls = 0, artifactPages = 1}) {
+  need([metadataCalls, proofCalls, artifactPages, inventory.blob_calls].every(n => Number.isSafeInteger(n) && n >= 0),
     'Cannot establish a finite final request bound');
   // Two metadata passes: fresh rejection gates after waiting and full final
   // inspection. Additional source authority includes its fresh rechecks. The
@@ -123,7 +123,7 @@ export function finalRequestBound({inventory, metadataCalls, admissionCalls = 0,
   // download/notification, plus 4 for fresh geographic run/job/log/tree custody. This logical inventory is a minimum admission estimate,
   // not an upper bound on actual attempts: mutable fanout and HTTP retries may
   // exceed it. The separate quota-derived attempt bound preserves recovery.
-  const required = inventory.blob_calls + metadataCalls * (inventory.water ? 5 : 2) + admissionCalls + proofCalls + artifactPages + 52;
+  const required = inventory.blob_calls + metadataCalls * (inventory.water ? 5 : 2) + proofCalls + artifactPages + 52;
   need(Number.isSafeInteger(required) && required > 0, 'Cannot establish a finite final request bound');
   return required;
 }
@@ -214,10 +214,9 @@ export async function beginFinalPlanning(options) {
   } catch (error) {error.capacity = receipt; throw error;}
 }
 
-export async function paceFinalValidation(options, {inspect, admission = async () => {}}) {
-  let metadataCalls = 0, admissionCalls = 0, proofCalls = 0, artifactPages = 0;
+export async function paceFinalValidation(options, {inspect}) {
+  let metadataCalls = 0, proofCalls = 0, artifactPages = 0;
   const counted = copyAPIFeatures(async (...args) => {metadataCalls++; return options.api(...args);}, options.api);
-  const admissionAPI = async (...args) => {admissionCalls++; return options.api(...args);};
   let receipt = {phase: 'final-capacity', reserved: false, ...(options.planningCapacity ? {planning: options.planningCapacity} : {})};
   try {
     const proofInventory = async (api, state) => {
@@ -236,7 +235,7 @@ export async function paceFinalValidation(options, {inspect, admission = async (
     };
     let before;
     for (let planningAttempt = 1; planningAttempt <= 3; planningAttempt++) {
-      metadataCalls = 0; admissionCalls = 0; proofCalls = 0; artifactPages = 0;
+      metadataCalls = 0; proofCalls = 0; artifactPages = 0;
       try {
         const currentPR = await counted(`/repos/${options.repo}/pulls/${options.number}`);
         need(currentPR.head?.sha === options.expectedHead, 'PR head changed; obtain fresh exact-head review');
@@ -244,7 +243,6 @@ export async function paceFinalValidation(options, {inspect, admission = async (
           const current = await counted(`/repos/${options.repo}/git/ref/heads/main`);
           need(current.object?.sha === options.testedBase, 'Main advanced before capacity wait; resubmit unchanged head');
         }
-        await admission(admissionAPI);
         before = await inspect({...options, api: counted, evidenceCheck: inventoryFinalEvidence});
         if (before.replayed) return {api: options.capacityAPI ?? options.api, receipt: {...receipt, status: 'already-merged'}};
         need(before.base === options.testedBase, 'Main advanced before capacity wait; resubmit unchanged head');
@@ -283,9 +281,9 @@ export async function paceFinalValidation(options, {inspect, admission = async (
           boundedFinalAPI(options.capacityAPI, capacity.remaining - 16, {planning: true})};
       }
     }
-    const required = finalRequestBound({inventory: before.evidence, metadataCalls, admissionCalls,
+    const required = finalRequestBound({inventory: before.evidence, metadataCalls,
       proofCalls: proofCalls * 2, artifactPages});
-    receipt = {...receipt, required, metadata_calls: metadataCalls, admission_calls: admissionCalls,
+    receipt = {...receipt, required, metadata_calls: metadataCalls,
       proof_calls: proofCalls, artifact_pages: artifactPages, inventory: before.evidence};
     const capacity = await waitForFinalCapacity({...options.capacityTiming,
       ...(options.capacityDeadlineRemaining ? {deadlineMs: options.capacityDeadlineRemaining()} : {}),
@@ -306,7 +304,6 @@ export async function paceFinalValidation(options, {inspect, admission = async (
     receipt.recovery_call_reserve = 16;
     // Re-read every mutable rejection gate after waiting. These are not reused
     // by the normal completeIntegration inspection and full evidence validator.
-    await admission(api);
     const after = await inspect({...options, api, evidenceCheck: inventoryFinalEvidence});
     need(!after.replayed && after.base === before.base && after.base === options.testedBase &&
       after.pr.head.sha === before.pr.head.sha && after.pr.body === before.pr.body && after.pr.title === before.pr.title &&

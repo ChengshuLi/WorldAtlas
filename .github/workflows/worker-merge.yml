@@ -1,5 +1,5 @@
 name: Serialize worker PR merges
-run-name: 'merge #${{ inputs.pr_number }} ${{ inputs.request_id }} attempt ${{ inputs.queue_attempt }}'
+run-name: 'merge #${{ inputs.pr_number }} ${{ inputs.request_id }}'
 on:
   workflow_dispatch:
     inputs:
@@ -12,15 +12,12 @@ on:
       request_id:
         type: string
         required: true
-      queue_attempt:
-        type: string
-        required: true
 permissions: {}
-# Hold main for the admitted request's complete candidate/test/final lifecycle.
-# Durable FIFO registrations live outside this group, so replaced pending runs
-# are recovered by the scheduler rather than discarded.
+# GitHub queues up to 100 pending runs; overflow is canceled by Actions.
+# Serialize the complete candidate/test/final lifecycle, with no scheduler.
 concurrency:
   group: worldatlas-main-integrate
+  queue: max
   cancel-in-progress: false
 # The intended normal package target is Cloudflare; the separate Site gate is retained.
 
@@ -67,7 +64,6 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           PREPARE_FALLBACK: 'true'
-          QUEUE_ADMISSION: 'required'
           MERGE_PHASE: prepare
         run: node scripts/run-worker-merge.mjs
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -406,7 +402,6 @@ jobs:
       - name: Recheck tested base, ownership, reviewed bytes and checks before squash
         env:
           GH_TOKEN: ${{ github.token }}
-          QUEUE_ADMISSION: 'required'
           MERGE_PHASE: merge
           FINAL_CAPACITY: 'required'
           CANDIDATE_REF: ${{ needs.prepare.outputs.candidate_ref }}
@@ -426,29 +421,3 @@ jobs:
           name: merge-${{ inputs.request_id }}
           path: merge-result.json
           retention-days: 30
-
-  wake:
-    needs: [prepare, integration, geography, merge]
-    if: always() && github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    timeout-minutes: 2
-    permissions:
-      contents: read
-      actions: write
-    steps:
-      # This separate trusted job never checks out or executes candidate code.
-      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
-        with:
-          ref: ${{ github.workflow_sha }}
-          persist-credentials: false
-          sparse-checkout: |
-            scripts
-            src
-            .github
-      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
-        with:
-          node-version: '24'
-      - name: Wake existing FIFO after this worker settles
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: node scripts/run-merge-wake.mjs

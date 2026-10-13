@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "issue": 1813,
+  "lane": "engineering",
+  "worker_id": "01a1344d-d3f0-73ec-86e4-12a4a5b5b02d",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "429769c66494a9333c481b052a246b504297bd0d",
+    "files": [
+      {
+        "path": ".github/workflows/worker-merge.yml",
+        "bytes": 24069,
+        "sha256": "c8007f5963203e2c32b2088e21b0ae60c69569cd6fc9f24df41c680bbf6ec173",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "delete-custom-merge-scheduler",
+      "kind": "code",
+      "description": "Delete custom merge registration, scheduler, completion wake and observation client. Dispatch and observe existing Actions worker lifecycle directly, preserving candidate/review/evidence checks and actual merged-head reconciliation. No new cache or queue abstraction.",
+      "software": "Node 24; native GitHub Actions concurrency; credential-free real-entrypoint API fixtures",
+      "units": "workflow stages and positive/adverse behavior checks"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/merge-integration-entrypoint.test.mjs test/merge-integration.test.mjs test/final-capacity.test.mjs",
+    "node --test test/delivery-handoff-advance.test.mjs test/delivery-handoff.test.mjs test/trusted-workflow-checkouts.test.mjs",
+    "node --test test/job-deadline.test.mjs test/job-deadline-independent.test.mjs test/github-quota.test.mjs"
+  ]
+}

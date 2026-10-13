@@ -10,13 +10,13 @@ export const COORDINATION_PATHS = new Set([
   'scripts/classify-deployment-budget.mjs',
   '.github/workflows/deployment-budget.yml', 'test/deployment-budget-scope.test.mjs',
   // Test-runner changes require full regression to validate the real inventory.
-  'scripts/run-worker-merge.mjs', 'scripts/queue-pr-merge.mjs', 'scripts/merge-queue-client.mjs',
+  'scripts/run-worker-merge.mjs',
   '.github/workflows/handoff-scope.yml',
   '.github/workflows/merge-integration-checks.yml', '.github/workflows/worker-merge.yml',
   '.github/evidence-policy.json',
   ...['handoff-scope','issue-claims','worker-result','regional-research-gate','geography-worker-lane',
     'evidence-quality','premerge-evidence','trusted-workflow-checkouts','merge-integration',
-    'merge-integration-client','merge-integration-entrypoint','integration-proof'].map(name=>`test/${name}.test.mjs`)
+    'merge-integration-entrypoint','integration-proof'].map(name=>`test/${name}.test.mjs`)
 ]);
 // Callers supply the current linked issue's scope only after exact-branch claim
 // validation. Candidate metadata is never an ownership source.

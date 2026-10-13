@@ -3,7 +3,6 @@ import {gitBlobTransport} from './git-blob-transport.mjs';
 import {quotaDelay,requestAccounting} from './github-quota.mjs';
 import {loadGeographicReport, prepareGeographyProof, validateGeographyProof} from './geographic-report-artifact.mjs';
 import fs from 'node:fs';
-import {assertAdmission} from './merge-scheduler.mjs';
 import {renderWorkerResult} from './worker-result.mjs';
 import {githubAPI} from './issue-claim-contract.mjs';
 import {loadEvidencePolicy} from './evidence-policy.mjs';
@@ -22,15 +21,11 @@ const api = transport.api, options = {api, repo, number, expectedHead: input.exp
   metadataProofLoader: createMetadataRegressionProofLoader({token: process.env.GH_TOKEN, directory: process.cwd()}),
   prepareFallback: process.env.PREPARE_FALLBACK === 'true',
   integrationRequestId: input.request_id + (process.env.GITHUB_RUN_ID ? `-${process.env.GITHUB_RUN_ID}` : '')};
-let result = {accepted: false, request_id: input.request_id, pr_number: number, phase, ...(input.queue_attempt ? {queue_attempt: Number(input.queue_attempt)} : {})};
+let result = {accepted: false, request_id: input.request_id, pr_number: number, phase};
 try {
-  if (process.env.QUEUE_ADMISSION === 'required' && (phase === 'prepare' || process.env.FINAL_CAPACITY !== 'required')) {
-    await assertAdmission({api, repo, request: {pr_number: number, expected_head: input.expected_head, request_id: input.request_id},
-      attempt: Number(input.queue_attempt), runId: process.env.GITHUB_RUN_ID});
-  }
   if (phase === 'prepare') {
     const state = await prepareIntegration(options);
-    result = {...result, status: state.replayed ? 'already-merged' : 'testing',
+    result = {...result, accepted: Boolean(state.replayed), ...(state.replayed ? {merge_commit: state.pr.merge_commit_sha} : {}), status: state.replayed ? 'already-merged' : 'testing',
       tested_base: state.base, tested_candidate: state.candidate, reviewed_head: input.expected_head, profile: state.profile, test_selection: state.test_selection ?? 'complete', expectations_path: state.expectations_path, proof: state.proof, proof_unavailable: state.proof_unavailable,
       geography_proof: state.geography_proof, candidate_refresh_attempts: state.candidate_refresh_attempts, candidate_ref: state.candidate_ref};
     // Only validated commit IDs and owned ref identifiers become job outputs.
@@ -38,12 +33,8 @@ try {
     fs.appendFileSync(process.env.GITHUB_OUTPUT, `geography_proof=${state.geography_proof ? JSON.stringify(state.geography_proof) : ''}\n`);
   } else {
     const geographyProof = process.env.GEOGRAPHY_PROOF ? validateGeographyProof(JSON.parse(process.env.GEOGRAPHY_PROOF)) : null;
-    const finalAdmission = admittedAPI => assertAdmission({api: admittedAPI, repo,
-      request: {pr_number: number, expected_head: input.expected_head, request_id: input.request_id},
-      attempt: Number(input.queue_attempt), runId: process.env.GITHUB_RUN_ID});
     const completed = await completeIntegration({...options, integrationResult: process.env.INTEGRATION_RESULT,
       finalCapacity: process.env.FINAL_CAPACITY === 'required',
-      finalAdmission: process.env.QUEUE_ADMISSION === 'required' ? finalAdmission : undefined,
       artifactRunId: geographyProof?.run_id ?? Number(process.env.GITHUB_RUN_ID),
       capacityObserver: observation => {result.final_capacity = observation; console.log(JSON.stringify(observation));},
       geographyResult: process.env.GEOGRAPHY_RESULT,
@@ -72,7 +63,16 @@ try {
   result.status = /conflict|changes reviewed bytes|substantive review/.test(error.message) ? 'intervention-required' : 'not-merged';
   result.retryable = /resubmit unchanged head/.test(error.message) || (quotaDelay(error)??quotaDelay(error.quotaCause))!==null;
   if((quotaDelay(error)??quotaDelay(error.quotaCause))!==null)result.quota_retry_at=new Date(Date.now()+(quotaDelay(error)??quotaDelay(error.quotaCause))).toISOString();
-  if (phase === 'prepare') process.exitCode = 1;
+  // A lost merge response or canceled predecessor can still have committed.
+  // Reconcile the actual PR once; never repeat the merge write here.
+  if (phase === 'merge') {
+    try {
+      const pr = await api(`/repos/${repo}/pulls/${number}`);
+      if (pr.merged === true && pr.head?.sha === input.expected_head && /^[a-f0-9]{40}$/.test(pr.merge_commit_sha ?? ''))
+        result = {...result, accepted: true, status: 'already-merged', merge_commit: pr.merge_commit_sha};
+    } catch { /* The original failure remains; inspect the actual PR before retrying. */ }
+  }
+  if (!result.accepted) process.exitCode = 1;
 }
 if (phase === 'merge' && process.env.CANDIDATE_REF) {
   try { result.candidate_cleanup = await cleanupCandidate(options, process.env.CANDIDATE_REF, process.env.TESTED_CANDIDATE); }
@@ -91,14 +91,14 @@ catch (error) {
   if (error.github) result.notification_api_error = error.github;
   // Failed preparation notification prevents the downstream final job from
   // running, so dispose of a confirmed owned candidate here rather than leak it.
-  if (phase === 'prepare' && result.candidate_ref) {
+  if (phase === 'prepare' && !result.accepted && result.candidate_ref) {
     try { result.candidate_cleanup = await cleanupCandidate(options, result.candidate_ref, result.tested_candidate); }
     catch (cleanupError) { result.candidate_cleanup = {status: 'pending', reference: result.candidate_ref, reason: cleanupError.message}; }
   }
   result.request_accounting=accounting.receipt();
   fs.writeFileSync('merge-result.json', JSON.stringify(result, null, 2) + '\n');
   console.log(JSON.stringify(result));
-  throw error;
+  if (!result.accepted) throw error;
 }
 
 result.request_accounting=accounting.receipt();

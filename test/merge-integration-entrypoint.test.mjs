@@ -18,19 +18,21 @@ globalThis.Response=class extends NativeResponse {
 };
 `;
 
-function run({readFails=false,commentFails=false}={}) {
+function run({readFails=false,commentFails=false,phase='prepare',merged=true,head='a'.repeat(40),integration='skipped',geography='skipped',mergeOnReconcile=false,mergeCommit='b'.repeat(40)}={}) {
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-merge-entry-'));
   fs.mkdirSync(path.join(directory,'.github'));
   fs.copyFileSync(path.join(root,'.github/evidence-policy.json'),path.join(directory,'.github/evidence-policy.json'));
   fs.writeFileSync(path.join(directory,'event.json'),JSON.stringify({inputs:{pr_number:'2',expected_head:'a'.repeat(40),request_id:'entrypoint-test-request'}}));
-  fs.writeFileSync(path.join(directory,'mock.mjs'),capacityShim+`globalThis.fetch=async(url,options)=> {
+  fs.writeFileSync(path.join(directory,'mock.mjs'),capacityShim+`let reads=0;globalThis.fetch=async(url,options)=> {
+    if(options.method==='PUT')throw Error('Unexpected new merge');
     const posting=options.method==='POST';
-    return new Response(JSON.stringify(posting?{}:{merged:true,head:{sha:'a'.repeat(40)},merge_commit_sha:'b'.repeat(40)}),
+    if(new URL(url).pathname.endsWith('/pulls/2'))reads++;
+    return new Response(JSON.stringify(posting?{}:{merged:${merged}||(${mergeOnReconcile}&&reads>1),head:{sha:'${head}'},merge_commit_sha:${JSON.stringify(mergeCommit)}}),
       {status:posting?${commentFails?403:201}:${readFails?418:200},headers:{'Content-Type':'application/json'}});
   };`);
   const result=spawnSync(process.execPath,['--import',path.join(directory,'mock.mjs'),path.join(root,'scripts/run-worker-merge.mjs')],{
     cwd:directory,encoding:'utf8',env:{...process.env,GH_TOKEN:'synthetic-test-token',GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',
-      GITHUB_EVENT_PATH:path.join(directory,'event.json'),GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:'prepare'}});
+      GITHUB_EVENT_PATH:path.join(directory,'event.json'),GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:phase,FINAL_CAPACITY:'required',INTEGRATION_RESULT:integration,GEOGRAPHY_RESULT:geography}});
   const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json'))),summary=fs.readFileSync(path.join(directory,'summary'),'utf8');
   fs.rmSync(directory,{recursive:true,force:true});return {result,receipt,summary};
 }
@@ -43,7 +45,7 @@ test('actual trusted entry point preserves the original rejection before a denie
 });
 test('actual trusted entry point retains its preparation receipt before successful notification',()=>{
   const {result,receipt}=run();assert.equal(result.status,0,result.stderr);
-  assert.equal(receipt.status,'already-merged');assert.equal(receipt.accepted,false);
+  assert.equal(receipt.status,'already-merged');assert.equal(receipt.accepted,true);
 });
 test('trusted preparation has PR comment permission while candidate tests remain read-only',()=>{
   const yaml=fs.readFileSync(path.join(root,'.github/workflows/worker-merge.yml'),'utf8');
@@ -179,4 +181,36 @@ test('actual fallback prepare cleans its confirmed ref when receipt notification
     assert.match(receipt.notification_error,/HTTP 403/);assert.equal(receipt.candidate_cleanup.status,'deleted');
     assert.deepEqual(JSON.parse(fs.readFileSync(path.join(directory,'remaining-refs.json'))),[]);
   } finally {fs.rmSync(directory,{recursive:true,force:true});}
+});
+
+for (const phase of ['prepare', 'merge']) test(`actual ${phase} replay accepts matching merged head despite missing jobs and denied comment`, () => {
+  const {result, receipt} = run({phase, commentFails: true});
+  assert.equal(result.status, 0, result.stderr); assert.equal(receipt.accepted, true);
+  assert.equal(receipt.merge_commit, 'b'.repeat(40)); assert.match(receipt.notification_error, /403/);
+});
+for (const integration of ['failure', 'cancelled', 'skipped']) test(`actual final ${integration} run fails when PR is still open`, () => {
+  const {result, receipt} = run({phase: 'merge', merged: false, integration});
+  assert.notEqual(result.status, 0); assert.equal(receipt.accepted, false);
+});
+test('actual final replay refuses a different merged head', () => {
+  const {result, receipt} = run({phase: 'merge', head: 'c'.repeat(40)});
+  assert.notEqual(result.status, 0); assert.equal(receipt.accepted, false); assert.match(receipt.reason, /head changed/);
+});
+test('native Actions concurrency holds the full existing lifecycle without custom scheduling', () => {
+  const yaml = fs.readFileSync(path.join(root, '.github/workflows/worker-merge.yml'), 'utf8');
+  assert.match(yaml, /concurrency:\n  group: worldatlas-main-integrate\n  queue: max\n  cancel-in-progress: false\n/);
+  assert.doesNotMatch(yaml, /queue_attempt|QUEUE_ADMISSION|  wake:/);
+  assert.ok(yaml.indexOf('concurrency:') < yaml.indexOf('jobs:'));
+  for (const stage of ['prepare', 'integration', 'geography', 'merge']) assert.match(yaml, new RegExp('  ' + stage + ':\\n'));
+});
+
+test('actual final refusal reconciles a concurrent matching-head merge without redispatch', () => {
+  const {result, receipt} = run({phase: 'merge', merged: false, integration: 'cancelled', mergeOnReconcile: true, commentFails: true});
+  assert.equal(result.status, 0, result.stderr); assert.equal(receipt.accepted, true);
+  assert.equal(receipt.status, 'already-merged'); assert.equal(receipt.merge_commit, 'b'.repeat(40));
+  assert.match(receipt.reason, /cancelled/); assert.match(receipt.notification_error, /403/);
+});
+for (const phase of ['prepare', 'merge']) test(`actual ${phase} cannot accept merged state without a merge commit`, () => {
+  const {result, receipt} = run({phase, mergeCommit: null});
+  assert.notEqual(result.status, 0); assert.equal(receipt.accepted, false); assert.match(receipt.reason, /no confirmed merge commit/);
 });

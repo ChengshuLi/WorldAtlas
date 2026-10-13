@@ -8,7 +8,7 @@ import {checkGitScope} from '../scripts/check-handoff-scope.mjs';
 import {createHash} from 'node:crypto';
 
 const root = path.resolve(import.meta.dirname, '..');
-const workflows = ['issue-claims.yml', 'worker-merge.yml', 'merge-integration-checks.yml', 'queue-readiness-audit.yml', 'merge-scheduler.yml'];
+const workflows = ['issue-claims.yml', 'worker-merge.yml', 'merge-integration-checks.yml', 'queue-readiness-audit.yml'];
 
 // Reproduce each declared sparse tree, including cone-mode root files. Load
 // trusted modules without executing workflow entrypoints or contacting GitHub.
@@ -23,7 +23,7 @@ function probe(directories, {geography = false, checkoutTests = false} = {}) {
       fs.cpSync(source, destination, {recursive: true});
     }
     return spawnSync(process.execPath, checkoutTests ? ['--test', '--test-concurrency=1', '--test-name-pattern', 'actual sparse declarations include trusted module dependencies', 'test/trusted-workflow-checkouts.test.mjs'] : ['--input-type=module', '-e',
-      "await import('./scripts/issue-claim-contract.mjs'); await import('./scripts/premerge-evidence.mjs'); await import('./scripts/queue-readiness-audit.mjs'); await import('./scripts/merge-scheduler.mjs'); await import('./scripts/check-pr-gates.mjs');" +
+      "await import('./scripts/issue-claim-contract.mjs'); await import('./scripts/premerge-evidence.mjs'); await import('./scripts/queue-readiness-audit.mjs'); await import('./scripts/check-pr-gates.mjs');" +
       (geography ? "await import('./scripts/check-effective-geographic-regression.mjs'); await import('./coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs'); console.log('complete trusted geography closure imported');" : '')],
     {cwd: directory, encoding: 'utf8', env: {PATH: process.env.PATH}});
   } finally { fs.rmSync(directory, {recursive: true, force: true}); }
