@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "issue": 1811,
+  "lane": "engineering",
+  "worker_id": "01a13436-49c4-764c-ae86-f93cf8317021",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "429769c66494a9333c481b052a246b504297bd0d",
+    "files": [
+      {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 59396,
+        "sha256": "393db180eb836b5efb7bda5f48427725f0d58c552959528be57556bb8fc3c33f",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "delete-duplicate-batch-computation",
+      "kind": "code",
+      "description": "Delete selected-data author compute, its proof-transfer branch, and repeated software-only tests. Retain fresh final composed-candidate geography, output and current-authority checks. No new proof or cache mechanism.",
+      "software": "Node 24; GitHub Actions workflow conditions and actual CLI boundary fixtures",
+      "units": "job stages and positive/adverse behavior checks"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/integration-proof.test.mjs test/full-regression-shards.test.mjs test/merge-integration.test.mjs test/merge-integration-entrypoint.test.mjs",
+    "node --test --test-name-pattern=\"^(selected-data |whole-ledger|actual trusted metadata|actual selector|realistic new authority|real selected prepare|rename/copy)\" test/selected-data-profile.test.mjs",
+    "node --test test/integration-profile-restoration.test.mjs"
+  ]
+}

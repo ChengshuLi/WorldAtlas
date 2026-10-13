@@ -58,7 +58,9 @@ export function successfulMetadataRegressionJobs(jobs, {run, attempt, head}) {
 export async function integrationProof({api, repo, number, head, profile, testSelection = 'complete', baseline, authored, candidate, runId, runAttempt, metadataProofLoader, onUnavailable = () => {}}) {
   const unavailable = reason => {onUnavailable({reason});return null;};
   let reason = 'no-completed-code-run';
-  if (!['complete','selected-data'].includes(testSelection) || (testSelection === 'selected-data' && profile !== 'full')) return unavailable('invalid-test-selection');
+  // Ordinary data has no author computation to transfer. Always test its final candidate.
+  if (testSelection === 'selected-data' && profile === 'full') return unavailable('selected-data-requires-final-candidate');
+  if (testSelection !== 'complete') return unavailable('invalid-test-selection');
   if (runId !== undefined && (!Number.isSafeInteger(runId) || runId < 1 ||
       !Number.isSafeInteger(runAttempt) || runAttempt < 1)) return unavailable('invalid-run-pin');
   if (runAttempt !== undefined && runId === undefined) return unavailable('invalid-run-pin');
@@ -83,7 +85,7 @@ export async function integrationProof({api, repo, number, head, profile, testSe
         run.status !== 'completed' || !['success', 'failure'].includes(run.conclusion) ||
         !run.pull_requests?.some(pr => pr.number === number && pr.head?.sha === head)) continue;
     const jobs = await githubPages(async route => (await api(route)).jobs, `${prefix(repo)}/actions/runs/${run.id}/attempts/${run.run_attempt}/jobs`);
-    const currentMetadata = profile === 'full' && testSelection === 'complete' &&
+    const currentMetadata = profile === 'full' &&
       successfulMetadataRegressionJobs(jobs, {run: run.id, attempt: run.run_attempt, head});
     if (currentMetadata) {
       reason = 'metadata-predecessor-proof-unavailable';
@@ -114,31 +116,16 @@ export async function integrationProof({api, repo, number, head, profile, testSe
       !jobs.some(job => job.name === 'evidence' && job.conclusion === 'failure') ||
       !['scope', 'geography', 'package'].every(name => jobs.some(job => job.name === name)) ||
       jobs.some(job => job.status !== 'completed' ||
-        job.conclusion !== (job.name === 'evidence' ? 'failure' :
-          testSelection === 'selected-data' && /^regression(?: \(\d\))?$/.test(job.name) ? 'skipped' : 'success')))) continue;
+        job.conclusion !== (job.name === 'evidence' ? 'failure' : 'success')))) continue;
     reason = 'required-code-job-or-step';
-    const expected = testSelection === 'selected-data' ? [] : profile === 'full' ? [0,1,2] : [0];
-    if (testSelection === 'selected-data') {
-      const skipped = jobs.filter(job => /^regression(?: \(\d\))?$/.test(job.name));
-      if (skipped.length !== 1 || skipped[0].status !== 'completed' || skipped[0].conclusion !== 'skipped') continue;
-      const packages = jobs.filter(job => job.name === 'package');
-      const required = ['Checkout complete package inputs', 'Install package Node dependencies', 'Install package Python dependencies',
-        'Verify package controls', 'Build Cloudflare package without publishing',
-        'Read back qualified native build outputs when selected', 'Install selected-data browser dependencies', 'Run selected-data consumer checks'];
-      if (packages.length !== 1 || packages[0].status !== 'completed' || packages[0].conclusion !== 'success' ||
-          !required.every(name => {
-            const steps = packages[0].steps?.filter(step => step.name === name) ?? [];
-            return steps.length === 1 && steps[0].status === 'completed' && steps[0].conclusion === 'success';
-          })) continue;
-    }
-    if (profile === 'full' && testSelection === 'complete') {
+    const expected = profile === 'full' ? [0,1,2] : [0];
+    if (profile === 'full') {
       const packages = jobs.filter(job => job.name === 'package');
       const steps = packages[0]?.steps?.filter(step => step.name === 'Use full-regression package verification') ?? [];
       if (packages.length !== 1 || packages[0].status !== 'completed' || packages[0].conclusion !== 'success' ||
           steps.length !== 1 || steps[0].status !== 'completed' || steps[0].conclusion !== 'success') continue;
     }
-    const regression = jobs.filter(job => /^regression \(\d\)$/.test(job.name) &&
-      !(testSelection === 'selected-data' && job.conclusion === 'skipped'));
+    const regression = jobs.filter(job => /^regression \(\d\)$/.test(job.name));
     if (regression.length !== expected.length) continue;
     if (!expected.every(shard => {
       const job = regression.find(job => job.name === `regression (${shard})`);
@@ -157,7 +144,6 @@ export async function integrationProof({api, repo, number, head, profile, testSe
     if (selector?.conclusion !== 'success' || selector.status !== 'completed') continue;
     const geography = successfulGeographyJob(jobs);
     return {run_id: run.id, run_attempt: run.run_attempt, tree: authored.object.tree.sha, profile,
-      ...(testSelection === 'selected-data' ? {test_selection: testSelection} : {}),
       ...(geography ? {geography_job_id: geography.id} : {})};
   }
   return unavailable(reason);

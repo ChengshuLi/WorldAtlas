@@ -47,17 +47,17 @@ test('test-runner edits and renames require actual full-suite validation', () =>
   }
   assert.equal(integrationProfile('engineering/example', [{filename:'docs/runner.md'}]), 'evidence');
 });
-test('selected-data inventory keeps complete asset/UI and focused consumers under full setup',()=>{
+test('selected-data inventory keeps asset/UI consumers without unchanged coordination software regressions',()=>{
   const selected=integrationTestFiles('full',0,'selected-data');
   const focused=integrationTestFiles('evidence',0);
-  assert.deepEqual(selected,[...focused,...PACKAGED_ASSET_TESTS]);
+  assert.deepEqual(selected,PACKAGED_ASSET_TESTS);
+  assert(focused.every(file=>!selected.includes(file)));
   assert.equal(new Set(selected).size,selected.length);
   const reused=integrationTestFiles('full',0,'selected-output');
-  assert.deepEqual(reused,[...focused,'test/compact-ownership.test.mjs']);
+  assert.deepEqual(reused,['test/compact-ownership.test.mjs']);
   assert.deepEqual(selected.filter(file=>!reused.includes(file)).sort(),
     ['test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs']);
   for(const file of PACKAGED_ASSET_TESTS)assert(selected.includes(file));
-  for(const file of ['test/integration-proof.test.mjs','test/merge-integration.test.mjs','test/premerge-evidence.test.mjs'])assert(selected.includes(file));
   for(const [profile,shard,selection] of [['evidence',0,'selected-data'],['full',1,'selected-data'],['full',0,'unknown']])
     assert.throws(()=>integrationTestFiles(profile,shard,selection),/Invalid trusted test selection/);
 });

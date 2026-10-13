@@ -620,27 +620,31 @@ rendered selections. Reclassifying those old rows takes the full route. Do not d
 assets. Missing or ambiguous expectations retain full regression. Batch labels
 remain reviewed source-side statements, not a new independent source approval.
 
-Selected PR validation uses the existing package job once: all four package
-controls, real build and qualified native output readback, then the generic emitted
-asset smoke and all 14 focused/parity/UI test files. Queue fallback uses the same
-full setup and package responsibilities on shard 0. Chromium, actual selected
-GPU/Canvas tests, source/geography/current-authority gates and zero skipped tests
-remain required. The runner reports setup profile and actual test selection
-separately. Proof reuse requires every actual package/consumer step to succeed;
-the intentionally omitted generic regression job is only accepted for this mode.
-Final-capacity planning measures the applicable selector inventory, including
-cold metadata reads, rather than assuming overlap with evidence or reserving a
-blanket worst-case count. Hosted applicability, automatic next-ticket advancement
-and elapsed savings must be recorded when observed, not inferred from local
-controls or added parallel job durations.
+Selected data runs ownership, scope and evidence checks on the author head, without
+an author geography, regression or package execution. The serialized queue composes
+current main with the reviewed head, then runs one fresh geography conservation pass
+and one actual Cloudflare build on that candidate. It performs qualified native
+output readback, the generic emitted-asset smoke and the three packaged asset/UI
+files. Chromium and actual selected GPU/Canvas checks remain required. Unchanged
+coordination and synthetic package-control suites do not run for this data-only
+selection, and their historical regression commits are not fetched.
+
+There is no selected-data author computation or proof to transfer. The final gate
+requires successful current queue integration and geography, the exact candidate
+parents/tree, current authority and independent review. Missing, skipped, failed
+or stale final checks prevent merge. Software, dependency and unknown changes
+keep their complete CI route. The runner reports setup profile and actual test
+selection separately and rejects skipped tests. Hosted adoption and elapsed
+savings must be recorded when observed, not inferred from local controls or added
+parallel job durations.
 
 Ordinary full PR validation also builds Cloudflare only once, in regression (0).
 That same job runs the existing package controls, verifies reviewed-head package
 and applicable native readback receipts, uploads them, and retains its complete
 regression inventory. The package status depends on successful regression and
 reports reuse from this exact run; a failed, cancelled or skipped producer cannot
-supply it. Evidence-profile package execution and selected-data's single package
-producer remain separate. No large build artifact is transferred between jobs.
+supply it. Evidence-profile package execution remains separate from selected data's final
+queue producer. No large build artifact is transferred between jobs.
 The Cloudflare step does not measure the historical Sites archive reserve; the
 separate main-push Deployment package budget workflow retains its actual Sites
 build and file/archive accounting. Parallel build removal reduces runner work;

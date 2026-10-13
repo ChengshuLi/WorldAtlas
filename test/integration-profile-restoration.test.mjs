@@ -51,7 +51,7 @@ test('actual checkout authority refuses concatenated relative imports and missin
   assert.throws(()=>checkoutExecutionClosure(root),{code:'ENOENT'});
 });
 
-function selectedWorkflowCommand(workflow='pr') {
+function selectedWorkflowCommand(workflow='queue') {
   const name=workflow==='pr'?'merge-integration-checks':'worker-merge';
   const step=workflow==='pr'?'Run selected-data consumer checks':'Test applicable combined-tree invariants without publishing or live imports';
   const yaml=fs.readFileSync(path.join(repo,`.github/workflows/${name}.yml`),'utf8');
@@ -107,7 +107,7 @@ export async function runSelectedDeliverySmoke({root,expectationsPath,emittedDir
   fs.writeFileSync(outputPath,'{"fixture_only":true}',{flag:'wx'});return {fixture_only:true};
 }`);
   }
-  return {root,expectations,run(profile=full?'full':'evidence',shard='0',workflow='pr') {
+  return {root,expectations,run(profile=full?'full':'evidence',shard='0',workflow='queue') {
     const env={...process.env,INTEGRATION_PROFILE:profile,INTEGRATION_SHARD:shard,...(selected?{INTEGRATION_TEST_SELECTION:'selected-data',SELECTED_EXPECTATIONS_PATH:expectations}:{})};
     // Match a plain CLI launch, rather than inheriting node:test's recursion tag.
     delete env.NODE_TEST_CONTEXT;
@@ -159,11 +159,11 @@ test('invalid profile rejects before either restoration or tests',t=>{
 });
 
 const restored=`import fs from 'node:fs';export function prepareCanonicalCheckout(){fs.writeFileSync('restored-fixture.json','{}',{flag:'wx'});return {fixture_only:true};}`;
-test('actual PR and queue selected commands run smoke and genuine full setup before all retained tests',t=>{
-  for(const workflow of ['pr','queue']){
+test('actual queue selected command runs smoke and genuine full setup before asset tests',t=>{
+  for(const workflow of ['queue']){
     const f=fixture(t,{full:true,selected:true,helperBody:restored}),r=f.run('full','0',workflow);
     assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/# skipped 0/);assert.match(r.stdout,/"test_selection":"selected-data"/);
-    assert.equal(fs.readdirSync(f.root).filter(n=>n.startsWith('tests-reached-')).length,15);
+    assert.equal(fs.readdirSync(f.root).filter(n=>n.startsWith('tests-reached-')).length,3);
     assert(fs.existsSync(path.join(f.root,'.cache/selected-delivery-smoke.json')));
     assert(fs.existsSync(path.join(f.root,'selected-checkout-fixture-reached.json')));
   }
@@ -196,7 +196,7 @@ test('actual retained-output runner executes current tests without any model res
   delete env.NODE_TEST_CONTEXT;
   const result=spawnSync(process.execPath,['scripts/run-integration-tests.mjs'],{cwd:f.root,env,encoding:'utf8',timeout:30000});
   assert.equal(result.status,0,result.stderr);assert.match(result.stdout,/# skipped 0/);
-  assert.equal(fs.readdirSync(f.root).filter(name=>name.startsWith('tests-reached-')).length,focused.length+1);
+  assert.equal(fs.readdirSync(f.root).filter(name=>name.startsWith('tests-reached-')).length,1);
   assert(fs.existsSync(path.join(f.root,'tests-reached-compact-ownership')));
   assert(!fs.existsSync(path.join(f.root,'tests-reached-canonical-compact-repack')));
   assert(!fs.existsSync(path.join(f.root,'tests-reached-prepared-parity')));

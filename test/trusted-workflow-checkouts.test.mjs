@@ -240,19 +240,20 @@ test('full PR co-locates actual package work on shard zero without changing the 
   assert(w.regression.steps.indexOf(packageStep(w.regression,'Complete regression shard'))<w.regression.steps.indexOf(packageStep(w.regression,'Verify full-regression package receipt')),'validate the bytes actually retained after tests');
 });
 
-test('selected-data skipped regression still executes every existing real package consumer',()=>{
+test('selected-data omits all author compute and keeps final candidate consumers',()=>{
   const w=packageWorkflow(),ctx=packageContext({selection:'selected-data',result:'skipped'});
   assert.equal(workflowCondition(w.regression.condition,ctx),false);
-  assert.equal(workflowCondition(w.package.condition,ctx,{success:false}),true,'explicit status condition permits intentional dependency skip');
-  assert.equal(workflowCondition(packageStep(w.package,'Use full-regression package verification').condition,ctx),false);
-  for(const name of ['Checkout complete package inputs','Install package Node dependencies','Install package Python dependencies','Verify package controls',
-    'Build Cloudflare package without publishing','Read back qualified native build outputs when selected','Install selected-data browser dependencies','Run selected-data consumer checks'])
-    assert.equal(workflowCondition(packageStep(w.package,name).condition,ctx),true,name);
-  const consumer=packageStep(w.package,'Run selected-data consumer checks');
-  assert.match(consumer.text,/INTEGRATION_TEST_SELECTION:.*assembled.*selected-output.*selected-data/);
-  assert.match(consumer.run,/selectedDeliverySmoke/);assert.match(consumer.run,/node scripts\/run-integration-tests.mjs/);
-  assert.equal(w.package.steps.filter(step=>step.run==='npm run build:cloudflare'&&workflowCondition(step.condition,ctx)).length,1);
-  assert.equal(workflowCondition(packageStep(w.package,'Retain declared input build receipt').condition,ctx),true);
+  assert.equal(workflowCondition(w.package.condition,ctx,{success:false}),false);
+  const geography=w.source.slice(w.source.indexOf('  geography:'),w.source.indexOf('  regression:'));
+  assert.match(geography,/if:.*needs.profile.outputs.test_selection != 'selected-data'/);
+  for(const name of ['Assemble selected output from authenticated original package','Install selected-data browser dependencies','Run selected-data consumer checks'])
+    assert(!w.package.steps.some(step=>step.name===name),name);
+  const queue=fs.readFileSync(path.join(root,'.github/workflows/worker-merge.yml'),'utf8');
+  for(const name of ['Check exact combined geography with trusted baseline code','Build the combined application once before asset-dependent tests',
+    'Read back qualified native build outputs when selected','Test applicable combined-tree invariants without publishing or live imports'])
+    assert(queue.includes('- name: '+name),name);
+  assert.match(queue,/selectedDeliverySmoke/);
+  assert(!queue.includes('Verify selected-data package controls'));
 });
 
 test('evidence applicability and metadata/cancelled/failed dependency semantics stay fail-closed',()=>{
@@ -550,19 +551,4 @@ test('missing or declined predecessor admission retains ordinary full work and c
   }
   const helper=fs.readFileSync(path.join(root,'scripts/run-metadata-regression-controls.mjs'),'utf8');
   assert.match(helper,/streamTestProcess/);assert.doesNotMatch(helper,/prepareNativeRegressionInputs|prepareCanonicalCheckout|prepareModelReaderCheckout/);
-});
-
-test('authenticated selected assembly skips only invariant production and attributes retained base tests',()=>{
- const w=packageWorkflow(),ctx=packageContext({selection:'selected-data',result:'skipped'});
- ctx.steps.selected_package.outputs.assembled='true';
- assert.equal(workflowCondition(packageStep(w.package,'Build Cloudflare package without publishing').condition,ctx),false);
- assert.equal(workflowCondition(packageStep(w.package,'Retain original selected package output').condition,ctx),false);
- for(const name of ['Read back qualified native build outputs when selected','Install selected-data browser dependencies','Run selected-data consumer checks'])
-  assert.equal(workflowCondition(packageStep(w.package,name).condition,ctx),true,name);
- const consumer=packageStep(w.package,'Run selected-data consumer checks');
- assert.match(consumer.text,/SELECTED_PACKAGE_ASSEMBLY_SHA256:.*assembly_sha256/);
- assert.match(consumer.run,/selectedDeliverySmoke/);
- ctx.needs.profile.outputs.metadata_reuse='true';
- assert.equal(workflowCondition(packageStep(w.package,'Assemble selected output from authenticated original package').condition,ctx),false);
- assert.equal(workflowCondition(packageStep(w.regression,'Retain original full-regression package output').condition,ctx),false);
 });

@@ -85,8 +85,8 @@ export function integrationTestFiles(profile, shard, testSelection = 'complete')
   const focused = ['handoff-scope','issue-claims','worker-result','regional-research-gate','geography-worker-lane',
     'evidence-quality','premerge-evidence','trusted-workflow-checkouts','merge-integration','merge-integration-client','merge-integration-entrypoint','integration-proof'];
   const inventory = fs.readdirSync('test').filter(name => name.endsWith('.test.mjs')).sort().map(name=>`test/${name}`);
-  const files = testSelection === 'selected-output' ? [...focused.map(name => `test/${name}.test.mjs`), 'test/compact-ownership.test.mjs']
-    : testSelection === 'selected-data' ? [...focused.map(name => `test/${name}.test.mjs`), ...PACKAGED_ASSET_TESTS]
+  const files = testSelection === 'selected-output' ? ['test/compact-ownership.test.mjs']
+    : testSelection === 'selected-data' ? PACKAGED_ASSET_TESTS
     : profile === 'full' ? fullRegressionShard(inventory, shard) : focused.map(name => `test/${name}.test.mjs`);
   if (!files.length || files.some(name => !fs.existsSync(name))) throw Error('Missing integration test inventory');
   return files;
@@ -193,7 +193,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const retained=testSelection==='selected-output'?requireRetainedPackageTests():null;
   if(retained)console.log(JSON.stringify({retained_package_tests:retained}));
   const git=measuredGitSetup();
-  const nativeInputs=await observeSetupPhase('immutable-regression-inputs',()=>prepareNativeRegressionInputs(retained?'evidence':profile,{run:git.run}),{counters:git.snapshot});
+  const nativeInputs=await observeSetupPhase('immutable-regression-inputs',()=>prepareNativeRegressionInputs(testSelection === 'complete' ? profile : 'evidence',{run:git.run}),{counters:git.snapshot});
   console.log(JSON.stringify({native_inputs:nativeInputs}));
   // Only full checkout readers consume canonical products. The focused evidence
   // profile deliberately has no canonical namespace in its sparse checkout.

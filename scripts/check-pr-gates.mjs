@@ -83,7 +83,7 @@ export async function checkPRGates({event, repo, token, api, now = Date.now, pha
   const packageProfile = phase === 'evidence' ? undefined : await deploymentBudgetProfile({event: authoritativeEvent,
     eventName: 'pull_request', repository: repo, api: read});
   if (regression?.test_selection === 'selected-data' && packageProfile?.full !== true)
-    throw Error('Selected-data requires the complete actual package job');
+    throw Error('Selected-data requires complete package inputs for the final candidate build');
   if (packageProfile?.blocked) throw Object.assign(Error('Package classification deferred for quota'),
     {blocked: packageProfile, ...(packageProfile.api_error ? {github: packageProfile.api_error} : {})});
 
