@@ -125,10 +125,11 @@ test('actual scope candidate sparse declaration contains cold-checkout test impo
   assert.notEqual(missing.status, 0);assert.match(missing.stderr, /selected-geography-effective-prevention-20261009/);
 });
 
-test('scope candidate includes the inputs of its nested actual-checkout probes', () => {
+for (const kind of ['scope candidate', 'focused regression']) test(`${kind} includes the inputs of its nested actual-checkout probes`, () => {
   const source = fs.readFileSync(path.join(root, '.github/workflows/merge-integration-checks.yml'), 'utf8');
-  const scope = source.split('  scope:\n')[1].split('  geography:\n')[0];
-  const candidate = scope.match(/path: candidate[\s\S]*?sparse-checkout: \|\n((?:            .+\n)+)/);
+  const section = kind === 'scope candidate' ? source.split('  scope:\n')[1].split('  geography:\n')[0].split('path: candidate')[1] :
+    source.split("        if: needs.profile.outputs.profile == 'evidence'")[1];
+  const candidate = section.match(/sparse-checkout: \|\n((?:            .+\n)+)/);
   assert.ok(candidate);
   const directories = candidate[1].trim().split('\n').map(row => row.trim());
   const result = probe(directories, {checkoutTests: true});
