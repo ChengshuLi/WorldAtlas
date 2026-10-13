@@ -123,10 +123,32 @@ Expiry does not authorize destroying or silently taking another worker's work. A
 Each focused PR targets main and has exactly one `Refs #N` for partial work or `Closes #N` for full acceptance. CI checks the current claim and exact branch as well as issue type/scope. All working lanes submit merges through:
 
 ```sh
-node scripts/queue-pr-merge.mjs --pr PR-NUMBER --head VERIFIED-HEAD-SHA
+gh workflow run worker-merge.yml --repo ChengshuLi/WorldAtlas --ref main \
+  -f pr_number=PR-NUMBER -f expected_head=VERIFIED-HEAD-SHA \
+  -f request_id=UNIQUE-REQUEST-ID
 ```
 
-Inspect the exact returned run name/request ID, wait for its completion and read the bot-authored **Merge result** comment on the PR with that request ID. Claims similarly return bot-authored **Reservation result** comments on their issues. Artifact copies remain available for audit, but the clients do not depend on artifact downloads. Queued or successful workflow execution alone is not proof of an accepted merge. Candidate preflight and isolated integration tests run in parallel across workers. Only the final authority recheck and squash merge share the short serialized integration slot; tests never hold that slot. The merge uses the PR title. It tests GitHub’s exact current-main plus reviewed-head merge tree without updating the worker branch, and rechecks ownership, evidence/review, check-runs and commit statuses. Reviewed changed-file blobs and modes must remain identical in the combined tree, including removed/renamed paths. Conflicts or changed reviewed bytes require author intervention and fresh substantive review; no automatic conflict resolution is allowed. The GitHub scheduler owns bounded execution recovery and retains durable request admission independently of observers. The client submits once, observes the final bot receipt with bounded adaptive polling and verifies the actual merged PR before reporting success or cleanup. Successful registration is not polled repeatedly. See [MERGE_QUEUE_CLIENT.md](MERGE_QUEUE_CLIENT.md) for read-only resume, rate-limit handling, pending exit status and explicit recovery cleanup. Supplying a request ID resumes that existing request without another submission; omit it for an initial submission.
+Use a fresh 16–100 character request ID containing only ASCII letters, digits and
+hyphens. Record it before dispatch, identify the exact matching Actions run with
+`gh run list`, then inspect or watch that numeric run ID. The native Actions queue
+holds the entire preparation, isolated candidate tests and final merge lifecycle
+in the top-level `worldatlas-main-integrate` concurrency group. The workflow uses
+`queue: max` and does not cancel an in-progress merge when another arrives.
+Research, PR checks and independent review remain parallel.
+
+The merge uses the PR title as its squash commit title. It tests GitHub's exact
+current-main plus reviewed-head merge tree without updating the worker branch,
+and rechecks ownership, evidence/review, check-runs and commit statuses. Reviewed
+changed-file blobs and modes must remain identical in the combined tree, including
+removed/renamed paths. Conflicts or changed reviewed bytes require author
+intervention and fresh substantive review; no automatic conflict resolution is
+allowed. Workflow completion or a bot result comment alone is not merge proof.
+Fresh PR API state must show `merged: true`, the exact reviewed `.head.sha` and
+its actual nonempty `.merge_commit_sha`. Claims still return bot-authored
+**Reservation result** comments on their issues; claim coordination is unchanged.
+See [MERGE_QUEUE_CLIENT.md](MERGE_QUEUE_CLIENT.md) for direct dispatch, ordinary
+GitHub CLI observation, uncertain submissions, safe retries and explicit local
+workspace release. There is no custom merge-registration or observation client.
 
 Preparation refreshes GitHub's asynchronous candidate immediately after eligibility
 checks and verifies its parents before fetching complete trees. A stale or unavailable
@@ -137,8 +159,9 @@ ownership fail; actual main/PR-base advances require renewed preflight and evide
 vintage validation. Rejections retain expected/actual commit IDs, observation time
 and attempt count. Worker commands and branch ownership do not change; no automatic
 rebases or conflict resolutions occur. This reduces stale-preview retries, not the
-need to validate a genuinely changed integration base. Testing remains parallel,
-and only final merging is serialized. If the automatic preview stays stale, trusted
+need to validate a genuinely changed integration base. Independent PR checks remain
+parallel; each admitted merge run holds the native concurrency slot through its
+candidate tests and final merge. If the automatic preview stays stale, trusted
 preparation creates an owned disposable `worldatlas-integration/pr-N-REQUEST-RUN`
 branch at the exact main SHA and asks GitHub to merge the exact reviewed SHA there.
 It validates the resulting parents and reviewed tree before tests. This never edits
@@ -262,10 +285,13 @@ Code-proof reuse still needs whole-tree equality, and the final queue independen
 checks current main plus its actual combined candidate. No main advance alone
 requires rewriting the author's branch merely to make geography comparable.
 
-This is cooperative GitHub Actions evidence, not independent authenticated worker
-identity or a native GitHub merge queue. The existing final base check and guarded
-head merge remain; outside writers must honor the same serialized queue. A green
-run does not certify geographic facts, authorize imports or publish the Site.
+This is cooperative GitHub Actions evidence and native workflow concurrency, not
+independent authenticated worker identity or GitHub's separate branch-protection
+merge-queue product. The final base read and SHA-guarded head merge remain separate
+API operations: an out-of-band writer can advance main between them. Native queue
+serialization is not an atomic base guard; every main writer must honor the same
+serialized workflow. A green run does not certify geographic facts, authorize
+imports or publish the Site.
 
 The focused `evidence` controls use Node and repository files without installed
 npm packages. Both PR regression and isolated queue regression install npm
@@ -274,116 +300,53 @@ and Python installation, applicable browser setup and the actual hosted build;
 focused proof requires every focused control to execute successfully with zero
 skipped tests. A skipped dependency-install step is not application coverage.
 
-## Durable FIFO integration admission
+## Native queued integration
 
 Issue #1174 identified an actual starvation path: a long engineering request tested
 main `72029…` while unrelated source merges advanced it to `1f971…` and `9a824…`.
 The final base guard correctly rejected that candidate. Independent testing plus
 final-only serialization allowed this to repeat indefinitely. The observed HTTP
-403 failures have no established cause and are separate from this scheduling bug.
+403 failures have no established cause and are separate from that scheduling bug.
+The retired scheduler addressed this with durable registrations. Native Actions
+now owns queueing, while the existing top-level concurrency group still holds the
+complete candidate/test/final lifecycle to prevent cooperating merges from
+invalidating one another's tested base.
 
-`queue-pr-merge.mjs` now submits to `merge-scheduler.yml`. A trusted registration
-job appends a bot-authored immutable request to its PR, retaining the exact head
-and request ID. Registration runs outside execution concurrency. The short
-serialized scheduler chooses the oldest unresolved open-PR request by comment ID,
-then dispatches `worker-merge.yml` only when a complete live-run inventory is empty.
-The entire admitted preparation, regression and final merge lifecycle holds
-`worldatlas-main-integrate`; source authors continue research and submit normally.
-Both preparation and final merge require that same FIFO ticket and dispatch
-attempt. All existing reviewed-head, authority, evidence, test, candidate-parent,
-base and SHA-guarded squash checks remain mandatory.
+Submit `worker-merge.yml` directly on main with the exact reviewed head and a fresh
+request ID. `queue: max` retains up to 100 pending executions; excess executions
+can be cancelled. There is no separate scheduler, registration comment, FIFO
+ticket, dispatch-attempt ledger, completion wake or automatic recovery daemon.
+Provider ordering, queue limits and runner availability remain external controls,
+not an application-level availability guarantee. No queue-capacity engine is
+introduced; existing per-run API quota and deadline guards remain mandatory.
 
-GitHub defaults to one pending concurrency run, which lets a newer registration
-tick replace a completion wake. The short scheduler opts into `queue: max` so
-pending wakes remain queued without overlapping active scheduler jobs. GitHub
-allows at most 100 pending jobs in that group; excess runs can still be cancelled.
-Registrations remain durable outside the group, independent of wake retention.
-The workflow declares completion-triggered scheduler ticks and a five-minute
-scheduled fallback for cancelled execution, failed notification and ambiguous
-dispatch; provider delivery can be delayed or unavailable. Live,
-queued, requested, waiting and pending executions of any age prevent redispatch;
-observation expiry never implies completion. Each execution attempt is recorded
-before dispatch, cancellation/conclusion observations remain on the PR, and an
-absent dispatch gets two minutes to appear. At most three execution attempts are
-automatic. Exhaustion produces a durable rejection and advances FIFO; inspect the
-receipts and submit a new unchanged-head request after correcting the transient
-condition. A failed test or authority rejection is terminal; changed heads require
-new review and a new request. Main advancement remains a rejection requiring a
-fresh tested candidate with the same reviewed head. Closing a PR withdraws its
-request; its registrations/results remain preserved on the closed PR.
+Record the matching run ID/URL and use `gh run list`, `gh run view` and
+`gh run watch` to inspect it. Preserve failure diagnostics and result receipts,
+then independently verify actual PR merged state, exact head and squash commit.
+An interrupted local wait does not end a workflow. An uncertain dispatch, missing
+run on a bounded history page, pending state or missing receipt never authorizes a
+blind duplicate. After a settled failed/cancelled execution, reconcile the PR and
+all earlier unresolved executions; if it remains open at its unchanged reviewed
+head, address the cause and submit a fresh request. Changed reviewed bytes require
+new substantive review. See [MERGE_QUEUE_CLIENT.md](MERGE_QUEUE_CLIENT.md).
 
-Within one serialized tick, the scheduler records proven changed-head or exhausted-
-recovery rejections and continues through the existing finite FIFO snapshot. It
-stops on the first live execution, ambiguous-dispatch grace, quota wait or actual
-dispatch. A failed or uncertain rejection write stops the tick before any later
-request can advance. Even a changed head retains the two-minute dispatch discovery
-window. Each API attempt still shares the actual job deadline and quota controls;
-no new registration, idle wake loop or completion-trigger guarantee is introduced.
+### Migrate existing requests safely
 
-A separate, two-minute trusted worker-completion job sends one registration-free
-`workflow_dispatch` to the existing scheduler. It checks out the immutable
-executing workflow commit, runs no candidate code, and makes no automatic retry
-of the notification POST. Its process admits only a short bounded HTTP budget;
-quota refusal or transport uncertainty stays visible rather than authorizing
-another write. No startup job-metadata request is added to this notifier.
+The coordinating integrator enumerates old scheduler and worker executions and
+lets live work settle before new direct submissions. Include queued, requested,
+waiting, pending and in-progress runs: a workflow already running keeps its old
+definition after this change merges. Preserve old request IDs, exact heads,
+workflow links and receipts on the original issues. Do not cancel #1810's
+in-flight work as part of the transition. Research and PR checks remain enabled.
 
-The `wake_run_id` input is only an observation hint. The scheduler checks that it
-identifies a main-branch worker workflow and waits for that run to become terminal
-within its existing authenticated job deadline. It then performs normal complete
-live-run and FIFO admission; the hint cannot approve a merge, skip another live
-run or recreate a request. This closes the race where the notifier is still live
-when its scheduler starts. Requests arriving during that wait are read afterward.
-Mixed wake/registration inputs, unrelated runs and invalid hints refuse safely.
-An empty queue or duplicate wake causes no idle self-dispatch. The scheduler
-retains pending wake jobs so a later ordinary registration tick cannot replace
-the only tick that knows to wait for its still-live notifier.
-
-Cancellation before the notifier can run, runner loss, quota refusal and provider
-outages can still prevent notification; the existing completion event and
-five-minute fallback remain. Inspect existing durable requests before bounded
-manual recovery, never submit a duplicate. A workflow already running when this
-change lands keeps its original definition, so rollout may still need that normal
-recovery once. Hosted automatic advancement must be recorded separately from
-local simulated controls. Scheduler quota-floor refusals retain their observed
-numeric admission fields and retry time; they are not ordinary permission errors.
-
-The CLI observes for 65 minutes, then reports its request ID without cancelling
-anything. Resume read-only observation using
-`--request-id ORIGINAL-REQUEST-ID --observe`; the existing registration retains
-its original FIFO ticket. An absent or uncertain registration is inspected rather
-than automatically resubmitted. Omit `--request-id` only for a genuinely new request.
-Existing author checkouts can contain the old helper. After rollout, invoke the
-updated helper from the trusted primary checkout by its absolute path, keeping
-the current working directory in your managed author slot so verified local
-cleanup targets that slot. Keep the same `--pr` and exact reviewed `--head`; do
-not merge main into or rewrite a reviewed source branch merely to update a CLI.
-The old direct `worker-merge.yml` entry lacks durable FIFO admission and is
-rejected; refresh saved queue commands to use the new helper.
-Never infer a merge from timeout, a candidate SHA or workflow success: the exact
-bot result must agree with the actual merged PR/head/squash commit.
-
-Progress is bounded by the finite tickets ahead of a request and each execution's
-existing job timeouts plus at most three recovery attempts; new arrivals cannot
-jump ahead. GitHub runner and scheduled-event availability remain external
-requirements: ticks can be delayed, and these are cooperative admission controls,
-not a platform availability guarantee. A queue workflow failure keeps the request
-and receipts visible and must be inspected rather than reported as a merge.
-
-For initial rollout, the integrator coordinates the currently live request and
-waits for it to settle. Temporarily disabling the old worker-merge workflow can
-hold new dispatches without cancelling live work; do not disable it before the
-scheduler PR's own normal integration is dispatched. Record deferred authors'
-request IDs/heads and re-enable immediately after actual merge confirmation.
-Disabling workflow triggers is separate from cancelling a run; still enumerate
-and settle all queued, requested, waiting, pending and in-progress runs. Retain
-cancelled/coalesced old request IDs and exact PR heads for unchanged-head
-resubmission. The enable/dispatch/disable window is cooperative rather than
-atomic: enumerate racing admissions, preserve them and let them settle. Record
-and restore prior workflow availability. Leave research and PR checks enabled.
-The new scheduler then recovers registrations under ordinary exact-head rules.
-No direct merge, manual research stop, provider operation or publication is part
-of this procedure. Only the coordinating integrator performs this reversible
-admission hold; workers do not independently toggle shared workflow availability.
+Any reversible admission hold is owned by the coordinating integrator, with its
+prior state recorded and restored. Disabling a workflow is not cancellation and
+does not settle existing runs; enumerate racing admissions as well. Reconcile
+ambiguous old submissions and terminal registrations before deciding whether a
+remaining unchanged-head PR needs a new native dispatch. Do not bulk-replay old
+registrations or dispatch both paths. Workers do not independently toggle shared
+workflow availability. No direct merge, provider operation or publication is part
+of this procedure.
 
 ### Immutable blob reuse during repeated authority checks
 
@@ -449,8 +412,8 @@ duplicate jobs, ID/start drift, terminal state or malformed nonempty start refus
 No evidence transport or inspection starts before all original identity and timing
 checks pass. Allowlisted binding fields and read/wait counts explain both failed
 and recovered observations; they do not assert a provider cause or saved time.
-Scheduler callers retain their single metadata read. A simulated recovery proves
-the control path, not that a particular hosted failure was eventual consistency.
+A simulated recovery proves the control path, not that a particular hosted
+failure was eventual consistency.
 
 ### Observed capacity before final validation
 
@@ -458,7 +421,7 @@ The final job observes `/rate_limit` with its existing authenticated token befor
 any repository planning read. It validates the current core limit, remaining
 capacity and reset, including the corresponding allowlisted response fields.
 It never assumes a fixed installation quota or reserves shared capacity.
-A zero or insufficient observation waits inside the same live FIFO run.
+A zero or insufficient observation waits inside the same live workflow run.
 
 A complete fresh metadata inventory binds manifest descriptors and all nonadded
 originals to current complete Git trees, ordinary paths, vintages and OIDs. Historical descriptors use the same version-1/version-2 parser as the evidence
@@ -483,43 +446,16 @@ per 30 seconds and waits only for an observed deficit. A bound above the observe
 limit, invalid observation, exhausted call/deadline budget or actual denial needs
 bounded intervention. Capacity can be consumed by concurrent jobs after a probe.
 
-After waiting, FIFO, reviewed head, tested base, claim, issue, review, checks,
+After waiting, reviewed head, tested base, claim, issue, review, checks,
 proof jobs and tree/path bindings are read again before costly output bytes.
 The original full evidence, source/geography, candidate-parent/tree, final
 mutable guards and SHA-guarded merge then run unchanged. A long final job may
-outlast a local observer; resume observation of that original request rather than
-cancel or dispatch a duplicate. A terminal result settles its FIFO ticket and
-cannot be recovered by rerunning just that final job under the resolved ticket.
+outlast a local observation session; inspect the same Actions execution rather
+than cancel or dispatch a duplicate. Reconcile terminal failure and actual PR
+state before a fresh request; do not rerun just the final job to bypass candidate
+preparation or checks.
 Local controls demonstrate pacing and rejection, not hosted quota recovery;
 record actual same-token hosted observations separately when those conditions occur.
-
-### Registration and scheduling job deadlines
-
-Registration and scheduling bind retry admission to the executing job's actual
-start, current run/attempt and literal workflow timeout (five and ten minutes,
-respectively). One bounded, non-retried Actions jobs read establishes this timing;
-missing, incomplete, mismatched or ambiguous metadata refuses before queue writes.
-Registration has only the additional `actions: read` permission needed for that
-read. The request is included in normal HTTP accounting.
-
-The remaining budget includes earlier setup and metadata time, then decreases
-with a monotonic clock. Each retry must fit both its complete wait and a bounded
-20-second HTTP attempt, leaving 30 seconds for refusal/accounting and runner
-cleanup. Response consumption shares the HTTP timeout; a late response cannot
-authorize a subsequent queue write. The deadline is rechecked after sleeping and
-before each actual attempt, independently of the existing capacity-admission hook.
-Dispatch and recovery timestamps use the clock after quota waits, so a newly
-written attempt cannot inherit an already-expired discovery window.
-The bootstrap itself is bounded to one 20-second read; if the runner is already
-unable to reach/finish that first read, no controlled completion is claimed.
-
-A registration refusal exits unsuccessfully, preserves the request identity and
-sanitized quota cause when available, and cannot advance scheduling as though a
-durable request exists. Inspect that same identity's workflow and bot comments
-before any authorized recovery; uncertain POSTs are never automatically retried.
-This changes neither FIFO/cadence nor preparation/final-validation's separate
-capacity and timing controls. Simulated clocks prove admission/refusal cases;
-actual hosted operation and quota observations must be recorded separately.
 
 ## Issue lifecycle accuracy
 
@@ -537,11 +473,6 @@ independent review may proceed in parallel. The guide supplies practical helper 
 command details, meaningful adverse cases and existing-chat refresh text; author
 preflight does not replace independently derived reviewer expectations.
 
-Scheduler admission checks out the executing `github.workflow_sha`, binds its
-commit and workflow path/ref to GitHub’s current job environment, and reads the
-timeout from that immutable Git blob. A newer main commit cannot extend an
-already-running job’s timeout; mixed-vintage checkouts refuse before API work.
-
 ### Shared Actions quota: reduce work and recover from actual evidence
 
 The Actions installation token and a worker's local GitHub credential can have
@@ -552,11 +483,11 @@ request per evidence file. It still verifies complete bytes and every declared
 binding; mutable issue, claim, PR, tree, ancestry and review authority stay fresh.
 Read-only handoff, PR regression and PR package workflows cancel superseded
 runs for the same PR; main package push observations remain separate. This does
-not cancel the merge scheduler, claim mutations or publication.
+not cancel merge workflows, claim mutations or publication.
 
 Premerge evidence, linked-issue checks, profile selection, deployment classification,
 claims and the existing
-queue/scheduler emit actual categorized HTTP attempt counts. Their existing
+merge workflows emit actual categorized HTTP attempt counts. Their existing
 responses supply allowlisted numeric repository-core observations when available;
 no extra quota poll is added. These observations describe that credential and
 window, are not reserved capacity, and cannot attribute other concurrent jobs'

@@ -727,8 +727,10 @@ export async function freezeReview({repo, number, expectedHead, expectedPR, api,
     evidence_limits: checked.limits, issue, pr, files,
     next: ['A distinct reviewer must independently inspect this exact head and post the existing worldatlas-review:v1 receipt.',
       'After that review, use the existing queue; re-freeze if head, acceptance, body or file scope changes.'],
-    queue_command: ['node', 'scripts/queue-pr-merge.mjs', '--pr', String(number), '--head', expectedHead],
-    resume_command: ['node', 'scripts/queue-pr-merge.mjs', '--pr', String(number), '--head', expectedHead, '--request-id', 'ACTUAL_EXISTING_REQUEST_ID', '--observe']};
+    queue_command: ['gh', 'workflow', 'run', 'worker-merge.yml', '--repo', repo, '--ref', 'main',
+      '-f', `pr_number=${number}`, '-f', `expected_head=${expectedHead}`, '-f', 'request_id=REPLACE-WITH-A-NEW-UUID'],
+    resume_command: ['gh', 'run', 'list', '--repo', repo, '--workflow', 'worker-merge.yml'],
+    verify_command: ['gh', 'api', `repos/${repo}/pulls/${number}`, '--jq', '{merged, head: .head.sha, merge_commit: .merge_commit_sha}']};
   return {'review-packet.json': jsonBytes(packet)};
 }
 
@@ -799,9 +801,9 @@ async function main(args) {
                 return refreshed;
               },
               queue: packet => flow.advanceQueue(journal, packet, {api: liveAPI,
-                queueAPI: flow.deliveryQueueAPI(), authorizeSubmission: flags.includes('--submit-queue'),
+                authorizeSubmission: flags.includes('--submit-queue'),
                 submit: ({number, head, requestId, timeoutMs}) => execFileSync('gh',
-                  ['workflow', 'run', 'merge-scheduler.yml', '--repo', packet.repo, '--ref', 'main',
+                  ['workflow', 'run', 'worker-merge.yml', '--repo', packet.repo, '--ref', 'main',
                     '-f', `pr_number=${number}`, '-f', `expected_head=${head}`, '-f', `request_id=${requestId}`],
                   {encoding: 'utf8', timeout: timeoutMs, maxBuffer: 1048576})})});
           console.log(JSON.stringify({result, ...flow.readAdvanceStatus(journal)})); return;
@@ -814,8 +816,8 @@ async function main(args) {
         let result;
         if (next.waiting) result = flow.observeAdvance(journal, next.waiting);
         else if (next.queue) result = await flow.advanceQueue(journal, next.queue, {api: liveAPI,
-          queueAPI: flow.deliveryQueueAPI(), authorizeSubmission: flags.includes('--submit-queue'), submit: ({number, head, requestId, timeoutMs}) =>
-            execFileSync('gh', ['workflow', 'run', 'merge-scheduler.yml', '--repo', next.queue.repo, '--ref', 'main',
+          authorizeSubmission: flags.includes('--submit-queue'), submit: ({number, head, requestId, timeoutMs}) =>
+            execFileSync('gh', ['workflow', 'run', 'worker-merge.yml', '--repo', next.queue.repo, '--ref', 'main',
               '-f', `pr_number=${number}`, '-f', `expected_head=${head}`, '-f', `request_id=${requestId}`],
             {encoding: 'utf8', timeout: timeoutMs, maxBuffer: 1048576})});
         else result = await flow.prepareAdvanceStage(journal, next.id, next.phase, next.input, next.produce, {preparationStarted, apiWaitMilliseconds: () => apiWait, adoption: config.prepared_stages?.[next.id]});

@@ -55,11 +55,6 @@ test('quota classifier rejects malformed or irrelevant error metadata',()=>{
  assert.equal(quotaDelay({github:{http_status:404,rate_remaining:'0',rate_reset:'100'}}),null);
  assert.equal(quotaDelay({github:{http_status:403,retry_after:'bogus'}}),null);
 });
-test('scheduler with real zero capacity neither inventories the queue nor spends a dispatch attempt',async()=>{
- const {scheduleNext}=await import('../scripts/merge-scheduler.mjs');
- const api=Object.assign(async()=>assert.fail('no queue read or write without capacity'),{readRepositoryCapacity:async()=>({remaining:0,limit:1000,reset:100})});
- const result=await scheduleNext({api,repo:'a/b',now:99000});assert.equal(result.status,'waiting-quota');assert.equal(Date.parse(result.retry_at),101000);
-});
 test('final paid-call allowance covers actual HTTP retries and preserves recovery capacity',async()=>{
  const {finalRequestBudget}=await import('../scripts/final-capacity.mjs');let calls=0,time=99000;
  await mocked(async()=>{calls++;return response(calls===1?403:200,calls===1?'0':'999');},async()=>{

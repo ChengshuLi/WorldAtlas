@@ -11,7 +11,6 @@ import {execFileSync} from 'node:child_process';
 import {createAcquisition} from './geography-prefetch.mjs';
 import {performance} from 'node:perf_hooks';
 import {candidateBudget} from './native-ownership/native-preparation-guards.mjs';
-import {runMergeQueueClient, mergeQueueAPI} from './merge-queue-client.mjs';
 import {checkPremergeEvidence, reviewContractBinding} from './premerge-evidence.mjs';
 import {githubPages, verifyClaimForPR, assertIssueReadiness, workSpec} from './issue-claim-contract.mjs';
 import {validateIssuePRBody} from './check-handoff-scope.mjs';
@@ -659,21 +658,9 @@ export async function acceptedReview(packet, api) {
     manifest_sha256: checked.manifest_sha256};
 }
 
-// Keep automatic delivery and the standalone observer on the same bounded,
-// authenticated conditional transport. The named-repository boundary remains.
-export function deliveryQueueAPI({execute = execFileSync} = {}) {
-  const read = mergeQueueAPI({execute});
-  return (route, options) => {
-    need(typeof route === 'string' && route.startsWith('/repos/ChengshuLi/WorldAtlas/'), 'Invalid bounded queue read');
-    return read(route, options);
-  };
-}
-
-// Submission identity reaches durable disk before the existing queue client can
-// write. Any existing intent is observation-only, even if the original process
-// died before POST. That ambiguity is reported, never turned into a retry.
+// Preserve submission identity before the one direct Actions dispatch.
 export async function advanceQueue(journal, packet, {api, submit, authorizeSubmission = false,
-  checkReview = acceptedReview, client = runMergeQueueClient, clientOptions = {}, queueAPI = api}) {
+  checkReview = acceptedReview}) {
   need(packet.repo === 'ChengshuLi/WorldAtlas', 'Use the existing named-repository queue');
   const filename = path.join(journal.stateTarget, 'queue-submission.json');
   let intent, resuming = false;
@@ -688,12 +675,19 @@ export async function advanceQueue(journal, packet, {api, submit, authorizeSubmi
     intent = {version: 1, ...acceptance, request_id: randomUUID(), created_at: new Date(journal.now()).toISOString()};
     writeJournal(journal, filename, bytes(intent));
   }
-  const started = journal.now();
-  const result = await client({...clientOptions, api: queueAPI, submit, repo: intent.repo, number: intent.pr_number,
-    head: intent.head_sha, requestId: intent.request_id, observeOnly: resuming, resuming,
-    progress: value => clientOptions.progress?.(value)});
-  observeAdvance(journal, {status: 'external', kind: 'queue', request_id: intent.request_id,
-    observation_elapsed_ms: journal.now() - started, result});
+  if (!resuming) await submit({number: intent.pr_number, head: intent.head_sha,
+    requestId: intent.request_id, timeoutMs: 20_000});
+  // An existing intent is read-only, including uncertain dispatch. Standard
+  // Actions run list/view/watch owns execution status; PR state owns completion.
+  const pr = await api(`/repos/${intent.repo}/pulls/${intent.pr_number}`);
+  need(pr.head?.sha === intent.head_sha, 'PR head changed; obtain fresh exact-head review');
+  const accepted = pr.merged === true && /^[a-f0-9]{40}$/.test(pr.merge_commit_sha ?? '');
+  const result = {accepted, status: accepted ? 'merged' : 'pending', request_id: intent.request_id,
+    ...(accepted ? {merge_commit: pr.merge_commit_sha} : {next:
+      `Inspect the Actions run named "merge #${intent.pr_number} ${intent.request_id}" with gh run list/view/watch. ` +
+      'Workflow success alone is not a merge. Reconcile failed/canceled runs and the actual PR before a fresh dispatch; ' +
+      'GitHub queues at most 100 pending runs and cancels overflow.'})};
+  observeAdvance(journal, {status: 'external', kind: 'queue', request_id: intent.request_id, result});
   return result;
 }
 

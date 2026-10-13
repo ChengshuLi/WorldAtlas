@@ -122,22 +122,32 @@ test('status validates completed bytes and observations distinguish wait from pr
   fs.writeFileSync(path.join(j.target, 'requests', 'a.json'), 'drift');
   assert.throws(() => readAdvanceStatus(j), /changed/);
 });
-test('queue identity is durable before uncertain submit and resume can never dispatch twice', async t => {
+test('direct Actions identity is durable before uncertain submit and resume cannot redispatch', async t => {
   const j = journal(t), packet = {repo: 'ChengshuLi/WorldAtlas', pr_number: 1, head_sha: commit};
   let calls = 0, identity;
   const checkReview = async () => ({...packet, review_comment_id: 123});
-  const client = async options => {
+  const submit = async options => {
     const saved = JSON.parse(fs.readFileSync(path.join(j.stateTarget, 'queue-submission.json')));
-    assert.equal(saved.request_id, options.requestId); identity ??= options.requestId; assert.equal(identity, options.requestId);
-    if (!options.observeOnly) { calls++; throw Error('uncertain POST'); }
-    assert.equal(options.resuming, true); return {status: 'pending', request_id: identity};
+    assert.equal(saved.request_id, options.requestId); identity = options.requestId;
+    calls++; throw Error('uncertain POST');
   };
+  let pr = {merged: false, head: {sha: commit}};
+  const api = async route => {assert.equal(route, '/repos/ChengshuLi/WorldAtlas/pulls/1'); return pr;};
   assert.equal((await advanceQueue(j, packet, {checkReview})).status, 'ready-for-queue');
   assert.equal(fs.existsSync(path.join(j.stateTarget, 'queue-submission.json')), false);
-  await assert.rejects(advanceQueue(j, packet, {authorizeSubmission: true, checkReview, client}), /uncertain/);
-  assert.equal((await advanceQueue(j, packet, {authorizeSubmission: true, checkReview, client})).status, 'pending');
+  await assert.rejects(advanceQueue(j, packet, {authorizeSubmission: true, checkReview, submit, api}), /uncertain/);
+  const pending = await advanceQueue(j, packet, {authorizeSubmission: true, checkReview, submit, api});
+  assert.equal(pending.status, 'pending'); assert.equal(pending.request_id, identity);
+  assert.match(pending.next, /gh run list\/view\/watch/); assert.match(pending.next, /100 pending/);
+  assert.match(pending.next, /failed\/canceled/); assert.equal(calls, 1);
+  pr = {merged: true, head: {sha: commit}, merge_commit_sha: later};
+  assert.equal((await advanceQueue(j, packet, {api})).accepted, true);
+  pr.merge_commit_sha = null;
+  assert.equal((await advanceQueue(j, packet, {api})).accepted, false);
+  pr.head.sha = later;
+  await assert.rejects(advanceQueue(j, packet, {api}), /head changed/);
+  await assert.rejects(advanceQueue(j, {...packet, head_sha: later}, {api}), /another target/);
   assert.equal(calls, 1);
-  await assert.rejects(advanceQueue(j, {...packet, head_sha: later}, {checkReview, client}), /another target/);
 });
 test('missing independent acceptance never writes a queue identity', async t => {
   const j = journal(t);
@@ -723,20 +733,6 @@ test('real advance CLI refuses an oversized admitted config before reading recip
   assert.equal(fs.existsSync(path.join(root, '.cache')), false);
 });
 
-import {deliveryQueueAPI} from '../scripts/delivery-handoff-advance.mjs';
-test('actual queue read adapter forwards remaining timeout and preserves rate-limit metadata', () => {
-  const route = '/repos/ChengshuLi/WorldAtlas/pulls/1';
-  const api = deliveryQueueAPI({execute: (command, args, options) => {
-    assert.equal(command, 'gh'); assert.deepEqual(args, ['api', '--include', route]);
-    assert.equal(options.timeout, 1234); assert.equal(options.killSignal, 'SIGKILL');
-    return 'HTTP/2.0 200 OK\r\ncontent-type: application/json\r\n\r\n{"real":true}';
-  }});
-  assert.deepEqual(api(route, {timeoutMs: 1234}), {real: true});
-  const refused = deliveryQueueAPI({execute: () => { throw Object.assign(Error('gh failure'), {
-    stdout: 'HTTP/2.0 403 Forbidden\r\nx-ratelimit-remaining: 4\r\nretry-after: 90\r\n\r\n{"message":"secondary rate limit"}'}); }});
-  assert.throws(() => refused(route, {timeoutMs: 567}), error => error.github.http_status === 403
-    && error.github.rate_remaining === '4' && error.github.retry_after === '90' && error.github.secondary_limit);
-});
 test('journal writes and queue intent reads share admission before dispatch', async t => {
   const j = journal(t), packet = {repo: 'ChengshuLi/WorldAtlas', pr_number: 1, head_sha: commit};
   const budget = () => candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0,
@@ -746,11 +742,11 @@ test('journal writes and queue intent reads share admission before dispatch', as
   assert.equal(fs.readdirSync(j.target).length, 1);
   j.budget = budget(); let submitted = false;
   await assert.rejects(advanceQueue(j, packet, {authorizeSubmission: true, checkReview: async () => packet,
-    client: async () => { submitted = true; }}), /Aggregate/);
+    submit: async () => { submitted = true; }}), /Aggregate/);
   assert.equal(submitted, false); assert.equal(fs.existsSync(path.join(j.stateTarget, 'queue-submission.json')), false);
   fs.writeFileSync(path.join(j.stateTarget, 'queue-submission.json'), JSON.stringify({...packet, request_id: 'a'.repeat(36)}));
   j.budget = budget();
-  await assert.rejects(advanceQueue(j, packet, {client: async () => { submitted = true; }}), /Aggregate/);
+  await assert.rejects(advanceQueue(j, packet, {submit: async () => { submitted = true; }}), /Aggregate/);
   assert.equal(submitted, false);
 });
 
@@ -1873,21 +1869,6 @@ test('default automatic delivery revalidates the real claim before committing ne
 });
 }
 
-test('automatic delivery uses the shared conditional observer transport without widening repository access', () => {
-  const route = '/repos/ChengshuLi/WorldAtlas/issues/1/comments?per_page=100&page=1';
-  let reads = 0;
-  const api = deliveryQueueAPI({execute: (_command, args) => {
-    if (++reads === 1) return 'HTTP/2.0 200 OK\r\nETag: W/"same"\r\n\r\n[{"id":1}]';
-    assert.ok(args.includes('If-None-Match: W/"same"'));
-    throw Object.assign(Error('gh 304'), {status: 1, signal: null,
-      stdout: 'HTTP/2.0 304 Not Modified\r\nETag: "same"\r\n\r\n'});
-  }});
-  assert.deepEqual(api(route), [{id: 1}]); assert.deepEqual(api(route), [{id: 1}]);
-  assert.throws(() => api('/repos/other/repo/issues/1/comments'), /Invalid bounded queue read/);
-  assert.equal(reads, 2);
-});
-
-
 import {qualifiedPreparedReuse} from '../scripts/delivery-handoff-advance.mjs';
 test('qualified stage reuse preserves immutable products and records only references, with once-only resume', async t => {
  const f=fixture(),j=journal(t);j.reader=f.reader;
@@ -2284,7 +2265,7 @@ async function legacyRuntimeFixture(t, {published = false} = {}) {
   await withAdvanceLock(f.j, () => commitAdvanceStage(f.j, 'recipe', {validate: f.validate}));
   const packet = {repo: 'ChengshuLi/WorldAtlas', pr_number: 1, head_sha: f.git('rev-parse', 'HEAD')};
   await assert.rejects(advanceQueue(f.j, packet, {authorizeSubmission: true, checkReview: async () => packet,
-    client: async () => {throw Error('uncertain original submission');}}), /uncertain original/);
+    submit: async () => {throw Error('uncertain original submission');}}), /uncertain original/);
   observeAdvance(f.j, {status: 'waiting', stage: 'current-rebind', kind: 'rebind-terminal', detail: 'Genuine external terminal required'});
   // Reproduce the accepted legacy physical layout using unchanged v1 bytes.
   const saved = new Map(fs.readdirSync(f.j.stateTarget).map(name => [name, fs.readFileSync(path.join(f.j.stateTarget, name))]));
@@ -2308,11 +2289,11 @@ for (const published of [false, true]) test('runtime separation preserves origin
   const j = f.reopen(), result = await withAdvanceLock(j, () => commitAdvanceStage(j, 'recipe', {validate: f.validate}));
   assert.equal(result.resumed, true); assert.equal(f.git('rev-parse', 'HEAD'), f.head);
   let observed = 0;
-  await withAdvanceLock(j, () => advanceQueue(j, f.packet, {authorizeSubmission: true, client: async options => {
-    assert.equal(options.observeOnly, true); assert.equal(options.resuming, true);
-    assert.equal(options.requestId, JSON.parse(f.saved.get('queue-submission.json')).request_id); observed++;
-    return {status: 'pending', request_id: options.requestId};
-  }}));
+  await withAdvanceLock(j, () => advanceQueue(j, f.packet, {authorizeSubmission: true,
+    submit: async () => {throw Error('No redispatch');}, api: async route => {
+      assert.equal(route, '/repos/ChengshuLi/WorldAtlas/pulls/1'); observed++;
+      return {merged: false, head: {sha: f.packet.head_sha}};
+    }}));
   assert.equal(observed, 1); assert.equal(f.git('status', '--porcelain'), '');
 });
 for (const point of ['migration-intent', 'copied:advance.json', 'retired:advance.json', 'migration-complete'])

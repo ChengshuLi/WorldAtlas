@@ -232,7 +232,10 @@ export async function inspectMerge({api, repo, number, expectedHead, policy, evi
     candidateDiagnostics(null, candidateContext?.base ?? pr.base.sha, expectedHead, {
       candidate: commitID(pr.merge_commit_sha), observed_head: commitID(pr.head.sha), observed_pr_base: commitID(pr.base.sha),
       attempt: candidateContext?.attempt, reason: 'head-changed', observed_at: new Date().toISOString()}));
-  if (pr.merged) return {replayed: true, pr};
+  if (pr.merged) {
+    need(commitID(pr.merge_commit_sha), 'Merged PR has no confirmed merge commit');
+    return {replayed: true, pr};
+  }
   need(pr.state === 'open' && !pr.draft && pr.base.ref === 'main' && pr.head.repo?.full_name === repo,
     'Only open non-draft repository PRs targeting main may merge');
   const {github_issue} = validateIssuePRBody(pr.body ?? '');
@@ -340,6 +343,16 @@ export async function completeIntegration(options) {
   try {
   options = {...options, ...(capacityBudget ? {capacityBudget} : {}),
     api: memoizeImmutableGitBlobs(capacityBudget?.api ?? options.api)};
+  if (options.finalCapacity) options = await beginFinalPlanning(options);
+  // Duplicate/canceled executions reconcile the immutable reviewed head before
+  // requiring now-inapplicable candidate jobs or traversing evidence.
+  const initialPR = await options.api(`${root(options.repo)}/pulls/${options.number}`);
+  need(initialPR.head?.sha === options.expectedHead, 'PR head changed; obtain fresh exact-head review');
+  if (initialPR.merged) {
+    need(commitID(initialPR.merge_commit_sha), 'Merged PR has no confirmed merge commit');
+    return {accepted: true, replayed: true, merge_commit: initialPR.merge_commit_sha,
+      head_cleanup: await cleanupMergedHead(options)};
+  }
   const geographyProof = options.geographyProof ? validateGeographyProof(options.geographyProof) : null;
   const geographyReady = geographyProof
     ? options.geographyResult === 'skipped' && options.integrationResult === 'skipped' &&
@@ -352,7 +365,6 @@ export async function completeIntegration(options) {
   let capacity = null;
   if (options.finalCapacity) {
     need(geographyReady, 'Trusted combined geography check missing, failed or cancelled; no merge performed');
-    options = await beginFinalPlanning(options);
     const proofApplicabilityInventory = async ({api, state, run, jobs}) => {
       if (successfulMetadataRegressionJobs(jobs, {run: run?.id, attempt: run?.run_attempt, head: state.pr.head.sha})) {
         need(typeof options.metadataProofLoader === 'function', 'Metadata predecessor proof loader unavailable');
@@ -363,18 +375,14 @@ export async function completeIntegration(options) {
       const [baseline, authored] = await Promise.all([tree(api, options.repo, state.base), tree(api, options.repo, state.pr.head.sha)]);
       await selectedDataSelection({...options, api, branch: state.pr.head.ref, files: state.files, reservation: state.reservation, baseline, authored});
     };
-    const paced = await paceFinalValidation({...options, proofApplicabilityInventory}, {inspect: inspectMerge, admission: options.finalAdmission});
+    const paced = await paceFinalValidation({...options, proofApplicabilityInventory}, {inspect: inspectMerge});
     options = {...options, api: paced.api}; capacity = paced.receipt;
   }
   // Rejection-only fast path: known stale base/head cannot benefit from the
   // expensive full evidence inventory. Eligible/replayed requests still run
   // every normal trusted validation and the later final base guard.
-  const initialPR = await options.api(`${root(options.repo)}/pulls/${options.number}`);
-  need(initialPR.head.sha === options.expectedHead, 'PR head changed; obtain fresh exact-head review');
-  if (!initialPR.merged) {
-    const current = await options.api(`${root(options.repo)}/git/ref/heads/main`);
-    need(current.object?.sha === options.testedBase, 'Main advanced after integration tests; resubmit unchanged head');
-  }
+  const current = await options.api(`${root(options.repo)}/git/ref/heads/main`);
+  need(current.object?.sha === options.testedBase, 'Main advanced after integration tests; resubmit unchanged head');
   const state = await inspectMerge(options);
   if (state.replayed) return {accepted: true, replayed: true, merge_commit: state.pr.merge_commit_sha,
     head_cleanup: await cleanupMergedHead(options)};
