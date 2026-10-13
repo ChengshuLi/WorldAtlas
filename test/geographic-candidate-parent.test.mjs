@@ -26,10 +26,15 @@ for(const [name,options] of [['unchanged accepted parent',{}],['advanced accepte
 for(const [name,options] of [['wrong reviewed head',{wrongHead:true}],['unaccepted parent',{advanced:true,unaccepted:true}],['extra parent',{extraParent:true}],['wrong candidate',{wrongCandidate:true}],['identical parents',{identicalParents:true}],['malformed parent',{malformedParent:true}],['wrong merge base',{advanced:true,wrongMergeBase:true}]])test('geographic actual-parent resolver rejects '+name+' before output',()=>{
  const result=resolve(options);assert.notEqual(result.status,0);assert.equal(result.output,'');
 });
-test('geographic checkout and comparison use the same accepted actual parent',()=>{
+test('profile and geography share one authenticated accepted-parent resolution',()=>{
+ const profile=workflow.slice(workflow.indexOf('  profile:'),workflow.indexOf('  evidence:'));
  const geography=workflow.slice(workflow.indexOf('  geography:'),workflow.indexOf('  regression:'));
- assert.match(geography,/ref: \$\{\{ steps\.geographic_parent\.outputs\.baseline \}\}/);
- assert.match(geography,/GEOGRAPHY_BASELINE: \$\{\{ steps\.geographic_parent\.outputs\.baseline \}\}/);
- assert.match(geography,/if: steps\.geographic_parent\.outputs\.baseline == github\.event\.pull_request\.base\.sha/);
- assert.ok(geography.indexOf('Resolve accepted geographic candidate parent')<geography.indexOf('Checkout trusted geographic checker'));
+ assert.equal((workflow.match(/name: Resolve accepted geographic candidate parent/g)||[]).length,1);
+ assert.match(profile,/ref: \$\{\{ steps\.geographic_parent\.outputs\.baseline \}\}/);
+ assert.match(profile,/geography_baseline: \$\{\{ steps\.geographic_parent\.outputs\.baseline \}\}/);
+ assert.match(profile,/PR_GATE_CODE_COMMIT: \$\{\{ steps\.geographic_parent\.outputs\.baseline \}\}/);
+ assert.ok(profile.indexOf('Resolve accepted geographic candidate parent')<profile.indexOf('uses: actions/checkout'));
+ assert.match(geography,/GEOGRAPHY_BASELINE: \$\{\{ needs\.profile\.outputs\.geography_baseline \}\}/);
+ assert.match(geography,/needs\.profile\.outputs\.geography_baseline == github\.event\.pull_request\.base\.sha/);
+ assert.match(geography,/geography_software == 'true'\) && github\.sha \|\| needs\.profile\.outputs\.geography_baseline/);
 });

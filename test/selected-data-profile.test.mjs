@@ -179,7 +179,7 @@ test('actual trusted metadata entry binds ownership and forwards full setup plus
 });
 test('actual selector retains all three shards when accepted smoke or complete expectations are unavailable',async()=>{
   for(const mutate of [f=>f.baseline.entries.delete(SELECTED_SMOKE),f=>f.blobs.delete(f.authored.entries.get(prefix+'selected-delivery-expectations.json').sha)]){
-    const f=gateFixture();mutate(f);assert.deepEqual(await f.select(),{profile:'full',shards:[0,1,2]});
+    const f=gateFixture();mutate(f);assert.deepEqual(await f.select(),{profile:'full',shards:[0,1,2],geography_software:false});
   }
 });
 
@@ -975,7 +975,7 @@ for (const [name, change] of Object.entries({
   'wrong lane':f => f.issue.labels[0] = 'type:geography',
 })) test('retained selected metadata refuses ' + name, async () => {
   const f = gateFixture(ownedFixture()); change(f);
-  if (name === 'missing current scope') assert.deepEqual(await f.select(), {profile:'full', shards:[0,1,2]});
+  if (name === 'missing current scope') assert.deepEqual(await f.select(), {profile:'full', shards:[0,1,2], geography_software:false});
   else await assert.rejects(f.select());
 });
 for (const owned_paths of [['coordination/engineering/'], ['coordination/engineering/retained-delivery/../'],

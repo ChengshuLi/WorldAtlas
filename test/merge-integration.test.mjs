@@ -1185,3 +1185,46 @@ test('original PR merge candidate survives prepare and final acceptance without 
 });
 
 }
+
+test('changed checker uses fresh candidate science and cannot accept a baseline-only report', async () => {
+ const make = () => {
+  const f = fixture(), original = f.api;
+  const filename = 'scripts/check-geographic-regression.py';
+  f.authored[0].path = filename; f.integrated[0].path = filename;
+  f.api = async (route, ...args) => route.includes('/pulls/2/files')
+    ? [{filename, status: 'modified'}] : original(route, ...args);
+  return f;
+ };
+ const softwareReport = f => ({version: 1, method_id: 'worldatlas-trusted-geography-check-v1',
+  baseline_commit: f.base, candidate_commit: f.candidate, trusted_code_commit: f.candidate,
+  trusted_code_inventory_sha256: 'd'.repeat(64), candidate_code_executed: true,
+  published: false, source_approval: false, gate_status: 'passed', status: 'not-applicable'});
+ const f = make();
+ assert.equal((await prepareIntegration(f.options())).geography_software, true);
+ await assert.rejects(f.complete(), /exact trusted combined check/);
+ assert.equal(f.writes.length, 0);
+ const result = await f.complete({geographyReportLoader: async () => softwareReport(f)});
+ assert.equal(result.geography.trusted_code_commit, f.candidate);
+ assert.equal(result.tested_base, f.base);
+ assert.equal(f.writes.length, 1);
+ const unrelated = fixture();
+ await assert.rejects(unrelated.complete({geographyReportLoader: async () => softwareReport(unrelated)}), /exact trusted combined check/);
+ assert.equal(unrelated.writes.length, 0);
+});
+
+test('workflow candidate geography is selected by trusted profile output without credentials', () => {
+ for (const [file, selector, candidate, baseline] of [
+  ['merge-integration-checks.yml', 'profile', 'github.sha', 'needs.profile.outputs.geography_baseline'],
+  ['worker-merge.yml', 'prepare', 'needs.prepare.outputs.candidate', 'needs.prepare.outputs.base']
+ ]) {
+  const source = fs.readFileSync('.github/workflows/' + file, 'utf8');
+  const job = source.match(/\n  geography:\n([\s\S]*?)(?=\n  [a-z][a-z-]*:|$)/)[1];
+  const expression = `\${{ (needs.${selector}.outputs.geography_software == 'true') && ${candidate} || ${baseline} }}`;
+  assert.ok(job.includes('ref: ' + expression));
+  assert.ok(job.includes('GEOGRAPHY_CODE_COMMIT: ' + expression));
+  assert.ok(job.includes(`GH_TOKEN: \${{ !(needs.${selector}.outputs.geography_software == 'true') && github.token || '' }}`));
+  assert.match(job, /persist-credentials: false/);
+  assert.match(job, /GIT_CONFIG_GLOBAL: \/dev\/null/);
+  assert.doesNotMatch(job, /secrets\.|contents: write|issues: write|pull-requests: write|id-token:/);
+ }
+});

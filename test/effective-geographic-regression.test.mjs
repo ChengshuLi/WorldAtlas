@@ -85,6 +85,40 @@ test('actual immutable entry rejects owner loss/reassignment with rawworld geome
  }finally{f.cleanup();}
 });
 
+test('software checker executes candidate native code against distinct data and detects real owner loss', () => {
+ const f = fixture();
+ try {
+  const base = f.select([[[0, 2, 1]], [], [], []]);
+  f.select([[[0, 1, 1]], [], [], []]);
+  const nativePath = 'scripts/check-effective-geographic-regression.mjs';
+  fs.appendFileSync(path.join(f.repo, nativePath), '\n// Reviewed candidate-code identity control.\n');
+  const candidate = f.commit();
+  const output = path.join(f.repo, 'software-native-loss.json');
+  const env = {...process.env, NODE: process.execPath};
+  for (const name of ['GH_TOKEN', 'GITHUB_TOKEN', 'WORLDATLAS_CHECKOUT_TOKEN', 'GIT_CONFIG_COUNT', 'GIT_ASKPASS', 'SSH_ASKPASS', 'GIT_SSH_COMMAND']) delete env[name];
+  const result = spawnSync(process.env.WORLDATLAS_TEST_PYTHON ?? 'python3', ['-I', '-B',
+   path.join(f.repo, 'scripts/run-geographic-check.py'), '--repo', f.repo,
+   '--baseline', base, '--candidate', candidate, '--code-commit', candidate, '--out', output], {encoding: 'utf8', env});
+  assert.equal(result.status, 1, result.stderr);
+  assert.ok(fs.existsSync(output), result.stderr);
+  const report = JSON.parse(fs.readFileSync(output));
+  assert.equal(report.status, 'native-regressions-found');
+  assert.equal(report.baseline_commit, base);
+  assert.equal(report.candidate_commit, candidate);
+  assert.notEqual(base, candidate);
+  assert.equal(report.trusted_code_commit, candidate);
+  assert.equal(report.candidate_code_executed, true);
+  assert.equal(report.selected_native_report.lost_or_reassigned_cells, 1);
+  assert.equal(report.selected_native_report.candidate_code_executed, false, 'retain legacy child bytes honestly');
+  assert.match(report.execution_limits.join(' '), /marker is not evidence/);
+  const code = report.selected_native_report.execution_code_inventory.find(row => row.path === nativePath);
+  assert.equal(code.sha256, sha(fs.readFileSync(path.join(f.repo, nativePath))));
+  assert.notEqual(code.sha256, sha(execFileSync('git', ['-C', f.repo, 'show', base + ':' + nativePath])));
+  assert.equal(report.checkpoint, undefined);
+  assert.equal(report.unchanged_selected_inputs, undefined);
+ } finally { f.cleanup(); }
+});
+
 test('missing native selection, dishonest row partition and unsupported additive hook fail closed',()=>{
  const f=fixture();try{const base=f.select([[[0,2,1]],[],[],[]]);
   fs.unlinkSync(path.join(f.repo,'data/ownership-selection.json'));const removed=f.commit();assert.throws(()=>inspectSelected(f.repo,base,removed),/removed or introduced/);

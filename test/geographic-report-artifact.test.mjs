@@ -405,3 +405,21 @@ test('fresh queue authenticated report still requires exact baseline, candidate 
     assert.throws(() => checkGeographicReport(result, f.options.baseline, f.commit.sha));
   }
 });
+
+
+test('candidate software report requires explicit expected code identity and cannot impersonate baseline proof', () => {
+ const baseline = 'a'.repeat(40), candidate = 'b'.repeat(40);
+ const report = {version: 1, method_id: 'worldatlas-trusted-geography-check-v1',
+  baseline_commit: baseline, candidate_commit: candidate, trusted_code_commit: candidate,
+  trusted_code_inventory_sha256: 'c'.repeat(64), candidate_code_executed: true,
+  published: false, source_approval: false, gate_status: 'passed', status: 'not-applicable'};
+ assert.equal(checkGeographicReport(report, baseline, candidate, candidate), false);
+ assert.throws(() => checkGeographicReport(report, baseline, candidate), /exact trusted combined/);
+ for (const mutation of [{trusted_code_commit: baseline}, {candidate_code_executed: false},
+  {trusted_code_inventory_sha256: ''}, {checkpoint: {}}, {unchanged_selected_inputs: {}}, {reused_baseline_proof: {}}]) {
+  assert.throws(() => checkGeographicReport({...report, ...mutation}, baseline, candidate, candidate));
+ }
+ const old = {...report, trusted_code_commit: baseline, candidate_code_executed: false};
+ assert.equal(checkGeographicReport(old, baseline, candidate), false);
+ assert.throws(() => checkGeographicReport(old, baseline, candidate, candidate));
+});

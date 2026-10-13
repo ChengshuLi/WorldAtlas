@@ -1,5 +1,5 @@
 import {collectGeographicApproval, bindingHash} from './geographic-adjudication-api.mjs';
-import {integrationProfile, selectedDataCandidate, selectedDataSelection} from './integration-profile.mjs';
+import {integrationProfile, selectedDataCandidate, selectedDataSelection, candidateGeographyCode} from './integration-profile.mjs';
 import {integrationProof} from './integration-proof.mjs';
 import {githubPages, verifyIssueScope, workSpec} from './issue-claim-contract.mjs';
 import {validateIssuePRBody, validateLanePaths} from './check-handoff-scope.mjs';
@@ -315,7 +315,7 @@ export async function prepareIntegration(options) {
     try { proof = await integrationProof({...options, head: state.pr.head.sha, profile, testSelection: selection?.test_selection, onUnavailable: value => {proofUnavailable = value;},
       baseline: baseline ?? await tree(options.api, options.repo, state.base), authored, candidate: integrated}); } catch { proofUnavailable = {reason: 'proof-read-unavailable'}; /* isolated tests remain required */ }
     let geographyProof = null;
-    if (proof && options.geographyProofLoader) {
+    if (!candidateGeographyCode(profile, state.files, selection?.test_selection) && proof && options.geographyProofLoader) {
       try {
         const loaded = await options.geographyProofLoader({api: options.api, repo: options.repo,
           number: options.number, head: state.pr.head.sha, baseline: state.base, proof});
@@ -326,7 +326,7 @@ export async function prepareIntegration(options) {
         }
       } catch { /* A missing original report never discards valid regression proof or waives fresh geography. */ }
     }
-    return {...state, candidate, profile, ...selection, proof, proof_unavailable: proofUnavailable, geography_proof: geographyProof,
+    return {...state, candidate, profile, ...selection, geography_software: candidateGeographyCode(profile, state.files, selection?.test_selection), proof, proof_unavailable: proofUnavailable, geography_proof: geographyProof,
       candidate_refresh_attempts: fresh.attempts, candidate_ref: fresh.reference};
   } catch (error) {
     if (fresh.reference) {
@@ -369,24 +369,35 @@ export async function completeIntegration(options) {
     'An open PR requires successful isolated integration tests or revalidated trusted proof');
   need(state.base === options.testedBase, 'Main advanced after integration tests; resubmit unchanged head');
   need(typeof options.geographyReportLoader === 'function', 'Missing trusted geography report loader');
-  const geography = await options.geographyReportLoader({api: options.api});
-  const waterPass = checkGeographicReport(geography, state.base,
-    geographyProof ? geographyProof.candidate_commit ?? state.pr.head.sha : options.testedCandidate);
   const candidate = await tree(options.api, options.repo, options.testedCandidate);
   checkCandidateParents(candidate.object, state.base, state.pr.head.sha);
+  const authored = await tree(options.api, options.repo, state.pr.head.sha);
+  checkReviewedTrees(state.files, authored.entries, candidate.entries);
+  const profile = integrationProfile(state.pr.head.ref, state.files, state.reservation);
+  let baseline, selection = null;
+  if (profile === 'full' && selectedDataCandidate(state.pr.head.ref, state.files, state.reservation)) {
+    try {
+      baseline = await tree(options.api, options.repo, state.base);
+      selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files: state.files,
+        reservation: state.reservation, baseline, authored});
+    } catch { /* Unknown applicability retains full software validation. */ }
+  }
+  const geography = await options.geographyReportLoader({api: options.api});
+  const geographicCandidate = geographyProof ? geographyProof.candidate_commit ?? state.pr.head.sha : options.testedCandidate;
+  const software = candidateGeographyCode(profile, state.files, selection?.test_selection);
+  need(!software || !geographyProof, 'Changed checker code requires fresh candidate geography');
+  const codeCommit = software ? options.testedCandidate : state.base;
+  const waterPass = checkGeographicReport(geography, state.base, geographicCandidate, codeCommit);
   const geographicSource = geographyProof ?? geographicReportProducts(geography)?.source;
   if (geographicSource) need(geographicSource.tree === candidate.object.tree.sha &&
     geographicSource.head === state.pr.head.sha && geographicSource.baseline === state.base &&
     (!geographicSource.candidate_commit || geographicSource.candidate_commit === geography.candidate_commit),
     'Geographic source differs from accepted candidate identities');
-  const authored = await tree(options.api, options.repo, state.pr.head.sha);
-  checkReviewedTrees(state.files, authored.entries, candidate.entries);
   let proof = null;
   if (options.proofRunId) {
-    const baseline = await tree(options.api, options.repo, state.base);
-    const selection = await selectedDataSelection({...options, branch: state.pr.head.ref, files: state.files, reservation: state.reservation, baseline, authored});
+    baseline ??= await tree(options.api, options.repo, state.base);
     proof = await integrationProof({...options, runId: options.proofRunId, runAttempt: options.proofRunAttempt, head: state.pr.head.sha,
-      profile: integrationProfile(state.pr.head.ref, state.files, state.reservation),
+      profile,
       testSelection: selection?.test_selection, baseline, authored, candidate});
     need(proof, 'Trusted integration proof is no longer valid; resubmit unchanged head');
   }
@@ -420,7 +431,7 @@ export async function completeIntegration(options) {
   });
   need(merged.merged, 'GitHub did not merge the PR');
   return {accepted: true, merge_commit: merged.sha, title: state.pr.title, github_issue: state.issue.number,
-    geography: {status: 'passed', trusted_code_commit: state.base, candidate_commit: geography.candidate_commit,
+    geography: {status: 'passed', trusted_code_commit: geography.trusted_code_commit, candidate_commit: geography.candidate_commit,
       report_sha256: geographyProof?.report_sha256 ?? options.geographyReportHash, adjudication: geography.adjudication ?? null,
       ...(geographicSource ? {execution: geographyProof ? 'reused-original' : 'fresh-queue', source: geographicSource} : {})},
     tested_base: state.base, tested_candidate: options.testedCandidate, reviewed_head: state.pr.head.sha, evidence: state.evidence, proof,
