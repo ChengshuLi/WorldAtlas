@@ -2,7 +2,6 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {githubAPI} from '../scripts/issue-claim-contract.mjs';
 import {quotaDelay,requestAccounting} from '../scripts/github-quota.mjs';
-import {waitForFinalCapacity} from '../scripts/final-capacity.mjs';
 const response=(status,remaining='0',extra={})=>new Response(JSON.stringify({message:status===403?'rate limit exceeded':'ok'}),{status,headers:{'x-ratelimit-limit':'1000','x-ratelimit-remaining':remaining,'x-ratelimit-reset':'100','x-ratelimit-resource':'core',...extra}});
 async function mocked(run,fn){const old=globalThis.fetch;globalThis.fetch=run;try{await fn();}finally{globalThis.fetch=old;}}
 test('quota retry only retries an explicit read rejection, and accounts every attempt',async()=>{
@@ -46,30 +45,33 @@ test('invalid capacity headers fail closed and concurrent reads cannot replace p
  });
  await mocked(async()=>new Response('{}'),async()=>{await assert.rejects(githubAPI('private').readRepositoryCapacity('a/b'),/Unavailable/);});
 });
-test('capacity wait honors secondary retry-after before the next actual observation',async()=>{
- let time=0,calls=0;const error=Object.assign(Error('secondary'),{github:{http_status:403,retry_after:'2'}});
- const api=Object.assign(async()=>assert.fail('generic capacity must not be read'),{readRepositoryCapacity:async()=>{if(++calls===1)throw error;return {remaining:500,limit:1000,reset:100};}});
- const row=await waitForFinalCapacity({api,repo:'a/b',required:100,now:()=>time,wallNow:()=>time,sleep:async ms=>{time+=ms;},deadlineMs:10000});assert.equal(time,3000);assert.equal(row.remaining,500);
+test('actual read quota rejection honors secondary retry-after within its finite deadline',async()=>{
+ let time=0,calls=0;
+ await mocked(async()=>response(++calls===1?403:200,'500',calls===1?{'retry-after':'2'}:{}),async()=>{
+  const api=githubAPI('private',{readWaitMs:10000,deadlineRemaining:()=>60000-time,now:()=>time,sleep:async ms=>{time+=ms;}});
+  await api('/repos/a/b/pulls/1');assert.equal(time,3000);assert.equal(calls,2);
+ });
 });
 test('quota classifier rejects malformed or irrelevant error metadata',()=>{
  assert.equal(quotaDelay({github:{http_status:404,rate_remaining:'0',rate_reset:'100'}}),null);
  assert.equal(quotaDelay({github:{http_status:403,retry_after:'bogus'}}),null);
 });
-test('final paid-call allowance covers actual HTTP retries and preserves recovery capacity',async()=>{
- const {finalRequestBudget}=await import('../scripts/final-capacity.mjs');let calls=0,time=99000;
- await mocked(async()=>{calls++;return response(calls===1?403:200,calls===1?'0':'999');},async()=>{
-  const raw=githubAPI('private',{readWaitMs:10000,now:()=>time,sleep:async ms=>{time+=ms;}});
-  const budget=finalRequestBudget(raw);budget.setLimit(1);
-  await assert.rejects(budget.api('/repos/a/b/pulls/1'),error=>error.requestBudget===true&&error.quotaCause?.github?.rate_remaining==='0');
-  assert.equal(calls,1);budget.dispose();await raw('/repos/a/b/issues/1/comments','POST',{body:'recovery'});assert.equal(calls,2);
+test('deadline refuses a quota wait that cannot fit one complete HTTP attempt',async()=>{
+ let calls=0,time=99000;
+ await mocked(async()=>{calls++;return response(403);},async()=>{
+  const api=githubAPI('private',{readWaitMs:10000,deadlineRemaining:()=>120000-time,
+    now:()=>time,sleep:async()=>assert.fail('deadline cannot admit this wait')});
+  await assert.rejects(api('/repos/a/b/pulls/1'),error=>error.jobDeadline===true&&error.github?.rate_remaining==='0');
+  assert.equal(calls,1);
  });
 });
-test('final deadline is checked before a retry actually sends HTTP',async()=>{
- const {finalRequestBudget}=await import('../scripts/final-capacity.mjs');let calls=0,time=99000;
+test('deadline is rechecked after an oversleep before a retry actually sends HTTP',async()=>{
+ let calls=0,time=99000;
  await mocked(async()=>{calls++;return response(403);},async()=>{
-  const raw=githubAPI('private',{readWaitMs:10000,now:()=>time,sleep:async ms=>{time+=ms;}});
-  const budget=finalRequestBudget(raw);budget.setLimit(3);budget.setDeadline(()=>100000-time);
-  await assert.rejects(budget.api('/repos/a/b/pulls/1'),/deadline/);assert.equal(calls,1);budget.dispose();
+  const api=githubAPI('private',{readWaitMs:60000,deadlineRemaining:()=>130000-time,
+    now:()=>time,sleep:async()=>{time+=15000;}});
+  await assert.rejects(api('/repos/a/b/pulls/1'),error=>error.jobDeadline===true&&error.quotaCause?.github?.rate_remaining==='0');
+  assert.equal(calls,1);
  });
 });
 

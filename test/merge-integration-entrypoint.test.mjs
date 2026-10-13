@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
 
 const root=path.resolve(import.meta.dirname,'..');
@@ -31,8 +32,8 @@ function run({readFails=false,commentFails=false,phase='prepare',merged=true,hea
       {status:posting?${commentFails?403:201}:${readFails?418:200},headers:{'Content-Type':'application/json'}});
   };`);
   const result=spawnSync(process.execPath,['--import',path.join(directory,'mock.mjs'),path.join(root,'scripts/run-worker-merge.mjs')],{
-    cwd:directory,encoding:'utf8',env:{...process.env,GH_TOKEN:'synthetic-test-token',GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',
-      GITHUB_EVENT_PATH:path.join(directory,'event.json'),GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:phase,FINAL_CAPACITY:'required',INTEGRATION_RESULT:integration,GEOGRAPHY_RESULT:geography}});
+    cwd:directory,encoding:'utf8',env:{...process.env,GITHUB_ACTIONS:'false',GH_TOKEN:'synthetic-test-token',GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',
+      GITHUB_EVENT_PATH:path.join(directory,'event.json'),GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:phase,INTEGRATION_RESULT:integration,GEOGRAPHY_RESULT:geography}});
   const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json'))),summary=fs.readFileSync(path.join(directory,'summary'),'utf8');
   fs.rmSync(directory,{recursive:true,force:true});return {result,receipt,summary};
 }
@@ -91,7 +92,7 @@ test('actual entry point saves stale/head/conflict/base diagnostics even when no
     };`);
   try {
     const result=spawnSync(process.execPath,['--import',path.join(directory,'mock.mjs'),path.join(root,'scripts/run-worker-merge.mjs')],{
-      cwd:directory,encoding:'utf8',env:{...process.env,GH_TOKEN:'synthetic-token',GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',
+      cwd:directory,encoding:'utf8',env:{...process.env,GITHUB_ACTIONS:'false',GH_TOKEN:'synthetic-token',GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',
         GITHUB_EVENT_PATH:path.join(directory,'event.json'),GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:'prepare'}});
     const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json')));
     assert.notEqual(result.status,0);assert.match(result.stderr,/HTTP 403/);
@@ -127,7 +128,7 @@ test('actual final entry point cleans only its owned ref and retains successful 
     };`);
     try {
       const result=spawnSync(process.execPath,['--import',path.join(directory,'mock.mjs'),path.join(root,'scripts/run-worker-merge.mjs')],{
-        cwd:directory,encoding:'utf8',env:{...process.env,GH_TOKEN:'synthetic-token',GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',
+        cwd:directory,encoding:'utf8',env:{...process.env,GITHUB_ACTIONS:'false',GH_TOKEN:'synthetic-token',GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',
           GITHUB_RUN_ID:'1234',GITHUB_EVENT_PATH:path.join(directory,'event.json'),GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),
           MERGE_PHASE:'merge',INTEGRATION_RESULT:'success',TESTED_CANDIDATE:'b'.repeat(40),CANDIDATE_REF:kind==='unowned'?'main':reference}});
       const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json')));
@@ -173,7 +174,7 @@ test('actual fallback prepare cleans its confirmed ref when receipt notification
     };`);
   try {
     const result=spawnSync(process.execPath,['--import',path.join(directory,'mock.mjs'),path.join(root,'scripts/run-worker-merge.mjs')],{
-      cwd:directory,encoding:'utf8',env:{...process.env,GH_TOKEN:'synthetic-token',GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',GITHUB_RUN_ID:'1234',
+      cwd:directory,encoding:'utf8',env:{...process.env,GITHUB_ACTIONS:'false',GH_TOKEN:'synthetic-token',GITHUB_REPOSITORY:'owner/repo',GITHUB_REF:'refs/heads/main',GITHUB_RUN_ID:'1234',
         GITHUB_EVENT_PATH:path.join(directory,'event.json'),GITHUB_OUTPUT:path.join(directory,'outputs'),GITHUB_STEP_SUMMARY:path.join(directory,'summary'),MERGE_PHASE:'prepare',PREPARE_FALLBACK:'true'}});
     const receipt=JSON.parse(fs.readFileSync(path.join(directory,'merge-result.json')));
     assert.notEqual(result.status,0);assert.match(result.stderr,/POST.*HTTP 403/);
@@ -213,4 +214,80 @@ test('actual final refusal reconciles a concurrent matching-head merge without r
 for (const phase of ['prepare', 'merge']) test(`actual ${phase} cannot accept merged state without a merge commit`, () => {
   const {result, receipt} = run({phase, mergeCommit: null});
   assert.notEqual(result.status, 0); assert.equal(receipt.accepted, false); assert.match(receipt.reason, /no confirmed merge commit/);
+});
+
+function hostedDeadlineRun({phase = 'merge', ageSeconds = 0, expire = false, corrupt = false, foreignJob = false,
+  malformedMetadata = false, pending = false, badWorkflow = false} = {}) {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'atlas-merge-deadline-'));
+  fs.mkdirSync(path.join(directory, '.github'));
+  fs.copyFileSync(path.join(root, '.github/evidence-policy.json'), path.join(directory, '.github/evidence-policy.json'));
+  const request = 'deadline-entrypoint-request', reference = `worldatlas-integration/pr-2-${request}-1234`;
+  fs.writeFileSync(path.join(directory, 'event.json'), JSON.stringify({inputs: {pr_number: '2', expected_head: 'a'.repeat(40), request_id: request}}));
+  const workflow = fs.readFileSync(path.join(root, '.github/workflows/worker-merge.yml'));
+  const file = {type: 'file', path: '.github/workflows/worker-merge.yml', encoding: 'base64', size: workflow.length,
+    sha: createHash('sha1').update(`blob ${workflow.length}\0`).update(workflow).digest('hex'), content: workflow.toString('base64')};
+  if (corrupt) file.content = Buffer.from('changed workflow').toString('base64');
+  fs.writeFileSync(path.join(directory, 'mock.mjs'), capacityShim + `
+    import fs from 'node:fs'; import {performance} from 'node:perf_hooks';
+    const realNow = performance.now.bind(performance), wall = Date.now(); let elapsed = 0, jobs = 0;
+    Object.defineProperty(performance, 'now', {value: () => realNow() + elapsed});
+    const calls = []; globalThis.fetch = async (url, options) => {
+      const route = new URL(url).pathname; calls.push({route, method: options.method});
+      fs.writeFileSync('calls.json', JSON.stringify(calls));
+      if (options.method === 'PUT') throw Error('No new merge is allowed');
+      if (route.includes('/contents/')) return Response.json(${JSON.stringify(file)});
+      if (route.includes('/attempts/1/jobs')) {
+        jobs++; return Response.json(${malformedMetadata} ? {} : {total_count: 1, jobs: [{id: 51, name: '${phase}',
+          run_id: 1234, run_attempt: 1, status: ${pending} && jobs === 1 ? 'queued' : 'in_progress',
+          started_at: new Date(wall - ${ageSeconds} * 1000).toISOString()}]});
+      }
+      if (route.endsWith('/pulls/2')) {
+        if (${expire}) elapsed += ${phase === 'merge' ? 75 : 10} * 60000 - ${ageSeconds} * 1000 - 27000;
+        return Response.json({merged: ${!(corrupt || foreignJob || malformedMetadata || badWorkflow || ageSeconds >= (phase === 'merge' ? 75 : 10) * 60 - 40)}, head: {sha: 'a'.repeat(40)}, merge_commit_sha: 'b'.repeat(40)});
+      }
+      if (options.method === 'DELETE') return new Response(null, {status: 204});
+      return Response.json(route.includes('/git/ref/heads/') ? {object: {sha: 'b'.repeat(40)}} : {});
+    };
+  `);
+  try {
+    const result = spawnSync(process.execPath, ['--import', path.join(directory, 'mock.mjs'), path.join(root, 'scripts/run-worker-merge.mjs')], {
+      cwd: directory, encoding: 'utf8', timeout: 10000, env: {...process.env,
+        GH_TOKEN: 'synthetic-deadline-token', GITHUB_ACTIONS: 'true', GITHUB_REPOSITORY: 'owner/repo', GITHUB_REF: 'refs/heads/main',
+        GITHUB_RUN_ID: '1234', GITHUB_RUN_ATTEMPT: '1', GITHUB_JOB: foreignJob ? 'geography' : phase,
+        GITHUB_WORKFLOW_SHA: 'c'.repeat(40), GITHUB_WORKFLOW_REF: 'owner/repo/.github/workflows/' + (badWorkflow ? 'foreign.yml' : 'worker-merge.yml') + '@refs/heads/main',
+        GITHUB_EVENT_PATH: path.join(directory, 'event.json'), GITHUB_OUTPUT: path.join(directory, 'outputs'), GITHUB_STEP_SUMMARY: path.join(directory, 'summary'),
+        MERGE_PHASE: phase, INTEGRATION_RESULT: 'success', GEOGRAPHY_RESULT: 'success', TESTED_CANDIDATE: 'b'.repeat(40), CANDIDATE_REF: reference}});
+    const receipt = JSON.parse(fs.readFileSync(path.join(directory, 'merge-result.json')));
+    const calls = JSON.parse(fs.readFileSync(path.join(directory, 'calls.json')));
+    return {result, receipt, calls};
+  } finally {fs.rmSync(directory, {recursive: true, force: true});}
+}
+for (const [phase, minutes] of [['prepare', 10], ['merge', 75]]) {
+  test(`actual ${phase} HTTP deadline binds authenticated job start and executing workflow`, () => {
+    const {result, receipt, calls} = hostedDeadlineRun({phase, ageSeconds: 30, pending: true});
+    assert.equal(result.status, 0, result.stderr); assert.equal(receipt.accepted, true);
+    assert.equal(receipt.job_deadline.timeout_minutes, minutes); assert.equal(receipt.job_deadline.finalization_ms, 30000);
+    assert.equal(receipt.job_deadline.metadata_reads, 2); assert.equal(receipt.job_deadline.phase, phase);
+    assert.equal(calls.filter(row => row.route.includes('/contents/')).length, 1);
+    assert(!calls.some(row => row.route === '/rate_limit'));
+  });
+  test(`actual ${phase} cannot start work after setup consumes its job ceiling`, () => {
+    const {receipt, calls} = hostedDeadlineRun({phase, ageSeconds: minutes * 60 - 40});
+    assert.equal(receipt.accepted, false); assert.match(receipt.reason, /deadline exhausted/);
+    assert(!calls.some(row => row.method === 'PUT'));
+  });
+}
+test('actual final work expiry leaves the existing reserved time usable for owned cleanup and notification', () => {
+  const {result, receipt, calls} = hostedDeadlineRun({expire: true, ageSeconds: 60});
+  assert.notEqual(result.status, 0); assert.equal(receipt.accepted, false); assert.equal(receipt.job_deadline_exhausted, true);
+  assert.equal(receipt.candidate_cleanup.status, 'deleted'); assert.equal(receipt.notification_error, undefined);
+  assert.equal(calls.filter(row => row.method === 'DELETE').length, 1);
+  assert.equal(calls.filter(row => row.method === 'POST').length, 1);
+  assert.equal(calls.filter(row => row.route.endsWith('/pulls/2')).length, 1, 'Normal reconciliation cannot spend the cleanup reserve');
+});
+for (const option of ['corrupt', 'foreignJob', 'malformedMetadata', 'badWorkflow']) test(`actual merge deadline rejects ${option} before merge work`, () => {
+  const {receipt, calls} = hostedDeadlineRun({[option]: true});
+  assert.equal(receipt.accepted, false); assert(!calls.some(row => row.method === 'PUT'));
+  // Failure reconciliation may read the PR, but cannot accept a fresh merge.
+  assert.match(receipt.reason, /workflow|job|inventory|metadata/);
 });

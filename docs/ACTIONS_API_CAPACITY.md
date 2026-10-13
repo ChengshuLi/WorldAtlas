@@ -6,15 +6,20 @@ count stops before that notification. These counts exclude Git transport and
 external consumers sharing the same credential. They are observations, not a
 reservation or a guarantee that capacity cannot be exhausted.
 
-Final capacity and scheduler admission inspect headers from an actual repository
-GET. Generic `/rate_limit` can describe a different bucket and cannot establish
-repository capacity. Invalid or missing repository headers fail closed. A primary
-zero/reset or a secondary Retry-After can cause a bounded read wait; ordinary
-permission denial cannot. Scheduler refusal spends no execution attempt. A quota
-rejection retains its durable request identity and an observable next retry time.
-Registration and preparation read waits share an eight-minute API deadline;
-final reads share a 61-minute API deadline inside the existing final job limit.
-Writes and ambiguous transport outcomes are never automatically retried.
+The existing HTTP client inspects actual response-header quota on required
+repository reads. Generic `/rate_limit` cannot establish repository capacity.
+Invalid or missing successful-response headers fail closed. There is no final
+capacity preinventory, request estimator, speculative proof/artifact walk or
+replanning pass. Actual final evidence and merge validation remain required.
+
+A primary zero/reset or secondary Retry-After can cause a bounded GET retry;
+ordinary permission denial cannot. Preparation retains its eight-minute read-wait
+limit and final validation its 61-minute read-wait limit. Every actual attempt
+also fits the authenticated current job deadline: setup-aware 10/75-minute
+workflow ceilings minus the existing 30-second finalization reserve. Only
+already-restricted owned-candidate cleanup and merge-result notification can
+use that reserve, with the same actual quota accounting and bounded recovery
+allocation. Writes and ambiguous transport outcomes are never retried.
 
 Evidence validation binds every input to an exact complete tree, path, mode,
 size and blob OID. Eligible bounded inventories transfer those exact blob OIDs
@@ -25,9 +30,9 @@ store or mutable authority cache is introduced. Existing descriptor/byte,
 scientific, independent-review and exact-head checks still run. Inventories that
 exceed the transport's cache limits use the existing complete REST validation.
 
-Issue state, claims, review receipts, checks, refs, PR disposition and FIFO
-admission still reach GitHub on each required authority pass. Geography/history
-CI selection and the five-minute merge scheduler are unchanged.
+Issue state, review receipts, checks, refs and PR disposition still reach GitHub
+on each required authority pass. Geography/history CI selection is unchanged;
+native Actions concurrency serializes the complete merge lifecycle.
 
 If a bounded wait ends, inspect the same request and current workflow before
 recovery. Do not manufacture a new request, retry an uncertain write, infer

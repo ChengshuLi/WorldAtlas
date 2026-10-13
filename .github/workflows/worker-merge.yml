@@ -403,7 +403,6 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           MERGE_PHASE: merge
-          FINAL_CAPACITY: 'required'
           CANDIDATE_REF: ${{ needs.prepare.outputs.candidate_ref }}
           TESTED_BASE: ${{ needs.prepare.outputs.base }}
           TESTED_CANDIDATE: ${{ needs.prepare.outputs.candidate }}

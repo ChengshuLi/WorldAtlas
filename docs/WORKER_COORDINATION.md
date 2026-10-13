@@ -239,7 +239,7 @@ origin attempt; the queue authenticates that exact run/job, required steps,
 matching original receipt and artifact/report rather than scanning old artifacts
 or relabeling execution. The origin attempt may have failed/cancelled code while
 its geography succeeded. Latest code proof still requires its own successful
-coverage. Both identities are rechecked after capacity waiting and before merge;
+coverage. Both identities are rechecked in actual final validation before merge;
 missing original proof requires fresh geography. Preparation pins the run ID and attempt. The final serialized merge re-reads that run,
 the same successful attempt/jobs and the usual exact-head review, evidence, ownership,
 checks, candidate parents and base guards. An unavailable/untrusted proof causes
@@ -269,7 +269,7 @@ normal ownership, scope, evidence and exact-head review remain required. Reuse
 records retain the original run, attempt, head and successful job identities.
 They do not claim a new build or relabel the old report. The queue authenticates
 that predecessor again against its actual baseline and current control job,
-including after capacity waiting and before merge. Only immutable input
+during actual final validation before merge. Only immutable input
 collection is cached within that queue process; live authority is reread.
 
 PR geography compares the event's authenticated merge commit against its exact
@@ -416,47 +416,36 @@ and recovered observations; they do not assert a provider cause or saved time.
 A simulated recovery proves the control path, not that a particular hosted
 failure was eventual consistency.
 
-### Observed capacity before final validation
+### Actual HTTP quota and job deadlines
 
-The final job observes `/rate_limit` with its existing authenticated token before
-any repository planning read. It validates the current core limit, remaining
-capacity and reset, including the corresponding allowlisted response fields.
-It never assumes a fixed installation quota or reserves shared capacity.
-A zero or insufficient observation waits inside the same live workflow run.
+Final merge runs its actual evidence, review, proof/source, candidate-parent/tree
+and mutable-authority validation once. There is no separate evidence preinventory,
+request estimator, speculative artifact/proof walk, capacity poll or replanning
+pass. The full scientific byte validator retains its ancestry, descriptor and
+byte limits. The final current issue/check/source/base guards and SHA-guarded
+merge remain required.
 
-A complete fresh metadata inventory binds manifest descriptors and all nonadded
-originals to current complete Git trees, ordinary paths, vintages and OIDs. Historical descriptors use the same version-1/version-2 parser as the evidence
-gate: each exact commit is checked against the PR base and each file is resolved
-from its own complete tree. Same-path historical vintages retain separate byte
-accounting; only immutable OID reuse reduces transport calls. Only
-verified immutable OID reuse tightens the blob estimate. Review, claim, checks,
-proof jobs, artifact pagination and applicable source authority remain fresh.
-The estimate includes repeated metadata passes and 48 additional calls: 16 for
-bounded rejection cleanup/receipt, 20 for final mutable guards and guarded merge,
-8 for candidate/proof trees, and 4 for artifact download/notification overhead.
-The paid-call guard sits below immutable reuse. It reserves those 16 recovery
-calls outside validation, and fails closed if growing inventories consume the
-remaining allowance; capacity observation never approves evidence or a merge.
+The existing HTTP client admits every actual request using response-header core
+quota, including concurrent charges and conditional 304 refunds. It retains a
+16-request recovery floor, bounded GET-only retries after recognized quota
+rejections and a fresh repository probe after a reset. No ordinary permission
+failure, ambiguous transport outcome or write is automatically retried.
 
-There are at most three complete planning attempts. Only a proven planning-call
-budget deficit may wait and restart the whole mutable inventory. Original API
-errors and invalid authority fail normally. All planning and capacity waits share
-one monotonic 61-minute deadline, with 13 further minutes for validation and one
-minute for job setup inside the 75-minute final timeout. Polling is at most once
-per 30 seconds and waits only for an observed deficit. A bound above the observed
-limit, invalid observation, exhausted call/deadline budget or actual denial needs
-bounded intervention. Capacity can be consumed by concurrent jobs after a probe.
+The worker entrypoint binds its deadline to the authenticated current prepare or
+merge job's start and the executing workflow's immutable literal timeout (10 or
+75 minutes). Setup time is charged. Workflow/job metadata share a finite startup
+budget; requests and waits must fit a complete 20-second HTTP attempt before the
+existing 30-second finalization reserve. Local entrypoint runs also have finite
+deadlines. Only the client's already-restricted exact-owned candidate cleanup
+and result-notification routes can use that final reserve; they keep the same
+quota state and bounded recovery allocation. This is best-effort cleanup, not a
+guarantee against concurrent quota depletion or a slow provider.
 
-After waiting, reviewed head, tested base, claim, issue, review, checks,
-proof jobs and tree/path bindings are read again before costly output bytes.
-The original full evidence, source/geography, candidate-parent/tree, final
-mutable guards and SHA-guarded merge then run unchanged. A long final job may
-outlast a local observation session; inspect the same Actions execution rather
-than cancel or dispatch a duplicate. Reconcile terminal failure and actual PR
-state before a fresh request; do not rerun just the final job to bypass candidate
-preparation or checks.
-Local controls demonstrate pacing and rejection, not hosted quota recovery;
-record actual same-token hosted observations separately when those conditions occur.
+Inspect the same Actions execution rather than canceling or duplicating a long
+job. Reconcile terminal failure and actual PR state before a fresh request;
+never rerun just the final job to bypass candidate preparation or checks. Local
+mocked HTTP controls establish rejection and cleanup behavior, not hosted quota
+recovery or a system-wide capacity guarantee.
 
 ## Issue lifecycle accuracy
 
