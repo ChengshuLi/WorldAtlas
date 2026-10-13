@@ -261,7 +261,6 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       packageAdditions = after.slice(before.length);
     }
     const registryChanged = files.some(file => file.filename === ADMINISTRATIVE_REGISTRY);
-    const sourceExtension = registryChanged || packageAdditions.some(name => baseline.entries.has(name));
     const oldSelection = await json(SELECTION, baseline), selection = await json(SELECTION);
     const {additive_release: oldHook, ...oldBase} = oldSelection, {additive_release: hook, ...newBase} = selection;
     needSelected(selection.version === 1 && selection.method === 'native-linear-evenodd-first-owner-v1' &&
@@ -560,6 +559,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     };
     // Existing deliveries resolve new authority first; only unresolved native
     // operands require a bounded second pass through retained custody.
+    const sourceAuthorities = [];
     const roleEntries = [...registry.entries].sort((a, b) => Number(added.has(b.source_authority?.path)) - Number(added.has(a.source_authority?.path)));
     for (const entry of roleEntries) {
       needSelected(keys(entry, ['authority_sha256','policy_id','policy_version','rule_preimage','rule_sha256','source_authority']), 'foreign registry fields');
@@ -604,7 +604,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       }
       const nativeRequest = restoredRequest ?? await pinnedJSON(authority.original_pins.native_request), spec = nativeRequest.additive;
       await nativeRoles(authority, nativeRequest);
-      if (sourceExtension) await sourceRoles(authority);
+      sourceAuthorities.push(authority);
       needSelected(Array.isArray(spec?.inputs) && spec.inputs.length <= 1024, 'missing source role inputs');
       for (const role of ['publication_path','inventory_path','operating_path']) {
         const matches = spec.inputs.filter(value => value.path === spec[role]);
@@ -763,6 +763,10 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         if (bytes.length > 128 * 1024) jsonLines(bytes, 128 * 1024);
       }
     }
+    // Existing proof roles are already authenticated by the fixed-role walk.
+    // Only declarations beyond that graph need the administrative extension.
+    if (registryChanged || packageAdditions.some(name => baseline.entries.has(name) && !reachable.has(name)))
+      for (const authority of sourceAuthorities) await sourceRoles(authority);
     if (registryChanged) {
       const previous = registryEntries(await json(ADMINISTRATIVE_REGISTRY, baseline));
       needSelected(administrative && administrative.length > previous.length && same(previous, administrative.slice(0, previous.length)) &&

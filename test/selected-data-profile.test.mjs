@@ -1303,3 +1303,71 @@ for(const changed of [false,true])test('retained package refuses '+(changed?'cha
   }
   assert.equal(await f.run(),null);
 });
+
+// Actual already accepted SOURCE000 proof bytes; only the enclosing selection
+// and native locator are synthetic. This tests routing, not source/native science.
+function legacySourceProofFixture() {
+  return fixture({mutate:f=>{
+    const stem='coordination/engineering/melanesia363-additive-delivery-20261010/';
+    const names=['source-requests/000-full-component-request.json','source-qualified/000/facts.json',
+      'source-qualified/000/publication.json','source-qualified/000/inventory.jsonl.gz',
+      'native-source-operating/source000-derived-operating-view.json'];
+    const pins=names.map(name=>{
+      const bytes=execFileSync('git',['show','36ce805d29e1cfd1da6f95d1aa0f4d20ab2ab92c:'+stem+name],
+        {maxBuffer:32*1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
+      return {...f.put(stem+name,bytes,true),commit:'36ce805d29e1cfd1da6f95d1aa0f4d20ab2ab92c'};
+    });
+    const [source_request,source_facts,publication,inventory,operating]=pins;
+    assert.equal(source_request.sha256,'6a15237137046e136e198286831d719087a78c2c6320f82235891f2a68097f1d');
+    const issued=JSON.parse(f.blobs.get(source_request.git_blob_oid));
+    assert.equal(issued.source_rule.geometry_scope,'full-component');
+    assert.equal(issued.source_rule.registry_path,undefined);
+    const native_request=f.put(prefix+'native/request.json',{additive:{inputs:[publication,inventory,operating],
+      publication_path:publication.path,inventory_path:inventory.path,operating_path:operating.path}});
+    const original_pins={native_request,source_request,source_facts,
+      ...Object.fromEntries(['ledger','native_facts','native_manifest'].map(name=>[name,f.leaf('original/'+name+'.json')]))};
+    const native_proof={publication:f.leaf('native/publication.json'),inventory:f.leaf('native/inventory.jsonl.gz'),
+      operating:f.leaf('native/operating.json'),assets:[f.leaf('native/base-native-manifest.json')]};
+    const source_authority=f.put(prefix+'authority-binding.json',
+      {version:1,kind:'original-issued-rule-source-custody-v1',original_pins,native_proof});
+    const rule_preimage=f.leaf('original-rule.json');
+    f.registryBody.entries.push({authority_sha256:source_authority.sha256,policy_id:'retained-source-literal-additions',
+      policy_version:1,source_authority,rule_preimage,rule_sha256:rule_preimage.sha256});
+    refreshPins(f);f.definition.inputs.push(...pins.map(pin=>pin.path));f.put('.github/package-inputs.json',f.definition);
+    f.legacyPins=pins;
+  }});
+}
+test('legacy SOURCE000 proof declarations use exact reachable roles without inventing registry custody',async()=>{
+  const f=legacySourceProofFixture(),stats={};
+  assert.equal((await f.run({metadataDiagnostics:stats}))?.test_selection,'selected-data',stats.failure);
+  assert(!f.files.some(row=>row.filename===administrativePath));
+  assert(f.legacyPins.every(pin=>f.baseline.entries.has(pin.path)&&f.definition.inputs.includes(pin.path)));
+  const gate=gateFixture(legacySourceProofFixture());
+  assert.equal((await gate.select()).test_selection,'selected-data');
+});
+for(const [label,mutate] of Object.entries({
+  'changed retained bytes':f=>{f.baseline.entries.get(f.legacyPins[0].path).sha='0'.repeat(40);},
+  'changed retained mode':f=>{f.baseline.entries.get(f.legacyPins[0].path).mode='100755';},
+  'missing retained role':f=>{f.authored.entries.delete(f.legacyPins[1].path);},
+  'unbound retained declaration':f=>{
+    const name='coordination/engineering/prior/unbound.json';f.put(name,{},true);
+    f.definition.inputs.push(name);f.put('.github/package-inputs.json',f.definition);
+  },
+  'new administrative registry':f=>{
+    f.put(administrativePath,{version:1,kind:'accepted-administrative-handoffs-v1',entries:[]},true);
+    f.files.push({filename:administrativePath,status:'modified'});
+  },
+  'code change':f=>{f.put('src/attributes.js','// changed');f.files.push({filename:'src/attributes.js',status:'modified'});},
+}))test('legacy proof declarations retain full fallback for '+label,async()=>{
+  const f=legacySourceProofFixture();mutate(f);assert.equal(await f.run(),null);
+});
+
+test('unreachable accepted SOURCE declarations still require administrative custody without a registry edit',async()=>{
+  for(const invalid of [false,true]) {
+    const f=retainedSourceFixture({mutate:x=>{if(invalid)x.issued.source_rule.registry_path='coordination/engineering/foreign/registry.json';}});
+    f.baseline.entries.set(administrativePath,{...f.authored.entries.get(administrativePath)});
+    f.files.splice(f.files.findIndex(row=>row.filename===administrativePath),1);
+    const stats={},result=await f.run({metadataDiagnostics:stats});
+    if(invalid)assert.equal(result,null);else assert.equal(result?.test_selection,'selected-data',stats.failure);
+  }
+});
