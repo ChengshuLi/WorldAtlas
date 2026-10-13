@@ -93,8 +93,8 @@ export function requireActualAssembly(child,receiptRaw,sourceHead,originalRunId)
   need(child?.status===0&&!child.error&&child.signal===null,'Successful actual production assembly required');
   const lines=String(child.stdout).trim().split('\n');
   const result=JSON.parse(lines.at(-1));
-  need(result.assembled===true&&result.receipt_sha256===sha(receiptRaw)&&result.proof?.comparison,
-    'Successful child result must bind actual receipt and completed comparison');
+  need(result.assembled===true&&result.receipt_sha256===sha(receiptRaw),
+    'Successful child result must bind actual receipt');
   const receipt=JSON.parse(receiptRaw);
   need(receipt.kind==='cloudflare'&&receipt.preflight?.passed===true&&
     Array.isArray(receipt.preflight.errors)&&receipt.preflight.errors.length===0&&receipt.preflight.inputs?.head===sourceHead&&
@@ -127,15 +127,6 @@ export async function retainProofManifest({api,origin,directory,extractor,expect
   validatePackageOutputManifest(JSON.parse(raw));fs.unlinkSync(archive);return {file:manifest,raw};
 }
 
-export function retainSuccessfulChildProof(sourceRoot,expectedProof){
-  const childProof=path.join(sourceRoot,'.cache/selected-package-proof.json');
-  const childProofStat=fs.lstatSync(childProof);
-  need(childProofStat.isFile()&&!childProofStat.isSymbolicLink(),'Ordinary freshly published child proof required');
-  const childProofRaw=fs.readFileSync(childProof);
-  need(sameOrigin(JSON.parse(childProofRaw),expectedProof), 'Published child proof differs from successful CLI result');
-  fs.writeFileSync(path.join(sourceRoot,'.cache/selected-package-child-proof.json'),childProofRaw,{flag:'wx'});
-  fs.unlinkSync(childProof);
-}
 
 async function main(){
   need(process.env.GITHUB_REPOSITORY===repository&&process.env.GITHUB_REF==='refs/heads/main'&&
@@ -163,9 +154,9 @@ async function main(){
   need(startup.kind==='authenticated-package-startup-closure'&&startup.trusted_base===frozen.accepted_commit&&
     startup.entry_point==='scripts/assemble-selected-package.mjs'&&startup.files.includes(startup.entry_point),'Frozen startup authentication missing');
   const readback=await loadSelectedPackageReadback({api,repo:repository,runId:Number(input.readback_run_id),
-    attempt:Number(input.readback_attempt),expectedHead:input.source_head});
-  // Invoke the genuine production CLI. It must finish successfully, including
-  // its exhaustive comparison. Independently observe its output below.
+    attempt:Number(input.readback_attempt),expectedHead:input.source_head,expectedPullRequest:Number(input.source_pull_request)});
+  // Invoke the genuine production CLI. It must finish actual assembly successfully.
+  // This observer independently authenticates the reference and compares output.
   const receiptPath=prepareFreshAssemblyScratch(sourceRoot);
   const child=spawnSync('python3',['-I','-S','-B',path.join(proofRoot,'scripts/selected-package-bootstrap.py')],{
     cwd:sourceRoot,env:{...cleanEnvironment(),GH_TOKEN:token,SELECTED_PACKAGE_TRUSTED_BASE:frozen.accepted_commit,
@@ -197,7 +188,6 @@ async function main(){
       originalHead,currentHead:input.source_head,originalManifest:original.file});
     const implementationFiles=['scripts/run-selected-package-proof.mjs','scripts/compare-selected-package-output.mjs',
       'scripts/selected-package-bootstrap.py','scripts/selected-package-readback-proof.mjs','scripts/package-output-artifact.mjs','scripts/extract-package-output.py'];
-    retainSuccessfulChildProof(sourceRoot,committed.frozen_cli.result.proof);
     const proof={version:2,kind:'separate-observer-accepted-package-equivalence',frozen_programme:frozen,
       proof_implementation:{commit:process.env.GITHUB_SHA,tree:git(proofRoot,'rev-parse','HEAD^{tree}'),
         files:implementationFiles.map(name=>{const raw=fs.readFileSync(path.join(proofRoot,name));return {path:name,bytes:raw.length,sha256:sha(raw)};})},

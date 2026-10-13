@@ -8,7 +8,6 @@ import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {processingAllowance} from './check-effective-geographic-regression.mjs';
-import {loadSelectedPackageReadback} from './selected-package-readback-proof.mjs';
 import {githubAPI, githubPages} from './issue-claim-contract.mjs';
 import {integrationTree} from './integration-profile.mjs';
 import {loadPackageInputs, readPackageInputs, containsPackagePath} from './package-inputs.mjs';
@@ -121,7 +120,7 @@ function currentSource(){
     files:committedPackageInputs(root,definition),programme:committedPackageProgramme(root)};
 }
 
-export async function assembleSelectedPackage({api,repo,expectedHead,originalRunId,proofReadback}){
+export async function assembleSelectedPackage({api,repo,expectedHead,originalRunId}){
   const started=performance.now(),current=currentSource();need(current.head===expectedHead,'Actual selected head changed');
   const found=await findOriginalPackage({api,repo,current,originalRunId});if(!found)return {assembled:false,reason:'No applicable retained original output in bounded recent-result search'};
   await verifyPackageDependencies(path.join(root,'node_modules'));
@@ -174,7 +173,7 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
     admitAssemblyAtlasMetadata(atlasPin.bytes);
     const atlas=JSON.parse(fs.readFileSync(atlasPath));need(atlas.additiveRelease?.base_reference,'Original additive base descriptor missing');
     const execution=issuePackageAssemblyExecution({original,source:root,stage,executingRoot:root,
-      inheritedMetadata:[current,found.source,manifest,atlas,{runtime,...(proofReadback?{proofReadback}:{})}]});
+      inheritedMetadata:[current,found.source,manifest,atlas,{runtime}]});
     const publication=await preparePackageSelectedAdditive({root:stage,originalPackage:original,assemblyExecution:execution,
       selectedGrid:{sha256:current.selection.sha256},geographicRelease:atlas.additiveRelease.base_reference});
     need(publication,'Genuine current additive publication required');
@@ -231,29 +230,27 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
       throw error;
     }
     committed=true;
-    let proof;
-    if(proofReadback){
-      need(!same(manifest.source.selection.additive_release,current.selection.additive_release)&&
-        oldAssets.some((pin,index)=>pin.sha256!==publication.additiveRelease[['base_manifest','ledger','owner_roster','patch'][index]].sha256),
-        'Changed-selection proof requires genuinely different selected output');
-      // Import only the two original source metadata blobs needed by the
-      // comparison, using ordinary filtered Git acquisition, not a base checkout.
-      try{git(['cat-file','-e',manifest.source.head+'^{commit}']);}
-      catch{git(['fetch','--quiet','--depth=1','--filter=blob:none','--no-tags','--no-write-fetch-head','origin',manifest.source.head]);}
-      for(const name of ['.github/package-inputs.json','data/ownership-selection.json'])
-        execFileSync('git',['-C',root,'show',manifest.source.head+':'+name],{stdio:'pipe',maxBuffer:8*1048576,
-          env:{...process.env,GIT_NO_LAZY_FETCH:'0',GIT_TERMINAL_PROMPT:'0',GIT_NO_REPLACE_OBJECTS:'1'}});
-      const {compareSelectedPackageReadback}=await import('./compare-selected-package-output.mjs');
-      proof={reference:proofReadback.origin,comparison:compareSelectedPackageReadback({assembled:root,readback:proofReadback.report,
-        originalHead:manifest.source.head,currentHead:current.head,sourceRoot:root,originalManifest:manifestFile})};
-      fs.writeFileSync(path.join(root,'.cache/selected-package-proof.json'),JSON.stringify(proof,null,2)+'\n',{flag:'wx'});
-    }
-    return {assembled:true,receipt_sha256:hash(receiptRaw),origin:found.origin,...(proof?{proof}:{}),elapsed_seconds:assembly.elapsed_seconds,
+    return {assembled:true,receipt_sha256:hash(receiptRaw),origin:found.origin,elapsed_seconds:assembly.elapsed_seconds,
       reused_output_files:manifest.output.files.length-mutable.size,current_additive_assets:4};
   }finally{
     if(!preserveScratch)try{await fsp.rm(scratch,{recursive:true,force:true});}
     catch(error){if(!committed)throw error;console.warn('Committed selected output is valid; temporary output cleanup remains pending');}
   }
+}
+
+// Production assembly binds source and original output custody. Reference-run
+// authentication and output equivalence belong to the independent observer.
+export function packageAssemblyInvocation(event, environment = process.env) {
+  const proofMode=environment.GITHUB_EVENT_NAME==='workflow_dispatch'&&environment.GITHUB_WORKFLOW==='Selected package equivalence proof';
+  const expectedHead=proofMode?event.inputs?.source_head:event.pull_request?.head?.sha;
+  let originalRunId;
+  if(proofMode){
+    need(/^[a-f0-9]{40}$/.test(expectedHead??''),'Exact proof source head required');
+    need(/^[1-9]\d*$/.test(event.inputs?.original_run_id??'')&&Number.isSafeInteger(Number(event.inputs.original_run_id)),
+      'Exact original package run identity required');
+    originalRunId=Number(event.inputs.original_run_id);
+  }
+  return {proofMode,expectedHead,originalRunId};
 }
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
@@ -262,18 +259,9 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
     need(process.argv.length===2&&process.env.GH_TOKEN&&process.env.GITHUB_REPOSITORY&&process.env.GITHUB_EVENT_PATH,'Trusted selected-data CI invocation required');
     const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8'));
     const api=githubAPI(process.env.GH_TOKEN,{conditionalReads:false});delete process.env.GH_TOKEN;delete process.env.GITHUB_TOKEN;
-    const proofMode=process.env.GITHUB_EVENT_NAME==='workflow_dispatch'&&process.env.GITHUB_WORKFLOW==='Selected package equivalence proof';
-    let proofReadback,originalRunId;
-    const expectedHead=proofMode?event.inputs?.source_head:event.pull_request?.head?.sha;
-    if(proofMode){
-      need(/^[a-f0-9]{40}$/.test(expectedHead??''),'Exact proof source head required');
-      for(const key of ['original_run_id','readback_run_id','readback_attempt'])need(/^[1-9]\d*$/.test(event.inputs?.[key]??''),'Exact proof run identity required');
-      originalRunId=Number(event.inputs.original_run_id);
-      proofReadback=await loadSelectedPackageReadback({api,repo:process.env.GITHUB_REPOSITORY,
-        runId:Number(event.inputs.readback_run_id),attempt:Number(event.inputs.readback_attempt),expectedHead});
-    }
-    result=await assembleSelectedPackage({api,repo:process.env.GITHUB_REPOSITORY,expectedHead,originalRunId,proofReadback});
-    if(proofMode)need(result.assembled&&result.proof,'Actual proof assembly required; fallback cannot establish equivalence');
+    const {proofMode,expectedHead,originalRunId}=packageAssemblyInvocation(event);
+    result=await assembleSelectedPackage({api,repo:process.env.GITHUB_REPOSITORY,expectedHead,originalRunId});
+    if(proofMode)need(result.assembled,'Actual assembly required; fallback cannot establish equivalence');
   }catch(error){if(process.env.GITHUB_EVENT_NAME==='workflow_dispatch')process.exitCode=1;result={assembled:false,reason:String(error.message).replace(/https?:\/\/\S+/g,'[delivery address]').slice(0,600)};}
   console.log(JSON.stringify(result));
   if(process.env.GITHUB_OUTPUT)fs.appendFileSync(process.env.GITHUB_OUTPUT,`assembled=${result.assembled}\nassembly_sha256=${result.receipt_sha256??''}\n`);

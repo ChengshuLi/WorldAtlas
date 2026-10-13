@@ -7,7 +7,7 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync,spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {resolveFrozenPackageProgramme, requireSeparatedProofRoots,
-  requireActualAssembly, retainProofManifest, retainSuccessfulChildProof, prepareFreshAssemblyScratch, recordFrozenChildDiagnostic} from '../scripts/run-selected-package-proof.mjs';
+  requireActualAssembly, retainProofManifest, prepareFreshAssemblyScratch, recordFrozenChildDiagnostic} from '../scripts/run-selected-package-proof.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 const FROZEN_REVIEWED_HEAD = '9'.repeat(40);
@@ -99,12 +99,12 @@ function assembly() {
       original_base_context_retained: true, base_restoration_invoked: false, invariant_build_invoked: false,
       original_manifest_sha256: 'e'.repeat(64), origin}};
   const raw = Buffer.from(JSON.stringify(receipt) + '\n');
-  const result = {assembled:true,receipt_sha256:hash(raw),origin,proof:{comparison:{equivalent:true}}};
+  const result = {assembled:true,receipt_sha256:hash(raw),origin};
   return {receipt, raw, child: {status: 0, signal: null, error: undefined,
     stdout: 'Actual production CLI progress\n' + JSON.stringify(result) + '\n'}};
 }
 
-test('successful actual production child binds its fresh receipt and comparison', () => {
+test('successful actual production child binds its fresh receipt without owning reference comparison', () => {
   const f = assembly(), result = requireActualAssembly(f.child, f.raw, sourceHead, 17);
   assert.deepEqual(result.receipt, f.receipt); assert.equal(result.receipt_sha256, hash(f.raw));
   assert.deepEqual(result.origin, f.receipt.assembly.origin);
@@ -403,15 +403,10 @@ test('requested delivery identity is general but must remain an exact positive p
   for(const pullRequest of [undefined,0,-1,1.5,'1802',Number.MAX_SAFE_INTEGER+1])
     await assert.rejects(resolveFrozenPackageProgramme({api,sourceHead,pullRequest}),/Exact accepted/);
 });
-test('successful child proof is retained separately only when ordinary and exact',t=>{
-  const proof={reference:{run_id:17},comparison:{equivalent:true}};
-  for(const kind of ['valid','altered','malformed','link','collision']){
-    const root=temporary(t);prepareFreshAssemblyScratch(root);
-    const current=path.join(root,'.cache/selected-package-proof.json'),retained=path.join(root,'.cache/selected-package-child-proof.json');
-    if(kind==='link'){fs.writeFileSync(path.join(root,'elsewhere'),JSON.stringify(proof));fs.symlinkSync(path.join(root,'elsewhere'),current);}
-    else fs.writeFileSync(current,kind==='malformed'?'{bad':JSON.stringify(kind==='altered'?{different:true}:proof));
-    if(kind==='collision')fs.writeFileSync(retained,'sentinel');
-    if(kind==='valid'){retainSuccessfulChildProof(root,proof);assert.deepEqual(JSON.parse(fs.readFileSync(retained)),proof);assert.equal(fs.existsSync(current),false);}
-    else {assert.throws(()=>retainSuccessfulChildProof(root,proof));assert.ok(fs.lstatSync(current));if(kind==='collision')assert.equal(fs.readFileSync(retained,'utf8'),'sentinel');}
-  }
+test('current observer owns explicit accepted reference authority and final comparison',()=>{
+  const source=fs.readFileSync(new URL('../scripts/run-selected-package-proof.mjs',import.meta.url),'utf8');
+  assert.match(source,/expectedPullRequest:Number\(input.source_pull_request\)/);
+  assert.doesNotMatch(source,/retainSuccessfulChildProof|result\.proof/);
+  assert.ok(source.indexOf('const readback=await loadSelectedPackageReadback(')<source.indexOf('const child=spawnSync('));
+  assert.ok(source.indexOf('const comparison=compareSelectedPackageReadback(')>source.indexOf('const committed=requireActualAssembly('));
 });
