@@ -129,8 +129,8 @@ test('tree completeness, duplicate identities and immutable commit identity are 
 test('failed/skipped/missing/ambiguous original geography never becomes a reusable execution', async () => {
   for (const mutate of [
     f => {f.job.conclusion = 'failure';}, f => {f.job.status = 'in_progress';},
-    f => {f.job.steps[2].conclusion = 'skipped';}, f => {f.job.steps.pop();},
-    f => {f.job.steps.push({...f.job.steps[2]});}, f => {f.jobs.push(structuredClone(f.job));},
+    f => {f.job.conclusion = 'skipped';}, f => {f.job.status = 'in_progress';},
+    f => {f.jobs.push(structuredClone(f.job));},
     f => {f.jobs = [];}, f => {f.job.head_sha = H;}, f => {f.job.run_attempt = 2;},
     f => {f.run.head_sha = H;}, f => {f.run.event = 'push';}, f => {f.run.path = 'foreign.yml';},
     f => {f.run.repository.full_name = 'foreign/repo';}, f => {f.run.pull_requests = [{number: 99}];},
@@ -174,7 +174,10 @@ test('workflow keeps source report upload separate and never advertises reused e
   assert.match(geography, /path: geography-reuse\.json/);
   assert.match(geography, /name: reused-geography-/);
   const f = fixture(); f.job.steps[2].conclusion = 'skipped';
-  assert.equal(successfulGeographyJob([f.job]), null, 'new reused job grants no transferable original geography producer authority');
+  assert.equal(successfulGeographyJob([f.job])?.id, f.job.id, 'job success only discovers a possible producer');
+  const reuseLog = Buffer.from(JSON.stringify({status: 'reused-original', original_head: P, original_run: 101, science_reexecuted: false}));
+  assert.throws(() => readGeographyJobReceipt(reuseLog, {number: 7, runAttempt: 1}), /receipt/,
+    'successful reuse-only job lacks the original report/upload receipt and cannot mint producer authority');
   assert.equal(ordinaryOriginalGeography(f.report, {baseline: B, head: P}), true);
 });
 

@@ -4,7 +4,7 @@ import {deflateRawSync, crc32} from 'node:zlib';
 import {githubAPI} from '../scripts/issue-claim-contract.mjs';
 import {requestAccounting} from '../scripts/github-quota.mjs';
 import {readReportArchive, loadGeographicReport, reportHash, prepareGeographyProof,
-  readGeographyJobReceipt, validateGeographyProof} from '../scripts/geographic-report-artifact.mjs';
+  readGeographyJobReceipt, validateGeographyProof, geographicReportProducts, checkGeographicReport} from '../scripts/geographic-report-artifact.mjs';
 
 // Real single-file ZIP records, with both archive formats used by uploaders.
 function archive(raw, {method = 8, descriptor = false, name = 'geography-check.json', attributes = 0} = {}) {
@@ -247,7 +247,7 @@ test('carried geography authenticates only its exact origin metadata, successful
   assert(f.metadata.some(x => x.endsWith('/jobs/55/logs')));
   assert(!f.metadata.some(x => /attempts\/(?:0|2|3)\//.test(x)));
 });
-test('origin metadata, job steps and actual originating log cannot be substituted', async () => {
+test('origin metadata, successful job and actual originating log cannot be substituted', async () => {
   for (const mutate of [
     f => {f.run.id++;}, f => {f.run.run_attempt++;}, f => {f.run.head_sha = 'f'.repeat(40);},
     f => {f.run.repository.full_name = 'foreign/repo';}, f => {f.run.head_repository.full_name = 'foreign/repo';},
@@ -255,8 +255,8 @@ test('origin metadata, job steps and actual originating log cannot be substitute
     f => {f.run.pull_requests[0].head.sha = 'f'.repeat(40);}, f => {f.run.pull_requests[0].number++;},
     f => {f.run.status = 'in_progress';}, f => {delete f.run.pull_requests;},
     f => {f.jobs[0].run_id++;}, f => {f.jobs[0].run_attempt++;}, f => {f.jobs[0].head_sha = 'f'.repeat(40);},
-    f => {f.jobs[0].conclusion = 'failure';}, f => {f.jobs[0].steps.pop();},
-    f => {f.jobs[0].steps[2].conclusion = 'skipped';}, f => {f.jobs.push(structuredClone(f.jobs[0]));},
+    f => {f.jobs[0].conclusion = 'failure';}, f => {f.jobs[0].status = 'in_progress';},
+    f => {f.jobs[0].conclusion = 'skipped';}, f => {f.jobs[0].conclusion = 'cancelled';}, f => {f.jobs.push(structuredClone(f.jobs[0]));},
     f => {f.jobs = [];},
     f => {f.originLog = Buffer.from(f.log.toString().replace('Artifact ID is 12', 'Artifact ID is 13'));},
     f => {f.originLog = Buffer.from(f.log.toString().replace(digest, 'f'.repeat(64)));},
@@ -314,4 +314,94 @@ test('combined geography receipt rejects foreign tree, stale parents and relabel
   }
   const f = combinedTransport(); f.log = Buffer.from(f.log.toString().replace('"candidate_commit":"' + f.commit.sha + '"', '"candidate_commit":"invalid"'));
   assert.throws(() => readGeographyJobReceipt(f.log, f.artifact.name), /candidate receipt/);
+});
+
+
+test('carried producer keeps original custody when step projections are absent or stale', async () => {
+  for (const steps of [undefined, [], [{name: 'old checker label', status: 'in_progress', conclusion: null}]]) {
+    const f = carriedTransport(); f.jobs[0].steps = steps;
+    const result = await prepareGeographyProof(f.options);
+    assert.equal(result.source.job_id, 55); assert.equal(result.source.current_job_id, 66);
+    assert.equal(result.source.run_attempt, 1); assert.equal(result.source.report_sha256, digest);
+  }
+});
+
+function freshQueueTransport(changeReport) {
+  const f = combinedTransport(changeReport), original = f.options.api;
+  const oldName = f.artifact.name, name = 'geography-fixture-request-12345678-1';
+  f.artifact.name = name;
+  f.artifact.workflow_run.head_sha = 'e'.repeat(40);
+  f.log = Buffer.from(f.log.toString().replace(oldName, name));
+  f.run = {id: 123, run_attempt: 1, head_sha: 'e'.repeat(40), event: 'workflow_dispatch',
+    path: '.github/workflows/worker-merge.yml', repository: {full_name: 'owner/repo'},
+    head_repository: {full_name: 'owner/repo'}, status: 'in_progress'};
+  f.jobs = [{id: 55, run_id: 123, run_attempt: 1, head_sha: f.run.head_sha,
+    name: 'geography', status: 'completed', conclusion: 'success', steps: []}];
+  f.metadata = [];
+  const api = async route => {
+    f.metadata.push(route);
+    if (route.endsWith('/attempts/1')) return structuredClone(f.run);
+    if (route.includes('/attempts/1/jobs')) return {jobs: structuredClone(f.jobs)};
+    return original(route);
+  };
+  api.jobLogRedirect = async route => {
+    f.metadata.push(route);
+    assert.equal(route, '/repos/owner/repo/actions/jobs/55/logs');
+    return original.jobLogRedirect(route);
+  };
+  api.artifactRedirect = original.artifactRedirect;
+  f.loadOptions = {api, repo: 'owner/repo', runId: 123, artifactName: name,
+    expectedHash: JSON.parse(f.log.toString().split('\n')[0]).report_sha256,
+    token: f.options.token, fetchImpl: f.options.fetchImpl,
+    fresh: {run_attempt: 1, workflow_head: f.run.head_sha, head: f.options.head,
+      baseline: f.options.baseline, candidate_commit: f.commit.sha, request_id: 'fixture-request-12345678'}};
+  return f;
+}
+
+for (const [label, steps] of [['missing', undefined], ['empty', []], ['stale', [
+  {name: 'Check exact combined geography with trusted baseline code', status: 'in_progress', conclusion: null},
+  {name: 'Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02', status: 'pending', conclusion: null}
+]], ['renamed', [{name: 'renamed checker', status: 'completed', conclusion: 'success'}]]]) {
+  test(`fresh queue loader authenticates successful producer with ${label} step projection`, async () => {
+    const f = freshQueueTransport(); f.jobs[0].steps = steps;
+    const result = await loadGeographicReport(f.loadOptions);
+    checkGeographicReport(result, f.options.baseline, f.commit.sha);
+    const source = geographicReportProducts(result).source;
+    assert.equal(source.job_id, 55); assert.equal(source.run_id, 123); assert.equal(source.run_attempt, 1);
+    assert.equal(source.workflow_head, f.run.head_sha); assert.equal(source.head, f.options.head);
+    assert.equal(source.tree, f.commit.tree.sha); assert.equal(source.candidate_commit, f.commit.sha);
+    assert.equal(source.artifact_digest, reportHash(f.zip));
+    assert(f.metadata.some(route => route.endsWith('/jobs/55/logs')));
+  });
+}
+
+test('fresh queue loader rejects foreign or unsuccessful producers and altered receipt custody with empty steps', async () => {
+  for (const mutate of [
+    f => {f.run.id++;}, f => {f.run.run_attempt++;}, f => {f.run.head_sha = 'f'.repeat(40);},
+    f => {f.run.path = '.github/workflows/other.yml';}, f => {f.run.event = 'push';},
+    f => {f.run.repository.full_name = 'foreign/repo';}, f => {f.run.head_repository.full_name = 'foreign/repo';},
+    f => {f.jobs[0].id = 0;}, f => {f.jobs[0].run_id++;}, f => {f.jobs[0].run_attempt++;},
+    f => {f.jobs[0].head_sha = 'f'.repeat(40);}, f => {f.jobs[0].status = 'in_progress';},
+    ...['failure', 'cancelled', 'skipped'].map(conclusion => f => {f.jobs[0].conclusion = conclusion;}),
+    f => {f.jobs.push(structuredClone(f.jobs[0]));}, f => {f.jobs = [];},
+    f => {f.log = Buffer.from('no upload receipt');},
+    f => {f.log = Buffer.from(f.log.toString().replace('Artifact ID is 12', 'Artifact ID is 13'));},
+    f => {f.loadOptions.expectedHash = 'f'.repeat(64);},
+    f => {f.artifact.workflow_run.id++;}, f => {f.artifact.workflow_run.head_sha = 'f'.repeat(40);},
+    f => {f.artifact.digest = `sha256:${'f'.repeat(64)}`;},
+    f => {f.zip = archive(Buffer.from('{}'));}, f => {f.commit.sha = 'f'.repeat(40);},
+    f => {f.commit.tree.sha = 'invalid';}
+  ]) {
+    const f = freshQueueTransport(); mutate(f);
+    await assert.rejects(loadGeographicReport(f.loadOptions));
+  }
+});
+
+test('fresh queue authenticated report still requires exact baseline, candidate and passed scientific gate', async () => {
+  for (const changeReport of [r => ({...r, baseline_commit: 'f'.repeat(40)}),
+    r => ({...r, trusted_code_commit: 'f'.repeat(40)}), r => ({...r, candidate_commit: 'f'.repeat(40)}),
+    r => ({...r, gate_status: 'failed'}), r => ({...r, candidate_code_executed: true})]) {
+    const f = freshQueueTransport(changeReport), result = await loadGeographicReport(f.loadOptions);
+    assert.throws(() => checkGeographicReport(result, f.options.baseline, f.commit.sha));
+  }
 });

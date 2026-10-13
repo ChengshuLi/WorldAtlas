@@ -898,7 +898,7 @@ test('reused geography never accepts drift, unresolved science or failed current
     f => {f.source.artifact_name = 'proposed-geography-24-1';},
     f => {f.report.candidate_commit = f.candidate;}, f => {f.report.trusted_code_commit = 'd'.repeat(40);},
     f => {f.report.status = 'regressions-found';}, f => {f.report.gate_status = 'blocked';},
-    f => {f.proofJobs.find(job => job.name === 'geography').steps[2].conclusion = 'skipped';},
+    f => {f.proofJobs.find(job => job.name === 'geography').conclusion = 'skipped';},
     f => {f.proofRun.run_attempt++;}, f => {f.checks = 'failure';},
     f => {f.issue.state = 'closed';}
   ]) {
@@ -912,7 +912,7 @@ test('final geography source is revalidated during final validation before any w
   f.api = async (route, ...args) => {
     const result = await original(route, ...args);
     if (route.endsWith('/actions/runs/44') && f.proofReads === 1)
-      f.proofJobs.find(job => job.name === 'geography').steps.pop();
+      f.proofJobs.find(job => job.name === 'geography').id = 0;
     return result;
   };
   await assert.rejects(f.reuse(), /Original geographic proof/); assert.equal(f.writes.length, 0);
@@ -1084,7 +1084,7 @@ test('actual carried prepare rejects missing, multiple, future and foreign recei
     f => {f.log = Buffer.from(f.log.toString().replace('proposed-geography-23-1', 'proposed-geography-23-3'));},
     f => {f.log = Buffer.from(f.log.toString().replace('proposed-geography-23-1', 'proposed-geography-24-1'));},
     f => {f.originLog = Buffer.from(f.log.toString().replace('Artifact ID is 77', 'Artifact ID is 78'));},
-    f => {f.originJobs[0].steps.pop();}, f => {f.originRun.head_sha = 'e'.repeat(40);},
+    f => {f.originJobs[0].status = 'in_progress';}, f => {f.originRun.head_sha = 'e'.repeat(40);},
     f => {f.publishReport({...f.report, baseline_commit: 'e'.repeat(40)});},
     f => {f.publishReport({...f.report, trusted_code_commit: 'e'.repeat(40)});},
     f => {f.publishReport({...f.report, candidate_commit: f.candidate});}
@@ -1106,7 +1106,7 @@ test('actual final carried reuse rejects identity, source, artifact and report s
     f => {f.originJobs[0].run_attempt++;}, f => {f.originJobs[0].head_sha = 'e'.repeat(40);},
     f => {f.originRun.id++;}, f => {f.originRun.run_attempt++;},
     f => {f.originRun.head_sha = 'e'.repeat(40);},
-    f => {f.originJobs[0].steps[2].conclusion = 'failure';},
+    f => {f.originJobs[0].conclusion = 'failure';},
     f => {f.proofJobs.find(job => job.name === 'geography').conclusion = 'failure';},
     f => {f.proofRun.run_attempt++;}, f => {f.artifact.expired = true;},
     f => {f.artifact.id++;}, f => {f.artifact.workflow_run.head_sha = 'e'.repeat(40);},

@@ -157,12 +157,12 @@ test('fake bot or nonaccepted receipt produces no checkpoint authority', async (
     const f=acceptedFixture();mutate(f);assert.equal((await acquireAcceptedCheckpoint(f.options)).available,false);
   }
 });
-test('actual merge, origin workflow/head/attempt, job steps, artifact identity and tree cannot be substituted', async () => {
+test('actual merge, origin workflow/head/attempt, successful job, artifact identity and tree cannot be substituted', async () => {
   for(const mutate of [f=>f.pr.merged=false,f=>f.pr.head.sha=baseline,f=>f.pr.merge_commit_sha=baseline,
     f=>f.pr.number=8,f=>f.receipt.reviewed_head=baseline,f=>f.tree=baseline,
     f=>f.run.head_sha=head,f=>f.run.path='.github/workflows/merge-integration-checks.yml',
     f=>f.run.event='pull_request',f=>f.run.run_attempt=1,f=>f.job.head_sha=head,f=>f.job.id=99,
-    f=>f.job.steps.push(f.job.steps[0]),f=>f.job.steps[2].conclusion='skipped',
+    f=>f.job.status='in_progress',f=>f.job.conclusion='skipped',
     f=>f.artifact.id=1,f=>f.artifact.digest='sha256:'+'0'.repeat(64)]) {
     const f=acceptedFixture();mutate(f);await assert.rejects(acquireAcceptedCheckpoint(f.options));
   }

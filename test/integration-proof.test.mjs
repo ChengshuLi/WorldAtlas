@@ -35,7 +35,7 @@ test('successful full and focused workflows prove exact tree and pinned current 
     assert.deepEqual(await integrationProof({...f.options,runId:12,runAttempt:1}),proof);
   }
 });
-test('geography reuse requires one actual successful producer and every trusted step', async () => {
+test('geography reuse requires one actual successful producer, independently of step projections', async () => {
   const geography = {id: 44, name: 'geography', status: 'completed', conclusion: 'success', steps: [
     'Checkout trusted geographic checker', 'Install trusted geographic dependencies',
     'Check proposed geography with trusted baseline code',
@@ -44,10 +44,14 @@ test('geography reuse requires one actual successful producer and every trusted 
   const f = fixture(); f.jobs.push(geography);
   assert.equal((await integrationProof(f.options)).geography_job_id, 44);
   for (const mutate of [job => {job.id = 0;}, job => {job.status = 'in_progress';},
-    job => {job.conclusion = 'failure';}, job => {job.steps.pop();},
-    job => {job.steps[2].conclusion = 'skipped';}, job => {job.steps.push({...job.steps[2]});}]) {
+    job => {job.conclusion = 'failure';}, job => {job.conclusion = 'skipped';},
+    job => {job.conclusion = 'cancelled';}, job => {job.name = 'other';}]) {
     const job = structuredClone(geography); mutate(job); assert.equal(successfulGeographyJob([job]), null);
   }
+  for (const steps of [undefined, [], [{name: 'old display name', status: 'in_progress', conclusion: null}]]) {
+    assert.equal(successfulGeographyJob([{...geography, steps}])?.id, 44);
+  }
+  assert.equal(successfulGeographyJob([geography], '.github/workflows/foreign.yml'), null);
   assert.equal(successfulGeographyJob([geography, structuredClone(geography)]), null);
   f.jobs.push(structuredClone(geography));
   assert.equal((await integrationProof(f.options)).geography_job_id, undefined,
