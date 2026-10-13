@@ -311,3 +311,54 @@ test('declaration accounting preserves actual observations and every nondeclarat
   const changedDecoded=structuredClone(current);changedDecoded.consumed_input_bytes.decoded++;
   assert.notDeepEqual(normalizeDeclarationReadAccounting(changedDecoded,original,b,a).normalized,original);
 });
+
+test('versioned runtime evidence requires complete bound inventories before summary equality',async t=>{
+  const {installedPackageDifferences,validateInstalledPackageIdentity}=await import('../scripts/package-output-artifact.mjs');
+  const f=fixture(t),identity=installedPackageIdentity(f.root);
+  assert.equal(identity.version,2);assert.equal(validateInstalledPackageIdentity(identity),identity);
+  assert.deepEqual(installedPackageDifferences(identity,structuredClone(identity)),[]);
+  const legacy={node:identity.node,dependencies:{files:identity.dependencies.files,sha256:identity.dependencies.sha256},python:null};
+  assert.equal(installedPackageDifferences(legacy,identity)[0].component,'identity-policy');
+  assert.throws(()=>installedPackageDifferences({...legacy,version:2},identity));
+  for(const mutate of [
+    value=>delete value.dependencies.inventory,
+    value=>value.dependencies.inventory[0].sha256='f'.repeat(64),
+    value=>value.dependencies.inventory.push(structuredClone(value.dependencies.inventory[0])),
+    value=>value.dependencies.files++,
+    value=>delete value.python,
+  ]){const changed=structuredClone(identity);mutate(changed);assert.throws(()=>installedPackageDifferences(changed,identity));}
+  f.write('node_modules/example/index.js','actually changed execution bytes');
+  const current=installedPackageIdentity(f.root),diff=installedPackageDifferences(identity,current);
+  assert.deepEqual(diff.map(row=>row.component),['dependencies']);
+  assert.deepEqual(diff[0].changed_files,['node_modules/example/index.js']);
+});
+
+test('scientific identity roots follow every exact declared requirement',async t=>{
+  const {declaredPackagePythonRoots}=await import('../scripts/package-output-artifact.mjs');
+  const f=fixture(t);assert.deepEqual(declaredPackagePythonRoots(f.root),[]);
+  f.write('requirements.txt','# scientific roots\nnumpy==2.3.5\nshapely==2.1.2\npyproj==3.7.2\nrasterio==1.4.3\nscipy==1.17.0\n');
+  assert.deepEqual(declaredPackagePythonRoots(f.root).map(row=>row.name),['numpy','shapely','pyproj','rasterio','scipy']);
+  for(const unknown of ['numpy>=2','-r elsewhere.txt','package @ https://example.invalid/file']){
+    f.write('requirements.txt',unknown);assert.throws(()=>declaredPackagePythonRoots(f.root),/Exact pinned/);
+  }
+});
+
+
+test('parent independently binds Python executable before any consumer identity process',async t=>{
+  const {resolvePackagePythonExecutable}=await import('../scripts/package-output-artifact.mjs');
+  const observed=resolvePackagePythonExecutable();assert.equal(resolvePackagePythonExecutable(observed.sha256).executable,observed.executable);
+  const f=fixture(t),bin=path.join(f.root,'bin'),marker=path.join(f.root,'forged-executable-ran');fs.mkdirSync(bin);
+  fs.writeFileSync(path.join(bin,'python3'),'#!/bin/sh\necho forged > '+JSON.stringify(marker)+'\n',{mode:0o755});
+  const before=process.env.PATH;process.env.PATH=bin;
+  try{assert.throws(()=>resolvePackagePythonExecutable(observed.sha256),/differs from authenticated original/);assert.equal(fs.existsSync(marker),false);}
+  finally{process.env.PATH=before;}
+});
+
+test('assembly admits original custody and installed bytes before scientific imports',()=>{
+  const source=fs.readFileSync(new URL('../scripts/assemble-selected-package.mjs',import.meta.url),'utf8');
+  const custody=source.indexOf('const original=await authenticateOriginalPackageOutput('),identity=source.indexOf('const installed=installedPackageIdentity('),admission=source.indexOf('if(differences.length)recordAndRequireRuntime();'),probe=source.indexOf('const runtime=inspectPackageRuntime(root,{isolatedPython:true})');
+  assert.ok(custody>0&&identity>custody&&admission>identity&&probe>admission);
+  assert.match(source,/expectedParser:manifest\.runtime\.installed\.python\.parser/);
+  assert.match(source,/expectedExecutable:manifest\.runtime\.installed\.python\.executable_sha256/);
+  assert.ok(source.indexOf('if(runtime.errors.length)')<source.indexOf('const actualRuntime='));
+});

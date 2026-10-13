@@ -1,5 +1,5 @@
-// Separately identified observer for the frozen PR1802 A/B rollout pair. This
-// never changes the original output programme, its private gates or receipts.
+// Separately identified observer for an accepted changed-selection delivery.
+// The production tree and its original full producer retain their own identities.
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -14,8 +14,8 @@ const need=(ok,message)=>{if(!ok)throw Error(message);};
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
 const oid=value=>typeof value==='string'&&/^[a-f0-9]{40}$/.test(value);
 const positive=value=>Number.isSafeInteger(value)&&value>0;
-export const FROZEN_REVIEWED_HEAD='3d62bd88b15003c3c1232bb5bc63f0b35e4d7a02';
 const repository='ChengshuLi/WorldAtlas';
+const sameOrigin=(left,right)=>JSON.stringify(left)===JSON.stringify(right);
 const proofRoot=path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 function cleanEnvironment(){
   const env={...process.env};
@@ -23,17 +23,17 @@ function cleanEnvironment(){
   return {...env,GIT_NO_LAZY_FETCH:'1',GIT_NO_REPLACE_OBJECTS:'1',GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_TERMINAL_PROMPT:'0'};
 }
 const git=(root,...args)=>execFileSync('git',['-C',root,...args],{encoding:'utf8',env:cleanEnvironment(),maxBuffer:8*1048576}).trim();
-export async function resolveFrozenPackageProgramme({api,sourceHead}){
-  need(oid(sourceHead),'Exact frozen B source required');
-  const pr=await api(`/repos/${repository}/pulls/1802`);
-  need(pr.number===1802&&pr.merged===true&&pr.state==='closed'&&pr.base?.ref==='main'&&
-    pr.head?.repo?.full_name===repository&&pr.head.sha===FROZEN_REVIEWED_HEAD&&oid(pr.merge_commit_sha),
-    'Frozen package programme must be the accepted exact PR1802 delivery');
+export async function resolveFrozenPackageProgramme({api,sourceHead,pullRequest}){
+  need(oid(sourceHead)&&positive(pullRequest),'Exact accepted source and pull request required');
+  const pr=await api(`/repos/${repository}/pulls/${pullRequest}`);
+  need(pr.number===pullRequest&&pr.merged===true&&pr.state==='closed'&&pr.base?.ref==='main'&&
+    pr.head?.repo?.full_name===repository&&oid(pr.head.sha)&&oid(pr.merge_commit_sha),
+    'Production programme must be an accepted same-repository main delivery');
   const accepted=await api(`/repos/${repository}/git/commits/${pr.merge_commit_sha}`);
   const candidate=await api(`/repos/${repository}/git/commits/${sourceHead}`);
   need(accepted.sha===pr.merge_commit_sha&&candidate.sha===sourceHead&&oid(accepted.tree?.sha)&&
     candidate.tree?.sha===accepted.tree.sha,'Frozen source differs from complete accepted production tree');
-  return {pull_request:1802,reviewed_head:FROZEN_REVIEWED_HEAD,accepted_commit:pr.merge_commit_sha,
+  return {pull_request:pullRequest,reviewed_head:pr.head.sha,accepted_commit:pr.merge_commit_sha,
     source_head:sourceHead,source_tree:accepted.tree.sha};
 }
 export function requireSeparatedProofRoots({sourceRoot,observerRoot,sourceHead,proofHead}){
@@ -51,7 +51,7 @@ export function prepareFreshAssemblyScratch(sourceRoot){
   need(!existing||existing.isDirectory()&&!existing.isSymbolicLink(),'Ordinary assembly scratch directory required');
   if(!existing)fs.mkdirSync(cache,{mode:0o700});
   const receiptPath=path.join(cache,'package-input-build.json');
-  for(const target of [path.join(sourceRoot,'dist'),receiptPath,path.join(cache,'selected-package-proof.json'),path.join(cache,'frozen-cli-output'),path.join(cache,'selected-package-child-diagnostic.json')]){
+  for(const target of [path.join(sourceRoot,'dist'),receiptPath,path.join(cache,'selected-package-proof.json'),path.join(cache,'selected-package-child-proof.json'),path.join(cache,'package-runtime-comparison.json'),path.join(cache,'frozen-cli-output'),path.join(cache,'selected-package-child-diagnostic.json')]){
     let prior;try{prior=fs.lstatSync(target);}catch(error){if(error.code!=='ENOENT')throw error;}
     need(!prior,'Fresh frozen proof checkout required; prior output is not evidence');
   }
@@ -90,23 +90,22 @@ export function recordFrozenChildDiagnostic({child,sourceRoot,secret='',log=mess
   return fs.readFileSync(receiptPath);
 }
 export function requireActualAssembly(child,receiptRaw,sourceHead,originalRunId){
-  need(child?.status===1&&!child.error&&child.signal===null,'Known post-commit legacy comparison failure required');
+  need(child?.status===0&&!child.error&&child.signal===null,'Successful actual production assembly required');
   const lines=String(child.stdout).trim().split('\n');
   const result=JSON.parse(lines.at(-1));
-  need(result.assembled===false&&typeof result.reason==='string'&&
-    result.reason.startsWith('Scientific context differs beyond authenticated provenance'),
-    'Unexpected frozen CLI failure; cannot continue output proof');
+  need(result.assembled===true&&result.receipt_sha256===sha(receiptRaw)&&result.proof?.comparison,
+    'Successful child result must bind actual receipt and completed comparison');
   const receipt=JSON.parse(receiptRaw);
   need(receipt.kind==='cloudflare'&&receipt.preflight?.passed===true&&
     Array.isArray(receipt.preflight.errors)&&receipt.preflight.errors.length===0&&receipt.preflight.inputs?.head===sourceHead&&
-    receipt.assembly?.kind==='retained-original-output-plus-current-additive'&&
+    receipt.assembly?.kind==='retained-original-output-plus-current-additive'&&receipt.assembly.runtime_identity_version===2&&
     receipt.assembly.current_execution?.source_commit===sourceHead&&
     receipt.assembly.original_base_context_retained===true&&receipt.assembly.base_restoration_invoked===false&&
-    receipt.assembly.invariant_build_invoked===false&&receipt.assembly.origin?.head===FROZEN_REVIEWED_HEAD&&
-    receipt.assembly.origin.run_id===originalRunId&&/^[a-f0-9]{64}$/.test(receipt.assembly.original_manifest_sha256??''),
-    'Committed assembly receipt identity differs');
+    receipt.assembly.invariant_build_invoked===false&&oid(receipt.assembly.origin?.head)&&
+    receipt.assembly.origin.run_id===originalRunId&&/^[a-f0-9]{64}$/.test(receipt.assembly.original_manifest_sha256??'')&&
+    sameOrigin(result.origin,receipt.assembly.origin),'Committed assembly receipt identity differs');
   return {receipt,receipt_sha256:sha(receiptRaw),origin:receipt.assembly.origin,
-    frozen_cli:{exit_status:child.status,result,committed_output_observed:true,cli_succeeded:false}};
+    frozen_cli:{exit_status:child.status,result,committed_output_observed:true,cli_succeeded:true}};
 }
 export async function retainProofManifest({api,origin,directory,extractor,expectedHash,fetchImpl=fetch}){
   need(positive(origin?.artifact_id)&&positive(origin.artifact_bytes)&&/^[a-f0-9]{64}$/.test(origin.artifact_digest??'')&&
@@ -123,9 +122,19 @@ export async function retainProofManifest({api,origin,directory,extractor,expect
   try{for await(const chunk of response.body){bytes+=chunk.length;need(bytes<=origin.artifact_bytes,'Original proof archive grew');digest.update(chunk);fs.writeSync(fd,chunk);}}
   finally{fs.closeSync(fd);}
   need(bytes===origin.artifact_bytes&&digest.digest('hex')===origin.artifact_digest,'Original proof archive digest differs');
-  execFileSync('python3',['-I','-B',extractor,'--manifest',archive,manifest,origin.artifact_digest],{env:cleanEnvironment(),stdio:'pipe',maxBuffer:1048576});
+  execFileSync('python3',['-I','-S','-B',extractor,'--manifest',archive,manifest,origin.artifact_digest],{env:cleanEnvironment(),stdio:'pipe',maxBuffer:1048576});
   const raw=fs.readFileSync(manifest);need(sha(raw)===expectedHash,'Original proof manifest differs from authenticated assembly');
   validatePackageOutputManifest(JSON.parse(raw));fs.unlinkSync(archive);return {file:manifest,raw};
+}
+
+export function retainSuccessfulChildProof(sourceRoot,expectedProof){
+  const childProof=path.join(sourceRoot,'.cache/selected-package-proof.json');
+  const childProofStat=fs.lstatSync(childProof);
+  need(childProofStat.isFile()&&!childProofStat.isSymbolicLink(),'Ordinary freshly published child proof required');
+  const childProofRaw=fs.readFileSync(childProof);
+  need(sameOrigin(JSON.parse(childProofRaw),expectedProof), 'Published child proof differs from successful CLI result');
+  fs.writeFileSync(path.join(sourceRoot,'.cache/selected-package-child-proof.json'),childProofRaw,{flag:'wx'});
+  fs.unlinkSync(childProof);
 }
 
 async function main(){
@@ -135,7 +144,8 @@ async function main(){
   const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH)),input=event.inputs??{};
   const token=process.env.GH_TOKEN;need(token,'Read-only proof API authority required');
   const api=githubAPI(token,{conditionalReads:false});delete process.env.GH_TOKEN;delete process.env.GITHUB_TOKEN;
-  const frozen=await resolveFrozenPackageProgramme({api,sourceHead:input.source_head});
+  need(/^[1-9]\d*$/.test(input.source_pull_request??''),'Exact accepted source pull request required');
+  const frozen=await resolveFrozenPackageProgramme({api,sourceHead:input.source_head,pullRequest:Number(input.source_pull_request)});
   if(process.argv[2]==='--resolve-frozen'){
     fs.appendFileSync(process.env.GITHUB_OUTPUT,`programme_sha=${frozen.accepted_commit}\nsource_tree=${frozen.source_tree}\n`);
     console.log(JSON.stringify({frozen_package_programme:frozen}));return;
@@ -147,18 +157,17 @@ async function main(){
   need(git(sourceRoot,'rev-parse','HEAD^{tree}')===frozen.source_tree,'Actual frozen production tree differs');
   // The current observer graph was authenticated by the same bootstrap before
   // startup. Authenticate the frozen graph independently before importing it.
-  const startup=JSON.parse(execFileSync('python3',['-I','-B',path.join(proofRoot,'scripts/selected-package-bootstrap.py')],{
+  const startup=JSON.parse(execFileSync('python3',['-I','-S','-B',path.join(proofRoot,'scripts/selected-package-bootstrap.py')],{
     cwd:sourceRoot,env:{...cleanEnvironment(),GH_TOKEN:token,SELECTED_PACKAGE_TRUSTED_BASE:frozen.accepted_commit,
       SELECTED_PACKAGE_ENTRY_POINT:'scripts/assemble-selected-package.mjs',SELECTED_PACKAGE_VERIFY_ONLY:'true'},encoding:'utf8',maxBuffer:1048576}));
   need(startup.kind==='authenticated-package-startup-closure'&&startup.trusted_base===frozen.accepted_commit&&
     startup.entry_point==='scripts/assemble-selected-package.mjs'&&startup.files.includes(startup.entry_point),'Frozen startup authentication missing');
   const readback=await loadSelectedPackageReadback({api,repo:repository,runId:Number(input.readback_run_id),
     attempt:Number(input.readback_attempt),expectedHead:input.source_head});
-  // Frozen authority requires its genuine CLI entrypoint. Its legacy observer
-  // fails only after publishing dist and the actual assembly receipt. Preserve
-  // that failure honestly, then establish equivalence with this current observer.
+  // Invoke the genuine production CLI. It must finish successfully, including
+  // its exhaustive comparison. Independently observe its output below.
   const receiptPath=prepareFreshAssemblyScratch(sourceRoot);
-  const child=spawnSync('python3',['-I','-B',path.join(proofRoot,'scripts/selected-package-bootstrap.py')],{
+  const child=spawnSync('python3',['-I','-S','-B',path.join(proofRoot,'scripts/selected-package-bootstrap.py')],{
     cwd:sourceRoot,env:{...cleanEnvironment(),GH_TOKEN:token,SELECTED_PACKAGE_TRUSTED_BASE:frozen.accepted_commit,
       SELECTED_PACKAGE_ENTRY_POINT:'scripts/assemble-selected-package.mjs',SELECTED_PACKAGE_VERIFY_ONLY:'false',
       GITHUB_OUTPUT:path.join(sourceRoot,'.cache/frozen-cli-output')},encoding:'utf8',maxBuffer:8*1048576});
@@ -169,7 +178,9 @@ async function main(){
   try{
     const original=await retainProofManifest({api,origin:committed.origin,directory,
       extractor:path.join(proofRoot,'scripts/extract-package-output.py'),expectedHash:receipt.assembly.original_manifest_sha256});
-    const manifest=JSON.parse(original.raw),selection=JSON.parse(fs.readFileSync(path.join(sourceRoot,'data/ownership-selection.json')));
+    const manifest=JSON.parse(original.raw);
+    need(manifest.runtime.installed?.version===2,'Version 2 original installed evidence required for current proof');
+    const selection=JSON.parse(fs.readFileSync(path.join(sourceRoot,'data/ownership-selection.json')));
     need(JSON.stringify(manifest.source.selection.additive_release)!==JSON.stringify(selection.additive_release),'Changed selection required');
     const inventory=inventoryPackageOutput(sourceRoot),atlas=JSON.parse(fs.readFileSync(path.join(sourceRoot,'dist/client/atlas-geography.json')));
     need(['base_manifest','ledger','owner_roster','patch'].some(role=>{
@@ -186,7 +197,8 @@ async function main(){
       originalHead,currentHead:input.source_head,originalManifest:original.file});
     const implementationFiles=['scripts/run-selected-package-proof.mjs','scripts/compare-selected-package-output.mjs',
       'scripts/selected-package-bootstrap.py','scripts/selected-package-readback-proof.mjs','scripts/package-output-artifact.mjs','scripts/extract-package-output.py'];
-    const proof={version:1,kind:'separate-observer-frozen-package-equivalence',frozen_programme:frozen,
+    retainSuccessfulChildProof(sourceRoot,committed.frozen_cli.result.proof);
+    const proof={version:2,kind:'separate-observer-accepted-package-equivalence',frozen_programme:frozen,
       proof_implementation:{commit:process.env.GITHUB_SHA,tree:git(proofRoot,'rev-parse','HEAD^{tree}'),
         files:implementationFiles.map(name=>{const raw=fs.readFileSync(path.join(proofRoot,name));return {path:name,bytes:raw.length,sha256:sha(raw)};})},
       original:committed.origin,reference:readback.origin,assembly_receipt_sha256:committed.receipt_sha256,

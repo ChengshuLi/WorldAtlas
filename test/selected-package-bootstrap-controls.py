@@ -352,11 +352,19 @@ class BootstrapTests(unittest.TestCase):
             env=kwargs['env']
             for key in ('GH_TOKEN','GITHUB_TOKEN','LD_LIBRARY_PATH','GIT_CONFIG_COUNT','GIT_CONFIG_KEY_0','GIT_CONFIG_VALUE_0'): self.assertNotIn(key,env)
             self.assertEqual(env['GIT_NO_REPLACE_OBJECTS'],'1'); self.assertEqual(env['GIT_CONFIG_GLOBAL'],'/dev/null')
+    def test_authenticate_python_runtime_helper_when_identity_module_is_consumed(self):
+        self.write('scripts/child.mjs', "import './package-output-artifact.mjs';\n")
+        self.write('scripts/package-output-artifact.mjs', "export const identity=2;\n")
+        self.write('scripts/package-python-runtime.py', "raise RuntimeError('must not execute')\n")
+        self.trust_changes(); self.accepted(); self.started.clear()
+        self.write('scripts/package-python-runtime.py', "print('substituted executable helper')\n")
+        self.rejected('Actual source differs')
+
     def test_accept_real_repository_static_closure(self):
         # Copy Node's independently parsed static graph, without evaluating modules.
         names=actual_static_graph(SOURCE_ROOT, 'scripts/assemble-selected-package.mjs')
         self.assertIn('scripts/assemble-selected-package.mjs',names)
-        for name in names: self.write(name,(SOURCE_ROOT/name).read_bytes())
+        for name in names+['scripts/package-python-runtime.py']: self.write(name,(SOURCE_ROOT/name).read_bytes())
         self.write('package.json',(SOURCE_ROOT/'package.json').read_bytes()); self.trust_changes(); self.accepted()
         cli=(SOURCE_ROOT/'scripts/assemble-selected-package.mjs').read_text()
         self.assertLess(cli.index('delete process.env.GH_TOKEN;delete process.env.GITHUB_TOKEN;'),cli.index('result=await assembleSelectedPackage('))
@@ -366,7 +374,7 @@ class BootstrapTests(unittest.TestCase):
         self.assertIn('scripts/run-selected-package-proof.mjs',names)
         self.assertNotIn('scripts/assemble-selected-package.mjs',names,
                          'Frozen assembly is imported only after its separate authentication')
-        for name in names+['scripts/selected-package-bootstrap.py','scripts/extract-package-output.py','package.json']:
+        for name in names+['scripts/selected-package-bootstrap.py','scripts/extract-package-output.py','scripts/package-python-runtime.py','package.json']:
             self.write(name,(SOURCE_ROOT/name).read_bytes())
         self.trust_changes();receipt=self.verified_only('scripts/run-selected-package-proof.mjs')
         self.assertEqual(receipt['files'],sorted(names))
@@ -374,7 +382,7 @@ class BootstrapTests(unittest.TestCase):
 class WorkflowBootstrapTests(unittest.TestCase):
     def setUp(self):
         workflow=(SOURCE_ROOT/'.github/workflows/merge-integration-checks.yml').read_text()
-        self.assertIn("python3 -I -B - <<'ASSEMBLY_BOOTSTRAP'",workflow)
+        self.assertIn("python3 -I -S -B - <<'ASSEMBLY_BOOTSTRAP'",workflow)
         self.code=textwrap.dedent(workflow.split("<<'ASSEMBLY_BOOTSTRAP'\n",1)[1].split('          ASSEMBLY_BOOTSTRAP',1)[0])
         self.temp=tempfile.TemporaryDirectory(prefix='worldatlas-inline-bootstrap-'); self.addCleanup(self.temp.cleanup)
         self.root=Path(self.temp.name); oldcwd=Path.cwd(); os.chdir(self.root); self.addCleanup(os.chdir,oldcwd)
@@ -419,7 +427,7 @@ class ProofWorkflowBootstrapTests(WorkflowBootstrapTests):
     def setUp(self):
         super().setUp()
         workflow=(SOURCE_ROOT/'.github/workflows/selected-package-proof.yml').read_text()
-        self.assertIn("python3 -I -B - <<'ASSEMBLY_PROOF'",workflow)
+        self.assertIn("python3 -I -S -B - <<'ASSEMBLY_PROOF'",workflow)
         self.bootstrap_ref='b'*40;self.env['GITHUB_SHA']=self.bootstrap_ref
         self.code=textwrap.dedent(workflow.split("<<'ASSEMBLY_PROOF'\n",1)[1].split('          ASSEMBLY_PROOF',1)[0])
         self.assertNotIn('npm run build',workflow)
@@ -437,7 +445,7 @@ class ProofWorkflowBootstrapTests(WorkflowBootstrapTests):
         if sparse:
             roots=[line.strip().rstrip('/') for line in sparse[1].splitlines()]
             closure=actual_static_graph(SOURCE_ROOT,'scripts/run-selected-package-proof.mjs')
-            closure+=['scripts/selected-package-bootstrap.py','scripts/extract-package-output.py']
+            closure+=['scripts/selected-package-bootstrap.py','scripts/extract-package-output.py','scripts/package-python-runtime.py']
             absent=[name for name in closure if '/' in name and not any(name==root or name.startswith(root+'/') for root in roots)]
             self.assertEqual(absent,[], 'Sparse observer checkout omits actually executed or authenticated files')
         else:
@@ -465,7 +473,7 @@ class ProofInstallerBootstrapTests(ProofWorkflowBootstrapTests):
     def setUp(self):
         super().setUp()
         workflow=(SOURCE_ROOT/'.github/workflows/selected-package-proof.yml').read_text()
-        self.assertIn("python3 -I -B - <<'INSTALLER_PREFLIGHT'",workflow)
+        self.assertIn("python3 -I -S -B - <<'INSTALLER_PREFLIGHT'",workflow)
         self.code=textwrap.dedent(workflow.split("<<'INSTALLER_PREFLIGHT'\n",1)[1].split('          INSTALLER_PREFLIGHT',1)[0])
         self.env['SELECTED_PACKAGE_PREFLIGHT']='install'
         self.assertNotEqual(self.env['SELECTED_PACKAGE_TRUSTED_BASE'],self.env['GITHUB_SHA'],

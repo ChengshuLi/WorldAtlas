@@ -6,10 +6,11 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {execFileSync,spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {FROZEN_REVIEWED_HEAD, resolveFrozenPackageProgramme, requireSeparatedProofRoots,
-  requireActualAssembly, retainProofManifest, prepareFreshAssemblyScratch, recordFrozenChildDiagnostic} from '../scripts/run-selected-package-proof.mjs';
+import {resolveFrozenPackageProgramme, requireSeparatedProofRoots,
+  requireActualAssembly, retainProofManifest, retainSuccessfulChildProof, prepareFreshAssemblyScratch, recordFrozenChildDiagnostic} from '../scripts/run-selected-package-proof.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
+const FROZEN_REVIEWED_HEAD = '9'.repeat(40);
 const sourceHead = 'a'.repeat(40), acceptedHead = 'b'.repeat(40), tree = 'c'.repeat(40);
 const repository = 'ChengshuLi/WorldAtlas';
 const extractor = fileURLToPath(new URL('../scripts/extract-package-output.py', import.meta.url));
@@ -28,10 +29,10 @@ function resolver() {
     if (route === `/repos/${repository}/git/commits/${sourceHead}`) return candidate;
     throw Error('Unexpected frozen-source authority route: ' + route);
   };
-  return {pr, accepted, candidate, calls, load: () => resolveFrozenPackageProgramme({api, sourceHead}), api};
+  return {pr, accepted, candidate, calls, load: () => resolveFrozenPackageProgramme({api, sourceHead, pullRequest:1802}), api};
 }
 
-test('frozen programme resolves exact accepted PR1802 and complete same-tree B commit', async () => {
+test('production programme resolves requested accepted delivery and complete same-tree candidate commit', async () => {
   const f = resolver();
   assert.deepEqual(await f.load(), {pull_request: 1802, reviewed_head: FROZEN_REVIEWED_HEAD,
     accepted_commit: acceptedHead, source_head: sourceHead, source_tree: tree});
@@ -43,13 +44,13 @@ test('frozen programme resolves exact accepted PR1802 and complete same-tree B c
 test('unaccepted or replaced PR identity and partial-tree equivalence never establish the frozen programme', async () => {
   const changes = [f => f.pr.number = 1803, f => f.pr.merged = false, f => f.pr.state = 'open',
     f => f.pr.base.ref = 'work', f => f.pr.head.repo.full_name = 'fork/WorldAtlas',
-    f => f.pr.head.sha = sourceHead, f => f.pr.merge_commit_sha = 'main',
+    f => f.pr.head.sha = 'main', f => f.pr.merge_commit_sha = 'main',
     f => f.accepted.sha = sourceHead, f => f.candidate.sha = acceptedHead,
     f => f.accepted.tree.sha = 'not-a-tree', f => f.candidate.tree.sha = 'd'.repeat(40),
     f => delete f.candidate.tree];
   for (const change of changes) { const f = resolver(); change(f); await assert.rejects(f.load); }
   for (const invalid of ['main', '', 'a'.repeat(39), 'A'.repeat(40), null]) {
-    const f = resolver(); await assert.rejects(resolveFrozenPackageProgramme({api: f.api, sourceHead: invalid}), /Exact frozen B source/);
+    const f = resolver(); await assert.rejects(resolveFrozenPackageProgramme({api: f.api, sourceHead: invalid, pullRequest:1802}), /Exact accepted source/);
     assert.deepEqual(f.calls, []);
   }
 });
@@ -94,33 +95,32 @@ function assembly() {
   const origin = {head: FROZEN_REVIEWED_HEAD, run_id: 17, run_attempt: 1, artifact_id: 29,
     artifact_bytes: 100, artifact_digest: 'd'.repeat(64)};
   const receipt = {version: 1, kind: 'cloudflare', preflight: {passed: true, errors: [], inputs: {head: sourceHead}},
-    assembly: {kind: 'retained-original-output-plus-current-additive', current_execution: {source_commit: sourceHead},
+    assembly: {kind: 'retained-original-output-plus-current-additive', runtime_identity_version:2, current_execution: {source_commit: sourceHead},
       original_base_context_retained: true, base_restoration_invoked: false, invariant_build_invoked: false,
       original_manifest_sha256: 'e'.repeat(64), origin}};
   const raw = Buffer.from(JSON.stringify(receipt) + '\n');
-  const failure = {assembled: false, reason: 'Scientific context differs beyond authenticated provenance\n+ encoded_read_bytes: 100\n- encoded_read_bytes: 90'};
-  return {receipt, raw, child: {status: 1, signal: null, error: undefined,
-    stdout: 'Actual frozen CLI progress\n' + JSON.stringify(failure) + '\n'}};
+  const result = {assembled:true,receipt_sha256:hash(raw),origin,proof:{comparison:{equivalent:true}}};
+  return {receipt, raw, child: {status: 0, signal: null, error: undefined,
+    stdout: 'Actual production CLI progress\n' + JSON.stringify(result) + '\n'}};
 }
 
-test('known post-commit frozen comparison failure remains explicit while fresh receipt identifies actual assembly', () => {
+test('successful actual production child binds its fresh receipt and comparison', () => {
   const f = assembly(), result = requireActualAssembly(f.child, f.raw, sourceHead, 17);
   assert.deepEqual(result.receipt, f.receipt); assert.equal(result.receipt_sha256, hash(f.raw));
   assert.deepEqual(result.origin, f.receipt.assembly.origin);
-  assert.equal(result.frozen_cli.exit_status, 1); assert.equal(result.frozen_cli.cli_succeeded, false);
-  assert.equal(result.frozen_cli.result.assembled, false);
+  assert.equal(result.frozen_cli.exit_status, 0); assert.equal(result.frozen_cli.cli_succeeded, true);
+  assert.equal(result.frozen_cli.result.assembled, true);
   assert.equal(result.frozen_cli.committed_output_observed, true);
-  // The observer hashes the actual newly committed bytes; no synthetic CLI
-  // success hash exists for this deliberately preserved comparator failure.
+  // A receipt must match the successful child's actual byte hash.
   const spaced = Buffer.concat([f.raw, Buffer.from(' ')]);
-  assert.equal(requireActualAssembly(f.child, spaced, sourceHead, 17).receipt_sha256, hash(spaced));
+  assert.throws(()=>requireActualAssembly(f.child, spaced, sourceHead, 17), /bind actual receipt/);
   assert.throws(() => requireActualAssembly(f.child, f.raw, acceptedHead, 17), /identity differs/);
   assert.throws(() => requireActualAssembly(f.child, f.raw, sourceHead, 18), /identity differs/);
 });
 
-test('unrelated child failure, transport interruption, claimed CLI success and missing output cannot continue', () => {
+test('child failures, transport interruption, unbound success and missing output cannot continue', () => {
   const f = assembly(), encoded = value => JSON.stringify(value) + '\n';
-  for (const child of [undefined, {...f.child, status: 0}, {...f.child, status: 2},
+  for (const child of [undefined, {...f.child, status: 1}, {...f.child, status: 2},
     {...f.child, signal: 'SIGTERM'}, {...f.child, error: Error('timed out')},
     {...f.child, stdout: ''}, {...f.child, stdout: '{truncated'}, {...f.child, stdout: '{}'},
     {...f.child, stdout: encoded({assembled: true, reason: 'Scientific context differs beyond authenticated provenance'})},
@@ -139,14 +139,17 @@ test('reconstructed receipt substitutions still reject fallback, wrong identitie
     r => r.preflight.errors = ['actual failure'], r => delete r.preflight.errors,
     r => r.preflight.inputs.head = acceptedHead, r => r.assembly.kind = 'full-build',
     r => r.assembly.current_execution.source_commit = acceptedHead,
-    r => r.assembly.origin.head = sourceHead, r => r.assembly.origin.run_id = 18,
+    r => r.assembly.runtime_identity_version = 1,
+    r => r.assembly.origin.head = 'main', r => r.assembly.origin.run_id = 18,
     r => r.assembly.original_manifest_sha256 = 'invalid',
     r => r.assembly.original_base_context_retained = false,
     r => r.assembly.base_restoration_invoked = true, r => r.assembly.invariant_build_invoked = true,
     r => delete r.assembly.invariant_build_invoked
   ]) {
     const f = assembly(); change(f.receipt); const raw = Buffer.from(JSON.stringify(f.receipt));
-    assert.throws(() => requireActualAssembly(f.child, raw, sourceHead, 17), /identity differs/);
+    const result=JSON.parse(f.child.stdout.trim().split('\n').at(-1)); result.receipt_sha256=hash(raw);
+    const child={...f.child,stdout:JSON.stringify(result)};
+    assert.throws(() => requireActualAssembly(child, raw, sourceHead, 17), /identity differs/);
   }
 });
 
@@ -355,7 +358,7 @@ test('diagnostics preserve genuine receipt bytes but reject symlink receipts and
 test('workflow retains only sanitized child diagnosis on failure without granting proof success',()=>{
   const workflow=fs.readFileSync(new URL('../.github/workflows/selected-package-proof.yml',import.meta.url),'utf8');
   const step=workflow.split('      - name: Retain frozen child execution diagnostic')[1].split('      - name:')[0];
-  assert.match(step,/if: always\(\)/);assert.match(step,/path: candidate\/\.cache\/selected-package-child-diagnostic\.json/);
+  assert.match(step,/if: always\(\)/);assert.match(step,/candidate\/\.cache\/selected-package-child-diagnostic\.json/);
   assert.match(step,/if-no-files-found: ignore/);assert.doesNotMatch(step,/continue-on-error|package-input-build|selected-package-proof\.json/);
 });
 
@@ -381,7 +384,7 @@ test('malformed receipts and unrelated failures preserve diagnostics without man
   const root=temporary(t);prepareFreshAssemblyScratch(root);fs.writeFileSync(path.join(root,'.cache/package-input-build.json'),'{broken');
   const child=spawnSync(process.execPath,['-e',"console.log(JSON.stringify({assembled:false,reason:'Scientific context differs beyond authenticated provenance'}));process.exitCode=1"],{encoding:'utf8'});
   const raw=recordFrozenChildDiagnostic({child,sourceRoot:root,log:()=>{}});
-  assert.throws(()=>requireActualAssembly(child,raw,sourceHead,1),SyntaxError);
+  assert.throws(()=>requireActualAssembly(child,raw,sourceHead,1),/Successful actual production assembly/);
   assert.ok(fs.existsSync(path.join(root,'.cache/selected-package-child-diagnostic.json')));
 });
 test('large diagnostic retains both first and final cause and reaches logs even if durable write fails',t=>{
@@ -390,4 +393,25 @@ test('large diagnostic retains both first and final cause and reaches logs even 
   assert.throws(()=>recordFrozenChildDiagnostic({child,sourceRoot:root,log:text=>logs.push(text)}),/EEXIST/);
   assert.equal(fs.readFileSync(file,'utf8'),'preserved prior');assert.equal(logs.length,2);assert.match(logs[1],/persistence failed/);
   assert.match(logs[0],/FIRST CAUSE/);assert.match(logs[0],/FINAL CAUSE/);assert.match(logs[0],/diagnostic middle omitted/);
+});
+
+
+test('requested delivery identity is general but must remain an exact positive pull request',async()=>{
+  const f=resolver(); f.pr.number=2042;
+  const api=route=>f.api(route.replace('/pulls/2042','/pulls/1802'));
+  assert.equal((await resolveFrozenPackageProgramme({api,sourceHead,pullRequest:2042})).pull_request,2042);
+  for(const pullRequest of [undefined,0,-1,1.5,'1802',Number.MAX_SAFE_INTEGER+1])
+    await assert.rejects(resolveFrozenPackageProgramme({api,sourceHead,pullRequest}),/Exact accepted/);
+});
+test('successful child proof is retained separately only when ordinary and exact',t=>{
+  const proof={reference:{run_id:17},comparison:{equivalent:true}};
+  for(const kind of ['valid','altered','malformed','link','collision']){
+    const root=temporary(t);prepareFreshAssemblyScratch(root);
+    const current=path.join(root,'.cache/selected-package-proof.json'),retained=path.join(root,'.cache/selected-package-child-proof.json');
+    if(kind==='link'){fs.writeFileSync(path.join(root,'elsewhere'),JSON.stringify(proof));fs.symlinkSync(path.join(root,'elsewhere'),current);}
+    else fs.writeFileSync(current,kind==='malformed'?'{bad':JSON.stringify(kind==='altered'?{different:true}:proof));
+    if(kind==='collision')fs.writeFileSync(retained,'sentinel');
+    if(kind==='valid'){retainSuccessfulChildProof(root,proof);assert.deepEqual(JSON.parse(fs.readFileSync(retained)),proof);assert.equal(fs.existsSync(current),false);}
+    else {assert.throws(()=>retainSuccessfulChildProof(root,proof));assert.ok(fs.lstatSync(current));if(kind==='collision')assert.equal(fs.readFileSync(retained,'utf8'),'sentinel');}
+  }
 });

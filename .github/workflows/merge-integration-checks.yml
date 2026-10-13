@@ -851,7 +851,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           SELECTED_PACKAGE_TRUSTED_BASE: ${{ github.event.pull_request.base.sha }}
         run: |
-          python3 -I -B - <<'ASSEMBLY_BOOTSTRAP'
+          python3 -I -S -B - <<'ASSEMBLY_BOOTSTRAP'
           import base64, hashlib, json, os, re, urllib.error, urllib.request
           try:
               base = os.environ['SELECTED_PACKAGE_TRUSTED_BASE']
