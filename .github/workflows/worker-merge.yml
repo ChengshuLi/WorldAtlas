@@ -257,7 +257,7 @@ jobs:
         run: |
           python3 -I -S -B "$CI_CHECKOUT_HELPER" --repository ChengshuLi/WorldAtlas \
             --sha "$CI_CHECKOUT_SHA" --tree "$CI_CHECKOUT_TREE" --workspace "$GITHUB_WORKSPACE" \
-            --fetch-timeout-seconds 240 --total-timeout-seconds 420 --max-attempts 2 --elapsed-seconds "$CI_BOOTSTRAP_ELAPSED"
+            --total-timeout-seconds 420 --elapsed-seconds "$CI_BOOTSTRAP_ELAPSED"
       - name: Legacy full checkout only for proven trusted-helper absence
         if: (needs.prepare.outputs.profile == 'full') && steps.checkout_bootstrap.outputs.mode == 'legacy'
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
