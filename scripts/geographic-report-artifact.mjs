@@ -254,8 +254,7 @@ async function downloadRedirect(response, fetchImpl, maximum = MAX_ARCHIVE) {
 
 // Only the originating attempt named by an already authenticated job receipt is
 // inspected. A failed/cancelled code attempt can contain successful geography; its
-// actual unique geography job must still be successful. Its authenticated log
-// and artifact/report bytes establish execution independently of step projections.
+// actual unique geography job and all required steps must still be successful.
 async function readGeographyOriginJob({api, repo, number, source}) {
   const route = `/repos/${repo}/actions/runs/${source.run_id}/attempts/${source.run_attempt}`;
   const run = await api(route);
@@ -275,7 +274,7 @@ async function readGeographyOriginJob({api, repo, number, source}) {
   const job = successfulGeographyJob(jobs, queue ? QUEUE_WORKFLOW_PATH : WORKFLOW_PATH);
   need(job && job.run_id === source.run_id &&
     job.run_attempt === source.run_attempt && job.head_sha === workflowHead,
-    'Original geographic job identity or successful state changed');
+    'Original geographic job identity or successful steps changed');
   return job;
 }
 
