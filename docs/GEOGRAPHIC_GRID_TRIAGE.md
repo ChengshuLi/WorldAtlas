@@ -40,7 +40,7 @@ Current atlas footprints remain derived data, requiring native-provider verifica
 Source metadata and original full-feature hashes are retained. Research links come
 from exact machine-readable member inventories in retained original GitHub API
 responses, rather than regional issue titles. Snapshot links describe retrieval-time
-scope; future coordination must recheck live claims and preserve other workers' work.
+scope; future coordination must recheck current issue ownership and preserve other workers' work.
 
 `coordinated-followups.json` stages bounded joint source investigations for both sides
 of the Iran–Pakistan and Portugal–Spain components. It records exact contacts and

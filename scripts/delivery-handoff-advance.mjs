@@ -12,7 +12,7 @@ import {createAcquisition} from './geography-prefetch.mjs';
 import {performance} from 'node:perf_hooks';
 import {candidateBudget} from './native-ownership/native-preparation-guards.mjs';
 import {checkPremergeEvidence, reviewContractBinding} from './premerge-evidence.mjs';
-import {githubPages, verifyClaimForPR, assertIssueReadiness, workSpec} from './issue-claim-contract.mjs';
+import {githubPages, verifyIssueScope, workSpec} from './issue-claim-contract.mjs';
 import {validateIssuePRBody} from './check-handoff-scope.mjs';
 import {createHash} from 'node:crypto';
 
@@ -629,16 +629,7 @@ export async function acceptedReview(packet, api) {
   const issue = await api(`${route}/issues/${packet.issue.number}`);
   need(equal(reviewContractBinding(issue, pr), {issue_contract_sha256: packet.issue_contract_sha256,
     pr_body_sha256: packet.pr_body_sha256}), 'Frozen review acceptance/body changed');
-  const currentReservation = async (currentIssue, currentPR) => {
-    const comments = await githubPages(api, `${route}/issues/${currentIssue.number}/comments`);
-    const dependencies = await Promise.all(workSpec(currentIssue.body).depends_on.map(number => api(`${route}/issues/${number}`)));
-    assertIssueReadiness({issue: currentIssue, branch: currentPR.head.ref, comments, dependencies});
-    const reservation = verifyClaimForPR({branch: currentPR.head.ref, issue: currentIssue, comments});
-    need(reservation.worker_id === packet.author_worker_id, 'Current author claim changed');
-    return reservation;
-  };
-  // Engineering ownership is authenticated by the issue contract, not stored in
-  // the legacy raw claim. Use the same canonical scope consumed by the queue.
+  const currentReservation = async (currentIssue, currentPR) => verifyIssueScope({branch: currentPR.head.ref, issue: currentIssue});
   const reservation = await currentReservation(issue, pr);
   const files = await githubPages(api, `${route}/pulls/${pr.number}/files`);
   need(equal(files, packet.files) && files.length === pr.changed_files, 'Frozen review file inventory changed');
@@ -1952,19 +1943,15 @@ export async function automaticAuthorGuard(root, config, api) {
     validateWorkspace();
     need(branch === entry.branch, 'Automatic delivery branch differs from managed ownership');
     const route = '/repos/ChengshuLi/WorldAtlas', number = config.automation.issue_number;
-    const issue = await api(`${route}/issues/${number}`), spec = contract.workSpec(issue.body);
-    const comments = await contract.githubPages(api, `${route}/issues/${number}/comments`);
-    const dependencies = await Promise.all(contract.readinessDependencyIds(spec).map(id => api(`${route}/issues/${id}`)));
-    const prs = await contract.linkedPulls(api, 'ChengshuLi/WorldAtlas', number);
-    contract.assertIssueReadiness({issue, branch, comments, dependencies, prs});
-    const reservation = contract.verifyClaimForPR({branch, issue, comments, prs});
-    need(reservation.worker_id === entry.worker && spec.mode === 'engineering'
-      && Array.isArray(reservation.owned_paths), 'Automatic delivery requires canonical scoped author ownership');
-    need(prs.filter(pr => pr.state === 'open').every(pr => pr.head?.ref === branch), 'Preserve foreign open issue PR');
-    const current = {worker: reservation.worker_id, claim: reservation.claim_id, paths: reservation.owned_paths};
+    const issue = await api(`${route}/issues/${number}`);
+    need(issue.number === number, 'Automatic delivery issue identity changed');
+    const scope = contract.verifyIssueScope({branch, issue});
+    need(scope.mode === 'engineering' && Array.isArray(scope.owned_paths),
+      'Automatic delivery requires declared engineering output scope');
+    const current = {worker: entry.worker, paths: scope.owned_paths};
     if (identity) need(equal(current, identity), 'Automatic author identity or scope changed');
     identity = current;
-    need(paths.every(p => safe(p.replace(/\/$/, '')) && reservation.owned_paths.some(owned =>
+    need(paths.every(p => safe(p.replace(/\/$/, '')) && scope.owned_paths.some(owned =>
       p === owned || owned.endsWith('/') && p.startsWith(owned))), 'Automatic output exceeds current issue ownership');
     validateWorkspace();
     return current;

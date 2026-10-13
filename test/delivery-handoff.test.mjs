@@ -645,15 +645,14 @@ test('review freeze authenticates current issue scope for an owned nested manife
   const f=reviewFixture(options), packet=JSON.parse((await freezeReview(f))['review-packet.json']);
   assert.equal(packet.manifest.path,options.packetPrefix+'evidence-quality.json');
   for(const mutate of [f=>delete f.spec.owned_paths,f=>f.spec.owned_paths=['coordination/engineering/foreign/'],
-    f=>f.claim.active=false,f=>f.claim.branch='engineering/other',f=>f.claim.expires_at='2000-01-01T00:00:00Z',
-    f=>f.claim.issue_number=41,f=>f.issue.number=41,f=>f.issue.labels.push('status:blocked')]) {
+    f=>f.issue.number=41,f=>f.issue.state='closed']) {
     const g=reviewFixture(options);mutate(g);g.issue.body='Original acceptance\n<!-- worldatlas-work:v1\n'+JSON.stringify(g.spec)+'\n-->';
     await assert.rejects(freezeReview(g));
   }
 });
 
-test('review freeze rechecks current issue readiness and owned scope after reading evidence', async () => {
-  for(const mutation of [issue=>issue.labels.push('status:blocked'),issue=>issue.labels.splice(2,1),
+test('review freeze rechecks current issue state and owned scope after reading evidence', async () => {
+  for(const mutation of [issue=>issue.state='closed',
     issue=>issue.body=issue.body.replace('coordination/engineering/retained/','coordination/engineering/foreign/')]) {
     const f=reviewFixture({packetPrefix:'coordination/engineering/retained/nested/',ownedPaths:['coordination/engineering/retained/']}), original=f.api;let reads=0;
     f.api=async url=>{const value=await original(url);if(url.endsWith('/issues/42')&&++reads===2)mutation(value);return value;};

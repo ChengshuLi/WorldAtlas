@@ -5,28 +5,17 @@ own implementation/review evidence. Merging is separate from completing an issue
 Use the existing labels and ordinary comments; no additional ledger or mandatory
 handoff form is required. Readiness is reviewed eligibility, not scientific approval.
 
-## Before readying or claiming
+## Before starting work
 
-Run `node scripts/review-issue-readiness.mjs ChengshuLi/WorldAtlas NUMBER OUTPUT [BRANCH]`
-with the read-only GitHub token in GH_TOKEN. This shares mechanical contract, lane,
-evidence-declaration, dependency and geography-owned-path checks with claims.
-Its output explains rejection reasons and incomplete reads. It never changes labels,
-claims, approvals or production. A ready label remains required for an actual claim.
-The command examines unready issues so it can be used before adding ready.
+Read original acceptance, current comments, active PRs and actual source/production
+waits. Comment with the worker ID, branch, bounded scope and planned checks; the
+parent coordinates overlap. Labels summarize that decision. No machine readiness
+review, canonical lease or routine triage sweep is required for ordinary work.
+Scientific approval and actual production authorization remain separate.
 
-Inspect original acceptance, newer comments, source/production waits and canonical
-ownership too. Eligibility cannot decide whether a research conclusion is supported.
-Resolve rejection reasons before marking ready. A failed claim is a safety net: repair
-routine stale metadata or explain the next action on the issue, rather than leaving
-an unexplained rejection. Evidence support deficiencies belong in bounded engineering
-work; never fabricate subjects or discard a scientific gate to make a claim pass.
-
-Use fresh complete issue, comment, dependency and linked-PR reads. Immediately before
-an issue mutation, reread these inputs and preserve concurrent owner changes. GitHub
-issue updates have no atomic compare-and-swap: stop/reassess changed snapshots, make
-narrow edits rather than replacing whole label sets, and read back every mutation.
-Do not mutate on partial pagination/API failure. An uncertain mutation outcome requires
-readback before retry. Canonical bot claims, not convenience labels/assignees, own work.
+Before changing an issue, read its current body and discussion and preserve other
+workers' changes. Make narrow edits and read them back; an uncertain write needs
+readback before retry. Preserve historical claims and checkpoints.
 
 ## Author and premerge reviewer
 
@@ -76,41 +65,22 @@ Publisher discovers production acceptance on original publisher-needed issues an
 existing deployment/change records. Auditor owns its quality follow-ups and #726;
 neither role acquires unrelated housekeeping duties.
 
-An available same-lane worker may reconcile an unclaimed issue. An active claim or
-open PR stays with its owner. For expired claims inspect checkpoints, live PRs and
-operations, then follow explicit approved recovery; expiry never authorizes takeover.
+An available same-lane worker may reconcile an unclaimed issue. An active branch or
+open PR stays with its owner. Preserve historical claims and checkpoints; coordinate
+a handoff instead of assuming that an expired record authorizes takeover.
 Disputed scope, conflicting ownership, unresolved cross-lane authority and decisions
 requiring human/provider approval are escalated to Main/human with a concrete question.
 Reopen prematurely closed work only with original-acceptance evidence; do not reopen
 a completed historical repair just because its old blocker appears in a report.
 
-## Between jobs and instruction adoption
+## Instruction adoption
 
-For general queue work, inspect up to three neglected unclaimed
-same-lane issues with apparently finished dependencies or previously discovered
-readiness problems. Include blocked/missing-ready work, not only the ready queue.
-During an assigned delivery campaign, limit this maintenance to encountered issues and direct dependencies; do not interrupt batch delivery with a general queue sweep. Prefer older last relevant issue review/checkpoints and avoid repeatedly examining
-unchanged documented blockers. Handle routine repairs on original issues; do not
-create another queue/table. If all relevant workers are inactive, maintenance waits.
-The manual queue audit can support an explicit investigation; there is no hourly
-unread report, event-driven audit workflow or background chat monitor.
+Existing workers reread AGENTS.md, WORKER_COORDINATION.md and their role prompt
+before the next job. Reconcile the original issue after meaningful results and
+when moving on. Address encountered blockers and direct dependencies when needed;
+there is no mandatory between-jobs readiness audit or replacement queue ledger.
+Preserve active work, real waits, evidence, source bytes and production gates.
 
-Repository prompts do not rewrite saved chat goals. Existing workers refresh before
-their next job, preserving active identity, claim, exact-head review and checkpoints.
-Actual subsequent handoffs and dependent reviews prove adoption; edited files alone
-do not. Main needs no periodic full-queue housekeeping obligation.
-
-Copy-ready refresh:
-
-> Before your next job, reread AGENTS.md, docs/WORKER_COORDINATION.md,
-> docs/ISSUE_LIFECYCLE.md and your role prompt on current main. Preserve active
-> ownership and checkpoints. Reconcile your issue's original acceptance and next
-> action after results/before moving on; review direct dependents on completion or
-> dependency changes. Between jobs review up to three neglected unclaimed same-lane
-> readiness problems. Use shared read-only readiness checks before readying/claiming;
-> no scientific approval from machine eligibility. Keep merging separate from closure,
-> preserve waits/publisher-needed, reuse genuine bounded follow-ups, and never take over
-> an expired claim automatically. Report adoption with actual issue handoff/dependency
-> evidence. Do not restart paused work or perform unapproved production operations.
-
-Geography ownership may name a safe subdirectory inside an owned packet or campaign. Preserve that narrower scope: repairing a contract must not grant its worker the whole enclosing packet. Enclosing and nested scopes conflict; sibling subdirectories can remain disjoint.
+Geography ownership may name a safe subdirectory inside an owned packet or
+campaign. Preserve that narrower scope: an edit must not silently grant the whole
+enclosing packet. Enclosing and nested scopes overlap; siblings can remain disjoint.

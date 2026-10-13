@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import fs from 'node:fs';
 import {checkPRGates, runPRGates} from '../scripts/check-pr-gates.mjs';
-import {githubAPI, verifyClaimForPR} from '../scripts/issue-claim-contract.mjs';
+import {githubAPI, verifyIssueScope} from '../scripts/issue-claim-contract.mjs';
 import {integrationProfile} from '../scripts/integration-profile.mjs';
 import {PROOF_PATHS, WORKFLOW_PATH} from '../scripts/integration-proof.mjs';
 import {requestAccounting} from '../scripts/github-quota.mjs';
@@ -121,7 +121,7 @@ function ownedEngineeringFixture() {
 }
 async function currentEngineeringReservation(f) {
   const comments = await f.api(f.root + '/issues/10/comments?per_page=100&page=1');
-  return verifyClaimForPR({branch: f.pr.head.ref, issue: f.issue, comments});
+  return verifyIssueScope({branch: f.pr.head.ref, issue: f.issue, comments});
 }
 test('actual PR selector and merge profile share the authenticated retained engineering prefix', async () => {
   const f = ownedEngineeringFixture();
@@ -191,23 +191,24 @@ test('actual prepare and final merge reuse only successful focused proof for ret
   assert.equal(writes.length, 1);assert.equal(writes[0].sha, f.pr.head.sha);
 });
 
-test('actual composed engineering gates reuse captured claim reads and keep package classification independent', async () => {
+test('actual composed engineering gates omit lease reads and keep package classification independent', async () => {
   const f = ownedEngineeringFixture();
   const result = await checkPRGates({event: f.event, repo: f.repo, token: 'fixture', api: f.api, phase: 'metadata'});
   assert.equal(result.profile, 'evidence'); assert.equal(result.package.full, false);
   assert.deepEqual(result.owned_paths, [f.owned]);
   assert.equal(f.calls.filter(route => route === f.root + '/issues/10').length, 2, 'One captured pass plus final fresh reconciliation');
-  assert.equal(f.calls.filter(route => route === f.root + '/issues/10/comments?per_page=100&page=1').length, 2);
+  assert.equal(f.calls.filter(route => route === f.root + '/issues/10/comments?per_page=100&page=1').length, 0);
   f.files.push({filename: 'src/attributes.js', status: 'modified'});f.pr.changed_files++;
   const full = await checkPRGates({event: f.event, repo: f.repo, token: 'fixture', api: f.api, phase: 'metadata'});
   assert.equal(full.profile, 'full'); assert.equal(full.package.full, true);
 });
+test('ordinary profile ignores historical lease state and readiness labels without reading them', async()=>{
+ const f=ownedEngineeringFixture(); f.claim.active=false;f.claim.expires_at='2000-01-01';
+ f.issue.labels=['type:engineering','status:blocked'];
+ const api=async route=>{assert(!route.includes('/comments')&&!route.includes('/timeline'));return f.api(route);};
+ assert.equal((await selectIntegrationProfile({event:f.event,repo:f.repo,api})).profile,'evidence');
+});
 for (const [name, mutate] of [
-  ['expired', f => {f.claim.expires_at = '2020-01-01T00:00:00Z';}],
-  ['inactive', f => {f.claim.active = false;}],
-  ['wrong branch', f => {f.claim.branch = 'engineering/retained-job';}],
-  ['not ready', f => {f.issue.labels = f.issue.labels.filter(x => x !== 'status:ready');}],
-  ['blocked', f => {f.issue.labels.push('status:blocked');}],
   ['wrong issue type', f => {f.issue.labels[0] = 'type:geography';}],
   ['wrong scope mode', f => {f.issue.body = f.issue.body.replace('"mode":"engineering"', '"mode":"geography"');}],
   ['unsafe scope', f => {f.issue.body = f.issue.body.replace('coordination/engineering/retained-job/', 'coordination/engineering/../');}]
@@ -280,7 +281,6 @@ test('new retained-prefix additions do not exempt package inputs, module configu
 
 test('retained engineering scope changes during actual composed inspection still refuse', async () => {
   for (const mutate of [
-    f => {f.claim.worker_id = 'another-worker';},
     f => {f.issue.body = f.issue.body.replace('retained-job/', 'foreign-job/');}
   ]) {
     const f = ownedEngineeringFixture();f.hooks[f.definitionRoute] = () => mutate(f);
@@ -296,8 +296,6 @@ for (const [name, change] of [
   ['code head', f => {f.pr.head.sha = 'c'.repeat(40);}],
   ['contract', f => {f.issue.body = f.issue.body.replace('retained bounded', 'different bounded');}],
   ['disposition', f => {f.pr.body = 'Closes #10';}],
-  ['ownership', f => {f.claim.worker_id = 'another-worker';}],
-  ['ready label', f => {f.issue.labels.push('status:blocked');}],
   ['PR allowance', f => {f.timeline = [{source: {issue: {number: 19, body: 'Refs #10', pull_request: {}}}}]; f.issue.body = f.issue.body.replace('"max_prs":2', '"max_prs":1');}]
 ]) test(`${name} change during byte/selection work prevents a coherent success`, async () => {
   const f = fixture();
@@ -322,12 +320,12 @@ test('authenticated conditional reads reduce paid repeats while changed authorit
     const result = await checkPRGates({event: f.event, repo: f.repo, token: 'fixture', api: githubAPI('fixture', {onRequest: accounting.observe})});
     assert.equal(result.status, 'checked');
     const counts = accounting.receipt().counts;
-    assert(Object.entries(counts).filter(([key]) => key.endsWith(':304')).reduce((sum, [, n]) => sum + n, 0) >= 4);
+    assert(Object.entries(counts).filter(([key]) => key.endsWith(':304')).reduce((sum, [, n]) => sum + n, 0) >= 2);
     assert(headersSeen.every(value => value === 'Bearer fixture'));
   } finally {globalThis.fetch = original;}
 });
 test('a failed real gate closes transport and cannot publish profile outputs', async () => {
-  const f = fixture(); f.claim.active = false; let closed = false;
+  const f = fixture(); f.issue.state = 'closed'; let closed = false;
   const result = await runPRGates({event: f.event, env: {GH_TOKEN: 'fixture', GITHUB_REPOSITORY: f.repo},
     apiFactory: () => f.api, transportFactory: api => ({api, close() {closed = true;}})});
   assert(closed); assert.equal(result.status, 'incomplete-or-invalid'); assert.equal(result.profile, undefined);
@@ -424,10 +422,10 @@ test('independent evidence phase verifies bytes without selecting or waiting for
   assert(!f.calls.some(route => route.includes('/contents/.github/package-inputs.json')));
 });
 test('independent evidence rejects unmet required evidence and changed ownership', async () => {
-  for (const change of ['required', 'ownership']) {
+  for (const change of ['required', 'scope']) {
     const f = fixture();
     if (change === 'required') f.issue.created_at = '2026-10-08T00:00:00Z';
-    else f.hooks[f.root + '/pulls/20/files?per_page=100&page=1'] = () => {f.claim.worker_id = 'changed-author';};
+    else f.hooks[f.root + '/pulls/20/files?per_page=100&page=1'] = () => {f.issue.body=f.issue.body.replace('retained bounded','changed bounded');};
     await assert.rejects(checkPRGates({event: f.event, repo: f.repo, token: 'fixture', api: f.api, phase: 'evidence'}));
   }
 });

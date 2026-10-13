@@ -14,7 +14,7 @@ const pages = rows => Math.floor(rows.length / 100) + 1;
 
 // This is an estimate/rejection gate, never an evidence acceptance. The real
 // byte, review and authority validators run again after capacity is observed.
-export async function inventoryFinalEvidence({api, repo, pr, issue, reservation, files, policy}) {
+export async function inventoryFinalEvidence({api, repo, pr, issue, files, policy}) {
   const requirement = evidenceRequirement(issue, workSpec(issue.body), policy, pr.head.ref);
   if (!requirement.required) return {blob_calls: 0, water: false, proof_calls: 0, descriptor_count: 0, original_count: 0};
   const root = `/repos/${repo}`;
@@ -94,7 +94,7 @@ export async function inventoryFinalEvidence({api, repo, pr, issue, reservation,
       // Empty limits intentionally cannot approve limited evidence. This early
       // rejection checks known bindings; the full validator computes limits later.
       validateReviewReceipt(receipt, {pr, issue, manifest, manifestHash: sha256(raw), files, limits: [],
-        author: reservation.worker_id, reviewKind: requirement.quality.review_kind,
+        author: manifest.worker_id, reviewKind: requirement.quality.review_kind,
         requireContractBinding: reviewBindingRequired(pr, policy)}); accepted = true;
     } catch { /* Another current receipt may bind this exact inventory. */ }
   }
@@ -307,8 +307,7 @@ export async function paceFinalValidation(options, {inspect}) {
     const after = await inspect({...options, api, evidenceCheck: inventoryFinalEvidence});
     need(!after.replayed && after.base === before.base && after.base === options.testedBase &&
       after.pr.head.sha === before.pr.head.sha && after.pr.body === before.pr.body && after.pr.title === before.pr.title &&
-      after.pr.base.sha === before.pr.base.sha && after.issue.body === before.issue.body &&
-      after.reservation.claim_id === before.reservation.claim_id && after.reservation.worker_id === before.reservation.worker_id,
+      after.pr.base.sha === before.pr.base.sha && after.issue.body === before.issue.body,
       'Authority or tested base changed during capacity wait; resubmit unchanged head');
     await proofInventory(api, after);
     return {api, receipt};

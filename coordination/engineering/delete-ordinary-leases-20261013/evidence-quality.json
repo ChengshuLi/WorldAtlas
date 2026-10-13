@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "issue": 1816,
+  "lane": "engineering",
+  "worker_id": "01a13476-effe-7065-ba24-6b7411e9702c",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "723d64259929e67ec023a4b349eaf4740a091e23",
+    "files": [
+      {
+        "path": "scripts/issue-claim-contract.mjs",
+        "bytes": 27800,
+        "sha256": "2336ebed24e966ec90b1e7408a380c20c0f12f5293fa015e8fdb267ceaeffc5c",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "ordinary-lease-readiness-removal",
+      "kind": "code",
+      "description": "Delete ordinary author lease clients, readiness audits and canonical lease consumption while retaining issue scope, managed writer identity, scientific byte/domain review and narrowly used live-operation reservations. This transitional manifest satisfies current main; no scientific result or live-operation execution is claimed.",
+      "software": "Node 24.19.0; Git",
+      "units": "No scientific measurements"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/issue-claims.test.mjs test/issue-claim-quota.test.mjs test/geography-worker-lane.test.mjs test/worker-identity.test.mjs test/worker-result.test.mjs test/pr-gates.test.mjs test/pr-evidence-transport.test.mjs test/merge-integration.test.mjs test/premerge-evidence.test.mjs"
+  ]
+}

@@ -78,7 +78,7 @@ test('PR missing pages, changed heads, unavailable lookup and malformed inventor
 test('push before/after comparison includes rename origins and fails full for missing or capped inventories', async () => {
   const push = {repository: {full_name: repository}, before, after};
   const run = (result, value = push) => profile(async () => result, {eventName: 'push', event: value});
-  assert.equal((await run(comparison([file('scripts/issue-lease.mjs')]))).full, false);
+  assert.equal((await run(comparison([file('scripts/run-issue-claim.mjs')]))).full, false);
   assert.equal((await run(comparison([file('docs/x.md', {status: 'renamed', previous_filename: 'data/world-index.json'})]))).full, true);
   for (const result of [undefined, {}, {...comparison([]), files: undefined}, {...comparison([]), commits: []},
     {...comparison([]), truncated: true}, comparison(Array.from({length: 300}, (_, n) => file(`docs/${n}.md`)))]) {

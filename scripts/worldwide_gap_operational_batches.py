@@ -29,8 +29,8 @@ def operational_batches(families):
         extents=batch.pop('known_extents')
         batch['aggregate_extent_lonlat']=None if not extents else [min(e[0]for e in extents),min(e[1]for e in extents),max(e[2]for e in extents),max(e[3]for e in extents)]
         batch['membership_view']='Union every referenced complete fine-family component roster; never split a shared-source/cross-subcontinent family.'
-        batch['next_action']='Review related open and archived issues, select a bounded complete source family closure, check current canonical claim and source contract, then dispatch source research or engineering reproduction.'
-        batch['eligibility']='Prioritized orchestration backlog; live canonical claim eligibility is not established.'
+        batch['next_action']='Review related open and archived issues, select a bounded complete source family closure, check current issue ownership and source contract, then dispatch source research or engineering reproduction.'
+        batch['eligibility']='Prioritized orchestration backlog; current issue ownership and acceptance are not established.'
         result.append(batch)
     verify_operational_batches(result,families)
     return result

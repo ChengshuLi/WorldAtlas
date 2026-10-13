@@ -1,5 +1,5 @@
 // Read-only exact-head authority; proposed dossiers never approve themselves.
-import {githubPages, linkedPulls, verifyClaimForPR, workSpec} from './issue-claim-contract.mjs';
+import {githubPages, verifyIssueScope, workSpec} from './issue-claim-contract.mjs';
 import {validateIssuePRBody, validateLanePaths} from './check-handoff-scope.mjs';
 import {evidenceRequirement, loadEvidencePolicy} from './evidence-policy.mjs';
 import {checkPremergeEvidence, validateReviewReceipt, reviewBindingRequired} from './premerge-evidence.mjs';
@@ -99,9 +99,8 @@ export async function collectGeographicApproval({api, repo, number, expectedHead
     !pr.merged && pr.base.ref === 'main' && pr.head.repo?.full_name === repo, 'PR changed or lacks source-decision authority');
   const {github_issue} = validateIssuePRBody(pr.body ?? '');
   const issue = await api(`/repos/${repo}/issues/${github_issue}`);
-  const reservation = verifyClaimForPR({branch: pr.head.ref, issue,
-    comments: await githubPages(api, `/repos/${repo}/issues/${github_issue}/comments`),
-    prs: await linkedPulls(api, repo, github_issue)});
+  if (issue.number !== github_issue) throw Error('Issue response does not match the PR linkage');
+  const reservation = verifyIssueScope({branch: pr.head.ref, issue});
   const files = await githubPages(api, `/repos/${repo}/pulls/${number}/files`);
   need(files.length === pr.changed_files && new Set(files.map(row => row.filename)).size === files.length,
     'Incomplete source-decision change inventory');
@@ -139,15 +138,11 @@ export async function collectGeographicApproval({api, repo, number, expectedHead
   need(freshPR.head.sha === expectedHead && freshPR.body === pr.body && freshPR.title === pr.title &&
     freshIssue.body === issue.body && freshPR.state === 'open' && !freshPR.draft && !freshPR.merged &&
     freshPR.base.ref === 'main' && freshPR.head.repo?.full_name === repo, 'PR or source contract changed during byte validation');
-  const freshReservation = verifyClaimForPR({branch: freshPR.head.ref, issue: freshIssue,
-    comments: await githubPages(api, `/repos/${repo}/issues/${github_issue}/comments`),
-    prs: await linkedPulls(api, repo, github_issue)});
-  need(freshReservation.claim_id === reservation.claim_id && freshReservation.worker_id === reservation.worker_id,
-    'Source reservation changed during validation');
+  verifyIssueScope({branch: freshPR.head.ref, issue: freshIssue});
   const {receipt, comment} = latestReviews(await githubPages(api, `/repos/${repo}/issues/${number}/comments`), expectedHead);
   need(comment.id === checked.review.comment_id, 'Source decision changed during byte validation; rerun same head');
   validateReviewReceipt(receipt, {pr: freshPR, issue: freshIssue, manifest, manifestHash: checked.manifest_sha256, files,
-    limits: checked.limits, author: reservation.worker_id, reviewKind: requirement.quality.review_kind,
+    limits: checked.limits, author: manifest.worker_id, reviewKind: requirement.quality.review_kind,
     requireContractBinding: reviewBindingRequired(freshPR, policy)});
   for (const name of ['source', 'geometry']) need(receipt.domains?.[name] &&
     ['accepted', 'accepted-with-limits'].includes(receipt.domains[name].outcome) &&
@@ -162,7 +157,7 @@ export async function collectGeographicApproval({api, repo, number, expectedHead
   }
   dossiers.sort((a, b) => a.path.localeCompare(b.path));
   const authority = {version: 1, method_id: METHOD, pr_number: number, reviewed_head: expectedHead,
-    claim_id: reservation.claim_id, issue_contract_sha256: sha256(issue.body),
+    issue_contract_sha256: sha256(issue.body),
     manifest_sha256: checked.manifest_sha256, review: {reviewer_worker_id: receipt.reviewer_worker_id,
       comment_id: comment.id, comment_body_sha256: sha256(comment.body)}, decisions: dossiers.map(row => row.decision)};
   need((await api(`/repos/${repo}/pulls/${number}`)).head.sha === expectedHead, 'PR head changed during source validation');

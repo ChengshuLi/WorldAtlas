@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {assertResearchImportsReady,assertResearchBundleApproved,readResearchImportGate} from '../scripts/research-import-gate.mjs';
-import {transitionClaim} from '../scripts/issue-claim-contract.mjs';
+import {verifyIssueScope} from '../scripts/issue-claim-contract.mjs';
 const pins={release_id:'release:approved',hierarchy_sha256:'a'.repeat(64),footprints_sha256:'b'.repeat(64)},macroHash='c'.repeat(64);
 const geography={id:pins.release_id,hierarchy_sha256:pins.hierarchy_sha256,footprints_sha256:pins.footprints_sha256};
 const region=id=>({region_id:id,approval_issue:id==='region:a'?101:102,semantic_complete:true,approval_evidence:'Test-only certificate',macro_boundary_sha256:macroHash,approved_release:{...pins},approved_location_ids:[`${id}:location`],approved_subject_ids:[id,`${id}:province`,`${id}:location`]});
@@ -18,14 +18,13 @@ test('v1 worldwide approval remains compatible',()=>{
  assert.deepEqual(assertResearchImportsReady(legacy),pins);
  assert.deepEqual(assertResearchBundleApproved(legacy,geography),pins);
 });
-test('regional content claims depend on macro and branch approval, not unfinished worldwide descendants',()=>{
+test('regional content scope and actual import gates are independent of ordinary reservations',()=>{
  const spec={max_prs:1,depends_on:[],scope:'One sourced census batch',mode:'content',region_ids:['region:a'],geographic_release:pins.release_id,scope_manifest:'campaign/scope.json',territory_match_review:'Approved subject denominator'};
- const issue={number:200,created_at:'2026-10-03T00:00:00Z',state:'open',labels:['type:history-research','kind:work-item','status:ready'],body:`<!-- worldatlas-work:v1\n${JSON.stringify(spec)}\n-->`};
- const request={action:'claim',worker_id:'research-a',claim_id:'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',request_id:'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',branch:'research/census-a'};
- const dependencies=[{number:100,state:'closed'},{number:101,state:'closed'},{number:7,state:'open'}];
- assert.equal(transitionClaim({issue,comments:[],request,dependencies,geographyGate:gate()}).claim.mode,'content');
- for(const missing of [100,101])assert.throws(()=>transitionClaim({issue,comments:[],request,dependencies:dependencies.filter(d=>d.number!==missing),geographyGate:gate()}),/approval dependencies/);
- assert.throws(()=>transitionClaim({issue:{...issue,body:issue.body.replace('"region:a"','"region:b"')},comments:[],request,dependencies,geographyGate:gate()}),/approval dependencies/);
+ const issue={number:200,state:'open',labels:['type:history-research','kind:work-item'],body:`<!-- worldatlas-work:v1\n${JSON.stringify(spec)}\n-->`};
+ assert.equal(verifyIssueScope({issue,branch:'research/census-a'}).mode,'content');
+ assertResearchBundleApproved(gate(),geography,{regionIds:spec.region_ids,input:{records:[record()]}});
+ const unapproved=gate();unapproved.regions[0].semantic_complete=false;
+ assert.throws(()=>assertResearchBundleApproved(unapproved,geography,{regionIds:spec.region_ids,input:{records:[record()]}}),/not approved/);
 });
 test('macro approval and explicit complete region certificates are required',()=>{
  assert.deepEqual(assertResearchImportsReady(gate(),{regionIds:['region:a']}),pins);

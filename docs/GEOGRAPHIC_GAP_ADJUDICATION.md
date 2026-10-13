@@ -63,7 +63,7 @@ has `version: 1` and one `decisions` row for every dossier. Each decision record
   canonical JSON including the final newline.
 - Sorted, unique `finding_sha256s` covering every complete supported finding.
 
-The read-only adapter validates the actual issue contract, canonical claim,
+The read-only adapter validates the actual issue contract and declared scope,
 whole-file evidence and latest distinct review from GitHub. Candidate-local
 approval files cannot replace these authorities. Request a same-head geography
 rerun after a valid decision; the adapter does not require its own geography

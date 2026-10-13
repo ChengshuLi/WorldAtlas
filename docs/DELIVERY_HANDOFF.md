@@ -4,8 +4,8 @@
 prepares immutable metadata in a managed checkout. The individual preparation phases
 never run a scientific operator, accept a source, submit a review, commit, queue
 or merge. The optional automatic continuation below commits completed metadata. The later explicit `advance --submit-queue` option uses the existing
-queue client only after genuine independent acceptance. The
-existing issue claim, source/native supervisor, rebind issuer, selected reader,
+native merge workflow only after genuine independent acceptance. The
+existing issue scope, source/native supervisor, rebind issuer, selected reader,
 evidence gate, independent reviewer and serialized queue retain their authority.
 Use Node 24 without loaders/preloads. Check storage with `local-workspace.mjs`
 before preparation. Sparse checkouts need the two literal existing composition
@@ -128,9 +128,9 @@ No proposed input is called accepted merely because a hash matches.
    staged selector/package or using exact `--resume` must produce no changes.
    Scientific assembly, package builds and final delivery remain separate.
 8. `review`: supply `repo`, `pr_number` and exact `head_sha`. Existing `gh` login is
-   read once for read-only API calls. The command reads current PR, issue, claim,
+   read once for read-only API calls. The command reads current PR and issue,
    complete changed-file/rename scope and existing premerge evidence checks, then
-   rereads current head/base/body/claim. The frozen packet carries required domains,
+   rereads current head/base/body/scope. The frozen packet carries required domains,
    complete inventory commitment, issue-contract and PR-body hashes, limitations,
    and existing queue/read-only resume command arguments. It is deliberately not a
    `worldatlas-review:v1` receipt and contains no approval or reviewer identity.
@@ -368,11 +368,12 @@ operator-receipt durations separately. Parallel operator durations are not added
 and called wall time; metadata speed is not global gap-closures/hour.
 
 Queue preparation requires the existing live independent review/evidence gate,
-including current scope/body/manifest/claim bindings and unresolved refusals.
-Only explicit `advance ... --resume --submit-queue` invokes the existing queue
-client. Its submission ID is durably written before POST. Every invocation with
+including current scope/body/manifest bindings and unresolved refusals.
+Only explicit `advance ... --resume --submit-queue` dispatches the native merge
+workflow. Its submission ID is durably written before POST. Every invocation with
 an existing submission intent is observation-only, including a crash before an
-uncertain POST. Missing registration never authorizes another submission. Follow
+uncertain POST. An absent run in a bounded listing never authorizes another
+submission. Follow
 `MERGE_QUEUE_CLIENT.md` for explicit reconciliation; no approval is inferred from
 local records, an unchanged head, or successful metadata preparation.
 
@@ -451,7 +452,7 @@ node scripts/prepare-delivery-handoff.mjs advance CONFIG OWNED_DESTINATION --aut
 Add `automation: {"issue_number": YOUR_ISSUE}` to the existing config. The
 existing recipe and observations remain authoritative. Automatic mode requires
 the current chat's ready managed author workspace, exact engineering branch,
-canonical unexpired claim, ready issue/dependencies and declared output ownership.
+current open issue with engineering lane/mode and declared output ownership.
 Use an issue-owned `coordination/engineering/.../` destination; `.cache` products
 are never silently committed as repository evidence.
 
@@ -470,8 +471,8 @@ intent binds the parent, tree, complete ordinary-file inventory, Git identity an
 operation ID before an atomic branch-ref update. Interruption after intent,
 object creation or ref advancement resumes the same commit. Foreign branch/index
 movement, hidden index edits, changed outputs and undeclared tree changes refuse;
-unrelated files are preserved. The ordinary author claim is revalidated before
-mutation. No worktree reset, automatic conflict resolution or credential/setup
+unrelated files are preserved. Managed author identity and the current issue-owned
+scope are revalidated before mutation. No worktree reset, automatic conflict resolution or credential/setup
 change is performed.
 
 Before the publication/review boundary, automatic mode fetches main with blobs
@@ -525,21 +526,14 @@ wrong units and conflicting input/result/evaluation bindings refuse before the
 existing exclusive publication writer creates output. Original metric vintages
 remain intact. This validates reporting, not the underlying geographic result.
 
-## Claim and accepted-review stability
+## Author scope
 
-Claim mutation rereads compare parsed canonical reservation and blocker authority,
-readiness/work contract, dependency state, linked PR identity/head/state/target,
-and applicable geography ownership. Cosmetic timestamps, ordinary comments and
-PR presentation fields do not invalidate a stable decision. A refusal names the
-changed categories; it does not guess which field caused an older incident.
-Fresh transition guards still enforce exclusivity and all existing readiness.
-
-The accepted-review step uses the canonical scoped reservation, including
-engineering `owned_paths`, with shared readiness/dependency/blocker validation
-before and after evidence traversal. Revoked, foreign, expired or replaced claims
-and changed scope/readiness fail. A benign renewal does not replace ownership.
-The actual independent receipt, exact head/body/manifest and unresolved-review
-gates remain authoritative.
+Automatic authoring verifies the actual managed workspace worker, token, branch
+and path before and after reading the linked issue. It checks the issue's declared
+engineering output paths before writing. Ordinary authorship does not read a
+canonical lease, readiness snapshot, dependency audit or parsed blocker receipt.
+The parent coordinates real overlapping work and dependencies. Scientific byte
+checks and distinct exact-head review remain required where applicable.
 
 ### Explicit v2 subsets and immutable receipt continuation
 
@@ -659,7 +653,7 @@ package declarations are preserved as a prefix; covered directory members are
 not redundantly appended. New output ownership is unchanged.
 
 When an original consumed role is absent from that baseline, first reconcile its
-exact restoration write path in the ordinary issue/claim scope and commit the
+exact restoration write path in the ordinary issue scope and commit the
 unchanged original body. Then supply `restored_read_roles` in standalone finalize
 configuration, or `observations.restored_read_roles` for automatic continuation:
 `{"commit":"<exact restoration commit>","paths":["<original role path>"]}`.

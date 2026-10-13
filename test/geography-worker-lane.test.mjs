@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {laneForBranch,validateLanePaths,validateIssueMetadata,checkGitScope,validateGeographyOwnedPaths} from '../scripts/check-handoff-scope.mjs';
-import {workSpec,transitionClaim,readClaim,renderClaim,verifyClaimForPR} from '../scripts/issue-claim-contract.mjs';
+import {workSpec,transitionClaim,readClaim,renderClaim,verifyIssueScope} from '../scripts/issue-claim-contract.mjs';
 import {checkLinkedIssue} from '../scripts/check-linked-github-issue.mjs';
 
 const owned=['data/regional-review/regional-review-packet-a/'],now=Date.parse('2026-10-02T22:00:00Z');
@@ -13,7 +13,6 @@ const spec={max_prs:2,depends_on:[],mode:'geography',scope:'Review the exact pub
 const issue=(scope=spec)=>({number:507,created_at:'2020-01-01T00:00:00Z',state:'open',labels:['type:geography','kind:work-item','status:ready'],body:`<!-- worldatlas-work:v1\n${JSON.stringify(scope)}\n-->`});
 const request=(extra={})=>({action:'claim',worker_id:'geo-worker',branch:'geography/packet-a',claim_id:'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',request_id:'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',...extra});
 const comment=claim=>({id:88,user:{login:'github-actions[bot]'},body:renderClaim(claim)});
-const first=()=>transitionClaim({issue:issue(),comments:[],request:request(),now}).claim;
 
 test('geography has its own branch and exactly one matching type',()=>{
  assert.deepEqual(laneForBranch('geography/packet-a'),{lane:'geography',id:'packet-a'});
@@ -37,21 +36,15 @@ test('engineering consumes but preserves geography evidence while existing lanes
  for(const file of [owned[0]+'sources.json','research/geography/source-a/proposal.json','research/campaigns/history-a/input.json'])assert.throws(()=>validateLanePaths('engineering/integrate',[file]),/preserve/);
  validateLanePaths('research/history-a',['research/campaigns/history-a/input.json']);
 });
-test('geography claims retain exact ownership through renewal and rotation, without content approval',()=>{
- const claim=first();assert.equal(claim.mode,'geography');assert.deepEqual(claim.owned_paths,owned);assert.deepEqual(readClaim([comment(claim)]).owned_paths,owned);
- const renew=request({action:'renew',branch:'geography/packet-a-part2',request_id:'cccccccc-cccc-cccc-cccc-cccccccccccc'});
- const changed=transitionClaim({issue:issue(),comments:[comment(claim)],request:renew,now}).claim;
- assert.equal(changed.claim_id,claim.claim_id);assert.deepEqual(changed.owned_paths,owned);
- assert.deepEqual(verifyClaimForPR({branch:changed.branch,issue:issue(),comments:[comment(changed)],now}).owned_paths,owned);
- assert.throws(()=>transitionClaim({issue:issue(),comments:[comment(claim)],request:{...renew,live_work:true},now}),/cannot reserve live/);
-});
-test('claims and PRs refuse issue ownership expansion and incompatible modes',()=>{
- const changed=issue({...spec,owned_paths:[...owned,'research/geography/other/']});
- assert.throws(()=>transitionClaim({issue:changed,comments:[comment(first())],request:request({action:'renew',request_id:'cccccccc-cccc-cccc-cccc-cccccccccccc'}),now}),/ownership changed/);
- assert.throws(()=>verifyClaimForPR({branch:'geography/packet-a',issue:changed,comments:[comment(first())],now}),/exact declared/);
- for(const mode of ['engineering','source-only','content'])assert.throws(()=>transitionClaim({issue:issue({...spec,mode,geographic_release:'r',scope_manifest:'s',territory_match_review:'t'}),comments:[],request:request(),now}),/mode.*lane/);
+test('geography scope comes from the issue without entering live-operation reservations',()=>{
+ assert.deepEqual(verifyIssueScope({branch:'geography/packet-a',issue:issue()}).owned_paths,owned);
+ assert.throws(()=>transitionClaim({issue:issue(),comments:[],request:request(),now}),/only for engineering live/);
+ for(const mode of ['engineering','source-only','content'])assert.throws(()=>verifyIssueScope({branch:'geography/packet-a',issue:issue({...spec,mode,geographic_release:'r',scope_manifest:'s',territory_match_review:'t'})}),/mode.*lane/);
  assert.throws(()=>workSpec(issue({...spec,owned_paths:['data/hierarchy.json']}).body),/owned_paths/);
- const malformed={...first(),owned_paths:['data/']};assert.throws(()=>readClaim([comment(malformed)]),/owned_paths/);
+ // Historical canonical comments remain parseable but confer no ordinary scope.
+ const legacy={version:1,active:true,worker_id:'legacy',claim_id:'legacy',branch:'geography/packet-a',expires_at:'2020-01-01',mode:'geography',owned_paths:owned};
+ assert.deepEqual(readClaim([comment(legacy)]).owned_paths,owned);
+ assert.throws(()=>readClaim([comment({...legacy,owned_paths:['data/']})]),/owned_paths/);
 });
 test('actual linked GitHub issue supplies geography ownership, not a PR-controlled declaration',async()=>{
  const event={repository:{full_name:'ChengshuLi/WorldAtlas'},pull_request:{body:'Refs #507\nUntrusted owned_paths: data/hierarchy.json'}};

@@ -66,3 +66,46 @@ test('fast parallel quota refusal drains bounded reads before recording actual H
   assert.equal(result.notification_deferred,true);assert.equal(result.mutation_attempted,false);
  }finally{globalThis.fetch=old;}
 });
+
+for (const change of ['stable', 'blocker', 'dependency', 'scope', 'holder', 'live-work', 'linked-pr', 'closed-issue']) {
+ test(`live reservation rechecks ${change} after dependency reads before canonical mutation`, async () => {
+  const branch='engineering/live-operation',worker='publisher';
+  const spec={mode:'engineering',max_prs:1,scope:'One bounded live operation',depends_on:[2],
+   production_operation:{source_issue:51,queue:714,publisher_worker_id:worker}};
+  const issue={number:1,state:'open',labels:[{name:'type:engineering'},{name:'kind:work-item'},{name:'status:ready'}],
+   body:`<!-- worldatlas-work:v1\n${JSON.stringify(spec)}\n-->`};
+  const claim={version:1,active:true,issue_number:1,worker_id:worker,branch,claim_id:'claim-abcdefghijklmnop',
+   request_id:'previous-abcdefghijklmnop',expires_at:'2099-01-01T00:00:00Z',live_work:false};
+  const comments=change==='live-work'?[{id:5,user:{login:'github-actions[bot]'},body:renderClaim(claim)}]:[];
+  const dependency={number:2,state:'closed'},writes=[];let armed=false,commentReads=0,linked=false;
+  const apiFactory=()=>async(route,method='GET',body)=>{
+   if(method!=='GET'){writes.push({route,method,body});return {id:10};}
+   if(route==='/repos/a/b/issues/1')return structuredClone(issue);
+   if(route.startsWith('/repos/a/b/issues/1/comments')){commentReads++;return structuredClone(comments);}
+   if(route.startsWith('/repos/a/b/issues/1/timeline'))return linked?
+    [{source:{issue:{number:3,pull_request:{},body:'Refs #1'}}}]:[];
+   if(route==='/repos/a/b/pulls/3')return {number:3,state:'open',head:{ref:branch}};
+   if(route==='/repos/a/b/issues/2'){
+    const response=structuredClone(dependency);
+    if(!armed){
+     armed=true;
+     if(change==='blocker')comments.push({id:4,body:'<!-- worldatlas-blocker:v1\n{"id":"stop-live","active":true,"reason":"Operator stopped this operation"}\n-->'});
+     if(change==='dependency')dependency.state='open';
+     if(change==='scope')issue.body=issue.body.replace('One bounded live operation','Different operation');
+     if(change==='holder')comments.push({id:5,user:{login:'github-actions[bot]'},body:renderClaim({...claim,worker_id:'other'})});
+     if(change==='live-work')comments[0].body=renderClaim({...claim,live_work:true});
+     if(change==='linked-pr')linked=true;
+     if(change==='closed-issue')issue.state='closed';
+    }
+    return response;
+   }
+   throw Error('Unexpected route '+route);
+  };
+  const result=await runIssueClaim({event:{inputs:{action:change==='live-work'?'renew':'claim',issue_number:'1',
+   worker_id:worker,branch,claim_id:claim.claim_id,request_id:'request-abcdefghijklmnop'}},env,apiFactory});
+  assert.equal(result.accepted,change==='stable',result.reason);
+  assert.equal(commentReads,2);
+  assert.equal(writes.filter(row=>row.body?.body?.startsWith('**Worker reservation:**')).length,change==='stable'?1:0);
+  if(change!=='stable')assert.equal(result.mutation_attempted,false);
+ });
+}

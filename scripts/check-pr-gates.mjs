@@ -3,7 +3,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {performance} from 'node:perf_hooks';
-import {githubAPI, githubPages, linkedPulls, verifyClaimForPR} from './issue-claim-contract.mjs';
+import {githubAPI, verifyIssueScope} from './issue-claim-contract.mjs';
 import {validateIssuePRBody} from './check-handoff-scope.mjs';
 import {reviewContractBinding} from './premerge-evidence.mjs';
 import {checkPREvidence} from './check-pr-evidence.mjs';
@@ -30,7 +30,7 @@ export async function readPRGateWorkflow({api, event, env}) {
 
 // Compose the actual trusted gates with one client. No prior successful verdict
 // is reused: each phase starts fresh and ends with authenticated rechecks.
-export async function checkPRGates({event, repo, token, api, now = Date.now, phase = 'all'}) {
+export async function checkPRGates({event, repo, token, api, phase = 'all'}) {
   if (!['all', 'metadata', 'evidence'].includes(phase)) throw Error('Invalid PR gate phase');
   const scheduled = event.pull_request, root = `/repos/${repo}`;
   if (event.repository?.full_name !== repo || !/^[-\w.]+\/[-\w.]+$/.test(repo ?? '') ||
@@ -67,10 +67,9 @@ export async function checkPRGates({event, repo, token, api, now = Date.now, pha
   assertHead(current);
   const {github_issue} = validateIssuePRBody(current.body ?? '');
   const issueRoute = `${root}/issues/${github_issue}`;
-  const [issue, comments, prs] = await completeReads([read(issueRoute),
-    githubPages(read, `${issueRoute}/comments`), linkedPulls(read, repo, github_issue)]);
+  const issue = await read(issueRoute);
   if (issue.number !== github_issue) throw Error('Issue response belongs to another contract');
-  const holder = verifyClaimForPR({branch: current.head.ref, issue, comments, prs, now: now()});
+  verifyIssueScope({branch: current.head.ref, issue});
   const binding = reviewContractBinding(issue, current);
   // Use the current authoritative body, not a possibly older edited-event body.
   const authoritativeEvent = {...event, pull_request: {...scheduled, body: current.body}};
@@ -78,8 +77,8 @@ export async function checkPRGates({event, repo, token, api, now = Date.now, pha
   if (evidence && (evidence.head_sha !== scheduled.head.sha || evidence.status === 'incomplete-or-invalid'))
     throw Error('Evidence verification did not bind the scheduled head');
   const linked = phase === 'evidence' ? undefined : await checkLinkedIssue({branch: current.head.ref, event: authoritativeEvent,
-    token, api: read, checkClaim: true});
-  const regression = phase === 'evidence' ? undefined : await selectIntegrationProfile({event: authoritativeEvent, repo, api: read, now: now()});
+    token, api: read});
+  const regression = phase === 'evidence' ? undefined : await selectIntegrationProfile({event: authoritativeEvent, repo, api: read});
   const packageProfile = phase === 'evidence' ? undefined : await deploymentBudgetProfile({event: authoritativeEvent,
     eventName: 'pull_request', repository: repo, api: read});
   if (regression?.test_selection === 'selected-data' && packageProfile?.full !== true)
@@ -87,17 +86,13 @@ export async function checkPRGates({event, repo, token, api, now = Date.now, pha
   if (packageProfile?.blocked) throw Object.assign(Error('Package classification deferred for quota'),
     {blocked: packageProfile, ...(packageProfile.api_error ? {github: packageProfile.api_error} : {})});
 
-  // Reconcile changed contracts/ownership after the byte checks. Renewals and
-  // ordinary progress comments are allowed; different holders or scope are not.
-  const [settled, finalIssue, finalComments, finalPRs] = await completeReads([
-    api(prRoute), api(issueRoute), githubPages(api, `${issueRoute}/comments`), linkedPulls(api, repo, github_issue)]);
+  // Reconcile the actual issue contract and PR after byte validation.
+  const [settled, finalIssue] = await completeReads([api(prRoute), api(issueRoute)]);
   assertHead(settled);
   if (settled.base?.sha !== current.base?.sha || finalIssue.number !== github_issue ||
       JSON.stringify(reviewContractBinding(finalIssue, settled)) !== JSON.stringify(binding))
     throw Error('PR base, acceptance contract or disposition changed during trusted gates');
-  const finalHolder = verifyClaimForPR({branch: settled.head.ref, issue: finalIssue,
-    comments: finalComments, prs: finalPRs, now: now()});
-  if (JSON.stringify(finalHolder) !== JSON.stringify(holder)) throw Error('Canonical ownership changed during trusted gates');
+  verifyIssueScope({branch: settled.head.ref, issue: finalIssue});
   return {status: 'checked', phase, head_sha: scheduled.head.sha, trusted_base: scheduled.base?.sha,
     github_issue, pr_body: current.body ?? '', issue_binding: binding, evidence, linked,
     ...(regression ? {profile: regression.profile, shards: regression.shards,
@@ -122,7 +117,7 @@ export async function runPRGates({event, env = process.env, directory = process.
     }
     if (phase !== 'metadata') transport = transportFactory(api, {repo: env.GITHUB_REPOSITORY, token: env.GH_TOKEN,
       directory, onFetch: row => downloads.push(row)});
-    result = await checkPRGates({event, repo: env.GITHUB_REPOSITORY, token: env.GH_TOKEN, api: transport?.api ?? api, now: wallNow, phase});
+    result = await checkPRGates({event, repo: env.GITHUB_REPOSITORY, token: env.GH_TOKEN, api: transport?.api ?? api, phase});
   }
   catch (error) {
     const delay = quotaDelay(error, wallNow());

@@ -2,8 +2,6 @@ import {quotaDelay,completeReads} from './github-quota.mjs';
 import {HTTP_ATTEMPT_MS} from './job-deadline.mjs';
 import {conditionalSnapshots} from './github-snapshots.mjs';
 import {laneForBranch,validateIssueMetadata,validateIssuePRBody,validateGeographyOwnedPaths,validateEngineeringOwnedPaths} from './check-handoff-scope.mjs';
-import {evidenceRequirement} from './evidence-policy.mjs';
-import {assertResearchImportsReady} from './research-import-gate.mjs';
 
 export const claimMarker='worldatlas-claim:v1';
 export function canonicalIssueNumber(value){if(!/^[1-9]\d*$/.test(String(value))||!Number.isSafeInteger(Number(value)))throw Error('Use a canonical positive issue number, without leading zeros or exponent notation');return Number(value);}
@@ -24,17 +22,23 @@ function checkLaneMode(branch,spec){
  if(lane==='engineering'&&spec.mode!=='engineering'||lane==='geography'&&spec.mode!=='geography'||lane==='research'&&!['source-only','content'].includes(spec.mode))throw Error('Scope mode must agree with the issue lane');
  if(lane==='engineering')validateEngineeringOwnedPaths(spec.owned_paths);
 }
-export function readinessDependencyIds(spec,geographyGate){
- const ids=new Set(spec?.depends_on??[]);
- if(spec?.mode==='content'){
-  if(geographyGate?.version===2){
-   assertResearchImportsReady(geographyGate,{regionIds:spec.region_ids});
-   ids.add(geographyGate.macro_boundaries.approval_issue);
-   for(const id of spec.region_ids)ids.add(geographyGate.regions.find(r=>r.region_id===id).approval_issue);
-  }else ids.add(7);
- }
- return [...ids];
+// Ordinary authorship uses the issue's declared lane and paths. Reservations
+// below are retained only for explicitly coordinated live operations.
+export function verifyIssueScope({branch, issue}) {
+ validateIssueMetadata(branch,issue);
+ const spec=workSpec(issue.body);checkLaneMode(branch,spec);
+ return {mode:spec.mode,...(spec.owned_paths!==undefined?{owned_paths:[...spec.owned_paths]}:{})};
 }
+function liveOperationScope({issue,branch,dependencies=[],comments=[]}) {
+ verifyIssueScope({branch,issue});
+ const spec=workSpec(issue.body),labels=(issue.labels??[]).map(x=>typeof x==='string'?x:x.name);
+ if(spec.mode!=='engineering')throw Error('Reservations are retained only for engineering live operations');
+ if(!labels.includes('kind:work-item')||labels.includes('kind:umbrella')||!labels.includes('status:ready')||labels.includes('status:blocked'))throw Error('Live operation needs a reviewed ready work item');
+ if(activeIssueBlockers(comments).length)throw Error('Unresolved live-operation blocker');
+ if(spec.depends_on.some(id=>!dependencies.some(d=>d.number===id&&d.state==='closed'&&!d.pull_request)))throw Error('A live-operation dependency is still open or missing');
+ return spec;
+}
+// Retained by live Cloudflare acceptance; ordinary authoring does not read blockers.
 export function activeIssueBlockers(comments){
  const latest=new Map();
  for(const c of [...comments].sort((a,b)=>a.id-b.id))for(const match of String(c.body??'').matchAll(/<!-- worldatlas-blocker:v1\s*\n([\s\S]*?)\n-->/g)){
@@ -43,32 +47,6 @@ export function activeIssueBlockers(comments){
   latest.set(value.id,value);
  }
  return [...latest.values()].filter(x=>x.active);
-}
-// Shared mechanical eligibility; no scientific approval or label mutation.
-export function assertIssueReadiness({issue,branch,dependencies=[],prs=[],otherIssues=[],comments=[],geographyGate=null,evidencePolicy,requireReady=true}) {
- validateIssueMetadata(branch,issue);
- const spec=workSpec(issue.body);checkLaneMode(branch,spec);
- const labels=(issue.labels??[]).map(x=>typeof x==='string'?x:x.name);
- const kinds=labels.filter(x=>x.startsWith('kind:'));
- if(kinds.length!==1||kinds[0]!=='kind:work-item'||(requireReady&&(!labels.includes('status:ready')||labels.includes('status:blocked'))))throw Error('Only reviewed ready work items may be claimed; split umbrellas or resolve blockers first');
- evidenceRequirement(issue,spec,evidencePolicy,branch);
- if(activeIssueBlockers(comments).length)throw Error('Explicit unresolved issue blocker; review its resume condition before readying or claiming');
- if(spec.depends_on.some(id=>!dependencies.some(d=>d.number===id&&d.state==='closed'&&!d.pull_request)))throw Error('A dependency is still open or missing');
- if(spec.mode==='geography')for(const other of otherIssues){
-  if(other.number===issue.number||other.state!=='open'||other.pull_request)continue;
-  const otherLabels=(other.labels??[]).map(x=>typeof x==='string'?x:x.name);
-  if(!otherLabels.includes('type:geography')||otherLabels.includes('kind:umbrella'))continue;
-  let owned;try{owned=workSpec(other.body).owned_paths;}catch{throw Error(`Cannot verify geography ownership: invalid open issue #${other.number}`);}
-  if(owned?.some(q=>spec.owned_paths.some(p=>p.startsWith(q)||q.startsWith(p))))throw Error(`Geography ownership conflicts with open issue #${other.number}`);
- }
- if(spec.mode==='content'){
-  if(geographyGate?.version===2){
-   const approved=assertResearchImportsReady(geographyGate,{regionIds:spec.region_ids});
-   const required=[geographyGate.macro_boundaries.approval_issue,...spec.region_ids.map(id=>geographyGate.regions.find(r=>r.region_id===id).approval_issue)];
-   if(approved.release_id!==spec.geographic_release||required.some(id=>!dependencies.some(d=>d.number===id&&d.state==='closed')))throw Error('Published macro and regional approval dependencies must be complete before content claims');
-  }else if(!geographyGate?.ready_for_location_attributes||!geographyGate.semantic_complete||geographyGate.approved_release?.release_id!==spec.geographic_release||!dependencies.some(d=>d.number===7&&d.state==='closed'))throw Error('Worldwide hierarchy approval is required before location-content imports');
- }
- return spec;
 }
 export function readClaim(comments){
  const canonical=comments.filter(c=>c.user?.login==='github-actions[bot]'&&c.body?.startsWith('**Worker reservation:**'));
@@ -81,44 +59,15 @@ export function readClaim(comments){
  if(claim.mode==='geography')validateGeographyOwnedPaths(claim.owned_paths);
  return {comment_id:comment.id,...claim};
 }
-// Keep the two-read mutation guard aligned with the authority consumed below.
-// GitHub activity timestamps, ordinary discussion and PR presentation fields are
-// not reservation authority. Parsed canonical records remain fail-closed.
-export function claimDecisionSnapshot({issue,comments=[],dependencies=[],prs=[],otherIssues=[],action}) {
- const labels=value=>(value.labels??[]).map(x=>typeof x==='string'?x:x.name);
- const relevantLabels=value=>labels(value).filter(x=>x?.startsWith('type:')||x?.startsWith('kind:')||
-  ['status:ready','status:blocked','status:claimed','coordination:recovery-approved'].includes(x)).sort();
- const canonical=value=>{
-  if(Array.isArray(value))return value.map(canonical);
-  if(value&&typeof value==='object')return Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])]));
-  return value;
- };
- const inventory=rows=>rows.map(canonical).sort((a,b)=>JSON.stringify(a).localeCompare(JSON.stringify(b)));
- const authority=(category,read)=>{try{return read();}catch(error){throw Object.assign(error,{claim_category:category});}};
- const spec=action==='release'?null:authority('readiness',()=>workSpec(issue.body));
- const endpoint=value=>({ref:value?.ref,sha:value?.sha,repo_id:value?.repo?.id,repository:value?.repo?.full_name});
- const snapshot={
-  readiness:{number:issue.number,state:issue.state,pull_request:Boolean(issue.pull_request),
-   created_at:action==='release'?undefined:issue.created_at,labels:relevantLabels(issue),spec},
-  claim:authority('claim',()=>readClaim(comments)),
-  blockers:action==='release'?[]:authority('blockers',()=>inventory(activeIssueBlockers(comments))),
-  dependencies:inventory(dependencies.map(d=>({number:d.number,state:d.state,pull_request:Boolean(d.pull_request)}))),
-  linked_prs:inventory(prs.map(pr=>({number:pr.number,state:pr.state,head:endpoint(pr.head),base:{ref:pr.base?.ref,repo_id:pr.base?.repo?.id,repository:pr.base?.repo?.full_name},
-   merged:Boolean(pr.merged_at)}))),
-  ownership:spec?.mode==='geography'?authority('ownership',()=>inventory(otherIssues.filter(other=>other.number!==issue.number&&
-   other.state==='open'&&!other.pull_request&&labels(other).includes('type:geography')&&!labels(other).includes('kind:umbrella'))
-   .map(other=>({number:other.number,owned_paths:workSpec(other.body).owned_paths})))):[]
- };
- return Object.fromEntries(Object.entries(snapshot).map(([category,value])=>[category,JSON.stringify(canonical(value))]));
-}
 export function renderClaim(claim){
  const state={...claim};delete state.comment_id;
  return `**Worker reservation:** ${claim.active?'claimed':'released'} · ${claim.worker_id}\n\nBranch: \`${claim.branch}\` · lease expires: ${claim.expires_at} · live work pending: ${Boolean(claim.live_work)}\n\n<!-- ${claimMarker}\n${JSON.stringify(state)}\n-->`;
 }
-export function transitionClaim({issue,comments,prs=[],dependencies=[],request,geographyGate=null,otherIssues=[],evidencePolicy,now=Date.now()}){
+export function transitionClaim({issue,comments,prs=[],dependencies=[],request,now=Date.now()}){
  const {action,worker_id,claim_id,branch,request_id}=request;
  if(!['claim','renew','release','recover'].includes(action)||!/^[-a-zA-Z0-9_:.]{1,100}$/.test(worker_id??'')||!/^[-a-zA-Z0-9]{16,100}$/.test(claim_id??'')||!/^[-a-zA-Z0-9]{16,100}$/.test(request_id??''))throw Error('Invalid claim action or unique worker/request IDs');
- const lane=laneForBranch(branch),current=readClaim(comments);
+ laneForBranch(branch);
+ const current=readClaim(comments);
  if(current?.request_id===request_id)return {claim:current,replayed:true};
  const openPR=prs.find(p=>p.state==='open'&&p.head?.ref===current?.branch);
  const own=current?.worker_id===worker_id&&current?.claim_id===claim_id;
@@ -129,10 +78,8 @@ export function transitionClaim({issue,comments,prs=[],dependencies=[],request,g
   if(openPR||current.live_work)throw Error('Preserve the active PR/live operation; finish or hand over before release');
   return {claim:{...current,active:false,request_id,released_at:new Date(now).toISOString()},previous:current};
  }
- const spec=assertIssueReadiness({issue,branch,dependencies,prs,otherIssues,comments,geographyGate,evidencePolicy});
+ const spec=liveOperationScope({issue,branch,dependencies,comments});
  if(spec.production_operation&&(spec.mode!=='engineering'||!Number.isSafeInteger(spec.production_operation.source_issue)||spec.production_operation.source_issue<1||![714,spec.production_operation.source_issue].includes(spec.production_operation.queue)||spec.production_operation.publisher_worker_id!==worker_id))throw Error('Production-only child reservations belong to their designated publisher');
- if(spec.mode==='geography'&&request.live_work)throw Error('Geography workers stage evidence only and cannot reserve live operations');
- if(current?.active&&own&&spec.mode==='geography'&&JSON.stringify(current.owned_paths)!==JSON.stringify(spec.owned_paths))throw Error('Geography ownership changed; preserve the work and coordinate release/reclaim before expanding scope');
  if(action==='renew'){
   if(!current?.active||!own)throw Error('Only the current holder may renew or change branch');
   if(branch!==current.branch&&(openPR||current.live_work))throw Error('Merge/close the previous PR and complete live work before rotating branches');
@@ -143,17 +90,8 @@ export function transitionClaim({issue,comments,prs=[],dependencies=[],request,g
   if(!current?.active||Date.parse(current.expires_at)>now||!labels.includes('coordination:recovery-approved')||String(request.reason??'').trim().length<10||openPR||current.live_work)throw Error('Recovery requires expired lease, explicit approval/reason and no active PR/live operation');
  }
  const expires_at=new Date(now+24*60*60*1000).toISOString();
- const claim={...(current?.comment_id?{comment_id:current.comment_id}:{}),version:1,active:true,worker_id,claim_id,branch,request_id,issue_number:issue.number,claimed_at:own?current.claimed_at:new Date(now).toISOString(),updated_at:new Date(now).toISOString(),expires_at,live_work:action==='renew'?Boolean(request.live_work):false,mode:spec.mode,max_prs:spec.max_prs,...(spec.mode==='geography'?{owned_paths:[...spec.owned_paths]}:{})};
+ const claim={...(current?.comment_id?{comment_id:current.comment_id}:{}),version:1,active:true,worker_id,claim_id,branch,request_id,issue_number:issue.number,claimed_at:own?current.claimed_at:new Date(now).toISOString(),updated_at:new Date(now).toISOString(),expires_at,live_work:action==='renew'?Boolean(request.live_work):false,mode:spec.mode,max_prs:spec.max_prs};
  return {claim,previous:current};
-}
-export function verifyClaimForPR({branch,issue,comments,prs=[],now=Date.now()}){
- validateIssueMetadata(branch,issue);const spec=workSpec(issue.body),claim=readClaim(comments);
- checkLaneMode(branch,spec);
- const labels=issue.labels.map(l=>typeof l==='string'?l:l.name);
- if(labels.includes('kind:umbrella')||labels.includes('status:blocked')||!labels.includes('status:ready'))throw Error('Issue is not ready for implementation');
- if(!claim?.active||claim.branch!==branch||Date.parse(claim.expires_at)<=now)throw Error('PR needs a current unexpired claim for this exact branch');
- if(spec.mode==='geography'&&(claim.mode!==spec.mode||JSON.stringify(claim.owned_paths)!==JSON.stringify(spec.owned_paths)))throw Error('Geography claim must retain the exact declared ownership scope');
- return {worker_id:claim.worker_id,claim_id:claim.claim_id,mode:spec.mode,...(spec.mode==='geography'||spec.mode==='engineering'&&spec.owned_paths!==undefined?{owned_paths:[...spec.owned_paths]}:{})};
 }
 export async function githubPages(api,route){
  const all=[];for(let page=1;page<=100;page++){const rows=await api(`${route}${route.includes('?')?'&':'?'}per_page=100&page=${page}`);const list=Array.isArray(rows)?rows:rows?.check_runs;if(!Array.isArray(list))throw Error('Invalid paginated GitHub response');all.push(...list);if(list.length<100)return all;}throw Error('GitHub pagination limit reached; stop rather than assume completeness');

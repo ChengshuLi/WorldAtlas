@@ -2,7 +2,7 @@
 // Unknown docs/scripts/workflows retain full regression, including rename origins.
 export const COORDINATION_PATHS = new Set([
   'docs/WORKER_COORDINATION.md', 'docs/PREMERGE_EVIDENCE_REVIEW.md',
-  'scripts/issue-claim-contract.mjs', 'scripts/issue-lease.mjs', 'scripts/run-issue-claim.mjs',
+  'scripts/issue-claim-contract.mjs', 'scripts/run-issue-claim.mjs',
   'scripts/worker-result.mjs', 'scripts/check-handoff-scope.mjs', 'scripts/check-linked-github-issue.mjs',
   'scripts/evidence-quality.mjs', 'scripts/evidence-policy.mjs', 'scripts/premerge-evidence.mjs',
   'scripts/check-pr-evidence.mjs', 'scripts/merge-integration.mjs', 'scripts/integration-proof.mjs',
@@ -18,8 +18,8 @@ export const COORDINATION_PATHS = new Set([
     'evidence-quality','premerge-evidence','trusted-workflow-checkouts','merge-integration',
     'merge-integration-entrypoint','integration-proof'].map(name=>`test/${name}.test.mjs`)
 ]);
-// Callers supply the current linked issue's scope only after exact-branch claim
-// validation. Candidate metadata is never an ownership source.
+// Callers supply the current linked issue's validated lane and declared scope.
+// Candidate metadata is never an ownership source.
 function engineeringOwnedScopes(reservation) {
   return reservation.mode === 'engineering' && Array.isArray(reservation.owned_paths)
     ? reservation.owned_paths.filter(prefix => typeof prefix === 'string' &&

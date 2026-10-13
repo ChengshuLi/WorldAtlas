@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
-import {transitionClaim,readClaim,renderClaim,verifyClaimForPR,workSpec,githubPages,canonicalIssueNumber} from '../scripts/issue-claim-contract.mjs';
+import {transitionClaim,readClaim,renderClaim,verifyIssueScope,workSpec,githubPages,canonicalIssueNumber} from '../scripts/issue-claim-contract.mjs';
 import {assertResearchImportsReady,assertResearchBundleApproved} from '../scripts/research-import-gate.mjs';
 
 const now=Date.parse('2026-10-02T12:00:00Z');
@@ -64,17 +64,13 @@ test('canonical comments cannot be impersonated or ambiguous',()=>{
  assert.throws(()=>readClaim([value,{...value,id:102}]),/Multiple/);
  assert.throws(()=>readClaim([{...value,body:'**Worker reservation:** worldatlas-claim:v1 malformed'}]),/Malformed/);
 });
-test('PR validation uses current exact-branch ownership and rejects expired or blocked claims',()=>{
- verifyClaimForPR({issue:issue(),comments:[comment(first())],branch:'engineering/repair-a',now});
- assert.throws(()=>verifyClaimForPR({issue:issue(),comments:[comment(first())],branch:'engineering/repair-b',now}),/exact branch/);
- assert.throws(()=>verifyClaimForPR({issue:issue(),comments:[comment(first())],branch:'engineering/repair-a',now:now+86400001}),/unexpired/);
- assert.throws(()=>verifyClaimForPR({issue:issue({labels:[...issue().labels,'status:blocked']}),comments:[comment(first())],branch:'engineering/repair-a',now}),/not ready/);
-});
-test('location-content claims wait for worldwide approval while source-only work can start',()=>{
- const researchIssue=mode=>issue({labels:['type:history-research','kind:work-item','status:ready'],body:`<!-- worldatlas-work:v1\n${JSON.stringify({...spec,mode,geographic_release:'release-2',scope_manifest:'inputs.json',territory_match_review:'Pending evidence'})}\n-->`});
- const researchRequest=request({branch:'research/source-a'});
- assert.equal(transitionClaim({issue:researchIssue('source-only'),comments:[],request:researchRequest,now}).claim.mode,'source-only');
- assert.throws(()=>transitionClaim({issue:researchIssue('content'),comments:[],request:researchRequest,dependencies:[{number:7,state:'closed'}],geographyGate:{ready_for_location_attributes:false},now}),/Worldwide hierarchy approval/);
+test('ordinary scope no longer requires a lease, but content imports retain their scientific gate',()=>{
+ assert.deepEqual(verifyIssueScope({issue:issue(),branch:'engineering/repair-a'}),{mode:'engineering'});
+ assert.deepEqual(verifyIssueScope({issue:issue({labels:['type:engineering']}),branch:'engineering/other'}),{mode:'engineering'});
+ assert.throws(()=>verifyIssueScope({issue:issue(),branch:'research/repair-a'}),/type:/);
+ const researchIssue=mode=>issue({labels:['type:history-research'],body:`<!-- worldatlas-work:v1\n${JSON.stringify({...spec,mode,geographic_release:'release-2',scope_manifest:'inputs.json',territory_match_review:'Pending evidence'})}\n-->`});
+ assert.equal(verifyIssueScope({issue:researchIssue('source-only'),branch:'research/source-a'}).mode,'source-only');
+ assert.throws(()=>transitionClaim({issue:researchIssue('source-only'),comments:[],request:request({branch:'research/source-a'}),now}),/only for engineering live/);
  assert.throws(()=>assertResearchImportsReady({version:1,ready_for_location_attributes:false}),/paused/);
  assert.throws(()=>execFileSync(process.execPath,['scripts/import-research-bundle.mjs','https://example.com','unused-bundle'],{stdio:'pipe'}),error=>error.stderr.toString().includes('Research imports are paused'));
 });
@@ -83,9 +79,8 @@ test('in-scope continuation beyond the estimate claims, rotates and merges under
  const held=transitionClaim({issue:issue(),comments:[],request:request(),prs,now}).claim;
  const rotated=transitionClaim(next({comments:[comment(held)],prs,request:request({action:'renew',request_id:'ssssssss-ssss-ssss-ssss-ssssssssssss',branch:'engineering/next'})})).claim;
  assert.equal(rotated.claim_id,held.claim_id);
- assert.equal(verifyClaimForPR({issue:issue(),comments:[comment(rotated)],prs,branch:rotated.branch,now}).worker_id,held.worker_id);
+ assert.equal(verifyIssueScope({issue:issue(),branch:rotated.branch}).mode,'engineering');
  assert.throws(()=>transitionClaim(next({comments:[comment(held)],prs:[...prs,{state:'open',head:{ref:held.branch}}],request:request({action:'renew',request_id:'ssssssss-ssss-ssss-ssss-ssssssssssss',branch:'engineering/next'})})),/previous PR/);
- assert.throws(()=>verifyClaimForPR({issue:issue(),comments:[comment(rotated)],prs,branch:'engineering/foreign',now}),/exact branch/);
  const larger=issue({body:'<!-- worldatlas-work:v1\n'+JSON.stringify({...spec,max_prs:10})+'\n-->'});
  assert.equal(workSpec(larger.body).max_prs,10);
  assert.equal(transitionClaim({issue:larger,comments:[],request:request(),prs,now}).claim.max_prs,10);
@@ -126,15 +121,21 @@ test('production child accepts only original-issue or legacy tracking and design
 });
 
 
-test('verified engineering reservation carries only safe actual work declarations',()=>{
+test('verified engineering scope carries only safe actual work declarations',()=>{
  const owned_paths=['coordination/engineering/batch/','coordination/engineering/prevention/helper.mjs'];
  const scoped=issue({body:`<!-- worldatlas-work:v1\n${JSON.stringify({...spec,owned_paths})}\n-->`});
  const claim=transitionClaim({issue:scoped,comments:[],request:request(),now}).claim;
- const reservation=verifyClaimForPR({issue:scoped,comments:[comment(claim)],branch:claim.branch,now});
+ const reservation=verifyIssueScope({issue:scoped,comments:[comment(claim)],branch:claim.branch,now});
  assert.deepEqual(reservation.owned_paths,owned_paths);
  // Existing engineering claims have no stored path array: the matched issue remains authority.
  assert.equal(claim.owned_paths,undefined);
- assert.equal(verifyClaimForPR({issue:issue(),comments:[comment(claim)],branch:claim.branch,now}).owned_paths,undefined);
- for(const owned_paths of [['coordination/engineering/'],['coordination/engineering/batch/','coordination/engineering/batch/'],['coordination/engineering/batch/../other/'],['research/geography/a/']])assert.throws(()=>verifyClaimForPR({issue:issue({body:`<!-- worldatlas-work:v1\n${JSON.stringify({...spec,owned_paths})}\n-->`}),comments:[comment(claim)],branch:claim.branch,now}));
- assert.throws(()=>verifyClaimForPR({issue:scoped,comments:[comment(claim)],branch:'engineering/foreign',now}),/exact branch/);
+ assert.equal(verifyIssueScope({issue:issue(),comments:[comment(claim)],branch:claim.branch,now}).owned_paths,undefined);
+ for(const owned_paths of [['coordination/engineering/'],['coordination/engineering/batch/','coordination/engineering/batch/'],['coordination/engineering/batch/../other/'],['research/geography/a/']])assert.throws(()=>verifyIssueScope({issue:issue({body:`<!-- worldatlas-work:v1\n${JSON.stringify({...spec,owned_paths})}\n-->`}),comments:[comment(claim)],branch:claim.branch,now}));
+});
+
+test('live reservation refuses active blockers and can settle historical source-author reservations',()=>{
+ const blockers=[{id:1,body:'<!-- worldatlas-blocker:v1\n{"id":"live-stop","active":true,"reason":"Unsettled operation"}\n-->'}];
+ assert.throws(()=>transitionClaim({issue:issue(),comments:blockers,request:request(),now}),/live-operation blocker/);
+ const held={...first(),mode:'source-only',branch:'research/historical'};
+ assert.equal(transitionClaim({issue:issue(),comments:[comment(held)],request:request({action:'release',branch:held.branch,request_id:'ssssssss-ssss-ssss-ssss-ssssssssssss'}),now}).claim.active,false);
 });

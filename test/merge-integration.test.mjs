@@ -85,10 +85,10 @@ test('stale merge object and truncated inventories fail closed', async () => {
   const a=fixture();a.parentBase=sha('e');await assert.rejects(prepareIntegration(a.options()),/bounded refresh/);
   const b=fixture();b.truncated=true;await assert.rejects(prepareIntegration(b.options()),/Incomplete integration tree/);
 });
-test('stale head or review and expired ownership prohibit integration', async () => {
+test('stale head, review or issue scope prohibit integration', async () => {
   const a=fixture();a.pr.head.sha=sha('e');await assert.rejects(a.complete(),/head changed/);
   const b=fixture();b.staleReview=true;await assert.rejects(b.complete(),/exact-head review/);
-  const c=fixture();c.claim.expires_at='2000-01-01T00:00:00Z';await assert.rejects(c.complete(),/unexpired claim/);
+  const c=fixture();c.issue.state='closed';await assert.rejects(c.complete(),/open GitHub issue/);
   assert.equal(a.writes.length+b.writes.length+c.writes.length,0);
 });
 test('failed or skipped candidate tests never merge an open PR', async () => {
@@ -211,7 +211,7 @@ test('historical code success never bypasses fresh evidence, review, ownership, 
   for (const mutate of [
     f=>f.checks.push({id:2,name:'evidence',app:{id:1},status:'completed',conclusion:'failure'}),
     f=>f.staleReview=true,
-    f=>f.claim.expires_at='2000-01-01T00:00:00Z',
+    f=>f.issue.state='closed',
     f=>f.checks[0].conclusion='failure'
   ]) {
     const f=fixture();addTrustedProof(f,{evidenceFailed:true});
@@ -312,18 +312,18 @@ test('main and evidence vintage advances are not silently adopted while refreshi
     });assert.equal(f.treeReads??0,0);assert.equal(f.writes.length,0);
   }
 });
-test('claim/check/review and issue authority is rechecked after waiting',async()=>{
-  for(const change of ['claim','checks','review','issue']) {
+test('scope/check/review and issue authority is rechecked after waiting',async()=>{
+  for(const change of ['scope','checks','review','issue']) {
     const f=fixture();sequencePR(f,(f,n)=>{
       f.parentBase=n<3?sha('e'):f.base;
       if(n===4) {
-        if(change==='claim')f.claim.expires_at='2000-01-01T00:00:00Z';
+        if(change==='scope')f.issue.state='closed';
         if(change==='checks')f.checks[0].conclusion='failure';
         if(change==='review')f.staleReview=true;
         if(change==='issue')f.issue.body=f.issue.body.replace('code','different');
       }
     });
-    await assert.rejects(prepareIntegration(f.options()),/unexpired claim|trusted scope|exact-head review|contract or ownership/);
+    await assert.rejects(prepareIntegration(f.options()),/open GitHub issue|trusted scope|exact-head review|contract or ownership/);
     assert.equal(f.treeReads??0,0);assert.equal(f.writes.length,0);
   }
 });
@@ -606,8 +606,8 @@ test('known stale tested base or head rejects before expensive evidence/tree ins
 });
 
 
-test('candidate waiting rechecks changed claim/check/review/head after caching immutable evidence',async()=>{
- for(const changed of ['claim','check','review','head']) {
+test('candidate waiting rechecks changed scope/check/review/head after caching immutable evidence',async()=>{
+ for(const changed of ['scope','check','review','head']) {
   const f=fixture(),origin=f.api,raw=Buffer.from('immutable evidence'),oid=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
   let candidates=0,blobs=0;
   f.api=async(route,...rest)=>{
@@ -621,12 +621,12 @@ test('candidate waiting rechecks changed claim/check/review/head after caching i
    if(f.staleReview)throw Error('Missing independent exact-head review');return {status:'legacy'};
   };
   options.candidateSleep=async()=>{
-   if(changed==='claim')f.claim.expires_at='2000-01-01T00:00:00Z';
+   if(changed==='scope')f.issue.state='closed';
    if(changed==='check')f.checks[0].conclusion='failure';
    if(changed==='review')f.staleReview=true;
    if(changed==='head')f.pr.head.sha=sha('e');
   };
-  await assert.rejects(prepareIntegration(options),changed==='claim'?/unexpired claim/:changed==='check'?/trusted scope/:changed==='review'?/exact-head review/:/head changed/);
+  await assert.rejects(prepareIntegration(options),changed==='scope'?/open GitHub issue/:changed==='check'?/trusted scope/:changed==='review'?/exact-head review/:/head changed/);
   assert.equal(blobs,1);assert.equal(f.writes.length,0);
  }
 });

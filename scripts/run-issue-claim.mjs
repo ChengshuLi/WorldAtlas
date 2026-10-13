@@ -1,10 +1,10 @@
 import {renderWorkerResult} from './worker-result.mjs';
 import fs from 'node:fs';
+import {isDeepStrictEqual} from 'node:util';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {requestAccounting, quotaDelay, completeReads} from './github-quota.mjs';
-import {githubAPI,githubPages,linkedPulls,transitionClaim,renderClaim,workSpec,canonicalIssueNumber,readinessDependencyIds,claimDecisionSnapshot} from './issue-claim-contract.mjs';
-import {evidenceRequirement,loadEvidencePolicy} from './evidence-policy.mjs';
+import {githubAPI,githubPages,linkedPulls,transitionClaim,renderClaim,readClaim,workSpec,canonicalIssueNumber} from './issue-claim-contract.mjs';
 
 export async function runIssueClaim({event, env=process.env, apiFactory=githubAPI, wallNow=Date.now}) {
 const input=event.inputs??{},repo=env.GITHUB_REPOSITORY;
@@ -17,24 +17,17 @@ let mutationAttempted=false;
 try{
  const [issue,comments,prs]=await completeReads([api(`/repos/${repo}/issues/${number}`),githubPages(api,`/repos/${repo}/issues/${number}/comments`),linkedPulls(api,repo,number)]);
  const spec=input.action==='release'?null:workSpec(issue.body);
- if(spec&&loadEvidencePolicy().mode==='enforce-new')evidenceRequirement(issue,spec,undefined,input.branch);
- const geographyGate=spec?.mode==='content'?JSON.parse(fs.readFileSync('data/research-geography-gate.json','utf8')):null;
- const ids=readinessDependencyIds(spec,geographyGate);
- const dependencies=await completeReads([...ids].map(id=>api(`/repos/${repo}/issues/${id}`)));
- const otherIssues=spec?.mode==='geography'?await githubPages(api,`/repos/${repo}/issues?state=open&labels=type%3Ageography`):[];
- const before=claimDecisionSnapshot({issue,comments,dependencies,prs,otherIssues,action:input.action});
- const [freshIssue,freshComments,freshDependencies,freshPRs,freshOtherIssues]=await completeReads([
+ const dependencies=await completeReads((spec?.depends_on??[]).map(id=>api(`/repos/${repo}/issues/${id}`)));
+ const request={...input,live_work:input.live_work==='true'};
+ transitionClaim({issue,comments,prs,dependencies,request});
+ // Only live reservations use this second authority read. Dependency requests
+ // can outlive an operator stop, scope edit, or handoff; do not write stale authority.
+ const [freshIssue,freshComments,freshDependencies,freshPRs]=await completeReads([
   api(`/repos/${repo}/issues/${number}`),githubPages(api,`/repos/${repo}/issues/${number}/comments`),
-  completeReads(ids.map(id=>api(`/repos/${repo}/issues/${id}`))),linkedPulls(api,repo,number),
-  spec?.mode==='geography'?githubPages(api,`/repos/${repo}/issues?state=open&labels=type%3Ageography`):[]]);
- let after;
- try{after=claimDecisionSnapshot({issue:freshIssue,comments:freshComments,dependencies:freshDependencies,
-  prs:freshPRs,otherIssues:freshOtherIssues,action:input.action});}
- catch(error){if(error.claim_category)error.changed_categories=[error.claim_category];throw error;}
- const changedCategories=Object.keys(before).filter(category=>before[category]!==after[category]);
- if(changedCategories.length)throw Object.assign(Error(`Issue, ownership, dependencies or linked PR state changed during claim (${changedCategories.join(', ')}); reread before retry`),
-  {changed_categories:changedCategories});
- const next=transitionClaim({issue:freshIssue,comments:freshComments,prs:freshPRs,dependencies:freshDependencies,geographyGate,otherIssues:freshOtherIssues,request:{...input,live_work:input.live_work==='true'}}),claim=next.claim;
+  completeReads((spec?.depends_on??[]).map(id=>api(`/repos/${repo}/issues/${id}`))),linkedPulls(api,repo,number)]);
+ if(freshIssue.body!==issue.body||!isDeepStrictEqual(readClaim(comments),readClaim(freshComments)))
+  throw Error('Live scope or reservation changed during authority reads; reread before retry');
+ const next=transitionClaim({issue:freshIssue,comments:freshComments,prs:freshPRs,dependencies:freshDependencies,request}),claim=next.claim;
  // The canonical bot comment is authority; labels are a repairable display projection.
  mutationAttempted=true; // A lost write response requires reconciliation, never blind replay.
  if(claim.comment_id)await api(`/repos/${repo}/issues/comments/${claim.comment_id}`,'PATCH',{body:renderClaim(claim)});
@@ -50,7 +43,6 @@ try{
  Object.assign(result,{reason:error.message,mutation_attempted:mutationAttempted,
    reconcile_required:mutationAttempted,retryable:delay!==null,
    ...(error.github?{api_error:error.github}:{}),
-   ...(error.changed_categories?{changed_categories:error.changed_categories}:{}),
    ...(delay!==null?{retry_at:new Date(wallNow()+delay).toISOString()}:{} )});
 }
 // A known quota refusal cannot deliver another API comment before reset. The

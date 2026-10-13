@@ -1,4 +1,4 @@
-name: Issue worker reservations
+name: Live operation reservations
 run-name: '${{ inputs.action }} #${{ inputs.issue_number }} ${{ inputs.request_id }}'
 on:
   workflow_dispatch:
@@ -49,11 +49,10 @@ jobs:
             scripts
             src
             .github
-            data/research-geography-gate.json
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
           node-version: '24'
-      - name: Reserve, renew or release the issue
+      - name: Reserve, renew or release live-operation ownership
         env:
           GH_TOKEN: ${{ github.token }}
         run: node scripts/run-issue-claim.mjs
