@@ -1,5 +1,7 @@
 # Worker system before and after the five engineering changes
 
+This is a historical comparison of the five changes below, not the current operating procedure. Ordinary leases/readiness audits and the custom merge scheduler were subsequently retired. Use [WORKER_COORDINATION.md](WORKER_COORDINATION.md) and [MERGE_QUEUE_CLIENT.md](MERGE_QUEUE_CLIENT.md) for current ownership and native queue instructions.
+
 The comparison baseline is `7e0d5c97aeb1f0d98ac035959a2fe7a3cafe99c3`, immediately before PR #631, the first change in this effort. It is **not** the state immediately before the fifth change. The five work items are #625, #628, #626, #627 and #650. GitHub Issues remains the live work record.
 
 | Worker step | Before this effort | After the five changes |
