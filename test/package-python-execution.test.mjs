@@ -46,6 +46,67 @@ test('script-parent namespace portions cannot expand or replace installed import
  }
 });
 
+test('empty, data-only and tagged-cache namespace portions do not change executable imports',async t=>{
+ const f=await fixture(t),script=path.join(f.scripts,'operation.py');
+ for(const name of ['emptybranch','records']){
+  await fs.mkdir(path.join(f.site,name));await fs.mkdir(path.join(f.scripts,name));
+ }
+ await fs.mkdir(path.join(f.scripts,'records','nested'));
+ await fs.writeFile(path.join(f.scripts,'records','nested','data.json'),'{}');
+ await fs.symlink(path.join(f.scripts,'records'),path.join(f.scripts,'records','cycle'));
+ await fs.writeFile(path.join(f.scripts,'sibling.py'),'value="authored"\n');
+ // Actual compiler-produced tagged caches reproduce the hosted regression.
+ for(const source of [path.join(f.site,'science.py'),path.join(f.scripts,'sibling.py')]){
+  execFileSync(f.python,['-I','-S','-B','-c','import py_compile,sys;py_compile.compile(sys.argv[1],doraise=True)',source]);
+ }
+ await fs.writeFile(script,'import science,sibling,json\nprint(json.dumps([science.value,sibling.value]))\n');
+ assert.deepEqual(JSON.parse(f.run(packagePythonArgs([script]))),['installed','authored']);
+ await assert.rejects(fs.stat(f.marker),{code:'ENOENT'});
+ // The cache directory itself has no exemption: an ordinary importable child
+ // would extend the installed namespace and must fail before authored execution.
+ await fs.writeFile(path.join(f.scripts,'__pycache__','injected.py'),'raise RuntimeError("injected child ran")\n');
+ const rejected=spawnSync(f.python,packagePythonArgs([script]),{encoding:'utf8'});
+ assert.notEqual(rejected.status,0);assert.match(rejected.stderr,/changes admitted import resolution: __pycache__/);
+ assert.equal(rejected.stdout,'');assert.doesNotMatch(rejected.stderr,/RuntimeError: injected child ran/);
+});
+
+test('namespace admission rejects source, sourceless, native and nested executable additions',async t=>{
+ const f=await fixture(t),script=path.join(f.scripts,'operation.py');
+ await fs.mkdir(path.join(f.site,'sharedns'));await fs.writeFile(path.join(f.site,'sharedns','installed.py'),'value=1\n');
+ await fs.writeFile(script,'raise RuntimeError("authored script must not execute")\n');
+ const suffix=execFileSync(f.python,['-I','-S','-B','-c','import importlib.machinery;print(importlib.machinery.EXTENSION_SUFFIXES[0])'],{encoding:'utf8'}).trim();
+ for(const member of ['injected.py','injected.pyc','injected'+suffix,'nested/injected.py','nested/__init__.py']){
+  const portion=path.join(f.scripts,'sharedns'),target=path.join(portion,member);
+  await fs.mkdir(path.dirname(target),{recursive:true});
+  if(member.endsWith('.pyc')){
+   const source=path.join(f.root,'cache-source.py');await fs.writeFile(source,'value=2\n');
+   execFileSync(f.python,['-I','-S','-B','-c','import py_compile,sys;py_compile.compile(sys.argv[1],cfile=sys.argv[2],doraise=True)',source,target]);
+  }else await fs.writeFile(target,'value=2\n');
+  const result=spawnSync(f.python,packagePythonArgs([script]),{encoding:'utf8'});
+  assert.notEqual(result.status,0,member);assert.match(result.stderr,/changes admitted import resolution: sharedns/,member);
+  assert.doesNotMatch(result.stderr,/RuntimeError: authored script must not execute/,member);
+  await fs.rm(portion,{recursive:true});
+ }
+});
+
+test('dynamic imports with nonidentifier namespace and module names remain protected',async t=>{
+ const f=await fixture(t),script=path.join(f.scripts,'operation.py');
+ for(const name of ['sharedns','shared-ns']){
+  const installed=path.join(f.site,name),authored=path.join(f.scripts,name);
+  await fs.mkdir(installed);await fs.writeFile(path.join(installed,'installed.py'),'value=1\n');
+  await fs.mkdir(authored);await fs.writeFile(path.join(authored,'x-y.py'),'value=2\n');
+  const module=name+'.x-y';
+  // Prove this is a real importer-resolvable name, despite invalid Python syntax.
+  const actual=execFileSync(f.python,['-I','-S','-B','-c','import importlib,sys;sys.path.append(sys.argv[1]);print(importlib.import_module(sys.argv[2]).value)',f.scripts,module],{encoding:'utf8'});
+  assert.equal(actual.trim(),'2');
+  await fs.writeFile(script,'import importlib\nprint(importlib.import_module('+JSON.stringify(module)+').value)\n');
+  const result=spawnSync(f.python,packagePythonArgs([script]),{encoding:'utf8'});
+  assert.notEqual(result.status,0);assert.match(result.stderr,new RegExp('changes admitted import resolution: '+name));
+  assert.equal(result.stdout,'');
+  await fs.rm(authored,{recursive:true});
+ }
+});
+
 test('real execution retains explicit failures and rejects unsupported invocation forms',async t=>{
  const f=await fixture(t);
  const result=spawnSync(f.python,packagePythonArgs(['-c','raise ValueError("genuine operation failure")']),{encoding:'utf8'});

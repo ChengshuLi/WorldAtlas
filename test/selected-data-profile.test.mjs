@@ -921,15 +921,19 @@ test('actual immutable transport retains required metadata but not cumulative su
 test('machine observations tighten admission during reads and immediately before decoding',async()=>{
  for(const pressure of ['read','decode','zero','invalid']){
   const name=prefix+'support.json.gz',f=fixture({mutate:f=>f.put(name,gzipSync(JSON.stringify('x'.repeat(64*1024))))});
-  const original=process.availableMemory,api=f.api,stats={};let observed=1024*1024;
+  const original=process.availableMemory,api=f.api,stats={};let observed=1024*1024,pressuredAt=null;
   f.api=memoizeImmutableGitBlobs(async(...args)=>{
    const response=await api(...args);
-   if(pressure==='read'&&f.reads.length===1)observed=8;
-   if(args[0].endsWith(f.authored.entries.get(name).sha))observed=pressure==='zero'?0:pressure==='invalid'?NaN:64*1024;
+   if(pressure==='read'&&f.reads.length===1){observed=8;pressuredAt=f.reads.length;}
+   if(args[0].endsWith(f.authored.entries.get(name).sha)){observed=pressure==='zero'?0:pressure==='invalid'?NaN:64*1024;pressuredAt=f.reads.length;}
    return response;
   });
   process.availableMemory=()=>observed;
-  try {assert.equal(await f.run({metadataDiagnostics:stats}),null,pressure);assert.match(stats.failure,/metadata (memory|admission)/);}
+  // Both the shared package declaration reader and selected metadata reader
+  // enforce live admission. The first refusing layer may use a generic reason;
+  // prove refusal and no further reads rather than require one error spelling.
+  try {assert.equal(await f.run({metadataDiagnostics:stats}),null,pressure);assert.ok(stats.failure,pressure);
+   assert.notEqual(pressuredAt,null,pressure);assert.equal(f.reads.length,pressuredAt,pressure);}
   finally {process.availableMemory=original;}
   assert(stats.peak_admitted_bytes<=stats.limit_bytes);
  }

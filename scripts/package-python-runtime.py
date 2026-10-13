@@ -880,8 +880,33 @@ def probe_imports(rows):
     return {'version': sys.version.split()[0], 'executable': sys.executable, 'imports': imports}
 
 
+def namespace_portion_has_code(directory):
+    """Data/cache-only namespace portions add no executable import candidates."""
+    pending, seen = [Path(directory)], set()
+    suffixes = sorted(importlib.machinery.all_suffixes(), key=len, reverse=True)
+    while pending:
+        directory = pending.pop()
+        physical = directory.resolve(strict=True)
+        if physical in seen:
+            continue
+        seen.add(physical)
+        for item in directory.iterdir():
+            name = item.name if item.is_dir() else next((item.name[:-len(suffix)] for suffix in suffixes
+                                                       if item.name.endswith(suffix)), '')
+            # Dynamic imports allow nonidentifiers; dots still delimit segments.
+            if not name or '.' in name:
+                continue
+            spec = importlib.machinery.PathFinder.find_spec(name, [str(directory)])
+            if spec is None:
+                continue
+            if spec.loader is not None or spec.origin is not None:
+                return True
+            pending.extend(Path(location) for location in spec.submodule_search_locations or ())
+    return False
+
+
 def append_authored_script_path(parent):
-    """Local helpers cannot replace or extend any admitted import root."""
+    """Local helpers cannot replace or extend admitted executable imports."""
     parent = Path(parent)
     need(parent.absolute() == parent.resolve(strict=True) and parent.is_dir(),
          'Ordinary authored script directory required')
@@ -890,7 +915,7 @@ def append_authored_script_path(parent):
     for item in parent.iterdir():
         name = item.name if item.is_dir() else next((item.name[:-len(suffix)] for suffix in suffixes
                                                    if item.name.endswith(suffix)), '')
-        if name.isidentifier():
+        if name and '.' not in name:
             names.add(name)
     def identity(spec):
         return None if spec is None else (spec.origin, tuple(spec.submodule_search_locations or ()))
@@ -898,8 +923,18 @@ def append_authored_script_path(parent):
     for name in sorted(names):
         original = importlib.machinery.PathFinder.find_spec(name, before)
         if original is not None:
-            need(identity(original) == identity(importlib.machinery.PathFinder.find_spec(name, [*before, str(parent)])),
-                 'Authored script directory changes admitted import resolution: ' + name)
+            updated = importlib.machinery.PathFinder.find_spec(name, [*before, str(parent)])
+            unchanged = identity(original) == identity(updated)
+            if not unchanged and updated is not None and original.loader is None and updated.loader is None:
+                old_parts = tuple(original.submodule_search_locations or ())
+                new_parts = tuple(updated.submodule_search_locations or ())
+                # Namespace search paths are observable, but adding an empty or
+                # data-only portion cannot supply executable Python code. Tagged
+                # cache filenames are handled by the actual importer, not a
+                # special-case directory-name exemption.
+                unchanged = (new_parts[:len(old_parts)] == old_parts and
+                             not any(namespace_portion_has_code(part) for part in new_parts[len(old_parts):]))
+            need(unchanged, 'Authored script directory changes admitted import resolution: ' + name)
     if str(parent) not in sys.path:
         sys.path.append(str(parent))
 

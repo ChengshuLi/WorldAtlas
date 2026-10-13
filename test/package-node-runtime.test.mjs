@@ -15,7 +15,7 @@ const makePath=packagePath+'/build/Makefile';
 const compatibility=identity=>({node:identity.node,dependencies:{files:identity.dependencies.files,
   bytes:identity.dependencies.bytes,sha256:identity.dependencies.sha256}});
 function write(root,name,value){const file=path.join(root,name);fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,value);return file;}
-function fixture(t){
+function fixture(t,{generate=true}={}){
   const temp=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-node-runtime-'));t.after(()=>fs.rmSync(temp,{recursive:true,force:true}));
   const roots=['original','candidate+longer'].map(name=>path.join(temp,name));
   const pkg=JSON.stringify({name:packageName,version:'1.0.0',main:'index.js',
@@ -29,7 +29,7 @@ function fixture(t){
     write(root,packagePath+'/control.cc','int unchanged_runtime_source=42;\n');
     // Only the actual installed make generator runs, with inert type:none.
     // No npm install, native compile, package build, network or emitted JS runs.
-    execFileSync('python3',[generator,'binding.gyp','-f','make','--depth=.',
+    if(generate)execFileSync('python3',[generator,'binding.gyp','-f','make','--depth=.',
       '-Dmodule_root_dir='+path.join(root,packagePath),'-Dlibrary=shared_library','-Dvisibility=default',
       '-Dnode_lib_file=/opt/node/include/<(target_arch)/node.lib','--generator-output=build','--no-parallel','-Goutput_dir=.'],
       {cwd:path.join(root,packagePath),stdio:'pipe',env:{...process.env,PYTHONDONTWRITEBYTECODE:'1'}});
@@ -140,7 +140,8 @@ test('altering ordinary source or generated target instructions remains incompat
 });
 
 test('large runtime files are streamed exactly rather than excluded by metadata recognition budget',t=>{
-  const {roots}=fixture(t),raw=Buffer.alloc(2*1024*1024,0x53);
+  // Stream/hash coverage is independent of optional generator normalization.
+  const {roots}=fixture(t,{generate:false}),raw=Buffer.alloc(2*1024*1024,0x53);
   for(const root of roots)write(root,packagePath+'/large.node',raw);
   const [a,b]=identities(roots);assert.deepEqual(compatibility(a),compatibility(b));
   const row=a.dependencies.inventory.find(row=>row.path.endsWith('/large.node'));assert.equal(row.bytes,raw.length);assert.equal(row.sha256,sha(raw));
@@ -148,7 +149,8 @@ test('large runtime files are streamed exactly rather than excluded by metadata 
 });
 
 test('internal symlinks are inventoried exactly and links escaping installation reject',t=>{
-  const {roots}=fixture(t);
+  // Equal raw inputs must not depend on the host's node-gyp version.
+  const {roots}=fixture(t,{generate:false});
   for(const root of roots)fs.symlinkSync('index.js',path.join(root,packagePath+'/linked.js'));
   const [a,b]=identities(roots);assert.deepEqual(compatibility(a),compatibility(b));
   assert.deepEqual(a.dependencies.inventory.find(row=>row.path.endsWith('/linked.js')),{path:packagePath+'/linked.js',link:'index.js'});
