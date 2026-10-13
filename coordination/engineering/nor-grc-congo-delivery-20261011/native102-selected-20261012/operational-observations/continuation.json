@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "classification": "genuine Native102 continuation with automatic metadata stages and explicit recovery",
+  "accepted_driver": "02cd63c6c29032af86b739dcf3b600104b128aec",
+  "original_custody": "0dfbb27b509e871d253f0a2572a7e57448171b59",
+  "completed_automatic_stages": [
+    "authority-native102",
+    "registry",
+    "compose",
+    "rebind-retain",
+    "rebind-operating",
+    "rebind-certificate",
+    "package"
+  ],
+  "rebind": {
+    "execution_commit": "64e1484ff3415c8984bb4a6ecc282276f054b745",
+    "elapsed_seconds": 114.71296645200346,
+    "qualification": "qualified"
+  },
+  "assembly_history": {
+    "001": "Qualified numerical output; later-HEAD descriptor aliases incompatible with exact automatic finalization; preserved as real prior attempt.",
+    "002": "Corrected exact original descriptors, qualified; used by final release. No rebind or SOURCE/NATIVE replay."
+  },
+  "historical_restoration": {
+    "commit": "3accc55f3b64fd3cbfede1d147da898ee925697a",
+    "files": 16,
+    "bytes": 4353875,
+    "original_paths_and_bytes_unchanged": true,
+    "absent_prior_accepted_tree": true,
+    "scope_issue": 1647
+  },
+  "recovery": [
+    "Sparse inherited parent write-tree refusal preserved; consumed accepted PR1806 Git-native fix.",
+    "Failed automatic finalize intent preserved; used fresh stock standalone finalize with exact corrected descriptors.",
+    "Used accepted PR1807 transactional journal migration, authenticated45 runtime files unchanged, no source/input movement.",
+    "Fresh finalizer config004 binds actual accepted current package metadata and original restoration snapshot."
+  ],
+  "finalization": {
+    "config": "finalize-config-004.json",
+    "destination": "final-003",
+    "package_input_count_before": 973,
+    "package_input_count_after": 1010,
+    "selection_commit": "6a842f6db7b3f8e855d02c1b5e13dde7c5dcffff"
+  },
+  "limits": [
+    "No whole-gap completion credit; original nonempty remainder remains.",
+    "No end-to-end speedup claim; support CI waits and recovery intervals are not scientific execution time.",
+    "Full-profile author/reference route intentional; historical fragment selected-data fast classifier not adopted.",
+    "Hosted rendering/picking/review/queue remain pending; actual selected native/continuous gates passed.",
+    "No production deployment."
+  ],
+  "selected_gate": {
+    "candidate": "6a842f6db7b3f8e855d02c1b5e13dde7c5dcffff",
+    "trusted": "02cd63c6c29032af86b739dcf3b600104b128aec",
+    "native": "no-new-native-loss",
+    "lost_or_reassigned_cells": 0,
+    "continuous": "no-new-regression",
+    "continuous_regressions": 0,
+    "complete_owners": 49625,
+    "elapsed_seconds": 36.972899192987825,
+    "peak_group_rss_bytes": 602140672,
+    "cleanup_group": []
+  }
+}

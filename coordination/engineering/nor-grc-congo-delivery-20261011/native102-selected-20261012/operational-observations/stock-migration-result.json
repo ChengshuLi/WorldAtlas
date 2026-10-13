@@ -1,0 +1,267 @@
+{
+  "runtime_target": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/ce2f7ca0bdffcd3d8bb9d38387e80683962f3c2cbac078a921419a68710edbd1/work/.cache/delivery-handoff/runtime/321141b3b6a70e642de2402c9a03bc4824263f901b670d8d31e38bb12f33fd13",
+  "product_target": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/ce2f7ca0bdffcd3d8bb9d38387e80683962f3c2cbac078a921419a68710edbd1/work/coordination/engineering/nor-grc-congo-delivery-20261011/native102-selected-20261012/advance",
+  "status": {
+    "version": 1,
+    "queue_submission": null,
+    "pr_base_refresh": null,
+    "completed": [
+      "authority-native102",
+      "compose",
+      "package",
+      "rebind-certificate",
+      "rebind-operating",
+      "rebind-retain",
+      "registry"
+    ],
+    "waiting": null,
+    "last_refusal": {
+      "observed_at": "2026-10-13T00:35:33.475Z",
+      "reason": "Final sidecar authority/selected-ledger pins differ",
+      "status": "refused"
+    },
+    "timing": {
+      "overall_wall_ms": 16503022,
+      "preparation_ms": 28571.749110999994,
+      "api_wait_ms": 0,
+      "stages": [
+        {
+          "stage": "authority-native102",
+          "preparation_ms": 1833.1901789999993,
+          "api_wait_ms": 0,
+          "completed_at": "2026-10-12T23:39:19.021Z"
+        },
+        {
+          "stage": "compose",
+          "preparation_ms": 4765.498060999991,
+          "api_wait_ms": 0,
+          "completed_at": "2026-10-13T00:20:18.605Z"
+        },
+        {
+          "stage": "package",
+          "preparation_ms": 4456.936912000005,
+          "api_wait_ms": 0,
+          "completed_at": "2026-10-13T00:30:52.573Z"
+        },
+        {
+          "stage": "rebind-certificate",
+          "preparation_ms": 4803.839601,
+          "api_wait_ms": 0,
+          "completed_at": "2026-10-13T00:29:52.318Z"
+        },
+        {
+          "stage": "rebind-operating",
+          "preparation_ms": 5097.322141999997,
+          "api_wait_ms": 0,
+          "completed_at": "2026-10-13T00:28:53.067Z"
+        },
+        {
+          "stage": "rebind-retain",
+          "preparation_ms": 4708.390299000002,
+          "api_wait_ms": 0,
+          "completed_at": "2026-10-13T00:28:14.259Z"
+        },
+        {
+          "stage": "registry",
+          "preparation_ms": 2906.571917000001,
+          "api_wait_ms": 0,
+          "completed_at": "2026-10-13T00:19:19.658Z"
+        }
+      ],
+      "external_observations": [
+        {
+          "elapsed_ms": 18533.473677,
+          "kind": "automatic-invocation",
+          "observed_at": "2026-10-12T23:39:35.720Z",
+          "observed_commits": 0,
+          "prepared_stages": 1,
+          "reason": "Command failed: git write-tree\nwarning: lazy fetching disabled; some objects may not be available\nfatal: could not fetch a11e6e2525050a0fecdb6d84c36fbe54a8ec76d5 from promisor remote\n",
+          "started_at": "2026-10-12T23:39:17.187Z",
+          "status": "refused"
+        },
+        {
+          "observed_at": "2026-10-12T23:39:35.722Z",
+          "reason": "Command failed: git write-tree\nwarning: lazy fetching disabled; some objects may not be available\nfatal: could not fetch a11e6e2525050a0fecdb6d84c36fbe54a8ec76d5 from promisor remote\n",
+          "status": "refused"
+        },
+        {
+          "elapsed_ms": 20579.831934,
+          "head": "21dd61bacc84eb22b511b2a71ed0caf55c5b0d45",
+          "kind": "commit",
+          "observed_at": "2026-10-13T00:19:16.751Z",
+          "stage": "authority-native102",
+          "status": "external"
+        },
+        {
+          "elapsed_ms": 54178.75287,
+          "head": "e811e3c83397f2f5afff190722e3149b4f622ef0",
+          "kind": "commit",
+          "observed_at": "2026-10-13T00:20:13.840Z",
+          "stage": "registry",
+          "status": "external"
+        },
+        {
+          "elapsed_ms": 9583.056124,
+          "head": "64e1484ff3415c8984bb4a6ecc282276f054b745",
+          "kind": "commit",
+          "observed_at": "2026-10-13T00:22:18.394Z",
+          "stage": "compose",
+          "status": "external"
+        },
+        {
+          "barrier": "rebind-terminal",
+          "elapsed_ms": 13179.893973999999,
+          "kind": "automatic-invocation",
+          "observed_at": "2026-10-13T00:22:21.710Z",
+          "observed_commits": 3,
+          "prepared_stages": 0,
+          "started_at": "2026-10-13T00:22:08.530Z",
+          "status": "external"
+        },
+        {
+          "detail": "Run the existing rebind wrapper externally; supply its genuine committed publication, request and complete custody.",
+          "kind": "rebind-terminal",
+          "observed_at": "2026-10-13T00:22:21.711Z",
+          "stage": "rebind-retain",
+          "status": "waiting"
+        },
+        {
+          "elapsed_ms": 33694.679735,
+          "head": "15138b707f2672ef2480856bf553b06b840eece5",
+          "kind": "commit",
+          "observed_at": "2026-10-13T00:28:47.970Z",
+          "stage": "rebind-retain",
+          "status": "external"
+        },
+        {
+          "elapsed_ms": 54431.695974,
+          "head": "c139e3dd70b357769a374b6712b84a05fdb095f2",
+          "kind": "commit",
+          "observed_at": "2026-10-13T00:29:47.514Z",
+          "stage": "rebind-operating",
+          "status": "external"
+        },
+        {
+          "elapsed_ms": 55781.882965,
+          "head": "4c74e66d820d78ad1270437e3a41804038db37ab",
+          "kind": "commit",
+          "observed_at": "2026-10-13T00:30:48.115Z",
+          "stage": "rebind-certificate",
+          "status": "external"
+        },
+        {
+          "elapsed_ms": 62917.194991,
+          "head": "b8a6e98d35f17518aa21ac44a9bf5bf8a0aaf044",
+          "kind": "commit",
+          "observed_at": "2026-10-13T00:31:55.527Z",
+          "stage": "package",
+          "status": "external"
+        },
+        {
+          "barrier": "assembly",
+          "elapsed_ms": 230890.633432,
+          "kind": "automatic-invocation",
+          "observed_at": "2026-10-13T00:31:59.693Z",
+          "observed_commits": 7,
+          "prepared_stages": 4,
+          "started_at": "2026-10-13T00:28:08.802Z",
+          "status": "external"
+        },
+        {
+          "detail": "Existing assembly/release preparation must supply the actual committed sidecar.",
+          "kind": "assembly",
+          "observed_at": "2026-10-13T00:31:59.694Z",
+          "stage": "finalize",
+          "status": "waiting"
+        },
+        {
+          "elapsed_ms": 6397.396266,
+          "kind": "automatic-invocation",
+          "observed_at": "2026-10-13T00:35:33.474Z",
+          "observed_commits": 7,
+          "prepared_stages": 0,
+          "reason": "Final sidecar authority/selected-ledger pins differ",
+          "started_at": "2026-10-13T00:35:27.076Z",
+          "status": "refused"
+        },
+        {
+          "observed_at": "2026-10-13T00:35:33.475Z",
+          "reason": "Final sidecar authority/selected-ledger pins differ",
+          "status": "refused"
+        }
+      ],
+      "waits": [
+        {
+          "stage": "rebind-retain",
+          "kind": "rebind-terminal",
+          "started_at": "2026-10-13T00:22:21.711Z",
+          "elapsed_ms": 352548,
+          "ongoing": false
+        },
+        {
+          "stage": "finalize",
+          "kind": "assembly",
+          "started_at": "2026-10-13T00:31:59.694Z",
+          "elapsed_ms": 13329095,
+          "ongoing": true
+        }
+      ],
+      "operator_durations": [
+        {
+          "stage": "rebind-retain",
+          "elapsed_seconds": 114.71296645200346,
+          "execution_commit": "64e1484ff3415c8984bb4a6ecc282276f054b745",
+          "terminal_sha256": "3ab5a80a6aa06c02a82264944c036efc58ca44f00ba55654ca8534f7e2b46367"
+        }
+      ],
+      "automatic_invocations": [
+        {
+          "elapsed_ms": 18533.473677,
+          "kind": "automatic-invocation",
+          "observed_at": "2026-10-12T23:39:35.720Z",
+          "observed_commits": 0,
+          "prepared_stages": 1,
+          "reason": "Command failed: git write-tree\nwarning: lazy fetching disabled; some objects may not be available\nfatal: could not fetch a11e6e2525050a0fecdb6d84c36fbe54a8ec76d5 from promisor remote\n",
+          "started_at": "2026-10-12T23:39:17.187Z",
+          "status": "refused"
+        },
+        {
+          "barrier": "rebind-terminal",
+          "elapsed_ms": 13179.893973999999,
+          "kind": "automatic-invocation",
+          "observed_at": "2026-10-13T00:22:21.710Z",
+          "observed_commits": 3,
+          "prepared_stages": 0,
+          "started_at": "2026-10-13T00:22:08.530Z",
+          "status": "external"
+        },
+        {
+          "barrier": "assembly",
+          "elapsed_ms": 230890.633432,
+          "kind": "automatic-invocation",
+          "observed_at": "2026-10-13T00:31:59.693Z",
+          "observed_commits": 7,
+          "prepared_stages": 4,
+          "started_at": "2026-10-13T00:28:08.802Z",
+          "status": "external"
+        },
+        {
+          "elapsed_ms": 6397.396266,
+          "kind": "automatic-invocation",
+          "observed_at": "2026-10-13T00:35:33.474Z",
+          "observed_commits": 7,
+          "prepared_stages": 0,
+          "reason": "Final sidecar authority/selected-ledger pins differ",
+          "started_at": "2026-10-13T00:35:27.076Z",
+          "status": "refused"
+        }
+      ],
+      "unobserved_interphase_time": "Intervals outside recorded invocations/wait observations are unclassified, not proven idle.",
+      "limits": [
+        "Preparation milliseconds are measured separately from external waits.",
+        "Per-operator elapsed receipts are individual durations, never summed as parallel wall time.",
+        "No gap-closures/hour claim follows from metadata preparation timing."
+      ]
+    }
+  }
+}
