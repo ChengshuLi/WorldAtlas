@@ -1214,7 +1214,7 @@ test('changed checker uses fresh candidate science and cannot accept a baseline-
 
 test('workflow candidate geography is selected by trusted profile output without credentials', () => {
  for (const [file, selector, candidate, baseline] of [
-  ['merge-integration-checks.yml', 'profile', 'github.sha', 'steps.geographic_parent.outputs.baseline'],
+  ['merge-integration-checks.yml', 'profile', 'github.sha', 'needs.profile.outputs.geography_baseline'],
   ['worker-merge.yml', 'prepare', 'needs.prepare.outputs.candidate', 'needs.prepare.outputs.base']
  ]) {
   const source = fs.readFileSync('.github/workflows/' + file, 'utf8');

@@ -3,6 +3,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {performance} from 'node:perf_hooks';
+import {execFileSync} from 'node:child_process';
 import {githubAPI, verifyIssueScope} from './issue-claim-contract.mjs';
 import {validateIssuePRBody} from './check-handoff-scope.mjs';
 import {checkPREvidence} from './check-pr-evidence.mjs';
@@ -29,7 +30,7 @@ export async function readPRGateWorkflow({api, event, env}) {
 
 // Compose the actual trusted gates with one client. No prior successful verdict
 // is reused: each phase starts fresh and ends with authenticated rechecks.
-export async function checkPRGates({event, repo, token, api, phase = 'all'}) {
+export async function checkPRGates({event, repo, token, api, phase = 'all', codeCommit}) {
   if (!['all', 'metadata', 'evidence'].includes(phase)) throw Error('Invalid PR gate phase');
   const scheduled = event.pull_request, root = `/repos/${repo}`;
   if (event.repository?.full_name !== repo || !/^[-\w.]+\/[-\w.]+$/.test(repo ?? '') ||
@@ -91,7 +92,8 @@ export async function checkPRGates({event, repo, token, api, phase = 'all'}) {
       finalIssue.body !== issue.body || settled.body !== current.body)
     throw Error('PR base, acceptance contract or disposition changed during trusted gates');
   verifyIssueScope({branch: settled.head.ref, issue: finalIssue});
-  return {status: 'checked', phase, head_sha: scheduled.head.sha, trusted_base: scheduled.base?.sha,
+  return {status: 'checked', phase, head_sha: scheduled.head.sha, trusted_base: codeCommit ?? scheduled.base?.sha,
+    ...(codeCommit ? {event_base: scheduled.base?.sha} : {}),
     github_issue, pr_body: current.body ?? '', evidence, linked,
     ...(regression ? {profile: regression.profile, shards: regression.shards, geography_software: regression.geography_software,
       ...(regression.test_selection ? {test_selection: regression.test_selection, expectations_path: regression.expectations_path} : {}),
@@ -109,13 +111,17 @@ export async function runPRGates({event, env = process.env, directory = process.
   const api = apiFactory(env.GH_TOKEN, {onRequest: accounting.observe,
     deadlineRemaining: () => deadline ? deadline.remaining() : hosted ? bootstrapRemaining() : 8 * 60 * 1000 - (monotonicNow() - started)});
   try {
+    const codeCommit = env.PR_GATE_CODE_COMMIT;
+    if (codeCommit && (!/^[a-f0-9]{40}$/.test(codeCommit) ||
+        execFileSync('git', ['-C', directory, 'rev-parse', 'HEAD'], {encoding: 'utf8'}).trim() !== codeCommit))
+      throw Error('Trusted PR gate code must match the authenticated accepted parent');
     if (hosted) {
       const workflow = await readPRGateWorkflow({api, event, env});
       deadline = await loadJobDeadline({api, repo: env.GITHUB_REPOSITORY, phase: phase === 'evidence' ? 'evidence' : 'profile', workflow, env, wallNow, monotonicNow, metadataRemaining: bootstrapRemaining, sleep});
     }
     if (phase !== 'metadata') transport = transportFactory(api, {repo: env.GITHUB_REPOSITORY, token: env.GH_TOKEN,
       directory, onFetch: row => downloads.push(row)});
-    result = await checkPRGates({event, repo: env.GITHUB_REPOSITORY, token: env.GH_TOKEN, api: transport?.api ?? api, phase});
+    result = await checkPRGates({event, repo: env.GITHUB_REPOSITORY, token: env.GH_TOKEN, api: transport?.api ?? api, phase, codeCommit});
   }
   catch (error) {
     const delay = quotaDelay(error, wallNow());

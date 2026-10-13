@@ -302,6 +302,12 @@ the baseline route may request the existing authenticated source adjudication.
 A mixed checker upgrade and raw-data correction needing adjudication must deliver
 the checker first, then the data change through that existing trusted route.
 
+The profile job resolves that candidate's authenticated accepted parent before
+checking out its trusted classifier, so older PR opening metadata cannot keep
+running an obsolete classifier. Geography consumes that same resolved parent.
+Ownership/evidence retain their original authored/event metadata; the existing
+profile receipt distinguishes its actual trusted code commit from event_base.
+
 PR geography compares the event's authenticated merge commit against its exact
 trusted event base, not the raw author head against a newer base. The checker
 verifies ordered parents `[event base, reviewed head]` before reading scientific
