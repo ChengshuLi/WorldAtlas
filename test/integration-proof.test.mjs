@@ -35,6 +35,31 @@ test('successful full and focused workflows prove exact tree and pinned current 
     assert.deepEqual(await integrationProof({...f.options,runId:12,runAttempt:1}),proof);
   }
 });
+test('classifier-only changes reuse completed exact-tree coverage, never absent coverage', async () => {
+  for (const profile of ['full', 'evidence']) {
+    const make = () => {
+      const f = fixture(profile);
+      f.options.baseline.entries.set('scripts/integration-profile.mjs', {sha: 'old-classifier', mode: '100644', type: 'blob'});
+      f.options.authored.entries.set('scripts/integration-profile.mjs', {sha: 'new-classifier', mode: '100644', type: 'blob'});
+      f.options.candidate.entries.set('scripts/integration-profile.mjs', {sha: 'new-classifier', mode: '100644', type: 'blob'});
+      return f;
+    };
+    assert.equal((await integrationProof(make().options)).tree, 'exact-complete-tree');
+    for (const mutate of [
+      f => {f.jobs = f.jobs.filter(job => job.name !== 'regression (0)');},
+      f => {f.jobs.find(job => job.name === 'regression (0)').name = 'wrong job';},
+      f => {f.jobs.find(job => job.name === 'regression (0)').conclusion = 'skipped';},
+      f => {f.jobs.find(job => job.name === 'regression (0)').steps.find(step => step.name === 'Complete regression shard').conclusion = 'skipped';},
+      f => {f.options.candidate.object.tree.sha = 'changed-tree';},
+      f => {f.run.head_sha = 'wrong-head';},
+      f => {f.options.authored.entries.get(WORKFLOW_PATH).sha = 'changed-workflow';},
+      f => {f.options.authored.entries.get('scripts/run-integration-tests.mjs').sha = 'changed-runner';}
+    ]) {
+      const f = make(); mutate(f);
+      assert.equal(await integrationProof(f.options), null);
+    }
+  }
+});
 test('geography reuse requires one actual successful producer and every trusted step', async () => {
   const geography = {id: 44, name: 'geography', status: 'completed', conclusion: 'success', steps: [
     'Checkout trusted geographic checker', 'Install trusted geographic dependencies',
