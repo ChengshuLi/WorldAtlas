@@ -1,0 +1,30 @@
+{
+  "kind": "generator-provenance-data-mode-control",
+  "handoff_sha256": "ad5c7c35b137bef59a817ef9e4299fda17b7a55cf54176891ca9e06fc414a90b",
+  "base_commit": "9d458af3c52f3c3da540be1760baa670161731a9",
+  "production_change": "generatorProvenance parses bounded ordinary stable-read package.json data regardless of execute bits. Existing seven source hashes, name/version, path/no-symlink and all installed dependency mode rules stay unchanged.",
+  "test_design": "Independent reviewed source/version prerequisite ignores execute bits. Known generators require positive admission; only genuinely unsupported source/version is explicitly skipped. Isolated copied runtimes exercise modes0644/0755/0777 with exactly two roles, plus invalid name/version/JSON/source/symlink/oversize and native changes.",
+  "tests": {
+    "runtime": "v24.21.0",
+    "npm": "11.19.0",
+    "runtime_sha256": "7fde7b8afa198da66257f42ee2001d874c7355631e6d1579a5fb5ef1f246df4c",
+    "pass": 25,
+    "fail": 0,
+    "skip": 0,
+    "log": "/workspace/scratch/127991fc8b8e/selected-package1798-recovery/generator-json-mode-fix-actual-runtime-tests.log",
+    "unchanged_1810_regression_control": {
+      "pass": 0,
+      "fail": 1,
+      "skip": 0,
+      "expected": "New positive mode test fails on unchanged1810helper instead of falling back or skipping.",
+      "log": "/workspace/scratch/127991fc8b8e/selected-package1798-recovery/generator-json-mode-before-regression.log"
+    }
+  },
+  "diagnosis": {
+    "reproduced_first_predicate": "generatorProvenance -> metadata(package.json) -> reject any execute bit",
+    "control_evidence": "/workspace/scratch/127991fc8b8e/selected-package1798-recovery/generator-mode-control/evidence.json",
+    "hosted_attribution": "Strong inference from observed Node0777, both hosted fallback diagnostics, exact known raw documents, and runner-image provisioning; actual hosted global package.json mode was not directly retained.",
+    "exact_image_source": "https://raw.githubusercontent.com/actions/runner-images/ubuntu24/20261004.327/images/ubuntu/scripts/build/configure-environment.sh"
+  },
+  "limits": "No claim that1810raw-onlybaseline gains exclusions retroactively. No full npm or atlas installation/build replay in this turn. Publication and receiver integration owned by parent."
+}

@@ -12,14 +12,36 @@ const generator=path.resolve(path.dirname(fs.realpathSync(process.execPath)),
   '../lib/node_modules/npm/node_modules/node-gyp/gyp/gyp_main.py');
 const packageName='atlas-native-path-control',packagePath='node_modules/'+packageName;
 const makePath=packagePath+'/build/Makefile';
+// Independent prerequisite check: genuinely new generators may be unsupported,
+// but recognized source bytes must exercise the positive assertions below.
+// Deliberately ignore metadata execute bits here so the hosted failure cannot
+// turn an intended positive control into a successful fallback or a skip.
+function reviewedGenerator(t,{configure=true}={}){
+  const root=path.resolve(generator,'../..');
+  try{
+    const pkg=JSON.parse(fs.readFileSync(path.join(root,'package.json')));
+    const versions={'12.2.0':'a7333a360f53319d1992bc3d71a010ef5a02effb23b93ecfd8be75edf5716065',
+      '12.4.0':'0bc04e8561199ae81da51e7f45fdf271fd2d6025c3bda411d622d59f54ee3429'};
+    const pins={'gyp/gyp_main.py':'80eb0a1948230c832f17bf99f31a8729d54044d80469cfe0fecace69e7ab66a6',
+      'gyp/pylib/gyp/generator/make.py':'0ce6c09023c2cf4fa48f2c5d17d0f6c96ff6debc44df5d8477bbee6eb33dc0ca',
+      'gyp/pylib/gyp/common.py':'cbbc59947402ff878a121a6d95034e8b04016486154502beb9f9b84c4b2d8db8',
+      'gyp/pylib/gyp/__init__.py':versions[pkg.version],
+      ...(configure?{'lib/node-gyp.js':'6221f4df47b863bcff62ae052d53f11b7487c9ea015f787771323c4c232a2139',
+        'lib/configure.js':'640d14e5719d34a4b5f1b7728cd94f383b0992a6089f3a133ecb9a349625d861',
+        'lib/create-config-gypi.js':'b634df313bd97a588d7e235e4043128d71571d1ea7e4282906170d58d9f6e504'}:{})};
+    if(pkg.name==='node-gyp'&&Object.hasOwn(versions,pkg.version)&&(!configure||pkg.version==='12.4.0')&&
+      Object.entries(pins).every(([name,expected])=>sha(fs.readFileSync(path.join(root,name)))===expected))return true;
+  }catch{}
+  t.skip('Installed generator source is genuinely outside the reviewed positive-control fixture');return false;
+}
 const compatibility=identity=>({node:identity.node,dependencies:{files:identity.dependencies.files,
   bytes:identity.dependencies.bytes,sha256:identity.dependencies.sha256}});
 function write(root,name,value){const file=path.join(root,name);fs.mkdirSync(path.dirname(file),{recursive:true});fs.writeFileSync(file,value);return file;}
-function fixture(t,{generate=true,completeFamily=false,implicit=false}={}){
+function fixture(t,{generate=true,completeFamily=false,implicit=false,generatorPath=generator}={}){
   const temp=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-node-runtime-'));t.after(()=>fs.rmSync(temp,{recursive:true,force:true}));
   const roots=['original','candidate+longer'].map(name=>path.join(temp,name));
   const pkg=JSON.stringify({name:packageName,version:'1.0.0',main:'index.js',
-    ...(implicit?{gypfile:false}:{scripts:{install:`python3 ${generator} binding.gyp -f make --depth=. -Dmodule_root_dir=$PWD --generator-output=build`}})});
+    ...(implicit?{gypfile:false}:{scripts:{install:`python3 ${generatorPath} binding.gyp -f make --depth=. -Dmodule_root_dir=$PWD --generator-output=build`}})});
   const binding=JSON.stringify({targets:[{target_name:'control',type:'none',sources:['control.cc']}]});
   const lock=JSON.stringify({lockfileVersion:3,packages:{[packagePath]:{version:'1.0.0',...(implicit?{}:{hasInstallScript:true}),
     resolved:'file:native.tgz',integrity:completeFamily?'sha512-'+Buffer.alloc(64,1).toString('base64'):'sha512-test-fixture-identical-in-both-roots'}}});
@@ -32,7 +54,7 @@ function fixture(t,{generate=true,completeFamily=false,implicit=false}={}){
       JSON.stringify({variables:{nodedir:'/opt/node/include',python:'/usr/bin/python3',local_prefix:root},target_defaults:{}},null,2)+'\n');
     // Only the actual installed make generator runs, with inert type:none.
     // No npm install, native compile, package build, network or emitted JS runs.
-    if(generate)execFileSync('python3',[generator,'binding.gyp','-f','make','--depth=.',
+    if(generate)execFileSync('python3',[generatorPath,'binding.gyp','-f','make','--depth=.',
       ...(completeFamily?['-I',path.join(root,packagePath+'/build/config.gypi')]:[]),
       '-Dmodule_root_dir='+path.join(root,packagePath),'-Dlibrary=shared_library','-Dvisibility=default',
       '-Dnode_lib_file=/opt/node/include/<(target_arch)/node.lib','--generator-output=build','--no-parallel','-Goutput_dir=.'],
@@ -49,13 +71,70 @@ function pairedFamily(t,options={}){
   return {...result,values,recognized:values[0].dependencies.inventory.some(row=>row.exclusion)};
 }
 
+function isolatedGenerator(t){
+  const root=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-generator-data-'));
+  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  const executable=path.join(root,'bin/node'),source=path.resolve(generator,'../..');
+  const installed=path.join(root,'lib/node_modules/npm/node_modules/node-gyp');
+  fs.mkdirSync(path.dirname(executable),{recursive:true});
+  fs.copyFileSync(fs.realpathSync(process.execPath),executable);fs.chmodSync(executable,0o755);
+  fs.cpSync(source,installed,{recursive:true,dereference:false});
+  const helper=new URL('../scripts/package-node-runtime.mjs',import.meta.url).href;
+  const observe=roots=>JSON.parse(execFileSync(executable,['--input-type=module','-e',
+    `import {installedNodeIdentity} from ${JSON.stringify(helper)}; console.log(JSON.stringify(${JSON.stringify(roots)}.map(root=>installedNodeIdentity(root))));`],
+    {encoding:'utf8',env:{...process.env,NODE_OPTIONS:'',NODE_PATH:''},maxBuffer:8*1024*1024}));
+  return {root,installed,manifest:path.join(installed,'package.json'),generatorPath:path.join(installed,'gyp/gyp_main.py'),observe};
+}
+
+test('generator JSON is ordinary data at modes 0644, 0755 and 0777 without relaxing installed file modes',t=>{
+  if(!reviewedGenerator(t))return;
+  const runtime=isolatedGenerator(t),{roots}=fixture(t,{completeFamily:true,implicit:true,generatorPath:runtime.generatorPath});
+  let expected;
+  for(const mode of [0o644,0o755,0o777]){
+    fs.chmodSync(runtime.manifest,mode);
+    const [a,b]=runtime.observe(roots);
+    for(const identity of [a,b])assert.deepEqual(identity.dependencies.inventory.filter(row=>row.exclusion).map(row=>row.path),
+      [makePath,packagePath+'/build/config.gypi'],'Every mode must positively admit exactly the two reviewed roles');
+    assert.deepEqual(compatibility(a),compatibility(b));
+    if(expected)assert.deepEqual(compatibility(a),expected);else expected=compatibility(a);
+    assert.notEqual(a.dependencies.raw_sha256,b.dependencies.raw_sha256);
+  }
+  for(const root of roots)write(root,packagePath+'/prebuilds/linux-x64.node','same native bytes');
+  edit(roots[1],packagePath+'/prebuilds/linux-x64.node',()=>Buffer.from('changed native bytes'));
+  const [a,b]=runtime.observe(roots);assert.notDeepEqual(compatibility(a),compatibility(b));
+  for(const root of roots)fs.chmodSync(path.join(root,makePath),0o755);
+  assert.equal(runtime.observe(roots)[0].dependencies.inventory.some(row=>row.exclusion),false);
+});
+
+test('generator data-mode admission still rejects wrong provenance, source changes, links and oversized metadata',t=>{
+  if(!reviewedGenerator(t))return;
+  const runtime=isolatedGenerator(t),{roots}=fixture(t,{completeFamily:true,implicit:true,generatorPath:runtime.generatorPath});
+  const manifestRaw=fs.readFileSync(runtime.manifest),source=path.join(runtime.installed,'gyp/gyp_main.py'),sourceRaw=fs.readFileSync(source);
+  assert.equal(runtime.observe(roots)[0].dependencies.inventory.filter(row=>row.exclusion).length,2,
+    'Negative controls must start with a positively recognized generator');
+  const foreign=write(runtime.root,'other-package.json',manifestRaw);
+  for(const change of [
+    ()=>fs.writeFileSync(runtime.manifest,JSON.stringify({...JSON.parse(manifestRaw),version:'unknown'})),
+    ()=>fs.writeFileSync(runtime.manifest,JSON.stringify({...JSON.parse(manifestRaw),name:'foreign-generator'})),
+    ()=>fs.writeFileSync(runtime.manifest,'not JSON'),
+    ()=>fs.writeFileSync(runtime.manifest,JSON.stringify({...JSON.parse(manifestRaw),padding:'x'.repeat(1024*1024)})),
+    ()=>{fs.unlinkSync(runtime.manifest);fs.symlinkSync(foreign,runtime.manifest);},
+    ()=>fs.writeFileSync(source,Buffer.concat([sourceRaw,Buffer.from('\n# changed generator\n')]))
+  ]){
+    change();
+    const [a,b]=runtime.observe(roots);
+    assert.equal(a.dependencies.inventory.some(row=>row.exclusion||row.normalization),false);
+    assert.notDeepEqual(compatibility(a),compatibility(b));
+    fs.unlinkSync(runtime.manifest);fs.writeFileSync(runtime.manifest,manifestRaw,{mode:0o777});
+    fs.writeFileSync(source,sourceRaw);
+  }
+});
+
 test('complete actual gyp document families retain raw bytes but omit only the two unused regeneration roles',t=>{
+  if(!reviewedGenerator(t))return;
   for(const implicit of [false,true]){
     const {roots,values:[a,b],recognized}=pairedFamily(t,{implicit});
-    if(!recognized){
-      assert.notDeepEqual(compatibility(a),compatibility(b));
-      t.diagnostic('Configure generator is outside reviewed unused-document policy; raw evidence remains strict.');continue;
-    }
+    assert.equal(recognized,true,'Positive control requires the reviewed configure generator; exact-byte fallback is not a pass');
     assert.deepEqual(compatibility(a),compatibility(b));
     assert.notEqual(a.dependencies.raw_sha256,b.dependencies.raw_sha256);
     const excluded=a.dependencies.inventory.filter(row=>row.exclusion);
@@ -74,8 +153,9 @@ test('complete actual gyp document families retain raw bytes but omit only the t
 });
 
 test('unused document flags stay auditable while loaded JavaScript, native binaries and other generated files stay strict',t=>{
+  if(!reviewedGenerator(t))return;
   const {roots,recognized}=pairedFamily(t,{implicit:true});
-  if(!recognized){t.diagnostic('Unknown configure generator stays exact.');return;}
+  assert.equal(recognized,true,'Positive control requires the reviewed configure generator');
   edit(roots[1],makePath,raw=>raw.toString().replace('CFLAGS.target ?= $(CPPFLAGS) $(CFLAGS)','CFLAGS.target ?= -DUNUSED_REGENERATION_ONLY'));
   edit(roots[1],packagePath+'/build/config.gypi',raw=>{const lines=raw.toString().split('\n'),config=JSON.parse(lines.slice(1).join('\n'));
     config.variables.unused_configuration_flag='different';return lines[0]+'\n'+JSON.stringify(config,null,2)+'\n';});
@@ -107,8 +187,9 @@ test('unknown or malformed complete document families and provenance fail closed
 });
 
 test('unused role validator binds the complete paired raw documents and rejects relabeling executable rows',t=>{
+  if(!reviewedGenerator(t))return;
   const {values:[identity],recognized}=pairedFamily(t,{implicit:true});
-  if(!recognized){t.diagnostic('Unknown configure generator stays exact.');return;}
+  assert.equal(recognized,true,'Positive control requires the reviewed configure generator');
   const original=identity.dependencies.inventory.find(row=>row.exclusion);
   const recompute=value=>{
     const raw=value.dependencies.inventory.map(({effective,normalization,exclusion,...row})=>row),effective=effectiveNodeDependencyInventory(value);
@@ -136,13 +217,10 @@ test('unused role validator binds the complete paired raw documents and rejects 
 });
 
 test('actual gyp regeneration in two physical package roots has exact raw evidence and equal effective identity',t=>{
+  if(!reviewedGenerator(t,{configure:false}))return;
   const {roots}=fixture(t),[a,b]=identities(roots);
-  if(!a.dependencies.inventory.some(row=>row.normalization)){
-    assert.notDeepEqual(compatibility(a),compatibility(b));
-    assert.equal(a.dependencies.sha256,a.dependencies.raw_sha256);
-    assert.equal(b.dependencies.sha256,b.dependencies.raw_sha256);
-    t.diagnostic('Installed generator is outside reviewed normalization; exact-byte fallback is valid.');return;
-  }
+  assert.equal(a.dependencies.inventory.some(row=>row.normalization),true,
+    'Positive control requires reviewed generator normalization; exact-byte fallback is not a pass');
   assert.deepEqual(compatibility(a),compatibility(b));
   assert.deepEqual(effectiveNodeDependencyInventory(a),effectiveNodeDependencyInventory(b));
   assert.notEqual(a.dependencies.raw_sha256,b.dependencies.raw_sha256);

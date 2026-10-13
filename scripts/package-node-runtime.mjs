@@ -72,7 +72,10 @@ function metadata(root,relative){
 function generatorProvenance(nodeExecutable){
   const root=path.resolve(path.dirname(nodeExecutable),'../lib/node_modules/npm/node_modules/node-gyp');
   try{
-    const manifest=metadata(root,'package.json');if(!manifest)return null;
+    // This JSON is parsed as generator provenance, never executed or omitted
+    // from an installed dependency roster. Toolcache execute bits do not change
+    // its data role. Keep the ordinary-path, size and stable-read checks.
+    const manifest=digestFile(ordinary(root,'package.json'),{capture:true});if(!manifest.body)return null;
     const pkg=JSON.parse(manifest.body);
     if(pkg.name!=='node-gyp'||!Object.hasOwn(GENERATOR_VERSIONS,pkg.version))return null;
     const files=[],expectedFiles={...GENERATOR_FILES,'gyp/pylib/gyp/__init__.py':GENERATOR_VERSIONS[pkg.version]};

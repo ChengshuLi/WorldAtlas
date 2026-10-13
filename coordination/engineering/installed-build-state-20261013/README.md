@@ -23,3 +23,11 @@ The required author build supplies a new Norway B baseline, and the normal queue
 The accepted metadata-regression catalogue is preserved unchanged. This new programme is not yet registered for metadata-only regression reuse; a later actual-main registration remains a separate optimization and does not establish or block package-output equivalence.
 
 Squash ancestry means reviewed88bcb405 is not an ancestor of accepted429769c. The actual merge-base remains02cd, so the complete15-path review includes eight unchanged already-accepted1809 source/test/evidence postimages. They match current main exactly and preserve original evidence; current machine scope and manifest explicitly cover them. Only the new helper/test policy and new owned evidence are additional changes. No Native102 path is in the triple-dot diff.
+
+## Hosted recognition correction
+
+Although the original1810 author checks passed, its authenticated retained manifest contained zero excluded roles and is not a usable semantic baseline. A local real-generator control identified an unnecessary0644-only restriction on the generator's own package.json. That file is parsed provenance data, never executed or omitted from the installed dependency roster. The reader now retains ordinary-path, bounded stable-read, exact version and seven source pins while allowing data permissions0644/0755/0777. Installed document/source/native mode checks are unchanged.
+
+The new known-generator positive tests require exactly two excluded roles; silent fallback can no longer count as a successful positive. Unknown source/version uses an explicit skip. The new permission-mode control fails against the unchanged old helper. Hosted global package.json mode was not retained, so attributing the hosted failure to mode is an evidence-supported inference, not a direct observation. The next hosted manifest must actually contain the expected recognized roles before queue/proof admission.
+
+The execution environment was replaced after the first author run. Original local full-install trees are no longer available; committed summaries and the independent review performed before replacement preserve their historical meaning. Recovery used the exact published source, minimum sparse managed checkout, and existing claim. No full dependency installation or scientific replay was performed for recovery.
