@@ -1,0 +1,641 @@
+{
+  "version": 1,
+  "qualified": true,
+  "exit": {
+    "code": 0,
+    "signal": null
+  },
+  "refusal": null,
+  "command": [
+    "/workspace/scratch/127991fc8b8e/cloud-tools/gnu-time/time-1.9-0.2-amd64/usr/bin/time",
+    "-v",
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "--expose-gc",
+    "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/ce2f7ca0bdffcd3d8bb9d38387e80683962f3c2cbac078a921419a68710edbd1/work/coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/assemble-existing-five.mjs",
+    "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/ce2f7ca0bdffcd3d8bb9d38387e80683962f3c2cbac078a921419a68710edbd1/work/.cache/native102-preparation/assembly-parameters-001.json",
+    "8523ff38af7c5c9826c7f73e05cca03918212ab55b1e9fdd08f9ec013dcbdb6b"
+  ],
+  "owned_root_identity": {
+    "pid": 173,
+    "pgid": 173,
+    "started_ticks": "10376258",
+    "ppid": 49,
+    "rss_bytes": 647168,
+    "started": "Mon Oct 12 17:32:59 2026"
+  },
+  "owned_processes_remaining": [],
+  "elapsed_seconds": 64.227,
+  "rss_cap_bytes": 1073741824,
+  "wall_deadline_seconds": 1200,
+  "peak_sampled_group_rss_bytes": 382062592,
+  "peak_supervisor_rss_bytes": 72011776,
+  "time_lifetime_max_rss_bytes": 354140160,
+  "conservative_lifetime_and_supervisor_bound_bytes": 426151936,
+  "termination_events": [],
+  "monitoring_limits": "Complete isolated-group samples plus GNU time child lifetime and conservative separate parent peak; not kernel enforcement.",
+  "operating_limits": {
+    "log_bytes": 4194304,
+    "monitor_bytes": 8388608,
+    "output_bytes": 4194304,
+    "receipt_bytes": 1048576,
+    "retained_bytes": 20971520,
+    "rss_bytes": 1073741824,
+    "wall_seconds": 1200
+  },
+  "profile": "selected-assembly-v2",
+  "processing_allowance": {
+    "phaseBytes": 536870912,
+    "rssBytes": 805306368
+  },
+  "execution_commit": "b8a6e98d35f17518aa21ac44a9bf5bf8a0aaf044",
+  "parameters_sha256": "8523ff38af7c5c9826c7f73e05cca03918212ab55b1e9fdd08f9ec013dcbdb6b",
+  "destination": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/ce2f7ca0bdffcd3d8bb9d38387e80683962f3c2cbac078a921419a68710edbd1/work/.cache/native102-assembly-001",
+  "resource_admission": {
+    "supply_upper_bytes": 9271922688,
+    "residual_reported_bytes": 6050697216,
+    "headroom_reserve_bytes": 2147483648,
+    "process_peak_reservation_bytes": 1073741824,
+    "required_bytes": 805306368,
+    "observations": {
+      "reserved": 0,
+      "ancestors": [],
+      "unknown_limits": [
+        "No exposed cgroup2 memory mount"
+      ],
+      "meminfo": "MemTotal:       10230316 kB\nMemFree:         9094556 kB\nMemAvailable:    9054612 kB\nBuffers:            6832 kB\nCached:           152768 kB\nSwapCached:            0 kB\nActive:            89020 kB\nInactive:         508000 kB\nActive(anon):      26516 kB\nInactive(anon):   467708 kB\nActive(file):      62504 kB\nInactive(file):    40292 kB\nUnevictable:       29920 kB\nMlocked:               0 kB\nSwapTotal:             0 kB\nSwapFree:              0 kB\nDirty:              9932 kB\nWriteback:             0 kB\nAnonPages:        467808 kB\nMapped:           340468 kB\nShmem:             26692 kB\nKReclaimable:     106496 kB\nSlab:             170804 kB\nSReclaimable:     106496 kB\nSUnreclaim:        64308 kB\nKernelStack:        8368 kB\nPageTables:        20572 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:     5115156 kB\nCommitted_AS:    4923228 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:        9744 kB\nVmallocChunk:          0 kB\nPercpu:             2880 kB\nAnonHugePages:         0 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nBalloon:               0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:      571392 kB\nDirectMap2M:     9519104 kB\nDirectMap1G:    16777216 kB\n",
+      "cgroup": "0::/\n",
+      "mountinfo": "206 104 0:52 /newroot / ro,nosuid,nodev,relatime - tmpfs tmpfs rw,uid=1000,gid=1000\n207 206 0:27 /usr /usr ro,nosuid,nodev,relatime - overlay overlay rw,lowerdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/lower-0,upperdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/upper,workdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/work,index=off,metacopy=off,fsync=volatile\n208 206 0:27 /opt /opt ro,nosuid,nodev,relatime - overlay overlay rw,lowerdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/lower-0,upperdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/upper,workdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/work,index=off,metacopy=off,fsync=volatile\n209 206 0:27 /etc /etc ro,nosuid,nodev,relatime - overlay overlay rw,lowerdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/lower-0,upperdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/upper,workdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/work,index=off,metacopy=off,fsync=volatile\n210 206 0:53 / /proc ro,nosuid,nodev,noexec,relatime - proc proc rw\n211 206 0:54 / /dev ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=755,uid=1000,gid=1000\n212 211 0:31 /null /dev/null ro,nosuid,nodev - tmpfs tmpfs rw,size=65536k,mode=755\n213 211 0:31 /zero /dev/zero ro,nosuid,nodev - tmpfs tmpfs rw,size=65536k,mode=755\n214 211 0:31 /full /dev/full ro,nosuid,nodev - tmpfs tmpfs rw,size=65536k,mode=755\n215 211 0:31 /random /dev/random ro,nosuid,nodev - tmpfs tmpfs rw,size=65536k,mode=755\n216 211 0:31 /urandom /dev/urandom ro,nosuid,nodev - tmpfs tmpfs rw,size=65536k,mode=755\n217 211 0:31 /tty /dev/tty ro,nosuid,nodev - tmpfs tmpfs rw,size=65536k,mode=755\n218 211 0:55 / /dev/pts ro,nosuid,nodev,noexec,relatime - devpts devpts rw,mode=620,ptmxmode=666\n219 211 0:56 / /dev/shm ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=755,uid=1000,gid=1000\n220 206 0:57 / /tmp ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=755,uid=1000,gid=1000\n221 206 0:58 / /run ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=755,uid=1000,gid=1000\n222 206 0:59 / /home/agent ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=755,uid=1000,gid=1000\n223 222 0:61 / /home/agent/.codex ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=755,uid=1000,gid=1000\n224 223 0:27 /home/agent/.codex/config.toml /home/agent/.codex/config.toml ro,nosuid,nodev,relatime - overlay overlay rw,lowerdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/lower-0,upperdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/upper,workdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/work,index=off,metacopy=off,fsync=volatile\n225 223 0:27 /home/agent/.codex/skills /home/agent/.codex/skills ro,nosuid,nodev,relatime - overlay overlay rw,lowerdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/lower-0,upperdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/upper,workdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/work,index=off,metacopy=off,fsync=volatile\n226 223 0:27 /home/agent/.codex/plugins /home/agent/.codex/plugins ro,nosuid,nodev,relatime - overlay overlay rw,lowerdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/lower-0,upperdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/upper,workdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/work,index=off,metacopy=off,fsync=volatile\n227 223 0:27 /home/agent/.codex/auth.json /home/agent/.codex/auth.json ro,nosuid,nodev,relatime - overlay overlay rw,lowerdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/lower-0,upperdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/upper,workdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/work,index=off,metacopy=off,fsync=volatile\n228 223 0:62 / /home/agent/.codex/tmp ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=755,uid=1000,gid=1000\n229 206 0:27 /workspace /workspace ro,nosuid,nodev,relatime - overlay overlay rw,lowerdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/lower-0,upperdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/upper,workdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/work,index=off,metacopy=off,fsync=volatile\n230 211 0:63 / /dev rw,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=755,uid=1000,gid=1000\n231 230 0:31 /null /dev/null rw,nosuid - tmpfs tmpfs rw,size=65536k,mode=755\n232 230 0:31 /zero /dev/zero rw,nosuid - tmpfs tmpfs rw,size=65536k,mode=755\n233 230 0:31 /full /dev/full rw,nosuid - tmpfs tmpfs rw,size=65536k,mode=755\n234 230 0:31 /random /dev/random rw,nosuid - tmpfs tmpfs rw,size=65536k,mode=755\n235 230 0:31 /urandom /dev/urandom rw,nosuid - tmpfs tmpfs rw,size=65536k,mode=755\n236 230 0:31 /tty /dev/tty rw,nosuid - tmpfs tmpfs rw,size=65536k,mode=755\n237 230 0:64 / /dev/pts rw,nosuid,noexec,relatime - devpts devpts rw,mode=620,ptmxmode=666\n238 220 0:65 / /tmp/codex-daemon-1000 ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=000,uid=1000,gid=1000\n239 220 0:57 / /tmp rw,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=755,uid=1000,gid=1000\n240 239 0:66 / /tmp/codex-daemon-1000 ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=000,uid=1000,gid=1000\n241 239 0:67 / /tmp/.git ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=555,uid=1000,gid=1000\n242 239 0:68 / /tmp/.agents ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=555,uid=1000,gid=1000\n243 239 0:69 / /tmp/.codex ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=555,uid=1000,gid=1000\n244 239 0:70 / /tmp/.aws ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=555,uid=1000,gid=1000\n245 239 0:57 /codex-bwrap-synthetic-mount-targets-1000 /tmp/codex-bwrap-synthetic-mount-targets-1000 ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=755,uid=1000,gid=1000\n246 229 0:27 /workspace/scratch/127991fc8b8e /workspace/scratch/127991fc8b8e rw,nosuid,nodev,relatime - overlay overlay rw,lowerdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/lower-0,upperdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/upper,workdir=/run/kata-containers/erofs-multi-layer/5b102a2922b448fdbf0e472f01582884/upper/work,index=off,metacopy=off,fsync=volatile\n247 246 0:71 / /workspace/scratch/127991fc8b8e/.git ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=555,uid=1000,gid=1000\n248 246 0:72 / /workspace/scratch/127991fc8b8e/.agents ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=555,uid=1000,gid=1000\n249 246 0:73 / /workspace/scratch/127991fc8b8e/.codex ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=555,uid=1000,gid=1000\n250 246 0:74 / /workspace/scratch/127991fc8b8e/.aws ro,nosuid,nodev,relatime - tmpfs tmpfs rw,mode=555,uid=1000,gid=1000\n251 210 0:75 / /proc rw,nosuid,nodev,noexec,relatime - proc proc rw\n",
+      "limits": "Limit                     Soft Limit           Hard Limit           Units     \nMax cpu time              unlimited            unlimited            seconds   \nMax file size             unlimited            unlimited            bytes     \nMax data size             unlimited            unlimited            bytes     \nMax stack size            8388608              unlimited            bytes     \nMax core file size        0                    unlimited            bytes     \nMax resident set          unlimited            unlimited            bytes     \nMax processes             39885                39885                processes \nMax open files            16384                16384                files     \nMax locked memory         8388608              8388608              bytes     \nMax address space         unlimited            unlimited            bytes     \nMax file locks            unlimited            unlimited            locks     \nMax pending signals       39885                39885                signals   \nMax msgqueue size         819200               819200               bytes     \nMax nice priority         0                    0                    \nMax realtime priority     0                    0                    \nMax realtime timeout      unlimited            unlimited            us        \n",
+      "status": "Name:\tMainThread\nUmask:\t0022\nState:\tR (running)\nTgid:\t49\nNgid:\t0\nPid:\t49\nPPid:\t2\nTracerPid:\t0\nUid:\t1000\t1000\t1000\t1000\nGid:\t1000\t1000\t1000\t1000\nFDSize:\t64\nGroups:\t \nNStgid:\t49\nNSpid:\t49\nNSpgid:\t1\nNSsid:\t1\nKthread:\t0\nVmPeak:\t 1510732 kB\nVmSize:\t 1510456 kB\nVmLck:\t       0 kB\nVmPin:\t       0 kB\nVmHWM:\t   48644 kB\nVmRSS:\t   48644 kB\nRssAnon:\t   23004 kB\nRssFile:\t   25640 kB\nRssShmem:\t       0 kB\nVmData:\t  614224 kB\nVmStk:\t     136 kB\nVmExe:\t   43776 kB\nVmLib:\t    3488 kB\nVmPTE:\t     880 kB\nVmSwap:\t       0 kB\nHugetlbPages:\t       0 kB\nCoreDumping:\t0\nTHP_enabled:\t1\nuntag_mask:\t0xffffffffffffffff\nThreads:\t7\nSigQ:\t0/39885\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000001001000\nSigCgt:\t0000000100004602\nCapInh:\t0000000000000000\nCapPrm:\t0000000000000000\nCapEff:\t0000000000000000\nCapBnd:\t0000000000000000\nCapAmb:\t0000000000000000\nNoNewPrivs:\t1\nSeccomp:\t2\nSeccomp_filters:\t1\nSpeculation_Store_Bypass:\tvulnerable\nSpeculationIndirectBranch:\talways enabled\nCpus_allowed:\t1ff\nCpus_allowed_list:\t0-8\nMems_allowed:\t00000000,00000001\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t252\nnonvoluntary_ctxt_switches:\t12\n",
+      "aggregate_rss": 69439488
+    },
+    "uncertainty": "Reported availability only; unexposed limits remain unknown, not unlimited. No swap credit or guaranteed allocation."
+  },
+  "storage_admission": {
+    "free_bytes": 29978427392,
+    "minimum_free_bytes": 10737418240,
+    "own_remaining_reservation_bytes": 1034895360,
+    "peer_remaining_reservation_bytes": 1059336192,
+    "issued_growth_bytes": 20971520,
+    "admitted_growth_bytes": 1034895360,
+    "residual_bytes": 27884195840
+  },
+  "pre_use": {
+    "head": "b8a6e98d35f17518aa21ac44a9bf5bf8a0aaf044",
+    "processing_allowance": {
+      "phaseBytes": 536870912,
+      "rssBytes": 805306368
+    },
+    "operating_limits": {
+      "log_bytes": 4194304,
+      "monitor_bytes": 8388608,
+      "output_bytes": 4194304,
+      "receipt_bytes": 1048576,
+      "retained_bytes": 20971520,
+      "rss_bytes": 1073741824,
+      "wall_seconds": 1200
+    },
+    "concurrent_reserved_bytes": 0,
+    "code": [
+      {
+        "bytes": 2279,
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+        "sha256": "f4d5480d23ba6ae097a559d066b2a244ce388ba81aa6c486331e731be23e1813"
+      },
+      {
+        "bytes": 242,
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs",
+        "sha256": "704b8a224f09943b4290d0c39514c480d041de946683253f36ef86dcf4f92f7c"
+      },
+      {
+        "bytes": 317,
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind.mjs",
+        "sha256": "a0aecb8720ff295df16e5bef6bb5f527ed002380c6cb64a514242f79614c8cb0"
+      },
+      {
+        "bytes": 144181,
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+        "sha256": "1ebc1415f9c18cf8639734073313667bbc0e831317484c48fcafbc6f6d7f1216"
+      },
+      {
+        "bytes": 45330,
+        "path": "src/effective-footprint.js",
+        "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+      },
+      {
+        "bytes": 77142,
+        "path": "scripts/check-effective-geographic-regression.mjs",
+        "sha256": "5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda"
+      },
+      {
+        "bytes": 2948,
+        "path": "src/ownership-codec.js",
+        "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+      },
+      {
+        "bytes": 1417,
+        "path": "package.json",
+        "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+      },
+      {
+        "bytes": 3497,
+        "path": "src/native-runtime.js",
+        "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+      },
+      {
+        "bytes": 4472,
+        "path": "scripts/native-ownership/compile-native-ownership.mjs",
+        "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+      },
+      {
+        "bytes": 6408,
+        "path": "src/native-grid.js",
+        "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+      },
+      {
+        "bytes": 2799,
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/package.json",
+        "sha256": "ceb30ba96a14786c419db53f2b8d3d59ece7ac5221c198ac03def462cf96ef23"
+      },
+      {
+        "bytes": 16773,
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/sha2.js",
+        "sha256": "3ddc587c588283cbceed4dd9929cefcce06a0c231b54d4c6f0f99c478c686c00"
+      },
+      {
+        "bytes": 5615,
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_md.js",
+        "sha256": "a112f0fe1b15db00f2638618c436a17be1c5e13baf19d02fcc29016ae1db2233"
+      },
+      {
+        "bytes": 3081,
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_u64.js",
+        "sha256": "e48c0cfc10810439a4807b46db136ce603a3fa09b62584f513ef2f3ca496af54"
+      },
+      {
+        "bytes": 9356,
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/utils.js",
+        "sha256": "11319ec0a8132a0c2ced8c98af33ae9274c001d6baf4f4709c4a6115e031a3c5"
+      },
+      {
+        "bytes": 6777,
+        "path": "scripts/audit-grid-intervals.mjs",
+        "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+      },
+      {
+        "bytes": 17977,
+        "path": "coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs",
+        "sha256": "99e9a5f2508cea0a830480d7ff01af85654f04a972e49ee2391b3e0b2c3d3c68"
+      },
+      {
+        "bytes": 8823,
+        "path": "coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs",
+        "sha256": "319744feb3c73f2b51deed68222e43c2241dbb28557c917a15a4f9010273b614"
+      },
+      {
+        "bytes": 25823,
+        "path": "coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py",
+        "sha256": "372e020108f6ddbf6cecefc5522b31105ebdf81e2bf9e6fe0a459a19fd561669"
+      },
+      {
+        "bytes": 22240,
+        "path": "coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py",
+        "sha256": "538c5d85f69345f6436d1cf34dca3c78bd0cef13fec1c7271a5ba9f19b0bb0ea"
+      },
+      {
+        "bytes": 4874,
+        "path": "coordination/engineering/additive-native-composition-20261009/execution-contract.py",
+        "sha256": "6caf8f51ce4516c7a9ca8c407c06c522dac7676a26eb91999c8f25170aa1fc13"
+      },
+      {
+        "bytes": 2201,
+        "path": "coordination/engineering/additive-native-composition-20261009/owned-group-original.py",
+        "sha256": "9ac8aeca9c721968bf33e69e219dbfb103875263b994dff1bd2e94402d0750ce"
+      },
+      {
+        "bytes": 2596,
+        "path": "coordination/engineering/additive-native-composition-20261009/owned-child-termination-original.py",
+        "sha256": "00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61"
+      },
+      {
+        "bytes": 22001,
+        "path": "coordination/engineering/additive-native-composition-20261009/mac-execution-runtime-original.json",
+        "sha256": "3b4c62732d123b00c436f724387f3fec67390b205223561b70787b0e2d44d4f5"
+      },
+      {
+        "bytes": 2197,
+        "path": "coordination/engineering/additive-native-composition-20261009/execution-code-paths.json",
+        "sha256": "9173f3eb7a6c9dfe6c6aaf4524229db6c7caec296a09ed41347b0c43c6145708"
+      },
+      {
+        "bytes": 14901,
+        "path": "scripts/local-workspace.mjs",
+        "sha256": "40b33be2e40c4d840b8ca3921eab36d2d899c638ff0d94ddde9e3016402b896c"
+      },
+      {
+        "bytes": 548,
+        "path": "scripts/worker-identity.mjs",
+        "sha256": "e31ef3d286c3250f7f69e23f455edd896cfa96b8eb6438026aa4374da57128bd"
+      }
+    ],
+    "support_code": [
+      {
+        "bytes": 13084,
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/supervise-selected-assembly-linux.mjs",
+        "sha256": "778d695d496714ad9a44488eaf218014d344702704f4b5d9121794d3b2f1d287"
+      },
+      {
+        "bytes": 30700,
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs",
+        "sha256": "5ee0e1412990e84048fae88b05a49261088ec5b5b201579d7adbfdf284a1f37d"
+      },
+      {
+        "bytes": 5441,
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/assemble-existing-five.mjs",
+        "sha256": "733d90bad97f9d402cf6e4618480a6621c9858e6669dfa56bf41a0dc464cb765"
+      },
+      {
+        "bytes": 4822,
+        "path": "coordination/engineering/additive-native-activation-20261009/assemble-supported-activation.mjs",
+        "sha256": "2c7130bacf4466e00d7e7ed970827264aedb3af1ed9968423ea557003da39765"
+      }
+    ],
+    "runtime": [
+      {
+        "bytes": 4082768,
+        "mode": 493,
+        "path": "/usr/bin/git",
+        "role": "git",
+        "sha256": "356db14e102d68a1a37d8a1ac577dfd678d45d46e92f468bef8b7154e7bfdc60"
+      },
+      {
+        "bytes": 125989464,
+        "mode": 493,
+        "path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "role": "node",
+        "sha256": "bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12"
+      },
+      {
+        "bytes": 154552,
+        "mode": 493,
+        "path": "/usr/bin/ps",
+        "role": "process-inspector",
+        "sha256": "43b8d2d049183e9ebc409c86b89150b5a4a68fa19fe1815b16bed5561921a9c3"
+      },
+      {
+        "bytes": 27384,
+        "mode": 493,
+        "path": "/workspace/scratch/127991fc8b8e/cloud-tools/gnu-time/time-1.9-0.2-amd64/usr/bin/time",
+        "role": "time",
+        "sha256": "efc0d1112e36ec76c14bf7508e287935cf1631d9d0d91fb532802d07aef51cea"
+      }
+    ],
+    "installed": [
+      {
+        "bytes": 2799,
+        "path": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/ce2f7ca0bdffcd3d8bb9d38387e80683962f3c2cbac078a921419a68710edbd1/work/node_modules/@noble/hashes/package.json",
+        "sha256": "ceb30ba96a14786c419db53f2b8d3d59ece7ac5221c198ac03def462cf96ef23",
+        "mode": 420
+      },
+      {
+        "bytes": 16773,
+        "path": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/ce2f7ca0bdffcd3d8bb9d38387e80683962f3c2cbac078a921419a68710edbd1/work/node_modules/@noble/hashes/sha2.js",
+        "sha256": "3ddc587c588283cbceed4dd9929cefcce06a0c231b54d4c6f0f99c478c686c00",
+        "mode": 420
+      },
+      {
+        "bytes": 5615,
+        "path": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/ce2f7ca0bdffcd3d8bb9d38387e80683962f3c2cbac078a921419a68710edbd1/work/node_modules/@noble/hashes/_md.js",
+        "sha256": "a112f0fe1b15db00f2638618c436a17be1c5e13baf19d02fcc29016ae1db2233",
+        "mode": 420
+      },
+      {
+        "bytes": 3081,
+        "path": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/ce2f7ca0bdffcd3d8bb9d38387e80683962f3c2cbac078a921419a68710edbd1/work/node_modules/@noble/hashes/_u64.js",
+        "sha256": "e48c0cfc10810439a4807b46db136ce603a3fa09b62584f513ef2f3ca496af54",
+        "mode": 420
+      },
+      {
+        "bytes": 9356,
+        "path": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/ce2f7ca0bdffcd3d8bb9d38387e80683962f3c2cbac078a921419a68710edbd1/work/node_modules/@noble/hashes/utils.js",
+        "sha256": "11319ec0a8132a0c2ced8c98af33ae9274c001d6baf4f4709c4a6115e031a3c5",
+        "mode": 420
+      }
+    ],
+    "parameters": {
+      "path": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/ce2f7ca0bdffcd3d8bb9d38387e80683962f3c2cbac078a921419a68710edbd1/work/.cache/native102-preparation/assembly-parameters-001.json",
+      "bytes": 21684,
+      "sha256": "8523ff38af7c5c9826c7f73e05cca03918212ab55b1e9fdd08f9ec013dcbdb6b"
+    },
+    "runtimeBytes": 130254168,
+    "executionBytes": 18885140,
+    "gitExecutable": "/usr/bin/git"
+  },
+  "post_use": {
+    "head": "b8a6e98d35f17518aa21ac44a9bf5bf8a0aaf044",
+    "processing_allowance": {
+      "phaseBytes": 536870912,
+      "rssBytes": 805306368
+    },
+    "operating_limits": {
+      "log_bytes": 4194304,
+      "monitor_bytes": 8388608,
+      "output_bytes": 4194304,
+      "receipt_bytes": 1048576,
+      "retained_bytes": 20971520,
+      "rss_bytes": 1073741824,
+      "wall_seconds": 1200
+    },
+    "concurrent_reserved_bytes": 0,
+    "code": [
+      {
+        "bytes": 2279,
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs",
+        "sha256": "f4d5480d23ba6ae097a559d066b2a244ce388ba81aa6c486331e731be23e1813"
+      },
+      {
+        "bytes": 242,
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-geometry.mjs",
+        "sha256": "704b8a224f09943b4290d0c39514c480d041de946683253f36ef86dcf4f92f7c"
+      },
+      {
+        "bytes": 317,
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/composition-v2/current-rebind.mjs",
+        "sha256": "a0aecb8720ff295df16e5bef6bb5f527ed002380c6cb64a514242f79614c8cb0"
+      },
+      {
+        "bytes": 144181,
+        "path": "coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs",
+        "sha256": "1ebc1415f9c18cf8639734073313667bbc0e831317484c48fcafbc6f6d7f1216"
+      },
+      {
+        "bytes": 45330,
+        "path": "src/effective-footprint.js",
+        "sha256": "28edb52a2befd80b73e0ce62fa3f7de51cada4f9894aab32e5ff2761f1fe0745"
+      },
+      {
+        "bytes": 77142,
+        "path": "scripts/check-effective-geographic-regression.mjs",
+        "sha256": "5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda"
+      },
+      {
+        "bytes": 2948,
+        "path": "src/ownership-codec.js",
+        "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d"
+      },
+      {
+        "bytes": 1417,
+        "path": "package.json",
+        "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+      },
+      {
+        "bytes": 3497,
+        "path": "src/native-runtime.js",
+        "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600"
+      },
+      {
+        "bytes": 4472,
+        "path": "scripts/native-ownership/compile-native-ownership.mjs",
+        "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378"
+      },
+      {
+        "bytes": 6408,
+        "path": "src/native-grid.js",
+        "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663"
+      },
+      {
+        "bytes": 2799,
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/package.json",
+        "sha256": "ceb30ba96a14786c419db53f2b8d3d59ece7ac5221c198ac03def462cf96ef23"
+      },
+      {
+        "bytes": 16773,
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/sha2.js",
+        "sha256": "3ddc587c588283cbceed4dd9929cefcce06a0c231b54d4c6f0f99c478c686c00"
+      },
+      {
+        "bytes": 5615,
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_md.js",
+        "sha256": "a112f0fe1b15db00f2638618c436a17be1c5e13baf19d02fcc29016ae1db2233"
+      },
+      {
+        "bytes": 3081,
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/_u64.js",
+        "sha256": "e48c0cfc10810439a4807b46db136ce603a3fa09b62584f513ef2f3ca496af54"
+      },
+      {
+        "bytes": 9356,
+        "path": "coordination/engineering/additive-native-gap-batch-20261008/original-execution-custody/module-bodies/utils.js",
+        "sha256": "11319ec0a8132a0c2ced8c98af33ae9274c001d6baf4f4709c4a6115e031a3c5"
+      },
+      {
+        "bytes": 6777,
+        "path": "scripts/audit-grid-intervals.mjs",
+        "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9"
+      },
+      {
+        "bytes": 17977,
+        "path": "coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs",
+        "sha256": "99e9a5f2508cea0a830480d7ff01af85654f04a972e49ee2391b3e0b2c3d3c68"
+      },
+      {
+        "bytes": 8823,
+        "path": "coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs",
+        "sha256": "319744feb3c73f2b51deed68222e43c2241dbb28557c917a15a4f9010273b614"
+      },
+      {
+        "bytes": 25823,
+        "path": "coordination/engineering/additive-native-composition-20261009/issue-current-rebind-execution.py",
+        "sha256": "372e020108f6ddbf6cecefc5522b31105ebdf81e2bf9e6fe0a459a19fd561669"
+      },
+      {
+        "bytes": 22240,
+        "path": "coordination/engineering/additive-native-composition-20261009/supervise-current-rebind.py",
+        "sha256": "538c5d85f69345f6436d1cf34dca3c78bd0cef13fec1c7271a5ba9f19b0bb0ea"
+      },
+      {
+        "bytes": 4874,
+        "path": "coordination/engineering/additive-native-composition-20261009/execution-contract.py",
+        "sha256": "6caf8f51ce4516c7a9ca8c407c06c522dac7676a26eb91999c8f25170aa1fc13"
+      },
+      {
+        "bytes": 2201,
+        "path": "coordination/engineering/additive-native-composition-20261009/owned-group-original.py",
+        "sha256": "9ac8aeca9c721968bf33e69e219dbfb103875263b994dff1bd2e94402d0750ce"
+      },
+      {
+        "bytes": 2596,
+        "path": "coordination/engineering/additive-native-composition-20261009/owned-child-termination-original.py",
+        "sha256": "00c6028d814eabb67fd1986c7e7b0473836823dcfc81072d2b6563b0a5151c61"
+      },
+      {
+        "bytes": 22001,
+        "path": "coordination/engineering/additive-native-composition-20261009/mac-execution-runtime-original.json",
+        "sha256": "3b4c62732d123b00c436f724387f3fec67390b205223561b70787b0e2d44d4f5"
+      },
+      {
+        "bytes": 2197,
+        "path": "coordination/engineering/additive-native-composition-20261009/execution-code-paths.json",
+        "sha256": "9173f3eb7a6c9dfe6c6aaf4524229db6c7caec296a09ed41347b0c43c6145708"
+      },
+      {
+        "bytes": 14901,
+        "path": "scripts/local-workspace.mjs",
+        "sha256": "40b33be2e40c4d840b8ca3921eab36d2d899c638ff0d94ddde9e3016402b896c"
+      },
+      {
+        "bytes": 548,
+        "path": "scripts/worker-identity.mjs",
+        "sha256": "e31ef3d286c3250f7f69e23f455edd896cfa96b8eb6438026aa4374da57128bd"
+      }
+    ],
+    "support_code": [
+      {
+        "bytes": 13084,
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/supervise-selected-assembly-linux.mjs",
+        "sha256": "778d695d496714ad9a44488eaf218014d344702704f4b5d9121794d3b2f1d287"
+      },
+      {
+        "bytes": 30700,
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/supervise-source-native-linux.mjs",
+        "sha256": "5ee0e1412990e84048fae88b05a49261088ec5b5b201579d7adbfdf284a1f37d"
+      },
+      {
+        "bytes": 5441,
+        "path": "coordination/engineering/melanesia363-additive-delivery-20261010/selected-integration/melanesia-five/assemble-existing-five.mjs",
+        "sha256": "733d90bad97f9d402cf6e4618480a6621c9858e6669dfa56bf41a0dc464cb765"
+      },
+      {
+        "bytes": 4822,
+        "path": "coordination/engineering/additive-native-activation-20261009/assemble-supported-activation.mjs",
+        "sha256": "2c7130bacf4466e00d7e7ed970827264aedb3af1ed9968423ea557003da39765"
+      }
+    ],
+    "runtime": [
+      {
+        "bytes": 4082768,
+        "mode": 493,
+        "path": "/usr/bin/git",
+        "role": "git",
+        "sha256": "356db14e102d68a1a37d8a1ac577dfd678d45d46e92f468bef8b7154e7bfdc60"
+      },
+      {
+        "bytes": 125989464,
+        "mode": 493,
+        "path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+        "role": "node",
+        "sha256": "bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12"
+      },
+      {
+        "bytes": 154552,
+        "mode": 493,
+        "path": "/usr/bin/ps",
+        "role": "process-inspector",
+        "sha256": "43b8d2d049183e9ebc409c86b89150b5a4a68fa19fe1815b16bed5561921a9c3"
+      },
+      {
+        "bytes": 27384,
+        "mode": 493,
+        "path": "/workspace/scratch/127991fc8b8e/cloud-tools/gnu-time/time-1.9-0.2-amd64/usr/bin/time",
+        "role": "time",
+        "sha256": "efc0d1112e36ec76c14bf7508e287935cf1631d9d0d91fb532802d07aef51cea"
+      }
+    ],
+    "installed": [
+      {
+        "bytes": 2799,
+        "path": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/ce2f7ca0bdffcd3d8bb9d38387e80683962f3c2cbac078a921419a68710edbd1/work/node_modules/@noble/hashes/package.json",
+        "sha256": "ceb30ba96a14786c419db53f2b8d3d59ece7ac5221c198ac03def462cf96ef23",
+        "mode": 420
+      },
+      {
+        "bytes": 16773,
+        "path": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/ce2f7ca0bdffcd3d8bb9d38387e80683962f3c2cbac078a921419a68710edbd1/work/node_modules/@noble/hashes/sha2.js",
+        "sha256": "3ddc587c588283cbceed4dd9929cefcce06a0c231b54d4c6f0f99c478c686c00",
+        "mode": 420
+      },
+      {
+        "bytes": 5615,
+        "path": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/ce2f7ca0bdffcd3d8bb9d38387e80683962f3c2cbac078a921419a68710edbd1/work/node_modules/@noble/hashes/_md.js",
+        "sha256": "a112f0fe1b15db00f2638618c436a17be1c5e13baf19d02fcc29016ae1db2233",
+        "mode": 420
+      },
+      {
+        "bytes": 3081,
+        "path": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/ce2f7ca0bdffcd3d8bb9d38387e80683962f3c2cbac078a921419a68710edbd1/work/node_modules/@noble/hashes/_u64.js",
+        "sha256": "e48c0cfc10810439a4807b46db136ce603a3fa09b62584f513ef2f3ca496af54",
+        "mode": 420
+      },
+      {
+        "bytes": 9356,
+        "path": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/ce2f7ca0bdffcd3d8bb9d38387e80683962f3c2cbac078a921419a68710edbd1/work/node_modules/@noble/hashes/utils.js",
+        "sha256": "11319ec0a8132a0c2ced8c98af33ae9274c001d6baf4f4709c4a6115e031a3c5",
+        "mode": 420
+      }
+    ],
+    "parameters": {
+      "path": "/workspace/scratch/127991fc8b8e/.worldatlas-workspaces/a7d1c19eff225d01/ce2f7ca0bdffcd3d8bb9d38387e80683962f3c2cbac078a921419a68710edbd1/work/.cache/native102-preparation/assembly-parameters-001.json",
+      "bytes": 21684,
+      "sha256": "8523ff38af7c5c9826c7f73e05cca03918212ab55b1e9fdd08f9ec013dcbdb6b"
+    },
+    "runtimeBytes": 130254168,
+    "executionBytes": 18885140,
+    "gitExecutable": "/usr/bin/git"
+  },
+  "products": {
+    "execution_commit": "b8a6e98d35f17518aa21ac44a9bf5bf8a0aaf044",
+    "processing_allowance": {
+      "phaseBytes": 536870912,
+      "rssBytes": 805306368
+    },
+    "operating_limits": {
+      "log_bytes": 4194304,
+      "monitor_bytes": 8388608,
+      "output_bytes": 4194304,
+      "receipt_bytes": 1048576,
+      "retained_bytes": 20971520,
+      "rss_bytes": 1073741824,
+      "wall_seconds": 1200
+    },
+    "complete_reader_phase_bytes": 289078968,
+    "products": [
+      {
+        "path": "ledger.json",
+        "bytes": 1223726,
+        "sha256": "2f28eff93a4ebe3263c653b346c187224b94e5a7987b6ff1046294843ce221d5"
+      },
+      {
+        "path": "patch.json",
+        "bytes": 16380,
+        "sha256": "5cc91ad57ce5ada9e03f9475979940bf29f16333e22096efa70eb700a44793f5"
+      },
+      {
+        "path": "envelope.json",
+        "bytes": 1423,
+        "sha256": "454b6be45ecfe0cee7e9e906263aae7fb0e1661a5a965b873c68fba6bf7f4846"
+      },
+      {
+        "path": "qualification.json",
+        "bytes": 670,
+        "sha256": "9400c11bc137ec9f98c1cb5e9a775e14c2a4543a64624e0690064d6444b97803"
+      }
+    ],
+    "qualification": {
+      "rebind_certificate": {
+        "bytes": 3223,
+        "commit": "b8a6e98d35f17518aa21ac44a9bf5bf8a0aaf044",
+        "git_blob_oid": "142a7351014da2d90294b60f9d5a7504a3c422a0",
+        "mode": "100644",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/native102-selected-20261012/advance/rebind-certificate/certificate.json",
+        "sha256": "533dd5ba5b4bd9dcabe97ac918f851f517914f6dd2b35fa0f790941913af2a03"
+      },
+      "complete_result_sha256": "48d6661f7fea5513f85680a4a8cd415765b9ed3102019f42f90d8ede99c22d24",
+      "assigned_cells": 1306,
+      "components": 92,
+      "limits": [
+        "Ordinary output custody and committed sidecar authentication remain mandatory.",
+        "These bodies do not change selection or approve physical authority."
+      ]
+    }
+  }
+}
