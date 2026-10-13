@@ -7,7 +7,7 @@ import {createHash} from 'node:crypto';
 import {authenticateOriginalPackageOutput, requireOriginalPackageOutput,
   requirePackageAssemblyExecution} from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
 import {requireRetainedPackageTests, integrationTestFiles} from '../scripts/run-integration-tests.mjs';
-import {admitAssemblyAtlasMetadata,createPackageAssemblyScratch} from '../scripts/assemble-selected-package.mjs';
+import {admitAssemblyAtlasMetadata,createPackageAssemblyScratch,packageAssemblyInvocation} from '../scripts/assemble-selected-package.mjs';
 import {execFileSync,spawnSync} from 'node:child_process';
 
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
@@ -144,4 +144,17 @@ test('selected assembly rejects symlink, dangling-link and non-directory scratch
   }
   fs.writeFileSync(cache,'preserve cache');await assert.rejects(createPackageAssemblyScratch(root),/Ordinary package assembly scratch/);
   assert.equal(fs.readFileSync(cache,'utf8'),'preserve cache');assert.deepEqual(fs.readdirSync(outside),['sentinel']);
+});
+
+
+test('production assembly admission is independent of optional proof-reference metadata',()=>{
+  const environment={GITHUB_EVENT_NAME:'workflow_dispatch',GITHUB_WORKFLOW:'Selected package equivalence proof'};
+  const inputs={source_head:'a'.repeat(40),original_run_id:'17'};
+  const expected={proofMode:true,expectedHead:inputs.source_head,originalRunId:17};
+  assert.deepEqual(packageAssemblyInvocation({inputs},environment),expected);
+  assert.deepEqual(packageAssemblyInvocation({inputs:{...inputs,readback_run_id:'not-an-authority',readback_attempt:'missing'}},environment),expected);
+  for(const mutation of [{source_head:'main'},{original_run_id:'0'},{original_run_id:'9007199254740993'}])
+    assert.throws(()=>packageAssemblyInvocation({inputs:{...inputs,...mutation}},environment),/Exact/);
+  const source=fs.readFileSync(new URL('../scripts/assemble-selected-package.mjs',import.meta.url),'utf8');
+  assert.doesNotMatch(source,/loadSelectedPackageReadback|compareSelectedPackageReadback|proofReadback/);
 });

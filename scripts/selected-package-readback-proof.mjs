@@ -38,13 +38,33 @@ const authorSteps = [
 ];
 const authorReceipt = 'Actual reviewed-head Cloudflare package and applicable native readback receipts verified.';
 
-function producerFor(run, repo, expectedHead) {
+async function producerFor(run, repo, expectedHead, expectedPullRequest, api) {
   if (run.event === 'workflow_dispatch' && run.path === queueWorkflow && run.head_branch === 'main')
     return {workflow: queueWorkflow, job: 'integration (0)', steps: queueSteps, smoke: true};
-  need(run.event === 'pull_request' && run.path === authorWorkflow &&
-    Array.isArray(run.pull_requests) && run.pull_requests.length === 1,
-    'Native readback workflow identity differs');
-  const pr = run.pull_requests[0], repositoryURL = `https://api.github.com/repos/${repo}`;
+  need(run.event === 'pull_request' && run.path === authorWorkflow,
+    'Native author readback requires the pull_request full-regression workflow');
+  need(Array.isArray(run.pull_requests) && run.pull_requests.length <= 1,
+    'Native author readback requires zero or one unambiguous run PR link');
+  need(expectedPullRequest === undefined || positive(expectedPullRequest),
+    'Native author readback expected PR must be an exact positive number');
+  const repositoryURL = `https://api.github.com/repos/${repo}`;
+  let pr = run.pull_requests[0], linkage = {kind: 'run-pull-requests'};
+  if (run.pull_requests.length === 0) {
+    // GitHub can clear this mutable association after merge. The caller must
+    // supply an independently selected PR; never search by branch or guess it
+    // from an artifact. The actual run, successful job, receipts and complete
+    // report below must still bind this exact source independently.
+    need(positive(expectedPullRequest),
+      'Native author readback has no run PR link; explicit expectedPullRequest required');
+    pr = await api(`/repos/${repo}/pulls/${expectedPullRequest}`);
+    need(pr?.number === expectedPullRequest && pr.merged === true && pr.state === 'closed' &&
+      commit(pr.merge_commit_sha) && pr.head?.repo?.full_name === repo && pr.base?.repo?.full_name === repo,
+      'Native author readback fallback requires the exact accepted same-repository PR');
+    linkage = {kind: 'accepted-pull-request-lookup', merge_commit: pr.merge_commit_sha};
+  }
+  need(object(pr), 'Native author readback requires an ordinary PR identity');
+  need(expectedPullRequest === undefined || pr.number === expectedPullRequest,
+    'Native author run PR link contradicts the explicit expected PR');
   need(positive(pr?.number) && pr.url === `${repositoryURL}/pulls/${pr.number}` &&
     pr.head?.sha === expectedHead && typeof pr.head.ref === 'string' && pr.head.ref.length > 0 &&
     run.head_branch === pr.head.ref && pr.head.repo?.url === repositoryURL &&
@@ -54,7 +74,7 @@ function producerFor(run, repo, expectedHead) {
   // reviewed head is independently bound by PR metadata, artifact name, the
   // full-receipt verification step/log, and the decoded native report.
   return {workflow: authorWorkflow, job: 'regression (0)', steps: authorSteps, smoke: false,
-    pullRequest: pr.number, artifactName: `native-built-output-regression-${pr.number}-${expectedHead}`};
+    pullRequest: pr.number, linkage, artifactName: `native-built-output-regression-${pr.number}-${expectedHead}`};
 }
 
 async function delivery(redirect, fetchImpl, maximum, destination) {
@@ -190,14 +210,15 @@ function validateInventory(rows, label) {
   return {paths, bytes};
 }
 
-export async function loadSelectedPackageReadback({api, repo, runId, attempt, expectedHead, fetchImpl = fetch}) {
+export async function loadSelectedPackageReadback({api, repo, runId, attempt, expectedHead, expectedPullRequest, fetchImpl = fetch}) {
   need(typeof api === 'function' && typeof api.artifactRedirect === 'function' && typeof api.jobLogRedirect === 'function' &&
     /^[-\w.]+\/[-\w.]+$/.test(repo ?? '') && positive(runId) && positive(attempt) && commit(expectedHead),
     'Exact authenticated native readback source required');
   const run = await api(`/repos/${repo}/actions/runs/${runId}/attempts/${attempt}`);
   need(run.id === runId && run.run_attempt === attempt && commit(run.head_sha) && run.status === 'completed' &&
-    run.repository?.full_name === repo && run.head_repository?.full_name === repo, 'Native readback workflow identity differs');
-  const producer = producerFor(run, repo, expectedHead);
+    run.repository?.full_name === repo && run.head_repository?.full_name === repo,
+    'Native readback run ID, attempt, completed status, head or repository identity differs');
+  const producer = await producerFor(run, repo, expectedHead, expectedPullRequest, api);
   // Both fixed workflows fit one 100-row API page. Require the complete actual
   // inventory to establish uniqueness, without an open-ended discovery loop.
   const inventory = await api(`/repos/${repo}/actions/runs/${runId}/attempts/${attempt}/jobs?per_page=100&page=1`);
@@ -260,7 +281,7 @@ export async function loadSelectedPackageReadback({api, repo, runId, attempt, ex
       'Native readback complete output inventory differs');
     return {report, origin: {run_id: runId, run_attempt: attempt, job_id: job.id, head: expectedHead,
       workflow_head: run.head_sha, workflow_path: producer.workflow, event: run.event,
-      ...(producer.pullRequest ? {pull_request: producer.pullRequest} : {}),
+      ...(producer.pullRequest ? {pull_request: producer.pullRequest, pull_request_linkage: producer.linkage} : {}),
       artifact_id: artifact.id, artifact_name: artifact.name, artifact_bytes: artifact.size_in_bytes,
       artifact_digest: artifactDigest, report_bytes: raw.length, report_sha256: hash(raw),
       use: 'full-output-comparison-only'}};

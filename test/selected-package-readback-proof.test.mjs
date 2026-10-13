@@ -73,6 +73,11 @@ function fixture({author = false, smoke = !author, reportChange, zipChange, arch
   const inventory = {total_count: 2, jobs: [job, {id: 30, name: 'merge'}]};
   const f = {run, job, artifact, report, receipt, inventory, archive, calls: [], deliveries: [],
     logLocation: 'https://fixture.blob.core.windows.net/job-log', artifactLocation: 'https://fixture.blob.core.windows.net/archive'};
+  if (author) {
+    f.acceptedPR = {...structuredClone(run.pull_requests[0]), merged: true, state: 'closed', merge_commit_sha: 'd'.repeat(40)};
+    f.acceptedPR.head.repo.full_name = repo;
+    f.acceptedPR.base.repo.full_name = repo;
+  }
   f.log = () => [JSON.stringify(f.receipt), ...(author ? [authorReceipt] : []),
     'SHA256 digest of uploaded artifact zip is ' + f.artifact.digest.slice(7),
     `Artifact ${f.artifact.name} has been successfully uploaded! Final size is ${f.artifact.size_in_bytes} bytes. Artifact ID is ${f.artifact.id}`,
@@ -85,6 +90,7 @@ function fixture({author = false, smoke = !author, reportChange, zipChange, arch
     if (route === `/repos/${repo}/actions/runs/17/attempts/2/jobs?per_page=100&page=1`) return f.inventory;
     if (route === `/repos/${repo}/actions/jobs/29`) return f.job;
     if (route === `/repos/${repo}/actions/artifacts/41`) return f.artifact;
+    if (route === `/repos/${repo}/pulls/1808`) return f.acceptedPR;
     throw Error('Unexpected fixture authority route: ' + route);
   };
   api.jobLogRedirect = async route => {
@@ -103,7 +109,7 @@ function fixture({author = false, smoke = !author, reportChange, zipChange, arch
     assert.equal(String(url), f.artifactLocation);
     return new Response(f.archive);
   };
-  f.load = () => loadSelectedPackageReadback({api, repo, runId: 17, attempt: 2, expectedHead, fetchImpl});
+  f.load = (options = {}) => loadSelectedPackageReadback({api, repo, runId: 17, attempt: 2, expectedHead, fetchImpl, ...options});
   return f;
 }
 
@@ -135,6 +141,96 @@ test('ordinary author full regression authenticates exact PR linkage, full recei
   assert.notEqual(result.origin.head, result.origin.workflow_head);
   assert.equal(result.origin.artifact_name, `native-built-output-regression-1808-${expectedHead}`);
   assert.equal(result.origin.use, 'full-output-comparison-only');
+});
+
+test('explicit author PR agrees with the existing run link before merge without an accepted-PR lookup', async () => {
+  const f = fixture({author: true});
+  f.acceptedPR.merged = false; f.acceptedPR.state = 'open';
+  const result = await f.load({expectedPullRequest: 1808});
+  assert.deepEqual(result.origin.pull_request_linkage, {kind: 'run-pull-requests'});
+  assert.equal(f.calls.some(route => route.includes('/pulls/')), false);
+  await assert.rejects(f.load({expectedPullRequest: 1809}), /contradicts the explicit expected PR/);
+});
+
+test('post-merge missing run association authenticates only the explicit accepted PR and records honest linkage', async () => {
+  const f = fixture({author: true}); f.run.pull_requests = []; f.run.conclusion = 'failure';
+  const result = await f.load({expectedPullRequest: 1808});
+  assert.deepEqual(result.report, f.report);
+  assert.equal(result.origin.pull_request, 1808);
+  assert.deepEqual(result.origin.pull_request_linkage,
+    {kind: 'accepted-pull-request-lookup', merge_commit: f.acceptedPR.merge_commit_sha});
+  assert.deepEqual(f.calls.slice(0, 2), [`/repos/${repo}/actions/runs/17/attempts/2`, `/repos/${repo}/pulls/1808`]);
+  assert.equal(f.calls.length, 5);
+  assert.equal(f.deliveries.length, 2);
+});
+
+test('post-merge fallback requires explicit identity and rejects wrong, foreign, unaccepted or unbound PRs', async () => {
+  const changes = [
+    f => f.acceptedPR.number = 1809,
+    f => f.acceptedPR.url = 'https://api.github.com/repos/foreign/repo/pulls/1808',
+    f => f.acceptedPR.head.sha = workflowHead,
+    f => f.acceptedPR.head.ref = 'other-branch',
+    f => f.acceptedPR.head.repo.url = 'https://api.github.com/repos/foreign/repo',
+    f => f.acceptedPR.head.repo.full_name = 'foreign/repo',
+    f => f.acceptedPR.base.repo.url = 'https://api.github.com/repos/foreign/repo',
+    f => f.acceptedPR.base.repo.full_name = 'foreign/repo',
+    f => f.acceptedPR.base.ref = 'other-base',
+    f => f.acceptedPR.base.sha = 'unbound-base',
+    f => f.acceptedPR.merged = false,
+    f => f.acceptedPR.state = 'open',
+    f => f.acceptedPR.merge_commit_sha = 'unbound-merge',
+    f => f.acceptedPR = null
+  ];
+  for (const change of changes) {
+    const f = fixture({author: true}); f.run.pull_requests = []; change(f);
+    await assert.rejects(f.load({expectedPullRequest: 1808}));
+    assert.equal(f.deliveries.length, 0);
+    assert.equal(f.calls.some(route => route.includes('/jobs')), false);
+  }
+  for (const expectedPullRequest of [undefined, null, 0, -1, '1808', 1.5]) {
+    const f = fixture({author: true}); f.run.pull_requests = [];
+    await assert.rejects(f.load({expectedPullRequest}), /explicit expectedPullRequest|required|exact positive number/);
+    assert.equal(f.calls.length, 1);
+  }
+});
+
+test('explicit accepted PR cannot repair contradictory, foreign, missing or duplicate run links', async () => {
+  for (const change of [
+    f => f.run.pull_requests[0].number = 1809,
+    f => f.run.pull_requests[0].head.sha = workflowHead,
+    f => f.run.pull_requests[0].head.repo.url = 'https://api.github.com/repos/foreign/repo',
+    f => f.run.pull_requests = [null],
+    f => f.run.pull_requests.push(structuredClone(f.run.pull_requests[0])),
+    f => delete f.run.pull_requests
+  ]) {
+    const f = fixture({author: true}); change(f);
+    await assert.rejects(f.load({expectedPullRequest: 1808}));
+    assert.equal(f.calls.length, 1);
+  }
+});
+
+test('accepted-PR fallback preserves exact successful job, artifact, report and archive controls', async () => {
+  for (const change of [
+    f => f.job.conclusion = 'failure',
+    f => f.job.head_sha = expectedHead,
+    f => f.job.steps[0].conclusion = 'skipped',
+    f => f.artifact.name = `native-built-output-regression-1809-${expectedHead}`,
+    f => f.artifact.workflow_run.head_sha = expectedHead,
+    f => f.receipt.sha256 = 'f'.repeat(64)
+  ]) {
+    const f = fixture({author: true}); f.run.pull_requests = []; change(f);
+    await assert.rejects(f.load({expectedPullRequest: 1808}));
+  }
+  const f = fixture({author: true, reportChange: report => report.head = workflowHead}); f.run.pull_requests = [];
+  await assert.rejects(f.load({expectedPullRequest: 1808}), /actual candidate/);
+});
+
+test('queue producer needs no author PR metadata even when the caller supplies an accepted source PR', async () => {
+  const f = fixture();
+  const result = await f.load({expectedPullRequest: 1808});
+  assert.equal(result.origin.pull_request, undefined);
+  assert.equal(result.origin.pull_request_linkage, undefined);
+  assert.equal(f.calls.some(route => route.includes('/pulls/')), false);
 });
 
 test('author producer rejects mismatched PR/head/repository, metadata jobs, skipped full steps and replayed receipts', async () => {
