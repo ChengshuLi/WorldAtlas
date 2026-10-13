@@ -293,6 +293,91 @@ class PythonRuntimeIdentityTests(unittest.TestCase):
         finally:
             sys.path[:] = old_path
 
+    def test_capacity_uses_memavailable_and_only_clean_reclaimable_cgroup_cache(self):
+        mib = 1024 * 1024
+        files = {'/proc/meminfo': 'MemFree: 32768 kB\nMemAvailable: 819200 kB\n',
+                 '/sys/fs/cgroup/memory.max': str(512 * mib),
+                 '/sys/fs/cgroup/memory.current': str(480 * mib),
+                 '/sys/fs/cgroup/memory.stat': '\n'.join([
+                     'inactive_file ' + str(128 * mib), 'file ' + str(160 * mib),
+                     'shmem ' + str(16 * mib), 'file_dirty ' + str(8 * mib), 'file_writeback ' + str(4 * mib)])}
+        def read(path):
+            if path not in files: raise FileNotFoundError(path)
+            return files[path]
+        observed = runtime.available_memory(read_text=read, sysconf=lambda key: 1)
+        self.assertEqual(observed['host'], {'kind': 'linux-MemAvailable', 'bytes': 800 * mib})
+        self.assertEqual(observed['available_bytes'], 148 * mib)
+        self.assertEqual(observed['cgroups'][0]['clean_inactive_file_bytes'], 116 * mib)
+        files['/sys/fs/cgroup/memory.current'] = str(700 * mib)
+        self.assertEqual(runtime.available_memory(read_text=read)['available_bytes'], 0)
+        files['/sys/fs/cgroup/memory.current'] = str(8 * mib)
+        available = runtime.available_memory(read_text=read)['available_bytes']
+        self.assertLessEqual(available, 512 * mib, 'Reclaim cannot expand the hard cgroup ceiling')
+
+    def test_scoped_physical_charges_release_on_success_and_refusal(self):
+        budget = runtime.Budget(8 * 1024 * 1024)
+        shared = bytearray(1024 * 1024)
+        original = budget.used
+        with budget.scoped([shared], 'temporary member map'):
+            self.assertGreater(budget.scoped_bytes(), len(shared))
+        self.assertEqual(budget.scoped_bytes(), 0)
+        self.assertEqual(budget.used, original)
+        with self.assertRaisesRegex(ValueError, 'capacity_bytes.*retained_bytes.*scoped_bytes.*working_bytes'):
+            with budget.scoped([shared], 'temporary member map'):
+                budget.admit(budget.maximum, 'true oversized working set')
+        self.assertEqual(budget.scoped_bytes(), 0)
+        self.assertEqual(budget.used, original)
+        with budget.scoped([shared], 'transferred member'):
+            before = budget.scoped_bytes()
+            budget.retain(shared)
+            self.assertLess(budget.scoped_bytes(), before)
+        self.assertGreaterEqual(budget.used, len(shared))
+        self.assertEqual(budget.scoped_bytes(), 0)
+
+    def test_sequential_caches_release_workspace_and_large_raw_members_stream(self):
+        install = self.installation(); source, _ = install.add('example', cache=False)
+        payload = ('# ' + 'x' * (512 * 1024) + '\ndef answer(): return 1\n').encode()
+        for index in range(40):
+            file = source.parent / ('member_' + str(index) + '.py')
+            file.write_bytes(payload)
+            cache = Path(importlib.util.cache_from_source(str(file)))
+            cache.parent.mkdir(exist_ok=True)
+            cache.write_bytes(importlib.util.MAGIC_NUMBER + struct.pack('<III', 0, 0, len(payload)) +
+                              marshal.dumps(compile(payload, str(file), 'exec', dont_inherit=True)))
+        native = source.parent / 'large-native.bin'
+        with native.open('wb') as stream:
+            for _ in range(24): stream.write(b'x' * (1024 * 1024))
+        observed = install.identity(metadata_bytes=16 * 1024 * 1024)
+        self.assertEqual(sum('normalization' in row for row in observed['inventory']), 40)
+        self.assertGreater(sum(row['raw']['bytes'] for row in observed['inventory']), 32 * 1024 * 1024)
+        self.assertEqual(runtime.validate_identity(observed), {'valid': True})
+        oversized = source.parent / 'oversized.py'
+        with oversized.open('wb') as stream:
+            stream.write(b'# ')
+            for _ in range(10): stream.write(b'x' * (1024 * 1024))
+        cache = Path(importlib.util.cache_from_source(str(oversized)))
+        cache.write_bytes(importlib.util.MAGIC_NUMBER + b'\0' * 12 + marshal.dumps(compile('pass', str(oversized), 'exec')))
+        with self.assertRaisesRegex(ValueError, 'read source/cache pair: .*oversized.*working_bytes'):
+            install.identity(metadata_bytes=16 * 1024 * 1024)
+
+    def test_fixed_os_boundary_covers_canonical_and_final_serialization_growth(self):
+        if sys.platform != 'linux': self.skipTest('Linux production allocation boundary')
+        from unittest.mock import patch
+        install = self.installation(); install.add('example')
+        capacity = 16 * 1024 * 1024
+        def expand(*args): return bytearray(capacity * 4)
+        with patch.object(runtime, 'canonical_code', side_effect=expand):
+            with self.assertRaisesRegex(ValueError, 'OS allocation limit during canonical'):
+                install.identity(metadata_bytes=capacity)
+        original = runtime.encoded
+        def serialize(value):
+            if isinstance(value, dict) and 'interpreter' in value and 'inventory' in value:
+                return bytearray(capacity * 4)
+            return original(value)
+        with patch.object(runtime, 'encoded', side_effect=serialize):
+            with self.assertRaisesRegex(ValueError, 'OS allocation limit during final effective/raw identity serialization'):
+                install.identity(metadata_bytes=capacity)
+
     def test_metadata_memory_admission_is_resource_based_and_fails_closed(self):
         install = self.installation(); install.add('example')
         with self.assertRaisesRegex(ValueError, 'memory admission'): install.identity(metadata_bytes=1)
