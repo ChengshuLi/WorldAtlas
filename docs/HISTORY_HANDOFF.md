@@ -4,7 +4,7 @@ This lane researches dated attributes for approved territories. Boundary/hierarc
 
 Give a Luna thread this document and [its prompt](prompts/LUNA_HISTORY.txt). They explain research contracts, import commands and safe concurrency. **GitHub Issues is the single source of truth for TODOs, status and work history**: [open historical-research issues](https://github.com/ChengshuLi/WorldAtlas/issues?q=is%3Aissue+is%3Aopen+label%3Atype%3Ahistory-research). This document contains no live task checklist.
 
-M engineering and N history workers must read [WORKER_COORDINATION.md](WORKER_COORDINATION.md), claim one ready bounded work item before implementation, and use the merge queue. Umbrellas are split into bounded children and never reserved by one worker.
+M engineering and N history workers must read [WORKER_COORDINATION.md](WORKER_COORDINATION.md), choose one bounded work item and record worker ID, branch and scope in an ordinary issue comment, and use the merge queue. Umbrellas are split into bounded children and never reserved by one worker.
 
 Repository: https://github.com/ChengshuLi/WorldAtlas, integration branch **main**. Site: https://worldatlas-explorer.chengshu-li-2013.chatgpt.site/, owner-private. Read `AGENTS.md`, [scope guidance](HISTORICAL_RESEARCH_TODO.md), [LUNA_DATA_HANDOFF.md](LUNA_DATA_HANDOFF.md), [RESEARCH_IMPORT_WORKFLOW.md](RESEARCH_IMPORT_WORKFLOW.md), [ATTRIBUTE_CONTRACT.md](ATTRIBUTE_CONTRACT.md) and [PARALLEL_WORK_PROTOCOL.md](PARALLEL_WORK_PROTOCOL.md).
 
@@ -60,7 +60,7 @@ Before ending, push every source note, input, bundle and receipt needed by a fre
 
 ## Issue lifecycle accuracy
 
-Read [ISSUE_LIFECYCLE.md](ISSUE_LIFECYCLE.md). Authors reconcile original acceptance and next actions before moving on; reviewers check closure/continuation independently of merging. Dependency owners maintain direct dependents. Between jobs review up to three neglected unclaimed same-lane readiness problems. Use shared read-only readiness checks before readying and claiming; preserve scientific/publication gates and canonical ownership. Existing chats refresh before their next job; Main handles exceptional decisions.
+Read [ISSUE_LIFECYCLE.md](ISSUE_LIFECYCLE.md). Authors reconcile original acceptance and next actions before moving on; reviewers check closure/continuation independently of merging. Dependency owners maintain direct dependents. Coordinate encountered overlap and remaining work on the original issue; preserve scientific/publication gates. No readiness script or routine queue-triage pass is required. Existing chats refresh before their next job; Main handles exceptional decisions.
 
 Read docs/AUDIT_FAILURE_PREVENTION.md on current main before the next job or review. Identify the consequential acceptance claims and independently test applicable consumed-input/code, identity/join, source/method, safe-reproduction, nonvacuous-control and operating-limit invariants. Use shared evidence helpers or an explicitly reviewed equivalent; reviewers derive expectations from original acceptance and independent records before relying on author tests. Exercise real entry points and adjacent paths for corrective PRs; record unexecuted proof as a limit. Keep exact-head review, original evidence, scientific/publication gates and focused research CI. Adoption requires actual subsequent handoffs, not just this prompt edit.
 

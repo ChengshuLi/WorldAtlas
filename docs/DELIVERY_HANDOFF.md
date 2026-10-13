@@ -451,7 +451,7 @@ node scripts/prepare-delivery-handoff.mjs advance CONFIG OWNED_DESTINATION --aut
 Add `automation: {"issue_number": YOUR_ISSUE}` to the existing config. The
 existing recipe and observations remain authoritative. Automatic mode requires
 the current chat's ready managed author workspace, exact engineering branch,
-canonical unexpired claim, ready issue/dependencies and declared output ownership.
+current open issue with engineering lane/mode and declared output ownership.
 Use an issue-owned `coordination/engineering/.../` destination; `.cache` products
 are never silently committed as repository evidence.
 
@@ -525,21 +525,14 @@ wrong units and conflicting input/result/evaluation bindings refuse before the
 existing exclusive publication writer creates output. Original metric vintages
 remain intact. This validates reporting, not the underlying geographic result.
 
-## Claim and accepted-review stability
+## Author scope
 
-Claim mutation rereads compare parsed canonical reservation and blocker authority,
-readiness/work contract, dependency state, linked PR identity/head/state/target,
-and applicable geography ownership. Cosmetic timestamps, ordinary comments and
-PR presentation fields do not invalidate a stable decision. A refusal names the
-changed categories; it does not guess which field caused an older incident.
-Fresh transition guards still enforce exclusivity and all existing readiness.
-
-The accepted-review step uses the canonical scoped reservation, including
-engineering `owned_paths`, with shared readiness/dependency/blocker validation
-before and after evidence traversal. Revoked, foreign, expired or replaced claims
-and changed scope/readiness fail. A benign renewal does not replace ownership.
-The actual independent receipt, exact head/body/manifest and unresolved-review
-gates remain authoritative.
+Automatic authoring verifies the actual managed workspace worker, token, branch
+and path before and after reading the linked issue. It checks the issue's declared
+engineering output paths before writing. Ordinary authorship does not read a
+canonical lease, readiness snapshot, dependency audit or parsed blocker receipt.
+The parent coordinates real overlapping work and dependencies. Scientific byte
+checks and distinct exact-head review remain required where applicable.
 
 ### Explicit v2 subsets and immutable receipt continuation
 

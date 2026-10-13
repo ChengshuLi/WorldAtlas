@@ -1,20 +1,20 @@
 # Many engineering, geography and history workers
 
-M geography, N engineering and P history-research chats may work in isolated checkouts. GitHub Issues remains the work record; a serialized bot-managed reservation prevents two cooperative workers from taking the same issue. Threads using the same GitHub account need distinct **worker IDs**, not just an assignee.
+M geography, N engineering and P history-research chats may work in isolated checkouts. GitHub Issues remains the work record. Before implementation, comment with the worker ID, branch, bounded scope and planned checks. The parent coordinates overlapping work. Threads sharing a GitHub account still use distinct worker IDs; a comment is coordination, not security isolation.
 
 Read [LOCAL_WORKSPACES.md](LOCAL_WORKSPACES.md). Allocate isolated checkouts through `scripts/local-workspace.mjs`; keep bounded work/review slots, include exact required sparse inputs, check storage before generation/installations, and release finished slots after preserving unique work. Do not retain a full checkout per task or review revision. Existing chats must refresh their saved instructions.
 
 ## Chat identity
 
-Worker identity belongs to the chat, not the issue, branch, goal, checkout or GitHub account. In Codex, use the exact current CODEX_THREAD_ID as the author worker ID and keep it across successive jobs. Never copy an ID from another chat, a reservation, a checkout registry, a handoff or inherited/forked context. A fork/new chat has its own identity. Before claiming or allocating, compare the chosen ID with this chat’s actual ID; if another chat owns the claim/slot, leave it untouched and do not treat it as your work or blocker. New author claim/recover and work-allocation commands reject mismatches when CODEX_THREAD_ID is available. Outside Codex, establish one unique persistent ID for that chat; the tools cannot verify chat identity when the environment does not supply it. Do not unset or override CODEX_THREAD_ID to bypass the check.
+Worker identity belongs to the chat, not the issue, branch, goal, checkout or GitHub account. In Codex, use the exact current CODEX_THREAD_ID as the author worker ID and keep it across successive jobs. Never copy an ID from another chat, a reservation, a checkout registry, a handoff or inherited/forked context. A fork/new chat has its own identity. Before starting work or allocating, compare the chosen ID with this chat’s actual ID; if another chat owns the work/slot, leave it untouched and do not treat it as your work or blocker. New author work-allocation commands reject mismatches when CODEX_THREAD_ID is available. Outside Codex, establish one unique persistent ID for that chat; the tools cannot verify chat identity when the environment does not supply it. Do not unset or override CODEX_THREAD_ID to bypass the check.
 
-Active legacy work keeps its recorded worker ID only for finishing, renewing and releasing that exact claim/checkout. Do not rename an active claim, take over another chat’s slot or start new work under the legacy ID. After verified merge/handoff and safe release, use this chat’s ID for the next claim and allocation. Independent reviewer agents keep their own stable distinct reviewer IDs (actual agent identity when available); an inherited parent CODEX_THREAD_ID does not identify a sub-agent. Never invent a second ID for self-review. Review allocation is exempt from the author-ID check because review sub-agents may inherit their parent’s environment; review identity remains cooperative and must be checked by the reviewer.
+Active legacy work keeps its recorded worker ID only for finishing, renewing and releasing that exact claim/checkout. Do not rename an active claim, take over another chat’s slot or start new work under the legacy ID. After verified merge/handoff and safe release, use this chat’s ID for the next job and allocation. Independent reviewer agents keep their own stable distinct reviewer IDs (actual agent identity when available); an inherited parent CODEX_THREAD_ID does not identify a sub-agent. Never invent a second ID for self-review. Review allocation is exempt from the author-ID check because review sub-agents may inherit their parent’s environment; review identity remains cooperative and must be checked by the reviewer.
 
 ## Small, reviewed work items
 
-Each worker holds at most one active work item; do not mass-reserve the queue. Actionable issues have exactly one type label, `kind:work-item`, `status:ready`, an explicit bounded scope and a positive PR planning estimate (`max_prs`, retained for v1 compatibility). Larger objectives are `kind:umbrella`, cannot be claimed and are decomposed by independently deliverable scope or ownership. The estimate does not block readiness, claims, branch rotation or merging; exceeding it does not require another issue or a contract edit. Review why work is growing and finish the existing promise instead of mechanically creating a successor. Open dependencies or `status:blocked` prevent claims. Completing a child does not close its parent.
+Each worker holds at most one active work item; do not mass-reserve the queue. Actionable issues have exactly one type label, an explicit bounded scope and a positive PR planning estimate (`max_prs`, retained for v1 compatibility). Labels summarize human coordination; they do not start an automated readiness protocol. Larger objectives are `kind:umbrella`, cannot be claimed and are decomposed by independently deliverable scope or ownership. The estimate does not block readiness, claims, branch rotation or merging; exceeding it does not require another issue or a contract edit. Review why work is growing and finish the existing promise instead of mechanically creating a successor. Resolve real dependencies before dependent work; independent work can proceed. Completing a child does not close its parent.
 
-Within a human-assigned delivery goal, choose the next eligible work that most directly finishes that outcome: integrate a supported batch or fix its demonstrated blocker before unrelated housekeeping or speculative hardening. A newly found incident threatening data, service availability or correctness of that delivery takes priority according to its demonstrated impact. For general unassigned queue work, choose eligible urgent items, then follow-ups, then other ready work. A label alone does not establish impact. Finish or safely hand over the current claim; preserve readiness, lane, ownership and scientific/publication rules.
+Within a human-assigned delivery goal, choose the next eligible work that most directly finishes that outcome: integrate a supported batch or fix its demonstrated blocker before unrelated housekeeping or speculative hardening. A newly found incident threatening data, service availability or correctness of that delivery takes priority according to its demonstrated impact. For general unassigned queue work, choose eligible urgent items, then follow-ups, then other ready work. A label alone does not establish impact. Finish or safely hand over the current work; preserve lane, declared scope and scientific/publication rules.
 
 The issue-creation thread reviews scope, dependencies and overlap before marking ready. Include one machine-readable block in the issue body (GitHub is its sole authority):
 
@@ -24,7 +24,7 @@ The issue-creation thread reviews scope, dependencies and overlap before marking
 -->
 ```
 
-Modes are `engineering`, `geography`, `source-only` and `content`. `type:geography` uses `geography/<job-id>` branches and must declare 1–8 disjoint safe `owned_paths` prefixes, each exactly `data/regional-review/<packet-id>/` or `research/geography/<campaign-id>/`. Existing review packets retain their declared directories. Its work is source evidence, proposals and local reproductions only. Engineering preserves this evidence and implements executable migrations/integration/publication. Models are selected by the user; geography research can run on Luna. See [GEOGRAPHY_HANDOFF.md](GEOGRAPHY_HANDOFF.md). Source-only research defines disjoint subjects/source collections/time/attributes and stages evidence without imports. Content additionally needs `geographic_release`, `scope_manifest` and `territory_match_review`, plus `region_ids` and an explicit permitted subject scope in its manifest. Claim automation requires completed global macro approval and a completed published full-branch regional certificate with matching release pins. No branches are approved yet. See [GEOGRAPHY_RESEARCH_READINESS.md](GEOGRAPHY_RESEARCH_READINESS.md).
+Modes are `engineering`, `geography`, `source-only` and `content`. `type:geography` uses `geography/<job-id>` branches and must declare 1–8 disjoint safe `owned_paths` prefixes, each exactly `data/regional-review/<packet-id>/` or `research/geography/<campaign-id>/`. Existing review packets retain their declared directories. Its work is source evidence, proposals and local reproductions only. Engineering preserves this evidence and implements executable migrations/integration/publication. Models are selected by the user; geography research can run on Luna. See [GEOGRAPHY_HANDOFF.md](GEOGRAPHY_HANDOFF.md). Source-only research defines disjoint subjects/source collections/time/attributes and stages evidence without imports. Content additionally needs `geographic_release`, `scope_manifest` and `territory_match_review`, plus `region_ids` and an explicit permitted subject scope in its manifest. Actual content imports require completed global macro approval and a completed published full-branch regional certificate with matching release pins. No branches are approved yet. See [GEOGRAPHY_RESEARCH_READINESS.md](GEOGRAPHY_RESEARCH_READINESS.md).
 
 A geography work item declares ownership in the same machine block, for example:
 
@@ -34,9 +34,9 @@ A geography work item declares ownership in the same machine block, for example:
 -->
 ```
 
-Inspect other ready issues' declared prefixes before accepting ownership. The canonical geography claim retains the exact prefix array; scope changes require coordinated release/reclaim. No geography live-operation reservations are allowed. Engineering reads but preserves both geography namespaces; integration outputs go elsewhere. Trusted CI and the serialized merge queue verify actual GitHub-owned paths, including rename sources; evidence must use ordinary files rather than symlinks/submodules.
+Inspect other ready issues' declared prefixes before accepting ownership. The issue retains the exact prefix array; scope changes require coordination with affected workers. No geography live-operation reservations are allowed. Engineering reads but preserves both geography namespaces; integration outputs go elsewhere. Trusted CI and the serialized merge queue verify actual GitHub-owned paths, including rename sources; evidence must use ordinary files rather than symlinks/submodules.
 
-A ready label is a reviewed decision, not an automatic conclusion from complete database chains. Two separate issues can still overlap; triage must record subsystem/resource or geography/source/time/attribute scope and dependencies. A worker discovering overlap stops the conflicting part and coordinates on the issues. Git claims are cooperative reservations, not security isolation or an unlimited production-capacity guarantee.
+A ready label is a reviewed decision, not an automatic conclusion from complete database chains. Two separate issues can still overlap; triage must record subsystem/resource or geography/source/time/attribute scope and dependencies. A worker discovering overlap stops the conflicting part and coordinates on the issues. Ordinary author coordination is not security isolation or a production-capacity guarantee.
 
 Geography proposals → bounded engineering corrections/integration → complete validated published regional branch → permitted historical imports. Independent UI/performance/infrastructure engineering and source-only historical collection may run in parallel throughout. Inter-region inconsistencies require a coordinated issue covering all affected neighbors; no unilateral boundary or certificate edits. After a published boundary change, engineering revalidates affected release pins, complete-branch certificates and content scopes while retaining earlier records/evidence.
 
@@ -92,35 +92,36 @@ corresponding delivery. An optional improvement is not a new acceptance criterio
 
 Keep PRs focused on one issue or a coherent part. Aim for fewer than 1,000 changed non-test lines as a soft review target, not a hard cutoff. Larger focused PRs are allowed when splitting would make implementation, migration or validation harder to review safely; explain the reason in the PR description. Report generated-data changes separately. Do not compress code or documentation merely to meet a line budget. The soft target does not change lane ownership, required checks or serialized squash merges. Split oversized issue scopes into bounded children when needed, rather than fragmenting one coherent change just to meet a line count.
 
-## Claim before implementation
+## Ordinary ownership and live-operation reservations
 
-Read fresh main, inspect the issue and its active PRs, use this chat’s stable author ID as defined above and a planned fresh lane branch. From the repo:
+Read fresh main, the issue and its active PRs. Post an ordinary issue comment naming
+this chat's worker ID, fresh lane branch, bounded scope and planned checks. The
+parent coordinates overlap and handoffs. No parsed ownership receipt, timed lease,
+renewal heartbeat, readiness audit or claim workflow is required for code or
+source authoring. Preserve other workers' open branches, evidence and checkpoints.
 
-```sh
-node scripts/issue-lease.mjs claim --issue 22 --worker YOUR-UNIQUE-WORKER --branch engineering/YOUR-JOB --out /tmp/claim.json
-node scripts/issue-lease.mjs inspect --issue 22
-```
+The existing `issue-claims.yml` workflow remains only for explicitly coordinated
+engineering live operations and settling historical reservations. Cloudflare
+republish, current PostgreSQL recovery and compact production retain their active
+live reservation, independently expiring operation window, exact provider/tool/
+source pins, operation registry and actual database locks. Read the applicable
+operation guide before dispatch; a reservation never authorizes an operation by
+itself. Existing native maintenance workflow groups differ; they do not provide
+global serialization across every historical writer.
 
-Replace placeholders. Begin only after the command exits successfully and its result says `accepted: true`. Retain the receipt, claim ID and workflow link in your owned execution artifacts. Mutating claim actions require `--out`: use a fresh path for each new action; reuse a pending path only with its original inputs to resume observation. Completed receipts and unrelated files are preserved. The client durably publishes checkpoints before dispatch, rejects symlink outputs, and allows only one local process to own a receipt. A `status:claimed` label is visible convenience; the canonical bot-authored comment is authority. Public ownership nonces prevent accidental collisions, not impersonation by someone with repository write access.
-
-Per-issue GitHub Actions concurrency serializes claim/renew/release/recover on **main**. Different issues may reserve concurrently. GitHub allows one running and one pending run per group; later requests may cancel pending requests. The client dispatches once and retains its request ID and pending checkpoint. It discovers the execution through a complete bounded inventory, then observes that exact execution and its durable result. Cancellation, timeout or missing confirmation is never success or permission to redispatch blindly. Resume observation with the original request/checkpoint; reconcile terminal or ambiguous results before deciding on a new request. Lack of Actions dispatch/read permissions is a blocker; do not fall back to an uncoordinated comment-only claim.
-
-## Keep, rotate and release a reservation
-
-The lease lasts 24 hours. Renew at work milestones and before each live operation/merge; heartbeat periodically during sustained work. Use your actual claim ID:
-
-```sh
-node scripts/issue-lease.mjs renew --issue 22 --worker YOUR-UNIQUE-WORKER --branch engineering/YOUR-JOB --claim-id CLAIM-ID --out /tmp/renew.json
-node scripts/issue-lease.mjs release --issue 22 --worker YOUR-UNIQUE-WORKER --branch engineering/YOUR-JOB --claim-id CLAIM-ID --out /tmp/release.json
-```
-
-Only the holder can renew/release. Renewal can rotate to a fresh branch after a previous PR merges/closes and live work is verified. An open PR or `live_work:true` prevents branch rotation/release. For an operation directly executed under the holder’s reservation, set `--live-work true` before it, then renew with `--live-work false` only after its outcome/receipts are settled. Delegated Cloudflare publication uses the publisher-owned operation record in `PUBLICATION_HANDOFF.md`; the implementation holder does not toggle its flag for the publisher. Historical Site/native operations remain part of the shared serialization checks. Code-enforced owner maintenance uses the same implementation handoff; `CURRENT_POSTGRES_RECOVERY.md` supports a bounded publisher-owned production-only child after safe original-claim release, while preserving its legacy path for already-agreed operations. A work item with `production_operation` is reserved for its declared publisher, not ordinary implementation workers. Source-only workers do not perform live imports. Do not leave work pending without recording its branch, sources, receipts and next action.
-
-Expiry does not authorize destroying or silently taking another worker's work. A stale reservation requires operator inspection and explicit recovery: label `coordination:recovery-approved`, an expired lease, no active PR/live operation, and a reason supplied with `recover`. Preserve the old branch/artifacts and coordinate unresolved evidence before approval. Live/PR handovers require their existing owner/integrator first; automatic recovery is refused.
+For an authorized live reservation, use native `gh workflow run issue-claims.yml`
+with the documented issue, worker, branch, action, claim ID, request ID and live-work
+inputs. Observe the exact run using `gh run view` / `gh run watch`, then read back
+its canonical bot comment and operation state. Preserve the original IDs when
+reconciling an uncertain dispatch; never infer acceptance from a queued run or
+blindly redispatch a mutation. Only the holder can renew/release. An open PR or
+live operation blocks release/rotation; expiry never permits takeover or proves
+cleanup. Recovery still requires explicit approval and preservation of earlier
+work. Historical comments and receipts remain immutable records.
 
 ## PRs and the merge queue
 
-Each focused PR targets main and has exactly one `Refs #N` for partial work or `Closes #N` for full acceptance. CI checks the current claim and exact branch as well as issue type/scope. All working lanes submit merges through:
+Each focused PR targets main and has exactly one `Refs #N` for partial work or `Closes #N` for full acceptance. CI checks actual issue linkage, lane, declared paths and the complete Git diff/head/base. All working lanes submit merges through:
 
 ```sh
 gh workflow run worker-merge.yml --repo ChengshuLi/WorldAtlas --ref main \
@@ -138,14 +139,14 @@ Research, PR checks and independent review remain parallel.
 
 The merge uses the PR title as its squash commit title. It tests GitHub's exact
 current-main plus reviewed-head merge tree without updating the worker branch,
-and rechecks ownership, evidence/review, check-runs and commit statuses. Reviewed
+and rechecks issue scope, evidence/review, check-runs and commit statuses. Reviewed
 changed-file blobs and modes must remain identical in the combined tree, including
 removed/renamed paths. Conflicts or changed reviewed bytes require author
 intervention and fresh substantive review; no automatic conflict resolution is
 allowed. Workflow completion or a bot result comment alone is not merge proof.
 Fresh PR API state must show `merged: true`, the exact reviewed `.head.sha` and
-its actual nonempty `.merge_commit_sha`. Claims still return bot-authored
-**Reservation result** comments on their issues; claim coordination is unchanged.
+its actual nonempty `.merge_commit_sha`. Retained live reservations still return bot-authored
+**Reservation result** comments on their issues; ordinary authoring needs no lease.
 See [MERGE_QUEUE_CLIENT.md](MERGE_QUEUE_CLIENT.md) for direct dispatch, ordinary
 GitHub CLI observation, uncertain submissions, safe retries and explicit local
 workspace release. There is no custom merge-registration or observation client.
@@ -173,13 +174,13 @@ resource without deleting a collision. Canceled
 jobs may leave an owned ref and require cleanup, never blind deletion or proof of
 merge. Candidate tests still check out immutable SHAs with read-only permissions.
 
-Base-dependent evidence still needs refresh: a metric labeled current must match the actual PR-base vintage, and original-file receipts must match actual base bytes. Disjoint main changes with unchanged scoped inputs can reuse review; fresh global measurements or changes to the reviewed inputs cannot. Preserve the earlier evidence, refresh in a new vintage, and obtain exact-head review when needed. Trusted preflight selects checks by every changed and renamed path. Code, workflow, schema and core-data changes run the complete unit suite across three parallel shards, plus one hosted package build. Isolated geography/history campaign evidence and engineering-owned receipts or Markdown/text docs run the focused ownership/evidence/review/invariant suite, without rebuilding the unchanged application. Both profiles run in isolated read-only jobs without secrets or persistent checkout credentials. They retain the same exact candidate, reviewed-byte, claim and evidence gates; a renamed runtime file cannot evade full regression. Prepare/final jobs execute only fresh trusted main code. Tests are bounded to35minutes, trusted jobs to10minutes each; unfinished heads fail preflight rather than holding the slot for worker action.
+Base-dependent evidence still needs refresh: a metric labeled current must match the actual PR-base vintage, and original-file receipts must match actual base bytes. Disjoint main changes with unchanged scoped inputs can reuse review; fresh global measurements or changes to the reviewed inputs cannot. Preserve the earlier evidence, refresh in a new vintage, and obtain exact-head review when needed. Trusted preflight selects checks by every changed and renamed path. Code, workflow, schema and core-data changes run the complete unit suite across three parallel shards, plus one hosted package build. Isolated geography/history campaign evidence and engineering-owned receipts or Markdown/text docs run the focused ownership/evidence/review/invariant suite, without rebuilding the unchanged application. Both profiles run in isolated read-only jobs without secrets or persistent checkout credentials. They retain the same exact candidate, reviewed-byte, scope and evidence gates; a renamed runtime file cannot evade full regression. Prepare/final jobs execute only fresh trusted main code. Tests are bounded to35minutes, trusted jobs to10minutes each; unfinished heads fail preflight rather than holding the slot for worker action.
 
 The full runner keeps packaged-asset checks on the build job and the expensive local model/migration file on a separate job. Measured database-neighbor suites use the otherwise lighter job; the remaining discovered files retain deterministic assignment. Every file still runs exactly once. Named placement is a scheduling choice, not a runtime guarantee; compare actual complete workflow times rather than summed TAP durations.
 
 Package inputs are declared in `.github/package-inputs.json` and physically copied into an isolated build source image by the standard package builders; see [PACKAGE_INPUTS.md](PACKAGE_INPUTS.md). CI uses the same declaration from trusted base. Implementation edits do not invalidate later research through code fingerprints. Research becomes a package input only through an explicit reviewed declaration change. A packaged research PR runs its research evidence checks plus package checks; package applicability alone does not select full application regression.
 
-For unpublished research, retain the canonical claim/scope/evidence gates, focused ownership/evidence/invariant checks, independent exact-head review and exact current-main integration checks. Package CI records applicability without a candidate checkout, npm/pip installs, budget unit tests or compilation: none of their inputs changed. Changes to the classifier, budget tools or their tests retain the full package profile. Its receipt states that no fresh package-size measurement was made. The focused suite is short; the avoidable expensive work was rebuilding unchanged package inputs. Full application tests remain required when the affected behavior is uncertain.
+For unpublished research, retain the issue scope/evidence gates, focused ownership/evidence/invariant checks, independent exact-head review and exact current-main integration checks. Package CI records applicability without a candidate checkout, npm/pip installs, budget unit tests or compilation: none of their inputs changed. Changes to the classifier, budget tools or their tests retain the full package profile. Its receipt states that no fresh package-size measurement was made. The focused suite is short; the avoidable expensive work was rebuilding unchanged package inputs. Full application tests remain required when the affected behavior is uncertain.
 
 Package applicability selectors, their scope tests and the package-check workflow are coordination controls: their PRs run focused ownership/evidence/integration controls plus package-scope tests, rather than unrelated application regression. Full-profile discovery runs the package-scope test file once; the evidence profile includes it through the integration proof tests. Actual build/archive tools, test runners, application code and schema remain full. The package workflow still independently decides whether an archive rebuild is applicable.
 
@@ -189,7 +190,7 @@ All integrations must use this queue. GitHub’s merge endpoint guards the PR he
 
 After a confirmed merge, the trusted queue also attempts remote head cleanup, independently of merge acceptance. It confirms the merged PR and exact reviewed head, same-repository worker lane, non-default/unprotected branch, complete open-PR head/base identities with no other use, and unchanged branch/ref SHA immediately before deletion. An already absent branch is clean; advanced, protected, shared, fork or uncertain heads remain with a durable `head_cleanup` reason. A bounded API/time budget stops oversized or slow cleanup before starting further calls. API/deletion errors are pending cleanup and never invalidate the successful merge. GitHub's automatic-delete checkbox remains enabled but is not the queue's sole cleanup mechanism. The GitHub delete-ref endpoint has no SHA guard; the final read/delete interval cannot atomically exclude an out-of-band push or new PR. Workers must use fresh branches after merging and never push to or reuse merged heads. This cleanup does not remove local branches/worktrees, original evidence, or archived PRs.
 
-After each merge, release a completed issue or renew its claim onto a fresh branch for its remaining bounded part. When three PRs are insufficient, stop extending it and split the remaining scope into reviewed children/follow-ups. Existing closed Issues, source evidence and dates are retained.
+After each merge, reconcile acceptance and remaining work on the issue, then use a fresh branch. Split work only for a distinct deliverable or real ownership boundary. Existing closed Issues, source evidence and dates are retained.
 
 One explicitly designated engineering publisher coordinates Cloudflare deployments, geographic releases and owner maintenance. Workers do not publish competing versions independently. The GitHub merge queue does not serialize manual provider operations or a different repository; use the existing deployment/maintenance protocol and complete cross-provider registry. The old owner-private read-only Site is a retained recovery copy, retired from ordinary serving/publishing instructions; explicit recovery operations still require serialization. See `CLOUDFLARE_RECOVERY_HANDOFF.md`. Branch protection is not configured, so workers must honor the queue and checks; direct merge permissions are not revoked by this setup.
 
@@ -216,7 +217,7 @@ barriers, evidence/review validation, workflow checkout and integration controls
 Source-only owned research retains its focused controls. Every changed path and
 rename origin participates; unknown non-text documentation/scripts, application code, storage,
 atlas data, geometry, schema, imports, builds and deployment require full regression.
-The PR profile selector runs trusted base code against GitHub's complete file list and verifies the current head. Geography focused selection also reads the linked issue and paginated canonical reservation, requiring an active unexpired exact-branch geography claim with identical safe owned prefixes; missing/stale ownership fails rather than allowing reduced tests. Out-of-scope files or rename origins retain full regression;
+The PR profile selector runs trusted base code against GitHub's complete file list and verifies the current head. Geography focused selection reads the linked issue and requires matching lane/mode and safe declared owned prefixes; missing or invalid scope fails rather than allowing reduced tests. Out-of-scope files or rename origins retain full regression;
 a base without the selector runs full regression. Full shards cover every test file
 exactly once, build actual packaged assets and reject skipped tests.
 
@@ -459,7 +460,7 @@ record actual same-token hosted observations separately when those conditions oc
 
 ## Issue lifecycle accuracy
 
-Read [ISSUE_LIFECYCLE.md](ISSUE_LIFECYCLE.md). Authors reconcile original acceptance and next actions before moving on; reviewers check closure/continuation independently of merging. Dependency owners maintain direct dependents. Between jobs review up to three neglected unclaimed same-lane readiness problems. Use shared read-only readiness checks before readying and claiming; preserve scientific/publication gates and canonical ownership. Existing chats refresh before their next job; Main handles exceptional decisions.
+Read [ISSUE_LIFECYCLE.md](ISSUE_LIFECYCLE.md). Authors reconcile original acceptance and next actions before moving on; reviewers check closure/continuation independently of merging. Dependency owners maintain direct dependents. Coordinate encountered overlap and remaining work on the original issue; preserve scientific/publication gates. No readiness script or routine queue-triage pass is required. Existing chats refresh before their next job; Main handles exceptional decisions.
 
 Read docs/AUDIT_FAILURE_PREVENTION.md on current main before the next job or review. Identify the consequential acceptance claims and independently test applicable consumed-input/code, identity/join, source/method, safe-reproduction, nonvacuous-control and operating-limit invariants. Use shared evidence helpers or an explicitly reviewed equivalent; reviewers derive expectations from original acceptance and independent records before relying on author tests. Exercise real entry points and adjacent paths for corrective PRs; record unexecuted proof as a limit. Keep exact-head review, original evidence, scientific/publication gates and focused research CI. Adoption requires actual subsequent handoffs, not just this prompt edit.
 

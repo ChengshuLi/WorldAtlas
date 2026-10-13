@@ -39,7 +39,7 @@ function fixture(t, {corrupt = false, quota = false, stale = false} = {}) {
   const tree=[...contents].map(([name,raw])=>({path:name,type:'blob',mode:'100644',size:raw.length,sha:oid(raw)}));
   const spec={mode:'engineering',max_prs:1,depends_on:[],scope:'Complete transport test',evidence_quality:{version:1,
     manifest_path:manifestPath,subject_ids:[],pins:{},review_kind:'code'}};
-  const issue={number:100,created_at:'2026-10-04T00:00:00Z',body:`<!-- worldatlas-work:v1\n${JSON.stringify(spec)}\n-->`};
+  const issue={number:100,state:'open',labels:['type:engineering'],created_at:'2026-10-04T00:00:00Z',body:`<!-- worldatlas-work:v1\n${JSON.stringify(spec)}\n-->`};
   const claim={version:1,active:true,issue_number:100,worker_id:'author',claim_id:'fixture',branch:'engineering/transport-probe',expires_at:'2099-01-01T00:00:00Z'};
   const pr={number:101,head:{sha:stale?base:head,ref:claim.branch},base:{sha:base},body:'Refs #100\n',changed_files:files.length};
   const event={repository:{full_name:repo},pull_request:{number:101,head:{sha:head}}};

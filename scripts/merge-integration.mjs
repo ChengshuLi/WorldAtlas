@@ -1,7 +1,7 @@
 import {collectGeographicApproval, bindingHash} from './geographic-adjudication-api.mjs';
 import {integrationProfile, selectedDataCandidate, selectedDataSelection} from './integration-profile.mjs';
 import {integrationProof, successfulMetadataRegressionJobs} from './integration-proof.mjs';
-import {githubPages, linkedPulls, verifyClaimForPR, workSpec} from './issue-claim-contract.mjs';
+import {githubPages, verifyIssueScope, workSpec} from './issue-claim-contract.mjs';
 import {validateIssuePRBody, validateLanePaths} from './check-handoff-scope.mjs';
 import {checkPremergeEvidence} from './premerge-evidence.mjs';
 import {beginFinalPlanning, paceFinalValidation, finalRequestBudget} from './final-capacity.mjs';
@@ -240,9 +240,8 @@ export async function inspectMerge({api, repo, number, expectedHead, policy, evi
     'Only open non-draft repository PRs targeting main may merge');
   const {github_issue} = validateIssuePRBody(pr.body ?? '');
   const issue = await api(`${root(repo)}/issues/${github_issue}`);
-  const reservation = verifyClaimForPR({branch: pr.head.ref, issue,
-    comments: await githubPages(api, `${root(repo)}/issues/${github_issue}/comments`),
-    prs: await linkedPulls(api, repo, github_issue)});
+  if (issue.number !== github_issue) throw Error('Issue response does not match the PR linkage');
+  const reservation = verifyIssueScope({branch: pr.head.ref, issue});
   const files = await githubPages(api, `${root(repo)}/pulls/${number}/files`);
   need(files.length === pr.changed_files, 'Incomplete PR file inventory');
   validateLanePaths(pr.head.ref, files.flatMap(file => [file.filename, ...(file.previous_filename ? [file.previous_filename] : [])]),
@@ -269,14 +268,14 @@ export async function prepareIntegration(options) {
     unchangedPR(revalidated.pr, state.pr);
     need(revalidated.base === state.base && revalidated.pr.base.sha === state.pr.base.sha,
       'Main or PR evidence base advanced before isolated preparation; resubmit unchanged head');
-    need(revalidated.issue.body === state.issue.body && revalidated.reservation.claim_id === state.reservation.claim_id,
+    need(revalidated.issue.body === state.issue.body,
       'Issue contract or ownership changed before isolated preparation');
     Object.assign(state, revalidated);
     fresh = {...await createCandidate(options, state), attempts: error.candidateDiagnostics.attempt};
   }
   try {
     if (fresh.attempts > 1) {
-      // Waiting must not extend an expired claim or reuse revoked checks/review.
+      // Waiting must not reuse revoked scope, checks or review.
       let revalidated;
       try { revalidated = await inspectMerge({...options, candidateContext: {base: fresh.base, attempt: fresh.attempts}}); }
       catch (error) {
@@ -290,7 +289,7 @@ export async function prepareIntegration(options) {
         inspected_pr_base: commitID(state.pr.base.sha), attempt: fresh.attempts, observed_at: new Date().toISOString()});
       try { unchangedPR(revalidated.pr, state.pr); }
       catch (error) { throw candidateFailure(error.message, {...diagnostics, reason: 'pr-scope-changed'}); }
-      if (revalidated.issue.body !== state.issue.body || revalidated.reservation.claim_id !== state.reservation.claim_id) {
+      if (revalidated.issue.body !== state.issue.body) {
         throw candidateFailure('Issue contract or ownership changed during candidate refresh', {...diagnostics, reason: 'authority-changed'});
       }
       if (revalidated.base !== fresh.base || revalidated.pr.base.sha !== state.pr.base.sha) {
@@ -422,9 +421,7 @@ export async function completeIntegration(options) {
   need(currentPR.head.sha === state.pr.head.sha && currentPR.body === state.pr.body && currentPR.title === state.pr.title &&
     currentPR.state === 'open' && !currentPR.draft && currentPR.base.ref === 'main' && currentIssue.body === state.issue.body,
     'Head/body or issue contract changed during integration review');
-  verifyClaimForPR({branch: currentPR.head.ref, issue: currentIssue,
-    comments: await githubPages(options.api, `${root(options.repo)}/issues/${state.issue.number}/comments`),
-    prs: await linkedPulls(options.api, options.repo, state.issue.number)});
+  verifyIssueScope({branch: currentPR.head.ref, issue: currentIssue});
   checkCurrentChecks(await githubPages(options.api, `${root(options.repo)}/commits/${state.pr.head.sha}/check-runs`),
     {evidenceRequired: options.policy.mode === 'enforce-new' && evidenceRequirement(currentIssue, workSpec(currentIssue.body), options.policy, currentPR.head.ref).required});
   const freshStatuses = await options.api(`${root(options.repo)}/commits/${state.pr.head.sha}/status`);

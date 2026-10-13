@@ -56,7 +56,6 @@ export function validateRecordChecks(manifest, readFile) {
 export function validatePremergeManifest(manifest, {readFile, files, manifestPath, issue, spec, reservation, branch, pr}) {
   const quality = spec.evidence_quality;
   validateLanePaths(branch, [manifestPath], {ownedPaths: reservation.owned_paths});
-  need(manifest.worker_id === reservation.worker_id, 'Manifest worker differs from canonical reservation');
   const result = validateEvidence(manifest, {readFile, expectedIssue: issue.number,
     expectedLane: spec.mode, expectedSubjects: quality.subject_ids, expectedPins: quality.pins});
   const recordChecks = validateRecordChecks(manifest, readFile);
@@ -316,7 +315,7 @@ export async function checkPremergeEvidence({api, repo, pr, issue, reservation, 
       const candidates = [...latest.values()].sort((a, b) => b.comment.id - a.comment.id);
       need(candidates.length, 'Missing independent exact-head review receipt');
       result.review = validateReviewReceipt(candidates[0].receipt, {pr, manifest, manifestHash: result.manifest_sha256, files,
-        limits: checked.limits, author: reservation.worker_id, reviewKind: requirement.quality.review_kind, issue, requireContractBinding:reviewBindingRequired(pr,policy)});
+        limits: checked.limits, author: manifest.worker_id, reviewKind: requirement.quality.review_kind, issue, requireContractBinding:reviewBindingRequired(pr,policy)});
       result.review.comment_id = candidates[0].comment.id;
     }
     return result;

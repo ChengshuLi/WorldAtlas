@@ -74,7 +74,7 @@ function fixture({mutation=()=>{}, secondReview=null, changeClaim=false, changeC
  return {api,calls,pr,manifest,receipt,dossier,decision,blobs,run:()=>collectGeographicApproval({api,repo,number:32,expectedHead:head})};
 }
 
-test('actual evidence/claim/review validators produce bounded read-only authority carrier',async()=>{
+test('actual evidence/scope/review validators produce bounded read-only authority carrier',async()=>{
  const f=fixture(),result=await f.run();assert.equal(result.status,'reviewed');assert.equal(result.dossiers.length,1);
  assert.equal(result.authority_sha256,bindingHash(result.authority));assert.equal(result.review.comment_id,600);
  assert.equal(JSON.parse(Buffer.from(result.dossiers[0].bytes_base64,'base64')).rationale,f.dossier.rationale);
@@ -90,7 +90,6 @@ for(const [name,options,pattern] of [
  ['wrong source reference digest',{mutation:({decision})=>decision.source_refs_sha256='0'.repeat(64)},/bindings differ/],
  ['revoked source decision after byte checks',{secondReview:r=>r.geographic_adjudications.decisions[0].target_water='unknown'},/Unresolved/],
  ['rejected review after byte checks',{secondReview:r=>r.outcome='changes-requested'},/unresolved independent rejection/],
- ['changed canonical claim during byte checks',{changeClaim:true},/reservation changed/],
  ['changed source contract during byte checks',{changeContract:true},/contract changed/],
 ]) test(`source authority rejects ${name}`,async()=>{await assert.rejects(fixture(options).run,pattern);});
 

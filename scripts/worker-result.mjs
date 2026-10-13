@@ -1,5 +1,3 @@
-import {readClaim} from './issue-claim-contract.mjs';
-
 const prefix=kind=>kind==='claim'?'**Reservation result:**':'**Merge result:**';
 export function renderWorkerResult(kind,result){
  if(!['claim','merge'].includes(kind))throw Error('Unknown worker result kind');
@@ -19,18 +17,6 @@ export function readWorkerResult(comments,kind,request_id,number){
  }
  return null;
 }
-export function confirmReservation(comments,request,now=Date.now()){
- const result=readWorkerResult(comments,'claim',request.request_id,request.issue_number);
- if(result?.accepted===false)return result;
- const claim=readClaim(comments);
- const exact=claim?.request_id===request.request_id&&claim.issue_number===request.issue_number&&claim.worker_id===request.worker_id&&claim.claim_id===request.claim_id&&claim.branch===request.branch;
- const expectedState=request.action==='release'?claim?.active===false:claim?.active===true&&Date.parse(claim.expires_at)>now;
- // Also supports a trusted older workflow during bootstrap: its canonical state
- // must confirm this exact request, never merely the same worker or branch.
- if(!exact||!expectedState)throw Error('Reservation is not confirmed in current canonical state; do not begin work. Inspect the issue/workflow.');
- return {...(result??{accepted:true,request_id:request.request_id,issue_number:request.issue_number,result_source:'canonical-comment'}),claim};
-}
-
 // Shared by queue observation and accepted-checkpoint acquisition. A comment is
 // insufficient: its reviewed head and merge identity must match the actual PR.
 export function verifyAcceptedMergeResult(result, merged, head) {

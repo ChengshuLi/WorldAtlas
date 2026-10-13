@@ -135,7 +135,7 @@ Post one `worldatlas-review:v1` JSON comment on the PR, using the template below
   "pr_number": 123,
   "head_sha": "REPLACE_WITH_CURRENT_40_CHARACTER_HEAD",
   "manifest_sha256": "REPLACE_WITH_RAW_MANIFEST_FILE_SHA256",
-  "author_worker_id": "actual-reservation-worker",
+  "author_worker_id": "actual-author-worker",
   "reviewer_worker_id": "distinct-review-worker",
   "inspected_files": ["every changed file and renamed original path"],
   "evidence_hashes": ["every unique baseline/source/output whole-file SHA256"],
@@ -207,3 +207,5 @@ actual local-versus-hosted check boundaries. Reviewers still derive expectations
 from original acceptance and independent reference records; author controls and
 byte-only local success do not replace substantive exact-head review. Select only
 applicable failure families and preserve focused source-only CI.
+
+Ordinary code and source authoring do not require an expiring GitHub lease. Scientific manifests retain their actual author identity, and their exact-head reviewer must be a distinct worker. Shared-account worker IDs provide cooperative attribution, not authenticated personal identities; the operator verifies the independent review. Issue linkage, declared paths, source/result bytes and domain review remain required.

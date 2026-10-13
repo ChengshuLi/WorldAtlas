@@ -11,7 +11,7 @@ import {candidateBudget} from './native-ownership/native-preparation-guards.mjs'
 import {validatePackageInputs} from './package-inputs.mjs';
 import {baselineFiles, validateEvidence} from './evidence-quality.mjs';
 import {reviewContractBinding, reviewInventoryCommitment, checkPremergeEvidence} from './premerge-evidence.mjs';
-import {githubAPI, githubPages, readClaim, workSpec, verifyClaimForPR} from './issue-claim-contract.mjs';
+import {githubAPI, githubPages, workSpec, verifyIssueScope} from './issue-claim-contract.mjs';
 import {composeRetainedLedgers} from '../coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs';
 import {normaliseRetainedRepairLedger, verifyCurrentRebindExecution, CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
@@ -698,9 +698,8 @@ export async function freezeReview({repo, number, expectedHead, expectedPR, api,
   if (expectedPR) need(same(state(pr), state(expectedPR)), 'PR state changed after review preparation');
   const refs = [...pr.body.matchAll(/^(?:Refs|Closes) #(\d+)\s*$/gm)]; need(refs.length === 1, 'Exactly one original issue linkage required');
   const issue = await api(`${route}/issues/${refs[0][1]}`), spec = workSpec(issue.body);
-  const comments = await githubPages(api, `${route}/issues/${issue.number}/comments`), claim = readClaim(comments);
-  need(issue.number === Number(refs[0][1]) && claim?.issue_number === issue.number, 'Reservation must belong to the linked issue');
-  const reservation = verifyClaimForPR({branch: pr.head.ref, issue, comments});
+  need(issue.number === Number(refs[0][1]), 'Scope must belong to the linked issue');
+  const reservation = verifyIssueScope({branch: pr.head.ref, issue});
   const files = await githubPages(api, `${route}/pulls/${number}/files`);
   need(files.length === pr.changed_files && files.length > 0 && new Set(files.map(f => f.filename)).size === files.length, 'Incomplete/duplicate PR file scope');
   const checked = await checkPremergeEvidence({api, repo, pr, issue, reservation, files, review: false});
@@ -714,14 +713,12 @@ export async function freezeReview({repo, number, expectedHead, expectedPR, api,
   if (manifest.methods.some(m => m.kind === 'geography') || files.some(f => /(?:hierarchy|world-index|crosswalk|ellipsoidal|geometry)/.test(f.filename))) domains.add('geometry');
   if (files.some(f => /(?:release|migration|identity|regional-approval)/.test(f.filename))) domains.add('release');
   const currentPr = await api(`${route}/pulls/${number}`), currentIssue = await api(`${route}/issues/${issue.number}`);
-  const currentComments = await githubPages(api, `${route}/issues/${issue.number}/comments`), currentClaim = readClaim(currentComments);
-  need(same(currentClaim, claim), 'Author claim changed while freezing');
   need(same(state(currentPr), state(pr)) && same(reviewContractBinding(issue, pr), reviewContractBinding(currentIssue, currentPr)),
     'Review head/base/target/draft/scope/body changed while freezing');
-  need(same(verifyClaimForPR({branch: currentPr.head.ref, issue: currentIssue, comments: currentComments}), reservation),
+  need(same(verifyIssueScope({branch: currentPr.head.ref, issue: currentIssue}), reservation),
     'Author scope changed while freezing');
   const packet = {version: 1, kind: 'review-preparation-only', repo, pr_number: number, head_sha: expectedHead, base_sha: pr.base.sha,
-    author_worker_id: claim.worker_id, manifest: manifestPin, ...reviewContractBinding(issue, pr),
+    author_worker_id: manifest.worker_id, manifest: manifestPin, ...reviewContractBinding(issue, pr),
     inventory_commitment: reviewInventoryCommitment({files, manifest}), required_domains: [...domains].sort(),
     inspected_files: [...new Set(files.flatMap(f => [f.filename, f.previous_filename].filter(Boolean)))].sort(),
     evidence_limits: checked.limits, issue, pr, files,

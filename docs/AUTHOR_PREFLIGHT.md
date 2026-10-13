@@ -9,7 +9,7 @@ without changing ownership or repeating completed implementation.
 
 ## Before implementation
 
-Read the original acceptance criteria and current claim. Identify what this PR
+Read the original acceptance criteria and current issue discussion. Identify what this PR
 will establish, which facts remain unknown and what will happen after merge.
 Choose only the checks implicated by those claims and changed behavior:
 
@@ -124,7 +124,7 @@ independently derived expectations, source inspection or adverse fixtures.
    Zero declarations establish no structured claim. Choose independent pinned
    references; candidate outputs cannot serve as their own reference. The hosted
    trusted premerge gate additionally checks metric/table bindings, control receipts,
-   changed-file accounting and issue/claim bindings. After independent review, the
+   changed-file accounting and issue/scope bindings. After independent review, the
    normal merge queue rechecks the exact-head review receipt and its issue/PR contract
    bindings. Before review, inspect
    those declarations against actual outputs and changed files; the local byte-only
@@ -196,7 +196,7 @@ and release the owned checkout before taking the next fresh job.
 ## Existing-chat refresh text
 
 Read current-main docs/AUTHOR_PREFLIGHT.md, docs/AUDIT_FAILURE_PREVENTION.md and
-docs/PREMERGE_EVIDENCE_REVIEW.md before your next job. Preserve your current claim,
+docs/PREMERGE_EVIDENCE_REVIEW.md before your next job. Preserve your current work,
 checkpoint and completed evidence. Select the checks needed by your actual
 acceptance claims before implementation; use authenticated consumed inputs/code,
 independent reference records, safe fresh outputs and meaningful adverse controls

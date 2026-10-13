@@ -1292,36 +1292,16 @@ test('accepted review authenticates nested engineering ownership through real ev
   const accepted = await f.run();
   assert.equal(accepted.review_comment_id, 2); assert.equal(accepted.reviewer_worker_id, 'independent-reviewer');
   assert.equal(accepted.manifest_sha256, f.packet.manifest.sha256); assert.equal(f.control.traversed, true);
-  assert.equal(f.control.calls.filter(route => route.endsWith('/issues/99')).length, 2);
+  assert.equal(f.control.calls.filter(route => route.endsWith('/issues/99')).length, 0);
   assert.equal((await acceptedReviewFixture({nested: false}).run()).review_comment_id, 2);
 });
 
-test('accepted review refuses revoked, foreign and expired claims before reading immutable evidence', async () => {
-  for (const mutate of [c => { c.claim.active = false; }, c => { c.claim.worker_id = 'foreign'; },
-    c => { c.claim.branch = 'engineering/foreign'; }, c => { c.claim.expires_at = '2000-01-01T00:00:00Z'; }]) {
-    const f = acceptedReviewFixture(); mutate(f.control);
-    await assert.rejects(f.run(), /claim/); assert.equal(f.control.traversed, false);
-  }
-});
-
-test('accepted review rejects claim, issue readiness and dependency changes during evidence traversal', async () => {
-  const blocker = {id: 3, body: '<!-- worldatlas-blocker:v1\n{"id":"hold","active":true,"reason":"Need review"}\n-->'};
-  const mutations = [c => { c.claim.active = false; }, c => { c.claim.worker_id = 'foreign'; },
-    c => { c.claim.claim_id = 'replacement-claim-002'; }, c => { c.claim.branch = 'engineering/foreign'; },
-    c => { c.claim.expires_at = '2000-01-01T00:00:00Z'; }, c => { c.issue.labels.push('status:blocked'); },
-    c => { c.issue.labels = c.issue.labels.filter(label => label !== 'status:ready'); }, c => { c.issue.state = 'closed'; },
-    c => { c.blockers.push(blocker); }, c => { c.dependency.state = 'open'; },
-    c => { c.issue.body = c.issue.body.replace('retained/new-delivery/', 'retained/foreign/'); },
-    c => { c.pr.head.ref = 'engineering/foreign'; }, c => { c.pr.base.ref = 'foreign'; },
-    c => { c.pr.head.repo.full_name = 'foreign/repo'; }, c => { c.pr.changed_files++; }];
-  for (const mutate of mutations) {
-    const f = acceptedReviewFixture(); f.control.onEvidence = mutate;
-    await assert.rejects(f.run()); assert.equal(f.control.traversed, true);
-  }
-  for (const mutate of [c => { c.blockers.push(blocker); }, c => { c.dependency.state = 'open'; }]) {
-    const f = acceptedReviewFixture(); mutate(f.control);
-    await assert.rejects(f.run(), /blocker|dependency/); assert.equal(f.control.traversed, false);
-  }
+test('accepted review rejects actual issue scope and PR changes during evidence traversal', async()=>{
+ const mutations=[c=>{c.issue.state='closed';},
+  c=>{c.issue.body=c.issue.body.replace('retained/new-delivery/','retained/foreign/');},
+  c=>{c.pr.head.ref='engineering/foreign';},c=>{c.pr.base.ref='foreign';},
+  c=>{c.pr.head.repo.full_name='foreign/repo';},c=>{c.pr.changed_files++;}];
+ for(const mutate of mutations){const f=acceptedReviewFixture();f.control.onEvidence=mutate;await assert.rejects(f.run());assert.equal(f.control.traversed,true);}
 });
 
 test('accepted review tolerates a same-owner lease renewal without weakening independent substantive review', async () => {
@@ -1702,28 +1682,23 @@ function managedAutomaticFixture(t) {
   return {root, git, entry, manager, control, api, config, prefix};
 }
 
-test('real automatic author guard preserves live claim, ownership, dependency and open-PR guards', async t => {
-  const f = managedAutomaticFixture(t), guard = await automaticAuthorGuard(f.root, f.config, f.api);
+test('real automatic author guard uses managed identity and declared output scope without leases', async t => {
+  const f = managedAutomaticFixture(t), api=async route=>{
+    assert(!route.includes('/comments')&&!route.includes('/timeline')&&!route.endsWith('/issues/99'));
+    return f.api(route);
+  }, guard = await automaticAuthorGuard(f.root, f.config, api);
   const scope = {branch: f.entry.branch, paths: [f.prefix + 'advance/recipe.json']};
   assert.equal((await guard(scope)).worker, process.env.CODEX_THREAD_ID ?? f.entry.worker);
   const original = clone(f.control);
-  const cases = [
-    [c => { c.claim.active = false; }, /claim/], [c => { c.claim.expires_at = '2000-01-01T00:00:00Z'; }, /claim/],
-    [c => { c.claim.worker_id = 'foreign-worker'; }, /ownership/], [c => { c.claim.branch = 'engineering/foreign'; }, /claim/],
-    [c => { c.spec.owned_paths = ['coordination/engineering/foreign/']; }, /scope changed/],
-    [c => { c.prs = [{number: 101, state: 'open', head: {ref: 'engineering/foreign'}}]; }, /foreign open/],
-    [c => { c.dependency.state = 'open'; }, /dependency/],
-    [c => { c.blockers.push({id: 2, body: '<!-- worldatlas-blocker:v1\n{"id":"hold","active":true,"reason":"Investigate"}\n-->'}); }, /blocker/]
-  ];
-  for (const [mutate, expected] of cases) {
-    Object.assign(f.control, clone(original)); mutate(f.control); await assert.rejects(guard(scope), expected);
+  f.control.claim.active=false;f.control.claim.expires_at='2000-01-01';
+  f.control.dependency.state='open';
+  assert.deepEqual(await guard(scope),{worker:f.entry.worker,paths:f.control.spec.owned_paths});
+  for(const mutate of [c=>{c.spec.owned_paths=['coordination/engineering/foreign/'];},c=>{c.issue.state='closed';}]){
+    Object.assign(f.control,clone(original));mutate(f.control);await assert.rejects(guard(scope));
   }
-  Object.assign(f.control, clone(original));
-  await assert.rejects(guard({...scope, branch: 'engineering/foreign'}), /managed ownership/);
-  await assert.rejects(guard({...scope, paths: ['coordination/engineering/foreign/output.json']}), /output exceeds/);
-  f.control.claim.expires_at = new Date(Date.now() + 7200000).toISOString();
-  assert.equal((await guard(scope)).claim, original.claim.claim_id);
-  f.control.prs = [{number: 101, state: 'open', head: {ref: f.entry.branch}}]; await guard(scope);
+  Object.assign(f.control,clone(original));
+  await assert.rejects(guard({...scope,branch:'engineering/foreign'}),/managed ownership/);
+  await assert.rejects(guard({...scope,paths:['coordination/engineering/foreign/output.json']}),/output exceeds/);
 });
 
 // This expected-refusal test exposes captured workspace authority surviving a
@@ -1731,7 +1706,7 @@ test('real automatic author guard preserves live claim, ownership, dependency an
 test('real automatic author guard rereads current managed ownership before each mutation', async t => {
   const f = managedAutomaticFixture(t); let changeDuringRead;
   const guard = await automaticAuthorGuard(f.root, f.config, async route => {
-    const result = await f.api(route); if (route.includes('/timeline?')) changeDuringRead?.(); return result;
+    const result = await f.api(route); if (route.endsWith('/issues/100')) changeDuringRead?.(); return result;
   });
   const scope = {branch: f.entry.branch, paths: [f.prefix + 'advance/recipe.json']}; await guard(scope);
   const stateFile = path.join(f.manager.report().registry, 'state.json'), original = fs.readFileSync(stateFile);
@@ -1851,18 +1826,18 @@ test('default automatic entry issues a genuine v2 subset and stops only at its S
   assert.equal(f.git('rev-parse','HEAD'),head,'unchanged resumed requests do not get another commit');
 });
 
-test('default automatic delivery revalidates the real claim before committing newly prepared requests', async t => {
+test('default automatic delivery revalidates actual issue scope before committing newly prepared requests', async t => {
   const f = managedAutomaticFixture(t), input = realAutomaticRecipe(f), config = {...f.config, recipe: input.recipeLocator};
   const journal = openAdvanceJournal(f.root, f.prefix + 'advance', config.recipe, {budget: input.budget});
   const validate = await automaticAuthorGuard(f.root, config, f.api);
   const initialCount = Number(f.git('rev-list', '--count', 'HEAD'));
-  const adapters = {prepareRequests: (...args) => {const products = prepareRequests(...args); f.control.claim.active = false; return products;}};
-  await assert.rejects(runAutomaticDelivery(journal, config, input.reader, adapters, {validate}), /claim/);
+  const adapters = {prepareRequests: (...args) => {const products = prepareRequests(...args); f.control.issue.state = 'closed'; return products;}};
+  await assert.rejects(runAutomaticDelivery(journal, config, input.reader, adapters, {validate}), /open GitHub issue/);
   assert.equal(Number(f.git('rev-list', '--count', 'HEAD')), initialCount + 1);
   assert.deepEqual(readAdvanceStatus(journal).completed, ['recipe', 'requests']);
   assert.equal(fs.existsSync(path.join(journal.stateTarget, 'committed-requests.json')), false);
   const prepared = fs.readFileSync(path.join(journal.target, 'requests/delivery-001-source-request.json'));
-  f.control.claim.active = true;
+  f.control.issue.state = 'open';
   const resumed = await runAutomaticDelivery(journal, config, input.reader, {prepareRequests}, {validate});
   assert.equal(resumed.kind, 'source-terminal'); assert.equal(Number(f.git('rev-list', '--count', 'HEAD')), initialCount + 2);
   assert.deepEqual(fs.readFileSync(path.join(journal.target, 'requests/delivery-001-source-request.json')), prepared);

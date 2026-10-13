@@ -72,7 +72,7 @@ test('regressions: stale vintage, entry hash, wrong source/path and conflicting 
   const mutations = [f => f.manifest.baseline.files[0].sha256 = 'broken', f => f.manifest.baseline.files[0].hash_kind = 'entry',
     f => f.manifest.metrics[0].evaluation_commit = head, f => f.manifest.summaries[0].value = 0.9,
     f => f.manifest.metric_bindings[0].json_pointer = '/absent', f => f.manifest.metrics[0].value = f.manifest.summaries[0].value = 0.2,
-    f => f.manifest.outputs[0].path = '../secret', f => f.manifest.worker_id = 'different', f => f.pr.base.sha = head, f => f.manifest.stages.geographic_approval = 'approved'];
+    f => f.manifest.outputs[0].path = '../secret', f => f.pr.base.sha = head, f => f.manifest.stages.geographic_approval = 'approved'];
   for (const mutate of mutations) {const f = fixture(); mutate(f); assert.throws(() => validate(f));}
 });
 test('full changes include rename/deletion originals; immutable original-source refresh cannot overwrite evidence', () => {
@@ -218,8 +218,8 @@ test('trusted hosted gate checks a new limited prior-evidence registry and still
 });
 
 
-test('fresh remote review, head, tree/path and reservation checks reject after immutable bytes were reused',async()=>{
- for(const change of ['review','head','tree','mode','path','worker']) {
+test('fresh remote review, head, tree/path checks reject after immutable bytes were reused',async()=>{
+ for(const change of ['review','head','tree','mode','path']) {
   const f=fixture(),comments=[],remote=remoteFixture(f,comments),r=receipt(f);r.manifest_sha256=sha256(remote.bytes);
   const comment=value=>({id:comments.length+1,author_association:'OWNER',body:`<!-- worldatlas-review:v1\n${JSON.stringify(value)}\n-->`});
   comments.push(comment(r));const api=memoizeImmutableGitBlobs(remote.api);
@@ -228,14 +228,13 @@ test('fresh remote review, head, tree/path and reservation checks reject after i
   assert.equal(remote.calls.filter(c=>c.route.includes('/comments?')).length,2);
   if(change==='review')comments.push(comment({...r,outcome:'changes-requested'}));
   if(change==='head')f.pr.head.sha='c'.repeat(40);
-  if(change==='worker')f.reservation.worker_id='changed-worker';
   if(change==='mode')remote.tree.find(e=>e.path===outputPath).mode='120000';
   if(change==='path')remote.tree.splice(remote.tree.findIndex(e=>e.path===outputPath),1);
   if(change==='tree') {
    const raw=Buffer.from('{"value":0.6}\n'),oid=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
    remote.blobs.set(oid,raw);Object.assign(remote.tree.find(e=>e.path===outputPath),{sha:oid,size:raw.length});
   }
-  await assert.rejects(check(),change==='review'?/unresolved/:change==='head'?/Missing independent/:change==='worker'?/worker differs/:['mode','path'].includes(change)?/nonordinary/:/Input bytes mismatch/);
+  await assert.rejects(check(),change==='review'?/unresolved/:change==='head'?/Missing independent/:['mode','path'].includes(change)?/nonordinary/:/Input bytes mismatch/);
   assert.equal(remote.calls.filter(c=>c.route.includes('/git/blobs/')).length,change==='tree'?4:3);
  }
  const f=fixture(),remote=remoteFixture(f);let truncated=false;

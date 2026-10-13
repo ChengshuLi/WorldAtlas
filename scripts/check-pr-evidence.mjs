@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {githubAPI, githubPages, workSpec, readClaim} from './issue-claim-contract.mjs';
+import {githubAPI, githubPages, verifyIssueScope} from './issue-claim-contract.mjs';
 import {validateIssuePRBody} from './check-handoff-scope.mjs';
 import {checkPremergeEvidence} from './premerge-evidence.mjs';
 import {gitBlobTransport} from './git-blob-transport.mjs';
@@ -17,14 +17,13 @@ export async function checkPREvidence({event, api, verify = checkPremergeEvidenc
   const pr = await api(`/repos/${repo}/pulls/${scheduled.number}`);
   if (pr.head.sha !== scheduled.head.sha) throw Error('PR head changed since this check was scheduled');
   const {github_issue} = validateIssuePRBody(pr.body ?? '');
-  const [issue, comments, files] = await completeReads([
-    api(`/repos/${repo}/issues/${github_issue}`), githubPages(api, `/repos/${repo}/issues/${github_issue}/comments`),
+  const [issue, files] = await completeReads([
+    api(`/repos/${repo}/issues/${github_issue}`),
     githubPages(api, `/repos/${repo}/pulls/${pr.number}/files`)
   ]);
-  const claim = readClaim(comments);
-  if (!claim?.active) throw Error('Evidence check requires a canonical active reservation');
-  const spec = workSpec(issue.body);
-  return verify({api, repo, pr, issue, files, reservation: {...claim, owned_paths: spec.owned_paths}});
+  if (issue.number !== github_issue) throw Error('Issue response does not match the PR linkage');
+  const reservation = verifyIssueScope({branch: pr.head.ref, issue});
+  return verify({api, repo, pr, issue, files, reservation});
 }
 
 export async function runPREvidence({event, env = process.env, directory = process.cwd(),

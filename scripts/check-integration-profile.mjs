@@ -1,12 +1,12 @@
 import fs from 'node:fs';
-import {requestAccounting,quotaDelay,completeReads} from './github-quota.mjs';
+import {requestAccounting,quotaDelay} from './github-quota.mjs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {githubAPI, githubPages, readClaim, verifyClaimForPR} from './issue-claim-contract.mjs';
+import {githubAPI, githubPages, verifyIssueScope} from './issue-claim-contract.mjs';
 import {validateIssuePRBody} from './check-handoff-scope.mjs';
 import {integrationProfile, selectedDataCandidate, selectedDataSelection} from './integration-profile.mjs';
 
-export async function selectIntegrationProfile({event, repo, api, now = Date.now()}) {
+export async function selectIntegrationProfile({event, repo, api}) {
   const scheduled = event.pull_request;
   if (!scheduled || !Number.isSafeInteger(scheduled.number) || scheduled.number < 1 ||
       !/^[-\w.]+\/[-\w.]+$/.test(repo ?? '') || event.repository?.full_name !== repo) {
@@ -28,17 +28,9 @@ export async function selectIntegrationProfile({event, repo, api, now = Date.now
     files.some(file => [file.filename, file.previous_filename].some(name => name?.startsWith('coordination/engineering/')));
   if (pr.head.ref.startsWith('geography/') || needsEngineeringScope || selectedDataCandidate(pr.head.ref, files)) {
     const {github_issue} = validateIssuePRBody(pr.body ?? '');
-    const [issue, comments] = await completeReads([
-      api(`${prefix}/issues/${github_issue}`),
-      githubPages(api, `${prefix}/issues/${github_issue}/comments`)
-    ]);
-    if (issue.number !== github_issue || readClaim(comments)?.issue_number !== github_issue) {
-      throw Error('Reservation must belong to the linked issue');
-    }
-    // Reuse the claim contract: current holder, exact branch, ready lane/type,
-    // safe owned paths and the current reviewed issue scope.
-    // Profile selection is not a replacement for the merge/evidence gates.
-    reservation = verifyClaimForPR({branch: pr.head.ref, issue, comments, now});
+    const issue = await api(`${prefix}/issues/${github_issue}`);
+    if (issue.number !== github_issue) throw Error('Scope must belong to the linked issue');
+    reservation = verifyIssueScope({branch: pr.head.ref, issue});
   }
   let profile = integrationProfile(pr.head.ref, files, reservation);
   // The retained-prefix exception consults package roles in this workflow's

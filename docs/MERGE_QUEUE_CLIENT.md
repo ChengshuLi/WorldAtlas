@@ -77,9 +77,9 @@ node scripts/local-workspace.mjs release --worker YOUR-WORKER-ID --slot work \
 ```
 
 Follow [LOCAL_WORKSPACES.md](LOCAL_WORKSPACES.md) for clean-workspace guards and
-owned release. GitHub CLI observation performs no automatic local cleanup. Release
-or reconcile the issue claim through its normal workflow, then allocate the next
-job from fresh main. A cleanup failure does not invalidate an already verified
+owned release. GitHub CLI observation performs no automatic local cleanup. Reconcile
+the original issue and preserve historical claims, then allocate the next job from
+fresh main. Settle any retained live-operation reservation through its workflow. A cleanup failure does not invalidate an already verified
 merge. Observing or retrying grants no new review, science, publication or provider
 permission.
 
