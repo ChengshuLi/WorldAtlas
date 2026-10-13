@@ -143,14 +143,14 @@ def inventory(repo, commit):
     return [entry(repo, commit, name) for name in sorted(set(names))]
 
 
-def verify_trusted_checkout(repo, baseline):
-    if git(repo, 'rev-parse', 'HEAD').decode().strip() != baseline:
-        raise ValueError('Checker checkout must be the exact trusted baseline commit')
+def verify_trusted_checkout(repo, code_commit):
+    if git(repo, 'rev-parse', 'HEAD').decode().strip() != code_commit:
+        raise ValueError('Checker checkout must be the exact executing code commit')
     # Verify the complete local scripts namespace, including package absence.
     # A byte-correct geometry.py is insufficient if an untracked evidence.py,
     # package initializer, extension module or cached bytecode can shadow it.
     expected = {}
-    for row in git(repo, 'ls-tree', '-r', '-z', baseline, '--', 'scripts', 'src').decode().split('\0'):
+    for row in git(repo, 'ls-tree', '-r', '-z', code_commit, '--', 'scripts', 'src').decode().split('\0'):
         if not row:
             continue
         fields, name = row.split('\t', 1)
@@ -170,12 +170,12 @@ def verify_trusted_checkout(repo, baseline):
         raise ValueError('Untracked or missing file in trusted scripts namespace')
     for name, target in actual.items():
         if target.read_bytes() != git(repo, 'cat-file', 'blob', expected[name]):
-            raise ValueError('Checker differs from immutable trusted baseline: ' + name)
+            raise ValueError('Checker differs from immutable executing code: ' + name)
     for name in ['requirements.txt', 'package.json', '.github/evidence-policy.json', *[p for p in TRUSTED_PATHS if p.startswith('coordination/')]]:
         target = repo / name
-        if any(path.is_symlink() for path in [target, *target.parents]) or not target.is_file() or target.read_bytes() != read(repo, baseline, name):
-            raise ValueError('Trusted dependency metadata or evidence policy differs from baseline')
-        expected[name] = entry(repo, baseline, name)['git_blob_oid']
+        if any(path.is_symlink() for path in [target, *target.parents]) or not target.is_file() or target.read_bytes() != read(repo, code_commit, name):
+            raise ValueError('Trusted dependency metadata or evidence policy differs from executing code')
+        expected[name] = entry(repo, code_commit, name)['git_blob_oid']
     return hashlib.sha256((json.dumps(expected, sort_keys=True, separators=(',', ':')) + '\n').encode()).hexdigest()
 
 
@@ -281,7 +281,7 @@ def selected_consumer_allowance(repo):
     code_bytes = sum((repo / name).stat().st_size for name in TRUSTED_PATHS)
     # Re-observe current resources after the Node operand child has exited.
     # Reuse the trusted reader's OS/cgroup-aware admission instead of an
-    # unrelated fixed historical phase ceiling. No candidate code is loaded.
+    # unrelated fixed historical phase ceiling. The caller pins executing code.
     allowance_raw = subprocess.check_output([
         executable, '--input-type=module', '-e',
         'const {processingAllowance}=await import(process.argv[1]);process.stdout.write(JSON.stringify(processingAllowance()));',
@@ -504,6 +504,7 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
     if software:
         report['execution_limits'] = [
             'Candidate checker code executed against distinct baseline and candidate data; no checkpoint reuse or new checkpoint authority.',
+            'Authenticated source adjudication remains baseline-only; deliver checker upgrades separately from data corrections that require it.',
             'Nested child receipts retain their legacy candidate_code_executed=false marker verbatim. That marker is not evidence that candidate checker code was absent; this report binds actual executing code.']
     if not software and before == after and baseline != candidate:
         with stage_timing('unchanged-selected-inputs'):

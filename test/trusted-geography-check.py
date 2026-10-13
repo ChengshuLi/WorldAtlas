@@ -119,7 +119,7 @@ class TrustedCheckControls(unittest.TestCase):
         result, report = self.f.run(candidate, extra_env={'GEOGRAPHY_CODE_COMMIT': candidate})
         self.assertNotEqual(result.returncode, 0)
         self.assertIsNone(report)
-        self.assertIn('exact trusted baseline', result.stderr)
+        self.assertIn('exact executing code', result.stderr)
 
     def test_software_candidate_rejects_foreign_code_and_credentials(self):
         self.f.write('data/geography/part.json', collection(left=.9))
@@ -153,7 +153,7 @@ class TrustedCheckControls(unittest.TestCase):
         result, report = self.f.run(self.f.baseline, rewind=False)
         self.assertNotEqual(result.returncode, 0)
         self.assertIsNone(report)
-        self.assertIn('differs from immutable trusted baseline', result.stderr)
+        self.assertIn('differs from immutable executing code', result.stderr)
 
     def test_external_package_and_policy_tampering_is_rejected(self):
         for name in ['package.json', '.github/evidence-policy.json']:
@@ -286,7 +286,7 @@ class TrustedCheckControls(unittest.TestCase):
         result, report = self.f.run(self.f.commit('untrusted-head'), rewind=False)
         self.assertNotEqual(result.returncode, 0)
         self.assertIsNone(report)
-        self.assertIn('exact trusted baseline', result.stderr)
+        self.assertIn('exact executing code', result.stderr)
 
     def test_untracked_import_shadow_files_are_rejected(self):
         for name in ['scripts/evidence.py', 'scripts/evidence/__init__.py', 'scripts/evidence/geometry.so', 'scripts/evidence/__pycache__/geometry.pyc']:
@@ -305,7 +305,7 @@ class TrustedCheckControls(unittest.TestCase):
         result, report = self.f.run(self.f.baseline, rewind=False)
         self.assertNotEqual(result.returncode, 0)
         self.assertIsNone(report)
-        self.assertIn('differs from immutable trusted baseline', result.stderr)
+        self.assertIn('differs from immutable executing code', result.stderr)
 
     def test_candidate_part_symlink_is_rejected(self):
         p = self.f.repo / 'data/geography/part.json'
