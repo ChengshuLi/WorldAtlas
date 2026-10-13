@@ -12,28 +12,33 @@ import {execFileSync,spawnSync} from 'node:child_process';
 import {committedPackageInputs,committedPackageProducer} from '../scripts/package-output-artifact.mjs';
 
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
-function original(t){
+function original(t,{worker=false}={}){
   const root=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-original-package-'));
   t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
   const bodies={'dist/client/atlas-geography.json':'{}','dist/client/a.bin':'invariant',
     'dist/cloudflare/index.js':'worker','dist/cloudflare/wrangler.json':'{}'};
   for(const [name,body]of Object.entries(bodies)){fs.mkdirSync(path.dirname(path.join(root,name)),{recursive:true});fs.writeFileSync(path.join(root,name),body);}
-  const head='a'.repeat(40),repo='ChengshuLi/WorldAtlas';
-  const origin={run_id:17,run_attempt:2,job_id:29,artifact_id:41,head,
+  const head='a'.repeat(40),workflowHead=worker?'c'.repeat(40):head,repo='ChengshuLi/WorldAtlas';
+  const origin={run_id:17,run_attempt:2,job_id:29,artifact_id:41,head,workflow_head:workflowHead,
     artifact_name:'cloudflare-package-output-17-2',artifact_digest:'b'.repeat(64),artifact_bytes:2000};
   const output={files:Object.entries(bodies).map(([name,body])=>({path:name,bytes:Buffer.byteLength(body),sha256:sha(body)})),
     bytes:Object.values(bodies).reduce((n,body)=>n+Buffer.byteLength(body),0)};
-  const manifest={version:1,kind:'original-cloudflare-package-output',source:{head},output};
+  const workflow={path:worker?'.github/workflows/worker-merge.yml':'.github/workflows/merge-integration-checks.yml',
+    type:'blob',mode:'100644',sha:'d'.repeat(40)};
+  const manifest={version:1,kind:'original-cloudflare-package-output',source:{head,producer:{kind:'immediate-cloudflare-build-v1',
+    workflows:[{path:workflow.path,mode:workflow.mode,oid:workflow.sha}]}},output};
   const raw=Buffer.from(JSON.stringify(manifest)+'\n');
-  const run={id:17,run_attempt:2,head_sha:head,event:'pull_request',path:'.github/workflows/merge-integration-checks.yml',
+  const run={id:17,run_attempt:2,head_sha:workflowHead,event:worker?'workflow_dispatch':'pull_request',path:workflow.path,head_branch:worker?'main':'engineering/fixture',
     status:'completed',repository:{full_name:repo},head_repository:{full_name:repo}};
-  const names=['Snapshot original selected package inputs','Verify package controls','Build Cloudflare package without publishing',
-    'Read back qualified native build outputs when selected','Run selected-data consumer checks','Inventory original selected package output',
-    'Retain original selected package output'];
-  const job={id:29,run_id:17,run_attempt:2,head_sha:head,name:'package',status:'completed',conclusion:'success',
-    steps:names.map(name=>({name,status:'completed',conclusion:'success'}))};
+  const names=worker?['Snapshot original final-worker package inputs','Build the combined application once before asset-dependent tests',
+    'Inventory original final-worker package output','Read back qualified native build outputs when selected',
+    'Test applicable combined-tree invariants without publishing or live imports','Retain original final-worker package output']:
+    ['Snapshot original selected package inputs','Build Cloudflare package without publishing','Inventory original selected package output',
+      'Verify package controls','Read back qualified native build outputs when selected','Run selected-data consumer checks','Retain original selected package output'];
+  const job={id:29,run_id:17,run_attempt:2,head_sha:workflowHead,name:worker?'integration (0)':'package',status:'completed',conclusion:'success',
+    steps:names.map((name,index)=>({name,number:index+1,status:'completed',conclusion:'success'}))};
   const artifact={id:41,name:origin.artifact_name,size_in_bytes:2000,digest:'sha256:'+origin.artifact_digest,
-    expired:false,workflow_run:{id:17,head_sha:head}};
+    expired:false,workflow_run:{id:17,head_sha:workflowHead}};
   const receipt={package_output_manifest_sha256:sha(raw),package_output_manifest_bytes:raw.length,original_head:head};
   const log=()=>[JSON.stringify(receipt),`SHA256 digest of uploaded artifact zip is ${origin.artifact_digest}`,
     `Artifact ${origin.artifact_name} has been successfully uploaded! Final size is 2000 bytes. Artifact ID is 41`].join('\n');
@@ -41,10 +46,15 @@ function original(t){
     if(route.endsWith('/attempts/2'))return run;
     if(route.endsWith('/jobs/29'))return job;
     if(route.endsWith('/artifacts/41'))return artifact;
+    if(route.includes('/git/commits/'))return {tree:{sha:'e'.repeat(40)}};
+    if(route.endsWith('/git/trees/'+'e'.repeat(40)))return {tree:[{path:'.github',type:'tree',mode:'040000',sha:'6'.repeat(40)}],truncated:false};
+    if(route.endsWith('/git/trees/'+'6'.repeat(40)))return {tree:[{path:'workflows',type:'tree',mode:'040000',sha:'7'.repeat(40)}],truncated:false};
+    if(route.endsWith('/git/trees/'+'7'.repeat(40)))return {tree:[{...workflow,path:path.posix.basename(workflow.path)}],truncated:false};
+    if(route.includes('/git/trees/'))return {tree:[workflow],truncated:false};
     throw Error('Unexpected mocked authority route: '+route);
   };
   api.jobLogRedirect=async()=>new Response(null,{status:302,headers:{location:'https://fixture.blob.core.windows.net/job-log'}});
-  return {root,repo,origin,manifestRaw:raw,api,run,job,artifact,receipt,log};
+  return {root,repo,origin,manifestRaw:raw,api,run,job,artifact,receipt,log,workflow};
 }
 
 test('actual original-job admission mints a private token and never brands copied JSON',async t=>{
@@ -61,6 +71,11 @@ test('origin, successful actual steps, upload receipt and output mutations fail 
   const old=globalThis.fetch;t.after(()=>{globalThis.fetch=old;});
   const cases=[
     f=>{f.run.head_sha='c'.repeat(40);},
+    f=>{f.job.head_sha='c'.repeat(40);},
+    f=>{f.artifact.workflow_run.head_sha='c'.repeat(40);},
+    f=>{f.workflow.sha='f'.repeat(40);},
+    f=>{f.workflow.mode='100755';},
+    f=>{f.receipt.original_head='c'.repeat(40);},
     f=>{f.run.path='.github/workflows/unknown.yml';},
     f=>{f.job.run_attempt=1;},
     f=>{f.job.conclusion='failure';},
@@ -114,12 +129,13 @@ test('actual emitted atlas admission follows observed size and shared memory rat
 test('explicit hosted proof cannot silently report normal fallback success',t=>{
   const temporary=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-proof-invocation-'));
   t.after(()=>fs.rmSync(temporary,{recursive:true,force:true}));
-  for(const [event,status] of [['workflow_dispatch',1],['pull_request',0]]){
+  for(const [event,workflow,status] of [['workflow_dispatch','Selected package equivalence proof',1],
+    ['pull_request','Integration queue regression',0],['workflow_dispatch','Serialize worker PR merges',0],['workflow_dispatch','Unrelated workflow',0]]){
     const result=spawnSync(process.execPath,['scripts/assemble-selected-package.mjs'],{
       env:{...process.env,GH_TOKEN:'',GITHUB_TOKEN:'',GITHUB_EVENT_NAME:event,
-        GITHUB_WORKFLOW:'Selected package equivalence proof',GITHUB_OUTPUT:path.join(temporary,event)},encoding:'utf8'});
+        GITHUB_WORKFLOW:workflow,GITHUB_OUTPUT:path.join(temporary,workflow)},encoding:'utf8'});
     assert.equal(result.status,status,result.stderr);assert.equal(JSON.parse(result.stdout).assembled,false);
-    assert.match(fs.readFileSync(path.join(temporary,event),'utf8'),/^assembled=false\n/);
+    assert.match(fs.readFileSync(path.join(temporary,workflow),'utf8'),/^assembled=false\n/);
   }
 });
 
@@ -189,7 +205,8 @@ test('private assembly admission uses actual declared inputs and rejects legacy 
   const stage=fs.mkdtempSync(path.join(f.root,'stage-'));
   t.after(()=>{globalThis.fetch=oldFetch;process.argv[1]=oldEntry;});
   manifest.source=s.snapshot();
-  f.origin.head=f.run.head_sha=f.job.head_sha=f.artifact.workflow_run.head_sha=f.receipt.original_head=manifest.source.head;
+  f.origin.head=f.origin.workflow_head=f.run.head_sha=f.job.head_sha=f.artifact.workflow_run.head_sha=f.receipt.original_head=manifest.source.head;
+  f.workflow.sha=manifest.source.producer.workflows.find(row=>row.path===f.workflow.path).oid;
   const authenticate=async source=>{
     f.manifestRaw=Buffer.from(JSON.stringify({...manifest,source})+'\n');
     f.receipt.package_output_manifest_sha256=sha(f.manifestRaw);f.receipt.package_output_manifest_bytes=f.manifestRaw.length;
@@ -223,35 +240,123 @@ test('private assembly admission uses actual declared inputs and rejects legacy 
     s.write(name,old);s.commit();
   }
   const legacy={...manifest.source};delete legacy.producer;legacy.programme=[];
-  const legacyToken=await authenticate(legacy);
-  assert.throws(()=>issue(legacyToken),/Immediate original build capture/);
+  await assert.rejects(authenticate(legacy),/Actual executed producer workflow/);
 });
 
-test('original discovery ignores observer trees but refuses changed build inputs and workflow',async t=>{
-  const f=original(t),s=sourceFixture(f),before=s.snapshot(),head=before.head,repo=f.repo;
+function originalDiscovery(t,{worker=false}={}){
+  const f=original(t,{worker}),s=sourceFixture(f),before=s.snapshot(),repo=f.repo;
   const rows=s.git('ls-tree','-rlz','HEAD').split('\0').filter(Boolean).map(line=>{
     const [metadata,name]=line.split('\t'),[mode,type,oid,size]=metadata.trim().split(/\s+/);
     return {path:name,mode,type,sha:oid,size:Number(size)};
   });
+  f.origin.head=f.receipt.original_head=before.head;
+  if(!worker)f.origin.workflow_head=f.run.head_sha=f.job.head_sha=f.artifact.workflow_run.head_sha=before.head;
+  f.workflow.sha=before.producer.workflows.find(row=>row.path===f.workflow.path).oid;
+  const sourceHead=before.head,workflowHead=f.origin.workflow_head;
   const blob=raw=>({encoding:'base64',content:Buffer.from(raw).toString('base64')});
   const definitionRaw=JSON.stringify(before.definition),selectionRaw=JSON.stringify(before.selection);
-  const api=async route=>{
-    if(route.endsWith('/actions/runs/17'))return {id:17,run_attempt:2,head_sha:head,status:'completed',repository:{full_name:repo},head_repository:{full_name:repo}};
-    if(route.includes('/git/commits/'))return {tree:{sha:before.tree}};
-    if(route.includes('/git/trees/'))return {tree:rows,truncated:false};
-    if(route.includes('/contents/.github/package-inputs.json')){const row=rows.find(r=>r.path==='.github/package-inputs.json');return {...blob(definitionRaw),...row,type:'file'};}
+  const originalAPI=f.api,calls=[];
+  f.api=async route=>{
+    calls.push(route);
+    if(route.includes('/actions/workflows/'))return {workflow_runs:route.includes(worker?'worker-merge.yml':'merge-integration-checks.yml')?[f.run]:[]};
+    if(route.endsWith('/actions/runs/17'))return f.run;
+    if(route===`/repos/${repo}/git/commits/${sourceHead}`)return {tree:{sha:before.tree}};
+    if(route===`/repos/${repo}/git/trees/${before.tree}?recursive=1`)return {tree:rows,truncated:false};
+    if(route.includes('/contents/.github/package-inputs.json')){assert(route.endsWith(sourceHead));const row=rows.find(r=>r.path==='.github/package-inputs.json');return {...blob(definitionRaw),...row,type:'file'};}
     if(route.includes('/git/blobs/'))return blob(selectionRaw);
-    if(route.includes('/attempts/2/jobs'))return {jobs:[{id:29,status:'completed',conclusion:'success',steps:[{name:'Retain original full-regression package output',conclusion:'success'}]}]};
-    if(route.includes('/artifacts?'))return {total_count:1,artifacts:[{id:41,name:'cloudflare-package-output-17-2',expired:false,digest:'sha256:'+'b'.repeat(64),size_in_bytes:2000}]};
-    throw Error('Unexpected discovery route: '+route);
+    if(route.includes('/attempts/2/jobs'))return {jobs:[f.job]};
+    if(route.includes('/artifacts?'))return {total_count:1,artifacts:[f.artifact]};
+    return originalAPI(route);
   };
-  const discover=()=>findOriginalPackage({api,repo,current:s.snapshot(),originalRunId:17});
-  assert.equal((await discover()).origin.head,head);
+  f.api.jobLogRedirect=originalAPI.jobLogRedirect;
+  return {...f,s,before,rows,calls,sourceHead,workflowHead};
+}
+
+test('original discovery ignores observer trees but refuses changed build inputs and workflow',async t=>{
+  const f=originalDiscovery(t),old=globalThis.fetch;t.after(()=>{globalThis.fetch=old;});
+  globalThis.fetch=async()=>new Response(f.log());
+  const discover=()=>findOriginalPackage({api:f.api,repo:f.repo,current:f.s.snapshot(),originalRunId:17});
+  assert.equal((await discover()).origin.head,f.sourceHead);
   for(const name of ['test/incidental.test.mjs','scripts/observer.mjs','.github/workflows/unrelated.yml']){
-    s.write(name,'new observer');s.commit();assert.equal((await discover()).origin.head,head,name);
+    f.s.write(name,'new observer');f.s.commit();assert.equal((await discover()).origin.head,f.sourceHead,name);
   }
   for(const name of ['scripts/builder.mjs','package-lock.json','scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs','.github/workflows/merge-integration-checks.yml','.github/workflows/worker-merge.yml']){
-    const old=fs.readFileSync(path.join(f.root,name),'utf8');s.write(name,'changed');s.commit();assert.equal(await discover(),null,name);
-    s.write(name,old);s.commit();
+    const old=fs.readFileSync(path.join(f.root,name),'utf8');f.s.write(name,'changed');f.s.commit();assert.equal(await discover(),null,name);
+    f.s.write(name,old);f.s.commit();
   }
+});
+
+test('final-worker original binds candidate source separately from successful producer workflow SHA',async t=>{
+  const old=globalThis.fetch;t.after(()=>{globalThis.fetch=old;});
+  const f=original(t,{worker:true});f.run.conclusion='failure';
+  assert.notEqual(f.origin.head,f.origin.workflow_head);
+  globalThis.fetch=async()=>new Response(f.log());
+  const token=await authenticateOriginalPackageOutput(f);
+  assert.equal(requireOriginalPackageOutput(token).manifest.source.head,f.origin.head);
+  assert.equal(requireOriginalPackageOutput(token).origin.workflow_head,f.run.head_sha);
+  assert.throws(()=>requireOriginalPackageOutput(structuredClone(token)),/Privately authenticated/);
+});
+
+test('worker origin rejects substituted source, workflow, job, artifact and incomplete producer steps',async t=>{
+  const old=globalThis.fetch;t.after(()=>{globalThis.fetch=old;});
+  const cases=[
+    f=>{f.origin.head=f.origin.workflow_head;},
+    f=>{delete f.origin.workflow_head;},
+    f=>{f.run.head_branch='engineering/fixture';},
+    f=>{f.run.event='pull_request';},
+    f=>{f.run.path='.github/workflows/merge-integration-checks.yml';},
+    f=>{f.run.run_attempt=3;},
+    f=>{f.job.head_sha=f.origin.head;},
+    f=>{f.job.name='integration (1)';},
+    f=>{f.job.conclusion='failure';},
+    f=>{f.artifact.workflow_run.head_sha=f.origin.head;},
+    f=>{f.workflow.sha='f'.repeat(40);},
+    f=>{f.workflow.mode='120000';},
+    f=>{f.receipt.original_head=f.origin.workflow_head;},
+    f=>{f.job.steps.find(row=>row.name.startsWith('Inventory')).number=5;},
+    f=>{f.job.steps.find(row=>row.name.startsWith('Retain')).number=4;},
+    ...['Snapshot original final-worker package inputs','Build the combined application once before asset-dependent tests',
+      'Inventory original final-worker package output','Read back qualified native build outputs when selected',
+      'Test applicable combined-tree invariants without publishing or live imports','Retain original final-worker package output']
+      .map(name=>f=>{f.job.steps.find(row=>row.name===name).conclusion='skipped';}),
+  ];
+  for(const mutate of cases){const f=original(t,{worker:true});mutate(f);globalThis.fetch=async()=>new Response(f.log());
+    await assert.rejects(authenticateOriginalPackageOutput(f));}
+});
+
+test('bounded discovery checks both producer workflows and distinct runs sharing a workflow SHA',async t=>{
+  const f=originalDiscovery(t,{worker:true}),old=globalThis.fetch;t.after(()=>{globalThis.fetch=old;});
+  globalThis.fetch=async()=>new Response(f.log());
+  f.run.conclusion='failure';
+  const rejected={...f.run,id:18};
+  const baseAPI=f.api,warnings=[],oldWarn=console.warn;let rejectedReads=0,workerReads=0;
+  console.warn=message=>warnings.push(message);t.after(()=>{console.warn=oldWarn;});
+  const api=async route=>{
+    if(route.includes('/actions/workflows/worker-merge.yml/')){workerReads++;return {workflow_runs:[rejected,rejected,{...f.run,run_attempt:3},f.run]};}
+    if(route.includes('/actions/runs/18/attempts/2/jobs')){rejectedReads++;throw Error('Authority unavailable https://fixture.invalid/private?signature=secret');}
+    if(route.includes('/actions/runs/17/attempts/3/jobs'))return {jobs:[]};
+    return baseAPI(route);
+  };
+  api.jobLogRedirect=baseAPI.jobLogRedirect;
+  const found=await findOriginalPackage({api,repo:f.repo,current:f.s.snapshot()});
+  assert.equal(found.origin.head,f.sourceHead);assert.equal(found.origin.workflow_head,f.workflowHead);
+  assert.notEqual(found.origin.head,found.origin.workflow_head);assert.equal(found.origin.run_id,17);
+  assert.equal(rejectedReads,1);assert.equal(workerReads,1);
+  assert.deepEqual(warnings,['Skipped original package run 18/2: Authority unavailable [delivery address]']);
+  assert(f.calls.some(route=>route.includes('merge-integration-checks.yml/runs?event=pull_request&per_page=20&page=1')));
+  f.workflow.sha='f'.repeat(40);
+  assert.equal(await findOriginalPackage({api,repo:f.repo,current:f.s.snapshot()}),null,'Changed actual workflow must be a cache miss');
+});
+
+test('worker invocation uses only trusted candidate and exact selected integration (0) context',()=>{
+  const candidate='a'.repeat(40),injected='b'.repeat(40);
+  const environment={GITHUB_EVENT_NAME:'workflow_dispatch',GITHUB_WORKFLOW:'Serialize worker PR merges',GITHUB_REF:'refs/heads/main',
+    INTEGRATION_PROFILE:'full',INTEGRATION_SHARD:'0',INTEGRATION_TEST_SELECTION:'selected-data',SELECTED_PACKAGE_CANDIDATE:candidate};
+  const event={pull_request:{head:{sha:injected}},inputs:{source_head:injected,original_run_id:'99',candidate:injected}};
+  assert.deepEqual(packageAssemblyInvocation(event,environment),{proofMode:false,expectedHead:candidate,originalRunId:undefined});
+  for(const mutation of [{GITHUB_REF:'refs/heads/engineering/fixture'},{GITHUB_WORKFLOW:'Unrelated workflow'},
+    {INTEGRATION_PROFILE:'evidence'},{INTEGRATION_SHARD:'1'},{INTEGRATION_TEST_SELECTION:'complete'},
+    {SELECTED_PACKAGE_CANDIDATE:undefined},{SELECTED_PACKAGE_CANDIDATE:'main'}])
+    assert.throws(()=>packageAssemblyInvocation(event,{...environment,...mutation}));
+  assert.throws(()=>packageAssemblyInvocation(event,{GITHUB_EVENT_NAME:'workflow_dispatch'}));
 });

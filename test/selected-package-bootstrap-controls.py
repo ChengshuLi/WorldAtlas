@@ -476,4 +476,57 @@ class ProofInstallerBootstrapTests(ProofWorkflowBootstrapTests):
         self.assertNotEqual(self.env['SELECTED_PACKAGE_TRUSTED_BASE'],self.env['GITHUB_SHA'],
                             'Installer fixture distinguishes frozen source from current verifier implementation')
 
+class WorkerWorkflowBootstrapTests(WorkflowBootstrapFixture, unittest.TestCase):
+    step_name='Assemble unchanged base with current selected output'
+    def setUp(self):
+        super().setUp()
+        workflow=(SOURCE_ROOT/'.github/workflows/worker-merge.yml').read_text()
+        self.integration=workflow.split('  integration:',1)[1].split('  merge:',1)[0]
+        self.step=self.integration.split('- name: '+self.step_name,1)[1].split('      - ',1)[0]
+        self.code=textwrap.dedent(self.step.split("<<'PACKAGE_BOOTSTRAP'\n",1)[1].split('          PACKAGE_BOOTSTRAP',1)[0])
+        self.assertIn("needs.prepare.outputs.test_selection == 'selected-data'",self.step)
+        self.assertIn("matrix.shard == 0",self.step)
+        self.assertIn('SELECTED_PACKAGE_TRUSTED_BASE: ${{ needs.prepare.outputs.base }}',self.step)
+        self.assertIn('SELECTED_PACKAGE_ENTRY_POINT: scripts/assemble-selected-package.mjs',self.step)
+    def assert_rejected(self,error=None):
+        with self.assertRaises(Exception): self.invoke(error)
+        self.assertFalse(self.marker.exists());self.assertFalse(self.output.exists())
+    def test_missing_trusted_helper_falls_back_without_candidate_execution(self):
+        self.assert_rejected(urllib.error.HTTPError('https://api.github.com',404,'Not Found',None,None))
+    def test_bad_blob_identity_falls_back(self):
+        self.blob['sha']='0'*40;self.assert_rejected()
+    def test_nonordinary_trusted_path_falls_back(self):
+        self.blob['type']='symlink';self.assert_rejected()
+    def test_wrong_repository_falls_back_before_token_request(self):
+        self.env['GITHUB_REPOSITORY']='other/repo';self.assert_rejected();self.assertFalse(self.requests)
+    def test_nonexact_base_falls_back_before_token_request(self):
+        self.env['SELECTED_PACKAGE_TRUSTED_BASE']='main';self.assert_rejected();self.assertFalse(self.requests)
+    def test_actual_worker_order_and_fallback_consumers(self):
+        order=['Authenticate selected package installer inputs','npm ci','pip install',
+          'Assemble unchanged base with current selected output','Snapshot original final-worker package inputs',
+          'Build the combined application once before asset-dependent tests','Inventory original final-worker package output',
+          'Install browser dependencies only for tests that use Playwright','Read back qualified native build outputs when selected',
+          'Test applicable combined-tree invariants without publishing or live imports','Retain original final-worker package output']
+        positions=[self.integration.index(name) for name in order]
+        self.assertEqual(positions,sorted(positions))
+        for name in [order[4],order[5],order[6],order[-1]]:
+            step=self.integration.split('- name: '+name,1)[1].split('      - ',1)[0]
+            self.assertIn("steps.assembly.outputs.assembled != 'true'",step)
+        for name in [order[7],order[9]]:
+            step=self.integration.split('- name: '+name,1)[1].split('      - ',1)[0]
+            self.assertIn("steps.assembly.outputs.assembled == 'true' && 'selected-output' || needs.prepare.outputs.test_selection",step)
+        tests=self.integration.split('- name: '+order[9],1)[1].split('      - ',1)[0]
+        self.assertIn('SELECTED_PACKAGE_ASSEMBLY_SHA256: ${{ steps.assembly.outputs.assembly_sha256 }}',tests)
+        self.assertIn('= selected-output',tests);self.assertIn('selectedDeliverySmoke',tests)
+        self.assertIn('SELECTED_PACKAGE_CANDIDATE: ${{ needs.prepare.outputs.candidate }}',self.integration)
+        self.assertNotIn('continue-on-error:',self.integration)
+        permissions=self.integration.split('    permissions:',1)[1].split('    steps:',1)[0]
+        self.assertIn('actions: read',permissions);self.assertIn('contents: read',permissions)
+        self.assertNotIn('write',permissions)
+
+class WorkerInstallerBootstrapTests(WorkerWorkflowBootstrapTests):
+    step_name='Authenticate selected package installer inputs'
+    def test_installer_preflight_is_explicit(self):
+        self.assertIn('SELECTED_PACKAGE_PREFLIGHT: install',self.step)
+
 if __name__=='__main__': unittest.main(verbosity=2)

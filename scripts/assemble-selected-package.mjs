@@ -14,7 +14,7 @@ import {loadPackageInputs, readPackageInputs, containsPackagePath} from './packa
 import {inspectPackageRuntime, verifyPackageDependencies} from './package-build.mjs';
 import {committedPackageInputs, committedPackageProducer, PACKAGE_PRODUCER_WORKFLOWS, PACKAGE_PRODUCER_KIND, packageBuildConfiguration,
   validatePackageOutputManifest, admitPackageOutputTransition, streamedPackageFile, installedPackageIdentity, installedPackageDifferences, declaredPackagePythonRoots} from './package-output-artifact.mjs';
-import {authenticateOriginalPackageOutput, issuePackageAssemblyExecution, preparePackageSelectedAdditive,
+import {authenticateOriginalPackageOutput, readOriginalPackageInventory, issuePackageAssemblyExecution, preparePackageSelectedAdditive,
   publishPackageSelectedAdditive, packageSelectedPublicationInventory, requirePackageAssemblyExecution}
   from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
 
@@ -61,36 +61,55 @@ export async function findOriginalPackage({api,repo,current,originalRunId}){
   // A small recent-result search is an optimization. Exhaustion means a full
   // build, never a claim that no older result exists.
   need(originalRunId===undefined||Number.isSafeInteger(originalRunId)&&originalRunId>0,'Exact optional original run required');
-  const response=originalRunId===undefined?await api(`/repos/${repo}/actions/workflows/merge-integration-checks.yml/runs?event=pull_request&per_page=20&page=1`):
-    {workflow_runs:[await api(`/repos/${repo}/actions/runs/${originalRunId}`)]};
-  need(Array.isArray(response.workflow_runs),'Original run discovery unavailable');
-  if(originalRunId!==undefined)need(response.workflow_runs.length===1&&response.workflow_runs[0]?.id===originalRunId,'Pinned original run identity differs');
+  const responses=originalRunId===undefined?await Promise.all([
+    api(`/repos/${repo}/actions/workflows/merge-integration-checks.yml/runs?event=pull_request&per_page=20&page=1`),
+    api(`/repos/${repo}/actions/workflows/worker-merge.yml/runs?event=workflow_dispatch&per_page=20&page=1`)
+  ]):[{workflow_runs:[await api(`/repos/${repo}/actions/runs/${originalRunId}`)]}];
+  need(responses.every(response=>Array.isArray(response.workflow_runs)&&response.workflow_runs.length<=20),'Bounded original run discovery unavailable');
+  const runs=responses.flatMap(response=>response.workflow_runs).sort((a,b)=>b.id-a.id||b.run_attempt-a.run_attempt);
+  if(originalRunId!==undefined)need(runs.length===1&&runs[0]?.id===originalRunId,'Pinned original run identity differs');
   const seen=new Set();
-  for(const run of response.workflow_runs){
-    if(run.status!=='completed'||seen.has(run.head_sha)||run.repository?.full_name!==repo||run.head_repository?.full_name!==repo)continue;
-    seen.add(run.head_sha);
-    const tree=await integrationTree(api,repo,run.head_sha),all=treeRows(tree);
-    const producer={kind:PACKAGE_PRODUCER_KIND,workflows:all.filter(row=>PACKAGE_PRODUCER_WORKFLOWS.includes(row.path))};
-    if(!same(producer,current.producer))continue;
-    const definition=await readPackageInputs({route:`/repos/${repo}`,base:run.head_sha,api});
-    const source={head:run.head_sha,tree:tree.object.tree.sha,definition,producer,
-      files:all.filter(row=>containsPackagePath(definition.inputs,row.path)),
-      selection:await blobJSON(api,repo,tree,'data/ownership-selection.json')};
-    if(!sourceCompatible(source,current))continue;
-    const jobs=await githubPages(async route=>(await api(route)).jobs,
-      `/repos/${repo}/actions/runs/${run.id}/attempts/${run.run_attempt}/jobs`);
-    const candidates=jobs.filter(job=>job.status==='completed'&&job.conclusion==='success'&&
-      job.steps?.some(step=>['Retain original full-regression package output','Retain original selected package output'].includes(step.name)&&step.conclusion==='success'));
-    if(candidates.length!==1)continue;
-    const artifactName=`cloudflare-package-output-${run.id}-${run.run_attempt}`;
-    const inventory=await api(`/repos/${repo}/actions/runs/${run.id}/artifacts?per_page=100&page=1`);
-    if(!Array.isArray(inventory.artifacts)||inventory.total_count!==inventory.artifacts.length)continue;
-    const matches=inventory.artifacts.filter(row=>row.name===artifactName&&!row.expired);
-    if(matches.length!==1)continue;
-    const artifact=matches[0];
-    if(!/^sha256:[a-f0-9]{64}$/.test(artifact.digest??'')||!Number.isSafeInteger(artifact.size_in_bytes)||artifact.size_in_bytes<=0)continue;
-    return {source,origin:{run_id:run.id,run_attempt:run.run_attempt,job_id:candidates[0].id,head:run.head_sha,
-      artifact_id:artifact.id,artifact_name:artifactName,artifact_digest:artifact.digest.slice(7),artifact_bytes:artifact.size_in_bytes}};
+  for(const run of runs){
+    const identity=`${run.id}/${run.run_attempt}`;
+    if(run.status!=='completed'||seen.has(identity)||run.repository?.full_name!==repo||run.head_repository?.full_name!==repo)continue;
+    seen.add(identity);
+    if(!(run.event==='pull_request'&&run.path==='.github/workflows/merge-integration-checks.yml'||
+      run.event==='workflow_dispatch'&&run.path==='.github/workflows/worker-merge.yml'&&run.head_branch==='main'))continue;
+    // A missing/obsolete original is a cache miss. A later run may contain a
+    // compatible candidate even when both runs executed the same main workflow.
+    try{
+      const jobs=await githubPages(async route=>(await api(route)).jobs,
+        `/repos/${repo}/actions/runs/${run.id}/attempts/${run.run_attempt}/jobs`);
+      const candidates=jobs.filter(job=>job.status==='completed'&&job.conclusion==='success'&&
+        job.steps?.some(step=>['Retain original full-regression package output','Retain original selected package output',
+          'Retain original final-worker package output'].includes(step.name)&&step.conclusion==='success'));
+      if(candidates.length!==1)continue;
+      const artifactName=`cloudflare-package-output-${run.id}-${run.run_attempt}`;
+      const inventory=await api(`/repos/${repo}/actions/runs/${run.id}/artifacts?per_page=100&page=1`);
+      if(!Array.isArray(inventory.artifacts)||inventory.total_count!==inventory.artifacts.length)continue;
+      const matches=inventory.artifacts.filter(row=>row.name===artifactName&&!row.expired);
+      if(matches.length!==1)continue;
+      const artifact=matches[0];
+      if(!/^sha256:[a-f0-9]{64}$/.test(artifact.digest??'')||!Number.isSafeInteger(artifact.size_in_bytes)||artifact.size_in_bytes<=0)continue;
+      const origin={run_id:run.id,run_attempt:run.run_attempt,job_id:candidates[0].id,workflow_head:run.head_sha,
+        artifact_id:artifact.id,artifact_name:artifactName,artifact_digest:artifact.digest.slice(7),artifact_bytes:artifact.size_in_bytes};
+      const receipt=await readOriginalPackageInventory({api,repo,origin});
+      origin.head=receipt.original_head;
+      const tree=await integrationTree(api,repo,origin.head),all=treeRows(tree);
+      const producer={kind:PACKAGE_PRODUCER_KIND,workflows:all.filter(row=>PACKAGE_PRODUCER_WORKFLOWS.includes(row.path))};
+      if(!same(producer,current.producer))continue;
+      const workflowTree=origin.head===origin.workflow_head?tree:await integrationTree(api,repo,origin.workflow_head);
+      const actual=workflowTree.entries.get(receipt.workflow_path),captured=producer.workflows.find(row=>row.path===receipt.workflow_path);
+      if(actual?.type!=='blob'||actual.mode!=='100644'||!same(captured,{path:receipt.workflow_path,mode:actual.mode,oid:actual.sha}))continue;
+      const definition=await readPackageInputs({route:`/repos/${repo}`,base:origin.head,api});
+      const source={head:origin.head,tree:tree.object.tree.sha,definition,producer,
+        files:all.filter(row=>containsPackagePath(definition.inputs,row.path)),
+        selection:await blobJSON(api,repo,tree,'data/ownership-selection.json')};
+      if(!sourceCompatible(source,current))continue;
+      return {source,origin};
+    }catch(error){
+      console.warn(`Skipped original package run ${identity}: ${String(error.message).replace(/https?:\/\/\S+/g,'[delivery address]').slice(0,300)}`);
+    }
   }
   return null;
 }
@@ -242,10 +261,15 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
 // authentication and output equivalence belong to the independent observer.
 export function packageAssemblyInvocation(event, environment = process.env) {
   const proofMode=environment.GITHUB_EVENT_NAME==='workflow_dispatch'&&environment.GITHUB_WORKFLOW==='Selected package equivalence proof';
-  const expectedHead=proofMode?event.inputs?.source_head:event.pull_request?.head?.sha;
+  const workerMode=environment.GITHUB_EVENT_NAME==='workflow_dispatch'&&environment.GITHUB_WORKFLOW==='Serialize worker PR merges'&&
+    environment.GITHUB_REF==='refs/heads/main';
+  need(proofMode||workerMode||environment.GITHUB_EVENT_NAME==='pull_request','Trusted selected-data CI invocation required');
+  if(workerMode)need(environment.INTEGRATION_PROFILE==='full'&&environment.INTEGRATION_SHARD==='0'&&
+    environment.INTEGRATION_TEST_SELECTION==='selected-data','Trusted selected-data worker integration (0) required');
+  const expectedHead=proofMode?event.inputs?.source_head:workerMode?environment.SELECTED_PACKAGE_CANDIDATE:event.pull_request?.head?.sha;
+  need(/^[a-f0-9]{40}$/.test(expectedHead??''),proofMode?'Exact proof source head required':'Exact selected package candidate required');
   let originalRunId;
   if(proofMode){
-    need(/^[a-f0-9]{40}$/.test(expectedHead??''),'Exact proof source head required');
     need(/^[1-9]\d*$/.test(event.inputs?.original_run_id??'')&&Number.isSafeInteger(Number(event.inputs.original_run_id)),
       'Exact original package run identity required');
     originalRunId=Number(event.inputs.original_run_id);
@@ -262,7 +286,7 @@ if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.ur
     const {proofMode,expectedHead,originalRunId}=packageAssemblyInvocation(event);
     result=await assembleSelectedPackage({api,repo:process.env.GITHUB_REPOSITORY,expectedHead,originalRunId});
     if(proofMode)need(result.assembled,'Actual assembly required; fallback cannot establish equivalence');
-  }catch(error){if(process.env.GITHUB_EVENT_NAME==='workflow_dispatch')process.exitCode=1;result={assembled:false,reason:String(error.message).replace(/https?:\/\/\S+/g,'[delivery address]').slice(0,600)};}
+  }catch(error){if(process.env.GITHUB_EVENT_NAME==='workflow_dispatch'&&process.env.GITHUB_WORKFLOW==='Selected package equivalence proof')process.exitCode=1;result={assembled:false,reason:String(error.message).replace(/https?:\/\/\S+/g,'[delivery address]').slice(0,600)};}
   console.log(JSON.stringify(result));
   if(process.env.GITHUB_OUTPUT)fs.appendFileSync(process.env.GITHUB_OUTPUT,`assembled=${result.assembled}\nassembly_sha256=${result.receipt_sha256??''}\n`);
 }
