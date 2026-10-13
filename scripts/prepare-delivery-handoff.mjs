@@ -1,4 +1,4 @@
-// Metadata preparation and explicit body acquisition/queue transitions. Existing
+// Metadata preparation and explicit body acquisition. Existing
 // operators, source authority and independent review remain authoritative.
 import fs from 'node:fs';
 import {performance} from 'node:perf_hooks';
@@ -10,8 +10,7 @@ import {gunzipSync} from 'node:zlib';
 import {candidateBudget} from './native-ownership/native-preparation-guards.mjs';
 import {validatePackageInputs} from './package-inputs.mjs';
 import {baselineFiles, validateEvidence} from './evidence-quality.mjs';
-import {reviewContractBinding, reviewInventoryCommitment, checkPremergeEvidence} from './premerge-evidence.mjs';
-import {githubAPI, githubPages, workSpec, verifyIssueScope} from './issue-claim-contract.mjs';
+import {githubAPI} from './issue-claim-contract.mjs';
 import {composeRetainedLedgers} from '../coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs';
 import {normaliseRetainedRepairLedger, verifyCurrentRebindExecution, CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
@@ -689,48 +688,6 @@ export function finalizeDelivery(config, reader) {
     'selected-delivery-expectations.json': orderedBytes(expectations)};
 }
 
-export async function freezeReview({repo, number, expectedHead, expectedPR, api, reader}) {
-  need(/^[\w.-]+\/[\w.-]+$/.test(repo) && Number.isSafeInteger(number) && number > 0 && hex(expectedHead, 40), 'Exact PR/repository/head required');
-  const route = `/repos/${repo}`, pr = await api(`${route}/pulls/${number}`);
-  need(pr.state === 'open' && pr.head.sha === expectedHead, 'Current PR head/state differs');
-  const state = value => [value.number, value.state, value.draft, value.head.sha, value.head.ref, value.head.repo?.full_name,
-    value.base.sha, value.base.ref, value.base.repo?.full_name, value.body, value.changed_files];
-  if (expectedPR) need(same(state(pr), state(expectedPR)), 'PR state changed after review preparation');
-  const refs = [...pr.body.matchAll(/^(?:Refs|Closes) #(\d+)\s*$/gm)]; need(refs.length === 1, 'Exactly one original issue linkage required');
-  const issue = await api(`${route}/issues/${refs[0][1]}`), spec = workSpec(issue.body);
-  need(issue.number === Number(refs[0][1]), 'Scope must belong to the linked issue');
-  const reservation = verifyIssueScope({branch: pr.head.ref, issue});
-  const files = await githubPages(api, `${route}/pulls/${number}/files`);
-  need(files.length === pr.changed_files && files.length > 0 && new Set(files.map(f => f.filename)).size === files.length, 'Incomplete/duplicate PR file scope');
-  const checked = await checkPremergeEvidence({api, repo, pr, issue, reservation, files, review: false});
-  need(['bytes-verified', 'limited'].includes(checked.status), 'Current premerge evidence did not pass');
-  const manifestPath = spec.evidence_quality.manifest_path.replace('{job}', pr.head.ref.split('/').slice(1).join('/'));
-  const manifestPin = reader.pin(expectedHead, manifestPath), manifest = reader.json(manifestPin);
-  need(manifestPin.sha256 === checked.manifest_sha256, 'Local/hosted manifest differs');
-  const domains = new Set(['implementation']);
-  if (spec.evidence_quality.review_kind !== 'code') domains.add(spec.evidence_quality.review_kind);
-  if (manifest.sources.length || ['geography', 'source-only', 'content'].includes(manifest.lane)) domains.add('source');
-  if (manifest.methods.some(m => m.kind === 'geography') || files.some(f => /(?:hierarchy|world-index|crosswalk|ellipsoidal|geometry)/.test(f.filename))) domains.add('geometry');
-  if (files.some(f => /(?:release|migration|identity|regional-approval)/.test(f.filename))) domains.add('release');
-  const currentPr = await api(`${route}/pulls/${number}`), currentIssue = await api(`${route}/issues/${issue.number}`);
-  need(same(state(currentPr), state(pr)) && same(reviewContractBinding(issue, pr), reviewContractBinding(currentIssue, currentPr)),
-    'Review head/base/target/draft/scope/body changed while freezing');
-  need(same(verifyIssueScope({branch: currentPr.head.ref, issue: currentIssue}), reservation),
-    'Author scope changed while freezing');
-  const packet = {version: 1, kind: 'review-preparation-only', repo, pr_number: number, head_sha: expectedHead, base_sha: pr.base.sha,
-    author_worker_id: manifest.worker_id, manifest: manifestPin, ...reviewContractBinding(issue, pr),
-    inventory_commitment: reviewInventoryCommitment({files, manifest}), required_domains: [...domains].sort(),
-    inspected_files: [...new Set(files.flatMap(f => [f.filename, f.previous_filename].filter(Boolean)))].sort(),
-    evidence_limits: checked.limits, issue, pr, files,
-    next: ['A distinct reviewer must independently inspect this exact head and post the existing worldatlas-review:v1 receipt.',
-      'After that review, use the existing queue; re-freeze if head, acceptance, body or file scope changes.'],
-    queue_command: ['gh', 'workflow', 'run', 'worker-merge.yml', '--repo', repo, '--ref', 'main',
-      '-f', `pr_number=${number}`, '-f', `expected_head=${expectedHead}`, '-f', 'request_id=REPLACE-WITH-A-NEW-UUID'],
-    resume_command: ['gh', 'run', 'list', '--repo', repo, '--workflow', 'worker-merge.yml'],
-    verify_command: ['gh', 'api', `repos/${repo}/pulls/${number}`, '--jq', '{merged, head: .head.sha, merge_commit: .merge_commit_sha}']};
-  return {'review-packet.json': jsonBytes(packet)};
-}
-
 async function main(args) {
   const [phase, configFile, destination, ...flags] = args;
   if (phase === 'materialize') {
@@ -752,8 +709,8 @@ async function main(args) {
     return;
   }
   if (['advance', 'status'].includes(phase)) {
-    need(configFile && destination && flags.every(f => ['--resume', '--submit-queue', '--automatic'].includes(f))
-      && new Set(flags).size === flags.length && !(phase === 'status' && flags.some(f => f !== '--resume')), 'Use advance|status CONFIG DESTINATION [--resume] [--submit-queue]');
+    need(configFile && destination && flags.every(f => ['--resume', '--automatic'].includes(f))
+      && new Set(flags).size === flags.length && !(phase === 'status' && flags.some(f => f !== '--resume')), 'Use advance|status CONFIG DESTINATION [--resume]');
     need(!process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node launch required');
     const root = fs.realpathSync(process.cwd()), configRaw = ordinary(root, configFile), config = JSON.parse(configRaw);
     const reader = pinReader(root, {allowance: config.preparation_allowance});
@@ -775,48 +732,32 @@ async function main(args) {
       const validate = await flow.automaticAuthorGuard(root, config, liveAPI);
       const branch = execFileSync('git', ['symbolic-ref', '--short', 'HEAD'], {cwd: root, env: environment(), encoding: 'utf8'}).trim();
       await validate({branch, paths: [destination + '/']});
-      automaticContext = {validate, branch};
+      automaticContext = {validate};
     }
     await flow.withAdvanceLock(journal, async () => {
       try {
         if (automaticContext) {
-          const {validate, branch} = automaticContext;
+          const {validate} = automaticContext;
           const result = await flow.runAutomaticDelivery(journal, config, reader,
             {prepareRequests, nativeRequests, retainProducts, composeAuthorities, rebindCustody, packageProjection,
-              finalizeDelivery, freezeReview, api: liveAPI, refreshBase: flow.deliveryBaseRefreshAPI(liveAPI),
+              finalizeDelivery,
               authorityReader: () => flow.deliveryAuthorityReader(root, reader)},
             {validate, apiWaitMilliseconds: () => apiWait,
               beforePublication: async () => {
                 execFileSync('git', ['fetch', '--filter=blob:none', 'origin', 'main'], {cwd: root, env: environment(), maxBuffer: 1048576});
                 const main = execFileSync('git', ['rev-parse', 'origin/main'], {cwd: root, env: environment(), encoding: 'utf8'}).trim();
                 const refreshed = await flow.refreshDeliveryAuthorTree(journal, {main, validate});
-                if (config.review) {
-                  const pr = await liveAPI(`/repos/${config.review.repo}/pulls/${config.review.pr_number}`);
-                  need(pr.head?.sha === refreshed.head && pr.head?.ref === branch,
-                    'Publish the actual refreshed author head before freezing immutable review evidence');
-                }
                 return refreshed;
-              },
-              queue: packet => flow.advanceQueue(journal, packet, {api: liveAPI,
-                authorizeSubmission: flags.includes('--submit-queue'),
-                submit: ({number, head, requestId, timeoutMs}) => execFileSync('gh',
-                  ['workflow', 'run', 'worker-merge.yml', '--repo', packet.repo, '--ref', 'main',
-                    '-f', `pr_number=${number}`, '-f', `expected_head=${head}`, '-f', `request_id=${requestId}`],
-                  {encoding: 'utf8', timeout: timeoutMs, maxBuffer: 1048576})})});
+              }});
           console.log(JSON.stringify({result, ...flow.readAdvanceStatus(journal)})); return;
         }
         const preparationStarted = performance.now();
         const next = await flow.nextDeliveryStage(journal, config, reader, {prepareRequests, nativeRequests, retainProducts,
-          composeAuthorities, rebindCustody, packageProjection, finalizeDelivery, freezeReview, api: liveAPI,
-          refreshBase: flow.deliveryBaseRefreshAPI(liveAPI),
+          composeAuthorities, rebindCustody, packageProjection, finalizeDelivery,
           authorityReader: () => flow.deliveryAuthorityReader(root, reader)});
         let result;
         if (next.waiting) result = flow.observeAdvance(journal, next.waiting);
-        else if (next.queue) result = await flow.advanceQueue(journal, next.queue, {api: liveAPI,
-          authorizeSubmission: flags.includes('--submit-queue'), submit: ({number, head, requestId, timeoutMs}) =>
-            execFileSync('gh', ['workflow', 'run', 'worker-merge.yml', '--repo', next.queue.repo, '--ref', 'main',
-              '-f', `pr_number=${number}`, '-f', `expected_head=${head}`, '-f', `request_id=${requestId}`],
-            {encoding: 'utf8', timeout: timeoutMs, maxBuffer: 1048576})});
+        else if (next.complete) result = next;
         else result = await flow.prepareAdvanceStage(journal, next.id, next.phase, next.input, next.produce, {preparationStarted, apiWaitMilliseconds: () => apiWait, adoption: config.prepared_stages?.[next.id]});
         console.log(JSON.stringify({result, ...flow.readAdvanceStatus(journal)}));
       } catch (error) {
@@ -825,8 +766,8 @@ async function main(args) {
     });
     return;
   }
-  need(['requests', 'native-requests', 'retain', 'rebind-operating', 'rebind-certificate', 'compose', 'package', 'finalize', 'evidence', 'review'].includes(phase) && configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
-    'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|package|finalize|evidence|review CONFIG DESTINATION [--resume]');
+  need(['requests', 'native-requests', 'retain', 'rebind-operating', 'rebind-certificate', 'compose', 'package', 'finalize', 'evidence'].includes(phase) && configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
+    'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|package|finalize|evidence CONFIG DESTINATION [--resume]');
   need(!process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node launch required');
   const root = fs.realpathSync(process.cwd()); admitDestination(root, destination, flags.includes('--resume'));
   const raw = ordinary(root, configFile), config = JSON.parse(raw), reader = pinReader(root, {allowance: config.preparation_allowance});
@@ -840,10 +781,6 @@ async function main(args) {
   if (phase === 'package') outputs = packageProjection(config, reader);
   if (phase === 'finalize') outputs = finalizeDelivery(config, reader);
   if (phase === 'evidence') outputs = prepareEvidence(config, reader);
-  if (phase === 'review') {
-    const token = execFileSync('gh', ['auth', 'token'], {encoding: 'utf8', maxBuffer: 16384}).trim();
-    outputs = await freezeReview({repo: config.repo, number: config.pr_number, expectedHead: config.head_sha, api: githubAPI(token), reader});
-  }
   console.log(JSON.stringify(publish(root, destination, outputs, {phase, config_sha256: digest(raw)}, flags.includes('--resume'), reader.budget)));
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main(process.argv.slice(2)).catch(error => { console.error(error.message); process.exitCode = 1; });

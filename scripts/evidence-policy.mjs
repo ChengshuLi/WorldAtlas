@@ -6,6 +6,10 @@ export function loadEvidencePolicy() {
 }
 export function evidenceRequirement(issue, spec, policy = loadEvidencePolicy(), branch) {
   if (policy.version !== 1 || !['report-only', 'enforce-new'].includes(policy.mode)) throw Error('Unsupported evidence policy');
+  // Code review and applicable tests use Git's exact diff. A scientific contract
+  // is required only when the issue actually declares scientific evidence.
+  if (spec.mode === 'engineering' && spec.evidence_quality === undefined) return {required: false,
+    decision: 'Engineering uses the Git diff, applicable tests and substantive exact-head review'};
   const created = Date.parse(issue.created_at), activation = Date.parse(policy.activation_time);
   if (policy.mode === 'enforce-new' && (!Number.isFinite(created) || !Number.isFinite(activation))) throw Error('Missing evidence activation/issue timestamp');
   const legacy = policy.mode === 'enforce-new' && created < activation;

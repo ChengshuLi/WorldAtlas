@@ -1,10 +1,31 @@
 # Trusted evidence and independent premerge review
 
-This is a preventive gate, not proof that every fact is true. Read `EVIDENCE_QUALITY.md` and, for geographic measurements or generators, `EVIDENCE_GEOGRAPHY_HELPERS.md`. CI reads immutable Git blobs with trusted base code and a read-only token; it never executes a packet's reproduction commands. The merge queue repeats byte checks using trusted main, then requires a separate worker's review of the exact head. Existing regional approval, import and publisher gates remain in force.
+This is a preventive gate, not proof that every fact is true. Read `EVIDENCE_QUALITY.md` and, for geographic measurements or generators, `EVIDENCE_GEOGRAPHY_HELPERS.md`. CI reads immutable Git blobs with trusted base code and a read-only token; it never executes a packet's reproduction commands. The integration workflow repeats applicable scientific byte checks using trusted main. Every PR still needs a separate worker's substantive review of its exact head. Existing regional approval, import and publisher gates remain in force.
 
-## Issue creation and rollout
+## Ordinary engineering and scientific evidence
 
-`.github/evidence-policy.json` is authoritative. Initially `report-only` reports failures without changing existing merge rules. Activation changes it to `enforce-new` with an explicit UTC timestamp. Issues created before that timestamp retain their original scopes unless they explicitly adopt `evidence_quality`. This exception preserves completed evidence and currently claimed work; it does not endorse legacy findings. The inventory records current claims, open PRs and decisions; deficiencies remain bounded corrective work under #624, not silent invalidation or blanket geographic approval. New issues must declare this additive field inside their existing `worldatlas-work:v1` JSON:
+Ordinary code, documentation, tooling and tested delivery metadata use the actual
+Git diff, applicable tests and a substantive review comment naming the exact head
+and distinct reviewer. They need no `evidence_quality` declaration, synthetic
+scientific manifest, duplicated file/hash inventory, prose hashes or frozen review
+packet. The submitting operator reads the current head and review, resolves every
+outstanding objection and verifies the actual acceptance claims before dispatching
+the standard integration workflow. There is no comment parser or automatic review
+approval for this path. Shared-account reviewers are distinct agents, not distinct
+authenticated GitHub principals.
+
+Scientific source, geometry and release claims still need their actual supporting
+records, original identities/vintages, consumed-input/result bindings and substantive
+source interpretation. Declare a scientific manifest when the issue's result uses
+those bindings; engineering code changes do not acquire one merely by changing
+files. Unknown or changed consumed inputs still get the actual applicable checks.
+An explicitly declared manifest remains checked, including retained engineering
+contracts. Do not drop a scientific declaration to hide failed or missing proof.
+
+`.github/evidence-policy.json` preserves the original activation/legacy rules for
+geography and history work. Their new issues declare this field in the existing
+`worldatlas-work:v1` scope; older issues retain their original scopes unless they
+explicitly adopt it. Historical evidence and rollout inventories remain unchanged.
 
 ```json
 "evidence_quality": {
@@ -16,9 +37,9 @@ This is a preventive gate, not proof that every fact is true. Read `EVIDENCE_QUA
 }
 ```
 
-The example is a field fragment, not a replacement for max_prs, dependencies, mode or scope. `subject_ids` lists the exact geographic subjects if applicable; `pins` maps named release/scope/input hashes to actual baseline files. `review_kind` is `code`, `source`, `geometry` or `release`. Use geography's declared owned directory or history's campaign directory for those lanes. Engineering's `{job}` resolves to the branch ID, allowing a new owned manifest for each PR. A claim checks this declaration before implementation; it does not require an as-yet unwritten manifest. Missing issue creation timestamps cannot claim legacy status.
+The example is a field fragment, not a replacement for max_prs, dependencies, mode or scope. `subject_ids` lists the exact geographic subjects if applicable; `pins` maps named release/scope/input hashes to actual baseline files. `review_kind` is `code`, `source`, `geometry` or `release`. Use geography's declared owned directory or history's campaign directory for those lanes. Engineering's `{job}` resolves to the branch ID, allowing a new owned manifest for each PR. The issue declares these scientific bindings before implementation; an as-yet unwritten manifest is not required to begin authoring. Missing issue creation timestamps cannot claim legacy status.
 
-## Preparing each PR
+## Preparing declared scientific evidence
 
 Start with `coordination/templates/evidence-v1.json`, replace placeholders, and retain an immutable baseline. Run the shared byte validator and checks relevant to changed acceptance claims. Bind actual scientific inputs, sources and claimed results. Git already supplies the complete immutable code/test/doc diff: those files need no duplicate output descriptors merely because they changed. Source restoration instructions remain explicit limits. Do not overwrite original sources; make a new vintage. The manifest adds:
 
@@ -28,7 +49,7 @@ Start with `coordination/templates/evidence-v1.json`, replace placeholders, and 
 - Every method declares kind `code`, `source`, `geography`, `generator` or `measurement`. Geographic methods use `helper_version: "worldatlas-evidence-geometry-v1"` and the exact shared helper method policy. Generator methods use `kind: "generator"` and `helper_version: "worldatlas-evidence-preparation-v1"`. Measurement methods use `kind: "measurement"`.
 - `validation` is optional retained control evidence, not a requirement to create JSON wrappers for tests. Applicable positive/adverse tests still establish changed behavior and independent review checks their substance. Cite actual test output in the PR/review; reuse applicable unchanged tests. Repeat a full execution only when needed for a changed repeatability claim, invalidated evidence or explicit acceptance. If supplied, each row has `method_id`, `kind`, `outcome: "passed"`, and `evidence_path` referring to a hashed JSON output with the same first three fields. Reproducibility outputs also record equal `run_one_sha256` and `run_two_sha256`. Review must assess whether checks are meaningful; typed receipts cannot prove an experiment was honestly performed. Omitting optional metadata never authorizes hiding a failed check or claiming unverified correctness.
 
-The gate checks scientific file hashes, subjects, supported vintages, method policy and result bindings; complete Git change accounting and exact-head review remain required. Existing v1 manifests/receipts remain supported, with supplied optional fields validated rather than silently ignored. Ordinary input/decompressed files are bounded to 32 MiB, declared bytes to 256 MiB and descriptors to 512; remote Git trees must be complete. Larger datasets need reviewed partitioning rather than disabled checks. A premerge manifest cannot certify a deployment or geographic approval. Initial research may be complete with unresolved facts; it cannot close a correction that remains unresolved.
+The gate checks scientific file hashes, subjects, supported vintages, method policy and result bindings; complete Git change accounting and exact-head review remain required. Existing v1 scientific manifests remain supported, including validation of their supplied optional scientific fields. Ordinary input/decompressed files are bounded to 32 MiB, declared bytes to 256 MiB and descriptors to 512; remote Git trees must be complete. Larger datasets need reviewed partitioning rather than disabled checks. A premerge manifest cannot certify a deployment or geographic approval. Initial research may be complete with unresolved facts; it cannot close a correction that remains unresolved.
 
 ### Multiple historical file vintages
 
@@ -122,11 +143,11 @@ A review sub-agent in the author's chat is permitted. It provides a separate exa
 
 Copy-ready task (replace placeholders):
 
-> Review PR URL at exact HEAD_SHA for ISSUE_URL. Read AGENTS.md, docs/WORKER_COORDINATION.md, docs/LOCAL_WORKSPACES.md, docs/AUTHOR_PREFLIGHT.md, docs/AUDIT_FAILURE_PREVENTION.md and docs/PREMERGE_EVIDENCE_REVIEW.md from current main, plus relevant lane/data contracts. Follow consequential claims through their actual inputs, computation, report/control writers and final evidence. Select independent bounded probes for applicable field/unit transfer, comparison products, writer safety, combined budgets and inherited/source claims; distinguish executed checks from unavailable full-source/GIS proof in the existing domain scope. Use API/blob inspection without a checkout when sufficient; when local execution is needed, use the managed sparse detached review slot, include all required inputs, check disk before reproduction, and release the slot when the review is durably posted. Inspect every changed file and renamed original, linked acceptance criteria, actual sources/methods/controls, evidence manifest MANIFEST_PATH, checks and identity/history/release preservation. Inspect author claims and CI evidence independently. Reuse applicable retained tests instead of repeating unchanged expensive executions or creating ceremonial control files; renew relevant review for changed inputs/behavior. Use a unique reviewer worker ID distinct from AUTHOR_WORKER_ID. Do not claim the issue or edit/merge/deploy/import. Report specific findings and actual validation limits. When the required review domains are accepted, post the worldatlas-review:v1 receipt on the PR tied to the exact head and manifest hash; use accepted-with-limits only where policy permits it. If access or evidence prevents acceptance, report the blocker without fabricating a receipt.
+> Review PR URL at exact HEAD_SHA for ISSUE_URL. Read AGENTS.md, docs/WORKER_COORDINATION.md, docs/LOCAL_WORKSPACES.md, docs/AUTHOR_PREFLIGHT.md, docs/AUDIT_FAILURE_PREVENTION.md and docs/PREMERGE_EVIDENCE_REVIEW.md from current main, plus relevant lane/data contracts. Follow consequential claims through their actual inputs, computation, report/control writers and final evidence. Select independent bounded probes for applicable field/unit transfer, comparison products, writer safety, combined budgets and inherited/source claims; distinguish executed checks from unavailable full-source/GIS proof in the existing domain scope. Use API/blob inspection without a checkout when sufficient; when local execution is needed, use the managed sparse detached review slot, include all required inputs, check disk before reproduction, and release the slot when the review is durably posted. Inspect every changed file and renamed original, linked acceptance criteria, actual sources/methods/controls, evidence manifest MANIFEST_PATH, checks and identity/history/release preservation. Inspect author claims and CI evidence independently. Reuse applicable retained tests instead of repeating unchanged expensive executions or creating ceremonial control files; renew relevant review for changed inputs/behavior. Use a unique reviewer worker ID distinct from AUTHOR_WORKER_ID. Do not claim the issue or edit/merge/deploy/import. Report specific findings and actual validation limits. For ordinary engineering, post the substantive exact-head review as an ordinary comment. When a declared scientific manifest needs review, post the worldatlas-review:v1 receipt tied to the exact head and manifest hash; use accepted-with-limits only where policy permits it. If access or evidence prevents acceptance, report the blocker without fabricating a receipt.
 
-The author addresses findings and requests review of any updated head before using the normal merge queue. Authors reconcile the latest current-head receipt from every reviewer before submission; acceptance by one reviewer cannot override another reviewer's unresolved changes-requested receipt. A new head requires renewed relevant review of earlier objections, not merely reliance on their previous-head receipts becoming ineligible. Scoped resolution comments do not replace the required whole-PR acceptance. If no review sub-agent is available, ask another available worker on the PR. Record unavailable review/access on the linked issue; continue independent work within the existing claim if possible, otherwise leave a durable checkpoint and safely release or hand over. Do not ask the user to manually launch a reviewer when an available review agent can do it. No reviewer means no merge, not an exception or a self-review under another ID.
+The author addresses findings and requests review of any updated head before using the normal merge queue. Authors reconcile the latest current-head review from every reviewer before submission; acceptance by one reviewer cannot override another reviewer's unresolved changes-requested receipt. A new head requires renewed relevant review of earlier objections, not merely reliance on their previous-head receipts becoming ineligible. Scoped resolution comments do not replace the required whole-PR acceptance. If no review sub-agent is available, ask another available worker on the PR. Record unavailable review/access on the linked issue; continue independent work within the existing owned scope if possible, otherwise leave a durable checkpoint and safely release or hand over. Do not ask the user to manually launch a reviewer when an available review agent can do it. No reviewer means no merge, not an exception or a self-review under another ID.
 
-Post one `worldatlas-review:v1` JSON comment on the PR, using the template below. Repository owner/member/collaborator comments qualify. All workers may share one GitHub account: distinct worker IDs are cooperative accountability, not authenticated independent security principals. Never invent a second ID for self-review. Relevant geometry/release/identity changes and the issue's review_kind require substantive domain reviews even when the author labels a PR differently. Posting a receipt does not itself certify regional approval.
+For a declared scientific manifest, post one `worldatlas-review:v1` JSON comment using the template below. Ordinary engineering uses the plain review described above. Repository owner/member/collaborator comments qualify. All workers may share one GitHub account: distinct worker IDs are cooperative accountability, not authenticated independent security principals. Never invent a second ID for self-review. Relevant geometry/release/identity changes and the issue's review_kind require substantive domain reviews even when the author labels a PR differently. Posting a receipt does not itself certify regional approval.
 
 ```text
 <!-- worldatlas-review:v1
@@ -137,8 +158,6 @@ Post one `worldatlas-review:v1` JSON comment on the PR, using the template below
   "manifest_sha256": "REPLACE_WITH_RAW_MANIFEST_FILE_SHA256",
   "author_worker_id": "actual-author-worker",
   "reviewer_worker_id": "distinct-review-worker",
-  "inspected_files": ["every changed file and renamed original path"],
-  "evidence_hashes": ["every unique baseline/source/output whole-file SHA256"],
   "outcome": "accepted",
   "limits": [],
   "domains": {
@@ -151,40 +170,7 @@ Post one `worldatlas-review:v1` JSON comment on the PR, using the template below
 -->
 ```
 
-Only needed domains are required; do not claim a review you did not perform. The latest receipt from each worker for the current head is authoritative; any unresolved changes-requested outcome blocks. New commits invalidate reviews even if they only update main. The queue rereads the head, current checks, issue contract, actual files/bytes and receipts before a SHA-guarded squash merge. It preserves the soft 1,000 non-test-line review target. No provider changes, token rotation, deployment or live import occurs as part of this gate.
-
-### Complete inventory commitments for large reviews
-
-When the two literal inventory arrays would exceed GitHub's comment limit, omit
-both `inspected_files` and `evidence_hashes` and provide this optional field:
-
-```json
-"inventory_commitment": {
-  "version": 1,
-  "inspected_files": {"count": 470, "sha256": "REPLACE_WITH_COMPLETE_PATH_LIST_SHA256"},
-  "evidence_hashes": {"count": 481, "sha256": "REPLACE_WITH_COMPLETE_EVIDENCE_HASH_LIST_SHA256"}
-}
-```
-
-These counts are examples, not an allowed scope. For each list, deduplicate the
-strings, sort them with JavaScript's default `.sort()`, and hash the UTF-8 bytes of
-`JSON.stringify(sortedUniqueStrings)` with SHA-256, without a trailing newline.
-The path list includes every complete GitHub changed filename and every rename's
-`previous_filename`. The evidence list includes every unique raw-file SHA-256 in
-the authenticated manifest's baseline files, outputs and source files. Counts
-are the respective unique list lengths. `reviewInventoryCommitment({files,
-manifest})` computes this format from those complete trusted inputs.
-
-The reviewer must still actually inspect every changed file, renamed original
-and evidence body and write the same substantive domain review and limitations.
-A commitment is compact accounting, not proof of inspection or approval. Never
-derive it from an author's abbreviated roster or an external mutable review
-artifact. The normal premerge and queue validator derives both complete lists
-independently and requires exact count/hash equality. Mixed literal/commitment
-forms, partial fields and unsupported versions are rejected. Existing literal
-receipts keep their behavior; exact head, distinct identity, acceptance/body
-bindings, unresolved-review refusal, evidence budgets and all domain/limit gates
-remain unchanged.
+Only needed domains are required; do not claim a review you did not perform. The latest receipt from each worker for the current head is authoritative; any unresolved changes-requested outcome blocks. New commits invalidate reviews even if they only update main. The standard integration workflow rereads the head, current checks, issue contract, actual files/bytes and applicable scientific receipts before a SHA-guarded squash merge. It preserves the soft 1,000 non-test-line review target. No provider changes, token rotation, deployment or live import occurs as part of this gate.
 
 ## Activation proof and limitations
 
@@ -192,11 +178,16 @@ Activation must follow a merged reporting implementation, actual hosted report r
 
 Regression controls reflect concrete moderator findings: #579's malformed hierarchy pin, #580's swapped longitude/latitude transform, #600's conflicting narrative/generated figures, #614's overwritten timestamp-dependent extracts, and #619's inferred containing-file inventory. The manifest and shared-helper tests cover their failure patterns without special country rules. #591's restoration-pin mismatch additionally motivates independent provenance review: a hash alone cannot establish which upstream release exists. These safeguards do not close the individual source/correction issues.
 
-## Acceptance and disposition binding
+## Acceptance and disposition
 
 Read ISSUE_LIFECYCLE.md. Review the original acceptance and PR completion/continuation/wait independently of implementation acceptance. Before a final allowed partial PR, check where actual unfinished obligations go; an explicit original-issue wait is valid and no duplicate follow-up is forced. Initial research may close with permitted unknowns; correction/production acceptance may not.
 
-For PRs created on or after `.github/evidence-policy.json` review_contract_activation_time, add `issue_contract_sha256` and `pr_body_sha256` to the existing worldatlas-review:v1 receipt. Calculate them with `reviewContractBinding(issue, pr)` from scripts/premerge-evidence.mjs using the current GitHub issue and PR. The hash binds normalized issue acceptance prose and canonical work contract plus normalized PR body. Inspect the actual acceptance/disposition before accepting; a hash alone is not semantic approval. Source/geometry/release gates are unchanged. Ordinary issue/PR progress comments do not invalidate these bindings. Substantive body/scope/linkage/closure changes require a renewed exact-head receipt. Older PRs preserve existing receipt compatibility; voluntarily bound receipts are always rechecked. No new handoff form is required.
+Review substantive acceptance, scope and completion/continuation changes directly;
+request renewed relevant review when they change. Ordinary progress comments do
+not invalidate a review. No duplicate issue/PR-body hashes or file-inventory
+commitments are required. The exact commit already identifies the reviewed code;
+scientific manifests bind the actual inputs and results. Preserve historical
+comments and records without copying their obsolete bookkeeping into new work.
 
 Read docs/AUDIT_FAILURE_PREVENTION.md on current main before the next job or review. Identify the consequential acceptance claims and independently test applicable consumed-input/code, identity/join, source/method, safe-reproduction, nonvacuous-control and operating-limit invariants. Use shared evidence helpers or an explicitly reviewed equivalent; reviewers derive expectations from original acceptance and independent records before relying on author tests. Exercise real entry points and adjacent paths for corrective PRs; record unexecuted proof as a limit. Keep exact-head review, original evidence, scientific/publication gates and focused research CI. Adoption requires actual subsequent handoffs, not just this prompt edit.
 

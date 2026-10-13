@@ -11,9 +11,6 @@ import {execFileSync} from 'node:child_process';
 import {createAcquisition} from './geography-prefetch.mjs';
 import {performance} from 'node:perf_hooks';
 import {candidateBudget} from './native-ownership/native-preparation-guards.mjs';
-import {checkPremergeEvidence, reviewContractBinding} from './premerge-evidence.mjs';
-import {githubPages, verifyIssueScope, workSpec} from './issue-claim-contract.mjs';
-import {validateIssuePRBody} from './check-handoff-scope.mjs';
 import {createHash} from 'node:crypto';
 
 const need = (value, message) => { if (!value) throw Error(message); };
@@ -419,7 +416,7 @@ export function readAdvanceStatus(journal) {
   const queuePath = path.join(journal.stateTarget, 'queue-submission.json');
   const queue_submission = fs.existsSync(queuePath) ? JSON.parse(journalFile(journal, queuePath)) : null;
   const refreshPath = path.join(journal.stateTarget, 'pr-base-refresh.json');
-  const refresh = fs.lstatSync(refreshPath, {throwIfNoEntry: false}) ? readBaseRefreshIntent(journal, refreshPath) : null;
+  const refresh = fs.lstatSync(refreshPath, {throwIfNoEntry: false}) ? JSON.parse(journalFile(journal, refreshPath)) : null;
   const pr_base_refresh = refresh ? {repo: refresh.repo, pr_number: refresh.pr_number, head_sha: refresh.before.head.sha,
     main_sha: refresh.main_sha, last_observation: events.filter(e => e.kind === 'pr-base-refresh').at(-1) ?? null} : null;
   return {version: 1, queue_submission, pr_base_refresh, completed: completed.map(e => e.stage), waiting: !resolved && last?.status === 'waiting' ? last : null,
@@ -508,178 +505,6 @@ export async function prepareAdvanceStage(journal, id, phase, config, produce, {
     completed_at: new Date(journal.now()).toISOString()};
   writeJournal(journal, eventPath, bytes(event));
   return {stage: id, resumed: false};
-}
-
-function refreshSnapshot(pr, repo, number) {
-  need(repo === 'ChengshuLi/WorldAtlas' && Number.isSafeInteger(number) && number > 0
-    && pr?.number === number && pr.state === 'open' && typeof pr.draft === 'boolean' && typeof pr.body === 'string'
-    && /^[a-f0-9]{40}$/.test(pr.head?.sha ?? '') && typeof pr.head?.ref === 'string' && pr.head.ref.length > 0
-    && pr.head.repo?.full_name === repo && /^[a-f0-9]{40}$/.test(pr.base?.sha ?? '')
-    && pr.base.ref === 'main' && pr.base.repo?.full_name === repo,
-  'Base refresh requires a complete open same-repository PR already targeting main');
-  return {number, state: pr.state, draft: pr.draft, body: pr.body,
-    head: {sha: pr.head.sha, ref: pr.head.ref, repo: {full_name: pr.head.repo.full_name}},
-    base: {sha: pr.base.sha, ref: pr.base.ref, repo: {full_name: pr.base.repo.full_name}}};
-}
-
-function readBaseRefreshIntent(journal, filename) {
-  const intent = JSON.parse(journalFile(journal, filename));
-  need(intent.version === 1 && intent.kind === 'delivery-pr-base-refresh-v1'
-    && /^[a-f0-9]{40}$/.test(intent.main_sha ?? '') && Number.isFinite(Date.parse(intent.created_at))
-    && equal(refreshSnapshot(intent.before, intent.repo, intent.pr_number), intent.before)
-    && intent.before.base.sha !== intent.main_sha, 'Invalid original base refresh intent');
-  return intent;
-}
-
-// A durable intent permits exactly one PATCH attempt in its creating invocation.
-// Existing intents are always read-only, including a crash before the call. The
-// ordinary API cannot atomically guard all PR fields: verify them immediately
-// before and after, and never claim protection against out-of-band writers.
-export async function refreshReviewBase(journal, review, {api, refresh, interrupt = () => {}}) {
-  need(review?.repo === 'ChengshuLi/WorldAtlas' && Number.isSafeInteger(review.pr_number) && review.pr_number > 0,
-    'Exact named repository and PR required for base refresh');
-  readAdvanceStatus(journal);
-  const route = `/repos/${review.repo}`, filename = path.join(journal.stateTarget, 'pr-base-refresh.json');
-  const resuming = Boolean(fs.lstatSync(filename, {throwIfNoEntry: false}));
-  let intent = resuming ? readBaseRefreshIntent(journal, filename) : null;
-  if (intent) need(intent.repo === review.repo && intent.pr_number === review.pr_number,
-    'Existing base refresh intent belongs to another PR');
-  else need(review.refresh_base_metadata === true, 'Explicit review.refresh_base_metadata is required');
-  const initial = await api(`${route}/pulls/${review.pr_number}`);
-  const before = refreshSnapshot(initial, review.repo, review.pr_number);
-  // Capture actual main once. Never chase a moving target or infer it from the PR.
-  const target = await api(`${route}/git/ref/heads/main`);
-  need(target?.ref === 'refs/heads/main' && target.object?.type === 'commit'
-    && /^[a-f0-9]{40}$/.test(target.object.sha ?? ''), 'Cannot prove the actual target-main ref');
-  const main = target.object.sha;
-  const observation = (result, mutation) => ({status: 'external', kind: 'pr-base-refresh', repo: review.repo,
-    pr_number: review.pr_number, head_sha: intent?.before.head.sha ?? before.head.sha, main_sha: intent?.main_sha ?? main,
-    ...(intent ? {intent_sha256: hash(bytes(intent))} : {}), result, mutation});
-  if (intent) {
-    const expected = {...intent.before, base: {...intent.before.base, sha: intent.main_sha}};
-    const verified = main === intent.main_sha && equal(before, expected);
-    observeAdvance(journal, observation(verified ? 'verified' : 'unresolved', 'observation-only'));
-    need(verified, 'Original base refresh is unresolved or PR/main state changed; preserve intent and reconcile without another PATCH');
-    return initial;
-  }
-  if (before.base.sha === main) {
-    observeAdvance(journal, observation('unchanged', 'none'));
-    return initial;
-  }
-  need(typeof refresh === 'function', 'Authorized base refresh adapter is unavailable');
-  const current = await api(`${route}/pulls/${review.pr_number}`);
-  need(equal(refreshSnapshot(current, review.repo, review.pr_number), before), 'PR state changed before base refresh');
-  intent = {version: 1, kind: 'delivery-pr-base-refresh-v1', repo: review.repo, pr_number: review.pr_number,
-    before, main_sha: main, created_at: new Date(journal.now()).toISOString()};
-  // Reserve the bounded outcome before dispatch; its actual durable write is
-  // also accounted by the ordinary observation writer. Full API responses are
-  // excluded; the intent retains only the exact identity/body fields above.
-  journal.budget.add({bytes: bytes({...observation('unresolved', 'observation-only'), observed_at: intent.created_at}).length});
-  writeJournal(journal, filename, bytes(intent));
-  interrupt('intent');
-  let mutation = 'returned';
-  try { await refresh(review.repo, review.pr_number); } catch { mutation = 'uncertain'; }
-  interrupt('mutation');
-  let after, verified = false;
-  try {
-    after = await api(`${route}/pulls/${review.pr_number}`);
-    verified = equal(refreshSnapshot(after, review.repo, review.pr_number), {...before, base: {...before.base, sha: main}});
-  } catch { /* An incomplete readback is an unresolved external outcome. */ }
-  observeAdvance(journal, observation(verified ? 'verified' : 'unresolved', mutation));
-  need(verified, 'Base refresh readback could not prove unchanged PR state and exact captured main; reconcile without another PATCH');
-  return after;
-}
-
-// Only this narrow opt-in adapter supplies a write method, with no readiness,
-// branch, title or body fields. The existing queue read adapter is unchanged.
-export function deliveryBaseRefreshAPI(api) {
-  return (repo, number) => {
-    need(repo === 'ChengshuLi/WorldAtlas' && Number.isSafeInteger(number) && number > 0, 'Invalid base refresh target');
-    return api(`/repos/${repo}/pulls/${number}`, 'PATCH', {base: 'main'});
-  };
-}
-
-export async function nextReviewStage(journal, review, reader, adapters) {
-  need(review && (review.refresh_base_metadata === undefined || typeof review.refresh_base_metadata === 'boolean'),
-    'review.refresh_base_metadata must be an explicit boolean');
-  const done = readAdvanceStatus(journal).completed.includes('review');
-  const hasIntent = Boolean(fs.lstatSync(path.join(journal.stateTarget, 'pr-base-refresh.json'), {throwIfNoEntry: false}));
-  const pr = !done && (review.refresh_base_metadata === true || hasIntent)
-    ? await refreshReviewBase(journal, review, {api: adapters.api, refresh: adapters.refreshBase})
-    : await adapters.api(`/repos/${review.repo}/pulls/${review.pr_number}`);
-  const input = {repo: review.repo, number: review.pr_number, expectedHead: pr.head.sha};
-  if (done) {
-    need(equal(journalJSON(journal, '.', stageNames('review').intent).config, input), 'Completed stage inputs changed: review');
-    return {queue: journalJSON(journal, 'review', 'review-packet.json')};
-  }
-  return {id: 'review', phase: 'review', input,
-    produce: () => adapters.freezeReview({...input, expectedPR: pr, api: adapters.api, reader})};
-}
-
-// The same live evidence gate used by the queue resolves the independently
-// authored receipt. A local accepted:true field is never an approval input.
-export async function acceptedReview(packet, api) {
-  const route = `/repos/${packet.repo}`, pr = await api(`${route}/pulls/${packet.pr_number}`);
-  const state = value => [value.number, value.state, value.draft, value.head.sha, value.head.ref, value.head.repo?.full_name,
-    value.base.sha, value.base.ref, value.base.repo?.full_name, value.changed_files];
-  need(pr.number === packet.pr_number && pr.state === 'open' && !pr.draft
-    && pr.head.sha === packet.head_sha && pr.base.sha === packet.base_sha
-    && pr.head.repo?.full_name === packet.repo && pr.base.repo?.full_name === packet.repo && pr.base.ref === 'main'
-    && validateIssuePRBody(pr.body).github_issue === packet.issue.number, 'Review head/base/readiness changed');
-  const issue = await api(`${route}/issues/${packet.issue.number}`);
-  need(equal(reviewContractBinding(issue, pr), {issue_contract_sha256: packet.issue_contract_sha256,
-    pr_body_sha256: packet.pr_body_sha256}), 'Frozen review acceptance/body changed');
-  const currentReservation = async (currentIssue, currentPR) => verifyIssueScope({branch: currentPR.head.ref, issue: currentIssue});
-  const reservation = await currentReservation(issue, pr);
-  const files = await githubPages(api, `${route}/pulls/${pr.number}/files`);
-  need(equal(files, packet.files) && files.length === pr.changed_files, 'Frozen review file inventory changed');
-  const checked = await checkPremergeEvidence({api, repo: packet.repo, pr, issue, reservation, files, review: true});
-  need(['bytes-verified', 'limited'].includes(checked.status) && checked.review?.comment_id
-    && checked.manifest_sha256 === packet.manifest.sha256, 'Genuine independent acceptance required');
-  // Recheck ownership, scope, blockers and dependencies after the potentially
-  // long evidence traversal. Benign lease renewals retain the canonical identity.
-  const after = await api(`${route}/pulls/${pr.number}`), currentIssue = await api(`${route}/issues/${issue.number}`);
-  need(equal([state(after), reviewContractBinding(currentIssue, after)],
-    [state(pr), reviewContractBinding(issue, pr)]), 'Review changed during queue preparation');
-  const afterReservation = await currentReservation(currentIssue, after);
-  need(equal(afterReservation, reservation), 'Author claim/scope changed during queue preparation');
-  return {review_comment_id: checked.review.comment_id, reviewer_worker_id: checked.review.reviewer,
-    repo: packet.repo, pr_number: pr.number, head_sha: pr.head.sha, base_sha: pr.base.sha,
-    issue_contract_sha256: packet.issue_contract_sha256, pr_body_sha256: packet.pr_body_sha256,
-    manifest_sha256: checked.manifest_sha256};
-}
-
-// Preserve submission identity before the one direct Actions dispatch.
-export async function advanceQueue(journal, packet, {api, submit, authorizeSubmission = false,
-  checkReview = acceptedReview}) {
-  need(packet.repo === 'ChengshuLi/WorldAtlas', 'Use the existing named-repository queue');
-  const filename = path.join(journal.stateTarget, 'queue-submission.json');
-  let intent, resuming = false;
-  if (fs.existsSync(filename)) {
-    intent = JSON.parse(journalFile(journal, filename)); resuming = true;
-    need(intent.repo === packet.repo && intent.pr_number === packet.pr_number && intent.head_sha === packet.head_sha
-      && /^[-a-zA-Z0-9]{16,100}$/.test(intent.request_id), 'Existing submission identity belongs to another target');
-  } else {
-    const acceptance = await checkReview(packet, api);
-    if (!authorizeSubmission) return {status: 'ready-for-queue', acceptance,
-      next: 'Use advance with --submit-queue for this exact independently accepted head.'};
-    intent = {version: 1, ...acceptance, request_id: randomUUID(), created_at: new Date(journal.now()).toISOString()};
-    writeJournal(journal, filename, bytes(intent));
-  }
-  if (!resuming) await submit({number: intent.pr_number, head: intent.head_sha,
-    requestId: intent.request_id, timeoutMs: 20_000});
-  // An existing intent is read-only, including uncertain dispatch. Standard
-  // Actions run list/view/watch owns execution status; PR state owns completion.
-  const pr = await api(`/repos/${intent.repo}/pulls/${intent.pr_number}`);
-  need(pr.head?.sha === intent.head_sha, 'PR head changed; obtain fresh exact-head review');
-  const accepted = pr.merged === true && /^[a-f0-9]{40}$/.test(pr.merge_commit_sha ?? '');
-  const result = {accepted, status: accepted ? 'merged' : 'pending', request_id: intent.request_id,
-    ...(accepted ? {merge_commit: pr.merge_commit_sha} : {next:
-      `Inspect the Actions run named "merge #${intent.pr_number} ${intent.request_id}" with gh run list/view/watch. ` +
-      'Workflow success alone is not a merge. Reconcile failed/canceled runs and the actual PR before a fresh dispatch; ' +
-      'GitHub queues at most 100 pending runs and cancels overflow.'})};
-  observeAdvance(journal, {status: 'external', kind: 'queue', request_id: intent.request_id, result});
-  return result;
 }
 
 // A publication locator suffices to discover actual facts/request and all
@@ -949,10 +774,7 @@ export async function nextDeliveryStage(journal, config, reader, adapters) {
   if (config.resume_finalized) {
     need(!config.completed_delivery && !config.prepared_stages, 'Choose one unambiguous receipt continuation route');
     qualifyFinalizedCheckpoint(recipe, config.resume_finalized, reader, adapters);
-    if (adapters.beforeReview) await adapters.beforeReview();
-    if (!config.review) return {waiting: {status: 'waiting', stage: 'review', kind: 'publication-review',
-      detail: 'Existing finalized receipt qualified without replay; publish the actual author head/PR for independent review.'}};
-    return nextReviewStage(journal, config.review, reader, adapters);
+    return {complete: true, status: 'prepared', next: 'Publish the actual author head, obtain substantive independent review, then dispatch the standard worker workflow.'};
   }
   const {done, completed, prepare, wait} = deliveryTransitions(journal, config);
   if (!done.has('recipe')) return prepare('recipe', 'recipe', {recipe: recipePin}, () => materializeRecipe(recipe, reader).products);
@@ -1074,9 +896,7 @@ async function nextAuthorityDelivery(journal, config, reader, adapters, recipe, 
   const final = {...projection, sidecar, selected_ledger: selected, selector: locate(reader, recipe.selector), package_inputs: locate(reader, recipe.package_inputs)};
   if (observed.restored_read_roles) final.restored_read_roles = observed.restored_read_roles;
   if (!completed('finalize', final)) return prepare('finalize', 'finalize', final, () => adapters.finalizeDelivery(final, reader));
-  if (adapters.beforeReview) await adapters.beforeReview();
-  if (!config.review) return wait('review', 'publication-review', 'Publish the actual author head/PR; provide repository and PR number.');
-  return nextReviewStage(journal, config.review, reader, adapters);
+  return {complete: true, status: 'prepared', next: 'Publish the actual author head, obtain substantive independent review, then dispatch the standard worker workflow.'};
 }
 
 // Existing-contract constructor, scoped to avoid mixing scientific identities.
@@ -1882,7 +1702,7 @@ export function automaticDeliveryObservations(journal, config) {
 
 // A finite sequence of the existing transitions, not a new execution scheduler.
 // Scientific terminals, assembly, independent review and permission stay gates.
-export async function runAutomaticDelivery(journal, config, reader, adapters, {validate, beforePublication, queue, nextStage = nextDeliveryStage,
+export async function runAutomaticDelivery(journal, config, reader, adapters, {validate, beforePublication, nextStage = nextDeliveryStage,
   commitStage = commitAdvanceStage, apiWaitMilliseconds = () => 0} = {}) {
   journal.reader = reader;
   need(typeof validate === 'function', 'Automatic delivery requires current author authority');
@@ -1899,15 +1719,13 @@ export async function runAutomaticDelivery(journal, config, reader, adapters, {v
   while (true) {
     const preparationStarted = performance.now(), apiBefore = apiWaitMilliseconds();
     const effective = automaticDeliveryObservations(journal, config);
-    const next = await nextStage(journal, effective, reader, {...adapters, beforeReview: checkPublication});
-    if (next.waiting || next.queue) {
+    const next = await nextStage(journal, effective, reader, adapters);
+    if (next.waiting || next.complete) {
       if (next.waiting?.kind === 'commit') throw Error('Unresolved automatic immutable commit boundary: ' + next.waiting.stage);
-      if (next.waiting?.kind === 'publication-review') {
-        await checkPublication();
-      }
+      if (next.complete) await checkPublication();
       observeAdvance(journal, {status: 'external', kind: 'automatic-invocation', started_at: startedAt, elapsed_ms: performance.now() - started,
-        prepared_stages: prepared, observed_commits: committed, barrier: next.waiting?.kind ?? 'independent-review-or-queue'});
-      return next.queue ? await queue(next.queue) : observeAdvance(journal, next.waiting);
+        prepared_stages: prepared, observed_commits: committed, barrier: next.waiting?.kind ?? 'prepared'});
+      return next.complete ? next : observeAdvance(journal, next.waiting);
     }
     need(!readAdvanceStatus(journal).completed.includes(next.id), 'Automatic transition failed to advance');
     await prepareAdvanceStage(journal, next.id, next.phase, next.input, next.produce,

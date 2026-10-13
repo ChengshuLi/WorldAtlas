@@ -48,7 +48,7 @@ Missing required proof prevents the corresponding completion claim. Limited evid
 may still advance a partial research PR when its acceptance permits those limits.
 Passing these checks grants no scientific approval, import or publication authority.
 New exact heads, evidence or substantive acceptance/disposition changes require renewed
-relevant review under the existing receipt binding; progress comments do not.
+relevant review of the actual head and consequential claims; progress comments do not.
 
 ## Follow a claim through the final evidence
 

@@ -145,75 +145,12 @@ export function validatePremergeManifest(manifest, {readFile, files, manifestPat
   return {...result, change_files_checked: files.length, metric_bindings_checked: bindings.length, record_checks_checked: recordChecks};
 }
 
-// Bind the reviewed acceptance contract and PR disposition, independently of
-// progress comments. JSON formatting/order and prose whitespace are immaterial.
-function stable(value){return Array.isArray(value)?value.map(stable):value&&typeof value==='object'?Object.fromEntries(Object.keys(value).sort().map(key=>[key,stable(value[key])])):value;}
-const normalize=body=>String(body??'').replace(/\s+/g,' ').trim();
-export function reviewContractBinding(issue,pr){
- const prose=String(issue.body??'').replace(/<!-- worldatlas-work:v1\s*\n([\s\S]*?)\n-->/g,'');
- return {issue_contract_sha256:sha256(JSON.stringify({issue:issue.number,scope:stable(workSpec(issue.body)),acceptance:normalize(prose)})),
-  pr_body_sha256:sha256(normalize(pr.body))};
-}
-export function reviewBindingRequired(pr,policy){
- if(!policy.review_contract_activation_time)return false;
- const activation=Date.parse(policy.review_contract_activation_time),created=Date.parse(pr.created_at);
- need(Number.isFinite(activation)&&Number.isFinite(created),'Missing review-binding activation/PR timestamp');
- return created>=activation;
-}
-
-// Canonical inventory bytes are UTF-8 JSON.stringify(sorted unique strings),
-// without a trailing newline. Expectations always come from complete trusted
-// GitHub changes and authenticated evidence, never the reviewer's abbreviated list.
-export function reviewInventoryCommitment({files, manifest}) {
-  const summarize = values => {
-    const sorted = [...new Set(values)].sort();
-    return {count: sorted.length, sha256: sha256(JSON.stringify(sorted))};
-  };
-  return {version: 1,
-    inspected_files: summarize(files.flatMap(file => [file.filename, file.previous_filename].filter(Boolean))),
-    evidence_hashes: summarize([...manifest.baseline.files, ...manifest.outputs,
-      ...manifest.sources.flatMap(source => source.files ?? [])].map(file => file.sha256))};
-}
-
-function validateReviewInventory(receipt, files, manifest) {
-  if (Object.hasOwn(receipt, 'inventory_commitment')) {
-    need(!Object.hasOwn(receipt, 'inspected_files') && !Object.hasOwn(receipt, 'evidence_hashes'),
-      'Review inventory cannot mix literal arrays and a commitment');
-    const actual = receipt.inventory_commitment;
-    const keys = (value, expected) => value && typeof value === 'object' && !Array.isArray(value) &&
-      JSON.stringify(Object.keys(value).sort()) === JSON.stringify(expected.sort());
-    need(keys(actual, ['version', 'inspected_files', 'evidence_hashes']) && actual.version === 1,
-      'Unsupported or partial review inventory commitment');
-    const expected = reviewInventoryCommitment({files, manifest});
-    for (const name of ['inspected_files', 'evidence_hashes']) {
-      const value = actual[name];
-      need(keys(value, ['count', 'sha256']) && Number.isSafeInteger(value.count) && value.count >= 0 &&
-        /^[a-f0-9]{64}$/.test(value.sha256 ?? ''), 'Malformed review inventory commitment');
-      need(value.count === expected[name].count && value.sha256 === expected[name].sha256,
-        `Review ${name} commitment differs from complete trusted inventory`);
-    }
-    return;
-  }
-  // Preserve the original literal receipt behavior.
-  const expectedFiles = [...new Set(files.flatMap(file => [file.filename, file.previous_filename].filter(Boolean)))].sort();
-  need(JSON.stringify([...(receipt.inspected_files ?? [])].sort()) === JSON.stringify(expectedFiles), 'Review omitted changed/renamed files');
-  const hashes = [...new Set([...manifest.baseline.files, ...manifest.outputs, ...manifest.sources.flatMap(source => source.files ?? [])].map(file => file.sha256))].sort();
-  need(JSON.stringify([...(receipt.evidence_hashes ?? [])].sort()) === JSON.stringify(hashes), 'Review evidence hashes differ');
-}
-
 /** Cooperative worker identities, not a security boundary between shared-account operators. */
-export function validateReviewReceipt(receipt, {pr, manifest, manifestHash, files, limits, author, reviewKind = 'code', issue, requireContractBinding = false}) {
+export function validateReviewReceipt(receipt, {pr, manifest, manifestHash, files, limits, author, reviewKind = 'code'}) {
   need(receipt?.version === 1 && receipt.pr_number === pr.number && receipt.head_sha === pr.head.sha &&
     receipt.manifest_sha256 === manifestHash && receipt.author_worker_id === author &&
     typeof receipt.reviewer_worker_id === 'string' && receipt.reviewer_worker_id.trim() && receipt.reviewer_worker_id !== author,
     'Review must bind exact head, manifest and a distinct worker identity');
-  if(requireContractBinding||receipt.issue_contract_sha256||receipt.pr_body_sha256){
-    need(issue,'Review contract binding needs the authoritative issue');
-    const binding=reviewContractBinding(issue,pr);
-    need(receipt.issue_contract_sha256===binding.issue_contract_sha256&&receipt.pr_body_sha256===binding.pr_body_sha256,
-      'Issue acceptance contract or PR disposition changed; obtain renewed exact-head review');
-  }
-  validateReviewInventory(receipt, files, manifest);
   need(receipt.outcome === 'accepted' && Array.isArray(receipt.limits) && limits.every(limit => receipt.limits.includes(limit)), 'Review rejected work or omitted verification limits');
   const required = ['implementation'];
   if (reviewKind !== 'code') required.push(reviewKind === 'source' ? 'source' : reviewKind);
@@ -269,7 +206,7 @@ export async function checkPremergeEvidence({api, repo, pr, issue, reservation, 
   try {
     const spec = workSpec(issue.body);
     requirement = evidenceRequirement(issue, spec, policy, pr.head.ref);
-    if (!requirement.required) return {status: 'legacy-or-report-only', ...requirement, head_sha: pr.head.sha, limits: ['No versioned manifest was required or checked; no factual approval']};
+    if (!requirement.required) return {status: 'not-required', ...requirement, head_sha: pr.head.sha, limits: ['No scientific manifest was checked; substantive exact-head review and applicable tests remain required']};
     need(files.length === pr.changed_files, 'Incomplete PR change inventory');
     const initial = await remoteReader(api, repo, {candidate: pr.head.sha, base: pr.base.sha});
     const manifestBytes = await initial.load(requirement.manifestPath, 'candidate', 1024 * 1024);
@@ -315,7 +252,7 @@ export async function checkPremergeEvidence({api, repo, pr, issue, reservation, 
       const candidates = [...latest.values()].sort((a, b) => b.comment.id - a.comment.id);
       need(candidates.length, 'Missing independent exact-head review receipt');
       result.review = validateReviewReceipt(candidates[0].receipt, {pr, manifest, manifestHash: result.manifest_sha256, files,
-        limits: checked.limits, author: manifest.worker_id, reviewKind: requirement.quality.review_kind, issue, requireContractBinding:reviewBindingRequired(pr,policy)});
+        limits: checked.limits, author: manifest.worker_id, reviewKind: requirement.quality.review_kind});
       result.review.comment_id = candidates[0].comment.id;
     }
     return result;

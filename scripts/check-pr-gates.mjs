@@ -5,7 +5,6 @@ import {createHash} from 'node:crypto';
 import {performance} from 'node:perf_hooks';
 import {githubAPI, verifyIssueScope} from './issue-claim-contract.mjs';
 import {validateIssuePRBody} from './check-handoff-scope.mjs';
-import {reviewContractBinding} from './premerge-evidence.mjs';
 import {checkPREvidence} from './check-pr-evidence.mjs';
 import {checkLinkedIssue} from './check-linked-github-issue.mjs';
 import {selectIntegrationProfile} from './check-integration-profile.mjs';
@@ -70,7 +69,6 @@ export async function checkPRGates({event, repo, token, api, phase = 'all'}) {
   const issue = await read(issueRoute);
   if (issue.number !== github_issue) throw Error('Issue response belongs to another contract');
   verifyIssueScope({branch: current.head.ref, issue});
-  const binding = reviewContractBinding(issue, current);
   // Use the current authoritative body, not a possibly older edited-event body.
   const authoritativeEvent = {...event, pull_request: {...scheduled, body: current.body}};
   const evidence = phase === 'metadata' ? undefined : await checkPREvidence({event: authoritativeEvent, api: read});
@@ -90,11 +88,11 @@ export async function checkPRGates({event, repo, token, api, phase = 'all'}) {
   const [settled, finalIssue] = await completeReads([api(prRoute), api(issueRoute)]);
   assertHead(settled);
   if (settled.base?.sha !== current.base?.sha || finalIssue.number !== github_issue ||
-      JSON.stringify(reviewContractBinding(finalIssue, settled)) !== JSON.stringify(binding))
+      finalIssue.body !== issue.body || settled.body !== current.body)
     throw Error('PR base, acceptance contract or disposition changed during trusted gates');
   verifyIssueScope({branch: settled.head.ref, issue: finalIssue});
   return {status: 'checked', phase, head_sha: scheduled.head.sha, trusted_base: scheduled.base?.sha,
-    github_issue, pr_body: current.body ?? '', issue_binding: binding, evidence, linked,
+    github_issue, pr_body: current.body ?? '', evidence, linked,
     ...(regression ? {profile: regression.profile, shards: regression.shards,
       ...(regression.test_selection ? {test_selection: regression.test_selection, expectations_path: regression.expectations_path} : {}),
       owned_paths: linked.owned_paths ?? [], package: packageProfile} : {})};

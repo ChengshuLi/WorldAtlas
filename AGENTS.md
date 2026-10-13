@@ -45,7 +45,7 @@ Follow the delivery and proportionate-verification policy in docs/WORKER_COORDIN
 
 ## Evidence and independent review
 
-Follow `docs/PREMERGE_EVIDENCE_REVIEW.md` and the authoritative `.github/evidence-policy.json`. New work after activation declares exact subjects/pins and its owned manifest in the issue contract; legacy scopes remain preserved. Prepare versioned whole-file evidence, immutable scientific helper results and honest source/publication limits. Request a distinct worker's substantive review tied to the exact PR head; never self-review under a second worker ID. The queue rechecks evidence and review; green CI alone does not approve geography or authorize imports.
+Follow `docs/PREMERGE_EVIDENCE_REVIEW.md`. Ordinary engineering uses the actual Git diff, applicable tests and a distinct worker's substantive exact-head review comment; no synthetic evidence manifest, duplicate inventory, body hashes or frozen review packet is required. Scientific claims retain their actual subjects/pins, immutable input/result evidence and honest source/publication limits under `.github/evidence-policy.json`; explicitly declared manifests remain checked. Never self-review under a second worker ID. The submitting operator verifies current review before integration; green CI alone does not approve geography or authorize imports.
 
 ## Issue lifecycle accuracy
 
