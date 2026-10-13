@@ -4,10 +4,10 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {execFileSync} from 'node:child_process';
+import {execFileSync,spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {FROZEN_REVIEWED_HEAD, resolveFrozenPackageProgramme, requireSeparatedProofRoots,
-  requireActualAssembly, retainProofManifest, prepareFreshAssemblyScratch} from '../scripts/run-selected-package-proof.mjs';
+  requireActualAssembly, retainProofManifest, prepareFreshAssemblyScratch, recordFrozenChildDiagnostic} from '../scripts/run-selected-package-proof.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 const sourceHead = 'a'.repeat(40), acceptedHead = 'b'.repeat(40), tree = 'c'.repeat(40);
@@ -289,7 +289,7 @@ test('driver rejects stale output before genuine frozen CLI and isolates its fai
   const source = fs.readFileSync(new URL('../scripts/run-selected-package-proof.mjs', import.meta.url), 'utf8');
   const freshness = source.indexOf("Fresh frozen proof checkout required; prior output is not evidence");
   const child = source.indexOf("const child=spawnSync(");
-  const receipt = source.indexOf('const receiptRaw=fs.readFileSync(receiptPath)');
+  const receipt = source.indexOf('const receiptRaw=recordFrozenChildDiagnostic(');
   const comparison = source.indexOf('const comparison=compareSelectedPackageReadback(');
   const success = source.indexOf('`assembled=true');
   assert.ok(freshness > 0 && child > freshness && receipt > child && comparison > receipt && success > comparison);
@@ -322,4 +322,72 @@ test('fresh assembly scratch is created ordinarily and rejects stale files or da
   }
   fs.rmdirSync(path.join(root,'.cache'));fs.symlinkSync(path.join(root,'missing'),path.join(root,'.cache'));
   assert.throws(()=>prepareFreshAssemblyScratch(root),/Ordinary assembly scratch/);
+});
+
+
+test('real pre-receipt child failure logs and retains sanitized cause before missing receipt rejection',t=>{
+  const root=temporary(t);prepareFreshAssemblyScratch(root);
+  const secret='private-sentinel-value';
+  const child=spawnSync(process.execPath,['-e',`console.log(JSON.stringify({assembled:false,reason:'Original runtime differs '+process.env.TEST_DIAGNOSTIC_SECRET}));console.error('fetch https://example.invalid/signed?secret=hidden Bearer another-secret');process.exitCode=1;`],
+    {encoding:'utf8',env:{PATH:process.env.PATH,TEST_DIAGNOSTIC_SECRET:secret}});
+  child.options={env:{UNRELATED_PRIVATE_VALUE:'do-not-serialize-environment'}};
+  const logs=[];
+  assert.throws(()=>recordFrozenChildDiagnostic({child,sourceRoot:root,secret,log:text=>logs.push(text)}),/did not publish an ordinary receipt/);
+  const raw=fs.readFileSync(path.join(root,'.cache/selected-package-child-diagnostic.json'),'utf8'),record=JSON.parse(raw);
+  assert.equal(record.status,1);assert.match(record.stdout.text,/Original runtime differs/);
+  assert.match(record.stdout.text,/redacted/);assert.match(record.stderr.text,/delivery address/);
+  assert.equal(logs.length,1);assert.match(logs[0],/Original runtime differs/);
+  for(const leaked of [secret,'another-secret','secret=hidden','do-not-serialize-environment'])assert.ok(!raw.includes(leaked)&&!logs[0].includes(leaked));
+  assert.equal(fs.existsSync(path.join(root,'.cache/package-input-build.json')),false);
+});
+test('diagnostics preserve genuine receipt bytes but reject symlink receipts and remain non-success evidence',t=>{
+  for(const linked of [false,true]){
+    const root=temporary(t);prepareFreshAssemblyScratch(root);const receipt=path.join(root,'.cache/package-input-build.json');
+    const raw=Buffer.from('{"kind":"test-receipt-only"}');
+    if(linked){const outside=path.join(root,'outside');fs.writeFileSync(outside,raw);fs.symlinkSync(outside,receipt);}
+    else fs.writeFileSync(receipt,raw);
+    const child={status:1,signal:null,stdout:'{"assembled":false,"reason":"known failure"}',stderr:''};
+    const run=()=>recordFrozenChildDiagnostic({child,sourceRoot:root,log:()=>{}});
+    if(linked)assert.throws(run,/ordinary receipt/);else assert.deepEqual(run(),raw);
+    assert.match(JSON.parse(fs.readFileSync(path.join(root,'.cache/selected-package-child-diagnostic.json'))).semantics,/does not establish assembly/);
+  }
+});
+test('workflow retains only sanitized child diagnosis on failure without granting proof success',()=>{
+  const workflow=fs.readFileSync(new URL('../.github/workflows/selected-package-proof.yml',import.meta.url),'utf8');
+  const step=workflow.split('      - name: Retain frozen child execution diagnostic')[1].split('      - name:')[0];
+  assert.match(step,/if: always\(\)/);assert.match(step,/path: candidate\/\.cache\/selected-package-child-diagnostic\.json/);
+  assert.match(step,/if-no-files-found: ignore/);assert.doesNotMatch(step,/continue-on-error|package-input-build|selected-package-proof\.json/);
+});
+
+
+test('actual spawn, signal, timeout and output-limit failures retain first cause without an assembly receipt',t=>{
+  const cases=[
+    ['missing executable',()=>spawnSync('/definitely-absent-package-proof-command',[],{encoding:'utf8'}),'ENOENT'],
+    ['signal',()=>spawnSync(process.execPath,['-e',"console.error('signal-first-cause');process.kill(process.pid,'SIGTERM')"],{encoding:'utf8'}),null],
+    ['timeout',()=>spawnSync(process.execPath,['-e',"console.error('timeout-first-cause');setTimeout(()=>{},5000)"],{encoding:'utf8',timeout:150}),'ETIMEDOUT'],
+    ['output limit',()=>spawnSync(process.execPath,['-e',"process.stdout.write('output-first-cause '+ 'x'.repeat(131072))"],{encoding:'utf8',maxBuffer:1024}),'ENOBUFS']
+  ];
+  for(const [label,invoke,code]of cases){
+    const root=temporary(t);prepareFreshAssemblyScratch(root);const child=invoke(),logs=[];
+    assert.throws(()=>recordFrozenChildDiagnostic({child,sourceRoot:root,log:text=>logs.push(text)}),/did not publish/);
+    const diagnostic=JSON.parse(fs.readFileSync(path.join(root,'.cache/selected-package-child-diagnostic.json')));
+    assert.equal(diagnostic.error_code,code,label);assert.equal(logs.length,1,label);
+    if(label==='signal')assert.equal(diagnostic.signal,'SIGTERM');
+    if(label==='output limit'){assert.match(diagnostic.stdout.text,/output-first-cause/);assert.ok(diagnostic.stdout.text.length<9000);}
+    assert.throws(()=>requireActualAssembly(child,Buffer.from('{}'),sourceHead,1));
+  }
+});
+test('malformed receipts and unrelated failures preserve diagnostics without manufacturing proof success',t=>{
+  const root=temporary(t);prepareFreshAssemblyScratch(root);fs.writeFileSync(path.join(root,'.cache/package-input-build.json'),'{broken');
+  const child=spawnSync(process.execPath,['-e',"console.log(JSON.stringify({assembled:false,reason:'Scientific context differs beyond authenticated provenance'}));process.exitCode=1"],{encoding:'utf8'});
+  const raw=recordFrozenChildDiagnostic({child,sourceRoot:root,log:()=>{}});
+  assert.throws(()=>requireActualAssembly(child,raw,sourceHead,1),SyntaxError);
+  assert.ok(fs.existsSync(path.join(root,'.cache/selected-package-child-diagnostic.json')));
+});
+test('large diagnostic retains both first and final cause and reaches logs even if durable write fails',t=>{
+  const root=temporary(t);prepareFreshAssemblyScratch(root);const file=path.join(root,'.cache/selected-package-child-diagnostic.json');fs.writeFileSync(file,'preserved prior');
+  const logs=[],child={status:2,signal:null,stderr:'FIRST CAUSE '+ 'x'.repeat(20000)+' FINAL CAUSE',stdout:''};
+  assert.throws(()=>recordFrozenChildDiagnostic({child,sourceRoot:root,log:text=>logs.push(text)}),/EEXIST/);
+  assert.equal(fs.readFileSync(file,'utf8'),'preserved prior');assert.equal(logs.length,2);assert.match(logs[1],/persistence failed/);
+  assert.match(logs[0],/FIRST CAUSE/);assert.match(logs[0],/FINAL CAUSE/);assert.match(logs[0],/diagnostic middle omitted/);
 });

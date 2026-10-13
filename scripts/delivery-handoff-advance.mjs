@@ -1635,11 +1635,22 @@ export async function commitAdvanceStage(journal, stage, {validate, execute = ex
     const relative = `${journal.destination}/${stage}/${name}`, raw = journalBody(journal, stage, name);
     return {path: relative, bytes: raw.length, sha256: hash(raw), oid: createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex')};
   });
+  // Only newly prepared products must be locally present. Unchanged parent
+  // blobs may legitimately remain absent in a sparse/promisor checkout.
+  const storeProducts = () => {
+    for (const file of files) {
+      const raw = journalBody(journal, stage, path.posix.basename(file.path));
+      need(hash(raw) === file.sha256, 'Completed stage changed before commit');
+      need(git(['hash-object', '-w', '--stdin'], {input: raw}).toString().trim() === file.oid, 'Stored stage blob differs');
+      need(git(['cat-file', 'blob', file.oid]).equals(raw), 'Stored stage blob bytes differ');
+    }
+  };
   let intent;
   if (fs.existsSync(intentPath)) {
     intent = JSON.parse(journalFile(journal, intentPath));
     need(intent.version === 1 && intent.stage === stage && intent.branch === branch && equal(intent.files, files)
       && equal(intent.binding, event.binding), 'Commit intent differs from the current completed stage');
+    storeProducts(); // Recovery also restores only authenticated new products.
   } else {
     const parent = text(['rev-parse', 'HEAD']), parentTree = text(['rev-parse', 'HEAD^{tree}']);
     need(!text(['diff', '--name-only']) && !text(['diff', '--cached', '--name-only']), 'Preserve existing tracked/index edits before automatic commit');
@@ -1650,13 +1661,9 @@ export async function commitAdvanceStage(journal, stage, {validate, execute = ex
     try {
       const indexEnv = {...env, GIT_INDEX_FILE: path.join(scratch, 'index')};
       git(['read-tree', parent], {env: indexEnv});
-      for (const file of files) {
-        const raw = journalBody(journal, stage, path.posix.basename(file.path));
-        need(hash(raw) === file.sha256, 'Completed stage changed before commit');
-        need(git(['hash-object', '-w', '--stdin'], {input: raw}).toString().trim() === file.oid, 'Stored stage blob differs');
-      }
+      storeProducts();
       git(['update-index', '--index-info'], {env: indexEnv, input: files.map(f => `100644 ${f.oid}\t${f.path}\n`).join('')});
-      tree = git(['write-tree'], {env: indexEnv}).toString().trim();
+      tree = git(['write-tree', '--missing-ok'], {env: indexEnv}).toString().trim();
     } finally { fs.rmSync(scratch, {recursive: true}); }
     const author = text(['var', 'GIT_AUTHOR_IDENT']), committer = text(['var', 'GIT_COMMITTER_IDENT']);
     need(/^[^\n]+ <[^<>\n]+> \d+ [+-]\d{4}$/.test(author) && /^[^\n]+ <[^<>\n]+> \d+ [+-]\d{4}$/.test(committer), 'Complete existing Git commit identity required');
@@ -1697,7 +1704,7 @@ export async function commitAdvanceStage(journal, stage, {validate, execute = ex
   interrupt('ref');
   // Only the index changes: stage products already exist with authenticated bytes.
   // No worktree reset, force checkout or unrelated file mutation is performed.
-  git(['read-tree', intent.head]);
+  git(['read-tree', '-m', intent.head]);
   need(text(['rev-parse', 'HEAD']) === intent.head && !text(['diff', '--name-only']), 'Commit/index reconciliation did not complete');
   const result = {version: 1, stage, head: intent.head, parent: intent.parent, request_id: intent.request_id,
     elapsed_ms: performance.now() - started, completed_at: new Date(journal.now()).toISOString()};
