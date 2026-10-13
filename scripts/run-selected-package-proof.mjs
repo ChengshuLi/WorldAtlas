@@ -128,62 +128,6 @@ export async function retainProofManifest({api,origin,directory,extractor,expect
 }
 
 
-// Acquisition candidates come from declared research metadata, including directory
-// declarations. Historical refusal logs and unused certificate origins are not new
-// admission gates: the unchanged production readers decide which pins are required.
-export function prepareDeclaredHistoricalOrigins({sourceRoot,token,execute=execFileSync}){
-  const env=cleanEnvironment();
-  const run=(args,input,maxBuffer=8*1048576)=>execute('git',['-C',sourceRoot,...args],
-    {env,input,maxBuffer,stdio:['pipe','pipe','pipe']});
-  const definition=JSON.parse(run(['show','HEAD:.github/package-inputs.json']));
-  need(Array.isArray(definition.inputs),'Package input declarations required');
-  const declared=name=>definition.inputs.some(value=>typeof value==='string'&&
-    (value===name||value.endsWith('/')&&name.startsWith(value)));
-  const roots=new Set(),summary={metadata_files:0,metadata_bytes:0,non_json_files:[],candidate_roots:0,
-    fetched_roots:[],unavailable_roots:[],fetch_batches:0};
-  function scan(value){
-    if(!value||typeof value!=='object')return;
-    if(oid(value.commit)&&typeof value.path==='string')roots.add(value.commit);
-    if(oid(value.execution_commit))roots.add(value.execution_commit);
-    for(const child of Object.values(value))if(child&&typeof child==='object')scan(child);
-  }
-  const tree=run(['ls-tree','-r','-z','HEAD']).toString().split('\0');
-  for(const entry of tree){
-    const match=entry.match(/^(100644|100755) blob ([a-f0-9]{40})\t(.+)$/s);
-    if(!match||!match[3].startsWith('coordination/')||!match[3].endsWith('.json')||!declared(match[3]))continue;
-    const bytes=Number(run(['cat-file','-s',match[2]]).toString().trim());
-    const body=run(['cat-file','blob',match[2]],undefined,bytes+1);
-    summary.metadata_files++;summary.metadata_bytes+=body.length;
-    let value;try{value=JSON.parse(body);}catch{summary.non_json_files.push(match[3]);continue;}
-    scan(value);
-  }
-  summary.candidate_roots=roots.size;
-  const available=commit=>{try{run(['cat-file','-e',commit+'^{tree}']);return true;}catch{return false;}};
-  let pending=[...roots].sort().filter(commit=>!available(commit));
-  const fetchEnv={...env};
-  if(token)Object.assign(fetchEnv,{GIT_CONFIG_COUNT:'1',GIT_CONFIG_KEY_0:'http.https://github.com/.extraheader',
-    GIT_CONFIG_VALUE_0:'AUTHORIZATION: basic '+Buffer.from('x-access-token:'+token).toString('base64')});
-  while(pending.length){
-    summary.fetch_batches++;
-    try{
-      execute('git',['--no-replace-objects','-C',sourceRoot,'-c','core.hooksPath=/dev/null','-c','credential.helper=','-c','fetch.negotiationAlgorithm=noop','fetch','--depth=1',
-        '--filter=blob:none','--no-tags','--no-write-fetch-head','--no-recurse-submodules','--no-auto-maintenance',
-        '--stdin','https://github.com/'+repository+'.git'],
-        {env:fetchEnv,input:pending.join('\n')+'\n',maxBuffer:1048576,stdio:['pipe','pipe','pipe']});
-      for(const commit of pending)need(available(commit),'Historical Git fetch did not provide requested tree '+commit);
-      summary.fetched_roots.push(...pending);break;
-    }catch(error){
-      // Git names an unavailable requested object. Remove only that explicit
-      // candidate and retry the remaining batch; transport/auth failures stay fatal.
-      const missing=String(error.stderr??'').match(/upload-pack: not our ref ([a-f0-9]{40})/);
-      if(!missing||!pending.includes(missing[1]))throw error;
-      summary.unavailable_roots.push(missing[1]);
-      pending=pending.filter(commit=>commit!==missing[1]);
-    }
-  }
-  return summary;
-}
-
 async function main(){
   need(process.env.GITHUB_REPOSITORY===repository&&process.env.GITHUB_REF==='refs/heads/main'&&
     process.env.GITHUB_EVENT_NAME==='workflow_dispatch'&&process.env.GITHUB_WORKFLOW==='Selected package equivalence proof',
@@ -213,7 +157,6 @@ async function main(){
     attempt:Number(input.readback_attempt),expectedHead:input.source_head,expectedPullRequest:Number(input.source_pull_request)});
   // Invoke the genuine production CLI. It must finish actual assembly successfully.
   // This observer independently authenticates the reference and compares output.
-  console.log(JSON.stringify({historical_origin_acquisition:prepareDeclaredHistoricalOrigins({sourceRoot,token})}));
   const receiptPath=prepareFreshAssemblyScratch(sourceRoot);
   const child=spawnSync('python3',['-I','-S','-B',path.join(proofRoot,'scripts/selected-package-bootstrap.py')],{
     cwd:sourceRoot,env:{...cleanEnvironment(),GH_TOKEN:token,SELECTED_PACKAGE_TRUSTED_BASE:frozen.accepted_commit,

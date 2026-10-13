@@ -62,6 +62,7 @@ class BootstrapTests(unittest.TestCase):
         self.write('coordination/deep/consumer.mjs', "import fs from 'node:fs';\nexport const value=1;\n")
         self.git('init', '-q'); self.git('config', 'user.name', 'Bootstrap test'); self.git('config', 'user.email', 'bootstrap-test@example.invalid')
         self.git('add', '.'); self.git('commit', '-qm', 'Synthetic trusted base')
+        self.git('remote','add','origin','https://github.com/ChengshuLi/WorldAtlas.git')
         self.base = self.git('rev-parse', 'HEAD').decode().strip()
         self.cache = Path(self.temp.name) / 'toolcache'
         self.node = self.cache / 'node/24.0.0/x64/bin/node'; self.node.parent.mkdir(parents=True)
@@ -120,10 +121,29 @@ class BootstrapTests(unittest.TestCase):
         self.assertEqual(self.started[0][2]['GH_TOKEN'], 'synthetic-token-never-transmitted')
         self.assertEqual(self.started[0][2]['GIT_NO_REPLACE_OBJECTS'],'1')
         self.assertNotIn('GITHUB_TOKEN',self.started[0][2])
-        self.assertNotIn('GIT_CONFIG_COUNT',self.started[0][2])
+        launch=self.started[0][2]
+        if self.env.get('SELECTED_PACKAGE_ENTRY_POINT','scripts/assemble-selected-package.mjs') == 'scripts/assemble-selected-package.mjs':
+            self.assertEqual(launch['GIT_NO_LAZY_FETCH'],'0')
+            self.assertEqual(launch['GIT_CONFIG_VALUE_0'],'true')
+            self.assertEqual(launch['GIT_CONFIG_VALUE_2'],'/dev/null')
+            self.assertEqual(launch['GIT_CONFIG_VALUE_3'],'')
+        else:
+            self.assertNotIn('GIT_CONFIG_COUNT',launch)
+            self.assertEqual(launch['GIT_NO_LAZY_FETCH'],'1')
     def rejected(self, reason):
         with self.assertRaisesRegex(ValueError, reason): self.run_bootstrap()
         self.assertEqual(self.started, [])
+
+    def test_package_git_origin_rewrite_is_refused_before_node_launch(self):
+        self.git('config','url.https://foreign.invalid/.insteadOf','https://github.com/')
+        self.rejected('Package Git origin was redirected')
+
+    def test_package_git_configuration_is_child_local_and_replaces_injected_options(self):
+        before=(self.root/'.git/config').read_bytes()
+        self.env.update(GIT_CONFIG_COUNT='1',GIT_CONFIG_KEY_0='remote.origin.url',GIT_CONFIG_VALUE_0='https://foreign.invalid/')
+        self.accepted()
+        self.assertEqual((self.root/'.git/config').read_bytes(),before)
+        self.assertNotIn('https://foreign.invalid/',self.started[0][2].values())
 
     def proof_fixture(self):
         self.write('scripts/run-selected-package-proof.mjs', "import './proof-child.mjs';\n")
@@ -231,6 +251,7 @@ class BootstrapTests(unittest.TestCase):
         clone=Path(self.temp.name)/'shallow'
         subprocess.check_call([SYSTEM_GIT,'clone','--quiet','--depth=1','file://'+str(self.root),str(clone)],stderr=subprocess.DEVNULL)
         self.root=clone;os.chdir(clone)
+        self.git('remote','set-url','origin','https://github.com/ChengshuLi/WorldAtlas.git')
         absent=subprocess.run([SYSTEM_GIT,'cat-file','-e',self.base+'^{commit}'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
         self.assertNotEqual(absent.returncode,0,'Fixture must really lack the base commit')
     def test_accept_genuine_candidate_only_shallow_checkout(self):
@@ -350,7 +371,12 @@ class BootstrapTests(unittest.TestCase):
         self.assertTrue(any('--experimental-vm-modules' in args[0] for args,kwargs in calls))
         for args,kwargs in calls:
             env=kwargs['env']
-            for key in ('GH_TOKEN','GITHUB_TOKEN','LD_LIBRARY_PATH','GIT_CONFIG_COUNT','GIT_CONFIG_KEY_0','GIT_CONFIG_VALUE_0'): self.assertNotIn(key,env)
+            for key in ('GH_TOKEN','GITHUB_TOKEN','LD_LIBRARY_PATH'): self.assertNotIn(key,env)
+            if args[0] == ['git','remote','get-url','origin']:
+                self.assertEqual(env['GIT_CONFIG_COUNT'],'4')
+                self.assertNotIn('injected',env.values())
+            else:
+                for key in ('GIT_CONFIG_COUNT','GIT_CONFIG_KEY_0','GIT_CONFIG_VALUE_0'): self.assertNotIn(key,env)
             self.assertEqual(env['GIT_NO_REPLACE_OBJECTS'],'1'); self.assertEqual(env['GIT_CONFIG_GLOBAL'],'/dev/null')
     def test_authenticate_python_runtime_helper_when_identity_module_is_consumed(self):
         self.write('scripts/child.mjs', "import './package-output-artifact.mjs';\n")
@@ -475,5 +501,38 @@ class ProofInstallerBootstrapTests(ProofWorkflowBootstrapTests):
         self.env['SELECTED_PACKAGE_PREFLIGHT']='install'
         self.assertNotEqual(self.env['SELECTED_PACKAGE_TRUSTED_BASE'],self.env['GITHUB_SHA'],
                             'Installer fixture distinguishes frozen source from current verifier implementation')
+
+
+class GitPromisorTests(unittest.TestCase):
+    def test_actual_cold_checkout_reads_historical_tree_and_body_without_scanner(self):
+        with tempfile.TemporaryDirectory(prefix='worldatlas-promisor-') as directory:
+            root=Path(directory); server=root/'server'; server.mkdir(); candidate=root/'candidate'
+            env={k:v for k,v in os.environ.items() if not k.startswith('GIT_')}
+            env.update(GIT_CONFIG_NOSYSTEM='1',GIT_CONFIG_GLOBAL='/dev/null',GIT_NO_LAZY_FETCH='1')
+            def git(repo,*args,environment=env):
+                return subprocess.check_output([SYSTEM_GIT,'-C',str(repo),*args],env=environment,stderr=subprocess.PIPE).decode().strip()
+            git(server,'init','-q');git(server,'config','gc.auto','0');git(server,'config','maintenance.auto','false')
+            git(server,'config','uploadpack.allowFilter','true');git(server,'config','uploadpack.allowAnySHA1InWant','true')
+            (server/'selector.json').write_text('{"historical":true}\n')
+            git(server,'add','.');git(server,'-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','historical source')
+            historical=git(server,'rev-parse','HEAD'); blob=git(server,'rev-parse','HEAD:selector.json')
+            git(server,'checkout','--orphan','current');git(server,'rm','-rf','.')
+            (server/'current.txt').write_text('current source\n')
+            git(server,'add','.');git(server,'-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','current source')
+            subprocess.check_call([SYSTEM_GIT,'clone','--quiet','--no-local','--depth=1','--branch','current',server.as_uri(),str(candidate)],env=env)
+            for value in (historical,blob):
+                with self.assertRaises(subprocess.CalledProcessError):git(candidate,'cat-file','-e',value)
+            before=git(candidate,'rev-parse','HEAD')
+            # Only the fixture's server replaces the production constant. Git's
+            # real lazy-fetch path runs unchanged; no command results are mocked.
+            with patch.object(bootstrap,'PACKAGE_GIT_ORIGIN',server.as_uri()):
+                launch=bootstrap.package_git_environment(env)
+            self.assertEqual(git(candidate,'remote','get-url','origin',environment=launch),server.as_uri())
+            self.assertIn(blob,git(candidate,'ls-tree',historical,'--','selector.json',environment=launch))
+            self.assertEqual(git(candidate,'cat-file','blob',blob,environment=launch),'{"historical":true}')
+            self.assertEqual(git(candidate,'rev-parse','HEAD'),before)
+            self.assertEqual(launch['GIT_NO_REPLACE_OBJECTS'],'1')
+            self.assertEqual(launch['GIT_CONFIG_VALUE_2'],'/dev/null')
+            self.assertEqual(launch['GIT_CONFIG_VALUE_3'],'')
 
 if __name__=='__main__': unittest.main(verbosity=2)

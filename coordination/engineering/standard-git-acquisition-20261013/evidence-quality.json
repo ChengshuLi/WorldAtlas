@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "issue": 1798,
+  "lane": "engineering",
+  "worker_id": "01a131c0-8b58-70b6-8e2c-52240f11e03f",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "ec789a26a010b029a1ad9bc333ba4c8dd148afc8",
+    "files": [],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "standard-git-acquisition",
+      "kind": "code",
+      "description": "Delete custom historical citation scanning; authenticated assembler child uses canonical-origin Git promisor acquisition. Unchanged frozen readers validate exact required objects.",
+      "software": "Python, Node and Git",
+      "units": "positive/adverse controls"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "python -I -S -B test/selected-package-bootstrap-controls.py scripts/selected-package-bootstrap.py",
+    "node --test test/selected-package-proof-driver.test.mjs"
+  ]
+}
