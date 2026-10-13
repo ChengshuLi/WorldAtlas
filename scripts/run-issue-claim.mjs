@@ -1,9 +1,10 @@
 import {renderWorkerResult} from './worker-result.mjs';
 import fs from 'node:fs';
+import {isDeepStrictEqual} from 'node:util';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {requestAccounting, quotaDelay, completeReads} from './github-quota.mjs';
-import {githubAPI,githubPages,linkedPulls,transitionClaim,renderClaim,workSpec,canonicalIssueNumber} from './issue-claim-contract.mjs';
+import {githubAPI,githubPages,linkedPulls,transitionClaim,renderClaim,readClaim,workSpec,canonicalIssueNumber} from './issue-claim-contract.mjs';
 
 export async function runIssueClaim({event, env=process.env, apiFactory=githubAPI, wallNow=Date.now}) {
 const input=event.inputs??{},repo=env.GITHUB_REPOSITORY;
@@ -17,15 +18,24 @@ try{
  const [issue,comments,prs]=await completeReads([api(`/repos/${repo}/issues/${number}`),githubPages(api,`/repos/${repo}/issues/${number}/comments`),linkedPulls(api,repo,number)]);
  const spec=input.action==='release'?null:workSpec(issue.body);
  const dependencies=await completeReads((spec?.depends_on??[]).map(id=>api(`/repos/${repo}/issues/${id}`)));
- const next=transitionClaim({issue,comments,prs,dependencies,request:{...input,live_work:input.live_work==='true'}}),claim=next.claim;
+ const request={...input,live_work:input.live_work==='true'};
+ transitionClaim({issue,comments,prs,dependencies,request});
+ // Only live reservations use this second authority read. Dependency requests
+ // can outlive an operator stop, scope edit, or handoff; do not write stale authority.
+ const [freshIssue,freshComments,freshDependencies,freshPRs]=await completeReads([
+  api(`/repos/${repo}/issues/${number}`),githubPages(api,`/repos/${repo}/issues/${number}/comments`),
+  completeReads((spec?.depends_on??[]).map(id=>api(`/repos/${repo}/issues/${id}`))),linkedPulls(api,repo,number)]);
+ if(freshIssue.body!==issue.body||!isDeepStrictEqual(readClaim(comments),readClaim(freshComments)))
+  throw Error('Live scope or reservation changed during authority reads; reread before retry');
+ const next=transitionClaim({issue:freshIssue,comments:freshComments,prs:freshPRs,dependencies:freshDependencies,request}),claim=next.claim;
  // The canonical bot comment is authority; labels are a repairable display projection.
  mutationAttempted=true; // A lost write response requires reconciliation, never blind replay.
  if(claim.comment_id)await api(`/repos/${repo}/issues/comments/${claim.comment_id}`,'PATCH',{body:renderClaim(claim)});
  else claim.comment_id=(await api(`/repos/${repo}/issues/${number}/comments`,'POST',{body:renderClaim(claim)})).id;
- const hasClaimLabel=issue.labels.some(l=>l.name==='status:claimed');
+ const hasClaimLabel=freshIssue.labels.some(l=>l.name==='status:claimed');
  if(claim.active&&!hasClaimLabel)await api(`/repos/${repo}/issues/${number}/labels`,'POST',{labels:['status:claimed']});
  if(!claim.active&&hasClaimLabel)await api(`/repos/${repo}/issues/${number}/labels/${encodeURIComponent('status:claimed')}`,'DELETE');
- if(input.action==='recover'&&issue.labels.some(l=>l.name==='coordination:recovery-approved'))await api(`/repos/${repo}/issues/${number}/labels/${encodeURIComponent('coordination:recovery-approved')}`,'DELETE');
+ if(input.action==='recover'&&freshIssue.labels.some(l=>l.name==='coordination:recovery-approved'))await api(`/repos/${repo}/issues/${number}/labels/${encodeURIComponent('coordination:recovery-approved')}`,'DELETE');
  if(input.action!=='renew'||next.previous?.branch!==claim.branch)await api(`/repos/${repo}/issues/${number}/comments`,'POST',{body:`Worker coordination: ${input.action} by \`${claim.worker_id}\`, branch \`${claim.branch}\`, lease ${claim.expires_at}. Request \`${input.request_id}\`.${next.previous?` Previous branch retained: \`${next.previous.branch}\`.`:''}${input.reason?` Reason: ${input.reason}`:''}`});
  Object.assign(result,{accepted:true,claim,replayed:Boolean(next.replayed)});
 }catch(error){

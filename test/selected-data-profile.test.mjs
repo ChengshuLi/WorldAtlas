@@ -174,7 +174,8 @@ test('actual trusted metadata entry binds ownership and forwards full setup plus
   const f=gateFixture(), result=await f.gate();
   assert.equal(result.profile,'full');assert.equal(result.test_selection,'selected-data');
   assert.equal(result.expectations_path,prefix+'selected-delivery-expectations.json');assert.deepEqual(result.shards,[0]);assert.equal(result.package.full,true);
-  f.claim.active=false;await assert.rejects(f.select());
+  f.claim.active=false;assert.equal((await f.select()).test_selection,'selected-data');
+  f.issue.state='closed';await assert.rejects(f.select());
 });
 test('actual selector retains all three shards when accepted smoke or complete expectations are unavailable',async()=>{
   for(const mutate of [f=>f.baseline.entries.delete(SELECTED_SMOKE),f=>f.blobs.delete(f.authored.entries.get(prefix+'selected-delivery-expectations.json').sha)]){
@@ -980,12 +981,10 @@ test('retained nested delivery needs authenticated current issue scope through P
 });
 for (const [name, change] of Object.entries({
   'missing current scope':f => f.issue.body = f.issue.body.replace(/,"owned_paths":\[[^\]]*\]/, ''),
-  'expired claim':f => f.claim.expires_at = '2000-01-01T00:00:00Z',
-  'inactive claim':f => f.claim.active = false,
-  'wrong branch':f => f.claim.branch = 'engineering/other',
-  'wrong issue':f => f.claim.issue_number = 11,
+  'closed issue':f => f.issue.state = 'closed',
+  'wrong issue':f => f.issue.number = 11,
+  'wrong mode':f => f.issue.body = f.issue.body.replace('\"mode\":\"engineering\"','\"mode\":\"source-only\"'),
   'wrong lane':f => f.issue.labels[0] = 'type:geography',
-  'blocked issue':f => f.issue.labels.push('status:blocked'),
 })) test('retained selected metadata refuses ' + name, async () => {
   const f = gateFixture(ownedFixture()); change(f);
   if (name === 'missing current scope') assert.deepEqual(await f.select(), {profile:'full', shards:[0,1,2]});

@@ -10,7 +10,7 @@ import {gitBlobTransport} from '../scripts/git-blob-transport.mjs';
 import {waitForFinalCapacity, capacityObservation, finalRequestBound, inventoryFinalEvidence, paceFinalValidation,
   boundedFinalAPI, finalRequestBudget, beginFinalPlanning} from '../scripts/final-capacity.mjs';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
-import {githubAPI, renderClaim} from '../scripts/issue-claim-contract.mjs';
+import {githubAPI} from '../scripts/issue-claim-contract.mjs';
 import {loadGeographicReport, prepareGeographyProof, reportHash} from '../scripts/geographic-report-artifact.mjs';
 import {inspectMerge, prepareIntegration, completeIntegration} from '../scripts/merge-integration.mjs';
 import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
@@ -79,7 +79,6 @@ function fixture() {
     stages: {research: 'complete', implementation: 'implemented', geographic_approval: 'not-requested'},
     change_receipts: files.map(row => ({path: row.filename, status: row.status}))};
   const manifestRaw = Buffer.from(JSON.stringify(manifest));
-  const claim = {version: 1, active: true, worker_id: 'author', claim_id: 'original-claim', branch, expires_at: '2030-01-01T00:00:00Z'};
   const review = {version: 1, pr_number: 23, head_sha: head, manifest_sha256: sha256(manifestRaw), author_worker_id: 'author',
     reviewer_worker_id: 'reviewer', inspected_files: files.map(row => row.filename), evidence_hashes: [sha256(baselineRaw), sha256(outputRaw)],
     outcome: 'accepted', limits: [], domains: {implementation: {outcome: 'accepted', scope: 'Synthetic controls', limits: []},
@@ -90,7 +89,7 @@ function fixture() {
     return {path, sha, size: raw.length, mode: '100644', type: 'blob'};
   });
   const authored = tree([['README.md', baselineRaw], [outputPath, outputRaw], [manifestPath, manifestRaw]]), baseline = tree([['README.md', baselineRaw]]);
-  const f = {repo, head, base, candidate, issue, pr, files, claim, review, manifest, blobs, authored, baseline, calls: [], writes: [], phase: 'before', checks: 'success'};
+  const f = {repo, head, base, candidate, issue, pr, files, review, manifest, blobs, authored, baseline, calls: [], writes: [], phase: 'before', checks: 'success'};
   f.api = async (route, method = 'GET', body) => {
     f.calls.push({route, method, phase: f.phase}); const name = route.split('?')[0];
     if (method !== 'GET') {f.writes.push({route, method, body}); return {merged: true, sha: 'd'.repeat(40)};}
@@ -98,7 +97,6 @@ function fixture() {
     if (name === `/repos/${repo}/pulls`) return [structuredClone(f.pr)];
     if (name === `/repos/${repo}/pulls/23`) return structuredClone(f.pr);
     if (name === `/repos/${repo}/issues/1183`) return structuredClone(f.issue);
-    if (name === `/repos/${repo}/issues/1183/comments`) return [{user: {login: 'github-actions[bot]'}, body: renderClaim(f.claim)}];
     if (name.endsWith('/timeline')) return [];
     if (name === `/repos/${repo}/pulls/23/files`) return structuredClone(f.files);
     if (name.endsWith('/check-runs')) return {check_runs: ['scope', 'evidence'].map((name, id) => ({name, id, status: 'completed', conclusion: f.checks}))};
@@ -256,7 +254,7 @@ test('reused geography never accepts drift, unresolved science or failed current
     f => {f.report.status = 'regressions-found';}, f => {f.report.gate_status = 'blocked';},
     f => {f.proofJobs.find(job => job.name === 'geography').steps[2].conclusion = 'skipped';},
     f => {f.proofRun.run_attempt++;}, f => {f.checks = 'failure';},
-    f => {f.claim.expires_at = '2000-01-01T00:00:00Z';}
+    f => {f.issue.state = 'closed';}
   ]) {
     const f = geographyReuseFixture(); await f.prepare(); mutate(f);
     await assert.rejects(f.reuse()); assert.equal(f.writes.length, 0);
@@ -276,13 +274,13 @@ test('final geography source is revalidated after capacity waiting before any wr
 
 test('real tree/path/vintage inventory includes nonadded originals and verified OID reuse', async () => {
   const f = fixture(), options = f.options();
-  const inventory = await inventoryFinalEvidence({...options, pr: f.pr, issue: f.issue, files: f.files, reservation: {worker_id: 'author'}});
+  const inventory = await inventoryFinalEvidence({...options, pr: f.pr, issue: f.issue, files: f.files});
   assert.equal(inventory.blob_calls, 3); assert.equal(inventory.cache_fit, true); assert.equal(inventory.original_count, 0);
   f.files[0].status = 'modified'; f.baseline.push({...f.authored.find(row => row.path.endsWith('result.json'))});
-  const next = await inventoryFinalEvidence({...options, pr: f.pr, issue: f.issue, files: f.files, reservation: {worker_id: 'author'}});
+  const next = await inventoryFinalEvidence({...options, pr: f.pr, issue: f.issue, files: f.files});
   assert.equal(next.original_count, 1); assert.equal(next.blob_calls, 3);
   f.truncated = true;
-  await assert.rejects(inventoryFinalEvidence({...options, pr: f.pr, issue: f.issue, files: f.files, reservation: {worker_id: 'author'}}), /complete trees/);
+  await assert.rejects(inventoryFinalEvidence({...options, pr: f.pr, issue: f.issue, files: f.files}), /complete trees/);
 });
 // Different bytes at the same path, plus a path absent from the default baseline,
 // exercise the actual inventory boundary rather than a version flag alone.
@@ -320,7 +318,7 @@ function historicalFixture() {
     return original(route, ...args);
   };
   f.inventory = () => inventoryFinalEvidence({...f.options(), pr: f.pr, issue: f.issue,
-    files: f.files, reservation: f.claim});
+    files: f.files});
   return f;
 }
 
@@ -386,7 +384,7 @@ test('costly evidence inventory requires current issue and disposition bindings 
   const f = fixture(), options = f.options();
   f.pr.created_at = '2026-10-07T00:00:00Z';
   options.policy.review_contract_activation_time = '2026-10-06T20:45:00Z';
-  const inventory = () => inventoryFinalEvidence({...options, pr: f.pr, issue: f.issue, files: f.files, reservation: {worker_id: 'author'}});
+  const inventory = () => inventoryFinalEvidence({...options, pr: f.pr, issue: f.issue, files: f.files});
   await assert.rejects(inventory(), /Missing current exact-head review/);
   Object.assign(f.review, reviewContractBinding(f.issue, f.pr));
   assert.equal((await inventory()).blob_calls, 3);
@@ -397,18 +395,18 @@ test('costly evidence inventory requires current issue and disposition bindings 
   await assert.rejects(inventory(), /Missing current exact-head review/);
   assert.equal(f.writes.length, 0);
 });
-test('capacity wait rechecks actual claim authority without scheduler admission', async () => {
+test('capacity wait rechecks current issue scope without scheduler admission', async () => {
   const f = fixture();
   const result = await paceFinalValidation(f.options(), {inspect: inspectMerge});
   assert.equal(result.receipt.reserved, false); assert.equal(result.receipt.status, 'observed-sufficient');
-  assert.equal(f.writes.length, 0); assert.ok(f.calls.some(row => row.phase === 'after' && row.route.includes('/issues/1183/comments')));
+  assert.equal(f.writes.length, 0); assert.ok(f.calls.some(row => row.phase === 'after' && row.route === '/repos/o/r/issues/1183'));
 });
-for (const mutation of ['claim', 'claim-id', 'review', 'head', 'base', 'checks', 'contract', 'tree-mode', 'tree-path']) test(`changed ${mutation} while waiting rejects before costly output blobs`, async () => {
+for (const mutation of ['closed-issue', 'wrong-lane', 'review', 'head', 'base', 'checks', 'contract', 'tree-mode', 'tree-path']) test(`changed ${mutation} while waiting rejects before costly output blobs`, async () => {
   const f = fixture(), options = f.options();
   options.capacityTiming.sleep = async () => {
     f.phase = 'after';
-    if (mutation === 'claim') f.claim.expires_at = '2000-01-01T00:00:00Z';
-    if (mutation === 'claim-id') f.claim.claim_id = 'changed-claim';
+    if (mutation === 'closed-issue') f.issue.state = 'closed';
+    if (mutation === 'wrong-lane') f.issue.labels[0] = 'type:geography';
     if (mutation === 'review') f.review.outcome = 'changes-requested';
     if (mutation === 'head') f.pr.head.sha = 'e'.repeat(40);
     if (mutation === 'base') f.base = 'e'.repeat(40);
@@ -518,7 +516,7 @@ test('capacity excludes blob REST requests only after exact transport proves the
   const f=fixture();let rows;
   f.api.prefetchGitBlobs=async(repo,inventory)=>{assert.equal(repo,f.repo);rows=inventory;};
   f.api.hasGitBlobs=(repo,inventory)=>complete&&inventory===rows;
-  const value=await inventoryFinalEvidence({api:f.api,repo:f.repo,pr:f.pr,issue:f.issue,reservation:f.claim,files:f.files,policy:{version:1,mode:'enforce-new',activation_time:'2020-01-01T00:00:00Z'}});
+  const value=await inventoryFinalEvidence({api:f.api,repo:f.repo,pr:f.pr,issue:f.issue,files:f.files,policy:{version:1,mode:'enforce-new',activation_time:'2020-01-01T00:00:00Z'}});
   assert(rows.length>0);assert.equal(value.exact_git_transport,complete);assert.equal(value.blob_calls,complete?0:rows.length);
  }
 });
@@ -757,12 +755,10 @@ test('origin identity and latest successful geography remain fresh across actual
 
 
 // Real HTTP admission and ETag revalidation, with only the network replaced.
-// Closed linked PRs remain part of every fresh ownership inventory.
-function quotaCompletionFixture({fanout = 40, retry = false, deplete = false} = {}) {
+// Current issue authority is still reread after capacity is observed.
+function quotaCompletionFixture({retry = false, deplete = false} = {}) {
   const f = fixture(), original = f.api, timing = clock(), attempts = [], observations = [];
-  const linked = Array.from({length: fanout}, (_, i) => ({...structuredClone(f.pr), number: 100 + i,
-    state: 'closed', merged: true}));
-  let remaining = 2000, probes = 0, retried = false, validationStart = 0, finalTimeline = false;
+  let remaining = 2000, probes = 0, retried = false, validationStart = 0, finalAuthority = false;
   const headers = () => ({'x-ratelimit-limit': '2000', 'x-ratelimit-remaining': String(remaining),
     'x-ratelimit-reset': '3600', 'x-ratelimit-resource': 'core', etag: '"unchanged"'});
   f.api = githubAPI('synthetic-quota-token', {...timing, minimumRemaining: 16, readWaitMs: 60000,
@@ -779,33 +775,27 @@ function quotaCompletionFixture({fanout = 40, retry = false, deplete = false} = 
         return Response.json({message: 'secondary rate limit'}, {status: 403,
           headers: {...headers(), 'retry-after': '1'}});
       }
-      if (validation && name.endsWith('/timeline')) {
-        finalTimeline = true;
-        if (deplete) remaining = 20; // Another consumer exhausted most shared capacity.
+      if (validation && name.endsWith('/issues/1183')) {
+        finalAuthority = true;
+        if (deplete) remaining = 16; // Another consumer exhausted most shared capacity.
       }
       if (init.headers['If-None-Match']) return new Response(null, {status: 304, headers: headers()});
       remaining--;
-      let value;
-      if (name.endsWith('/timeline')) value = linked.map(pr => ({source: {issue: {
-        number: pr.number, body: pr.body, pull_request: {url: 'fixture'}}}}));
-      else if (linked.some(pr => name.endsWith('/pulls/' + pr.number)))
-        value = structuredClone(linked.find(pr => name.endsWith('/pulls/' + pr.number)));
-      else value = await original(route, init.method, init.body ? JSON.parse(init.body) : undefined);
+      const value = await original(route, init.method, init.body ? JSON.parse(init.body) : undefined);
       return Response.json(value, {headers: headers()});
     }});
   const complete = extra => f.complete({capacityTiming: timing, capacityObserver: row => observations.push(row), ...extra});
   return {f, attempts, observations, complete, get validationAttempts() {return attempts.slice(validationStart);},
-    get remaining() {return remaining;}, get finalTimeline() {return finalTimeline;}};
+    get remaining() {return remaining;}, get finalAuthority() {return finalAuthority;}};
 }
 
-for (const retry of [false, true]) test(`actual final HTTP fanout exceeds estimate with fresh quota and retained 304/retry guards: ${retry}`, async t => {
+for (const retry of [false, true]) test(`actual final HTTP uses fresh quota and retains 304/retry guards: ${retry}`, async t => {
   const q = quotaCompletionFixture({retry}), result = await q.complete();
   const capacity = result.final_capacity;
   assert.equal(result.accepted, true);
   assert.equal(capacity.validation_call_bound, capacity.remaining - 16);
   assert.equal(capacity.validation_call_bound_source, 'observed-remaining-minus-recovery-reserve');
   assert.equal(capacity.recovery_call_reserve, 16);
-  assert(q.validationAttempts.length > capacity.required - 16, 'actual attempts must expose the former estimated cap');
   assert(q.validationAttempts.length < capacity.validation_call_bound);
   assert(q.validationAttempts.some(row => row.status === 304), 'authority was actually conditionally reread');
   assert.equal(q.validationAttempts.filter(row => row.status === 403).length, retry ? 1 : 0);
@@ -817,10 +807,10 @@ for (const retry of [false, true]) test(`actual final HTTP fanout exceeds estima
     retry_rejections: q.validationAttempts.filter(row => row.status === 403).length}));
 });
 
-test('actual final high fanout stops on newly observed concurrent depletion and preserves recovery', async () => {
+test('actual final authority stops on newly observed concurrent depletion and preserves recovery', async () => {
   const q = quotaCompletionFixture({deplete: true});
   await assert.rejects(q.complete(), error => error.quotaAdmission?.remaining === 16);
-  assert(q.finalTimeline, 'depletion must happen after final capacity observation');
+  assert(q.finalAuthority, 'depletion must happen after final capacity observation');
   assert.equal(q.f.writes.length, 0);
   assert(q.validationAttempts.length < q.observations.at(-1).remaining - 16,
     'live quota must refuse before the otherwise sufficient fixed attempt allowance');
