@@ -1,0 +1,217 @@
+{
+  "version": 1,
+  "kind": "native102-selected-row-conservation-observation",
+  "evaluation_commit": "31b358881c53796ae1e9d0d87f97e1d0a3381f60",
+  "inputs": [
+    {
+      "commit": "4278a6176e5530ccafe39f57bb1ab58a60992701",
+      "path": "coordination/engineering/nor18-selected-20261012/north13-assembly-001/ledger.json",
+      "bytes": 1218596,
+      "sha256": "bf92285c2bab3f02aa863175e5e52eaca398b84e63cda5fe0ea96d6dd279759a"
+    },
+    {
+      "commit": "31b358881c53796ae1e9d0d87f97e1d0a3381f60",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/native102-selected-20261012/assembly-002/ledger.json",
+      "bytes": 1223726,
+      "sha256": "ee3d39fbcad50c78a38b1d503f96ecbd5595bfeffeb405e793b06b81b4be147e"
+    },
+    {
+      "commit": "4278a6176e5530ccafe39f57bb1ab58a60992701",
+      "path": "coordination/engineering/nor18-selected-20261012/north13-assembly-001/patch.json",
+      "bytes": 16292,
+      "sha256": "b6a9e2fd15b3f82ef10410878a1e0066b42458dc4fb97751095aac6fb5ee2f37"
+    },
+    {
+      "commit": "31b358881c53796ae1e9d0d87f97e1d0a3381f60",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/native102-selected-20261012/assembly-002/patch.json",
+      "bytes": 16380,
+      "sha256": "88fba37ffbb6f772ede92a9bd51bc8aaf813a3149fdc19af9a15e4f50d697af6"
+    },
+    {
+      "commit": "4278a6176e5530ccafe39f57bb1ab58a60992701",
+      "path": "coordination/engineering/nor18-selected-20261012/north13-precompose-001/authority-registry.json",
+      "bytes": 37021,
+      "sha256": "ba382892a62f57a6ad1bf298e15f689c5363a098e277db3ee5a23d94030eaf9d"
+    },
+    {
+      "commit": "64e1484ff3415c8984bb4a6ecc282276f054b745",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/native102-selected-20261012/advance/compose/authority-registry.json",
+      "bytes": 38022,
+      "sha256": "6962d2f946e57999bcd3cd0c75e925b702607f25e4da701c7fd3878d7fb063af"
+    },
+    {
+      "commit": "21dd61bacc84eb22b511b2a71ed0caf55c5b0d45",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/native102-selected-20261012/advance/authority-native102/original-rule-preimage.json",
+      "bytes": 17880,
+      "sha256": "ba3499c77a5461c6f6dec9cbf63e56660a077d684260067cf9018c62ded41f9b"
+    }
+  ],
+  "prior_authorities": 38,
+  "current_authorities": 39,
+  "prior_rows": 99,
+  "current_rows": 100,
+  "prior_native_cells": 1304,
+  "current_native_cells": 1306,
+  "added_native_cells": 2,
+  "whole_gap_completion_credit": 0,
+  "preserved_prior_authorities": true,
+  "preserved_prior_rows": true,
+  "preserved_prior_cell_owners": true,
+  "added_cells": [
+    [
+      139002,
+      249212,
+      249213,
+      39704
+    ],
+    [
+      139018,
+      249253,
+      249254,
+      39704
+    ]
+  ],
+  "component_id": "physical-component:64621d74ca19d475b02d7c9144029019088f8734c068058fc5e8055d33426e15",
+  "target_id": "gb:SLB:ADM1:17018030B43755880178831",
+  "source_expected_ids": [
+    "physical-component:64621d74ca19d475b02d7c9144029019088f8734c068058fc5e8055d33426e15"
+  ],
+  "source_cohort_ids": [
+    "physical-component:2b205ebdb5b119330c3195595607377039ed6ab6851c10bf374b9eb306b054e5",
+    "physical-component:4fc2e6ac1e86cb80c872ae22144b3779ddec90f319a4fbecafba3d9098f6ce0a",
+    "physical-component:7f95e964dbd211a0ed13380ebd6d3644e20006e208ff1f3e0954eade31e3c046",
+    "physical-component:8fcf098be5391eb150b9bbe20c8b1bb22b18732047c8721de804a2c0f573741b",
+    "physical-component:af22023e972fb8c20144c11e1a74687e7b70dd2c041fcb31bebf261211d38ec4",
+    "physical-component:dd51ffd9e54a0dcb07f0764e68eb4a4d5d9c922b1bba1bd36ce65f8c24f9ac04",
+    "physical-component:de8be009c72905949492c7d2ddd04fdca9c764ce9a65ff0f480d3b48c83f1970",
+    "physical-component:ec19d620a7a37c4066f4a4dcb639fda20602806054537b3998d8464d718539dc",
+    "physical-component:fbca6631c8dd7b2b5dca08a1c4ce932bea4609770259281349b3c971af6ddd4a",
+    "physical-component:01648ecb35ddc372d53a272eb8350f1f72a889f3b7b0c47ec662eed78e6d07dd",
+    "physical-component:2a6fb2fe690a0d3e539c1fb6b8626fcb4e6fdede0f0a1b15e3d36e1d8764d0ca",
+    "physical-component:75c2cd48d382bce44caba45ca70c64d1adb4a6986b3bac8fa14980337d206e97",
+    "physical-component:08fc6ae4897c0b075ee3d00bcbb98825414143e9fec54ea334941260a20a4a08",
+    "physical-component:d42592123cb3e4297bfecc74543edb6519753296ec845226bc4d2eaa813e3314",
+    "physical-component:e103a52443a9908ba4efd7d2ef0208bc89f169717604b197cc57f306cf2134f5",
+    "physical-component:7ee814e01e8eb06480e8f8ed9263e1f63abe6e35515bbd66bd0a0e71301a0f56",
+    "physical-component:9b46a801e6f1be951865f7f54714ccf7a5e98ef6211a945dbabcf896f9ee86e3",
+    "physical-component:aeeb6e8e26eb7b2a587040cbd4cad7b74ba4abcce69930e106445d8a75a322a6",
+    "physical-component:ba75d7bb21cee36d42738d7da1be04d0d0a379d6a31852fde00ed35b800b4a55",
+    "physical-component:c31b53ea6554bddaaf73ad9f2878c0baa6a1272a05b82531755033d1465a6f4f",
+    "physical-component:d7e25c1637b585543f8fda09fe86665c2b2bb925bbac890510c4bb54781809a6",
+    "physical-component:e800720b95dd8bb0aa4952624e7621dde1b053ea83c6df588a5afdb048bf407d",
+    "physical-component:94d4cd339d6adca3fecd86682a700d3c85c7c67a8745996b1d878a875cb4c0bc",
+    "physical-component:0e4a41c2343fc1c668ac4354e999c479ff02b8a809984d7c8d80ea2718d0e778",
+    "physical-component:1e6775304d377bbcb519ad8721c8d4da5a5f0595bf2ca3e309d4a1a6b65401d3",
+    "physical-component:28b6d609f65907c83be08c2ee49462c1734a3f0a9d5351d9159496e0592ecf1d",
+    "physical-component:327079327a1e08f3c08550fe027f8f17fa6571d78b40c92145d603b2faf2b6eb",
+    "physical-component:9b622a46bb7d75c1c119095e46e210046f4d1a96e44e3622ca84c5ee26d9e848",
+    "physical-component:768fe4b3068e570c2257750496a4d7dc8edd343958716fbe235bc21f48a28649",
+    "physical-component:4ccb5efcb0fe48c2cb94967532d483c3a9eb2d1f99d1f775c97ebfd53a754625",
+    "physical-component:8c3d8719e0b41bedbb3d37f3ccf240fd6b26e8766cce23e982a2fd945c868e58",
+    "physical-component:16a822873dfc07c1ae364d8411fffb2895f9446daeb60bf112c9b6d0c0c13eef",
+    "physical-component:1823bc93676bb57db1b85751dee537a7892037599c04fcbbc26130ed85add368",
+    "physical-component:8968b22d73907e3452f4102da4bd9b534f86b65a1fbb7b7e3482bf4365eabcbb",
+    "physical-component:97bf30d0982f2199276b852da11142b3b94dd1a1f89172122d47ae649eb3724d",
+    "physical-component:bbf9693d411fa1aa132f2e1b9624ba9c41f3e12878d58c8e91617a3384f70689",
+    "physical-component:31144721bab5465bc83fda9022c1ee8d74763f34dc5511113194a6cb97b190df",
+    "physical-component:52c2d80fd24ec1d6eb2dc12ed276dd9947f06a61543870367bc35ce208393198",
+    "physical-component:69d98a4f0be03e2037b36688954923379f017b7a79e0eaec86960a295cbd6821",
+    "physical-component:920d9c0c57598d71fac2181fdc6520caf1a3ef661bc798cd2562a6f495e162bd",
+    "physical-component:169112411be77db10efb25f88ad77e818dccc99c4c2cf0382ca7ab6990fd8658",
+    "physical-component:d5435337e94c012a0e317c03fec8eddb237f3fee0b82bf634639bf9aba6a94a7",
+    "physical-component:d6c861320821222a4fa3b9eabe813f50e06b3022ed3cfdfbc7ecf18b35283cea",
+    "physical-component:f55c8e22781c0c1c1fea7916b23d5e003f99ab05cd63fb4fb5a8c7fd6f39d018",
+    "physical-component:afe8e4c5c6c295edfd94983874fa5b6fa332db027be7b38e5560dfc9489f2e9c",
+    "physical-component:434f5620b649cde0af1a0b5342592f5cb971f67575faad1462c9451578268028",
+    "physical-component:581b817bae229bf0a9f0cdb2cdef318c2532b7728b30694316b6568aef11da85",
+    "physical-component:5c63748e37f5f4fd16bd4c96b2ced062dca43a4c227eccd8b3300c1f06142c9f",
+    "physical-component:6cd85dd44bd052c7cdb683d11d7d0587be3024d45519ad558a461c1d9c72722b",
+    "physical-component:9239659739230d43185316f8472b6b9daab1e202645edf30058e96212db396ef",
+    "physical-component:99d1a7ec56b2da82e9bc5de4a2e9ae90f3fc97224b68e66260a35ec8646e905b",
+    "physical-component:f4ad78c9cef04bce9a434cce624842d15d4df324ff81c059090a59cc56191a09",
+    "physical-component:b4f157a2dd71d807c03f52a1828827813bcf829c18b681d22bf8b4c72f09c029",
+    "physical-component:2c0975a947223865b5ed44b233aa09ca22a5387b7a02774d9cae57c9e243cd37",
+    "physical-component:38e6a690729876e62f42f9c2f51b86a36e4cb57455e65054c8bc0dc7072704d2",
+    "physical-component:87e079a4cfe8bb992c326637cfc95c85c1c95e78a5aa07a4a333d537ae632500",
+    "physical-component:2356b4e62d40367ccd7e1b3a68879d641d60a69e7b88335878f4ec567dac2b68",
+    "physical-component:551ca58c3f9a9f37b506c4da3b2bf8641e479b36af76aa1936018d0e50e0d011",
+    "physical-component:ced1abd1efed5578ee0d23497a2d8c71e92f19f69a50a1cad0e6f52e82e56c70",
+    "physical-component:18f67ea75fe03dd910a1d9d2e02395837d6a7a84e090f024522c1cab7a1d7caf",
+    "physical-component:310540c2dd46b9b58754b8de9b45a01bd520c5a082dfae327a20fe54d08bf850",
+    "physical-component:64621d74ca19d475b02d7c9144029019088f8734c068058fc5e8055d33426e15",
+    "physical-component:767aa8d41f588bc9163a6d6b72421888a3ccb69e85caa209d934008bbaced3f0",
+    "physical-component:7b4866aa79d8a17c6d9c211c737cc6687d611ef068301f0ecd12aa5e0deca405",
+    "physical-component:9f76b2d7e607e605a70efa73e8457beb17a87f20270076f6c7de62db142a570e",
+    "physical-component:aa84fcb57bf28efaeb7b04aca18624c1da865c72b0159311ee41b7368faaea55",
+    "physical-component:cc8500298299eff6edf9663b563a6d06a73939d6eec1aaea93963fa165ae5ccd",
+    "physical-component:db2d154456321a9d6202b1fc481298a20b8d6e23de93d82965c52a6499839921",
+    "physical-component:e2e7022d29c40e5c267166a5f29e94772a2ba14fe95bce7b3280e29dd5dc4e31"
+  ],
+  "geometry_scope": "supported-fragment",
+  "whole_gap_completion": false,
+  "original_remainder": {
+    "geometry": {
+      "coordinates": [
+        [
+          [
+            [
+              162.278656,
+              -10.835545
+            ],
+            [
+              162.2142200521766,
+              -10.81079509611558
+            ],
+            [
+              162.2786564460382,
+              -10.835544529256595
+            ],
+            [
+              162.30239362455762,
+              -10.838276188738945
+            ],
+            [
+              162.292328,
+              -10.837986
+            ],
+            [
+              162.278656,
+              -10.835545
+            ]
+          ]
+        ],
+        [
+          [
+            [
+              162.1930070177853,
+              -10.809817270417492
+            ],
+            [
+              162.19306707395197,
+              -10.80980947091533
+            ],
+            [
+              162.2069238979205,
+              -10.808052972269513
+            ],
+            [
+              162.1930070177853,
+              -10.809817270417492
+            ]
+          ]
+        ]
+      ],
+      "type": "MultiPolygon"
+    },
+    "geometry_sha256": "6efe56a29f0332221598ee8da4c3aff52be6dcb3e3dbb21d60f2a611404ceff2",
+    "geometry_type": "MultiPolygon",
+    "is_empty": false,
+    "is_valid": true,
+    "planar_area_coordinate_units_squared": 1.0329540802113956e-05,
+    "planar_length_coordinate_units": 0.21396005640602062
+  },
+  "limits": [
+    "Actual assembly and whole original custody only; selected native/continuous consumers and package/render/pick gates remain pending.",
+    "No deployment, physical/legal/date/source-policy expansion or whole-gap-completion credit."
+  ]
+}

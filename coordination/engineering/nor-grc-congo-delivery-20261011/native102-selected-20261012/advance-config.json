@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "recipe": {
+    "commit": "f35cc8e79b434ec317f2663fea56299689d4463a",
+    "path": "coordination/engineering/nor-grc-congo-delivery-20261011/native102-selected-20261012/recipe.json"
+  },
+  "automation": {
+    "issue_number": 1647
+  },
+  "preparation_allowance": {
+    "phaseBytes": 268435456,
+    "rssBytes": 536870912
+  },
+  "observations": {
+    "rebind": {
+      "publication": {
+        "commit": "38b3f45caa1a9f8f9dd9fbd854f8b4c2aaef637d",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/native102-selected-20261012/rebind-execution-001/publication.json"
+      },
+      "request": {
+        "commit": "38b3f45caa1a9f8f9dd9fbd854f8b4c2aaef637d",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/native102-selected-20261012/rebind-execution-001/request.json"
+      },
+      "terminal": {
+        "commit": "38b3f45caa1a9f8f9dd9fbd854f8b4c2aaef637d",
+        "path": "coordination/engineering/nor-grc-congo-delivery-20261011/native102-selected-20261012/rebind-execution-001/terminal.json"
+      },
+      "custody": {
+        "code_source": {
+          "commit": "38b3f45caa1a9f8f9dd9fbd854f8b4c2aaef637d",
+          "path": "coordination/engineering/nor-grc-congo-delivery-20261011/native102-selected-20261012/rebind-execution-001/code-source.json"
+        },
+        "issued_plan": {
+          "commit": "38b3f45caa1a9f8f9dd9fbd854f8b4c2aaef637d",
+          "path": "coordination/engineering/nor-grc-congo-delivery-20261011/native102-selected-20261012/rebind-execution-001/issued-plan.json"
+        },
+        "stdout": {
+          "commit": "38b3f45caa1a9f8f9dd9fbd854f8b4c2aaef637d",
+          "path": "coordination/engineering/nor-grc-congo-delivery-20261011/native102-selected-20261012/rebind-execution-001/stdout.json"
+        },
+        "stderr": {
+          "commit": "38b3f45caa1a9f8f9dd9fbd854f8b4c2aaef637d",
+          "path": "coordination/engineering/nor-grc-congo-delivery-20261011/native102-selected-20261012/rebind-execution-001/stderr.log"
+        }
+      }
+    },
+    "sidecar": {
+      "commit": "6b4fe91b721e942803c3b9a82df069b300026590",
+      "path": "coordination/engineering/nor-grc-congo-delivery-20261011/native102-selected-20261012/release-001/selection-sidecar.json"
+    }
+  }
+}
