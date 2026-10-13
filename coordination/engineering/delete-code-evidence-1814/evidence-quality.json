@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "issue": 1814,
+  "lane": "engineering",
+  "worker_id": "01a13450-f7c7-73b2-93d8-99b553a48037",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "723d64259929e67ec023a4b349eaf4740a091e23",
+    "files": [
+      {
+        "path": "scripts/evidence-policy.mjs",
+        "bytes": 2126,
+        "sha256": "a6b2d154c234d16321ab1841a69b681a739b45ac63e98bbeb6def295e1c6c11f",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "ordinary-engineering-retirement",
+      "kind": "code",
+      "description": "Delete generic engineering review inventories and body hashes, and the delivery review-freeze/base-refresh/queue wrapper. This transitional manifest satisfies the current-main issue contract while retiring mandatory wrappers for future ordinary engineering; it makes no scientific result claim.",
+      "software": "Node 24.19.0; Git; pinned scientific Python environment for source-adjudication controls",
+      "units": "No scientific measurements"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/premerge-evidence.test.mjs test/evidence-quality.test.mjs test/evidence-prevention.test.mjs test/evidence-partition-review.test.mjs test/historical-evidence.test.mjs test/pr-gates.test.mjs test/pr-evidence-transport.test.mjs test/issue-claims.test.mjs test/delivery-handoff.test.mjs test/delivery-handoff-advance.test.mjs test/geographic-adjudication-api.test.mjs test/merge-integration.test.mjs test/merge-integration-entrypoint.test.mjs test/effective-geographic-regression.test.mjs"
+  ]
+}

@@ -98,7 +98,9 @@ independently derived expectations, source inspection or adverse fixtures.
    changed expected digest or a true/false assertion alone does not test semantics.
 3. Reconcile source content, method, results and prose. Refresh descriptors only after
    results are final. Record unavailable experiments as limits, not successful checks.
-4. Check the existing evidence manifest locally. From the repository root, replace
+4. For declared scientific evidence, check the existing manifest locally. Ordinary
+   engineering uses the actual diff, applicable tests and substantive exact-head
+   review; do not manufacture a scientific wrapper. From the repository root, replace
    the manifest path below with the issue-declared path:
 
    ```sh
@@ -125,8 +127,8 @@ independently derived expectations, source inspection or adverse fixtures.
    references; candidate outputs cannot serve as their own reference. The hosted
    trusted premerge gate additionally checks metric/table bindings, control receipts,
    changed-file accounting and issue/scope bindings. After independent review, the
-   normal merge queue rechecks the exact-head review receipt and its issue/PR contract
-   bindings. Before review, inspect
+   integration workflow rechecks declared scientific evidence and its substantive
+   exact-head review. Ordinary engineering review is checked by the submitting operator. Before review, inspect
    those declarations against actual outputs and changed files; the local byte-only
    success is not full premerge acceptance. Read the quick hosted ownership/evidence
    results and resolve their machine-reported errors before requesting review. Long

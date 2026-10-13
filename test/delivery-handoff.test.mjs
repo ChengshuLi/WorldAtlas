@@ -3,13 +3,14 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {gzipSync} from 'node:zlib';
 import {candidateBudget} from '../scripts/native-ownership/native-preparation-guards.mjs';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
 import {subjectsHash} from '../scripts/evidence-quality.mjs';
 import {jsonBytes, digest, pinReader, publish, prepareRequests, retainProducts, nativeRequests,
-  composeAuthorities, packageProjection, rebindCustody, requestProfile, finalizedSelection, finalizedPackageInputs, finalizeDelivery, prepareEvidence, freezeReview} from '../scripts/prepare-delivery-handoff.mjs';
+  composeAuthorities, packageProjection, rebindCustody, requestProfile, finalizedSelection, finalizedPackageInputs, finalizeDelivery, prepareEvidence} from '../scripts/prepare-delivery-handoff.mjs';
 
 const commit = 'a'.repeat(40), prefix = 'coordination/engineering/control/';
 function memoryReader({admit = true} = {}) {
@@ -171,46 +172,6 @@ test('immutable Git input reader rejects whole-body drift, missing objects and n
   git('add', 'input.json'); git('commit', '-m', 'Fixture'); const r = pinReader(root), pin = r.pin(git('rev-parse', 'HEAD'), 'input.json');
   assert.equal(r.json(pin).value, 1); assert.throws(() => r.read({...pin, path: 'missing.json'}), /Missing ordinary/); assert.throws(() => r.read({...pin, sha256: '0'.repeat(64)}), /hash differs/);
   assert.throws(() => r.read({...pin, mode: '120000'}), /identity/); assert.throws(() => r.read({...pin, path: '../input.json'}), /safe/);
-});
-
-function reviewFixture({packetPrefix = prefix, ownedPaths} = {}) {
-  const head = 'b'.repeat(40), manifestPath = packetPrefix + 'evidence-quality.json';
-  const spec = {mode: 'engineering', max_prs: 1, depends_on: [], scope: 'Bounded fixture', ...(ownedPaths ? {owned_paths:ownedPaths} : {}), evidence_quality: {version: 1,
-    manifest_path: manifestPath, subject_ids: [], pins: {}, review_kind: 'code'}};
-  const issue = {number: 42, state: 'open', labels: ['type:engineering', 'kind:work-item', 'status:ready'], created_at: '2026-10-10T00:00:00Z', body: 'Original acceptance\n<!-- worldatlas-work:v1\n' + JSON.stringify(spec) + '\n-->'};
-  const files = [{filename: 'scripts/renamed.mjs', previous_filename: 'scripts/identity-old.mjs', status: 'renamed'}, {filename: manifestPath, status: 'added'}];
-  const pr = {number: 43, state: 'open', body: 'Refs #42\n', head: {sha: head, ref: 'engineering/control'}, base: {sha: commit}, changed_files: files.length};
-  const claim = {version: 1, active: true, worker_id: 'author', claim_id: 'fixture-claim', request_id: 'fixture-request', issue_number: 42, mode: 'engineering', max_prs: 1, live_work: false, branch: pr.head.ref, expires_at: '2099-01-01T00:00:00Z'};
-  const manifest = {version: 1, issue: 42, lane: 'engineering', worker_id: 'author', subject_ids: [], subject_ids_sha256: subjectsHash([]),
-    baseline: {commit, files: [{path: 'baseline.txt', bytes: 9, sha256: digest(Buffer.from('baseline\n')), hash_kind: 'file-bytes'}], pins: {}}, sources: [], outputs: [], methods: [{id: 'code', kind: 'code', description: 'Metadata', software: 'Node 24', units: 'none'}],
-    metrics: [], summaries: [], conclusions: [], stages: {research: 'complete', implementation: 'implemented', geographic_approval: 'not-requested'}, commands: []};
-  const r = memoryReader(), pin = r.add(manifestPath, manifest), raw = r.read(pin); r.pin = () => pin;
-  const api = async url => {
-    if (url.endsWith('/pulls/43')) return structuredClone(pr);
-    if (url.endsWith('/issues/42')) return structuredClone(issue);
-    if (url.includes('/issues/42/comments')) return [{id: 1, user: {login: 'github-actions[bot]', type: 'Bot'}, body: renderClaim(claim)}];
-    if (url.includes('/pulls/43/files')) return files;
-    if (url.includes('/git/commits/')) return {tree: {sha: 'tree'}};
-    if (url.includes('/git/trees/')) return {truncated: false, tree: [{path: manifestPath, type: 'blob', mode: '100644', sha: pin.blob, size: raw.length}, {path: 'baseline.txt', type: 'blob', mode: '100644', sha: 'baseblob', size: 9}]};
-    if (url.includes('/git/blobs/')) return {encoding: 'base64', content: (url.endsWith('/baseblob') ? Buffer.from('baseline\n') : raw).toString('base64')};
-    if (url.includes('/compare/')) return {status: 'ahead'};
-    throw Error('Unexpected API: ' + url);
-  };
-  return {pr, issue, claim, spec, files, api, reader: r, repo: 'fixture/repo', number: 43, expectedHead: head};
-}
-
-test('review handoff includes current bindings/complete rename scope and no approval; stale head/body/scope fail', async () => {
-  const f = reviewFixture(), packet = JSON.parse((await freezeReview(f))['review-packet.json']);
-  assert.equal(packet.kind, 'review-preparation-only'); assert.ok(packet.inspected_files.includes('scripts/identity-old.mjs'));
-  assert.equal(packet.outcome, undefined); assert.equal(packet.reviewer_worker_id, undefined); assert.match(packet.pr_body_sha256, /^[a-f0-9]{64}$/);
-  for (const field of ['head', 'body', 'changed_files']) {
-    const g = reviewFixture(), original = g.api; let reads = 0;
-    g.api = async url => { const value = await original(url); if (url.endsWith('/pulls/43') && ++reads === 2) {
-      if (field === 'head') value.head.sha = 'c'.repeat(40); else if (field === 'body') value.body += 'Changed disposition'; else value.changed_files++;
-    } return value; };
-    await assert.rejects(freezeReview(g), /changed while freezing/);
-  }
-  const missing = reviewFixture(); missing.files.pop(); await assert.rejects(freezeReview(missing), /Incomplete/);
 });
 
 test('rebind commit phases require complete custody and publication-matching result pins', () => {
@@ -498,25 +459,6 @@ test('finalization refuses a new identity at an accepted package path', () => {
   assert.throws(() => finalizeDelivery({...config,package_inputs},reader), /conflicts with accepted path identity/);
 });
 
-test('review freeze binds refreshed PR state before reading evidence and detects target/readiness drift', async () => {
-  const prepare = () => {
-    const f = reviewFixture(); f.pr.draft = false;
-    f.pr.head.repo = {full_name: f.repo}; f.pr.base.ref = 'main'; f.pr.base.repo = {full_name: f.repo};
-    return f;
-  };
-  for (const drift of [p => { p.draft = true; }, p => { p.base.ref = 'other'; },
-    p => { p.head.ref = 'engineering/other'; }, p => { p.base.repo.full_name = 'foreign/repo'; },
-    p => { p.head.repo.full_name = 'foreign/repo'; }, p => { p.body += 'Changed'; }]) {
-    const f = prepare(); f.expectedPR = structuredClone(f.pr); drift(f.pr);
-    await assert.rejects(freezeReview(f), /state changed after review preparation/);
-    const g = prepare(), original = g.api; let reads = 0;
-    g.api = async route => { const result = await original(route); if (route.endsWith('/pulls/43') && ++reads === 2) drift(result); return result; };
-    await assert.rejects(freezeReview(g), /changed while freezing/);
-  }
-  const draft = prepare(); draft.pr.draft = true; draft.expectedPR = structuredClone(draft.pr);
-  const packet = JSON.parse((await freezeReview(draft))['review-packet.json']);
-  assert.equal(packet.pr.draft, true); assert.equal(packet.kind, 'review-preparation-only');
-});
 
 // Scalar extraction from the reviewed AUS facts/evidence at
 // c753c65a72e51718b453883a941fc22e148b5fbb, merged as 94d7016a6e12ec5c5414db24202e95d5dd9e4459:
@@ -640,22 +582,12 @@ test('evidence CLI authenticates Git inputs and refuses malformed metrics before
   }
 });
 
-test('review freeze authenticates current issue scope for an owned nested manifest', async () => {
-  const options={packetPrefix:'coordination/engineering/retained/new-delivery/',ownedPaths:['coordination/engineering/retained/','scripts/renamed.mjs','scripts/identity-old.mjs']};
-  const f=reviewFixture(options), packet=JSON.parse((await freezeReview(f))['review-packet.json']);
-  assert.equal(packet.manifest.path,options.packetPrefix+'evidence-quality.json');
-  for(const mutate of [f=>delete f.spec.owned_paths,f=>f.spec.owned_paths=['coordination/engineering/foreign/'],
-    f=>f.issue.number=41,f=>f.issue.state='closed']) {
-    const g=reviewFixture(options);mutate(g);g.issue.body='Original acceptance\n<!-- worldatlas-work:v1\n'+JSON.stringify(g.spec)+'\n-->';
-    await assert.rejects(freezeReview(g));
-  }
-});
-
-test('review freeze rechecks current issue state and owned scope after reading evidence', async () => {
-  for(const mutation of [issue=>issue.state='closed',
-    issue=>issue.body=issue.body.replace('coordination/engineering/retained/','coordination/engineering/foreign/')]) {
-    const f=reviewFixture({packetPrefix:'coordination/engineering/retained/nested/',ownedPaths:['coordination/engineering/retained/']}), original=f.api;let reads=0;
-    f.api=async url=>{const value=await original(url);if(url.endsWith('/issues/42')&&++reads===2)mutation(value);return value;};
-    await assert.rejects(freezeReview(f));
+test('delivery CLI retires review-freeze and queue-submission entry points before any mutation', () => {
+  const script = fileURLToPath(new URL('../scripts/prepare-delivery-handoff.mjs', import.meta.url));
+  for (const args of [['review', 'absent-config.json', 'absent-destination'],
+    ['advance', 'absent-config.json', 'absent-destination', '--submit-queue']]) {
+    assert.throws(() => execFileSync(process.execPath, [script, ...args], {
+      encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], env: {...process.env, NODE_OPTIONS: '', NODE_PATH: ''}
+    }), error => error.status === 1 && /Use advance\|status|Use prepare-delivery-handoff/.test(error.stderr));
   }
 });
