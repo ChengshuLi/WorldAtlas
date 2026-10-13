@@ -742,3 +742,24 @@ test('only exact attempt-job inventory bypasses conditional snapshots; unsolicit
     ? new Response('{}', {headers: {etag: '"pending"'}}) : new Response(null, {status: 304})});
   await api(inventory);await assert.rejects(api(inventory), /Unrequested conditional/);assert.equal(reads, 2);
 });
+
+test('current accepted-parent policy keeps original authored event and evidence vintage explicit', async () => {
+ const f = fixture(), original = structuredClone(f.event), codeCommit = 'c'.repeat(40);
+ const result = await checkPRGates({event: f.event, repo: f.repo, token: 'fixture', api: f.api,
+  phase: 'metadata', codeCommit});
+ assert.equal(result.trusted_base, codeCommit);
+ assert.equal(result.event_base, original.pull_request.base.sha);
+ assert.equal(result.head_sha, original.pull_request.head.sha);
+ assert.deepEqual(f.event, original);
+ assert.ok(f.calls.includes(f.definitionRoute), 'authored package evidence retains original PR metadata');
+});
+
+test('PR entry refuses an executing checkout different from authenticated accepted parent', async () => {
+ const f = fixture();
+ const result = await runPRGates({event: f.event, env: {GITHUB_REPOSITORY: f.repo,
+  GH_TOKEN: 'fixture', PR_GATE_CODE_COMMIT: '0'.repeat(40)}, phase: 'metadata',
+  apiFactory: () => f.api, monotonicNow: () => 0});
+ assert.equal(result.status, 'incomplete-or-invalid');
+ assert.match(result.reason, /code must match the authenticated accepted parent/);
+ assert.equal(f.calls.length, 0);
+});

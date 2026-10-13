@@ -152,9 +152,6 @@ class JointRouting(unittest.TestCase):
         with mock.patch.object(G, 'verify_trusted_checkout', return_value='fixture'), \
              mock.patch.object(G, 'inventory', return_value=[]), \
              mock.patch.object(G, 'unchanged_selected_inputs', return_value=None), \
-             mock.patch.object(G, 'output_budget_transition', return_value=None), \
-             mock.patch.object(G, 'programme_registry_transition', return_value=None), \
-             mock.patch.object(G, 'linux_support_transition', return_value=None), \
              mock.patch.object(G, 'git', return_value=b'present'), \
              mock.patch.object(G, 'selected_joint', return_value={'mode': 'authenticated-checkpoint-append-v1', 'native': native, 'continuous_result': continuous}), \
              mock.patch.object(G.subprocess, 'check_output', side_effect=AssertionError('duplicate native child')), \
@@ -162,6 +159,36 @@ class JointRouting(unittest.TestCase):
             result = G.inspect(ROOT, BASE, NEXT)
         self.assertIs(result['selected_native_report'], native)
         self.assertIs(result['selected_continuous_report'], continuous)
+
+    def test_software_inspect_runs_cold_native_and_continuous_with_distinct_data(self):
+        native = {'status': 'no-new-native-loss', 'candidate_code_executed': False}
+        continuous = {'status': 'no-new-regression', 'regressions': 0}
+        with mock.patch.object(G, 'verify_trusted_checkout', return_value='fixture') as verify, \
+             mock.patch.object(G, 'inventory', return_value=[]), \
+             mock.patch.object(G, 'unchanged_selected_inputs', side_effect=AssertionError('software shortcut')), \
+             mock.patch.object(G, 'git', return_value=b'present'), \
+             mock.patch.object(G, 'selected_joint', side_effect=AssertionError('software checkpoint reuse')), \
+             mock.patch.object(G.subprocess, 'check_output', return_value=raw(native)) as child, \
+             mock.patch.object(G, 'selected_continuous', return_value=continuous) as cold:
+            result = G.inspect(ROOT, BASE, NEXT, code_commit=NEXT, checkpoint_destination=ROOT)
+        verify.assert_called_once_with(ROOT, NEXT)
+        self.assertEqual(child.call_args.args[0][-3:-1], [BASE, NEXT])
+        self.assertEqual(cold.call_args.args[1:3], (BASE, NEXT))
+        self.assertEqual(cold.call_args.kwargs, {'trusted': NEXT})
+        self.assertEqual(result['trusted_code_commit'], NEXT)
+        self.assertTrue(result['candidate_code_executed'])
+        self.assertEqual(result['selected_native_report'], native)
+        self.assertIs(result['selected_continuous_report'], continuous)
+        self.assertNotIn('checkpoint', result)
+
+    def test_cold_launcher_separates_code_from_both_data_commits(self):
+        issued = {'protocol': 'unchanged-child'}
+        with mock.patch.object(G.subprocess, 'check_output', return_value=raw(issued)) as child, \
+             mock.patch.object(G, 'consume_selected_continuous', return_value={}) as consume:
+            G.selected_continuous(ROOT, BASE, NEXT, D, trusted=NEXT)
+        args = child.call_args.args[0]
+        self.assertEqual(args[4:8], [str(ROOT), NEXT, BASE, NEXT])
+        self.assertEqual(consume.call_args.kwargs, {'trusted': NEXT})
 
 if __name__ == '__main__':
     unittest.main()

@@ -31,11 +31,11 @@ const joined = async promises => {
 // A later trusted reader may introduce another input route. Equal candidate code
 // alone cannot prove this older collector complete for that new reader. Updating
 // these profiles therefore requires reviewing its reads and the adverse tests.
+// Artifact transport/receipt validation discovers no scientific file routes. Its
+// code remains in EXECUTION_CODE, and locator/retained archive equality is checked.
 export const AUDITED_READERS = Object.freeze({
   // Accepted artifact routing and fixed output retention are part of this collector profile.
   'scripts/accepted-selected-checkpoint.mjs': ['54e78c5ea3316612b4605579808a8ec3863b69401e6e57da71e8d8070aee97ec'],
-  // PR merge-parent provenance adds no scientific file/route reads; retain the original profile.
-  'scripts/geographic-report-artifact.mjs': ['8023bccb096c2f6099b421ca25c0eec85b87cf1360d818b090fb551028c3b26a', '9b7a6efe042ce5866a621e5c65cecb1332406084f567e38f4928ef7d1ac3a8ec'],
   'scripts/geographic_checkpoint_products.py': ['24c692ee5f9e985b50ceb173cd6bf6c46ccfbe5b9505c519a51e1135d1f49434'],
   // The joint route only reuses authenticated original selected inputs and products.
   // These exact readers introduce no new scientific source outside that closure.
@@ -48,7 +48,9 @@ export const AUDITED_READERS = Object.freeze({
   // The second profile is reviewed stage-2 blob f8e4a88a6dbe3d3961d6b17d9b926ee4488561a8:
   // catalogue/admission/peak accounting changes; all input routes are identical.
   [PREFIX + 'selected-neighbor-prevention.mjs']: ['63745cc5d4f15bdd8c153787df07379d813ab037fc1e0734944a75568235e8aa',
-    '6da5919c63822393959afc8f2499c76470aa6b51d6e29664d372e9eee79ae4b1', '1ebc1415f9c18cf8639734073313667bbc0e831317484c48fcafbc6f6d7f1216'],
+    '6da5919c63822393959afc8f2499c76470aa6b51d6e29664d372e9eee79ae4b1', '1ebc1415f9c18cf8639734073313667bbc0e831317484c48fcafbc6f6d7f1216',
+    // Independent historical admission preserves all input routes.
+    '1593aad902a1c7010c5ffde21b2af2d39edd2093c82fac6973ed207e3b365847'],
   // Candidate and single-vintage frame reuse change lifetime/accounting, not input routes.
   [PREFIX + 'selected-continuous-entry.mjs']: ['84ddc84798fa371e37c0acbd6764a39ef79296f3b8a57ff09aa4ed416e7ae1b9', '198817f84574d3d04b0ab2c4827eced98211533a79851ee43b97c59d80663c07',
     '7f23e383ba04ab2953758087eb6c2c69c777d103589f5f1e00076163f084aeac',

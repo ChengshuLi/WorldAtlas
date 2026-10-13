@@ -4,7 +4,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {githubAPI, githubPages, verifyIssueScope} from './issue-claim-contract.mjs';
 import {validateIssuePRBody} from './check-handoff-scope.mjs';
-import {integrationProfile, selectedDataCandidate, selectedDataSelection} from './integration-profile.mjs';
+import {integrationProfile, selectedDataCandidate, selectedDataSelection, candidateGeographyCode} from './integration-profile.mjs';
 
 export async function selectIntegrationProfile({event, repo, api}) {
   const scheduled = event.pull_request;
@@ -38,7 +38,8 @@ export async function selectIntegrationProfile({event, repo, api}) {
   if (needsEngineeringScope && profile === 'evidence' && pr.base.sha !== scheduled.base?.sha) profile = 'full';
   const selection = profile === 'full' ? await selectedDataSelection({api, repo, branch: pr.head.ref, files,
     base: pr.base.sha, head: pr.head.sha, reservation}) : null;
-  return {profile, shards: profile === 'full' ? [0, 1, 2] : [0], ...selection};
+  return {profile, shards: profile === 'full' ? [0, 1, 2] : [0], ...selection,
+    geography_software: candidateGeographyCode(profile, files, selection?.test_selection)};
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
@@ -48,7 +49,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     const result = await selectIntegrationProfile({event, repo: process.env.GITHUB_REPOSITORY,
       api: githubAPI(process.env.GH_TOKEN,{onRequest:accounting.observe})});
     fs.appendFileSync(process.env.GITHUB_OUTPUT,
-      `profile=${result.profile}\nshards=${JSON.stringify(result.shards)}\ntest_selection=${result.test_selection ?? 'complete'}\nexpectations_path=${result.expectations_path ?? ''}\n`);
+      `geography_software=${result.geography_software}\nprofile=${result.profile}\nshards=${JSON.stringify(result.shards)}\ntest_selection=${result.test_selection ?? 'complete'}\nexpectations_path=${result.expectations_path ?? ''}\n`);
     console.log(JSON.stringify({integration_profile: result.profile, shards: result.shards}));
   }catch(error){
     const delay=quotaDelay(error);

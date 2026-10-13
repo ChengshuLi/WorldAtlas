@@ -406,12 +406,16 @@ export async function loadGeographicReport({api, repo, runId, artifactName, expe
   return report;
 }
 
-export function checkGeographicReport(geography, baseline, candidate) {
+export function checkGeographicReport(geography, baseline, candidate, codeCommit = baseline) {
+  need(codeCommit === baseline || codeCommit === candidate, 'Unsupported geographic checker code commit');
   need(geography?.version === 1 && geography.method_id === 'worldatlas-trusted-geography-check-v1' &&
-    geography.baseline_commit === baseline && geography.trusted_code_commit === baseline &&
-    geography.candidate_commit === candidate && geography.candidate_code_executed === false &&
+    geography.baseline_commit === baseline && geography.trusted_code_commit === codeCommit &&
+    geography.candidate_commit === candidate && geography.candidate_code_executed === (codeCommit !== baseline) &&
     geography.published === false && geography.source_approval === false && geography.gate_status === 'passed',
     'Geographic report does not bind exact trusted combined check');
+  if (codeCommit !== baseline) need(!geography.checkpoint && !geography.reused_baseline_proof && !geography.unchanged_selected_inputs &&
+    /^[a-f0-9]{64}$/.test(geography.trusted_code_inventory_sha256 ?? ''),
+    'Software geography must bind actual execution inventory without baseline/checkpoint reuse');
   const ordinaryPass = ['not-applicable', 'no-footprint-change', 'no-new-regression'].includes(geography.status);
   const waterPass = geography.status === 'regressions-found' &&
     geography.adjudication?.status === 'all-findings-supported-and-reviewed' &&
