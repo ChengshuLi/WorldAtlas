@@ -70,6 +70,23 @@ function journal(t) {
   const value = openAdvanceJournal(root, '.cache/delivery-handoff/one', {commit, path: 'recipe.json'}, {now: () => time});
   return {...value, tick: ms => { time += ms; }};
 }
+test('package receipts bind immutable input and preserve interrupted legacy receipt bytes', async t => {
+  const j=journal(t), config={version:1, scope:'ordinary'}, products={'package-roles.json':Buffer.from('{}\n')};
+  await withAdvanceLock(j,()=>prepareAdvanceStage(j,'package','package',config,()=>products));
+  const filename=path.join(j.target,'package','preparation.json'), receipt=JSON.parse(fs.readFileSync(filename));
+  assert.deepEqual(receipt.input,config);
+  const changed=structuredClone(receipt);changed.input.scope='foreign';fs.writeFileSync(filename,JSON.stringify(changed)+'\n');
+  assert.throws(()=>readAdvanceStatus(j),/inventory differs/);
+  delete receipt.input;
+  // Reproduce the canonical old producer format, including nested bindings.
+  const canonical=v=>Array.isArray(v)?v.map(canonical):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canonical(v[k])])):v;
+  const legacy=Buffer.from(JSON.stringify(canonical(receipt))+'\n');fs.writeFileSync(filename,legacy);
+  fs.unlinkSync(path.join(j.stateTarget,'package.completed.json'));
+  await withAdvanceLock(j,()=>prepareAdvanceStage(j,'package','package',config,()=>products));
+  assert.deepEqual(fs.readFileSync(filename),legacy);
+  assert.deepEqual(readAdvanceStatus(j).completed,['package']);
+});
+
 test('interrupted metadata resumes identical postimages and only completes once', async t => {
   const j = journal(t), products = {'a.json': Buffer.from('{}\n'), 'b.json': Buffer.from('[]\n')};
   let stopped = false;

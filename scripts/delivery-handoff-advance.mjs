@@ -39,6 +39,8 @@ export function readPreparedStage(reader, locator, expectedPhase) {
     && /^[a-f0-9]{64}$/.test(receipt.binding.config_sha256)
     && receipt.outputs && Object.keys(receipt.outputs).length,
   'Missing completed preparation phase');
+  need(!Object.hasOwn(receipt, 'input') || expectedPhase === 'package'
+    && hash(bytes(receipt.input)) === receipt.binding.config_sha256, 'Committed package input binding differs');
   const prefix = path.posix.dirname(pin.path), outputs = {};
   for (const [name, declared] of Object.entries(receipt.outputs)) {
     need(safe(name) && !name.includes('/') && name !== 'preparation.json', 'Unsafe prepared output');
@@ -383,7 +385,9 @@ export function readAdvanceStatus(journal) {
       completed.push(event); continue;
     }
     const receipt = JSON.parse(journalFile(journal, path.join(journal.target, event.stage, 'preparation.json')));
-    need(equal(receipt.binding, event.binding) && equal(receipt.outputs, event.outputs), 'Completion/whole inventory differs');
+    need(equal(receipt.binding, event.binding) && equal(receipt.outputs, event.outputs)
+      && (!Object.hasOwn(receipt, 'input') || event.binding.phase === 'package' && equal(receipt.input, intent.config)),
+      'Completion/whole inventory differs');
     const actualNames = fs.readdirSync(path.join(journal.target, event.stage)).sort();
     need(equal(actualNames, [...Object.keys(receipt.outputs), 'preparation.json'].sort()), 'Foreign completed output');
     for (const [file, pin] of Object.entries(receipt.outputs)) {
@@ -478,9 +482,14 @@ export async function prepareAdvanceStage(journal, id, phase, config, produce, {
     writeJournal(journal, eventPath, bytes(event));
     return {stage: id, resumed: false, reused: true, receipt: adoption.receipt};
   }
-  const receipt = bytes({version: 1, binding, outputs});
-  budget.add({bytes: receipt.length});
   const target = path.join(journal.target, names.directory);
+  // Package templates need immutable input provenance after runtime state moves
+  // to cache. Preserve already-written legacy receipts exactly on recovery.
+  const oldReceiptPath = path.join(target, 'preparation.json');
+  const legacyReceipt = fs.existsSync(oldReceiptPath)
+    && !Object.hasOwn(JSON.parse(journalFile(journal, oldReceiptPath)), 'input');
+  const receipt = bytes({version: 1, binding, outputs, ...(phase === 'package' && !legacyReceipt ? {input: config} : {})});
+  budget.add({bytes: receipt.length});
   if (fs.existsSync(target) || fs.lstatSync(target, {throwIfNoEntry: false})) {
     need(fs.lstatSync(target).isDirectory() && fs.realpathSync(target) === target, 'Foreign stage destination');
     const expected = {...products, 'preparation.json': receipt};

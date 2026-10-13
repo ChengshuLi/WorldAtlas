@@ -670,3 +670,12 @@ custody commits stay unchanged. All foreign-role identity failures are reported
 together so the complete scope can be reconciled before retrying. This descriptor
 is part of the immutable finalize-stage input; an already failed stage must keep
 its original intent and use a truthful new preparation vintage for changed input.
+
+Automatic `package` stages retain their exact immutable input in the committed
+`preparation.json`, authenticated by its existing configuration hash and output
+inventory. The selected classifier consumes this product provenance without
+requiring any runtime cache or `package.intent.json` in Git. Existing published
+legacy intent/receipt pairs remain supported; an already-written legacy receipt
+keeps its exact bytes during interrupted recovery. Standalone package publication
+continues to use its existing receipt/configuration contract. Runtime observations,
+locks, timestamps and dispatch intent are never added to the product receipt.
