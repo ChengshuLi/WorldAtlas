@@ -620,6 +620,10 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       'unsupported current rebind');
     for (const role of ['request','facts','publication','result']) pin(certificate[role]);
     await operating(certificate.operating, true);
+    // Existing proof roles are already authenticated by the fixed-role walk.
+    // Only declarations beyond that graph need the administrative extension.
+    if (registryChanged || packageAdditions.some(name => baseline.entries.has(name) && !reachable.has(name)))
+      for (const authority of sourceAuthorities) await sourceRoles(authority);
     for (const name of templates) {
       // A null template needs immutable input/output provenance, never mutable
       // runtime journal state. Legacy published intent pairs remain supported.
@@ -763,10 +767,6 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
         if (bytes.length > 128 * 1024) jsonLines(bytes, 128 * 1024);
       }
     }
-    // Existing proof roles are already authenticated by the fixed-role walk.
-    // Only declarations beyond that graph need the administrative extension.
-    if (registryChanged || packageAdditions.some(name => baseline.entries.has(name) && !reachable.has(name)))
-      for (const authority of sourceAuthorities) await sourceRoles(authority);
     if (registryChanged) {
       const previous = registryEntries(await json(ADMINISTRATIVE_REGISTRY, baseline));
       needSelected(administrative && administrative.length > previous.length && same(previous, administrative.slice(0, previous.length)) &&
