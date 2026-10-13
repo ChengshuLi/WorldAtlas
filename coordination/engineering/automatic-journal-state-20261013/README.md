@@ -88,3 +88,16 @@ with 72,720 and 73,028 KiB peak RSS; the old accounting refused the same roster.
 Genuinely oversized live inputs and serialization still refuse. This establishes
 resource-admission correctness for that roster, not hosted output equivalence.
 The failed run created no eligible baseline and its remaining jobs were cancelled.
+
+Run 38338654077 completed the genuine hosted build, full producer shard and
+geography gate, but failed other shards on two fixture assumptions and an inert
+namespace rejection. The follow-up keeps actual dynamically importable source,
+native and sourceless additions forbidden while admitting data/cache-only
+namespace portions. It uses importer-resolvable names, including dynamic names,
+without a cache-directory name exception. Streaming/symlink controls now isolate
+raw-file behavior from optional host-generator normalization; dedicated generator
+controls remain. Memory-pressure controls assert refusal and no further reads
+instead of one reader layer's diagnostic spelling. The 19 Node runtime controls,
+4 pressure controls and 8 execution plus 29 Python identity controls pass. The
+previous producer artifact is preserved; programme changes require a new matching
+baseline before changed-selection proof.
