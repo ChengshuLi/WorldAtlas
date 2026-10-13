@@ -3,10 +3,10 @@
 `node scripts/prepare-delivery-handoff.mjs PHASE CONFIG DESTINATION [--resume]`
 prepares immutable metadata in a managed checkout. The individual preparation phases
 never run a scientific operator, accept a source, submit a review, commit, queue
-or merge. The optional automatic continuation below commits completed metadata. The later explicit `advance --submit-queue` option uses the existing
-native merge workflow only after genuine independent acceptance. The
-existing issue scope, source/native supervisor, rebind issuer, selected reader,
-evidence gate, independent reviewer and serialized queue retain their authority.
+or merge. The optional automatic continuation below commits completed metadata
+and ends with the actual finalized outputs. Publish the real head, obtain
+substantive independent review, then use the standard worker integration workflow.
+Scientific source/native supervision, rebind, selected-reader and output checks remain authoritative.
 Use Node 24 without loaders/preloads. Check storage with `local-workspace.mjs`
 before preparation. Sparse checkouts need the two literal existing composition
 and selected-neighbor helper paths imported by the command; no dataset directory
@@ -127,15 +127,6 @@ No proposed input is called accepted merely because a hash matches.
    files in the delivery owner's ordinary commit/review flow. Repeating from the
    staged selector/package or using exact `--resume` must produce no changes.
    Scientific assembly, package builds and final delivery remain separate.
-8. `review`: supply `repo`, `pr_number` and exact `head_sha`. Existing `gh` login is
-   read once for read-only API calls. The command reads current PR and issue,
-   complete changed-file/rename scope and existing premerge evidence checks, then
-   rereads current head/base/body/scope. The frozen packet carries required domains,
-   complete inventory commitment, issue-contract and PR-body hashes, limitations,
-   and existing queue/read-only resume command arguments. It is deliberately not a
-   `worldatlas-review:v1` receipt and contains no approval or reviewer identity.
-   A distinct reviewer inspects the exact head, current acceptance and evidence,
-   and posts their own substantive receipt. Only then use the existing queue.
 
 Outputs use a fresh directory below `.cache/delivery-handoff/` or the caller's
 issue-owned `coordination/engineering/<job>/`. All products are admitted before
@@ -207,10 +198,9 @@ command/test bodies and their immutable example inputs are unchanged.
   groups and finite resource profiles; no source acceptance is inferred.
 - Package and selector finalization: automated, including literal accepted-prefix
   preservation, selector insertion order, collisions and exact resume.
-- Review handoff: current contract, complete scope, required domains and existing
-  queue arguments are frozen together. The reviewer still performs substantive
-  review and posts their own receipt. The command never asks again for authority
-  it does not own, nor grants authority on behalf of that reviewer.
+- Review and integration use the actual PR/head, ordinary review comments and
+  standard workflow dispatch. Delivery preparation creates no review packet or
+  submission state and never approves itself.
 - Grouping and parallel work: configs accept actual independent method/resource
   groups. Scheduling, source readiness and selecting which groups can run in
   parallel remain outside this command; it introduces no old-batch barrier.
@@ -221,8 +211,8 @@ command/test bodies and their immutable example inputs are unchanged.
 Actual immutable commit pins between phases, external scientific execution,
 independent source/review authority and the existing serialized queue are manual
 or existing-tool boundaries. No scheduler or automatic approval is hidden in the
-preparation command. The explicit continuation below binds these existing tools;
-queue submission still needs the normal live authority and explicit option.
+preparation command. Its completed result establishes prepared outputs only, not
+source acceptance, review, integration or publication.
 
 ## Admitted recipe continuation (`advance` / `status`)
 
@@ -241,9 +231,8 @@ reports the exact external input it is waiting for. Repeat the same command afte
 recording genuine publication/commit results. It never runs SOURCE, NATIVE,
 rebind, assembly, builds, Git commits, or a reviewer. The finite sequence is recipe,
 requests, SOURCE retention, native requests/retention, authority pairs/registry,
-composition, rebind custody/certificate, package, finalization, live review
-preparation and the existing merge queue. Actual operators and their required
-per-phase input authentication remain separate.
+composition, rebind custody/certificate, package and finalization. Actual operators,
+per-phase input authentication, independent review and integration remain separate.
 
 Initial method admission is explicit. A `greedy-model` recipe supplies the
 accepted registry locator, handoff IDs, admitted v2 SOURCE/NATIVE exemplar
@@ -325,8 +314,6 @@ Observations supply only actual commit/path locators, not derived hashes:
   to the deterministic preceding output.
 - `rebind`: actual `publication`, `request`, `terminal` locators and complete
   `custody` locators for code_source, issued_plan, stdout and stderr.
-- `review: {repo, pr_number}` is a top-level config field. The current head is
-  read from GitHub, then the existing exact-head review packet is frozen.
 
 For an already completed delivery, top-level `completed_delivery` supplies its
 sidecar locator, composed-ledger locator and owned prefix. The command discovers
@@ -367,15 +354,11 @@ Timings report preparation, acquisition, API wait, observed external wait and in
 operator-receipt durations separately. Parallel operator durations are not added
 and called wall time; metadata speed is not global gap-closures/hour.
 
-Queue preparation requires the existing live independent review/evidence gate,
-including current scope/body/manifest bindings and unresolved refusals.
-Only explicit `advance ... --resume --submit-queue` dispatches the native merge
-workflow. Its submission ID is durably written before POST. Every invocation with
-an existing submission intent is observation-only, including a crash before an
-uncertain POST. An absent run in a bounded listing never authorizes another
-submission. Follow
-`MERGE_QUEUE_CLIENT.md` for explicit reconciliation; no approval is inferred from
-local records, an unchanged head, or successful metadata preparation.
+The command stops at `status: "prepared"` after finalization. Review the actual
+published head and dispatch the standard workflow directly. Retained historical
+review/queue records remain readable and unchanged; they never authorize a new
+submission. There is no review-freeze phase, PR-base metadata PATCH or
+`--submit-queue` option in this preparation command.
 
 Optional `preparation_allowance: {phaseBytes, rssBytes}` in either command config
 requests a finite metadata phase allowance, checked against current available
@@ -397,50 +380,6 @@ scientific cache or GIS operands. Acceptance or revalidation relying on the
 retained current13 proof must run `WORLDATLAS_DELIVERY_FIXTURE=1` and establish
 zero skips; ordinary CI alone does not establish that proof. Absence of those
 bodies is a fixture availability limit, never a successful replay.
-
-## Optional same-target PR base metadata refresh
-
-For a genuine refresh of an existing PR, set `review.refresh_base_metadata: true`
-alongside its existing `repo` and `pr_number` in the advance config. The same
-`advance` invocation then compares GitHub's reported PR base to one actual
-`refs/heads/main` snapshot before freezing a new review packet. An already-current
-base needs no write. A stale base permits one ordinary `PATCH {base: "main"}` only
-for a complete open same-repository PR already targeting main. Exact head SHA,
-head/target branch and repository identities, body and draft/ready state are
-checked immediately before the call, in an independent readback and throughout
-review freezing. This option cannot mark a draft ready, edit source branches,
-change main or authorize the existing independent review/queue gates.
-
-The existing advance journal writes `pr-base-refresh.json` before the external
-call and records its outcome in its ordinary observations. Every invocation with
-that intent is observation-only, including interruption before dispatch or loss
-of the response. A complete readback may establish the intended state even when
-the PATCH response was lost; it does not prove which actor changed the metadata.
-Missing readback, state drift or a changed captured main refuses without another
-PATCH. Preserve the original journal and reconcile the external outcome before
-deciding on any new attempt. `status` remains read-only and reports the retained
-intent and last observed outcome. Removing the opt-in does not turn an existing
-intent into permission to retry.
-
-A completed review packet is never silently rebound by this option. Its ordinary
-frozen bindings and live queue checks still apply; a changed review vintage needs
-fresh preparation and any required independent review. The PR API has no atomic
-multi-field compare-and-swap guard, so the before/after checks rely on the existing
-cooperative owner protocol and cannot exclude an out-of-band writer in between.
-
-The retained PR #1762 fixture exercises the actually observed stale metadata
-shape, plus exact draft preservation, denied/uncertain responses, interruption,
-foreign targets, state drift and frozen-packet preservation. These controls do
-not mutate a live PR or measure delivery throughput. Record adoption only when
-the option handles the next genuinely required refresh.
-
-The fresh-composition control uses the actual retained five new authority entries
-and thirty predecessor entries as separate immutable inputs, then commits the
-ordinary composer output and derives both pins from its genuine completion
-receipt. The combined output preserves all original rows and exact accepted
-registry bytes. This is metadata-transition proof, not another scientific run.
-The need was found by tracing the current AUS continuation; no actual AUS refusal
-was run, and its already-supported standalone compose route remains valid.
 
 ## Automatic mechanical continuation
 
@@ -482,15 +421,12 @@ postimage, including deletions and modes. Conflicts, missing immutable objects,
 untracked collisions and changes to an owned postimage stop publication. Exact
 refresh intent/result and elapsed time are retained. A resume requires that same
 captured main and head; changed targets require a fresh vintage or explicit
-reconciliation. This is separate from the optional PR base-metadata PATCH.
+reconciliation. No separate PR-base metadata PATCH is performed.
 
-Publication must use the actual refreshed head. If a PR is supplied but still
-names an older head, review freezing refuses before evidence traversal. Creating
+Publication and independent review must use the actual refreshed head. Creating
 or updating the PR, installing final selection outputs and scientific operators
-remain outside this metadata continuation. Independent substantive reviewer
-acceptance remains mandatory; automatic continuation never approves itself.
-Use the existing explicit `--submit-queue` only after that acceptance. An existing
-queue submission ID still makes every resumed invocation observation-only.
+remain outside this metadata continuation. Substantive reviewer acceptance remains
+mandatory; use the ordinary review and standard workflow dispatch after preparation.
 
 Timing includes each automatic invocation's start, measured elapsed duration,
 prepared-stage count and observed commit count, plus commit/refresh work and
@@ -631,8 +567,8 @@ This route enters directly at real authority metadata preparation. It neither
 issues SOURCE/NATIVE requests nor marks recipe, request or operator stages as
 completed. It uses the existing interruption-safe journal and automatic commit
 path for metadata actually prepared, then shares the ordinary authority registry,
-composition, genuine current rebind, package/finalize, independent review and
-queue barriers. It cannot be mixed with `resume_finalized`, `completed_delivery`
+composition, genuine current rebind and package/finalize preparation. Independent
+review and integration follow separately. It cannot be mixed with `resume_finalized`, `completed_delivery`
 or `prepared_stages`; execution observations cannot replace its pinned custody.
 Original qualification alone is never current selection approval.
 

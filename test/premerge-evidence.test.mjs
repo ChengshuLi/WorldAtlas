@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
 import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
 import {evidenceRequirement} from '../scripts/evidence-policy.mjs';
-import {validatePremergeManifest, validateRecordChecks, validateReviewReceipt, reviewInventoryCommitment, checkPremergeEvidence, GEOMETRY_VERSION, reviewContractBinding, reviewBindingRequired} from '../scripts/premerge-evidence.mjs';
+import {validatePremergeManifest, validateRecordChecks, validateReviewReceipt, checkPremergeEvidence, GEOMETRY_VERSION} from '../scripts/premerge-evidence.mjs';
 
 const commit = 'a'.repeat(40), head = 'b'.repeat(40), branch = 'engineering/synthetic';
 const manifestPath = 'coordination/engineering/synthetic/evidence-quality.json';
@@ -58,9 +58,10 @@ function review(f, r = receipt(f), options = {}) {
   return validateReviewReceipt(r, {pr: f.pr, manifest: f.manifest, manifestHash: sha256(JSON.stringify(f.manifest)), files: f.files,
     limits: [], author: 'author', ...options});
 }
-test('new requirements preserve old scopes, enforce new declarations and permit explicit legacy adoption', () => {
+test('scientific requirements preserve legacy scopes while ordinary engineering needs no wrapper', () => {
   const f = fixture(); assert.equal(evidenceRequirement(f.issue, f.spec, policy, branch).required, true);
-  delete f.spec.evidence_quality; assert.throws(() => evidenceRequirement(f.issue, f.spec, policy, branch), /New work/);
+  delete f.spec.evidence_quality; assert.equal(evidenceRequirement(f.issue, f.spec, policy, branch).required, false);
+  f.spec.mode = 'source-only'; assert.throws(() => evidenceRequirement(f.issue, f.spec, policy, branch), /New work/);
   f.issue.created_at = '2026-10-02T00:00:00Z'; assert.equal(evidenceRequirement(f.issue, f.spec, policy, branch).legacy, true);
   delete f.issue.created_at; assert.throws(() => evidenceRequirement(f.issue, f.spec, policy, branch), /timestamp/);
   assert.equal(evidenceRequirement({}, {}, {...policy, mode: 'report-only'}).required, false);
@@ -123,9 +124,8 @@ test('Washington-style generated narrative/table mismatch fails against the same
   f.manifest.rendered_tables[0].rows[0].template = 'Wrong | {value}%'; assert.throws(() => validate(f), /table differs/);
   f.manifest.rendered_tables = []; assert.throws(() => validate(f), /ledger-bound/);
 });
-test('reviews reject self approval, stale heads, omitted hashes/files and absent factual/geometry review', () => {
-  for (const mutate of [r => r.reviewer_worker_id = 'author', r => r.head_sha = commit, r => r.evidence_hashes.pop(),
-    r => r.inspected_files.pop(), r => r.outcome = 'changes-requested', r => delete r.domains.implementation]) {
+test('scientific reviews reject self approval, stale heads and absent factual/geometry review', () => {
+  for (const mutate of [r => r.reviewer_worker_id = 'author', r => r.head_sha = commit, r => r.outcome = 'changes-requested', r => delete r.domains.implementation]) {
     const f = fixture(), r = receipt(f); mutate(r); assert.throws(() => review(f, r));
   }
   const f = fixture(); assert.throws(() => review(f, receipt(f), {reviewKind: 'geometry'}), /geometry/);
@@ -243,126 +243,25 @@ test('fresh remote review, head, tree/path checks reject after immutable bytes w
  await assert.rejects(checkPremergeEvidence({...f,api,repo:'test/repo',policy}),/Incomplete/);
 });
 
-test('acceptance/disposition binding invalidates substantive changes but preserves JSON formatting and progress comments',()=>{
- const f=fixture();f.pr.body='Refs #100\nImplemented scoped repair; remaining production acceptance waits for Publisher.';
- const binding=reviewContractBinding(f.issue,f.pr),r={...receipt(f),...binding};
- review(f,r,{issue:f.issue,requireContractBinding:true});
- const reformatted={...f.issue,body:f.issue.body.replace(JSON.stringify(f.spec),JSON.stringify(f.spec,null,2))};
- assert.deepEqual(reviewContractBinding(reformatted,f.pr),binding);
- assert.deepEqual(reviewContractBinding({...f.issue,comments:1000},f.pr),binding);
- for(const change of [()=>f.issue.body+='\nAcceptance now requires publication.',()=>f.pr.body=f.pr.body.replace('Refs','Closes')]){
-  const beforeIssue=f.issue.body,beforePR=f.pr.body;change();
-  assert.throws(()=>review(f,r,{issue:f.issue,requireContractBinding:true}),/contract or PR disposition changed/);
-  f.issue.body=beforeIssue;f.pr.body=beforePR;
- }
- assert.throws(()=>review(f,receipt(f),{issue:f.issue,requireContractBinding:true}),/contract or PR disposition changed/);
- review(f,receipt(f),{issue:f.issue,requireContractBinding:false});
-});
-test('binding activation preserves existing PRs and rejects unknown activation timestamps',()=>{
- const p={...policy,review_contract_activation_time:'2026-10-06T20:45:00Z'};
- assert.equal(reviewBindingRequired({created_at:'2026-10-06T20:44:00Z'},p),false);
- assert.equal(reviewBindingRequired({created_at:'2026-10-06T20:45:00Z'},p),true);
- assert.throws(()=>reviewBindingRequired({},p),/timestamp/);
-});
-
-function compactReceipt(f) {
-  const value = receipt(f);
+test('scientific review needs substantive scope, not a duplicate file inventory or prose hashes', () => {
+  const f = fixture(), value = receipt(f);
   delete value.inspected_files;
   delete value.evidence_hashes;
-  value.inventory_commitment = reviewInventoryCommitment(f);
-  return value;
-}
-
-test('compact review binds canonical complete inventory and preserves literal receipts', () => {
-  const f = fixture();
-  f.files[0].previous_filename = 'previous-name.json';
-  const value = compactReceipt(f);
-  assert.deepEqual(value.inventory_commitment, {version: 1,
-    inspected_files: {count: 3, sha256: sha256(JSON.stringify([manifestPath, outputPath, 'previous-name.json'].sort()))},
-    evidence_hashes: {count: 2, sha256: sha256(JSON.stringify([sha256(baseline), sha256(output)].sort()))}});
   assert.equal(review(f, value).reviewer, 'reviewer');
-  f.files.reverse();
+  f.issue.body += '\nProgress and disposition are reviewed in ordinary comments.';
   assert.equal(review(f, value).reviewer, 'reviewer');
-  assert.equal(review(fixture()).reviewer, 'reviewer');
-  assert.notEqual(value.inventory_commitment.inspected_files.sha256,
-    sha256(JSON.stringify([manifestPath, outputPath, 'previous-name.json'].sort()) + '\n'));
+  value.manifest_sha256 = 'c'.repeat(64);
+  assert.throws(() => review(f, value), /exact head, manifest/);
 });
 
-test('compact reviews refuse malformed, mixed, omitted, changed and renamed inventories', () => {
-  const changes = [
-    r => r.inspected_files = [], r => r.evidence_hashes = [],
-    r => r.inventory_commitment = null, r => r.inventory_commitment.version = 2,
-    r => delete r.inventory_commitment.evidence_hashes,
-    r => r.inventory_commitment.extra = true,
-    r => r.inventory_commitment.inspected_files.count--,
-    r => r.inventory_commitment.evidence_hashes.count++,
-    r => r.inventory_commitment.inspected_files.count = false,
-    r => r.inventory_commitment.inspected_files.sha256 = 'broken',
-    r => r.inventory_commitment.evidence_hashes.sha256 = 'A'.repeat(64),
-    r => delete r.inventory_commitment.inspected_files.sha256,
-    r => r.inventory_commitment.inspected_files.extra = true,
-    r => r.inventory_commitment.inspected_files.sha256 = sha256(JSON.stringify([manifestPath])),
-    r => r.inventory_commitment.evidence_hashes.sha256 = sha256(JSON.stringify([sha256(baseline)]))
-  ];
-  for (const change of changes) {
-    const f = fixture(), value = compactReceipt(f); change(value);
-    assert.throws(() => review(f, value), /inventory|commitment/);
-  }
-  for (const change of [
-    f => f.files[0].filename += '.changed',
-    f => f.files[0].previous_filename = 'renamed-original.json',
-    f => f.manifest.outputs[0].sha256 = 'c'.repeat(64),
-    f => f.manifest.outputs.pop()
-  ]) {
-    const f = fixture(), value = compactReceipt(f); change(f);
-    value.manifest_sha256 = sha256(JSON.stringify(f.manifest));
-    assert.throws(() => review(f, value), /commitment differs/);
-  }
-});
-
-test('compact inventory does not weaken head, reviewer, contract, domain or limit authority', () => {
-  for (const change of [r => r.head_sha = commit, r => r.reviewer_worker_id = 'author',
-    r => delete r.domains.implementation, r => r.outcome = 'changes-requested']) {
-    const f = fixture(), value = compactReceipt(f); change(value);
-    assert.throws(() => review(f, value));
-  }
-  const f = fixture(), value = {...compactReceipt(f), ...reviewContractBinding(f.issue, f.pr)};
-  assert.equal(review(f, value, {issue: f.issue, requireContractBinding: true}).reviewer, 'reviewer');
-  f.issue.body = 'Changed acceptance\n' + f.issue.body;
-  assert.throws(() => review(f, value, {issue: f.issue, requireContractBinding: true}), /contract/);
-  assert.throws(() => review(f, compactReceipt(f), {limits: ['Retained source uncertainty']}), /limits/);
-  assert.throws(() => review(f, compactReceipt(f), {reviewKind: 'geometry'}), /geometry/);
-});
-
-test('normal remote comment route admits a complete compact review beyond literal GitHub comment size', async () => {
-  const f = fixture(), contents = [];
-  for (let i = 0; i < 468; i++) {
-    const path = `coordination/engineering/synthetic/${'complete-original-custody-'.repeat(5)}${String(i).padStart(3, '0')}.json`;
-    const raw = Buffer.from(JSON.stringify({original_record: i}));
-    f.files.push({filename: path, status: 'added'});
-    f.manifest.outputs.push(desc(path, raw));
-    f.manifest.change_receipts.push({path, status: 'added'});
-    contents.push([path, raw]);
-  }
-  f.pr.changed_files = f.files.length;
-  const value = {...compactReceipt(f), ...reviewContractBinding(f.issue, f.pr)};
-  const literal = {...value, inspected_files: f.files.map(x => x.filename),
-    evidence_hashes: [sha256(baseline), ...f.manifest.outputs.map(x => x.sha256)]};
-  delete literal.inventory_commitment;
-  assert.ok(JSON.stringify(literal).length > 65536);
-  assert.ok(JSON.stringify(value).length < 4096);
-  const comment = (r, id = 1) => ({id, author_association: 'OWNER',
-    body: `<!-- worldatlas-review:v1\n${JSON.stringify(r)}\n-->`});
-  const run = comments => checkPremergeEvidence({...f, repo: 'test/repo', policy, review: true,
-    api: remoteFixture(f, comments, contents).api});
-  const positive = await run([comment(value)]);
-  assert.equal(positive.change_files_checked, 470);
-  assert.equal(positive.review.reviewer, 'reviewer');
-  await assert.rejects(() => run([comment(value), comment({...value, outcome: 'changes-requested'}, 2)]), /unresolved/);
-  const omitted = structuredClone(value); omitted.inventory_commitment.inspected_files.count--;
-  await assert.rejects(() => run([comment(omitted)]), /commitment differs/);
-  const stale = {...value, head_sha: commit};
-  await assert.rejects(() => run([comment(stale)]), /Missing independent/);
+test('ordinary engineering reads no synthetic scientific packet or review JSON', async () => {
+  const f = fixture(); delete f.spec.evidence_quality;
+  f.issue.body = `<!-- worldatlas-work:v1\n${JSON.stringify(f.spec)}\n-->`;
+  const result = await checkPremergeEvidence({...f, repo: 'test/repo', policy, review: true,
+    api: async () => { throw Error('Ordinary engineering must not fetch an invented scientific packet'); }});
+  assert.equal(result.status, 'not-required');
+  assert.equal(result.head_sha, f.pr.head.sha);
+  assert.match(result.limits.join(), /substantive exact-head review/);
 });
 
 test('minimal manifests reuse Git change inventory but preserve evidence and independent review',()=>{
@@ -371,7 +270,7 @@ test('minimal manifests reuse Git change inventory but preserve evidence and ind
  f.pr.changed_files=f.files.length;
  validate(f);
  const r=receipt(f);review(f,r);
- r.inspected_files.pop();assert.throws(()=>review(f,r),/inventory|files/i);
+ delete r.inspected_files;delete r.evidence_hashes;review(f,r);
  f.manifest.outputs[0].sha256='c'.repeat(64);assert.throws(()=>validate(f),/hash|bytes/i);
 });
 test('omitting duplicate change receipts does not authorize replacing original scientific evidence',()=>{

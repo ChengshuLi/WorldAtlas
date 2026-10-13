@@ -12,7 +12,6 @@ import {checkPREvidence} from '../scripts/check-pr-evidence.mjs';
 import {checkLinkedIssue} from '../scripts/check-linked-github-issue.mjs';
 import {selectIntegrationProfile} from '../scripts/check-integration-profile.mjs';
 import {deploymentBudgetProfile} from '../scripts/classify-deployment-budget.mjs';
-import {reviewContractBinding} from '../scripts/premerge-evidence.mjs';
 import {inspectMerge, prepareIntegration, completeIntegration} from '../scripts/merge-integration.mjs';
 
 function fixture(lane = 'engineering') {
@@ -105,7 +104,7 @@ for (const lane of ['engineering', 'geography', 'research']) test(`real composed
   const f = fixture(lane), result = await f.run();
   assert.equal(result.status, 'checked'); assert.equal(result.profile, 'evidence');
   assert.deepEqual(result.shards, [0]); assert.equal(result.package.full, false);
-  assert.equal(result.evidence.status, 'legacy-or-report-only');
+  assert.equal(result.evidence.status, 'not-required');
   assert.deepEqual(result.owned_paths, f.claim.owned_paths ?? []);
 });
 // A fresh branch can publish its original issue-owned evidence without
@@ -288,9 +287,9 @@ test('retained engineering scope changes during actual composed inspection still
   }
 });
 
-test('new required evidence cannot succeed using the legacy fixture', async () => {
+test('new ordinary engineering succeeds without a scientific wrapper', async () => {
   const f = fixture(); f.issue.created_at = '2026-10-08T00:00:00Z';
-  await assert.rejects(f.run(), /evidence|Evidence|quality|subjects/i);
+  assert.equal((await f.run()).evidence.status, 'not-required');
 });
 for (const [name, change] of [
   ['code head', f => {f.pr.head.sha = 'c'.repeat(40);}],
@@ -417,14 +416,14 @@ test('independent evidence phase verifies bytes without selecting or waiting for
   const result = await runPRGates({event: f.event, env: {GH_TOKEN: 'fixture', GITHUB_REPOSITORY: f.repo},
     phase: 'evidence', apiFactory: () => f.api,
     transportFactory: api => ({api, close() {closed = true;}})});
-  assert.equal(result.status, 'checked'); assert.equal(result.evidence.status, 'legacy-or-report-only');
+  assert.equal(result.status, 'checked'); assert.equal(result.evidence.status, 'not-required');
   assert.equal(result.profile, undefined); assert.equal(result.package, undefined); assert(closed);
   assert(!f.calls.some(route => route.includes('/contents/.github/package-inputs.json')));
 });
 test('independent evidence rejects unmet required evidence and changed ownership', async () => {
   for (const change of ['required', 'scope']) {
     const f = fixture();
-    if (change === 'required') f.issue.created_at = '2026-10-08T00:00:00Z';
+    if (change === 'required') f.issue.body = f.issue.body.replace('\"max_prs\":2', '\"evidence_quality\":{\"version\":0},\"max_prs\":2');
     else f.hooks[f.root + '/pulls/20/files?per_page=100&page=1'] = () => {f.issue.body=f.issue.body.replace('retained bounded','changed bounded');};
     await assert.rejects(checkPRGates({event: f.event, repo: f.repo, token: 'fixture', api: f.api, phase: 'evidence'}));
   }
@@ -523,12 +522,10 @@ test('draft readiness starts no duplicate run while code and edited events keep 
 
 test('draft readiness preserves byte authority while both merge phases require current non-draft state', async () => {
   const f = fixture(); f.pr.draft = true;
-  const binding = reviewContractBinding(f.issue, f.pr), draft = await f.run();
+  const draft = await f.run();
   f.pr.draft = false;
-  assert.deepEqual(reviewContractBinding(f.issue, f.pr), binding);
   const ready = await f.run();
   assert.equal(ready.profile, draft.profile); assert.deepEqual(ready.shards, draft.shards);
-  assert.notDeepEqual(reviewContractBinding(f.issue, {...f.pr, body: f.pr.body + '\nChanged disposition'}), binding);
   const original = f.api, options = {repo: f.repo, number: f.pr.number, expectedHead: f.pr.head.sha,
     policy: {version: 1, mode: 'enforce-new', activation_time: '2100-01-01T00:00:00Z'},
     evidenceCheck: async () => ({status: 'legacy'}),

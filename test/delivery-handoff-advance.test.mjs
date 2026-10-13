@@ -62,7 +62,7 @@ test('native transition takes original request identity and group order from sav
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {openAdvanceJournal, withAdvanceLock, prepareAdvanceStage, readAdvanceStatus, observeAdvance, advanceQueue} from '../scripts/delivery-handoff-advance.mjs';
+import {openAdvanceJournal, withAdvanceLock, prepareAdvanceStage, readAdvanceStatus, observeAdvance} from '../scripts/delivery-handoff-advance.mjs';
 function journal(t) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'delivery-advance-'));
   t.after(() => fs.rmSync(root, {recursive: true, force: true}));
@@ -121,39 +121,6 @@ test('status validates completed bytes and observations distinguish wait from pr
   const s = readAdvanceStatus(j); assert.equal(s.timing.overall_wall_ms, 5000); assert.ok(s.timing.preparation_ms >= 0);
   fs.writeFileSync(path.join(j.target, 'requests', 'a.json'), 'drift');
   assert.throws(() => readAdvanceStatus(j), /changed/);
-});
-test('direct Actions identity is durable before uncertain submit and resume cannot redispatch', async t => {
-  const j = journal(t), packet = {repo: 'ChengshuLi/WorldAtlas', pr_number: 1, head_sha: commit};
-  let calls = 0, identity;
-  const checkReview = async () => ({...packet, review_comment_id: 123});
-  const submit = async options => {
-    const saved = JSON.parse(fs.readFileSync(path.join(j.stateTarget, 'queue-submission.json')));
-    assert.equal(saved.request_id, options.requestId); identity = options.requestId;
-    calls++; throw Error('uncertain POST');
-  };
-  let pr = {merged: false, head: {sha: commit}};
-  const api = async route => {assert.equal(route, '/repos/ChengshuLi/WorldAtlas/pulls/1'); return pr;};
-  assert.equal((await advanceQueue(j, packet, {checkReview})).status, 'ready-for-queue');
-  assert.equal(fs.existsSync(path.join(j.stateTarget, 'queue-submission.json')), false);
-  await assert.rejects(advanceQueue(j, packet, {authorizeSubmission: true, checkReview, submit, api}), /uncertain/);
-  const pending = await advanceQueue(j, packet, {authorizeSubmission: true, checkReview, submit, api});
-  assert.equal(pending.status, 'pending'); assert.equal(pending.request_id, identity);
-  assert.match(pending.next, /gh run list\/view\/watch/); assert.match(pending.next, /100 pending/);
-  assert.match(pending.next, /failed\/canceled/); assert.equal(calls, 1);
-  pr = {merged: true, head: {sha: commit}, merge_commit_sha: later};
-  assert.equal((await advanceQueue(j, packet, {api})).accepted, true);
-  pr.merge_commit_sha = null;
-  assert.equal((await advanceQueue(j, packet, {api})).accepted, false);
-  pr.head.sha = later;
-  await assert.rejects(advanceQueue(j, packet, {api}), /head changed/);
-  await assert.rejects(advanceQueue(j, {...packet, head_sha: later}, {api}), /another target/);
-  assert.equal(calls, 1);
-});
-test('missing independent acceptance never writes a queue identity', async t => {
-  const j = journal(t);
-  await assert.rejects(advanceQueue(j, {repo: 'ChengshuLi/WorldAtlas', pr_number: 1, head_sha: commit},
-    {authorizeSubmission: true, checkReview: async () => { throw Error('stale review'); }}), /stale review/);
-  assert.equal(fs.existsSync(path.join(j.stateTarget, 'queue-submission.json')), false);
 });
 
 // recipe constructor controls
@@ -733,23 +700,6 @@ test('real advance CLI refuses an oversized admitted config before reading recip
   assert.equal(fs.existsSync(path.join(root, '.cache')), false);
 });
 
-test('journal writes and queue intent reads share admission before dispatch', async t => {
-  const j = journal(t), packet = {repo: 'ChengshuLi/WorldAtlas', pr_number: 1, head_sha: commit};
-  const budget = () => candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0,
-    allowance: {phaseBytes: 100, rssBytes: 1024 ** 3}});
-  j.budget = budget();
-  assert.throws(() => observeAdvance(j, {status: 'waiting', kind: 'commit', detail: 'x'.repeat(200)}), /Aggregate/);
-  assert.equal(fs.readdirSync(j.target).length, 1);
-  j.budget = budget(); let submitted = false;
-  await assert.rejects(advanceQueue(j, packet, {authorizeSubmission: true, checkReview: async () => packet,
-    submit: async () => { submitted = true; }}), /Aggregate/);
-  assert.equal(submitted, false); assert.equal(fs.existsSync(path.join(j.stateTarget, 'queue-submission.json')), false);
-  fs.writeFileSync(path.join(j.stateTarget, 'queue-submission.json'), JSON.stringify({...packet, request_id: 'a'.repeat(36)}));
-  j.budget = budget();
-  await assert.rejects(advanceQueue(j, packet, {submit: async () => { submitted = true; }}), /Aggregate/);
-  assert.equal(submitted, false);
-});
-
 import {admitPublication, pinReader} from '../scripts/prepare-delivery-handoff.mjs';
 test('materialization report preflight refuses late collisions and changed postimages', t => {
   const j = journal(t), destination = '.cache/delivery-handoff/report';
@@ -920,180 +870,6 @@ test('cold acquisition reuses gh login ephemerally; warm and non-fetch reads nev
 }
 
 // Genuine PR1762 shape, with only state required by the transition retained.
-import {refreshReviewBase, deliveryBaseRefreshAPI, nextReviewStage} from '../scripts/delivery-handoff-advance.mjs';
-const refreshRecord = JSON.parse(fs.readFileSync(new URL('./fixtures/delivery-pr-base-refresh.json', import.meta.url)));
-function baseRefreshFixture(t) {
-  const j = journal(t), repo = 'ChengshuLi/WorldAtlas', number = refreshRecord.before.number;
-  const control = {pr: structuredClone(refreshRecord.before), main: refreshRecord.after.base.sha,
-    reads: 0, refs: 0, writes: [], onRead: () => {}, patch: null};
-  const api = async (route, method = 'GET', body) => {
-    if (method === 'PATCH') {
-      assert.equal(route, `/repos/${repo}/pulls/${number}`);
-      assert.deepEqual(body, {base: 'main'}); control.writes.push({route, method, body});
-      if (control.patch) return control.patch(control);
-      control.pr.base.sha = control.main; return structuredClone(control.pr);
-    }
-    assert.equal(method, 'GET'); assert.equal(body, undefined);
-    if (route === `/repos/${repo}/git/ref/heads/main`) {
-      control.refs++; return {ref: 'refs/heads/main', object: {type: 'commit', sha: control.main}};
-    }
-    assert.equal(route, `/repos/${repo}/pulls/${number}`);
-    const pr = structuredClone(control.pr); control.onRead(pr, ++control.reads); return pr;
-  };
-  const review = {repo, pr_number: number, refresh_base_metadata: true};
-  const adapters = {api, refresh: deliveryBaseRefreshAPI(api)};
-  return {j, control, review, adapters,
-    run: options => withAdvanceLock(j, () => refreshReviewBase(j, review, {...adapters, ...options}))};
-}
-
-test('real retained stale-base shape refreshes once with exact draft/ready and body preservation', async t => {
-  assert.equal(createHash('sha256').update(refreshRecord.before.body).digest('hex'), refreshRecord.body_sha256);
-  assert.equal(refreshRecord.before.head.sha, '9f2f4108589bf772f30a8e4edf1838e953191daa');
-  assert.equal(refreshRecord.before.base.sha, '7446e4bcf19825698f544a5fa2809b3a78f88a25');
-  for (const draft of [false, true]) {
-    const f = baseRefreshFixture(t); f.control.pr.draft = draft;
-    const original = structuredClone(f.control.pr), result = await f.run();
-    assert.deepEqual(result, {...original, base: {...original.base, sha: refreshRecord.after.base.sha}});
-    assert.equal(f.control.writes.length, 1); assert.equal(f.control.refs, 1);
-    const intent = fs.readFileSync(path.join(f.j.stateTarget, 'pr-base-refresh.json'));
-    assert.equal(readAdvanceStatus(f.j).pr_base_refresh.last_observation.result, 'verified');
-    await f.run();
-    assert.equal(f.control.writes.length, 1); assert.equal(f.control.refs, 2);
-    assert.deepEqual(fs.readFileSync(path.join(f.j.stateTarget, 'pr-base-refresh.json')), intent);
-    assert.equal(readAdvanceStatus(f.j).pr_base_refresh.last_observation.mutation, 'observation-only');
-  }
-});
-
-test('current base and absent opt-in cannot issue a refresh mutation', async t => {
-  const f = baseRefreshFixture(t); f.control.pr = structuredClone(refreshRecord.after);
-  await f.run(); assert.equal(f.control.writes.length, 0); assert.equal(f.control.refs, 1);
-  assert.equal(fs.existsSync(path.join(f.j.stateTarget, 'pr-base-refresh.json')), false);
-  const g = baseRefreshFixture(t); delete g.review.refresh_base_metadata;
-  await assert.rejects(g.run(), /Explicit/); assert.equal(g.control.writes.length, 0); assert.equal(g.control.reads, 0);
-});
-
-const refreshDrifts = [
-  p => { p.head.sha = 'c'.repeat(40); }, p => { p.head.ref = 'engineering/other'; },
-  p => { p.head.repo.full_name = 'foreign/repo'; }, p => { p.base.ref = 'foreign-target'; },
-  p => { p.base.repo.full_name = 'foreign/repo'; }, p => { p.body += '\nChanged acceptance'; },
-  p => { p.draft = !p.draft; }, p => { p.state = 'closed'; }, p => { delete p.draft; },
-];
-test('foreign or incomplete targets and every exact-state drift refuse before PATCH', async t => {
-  for (const drift of refreshDrifts) {
-    const f = baseRefreshFixture(t); f.control.onRead = (pr, read) => { if (read === 2) drift(pr); };
-    await assert.rejects(f.run(), /state changed|complete open/);
-    assert.equal(f.control.writes.length, 0); assert.equal(fs.existsSync(path.join(f.j.stateTarget, 'pr-base-refresh.json')), false);
-  }
-  const foreign = baseRefreshFixture(t); foreign.control.pr.base.ref = 'other';
-  await assert.rejects(foreign.run(), /already targeting main/); assert.equal(foreign.control.refs, 0);
-  const noMain = baseRefreshFixture(t); noMain.control.main = undefined;
-  await assert.rejects(noMain.run(), /actual target-main/); assert.equal(noMain.control.writes.length, 0);
-});
-
-test('post-PATCH drift stays unresolved and never authorizes a second mutation', async t => {
-  for (const drift of refreshDrifts) {
-    const f = baseRefreshFixture(t);
-    f.control.patch = control => { control.pr.base.sha = control.main; drift(control.pr); return structuredClone(control.pr); };
-    await assert.rejects(f.run(), /readback could not prove/);
-    assert.equal(readAdvanceStatus(f.j).pr_base_refresh.last_observation.result, 'unresolved');
-    await assert.rejects(f.run(), /unresolved|complete open/); assert.equal(f.control.writes.length, 1);
-  }
-});
-
-test('denied and uncertain writes reconcile actual state without blind retries', async t => {
-  const denied = baseRefreshFixture(t); denied.control.pr.draft = true;
-  denied.control.patch = () => { throw Error('403 denied'); };
-  await assert.rejects(denied.run(), /readback could not prove/);
-  await assert.rejects(denied.run(), /unresolved/);
-  assert.equal(denied.control.writes.length, 1); assert.equal(denied.control.pr.draft, true);
-  const uncertain = baseRefreshFixture(t);
-  uncertain.control.patch = control => { control.pr.base.sha = control.main; throw Error('response lost'); };
-  assert.equal((await uncertain.run()).base.sha, uncertain.control.main);
-  assert.equal(readAdvanceStatus(uncertain.j).pr_base_refresh.last_observation.mutation, 'uncertain');
-  await uncertain.run(); assert.equal(uncertain.control.writes.length, 1);
-});
-
-test('interruption before dispatch is observation-only; interruption after dispatch proves readback', async t => {
-  for (const phase of ['intent', 'mutation']) {
-    const f = baseRefreshFixture(t);
-    await assert.rejects(f.run({interrupt: event => { if (event === phase) throw Error('interruption'); }}), /interruption/);
-    assert.equal(f.control.writes.length, phase === 'intent' ? 0 : 1);
-    if (phase === 'intent') await assert.rejects(f.run(), /unresolved/);
-    else await f.run();
-    assert.equal(f.control.writes.length, phase === 'intent' ? 0 : 1);
-  }
-});
-
-test('failed readback, moving main and foreign resumption cannot chase a new target', async t => {
-  const f = baseRefreshFixture(t); f.control.onRead = (_pr, read) => { if (read === 3) throw Error('read unavailable'); };
-  await assert.rejects(f.run(), /readback could not prove/); await f.run(); assert.equal(f.control.writes.length, 1);
-  f.control.main = 'd'.repeat(40); await assert.rejects(f.run(), /unresolved/); assert.equal(f.control.writes.length, 1);
-  f.review.pr_number++; await assert.rejects(f.run(), /another PR/); assert.equal(f.control.writes.length, 1);
-});
-
-test('journal admission, foreign inventory and dangling intent preserve originals before dispatch', async t => {
-  const budget = baseRefreshFixture(t), admitted = budget.j.budget; let additions = 0;
-  budget.j.budget = {add: item => { if (++additions === 3) throw Error('Aggregate admission'); admitted.add(item); }};
-  await assert.rejects(budget.run(), /Aggregate/); assert.equal(budget.control.writes.length, 0);
-  assert.equal(fs.existsSync(path.join(budget.j.stateTarget, 'pr-base-refresh.json')), false);
-  const foreign = baseRefreshFixture(t), sentinel = path.join(foreign.j.target, 'foreign.txt');
-  fs.writeFileSync(sentinel, 'original', {flag: 'wx'});
-  await assert.rejects(foreign.run(), /Foreign advance/); assert.equal(fs.readFileSync(sentinel, 'utf8'), 'original');
-  assert.equal(foreign.control.reads, 0);
-  const linked = baseRefreshFixture(t), intent = path.join(linked.j.stateTarget, 'pr-base-refresh.json');
-  fs.symlinkSync('missing-intent', intent); await assert.rejects(linked.run(), /Nonordinary/);
-  assert.equal(fs.readlinkSync(intent), 'missing-intent'); assert.equal(linked.control.reads, 0);
-});
-
-test('actual narrow write adapter cannot modify another route or include readiness/body fields', async () => {
-  const calls = [], patch = deliveryBaseRefreshAPI((...args) => { calls.push(args); });
-  await patch('ChengshuLi/WorldAtlas', 1762);
-  assert.deepEqual(calls, [['/repos/ChengshuLi/WorldAtlas/pulls/1762', 'PATCH', {base: 'main'}]]);
-  assert.throws(() => patch('foreign/repo', 1762), /Invalid/); assert.throws(() => patch('ChengshuLi/WorldAtlas', '1762'), /Invalid/);
-  assert.equal(calls.length, 1);
-});
-
-test('actual review transition freezes verified state and never silently rebinds a completed packet', async t => {
-  const f = baseRefreshFixture(t); let freezes = 0;
-  const adapters = {api: f.adapters.api, refreshBase: f.adapters.refresh, freezeReview: async input => {
-    freezes++; assert.deepEqual(input.expectedPR, f.control.pr);
-    return {'review-packet.json': Buffer.from(JSON.stringify({head_sha: input.expectedHead, base_sha: input.expectedPR.base.sha}))};
-  }};
-  const next = await nextReviewStage(f.j, f.review, {}, adapters);
-  assert.equal(next.id, 'review'); await prepareAdvanceStage(f.j, next.id, next.phase, next.input, next.produce);
-  const original = fs.readFileSync(path.join(f.j.target, 'review', 'review-packet.json'));
-  f.control.pr.base.sha = refreshRecord.before.base.sha; // GitHub later reports stale metadata again.
-  const repeated = await nextReviewStage(f.j, f.review, {}, adapters);
-  assert.equal(repeated.queue.base_sha, refreshRecord.after.base.sha);
-  assert.equal(f.control.writes.length, 1); assert.equal(f.control.refs, 1); assert.equal(freezes, 1);
-  assert.deepEqual(fs.readFileSync(path.join(f.j.target, 'review', 'review-packet.json')), original);
-  f.control.pr.head.sha = 'd'.repeat(40);
-  await assert.rejects(nextReviewStage(f.j, f.review, {}, adapters), /Completed stage inputs changed/);
-});
-
-test('plain status CLI observes a retained base refresh without credentials, API calls or journal writes', async t => {
-  const f = baseRefreshFixture(t), root = f.j.root;
-  const git = (...args) => execFileSync('git', args, {cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe']}).trim();
-  git('init'); git('config', 'user.name', 'Fixture'); git('config', 'user.email', 'fixture@example.invalid');
-  fs.writeFileSync(path.join(root, 'recipe.json'), '{}\n', {flag: 'wx'});
-  git('add', 'recipe.json'); git('commit', '-m', 'Fixture');
-  const head = git('rev-parse', 'HEAD'), recipe = pinReader(root).pin(head, 'recipe.json');
-  const j = openAdvanceJournal(root, '.cache/delivery-handoff/status-control', recipe);
-  await withAdvanceLock(j, () => refreshReviewBase(j, f.review, f.adapters));
-  const snapshot = () => fs.readdirSync(j.target).sort().map(name => [name, fs.readFileSync(path.join(j.target, name)).toString('base64')]);
-  const before = snapshot(), bin = path.join(root, 'bin'); fs.mkdirSync(bin);
-  fs.writeFileSync(path.join(bin, 'gh'), '#!/bin/sh\necho unexpected-gh >&2\nexit 88\n', {flag: 'wx', mode: 0o755});
-  fs.writeFileSync(path.join(root, 'config.json'), JSON.stringify({version: 1, recipe: {commit: head, path: 'recipe.json'}}), {flag: 'wx'});
-  const env = {...process.env, PATH: bin + path.delimiter + process.env.PATH};
-  for (const key of ['NODE_OPTIONS', 'NODE_PATH', 'GH_TOKEN', 'GITHUB_TOKEN']) delete env[key];
-  const script = fileURLToPath(new URL('../scripts/prepare-delivery-handoff.mjs', import.meta.url));
-  const status = JSON.parse(execFileSync(process.execPath, [script, 'status', 'config.json', j.destination],
-    {cwd: root, env, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe']}));
-  assert.equal(status.pr_base_refresh.main_sha, refreshRecord.after.base.sha);
-  assert.equal(status.pr_base_refresh.last_observation.result, 'verified');
-  assert.deepEqual(snapshot(), before); assert.equal(f.control.writes.length, 1);
-});
-
 import {committedComposition} from '../scripts/delivery-handoff-advance.mjs';
 import {composeAuthorities, jsonBytes} from '../scripts/prepare-delivery-handoff.mjs';
 function compositionRepository(t, originalObjects) {
@@ -1219,103 +995,7 @@ if (process.env.WORLDATLAS_DELIVERY_FIXTURE === '1') test('real five new-only au
   assert.deepEqual(fs.readFileSync(path.join(j.stateTarget, 'compose.intent.json')), before);
 });
 
-import {acceptedReview} from '../scripts/delivery-handoff-advance.mjs';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
-import {checkPremergeEvidence, reviewContractBinding} from '../scripts/premerge-evidence.mjs';
-
-// Exercise the actual remote byte and distinct-review gates. Only GitHub
-// transport is mocked; the legacy claim intentionally has no owned_paths.
-function acceptedReviewFixture({nested = true} = {}) {
-  const repo = 'ChengshuLi/WorldAtlas', branch = 'engineering/advance-acceptance';
-  const prefix = nested ? 'coordination/engineering/retained/new-delivery/' : 'coordination/engineering/advance-acceptance/';
-  const manifestPath = prefix + 'evidence-quality.json', outputPath = prefix + 'results.json';
-  const baseline = Buffer.from('acceptance baseline\n'), output = Buffer.from('{"value":0.5}\n');
-  const descriptor = (name, raw) => ({path: name, bytes: raw.length, sha256: digest(raw), hash_kind: 'file-bytes'});
-  const spec = {mode: 'engineering', max_prs: 1, depends_on: [99], scope: 'Bounded delivery acceptance fixture',
-    ...(nested ? {owned_paths: [prefix]} : {}),
-    evidence_quality: {version: 1, manifest_path: manifestPath, subject_ids: [], pins: {}, review_kind: 'code'}};
-  const issue = {number: 100, state: 'open', labels: ['type:engineering', 'kind:work-item', 'status:ready'],
-    created_at: '2026-10-07T00:00:00Z', body: `Delivery acceptance.\n<!-- worldatlas-work:v1\n${JSON.stringify(spec)}\n-->`};
-  const files = [{filename: outputPath, status: 'added'}, {filename: manifestPath, status: 'added'}];
-  const pr = {number: 101, state: 'open', draft: false, created_at: issue.created_at, body: 'Refs #100\nScoped delivery.',
-    head: {sha: later, ref: branch, repo: {full_name: repo}}, base: {sha: commit, ref: 'main', repo: {full_name: repo}}, changed_files: files.length};
-  const claim = {version: 1, active: true, worker_id: 'author', claim_id: 'original-claim-001', branch, mode: 'engineering',
-    expires_at: new Date(Date.now() + 3600000).toISOString()};
-  const manifest = {version: 1, issue: issue.number, lane: 'engineering', worker_id: claim.worker_id,
-    subject_ids: [], subject_ids_sha256: digest('[]'), baseline: {commit, files: [descriptor('baseline.txt', baseline)], pins: {}},
-    sources: [], outputs: [descriptor(outputPath, output)],
-    methods: [{id: 'synthetic', kind: 'code', description: 'Synthetic numeric byte control', software: 'Node 24', units: 'fraction'}],
-    metrics: [{id: 'share', value: 0.5, unit: 'fraction', vintage: 'current', input_sha256: digest(baseline), evaluation_commit: commit}],
-    summaries: [{metric_id: 'share', value: 0.5, unit: 'fraction'}], conclusions: [],
-    stages: {research: 'complete', implementation: 'implemented', geographic_approval: 'not-requested'},
-    commands: ['node --test test/delivery-handoff-advance.test.mjs'],
-    metric_bindings: [{metric_id: 'share', path: outputPath, json_pointer: '/value'}]};
-  const manifestBytes = Buffer.from(JSON.stringify(manifest));
-  const receipt = {version: 1, pr_number: pr.number, head_sha: later, manifest_sha256: digest(manifestBytes),
-    author_worker_id: claim.worker_id, reviewer_worker_id: 'independent-reviewer', outcome: 'accepted', limits: [],
-    inspected_files: files.map(file => file.filename), evidence_hashes: [digest(baseline), digest(output)],
-    domains: {implementation: {outcome: 'accepted', scope: 'Actual fixture byte inventory and scoped ownership.', limits: []}},
-    ...reviewContractBinding(issue, pr)};
-  const packet = {repo, pr_number: pr.number, head_sha: later, base_sha: commit, issue: structuredClone(issue),
-    author_worker_id: claim.worker_id, manifest: {sha256: digest(manifestBytes)}, files: structuredClone(files), ...reviewContractBinding(issue, pr)};
-  const control = {issue, pr, claim, dependency: {number: 99, state: 'closed'}, blockers: [], receipt, reviewAssociation: 'OWNER',
-    calls: [], traversed: false, onEvidence: () => {}};
-  const oid = raw => createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
-  const contents = new Map([['baseline.txt', baseline], [outputPath, output], [manifestPath, manifestBytes]]);
-  const blobs = new Map([...contents.values()].map(raw => [oid(raw), raw]));
-  const tree = [...contents].map(([name, raw]) => ({path: name, type: 'blob', mode: '100644', size: raw.length, sha: oid(raw)}));
-  const api = async (route, method = 'GET') => {
-    control.calls.push(route); assert.equal(method, 'GET');
-    if (route === `/repos/${repo}/pulls/101`) return structuredClone(control.pr);
-    if (route === `/repos/${repo}/issues/100`) return structuredClone(control.issue);
-    if (route === `/repos/${repo}/issues/99`) return structuredClone(control.dependency);
-    if (route.includes('/pulls/101/files?')) return structuredClone(files);
-    if (route.includes('/issues/100/comments?')) return [{id: 1, user: {login: 'github-actions[bot]'}, body: renderClaim(control.claim)}, ...control.blockers];
-    if (route.includes('/issues/101/comments?')) {
-      const comments = control.receipt ? [{id: 2, author_association: control.reviewAssociation,
-        body: `<!-- worldatlas-review:v1\n${JSON.stringify(control.receipt)}\n-->`}] : [];
-      control.traversed = true; control.onEvidence(control); return comments;
-    }
-    if (route.includes('/git/commits/')) return {tree: {sha: 'fixture-tree'}};
-    if (route.includes('/git/trees/')) return {truncated: false, tree};
-    if (route.includes('/git/blobs/')) { const sha = route.split('/').pop(), raw = blobs.get(sha);
-      return {sha, size: raw.length, encoding: 'base64', content: raw.toString('base64')}; }
-    if (route.includes('/compare/')) return {status: 'identical'};
-    throw Error('Unexpected acceptance route: ' + route);
-  };
-  return {control, packet, api, run: () => acceptedReview(packet, api), rawCheck: () => checkPremergeEvidence({api, repo, pr, issue, reservation: claim, files, review: true})};
-}
-
-test('accepted review authenticates nested engineering ownership through real evidence and distinct receipt gates', async () => {
-  const f = acceptedReviewFixture();
-  await assert.rejects(f.rawCheck(), /preserve other lanes/); // Independent reproduction of the old raw-claim failure.
-  const accepted = await f.run();
-  assert.equal(accepted.review_comment_id, 2); assert.equal(accepted.reviewer_worker_id, 'independent-reviewer');
-  assert.equal(accepted.manifest_sha256, f.packet.manifest.sha256); assert.equal(f.control.traversed, true);
-  assert.equal(f.control.calls.filter(route => route.endsWith('/issues/99')).length, 0);
-  assert.equal((await acceptedReviewFixture({nested: false}).run()).review_comment_id, 2);
-});
-
-test('accepted review rejects actual issue scope and PR changes during evidence traversal', async()=>{
- const mutations=[c=>{c.issue.state='closed';},
-  c=>{c.issue.body=c.issue.body.replace('retained/new-delivery/','retained/foreign/');},
-  c=>{c.pr.head.ref='engineering/foreign';},c=>{c.pr.base.ref='foreign';},
-  c=>{c.pr.head.repo.full_name='foreign/repo';},c=>{c.pr.changed_files++;}];
- for(const mutate of mutations){const f=acceptedReviewFixture();f.control.onEvidence=mutate;await assert.rejects(f.run());assert.equal(f.control.traversed,true);}
-});
-
-test('accepted review tolerates a same-owner lease renewal without weakening independent substantive review', async () => {
-  const f = acceptedReviewFixture(); f.control.onEvidence = c => {
-    c.claim.expires_at = new Date(Date.now() + 7200000).toISOString(); c.claim.request_id = 'benign-renewal-001';
-    c.issue.updated_at = new Date().toISOString();
-  };
-  assert.equal((await f.run()).review_comment_id, 2);
-  for (const mutate of [c => { c.receipt = null; }, c => { c.receipt.reviewer_worker_id = 'author'; },
-    c => { c.receipt.domains = {}; }, c => { c.reviewAssociation = 'NONE'; },
-    c => { c.receipt.manifest_sha256 = 'f'.repeat(64); }, c => { c.receipt.head_sha = commit; }]) {
-    const adverse = acceptedReviewFixture(); mutate(adverse.control); await assert.rejects(adverse.run(), /review|Review/);
-  }
-});
 
 import {refreshDeliveryAuthorTree} from '../scripts/delivery-handoff-advance.mjs';
 function authorRefreshFixture(t, {authorChange, mainChange} = {}) {
@@ -1924,7 +1604,7 @@ if (process.env.WORLDATLAS_DELIVERY_V2_FIXTURE === '1') {
     let publicationChecks=0;
     const outcome=await flow.runAutomaticDelivery(j,config,reader,adapters,{validate:async()=>{},beforePublication:async()=>{publicationChecks++;},
       commitStage:()=>{throw Error('Frozen checkpoint tried to commit duplicate evidence');}});
-    assert.equal(outcome.kind,'publication-review');assert.equal(publicationChecks,1);
+    assert.equal(outcome.status,'prepared');assert.equal(outcome.complete,true);assert.equal(publicationChecks,1);
     assert.deepEqual(readAdvanceStatus(j).completed,[]);
     assert.equal(fs.readdirSync(j.target).some(name=>fs.lstatSync(path.join(j.target,name)).isDirectory()),false);
     for(const kind of ['source','native']){
@@ -2239,8 +1919,9 @@ async function legacyRuntimeFixture(t, {published = false} = {}) {
   await prepareAdvanceStage(f.j, 'recipe', 'recipe', {}, () => ({'recipe-index.json': Buffer.from('{"groups":[]}\n')}));
   await withAdvanceLock(f.j, () => commitAdvanceStage(f.j, 'recipe', {validate: f.validate}));
   const packet = {repo: 'ChengshuLi/WorldAtlas', pr_number: 1, head_sha: f.git('rev-parse', 'HEAD')};
-  await assert.rejects(advanceQueue(f.j, packet, {authorizeSubmission: true, checkReview: async () => packet,
-    submit: async () => {throw Error('uncertain original submission');}}), /uncertain original/);
+  // Preserved historical coordination is readable without replaying its retired writer.
+  fs.writeFileSync(path.join(f.j.stateTarget, 'queue-submission.json'), JSON.stringify({
+    version: 1, ...packet, request_id: 'original-retained-submission', created_at: new Date().toISOString()}));
   observeAdvance(f.j, {status: 'waiting', stage: 'current-rebind', kind: 'rebind-terminal', detail: 'Genuine external terminal required'});
   // Reproduce the accepted legacy physical layout using unchanged v1 bytes.
   const saved = new Map(fs.readdirSync(f.j.stateTarget).map(name => [name, fs.readFileSync(path.join(f.j.stateTarget, name))]));
@@ -2263,13 +1944,8 @@ for (const published of [false, true]) test('runtime separation preserves origin
   assert.equal(f.git('status', '--porcelain'), ''); assert.equal(f.git('rev-parse', 'HEAD'), f.head);
   const j = f.reopen(), result = await withAdvanceLock(j, () => commitAdvanceStage(j, 'recipe', {validate: f.validate}));
   assert.equal(result.resumed, true); assert.equal(f.git('rev-parse', 'HEAD'), f.head);
-  let observed = 0;
-  await withAdvanceLock(j, () => advanceQueue(j, f.packet, {authorizeSubmission: true,
-    submit: async () => {throw Error('No redispatch');}, api: async route => {
-      assert.equal(route, '/repos/ChengshuLi/WorldAtlas/pulls/1'); observed++;
-      return {merged: false, head: {sha: f.packet.head_sha}};
-    }}));
-  assert.equal(observed, 1); assert.equal(f.git('status', '--porcelain'), '');
+  assert.deepEqual(readAdvanceStatus(j).queue_submission, JSON.parse(f.saved.get('queue-submission.json')));
+  assert.equal(f.git('status', '--porcelain'), '');
 });
 for (const point of ['migration-intent', 'copied:advance.json', 'retired:advance.json', 'migration-complete'])
   test('legacy runtime relocation resumes unchanged after ' + point, async t => {
