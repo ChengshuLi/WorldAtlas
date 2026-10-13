@@ -86,7 +86,7 @@ export function integrationTestFiles(profile, shard, testSelection = 'complete')
     'evidence-quality','premerge-evidence','trusted-workflow-checkouts','merge-integration','merge-integration-entrypoint','integration-proof'];
   const inventory = fs.readdirSync('test').filter(name => name.endsWith('.test.mjs')).sort().map(name=>`test/${name}`);
   const files = testSelection === 'selected-output' ? ['test/compact-ownership.test.mjs']
-    : testSelection === 'selected-data' ? PACKAGED_ASSET_TESTS
+    : testSelection === 'selected-data' ? PACKAGED_ASSET_TESTS.filter(name => name !== 'test/compact-ownership.test.mjs')
     : profile === 'full' ? fullRegressionShard(inventory, shard) : focused.map(name => `test/${name}.test.mjs`);
   if (!files.length || files.some(name => !fs.existsSync(name))) throw Error('Missing integration test inventory');
   return files;
@@ -183,7 +183,7 @@ export function requireRetainedPackageTests({directory=process.cwd(),expected=pr
     JSON.stringify(assembly.base_tests_reused)!==JSON.stringify(['test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs']))
     throw Error('Actual same-head assembly and explicit original base-test proof required');
   return {origin:assembly.origin,base_tests_reused:assembly.base_tests_reused,
-    limitation:'Original successful base checks reused; current compact/coverage/selected GPU+Canvas checks remain actual execution.'};
+    limitation:'Original successful base checks reused; this receipt does not attest current native, smoke, or browser execution.'};
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

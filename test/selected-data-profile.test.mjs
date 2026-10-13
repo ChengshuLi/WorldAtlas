@@ -1018,26 +1018,15 @@ test('one current-bound expectation disambiguates an exact unconsumed package te
   assert.equal(result.expectations_path,f.packetPrefix+'selected-delivery-expectations.json');
   assert.equal((await gateFixture(templateFixture()).select()).test_selection,'selected-data');
 });
-test('automatic package publishes immutable input custody and classifies without any runtime cache in Git', async t => {
-  const fs = await import('node:fs'), os = await import('node:os'), path = await import('node:path');
-  const flow = await import('../scripts/delivery-handoff-advance.mjs');
-  const root = fs.mkdtempSync(path.join(os.tmpdir(),'package-input-custody-'));
-  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+test('retained package receipt input custody classifies without a runtime journal in Git', async () => {
   let input, directory;
-  const f=templateFixture(v=>{input=v.config;directory=v.directory;},'advance/package');
-  const journal=flow.openAdvanceJournal(root,path.posix.dirname(directory),{commit:'a'.repeat(40),path:'recipe.json'});
-  const products=Object.fromEntries(['package-roles.json','selected-delivery-expectations.json'].map(name=>
-    [name,f.blobs.get(f.authored.entries.get(directory+'/'+name).sha)]));
-  await flow.withAdvanceLock(journal,()=>flow.prepareAdvanceStage(journal,'package','package',input,()=>products));
-  assert.notEqual(journal.stateTarget,journal.target);
-  const git=(...args)=>execFileSync('git',args,{cwd:root,encoding:'utf8',stdio:['pipe','pipe','pipe']}).trim();
-  git('init');git('config','user.name','Fixture');git('config','user.email','fixture@example.invalid');
-  git('add','coordination');git('commit','-m','Immutable package products');
-  assert.ok(!git('ls-files').includes('.cache'));
-  assert.ok(!git('ls-files').includes('.intent.json'));
-  const legacy=directory+'.intent.json';f.authored.entries.delete(legacy);f.files.splice(f.files.findIndex(row=>row.filename===legacy),1);
-  for(const name of [...Object.keys(products),'preparation.json']) f.put(directory+'/'+name,Buffer.from(execFileSync('git',['show','HEAD:'+directory+'/'+name],{cwd:root})));
-  const original=JSON.parse(f.blobs.get(f.authored.entries.get(directory+'/preparation.json').sha));assert.deepEqual(original.input,input);
+  const f=templateFixture(v=>{input=v.config;directory=v.directory;},'retained-package');
+  const legacy=directory+'.intent.json';
+  f.authored.entries.delete(legacy);f.files.splice(f.files.findIndex(row=>row.filename===legacy),1);
+  // Preserve the historical immutable receipt contract after retiring its
+  // automatic producer. The classifier still authenticates its original input.
+  const original=JSON.parse(f.blobs.get(f.authored.entries.get(directory+'/preparation.json').sha));
+  original.input=input;f.put(directory+'/preparation.json',original);
   assert.equal((await f.run()).test_selection,'selected-data');
   for(const mutate of [r=>delete r.input,r=>r.input.registry.path='coordination/engineering/foreign/registry.json',
     r=>r.binding.config_sha256='0'.repeat(64),r=>r.outputs['package-roles.json'].bytes++,
