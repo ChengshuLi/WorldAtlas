@@ -648,3 +648,25 @@ its supported fragment, two original cells and nonempty remainder. Run with
 `GIT_NO_LAZY_FETCH=1` and the exact objects already present. It performs no
 SOURCE/NATIVE/rebind execution and claims no subsequent-batch adoption. Default
 CI retains its bounded contract controls without fetching historical science.
+
+### Inherited package read roles and explicit historical restoration
+
+Finalization derives its package read roles from the authenticated authority,
+original custody and current release metadata. An out-of-prefix role that exists
+at the accepted package baseline must have the exact ordinary mode, Git object,
+size and SHA-256 there. It need not already be listed in package inputs. Existing
+package declarations are preserved as a prefix; covered directory members are
+not redundantly appended. New output ownership is unchanged.
+
+When an original consumed role is absent from that baseline, first reconcile its
+exact restoration write path in the ordinary issue/claim scope and commit the
+unchanged original body. Then supply `restored_read_roles` in standalone finalize
+configuration, or `observations.restored_read_roles` for automatic continuation:
+`{"commit":"<exact restoration commit>","paths":["<original role path>"]}`.
+The finalizer checks each role against its original custody and that committed
+snapshot; it does not restore files or grant write authority. Duplicate, unbound,
+changed, nonordinary, missing or accepted-path-overwriting entries fail. Original
+custody commits stay unchanged. All foreign-role identity failures are reported
+together so the complete scope can be reconciled before retrying. This descriptor
+is part of the immutable finalize-stage input; an already failed stage must keep
+its original intent and use a truthful new preparation vintage for changed input.

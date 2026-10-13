@@ -947,7 +947,7 @@ export async function nextDeliveryStage(journal, config, reader, adapters) {
       'Choose one unambiguous completed-original custody route');
     const qualified = qualifyCompletedCustody(recipe, reader, adapters);
     const observed = config.observations ?? {};
-    need(Object.keys(observed).every(key => ['authorities', 'registry', 'composition', 'rebind', 'operating', 'certificate', 'sidecar'].includes(key)),
+    need(Object.keys(observed).every(key => ['authorities', 'registry', 'composition', 'rebind', 'operating', 'certificate', 'sidecar', 'restored_read_roles'].includes(key)),
       'Completed-original custody cannot substitute execution observations');
     return nextAuthorityDelivery(journal, config, reader, adapters, recipe, qualified.groups, observed,
       new Map(qualified.groups.map(group => [group.id, group.qualified_products])));
@@ -1078,6 +1078,7 @@ async function nextAuthorityDelivery(journal, config, reader, adapters, recipe, 
   if (!observed.sidecar) return wait('finalize', 'assembly', 'Existing assembly/release preparation must supply the actual committed sidecar.');
   const sidecar = locate(reader, observed.sidecar), selected = reader.json(sidecar).logical_asset_map.ledger;
   const final = {...projection, sidecar, selected_ledger: selected, selector: locate(reader, recipe.selector), package_inputs: locate(reader, recipe.package_inputs)};
+  if (observed.restored_read_roles) final.restored_read_roles = observed.restored_read_roles;
   if (!completed('finalize', final)) return prepare('finalize', 'finalize', final, () => adapters.finalizeDelivery(final, reader));
   if (adapters.beforeReview) await adapters.beforeReview();
   if (!config.review) return wait('review', 'publication-review', 'Publish the actual author head/PR; provide repository and PR number.');
