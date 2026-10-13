@@ -1,0 +1,154 @@
+{
+  "version": 1,
+  "issue": 1785,
+  "lane": "engineering",
+  "worker_id": "01a131c0-8b58-70b6-8e2c-52240f11e03f",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "98b966a4593d23a16fbfcf3b267b4564dd6bb74c",
+    "files": [
+      {
+        "path": ".github/metadata-regression-programs.json",
+        "bytes": 550,
+        "sha256": "33665604281d0951f520670b9cdabd9234e059957eb338ba8e55a531da96e0ea",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 59375,
+        "sha256": "51fd481574e6b352483e823c03bdab92fef373d552150e9712f600c1b611c27e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/selected-package-proof.yml",
+        "bytes": 8048,
+        "sha256": "ca66d9adf0d8ef1bffb66fec11738d59b353c09a4c883389e0b316f504d64293",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/DELIVERY_HANDOFF.md",
+        "bytes": 41894,
+        "sha256": "966bc52c9956758855de6cead31c8abc5c7564fbd5f11dbb9ce809cf2cf3ddd7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/assemble-selected-package.mjs",
+        "bytes": 21445,
+        "sha256": "e4f6f20e6fcd89beb5f2ca465530f7c7a6b84c7c3a1af053162d3bd1c3a14a2b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/delivery-handoff-advance.mjs",
+        "bytes": 145064,
+        "sha256": "626a8a4c85e5ee9a5943f1ac48b6278ca44e5afc54396d2e01025b6cde0a78c9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/package-build.mjs",
+        "bytes": 24657,
+        "sha256": "23f943b3091091be026cc2fb250e919c715e773c51230d958acf83ad0d6efec0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/package-output-artifact.mjs",
+        "bytes": 20522,
+        "sha256": "5bd083328543d4249420590ed79ce5c5d0f5cb98d12dae1230b377cc7af3b9de",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/prepare-delivery-handoff.mjs",
+        "bytes": 66812,
+        "sha256": "46e3e21673d1c9f1c93f6ce261808c3a3120dfdb4c6b312aeeb7388cbb9f9e5e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-selected-package-proof.mjs",
+        "bytes": 16995,
+        "sha256": "f495fa553cacda8416f7556791b62ad36791a8e062ae0a3bf1721b401b2ee397",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/selected-package-bootstrap.py",
+        "bytes": 10563,
+        "sha256": "eac4d96ac8d2ef9fb457d2daa7526209c88e0a68619dfe175ccb803add60d220",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/delivery-handoff-advance.test.mjs",
+        "bytes": 193477,
+        "sha256": "51187ce6be81111de0707ee87ccabad8eb2736a4e10701d786fb9cd880f1927b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/delivery-handoff.test.mjs",
+        "bytes": 53451,
+        "sha256": "1a2a9a7a933d8cafa49aedf93f19fd18e5eb2b4404c4707a981235b31e678e0c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/package-build.test.mjs",
+        "bytes": 6858,
+        "sha256": "3fbc4561d4b44c5eacfd01ff33378af492b54df8b35548ef3a402666f3622d89",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/package-output-artifact.test.mjs",
+        "bytes": 22505,
+        "sha256": "816b48614e717651b1450273be737295e65f98267546c38f35e5a94d7ca41115",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/selected-package-bootstrap-controls.py",
+        "bytes": 34975,
+        "sha256": "dcf2524acf2ceadf6960c09e9468c34d618b0ae257a09cb43d70ab3fc5faabd3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/selected-package-proof-driver.test.mjs",
+        "bytes": 28644,
+        "sha256": "27e3fdd21be667cff6d92297d9fe6eb3342bd8cee8ed2e3ad5f51f6c9bcfc0f1",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "separate-runtime-state",
+      "kind": "code",
+      "description": "Keep automatic journal, locks and commit/queue intent in ignored runtime cache while preserving immutable product locators; migrate exact legacy runtime bytes transactionally and retain published records.",
+      "software": "Git, Node 24 and stock Python execution contract",
+      "units": "metadata and real Git controls"
+    },
+    {
+      "id": "authenticated-inherited-read-roles",
+      "kind": "code",
+      "description": "Derive package roles from canonical original custody; authenticate unchanged accepted roles or exact committed restorations without widening write scope, repinning originals or replaying science.",
+      "software": "Git and Node 24",
+      "units": "metadata and real Git controls"
+    },
+    {
+      "id": "semantic-installed-runtime",
+      "kind": "code",
+      "description": "Version complete installed runtime evidence and authenticate it before selected assembly dependency execution. Only source-proven installation relocation metadata is normalized; unknown and executable bytes remain exact.",
+      "software": "Node and isolated Python",
+      "units": "installed-file identities and adversarial controls"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/delivery-handoff-advance.test.mjs test/delivery-handoff.test.mjs",
+    "node --test test/selected-package-assembly.test.mjs test/package-build.test.mjs test/trusted-workflow-checkouts.test.mjs test/selected-package-bootstrap.test.mjs",
+    "node .cache/qualify-current-metadata-program.mjs"
+  ]
+}
