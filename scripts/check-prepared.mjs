@@ -1,3 +1,4 @@
+import {packagePythonArgs} from './package-python-execution.mjs';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
@@ -23,7 +24,7 @@ export function checkPrepared(features){
  };
  validateAlgorithms(owner.execution_algorithms,owner.inputs.algorithm_sha256);
  validateAlgorithms(owner.initial_execution.algorithms,owner.initial_execution.inputs.algorithm_sha256);
- const boundaryVersions=execFileSync('python3',[fileURLToPath(new URL('./boundary-version-hash.py',import.meta.url))],{encoding:'utf8'}).trim();
+ const boundaryVersions=execFileSync('python3',packagePythonArgs([fileURLToPath(new URL('./boundary-version-hash.py',import.meta.url))]),{encoding:'utf8'}).trim();
  if(boundaryVersions!==owner.inputs.boundary_versions)throw Error('Prepared ownership is stale: dated non-example location footprints changed; reprepare ownership and runtime assets');
  for(const part of [...owner.parts,...(owner.evidence_parts||[])]){const raw=fs.readFileSync('data/ownership-history/'+part.path);if(createHash('sha256').update(raw).digest('hex')!==part.sha256)throw Error(`Ownership part hash mismatch: ${part.path}`);}
  for(const [part,hash] of Object.entries(reference.parts_sha256||{}))if(createHash('sha256').update(fs.readFileSync('data/reference-attributes/'+part)).digest('hex')!==hash)throw Error(`Reference part hash mismatch: ${part}`);

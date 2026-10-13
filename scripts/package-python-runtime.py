@@ -427,12 +427,42 @@ def implementation_parser(budget, expected_parser=None):
     return requirements.Requirement, markers.default_environment(), utils.canonicalize_name, identity
 
 
+def require_import_ownership(names, root, members):
+    """Bind declared physical modules to Python's ordered import resolution."""
+    importlib.machinery.PathFinder.invalidate_caches()
+    for name in sorted(names):
+        loaded = sys.modules.get(name)
+        if loaded is not None:
+            filename = getattr(loaded, '__file__', None)
+            locations = getattr(loaded, '__path__', ())
+            need((filename is not None and Path(filename).absolute().is_relative_to(root)) or
+                 (filename is None and locations and all(Path(item).absolute().is_relative_to(root) for item in locations)),
+                 'Declared Python import is already loaded outside its distribution root: ' + name)
+        need(importlib.machinery.BuiltinImporter.find_spec(name) is None and
+             importlib.machinery.FrozenImporter.find_spec(name) is None,
+             'Declared Python import is shadowed by interpreter modules: ' + name)
+        spec = importlib.machinery.PathFinder.find_spec(name, sys.path)
+        need(spec is not None, 'Declared Python import is absent from active import roots: ' + name)
+        if spec.origin is not None:
+            file = Path(spec.origin).absolute()
+            need(file.is_relative_to(root) and file in members,
+                 'Declared Python import resolves outside its inventoried distribution root: ' + name)
+            ordinary(file)
+        else:
+            locations = spec.submodule_search_locations
+            need(locations and all(Path(item).absolute().is_relative_to(root) and
+                                   Path(item).absolute() == Path(item).resolve(strict=True) for item in locations),
+                 'Declared Python namespace merges an unowned import root: ' + name)
+
+
 def distribution_members(distribution, budget):
     root = Path(distribution.locate_file('')).absolute()
     need(root == root.resolve(strict=True) and root.is_dir(), 'Ordinary installed distribution root required')
     records = distribution.files
     need(records is not None and len(records) > 0, 'Complete installed distribution RECORD required')
-    members, directories = {}, set()
+    members, directories, imports = {}, set(), set()
+    suffixes = sorted(importlib.machinery.EXTENSION_SUFFIXES + importlib.machinery.SOURCE_SUFFIXES +
+                      importlib.machinery.BYTECODE_SUFFIXES, key=len, reverse=True)
     scripts = Path(sys.executable).absolute().parent
     for member in records:
         name = str(member)
@@ -443,17 +473,43 @@ def distribution_members(distribution, budget):
         need(file not in members, 'Duplicate installed distribution member')
         members[file] = name
         if file.is_relative_to(root):
-            first = file.relative_to(root).parts[0]
-            if (root / first).is_dir():
+            relative = file.relative_to(root)
+            first = relative.parts[0]
+            if first == '__pycache__':
+                # A flat module's cache does not grant ownership over every
+                # unrelated cache sharing this site-level directory.
+                match = re.fullmatch(r'(.+)\.' + re.escape(sys.implementation.cache_tag) + r'(?:\.opt-[012])?\.pyc', file.name)
+                if match and match[1].isidentifier():
+                    imports.add(match[1])
+            elif (root / first).is_dir():
                 directories.add(root / first)
-    # Include unrecorded files in owned package namespaces: a newly added module
-    # or cache can execute even when the installer's RECORD was left unchanged.
+                if first.isidentifier():
+                    imports.add(first)
+            elif len(relative.parts) == 1:
+                suffix = next((item for item in suffixes if first.endswith(item)), None)
+                if suffix and first[:-len(suffix)].isidentifier():
+                    imports.add(first[:-len(suffix)])
+    # FileFinder can choose a package before a recorded flat module, an
+    # extension before source, or a sourceless/cache sibling. Enumerate the
+    # entire physical name family, including unknown companion bytes, rather
+    # than trusting RECORD to describe future import resolution.
+    for name in sorted(imports):
+        candidates = [root / name, *root.glob(name + '.*'), *(root / '__pycache__').glob(name + '.*.pyc')]
+        for file in candidates:
+            if not file.exists() and not file.is_symlink():
+                continue
+            if file.is_dir() and not file.is_symlink():
+                directories.add(file)
+            else:
+                ordinary(file)
+                members.setdefault(file, file.relative_to(root).as_posix())
     for directory in sorted(directories):
         for file in sorted(directory.rglob('*')):
             if file.is_dir() and not file.is_symlink():
                 continue
             ordinary(file)
             members.setdefault(file, file.relative_to(root).as_posix())
+    require_import_ownership(imports, root, members)
     budget.admit(sum(len(str(file)) + len(logical) + 128 for file, logical in members.items()))
     return members
 
@@ -691,8 +747,59 @@ def probe_imports(rows):
     return {'version': sys.version.split()[0], 'executable': sys.executable, 'imports': imports}
 
 
+def append_authored_script_path(parent):
+    """Local helpers cannot replace or extend any admitted import root."""
+    parent = Path(parent)
+    need(parent.absolute() == parent.resolve(strict=True) and parent.is_dir(),
+         'Ordinary authored script directory required')
+    names = set()
+    suffixes = sorted(importlib.machinery.all_suffixes(), key=len, reverse=True)
+    for item in parent.iterdir():
+        name = item.name if item.is_dir() else next((item.name[:-len(suffix)] for suffix in suffixes
+                                                   if item.name.endswith(suffix)), '')
+        if name.isidentifier():
+            names.add(name)
+    def identity(spec):
+        return None if spec is None else (spec.origin, tuple(spec.submodule_search_locations or ()))
+    before = sys.path[:]
+    for name in sorted(names):
+        original = importlib.machinery.PathFinder.find_spec(name, before)
+        if original is not None:
+            need(identity(original) == identity(importlib.machinery.PathFinder.find_spec(name, [*before, str(parent)])),
+                 'Authored script directory changes admitted import resolution: ' + name)
+    if str(parent) not in sys.path:
+        sys.path.append(str(parent))
+
+
+def execute_package_source(mode, arguments):
+    """The same no-hook/source-cache policy governs real work and probes."""
+    need(mode in ('--run-script', '--run-code') and arguments,
+         'Explicit package Python source required')
+    import runpy
+    old_argv = sys.argv[:]
+    with source_only_parser():
+        try:
+            if mode == '--run-script':
+                script = Path(arguments[0]).absolute()
+                ordinary(script)
+                # Installed/runtime roots win over local names. The explicit
+                # script directory supplies authored sibling helpers only.
+                append_authored_script_path(script.parent)
+                sys.argv = [str(script), *arguments[1:]]
+                runpy.run_path(str(script), run_name='__main__')
+            else:
+                sys.argv = ['-c', *arguments[1:]]
+                exec(compile(arguments[0], '<string>', 'exec'),
+                     {'__name__': '__main__', '__package__': None, '__builtins__': __builtins__})
+        finally:
+            sys.argv = old_argv
+
+
 def main():
     need(sys.flags.isolated and sys.flags.no_site and sys.dont_write_bytecode, 'Runtime identity requires Python -I -S -B startup')
+    if len(sys.argv) >= 3 and sys.argv[1] in ('--run-script', '--run-code'):
+        execute_package_source(sys.argv[1], sys.argv[2:])
+        return
     if len(sys.argv) == 3 and sys.argv[1] == '--probe-imports':
         print(json.dumps(probe_imports(json.loads(sys.argv[2])), separators=(',', ':')))
         return

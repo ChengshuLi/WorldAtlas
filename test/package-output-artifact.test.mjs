@@ -356,7 +356,7 @@ test('parent independently binds Python executable before any consumer identity 
 
 test('assembly admits original custody and installed bytes before scientific imports',()=>{
   const source=fs.readFileSync(new URL('../scripts/assemble-selected-package.mjs',import.meta.url),'utf8');
-  const custody=source.indexOf('const original=await authenticateOriginalPackageOutput('),identity=source.indexOf('const installed=installedPackageIdentity('),admission=source.indexOf('if(differences.length)recordAndRequireRuntime();'),probe=source.indexOf('const runtime=inspectPackageRuntime(root,{isolatedPython:true})');
+  const custody=source.indexOf('const original=await authenticateOriginalPackageOutput('),identity=source.indexOf('const installed=installedPackageIdentity('),admission=source.indexOf('if(differences.length)recordAndRequireRuntime();'),probe=source.indexOf('const runtime=inspectPackageRuntime(root)');
   assert.ok(custody>0&&identity>custody&&admission>identity&&probe>admission);
   assert.match(source,/expectedParser:manifest\.runtime\.installed\.python\.parser/);
   assert.match(source,/expectedExecutable:manifest\.runtime\.installed\.python\.executable_sha256/);

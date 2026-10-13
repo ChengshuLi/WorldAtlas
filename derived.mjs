@@ -1,3 +1,4 @@
+import {packagePythonArgs} from './scripts/package-python-execution.mjs';
 import fs from 'node:fs';
 import {gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
@@ -13,7 +14,7 @@ export function preparedBoundariesMatch(rows){
  const stamp=fs.statSync(file).mtimeMs,raw=JSON.stringify(rows),signature=createHash('sha256').update(raw).digest('hex');
  if(boundaryProofCache?.stamp===stamp&&boundaryProofCache.signature===signature)return boundaryProofCache.matches;
  const index=JSON.parse(fs.readFileSync(file));
- const actual=rows.length?execFileSync('python3',[new URL('./scripts/boundary-version-hash.py',import.meta.url).pathname,'--stdin'],{input:raw,encoding:'utf8'}).trim():createHash('sha256').update('[]').digest('hex');
+ const actual=rows.length?execFileSync('python3',packagePythonArgs([new URL('./scripts/boundary-version-hash.py',import.meta.url).pathname,'--stdin']),{input:raw,encoding:'utf8'}).trim():createHash('sha256').update('[]').digest('hex');
  const matches=actual===index.inputs?.boundary_versions;
  boundaryProofCache={stamp,signature,matches};return matches;
 }

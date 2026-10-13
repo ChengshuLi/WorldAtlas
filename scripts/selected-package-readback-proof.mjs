@@ -15,17 +15,47 @@ const hash = raw => createHash('sha256').update(raw).digest('hex');
 const object = value => value && typeof value === 'object' && !Array.isArray(value);
 const safe = value => typeof value === 'string' && value.length > 0 && !/[\\\x00-\x1f\x7f]/.test(value) &&
   !value.startsWith('/') && value.split('/').every(part => part && part !== '.' && part !== '..');
-const workflow = '.github/workflows/worker-merge.yml';
+const queueWorkflow = '.github/workflows/worker-merge.yml';
+const authorWorkflow = '.github/workflows/merge-integration-checks.yml';
 const reportName = 'native-normal-built-output.json';
 // This established job-log metadata admission is independent of output size.
 // The observed full integration log is 533 KiB; retain the original 8 MiB cap.
 const maxLog = 8 * 1048576;
-const requiredSteps = [
+const queueSteps = [
   'Build the combined application once before asset-dependent tests',
   'Read back qualified native build outputs when selected',
   'Test applicable combined-tree invariants without publishing or live imports',
   'Retain native built-output readback'
 ];
+const authorSteps = [
+  'Verify full-regression package controls',
+  'Build hosted assets',
+  'Read back qualified native build outputs when selected',
+  'Complete regression shard',
+  'Verify full-regression package receipt',
+  'Retain native built-output readback',
+  'Retain full-regression package receipt'
+];
+const authorReceipt = 'Actual reviewed-head Cloudflare package and applicable native readback receipts verified.';
+
+function producerFor(run, repo, expectedHead) {
+  if (run.event === 'workflow_dispatch' && run.path === queueWorkflow && run.head_branch === 'main')
+    return {workflow: queueWorkflow, job: 'integration (0)', steps: queueSteps, smoke: true};
+  need(run.event === 'pull_request' && run.path === authorWorkflow &&
+    Array.isArray(run.pull_requests) && run.pull_requests.length === 1,
+    'Native readback workflow identity differs');
+  const pr = run.pull_requests[0], repositoryURL = `https://api.github.com/repos/${repo}`;
+  need(positive(pr?.number) && pr.url === `${repositoryURL}/pulls/${pr.number}` &&
+    pr.head?.sha === expectedHead && typeof pr.head.ref === 'string' && pr.head.ref.length > 0 &&
+    run.head_branch === pr.head.ref && pr.head.repo?.url === repositoryURL &&
+    pr.base?.ref === 'main' && commit(pr.base.sha) && pr.base.repo?.url === repositoryURL,
+    'Native author readback lacks exact reviewed pull-request linkage');
+  // GitHub may run the workflow on a synthetic PR merge. The actual checked-out
+  // reviewed head is independently bound by PR metadata, artifact name, the
+  // full-receipt verification step/log, and the decoded native report.
+  return {workflow: authorWorkflow, job: 'regression (0)', steps: authorSteps, smoke: false,
+    pullRequest: pr.number, artifactName: `native-built-output-regression-${pr.number}-${expectedHead}`};
+}
 
 async function delivery(redirect, fetchImpl, maximum, destination) {
   need(redirect?.status === 302, 'Native readback delivery redirect unavailable');
@@ -74,7 +104,7 @@ function receipts(raw) {
 // comes from its actual roster and available memory/disk, not a package-size cap.
 const extract = String.raw`
 import hashlib, os, shutil, stat, struct, sys, zipfile
-archive, target, expected_bytes, expected_hash, budget = sys.argv[1:]
+archive, target, expected_bytes, expected_hash, budget, allow_smoke = sys.argv[1:]
 expected_bytes, budget = int(expected_bytes), int(budget)
 def need(ok, message):
     if not ok: raise ValueError(message)
@@ -83,7 +113,8 @@ with zipfile.ZipFile(archive) as package:
     names = [member.filename for member in members]
     need(1 <= len(names) <= 2 and len(set(names)) == len(names)
          and 'native-normal-built-output.json' in names
-         and set(names) <= {'native-normal-built-output.json', 'selected-delivery-smoke.json'},
+         and set(names) <= {'native-normal-built-output.json', 'selected-delivery-smoke.json'}
+         and (allow_smoke == 'yes' or names == ['native-normal-built-output.json']),
          'Native archive inventory differs')
     # No prepended/unlisted local member, overlapping body, or trailing payload.
     # Streaming Actions ZIPs use signed or unsigned data descriptors; accept
@@ -164,22 +195,22 @@ export async function loadSelectedPackageReadback({api, repo, runId, attempt, ex
     /^[-\w.]+\/[-\w.]+$/.test(repo ?? '') && positive(runId) && positive(attempt) && commit(expectedHead),
     'Exact authenticated native readback source required');
   const run = await api(`/repos/${repo}/actions/runs/${runId}/attempts/${attempt}`);
-  need(run.id === runId && run.run_attempt === attempt && commit(run.head_sha) && run.head_branch === 'main' &&
-    run.event === 'workflow_dispatch' && run.path === workflow && run.status === 'completed' &&
+  need(run.id === runId && run.run_attempt === attempt && commit(run.head_sha) && run.status === 'completed' &&
     run.repository?.full_name === repo && run.head_repository?.full_name === repo, 'Native readback workflow identity differs');
-  // worker-merge has at most seven jobs. A complete single 100-row API page
-  // establishes uniqueness, without an open-ended attempt/job discovery loop.
+  const producer = producerFor(run, repo, expectedHead);
+  // Both fixed workflows fit one 100-row API page. Require the complete actual
+  // inventory to establish uniqueness, without an open-ended discovery loop.
   const inventory = await api(`/repos/${repo}/actions/runs/${runId}/attempts/${attempt}/jobs?per_page=100&page=1`);
   need(Array.isArray(inventory.jobs) && positive(inventory.total_count) && inventory.total_count === inventory.jobs.length &&
     inventory.jobs.length <= 100 && new Set(inventory.jobs.map(row => row.id)).size === inventory.jobs.length,
     'Incomplete or duplicate native readback job inventory');
-  const matches = inventory.jobs.filter(job => job.name === 'integration (0)');
-  need(matches.length === 1 && positive(matches[0].id), 'Exactly one native integration (0) producer required');
+  const matches = inventory.jobs.filter(job => job.name === producer.job);
+  need(matches.length === 1 && positive(matches[0].id), 'Exactly one native ' + producer.job + ' producer required');
   const job = await api(`/repos/${repo}/actions/jobs/${matches[0].id}`);
-  need(job.id === matches[0].id && job.name === 'integration (0)' && job.run_id === runId && job.run_attempt === attempt &&
+  need(job.id === matches[0].id && job.name === producer.job && job.run_id === runId && job.run_attempt === attempt &&
     job.head_sha === run.head_sha && job.status === 'completed' && job.conclusion === 'success' && Array.isArray(job.steps),
     'Native readback producer did not succeed on the exact attempt');
-  const stepNumbers = requiredSteps.map(name => {
+  const stepNumbers = producer.steps.map(name => {
     const rows = job.steps.filter(step => step.name === name);
     need(rows.length === 1 && rows[0].status === 'completed' && rows[0].conclusion === 'success' && positive(rows[0].number),
       'Native readback producer lacks successful actual step: ' + name);
@@ -188,6 +219,9 @@ export async function loadSelectedPackageReadback({api, repo, runId, attempt, ex
   need(stepNumbers.every((number, index) => index === 0 || number > stepNumbers[index - 1]), 'Native readback step order differs');
   const log = await delivery(await api.jobLogRedirect(`/repos/${repo}/actions/jobs/${job.id}/logs`), fetchImpl, maxLog);
   const receipt = receipts(log.raw);
+  if (producer.artifactName) need(receipt.artifact_name === producer.artifactName &&
+    receipt.lines.filter(line => line === authorReceipt).length === 1,
+    'Native author full-build receipt or exact artifact name differs');
   const artifact = await api(`/repos/${repo}/actions/artifacts/${receipt.artifact_id}`);
   need(artifact.id === receipt.artifact_id && artifact.name === receipt.artifact_name && artifact.expired === false &&
     artifact.size_in_bytes === receipt.artifact_bytes && /^sha256:[a-f0-9]{64}$/.test(artifact.digest ?? '') &&
@@ -209,7 +243,7 @@ export async function loadSelectedPackageReadback({api, repo, runId, attempt, ex
     const downloaded = await delivery(await api.artifactRedirect(`/repos/${repo}/actions/artifacts/${artifact.id}/zip`),
       fetchImpl, receipt.artifact_bytes, archive);
     need(downloaded.bytes === receipt.artifact_bytes && downloaded.sha256 === artifactDigest, 'Native archive bytes or digest differ');
-    execFileSync('python3', ['-I', '-B', '-c', extract, archive, target, String(receipt.report.bytes), receipt.report.sha256, String(budget)],
+    execFileSync('python3', ['-I', '-S', '-B', '-c', extract, archive, target, String(receipt.report.bytes), receipt.report.sha256, String(budget), producer.smoke ? 'yes' : 'no'],
       {env: {PATH: '/usr/bin:/bin', LANG: 'C.UTF-8'}, timeout: 120000, maxBuffer: 1048576, stdio: ['ignore', 'pipe', 'pipe']});
     const raw = fs.readFileSync(target);
     need(raw.length === receipt.report.bytes && hash(raw) === receipt.report.sha256, 'Extracted native readback changed');
@@ -225,7 +259,8 @@ export async function loadSelectedPackageReadback({api, repo, runId, attempt, ex
       assets.paths.has('atlas-geography.json') && worker.paths.has('index.js') && worker.paths.has('wrangler.json'),
       'Native readback complete output inventory differs');
     return {report, origin: {run_id: runId, run_attempt: attempt, job_id: job.id, head: expectedHead,
-      workflow_head: run.head_sha, workflow_path: workflow, event: run.event,
+      workflow_head: run.head_sha, workflow_path: producer.workflow, event: run.event,
+      ...(producer.pullRequest ? {pull_request: producer.pullRequest} : {}),
       artifact_id: artifact.id, artifact_name: artifact.name, artifact_bytes: artifact.size_in_bytes,
       artifact_digest: artifactDigest, report_bytes: raw.length, report_sha256: hash(raw),
       use: 'full-output-comparison-only'}};

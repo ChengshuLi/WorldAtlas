@@ -112,7 +112,7 @@ test('private builder requires the actual declared image identity', () => {
 });
 
 
-test('selected runtime probe genuinely imports admitted modules without Python startup hooks',async t=>{
+test('producer and selected runtime probes genuinely import without Python startup hooks',async t=>{
   const prior=new Map(['NODE_OPTIONS','NODE_PATH'].map(name=>[name,process.env[name]]));
   for(const name of prior.keys())delete process.env[name];
   t.after(()=>{for(const [name,value]of prior)value===undefined?delete process.env[name]:process.env[name]=value;});
@@ -133,8 +133,9 @@ test('selected runtime probe genuinely imports admitted modules without Python s
   assert.deepEqual(isolated.errors,[]);assert.equal(isolated.python.imports.length,3);
   assert.ok(isolated.python.imports.every(row=>row.actual==='1.0'));
   await assert.rejects(fs.stat(marker),{code:'ENOENT'});
-  // The positive hook control proves the fixture would execute during ordinary
-  // startup; the full producer's existing default probe remains unchanged.
   assert.deepEqual(inspectPackageRuntime(root,{python}).errors,[]);
+  await assert.rejects(fs.stat(marker),{code:'ENOENT'});
+  // Genuine ordinary startup proves the hostile fixture is active.
+  execFileSync(python,['-c','pass']);
   assert.equal(await fs.readFile(marker,'utf8'),'executed');
 });

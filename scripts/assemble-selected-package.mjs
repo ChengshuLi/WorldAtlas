@@ -151,7 +151,7 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
     if(differences.length)recordAndRequireRuntime();
     // Actual scientific imports run only after original custody and complete
     // installed-byte admission, with the same no-site startup as measurement.
-    const runtime=inspectPackageRuntime(root,{isolatedPython:true});
+    const runtime=inspectPackageRuntime(root);
     if(runtime.errors.length){differences.push({component:'runtime.preflight',errors:runtime.errors});recordAndRequireRuntime();}
     const actualRuntime={node:process.version,platform:process.platform,arch:process.arch,
       versions:process.versions,dependencies:runtime.package_lock_sha256,

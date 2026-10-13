@@ -1,3 +1,4 @@
+import {packagePythonProbeArgs} from './package-python-execution.mjs';
 import fs from 'node:fs/promises';
 import fsSync, {constants} from 'node:fs';
 import path from 'node:path';
@@ -125,7 +126,7 @@ export function inspectPackageExecutionInputs(root, definition, kind = 'cloudfla
   return {files, errors};
 }
 
-export function inspectPackageRuntime(root, {python = 'python3', isolatedPython = false} = {}) {
+export function inspectPackageRuntime(root, {python = 'python3'} = {}) {
   const errors = [], result = {node: {version: process.version, executable: process.execPath}, python: null, npm_packages: 0, optional_npm_omissions: []};
   if(process.env.NODE_OPTIONS?.trim()||process.env.NODE_PATH?.trim())errors.push({kind:'node-execution',detail:'Actual package issuer requires NODE_OPTIONS and NODE_PATH unset'});
   const attempt = (kind, run) => { try { run(); } catch (error) { errors.push({kind, detail: error.message}); } };
@@ -164,8 +165,7 @@ export function inspectPackageRuntime(root, {python = 'python3', isolatedPython 
       if (!version) throw Error(`Missing exact build requirement ${name}`);
       return {name, version};
     });
-    const source = 'import importlib,json,sys\nrows=[]\nfor item in json.loads(sys.argv[1]):\n try:\n  module=importlib.import_module(item["name"]); rows.append({**item,"actual":module.__version__})\n except Exception as error: rows.append({**item,"error":str(error)})\nprint(json.dumps({"version":sys.version.split()[0],"executable":sys.executable,"imports":rows}))';
-    const args=isolatedPython?['-I','-S','-B',path.join(root,'scripts/package-python-runtime.py'),'--probe-imports',JSON.stringify(modules)]:['-c',source,JSON.stringify(modules)];
+    const args=packagePythonProbeArgs(modules);
     result.python = JSON.parse(command(python, args, {env: {...process.env, PYTHONDONTWRITEBYTECODE: '1', OPENBLAS_NUM_THREADS: '1'}}));
     for (const row of result.python.imports) if (row.error || row.actual !== row.version) errors.push({kind: 'python-import', module: row.name, expected: row.version, actual: row.actual ?? null, detail: row.error ?? 'Version differs'});
   });

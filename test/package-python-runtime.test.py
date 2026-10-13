@@ -26,10 +26,11 @@ class Installation:
         self.lookups = []
 
     def add(self, name, *, version='1.0', source='def answer(x):\n    return x + 1\n',
-            requirements=(), extras=(), cache=True, optimization=0, flags=0, stamp=1):
+            requirements=(), extras=(), cache=True, optimization=0, flags=0, stamp=1, flat=False):
         package = self.root / name.replace('-', '_')
-        package.mkdir()
-        source_file = package / '__init__.py'
+        if not flat:
+            package.mkdir()
+        source_file = package.with_suffix('.py') if flat else package / '__init__.py'
         source_file.write_bytes(source.encode())
         files = [source_file]
         if cache:
@@ -60,7 +61,12 @@ class Installation:
         return self.distributions[name]
 
     def identity(self, roots=None, **kwargs):
-        return runtime.installed_identity(roots or ['example'], distribution_finder=self.finder, **kwargs)
+        original = sys.path[:]
+        sys.path.insert(0, str(self.root))
+        try:
+            return runtime.installed_identity(roots or ['example'], distribution_finder=self.finder, **kwargs)
+        finally:
+            sys.path[:] = original
 
 
 class PythonRuntimeIdentityTests(unittest.TestCase):
@@ -199,6 +205,93 @@ class PythonRuntimeIdentityTests(unittest.TestCase):
         self.assertTrue(any(row['path'] == 'example/injected.py' for row in changed['inventory']))
         injected.unlink(); injected.symlink_to(source)
         with self.assertRaisesRegex(ValueError, 'linked ancestor|ordinary file'): install.identity()
+
+    def test_flat_module_package_shadow_changes_complete_identity(self):
+        install = self.installation()
+        install.add('example', flat=True, cache=False, source='__version__="1.0"\ndef answer(): return 1\n')
+        original = install.identity()
+        package = install.root / 'example'
+        package.mkdir()
+        (package / '__init__.py').write_text('__version__="1.0"\ndef answer(): return 2\n')
+        changed = install.identity(expected_parser=original['parser'])
+        self.assertNotEqual(original['sha256'], changed['sha256'])
+        self.assertNotEqual(original['raw_sha256'], changed['raw_sha256'])
+        self.assertEqual(runtime.validate_identity(changed), {'valid': True})
+        self.assertTrue(any(row['path'] == 'example/__init__.py' for row in changed['inventory']))
+        spec = importlib.machinery.PathFinder.find_spec('example', [str(install.root)])
+        self.assertEqual(Path(spec.origin), package / '__init__.py')
+
+    def test_flat_module_native_sourceless_unknown_and_cache_siblings_are_bound(self):
+        install = self.installation(); source, _ = install.add('example', flat=True, cache=False)
+        original = install.identity()
+        native = source.with_name('example' + importlib.machinery.EXTENSION_SUFFIXES[0])
+        native.write_bytes(b'Unexecuted native candidate')
+        changed = install.identity()
+        self.assertNotEqual(original['sha256'], changed['sha256'])
+        self.assertEqual(next(row['effective']['kind'] for row in changed['inventory'] if row['path'] == native.name), 'exact')
+        native.unlink()
+        unknown = source.with_suffix('.data'); unknown.write_bytes(b'unknown exact companion')
+        self.assertNotEqual(original['sha256'], install.identity()['sha256'])
+        unknown.unlink()
+        cache = source.parent / '__pycache__' / ('example.' + sys.implementation.cache_tag + '.pyc')
+        cache.parent.mkdir()
+        header = importlib.util.MAGIC_NUMBER + struct.pack('<III', 0, 0, source.stat().st_size)
+        cache.write_bytes(header + marshal.dumps(compile(source.read_bytes(), str(source), 'exec', dont_inherit=True)))
+        observed = install.identity()
+        self.assertTrue(any(row['path'] == '__pycache__/' + cache.name for row in observed['inventory']))
+        cache.write_bytes(header + marshal.dumps(compile('changed=True', str(source), 'exec', dont_inherit=True)))
+        with self.assertRaisesRegex(ValueError, 'Cached executable code differs'):
+            install.identity()
+        cache.unlink()
+        legacy = source.with_suffix('.pyc')
+        legacy.write_bytes(header + marshal.dumps(compile(source.read_bytes(), str(source), 'exec', dont_inherit=True)))
+        self.assertNotEqual(original['sha256'], install.identity()['sha256'])
+
+    def test_sourceless_recorded_module_package_shadow_is_inventoried(self):
+        install = self.installation(); source, _ = install.add('example', flat=True, cache=False)
+        bytecode = source.with_suffix('.pyc')
+        bytecode.write_bytes(importlib.util.MAGIC_NUMBER + b'\0' * 12 + marshal.dumps(compile(source.read_bytes(), '/original/example.py', 'exec')))
+        source.unlink()
+        record = install.root / 'example-1.0.dist-info/RECORD'
+        record.write_text(record.read_text().replace('example.py,,', 'example.pyc,,'))
+        original = install.identity()
+        package = install.root / 'example'; package.mkdir()
+        (package / '__init__.py').write_text('changed=True\n')
+        changed = install.identity()
+        self.assertNotEqual(original['sha256'], changed['sha256'])
+        row = next(row for row in changed['inventory'] if row['path'] == 'example.pyc')
+        self.assertEqual(row['effective']['kind'], 'exact')
+
+    def test_ordered_roots_reject_shadowing_but_ignore_unreachable_later_module(self):
+        install = self.installation(); install.add('example', flat=True, cache=False)
+        original = install.identity()
+        other = self.base / 'other-site'; other.mkdir()
+        (other / 'example.py').write_text('changed=True\n')
+        old_path = sys.path[:]
+        try:
+            sys.path[:] = [str(other), str(install.root), *old_path]
+            with self.assertRaisesRegex(ValueError, 'outside its inventoried distribution root'):
+                runtime.installed_identity(['example'], distribution_finder=install.finder)
+            sys.path[:] = [str(install.root), str(other), *old_path]
+            self.assertEqual(runtime.installed_identity(['example'], distribution_finder=install.finder)['sha256'], original['sha256'])
+        finally:
+            sys.path[:] = old_path
+
+    def test_unowned_namespace_portions_are_rejected_even_in_later_roots(self):
+        install = self.installation(); source, _ = install.add('example', cache=False)
+        member = source.with_name('member.py'); source.rename(member)
+        record = install.root / 'example-1.0.dist-info/RECORD'
+        record.write_text(record.read_text().replace('example/__init__.py,,', 'example/member.py,,'))
+        install.identity()
+        other = self.base / 'other-site'; (other / 'example').mkdir(parents=True)
+        (other / 'example/second.py').write_text('changed=True\n')
+        old_path = sys.path[:]
+        try:
+            sys.path[:] = [str(install.root), str(other), *old_path]
+            with self.assertRaisesRegex(ValueError, 'namespace merges an unowned import root'):
+                runtime.installed_identity(['example'], distribution_finder=install.finder)
+        finally:
+            sys.path[:] = old_path
 
     def test_metadata_memory_admission_is_resource_based_and_fails_closed(self):
         install = self.installation(); install.add('example')
