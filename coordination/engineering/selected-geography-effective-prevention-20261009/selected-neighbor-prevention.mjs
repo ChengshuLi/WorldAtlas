@@ -78,7 +78,7 @@ export function matchSupportedProgramme(catalogue,{preimageVersion,sourceProfile
  // two already reviewed closures does not create a new method registration.
  const source=methods.find(p=>same(sourceCode,p.source_executed_code));
  const native=methods.find(p=>same(nativeCode,p.native_executed_code));
- demand(source&&native,'Unknown original source/native policy program closure');return {source,native};
+ demand(source&&native,'Unknown/ambiguous original source/native policy program closure');return {source,native};
 }
 
 // Only the compact reviewed authority escapes. The full policy graph and
@@ -985,7 +985,10 @@ export function compatibleCurrentRebindCode(executionCommit,currentCode,historic
  // independently acquired and compared by readCurrentRebindCustody below.
  const boundaries=new Set(['coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs','coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs','scripts/local-workspace.mjs','scripts/worker-identity.mjs']);
  if(reader){const policy=readSupportedProgrammeCatalogue(reader);
-  if(policy.catalogue.current_rebind_migrations.some(p=>p.execution_commit===executionCommit&&same(p.historical_code,historicalCode)
+  // A reviewed complete current vector remains admitted when a later run
+  // retains it as history. Authenticate all historical bytes, including the
+  // boundaries; only the independently executing current boundary may differ.
+  if(policy.catalogue.current_rebind_migrations.some(p=>((p.execution_commit===executionCommit&&same(p.historical_code,historicalCode))||same(p.current_code,historicalCode))
    &&currentCode.every((current,i)=>boundaries.has(current.path)||same(current,p.current_code[i]))))return historicalCode;
  }
  demand((executionCommit==='46cb67a6cc0f88c6295d2d70da654baa5c6119a0'&&valueSha(historicalCode)==='e20767cd7f4aea34c1c1ce794bd09c43993905ac8da94779781c616ccd7c20ee')||(executionCommit==='c192aa5c88df9a55594b62f7dcfa6e4226f59682'&&valueSha(historicalCode)==='8542f8b0d2d41e6dc1a31090a91a47cbe383f3ab173f547a4c07aaeb8bb74284')||(executionCommit==='0eefe294390894f66c33e24e7950f21012d3791c'&&valueSha(historicalCode)==='ff910e210d83648c50608a0295a95b7ab1c5840f2f7eb678508cb7e02afe3c1d')||(executionCommit==='16c35b9188d130b060fc2dcf4e917983d42d9db1'&&valueSha(historicalCode)==='4ad24312546806ee47126994436d335e81a851eba499bc3607b232c76bf41d7b')||(executionCommit==='bb73f014366ed7e7b10a54a4fb3b2113e8743d66'&&valueSha(historicalCode)==='41ed51a21ff438fb51533664c6308a3120f245af5c260eec90b028cc21d1431e')||(executionCommit==='75d5a33e52b8d960875055a91ea3b1ed82ad6d71'&&valueSha(historicalCode)==='4ba0e3b564611248d428613c33bd60cf68a99233f2db572f3893a7d46dda429a'),'Unknown historical rebind qualification generation');

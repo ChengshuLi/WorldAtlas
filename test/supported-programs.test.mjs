@@ -35,7 +35,7 @@ test('catalogue-only additions do not change any existing method descriptor',()=
 test('changed caller, helper and other method bytes refuse independently',()=>{
  for(const changedPath of ['scripts/additive-gap-repair.mjs',helper,'package.json']){
   const q=request(clone(read().programs.at(-1))),body=q.nativeCode.find(p=>p.path===changedPath);assert.ok(body);body.sha256='f'.repeat(64);
-  assert.throws(()=>matchSupportedProgramme(read(),q),/Unknown original/);
+  assert.throws(()=>matchSupportedProgramme(read(),q),/Unknown\/ambiguous original/);
  }
 });
 test('missing, malformed, duplicate and foreign catalogue records refuse',()=>{
@@ -43,7 +43,7 @@ test('missing, malformed, duplicate and foreign catalogue records refuse',()=>{
  for(const mutate of [c=>c.programs.push(clone(c.programs[0])),c=>c.programs[0].source_executed_code.push(clone(c.programs[0].source_executed_code[0])),c=>c.programs[0].accepted_head='latest',c=>c.programs[0].unexpected=true,c=>c.programs[0].native_executed_code[0].bytes=33554433]){
   const c=read();mutate(c);assert.throws(()=>validateSupportedProgrammeCatalogue(c));
  }
- const q=request(clone(read().programs[0]));q.sourceProfile='candidate-only';assert.throws(()=>matchSupportedProgramme(read(),q),/Unknown original/);
+ const q=request(clone(read().programs[0]));q.sourceProfile='candidate-only';assert.throws(()=>matchSupportedProgramme(read(),q),/Unknown\/ambiguous original/);
 });
 test('same complete rebind vector retains equality without a generation exception',()=>{
  const code=CURRENT_REBIND_CODE.map(path=>({path,bytes:1,sha256:'a'.repeat(64)}));
@@ -84,7 +84,10 @@ test('only finite exact complete migrations succeed and nearby changed vectors r
   assert.deepEqual(compatibleCurrentRebindCode(m.execution_commit,m.current_code,m.historical_code,reader),m.historical_code);
   for(const field of ['current_code','historical_code']){const changed=clone(m);changed[field][0].sha256='e'.repeat(64);
    assert.throws(()=>compatibleCurrentRebindCode(m.execution_commit,changed.current_code,changed.historical_code,reader),/Unknown historical/);}
-  assert.throws(()=>compatibleCurrentRebindCode('f'.repeat(40),m.current_code,m.historical_code,reader),/Unknown historical/);
+  // Row 6's retained vector is already a reviewed current vector, and its
+  // scientific descriptors are unchanged; the other rows require their migration.
+  if(m===c.current_rebind_migrations[6])assert.deepEqual(compatibleCurrentRebindCode('f'.repeat(40),m.current_code,m.historical_code,reader),m.historical_code);
+  else assert.throws(()=>compatibleCurrentRebindCode('f'.repeat(40),m.current_code,m.historical_code,reader),/Unknown historical/);
  }
  c.current_rebind_migrations.push(clone(c.current_rebind_migrations[0]));assert.throws(()=>validateSupportedProgrammeCatalogue(c),/Malformed|Ambiguous/);
 });
@@ -120,7 +123,8 @@ test('reviewed allocator admits only the two exact complete retained-consumer ve
   assert.deepEqual(m.current_code.map(p=>p.path),CURRENT_REBIND_CODE);
   assert.deepEqual(m.historical_code.map(p=>p.path),CURRENT_REBIND_CODE);
   assert.deepEqual(compatibleCurrentRebindCode(m.execution_commit,m.current_code,m.historical_code,reader),m.historical_code);
-  assert.throws(()=>compatibleCurrentRebindCode(expected[1-index][0],m.current_code,m.historical_code,reader),/Unknown historical/);
+  if(index===1)assert.deepEqual(compatibleCurrentRebindCode(expected[0][0],m.current_code,m.historical_code,reader),m.historical_code);
+  else assert.throws(()=>compatibleCurrentRebindCode(expected[1][0],m.current_code,m.historical_code,reader),/Unknown historical/);
   // Authority comes from the committed trusted catalogue, not a caller's own
   // vector or a candidate-only registration. Missing authority still refuses.
   assert.throws(()=>compatibleCurrentRebindCode(m.execution_commit,m.current_code,m.historical_code),/Unknown historical/);
@@ -151,7 +155,7 @@ test('native checkpoint preregistration preserves every prior programme and migr
  assert.deepEqual(request(p),requestFromMatch(matchSupportedProgramme(c,request(p))));
  for(const changedPath of ['scripts/check-effective-geographic-regression.mjs','src/native-grid.js']){
   const q=request(clone(p)),body=q.nativeCode.find(row=>row.path===changedPath);assert.ok(body);body.bytes++;
-  assert.throws(()=>matchSupportedProgramme(c,q),/Unknown original/);
+  assert.throws(()=>matchSupportedProgramme(c,q),/Unknown\/ambiguous original/);
  }
 });
 test('future native and allocator vectors admit only both genuinely consumed historical rebinds',()=>{
@@ -192,7 +196,7 @@ test('approved SOURCE000 and fresh accepted NATIVE compose without a registered 
  for(const field of ['sourceCode','nativeCode'])for(const mutate of [
   rows=>rows[0].sha256='e'.repeat(64),rows=>rows[0].bytes++,rows=>rows.pop(),rows=>rows.push(clone(rows[0]))]){
   const unknown=clone(q);mutate(unknown[field]);
-  assert.throws(()=>matchSupportedProgramme(c,unknown),/Unknown original/);
+  assert.throws(()=>matchSupportedProgramme(c,unknown),/Unknown\/ambiguous original/);
  }
 });
 
@@ -202,7 +206,7 @@ test('independent admission cannot borrow a closure from another profile or prei
   const isolated=clone(c);isolated.programs=[clone(original),clone(original)];
   isolated.programs[0].source_executed_code[0].sha256='d'.repeat(64);
   isolated.programs[1][key]=key==='source_profile'?'foreign-profile':original.preimage_version===2?3:2;
-  assert.throws(()=>matchSupportedProgramme(isolated,q),/Unknown original/);
+  assert.throws(()=>matchSupportedProgramme(isolated,q),/Unknown\/ambiguous original/);
  }
 });
 
@@ -212,11 +216,12 @@ test('current custody and workspace changes do not re-register an approved histo
  const reader=new ImmutableReader(root,head,{runtimeBytes:1,metadataBytes:1,executionBytes:1,outputBytes:1});
  const boundaries=[helper,'coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs',
   'coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs','scripts/local-workspace.mjs','scripts/worker-identity.mjs'];
- for(const m of read().current_rebind_migrations){
+ for(const [index,m] of read().current_rebind_migrations.entries()){
   const current=clone(m.current_code);
   for(const name of boundaries){const row=current.find(p=>p.path===name);assert.ok(row);row.bytes++;row.sha256=sha('current reviewed boundary '+name);}
   assert.deepEqual(compatibleCurrentRebindCode(m.execution_commit,current,m.historical_code,reader),m.historical_code);
-  assert.throws(()=>compatibleCurrentRebindCode('f'.repeat(40),current,m.historical_code,reader),/Unknown historical/);
+  if(index===6)assert.deepEqual(compatibleCurrentRebindCode('f'.repeat(40),current,m.historical_code,reader),m.historical_code);
+  else assert.throws(()=>compatibleCurrentRebindCode('f'.repeat(40),current,m.historical_code,reader),/Unknown historical/);
   for(const name of boundaries){
    const historical=clone(m.historical_code);historical.find(p=>p.path===name).sha256=sha('unknown historical boundary '+name);
    assert.throws(()=>compatibleCurrentRebindCode(m.execution_commit,current,historical,reader),/Unknown historical/);
@@ -224,6 +229,26 @@ test('current custody and workspace changes do not re-register an approved histo
   for(const name of ['src/native-grid.js','src/effective-footprint.js','scripts/check-effective-geographic-regression.mjs']){
    const scientific=clone(current);scientific.find(p=>p.path===name).sha256=sha('changed numerical method '+name);
    assert.throws(()=>compatibleCurrentRebindCode(m.execution_commit,scientific,m.historical_code,reader),/Unknown historical/);
+  }
+ }
+});
+
+test('every reviewed current rebind vector remains admitted when retained as history',()=>{
+ const head=git('rev-parse','HEAD').toString().trim();
+ const reader=new ImmutableReader(root,head,{runtimeBytes:1,metadataBytes:1,executionBytes:1,outputBytes:1});
+ const boundaries=new Set([helper,'coordination/engineering/additive-native-composition-20261009/capture-current-rebind.mjs',
+  'coordination/engineering/additive-native-composition-20261009/run-current-rebind.mjs','scripts/local-workspace.mjs','scripts/worker-identity.mjs']);
+ for(const m of read().current_rebind_migrations){
+  const historical=m.current_code,current=clone(historical);
+  for(const row of current)if(boundaries.has(row.path)){row.bytes++;row.sha256=sha('new current boundary '+row.path);}
+  assert.deepEqual(compatibleCurrentRebindCode('f'.repeat(40),current,historical,reader),historical);
+  for(const [i,row]of historical.entries()){
+   const unknown=clone(historical);unknown[i].sha256=sha('unknown historical '+row.path);
+   assert.throws(()=>compatibleCurrentRebindCode('f'.repeat(40),current,unknown,reader),/Unknown historical/);
+   if(!boundaries.has(row.path)){
+    const numerical=clone(current);numerical[i].sha256=sha('unknown current numerical '+row.path);
+    assert.throws(()=>compatibleCurrentRebindCode('f'.repeat(40),numerical,historical,reader),/Unknown historical/);
+   }
   }
  }
 });
