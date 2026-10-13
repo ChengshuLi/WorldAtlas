@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {integrationProof, PROOF_PATHS, WORKFLOW_PATH, successfulGeographyJob} from '../scripts/integration-proof.mjs';
-import {integrationProfile, COORDINATION_PATHS} from '../scripts/integration-profile.mjs';
+import {integrationProfile, COORDINATION_PATHS, candidateGeographyCode} from '../scripts/integration-profile.mjs';
 
 function fixture(profile = 'full') {
   const workflow='ref: ${{ github.event.pull_request.head.sha }}\nname: Complete regression shard\nname: Build hosted assets';
@@ -35,7 +35,7 @@ test('successful full and focused workflows prove exact tree and pinned current 
     assert.deepEqual(await integrationProof({...f.options,runId:12,runAttempt:1}),proof);
   }
 });
-test('geography reuse requires one actual successful producer and every trusted step', async () => {
+test('geography reuse requires one actual successful producer, independently of step projections', async () => {
   const geography = {id: 44, name: 'geography', status: 'completed', conclusion: 'success', steps: [
     'Checkout trusted geographic checker', 'Install trusted geographic dependencies',
     'Check proposed geography with trusted baseline code',
@@ -44,10 +44,14 @@ test('geography reuse requires one actual successful producer and every trusted 
   const f = fixture(); f.jobs.push(geography);
   assert.equal((await integrationProof(f.options)).geography_job_id, 44);
   for (const mutate of [job => {job.id = 0;}, job => {job.status = 'in_progress';},
-    job => {job.conclusion = 'failure';}, job => {job.steps.pop();},
-    job => {job.steps[2].conclusion = 'skipped';}, job => {job.steps.push({...job.steps[2]});}]) {
+    job => {job.conclusion = 'failure';}, job => {job.conclusion = 'skipped';},
+    job => {job.conclusion = 'cancelled';}, job => {job.name = 'other';}]) {
     const job = structuredClone(geography); mutate(job); assert.equal(successfulGeographyJob([job]), null);
   }
+  for (const steps of [undefined, [], [{name: 'old display name', status: 'in_progress', conclusion: null}]]) {
+    assert.equal(successfulGeographyJob([{...geography, steps}])?.id, 44);
+  }
+  assert.equal(successfulGeographyJob([geography], '.github/workflows/foreign.yml'), null);
   assert.equal(successfulGeographyJob([geography, structuredClone(geography)]), null);
   f.jobs.push(structuredClone(geography));
   assert.equal((await integrationProof(f.options)).geography_job_id, undefined,
@@ -205,7 +209,7 @@ function geographyProfileFixture() {
 }
 const select = f => selectIntegrationProfile({event:f.event,repo:f.repo,api:f.api});
 test('actual PR selector passes verified geography ownership and selects one evidence shard', async()=>{
-  const f=geographyProfileFixture();assert.deepEqual(await select(f),{profile:'evidence',shards:[0]});
+  const f=geographyProfileFixture();assert.deepEqual(await select(f),{profile:'evidence',shards:[0],geography_software:false});
   assert.ok(f.calls.includes(f.prefix+'/issues/472'));
   assert.equal(f.calls.some(route=>/comments|timeline/.test(route)),false);
 });
@@ -221,14 +225,14 @@ for (const [label,change] of [
 ]) test('actual PR selector rejects '+label,async()=>{const f=geographyProfileFixture();change(f);await assert.rejects(()=>select(f));});
 test('ordinary geography profile follows current owned scope without readiness labels',async()=>{
   const f=geographyProfileFixture();f.issue.labels.push('status:blocked');
-  assert.deepEqual(await select(f),{profile:'evidence',shards:[0]});
+  assert.deepEqual(await select(f),{profile:'evidence',shards:[0],geography_software:false});
   f.spec.owned_paths=['research/geography/another/'];
-  assert.deepEqual(await select(f),{profile:'full',shards:[0,1,2]});
+  assert.deepEqual(await select(f),{profile:'full',shards:[0,1,2],geography_software:false});
 });
 test('actual PR selector defaults full for files and rename origins outside geography scope',async()=>{
   for(const file of [{filename:'src/attributes.js'},{filename:'data/regional-review/another/findings.json'},
     {filename:'data/regional-review/regional-review-example/renamed.json',previous_filename:'src/attributes.js'}]){
-    const f=geographyProfileFixture();f.files[0]=file;assert.deepEqual(await select(f),{profile:'full',shards:[0,1,2]});
+    const f=geographyProfileFixture();f.files[0]=file;assert.deepEqual(await select(f),{profile:'full',shards:[0,1,2],geography_software:false});
   }
 });
 test('geography scope read paginates all changed files without canonical comments',async()=>{
@@ -238,7 +242,7 @@ test('geography scope read paginates all changed files without canonical comment
     if(route.includes('/files?'))return rows.slice(route.endsWith('page=1')?0:100,route.endsWith('page=1')?100:101);
     return api(route);
   };
-  assert.deepEqual(await select(f),{profile:'evidence',shards:[0]});
+  assert.deepEqual(await select(f),{profile:'evidence',shards:[0],geography_software:false});
 });
 test('non-geography selectors preserve existing profiles without requesting geography ownership',async()=>{
   for(const [branch,filename,profile] of [
@@ -313,4 +317,26 @@ test('full package proof binds every producer control, readback, receipt and sta
     else job.conclusion=outcome;
     assert.equal(await integrationProof(f.options),null,outcome);
   }
+});
+
+
+test('geography software route is derived from changed checker inputs, retaining data and source-only routes', async () => {
+ const changed = filename => [{filename, status: 'modified'}];
+ const {CURRENT_REBIND_CODE} = await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs');
+ for (const name of CURRENT_REBIND_CODE) assert.equal(candidateGeographyCode('full', changed(name)), true, name);
+ for (const name of ['scripts/run-geographic-check.py', 'scripts/check-effective-geographic-regression.mjs',
+  'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
+  'src/ownership-codec.js', 'src/native-grid.js', 'requirements.txt']) {
+  assert.equal(candidateGeographyCode('full', changed(name)), true, name);
+  assert.equal(candidateGeographyCode('evidence', changed(name)), false, name);
+  assert.equal(candidateGeographyCode('full', changed(name), 'selected-data'), false, name);
+ }
+ for (const name of ['data/geography/part-0.json', 'src/app.js', 'src/attributes.js',
+  'research/geography/example/source.py', 'docs/WORKER_COORDINATION.md',
+  'coordination/engineering/example/evidence-quality.json', 'scripts/native-ownership/verified-candidates.json']) {
+  assert.equal(candidateGeographyCode('full', changed(name)), false, name);
+ }
+ assert.equal(candidateGeographyCode('full', [...changed('data/geography/part-0.json'),
+  ...changed('coordination/engineering/example/source-adjudication.json')]), false);
+ assert.equal(candidateGeographyCode('full', [{filename: 'docs/removed.txt', previous_filename: 'scripts/check-geographic-regression.py'}]), true);
 });

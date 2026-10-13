@@ -12,15 +12,9 @@ export function successfulGeographyJob(jobs, workflow = WORKFLOW_PATH) {
   const matches = jobs.filter(job => job.name === 'geography');
   if (matches.length !== 1) return null;
   const job = matches[0];
-  const required = ['Checkout trusted geographic checker', 'Install trusted geographic dependencies',
-    workflow === WORKFLOW_PATH ? 'Check proposed geography with trusted baseline code' :
-      'Check exact combined geography with trusted baseline code',
-    'Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02'];
-  if (!Number.isSafeInteger(job.id) || job.id < 1 || job.status !== 'completed' || job.conclusion !== 'success' ||
-      !required.every(name => {
-        const steps = job.steps?.filter(step => step.name === name) ?? [];
-        return steps.length === 1 && steps[0].status === 'completed' && steps[0].conclusion === 'success';
-      })) return null;
+  // Step projections can remain pending or disappear after job completion.
+  // Callers authenticate this successful producer's run and immutable receipt.
+  if (!Number.isSafeInteger(job.id) || job.id < 1 || job.status !== 'completed' || job.conclusion !== 'success') return null;
   return job;
 }
 

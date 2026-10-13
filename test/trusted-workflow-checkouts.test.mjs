@@ -235,7 +235,7 @@ test('full PR co-locates actual package work on shard zero without changing the 
   const receipt=packageStep(w.regression,'Retain full-regression package receipt');
   assert.match(receipt.text,/name: package-input-build\n/);assert.match(receipt.text,/path: \|\n            \.cache\/package-input-build.json\n/);
   assert.match(receipt.text,/if-no-files-found: error/);
-  assert(w.regression.steps.indexOf(packageStep(w.regression,'Verify full-regression package controls'))<w.regression.steps.indexOf(packageStep(w.regression,'Build hosted assets')));
+  assert(w.regression.steps.indexOf(packageStep(w.regression,'Inventory original full-regression package output'))<w.regression.steps.indexOf(packageStep(w.regression,'Verify full-regression package controls')),'Incidental controls cannot mutate original capture authority');
   assert(w.regression.steps.indexOf(packageStep(w.regression,'Read back qualified native build outputs when selected'))<w.regression.steps.indexOf(packageStep(w.regression,'Verify full-regression package receipt')));
   assert(w.regression.steps.indexOf(packageStep(w.regression,'Complete regression shard'))<w.regression.steps.indexOf(packageStep(w.regression,'Verify full-regression package receipt')),'validate the bytes actually retained after tests');
 });
@@ -551,4 +551,18 @@ test('missing or declined predecessor admission retains ordinary full work and c
   }
   const helper=fs.readFileSync(path.join(root,'scripts/run-metadata-regression-controls.mjs'),'utf8');
   assert.match(helper,/streamTestProcess/);assert.doesNotMatch(helper,/prepareNativeRegressionInputs|prepareCanonicalCheckout|prepareModelReaderCheckout/);
+});
+
+
+test('queue focused candidate includes the inputs of its nested actual-checkout probes', () => {
+  const source = fs.readFileSync(path.join(root, '.github/workflows/worker-merge.yml'), 'utf8');
+  const candidate = source.match(/- name: Checkout only focused-test inputs for evidence regression[\s\S]*?sparse-checkout: \|\n((?:            .+\n)+)/);
+  assert.ok(candidate, 'actual focused queue checkout must be declared');
+  const directories = candidate[1].trim().split('\n').map(row => row.trim());
+  const result = probe(directories, {checkoutTests: true});
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  const missing = probe(directories.filter(row => !row.includes('selected-checkpoint-reuse-20261012')), {checkoutTests: true});
+  assert.notEqual(missing.status, 0);
+  assert.match(missing.stdout + missing.stderr, /ENOENT/);
+  assert.match(missing.stdout + missing.stderr, /selected-checkpoint-reuse-20261012/);
 });

@@ -71,10 +71,10 @@ try {
   if (phase === 'prepare') {
     const state = await prepareIntegration(options);
     result = {...result, accepted: Boolean(state.replayed), ...(state.replayed ? {merge_commit: state.pr.merge_commit_sha} : {}), status: state.replayed ? 'already-merged' : 'testing',
-      tested_base: state.base, tested_candidate: state.candidate, reviewed_head: input.expected_head, profile: state.profile, test_selection: state.test_selection ?? 'complete', expectations_path: state.expectations_path, proof: state.proof, proof_unavailable: state.proof_unavailable,
+      tested_base: state.base, tested_candidate: state.candidate, reviewed_head: input.expected_head, profile: state.profile, geography_software: state.geography_software, test_selection: state.test_selection ?? 'complete', expectations_path: state.expectations_path, proof: state.proof, proof_unavailable: state.proof_unavailable,
       geography_proof: state.geography_proof, candidate_refresh_attempts: state.candidate_refresh_attempts, candidate_ref: state.candidate_ref};
     // Only validated commit IDs and owned ref identifiers become job outputs.
-    fs.appendFileSync(process.env.GITHUB_OUTPUT, `candidate_ref=${state.candidate_ref ?? ''}\nproof_attempt=${state.proof?.run_attempt ?? ''}\nproof_run=${state.proof?.run_id ?? ''}\ncandidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\nprofile=${state.profile ?? 'evidence'}\nshards=${JSON.stringify(state.shards ?? (state.profile === 'full' ? [0,1,2] : [0]))}\ntest_selection=${state.test_selection ?? 'complete'}\nexpectations_path=${state.expectations_path ?? ''}\n`);
+    fs.appendFileSync(process.env.GITHUB_OUTPUT, `geography_software=${state.geography_software === true}\ncandidate_ref=${state.candidate_ref ?? ''}\nproof_attempt=${state.proof?.run_attempt ?? ''}\nproof_run=${state.proof?.run_id ?? ''}\ncandidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\nprofile=${state.profile ?? 'evidence'}\nshards=${JSON.stringify(state.shards ?? (state.profile === 'full' ? [0,1,2] : [0]))}\ntest_selection=${state.test_selection ?? 'complete'}\nexpectations_path=${state.expectations_path ?? ''}\n`);
     fs.appendFileSync(process.env.GITHUB_OUTPUT, `geography_proof=${state.geography_proof ? JSON.stringify(state.geography_proof) : ''}\n`);
   } else {
     const geographyProof = process.env.GEOGRAPHY_PROOF ? validateGeographyProof(JSON.parse(process.env.GEOGRAPHY_PROOF)) : null;

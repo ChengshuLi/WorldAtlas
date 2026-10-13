@@ -296,6 +296,26 @@ test('baseline-only unused programme-copy and source support changes do not alte
   } finally { f.close(); }
 });
 
+test('artifact transport code is equality-bound without a scientific reader hash whitelist', async () => {
+  const f = fixture(); try {
+    const code = 'scripts/geographic-report-artifact.mjs';
+    assert(EXECUTION_CODE.includes(code));
+    assert(!Object.hasOwn(AUDITED_READERS, code));
+    const upgraded = body('reviewed artifact transport update; no scientific route discovery');
+    const baseline = f.commit({...f.files, [code]: upgraded}, f.baseline);
+    const candidate = f.commit({...f.candidateFiles, [code]: upgraded}, baseline);
+    const accepted = await f.inspect(candidate, baseline);
+    assert.equal(accepted.status, 'unchanged-selected-inputs', accepted.reason);
+    const changed = f.commit({...f.candidateFiles, [code]: body('different candidate transport code')}, baseline);
+    const refused = await f.inspect(changed, baseline);
+    assert.equal(refused.status, 'full-check-required');
+    assert.equal(refused.reason, 'outside-source-publication-scope');
+    const differentBaseline = await f.inspect(f.candidate, baseline);
+    assert.equal(differentBaseline.status, 'full-check-required');
+    assert.equal(differentBaseline.reason, 'changed-current-input:' + code);
+  } finally { f.close(); }
+});
+
 test('unknown trusted reader profile, unsafe modes, limits and identical commits decline', async () => {
   const f = fixture(); try {
     assert.match((await f.inspect(f.baseline)).reason, /baseline-proof/);

@@ -10,7 +10,6 @@ import {gunzipSync} from 'node:zlib';
 import {candidateBudget} from './native-ownership/native-preparation-guards.mjs';
 import {validatePackageInputs} from './package-inputs.mjs';
 import {baselineFiles, validateEvidence} from './evidence-quality.mjs';
-import {githubAPI} from './issue-claim-contract.mjs';
 import {composeRetainedLedgers} from '../coordination/engineering/additive-native-gap-batch-20261008/composition-v2/compose-retained.mjs';
 import {normaliseRetainedRepairLedger, verifyCurrentRebindExecution, CURRENT_REBIND_CODE} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
@@ -706,64 +705,6 @@ async function main(args) {
     const started = performance.now();
     const result = await flow.acquireDeliveryInputs(plan, root, {budget: reader.budget, token: '', execute: flow.deliveryAcquisitionExecute()});
     console.log(JSON.stringify({...publishComplete(), acquisition: result, acquisition_ms: performance.now() - started}));
-    return;
-  }
-  if (['advance', 'status'].includes(phase)) {
-    need(configFile && destination && flags.every(f => ['--resume', '--automatic'].includes(f))
-      && new Set(flags).size === flags.length && !(phase === 'status' && flags.some(f => f !== '--resume')), 'Use advance|status CONFIG DESTINATION [--resume]');
-    need(!process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node launch required');
-    const root = fs.realpathSync(process.cwd()), configRaw = ordinary(root, configFile), config = JSON.parse(configRaw);
-    const reader = pinReader(root, {allowance: config.preparation_allowance});
-    reader.budget.add({bytes: configRaw.length});
-    need(config.version === 1, 'Versioned advance configuration required');
-    const flow = await import('./delivery-handoff-advance.mjs');
-    const recipe = flow.locate(reader, config.recipe);
-    const journal = flow.openAdvanceJournal(root, destination, recipe, {resume: phase === 'status' || flags.includes('--resume'), existingOnly: phase === 'status', budget: reader.budget, reader});
-    if (phase === 'status') { console.log(JSON.stringify(flow.readAdvanceStatus(journal))); return; }
-    let api, apiWait = 0;
-    const liveAPI = async (route, method = 'GET', body) => {
-      api ??= githubAPI(execFileSync('gh', ['auth', 'token'], {encoding: 'utf8', maxBuffer: 16384}).trim());
-      const started = performance.now();
-      try { return await api(route, method, body); } finally { apiWait += performance.now() - started; }
-    };
-    // Authenticate the owned author boundary before legacy runtime retirement.
-    let automaticContext;
-    if (flags.includes('--automatic')) {
-      const validate = await flow.automaticAuthorGuard(root, config, liveAPI);
-      const branch = execFileSync('git', ['symbolic-ref', '--short', 'HEAD'], {cwd: root, env: environment(), encoding: 'utf8'}).trim();
-      await validate({branch, paths: [destination + '/']});
-      automaticContext = {validate};
-    }
-    await flow.withAdvanceLock(journal, async () => {
-      try {
-        if (automaticContext) {
-          const {validate} = automaticContext;
-          const result = await flow.runAutomaticDelivery(journal, config, reader,
-            {prepareRequests, nativeRequests, retainProducts, composeAuthorities, rebindCustody, packageProjection,
-              finalizeDelivery,
-              authorityReader: () => flow.deliveryAuthorityReader(root, reader)},
-            {validate, apiWaitMilliseconds: () => apiWait,
-              beforePublication: async () => {
-                execFileSync('git', ['fetch', '--filter=blob:none', 'origin', 'main'], {cwd: root, env: environment(), maxBuffer: 1048576});
-                const main = execFileSync('git', ['rev-parse', 'origin/main'], {cwd: root, env: environment(), encoding: 'utf8'}).trim();
-                const refreshed = await flow.refreshDeliveryAuthorTree(journal, {main, validate});
-                return refreshed;
-              }});
-          console.log(JSON.stringify({result, ...flow.readAdvanceStatus(journal)})); return;
-        }
-        const preparationStarted = performance.now();
-        const next = await flow.nextDeliveryStage(journal, config, reader, {prepareRequests, nativeRequests, retainProducts,
-          composeAuthorities, rebindCustody, packageProjection, finalizeDelivery,
-          authorityReader: () => flow.deliveryAuthorityReader(root, reader)});
-        let result;
-        if (next.waiting) result = flow.observeAdvance(journal, next.waiting);
-        else if (next.complete) result = next;
-        else result = await flow.prepareAdvanceStage(journal, next.id, next.phase, next.input, next.produce, {preparationStarted, apiWaitMilliseconds: () => apiWait, adoption: config.prepared_stages?.[next.id]});
-        console.log(JSON.stringify({result, ...flow.readAdvanceStatus(journal)}));
-      } catch (error) {
-        flow.observeAdvance(journal, {status: 'refused', reason: error.message}); throw error;
-      }
-    });
     return;
   }
   need(['requests', 'native-requests', 'retain', 'rebind-operating', 'rebind-certificate', 'compose', 'package', 'finalize', 'evidence'].includes(phase) && configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,

@@ -31,11 +31,11 @@ const joined = async promises => {
 // A later trusted reader may introduce another input route. Equal candidate code
 // alone cannot prove this older collector complete for that new reader. Updating
 // these profiles therefore requires reviewing its reads and the adverse tests.
+// Artifact transport/receipt validation discovers no scientific file routes. Its
+// code remains in EXECUTION_CODE, and locator/retained archive equality is checked.
 export const AUDITED_READERS = Object.freeze({
   // Accepted artifact routing and fixed output retention are part of this collector profile.
   'scripts/accepted-selected-checkpoint.mjs': ['54e78c5ea3316612b4605579808a8ec3863b69401e6e57da71e8d8070aee97ec'],
-  // PR merge-parent provenance adds no scientific file/route reads; retain the original profile.
-  'scripts/geographic-report-artifact.mjs': ['8023bccb096c2f6099b421ca25c0eec85b87cf1360d818b090fb551028c3b26a', '9b7a6efe042ce5866a621e5c65cecb1332406084f567e38f4928ef7d1ac3a8ec'],
   'scripts/geographic_checkpoint_products.py': ['24c692ee5f9e985b50ceb173cd6bf6c46ccfbe5b9505c519a51e1135d1f49434'],
   // The joint route only reuses authenticated original selected inputs and products.
   // These exact readers introduce no new scientific source outside that closure.

@@ -56,6 +56,20 @@ export function integrationProfile(branch, files, reservation = {}) {
   return 'full';
 }
 
+// Route executable checker/producer changes through actual candidate science.
+// This is conservative path classification, not a programme/hash exemption.
+// Data-only full checks still use baseline code and authenticated adjudication.
+export function candidateGeographyCode(profile, files, testSelection) {
+  if (profile !== 'full' || testSelection === 'selected-data') return false;
+  return files.some(file => [file.filename, file.previous_filename].filter(Boolean).some(name =>
+    /^scripts\/.*\.(?:[cm]?js|[cm]?ts|py|wasm)$/.test(name) ||
+    /^src\/(?:native-|effective-footprint\.|ownership-codec\.|regional-import-gate\.)/.test(name) ||
+    /^coordination\/engineering\/.*\.(?:[cm]?js|[cm]?ts|py|wasm)$/.test(name) ||
+    /(?:^|\/)(?:requirements\.txt|package(?:-lock)?\.json)$/.test(name) ||
+    name === 'coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json' ||
+    /^coordination\/engineering\/additive-native-composition-20261009\/(?:execution-code-paths|mac-execution-runtime-original)\.json$/.test(name)));
+}
+
 import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
@@ -261,7 +275,6 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       packageAdditions = after.slice(before.length);
     }
     const registryChanged = files.some(file => file.filename === ADMINISTRATIVE_REGISTRY);
-    const sourceExtension = registryChanged || packageAdditions.some(name => baseline.entries.has(name));
     const oldSelection = await json(SELECTION, baseline), selection = await json(SELECTION);
     const {additive_release: oldHook, ...oldBase} = oldSelection, {additive_release: hook, ...newBase} = selection;
     needSelected(selection.version === 1 && selection.method === 'native-linear-evenodd-first-owner-v1' &&
@@ -560,6 +573,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
     };
     // Existing deliveries resolve new authority first; only unresolved native
     // operands require a bounded second pass through retained custody.
+    const sourceAuthorities = [];
     const roleEntries = [...registry.entries].sort((a, b) => Number(added.has(b.source_authority?.path)) - Number(added.has(a.source_authority?.path)));
     for (const entry of roleEntries) {
       needSelected(keys(entry, ['authority_sha256','policy_id','policy_version','rule_preimage','rule_sha256','source_authority']), 'foreign registry fields');
@@ -604,7 +618,7 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       }
       const nativeRequest = restoredRequest ?? await pinnedJSON(authority.original_pins.native_request), spec = nativeRequest.additive;
       await nativeRoles(authority, nativeRequest);
-      if (sourceExtension) await sourceRoles(authority);
+      sourceAuthorities.push(authority);
       needSelected(Array.isArray(spec?.inputs) && spec.inputs.length <= 1024, 'missing source role inputs');
       for (const role of ['publication_path','inventory_path','operating_path']) {
         const matches = spec.inputs.filter(value => value.path === spec[role]);
@@ -620,6 +634,10 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       'unsupported current rebind');
     for (const role of ['request','facts','publication','result']) pin(certificate[role]);
     await operating(certificate.operating, true);
+    // Existing proof roles are already authenticated by the fixed-role walk.
+    // Only declarations beyond that graph need the administrative extension.
+    if (registryChanged || packageAdditions.some(name => baseline.entries.has(name) && !reachable.has(name)))
+      for (const authority of sourceAuthorities) await sourceRoles(authority);
     for (const name of templates) {
       // A null template needs immutable input/output provenance, never mutable
       // runtime journal state. Legacy published intent pairs remain supported.

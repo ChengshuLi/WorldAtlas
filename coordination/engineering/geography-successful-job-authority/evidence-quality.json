@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "issue": 1842,
+  "lane": "engineering",
+  "worker_id": "01a13718-9e68-7737-a91b-c5305263b03e",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "797c69a44d2697a1f3139efa51b17fbf4ec6fd61",
+    "files": [
+      {
+        "path": "scripts/integration-proof.mjs",
+        "bytes": 11047,
+        "sha256": "df5248436554a41141155ca18ec40f880d779827dc6ddcd0420424f9bfe8b821",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/geographic-report-artifact.mjs",
+        "bytes": 28743,
+        "sha256": "9b7a6efe042ce5866a621e5c65cecb1332406084f567e38f4928ef7d1ac3a8ec",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "successful-producer-custody",
+      "kind": "code",
+      "description": "Use unique successful geography producer identity and authenticated log, artifact and report custody rather than mutable Actions step projections. Verify fresh queue loader and carried original producer with positive and adversarial fixtures.",
+      "software": "Node.js 24",
+      "units": "producer identity and report byte bindings"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/integration-proof.test.mjs test/geographic-report-artifact.test.mjs"
+  ]
+}

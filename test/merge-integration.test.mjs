@@ -118,7 +118,18 @@ test('workflow separates untrusted candidate tests from write credentials and se
   assert.match(yaml.split('jobs:')[0],/concurrency:\n  group: worldatlas-main-integrate/);
   assert.doesNotMatch(integration,/concurrency:/);
   assert.match(integration,/permissions:\n      contents: read/);
-  assert.doesNotMatch(integration,/GH_TOKEN:|GITHUB_TOKEN:|secrets\.|contents: write|issues: write|pull-requests: write/);
+  assert.doesNotMatch(integration,/GITHUB_TOKEN:|secrets\.|contents: write|issues: write|pull-requests: write/);
+  const authenticatedSteps=['Authenticate selected package installer inputs','Assemble unchanged base with current selected output'];
+  const tokenSteps=integration.split(/(?=^      - )/m).filter(step=>/^\s+GH_TOKEN:/m.test(step));
+  assert.equal(tokenSteps.length,authenticatedSteps.length);
+  for(const [index,step] of tokenSteps.entries()){
+    assert.ok(step.startsWith('      - name: '+authenticatedSteps[index]+'\n'));
+    assert.equal((step.match(/^\s+GH_TOKEN:/gm)||[]).length,1);
+    assert.match(step,/GH_TOKEN: \$\{\{ github\.token \}\}/);
+    assert.match(step,/SELECTED_PACKAGE_TRUSTED_BASE: \$\{\{ needs\.prepare\.outputs\.base \}\}/);
+    assert.match(step,/python3 -I -S -B/);
+    assert.match(step,/needs\.prepare\.outputs\.test_selection == 'selected-data'/);
+  }
   const steps=integration.split(/\n(?=      - )/).slice(1);
   const credentialSteps=steps.filter(step=>/WORLDATLAS_CHECKOUT_TOKEN:/.test(step));
   assert.equal(credentialSteps.length,2,'read-only acquisition credentials have exactly two trusted consumers');
@@ -168,6 +179,18 @@ test('parallel full-regression shards cover each unit file once and focused prof
    assert.equal(integrationNeedsBrowser('full',shard),needsBrowser);
  }
  assert.ok([0,1,2].some(shard=>integrationNeedsBrowser('full',shard)));
+});
+
+test('ordinary selected data retains CPU base checks while software and explicit output proof retain browser qualification', () => {
+ assert.deepEqual(integrationTestFiles('full',0,'selected-data'),
+   ['test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs']);
+ assert.equal(integrationNeedsBrowser('full',0,'selected-data'),false);
+ assert.ok(integrationTestFiles('full',0,'complete').includes('test/compact-ownership.test.mjs'));
+ assert.equal(integrationNeedsBrowser('full',0,'complete'),true);
+ assert.deepEqual(integrationTestFiles('full',0,'selected-output'),['test/compact-ownership.test.mjs']);
+ assert.equal(integrationNeedsBrowser('full',0,'selected-output'),true);
+ assert.throws(()=>integrationTestFiles('evidence',0,'selected-data'),/Invalid/);
+ assert.throws(()=>integrationTestFiles('full',1,'selected-data'),/Invalid/);
 });
 
 function addTrustedProof(f, {evidenceFailed = false} = {}) {
@@ -875,7 +898,7 @@ test('reused geography never accepts drift, unresolved science or failed current
     f => {f.source.artifact_name = 'proposed-geography-24-1';},
     f => {f.report.candidate_commit = f.candidate;}, f => {f.report.trusted_code_commit = 'd'.repeat(40);},
     f => {f.report.status = 'regressions-found';}, f => {f.report.gate_status = 'blocked';},
-    f => {f.proofJobs.find(job => job.name === 'geography').steps[2].conclusion = 'skipped';},
+    f => {f.proofJobs.find(job => job.name === 'geography').conclusion = 'skipped';},
     f => {f.proofRun.run_attempt++;}, f => {f.checks = 'failure';},
     f => {f.issue.state = 'closed';}
   ]) {
@@ -889,7 +912,7 @@ test('final geography source is revalidated during final validation before any w
   f.api = async (route, ...args) => {
     const result = await original(route, ...args);
     if (route.endsWith('/actions/runs/44') && f.proofReads === 1)
-      f.proofJobs.find(job => job.name === 'geography').steps.pop();
+      f.proofJobs.find(job => job.name === 'geography').id = 0;
     return result;
   };
   await assert.rejects(f.reuse(), /Original geographic proof/); assert.equal(f.writes.length, 0);
@@ -1061,7 +1084,7 @@ test('actual carried prepare rejects missing, multiple, future and foreign recei
     f => {f.log = Buffer.from(f.log.toString().replace('proposed-geography-23-1', 'proposed-geography-23-3'));},
     f => {f.log = Buffer.from(f.log.toString().replace('proposed-geography-23-1', 'proposed-geography-24-1'));},
     f => {f.originLog = Buffer.from(f.log.toString().replace('Artifact ID is 77', 'Artifact ID is 78'));},
-    f => {f.originJobs[0].steps.pop();}, f => {f.originRun.head_sha = 'e'.repeat(40);},
+    f => {f.originJobs[0].status = 'in_progress';}, f => {f.originRun.head_sha = 'e'.repeat(40);},
     f => {f.publishReport({...f.report, baseline_commit: 'e'.repeat(40)});},
     f => {f.publishReport({...f.report, trusted_code_commit: 'e'.repeat(40)});},
     f => {f.publishReport({...f.report, candidate_commit: f.candidate});}
@@ -1083,7 +1106,7 @@ test('actual final carried reuse rejects identity, source, artifact and report s
     f => {f.originJobs[0].run_attempt++;}, f => {f.originJobs[0].head_sha = 'e'.repeat(40);},
     f => {f.originRun.id++;}, f => {f.originRun.run_attempt++;},
     f => {f.originRun.head_sha = 'e'.repeat(40);},
-    f => {f.originJobs[0].steps[2].conclusion = 'failure';},
+    f => {f.originJobs[0].conclusion = 'failure';},
     f => {f.proofJobs.find(job => job.name === 'geography').conclusion = 'failure';},
     f => {f.proofRun.run_attempt++;}, f => {f.artifact.expired = true;},
     f => {f.artifact.id++;}, f => {f.artifact.workflow_run.head_sha = 'e'.repeat(40);},
@@ -1162,3 +1185,46 @@ test('original PR merge candidate survives prepare and final acceptance without 
 });
 
 }
+
+test('changed checker uses fresh candidate science and cannot accept a baseline-only report', async () => {
+ const make = () => {
+  const f = fixture(), original = f.api;
+  const filename = 'scripts/check-geographic-regression.py';
+  f.authored[0].path = filename; f.integrated[0].path = filename;
+  f.api = async (route, ...args) => route.includes('/pulls/2/files')
+    ? [{filename, status: 'modified'}] : original(route, ...args);
+  return f;
+ };
+ const softwareReport = f => ({version: 1, method_id: 'worldatlas-trusted-geography-check-v1',
+  baseline_commit: f.base, candidate_commit: f.candidate, trusted_code_commit: f.candidate,
+  trusted_code_inventory_sha256: 'd'.repeat(64), candidate_code_executed: true,
+  published: false, source_approval: false, gate_status: 'passed', status: 'not-applicable'});
+ const f = make();
+ assert.equal((await prepareIntegration(f.options())).geography_software, true);
+ await assert.rejects(f.complete(), /exact trusted combined check/);
+ assert.equal(f.writes.length, 0);
+ const result = await f.complete({geographyReportLoader: async () => softwareReport(f)});
+ assert.equal(result.geography.trusted_code_commit, f.candidate);
+ assert.equal(result.tested_base, f.base);
+ assert.equal(f.writes.length, 1);
+ const unrelated = fixture();
+ await assert.rejects(unrelated.complete({geographyReportLoader: async () => softwareReport(unrelated)}), /exact trusted combined check/);
+ assert.equal(unrelated.writes.length, 0);
+});
+
+test('workflow candidate geography is selected by trusted profile output without credentials', () => {
+ for (const [file, selector, candidate, baseline] of [
+  ['merge-integration-checks.yml', 'profile', 'github.sha', 'needs.profile.outputs.geography_baseline'],
+  ['worker-merge.yml', 'prepare', 'needs.prepare.outputs.candidate', 'needs.prepare.outputs.base']
+ ]) {
+  const source = fs.readFileSync('.github/workflows/' + file, 'utf8');
+  const job = source.match(/\n  geography:\n([\s\S]*?)(?=\n  [a-z][a-z-]*:|$)/)[1];
+  const expression = `\${{ (needs.${selector}.outputs.geography_software == 'true') && ${candidate} || ${baseline} }}`;
+  assert.ok(job.includes('ref: ' + expression));
+  assert.ok(job.includes('GEOGRAPHY_CODE_COMMIT: ' + expression));
+  assert.ok(job.includes(`GH_TOKEN: \${{ !(needs.${selector}.outputs.geography_software == 'true') && github.token || '' }}`));
+  assert.match(job, /persist-credentials: false/);
+  assert.match(job, /GIT_CONFIG_GLOBAL: \/dev\/null/);
+  assert.doesNotMatch(job, /secrets\.|contents: write|issues: write|pull-requests: write|id-token:/);
+ }
+});

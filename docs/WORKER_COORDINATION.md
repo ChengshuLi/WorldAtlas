@@ -272,6 +272,42 @@ that predecessor again against its actual baseline and current control job,
 during actual final validation before merge. Only immutable input
 collection is cached within that queue process; live authority is reread.
 
+Full-profile changes to checker/producer code or its dependencies run the exact
+combined candidate checker, with
+checker-code identity separate from baseline and candidate data identities. It
+runs the genuine cold native-conservation and continuous-geometry comparisons;
+there is no finite software hash exception, baseline self-comparison substitute,
+checkpoint reuse or new checkpoint authority for this route. Selected-data and
+source-only work, data-only full changes and unrelated application changes retain
+the baseline checker and their existing applicability/adjudication. The existing
+changed-file classifier conservatively selects scripts, scientific runtime modules,
+engineering code/policy files and dependency metadata, including rename origins.
+The final trusted merge consumer independently derives the route from the profile
+and selected-data classification; a candidate-code report cannot serve as baseline
+or checkpoint evidence. Full regression/build and exact-head independent review
+remain required.
+
+Candidate checker execution has no GitHub token or persistent checkout credentials.
+Public immutable Git acquisition uses the existing read-only transport anonymously;
+access failure blocks rather than falling back to a token. The exact executing
+checkout and its code inventory are checked and recorded. Existing child scientific
+receipts are retained verbatim, including their legacy `candidate_code_executed:
+false` marker. That marker does not establish absence of candidate checker code in
+a software run: the enclosing report explicitly records `candidate_code_executed:
+true`, the actual code commit and inventory, and distinct data commits. Historical
+receipt bytes and historical scientific admission are unchanged. Stable workflow
+step names remain for original-job receipt compatibility; the report's explicit
+execution identity determines what ran. Software-run raw findings block; only
+the baseline route may request the existing authenticated source adjudication.
+A mixed checker upgrade and raw-data correction needing adjudication must deliver
+the checker first, then the data change through that existing trusted route.
+
+The profile job resolves that candidate's authenticated accepted parent before
+checking out its trusted classifier, so older PR opening metadata cannot keep
+running an obsolete classifier. Geography consumes that same resolved parent.
+Ownership/evidence retain their original authored/event metadata; the existing
+profile receipt distinguishes its actual trusted code commit from event_base.
+
 PR geography compares the event's authenticated merge commit against its exact
 trusted event base, not the raw author head against a newer base. The checker
 verifies ordered parents `[event base, reviewed head]` before reading scientific

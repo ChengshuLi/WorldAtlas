@@ -88,12 +88,72 @@ class TrustedCheckControls(unittest.TestCase):
     def tearDown(self):
         self.f.close()
 
+    def test_software_candidate_executes_its_exact_checker_and_distinct_data(self):
+        checker = self.f.repo / 'scripts/check-geographic-regression.py'
+        checker.write_text(checker.read_text() + "\n# Independently reviewed software change.\n")
+        self.f.write('data/geography/part.json', collection(left=.9))
+        candidate = self.f.commit('software-and-real-loss')
+        result, report = self.f.run(candidate, rewind=False, extra_env={'GEOGRAPHY_CODE_COMMIT': candidate})
+        self.assertEqual(result.returncode, 1, result.stderr)
+        self.assertEqual(report['status'], 'regressions-found')
+        self.assertEqual(report['regressions'], 1)
+        self.assertEqual(report['baseline_commit'], self.f.baseline)
+        self.assertEqual(report['candidate_commit'], candidate)
+        self.assertEqual(report['trusted_code_commit'], candidate)
+        self.assertTrue(report['candidate_code_executed'])
+        self.assertRegex(report['trusted_code_inventory_sha256'], '^[a-f0-9]{64}$')
+        self.assertNotIn('checkpoint', report)
+        self.assertNotIn('adjudication', report)
+
+    def test_software_candidate_valid_joint_move_passes(self):
+        self.f.write('data/geography/part.json', collection(left=.9, right=.9))
+        candidate = self.f.commit('software-joint-move')
+        result, report = self.f.run(candidate, rewind=False, extra_env={'GEOGRAPHY_CODE_COMMIT': candidate})
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertTrue(report['candidate_code_executed'])
+        self.assertEqual(report['status'], 'no-new-regression')
+
+    def test_software_candidate_requires_actual_execution_checkout(self):
+        self.f.write('data/geography/part.json', collection(left=.9))
+        candidate = self.f.commit('software-loss')
+        result, report = self.f.run(candidate, extra_env={'GEOGRAPHY_CODE_COMMIT': candidate})
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIsNone(report)
+        self.assertIn('exact executing code', result.stderr)
+
+    def test_software_candidate_rejects_foreign_code_and_credentials(self):
+        self.f.write('data/geography/part.json', collection(left=.9))
+        candidate = self.f.commit('software-loss')
+        for env in [{'GEOGRAPHY_CODE_COMMIT': 'a' * 40},
+                    {'GEOGRAPHY_CODE_COMMIT': candidate, 'GH_TOKEN': 'synthetic-secret'}]:
+            result, report = self.f.run(candidate, rewind=False, extra_env=env)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIsNone(report)
+            self.assertNotIn('synthetic-secret', result.stdout + result.stderr)
+
+    def test_software_candidate_refuses_persistent_authentication_and_remote_rewrites(self):
+        self.f.write('data/geography/part.json', collection(left=.9))
+        candidate = self.f.commit('software-loss')
+        for name in ['credential.helper', 'http.https://github.com/.extraheader', 'url.https://credential.invalid/.insteadOf']:
+            self.f.git('config', name, 'synthetic-credential')
+            result, report = self.f.run(candidate, rewind=False, extra_env={'GEOGRAPHY_CODE_COMMIT': candidate})
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIsNone(report)
+            self.assertIn('credential-free Git configuration', result.stderr)
+            self.assertNotIn('synthetic-credential', result.stdout + result.stderr)
+            self.f.git('config', '--unset', name)
+        self.f.git('remote', 'add', 'origin', 'https://synthetic-secret@github.com/ChengshuLi/WorldAtlas.git')
+        result, report = self.f.run(candidate, rewind=False, extra_env={'GEOGRAPHY_CODE_COMMIT': candidate})
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIsNone(report)
+        self.assertNotIn('synthetic-secret', result.stdout + result.stderr)
+
     def test_external_src_code_tampering_is_rejected(self):
         (self.f.repo / 'src/regional-import-gate.js').write_text("throw Error('tampered trusted dependency')\n")
         result, report = self.f.run(self.f.baseline, rewind=False)
         self.assertNotEqual(result.returncode, 0)
         self.assertIsNone(report)
-        self.assertIn('differs from immutable trusted baseline', result.stderr)
+        self.assertIn('differs from immutable executing code', result.stderr)
 
     def test_external_package_and_policy_tampering_is_rejected(self):
         for name in ['package.json', '.github/evidence-policy.json']:
@@ -226,7 +286,7 @@ class TrustedCheckControls(unittest.TestCase):
         result, report = self.f.run(self.f.commit('untrusted-head'), rewind=False)
         self.assertNotEqual(result.returncode, 0)
         self.assertIsNone(report)
-        self.assertIn('exact trusted baseline', result.stderr)
+        self.assertIn('exact executing code', result.stderr)
 
     def test_untracked_import_shadow_files_are_rejected(self):
         for name in ['scripts/evidence.py', 'scripts/evidence/__init__.py', 'scripts/evidence/geometry.so', 'scripts/evidence/__pycache__/geometry.pyc']:
@@ -245,7 +305,7 @@ class TrustedCheckControls(unittest.TestCase):
         result, report = self.f.run(self.f.baseline, rewind=False)
         self.assertNotEqual(result.returncode, 0)
         self.assertIsNone(report)
-        self.assertIn('differs from immutable trusted baseline', result.stderr)
+        self.assertIn('differs from immutable executing code', result.stderr)
 
     def test_candidate_part_symlink_is_rejected(self):
         p = self.f.repo / 'data/geography/part.json'
@@ -382,515 +442,6 @@ def receipt_run(directory):
 
 
 
-class LinuxTransitionControls(unittest.TestCase):
-    """Real Git/tree/body controls; mocked baseline proof is labelled orchestration-only."""
-    def setUp(self):
-        import importlib.util
-        from unittest import mock
-        self.mock = mock
-        spec = importlib.util.spec_from_file_location('trusted_linux_transition_control', DRAFT)
-        self.gate = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(self.gate)
-        scratch = ROOT / '.cache/trusted-linux-transition-fixtures'
-        scratch.mkdir(parents=True, exist_ok=True)
-        self.temporary = tempfile.TemporaryDirectory(dir=scratch)
-        self.addCleanup(self.temporary.cleanup)
-        self.repo = Path(self.temporary.name)
-        self.git('init', '-q')
-        self.git('config', 'user.name', 'synthetic-control')
-        self.git('config', 'user.email', 'control@example.invalid')
-        self.paths = [f'support/boundary-{i:02}.py' for i in range(30)]
-        self.vector_paths = self.paths[:3] + [f'methods/method-{i:02}.js' for i in range(25)]
-        for i, name in enumerate(self.vector_paths):
-            self.write(name, f'original-method-{i}\n'.encode())
-        for i, name in enumerate(self.paths[3:7]):
-            self.write(name, f'original-support-{i}\n'.encode())
-        self.write(self.gate.LINUX_SUPPORT_MANIFEST, b'current author identity\n')
-        self.write('data/ownership-selection.json', b'{}\n')
-        self.write('data/scientific-input.json', b'unchanged scientific bytes\n')
-        self.baseline = self.commit('synthetic trusted baseline')
-        vector = [{'path': name, 'bytes': (self.repo/name).stat().st_size,
-                   'sha256': hashlib.sha256((self.repo/name).read_bytes()).hexdigest()} for name in self.vector_paths]
-        before = {name: self.pin(self.baseline, name) for name in self.paths}
-        for i, name in enumerate(self.paths):
-            self.write(name, f"raise RuntimeError('candidate must never execute {i}')\n".encode())
-        self.candidate = self.commit('synthetic exact support transition')
-        reference = [{'path': name, 'before': before[name], 'after': self.pin(self.candidate, name)} for name in self.paths]
-        current = self.pin(self.baseline, self.gate.LINUX_SUPPORT_MANIFEST)
-        reference.append({'path': self.gate.LINUX_SUPPORT_MANIFEST, 'before': {**current, 'sha256': '0'*64}, 'after': current})
-        reference.sort(key=lambda row: row['path'])
-        # Explicit synthetic contract; separately test the production literal map.
-        self.gate.LINUX_SUPPORT_REFERENCE = reference
-        self.gate.LINUX_SUPPORT_OLD_VECTOR = vector
-        self.rehash()
-
-    def git(self, *args):
-        return subprocess.check_output(['git', '-C', str(self.repo), *args], stderr=subprocess.PIPE)
-
-    def write(self, name, body):
-        p = self.repo/name
-        p.parent.mkdir(parents=True, exist_ok=True)
-        p.write_bytes(body)
-
-    def commit(self, message):
-        self.git('add', '--all')
-        self.git('commit', '-qm', message)
-        return self.git('rev-parse', 'HEAD').decode().strip()
-
-    def pin(self, version, name):
-        row = self.git('ls-tree', '-z', version, '--', name)
-        if not row:
-            return None
-        mode, kind, oid = row.split(b'\t')[0].decode().split()
-        self.assertEqual(kind, 'blob')
-        body = self.git('cat-file', 'blob', oid)
-        return {'mode': mode, 'git_blob_oid': oid, 'bytes': len(body), 'sha256': hashlib.sha256(body).hexdigest()}
-
-    def rehash(self):
-        g = self.gate
-        g.LINUX_SUPPORT_REFERENCE_SHA256 = g.transition_digest(g.LINUX_SUPPORT_REFERENCE)
-        g.LINUX_SUPPORT_DELTA_SHA256 = g.transition_digest([r for r in g.LINUX_SUPPORT_REFERENCE if r['path'] != g.LINUX_SUPPORT_MANIFEST])
-        g.LINUX_SUPPORT_VECTOR_SHA256 = g.transition_digest(g.LINUX_SUPPORT_OLD_VECTOR, newline=True)
-
-    def check(self, candidate=None):
-        return self.gate.linux_support_transition(self.repo, self.baseline, candidate or self.candidate)
-
-    def test_exact_real_git_transition_and_no_candidate_execution(self):
-        proof = self.check()
-        self.assertEqual(proof['changed_paths'], 30)
-        self.assertEqual(proof['baseline_commit'], self.baseline)
-        self.assertEqual(proof['candidate_commit'], self.candidate)
-        self.assertFalse(proof['candidate_code_executed'])
-        self.assertFalse(proof['candidate_scientific_qualification'])
-        self.assertIsNone(self.gate.linux_support_transition(self.repo, self.baseline, self.baseline))
-
-    def test_production_literal_contract_is_complete_and_authentic(self):
-        namespace = {'__name__': 'non_cli_control'}
-        exec(compile(DRAFT.read_bytes(), str(DRAFT), 'exec'), namespace)
-        self.assertEqual(namespace['transition_digest'](namespace['LINUX_SUPPORT_OLD_VECTOR'], newline=True),
-                         '4ba0e3b564611248d428613c33bd60cf68a99233f2db572f3893a7d46dda429a')
-        self.assertEqual(namespace['transition_digest'](namespace['LINUX_SUPPORT_REFERENCE']),
-                         'ae94c33f7923a04648bb7da080c61fffef67cbe7f966127fc9869e3863d468ca')
-        self.assertEqual(len(namespace['LINUX_SUPPORT_REFERENCE']), 31)
-
-    def test_changed_body_missing_addition_and_wrong_mode_refuse(self):
-        for alteration in ['body', 'missing', 'mode']:
-            with self.subTest(alteration=alteration):
-                self.git('checkout', '-q', '--detach', self.candidate)
-                p = self.repo/self.paths[-1]
-                if alteration == 'body': p.write_bytes(b'changed same audience\n')
-                elif alteration == 'missing': p.unlink()
-                else: p.chmod(0o755)
-                self.assertIsNone(self.check(self.commit(alteration)))
-
-    def test_excluded_path_directory_and_symlink_cannot_hide_descendants(self):
-        for alteration in ['directory', 'symlink']:
-            with self.subTest(alteration=alteration):
-                self.git('checkout', '-q', '--detach', self.candidate)
-                p = self.repo/self.paths[-1]
-                p.unlink()
-                if alteration == 'directory':
-                    p.mkdir();(p/'hidden-child.py').write_bytes(b'not admitted\n')
-                else: p.symlink_to('../data/scientific-input.json')
-                self.assertIsNone(self.check(self.commit(alteration)))
-
-    def test_extra_data_method_rename_and_file_refuse(self):
-        for alteration in ['data', 'method', 'rename', 'extra']:
-            with self.subTest(alteration=alteration):
-                self.git('checkout', '-q', '--detach', self.candidate)
-                if alteration == 'data': self.write('data/scientific-input.json', b'changed\n')
-                elif alteration == 'method': self.write(self.vector_paths[-1], b'changed method\n')
-                elif alteration == 'rename': (self.repo/self.paths[-1]).rename(self.repo/'renamed.py')
-                else: self.write('outside.py', b'not admitted\n')
-                self.assertIsNone(self.check(self.commit(alteration)))
-
-    def test_preinstalled_manifest_identity_cannot_change(self):
-        self.write(self.gate.LINUX_SUPPORT_MANIFEST, b'wrong worker\n')
-        self.assertIsNone(self.check(self.commit('manifest drift')))
-
-    def test_literal_vector_reordering_truncation_and_descriptor_bounds_refuse(self):
-        g = self.gate
-        original = list(g.LINUX_SUPPORT_OLD_VECTOR)
-        for malformed in [original[::-1], original[:-1]]:
-            g.LINUX_SUPPORT_OLD_VECTOR = malformed
-            with self.assertRaisesRegex(ValueError, 'Incomplete or reordered'):
-                self.check()
-        g.LINUX_SUPPORT_OLD_VECTOR = original
-        g.LINUX_SUPPORT_REFERENCE[-1]['after']['bytes'] = g.MAX_BYTES + 1
-        self.rehash()
-        with self.mock.patch.object(g, 'git', side_effect=AssertionError('body opened before admission')):
-            with self.assertRaisesRegex(ValueError, 'bounds'):
-                self.check()
-
-    def test_whole_tree_git_failure_and_timeout_do_not_pass(self):
-        from types import SimpleNamespace
-        original = self.gate.subprocess.run
-        def refusal(command, **kwargs):
-            return SimpleNamespace(returncode=128) if 'diff-tree' in command else original(command, **kwargs)
-        with self.mock.patch.object(self.gate.subprocess, 'run', side_effect=refusal):
-            with self.assertRaisesRegex(ValueError, 'equivalence unavailable'):
-                self.check()
-        def timeout(command, **kwargs):
-            if 'diff-tree' in command:
-                raise subprocess.TimeoutExpired('git', 30)
-            return original(command, **kwargs)
-        with self.mock.patch.object(self.gate.subprocess, 'run', side_effect=timeout):
-            with self.assertRaises(subprocess.TimeoutExpired):
-                self.check()
-
-    def orchestrate(self, proof):
-        g = self.gate
-        inspect = g.inspect
-        with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='synthetic-checkout'), \
-             self.mock.patch.object(g, 'inventory', return_value=['synthetic-equal-input']), \
-             self.mock.patch.object(g, 'inspect', side_effect=proof) as called:
-            result = inspect(self.repo, self.baseline, self.candidate)
-            called.assert_called_once_with(self.repo, self.baseline, self.baseline)
-            return result
-
-    def test_orchestration_retains_actual_baseline_proof_identities(self):
-        proof = {'status': 'not-applicable', 'regressions': None,
-                 'baseline_commit': self.baseline, 'candidate_commit': self.baseline,
-                 'selected_native_report': {'synthetic_proof': True},
-                 'selected_continuous_report': {'synthetic_proof': True}}
-        result = self.orchestrate(lambda *args: proof)
-        self.assertIs(result['reused_baseline_proof'], proof)
-        self.assertEqual(result['candidate_commit'], self.candidate)
-        self.assertEqual(result['reused_baseline_proof']['candidate_commit'], self.baseline)
-        self.assertFalse(result['candidate_code_executed'])
-
-    def test_original_baseline_failure_and_blocked_report_propagate(self):
-        with self.assertRaisesRegex(RuntimeError, 'original baseline failure'):
-            self.orchestrate(lambda *args: (_ for _ in ()).throw(RuntimeError('original baseline failure')))
-        with self.assertRaisesRegex(ValueError, 'baseline proof did not pass'):
-            self.orchestrate(lambda *args: {'status': 'native-regressions-found', 'regressions': 1})
-
-    def test_candidate_input_inventory_mismatch_refuses_before_proof(self):
-        g = self.gate
-        with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='synthetic-checkout'), \
-             self.mock.patch.object(g, 'inventory', side_effect=[['before'], ['after']]):
-            with self.assertRaisesRegex(ValueError, 'changed geographic inputs'):
-                g.inspect(self.repo, self.baseline, self.candidate)
-
-
-class ProgrammeMigrationControls(unittest.TestCase):
-    """Tiny real Git transitions; mocked baseline proofs test orchestration only."""
-    git = LinuxTransitionControls.git
-    write = LinuxTransitionControls.write
-    commit = LinuxTransitionControls.commit
-    pin = LinuxTransitionControls.pin
-    orchestrate = LinuxTransitionControls.orchestrate
-
-    def setUp(self):
-        import importlib.util
-        from unittest import mock
-        self.mock = mock
-        spec = importlib.util.spec_from_file_location('trusted_programme_migration_control', DRAFT)
-        self.gate = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(self.gate)
-        scratch = ROOT / '.cache/trusted-programme-migration-fixtures'
-        scratch.mkdir(parents=True, exist_ok=True)
-        self.temporary = tempfile.TemporaryDirectory(dir=scratch)
-        self.addCleanup(self.temporary.cleanup)
-        self.repo = Path(self.temporary.name)
-        self.git('init', '-q')
-        self.git('config', 'user.name', 'synthetic-control')
-        self.git('config', 'user.email', 'control@example.invalid')
-        # A metacharacter in an admitted name also checks literal exclusions.
-        self.helper = 'support/helper[1].py'
-        self.addition = 'test/programmes.test.py'
-        self.policy = 'support/catalogue.json'
-        self.paths = sorted([self.helper, self.addition, self.policy])
-        self.vector_paths = [self.helper, *[f'methods/method-{i:02}.py' for i in range(27)]]
-        for i, name in enumerate(self.vector_paths):
-            self.write(name, f'original-method-{i}\n'.encode())
-        self.write(self.policy, b'unchanged trusted policy\n')
-        self.write('data/ownership-selection.json', b'{}\n')
-        self.write('data/scientific-input.json', b'unchanged scientific bytes\n')
-        self.baseline = self.commit('synthetic trusted programme baseline')
-        vector = [{'path': name, 'bytes': (self.repo/name).stat().st_size,
-                   'sha256': hashlib.sha256((self.repo/name).read_bytes()).hexdigest()}
-                  for name in self.vector_paths]
-        before = {name: self.pin(self.baseline, name) for name in self.paths}
-        for name in [self.helper, self.addition]:
-            self.write(name, b"raise RuntimeError('candidate programme must never execute')\n")
-        self.candidate = self.commit('synthetic exact programme migration')
-        self.gate.PROGRAMME_MIGRATION_REFERENCE = [
-            {'path': name, 'before': before[name], 'after': self.pin(self.candidate, name)}
-            for name in self.paths]
-        self.gate.PROGRAMME_MIGRATION_OLD_VECTOR = vector
-        self.rehash()
-
-    def rehash(self):
-        g = self.gate
-        g.PROGRAMME_MIGRATION_REFERENCE_SHA256 = g.transition_digest(g.PROGRAMME_MIGRATION_REFERENCE)
-        g.PROGRAMME_MIGRATION_VECTOR_SHA256 = g.transition_digest(g.PROGRAMME_MIGRATION_OLD_VECTOR, newline=True)
-
-    def check(self, candidate=None, baseline=None):
-        return self.gate.programme_registry_transition(
-            self.repo, baseline or self.baseline, candidate or self.candidate)
-
-    def test_exact_real_git_programme_migration_never_executes_candidate(self):
-        proof = self.check()
-        self.assertEqual(proof['kind'], 'exact-reviewed-programme-registry-migration-v1')
-        self.assertEqual(proof['changed_paths'], 2)
-        self.assertEqual(proof['baseline_commit'], self.baseline)
-        self.assertEqual(proof['candidate_commit'], self.candidate)
-        self.assertEqual(proof['baseline_tree'], self.git('rev-parse', self.baseline + '^{tree}').decode().strip())
-        self.assertEqual(proof['candidate_tree'], self.git('rev-parse', self.candidate + '^{tree}').decode().strip())
-        self.assertTrue(proof['whole_tree_outside_exact_delta_equal'])
-        self.assertFalse(proof['candidate_code_executed'])
-        self.assertFalse(proof['candidate_scientific_qualification'])
-        self.assertIsNone(self.check(candidate=self.baseline))
-
-    def test_production_programme_contract_is_exact_and_authenticated(self):
-        namespace = {'__name__': 'non_cli_control'}
-        exec(compile(DRAFT.read_bytes(), str(DRAFT), 'exec'), namespace)
-        reference = namespace['PROGRAMME_MIGRATION_REFERENCE']
-        vector = namespace['PROGRAMME_MIGRATION_OLD_VECTOR']
-        prefix = 'coordination/engineering/selected-geography-effective-prevention-20261009/'
-        self.assertEqual([row['path'] for row in reference], [
-            prefix + 'selected-neighbor-prevention.mjs', prefix + 'supported-programs.json',
-            'test/supported-programs.test.mjs'])
-        self.assertEqual(reference[1]['before'], reference[1]['after'])
-        self.assertIsNone(reference[2]['before'])
-        self.assertEqual(sum(row['before'] != row['after'] for row in reference), 2)
-        self.assertEqual(namespace['transition_digest'](reference), namespace['PROGRAMME_MIGRATION_REFERENCE_SHA256'])
-        self.assertEqual(len(vector), 28)
-        self.assertEqual(len({row['path'] for row in vector}), 28)
-        self.assertEqual(namespace['transition_digest'](vector, newline=True), namespace['PROGRAMME_MIGRATION_VECTOR_SHA256'])
-
-    def test_programme_body_missing_addition_mode_directory_symlink_and_rename_refuse(self):
-        for alteration in ['body', 'missing', 'mode', 'directory', 'symlink', 'rename']:
-            with self.subTest(alteration=alteration):
-                self.git('checkout', '-q', '--detach', self.candidate)
-                p = self.repo/self.addition
-                if alteration == 'body':
-                    p.write_bytes(b'changed candidate body\n')
-                elif alteration == 'missing':
-                    p.unlink()
-                elif alteration == 'mode':
-                    p.chmod(0o755)
-                elif alteration == 'directory':
-                    p.unlink()
-                    p.mkdir()
-                    (p/'hidden-child.py').write_bytes(b'not admitted\n')
-                elif alteration == 'symlink':
-                    p.unlink()
-                    p.symlink_to('../data/scientific-input.json')
-                else:
-                    p.rename(self.repo/'renamed.py')
-                self.assertIsNone(self.check(self.commit(alteration)))
-        self.git('checkout', '-q', '--detach', self.baseline)
-        self.write(self.addition, self.git('show', self.candidate + ':' + self.addition))
-        self.assertIsNone(self.check(baseline=self.commit('addition already present')))
-
-    def test_extra_inputs_and_identical_policy_or_baseline_vector_drift_refuse(self):
-        for name in ['data/scientific-input.json', self.vector_paths[-1],
-                     'support/helper1.py', 'outside.py', self.policy]:
-            with self.subTest(candidate_path=name):
-                self.git('checkout', '-q', '--detach', self.candidate)
-                self.write(name, b'not admitted\n')
-                self.assertIsNone(self.check(self.commit('extra candidate drift')))
-        # Equality outside the delta is insufficient if both trees carry the
-        # same substituted policy or method. Authenticate actual baseline bodies.
-        for name in [self.policy, self.vector_paths[-1]]:
-            with self.subTest(both_versions=name):
-                self.git('checkout', '-q', '--detach', self.baseline)
-                self.write(name, b'equal but unauthenticated replacement\n')
-                baseline = self.commit('substituted baseline')
-                for changed in [self.helper, self.addition]:
-                    self.write(changed, self.git('show', self.candidate + ':' + changed))
-                self.assertIsNone(self.check(self.commit('substituted candidate'), baseline))
-
-    def test_programme_inventory_authentication_and_prospective_bounds_refuse(self):
-        g = self.gate
-        reference, vector = g.PROGRAMME_MIGRATION_REFERENCE, g.PROGRAMME_MIGRATION_OLD_VECTOR
-        for attribute, malformed in [
-                ('PROGRAMME_MIGRATION_REFERENCE', reference[::-1]),
-                ('PROGRAMME_MIGRATION_REFERENCE', reference[:-1]),
-                ('PROGRAMME_MIGRATION_OLD_VECTOR', vector[::-1]),
-                ('PROGRAMME_MIGRATION_OLD_VECTOR', vector[:-1])]:
-            with self.subTest(attribute=attribute, count=len(malformed)):
-                with self.mock.patch.object(g, attribute, malformed):
-                    with self.assertRaises(ValueError):
-                        self.check()
-        helper = next(row for row in reference if row['path'] == self.helper)['after']
-        original_bytes = helper['bytes']
-        for scope in ['one body', 'combined union']:
-            with self.subTest(scope=scope):
-                helper['bytes'] = g.MAX_BYTES + 1 if scope == 'one body' else original_bytes
-                if scope == 'combined union':
-                    # Descriptor-only admission probe; allocate no large bodies.
-                    g.PROGRAMME_MIGRATION_OLD_VECTOR = [{**row, 'bytes': g.MAX_BYTES} for row in vector]
-                self.rehash()
-                with self.mock.patch.object(g, 'git', side_effect=AssertionError('body opened before admission')):
-                    with self.assertRaisesRegex(ValueError, 'bounds'):
-                        self.check()
-
-    def test_programme_whole_tree_git_failure_and_timeout_do_not_pass(self):
-        from types import SimpleNamespace
-        original = self.gate.subprocess.run
-        def refusal(command, **kwargs):
-            return SimpleNamespace(returncode=128) if 'diff-tree' in command else original(command, **kwargs)
-        with self.mock.patch.object(self.gate.subprocess, 'run', side_effect=refusal):
-            with self.assertRaisesRegex(ValueError, 'equivalence unavailable'):
-                self.check()
-        def timeout(command, **kwargs):
-            if 'diff-tree' in command:
-                raise subprocess.TimeoutExpired('git', 30)
-            return original(command, **kwargs)
-        with self.mock.patch.object(self.gate.subprocess, 'run', side_effect=timeout):
-            with self.assertRaises(subprocess.TimeoutExpired):
-                self.check()
-
-    def test_programme_orchestration_keeps_baseline_proof_identities(self):
-        proof = {'status': 'not-applicable', 'regressions': None,
-                 'baseline_commit': self.baseline, 'candidate_commit': self.baseline,
-                 'selected_native_report': {'synthetic_proof': True},
-                 'selected_continuous_report': {'synthetic_proof': True}}
-        result = self.orchestrate(lambda *args: proof)
-        self.assertEqual(result['reviewed_code_transition']['kind'], 'exact-reviewed-programme-registry-migration-v1')
-        self.assertIs(result['reused_baseline_proof'], proof)
-        self.assertEqual(result['candidate_commit'], self.candidate)
-        self.assertEqual(result['reused_baseline_proof']['candidate_commit'], self.baseline)
-        self.assertFalse(result['candidate_code_executed'])
-
-    def test_programme_baseline_failure_and_input_mismatch_propagate(self):
-        with self.assertRaisesRegex(RuntimeError, 'original baseline failure'):
-            self.orchestrate(lambda *args: (_ for _ in ()).throw(RuntimeError('original baseline failure')))
-        with self.assertRaisesRegex(ValueError, 'baseline proof did not pass'):
-            self.orchestrate(lambda *args: {'status': 'native-regressions-found', 'regressions': 1})
-        g = self.gate
-        inspect = g.inspect
-        with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='synthetic-checkout'), \
-             self.mock.patch.object(g, 'inventory', side_effect=[['before'], ['after']]), \
-             self.mock.patch.object(g, 'inspect') as proof:
-            with self.assertRaisesRegex(ValueError, 'changed geographic inputs'):
-                inspect(self.repo, self.baseline, self.candidate)
-            proof.assert_not_called()
-
-
-class OutputBudgetMigrationControls(unittest.TestCase):
-    """Real tiny Git trees exercise the exact finite output-budget transition."""
-    git = LinuxTransitionControls.git
-    write = LinuxTransitionControls.write
-    commit = LinuxTransitionControls.commit
-    pin = LinuxTransitionControls.pin
-    orchestrate = LinuxTransitionControls.orchestrate
-
-    def setUp(self):
-        import importlib.util
-        from unittest import mock
-        self.mock = mock
-        spec = importlib.util.spec_from_file_location('trusted_output_budget_control', DRAFT)
-        self.gate = importlib.util.module_from_spec(spec); spec.loader.exec_module(self.gate)
-        scratch = ROOT / '.cache/trusted-output-budget-fixtures'; scratch.mkdir(parents=True, exist_ok=True)
-        self.temporary = tempfile.TemporaryDirectory(dir=scratch); self.addCleanup(self.temporary.cleanup)
-        self.repo = Path(self.temporary.name)
-        self.git('init', '-q'); self.git('config', 'user.name', 'synthetic-control'); self.git('config', 'user.email', 'control@example.invalid')
-        self.helper = 'methods/method[0].py'
-        self.vector_paths = [self.helper, *[f'methods/method-{i:02}.py' for i in range(27)]]
-        self.paths = sorted([self.helper, 'support/catalogue.json', *[f'control/file-{i}.py' for i in range(5)]])
-        self.addition = 'control/file-4.py'
-        for i, name in enumerate(set(self.vector_paths + self.paths) - {self.addition}): self.write(name, f'original-{i}\n'.encode())
-        self.write('data/ownership-selection.json', b'{}\n'); self.write('data/scientific-input.json', b'unchanged\n')
-        self.baseline = self.commit('original synthetic output-budget baseline')
-        def vector(version):
-            return [{'path': name, **{k: v for k, v in self.pin(version, name).items() if k in ['bytes', 'sha256']}} for name in self.vector_paths]
-        old = vector(self.baseline); before = {p: self.pin(self.baseline, p) for p in self.paths}
-        for name in self.paths: self.write(name, b"raise RuntimeError('candidate must never execute')\n")
-        self.candidate = self.commit('exact synthetic output-budget candidate')
-        g = self.gate
-        g.OUTPUT_BUDGET_REFERENCE = [{'path': p, 'before': before[p], 'after': self.pin(self.candidate, p)} for p in self.paths]
-        g.OUTPUT_BUDGET_OLD_VECTOR = old; g.OUTPUT_BUDGET_NEW_VECTOR = vector(self.candidate); self.rehash()
-
-    def rehash(self):
-        g = self.gate
-        g.OUTPUT_BUDGET_REFERENCE_SHA256 = g.transition_digest(g.OUTPUT_BUDGET_REFERENCE)
-        g.OUTPUT_BUDGET_OLD_VECTOR_SHA256 = g.transition_digest(g.OUTPUT_BUDGET_OLD_VECTOR, newline=True)
-        g.OUTPUT_BUDGET_NEW_VECTOR_SHA256 = g.transition_digest(g.OUTPUT_BUDGET_NEW_VECTOR, newline=True)
-
-    def check(self, candidate=None, baseline=None):
-        return self.gate.output_budget_transition(self.repo, baseline or self.baseline, candidate or self.candidate)
-
-    def test_exact_transition_authenticates_both_vectors_without_candidate_execution(self):
-        result = self.check()
-        self.assertEqual(result['kind'], 'exact-reviewed-output-budget-migration-v1')
-        self.assertEqual(result['changed_paths'], 7); self.assertTrue(result['whole_tree_outside_exact_delta_equal'])
-        self.assertFalse(result['candidate_code_executed']); self.assertFalse(result['candidate_scientific_qualification'])
-        self.assertEqual(result['baseline_commit'], self.baseline); self.assertEqual(result['candidate_commit'], self.candidate)
-        self.assertIsNone(self.check(candidate=self.baseline))
-
-    def test_body_missing_mode_type_symlink_and_rename_refuse(self):
-        for alteration in ['body', 'missing', 'mode', 'directory', 'symlink', 'rename']:
-            with self.subTest(alteration=alteration):
-                self.git('checkout', '-q', '--detach', self.candidate); p = self.repo/self.addition
-                if alteration == 'body': p.write_bytes(b'unreviewed\n')
-                elif alteration == 'missing': p.unlink()
-                elif alteration == 'mode': p.chmod(0o755)
-                elif alteration == 'directory': p.unlink(); p.mkdir(); (p/'hidden').write_bytes(b'unreviewed')
-                elif alteration == 'symlink': p.unlink(); p.symlink_to('../data/scientific-input.json')
-                else: p.rename(self.repo/'renamed.py')
-                self.assertIsNone(self.check(self.commit(alteration)))
-
-    def test_complete_tree_and_both_vectors_refuse_unlisted_or_equal_substitution(self):
-        for name in ['data/scientific-input.json', self.vector_paths[-1], 'methods/method0.py', 'outside.py']:
-            with self.subTest(path=name):
-                self.git('checkout', '-q', '--detach', self.candidate); self.write(name, b'unreviewed\n')
-                self.assertIsNone(self.check(self.commit('candidate drift')))
-        self.git('checkout', '-q', '--detach', self.baseline)
-        self.write(self.vector_paths[-1], b'equal but unknown method\n'); baseline = self.commit('substituted baseline')
-        for name in self.paths: self.write(name, self.git('show', self.candidate + ':' + name))
-        self.assertIsNone(self.check(self.commit('same substituted candidate method'), baseline))
-
-    def test_inventory_and_prospective_body_union_fail_before_opens(self):
-        g = self.gate
-        for name in ['OUTPUT_BUDGET_REFERENCE', 'OUTPUT_BUDGET_OLD_VECTOR', 'OUTPUT_BUDGET_NEW_VECTOR']:
-            for value in [getattr(g, name)[::-1], getattr(g, name)[:-1]]:
-                with self.subTest(name=name), self.mock.patch.object(g, name, value):
-                    with self.assertRaises(ValueError): self.check()
-        g.OUTPUT_BUDGET_NEW_VECTOR = [{**p, 'bytes': g.MAX_BYTES} for p in g.OUTPUT_BUDGET_NEW_VECTOR]; self.rehash()
-        with self.mock.patch.object(g, 'git', side_effect=AssertionError('body opened before admission')):
-            with self.assertRaisesRegex(ValueError, 'bounds'): self.check()
-
-    def test_whole_tree_git_failure_or_timeout_never_passes(self):
-        from types import SimpleNamespace
-        original = self.gate.subprocess.run
-        def refusal(command, **kwargs): return SimpleNamespace(returncode=128) if 'diff-tree' in command else original(command, **kwargs)
-        with self.mock.patch.object(self.gate.subprocess, 'run', side_effect=refusal):
-            with self.assertRaisesRegex(ValueError, 'equivalence unavailable'): self.check()
-        def timeout(command, **kwargs):
-            if 'diff-tree' in command: raise subprocess.TimeoutExpired('git', 30)
-            return original(command, **kwargs)
-        with self.mock.patch.object(self.gate.subprocess, 'run', side_effect=timeout):
-            with self.assertRaises(subprocess.TimeoutExpired): self.check()
-
-    def test_orchestration_keeps_real_baseline_identity_and_propagates_failure(self):
-        proof = {'status': 'not-applicable', 'regressions': None, 'baseline_commit': self.baseline, 'candidate_commit': self.baseline}
-        result = self.orchestrate(lambda *args: proof)
-        self.assertIs(result['reused_baseline_proof'], proof)
-        self.assertEqual(result['reviewed_code_transition']['kind'], 'exact-reviewed-output-budget-migration-v1')
-        with self.assertRaisesRegex(RuntimeError, 'original baseline failure'):
-            self.orchestrate(lambda *args: (_ for _ in ()).throw(RuntimeError('original baseline failure')))
-        with self.assertRaisesRegex(ValueError, 'baseline proof did not pass'):
-            self.orchestrate(lambda *args: {'status': 'native-regressions-found', 'regressions': 1})
-        with self.mock.patch.object(self.gate, 'verify_trusted_checkout', return_value='fixture'), self.mock.patch.object(self.gate, 'inventory', side_effect=[['before'], ['after']]):
-            with self.assertRaisesRegex(ValueError, 'changed geographic inputs'): self.gate.inspect(self.repo, self.baseline, self.candidate)
-
-    def test_production_output_budget_map_is_one_finite_seven_file_transition(self):
-        namespace = {'__name__': 'non_cli_control'}; exec(compile(DRAFT.read_bytes(), str(DRAFT), 'exec'), namespace)
-        reference = namespace['OUTPUT_BUDGET_REFERENCE']; old = namespace['OUTPUT_BUDGET_OLD_VECTOR']; new = namespace['OUTPUT_BUDGET_NEW_VECTOR']
-        self.assertEqual(len(reference), 7); self.assertEqual(len(old), 28); self.assertEqual(len(new), 28)
-        self.assertEqual(namespace['transition_digest'](reference), namespace['OUTPUT_BUDGET_REFERENCE_SHA256'])
-        self.assertEqual(namespace['transition_digest'](old, newline=True), namespace['OUTPUT_BUDGET_OLD_VECTOR_SHA256'])
-        self.assertEqual(namespace['transition_digest'](new, newline=True), namespace['OUTPUT_BUDGET_NEW_VECTOR_SHA256'])
-        self.assertEqual([p['path'] for p in old], [p['path'] for p in new])
-        self.assertEqual({a['path'] for a, b in zip(old, new) if a != b}, {
-            'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
-            *['coordination/engineering/additive-native-composition-20261009/' + p for p in ['capture-current-rebind.mjs', 'run-current-rebind.mjs', 'supervise-current-rebind.py']]})
-
-
 class UnchangedSelectedApplicabilityControls(unittest.TestCase):
     def setUp(self):
         import importlib.util
@@ -992,7 +543,6 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
              self.mock.patch.object(g, 'inventory', return_value=['same']), \
              self.mock.patch.object(g, 'unchanged_selected_inputs', return_value=self.proof), \
              self.mock.patch.object(g, 'prefetch_declared_inputs', side_effect=AssertionError('prefetch ran')), \
-             self.mock.patch.object(g, 'output_budget_transition', side_effect=AssertionError('transition ran')), \
              self.mock.patch.object(g.subprocess, 'check_output', side_effect=AssertionError('science ran')):
             result = g.inspect(ROOT, self.baseline, self.candidate, prefetch=True)
         self.assertEqual(result['status'], 'not-applicable')
@@ -1005,7 +555,7 @@ class UnchangedSelectedApplicabilityControls(unittest.TestCase):
         with self.mock.patch.object(g, 'verify_trusted_checkout', return_value='fixture'), \
              self.mock.patch.object(g, 'inventory', side_effect=[['before'], ['after']]), \
              self.mock.patch.object(g, 'unchanged_selected_inputs', side_effect=AssertionError('shortcut consulted')), \
-             self.mock.patch.object(g, 'output_budget_transition', side_effect=RuntimeError('full-check-reached')):
+             self.mock.patch.object(g.importlib.util, 'spec_from_file_location', side_effect=RuntimeError('full-check-reached')):
             with self.assertRaisesRegex(RuntimeError, 'full-check-reached'):
                 g.inspect(ROOT, self.baseline, self.candidate, prefetch=True)
 
