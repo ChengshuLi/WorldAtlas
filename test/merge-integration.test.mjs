@@ -118,7 +118,18 @@ test('workflow separates untrusted candidate tests from write credentials and se
   assert.match(yaml.split('jobs:')[0],/concurrency:\n  group: worldatlas-main-integrate/);
   assert.doesNotMatch(integration,/concurrency:/);
   assert.match(integration,/permissions:\n      contents: read/);
-  assert.doesNotMatch(integration,/GH_TOKEN:|GITHUB_TOKEN:|secrets\.|contents: write|issues: write|pull-requests: write/);
+  assert.doesNotMatch(integration,/GITHUB_TOKEN:|secrets\.|contents: write|issues: write|pull-requests: write/);
+  const authenticatedSteps=['Authenticate selected package installer inputs','Assemble unchanged base with current selected output'];
+  const tokenSteps=integration.split(/(?=^      - )/m).filter(step=>/^\s+GH_TOKEN:/m.test(step));
+  assert.equal(tokenSteps.length,authenticatedSteps.length);
+  for(const [index,step] of tokenSteps.entries()){
+    assert.ok(step.startsWith('      - name: '+authenticatedSteps[index]+'\n'));
+    assert.equal((step.match(/^\s+GH_TOKEN:/gm)||[]).length,1);
+    assert.match(step,/GH_TOKEN: \$\{\{ github\.token \}\}/);
+    assert.match(step,/SELECTED_PACKAGE_TRUSTED_BASE: \$\{\{ needs\.prepare\.outputs\.base \}\}/);
+    assert.match(step,/python3 -I -S -B/);
+    assert.match(step,/needs\.prepare\.outputs\.test_selection == 'selected-data'/);
+  }
   const steps=integration.split(/\n(?=      - )/).slice(1);
   const credentialSteps=steps.filter(step=>/WORLDATLAS_CHECKOUT_TOKEN:/.test(step));
   assert.equal(credentialSteps.length,2,'read-only acquisition credentials have exactly two trusted consumers');
@@ -168,6 +179,18 @@ test('parallel full-regression shards cover each unit file once and focused prof
    assert.equal(integrationNeedsBrowser('full',shard),needsBrowser);
  }
  assert.ok([0,1,2].some(shard=>integrationNeedsBrowser('full',shard)));
+});
+
+test('ordinary selected data retains CPU base checks while software and explicit output proof retain browser qualification', () => {
+ assert.deepEqual(integrationTestFiles('full',0,'selected-data'),
+   ['test/canonical-compact-repack.test.mjs','test/prepared-parity.test.mjs']);
+ assert.equal(integrationNeedsBrowser('full',0,'selected-data'),false);
+ assert.ok(integrationTestFiles('full',0,'complete').includes('test/compact-ownership.test.mjs'));
+ assert.equal(integrationNeedsBrowser('full',0,'complete'),true);
+ assert.deepEqual(integrationTestFiles('full',0,'selected-output'),['test/compact-ownership.test.mjs']);
+ assert.equal(integrationNeedsBrowser('full',0,'selected-output'),true);
+ assert.throws(()=>integrationTestFiles('evidence',0,'selected-data'),/Invalid/);
+ assert.throws(()=>integrationTestFiles('full',1,'selected-data'),/Invalid/);
 });
 
 function addTrustedProof(f, {evidenceFailed = false} = {}) {

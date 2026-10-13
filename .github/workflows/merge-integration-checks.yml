@@ -244,11 +244,54 @@ jobs:
       pull-requests: read
       issues: read
     steps:
+      # PR base.sha is an opening snapshot; the event merge can include newer main.
+      - name: Resolve accepted geographic candidate parent
+        id: geographic_parent
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CANDIDATE: ${{ github.sha }}
+          REVIEWED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          python3 -I -S -B - <<'PYTHON'
+          import json, os, re, urllib.request
+          def sha(value):
+              if not isinstance(value, str) or not re.fullmatch(r'[0-9a-f]{40}', value):
+                  raise SystemExit('Invalid immutable geographic commit')
+              return value
+          class NoRedirect(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self, *args, **kwargs):
+                  raise SystemExit('Unexpected GitHub API redirect')
+          opener = urllib.request.build_opener(NoRedirect())
+          def api(route):
+              request = urllib.request.Request('https://api.github.com/repos/ChengshuLi/WorldAtlas/' + route,
+                  headers={'Authorization': 'Bearer ' + os.environ['GH_TOKEN'],
+                           'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'})
+              with opener.open(request, timeout=20) as response:
+                  raw = response.read(8 * 1024 * 1024 + 1)
+              if len(raw) > 8 * 1024 * 1024:
+                  raise SystemExit('Oversized GitHub commit response')
+              return json.loads(raw)
+          candidate, head = sha(os.environ['CANDIDATE']), sha(os.environ['REVIEWED_HEAD'])
+          commit = api('git/commits/' + candidate)
+          parents = [sha(parent['sha']) for parent in commit['parents']]
+          if commit['sha'] != candidate or len(parents) != 2 or parents[1] != head or parents[0] == head:
+              raise SystemExit('Candidate must merge accepted main with exact reviewed head')
+          baseline = parents[0]
+          main = sha(api('git/ref/heads/main')['object']['sha'])
+          if baseline != main:
+              comparison = api('compare/' + baseline + '...' + main + '?per_page=1')
+              if (comparison.get('status') != 'ahead' or
+                  comparison.get('base_commit', {}).get('sha') != baseline or
+                  comparison.get('merge_base_commit', {}).get('sha') != baseline):
+                  raise SystemExit('Candidate parent is not accepted main ancestry')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write('baseline=' + baseline + '\n')
+          PYTHON
       # Trusted baseline code reads candidate blobs; candidate code never runs.
       - name: Checkout trusted geographic checker
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
-          ref: ${{ github.event.pull_request.base.sha }}
+          ref: ${{ steps.geographic_parent.outputs.baseline }}
           persist-credentials: false
           sparse-checkout: |
             scripts
@@ -261,6 +304,7 @@ jobs:
           node-version: '24'
       - name: Reuse original geography only for unchanged consumed inputs
         id: metadata_reuse
+        if: steps.geographic_parent.outputs.baseline == github.event.pull_request.base.sha
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -284,7 +328,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GEOGRAPHY_PR_NUMBER: ${{ github.event.pull_request.number }}
           GEOGRAPHY_REVIEWED_HEAD: ${{ github.event.pull_request.head.sha }}
-          GEOGRAPHY_BASELINE: ${{ github.event.pull_request.base.sha }}
+          GEOGRAPHY_BASELINE: ${{ steps.geographic_parent.outputs.baseline }}
           # This event merge commit includes parallel main additions. Raw head
           # against current base would invent deletions that the PR never made.
           GEOGRAPHY_CANDIDATE: ${{ github.sha }}
@@ -533,6 +577,18 @@ jobs:
       - name: Install Python dependencies
         if: needs.profile.outputs.profile == 'full' && needs.profile.outputs.metadata_reuse != 'true'
         run: python -m pip install -r requirements.txt
+      - name: Snapshot original full-regression package inputs
+        if: needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
+        run: node scripts/package-output-artifact.mjs --snapshot
+      - name: Build hosted assets
+        if: needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
+        run: npm run build:cloudflare
+      - name: Inventory original full-regression package output
+        if: success() && needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
+        run: node scripts/package-output-artifact.mjs
+      - name: Verify full-regression package controls
+        if: needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
+        run: node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs test/package-inputs.test.mjs test/package-build.test.mjs
       - name: Install browser dependencies only for tests that use Playwright
         if: needs.profile.outputs.metadata_reuse != 'true'
         env:
@@ -542,15 +598,6 @@ jobs:
           if node --input-type=module -e "import {integrationNeedsBrowser} from './scripts/run-integration-tests.mjs'; process.exit(integrationNeedsBrowser(process.env.INTEGRATION_PROFILE, Number(process.env.INTEGRATION_SHARD)) ? 0 : 1)"; then
             npx playwright install --with-deps chromium
           fi
-      - name: Verify full-regression package controls
-        if: needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
-        run: node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs test/package-inputs.test.mjs test/package-build.test.mjs
-      - name: Snapshot original full-regression package inputs
-        if: needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
-        run: node scripts/package-output-artifact.mjs --snapshot
-      - name: Build hosted assets
-        if: needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
-        run: npm run build:cloudflare
       - name: Read back qualified native build outputs when selected
         if: needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
         run: |
@@ -611,9 +658,6 @@ jobs:
           }
           console.log('Actual reviewed-head Cloudflare package and applicable native readback receipts verified.');
           NODE
-      - name: Inventory original full-regression package output
-        if: success() && needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
-        run: node scripts/package-output-artifact.mjs
       - name: Retain original full-regression package output
         if: success() && needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -839,15 +883,18 @@ jobs:
       - name: Install package Python dependencies
         run: python -m pip install -r requirements.txt
         if: needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete')
-      - name: Verify package controls
-        run: node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs test/package-inputs.test.mjs test/package-build.test.mjs
-        if: needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete')
       - name: Snapshot original selected package inputs
         if: needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete') && needs.profile.outputs.metadata_reuse != 'true'
         run: node scripts/package-output-artifact.mjs --snapshot
       - name: Build Cloudflare package without publishing
         if: needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete')
         run: npm run build:cloudflare
+      - name: Inventory original selected package output
+        if: success() && needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete') && needs.profile.outputs.metadata_reuse != 'true'
+        run: node scripts/package-output-artifact.mjs
+      - name: Verify package controls
+        run: node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs test/package-inputs.test.mjs test/package-build.test.mjs
+        if: needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete')
       - name: Read back qualified native build outputs when selected
         if: needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete')
         run: |
@@ -871,9 +918,6 @@ jobs:
             if test "$status" -ne 3; then exit "$status"; fi
             echo 'No artifact selection: native built-output readback is inapplicable; no report claimed.'
           fi
-      - name: Inventory original selected package output
-        if: success() && needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete') && needs.profile.outputs.metadata_reuse != 'true'
-        run: node scripts/package-output-artifact.mjs
       - name: Retain original selected package output
         if: success() && needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete') && needs.profile.outputs.metadata_reuse != 'true'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

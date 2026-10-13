@@ -117,15 +117,21 @@ export function packageBuildConfiguration(env = process.env) {
     ['NODE_ENV','TZ','LANG','LC_ALL','SOURCE_DATE_EPOCH'].includes(key)).sort(([a], [b]) => a.localeCompare(b, 'en')));
 }
 
-export const packageProducerPath = name => name !== '.github/package-inputs.json' &&
-  (!name.includes('/') || /^(?:scripts|test|src|hosted|\.github)\//.test(name) || /\.(?:mjs|cjs|js|py|sh)$/.test(name));
-export function committedPackageProgramme(root, head = 'HEAD') {
-  return git(root, ['ls-tree','-rz','--full-tree',head]).split('\0').filter(Boolean).map(line => {
-    const tab=line.indexOf('\t'),[mode,type,oid]=line.slice(0,tab).split(' ');
-    return {path:line.slice(tab+1),mode,type,oid};
-  }).filter(row=>packageProducerPath(row.path)).map(({type,...row})=>{
-    need(type==='blob'&&['100644','100755'].includes(row.mode)&&commit(row.oid),'Ordinary complete producer programme required');return row;
-  }).sort((a,b)=>a.path.localeCompare(b.path,'en'));
+// The staged image inventories build and capture code, dependencies and config.
+// Only the two genuine workflow invocations are outside that source boundary.
+// Post-build tests/observers run after capture, not as producer identity inputs.
+export const PACKAGE_PRODUCER_WORKFLOWS = [
+  '.github/workflows/merge-integration-checks.yml', '.github/workflows/worker-merge.yml',
+];
+export const PACKAGE_PRODUCER_KIND = 'immediate-cloudflare-build-v1';
+export function committedPackageProducer(root, head = 'HEAD') {
+  const workflows = git(root, ['ls-tree', '-z', head, '--', ...PACKAGE_PRODUCER_WORKFLOWS]).split('\0').filter(Boolean).map(raw=>{
+    const match = /^100644 blob ([a-f0-9]{40})\t(.+)$/.exec(raw);
+    need(match, 'Ordinary package producer workflow required');
+    return {path:match[2],mode:'100644',oid:match[1]};
+  });
+  need(same(workflows.map(row=>row.path),PACKAGE_PRODUCER_WORKFLOWS),'Complete package producer workflows required');
+  return {kind:PACKAGE_PRODUCER_KIND,workflows};
 }
 
 // Identity v2 retains raw evidence separately from narrowly proven relocation
@@ -242,7 +248,7 @@ export function snapshotPackageOutputSource(root = process.cwd()) {
   need(same(actual,files),'Actual original source image differs from complete immutable inventory');
   const head = git(root, ['rev-parse','HEAD']).trim(), tree = git(root, ['rev-parse','HEAD^{tree}']).trim();
   return {head, tree, input_definition_sha256: sha(fs.readFileSync(path.join(root, '.github/package-inputs.json'))),
-    definition, files, programme: committedPackageProgramme(root), selection: readJSON(root, 'data/ownership-selection.json'),
+    definition, files, producer: committedPackageProducer(root), selection: readJSON(root, 'data/ownership-selection.json'),
     installed_runtime:installedPackageIdentity(root,declaredPackagePythonRoots(root))};
 }
 
@@ -259,7 +265,7 @@ export function createPackageOutputManifest(root = process.cwd()) {
   const source = readJSON(root, OUTPUT_SOURCE);
   need(source.head === head && source.tree === tree && source.input_definition_sha256 === sha(definitionRaw) &&
     same(source.definition, definition) && same(source.files, committedPackageInputs(root, definition)) &&
-    same(source.programme, committedPackageProgramme(root)),
+    same(source.producer, committedPackageProducer(root)),
     'Original pre-build source snapshot differs');
   const output = inventoryPackageOutput(root);
   const {installed_runtime,...manifestSource}=source;
@@ -280,6 +286,13 @@ export function validatePackageOutputManifest(value) {
     Array.isArray(value.source.files) && value.source.files.length > 0 && value.source.files.length <= 20000,
     'Invalid original package identity');
   validatePackageInputs(value.source.definition);
+  // Absence preserves legacy history; transition admission requires this new
+  // capture policy explicitly rather than reinterpreting the old programme.
+  const producer=value.source.producer;
+  if(producer!==undefined)need(producer?.kind===PACKAGE_PRODUCER_KIND&&
+    Array.isArray(producer.workflows)&&producer.workflows.length===PACKAGE_PRODUCER_WORKFLOWS.length&&
+    producer.workflows.every((row,index)=>row.path===PACKAGE_PRODUCER_WORKFLOWS[index]&&row.mode==='100644'&&commit(row.oid)),
+    'Invalid immediate package producer identity');
   need(value.source.selection && typeof value.source.selection === 'object' &&
     value.runtime && typeof value.runtime.node === 'string' && typeof value.runtime.platform === 'string' &&
     typeof value.runtime.arch === 'string' && hash(value.runtime.dependencies) &&
@@ -313,6 +326,22 @@ export function verifyPackageOutput(root, manifest) {
   return true;
 }
 
+// The Actions run head can be the reviewed PR source, while its workflow runs
+// from the merge ref. Keep actual workflow context in the existing log receipt,
+// separate from reusable source/blob compatibility and local output manifests.
+export function packageWorkflowExecution(env = process.env) {
+  if (!env.GITHUB_WORKFLOW_SHA && !env.GITHUB_WORKFLOW_REF) return undefined;
+  const repo = 'ChengshuLi/WorldAtlas', prefix = repo + '/';
+  need(env.GITHUB_REPOSITORY === repo && commit(env.GITHUB_WORKFLOW_SHA) &&
+    env.GITHUB_WORKFLOW_REF?.startsWith(prefix), 'Exact executed package workflow required');
+  const [workflow, ref, ...extra] = env.GITHUB_WORKFLOW_REF.slice(prefix.length).split('@');
+  need(extra.length === 0 && PACKAGE_PRODUCER_WORKFLOWS.includes(workflow) && ref === env.GITHUB_REF &&
+    (env.GITHUB_EVENT_NAME === 'pull_request' && workflow === PACKAGE_PRODUCER_WORKFLOWS[0] && /^refs\/pull\/[1-9]\d*\/merge$/.test(ref) ||
+     env.GITHUB_EVENT_NAME === 'workflow_dispatch' && workflow === PACKAGE_PRODUCER_WORKFLOWS[1] && ref === 'refs/heads/main'),
+    'Executed package workflow event/ref differs');
+  return {sha:env.GITHUB_WORKFLOW_SHA,path:workflow,ref};
+}
+
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   need(process.argv.length === 2 || process.argv.length === 3 && process.argv[2] === '--snapshot',
     'Use node scripts/package-output-artifact.mjs [--snapshot]');
@@ -326,17 +355,19 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   fs.writeFileSync(OUTPUT_MANIFEST, raw, {flag: 'wx'});
   console.log(JSON.stringify({package_output_manifest_sha256: sha(raw), package_output_manifest_bytes: raw.length,
     package_output_files: manifest.output.files.length, package_output_bytes: manifest.output.bytes,
-    original_head: manifest.source.head}));
+    original_head: manifest.source.head, executed_workflow:packageWorkflowExecution()}));
 }
 
 // Original producer -> current selection, independently of PR-base -> head
 // classification. New directory members and implicit optional inputs are never
-// waved through by an append-only package-definition change.
-export function admitPackageOutputTransition(original, current, authorizedAdditions) {
+// waved through by an append-only package-definition change. Scientific readers
+// authenticate their own consumed inputs; a parent-only read inventory is not
+// the union of those readers and cannot gate inert declarations.
+export function admitPackageOutputTransition(original, current) {
   validatePackageOutputManifest(original); validatePackageInputs(current.definition);
-  const before=original.source, allowed=new Set(authorizedAdditions);
-  need(Array.isArray(before.programme)&&before.programme.length>0&&same(before.programme,current.programme),
-    'Original producer/test/workflow programme changed');
+  const before=original.source;
+  need(before.producer?.kind===PACKAGE_PRODUCER_KIND&&same(before.producer,current.producer),
+    'Immediate original build capture and unchanged producer workflow required');
   const {inputs:oldInputs,...oldPolicy}=before.definition,{inputs:newInputs,...newPolicy}=current.definition;
   need(same(oldPolicy,newPolicy)&&newInputs.length>=oldInputs.length&&same(oldInputs,newInputs.slice(0,oldInputs.length)),
     'Package definition is not an append-only selected change');
@@ -349,11 +380,11 @@ export function admitPackageOutputTransition(original, current, authorizedAdditi
   for(const [name,row] of oldFiles) need(newFiles.has(name)&&(exceptions.has(name)||same(row,newFiles.get(name))),
     'Original invariant package input changed: '+name);
   const newDeclarations=newInputs.slice(oldInputs.length);
-  need(newDeclarations.every(name=>!name.endsWith('/')&&/^coordination\/engineering\/[^/]+\/.+\.(?:json|jsonl\.gz|json\.gz|log)$/.test(name)&&allowed.has(name)),
-    'New package declaration is not explicitly authenticated selected data');
+  need(newDeclarations.every(name=>!name.endsWith('/')&&/^coordination\/engineering\/[^/]+\/.+\.(?:json|jsonl\.gz|json\.gz|log)$/.test(name)),
+    'New package declaration is not an explicit inert selected data file');
   const added=[];
   for(const [name,row] of newFiles)if(!oldFiles.has(name)){
-    need(row.mode==='100644'&&newDeclarations.includes(name)&&allowed.has(name),
+    need(row.mode==='100644'&&newDeclarations.includes(name),
       'Unadmitted new invariant/directory/optional package input: '+name);added.push(name);
   }
   need(newDeclarations.every(name=>newFiles.has(name)), 'New selected declaration is absent');

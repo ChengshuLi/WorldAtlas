@@ -7,7 +7,7 @@ import {fileURLToPath} from 'node:url';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
-import {inventoryPackageOutput, committedPackageInputs, committedPackageProgramme,
+import {inventoryPackageOutput, committedPackageInputs, committedPackageProducer,
   admitPackageOutputTransition, validatePackageOutputManifest, streamedPackageFile} from './package-output-artifact.mjs';
 import {safePackagePath} from './package-inputs.mjs';
 const digest = raw => createHash('sha256').update(raw).digest('hex');
@@ -40,7 +40,7 @@ function sourceSnapshot(root, head) {
     `100644 blob ${descriptor.git_blob}\t${descriptor.path}\n`,'Declaration must match ordinary immutable source');
   return {git,verifyBody,descriptor,source:{head,tree:git('rev-parse',head+'^{tree}').toString().trim(),definition,
     input_definition_sha256:digest(raw),files:committedPackageInputs(root,definition,head),
-    programme:committedPackageProgramme(root,head),selection:JSON.parse(git('show',head+':data/ownership-selection.json'))}};
+    producer:committedPackageProducer(root,head),selection:JSON.parse(git('show',head+':data/ownership-selection.json'))}};
 }
 export function normalizeDeclarationReadAccounting(fullStage, assembledStage, currentDescriptor, originalDescriptor) {
   // The qualified consumer reads this unique issued code descriptor once via
@@ -88,9 +88,7 @@ function bindDeclarationTransition({sourceRoot,originalManifest,assembled,origin
     if(!pins.has(key))current.verifyBody(pin);
     pins.set(key,pin);
   }
-  const authorized=assembly.current_selected_inputs.filter(pin=>current.source.files.some(row=>
-    row.path===pin.path&&row.mode===pin.mode&&row.oid===pin.git_blob_oid)).map(pin=>pin.path);
-  const transition=admitPackageOutputTransition(manifest,current.source,authorized);
+  const transition=admitPackageOutputTransition(manifest,current.source);
   assert.deepEqual(assembly.transition,transition,'Assembly delta transition differs');
   for(const [context,snapshot] of [[fullContext,current],[assembledContext,original]]){
     assert.ok(Array.isArray(context.full_code_closure),'Full code closure required');
