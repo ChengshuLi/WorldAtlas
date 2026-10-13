@@ -5,10 +5,11 @@ import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {authenticateOriginalPackageOutput, requireOriginalPackageOutput,
-  requirePackageAssemblyExecution} from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
+  requirePackageAssemblyExecution, issuePackageAssemblyExecution} from '../coordination/engineering/additive-native-activation-20261009/package-selected-additive.mjs';
 import {requireRetainedPackageTests, integrationTestFiles} from '../scripts/run-integration-tests.mjs';
-import {admitAssemblyAtlasMetadata,createPackageAssemblyScratch,packageAssemblyInvocation} from '../scripts/assemble-selected-package.mjs';
+import {admitAssemblyAtlasMetadata,createPackageAssemblyScratch,packageAssemblyInvocation,findOriginalPackage} from '../scripts/assemble-selected-package.mjs';
 import {execFileSync,spawnSync} from 'node:child_process';
+import {committedPackageInputs,committedPackageProducer} from '../scripts/package-output-artifact.mjs';
 
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
 function original(t){
@@ -157,4 +158,84 @@ test('production assembly admission is independent of optional proof-reference m
     assert.throws(()=>packageAssemblyInvocation({inputs:{...inputs,...mutation}},environment),/Exact/);
   const source=fs.readFileSync(new URL('../scripts/assemble-selected-package.mjs',import.meta.url),'utf8');
   assert.doesNotMatch(source,/loadSelectedPackageReadback|compareSelectedPackageReadback|proofReadback/);
+});
+
+
+function sourceFixture(f){
+  const write=(name,raw)=>{fs.mkdirSync(path.dirname(path.join(f.root,name)),{recursive:true});fs.writeFileSync(path.join(f.root,name),typeof raw==='string'?raw:JSON.stringify(raw));};
+  const git=(...args)=>execFileSync('git',['-C',f.root,...args],{encoding:'utf8'}).trim();
+  const commit=()=>{git('add','.');git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','source');};
+  const definition={version:1,inputs:['.github/package-inputs.json','data/ownership-selection.json','scripts/builder.mjs','package-lock.json'],
+    optional_inputs:[],verification_paths:[],generated_outputs:['dist/']};
+  const selection={version:1,additive_release:{path:'coordination/engineering/original/release.json'}};
+  write('.github/package-inputs.json',definition);write('data/ownership-selection.json',selection);
+  write('.github/workflows/merge-integration-checks.yml','actual build invocation');
+  write('scripts/assemble-selected-package.mjs','// Synthetic current entry point for private admission controls.');
+  write('scripts/builder.mjs','actual consumed builder');write('package-lock.json','{}');
+  git('init','-q');commit();
+  const snapshot=()=>({head:git('rev-parse','HEAD'),tree:git('rev-parse','HEAD^{tree}'),definition,selection,
+    files:committedPackageInputs(f.root,definition),producer:committedPackageProducer(f.root)});
+  return {write,git,commit,snapshot};
+}
+
+test('private assembly admission uses actual declared inputs and rejects legacy capture semantics',async t=>{
+  // Exercise the actual plain-process guard instead of altering execArgv in the test.
+  if(process.execArgv.length||process.env.NODE_OPTIONS?.trim()||process.env.NODE_PATH?.trim()){
+    execFileSync(process.execPath,[new URL(import.meta.url).pathname],{env:{...process.env,NODE_OPTIONS:'',NODE_PATH:'',NODE_TEST_CONTEXT:undefined},encoding:'utf8'});return;
+  }
+  const f=original(t),s=sourceFixture(f),manifest=JSON.parse(f.manifestRaw),oldFetch=globalThis.fetch,oldEntry=process.argv[1];
+  const stage=fs.mkdtempSync(path.join(f.root,'stage-'));
+  t.after(()=>{globalThis.fetch=oldFetch;process.argv[1]=oldEntry;});
+  manifest.source=s.snapshot();
+  f.origin.head=f.run.head_sha=f.job.head_sha=f.artifact.workflow_run.head_sha=f.receipt.original_head=manifest.source.head;
+  const authenticate=async source=>{
+    f.manifestRaw=Buffer.from(JSON.stringify({...manifest,source})+'\n');
+    f.receipt.package_output_manifest_sha256=sha(f.manifestRaw);f.receipt.package_output_manifest_bytes=f.manifestRaw.length;
+    return authenticateOriginalPackageOutput(f);
+  };
+  globalThis.fetch=async()=>new Response(f.log());
+  const token=await authenticate(manifest.source);
+  process.argv[1]=path.join(f.root,'scripts/assemble-selected-package.mjs');
+  const issue=original=>issuePackageAssemblyExecution({original,source:f.root,stage,executingRoot:f.root,inheritedMetadata:[null,null,null,null,null]});
+  assert.doesNotThrow(()=>requirePackageAssemblyExecution(issue(token)));
+  for(const name of ['test/incidental.test.mjs','scripts/observer.mjs','.github/workflows/unrelated.yml']){
+    s.write(name,'unconsumed observer');s.commit();assert.doesNotThrow(()=>requirePackageAssemblyExecution(issue(token)),name);
+  }
+  for(const name of ['scripts/builder.mjs','package-lock.json','.github/workflows/merge-integration-checks.yml']){
+    const old=fs.readFileSync(path.join(f.root,name),'utf8');s.write(name,'changed');s.commit();
+    assert.throws(()=>issue(token),/input changed|producer workflow required/,name);
+    s.write(name,old);s.commit();
+  }
+  const legacy={...manifest.source};delete legacy.producer;legacy.programme=[];
+  const legacyToken=await authenticate(legacy);
+  assert.throws(()=>issue(legacyToken),/Immediate original build capture/);
+});
+
+test('original discovery ignores observer trees but refuses changed build inputs and workflow',async t=>{
+  const f=original(t),s=sourceFixture(f),before=s.snapshot(),head=before.head,repo=f.repo;
+  const rows=s.git('ls-tree','-rlz','HEAD').split('\0').filter(Boolean).map(line=>{
+    const [metadata,name]=line.split('\t'),[mode,type,oid,size]=metadata.trim().split(/\s+/);
+    return {path:name,mode,type,sha:oid,size:Number(size)};
+  });
+  const blob=raw=>({encoding:'base64',content:Buffer.from(raw).toString('base64')});
+  const definitionRaw=JSON.stringify(before.definition),selectionRaw=JSON.stringify(before.selection);
+  const api=async route=>{
+    if(route.endsWith('/actions/runs/17'))return {id:17,run_attempt:2,head_sha:head,status:'completed',repository:{full_name:repo},head_repository:{full_name:repo}};
+    if(route.includes('/git/commits/'))return {tree:{sha:before.tree}};
+    if(route.includes('/git/trees/'))return {tree:rows,truncated:false};
+    if(route.includes('/contents/.github/package-inputs.json')){const row=rows.find(r=>r.path==='.github/package-inputs.json');return {...blob(definitionRaw),...row,type:'file'};}
+    if(route.includes('/git/blobs/'))return blob(selectionRaw);
+    if(route.includes('/attempts/2/jobs'))return {jobs:[{id:29,status:'completed',conclusion:'success',steps:[{name:'Retain original full-regression package output',conclusion:'success'}]}]};
+    if(route.includes('/artifacts?'))return {total_count:1,artifacts:[{id:41,name:'cloudflare-package-output-17-2',expired:false,digest:'sha256:'+'b'.repeat(64),size_in_bytes:2000}]};
+    throw Error('Unexpected discovery route: '+route);
+  };
+  const discover=()=>findOriginalPackage({api,repo,current:s.snapshot(),originalRunId:17});
+  assert.equal((await discover()).origin.head,head);
+  for(const name of ['test/incidental.test.mjs','scripts/observer.mjs','.github/workflows/unrelated.yml']){
+    s.write(name,'new observer');s.commit();assert.equal((await discover()).origin.head,head,name);
+  }
+  for(const name of ['scripts/builder.mjs','package-lock.json','.github/workflows/merge-integration-checks.yml']){
+    const old=fs.readFileSync(path.join(f.root,name),'utf8');s.write(name,'changed');s.commit();assert.equal(await discover(),null,name);
+    s.write(name,old);s.commit();
+  }
 });

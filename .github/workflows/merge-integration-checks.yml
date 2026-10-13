@@ -551,6 +551,9 @@ jobs:
       - name: Build hosted assets
         if: needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
         run: npm run build:cloudflare
+      - name: Inventory original full-regression package output
+        if: success() && needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
+        run: node scripts/package-output-artifact.mjs
       - name: Read back qualified native build outputs when selected
         if: needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
         run: |
@@ -611,9 +614,6 @@ jobs:
           }
           console.log('Actual reviewed-head Cloudflare package and applicable native readback receipts verified.');
           NODE
-      - name: Inventory original full-regression package output
-        if: success() && needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
-        run: node scripts/package-output-artifact.mjs
       - name: Retain original full-regression package output
         if: success() && needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -848,6 +848,9 @@ jobs:
       - name: Build Cloudflare package without publishing
         if: needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete')
         run: npm run build:cloudflare
+      - name: Inventory original selected package output
+        if: success() && needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete') && needs.profile.outputs.metadata_reuse != 'true'
+        run: node scripts/package-output-artifact.mjs
       - name: Read back qualified native build outputs when selected
         if: needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete')
         run: |
@@ -871,9 +874,6 @@ jobs:
             if test "$status" -ne 3; then exit "$status"; fi
             echo 'No artifact selection: native built-output readback is inapplicable; no report claimed.'
           fi
-      - name: Inventory original selected package output
-        if: success() && needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete') && needs.profile.outputs.metadata_reuse != 'true'
-        run: node scripts/package-output-artifact.mjs
       - name: Retain original selected package output
         if: success() && needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete') && needs.profile.outputs.metadata_reuse != 'true'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

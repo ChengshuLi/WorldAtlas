@@ -316,12 +316,15 @@ function assemblySourceAdmission(original,source) {
   const all=assemblyGit(source,['ls-tree','-rz','--full-tree','HEAD']).split('\0').filter(Boolean).map(line=>{
     const tab=line.indexOf('\t'),[mode,type,oid]=line.slice(0,tab).split(' ');return {path:line.slice(tab+1),mode,type,oid};
   });
-  const programmePath=name=>name!=='.github/package-inputs.json'&&(!name.includes('/')||/^(?:scripts|test|src|hosted|\.github)\//.test(name)||/\.(?:mjs|cjs|js|py|sh)$/.test(name));
-  const rows=all.filter(row=>containsPackagePath(definition.inputs,row.path)||programmePath(row.path));
-  demand(rows.every(row=>row.type==='blob'&&['100644','100755'].includes(row.mode)),'Ordinary original input/programme roles required');
-  const plain=rows.map(({type,...row})=>row),programme=plain.filter(row=>programmePath(row.path)).sort((a,b)=>a.path.localeCompare(b.path,'en'));
-  demand(Array.isArray(before.programme)&&before.programme.length>0&&assemblySame(before.programme,programme),'Original producer/test/workflow programme changed');
-  const current=new Map(plain.filter(row=>containsPackagePath(definition.inputs,row.path)).map(row=>[row.path,row]));
+  const rows=all.filter(row=>containsPackagePath(definition.inputs,row.path));
+  demand(rows.every(row=>row.type==='blob'&&['100644','100755'].includes(row.mode)),'Ordinary original input roles required');
+  const plain=rows.map(({type,...row})=>row);
+  const workflow=all.find(row=>row.path==='.github/workflows/merge-integration-checks.yml');
+  demand(workflow?.type==='blob'&&workflow.mode==='100644','Ordinary original producer workflow required');
+  const {type,...workflowPin}=workflow;
+  demand(before.producer?.kind==='immediate-cloudflare-build-v1'&&assemblySame(before.producer,{kind:'immediate-cloudflare-build-v1',workflow:workflowPin}),
+    'Immediate original build capture and unchanged producer workflow required');
+  const current=new Map(plain.map(row=>[row.path,row]));
   const old=new Map(before.files.map(row=>[row.path,row])),exceptions=new Set(['.github/package-inputs.json','data/ownership-selection.json']);
   demand(old.size===before.files.length&&old.size>0,'Complete unique original source inventory required');
   for(const [name,row]of old)demand(current.has(name)&&(exceptions.has(name)||assemblySame(row,current.get(name))),'Original package input changed: '+name);

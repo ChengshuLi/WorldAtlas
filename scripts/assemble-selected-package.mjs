@@ -12,7 +12,7 @@ import {githubAPI, githubPages} from './issue-claim-contract.mjs';
 import {integrationTree} from './integration-profile.mjs';
 import {loadPackageInputs, readPackageInputs, containsPackagePath} from './package-inputs.mjs';
 import {inspectPackageRuntime, verifyPackageDependencies} from './package-build.mjs';
-import {committedPackageInputs, committedPackageProgramme, packageProducerPath, packageBuildConfiguration,
+import {committedPackageInputs, committedPackageProducer, PACKAGE_PRODUCER_WORKFLOW, PACKAGE_PRODUCER_KIND, packageBuildConfiguration,
   validatePackageOutputManifest, admitPackageOutputTransition, streamedPackageFile, installedPackageIdentity, installedPackageDifferences, declaredPackagePythonRoots} from './package-output-artifact.mjs';
 import {authenticateOriginalPackageOutput, issuePackageAssemblyExecution, preparePackageSelectedAdditive,
   publishPackageSelectedAdditive, packageSelectedPublicationInventory, requirePackageAssemblyExecution}
@@ -52,7 +52,7 @@ function sourceCompatible(before,current){
   const {inputs:oldInputs,...oldPolicy}=before.definition,{inputs:newInputs,...newPolicy}=current.definition;
   if(!same(oldPolicy,newPolicy)||!same(oldInputs,newInputs.slice(0,oldInputs.length)))return false;
   const {additive_release:oldHook,...oldBase}=before.selection,{additive_release:newHook,...newBase}=current.selection;
-  if(!oldHook||!newHook||!same(oldBase,newBase)||!same(before.programme,current.programme))return false;
+  if(!oldHook||!newHook||!same(oldBase,newBase))return false;
   const now=new Map(current.files.map(row=>[row.path,row]));
   return before.files.every(row=>now.has(row.path)&&(['.github/package-inputs.json','data/ownership-selection.json'].includes(row.path)||same(row,now.get(row.path))));
 }
@@ -70,10 +70,10 @@ export async function findOriginalPackage({api,repo,current,originalRunId}){
     if(run.status!=='completed'||seen.has(run.head_sha)||run.repository?.full_name!==repo||run.head_repository?.full_name!==repo)continue;
     seen.add(run.head_sha);
     const tree=await integrationTree(api,repo,run.head_sha),all=treeRows(tree);
-    const programme=all.filter(row=>packageProducerPath(row.path));
-    if(!same(programme,current.programme))continue;
+    const producer={kind:PACKAGE_PRODUCER_KIND,workflow:all.find(row=>row.path===PACKAGE_PRODUCER_WORKFLOW)};
+    if(!same(producer,current.producer))continue;
     const definition=await readPackageInputs({route:`/repos/${repo}`,base:run.head_sha,api});
-    const source={head:run.head_sha,tree:tree.object.tree.sha,definition,programme,
+    const source={head:run.head_sha,tree:tree.object.tree.sha,definition,producer,
       files:all.filter(row=>containsPackagePath(definition.inputs,row.path)),
       selection:await blobJSON(api,repo,tree,'data/ownership-selection.json')};
     if(!sourceCompatible(source,current))continue;
@@ -117,7 +117,7 @@ function currentSource(){
   need(same(actual('.github/package-inputs.json'),definition),'Current package declaration differs');
   return {head:git(['rev-parse','HEAD']),tree:git(['rev-parse','HEAD^{tree}']),definition,
     selection:actual('data/ownership-selection.json'),input_definition_sha256:hash(fs.readFileSync(path.join(root,'.github/package-inputs.json'))),
-    files:committedPackageInputs(root,definition),programme:committedPackageProgramme(root)};
+    files:committedPackageInputs(root,definition),producer:committedPackageProducer(root)};
 }
 
 export async function assembleSelectedPackage({api,repo,expectedHead,originalRunId}){
@@ -133,7 +133,7 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
     const pythonArgs=['-I','-S','-B',path.join(root,'scripts/extract-package-output.py')];
     execFileSync('python3',[...pythonArgs,'--manifest',archive,manifestFile,found.origin.artifact_digest],{stdio:'pipe',maxBuffer:1048576});
     const manifestRaw=fs.readFileSync(manifestFile),manifest=validatePackageOutputManifest(JSON.parse(manifestRaw));
-    for(const key of ['head','tree','definition','files','programme','selection'])need(same(manifest.source[key],found.source[key]),'Retained manifest differs from original immutable source: '+key);
+    for(const key of ['head','tree','definition','files','producer','selection'])need(same(manifest.source[key],found.source[key]),'Retained manifest differs from original immutable source: '+key);
     need(manifest.runtime.installed?.version===2&&manifest.runtime.installed.python?.parser,
       'Version 2 original installed parser evidence required; legacy aggregate evidence requires a full build');
     const originalRoot=path.join(scratch,'original');

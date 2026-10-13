@@ -12,6 +12,26 @@ Application regression selection remains a separate question. Unpublished geogra
 
 When adding a genuine package dependency outside declared directories, add its precise path to the declaration in the same reviewed PR. Do not declare a whole research namespace to make a missing-read error disappear. Data manifests that point at unpublished research must promote the actual required inputs explicitly. New ordinary modules inside declared `src/` and `hosted/` directories are already inputs. Root configuration files absent from the image cannot silently affect a build; adopting one requires declaring it. Verification-only controls trigger package checks without entering the package source image.
 
+## Retained original Cloudflare output
+
+The original output inventory is captured immediately after the genuine Cloudflare
+build, before readback and regression consumers. Upload still waits for required
+checks to succeed. Authentication compares every retained output byte with that
+inventory, so a later consumer cannot silently change the reusable package.
+
+New manifests identify this boundary as `immediate-cloudflare-build-v1` and retain
+the actual build workflow's Git identity. The complete declared source image,
+installed dependencies/runtime and build configuration remain authoritative.
+Tests, unrelated workflows and observer scripts outside the declared image do not
+invalidate those bytes merely because they changed. A declared observer remains a
+package input; this change does not guess which declared files are unused.
+
+Legacy manifests keep their original provenance. They cannot establish immediate
+build capture and therefore require the ordinary full-build path under the new
+reuse policy. This removes false invalidation for later eligible selected-package
+reuse; it does not skip current-head tests, authenticate old runtime evidence as
+new, or enable the separately reviewed final-worker adoption by itself.
+
 Local checks:
 
 ```sh
