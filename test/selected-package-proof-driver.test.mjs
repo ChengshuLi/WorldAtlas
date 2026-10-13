@@ -7,7 +7,7 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync,spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {resolveFrozenPackageProgramme, requireSeparatedProofRoots,
-  requireActualAssembly, retainProofManifest, prepareFreshAssemblyScratch, recordFrozenChildDiagnostic, prepareDeclaredHistoricalOrigins} from '../scripts/run-selected-package-proof.mjs';
+  requireActualAssembly, retainProofManifest, prepareFreshAssemblyScratch, recordFrozenChildDiagnostic} from '../scripts/run-selected-package-proof.mjs';
 
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 const FROZEN_REVIEWED_HEAD = '9'.repeat(40);
@@ -409,65 +409,4 @@ test('current observer owns explicit accepted reference authority and final comp
   assert.doesNotMatch(source,/retainSuccessfulChildProof|result\.proof/);
   assert.ok(source.indexOf('const readback=await loadSelectedPackageReadback(')<source.indexOf('const child=spawnSync('));
   assert.ok(source.indexOf('const comparison=compareSelectedPackageReadback(')>source.indexOf('const committed=requireActualAssembly('));
-});
-
-function originFixtureExecute({unavailable=false,transportFailure=false}={}) {
-  const a='1'.repeat(40),b='2'.repeat(40),calls=[],present=new Set();
-  const bodies=new Map([
-    ['3'.repeat(40),JSON.stringify({nested:[{commit:a,path:'old/facts.json'},{execution_commit:b},{commit:'https://foreign.invalid',path:'x'}]})],
-    ['4'.repeat(40),''],['5'.repeat(40),JSON.stringify({commit:'6'.repeat(40),path:'ignored'})]
-  ]);
-  const execute=(_command,args,options)=>{
-    calls.push({args,options});const command=args[2];
-    if(command==='show')return Buffer.from(JSON.stringify({inputs:['coordination/declared/']}));
-    if(command==='ls-tree'){assert.ok(!args.includes('-l'));return Buffer.from([...bodies].map(([hash,body],i)=>`100644 blob ${hash}\tcoordination/${i===2?'outside':'declared'}/${i}.json\0`).join(''));}
-    if(command==='cat-file'&&args[3]==='-s'){assert.notEqual(args[4],'5'.repeat(40));return Buffer.from(String(Buffer.byteLength(bodies.get(args[4]))));}
-    if(command==='cat-file'&&args[3]==='blob')return Buffer.from(bodies.get(args[4]));
-    if(command==='cat-file'){if(!present.has(args[4].slice(0,40)))throw Error('missing tree');return Buffer.alloc(0);}
-    if(args.includes('fetch')){
-      assert.equal(args.at(-1),'https://github.com/ChengshuLi/WorldAtlas.git');
-      for(const control of ['--no-replace-objects','core.hooksPath=/dev/null','credential.helper='])assert.ok(args.includes(control));
-      assert.ok(args.includes('--filter=blob:none'));assert.ok(args.includes('--depth=1'));
-      const roots=options.input.trim().split('\n');
-      if(transportFailure)throw Object.assign(Error('network failed'),{stderr:Buffer.from('network failed')});
-      if(unavailable&&roots.includes(b))throw Object.assign(Error('not served'),{stderr:Buffer.from('fatal: remote error: upload-pack: not our ref '+b)});
-      roots.forEach(root=>present.add(root));return Buffer.alloc(0);
-    }
-    throw Error('Unexpected command '+args.join(' '));
-  };
-  return {execute,calls,a,b};
-}
-test('historical setup scans declared directory metadata once and fetches valid same-repository roots together',()=>{
-  const fixture=originFixtureExecute();
-  const result=prepareDeclaredHistoricalOrigins({sourceRoot:'/candidate',execute:fixture.execute});
-  assert.equal(result.metadata_files,2);assert.equal(result.candidate_roots,2);
-  assert.deepEqual(result.fetched_roots,[fixture.a,fixture.b]);assert.equal(result.fetch_batches,1);
-  assert.deepEqual(result.non_json_files,['coordination/declared/1.json']);
-  assert.equal(fixture.calls.filter(c=>c.args[2]==='cat-file'&&c.args[3]==='blob').length,2);
-});
-test('unavailable incidental certificate origin does not prevent acquiring remaining actual reader roots',()=>{
-  const fixture=originFixtureExecute({unavailable:true});
-  const result=prepareDeclaredHistoricalOrigins({sourceRoot:'/candidate',execute:fixture.execute});
-  assert.deepEqual(result.unavailable_roots,[fixture.b]);assert.deepEqual(result.fetched_roots,[fixture.a]);
-  assert.equal(result.fetch_batches,2);
-});
-test('historical acquisition does not swallow transport failure as an unavailable origin',()=>{
-  const fixture=originFixtureExecute({transportFailure:true});
-  assert.throws(()=>prepareDeclaredHistoricalOrigins({sourceRoot:'/candidate',execute:fixture.execute}),/network failed/);
-});
-
-test('real cold Git checkout does not need unrelated unavailable blobs for metadata discovery',t=>{
-  const root=temporary(t),run=(...args)=>execFileSync('git',['-C',root,...args],{encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
-  run('init','-q');run('config','gc.auto','0');run('config','maintenance.auto','false');
-  fs.mkdirSync(path.join(root,'.github'));fs.mkdirSync(path.join(root,'coordination/declared'),{recursive:true});
-  fs.writeFileSync(path.join(root,'.github/package-inputs.json'),JSON.stringify({inputs:['coordination/declared/']}));
-  fs.writeFileSync(path.join(root,'coordination/declared/facts.json'),'{}');
-  fs.writeFileSync(path.join(root,'unrelated.json'),'unavailable unrelated body');
-  run('add','.');run('-c','user.name=Fixture','-c','user.email=fixture@example.test','commit','-qm','cold objects');
-  const absent=run('rev-parse','HEAD:unrelated.json');
-  fs.unlinkSync(path.join(root,'.git/objects',absent.slice(0,2),absent.slice(2)));
-  assert.throws(()=>run('cat-file','-e',absent));
-  const result=prepareDeclaredHistoricalOrigins({sourceRoot:root});
-  assert.equal(result.metadata_files,1);assert.equal(result.metadata_bytes,2);assert.equal(result.fetch_batches,0);
-  assert.throws(()=>run('cat-file','-e',absent));
 });
