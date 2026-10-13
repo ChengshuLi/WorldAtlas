@@ -1,10 +1,9 @@
 import {collectGeographicApproval, bindingHash} from './geographic-adjudication-api.mjs';
 import {integrationProfile, selectedDataCandidate, selectedDataSelection} from './integration-profile.mjs';
-import {integrationProof, successfulMetadataRegressionJobs} from './integration-proof.mjs';
+import {integrationProof} from './integration-proof.mjs';
 import {githubPages, verifyIssueScope, workSpec} from './issue-claim-contract.mjs';
 import {validateIssuePRBody, validateLanePaths} from './check-handoff-scope.mjs';
 import {checkPremergeEvidence} from './premerge-evidence.mjs';
-import {beginFinalPlanning, paceFinalValidation, finalRequestBudget} from './final-capacity.mjs';
 import {memoizeImmutableGitBlobs} from './immutable-git-blobs.mjs';
 import {evidenceRequirement} from './evidence-policy.mjs';
 import {checkGeographicReport, geographicReportProducts, validateGeographyProof, validateGeographyOrigin} from './geographic-report-artifact.mjs';
@@ -338,11 +337,7 @@ export async function prepareIntegration(options) {
   }
 }
 export async function completeIntegration(options) {
-  const capacityBudget = options.finalCapacity ? finalRequestBudget(options.api) : null;
-  try {
-  options = {...options, ...(capacityBudget ? {capacityBudget} : {}),
-    api: memoizeImmutableGitBlobs(capacityBudget?.api ?? options.api)};
-  if (options.finalCapacity) options = await beginFinalPlanning(options);
+  options = {...options, api: memoizeImmutableGitBlobs(options.api)};
   // Duplicate/canceled executions reconcile the immutable reviewed head before
   // requiring now-inapplicable candidate jobs or traversing evidence.
   const initialPR = await options.api(`${root(options.repo)}/pulls/${options.number}`);
@@ -358,25 +353,8 @@ export async function completeIntegration(options) {
       options.proofRunId === geographyProof.run_id && options.proofRunAttempt === (geographyProof.current_run_attempt ?? geographyProof.run_attempt) &&
       options.expectedHead === geographyProof.head && options.testedBase === geographyProof.baseline
     : options.geographyResult === 'success';
-  if (geographyProof) options = {...options, artifactRunId: geographyProof.run_id};
   need(options.integrationResult === 'success' || options.integrationResult === 'skipped',
     'Integration tests failed or were cancelled; no merge performed');
-  let capacity = null;
-  if (options.finalCapacity) {
-    need(geographyReady, 'Trusted combined geography check missing, failed or cancelled; no merge performed');
-    const proofApplicabilityInventory = async ({api, state, run, jobs}) => {
-      if (successfulMetadataRegressionJobs(jobs, {run: run?.id, attempt: run?.run_attempt, head: state.pr.head.sha})) {
-        need(typeof options.metadataProofLoader === 'function', 'Metadata predecessor proof loader unavailable');
-        await options.metadataProofLoader({api, repo: options.repo, number: options.number, head: state.pr.head.sha, baseline: state.base});
-      }
-      if (geographyProof) await validateGeographyOrigin({api, repo: options.repo, number: options.number, source: geographyProof});
-      if (!selectedDataCandidate(state.pr.head.ref, state.files, state.reservation)) return;
-      const [baseline, authored] = await Promise.all([tree(api, options.repo, state.base), tree(api, options.repo, state.pr.head.sha)]);
-      await selectedDataSelection({...options, api, branch: state.pr.head.ref, files: state.files, reservation: state.reservation, baseline, authored});
-    };
-    const paced = await paceFinalValidation({...options, proofApplicabilityInventory}, {inspect: inspectMerge});
-    options = {...options, api: paced.api}; capacity = paced.receipt;
-  }
   // Rejection-only fast path: known stale base/head cannot benefit from the
   // expensive full evidence inventory. Eligible/replayed requests still run
   // every normal trusted validation and the later final base guard.
@@ -442,11 +420,9 @@ export async function completeIntegration(options) {
   });
   need(merged.merged, 'GitHub did not merge the PR');
   return {accepted: true, merge_commit: merged.sha, title: state.pr.title, github_issue: state.issue.number,
-    ...(capacity ? {final_capacity: capacity} : {}),
     geography: {status: 'passed', trusted_code_commit: state.base, candidate_commit: geography.candidate_commit,
       report_sha256: geographyProof?.report_sha256 ?? options.geographyReportHash, adjudication: geography.adjudication ?? null,
       ...(geographicSource ? {execution: geographyProof ? 'reused-original' : 'fresh-queue', source: geographicSource} : {})},
     tested_base: state.base, tested_candidate: options.testedCandidate, reviewed_head: state.pr.head.sha, evidence: state.evidence, proof,
     head_cleanup: await cleanupMergedHead(options)};
-  } finally {capacityBudget?.dispose();}
 }

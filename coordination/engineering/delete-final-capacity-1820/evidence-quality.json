@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "issue": 1820,
+  "lane": "engineering",
+  "worker_id": "01a134fb-5a99-75bf-a00c-bc0c73a3003c",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "c3ceedf1b3d7e9b5d8ec6c7308cdea4d9faa1be6",
+    "files": [
+      {
+        "path": "scripts/final-capacity.mjs",
+        "bytes": 21941,
+        "sha256": "8713794dbfd81d6e9495497aa478d4b539168ad629371e6ab74f2387845ea695",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "remove-final-capacity-planner",
+      "kind": "code",
+      "description": "Delete speculative final-capacity inventory, estimation and replanning while preserving actual final validation and the existing HTTP quota/recovery controls. Bind worker HTTP requests to authenticated job deadlines with the existing finalization reserve. This code-only manifest preserves the removed source at its immutable baseline; no new scientific computation or live provider operation is claimed.",
+      "software": "Node 24.19.0; Git",
+      "units": "No scientific measurements"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/merge-integration.test.mjs test/merge-integration-entrypoint.test.mjs test/github-quota.test.mjs test/job-deadline.test.mjs"
+  ]
+}

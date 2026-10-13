@@ -3,6 +3,10 @@ import {gitBlobTransport} from './git-blob-transport.mjs';
 import {quotaDelay,requestAccounting} from './github-quota.mjs';
 import {loadGeographicReport, prepareGeographyProof, validateGeographyProof} from './geographic-report-artifact.mjs';
 import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import {performance} from 'node:perf_hooks';
+import {AsyncLocalStorage} from 'node:async_hooks';
+import {loadJobDeadline, HTTP_ATTEMPT_MS, JOB_FINALIZATION_MS} from './job-deadline.mjs';
 import {renderWorkerResult} from './worker-result.mjs';
 import {githubAPI} from './issue-claim-contract.mjs';
 import {loadEvidencePolicy} from './evidence-policy.mjs';
@@ -15,7 +19,25 @@ const number = Number(input.pr_number), phase = process.env.MERGE_PHASE;
 if (!['prepare','merge'].includes(phase) || !Number.isSafeInteger(number) || number < 1 ||
     !/^[a-f0-9]{40}$/.test(input.expected_head ?? '') || !/^[-a-zA-Z0-9]{16,100}$/.test(input.request_id ?? '')) throw Error('Invalid merge request');
 const accounting=requestAccounting(phase);
-const transport=gitBlobTransport(githubAPI(process.env.GH_TOKEN,{onRequest:accounting.observe,readWaitMs:phase==='merge'?61*60*1000:8*60*1000}),{repo,token:process.env.GH_TOKEN,directory:process.cwd(),onFetch:row=>console.log(JSON.stringify({phase,immutable_transport:row}))});
+const started = performance.now(), hosted = process.env.GITHUB_ACTIONS === 'true';
+let deadline, bootstrapping = hosted;
+const bootstrapRemaining = () => 2 * HTTP_ATTEMPT_MS + 1000 - (performance.now() - started);
+const recovery = new AsyncLocalStorage();
+// The same client owns quota state for work and its already-restricted recovery
+// routes. Only those exact calls may consume the existing finalization reserve;
+// concurrent authority reads never inherit that allowance.
+const rawAPI = githubAPI(process.env.GH_TOKEN, {onRequest: accounting.observe,
+  readWaitMs: phase === 'merge' ? 61 * 60 * 1000 : 8 * 60 * 1000,
+  deadlineRemaining: () => {
+    if (hosted && !bootstrapping && !deadline) return 0;
+    const workRemaining = deadline ? deadline.remaining() : hosted ? bootstrapRemaining() :
+      (phase === 'merge' ? 75 : 10) * 60_000 - JOB_FINALIZATION_MS - (performance.now() - started);
+    return workRemaining + (recovery.getStore() ? JOB_FINALIZATION_MS : 0);
+  }});
+const recover = rawAPI.recovery;
+rawAPI.recovery = (...args) => recovery.run(true, () => recover(...args));
+const transport = gitBlobTransport(rawAPI, {repo, token: process.env.GH_TOKEN, directory: process.cwd(),
+  onFetch: row => console.log(JSON.stringify({phase, immutable_transport: row}))});
 const api = transport.api, options = {api, repo, number, expectedHead: input.expected_head, policy: loadEvidencePolicy(),
   geographyProofLoader: args => prepareGeographyProof({...args, token: process.env.GH_TOKEN}),
   metadataProofLoader: createMetadataRegressionProofLoader({token: process.env.GH_TOKEN, directory: process.cwd()}),
@@ -23,6 +45,29 @@ const api = transport.api, options = {api, repo, number, expectedHead: input.exp
   integrationRequestId: input.request_id + (process.env.GITHUB_RUN_ID ? `-${process.env.GITHUB_RUN_ID}` : '')};
 let result = {accepted: false, request_id: input.request_id, pr_number: number, phase};
 try {
+  if (hosted) {
+    try {
+      const workflowPath = '.github/workflows/worker-merge.yml';
+      if (process.env.GITHUB_WORKFLOW_REF !== `${repo}/${workflowPath}@refs/heads/main` ||
+          !/^[a-f0-9]{40}$/.test(process.env.GITHUB_WORKFLOW_SHA ?? '')) throw Error('Missing executing merge workflow authority');
+      // The checkout follows current main; the executing workflow may be older.
+      // Bind its literal timeout to its own immutable bytes, not the checkout.
+      const file = await api(`/repos/${repo}/contents/${workflowPath}?ref=${process.env.GITHUB_WORKFLOW_SHA}`);
+      if (file?.type !== 'file' || file.path !== workflowPath || file.encoding !== 'base64' ||
+          !/^[a-f0-9]{40}$/.test(file.sha ?? '') || !Number.isSafeInteger(file.size) ||
+          file.size <= 0 || file.size > 128 * 1024 || typeof file.content !== 'string') throw Error('Executing merge workflow unavailable');
+      const bytes = Buffer.from(file.content, 'base64');
+      if (bytes.length !== file.size || createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex') !== file.sha)
+        throw Error('Executing merge workflow bytes changed');
+      deadline = await loadJobDeadline({api, repo, phase, workflow: bytes.toString('utf8'), metadataRemaining: bootstrapRemaining});
+      const {remaining, ...binding} = deadline;
+      result.job_deadline = binding;
+    } finally {
+      // Refused or unbound job metadata cannot reopen a fresh startup clock,
+      // even for recovery. Only an admitted authenticated deadline owns time.
+      bootstrapping = false;
+    }
+  }
   if (phase === 'prepare') {
     const state = await prepareIntegration(options);
     result = {...result, accepted: Boolean(state.replayed), ...(state.replayed ? {merge_commit: state.pr.merge_commit_sha} : {}), status: state.replayed ? 'already-merged' : 'testing',
@@ -34,9 +79,6 @@ try {
   } else {
     const geographyProof = process.env.GEOGRAPHY_PROOF ? validateGeographyProof(JSON.parse(process.env.GEOGRAPHY_PROOF)) : null;
     const completed = await completeIntegration({...options, integrationResult: process.env.INTEGRATION_RESULT,
-      finalCapacity: process.env.FINAL_CAPACITY === 'required',
-      artifactRunId: geographyProof?.run_id ?? Number(process.env.GITHUB_RUN_ID),
-      capacityObserver: observation => {result.final_capacity = observation; console.log(JSON.stringify(observation));},
       geographyResult: process.env.GEOGRAPHY_RESULT,
       geographyProof,
       geographyReportHash: process.env.GEOGRAPHY_REPORT_SHA256,
@@ -57,7 +99,8 @@ try {
   result.reason = error.message;
   if (error.github) result.api_error = error.github;
   if (error.quotaCause?.github)result.quota_cause=error.quotaCause.github;
-  if (error.capacity) result.final_capacity = error.capacity;
+  if (error.jobDeadline || error.message === 'Job deadline exhausted during metadata admission') result.job_deadline_exhausted = true;
+  if (error.deadlineBinding) result.deadline_binding = error.deadlineBinding;
   if (error.candidateCleanup) result.candidate_cleanup = error.candidateCleanup;
   if (error.candidateDiagnostics) result.candidate_diagnostics = error.candidateDiagnostics;
   result.status = /conflict|changes reviewed bytes|substantive review/.test(error.message) ? 'intervention-required' : 'not-merged';
