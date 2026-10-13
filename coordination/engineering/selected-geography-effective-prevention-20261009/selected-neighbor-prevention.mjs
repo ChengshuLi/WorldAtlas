@@ -73,16 +73,20 @@ export function readSupportedProgrammeCatalogue(reader) {
 }
 export function matchSupportedProgramme(catalogue,{preimageVersion,sourceProfile,sourceCode,nativeCode}) {
  validateSupportedProgrammeCatalogue(catalogue);
- const matches=catalogue.programs.filter(p=>p.preimage_version===preimageVersion&&p.source_profile===sourceProfile
-  &&same(sourceCode,p.source_executed_code)&&same(nativeCode,p.native_executed_code));
- demand(matches.length===1,'Unknown/ambiguous original source/native policy program closure');return matches[0];
+ const methods=catalogue.programs.filter(p=>p.preimage_version===preimageVersion&&p.source_profile===sourceProfile);
+ // Each complete executed closure needs its own historical admission. Pairing
+ // two already reviewed closures does not create a new method registration.
+ const source=methods.find(p=>same(sourceCode,p.source_executed_code));
+ const native=methods.find(p=>same(nativeCode,p.native_executed_code));
+ demand(source&&native,'Unknown original source/native policy program closure');return {source,native};
 }
 
 // Only the compact reviewed authority escapes. The full policy graph and
 // exact matching scratch finish before native member phases reset accounting.
 export function readSupportedProgrammeAuthority(reader,request) {
  const policy=readSupportedProgrammeCatalogue(reader),supported=matchSupportedProgramme(policy.catalogue,request);
- const authority={accepted_head:supported.accepted_head,independent_review_comment:supported.independent_review_comment,catalogue:policy.pin};
+ const review=p=>({accepted_head:p.accepted_head,independent_review_comment:p.independent_review_comment});
+ const authority={source:review(supported.source),native:review(supported.native),catalogue:policy.pin};
  const carry=2*valueBytes(authority).length;demand(reader.used+carry<=reader.phaseLimit,'Programme authority carry exceeds complete phase');
  reader.metadataBytes+=carry;reader.used+=carry;return authority;
 }
@@ -357,16 +361,16 @@ export function readOriginalRuleAuthority(reader, pins, sourceOutputAliases=[]) 
 // Reuse the actually qualified source predecessor; never infer permission from
 // a hash-shaped receipt or caller-written approval boolean. No source method is
 // rerun here. Original whole case/source pins remain in the retained closure.
-// Only a unique immutable reviewed administrative SOURCE/NATIVE pair may retain
+// Only independently reviewed administrative SOURCE and NATIVE closures may retain
 // an older source selector. Both selectors and their complete unchanged source-map
 // identity are authenticated; current selected-bank conservation remains later.
 function originalAdministrativeBaseline(reader, issued, request, native) {
  if(same(issued.baseline,request.baseline))return true;
  const profile='retained-consumed-administrative-source';
- demand(issued.source_rule?.profile===profile&&request.additive?.source_profile===profile
-  &&readSupportedProgrammeCatalogue(reader).catalogue.programs.filter(p=>p.preimage_version===3&&p.source_profile===profile
-   &&same(issued.executed_code,p.source_executed_code)&&same(request.executed_code,p.native_executed_code)).length===1,
+ demand(issued.source_rule?.profile===profile&&request.additive?.source_profile===profile,
   'Unreviewed original administrative baseline split');
+ matchSupportedProgramme(readSupportedProgrammeCatalogue(reader).catalogue,{preimageVersion:3,sourceProfile:profile,
+  sourceCode:issued.executed_code,nativeCode:request.executed_code});
  const read=p=>{pinCheck({...p,git_blob_oid:p.git_blob_oid??p.blob});
   const actual=reader.descriptor(p.path,p.commit);
   demand(actual.mode===p.mode&&actual.git_blob_oid===(p.git_blob_oid??p.blob)&&actual.bytes===p.bytes,'Original selector/source-map Git identity differs');
