@@ -436,7 +436,9 @@ merge job's start and the executing workflow's immutable literal timeout (10 or
 75 minutes). Setup time is charged. Workflow/job metadata share a finite startup
 budget; requests and waits must fit a complete 20-second HTTP attempt before the
 existing 30-second finalization reserve. Local entrypoint runs also have finite
-deadlines. Only the client's already-restricted exact-owned candidate cleanup
+deadlines. Failed startup authority or deadline admission closes all further
+HTTP, including optional cleanup/notification. Once a deadline is admitted, only
+the client's already-restricted exact-owned candidate cleanup
 and result-notification routes can use that final reserve; they keep the same
 quota state and bounded recovery allocation. This is best-effort cleanup, not a
 guarantee against concurrent quota depletion or a slow provider.

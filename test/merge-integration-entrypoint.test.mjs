@@ -217,7 +217,7 @@ for (const phase of ['prepare', 'merge']) test(`actual ${phase} cannot accept me
 });
 
 function hostedDeadlineRun({phase = 'merge', ageSeconds = 0, expire = false, corrupt = false, foreignJob = false,
-  malformedMetadata = false, pending = false, badWorkflow = false} = {}) {
+  malformedMetadata = false, pending = false, badWorkflow = false, metadataNetworkFailure = false} = {}) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'atlas-merge-deadline-'));
   fs.mkdirSync(path.join(directory, '.github'));
   fs.copyFileSync(path.join(root, '.github/evidence-policy.json'), path.join(directory, '.github/evidence-policy.json'));
@@ -227,6 +227,7 @@ function hostedDeadlineRun({phase = 'merge', ageSeconds = 0, expire = false, cor
   const file = {type: 'file', path: '.github/workflows/worker-merge.yml', encoding: 'base64', size: workflow.length,
     sha: createHash('sha1').update(`blob ${workflow.length}\0`).update(workflow).digest('hex'), content: workflow.toString('base64')};
   if (corrupt) file.content = Buffer.from('changed workflow').toString('base64');
+  fs.writeFileSync(path.join(directory, 'calls.json'), '[]');
   fs.writeFileSync(path.join(directory, 'mock.mjs'), capacityShim + `
     import fs from 'node:fs'; import {performance} from 'node:perf_hooks';
     const realNow = performance.now.bind(performance), wall = Date.now(); let elapsed = 0, jobs = 0;
@@ -237,13 +238,14 @@ function hostedDeadlineRun({phase = 'merge', ageSeconds = 0, expire = false, cor
       if (options.method === 'PUT') throw Error('No new merge is allowed');
       if (route.includes('/contents/')) return Response.json(${JSON.stringify(file)});
       if (route.includes('/attempts/1/jobs')) {
+        if (${metadataNetworkFailure}) throw Error('Metadata transport failure');
         jobs++; return Response.json(${malformedMetadata} ? {} : {total_count: 1, jobs: [{id: 51, name: '${phase}',
           run_id: 1234, run_attempt: 1, status: ${pending} && jobs === 1 ? 'queued' : 'in_progress',
           started_at: new Date(wall - ${ageSeconds} * 1000).toISOString()}]});
       }
       if (route.endsWith('/pulls/2')) {
         if (${expire}) elapsed += ${phase === 'merge' ? 75 : 10} * 60000 - ${ageSeconds} * 1000 - 27000;
-        return Response.json({merged: ${!(corrupt || foreignJob || malformedMetadata || badWorkflow || ageSeconds >= (phase === 'merge' ? 75 : 10) * 60 - 40)}, head: {sha: 'a'.repeat(40)}, merge_commit_sha: 'b'.repeat(40)});
+        return Response.json({merged: ${!(corrupt || foreignJob || malformedMetadata || badWorkflow || metadataNetworkFailure || ageSeconds >= (phase === 'merge' ? 75 : 10) * 60 - 40)}, head: {sha: 'a'.repeat(40)}, merge_commit_sha: 'b'.repeat(40)});
       }
       if (options.method === 'DELETE') return new Response(null, {status: 204});
       return Response.json(route.includes('/git/ref/heads/') ? {object: {sha: 'b'.repeat(40)}} : {});
@@ -271,10 +273,20 @@ for (const [phase, minutes] of [['prepare', 10], ['merge', 75]]) {
     assert.equal(calls.filter(row => row.route.includes('/contents/')).length, 1);
     assert(!calls.some(row => row.route === '/rate_limit'));
   });
-  test(`actual ${phase} cannot start work after setup consumes its job ceiling`, () => {
-    const {receipt, calls} = hostedDeadlineRun({phase, ageSeconds: minutes * 60 - 40});
+  for (const remaining of [40, 19, 0, -60]) test(`actual ${phase} startup refuses ${remaining}s remaining without post-refusal HTTP`, () => {
+    const {receipt, calls} = hostedDeadlineRun({phase, ageSeconds: minutes * 60 - remaining});
     assert.equal(receipt.accepted, false); assert.match(receipt.reason, /deadline exhausted/);
-    assert(!calls.some(row => row.method === 'PUT'));
+    assert.equal(receipt.job_deadline_exhausted, true);
+    assert.equal(calls.length, 2, 'Only immutable workflow and authenticated job metadata may be fetched');
+    assert(calls.every(row => row.method === 'GET' && /\/contents\/|\/attempts\/1\/jobs$/.test(row.route)));
+    assert.match(receipt.notification_error, /deadline/);
+  });
+  test(`actual ${phase} starts with a valid near-ceiling deadline and reserves finalization time`, () => {
+    const {result, receipt, calls} = hostedDeadlineRun({phase, ageSeconds: minutes * 60 - 55});
+    assert.equal(result.status, 0, result.stderr); assert.equal(receipt.accepted, true);
+    assert.equal(receipt.job_deadline.timeout_minutes, minutes);
+    assert.equal(receipt.job_deadline.finalization_ms, 30000);
+    assert.equal(calls.filter(row => row.method === 'POST').length, 1);
   });
 }
 test('actual final work expiry leaves the existing reserved time usable for owned cleanup and notification', () => {
@@ -285,9 +297,11 @@ test('actual final work expiry leaves the existing reserved time usable for owne
   assert.equal(calls.filter(row => row.method === 'POST').length, 1);
   assert.equal(calls.filter(row => row.route.endsWith('/pulls/2')).length, 1, 'Normal reconciliation cannot spend the cleanup reserve');
 });
-for (const option of ['corrupt', 'foreignJob', 'malformedMetadata', 'badWorkflow']) test(`actual merge deadline rejects ${option} before merge work`, () => {
-  const {receipt, calls} = hostedDeadlineRun({[option]: true});
-  assert.equal(receipt.accepted, false); assert(!calls.some(row => row.method === 'PUT'));
-  // Failure reconciliation may read the PR, but cannot accept a fresh merge.
-  assert.match(receipt.reason, /workflow|job|inventory|metadata/);
-});
+for (const phase of ['prepare', 'merge']) for (const option of ['corrupt', 'foreignJob', 'malformedMetadata', 'badWorkflow', 'metadataNetworkFailure'])
+  test(`actual ${phase} deadline rejects ${option} without post-refusal HTTP`, () => {
+    const {receipt, calls} = hostedDeadlineRun({phase, [option]: true});
+    assert.equal(receipt.accepted, false);
+    assert(calls.every(row => row.method === 'GET' && /\/contents\/|\/attempts\/1\/jobs$/.test(row.route)));
+    assert.match(receipt.reason, /workflow|job|inventory|metadata|Metadata/);
+    assert.match(receipt.notification_error, /deadline/);
+  });
