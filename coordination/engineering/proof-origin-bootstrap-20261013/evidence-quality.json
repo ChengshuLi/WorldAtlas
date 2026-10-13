@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "issue": 1798,
+  "lane": "engineering",
+  "worker_id": "01a131c0-8b58-70b6-8e2c-52240f11e03f",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "723d64259929e67ec023a4b349eaf4740a091e23",
+    "files": [
+      {
+        "path": "scripts/run-selected-package-proof.mjs",
+        "bytes": 17405,
+        "sha256": "fafdcf83b22523c90147ed5ab7450f6ee788c4d36fa9c55365ed6347f9a09c89",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/selected-package-proof-driver.test.mjs",
+        "bytes": 29907,
+        "sha256": "fb1cfd822a215b12f75d49ce29f2d71d257ee1375b31490c0dfa5bd0645fbc8e",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "declared-origin-acquisition",
+      "kind": "code",
+      "description": "Acquire Git origins referenced by declared coordination metadata before unchanged frozen readers; preserve original source and output identities and explicit unavailable-root diagnostics.",
+      "software": "Node and Git",
+      "units": "metadata files/bytes, commit origins and positive/adverse controls"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/selected-package-proof-driver.test.mjs"
+  ]
+}
