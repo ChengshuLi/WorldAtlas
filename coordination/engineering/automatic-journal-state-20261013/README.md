@@ -41,8 +41,39 @@ adoption. Independent exact-head review, current scope/evidence validation and
 ordinary CI/serialized queue remain mandatory.
 
 The required full author producer is intended to retain unchanged selected Norway
-B under the new runtime identity. Genuine Native102 selected delivery is the later
-changed-selection candidate/reference. That actual hosted proof, ordinary-path
+B under the new runtime identity. Genuine Native102 delivery uses full author CI as the later
+changed-selection reference and an explicit accepted-source package proof. That actual hosted proof, ordinary-path
 adoption and timing remain open; original v1 artifacts cannot retroactively prove
 new per-file semantic identity. SOURCE/NATIVE/rebind/assembly results retain their
 original producer and execution identities.
+
+## Whole-route review and limits
+
+The combined review follows the actual producer and continuation paths. Local
+controls establish the listed boundaries; they do not substitute for the pending
+hosted changed-selection proof.
+
+| Boundary | Exercised evidence | Remaining observation |
+| --- | --- | --- |
+| Runtime journal and clean work slot | Fresh and migrated real Git work slots; interrupted migration, raw-byte preservation, collisions, tracked legacy records and stock cleanliness inside the next action | Actual Native102 migration of its preserved legacy state after acceptance |
+| Immutable metadata and resumed commits | Actual historical-custody continuation reached the rebind barrier; sparse inherited-object and interruption controls preserve commit intent | Continued publication with accepted current code |
+| Package product to selected classifier | Real automatic preparation and Git commit with no runtime cache or intent in Git; embedded input/output authentication and legacy compatibility, with changed/missing/conflicting negatives | Subsequent ordinary full-component fast-path adoption |
+| Exact scientific inputs and finalization | Existing actual Native102 rebind and corrected assembly retain original registry, ledger and certificate pins; metadata-only finalizer authenticates 18 original roles, including 16 independently authorized exact restorations | Finalization against the accepted current package definition and normal selected gates |
+| Installed runtime and launch policy | Real cold install, complete Node/Python inventories, relocation and import-shadow/startup-hook adverse controls, actual scientific imports, independent interpreter/parser authentication | Successful current hosted full producer and independent worker admission |
+| Current execution custody | Actual producer preflight matches all 93 application roles and 39 immutable critical records; current wrapper/helper source is independently authenticated, with real child-call and failure controls | Final exact-head review and hosted full build |
+| Declaration and archive admission | More than 4,096 entries and greater-than-128-KiB descriptor controls, actual byte/resource reservations, duplicate/overlap rejection, full archive and manifest authentication | Actual retained v2 producer artifact and its measured metadata sizes |
+| Reference and output equivalence | Successful full-author and queue producer predicates, rejected skipped/reused producers, complete output comparison and subprocess-failure controls | Genuine Native102 full-author reference, accepted source, assembled=true output and exhaustive comparison |
+| Current consumers | Source review and existing targeted native/readback/smoke/renderer/pick contracts retained | Fresh hosted native, selected smoke, GPU/Canvas and pick results for the changed selection |
+
+Native102 intentionally uses full author CI: its exact-file historical restoration
+scope and authentic supported-fragment SOURCE custody are outside the existing
+selected fast-profile admission. Checkpoint JSON and ZIP custody are already
+admitted. This exception does not claim ordinary fast-profile adoption. Its failed
+automatic finalization intent remains preserved; the actual recovery uses a fresh
+standalone finalizer with exact original scientific descriptors.
+
+The cancelled initial author run 38331983083 is not an eligible original producer.
+The original failed package proof runs 38323094289 and 38326625903 remain failed.
+New installed-runtime evidence cannot retroactively establish v1 equivalence.
+Hosted equivalence, savings and completed adoption remain unobserved until the
+required baseline, genuine changed-selection reference and fresh consumers pass.

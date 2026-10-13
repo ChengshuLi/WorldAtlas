@@ -15,6 +15,12 @@
         "hash_kind": "file-bytes"
       },
       {
+        "path": ".github/package-inputs.json",
+        "bytes": 96272,
+        "sha256": "de4ad1ed444b00cc5bde0873e6b1fec046c137baa26ba7e1fc28bf6b583e5dd1",
+        "hash_kind": "file-bytes"
+      },
+      {
         "path": ".github/workflows/merge-integration-checks.yml",
         "bytes": 59375,
         "sha256": "51fd481574e6b352483e823c03bdab92fef373d552150e9712f600c1b611c27e",
@@ -24,6 +30,18 @@
         "path": ".github/workflows/selected-package-proof.yml",
         "bytes": 8048,
         "sha256": "ca66d9adf0d8ef1bffb66fec11738d59b353c09a4c883389e0b316f504d64293",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/worker-merge.yml",
+        "bytes": 24060,
+        "sha256": "4307dc705a8109e8ce732dcf54266d5ecd7b7db07457439cea58acf48bccca8b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "derived.mjs",
+        "bytes": 4027,
+        "sha256": "f1fbf4a698299957109fe892062be7009362d77b9d1944fd1abcc59f0d5926ba",
         "hash_kind": "file-bytes"
       },
       {
@@ -45,9 +63,21 @@
         "hash_kind": "file-bytes"
       },
       {
+        "path": "scripts/integration-profile.mjs",
+        "bytes": 62584,
+        "sha256": "1f7d0d3e8fd14083fe587cb4ea1b3e138dc433b800bddfb7d5b6bd389591d2e6",
+        "hash_kind": "file-bytes"
+      },
+      {
         "path": "scripts/package-build.mjs",
         "bytes": 24657,
         "sha256": "23f943b3091091be026cc2fb250e919c715e773c51230d958acf83ad0d6efec0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/package-inputs.mjs",
+        "bytes": 3021,
+        "sha256": "b34b30e1d8bb1661558d2ec891ca4eb23f43d1844750dc3d600ff76a90a88a2e",
         "hash_kind": "file-bytes"
       },
       {
@@ -75,6 +105,12 @@
         "hash_kind": "file-bytes"
       },
       {
+        "path": "scripts/selected-package-readback-proof.mjs",
+        "bytes": 16237,
+        "sha256": "069d5344533e5268c69828a115dafb22daf5b9da2666615ba1a5dc52fdec2541",
+        "hash_kind": "file-bytes"
+      },
+      {
         "path": "test/delivery-handoff-advance.test.mjs",
         "bytes": 193477,
         "sha256": "51187ce6be81111de0707ee87ccabad8eb2736a4e10701d786fb9cd880f1927b",
@@ -93,9 +129,21 @@
         "hash_kind": "file-bytes"
       },
       {
+        "path": "test/package-inputs.test.mjs",
+        "bytes": 1435,
+        "sha256": "2d538a5387c5249337929cc3e57e81e47b3a67bdc09bb075b3a5e20c89aa111b",
+        "hash_kind": "file-bytes"
+      },
+      {
         "path": "test/package-output-artifact.test.mjs",
         "bytes": 22505,
         "sha256": "816b48614e717651b1450273be737295e65f98267546c38f35e5a94d7ca41115",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/selected-data-profile.test.mjs",
+        "bytes": 106436,
+        "sha256": "f95f4f845226fce693c63fb0e05e811abc14be3ad659feeaa7fb41dd3e0d02c0",
         "hash_kind": "file-bytes"
       },
       {
@@ -108,6 +156,18 @@
         "path": "test/selected-package-proof-driver.test.mjs",
         "bytes": 28644,
         "sha256": "27e3fdd21be667cff6d92297d9fe6eb3342bd8cee8ed2e3ad5f51f6c9bcfc0f1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/selected-package-readback-proof.test.mjs",
+        "bytes": 14926,
+        "sha256": "300cde4ad393a686098959c94cb6c4a097087f8fb94f3ba0f436738f7732917d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/trusted-workflow-checkouts.test.mjs",
+        "bytes": 44607,
+        "sha256": "fffe8301782aaf98ff4d250671f08a6c040fe4f0054af7398cd93cf7f0303e91",
         "hash_kind": "file-bytes"
       }
     ],
@@ -149,6 +209,9 @@
   "commands": [
     "node --test test/delivery-handoff-advance.test.mjs test/delivery-handoff.test.mjs",
     "node --test test/selected-package-assembly.test.mjs test/package-build.test.mjs test/trusted-workflow-checkouts.test.mjs test/selected-package-bootstrap.test.mjs",
+    "node --test test/package-python-execution.test.mjs test/package-inputs.test.mjs test/package-build.test.mjs",
+    "node --test test/selected-data-profile.test.mjs",
+    "node .cache/check-complete-producer-roles.mjs",
     "node .cache/qualify-current-metadata-program.mjs"
   ]
 }
