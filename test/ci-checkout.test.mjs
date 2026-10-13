@@ -118,7 +118,9 @@ test('progressing fetch beyond the previous scaled cutoff completes once within 
   assert.equal(f.fetches(), 1); assert.equal(f.rows().filter(row => row.args?.includes('init')).length, 1);
   const events = f.events(result), fetch = events.find(row => row.event === 'phase-complete' && row.phase === 'fetch');
   assert.ok(fetch.phase_seconds >= 3, 'actual fetch exceeds the former 2-second fixture cutoff');
-  assert.equal(fetch.status, 'success'); assert.ok(events.some(row => row.event === 'git-progress' && row.percent === 50));
+  assert.equal(fetch.status, 'success');
+  assert.ok(events.some(row => row.event === 'git-progress' && row.phase === 'fetch'
+    && row.activity === 'Receiving objects' && [25, 50, 75].includes(row.percent)));
   assert.ok(events.every(row => !Object.hasOwn(row, 'attempt') && !Object.hasOwn(row, 'attempts')));
   assert.ok(!events.some(row => row.event === 'acquisition-retry'));
   f.clean(); noSecrets(result);
