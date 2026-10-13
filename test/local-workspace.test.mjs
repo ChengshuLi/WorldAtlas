@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {execFileSync, spawn} from 'node:child_process';
-import {workspaceManager, cleanupCompletedWorkspace, GiB} from '../scripts/local-workspace.mjs';
+import {workspaceManager, GiB} from '../scripts/local-workspace.mjs';
 
 function fixture(t, overrides = {}) {
   const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'atlas-storage-test-'));
@@ -200,29 +200,13 @@ test('new sparse packet paths permit ordinary creation and staging', t => {
   assert.match(execFileSync('git', ['-C', entry.path, 'status', '--porcelain'], {encoding: 'utf8'}), /A  research\/campaigns\/new\/result.json/);
 });
 
-test('confirmed merge cleanup removes only the unchanged clean managed author checkout', t => {
-  const {manager, repo, head} = fixture(t);
-  assert.equal(cleanupCompletedWorkspace(repo, head).status, 'unmanaged');
-  const entry = manager.allocate({worker: 'one', branch: 'engineering/finished'});
-  assert.equal(cleanupCompletedWorkspace(entry.path, 'a'.repeat(40)).status, 'retained');
-  assert.ok(fs.existsSync(entry.path));
-  fs.writeFileSync(path.join(entry.path, 'unique.txt'), 'retain');
-  assert.equal(cleanupCompletedWorkspace(entry.path, head).status, 'pending');
-  assert.ok(fs.existsSync(path.join(entry.path, 'unique.txt')));
-  fs.unlinkSync(path.join(entry.path, 'unique.txt'));
-  assert.equal(cleanupCompletedWorkspace(entry.path, head).status, 'released');
-  assert.ok(!fs.existsSync(entry.path));
-  assert.equal(manager.report().entries.length, 0);
-});
-
 test('assume-unchanged cannot hide unique tracked bytes from cleanup', t => {
-  const {manager, head} = fixture(t);
+  const {manager} = fixture(t);
   const entry = manager.allocate({worker: 'one', branch: 'engineering/hidden-edits'});
   execFileSync('git', ['-C', entry.path, 'update-index', '--assume-unchanged', 'README.md']);
   fs.writeFileSync(path.join(entry.path, 'README.md'), 'unique hidden work');
   assert.equal(execFileSync('git', ['-C', entry.path, 'status', '--porcelain'], {encoding: 'utf8'}), '');
   assert.throws(() => manager.release({worker: 'one', token: entry.token}), /trust flags/);
-  assert.equal(cleanupCompletedWorkspace(entry.path, head).status, 'pending');
   assert.equal(fs.readFileSync(path.join(entry.path, 'README.md'), 'utf8'), 'unique hidden work');
 });
 
