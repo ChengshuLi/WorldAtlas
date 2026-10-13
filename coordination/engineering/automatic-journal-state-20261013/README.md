@@ -77,3 +77,14 @@ The original failed package proof runs 38323094289 and 38326625903 remain failed
 New installed-runtime evidence cannot retroactively establish v1 equivalence.
 Hosted equivalence, savings and completed adoption remain unobserved until the
 required baseline, genuine changed-selection reference and fresh consumers pass.
+
+The subsequent b2628835 producer attempt (run 38336301377) failed before build
+while capturing Python cache identity. Its budget applied the memory expansion
+factor twice. The corrected model charges retained object graphs separately from
+scoped transient buffers under one physical allocation ceiling, including final
+serialization. All 29 focused Python controls pass. Two independent complete
+4,552-file runs under 128 MiB preserve both original raw and effective hashes,
+with 72,720 and 73,028 KiB peak RSS; the old accounting refused the same roster.
+Genuinely oversized live inputs and serialization still refuse. This establishes
+resource-admission correctness for that roster, not hosted output equivalence.
+The failed run created no eligible baseline and its remaining jobs were cancelled.

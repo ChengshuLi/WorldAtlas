@@ -211,6 +211,7 @@
     "node --test test/selected-package-assembly.test.mjs test/package-build.test.mjs test/trusted-workflow-checkouts.test.mjs test/selected-package-bootstrap.test.mjs",
     "node --test test/package-python-execution.test.mjs test/package-inputs.test.mjs test/package-build.test.mjs",
     "node --test test/selected-data-profile.test.mjs",
+    "node --test test/package-python-runtime.test.mjs",
     "node .cache/check-complete-producer-roles.mjs",
     "node .cache/qualify-current-metadata-program.mjs"
   ]
