@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "issue": 1798,
+  "lane": "engineering",
+  "worker_id": "01a131c0-8b58-70b6-8e2c-52240f11e03f",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "02cd63c6c29032af86b739dcf3b600104b128aec",
+    "files": [
+      {
+        "path": ".github/metadata-regression-programs.json",
+        "bytes": 550,
+        "sha256": "ba3efbc54d2e00528bacc86fc4fc03f2d5a42fcb3822ba0c3650355e7fc8f037",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/assemble-selected-package.mjs",
+        "bytes": 23024,
+        "sha256": "fa522b5e4de944339d088261e959f960070b783873bc1b9d14c5147af90d9c0c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-selected-package-proof.mjs",
+        "bytes": 18094,
+        "sha256": "dc89d968a420fda98868a4d4c277759bcccb12239517c2914706b27621ed4634",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/selected-package-readback-proof.mjs",
+        "bytes": 18529,
+        "sha256": "4b4f68ccc743124a46bc87554d7305cdf0463c1cdf7c21f948ca931f31548bac",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/selected-package-assembly.test.mjs",
+        "bytes": 10414,
+        "sha256": "40cf73ead5c38c98fe579baabc86d78f41a06d775d695b258ce1f03ce7ca3ddd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/selected-package-proof-driver.test.mjs",
+        "bytes": 30445,
+        "sha256": "bee9db6f9501768ca43579dc049d11254319e84c6002df6fa48479aef7ca00f8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/selected-package-readback-proof.test.mjs",
+        "bytes": 19629,
+        "sha256": "47308cdeddd75c9b5c78d4d657b3165ee836adf7d8012bb0f14a91d3331e944e",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [],
+  "methods": [
+    {
+      "id": "accepted-reference-custody",
+      "kind": "code",
+      "description": "Separate actual production assembly from optional comparison; authenticate original successful reference using explicit accepted PR/source/tree/repository plus original workflow/run/job/artifact and complete report custody. Mutable live PR annotations cannot replace original identity.",
+      "software": "Node and immutable Git/GitHub metadata",
+      "units": "identity and positive/adverse controls"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/selected-package-assembly.test.mjs test/selected-package-proof-driver.test.mjs test/selected-package-readback-proof.test.mjs",
+    "node .cache/qualify-current-metadata-program.mjs"
+  ]
+}
