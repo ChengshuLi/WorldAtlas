@@ -78,10 +78,10 @@ test('interrupted metadata resumes identical postimages and only completes once'
   assert.deepEqual(readAdvanceStatus(j).completed, []);
   assert.equal(fs.existsSync(path.join(j.target, 'requests', 'preparation.json')), false);
   await withAdvanceLock(j, () => prepareAdvanceStage(j, 'requests', 'requests', {one: 1}, () => products));
-  const before = fs.readFileSync(path.join(j.target, 'requests.completed.json'));
+  const before = fs.readFileSync(path.join(j.stateTarget, 'requests.completed.json'));
   const repeated = await withAdvanceLock(j, () => prepareAdvanceStage(j, 'requests', 'requests', {one: 1}, () => { throw Error('completed stage reran'); }));
   assert.equal(repeated.resumed, true);
-  assert.deepEqual(fs.readFileSync(path.join(j.target, 'requests.completed.json')), before);
+  assert.deepEqual(fs.readFileSync(path.join(j.stateTarget, 'requests.completed.json')), before);
   assert.deepEqual(readAdvanceStatus(j).completed, ['requests']);
   await assert.rejects(prepareAdvanceStage(j, 'requests', 'requests', {one: 2}, () => products), /Changed stage inputs/);
 });
@@ -110,13 +110,13 @@ test('queue identity is durable before uncertain submit and resume can never dis
   let calls = 0, identity;
   const checkReview = async () => ({...packet, review_comment_id: 123});
   const client = async options => {
-    const saved = JSON.parse(fs.readFileSync(path.join(j.target, 'queue-submission.json')));
+    const saved = JSON.parse(fs.readFileSync(path.join(j.stateTarget, 'queue-submission.json')));
     assert.equal(saved.request_id, options.requestId); identity ??= options.requestId; assert.equal(identity, options.requestId);
     if (!options.observeOnly) { calls++; throw Error('uncertain POST'); }
     assert.equal(options.resuming, true); return {status: 'pending', request_id: identity};
   };
   assert.equal((await advanceQueue(j, packet, {checkReview})).status, 'ready-for-queue');
-  assert.equal(fs.existsSync(path.join(j.target, 'queue-submission.json')), false);
+  assert.equal(fs.existsSync(path.join(j.stateTarget, 'queue-submission.json')), false);
   await assert.rejects(advanceQueue(j, packet, {authorizeSubmission: true, checkReview, client}), /uncertain/);
   assert.equal((await advanceQueue(j, packet, {authorizeSubmission: true, checkReview, client})).status, 'pending');
   assert.equal(calls, 1);
@@ -126,7 +126,7 @@ test('missing independent acceptance never writes a queue identity', async t => 
   const j = journal(t);
   await assert.rejects(advanceQueue(j, {repo: 'ChengshuLi/WorldAtlas', pr_number: 1, head_sha: commit},
     {authorizeSubmission: true, checkReview: async () => { throw Error('stale review'); }}), /stale review/);
-  assert.equal(fs.existsSync(path.join(j.target, 'queue-submission.json')), false);
+  assert.equal(fs.existsSync(path.join(j.stateTarget, 'queue-submission.json')), false);
 });
 
 // recipe constructor controls
@@ -519,7 +519,7 @@ fixtureTest('registry phase transitions preserve another live reader shared-budg
 test('unowned empty stage directories and foreign root inventory are never adopted', async t => {
   const j = journal(t); fs.mkdirSync(path.join(j.target, 'requests'));
   await assert.rejects(prepareAdvanceStage(j, 'requests', 'requests', {}, () => ({'a.json': Buffer.from('{}\n')})), /Unowned stage/);
-  assert.equal(fs.existsSync(path.join(j.target, 'requests.intent.json')), false);
+  assert.equal(fs.existsSync(path.join(j.stateTarget, 'requests.intent.json')), false);
   assert.throws(() => readAdvanceStatus(j), /Foreign advance inventory/);
 });
 
@@ -659,7 +659,7 @@ if (process.env.WORLDATLAS_DELIVERY_FIXTURE === '1') test('real13 greedy model i
   });
 
 test('stale lock recovery serializes competing acquisition and refuses ambiguous acquisition guards', async t => {
-  const j = journal(t), lockPath = path.join(j.target, 'advance.lock');
+  const j = journal(t), lockPath = path.join(j.stateTarget, 'advance.lock');
   const raw = Buffer.from(JSON.stringify({host: os.hostname(), pid: 2147483647, nonce: 'dead',
     intent_sha256: digest(Buffer.from(JSON.stringify({kind: j.intent.kind, recipe: j.intent.recipe,
       started_at: j.intent.started_at, version: j.intent.version}) + '\n'))}) + '\n');
@@ -675,9 +675,9 @@ test('stale lock recovery serializes competing acquisition and refuses ambiguous
   };
   try { await withAdvanceLock(j, () => { assert.equal(ran, false); }); } finally { fs.unlinkSync = unlink; }
   assert.equal(blocked, true); assert.equal(ran, false);
-  fs.writeFileSync(path.join(j.target, 'advance.acquire'), raw);
+  fs.writeFileSync(path.join(j.stateTarget, 'advance.acquire'), raw);
   assert.throws(() => withAdvanceLock(j, () => { ran = true; }), /inspect its owner/);
-  assert.equal(ran, false); assert.deepEqual(fs.readFileSync(path.join(j.target, 'advance.acquire')), raw);
+  assert.equal(ran, false); assert.deepEqual(fs.readFileSync(path.join(j.stateTarget, 'advance.acquire')), raw);
 });
 
 test('initial advance intent is charged before mutation and on read-only reopening', t => {
@@ -688,10 +688,10 @@ test('initial advance intent is charged before mutation and on read-only reopeni
     {budget: candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0, allowance})}), /Aggregate/);
   assert.equal(fs.existsSync(path.join(root, '.cache/delivery-handoff/small')), false);
   const j = openAdvanceJournal(root, '.cache/delivery-handoff/full', {commit, path: 'recipe.json'});
-  const before = fs.readFileSync(path.join(j.target, 'advance.json'));
+  const before = fs.readFileSync(path.join(j.stateTarget, 'advance.json'));
   assert.throws(() => openAdvanceJournal(root, j.destination, j.intent.recipe, {resume: true,
     budget: candidateBudget([], {reserveBytes: 0, reserveDescriptors: 0, allowance})}), /Aggregate/);
-  assert.deepEqual(fs.readFileSync(path.join(j.target, 'advance.json')), before);
+  assert.deepEqual(fs.readFileSync(path.join(j.stateTarget, 'advance.json')), before);
 });
 test('real advance CLI refuses an oversized admitted config before reading recipe or creating destination', t => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'delivery-config-'));
@@ -730,8 +730,8 @@ test('journal writes and queue intent reads share admission before dispatch', as
   j.budget = budget(); let submitted = false;
   await assert.rejects(advanceQueue(j, packet, {authorizeSubmission: true, checkReview: async () => packet,
     client: async () => { submitted = true; }}), /Aggregate/);
-  assert.equal(submitted, false); assert.equal(fs.existsSync(path.join(j.target, 'queue-submission.json')), false);
-  fs.writeFileSync(path.join(j.target, 'queue-submission.json'), JSON.stringify({...packet, request_id: 'a'.repeat(36)}));
+  assert.equal(submitted, false); assert.equal(fs.existsSync(path.join(j.stateTarget, 'queue-submission.json')), false);
+  fs.writeFileSync(path.join(j.stateTarget, 'queue-submission.json'), JSON.stringify({...packet, request_id: 'a'.repeat(36)}));
   j.budget = budget();
   await assert.rejects(advanceQueue(j, packet, {client: async () => { submitted = true; }}), /Aggregate/);
   assert.equal(submitted, false);
@@ -942,11 +942,11 @@ test('real retained stale-base shape refreshes once with exact draft/ready and b
     const original = structuredClone(f.control.pr), result = await f.run();
     assert.deepEqual(result, {...original, base: {...original.base, sha: refreshRecord.after.base.sha}});
     assert.equal(f.control.writes.length, 1); assert.equal(f.control.refs, 1);
-    const intent = fs.readFileSync(path.join(f.j.target, 'pr-base-refresh.json'));
+    const intent = fs.readFileSync(path.join(f.j.stateTarget, 'pr-base-refresh.json'));
     assert.equal(readAdvanceStatus(f.j).pr_base_refresh.last_observation.result, 'verified');
     await f.run();
     assert.equal(f.control.writes.length, 1); assert.equal(f.control.refs, 2);
-    assert.deepEqual(fs.readFileSync(path.join(f.j.target, 'pr-base-refresh.json')), intent);
+    assert.deepEqual(fs.readFileSync(path.join(f.j.stateTarget, 'pr-base-refresh.json')), intent);
     assert.equal(readAdvanceStatus(f.j).pr_base_refresh.last_observation.mutation, 'observation-only');
   }
 });
@@ -954,7 +954,7 @@ test('real retained stale-base shape refreshes once with exact draft/ready and b
 test('current base and absent opt-in cannot issue a refresh mutation', async t => {
   const f = baseRefreshFixture(t); f.control.pr = structuredClone(refreshRecord.after);
   await f.run(); assert.equal(f.control.writes.length, 0); assert.equal(f.control.refs, 1);
-  assert.equal(fs.existsSync(path.join(f.j.target, 'pr-base-refresh.json')), false);
+  assert.equal(fs.existsSync(path.join(f.j.stateTarget, 'pr-base-refresh.json')), false);
   const g = baseRefreshFixture(t); delete g.review.refresh_base_metadata;
   await assert.rejects(g.run(), /Explicit/); assert.equal(g.control.writes.length, 0); assert.equal(g.control.reads, 0);
 });
@@ -969,7 +969,7 @@ test('foreign or incomplete targets and every exact-state drift refuse before PA
   for (const drift of refreshDrifts) {
     const f = baseRefreshFixture(t); f.control.onRead = (pr, read) => { if (read === 2) drift(pr); };
     await assert.rejects(f.run(), /state changed|complete open/);
-    assert.equal(f.control.writes.length, 0); assert.equal(fs.existsSync(path.join(f.j.target, 'pr-base-refresh.json')), false);
+    assert.equal(f.control.writes.length, 0); assert.equal(fs.existsSync(path.join(f.j.stateTarget, 'pr-base-refresh.json')), false);
   }
   const foreign = baseRefreshFixture(t); foreign.control.pr.base.ref = 'other';
   await assert.rejects(foreign.run(), /already targeting main/); assert.equal(foreign.control.refs, 0);
@@ -1022,12 +1022,12 @@ test('journal admission, foreign inventory and dangling intent preserve original
   const budget = baseRefreshFixture(t), admitted = budget.j.budget; let additions = 0;
   budget.j.budget = {add: item => { if (++additions === 3) throw Error('Aggregate admission'); admitted.add(item); }};
   await assert.rejects(budget.run(), /Aggregate/); assert.equal(budget.control.writes.length, 0);
-  assert.equal(fs.existsSync(path.join(budget.j.target, 'pr-base-refresh.json')), false);
+  assert.equal(fs.existsSync(path.join(budget.j.stateTarget, 'pr-base-refresh.json')), false);
   const foreign = baseRefreshFixture(t), sentinel = path.join(foreign.j.target, 'foreign.txt');
   fs.writeFileSync(sentinel, 'original', {flag: 'wx'});
   await assert.rejects(foreign.run(), /Foreign advance/); assert.equal(fs.readFileSync(sentinel, 'utf8'), 'original');
   assert.equal(foreign.control.reads, 0);
-  const linked = baseRefreshFixture(t), intent = path.join(linked.j.target, 'pr-base-refresh.json');
+  const linked = baseRefreshFixture(t), intent = path.join(linked.j.stateTarget, 'pr-base-refresh.json');
   fs.symlinkSync('missing-intent', intent); await assert.rejects(linked.run(), /Nonordinary/);
   assert.equal(fs.readlinkSync(intent), 'missing-intent'); assert.equal(linked.control.reads, 0);
 });
@@ -1133,7 +1133,7 @@ async function freshCompositionFixture(t) {
 
 test('fresh new-only composition derives both committed output pins while preserving frozen input', async t => {
   const {f, r, j, config, registry} = await freshCompositionFixture(t);
-  const original = fs.readFileSync(path.join(j.target, 'compose.intent.json'));
+  const original = fs.readFileSync(path.join(j.stateTarget, 'compose.intent.json'));
   assert.equal(r.json(registry).entries.length, 1);
   assert.equal(committedComposition(j, r, {}, registry), null);
   const composition = commitComposition(f, j);
@@ -1143,11 +1143,11 @@ test('fresh new-only composition derives both committed output pins while preser
   assert.equal(r.json(result.ledger).authority_registry_sha256, result.registry.sha256);
   assert.equal(committedComposition(j, r, {composed_ledger: {commit: result.ledger.commit, path: result.ledger.path}}, registry), null);
   assert.deepEqual(committedComposition(j, r, {composed_ledger: {commit: result.ledger.commit, path: result.ledger.path}}, result.registry), result);
-  assert.deepEqual(fs.readFileSync(path.join(j.target, 'compose.intent.json')), original);
+  assert.deepEqual(fs.readFileSync(path.join(j.stateTarget, 'compose.intent.json')), original);
   await assert.rejects(prepareAdvanceStage(j, 'compose', 'compose', {...config, registries: [result.registry]}, () => {
     throw Error('A completed composition must not rerun');
   }), /Changed stage inputs/);
-  assert.deepEqual(fs.readFileSync(path.join(j.target, 'compose.intent.json')), original);
+  assert.deepEqual(fs.readFileSync(path.join(j.stateTarget, 'compose.intent.json')), original);
   await prepareAdvanceStage(j, 'package', 'package', result, () => ({'projection.json': jsonBytes(result)}));
   const receipt = fs.readFileSync(path.join(j.target, 'compose', 'preparation.json'));
   const equivalent = commitComposition(f, j, {'preparation.json': Buffer.concat([receipt, Buffer.from('\n')])});
@@ -1201,9 +1201,9 @@ if (process.env.WORLDATLAS_DELIVERY_FIXTURE === '1') test('real five new-only au
   const expectedIds = config.ledgers.flatMap(p => r.json(p).scope_ids).sort();
   assert.deepEqual(r.json(result.ledger).scope_ids, expectedIds);
   assert.equal(r.json(result.ledger).authority_registry_sha256, accepted.sha256);
-  const before = fs.readFileSync(path.join(j.target, 'compose.intent.json'));
+  const before = fs.readFileSync(path.join(j.stateTarget, 'compose.intent.json'));
   assert.deepEqual(committedComposition(j, r, {composition}, registry), result);
-  assert.deepEqual(fs.readFileSync(path.join(j.target, 'compose.intent.json')), before);
+  assert.deepEqual(fs.readFileSync(path.join(j.stateTarget, 'compose.intent.json')), before);
 });
 
 import {acceptedReview} from '../scripts/delivery-handoff-advance.mjs';
@@ -1390,12 +1390,12 @@ test('author refresh resumes identical intent after interruption before ref, aft
   for (const point of ['intent', 'ref', 'checkout']) await t.test(point, async t => {
     const f = authorRefreshFixture(t);
     await assert.rejects(f.run({interrupt: where => { if (where === point) throw Error('interrupted ' + point); }}), /interrupted/);
-    const original = fs.readFileSync(path.join(f.j.target, 'author-tree-refresh.json'));
+    const original = fs.readFileSync(path.join(f.j.stateTarget, 'author-tree-refresh.json'));
     const intended = JSON.parse(original);
-    assert.equal(fs.existsSync(path.join(f.j.target, 'author-tree-refreshed.json')), false);
+    assert.equal(fs.existsSync(path.join(f.j.stateTarget, 'author-tree-refreshed.json')), false);
     assert.equal(f.git('rev-parse', 'HEAD'), point === 'intent' ? f.before : intended.head);
     const result = await f.run(); assert.equal(result.head, intended.head);
-    assert.deepEqual(fs.readFileSync(path.join(f.j.target, 'author-tree-refresh.json')), original);
+    assert.deepEqual(fs.readFileSync(path.join(f.j.stateTarget, 'author-tree-refresh.json')), original);
     assert.equal(f.git('status', '--porcelain', '--untracked-files=no'), '');
     assert.equal(f.calls.filter(args => args.includes('update-ref')).length, 1);
   });
@@ -1406,7 +1406,7 @@ test('author refresh refuses a genuine conflict before publication and preserves
   await assert.rejects(f.run(), /conflict or unavailable/);
   assert.equal(f.git('rev-parse', 'HEAD'), f.before);
   assert.equal(fs.readFileSync(path.join(f.root, 'shared.txt'), 'utf8'), 'author\n');
-  assert.equal(fs.existsSync(path.join(f.j.target, 'author-tree-refresh.json')), false);
+  assert.equal(fs.existsSync(path.join(f.j.stateTarget, 'author-tree-refresh.json')), false);
 });
 
 test('author refresh refuses even a clean textual merge when it changes an owned postimage', async t => {
@@ -1414,7 +1414,7 @@ test('author refresh refuses even a clean textual merge when it changes an owned
     mainChange: ({put}) => put('shared.txt', 'first\nsecond\nthird\nfourth\nmain\n')});
   await assert.rejects(f.run(), /owned postimage: shared.txt/);
   assert.equal(f.git('rev-parse', 'HEAD'), f.before);
-  assert.equal(fs.existsSync(path.join(f.j.target, 'author-tree-refresh.json')), false);
+  assert.equal(fs.existsSync(path.join(f.j.stateTarget, 'author-tree-refresh.json')), false);
 });
 
 test('author refresh preserves owned renames, deletions and file modes', async t => {
@@ -1434,7 +1434,7 @@ test('author refresh refuses foreign index, worktree and untracked collisions wi
     await assert.rejects(f.run(), kind === 'index' ? /Tracked index/ : kind === 'worktree' ? /Tracked worktree/ : /overwritten|read-tree/);
     assert.equal(f.git('rev-parse', 'HEAD'), f.before);
     assert.equal(fs.readFileSync(path.join(f.root, name), 'utf8'), 'foreign\n');
-    assert.equal(fs.existsSync(path.join(f.j.target, 'author-tree-refresh.json')), false);
+    assert.equal(fs.existsSync(path.join(f.j.stateTarget, 'author-tree-refresh.json')), false);
   });
 });
 
@@ -1451,7 +1451,7 @@ test('author refresh rejects revoked validation and foreign movement during vali
 test('author refresh never chases a changed main or adopts foreign edits after interrupted ref update', async t => {
   const f = authorRefreshFixture(t);
   await assert.rejects(f.run({interrupt: where => { if (where === 'ref') throw Error('interrupted'); }}), /interrupted/);
-  const intended = JSON.parse(fs.readFileSync(path.join(f.j.target, 'author-tree-refresh.json')));
+  const intended = JSON.parse(fs.readFileSync(path.join(f.j.stateTarget, 'author-tree-refresh.json')));
   await assert.rejects(f.run({main: f.base}), /Foreign or changed author refresh intent/);
   f.put('shared.txt', 'foreign after ref\n');
   await assert.rejects(f.run(), /Tracked worktree/);
@@ -1479,7 +1479,7 @@ for (const stop of ['intent', 'object', 'ref']) test('automatic commit resumes t
   await prepareAdvanceStage(j, 'recipe', 'recipe', {}, () => ({'recipe-index.json': Buffer.from('{"groups":[]}\n')}));
   const parent = git('rev-parse', 'HEAD');
   await assert.rejects(commitAdvanceStage(j, 'recipe', {validate, interrupt: point => {if (point === stop) throw Error('interrupted ' + stop);}}), /interrupted/);
-  const intended = JSON.parse(fs.readFileSync(path.join(j.target, 'commit-recipe.json')));
+  const intended = JSON.parse(fs.readFileSync(path.join(j.stateTarget, 'commit-recipe.json')));
   const result = await commitAdvanceStage(j, 'recipe', {validate});
   assert.equal(result.head, intended.head); assert.equal(git('rev-parse', 'HEAD^'), parent);
   assert.equal(git('rev-list', '--count', 'HEAD'), '2');
@@ -1497,7 +1497,7 @@ test('automatic commit preserves foreign staged files, claim refusal and changed
   assert.equal(git('show', ':foreign'), 'keep me'); assert.equal(git('rev-parse', 'HEAD'), parent);
   git('reset', '-q', 'HEAD', '--', 'foreign');
   await assert.rejects(commitAdvanceStage(j, 'recipe', {validate: async () => {throw Error('revoked claim');}}), /revoked claim/);
-  assert.equal(fs.existsSync(path.join(j.target, 'commit-recipe.json')), false);
+  assert.equal(fs.existsSync(path.join(j.stateTarget, 'commit-recipe.json')), false);
   fs.writeFileSync(path.join(j.target, 'recipe', 'recipe-index.json'), 'changed');
   await assert.rejects(commitAdvanceStage(j, 'recipe', {validate}), /Completed metadata changed/);
   assert.equal(git('rev-parse', 'HEAD'), parent); assert.equal(fs.readFileSync(path.join(j.root, 'foreign'), 'utf8'), 'keep me');
@@ -1549,7 +1549,7 @@ test('author refresh already containing captured main performs no commit or ref 
   const result = await f.run({main: f.base});
   assert.equal(result.status, 'current'); assert.equal(result.head, f.before);
   assert.equal(f.calls.some(args => args.includes('hash-object') || args.includes('update-ref') || args.includes('read-tree')), false);
-  assert.equal(fs.existsSync(path.join(f.j.target, 'author-tree-refresh.json')), false);
+  assert.equal(fs.existsSync(path.join(f.j.stateTarget, 'author-tree-refresh.json')), false);
 });
 
 test('author refresh respects an existing reference transaction hook refusal', async t => {
@@ -1557,7 +1557,7 @@ test('author refresh respects an existing reference transaction hook refusal', a
   fs.writeFileSync(hook, '#!/bin/sh\nif [ "$1" = prepared ]; then exit 1; fi\nexit 0\n'); fs.chmodSync(hook, 0o755);
   await assert.rejects(f.run(), /ref updates aborted by hook|update-ref/);
   assert.equal(f.git('rev-parse', 'HEAD'), f.before);
-  assert.equal(fs.existsSync(path.join(f.j.target, 'author-tree-refreshed.json')), false);
+  assert.equal(fs.existsSync(path.join(f.j.stateTarget, 'author-tree-refreshed.json')), false);
   assert.equal(f.git('status', '--porcelain', '--untracked-files=no'), '');
 });
 
@@ -1569,7 +1569,7 @@ test('author refresh refuses assume-unchanged and materialized skip-worktree edi
     await assert.rejects(f.run(), kind === 'assume' ? /Assume-unchanged/ : /Materialized skip-worktree/);
     assert.equal(f.git('rev-parse', 'HEAD'), f.before);
     assert.equal(fs.readFileSync(path.join(f.root, name), 'utf8'), 'hidden foreign edit\n');
-    assert.equal(fs.existsSync(path.join(f.j.target, 'author-tree-refresh.json')), false);
+    assert.equal(fs.existsSync(path.join(f.j.stateTarget, 'author-tree-refresh.json')), false);
   });
 });
 
@@ -1581,7 +1581,7 @@ test('automatic commit rejects hidden index edits and a forged tree outside decl
   assert.equal(fs.readFileSync(path.join(j.root, 'original'), 'utf8'), 'hidden edit');
   git('update-index', '--no-assume-unchanged', 'original'); fs.writeFileSync(path.join(j.root, 'original'), 'unchanged\n');
   await assert.rejects(commitAdvanceStage(j, 'recipe', {validate, interrupt: point => {if(point === 'intent') throw Error('stop');}}), /stop/);
-  const filename = path.join(j.target, 'commit-recipe.json'), intent = JSON.parse(fs.readFileSync(filename));
+  const filename = path.join(j.stateTarget, 'commit-recipe.json'), intent = JSON.parse(fs.readFileSync(filename));
   const originalTree = intent.tree;
   git('read-tree', intent.tree); fs.writeFileSync(path.join(j.root, 'foreign'), 'forged'); git('add', 'foreign'); intent.tree = git('write-tree');
   git('read-tree', intent.parent);
@@ -1595,7 +1595,7 @@ test('automatic commit rejects hidden index edits and a forged tree outside decl
 test('author refresh resume rejects a forged inherited selector despite valid parents and unchanged owned postimages', async t => {
   const f = authorRefreshFixture(t), name = 'data/ownership-selection.json';
   await assert.rejects(f.run({interrupt: where => { if (where === 'intent') throw Error('interrupted'); }}), /interrupted/);
-  const filename = path.join(f.j.target, 'author-tree-refresh.json'), intent = JSON.parse(fs.readFileSync(filename));
+  const filename = path.join(f.j.stateTarget, 'author-tree-refresh.json'), intent = JSON.parse(fs.readFileSync(filename));
   const originalIndex = f.git('write-tree'), originalSelector = fs.readFileSync(path.join(f.root, name));
   const owned = 'coordination/engineering/fixture/receipt.json', originalOwned = fs.readFileSync(path.join(f.root, owned));
   const originalTree = intent.tree;
@@ -1618,7 +1618,7 @@ test('author refresh resume rejects a forged inherited selector despite valid pa
   assert.deepEqual(fs.readFileSync(path.join(f.root, owned)), originalOwned);
   assert.deepEqual(fs.readFileSync(filename), forgedIntent);
   assert.equal(f.calls.some(args => args.includes('update-ref')), false);
-  assert.equal(fs.existsSync(path.join(f.j.target, 'author-tree-refreshed.json')), false);
+  assert.equal(fs.existsSync(path.join(f.j.stateTarget, 'author-tree-refreshed.json')), false);
 });
 
 test('automatic commit recovery rejects forged parent-tree allowance and preserves unrelated staged contents', async t => {
@@ -1627,7 +1627,7 @@ test('automatic commit recovery rejects forged parent-tree allowance and preserv
   await assert.rejects(commitAdvanceStage(j, 'recipe', {validate, interrupt: point => {
     if (point === 'intent') throw Error('interrupted');
   }}), /interrupted/);
-  const filename = path.join(j.target, 'commit-recipe.json'), intent = JSON.parse(fs.readFileSync(filename));
+  const filename = path.join(j.stateTarget, 'commit-recipe.json'), intent = JSON.parse(fs.readFileSync(filename));
   const head = git('rev-parse', 'HEAD'), name = 'foreign-staged', foreign = Buffer.from('preserve staged contents\n');
   fs.writeFileSync(path.join(j.root, name), foreign); git('add', name);
   const stagedTree = git('write-tree'), stagedEntry = git('ls-files', '--stage', '--', name);
@@ -1640,7 +1640,7 @@ test('automatic commit recovery rejects forged parent-tree allowance and preserv
   assert.equal(git('show', ':' + name), foreign.toString().trim());
   assert.deepEqual(fs.readFileSync(path.join(j.root, name)), foreign);
   assert.deepEqual(fs.readFileSync(filename), forgedIntent);
-  assert.equal(fs.existsSync(path.join(j.target, 'committed-recipe.json')), false);
+  assert.equal(fs.existsSync(path.join(j.stateTarget, 'committed-recipe.json')), false);
 });
 
 // Real author authority and default transition wiring; no operator execution.
@@ -1847,7 +1847,7 @@ test('default automatic delivery revalidates the real claim before committing ne
   await assert.rejects(runAutomaticDelivery(journal, config, input.reader, adapters, {validate}), /claim/);
   assert.equal(Number(f.git('rev-list', '--count', 'HEAD')), initialCount + 1);
   assert.deepEqual(readAdvanceStatus(journal).completed, ['recipe', 'requests']);
-  assert.equal(fs.existsSync(path.join(journal.target, 'committed-requests.json')), false);
+  assert.equal(fs.existsSync(path.join(journal.stateTarget, 'committed-requests.json')), false);
   const prepared = fs.readFileSync(path.join(journal.target, 'requests/delivery-001-source-request.json'));
   f.control.claim.active = true;
   const resumed = await runAutomaticDelivery(journal, config, input.reader, {prepareRequests}, {validate});
@@ -1885,9 +1885,9 @@ test('qualified stage reuse preserves immutable products and records only refere
  await prepareAdvanceStage(j,'requests','requests',{derived:'same request'},()=>{calls++;return products;},{adoption});
  assert.equal(calls,1);assert.deepEqual(readAdvanceStatus(j).completed,['requests']);
  assert.equal(fs.existsSync(path.join(j.target,'requests')),false,'no copied evidence directory');
- const event=fs.readFileSync(path.join(j.target,'requests.completed.json'));
+ const event=fs.readFileSync(path.join(j.stateTarget,'requests.completed.json'));
  await prepareAdvanceStage(j,'requests','requests',{derived:'same request'},()=>{throw Error('rerun');},{adoption});
- assert.deepEqual(fs.readFileSync(path.join(j.target,'requests.completed.json')),event);
+ assert.deepEqual(fs.readFileSync(path.join(j.stateTarget,'requests.completed.json')),event);
  assert.throws(()=>qualifiedPreparedReuse(f.reader,adoption,'retain'),/phase/);
  assert.throws(()=>qualifiedPreparedReuse(f.reader,adoption,'requests',{'request.json':Buffer.from('{}')}),/no longer matches/);
  f.files.set(commit+':qualified/request.json',Buffer.from('corrupt'));
@@ -2015,7 +2015,7 @@ test('reuse refuses an interrupted product directory without completing or chang
  await assert.rejects(prepareAdvanceStage(j,'requests','requests',{},()=>{called=true;return products;},
   {adoption:{config:{commit,path:'unused.json'},receipt:{commit,path:'unused/preparation.json'}}}),/Cannot adopt/);
  assert.equal(called,false);assert.deepEqual(fs.readFileSync(path.join(j.target,'requests/a.json')),sentinel);
- assert.equal(fs.existsSync(path.join(j.target,'requests.completed.json')),false);
+ assert.equal(fs.existsSync(path.join(j.stateTarget,'requests.completed.json')),false);
 });
 
 import {qualifyCompletedCustody} from '../scripts/delivery-handoff-advance.mjs';
@@ -2100,11 +2100,11 @@ if(process.env.WORLDATLAS_DELIVERY_ORIGINAL_FIXTURE==='1') {
   await assert.rejects(flow.nextDeliveryStage(j,changed,reader,noIssuance),/substitute execution observations/);
   next=await flow.nextDeliveryStage(j,config,reader,noIssuance);
   await prepareAdvanceStage(j,next.id,next.phase,next.input,next.produce);
-  const receipt=fs.readFileSync(path.join(j.target,'authority-original.completed.json'));
+  const receipt=fs.readFileSync(path.join(j.stateTarget,'authority-original.completed.json'));
   next=await flow.nextDeliveryStage(j,config,reader,noIssuance);
   assert.equal(next.waiting.kind,'commit');assert.equal(next.waiting.stage,'registry');
   assert.deepEqual(readAdvanceStatus(j).completed,['authority-original']);
-  assert.deepEqual(fs.readFileSync(path.join(j.target,'authority-original.completed.json')),receipt);
+  assert.deepEqual(fs.readFileSync(path.join(j.stateTarget,'authority-original.completed.json')),receipt);
   assert.equal(fs.existsSync(path.join(j.target,'recipe')),false);assert.equal(fs.existsSync(path.join(j.target,'requests')),false);
   assert.equal(fs.existsSync(path.join(j.target,'native-requests')),false);
   await t.test('actual automatic Git continuation commits original custody once and stops at current rebind',async()=>{
@@ -2122,7 +2122,7 @@ if(process.env.WORLDATLAS_DELIVERY_ORIGINAL_FIXTURE==='1') {
    const validate=async({branch,paths})=>{assert.equal(branch,'engineering/automatic-control');assert.ok(paths.every(p=>p.startsWith(j.destination+'/')));};
    await assert.rejects(flow.runAutomaticDelivery(j,config,local,adapters,{validate,
     commitStage:(journal,id,options)=>flow.commitAdvanceStage(journal,id,{...options,interrupt:point=>{if(point==='ref')throw Error('interrupted authority ref');}})}),/interrupted authority ref/);
-   const intended=JSON.parse(fs.readFileSync(path.join(j.target,'commit-authority-original.json')));
+   const intended=JSON.parse(fs.readFileSync(path.join(j.stateTarget,'commit-authority-original.json')));
    assert.equal(f.git('rev-parse','HEAD'),intended.head);
    const result=await flow.runAutomaticDelivery(j,config,local,adapters,{validate});
    assert.equal(result.kind,'rebind-terminal');
@@ -2197,7 +2197,7 @@ for (const stop of [null, 'intent', 'object', 'ref']) test('automatic commit pre
   await prepareAdvanceStage(f.j, 'recipe', 'recipe', {}, () => ({'recipe-index.json': Buffer.from('{"groups":[]}\n')}));
   if (stop) {
     await assert.rejects(commitAdvanceStage(f.j, 'recipe', {validate: f.validate, interrupt: point => {if (point === stop) throw Error('interrupted');}}), /interrupted/);
-    const intent = JSON.parse(fs.readFileSync(path.join(f.j.target, 'commit-recipe.json')));
+    const intent = JSON.parse(fs.readFileSync(path.join(f.j.stateTarget, 'commit-recipe.json')));
     // The newly hash-object-written fixture product is loose; remove just that
     // known fixture object to exercise authenticated recovery, never parent data.
     const oid = intent.files[0].oid, objects = f.git('rev-parse', '--git-path', 'objects');
@@ -2205,7 +2205,7 @@ for (const stop of [null, 'intent', 'object', 'ref']) test('automatic commit pre
     assert.ok(fs.lstatSync(loose).isFile()); fs.unlinkSync(loose); f.missing(oid);
   }
   const result = await commitAdvanceStage(f.j, 'recipe', {validate: f.validate});
-  const intent = JSON.parse(fs.readFileSync(path.join(f.j.target, 'commit-recipe.json')));
+  const intent = JSON.parse(fs.readFileSync(path.join(f.j.stateTarget, 'commit-recipe.json')));
   assert.equal(result.head, intent.head); assert.equal(f.git('rev-parse', 'HEAD^'), parent);
   assert.equal(f.git('rev-list', '--count', 'HEAD'), '2');
   const added = new Set(intent.files.map(file => file.path));
@@ -2229,7 +2229,7 @@ test('automatic sparse commit rejects unstored new products despite missing-ok i
   };
   await assert.rejects(commitAdvanceStage(f.j, 'recipe', {validate: f.validate, execute}), /cat-file|could not|Not a valid/);
   assert.equal(f.git('rev-parse', 'HEAD'), before);
-  assert.equal(fs.existsSync(path.join(f.j.target, 'commit-recipe.json')), false);
+  assert.equal(fs.existsSync(path.join(f.j.stateTarget, 'commit-recipe.json')), false);
 });
 
 
@@ -2247,7 +2247,7 @@ test('sparse automatic recovery rejects changed or deleted inherited entries in 
     const f = sparseAutomaticGitFixture(t), before = f.git('rev-parse', 'HEAD');
     await prepareAdvanceStage(f.j, 'recipe', 'recipe', {}, () => ({'recipe-index.json': Buffer.from('{}\n')}));
     await assert.rejects(commitAdvanceStage(f.j, 'recipe', {validate: f.validate, interrupt: point => {if (point === 'intent') throw Error('stop');}}), /stop/);
-    const file = path.join(f.j.target, 'commit-recipe.json'), intent = JSON.parse(fs.readFileSync(file));
+    const file = path.join(f.j.stateTarget, 'commit-recipe.json'), intent = JSON.parse(fs.readFileSync(file));
     const env = {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_INDEX_FILE: path.join(f.root, 'adversarial-index')};
     f.run(f.root, ['read-tree', intent.tree], {env});
     f.run(f.root, ['update-index', '--index-info'], {env, input: change === 'modify' ? `100644 ${intent.files[0].oid}\t${target}\n` : `0 ${'0'.repeat(40)}\t${target}\n`});
@@ -2257,5 +2257,106 @@ test('sparse automatic recovery rejects changed or deleted inherited entries in 
     fs.writeFileSync(file, JSON.stringify(intent));
     await assert.rejects(commitAdvanceStage(f.j, 'recipe', {validate: f.validate}), /undeclared paths/);
     assert.equal(f.git('rev-parse', 'HEAD'), before); f.absent.forEach(({oid}) => f.missing(oid));
+  });
+});
+
+async function legacyRuntimeFixture(t, {published = false} = {}) {
+  const f = automaticGitFixture(t), root = f.j.root;
+  fs.writeFileSync(path.join(root, '.gitignore'), '/.cache/\n'); f.git('add', '.gitignore'); f.git('commit', '-qm', 'ignore runtime cache');
+  await prepareAdvanceStage(f.j, 'recipe', 'recipe', {}, () => ({'recipe-index.json': Buffer.from('{"groups":[]}\n')}));
+  await withAdvanceLock(f.j, () => commitAdvanceStage(f.j, 'recipe', {validate: f.validate}));
+  const packet = {repo: 'ChengshuLi/WorldAtlas', pr_number: 1, head_sha: f.git('rev-parse', 'HEAD')};
+  await assert.rejects(advanceQueue(f.j, packet, {authorizeSubmission: true, checkReview: async () => packet,
+    client: async () => {throw Error('uncertain original submission');}}), /uncertain original/);
+  observeAdvance(f.j, {status: 'waiting', stage: 'current-rebind', kind: 'rebind-terminal', detail: 'Genuine external terminal required'});
+  // Reproduce the accepted legacy physical layout using unchanged v1 bytes.
+  const saved = new Map(fs.readdirSync(f.j.stateTarget).map(name => [name, fs.readFileSync(path.join(f.j.stateTarget, name))]));
+  for (const [name] of saved) fs.renameSync(path.join(f.j.stateTarget, name), path.join(f.j.target, name));
+  fs.rmdirSync(f.j.stateTarget);
+  if (published) {f.git('add', f.j.destination); f.git('commit', '-qm', 'published legacy journal');}
+  const reopen = () => openAdvanceJournal(root, f.j.destination, f.j.intent.recipe, {resume: true, budget: {add() {}}});
+  return {...f, root, saved, packet, reopen, j: reopen(), head: f.git('rev-parse', 'HEAD'), published};
+}
+for (const published of [false, true]) test('runtime separation preserves original ' + (published ? 'published' : 'untracked') + ' journal bytes and operation identities', async t => {
+  const f = await legacyRuntimeFixture(t, {published});
+  if (!published) assert.match(f.git('status', '--porcelain'), /\?\?/);
+  await withAdvanceLock(f.j, () => readAdvanceStatus(f.j));
+  assert.notEqual(f.j.stateTarget, f.j.target);
+  for (const [name, raw] of f.saved) {
+    assert.deepEqual(fs.readFileSync(path.join(f.j.stateTarget, name)), raw);
+    if (published) assert.deepEqual(fs.readFileSync(path.join(f.j.target, name)), raw);
+    else assert.equal(fs.existsSync(path.join(f.j.target, name)), false);
+  }
+  assert.equal(f.git('status', '--porcelain'), ''); assert.equal(f.git('rev-parse', 'HEAD'), f.head);
+  const j = f.reopen(), result = await withAdvanceLock(j, () => commitAdvanceStage(j, 'recipe', {validate: f.validate}));
+  assert.equal(result.resumed, true); assert.equal(f.git('rev-parse', 'HEAD'), f.head);
+  let observed = 0;
+  await withAdvanceLock(j, () => advanceQueue(j, f.packet, {authorizeSubmission: true, client: async options => {
+    assert.equal(options.observeOnly, true); assert.equal(options.resuming, true);
+    assert.equal(options.requestId, JSON.parse(f.saved.get('queue-submission.json')).request_id); observed++;
+    return {status: 'pending', request_id: options.requestId};
+  }}));
+  assert.equal(observed, 1); assert.equal(f.git('status', '--porcelain'), '');
+});
+for (const point of ['migration-intent', 'copied:advance.json', 'retired:advance.json', 'migration-complete'])
+  test('legacy runtime relocation resumes unchanged after ' + point, async t => {
+    const f = await legacyRuntimeFixture(t);
+    await assert.rejects(withAdvanceLock(f.j, () => {throw Error('action must wait');}, {interrupt: where => {if (where === point) throw Error('interrupted relocation');}}), /interrupted relocation/);
+    const j = f.reopen(); let actions = 0;
+    await withAdvanceLock(j, () => {actions++; readAdvanceStatus(j);});
+    assert.equal(actions, 1); assert.equal(f.git('rev-parse', 'HEAD'), f.head); assert.equal(f.git('status', '--porcelain'), '');
+    for (const [name, raw] of f.saved) assert.deepEqual(fs.readFileSync(path.join(j.stateTarget, name)), raw);
+  });
+test('runtime relocation refuses changed, unknown, tracked-drift and symlink inputs without losing originals', async t => {
+  for (const kind of ['changed-copy', 'unknown', 'tracked-drift', 'symlink']) await t.test(kind, async t => {
+    const f = await legacyRuntimeFixture(t, {published: kind === 'tracked-drift'});
+    const original = path.join(f.j.target, 'advance.json'), before = fs.readFileSync(original);
+    if (kind === 'changed-copy') {
+      await assert.rejects(withAdvanceLock(f.j, () => {}, {interrupt: point => {if (point === 'copied:advance.json') throw Error('stop');}}), /stop/);
+      fs.writeFileSync(path.join(f.j.runtimeTarget, 'advance.json'), '{}');
+    } else if (kind === 'unknown') fs.writeFileSync(path.join(f.j.target, 'foreign-record.json'), 'sentinel');
+    else if (kind === 'tracked-drift') fs.writeFileSync(original, JSON.stringify({...f.j.intent, started_at: '2000-01-01T00:00:00Z'}));
+    else {fs.mkdirSync(f.j.runtimeTarget, {recursive: true}); fs.symlinkSync(original, path.join(f.j.runtimeTarget, 'foreign-link'));}
+    await assert.rejects(withAdvanceLock(f.j, () => {throw Error('must not advance');}), /changed|Foreign|Occupied|published|Nonordinary/i);
+    if (kind !== 'tracked-drift') assert.deepEqual(fs.readFileSync(original), before);
+    assert.equal(f.git('rev-parse', 'HEAD'), f.head);
+  });
+});
+test('runtime cache ownership is destination-wide and blocks conflicting recipes and live owners', async t => {
+  const f = await legacyRuntimeFixture(t);
+  await withAdvanceLock(f.j, async () => {
+    const same = f.reopen();
+    await assert.rejects(async () => withAdvanceLock(same, () => {}), /Another advance process/);
+    assert.throws(() => openAdvanceJournal(f.root, f.j.destination, {...f.j.intent.recipe, commit: 'f'.repeat(40)}, {resume: true}), /Foreign or changed/);
+  });
+  assert.equal(f.git('status', '--porcelain'), '');
+});
+test('fresh automatic products pass the unchanged stock current-rebind cleanliness boundary with runtime state retained', async t => {
+  const f = automaticGitFixture(t), root = f.j.root;
+  fs.writeFileSync(path.join(root, '.gitignore'), '/.cache/\n'); f.git('add', '.gitignore'); f.git('commit', '-qm', 'ignore runtime cache');
+  await withAdvanceLock(f.j, async () => {
+    await prepareAdvanceStage(f.j, 'compose', 'compose', {}, () => ({'authority-registry.json': Buffer.from('{}\n')}));
+    await commitAdvanceStage(f.j, 'compose', {validate: f.validate});
+    observeAdvance(f.j, {status: 'waiting', stage: 'current-rebind', kind: 'rebind-terminal', detail: 'Actual terminal required'});
+  });
+  assert.equal(f.git('status', '--porcelain'), ''); assert.ok(fs.readdirSync(f.j.stateTarget).length > 3);
+  assert.match(stockCleanlinessBoundary(root), /stock cleanliness passed/);
+  fs.writeFileSync(path.join(f.j.target, 'foreign.json'), 'not runtime state');
+  assert.throws(() => stockCleanlinessBoundary(root), /Require frozen clean executing checkout/);
+});
+
+function stockCleanlinessBoundary(root) {
+  const contract = fileURLToPath(new URL('../coordination/engineering/additive-native-composition-20261009/execution-contract.py', import.meta.url));
+  const script = `import importlib.util,json,pathlib,subprocess,sys\np=pathlib.Path(sys.argv[1]);spec=importlib.util.spec_from_file_location('stock',p);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)\nroot=pathlib.Path(sys.argv[2]);git=sys.argv[3];head=subprocess.check_output([git,'-C',str(root),'rev-parse','HEAD'],text=True).strip()\npre={'code':[{'path':p} for p in json.loads((p.parent/'execution-code-paths.json').read_bytes())],'runtime':[{'role':'git','path':git}]}\ntry:m.capture(root,head,pre)\nexcept KeyError as e:\n assert e.args==('entry',),repr(e)\n print('stock cleanliness passed; absent scientific entry still refuses')\nelse:raise AssertionError('must not grant scientific execution')\n`;
+  const git = execFileSync('which', ['git'], {encoding: 'utf8'}).trim();
+  return execFileSync(process.env.WORLDATLAS_TEST_PYTHON || process.env.PYTHON || 'python3', ['-c', script, contract, root, git], {encoding: 'utf8'});
+}
+
+for (const published of [false, true]) test('first migrated action crosses stock cleanliness with ' + (published ? 'published' : 'untracked') + ' originals retained correctly', async t => {
+  const f = await legacyRuntimeFixture(t, {published});
+  await withAdvanceLock(f.j, () => {
+    assert.equal(fs.existsSync(path.join(f.j.target, 'advance.lock')), false);
+    assert.equal(fs.existsSync(path.join(f.j.stateTarget, 'advance.lock')), true);
+    assert.match(stockCleanlinessBoundary(f.root), /stock cleanliness passed/);
   });
 });

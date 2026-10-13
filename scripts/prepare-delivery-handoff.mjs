@@ -725,8 +725,7 @@ async function main(args) {
     need(config.version === 1, 'Versioned advance configuration required');
     const flow = await import('./delivery-handoff-advance.mjs');
     const recipe = flow.locate(reader, config.recipe);
-    if (phase === 'status') need(fs.existsSync(path.join(root, destination, 'advance.json')), 'No existing advance to observe');
-    const journal = flow.openAdvanceJournal(root, destination, recipe, {resume: phase === 'status' || flags.includes('--resume'), budget: reader.budget, reader});
+    const journal = flow.openAdvanceJournal(root, destination, recipe, {resume: phase === 'status' || flags.includes('--resume'), existingOnly: phase === 'status', budget: reader.budget, reader});
     if (phase === 'status') { console.log(JSON.stringify(flow.readAdvanceStatus(journal))); return; }
     let api, apiWait = 0;
     const liveAPI = async (route, method = 'GET', body) => {
@@ -734,12 +733,18 @@ async function main(args) {
       const started = performance.now();
       try { return await api(route, method, body); } finally { apiWait += performance.now() - started; }
     };
+    // Authenticate the owned author boundary before legacy runtime retirement.
+    let automaticContext;
+    if (flags.includes('--automatic')) {
+      const validate = await flow.automaticAuthorGuard(root, config, liveAPI);
+      const branch = execFileSync('git', ['symbolic-ref', '--short', 'HEAD'], {cwd: root, env: environment(), encoding: 'utf8'}).trim();
+      await validate({branch, paths: [destination + '/']});
+      automaticContext = {validate, branch};
+    }
     await flow.withAdvanceLock(journal, async () => {
       try {
-        if (flags.includes('--automatic')) {
-          const validate = await flow.automaticAuthorGuard(root, config, liveAPI);
-          const branch = execFileSync('git', ['symbolic-ref', '--short', 'HEAD'], {cwd: root, env: environment(), encoding: 'utf8'}).trim();
-          await validate({branch, paths: [destination + '/']});
+        if (automaticContext) {
+          const {validate, branch} = automaticContext;
           const result = await flow.runAutomaticDelivery(journal, config, reader,
             {prepareRequests, nativeRequests, retainProducts, composeAuthorities, rebindCustody, packageProjection,
               finalizeDelivery, freezeReview, api: liveAPI, refreshBase: flow.deliveryBaseRefreshAPI(liveAPI),

@@ -334,9 +334,30 @@ its original publications, authority pairs and current rebind custody from the
 actual selected release. Every corresponding ordinary validator still runs.
 The committed current13 recipe/config exercise this mode without scientific work.
 
-The destination contains immutable stage intents, ordinary preparation receipts,
-completion observations and timings. An identical partial metadata write can
-resume only after its exact intent and every existing byte agree. Foreign files,
+The destination contains only immutable stage products and their ordinary
+`preparation.json` receipts. For tracked `coordination/engineering/.../` products,
+local runtime state lives separately under `.cache/delivery-handoff/runtime/`, in
+a directory keyed by the exact product destination. Different recipes cannot
+acquire independent ownership over the same products. Stage intents, completion
+observations, timings, commit/queue identities, refresh records and locks stay in
+that ignored runtime directory; none becomes a scientific input. Existing
+`.cache/delivery-handoff/...` product destinations retain their co-located layout.
+
+Current `advance --resume` automatically transfers an old tracked-prefix journal
+once, under destination-wide cache ownership and the existing legacy lock. It
+records and verifies the exact runtime inventory, copies raw bytes unchanged, and
+retires only matching untracked originals. Published tracked journal records stay
+unchanged at their original paths. Product paths, preparation receipts, timestamps,
+operation IDs, commit objects and queue request IDs are preserved. Interrupted
+copy/retirement resumes from the retained transfer inventory before any action.
+The legacy lock is removed before the first action; cache ownership remains held,
+so the stock clean executing-checkout boundary needs no manual runtime shuffling.
+Continue migrated journals with the current driver: obsolete executables do not
+understand the new cache lock. Preserve the runtime directory when moving or
+releasing a workspace; it remains a local resume aid, never scientific authority.
+
+An identical partial metadata write can resume only after its exact intent and
+every existing byte agree. Foreign files,
 changed recipe/observations, symlinks and altered completed bytes refuse. A crash
 lock is recovered only when its same-host process is gone, with inspection and
 new acquisition serialized by an exclusive short guard. A process killed inside
