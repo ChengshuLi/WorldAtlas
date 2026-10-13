@@ -35,6 +35,16 @@ immutable source rows. It does not equate the parent reader inventory with all
 scientific consumption: detached readers authenticate their own inputs, while
 existing scientific loading and copied-publication checks remain authoritative.
 
+The final worker retains genuine full-build originals at this same boundary.
+For selected-data candidates it authenticates eligible author or final-worker
+archives through the trusted bootstrap, then runs current selected-output, native
+readback and delivery-smoke consumers. A worker run's workflow commit and built
+candidate commit are distinct: the authenticated inventory log binds the candidate,
+and the executed workflow must match its captured descriptor. A missing or
+incompatible original takes the ordinary full-build path; the explicit equivalence
+proof still requires actual assembly. Assembled output is never retained as a new
+full-build original.
+
 Legacy manifests keep their original provenance. They cannot establish immediate
 build capture and therefore require the ordinary full-build path under the new
 reuse policy. This removes false invalidation for later eligible selected-package
