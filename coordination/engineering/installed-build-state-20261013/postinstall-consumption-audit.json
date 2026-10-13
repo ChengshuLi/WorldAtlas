@@ -1,0 +1,90 @@
+{
+  "kind": "post-install-node-gyp-role-audit",
+  "observed_failed_run": 38356055438,
+  "original_successful_run": 38352245546,
+  "source_programme": "88bcb405e5de233ee5d219dc1f624b2413da80a0",
+  "actual_failure": "Runtime admission refused two non-normalized generated records before assembly",
+  "raw_reconstruction": [
+    {
+      "path": "original-Makefile",
+      "bytes": 14154,
+      "sha256": "f948976fbe5879441482b9021a0f62d38012c5f176a6d930f86e0e2583de42df",
+      "matches_authenticated_observation": true
+    },
+    {
+      "path": "candidate-Makefile",
+      "bytes": 14180,
+      "sha256": "d9e1e591b49d43ac26b459814c80e6c2e791c96ed5618a9b5c47dd8aff0298e6",
+      "matches_authenticated_observation": true
+    },
+    {
+      "path": "original-config.gypi",
+      "bytes": 21245,
+      "sha256": "831c712da79d2130fd6c8e27f1e9e954c29f3be90a7cd7a2fca657748d28996d",
+      "matches_authenticated_observation": true
+    },
+    {
+      "path": "candidate-config.gypi",
+      "bytes": 21255,
+      "sha256": "bee3cee32fb55733c53abe1b432611c4de3e6d8324a6162f2acb6dab924e4b8d",
+      "matches_authenticated_observation": true
+    }
+  ],
+  "root_causes": [
+    "Implicit npm node-gyp default install is legitimate without lock.hasInstallScript",
+    "Installed package gypfile:false is not evidence that no generated state exists",
+    "Former Makefile policy recognizes only one of four actual layout-dependent fields",
+    "config.gypi.variables.local_prefix was not covered"
+  ],
+  "actual_makefile_differences": [
+    "-Dmodule_root_dir",
+    "absolute -I package build/config.gypi",
+    "relative prerequisite addon.gypi",
+    "relative prerequisite common.gypi"
+  ],
+  "actual_config_differences": [
+    "variables.local_prefix"
+  ],
+  "audited_postinstall_consumers": [
+    {
+      "path": "better-sqlite3/lib/binding.js",
+      "finding": "Only prebuilds/platform-arch.node or Debug/Release native binary are loaded; no Makefile/config.gypi read or regeneration"
+    },
+    {
+      "path": "scripts/package-build.mjs",
+      "finding": "Links existing installed node_modules and launches Node build entry; no dependency installer or native regeneration"
+    },
+    {
+      "path": "scripts/assemble-selected-package.mjs",
+      "finding": "Measures runtime and repackages authenticated outputs; no npm/make/node-gyp"
+    },
+    {
+      "path": "scripts/build-static-inner.mjs",
+      "finding": "Vite index.html/src/main.js bundle, no node_modules copying"
+    },
+    {
+      "path": "scripts/build-cloudflare-inner.mjs",
+      "finding": "esbuild browser bundle hosted/cloudflare-worker.js, no custom plugin or native rebuild"
+    },
+    {
+      "path": "mapshaper.js: sanitizeGeoPackageCrsMetadata",
+      "finding": "Uses official addon constructor and native loader; does not read build metadata"
+    }
+  ],
+  "evidence_limit": "Source/callsite and exact integrity-verified package/generator evidence, not a new dynamic full-build trace or exhaustive sparse-repository grep",
+  "proposed_scope": [
+    "Ordinary positively recognized package-root build/Makefile",
+    "Ordinary positively recognized package-root build/config.gypi"
+  ],
+  "preserved_strict": [
+    "Executable and source files",
+    "Package loaders",
+    "Native/prebuilt binaries",
+    "Generated target rules",
+    "Unknown members",
+    "Exact complete producer programme"
+  ],
+  "policy": "Retain full raw inventory and explicit new non-runtime regeneration-state role; omit only recognized roles from effective runtime equality under reviewed non-consuming programme",
+  "future_obligation": "Reassess role policy if future source starts reading or regenerating from these records; any programme change already prevents reuse of original producer evidence",
+  "actual_assembly_equivalence": false
+}

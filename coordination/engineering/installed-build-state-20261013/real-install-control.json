@@ -1,0 +1,114 @@
+{
+  "kind": "real-installed-runtime-comparison-summary",
+  "original_evidence_sha256": "e676a9bc98d4188d156542f4e569cd0e7dc3a34576c5bcdebf95dc34740f14dd",
+  "node": "v24.21.0",
+  "helper_sha256": "c34a75e42d10497e1f409fec3bee9c91d74e4a80d978476b7962647e6e8fa11f",
+  "identities": [
+    {
+      "node": {
+        "bytes": 126595440,
+        "sha256": "7fde7b8afa198da66257f42ee2001d874c7355631e6d1579a5fb5ef1f246df4c"
+      },
+      "files": 13527,
+      "bytes": 656911574,
+      "sha256": "2daeb8a9d22f56cbc801646c1a8a2ee74a7e9154dc9e27bcd2f0c466f946c881",
+      "raw_bytes": 656947973,
+      "raw_sha256": "511031e6c8326e0701feb222595665a1fcbb5e9731fc6bb794368666b767e984",
+      "excluded_paths": [
+        "node_modules/better-sqlite3/build/Makefile",
+        "node_modules/better-sqlite3/build/config.gypi"
+      ]
+    },
+    {
+      "node": {
+        "bytes": 126595440,
+        "sha256": "7fde7b8afa198da66257f42ee2001d874c7355631e6d1579a5fb5ef1f246df4c"
+      },
+      "files": 13527,
+      "bytes": 656911574,
+      "sha256": "2daeb8a9d22f56cbc801646c1a8a2ee74a7e9154dc9e27bcd2f0c466f946c881",
+      "raw_bytes": 656948009,
+      "raw_sha256": "af48520444b19af1b8a5e40842a5603f53365fe514f2f8817fb991090e09de0c",
+      "excluded_paths": [
+        "node_modules/better-sqlite3/build/Makefile",
+        "node_modules/better-sqlite3/build/config.gypi"
+      ]
+    }
+  ],
+  "runtime": [
+    {
+      "node": "v24.21.0",
+      "package": "13.0.3",
+      "row": {
+        "answer": 42,
+        "version": "3.53.4"
+      },
+      "loaded": [
+        {
+          "bytes": 2226168,
+          "sha256": "6fd4292c6c5f352436cd85c9e1cb286978efa43c20ae350973f83414ced9991d"
+        }
+      ]
+    },
+    {
+      "node": "v24.21.0",
+      "package": "13.0.3",
+      "row": {
+        "answer": 42,
+        "version": "3.53.4"
+      },
+      "loaded": [
+        {
+          "bytes": 2226168,
+          "sha256": "6fd4292c6c5f352436cd85c9e1cb286978efa43c20ae350973f83414ced9991d"
+        }
+      ]
+    }
+  ],
+  "raw_differences": [
+    {
+      "path": "node_modules/better-sqlite3/build/Makefile",
+      "original": {
+        "path": "node_modules/better-sqlite3/build/Makefile",
+        "bytes": 14672,
+        "sha256": "2d5bbbe8b8a3b5fb187e82b1beb2d8ccdebd5724c2b28356dbd15ab6e9fa0e36",
+        "mode": "100644"
+      },
+      "candidate": {
+        "path": "node_modules/better-sqlite3/build/Makefile",
+        "bytes": 14698,
+        "sha256": "2921cbe74d81b2832053140319e8111cb1d507181ca6b268ccc48063a908a7c0",
+        "mode": "100644"
+      }
+    },
+    {
+      "path": "node_modules/better-sqlite3/build/config.gypi",
+      "original": {
+        "path": "node_modules/better-sqlite3/build/config.gypi",
+        "bytes": 21727,
+        "sha256": "207a0c19ef9f449f1f62105bdd803231ee2cc372a99b8be125f904033b6f5b82",
+        "mode": "100644"
+      },
+      "candidate": {
+        "path": "node_modules/better-sqlite3/build/config.gypi",
+        "bytes": 21737,
+        "sha256": "78e78cd3e4467559fc96a298f19389c8b836027ed236438f0724275309bacbee",
+        "mode": "100644"
+      }
+    }
+  ],
+  "effective_equal": true,
+  "negative_controls": [
+    {
+      "path": "node_modules/better-sqlite3/lib/binding.js",
+      "effective_identity_changed": true,
+      "changed_sha256": "b5ec1026e36fcb6abc43ffdd99492c8d73bd281df55600360a64fd8a4b7d8bfb"
+    },
+    {
+      "path": "node_modules/better-sqlite3/prebuilds/linux-x64.node",
+      "effective_identity_changed": true,
+      "changed_sha256": "42523061c6558b4eba3a1f9a224bdb5b486bab19275d043fa06c3663a516919b"
+    }
+  ],
+  "restored_effective_sha256": "2daeb8a9d22f56cbc801646c1a8a2ee74a7e9154dc9e27bcd2f0c466f946c881"
+}
