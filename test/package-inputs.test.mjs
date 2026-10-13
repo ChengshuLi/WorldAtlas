@@ -35,3 +35,11 @@ test('package declarations use actual metadata memory rather than historical bat
   await assert.rejects(readPackageInputs({route:'/repo',base:'main',api:async()=>({...blob,size:Number.MAX_SAFE_INTEGER})}),/unavailable/);
   await assert.rejects(readPackageInputs({route:'/repo',base:'main',maximumBytes:128,api:async()=>({...blob,size:1,content:'A'.repeat(1024)})}),/Encoded package metadata/);
 });
+
+
+test('original output capture and runtime evidence use the declared source boundary',()=>{
+  const definition=loadPackageInputs();
+  for(const name of ['scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs',
+    'scripts/package-inputs.mjs','scripts/package-python-runtime.py'])
+    assert(containsPackagePath(definition.inputs,name),name+' is a genuine capture dependency');
+});
