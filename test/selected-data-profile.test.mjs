@@ -1309,12 +1309,18 @@ for(const changed of [false,true])test('retained package refuses '+(changed?'cha
 function legacySourceProofFixture() {
   return fixture({mutate:f=>{
     const stem='coordination/engineering/melanesia363-additive-delivery-20261010/';
-    const names=['source-requests/000-full-component-request.json','source-qualified/000/facts.json',
-      'source-qualified/000/publication.json','source-qualified/000/inventory.jsonl.gz',
-      'native-source-operating/source000-derived-operating-view.json'];
-    const pins=names.map(name=>{
-      const bytes=execFileSync('git',['show','36ce805d29e1cfd1da6f95d1aa0f4d20ab2ab92c:'+stem+name],
+    // Retained HEAD blobs also work in the exact-tree CI checkout without
+    // fetching history. Their original 36ce805d bytes remain hash-pinned.
+    const names=[
+      ['source-requests/000-full-component-request.json','6a15237137046e136e198286831d719087a78c2c6320f82235891f2a68097f1d'],
+      ['source-qualified/000/facts.json','bead4a53cc83b254fa1e7ef709e762b9ea4117906b9fca8f1c708d357f50c568'],
+      ['source-qualified/000/publication.json','909571ab6b590215e311d79f3bac2e8dbb78d545dbcdf22a678e64a7b2f8d80d'],
+      ['source-qualified/000/inventory.jsonl.gz','4ad5edfd57eff2e06bbe97881d5f985f15f7871eba6c85e37024d63736505136'],
+      ['native-source-operating/source000-derived-operating-view.json','eec862edb5f7dd1e55d1d1446b7dfa47c4be1b3c50cbba6edb86045bdef7a10e']];
+    const pins=names.map(([name,originalHash])=>{
+      const bytes=execFileSync('git',['show','HEAD:'+stem+name],
         {maxBuffer:32*1024*1024,env:{...process.env,GIT_NO_LAZY_FETCH:'1'}});
+      assert.equal(digest(bytes),originalHash);
       return {...f.put(stem+name,bytes,true),commit:'36ce805d29e1cfd1da6f95d1aa0f4d20ab2ab92c'};
     });
     const [source_request,source_facts,publication,inventory,operating]=pins;
