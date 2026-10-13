@@ -379,11 +379,8 @@ class BootstrapTests(unittest.TestCase):
         self.trust_changes();receipt=self.verified_only('scripts/run-selected-package-proof.mjs')
         self.assertEqual(receipt['files'],sorted(names))
 
-class WorkflowBootstrapTests(unittest.TestCase):
+class WorkflowBootstrapFixture:
     def setUp(self):
-        workflow=(SOURCE_ROOT/'.github/workflows/merge-integration-checks.yml').read_text()
-        self.assertIn("python3 -I -S -B - <<'ASSEMBLY_BOOTSTRAP'",workflow)
-        self.code=textwrap.dedent(workflow.split("<<'ASSEMBLY_BOOTSTRAP'\n",1)[1].split('          ASSEMBLY_BOOTSTRAP',1)[0])
         self.temp=tempfile.TemporaryDirectory(prefix='worldatlas-inline-bootstrap-'); self.addCleanup(self.temp.cleanup)
         self.root=Path(self.temp.name); oldcwd=Path.cwd(); os.chdir(self.root); self.addCleanup(os.chdir,oldcwd)
         self.output=self.root/'output'; self.marker=self.root/'marker'
@@ -423,7 +420,7 @@ class WorkflowBootstrapTests(unittest.TestCase):
     def test_nonexact_base_falls_back_before_token_request(self):
         self.env['SELECTED_PACKAGE_TRUSTED_BASE']='main'; self.invoke(); self.assert_fallback(); self.assertFalse(self.requests)
 
-class ProofWorkflowBootstrapTests(WorkflowBootstrapTests):
+class ProofWorkflowBootstrapTests(WorkflowBootstrapFixture, unittest.TestCase):
     def setUp(self):
         super().setUp()
         workflow=(SOURCE_ROOT/'.github/workflows/selected-package-proof.yml').read_text()

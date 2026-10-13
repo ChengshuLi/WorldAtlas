@@ -270,41 +270,16 @@ test('package CI coordination paths use focused tests while builders and runners
   assert.equal(integrationProfile('engineering/example', [{filename:'scripts/classify-deployment-budget.mjs', previous_filename:'src/main.js'}]), 'full');
 });
 
-const selectedPackageSteps = ['Checkout complete package inputs','Install package Node dependencies','Install package Python dependencies',
-  'Verify package controls','Build Cloudflare package without publishing','Read back qualified native build outputs when selected',
-  'Install selected-data browser dependencies','Run selected-data consumer checks'];
-function selectedProofFixture(failedEvidence = false) {
-  const f = fixture(); f.options.testSelection = 'selected-data';
-  f.jobs = [{name:'profile',status:'completed',conclusion:'success'},
-    {name:'regression',status:'completed',conclusion:'skipped'},
-    {name:'package',status:'completed',conclusion:'success',steps:selectedPackageSteps.map(name=>({name,status:'completed',conclusion:'success'}))},
-    ...['scope','geography','evidence'].map(name=>({name,status:'completed',conclusion:'success'}))];
-  if(failedEvidence){f.run.conclusion='failure';f.jobs.find(job=>job.name==='evidence').conclusion='failure';}
-  return f;
-}
-test('selected-data proves actual package/readback/browser/consumer steps and labels omitted regression truthfully',async()=>{
-  for(const failure of [false,true]){
-    const f=selectedProofFixture(failure),proof=await integrationProof(f.options);
-    assert.equal(proof.test_selection,'selected-data');assert.equal(proof.profile,'full');
-    assert.deepEqual(await integrationProof({...f.options,runId:12,runAttempt:1}),proof);
-    assert.equal(await integrationProof({...f.options,testSelection:'complete'}),null,'cannot relabel selected inventory full');
-    assert.equal(await integrationProof({...f.options,profile:'evidence'}),null,'cannot relabel full setup evidence');
+test('selected-data never discovers or accepts author proof, including historical successful runs', async () => {
+  for (const pinned of [false, true]) {
+    const f = fixture(); let reason;
+    assert.equal(await integrationProof({...f.options, testSelection: 'selected-data',
+      ...(pinned ? {runId: 12, runAttempt: 1} : {}),
+      api: () => assert.fail('Selected-data has no author computation to discover'),
+      onUnavailable: value => {reason = value.reason;}}), null);
+    assert.equal(reason, 'selected-data-requires-final-candidate');
   }
-});
-test('selected-data refuses missing/failed/skipped/duplicate package consumers and unbound regression omission',async()=>{
-  for(const failure of [false,true])for(const name of selectedPackageSteps)for(const outcome of ['failure','skipped','missing','duplicate']){
-    const f=selectedProofFixture(failure),job=f.jobs.find(job=>job.name==='package');
-    if(outcome==='missing')job.steps=job.steps.filter(step=>step.name!==name);
-    else if(outcome==='duplicate')job.steps.push({...job.steps.find(step=>step.name===name)});
-    else job.steps.find(step=>step.name===name).conclusion=outcome;
-    assert.equal(await integrationProof(f.options),null,`${name}/${outcome}/${failure}`);
-  }
-  for(const mutate of [f=>f.jobs.push({...f.jobs.find(job=>job.name==='package')}),
-    f=>f.jobs.find(job=>job.name==='package').conclusion='failure',f=>f.jobs.find(job=>job.name==='regression').conclusion='success',
-    f=>f.jobs=f.jobs.filter(job=>job.name!=='regression'),f=>f.run.run_attempt=2,
-    f=>f.options.candidate.object.tree.sha='changed']){
-    const f=selectedProofFixture();mutate(f);assert.equal(await integrationProof({...f.options,runId:12,runAttempt:1}),null);
-  }
+  assert.equal(await integrationProof({...fixture('evidence').options, testSelection: 'selected-data'}), null);
 });
 
 test('proof fallback reports existing allowlisted decisions without extra requests',async()=>{
@@ -339,10 +314,4 @@ test('full package proof binds every producer control, readback, receipt and sta
     else job.conclusion=outcome;
     assert.equal(await integrationProof(f.options),null,outcome);
   }
-});
-
-test('the obsolete Sites reserve label cannot substitute for the actual selected Cloudflare step', async () => {
-  const f=selectedProofFixture();
-  f.jobs.find(job=>job.name==='package').steps.find(step=>step.name==='Build Cloudflare package without publishing').name='Build and enforce archive/file reserves without publishing';
-  assert.equal(await integrationProof(f.options),null);
 });

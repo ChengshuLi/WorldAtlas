@@ -235,26 +235,33 @@ function mergeFixture({capacity = 2000, afterWait, selectedFixture} = {}) {
   };
   f.options={api:f.api,repo:'owner/repo',number:20,expectedHead:f.head,policy:{version:1,mode:'enforce-new',activation_time:'2100-01-01T00:00:00Z'},
     evidenceCheck:async()=>({status:'legacy'}),candidateSleep:async()=>{}};
-  f.complete=()=>completeIntegration({...f.options,finalCapacity:true,artifactRunId:99,integrationResult:'skipped',geographyResult:'success',
-    proofRunId:44,proofRunAttempt:1,testedBase:f.base,testedCandidate:candidate,
+  f.complete=(overrides={})=>completeIntegration({...f.options,finalCapacity:true,artifactRunId:99,integrationResult:'success',geographyResult:'success',
+    testedBase:f.base,testedCandidate:candidate,
     geographyReportLoader:async()=>({version:1,method_id:'worldatlas-trusted-geography-check-v1',baseline_commit:f.base,trusted_code_commit:f.base,
-      candidate_commit:candidate,candidate_code_executed:false,published:false,source_approval:false,gate_status:'passed',status:'not-applicable'})});
+      candidate_commit:candidate,candidate_code_executed:false,published:false,source_approval:false,gate_status:'passed',status:'not-applicable'}),...overrides});
   return f;
 }
-test('real prepare and cold final-capacity consumer measure selected metadata and reuse actual narrowed proof at exact capacity',async()=>{
+test('real selected prepare has no author proof and final capacity accepts fresh composed candidate at exact capacity',async()=>{
   const preparedFixture=mergeFixture(), prepared=await prepareIntegration(preparedFixture.options);
   assert.equal(prepared.profile,'full');assert.equal(prepared.test_selection,'selected-data');assert.deepEqual(prepared.shards,[0]);
-  assert.equal(prepared.proof.test_selection,'selected-data');
+  assert.equal(prepared.proof,null);assert.equal(prepared.geography_proof,null);
   // A separate final-phase fixture has no cross-job byte cache or evidence overlap.
   const first=mergeFixture(),result=await first.complete();assert.equal(result.accepted,true);assert.equal(first.writes.length,1);
-  assert(result.final_capacity.proof_calls>10,'classifier reads missing from actual planning inventory');
+  assert.equal(result.final_capacity.proof_calls,0,'No author proof discovery or transfer on ordinary data');
   const exact=mergeFixture({capacity:result.final_capacity.required}),accepted=await exact.complete();
   assert.equal(accepted.accepted,true);assert.equal(exact.writes.length,1);
   assert(exact.afterCalls<=accepted.final_capacity.validation_call_bound);
 });
-test('actual capacity-enabled selected proof rechecks required consumer steps after waiting before any write',async()=>{
-  const f=mergeFixture({afterWait:f=>{f.jobs.find(job=>job.name==='package').steps.at(-1).conclusion='failure';}});
-  await assert.rejects(f.complete(),/proof is no longer valid/);assert.equal(f.writes.length,0);
+test('selected-data refuses absent, failed, skipped or stale final candidate checks before any merge',async()=>{
+  for(const integrationResult of [undefined,'failure','cancelled','skipped']){
+    const f=mergeFixture();await assert.rejects(f.complete({integrationResult}),/Integration tests|successful isolated/);assert.equal(f.writes.length,0);
+  }
+  for(const geographyResult of [undefined,'failure','cancelled','skipped']){
+    const f=mergeFixture();await assert.rejects(f.complete({geographyResult}),/geography check/);assert.equal(f.writes.length,0);
+  }
+  for(const overrides of [{testedBase:'e'.repeat(40)}, {testedCandidate:'e'.repeat(40)}, {integrationResult:'skipped',proofRunId:44,proofRunAttempt:1}]){
+    const f=mergeFixture();await assert.rejects(f.complete(overrides));assert.equal(f.writes.length,0);
+  }
 });
 
 // Retained real UKR metadata, not an idealized two-row ledger. Only a new hook,
@@ -530,9 +537,9 @@ test('real SOURCE metadata entry and cold final-capacity proof include every add
   const gate=gateFixture(retainedSourceFixture()),selection=await gate.gate();
   assert.equal(selection.test_selection,'selected-data');assert.equal(selection.profile,'full');assert.equal(selection.package.full,true);
   const prep=mergeFixture({selectedFixture:retainedSourceFixture()}),prepared=await prepareIntegration(prep.options);
-  assert.equal(prepared.test_selection,'selected-data');assert.equal(prepared.proof.test_selection,'selected-data');
+  assert.equal(prepared.test_selection,'selected-data');assert.equal(prepared.proof,null);assert.equal(prepared.geography_proof,null);
   const cold=mergeFixture({selectedFixture:retainedSourceFixture()}),result=await cold.complete();
-  assert.equal(result.accepted,true);assert(result.final_capacity.proof_calls>30);
+  assert.equal(result.accepted,true);assert.equal(result.final_capacity.proof_calls,0);
   const exact=mergeFixture({capacity:result.final_capacity.required,selectedFixture:retainedSourceFixture()});
   const accepted=await exact.complete();assert.equal(accepted.accepted,true);assert.equal(exact.writes.length,1);
   assert(exact.afterCalls<=accepted.final_capacity.validation_call_bound);
@@ -763,9 +770,9 @@ test('fixed COD/PHL lean declarations reach actual author selection and cold fin
   const gate=await fixedConsumerFixture({gate:true}),selection=await gate.gate();
   assert.equal(selection.test_selection,'selected-data');assert.deepEqual(selection.shards,[0]);assert.equal(selection.package.full,true);
   const prep=await fixedConsumerFixture(),prepared=await prepareIntegration(prep.options);
-  assert.equal(prepared.test_selection,'selected-data');assert.equal(prepared.proof.test_selection,'selected-data');
+  assert.equal(prepared.test_selection,'selected-data');assert.equal(prepared.proof,null);assert.equal(prepared.geography_proof,null);
   const cold=await fixedConsumerFixture(),result=await cold.complete();
-  assert.equal(result.accepted,true);assert(result.final_capacity.proof_calls>30);
+  assert.equal(result.accepted,true);assert.equal(result.final_capacity.proof_calls,0);
   const exact=await fixedConsumerFixture({capacity:result.final_capacity.required}),accepted=await exact.complete();
   assert.equal(accepted.accepted,true);assert.equal(exact.writes.length,1);
   assert(exact.afterCalls<=accepted.final_capacity.validation_call_bound);
@@ -863,7 +870,7 @@ test('real PR1753 selection reaches author profile and cold final-capacity valid
   const gate=gateFixture(await ready()),selection=await gate.gate();
   assert.equal(selection.test_selection,'selected-data');assert.equal(selection.profile,'full');assert.equal(selection.package.full,true);
   const cold=mergeFixture({selectedFixture:await ready()}),result=await cold.complete();
-  assert.equal(result.accepted,true);assert(result.final_capacity.proof_calls>300);
+  assert.equal(result.accepted,true);assert.equal(result.final_capacity.proof_calls,0);
   const exact=mergeFixture({capacity:result.final_capacity.required,selectedFixture:await ready()}),accepted=await exact.complete();
   assert.equal(accepted.accepted,true);assert(exact.afterCalls<=accepted.final_capacity.validation_call_bound);
 });
@@ -969,7 +976,7 @@ test('retained nested delivery needs authenticated current issue scope through P
   assert.equal(prepared.test_selection, 'selected-data');
   const final = mergeFixture({selectedFixture:ownedFixture()});
   const result = await final.complete(); assert.equal(result.accepted, true); assert.equal(final.writes.length, 1);
-  assert(result.final_capacity.proof_calls > 10, 'cold selected metadata reads are capacity-planned');
+  assert.equal(result.final_capacity.proof_calls,0);
 });
 for (const [name, change] of Object.entries({
   'missing current scope':f => f.issue.body = f.issue.body.replace(/,"owned_paths":\[[^\]]*\]/, ''),
@@ -1124,7 +1131,7 @@ test('actual PR1770 reaches authenticated author and cold queue proof with compl
   assert.equal((await gateFixture(real1770()).select()).test_selection,'selected-data');
   const prep=await prepareIntegration(mergeFixture({selectedFixture:real1770()}).options);assert.equal(prep.test_selection,'selected-data');
   const final=mergeFixture({selectedFixture:real1770()}), result=await final.complete();
-  assert.equal(result.accepted,true);assert.equal(final.writes.length,1);assert(result.final_capacity.proof_calls>100);
+  assert.equal(result.accepted,true);assert.equal(final.writes.length,1);assert.equal(result.final_capacity.proof_calls,0);
 });
 for(const [label,mutate] of Object.entries({
   'two authoritative expectations':f=>{const names=f.files.filter(row=>row.filename.endsWith('/selected-delivery-expectations.json')).map(row=>row.filename);const final=names.find(name=>f.document(name).selected_ledger_sha256);f.put(names.find(name=>name!==final),f.document(final));},
