@@ -324,7 +324,7 @@ test('Cloudflare label and artifacts do not claim the separate Sites reserve mea
 function checkoutBootstrapBodies() {
   return ['merge-integration-checks.yml','worker-merge.yml'].flatMap(workflow => {
     const source=fs.readFileSync(path.join(root,'.github/workflows',workflow),'utf8');
-    return [...source.matchAll(/python3 -I -B - <<'CHECKOUT_BOOTSTRAP'\n([\s\S]*?)          CHECKOUT_BOOTSTRAP/g)]
+    return [...source.matchAll(/python3 -I -S -B - <<'CHECKOUT_BOOTSTRAP'\n([\s\S]*?)          CHECKOUT_BOOTSTRAP/g)]
       .map(match=>({workflow,body:match[1].split('\n').map(line=>line.slice(10)).join('\n')}));
   });
 }
@@ -402,7 +402,7 @@ finally:
  for server in servers: server.server_close()
  json.dump(calls,open(sys.argv[3],'w'))
 `;
-    const result=spawnSync('python3',['-I','-B','-c',wrapper,source,input,trace],{encoding:'utf8',timeout:10000,
+    const result=spawnSync('python3',['-I','-S','-B','-c',wrapper,source,input,trace],{encoding:'utf8',timeout:10000,
       env:{...process.env,WORLDATLAS_CHECKOUT_TOKEN:'fixture-secret-never-print',CI_CHECKOUT_REPOSITORY:fixture.repo,
         CI_CHECKOUT_BASE:fixture.base,CI_CHECKOUT_SHA:fixture.sha,CI_CHECKOUT_PR:queue?'':'17',CI_CHECKOUT_HEAD_REF:'engineering/fixture',RUNNER_TEMP:temp,GITHUB_OUTPUT:output}});
     const outputs=Object.fromEntries((fs.existsSync(output)?fs.readFileSync(output,'utf8'):'').trim().split('\n').filter(Boolean).map(row=>{const split=row.indexOf('=');return[row.slice(0,split),row.slice(split+1)];}));
@@ -492,7 +492,7 @@ test('full-checkout bootstrap accepts live main movement while authenticating on
 
 test('full-checkout canonical verification executes against real Git and refuses mismatched identity or retained credentials',()=>{
   const bodies=['merge-integration-checks.yml','worker-merge.yml'].flatMap(workflow=>
-    [...fs.readFileSync(path.join(root,'.github/workflows',workflow),'utf8').matchAll(/python3 -I -B - <<'CHECKOUT_VERIFY'\n([\s\S]*?)          CHECKOUT_VERIFY/g)]
+    [...fs.readFileSync(path.join(root,'.github/workflows',workflow),'utf8').matchAll(/python3 -I -S -B - <<'CHECKOUT_VERIFY'\n([\s\S]*?)          CHECKOUT_VERIFY/g)]
       .map(match=>match[1].split('\n').map(line=>line.slice(10)).join('\n')));
   assert.equal(bodies.length,3);assert.equal(new Set(bodies).size,1);
   for(const kind of ['valid','wrong-head','wrong-tree','attached','header','credential-helper','remote-credential','inherited-token']){
@@ -510,7 +510,7 @@ test('full-checkout canonical verification executes against real Git and refuses
       const env={...process.env,CI_CHECKOUT_REPOSITORY:'ChengshuLi/WorldAtlas',CI_CHECKOUT_SHA:kind==='wrong-head'?'a'.repeat(40):sha,CI_CHECKOUT_TREE:kind==='wrong-tree'?'b'.repeat(40):tree};
       for(const key of ['WORLDATLAS_CHECKOUT_TOKEN','GH_TOKEN','GITHUB_TOKEN'])delete env[key];
       if(kind==='inherited-token')env.WORLDATLAS_CHECKOUT_TOKEN='fixture-secret-never-print';
-      const result=spawnSync('python3',['-I','-B','-c',bodies[0]],{cwd:directory,env,encoding:'utf8',timeout:10000});
+      const result=spawnSync('python3',['-I','-S','-B','-c',bodies[0]],{cwd:directory,env,encoding:'utf8',timeout:10000});
       assert.equal(result.status===0,kind==='valid',kind+': '+result.stderr);assert.doesNotMatch(result.stdout+result.stderr,/fixture-secret-never-print/);
     }finally{fs.rmSync(directory,{recursive:true,force:true});}
   }

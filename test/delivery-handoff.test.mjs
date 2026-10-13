@@ -343,12 +343,13 @@ test('final package appends preserve the entire accepted prefix and validate dup
   assert.deepEqual(finalizedPackageInputs({...original, optional_inputs: [prefix + 'obsolete.json']}, prefix, paths).optional_inputs, [prefix + 'obsolete.json']);
 });
 
-function finalizationFixture() {
+function finalizationFixture({historical = false, custodyPin = null} = {}) {
   const f = authorityFixture(), r = f.reader, owned = 'coordination/engineering/finalize/';
   const composed = composeAuthorities({registries: [r.add(prefix + 'original-registry.json', f.registry)], ledgers: [r.add(prefix + 'original-ledger.json', f.ledger)]}, r);
   const registry = r.add(owned + 'registry.json', composed['authority-registry.json']);
   const ledger = r.add(owned + 'ledger.json', composed['composed-original-ledger.json']);
-  const stub = r.add(owned + 'custody.json', {}), operating = r.add(owned + 'operating.json', {execution_custody: {terminal: stub}});
+  const retained = historical ? 'coordination/engineering/accepted-original/' : owned;
+  const stub = {...r.add(retained + 'custody.json', {}), ...(custodyPin ?? {})}, operating = r.add(retained + 'operating.json', {execution_custody: {terminal: stub}});
   const rebind = r.add(owned + 'certificate.json', {request: stub, facts: stub, publication: stub, result: stub, operating});
   const selected_ledger = r.add(owned + 'selected.json', {...r.json(ledger), current_rebind: rebind, current_targets: {target: true}});
   const baseReference = {id: 'base', footprints_sha256: 'b'.repeat(64), hierarchy_sha256: 'c'.repeat(64)};
@@ -400,6 +401,93 @@ test('finalization rejects coherent foreign sidecar/base/ledger/envelope binding
   }
 });
 
+
+test('finalization appends authenticated inherited read roles without widening output ownership', () => {
+  const {reader, config} = finalizationFixture({historical: true});
+  const original = reader.json(config.package_inputs), result = finalizeDelivery(config, reader);
+  const actual = JSON.parse(result['package-inputs.json']);
+  assert.deepEqual(actual.inputs.slice(0, original.inputs.length), original.inputs);
+  assert.ok(actual.inputs.includes('coordination/engineering/accepted-original/custody.json'));
+  assert.ok(actual.inputs.includes('coordination/engineering/accepted-original/operating.json'));
+  assert.ok(Object.keys(result).every(name => !name.includes('/')));
+  const foreign = reader.add('coordination/engineering/unbound/existing.json', {});
+  assert.throws(() => finalizeDelivery({...config, outer_roles: [foreign]}, reader), /derived outer roles/);
+  assert.throws(() => finalizedPackageInputs(original, config.new_prefix, [foreign.path]), /owned package/);
+});
+
+test('finalization refuses changed, absent or nonordinary inherited read identities', () => {
+  for (const change of [p => ({...p, sha256: '0'.repeat(64)}), p => ({...p, bytes: p.bytes + 1}),
+    p => ({...p, blob: '0'.repeat(40)}), p => ({...p, mode: '100755'}),
+    () => { throw new Error('missing accepted inherited path'); }]) {
+    const {reader, config} = finalizationFixture({historical: true}), originalPin = reader.pin;
+    reader.pin = (c, name) => name === 'coordination/engineering/accepted-original/custody.json'
+      ? change(originalPin(c, name)) : originalPin(c, name);
+    assert.throws(() => finalizeDelivery(config, reader), /accepted path identity|missing accepted inherited path/);
+  }
+});
+
+test('finalization checks the independent Git package baseline, not the role source commit', t => {
+  const root = directory(t), name = 'coordination/engineering/accepted-original/custody.json';
+  const git = (...args) => execFileSync('git', args, {cwd: root, stdio: ['pipe','pipe','pipe']}).toString().trim();
+  git('init'); git('config','user.name','Fixture'); git('config','user.email','fixture@example.invalid');
+  write(root, 'baseline.txt', 'baseline'); git('add','.'); git('commit','-m','Absent baseline');
+  const absent = git('rev-parse','HEAD');
+  write(root, name, jsonBytes({changed: true})); git('add','.'); git('commit','-m','Different baseline');
+  const changed = git('rev-parse','HEAD');
+  write(root, name, jsonBytes({})); git('add','.'); git('commit','-m','Original source body');
+  const source = git('rev-parse','HEAD'), actual = pinReader(root);
+  assert.deepEqual(actual.json(actual.pin(source,name)), {});
+  const restored = finalizationFixture({historical: true, custodyPin: actual.pin(source,name)});
+  const originalPin = restored.reader.pin;
+  restored.config.package_inputs = {...restored.config.package_inputs, commit: absent};
+  restored.config.restored_read_roles = {commit: source, paths: [name]};
+  restored.reader.hasPath = (c,p) => { assert.equal(c,absent); return actual.hasPath(c,p); };
+  restored.reader.pin = (c,p) => p === name ? actual.pin(c,p) : originalPin(commit,p);
+  assert.ok(JSON.parse(finalizeDelivery(restored.config,restored.reader)['package-inputs.json']).inputs.includes(name));
+  restored.config.restored_read_roles.commit = changed;
+  assert.throws(()=>finalizeDelivery(restored.config,restored.reader), /Restored snapshot differs/);
+  for (const baseline of [absent, changed]) {
+    const {reader,config} = finalizationFixture({historical: true}), originalPin = reader.pin, calls = [];
+    config.package_inputs = {...config.package_inputs, commit: baseline};
+    reader.pin = (c,p) => { calls.push(c); return p === name ? actual.pin(c,p) : originalPin(commit,p); };
+    assert.throws(() => finalizeDelivery(config,reader), /Missing ordinary exact Git body|accepted path identity/);
+    assert.ok(calls.length && calls.every(c => c === baseline));
+    assert.ok(!calls.includes(source));
+  }
+});
+
+test('finalization admits only an exact committed restoration of absent canonical read roles', () => {
+  const setup = () => {
+    const f = finalizationFixture({historical: true}), original = f.reader.pin;
+    const paths = ['custody.json','operating.json'].map(n => 'coordination/engineering/accepted-original/' + n);
+    const snapshot = 'b'.repeat(40);
+    f.config.restored_read_roles = {commit: snapshot, paths: [...paths]};
+    f.reader.hasPath = (c,p) => { assert.equal(c,commit); return !paths.includes(p); };
+    f.reader.pin = (c,p) => {
+      if (paths.includes(p)) { assert.equal(c,snapshot); return {...original(commit,p), commit: snapshot}; }
+      return original(c,p);
+    };
+    return f;
+  };
+  const f = setup(), output = finalizeDelivery(f.config,f.reader);
+  const inputs = JSON.parse(output['package-inputs.json']).inputs;
+  for (const name of f.config.restored_read_roles.paths) assert.ok(inputs.includes(name));
+  for (const mutate of [
+    f => f.config.restored_read_roles.paths.push(f.config.restored_read_roles.paths[0]),
+    f => f.config.restored_read_roles.paths.push('coordination/engineering/unbound/existing.json'),
+    f => f.config.restored_read_roles.paths.push(f.config.selected_ledger.path),
+    f => f.config.restored_read_roles.paths.pop(),
+    f => { const old=f.reader.pin; f.reader.pin=(c,p)=>c==='b'.repeat(40)?{...old(c,p),sha256:'0'.repeat(64)}:old(c,p); },
+    f => { const old=f.reader.pin; f.reader.pin=(c,p)=>c==='b'.repeat(40)?{...old(c,p),mode:'120000'}:old(c,p); },
+    f => { const old=f.reader.pin; f.reader.pin=(c,p)=>{ if(c==='b'.repeat(40)) throw Error('missing snapshot'); return old(c,p); }; },
+    f => { f.reader.hasPath=()=>true; const old=f.reader.pin; f.reader.pin=(c,p)=>old(c===commit?'b'.repeat(40):c,p); }
+  ]) { const g=setup(); mutate(g); assert.throws(()=>finalizeDelivery(g.config,g.reader), /inventory|required|accepted path identity/); }
+  const g=setup(); g.config.restored_read_roles.paths=[];
+  assert.throws(()=>finalizeDelivery(g.config,g.reader), /inventory required/);
+  const h=setup(); delete h.config.restored_read_roles;
+  assert.throws(()=>finalizeDelivery(h.config,h.reader), error => h.reader &&
+    error.message.includes('accepted-original/custody.json') && error.message.includes('accepted-original/operating.json'));
+});
 
 test('finalization refuses a new identity at an accepted package path', () => {
   const {reader,config} = finalizationFixture();

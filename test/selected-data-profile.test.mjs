@@ -921,15 +921,19 @@ test('actual immutable transport retains required metadata but not cumulative su
 test('machine observations tighten admission during reads and immediately before decoding',async()=>{
  for(const pressure of ['read','decode','zero','invalid']){
   const name=prefix+'support.json.gz',f=fixture({mutate:f=>f.put(name,gzipSync(JSON.stringify('x'.repeat(64*1024))))});
-  const original=process.availableMemory,api=f.api,stats={};let observed=1024*1024;
+  const original=process.availableMemory,api=f.api,stats={};let observed=1024*1024,pressuredAt=null;
   f.api=memoizeImmutableGitBlobs(async(...args)=>{
    const response=await api(...args);
-   if(pressure==='read'&&f.reads.length===1)observed=8;
-   if(args[0].endsWith(f.authored.entries.get(name).sha))observed=pressure==='zero'?0:pressure==='invalid'?NaN:64*1024;
+   if(pressure==='read'&&f.reads.length===1){observed=8;pressuredAt=f.reads.length;}
+   if(args[0].endsWith(f.authored.entries.get(name).sha)){observed=pressure==='zero'?0:pressure==='invalid'?NaN:64*1024;pressuredAt=f.reads.length;}
    return response;
   });
   process.availableMemory=()=>observed;
-  try {assert.equal(await f.run({metadataDiagnostics:stats}),null,pressure);assert.match(stats.failure,/metadata (memory|admission)/);}
+  // Both the shared package declaration reader and selected metadata reader
+  // enforce live admission. The first refusing layer may use a generic reason;
+  // prove refusal and no further reads rather than require one error spelling.
+  try {assert.equal(await f.run({metadataDiagnostics:stats}),null,pressure);assert.ok(stats.failure,pressure);
+   assert.notEqual(pressuredAt,null,pressure);assert.equal(f.reads.length,pressuredAt,pressure);}
   finally {process.availableMemory=original;}
   assert(stats.peak_admitted_bytes<=stats.limit_bytes);
  }
@@ -998,9 +1002,9 @@ test('retained inert text stays ordinary, bounded, unconsumed and outside packag
     assert.equal(await ownedFixture({mutate:f=>f.put('coordination/engineering/retained-delivery/new-packet/'+name,raw)}).run(),null,name);
   }
 });
-function templateFixture(change = () => {}) {
+function templateFixture(change = () => {}, suffix = 'prospective') {
   return ownedFixture({mutate:f=>{
-    const root='coordination/engineering/retained-delivery/new-packet/', directory=root+'prospective';
+    const root='coordination/engineering/retained-delivery/new-packet/', directory=root+suffix;
     const expected={...f.expected, selected_ledger_sha256:null};
     const config={version:1, registry:f.registry, ledger:f.leaf('composed-original-ledger.json'),
       rebind:f.ledgerBody.current_rebind, new_prefix:root};
@@ -1020,6 +1024,38 @@ test('one current-bound expectation disambiguates an exact unconsumed package te
   assert.equal(result.expectations_path,f.packetPrefix+'selected-delivery-expectations.json');
   assert.equal((await gateFixture(templateFixture()).select()).test_selection,'selected-data');
 });
+test('automatic package publishes immutable input custody and classifies without any runtime cache in Git', async t => {
+  const fs = await import('node:fs'), os = await import('node:os'), path = await import('node:path');
+  const flow = await import('../scripts/delivery-handoff-advance.mjs');
+  const root = fs.mkdtempSync(path.join(os.tmpdir(),'package-input-custody-'));
+  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
+  let input, directory;
+  const f=templateFixture(v=>{input=v.config;directory=v.directory;},'advance/package');
+  const journal=flow.openAdvanceJournal(root,path.posix.dirname(directory),{commit:'a'.repeat(40),path:'recipe.json'});
+  const products=Object.fromEntries(['package-roles.json','selected-delivery-expectations.json'].map(name=>
+    [name,f.blobs.get(f.authored.entries.get(directory+'/'+name).sha)]));
+  await flow.withAdvanceLock(journal,()=>flow.prepareAdvanceStage(journal,'package','package',input,()=>products));
+  assert.notEqual(journal.stateTarget,journal.target);
+  const git=(...args)=>execFileSync('git',args,{cwd:root,encoding:'utf8',stdio:['pipe','pipe','pipe']}).trim();
+  git('init');git('config','user.name','Fixture');git('config','user.email','fixture@example.invalid');
+  git('add','coordination');git('commit','-m','Immutable package products');
+  assert.ok(!git('ls-files').includes('.cache'));
+  assert.ok(!git('ls-files').includes('.intent.json'));
+  const legacy=directory+'.intent.json';f.authored.entries.delete(legacy);f.files.splice(f.files.findIndex(row=>row.filename===legacy),1);
+  for(const name of [...Object.keys(products),'preparation.json']) f.put(directory+'/'+name,Buffer.from(execFileSync('git',['show','HEAD:'+directory+'/'+name],{cwd:root})));
+  const original=JSON.parse(f.blobs.get(f.authored.entries.get(directory+'/preparation.json').sha));assert.deepEqual(original.input,input);
+  assert.equal((await f.run()).test_selection,'selected-data');
+  for(const mutate of [r=>delete r.input,r=>r.input.registry.path='coordination/engineering/foreign/registry.json',
+    r=>r.binding.config_sha256='0'.repeat(64),r=>r.outputs['package-roles.json'].bytes++,
+    r=>r.input.new_prefix='coordination/engineering/foreign/']) {
+    const changed=structuredClone(original);mutate(changed);f.put(directory+'/preparation.json',changed);
+    assert.equal(await f.run(),null);
+  }
+  f.put(directory+'/preparation.json',original);
+  f.put(legacy,{version:1,stage:'package',binding:original.binding,config:{...input,new_prefix:'coordination/engineering/foreign/'}});
+  f.files.push({filename:legacy,status:'added'});assert.equal(await f.run(),null);
+});
+
 for (const [name,change] of Object.entries({
   'two authoritative candidates':({f,directory})=>f.put(directory+'/selected-delivery-expectations.json',f.expected),
   'incorrect current ledger binding':({f,root})=>f.put(root+'selected-delivery-expectations.json',{...f.expected,selected_ledger_sha256:'f'.repeat(64)}),

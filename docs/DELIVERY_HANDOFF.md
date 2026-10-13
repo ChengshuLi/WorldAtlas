@@ -334,9 +334,30 @@ its original publications, authority pairs and current rebind custody from the
 actual selected release. Every corresponding ordinary validator still runs.
 The committed current13 recipe/config exercise this mode without scientific work.
 
-The destination contains immutable stage intents, ordinary preparation receipts,
-completion observations and timings. An identical partial metadata write can
-resume only after its exact intent and every existing byte agree. Foreign files,
+The destination contains only immutable stage products and their ordinary
+`preparation.json` receipts. For tracked `coordination/engineering/.../` products,
+local runtime state lives separately under `.cache/delivery-handoff/runtime/`, in
+a directory keyed by the exact product destination. Different recipes cannot
+acquire independent ownership over the same products. Stage intents, completion
+observations, timings, commit/queue identities, refresh records and locks stay in
+that ignored runtime directory; none becomes a scientific input. Existing
+`.cache/delivery-handoff/...` product destinations retain their co-located layout.
+
+Current `advance --resume` automatically transfers an old tracked-prefix journal
+once, under destination-wide cache ownership and the existing legacy lock. It
+records and verifies the exact runtime inventory, copies raw bytes unchanged, and
+retires only matching untracked originals. Published tracked journal records stay
+unchanged at their original paths. Product paths, preparation receipts, timestamps,
+operation IDs, commit objects and queue request IDs are preserved. Interrupted
+copy/retirement resumes from the retained transfer inventory before any action.
+The legacy lock is removed before the first action; cache ownership remains held,
+so the stock clean executing-checkout boundary needs no manual runtime shuffling.
+Continue migrated journals with the current driver: obsolete executables do not
+understand the new cache lock. Preserve the runtime directory when moving or
+releasing a workspace; it remains a local resume aid, never scientific authority.
+
+An identical partial metadata write can resume only after its exact intent and
+every existing byte agree. Foreign files,
 changed recipe/observations, symlinks and altered completed bytes refuse. A crash
 lock is recovered only when its same-host process is gone, with inspection and
 new acquisition serialized by an exclusive short guard. A process killed inside
@@ -627,3 +648,34 @@ its supported fragment, two original cells and nonempty remainder. Run with
 `GIT_NO_LAZY_FETCH=1` and the exact objects already present. It performs no
 SOURCE/NATIVE/rebind execution and claims no subsequent-batch adoption. Default
 CI retains its bounded contract controls without fetching historical science.
+
+### Inherited package read roles and explicit historical restoration
+
+Finalization derives its package read roles from the authenticated authority,
+original custody and current release metadata. An out-of-prefix role that exists
+at the accepted package baseline must have the exact ordinary mode, Git object,
+size and SHA-256 there. It need not already be listed in package inputs. Existing
+package declarations are preserved as a prefix; covered directory members are
+not redundantly appended. New output ownership is unchanged.
+
+When an original consumed role is absent from that baseline, first reconcile its
+exact restoration write path in the ordinary issue/claim scope and commit the
+unchanged original body. Then supply `restored_read_roles` in standalone finalize
+configuration, or `observations.restored_read_roles` for automatic continuation:
+`{"commit":"<exact restoration commit>","paths":["<original role path>"]}`.
+The finalizer checks each role against its original custody and that committed
+snapshot; it does not restore files or grant write authority. Duplicate, unbound,
+changed, nonordinary, missing or accepted-path-overwriting entries fail. Original
+custody commits stay unchanged. All foreign-role identity failures are reported
+together so the complete scope can be reconciled before retrying. This descriptor
+is part of the immutable finalize-stage input; an already failed stage must keep
+its original intent and use a truthful new preparation vintage for changed input.
+
+Automatic `package` stages retain their exact immutable input in the committed
+`preparation.json`, authenticated by its existing configuration hash and output
+inventory. The selected classifier consumes this product provenance without
+requiring any runtime cache or `package.intent.json` in Git. Existing published
+legacy intent/receipt pairs remain supported; an already-written legacy receipt
+keeps its exact bytes during interrupted recovery. Standalone package publication
+continues to use its existing receipt/configuration contract. Runtime observations,
+locks, timestamps and dispatch intent are never added to the product receipt.

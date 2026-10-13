@@ -15,7 +15,14 @@ const producerSteps = [
   'Test applicable combined-tree invariants without publishing or live imports',
   'Retain native built-output readback'
 ];
-const makeZip = (entries, streaming = false, forceZip64 = false) => execFileSync('python3', ['-I', '-B', '-c', `
+const authorSteps = [
+  'Verify full-regression package controls', 'Build hosted assets',
+  'Read back qualified native build outputs when selected', 'Complete regression shard',
+  'Verify full-regression package receipt', 'Retain native built-output readback',
+  'Retain full-regression package receipt'
+];
+const authorReceipt = 'Actual reviewed-head Cloudflare package and applicable native readback receipts verified.';
+const makeZip = (entries, streaming = false, forceZip64 = false) => execFileSync('python3', ['-I', '-S', '-B', '-c', `
 import base64, io, json, stat, sys, zipfile
 options = json.load(sys.stdin)
 entries = options['entries']
@@ -33,7 +40,7 @@ with zipfile.ZipFile(output, 'w', compression=zipfile.ZIP_DEFLATED) as package:
 sys.stdout.buffer.write(output.getvalue())
 `], {input: JSON.stringify({entries, streaming, forceZip64}), env: {PATH: '/usr/bin:/bin'}, maxBuffer: 32 * 1048576});
 const entry = (name, body, options = {}) => ({name, body: Buffer.from(body).toString('base64'), ...options});
-function fixture({smoke = true, reportChange, zipChange, archiveChange, streaming = false, forceZip64 = false} = {}) {
+function fixture({author = false, smoke = !author, reportChange, zipChange, archiveChange, streaming = false, forceZip64 = false} = {}) {
   const pin = (path, body) => ({path, bytes: Buffer.byteLength(body), sha256: hash(body)});
   const assets = [pin('atlas-geography.json', '{}'), pin('native/rows.bin', 'rows')];
   const report = {version: 1, kind: 'ordinary-cloudflare-built-output-readback', head: expectedHead,
@@ -49,20 +56,24 @@ function fixture({smoke = true, reportChange, zipChange, archiveChange, streamin
   entries = zipChange?.(entries) ?? entries;
   let archive = makeZip(entries, streaming, forceZip64);
   archive = archiveChange?.(archive) ?? archive;
-  const run = {id: 17, run_attempt: 2, head_sha: workflowHead, head_branch: 'main', event: 'workflow_dispatch',
-    path: '.github/workflows/worker-merge.yml', status: 'completed', conclusion: 'success',
-    repository: {full_name: repo}, head_repository: {full_name: repo}};
-  const job = {id: 29, run_id: 17, run_attempt: 2, head_sha: workflowHead, name: 'integration (0)',
-    status: 'completed', conclusion: 'success', steps: producerSteps.map((name, index) =>
+  const run = {id: 17, run_attempt: 2, head_sha: workflowHead, head_branch: author ? 'engineering/native102' : 'main',
+    event: author ? 'pull_request' : 'workflow_dispatch',
+    path: author ? '.github/workflows/merge-integration-checks.yml' : '.github/workflows/worker-merge.yml', status: 'completed', conclusion: 'success',
+    repository: {full_name: repo}, head_repository: {full_name: repo},
+    ...(author ? {pull_requests: [{number: 1808, url: `https://api.github.com/repos/${repo}/pulls/1808`,
+      head: {sha: expectedHead, ref: 'engineering/native102', repo: {url: `https://api.github.com/repos/${repo}`}},
+      base: {sha: 'c'.repeat(40), ref: 'main', repo: {url: `https://api.github.com/repos/${repo}`}}}]} : {})};
+  const job = {id: 29, run_id: 17, run_attempt: 2, head_sha: workflowHead, name: author ? 'regression (0)' : 'integration (0)',
+    status: 'completed', conclusion: 'success', steps: (author ? authorSteps : producerSteps).map((name, index) =>
       ({name, number: index + 12, status: 'completed', conclusion: 'success'}))};
-  const artifact = {id: 41, name: 'native-built-output-12345678-1234-1234-1234-123456789abc', size_in_bytes: archive.length,
+  const artifact = {id: 41, name: author ? `native-built-output-regression-1808-${expectedHead}` : 'native-built-output-12345678-1234-1234-1234-123456789abc', size_in_bytes: archive.length,
     digest: 'sha256:' + hash(archive), expired: false, workflow_run: {id: 17, head_sha: workflowHead}};
   const receipt = {built_output_readback: '/home/runner/work/WorldAtlas/WorldAtlas/.cache/native-normal-built-output.json',
     bytes: raw.length, sha256: hash(raw)};
   const inventory = {total_count: 2, jobs: [job, {id: 30, name: 'merge'}]};
   const f = {run, job, artifact, report, receipt, inventory, archive, calls: [], deliveries: [],
     logLocation: 'https://fixture.blob.core.windows.net/job-log', artifactLocation: 'https://fixture.blob.core.windows.net/archive'};
-  f.log = () => [JSON.stringify(f.receipt),
+  f.log = () => [JSON.stringify(f.receipt), ...(author ? [authorReceipt] : []),
     'SHA256 digest of uploaded artifact zip is ' + f.artifact.digest.slice(7),
     `Artifact ${f.artifact.name} has been successfully uploaded! Final size is ${f.artifact.size_in_bytes} bytes. Artifact ID is ${f.artifact.id}`,
     // An unrelated upload digest in the same job is not a conflicting receipt.
@@ -109,6 +120,63 @@ test('exact queue attempt authenticates the full native report with optional smo
     assert.equal(f.calls.length, 4);
     assert.equal(f.deliveries.length, 2);
   }
+});
+
+test('ordinary author full regression authenticates exact PR linkage, full receipt, and source independently of synthetic workflow head', async () => {
+  const f = fixture({author: true, streaming: true});
+  f.run.conclusion = 'failure'; // An unrelated shard cannot invalidate this completed full producer.
+  const result = await f.load();
+  assert.deepEqual(result.report, f.report);
+  assert.equal(result.origin.workflow_path, '.github/workflows/merge-integration-checks.yml');
+  assert.equal(result.origin.event, 'pull_request');
+  assert.equal(result.origin.pull_request, 1808);
+  assert.equal(result.origin.head, expectedHead);
+  assert.equal(result.origin.workflow_head, workflowHead);
+  assert.notEqual(result.origin.head, result.origin.workflow_head);
+  assert.equal(result.origin.artifact_name, `native-built-output-regression-1808-${expectedHead}`);
+  assert.equal(result.origin.use, 'full-output-comparison-only');
+});
+
+test('author producer rejects mismatched PR/head/repository, metadata jobs, skipped full steps and replayed receipts', async () => {
+  const changes = [
+    f => f.run.event = 'pull_request_target',
+    f => f.run.path = '.github/workflows/worker-merge.yml',
+    f => f.run.pull_requests = [],
+    f => f.run.pull_requests.push({...f.run.pull_requests[0]}),
+    f => f.run.pull_requests[0].number = 1809,
+    f => f.run.pull_requests[0].head.sha = workflowHead,
+    f => f.run.pull_requests[0].head.ref = 'other-branch',
+    f => f.run.pull_requests[0].head.repo.url = 'https://api.github.com/repos/fork/WorldAtlas',
+    f => f.run.pull_requests[0].base.repo.url = 'https://api.github.com/repos/other/WorldAtlas',
+    f => f.run.pull_requests[0].base.ref = 'other-base',
+    f => f.run.pull_requests[0].base.sha = 'unbound-base',
+    f => f.job.name = 'package',
+    f => f.job.name = 'regression (1)',
+    f => f.job.name = 'selected-package-assembly',
+    f => f.job.conclusion = 'skipped',
+    f => f.job.steps = [{name: 'Use full-regression package verification', number: 1, status: 'completed', conclusion: 'success'}],
+    ...authorSteps.map(name => f => f.job.steps.find(row => row.name === name).conclusion = 'skipped'),
+    ...authorSteps.map(name => f => f.job.steps = f.job.steps.filter(row => row.name !== name)),
+    f => f.job.steps[4].number = 1,
+    f => f.job.steps.push({...f.job.steps[1]}),
+    f => f.artifact.name = `native-built-output-regression-1809-${expectedHead}`,
+    f => f.artifact.name = `native-built-output-regression-1808-${workflowHead}`,
+    f => f.artifact.name = 'native-built-output-12345678-1234-1234-1234-123456789abc',
+    f => { const original = f.log; f.log = () => original().replace(authorReceipt, 'Reused earlier package metadata.'); },
+    f => { const original = f.log; f.log = () => original() + '\n' + authorReceipt; }
+  ];
+  for (let index = 0; index < changes.length; index++) {
+    const f = fixture({author: true}); changes[index](f);
+    await assert.rejects(f.load, undefined, 'Adverse author producer case ' + index);
+  }
+});
+
+test('author full-output proof preserves complete archive, report-head and digest controls', async () => {
+  await assert.rejects(fixture({author: true, smoke: true}).load, /Native archive inventory differs/);
+  await assert.rejects(fixture({author: true, reportChange: report => report.head = workflowHead}).load);
+  await assert.rejects(fixture({author: true, archiveChange: archive => Buffer.concat([archive, Buffer.from('extra')])}).load);
+  const f = fixture({author: true}); f.receipt.sha256 = 'f'.repeat(64);
+  await assert.rejects(f.load);
 });
 
 test('Actions-style streaming ZIP data descriptors and ZIP64 member descriptors are accepted', async () => {
@@ -247,4 +315,5 @@ test('temporary extraction cleans up on success and failure and subprocess inher
   const source = fs.readFileSync(new URL('../scripts/selected-package-readback-proof.mjs', import.meta.url), 'utf8');
   assert.match(source, /env: \{PATH: '\/usr\/bin:\/bin', LANG: 'C.UTF-8'\}/);
   assert.doesNotMatch(source, /env:\s*\{\s*\.\.\.process\.env/);
+  assert.ok(source.includes("execFileSync('python3', ['-I', '-S', '-B'"));
 });
