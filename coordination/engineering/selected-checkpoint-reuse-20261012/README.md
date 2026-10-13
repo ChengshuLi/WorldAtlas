@@ -68,7 +68,10 @@ checkout. Candidate copies, candidate-chosen Git refs and serialized lookalikes
 cannot create authority. The catalogue pins the complete original accepted
 products and their actual executed code/runtime, plus a complete immutable route
 index. Root products remain in their original retained packet; they are not
-copied here or relabelled as new execution.
+copied here or relabelled as new execution. Current qualifier code is authenticated
+against the executing trusted checkout's Git HEAD and actual local bytes. Editing
+reviewed qualifier code requires no catalogue hash refresh; original scientific
+execution/runtime and product pins remain historical and unchanged.
 
 The initial catalogue indexes both genuine sides of PR #1771's frozen retained
 execution. PR #1771 was accepted at main commit

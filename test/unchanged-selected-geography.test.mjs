@@ -12,7 +12,6 @@ const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const P = 'research/geography/selected-fixture/';
 const POLICY = 'coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
 const CHECKPOINTS = 'coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
-const CHECKPOINT_METHODS = ['selected-checkpoint.mjs', 'selected-neighbor-prevention.mjs'].map(p => 'coordination/engineering/selected-geography-effective-prevention-20261009/' + p).concat(['scripts/check-effective-geographic-regression.mjs', 'src/ownership-codec.js']);
 const canonical = value => Array.isArray(value) ? value.map(canonical) : value && typeof value === 'object' ? Object.fromEntries(Object.keys(value).sort().map(k => [k, canonical(value[k])])) : value;
 const HANDOFFS = 'coordination/engineering/melanesia363-additive-delivery-20261010/accepted-administrative-handoffs.json';
 const RECEIVING = 'coordination/engineering/receiving-metadata-fixture/';
@@ -65,7 +64,7 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
     }
   };
   for (const name of new Set([...EXECUTION_CODE, ...REBIND_CODE, 'scripts/geography-prefetch.mjs'])) put(name, Object.hasOwn(AUDITED_READERS, name) ? auditedReader(name) : 'trusted code leaf');
-  const catalogue = {version: 1, kind: 'accepted-selected-checkpoints-v1', qualifier_code: CHECKPOINT_METHODS.map(path => ({path, bytes: files[path].length, sha256: sha(files[path])})), checkpoints: []};
+  const catalogue = {version: 1, kind: 'accepted-selected-checkpoints-v1', checkpoints: []};
   put(CHECKPOINTS, catalogue);
   put(POLICY, fs.readFileSync(path.join(ROOT, POLICY)));
   const world = {parts: ['geography/source.json']};
@@ -228,7 +227,7 @@ test('checkpoint trust is executing catalogue authority and rejects unknown root
     const untrustedCandidate = f.commit({...untrustedFiles, [P + 'checkpoint-routed']: body('changed source-scoped alias')}, untrustedBase);
     assert.match((await f.inspect(untrustedCandidate, untrustedBase, {trusted:f.baseline})).reason,
       /changed-current-input/, 'candidate catalogue cannot suppress the executing trusted roster');
-    for (const mutate of [c => c.qualifier_code.pop(), c => c.checkpoints.push(c.checkpoints[0]),
+    for (const mutate of [c => c.checkpoints.push(c.checkpoints[0]),
       c => c.checkpoints[0].extra_route = {}, c => c.checkpoints[0].certificate.git_blob_oid = 'e'.repeat(40)]) {
       const catalogue = JSON.parse(f.files[CHECKPOINTS]); mutate(catalogue);
       const files = {...f.files, [CHECKPOINTS]: body(catalogue)};

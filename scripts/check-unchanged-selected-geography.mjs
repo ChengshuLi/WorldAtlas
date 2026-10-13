@@ -40,7 +40,7 @@ export const AUDITED_READERS = Object.freeze({
   // The joint route only reuses authenticated original selected inputs and products.
   // These exact readers introduce no new scientific source outside that closure.
   'scripts/selected-checkpoint-native.mjs': ['1372180d776e33227410aaeb4ef5526cd5cc84e4dca3950cc6eaa6210bad04ca'],
-  [PREFIX + 'selected-checkpoint.mjs']: ['d96d0414b2c246b456c00a7878511652ff2ce2df77586bfa36d88d01247463d1'],
+  [PREFIX + 'selected-checkpoint.mjs']: ['d96d0414b2c246b456c00a7878511652ff2ce2df77586bfa36d88d01247463d1', '89241cff2c243018af668b06e71cfe9e5d3edf89da19f4c03db4b1934c977851'],
   [PREFIX + 'selected-checkpoint-continuous.mjs']: ['1c82e1bb619bc42353a573d0ef4f1989490e03b32d5137035cf890a3719c55dc'],
   [PREFIX + 'selected-joint-entry.mjs']: ['ce1c4513ecf130452c07bdf4e516019e7ac85c0ee14c14b44203f3b23a16ae6d'],
   'src/ownership-codec.js': ['64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d'],
@@ -268,19 +268,8 @@ async function currentRebind(reader, pin, sourcePaths) {
 // must not alter one of those aliases while the old collector silently skips it.
 async function checkpointRoutes(reader, selection, trusted) {
   const catalogue = await reader.trustedJson(CHECKPOINTS);
-  keys(catalogue, 'version,kind,qualifier_code,checkpoints', 'checkpoint-catalogue');
+  keys(catalogue, 'version,kind,checkpoints', 'checkpoint-catalogue');
   demand(catalogue.version === 1 && catalogue.kind === 'accepted-selected-checkpoints-v1', 'unsupported-checkpoint-catalogue');
-  const methods = [PREFIX + 'selected-checkpoint.mjs', PREFIX + 'selected-neighbor-prevention.mjs',
-    'scripts/check-effective-geographic-regression.mjs', 'src/ownership-codec.js'];
-  const declaredMethods = array(catalogue.qualifier_code, 'checkpoint-methods').map(p => p.path);
-  demand(same(declaredMethods, methods) || same(declaredMethods, [...methods, ...ACCEPTED_CHECKPOINT_CODE]), 'unsupported-checkpoint-methods');
-  for (const p of catalogue.qualifier_code) {
-    keys(p, 'path,bytes,sha256', 'checkpoint-method');
-    demand(Number.isSafeInteger(p.bytes) && p.bytes > 0 && hash(p.sha256), 'unsupported-checkpoint-method');
-    const actual = reader.descriptor(trusted, p.path);
-    demand(actual.mode === '100644', 'unsupported-checkpoint-method-mode');
-    await reader.body(actual, p);
-  }
   const roots = array(catalogue.checkpoints, 'checkpoint-roots', 0);
   demand(new Set(roots.map(p => p.id)).size === roots.length, 'duplicate-checkpoint-identity');
   const selectedHash = sha(Buffer.from(JSON.stringify(canonical(selection)) + '\n'));
