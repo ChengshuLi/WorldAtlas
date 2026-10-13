@@ -544,6 +544,13 @@ class WorkerWorkflowBootstrapTests(WorkflowBootstrapFixture, unittest.TestCase):
         tests=self.integration.split('- name: '+order[9],1)[1].split('      - ',1)[0]
         self.assertIn('SELECTED_PACKAGE_ASSEMBLY_SHA256: ${{ steps.assembly.outputs.assembly_sha256 }}',tests)
         self.assertIn('= selected-output',tests);self.assertIn('selectedDeliverySmoke',tests)
+        browser=self.integration.split('- name: '+order[7],1)[1].split('      - ',1)[0]
+        self.assertIn("if: needs.prepare.outputs.test_selection != 'selected-data'",browser)
+        self.assertIn('if test "$INTEGRATION_TEST_SELECTION" = selected-output; then',tests)
+        self.assertIn('requireRetainedPackageTests()',tests)
+        self.assertIn('else\n            node scripts/run-integration-tests.mjs',tests)
+        native=self.integration.split('- name: '+order[8],1)[1].split('      - ',1)[0]
+        self.assertNotIn('steps.assembly.outputs.assembled',native)
         self.assertIn('SELECTED_PACKAGE_CANDIDATE: ${{ needs.prepare.outputs.candidate }}',self.integration)
         self.assertNotIn('continue-on-error:',self.integration)
         permissions=self.integration.split('    permissions:',1)[1].split('    steps:',1)[0]

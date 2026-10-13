@@ -326,6 +326,22 @@ export function verifyPackageOutput(root, manifest) {
   return true;
 }
 
+// The Actions run head can be the reviewed PR source, while its workflow runs
+// from the merge ref. Keep actual workflow context in the existing log receipt,
+// separate from reusable source/blob compatibility and local output manifests.
+export function packageWorkflowExecution(env = process.env) {
+  if (!env.GITHUB_WORKFLOW_SHA && !env.GITHUB_WORKFLOW_REF) return undefined;
+  const repo = 'ChengshuLi/WorldAtlas', prefix = repo + '/';
+  need(env.GITHUB_REPOSITORY === repo && commit(env.GITHUB_WORKFLOW_SHA) &&
+    env.GITHUB_WORKFLOW_REF?.startsWith(prefix), 'Exact executed package workflow required');
+  const [workflow, ref, ...extra] = env.GITHUB_WORKFLOW_REF.slice(prefix.length).split('@');
+  need(extra.length === 0 && PACKAGE_PRODUCER_WORKFLOWS.includes(workflow) && ref === env.GITHUB_REF &&
+    (env.GITHUB_EVENT_NAME === 'pull_request' && workflow === PACKAGE_PRODUCER_WORKFLOWS[0] && /^refs\/pull\/[1-9]\d*\/merge$/.test(ref) ||
+     env.GITHUB_EVENT_NAME === 'workflow_dispatch' && workflow === PACKAGE_PRODUCER_WORKFLOWS[1] && ref === 'refs/heads/main'),
+    'Executed package workflow event/ref differs');
+  return {sha:env.GITHUB_WORKFLOW_SHA,path:workflow,ref};
+}
+
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   need(process.argv.length === 2 || process.argv.length === 3 && process.argv[2] === '--snapshot',
     'Use node scripts/package-output-artifact.mjs [--snapshot]');
@@ -339,7 +355,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   fs.writeFileSync(OUTPUT_MANIFEST, raw, {flag: 'wx'});
   console.log(JSON.stringify({package_output_manifest_sha256: sha(raw), package_output_manifest_bytes: raw.length,
     package_output_files: manifest.output.files.length, package_output_bytes: manifest.output.bytes,
-    original_head: manifest.source.head}));
+    original_head: manifest.source.head, executed_workflow:packageWorkflowExecution()}));
 }
 
 // Original producer -> current selection, independently of PR-base -> head

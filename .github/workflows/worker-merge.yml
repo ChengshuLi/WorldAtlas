@@ -384,6 +384,7 @@ jobs:
         if: needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && steps.assembly.outputs.assembled != 'true'
         run: node scripts/package-output-artifact.mjs
       - name: Install browser dependencies only for tests that use Playwright
+        if: needs.prepare.outputs.test_selection != 'selected-data'
         env:
           INTEGRATION_PROFILE: ${{ needs.prepare.outputs.profile }}
           INTEGRATION_SHARD: ${{ matrix.shard }}
@@ -427,7 +428,11 @@ jobs:
           if test "$INTEGRATION_TEST_SELECTION" = selected-data || test "$INTEGRATION_TEST_SELECTION" = selected-output; then
             node --input-type=module -e 'import {selectedDeliverySmoke} from "./scripts/integration-profile.mjs"; console.log(JSON.stringify({selected_delivery_smoke:await selectedDeliverySmoke(process.env.SELECTED_EXPECTATIONS_PATH)}));'
           fi
-          node scripts/run-integration-tests.mjs
+          if test "$INTEGRATION_TEST_SELECTION" = selected-output; then
+            node --input-type=module -e "import {requireRetainedPackageTests} from './scripts/run-integration-tests.mjs'; console.log(JSON.stringify({retained_package_tests:requireRetainedPackageTests()}))"
+          else
+            node scripts/run-integration-tests.mjs
+          fi
       - name: Retain original final-worker package output
         if: success() && needs.prepare.outputs.profile == 'full' && matrix.shard == 0 && steps.assembly.outputs.assembled != 'true'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

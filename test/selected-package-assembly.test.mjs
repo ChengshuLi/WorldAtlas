@@ -39,7 +39,8 @@ function original(t,{worker=false}={}){
     steps:names.map((name,index)=>({name,number:index+1,status:'completed',conclusion:'success'}))};
   const artifact={id:41,name:origin.artifact_name,size_in_bytes:2000,digest:'sha256:'+origin.artifact_digest,
     expired:false,workflow_run:{id:17,head_sha:workflowHead}};
-  const receipt={package_output_manifest_sha256:sha(raw),package_output_manifest_bytes:raw.length,original_head:head};
+  const receipt={package_output_manifest_sha256:sha(raw),package_output_manifest_bytes:raw.length,original_head:head,
+    executed_workflow:{sha:worker?workflowHead:'9'.repeat(40),path:workflow.path,ref:worker?'refs/heads/main':'refs/pull/17/merge'}};
   const log=()=>[JSON.stringify(receipt),`SHA256 digest of uploaded artifact zip is ${origin.artifact_digest}`,
     `Artifact ${origin.artifact_name} has been successfully uploaded! Final size is 2000 bytes. Artifact ID is 41`].join('\n');
   const api=async route=>{
@@ -61,6 +62,10 @@ test('actual original-job admission mints a private token and never brands copie
   const f=original(t),old=globalThis.fetch;
   globalThis.fetch=async(url,options)=>{assert.equal(String(url),'https://fixture.blob.core.windows.net/job-log');
     assert.equal(options.headers,undefined);return new Response(f.log());};t.after(()=>{globalThis.fetch=old;});
+  const priorAPI=f.api;
+  f.api=async route=>{if(route.includes('/git/commits/'))assert(route.endsWith(f.receipt.executed_workflow.sha));return priorAPI(route);};
+  f.api.jobLogRedirect=priorAPI.jobLogRedirect;
+  assert.notEqual(f.receipt.executed_workflow.sha,f.run.head_sha);
   const token=await authenticateOriginalPackageOutput(f);
   assert.equal(requireOriginalPackageOutput(token).manifest.source.head,f.origin.head);
   assert.throws(()=>requireOriginalPackageOutput(structuredClone(token)),/Privately authenticated/);
@@ -76,6 +81,10 @@ test('origin, successful actual steps, upload receipt and output mutations fail 
     f=>{f.workflow.sha='f'.repeat(40);},
     f=>{f.workflow.mode='100755';},
     f=>{f.receipt.original_head='c'.repeat(40);},
+    f=>{delete f.receipt.executed_workflow;},
+    f=>{f.receipt.executed_workflow.sha='main';},
+    f=>{f.receipt.executed_workflow.path='.github/workflows/foreign.yml';},
+    f=>{f.receipt.executed_workflow.ref='refs/heads/main';},
     f=>{f.run.path='.github/workflows/unknown.yml';},
     f=>{f.job.run_attempt=1;},
     f=>{f.job.conclusion='failure';},
@@ -302,6 +311,7 @@ test('worker origin rejects substituted source, workflow, job, artifact and inco
   const cases=[
     f=>{f.origin.head=f.origin.workflow_head;},
     f=>{delete f.origin.workflow_head;},
+    f=>{f.receipt.executed_workflow.sha=f.origin.head;},
     f=>{f.run.head_branch='engineering/fixture';},
     f=>{f.run.event='pull_request';},
     f=>{f.run.path='.github/workflows/merge-integration-checks.yml';},
@@ -359,4 +369,33 @@ test('worker invocation uses only trusted candidate and exact selected integrati
     {SELECTED_PACKAGE_CANDIDATE:undefined},{SELECTED_PACKAGE_CANDIDATE:'main'}])
     assert.throws(()=>packageAssemblyInvocation(event,{...environment,...mutation}));
   assert.throws(()=>packageAssemblyInvocation(event,{GITHUB_EVENT_NAME:'workflow_dispatch'}));
+});
+
+test('PR discovery checks actual merge-ref workflow bytes even when source and run heads agree',async t=>{
+  const f=originalDiscovery(t),old=globalThis.fetch;t.after(()=>{globalThis.fetch=old;});
+  globalThis.fetch=async()=>new Response(f.log());
+  const baseAPI=f.api;
+  const api=async route=>{
+    const commit=/\/git\/commits\/([a-f0-9]{40})$/.exec(route);
+    if(commit)return {tree:{sha:f.s.git('rev-parse',commit[1]+'^{tree}')}};
+    const tree=/\/git\/trees\/([a-f0-9]{40})(\?recursive=1)?$/.exec(route);
+    if(tree){
+      const rows=f.s.git('ls-tree',...(tree[2]?['-r']:[]),'-lz',tree[1]).split('\0').filter(Boolean).map(line=>{
+        const [meta,name]=line.split('\t'),[mode,type,sha,size]=meta.trim().split(/\s+/);return {path:name,mode,type,sha,size:Number(size)};
+      });
+      return {tree:rows,truncated:false};
+    }
+    return baseAPI(route);
+  };
+  api.jobLogRedirect=baseAPI.jobLogRedirect;
+  f.s.write('README.md','A distinct merge-ref commit with identical workflow bytes');f.s.commit();
+  f.receipt.executed_workflow.sha=f.s.git('rev-parse','HEAD');
+  assert.notEqual(f.receipt.executed_workflow.sha,f.origin.workflow_head);
+  const discover=()=>findOriginalPackage({api,repo:f.repo,current:f.before,originalRunId:17});
+  assert.equal((await discover()).origin.head,f.sourceHead,'Commit identity alone must not invalidate identical workflow bytes');
+  f.s.write(f.workflow.path,'Changed only in the actual merge-ref workflow');f.s.commit();
+  f.receipt.executed_workflow.sha=f.s.git('rev-parse','HEAD');
+  assert.equal(await discover(),null,'Source/run workflow bytes cannot stand in for actual executed workflow');
+  delete f.receipt.executed_workflow;
+  assert.equal(await discover(),null,'No inferred workflow provenance for older captures');
 });

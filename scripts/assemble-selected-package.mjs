@@ -98,7 +98,7 @@ export async function findOriginalPackage({api,repo,current,originalRunId}){
       const tree=await integrationTree(api,repo,origin.head),all=treeRows(tree);
       const producer={kind:PACKAGE_PRODUCER_KIND,workflows:all.filter(row=>PACKAGE_PRODUCER_WORKFLOWS.includes(row.path))};
       if(!same(producer,current.producer))continue;
-      const workflowTree=origin.head===origin.workflow_head?tree:await integrationTree(api,repo,origin.workflow_head);
+      const workflowTree=origin.head===receipt.executed_workflow.sha?tree:await integrationTree(api,repo,receipt.executed_workflow.sha);
       const actual=workflowTree.entries.get(receipt.workflow_path),captured=producer.workflows.find(row=>row.path===receipt.workflow_path);
       if(actual?.type!=='blob'||actual.mode!=='100644'||!same(captured,{path:receipt.workflow_path,mode:actual.mode,oid:actual.sha}))continue;
       const definition=await readPackageInputs({route:`/repos/${repo}`,base:origin.head,api});

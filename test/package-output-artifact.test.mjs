@@ -6,7 +6,7 @@ import os from 'node:os';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {createPackageOutputManifest, snapshotPackageOutputSource, inventoryPackageOutput, validatePackageOutputManifest,
-  verifyPackageOutput, streamedPackageFile, PACKAGE_OUTPUT_LIMITS, installedPackageIdentity, admitPackageOutputTransition, committedPackageInputs, committedPackageProducer} from '../scripts/package-output-artifact.mjs';
+  verifyPackageOutput, streamedPackageFile, PACKAGE_OUTPUT_LIMITS, installedPackageIdentity, admitPackageOutputTransition, committedPackageInputs, committedPackageProducer, packageWorkflowExecution} from '../scripts/package-output-artifact.mjs';
 
 import {compareSelectedPackageOutput,compareSelectedPackageReadback,normalizeDeclarationReadAccounting} from '../scripts/compare-selected-package-output.mjs';
 
@@ -427,4 +427,21 @@ test('both workflows capture genuine build output immediately and upload only af
     assert(steps.slice(at+2,end).some(step=>step.name===check),'Required checks remain before upload');
     assert.match(steps[end].raw,/if: success\(\)/,'Failed checks cannot upload an original');
   }
+});
+
+
+test('capture logs actual workflow-file commit and ref independently of source checkout',()=>{
+  const workflow='.github/workflows/merge-integration-checks.yml';
+  const env={GITHUB_REPOSITORY:'ChengshuLi/WorldAtlas',GITHUB_WORKFLOW_SHA:'b'.repeat(40),
+    GITHUB_SHA:'a'.repeat(40),GITHUB_WORKFLOW_REF:'ChengshuLi/WorldAtlas/'+workflow+'@refs/pull/17/merge',
+    GITHUB_REF:'refs/pull/17/merge',GITHUB_EVENT_NAME:'pull_request'};
+  assert.deepEqual(packageWorkflowExecution(env),{sha:'b'.repeat(40),path:workflow,ref:env.GITHUB_REF});
+  assert.equal(packageWorkflowExecution({}),undefined,'Local historical capture grants no workflow provenance');
+  for(const patch of [{GITHUB_WORKFLOW_SHA:'main'},{GITHUB_WORKFLOW_REF:'other/repo/'+workflow+'@refs/pull/17/merge'},
+    {GITHUB_EVENT_NAME:'push'},{GITHUB_REF:'refs/heads/main'},
+    {GITHUB_WORKFLOW_REF:'ChengshuLi/WorldAtlas/.github/workflows/other.yml@refs/pull/17/merge'}])
+    assert.throws(()=>packageWorkflowExecution({...env,...patch}));
+  const worker='.github/workflows/worker-merge.yml';
+  assert.deepEqual(packageWorkflowExecution({...env,GITHUB_WORKFLOW_REF:'ChengshuLi/WorldAtlas/'+worker+'@refs/heads/main',
+    GITHUB_REF:'refs/heads/main',GITHUB_EVENT_NAME:'workflow_dispatch'}),{sha:'b'.repeat(40),path:worker,ref:'refs/heads/main'});
 });

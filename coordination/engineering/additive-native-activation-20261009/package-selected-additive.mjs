@@ -267,6 +267,10 @@ export async function readOriginalPackageInventory({api,repo,origin}) {
     receipts[0].package_output_manifest_bytes<=8*1048576&&
     uploads.length===1&&uploads[0]===`Artifact ${artifactName} has been successfully uploaded! Final size is ${origin.artifact_bytes} bytes. Artifact ID is ${origin.artifact_id}`,
     'Missing or ambiguous actual original package upload receipt');
+  const executed=receipts[0].executed_workflow;
+  demand(assemblyCommit(executed?.sha)&&executed.path===run.path&&
+    (pullRequest?/^refs\/pull\/[1-9]\d*\/merge$/.test(executed.ref):executed.ref==='refs/heads/main'&&executed.sha===workflowHead),
+    'Actual executed package workflow context is missing or differs');
   // Other receipts may have their own archive digests. The exact output digest
   // must occur once, and the artifact API independently binds it to this name.
   demand(lines.filter(line=>line===`SHA256 digest of uploaded artifact zip is ${origin.artifact_digest}`).length===1,'Original package upload digest differs');
@@ -288,7 +292,7 @@ export async function authenticateOriginalPackageOutput({api,repo,origin,root,ma
     assemblyPositive(manifest.output.bytes)&&Number.isSafeInteger(manifest.output.bytes),'Original package manifest differs');
   // Walk only the fixed executed workflow path. Adding an imported discovery
   // helper here would change the separately qualified native build closure.
-  const commit=await api(`/repos/${repo}/git/commits/${receipt.workflow_head}`);
+  const commit=await api(`/repos/${repo}/git/commits/${receipt.executed_workflow.sha}`);
   let tree=commit.tree?.sha,workflow;
   const components=receipt.workflow_path.split('/');
   for(let index=0;index<components.length;index++){
