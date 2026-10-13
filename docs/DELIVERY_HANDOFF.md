@@ -3,8 +3,7 @@
 `node scripts/prepare-delivery-handoff.mjs PHASE CONFIG DESTINATION [--resume]`
 prepares immutable metadata in a managed checkout. The individual preparation phases
 never run a scientific operator, accept a source, submit a review, commit, queue
-or merge. The optional automatic continuation below commits completed metadata
-and ends with the actual finalized outputs. Publish the real head, obtain
+or merge. Publish the real head, obtain
 substantive independent review, then use the standard worker integration workflow.
 Scientific source/native supervision, rebind, selected-reader and output checks remain authoritative.
 Use Node 24 without loaders/preloads. Check storage with `local-workspace.mjs`
@@ -214,25 +213,7 @@ or existing-tool boundaries. No scheduler or automatic approval is hidden in the
 preparation command. Its completed result establishes prepared outputs only, not
 source acceptance, review, integration or publication.
 
-## Admitted recipe continuation (`advance` / `status`)
-
-The same command can prepare the next supported metadata transition without
-copying derived hashes, component IDs, or authority records between configs:
-
-```sh
-node scripts/prepare-delivery-handoff.mjs advance CONFIG DESTINATION
-node scripts/prepare-delivery-handoff.mjs advance CONFIG DESTINATION --resume
-node scripts/prepare-delivery-handoff.mjs status CONFIG DESTINATION
-```
-
-`CONFIG` has `version: 1`, an immutable `recipe: {commit, path}`, and optional
-`observations`. Each invocation completes one available preparation stage or
-reports the exact external input it is waiting for. Repeat the same command after
-recording genuine publication/commit results. It never runs SOURCE, NATIVE,
-rebind, assembly, builds, Git commits, or a reviewer. The finite sequence is recipe,
-requests, SOURCE retention, native requests/retention, authority pairs/registry,
-composition, rebind custody/certificate, package and finalization. Actual operators,
-per-phase input authentication, independent review and integration remain separate.
+## Recipe admission and exact-body materialization
 
 Initial method admission is explicit. A `greedy-model` recipe supplies the
 accepted registry locator, handoff IDs, admitted v2 SOURCE/NATIVE exemplar
@@ -260,7 +241,7 @@ handoff preserves that prior-consumption limit; generated ordinary acquisition p
 request later full-body reads. Conflicting source/product identities refuse.
 
 The recipe index emits one transport/acquisition identity per whole encoded and
-decoded body, with all compatible destinations. `advance` only prepares this plan.
+decoded body, with all compatible destinations.
 The explicit `materialize` phase consumes its actual committed index:
 
 ```sh
@@ -293,82 +274,6 @@ Physical-product paths come from the accepted handoff's original comparison or
 its exact consumed locator metadata. Missing joins refuse, rather than guessing
 from country names, old batches, or incomplete source records.
 
-Observations supply only actual commit/path locators, not derived hashes:
-
-- `template_commit`: actual commit containing generated recipe templates (new recipes).
-- `sources` / `natives`: arrays of `{publication, terminal}` locators. Original
-  facts determine request identity and saved group scope; unknown/duplicate groups fail.
-- `authorities`: committed `{rule_preimage, source_authority}` locator pairs.
-- `registry`: the committed registry input to composition. Keep this locator
-  unchanged after the compose intent freezes, even when it contains only the new
-  authorities and composition adds declared retained authorities.
-- `composition`: the actual commit/path of the completed compose stage's
-  `preparation.json`. Its authenticated receipt derives both combined-registry and
-  composed-ledger pins and must match the original frozen input binding and whole
-  output inventory. Commit the completed compose directory, then supply this one
-  locator before rebind; no standalone composition command is needed.
-- Historical configurations with an already-combined `registry` may retain their
-  existing `composed_ledger` locator. It must match the saved composition bytes.
-  If both forms are supplied, the legacy ledger must name the same derived pin.
-- `operating`, `certificate`, `sidecar`: actual committed products. Each is joined
-  to the deterministic preceding output.
-- `rebind`: actual `publication`, `request`, `terminal` locators and complete
-  `custody` locators for code_source, issued_plan, stdout and stderr.
-
-For an already completed delivery, top-level `completed_delivery` supplies its
-sidecar locator, composed-ledger locator and owned prefix. The command discovers
-its original publications, authority pairs and current rebind custody from the
-actual selected release. Every corresponding ordinary validator still runs.
-The committed current13 recipe/config exercise this mode without scientific work.
-
-The destination contains only immutable stage products and their ordinary
-`preparation.json` receipts. For tracked `coordination/engineering/.../` products,
-local runtime state lives separately under `.cache/delivery-handoff/runtime/`, in
-a directory keyed by the exact product destination. Different recipes cannot
-acquire independent ownership over the same products. Stage intents, completion
-observations, timings, commit/queue identities, refresh records and locks stay in
-that ignored runtime directory; none becomes a scientific input. Existing
-`.cache/delivery-handoff/...` product destinations retain their co-located layout.
-
-Current `advance --resume` automatically transfers an old tracked-prefix journal
-once, under destination-wide cache ownership and the existing legacy lock. It
-records and verifies the exact runtime inventory, copies raw bytes unchanged, and
-retires only matching untracked originals. Published tracked journal records stay
-unchanged at their original paths. Product paths, preparation receipts, timestamps,
-operation IDs, commit objects and queue request IDs are preserved. Interrupted
-copy/retirement resumes from the retained transfer inventory before any action.
-The legacy lock is removed before the first action; cache ownership remains held,
-so the stock clean executing-checkout boundary needs no manual runtime shuffling.
-Continue migrated journals with the current driver: obsolete executables do not
-understand the new cache lock. Preserve the runtime directory when moving or
-releasing a workspace; it remains a local resume aid, never scientific authority.
-
-An identical partial metadata write can resume only after its exact intent and
-every existing byte agree. Foreign files,
-changed recipe/observations, symlinks and altered completed bytes refuse. A crash
-lock is recovered only when its same-host process is gone, with inspection and
-new acquisition serialized by an exclusive short guard. A process killed inside
-that guard leaves an explicit owner-reconciliation refusal; the guard is never
-automatically reaped. A live or foreign owner is never displaced. `status` checks completed inventories without mutation.
-Timings report preparation, acquisition, API wait, observed external wait and individual
-operator-receipt durations separately. Parallel operator durations are not added
-and called wall time; metadata speed is not global gap-closures/hour.
-
-The command stops at `status: "prepared"` after finalization. Review the actual
-published head and dispatch the standard workflow directly. Retained historical
-review/queue records remain readable and unchanged; they never authorize a new
-submission. There is no review-freeze phase, PR-base metadata PATCH or
-`--submit-queue` option in this preparation command.
-
-Optional `preparation_allowance: {phaseBytes, rssBytes}` in either command config
-requests a finite metadata phase allowance, checked against current available
-memory by the shared guard. Inputs, decoded representations, journal reads,
-outputs and the completion receipt share admission. The authority reader carries
-still-live outer metadata into its existing bounded qualification phases. There
-is no separate 4KiB receipt cutoff; the ordinary whole-member bound and configured
-aggregate budget apply to receipts as to other metadata. A receipt does not grant
-approval regardless of its size.
-
 Run ordinary controls with `node --test test/delivery-handoff.test.mjs
 test/delivery-handoff-advance.test.mjs`. The opt-in
 `WORLDATLAS_DELIVERY_FIXTURE=1` explicitly registers the additional retained-fixture
@@ -380,61 +285,6 @@ scientific cache or GIS operands. Acceptance or revalidation relying on the
 retained current13 proof must run `WORLDATLAS_DELIVERY_FIXTURE=1` and establish
 zero skips; ordinary CI alone does not establish that proof. Absence of those
 bodies is a fixture availability limit, never a successful replay.
-
-## Automatic mechanical continuation
-
-```sh
-node scripts/prepare-delivery-handoff.mjs advance CONFIG OWNED_DESTINATION --automatic
-node scripts/prepare-delivery-handoff.mjs advance CONFIG OWNED_DESTINATION --automatic --resume
-```
-
-Add `automation: {"issue_number": YOUR_ISSUE}` to the existing config. The
-existing recipe and observations remain authoritative. Automatic mode requires
-the current chat's ready managed author workspace, exact engineering branch,
-current open issue with engineering lane/mode and declared output ownership.
-Use an issue-owned `coordination/engineering/.../` destination; `.cache` products
-are never silently committed as repository evidence.
-
-One invocation prepares and commits available stages, derives actual immutable
-locators, and continues. Generated observations are `template_commit`, authority
-pairs, registry, composition, operating and certificate. Explicit contradictory
-observations refuse. SOURCE/NATIVE/rebind terminals and assembly still require
-genuine outputs from their admitted existing tools; no future receipt, scientific
-acceptance or operator execution is invented. The command reports the exact
-missing input. A commit pause with available authenticated metadata is handled
-automatically, rather than returned to the operator.
-
-Commits contain only the complete authenticated stage products and preparation
-receipt. Lock files and evolving journal observations are excluded. A durable
-intent binds the parent, tree, complete ordinary-file inventory, Git identity and
-operation ID before an atomic branch-ref update. Interruption after intent,
-object creation or ref advancement resumes the same commit. Foreign branch/index
-movement, hidden index edits, changed outputs and undeclared tree changes refuse;
-unrelated files are preserved. Managed author identity and the current issue-owned
-scope are revalidated before mutation. No worktree reset, automatic conflict resolution or credential/setup
-change is performed.
-
-Before the publication/review boundary, automatic mode fetches main with blobs
-excluded and performs a cheap inherited-tree check. A needed refresh is an
-ancestry-preserving two-parent merge whose tree must retain every author-changed
-postimage, including deletions and modes. Conflicts, missing immutable objects,
-untracked collisions and changes to an owned postimage stop publication. Exact
-refresh intent/result and elapsed time are retained. A resume requires that same
-captured main and head; changed targets require a fresh vintage or explicit
-reconciliation. No separate PR-base metadata PATCH is performed.
-
-Publication and independent review must use the actual refreshed head. Creating
-or updating the PR, installing final selection outputs and scientific operators
-remain outside this metadata continuation. Substantive reviewer acceptance remains
-mandatory; use the ordinary review and standard workflow dispatch after preparation.
-
-Timing includes each automatic invocation's start, measured elapsed duration,
-prepared-stage count and observed commit count, plus commit/refresh work and
-explicit barrier reasons. API time is measured separately for each stage.
-Unobserved interphase wall time remains unclassified, not proven idle. Do not add
-overlapping wait/operator durations or infer gap closures per hour from controls.
-Actual later batch adoption and end-to-end elapsed outcomes must be recorded on
-the original issue.
 
 ## Typed measured evidence construction
 
@@ -462,18 +312,9 @@ wrong units and conflicting input/result/evaluation bindings refuse before the
 existing exclusive publication writer creates output. Original metric vintages
 remain intact. This validates reporting, not the underlying geographic result.
 
-## Author scope
+## Explicit v2 subsets and immutable receipt qualification
 
-Automatic authoring verifies the actual managed workspace worker, token, branch
-and path before and after reading the linked issue. It checks the issue's declared
-engineering output paths before writing. Ordinary authorship does not read a
-canonical lease, readiness snapshot, dependency audit or parsed blocker receipt.
-The parent coordinates real overlapping work and dependencies. Scientific byte
-checks and distinct exact-head review remain required where applicable.
-
-### Explicit v2 subsets and immutable receipt continuation
-
-`advance` also accepts a recipe with `mode: "explicit-groups"`. Each group names
+The recipe constructor accepts `mode: "explicit-groups"`. Each group names
 `id`, `handoff_id`, ordered `component_ids`, unique `target_ids`, and exact
 `source_template` / `native_template` commit/path locators. The templates must
 already be genuine `source-native-v2` requests with precisely that subset. The
@@ -487,97 +328,6 @@ This mode preserves each template's source/native destination. For new science,
 prepare templates with fresh candidate destinations and the admitted resource
 configuration; the driver does not silently rename historical requests or rerun
 operators. `destination_prefix` is used only by the existing greedy constructor.
-The ordinary automatic entry commits recipe/request metadata, then waits for the
-real external SOURCE and NATIVE terminals as before.
-
-For stages already prepared by the standalone commands, `prepared_stages` in the
-advance config can map an existing stage ID to:
-
-```json
-{
-  "config": {"commit": "EXACT_ORIGINAL_CONFIG_COMMIT", "path": "original-config.json"},
-  "receipt": {"commit": "EXACT_RECEIPT_COMMIT", "path": "original-stage/preparation.json"}
-}
-```
-
-Use the actual original raw config, including its original local output paths.
-The receipt's config hash is a hash of those bytes, not a newly serialized or
-repinned substitute. The driver authenticates every immutable product and runs
-the ordinary metadata constructor to establish applicability to the current
-transition. It compares the entire output inventory and bytes, then records only
-a reference in its local continuation journal. It neither copies the retained
-products nor commits a duplicate stage. Resume rereads the same receipt; changed
-or removed inputs, product drift, foreign stages and changed reuse bindings fail.
-Missing stages continue through the existing constructor. Review and queue
-decisions cannot be adopted. This route can reuse SOURCE/NATIVE retention receipts
-before composition, without launching any scientific operator.
-
-A retained stage whose regenerated metadata would differ is rejected, rather than
-called complete. This includes changed consumed code for request issuance and
-changed descriptor identities. Preserve the old evidence, supply its exact
-original observations when still applicable, or prepare only the affected stage
-in a fresh continuation. An explicitly supplied byte-identical commit alias for
-a reused output is authenticated but kept exactly as supplied; it is not silently
-repinned to the receipt's later commit.
-
-For an already finalized standalone delivery, set `resume_finalized` to the same
-config/receipt locator pair, referencing the existing `finalize` stage. Use an
-explicit-v2 recipe whose templates name the actual original issued requests;
-include its exact `selector`, `package_inputs`, `new_prefix` and retained registry
-locators. This route verifies the complete new subset against the retained
-SOURCE/NATIVE authorities, preserved registry entries, original composed rows,
-genuine rebind execution custody and every final output. It then enters the
-ordinary publication/independent-review boundary directly. No preceding stage
-files or scientific evidence are minted. Do not combine it with `prepared_stages`
-or the older `completed_delivery` discovery/replay option.
-
-Neither receipt route establishes new science, CI acceptance, review acceptance
-or actual subsequent delivery adoption. The frozen Norway B PR #1804 was checked
-read-only as a real compatibility fixture; it was not changed or replayed. The
-opt-in retained-object control is:
-
-```sh
-GIT_NO_LAZY_FETCH=1 WORLDATLAS_DELIVERY_V2_FIXTURE=1 node --test \
-  --test-name-pattern='frozen Norway B' test/delivery-handoff-advance.test.mjs
-```
-
-It requires the referenced immutable Git objects locally, performs no fetch or
-operator execution, and includes adverse scope/product controls. Default CI uses
-bounded synthetic and actual-Git orchestration fixtures. Real later automatic
-batch adoption and measured delivery timing remain open on issue #1785.
-
-### Continue completed original SOURCE/NATIVE custody
-
-A completed historical pair is not a new issuance recipe. The `advance` entry
-also accepts a committed recipe with `mode: "completed-original-custody"`,
-`version: 1`, an `id`, and the existing exact `selector`, `package_inputs`,
-`retained_registries` and `new_prefix` context. Its nonempty `groups` contain only
-`id`, ordered `component_ids`, `target_ids`, and exact commit/path locators named
-`source_publication`, `native_publication` and `native_operating`.
-
-Each continuation invokes the unchanged original-authority constructor on the
-complete original publications, issued requests, facts, inventories, operating
-custody and native assets. Declared component and target scopes must equal the
-qualified original ledger. A literal historical request keeps its complete
-source rule, original cohort roster, issued subset, resource/code identities,
-geometry scope and remainder. There is no v1-to-v2 conversion, singleton source
-fabrication or inference of whole-gap completion.
-
-This route enters directly at real authority metadata preparation. It neither
-issues SOURCE/NATIVE requests nor marks recipe, request or operator stages as
-completed. It uses the existing interruption-safe journal and automatic commit
-path for metadata actually prepared, then shares the ordinary authority registry,
-composition, genuine current rebind and package/finalize preparation. Independent
-review and integration follow separately. It cannot be mixed with `resume_finalized`, `completed_delivery`
-or `prepared_stages`; execution observations cannot replace its pinned custody.
-Original qualification alone is never current selection approval.
-
-The opt-in `WORLDATLAS_DELIVERY_ORIGINAL_FIXTURE=1` control reads the genuine
-retained Native102 singleton within its original69-member corpus and preserves
-its supported fragment, two original cells and nonempty remainder. Run with
-`GIT_NO_LAZY_FETCH=1` and the exact objects already present. It performs no
-SOURCE/NATIVE/rebind execution and claims no subsequent-batch adoption. Default
-CI retains its bounded contract controls without fetching historical science.
 
 ### Inherited package read roles and explicit historical restoration
 
@@ -591,21 +341,15 @@ not redundantly appended. New output ownership is unchanged.
 When an original consumed role is absent from that baseline, first reconcile its
 exact restoration write path in the ordinary issue scope and commit the
 unchanged original body. Then supply `restored_read_roles` in standalone finalize
-configuration, or `observations.restored_read_roles` for automatic continuation:
+configuration:
 `{"commit":"<exact restoration commit>","paths":["<original role path>"]}`.
 The finalizer checks each role against its original custody and that committed
 snapshot; it does not restore files or grant write authority. Duplicate, unbound,
 changed, nonordinary, missing or accepted-path-overwriting entries fail. Original
 custody commits stay unchanged. All foreign-role identity failures are reported
 together so the complete scope can be reconciled before retrying. This descriptor
-is part of the immutable finalize-stage input; an already failed stage must keep
-its original intent and use a truthful new preparation vintage for changed input.
+is part of the immutable finalize input; changed input requires a fresh preparation
+destination rather than replacing an existing completed product.
 
-Automatic `package` stages retain their exact immutable input in the committed
-`preparation.json`, authenticated by its existing configuration hash and output
-inventory. The selected classifier consumes this product provenance without
-requiring any runtime cache or `package.intent.json` in Git. Existing published
-legacy intent/receipt pairs remain supported; an already-written legacy receipt
-keeps its exact bytes during interrupted recovery. Standalone package publication
-continues to use its existing receipt/configuration contract. Runtime observations,
-locks, timestamps and dispatch intent are never added to the product receipt.
+Standalone preparation retains its existing receipt/configuration contract.
+Published legacy receipts remain supported by their existing consumers.
