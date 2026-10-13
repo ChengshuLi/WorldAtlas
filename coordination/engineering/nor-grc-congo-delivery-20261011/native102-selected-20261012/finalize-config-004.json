@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "registry": {
+    "bytes": 38022,
+    "commit": "64e1484ff3415c8984bb4a6ecc282276f054b745",
+    "git_blob_oid": "7c546f44c0568260a89527094d9eae2fedc3929d",
+    "mode": "100644",
+    "path": "coordination/engineering/nor-grc-congo-delivery-20261011/native102-selected-20261012/advance/compose/authority-registry.json",
+    "sha256": "6962d2f946e57999bcd3cd0c75e925b702607f25e4da701c7fd3878d7fb063af"
+  },
+  "ledger": {
+    "bytes": 768918,
+    "commit": "64e1484ff3415c8984bb4a6ecc282276f054b745",
+    "git_blob_oid": "9b919a23168946d971997771279b298f25715fb7",
+    "mode": "100644",
+    "path": "coordination/engineering/nor-grc-congo-delivery-20261011/native102-selected-20261012/advance/compose/composed-original-ledger.json",
+    "sha256": "34cd825e7b38ed1ce0751a7e37799ee035f28813290f30aa004329e12fe04fbe"
+  },
+  "rebind": {
+    "bytes": 3223,
+    "commit": "4c74e66d820d78ad1270437e3a41804038db37ab",
+    "git_blob_oid": "142a7351014da2d90294b60f9d5a7504a3c422a0",
+    "mode": "100644",
+    "path": "coordination/engineering/nor-grc-congo-delivery-20261011/native102-selected-20261012/advance/rebind-certificate/certificate.json",
+    "sha256": "533dd5ba5b4bd9dcabe97ac918f851f517914f6dd2b35fa0f790941913af2a03"
+  },
+  "new_prefix": "coordination/engineering/nor-grc-congo-delivery-20261011/native102-selected-20261012/",
+  "sidecar": {
+    "commit": "31b358881c53796ae1e9d0d87f97e1d0a3381f60",
+    "path": "coordination/engineering/nor-grc-congo-delivery-20261011/native102-selected-20261012/release-002/selection-sidecar.json",
+    "mode": "100644",
+    "git_blob_oid": "d0cc7438984b6112c5c3e95a25092d725f806d2f",
+    "bytes": 3521,
+    "sha256": "9a0eca566dba6d4a1d477bee18b16605f2deb1cac56dd105d48495568f5e8ee5"
+  },
+  "selected_ledger": {
+    "bytes": 1223726,
+    "commit": "53607351b20d57dab9a2dd704428590450b45c08",
+    "git_blob_oid": "970bb043c4296398408cb7dd82a5f2cf0871fd4f",
+    "mode": "100644",
+    "path": "coordination/engineering/nor-grc-congo-delivery-20261011/native102-selected-20261012/assembly-002/ledger.json",
+    "sha256": "ee3d39fbcad50c78a38b1d503f96ecbd5595bfeffeb405e793b06b81b4be147e"
+  },
+  "selector": {
+    "commit": "4278a6176e5530ccafe39f57bb1ab58a60992701",
+    "path": "data/ownership-selection.json",
+    "mode": "100644",
+    "git_blob_oid": "ee85cd04e970c0fe350ceb4ff82b84e797e6efac",
+    "bytes": 1574,
+    "sha256": "6357d451427f894959f80af44d1fdfa51d030934abedb1a0e34f09c1c05436a5"
+  },
+  "package_inputs": {
+    "path": ".github/package-inputs.json",
+    "commit": "02cd63c6c29032af86b739dcf3b600104b128aec",
+    "mode": "100644",
+    "git_blob_oid": "7477a75a84a4b1b2661dcbc54b00326a16f3b71d",
+    "bytes": 96354,
+    "sha256": "bd78f643461f6a9b033d0bca9c2130bb143b539b1d810185b795b86569edc56e"
+  },
+  "preparation_allowance": {
+    "phaseBytes": 536870912,
+    "rssBytes": 1073741824
+  },
+  "restored_read_roles": {
+    "commit": "3accc55f3b64fd3cbfede1d147da898ee925697a",
+    "paths": [
+      "coordination/engineering/melanesia363-additive-delivery-20261010/native-operating/native102-derived-operating-view.json",
+      "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/102/base-native-manifest.json",
+      "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/102/facts.json",
+      "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/102/features.json",
+      "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/102/inventory.jsonl.gz",
+      "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/102/ledger-batch.json",
+      "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/102/owner-window.json",
+      "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/102/owners-batch.json.gz",
+      "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/102/patch-batch.json",
+      "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/102/publication.json",
+      "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/102/release-envelope.json",
+      "coordination/engineering/melanesia363-additive-delivery-20261010/native-qualified/102/virtual-owner-window.json",
+      "coordination/engineering/melanesia363-additive-delivery-20261010/native-requests/102-current353-lifetime-bf9fae.json",
+      "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/102/facts.json",
+      "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/102/inventory.jsonl.gz",
+      "coordination/engineering/melanesia363-additive-delivery-20261010/source-qualified/102/publication.json"
+    ]
+  }
+}
