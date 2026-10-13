@@ -88,9 +88,7 @@ function bindDeclarationTransition({sourceRoot,originalManifest,assembled,origin
     if(!pins.has(key))current.verifyBody(pin);
     pins.set(key,pin);
   }
-  const authorized=assembly.current_selected_inputs.filter(pin=>current.source.files.some(row=>
-    row.path===pin.path&&row.mode===pin.mode&&row.oid===pin.git_blob_oid)).map(pin=>pin.path);
-  const transition=admitPackageOutputTransition(manifest,current.source,authorized);
+  const transition=admitPackageOutputTransition(manifest,current.source);
   assert.deepEqual(assembly.transition,transition,'Assembly delta transition differs');
   for(const [context,snapshot] of [[fullContext,current],[assembledContext,original]]){
     assert.ok(Array.isArray(context.full_code_closure),'Full code closure required');

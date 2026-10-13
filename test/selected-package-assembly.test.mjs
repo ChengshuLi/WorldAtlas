@@ -165,13 +165,15 @@ function sourceFixture(f){
   const write=(name,raw)=>{fs.mkdirSync(path.dirname(path.join(f.root,name)),{recursive:true});fs.writeFileSync(path.join(f.root,name),typeof raw==='string'?raw:JSON.stringify(raw));};
   const git=(...args)=>execFileSync('git',['-C',f.root,...args],{encoding:'utf8'}).trim();
   const commit=()=>{git('add','.');git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','source');};
-  const definition={version:1,inputs:['.github/package-inputs.json','data/ownership-selection.json','scripts/builder.mjs','package-lock.json'],
+  const definition={version:1,inputs:['.github/package-inputs.json','data/ownership-selection.json','scripts/builder.mjs','package-lock.json','scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs'],
     optional_inputs:[],verification_paths:[],generated_outputs:['dist/']};
   const selection={version:1,additive_release:{path:'coordination/engineering/original/release.json'}};
   write('.github/package-inputs.json',definition);write('data/ownership-selection.json',selection);
   write('.github/workflows/merge-integration-checks.yml','actual build invocation');
+  write('.github/workflows/worker-merge.yml','actual final-worker build invocation');
   write('scripts/assemble-selected-package.mjs','// Synthetic current entry point for private admission controls.');
   write('scripts/builder.mjs','actual consumed builder');write('package-lock.json','{}');
+  write('scripts/package-output-artifact.mjs','capture writer');write('scripts/package-node-runtime.mjs','runtime inventory');
   git('init','-q');commit();
   const snapshot=()=>({head:git('rev-parse','HEAD'),tree:git('rev-parse','HEAD^{tree}'),definition,selection,
     files:committedPackageInputs(f.root,definition),producer:committedPackageProducer(f.root)});
@@ -201,7 +203,21 @@ test('private assembly admission uses actual declared inputs and rejects legacy 
   for(const name of ['test/incidental.test.mjs','scripts/observer.mjs','.github/workflows/unrelated.yml']){
     s.write(name,'unconsumed observer');s.commit();assert.doesNotThrow(()=>requirePackageAssemblyExecution(issue(token)),name);
   }
-  for(const name of ['scripts/builder.mjs','package-lock.json','.github/workflows/merge-integration-checks.yml']){
+  const declaration=JSON.parse(fs.readFileSync(path.join(f.root,'.github/package-inputs.json'),'utf8'));
+  const childInput='coordination/engineering/child-reader/authority.json';
+  declaration.inputs.push(childInput);s.write('.github/package-inputs.json',declaration);
+  s.write(childInput,{authority:'read by a detached scientific reader'});s.commit();
+  const admitted=issue(token);assert.equal(Object.hasOwn(admitted,'pending_selected_inputs'),false,
+    'A parent-only list is not a scientific consumption inventory');
+  assert.doesNotThrow(()=>requirePackageAssemblyExecution(admitted));
+  for(const name of ['coordination/engineering/child-reader/helper.mjs','coordination/engineering/child-reader/absent.json']){
+    const bad=structuredClone(declaration);bad.inputs.push(name);s.write('.github/package-inputs.json',bad);
+    if(name.endsWith('.mjs'))s.write(name,'executable');s.commit();
+    assert.throws(()=>issue(token),/Exact inert selected additions required/);
+    s.write('.github/package-inputs.json',declaration);
+    if(name.endsWith('.mjs'))fs.unlinkSync(path.join(f.root,name));s.commit();
+  }
+  for(const name of ['scripts/builder.mjs','package-lock.json','scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs','.github/workflows/merge-integration-checks.yml','.github/workflows/worker-merge.yml']){
     const old=fs.readFileSync(path.join(f.root,name),'utf8');s.write(name,'changed');s.commit();
     assert.throws(()=>issue(token),/input changed|producer workflow required/,name);
     s.write(name,old);s.commit();
@@ -234,7 +250,7 @@ test('original discovery ignores observer trees but refuses changed build inputs
   for(const name of ['test/incidental.test.mjs','scripts/observer.mjs','.github/workflows/unrelated.yml']){
     s.write(name,'new observer');s.commit();assert.equal((await discover()).origin.head,head,name);
   }
-  for(const name of ['scripts/builder.mjs','package-lock.json','.github/workflows/merge-integration-checks.yml']){
+  for(const name of ['scripts/builder.mjs','package-lock.json','scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs','.github/workflows/merge-integration-checks.yml','.github/workflows/worker-merge.yml']){
     const old=fs.readFileSync(path.join(f.root,name),'utf8');s.write(name,'changed');s.commit();assert.equal(await discover(),null,name);
     s.write(name,old);s.commit();
   }

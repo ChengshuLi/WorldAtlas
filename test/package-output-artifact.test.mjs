@@ -16,11 +16,14 @@ function fixture(t) {
   t.after(() => fs.rmSync(root, {recursive: true, force: true}));
   const write = (name, value) => { fs.mkdirSync(path.dirname(path.join(root, name)), {recursive: true});
     fs.writeFileSync(path.join(root, name), typeof value === 'string' ? value : JSON.stringify(value)); };
-  const definition = {version: 1, inputs: ['.github/package-inputs.json','data/ownership-selection.json','package-lock.json'],
+  const definition = {version: 1, inputs: ['.github/package-inputs.json','data/ownership-selection.json','package-lock.json','scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs'],
     optional_inputs: [], verification_paths: [], generated_outputs: ['dist/']};
   write('.github/package-inputs.json', definition); write('data/ownership-selection.json', {version: 1});
   write('package-lock.json', {lockfileVersion: 3});
+  write('scripts/package-output-artifact.mjs','synthetic capture writer');
+  write('scripts/package-node-runtime.mjs','synthetic runtime inventory');
   write('.github/workflows/merge-integration-checks.yml', 'genuine package build and immediate capture');
+  write('.github/workflows/worker-merge.yml','genuine final-worker package producer');
   write('node_modules/example/index.js','original dependency body');
   const git = (...args) => execFileSync('git', ['-C', root, ...args], {encoding: 'utf8'}).trim();
   git('init','-q'); git('add','.'); git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-qm','fixture');
@@ -36,7 +39,7 @@ function fixture(t) {
 test('retains complete actual Cloudflare output and original input identity', t => {
   const {root, git} = fixture(t), manifest = createPackageOutputManifest(root);
   assert.equal(manifest.source.head, git('rev-parse','HEAD'));
-  assert.equal(manifest.source.files.length, 3); assert.equal(manifest.output.files.length, 4);
+  assert.equal(manifest.source.files.length, 5); assert.equal(manifest.output.files.length, 4);
   assert.equal(verifyPackageOutput(root, manifest), true);
   assert.match(manifest.semantics, /Original full/);
 });
@@ -72,8 +75,8 @@ test('malformed output rosters, duplicate paths, traversal and byte accounting f
     value => { value.output.bytes++; },
     value => { value.output.files[0].bytes = PACKAGE_OUTPUT_LIMITS.member_bytes + 1; },
     value => { value.source.files.push(value.source.files[0]); },
-    value => { value.source.producer.workflow.oid='broken'; },
-    value => { delete value.source.producer.workflow; },
+    value => { value.source.producer.workflows[0].oid='broken'; },
+    value => { delete value.source.producer.workflows; },
     value => { value.source.producer.kind='legacy'; },
   ]) { const value = structuredClone(original); mutate(value); assert.throws(() => validatePackageOutputManifest(value)); }
 });
@@ -109,10 +112,10 @@ test('original-to-current admission covers base, producer workflow, optional and
   const current={...structuredClone(original.source),head:'f'.repeat(40)};
   current.selection.additive_release={path:'coordination/engineering/new/release.json'};
   current.definition.inputs.push(name);current.files.push({path:name,mode:'100644',oid:'1'.repeat(40)});
-  assert.deepEqual(admitPackageOutputTransition(original,current,[name]).added_selected_inputs,[name]);
+  assert.deepEqual(admitPackageOutputTransition(original,current).added_selected_inputs,[name]);
   for(const mutate of [
     value=>{value.selection.base='changed';},
-    value=>{value.producer.workflow.oid='a'.repeat(40);},
+    value=>{value.producer.workflows[0].oid='a'.repeat(40);},
     value=>{delete value.producer;},
     value=>{value.files.find(row=>row.path==='package-lock.json').oid='c'.repeat(40);},
     value=>{value.files=value.files.filter(row=>row.path!=='package-lock.json');},
@@ -120,8 +123,12 @@ test('original-to-current admission covers base, producer workflow, optional and
     value=>{value.files.at(-1).mode='120000';},
     value=>{value.definition.optional_inputs.push(name);},
     value=>{value.definition.inputs.push('coordination/engineering/new/');},
-  ]){const candidate=structuredClone(current);mutate(candidate);assert.throws(()=>admitPackageOutputTransition(original,candidate,[name]));}
-  assert.throws(()=>admitPackageOutputTransition(original,current,[]),/authenticated selected data/);
+  ]){const candidate=structuredClone(current);mutate(candidate);assert.throws(()=>admitPackageOutputTransition(original,candidate));}
+  const absent=structuredClone(current);absent.definition.inputs.push('coordination/engineering/new/absent.json');
+  assert.throws(()=>admitPackageOutputTransition(original,absent),/New selected declaration is absent/);
+  const executable=structuredClone(current);executable.definition.inputs.push('coordination/engineering/new/helper.mjs');
+  executable.files.push({path:'coordination/engineering/new/helper.mjs',mode:'100644',oid:'e'.repeat(40)});
+  assert.throws(()=>admitPackageOutputTransition(original,executable),/explicit inert selected data/);
 });
 
 test('actual ZIP extraction preserves exact complete bytes and rejects hostile archives before publishing', t => {
@@ -210,7 +217,7 @@ test('changed-declaration full-output comparison authenticates both sources and 
       origin:{head:originalHead},original_manifest_sha256:manifestSha,
       current_execution:{source_commit:currentHead,source_tree:current.tree},
       original_base_context_retained:true,base_restoration_invoked:false,invariant_build_invoked:false,
-      transition:admitPackageOutputTransition(manifest,current,[added]),current_selected_inputs:[pin]}};
+      transition:admitPackageOutputTransition(manifest,current),current_selected_inputs:[pin]}};
   const originalAtlas=atlas(originalHead,descriptor(originalHead)),currentAtlas=atlas(currentHead,descriptor(currentHead));
   const reset=()=>{full.write('dist/client/atlas-geography.json',currentAtlas);
     assembled.write('dist/client/atlas-geography.json',originalAtlas);assembled.write('.cache/package-input-build.json',receipt);};
@@ -385,19 +392,24 @@ test('declared build image rejects real producer changes but ignores incidental 
     files:committedPackageInputs(f.root,definition),producer:committedPackageProducer(f.root)});
   const incidental=['test/new.test.mjs','scripts/read-only-observer.mjs','.github/workflows/unrelated.yml','README.md'];
   for(const name of incidental){
-    f.write(name,'observer version one');commit();assert.doesNotThrow(()=>admitPackageOutputTransition(original,current(),[]),name+' added');
-    f.write(name,'observer version two');commit();assert.doesNotThrow(()=>admitPackageOutputTransition(original,current(),[]),name+' changed');
-    fs.unlinkSync(path.join(f.root,name));commit();assert.doesNotThrow(()=>admitPackageOutputTransition(original,current(),[]),name+' deleted');
+    f.write(name,'observer version one');commit();assert.doesNotThrow(()=>admitPackageOutputTransition(original,current()),name+' added');
+    f.write(name,'observer version two');commit();assert.doesNotThrow(()=>admitPackageOutputTransition(original,current()),name+' changed');
+    fs.unlinkSync(path.join(f.root,name));commit();assert.doesNotThrow(()=>admitPackageOutputTransition(original,current()),name+' deleted');
   }
-  for(const name of [...Object.keys(inputs),'package-lock.json','.github/workflows/merge-integration-checks.yml']){
+  for(const name of [...Object.keys(inputs),'package-lock.json','scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs','.github/workflows/merge-integration-checks.yml','.github/workflows/worker-merge.yml']){
     const prior=fs.readFileSync(path.join(f.root,name));f.write(name,'changed consumed bytes');commit();
-    assert.throws(()=>admitPackageOutputTransition(original,current(),[]),/input changed|producer workflow required/,name);
+    assert.throws(()=>admitPackageOutputTransition(original,current()),/input changed|producer workflow required/,name);
     f.write(name,prior.toString());commit();
+  }
+  for(const name of ['scripts/package-output-artifact.mjs','scripts/package-node-runtime.mjs']){
+    const prior=fs.readFileSync(path.join(f.root,name),'utf8');f.write(name,'dirty capture code');
+    assert.throws(()=>snapshotPackageOutputSource(f.root),/complete immutable inventory/,name+' dirty');
+    f.write(name,prior);
   }
   const legacy=structuredClone(original);delete legacy.source.producer;
   legacy.source.programme=[{path:'scripts/old-observer.mjs',mode:'100644',oid:'a'.repeat(40)}];
   assert.doesNotThrow(()=>validatePackageOutputManifest(legacy),'Legacy remains honest retained history');
-  assert.throws(()=>admitPackageOutputTransition(legacy,current(),[]),/Immediate original build capture/);
+  assert.throws(()=>admitPackageOutputTransition(legacy,current()),/Immediate original build capture/);
 });
 
 test('both workflows capture genuine build output immediately and upload only after checks', () => {
@@ -410,6 +422,8 @@ test('both workflows capture genuine build output immediately and upload only af
     const at=steps.findIndex(step=>step.name===build);
     assert.equal(steps[at+1].name,inventory,'No observer/test may intervene before original capture');
     const end=steps.findIndex(step=>step.name===upload);
+    const controls=build==='Build hosted assets'?['Verify full-regression package controls','Install browser dependencies only for tests that use Playwright']:['Verify package controls'];
+    for(const name of controls)assert(steps.findIndex(step=>step.name===name)>at+1,name+' must not run before capture');
     assert(steps.slice(at+2,end).some(step=>step.name===check),'Required checks remain before upload');
     assert.match(steps[end].raw,/if: success\(\)/,'Failed checks cannot upload an original');
   }

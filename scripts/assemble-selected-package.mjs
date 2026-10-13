@@ -12,7 +12,7 @@ import {githubAPI, githubPages} from './issue-claim-contract.mjs';
 import {integrationTree} from './integration-profile.mjs';
 import {loadPackageInputs, readPackageInputs, containsPackagePath} from './package-inputs.mjs';
 import {inspectPackageRuntime, verifyPackageDependencies} from './package-build.mjs';
-import {committedPackageInputs, committedPackageProducer, PACKAGE_PRODUCER_WORKFLOW, PACKAGE_PRODUCER_KIND, packageBuildConfiguration,
+import {committedPackageInputs, committedPackageProducer, PACKAGE_PRODUCER_WORKFLOWS, PACKAGE_PRODUCER_KIND, packageBuildConfiguration,
   validatePackageOutputManifest, admitPackageOutputTransition, streamedPackageFile, installedPackageIdentity, installedPackageDifferences, declaredPackagePythonRoots} from './package-output-artifact.mjs';
 import {authenticateOriginalPackageOutput, issuePackageAssemblyExecution, preparePackageSelectedAdditive,
   publishPackageSelectedAdditive, packageSelectedPublicationInventory, requirePackageAssemblyExecution}
@@ -70,7 +70,7 @@ export async function findOriginalPackage({api,repo,current,originalRunId}){
     if(run.status!=='completed'||seen.has(run.head_sha)||run.repository?.full_name!==repo||run.head_repository?.full_name!==repo)continue;
     seen.add(run.head_sha);
     const tree=await integrationTree(api,repo,run.head_sha),all=treeRows(tree);
-    const producer={kind:PACKAGE_PRODUCER_KIND,workflow:all.find(row=>row.path===PACKAGE_PRODUCER_WORKFLOW)};
+    const producer={kind:PACKAGE_PRODUCER_KIND,workflows:all.filter(row=>PACKAGE_PRODUCER_WORKFLOWS.includes(row.path))};
     if(!same(producer,current.producer))continue;
     const definition=await readPackageInputs({route:`/repos/${repo}`,base:run.head_sha,api});
     const source={head:run.head_sha,tree:tree.object.tree.sha,definition,producer,
@@ -178,7 +178,7 @@ export async function assembleSelectedPackage({api,repo,expectedHead,originalRun
       selectedGrid:{sha256:current.selection.sha256},geographicRelease:atlas.additiveRelease.base_reference});
     need(publication,'Genuine current additive publication required');
     const consumed=packageSelectedPublicationInventory(publication,{root:stage});
-    const transition=admitPackageOutputTransition(manifest,current,consumed.map(row=>row.path));
+    const transition=admitPackageOutputTransition(manifest,current);
     const oldAssets=['base_manifest','ledger','owner_roster','patch'].map(role=>atlas.additiveRelease[role]);
     need(oldAssets.every(pin=>/^additive-repairs\/[A-Za-z0-9_.-]+$/.test(pin?.path??''))&&new Set(oldAssets.map(pin=>pin.path)).size===4,'Original four public additive assets required');
     for(const pin of oldAssets)need(same(streamedPackageFile(originalRoot,'dist/client/'+pin.path),{path:'dist/client/'+pin.path,bytes:pin.bytes,sha256:pin.sha256}),'Original additive output differs');

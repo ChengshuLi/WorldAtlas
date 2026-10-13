@@ -533,18 +533,6 @@ jobs:
       - name: Install Python dependencies
         if: needs.profile.outputs.profile == 'full' && needs.profile.outputs.metadata_reuse != 'true'
         run: python -m pip install -r requirements.txt
-      - name: Install browser dependencies only for tests that use Playwright
-        if: needs.profile.outputs.metadata_reuse != 'true'
-        env:
-          INTEGRATION_PROFILE: ${{ needs.profile.outputs.profile }}
-          INTEGRATION_SHARD: ${{ matrix.shard }}
-        run: |
-          if node --input-type=module -e "import {integrationNeedsBrowser} from './scripts/run-integration-tests.mjs'; process.exit(integrationNeedsBrowser(process.env.INTEGRATION_PROFILE, Number(process.env.INTEGRATION_SHARD)) ? 0 : 1)"; then
-            npx playwright install --with-deps chromium
-          fi
-      - name: Verify full-regression package controls
-        if: needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
-        run: node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs test/package-inputs.test.mjs test/package-build.test.mjs
       - name: Snapshot original full-regression package inputs
         if: needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
         run: node scripts/package-output-artifact.mjs --snapshot
@@ -554,6 +542,18 @@ jobs:
       - name: Inventory original full-regression package output
         if: success() && needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
         run: node scripts/package-output-artifact.mjs
+      - name: Verify full-regression package controls
+        if: needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
+        run: node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs test/package-inputs.test.mjs test/package-build.test.mjs
+      - name: Install browser dependencies only for tests that use Playwright
+        if: needs.profile.outputs.metadata_reuse != 'true'
+        env:
+          INTEGRATION_PROFILE: ${{ needs.profile.outputs.profile }}
+          INTEGRATION_SHARD: ${{ matrix.shard }}
+        run: |
+          if node --input-type=module -e "import {integrationNeedsBrowser} from './scripts/run-integration-tests.mjs'; process.exit(integrationNeedsBrowser(process.env.INTEGRATION_PROFILE, Number(process.env.INTEGRATION_SHARD)) ? 0 : 1)"; then
+            npx playwright install --with-deps chromium
+          fi
       - name: Read back qualified native build outputs when selected
         if: needs.profile.outputs.profile == 'full' && matrix.shard == 0 && needs.profile.outputs.metadata_reuse != 'true'
         run: |
@@ -839,9 +839,6 @@ jobs:
       - name: Install package Python dependencies
         run: python -m pip install -r requirements.txt
         if: needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete')
-      - name: Verify package controls
-        run: node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs test/package-inputs.test.mjs test/package-build.test.mjs
-        if: needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete')
       - name: Snapshot original selected package inputs
         if: needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete') && needs.profile.outputs.metadata_reuse != 'true'
         run: node scripts/package-output-artifact.mjs --snapshot
@@ -851,6 +848,9 @@ jobs:
       - name: Inventory original selected package output
         if: success() && needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete') && needs.profile.outputs.metadata_reuse != 'true'
         run: node scripts/package-output-artifact.mjs
+      - name: Verify package controls
+        run: node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs test/package-inputs.test.mjs test/package-build.test.mjs
+        if: needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete')
       - name: Read back qualified native build outputs when selected
         if: needs.profile.outputs.full != 'false' && !(needs.profile.outputs.profile == 'full' && needs.profile.outputs.test_selection == 'complete')
         run: |

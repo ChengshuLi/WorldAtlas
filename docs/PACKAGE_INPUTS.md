@@ -15,16 +15,25 @@ When adding a genuine package dependency outside declared directories, add its p
 ## Retained original Cloudflare output
 
 The original output inventory is captured immediately after the genuine Cloudflare
-build, before readback and regression consumers. Upload still waits for required
+build, before package controls, browser-selection/install code, readback and regression consumers. Upload still waits for required
 checks to succeed. Authentication compares every retained output byte with that
 inventory, so a later consumer cannot silently change the reusable package.
 
 New manifests identify this boundary as `immediate-cloudflare-build-v1` and retain
-the actual build workflow's Git identity. The complete declared source image,
-installed dependencies/runtime and build configuration remain authoritative.
+the two genuine build workflows' Git identities (`merge-integration-checks.yml`
+and `worker-merge.yml`). The complete declared source image,
+installed dependencies/runtime and build configuration remain authoritative. The capture
+writer and Node runtime-inventory helper are explicit package inputs; their existing
+input/Python helpers were already declared. The ordinary pre-build snapshot therefore
+checks their actual bytes against Git as well as binding their committed identities.
 Tests, unrelated workflows and observer scripts outside the declared image do not
 invalidate those bytes merely because they changed. A declared observer remains a
 package input; this change does not guess which declared files are unused.
+
+Selected declaration admission checks the append-only inert file boundary and
+immutable source rows. It does not equate the parent reader inventory with all
+scientific consumption: detached readers authenticate their own inputs, while
+existing scientific loading and copied-publication checks remain authoritative.
 
 Legacy manifests keep their original provenance. They cannot establish immediate
 build capture and therefore require the ordinary full-build path under the new

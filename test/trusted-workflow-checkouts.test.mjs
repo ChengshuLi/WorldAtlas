@@ -235,7 +235,7 @@ test('full PR co-locates actual package work on shard zero without changing the 
   const receipt=packageStep(w.regression,'Retain full-regression package receipt');
   assert.match(receipt.text,/name: package-input-build\n/);assert.match(receipt.text,/path: \|\n            \.cache\/package-input-build.json\n/);
   assert.match(receipt.text,/if-no-files-found: error/);
-  assert(w.regression.steps.indexOf(packageStep(w.regression,'Verify full-regression package controls'))<w.regression.steps.indexOf(packageStep(w.regression,'Build hosted assets')));
+  assert(w.regression.steps.indexOf(packageStep(w.regression,'Inventory original full-regression package output'))<w.regression.steps.indexOf(packageStep(w.regression,'Verify full-regression package controls')),'Incidental controls cannot mutate original capture authority');
   assert(w.regression.steps.indexOf(packageStep(w.regression,'Read back qualified native build outputs when selected'))<w.regression.steps.indexOf(packageStep(w.regression,'Verify full-regression package receipt')));
   assert(w.regression.steps.indexOf(packageStep(w.regression,'Complete regression shard'))<w.regression.steps.indexOf(packageStep(w.regression,'Verify full-regression package receipt')),'validate the bytes actually retained after tests');
 });

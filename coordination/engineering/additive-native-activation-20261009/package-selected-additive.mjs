@@ -136,8 +136,6 @@ export async function preparePackageSelectedAdditive({root,currentExecution,cons
   reader.outputBytes=outputBytes;
   reader.metadataBytes+=snapshot.metadataBytes+2*valueBytes(view).length;reader.phase();
   const copied=readBoundPublicationAssets(reader,roster,name=>containsPackagePath(definition.inputs,name)||execution.files.some(p=>p.path===name));
-  if(assembling)demand(execution.pending_selected_inputs.every(name=>copied.input_inventory.some(pin=>pin.path===name)),
-    'Package addition was not consumed by genuine current selected authority');
   const bodies=copied.bodies;
   requireExecution(execution);
   const gitEnd=ordinary(git);for(const k of ['dev','ino','size','mode','mtimeMs','ctimeMs'])demand(gitEnd[k]===gitStat[k],'Git program pathname drift');
@@ -319,10 +317,12 @@ function assemblySourceAdmission(original,source) {
   const rows=all.filter(row=>containsPackagePath(definition.inputs,row.path));
   demand(rows.every(row=>row.type==='blob'&&['100644','100755'].includes(row.mode)),'Ordinary original input roles required');
   const plain=rows.map(({type,...row})=>row);
-  const workflow=all.find(row=>row.path==='.github/workflows/merge-integration-checks.yml');
-  demand(workflow?.type==='blob'&&workflow.mode==='100644','Ordinary original producer workflow required');
-  const {type,...workflowPin}=workflow;
-  demand(before.producer?.kind==='immediate-cloudflare-build-v1'&&assemblySame(before.producer,{kind:'immediate-cloudflare-build-v1',workflow:workflowPin}),
+  const workflowPaths=['.github/workflows/merge-integration-checks.yml','.github/workflows/worker-merge.yml'];
+  const workflows=all.filter(row=>workflowPaths.includes(row.path));
+  demand(workflows.length===workflowPaths.length&&workflows.every(row=>row.type==='blob'&&row.mode==='100644'),
+    'Ordinary original producer workflows required');
+  const workflowPins=workflows.map(({type,...row})=>row);
+  demand(before.producer?.kind==='immediate-cloudflare-build-v1'&&assemblySame(before.producer,{kind:'immediate-cloudflare-build-v1',workflows:workflowPins}),
     'Immediate original build capture and unchanged producer workflow required');
   const current=new Map(plain.map(row=>[row.path,row]));
   const old=new Map(before.files.map(row=>[row.path,row])),exceptions=new Set(['.github/package-inputs.json','data/ownership-selection.json']);
@@ -331,7 +331,6 @@ function assemblySourceAdmission(original,source) {
   const added=newInputs.slice(oldInputs.length);
   demand(added.every(name=>!name.endsWith('/')&&/^coordination\/engineering\/[^/]+\/.+\.(?:json|jsonl\.gz|json\.gz|log)$/.test(name)&&current.get(name)?.mode==='100644'),'Exact inert selected additions required');
   for(const name of current.keys())demand(old.has(name)||added.includes(name),'New directory or optional package input is not invariant');
-  return added;
 }
 
 // Separate from package-issued full-build execution: this authenticates only the
@@ -342,7 +341,7 @@ export function issuePackageAssemblyExecution({original,source,stage,executingRo
   const metadataBytes=2*valueBytes(inheritedMetadata).length;
   demand(process.execArgv.length===0&&!process.env.NODE_OPTIONS?.trim()&&!process.env.NODE_PATH?.trim(),'Plain assembly Node execution required');
   source=fs.realpathSync(source);stage=fs.realpathSync(stage);executingRoot=fs.realpathSync(executingRoot);
-  const pendingInputs=assemblySourceAdmission(original,source);
+  assemblySourceAdmission(original,source);
   demand(path.resolve(process.argv[1])===path.join(executingRoot,'scripts/assemble-selected-package.mjs'),'Actual assembly driver required');
   const files=assemblyCode(source,executingRoot), executable=fs.realpathSync(process.execPath);
   const allowance=processingAllowance(),runtimeStat=ordinary(executable);
@@ -352,7 +351,7 @@ export function issuePackageAssemblyExecution({original,source,stage,executingRo
   delete runtime.path;
   const record=Object.freeze({kind:'current-selected-package-assembly',source_root:source,
     source_commit:assemblyGit(source,['rev-parse','HEAD']).trim(),source_tree:assemblyGit(source,['rev-parse','HEAD^{tree}']).trim(),
-    stage_root:stage,entry_point:'scripts/assemble-selected-package.mjs',files,runtime,allowance,original,inherited_metadata_bytes:metadataBytes,pending_selected_inputs:pendingInputs});
+    stage_root:stage,entry_point:'scripts/assemble-selected-package.mjs',files,runtime,allowance,original,inherited_metadata_bytes:metadataBytes});
   currentAssemblies.set(record,{executingRoot,fingerprint:valueSha(record)});return record;
 }
 export function requirePackageAssemblyExecution(record) {
