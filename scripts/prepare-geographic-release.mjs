@@ -1,4 +1,3 @@
-import {packagePythonArgs} from './package-python-execution.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -106,7 +105,7 @@ export function validateGeometryMigrations({features,baselineIds,baselineFootpri
   for(const id of added)state.delete(id);for(const [id,feature] of archives)state.set(id,feature);
   if(!equalIds(new Set(state.keys()),new Set([...changed,...removed,...reused]))||footprintHash([...state.values()])!==receipt.before_footprints_sha256)throw Error('Archived originals do not reconstruct the pinned pre-migration footprints');
   if(proof.creationProofs.length){const hierarchy=proof.files['after/hierarchy.json']??proof.files['after-hierarchy.json'];
-   execFileSync('python3',packagePythonArgs([fileURLToPath(new URL('./validate-land-creations.py',import.meta.url))]),{input:json({before:[...state.values()],after:afterFeatures,units:hierarchy?read(hierarchy.file):units,proofs:proof.creationProofs,base:proof.base}),maxBuffer:16*1024*1024});
+   execFileSync('python3',[fileURLToPath(new URL('./validate-land-creations.py',import.meta.url))],{input:json({before:[...state.values()],after:afterFeatures,units:hierarchy?read(hierarchy.file):units,proofs:proof.creationProofs,base:proof.base}),maxBuffer:16*1024*1024});
   }
  }
  if(!equalIds(new Set(state.keys()),new Set(baselineIds)))throw Error('Location migration requires a separately validated footprint/identity crosswalk');

@@ -797,6 +797,11 @@ def execute_package_source(mode, arguments):
 
 def main():
     need(sys.flags.isolated and sys.flags.no_site and sys.dont_write_bytecode, 'Runtime identity requires Python -I -S -B startup')
+    if len(sys.argv) >= 3 and sys.argv[1] == '--run-cli':
+        arguments=sys.argv[2:]
+        need(arguments[0] == '-c' and len(arguments)>1 or not arguments[0].startswith('-'), 'Unsupported current Python child invocation')
+        execute_package_source('--run-code' if arguments[0]=='-c' else '--run-script',arguments[1:] if arguments[0]=='-c' else arguments)
+        return
     if len(sys.argv) >= 3 and sys.argv[1] in ('--run-script', '--run-code'):
         execute_package_source(sys.argv[1], sys.argv[2:])
         return

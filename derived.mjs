@@ -1,4 +1,4 @@
-import {packagePythonArgs} from './scripts/package-python-execution.mjs';
+import {packagePythonArgs} from './scripts/package-build.mjs';
 import fs from 'node:fs';
 import {gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';

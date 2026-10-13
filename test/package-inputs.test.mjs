@@ -33,4 +33,5 @@ test('package declarations use actual metadata memory rather than historical bat
   const blob={type:'file',encoding:'base64',path:'.github/package-inputs.json',size:raw.length,content:raw.toString('base64'),sha:createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex')};
   assert.deepEqual(await readPackageInputs({route:'/repo',base:'main',api:async()=>blob}),value);
   await assert.rejects(readPackageInputs({route:'/repo',base:'main',api:async()=>({...blob,size:Number.MAX_SAFE_INTEGER})}),/unavailable/);
+  await assert.rejects(readPackageInputs({route:'/repo',base:'main',maximumBytes:128,api:async()=>({...blob,size:1,content:'A'.repeat(1024)})}),/Encoded package metadata/);
 });

@@ -45,11 +45,14 @@ export function loadPackageInputs(directory = root) {
   return validatePackageInputs(JSON.parse(fs.readFileSync(file,'utf8')),{maximumBytes});
 }
 
-export async function readPackageInputs({route, base, api}) {
-  const maximumBytes=packageInputByteBudget();
+export async function readPackageInputs({route, base, api, maximumBytes=packageInputByteBudget()}) {
+  if(!Number.isSafeInteger(maximumBytes)||maximumBytes<=0)throw Error('Invalid package metadata memory admission');
   const blob = await api(`${route}/contents/${PACKAGE_INPUT_FILE}?ref=${base}`);
   if (blob?.type !== 'file' || blob.encoding !== 'base64' || blob.path !== PACKAGE_INPUT_FILE ||
       !/^[a-f0-9]{40}$/.test(blob.sha ?? '') || !Number.isSafeInteger(blob.size) || blob.size > maximumBytes || typeof blob.content !== 'string') throw Error('Package input definition unavailable');
+  // Base64 expansion plus ordinary line wrapping fits two encoded characters
+  // per admitted decoded byte. Check before allocating the decoded buffer.
+  if(blob.content.length>2*maximumBytes+4)throw Error('Encoded package metadata exceeds available-memory admission');
   const raw = Buffer.from(blob.content, 'base64');
   if (raw.length !== blob.size || createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex') !== blob.sha) throw Error('Package input definition bytes changed');
   return validatePackageInputs(JSON.parse(raw),{maximumBytes});

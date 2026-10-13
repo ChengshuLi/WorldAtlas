@@ -1,4 +1,3 @@
-import {packagePythonProbeArgs} from './package-python-execution.mjs';
 import fs from 'node:fs/promises';
 import fsSync, {constants} from 'node:fs';
 import path from 'node:path';
@@ -7,6 +6,68 @@ import {spawn, spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {loadPackageInputs, validatePackageInputs, containsPackagePath} from './package-inputs.mjs';
 import {issueCurrentExecution,authenticateCurrentExecution,requireCurrentExecution,currentExecutionClosure} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/current-execution.mjs';
+
+// One explicit startup policy for package production and selected consumers.
+// Site hooks, user/PYTHONPATH imports and ambient bytecode cannot run before
+// the package's declared Python source and installed runtime have been admitted.
+const helper=fileURLToPath(new URL('./package-python-runtime.py',import.meta.url));
+export function packagePythonArgs(args){
+  if(!Array.isArray(args)||!args.length||args.some(value=>typeof value!=='string'))throw Error('Explicit Python package arguments required');
+  if(args[0]==='-c'){
+    if(args.length<2)throw Error('Explicit Python source required');
+    return ['-I','-S','-B',helper,'--run-code',...args.slice(1)];
+  }
+  if(args[0].startsWith('-'))throw Error('Package Python execution requires an explicit source script or -c');
+  return ['-I','-S','-B',helper,'--run-script',...args];
+}
+export function packagePythonProbeArgs(rows){
+  return ['-I','-S','-B',helper,'--probe-imports',JSON.stringify(rows)];
+}
+
+// Only this current execution wrapper controls the full build child's Python
+// startup. Immutable critical callers retain their certified source bytes.
+export function createPackagePythonExecution(stage,{python,sourceHelper,env=process.env}={}) {
+  if(!path.isAbsolute(python??'')||/[\r\n]/.test(process.execPath)||/\s/.test(process.execPath))throw Error('Exact executable paths required for current Python launcher');
+  const base=fsSync.realpathSync(stage),helperPath=path.join(base,'scripts/package-python-runtime.py');
+  const pin=file=>{
+    const actual=fsSync.realpathSync(file),stat=fsSync.statSync(actual);
+    if(!stat.isFile())throw Error('Ordinary current execution tool required');
+    const hash=createHash('sha256'),buffer=Buffer.alloc(1048576),fd=fsSync.openSync(actual,'r');let bytes=0,held;
+    try{for(;;){const n=fsSync.readSync(fd,buffer,0,buffer.length,null);if(!n)break;bytes+=n;hash.update(buffer.subarray(0,n));}held=fsSync.fstatSync(fd);}finally{fsSync.closeSync(fd);}
+    const after=fsSync.statSync(actual),fields=['dev','ino','size','mode','mtimeMs','ctimeMs'];
+    if(bytes!==stat.size||fsSync.realpathSync(file)!==actual||fields.some(key=>stat[key]!==held[key]||stat[key]!==after[key]))throw Error('Current execution tool changed while reading');
+    return {path:file,resolved:actual,mode:stat.mode&0o777,bytes,sha256:hash.digest('hex')};
+  };
+  if(fsSync.realpathSync(helperPath)!==helperPath)throw Error('Declared Python helper must be ordinary');
+  const interpreter=pin(python),helperPin=pin(helperPath),node=pin(process.execPath);
+  if(sourceHelper?.path!=='scripts/package-python-runtime.py'||sourceHelper.bytes!==helperPin.bytes||sourceHelper.sha256!==helperPin.sha256||sourceHelper.mode!==(helperPin.mode&0o111?'100755':'100644'))throw Error('Staged Python helper differs from independently authenticated source');
+  const cache=path.join(base,'.cache');fsSync.mkdirSync(cache,{recursive:true});
+  if(fsSync.realpathSync(cache)!==cache||!fsSync.lstatSync(cache).isDirectory())throw Error('Ordinary package cache required');
+  const directory=fsSync.mkdtempSync(path.join(cache,'python-execution-')),launcher=path.join(directory,'python3');
+  const raw=`#!${process.execPath}\nimport {spawnSync} from 'node:child_process';\nconst child=spawnSync(${JSON.stringify(python)},${JSON.stringify(['-I','-S','-B',helperPath,'--run-cli'])}.concat(process.argv.slice(2)),{stdio:'inherit'});\nif(child.error){process.stderr.write(String(child.error.message)+'\\n');process.exit(1);}\nif(child.signal){process.kill(process.pid,child.signal);}else process.exit(child.status??1);\n`;
+  fsSync.writeFileSync(launcher,raw,{flag:'wx',mode:0o700});
+  const launcherPin=pin(launcher);
+  const record={kind:'current-package-isolated-python-execution-v1',source_role:'scripts/package-build.mjs',
+    attribution:'Current application execution policy; not a historical scientific invocation',
+    interpreter,helper:{...helperPin,source:sourceHelper},node,launcher:launcherPin,startup:['-I','-S','-B'],argv_mode:'--run-cli'};
+  const verify=()=>{
+    for(const expected of [interpreter,helperPin,node,launcherPin])if(JSON.stringify(pin(expected.path))!==JSON.stringify(expected))throw Error('Current Python execution tool changed');
+    if(fsSync.realpathSync(launcher)!==launcher||!fsSync.lstatSync(launcher).isFile())throw Error('Current Python launcher replaced');
+  };
+  verify();
+  return {env:{...env,PATH:directory+path.delimiter+(env.PATH??'')},record,verify};
+}
+
+export function packagePythonSourceDescriptor(root,head) {
+  const name='scripts/package-python-runtime.py';
+  if(!/^[a-f0-9]{40}$/.test(head??''))throw Error('Exact package source head required for Python helper');
+  const file=path.join(fsSync.realpathSync(root),name),stat=fsSync.lstatSync(file);
+  if(!stat.isFile()||fsSync.realpathSync(file)!==file)throw Error('Ordinary declared Python source required');
+  const raw=fsSync.readFileSync(file),row=command('git',['--no-replace-objects','-C',root,'ls-tree','-z',head,'--',name],{env:gitEnv()});
+  const oid=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex'),mode=stat.mode&0o111?'100755':'100644';
+  if(row!==`${mode} blob ${oid}\t${name}\0`)throw Error('Declared Python helper differs from immutable source tree');
+  return {path:name,source_head:head,git_blob_oid:oid,mode,bytes:raw.length,sha256:sha(raw)};
+}
 
 // Keep preparation in this already-admitted wrapper role. A new imported
 // wrapper module would alter the immutable application-consumer role roster.
@@ -292,9 +353,12 @@ export async function runPackageBuild(kind, {root = repository, execute, preflig
   const stage = await fs.mkdtemp(path.join(cache, 'package-input-image-'));
   const exports = [];
   try {
+    const pythonSource=containsPackagePath(definition.inputs,'scripts/package-python-runtime.py')?packagePythonSourceDescriptor(root,readiness.inputs?.head):null;
     const inventory = await materializePackageInputs({source: root, destination: stage, definition});
     await fs.symlink(dependencies, path.join(stage, 'node_modules'), 'dir');
-    const env = {...process.env, WORLDATLAS_PACKAGE_STAGE: stage};
+    let env = {...process.env, WORLDATLAS_PACKAGE_STAGE: stage};
+    const pythonExecution=containsPackagePath(definition.inputs,'scripts/package-python-runtime.py')?createPackagePythonExecution(stage,{python:readiness.runtime?.python?.executable,sourceHelper:pythonSource,env}):null;
+    if(pythonExecution)env=pythonExecution.env;
     delete env.WORLDATLAS_CURRENT_EXECUTION_PATH;
     delete env.WORLDATLAS_CURRENT_EXECUTION_SHA256;
     delete env.WORLDATLAS_PACKAGE_SOURCE_ROOT;
@@ -325,7 +389,13 @@ export async function runPackageBuild(kind, {root = repository, execute, preflig
       child.on('error', reject);
       child.on('exit', (code, signal) => code === 0 ? resolve() : reject(Error(`Package ${kind} build failed (${signal ?? code}); prior outputs retained`)));
     }));
-    await run(path.join(stage, entries[kind]), {cwd: stage, env});
+    pythonExecution?.verify();
+    try{await run(path.join(stage, entries[kind]), {cwd: stage, env});}
+    catch(error){
+      try{pythonExecution?.verify();}catch(changed){throw new AggregateError([error,changed],'Build failed and current Python execution changed');}
+      throw error;
+    }
+    pythonExecution?.verify();
     if(currentExecution)requireCurrentExecution(currentExecution);
     // Only explicit generated outputs return to the caller. Source archives and
     // unpublished research never get copied back or altered by this wrapper.
@@ -348,6 +418,7 @@ export async function runPackageBuild(kind, {root = repository, execute, preflig
       source_bytes: inventory.reduce((sum, row) => sum + row.bytes, 0), input_paths: definition.inputs,
       boundary: 'Build source contains only declared inputs and the installed dependencies; unpublished inputs are absent. This is not an OS security sandbox.'};
     if(currentExecution)receipt.current_context_execution=currentExecution;
+    if(pythonExecution)receipt.current_python_execution=pythonExecution.record;
     receipt.preflight = readiness;
     await fs.writeFile(path.join(cache, 'package-input-build.json'), JSON.stringify(receipt, null, 2) + '\n');
     return receipt;
