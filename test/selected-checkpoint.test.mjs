@@ -107,7 +107,7 @@ async function trustedFixture(t,{incompleteNative=false}={}){
  save('accepted/custody.json',{complete_cold_custody:[{facts,publication,effective_additions:additions,inventory}]});
  save('accepted/routes.json',inventory.map(p=>p.path).sort().map(name=>({path:name,tree:git('ls-tree','-z',selected,'--',name).toString()})));const accepted=commit();
  const rootRow={id:'fixture',accepted_head:accepted,selected_commit:selected,selection_sha256:valueSha(selection),execution_commit:one,execution_code_sha256:valueSha(execution_code),runtime_sha256:valueSha(runtime),facts:pin('accepted/facts.json'),certificate:{...pin('accepted/certificate.json.gz'),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)},publication:pin('accepted/publication.json'),custody:pin('accepted/custody.json'),routes:pin('accepted/routes.json')};
- save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',qualifier_code:CODE.map(name=>{const p=pin(name);return {path:name,bytes:p.bytes,sha256:p.sha256};}),checkpoints:[rootRow]});commit();
+ save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[rootRow]});commit();
  const api=await import(pathToFileURL(path.join(root,MODULE))),native=await import(pathToFileURL(path.join(root,'scripts/check-effective-geographic-regression.mjs')));
  const reader=new native.ImmutableReader(root,selected,{allowance:{phaseBytes:512*1024**2,rssBytes:512*1024**2}}),budget={shared:reader.budget,carriedBytes:1024};
  return {api,native,reader,budget,selected,root,git,save,commit,pin,ledger,patch,sidecar,envelope,selection,rootRow};
@@ -136,6 +136,13 @@ test('unchanged actual selection at a newer commit reuses the original accepted 
  assert.deepEqual(transition.changedIds,[]);assert.deepEqual(transition.changedNativeRows,[]);
  assert.deepEqual(transition.plan.required_ids,[]);
 });
+test('committed qualifier edits need no manual catalogue fingerprint refresh',async t=>{
+ const f=await trustedFixture(t), catalogue=fs.readFileSync(path.join(f.root,CATALOGUE));
+ fs.appendFileSync(path.join(f.root,MODULE),'\n// reviewed non-scientific change\n');const newer=f.commit();
+ const reader=new f.native.ImmutableReader(f.root,newer,{allowance:f.reader.allowance}),budget={shared:reader.budget,carriedBytes:0};
+ assert.equal(f.api.qualifyCheckpoint({reader,budget}).available,true);
+ assert.deepEqual(fs.readFileSync(path.join(f.root,CATALOGUE)),catalogue);
+});
 test('changed same-count source owners cannot reuse accepted custody, and undercharged shared budgets are rejected',async t=>{
  const f=await trustedFixture(t);f.save('data/source.json',{type:'FeatureCollection',features:[feature('B',0),feature('A',1),feature('C',5)]});const candidate=f.commit();
  const reader=new f.native.ImmutableReader(f.root,candidate,{allowance:f.reader.allowance}),budget={shared:reader.budget,carriedBytes:0};
@@ -143,14 +150,13 @@ test('changed same-count source owners cannot reuse accepted custody, and underc
  assert.throws(()=>f.api.qualifyCheckpoint({reader,budget:{shared:{},carriedBytes:0}}),/actual shared/);
  assert.throws(()=>f.api.qualifyCheckpoint({reader,budget:{shared:reader.budget,carriedBytes:-1}}),/caller-carried/);
 });
-test('corrupt accepted products and unknown executing code are rejected rather than treated as no change',async t=>{
+test('corrupt accepted products and dirty executing code are rejected rather than treated as no change',async t=>{
  const f=await trustedFixture(t);f.rootRow.certificate.decoded_sha256='0'.repeat(64);
- const code=CODE.map(name=>{const p=f.pin(name);return {path:name,bytes:p.bytes,sha256:p.sha256};});
- f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',qualifier_code:code,checkpoints:[f.rootRow]});f.commit();
+ f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[f.rootRow]});f.commit();
  assert.throws(()=>f.api.qualifyCheckpoint({reader:f.reader,budget:f.budget}),/decoded output is corrupt/);
- f.save(MODULE,Buffer.concat([fs.readFileSync(path.join(f.root,MODULE)),Buffer.from('\n// drift\n')]));f.commit();
+ f.save(MODULE,Buffer.concat([fs.readFileSync(path.join(f.root,MODULE)),Buffer.from('\n// drift\n')]));
  const reader=new f.native.ImmutableReader(f.root,f.selected,{allowance:f.reader.allowance});
- assert.throws(()=>f.api.qualifyCheckpoint({reader,budget:{shared:reader.budget,carriedBytes:0}}),/method identity differs/);
+ assert.throws(()=>f.api.qualifyCheckpoint({reader,budget:{shared:reader.budget,carriedBytes:0}}),/changed executing checkpoint method/);
 });
 
 test('native projection rejects an incomplete complete row partition despite matching encoded and decoded hashes',async t=>{
@@ -160,7 +166,7 @@ test('native projection rejects an incomplete complete row partition despite mat
 });
 test('a forged candidate-selected checkpoint catalogue cannot replace trusted execution authority',async t=>{
  const f=await trustedFixture(t);const original=f.git('rev-parse','HEAD').toString().trim();
- f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',qualifier_code:[],checkpoints:[]});const candidate=f.commit();
+ f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[]});const candidate=f.commit();
  f.git('checkout','-q',original);
  const reader=new f.native.ImmutableReader(f.root,candidate,{allowance:f.reader.allowance}),budget={shared:reader.budget,carriedBytes:0};
  assert.equal(f.api.qualifyCheckpoint({reader,budget}).available,true);
@@ -270,11 +276,10 @@ test('policy-route exception never permits an incomplete archived census or adja
  const f=await trustedFixture(t), original=f.git('rev-parse','HEAD').toString().trim();
  const routes=JSON.parse(f.git('show',f.rootRow.routes.commit+':'+f.rootRow.routes.path));
  f.save('accepted/routes.json',routes.filter(p=>p.path!==PROGRAMME));const incomplete=f.commit();
- const code=CODE.map(name=>{const p=f.pin(name);return {path:name,bytes:p.bytes,sha256:p.sha256};});
- f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',qualifier_code:code,
+ f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',
   checkpoints:[{...f.rootRow,routes:f.pin('accepted/routes.json',incomplete)}]});f.commit();
  assert.throws(()=>f.api.qualifyCheckpoint({reader:f.reader,budget:f.budget}),/Incomplete trusted present\/absent route census/);
- f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',qualifier_code:code,
+ f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',
   checkpoints:[{...f.rootRow,routes:{...f.rootRow.routes,sha256:'0'.repeat(64)}}]});f.commit();
  const corruptReader=new f.native.ImmutableReader(f.root,f.selected,{allowance:f.reader.allowance});
  assert.throws(()=>f.api.qualifyCheckpoint({reader:corruptReader,budget:{shared:corruptReader.budget,carriedBytes:0}}),/Whole immutable input differs/);

@@ -153,23 +153,22 @@ function rootCatalogue(session, reader, {accepted = false} = {}) {
   demand(executing.git('rev-parse','HEAD').toString().trim() === trusted,
     'Checkpoint repo differs from the actual trusted execution checkout');
   const catalogue = readNamed(session, executing, CATALOGUE);
-  keys(catalogue, 'version,kind,qualifier_code,checkpoints', 'Unknown checkpoint catalogue schema');
+  keys(catalogue, 'version,kind,checkpoints', 'Unknown checkpoint catalogue schema');
   demand(catalogue.version === 1 && catalogue.kind === 'accepted-selected-checkpoints-v1'
-    && Array.isArray(catalogue.checkpoints) && Array.isArray(catalogue.qualifier_code),
+    && Array.isArray(catalogue.checkpoints),
   'Unknown trusted checkpoint catalogue');
   const expectedPaths = [MODULE,
     'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
     'scripts/check-effective-geographic-regression.mjs','src/ownership-codec.js'];
-  const paths = catalogue.qualifier_code.map(p => p.path);
-  demand(same(paths,[...expectedPaths,...ACCEPTED_CODE]) || !accepted && same(paths,expectedPaths),
-    'Unknown or incomplete checkpoint method closure');
-  for (const p of catalogue.qualifier_code) {
-    const actual = executing.descriptor(p.path), local = path.join(ROOT,p.path);
-    demand(actual.bytes === p.bytes && actual.mode === '100644', 'Checkpoint method identity differs');
-    charge(session, reader, 2 * p.bytes);
+  // HEAD owns current code identity; the catalogue records historical science.
+  // Keep authenticating the actual executable bytes without a second hash ledger.
+  for (const name of [...expectedPaths, ...(accepted ? ACCEPTED_CODE : [])]) {
+    const actual = executing.descriptor(name), local = path.join(ROOT,name);
+    demand(actual.mode === '100644', 'Checkpoint method identity differs');
+    charge(session, reader, 2 * actual.bytes);
     const bytes = fs.readFileSync(local);
-    demand(bytes.length === p.bytes && sha(bytes) === p.sha256
-      && bytes.equals(executing.read(p.path)), 'Unrecognized/changed executing checkpoint method');
+    demand(bytes.length === actual.bytes && bytes.equals(executing.read(name)),
+      'Unrecognized/changed executing checkpoint method');
   }
   demand(new Set(catalogue.checkpoints.map(p => p.id)).size === catalogue.checkpoints.length,
     'Duplicate accepted checkpoint identity');

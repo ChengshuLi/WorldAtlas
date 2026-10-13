@@ -136,8 +136,6 @@ export async function preparePackageSelectedAdditive({root,currentExecution,cons
   reader.outputBytes=outputBytes;
   reader.metadataBytes+=snapshot.metadataBytes+2*valueBytes(view).length;reader.phase();
   const copied=readBoundPublicationAssets(reader,roster,name=>containsPackagePath(definition.inputs,name)||execution.files.some(p=>p.path===name));
-  if(assembling)demand(execution.pending_selected_inputs.every(name=>copied.input_inventory.some(pin=>pin.path===name)),
-    'Package addition was not consumed by genuine current selected authority');
   const bodies=copied.bodies;
   requireExecution(execution);
   const gitEnd=ordinary(git);for(const k of ['dev','ino','size','mode','mtimeMs','ctimeMs'])demand(gitEnd[k]===gitStat[k],'Git program pathname drift');
@@ -214,49 +212,104 @@ async function assemblyJobLog(api,repo,job) {
   return Buffer.concat(chunks,bytes).toString('utf8').split(/\r?\n/).map(line=>line.replace(/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d\.\d+Z /,''));
 }
 
-// Called only by the trusted assembly driver, using its authenticated GitHub
-// client. It authenticates the actual originating producer and log, rather than
-// accepting a caller-supplied success flag or a copied context certificate.
-export async function authenticateOriginalPackageOutput({api,repo,origin,root,manifestRaw}) {
+// Discovery and private admission share the same job/log/artifact authority.
+// Reading this record grants no assembly capability; only whole output admission
+// below can mint the private token.
+export async function readOriginalPackageInventory({api,repo,origin}) {
+  const workflowHead=origin?.workflow_head??origin?.head;
   demand(/^[-\w.]+\/[-\w.]+$/.test(repo??'')&&origin&&
     ['run_id','run_attempt','job_id','artifact_id','artifact_bytes'].every(key=>assemblyPositive(origin[key]))&&
-    assemblyCommit(origin.head)&&assemblyDigest(origin.artifact_digest),'Exact original package origin required');
+    assemblyCommit(workflowHead)&&assemblyDigest(origin.artifact_digest),'Exact original package origin required');
   const artifactName=`cloudflare-package-output-${origin.run_id}-${origin.run_attempt}`;
-  demand(origin.artifact_name===artifactName&&Buffer.isBuffer(manifestRaw)&&manifestRaw.length>0&&manifestRaw.length<=8*1048576,'Bounded original package manifest required');
+  demand(origin.artifact_name===artifactName,'Exact original package artifact name required');
   const run=await api(`/repos/${repo}/actions/runs/${origin.run_id}/attempts/${origin.run_attempt}`);
-  demand(run.id===origin.run_id&&run.run_attempt===origin.run_attempt&&run.head_sha===origin.head&&
-    run.event==='pull_request'&&run.path==='.github/workflows/merge-integration-checks.yml'&&run.status==='completed'&&
+  const pullRequest=run.event==='pull_request'&&run.path==='.github/workflows/merge-integration-checks.yml';
+  const worker=run.event==='workflow_dispatch'&&run.path==='.github/workflows/worker-merge.yml'&&run.head_branch==='main'&&assemblyCommit(origin.workflow_head);
+  demand(run.id===origin.run_id&&run.run_attempt===origin.run_attempt&&run.head_sha===workflowHead&&
+    (pullRequest||worker)&&run.status==='completed'&&
     run.repository?.full_name===repo&&run.head_repository?.full_name===repo,'Original package run differs');
   const job=await api(`/repos/${repo}/actions/jobs/${origin.job_id}`);
-  demand(job.id===origin.job_id&&job.run_id===origin.run_id&&job.run_attempt===origin.run_attempt&&job.head_sha===origin.head&&
+  demand(job.id===origin.job_id&&job.run_id===origin.run_id&&job.run_attempt===origin.run_attempt&&job.head_sha===workflowHead&&
     job.status==='completed'&&job.conclusion==='success'&&Array.isArray(job.steps),'Original package producer did not succeed');
   const step=name=>job.steps.filter(row=>row.name===name&&row.status==='completed'&&row.conclusion==='success').length===1;
-  const full=job.name==='regression (0)'&&['Snapshot original full-regression package inputs','Verify full-regression package controls',
+  const full=pullRequest&&job.name==='regression (0)'&&['Snapshot original full-regression package inputs','Verify full-regression package controls',
     'Build hosted assets','Read back qualified native build outputs when selected','Complete regression shard','Verify full-regression package receipt',
     'Inventory original full-regression package output','Retain original full-regression package output'].every(step);
-  const selected=job.name==='package'&&['Snapshot original selected package inputs','Verify package controls',
+  const selected=pullRequest&&job.name==='package'&&['Snapshot original selected package inputs','Verify package controls',
     'Build Cloudflare package without publishing','Read back qualified native build outputs when selected',
     'Run selected-data consumer checks','Inventory original selected package output','Retain original selected package output'].every(step);
-  demand(full||selected,'Original package producer lacks required actual steps');
+  const finalWorker=worker&&job.name==='integration (0)'&&['Snapshot original final-worker package inputs',
+    'Build the combined application once before asset-dependent tests','Inventory original final-worker package output',
+    'Read back qualified native build outputs when selected','Test applicable combined-tree invariants without publishing or live imports',
+    'Retain original final-worker package output'].every(step);
+  demand(full||selected||finalWorker,'Original package producer lacks required actual steps');
+  const sequence=full?['Snapshot original full-regression package inputs','Build hosted assets','Inventory original full-regression package output',
+    'Read back qualified native build outputs when selected','Complete regression shard','Retain original full-regression package output']:
+    selected?['Snapshot original selected package inputs','Build Cloudflare package without publishing','Inventory original selected package output',
+      'Read back qualified native build outputs when selected','Run selected-data consumer checks','Retain original selected package output']:
+      ['Snapshot original final-worker package inputs','Build the combined application once before asset-dependent tests','Inventory original final-worker package output',
+        'Read back qualified native build outputs when selected','Test applicable combined-tree invariants without publishing or live imports','Retain original final-worker package output'];
+  const numbers=sequence.map(name=>job.steps.find(row=>row.name===name).number);
+  demand(numbers.every((number,index)=>assemblyPositive(number)&&(index===0||number>numbers[index-1]))&&numbers[2]===numbers[1]+1,
+    'Original inventory must immediately follow the build and upload must follow successful tests');
   const artifact=await api(`/repos/${repo}/actions/artifacts/${origin.artifact_id}`);
   demand(artifact.id===origin.artifact_id&&artifact.name===artifactName&&!artifact.expired&&artifact.size_in_bytes===origin.artifact_bytes&&
     artifact.digest==='sha256:'+origin.artifact_digest&&artifact.workflow_run?.id===origin.run_id&&
-    artifact.workflow_run?.head_sha===origin.head,'Original package artifact differs');
+    artifact.workflow_run?.head_sha===workflowHead,'Original package artifact differs');
   const lines=await assemblyJobLog(api,repo,origin.job_id),receipts=[];
   for(const line of lines){if(!line.startsWith('{'))continue;let value;try{value=JSON.parse(line);}catch{continue;}
     if(Object.hasOwn(value,'package_output_manifest_sha256'))receipts.push(value);}
   const uploads=lines.filter(line=>line.startsWith('Artifact '+artifactName+' has been successfully uploaded!'));
-  demand(receipts.length===1&&receipts[0].original_head===origin.head&&
-    receipts[0].package_output_manifest_sha256===assemblyHash(manifestRaw)&&receipts[0].package_output_manifest_bytes===manifestRaw.length&&
+  demand(receipts.length===1&&assemblyCommit(receipts[0].original_head)&&
+    (pullRequest?receipts[0].original_head===workflowHead:true)&&
+    (origin.head===undefined||receipts[0].original_head===origin.head)&&
+    assemblyDigest(receipts[0].package_output_manifest_sha256)&&assemblyPositive(receipts[0].package_output_manifest_bytes)&&
+    receipts[0].package_output_manifest_bytes<=8*1048576&&
     uploads.length===1&&uploads[0]===`Artifact ${artifactName} has been successfully uploaded! Final size is ${origin.artifact_bytes} bytes. Artifact ID is ${origin.artifact_id}`,
     'Missing or ambiguous actual original package upload receipt');
+  const executed=receipts[0].executed_workflow;
+  demand(assemblyCommit(executed?.sha)&&executed.path===run.path&&
+    (pullRequest?/^refs\/pull\/[1-9]\d*\/merge$/.test(executed.ref):executed.ref==='refs/heads/main'&&executed.sha===workflowHead),
+    'Actual executed package workflow context is missing or differs');
   // Other receipts may have their own archive digests. The exact output digest
   // must occur once, and the artifact API independently binds it to this name.
   demand(lines.filter(line=>line===`SHA256 digest of uploaded artifact zip is ${origin.artifact_digest}`).length===1,'Original package upload digest differs');
+  return {...receipts[0],workflow_head:workflowHead,workflow_path:run.path};
+}
+
+// Called only by the trusted assembly driver, using its authenticated GitHub
+// client. It authenticates the actual originating producer and log, rather than
+// accepting a caller-supplied success flag or a copied context certificate.
+export async function authenticateOriginalPackageOutput({api,repo,origin,root,manifestRaw}) {
+  demand(assemblyCommit(origin?.head)&&Buffer.isBuffer(manifestRaw)&&manifestRaw.length>0&&manifestRaw.length<=8*1048576,
+    'Bounded original package manifest and exact source head required');
+  const receipt=await readOriginalPackageInventory({api,repo,origin});
+  demand(receipt.package_output_manifest_sha256===assemblyHash(manifestRaw)&&receipt.package_output_manifest_bytes===manifestRaw.length,
+    'Original package inventory differs from retained manifest');
   const manifest=JSON.parse(manifestRaw);
   demand(manifest.version===1&&manifest.kind==='original-cloudflare-package-output'&&manifest.source?.head===origin.head&&
     Array.isArray(manifest.output?.files)&&manifest.output.files.length>0&&manifest.output.files.length<=20000&&
     assemblyPositive(manifest.output.bytes)&&Number.isSafeInteger(manifest.output.bytes),'Original package manifest differs');
+  // Walk only the fixed executed workflow path. Adding an imported discovery
+  // helper here would change the separately qualified native build closure.
+  const commit=await api(`/repos/${repo}/git/commits/${receipt.executed_workflow.sha}`);
+  let tree=commit.tree?.sha,workflow;
+  const components=receipt.workflow_path.split('/');
+  for(let index=0;index<components.length;index++){
+    demand(assemblyCommit(tree),'Executed producer workflow tree unavailable');
+    const listing=await api(`/repos/${repo}/git/trees/${tree}`);
+    demand(!listing.truncated&&Array.isArray(listing.tree),'Complete executed workflow tree required');
+    const matches=listing.tree.filter(row=>row.path===components[index]);
+    demand(matches.length===1,'Unique executed workflow path required');workflow=matches[0];
+    if(index<components.length-1){
+      demand(workflow.type==='tree'&&workflow.mode==='040000','Ordinary executed workflow ancestors required');tree=workflow.sha;
+    }
+  }
+  const captured=manifest.source.producer?.workflows?.filter(row=>row.path===receipt.workflow_path);
+  demand(manifest.source.producer?.kind==='immediate-cloudflare-build-v1'&&captured?.length===1&&
+    workflow?.type==='blob'&&workflow.mode==='100644'&&
+    assemblySame(captured[0],{path:receipt.workflow_path,mode:workflow.mode,oid:workflow.sha}),
+    'Actual executed producer workflow differs from original source descriptor');
   root=fs.realpathSync(root);const expected=new Set();let bytes=0;
   for(const pin of manifest.output.files){demand(assemblySafe(pin.path)&&/^dist\/(client|cloudflare)\//.test(pin.path)&&
       !expected.has(pin.path)&&Number.isSafeInteger(pin.bytes)&&pin.bytes>=0&&Number.isSafeInteger(pin.bytes)&&assemblyDigest(pin.sha256),'Invalid original output roster');
@@ -316,19 +369,23 @@ function assemblySourceAdmission(original,source) {
   const all=assemblyGit(source,['ls-tree','-rz','--full-tree','HEAD']).split('\0').filter(Boolean).map(line=>{
     const tab=line.indexOf('\t'),[mode,type,oid]=line.slice(0,tab).split(' ');return {path:line.slice(tab+1),mode,type,oid};
   });
-  const programmePath=name=>name!=='.github/package-inputs.json'&&(!name.includes('/')||/^(?:scripts|test|src|hosted|\.github)\//.test(name)||/\.(?:mjs|cjs|js|py|sh)$/.test(name));
-  const rows=all.filter(row=>containsPackagePath(definition.inputs,row.path)||programmePath(row.path));
-  demand(rows.every(row=>row.type==='blob'&&['100644','100755'].includes(row.mode)),'Ordinary original input/programme roles required');
-  const plain=rows.map(({type,...row})=>row),programme=plain.filter(row=>programmePath(row.path)).sort((a,b)=>a.path.localeCompare(b.path,'en'));
-  demand(Array.isArray(before.programme)&&before.programme.length>0&&assemblySame(before.programme,programme),'Original producer/test/workflow programme changed');
-  const current=new Map(plain.filter(row=>containsPackagePath(definition.inputs,row.path)).map(row=>[row.path,row]));
+  const rows=all.filter(row=>containsPackagePath(definition.inputs,row.path));
+  demand(rows.every(row=>row.type==='blob'&&['100644','100755'].includes(row.mode)),'Ordinary original input roles required');
+  const plain=rows.map(({type,...row})=>row);
+  const workflowPaths=['.github/workflows/merge-integration-checks.yml','.github/workflows/worker-merge.yml'];
+  const workflows=all.filter(row=>workflowPaths.includes(row.path));
+  demand(workflows.length===workflowPaths.length&&workflows.every(row=>row.type==='blob'&&row.mode==='100644'),
+    'Ordinary original producer workflows required');
+  const workflowPins=workflows.map(({type,...row})=>row);
+  demand(before.producer?.kind==='immediate-cloudflare-build-v1'&&assemblySame(before.producer,{kind:'immediate-cloudflare-build-v1',workflows:workflowPins}),
+    'Immediate original build capture and unchanged producer workflow required');
+  const current=new Map(plain.map(row=>[row.path,row]));
   const old=new Map(before.files.map(row=>[row.path,row])),exceptions=new Set(['.github/package-inputs.json','data/ownership-selection.json']);
   demand(old.size===before.files.length&&old.size>0,'Complete unique original source inventory required');
   for(const [name,row]of old)demand(current.has(name)&&(exceptions.has(name)||assemblySame(row,current.get(name))),'Original package input changed: '+name);
   const added=newInputs.slice(oldInputs.length);
   demand(added.every(name=>!name.endsWith('/')&&/^coordination\/engineering\/[^/]+\/.+\.(?:json|jsonl\.gz|json\.gz|log)$/.test(name)&&current.get(name)?.mode==='100644'),'Exact inert selected additions required');
   for(const name of current.keys())demand(old.has(name)||added.includes(name),'New directory or optional package input is not invariant');
-  return added;
 }
 
 // Separate from package-issued full-build execution: this authenticates only the
@@ -339,7 +396,7 @@ export function issuePackageAssemblyExecution({original,source,stage,executingRo
   const metadataBytes=2*valueBytes(inheritedMetadata).length;
   demand(process.execArgv.length===0&&!process.env.NODE_OPTIONS?.trim()&&!process.env.NODE_PATH?.trim(),'Plain assembly Node execution required');
   source=fs.realpathSync(source);stage=fs.realpathSync(stage);executingRoot=fs.realpathSync(executingRoot);
-  const pendingInputs=assemblySourceAdmission(original,source);
+  assemblySourceAdmission(original,source);
   demand(path.resolve(process.argv[1])===path.join(executingRoot,'scripts/assemble-selected-package.mjs'),'Actual assembly driver required');
   const files=assemblyCode(source,executingRoot), executable=fs.realpathSync(process.execPath);
   const allowance=processingAllowance(),runtimeStat=ordinary(executable);
@@ -349,7 +406,7 @@ export function issuePackageAssemblyExecution({original,source,stage,executingRo
   delete runtime.path;
   const record=Object.freeze({kind:'current-selected-package-assembly',source_root:source,
     source_commit:assemblyGit(source,['rev-parse','HEAD']).trim(),source_tree:assemblyGit(source,['rev-parse','HEAD^{tree}']).trim(),
-    stage_root:stage,entry_point:'scripts/assemble-selected-package.mjs',files,runtime,allowance,original,inherited_metadata_bytes:metadataBytes,pending_selected_inputs:pendingInputs});
+    stage_root:stage,entry_point:'scripts/assemble-selected-package.mjs',files,runtime,allowance,original,inherited_metadata_bytes:metadataBytes});
   currentAssemblies.set(record,{executingRoot,fingerprint:valueSha(record)});return record;
 }
 export function requirePackageAssemblyExecution(record) {

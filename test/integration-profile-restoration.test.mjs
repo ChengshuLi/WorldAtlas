@@ -163,7 +163,8 @@ test('actual queue selected command runs smoke and genuine full setup before ass
   for(const workflow of ['queue']){
     const f=fixture(t,{full:true,selected:true,helperBody:restored}),r=f.run('full','0',workflow);
     assert.equal(r.status,0,r.stderr);assert.match(r.stdout,/# skipped 0/);assert.match(r.stdout,/"test_selection":"selected-data"/);
-    assert.equal(fs.readdirSync(f.root).filter(n=>n.startsWith('tests-reached-')).length,3);
+    assert.deepEqual(fs.readdirSync(f.root).filter(n=>n.startsWith('tests-reached-')).sort(),
+      ['tests-reached-canonical-compact-repack','tests-reached-prepared-parity']);
     assert(fs.existsSync(path.join(f.root,'.cache/selected-delivery-smoke.json')));
     assert(fs.existsSync(path.join(f.root,'selected-checkout-fixture-reached.json')));
   }
