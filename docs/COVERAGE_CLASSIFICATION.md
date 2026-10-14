@@ -21,3 +21,78 @@ node --test test/coverage-classification.test.mjs test/coverage-browser.test.mjs
 ```
 
 These checks prove the implementation contract, not complete hydrological accuracy. See `GEOGRAPHIC_GAP_AUDIT.md` for the global candidate inventory. Detailed water evidence and source-backed coordinated administrative repairs remain necessary before closing confirmed geography defects. Issue #920 separately tracks the differential integration gate and actionable repair reports. This rendering change does not install that gate or fix boundary geometry. Deployment is deferred at the user's request.
+
+## Read a current cell before proposing a repair
+
+The offline, read-only command follows the committed selection, including additive
+repairs. It answers the useful questions separately: what owns the cell now,
+what physical source says water/land, and which exact upstream source ID joins to
+a current location. It does not install a UI feature or change any geometry.
+
+```sh
+node scripts/diagnose-map-cell.mjs --repo . --commit EXACT_MAIN_COMMIT \
+  --cell 126031,99379 --coordinate -87.979,47.727
+```
+
+Repeat `--cell X,Y` or `--coordinate LON,LAT` to inspect multiple points. Coordinates select
+a canonical cell; all membership tests use its center and the pinned native
+latitude bytes, never regenerated inverse-projection latitudes. Output goes to
+stdout. The command reads immutable Git inputs, including sparse-checkout inputs.
+Use a current checkout for the executable reader and an exact revision for data.
+
+Optional repeated `--original`, `--consumed`, and `--physical` arguments name
+existing committed GeoJSON files (plain or gzip). They do not create a new evidence
+format or approval layer. Source joins use exact feature IDs, or geoBoundaries
+`shapeGroup`/`shapeType`/`shapeID`, never proximity or matching names. A byte match
+to retained administrative-source metadata carries its reference year; otherwise
+missing source dates remain unknown. GeoJSON `date`/`metadata.date`, feature
+`metadata.reference_year`/`source_timestamp`/`timestamp`/`date`, and collection
+`coverage` are retained when present. An omitted upstream collection is an unknown
+stage, not evidence that the original source missed the cell.
+
+Physical GeoJSON must carry explicit physical semantics: OSM `natural=water`,
+`waterway=riverbank`, `landuse=reservoir`, or Natural Earth lake/reservoir feature
+classes identify mapped water. `physical_class=land` with `excludes_water=true`
+describes an already-reconciled physical land mask whose mapped waters were
+excluded. This is the source's known coverage, not proof that every unmapped small
+water body is absent. Administrative polygons must never receive those labels.
+For nested sources such as GSHHG, use the existing decoder and complete L1–L4
+support masks, not a bare lake polygon that paints over lake islands. Periodic
+source frames require their source decoder; this reader never clamps or wraps
+out-of-domain longitudes. Source hashes, dates and known scope accompany results.
+
+The default physical context remains the coarse Natural Earth product. Its
+projected-edge classification is reported separately from native membership and
+is never promoted to high-resolution truth. Water additionally requires a matching
+explicit retained lake feature under the native rule. Source vintage and whether
+the historical classification pins match the current selection are shown.
+
+`diagnoseMapCell` in `src/map-cell-diagnosis.js` is a small reusable interpreter
+for measured evidence. It returns **independent** `physical_status` and
+`location_status`, plus `current_owner`, a source-supported `intended_location`,
+and concrete ownership blockers. Existing design issues [#528](https://github.com/ChengshuLi/WorldAtlas/issues/528)
+and [#534](https://github.com/ChengshuLi/WorldAtlas/issues/534) keep rivers/lakes as
+separate features: physical water does not imply owner zero, a permanent territorial
+exclusion, a proximity buffer, or a new hierarchy. This diagnostic specifies no
+click precedence.
+
+A positive water feature remains water-supported even when a coarser land mask
+misses it; both source dates and the physical-source disagreement remain explicit.
+Territorial membership is resolved independently by exact source identity joins.
+One supported source location can coexist with water. Missing or competing source
+locations, a source-vintage ownership conflict, an unexplained selected polygon
+hole, or a native/selection mismatch stays unresolved. A hole needs its own
+territorial/semantic evidence; water alone cannot explain why ownership is absent.
+Exact boundary incidences are reported and use the existing native/source-defined
+sampling rule; they do not invent a proximity buffer or an automatic owner-zero rule.
+Already-assigned cells report current ownership without claiming it is
+independently correct. Proposed additions still need actual physical source
+coverage and exact source membership; absence of a known water feature is not
+land evidence. The supporting lineage reports each joined source ID separately,
+so an overlapping feature cannot hide another feature's loss. Feature-specific
+dates take precedence over collection dates. No result replaces the repair path's
+existing-owner conservation and territorial-semantics checks.
+
+Run `node --test test/map-cell-diagnosis.test.mjs` for small independent numerical
+and interpretation controls. Real-current-cell runs and source-specific held-out
+findings belong in the linked PR/issue, not a second diagnostic registry.
