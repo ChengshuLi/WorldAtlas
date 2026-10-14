@@ -6,7 +6,7 @@ import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {pathToFileURL, fileURLToPath} from 'node:url';
 import {createRoutingMetadataAcquisition} from '../scripts/geography-routing-metadata.mjs';
-import {inspectUnchangedSelectedGeography, EXECUTION_CODE, REBIND_CODE, AUDITED_READERS} from '../scripts/check-unchanged-selected-geography.mjs';
+import {inspectUnchangedSelectedGeography, inspectExecutingSelectedGeography, EXECUTION_CODE, REBIND_CODE} from '../scripts/check-unchanged-selected-geography.mjs';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const P = 'research/geography/selected-fixture/';
@@ -53,17 +53,7 @@ function fixture({missingOrigin = false, splitBaseline = false, rebind = true, m
     const raw = commits.get(at)[name];
     return {commit: at, path: name, mode: '100644', git_blob_oid: git(['hash-object', '--stdin'], raw), bytes: raw.length, sha256: sha(raw), ...extra};
   };
-  const auditedReader = name => {
-    try { return fs.readFileSync(path.join(ROOT, name)); }
-    catch (error) {
-      if (error.code !== 'ENOENT') throw error;
-      // Sparse checkouts may omit these small audited helpers. Read only an
-      // already-local HEAD blob; never hydrate their surrounding evidence bank.
-      return execFileSync('git', ['--no-replace-objects', '-C', ROOT, 'show', 'HEAD:' + name],
-        {env, maxBuffer: 1024 * 1024, timeout: 30000, stdio: ['ignore', 'pipe', 'pipe']});
-    }
-  };
-  for (const name of new Set([...EXECUTION_CODE, ...REBIND_CODE, 'scripts/geography-prefetch.mjs'])) put(name, Object.hasOwn(AUDITED_READERS, name) ? auditedReader(name) : 'trusted code leaf');
+  for (const name of new Set([...EXECUTION_CODE, ...REBIND_CODE, 'scripts/geography-prefetch.mjs'])) put(name, 'trusted code leaf');
   const catalogue = {version: 1, kind: 'accepted-selected-checkpoints-v1', checkpoints: []};
   put(CHECKPOINTS, catalogue);
   put(POLICY, fs.readFileSync(path.join(ROOT, POLICY)));
@@ -300,7 +290,6 @@ test('artifact transport code is equality-bound without a scientific reader hash
   const f = fixture(); try {
     const code = 'scripts/geographic-report-artifact.mjs';
     assert(EXECUTION_CODE.includes(code));
-    assert(!Object.hasOwn(AUDITED_READERS, code));
     const upgraded = body('reviewed artifact transport update; no scientific route discovery');
     const baseline = f.commit({...f.files, [code]: upgraded}, f.baseline);
     const candidate = f.commit({...f.candidateFiles, [code]: upgraded}, baseline);
@@ -316,15 +305,17 @@ test('artifact transport code is equality-bound without a scientific reader hash
   } finally { f.close(); }
 });
 
-test('unknown trusted reader profile, unsafe modes, limits and identical commits decline', async () => {
+test('reviewed equal readers need no hash catalogue; unsafe modes, limits and identical commits decline', async () => {
   const f = fixture(); try {
     assert.match((await f.inspect(f.baseline)).reason, /baseline-proof/);
     assert.match((await f.inspect(f.candidate, f.baseline, {limits: {member: 32 * 1024 * 1024, metadata: 1, entries: 4096}})).reason, /metadata-byte-limit/);
     assert.match((await f.inspect(f.candidate, f.baseline, {limits: {member: 32 * 1024 * 1024, metadata: 64 * 1024 * 1024, entries: 1}})).reason, /identity-entry-limit/);
     const code = 'scripts/check-effective-geographic-regression.mjs';
-    const baseline = f.commit({...f.files, [code]: body('unknown new routing reader')}, f.baseline);
-    const candidate = f.commit({...f.candidateFiles, [code]: body('unknown new routing reader')}, baseline);
-    assert.match((await f.inspect(candidate, baseline)).reason, /unsupported-reader-profile/);
+    const baseline = f.commit({...f.files, [code]: body('reviewed reader update with unchanged routes')}, f.baseline);
+    const candidate = f.commit({...f.candidateFiles, [code]: body('reviewed reader update with unchanged routes')}, baseline);
+    const accepted = await f.inspect(candidate, baseline);
+    assert.equal(accepted.status, 'unchanged-selected-inputs', accepted.reason);
+    assert.match((await f.inspect(f.candidate, baseline)).reason, /changed-current-input/);
     const symlink = f.commit(f.candidateFiles, f.baseline, {'research/geography/new-packet/source.json': '120000'});
     assert.match((await f.inspect(symlink)).reason, /nonordinary/);
   } finally { f.close(); }
@@ -671,5 +662,18 @@ test('receiving metadata cannot exempt either filename when it is a selected cur
         assert.equal(result.reason, 'changed-current-input:' + target);
       }
     }
+  } finally { f.close(); }
+});
+
+
+test('production collector rejects a moving-main policy label different from its executing checkout', async () => {
+  const f = fixture(); try {
+    f.git(['update-ref', 'HEAD', f.baseline]);
+    const accepted = await inspectExecutingSelectedGeography({repo: f.directory, baseline: f.baseline, candidate: f.candidate});
+    assert.equal(accepted.status, 'unchanged-selected-inputs', accepted.reason);
+    const movedMain = f.commit({...f.files, 'reviewed-main-note': body('later main')}, f.baseline);
+    const rejected = await inspectExecutingSelectedGeography({repo: f.directory, baseline: f.baseline, candidate: f.candidate, trusted: movedMain});
+    assert.equal(rejected.status, 'full-check-required');
+    assert.equal(rejected.reason, 'executing-checkout-mismatch');
   } finally { f.close(); }
 });

@@ -9,7 +9,7 @@ import {githubAPI, githubPages, workSpec} from './issue-claim-contract.mjs';
 import {validateIssuePRBody} from './check-handoff-scope.mjs';
 import {WORKFLOW_PATH, successfulGeographyJob} from './integration-proof.mjs';
 import {prepareGeographyProof, validateGeographyProof} from './geographic-report-artifact.mjs';
-import {inspectUnchangedSelectedGeography} from './check-unchanged-selected-geography.mjs';
+import {inspectExecutingSelectedGeography} from './check-unchanged-selected-geography.mjs';
 import {validatePackageInputs, packagePathRequired, PACKAGE_INPUT_FILE} from './package-inputs.mjs';
 
 const oid = value => typeof value === 'string' && /^[a-f0-9]{40}$/.test(value);
@@ -113,7 +113,7 @@ export function acquireGeographyReuseGraphs({directory, repo, head, token, execu
 }
 
 export async function reusePRGeography({event, repo, api, token, directory = process.cwd(),
-  loadProof = prepareGeographyProof, inspect = inspectUnchangedSelectedGeography, acquire = acquireGeographyReuseGraphs}) {
+  loadProof = prepareGeographyProof, inspect = inspectExecutingSelectedGeography, acquire = acquireGeographyReuseGraphs}) {
   const scheduled = event?.pull_request;
   need(/^[-\w.]+\/[-\w.]+$/.test(repo ?? '') && event.repository?.full_name === repo && positive(scheduled?.number) &&
     oid(scheduled.head?.sha) && oid(scheduled.base?.sha), 'invalid-pr-context');

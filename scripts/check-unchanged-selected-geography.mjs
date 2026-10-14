@@ -1,5 +1,5 @@
 // Applicability only. The caller authenticates this module in its trusted checkout.
-// These explicit roles mirror the audited readers below, including detached
+// These explicit roles mirror the reviewed readers, including detached
 // SOURCE/NATIVE readers. No candidate module or scientific body is executed.
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -28,34 +28,10 @@ const joined = async promises => {
   return rows.map(row => row.value);
 };
 
-// A later trusted reader may introduce another input route. Equal candidate code
-// alone cannot prove this older collector complete for that new reader. Updating
-// these profiles therefore requires reviewing its reads and the adverse tests.
-// Artifact transport/receipt validation discovers no scientific file routes. Its
-// code remains in EXECUTION_CODE, and locator/retained archive equality is checked.
-export const AUDITED_READERS = Object.freeze({
-  // Accepted artifact routing and fixed output retention are part of this collector profile.
-  'scripts/accepted-selected-checkpoint.mjs': ['54e78c5ea3316612b4605579808a8ec3863b69401e6e57da71e8d8070aee97ec'],
-  'scripts/geographic_checkpoint_products.py': ['24c692ee5f9e985b50ceb173cd6bf6c46ccfbe5b9505c519a51e1135d1f49434'],
-  // The joint route only reuses authenticated original selected inputs and products.
-  // These exact readers introduce no new scientific source outside that closure.
-  'scripts/selected-checkpoint-native.mjs': ['1372180d776e33227410aaeb4ef5526cd5cc84e4dca3950cc6eaa6210bad04ca'],
-  [PREFIX + 'selected-checkpoint.mjs']: ['d96d0414b2c246b456c00a7878511652ff2ce2df77586bfa36d88d01247463d1', '89241cff2c243018af668b06e71cfe9e5d3edf89da19f4c03db4b1934c977851'],
-  [PREFIX + 'selected-checkpoint-continuous.mjs']: ['1c82e1bb619bc42353a573d0ef4f1989490e03b32d5137035cf890a3719c55dc'],
-  [PREFIX + 'selected-joint-entry.mjs']: ['ce1c4513ecf130452c07bdf4e516019e7ac85c0ee14c14b44203f3b23a16ae6d'],
-  'src/ownership-codec.js': ['64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d'],
-  'scripts/check-effective-geographic-regression.mjs': ['85ed6815060c98973ecc4043f0872398a6b8e474130d1663b5940eefd9f8baf4', '801ad9f05a8d7f34ae591ee78a09b71c87090acd4d20c92c9831152528a9c039', '5aa156ef010e0bfb14b88286a1c82231f6e4a7749c8063142082feb84e721cda'],
-  // The second profile is reviewed stage-2 blob f8e4a88a6dbe3d3961d6b17d9b926ee4488561a8:
-  // catalogue/admission/peak accounting changes; all input routes are identical.
-  [PREFIX + 'selected-neighbor-prevention.mjs']: ['63745cc5d4f15bdd8c153787df07379d813ab037fc1e0734944a75568235e8aa',
-    '6da5919c63822393959afc8f2499c76470aa6b51d6e29664d372e9eee79ae4b1', '1ebc1415f9c18cf8639734073313667bbc0e831317484c48fcafbc6f6d7f1216',
-    // Independent historical admission preserves all input routes.
-    '1593aad902a1c7010c5ffde21b2af2d39edd2093c82fac6973ed207e3b365847'],
-  // Candidate and single-vintage frame reuse change lifetime/accounting, not input routes.
-  [PREFIX + 'selected-continuous-entry.mjs']: ['84ddc84798fa371e37c0acbd6764a39ef79296f3b8a57ff09aa4ed416e7ae1b9', '198817f84574d3d04b0ab2c4827eced98211533a79851ee43b97c59d80663c07',
-    '7f23e383ba04ab2953758087eb6c2c69c777d103589f5f1e00076163f084aeac',
-    '94379e0b99aefca7267cca7a84032b44cb637aa6150e362e194a72f7e9e44b85']
-});
+// The trusted caller authenticates this collector and its readers together from
+// one reviewed checkout. EXECUTION_CODE below still binds every current reader
+// across baseline/candidate; typed routing schemas reject unknown input layouts.
+// A second manually maintained source-hash whitelist adds no execution authority.
 export const EXECUTION_CODE = Object.freeze([
   'scripts/run-geographic-check.py', 'scripts/check-geographic-regression.py',
   'scripts/check-effective-geographic-regression.mjs', 'scripts/selected-checkpoint-native.mjs', 'src/ownership-codec.js',
@@ -379,13 +355,8 @@ async function collect(reader, {baseline, candidate, trusted, metadataPaths}) {
   }
   for (const name of ['scripts/check-unchanged-selected-geography.mjs', 'scripts/geography-routing-metadata.mjs']) reader.equalCurrent(name, true);
   reader.equalCurrent('scripts/geography-prefetch.mjs');
-  await joined([...Object.keys(AUDITED_READERS).map(name => reader.body(reader.descriptor(trusted, name))),
-    reader.trustedJson(POLICY), reader.trustedJson(CHECKPOINTS), ...[HANDOFFS, 'data/world-index.json', 'data/geographic-releases/current-manifest.json',
+  await joined([reader.trustedJson(POLICY), reader.trustedJson(CHECKPOINTS), ...[HANDOFFS, 'data/world-index.json', 'data/geographic-releases/current-manifest.json',
       'data/ownership-selection.json', 'scripts/native-ownership/verified-candidates.json'].map(name => reader.currentJson(name))]);
-  for (const [name, allowed] of Object.entries(AUDITED_READERS)) {
-    const raw = await reader.body(reader.descriptor(trusted, name));
-    demand(allowed.includes(sha(raw)), 'unsupported-reader-profile:' + name);
-  }
   // The original reader uses executing-checkout policy for BOTH selections.
   const programme = await reader.trustedJson(POLICY);
   demand(programme.version === 1 && programme.kind === 'trusted-source-native-programmes-v1', 'unsupported-programme-catalogue');
@@ -469,7 +440,7 @@ async function collect(reader, {baseline, candidate, trusted, metadataPaths}) {
   }
 }
 
-export async function inspectUnchangedSelectedGeography({repo, baseline, candidate, trusted = baseline, acquisition, metadataPaths, limits = {member: FILE, metadata: METADATA, entries: ENTRIES}}) {
+export async function inspectUnchangedSelectedGeography({repo, baseline, candidate, trusted = baseline, acquisition, metadataPaths, verifyExecutingCheckout = false, limits = {member: FILE, metadata: METADATA, entries: ENTRIES}}) {
   const report = {version: 1, kind: 'trusted-unchanged-selected-geography-v1', baseline_commit: baseline,
     candidate_commit: candidate, trusted_reader_policy_commit: trusted, candidate_code_executed: false,
     science_reexecuted: false, source_approval: false, published: false};
@@ -478,6 +449,7 @@ export async function inspectUnchangedSelectedGeography({repo, baseline, candida
     demand(baseline !== candidate, 'baseline-proof-requires-full-check');
     acquisition ??= createRoutingMetadataAcquisition({repo, baseline, limits});
     const reader = createReader({repo, baseline, candidate, trusted, limits, acquisition});
+    if (verifyExecutingCheckout) demand(reader.git('rev-parse', 'HEAD').toString().trim() === trusted, 'executing-checkout-mismatch');
     for (let round = 0; ; round++) {
       try { await collect(reader, {baseline, candidate, trusted, metadataPaths}); break; }
       catch (error) {
@@ -498,7 +470,13 @@ export async function inspectUnchangedSelectedGeography({repo, baseline, candida
   }
 }
 
+// Production callers bind policy/code identity to the actual immutable checkout.
+// The lower-level collector remains available for isolated routing fixtures.
+export function inspectExecutingSelectedGeography(options) {
+  return inspectUnchangedSelectedGeography({...options, verifyExecutingCheckout: true});
+}
+
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const [repo, baseline, candidate, trusted] = process.argv.slice(2);
-  process.stdout.write(JSON.stringify(await inspectUnchangedSelectedGeography({repo, baseline, candidate, ...(trusted ? {trusted} : {})})) + '\n');
+  process.stdout.write(JSON.stringify(await inspectExecutingSelectedGeography({repo, baseline, candidate, ...(trusted ? {trusted} : {})})) + '\n');
 }

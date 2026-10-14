@@ -16,6 +16,16 @@ activate a selection, or replace geometric predicates.
 3. Call `qualifyCheckpoint({reader, checkpointId?, budget})` once. `reader.version`
    is the actual requested baseline. Unrelated commit changes do not prevent
    reuse when its selector and complete input/present-or-absent routes match.
+   The accepted-artifact alternative, `qualifyAcceptedCheckpoint`, can also
+   advance an older accepted selector to the requested baseline. It authenticates
+   the accepted merged tree, qualifies the existing append-only transition, and
+   carries every newly consumed scientific route into the candidate comparison.
+   It never reconstructs the complete source bank. Missing historical transport
+   declines reuse; an inconsistent authenticated tree or corrupt custody fails.
+   This applies to positive-native additions as well as unchanged native rows:
+   consumers still compare every actual changed row and every possible continuous
+   neighbor. Accepted geometry is reused only while the complete base, identities,
+   scientific routes and prior literal ledger/authority records remain unchanged.
 4. Call `qualifyTransition({state, reader: candidateReader, budget})` once. The
    module derives all changes from actual committed products. Reuse-unavailable
    returns the still-qualified baseline and `cold: "candidate"`; absence of a
