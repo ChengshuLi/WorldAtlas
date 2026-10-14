@@ -35,8 +35,10 @@ export function preparationRequestAllowance(value){
   if(!value||typeof value!=='object'||Array.isArray(value)||Object.keys(value).sort().join(',')!=='phaseBytes,rssBytes'||![value.phaseBytes,value.rssBytes].every(n=>Number.isSafeInteger(n)&&n>0))throw Error('Explicit finite preparation request allowance required');
   return preparationAllowance({phaseBytes:value.phaseBytes,rssBytes:value.rssBytes});
 }
-export function candidateBudget(inputs, {reserveBytes = 131072, reserveDescriptors = 16, allowance=preparationAllowance()} = {}) {
-  allowance=preparationRequestAllowance(allowance);
+export function candidateBudget(inputs, {reserveBytes = 131072, reserveDescriptors = 16, allowance} = {}) {
+  // An automatic budget is admitted once at this entry, not through two
+  // non-atomic OS observations. Explicit prior grants still need fresh admission.
+  allowance=allowance===undefined?preparationAllowance():preparationRequestAllowance(allowance);
   const limitBytes = allowance.phaseBytes, limitDescriptors = 512;
   if (![limitBytes,allowance.rssBytes].every(n=>Number.isSafeInteger(n)&&n>0)) throw Error('Invalid current preparation allowance');
   if (!Number.isSafeInteger(reserveBytes) || reserveBytes < 0 || !Number.isInteger(reserveDescriptors) || reserveDescriptors < 0)

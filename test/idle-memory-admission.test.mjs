@@ -104,6 +104,24 @@ test('revalidation credits already resident bytes for both complete-phase and to
   assert.throws(() => budget.snapshot(), /RSS/);
 });
 
+test('automatic preparation budget observes admission once while explicit prior grants revalidate', t => {
+  let observations = 0;
+  t.mock.method(process, 'availableMemory', () => ++observations === 1 ? 1600 * MiB : 600 * MiB);
+  t.mock.method(process, 'memoryUsage', () => ({rss: 50 * MiB}));
+  const previousReservation = process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES;
+  delete process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES;
+  t.after(() => {
+    if (previousReservation === undefined) delete process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES;
+    else process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES = previousReservation;
+  });
+  const automatic = candidateBudget([{bytes: 32 * MiB}]);
+  assert.equal(observations, 1);
+  assert.equal(automatic.snapshot().limit_bytes, 850 * MiB);
+  // A supplied prior request is different: newly lost supply must reject it.
+  assert.throws(() => candidateBudget([], {allowance: automatic.allowance}), /admission/);
+  assert.equal(observations, 2);
+});
+
 test('actual reader and preparation budgets retain complete-phase, member and RSS rejection', t => {
   let residentBytes = 50 * MiB;
   t.mock.method(process, 'memoryUsage', () => ({rss: residentBytes}));

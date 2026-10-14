@@ -27,7 +27,9 @@ The complete-process ceiling is current measured RSS plus that growth. Both the
 complete-phase byte limit and total-process RSS limit default to this ceiling;
 explicit positive grants cannot exceed it. Only measured RSS gets this resident
 credit, never runtime executable size, transport size or historical phase counts.
-Repeated request validation observes resources again without subtracting already
+An automatic preparation budget takes one admission observation at its entry;
+it does not re-admit its just-created default against a second non-atomic sample.
+Explicit prior requests are freshly validated without subtracting already
 resident bytes a second time. Lost remaining supply or increased future concurrent
 reservations can still make the same request inadmissible.
 
