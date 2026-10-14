@@ -240,9 +240,11 @@ export function githubAPI(token, {fetchImpl = fetch, onRequest = () => {}, readW
    try{return await request(route,method,body,undefined,false,false,false,maxResponseBytes);}
    catch(error){
     if((error.requestBudget||error.jobDeadline)&&lastQuota)error.quotaCause=lastQuota;
-    const delay=quotaDelay(error,now());
-    if(delay!==null)lastQuota=error;
-    // Never retry writes, transport ambiguity, ordinary denial or unbounded waits.
+    const quota=quotaDelay(error,now());
+    const delay=quota??([500,502,503,504].includes(error.github?.http_status)?1000*2**attempt:null);
+    if(quota!==null)lastQuota=error;
+    // Retry only explicit transient read responses inside the existing budget.
+    // Writes, transport ambiguity and ordinary denial remain unretried.
     if(method!=='GET'||body!==undefined||delay===null||attempt>=2)throw error;
     // Include the next complete attempt, not only the sleep. Recheck admission
     // after waking too, because previous work or an oversleep may consume time.
