@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
 import {processingAllowance, ImmutableReader, SelectedGeometrySources, NativeAssetImage, selectedBaseAssetAlias, selectedGeometrySourceAlias} from '../../../scripts/check-effective-geographic-regression.mjs';
-import {nativeOnlyComponent, deriveSourceTargetNativeDelta} from '../../../src/native-grid.js';
+import {nativeOnlyComponent, deriveSourceTargetNativeDelta, nativePolygonIntervals, polygonParts} from '../../../src/native-grid.js';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 const FILE=33554432, SLOT=512;
 const certificates=new WeakMap(), originalAuthorities=new WeakMap(), selectedAdditions=new WeakMap();
@@ -538,6 +538,57 @@ function authorityRegistry(registry) {
  }
  return byId;
 }
+// A retained reconstruction residual can be irrelevant to requested native
+// centres without making its original whole-source issue disappear. Require
+// every observed operation and witness before checking that narrower domain.
+function reconstructionResidualPointsets(result) {
+ demand(Array.isArray(result?.issues)&&result.support&&typeof result.support==='object',
+  'Missing qualified physical source interpretation');
+ const support=result.support, residualKeys=['missing_reconstruction','extra_reconstruction'];
+ const hierarchyKeys=['L2-outside-L1','L3-outside-L2','L4-outside-L3'];
+ const empty=geometry=>{
+  if(!geometry||typeof geometry!=='object'||Array.isArray(geometry))return false;
+  const keys=Object.keys(geometry).sort().join(',');
+  return ['Polygon','MultiPolygon'].includes(geometry.type)&&keys==='coordinates,type'
+    &&Array.isArray(geometry.coordinates)&&geometry.coordinates.length===0
+   ||geometry.type==='GeometryCollection'&&keys==='geometries,type'
+    &&Array.isArray(geometry.geometries)&&geometry.geometries.length===0;
+ };
+ const hierarchy=support.hierarchy_disagreements;
+ const observed=[...residualKeys,'contradictory_land_water_support'].some(key=>
+  Object.hasOwn(support,key)&&!empty(support[key]))
+  ||Object.hasOwn(support,'hierarchy_disagreements')&&(!hierarchy||typeof hierarchy!=='object'
+   ||Object.keys(hierarchy).sort().join(',')!==hierarchyKeys.join(',')
+   ||Object.values(hierarchy).some(geometry=>!empty(geometry)));
+ // Genuine legacy issue-free records need no newly invented support fields.
+ // An omitted issue cannot hide a present nonempty or malformed operation.
+ if(result.issues.length===0&&!observed)return [];
+ const supportKeys=['mapped_land_support','mapped_inland_water_support','outside_mapped_L1_context',
+  'hierarchy_disagreements',...residualKeys,'contradictory_land_water_support'];
+ demand(Object.keys(support).sort().join(',')===supportKeys.sort().join(',')
+  &&hierarchy&&typeof hierarchy==='object'
+  &&Object.keys(hierarchy).sort().join(',')===hierarchyKeys.join(','),
+ 'Incomplete physical residual operation roster');
+ demand(empty(support.contradictory_land_water_support)&&hierarchyKeys.every(key=>empty(hierarchy[key])),
+  'Unresolved contradictory or hierarchy physical support');
+ const issues=new Map();
+ for(const issue of result.issues){
+  demand(issue&&Object.keys(issue).sort().join(',')==='geometry,reason'
+   &&residualKeys.includes(issue.reason)&&!issues.has(issue.reason),
+  'Unknown or duplicate physical residual issue');
+  issues.set(issue.reason,issue.geometry);
+ }
+ const pointsets=[];
+ for(const key of residualKeys){
+  const geometry=support[key];
+  if(empty(geometry)){demand(!issues.has(key),'Empty physical residual has an issue witness');continue;}
+  polygonParts(geometry);
+  demand(issues.has(key)&&same(issues.get(key),geometry),'Missing or mismatched complete physical residual witness');
+  pointsets.push(geometry);
+ }
+ return pointsets;
+}
+
 // Source-target evidence uses the same retained registry and literal native
 // patch route. It has no invented original-gap inventory or addition polygon.
 export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
@@ -641,15 +692,22 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
   }
   return {id:change.id,pixelIndex:owners.get(change.id),feature:accepted};
  };
- const targets=new Map(), resolvedTargets=new Map();
+ const targets=new Map(), resolvedTargets=new Map(), residualsByOwner=new Map();
  for(const target of evidence.targets){
   const ownerId=target.target_id??target.id;
   demand(typeof target.id==='string'&&target.id&&!targets.has(target.id)&&owners.get(ownerId)===target.pixelIndex&&hash(target.source_receipt_sha256),
    'Foreign or duplicate source-target identity');
   const supports=physical.results.filter(result=>result.target===target.id);
   demand(supports.length===1,'Missing or duplicate physical source member');const support=supports[0];
-  demand(support&&Array.isArray(support.issues)&&support.issues.length===0
-   &&target.source_receipt_sha256===evidence.physical_evidence.sha256, 'Missing qualified physical source interpretation');
+  demand(target.source_receipt_sha256===evidence.physical_evidence.sha256,
+   'Missing qualified physical source interpretation');
+  const residuals=reconstructionResidualPointsets(support);
+  if(residuals.length){
+   const item=residualsByOwner.get(target.pixelIndex)??{index:target.pixelIndex,polygons:[]};
+   for(const geometry of residuals)for(const polygon of polygonParts(geometry))
+    item.polygons.push(polygon.map(ring=>ring.flat()));
+   residualsByOwner.set(target.pixelIndex,item);
+  }
   demand(Array.isArray(target.coverage_classes)&&target.coverage_classes.length>0
    &&target.coverage_classes.every(kind=>['mapped_land_support','mapped_inland_water_support'].includes(kind)),
    'Unresolved physical support cannot qualify a repair');
@@ -719,6 +777,15 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
   }
   for(const [block,rows]of blocks){
    const rowStart=block*4096,rowEnd=Math.min(262166,rowStart+4096);
+   // Patch rows name owners, not members. Conservatively keep every measured
+   // sibling's original residual parts and boundaries in that owner's veto.
+   const residualIndex=[...residualsByOwner.values()].filter(item=>selectedOwners.has(item.index))
+    .sort((a,b)=>a.index-b.index);
+   const residualScan=residualIndex.length?nativePolygonIntervals(residualIndex,
+    {size:262166,latitudes,rowStart,rowEnd}):{rows:new Map(),ties:[]};
+   const residualTies=new Map();
+   for(const tie of residualScan.ties){const list=residualTies.get(tie.y)??[];
+    list.push(tie);residualTies.set(tie.y,list);}
    // Empty rows here derive the permitted source/coverage domain, not a claim
    // about actual ownership. Actual current owner zero is enforced separately
    // by selectedAdditiveRows and the emitted native patch application.
@@ -727,6 +794,11 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
     ownerRows:Array.from({length:rowEnd-rowStart},(_,i)=>({y:rowStart+i,complete_owner_intervals:[]}))});
    const allowedRows=new Map(allowed.rows.map(row=>[row.y,row.runs]));
    for(const row of rows)for(const run of row.runs)if(selectedOwners.has(run[2])){
+    const intersects=(start,end)=>Math.max(start,run[0])<Math.min(end,run[1]);
+    demand(!(residualScan.rows.get(row.y)??[]).some(span=>span.owner===run[2]&&intersects(span.start,span.end))
+     &&!(residualTies.get(row.y)??[]).some(tie=>tie.owner===run[2]
+      &&intersects(tie.start??tie.x,tie.end??tie.x+1)),
+    'Requested native cells intersect a physical reconstruction residual');
     demand((allowedRows.get(row.y)??[]).some(span=>span[2]===run[2]&&span[0]<=run[0]&&span[1]>=run[1]),
      'Proposed native cells lack unique source-target coverage');checked.add(row.y+':'+run.join(':'));
    }

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {deriveSourceTargetNativeDelta,nativeRowLatitudes} from '../src/native-grid.js';
+import {deriveSourceTargetNativeDelta,nativeRowLatitudes,nativePolygonIntervals,polygonParts} from '../src/native-grid.js';
 import {ImmutableReader} from '../scripts/check-effective-geographic-regression.mjs';
 import {constructOriginalAuthority} from '../scripts/delivery-handoff-advance.mjs';
 
@@ -214,4 +214,148 @@ test('actual constructor rejects membership pins different from selected canonic
   const raw=Buffer.from(JSON.stringify({changes:[]}));
   fixture.byBlob.set(blob(raw),raw);fixture.files.set(fixture.membership.lineage.path,{raw,pin:{...old.pin,git_blob_oid:blob(raw),bytes:raw.length}});
   assert.throws(()=>fixture.run(),/membership differs from selected canonical bytes/);
+});
+
+const emptyPolygon=()=>({type:'Polygon',coordinates:[]});
+function withResiduals(state,witnesses,member=0){
+  const result=state.physical.results[member];
+  result.support={mapped_land_support:result.support.mapped_land_support,
+    mapped_inland_water_support:emptyPolygon(),outside_mapped_L1_context:emptyPolygon(),
+    hierarchy_disagreements:Object.fromEntries(['L2-outside-L1','L3-outside-L2','L4-outside-L3']
+      .map(key=>[key,emptyPolygon()])),missing_reconstruction:emptyPolygon(),
+    extra_reconstruction:emptyPolygon(),contradictory_land_water_support:emptyPolygon()};
+  result.issues=witnesses.map(([reason,geometry])=>{result.support[reason]=geometry;return {reason,geometry};});
+  return result;
+}
+const disjointResidual=()=>rectangle(-.01,.005,-.01,.01);
+for(const reasons of [['missing_reconstruction'],['extra_reconstruction'],['missing_reconstruction','extra_reconstruction']])
+  test('actual constructor retains requested cells outside complete '+reasons.join(' and ')+' witnesses',()=>{
+    const fixture=constructorFixture(s=>withResiduals(s,reasons.map(reason=>[reason,disjointResidual()])));
+    const result=fixture.run();
+    assert.deepEqual(result.ledger_rows[0].native_rows,fixture.state.proposed.rows);
+    assert.equal(result.ledger_rows[0].native_cells,1);
+    assert.equal(result.ledger_rows[0].source_receipt_sha256,fixture.files.get('physical.json').pin.sha256);
+    assert.equal(fixture.state.physical.results[0].issues.length,reasons.length);
+  });
+test('residual exception accepts exact empty multipolygon and collection operations',()=>{
+  const fixture=constructorFixture(s=>{
+    const result=withResiduals(s,[['extra_reconstruction',disjointResidual()]]);
+    result.support.missing_reconstruction={type:'MultiPolygon',coordinates:[]};
+    result.support.contradictory_land_water_support={type:'GeometryCollection',geometries:[]};
+  });
+  assert.equal(fixture.run().ledger_rows[0].native_cells,1);
+});
+test('residual hole interior passes without erasing its nonvacuous outer pointset',()=>{
+  const outer=rectangle(-.03,.005,-.01,.01),hole=rectangle(-.025,-.015,-.005,.005);
+  const residual={type:'Polygon',coordinates:[outer.coordinates[0],hole.coordinates[0]]};
+  const fixture=constructorFixture(s=>withResiduals(s,[['missing_reconstruction',residual]]));
+  assert.equal(fixture.run().ledger_rows[0].native_cells,1);
+});
+test('one affected centre rejects a whole requested interval rather than shrinking it',()=>{
+  const fixture=constructorFixture(s=>{
+    const run=s.proposed.rows[0].runs[0],longitude=(run[0]+1.5)/size*360-180;
+    run[1]=run[0]+3;
+    withResiduals(s,[['extra_reconstruction',rectangle(longitude-.0002,longitude+.0002,-.01,.01)]]);
+  });
+  assert.throws(()=>fixture.run(),/intersect a physical reconstruction residual/);
+  assert.equal(fixture.state.proposed.rows[0].runs[0][1]-fixture.state.proposed.rows[0].runs[0][0],3);
+});
+test('a same-owner sibling residual veto cannot be bypassed through clean member coverage',()=>{
+  const fixture=constructorFixture(s=>withResiduals(s,[['missing_reconstruction',rectangle(-.025,-.015,-.01,.01)]],1));
+  assert.throws(()=>fixture.run(),/intersect a physical reconstruction residual/);
+});
+test('multipart residuals check every retained part',()=>{
+  const geometry={type:'MultiPolygon',coordinates:[disjointResidual().coordinates,
+    rectangle(-.025,-.015,-.01,.01).coordinates]};
+  assert.throws(()=>constructorFixture(s=>withResiduals(s,[['extra_reconstruction',geometry]])).run(),
+    /intersect a physical reconstruction residual/);
+});
+
+function exactBoundaryTarget(state){
+  directTarget(state,{membership:false});
+  const geometry=rectangle(-90.03,-89.97,-.02,.02);
+  state.originals[2].geometry=geometry;state.targets[0].base_geometry=geometry;
+  state.physical.results[0].support.mapped_land_support=geometry;
+  state.measured[0].consumed.geometry=geometry;state.measured[0].selected.geometry=geometry;
+  state.proposed.rows=[{y:size/2,runs:[[(size/2-1)/2,(size/2-1)/2+1,2]]}];
+}
+for(const [name,geometry,kind]of [
+  ['vertical upper endpoint',()=>rectangle(-90.01,-90,-.01,.01),'native-intersection-on-cell-centre'],
+  ['sloping intersection',()=>({type:'Polygon',coordinates:[[[-90-2**-10,latitudes[size/2]-2**-16],
+    [-90+2**-10,latitudes[size/2]+2**-16],[-90-2**-10,latitudes[size/2]+2**-16],
+    [-90-2**-10,latitudes[size/2]-2**-16]]]}),'native-intersection-on-cell-centre'],
+  ['horizontal lower edge',()=>rectangle(-90.01,-89.99,latitudes[size/2],.01),'horizontal-native-boundary-centres'],
+  ['excluded lower vertex',()=>({type:'Polygon',coordinates:[[[-90,latitudes[size/2]],
+    [-90.01,.01],[-89.99,.01],[-90,latitudes[size/2]]]]}),'excluded-native-lower-vertex-centre'],
+  ['hole boundary',()=>({type:'Polygon',coordinates:[rectangle(-90.02,-89.98,-.02,.02).coordinates[0],
+    rectangle(-90,-89.99,-.01,.01).coordinates[0]]}),'native-intersection-on-cell-centre'],
+])test('actual constructor rejects exact residual '+name+' contact',()=>{
+  const residual=geometry(),x=(size/2-1)/2,y=size/2;
+  const scan=nativePolygonIntervals([{index:2,polygons:polygonParts(residual).map(p=>p.map(ring=>ring.flat()))}],
+    {size,latitudes,rowStart:y,rowEnd:y+1});
+  assert.equal((scan.rows.get(y)??[]).some(span=>span.start<=x&&x<span.end),false);
+  assert.ok(scan.ties.some(tie=>tie.kind===kind&&tie.y===y&&(tie.start??tie.x)<=x&&x<(tie.end??tie.x+1)));
+  const fixture=constructorFixture(s=>{exactBoundaryTarget(s);withResiduals(s,[['extra_reconstruction',residual]]);});
+  assert.throws(()=>fixture.run(),/intersect a physical reconstruction residual/);
+});
+test('every requested native row block is checked against complete residuals',()=>{
+  const fixture=constructorFixture(s=>{
+    exactBoundaryTarget(s);const geometry=rectangle(-90.03,-89.97,-20,20);
+    s.originals[2].geometry=geometry;s.targets[0].base_geometry=geometry;
+    s.physical.results[0].support.mapped_land_support=geometry;
+    s.measured[0].consumed.geometry=geometry;s.measured[0].selected.geometry=geometry;
+    const y=size/2+5000;s.proposed.rows.push({y,runs:s.proposed.rows[0].runs.map(run=>[...run])});
+    withResiduals(s,[['extra_reconstruction',rectangle(-90.01,-89.99,latitudes[y]-.001,latitudes[y]+.001)]]);
+  });
+  assert.throws(()=>fixture.run(),/intersect a physical reconstruction residual/);
+});
+test('a residual for another owner does not veto clean requested owner cells',()=>{
+  const fixture=constructorFixture(s=>{
+    const geometry=s.originals[2].geometry;
+    s.targets.push({id:c,pixelIndex:2,source_family:family,base_geometry:geometry,coverage_classes:['mapped_land_support']});
+    s.physical.results.push({target:c,issues:[],support:{mapped_land_support:geometry}});
+    s.measured.push({target:c,consumed:{geometry},selected:{id:c,geometry}});
+    const x=Math.floor(size/2+.05/360*size);s.proposed.rows[0].runs.push([x,x+1,2]);
+    withResiduals(s,[['missing_reconstruction',rectangle(-.025,-.015,-.01,.01)]],2);
+  });
+  assert.equal(fixture.run().ledger_rows.length,2);
+});
+
+for(const [name,change,pattern]of [
+  ['omitted witness',r=>r.issues=[],/Missing or mismatched complete physical residual witness/],
+  ['duplicate witness',r=>r.issues.push(r.issues[0]),/duplicate physical residual issue/],
+  ['unknown reason',r=>r.issues[0].reason='container-chain',/Unknown or duplicate physical residual issue/],
+  ['unknown issue field',r=>r.issues[0].source=0,/Unknown or duplicate physical residual issue/],
+  ['mismatched geometry',r=>r.issues[0].geometry=rectangle(0,1),/mismatched complete physical residual witness/],
+  ['omitted operation',r=>delete r.support.missing_reconstruction,/Incomplete physical residual operation roster/],
+  ['unknown operation',r=>r.support.foreign=emptyPolygon(),/Incomplete physical residual operation roster/],
+  ['omitted hierarchy operation',r=>delete r.support.hierarchy_disagreements['L4-outside-L3'],/Incomplete physical residual operation roster/],
+  ['unknown hierarchy operation',r=>r.support.hierarchy_disagreements.foreign=emptyPolygon(),/Incomplete physical residual operation roster/],
+  ['empty issued operation',r=>{r.support.extra_reconstruction=emptyPolygon();r.issues[0].geometry=r.support.extra_reconstruction;},/Empty physical residual/],
+  ['null operation',r=>{r.support.extra_reconstruction=null;r.issues[0].geometry=null;},/Unsupported original native geometry/],
+  ['malformed empty operation',r=>r.support.missing_reconstruction={type:'Polygon',coordinates:[[]]},/Incomplete footprint ring/],
+  ['extra empty geometry field',r=>r.support.missing_reconstruction.foreign=true,/Primitive geometry/],
+  ['nonpolygon witness',r=>{r.support.extra_reconstruction={type:'LineString',coordinates:[[0,0],[1,1]]};r.issues[0].geometry=r.support.extra_reconstruction;},/Unsupported original native geometry/],
+  ['nonempty collection witness',r=>{r.support.extra_reconstruction={type:'GeometryCollection',geometries:[disjointResidual()]};r.issues[0].geometry=r.support.extra_reconstruction;},/Unsupported original native geometry/],
+  ['hidden contradiction',r=>r.support.contradictory_land_water_support=rectangle(0,1),/Unresolved contradictory or hierarchy/],
+  ['hidden hierarchy disagreement',r=>r.support.hierarchy_disagreements['L2-outside-L1']=rectangle(0,1),/Unresolved contradictory or hierarchy/],
+])test('residual constructor rejects '+name+' after coherent evidence rehashing',()=>{
+  const fixture=constructorFixture(s=>change(withResiduals(s,[['extra_reconstruction',disjointResidual()]])));
+  assert.throws(()=>fixture.run(),pattern);
+});
+for(const key of ['contradictory_land_water_support','L2-outside-L1'])
+  test('deleting every issue cannot hide observed '+key,()=>{
+    const fixture=constructorFixture(s=>{
+      const result=withResiduals(s,[]);
+      if(key==='contradictory_land_water_support')result.support[key]=rectangle(0,1);
+      else result.support.hierarchy_disagreements[key]=rectangle(0,1);
+    });
+    assert.throws(()=>fixture.run(),/Unresolved contradictory or hierarchy/);
+  });
+test('deleting one of two residual witnesses cannot omit the other operation',()=>{
+  const fixture=constructorFixture(s=>{
+    const result=withResiduals(s,[['missing_reconstruction',disjointResidual()],['extra_reconstruction',disjointResidual()]]);
+    result.issues.pop();
+  });
+  assert.throws(()=>fixture.run(),/Missing or mismatched complete physical residual witness/);
 });
