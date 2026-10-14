@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {execFileSync} from 'node:child_process';
-import {gzipSync,crc32,deflateRawSync} from 'node:zlib';
+import {gzipSync,gunzipSync,crc32,deflateRawSync} from 'node:zlib';
 import {ACCEPTED_CHECKPOINT_CODE} from '../scripts/accepted-selected-checkpoint.mjs';
 import {renderWorkerResult} from '../scripts/worker-result.mjs';
 import {createHash} from 'node:crypto';
@@ -234,9 +234,9 @@ const JSON_BODY=valueBytes;
 const P='coordination/engineering/selected-geography-effective-prevention-20261009/';
 const {JOINT_CODE:JOINT}=await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs');
 const MEMBERS=['derived-certificate.json.gz','derived-facts.json','derived-publication.json','checkpoint-routes.json'];
-async function acceptedProducts(t,{sourcePaths}={}) {
+async function acceptedProducts(t,{sourcePaths,actualProducer=false}={}) {
   const f=await trustedFixture(t,{sourcePaths});
-  for(const name of JOINT)f.save(name,fs.readFileSync(name));
+  for(const name of [...JOINT,...(actualProducer?['scripts/check-geographic-regression.py','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt']:[])])f.save(name,fs.readFileSync(name));
   f.save(CATALOGUE,{version:1,kind:'accepted-selected-checkpoints-v1',checkpoints:[f.rootRow]});
   const trusted=f.commit();
   const reader=new f.native.ImmutableReader(f.root,trusted,{allowance:f.reader.allowance});
@@ -262,20 +262,32 @@ async function acceptedProducts(t,{sourcePaths}={}) {
   const products=structuredClone({facts,certificate,census,native});
   f.api.releaseCheckpoint(state);
   const transport=await import(pathToFileURL(path.join(f.root,'scripts/accepted-selected-checkpoint.mjs')));
+  if(actualProducer){
+    const destination=path.join(f.root,'actual-native-products');fs.mkdirSync(destination);
+    const driver="import importlib.util,json,pathlib,sys\nrepo=pathlib.Path(sys.argv[1]);s=importlib.util.spec_from_file_location('native_parent',repo/'scripts/run-geographic-check.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m)\nprint(json.dumps(m.selected_joint(repo,sys.argv[2],sys.argv[2],trusted=sys.argv[2],checkpoint_destination=pathlib.Path(sys.argv[3]))))";
+    const issued=JSON.parse(execFileSync(process.env.PYTHON??'python3',['-I','-B','-c',driver,f.root,trusted,destination],{env:{...process.env,NODE:process.execPath},encoding:'utf8'}));
+    const produced=new Map(MEMBERS.map(name=>[name,fs.readFileSync(path.join(destination,name))]));
+    assert.deepEqual(issued.checkpoint.members.map(p=>p.name).sort(),[...MEMBERS].sort());
+    return {...f,trusted,transport,produced,products:{native:issued.native,
+      facts:JSON.parse(produced.get('derived-facts.json')),certificate:JSON.parse(gunzipSync(produced.get('derived-certificate.json.gz'))),
+      census:JSON.parse(produced.get('checkpoint-routes.json'))}};
+  }
   return {...f,trusted,transport,products};
 }
 function pack(f,mutate=()=>{}) {
   const p=structuredClone(f.products);mutate(p);
-  const bodies=new Map();
+  const bodies=new Map(f.produced);
   const put=(name,value)=>{const decoded=valueBytes(value),encoded=name.endsWith('.gz')?gzipSync(decoded):decoded;
     bodies.set(name,encoded);return {path:name,bytes:encoded.length,sha256:sha(encoded),
       ...(name.endsWith('.gz')?{decoded_bytes:decoded.length,decoded_sha256:sha(decoded)}:{})};};
+  if(!f.produced){
   const certificate=put('derived-certificate.json.gz',p.certificate),routes=put('checkpoint-routes.json',p.census);
   const {runtime,caller_runtime,execution_runtimes,execution_code_inventory,...nativeInverse}=p.native;
   Object.assign(p.facts,{certificate,checkpoint_routes:routes,native_result_sha256:valueSha(nativeInverse)});
   const df=put('derived-facts.json',p.facts);
   put('derived-publication.json',{version:1,kind:p.facts.kind,complete:true,accepted_checkpoint:false,
     validation_stage:p.facts.validation_stage,certificate,facts:df,routes});
+  }
   const report={version:1,method_id:'worldatlas-trusted-geography-check-v1',baseline_commit:f.trusted,
     candidate_commit:f.trusted,trusted_code_commit:f.trusted,candidate_code_executed:false,published:false,
     source_approval:false,gate_status:'passed',status:'no-new-native-loss',validation_scope:'selected-native-map-cells',selected_native_report:p.native,
@@ -331,6 +343,16 @@ test('accepted original archive admits a private successor without a catalogue r
   const candidateReader=new f.native.ImmutableReader(f.root,f.trusted,{allowance:a.reader.allowance,budget:a.reader.budget});
   const transition=f.api.qualifyTransition({state:result.state,reader:candidateReader,budget:a.budget});assert.equal(transition.available,true);
   assert.deepEqual(f.api.checkpointRouteCensus({transition,budget:a.budget}).routes,f.products.census.routes);
+  f.api.releaseCheckpoint(result.state);f.transport.releaseAcceptedCheckpoint(a.handle);
+});
+test('actual joint producer and Python retention feed archive transport and next checkpoint admission',async t=>{
+  const f=await acceptedProducts(t,{actualProducer:true}),a=await acquire(f);
+  const result=await qualify(f,a);assert.equal(result.available,true);
+  assert.equal(result.state.selected_commit,f.trusted);
+  assert.deepEqual(result.state.certificate,f.products.certificate);
+  assert.equal(f.products.facts.validation_stage,'native-passed');
+  assert.equal(f.products.facts.continuous_publication,undefined);
+  assert.equal(f.products.native.repair_visibility.new_components,0);
   f.api.releaseCheckpoint(result.state);f.transport.releaseAcceptedCheckpoint(a.handle);
 });
 test('forged and released acceptance handles cannot mint private selected state',async t=>{
