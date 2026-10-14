@@ -896,6 +896,7 @@ export function finalizeDelivery(config, reader) {
     'selected-delivery-expectations.json': orderedBytes(expectations)};
 }
 
+const physicalProducts = ['whole-target-support.json', 'execution-receipt.json'];
 const sourceProducts = ['original-stage-inputs.json', 'cohort-intervals.json', 'cohort-config.json',
   'source-qualification.json', 'execution-receipt.json'];
 function sourceBinding(raw, phase = 'source') {
@@ -906,22 +907,25 @@ function sourceBinding(raw, phase = 'source') {
 // Reuse complete local original output without repeating scientific operators.
 // This validates retained custody; it does not create new scientific authority.
 export function resumeSource(root, destination, config, binding, reader) {
+  const physical = binding.phase === 'physical', phaseConfig = config[physical ? 'physical' : 'source'];
+  const names = physical ? physicalProducts : sourceProducts;
   const receipt = JSON.parse(ordinary(root, destination + '/preparation.json'));
   need(receipt.version === 1 && same(receipt.binding, binding) &&
-    same(Object.keys(receipt.outputs ?? {}).sort(), [...sourceProducts].sort()), 'Source resume configuration/code/inventory differs');
+    same(Object.keys(receipt.outputs ?? {}).sort(), [...names].sort()), 'Source resume configuration/code/inventory differs');
   const products = {};
-  for (const name of sourceProducts) {
+  for (const name of names) {
     const raw = ordinary(root, destination + '/' + name), pin = receipt.outputs[name];
     need(pin.bytes === raw.length && pin.sha256 === digest(raw), 'Source resumed product changed: ' + name);
     products[name] = raw;
   }
-  need(Array.isArray(config.source?.inputs) && config.source.inputs.length > 0, 'Source resume needs original input inventory');
-  for (const pin of [...config.source.inputs, config.source.physical_reproducer]) reader.read({...pin, mode: '100644'});
-  const execution = JSON.parse(products['execution-receipt.json']), qualified = JSON.parse(products['source-qualification.json']);
+  need(Array.isArray(phaseConfig?.inputs) && phaseConfig.inputs.length > 0, 'Source resume needs original input inventory');
+  for (const pin of [...phaseConfig.inputs, ...(physical ? [] : [phaseConfig.physical_reproducer])]) reader.read({...pin, mode: '100644'});
+  const execution = JSON.parse(products['execution-receipt.json']);
+  const qualified = physical ? execution : JSON.parse(products['source-qualification.json']);
   need(execution.complete === true && execution.program?.sha256 === binding.program_sha256 &&
-    qualified.fresh_admission?.config_sha256 === digest(jsonBytes(config.source)), 'Source original execution binding differs');
-  need(Array.isArray(execution.outputs) && execution.outputs.length === 4 &&
-    same(execution.outputs.map(pin => pin.path).sort(), sourceProducts.filter(name => name !== 'execution-receipt.json')
+    qualified.fresh_admission?.config_sha256 === digest(jsonBytes(phaseConfig)), 'Source original execution binding differs');
+  need(Array.isArray(execution.outputs) && execution.outputs.length === names.length - 1 &&
+    same(execution.outputs.map(pin => pin.path).sort(), names.filter(name => name !== 'execution-receipt.json')
       .map(name => destination + '/' + name).sort()), 'Source original output roster differs');
   for (const pin of execution.outputs) {
     const raw = products[pin.path.slice(destination.length + 1)];
@@ -990,14 +994,15 @@ export async function sourceCohort(config, reader, root, destination, phase = 's
       stdio: ['ignore', 'ignore', 'pipe'], maxBuffer: 131072});
     for (const pin of runtime.files) runtimeIdentity(pin);
     need(fs.readFileSync(helper).equals(helperRaw), 'Source helper changed during execution');
-    const names = phase === 'source' ? sourceProducts : ['whole-target-support.json', 'execution-receipt.json'];
+    const names = phase === 'source' ? sourceProducts : physicalProducts;
     need(same(fs.readdirSync(output).sort(), [...names].sort()), 'Incomplete or foreign source output inventory');
     const products = Object.fromEntries(names.map(name => [name, ordinary(root, path.relative(root, path.join(output, name)))]));
     const total = Object.values(products).reduce((n, raw) => n + raw.length, 0);
     need(total <= phaseConfig.resources.output_bytes, 'Complete source output reserve exceeded');
     return {products, observation: {elapsed_seconds: (performance.now() - started) / 1000, allowance,
-      runtime_inventory: identities, limits: ['Source checks are cooperative boundaries, not hard process-tree enforcement.',
-        'Source prerequisites are not physical, native, owner-zero or selected-output acceptance.']}};
+      runtime_inventory: identities, limits: ['Scientific checks are cooperative boundaries, not hard process-tree enforcement.',
+        phase === 'physical' ? 'Original physical source-relative support is not native, owner-zero, factual or selected-output acceptance.'
+          : 'Source prerequisites are not physical, native, owner-zero or selected-output acceptance.']}};
   } finally { fs.rmSync(staging, {recursive: true, force: true}); }
 }
 
@@ -1057,7 +1062,7 @@ async function main(args) {
   const raw = ordinary(root, configFile), config = JSON.parse(raw), reader = pinReader(root, {allowance: config.preparation_allowance});
   reader.budget.add({bytes: raw.length}); need(config.version === 1, 'Versioned preparation config required');
   const binding = ['source','physical'].includes(phase) ? sourceBinding(raw,phase) : {phase, config_sha256: digest(raw)};
-  if (phase === 'source' && flags.includes('--resume') && fs.existsSync(path.join(root, destination))) {
+  if (['source','physical'].includes(phase) && flags.includes('--resume') && fs.existsSync(path.join(root, destination))) {
     console.log(JSON.stringify(resumeSource(root, destination, config, binding, reader))); return;
   }
   let outputs, observation;

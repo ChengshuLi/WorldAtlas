@@ -1,9 +1,11 @@
-"""Reusable, source-only Indonesia cohort probe.
+"""Shared source-only Indonesia probe and distinct original physical phase.
 
 The immutable Riau/Indonesia programs remain historical evidence. This shared
-implementation retains their complete-family covers, lineage/identity checks,
+source implementation retains their complete-family covers, lineage/identity checks,
 competitor withholding and physical/native/semantic holds. It is not a writer of
-native authority. Inputs are explicit immutable whole-file pins, never a cache.
+native authority. The distinct physical phase preserves the archived comparison
+methods while reducing unneeded metadata/native-buffer retention. Inputs are
+explicit immutable whole-file pins, never a cache.
 """
 import argparse
 import collections
@@ -527,6 +529,7 @@ PHYSICAL_COMPARISON_SHA = 'f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9
 
 def selected_physical_metadata(parts, read_decoded, bounds, expected_count):
     """Full authentication first; retain full dictionaries only for the closure."""
+    need(positive_int(expected_count), 'Positive complete physical record count required')
     compact, selected, retained = {}, set(), {}
     for part in parts:
         raw = read_decoded(part)
@@ -617,6 +620,9 @@ def run_physical(repo, config_path, admission_path, output, publication_prefix):
          'Invalid physical allowance')
     need(config['runtime'] == {'python':sys.version,'numpy':np.__version__,
          'shapely':shapely.__version__,'geos':shapely.geos_version_string}, 'Physical runtime differs')
+    target=Path(output).absolute()
+    need(not target.exists() and target.parent.is_dir() and all(not p.is_symlink() for p in [target,*target.parents]),
+         'Fresh ordinary physical output destination required')
     verify_runtime(admission)
     consumed = {}
     env = {**os.environ,'GIT_NO_LAZY_FETCH':'1','GIT_NO_REPLACE_OBJECTS':'1',
@@ -624,8 +630,10 @@ def run_physical(repo, config_path, admission_path, output, publication_prefix):
     def check():
         need(peak() < admission['allowance']['rssBytes'], 'Physical RSS allowance exceeded at boundary')
         need(time.monotonic()-started < resources['deadline_seconds'], 'Physical deadline exceeded at boundary')
-        need(sum(p['bytes']+p.get('decoded_bytes',0) for p in consumed.values()) <= resources['input_bytes'],
-             'Complete physical input inventory exceeds allowance')
+        charged=sum(p['bytes']+p.get('decoded_bytes',0) for p in consumed.values())
+        need(charged <= resources['input_bytes'], 'Complete physical input inventory exceeds allowance')
+        need(charged+admission['runtime_inventory_bytes']+admission['execution_reserve_bytes']
+             < admission['allowance']['phaseBytes'], 'Complete physical charged phase exceeds allowance')
     def read(name):
         safe_path(name)
         need(name in pins, 'Unpinned physical input: '+name)
@@ -633,6 +641,8 @@ def run_physical(repo, config_path, admission_path, output, publication_prefix):
         need(re.fullmatch('[a-f0-9]{40}',pin['commit']) and positive_int(pin['bytes'],MAX_FILE)
              and re.fullmatch('[a-f0-9]{64}',pin['sha256']), 'Invalid immutable physical pin')
         command=['git','-c','protocol.allow=never','-C',str(repo)]
+        need(subprocess.check_output(command+['cat-file','-t',pin['commit']],env=env).strip()==b'commit',
+             'Physical input requires an actual immutable commit')
         tree=subprocess.check_output(command+['ls-tree','-z',pin['commit'],'--',name],env=env)
         need(tree.startswith(b'100644 blob ') and tree.endswith(('\t'+name+'\0').encode()),'Ordinary physical input required')
         oid=tree.split()[2].split(b'\t')[0].decode()
@@ -645,6 +655,9 @@ def run_physical(repo, config_path, admission_path, output, publication_prefix):
         check()
         return raw
     def decoded(part,prefix):
+        pin=pins.get(prefix+part['path'])
+        need(pin and pin.get('decoded_bytes')==part['uncompressed_bytes']
+             and pin.get('decoded_sha256')==part['uncompressed_sha256'], 'Physical decoded admission pin differs')
         raw=read(prefix+part['path'])
         need(len(raw)==part['bytes'] and sha(raw)==part['sha256'],'Physical fragment encoded binding differs')
         need(positive_int(part['uncompressed_bytes'],MAX_FILE),'Bounded decoded physical fragment required')
