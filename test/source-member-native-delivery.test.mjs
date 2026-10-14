@@ -57,6 +57,7 @@ test('an original member boundary remains withheld inside a same-owner union',()
 });
 for(const [name,change,pattern]of [
   ['duplicate original ID',i=>i.sourceFeatures.push(i.sourceFeatures[0]),/source owner roster/],
+  ['out-of-range native owner',i=>{i.sourceFeatures.forEach(f=>f.pixelIndex=2**32);i.targets[0].pixelIndex=2**32;},/source owner roster/],
   ['one owner with two accepted IDs',i=>i.sourceFeatures[1].target_id='other-city',/Conflicting source owner/],
   ['one accepted ID with two owners',i=>i.sourceFeatures[1].pixelIndex=2,/Conflicting source owner/],
   ['missing member coverage identity',i=>delete i.coverageFeatures[0].source_id,/exact original source/],

@@ -229,7 +229,7 @@ export function deriveSourceTargetNativeDelta({targets, sourceFeatures, coverage
     const ownerId = feature.target_id ?? feature.id;
     require(typeof feature.id === 'string' && feature.id && !sourceIds.has(feature.id)
       && typeof ownerId === 'string' && ownerId && Number.isSafeInteger(feature.pixelIndex)
-      && feature.pixelIndex > 0, 'Ambiguous source owner roster');
+      && feature.pixelIndex > 0 && feature.pixelIndex <= 2**32-1, 'Ambiguous source owner roster');
     require((!sourceOwners.has(feature.pixelIndex) || sourceOwners.get(feature.pixelIndex) === ownerId)
       && (!ownerById.has(ownerId) || ownerById.get(ownerId) === feature.pixelIndex),
     'Conflicting source owner identity');
