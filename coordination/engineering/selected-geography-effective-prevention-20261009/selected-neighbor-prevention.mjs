@@ -548,12 +548,13 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
   &&same(preimage.source_evidence,binding.source_evidence)&&same(preimage.native_patch,binding.native_patch),
  'Source-target authority inputs differ');
  const read=p=>{
-  pinCheck(p);const d=reader.descriptor(p.path,p.commit);
+  pinCheck(p);let version=p.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+  const d=reader.descriptor(p.path,version);
   demand(d.mode===p.mode&&d.git_blob_oid===p.git_blob_oid&&d.bytes===p.bytes,'Source-target whole identity differs');
   const parseReserve=6*(p.decoded_bytes??p.bytes);
   demand(reader.used+parseReserve<=reader.phaseLimit,'Source-target complete parsed acquisition exceeds phase');
   reader.used+=parseReserve;reader.admit(d,p.decoded_bytes??0);
-  const raw=reader.read(p.path,{version:p.commit,expected:p.sha256,decoded:p.decoded_bytes??0});
+  const raw=reader.read(p.path,{version,expected:p.sha256,decoded:p.decoded_bytes??0});
   if(p.decoded_bytes===undefined)return raw;
   const decoded=gunzipSync(raw,{maxOutputLength:p.decoded_bytes});
   demand(decoded.length===p.decoded_bytes&&sha(decoded)===p.decoded_sha256,'Source-target decoded body differs');return decoded;
