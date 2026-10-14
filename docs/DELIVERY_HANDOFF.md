@@ -81,6 +81,20 @@ No proposed input is called accepted merely because a hash matches.
    existing `composeRetainedLedgers` conservation implementation. It rejects
    duplicate original scopes and conflicting authorities. This makes metadata,
    not a qualification of a new source or a selected bank. Commit composition.
+   For an already-qualified modern source-target delivery, instead supply pinned
+   `selector`, original `rule_preimage` and `source_authority`, constructor-result `ledger`
+   (`constructed-authority.json`, including `component_ids`, `ledger_rows` and
+   `rule_sha256`), original `native_patch`, and `effective_release_id`. The selector
+   discovers the actual prior cumulative metadata; no prior-role list or separately
+   prepared singleton registry is needed. Compose forms the existing
+   `retained-source-literal-additions` policy entry from those actual whole pins.
+   The command preserves every inherited authority, literal row/exception, parent
+   inventory, current rebind and target binding, rejects native-contract changes
+   and any overlap with accepted additions, and emits `authority-registry.json`,
+   `selected-ledger.json`, `patch.json` and `runtime-envelope.json` together.
+   Flat public aliases come from the accepted envelope, not repository paths.
+   This consumes retained qualified metadata; it does not repeat source/physical
+   operators or prove actual current owner-zero. Commit those four products.
 5. Existing rebind issuance and supervision remain separate. `rebind-operating`
    accepts actual `request`, `publication`, `terminal` pins and complete
    `execution_custody` pins (`code_source`, `terminal`, `stderr`, `stdout`,
@@ -116,6 +130,13 @@ No proposed input is called accepted merely because a hash matches.
    and scientific validity. The four final release roles are derived, not supplied
    through `outer_roles`. It stages `ownership-selection.json`,
    `package-inputs.json`, the fixed-role inventory and bound smoke expectations.
+   To omit the separate sidecar construction/commit, supply `sidecar_output`
+   (a fresh flat filename under `new_prefix`), committed `patch` and
+   `runtime_envelope` pins instead of `sidecar`. Finalize retains base-manifest and
+   owner-roster pins from the original selected sidecar and emits the new sidecar
+   together with the selector/package/expectations. Its output identity has no
+   invented commit. The modern composed `selected-ledger.json` pin serves as both
+   `ledger` and `selected_ledger`; retain its actual `current_rebind` as `rebind`.
    It only replaces `additive_release` in the selector, preserving an already-final
    body's bytes. Keep the entire accepted package list verbatim as the prefix;
    append only genuinely new owned paths in stable sorted order. Existing paths
