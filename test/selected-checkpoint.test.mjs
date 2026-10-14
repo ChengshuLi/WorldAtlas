@@ -70,13 +70,13 @@ test('native-only append uses exact native bounds and identity without an additi
 // This is a fresh miniature trusted repository, not a test-only authority hook.
 // The real entry reads its ordinary committed catalogue and products exactly as
 // production does. Candidate edits never control that executing catalogue.
-async function trustedFixture(t,{incompleteNative=false}={}){
+async function trustedFixture(t,{incompleteNative=false,codeRoutes=false}={}){
  const root=fs.mkdtempSync(path.join(process.cwd(),'.checkpoint-test-'));
  t.after(()=>fs.rmSync(root,{recursive:true,force:true}));
  const git=(...a)=>execFileSync('git',['-c','core.hooksPath=/dev/null','-c','user.name=Checkpoint fixture','-c','user.email=checkpoint@example.invalid','-C',root,...a],{env:{...process.env,GIT_CONFIG_NOSYSTEM:'1',GIT_CONFIG_GLOBAL:'/dev/null',GIT_NO_LAZY_FETCH:'1'},stdio:['ignore','pipe','pipe']});
  const save=(name,value)=>{const f=path.join(root,name);fs.mkdirSync(path.dirname(f),{recursive:true});fs.writeFileSync(f,Buffer.isBuffer(value)?value:valueBytes(value));};
  const commit=()=>{git('add','.');git('commit','-qm','Checkpoint fixture');return git('rev-parse','HEAD').toString().trim();};
- git('init','-q');save(PROGRAMME,fs.readFileSync(PROGRAMME));for(const name of CODE)save(name,fs.readFileSync(name));save('package.json',{type:'module'});
+ git('init','-q');if(codeRoutes)save('data/scientific.js',{fixture:'scientific input, not executed code'});save(PROGRAMME,fs.readFileSync(PROGRAMME));for(const name of CODE)save(name,fs.readFileSync(name));save('package.json',{type:'module'});
  const {features,certificate}=fixtures(), source={type:'FeatureCollection',features};save('data/source.json',source);
  const reference={id:'geography:fixture',hierarchy_sha256:'a'.repeat(64),footprints_sha256:'b'.repeat(64)};
  const encode=(name,kind,values)=>{const words=Uint32Array.from(values),canonical=Buffer.from(words.buffer),encoded=gzipSync(shuffleOwnershipBytes(words));save('data/'+name,encoded);return {path:name,kind,offset:0,bytes:encoded.length,sha256:sha(encoded),decoded_bytes:canonical.length,decoded_sha256:sha(canonical),words:words.length,encoding:'byte-shuffle'};};
@@ -118,7 +118,7 @@ async function trustedFixture(t,{incompleteNative=false}={}){
  const facts={version:1,kind:'trusted-selected-coordinate-stage-v1',candidate_code_executed:false,selected_commit:selected,executing_commit:one,execution_code,runtime,binding:full.binding,complete_owners:3,complete_sources:1};
  const compressed=gzipSync(valueBytes(full));save('accepted/certificate.json.gz',compressed);save('accepted/facts.json',facts);
  const publication={version:1,kind:facts.kind,complete:true,facts:{path:'facts.json',bytes:valueBytes(facts).length,sha256:valueSha(facts)},certificate:{path:'certificate.json.gz',bytes:compressed.length,sha256:sha(compressed),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)}};save('accepted/publication.json',publication);
- const inventory=[PROGRAMME,'data/source.json','data/manifest.json','data/owners.json','data/registry.json','data/ledger.json','data/patch.json','data/sidecar.json','data/envelope.json','data/native/rows.bin.gz','data/native/runs.bin.gz'].map(name=>pin(name,selected));
+ const inventory=[...(codeRoutes?['src/native-grid.js','data/scientific.js']:[]),PROGRAMME,'data/source.json','data/manifest.json','data/owners.json','data/registry.json','data/ledger.json','data/patch.json','data/sidecar.json','data/envelope.json','data/native/rows.bin.gz','data/native/runs.bin.gz'].map(name=>pin(name,selected));
  save('accepted/custody.json',{complete_cold_custody:[{facts,publication,effective_additions:additions,inventory}]});
  save('accepted/routes.json',inventory.map(p=>p.path).sort().map(name=>({path:name,tree:git('ls-tree','-z',selected,'--',name).toString()})));const accepted=commit();
  const rootRow={id:'fixture',accepted_head:accepted,selected_commit:selected,selection_sha256:valueSha(selection),execution_commit:one,execution_code_sha256:valueSha(execution_code),runtime_sha256:valueSha(runtime),facts:pin('accepted/facts.json'),certificate:{...pin('accepted/certificate.json.gz'),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)},publication:pin('accepted/publication.json'),custody:pin('accepted/custody.json'),routes:pin('accepted/routes.json')};
@@ -345,4 +345,21 @@ test('accepted AUS producer limits retain canonical optional log bounds and reje
   x=>{x.sampled_stop_bytes=x.rss_bytes+1;},x=>{x.output_bytes=Number.MAX_SAFE_INTEGER;}]){
   const bad={...limits};edit(bad);assert.throws(()=>validateCurrentRebindLimits(bad));
  }
+});
+
+test('archived JavaScript execution roles can evolve while same-extension scientific inputs stay pinned',async t=>{
+ const f=await trustedFixture(t,{codeRoutes:true});
+ fs.appendFileSync(path.join(f.root,'src/native-grid.js'),'\n// Reviewed native-only support.\n');const newer=f.commit();
+ const reader=new f.native.ImmutableReader(f.root,newer,{allowance:f.reader.allowance}),budget={shared:reader.budget,carriedBytes:0};
+ const qualified=f.api.qualifyCheckpoint({reader,budget});assert.equal(qualified.available,true);
+ const transition=f.api.qualifyTransition({state:qualified.state,reader,budget});assert.equal(transition.available,true);
+ // A .js suffix alone does not exempt scientific bytes from the old census.
+ f.save('data/scientific.js',{fixture:'changed scientific input'});const changed=f.commit();
+ const candidate=new f.native.ImmutableReader(f.root,changed,{allowance:reader.allowance,budget:reader.budget});
+ const rejected=f.api.qualifyTransition({state:qualified.state,reader:candidate,budget});
+ assert.equal(rejected.available,false);assert.match(rejected.reason,/route changed/);
+ fs.appendFileSync(path.join(f.root,'src/native-grid.js'),'\n// Uncommitted executable drift.\n');
+ const dirty=new f.native.ImmutableReader(f.root,newer,{allowance:reader.allowance});
+ assert.throws(()=>f.api.qualifyCheckpoint({reader:dirty,budget:{shared:dirty.budget,carriedBytes:0}}),/changed executing checkpoint method/);
+ f.api.releaseCheckpoint(qualified.state);
 });

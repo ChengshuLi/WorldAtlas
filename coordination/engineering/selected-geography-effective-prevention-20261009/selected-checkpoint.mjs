@@ -31,7 +31,19 @@ const sha = body => createHash('sha256').update(body).digest('hex');
 // selected scientific vintage. Keep its archived census entry, but do not make
 // accepted programme additions look like changed source/native input bytes.
 const PROGRAMME_POLICY = 'coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
-const sameScientificRoutes = (reader,routes) => routes.every(p => p.path === PROGRAMME_POLICY || treeRoute(reader,p.path) === p.tree);
+const sameScientificRoutes = (reader,routes,executablePaths) => routes.every(p => p.path === PROGRAMME_POLICY
+  || executablePaths.has(p.path) || treeRoute(reader,p.path) === p.tree);
+// Older route censuses excluded .mjs/.py but also retained executable .js.
+// Keep the complete archived census. Identify code by its authenticated executed
+// role and whole bytes, never by an extension, changed-file list or new hashes.
+function acceptedExecutablePaths(session,inventory,facts,policy) {
+  const roles=[...facts.execution_code,...policy.programs.flatMap(p=>[...p.source_executed_code,...p.native_executed_code]),
+    ...policy.current_rebind_migrations.flatMap(p=>[...p.historical_code,...p.current_code])];
+  const identity=p=>valueSha([p.path,p.bytes,p.sha256]);
+  const bodies=new Set(roles.map(identity));
+  const paths=new Set(inventory.filter(p=>hash(p.sha256)&&bodies.has(identity(p))).map(p=>p.path));
+  retain(session,[...paths]);return paths;
+}
 const same = (a,b) => a === undefined || b === undefined ? a === b : valueSha(a) === valueSha(b);
 const hash = x => typeof x === 'string' && /^[a-f0-9]{64}$/.test(x);
 const commit = x => typeof x === 'string' && /^[a-f0-9]{40}$/.test(x);
@@ -340,7 +352,8 @@ export function qualifyCheckpoint({reader,checkpointId,budget}) {
       supported(priorPolicy[key].every(row => current.has(valueSha(row))),
         'Trusted producer policy no longer preserves accepted eligibility');
     }
-    supported(sameScientificRoutes(reader,routes), 'Accepted checkpoint input or routing alternative changed');
+    session.executablePaths=acceptedExecutablePaths(session,retained.inventory,facts,priorPolicy);
+    supported(sameScientificRoutes(reader,routes,session.executablePaths), 'Accepted checkpoint input or routing alternative changed');
     // All genuine old complete records remain in the state, including exceptions.
     const data = {version:1,kind:'verified-selected-state-v1',selected_commit:reader.version,
       accepted_execution:{accepted_head:root.accepted_head,execution_commit:root.execution_commit,
@@ -648,7 +661,8 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
     supported(priorPolicy[key].every(row=>current.has(valueSha(row))),
       'Trusted producer policy no longer preserves accepted eligibility');
   }
-  supported(sameScientificRoutes(reader,census.routes), 'Accepted checkpoint input or routing alternative changed');
+  session.executablePaths=acceptedExecutablePaths(session,Object.values(inventories).flat(),facts,priorPolicy);
+  supported(sameScientificRoutes(reader,census.routes,session.executablePaths), 'Accepted checkpoint input or routing alternative changed');
   const data={version:1,kind:'verified-selected-state-v1',selected_commit:reader.version,
     accepted_execution:seedRoot?{kind:'trusted-main-derived-selected-checkpoint-v1',checkpoint_id:seedRoot.id,
       accepted_head:seedRoot.accepted_head,execution_commit:facts.executing_commit,
@@ -1014,7 +1028,7 @@ export function qualifyTransition({state,reader,budget}) {
     beginFrame(session,reader);
     const selected=readSelection(session,reader);
     supported(same(nativeBaseSelection(selected.selection),state.baseSelection), 'Selected native/source/domain/owner base changed');
-    supported(sameScientificRoutes(reader,baseProof.routes), 'Selected input or present/absent route changed');
+    supported(sameScientificRoutes(reader,baseProof.routes,session.executablePaths), 'Selected input or present/absent route changed');
     for (const role of ['base_manifest','owner_roster'])
       supported(same(selected.sidecar.logical_asset_map[role],baseProof.selected.sidecar.logical_asset_map[role]), 'Selected original manifest/owner alias changed');
     demand(same(selected.ledger.parent_inventory,state.ledger.parent_inventory), 'Complete original source/scope denominator changed');
