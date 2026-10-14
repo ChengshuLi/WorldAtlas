@@ -635,7 +635,7 @@ export function qualifySourceTargetNativeAuthority(reader, preimage, binding) {
    &&same([...members].sort(),[...change.replaces].sort()),'Incomplete accepted aggregation member set');
   for(const member of members){
    const reverse=memberOwners.get(member);
-   demand(originals.has(member)&&!owners.has(member)&&reverse?.length===1&&reverse[0]===change,
+   demand(originals.has(member)&&(!owners.has(member)||member===change.id)&&reverse?.length===1&&reverse[0]===change,
     'Missing or conflicting complete source aggregation member');
   }
   return {id:change.id,pixelIndex:owners.get(change.id),feature:accepted};

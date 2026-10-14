@@ -137,6 +137,14 @@ test('actual constructor joins original member evidence into one accepted owner 
   assert.equal(result.ledger_rows[0].native_cells,1);assert.equal(result.ledger_rows[0].pixelIndex,1);
   assert.deepEqual(result.ledger_rows[0].base_geometry,fixture.state.accepted.features[0].geometry);
 });
+test('actual constructor supports an aggregation retaining an original member owner ID',()=>{
+  const fixture=constructorFixture(s=>{
+    s.roster[0].id=a;s.lineage.changes[0].id=a;s.accepted.features[0].id=a;
+    s.targets.forEach(target=>target.target_id=a);s.measured.forEach(input=>input.selected.id=a);
+  });
+  assert.equal(fixture.run().ledger_rows[0].target_id,a);
+  assert.equal(fixture.run().ledger_rows[0].native_cells,1);
+});
 function directTarget(state,{membership=true,overlap=false}={}){
   const geometry=state.originals[2].geometry;
   state.targets=[{id:c,pixelIndex:2,source_family:family,base_geometry:geometry,coverage_classes:['mapped_land_support']}];
