@@ -1,16 +1,13 @@
 # Bounded CI input checkout
 
-The full application acquisitions in `merge-integration-checks.yml` (regression
-and the selected-data package route) and `worker-merge.yml` (integration) use
+The final application acquisition in `worker-merge.yml` (integration) uses
 `scripts/acquire-ci-checkout.py` after its source is authenticated from the exact
 trusted base. Evidence-only sparse checkouts, geographic readers, test selection,
 package producers, artifact uploads and merge policy retain their existing roles.
 The complete software-regression route omits two unconsumed source-only namespaces
 from its input download; complete regression still means every original test runs.
 
-The author workflow is a `pull_request` workflow. Its workflow SHA can include
-candidate changes, so the acquisition helper is obtained from
-`github.event.pull_request.base.sha`. The queue uses the base emitted by trusted
+The queue uses the base emitted by trusted
 preparation. Bootstrap authenticates the base commit, path/tree entry, ordinary
 file mode and Git blob hash before executing the helper from a private temporary
 directory. Only proven helper absence in that trusted tree retains the original
@@ -24,8 +21,7 @@ legacy route. Candidate helper code is never a bootstrap fallback.
 python3 "$AUTHENTICATED_HELPER" \
   --repository ChengshuLi/WorldAtlas \
   --sha "$EXACT_CANDIDATE_SHA" --tree "$AUTHENTICATED_TREE_SHA" \
-  --workspace "$GITHUB_WORKSPACE" \
-  --total-timeout-seconds 420 --elapsed-seconds "$BOOTSTRAP_ELAPSED_SECONDS"
+  --workspace "$GITHUB_WORKSPACE"
 ```
 
 The workflow obtains the candidate's tree from the exact immutable Git commit
@@ -83,23 +79,19 @@ are retained. These numbers describe input selection, not compressed wire traffi
 or measured throughput; a later ordinary adopted CI run must establish real timing.
 No checkout artifact/cache framework or altered test selection is introduced.
 
-## Overall deadline and cleanup
+## Job cancellation and cleanup
 
-One monotonic total budget includes the supplied bootstrap elapsed time, fetch,
-selected blob acquisition/checkout, identity checks and terminal cleanup. A progressing fetch has no separate
-cutoff and is not restarted in a fresh repository. The workflow default remains
-420 seconds. The helper accepts a finite total budget up to 1,800 seconds, with
-bootstrap elapsed time below it. The 30-minute implementation ceiling remains a
-runaway-acquisition safeguard, below the existing 35-minute queue job limit; it is
-not an additional job allowance. A trusted caller must choose its budget within
-its job deadline and leave time for subsequent work. The author and package job
-limits remain 25 and 30 minutes. Invalid, nonfinite, spent or oversized budgets
-refuse before staging. The supervisor reserves time inside the total budget for
-termination and cleanup. Command failure, wrong commit/tree, failed checkout,
-changed workspace, cancellation or unverifiable process cleanup ends acquisition
-without restarting acquisition.
+The existing 35-minute integration job timeout owns acquisition and subsequent
+build/tests together. There is no second acquisition wall deadline: a healthy
+fetch or materialization continues until completion, a real command error or
+job/user cancellation. The separately bounded 60-second authentication bootstrap
+is unchanged. This removes the former 420-second cutoff and its 1,800-second
+configuration ceiling; neither was a memory bound. Buffer sizes, immutable Git
+identity checks, credential isolation and source-only sparse exclusions remain.
+Command failure, wrong commit/tree, failed checkout, changed workspace,
+cancellation or unverifiable process cleanup ends acquisition without restarting.
 
-Each command starts a new process session. SIGINT/SIGTERM and deadlines trigger
+Each command starts a new process session. SIGINT/SIGTERM trigger
 bounded TERM/KILL escalation, direct-child reaping and verification that no live
 group member remains. A zombie has no execution capability and is distinguished
 from a live descendant. If termination cannot be verified, the helper fails,
@@ -109,17 +101,15 @@ and processes that deliberately escape the owned session cannot be guaranteed
 cleaned by user-space supervision; runner teardown remains the final isolation
 boundary. No candidate code runs during acquisition.
 
-The retained 420-second total budget is an operational bound informed by sampled
-successful full checkouts (117–292 seconds) and directly inspected fetches
-(approximately 80–220 seconds). The incident fetch lasted 1,595.528 seconds before
-succeeding. These observations establish neither its root cause nor a performance
-percentile. The overall deadline can still reject a healthy slow transfer; this
-helper does not discard progress to restart it within that same budget. The existing
-25/30/35-minute job limits are not increased, and successful acquisition does not promise that later tests finish within them.
+The former cutoff was based on sampled successful checkouts, not a guaranteed
+upper duration. Riau and the deletion PR both lost required-input
+materialization at that cutoff. Removing it does not prove why Git was slow or
+promise the later tests will finish within the unchanged job limit. Runner
+cancellation remains the outer execution boundary, including if cleanup stalls.
 
 ## Observation and verification
 
-JSON lines report phase, status, elapsed/remaining seconds and allowlisted
+JSON lines report phase, status, elapsed seconds and allowlisted
 numeric Git progress. Fetch explicitly requests `--progress`. Raw Git stderr,
 trace files, HTTP headers and arbitrary command output are never emitted. Git
 progress describes the reported operation; it does not independently measure

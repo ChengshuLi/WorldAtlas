@@ -381,7 +381,8 @@ test('final queue keeps complete software sparse selection without importing sou
  const acquire=packageStep(queueWorkflow().integration,'Acquire full checkout with authenticated bounded helper');
  assert.match(acquire.text,/INTEGRATION_PROFILE: \$\{\{ needs\.prepare\.outputs\.profile \}\}/);
  assert.match(acquire.text,/INTEGRATION_TEST_SELECTION: \$\{\{ needs\.prepare\.outputs\.test_selection \}\}/);
- assert.match(acquire.run,/--total-timeout-seconds 420 --elapsed-seconds/);
+ assert.doesNotMatch(acquire.run,/--(?:total-timeout|elapsed)-seconds/);
+ assert.match(fs.readFileSync(path.join(root,'.github/workflows/worker-merge.yml'),'utf8'),/integration:[\s\S]*?timeout-minutes: 35/);
  const definition=JSON.parse(fs.readFileSync(path.join(root,'.github/package-inputs.json'),'utf8'));
  for(const name of [...definition.inputs,...definition.verification_paths])assert.ok(!['data/regional-review/','research/campaigns/'].some(prefix=>name===prefix.slice(0,-1)||name.startsWith(prefix)||prefix.startsWith(name)),name);
 });
