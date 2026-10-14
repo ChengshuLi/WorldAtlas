@@ -91,3 +91,25 @@ test('source joins use stable source identifiers, never a nearby name', () => {
   assert.equal(sourceFeatureId({...raw, id: 'atlas:group:ABC'}, 0), 'atlas:group:ABC');
   assert.notEqual(sourceFeatureId({properties: {name: 'District'}}, 0), 'gb:XYZ:ADM2:ABC');
 });
+
+test('held-out boundary river observation is not painted as land by a coarser physical mask', () => {
+  // Independently checked original JRC February 2024 10W_40N pixel (682,12209)
+  // is water at this canonical center. GSHHG 2.3.7 maps surrounding land here.
+  // Keep the actual observations; no country/coordinate exception is in code.
+  const input = blank(); input.cell = {x: 126023, y: 99412}; input.intendedLocations.push(location);
+  input.physicalEvidence = [
+    {...dry, source: 'GSHHG 2.3.7 full L1–L4', date: '2017-06-15', coverage: 'Mapped inland waters excluded; narrow rivers may be absent'},
+    {...water, source: 'JRC monthly 10W_40N', date: '2024-02', coverage: 'Observed water at the cell center; not permanent-water inference'},
+  ];
+  const result = diagnoseMapCell(input);
+  assert.equal(result.decision, 'unresolved'); assert.equal(result.physical_support, 'conflicting');
+  assert.equal(result.intended_location, null); assert.equal(result.kind, 'source-vintage-disagreement');
+});
+
+test('anonymous or numeric ordinal features cannot establish an upstream identity join', () => {
+  const geometry = {type: 'Polygon', coordinates: [rectangle(-2, 2)]};
+  for (const id of [undefined, 0]) {
+    const measured = measureCellFeatures([{id, properties: {}, geometry}], {x: 180, y: 180}, context);
+    assert.equal(measured.matches.length, 1); assert.equal(measured.matches[0].joinable_id, false);
+  }
+});
