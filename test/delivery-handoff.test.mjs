@@ -803,13 +803,12 @@ function modernCompositionFixture(t, {mixed = true} = {}) {
     const binding = {version: 1, kind: 'source-target-native-custody-v1',
       source_evidence: f.pin(owned + 'source-evidence.json'), native_patch: f.pin(owned + 'native-patch.json')};
     f.save(owned + 'binding.json', binding); f.save(owned + 'rule.json', {...binding, kind: 'source-target-native-rule-v1'}); f.commitAll();
-    const body = {policy_id: 'retained-source-literal-additions', policy_version: 1, rule_preimage: f.pin(owned + 'rule.json'),
-      rule_sha256: f.pin(owned + 'rule.json').sha256, source_authority: f.pin(owned + 'binding.json')};
-    const entry = {authority_sha256: digest(jsonBytes(body)), ...body};
-    const constructed = {component_ids: [row.component_id], ledger_rows: [row], rule_sha256: entry.rule_sha256};
-    f.save(owned + 'registry.json', {version: 1, kind: priorRegistry.kind, entries: [entry]});
+    const constructed = {products: JSON.parse(JSON.stringify({'original-rule-preimage.json': jsonBytes({...binding, kind: 'source-target-native-rule-v1'}),
+      'authority-binding.json': jsonBytes(binding)})), component_ids: [row.component_id], ledger_rows: [row],
+      rule_sha256: f.pin(owned + 'rule.json').sha256, limitations: ['Actual current owner-zero remains separately required.']};
     f.save(owned + 'constructed-authority.json', constructed); f.commitAll();
-    return {version: 1, selector, registry: f.pin(owned + 'registry.json'), ledger: f.pin(owned + 'constructed-authority.json'),
+    return {version: 1, selector, rule_preimage: f.pin(owned + 'rule.json'), source_authority: f.pin(owned + 'binding.json'),
+      ledger: f.pin(owned + 'constructed-authority.json'),
       native_patch: binding.native_patch, effective_release_id: 'geography:modern-next'};
   };
   const config = makeAppend();
@@ -830,6 +829,11 @@ for (const mixed of [false, true]) test('late compose and finalize replace moder
   const names = ['authority-registry.json', 'selected-ledger.json', 'patch.json', 'runtime-envelope.json'];
   const products = Object.fromEntries(names.map(name => [name, fs.readFileSync(path.join(f.root, composed, name))]));
   const registry = JSON.parse(products['authority-registry.json']), ledger = JSON.parse(products['selected-ledger.json']);
+  assert.equal(fs.existsSync(path.join(f.root, f.owned + 'registry.json')), false, 'qualification needs no standalone singleton registry');
+  const authority = {policy_id: 'retained-source-literal-additions', policy_version: 1, rule_preimage: f.config.rule_preimage,
+    rule_sha256: f.config.rule_preimage.sha256, source_authority: f.config.source_authority};
+  assert.deepEqual(registry.entries.find(entry => entry.authority_sha256 === digest(jsonBytes(authority))),
+    {authority_sha256: digest(jsonBytes(authority)), ...authority}, 'existing authority constructor policy/pin contract');
   for (const entry of f.priorRegistry.entries) assert.deepEqual(registry.entries.find(next => next.authority_sha256 === entry.authority_sha256), entry);
   for (const row of f.priorLedger.rows) assert.deepEqual(ledger.rows.find(next => next.component_id === row.component_id), row);
   for (const name of ['parent_inventory', 'current_rebind', 'current_targets']) assert.deepEqual(ledger[name], f.priorLedger[name]);
@@ -889,6 +893,12 @@ test('late modern composition refuses scope, source-contract, patch and occupied
   const result = f.run('compose', '.cache/delivery-handoff/refused-pin', [], altered);
   assert.notEqual(result.status, 0); assert.match(result.stderr, /hash differs/);
   assert.equal(fs.existsSync(path.join(f.root, '.cache/delivery-handoff/refused-pin')), false);
+  for (const role of ['rule_preimage', 'source_authority']) {
+    const changed = {...config, [role]: {...config[role], sha256: '0'.repeat(64)}};
+    const destination = '.cache/delivery-handoff/refused-' + role, refused = f.run('compose', destination, [], changed);
+    assert.notEqual(refused.status, 0); assert.match(refused.stderr, /hash differs/);
+    assert.equal(fs.existsSync(path.join(f.root, destination)), false);
+  }
 });
 
 test('modern composition accepts compatible mapped members and refuses omitted parsed metadata carry', t => {

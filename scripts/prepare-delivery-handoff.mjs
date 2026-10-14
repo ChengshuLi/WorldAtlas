@@ -514,7 +514,7 @@ export function composeAuthorities(config, reader) {
     const assets = sidecar.logical_asset_map;
     need(assets && same(Object.keys(assets).sort(), ['base_manifest', 'ledger', 'owner_roster', 'patch']), 'Complete prior logical assets required');
     let inputBytes = [config.selector, sidecarPin, assets.base_manifest, sidecar.authority_registry, assets.ledger, assets.patch, sidecar.runtime_envelope,
-      config.registry, config.ledger, config.native_patch].reduce((n, p) => n + p.bytes, 0);
+      config.rule_preimage, config.source_authority, config.ledger, config.native_patch].reduce((n, p) => n + p.bytes, 0);
     // Parsing, literal row copies, interval union and encoded products share the
     // same preparation allowance. Reserve their carry before opening large bodies.
     const checkCarry = (outputBytes = 0) => {
@@ -526,7 +526,7 @@ export function composeAuthorities(config, reader) {
     checkCarry();
     const priorRegistry = reader.json(sidecar.authority_registry), priorLedger = reader.json(assets.ledger);
     const priorPatch = reader.json(assets.patch), wrapped = reader.json(sidecar.runtime_envelope);
-    const envelope = wrapped.additiveRelease ?? wrapped, appended = reader.json(config.registry);
+    const envelope = wrapped.additiveRelease ?? wrapped;
     const constructed = reader.json(config.ledger), candidate = reader.json(config.native_patch);
     need(envelope.version === 2 && envelope.kind === 'retained-native-base-plus-delta-v2', 'Existing v2 runtime envelope required');
     for (const [role, pin] of Object.entries(assets)) {
@@ -535,16 +535,19 @@ export function composeAuthorities(config, reader) {
         && (declared.decoded_bytes ?? declared.bytes) === (pin.decoded_bytes ?? pin.bytes)
         && (declared.decoded_sha256 ?? declared.sha256) === (pin.decoded_sha256 ?? pin.sha256), 'Prior envelope asset binding differs: ' + role);
     }
-    need(appended.version === 1 && appended.kind === 'retained-rule-authority-registry-v1' && appended.entries?.length === 1
-      && priorRegistry.version === 1 && priorRegistry.kind === appended.kind && priorLedger.version === 2,
-    'Committed singleton modern authority and existing v2 cumulative ledger required');
-    const entry = appended.entries[0];
-    inputBytes += entry.source_authority.bytes + entry.rule_preimage.bytes; checkCarry();
-    const binding = reader.json(entry.source_authority), preimage = reader.json(entry.rule_preimage);
+    need(priorRegistry.version === 1 && priorRegistry.kind === 'retained-rule-authority-registry-v1' && priorLedger.version === 2,
+      'Existing v2 cumulative registry/ledger required');
+    const binding = reader.json(config.source_authority), preimage = reader.json(config.rule_preimage);
+    // Literal metadata contract of constructAuthorityRegistry. Retained constructor
+    // results supply qualification; the final selected reader remains authoritative.
+    const rule = reader.pin(config.rule_preimage.commit, config.rule_preimage.path);
+    const authority = {policy_id: 'retained-source-literal-additions', policy_version: 1, rule_preimage: rule,
+      rule_sha256: rule.sha256, source_authority: reader.pin(config.source_authority.commit, config.source_authority.path)};
+    const entry = {authority_sha256: digest(jsonBytes(authority)), ...authority};
     need(binding.version === 1 && binding.kind === 'source-target-native-custody-v1'
       && same(Object.keys(binding).sort(), ['kind', 'native_patch', 'source_evidence', 'version'])
       && same(preimage, {...binding, kind: 'source-target-native-rule-v1'}) && same(binding.native_patch, config.native_patch)
-      && entry.rule_sha256 === entry.rule_preimage.sha256 && constructed.rule_sha256 === entry.rule_sha256 && unique(constructed.component_ids)
+      && entry.rule_sha256 === digest(jsonBytes(preimage)) && constructed.rule_sha256 === entry.rule_sha256 && unique(constructed.component_ids)
       && same(constructed.component_ids, constructed.ledger_rows?.map(row => row.component_id)),
     'Committed modern constructor scope/rule/patch differs');
     inputBytes += binding.source_evidence.bytes; checkCarry();

@@ -82,10 +82,12 @@ No proposed input is called accepted merely because a hash matches.
    duplicate original scopes and conflicting authorities. This makes metadata,
    not a qualification of a new source or a selected bank. Commit composition.
    For an already-qualified modern source-target delivery, instead supply pinned
-   `selector`, singleton `registry`, original constructor-result `ledger`
+   `selector`, original `rule_preimage` and `source_authority`, constructor-result `ledger`
    (`constructed-authority.json`, including `component_ids`, `ledger_rows` and
    `rule_sha256`), original `native_patch`, and `effective_release_id`. The selector
-   discovers the actual prior cumulative metadata; no prior-role list is needed.
+   discovers the actual prior cumulative metadata; no prior-role list or separately
+   prepared singleton registry is needed. Compose forms the existing
+   `retained-source-literal-additions` policy entry from those actual whole pins.
    The command preserves every inherited authority, literal row/exception, parent
    inventory, current rebind and target binding, rejects native-contract changes
    and any overlap with accepted additions, and emits `authority-registry.json`,
