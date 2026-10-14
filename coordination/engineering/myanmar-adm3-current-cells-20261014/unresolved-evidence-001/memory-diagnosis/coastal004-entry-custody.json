@@ -1,0 +1,51 @@
+{
+  "status": "coastal004-admission-only-producer-never-launched",
+  "recorded_admission_call": {
+    "executable": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "args": [
+      "--input-type=module",
+      "-"
+    ],
+    "working_directory": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work",
+    "stdin_javascript": "import fs from'node:fs';import{processingAllowance}from'./scripts/check-effective-geographic-regression.mjs';const observation={availableBytes:process.availableMemory(),currentRssBytes:process.memoryUsage().rss,concurrentReservedBytes:0},allowance=processingAllowance(observation),prospective=995868672;const result={observed_unix_ms:Date.now(),observation,allowance,prospective_complete_charge_bytes:prospective,classification:'EmpiricalHpapun time-l928759808+64MiB, input-specific coastal inventory review; not measured newphase requirement or guaranteedbound',status:prospective<=allowance.phaseBytes?'admitted':'refused',physical_producer_started:false,compute_reserved:false};fs.writeFileSync('.cache/mmr-physical-kawthoung-004/admission.json',JSON.stringify(result,null,2)+'\\n');console.log(JSON.stringify(result,null,2));if(result.status!=='admitted')process.exitCode=2;",
+    "receipt_path": "kawthoung-physical-refusal/admission.json",
+    "exit_code": 2
+  },
+  "planned_direct_command": {
+    "status": "not-executed-for-coastal004; same invocation used by completedHpapun003 with its own cwd",
+    "command": "/usr/bin/time -l /usr/bin/env GIT_NO_LAZY_FETCH=1 GIT_CONFIG_COUNT=1 GIT_CONFIG_KEY_0=protocol.allow GIT_CONFIG_VALUE_0=never /usr/bin/perl -e 'alarm shift; exec @ARGV or die $!' 120 /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 -B physical-reproduction.py > stdout.txt 2> stderr.txt",
+    "working_directory": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/fa678ed92d9b60765f8935b6a7afd117bc7c744c96057999400c37180373dd2e/work/.cache/mmr-physical-kawthoung-004",
+    "deadline_seconds": 120
+  },
+  "policy_wiring": {
+    "supplied_observations": [
+      "process.availableMemory()",
+      "process.memoryUsage().rss",
+      "concurrentReservedBytes:0 (worker confirmations)"
+    ],
+    "configured_fraction": null,
+    "explicit_system_headroom_bytes": null,
+    "reason": "Current accepted guard internally hardcodes half; coordinator provides no independent configured headroom. Null fields record absence, not permission to usezero.",
+    "optional_lower_grants_supplied": false,
+    "grant_forwarded_to_python": false,
+    "child_rss_enforcement": false,
+    "wall_deadline": "OSPerl alarm thenexecPython; time-l observesactualpeak afterward.",
+    "coordinator": "Interactive Node admission followed by direct shell command if admitted. No per-batch executable launcher/supervisor file exists in coastal004.",
+    "producer_policy_api": "Archived physical-reproduction.py accepts no operating-policy/budget CLI/environment input; it reads .cache/full-census/all-stage-inputs.json and git HEAD bodies, writes fixed output."
+  },
+  "fixed_empirical_estimate": {
+    "bytes": 995868672,
+    "derivation": "CompletedHpapun time-l928759808+67108864; input-specificreview; not measurednewtargetdemand."
+  },
+  "implementation_pins": {
+    "producer_path": "coordination/engineering/source-target-native-delivery-20261014/evidence/physical-reproduction.py",
+    "producer_sha256": "05af43d7d7722e8d7bb201f5876a43d9c7f9a2d0f4ea39e467229351a35c9bc3",
+    "comparison_path": "coordination/engineering/global-physical-comparison-20261006/comparison.py",
+    "comparison_sha256": "f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe",
+    "input_tree": "24885811afa854b9c4ecf8a47e24b3c5d08ac162"
+  },
+  "limits": [
+    "No launch/retry/policyoverride ornewexecutablewrapper for this custody record.",
+    "Changes to shared operating-policy wiring are owned by #1925; no silent defaultheadroom orlowerestimate introduced here."
+  ]
+}
