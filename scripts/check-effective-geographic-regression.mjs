@@ -6,7 +6,7 @@ import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {fileURLToPath} from 'node:url';
 import {nativePolygonIntervals,NATIVE_GRID_METHOD} from '../src/native-grid.js';
-import {nativeOnlyComponent} from '../src/effective-footprint.js';
+import {nativeOnlyComponent} from '../src/native-runtime.js';
 import {unshuffleOwnershipBytes} from '../src/ownership-codec.js';
 import {readSelectedAdditive,selectedAdditiveRows,compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
@@ -765,7 +765,7 @@ export function repairVisibilityWitnesses({candidates,size,latitudes,beforeRows,
     demand(typeof candidate.component_id==='string'&&!ids.has(candidate.component_id),'Duplicate/missing visibility component');
     ids.add(candidate.component_id);
     if(candidate.representation!=='native-cells')continue;
-    nativeOnlyComponent(candidate);
+    nativeOnlyComponent(candidate,visibilityDigest);
     for(const row of candidate.native_rows){
       if(witnesses.has(candidate.component_id)||!before.has(row.y))continue;
       for(const [start,end]of row.runs){

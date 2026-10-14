@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {gunzipSync} from 'node:zlib';
 import {processingAllowance, ImmutableReader, SelectedGeometrySources, NativeAssetImage, selectedBaseAssetAlias, selectedGeometrySourceAlias} from '../../../scripts/check-effective-geographic-regression.mjs';
-import {nativeOnlyComponent, deriveSourceTargetNativeDelta} from '../../../src/effective-footprint.js';
+import {nativeOnlyComponent, deriveSourceTargetNativeDelta} from '../../../src/native-runtime.js';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 const FILE=33554432, SLOT=512;
 const certificates=new WeakMap(), originalAuthorities=new WeakMap(), selectedAdditions=new WeakMap();
@@ -726,7 +726,7 @@ export function normaliseRetainedRepairLedger(ledger,registry) {
   demand(['assigned','zero-cell','already-resolved','rejected','awaiting-evidence'].includes(row.disposition),'Unknown original ledger disposition');
   if(!['assigned','zero-cell'].includes(row.disposition))continue;
   const entry=legacy?legacyEntry:authorities.get(row.authority_sha256);demand(entry&&(!Object.hasOwn(row,'rule_sha256')||row.rule_sha256===entry.rule_sha256),'Per-component original authority rebound');
-  if(nativeOnlyComponent({...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256})){rows.set(row.component_id,{...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256});continue;}
+  if(nativeOnlyComponent({...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256},valueSha)){rows.set(row.component_id,{...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256});continue;}
   demand(typeof row.target_id==='string'&&Number.isSafeInteger(row.pixelIndex)&&row.pixelIndex>0&&hash(row.base_geometry_sha256)&&hash(row.geometry_sha256)&&hash(row.source_receipt_sha256)&&valueSha(row.geometry)===row.geometry_sha256,'Missing complete original primitive identity');
   coordinateBounds(row.geometry);demand(Number.isSafeInteger(row.native_cells)&&(row.disposition==='assigned'?row.native_cells>0:row.native_cells===0),'False original native contribution');
   rows.set(row.component_id,{...row,rule_sha256:entry.rule_sha256,authority_sha256:entry.authority_sha256});

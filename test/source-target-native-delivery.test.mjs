@@ -107,3 +107,41 @@ test('multiple territorial masks for one target combine without source-ID relaxa
   const duplicate=inputs();duplicate.sourceFeatures.push(duplicate.sourceFeatures[0]);
   assert.throws(()=>deriveSourceTargetNativeDelta(duplicate),/source owner roster/);
 });
+
+test('trusted reader, source constructor and profile execute without installed npm packages',async()=>{
+  const fs=await import('node:fs'),os=await import('node:os'),path=await import('node:path');
+  const {execFileSync}=await import('node:child_process');
+  const root=path.resolve('.'),cold=fs.mkdtempSync(path.join(os.tmpdir(),'worldatlas-native-cold-')),seen=new Set();
+  const entries=['scripts/check-effective-geographic-regression.mjs','scripts/delivery-handoff-advance.mjs',
+    'scripts/integration-profile.mjs','coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs'];
+  const copy=relative=>{
+    if(seen.has(relative))return;seen.add(relative);
+    const source=fs.readFileSync(path.join(root,relative),'utf8'),target=path.join(cold,relative);
+    fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,source);
+    for(const match of source.matchAll(/\b(?:from\s*|import\s*)['"](\.[^'"]+)['"]/g))
+      copy(path.relative(root,path.resolve(root,path.dirname(relative),match[1])));
+  };
+  try{
+    entries.forEach(copy);fs.writeFileSync(path.join(cold,'package.json'),'{"type":"module"}');
+    const script=`import assert from 'node:assert/strict';
+      for(const entry of ${JSON.stringify(entries)})await import('./'+entry);
+      const {deriveSourceTargetNativeDelta,nativeOnlyComponent}=await import('./src/native-runtime.js');
+      const {nativeRowLatitudes}=await import('./src/native-grid.js');
+      const {valueSha}=await import('./coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs');
+      const {repairVisibilityWitnesses}=await import('./scripts/check-effective-geographic-regression.mjs');
+      const geometry=${JSON.stringify(polygon(-89,89))},feature={id:'source:A',pixelIndex:1,geometry};
+      const result=deriveSourceTargetNativeDelta({targets:[feature],sourceFeatures:[feature],coverageFeatures:[feature],
+        ownerRows:Array.from({length:8},(_,y)=>({y,complete_owner_intervals:[]})),size:8,latitudes:nativeRowLatitudes(8),rowStart:0,rowEnd:8});
+      assert.equal(result.assigned_cells,8);
+      const component={representation:'native-cells',component_id:'cold:A',target_id:feature.id,pixelIndex:1,disposition:'assigned',
+        base_geometry:geometry,base_geometry_sha256:valueSha(geometry),native_rows:result.rows,native_bounds:[-89,-40,89,40],native_cells:8,
+        source_receipt_sha256:'a'.repeat(64),authority_sha256:'b'.repeat(64),rule_sha256:'c'.repeat(64)};
+      assert.equal(nativeOnlyComponent(component,valueSha),true);
+      const witness=repairVisibilityWitnesses({candidates:[component],size:8,latitudes:nativeRowLatitudes(8),
+        beforeRows:[{y:3,runs:[]}],afterRows:[result.rows[0]]})[0];
+      assert.equal(witness.candidate_owner,1);console.log('cold native authority entries passed');`;
+    fs.writeFileSync(path.join(cold,'probe.mjs'),script);
+    assert.match(execFileSync(process.execPath,[path.join(cold,'probe.mjs')],
+      {cwd:cold,encoding:'utf8',env:{...process.env,NODE_PATH:'',NODE_OPTIONS:''}}),/cold native authority entries passed/);
+  }finally{fs.rmSync(cold,{recursive:true,force:true});}
+});
