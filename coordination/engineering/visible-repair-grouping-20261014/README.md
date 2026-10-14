@@ -1,0 +1,13 @@
+# Visible repair grouping
+
+The five retained SEA candidates have twelve currently unassigned rendered ownership cells at accepted main a35ba193. The read-only exact native screen used the normative latitude bytes, nativePolygonIntervals and complete authenticated containing native assets, then overlaid the entire selected cumulative patch. No scientific SOURCE approval or repair is inferred from visibility. Original retained geometry digests were independently reproduced with canonical sorted JSON plus newline.
+
+The screen took 3.158 seconds and ended at 190,889,984 bytes RSS. This is a small candidate preflight, not global rescreening throughput. The complete screen output includes every candidate cell, selection/patch/latitude pins and containing-asset custody. Flat rows conservatively include the union of all five acquired native assets; this may overestimate shared locality, but cannot omit a required asset.
+
+`node scripts/group-visible-repairs.mjs INPUT.json NEW_OUTPUT.json` groups arbitrary current screening rows by identical source family/product and then native latitude locality. It splits by explicit component/vertex/row/source-working-set caps. This deterministic linearithmic heuristic avoids pairwise geometry comparisons and old batch boundaries; it does not claim a globally optimal schedule. Each component remains independently identifiable. Unknown/invisible/unresolved/oversize rows are preserved outside executable-source plans. Positive partial witnesses may advance without fabricating total cell counts. Current selection and patch identities must agree.
+
+Initial groups: Myanmar two components, six cells,121735.83928494141 square metres; Indonesia two components,five cells,99413.50509785085 square metres; Vietnam one component,one cell,36732.33535751916 square metres. Independent workers prepare their authentic source handoffs concurrently. Grouped delivery can amortize the expensive global checks after qualification. Actual science must still receive explicit measured aggregate RAM admission (currently at most2GiB per process); these planning estimates never grant runtime permission. Re-screen after any ownership change.
+
+The geometry inventory and historical594 batches are not visible-repair targets. Tests include95,173 synthetic positive rows solely to exercise global-size scheduling and conservation; they are not a factual visible count.
+
+Group totals are explicitly component-cell sums. Overlapping candidates can share the same native cell; global distinct progress must be measured after scientific conflict checks and final effective output, never by summing those planning counts.

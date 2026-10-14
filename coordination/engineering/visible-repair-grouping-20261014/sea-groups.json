@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "current_selection_sha256": "302f439559e69318b55aa3723946116b41dcc26d58e22b9549548f60d7d69299",
+  "patch_sha256": "b44fc535b704fd88ccad45b85fbad73849b9f54c12bd3a83a158915b072414ac",
+  "limits": {
+    "maxComponents": 64,
+    "maxVertices": 250000,
+    "maxRowWork": 16384,
+    "maxSourceBytes": 268435456
+  },
+  "groups": [
+    {
+      "source_family_id": "gb:IDN:ADM2",
+      "source_product_sha256": "ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8",
+      "components": [
+        "physical-component:2b4f4da5787b5d718443cca535274ed74ae62ff08f7b410c46277ef36705e0ff",
+        "physical-component:e4abb61a130c9be6d764a0a058df31d6acd4f427624c8b3d5af9bdb709b8badf"
+      ],
+      "witnessed_component_cell_sum": 5,
+      "current_unassigned_component_cell_sum": 5,
+      "estimated_vertices": 8,
+      "estimated_row_work": 10,
+      "estimated_shared_source_bytes": 14054287,
+      "containing_native_asset_ids": [
+        "native-v1/ownership/runs-36700160.bin.gz",
+        "native-v1/ownership/runs-37748736.bin.gz",
+        "native-v1/ownership/runs-40894464.bin.gz",
+        "native-v1/ownership/runs-48234496.bin.gz",
+        "native-v1/ownership/runs-49283072.bin.gz"
+      ],
+      "latitude_blocks": [
+        32,
+        33
+      ],
+      "scientific_qualification": "required",
+      "runtime_memory_admission": "required"
+    },
+    {
+      "source_family_id": "gb:MMR:ADM3",
+      "source_product_sha256": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6",
+      "components": [
+        "physical-component:ae27cc3d8e51ae163f2052f4455cb072bca1960607d7de8fb8cc087e8257f79b",
+        "physical-component:9f5d178736a1a6549f7660e6d048e61923c33865d08f91445a5237ce20d4e29b"
+      ],
+      "witnessed_component_cell_sum": 6,
+      "current_unassigned_component_cell_sum": 6,
+      "estimated_vertices": 9,
+      "estimated_row_work": 8,
+      "estimated_shared_source_bytes": 5601781,
+      "containing_native_asset_ids": [
+        "native-v1/ownership/runs-36700160.bin.gz",
+        "native-v1/ownership/runs-37748736.bin.gz",
+        "native-v1/ownership/runs-40894464.bin.gz",
+        "native-v1/ownership/runs-48234496.bin.gz",
+        "native-v1/ownership/runs-49283072.bin.gz"
+      ],
+      "latitude_blocks": [
+        28,
+        29
+      ],
+      "scientific_qualification": "required",
+      "runtime_memory_admission": "required"
+    },
+    {
+      "source_family_id": "gb:VNM:ADM2",
+      "source_product_sha256": "8fa769599000ab536b18b4a9d18c71fe0fecbe134d4443e36e6b2797b41273a8",
+      "components": [
+        "physical-component:f4516260fac3e4331de3658dde9bff6614d897c4bac651a962f80196b6ca94bc"
+      ],
+      "witnessed_component_cell_sum": 1,
+      "current_unassigned_component_cell_sum": 1,
+      "estimated_vertices": 4,
+      "estimated_row_work": 2,
+      "estimated_shared_source_bytes": 6898367,
+      "containing_native_asset_ids": [
+        "native-v1/ownership/runs-36700160.bin.gz",
+        "native-v1/ownership/runs-37748736.bin.gz",
+        "native-v1/ownership/runs-40894464.bin.gz",
+        "native-v1/ownership/runs-48234496.bin.gz",
+        "native-v1/ownership/runs-49283072.bin.gz"
+      ],
+      "latitude_blocks": [
+        28
+      ],
+      "scientific_qualification": "required",
+      "runtime_memory_admission": "required"
+    }
+  ],
+  "deferred": [],
+  "input_components": 5,
+  "note": "Source/locality planning only. Independent qualification may run in parallel within measured aggregate RAM; combine qualified groups in one delivery. Re-screen when current ownership changes."
+}
