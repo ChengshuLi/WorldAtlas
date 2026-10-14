@@ -31,11 +31,10 @@ test('source-relative physical land plus one joined location supports an actiona
   assert.deepEqual(input.lineage.selected, {first_owner: 0, holes: []});
 });
 
-test('competing owners, exact boundary and unexplained territorial exclusions withhold assignment', () => {
+test('competing owners and unexplained territorial exclusions withhold assignment', () => {
   for (const change of [
     input => input.intendedLocations.push({...location, id: 'location:other', index: 8}),
     input => input.lineage.selected.holes.push({id: location.id}),
-    input => input.lineage.consumed.push({boundary_ties: [{x: 1}]}),
   ]) {
     const input = blank(); input.physicalEvidence.push(dry); input.intendedLocations.push(location); change(input);
     assert.equal(diagnoseMapCell(input).location_status, 'unresolved'); assert.ok(diagnoseMapCell(input).blockers.length);
@@ -141,4 +140,15 @@ test('source transitions retain a lost overlapping ID and compare its own featur
   assert.deepEqual(transitions[0], {from: 'original', to: 'consumed', ids: ['A'], joined: true, before: true, after: false, same_vintage: false});
   assert.equal(transitions[1].after, true); assert.equal(transitions[1].same_vintage, true);
   assert.deepEqual(transitions[2].ids, ['B']);
+});
+
+
+test('a source-defined native boundary tie does not create an unassigned-cell rule', () => {
+  const input = blank(); input.physicalEvidence = [water]; input.intendedLocations = [location];
+  input.lineage.consumed = [{boundary_ties: [{kind: 'native-intersection-on-cell-centre', x: 1}]}];
+  const result = diagnoseMapCell(input);
+  assert.equal(result.boundary_incidence, true); assert.equal(result.location_status, 'source-supported');
+  assert.deepEqual(result.intended_location, location); assert.match(result.reasons.join(' '), /declared native sampling rule/);
+  input.intendedLocations.push({...location, id: 'location:other', index: 8});
+  assert.equal(diagnoseMapCell(input).location_status, 'unresolved');
 });

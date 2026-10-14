@@ -29,8 +29,8 @@ export function diagnoseMapCell({effectiveOwner, physicalEvidence = [], lineage,
     if (!water.length && !dry.length) blockers.push('Physical source coverage is missing for the proposed location addition.');
     if (lineage.selected.holes?.length) blockers.push('The selected polygon hole needs its own territorial/semantic explanation; water alone does not establish an ownership exclusion.');
   }
-  if ([lineage.selected, ...(lineage.original ?? []), ...(lineage.consumed ?? [])].some(stage => stage.boundary_ties?.length) || supported.some(e => e.boundary_ambiguous))
-    blockers.push('The cell center falls exactly on a measured source boundary.');
+  const boundaryIncidence = [lineage.selected, ...(lineage.original ?? []), ...(lineage.consumed ?? [])].some(stage => stage.boundary_ties?.length) || supported.some(e => e.boundary_ambiguous);
+  if (boundaryIncidence) reasons.push('A source boundary touches the cell center; ownership follows the declared native sampling rule and actual source membership, not proximity.');
   if (effectiveOwner.index && candidates.length === 1 && candidates[0].id !== effectiveOwner.id)
     blockers.push('The source-backed location differs from the current owner.');
   const locationStatus = blockers.length ? 'unresolved' : effectiveOwner.index ? 'currently-assigned' : 'source-supported';
@@ -40,6 +40,7 @@ export function diagnoseMapCell({effectiveOwner, physicalEvidence = [], lineage,
   return {
     physical_status: water.length ? 'water-supported' : dry.length ? 'land-supported' : 'unknown',
     physical_source_disagreement: Boolean(water.length && dry.length),
+    boundary_incidence: boundaryIncidence,
     location_status: locationStatus,
     current_owner: {id: effectiveOwner.id, index: effectiveOwner.index, name: effectiveOwner.name ?? null},
     intended_location: locationStatus === 'source-supported' ? candidates[0] : null,

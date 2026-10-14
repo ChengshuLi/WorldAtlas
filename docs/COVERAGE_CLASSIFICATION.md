@@ -83,6 +83,8 @@ One supported source location can coexist with water. Missing or competing sourc
 locations, a source-vintage ownership conflict, an unexplained selected polygon
 hole, or a native/selection mismatch stays unresolved. A hole needs its own
 territorial/semantic evidence; water alone cannot explain why ownership is absent.
+Exact boundary incidences are reported and use the existing native/source-defined
+sampling rule; they do not invent a proximity buffer or an automatic owner-zero rule.
 Already-assigned cells report current ownership without claiming it is
 independently correct. Proposed additions still need actual physical source
 coverage and exact source membership; absence of a known water feature is not
