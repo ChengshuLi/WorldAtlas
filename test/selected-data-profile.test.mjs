@@ -11,9 +11,7 @@ import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {verifyIssueScope} from '../scripts/issue-claim-contract.mjs';
 import {checkPremergeEvidence} from '../scripts/premerge-evidence.mjs';
-import {selectIntegrationProfile} from '../scripts/check-integration-profile.mjs';
 import {prepareIntegration, completeIntegration} from '../scripts/merge-integration.mjs';
-import {PROOF_PATHS, WORKFLOW_PATH} from '../scripts/integration-proof.mjs';
 import {checkPRGates} from '../scripts/check-pr-gates.mjs';
 import {selectedDataSelection, selectedDataCandidate, validateSelectedExpectations, selectedMetadataAdmission, SELECTED_SMOKE} from '../scripts/integration-profile.mjs';
 const prefix = 'coordination/engineering/fixture-delivery/';
@@ -173,14 +171,19 @@ function gateFixture(f=fixture()) {
     return blobAPI(route);
   };
   f.event={repository:{full_name:'owner/repo'},pull_request:pr};f.claim=claim;f.pr=pr;f.issue=issue;f.base=base;f.head=head;
-  f.select=()=>selectIntegrationProfile({event:f.event,repo:'owner/repo',api:f.api});
+  f.select=async()=>{
+    const prepared=await prepareIntegration(mergeFixture({selectedFixture:f,gateReady:true}).options);
+    return {profile:prepared.profile,shards:prepared.shards??(prepared.profile==='full'?[0,1,2]:[0]),
+      ...(prepared.test_selection?{test_selection:prepared.test_selection,expectations_path:prepared.expectations_path}:{}),
+      geography_software:prepared.geography_software};
+  };
   f.gate=()=>checkPRGates({event:f.event,repo:'owner/repo',token:'fixture',api:f.api,phase:'metadata'});
   return f;
 }
-test('actual trusted metadata entry binds ownership and forwards full setup plus narrowed selection',async()=>{
+test('trusted author authority and actual queue classification keep separate consumed roles',async()=>{
   const f=gateFixture(), result=await f.gate();
-  assert.equal(result.profile,'full');assert.equal(result.test_selection,'selected-data');
-  assert.equal(result.expectations_path,prefix+'selected-delivery-expectations.json');assert.deepEqual(result.shards,[0]);assert.equal(result.package.full,true);
+  assert.equal(result.status,'checked');assert.equal(result.profile,undefined);assert.equal(result.package,undefined);
+  assert.equal((await f.select()).test_selection,'selected-data');
   f.claim.active=false;assert.equal((await f.select()).test_selection,'selected-data');
   f.issue.state='closed';await assert.rejects(f.select());
 });
@@ -216,16 +219,9 @@ for(const [name,mutate] of Object.entries({
   'code original operand':f=>refreshPins(f,{planMutate:p=>p.original_inputs[1]=f.put(prefix+'helper.mjs','export default 1')}),
 }))test('selected-data rejects '+name,async()=>assert.equal(await fixture({mutate}).run(),null));
 
-function mergeFixture({selectedFixture} = {}) {
-  const f=gateFixture(selectedFixture), candidate='d'.repeat(40), root='/repos/owner/repo';
+function mergeFixture({selectedFixture,gateReady=false} = {}) {
+  const f=gateReady?selectedFixture:gateFixture(selectedFixture), candidate='9'.repeat(40), root='/repos/owner/repo';
   Object.assign(f.pr,{draft:false,merged:false,title:'Synthetic selected delivery',mergeable:true,merge_commit_sha:candidate});
-  for(const name of PROOF_PATHS)f.put(name,name===WORKFLOW_PATH?'ref: ${{ github.event.pull_request.head.sha }}\nname: Complete regression shard\nname: Build hosted assets':'// accepted '+name,true);
-  const steps=['Checkout complete package inputs','Install package Node dependencies','Install package Python dependencies','Verify package controls',
-    'Build Cloudflare package without publishing','Read back qualified native build outputs when selected','Install selected-data browser dependencies','Run selected-data consumer checks'];
-  f.runRecord={id:44,run_attempt:1,head_sha:f.head,event:'pull_request',path:WORKFLOW_PATH,repository:{full_name:'owner/repo'},head_repository:{full_name:'owner/repo'},
-    status:'completed',conclusion:'success',pull_requests:[{number:20,head:{sha:f.head}}]};
-  f.jobs=[{name:'profile',status:'completed',conclusion:'success'},{name:'regression',status:'completed',conclusion:'skipped'},
-    {name:'package',status:'completed',conclusion:'success',steps:steps.map(name=>({name,status:'completed',conclusion:'success'}))}];
   const source=f.api;f.mergeReads=[];f.writes=[];
   f.api=async(route,method='GET',body)=>{
     f.mergeReads.push(route);
@@ -234,9 +230,6 @@ function mergeFixture({selectedFixture} = {}) {
     if(route===root+'/git/commits/'+candidate)return {tree:{sha:'head-tree'},parents:[{sha:f.base},{sha:f.head}]};
     if(route.includes('/check-runs'))return {check_runs:['scope',...(f.evidenceQuality?['evidence']:[])].map((name,id)=>({id:id+1,name,status:'completed',conclusion:'success',app:{id:1}}))};
     if(route===root+'/commits/'+f.head+'/status')return {statuses:[]};
-    if(route.includes('/actions/workflows/merge-integration-checks.yml/runs?'))return {workflow_runs:[f.runRecord]};
-    if(route===root+'/actions/runs/44')return f.runRecord;
-    if(route.includes('/actions/runs/44/attempts/1/jobs'))return {jobs:f.jobs};
     if(route.includes('/actions/runs/99/artifacts'))return {total_count:0,artifacts:[]};
     return source(route);
   };
@@ -251,7 +244,7 @@ function mergeFixture({selectedFixture} = {}) {
 test('real selected prepare has no author proof and final merge accepts the fresh composed candidate',async()=>{
   const preparedFixture=mergeFixture(), prepared=await prepareIntegration(preparedFixture.options);
   assert.equal(prepared.profile,'full');assert.equal(prepared.test_selection,'selected-data');assert.deepEqual(prepared.shards,[0]);
-  assert.equal(prepared.proof,null);assert.equal(prepared.geography_proof,null);
+  assert(!('proof' in prepared));assert(!('geography_proof' in prepared));
   // A separate final-phase fixture has no cross-job byte cache or evidence overlap.
   const first=mergeFixture(),result=await first.complete();assert.equal(result.accepted,true);assert.equal(first.writes.length,1);
   assert(!first.mergeReads.some(route=>route.includes('/actions/')), 'No speculative proof or artifact discovery');
@@ -538,12 +531,12 @@ test('registry changes preserve every original entry and cannot remove or rewrit
 });
 
 test('real SOURCE metadata entry and cold final merge preserve applicability',async()=>{
-  const gate=gateFixture(retainedSourceFixture()),selection=await gate.gate();
-  assert.equal(selection.test_selection,'selected-data');assert.equal(selection.profile,'full');assert.equal(selection.package.full,true);
+  const gate=gateFixture(retainedSourceFixture()),authority=await gate.gate();
+  assert.equal(authority.status,'checked');assert.equal(authority.profile,undefined);assert.equal((await gate.select()).test_selection,'selected-data');
   const prep=mergeFixture({selectedFixture:retainedSourceFixture()}),prepared=await prepareIntegration(prep.options);
-  assert.equal(prepared.test_selection,'selected-data');assert.equal(prepared.proof,null);assert.equal(prepared.geography_proof,null);
+  assert.equal(prepared.test_selection,'selected-data');assert(!('proof' in prepared));assert(!('geography_proof' in prepared));
   const cold=mergeFixture({selectedFixture:retainedSourceFixture()}),result=await cold.complete();
-  assert.equal(result.accepted,true);assert.equal(result.proof,null);
+  assert.equal(result.accepted,true);assert(!('proof' in result));
 });
 
 // Only mutable global metadata is snapshotted. Original delivery vintages stay
@@ -767,13 +760,13 @@ async function fixedConsumerFixture(options={}) {
   assert.equal((await f.run()).test_selection,'selected-data');f.reads.length=0;
   return options.gate?gateFixture(f):mergeFixture({...options,selectedFixture:f});
 }
-test('fixed COD/PHL lean declarations reach actual author selection and cold final merge validation',async()=>{
-  const gate=await fixedConsumerFixture({gate:true}),selection=await gate.gate();
-  assert.equal(selection.test_selection,'selected-data');assert.deepEqual(selection.shards,[0]);assert.equal(selection.package.full,true);
+test('fixed COD/PHL lean declarations reach actual queue selection and cold final merge validation',async()=>{
+  const gate=await fixedConsumerFixture({gate:true}),authority=await gate.gate();
+  assert.equal(authority.status,'checked');assert.equal(authority.profile,undefined);assert.equal((await gate.select()).test_selection,'selected-data');
   const prep=await fixedConsumerFixture(),prepared=await prepareIntegration(prep.options);
-  assert.equal(prepared.test_selection,'selected-data');assert.equal(prepared.proof,null);assert.equal(prepared.geography_proof,null);
+  assert.equal(prepared.test_selection,'selected-data');assert(!('proof' in prepared));assert(!('geography_proof' in prepared));
   const cold=await fixedConsumerFixture(),result=await cold.complete();
-  assert.equal(result.accepted,true);assert.equal(result.proof,null);
+  assert.equal(result.accepted,true);assert(!('proof' in result));
 });
 
 for(const [label,mutate] of Object.entries({
@@ -863,12 +856,12 @@ test('large structured logs retain whole-body identity, finite records and ordin
   const row=f.authored.entries.get(prefix+'samples.log');f.blobs.set(row.sha,Buffer.from(lines.replace('sample','tamper')));
   assert.equal(await f.run(),null);
 });
-test('real PR1753 selection reaches author profile and cold final validation',async()=>{
+test('real PR1753 selection reaches cold queue classification and final validation',async()=>{
   const ready=async()=>{const f=real1753();assert.equal((await f.run()).test_selection,'selected-data');f.reads.length=0;return f;};
-  const gate=gateFixture(await ready()),selection=await gate.gate();
-  assert.equal(selection.test_selection,'selected-data');assert.equal(selection.profile,'full');assert.equal(selection.package.full,true);
+  const gate=gateFixture(await ready()),authority=await gate.gate();
+  assert.equal(authority.status,'checked');assert.equal(authority.profile,undefined);assert.equal((await gate.select()).test_selection,'selected-data');
   const cold=mergeFixture({selectedFixture:await ready()}),result=await cold.complete();
-  assert.equal(result.accepted,true);assert.equal(result.proof,null);
+  assert.equal(result.accepted,true);assert(!('proof' in result));
 });
 test('real PR1753 required selected roster cannot omit a member or change its identity',async()=>{
   for(const mutate of [expected=>expected.cohorts[0].members.pop(),expected=>{expected.cohorts[0].members[0].target_id='foreign';}]){
@@ -972,7 +965,7 @@ test('retained nested delivery needs authenticated current issue scope through P
   assert.equal(prepared.test_selection, 'selected-data');
   const final = mergeFixture({selectedFixture:ownedFixture()});
   const result = await final.complete(); assert.equal(result.accepted, true); assert.equal(final.writes.length, 1);
-  assert.equal(result.proof,null);
+  assert(!('proof' in result));
 });
 for (const [name, change] of Object.entries({
   'missing current scope':f => f.issue.body = f.issue.body.replace(/,"owned_paths":\[[^\]]*\]/, ''),
@@ -982,8 +975,7 @@ for (const [name, change] of Object.entries({
   'wrong lane':f => f.issue.labels[0] = 'type:geography',
 })) test('retained selected metadata refuses ' + name, async () => {
   const f = gateFixture(ownedFixture()); change(f);
-  if (name === 'missing current scope') assert.deepEqual(await f.select(), {profile:'full', shards:[0,1,2], geography_software:false});
-  else await assert.rejects(f.select());
+  await assert.rejects(f.select());
 });
 for (const owned_paths of [['coordination/engineering/'], ['coordination/engineering/retained-delivery/../'],
   ['coordination/engineering/other/'], ['coordination/engineering/retained-delivery/new-packet/registry.json']]) {
@@ -1114,7 +1106,7 @@ test('actual PR1770 reaches authenticated author and cold queue proof with compl
   assert.equal((await gateFixture(real1770()).select()).test_selection,'selected-data');
   const prep=await prepareIntegration(mergeFixture({selectedFixture:real1770()}).options);assert.equal(prep.test_selection,'selected-data');
   const final=mergeFixture({selectedFixture:real1770()}), result=await final.complete();
-  assert.equal(result.accepted,true);assert.equal(final.writes.length,1);assert.equal(result.proof,null);
+  assert.equal(result.accepted,true);assert.equal(final.writes.length,1);assert(!('proof' in result));
 });
 for(const [label,mutate] of Object.entries({
   'two authoritative expectations':f=>{const names=f.files.filter(row=>row.filename.endsWith('/selected-delivery-expectations.json')).map(row=>row.filename);const final=names.find(name=>f.document(name).selected_ledger_sha256);f.put(names.find(name=>name!==final),f.document(final));},

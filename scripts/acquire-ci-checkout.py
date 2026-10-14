@@ -3,7 +3,6 @@
 import argparse
 import base64
 import json
-import math
 import os
 import re
 import selectors
@@ -20,19 +19,6 @@ class AcquisitionError(Exception):
     def __init__(self, category):
         super().__init__(category)
         self.category = category
-
-
-MAX_TOTAL_SECONDS = 1800
-
-
-def finite_seconds(value, name, maximum=MAX_TOTAL_SECONDS):
-    try:
-        number = float(value)
-    except (TypeError, ValueError):
-        raise AcquisitionError('invalid-' + name)
-    if not math.isfinite(number) or number < 0 or number > maximum:
-        raise AcquisitionError('invalid-' + name)
-    return number
 
 
 def live_group(pgid):
@@ -62,20 +48,16 @@ def live_group(pgid):
 
 
 class Supervisor:
-    def __init__(self, total, elapsed, emit, grace=1):
+    def __init__(self, emit, grace=1):
         self.started = time.monotonic()
-        self.elapsed = elapsed
-        self.deadline = self.started + total - elapsed
         self.emit = emit
         self.grace = grace
-        self.reserve = 2 * grace + 2
         self.cancelled = False
         self.unresolved_groups = set()
 
     def report(self, event, **fields):
         self.emit(dict(event=event,
-                       elapsed_seconds=round(time.monotonic() - self.started + self.elapsed, 3),
-                       remaining_seconds=round(max(0, self.deadline - time.monotonic()), 3), **fields))
+                       elapsed_seconds=round(time.monotonic() - self.started, 3), **fields))
 
     def cancel(self, _signum, _frame):
         self.cancelled = True
@@ -89,14 +71,14 @@ class Supervisor:
         try:
             if live_group(child.pid):
                 send(signal.SIGTERM)
-                until = min(self.deadline, time.monotonic() + self.grace)
+                until = time.monotonic() + self.grace
                 while live_group(child.pid) and time.monotonic() < until:
                     child.poll()
                     time.sleep(0.02)
                 if live_group(child.pid):
                     send(signal.SIGKILL)
-            child.wait(timeout=max(0.01, min(self.grace, self.deadline - time.monotonic())))
-            until = min(self.deadline, time.monotonic() + self.grace)
+            child.wait(timeout=self.grace)
+            until = time.monotonic() + self.grace
             while live_group(child.pid) and time.monotonic() < until:
                 time.sleep(0.02)
             if live_group(child.pid):
@@ -107,7 +89,7 @@ class Supervisor:
             # claim verified cleanup or remove files the unknown group may use.
             try:
                 send(signal.SIGKILL)
-                child.wait(timeout=max(0.01, min(self.grace, self.deadline - time.monotonic())))
+                child.wait(timeout=self.grace)
             except (OSError, subprocess.SubprocessError):
                 pass
             raise AcquisitionError('process-cleanup-failed')
@@ -116,9 +98,6 @@ class Supervisor:
         if self.cancelled and not cleanup:
             raise AcquisitionError('cancelled')
         start = time.monotonic()
-        end = self.deadline - (self.grace if cleanup else self.reserve)
-        if end <= start:
-            raise AcquisitionError('acquisition-deadline')
         child = subprocess.Popen(argv, cwd=str(cwd), env=env, stdin=subprocess.DEVNULL,
                                  stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                  start_new_session=True)
@@ -135,10 +114,7 @@ class Supervisor:
                 if self.cancelled and not cleanup:
                     failure = 'cancelled'
                     break
-                if time.monotonic() >= end:
-                    failure = 'acquisition-deadline'
-                    break
-                for key, _ in selector.select(min(0.1, max(0, end - time.monotonic()))):
+                for key, _ in selector.select(0.1):
                     chunk = os.read(key.fileobj.fileno(), 8192)
                     if not chunk:
                         selector.unregister(key.fileobj)
@@ -168,10 +144,13 @@ class Supervisor:
             if failure:
                 self.stop_group(child)
             else:
-                try:
-                    child.wait(timeout=max(0.01, end - time.monotonic()))
-                except subprocess.TimeoutExpired:
-                    failure = 'acquisition-deadline'
+                # A child may close both pipes before exiting. Keep cancellation
+                # responsive here too; the runner owns the overall job timeout.
+                while child.poll() is None:
+                    if self.cancelled and not cleanup:
+                        failure = 'cancelled'
+                        break
+                    time.sleep(0.1)
                 self.stop_group(child)
             if self.cancelled and not cleanup:
                 failure = 'cancelled'
@@ -192,8 +171,7 @@ class Supervisor:
                 child.stderr.close()
 
 
-def acquire(repository, sha, tree, workspace, total_timeout=420, elapsed_seconds=0,
-            token=None, git_executable=None, emit=None, regression=False):
+def acquire(repository, sha, tree, workspace, token=None, git_executable=None, emit=None, regression=False):
     """git_executable is a library-only fault-injection seam, never a CLI option."""
     supplied_token = os.environ.pop('WORLDATLAS_CHECKOUT_TOKEN', None)
     token = supplied_token if token is None else token
@@ -203,10 +181,6 @@ def acquire(repository, sha, tree, workspace, total_timeout=420, elapsed_seconds
         raise AcquisitionError('invalid-repository')
     if not all(re.fullmatch(r'[a-f0-9]{40}', value or '') for value in (sha, tree)):
         raise AcquisitionError('invalid-git-identity')
-    total_timeout = finite_seconds(total_timeout, 'total-timeout')
-    elapsed_seconds = finite_seconds(elapsed_seconds, 'elapsed', maximum=total_timeout)
-    if total_timeout <= 4 or elapsed_seconds >= total_timeout:
-        raise AcquisitionError('invalid-deadline')
     workspace = Path(workspace)
     if not workspace.is_absolute() or workspace.is_symlink() or not workspace.is_dir():
         raise AcquisitionError('invalid-workspace')
@@ -223,15 +197,13 @@ def acquire(repository, sha, tree, workspace, total_timeout=420, elapsed_seconds
     common = [executable, '-c', 'core.hooksPath=' + os.devnull,
               '-c', 'credential.helper=', '-c', 'gc.auto=0', '-c', 'maintenance.auto=false']
     remote = 'https://github.com/' + repository + '.git'
-    supervisor = Supervisor(total_timeout, elapsed_seconds, emit)
+    supervisor = Supervisor(emit)
     previous = {sig: signal.signal(sig, supervisor.cancel) for sig in (signal.SIGINT, signal.SIGTERM)}
     staging = None
     promoted = False
     try:
         if supervisor.cancelled:
             raise AcquisitionError('cancelled')
-        if supervisor.deadline - time.monotonic() <= supervisor.reserve:
-            raise AcquisitionError('acquisition-deadline')
         staging = Path(tempfile.mkdtemp(prefix='.worldatlas-ci-checkout-', dir=str(workspace.parent)))
         if staging.stat().st_dev != workspace_identity[0]:
             raise AcquisitionError('workspace-filesystem-changed')
@@ -287,8 +259,6 @@ def acquire(repository, sha, tree, workspace, total_timeout=420, elapsed_seconds
         if (workspace.is_symlink() or not workspace.is_dir() or
                 (workspace.stat().st_dev, workspace.stat().st_ino) != workspace_identity or list(workspace.iterdir())):
             raise AcquisitionError('workspace-changed')
-        if time.monotonic() >= supervisor.deadline - supervisor.reserve:
-            raise AcquisitionError('acquisition-deadline')
         # Atomic directory replacement refuses a newly nonempty destination.
         # Both directories are on one filesystem; this is not a full-tree copy.
         os.replace(str(staging), str(workspace))
@@ -319,12 +289,9 @@ def main():
     parser.add_argument('--sha', required=True)
     parser.add_argument('--tree', required=True)
     parser.add_argument('--workspace', required=True)
-    parser.add_argument('--total-timeout-seconds', default='420')
-    parser.add_argument('--elapsed-seconds', default='0')
     args = parser.parse_args()
     try:
         acquire(args.repository, args.sha, args.tree, args.workspace,
-                args.total_timeout_seconds, args.elapsed_seconds,
                 regression=os.environ.get('INTEGRATION_PROFILE') == 'full' and
                 os.environ.get('INTEGRATION_TEST_SELECTION') == 'complete')
     except AcquisitionError as error:

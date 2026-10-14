@@ -174,15 +174,25 @@ resource without deleting a collision. Canceled
 jobs may leave an owned ref and require cleanup, never blind deletion or proof of
 merge. Candidate tests still check out immutable SHAs with read-only permissions.
 
-Base-dependent evidence still needs refresh: a metric labeled current must match the actual PR-base vintage, and original-file receipts must match actual base bytes. Disjoint main changes with unchanged scoped inputs can reuse review; fresh global measurements or changes to the reviewed inputs cannot. Preserve the earlier evidence, refresh in a new vintage, and obtain exact-head review when needed. Trusted preflight selects checks by every changed and renamed path. Code, workflow, schema and core-data changes run the complete unit suite across three parallel shards, plus one hosted package build. Isolated geography/history campaign evidence and engineering-owned receipts or Markdown/text docs run the focused ownership/evidence/review/invariant suite, without rebuilding the unchanged application. Both profiles run in isolated read-only jobs without secrets or persistent checkout credentials. They retain the same exact candidate, reviewed-byte, scope and evidence gates; a renamed runtime file cannot evade full regression. Prepare/final jobs execute only fresh trusted main code. Tests are bounded to35minutes, trusted jobs to10minutes each; unfinished heads fail preflight rather than holding the slot for worker action.
+Base-dependent evidence still needs refresh: a metric labeled current must match the actual PR-base vintage, and original-file receipts must match actual base bytes. Disjoint main changes with unchanged scoped inputs can reuse review; fresh global measurements or changes to the reviewed inputs cannot. Preserve the earlier evidence, refresh in a new vintage, and obtain exact-head review when needed. The final queue selects checks by every changed and renamed path. Code, workflow, schema and core-data changes run the complete unit suite across three parallel shards, plus one hosted package build. Isolated geography/history campaign evidence and engineering-owned receipts or Markdown/text docs run the final focused ownership/evidence/review/invariant suite, without rebuilding the unchanged application. Both profiles run in isolated read-only jobs without secrets or persistent checkout credentials. They retain the same exact candidate, reviewed-byte, scope and evidence gates; a renamed runtime file cannot evade full regression. Prepare/final jobs execute only fresh trusted main code. Tests are bounded to35minutes, trusted jobs to10minutes each; unfinished heads fail preflight rather than holding the slot for worker action.
 
 The full runner keeps packaged-asset checks on the build job and the expensive local model/migration file on a separate job. Measured database-neighbor suites use the otherwise lighter job; the remaining discovered files retain deterministic assignment. Every file still runs exactly once. Named placement is a scheduling choice, not a runtime guarantee; compare actual complete workflow times rather than summed TAP durations.
 
 Package inputs are declared in `.github/package-inputs.json` and physically copied into an isolated build source image by the standard package builders; see [PACKAGE_INPUTS.md](PACKAGE_INPUTS.md). CI uses the same declaration from trusted base. Implementation edits do not invalidate later research through code fingerprints. Research becomes a package input only through an explicit reviewed declaration change. A packaged research PR runs its research evidence checks plus package checks; package applicability alone does not select full application regression.
 
-For unpublished research, retain the issue scope/evidence gates, focused ownership/evidence/invariant checks, independent exact-head review and exact current-main integration checks. Package CI records applicability without a candidate checkout, npm/pip installs, budget unit tests or compilation: none of their inputs changed. Changes to the classifier, budget tools or their tests retain the full package profile. Its receipt states that no fresh package-size measurement was made. The focused suite is short; the avoidable expensive work was rebuilding unchanged package inputs. Full application tests remain required when the affected behavior is uncertain.
+All ordinary author heads run trusted current head/issue/evidence/scope checks,
+applicable bounded author/reviewer controls and substantive independent exact-head
+review. They do not automatically run geography, application regression or a
+package build. The serialized queue owns one actual current-main-plus-reviewed-head
+pass, with full software/unknown validation and the existing source-only focused
+route. A source packet becomes a package input only through its explicit reviewed
+declaration. Main-push package applicability and the distinct Sites reserve
+measurement remain separate from this premerge pipeline.
 
-Package applicability selectors, their scope tests and the package-check workflow are coordination controls: their PRs run focused ownership/evidence/integration controls plus package-scope tests, rather than unrelated application regression. Full-profile discovery runs the package-scope test file once; the evidence profile includes it through the integration proof tests. Actual build/archive tools, test runners, application code and schema remain full. The package workflow still independently decides whether an archive rebuild is applicable.
+Package applicability selectors, scope tests and package workflows retain their
+focused final coordination controls. Actual build/archive tools, test runners,
+application code and schema remain full. Full discovery includes every test once;
+the focused final inventory includes the relevant package-scope controls.
 
 Changes to the test runner require the full profile so the actual complete test inventory and scheduling are verified; they are excluded from the coordination-only allowlist.
 
@@ -217,71 +227,43 @@ barriers, evidence/review validation, workflow checkout and integration controls
 Source-only owned research retains its focused controls. Every changed path and
 rename origin participates; unknown non-text documentation/scripts, application code, storage,
 atlas data, geometry, schema, imports, builds and deployment require full regression.
-The PR profile selector runs trusted base code against GitHub's complete file list and verifies the current head. Geography focused selection reads the linked issue and requires matching lane/mode and safe declared owned prefixes; missing or invalid scope fails rather than allowing reduced tests. Out-of-scope files or rename origins retain full regression;
-a base without the selector runs full regression. Full shards cover every test file
+The queue classifier runs trusted current-main code against GitHub's complete file list and verifies the reviewed head. Geography focused selection reads the linked issue and requires matching lane/mode and safe declared owned prefixes; missing or invalid scope fails rather than allowing reduced tests. Out-of-scope files or rename origins retain full regression;
+Unknown applicability runs complete final regression. Full shards cover every test file
 exactly once, build actual packaged assets and reject skipped tests.
 
-The queue can avoid repeating those tests only when a completed
-`merge-integration-checks.yml` run's successful code jobs prove the entire candidate Git tree equals the
-reviewed head's tested tree. That approved workflow explicitly checks out the head;
-GitHub's `head_sha` alone cannot establish what a default PR merge-ref checkout tested.
-The workflow and runner/profile blobs must match trusted current main. All expected
-shards and their required completed steps must succeed; skipped jobs establish no
-coverage. A run whose only failed job is `evidence` can retain that code proof
-when its profile, scope, geography, package and every required regression job
-completed successfully. This handles a PR-body metadata race without repeating
-unchanged code work. Both merge phases still require fresh successful current
-checks, evidence, ownership and exact-head review. Geographic proof is separate:
-an authenticated successful geographic job may retain its original report only
-for that exact whole tree, head and trusted baseline. For candidate checker software,
-the original candidate and executing code commit must also equal the current combined
-candidate SHA, even when a different candidate has an equivalent tree. The trusted
-current route supplies the expected executing code; report fields never choose it.
-After a failed-job-only rerun, the successful carried job's single upload receipt identifies its true
-origin attempt; the queue authenticates that exact run/job, required steps,
-matching original receipt and artifact/report rather than scanning old artifacts
-or relabeling execution. The origin attempt may have failed/cancelled code while
-its geography succeeded. Latest code proof still requires its own successful
-coverage. Both identities are rechecked in actual final validation before merge;
-missing original proof requires fresh geography. Preparation pins the run ID and attempt. The final serialized merge re-reads that run,
-the same successful attempt/jobs and the usual exact-head review, evidence, ownership,
-checks, candidate parents and base guards. An unavailable/untrusted proof causes
-normal isolated tests; a proof revoked after preparation refuses the merge and
-requires resubmission. A rerun after preparation invalidates the proof even if it succeeds. An altered
-workflow/runner first passes ordinary integration.
+The automatic author geography/regression/package phase and its proof-transfer,
+predecessor-program catalogue and current-control reuse chain are removed. Current
+scope and required evidence must succeed before admission. Every existing current
+head check must finish successfully; the queue creates no exemption for failed
+checks. Author metadata no longer classifies unused build/test work. Independent
+review still selects concrete local controls for the changed invariants.
 
-The normal PR geography job separately admits a bounded direct metadata successor:
-only the issue-owned receiving manifest and packet-root README may change as
-ordinary modified files. It authenticates the original successful geography job,
-report and unchanged trusted baseline, then uses the existing audited selected
-input collector to prove unchanged execution code and every current/historical/
-fallback scientific route. Filename admission alone never proves non-consumption.
-Unavailable proof, changed consumed metadata or timeout runs normal geography.
-Current ownership, scope, evidence and exact-head review still run. The separate
-geography-reuse.json records original execution and current applicability without
-rewriting the report or granting transferable geography/checkpoint authority.
-The merge queue still runs fresh exact-candidate geography.
+The final queue requires successful actual geography and integration jobs. A prior
+author run, supplied legacy proof pin or skipped final job cannot replace them.
+Final authority, scientific evidence, reviewed bytes, ordered candidate parents,
+current main/head, checks and geographic adjudication are revalidated before the
+SHA-guarded merge. There is no new scheduler, cache or proof packet.
 
-Regression/build reuse additionally requires an exact trusted known-program
-catalogue match, successful original full regression shards and package jobs,
-and absence of the entire receiving packet from the trusted base. The programme
-vector binds complete test discovery, execution namespaces, policy selectors
-and archived executable images. Unknown programmes use ordinary full checks.
-The current head runs the four audited real-checkout consumer files afresh;
-normal ownership, scope, evidence and exact-head review remain required. Reuse
-records retain the original run, attempt, head and successful job identities.
-They do not claim a new build or relabel the old report. The queue authenticates
-that predecessor again against its actual baseline and current control job,
-during actual final validation before merge. Only immutable input
-collection is cached within that queue process; live authority is reread.
+Keep a qualified scientific delta and its manifest unchanged while its actual
+subjects, source/native inputs, results, metrics, vintages and limits are unchanged.
+Current delivery selector/package/sidecar wrappers and duplicate composition metrics
+need no additional scientific bookkeeping solely to restate final queue custody.
+Preserve historical declarations honestly; changed science requires new evidence
+and relevant review. Actual delivery files/receipts and final-head review remain.
+
+Historical author geography/package artifact readers remain available only where
+original provenance and accepted-checkpoint acquisition consume them. Original
+records preserve their actual head, workflow, candidate, attempt and checksum;
+they are never relabeled as current execution. New ordinary package originals
+come from the final queue. Explicit selected-package equivalence proof retains
+its accepted source, successful queue readback and current browser consumers.
 
 Full-profile changes to checker/producer code or its dependencies run the exact
 combined candidate checker, with
 checker-code identity separate from baseline and candidate data identities. It
 runs the genuine cold native-conservation and continuous-geometry comparisons;
-an authenticated original execution for the exact same combined candidate may be
-reused through the existing original-report custody and final validation. Missing
-or invalid proof requires fresh candidate execution.
+the actual final queue candidate executes this check once. Historical artifacts
+cannot replace that current final job.
 There is no finite software hash exception, baseline self-comparison substitute,
 checkpoint reuse or new checkpoint authority for this route. Selected-data and
 source-only work, data-only full changes and unrelated application changes retain
@@ -308,25 +290,17 @@ the baseline route may request the existing authenticated source adjudication.
 A mixed checker upgrade and raw-data correction needing adjudication must deliver
 the checker first, then the data change through that existing trusted route.
 
-The profile job resolves that candidate's authenticated accepted parent before
-checking out its trusted classifier, so older PR opening metadata cannot keep
-running an obsolete classifier. Geography consumes that same resolved parent.
-Ownership/evidence retain their original authored/event metadata; the existing
-profile receipt distinguishes its actual trusted code commit from event_base.
+The author authority job resolves its event candidate's authenticated accepted
+parent before checking out trusted code. Older PR opening metadata cannot keep an
+obsolete scope checker running. Ownership/evidence retain their actual original
+authored/event vintages, recorded separately from the executing trusted parent.
+The queue independently pins actual current main plus reviewed head. Disjoint
+main movement alone does not require rewriting an unchanged reviewed branch.
 
-PR geography compares the event's authenticated merge commit against its exact
-trusted event base, not the raw author head against a newer base. The checker
-verifies ordered parents `[event base, reviewed head]` before reading scientific
-inputs. This preserves unrelated authority added by parallel main while still
-rejecting real proposed removals/rebindings. The report keeps the executing base
-and actual candidate; its original upload receipt also records that candidate.
-Reuse readers verify its immutable parents/tree and preserve the reviewed head,
-workflow head and original candidate separately. Legacy raw-head receipts retain
-their original meaning. The transition PR may execute the older trusted checker;
-its report cannot be relabeled as raw-head proof and falls back to queue geography.
-Code-proof reuse still needs whole-tree equality, and the final queue independently
-checks current main plus its actual combined candidate. No main advance alone
-requires rewriting the author's branch merely to make geography comparable.
+Historical PR geography reports compared the event merge against its exact
+accepted parent. Their original readers still verify ordered parents, complete
+candidate tree and distinct reviewed/workflow/candidate identities. Legacy raw-head
+receipts keep their original meaning; no historical report is relabeled current.
 
 This is cooperative GitHub Actions evidence and native workflow concurrency, not
 independent authenticated worker identity or GitHub's separate branch-protection
@@ -337,11 +311,10 @@ serialized workflow. A green run does not certify geographic facts, authorize
 imports or publish the Site.
 
 The focused `evidence` controls use Node and repository files without installed
-npm packages. Both PR regression and isolated queue regression install npm
-packages only for the `full` profile. Full proof still requires successful Node
-and Python installation, applicable browser setup and the actual hosted build;
-focused proof requires every focused control to execute successfully with zero
-skipped tests. A skipped dependency-install step is not application coverage.
+npm packages. Final full validation requires pinned Node/Python dependencies,
+applicable browser setup, the actual hosted build and complete zero-skips tests.
+Every final focused control must execute successfully. A skipped install/test
+step does not establish application coverage.
 
 ## Native queued integration
 
@@ -369,9 +342,11 @@ then independently verify actual PR merged state, exact head and squash commit.
 An interrupted local wait does not end a workflow. An uncertain dispatch, missing
 run on a bounded history page, pending state or missing receipt never authorizes a
 blind duplicate. After a settled failed/cancelled execution, reconcile the PR and
-all earlier unresolved executions; if it remains open at its unchanged reviewed
-head, address the cause and submit a fresh request. Changed reviewed bytes require
-new substantive review. See [MERGE_QUEUE_CLIENT.md](MERGE_QUEUE_CLIENT.md).
+all earlier unresolved executions. With successful preparation and unchanged
+reviewed head/tested main, address the cause and rerun failed jobs of that same
+execution; successful original jobs need no repetition. Failed preparation or a
+changed base requires a fresh request. Changed reviewed bytes require new
+substantive review. See [MERGE_QUEUE_CLIENT.md](MERGE_QUEUE_CLIENT.md).
 
 ### Migrate existing requests safely
 
@@ -431,7 +406,7 @@ are never retained. Inspect this evidence before attributing any future denial
 or choosing a retry; observation expiry alone still cannot restart live work.
 
 
-For bootstrap observability, the existing PR regression profile job has a static
+For bootstrap observability, the existing PR authority profile job has a static
 failure-only diagnostic. It makes one read-only current-repository PR GET with
 the same job token and a 20-second request timeout, emits only the sanitized
 message/status and allowlisted rate/request fields, and leaves the original job
@@ -460,7 +435,7 @@ failure was eventual consistency.
 
 ### Actual HTTP quota and job deadlines
 
-Final merge runs its actual evidence, review, proof/source, candidate-parent/tree
+Final merge runs its actual evidence, review, source, candidate-parent/tree
 and mutable-authority validation once. There is no separate evidence preinventory,
 request estimator, speculative artifact/proof walk, capacity poll or replanning
 pass. The full scientific byte validator retains its ancestry, descriptor and
@@ -486,8 +461,9 @@ quota state and bounded recovery allocation. This is best-effort cleanup, not a
 guarantee against concurrent quota depletion or a slow provider.
 
 Inspect the same Actions execution rather than canceling or duplicating a long
-job. Reconcile terminal failure and actual PR state before a fresh request;
-never rerun just the final job to bypass candidate preparation or checks. Local
+job. Reconcile terminal failure and actual PR state before retrying; retained
+successful preparation/tests of the exact candidate can support a failed-job
+rerun, but rerunning only the final job cannot bypass missing or failed checks. Local
 mocked HTTP controls establish rejection and cleanup behavior, not hosted quota
 recovery or a system-wide capacity guarantee.
 
@@ -502,8 +478,8 @@ Read docs/AUDIT_FAILURE_PREVENTION.md on current main before the next job or rev
 Follow [AUTHOR_PREFLIGHT.md](AUTHOR_PREFLIGHT.md) before the next job and before
 requesting its first review. Select the checks implicated by the original acceptance
 and changed behavior from the start; preserve source-only focused CI. Resolve quick
-ownership/evidence errors before review, while long regressions and substantive
-independent review may proceed in parallel. The guide supplies practical helper and
+ownership/evidence errors before review, while substantive
+independent review proceeds independently of the later final queue computation. The guide supplies practical helper and
 command details, meaningful adverse cases and existing-chat refresh text; author
 preflight does not replace independently derived reviewer expectations.
 
@@ -515,7 +491,7 @@ has recovered. The premerge evidence entry point uses the same bounded,
 exact-tree-bound Git blob transport as the merge queue, rather than one REST
 request per evidence file. It still verifies complete bytes and every declared
 binding; mutable issue, claim, PR, tree, ancestry and review authority stay fresh.
-Read-only handoff, PR regression and PR package workflows cancel superseded
+The read-only author authority workflow cancels superseded
 runs for the same PR; main package push observations remain separate. This does
 not cancel merge workflows, claim mutations or publication.
 
@@ -553,16 +529,12 @@ Concurrent read batches finish their existing bounded requests before receipts
 are finalized, so a fast rejection cannot hide other already-started attempts.
 
 
-### Exact-tree delivery CI reuse
+### One final delivery validation
 
-The existing integration proof can also carry the original successful trusted
-geography job's report. Preparation authenticates its run/attempt, unique producer
-steps, job-log report hash/size, artifact ID/name/digest and complete tested tree.
-The final gate revalidates these bindings and current geography adjudication before
-merging. Its receipt preserves the original report candidate and labels reuse;
-it does not claim that a skipped queue geography job ran successfully. An absent
-usable original report causes a fresh geography job. A pinned proof that changes
-before merge is refused.
+Ordinary delivery performs actual conservation, build/assembly and applicable
+regression on the single final composed candidate. Authenticated retained-output
+assembly still proves its actual original successful producer/readback and all
+unchanged output bytes; it does not transfer an author's regression claim.
 
 For unchanged-method selected deliveries, the setup profile remains `full` while
 `test_selection=selected-data` declares the narrower inventory. This option is
@@ -608,7 +580,7 @@ canonical/model-reader/SQLite context solely for those tests. Software, content,
 unknown or base-changing work keeps full regression; explicit rollout proof keeps
 its current consumer tests.
 
-There is no selected-data author computation or proof to transfer. The final gate
+There is no automatic author computation or regression proof to transfer. The final gate
 requires successful current queue integration and geography, the exact candidate
 parents/tree, current authority and independent review. Missing, skipped, failed
 or stale final checks prevent merge. Software, dependency and unknown changes
@@ -617,13 +589,12 @@ selection separately and rejects skipped tests. Hosted adoption and elapsed
 savings must be recorded when observed, not inferred from local controls or added
 parallel job durations.
 
-Ordinary full PR validation also builds Cloudflare only once, in regression (0).
-That same job runs the existing package controls, verifies reviewed-head package
-and applicable native readback receipts, uploads them, and retains its complete
-regression inventory. The package status depends on successful regression and
-reports reuse from this exact run; a failed, cancelled or skipped producer cannot
-supply it. Evidence-profile package execution remains separate from selected data's final
-queue producer. No large build artifact is transferred between jobs.
+Ordinary software, executable-source additions, changed inputs, mixed and unknown
+scope run one complete final queue pass. Stable app-only author proofs previously
+could transfer before admission; the simpler default now places that single pass
+in the serialized lane. Measure actual lane occupancy and completed delivery time,
+including removed duplicate/reworked prequeue work, rather than adding job durations.
+
 The Cloudflare step does not measure the historical Sites archive reserve; the
 separate main-push Deployment package budget workflow retains its actual Sites
 build and file/archive accounting. Parallel build removal reduces runner work;

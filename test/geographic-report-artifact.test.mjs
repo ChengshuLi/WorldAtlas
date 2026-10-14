@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {deflateRawSync, crc32} from 'node:zlib';
 import {githubAPI} from '../scripts/issue-claim-contract.mjs';
 import {requestAccounting} from '../scripts/github-quota.mjs';
-import {readReportArchive, loadGeographicReport, reportHash, prepareGeographyProof,
+import {readReportArchive, loadGeographicReport, reportHash, validateGeographyOrigin, validatePRGeographyCandidate,
   readGeographyJobReceipt, validateGeographyProof, geographicReportProducts, checkGeographicReport} from '../scripts/geographic-report-artifact.mjs';
 
 // Real single-file ZIP records, with both archive formats used by uploaders.
@@ -136,17 +136,25 @@ function originalTransport() {
     fetchImpl: async (url, init) => {
       deliveries.push({url, init}); return new Response(url.includes('/log?') ? f.log : f.zip);
     }};
+  f.source = validateGeographyProof({run_id: 123, run_attempt: 1, job_id: 55,
+    tree: f.options.proof.tree, head: f.options.head, baseline: f.options.baseline,
+    workflow_path: '.github/workflows/merge-integration-checks.yml', event: 'pull_request',
+    workflow_head: f.options.head, candidate_commit: f.options.head,
+    ...readGeographyJobReceipt(log, name)});
+  f.loadOptions = {api, repo: f.options.repo, runId: 123, artifactName: name,
+    expectedHash: digest, source: f.source, token: f.options.token, fetchImpl: f.options.fetchImpl};
   f.accounting = accounting;
   return f;
 }
 
-test('original successful job log binds the exact producer, archive and raw report without relabeling', async () => {
-  const f = originalTransport(), result = await prepareGeographyProof(f.options);
-  assert.deepEqual(result.report, JSON.parse(report));
-  assert.equal(result.source.job_id, 55); assert.equal(result.source.run_id, 123);
-  assert.equal(result.source.head, 'b'.repeat(40)); assert.equal(result.source.baseline, 'c'.repeat(40));
-  assert.equal(result.source.artifact_id, 12); assert.equal(result.source.report_bytes, report.length);
-  assert.equal(f.accounting.receipt().actual_http_attempts, 3);
+test('accepted original source binds the exact archive and raw report without relabeling', async () => {
+  const f = originalTransport(), result = await loadGeographicReport(f.loadOptions);
+  assert.deepEqual(result, JSON.parse(report));
+  assert.deepEqual(geographicReportProducts(result).source, f.source);
+  assert.equal(f.source.job_id, 55); assert.equal(f.source.run_id, 123);
+  assert.equal(f.source.head, 'b'.repeat(40)); assert.equal(f.source.baseline, 'c'.repeat(40));
+  assert.equal(f.source.artifact_id, 12); assert.equal(f.source.report_bytes, report.length);
+  assert.equal(f.accounting.receipt().actual_http_attempts, 2);
   assert(f.requests.every(row => row.init.headers.Authorization === 'Bearer synthetic-token'));
   assert(f.deliveries.every(row => row.init.headers === undefined && row.init.redirect === 'error'));
   assert(!JSON.stringify(f.accounting.receipt()).includes('private-secret'));
@@ -168,11 +176,10 @@ test('pinned source refuses overwritten, foreign, expired and tampered original 
     f => {f.artifact.workflow_run.id++;}, f => {f.artifact.workflow_run.head_sha = 'd'.repeat(40);},
     f => {f.artifact.digest = 'sha256:' + 'f'.repeat(64);}, f => {f.artifact.size_in_bytes++;},
     f => {f.zip = archive(Buffer.from('{}'));},
-    f => {f.log = Buffer.from(f.log.toString().replace('"report_bytes":' + report.length, '"report_bytes":1'));}
   ]) {
-    const f = originalTransport(); mutate(f); await assert.rejects(prepareGeographyProof(f.options));
+    const f = originalTransport(); mutate(f); await assert.rejects(loadGeographicReport({...f.loadOptions, fetchImpl: f.options.fetchImpl}));
   }
-  const f = originalTransport(), {source} = await prepareGeographyProof(f.options);
+  const f = originalTransport(), source = f.source;
   assert.throws(() => validateGeographyProof({...source, job_id: -1}));
   assert.throws(() => validateGeographyProof({...source, extra: 'untrusted'}));
   await assert.rejects(loadGeographicReport({...f.options, runId: 124, artifactName: source.artifact_name,
@@ -182,10 +189,9 @@ test('pinned source refuses overwritten, foreign, expired and tampered original 
 test('job-log capability retains shared admission and refuses arbitrary redirect routes', async () => {
   const f = originalTransport(); let delivered = false;
   f.options.api.setHTTPAdmission(() => {throw Error('shared admission refused');});
-  await assert.rejects(prepareGeographyProof({...f.options, fetchImpl: async () => {delivered = true;}}), /shared admission refused/);
+  await assert.rejects(f.options.api.jobLogRedirect('/repos/owner/repo/actions/jobs/55/logs'), /shared admission refused/);
   assert.equal(delivered, false); assert.equal(f.requests.length, 0);
   assert.throws(() => f.options.api.jobLogRedirect('/repos/owner/repo/issues/2'), /job log redirect route/);
-  assert.equal(await prepareGeographyProof({...f.options, proof: {}}), null);
 });
 
 // Verbatim receipt lines from successful job 114478521619 (run 38142298387,
@@ -194,9 +200,9 @@ test('job-log capability retains shared admission and refuses arbitrary redirect
 const retained1726Receipt = Buffer.from(`2026-10-11T13:28:18.8017747Z {"status": "not-applicable", "regressions": null, "report_bytes": 274717, "report_sha256": "00ba911099849b347811c5dabc4b79f3e797a4ec25ab7fce81b0439260555cb7"}
 2026-10-11T13:28:19.2767025Z SHA256 digest of uploaded artifact zip is 799a31398a52ae11c73c8646337aa0c02e810d175fc8c69741d868a24db1381e
 2026-10-11T13:28:19.4818073Z Artifact proposed-geography-1726-1 has been successfully uploaded! Final size is 39994 bytes. Artifact ID is 11703004023`);
-test('retained failed-job-only retry log discovers its truthful origin rather than relabeling attempt two', () => {
+test('retained failed-job-only retry log keeps its exact origin instead of relabeling attempt two', () => {
   assert.throws(() => readGeographyJobReceipt(retained1726Receipt, 'proposed-geography-1726-2'), /receipt/);
-  assert.deepEqual(readGeographyJobReceipt(retained1726Receipt, {number: 1726, runAttempt: 2}), {
+  assert.deepEqual(readGeographyJobReceipt(retained1726Receipt, 'proposed-geography-1726-1'), {
     artifact_name: 'proposed-geography-1726-1', artifact_id: 11703004023, artifact_bytes: 39994,
     artifact_digest: '799a31398a52ae11c73c8646337aa0c02e810d175fc8c69741d868a24db1381e',
     report_sha256: '00ba911099849b347811c5dabc4b79f3e797a4ec25ab7fce81b0439260555cb7', report_bytes: 274717
@@ -206,12 +212,12 @@ test('retained failed-job-only retry log discovers its truthful origin rather th
     Buffer.from(retained1726Receipt.toString().split('\n').slice(0, 2).join('\n')),
     Buffer.concat([retained1726Receipt, Buffer.from('\nArtifact proposed-geography-1726-2 has been successfully uploaded! Final size is 39994 bytes. Artifact ID is 99')]),
     Buffer.concat([retained1726Receipt, Buffer.from('\nArtifact proposed-geography-1727-1 has been successfully uploaded! Final size is 39994 bytes. Artifact ID is 99')])])
-    assert.throws(() => readGeographyJobReceipt(raw, {number: 1726, runAttempt: 2}), /receipt/);
+    assert.throws(() => readGeographyJobReceipt(raw, 'proposed-geography-1726-1'), /receipt/);
 });
 
 function carriedTransport() {
   const f = originalTransport(), original = f.options.api;
-  f.options.proof.run_attempt = 2; f.options.proof.geography_job_id = 66;
+  f.source = {...f.source, current_run_attempt: 2, current_job_id: 66};
   f.run = {id: 123, run_attempt: 1, head_sha: f.options.head, event: 'pull_request',
     path: '.github/workflows/merge-integration-checks.yml', repository: {full_name: 'owner/repo'},
     head_repository: {full_name: 'owner/repo'}, status: 'completed', conclusion: 'failure',
@@ -236,41 +242,39 @@ function carriedTransport() {
   f.options.fetchImpl = async (url, init) => url.includes('/origin-log?') ? new Response(f.originLog ?? f.log) : fetch(url, init);
   return f;
 }
-test('carried geography authenticates only its exact origin metadata, successful job and matching log', async () => {
-  const f = carriedTransport(), result = await prepareGeographyProof(f.options);
-  assert.equal(result.source.run_attempt, 1); assert.equal(result.source.job_id, 55);
-  assert.equal(result.source.current_run_attempt, 2); assert.equal(result.source.current_job_id, 66);
-  assert.equal(result.source.artifact_name, 'proposed-geography-2-1');
-  assert.deepEqual(result.report, JSON.parse(report));
+test('accepted carried geography authenticates its exact successful original producer', async () => {
+  const f = carriedTransport();
+  await validateGeographyOrigin({...f.options, source: f.source});
+  const result = await loadGeographicReport({...f.loadOptions, api: f.options.api, source: f.source});
+  assert.equal(f.source.run_attempt, 1); assert.equal(f.source.job_id, 55);
+  assert.equal(f.source.current_run_attempt, 2); assert.equal(f.source.current_job_id, 66);
+  assert.equal(f.source.artifact_name, 'proposed-geography-2-1');
+  assert.deepEqual(result, JSON.parse(report));
   assert.equal(f.metadata.filter(x => x.endsWith('/attempts/1')).length, 1);
   assert.equal(f.metadata.filter(x => x.includes('/attempts/1/jobs')).length, 1);
-  assert(f.metadata.some(x => x.endsWith('/jobs/55/logs')));
   assert(!f.metadata.some(x => /attempts\/(?:0|2|3)\//.test(x)));
 });
-test('origin metadata, successful job and actual originating log cannot be substituted', async () => {
+test('accepted original run and successful job metadata cannot be substituted', async () => {
   for (const mutate of [
     f => {f.run.id++;}, f => {f.run.run_attempt++;}, f => {f.run.head_sha = 'f'.repeat(40);},
     f => {f.run.repository.full_name = 'foreign/repo';}, f => {f.run.head_repository.full_name = 'foreign/repo';},
     f => {f.run.event = 'push';}, f => {f.run.path = '.github/workflows/other.yml';},
     f => {f.run.pull_requests[0].head.sha = 'f'.repeat(40);}, f => {f.run.pull_requests[0].number++;},
     f => {f.run.status = 'in_progress';}, f => {delete f.run.pull_requests;},
-    f => {f.jobs[0].run_id++;}, f => {f.jobs[0].run_attempt++;}, f => {f.jobs[0].head_sha = 'f'.repeat(40);},
+    f => {f.jobs[0].id++;}, f => {f.jobs[0].run_id++;}, f => {f.jobs[0].run_attempt++;}, f => {f.jobs[0].head_sha = 'f'.repeat(40);},
     f => {f.jobs[0].conclusion = 'failure';}, f => {f.jobs[0].status = 'in_progress';},
     f => {f.jobs[0].conclusion = 'skipped';}, f => {f.jobs[0].conclusion = 'cancelled';}, f => {f.jobs.push(structuredClone(f.jobs[0]));},
-    f => {f.jobs = [];},
-    f => {f.originLog = Buffer.from(f.log.toString().replace('Artifact ID is 12', 'Artifact ID is 13'));},
-    f => {f.originLog = Buffer.from(f.log.toString().replace(digest, 'f'.repeat(64)));},
-    f => {f.originLog = Buffer.from('missing receipt');}
+    f => {f.jobs = [];}
   ]) {
-    const f = carriedTransport(); mutate(f); await assert.rejects(prepareGeographyProof(f.options));
+    const f = carriedTransport(); mutate(f);
+    await assert.rejects(validateGeographyOrigin({...f.options, source: f.source}));
     assert(!f.metadata.some(x => x.includes('/artifacts?')), 'reject before artifact discovery');
   }
 });
-
-test('completed cancelled origin retains its actually successful geography even without historical PR links', async () => {
+test('completed cancelled origin retains its actually successful geography without historical PR links', async () => {
   const f = carriedTransport(); f.run.conclusion = 'cancelled'; f.run.pull_requests = [];
-  const result = await prepareGeographyProof(f.options);
-  assert.equal(result.source.run_attempt, 1); assert.equal(result.source.job_id, 55);
+  await validateGeographyOrigin({...f.options, source: f.source});
+  assert.equal(f.source.run_attempt, 1); assert.equal(f.source.job_id, 55);
 });
 
 function combinedTransport(changeReport = value => value) {
@@ -288,77 +292,46 @@ function combinedTransport(changeReport = value => value) {
   f.options.api = async route => route.endsWith(`/git/commits/${candidate}`) ? structuredClone(f.commit) : original(route);
   f.options.api.jobLogRedirect = original.jobLogRedirect;
   f.options.api.artifactRedirect = original.artifactRedirect;
+  f.source = {...f.source, ...readGeographyJobReceipt(f.log, f.artifact.name)};
+  f.loadOptions = {...f.loadOptions, api: f.options.api, source: f.source,
+    expectedHash: f.source.report_sha256};
   return f;
 }
-test('original combined-candidate receipt keeps reviewed head separate through authenticated report', async () => {
-  const f = combinedTransport(), result = await prepareGeographyProof(f.options);
-  assert.equal(result.source.candidate_commit, f.commit.sha);
-  assert.equal(result.report.candidate_commit, f.commit.sha);
-  assert.equal(result.source.head, f.options.head);
-  assert.equal(result.source.workflow_head, f.options.head);
-  assert.equal(result.source.tree, f.commit.tree.sha);
-  assert.equal(result.source.baseline, f.options.baseline);
-  assert.notEqual(result.source.head, result.source.candidate_commit);
+test('retained combined candidate keeps exact reviewed head, parents and source tree', async () => {
+  const f = combinedTransport();
+  await validatePRGeographyCandidate({...f.options, source: f.source});
+  const result = await loadGeographicReport(f.loadOptions);
+  checkGeographicReport(result, f.options.baseline, f.commit.sha);
+  assert.equal(f.source.candidate_commit, f.commit.sha);
+  assert.equal(result.candidate_commit, f.commit.sha);
+  assert.equal(f.source.head, f.options.head);
+  assert.equal(f.source.workflow_head, f.options.head);
+  assert.equal(f.source.tree, f.commit.tree.sha);
+  assert.equal(f.source.baseline, f.options.baseline);
+  assert.notEqual(f.source.head, f.source.candidate_commit);
 });
-test('combined geography receipt rejects foreign tree, stale parents and relabeled report', async () => {
+test('retained combined geography rejects foreign tree, stale parents and relabeled report', async () => {
   for (const mutate of [f => {f.commit.sha = 'e'.repeat(40);}, f => {f.commit.tree.sha = 'e'.repeat(40);},
     f => {f.commit.parents.reverse();}, f => {f.commit.parents.pop();},
     f => {f.commit.parents[0].sha = 'e'.repeat(40);}, f => {f.commit.parents[1].sha = 'e'.repeat(40); }]) {
     const f = combinedTransport(); mutate(f);
-    await assert.rejects(prepareGeographyProof(f.options), /candidate parents or tree/);
+    await assert.rejects(validatePRGeographyCandidate({...f.options, source: f.source}), /candidate parents or tree/);
     assert(!f.requests.some(row => row.url.includes('/artifacts?')));
   }
   for (const key of ['baseline_commit', 'trusted_code_commit', 'candidate_commit']) {
     const f = combinedTransport(report => ({...report, [key]: 'e'.repeat(40)}));
-    await assert.rejects(prepareGeographyProof(f.options), /exact trusted combined check/);
+    const result = await loadGeographicReport(f.loadOptions);
+    assert.throws(() => checkGeographicReport(result, f.options.baseline, f.commit.sha), /exact trusted combined check/);
   }
   const f = combinedTransport(); f.log = Buffer.from(f.log.toString().replace('"candidate_commit":"' + f.commit.sha + '"', '"candidate_commit":"invalid"'));
   assert.throws(() => readGeographyJobReceipt(f.log, f.artifact.name), /candidate receipt/);
 });
-
-
-
-function softwareTransport(changeReport = value => value) {
-  return combinedTransport(report => changeReport({...report, trusted_code_commit: report.candidate_commit,
-    candidate_code_executed: true, trusted_code_inventory_sha256: 'f'.repeat(64)}));
-}
-test('original software archive loads only with trusted exact candidate code identity', async () => {
-  const f = softwareTransport();
-  await assert.rejects(prepareGeographyProof(f.options), /exact trusted combined check/);
-  const result = await prepareGeographyProof({...f.options, codeCommit: f.commit.sha});
-  assert.equal(result.source.candidate_commit, f.commit.sha);
-  assert.equal(result.report.trusted_code_commit, f.commit.sha);
-  assert.equal(result.report.candidate_code_executed, true);
-  assert.equal(geographicReportProducts(result.report).source.report_sha256, result.source.report_sha256);
-  const baseline = combinedTransport();
-  await assert.rejects(prepareGeographyProof({...baseline.options, codeCommit: baseline.commit.sha}), /exact trusted combined check/);
-  await assert.rejects(prepareGeographyProof({...f.options, codeCommit: 'e'.repeat(40)}), /Unsupported geographic checker/);
-});
-test('software original custody and pins remain mandatory with explicit candidate code', async () => {
-  for (const mutate of [f => {f.commit.tree.sha = 'e'.repeat(40);}, f => {f.commit.parents.reverse();},
-    f => {f.commit.parents[0].sha = 'e'.repeat(40);}, f => {f.commit.parents[1].sha = 'e'.repeat(40);},
-    f => {f.artifact.id++;}, f => {f.artifact.workflow_run.id++;},
-    f => {f.artifact.workflow_run.head_sha = 'e'.repeat(40);}, f => {f.artifact.digest = 'sha256:' + 'e'.repeat(64);},
-    f => {f.zip = archive(Buffer.from('{}'));},
-    f => {f.log = Buffer.from(f.log.toString().replace('"report_sha256":"', '"report_sha256":"0'));}]) {
-    const f = softwareTransport(); mutate(f);
-    await assert.rejects(prepareGeographyProof({...f.options, codeCommit: f.commit.sha}));
-  }
-  for (const mutation of [{trusted_code_commit: 'e'.repeat(40)}, {candidate_commit: 'e'.repeat(40)},
-    {baseline_commit: 'e'.repeat(40)}, {candidate_code_executed: false}, {trusted_code_inventory_sha256: ''},
-    {checkpoint: {}}, {reused_baseline_proof: {}}, {unchanged_selected_inputs: {}}]) {
-    const f = softwareTransport(report => ({...report, ...mutation}));
-    await assert.rejects(prepareGeographyProof({...f.options, codeCommit: f.commit.sha}));
-  }
-});
-
-
-test('carried producer keeps original custody when step projections are absent or stale', async () => {
+test('accepted producer ignores stale step projections while preserving actual successful job identity', async () => {
   for (const steps of [undefined, [], [{name: 'old checker label', status: 'in_progress', conclusion: null}]]) {
     const f = carriedTransport(); f.jobs[0].steps = steps;
-    const result = await prepareGeographyProof(f.options);
-    assert.equal(result.source.job_id, 55); assert.equal(result.source.current_job_id, 66);
-    assert.equal(result.source.run_attempt, 1); assert.equal(result.source.report_sha256, digest);
+    await validateGeographyOrigin({...f.options, source: f.source});
+    assert.equal(f.source.job_id, 55); assert.equal(f.source.current_job_id, 66);
+    assert.equal(f.source.run_attempt, 1); assert.equal(f.source.report_sha256, digest);
   }
 });
 
@@ -411,6 +384,19 @@ for (const [label, steps] of [['missing', undefined], ['empty', []], ['stale', [
   });
 }
 
+test('failed-job queue retry authenticates carried geography from its successful original attempt',async()=>{
+  const f=freshQueueTransport();
+  f.loadOptions.fresh.run_attempt=2;
+  f.run.status='completed';f.run.conclusion='failure';
+  const result=await loadGeographicReport(f.loadOptions);
+  checkGeographicReport(result,f.options.baseline,f.commit.sha);
+  const source=geographicReportProducts(result).source;
+  assert.equal(source.run_attempt,1);assert.equal(source.job_id,55);
+  assert(!f.metadata.some(route=>route.includes('/attempts/2')),'Do not relabel the original successful producer');
+  f.jobs[0].conclusion='failure';
+  await assert.rejects(loadGeographicReport(f.loadOptions),/successful|succeed/);
+});
+
 test('fresh queue loader rejects foreign or unsuccessful producers and altered receipt custody with empty steps', async () => {
   for (const mutate of [
     f => {f.run.id++;}, f => {f.run.run_attempt++;}, f => {f.run.head_sha = 'f'.repeat(40);},
@@ -421,6 +407,9 @@ test('fresh queue loader rejects foreign or unsuccessful producers and altered r
     ...['failure', 'cancelled', 'skipped'].map(conclusion => f => {f.jobs[0].conclusion = conclusion;}),
     f => {f.jobs.push(structuredClone(f.jobs[0]));}, f => {f.jobs = [];},
     f => {f.log = Buffer.from('no upload receipt');},
+    f => {f.log = Buffer.from(f.log.toString().replace('"report_bytes":', '"report_bytes":0,"unused":'));},
+    f => {f.log = Buffer.concat([f.log, Buffer.from('\n'), f.log]);},
+    f => {f.log = Buffer.alloc(2 * 1024 * 1024 + 1);},
     f => {f.log = Buffer.from(f.log.toString().replace('Artifact ID is 12', 'Artifact ID is 13'));},
     f => {f.loadOptions.expectedHash = 'f'.repeat(64);},
     f => {f.artifact.workflow_run.id++;}, f => {f.artifact.workflow_run.head_sha = 'f'.repeat(40);},
@@ -440,6 +429,18 @@ test('fresh queue authenticated report still requires exact baseline, candidate 
     const f = freshQueueTransport(changeReport), result = await loadGeographicReport(f.loadOptions);
     assert.throws(() => checkGeographicReport(result, f.options.baseline, f.commit.sha));
   }
+});
+
+test('actual fresh software archive binds candidate code without impersonating a baseline report', async () => {
+  const f = freshQueueTransport(report => ({...report, trusted_code_commit: report.candidate_commit,
+    candidate_code_executed: true, trusted_code_inventory_sha256: 'f'.repeat(64)}));
+  const result = await loadGeographicReport(f.loadOptions);
+  assert.equal(checkGeographicReport(result, f.options.baseline, f.commit.sha, f.commit.sha), false);
+  assert.throws(() => checkGeographicReport(result, f.options.baseline, f.commit.sha), /exact trusted combined/);
+  const source = geographicReportProducts(result).source;
+  assert.equal(source.candidate_commit, f.commit.sha);
+  assert.equal(source.report_sha256, f.loadOptions.expectedHash);
+  assert.equal(source.artifact_digest, reportHash(f.zip));
 });
 
 

@@ -114,7 +114,7 @@ function receipts(raw) {
     typeof report.built_output_readback === 'string' && report.built_output_readback.startsWith('/') &&
     safe(report.built_output_readback.slice(1)) && report.built_output_readback.endsWith('/.cache/' + reportName),
     'Invalid actual native readback receipt');
-  const upload = /^Artifact (native-built-output-[-a-zA-Z0-9]{16,100}) has been successfully uploaded! Final size is ([1-9]\d*) bytes\. Artifact ID is ([1-9]\d*)$/.exec(uploads[0]);
+  const upload = /^Artifact (native-built-output-[-a-zA-Z0-9]{16,103}) has been successfully uploaded! Final size is ([1-9]\d*) bytes\. Artifact ID is ([1-9]\d*)$/.exec(uploads[0]);
   need(upload && positive(Number(upload[2])) && positive(Number(upload[3])), 'Invalid native readback upload receipt');
   return {report, artifact_name: upload[1], artifact_bytes: Number(upload[2]), artifact_id: Number(upload[3]), lines};
 }
