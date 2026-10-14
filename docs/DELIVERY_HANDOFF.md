@@ -406,3 +406,85 @@ destination rather than replacing an existing completed product.
 
 Standalone preparation retains its existing receipt/configuration contract.
 Published legacy receipts remain supported by their existing consumers.
+
+## Reusable source and modern native entries
+
+The following entries replace per-cohort author programs. Unlike the metadata
+phases above, `source` performs the existing source qualification and
+`native-authority` executes the existing modern native constructor. Neither
+changes the selected release, publishes a source approval, establishes current
+owner-zero, or replaces independent scientific review and the final queue.
+Archived original programs and receipts are preserved unchanged.
+
+### Source cohorts using the retained Indonesia method
+
+`node scripts/prepare-delivery-handoff.mjs source CONFIG DESTINATION [--resume]`
+uses `scripts/qualify-source-cohort.py`; it does not generate a new Python
+program. This is the retained Indonesia nine-family source method, **not** a
+universal country classifier. Its complete IDN/MYS/PNG/TLS competitor-family
+roster and native grid remain fixed. A different scientific method requires
+separate review, rather than an arbitrary smaller family list in configuration.
+
+The version-1 config contains `source`, `runtime_inventory`,
+`processing_allowance` and `preparation_allowance`. The two allowances contain
+positive `phaseBytes`/`rssBytes`; fresh resource admission can refuse them.
+`source` supplies exact scientific/current Git commits, complete whole-file
+input pins and fixed-role paths; all target owner/ID/name/source-index/parent
+and original metadata expectations; exact candidate-selector counts and its
+whole pin; a retained physical-reproducer pin; resource limits and expected
+runtime versions. The helper validates the complete source reconstruction,
+lineage, native-centre membership and competing source/country witnesses.
+Original topology/identity/geometry refusals and physical holds remain.
+
+`runtime_inventory` names `python` and `files`, using absolute installed paths,
+whole byte counts and SHA-256 hashes. The interpreter must be in that inventory.
+Its configured virtual-environment path is retained while resolved file identity
+is verified. Loaded file-backed Python modules and bundled scientific libraries
+must be covered by the admitted inventory. This is not a hermetic OS-loader or
+system-library closure. Keep this environment-specific input private and reuse
+it only while the environment is unchanged; it is not a new per-cohort program.
+
+`source` invokes the shared probe in fresh private staging, validates its complete
+five-product inventory, then uses the existing immutable publication. Recorded
+product links name the final destination, never the temporary staging directory.
+Failure publishes no final output. The outputs are original-stage inputs,
+cohort intervals/configuration, source qualification and execution receipt.
+They retain source-only limits: successful source support is not physical or
+native qualification. Checks are cooperative input/feature/time/output bounds;
+no hard deadline or process-tree containment is claimed.
+
+Explicit `--resume` verifies the complete output inventory, each whole product,
+its execution/configuration binding, original immutable inputs and unchanged
+shared entry/probe bytes. It reuses those original observations without rerunning
+the source operator; changed or partial output is refused. Resume is custody
+verification, not another scientific qualification or approval.
+
+A replay can use a pinned `cohort-intervals-v1` retained cell set when the original
+private `candidate-rows-v1` selector bytes are unavailable. The input records must
+say which format was consumed. Equivalent cells/results do not establish the
+original selector's byte identity, and new runtime/timing/path observations must
+not replace the historical ones.
+
+### Modern native authority
+
+`node scripts/prepare-delivery-handoff.mjs native-authority CONFIG DESTINATION [--resume]`
+accepts exactly `version: 1`, `preparation_allowance`, `source_evidence` and
+`native_patch`. The last two are exact `{commit, path}` locators, without
+handwritten derived descriptors. It reuses `deliveryAuthorityReader` and
+`constructOriginalAuthority`, including their existing admission, source/physical
+joins and native coverage rules. It does not run the source or GSHHG producers.
+
+Outputs are the original rule preimage, authority binding and
+`constructor-result.json` containing every component and literal ledger row.
+The result can be the modern composition input; it does not require an inline
+constructor wrapper, separately assembled registry or copied physical/comparison
+program. Current elapsed time, charged phase, process lifetime peak and native
+cell count are emitted as observations, separately from deterministic products.
+Native `--resume` repeats the existing qualification and refuses any changed
+products/binding; it does not manufacture identical timing observations.
+
+Use the shared modern `compose` and `finalize` entries after committing the actual
+constructor outputs. This removes per-delivery executable creation; it does not
+retroactively change an earlier mixed-code PR's CI profile. Source-only completion,
+actual selected-consumer conservation, final package output and delivery timing
+remain distinct claims.
