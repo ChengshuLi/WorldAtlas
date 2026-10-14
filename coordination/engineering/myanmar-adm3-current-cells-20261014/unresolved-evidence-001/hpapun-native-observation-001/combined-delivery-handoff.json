@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "status": "18-constructor-qualified-not-current-owner-zero-or-accepted",
+  "candidate_cells": 18,
+  "group": {
+    "rule_preimage": {
+      "commit": "695146c62adfa07b67b5ce6332f62ecb45f6d3c1",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/hpapun-authority-001/original-rule-preimage.json",
+      "mode": "100644",
+      "git_blob_oid": "97b07eb8bf0777c2772ea09270fbf8b5fba07266",
+      "bytes": 789,
+      "sha256": "9242f4334a48d57be374bb59f51e5bccd10bea91fff86d158d6c8e231dc4957f"
+    },
+    "source_authority": {
+      "commit": "695146c62adfa07b67b5ce6332f62ecb45f6d3c1",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/hpapun-authority-001/authority-binding.json",
+      "mode": "100644",
+      "git_blob_oid": "4f048629c400783580d7b962df9ad26f2ce170f0",
+      "bytes": 792,
+      "sha256": "f1c15985ee499c7d5a20c3082f1fddbcbb343272f08d7db3a0872ad47836bcc1"
+    },
+    "ledger": {
+      "commit": "695146c62adfa07b67b5ce6332f62ecb45f6d3c1",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/hpapun-authority-001/constructor-result.json",
+      "mode": "100644",
+      "git_blob_oid": "06eef1ac5924a7478888045410750052728c21f5",
+      "bytes": 7125,
+      "sha256": "6364ae4b16151f1bd704d9f5e4c70d7ecd61ff565baa649848fe2cf3a75ea268"
+    },
+    "native_patch": {
+      "commit": "c9c33c777bd01c5214a372ebc3718eed0aa10271",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/unresolved-evidence-001/hpapun/candidate-native-patch.json",
+      "mode": "100644",
+      "git_blob_oid": "1cca68a8e1aae060904d6a1b6d22547856a9a51e",
+      "bytes": 627,
+      "sha256": "37bd0d911ec3d203d1c164d6c1695c4505c3f34a2f51a5b1930022ce2cf53cea"
+    }
+  },
+  "held_border_cells": 1,
+  "review": "independent-result-review.json",
+  "delivery": "Root authorized inclusion in next Indonesia/Vietnam combined delivery; no separate tiny PR. Preserve actual accepted Myanmar3816 before cumulative composition.",
+  "restoration": "Use accepted finalizer consumed-role discovery. Restore only exact original absent read-role paths with their immutable bytes and issue-scoped authorization; do not invent aliases or replace original locators.",
+  "limits": [
+    "Original source/physical producers not replayed.",
+    "Current-owner-zero, cumulative conservation and final acceptance remain normal integration gates."
+  ]
+}
