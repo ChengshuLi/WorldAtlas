@@ -1,0 +1,34 @@
+import fs from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
+import {ImmutableReader,loadBaseSelection,loadNativeRowTable,acquireNativeRows} from '../../scripts/check-effective-geographic-regression.mjs';
+const base='aaad1215c1b215b415d219b682bc0ff0380d8c73',candidate=process.argv[2],prefix='coordination/engineering/myeik-native-followup-20261014/';
+const sha=x=>createHash('sha256').update(x).digest('hex'),start=Date.now();
+const qualification=JSON.parse(fs.readFileSync(new URL('source-qualification.json',import.meta.url)));
+const proposal=qualification.proposed_patch;
+const read=(ref,p)=>execFileSync('git',['show',ref+':'+p],{maxBuffer:32*1024*1024});
+const parse=(ref,p)=>JSON.parse(read(ref,p));
+const expand=rows=>new Map(rows.flatMap(row=>row.runs.flatMap(([a,b,o])=>Array.from({length:b-a},(_,i)=>[`${row.y}:${a+i}`,o]))));
+const expected=expand(proposal.rows),actualNew=parse(candidate,prefix+'evidence/native-patch.json');
+const compare=(a,b)=>a.size===b.size&&[...a].every(([c,o])=>b.get(c)===o);
+if(!compare(expected,expand(actualNew.rows)))throw Error('Candidate patch differs from independently qualified source cells');
+const reader=new ImmutableReader(process.cwd(),base,{allowance:{phaseBytes:1073741824,rssBytes:1610612736}}),selection=loadBaseSelection(reader);
+reader.phase();const table=loadNativeRowTable(selection),ys=proposal.rows.map(r=>r.y),current=acquireNativeRows(selection,table,ys);
+reader.phase();const oldSide=reader.json(selection.selection.additive_release.path,{expected:selection.selection.additive_release.sha256});
+const oldPin=oldSide.logical_asset_map.patch,oldPatch=reader.json(oldPin.path,{version:oldPin.commit,expected:oldPin.sha256});
+const oldLedgerPin=oldSide.logical_asset_map.ledger,oldLedger=reader.json(oldLedgerPin.path,{version:oldLedgerPin.commit,expected:oldLedgerPin.sha256});
+const old=expand(oldPatch.rows),patch=expand(parse(candidate,prefix+'patch.json').rows);
+let occupied=0,priorOverlap=0;
+for(let k=0;k<ys.length;k++)for(const[a,b,o]of proposal.rows[k].runs){
+ for(let i=current.offsets[k];i<current.offsets[k+1];i+=3)if(current.words[i+2])occupied+=Math.max(0,Math.min(b,current.words[i+1])-Math.max(a,current.words[i]));
+ for(let x=a;x<b;x++)if(old.has(`${ys[k]}:${x}`))priorOverlap++;
+}
+if(occupied||priorOverlap)throw Error('Nonzero current owner in proposed cell');
+const combined=new Map([...old,...expected]);if(!compare(combined,patch))throw Error('Cumulative exact cells differ');
+const candidateLedger=parse(candidate,prefix+'ledger.json'),newRows=new Map(candidateLedger.rows.map(row=>[row.component_id,row]));
+for(const row of oldLedger.rows)if(JSON.stringify(row)!==JSON.stringify(newRows.get(row.component_id)))throw Error('Prior ledger changed');
+const missing=new Map(expected);missing.delete(missing.keys().next().value);if(compare(expected,missing))throw Error('Missing-cell control ineffective');
+const wrongOwner=new Map(expected);wrongOwner.set(wrongOwner.keys().next().value,30149);if(compare(expected,wrongOwner))throw Error('Wrong-owner control ineffective');
+const result={version:1,base_commit:base,candidate_commit:execFileSync('git',['rev-parse',candidate],{encoding:'utf8'}).trim(),qualification_sha256:sha(fs.readFileSync(new URL('source-qualification.json',import.meta.url))),proposed_cells:expected.size,rows_checked:ys.length,occupied_base_cells:occupied,prior_additive_overlap_cells:priorOverlap,prior_additive_cells:old.size,cumulative_cells:patch.size,prior_ledger_rows_preserved:oldLedger.rows.length,candidate_ledger_rows:candidateLedger.rows.length,prior_ledger_bytewise_row_preservation:true,exact_patch_set_agreement:true,controls:{missing_cell_detected:true,wrong_owner_detected:true},selection:selection.selection,native_custody:current.custody,source_limits:'Cell conservation and unique retained source agreement are not border or regional semantic approval.',elapsed_seconds:(Date.now()-start)/1000,max_rss_bytes:process.resourceUsage().maxRSS*1024};
+fs.writeFileSync(new URL('ownership-review.json',import.meta.url),JSON.stringify(result,null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify({candidate:result.candidate_commit,proposed:expected.size,prior:old.size,cumulative:patch.size,rows:ys.length,occupied,priorOverlap,priorRows:oldLedger.rows.length,seconds:result.elapsed_seconds}));

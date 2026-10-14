@@ -1,0 +1,498 @@
+{
+  "version": 1,
+  "issue": 1874,
+  "lane": "engineering",
+  "worker_id": "01a138b7-fe9b-738a-9032-622cdf229023",
+  "subject_ids": [
+    "gb:MMR:ADM3:66882298B30308301468052",
+    "gb:MMR:ADM3:66882298B36911639137507",
+    "gb:MMR:ADM3:66882298B40667774005147"
+  ],
+  "subject_ids_sha256": "74905e0b94d448c78b8f1a7be311b832f7a3ad29426353b323a0e233ada0f024",
+  "baseline": {
+    "commit": "aaad1215c1b215b415d219b682bc0ff0380d8c73",
+    "files": [
+      {
+        "path": "data/ownership-selection.json",
+        "bytes": 1569,
+        "sha256": "d636f3ddb04fc3e4a8374d83465f037861b0f25be43a3162290922a1b3faed1b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "bytes": 403376,
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "bytes": 1396414,
+        "sha256": "57de50a588f418601412bb7a34cc2f43a3fd6d7d6f16635cb41b95e5ae505db6",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4205367,
+        "uncompressed_sha256": "94c0c9af839094257d13a6fe6590feddb2dcb04540d87e58b656c9f000fb92a2"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/ownership-binding.json",
+        "bytes": 3048,
+        "sha256": "b952192475435c8fbc74a84627994aff4f4e073c36c479d369554fc75251bc89",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-census-summary.json",
+        "bytes": 120963,
+        "sha256": "8a4a6792237259328e56e38d91d0cb22f977de4a35caf4781f0d605e3db1653d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-current-cell-work-queue-20261014/physical-unassigned-summary.json",
+        "bytes": 154672,
+        "sha256": "a82c56c1d92ff52c0b0e52c9bf329905a05bace4b6a27c12771509d419888501",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/gshhg-native-member-custody-20261007/results/member-index.json",
+        "bytes": 5821,
+        "sha256": "1fc10fa094ebd128f21d6440152d391cec879a2ec6ded9d665667f9e42513d12",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/transport-map.json",
+        "bytes": 56473,
+        "sha256": "644345be3d231431177c416b6ddbe3a1b2486597295af45fd5224857b5612d26",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/comparison.py",
+        "bytes": 9834,
+        "sha256": "f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/retained-geographic-sources/namibia/natural-earth-reference-countries.geojson.gz",
+        "bytes": 4719659,
+        "sha256": "7b631cc2986f597d3378b72d86c11d42b0ef843e130f9194ffdd2e52797da075",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 13287234,
+        "uncompressed_sha256": "239eec57ac17f100a11e2536cffc56752c318b50ae765b0918ff7aab4ce8f255"
+      },
+      {
+        "path": "scripts/reconcile-topology.py",
+        "bytes": 8419,
+        "sha256": "1739883a9ada57e346f12c009beb4c14091429e810ec7cc77f8b01e8bd3ae763",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {
+      "gb:MMR:ADM3:66882298B30308301468052": {
+        "version": 1,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B36911639137507": {
+        "version": 1,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      },
+      "gb:MMR:ADM3:66882298B40667774005147": {
+        "version": 1,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-MMR-ADM3-000.bin.gz",
+        "id_template": "gb:{shapeGroup}:{shapeType}:{shapeID}",
+        "properties": [
+          "shapeGroup",
+          "shapeType",
+          "shapeID"
+        ]
+      }
+    }
+  },
+  "sources": [
+    {
+      "id": "mmr-adm3",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/MMR/ADM3/geoBoundaries-MMR-ADM3_simplified.geojson",
+      "role": "Complete consumed township source and exact native identities",
+      "vintage": "2019 represented-date claim",
+      "retrieved_at": "2026-10-14",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 4.0"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Complete catalogue parts and whole product hash bound in source-evidence.json.",
+      "limit": "Reference township source does not override accepted country-border reconciliation or establish historical ownership.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "gshhg",
+      "url": "https://www.soest.hawaii.edu/pwessel/gshhg/",
+      "role": "Physical source hierarchy, separate from territorial ownership",
+      "vintage": "GSHHG2.3.7, heterogeneous observations",
+      "retrieved_at": "2026-10-14",
+      "license": {
+        "status": "redistributable",
+        "terms": "LGPL source terms retained in existing custody"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore original native member parts and source metadata using the retained member index and transport map. Physical reproduction reads and hash-authenticates every retained original part before bounded target interpretation.",
+      "limit": "Compact premerge evidence authenticates source indexes and new physical output, while the unchanged physical reproducer authenticates full original bytes. Physical-source coverage is not perfect current truth.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "natural-earth",
+      "url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "role": "Previously accepted reference country border used by topology reconciliation",
+      "vintage": "Retained original reference snapshot",
+      "retrieved_at": "2026-10-14",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public domain"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Use retained natural-earth-reference-countries.geojson.gz and original data/sources.json hash.",
+      "limit": "Competing administrative and reference-country evidence is retained; deferred Tanintharyi cells remain unresolved.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/myeik-native-followup-20261014/authority-binding.json",
+      "bytes": 701,
+      "sha256": "9923fec53efef1245c6f3e54ac2fbfeb1d7db1a56ae9d462fc59de58973767ff",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myeik-native-followup-20261014/authority-registry.json",
+      "bytes": 40781,
+      "sha256": "7b174f9a41e3cc07cff459e1bb42d80253c1b8bc0b038907e0f39b5293676121",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myeik-native-followup-20261014/evidence/native-patch.json",
+      "bytes": 13783,
+      "sha256": "4213dbfab15a773c4b05694730bc951a8841cfa08853b71f98f13d33505c8502",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myeik-native-followup-20261014/evidence/original-stage-inputs.json",
+      "bytes": 95691,
+      "sha256": "0f85cf24f67cb8b2eb1f885a980fa031634380ca6d3556a773288ba3436e3d8b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myeik-native-followup-20261014/evidence/physical-support.json",
+      "bytes": 367381,
+      "sha256": "def2ea75631ca38958d1453cca5eb27e3b6511b7cada681c00c9cda712e30a57",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myeik-native-followup-20261014/evidence/queue-disposition.json",
+      "bytes": 316735,
+      "sha256": "7d2226b8012e8fff567336304f1fbb3d0020b7ed96e79115acca0da06bf2643c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myeik-native-followup-20261014/evidence/selected-readback.json",
+      "bytes": 233,
+      "sha256": "b22f83a5cfe8ae969ed65c8f7e8fa97c4334b7b0905d5c5fe5b7fcb1668d9d5b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myeik-native-followup-20261014/independent-review/ownership-review.json",
+      "bytes": 7818,
+      "sha256": "d792f383b65f94dc9dd3ee26ae635e9abe431043f2e16aae55c14ad185733775",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myeik-native-followup-20261014/independent-review/source-qualification.json",
+      "bytes": 87038,
+      "sha256": "580cc8af4c1441982f898ed1556781653aaa21cffc8d9186af045476265e0ea1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myeik-native-followup-20261014/ledger.json",
+      "bytes": 1420024,
+      "sha256": "febc43f5daf537d81afffa897120c6212f434c8861fa78ed0dc820069585f2b9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myeik-native-followup-20261014/original-rule-preimage.json",
+      "bytes": 698,
+      "sha256": "b9bbbece0813469ebdb777d3b184adee53c6d9111f6f44dabb8855740f6b6cec",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myeik-native-followup-20261014/patch.json",
+      "bytes": 168907,
+      "sha256": "9d381879137c75da28275d7efb75fcb0ccb1d8469ed07878ba52ef0a98f8e110",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myeik-native-followup-20261014/runtime-envelope.json",
+      "bytes": 1381,
+      "sha256": "3b9e9802b4b8f446b168d81dcf615b9b7761d018a7495c6f9343225517bba78c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myeik-native-followup-20261014/selected-delivery-expectations.json",
+      "bytes": 40853,
+      "sha256": "060ac712aab6bb0f8ff8c4239d47bcd341ae28f7fc3a8905fbd6916a33b49629",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myeik-native-followup-20261014/selection-sidecar.json",
+      "bytes": 3359,
+      "sha256": "5741d0cd351c5eef4aac6726809269060d3baef443fab0f29452f7d79f9cee84",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myeik-native-followup-20261014/source-evidence.json",
+      "bytes": 8777,
+      "sha256": "7908ecc354b446d4fe9524489ac43f0c3c744be6c58b8ef33f8beae98b093ebf",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "bounded-source-native-followup",
+      "kind": "measurement",
+      "description": "Reuse accepted native source-target constructor and complete retained source families; exact queue interval extraction, current-owner subtraction, unchanged original GSHHG hierarchy interpretation, independent source and accepted-country-border checks. No source method or runtime code changes.",
+      "software": "Node24.19.0; Python3.12; Shapely2.1.2/GEOS3.13.1",
+      "units": "Native cells, exact half-open native row intervals, seconds; no physical-area inference"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "qualified_cells",
+      "value": 1109,
+      "unit": "native cells",
+      "vintage": "baseline",
+      "input_sha256": "d636f3ddb04fc3e4a8374d83465f037861b0f25be43a3162290922a1b3faed1b",
+      "evaluation_commit": "aaad1215c1b215b415d219b682bc0ff0380d8c73"
+    },
+    {
+      "id": "withheld_border_review_cells",
+      "value": 56,
+      "unit": "native cells",
+      "vintage": "baseline",
+      "input_sha256": "d636f3ddb04fc3e4a8374d83465f037861b0f25be43a3162290922a1b3faed1b",
+      "evaluation_commit": "aaad1215c1b215b415d219b682bc0ff0380d8c73"
+    },
+    {
+      "id": "withheld_source_conflict_cells",
+      "value": 5,
+      "unit": "native cells",
+      "vintage": "baseline",
+      "input_sha256": "d636f3ddb04fc3e4a8374d83465f037861b0f25be43a3162290922a1b3faed1b",
+      "evaluation_commit": "aaad1215c1b215b415d219b682bc0ff0380d8c73"
+    },
+    {
+      "id": "withheld_physical_interpretation_cells",
+      "value": 897,
+      "unit": "native cells",
+      "vintage": "baseline",
+      "input_sha256": "d636f3ddb04fc3e4a8374d83465f037861b0f25be43a3162290922a1b3faed1b",
+      "evaluation_commit": "aaad1215c1b215b415d219b682bc0ff0380d8c73"
+    },
+    {
+      "id": "qualified-owner-30185",
+      "value": 1055,
+      "unit": "native cells",
+      "vintage": "baseline",
+      "input_sha256": "d636f3ddb04fc3e4a8374d83465f037861b0f25be43a3162290922a1b3faed1b",
+      "evaluation_commit": "aaad1215c1b215b415d219b682bc0ff0380d8c73"
+    },
+    {
+      "id": "qualified-owner-30179",
+      "value": 54,
+      "unit": "native cells",
+      "vintage": "baseline",
+      "input_sha256": "d636f3ddb04fc3e4a8374d83465f037861b0f25be43a3162290922a1b3faed1b",
+      "evaluation_commit": "aaad1215c1b215b415d219b682bc0ff0380d8c73"
+    },
+    {
+      "id": "selected-readback-cumulative_native_cells",
+      "value": 16378,
+      "unit": "native cells",
+      "vintage": "baseline",
+      "input_sha256": "d636f3ddb04fc3e4a8374d83465f037861b0f25be43a3162290922a1b3faed1b",
+      "evaluation_commit": "aaad1215c1b215b415d219b682bc0ff0380d8c73"
+    },
+    {
+      "id": "selected-readback-prior_cells",
+      "value": 15269,
+      "unit": "native cells",
+      "vintage": "baseline",
+      "input_sha256": "d636f3ddb04fc3e4a8374d83465f037861b0f25be43a3162290922a1b3faed1b",
+      "evaluation_commit": "aaad1215c1b215b415d219b682bc0ff0380d8c73"
+    },
+    {
+      "id": "selected-readback-elapsed_seconds",
+      "value": 98.093,
+      "unit": "seconds",
+      "vintage": "baseline",
+      "input_sha256": "d636f3ddb04fc3e4a8374d83465f037861b0f25be43a3162290922a1b3faed1b",
+      "evaluation_commit": "aaad1215c1b215b415d219b682bc0ff0380d8c73"
+    },
+    {
+      "id": "selected-readback-max_rss",
+      "value": 436318208,
+      "unit": "bytes",
+      "vintage": "baseline",
+      "input_sha256": "d636f3ddb04fc3e4a8374d83465f037861b0f25be43a3162290922a1b3faed1b",
+      "evaluation_commit": "aaad1215c1b215b415d219b682bc0ff0380d8c73"
+    },
+    {
+      "id": "physical-support-elapsed_seconds",
+      "value": 5.520373559993459,
+      "unit": "seconds",
+      "vintage": "baseline",
+      "input_sha256": "d636f3ddb04fc3e4a8374d83465f037861b0f25be43a3162290922a1b3faed1b",
+      "evaluation_commit": "aaad1215c1b215b415d219b682bc0ff0380d8c73"
+    },
+    {
+      "id": "physical-support-maximum_rss_kib",
+      "value": 887716,
+      "unit": "KiB",
+      "vintage": "baseline",
+      "input_sha256": "d636f3ddb04fc3e4a8374d83465f037861b0f25be43a3162290922a1b3faed1b",
+      "evaluation_commit": "aaad1215c1b215b415d219b682bc0ff0380d8c73"
+    },
+    {
+      "id": "source-qualification-candidate_cells",
+      "value": 2067,
+      "unit": "native cells",
+      "vintage": "baseline",
+      "input_sha256": "d636f3ddb04fc3e4a8374d83465f037861b0f25be43a3162290922a1b3faed1b",
+      "evaluation_commit": "aaad1215c1b215b415d219b682bc0ff0380d8c73"
+    },
+    {
+      "id": "source-qualification-source_membership_mismatch_cells",
+      "value": 0,
+      "unit": "native cells",
+      "vintage": "baseline",
+      "input_sha256": "d636f3ddb04fc3e4a8374d83465f037861b0f25be43a3162290922a1b3faed1b",
+      "evaluation_commit": "aaad1215c1b215b415d219b682bc0ff0380d8c73"
+    },
+    {
+      "id": "source-qualification-recommended_proposed_cells",
+      "value": 1109,
+      "unit": "native cells",
+      "vintage": "baseline",
+      "input_sha256": "d636f3ddb04fc3e4a8374d83465f037861b0f25be43a3162290922a1b3faed1b",
+      "evaluation_commit": "aaad1215c1b215b415d219b682bc0ff0380d8c73"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "qualified_cells",
+      "path": "coordination/engineering/myeik-native-followup-20261014/evidence/queue-disposition.json",
+      "json_pointer": "/territorial_review/qualified_cells"
+    },
+    {
+      "metric_id": "withheld_border_review_cells",
+      "path": "coordination/engineering/myeik-native-followup-20261014/evidence/queue-disposition.json",
+      "json_pointer": "/territorial_review/withheld_border_review_cells"
+    },
+    {
+      "metric_id": "withheld_source_conflict_cells",
+      "path": "coordination/engineering/myeik-native-followup-20261014/evidence/queue-disposition.json",
+      "json_pointer": "/territorial_review/withheld_source_conflict_cells"
+    },
+    {
+      "metric_id": "withheld_physical_interpretation_cells",
+      "path": "coordination/engineering/myeik-native-followup-20261014/evidence/queue-disposition.json",
+      "json_pointer": "/territorial_review/withheld_physical_interpretation_cells"
+    },
+    {
+      "metric_id": "qualified-owner-30185",
+      "path": "coordination/engineering/myeik-native-followup-20261014/evidence/queue-disposition.json",
+      "json_pointer": "/territorial_review/qualified_by_owner/30185"
+    },
+    {
+      "metric_id": "qualified-owner-30179",
+      "path": "coordination/engineering/myeik-native-followup-20261014/evidence/queue-disposition.json",
+      "json_pointer": "/territorial_review/qualified_by_owner/30179"
+    },
+    {
+      "metric_id": "selected-readback-cumulative_native_cells",
+      "path": "coordination/engineering/myeik-native-followup-20261014/evidence/selected-readback.json",
+      "json_pointer": "/cumulative_native_cells"
+    },
+    {
+      "metric_id": "selected-readback-prior_cells",
+      "path": "coordination/engineering/myeik-native-followup-20261014/evidence/selected-readback.json",
+      "json_pointer": "/prior_cells"
+    },
+    {
+      "metric_id": "selected-readback-elapsed_seconds",
+      "path": "coordination/engineering/myeik-native-followup-20261014/evidence/selected-readback.json",
+      "json_pointer": "/elapsed_seconds"
+    },
+    {
+      "metric_id": "selected-readback-max_rss",
+      "path": "coordination/engineering/myeik-native-followup-20261014/evidence/selected-readback.json",
+      "json_pointer": "/max_rss"
+    },
+    {
+      "metric_id": "physical-support-elapsed_seconds",
+      "path": "coordination/engineering/myeik-native-followup-20261014/evidence/physical-support.json",
+      "json_pointer": "/elapsed_seconds"
+    },
+    {
+      "metric_id": "physical-support-maximum_rss_kib",
+      "path": "coordination/engineering/myeik-native-followup-20261014/evidence/physical-support.json",
+      "json_pointer": "/maximum_rss_kib"
+    },
+    {
+      "metric_id": "source-qualification-candidate_cells",
+      "path": "coordination/engineering/myeik-native-followup-20261014/independent-review/source-qualification.json",
+      "json_pointer": "/candidate_cells"
+    },
+    {
+      "metric_id": "source-qualification-source_membership_mismatch_cells",
+      "path": "coordination/engineering/myeik-native-followup-20261014/independent-review/source-qualification.json",
+      "json_pointer": "/source_membership_mismatch_cells"
+    },
+    {
+      "metric_id": "source-qualification-recommended_proposed_cells",
+      "path": "coordination/engineering/myeik-native-followup-20261014/independent-review/source-qualification.json",
+      "json_pointer": "/recommended_proposed_cells"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "Only Palaw and Myeik source-qualified currently unassigned cells are proposed; all Tanintharyi border candidates, mapped-source conflicts and physical-interpretation candidates remain unassigned.",
+      "status": "supported",
+      "source_ids": [
+        "mmr-adm3",
+        "gshhg",
+        "natural-earth"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node coordination/engineering/myeik-native-followup-20261014/reproduce.mjs",
+    "node --test test/source-target-native-delivery.test.mjs"
+  ]
+}
