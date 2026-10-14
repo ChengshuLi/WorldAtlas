@@ -45,8 +45,8 @@ when needed. A `gh run watch` timeout, interrupted local process or disconnected
 terminal does not cancel the workflow. Resume `gh run view`/`gh run watch` for the
 same execution rather than dispatching another request. If a submission response
 is uncertain, reconcile existing executions and current PR state first; never
-blindly redispatch. Do not use workflow reruns to bypass a settled failure's
-preparation or exact-candidate checks.
+blindly redispatch. Reruns retain the original preparation and exact candidate;
+they cannot bypass missing or failed candidate checks.
 
 Read the workflow jobs, logs and retained result comment/artifact for diagnostics.
 A green workflow, candidate SHA or bot comment alone does not establish a merge.
@@ -56,14 +56,23 @@ execution URL in the issue checkpoint. Unavailable or mismatched actual PR state
 is unresolved, even if a local observer or result comment reported success.
 
 For a settled failed or cancelled execution, inspect its cause and actual PR state.
-Only after confirming the PR remains open at the same reviewed head and no prior
-execution remains live or unresolved may a corrected retry use a fresh request ID
-and a new dispatch. Changed heads or reviewed bytes require fresh substantive
-review. A pending run, uncertain dispatch or missing result is not a settled
-failure. There is no automatic redispatch, queue-capacity engine or cross-run
-recovery daemon; existing API quota/deadline guards still apply within the workflow.
-Native provider queueing and runner availability are external limits; overflow and
-provider failures remain visible and require this same reconciliation.
+If preparation succeeded, the PR remains open at its same reviewed head, main is
+still the tested base and no execution remains live or unresolved, retry the failed
+jobs of that execution:
+
+```sh
+gh run rerun RUN-ID --repo ChengshuLi/WorldAtlas --failed
+```
+
+Successful jobs and their original artifacts remain valid for that exact candidate,
+even after its disposable branch is cleaned up. The final job still rechecks the
+immutable candidate's parents/tree, current main/head, review, checks and original
+successful geographic producer. Artifact uploads are attempt-qualified; no prior
+evidence is overwritten. Use a fresh request and dispatch if preparation failed,
+main/head changed or the execution predates attempt-qualified uploads. Changed
+reviewed bytes need fresh substantive review. A pending run, uncertain dispatch or
+missing result is not a settled failure. No new recovery daemon is involved;
+existing API quota/deadline guards and native provider queueing still apply.
 
 ## Release the owned workspace
 

@@ -342,9 +342,11 @@ then independently verify actual PR merged state, exact head and squash commit.
 An interrupted local wait does not end a workflow. An uncertain dispatch, missing
 run on a bounded history page, pending state or missing receipt never authorizes a
 blind duplicate. After a settled failed/cancelled execution, reconcile the PR and
-all earlier unresolved executions; if it remains open at its unchanged reviewed
-head, address the cause and submit a fresh request. Changed reviewed bytes require
-new substantive review. See [MERGE_QUEUE_CLIENT.md](MERGE_QUEUE_CLIENT.md).
+all earlier unresolved executions. With successful preparation and unchanged
+reviewed head/tested main, address the cause and rerun failed jobs of that same
+execution; successful original jobs need no repetition. Failed preparation or a
+changed base requires a fresh request. Changed reviewed bytes require new
+substantive review. See [MERGE_QUEUE_CLIENT.md](MERGE_QUEUE_CLIENT.md).
 
 ### Migrate existing requests safely
 
@@ -459,8 +461,9 @@ quota state and bounded recovery allocation. This is best-effort cleanup, not a
 guarantee against concurrent quota depletion or a slow provider.
 
 Inspect the same Actions execution rather than canceling or duplicating a long
-job. Reconcile terminal failure and actual PR state before a fresh request;
-never rerun just the final job to bypass candidate preparation or checks. Local
+job. Reconcile terminal failure and actual PR state before retrying; retained
+successful preparation/tests of the exact candidate can support a failed-job
+rerun, but rerunning only the final job cannot bypass missing or failed checks. Local
 mocked HTTP controls establish rejection and cleanup behavior, not hosted quota
 recovery or a system-wide capacity guarantee.
 

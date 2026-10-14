@@ -299,6 +299,46 @@ test('original discovery ignores observer trees but refuses changed build inputs
   }
 });
 
+test('failed-job retry discovers the successful original package attempt without relabeling its producer',async t=>{
+  const f=originalDiscovery(t,{worker:true}),old=globalThis.fetch;t.after(()=>{globalThis.fetch=old;});
+  globalThis.fetch=async()=>new Response(f.log());
+  const originRun=structuredClone(f.run),baseAPI=f.api;
+  originRun.conclusion='failure';f.run.run_attempt=3;f.run.conclusion='success';
+  const api=async route=>{
+    assert(!route.includes('/attempts/3/jobs'),'Do not use relabeled carried jobs');
+    if(route.endsWith('/attempts/2'))return structuredClone(originRun);
+    return baseAPI(route);
+  };
+  api.jobLogRedirect=baseAPI.jobLogRedirect;
+  const found=await findOriginalPackage({api,repo:f.repo,current:f.s.snapshot(),originalRunId:17});
+  assert.equal(found.origin.run_attempt,2);assert.equal(found.origin.job_id,29);
+  assert.equal(found.origin.artifact_name,'cloudflare-package-output-17-2');
+  f.job.conclusion='failure';
+  assert.equal(await findOriginalPackage({api,repo:f.repo,current:f.s.snapshot(),originalRunId:17}),null);
+});
+
+test('unproved newer package cannot replace the authenticated older successful output',async t=>{
+  const f=originalDiscovery(t,{worker:true}),old=globalThis.fetch,oldWarn=console.warn;
+  t.after(()=>{globalThis.fetch=old;console.warn=oldWarn;});
+  globalThis.fetch=async()=>new Response(f.log());
+  const originRun=structuredClone(f.run),baseAPI=f.api,warnings=[];
+  originRun.conclusion='failure';f.run.run_attempt=3;console.warn=message=>warnings.push(message);
+  const partial={...f.artifact,id:42,name:'cloudflare-package-output-17-3'};
+  const newJob={...structuredClone(f.job),id:30,run_attempt:3};
+  const api=async route=>{
+    if(route.includes('/artifacts?'))return {total_count:2,artifacts:[partial,f.artifact]};
+    if(route.includes('/attempts/3/jobs'))return {jobs:[newJob]};
+    if(route.endsWith('/attempts/3'))return structuredClone(f.run);
+    if(route.endsWith('/attempts/2'))return structuredClone(originRun);
+    if(route.endsWith('/jobs/30'))return newJob;
+    return baseAPI(route);
+  };
+  api.jobLogRedirect=baseAPI.jobLogRedirect;
+  const found=await findOriginalPackage({api,repo:f.repo,current:f.s.snapshot(),originalRunId:17});
+  assert.equal(found.origin.run_attempt,2);assert.equal(found.origin.artifact_id,41);
+  assert(warnings.some(message=>message.includes('producer 17/3')),'The newer artifact must actually fail original receipt authentication');
+});
+
 test('final-worker original binds candidate source separately from successful producer workflow SHA',async t=>{
   const old=globalThis.fetch;t.after(()=>{globalThis.fetch=old;});
   const f=original(t,{worker:true});f.run.conclusion='failure';
@@ -348,6 +388,7 @@ test('bounded discovery checks both producer workflows and distinct runs sharing
   console.warn=message=>warnings.push(message);t.after(()=>{console.warn=oldWarn;});
   const api=async route=>{
     if(route.includes('/actions/workflows/worker-merge.yml/')){workerReads++;return {workflow_runs:[rejected,rejected,{...f.run,run_attempt:3},f.run]};}
+    if(route.includes('/actions/runs/18/artifacts?'))return {total_count:1,artifacts:[{...f.artifact,name:'cloudflare-package-output-18-2'}]};
     if(route.includes('/actions/runs/18/attempts/2/jobs')){rejectedReads++;throw Error('Authority unavailable https://fixture.invalid/private?signature=secret');}
     if(route.includes('/actions/runs/17/attempts/3/jobs'))return {jobs:[]};
     return baseAPI(route);
@@ -357,7 +398,7 @@ test('bounded discovery checks both producer workflows and distinct runs sharing
   assert.equal(found.origin.head,f.sourceHead);assert.equal(found.origin.workflow_head,f.workflowHead);
   assert.notEqual(found.origin.head,found.origin.workflow_head);assert.equal(found.origin.run_id,17);
   assert.equal(rejectedReads,1);assert.equal(workerReads,1);
-  assert.deepEqual(warnings,['Skipped original package run 18/2: Authority unavailable [delivery address]']);
+  assert.deepEqual(warnings,['Skipped original package producer 18/2: Authority unavailable [delivery address]']);
   assert(f.calls.some(route=>route.includes('merge-integration-checks.yml/runs?event=pull_request&per_page=20&page=1')));
   f.workflow.sha='f'.repeat(40);
   assert.equal(await findOriginalPackage({api,repo:f.repo,current:f.s.snapshot()}),null,'Changed actual workflow must be a cache miss');

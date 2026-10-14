@@ -452,7 +452,7 @@ jobs:
         if: always() && needs.prepare.outputs.profile == 'full' && matrix.shard == 0
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: native-built-output-${{ inputs.request_id }}
+          name: native-built-output-${{ inputs.request_id }}-${{ github.run_attempt }}
           path: |
             .cache/native-normal-built-output.json
             .cache/selected-delivery-smoke.json
@@ -498,6 +498,6 @@ jobs:
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: merge-${{ inputs.request_id }}
+          name: merge-${{ inputs.request_id }}-${{ github.run_attempt }}
           path: merge-result.json
           retention-days: 30

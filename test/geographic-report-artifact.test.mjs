@@ -384,6 +384,19 @@ for (const [label, steps] of [['missing', undefined], ['empty', []], ['stale', [
   });
 }
 
+test('failed-job queue retry authenticates carried geography from its successful original attempt',async()=>{
+  const f=freshQueueTransport();
+  f.loadOptions.fresh.run_attempt=2;
+  f.run.status='completed';f.run.conclusion='failure';
+  const result=await loadGeographicReport(f.loadOptions);
+  checkGeographicReport(result,f.options.baseline,f.commit.sha);
+  const source=geographicReportProducts(result).source;
+  assert.equal(source.run_attempt,1);assert.equal(source.job_id,55);
+  assert(!f.metadata.some(route=>route.includes('/attempts/2')),'Do not relabel the original successful producer');
+  f.jobs[0].conclusion='failure';
+  await assert.rejects(loadGeographicReport(f.loadOptions),/successful|succeed/);
+});
+
 test('fresh queue loader rejects foreign or unsuccessful producers and altered receipt custody with empty steps', async () => {
   for (const mutate of [
     f => {f.run.id++;}, f => {f.run.run_attempt++;}, f => {f.run.head_sha = 'f'.repeat(40);},

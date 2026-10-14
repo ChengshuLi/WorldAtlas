@@ -59,6 +59,17 @@ test('trusted preparation has PR comment permission while candidate tests remain
     assert.match(unsafe,forbidden);
 });
 
+test('native failed-job retries retain original receipts without artifact-name collisions',()=>{
+  const yaml=fs.readFileSync(path.join(root,'.github/workflows/worker-merge.yml'),'utf8');
+  for(const name of ['native-built-output','merge'])
+    assert(yaml.includes(`name: ${name}-\${{ inputs.request_id }}-\${{ github.run_attempt }}`),name);
+  assert.doesNotMatch(yaml,/overwrite: true/);
+  const client=fs.readFileSync(path.join(root,'docs/MERGE_QUEUE_CLIENT.md'),'utf8');
+  assert.match(client,/gh run rerun RUN-ID --repo ChengshuLi\/WorldAtlas --failed/);
+  assert.match(client,/still the tested base/);
+  assert.match(client,/execution predates attempt-qualified uploads/);
+});
+
 test('actual entry point saves stale/head/conflict/base diagnostics even when notification fails',()=>{
  for(const kind of ['stale','head','conflict','base']) {
   const directory=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-merge-diagnostics-'));

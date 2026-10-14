@@ -401,6 +401,27 @@ test('isolated candidate follows the existing final tests/main/head merge guards
   await assert.rejects(g.complete({testedCandidate:gp.candidate,testedBase:gp.base}),/Main advanced/);assert.equal(g.writes.length,0);
 });
 
+test('same-candidate failed-job retry survives owned ref cleanup and keeps final authority guards',async()=>{
+  for(const changed of [null,'base','head','tree','parents','review','checks','integration','geography']){
+    const f=isolatedFixture();f.parentBase=sha('d');
+    const prepared=await prepareIntegration(f.options());
+    await cleanupCandidate(f.options(),prepared.candidate_ref,prepared.candidate);
+    assert.equal(f.refs.size,0);
+    const options={testedCandidate:prepared.candidate,testedBase:prepared.base};
+    if(changed==='base')f.base=sha('d');
+    if(changed==='head')f.pr.head.sha=sha('d');
+    if(changed==='tree')f.integrated[0].sha='changed-after-tests';
+    if(changed==='parents')f.wrongSyntheticParent=true;
+    if(changed==='review')f.staleReview=true;
+    if(changed==='checks')f.checks[0].conclusion='failure';
+    if(changed==='integration')options.integrationResult='failure';
+    if(changed==='geography')options.geographyResult='failure';
+    if(changed){await assert.rejects(f.complete(options));assert.equal(f.writes.length,0,changed);}
+    else{assert.equal((await f.complete(options)).accepted,true);assert.equal(f.writes[0].sha,f.head);}
+    assert.equal(f.refs.size,0,'Final validation consumes immutable SHA, not the deleted ref');
+  }
+});
+
 test('unconfirmed ref creation identifies the resource without deleting a possible collision',async()=>{
   const f=isolatedFixture();f.createDenied=true;
   await assert.rejects(createCandidate(f.options(),{pr:f.pr,base:f.base}),error=>{

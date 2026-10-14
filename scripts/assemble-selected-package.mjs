@@ -78,35 +78,45 @@ export async function findOriginalPackage({api,repo,current,originalRunId}){
     // A missing/obsolete original is a cache miss. A later run may contain a
     // compatible candidate even when both runs executed the same main workflow.
     try{
-      const jobs=await githubPages(async route=>(await api(route)).jobs,
-        `/repos/${repo}/actions/runs/${run.id}/attempts/${run.run_attempt}/jobs`);
-      const candidates=jobs.filter(job=>job.status==='completed'&&job.conclusion==='success'&&
-        job.steps?.some(step=>['Retain original full-regression package output','Retain original selected package output',
-          'Retain original final-worker package output'].includes(step.name)&&step.conclusion==='success'));
-      if(candidates.length!==1)continue;
-      const artifactName=`cloudflare-package-output-${run.id}-${run.run_attempt}`;
       const inventory=await api(`/repos/${repo}/actions/runs/${run.id}/artifacts?per_page=100&page=1`);
-      if(!Array.isArray(inventory.artifacts)||inventory.total_count!==inventory.artifacts.length)continue;
-      const matches=inventory.artifacts.filter(row=>row.name===artifactName&&!row.expired);
-      if(matches.length!==1)continue;
-      const artifact=matches[0];
-      if(!/^sha256:[a-f0-9]{64}$/.test(artifact.digest??'')||!Number.isSafeInteger(artifact.size_in_bytes)||artifact.size_in_bytes<=0)continue;
-      const origin={run_id:run.id,run_attempt:run.run_attempt,job_id:candidates[0].id,workflow_head:run.head_sha,
-        artifact_id:artifact.id,artifact_name:artifactName,artifact_digest:artifact.digest.slice(7),artifact_bytes:artifact.size_in_bytes};
-      const receipt=await readOriginalPackageInventory({api,repo,origin});
-      origin.head=receipt.original_head;
-      const tree=await integrationTree(api,repo,origin.head),all=treeRows(tree);
-      const producer={kind:PACKAGE_PRODUCER_KIND,workflows:all.filter(row=>PACKAGE_PRODUCER_WORKFLOWS.includes(row.path))};
-      if(!same(producer,current.producer))continue;
-      const workflowTree=origin.head===receipt.executed_workflow.sha?tree:await integrationTree(api,repo,receipt.executed_workflow.sha);
-      const actual=workflowTree.entries.get(receipt.workflow_path),captured=producer.workflows.find(row=>row.path===receipt.workflow_path);
-      if(actual?.type!=='blob'||actual.mode!=='100644'||!same(captured,{path:receipt.workflow_path,mode:actual.mode,oid:actual.sha}))continue;
-      const definition=await readPackageInputs({route:`/repos/${repo}`,base:origin.head,api});
-      const source={head:origin.head,tree:tree.object.tree.sha,definition,producer,
-        files:all.filter(row=>containsPackagePath(definition.inputs,row.path)),
-        selection:await blobJSON(api,repo,tree,'data/ownership-selection.json')};
-      if(!sourceCompatible(source,current))continue;
-      return {source,origin};
+      if(!Array.isArray(inventory.artifacts)||inventory.total_count!==inventory.artifacts.length||inventory.artifacts.length>100)continue;
+      // Failed-job reruns retain successful earlier producers. Artifact names
+      // identify their actual attempts; each still needs its original job proof.
+      const prefix=`cloudflare-package-output-${run.id}-`;
+      const artifacts=inventory.artifacts.filter(row=>!row.expired&&row.name?.startsWith(prefix)&&
+        /^[1-9]\d*$/.test(row.name.slice(prefix.length))&&Number(row.name.slice(prefix.length))<=run.run_attempt)
+        .sort((a,b)=>Number(b.name.slice(prefix.length))-Number(a.name.slice(prefix.length)));
+      for(const artifact of artifacts){
+        const attempt=Number(artifact.name.slice(prefix.length));
+        if(inventory.artifacts.filter(row=>row.name===artifact.name).length!==1)continue;
+        try{
+          const jobs=await githubPages(async route=>(await api(route)).jobs,
+            `/repos/${repo}/actions/runs/${run.id}/attempts/${attempt}/jobs`);
+          const candidates=jobs.filter(job=>job.status==='completed'&&job.conclusion==='success'&&
+            job.steps?.some(step=>['Retain original full-regression package output','Retain original selected package output',
+              'Retain original final-worker package output'].includes(step.name)&&step.conclusion==='success'));
+          if(candidates.length!==1)continue;
+          if(!/^sha256:[a-f0-9]{64}$/.test(artifact.digest??'')||!Number.isSafeInteger(artifact.size_in_bytes)||artifact.size_in_bytes<=0)continue;
+          const origin={run_id:run.id,run_attempt:attempt,job_id:candidates[0].id,workflow_head:run.head_sha,
+            artifact_id:artifact.id,artifact_name:artifact.name,artifact_digest:artifact.digest.slice(7),artifact_bytes:artifact.size_in_bytes};
+          const receipt=await readOriginalPackageInventory({api,repo,origin});
+          origin.head=receipt.original_head;
+          const tree=await integrationTree(api,repo,origin.head),all=treeRows(tree);
+          const producer={kind:PACKAGE_PRODUCER_KIND,workflows:all.filter(row=>PACKAGE_PRODUCER_WORKFLOWS.includes(row.path))};
+          if(!same(producer,current.producer))continue;
+          const workflowTree=origin.head===receipt.executed_workflow.sha?tree:await integrationTree(api,repo,receipt.executed_workflow.sha);
+          const actual=workflowTree.entries.get(receipt.workflow_path),captured=producer.workflows.find(row=>row.path===receipt.workflow_path);
+          if(actual?.type!=='blob'||actual.mode!=='100644'||!same(captured,{path:receipt.workflow_path,mode:actual.mode,oid:actual.sha}))continue;
+          const definition=await readPackageInputs({route:`/repos/${repo}`,base:origin.head,api});
+          const source={head:origin.head,tree:tree.object.tree.sha,definition,producer,
+            files:all.filter(row=>containsPackagePath(definition.inputs,row.path)),
+            selection:await blobJSON(api,repo,tree,'data/ownership-selection.json')};
+          if(!sourceCompatible(source,current))continue;
+          return {source,origin};
+        }catch(error){
+          console.warn(`Skipped original package producer ${run.id}/${attempt}: ${String(error.message).replace(/https?:\/\/\S+/g,'[delivery address]').slice(0,300)}`);
+        }
+      }
     }catch(error){
       console.warn(`Skipped original package run ${identity}: ${String(error.message).replace(/https?:\/\/\S+/g,'[delivery address]').slice(0,300)}`);
     }
