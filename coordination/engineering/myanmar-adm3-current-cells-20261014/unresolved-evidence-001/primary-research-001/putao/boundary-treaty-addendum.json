@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "worker": "/root/putao_primary_boundary",
+  "date_utc": "2026-10-14",
+  "kind": "read-only-primary-document-discovery-addendum",
+  "parent_id": "framework:province:puta-o:c3a47161f76d",
+  "scope": [
+    "Nawngmun/Pannandin northern frontier",
+    "Khaunglanhpu eastern frontier",
+    "India-facing Puta-O context"
+  ],
+  "no_local_downloads": true,
+  "new_download_permission_requests": 0,
+  "sources": [
+    {
+      "title": "International Boundary Study No. 42: Burma–China Boundary",
+      "issuer": "U.S. Department of State, Bureau of Intelligence and Research, Office of the Geographer",
+      "publication_date": "1964-11-30",
+      "archive": "Florida State University College of Law, archived government-issued study; not a present-day government-hosted treaty original",
+      "url": "https://library.law.fsu.edu/Digital-Collections/LimitsinSeas/pdf/ibs042.pdf",
+      "pages": 20,
+      "locators": [
+        "Printed 9: Treaty G (1960-10-01), Protocol H (1961-10-13)",
+        "Appendix printed 12: Article V",
+        "Appendix printed 13: Article VII(1)(3)-(6)",
+        "Appendix printed 18: Articles VII(3), VIII, X"
+      ],
+      "findings": "Northern description names Nmai/Irrawaddy, Salween, Tulung/Taron and Tsayul watersheds, Western Chingdam, Tusehpong/Kundam Razi, Yulang and Gamlang passes. Article VII(3) cites 1:250,000 whole-boundary and 1:50,000 selected-area treaty maps. Article X makes later protocol maps replacements. Printed 9 says protocol text and large-scale maps were not public as of 1964.",
+      "limits": "Actual treaty/protocol annex maps are absent from this 20-page archive PDF. Northern sheet numbers, datum, coordinates and township correspondence are not supplied. Historical availability is not a claim about availability today. Shared drainage names provide geographic relevance only, without exact candidate registration."
+    },
+    {
+      "title": "International Boundary Study No. 80: Burma–India Boundary",
+      "issuer": "U.S. Department of State, Bureau of Intelligence and Research, Office of the Geographer",
+      "publication_date": "1968-05-15",
+      "archive": "Florida State University College of Law, archived government-issued study",
+      "url": "https://library.law.fsu.edu/Digital-Collections/LimitsinSeas/pdf/ibs080.pdf",
+      "pages": 10,
+      "locators": [
+        "Printed 2: 1967 agreement background and quoted delimitation begins",
+        "Printed 6: final northern delimitation paragraph",
+        "Printed 8: Treaty D and Summary IV"
+      ],
+      "findings": "Reproduces delimitation of agreement signed Rangoon 10 March 1967. Northern description reaches Shawngshan Bum, then follows Irrawaddy–Brahmaputra watershed; exact northern extremity remains provisional pending final determination. Summary identifies annexed 1:126,720 strip maps. Demarcation was separate future work as of publication.",
+      "limits": "Actual strip-map annexes are absent from this 10-page archive PDF. Northern sheet identifiers, datum, survey control and current terminus determination not established. Southern Survey of India sheet footnotes are not evidence for this northern group."
+    }
+  ],
+  "blocked_or_unproductive_routes": [
+    {
+      "url": "https://treaties.un.org/pages/cumulativeindexes.aspx?clang=_en",
+      "outcome": "UN Treaty Series generic cumulative index returned, no exact relevant treaty record/registration number established in bounded queries."
+    },
+    {
+      "url": "https://2009-2017.state.gov/documents/organization/58833.pdf",
+      "outcome": "Read-only web returned Technical Difficulties / Exception: forbidden. Contents not identified, no retry or local download."
+    },
+    {
+      "url": "https://library.law.fsu.edu/Digital-Collections/LimitsinSeas/",
+      "outcome": "Read-only index URL inaccessible; exact numbered primary PDFs readable."
+    },
+    {
+      "route": "Official India MEA and China MFA/NPC scoped search",
+      "outcome": "No exact treaty or protocol map record established; generic/irrelevant results excluded. Stopped broad searches."
+    },
+    {
+      "route": "NPC treaty reference discovered through secondary bibliography",
+      "outcome": "Outbound NPC link returned internal error without exposing a resolved official target URL; no claim relies on secondary narrative, no retry."
+    }
+  ],
+  "concrete_blocker": "The accessible government-issued primary texts identify the required map annex scales and replacement protocol but do not contain the actual annex map sheets. No presently retrievable official 1961 protocol map set, northern 1967 strip sheet, datum/control definition, later northern-terminus determination or 2019 township crosswalk was established. Those exact documents are needed before registration to original ADM3 geometry or candidate cells could be assessed.",
+  "next_document_requests_for_owner": [
+    "China–Burma Protocol signed 13 October 1961: full text, boundary-pillar register and detailed replacement maps under 1960 Treaty Article X, especially northern Article VII(1)(3)-(6) corridor.",
+    "India–Burma agreement signed 10 March 1967: annexed 1:126,720 northern strip-map sheets and datum/control metadata; later demarcation/northern-terminus instruments."
+  ],
+  "limits_held": {
+    "new_accepted_credit": 0,
+    "repair_clearance": false,
+    "sovereignty_adjudication": false,
+    "old_workspace_mutation": false,
+    "scientific_or_spatial_process": false,
+    "installed_packages": false,
+    "local_source_downloads": 0,
+    "local_hashes_of_web_sources": "Unavailable by design: read-only web source inspection, no downloaded original bytes."
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "status": "documentary_lineage_addendum_only_no_cell_clearance",
+  "research_date_utc": "2026-10-14",
+  "prior_packet": {
+    "path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/mmr-dawei-primary-water-owner-001/notes.json",
+    "sha256": "65aa8bfb830d50eefd244d159dbe7040ef262ec9fbede3870aef72a90cfd37dc",
+    "preserved": true
+  },
+  "authorized_scope": "Read-only follow-up for inland Dawei 19 retained candidate land cells; no new document downloads, browser downloads, map renders, source/GIS/native passes, geometry work, or scientific changes.",
+  "target": {
+    "owner_id": 30380,
+    "owner_name": "Dawei",
+    "source_id": "gb:MMR:ADM3:66882298B9277012619903",
+    "parent_id": "framework:province:dawei:260a377dc059",
+    "candidate_land_count": 19,
+    "retained_centre_envelope_degrees": {
+      "longitude": [
+        98.53840696352694,
+        99.20577038975307
+      ],
+      "latitude": [
+        13.375825470142939,
+        14.439478712800307
+      ]
+    },
+    "envelope_custody": "Inherited from prior retained-interval-envelope.json and verified normlat method; not recomputed in this addendum. Independent extrema do not identify one corner cell or the actual location of any checkpoint."
+  },
+  "sources": [
+    {
+      "id": "DOP_Myitta_2014_ENG",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_MyittaST_2014_ENG.pdf",
+      "publisher": "Department of Population, Ministry of Labour, Immigration and Population, Republic of the Union of Myanmar; MIMU mirror",
+      "publication_date": "2017-10",
+      "reference_date": "2014-03-29 census night",
+      "locators": [
+        {
+          "pdf_page_1_based": 1,
+          "role": "cover, publisher, publication date, report title, Dawei District and Tanintharyi Region"
+        },
+        {
+          "pdf_page_1_based": 7,
+          "role": "figures at a glance"
+        },
+        {
+          "pdf_page_1_based": 10,
+          "role": "date and area-source notes"
+        },
+        {
+          "pdf_page_1_based": 18,
+          "printed_page": "8",
+          "role": "Table1: Myitta Sub-Township (Dawei District, Tanintharyi Region), wards and village tracts"
+        }
+      ],
+      "supported": "Official census Myitta Sub-Township belongs to Dawei District, Tanintharyi Region. It reports 3 wards and 7 village tracts; area 2,559.3 km2 attributed to Settlement and Land Record Department (2014-2015).",
+      "limits": "No textual Dawei Township match was found. Census sub-township scope must not be equated with the smaller Myitta town row in the 2019 GAD profile. No coordinate/datum/scale or boundary annex used; no Htee Ki or cell-level parent assignment established.",
+      "acquisition": "Web PDF text only; no local or browser download."
+    },
+    {
+      "id": "GAD_Dawei_2019_reused",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Dawei_2019_MMR.pdf",
+      "local_existing_path": "/Users/chengshuli/Documents/Codex/2026-10-14/task-2/.cache/mmr-dawei-primary-water-owner-001/documents/GAD-Dawei-2019.pdf",
+      "sha256": "ff9263bb646dd86820096c1d70eeb3a3f85b535a5ff64f5a3a907e0e9f9ac1c6",
+      "publisher": "Myanmar General Administration Department; MIMU mirror",
+      "reference_date": "2019-09, profile introduction through end September",
+      "locators": [
+        {
+          "pdf_page_1_based": 15,
+          "section": "formation/history",
+          "support": "Identifies Dawei Township in Dawei District, Tanintharyi Region; Myitta town formation cites Ministry of Home Affairs order of 1April2014, file100/22-364/ဦး1."
+        },
+        {
+          "pdf_page_1_based": 16,
+          "section": "3 area and4 boundary",
+          "support": "Dawei and Myitta town rows combine in township total; Myitta town row3.68 square miles, total township2636.14 square miles. Myitta named on east."
+        },
+        {
+          "pdf_page_1_based": 26,
+          "section": "19 administrative organization",
+          "support": "Dawei and Myitta town rows combined under Dawei Township administrative total: 2 towns,18 wards,25 village tracts,106 villages."
+        },
+        {
+          "pdf_page_1_based": 48,
+          "section": "bus services",
+          "support": "Htee Khee–Dawei–Palaw and Htee Khee–Dawei–Myeik etc. transport route names occur."
+        },
+        {
+          "pdf_page_1_based": 50,
+          "section": "31 roads",
+          "support": "Dawei–Myitta road listed, township length24 miles3 furlongs."
+        }
+      ],
+      "reading_method": "Reused existing local PDF text for pages15,16,26, supplemented web text locations48,50; no map rendering repeated. Burmese font substitutions require caution.",
+      "limits": "The original 2014 order and its annex were not acquired. Town rows and transport routes establish administrative/reporting and transport context, not an exact sub-township footprint or Htee Khee ownership. Printed longitude range99deg12min to98deg27min has order as printed and no identified datum; no precision/extent inference made."
+    },
+    {
+      "id": "THA_MFA_Htee_Ki_2013",
+      "url": "https://www.mfa.go.th/en/content/5d5bccae15e39c306000d078?cate=5d5bcb4e15e39c3060006834",
+      "publisher": "Ministry of Foreign Affairs, Kingdom of Thailand",
+      "title": "Myanmar opens a Temporary Border Trade Post at Htee Ki",
+      "published": "2013-05-15",
+      "page_updated": "2022-11-29",
+      "locators": "Article body paragraphs1-3; webpage has no numbered pages.",
+      "supported": "Reports opening11May2013 of Htee Ki trade post in Tanintharyi Region opposite Ban Pu Nam Ron temporary entry, Kanchanaburi Province. Links checkpoint to Dawei Special Economic Zone; states Thai Ministry of Interior declared Ban Pu Nam Ron temporary entry22June2012.",
+      "limits": "Historical checkpoint announcement, not a bilateral boundary delimitation agreement or land-ownership instrument. No Myitta parent, Bong Ti alignment, local boundary coordinates/datum, or exact cell relationship is supplied. The joint detailed survey mentioned later concerns Singkorn–Maw Taung, a different reach.",
+      "acquisition": "Web HTML read only; no download."
+    },
+    {
+      "id": "Bong_Ti_official_site_lead",
+      "url": "https://www.bongti.go.th/",
+      "publisher": "Bong Ti Subdistrict Administrative Organization",
+      "supported": "Official search-index title identifies Bong Ti in Sai Yok District, Kanchanaburi Province.",
+      "limits": "Current homepage returned only image links in web text; no2019 boundary/extent or connection to the19cells verified. Preserved as an official lead only; not evidence of alignment with Phu Nam Ron/Htee Ki."
+    }
+  ],
+  "synthesis": {
+    "supported_inference": "Independent census and GAD records support an inland Myitta/Dawei administrative context; Thai MFA confirms the Htee Ki–Ban Pu Nam Ron cross-border route serving the Dawei project. These explain why Dawei research cannot be limited to coast/islands.",
+    "not_established": [
+      "Exact2019 Myitta sub-township footprint versus Myitta town and Dawei Township footprint.",
+      "Original producer crosswalk from GAD/DoP units to consumed MyanmarAnalytics/geoBoundaries feature.",
+      "Exact assignment of any of19centres to Htee Ki, Myitta, Bong Ti, Phu Nam Ron, a watershed or a boundary segment.",
+      "Bilateral boundary survey coordinates, geodetic datum, monument trace or legally applicable local line.",
+      "Physical water or land evidence at any target centre."
+    ],
+    "missing_evidence_path": [
+      "Obtain cited1April2014 MoHA formation order100/22-364/ဦး1 and dated2019 amendments with original boundary/tract annexes.",
+      "Locate2019-era Dawei Township/Myitta sub-township official tract membership or cadastral boundary records and reconcile named units with consumed source feature without inferring from labels.",
+      "Locate specific Htee Ki and Bong Ti/Phu Nam Ron boundary agreement or survey sheets with date, scale and datum for the relevant local reach.",
+      "Only if later separately authorized, compare exact retained centre coordinates to independently qualified source evidence; this addendum does not perform that work."
+    ],
+    "disposition": "All19candidate land cells remain unresolved; no new qualification, exception, border clearance or scientific patch."
+  },
+  "licensing": "MIMU mirror access does not confer a new open geospatial-data license. Prior MIMU citation/noncommercial and written-permission limits retained. Thai MFA webpage carries copyright; short factual summaries only. No dataset acquired.",
+  "network_and_local_actions": "Web searches and official document/webpage reads only; existing local report text read. No network download command, new browser download, approval-card request, or map render in this follow-up."
+}
