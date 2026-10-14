@@ -177,8 +177,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     if (usage.freeBytes < limits.minimumFree) throw Error('Local storage budget breached; stop new generation/installations and inspect report');
     return usage;
   };
-  const ownedEntry = directory => state().entries.find(entry => entry.path === directory && entry.slot === 'work');
-  return {report, check, allocate, release, ownedEntry};
+  return {report, check, allocate, release};
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
