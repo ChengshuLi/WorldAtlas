@@ -6,7 +6,7 @@ const hash = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
 const integer = value => Number.isSafeInteger(value) && value >= 0;
 const requireValue = (condition, message) => { if (!condition) throw Error(message); };
 const span = value => Array.isArray(value) && value.length === 2 && value.every(integer) && value[0] < value[1] && value[1] <= 262166;
-const defaults = {maxComponents:64, maxVertices:250000, maxRowWork:16384, maxSourceBytes:268435456};
+const defaults = {maxComponents:Number.MAX_SAFE_INTEGER, maxVertices:250000, maxRowWork:16384, maxSourceBytes:268435456};
 
 export function groupVisibleRepairs(rows, options = {}) {
   requireValue(Array.isArray(rows), 'Screening rows required');
@@ -56,11 +56,9 @@ export function groupVisibleRepairs(rows, options = {}) {
     let group;
     for (const row of members) {
       const sourceBytes = row.estimated_source_bytes + row.estimated_decoded_bytes;
-      if (sourceBytes > limits.maxSourceBytes || row.estimated_native_work.vertices > limits.maxVertices || row.estimated_native_work.rows > limits.maxRowWork) {
-        deferred.push({component_id:row.component_id, reason:'requires-larger-bounded-group'}); continue;
-      }
-      if (!group || group.components.length >= limits.maxComponents || group.estimated_vertices + row.estimated_native_work.vertices > limits.maxVertices || group.estimated_row_work + row.estimated_native_work.rows > limits.maxRowWork) {
-        group = {source_family_id:row.source_family_id, source_product_sha256:row.source_product_sha256, components:[], witnessed_component_cell_sum:0, current_unassigned_component_cell_sum:0, estimated_vertices:0, estimated_row_work:0, estimated_shared_source_bytes:sourceBytes, containing_native_asset_ids:[], latitude_blocks:[], scientific_qualification:'required', runtime_memory_admission:'required'};
+      const oversized = sourceBytes > limits.maxSourceBytes || row.estimated_native_work.vertices > limits.maxVertices || row.estimated_native_work.rows > limits.maxRowWork;
+      if (!group || oversized || group.oversized || group.components.length >= limits.maxComponents || group.estimated_vertices + row.estimated_native_work.vertices > limits.maxVertices || group.estimated_row_work + row.estimated_native_work.rows > limits.maxRowWork) {
+        group = {source_family_id:row.source_family_id, source_product_sha256:row.source_product_sha256, components:[], witnessed_component_cell_sum:0, current_unassigned_component_cell_sum:0, estimated_vertices:0, estimated_row_work:0, estimated_shared_source_bytes:sourceBytes, containing_native_asset_ids:[], latitude_blocks:[], scientific_qualification:'required', runtime_memory_admission:'required', oversized, resource_adjustment:oversized ? 'Schedule individually after measuring and admitting the required working set; target limits are not repair eligibility limits.' : null};
         groups.push(group);
       }
       requireValue(group.estimated_shared_source_bytes === sourceBytes, 'Same source hash has conflicting byte estimates');
@@ -76,8 +74,8 @@ export function groupVisibleRepairs(rows, options = {}) {
   return {version:1, current_selection_sha256:rows[0]?.current_selection_sha256 ?? null, patch_sha256:rows[0]?.patch_sha256 ?? null, limits, groups, deferred:deferred.sort((a,b)=>a.component_id.localeCompare(b.component_id)), input_components:rows.length, note:'Source/locality planning only. Independent qualification may run in parallel within measured aggregate RAM; combine qualified groups in one delivery. Re-screen when current ownership changes.'};
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  const [input,output] = process.argv.slice(2);
-  requireValue(input && output && process.argv.length === 4, 'Usage: group-visible-repairs.mjs INPUT.json OUTPUT.json');
-  const result = groupVisibleRepairs(JSON.parse(fs.readFileSync(input,'utf8')));
+  const [input,output,config] = process.argv.slice(2);
+  requireValue(input && output && [4,5].includes(process.argv.length), 'Usage: group-visible-repairs.mjs INPUT.json OUTPUT.json [LIMITS.json]');
+  const result = groupVisibleRepairs(JSON.parse(fs.readFileSync(input,'utf8')), config ? JSON.parse(fs.readFileSync(config,'utf8')) : {});
   fs.writeFileSync(output, JSON.stringify(result,null,2)+'\n', {flag:'wx'});
 }

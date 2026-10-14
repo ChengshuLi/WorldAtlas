@@ -3,7 +3,7 @@
   "current_selection_sha256": "302f439559e69318b55aa3723946116b41dcc26d58e22b9549548f60d7d69299",
   "patch_sha256": "b44fc535b704fd88ccad45b85fbad73849b9f54c12bd3a83a158915b072414ac",
   "limits": {
-    "maxComponents": 64,
+    "maxComponents": 9007199254740991,
     "maxVertices": 250000,
     "maxRowWork": 16384,
     "maxSourceBytes": 268435456
@@ -33,7 +33,9 @@
         33
       ],
       "scientific_qualification": "required",
-      "runtime_memory_admission": "required"
+      "runtime_memory_admission": "required",
+      "oversized": false,
+      "resource_adjustment": null
     },
     {
       "source_family_id": "gb:MMR:ADM3",
@@ -59,7 +61,9 @@
         29
       ],
       "scientific_qualification": "required",
-      "runtime_memory_admission": "required"
+      "runtime_memory_admission": "required",
+      "oversized": false,
+      "resource_adjustment": null
     },
     {
       "source_family_id": "gb:VNM:ADM2",
@@ -83,7 +87,9 @@
         28
       ],
       "scientific_qualification": "required",
-      "runtime_memory_admission": "required"
+      "runtime_memory_admission": "required",
+      "oversized": false,
+      "resource_adjustment": null
     }
   ],
   "deferred": [],
