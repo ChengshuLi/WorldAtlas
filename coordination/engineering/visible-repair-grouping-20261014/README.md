@@ -11,3 +11,5 @@ Initial groups: Myanmar two components, six cells,121735.83928494141 square metr
 The geometry inventory and historical594 batches are not visible-repair targets. Tests include95,173 synthetic positive rows solely to exercise global-size scheduling and conservation; they are not a factual visible count.
 
 Group totals are explicitly component-cell sums. Overlapping candidates can share the same native cell; global distinct progress must be measured after scientific conflict checks and final effective output, never by summing those planning counts.
+
+`current_selection_sha256` uses canonical recursively sorted JSON plus newline, matching the shared visibility helper and repository value digest. `patch_sha256` remains the actual pinned patch-body SHA. Initial candidate cells and acquisition custody are unchanged.
