@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "kind": "independent-riau-native-result-review",
+  "reviewer": "/root/riau_input_review",
+  "input_commit": "ceaebb8c78ec88d9f034577b5d0e7426c72d4585",
+  "result": "No cell/count/binding mismatch found",
+  "checks": {
+    "patch_row_run_tuple_equality": "PASS",
+    "source_and_patch_commit_oid_size_sha256": "PASS",
+    "rule_preimage_sha256": "PASS",
+    "preimage_binding_input_pin_equality": "PASS"
+  },
+  "components": [
+    {
+      "name": "Lingga",
+      "pixelIndex": 22871,
+      "cells": 7345,
+      "rows": 772,
+      "runs": 2172
+    },
+    {
+      "name": "Karimun",
+      "pixelIndex": 22849,
+      "cells": 3430,
+      "rows": 404,
+      "runs": 1145
+    }
+  ],
+  "native_resources": {
+    "charged_bytes": 329367503,
+    "observed_peak_rss_bytes": 222298112,
+    "fresh_allowance_bytes": 779935744
+  },
+  "physical_resources": {
+    "observed_peak_rss_bytes": 885030912,
+    "fresh_allowance_bytes": 870998016,
+    "exceedance_bytes": 14032896,
+    "resource_compliant_claimed": false
+  },
+  "limits": [
+    "Read-only independent output audit; no scientific rerun.",
+    "Current-owner-zero and cumulative selected conservation remain unproved.",
+    "Nine-family competitor analysis is separate evidence, not an input consumed by this native constructor.",
+    "All 3279 flagged-target repair and 4760 source-relative candidates remain excluded; accepted repair credit is zero."
+  ]
+}
