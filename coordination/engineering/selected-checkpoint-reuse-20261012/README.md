@@ -1,7 +1,6 @@
 # Selected checkpoint reuse
 
-This module is the shared data/custody boundary for the native and continuous
-consumers. It does not import candidate code, execute SOURCE/NATIVE science,
+This module is the shared data/custody boundary for native map-cell repair validation. It does not import candidate code, execute SOURCE/NATIVE science,
 activate a selection, or replace geometric predicates.
 
 ## Invocation contract
@@ -23,8 +22,7 @@ activate a selection, or replace geometric predicates.
    It never reconstructs the complete source bank. Missing historical transport
    declines reuse; an inconsistent authenticated tree or corrupt custody fails.
    This applies to positive-native additions as well as unchanged native rows:
-   consumers still compare every actual changed row and every possible continuous
-   neighbor. Accepted geometry is reused only while the complete base, identities,
+   the native consumer still compares every actual changed row. Accepted geometry is reused only while the complete base, identities,
    scientific routes and prior literal ledger/authority records remain unchanged.
 4. Call `qualifyTransition({state, reader: candidateReader, budget})` once. The
    module derives all changes from actual committed products. Reuse-unavailable
@@ -35,16 +33,15 @@ activate a selection, or replace geometric predicates.
    legacy callers must not claim they already realize the one-acquisition path.
    Corrupt custody
    throws. Neither outcome is a successful no-change result.
-5. Native and continuous consumers use those same private states in one trusted
+5. The native consumer uses the private states in one trusted
    Node invocation. Do not serialize the objects to independent children or
-   repeat qualification for each consumer. Each public consumer calls
+   repeat qualification. The consumer calls
    `authenticateTransition({transition, budget})` to admit the genuine private
-   transition and complete scope; caller-created wrappers cannot omit a neighbor
+   transition and complete scope; caller-created wrappers cannot omit a changed row
    even when they contain real state capabilities. This lookup does not rescan
-   coordinate rows. Each consumer may project only its
-   complete required scope, then apply its existing strict predicates.
+   coordinate rows. Native comparison uses the complete required row scope.
 6. Call `releaseCheckpoint(state)` once, in the joint caller's `finally`, after
-   both consumers finish. This invalidates every related private capability.
+   comparison and product publication finish. This invalidates every related private capability.
 
 `projectSourceFeatures({state, ids, budget, reuse?})` returns complete original
 features plus exact ordinal, owner/parent, whole-source, feature and geometry
@@ -62,11 +59,11 @@ containing native members with full row-table/range checks. Results report
 Coordinate boxes are never native evidence.
 
 The private state exposes frozen coordinate/ledger/registry/patch/addition views.
-The transition exposes complete `changedIds`, `changedNativeRows` and `plan`:
-`changed_ids`, `required_ids`, `pairs`, both `source_paths` and both genuine
-`source_bindings`. The plan traverses every old and new coordinate row and includes
-unchanged neighbors and other changed owners. Its boxes only exclude impossible
-neighbors; consumers must still run the original full-polygon predicates.
+The transition exposes complete `changedIds` and `changedNativeRows`.
+The next certificate is derived arithmetically from unchanged accepted base rows
+and actual literal additions. Coordinate boxes are retained identity metadata,
+not proof of polygon overlap validation. Newly added target/source identity is
+still checked against its actual whole immutable source body.
 
 `deriveCoordinateDelta` is pure arithmetic for testing. It grants no capability
 and cannot be supplied to either projector as a qualified state.

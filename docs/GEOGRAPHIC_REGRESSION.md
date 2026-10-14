@@ -113,18 +113,13 @@ not physical source approval. Whole decoded part cohorts are discarded before
 the next genuine bounded acquisition; metadata, row tables, runtime and live
 representations count toward the complete phase.
 
-This native test does not detect sub-cell polygon gaps. The existing polygon
-detector remains unchanged. Selected pointset comparison and a complete current
-effective-neighbor exclusion index are the second deliverable of #1569; historical
-native camera bounds do not supply that proof.
-
-There is currently no committed additive ownership selection. Extra/unknown
-selection fields, removal of a native selection and changed native grid domains
-fail closed rather than select a staged proposal or ignore unsupported effective
-geometry. The full repair-ledger preservation comparator retains zero-cell
-primitives as well as assigned primitives, but its active selection hook must be
-integrated with the normal reviewed additive activation contract before use.
-No files in coordination namespaces are automatically selected or activated.
+Selected repair validation is map-cell scoped. Both warm checkpoint reuse and
+cold fallback require complete native conservation and source-supported target
+identity. Every new component must produce its own actual current-gap-to-target
+cell witness. Continuous polygon overlap and sub-cell gaps are outside this
+scope; the wrapper does not run the polygon detector or import Shapely for a
+selected comparison. The raw detector remains available for nonselected source
+geometry checks.
 
 Focused controls live in `test/effective-geographic-regression.test.mjs` and invoke
 both the immutable reader and real trusted wrapper with complete small synthetic
@@ -162,62 +157,24 @@ does not establish global hydrology or approve administrative ownership. Existin
 identity, crosswalk, regional certificate, content and publication requirements
 remain in force.
 
-### Complete selected-source prevention certificate
+### Selected checkpoint identity and source support
 
-The selected continuous gate reads complete ordinary source bodies from the
-committed world index and any explicit, whole-byte selected overrides. Its
-`complete-selected-source-pointsets:v1` certificate covers the full unique owner
-roster, original record order, containing-body hashes, complete per-record
-geometry hashes and coordinate-derived conservative exclusion bounds. Camera
-bounds cannot exclude a neighbor. Both baseline and candidate certificates are
-required; changed targets are compared against each other and every possible
-unchanged neighbor using complete original pointsets.
+An accepted checkpoint retains the complete stable owner/index/parent roster,
+whole source identities and actual native result. Append-only transitions derive
+the next complete certificate arithmetically from unchanged accepted base rows
+and actual literal additions. New target geometry is still projected from its
+pinned source body and independently joined to the approved target; unchanged
+neighbors are not projected for a polygon-only overlap check.
 
-The geographic release's previously qualified footprint digest is separately
-recorded as historical authority with `recomputed:false`. Source-file traversal
-is not the legacy global `localeCompare` digest order. The certificate does not
-claim to recompute that scientific output; it authenticates the whole selected
-source bank and every actual pointset under its own explicit domain. Altered,
-omitted, duplicated or misjoined source bodies fail closed. This separates
-once-qualified scientific custody from normal provenance enforcement.
+A committed `additive_release` sidecar binds the exact runtime envelope, complete
+ledger/delta/owner assets and append-only original authority registry. Each
+authority retains its issued source/native requests, preimage, publications,
+operating receipts and executed code/runtime/input provenance. Existing records,
+including historical zero-cell components, cannot be omitted or rewritten.
 
-A future committed `additive_release` hook names one whole typed sidecar, never
-scans proposal files. It preserves the complete native base selection and binds
-the exact runtime envelope, ordinary ledger/delta/owner assets and append-only
-original authority registry. Each authority retains its original issued source
-and native requests, preimage, complete publications/inventories, operating
-receipts and code/runtime/input provenance. Batch hashes are not stable policy
-identities. Per-component authority and zero-cell geometry must remain unchanged
-when additional independently authenticated authorities are appended.
-
-Effective coverage means literal BASE OR complete ADDITION primitives. The
-trusted wrapper passes those separate, unchanged polygons to the original
-preparation/comparison functions; it does not persist a dissolved OGC polygon,
-round coordinates, use MakeValid or suppress coverage loss. Internal intersections
-between primitives of the same stable owner are not competing-owner overlap.
-All other loss/overlap/invalid-geometry findings remain failures. Native checks
-compare virtual combined rows against every original owner and reject delta
-cells that were previously assigned. No repair or release is activated by this
-checker, and source-relative qualification does not establish physical water,
-administrative or historical truth.
-
-The cold certificate retains one conservatively merged coordinate rectangle per
-owner and complete identity/index/parent tuples. It does not repeat camera fields
-or substitute bounds for actual source geometry. All original whole owner/camera
-custody and carried metadata remain authenticated and charged to the acquisition
-phase. A seam-spanning original member expands the merged longitude interval;
-merging never excludes a neighbor. After each whole containing body leaves its
-helper frame, the trusted cold child uses authenticated native GC (`--expose-gc`)
-to reclaim dead source objects. Missing or replaced GC refuses; this changes
-acquisition lifetime only, without changing source pointsets or polygon methods.
-
-The persisted certificate uses explicit version-2 fixed columns for every complete
-row, with a lossless shared field schema. Its trusted decoder restores field
-access without duplicating row objects. It retains every original identity,
-parent, source ordinal and full feature/base/effective hash. This is compact
-metadata representation, not source sampling or a change to geometry methods.
-Cold coordinate children admit exactly `--expose-gc`; extra preload flags or
-NODE_OPTIONS/NODE_PATH are refused, and trusted callers clear those variables.
+The current joint producer emits four native checkpoint products. See
+[accepted checkpoint handoff](ACCEPTED_SELECTED_CHECKPOINTS.md). Original polygon
+reports stay archived; they are not a second active acceptance format.
 
 The optional `artifact_consumption` selection binds an ordinary whole qualified
 product certificate and an independently registered whole review API capture.

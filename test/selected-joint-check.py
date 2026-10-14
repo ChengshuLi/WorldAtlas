@@ -1,194 +1,202 @@
-"""Actual continuous readback/polygon controls and the minimal joint routing seam."""
-import copy
-import gzip
-import hashlib
+"""Selected map repairs run native checks; raw polygon changes keep their detector."""
+import builtins
 import importlib.util
 import json
 import pathlib
 import sys
 import tempfile
 import unittest
+from contextlib import ExitStack, contextmanager
 from unittest import mock
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
-def module(name, file):
-    spec = importlib.util.spec_from_file_location(name, ROOT / file)
-    result = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(result)
-    return result
-G = module('joint_geography_controls', 'scripts/run-geographic-check.py')
-D = module('joint_strict_detector', 'scripts/check-geographic-regression.py')
+spec = importlib.util.spec_from_file_location('joint_geography_controls', ROOT / 'scripts/run-geographic-check.py')
+G = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(G)
 BASE, NEXT = '1' * 40, '2' * 40
+
 
 def raw(value):
     return (json.dumps(value, sort_keys=True, separators=(',', ':')) + '\n').encode()
-def digest(value):
-    return hashlib.sha256(raw(value)).hexdigest()
-def feature(identity, left, right):
-    return {'type': 'Feature', 'id': identity, 'properties': {'id': identity, 'parent_id': 'P'},
-            'geometry': {'type': 'Polygon', 'coordinates': [[[left, 0], [right, 0], [right, 1], [left, 1], [left, 0]]]}}
 
-class ContinuousReadback(unittest.TestCase):
-    def setUp(self):
-        self.temp = tempfile.TemporaryDirectory()
-        self.directory = pathlib.Path(self.temp.name)
-        self.features = {'A': feature('A', 0, 1), 'B': feature('B', 2, 3)}
-        self.addition = {'component_id': 'new', 'target_id': 'A', 'pixelIndex': 1,
-                         'base_geometry_sha256': digest(self.features['A']['geometry']),
-                         'geometry': feature('piece', 1.2, 1.5)['geometry']}
-        self.operands = {'version': 1, 'kind': 'complete-selected-continuous-operands-v1',
-                         'plan': {'required_ids': ['A', 'B'], 'changed_ids': ['A'], 'pairs': [['A', 'B']],
-                                  'source_bindings': {'baseline': {'vintage': BASE}, 'candidate': {'vintage': NEXT}}},
-                         'baseline': self.features, 'candidate': copy.deepcopy(self.features),
-                         'effective_additions': {'baseline': [], 'candidate': [self.addition]}}
-        self.facts = {'executing_commit': BASE, 'baseline_commit': BASE, 'candidate_commit': NEXT,
-                      'candidate_code_executed': False,
-                      'inverse': [{'vintage': vintage, 'id': identity, 'geometry_sha256': digest(f['geometry'])}
-                                  for vintage in ['baseline', 'candidate'] for identity, f in self.features.items()]}
-        self.allowance = mock.patch.object(G.subprocess, 'check_output', return_value=raw({'phaseBytes': 1024 ** 3}))
-        self.allowance.start()
-    def tearDown(self):
-        self.allowance.stop()
-        self.temp.cleanup()
-    def publish(self):
-        decoded, facts = raw(self.operands), raw(self.facts)
-        encoded = gzip.compress(decoded, mtime=0)
-        pin = lambda name, body: {'path': name, 'bytes': len(body), 'sha256': hashlib.sha256(body).hexdigest()}
-        publication = {'version': 1, 'complete': True, 'kind': 'trusted-selected-continuous-comparison-v1',
-                       'operands': {**pin('operands.json.gz', encoded), 'decoded_bytes': len(decoded), 'decoded_sha256': hashlib.sha256(decoded).hexdigest()},
-                       'facts': pin('facts.json', facts)}
-        for name, body in [('operands.json.gz', encoded), ('facts.json', facts), ('publication.json', raw(publication))]:
-            (self.directory / name).write_bytes(body)
-            (self.directory / name).chmod(0o644)
-        return {'version': 1, 'kind': publication['kind'], 'publication': publication, 'complete_owners': 2,
-                'changed_ids': self.operands['plan']['changed_ids'], 'candidate_code_executed': False}
-    def consume(self, issued):
-        return G.consume_selected_continuous(ROOT, BASE, NEXT, D, self.directory, issued)
-    def test_literal_addition_runs_the_original_full_polygon_predicates(self):
-        result = self.consume(self.publish())
-        self.assertEqual(result['status'], 'no-new-regression')
-        self.assertEqual(result['regressions'], 0)
-        self.assertEqual(result['original_strict_polygon_result']['changed_location_ids'], ['A'])
-    def test_overlap_with_an_unchanged_neighbor_is_not_filtered(self):
-        self.addition['geometry'] = feature('piece', 2.25, 2.75)['geometry']
-        result = self.consume(self.publish())
-        self.assertEqual(result['status'], 'regressions-found')
-        self.assertGreater(result['regressions'], 0)
-        self.assertEqual(result['original_strict_polygon_result']['findings']['features'][0]['properties']['location_ids'], ['A', 'B'])
-    def test_two_changed_owners_are_compared_to_each_other(self):
-        self.addition['geometry'] = feature('piece', 1.25, 1.75)['geometry']
-        second = {**self.addition, 'component_id': 'second', 'target_id': 'B', 'pixelIndex': 2,
-                  'base_geometry_sha256': digest(self.features['B']['geometry'])}
-        self.operands['effective_additions']['candidate'].append(second)
-        self.operands['plan']['changed_ids'] = ['A', 'B']
-        result = self.consume(self.publish())
-        self.assertGreater(result['regressions'], 0)
-    def test_polygon_loss_is_preserved(self):
-        self.operands['effective_additions']['candidate'] = []
-        self.operands['candidate']['A'] = feature('A', 0, 0.5)
-        for row in self.facts['inverse']:
-            if row['vintage'] == 'candidate' and row['id'] == 'A':
-                row['geometry_sha256'] = digest(self.operands['candidate']['A']['geometry'])
-        result = self.consume(self.publish())
-        self.assertGreater(result['regressions'], 0)
-    def test_wrong_changed_scope_fails_against_actual_polygon_result(self):
-        self.operands['plan']['changed_ids'] = ['B']
-        with self.assertRaisesRegex(ValueError, 'changed-ID closure differs'):
-            self.consume(self.publish())
-    def test_omitted_operand_and_inverse_records_fail_before_comparison(self):
-        del self.operands['candidate']['B']
-        with self.assertRaisesRegex(ValueError, 'closure omitted'):
-            self.consume(self.publish())
-        self.operands['candidate']['B'] = self.features['B']
-        self.facts['inverse'].pop()
-        with self.assertRaisesRegex(ValueError, 'inverse scope differs'):
-            self.consume(self.publish())
-    def test_tampered_body_and_symlink_are_not_a_successful_publication(self):
-        issued = self.publish()
-        target = self.directory / 'operands.json.gz'
-        target.write_bytes(target.read_bytes()[:-1] + b'x')
-        with self.assertRaisesRegex(ValueError, 'differs from issued trusted child'):
-            self.consume(issued)
-        self.publish()
-        target.rename(self.directory / 'sentinel.gz')
-        target.symlink_to(self.directory / 'sentinel.gz')
-        with self.assertRaisesRegex(ValueError, 'Nonordinary whole'):
-            self.consume(issued)
-    def test_foreign_execution_vintage_is_rejected(self):
-        self.facts['executing_commit'] = NEXT
-        with self.assertRaisesRegex(ValueError, 'Foreign selected execution'):
-            self.consume(self.publish())
+
+def native(**extra):
+    return {'method': 'selected-native-owner-conservation-v1', 'status': 'no-new-native-loss',
+            'candidate_code_executed': False, 'intervals': [], 'lost_or_reassigned_cells': 0, **extra}
+
+
+@contextmanager
+def no_polygons():
+    original_import = builtins.__import__
+
+    def guarded_import(name, *args, **kwargs):
+        if name == 'shapely' or name.startswith('shapely.'):
+            raise AssertionError('selected runner imported Shapely')
+        return original_import(name, *args, **kwargs)
+
+    with mock.patch.object(builtins, '__import__', side_effect=guarded_import), \
+         mock.patch.object(G.importlib.util, 'spec_from_file_location', side_effect=AssertionError('selected runner loaded polygon detector')):
+        yield
+
 
 class JointRouting(unittest.TestCase):
     def issued(self, **extra):
         return {'version': 1, 'kind': 'trusted-selected-joint-comparison-v1', 'candidate_code_executed': False, **extra}
-    def test_only_explicit_unavailable_custody_selects_legacy_fallback(self):
+
+    def test_only_explicit_unavailable_custody_selects_cold_native_fallback(self):
         value = self.issued(mode='legacy-cold-required', reuse_unavailable={'cold': 'candidate', 'reason': 'changed base'})
-        with mock.patch.object(G.subprocess, 'check_output', return_value=raw(value)) as launch, \
-             mock.patch.object(G, 'consume_selected_continuous', side_effect=AssertionError('unavailable proof consumed')):
-            self.assertEqual(G.selected_joint(ROOT, BASE, NEXT, D), value)
+        with no_polygons(), mock.patch.object(G.subprocess, 'check_output', return_value=raw(value)) as launch:
+            self.assertEqual(G.selected_joint(ROOT, BASE, NEXT), value)
         self.assertEqual(launch.call_count, 1)
         self.assertEqual(launch.call_args.args[0][1], '--expose-gc')
+        self.assertTrue(launch.call_args.args[0][2].endswith('/selected-joint-entry.mjs'))
         del value['reuse_unavailable']
         with mock.patch.object(G.subprocess, 'check_output', return_value=raw(value)):
             with self.assertRaisesRegex(ValueError, 'fallback omitted'):
-                G.selected_joint(ROOT, BASE, NEXT, D)
-    def test_native_failure_does_not_consume_continuous_or_report_success(self):
-        value = self.issued(mode='authenticated-checkpoint-append-v1', native={'status': 'native-regressions-found', 'candidate_code_executed': False, 'intervals': [{'row': 1}]}, continuous=None)
-        with mock.patch.object(G.subprocess, 'check_output', return_value=raw(value)), \
-             mock.patch.object(G, 'consume_selected_continuous', side_effect=AssertionError('continuous called')):
-            self.assertEqual(G.selected_joint(ROOT, BASE, NEXT, D), value)
-    def test_joint_success_uses_the_same_complete_readback_function(self):
-        value = self.issued(mode='authenticated-checkpoint-append-v1', native={'status': 'no-new-native-loss', 'candidate_code_executed': False}, continuous={'actual': 'issued acknowledgement'})
-        strict = {'status': 'no-new-regression', 'regressions': 0}
-        with mock.patch.object(G.subprocess, 'check_output', return_value=raw(value)), \
-             mock.patch.object(G, 'consume_selected_continuous', return_value=strict) as consume:
-            self.assertEqual(G.selected_joint(ROOT, BASE, NEXT, D)['continuous_result'], strict)
-            self.assertEqual(consume.call_args.args[-1], value['continuous'])
-    def test_actual_inspect_route_does_not_launch_old_native_or_continuous(self):
-        native = {'status': 'no-new-native-loss', 'candidate_code_executed': False}
-        continuous = {'status': 'no-new-regression', 'regressions': 0}
-        with mock.patch.object(G, 'verify_trusted_checkout', return_value='fixture'), \
-             mock.patch.object(G, 'inventory', return_value=[]), \
-             mock.patch.object(G, 'unchanged_selected_inputs', return_value=None), \
-             mock.patch.object(G, 'git', return_value=b'present'), \
-             mock.patch.object(G, 'selected_joint', return_value={'mode': 'authenticated-checkpoint-append-v1', 'native': native, 'continuous_result': continuous}), \
-             mock.patch.object(G.subprocess, 'check_output', side_effect=AssertionError('duplicate native child')), \
-             mock.patch.object(G, 'selected_continuous', side_effect=AssertionError('duplicate continuous child')):
-            result = G.inspect(ROOT, BASE, NEXT)
-        self.assertIs(result['selected_native_report'], native)
-        self.assertIs(result['selected_continuous_report'], continuous)
+                G.selected_joint(ROOT, BASE, NEXT)
 
-    def test_software_inspect_runs_cold_native_and_continuous_with_distinct_data(self):
-        native = {'status': 'no-new-native-loss', 'candidate_code_executed': False}
-        continuous = {'status': 'no-new-regression', 'regressions': 0}
-        with mock.patch.object(G, 'verify_trusted_checkout', return_value='fixture') as verify, \
-             mock.patch.object(G, 'inventory', return_value=[]), \
+    def test_native_failure_returns_without_additional_comparison(self):
+        value = self.issued(mode='authenticated-checkpoint-append-v1',
+                            native=native(status='native-regressions-found', intervals=[{'row': 1}], lost_or_reassigned_cells=1))
+        with no_polygons(), mock.patch.object(G.subprocess, 'check_output', return_value=raw(value)) as child:
+            self.assertEqual(G.selected_joint(ROOT, BASE, NEXT), value)
+        self.assertEqual(child.call_count, 1)
+
+    def test_joint_success_returns_direct_native_checkpoint_without_polygon_receipts(self):
+        value = self.issued(mode='authenticated-checkpoint-append-v1', native=native(),
+                            derived_checkpoint={'validation_stage': 'native-passed', 'accepted_checkpoint': False})
+        with no_polygons(), mock.patch.object(G.subprocess, 'check_output', return_value=raw(value)) as child:
+            result = G.selected_joint(ROOT, BASE, NEXT)
+        self.assertEqual(result, value)
+        self.assertEqual(child.call_count, 1)
+        self.assertNotIn('continuous', result)
+        self.assertNotIn('continuous_result', result)
+
+    def test_joint_invalid_or_foreign_acknowledgements_fail_closed(self):
+        valid = self.issued(mode='authenticated-checkpoint-append-v1', native=native())
+        cases = [{**valid, 'kind': 'foreign'}, {**valid, 'candidate_code_executed': True},
+                 {**valid, 'mode': 'invented'}, {**valid, 'native': None},
+                 {**valid, 'native': native(status='not-applicable')},
+                 {**valid, 'native': native(candidate_code_executed=True)},
+                 {**valid, 'native': native(method='foreign')},
+                 {**valid, 'native': native(lost_or_reassigned_cells=1)},
+                 {**valid, 'native': native(intervals=[{'row': 1}])}]
+        for value in cases:
+            with self.subTest(value=value), mock.patch.object(G.subprocess, 'check_output', return_value=raw(value)):
+                with self.assertRaises(ValueError):
+                    G.selected_joint(ROOT, BASE, NEXT)
+
+    def test_joint_launcher_keeps_code_and_both_data_commits_distinct(self):
+        value = self.issued(mode='authenticated-checkpoint-append-v1', native=native())
+        with mock.patch.object(G.subprocess, 'check_output', return_value=raw(value)) as child:
+            G.selected_joint(ROOT, BASE, NEXT, trusted=NEXT)
+        self.assertEqual(child.call_args.args[0][3:7], [str(ROOT), NEXT, BASE, NEXT])
+
+
+class InspectRouting(unittest.TestCase):
+    @contextmanager
+    def fixture(self):
+        with ExitStack() as stack:
+            stack.enter_context(mock.patch.object(G, 'verify_trusted_checkout', return_value='fixture'))
+            stack.enter_context(mock.patch.object(G, 'inventory', return_value=[]))
+            stack.enter_context(mock.patch.object(G, 'unchanged_selected_inputs', return_value=None))
+            stack.enter_context(mock.patch.object(G, 'git', return_value=b'present'))
+            yield
+
+    def test_warm_and_cold_selected_routes_never_import_or_launch_continuous_polygons(self):
+        for cold in [False, True]:
+            calls = []
+            result = native()
+
+            def joint(*args, **kwargs):
+                calls.append('joint')
+                if cold:
+                    return {'mode': 'legacy-cold-required', 'reuse_unavailable': {'cold': 'candidate', 'reason': 'not accepted'}}
+                return {'mode': 'authenticated-checkpoint-append-v1', 'native': result}
+
+            def child(command, **kwargs):
+                self.assertTrue(command[1].endswith('/check-effective-geographic-regression.mjs'))
+                self.assertEqual(command[2:5], [str(ROOT), BASE, NEXT])
+                calls.append('native')
+                return raw(result)
+
+            with self.subTest(cold=cold), self.fixture(), no_polygons(), \
+                 mock.patch.object(G, 'selected_joint', side_effect=joint), \
+                 mock.patch.object(G, 'prefetch_declared_inputs', side_effect=lambda *args: calls.append('prefetch')), \
+                 mock.patch.object(G.subprocess, 'check_output', side_effect=child):
+                report = G.inspect(ROOT, BASE, NEXT, prefetch=True)
+            self.assertFalse(any(name == 'shapely' or name.startswith('shapely.') for name in sys.modules))
+            self.assertEqual(calls, ['joint', 'prefetch', 'native'] if cold else ['joint'])
+            self.assertEqual(report['selected_native_report'], result)
+            self.assertEqual(report['status'], 'no-new-native-loss')
+            self.assertEqual(report['regressions'], 0)
+            self.assertEqual(report['validation_scope'], 'selected-native-map-cells')
+            self.assertNotIn('selected_continuous_report', report)
+            self.assertNotIn('differential_report', report)
+
+    def test_software_inspect_runs_cold_native_with_distinct_data_and_no_checkpoint_reuse(self):
+        result = native()
+        with self.fixture(), no_polygons(), \
+             mock.patch.object(G, 'verify_trusted_checkout', return_value='fixture') as verify, \
              mock.patch.object(G, 'unchanged_selected_inputs', side_effect=AssertionError('software shortcut')), \
-             mock.patch.object(G, 'git', return_value=b'present'), \
              mock.patch.object(G, 'selected_joint', side_effect=AssertionError('software checkpoint reuse')), \
-             mock.patch.object(G.subprocess, 'check_output', return_value=raw(native)) as child, \
-             mock.patch.object(G, 'selected_continuous', return_value=continuous) as cold:
-            result = G.inspect(ROOT, BASE, NEXT, code_commit=NEXT, checkpoint_destination=ROOT)
+             mock.patch.object(G.subprocess, 'check_output', return_value=raw(result)) as child:
+            report = G.inspect(ROOT, BASE, NEXT, code_commit=NEXT, checkpoint_destination=ROOT)
         verify.assert_called_once_with(ROOT, NEXT)
         self.assertEqual(child.call_args.args[0][-3:-1], [BASE, NEXT])
-        self.assertEqual(cold.call_args.args[1:3], (BASE, NEXT))
-        self.assertEqual(cold.call_args.kwargs, {'trusted': NEXT})
-        self.assertEqual(result['trusted_code_commit'], NEXT)
-        self.assertTrue(result['candidate_code_executed'])
-        self.assertEqual(result['selected_native_report'], native)
-        self.assertIs(result['selected_continuous_report'], continuous)
-        self.assertNotIn('checkpoint', result)
+        self.assertEqual(child.call_count, 1)
+        self.assertEqual(report['trusted_code_commit'], NEXT)
+        self.assertTrue(report['candidate_code_executed'])
+        self.assertEqual(report['selected_native_report'], result)
+        self.assertNotIn('selected_continuous_report', report)
+        self.assertNotIn('checkpoint', report)
 
-    def test_cold_launcher_separates_code_from_both_data_commits(self):
-        issued = {'protocol': 'unchanged-child'}
-        with mock.patch.object(G.subprocess, 'check_output', return_value=raw(issued)) as child, \
-             mock.patch.object(G, 'consume_selected_continuous', return_value={}) as consume:
-            G.selected_continuous(ROOT, BASE, NEXT, D, trusted=NEXT)
-        args = child.call_args.args[0]
-        self.assertEqual(args[4:8], [str(ROOT), NEXT, BASE, NEXT])
-        self.assertEqual(consume.call_args.kwargs, {'trusted': NEXT})
+    def test_warm_and_cold_invalid_native_results_fail_closed(self):
+        for cold in [False, True]:
+            for alter in [lambda v: v.pop('method'), lambda v: v.update(method='foreign'),
+                          lambda v: v.update(candidate_code_executed=True), lambda v: v.pop('status'),
+                          lambda v: v.update(status='no-new-regression'), lambda v: v.pop('lost_or_reassigned_cells'),
+                          lambda v: v.update(lost_or_reassigned_cells=1), lambda v: v.pop('intervals'),
+                          lambda v: v.update(intervals=[{'row': 1}])]:
+                value = native(); alter(value)
+                joint = {'mode': 'legacy-cold-required'} if cold else {'mode': 'authenticated-checkpoint-append-v1', 'native': value}
+                with self.subTest(cold=cold, value=value), self.fixture(), no_polygons(), \
+                     mock.patch.object(G, 'selected_joint', return_value=joint), \
+                     mock.patch.object(G.subprocess, 'check_output', return_value=raw(value)):
+                    with self.assertRaisesRegex(ValueError, 'completed native result|contradicts conservation'):
+                        G.inspect(ROOT, BASE, NEXT)
+
+    def test_native_loss_is_reported_without_polygon_adjudication_or_checkpoint(self):
+        value = native(status='native-regressions-found', intervals=[{'row': 1}], lost_or_reassigned_cells=1)
+        with self.fixture(), no_polygons(), \
+             mock.patch.object(G, 'selected_joint', return_value={'mode': 'authenticated-checkpoint-append-v1', 'native': value}), \
+             mock.patch.object(G.subprocess, 'check_output', side_effect=AssertionError('duplicate comparison')):
+            report = G.inspect(ROOT, BASE, NEXT)
+        self.assertEqual(report['status'], 'native-regressions-found')
+        self.assertEqual(report['regressions'], 1)
+        self.assertNotIn('selected_continuous_report', report)
+        self.assertNotIn('checkpoint', report)
+        self.assertNotIn('adjudication', report)
+
+    def test_nonselected_changed_geography_still_loads_and_runs_raw_polygon_detector(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            repo = pathlib.Path(temporary)
+            (repo / 'scripts').mkdir()
+            (repo / 'scripts/check-geographic-regression.py').write_text(
+                "def inspect(repo, baseline, candidate):\n"
+                "    assert baseline == '1' * 40 and candidate == '2' * 40\n"
+                "    return {'status': 'regressions-found', 'regressions': 2, 'raw_detector_executed': True}\n")
+            with self.fixture(), mock.patch.object(G, 'inventory', side_effect=[['before'], ['after']]), \
+                 mock.patch.object(G, 'git', return_value=b''), \
+                 mock.patch.object(G, 'selected_joint', side_effect=AssertionError('nonselected checkpoint route')), \
+                 mock.patch.object(G.subprocess, 'check_output', side_effect=AssertionError('nonselected native route')):
+                report = G.inspect(repo, BASE, NEXT)
+        self.assertEqual(report['status'], 'regressions-found')
+        self.assertEqual(report['regressions'], 2)
+        self.assertTrue(report['differential_report']['raw_detector_executed'])
+        self.assertNotIn('selected_native_report', report)
+
 
 if __name__ == '__main__':
     unittest.main()

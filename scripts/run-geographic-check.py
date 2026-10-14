@@ -234,10 +234,12 @@ def selected_joint(repo, baseline, candidate, *, trusted=None, checkpoint_destin
         if issued.get('mode') != 'authenticated-checkpoint-append-v1' or not isinstance(issued.get('native'), dict):
             raise ValueError('Joint selected comparison did not complete native validation')
         native = issued['native']
-        if native.get('candidate_code_executed') is not False or native.get('status') not in ['native-regressions-found', 'no-new-native-loss']:
+        if native.get('method') != 'selected-native-owner-conservation-v1' or native.get('candidate_code_executed') is not False or native.get('status') not in ['native-regressions-found', 'no-new-native-loss']:
             raise ValueError('Joint native comparison result is incomplete')
         if native['status'] == 'native-regressions-found':
             return issued
+        if native.get('lost_or_reassigned_cells') != 0 or native.get('intervals') != []:
+            raise ValueError('Successful native comparison contradicts conservation results')
         if checkpoint_destination is not None:
             issued['checkpoint'] = products.retain_checkpoint_products(destination, checkpoint_destination, issued,
                 allowance=min(products.PHASE, selected_consumer_allowance(repo)))
@@ -387,6 +389,8 @@ def inspect(repo, baseline, candidate, *, code_commit=None, prefetch=False, chec
             return {**report, 'status': 'native-regressions-found',
                     'regressions': len(native['intervals']),
                     'limits': ['Existing owner loss/reassignment has no automatic water or political exception. Unsupported native scope requires an explicit migration.']}
+        if native.get('lost_or_reassigned_cells') != 0 or native.get('intervals') != []:
+            raise ValueError('Successful native comparison contradicts conservation results')
         if joint is not None and joint.get('checkpoint') is not None:
             report['checkpoint'] = joint['checkpoint']
         return {**report, 'status':'no-new-native-loss', 'regressions':0,

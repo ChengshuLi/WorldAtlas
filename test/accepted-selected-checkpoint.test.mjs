@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
-import {crc32, gzipSync, deflateRawSync} from 'node:zlib';
+import zlib, {crc32, gzipSync, deflateRawSync} from 'node:zlib';
+import {syncBuiltinESMExports} from 'node:module';
 import {CHECKPOINT_MEMBERS, readReportArchive, reportHash, geographicReportProducts,
   loadGeographicReport} from '../scripts/geographic-report-artifact.mjs';
 import {acquireAcceptedCheckpoint, readAcceptedCheckpoint, releaseAcceptedCheckpoint,
@@ -37,11 +38,14 @@ function zipMembers(members, {descriptor = false, method = 8} = {}) {
 const head = 'a'.repeat(40), baseline = 'b'.repeat(40), candidate = 'c'.repeat(40), merged = 'd'.repeat(40), tree = 'e'.repeat(40), workflowHead = 'f'.repeat(40);
 const request = '01234567-abcd-4321-aaaa-123456789012';
 const json = value => Buffer.from(JSON.stringify(value) + '\n');
-function checkpoint() {
-  const bodies = CHECKPOINT_MEMBERS.map(name => [name, name.endsWith('.gz') ? gzipSync(json({member: name})) : json({member: name})]);
+const archivedPolygonMembers = ['facts.json', 'operands.json.gz', 'publication.json'];
+function checkpoint({historical = false} = {}) {
+  const bodies = [...CHECKPOINT_MEMBERS, ...(historical ? archivedPolygonMembers : [])].map(name => [name, name.endsWith('.gz') ? gzipSync(json({member: name})) : json({member: name})]);
   const report = {version: 1, method_id: 'worldatlas-trusted-geography-check-v1', baseline_commit: baseline,
     candidate_commit: candidate, trusted_code_commit: baseline, candidate_code_executed: false,
-    published: false, source_approval: false, gate_status: 'passed', status: 'no-new-regression',
+    published: false, source_approval: false, gate_status: 'passed', status: historical ? 'no-new-regression' : 'no-new-native-loss',
+    ...(!historical ? {validation_scope: 'selected-native-map-cells', selected_native_report: {method: 'selected-native-owner-conservation-v1',
+      status: 'no-new-native-loss', candidate_code_executed: false, lost_or_reassigned_cells: 0, intervals: []}} : {}),
     checkpoint: {version: 1, kind: 'selected-checkpoint-products-v1', members: bodies.map(([name, raw]) => ({name, bytes: raw.length,
       sha256: reportHash(raw), ...(name.endsWith('.gz') ? {decoded_bytes: json({member:name}).length, decoded_sha256: reportHash(json({member:name}))} : {})}))}};
   return {report, bodies};
@@ -102,7 +106,7 @@ test('current admission refuses before product allocation and full declared unio
   for (const row of f.report.checkpoint.members) { row.bytes=32*1024*1024; if(row.decoded_bytes) row.decoded_bytes=row.bytes; }
   const hugeRoot = json(f.report), huge = zipMembers([['geography-check.json',hugeRoot],...f.bodies],{descriptor:true});
   let cursor=huge.readUInt32LE(huge.length-6);
-  for(let i=0;i<8;i++) {const nameLength=huge.readUInt16LE(cursor+28); if(i) {
+  for(let i=0;i<f.bodies.length+1;i++) {const nameLength=huge.readUInt16LE(cursor+28); if(i) {
     huge.writeUInt32LE(32*1024*1024,cursor+24);
     const local=huge.readUInt32LE(cursor+42), start=local+30+huge.readUInt16LE(local+26), packed=huge.readUInt32LE(cursor+20);
     huge.writeUInt32LE(32*1024*1024,start+packed+12);
@@ -110,8 +114,9 @@ test('current admission refuses before product allocation and full declared unio
   assert.throws(() => readReportArchive(huge,reportHash(hugeRoot)),/combined budget/);
 });
 
-function acceptedFixture() {
-  const f = checkpoint(), encoded = encode(f); Object.assign(f,encoded);
+function acceptedFixture(options, alterReport = () => {}) {
+  const f = checkpoint(options); alterReport(f.report);
+  const encoded = encode(f); Object.assign(f,encoded);
   f.source = {run_id:12,run_attempt:2,job_id:34,tree,head,baseline,candidate_commit:candidate,
     workflow_path:'.github/workflows/worker-merge.yml',event:'workflow_dispatch',workflow_head:workflowHead,
     artifact_id:56,artifact_name:`geography-${request}-2`,artifact_digest:reportHash(f.zip),artifact_bytes:f.zip.length,
@@ -147,10 +152,57 @@ test('real acquisition accepts bot/merged/tree/origin/artifact custody and mints
   const f=acceptedFixture(), result=await acquireAcceptedCheckpoint(f.options);
   assert.equal(result.available,true); const proof=readAcceptedCheckpoint(result.handle);
   assert.equal(proof.source.workflow_head,workflowHead); assert.equal(proof.source.head,head);
-  assert.equal(proof.archive_origin,'actions'); assert.equal(proof.products['facts.json'].member,'facts.json');
-  assert(Object.isFrozen(proof.products['facts.json'])); assert.equal(proof.admitted_bytes,f.admitted.at(-1));
+  assert.equal(proof.archive_origin,'actions'); assert.equal(proof.products['derived-facts.json'].member,'derived-facts.json');
+  assert(Object.isFrozen(proof.products['derived-facts.json'])); assert.equal(proof.admitted_bytes,f.admitted.at(-1));
   assert.throws(()=>readAcceptedCheckpoint(JSON.parse(JSON.stringify(result.handle))),/private/);
   releaseAcceptedCheckpoint(result.handle); assert.throws(()=>readAcceptedCheckpoint(result.handle),/private/);
+});
+test('fresh accepted map reports require completed native conservation even with refreshed authenticated provenance', async () => {
+  for (const alter of [r => delete r.validation_scope, r => delete r.selected_native_report,
+    r => r.selected_native_report.method = 'foreign', r => r.selected_native_report.status = 'native-regressions-found',
+    r => r.selected_native_report.candidate_code_executed = true, r => r.selected_native_report.lost_or_reassigned_cells = 1,
+    r => delete r.selected_native_report.lost_or_reassigned_cells, r => delete r.selected_native_report.intervals,
+    r => r.selected_native_report.intervals.push({row: 1})]) {
+    const f = acceptedFixture(undefined, alter);
+    await assert.rejects(acquireAcceptedCheckpoint(f.options), /Combined geographic findings remain unresolved/);
+  }
+});
+test('accepted original seven-member archive decodes only native products and preserves complete provenance', async t => {
+  const f = acceptedFixture({historical: true});
+  const originalInflate = zlib.inflateRawSync, originalGunzip = zlib.gunzipSync;
+  const inflated = [], unzipped = [];
+  zlib.inflateRawSync = (...args) => {
+    const result = originalInflate(...args);
+    inflated.push(reportHash(Buffer.isBuffer(result) ? result : result.buffer));
+    return result;
+  };
+  zlib.gunzipSync = (...args) => {unzipped.push(reportHash(args[0])); return originalGunzip(...args);};
+  syncBuiltinESMExports();
+  let result;
+  try { result = await acquireAcceptedCheckpoint(f.options); }
+  finally {
+    zlib.inflateRawSync = originalInflate; zlib.gunzipSync = originalGunzip; syncBuiltinESMExports();
+  }
+  assert.equal(result.available, true);
+  const proof = readAcceptedCheckpoint(result.handle);
+  t.after(() => releaseAcceptedCheckpoint(result.handle));
+  const nativePins = f.report.checkpoint.members.filter(pin => CHECKPOINT_MEMBERS.includes(pin.name));
+  assert.deepEqual(inflated, [reportHash(f.raw), ...nativePins.map(pin => pin.sha256)]);
+  const certificate = nativePins.find(pin => pin.name === 'derived-certificate.json.gz');
+  assert.deepEqual(unzipped, [certificate.sha256, certificate.sha256]);
+  assert.deepEqual(Object.keys(proof.products), CHECKPOINT_MEMBERS);
+  assert.deepEqual(proof.member_pins, f.report.checkpoint.members);
+  assert.equal(proof.member_pins.length, 7);
+  assert.deepEqual(proof.report, f.report);
+  assert.equal(proof.report.selected_continuous_report, undefined);
+  assert(geographicReportProducts(proof.report).report_bytes.equals(f.raw));
+  assert.equal(geographicReportProducts(proof.report).admitted_bytes,
+    2 * f.zip.length + 8 * f.raw.length + nativePins.reduce((sum, pin) => sum + pin.bytes + 8 * (pin.decoded_bytes ?? pin.bytes), 0));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'accepted-original-'));
+  t.after(() => fs.rmSync(root, {recursive: true, force: true}));
+  fs.mkdirSync(path.join(root, 'coordination/engineering/native-repair'), {recursive: true});
+  const locator = retainAcceptedCheckpoint(result.handle, {repo: root, directory: 'coordination/engineering/native-repair/accepted'});
+  assert(fs.readFileSync(path.join(root, locator.retained_artifact.path)).equals(f.zip));
 });
 test('fake bot or nonaccepted receipt produces no checkpoint authority', async () => {
   for(const mutate of [f=>f.bot='attacker',f=>f.receipt.accepted=false,f=>f.receipt.request_id='another-request-12345']) {
@@ -271,21 +323,4 @@ test('prospective metadata admission refuses before fetching the second large co
     if(bytes>24*1024*1024)throw Error('current allowance');
   }}),/current allowance/);
   assert.equal(commitReads,1);
-});
-
-test('authenticated scoped pixel archive admits four members while legacy remains seven',()=>{
-  const f=checkpoint();
-  const continuousNames=['facts.json','operands.json.gz','publication.json'];
-  f.bodies=f.bodies.filter(([name])=>!continuousNames.includes(name));
-  f.report.checkpoint.members=f.report.checkpoint.members.filter(row=>!continuousNames.includes(row.name));
-  f.report.selected_continuous_report={scope:'visible-native-pixel-repair-v1',status:'not-applicable',regressions:null};
-  const {raw,zip}=encode(f),report=readReportArchive(zip,reportHash(raw));
-  assert.equal(geographicReportProducts(report).members.size,4);
-  for(const mutate of [x=>delete x.report.selected_continuous_report,
-    x=>x.report.selected_continuous_report.regressions=0,
-    x=>x.report.selected_continuous_report.original_strict_polygon_result={status:'no-new-regression'},
-    x=>x.bodies.push(['facts.json',json({})]),x=>x.report.checkpoint.members.pop()]) {
-    const altered=checkpoint();altered.bodies=f.bodies.map(([name,body])=>[name,body]);altered.report=structuredClone(f.report);mutate(altered);
-    const bad=encode(altered);assert.throws(()=>readReportArchive(bad.zip,reportHash(bad.raw)));
-  }
 });

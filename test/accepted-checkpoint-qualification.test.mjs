@@ -343,7 +343,7 @@ test('accepted native losses or missing native execution cannot mint a successor
   const f=await acceptedProducts(t);
   for(const mutate of [p=>p.native.lost_or_reassigned_cells=1,p=>p.native.intervals.push({bad:true}),
     p=>p.native.method='unknown',p=>p.native.candidate_code_executed=true]){
-    const a=await acquire(f,mutate);await assert.rejects(qualify(f,a),/successful.*native result/);f.transport.releaseAcceptedCheckpoint(a.handle);
+    await assert.rejects(async()=>{const a=await acquire(f,mutate);try{await qualify(f,a);}finally{f.transport.releaseAcceptedCheckpoint(a.handle);}},/successful.*native result|findings remain unresolved/);
   }
 });
 test('coherently rehashed omitted routes, stale selectors, old exception drift and unknown schema refuse',async t=>{
@@ -354,7 +354,7 @@ test('coherently rehashed omitted routes, stale selectors, old exception drift a
     [p=>p.facts.executing_policy.body+=' ',/policy identity differs/],
     [p=>p.facts.executing_policy.body=p.facts.executing_policy.body.replace('1','2'),/policy body differs/],
     [p=>p.facts.execution_code=p.facts.execution_code.filter(x=>x.path!=='scripts/selected-checkpoint-native.mjs'),/original native execution/],
-    [p=>p.certificate.entries.pop(),/Incomplete accepted coordinate/]]) {
+    [p=>p.certificate.entries.pop(),/stable owner\/index\/parent roster/]]) {
     const a=await acquire(f,mutate);
     try {const result=await qualify(f,a);assert.equal(result.available,false);assert.match(result.reason,reason);}
     catch(error){assert.match(error.message,reason);}
@@ -473,7 +473,7 @@ test('accepted complete source routes remain projected from authenticated immuta
   assert.deepEqual(projection.features.map(p=>p.id),['A','B','C','D','E']);
   f.api.releaseCheckpoint(result.state);f.transport.releaseAcceptedCheckpoint(accepted.handle);
   const omitted=await acquire(f,p=>p.certificate.inputs.pop());
-  await assert.rejects(qualify(f,omitted),/source binding inventory/);
+  await assert.rejects(qualify(f,omitted),/Incomplete accepted coordinate|source binding inventory/);
 });
 
 function successorSelector(f,name='successor/sidecar.json') {

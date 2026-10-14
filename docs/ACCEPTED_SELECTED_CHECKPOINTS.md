@@ -2,8 +2,8 @@
 
 A batch's provisional products become reusable only through the normal accepted
 merge boundary. A locator, a candidate certificate, a local digest or an uploaded
-ZIP alone cannot qualify a checkpoint. Scientific/source/publication limits are
-unchanged.
+ZIP alone cannot qualify a checkpoint. Source authority and delivered-map validation remain required. Continuous polygon
+overlap is outside the selected map-cell repair scope.
 
 ## Authority and lineage
 
@@ -12,7 +12,7 @@ receipt, checks the actual merged PR with the same verifier used by the queue,
 checks the accepted/tested trees, and authenticates the originating geography
 run, job and artifact. It returns an invocation-private handle. The selected
 qualifier independently checks complete selectors, source/native bindings,
-execution lineage, native and original strict Python outcomes and the complete
+execution lineage, native conservation and the complete
 present/absent route census before creating its own checkpoint capability.
 
 PR provenance uses `merge-integration-checks.yml` / `pull_request`; the workflow
@@ -28,8 +28,8 @@ or rerun historical science.
 
 ## Authenticated artifact
 
-`geography-check.json` remains the authenticated root, including complete native
-and original strict Python results. Its optional `checkpoint` object has version
+`geography-check.json` remains the authenticated root, including the actual native
+conservation result and per-component visible-cell witnesses. Its optional `checkpoint` object has version
 `1`, kind `selected-checkpoint-products-v1`, and a `members` array. Each member
 has a fixed `name`, exact `bytes` and `sha256`; gzip members additionally bind
 `decoded_bytes` and `decoded_sha256`.
@@ -37,12 +37,11 @@ has a fixed `name`, exact `bytes` and `sha256`; gzip members additionally bind
 The complete supported roster is:
 
 - `derived-certificate.json.gz`, `derived-facts.json`, `derived-publication.json`
-- `facts.json`, `operands.json.gz`, `publication.json`
 - `checkpoint-routes.json`
 - `operating.json` only when an actual producer emits it
 
 The provisional derived publication keeps `accepted_checkpoint:false` and its
-original validation stage. Acceptance is external custody, not an edited boolean.
+`native-passed` validation stage. Acceptance is external custody, not an edited boolean.
 The successful trusted job supplies terminal execution authority; the transport
 does not fabricate an operating or cleanup measurement.
 
@@ -53,6 +52,11 @@ traversal, links/directories, contradictory sizes/CRCs, malformed descriptors,
 compressed trailing bytes and excess decoded gzip output are rejected. Nothing
 is extracted into the trusted checkout. Legacy one-member artifacts remain
 reports and cannot provide checkpoint products.
+
+Existing accepted seven-member archives remain byte-identical. The reader
+authenticates their original archive and root, then decodes only the four current
+native checkpoint members. It neither decodes archived polygon operands nor
+fabricates a polygon pass. New producers emit only the four-member roster.
 
 The existing ordinary/report and archive limits remain 32 MiB and 40 MiB.
 Checkpoint acquisition additionally admits the complete transport, decoded JSON,
@@ -103,10 +107,10 @@ checkpoint. The initial rollout therefore adds one typed
 `accepted-derived-selected-checkpoint-v1` row to the existing executing trusted-main
 catalogue, after the combined joint implementation and its retained clean proof
 are actually accepted. This is a one-time bootstrap, not a per-batch registration
-step. The row pins the original certificate, continuous operands/facts, native
-and original strict result, successful operating receipt, exact executing policy,
-and complete inherited-plus-candidate route census. Historical proof bytes and
-provisional publications remain unchanged.
+step. The row preserves the original archive pins. Current admission reads only its
+certificate, derived facts/publication, native result, successful operating receipt,
+executing policy and complete route census. Archived polygon products stay
+unchanged and are never rerun or required as a current acceptance outcome.
 
 The seed uses the same private derived-state admission as accepted artifacts,
 with `trusted-main-derived-selected-checkpoint-v1` lineage. It does not claim
@@ -114,7 +118,7 @@ a hosted job receipt or cold acquisition. Current selectors, complete routes,
 consumed policy and current memory allowance are still checked. Candidate data
 cannot register itself in the executing catalogue.
 
-The first selected batch using that seed must pass both original consumers and
+The first selected batch using that seed must pass the actual native comparison and
 the normal hosted job/merge boundary, which creates the first complete accepted
 artifact. The following selected batch uses that artifact's normal merge receipt
 and locator through `acquireAcceptedCheckpoint`; it requires no catalogue or
@@ -122,7 +126,7 @@ executable change. Those two real batch handoffs establish bootstrap and generic
 advancement separately.
 
 Warm admission runs before any optional full-bank prefetch. Only an explicit
-legacy-cold decision starts that prefetch and the existing cold route. An
+cold decision starts that prefetch and the complete native comparison. An
 authentication contradiction or access denial remains an error.
 
 ## Completion criterion

@@ -104,7 +104,7 @@ def retain_checkpoint_products(source, destination, issued, *, allowance=PHASE):
     derived = _json(bodies['derived-publication.json'])
     facts = _json(bodies['derived-facts.json'])
     native = issued.get('native', {})
-    if (native.get('status') != 'no-new-native-loss' or native.get('candidate_code_executed') is not False
+    if (native.get('method') != 'selected-native-owner-conservation-v1' or native.get('status') != 'no-new-native-loss' or native.get('candidate_code_executed') is not False
             or native.get('lost_or_reassigned_cells') != 0 or native.get('intervals') != []):
         raise ValueError('Checkpoint products lack successful native conservation')
     if (derived.get('complete') is not True or derived.get('accepted_checkpoint') is not False
