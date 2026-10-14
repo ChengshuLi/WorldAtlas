@@ -1,0 +1,485 @@
+{
+  "version": 1,
+  "research_date": "2026-10-14",
+  "status": "primary-documentary-research-only; all175 repair land cells remain open",
+  "parent_id": "framework:province:bhamo:7bd3ba702533",
+  "scope": {
+    "complete_children": [
+      {
+        "owner": 30178,
+        "id": "gb:MMR:ADM3:66882298B3684723287244",
+        "name": "Bhamo",
+        "province_id": "framework:province:bhamo:7bd3ba702533",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B3684723287244"
+        ],
+        "remaining_counts": {},
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [],
+        "source_sids": [],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 106,
+          "interior_rings": 0,
+          "bounds": [
+            96.7758,
+            23.7146,
+            97.3939,
+            24.7101
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 285,
+          "interior_rings": 0,
+          "bounds": [
+            96.77580431900013,
+            23.711820320000076,
+            97.39491090000008,
+            24.710102023000083
+          ]
+        }
+      },
+      {
+        "owner": 30181,
+        "id": "gb:MMR:ADM3:66882298B3817966441751",
+        "name": "Shwegu",
+        "province_id": "framework:province:bhamo:7bd3ba702533",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B3817966441751"
+        ],
+        "remaining_counts": {},
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [],
+        "source_sids": [],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 100,
+          "interior_rings": 0,
+          "bounds": [
+            96.549,
+            23.9921,
+            97.0861,
+            24.7772
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 416,
+          "interior_rings": 0,
+          "bounds": [
+            96.54903642200013,
+            23.99208010700005,
+            97.08608128100012,
+            24.77715471100004
+          ]
+        }
+      },
+      {
+        "owner": 30258,
+        "id": "gb:MMR:ADM3:66882298B58400642266296",
+        "name": "Mansi",
+        "province_id": "framework:province:bhamo:7bd3ba702533",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B58400642266296"
+        ],
+        "remaining_counts": {
+          "repair-evaluation:land": 126
+        },
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          27
+        ],
+        "source_sids": [
+          15319,
+          44886,
+          44910,
+          45228
+        ],
+        "topology_fields": {
+          "topology_version": 1
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 96,
+          "interior_rings": 0,
+          "bounds": [
+            96.9746,
+            23.6341,
+            97.7522,
+            24.204
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 278,
+          "interior_rings": 0,
+          "bounds": [
+            96.97464527900004,
+            23.633245377000044,
+            97.75218672900006,
+            24.203980483000034
+          ]
+        }
+      },
+      {
+        "owner": 30261,
+        "id": "gb:MMR:ADM3:66882298B59325512969250",
+        "name": "Momauk",
+        "province_id": "framework:province:bhamo:7bd3ba702533",
+        "source_id": "gb:MMR:ADM3",
+        "source_atoms": [
+          "gb:MMR:ADM3:66882298B59325512969250"
+        ],
+        "remaining_counts": {
+          "repair-evaluation:land": 49
+        },
+        "accepted_removed_cells": 0,
+        "reserved_excluded_cells": 0,
+        "blocks": [
+          27
+        ],
+        "source_sids": [
+          44886,
+          44910,
+          45208
+        ],
+        "topology_fields": {
+          "topology_version": 1,
+          "topology_reconciled": true,
+          "topology_conflicts": 2,
+          "topology_note": "Shared display coverage reconciled against Natural Earth reference borders, then finer source geometry. Original source boundaries may differ."
+        },
+        "current_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 132,
+          "interior_rings": 1,
+          "bounds": [
+            97.1721,
+            24.1621,
+            97.7695,
+            24.8883
+          ]
+        },
+        "original_geometry": {
+          "type": "Polygon",
+          "polygons": 1,
+          "coordinate_pairs": 333,
+          "interior_rings": 0,
+          "bounds": [
+            97.17017942000018,
+            24.162086447,
+            97.76954563000007,
+            24.90497679300019
+          ]
+        }
+      }
+    ],
+    "repair_land": 175,
+    "relative": 0,
+    "source_parent_features": [
+      {
+        "source_index": 44910,
+        "family_index": 217,
+        "source_id": "gb:MMR:ADM2:60261553B27046412343024",
+        "ordinal": 13,
+        "owners": [],
+        "name": "Bhamo",
+        "geometry_status": "raw-native-supported"
+      }
+    ],
+    "source_region_features": [
+      {
+        "id": "gb:MMR:ADM1:20573499B79934184351821",
+        "name": "Kachin"
+      }
+    ]
+  },
+  "custody": {
+    "inventory": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+      "sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157"
+    },
+    "intervals": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/remaining-intervals.json.gz",
+      "sha256": "b12b9ed64ecb16fa2b5501648fa4ca91727793fa99ceadffb96d9623519c93aa"
+    },
+    "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+    "retention_commit": null,
+    "retention_limit": "Small input caches are read by absolute locator and verified byte SHA256; scientific_vintage is not represented as a cache retention commit.",
+    "latitude_pin": {
+      "commit": "5b32388df0501b013ac9a3ba97864932db493d59",
+      "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+      "decoded_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+    },
+    "longitude_formula": "(x+0.5)/262166*360-180",
+    "centre_envelopes": [
+      {
+        "owner": 30258,
+        "name": "Mansi",
+        "id": "gb:MMR:ADM3:66882298B58400642266296",
+        "interval_count": 79,
+        "cell_count": 126,
+        "x_inclusive": [
+          202133,
+          202269
+        ],
+        "y_inclusive": [
+          112923,
+          113177
+        ],
+        "centre_envelope_degrees": {
+          "longitude": [
+            97.56482533967028,
+            97.75157724495165
+          ],
+          "latitude": [
+            23.865742133526947,
+            24.184312019396653
+          ]
+        },
+        "source_sids": [
+          15319,
+          44886,
+          44910,
+          45228
+        ]
+      },
+      {
+        "owner": 30261,
+        "name": "Momauk",
+        "id": "gb:MMR:ADM3:66882298B59325512969250",
+        "interval_count": 45,
+        "cell_count": 49,
+        "x_inclusive": [
+          202111,
+          202265
+        ],
+        "y_inclusive": [
+          112491,
+          112873
+        ],
+        "centre_envelope_degrees": {
+          "longitude": [
+            97.53461547263947,
+            97.74608454185517
+          ],
+          "latitude": [
+            24.246929401821895,
+            24.724305085775345
+          ]
+        },
+        "source_sids": [
+          44886,
+          44910,
+          45208
+        ]
+      }
+    ],
+    "envelope_limit": "Independent extrema only; no source/geometry/GIS process or qualification."
+  },
+  "sources": [
+    {
+      "id": "mimu-kachin-catalogue",
+      "url": "https://themimu.info/states_regions/kachin",
+      "issuer": "Myanmar Information Management Unit, hosting government-authored documents",
+      "locator": "2019 GAD links182Momauk,185Mansi,191Bhamo; census216Momauk,222Mansi,242Dotphoneyan",
+      "facts": [
+        "Catalogue lists Momauk2019GAD1.56MB, Mansi2019GAD3.08MB, Bhamo2019GAD2.01MB, uploaded24Aug2020.",
+        "Census reports Momauk1.86MB, Mansi4.1MB, Dotphoneyan1.85MB uploaded30Mar2018."
+      ],
+      "limit": "Catalogue identity and upload metadata alone do not prove boundary geometry."
+    },
+    {
+      "id": "gad-momauk2019",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Momauk_2019_MMR.pdf",
+      "issuer": "Township General Administration Department",
+      "date": "2019-09-30 cover",
+      "pdf_pages": 79,
+      "locators": [
+        "PDFpage14(printed4), history and position/area table",
+        "PDFpage15(printed5), boundary section"
+      ],
+      "facts": [
+        "Readable history fragments on PDFpage14 contain date27.7.1972 and number953(၉၅၃). Surrounding formation text/authority and constituent names are missing in web extraction; no exact legal role asserted.",
+        "Position fragments give24°15′–24°55′N and97°15′–97°45′E. Table has three area entries382.78,160.64,525.53sqmi and total1068.95sqmi; row labels are not recoverable."
+      ],
+      "missing": [
+        "Readable original notification or order953 dated27July1972, exact title/authority, constituent schedule and territorial map annex.",
+        "Readable 2019 GAD area-row labels and boundary text/map relating Momauk,Lwegel/Lweje,Dotphoneyan to the whole original source footprint."
+      ],
+      "limits": [
+        "No row-label assignment from guessed area matching.",
+        "No datum or survey scale verified. A position box is not an administrative boundary."
+      ]
+    },
+    {
+      "id": "gad-mansi2019",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Mansi_2019_MMR.pdf",
+      "issuer": "Township General Administration Department",
+      "date": "2019-09-30 cover",
+      "pdf_pages": 76,
+      "locators": [
+        "PDFpage1cover",
+        "PDFpage12(printed1), intro",
+        "PDFpage14(printed3), area/boundary",
+        "PDFpage19(printed8), population table"
+      ],
+      "facts": [
+        "Cover date30September2019; introductory text nevertheless labels its information2018. Preserve the internal vintage distinction.",
+        "Area table gives urban0.656,rural1131.704,total1132.36square miles. Boundary names and history are absent from web text extraction.",
+        "Population table identifies February2019 statistics with4wards and40village tracts; census figures below use a different reporting scope/vintage."
+      ],
+      "limits": [
+        "No usable formation-order number extracted.",
+        "Area agreement does not prove individual edge ownership.",
+        "No CRS/datum or map scale verified."
+      ]
+    },
+    {
+      "id": "dop-momauk2014",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Momauk_2014_ENG.pdf",
+      "issuer": "Department of Population, Ministry of Labour,Immigration and Population",
+      "published": "2017-10",
+      "census_date": "2014-03-29",
+      "locators": [
+        "PDFpage1cover",
+        "PDFpage7figures",
+        "PDFpage10footnote3",
+        "PDFpage17(printed7), area/source",
+        "PDFpage18(printed8), tract table"
+      ],
+      "facts": [
+        "Official title places Momauk Township in Kachin State,Bhamo District.",
+        "Area991.4km²,3wards,22village tracts. Area source attributed to Settlement and Land Record Department2014–2015."
+      ],
+      "limits": [
+        "The title does not explicitly establish Dotphoneyan or Lwegel membership in Momauk.",
+        "Census scope is not a survey boundary or complete2019 original-footprint proof."
+      ]
+    },
+    {
+      "id": "dop-mansi2014",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Mansi_2014_ENG.pdf",
+      "issuer": "Department of Population, Ministry of Labour,Immigration and Population",
+      "published": "2017-10",
+      "locators": [
+        "PDFpage1cover",
+        "PDFpage7figures"
+      ],
+      "facts": [
+        "Official title places Mansi Township in Kachin State,Bhamo District.",
+        "Area2932.8km²,4wards,20village tracts."
+      ],
+      "limits": [
+        "Census title and area do not bind exact175candidatecentres to an administrative edge."
+      ]
+    },
+    {
+      "id": "dop-dotphoneyan2014",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Dotphoneyan_2014_ENG.pdf",
+      "issuer": "Department of Population, Ministry of Labour,Immigration and Population",
+      "published": "2017-10",
+      "census_date": "2014-03-29",
+      "locators": [
+        "PDFpage1cover",
+        "PDFpage7figures",
+        "PDFpage10footnote3",
+        "PDFpage17(printed7), area/source",
+        "PDFpage18(printed8), tract table"
+      ],
+      "facts": [
+        "Official title is Dotphoneyan Sub-Township Report,Kachin State,Bhamo District.",
+        "Area1361.1km²,3wards,10village tracts. Area attribution is Settlement and Land Record Department2014–2015."
+      ],
+      "limits": [
+        "Bhamo District association is explicit; Momauk Township inclusion is not explicit in inspected title/tables.",
+        "Separate census report supports scope investigation, not a modern parent-boundary assignment."
+      ]
+    },
+    {
+      "id": "ibs42",
+      "url": "https://library.law.fsu.edu/Digital-Collections/LimitsinSeas/pdf/ibs042.pdf",
+      "issuer": "United States Department of State, International Boundary Study42",
+      "date": "1964-11-30",
+      "pdf_pages": 20,
+      "locators": [
+        "printed9, treaty/protocol history",
+        "printed14–15, reproduced1960TreatyArticleVII2(4–7)",
+        "printed18, ArticleVII3 andVIII"
+      ],
+      "facts": [
+        "Treaty signed1October1960; protocol signed13October1961 with detailed boundary/pillar maps replacing original treaty maps.",
+        "ArticleVII2(4) follows Laisa,Molechaung,Gayang,Nampaung to Taping then up Taping to a ridge west of Kuli confluence.",
+        "ArticleVII2(5–7) describes Kuli/Husa–Namwan versus Taping watersheds, then Kindit/NamWa/NamSah and historical Namwan/Shweli courses; part expressly depends on treaty maps.",
+        "Original treaty maps:1:250000 general and1:50000 selected. ArticleVIII distinguishes river-channel rules; it does not authorize replacing the treaty line with a contemporary river axis."
+      ],
+      "limits": [
+        "U.S. official study is a primary government analysis reproducing treaty text, not the original bilateral map annex.",
+        "1964 statement that protocol maps were not public is historical, not a finding of current inaccessibility.",
+        "No candidate centre has been matched to a surveyed pillar/course/watershed segment. Datum unverified."
+      ]
+    }
+  ],
+  "concrete_followup": [
+    {
+      "artifact": "Original Momauk notification/order953 dated27July1972 with constituent schedule and map annex",
+      "known_locator": "GADMomauk2019PDFpage14(printed4), partial extraction",
+      "purpose": "Resolve township versus sub-township scope and preserve original extent; do not infer contents from the number alone."
+    },
+    {
+      "artifact": "Official Kachin State Government Momauk regional-data report attachments labelled Cover-Martercer and2020-1",
+      "known_locator": "https://kachinstate.gov.mm/မိုးမောက်မြို့နယ်၏‌ဒေသ/",
+      "state": "Search-discovered official lead; direct page and distinct archivepage174 each returned one internal error. No attachment inspected; no retry/download.",
+      "purpose": "Potential readable government rendition of history/area row names. Later2020 report would require vintage check against2019."
+    },
+    {
+      "artifact": "13October1961 China–Burma boundary protocol detailed maps/pillar schedule for Taping–Namwan/Shweli reach, with geodetic datum and authoritative coordinate registration",
+      "known_locator": "IBS42printed9 and reproduced1960TreatyArticleX",
+      "purpose": "Locate the actual border relative to Mansi126 flaggedCHNADM1 candidates; geographical name similarity alone does not clear any centre."
+    },
+    {
+      "artifact": "2019-era administrative map or legally traceable annex including Momauk,Lwegel/Lweje,Dotphoneyan and exact hole treatment",
+      "purpose": "Bind Momauk49candidatecentres and changed current hole to original owner membership, parent and accepted exclusions."
+    }
+  ],
+  "assessment": {
+    "supported": [
+      "All4exactsourcechildidentities and two repair owners are retained.",
+      "Official2014reports explicitly associate Mansi,Momauk and Dotphoneyan with Bhamo District.",
+      "Concrete1972notification fragment and treaty/protocol map leads are recorded."
+    ],
+    "open": [
+      "Complete4children original-footprint parent proof.",
+      "Mansi126centres include retainedforeignCHNADM1SID15319; no country/border clearance.",
+      "Momauk49centres lack foreignSID in retainedrows but this grants no country or hole clearance; current1interiorring vsoriginal0 remains unqualified.",
+      "Exact land/water/whole-hierarchy treatment, authoritative exclusion mapping and qualified delivery remain outside documentary pass."
+    ],
+    "promoted_cells": 0
+  },
+  "method_limits": [
+    "Read-only small retained inventory/interval/normlat inputs and bounded primary web text only.",
+    "No scientific source/geometry/GIS/native/raster/GSHHG run, dataset acquisition, local/browser download, new permission card or tracked repository change.",
+    "No current sovereignty/control adjudication.",
+    "Government/MIMU documents have no explicit reusable document license verified; retained geoBoundaries source metadata declaresCCBY4.0, which does not grant third-party document rights."
+  ]
+}

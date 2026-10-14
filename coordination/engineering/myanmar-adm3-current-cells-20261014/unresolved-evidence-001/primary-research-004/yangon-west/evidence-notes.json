@@ -1,0 +1,201 @@
+{
+  "kind": "primary-admin-research-not-qualification",
+  "parent_id": "framework:province:yangon-west:56b130588f31",
+  "scope": {
+    "land": 136,
+    "water": 0,
+    "relative": 0,
+    "conflict": 0,
+    "current_children": 13,
+    "repair_owners": 5,
+    "native_block": 28,
+    "interval_rows": 51,
+    "native_extent_x_half_open_y_inclusive": [
+      201073,
+      201120,
+      118644,
+      118695
+    ]
+  },
+  "repair_members": [
+    {
+      "owner": 30089,
+      "id": "gb:MMR:ADM3:66882298B13905773583964",
+      "name": "Kamaryut",
+      "cells": 2,
+      "rows": 2,
+      "extent_x_half_open_y_inclusive": [
+        201078,
+        201080,
+        118648,
+        118651
+      ],
+      "source_sids": [
+        44895,
+        44959,
+        45069
+      ]
+    },
+    {
+      "owner": 30144,
+      "id": "gb:MMR:ADM3:66882298B29412764358741",
+      "name": "Kyeemyindaing",
+      "cells": 91,
+      "rows": 29,
+      "extent_x_half_open_y_inclusive": [
+        201073,
+        201079,
+        118653,
+        118682
+      ],
+      "source_sids": [
+        44895,
+        44959,
+        45040
+      ]
+    },
+    {
+      "owner": 30189,
+      "id": "gb:MMR:ADM3:66882298B41675327542424",
+      "name": "Hlaing",
+      "cells": 1,
+      "rows": 1,
+      "extent_x_half_open_y_inclusive": [
+        201075,
+        201076,
+        118644,
+        118644
+      ],
+      "source_sids": [
+        44895,
+        44959,
+        45095
+      ]
+    },
+    {
+      "owner": 30221,
+      "id": "gb:MMR:ADM3:66882298B47304075793437",
+      "name": "Seikkan",
+      "cells": 26,
+      "rows": 6,
+      "extent_x_half_open_y_inclusive": [
+        201097,
+        201120,
+        118690,
+        118695
+      ],
+      "source_sids": [
+        44895,
+        44959,
+        45087
+      ]
+    },
+    {
+      "owner": 30299,
+      "id": "gb:MMR:ADM3:66882298B67010796182523",
+      "name": "Ahlone",
+      "cells": 16,
+      "rows": 13,
+      "extent_x_half_open_y_inclusive": [
+        201081,
+        201091,
+        118675,
+        118688
+      ],
+      "source_sids": [
+        44895,
+        44959,
+        45051
+      ]
+    }
+  ],
+  "source_vintage": {
+    "represented_year": 2019,
+    "consumed_geoboundaries_revision": "9469f09",
+    "source_parent_id": "gb:MMR:ADM2:60261553B21361013305345",
+    "source_parent_sid": 44959,
+    "ordinal": 62,
+    "region_id": "gb:MMR:ADM1:20573499B24734669936209"
+  },
+  "retained_diagnostic": "Kyeemyindaing (91 repair cells) and Mayangone (zero repair cells) have retained source-parent-overlap-below95percent diagnostic. No new geometry calculation performed.",
+  "primary_findings": [
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Kyeemyindaing_2019_MMR.pdf",
+      "provider": "GAD hosted MIMU",
+      "pdf_pages": 96,
+      "evidence_pages_1_based": [
+        14,
+        15,
+        16,
+        89,
+        90
+      ],
+      "represented_date": "September2019 end",
+      "finding": "Profile identifies West Yangon membership and a MoHA notification dated3December2004 transferring WarYonSeik and AyeYwa villages,1695acres, from Twantay/SouthYangon to Kyeemyindaing/WestYangon as WarYonSeikAyeYwaWest ward. It also cites notification323/2016 dated5February2016 renaming three opposite-bank wards. Pages89–90 distinguish township administrative membership from municipal inclusion: the transferred western ward was not then included in YCDC area while other three western wards were. Page16 neighbours Sanchaung east; Ahlone and Seikgyikanaungto south; Twantay west; Kamaryut and Hlaingthaya north.",
+      "implication": "Cross-river township ownership is primary-supported at named-ward level. Municipal limits or nearest bank cannot replace township limits.",
+      "missing": "Exact2004 notification number/body/schedule and original-feature component or candidate-cell-to-ward join. Source may omit or simplify transferred area; this is not proved by named membership."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Seikkan_2019_MMR.pdf",
+      "provider": "GAD hosted MIMU",
+      "pdf_pages": 65,
+      "evidence_pages_1_based": [
+        12,
+        13,
+        14
+      ],
+      "represented_date": "September2019 end",
+      "finding": "2019 profile supports separate Seikkan township. Cites15March1972 RevolutionaryCouncil declaration97,10April1974 boundary notification2/199/အထ(2), and1June2000 MoHA100/23-226/ဦး-1 deleting Customs ward. Boundary paragraph lists Botahtaung east, YangonRiver south, Ahlone west, and Lanmadaw/Latha/Pabedan/Kyauktada/Botahtaung north.",
+      "missing": "Underlying boundary instruments and exact2019 harbour/river coverage; no current-vintage survival assumption."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Kamaryut_2019_MMR.pdf",
+      "provider": "GAD hosted MIMU",
+      "pdf_pages": 70,
+      "evidence_pages_1_based": [
+        1,
+        13,
+        14,
+        15
+      ],
+      "cover_date": "October2019, day blank",
+      "finding": "Cover identifies YangonWest. Profile states township elevation in1974 with10wards; geographical paragraph names Bahan east, HlaingRiver west, Kyeemyindaing/Sanchaung south, Mayangone/Hlaing north.",
+      "limit": "Extracted coordinates contain suspicious latitude16degrees15minutes; no correctedbbox or exact street-boundary derivation adopted. No formation instrument identity verified."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Ahlone_2019_MMR.pdf",
+      "provider": "GAD hosted MIMU",
+      "pdf_pages": 88,
+      "evidence_pages_1_based": [
+        1,
+        15,
+        19
+      ],
+      "cover_date": "October2019, day blank",
+      "finding": "Cover identifies YangonWest; table reports11urbanwards and September2019 end conditions.",
+      "limit": "Geographic section text extraction loses boundary names. No exact cell/owner boundary claimed."
+    },
+    {
+      "url": "https://myanmar.unfpa.org/sites/default/files/pub-pdf/Yangon%20Region%20Census%20Report%20-%20ENGLISH.pdf",
+      "provider": "Department of Population, hosted UNFPA",
+      "evidence_page_1_based": 167,
+      "finding": "2014 Census tableI-2 lists13WestYangon townships: Kyauktada,Pabedan,Lanmadaw,Latha,Ahlon,Kyimyindine,Sangyoung,Hline,Kamayut,Mayangon,Dagon,Bahan,Seikkan. This corresponds by name to13retainedmembers, allowing transliteration variants.",
+      "limit": "Historical name roster corroboration only, not whole-footprint containment or2019boundary equivalence."
+    }
+  ],
+  "nonprimary_lead_not_adopted": {
+    "url": "https://news-eleven.com/article/157343",
+    "date": "2020-02-01",
+    "reported_instrument": "PresidentOffice letter27January2020 508(5)/12/PresidentOffice senttoUnionParliament",
+    "reported_change": "Seikkan abolished; MawTinTemporaryMarket ward toLanmadaw, other2wards plus104squaremileswaters toBotahtaung.",
+    "status": "Secondary reportage only. FocusedofficialMOI/MDN searches didnotrecover underlying instrument/official transcript. Preserve2019vintage; do not remap26cells from this lead alone."
+  },
+  "concrete_next_evidence": [
+    "Kyeemyindaing91: retrieve or inspect actual3December2004 MoHA transfer notification and its1695acre schedule/map; join namedward to retained two-component wholeoriginal and exact91candidate cells. No such join yet.",
+    "Seikkan26: verify current-vintage policy, actual2020 dissolution instrument/ward geometry if currentauthority required;2019profile alone supports historical township, not2026owner.",
+    "Kamaryut2,Hlaing1,Ahlone16: exact native/source/selected geometry cell qualification and wholeoriginalphysical observations still missing; primary urban membership doesnot supply pixelgeometry. Hlaing target-specific GAD profile not identified by catalogue spelling search; census provides membership only.",
+    "All136 remain held; no new sourceapproval or physical reproduction performed."
+  ],
+  "custody": "Web document text reads only; no localPDFdownload/rawbytes/hash, browserdownloadMedia, approvalcard, geometry/native/GSHHG/sourcepass. OriginalSouth227/333 and separateCocokyun40/173 packets untouched.",
+  "datum_and_license": "GAD profile map datum/scale/license not established from inspected text. Do not inherit geoBoundariesCCBY4 onto GAD reports. Consumed source represented2019 remains distinct from laterformation leads."
+}

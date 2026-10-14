@@ -1,0 +1,69 @@
+{
+  "kind": "bounded-official-instrument-search-negative-result",
+  "date": "2026-10-14",
+  "prior_packet_unchanged": {
+    "path": "evidence-notes.json",
+    "sha256": "a6e8f254d6bdac6dd0166f9f3622fa9c2bbe10d85776d7207cb4a722c7661430"
+  },
+  "scope": "YangonWest136; targeted Kyeemyindaing91 and Seikkan26. No new qualification/credit.",
+  "result": "Neither actual requested instrument body nor attached boundary map recovered in this bounded pass. Absence from inspected web results is not evidence instrument doesnotexist.",
+  "missing_artifacts": [
+    {
+      "issuer": "Ministry of Home Affairs",
+      "date": "2004-12-03",
+      "notification_number": null,
+      "identity_evidence": "2019 GAD Kyeemyindaing profile PDF14–15 names datednotification transferring WarYonSeik and AyeYwa villages,1695acres, Twantay/SouthYangon → Kyeemyindaing/WestYangon, as WarYonSeikAyeYwaWestward.",
+      "exact_missing": "Actual signed notification body, exactnotificationnumber, gazetteissue/page/custodylocator; attachedboundarymap/schedule and its existence unverified. No map filename invented.",
+      "unresolved_join": "Transferred1695acre area → original2019two sourcecomponents →91candidatecells, including actualtownshipboundary ratherthanYCDCmunicipalextent.",
+      "source_url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Kyeemyindaing_2019_MMR.pdf"
+    },
+    {
+      "issuer": "PresidentOffice, as reported by secondarynews",
+      "date": "2020-01-27",
+      "reported_letter": "508(5)/12/သမ္မတရုံး",
+      "identity_status": "Exact letter identity remains secondary-report lead; actualofficialbody not read.",
+      "exact_missing": "OriginalPresidentOfficeletter plus applicableMoHA/Gazette implementation instrument, parliamentary receipt/transcript, actualeffective-date clauses, ward/water allocation schedule and anyannexedmap. LettertoParliament isnotautomaticallytheimplementingboundarynotification.",
+      "unresolved_join": "Seikkan26candidatecells → affected2019wards/harbourgeometry → verifiedsuccessorowner underacceptedtargetvintage. Preserve historical2019identity untilvintagepolicy decided.",
+      "secondary_locator": "https://news-eleven.com/article/157343"
+    }
+  ],
+  "inspected_official_routes": [
+    {
+      "url": "https://www.gad.gov.mm/laws",
+      "result": "Accessible20-itemdepartmentallawlisting; no2004transferor2020Seikkaninstrument inrenderedlist. NoPDFdownloadlinksopened."
+    },
+    {
+      "url": "https://www.gad.gov.mm/all-announcements",
+      "result": "Accessiblecurrent2026announcements rendered; requestedhistoricalinstrumentnotpresent. Noexhaustivearchiveclaim."
+    },
+    {
+      "url": "https://myanmar-president-office.gov.mm/",
+      "result": "AccessiblecurrentPresidentOfficehome with2026archive andnotificationcategorylink. Nottreatedasfullhistoricalarchive."
+    },
+    {
+      "url": "https://myanmar-president-office.gov.mm/my/noticeorder",
+      "result": "Accessible58-linerenderednotificationcategory; norequested2020letterbodyreturned."
+    }
+  ],
+  "bounded_queries": [
+    "ဝါးရုံဆိပ် ၃.၁၂.၂၀၀၄",
+    "ဝါးရုံဆိပ် ၁၆၉၅ အမိန့်",
+    "Seikkan 27January2020 presidentoffice",
+    "ဆိပ်ကမ်းမြို့နယ် ၅၀၈",
+    "Official-domain Seikkan township abolished January2020 (president-office.gov.mm,moi.gov.mm,mdn.gov.mm,pyidaungsu.hluttaw.mm)",
+    "Official-domain ဝါးရုံဆိပ် ၂၀၀၄ (gad.gov.mm,moha.gov.mm,moi.gov.mm)",
+    "508(5) 2020 Seikkan",
+    "ကြည့်မြင်တိုင် ၁၆၉၅ ၂၀၀၄",
+    "Official-domain Seikkan township parliament January31 2020 (gnlm.com.mm,mdn.gov.mm)",
+    "Official-domain Seikkan abolished (moi.gov.mm,mdn.gov.mm,gnlm.com.mm)",
+    "WarYonSeik notification",
+    "Kyeemyindaing2004Ministry",
+    "site:gad.gov.mm ကြည့်မြင်တိုင်1695",
+    "site:moha.gov.mm ကြည့်မြင်တိုင်2004",
+    "site:president-office.gov.mm Seikkan",
+    "site:mdn.gov.mm PyidaungsuHluttaw31January2020"
+  ],
+  "query_limit": "Manyresultsunrelatedortoo broad; no newconcreteofficialartifactlead. Passstopped instead of repeatedportalretries or broadening. PreviousfailedMoHA/Gazette/portalrefsnotretried.",
+  "custody": "Read-onlywebsearch/page reads only. No browser/localdownloads, permissioncards, credentials, geometry/native/GSHHG/sourceprocess. No newrawdocumentbytesorhashes.",
+  "holds": "Kyeemyindaing91andSeikkan26notpromoted; allYangonWest136 remainheld. PriorSouth227+333 andseparateCocokyun40+173 distinctionunchanged."
+}

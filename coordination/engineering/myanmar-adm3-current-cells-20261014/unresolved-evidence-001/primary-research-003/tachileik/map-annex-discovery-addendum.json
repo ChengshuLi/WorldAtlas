@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "date_utc": "2026-10-14",
+  "worker": "/root/putao_primary_boundary",
+  "scope": "Bounded read-only follow-up for omitted Mae Sai and Koh Chang / Kaw Chang survey maps only",
+  "parent_id": "framework:province:tachileik:d7c859e72d59",
+  "repair_land_held": 295,
+  "separate_source_conflict_land_held": 4,
+  "retained_notes_sha256": "6d0a7a7261d4fc71380c0264aa994fe53c91e5539737c4850762f90e428792fa",
+  "technical_string_correction": {
+    "affected_location": "notes.json top-level fields scientific_vintage and frozen_queue_vintage; formal packet metadata fields, not prose only",
+    "published_source_packet_as_reported_by_parent": "5ce94327",
+    "preservation": "Published/retained notes.json bytes remain unchanged. No source IDs, geometry, candidate counts or acceptance decisions changed.",
+    "exact_replacements": [
+      {
+        "field": "scientific_vintage",
+        "old_value": "f 7 c 358326 d 776398 bc 1 cffe 84 df 81 eac 7033091 c",
+        "correct_value": "f7c358326d776398bc1cffe84df81eac7033091c",
+        "original_source_json_pointer": "/scientific_vintage"
+      },
+      {
+        "field": "frozen_queue_vintage",
+        "old_value": "a 61 b 6 f 9 e 7 f 88 b 1 da 380 e 3 a 834 f 89 d 7509132 ed 71",
+        "correct_value": "a61b6f9e7f88b1da380e3a834f89d7509132ed71",
+        "original_source_json_pointer": "/frozen_queue_vintage"
+      }
+    ],
+    "original_source_pin": {
+      "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+      "bytes": 257291,
+      "sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157"
+    },
+    "queue_input_pin": {
+      "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+      "path": "coordination/engineering/global-current-cell-work-queue-20261014/source-package-queue.json",
+      "git_blob_oid": "9c9a9bc83627afd3e8435ff4009e39530543bf54",
+      "bytes": 1754890,
+      "sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8",
+      "decoded_bytes": 1754890,
+      "decoded_sha256": "78007430b6f9faedb188ef0619b7ff0a7a2cc7fff2ec9f1c41ee69936ec4ebd8"
+    },
+    "reason": "An earlier prose readability transformation incorrectly inserted spaces into these technical strings. These exact replacements supersede only the two malformed values."
+  },
+  "missing_artifacts": [
+    {
+      "description": "Original commissioners map showing old and new Meh Sai channels between the steel bridge and the Meh Sai / Meh Ruak junction",
+      "locator": "Cmd 6262 / Treaty Series No. 3 (1941), printed pp. 2–4; Note 1 and attached memorandum, Chiengrai, 24 March 1939",
+      "signers": "Commissioners whose names appear on the memorandum: P. C. Fogarty, V. G. Robert, Luang Siddhi Sayamkar, Phra Anuraks Bhubes, Phra Panom, Phya Prakit Kolasastra. Exact map signatures not visually inspected.",
+      "publication_status": "Footnote to Note 1 says map not reproduced.",
+      "archive_access_status": "Original map image, separate catalogue identifier and digitization status not established in this bounded pass.",
+      "scale_datum_control_points": "Not supplied by the published text; original map not inspected."
+    },
+    {
+      "description": "Meh Ruak variation map at Koh Chang / Kaw Chang, describing old southern and present northern channels",
+      "locator": "Cmd 6262 / Treaty Series No. 3 (1941), printed p. 6, Note 3 paragraph (vi)",
+      "signers": "Mr. Stewart, Assistant Executive Engineer, Federated Shan States Public Works Department; Phya Prakit Kolasastra, Chief Engineer, Department of Public and Municipal Works, Thailand",
+      "publication_status": "Map referred to as attached, with a footnote that it is not reproduced.",
+      "archive_access_status": "Original map image, separate catalogue identifier and digitization status not established in this bounded pass.",
+      "scale_datum_control_points": "Not supplied by the published text; original map not inspected."
+    }
+  ],
+  "official_sources": [
+    {
+      "url": "https://treaties.fcdo.gov.uk/data/Library2/pdf/1941-TS0003.pdf",
+      "title": "Exchanges of Notes regarding the Boundary between Burma and Thailand",
+      "publication": "Cmd 6262, Treaty Series No. 3 (1941)",
+      "agreement_dates": [
+        "1940-10-01",
+        "1940-12-10"
+      ],
+      "extent": "Meh Sai and Meh Ruak river sections; exact candidate-cell location not established",
+      "license": "No document-specific reuse clearance established."
+    },
+    {
+      "url": "https://treaties.fcdo.gov.uk/awweb/awarchive?item=78950&type=metadata",
+      "record": "Item 78950; relation 9930; PRO (now TNA) FO 93/95/35/0:0",
+      "publication": "Cmd 4112, Treaty Series No. 19 (1932)",
+      "dates": [
+        "1931-08-27",
+        "1932-03-14"
+      ],
+      "limit": "This is a verified catalogue reference for the earlier 1931–32 instrument. It is not evidence that the separate 1939/1940 survey maps are held in this file."
+    }
+  ],
+  "new_access_attempts": [
+    {
+      "url": "https://discovery.nationalarchives.gov.uk/results/r?_q=%22FO%2093%2F95%2F35%22",
+      "result": "Internal error from read-only web open; not retried."
+    },
+    {
+      "url": "https://discovery.nationalarchives.gov.uk/",
+      "result": "403 Forbidden from read-only web open; not retried."
+    },
+    {
+      "url": "https://treaties.fcdo.gov.uk/",
+      "result": "Only Welcome to Knowvation landing text exposed; no navigable search state or map record."
+    },
+    {
+      "action": "Bounded exact-title, map-signer and FO 93/95/35 web searches",
+      "result": "Existing Cmd 6262 PDF surfaced; no official original-map record or image surfaced. Search results were not reliable evidence of archive absence."
+    }
+  ],
+  "concrete_blocker": "The published primary agreement omits both maps. No original-map catalogue reference or accessible digital image was obtained. TNA access errors prevent verification of its catalogue access status. Do not describe either map as genuinely not digitized or unavailable.",
+  "next_artifact_request": "Original maps attached to the 24 March 1939 Chiengrai memorandum adopted by 1 October 1940 Note 1, and to paragraph (vi) of 1 October 1940 Note 3 adopted on 10 December 1940. An archive reference connecting these exact attachments to a holding is needed before ordering or viewing anything.",
+  "proposed_next_scope": {
+    "parent_id": "framework:province:falam:6bc2430c5172",
+    "repair_land": 168,
+    "status": "Roster metadata only; awaiting parent confirmation before primary source research. Bhamo is assigned to another worker and will not be investigated here."
+  },
+  "limits": {
+    "local_source_downloads": 0,
+    "new_permission_cards": 0,
+    "scientific_or_spatial_processing": 0,
+    "new_accepted_credit": 0,
+    "sovereignty_adjudication": false,
+    "prior_notes_modified": false,
+    "source_byte_hashes": "Not available: read-only web inspection only."
+  }
+}
