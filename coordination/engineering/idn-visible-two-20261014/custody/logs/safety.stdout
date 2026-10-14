@@ -1,0 +1,10 @@
+ok - restore_physical.py occupied output; exists
+ok - restore_physical.py symlink output; Symlink
+ok - build_handoff.py occupied output; exists
+ok - build_handoff.py symlink output; Symlink
+ok - check_foreign_neighbors.py occupied output; exists
+ok - check_foreign_neighbors.py symlink output; Symlink
+ok - bind_current_neighbors.mjs occupied output; Occupied output destination
+ok - bind_current_neighbors.mjs symlink output; Symlink
+ok - restore physical input drift; Unfrozen execution input
+All 9 real-entrypoint refusals passed; original owned bytes unchanged and no publication produced.

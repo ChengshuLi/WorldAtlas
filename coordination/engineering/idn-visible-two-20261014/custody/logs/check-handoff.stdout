@@ -1,0 +1,17 @@
+ok 1 - actual complete IDN case 0 retains source-relative support and unapproved truth
+ok 2 - actual complete IDN case 1 retains source-relative support and unapproved truth
+ok 3 - actual v2 has two executable cases with passive original318 accounting
+ok 4 - actual target hashes need no cross-language aliases
+ok 5 - changed complete candidate is refused
+ok 6 - positive mapped-water support is refused
+ok 7 - wrong complete native metadata is refused
+ok 8 - missing original query is refused
+ok 9 - changed target parent fails original source relation
+ok 10 - nonempty original source remainder is refused
+ok 11 - wrong unique source subject is refused
+ok 12 - missing executable case is refused
+ok 13 - duplicate executable case is refused
+ok 14 - missing passive member is refused
+ok 15 - extra fabricated passive member is refused
+ok 16 - complete reused source metadata has original native roster coverage
+1..16
