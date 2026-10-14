@@ -3065,8 +3065,8 @@
     },
     {
       "path": "data/ownership-selection.json",
-      "bytes": 1590,
-      "sha256": "409118d59c0ba33886c653d7712e908386d493b5f4d32bd4d01b17752c58276e",
+      "bytes": 1591,
+      "sha256": "ff92b8a087814b3a489b16a20ca793c968d7932ff642a0ce0c19213773a54f17",
       "hash_kind": "file-bytes"
     },
     {
@@ -3109,6 +3109,54 @@
       "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/evidence/native-constructor/admission.json",
       "bytes": 2175,
       "sha256": "cd6caa817d8419e02de4471af127828cf94b8ebe550de491abad8b91c2bae416",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/delivery/authority-registry.json",
+      "bytes": 45361,
+      "sha256": "5bac64e3d17fbbc63c43f87bb7e58ddd8cb1b05a716671284be4865c4d75a1d9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/delivery/native-supplement-ledger.json",
+      "bytes": 2116823,
+      "sha256": "89b7c2175409100f521dbaa81b452e8499021aec8224acfe5b10ec7a86a1ec92",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/delivery/native-supplement-patch.json",
+      "bytes": 552362,
+      "sha256": "cc01cfaaf2a542b377f31e2693b2cf0363ad0fbc6a12fa2917f921552fa0b303",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/delivery/runtime-envelope.json",
+      "bytes": 1394,
+      "sha256": "b4823d7b5d43b04f8cb9e2792be5e2f56d2adc8d7ec9ce706e81a2d2dd109b49",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/delivery/selection-sidecar.json",
+      "bytes": 3515,
+      "sha256": "f44373b4bd7860e0d39efce805da8d082ff705ad5cdd5fa8dd221cefcf63563c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/delivery/selected-delivery-expectations.json",
+      "bytes": 104409,
+      "sha256": "a4f80773df74304728616e95de9dbd71790dd121035f2a8ac9a3404d7bec7a36",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/delivery/composition-receipt.json",
+      "bytes": 16215,
+      "sha256": "90b11ad70e31ea61ec0633e679af78fa9028583b62656a90ba19e065d09ab5ae",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/delivery/admission.json",
+      "bytes": 2335,
+      "sha256": "f97bade96db4c29528134def5ce3f9a3e17c27d404f41094fd79c08518a49ee5",
       "hash_kind": "file-bytes"
     }
   ],
@@ -3721,6 +3769,17 @@
       },
       "evidence_path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/evidence/native-constructor/constructor-receipt.json",
       "limit": "Source/native cell-domain qualification only. Current selected owner-zero consumption, cumulative selected conservation, finalized selector/package/readback and exact-head review/integration remain separate. All original full-source physical issues and source/territorial/semantic limits remain. Reported Node lifetime peak is sampled at receipt creation, not a later final or process-tree peak; plain external observer and cooperative checks do not claim live aggregate enforcement."
+    },
+    {
+      "id": "residual-followup-cumulative-composition",
+      "kind": "measurement",
+      "description": "Existing registry/ledger helpers preserved all43,429 accepted cells,46 authorities and203 literal rows including8 inactive exceptions, then appended exactly32 qualified rows/2,649 disjoint cells. Actual current-owner-zero and selected consumer remain normal queue obligations.",
+      "software": "Node24.19.0; constructAuthorityRegistry, compareVersionedRepairLedgers, normaliseRetainedRepairLedger; accepted prepare-delivery-handoff finalize",
+      "units": "Native cells, authority and literal-row counts, seconds and reported normalized main-process RSS bytes",
+      "execution_commit": "5d0eac7a9f535d92256e5f3b6a8216dcb62f8b1a",
+      "accepted_base": "f702b30caa7766f8d0837422eea8e0b686bf73b9",
+      "evidence_path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/delivery/composition-receipt.json",
+      "limit": "Cooperative current-process guards and sampled main-process RSS are not aggregate process-tree or hard-wall enforcement. No source/GSHHG producer replay, geographic approval or accepted repair credit before actual integration."
     }
   ],
   "metrics": [
@@ -4323,6 +4382,126 @@
         "commit": "candidate"
       },
       "evaluation_commit": "3335bc0140db801bafd7a6d53cd7be136c5c60fd"
+    },
+    {
+      "id": "residual_composition_prior_cells",
+      "value": 43429,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "b0ebab7942891625d8fe1d5af23b004ef5942af8516430683f8c6d2664484714",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/candidate-native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5d0eac7a9f535d92256e5f3b6a8216dcb62f8b1a"
+    },
+    {
+      "id": "residual_composition_proposed_added_cells",
+      "value": 2649,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "b0ebab7942891625d8fe1d5af23b004ef5942af8516430683f8c6d2664484714",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/candidate-native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5d0eac7a9f535d92256e5f3b6a8216dcb62f8b1a"
+    },
+    {
+      "id": "residual_composition_cumulative_cells",
+      "value": 46078,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "b0ebab7942891625d8fe1d5af23b004ef5942af8516430683f8c6d2664484714",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/candidate-native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5d0eac7a9f535d92256e5f3b6a8216dcb62f8b1a"
+    },
+    {
+      "id": "residual_composition_prior_authorities",
+      "value": 46,
+      "unit": "authorities",
+      "vintage": "archived",
+      "input_sha256": "b0ebab7942891625d8fe1d5af23b004ef5942af8516430683f8c6d2664484714",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/candidate-native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5d0eac7a9f535d92256e5f3b6a8216dcb62f8b1a"
+    },
+    {
+      "id": "residual_composition_cumulative_authorities",
+      "value": 47,
+      "unit": "authorities",
+      "vintage": "archived",
+      "input_sha256": "b0ebab7942891625d8fe1d5af23b004ef5942af8516430683f8c6d2664484714",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/candidate-native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5d0eac7a9f535d92256e5f3b6a8216dcb62f8b1a"
+    },
+    {
+      "id": "residual_composition_prior_ledger_rows",
+      "value": 203,
+      "unit": "literal ledger rows",
+      "vintage": "archived",
+      "input_sha256": "b0ebab7942891625d8fe1d5af23b004ef5942af8516430683f8c6d2664484714",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/candidate-native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5d0eac7a9f535d92256e5f3b6a8216dcb62f8b1a"
+    },
+    {
+      "id": "residual_composition_cumulative_ledger_rows",
+      "value": 235,
+      "unit": "literal ledger rows",
+      "vintage": "archived",
+      "input_sha256": "b0ebab7942891625d8fe1d5af23b004ef5942af8516430683f8c6d2664484714",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/candidate-native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5d0eac7a9f535d92256e5f3b6a8216dcb62f8b1a"
+    },
+    {
+      "id": "residual_composition_elapsed_seconds",
+      "value": 13.694469083,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "b0ebab7942891625d8fe1d5af23b004ef5942af8516430683f8c6d2664484714",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/candidate-native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5d0eac7a9f535d92256e5f3b6a8216dcb62f8b1a"
+    },
+    {
+      "id": "residual_composition_peak_rss_bytes",
+      "value": 339771392,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "b0ebab7942891625d8fe1d5af23b004ef5942af8516430683f8c6d2664484714",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/candidate-native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5d0eac7a9f535d92256e5f3b6a8216dcb62f8b1a"
+    },
+    {
+      "id": "residual_composition_phase_charged_bytes",
+      "value": 445487474,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "b0ebab7942891625d8fe1d5af23b004ef5942af8516430683f8c6d2664484714",
+      "input_file": {
+        "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/candidate-native-patch.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "5d0eac7a9f535d92256e5f3b6a8216dcb62f8b1a"
     }
   ],
   "metric_bindings": [
@@ -4575,6 +4754,56 @@
       "metric_id": "residual_constructor_fresh_allowance_bytes",
       "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/evidence/native-constructor/constructor-receipt.json",
       "json_pointer": "/allowance/phaseBytes"
+    },
+    {
+      "metric_id": "residual_composition_prior_cells",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/delivery/composition-receipt.json",
+      "json_pointer": "/prior_cells"
+    },
+    {
+      "metric_id": "residual_composition_proposed_added_cells",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/delivery/composition-receipt.json",
+      "json_pointer": "/proposed_added_cells"
+    },
+    {
+      "metric_id": "residual_composition_cumulative_cells",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/delivery/composition-receipt.json",
+      "json_pointer": "/cumulative_cells"
+    },
+    {
+      "metric_id": "residual_composition_prior_authorities",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/delivery/composition-receipt.json",
+      "json_pointer": "/prior_authorities"
+    },
+    {
+      "metric_id": "residual_composition_cumulative_authorities",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/delivery/composition-receipt.json",
+      "json_pointer": "/cumulative_authorities"
+    },
+    {
+      "metric_id": "residual_composition_prior_ledger_rows",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/delivery/composition-receipt.json",
+      "json_pointer": "/prior_ledger_rows"
+    },
+    {
+      "metric_id": "residual_composition_cumulative_ledger_rows",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/delivery/composition-receipt.json",
+      "json_pointer": "/cumulative_ledger_rows"
+    },
+    {
+      "metric_id": "residual_composition_elapsed_seconds",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/delivery/composition-receipt.json",
+      "json_pointer": "/elapsed_seconds"
+    },
+    {
+      "metric_id": "residual_composition_peak_rss_bytes",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/delivery/composition-receipt.json",
+      "json_pointer": "/peak_rss_bytes"
+    },
+    {
+      "metric_id": "residual_composition_phase_charged_bytes",
+      "path": "coordination/engineering/vietnam-current-cell-20261014/residual-followup-001/delivery/composition-receipt.json",
+      "json_pointer": "/phase_charged_bytes"
     }
   ],
   "summaries": [],
@@ -4597,7 +4826,7 @@
       ]
     },
     {
-      "text": "Preserve 3023 source/territorial repair holds, 2834 physical/current-target cohort holds and 131 original mapping holds, plus all 24880 physical-interpretation cells. The 131 mapping total is the literal 1+130 target contributions in constructor-mapping-holds.json; 2834 is the derived remainder 12447−9482−131. Exact complement operands are the preserved qualified-remaining intervals, candidate-native-patch and held_native_rows; neither derived total is fabricated as a new producer metric.",
+      "text": "Preserve 3023 source/territorial repair holds, 2834 physical/current-target cohort holds and 131 original mapping holds, plus all 24880 physical-interpretation cells. The 131 mapping total is the literal 1+130 target contributions in constructor-mapping-holds.json; 2834 is the derived remainder 12447\u22129482\u2212131. Exact complement operands are the preserved qualified-remaining intervals, candidate-native-patch and held_native_rows; neither derived total is fabricated as a new producer metric.",
       "status": "unresolved",
       "source_ids": [
         "gb:VNM:ADM2",
@@ -4635,6 +4864,15 @@
     },
     {
       "text": "A separate exact32-target/2649-cell original residual cohort is now qualified under accepted retained source/physical/native rules. The actual accepted131-cell baseline is f702b30caa7766f8d0837422eea8e0b686bf73b9. This preserves every inherited184-subject evidence record, source limit and historical result vintage. Full-source reconstruction issues, source/city/territorial questions and the distinct physically-held residual remain unchanged. Qualification and proposed metadata composition grant no new accepted repair credit, current selected owner-zero proof, geographic approval or publication. Actual current-base composition/selected-consumer/finalization records will be appended only after their distinct review and immutable product retention.",
+      "status": "unresolved",
+      "source_ids": [
+        "gb:VNM:ADM2",
+        "gshhg",
+        "natural-earth"
+      ]
+    },
+    {
+      "text": "The proposed selection46,078 cells/47 authorities/235 literal rows preserves every prior43,429 cell/owner tuple,46 authority entry and203 literal row and adds only the already qualified2,649-cell32-target cohort. Accepted source/physical/native inputs and all source/territorial/semantic/restoration limits remain; current owner-zero/selected consumption and integration are pending. Both issue1881packages remain partial and new accepted credit is0.",
       "status": "unresolved",
       "source_ids": [
         "gb:VNM:ADM2",
