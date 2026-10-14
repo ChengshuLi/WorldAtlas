@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {execFileSync} from 'node:child_process';
+import {execFileSync, spawnSync} from 'node:child_process';
 import {gzipSync} from 'node:zlib';
 import {candidateBudget} from '../scripts/native-ownership/native-preparation-guards.mjs';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
@@ -459,6 +459,169 @@ test('finalization refuses a new identity at an accepted package path', () => {
   assert.throws(() => finalizeDelivery({...config,package_inputs},reader), /conflicts with accepted path identity/);
 });
 
+// Actual Git/plain-Node fixture for metadata assembly. The source interpretation
+// and native construction controls live in source-member-native-delivery.test;
+// this fixture exercises the consumed-role boundary without replaying science.
+function modernFinalizationFixture(t, {mixed = false, membership = true} = {}) {
+  const root = directory(t), owned = 'coordination/engineering/modern-finalize/';
+  const git = (...args) => execFileSync('git', args, {cwd: root, stdio: ['pipe', 'pipe', 'pipe']}).toString().trim();
+  git('init'); git('config', 'user.name', 'Finalizer fixture'); git('config', 'user.email', 'finalizer@example.invalid');
+  const save = (name, value) => write(root, name, Buffer.isBuffer(value) ? value : jsonBytes(value));
+  const commitAll = () => { git('add', '.'); git('commit', '-qm', 'Immutable finalizer fixture'); return git('rev-parse', 'HEAD'); };
+  const r = pinReader(root), pin = name => r.pin(git('rev-parse', 'HEAD'), name);
+  const inherited = 'coordination/engineering/accepted-source/';
+  const roles = Object.fromEntries(['physical_input', 'physical_reproduction', 'physical_evidence', 'native_latitudes', 'owner_roster']
+    .map(role => [role, inherited + role + '.json']));
+  roles.catalogue = 'coordination/engineering/original-geography-source-corpus-20261006/catalogue.json';
+  for (const name of Object.values(roles)) save(name, {retained: name});
+  const familyPart = inherited + 'family-part.json.gz', familyRaw = jsonBytes({type: 'FeatureCollection', features: []});
+  save(familyPart, gzipSync(familyRaw));
+  const memberPaths = ['data/world-index.json', 'data/semantic-report.json', 'data/geography/part-0.json'];
+  for (const name of memberPaths) save(name, {retained: name});
+  const incidental = inherited + 'gshhg-never-consumed.json'; save(incidental, {not_a_selected_reader_operand: true});
+  const geometry = {type: 'Polygon', coordinates: [[[0, 0], [1, 0], [0, 1], [0, 0]]]};
+  const baseReference = {id: 'geography:base', footprints_sha256: 'b'.repeat(64), hierarchy_sha256: 'c'.repeat(64)};
+  const ownerPath = inherited + 'owners.json.gz', ownerRaw = jsonBytes([{id: 'target', index: 1}]);
+  save(ownerPath, gzipSync(ownerRaw)); commitAll();
+  const owner = {...pin(ownerPath), encoding: 'gzip', decoded_bytes: ownerRaw.length, decoded_sha256: digest(ownerRaw)};
+  save(inherited + 'base-manifest.json', {geographic_release: baseReference.id, footprints_sha256: baseReference.footprints_sha256,
+    hierarchy_sha256: baseReference.hierarchy_sha256, original_assets: {bounds: {sha256: owner.sha256}}}); commitAll();
+  const baseManifest = pin(inherited + 'base-manifest.json');
+  // Deliberately unsorted nested selector keys and accepted declaration ordering.
+  const base = {version: 1, release_id: baseReference.id, sha256: baseManifest.sha256,
+    selected_geography: {version: 1, path: 'bank.json', z: 3, a: 1, sha256: 'a'.repeat(64)}};
+  const originalSelector = Buffer.from(JSON.stringify(base, null, 2) + '\n');
+  const originalPackage = {version: 1, inputs: ['public/', '.github/package-inputs.json'], optional_inputs: ['public/'],
+    verification_paths: ['test/delivery-handoff.test.mjs'], generated_outputs: ['dist/'], retained_policy: 'unchanged'};
+  save('data/ownership-selection.json', originalSelector); save('.github/package-inputs.json', originalPackage); commitAll();
+  const selector = pin('data/ownership-selection.json');
+  const evidenceBody = {version: 1, kind: 'source-target-native-evidence-v1',
+    ...Object.fromEntries(Object.entries(roles).map(([role, name]) => [role, pin(name)])),
+    targets: [{id: 'source:A', target_id: 'target'}],
+    families: [{source_id: 'source', parts: [{...pin(familyPart), decoded_bytes: familyRaw.length, decoded_sha256: digest(familyRaw)}]}],
+    native_contract: {incidental_reproducer_operand: pin(incidental)},
+    ...(membership ? {source_membership: {index: pin(memberPaths[0]), lineage: pin(memberPaths[1]), parts: [pin(memberPaths[2])]}} : {})};
+  save(owned + 'source-evidence.json', evidenceBody); save(owned + 'native-patch.json', {rows: [{y: 2, runs: [[2, 4, 1]]}]}); commitAll();
+  const authority = binding => {
+    const stem = binding.kind === 'source-target-native-custody-v1' ? 'modern' : 'legacy';
+    const preimage = stem === 'modern' ? {...binding, kind: 'source-target-native-rule-v1'} : {version: 1, literal: true};
+    save(owned + stem + '-binding.json', binding); save(owned + stem + '-rule.json', preimage); commitAll();
+    const entry = {policy_id: 'retained-source-literal-additions', policy_version: 1,
+      rule_preimage: pin(owned + stem + '-rule.json'), rule_sha256: digest(jsonBytes(preimage)), source_authority: pin(owned + stem + '-binding.json')};
+    return {authority_sha256: digest(jsonBytes(entry)), ...entry};
+  };
+  const modern = authority({version: 1, kind: 'source-target-native-custody-v1',
+    source_evidence: pin(owned + 'source-evidence.json'), native_patch: pin(owned + 'native-patch.json')});
+  const entries = [modern], nativeRows = [{y: 2, runs: [[2, 4, 1]]}];
+  const rows = [{representation: 'native-cells', component_id: 'source-target:fixture', target_id: 'target', pixelIndex: 1,
+    disposition: 'assigned', base_geometry: geometry, base_geometry_sha256: digest(jsonBytes(geometry)), native_rows: nativeRows,
+    native_bounds: [0, 0, 1, 1], native_cells: 2, source_receipt_sha256: evidenceBody.physical_evidence.sha256,
+    authority_sha256: modern.authority_sha256, rule_sha256: modern.rule_sha256}];
+  if (mixed) {
+    const legacyPrefix = inherited + 'legacy/';
+    for (const name of ['source-publication', 'source-inventory', 'source-operating', 'native-publication', 'native-inventory', 'asset', 'stub'])
+      save(legacyPrefix + name + '.json', {retained: name}); commitAll();
+    const sourcePins = ['publication', 'inventory', 'operating'].map(name => pin(legacyPrefix + 'source-' + name + '.json'));
+    save(legacyPrefix + 'native-request.json', {additive: {inputs: sourcePins,
+      publication_path: sourcePins[0].path, inventory_path: sourcePins[1].path, operating_path: sourcePins[2].path}}); commitAll();
+    const stub = pin(legacyPrefix + 'stub.json');
+    const legacy = authority({version: 1, kind: 'original-issued-rule-source-custody-v1',
+      original_pins: {source_request: stub, source_facts: stub, native_request: pin(legacyPrefix + 'native-request.json'),
+        native_facts: stub, native_manifest: stub, ledger: stub},
+      native_proof: {publication: pin(legacyPrefix + 'native-publication.json'), inventory: pin(legacyPrefix + 'native-inventory.json'),
+        operating: stub, assets: [pin(legacyPrefix + 'asset.json')]}});
+    entries.push(legacy); rows.unshift({component_id: 'legacy:fixture', target_id: 'target', pixelIndex: 1, geometry,
+      base_geometry_sha256: digest(jsonBytes(geometry)), geometry_sha256: digest(jsonBytes(geometry)), source_receipt_sha256: 'e'.repeat(64),
+      native_cells: 1, disposition: 'assigned', authority_sha256: legacy.authority_sha256, rule_sha256: legacy.rule_sha256});
+  }
+  const package_inputs = pin('.github/package-inputs.json');
+  const registry = {version: 1, kind: 'retained-rule-authority-registry-v1', entries: entries.sort((a, b) => a.authority_sha256.localeCompare(b.authority_sha256))};
+  save(owned + 'registry.json', registry); save(owned + 'ledger.json', {version: 2, kind: 'native-additive-repair-ledger-v2',
+    authority_registry_sha256: digest(jsonBytes(registry)), scope_ids: rows.map(row => row.component_id), rows});
+  save(owned + 'custody.json', {retained: true}); commitAll();
+  const registryPin = pin(owned + 'registry.json'), ledgerPin = pin(owned + 'ledger.json');
+  const stub = pin(owned + 'custody.json'); save(owned + 'operating.json', {execution_custody: {terminal: stub}}); commitAll();
+  save(owned + 'rebind.json', {request: stub, facts: stub, publication: stub, result: stub, operating: pin(owned + 'operating.json')}); commitAll();
+  const rebind = pin(owned + 'rebind.json');
+  save(owned + 'selected-ledger.json', {...r.json(pin(owned + 'ledger.json')), current_rebind: rebind, current_targets: [{target_id: 'target'}]}); commitAll();
+  const selected_ledger = pin(owned + 'selected-ledger.json'), effectiveReference = {...baseReference, id: 'geography:effective'};
+  save(owned + 'patch.json', {authority_registry_sha256: digest(jsonBytes(registry)), ledger_sha256: selected_ledger.sha256,
+    base_reference: baseReference, effective_reference: effectiveReference}); commitAll();
+  const assets = {base_manifest: baseManifest, ledger: selected_ledger, owner_roster: owner, patch: pin(owned + 'patch.json')};
+  const envelope = {version: 2, kind: 'retained-native-base-plus-delta-v2', base_reference: baseReference, effective_reference: effectiveReference,
+    ...Object.fromEntries(Object.entries(assets).map(([role, p]) => [role, {path: 'additive-repairs/' + role + (role === 'owner_roster' ? '.json.gz' : '.json'),
+      bytes: p.bytes, sha256: p.sha256, ...(role === 'owner_roster' ? {encoding: 'gzip', decoded_bytes: p.decoded_bytes, decoded_sha256: p.decoded_sha256} : {})}]))};
+  save(owned + 'envelope.json', {reference_release: effectiveReference, additiveRelease: envelope}); commitAll();
+  save(owned + 'sidecar.json', {version: 2, kind: 'retained-native-additive-selection-v2', base_selection: base,
+    authority_registry: registryPin, logical_asset_map: assets, runtime_envelope: pin(owned + 'envelope.json')}); commitAll();
+  const config = {version: 1, registry: registryPin, ledger: ledgerPin, rebind, selected_ledger,
+    selector, package_inputs, sidecar: pin(owned + 'sidecar.json'), new_prefix: owned};
+  const withEvidence = body => {
+    save(owned + 'altered-source.json', body); commitAll();
+    const binding = {version: 1, kind: 'source-target-native-custody-v1', source_evidence: pin(owned + 'altered-source.json'),
+      native_patch: r.json(modern.source_authority).native_patch};
+    save(owned + 'altered-binding.json', binding); save(owned + 'altered-rule.json', {...binding, kind: 'source-target-native-rule-v1'}); commitAll();
+    const entry = {policy_id: 'retained-source-literal-additions', policy_version: 1, rule_preimage: pin(owned + 'altered-rule.json'),
+      rule_sha256: pin(owned + 'altered-rule.json').sha256, source_authority: pin(owned + 'altered-binding.json')};
+    const changedRegistry = {version: 1, kind: registry.kind, entries: [{authority_sha256: digest(jsonBytes(entry)), ...entry}]};
+    const changedLedger = {...r.json(config.ledger), authority_registry_sha256: digest(jsonBytes(changedRegistry)),
+      rows: rows.filter(row => row.representation === 'native-cells').map(row => ({...row,
+        authority_sha256: changedRegistry.entries[0].authority_sha256, rule_sha256: entry.rule_sha256}))};
+    changedLedger.scope_ids = changedLedger.rows.map(row => row.component_id);
+    save(owned + 'altered-registry.json', changedRegistry); save(owned + 'altered-ledger.json', changedLedger); commitAll();
+    return {...config, registry: pin(owned + 'altered-registry.json'), ledger: pin(owned + 'altered-ledger.json')};
+  };
+  const script = new URL('../scripts/prepare-delivery-handoff.mjs', import.meta.url).pathname;
+  const run = (phase, destination, flags = [], input = config) => {
+    save('config.json', input);
+    const env = {...process.env, GIT_NO_LAZY_FETCH: '1'}; delete env.NODE_OPTIONS; delete env.NODE_PATH;
+    return spawnSync(process.execPath, [script, phase, 'config.json', destination, ...flags], {cwd: root, env, encoding: 'utf8'});
+  };
+  return {root, r, config, run, git, save, commitAll, pin, evidenceBody, originalSelector, originalPackage, assets,
+    consumed: [...Object.values(roles), familyPart, ...(membership ? memberPaths : [])], incidental, withEvidence};
+}
+
+for (const mixed of [false, true]) test('real finalizer supports ' + (mixed ? 'mixed legacy/modern' : 'modern') + ' roles, flat envelope aliases and exact resume', t => {
+  const f = modernFinalizationFixture(t, {mixed}), first = '.cache/delivery-handoff/first', second = '.cache/delivery-handoff/second';
+  const packageRun = f.run('package', '.cache/delivery-handoff/projection'); assert.equal(packageRun.status, 0, packageRun.stderr);
+  const finalized = f.run('finalize', first); assert.equal(finalized.status, 0, finalized.stderr);
+  const products = name => fs.readFileSync(path.join(f.root, first, name));
+  const inputs = JSON.parse(products('package-inputs.json'));
+  assert.deepEqual(inputs.inputs.slice(0, f.originalPackage.inputs.length), f.originalPackage.inputs);
+  for (const key of ['optional_inputs', 'verification_paths', 'generated_outputs', 'retained_policy']) assert.deepEqual(inputs[key], f.originalPackage[key]);
+  for (const name of [...f.consumed, ...Object.values(f.assets).map(p => p.path)]) assert.ok(inputs.inputs.includes(name), name);
+  assert.ok(!inputs.inputs.includes(f.incidental)); assert.ok(!inputs.inputs.some(name => name.endsWith('selected-delivery-expectations.json')));
+  const selected = JSON.parse(products('ownership-selection.json')), original = {...selected}; delete original.additive_release;
+  assert.equal(JSON.stringify(original), JSON.stringify(JSON.parse(f.originalSelector)));
+  assert.deepEqual(fs.readFileSync(path.join(f.root, 'data/ownership-selection.json')), f.originalSelector);
+  const expected = JSON.parse(products('selected-delivery-expectations.json'));
+  const members = expected.cohorts.flatMap(cohort => cohort.members);
+  assert.equal(members.find(row => row.component_id === 'source-target:fixture').native_rows_sha256, digest(jsonBytes([{y: 2, runs: [[2, 4, 1]]}])));
+  assert.equal(expected.cumulative_native_cells, mixed ? 3 : 2);
+  if (mixed) assert.ok(members.find(row => row.component_id === 'legacy:fixture').geometry_sha256);
+  const resumed = f.run('finalize', first, ['--resume']); assert.equal(resumed.status, 0, resumed.stderr); assert.equal(JSON.parse(resumed.stdout).resumed, true);
+  const repeated = f.run('finalize', second); assert.equal(repeated.status, 0, repeated.stderr);
+  for (const name of ['ownership-selection.json', 'package-inputs.json', 'package-roles.json', 'selected-delivery-expectations.json'])
+    assert.deepEqual(fs.readFileSync(path.join(f.root, second, name)), products(name));
+});
+
+test('real modern package command accepts absent optional membership and refuses omitted or altered consumed dependencies before publication', t => {
+  const f = modernFinalizationFixture(t, {membership: false});
+  const good = f.run('package', '.cache/delivery-handoff/no-membership'); assert.equal(good.status, 0, good.stderr);
+  let ordinal = 0;
+  for (const name of f.consumed) {
+    const oldRead = f.r.read; f.r.read = p => p.path === name ? oldRead({...p, sha256: '0'.repeat(64)}) : oldRead(p);
+    assert.throws(() => packageProjection(f.config, f.r), /hash differs/); f.r.read = oldRead;
+  }
+  for (const role of ['catalogue', 'physical_input', 'physical_reproduction', 'physical_evidence', 'native_latitudes', 'owner_roster', 'families']) {
+    const body = structuredClone(f.evidenceBody); delete body[role];
+    const destination = '.cache/delivery-handoff/refused-' + ordinal++;
+    const refused = f.run('package', destination, [], f.withEvidence(body));
+    assert.notEqual(refused.status, 0, role); assert.match(refused.stderr, /Missing.*(?:role|family)/, role);
+    assert.equal(fs.existsSync(path.join(f.root, destination)), false);
+  }
+});
+
 
 // Scalar extraction from the reviewed AUS facts/evidence at
 // c753c65a72e51718b453883a941fc22e148b5fbb, merged as 94d7016a6e12ec5c5414db24202e95d5dd9e4459:
@@ -470,6 +633,26 @@ const ausNativeScalars = {components: 13, assigned_cells: 20, assigned_component
   candidate_cell_contributions: 20, shared_same_owner_cells: 0};
 const ausSourceEvaluation = 'ad32930dc368c1b4b1cb46cc0484649053d44762';
 const ausNativeEvaluation = '5d287b5f78c9219b1d9202d20d8824ef2ef7898b';
+
+test('real modern package command rejects changed whole dependency pins and incomplete accepted membership', t => {
+  const f = modernFinalizationFixture(t); let ordinal = 0;
+  const refused = body => {
+    const destination = '.cache/delivery-handoff/changed-' + ordinal++;
+    const result = f.run('package', destination, [], f.withEvidence(body));
+    assert.notEqual(result.status, 0); assert.match(result.stderr, /hash differs|Missing.*membership|Missing.*family/);
+    assert.equal(fs.existsSync(path.join(f.root, destination)), false);
+  };
+  for (const mutate of [
+    ...['catalogue', 'physical_input', 'physical_reproduction', 'physical_evidence', 'native_latitudes', 'owner_roster']
+      .map(role => body => { body[role].sha256 = '0'.repeat(64); }),
+    body => { body.families[0].parts[0].sha256 = '0'.repeat(64); },
+    ...['index', 'lineage'].map(role => body => { body.source_membership[role].sha256 = '0'.repeat(64); }),
+    body => { body.source_membership.parts[0].sha256 = '0'.repeat(64); },
+    ...['index', 'lineage', 'parts'].map(role => body => { delete body.source_membership[role]; }),
+    body => { body.source_membership.parts = []; }, body => { body.families[0].parts = []; }
+  ]) { const body = structuredClone(f.evidenceBody); mutate(body); refused(body); }
+});
+
 function evidenceFixture(reader = memoryReader({admit: false})) {
   const descriptor = pin => ({path: pin.path, bytes: pin.bytes, sha256: pin.sha256, hash_kind: 'file-bytes'});
   const baseline = reader.add('baseline.json', {retained: true});

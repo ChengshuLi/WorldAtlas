@@ -151,12 +151,21 @@ existing smoke runner, not a runtime package input. Keep it in the reviewed pack
 but do not append it to `.github/package-inputs.json` merely because preparation
 emitted it. Preserve prior declarations and append actual consumed roles using the
 existing `finalizedPackageInputs` constructor, not a copied packet filename list.
-The current `package`/`finalize` projection walks the original issued-rule binding
-shape (`original_pins`/`native_proof`); it is not a source-target-native constructor.
-For that distinct binding shape, derive the exact role list from its existing
-reader and validate the actual package/consumer rather than assuming the legacy
-projection supports it. Do not copy old source algorithms or add a new validator
-just to prepare another batch.
+The existing `package` and `finalize` commands handle issued-rule and modern
+`source-target-native-custody-v1` authorities, including mixed registries. After
+completed selected assembly, use `finalize CONFIG DESTINATION` to produce the
+selector, package definition, role inventory and smoke expectations directly;
+no hand-written modern role list or separate package pass is needed.
+Modern roles are the fixed whole-body reads of `qualifySourceTargetNativeAuthority`:
+evidence/patch, catalogue, measured physical inputs/evidence/reproducer, native
+latitudes/roster, declared family parts and optional membership index/lineage/parts.
+All final sidecar assets are included. Nested GIS descriptors are not traversed,
+and neither the physical reproducer nor scientific qualification runs here.
+The existing direct or `additiveRelease`-wrapped envelope's flat public aliases
+remain distinct from Git paths, with encoded/decoded identities preserved.
+Smoke members use original-ledger `native_rows_sha256` for native-only components
+and `geometry_sha256` for literal geometries. Existing accepted package policies,
+selector ordering, custody/rebind, package/consumer and publication gates remain.
 
 ## Retained current13 metadata example
 

@@ -528,6 +528,7 @@ export function packageProjection(config, reader) {
   const normalized = normaliseRetainedRepairLedger(ledger, registry);
   const roles = new Map();
   function add(pin, role) {
+    need(pin && safe(pin.path), 'Missing whole consumed package role: ' + role);
     reader.read(pin); const prior = roles.get(pin.path);
     need(!prior || prior.sha256 === pin.sha256 && prior.bytes === pin.bytes, 'Conflicting package path vintages');
     if (!prior) roles.set(pin.path, {...pin, roles: []});
@@ -538,6 +539,34 @@ export function packageProjection(config, reader) {
   for (const entry of registry.entries.filter(e => e.source_authority.path.startsWith(config.new_prefix))) {
     added++; add(entry.rule_preimage, 'authority rule preimage'); add(entry.source_authority, 'authority binding');
     const binding = reader.json(entry.source_authority);
+    if (binding.kind === 'source-target-native-custody-v1') {
+      const preimage = reader.json(entry.rule_preimage);
+      need(binding.version === 1 && same(Object.keys(binding).sort(), ['kind', 'native_patch', 'source_evidence', 'version'])
+        && same(preimage, {...binding, kind: 'source-target-native-rule-v1'}), 'Source-target authority inputs differ');
+      add(binding.source_evidence, 'original source evidence'); add(binding.native_patch, 'original native patch');
+      const evidence = reader.json(binding.source_evidence);
+      need(evidence.version === 1 && evidence.kind === 'source-target-native-evidence-v1'
+        && Array.isArray(evidence.targets) && evidence.targets.length > 0
+        && Array.isArray(evidence.families) && evidence.families.length > 0, 'Missing source-target evidence roles');
+      // Closed whole-body read roles of qualifySourceTargetNativeAuthority. Its
+      // physical reproducer is authenticated, never executed here; nested GIS
+      // operands/native contracts are not a recursive package declaration.
+      for (const role of ['catalogue', 'physical_input', 'physical_reproduction', 'physical_evidence', 'native_latitudes', 'owner_roster'])
+        add(evidence[role], 'source-target ' + role);
+      for (const family of evidence.families) {
+        need(typeof family.source_id === 'string' && family.source_id && Array.isArray(family.parts)
+          && family.parts.length > 0, 'Missing complete source family roles');
+        for (const pin of family.parts) add(pin, 'source-target source family part');
+      }
+      if (evidence.source_membership !== undefined) {
+        const membership = evidence.source_membership;
+        need(membership && same(Object.keys(membership).sort(), ['index', 'lineage', 'parts'])
+          && Array.isArray(membership.parts) && membership.parts.length > 0, 'Missing accepted source membership roles');
+        add(membership.index, 'source-target membership index'); add(membership.lineage, 'source-target membership lineage');
+        for (const pin of membership.parts) add(pin, 'source-target membership part');
+      }
+      continue;
+    }
     for (const [role, pin] of Object.entries(binding.original_pins)) add(pin, 'original ' + role);
     for (const role of ['publication', 'inventory', 'operating']) add(binding.native_proof[role], 'native ' + role);
     for (const pin of binding.native_proof.assets) add(pin, 'native emitted asset');
@@ -559,7 +588,9 @@ export function packageProjection(config, reader) {
   const cohorts = registry.entries.map(entry => {
     const rows = [...normalized.rows.values()].filter(row => row.authority_sha256 === entry.authority_sha256);
     return {original_batch_id: 'retained-authority-scope:' + entry.authority_sha256, component_ids: rows.map(row => row.component_id),
-      members: rows.map(row => Object.fromEntries(['component_id', 'target_id', 'disposition', 'geometry_sha256'].map(k => [k, row[k]])))};
+      members: rows.map(row => ({component_id: row.component_id, target_id: row.target_id, disposition: row.disposition,
+        ...(row.representation === 'native-cells' ? {native_rows_sha256: digest(jsonBytes(row.native_rows))}
+          : {geometry_sha256: row.geometry_sha256})}))};
   }).filter(c => c.members.length);
   const expectation = {version: 1, selected_ledger_sha256: null,
     cumulative_native_cells: [...normalized.rows.values()].reduce((sum, row) => sum + row.native_cells, 0), cohorts};
@@ -627,7 +658,8 @@ export function finalizeDelivery(config, reader) {
   const baseManifest = reader.json(assets.base_manifest);
   need(assets.owner_roster.sha256 === baseManifest.original_assets?.bounds?.sha256, 'Final owner roster differs from original native bounds');
   reader.read(assets.owner_roster); // Authenticate the retained encoded alias; no decoding or graph computation.
-  const selected = reader.json(config.selected_ledger), patch = reader.json(assets.patch), envelope = reader.json(sidecar.runtime_envelope);
+  const selected = reader.json(config.selected_ledger), patch = reader.json(assets.patch);
+  const wrapped = reader.json(sidecar.runtime_envelope), envelope = wrapped.additiveRelease ?? wrapped;
   need(typeof selection.release_id === 'string' && baseManifest.geographic_release === selection.release_id
     && hex(baseManifest.footprints_sha256, 64) && hex(baseManifest.hierarchy_sha256, 64)
     && same(envelope.base_reference, {id: selection.release_id, footprints_sha256: baseManifest.footprints_sha256,
@@ -642,7 +674,7 @@ export function finalizeDelivery(config, reader) {
       && (declared.decoded_sha256 ?? declared.sha256) === (pin.decoded_sha256 ?? pin.sha256), 'Final envelope asset descriptor differs: ' + role);
   }
   const selector = finalizedSelection(originalSelector, sidecar, config.sidecar);
-  const outputs = packageProjection({...config, outer_roles: [assets.patch, sidecar.runtime_envelope, config.sidecar]}, reader);
+  const outputs = packageProjection({...config, outer_roles: [...Object.values(assets), sidecar.runtime_envelope, config.sidecar]}, reader);
   const projection = JSON.parse(outputs['package-roles.json']);
   const paths = projection.paths.map(p => p.path);
   const baselinePackage = reader.json(config.package_inputs);
@@ -682,7 +714,8 @@ export function finalizeDelivery(config, reader) {
   const expectations = {version: expectation.version, selected_ledger_sha256: expectation.selected_ledger_sha256,
     cumulative_native_cells: expectation.cumulative_native_cells, cohorts: expectation.cohorts.map(c => ({original_batch_id: c.original_batch_id,
       component_ids: c.component_ids, members: c.members.map(m => ({component_id: m.component_id, target_id: m.target_id,
-        disposition: m.disposition, geometry_sha256: m.geometry_sha256}))}))};
+        disposition: m.disposition, ...(Object.hasOwn(m, 'native_rows_sha256')
+          ? {native_rows_sha256: m.native_rows_sha256} : {geometry_sha256: m.geometry_sha256})}))}))};
   return {...outputs, 'ownership-selection.json': selector, 'package-inputs.json': orderedBytes(packageInputs),
     'selected-delivery-expectations.json': orderedBytes(expectations)};
 }
