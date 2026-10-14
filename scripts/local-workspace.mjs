@@ -198,9 +198,9 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     git('worktree', 'add', '--no-checkout', ...(slot === 'work' ? ['-b', branch] : ['--detach']), destination, head);
     if (profile === 'sparse') {
       execFileSync('git', ['-C', destination, 'sparse-checkout', 'set', '--no-cone', '--stdin'], {
-        input: ['/*', '!/*/', ...selected.map(prefix => `/${prefix}${tree.some(({name}) => name.startsWith(prefix + '/')) ? '/' : ''}`)].join('\n') + '\n', encoding: 'utf8'});
+        input: ['/*', '!/*/', ...selected.map(prefix => `/${prefix}${tree.some(({name}) => name.startsWith(prefix + '/')) ? '/' : ''}`)].join('\n') + '\n', encoding: 'utf8', env: noLazyFetch});
     }
-    execFileSync('git', ['-C', destination, 'read-tree', '-mu', 'HEAD']);
+    execFileSync('git', ['-C', destination, 'read-tree', '-mu', 'HEAD'], {env: noLazyFetch});
     entry.status = 'ready';
     save(value);
     return entry;

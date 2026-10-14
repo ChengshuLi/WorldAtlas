@@ -521,6 +521,11 @@ test('exact commit inspection refuses non-commits and ignores replacement-object
   const root = inspected.inputs.find(row => row.path === 'README.md');
   assert.equal(root.oid, oid);
   assert.equal(root.bytes, 4);
+  for (const profile of ['sparse', 'full']) {
+    const entry = manager.allocate({worker: profile, slot: 'review', commit: head, profile});
+    assert.equal(fs.readFileSync(path.join(entry.path, 'README.md'), 'utf8'), 'root');
+    manager.release({worker: profile, slot: 'review', token: entry.token});
+  }
 });
 
 test('missing root and descendant tree metadata are classified before any blob sizing', t => {
