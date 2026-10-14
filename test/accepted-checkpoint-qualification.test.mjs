@@ -284,9 +284,9 @@ function pack(f,mutate=()=>{}) {
       return {name,bytes:raw.length,sha256:sha(raw),...(decoded?{decoded_bytes:decoded.length,decoded_sha256:sha(decoded)}:{})};})}};
   const raw=valueBytes(report);return {report,raw,zip:zipMembers([['geography-check.json',raw],...MEMBERS.map(name=>[name,bodies.get(name)])])};
 }
-async function acquire(f,mutate) {
+async function acquire(f,mutate,{merged=f.trusted,tree=f.git('rev-parse',f.trusted+'^{tree}').toString().trim()}={}) {
   const p=pack(f,mutate), request='01234567-abcd-4321-aaaa-123456789012',head=f.trusted,baseline=f.trusted,
-    candidate=f.trusted,merged=f.trusted,tree=f.git('rev-parse',f.trusted+'^{tree}').toString().trim(),workflowHead=f.trusted;
+    candidate=f.trusted,workflowHead=f.trusted;
   const source={run_id:12,run_attempt:2,job_id:34,tree,head,baseline,candidate_commit:candidate,
     workflow_path:'.github/workflows/worker-merge.yml',event:'workflow_dispatch',workflow_head:workflowHead,
     artifact_id:56,artifact_name:`geography-${request}-2`,artifact_digest:sha(p.zip),artifact_bytes:p.zip.length,
@@ -521,5 +521,20 @@ test('older checkpoint cannot skip changed source routing on actual baseline',as
   f.save('data/source.json',{type:'FeatureCollection',features:[]});const baseline=f.commit();
   a.reader=currentReader(f,a,baseline);const result=await qualify(f,a);
   assert.equal(result.available,false);assert.match(result.reason,/route changed/);
+  f.transport.releaseAcceptedCheckpoint(a.handle);
+});
+
+test('unavailable accepted historical commit declines reuse without weakening tree validation',async t=>{
+  const f=await acceptedProducts(t),a=await acquire(f,undefined,{merged:'d'.repeat(40)});
+  const baseline=successorSelector(f);a.reader=currentReader(f,a,baseline);
+  const result=await qualify(f,a);assert.equal(result.available,false);
+  assert.match(result.reason,/historical checkpoint commit unavailable/);
+  f.transport.releaseAcceptedCheckpoint(a.handle);
+});
+
+test('historical advancement rejects a local tree inconsistent with accepted provenance',async t=>{
+  const f=await acceptedProducts(t),a=await acquire(f,undefined,{tree:'f'.repeat(40)});
+  const baseline=successorSelector(f);a.reader=currentReader(f,a,baseline);
+  await assert.rejects(qualify(f,a),/historical checkpoint tree differs/);
   f.transport.releaseAcceptedCheckpoint(a.handle);
 });
