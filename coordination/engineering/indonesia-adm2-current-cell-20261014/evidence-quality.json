@@ -2,7 +2,7 @@
   "version": 1,
   "issue": 1884,
   "lane": "engineering",
-  "worker_id": "01a1275a-c716-71e6-8917-50c14148900e",
+  "worker_id": "01a13b6c-91af-722c-88a4-0d9bb2ea0029",
   "subject_ids": [
     "atlas:city:IDN-1227",
     "gb:IDN:ADM2:22746128B10156150641021",
@@ -352,7 +352,7 @@
   "subject_ids_sha256": "f685d4992315eb409ae44c05c250bc7c6c4875cf04a3d1a3f121579c7da28679",
   "baseline": {
     "version": 2,
-    "commit": "f7c358326d776398bc1cffe84df81eac7033091c",
+    "commit": "97a781284fa36fee4c698026a2af5f6d19cfc812",
     "files": [
       {
         "commit": "5ab660cb68821e6b719f1b86819069ecac419ce1",
@@ -826,6 +826,13 @@
         "bytes": 2948,
         "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
         "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/ownership-selection.json",
+        "bytes": 1602,
+        "sha256": "6771432f27c85e800b4f9129c3f2855166e7f79c46d4b565dd3e9d76ba03cfcf",
+        "hash_kind": "file-bytes",
+        "commit": "f5898ab7a791e343e40dccf0e8f94b082b4049b2"
       }
     ],
     "pins": {
@@ -1841,8 +1848,224 @@
     },
     {
       "path": "data/ownership-selection.json",
-      "bytes": 1602,
-      "sha256": "6771432f27c85e800b4f9129c3f2855166e7f79c46d4b565dd3e9d76ba03cfcf",
+      "bytes": 1592,
+      "sha256": "72d78f87dc14b3f945b5df6c24a72be9a7d59ee8a3db752e88d9884f524f239f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/authority/authority-binding.json",
+      "bytes": 717,
+      "sha256": "0dff6b0206a4ace2ec571557b44c01c59a25c712f42ad35859669920e928074c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/authority/independent-result-review.json",
+      "bytes": 1423,
+      "sha256": "5ec5e0edc08eae464e1547a382636bfd3484f58e6ba6e0dfe7ffc018b2e6ca7a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/authority/original-rule-preimage.json",
+      "bytes": 714,
+      "sha256": "d3e5d65a69ddad31802bed5fece2b44042bcaa8b52296defe26b46856e1e9409",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/authority/qualified-ledger-rows.json",
+      "bytes": 388721,
+      "sha256": "4a06ff8a2ce9b4c45b1d0fda7ffde35b48691d3b6300129e7cc53f44fdb0b0b4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/authority/receipt.json",
+      "bytes": 8111,
+      "sha256": "cbb08102f88ef3a9aebcec8a63e117b8ab0d77c05f671e98a4359f44ecfa6678",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/candidate-native-patch.json",
+      "bytes": 98571,
+      "sha256": "d34fef6dda41f12fb3eff97350423791fc04e4c878dc9940af8bd0125fa256cc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-001/admission.json",
+      "bytes": 2341,
+      "sha256": "a6255c915c3179dceff2f5c05bf693bfdece134ac8f592d1c80e2314b2f918fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-001/authority-registry.json",
+      "bytes": 44429,
+      "sha256": "c5cffec1d428e26f1b8961442f2c8c7d35cd4eb190cb7e355f2fd4719fa187ff",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-001/composition-receipt.json",
+      "bytes": 14759,
+      "sha256": "96e5aced16ab237cb1dbed86943b508c1c97ac3ec4d3cd77b8b4c1a03140eba2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-001/independent-result-review.json",
+      "bytes": 1760,
+      "sha256": "44b1c65462e28ce1b9bd0630af62a936f95c786f4d9bbf89c7cb8340c67b34ec",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-001/native-supplement-ledger.json",
+      "bytes": 2129323,
+      "sha256": "aa330a8af1c11140942f9a6ccc6062d80d6f0b870be425614f17c1518c1c6a82",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-001/native-supplement-patch.json",
+      "bytes": 593975,
+      "sha256": "1cffb8494495933429ce26c9fb5f8d2b6207e82cfb329dc0ae1f32403ab3bf20",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-001/runtime-envelope.json",
+      "bytes": 1383,
+      "sha256": "6547ac984dc4791bd746d350e003b38ea81178a44c700873661eec5679da4a28",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-001/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-001/stdout.log",
+      "bytes": 209,
+      "sha256": "7dd55b1bb8eeace7a93b167d0e82de2bf9732e94ffffd8d319714a2f8e4477d8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/admission.json",
+      "bytes": 2341,
+      "sha256": "ff0648b9538aec9ddc81fcc0c311e3896c23d14795ddf584c3191dc391f50063",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/authority-registry.json",
+      "bytes": 45353,
+      "sha256": "7d6f2462efb57e5a2de0a8c01cf30a54520ca069d077e872b9a239abc6b69f46",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+      "bytes": 15040,
+      "sha256": "4203af9464e46c0259a53bdde5a492221a0cfcf376ecee94f0a62e82b76d3670",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/native-supplement-ledger.json",
+      "bytes": 2135703,
+      "sha256": "d62efcc94b0d523fb023aef72f9439d521dc57dfd2fe06ba3b268a33b6a7f53d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/native-supplement-patch.json",
+      "bytes": 595361,
+      "sha256": "a0fd61bf621a236023042b1aac4db3916082bfd5abfee7489e7660d68b3c280a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/runtime-envelope.json",
+      "bytes": 1383,
+      "sha256": "241be7ffa1ecd607776aa4877d2835604097149ead105a3db53963b301ecf73c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/selected-delivery-expectations.json",
+      "bytes": 91903,
+      "sha256": "b4328706e6eccb50dd3e072ad512d9df34c618977dbc7a4ad76774d51f1e00b4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/selection-sidecar.json",
+      "bytes": 4082,
+      "sha256": "86ff2f2bae0ecf82a07f8ab5a897f3f4cbc85e60631ccd2714af84c32925faa5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/cohort-intervals.json",
+      "bytes": 932393,
+      "sha256": "e206d62804b2e12bf3cd981a88cae18ee96e3850d6e7723a115df111df7e21d7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/original-stage-inputs.json",
+      "bytes": 279046,
+      "sha256": "7d6d1d88866b6a1ce8ee282100a6c972d3732d301e08df4a56d6bdf14317fcff",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/physical-entry-receipt.json",
+      "bytes": 4359,
+      "sha256": "c890bc63798d71a295a8a12bccfff40bb041e4d93a49a028661a5b36b7b4ba10",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/physical-plan.json",
+      "bytes": 4288,
+      "sha256": "4813667c2d35049063cbfb8ac352fe1b5215318b67696fe8d0e0fc48da1ada7b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/physical-support.json",
+      "bytes": 1797357,
+      "sha256": "37fcbba4d60c81225471007005dea086b1e2c38a3739602d4590b9ae46200f6a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/source-admission.json",
+      "bytes": 2097,
+      "sha256": "6a0d9fa8f3f035bb29a369a18e55298518f69cd21f5878e968dd859c21d345c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/source-execution-receipt.json",
+      "bytes": 1942,
+      "sha256": "7dbf7e050501ff4ba2aa9affe59759682de7621598327b291e3bafe26dc52f73",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/source-input-inventory.json",
+      "bytes": 11017,
+      "sha256": "f229bae341dbfd2a787cec3051000f7c99081e384c28f9d6ebc055df624b5b1d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/source-qualification.json",
+      "bytes": 21132,
+      "sha256": "3ab4d5c35c239a62085250feef457e5d85371af8d60800dc10ba9a9e7988714e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/source-wrapper-disposition.json",
+      "bytes": 1069,
+      "sha256": "e99e7136870a4662ac681e301dc0347422b3868d724a7be34ea4ca806098d26f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/finalize-002.json",
+      "bytes": 2718,
+      "sha256": "d5b6745a174763b9d2c59982af4a196501d531fbb8ebb7d3551d0c60968dd51c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/source-evidence.json",
+      "bytes": 13310,
+      "sha256": "64331d4248d09396fc45f1c9a14f4cbf8d28b738d7d838c07874c1b890655381",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/package-inputs.json",
+      "bytes": 113567,
+      "sha256": "c7165304e690db7ca379f66b92e1ef626885824cce394155a0b1ccd5ebd3c6ed",
       "hash_kind": "file-bytes"
     }
   ],
@@ -1902,6 +2125,13 @@
       "description": "Correct only final runtime ledger.path and patch.path to accepted flat additive-repairs public aliases after the retained package attempt failed with Unsafe additive public asset path. Actual corrected runtime at 03b0ced3caa0e7e439d1455b7dca4bd634e1e475 is 1,387 bytes; its sidecar pin/hook and receipt are refreshed to those exact bytes. Ledger, registry, patch, target/hold scope and prior scientific qualification remain literally unchanged. The pre-correction geography pass and package failure remain historical attempt evidence; they do not approve the corrected current candidate. Fresh full CI/package/consumer proof and renewed exact-head review remain required. This binding repair runs no scientific operator or source/native constructor. The original issue-specific repository paths were composed manually in candidate runtime metadata. The correction copies the accepted Vietnam flat public aliases; the accepted package producer/publisher is unchanged, and no new per-batch wrapper or framework is introduced.",
       "software": "Existing preparePackageSelectedAdditive public-asset contract and existing evidence validator; no new algorithm or scientific execution.",
       "units": "Actual runtime-envelope bytes; unchanged proposed native cell counts."
+    },
+    {
+      "id": "retained-riau-native-and-current-composition",
+      "kind": "measurement",
+      "description": "Reuse original Riau source/physical results and aab952621 existing-constructor qualification without replaying source/GSHHG/native qualification. Current existing compose-cumulative adapter authenticates the recorded code and complete selected metadata against f702, preserves original authorities and literal ledger rows, checks a disjoint interval union and writes new registry/ledger/patch/envelope. Existing pinReader/nativeBaseSelection and prepare-delivery-handoff finalize bind actual products, preserve accepted selector order and package prefix, and exclude checkout smoke expectations from runtime package reads. Original producer and custody receipts retain original code/input/runtime/resource limitations. Fresh composition has cooperative reader phase/current-process RSS admission; measured lifetime RSS is not aggregate process-tree or hard-wall enforcement. Actual current-owner-zero and selected/package consumption remain final-queue obligations.",
+      "software": "Continuation Node24.19.0; unchanged production authority/conservation/finalizer helpers at acceptedf702. Original source/physical Python3.12.14 and original native Node24.19.0 remain historical evidence, not new executions.",
+      "units": "Native cells, authorities, literal ledger rows, seconds and bytes; discrete native intervals, no area/distance inference."
     }
   ],
   "metrics": [
@@ -1909,7 +2139,7 @@
       "id": "source-source_prerequisite_candidates",
       "value": 12424,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -1921,7 +2151,7 @@
       "id": "source-physical_interpretation_candidates_held",
       "value": 11080,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -1933,7 +2163,7 @@
       "id": "source-physical_qualified_cells",
       "value": 0,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -1945,7 +2175,7 @@
       "id": "source-native_authority_qualified_cells",
       "value": 0,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -1957,7 +2187,7 @@
       "id": "source-accepted_or_delivered_repairs",
       "value": 0,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -1969,7 +2199,7 @@
       "id": "source-candidate_cells",
       "value": 23504,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -1981,7 +2211,7 @@
       "id": "source-source_membership_mismatch_cells",
       "value": 0,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -1993,7 +2223,7 @@
       "id": "source-outside_retained_IDN_reference_cells",
       "value": 16540,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2005,7 +2235,7 @@
       "id": "source-competing_reference_country_cells",
       "value": 0,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2017,7 +2247,7 @@
       "id": "source-elapsed_seconds",
       "value": 4.941722125047818,
       "unit": "seconds",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2029,7 +2259,7 @@
       "id": "source-peak_rss_bytes",
       "value": 248020992,
       "unit": "bytes",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2041,7 +2271,7 @@
       "id": "session-frozen_candidate_cells",
       "value": 324722,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2053,7 +2283,7 @@
       "id": "session-already_owned_cells",
       "value": 2794,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2065,7 +2295,7 @@
       "id": "session-remaining_candidate_cells",
       "value": 321928,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2077,7 +2307,7 @@
       "id": "session-exact_remaining_exception_or_conflict_cells",
       "value": 30270,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2089,7 +2319,7 @@
       "id": "session-exception_locations",
       "value": 32,
       "unit": "locations",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2101,7 +2331,7 @@
       "id": "session-current_remaining-repair",
       "value": 188055,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2113,7 +2343,7 @@
       "id": "session-current_remaining-physical",
       "value": 133846,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2125,7 +2355,7 @@
       "id": "session-current_remaining-conflict",
       "value": 27,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2137,7 +2367,7 @@
       "id": "conflict-held_cells",
       "value": 27,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2149,7 +2379,7 @@
       "id": "conflict-accepted_cells",
       "value": 0,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2161,7 +2391,7 @@
       "id": "conflict-intervals",
       "value": 21,
       "unit": "intervals",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2173,7 +2403,7 @@
       "id": "conflict-competing_subjects",
       "value": 18,
       "unit": "locations",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2185,7 +2415,7 @@
       "id": "conflict-competing_source_features",
       "value": 26,
       "unit": "source features",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2197,7 +2427,7 @@
       "id": "papua-distinct_currently_unassigned_cells",
       "value": 49939,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2209,7 +2439,7 @@
       "id": "papua-accepted_cells",
       "value": 0,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2221,7 +2451,7 @@
       "id": "papua-repaired_credit",
       "value": 0,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2233,7 +2463,7 @@
       "id": "papua-repair-currently_unassigned_cells",
       "value": 27863,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2245,7 +2475,7 @@
       "id": "papua-physical-currently_unassigned_cells",
       "value": 22075,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2257,7 +2487,7 @@
       "id": "papua-conflict-currently_unassigned_cells",
       "value": 1,
       "unit": "native cells",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "1e75a3224cbfe25933c1828ad2b26176b628c31f60e02b4908711b2bddbc1cc0",
       "input_file": {
         "path": "data/ownership-selection.json",
@@ -2816,6 +3046,318 @@
         "commit": "candidate"
       },
       "evaluation_commit": "03b0ced3caa0e7e439d1455b7dca4bd634e1e475"
+    },
+    {
+      "id": "riau-current-prior_cells",
+      "value": 43429,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "4203af9464e46c0259a53bdde5a492221a0cfcf376ecee94f0a62e82b76d3670",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f702b30caa7766f8d0837422eea8e0b686bf73b9"
+    },
+    {
+      "id": "riau-current-proposed_added_cells",
+      "value": 10775,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "4203af9464e46c0259a53bdde5a492221a0cfcf376ecee94f0a62e82b76d3670",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f702b30caa7766f8d0837422eea8e0b686bf73b9"
+    },
+    {
+      "id": "riau-current-cumulative_cells",
+      "value": 54204,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "4203af9464e46c0259a53bdde5a492221a0cfcf376ecee94f0a62e82b76d3670",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f702b30caa7766f8d0837422eea8e0b686bf73b9"
+    },
+    {
+      "id": "riau-current-prior_authorities",
+      "value": 46,
+      "unit": "authorities",
+      "vintage": "archived",
+      "input_sha256": "4203af9464e46c0259a53bdde5a492221a0cfcf376ecee94f0a62e82b76d3670",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f702b30caa7766f8d0837422eea8e0b686bf73b9"
+    },
+    {
+      "id": "riau-current-cumulative_authorities",
+      "value": 47,
+      "unit": "authorities",
+      "vintage": "archived",
+      "input_sha256": "4203af9464e46c0259a53bdde5a492221a0cfcf376ecee94f0a62e82b76d3670",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f702b30caa7766f8d0837422eea8e0b686bf73b9"
+    },
+    {
+      "id": "riau-current-prior_ledger_rows",
+      "value": 203,
+      "unit": "rows",
+      "vintage": "archived",
+      "input_sha256": "4203af9464e46c0259a53bdde5a492221a0cfcf376ecee94f0a62e82b76d3670",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f702b30caa7766f8d0837422eea8e0b686bf73b9"
+    },
+    {
+      "id": "riau-current-cumulative_ledger_rows",
+      "value": 205,
+      "unit": "rows",
+      "vintage": "archived",
+      "input_sha256": "4203af9464e46c0259a53bdde5a492221a0cfcf376ecee94f0a62e82b76d3670",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f702b30caa7766f8d0837422eea8e0b686bf73b9"
+    },
+    {
+      "id": "riau-current-elapsed_seconds",
+      "value": 2.270558959,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "4203af9464e46c0259a53bdde5a492221a0cfcf376ecee94f0a62e82b76d3670",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f702b30caa7766f8d0837422eea8e0b686bf73b9"
+    },
+    {
+      "id": "riau-current-phase_charged_bytes",
+      "value": 369576386,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "4203af9464e46c0259a53bdde5a492221a0cfcf376ecee94f0a62e82b76d3670",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f702b30caa7766f8d0837422eea8e0b686bf73b9"
+    },
+    {
+      "id": "riau-current-peak_rss_bytes",
+      "value": 335904768,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "4203af9464e46c0259a53bdde5a492221a0cfcf376ecee94f0a62e82b76d3670",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f702b30caa7766f8d0837422eea8e0b686bf73b9"
+    },
+    {
+      "id": "riau-current-allowance-phaseBytes",
+      "value": 751230976,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "4203af9464e46c0259a53bdde5a492221a0cfcf376ecee94f0a62e82b76d3670",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f702b30caa7766f8d0837422eea8e0b686bf73b9"
+    },
+    {
+      "id": "riau-current-allowance-rssBytes",
+      "value": 751230976,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "4203af9464e46c0259a53bdde5a492221a0cfcf376ecee94f0a62e82b76d3670",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "f702b30caa7766f8d0837422eea8e0b686bf73b9"
+    },
+    {
+      "id": "riau-retained-native-qualified_cells",
+      "value": 10775,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "cbb08102f88ef3a9aebcec8a63e117b8ab0d77c05f671e98a4359f44ecfa6678",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/authority/receipt.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "ceaebb8c78ec88d9f034577b5d0e7426c72d4585"
+    },
+    {
+      "id": "riau-retained-native-elapsed_seconds",
+      "value": 1.368852083,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "cbb08102f88ef3a9aebcec8a63e117b8ab0d77c05f671e98a4359f44ecfa6678",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/authority/receipt.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "ceaebb8c78ec88d9f034577b5d0e7426c72d4585"
+    },
+    {
+      "id": "riau-retained-native-charged_phase_bytes",
+      "value": 329367503,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "cbb08102f88ef3a9aebcec8a63e117b8ab0d77c05f671e98a4359f44ecfa6678",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/authority/receipt.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "ceaebb8c78ec88d9f034577b5d0e7426c72d4585"
+    },
+    {
+      "id": "riau-retained-native-normalized_node_lifetime_peak_rss_bytes",
+      "value": 222298112,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "cbb08102f88ef3a9aebcec8a63e117b8ab0d77c05f671e98a4359f44ecfa6678",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/authority/receipt.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "ceaebb8c78ec88d9f034577b5d0e7426c72d4585"
+    },
+    {
+      "id": "riau-retained-native-target-0",
+      "value": 7345,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "4a06ff8a2ce9b4c45b1d0fda7ffde35b48691d3b6300129e7cc53f44fdb0b0b4",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/authority/qualified-ledger-rows.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "ceaebb8c78ec88d9f034577b5d0e7426c72d4585"
+    },
+    {
+      "id": "riau-retained-native-target-1",
+      "value": 3430,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "4a06ff8a2ce9b4c45b1d0fda7ffde35b48691d3b6300129e7cc53f44fdb0b0b4",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/authority/qualified-ledger-rows.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "ceaebb8c78ec88d9f034577b5d0e7426c72d4585"
+    },
+    {
+      "id": "riau-retained-source-candidate_cells",
+      "value": 18814,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "3ab4d5c35c239a62085250feef457e5d85371af8d60800dc10ba9a9e7988714e",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/source-qualification.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6"
+    },
+    {
+      "id": "riau-retained-source-source_prerequisite_repair_candidates",
+      "value": 14054,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "3ab4d5c35c239a62085250feef457e5d85371af8d60800dc10ba9a9e7988714e",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/source-qualification.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6"
+    },
+    {
+      "id": "riau-retained-source-physical_interpretation_held_cells",
+      "value": 4760,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "3ab4d5c35c239a62085250feef457e5d85371af8d60800dc10ba9a9e7988714e",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/source-qualification.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6"
+    },
+    {
+      "id": "riau-retained-source-repaired_credit",
+      "value": 0,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "3ab4d5c35c239a62085250feef457e5d85371af8d60800dc10ba9a9e7988714e",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/source-qualification.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6"
+    },
+    {
+      "id": "riau-retained-source-elapsed_seconds",
+      "value": 4.649333999957889,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "3ab4d5c35c239a62085250feef457e5d85371af8d60800dc10ba9a9e7988714e",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/source-qualification.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6"
+    },
+    {
+      "id": "riau-retained-source-peak_rss_bytes",
+      "value": 235765760,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "3ab4d5c35c239a62085250feef457e5d85371af8d60800dc10ba9a9e7988714e",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/source-qualification.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6"
+    },
+    {
+      "id": "riau-retained-physical-max_child_lifetime_rss_bytes",
+      "value": 885030912,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "c890bc63798d71a295a8a12bccfff40bb041e4d93a49a028661a5b36b7b4ba10",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/physical-entry-receipt.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6"
+    },
+    {
+      "id": "riau-retained-physical-elapsed_seconds",
+      "value": 4.968730207998306,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "c890bc63798d71a295a8a12bccfff40bb041e4d93a49a028661a5b36b7b4ba10",
+      "input_file": {
+        "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/physical-entry-receipt.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "ecb837c599544ff8462b50f43a678d60c80fa5f6"
     }
   ],
   "metric_bindings": [
@@ -3198,6 +3740,136 @@
       "metric_id": "final-runtime-public-envelope-bytes",
       "path": "coordination/engineering/indonesia-adm2-current-cell-20261014/native-delivery-v1/final-selection/final-metadata-preparation-receipt.json",
       "json_pointer": "/runtime_public_asset_correction/after/bytes"
+    },
+    {
+      "metric_id": "riau-current-prior_cells",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+      "json_pointer": "/prior_cells"
+    },
+    {
+      "metric_id": "riau-current-proposed_added_cells",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+      "json_pointer": "/proposed_added_cells"
+    },
+    {
+      "metric_id": "riau-current-cumulative_cells",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+      "json_pointer": "/cumulative_cells"
+    },
+    {
+      "metric_id": "riau-current-prior_authorities",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+      "json_pointer": "/prior_authorities"
+    },
+    {
+      "metric_id": "riau-current-cumulative_authorities",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+      "json_pointer": "/cumulative_authorities"
+    },
+    {
+      "metric_id": "riau-current-prior_ledger_rows",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+      "json_pointer": "/prior_ledger_rows"
+    },
+    {
+      "metric_id": "riau-current-cumulative_ledger_rows",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+      "json_pointer": "/cumulative_ledger_rows"
+    },
+    {
+      "metric_id": "riau-current-elapsed_seconds",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+      "json_pointer": "/elapsed_seconds"
+    },
+    {
+      "metric_id": "riau-current-phase_charged_bytes",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+      "json_pointer": "/phase_charged_bytes"
+    },
+    {
+      "metric_id": "riau-current-peak_rss_bytes",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+      "json_pointer": "/peak_rss_bytes"
+    },
+    {
+      "metric_id": "riau-current-allowance-phaseBytes",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+      "json_pointer": "/allowance/phaseBytes"
+    },
+    {
+      "metric_id": "riau-current-allowance-rssBytes",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/cumulative-proposal-002/composition-receipt.json",
+      "json_pointer": "/allowance/rssBytes"
+    },
+    {
+      "metric_id": "riau-retained-native-qualified_cells",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/authority/receipt.json",
+      "json_pointer": "/qualified_cells"
+    },
+    {
+      "metric_id": "riau-retained-native-elapsed_seconds",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/authority/receipt.json",
+      "json_pointer": "/elapsed_seconds"
+    },
+    {
+      "metric_id": "riau-retained-native-charged_phase_bytes",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/authority/receipt.json",
+      "json_pointer": "/charged_phase_bytes"
+    },
+    {
+      "metric_id": "riau-retained-native-normalized_node_lifetime_peak_rss_bytes",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/authority/receipt.json",
+      "json_pointer": "/normalized_node_lifetime_peak_rss_bytes"
+    },
+    {
+      "metric_id": "riau-retained-native-target-0",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/authority/qualified-ledger-rows.json",
+      "json_pointer": "/0/native_cells"
+    },
+    {
+      "metric_id": "riau-retained-native-target-1",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/authority/qualified-ledger-rows.json",
+      "json_pointer": "/1/native_cells"
+    },
+    {
+      "metric_id": "riau-retained-source-candidate_cells",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/source-qualification.json",
+      "json_pointer": "/candidate_cells"
+    },
+    {
+      "metric_id": "riau-retained-source-source_prerequisite_repair_candidates",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/source-qualification.json",
+      "json_pointer": "/source_prerequisite_repair_candidates"
+    },
+    {
+      "metric_id": "riau-retained-source-physical_interpretation_held_cells",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/source-qualification.json",
+      "json_pointer": "/physical_interpretation_held_cells"
+    },
+    {
+      "metric_id": "riau-retained-source-repaired_credit",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/source-qualification.json",
+      "json_pointer": "/repaired_credit"
+    },
+    {
+      "metric_id": "riau-retained-source-elapsed_seconds",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/source-qualification.json",
+      "json_pointer": "/elapsed_seconds"
+    },
+    {
+      "metric_id": "riau-retained-source-peak_rss_bytes",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/source-qualification.json",
+      "json_pointer": "/peak_rss_bytes"
+    },
+    {
+      "metric_id": "riau-retained-physical-max_child_lifetime_rss_bytes",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/physical-entry-receipt.json",
+      "json_pointer": "/max_child_lifetime_rss_bytes"
+    },
+    {
+      "metric_id": "riau-retained-physical-elapsed_seconds",
+      "path": "coordination/engineering/indonesia-riau-current-cells-20261014/evidence/physical-entry-receipt.json",
+      "json_pointer": "/elapsed_seconds"
     }
   ],
   "summaries": [],
@@ -3266,6 +3938,30 @@
         "gb:IDN:ADM2",
         "gshhg-original-physical"
       ]
+    },
+    {
+      "text": "Retained Riau scientific qualification proposes only Karimun and Lingga: two original rows of7345 and3430 native cells. Bintan/Tanjung Pinang3279 flagged repair cells and4760 source-relative cells remain excluded. The original physical lifetime RSS885030912 bytes exceeded fresh870998016 allowance by14032896; no compliant producer or fully guarded execution is claimed. The failed original wrapper and all source/physical/territorial limitations remain preserved; unchanged completed science was not rerun.",
+      "status": "supported",
+      "source_ids": [
+        "gb:IDN:ADM2",
+        "gshhg-original-physical"
+      ]
+    },
+    {
+      "text": "Current Riau cumulative metadata preserves acceptedf70243429 cells,46 authority objects and203 literal rows, and proposes10775 disjoint cells for54204 cells,47 authorities and205 literal rows. This is metadata conservation only. Actual current-owner-zero, selected consumption, emitted package checks and final acceptance remain pending in the ordinary final queue; accepted Riau credit is zero and all three original source/cause packages remain incomplete. Prior conclusions and metric evaluations are retained as archived historical evidence, and the old selector output is preserved at its actual acceptedf589 baseline descriptor.",
+      "status": "supported",
+      "source_ids": [
+        "gb:IDN:ADM2",
+        "gshhg-original-physical"
+      ]
+    },
+    {
+      "text": "Accepted main97a78128 advances only CI checkout/workflow/docs/tests fromf702. The accepted selector, package definition and source/native/composition/finalizer helpers are byte-identical, so retained f702 Riau composition evidence remains applicable. Its completed measurements retain actual evaluationf702 with archived vintage; no science or composition replay is claimed.",
+      "status": "supported",
+      "source_ids": [
+        "gb:IDN:ADM2",
+        "gshhg-original-physical"
+      ]
     }
   ],
   "stages": {
@@ -3276,6 +3972,9 @@
   "commands": [
     "node scripts/evidence-quality.mjs coordination/engineering/indonesia-adm2-current-cell-20261014/evidence-quality.json",
     "Original producer operands, exact code hashes and fixed-path limitations are documented in source-investigation-v1/reproduction-context.json; no portable scientific replay or second execution is claimed.",
-    "Constructor/physical execution receipts preserve their original immutable inputs, executed code and operating limits; this manifest preparation does not rerun those scientific operators. Current-owner-zero and selected consumer/readback remain separate pending phases."
+    "Constructor/physical execution receipts preserve their original immutable inputs, executed code and operating limits; this manifest preparation does not rerun those scientific operators. Current-owner-zero and selected consumer/readback remain separate pending phases.",
+    "Reuse original qualification aab952621; do not rerun source/GSHHG/native qualification for unchanged retained inputs.",
+    "GIT_NO_LAZY_FETCH=1 node coordination/engineering/indonesia-riau-current-cells-20261014/programs/compose-cumulative.mjs f702b30caa7766f8d0837422eea8e0b686bf73b9 FRESH_OWNED_ABSOLUTE_OUTPUT",
+    "node scripts/prepare-delivery-handoff.mjs finalize coordination/engineering/indonesia-riau-current-cells-20261014/finalize-002.json .cache/delivery-handoff/FRESH_DESTINATION"
   ]
 }

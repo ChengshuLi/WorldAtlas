@@ -17,13 +17,15 @@ export function requirePlainExecution({boundedHeap=false}={}) {
 
 // Current operational admission, independent of literal historical receipts.
 // OS availability is already net of resident parent/concurrent memory. Reserve
-// only additional planned concurrent growth and retain half the remainder for
+// only additional planned concurrent growth and explicit operating headroom for
 // parent/system growth and expansion. Both limits cover a complete process/phase,
 // so credit only measured resident RSS, never historical or on-disk byte counts.
 // Kept in this existing low-level guard to avoid expanding native import rosters.
-export function preparationAllowance({availableBytes=process.availableMemory(),concurrentReservedBytes=Number(process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES??0),currentRssBytes=process.memoryUsage().rss,phaseBytes,rssBytes}={}) {
+export function preparationAllowance({availableBytes=process.availableMemory(),concurrentReservedBytes=Number(process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES??0),currentRssBytes=process.memoryUsage().rss,headroomBytes=(process.env.WORLDATLAS_MEMORY_HEADROOM_BYTES===undefined?undefined:Number(process.env.WORLDATLAS_MEMORY_HEADROOM_BYTES)),phaseBytes,rssBytes}={}) {
   if (![availableBytes,concurrentReservedBytes,currentRssBytes].every(n=>Number.isSafeInteger(n)&&n>=0)) throw Error('Invalid current preparation resource observations');
-  const growthBytes=Math.floor((availableBytes-concurrentReservedBytes)/2);
+  if (headroomBytes!==undefined&&(!Number.isSafeInteger(headroomBytes)||headroomBytes<=0)) throw Error('Set WORLDATLAS_MEMORY_HEADROOM_BYTES or headroomBytes to a justified positive byte reservation for system growth');
+  const growthBytes=headroomBytes===undefined?Math.floor((availableBytes-concurrentReservedBytes)/2)
+    :availableBytes-concurrentReservedBytes-headroomBytes;
   if (growthBytes<=0) throw Error('Insufficient current preparation memory after concurrent reservation and safety headroom');
   const rssLimitBytes=currentRssBytes+growthBytes;
   if (!Number.isSafeInteger(rssLimitBytes)) throw Error('Invalid current preparation resource observations');

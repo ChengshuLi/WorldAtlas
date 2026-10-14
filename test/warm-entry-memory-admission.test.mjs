@@ -136,3 +136,21 @@ test('idle warm admission still authenticates every consumer before importing it
     /Joint code size differs/);
   assert.equal(fs.existsSync(destination), false);
 });
+
+test('actual warm entry propagates explicit headroom through authenticated consumers',async t=>{
+ const f=await trustedFixture(t,{nativeOnly:true});
+ const state={availableBytes:1401257984,currentRssBytes:52576256};
+ currentObservations(t,state);
+ const previous=process.env.WORLDATLAS_MEMORY_HEADROOM_BYTES;
+ t.after(()=>{if(previous===undefined)delete process.env.WORLDATLAS_MEMORY_HEADROOM_BYTES;else process.env.WORLDATLAS_MEMORY_HEADROOM_BYTES=previous;});
+ process.env.WORLDATLAS_MEMORY_HEADROOM_BYTES='572882944';
+ const expected={phaseBytes:880951296,rssBytes:880951296};
+ assert.deepEqual(jointExecutionAllowance(),expected);
+ assert.deepEqual(processingAllowance(),expected);
+ assert.deepEqual(preparationAllowance(),expected);
+ const trusted=f.git('rev-parse','HEAD').toString().trim();
+ const result=await f.joint.selectedJointStage(f.root,trusted,f.selected,f.selected,path.join(f.root,'explicit-headroom'));
+ assert.equal(result.native.status,'no-new-native-loss');
+ assert.equal(result.native.lost_or_reassigned_cells,0);
+ assert.equal(result.candidate_code_executed,false);
+});

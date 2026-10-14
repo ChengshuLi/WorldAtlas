@@ -55,7 +55,7 @@ function fixture() {
     if (p==='/commits/'+head+'/status') {f.statusReads=(f.statusReads??0)+1;return f.failStatusOnRead===f.statusReads ? {statuses:[{}],state:'failure'} : {statuses:[]};}
     if (p==='/git/ref/heads/main') {f.mainReads++;return {object:{sha:f.advanceOnRead===f.mainReads?sha('d'):f.base}};}
     if (p==='/git/commits/'+head) return {tree:{sha:'authored'}};
-    if (p==='/git/commits/'+candidate) return {tree:{sha:'integrated'},parents:[{sha:f.parentBase??f.base},{sha:head}]};
+    if (p==='/git/commits/'+candidate) return {sha:candidate,tree:{sha:'integrated'},parents:[{sha:f.parentBase??f.base},{sha:head}]};
     if (p==='/git/trees/authored') return {truncated:false,tree:f.authored};
     if (p==='/git/trees/integrated') return {truncated:f.truncated??false,tree:f.integrated};
     throw Error('Unexpected API '+method+' '+route);
@@ -666,7 +666,7 @@ function finalMergeFixture({software = false} = {}) {
       {id: 1, author_association: 'OWNER', body: `<!-- worldatlas-review:v1\n${JSON.stringify(f.review)}\n-->`}];
     if (name.includes('/git/commits/')) {
       const commit = name.split('/').at(-1);
-      return {tree: {sha: commit === base ? '1'.repeat(40) : '2'.repeat(40)}, parents: [{sha: base}, {sha: head}]};
+      return {sha: commit, tree: {sha: commit === base ? '1'.repeat(40) : '2'.repeat(40)}, parents: [{sha: base}, {sha: head}]};
     }
     if (name.includes('/git/trees/')) return {truncated: f.truncated ?? false, tree: name.endsWith('1'.repeat(40)) ? baseline : authored};
     if (name.includes('/git/blobs/')) return structuredClone(blobs.get(name.split('/').at(-1)));
