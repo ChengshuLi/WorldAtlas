@@ -787,6 +787,54 @@
   ],
   "outputs": [
     {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/thabaung-followup-001/authority-inputs.json",
+      "bytes": 802,
+      "sha256": "7951eaeb65162518edb1d2f0faffa3a91525efd63e835ad36d9f2edb6b2046e1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/thabaung-followup-001/authority/authority-registry.json",
+      "bytes": 1065,
+      "sha256": "c2f58b17af8e21f753148c4fa6ffbc3031426e994930f2d91f7ed81625d90439",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/thabaung-followup-001/authority/operating.json",
+      "bytes": 460,
+      "sha256": "3f611681314c96ea8c91412fcdac7e8ac12489b3ee69ca64f617136afda637f5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/thabaung-followup-001/authority/original-qualified-ledger.json",
+      "bytes": 6582,
+      "sha256": "c0b775eefe89fc08026f5c8815c674c7cc1add224818e5d3232c4c7a02a4b964",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/thabaung-followup-001/authority/preparation.json",
+      "bytes": 589,
+      "sha256": "9f208f6f8d1d1ad414aa7ae392f4acc56decdcc0e7762c9469a6621d4ce28e81",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/thabaung-followup-001/authority/registry-receipt.json",
+      "bytes": 8224,
+      "sha256": "6b645b917d14b58be129bf17036728189531c5adc48a9745826a85140228ccd1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/thabaung-followup-001/authority/stderr.txt",
+      "bytes": 777,
+      "sha256": "29389d2ac17190853f477aa76aefcd005c71fed34071d16bfa93b97dabdee2b1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/thabaung-followup-001/authority/stdout.txt",
+      "bytes": 444,
+      "sha256": "ba82a4bf9aefe40cf79348b900da1b8a31356c82a82373f2fd23ae2e3dc48216",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/thabaung-followup-001/candidate-native-patch.json",
       "bytes": 3773,
       "sha256": "531efb78503bb8fcc9f5d1aa37918c9d4c4e49219b89f196d0b6932b9f504473",
@@ -875,6 +923,14 @@
       "description": "Actual finite external operating record and raw Darwin time logs. Constructor receipt records pre-publication charge/peak; final stdout and external stderr describe their later measured stages. No continuous process-tree memory enforcement or selected-bank correctness is inferred.",
       "software": "Python 3.12.14 standard-library external deadline; Darwin /usr/bin/time -l; accepted processingAllowance and ImmutableReader.",
       "units": "bytes; seconds"
+    },
+    {
+      "id": "standalone-authority-preparation",
+      "kind": "measurement",
+      "description": "Actual stock constructAuthorityRegistry re-authenticates the existing committed Thabaung rule/custody pair. The standalone native ledger retains the actual constructor rows and is bound/checked by the existing normaliseRetainedRepairLedger. No cumulative selection, parent inventory or accepted-main composition is created here.",
+      "software": "Node v24.19.0; accepted registry constructor, ImmutableReader, processingAllowance and ledger normalizer.",
+      "units": "native cells; authorities; bytes; seconds",
+      "execution_commit": "cf40c71b3d060275edfe5c60c9039b71172b1d66"
     }
   ],
   "metrics": [
@@ -985,6 +1041,66 @@
         "commit": "candidate"
       },
       "evaluation_commit": "2af802cc26294e987234d10175868c3830b71fcc"
+    },
+    {
+      "id": "registry_authorities",
+      "value": 1,
+      "unit": "authorities",
+      "vintage": "archived",
+      "input_sha256": "7951eaeb65162518edb1d2f0faffa3a91525efd63e835ad36d9f2edb6b2046e1",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/thabaung-followup-001/authority-inputs.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "cf40c71b3d060275edfe5c60c9039b71172b1d66"
+    },
+    {
+      "id": "registry_qualified_cells",
+      "value": 220,
+      "unit": "native cells",
+      "vintage": "archived",
+      "input_sha256": "7951eaeb65162518edb1d2f0faffa3a91525efd63e835ad36d9f2edb6b2046e1",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/thabaung-followup-001/authority-inputs.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "cf40c71b3d060275edfe5c60c9039b71172b1d66"
+    },
+    {
+      "id": "registry_elapsed_seconds",
+      "value": 1.3357814170000002,
+      "unit": "seconds",
+      "vintage": "archived",
+      "input_sha256": "7951eaeb65162518edb1d2f0faffa3a91525efd63e835ad36d9f2edb6b2046e1",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/thabaung-followup-001/authority-inputs.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "cf40c71b3d060275edfe5c60c9039b71172b1d66"
+    },
+    {
+      "id": "registry_phase_charge_before_publication",
+      "value": 273089211,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "7951eaeb65162518edb1d2f0faffa3a91525efd63e835ad36d9f2edb6b2046e1",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/thabaung-followup-001/authority-inputs.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "cf40c71b3d060275edfe5c60c9039b71172b1d66"
+    },
+    {
+      "id": "registry_recorded_peak_rss",
+      "value": 215040000,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "7951eaeb65162518edb1d2f0faffa3a91525efd63e835ad36d9f2edb6b2046e1",
+      "input_file": {
+        "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/thabaung-followup-001/authority-inputs.json",
+        "commit": "candidate"
+      },
+      "evaluation_commit": "cf40c71b3d060275edfe5c60c9039b71172b1d66"
     }
   ],
   "metric_bindings": [
@@ -1032,6 +1148,31 @@
       "metric_id": "external_constructor_elapsed_seconds",
       "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/thabaung-followup-001/evidence/native-constructor/operating.json",
       "json_pointer": "/elapsed_seconds"
+    },
+    {
+      "metric_id": "registry_authorities",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/thabaung-followup-001/authority/registry-receipt.json",
+      "json_pointer": "/authorities"
+    },
+    {
+      "metric_id": "registry_qualified_cells",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/thabaung-followup-001/authority/registry-receipt.json",
+      "json_pointer": "/native_cells"
+    },
+    {
+      "metric_id": "registry_elapsed_seconds",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/thabaung-followup-001/authority/registry-receipt.json",
+      "json_pointer": "/elapsed_seconds"
+    },
+    {
+      "metric_id": "registry_phase_charge_before_publication",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/thabaung-followup-001/authority/registry-receipt.json",
+      "json_pointer": "/phase_charged_bytes"
+    },
+    {
+      "metric_id": "registry_recorded_peak_rss",
+      "path": "coordination/engineering/myanmar-adm3-current-cells-20261014/thabaung-followup-001/authority/registry-receipt.json",
+      "json_pointer": "/recorded_peak_rss_bytes"
     }
   ],
   "summaries": [],
