@@ -123,6 +123,10 @@ def main():
     if current['scopeIds'] != ids or current['complete_owner_rows'] != 49625 or current['complete_source_parts'] != 36:
         raise ValueError('Current selected context scope incomplete')
     contexts = unique(current['rows'], 'component_id')
+    foreign = json.loads(own('vintages/foreign-neighbors-001/result.json'))
+    foreign_rows = {(r['component_id'], r['foreign_id']): r for r in foreign['results']}
+    if len(foreign_rows) != 1 or not all(r['strictly_disjoint'] for r in foreign_rows.values()):
+        raise ValueError('Complete actual foreign-neighbor predicates missing')
     # The Node-written context preserves numeric values, not Python's original
     # 0.0/0 spelling. Recover preimages only from authenticated complete banks.
     ordinary_targets = {}
@@ -203,7 +207,7 @@ def main():
     if sha(raw) != product['original_sha256'] or len(raw) != product['original_bytes'] or registry['gb:VNM:ADM2']['sha256'] != sha(raw):
         raise ValueError('Consumed source edition differs')
     features = json.loads(raw)['features']
-    if len(features) != product['feature_count'] or len(features) != 330:
+    if len(features) != product['feature_count'] or len(features) != 708:
         raise ValueError('Incomplete VNM source')
     feature_boxes = [bounds(f['geometry']) for f in features]
     cases, physical_bindings, target_bindings, source_queries = [], [], [], []
@@ -214,12 +218,18 @@ def main():
         subject = retained['compatible_recorded_subject']['record']
         if candidate != retained['current_component_candidate']['feature'] or sha(canon(candidate)) != phys['candidate_feature_sha256'] or sha(canon(candidate['geometry'])) != phys['candidate_geometry_sha256']:
             raise ValueError('Source/physical candidate identity differs')
-        if len(context['candidate_neighbors']) != 1 or context['candidate_neighbors'][0]['feature']['id'] != subject['id'] or any(r['candidate_bbox_intersects'] for r in context['additive_geometry_screen']):
-            raise ValueError('Unproven extra current possible neighbor')
+        target_neighbors = [n for n in context['candidate_neighbors'] if n['feature']['id'] == subject['id']]
+        if len(target_neighbors) != 1 or any(r['candidate_bbox_intersects'] for r in context['additive_geometry_screen']):
+            raise ValueError('Current intended target/additive context differs')
+        for neighbor in context['candidate_neighbors']:
+            if neighbor['feature']['id'] != subject['id']:
+                proof = foreign_rows.get((cid, neighbor['feature']['id']))
+                if not proof or not proof['strictly_disjoint'] or proof['candidate_geometry_sha256'] != sha(canon(candidate['geometry'])) or proof['foreign_geometry_sha256'] != sha(canon(neighbor['feature']['geometry'])):
+                    raise ValueError('Actual foreign target pointsets do not match exact proof')
         target = ordinary_targets[subject['id']]
-        if target != context['candidate_neighbors'][0]['feature'] or sha(canon(target)) != subject['original_feature_sha256'] or target['properties']['parent_id'] != subject['original_parent_id']:
+        if target != target_neighbors[0]['feature'] or sha(canon(target)) != subject['original_feature_sha256'] or target['properties']['parent_id'] != subject['original_parent_id']:
             raise ValueError('Actual selected target or parent changed')
-        hits = op['feature_intersections']
+        hits = [h for h in op['feature_intersections'] if h['intersection']['planar_area_coordinate_units_squared'] > 0]
         if len(hits) != 1 or hits[0]['binding']['recorded_stable_subjects'] != [subject] or not hits[0]['source_feature_covers_entire_component']:
             raise ValueError('Retained unique full source relation differs')
         hit = hits[0]
@@ -244,7 +254,7 @@ def main():
                       'retained_source_operation_row': {'source_comparison_record': op, 'positive_area_recorded_source_subject_ids': [target['id']], 'positive_area_source_feature_intersections': [hit['binding']]},
                       'original_source_rule_fit_record': retained})
         physical_bindings.append({'component_id': cid, 'physical_comparison': {'row': phys}, 'original_queried_source_metadata': [{'original_source_record_metadata': r} for r in metadata]})
-        certificate_entry = context['candidate_neighbors'][0]['certificate_entry']
+        certificate_entry = target_neighbors[0]['certificate_entry']
         if certificate_entry[6] != sha(canon(target)) or certificate_entry[7] != sha(canon(target['geometry'])):
             target_bindings.append({'target_id': target['id'], 'feature_sha256': sha(canon(target)), 'feature_bytes_base64': base64.b64encode(canon(target)).decode(),
                                     'geometry_sha256': sha(canon(target['geometry'])), 'geometry_bytes_base64': base64.b64encode(canon(target['geometry'])).decode()})
@@ -254,15 +264,15 @@ def main():
              'candidate_source_native_bindings': cases, 'original_physical_comparison_bindings': physical_bindings,
              'original_target_canonical_bindings': target_bindings,
              'consumed_source_bindings': [{'source_id': 'gb:VNM:ADM2', 'whole_bytes': len(raw), 'whole_sha256': sha(raw), 'feature_count': len(features), 'catalogue_record': product, 'registry_record': registry['gb:VNM:ADM2'], 'per_case_original_bbox_queries': source_queries}],
-             'current_neighbor_binding': current,
-             'physical_restoration': {'restorations': restorations, 'source_metadata_reused': True, 'component_products_restored': 0, 'component_products_reused': 2},
+             'current_neighbor_binding': current, 'current_foreign_neighbor_binding': foreign,
+             'physical_restoration': {'restorations': restorations, 'source_metadata_reused': True, 'component_products_restored': 0, 'component_products_reused': 1},
              'source_rule_fit_binding': pins[BASE + ':' + FIT],
              'accepted_ledger_bindings': [pins[BASE + ':' + state_path], pins[BASE + ':' + family_path]],
              'constructor_disposition': {'source_relative_premises_require_independent_review': True, 'literal_representation': 'Complete unchanged retained target plus complete original candidate primitive; no dissolve or coordinate normalization.'},
              'unknowns': ['Current physical/legal truth, observation dates, source registration accuracy, cause and repair authority remain unapproved.',
-                          'Current complete envelopes identify only each intended target as a possible base neighbor; exact target overlap/gain predicates and native exclusion remain unexecuted here.',
+                          'Current complete envelopes and unchanged exact binary64 predicates exclude the one possible foreign neighbor; exact intended-target gain and native qualification remain unexecuted here.',
                           'Source/native programme registration, native-positive/zero-cell decisions, current continuous conservation, package/reader/picker/renderer and selected integration remain engineering gates.',
-                          'These one case do not close the original318 operational batch or alter any of the other316 states.'],
+                          'This one map-cell case does not close the original318 operational batch or alter any of the other317 states.'],
              'execution_commit': head, 'consumed_inputs': list(pins.values())}
     if resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024 > 256 * 1024 ** 2:
         raise ValueError('Metadata builder reservation exceeded')
