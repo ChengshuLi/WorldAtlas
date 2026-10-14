@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "findings": [
+    {
+      "id": "F1",
+      "input": "data/topology-report.json",
+      "locator": {
+        "json_pointer": "/policy"
+      },
+      "finding": "Accepted topology explicitly calls its border/finer-polygon/stable-ID procedure a display partition, not a sovereignty determination.",
+      "applicability_limit": "Does not choose a territorial owner for any of these 21 intervals."
+    },
+    {
+      "id": "F2",
+      "input": "data/border-parent-review.json",
+      "locator": {
+        "json_pointers": [
+          "/profiles",
+          "/changes",
+          "/scope"
+        ]
+      },
+      "finding": "No inspected IDN/MYS/PNG/TLS country assessment supplies a decision for the held intervals.",
+      "applicability_limit": "Absence is limited to this accepted file; no worldwide or official-source absence claim."
+    },
+    {
+      "id": "F3",
+      "input": "data/location-policy.json",
+      "locator": {
+        "json_pointers": [
+          "/countries/IDN",
+          "/countries/MYS",
+          "/countries/PNG",
+          "/countries/TLS"
+        ]
+      },
+      "finding": "Policy selects ADM2 for IDN/MYS/TLS and ADM3 for PNG as reference location tiers.",
+      "applicability_limit": "Tier selection establishes no precedence between overlapping country sources."
+    },
+    {
+      "id": "F4",
+      "input": "research/geography/indonesia-borneo-writer-integrity-1411/README.md",
+      "locator": {
+        "section": "BIG KSP assessment"
+      },
+      "finding": "Retained 45-component BIG comparison reproduces source relations but explicitly leaves territorial meaning, legal authority, effective date, current completeness, positional accuracy and source rights unresolved.",
+      "applicability_limit": "Different physical-component scope; no spatial match to these held native intervals was asserted or computed."
+    },
+    {
+      "id": "F5",
+      "input": "research/geography/southeast-asia-gap-batch-0393f64c-20261009/README.md",
+      "locator": {
+        "sections": [
+          "Results",
+          "Limits and next work",
+          "Source-rule-fit continuation (004)"
+        ]
+      },
+      "finding": "All 318 earlier component cases remain unresolved; source-union support does not authorize territorial repair.",
+      "applicability_limit": "Earlier component evidence does not establish a mapping decision for these native intervals."
+    },
+    {
+      "id": "F6",
+      "input": "coordination/engineering/global-current-cell-work-queue-20261014/README.md",
+      "locator": {
+        "sections": [
+          "Start a worker",
+          "Use source/cause packages, not connected components",
+          "Evidence and limits"
+        ]
+      },
+      "finding": "Queue requires current ownership, source-to-location authority, territorial exclusions and competitors; conflicts are not automatically disputed borders.",
+      "applicability_limit": "Frozen physical support and raw-native-supported labels are source-relative, not physical or jurisdictional truth."
+    }
+  ]
+}

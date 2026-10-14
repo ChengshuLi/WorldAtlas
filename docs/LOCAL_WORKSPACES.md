@@ -44,7 +44,9 @@ Use `--profile full` only when the actual build/test needs it, with an adequate
 `--reserve-gib` estimate. There is no allocation-time limit bypass.
 
 Allocation reads tree metadata before sizing only the selected blobs in bounded
-no-lazy-fetch batches. Excluded partial-clone blobs need not be present and are not
+no-lazy-fetch batches. Native `rev-list --missing=print --ignore-missing` probes
+disable fetch before object parsing, including on Git 2.39, before `cat-file`
+sizes locally present selected blobs. Excluded partial-clone blobs need not be present and are not
 hydrated for sizing. Missing selected blobs fail before a reservation, branch or
 checkout is created; acquire only the explicitly required inputs through the
 coordinated import path, then retry normal allocation. This also applies to full
@@ -89,6 +91,11 @@ for name in ('local-workspace.mjs', 'worker-identity.mjs'):
     mode, kind, oid = metadata.decode().split()
     if mode not in ('100644', '100755') or kind != 'blob' or member != ('scripts/' + name).encode():
         raise SystemExit('Ordinary pinned helper required')
+    present = git('-c', 'core.commitGraph=false', 'rev-list', '--objects', '--filter=tree:0',
+                  '--missing=print', '--ignore-missing', '--no-walk=unsorted', '--no-object-names',
+                  '--stdin', input=oid.encode() + b'\n').decode().strip()
+    if present != oid:
+        raise SystemExit('Pinned helper missing; coordinate exact-object acquisition')
     status = git('cat-file', '--batch-check=%(objectname) %(objecttype) %(objectsize)', input=oid.encode() + b'\n').decode().split()
     if len(status) != 3 or status[0] != oid or status[1] != 'blob' or not status[2].isdigit():
         raise SystemExit('Pinned helper missing; coordinate exact-object acquisition')
@@ -119,6 +126,14 @@ selected paths. `selectedBytes` is null while any selected size is unknown;
 `availableBytes` is only the known per-path subtotal. An empty missing list does
 not establish storage admission or complete test/scientific dependencies.
 `--profile full` inspects every file and retains submodule refusal.
+
+An unavailable exact commit or missing tree metadata stops inspection with the
+commit or known tree OIDs and no complete selected inventory. Descendant paths
+cannot be inferred from absent metadata; coordinate that metadata first and
+inspect again. Permission, corruption and other Git diagnostics remain failures,
+not missing-blob rows. No object acquisition is automatic. On older Git,
+`GIT_NO_LAZY_FETCH=1` alone can produce a fatal promisor error instead of a
+`cat-file` missing row; the presence probes avoid that lookup entirely.
 
 For a coordinated acquisition, authenticate each missing path/OID/type/size
 against the same immutable GitHub tree. Use the relevant subtree's metadata when

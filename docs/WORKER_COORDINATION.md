@@ -233,8 +233,11 @@ completed successfully. This handles a PR-body metadata race without repeating
 unchanged code work. Both merge phases still require fresh successful current
 checks, evidence, ownership and exact-head review. Geographic proof is separate:
 an authenticated successful geographic job may retain its original report only
-for that exact whole tree, head and trusted baseline. After a failed-job-only
-rerun, the successful carried job's single upload receipt identifies its true
+for that exact whole tree, head and trusted baseline. For candidate checker software,
+the original candidate and executing code commit must also equal the current combined
+candidate SHA, even when a different candidate has an equivalent tree. The trusted
+current route supplies the expected executing code; report fields never choose it.
+After a failed-job-only rerun, the successful carried job's single upload receipt identifies its true
 origin attempt; the queue authenticates that exact run/job, required steps,
 matching original receipt and artifact/report rather than scanning old artifacts
 or relabeling execution. The origin attempt may have failed/cancelled code while
@@ -276,7 +279,10 @@ Full-profile changes to checker/producer code or its dependencies run the exact
 combined candidate checker, with
 checker-code identity separate from baseline and candidate data identities. It
 runs the genuine cold native-conservation and continuous-geometry comparisons;
-there is no finite software hash exception, baseline self-comparison substitute,
+an authenticated original execution for the exact same combined candidate may be
+reused through the existing original-report custody and final validation. Missing
+or invalid proof requires fresh candidate execution.
+There is no finite software hash exception, baseline self-comparison substitute,
 checkpoint reuse or new checkpoint authority for this route. Selected-data and
 source-only work, data-only full changes and unrelated application changes retain
 the baseline checker and their existing applicability/adjudication. The existing

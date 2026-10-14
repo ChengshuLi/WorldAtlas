@@ -1,7 +1,7 @@
 import {assertAuthorWorkerIdentity} from './worker-identity.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
-import {execFileSync} from 'node:child_process';
+import {execFileSync, spawnSync} from 'node:child_process';
 import {createHash, randomUUID} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 
@@ -14,8 +14,32 @@ const safeInclude = value => typeof value === 'string' && /^(data|research|coord
 
 // No shell, background mutations, timeout retries, or automatic lock breaking.
 export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
-  const noLazyFetch = {...process.env, GIT_NO_LAZY_FETCH: '1'};
+  const noLazyFetch = {...process.env, GIT_NO_LAZY_FETCH: '1', GIT_NO_REPLACE_OBJECTS: '1'};
   const git = (...args) => execFileSync('git', ['-C', repo, ...args], {encoding: 'utf8', maxBuffer: 32 * 1024 * 1024, env: noLazyFetch});
+  const objectGit = (args, input, maxBuffer = 128 * 1024) => {
+    const result = spawnSync('git', ['-C', repo, ...args], {input, encoding: 'utf8', maxBuffer, env: noLazyFetch});
+    if (result.error) throw result.error;
+    // Some Git object-info commands report corruption but still exit zero.
+    // Never turn diagnostics or a failed read into an absent-object inventory.
+    if (result.status !== 0 || result.stderr) throw Error(result.stderr?.trim() || 'Git object inspection failed');
+    return result.stdout;
+  };
+  const probe = (oids, {objects = true, filter = 'tree:0', maxBuffer} = {}) => {
+    // --missing disables fetch before revision parsing, including in Git 2.39.
+    // GIT_NO_LAZY_FETCH alone can instead abort on a promised absent object.
+    // Blob-only batches and the separate commit probe never walk descendants.
+    const output = objectGit(['-c', 'core.commitGraph=false', 'rev-list', '--missing=print', '--ignore-missing',
+      '--no-walk=unsorted', '--no-object-names', ...(objects ? ['--objects', `--filter=${filter}`] : []), '--stdin'],
+    oids.join('\n') + '\n', maxBuffer);
+    const rows = output.trimEnd().split('\n').filter(Boolean);
+    if (rows.some(row => !/^\??[a-f0-9]{40,64}$/.test(row)) || new Set(rows).size !== rows.length) throw Error('Unknown object inventory');
+    return rows;
+  };
+  const requireCommit = commit => {
+    const rows = probe([commit], {objects: false});
+    if (rows.length !== 1 || rows[0] !== commit) throw Error(`Exact commit unavailable locally: ${commit} (missing or not a commit); selected inventory cannot be enumerated`);
+    return commit;
+  };
   const common = fs.realpathSync(git('rev-parse', '--path-format=absolute', '--git-common-dir').trim());
   const registry = path.join(common, 'worldatlas-local-workspaces');
   const root = path.resolve(common, '../../.worldatlas-workspaces', createHash('sha256').update(common).digest('hex').slice(0, 16));
@@ -83,6 +107,12 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
   };
   const inputInventory = (head, profile, include) => {
     const selected = [...support, ...include];
+    requireCommit(head);
+    // Check metadata without blob reads before ls-tree can attempt to recover a
+    // missing tree. Unknown descendants mean no complete selected inventory.
+    const metadata = probe([head], {filter: 'blob:none', maxBuffer: 32 * 1024 * 1024});
+    const missingTrees = metadata.filter(row => row.startsWith('?')).map(row => row.slice(1));
+    if (missingTrees.length) throw Error(`Missing tree metadata: ${missingTrees.join(', ')}; selected inventory cannot be enumerated`);
     // Tree metadata needs no blob contents. Global -l sizing can fetch excluded
     // promisor blobs, or abort on them before sparse filtering on some Git versions.
     const tree = git('ls-tree', '-rz', head).split('\0').filter(Boolean).map(line => {
@@ -103,22 +133,29 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     // OIDs still count once per selected path, matching materialized checkout bytes.
     for (let offset = 0; offset < inputs.length; offset += 1024) {
       const batch = inputs.slice(offset, offset + 1024);
-      const sizes = execFileSync('git', ['-C', repo, 'cat-file', '--batch-check=%(objectname) %(objecttype) %(objectsize)'], {
-        input: batch.map(({oid}) => oid).join('\n') + '\n', encoding: 'utf8', maxBuffer: 128 * 1024, env: noLazyFetch
-      }).trimEnd().split('\n');
-      if (sizes.length !== batch.length) throw Error('Unknown input size');
-      for (let index = 0; index < batch.length; index++) {
+      const oids = [...new Set(batch.map(({oid}) => oid))];
+      const available = probe(oids);
+      if (available.some(oid => !oids.includes(oid))) throw Error('Unknown object inventory');
+      const sizes = available.length ? objectGit(['cat-file', '--batch-check=%(objectname) %(objecttype) %(objectsize)'],
+        available.join('\n') + '\n').trimEnd().split('\n') : [];
+      if (sizes.length !== available.length) throw Error('Unknown input size');
+      const bytes = new Map();
+      for (let index = 0; index < available.length; index++) {
         const [oid, type, size, extra] = sizes[index].split(' ');
-        if (oid !== batch[index].oid || extra !== undefined) throw Error('Unknown input size');
-        if (type === 'missing' && size === undefined) {
+        if (oid !== available[index] || extra !== undefined || type !== 'blob' || !/^\d+$/.test(size)
+          || !Number.isSafeInteger(Number(size))) throw Error('Unknown input size');
+        bytes.set(oid, Number(size));
+      }
+      for (const input of batch) {
+        const {oid, name} = input;
+        if (!bytes.has(oid)) {
           if (!missing.has(oid)) missing.set(oid, {oid, paths: []});
-          missing.get(oid).paths.push(batch[index].name);
-          batch[index].bytes = null;
+          missing.get(oid).paths.push(name);
+          input.bytes = null;
           continue;
         }
-        if (type !== 'blob' || !/^\d+$/.test(size) || !Number.isSafeInteger(Number(size))) throw Error('Unknown input size');
-        batch[index].bytes = Number(size);
-        estimated += Number(size);
+        input.bytes = bytes.get(oid);
+        estimated += input.bytes;
         if (!Number.isSafeInteger(estimated)) throw Error('Reserve and selected inputs must represent a safe finite byte count');
       }
     }
@@ -127,7 +164,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
   const inspect = ({commit, profile = 'sparse', include = []}) => {
     if (!/^[a-f0-9]{40}$/.test(commit ?? '')) throw Error('Inspection needs an exact locally available 40-character commit');
     if (!['sparse', 'full'].includes(profile) || !Array.isArray(include) || !include.every(safeInclude)) throw Error('Use sparse/full profile and literal data/research/coordination paths without traversal or globs');
-    const head = git('rev-parse', '--verify', `${commit}^{commit}`).trim();
+    const head = commit;
     const {inputs, estimated, missing} = inputInventory(head, profile, include);
     return {head, profile, include, inputCount: inputs.length, availableBytes: estimated,
       selectedBytes: missing.length ? null : estimated,
@@ -145,7 +182,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     ordinaryDirectory(destination);
     if (fs.existsSync(destination)) throw Error('Unregistered checkout directory exists; inspect instead of overwriting');
     if (slot === 'work') git('fetch', 'origin', 'main');
-    const head = git('rev-parse', '--verify', `${slot === 'work' ? 'origin/main' : commit}^{commit}`).trim();
+    const head = slot === 'work' ? git('rev-parse', '--verify', 'origin/main').trim() : commit;
     const selected = [...support, ...include];
     const {tree, estimated, missing} = inputInventory(head, profile, include);
     if (missing.length) throw Error(`Unknown input size; selected blobs must be available locally. Run inspect --commit ${head} with this same profile/include scope to list missing paths/OIDs.`);
@@ -161,9 +198,9 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     git('worktree', 'add', '--no-checkout', ...(slot === 'work' ? ['-b', branch] : ['--detach']), destination, head);
     if (profile === 'sparse') {
       execFileSync('git', ['-C', destination, 'sparse-checkout', 'set', '--no-cone', '--stdin'], {
-        input: ['/*', '!/*/', ...selected.map(prefix => `/${prefix}${tree.some(({name}) => name.startsWith(prefix + '/')) ? '/' : ''}`)].join('\n') + '\n', encoding: 'utf8'});
+        input: ['/*', '!/*/', ...selected.map(prefix => `/${prefix}${tree.some(({name}) => name.startsWith(prefix + '/')) ? '/' : ''}`)].join('\n') + '\n', encoding: 'utf8', env: noLazyFetch});
     }
-    execFileSync('git', ['-C', destination, 'read-tree', '-mu', 'HEAD']);
+    execFileSync('git', ['-C', destination, 'read-tree', '-mu', 'HEAD'], {env: noLazyFetch});
     entry.status = 'ready';
     save(value);
     return entry;
@@ -176,7 +213,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     ordinaryDirectory(entry.path);
     const inventory = worktrees(false);
     if (!inventory.some(item => item.path === entry.path)) throw Error('Managed checkout missing; inspect registry');
-    const localGit = (...args) => execFileSync('git', ['-C', entry.path, ...args], {encoding: 'utf8', maxBuffer: 32 * 1024 * 1024});
+    const localGit = (...args) => execFileSync('git', ['-C', entry.path, ...args], {encoding: 'utf8', maxBuffer: 32 * 1024 * 1024, env: noLazyFetch});
     if (localGit('rev-parse', '--path-format=absolute', '--git-common-dir').trim() !== common) throw Error('Checkout Git identity changed');
     for (const row of localGit('ls-files', '-vz').split('\0').filter(Boolean)) {
       // Git status/remove can trust assume-unchanged and skip-worktree bits.
