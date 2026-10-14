@@ -324,7 +324,7 @@ test('geography software route is derived from changed checker inputs, retaining
  const changed = filename => [{filename, status: 'modified'}];
  const {CURRENT_REBIND_CODE} = await import('../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs');
  for (const name of CURRENT_REBIND_CODE) assert.equal(candidateGeographyCode('full', changed(name)), true, name);
- for (const name of ['scripts/run-geographic-check.py', 'scripts/check-effective-geographic-regression.mjs',
+ for (const name of ['scripts/run-geographic-check.py', 'scripts/check-effective-geographic-regression.mjs','scripts/visible-gap-eligibility.mjs',
   'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs',
   'src/ownership-codec.js', 'src/native-grid.js', 'requirements.txt']) {
   assert.equal(candidateGeographyCode('full', changed(name)), true, name);

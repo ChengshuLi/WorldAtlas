@@ -5,6 +5,7 @@ import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {fileURLToPath} from 'node:url';
+import {newVisibleRepairCandidates,repairVisibilityWitnesses,decodeVisibilityLatitudes} from './visible-gap-eligibility.mjs';
 import {unshuffleOwnershipBytes} from '../src/ownership-codec.js';
 import {readSelectedAdditive,selectedAdditiveRows,compareVersionedRepairLedgers} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 
@@ -622,7 +623,7 @@ export function selectedBootstrap(repo,baseline,candidate,{parentRuntimePath}={}
   const allowance=processingAllowance();
   const runtimePaths=[fs.realpathSync(process.execPath),...(parentRuntimePath?[fs.realpathSync(parentRuntimePath)]:[])];
   const codeRoot=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-  const codePaths=['scripts/run-geographic-check.py','scripts/check-geographic-regression.py','scripts/check-effective-geographic-regression.mjs','src/ownership-codec.js','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt','coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs'];
+  const codePaths=['scripts/run-geographic-check.py','scripts/check-geographic-regression.py','scripts/check-effective-geographic-regression.mjs','scripts/visible-gap-eligibility.mjs','src/native-grid.js','src/ownership-codec.js','scripts/evidence/immutable.py','scripts/evidence/geometry.py','scripts/ellipsoidal_area.py','requirements.txt','coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','coordination/engineering/selected-geography-effective-prevention-20261009/selected-continuous-entry.mjs'];
   const codeStats=codePaths.map(name=>{const file=path.join(codeRoot,name),stat=fs.statSync(file);demand(stat.isFile()&&stat.size<=FILE,'Nonordinary/oversized trusted execution code');return {name,file,stat};});
   const executionBytes=codeStats.reduce((n,p)=>n+p.stat.size,0);
   const launchGit=(process.env.PATH??'').split(path.delimiter).map(p=>path.join(p,'git')).find(p=>{try{return fs.statSync(p).isFile();}catch{return false;}});
@@ -652,8 +653,17 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
   if(!before&&!after)return {version:1,status:'legacy-selection',limits:['Legacy raw polygon gate remains applicable.']};
   demand(before&&after,'Selected native ownership removed or introduced without comparable migration');
   const a=before.manifest,b=after.manifest;
-  const metadataBytes=before.metadataBytes+after.metadataBytes+8*1024*1024;
+  const visibilityCandidates=newVisibleRepairCandidates(before.additive?.normalized_rows??[],after.additive?.normalized_rows??[]);
+  const visibilityWitnesses=new Map();let visibilityLatitudes;
+  const visibilityBytes=visibilityCandidates.length?4*a.size*8+8*Buffer.byteLength(JSON.stringify(visibilityCandidates)):0;
+  const metadataBytes=before.metadataBytes+after.metadataBytes+8*1024*1024+visibilityBytes;
   beforeReader.metadataBytes=afterReader.metadataBytes=metadataBytes;
+  if(visibilityCandidates.length){
+    beforeReader.phase();const pin=a.native_latitudes;
+    demand(pin?.root==='repository'&&pin.decoded_bytes===a.size*8,'Missing normative visibility latitude input');
+    let version=pin.commit;try{beforeReader.git('cat-file','-e',version+'^{commit}');}catch{version=baseline;}
+    visibilityLatitudes=decodeVisibilityLatitudes(beforeReader.read(pin.path,{version,expected:pin.sha256,decoded:pin.decoded_bytes}),pin,a.size);
+  }
   // A changed transport body with an unchanged declared selected member must
   // still authenticate against its independently pinned whole container hash.
   for(const snapshot of [before,after])if(snapshot.image)for(const part of snapshot.image.index.parts){const name=(snapshot.image instanceof NativeAssetImage?snapshot.image.directory:NS)+'/'+part.path,own=snapshot.reader.inventory.get(snapshot.reader.version+':'+name),other=(snapshot===before?afterReader:beforeReader).inventory.get((snapshot===before?candidate:baseline)+':'+name);if(!other||own.git_blob_oid!==other.git_blob_oid){snapshot.reader.phase();const encoded=snapshot.reader.read(name,{expected:part.sha256,decoded:part.decoded_bytes});const body=gunzipSync(encoded,{maxOutputLength:part.decoded_bytes});demand(body.length===part.decoded_bytes&&sha(body)===part.decoded_sha256,'Changed selected whole transport body differs');}}
@@ -684,7 +694,9 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
   const carriedMetadata=()=>2*Buffer.byteLength(JSON.stringify({before:[...beforeReader.inventory.values()],after:[...afterReader.inventory.values()],phases}))+affected.length*32;
   const baseMetadata=beforeReader.metadataBytes;
   const fits=rows=>{
-    beforeReader.metadataBytes=afterReader.metadataBytes=baseMetadata+carriedMetadata();
+    const visibilityCarry=visibilityCandidates.length?rows.reduce((n,y)=>n+oldRows[y*2+1]+newRows[y*2+1],0)*256+rows.length*1024
+      +256*([...(before.additive?.patch.rows??[]),...(after.additive?.patch.rows??[])].reduce((n,row)=>n+row.runs.length,0)):0;
+    beforeReader.metadataBytes=afterReader.metadataBytes=baseMetadata+carriedMetadata()+visibilityCarry;
     const previous=sidePlan(before,oldRows,rows),next=sidePlan(after,newRows,rows);
     sideAdmission(before,previous,0);sideAdmission(after,next,previous.projectionBytes);
   };
@@ -705,17 +717,25 @@ export function inspectSelected(repo,baseline,candidate,{parentRuntimePath}={}) 
     const previous=acquireNativeRows(before,oldRows,group);validateNativeRowCarry(previous,before,group);
     const next=acquireNativeRows(after,newRows,group,{carry:previous});
     validateNativeRowCarry(previous,before,group);validateNativeRowCarry(next,after,group);
+    const visibilityBefore=[],visibilityAfter=[];
     for(let k=0;k<group.length;k++){
       const y=group[k],oldBase=projectedRow(previous,k),newBase=projectedRow(next,k),old=before.additive?selectedAdditiveRows(before.additive,y,oldBase):oldBase,current=after.additive?selectedAdditiveRows(after.additive,y,newBase):newBase;
+      if(visibilityCandidates.length){visibilityBefore.push({y,runs:old});visibilityAfter.push({y,runs:current});}
       for(const loss of compareIntervals(old,current,{row:y,ownersBefore:before.owners,ownersAfter:after.owners})){
         lostCells+=loss.end-loss.start;demand(losses.length<65536,'Exact native finding output exceeds bounded receipt; refuse acceptance');losses.push(loss);
       }checkedRows++;
+    }
+    if(visibilityCandidates.length){
+      const pending=visibilityCandidates.filter(row=>!visibilityWitnesses.has(row.component_id));
+      for(const witness of repairVisibilityWitnesses({candidates:pending,size:a.size,latitudes:visibilityLatitudes,beforeRows:visibilityBefore,afterRows:visibilityAfter}))
+        if(witness)visibilityWitnesses.set(witness.component_id,witness);
     }
     phases.push({first_row:group[0],last_row:group.at(-1),rows:group.length,baseline:previous.custody,candidate:next.custody,baseline_carried_bytes:previous.bytes});
     demand(Buffer.byteLength(JSON.stringify(phases))+Buffer.byteLength(JSON.stringify(losses))<=OUTPUT,'Native phase/finding receipt exceeds admitted output reserve');
   }
   demand(checkedRows===affected.length&&groups.flat().every((y,i)=>y===affected[i]),'Incomplete affected native row comparison');
-  return {version:1,method:'selected-native-owner-conservation-v1',status:losses.length?'native-regressions-found':'no-new-native-loss',baseline_selection:before.selection,candidate_selection:after.selection,baseline_receipt_provenance:before.receiptProvenance,candidate_receipt_provenance:after.receiptProvenance,additive_conservation:additiveConservation,affected_rows:affected.length,lost_or_reassigned_cells:lostCells,intervals:losses,phases,runtime,caller_runtime:callerRuntime,execution_runtimes:identities,execution_code_inventory:executionCode,output_reserve_bytes:OUTPUT,input_inventory:[...beforeReader.inventory.values(),...afterReader.inventory.values()],candidate_code_executed:false,limits:['Native owner conservation is not sub-cell polygon coverage or source authority approval.','Only explicit authenticated committed additive hooks are consumed; proposal files never select a release. Continuous primitive-set coverage is enforced separately.']};
+  demand(visibilityCandidates.every(row=>visibilityWitnesses.has(row.component_id)),'New gap repair has no actual changed map-cell witness');
+  return {version:1,method:'selected-native-owner-conservation-v1',repair_visibility:{new_components:visibilityCandidates.length,witnesses:[...visibilityWitnesses.values()]},status:losses.length?'native-regressions-found':'no-new-native-loss',baseline_selection:before.selection,candidate_selection:after.selection,baseline_receipt_provenance:before.receiptProvenance,candidate_receipt_provenance:after.receiptProvenance,additive_conservation:additiveConservation,affected_rows:affected.length,lost_or_reassigned_cells:lostCells,intervals:losses,phases,runtime,caller_runtime:callerRuntime,execution_runtimes:identities,execution_code_inventory:executionCode,output_reserve_bytes:OUTPUT,input_inventory:[...beforeReader.inventory.values(),...afterReader.inventory.values()],candidate_code_executed:false,limits:['Native owner conservation is not sub-cell polygon coverage or source authority approval.','Only explicit authenticated committed additive hooks are consumed; proposal files never select a release. Continuous primitive-set coverage is enforced separately.']};
 }
 
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)) {

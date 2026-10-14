@@ -5,6 +5,7 @@ import {execFileSync} from 'node:child_process';
 import {gzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
 import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
+import {nativeRowLatitudes} from '../src/native-grid.js';
 import {valueBytes,valueSha,coordinateBounds} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs';
 import {deriveCoordinateDelta} from '../coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 import test from 'node:test';
@@ -308,7 +309,7 @@ test('synthetic no-additive state preserves complete native rows with fresh copi
 const MODULE='coordination/engineering/selected-geography-effective-prevention-20261009/selected-checkpoint.mjs';
 const CATALOGUE='coordination/engineering/selected-checkpoint-reuse-20261012/accepted-checkpoints.json';
 const PROGRAMME='coordination/engineering/selected-geography-effective-prevention-20261009/supported-programs.json';
-const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/check-effective-geographic-regression.mjs','src/ownership-codec.js'];
+const CODE=[MODULE,'coordination/engineering/selected-geography-effective-prevention-20261009/selected-neighbor-prevention.mjs','scripts/check-effective-geographic-regression.mjs','scripts/visible-gap-eligibility.mjs','src/native-grid.js','src/ownership-codec.js'];
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const polygon=(x,y=0)=>({type:'Polygon',coordinates:[[[x,y],[x+.2,y],[x+.2,y+.2],[x,y+.2],[x,y]]]});
 const feature=(id,x)=>({type:'Feature',id,properties:{id,parent_id:'parent'},geometry:polygon(x)});
@@ -336,7 +337,10 @@ async function trustedFixture(t,{incompleteNative=false}={}){
  const compressedParts=parts.map(p=>fs.readFileSync(path.join(root,'data',p.path))),whole=Buffer.concat(compressedParts),fragment=gzipSync(whole);
  save('data/transport/fragment.gz',fragment);
  const index={version:1,kind:'ordered-exact-original-byte-fragments',whole_bytes:whole.length,whole_sha256:sha(whole),files:parts.map((p,i)=>({path:p.path,mode:'100644',offset:i?parts[0].bytes:0,bytes:p.bytes,sha256:p.sha256})),parts:[{path:'fragment.gz',offset:0,bytes:fragment.length,sha256:sha(fragment),decoded_bytes:whole.length,decoded_sha256:sha(whole)}]};save('data/transport/index.json',index);
- const manifest={version:1,size:4,coordinateBits:2,method:'native-linear-evenodd-first-owner-v1',native_latitudes:[],hierarchy_sha256:reference.hierarchy_sha256,original_assets:{},parts,runWords:6,native_asset_transport:{version:1,kind:index.kind,index:{path:'data/transport/index.json',bytes:valueBytes(index).length,sha256:valueSha(index)},logical_assets:2,original_compressed_bytes:whole.length}};
+ const latitudeRaw=Buffer.alloc(32);nativeRowLatitudes(4).forEach((v,i)=>latitudeRaw.writeDoubleLE(v,i*8));
+ const latitudeEncoded=gzipSync(latitudeRaw);save('data/latitudes.f64le.gz',latitudeEncoded);const latitudeCommit=commit();
+ const latitudePin={root:'repository',commit:latitudeCommit,path:'data/latitudes.f64le.gz',bytes:latitudeEncoded.length,sha256:sha(latitudeEncoded),decoded_bytes:32,decoded_sha256:sha(latitudeRaw)};
+ const manifest={version:1,size:4,coordinateBits:2,method:'native-linear-evenodd-first-owner-v1',native_latitudes:latitudePin,hierarchy_sha256:reference.hierarchy_sha256,original_assets:{},parts,runWords:6,native_asset_transport:{version:1,kind:index.kind,index:{path:'data/transport/index.json',bytes:valueBytes(index).length,sha256:valueSha(index)},logical_assets:2,original_compressed_bytes:whole.length}};
  save('data/manifest.json',manifest);save('data/owners.json',[{id:'A',index:1},{id:'B',index:2},{id:'C',index:3}]);
  const primitive=addition('old','A',1,certificate.entries[0][7],.3);
  const literal={...primitive,base_geometry:features[0].geometry,disposition:'assigned',native_cells:1,source_receipt_sha256:'c'.repeat(64)};
@@ -370,7 +374,7 @@ async function trustedFixture(t,{incompleteNative=false}={}){
  const facts={version:1,kind:'trusted-selected-coordinate-stage-v1',candidate_code_executed:false,selected_commit:selected,executing_commit:one,execution_code,runtime,binding:full.binding,complete_owners:3,complete_sources:1};
  const compressed=gzipSync(valueBytes(full));save('accepted/certificate.json.gz',compressed);save('accepted/facts.json',facts);
  const publication={version:1,kind:facts.kind,complete:true,facts:{path:'facts.json',bytes:valueBytes(facts).length,sha256:valueSha(facts)},certificate:{path:'certificate.json.gz',bytes:compressed.length,sha256:sha(compressed),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)}};save('accepted/publication.json',publication);
- const inventory=[PROGRAMME,'data/source.json','data/manifest.json','data/owners.json','data/registry.json','data/ledger.json','data/patch.json','data/sidecar.json','data/envelope.json','data/native/rows.bin.gz','data/native/runs.bin.gz'].map(name=>pin(name,selected));
+ const inventory=[PROGRAMME,'data/latitudes.f64le.gz','data/source.json','data/manifest.json','data/owners.json','data/registry.json','data/ledger.json','data/patch.json','data/sidecar.json','data/envelope.json','data/native/rows.bin.gz','data/native/runs.bin.gz'].map(name=>pin(name,selected));
  save('accepted/custody.json',{complete_cold_custody:[{facts,publication,effective_additions:additions,inventory}]});
  save('accepted/routes.json',inventory.map(p=>p.path).sort().map(name=>({path:name,tree:git('ls-tree','-z',selected,'--',name).toString()})));const accepted=commit();
  const rootRow={id:'fixture',accepted_head:accepted,selected_commit:selected,selection_sha256:valueSha(selection),execution_commit:one,execution_code_sha256:valueSha(execution_code),runtime_sha256:valueSha(runtime),facts:pin('accepted/facts.json'),certificate:{...pin('accepted/certificate.json.gz'),decoded_bytes:valueBytes(full).length,decoded_sha256:valueSha(full)},publication:pin('accepted/publication.json'),custody:pin('accepted/custody.json'),routes:pin('accepted/routes.json')};
@@ -445,4 +449,14 @@ test('actual native consumer admits caller carry before returning an empty succe
  const f=await trustedFixture(t),{transition}=await nativeTransition(f);
  f.budget.carriedBytes+=f.reader.allowance.phaseBytes;
  await assert.rejects(f.native.compareSelectedCheckpointNative({transition,budget:f.budget}),/exceeds current allowance/);
+});
+
+
+test('actual visibility projection authenticates the selected whole normative latitude table',async t=>{
+ const f=await trustedFixture(t),qualified=f.api.qualifyCheckpoint({reader:f.reader,budget:f.budget});
+ assert.equal(qualified.available,true);
+ const result=f.api.projectVisibilityLatitudes({state:qualified.state,budget:f.budget});
+ assert.deepEqual([...result],[...nativeRowLatitudes(4)]);
+ assert.ok([...f.reader.inventory.values()].some(p=>p.path==='data/latitudes.f64le.gz'&&p.whole_body_consumed));
+ assert.throws(()=>f.api.projectVisibilityLatitudes({state:structuredClone(qualified.state),budget:f.budget}),/private qualified/);
 });

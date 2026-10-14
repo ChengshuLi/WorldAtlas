@@ -6,6 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {ImmutableReader, NativeAssetImage} from '../../../scripts/check-effective-geographic-regression.mjs';
+import {decodeVisibilityLatitudes} from '../../../scripts/visible-gap-eligibility.mjs';
 import {unshuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 import {valueBytes, valueSha, coordinateBounds, nativeBaseSelection,
   normaliseRetainedRepairLedger, readRetainedRegistryAuthority, validateSupportedProgrammeCatalogue,
@@ -33,6 +34,10 @@ const JOINT_CODE = ['scripts/run-geographic-check.py','scripts/check-geographic-
   'coordination/engineering/selected-geography-effective-prevention-20261009/selected-joint-entry.mjs'];
 const JOINT_NATIVE_CODE=[...JOINT_CODE.slice(0,3),'scripts/selected-checkpoint-native.mjs',...JOINT_CODE.slice(3)];
 const DERIVED_CODE=[...JOINT_NATIVE_CODE,...ACCEPTED_CODE,'scripts/geographic_checkpoint_products.py'];
+// Earlier accepted executions retain their original closure. New executions
+// additionally bind the exact visibility operator and native rule.
+const VISIBLE_JOINT_NATIVE_CODE=[...JOINT_NATIVE_CODE.slice(0,4),'scripts/visible-gap-eligibility.mjs','src/native-grid.js',...JOINT_NATIVE_CODE.slice(4)];
+const VISIBLE_DERIVED_CODE=[...VISIBLE_JOINT_NATIVE_CODE,...ACCEPTED_CODE,'scripts/geographic_checkpoint_products.py'];
 const demand = (ok, message) => { if (!ok) throw Error(message); };
 const sha = body => createHash('sha256').update(body).digest('hex');
 // Policy is rooted in the executing trusted checkout, independently of the
@@ -533,7 +538,8 @@ function admitDerivedCheckpoint(session,reader,archiveReader,accepted) {
     && same(continuous.issued_publication,continuousPublication),
   'Accepted checkpoint lacks its original successful strict polygon result');
   const codePaths=facts.execution_code?.map(p=>p.path);
-  supported(seedRoot && same(codePaths,JOINT_NATIVE_CODE) || same(codePaths,DERIVED_CODE),
+  supported(seedRoot && (same(codePaths,JOINT_NATIVE_CODE)||same(codePaths,VISIBLE_JOINT_NATIVE_CODE))
+    || same(codePaths,DERIVED_CODE)||same(codePaths,VISIBLE_DERIVED_CODE),
     'Unsupported accepted joint method closure');
   for (const p of facts.execution_code) {
     pin(p); demand(p.commit===facts.executing_commit, 'Accepted executing code was rebound');
@@ -763,6 +769,19 @@ function planFor(before,after) {
       candidate:[...new Set([...needed].map(id => next.get(id)[4]))].sort()},
     source_bindings:{baseline:before.binding,candidate:after.binding},
     limits:['Coordinate exclusion only. All required full original polygons and unchanged strict coverage/overlap predicates remain mandatory.']});
+}
+
+/** Read the selected normative latitude bytes for the actual native consumer.
+ * Historical checkpoint traversal does not apply new-repair eligibility. */
+export function projectVisibilityLatitudes({state,budget}) {
+  const {session,reader}=getState(state,undefined,budget), p=state.manifest.native_latitudes;
+  demand(p?.root==='repository'&&p.decoded_bytes===state.manifest.size*8,'Missing normative visibility latitude input');
+  beginFrame(session,reader,4*p.decoded_bytes);
+  let version=p.commit;try{reader.git('cat-file','-e',version+'^{commit}');}catch{version=reader.version;}
+  const encoded=reader.read(p.path,{version,expected:p.sha256,decoded:p.decoded_bytes});
+  const latitudes=decodeVisibilityLatitudes(encoded,p,state.manifest.size);
+  session.residentBytes+=latitudes.byteLength;
+  return latitudes;
 }
 
 /** Projects exact whole original features, never certificate boxes. Pass a prior
