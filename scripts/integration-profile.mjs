@@ -176,14 +176,21 @@ function nativeOperandPath(name, branch, reservation) {
     (name === branchScope(branch) + 'native-operands/' + name.split('/').at(-1) ||
       inScope(name, engineeringOwnedScopes(reservation)));
 }
+// Only the linked issue's validated scientific receipt can be updated metadata.
+// Existing independent evidence validation remains mandatory.
+function scientificManifest(branch, reservation) {
+  const name = reservation.evidence_manifest;
+  return reservation.mode === 'engineering' && safe(name) && name.endsWith('/evidence-quality.json') &&
+    inScope(name, [branchScope(branch), ...engineeringOwnedScopes(reservation)]) ? name : null;
+}
 // Fast prefilter avoids any extra tree/blob requests for ordinary code PRs.
 export function selectedDataCandidate(branch, files, reservation = {}) {
-  const scopes = [branchScope(branch), ...engineeringOwnedScopes(reservation)];
+  const scopes = [branchScope(branch), ...engineeringOwnedScopes(reservation)], manifest = scientificManifest(branch, reservation);
   return branch.startsWith('engineering/') && files.length > 1 && files.length <= 1024 &&
     files.some(file => file.filename === SELECTION && file.status === 'modified') &&
     files.every(file => !file.previous_filename && (file.filename === CHECKPOINT_LOCATOR
       ? ['added', 'modified'].includes(file.status) : [SELECTION, PACKAGE_INPUT_FILE, ADMINISTRATIVE_REGISTRY].includes(file.filename)
-      ? file.status === 'modified' : file.status === 'added' && inScope(file.filename, scopes) && safe(file.filename) &&
+      ? file.status === 'modified' : file.filename === manifest && file.status === 'modified' || file.status === 'added' && inScope(file.filename, scopes) && safe(file.filename) &&
         (/\.(?:json|jsonl\.gz|json\.gz|log)$/.test(file.filename) || supportingText(file.filename, branch, reservation) ||
           nativeOperandPath(file.filename, branch, reservation) || file.filename.endsWith('/geography-artifact.zip')) &&
         !/(?:^|\/)(?:package(?:-lock)?|tsconfig|jsconfig|binding|deno|composer)\.json$/.test(file.filename)));
@@ -772,6 +779,19 @@ export async function selectedDataSelection({api, repo, branch, files, baseline,
       needSelected(facts.candidate_commit === candidateCommit && same(facts.candidate_selection, oldSelection),
         'checkpoint does not supply selected baseline');
       transport.add(ACCEPTED_CHECKPOINT_LOCATOR); transport.add(archive);
+    }
+    const updatedManifest = scientificManifest(branch, reservation);
+    if (updatedManifest && files.some(file => file.filename === updatedManifest && file.status === 'modified')) {
+      // Issue ownership is necessary, never proof that changed bytes are inert.
+      // The fixed selected-role walk and actual package boundary must exclude
+      // the receipt. Source/result meaning remains in the independent evidence gate.
+      needSelected(ordinary(baseline.entries.get(updatedManifest)) && !reachable.has(updatedManifest) &&
+        ![selection.manifest_path, selection.selected_geography?.path, selection.artifact_consumption?.certificate?.path,
+          selection.artifact_consumption?.review?.path].includes(updatedManifest) &&
+        !sourceDeclarations.has(updatedManifest) &&
+        !packagePathRequired(updatedManifest, validatePackageInputs(await json(PACKAGE_INPUT_FILE))),
+        'scientific manifest is a consumed or nonordinary role');
+      await json(updatedManifest, authored, false);
     }
     const manifest = `coordination/engineering/${branch.slice('engineering/'.length)}/evidence-quality.json`;
     for (const name of added) {
