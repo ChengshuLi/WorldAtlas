@@ -129,6 +129,16 @@ Warm admission runs before any optional full-bank prefetch. Only an explicit
 cold decision starts that prefetch and the complete native comparison. An
 authentication contradiction or access denial remains an error.
 
+The joint entry's pre-import code/runtime gate uses current measured RSS plus
+half of currently available memory after coordinator-declared future concurrent
+growth. Availability already excludes resident parents and peers; no fixed
+resident reservation is subtracted again. This bootstrap calculation stays in
+the entry until every project import is authenticated, and parity controls bind
+it to the native reader/preparation policy. The complete reader still accounts
+for runtime, code, metadata, decoded inputs and outputs and checks actual RSS.
+Retaining products after Node exits re-observes the Python consumer's current
+allowance. These admission checks remain cooperative, not kernel quotas.
+
 ## Completion criterion
 
 Synthetic transport/adverse controls establish the changed boundaries only.
