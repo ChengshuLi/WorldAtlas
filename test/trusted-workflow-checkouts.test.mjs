@@ -580,3 +580,13 @@ test('author focused candidate includes the inputs of its nested actual-checkout
   assert.match(missing.stdout + missing.stderr, /ENOENT/);
   assert.match(missing.stdout + missing.stderr, /selected-checkpoint-reuse-20261012/);
 });
+
+for (const workflow of ['worker-merge.yml','merge-integration-checks.yml']) {
+  test(`${workflow}: native geography omits polygon dependencies while general regressions retain them`, () => {
+    const source=fs.readFileSync(path.join(root,'.github/workflows',workflow),'utf8');
+    const geography=source.match(/^  geography:\n([\s\S]*?)(?=^  [a-zA-Z_-]+:|$(?![\s\S]))/m)?.[1];
+    assert(geography);
+    assert.doesNotMatch(geography,/pip install|Install trusted geographic dependencies/);
+    assert.match(source,/pip install[^\n]*requirements\.txt/);
+  });
+}

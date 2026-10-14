@@ -131,7 +131,9 @@ Git data, and executes `python -I -B scripts/run-geographic-check.py --fetch
 --out geography-check.json`. Candidate scripts and reproduction commands never
 run. The complete scripts namespace must match baseline bytes; untracked import
 shadows, symlinks and cached bytecode are rejected. Dependencies come from the
-trusted baseline requirements.
+trusted baseline requirements for general regression tests. The selected geography
+job uses only Python standard-library code and Node; it does not install the
+polygon dependency set.
 
 Unchanged live input blob inventories produce an explicit `not-applicable`
 receipt, with no claim of fresh polygon validation or worldwide gap clearance.

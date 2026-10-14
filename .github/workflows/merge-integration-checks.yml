@@ -323,9 +323,6 @@ jobs:
         if: steps.metadata_reuse.outputs.reused != 'true'
         with:
           python-version: '3.12'
-      - name: Install trusted geographic dependencies
-        if: steps.metadata_reuse.outputs.reused != 'true'
-        run: python -m pip install -r requirements.txt
       - name: Check proposed geography with trusted baseline code
         if: steps.metadata_reuse.outputs.reused != 'true'
         env:
