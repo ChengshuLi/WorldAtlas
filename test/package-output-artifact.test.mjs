@@ -412,23 +412,22 @@ test('declared build image rejects real producer changes but ignores incidental 
   assert.throws(()=>admitPackageOutputTransition(legacy,current()),/Immediate original build capture/);
 });
 
-test('both workflows capture genuine build output immediately and upload only after checks', () => {
-  const workflow=fs.readFileSync(new URL('../.github/workflows/merge-integration-checks.yml',import.meta.url),'utf8');
+test('final queue captures genuine build output immediately and uploads only after checks', () => {
+  const workflow=fs.readFileSync(new URL('../.github/workflows/worker-merge.yml',import.meta.url),'utf8');
   const steps=workflow.split(/^      - name: /m).slice(1).map(raw=>({name:raw.split('\n')[0],raw}));
-  for(const [build,inventory,check,upload]of [
-    ['Build hosted assets','Inventory original full-regression package output','Complete regression shard','Retain original full-regression package output'],
-    ['Build Cloudflare package without publishing','Inventory original selected package output','Read back qualified native build outputs when selected','Retain original selected package output'],
-  ]){
-    const at=steps.findIndex(step=>step.name===build);
-    assert.equal(steps[at+1].name,inventory,'No observer/test may intervene before original capture');
-    const end=steps.findIndex(step=>step.name===upload);
-    const controls=build==='Build hosted assets'?['Verify full-regression package controls','Install browser dependencies only for tests that use Playwright']:['Verify package controls'];
-    for(const name of controls)assert(steps.findIndex(step=>step.name===name)>at+1,name+' must not run before capture');
-    assert(steps.slice(at+2,end).some(step=>step.name===check),'Required checks remain before upload');
-    assert.match(steps[end].raw,/if: success\(\)/,'Failed checks cannot upload an original');
+  const at=steps.findIndex(step=>step.name==='Build the combined application once before asset-dependent tests');
+  assert(at>=0,'The actual final package build remains required');
+  assert.equal(steps[at+1].name,'Inventory original final-worker package output',
+    'No observer/test may intervene before original capture');
+  const end=steps.findIndex(step=>step.name==='Retain original final-worker package output');
+  for(const name of ['Install browser dependencies only for tests that use Playwright',
+    'Read back qualified native build outputs when selected',
+    'Test applicable combined-tree invariants without publishing or live imports']){
+    const control=steps.findIndex(step=>step.name===name);
+    assert(control>at+1&&control<end,name+' must run between original capture and upload');
   }
+  assert.match(steps[end].raw,/if: success\(\)/,'Failed checks cannot upload an original');
 });
-
 
 test('capture logs actual workflow-file commit and ref independently of source checkout',()=>{
   const workflow='.github/workflows/merge-integration-checks.yml';
