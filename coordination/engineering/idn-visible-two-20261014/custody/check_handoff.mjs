@@ -5,7 +5,7 @@ import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {retainedAdministrativeSourcePremises, registeredAdministrativeViews, originalAdministrativeTargetHash} from '../../../../scripts/additive-gap-repair.mjs';
-const scope=JSON.parse(fs.readFileSync(new URL('../vintages/source-handoff-002/source-handoff.json',import.meta.url)));
+const scope=JSON.parse(fs.readFileSync(new URL('../vintages/source-handoff-003/source-handoff.json',import.meta.url)));
 const clone=()=>structuredClone(scope);
 const targetFor=(s,i)=>s.current_neighbor_binding.rows.find(r=>r.component_id===s.scopeIds[i]).candidate_neighbors.find(n=>n.feature.id===s.candidate_source_native_bindings[i].retained_payload.target_stable_location_id).feature;
 function premise(s,i=0,target=targetFor(s,i)){
