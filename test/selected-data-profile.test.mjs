@@ -593,20 +593,37 @@ test('fixed complete COD/PHL package preparation declarations correctly retain f
 });
 
 
-test('only a new unconsumed packet-root README is eligible supporting text',async()=>{
+test('new unconsumed supporting text is independent of document title',async()=>{
   const f=fixture({mutate:f=>f.put(prefix+'README.md','Retained delivery packet\n')});
   assert.equal((await f.run()).test_selection,'selected-data');
   f.definition.inputs.push(prefix+'README.md');f.put('.github/package-inputs.json',f.definition);
   assert.equal(await f.run(),null,'a packaged README is not inert supporting text');
 });
 for(const [label,change] of Object.entries({
-  'nested README':f=>f.put(prefix+'nested/README.md','text'),
-  'other Markdown':f=>f.put(prefix+'notes.md','text'),
   'NUL README':f=>f.put(prefix+'README.md','a\0b'),
   'oversized README':f=>f.put(prefix+'README.md','a'.repeat(128*1024+1)),
   'executable README':f=>{f.put(prefix+'README.md','text');f.authored.entries.get(prefix+'README.md').mode='100755';},
   'symlink README':f=>{f.put(prefix+'README.md','text');f.authored.entries.get(prefix+'README.md').mode='120000';},
 }))test('packet documentation falls back for '+label,async()=>assert.equal(await fixture({mutate:change}).run(),null));
+
+
+test('supporting Markdown remains new, ordinary, in scope and outside actual consumer roles',async()=>{
+  for(const name of ['notes.md','nested/README.md','review/independent-static-review.md']) {
+    assert.equal((await fixture({mutate:f=>f.put(prefix+name,'support only\n')}).run()).test_selection,'selected-data');
+  }
+  for(const mutate of [
+    f=>f.put('coordination/engineering/foreign/review.md','outside declared scope'),
+    f=>{f.put(prefix+'review.md','old',true);f.put(prefix+'review.md','modified');},
+    f=>{const row=f.put(prefix+'template.md',f.sidecarBody);f.put('data/ownership-selection.json',
+      {...f.base,additive_release:{path:row.path,bytes:row.bytes,sha256:row.sha256}});},
+    f=>f.put(prefix+'review.md',Buffer.from([0xff])),
+    f=>{f.put(prefix+'review.md','text');f.authored.entries.get(prefix+'review.md').mode='100755';},
+    f=>{f.put(prefix+'review.md','text');f.authored.entries.get(prefix+'review.md').mode='120000';},
+  ]) assert.equal(await fixture({mutate}).run(),null);
+  const renamed=fixture({mutate:f=>f.put(prefix+'review.md','text')});
+  renamed.files.find(row=>row.filename===prefix+'review.md').previous_filename='src/runtime-template.md';
+  assert.equal(await renamed.run(),null);
+});
 
 test('unchanged SOURCE opaque leaves retain exact baseline/candidate Git body and mode bindings',async()=>{
   for(const mutation of ['body','both-body','size','mode']){
@@ -984,14 +1001,14 @@ for (const owned_paths of [['coordination/engineering/'], ['coordination/enginee
   });
 }
 test('retained inert text stays ordinary, bounded, unconsumed and outside package inputs', async () => {
-  for (const name of ['README.md','CHECKPOINT.md','diagnostic.txt','refusals/stderr.txt']) {
+  for (const name of ['README.md','CHECKPOINT.md','notes.md','nested/review.md','unresolved-evidence-001/delivery-config-3816/independent-static-review.md','diagnostic.txt','refusals/stderr.txt']) {
     const f=ownedFixture({mutate:f=>f.put('coordination/engineering/retained-delivery/new-packet/'+name,'retained text\n')});
     assert.equal((await f.run()).test_selection,'selected-data');
     f.definition.inputs.push(f.packetPrefix+name); f.put('.github/package-inputs.json',f.definition);
     assert.equal(await f.run(),null);
   }
   for (const [name, raw] of [['CHECKPOINT.md','x\0y'],['diagnostic.txt',Buffer.from([0xff])],
-    ['README.md','x'.repeat(128*1024+1)],['requirements.txt','some-package'],['notes.md','unknown doc'],['code.mjs','export default 1']]) {
+    ['README.md','x'.repeat(128*1024+1)],['requirements.txt','some-package'],['constraints-dev.txt','some-package'],['code.mjs','export default 1']]) {
     assert.equal(await ownedFixture({mutate:f=>f.put('coordination/engineering/retained-delivery/new-packet/'+name,raw)}).run(),null,name);
   }
 });

@@ -160,6 +160,21 @@ No proposed input is called accepted merely because a hash matches.
    staged selector/package or using exact `--resume` must produce no changes.
    Scientific assembly, package builds and final delivery remain separate.
 
+For finalization, use local staging by default:
+
+```sh
+node scripts/prepare-delivery-handoff.mjs finalize CONFIG .cache/delivery-handoff/final-UNIQUE
+```
+
+Adopt `ownership-selection.json` as `data/ownership-selection.json` and
+`package-inputs.json` as `.github/package-inputs.json`. Adopt the emitted sidecar
+and `selected-delivery-expectations.json` once at the configured receiving
+`new_prefix`; retain the staged bundle locally for exact `--resume`. Do not also
+commit that bundle under a `finalized/` directory. The delivery has one canonical,
+current-ledger-bound expectations file. A duplicate authoritative copy is not a
+prospective template and correctly retains full regression. This uses the existing
+staging/adoption contract; it adds no writer, automatic Git mutation or resume rule.
+
 Outputs use a fresh directory below `.cache/delivery-handoff/` or the caller's
 issue-owned `coordination/engineering/<job>/`. All products are admitted before
 mutation and created exclusively; `preparation.json` is written last. An explicit
@@ -184,6 +199,13 @@ existing smoke runner, not a runtime package input. Keep it in the reviewed pack
 but do not append it to `.github/package-inputs.json` merely because preparation
 emitted it. Preserve prior declarations and append actual consumed roles using the
 existing `finalizedPackageInputs` constructor, not a copied packet filename list.
+New Markdown or text supporting evidence may use descriptive filenames in the
+issue-owned scope. Selected-data eligibility still requires ordinary, bounded
+UTF-8 text outside the actual reader/source roles and package inputs. Modified or
+renamed files, executable/symlink modes, configuration text and consumed templates
+retain full regression. Document titles do not establish or remove scientific
+approval, and the final review/evidence gates still apply.
+
 The existing `package` and `finalize` commands handle issued-rule and modern
 `source-target-native-custody-v1` authorities, including mixed registries. After
 completed selected assembly, use `finalize CONFIG DESTINATION` to produce the
@@ -520,3 +542,52 @@ coordination, review and preservation, not solely idle time; it is not a measure
 saving from these commands. The original records and exact removable stages are
 linked in issue #1920. A subsequent adopted package must establish actual delivery
 elapsed and whether those intermediate stages were eliminated.
+
+### Original physical source support
+
+`node scripts/prepare-delivery-handoff.mjs physical CONFIG DESTINATION [--resume]`
+uses the same admitted runtime, private staging, exclusive publication and resume
+path as `source`, with a distinct physical phase in the shared Python helper.
+It does not extend the Indonesia source classifier or create native authority.
+
+The outer version-1 configuration has `physical`, `runtime_inventory`,
+`processing_allowance` and `preparation_allowance`. `physical` contains exact
+ordinary immutable `inputs` pins (commit, path, Git blob, bytes, SHA-256; compressed
+pins additionally declare decoded bytes/SHA-256), `roles` for `stages`,
+`transport`, `native_index` and `comparison`, and the metadata/native repository
+prefixes. It also declares positive finite `resources.input_bytes`,
+`resources.output_bytes`, `resources.deadline_seconds` and exact Python, NumPy,
+Shapely and GEOS versions. The comparison method must match the preserved original
+method SHA; configuration cannot introduce another scientific algorithm.
+
+Authenticate every source metadata fragment before selection/ancestor closure.
+Retain full dictionaries only for selected records and their complete ancestry,
+rereading authenticated fragments for earlier ancestors when needed. Preserve
+original duplicate-ID last-record and ever-match selection semantics, missing
+parent handling, selected-cycle refusal and inclusive periodic bbox selection.
+Do not infer a fixed memory bound from a small selected cohort.
+
+Authenticate every native compressed/decoded fragment into one admitted complete
+member buffer. No geometry is decoded until the whole member size/hash passes.
+The native member remains whole; no source clipping, repaired polygon, altered
+coordinates or sampled-byte substitute is introduced. Original comparison,
+validity cache, query order and all unknown/support witnesses remain unchanged.
+The old archived producers/helpers and previously qualified outputs stay intact.
+
+The declared input-byte inventory still counts all authenticated inputs. Lower
+live residency does not reduce logical bytes: the representative source/native
+inventory exceeds 305 MB before target/code pins, even though measured optimized
+peak is lower than the original implementation. Fresh same-process or separate
+child admission must use the correct RSS credit; the shared Python launcher does
+not credit resident Node bytes to its new child. Checks remain cooperative
+boundaries, not an invented hard process-tree supervisor.
+
+Outputs are `whole-target-support.json` with the original scientific schema and
+`execution-receipt.json` binding actual inputs, program, runtime admission and
+measured peak. The existing constructor can consume the committed support file
+as `physical_evidence`, the unchanged target stages as `physical_input`, and the
+actual executed shared helper as `physical_reproduction`. Its independent source,
+native-cell and witness checks still apply. Exact whole-target support is not
+country approval, native-cell qualification, ownership-zero proof or delivery.
+`--resume` verifies complete original products, code/configuration and input pins
+without repeating physical operations. Invalid or incomplete evidence refuses.
