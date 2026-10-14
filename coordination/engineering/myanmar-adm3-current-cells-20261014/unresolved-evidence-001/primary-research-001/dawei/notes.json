@@ -1,0 +1,127 @@
+{
+  "status": "independent-primary-documentation-collected-not-qualified",
+  "research_date_utc": "2026-10-14",
+  "scope": "Dawei complete-parent documentary study only. No GIS, geometry/source/native producer, raster, GSHHG, scientific dataset acquisition, patch or qualification. Prior Hpapun and Tha Sae investigations were not repeated.",
+  "inventory_custody": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+    "bytes": 257291,
+    "sha256": "efec8d28b63befcb411b6d0d81063af6a962edbec9a1b3f08b86fc3b7bd44157",
+    "read_type": "Read exact small old-cache inventory supplied by parent; no mutation. This local-cache hash is the input pin, not an invented repository commit.",
+    "scientific_vintage_declared_by_inventory": "f7c358326d776398bc1cffe84df81eac7033091c",
+    "retained_extract": "retained-parent-inventory.json"
+  },
+  "target": {
+    "parent_id": "framework:province:dawei:260a377dc059",
+    "source_parent_id": "gb:MMR:ADM2:60261553B72281625520368",
+    "source_parent_sid": 44953,
+    "source_parent_ordinal": 56,
+    "source_region_id": "gb:MMR:ADM1:20573499B47967485654923",
+    "source_region_sid": 44893,
+    "repair_land_cells": 1693,
+    "source_relative_cells": 1145,
+    "native_blocks": [29],
+    "complete_children_from_retained_inventory": [
+      {"owner":30152,"name":"Thayetchaung","id":"gb:MMR:ADM3:66882298B32460181384532","source_sid":45131,"repair_land":58,"relative":179},
+      {"owner":30227,"name":"Yebyu","id":"gb:MMR:ADM3:66882298B48301856519721","source_sid":45129,"repair_land":788,"relative":188,"topology_reconciled":true},
+      {"owner":30342,"name":"Launglon","id":"gb:MMR:ADM3:66882298B80414211212402","source_sid":45116,"repair_land":828,"relative":778},
+      {"owner":30380,"name":"Dawei","id":"gb:MMR:ADM3:66882298B9277012619903","source_sid":45125,"repair_land":19,"relative":0,"topology_reconciled":true}
+    ],
+    "identity_limit": "Inventory defines the four complete current framework children. The four independent GAD reports identify these named townships under Dawei District in Tanintharyi. This does not prove exhaustive official district membership, unchanged footprint, or a geometrical crosswalk to consumed geoBoundaries features."
+  },
+  "retained_interval_traceability": {
+    "file": "retained-interval-envelope.json",
+    "input_bytes": 92904,
+    "input_sha256": "b12b9ed64ecb16fa2b5501648fa4ca91727793fa99ceadffb96d9623519c93aa",
+    "method": "Read-only counts and envelopes of the adjacent retained owner-labelled remaining intervals; no geometry or source pass. Counts independently reproduce 1693 land and 1145 relative cells. Geographic latitude values use only exact retained native-row-latitudes float64 table at commit 5b32388df0501b013ac9a3ba97864932db493d59, verified decoded hash 66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23; longitude=(x+0.5)/262166*360-180.",
+    "units": "Longitude degrees east, latitude degrees north. Envelopes bound centres only, not cell footprints or an official map datum.",
+    "land_centre_envelopes": [
+      {"owner":30152,"lon_min_max":[98.2143374808328,98.49995804185136],"lat_min_max":[13.290311040027428,13.989556903004106]},
+      {"owner":30227,"lon_min_max":[97.76393582691884,98.09075166116122],"lat_min_max":[14.110777541172999,14.875221471507102]},
+      {"owner":30342,"lon_min_max":[97.90537293165397,98.22669606279987],"lat_min_max":[13.537418143201556,14.195993051218169]},
+      {"owner":30380,"lon_min_max":[98.53840696352694,99.20577038975307],"lat_min_max":[13.375825470142939,14.439478712800307]}
+    ],
+    "limit": "No point was compared spatially against any new map or boundary. An envelope is retrieval orientation only. In particular the Dawei child centres extend far east of its river setting; a coastal-parent label does not clear inland/international-boundary questions."
+  },
+  "catalogue": {
+    "url": "https://themimu.info/township-profiles",
+    "regional_url": "https://themimu.info/states_regions/tanintharyi",
+    "inspected": "Both official MIMU catalogues list all four 2019 General Administration Department reports, uploaded 25 August 2020. Catalogue links 23/58/110/114 in the township page correspond to Dawei/Launglon/Thayetchaung/Yebyu. Regional catalogue links 16/13/9/8 offer the same reports.",
+    "source_relationship": "These are independently acquired primary Myanmar GAD documents hosted by MIMU. No evidence here establishes that Myanmar Analytics/USAID or the consumed geoBoundaries product was derived from them. Matching represented year is not a data lineage proof."
+  },
+  "primary_documents": [
+    {
+      "unit": "Launglon",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Launglon_2019_MMR.pdf",
+      "local_file": "documents/GAD-Launglon-2019.pdf",
+      "bytes": 2352209,
+      "sha256": "822ddf4047670272989cf2b5d99a694a39db4e606dbc59601ec69d3b5c0f1c0f",
+      "report_date": "30 September 2019, cover; introduction covers October 2018 through September 2019",
+      "locators": "PDF zero-based index 0 cover, index 2 township/village-tract map, indices 12-13 geography sections 3-6",
+      "support": "Geography places Launglon in Dawei District and describes the Dawei River to the east, Andaman Sea to west, sea to south and Yebyu to north. Drainage describes Dawei River between Launglon and Dawei. Visually inspected map shows offshore islands and river islands/channels.",
+      "map_precision": "Map has degree/minute graticule; clearly labelled ticks include 97°50′-98°10′ E and 13°35′-14°10′ N. Scale bars extend to 10 miles and 20 kilometres. These ticks are not a transcription of full map extent. Datum/projection, survey vintage, water level and positional accuracy were not identified.",
+      "limit": "Depicting an island in a township map does not establish its administrative owner. The map cannot prove every original component, river ownership rule or every held cell. No geometry traced from it."
+    },
+    {
+      "unit": "Yebyu",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Yebyu_2019_MMR.pdf",
+      "local_file": "documents/GAD-Yebyu-2019.pdf",
+      "bytes": 2510819,
+      "sha256": "149c0f070731db6bcb64d6560381f85a8cef1afd646fe174979d08e1a63457fd",
+      "report_date": "30 September 2019, cover; introduction covers October 2018 through September 2019",
+      "locators": "PDF zero-based index 0 cover, index 1 township map, index 2 town map, indices 12-13 geography sections 3-6",
+      "support": "Geography places Yebyu in Dawei District; describes Dawei and Thailand to east, Andaman Sea west, Dawei/Launglon south and Ye/Mon State north. Dawei River is identified in drainage. Visually inspected township map shows coastal estuary/inlets and offshore islands.",
+      "map_precision": "Township map index 1 has a 0-25 kilometre scale bar. No graticule, datum, shoreline water level, survey date or accuracy statement identified on the inspected page. Town map index 2 is separate and was not substituted for township extent.",
+      "limit": "Map context and named neighbors do not resolve offshore ownership, international-boundary exclusions or the exact consumed/current topology cuts."
+    },
+    {
+      "unit": "Thayetchaung",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Thayetchaung_2019_MMR.pdf",
+      "local_file": "documents/GAD-Thayetchaung-2019.pdf",
+      "bytes": 4635143,
+      "sha256": "b55b3110cdfe8694039e9ad8ba81702f9e05306409351c789ae114472b862251",
+      "report_date": "30 September 2019, cover; introduction states conditions through September 2019",
+      "locators": "PDF zero-based index 0 cover, index 2 township map, indices 13-15 history/geography sections 2-6",
+      "support": "Geography places Thayetchaung in Dawei District; describes Dawei east/north, Palauk south and Dawei River west. Physical description includes tidally inundated muddy ground/flats; drainage describes a north-south Dawei River reach of 30 miles. These machine-extracted passages include font substitutions and should be checked against original before formal adoption. Visually inspected township map depicts rivers/coast and adjacent Launglon, Dawei and Palauk.",
+      "map_precision": "No confident numerical scale, graticule, datum, shoreline survey date/water level or accuracy statement identified on the inspected township map.",
+      "limit": "Does not specify river-centre/bed ownership or tidal-boundary rule. Not a land/water mask. Its cited 1972-1973 formation orders were not independently acquired."
+    },
+    {
+      "unit": "Dawei",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Dawei_2019_MMR.pdf",
+      "local_file": "documents/GAD-Dawei-2019.pdf",
+      "bytes": 2605226,
+      "sha256": "ff9263bb646dd86820096c1d70eeb3a3f85b535a5ff64f5a3a907e0e9f9ac1c6",
+      "report_date": "September 2019, cover day blank; introduction explicitly states conditions through end September 2019",
+      "locators": "PDF zero-based index 0 cover, index 2 township/village-tract map, indices 14-16 formation/geography sections 2-6",
+      "support": "Report names Dawei District and identifies neighboring Yebyu, Myitta/Metta town, Thayetchaung and Launglon. Dawei River is west of Dawei town; waterways generally drain north-south. Visually inspected township map labels neighboring units and an eastern Thailand-facing reach.",
+      "map_precision": "Schematic-looking township map has a Burmese scale annotation not confidently transcribed in this study. No graticule, datum, shoreline epoch or positional accuracy identified.",
+      "official_order_leads": "Index 14 cites Dawei town formation order 31 October 1972, Myitta/Metta town order 1 April 2014, village-tract orders of 1972/1973/2004 and an amendment dated 24 January 2018. These are references in a primary report, not acquired order texts or boundary annexes.",
+      "limit": "No primary gazette/annex establishing exact township, river or international-border coordinates was obtained. Map labels cannot clear the 19 repair centres."
+    }
+  ],
+  "document_custody": {
+    "file": "retained-file-custody.json",
+    "total_pdf_bytes": 12103397,
+    "retrieval": "Four exact URLs downloaded with per-file 5,000,000-byte and 30-second caps after successful web inspection. All are valid PDF bodies. This was bounded document acquisition, not a scientific dataset download.",
+    "visual_review": "Native macOS PDFKit page thumbnails were rendered and inspected using view_image. No executable helper file was created. Diagnostic logs are retained; Launglon rendering logged a CoreGraphics PDF warning. Visual observations are limited to the rendered pages actually inspected.",
+    "reviewed_renders": ["Launglon-map-pdf-index1.png", "Launglon-map-pdf-index2.png", "Yebyu-map-pdf-index1.png", "Yebyu-map-pdf-index2.png", "Thayetchaung-map-pdf-index2.png", "Dawei-map-pdf-index2.png"]
+  },
+  "licensing": {
+    "terms_url": "https://themimu.info/mimu-terms-conditions",
+    "limit": "MIMU distinguishes report copying with citation/noncommercial restrictions from geospatial datasets requiring special permission; online dataset embedding has separate restrictions. No permission is inferred from download success. PDFs/renders are retained for internal review, not proposed as new openly licensed dataset geometry or online embeds. Original GAD report-specific license was not identified."
+  },
+  "bounded_access_limits": [
+    "Web find on long MIMU catalogue falsely reported no matches; exact catalogue link/open inspection resolved all four reports. Missing search matches are not treated as missing documents.",
+    "MPA official Dawei and deep-sea-port pages were located but web reads failed/time out; no port facts relied upon.",
+    "JICA connectivity report 12319620 was located but direct web document reads failed/time out; no hydrographic particulars relied upon or large report downloaded.",
+    "MIMU UNDP Tanintharyi governance report link returned 403; not used for complete official district-membership proof."
+  ],
+  "missing_evidence_by_group": [
+    {"owner":30342,"repair_land":828,"relative":778,"need":"Dated island-to-township/tract ownership schedule or authoritative boundary annex, and applicable shoreline/tidal-channel interpretation. Offshore/river-island depiction is a geographic lead only. Link each consumed component and candidate interval to exact evidence."},
+    {"owner":30227,"repair_land":788,"relative":188,"need":"Same island/estuary ownership and shoreline evidence; additionally exact preserved topology cuts and any applicable international-boundary exclusion for whole-original parent proof. Neighbor labels and no discovered conflict do not clear it."},
+    {"owner":30152,"repair_land":58,"relative":179,"need":"Dawei River reach, tidal-flat and riverbed ownership rule with dated map/order detail; check font-substituted source passages visually before formal adoption. Neither a muddy-flat label nor river proximity decides native physical class."},
+    {"owner":30380,"repair_land":19,"relative":0,"need":"Actual formation/amendment boundary annexes and preserved topology/international-boundary exclusions for the inland/eastern original footprint; report's river description alone is inadequate."},
+    {"parent":"framework:province:dawei:260a377dc059","need":"An exhaustive dated official district roster and exact original-feature joins, complete whole-footprint parent correspondence, accepted water/island/border exclusions, target-applicable physical evidence and later effective-owner/native conservation proof. Current four inventory children plus named reports are not complete territorial approval."}
+  ],
+  "conclusion": "New primary 2019 documents now cover every named current Dawei child and provide concrete river/coast/island map traceability for further study. No repair cell, source-relative cell, whole-original footprint or source exclusion was newly qualified. All 1693 land candidates and 1145 relative cells retain their prior status."
+}

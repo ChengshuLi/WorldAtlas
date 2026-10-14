@@ -1,0 +1,38 @@
+{
+  "status": "primary-document-context-only-no-clearance",
+  "target": "gb:MMR:ADM3:66882298B27866808767172",
+  "candidate_cells": 18,
+  "held_border_cells": 1,
+  "catalogue": {
+    "url": "https://themimu.info/township-profiles",
+    "support": "Lists the Hpapun PDF under GAD2019 township profiles; catalogue attributes these reports to General Administration Department. Hpapun entry lists1.68MB/upload24Aug2020.",
+    "locator": "Hpapun entry; openedcatalogue lines439-440"
+  },
+  "document": {
+    "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Hpapun_2019_MMR.pdf",
+    "pages": 67,
+    "inspected_via": "PublicwebPDFtext extraction; screenshotcalls returnedrefswithoutpixels, no visualinspectionclaimed",
+    "locators": [
+      "PDFindex14/printed4: location/extent/boundarysections",
+      "PDFindex15/printed5: terrain/drainage",
+      "PDFindex19: populationsection explicitlycovers endSeptember2019"
+    ],
+    "support": "A dated township-owner context source is located. Boundary and river-name extraction is incomplete/corrupt, so exact geographic names or limits are not adopted.",
+    "limit": "No verifiedlocalchart, boundarysurvey, datum, usablemaptrace or exactheld-centredisposition acquired."
+  },
+  "raw_custody": {
+    "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Hpapun_2019_MMR.pdf",
+    "scope": "boundedpublicprimarydocumentonly; noGIS/native/sourceproducer",
+    "maximum_bytes": 4194304,
+    "status": "not-acquired",
+    "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
+  "pending_input": "PublicoriginalPDFbytes/mapvisualinspection through normalpublicaccess ifavailable; existing403notbypassed orrepeated.",
+  "existing_qualification_inputs": "Reviewed immutable Hpapun18sourceevidence/nativeauthorityconfig alreadyprepared at4167f2828c326bfd7abc0a45f7e87b42f464a9fb. Thiscontextdoesnotchangeoraddaprerequisitetothoseinputs.",
+  "limits": [
+    "No native/GEOS/GSHHG/raster/sourcepass or constructor performed.",
+    "No originalwholeparentcontainment/exhaustiveness/topologycutclaim.",
+    "Source/authority/currentownership/conservationholds unchanged; border19thheld.",
+    "No explicit documentredistributionlicense inspected; retainURL/shortparaphrase/accessreceipt only inGit."
+  ]
+}

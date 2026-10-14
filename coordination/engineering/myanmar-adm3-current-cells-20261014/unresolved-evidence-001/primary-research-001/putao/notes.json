@@ -1,0 +1,325 @@
+{
+  "version": 1,
+  "worker": "/root/putao_primary_boundary",
+  "acquired_utc_date": "2026-10-14",
+  "kind": "bounded-primary-administrative-evidence-only",
+  "parent_id": "framework:province:puta-o:c3a47161f76d",
+  "scientific_vintage": "f7c358326d776398bc1cffe84df81eac7033091c",
+  "original_adm3_reference_year": 2019,
+  "roster": [
+    {
+      "name": "Nawngmun",
+      "owner": 30092,
+      "candidate_repair_land": 323,
+      "source_sids": [
+        44886,
+        44913,
+        45216
+      ]
+    },
+    {
+      "name": "Puta-O",
+      "owner": 30101,
+      "candidate_repair_land": 19,
+      "source_sids": [
+        36798,
+        44886,
+        44913,
+        45273,
+        67629
+      ]
+    },
+    {
+      "name": "Khaunglanhpu",
+      "owner": 30112,
+      "candidate_repair_land": 200,
+      "source_sids": [
+        15319,
+        44886,
+        44913,
+        45263
+      ]
+    },
+    {
+      "name": "Machanbaw",
+      "owner": 30208,
+      "candidate_repair_land": 0
+    },
+    {
+      "name": "Sumprabum",
+      "owner": 30331,
+      "candidate_repair_land": 0
+    }
+  ],
+  "inputs": [
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Nawngmun_2019_MMR.pdf",
+      "status": 200,
+      "bytes": 1089581,
+      "content_type": "application/pdf",
+      "path": ".cache/mmr-putao-primary-boundary-001/nawngmun-gad-2019.pdf",
+      "sha256": "3eb6749d1aaf03ade4695b075b4b3171be1782547bbb2849b380c937bb23e760"
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Puta-O_2019_MMR.pdf",
+      "status": 200,
+      "bytes": 3740004,
+      "content_type": "application/pdf",
+      "path": ".cache/mmr-putao-primary-boundary-001/TspProfiles_GAD_Puta-O_2019_MMR.pdf",
+      "sha256": "56c9828ef09aade623cdb21ce14b0c24c0118db2a52754f7e3106bba88a3ecaf"
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Khaunglanhpu_2019_MMR.pdf",
+      "status": 200,
+      "bytes": 1107630,
+      "content_type": "application/pdf",
+      "path": ".cache/mmr-putao-primary-boundary-001/TspProfiles_GAD_Khaunglanhpu_2019_MMR.pdf",
+      "sha256": "f49d33d7f3b5aca8604218ba9fb613a12d21700cb5069b42b58401b44e124795"
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Naungmoon_2014_ENG.pdf",
+      "status": 200,
+      "bytes": 1747028,
+      "content_type": "application/pdf",
+      "path": ".cache/mmr-putao-primary-boundary-001/TspProfiles_Census_Naungmoon_2014_ENG.pdf",
+      "sha256": "78beede564069fac1ed3b808fb81e59077628f90e36b3a4459464235a379793f"
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Putao_2014_ENG.pdf",
+      "status": 200,
+      "bytes": 1745196,
+      "content_type": "application/pdf",
+      "path": ".cache/mmr-putao-primary-boundary-001/TspProfiles_Census_Putao_2014_ENG.pdf",
+      "sha256": "606efd4db60b769376d612efb2bb63b0ca42694e6cc93688587e3a5529303552"
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_Census_Pannandin_2014_ENG.pdf",
+      "status": 200,
+      "bytes": 8047400,
+      "content_type": "application/pdf",
+      "path": ".cache/mmr-putao-primary-boundary-001/TspProfiles_Census_Pannandin_2014_ENG.pdf",
+      "sha256": "571dc9f18d19b9e1c23bbdf1a30305acfbaaef57e4459f8d19787de0ae808308"
+    }
+  ],
+  "sources": [
+    {
+      "input": "nawngmun-gad-2019.pdf",
+      "producer": "General Administration Department, Myanmar; mirrored by MIMU",
+      "date": "September 2019 cover; introduction says information through end September 2019",
+      "pages": 54,
+      "locators": [
+        "PDF page 14 / printed 3: location, limits, terrain",
+        "PDF page 15 / printed 4: drainage",
+        "embedded JPEG object 7467: town plan",
+        "embedded JPEG object 7471: township diagram, map section PDF pages 10-11"
+      ],
+      "findings": "Township diagram depicts Naungmoon proper with Pannandin separately north and Machanbaw south. It shows rivers, settlements, village-tract divisions and routes. Drainage prose traces Maykha headwaters in Hkakabo Razi National Park above Ta Su Htu village tract, south through township into Khaunglanhpu. This is geographic context, not a frontier survey.",
+      "actual_extent": "Main Naungmoon diagram excludes separately labelled Pannandin northern sub-township; no coordinate grid. Cannot represent full ADM3 Nawngmun northern footprint by itself.",
+      "scale": "Nominal inch-to-mile line visible in original embedded map; numeral transcription not independently validated, so no numeric scale claimed.",
+      "datum": "Not stated on inspected diagram.",
+      "limits": [
+        "Boundary prose extraction is incomplete due font encoding; no directional transcription accepted.",
+        "No 2019 polygon-to-diagram or candidate-cell registration performed."
+      ]
+    },
+    {
+      "input": "TspProfiles_GAD_Puta-O_2019_MMR.pdf",
+      "producer": "General Administration Department, Myanmar; mirrored by MIMU",
+      "date": "September 2019 cover; introduction also refers to 2018 data period, unresolved internal vintage qualification",
+      "pages": 73,
+      "locators": [
+        "PDF page 13 / printed 2: location",
+        "PDF page 14 / printed 3: limits and drainage",
+        "embedded JPEG object 12333: whole township diagram",
+        "embedded JPEG object 12337: additional town-plan image, retained but not visually inspected"
+      ],
+      "findings": "Whole township diagram visibly labels India west, Machanbaw east and Sumprabum south; its river and township/tract boundary symbols are differentiated.",
+      "actual_extent": "Schematic whole Puta-O township, including western frontier; no geographic coordinate grid or control points.",
+      "scale": "No numeric map scale visible on inspected whole-township image.",
+      "datum": "Not stated on inspected diagram.",
+      "limits": [
+        "No survey monuments, treaty annex, legal boundary coordinates or candidate-cell tie points.",
+        "Boundary and drainage prose is mostly missing from extracted text; visual Myanmar-language transcription still required."
+      ]
+    },
+    {
+      "input": "TspProfiles_GAD_Khaunglanhpu_2019_MMR.pdf",
+      "producer": "General Administration Department, Myanmar; mirrored by MIMU",
+      "date": "September 2019 cover; introduction refers to a 2018 data period, unresolved qualification",
+      "pages": 63,
+      "locators": [
+        "PDF page 14 / printed 3: limits, terrain, drainage",
+        "embedded JPEG object 9300: town plan",
+        "embedded JPEG object 9308: whole township diagram, map section PDF pages 10-11"
+      ],
+      "findings": "Whole-township diagram labels China east, Nawngmun north, Machanbaw west and Sumprabum/Hsotlaw south, with tributary network, settlement points, routes and tract divisions.",
+      "actual_extent": "Whole Khaunglanhpu schematic outline; China-facing east edge present, without coordinate grid or georeference control.",
+      "scale": "Nominal inch-to-mile scale printed; numeric Myanmar text requires independent transcription before numerical use.",
+      "datum": "Not stated on inspected diagram.",
+      "limits": [
+        "Partial extracted boundary line mentions Machanbaw and China but omitted text prevents reliable directional prose reconstruction.",
+        "No exact candidate overlap, boundary monuments or datum established."
+      ]
+    },
+    {
+      "input": "TspProfiles_Census_Naungmoon_2014_ENG.pdf",
+      "producer": "Department of Population, Ministry of Labour, Immigration and Population, Myanmar",
+      "date": "2014 census; report October 2017; census reference night 29 March 2014",
+      "pages": 56,
+      "locators": [
+        "PDF page 5: Figure 1 Kachin township locator (untexted map section)",
+        "PDF page 7: figures at a glance",
+        "embedded JPEG object 2965: inspected Kachin locator"
+      ],
+      "findings": "Report identifies Naungmoon in Putao District; locator highlights central northern unit with separate Pannandin Sub-Tsp immediately north. Reported area 3851.9 km2.",
+      "actual_extent": "Kachin State locator with selected Naungmoon; not detailed township frontier linework.",
+      "scale": "No scale printed on extracted locator.",
+      "datum": "No datum printed on extracted locator.",
+      "limits": [
+        "Naungmoon spelling and sub-township partition must be reconciled with 2019 source ADM3 identity; no whole-footprint equivalence inferred."
+      ]
+    },
+    {
+      "input": "TspProfiles_Census_Putao_2014_ENG.pdf",
+      "producer": "Department of Population, Ministry of Labour, Immigration and Population, Myanmar",
+      "date": "2014 census; October 2017 report",
+      "pages": 58,
+      "locators": [
+        "PDF page 5: Figure 1 Kachin township locator (untexted map section)",
+        "PDF page 7: figures at a glance"
+      ],
+      "findings": "Official report identifies Putao Township in Kachin State, Putao District; reported area 5453.1 km2.",
+      "actual_extent": "Kachin State township locator; original embedded map retained but not visually inspected.",
+      "scale": "Unverified.",
+      "datum": "Unverified.",
+      "limits": [
+        "Census context cannot determine 19 candidate cells or international boundary detail."
+      ]
+    },
+    {
+      "input": "TspProfiles_Census_Pannandin_2014_ENG.pdf",
+      "producer": "Department of Population, Ministry of Labour, Immigration and Population, Myanmar",
+      "date": "2014 census night 29 March 2014; October 2017 report; area source Settlement and Land Record Department 2014-2015",
+      "pages": 56,
+      "locators": [
+        "PDF page 7: figures at a glance",
+        "PDF page 10 note 3: area provenance",
+        "PDF page 18 / printed 8: Table 1 village tracts",
+        "embedded JPEG object 72: Kachin literacy thematic map, inspected (not Figure 1)"
+      ],
+      "findings": "Separate Pannandin Sub-Township report in Putao District; area 3971.8 km2; Table 1 lists Ta Su Htu village tract. Inspected thematic map puts Pannandin north of Naungmoon.",
+      "actual_extent": "Kachin State locator/thematic extent; not detailed northern international-boundary mapping.",
+      "scale": "No scale on inspected thematic map.",
+      "datum": "No datum on inspected thematic map.",
+      "limits": [
+        "Provides missing northern administrative context, not proof that its 2014 footprint equals the 2019 Nawngmun remainder."
+      ]
+    }
+  ],
+  "catalog_and_license": {
+    "profile_index": "https://themimu.info/township-profiles",
+    "state_index": "https://themimu.info/states_regions/kachin",
+    "terms_url": "https://themimu.info/mimu-terms-conditions",
+    "terms_date": "4 August 2025",
+    "terms_summary": "MIMU terms require source attribution and prohibit commercial sale/use. Geospatial dataset redistribution/online embedding requires written permission. Products are operational, as-is, with no UN endorsement of boundary delimitation. No document-specific open license was established for the six GAD/DoP PDFs. Do not treat geoBoundaries CC BY 4.0 source metadata as a license for these reports.",
+    "modern_catalog": "https://documents.themimu.info/view/maps/?location=Kachin&page=1&view=location",
+    "modern_putao_map": "https://documents.themimu.info/downloads/x1yUj7C/Tsp%20Map_VL_Puta-O_Kachin_MIMU154v06_16Feb2024_A1_MMR.pdf",
+    "modern_result": "Web fetch 403; direct read returned 218 bytes HTML, not PDF. No modern map acquired."
+  },
+  "exact_small_metadata_read": {
+    "path": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/341d0bbaf81e47cd16ab58ca6d1ab75d5ac120cf732c677e081b12830ea3ef31/work/.cache/mmr-remaining-inventory-20261014-001/inventory.json",
+    "bytes": 257291,
+    "observed_source_families": [
+      "gb:CHN:ADM1",
+      "gb:IND:ADM1",
+      "gb:IND:ADM3",
+      "gb:MMR:ADM1",
+      "gb:MMR:ADM2",
+      "gb:MMR:ADM3"
+    ],
+    "resolved_source_sid": {
+      "44913": "gb:MMR:ADM2:60261553B82845282425117 (Puta-O)"
+    },
+    "foreign_sid_identity": "Exact foreign SID-to-feature/country identities not present in permitted small inventory read; not guessed; no new source or spatial query."
+  },
+  "operation_limits": {
+    "new_accepted_credit": 0,
+    "clearance": false,
+    "sovereignty_adjudication": false,
+    "heavy_compute": false,
+    "gis_or_geometry_operations": false,
+    "old_cache_mutation": false,
+    "tracked_repo_changes": false,
+    "image_method": "Copied existing embedded DCT/JPEG byte streams from downloaded official PDFs using standard-library regex; no raster conversion, resampling, georeferencing or spatial computation. Original PDFs retained unchanged. Only visual inspection of embedded diagrams."
+  },
+  "specific_remaining_facts": [
+    "2019 full original Nawngmun/Pannandin administrative-footprint correspondence.",
+    "Exact 2019 China-facing and India-facing international boundary survey/treaty alignment, scales, datums and monuments.",
+    "Datum/control and full extent sufficient to tie maps to original polygon and exact candidate cells.",
+    "Foreign source SID identities and country/topology exclusions for affected candidate groups.",
+    "Independent transcription of Myanmar map scale numerals and incomplete prose.",
+    "Primary-source authority and license suitable for any proposed downstream geometry use."
+  ],
+  "conclusion": "Bounded primary evidence acquired and retained; administrative and headwater context strengthened. No repair decision or clearance supported for any of the 542 candidate land cells.",
+  "embedded_images": [
+    {
+      "path": ".cache/mmr-putao-primary-boundary-001/TspProfiles_Census_Naungmoon_2014_ENG-embedded-1.jpg",
+      "bytes": 63657,
+      "sha256": "b6e6f653f3557b8fea0c0a2cc1392e1ab072cf243d7d75196ada15b040ffe5ce"
+    },
+    {
+      "path": ".cache/mmr-putao-primary-boundary-001/TspProfiles_Census_Putao_2014_ENG-embedded-1.jpg",
+      "bytes": 64299,
+      "sha256": "128225fb9d0d1e86e3ca07bbacc1d128deffacb042d3cff83a7818313d7a5d5e"
+    },
+    {
+      "path": ".cache/mmr-putao-primary-boundary-001/TspProfiles_GAD_Khaunglanhpu_2019_MMR-embedded-1.jpg",
+      "bytes": 151223,
+      "sha256": "9a5a3449a56be4be57a043d141fa5b93af563195d401de71efe42fdccbcef401"
+    },
+    {
+      "path": ".cache/mmr-putao-primary-boundary-001/TspProfiles_GAD_Khaunglanhpu_2019_MMR-embedded-2.jpg",
+      "bytes": 111259,
+      "sha256": "ec5823815c5b327af6b3802347856f249ae0eb910a17de8b596a4e04360a38ff"
+    },
+    {
+      "path": ".cache/mmr-putao-primary-boundary-001/TspProfiles_GAD_Puta-O_2019_MMR-embedded-1.jpg",
+      "bytes": 1846877,
+      "sha256": "bff82074b20beeb9aaa18ea21a3584f4ebdc98099050671455d696ce94522a63"
+    },
+    {
+      "path": ".cache/mmr-putao-primary-boundary-001/TspProfiles_GAD_Puta-O_2019_MMR-embedded-2.jpg",
+      "bytes": 954843,
+      "sha256": "4641c6cbaff80ed77c573ef1bc11dfe34a1b493e0ee5d96b4d1dfd25a50cb461"
+    },
+    {
+      "path": ".cache/mmr-putao-primary-boundary-001/nawngmun-gad-2019-embedded-1.jpg",
+      "bytes": 113902,
+      "sha256": "7c93d4169e49f98653d67eda8e2149d6db8916ba0b276d064489c21c83a865e7"
+    },
+    {
+      "path": ".cache/mmr-putao-primary-boundary-001/nawngmun-gad-2019-embedded-2.jpg",
+      "bytes": 240078,
+      "sha256": "8f138f1bebcb8da58731a91012d5cb62a563dd2d097f44d65f6ce6077edb9b24"
+    },
+    {
+      "path": ".cache/mmr-putao-primary-boundary-001/pannandin-census-literacy-map-object72.jpg",
+      "bytes": 72344,
+      "sha256": "52eb1145bca10e78d792b714644502910cc1a221faf8138b6e6cc9cfdf1329c1"
+    }
+  ],
+  "network_pause": {
+    "status": "All new network downloads/retries/broadening paused after parent notice; all recorded PDF acquisitions had completed.",
+    "parent_reported_card_id": "manager:b22089e349ea426b9fdcb7949951a8c8:1",
+    "own_card_visibility": "No approval-card identifier visible in own tool results; attribution not established.",
+    "own_catalogue_action": {
+      "tool": "functions.exec -> exec_command",
+      "action": "Python urllib.request.urlopen index HTML, timeout 30; printed matching links; no local index output",
+      "url": "https://www.themimu.info/township-profiles",
+      "sandbox_permissions": "require_escalated",
+      "justification": "May I fetch the small official MIMU profile index to resolve exact PDF download links for the authorized primary-source evidence collection?",
+      "outcome": "HTTP 403 Forbidden",
+      "catalogue_file_downloaded": false
+    }
+  }
+}

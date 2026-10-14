@@ -1,0 +1,59 @@
+{
+  "status": "new-Bokpyin-map-inspection-no-clearance",
+  "old_notes_unchanged": true,
+  "raw_pdf": {
+    "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Bokpyin_2019_MMR.pdf",
+    "initiating_catalogue": "https://themimu.info/township-profiles",
+    "action": "Browser getByRole link exact TspProfiles_GAD_Bokpyin_2019_MMR.pdf.downloadMedia; requestedPDF notcatalogueHTML",
+    "returned_download_path": "/Users/chengshuli/Downloads/TspProfiles_GAD_Bokpyin_2019_MMR.pdf",
+    "retained_path": "GAD_Bokpyin_2019.catalogue-acquired.pdf",
+    "bytes": 2587191,
+    "sha256": "fbe9e5fe6d52490f42b93b4e32b90b01bedad795ea7fabfad955ad79ad9c7d1a",
+    "pages": 87,
+    "pdf_creation_metadata": "2019-12-13T10:06:54+06:30",
+    "permission_context": "Parent reported card b22089e349ea426b9fdcb7949951a8c8:1; no cardID or approval outcome appeared in worker tool output. Browser returnedPDFpath. All further network stopped on parent instruction; no consent inferred."
+  },
+  "new_visual_findings": [
+    {
+      "pdf_page_one_based": 2,
+      "kind": "Town street/landmark map",
+      "finding": "Visually shows dense street/parcel/landmark layout, river channels and longairstrip; not complete townshiparchipelago footprint. Symbol legend is present. No readable numeric scale,coordinategrid,datum,mapproductiondate or complete island schedule visible.",
+      "owner_limit": "Cannot use town map to assign offshore components."
+    },
+    {
+      "pdf_page_one_based": 3,
+      "kind": "Township village/tract schematic",
+      "finding": "Shows village/tract labels, schematic routes and eastern Thailand connection with line/symbol legend. The main mapped body is mainland; no complete archipelago component depiction or owner-coded island schedule is visible. No readable numeric scale,datum,coordinategrid or mapproductiondate visible.",
+      "owner_limit": "No claim of exact border alignment or offshore ownership. Burmese legend requires specialist transcription for finer classification."
+    },
+    {
+      "pdf_page_one_based": 14,
+      "kind": "Printed coordinate text, visually inspected",
+      "finding": "The latitude passage visibly prints10degrees19minutes to10degrees55minutes; longitude98degrees34minutes to98degrees56minutes. This agrees with extractedtext and is therefore not solely anOCR substitution. It conflicts with retained whole originalcomponentbounds; possible printederror or narrower geography must remain unresolved.",
+      "owner_limit": "No invented correctedboundingbox; do not georeference from this passage."
+    }
+  ],
+  "Kawthoung_maps": "No additional network acquisition or visual finding after pause; prior webtext/prose evidence retained with no rawPDFhash.",
+  "limits": [
+    "No GIS/source/native/GSHHG execution. Only offlinePDFpage rendering/extraction after pause.",
+    "New findings do not settle exact offshore ownership or2019source lineage.",
+    "No sourceapproval or conflict/relativehold release."
+  ],
+  "rendered_pages": [
+    {
+      "path": "GAD_Bokpyin_2019.page-2.png",
+      "bytes": 419265,
+      "sha256": "0e9f1314efc4514eaf360687209cd8ac242d570ab5b58816a9924c0335c1c743"
+    },
+    {
+      "path": "GAD_Bokpyin_2019.page-3.png",
+      "bytes": 289002,
+      "sha256": "286558ce87c5e7336d2c984df92916d369f0cd04ae610f7e8b41e7ce7bdbb322"
+    },
+    {
+      "path": "GAD_Bokpyin_2019.page-14.png",
+      "bytes": 180340,
+      "sha256": "baae9c4fcfc98d756bf0946d5ee6dc7e9577c9dcb2fde39339023cb788643c24"
+    }
+  ]
+}

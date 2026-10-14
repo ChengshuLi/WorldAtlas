@@ -1,0 +1,120 @@
+{
+  "status": "primary-documents-located-partial-byte-acquisition-no-clearance",
+  "observed_date": "2026-10-14",
+  "scope": {
+    "Bokpyin": {
+      "owner": 30350,
+      "source_id": "gb:MMR:ADM3:66882298B82483484204646",
+      "repair_land": 3617
+    },
+    "Kawthoung": {
+      "owner": 30361,
+      "source_id": "gb:MMR:ADM3:66882298B86598910616989",
+      "repair_land": 3721
+    },
+    "separate_holds": {
+      "source_conflict": 5,
+      "relative": 4844
+    }
+  },
+  "sources": [
+    {
+      "id": "GAD-Bokpyin-2019",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Bokpyin_2019_MMR.pdf",
+      "provider": "Bokpyin Township General Administration Department, distributed by MIMU",
+      "document_date": "2019-09-30",
+      "mimu_upload_date": "2020-08-25",
+      "catalogue_size": "2.47 MB",
+      "pages": 87,
+      "inspected_pdf_pages_one_based": [
+        1,
+        14,
+        15
+      ],
+      "findings": "Cover identifies Tanintharyi Region and Kawthoung District. Geography section identifies Thailand east, Kawthoung south, Andaman Sea west and Tanintharyi north. Text describes coastal mainland and western islands; administrative-area table separately lists Bokpyin, Pyigyimandaing and Karathuri. This is a township-owner account rather than a basemap label.",
+      "coordinate_caution": "Extracted geographic limits on PDF page14 appear inconsistent with the retained whole original footprint; treat as transcription/document discrepancy, not a georeferenced envelope or authority polygon.",
+      "map_pages": [
+        2,
+        3
+      ],
+      "map_inspection": "Map pages listed but failed reliable visual retrieval for Bokpyin; no scale/datum/individual-island boundary claim established.",
+      "scale": null,
+      "datum": null,
+      "reuse_license": "Not established from inspected pages; do not inherit geoBoundaries CC BY4.0 for this independent GAD PDF.",
+      "custody": "Web tool inspected PDF text; direct urllib byte acquisition returned HTTP403. Original PDF bytes/hash not held."
+    },
+    {
+      "id": "GAD-Kawthoung-2019",
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Kawthoung_2019_MMR.pdf",
+      "provider": "Kawthoung Township General Administration Department, distributed by MIMU",
+      "document_date": "2019-09-30",
+      "mimu_upload_date": "2020-08-25",
+      "catalogue_size": "3.2 MB",
+      "pages": 78,
+      "inspected_pdf_pages_one_based": [
+        1,
+        14,
+        15
+      ],
+      "findings": "Cover identifies Tanintharyi Region and Kawthoung District. Boundary section describes Ranong/Thailand east across Pakchan River, Pakchan mouth and Andaman Sea south, sea west, and Bokpyin north. Geography text reports93 islands,20 inhabited and73 uninhabited, with named examples. This supports township island inclusion generally, not matching every retained source polygon.",
+      "map_pages": [
+        2,
+        3
+      ],
+      "map_inspection": "Web screenshot calls returned map pages but no durable screenshot or scale/datum inspection was established in local custody.",
+      "scale": null,
+      "datum": null,
+      "reuse_license": "Not established from inspected pages.",
+      "custody": "Web tool inspected PDF text. Direct batch stopped on first Bokpyin403; Kawthoung raw byte acquisition not separately attempted."
+    },
+    {
+      "id": "MIMU182v03",
+      "url": "https://data.unhcr.org/es/documents/download/50060",
+      "provider": "Myanmar Information Management Unit; UNHCR primary distribution",
+      "document_date": "2012-05-01",
+      "pages": 1,
+      "scale": "1:1,800,000 at A3",
+      "projection_datum": "Geographic/WGS84",
+      "map_coverage": "Tanintharyi Region mainland plus depicted coastal archipelago, including Bokpyin/Pyigyimandaing/Karathuri and Kawthoung/Khamaukgyi; coordinate ticks inspected approximately96°40E–100°E,10°N–14°40N.",
+      "source_attribution": "MIMU base map; WFP/MIMU boundaries; SRTM elevation; GAD place names translated by MIMU.",
+      "boundary_evidence": "Legend explicitly distinguishes township,district,state,international boundaries; graphical relationship is regional context. No individual-island owner allocation or exact2019 border conversion derived.",
+      "reuse_license": "No explicit redistribution license found on retained map; UN disclaimer states names/boundaries do not imply UN endorsement/acceptance.",
+      "custody": "Raw original PDF plus extracted text and rendered one-page PNG retained; inspected visually."
+    }
+  ],
+  "trace_to_original_source": "The independent2019 GAD documents match township names and historic Kawthoung District grouping, and describe island/coastal geography. No feature IDs, coordinate-equivalent boundary lineage, dated cadastral decree, complete island schedule, or direct link to geoBoundaries2019 source product was established.",
+  "needed_exact_inputs": [
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Bokpyin_2019_MMR.pdf",
+      "pages_one_based": [
+        1,
+        2,
+        3,
+        14,
+        15
+      ],
+      "need": "Permitted raw PDF acquisition/hash; visual map legend/scale/datum and exact coast/island boundary interpretation."
+    },
+    {
+      "url": "https://themimu.info/sites/themimu.info/files/documents/TspProfiles_GAD_Kawthoung_2019_MMR.pdf",
+      "pages_one_based": [
+        1,
+        2,
+        3,
+        14,
+        15
+      ],
+      "need": "Permitted raw PDF acquisition/hash; original map inspection; named-island schedule mapped to original components."
+    },
+    {
+      "need": "Actual2019 township boundary directive/georeferenced owner map or authoritative island-assignment list, plus original/source lineage to resolve disputed original-vs-selected components; no exact directive located."
+    }
+  ],
+  "excluded_research": "Did not repeat Thai2012 watershed,ChumphonFY2022 orIBS1966 leads.",
+  "limits": [
+    "No source/territorial approval or repaired-cell credit.",
+    "No GIS/native/source raster/GSHHG/producer execution; no coordinate alignment or area comparison.",
+    "GAD prose constrains owner geography; MIMU regional map and place labels alone do not establish exact islands or borders.",
+    "All5 Thai source-conflict and4844 relative holds preserved; no generic zero-repaired disposition."
+  ]
+}
