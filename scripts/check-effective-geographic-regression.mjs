@@ -65,12 +65,14 @@ const STOCK_INDEX='b82b195d94530d9b1f48153f7e47616f8b841cb1438ddf59994ba4869a1d7
 
 // The allowance belongs to this execution, never to a historical certificate.
 // OS availability already excludes resident parent/concurrent memory. Reserve
-// only their additional planned growth, then leave half of the remainder for
+// only their additional planned growth and the explicit operating headroom for
 // parent/system growth and expansion. Both limits cover a complete process/phase,
 // so credit only measured resident RSS, never historical or on-disk byte counts.
-export function processingAllowance({availableBytes=process.availableMemory(), concurrentReservedBytes=Number(process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES??0), currentRssBytes=process.memoryUsage().rss, phaseBytes, rssBytes}={}) {
+export function processingAllowance({availableBytes=process.availableMemory(), concurrentReservedBytes=Number(process.env.WORLDATLAS_CONCURRENT_RESERVED_BYTES??0), currentRssBytes=process.memoryUsage().rss, headroomBytes=(process.env.WORLDATLAS_MEMORY_HEADROOM_BYTES===undefined?undefined:Number(process.env.WORLDATLAS_MEMORY_HEADROOM_BYTES)), phaseBytes, rssBytes}={}) {
   demand([availableBytes,concurrentReservedBytes,currentRssBytes].every(n=>Number.isSafeInteger(n)&&n>=0),'Invalid current resource observations');
-  const growthBytes=Math.floor((availableBytes-concurrentReservedBytes)/2);
+  demand(headroomBytes===undefined||(Number.isSafeInteger(headroomBytes)&&headroomBytes>0),'Set WORLDATLAS_MEMORY_HEADROOM_BYTES or headroomBytes to a justified positive byte reservation for system growth');
+  const growthBytes=headroomBytes===undefined?Math.floor((availableBytes-concurrentReservedBytes)/2)
+    :availableBytes-concurrentReservedBytes-headroomBytes;
   demand(growthBytes>0,'Insufficient current memory after concurrent reservation and safety headroom');
   const rssLimitBytes=currentRssBytes+growthBytes;
   demand(Number.isSafeInteger(rssLimitBytes),'Invalid current resource observations');

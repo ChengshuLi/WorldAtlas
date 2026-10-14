@@ -69,7 +69,7 @@ export function authenticateSuccessorContextInventory(indexRaw,imageIndex,compar
 // still require literal equality. This is not a future helper-code exemption.
 export function verifyPreparationBudgetCode(oldRaw,currentRaw,oldPin,currentPin){
  assert.equal(oldPin.sha256,'6c4ea2f29f6bfed9176fa8c38dfde522d859442797e4a3cce76f250c69c75fb0','Foreign historical preparation guard');assert.equal(oldPin.bytes,6371);
- assert.equal(currentPin.sha256,'e4daeabac420c657ed1b369a7d024d7bf545c15470013b3b618fcfb6de515c8c','Foreign current preparation guard');assert.equal(currentPin.bytes,9407);
+ assert.equal(currentPin.sha256,'227b982fac966fff5e55483c62ecb181defd55194b2946e31b7606574013f676','Foreign current preparation guard');assert.equal(currentPin.bytes,9849);
  assert.equal(oldRaw.length,oldPin.bytes);assert.equal(sha(oldRaw),oldPin.sha256);assert.equal(currentRaw.length,currentPin.bytes);assert.equal(sha(currentRaw),currentPin.sha256);
  return currentPin.bytes-oldPin.bytes;
 }

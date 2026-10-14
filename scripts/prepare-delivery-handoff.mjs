@@ -502,6 +502,14 @@ export function rebindCustody(config, reader, certificate = false) {
 
 export function composeAuthorities(config, reader) {
   if (config.selector) {
+    const authorityFields = ['rule_preimage', 'source_authority', 'ledger', 'native_patch'];
+    const multiple = Object.hasOwn(config, 'authorities');
+    need(!multiple || !authorityFields.some(key => Object.hasOwn(config, key)), 'Do not mix singleton and multiple modern authorities');
+    const authorities = multiple ? config.authorities : [Object.fromEntries(authorityFields.map(key => [key, config[key]]))];
+    need(Array.isArray(authorities) && authorities.length > 0 && authorities.every(value => value
+      && same(Object.keys(value).sort(), [...authorityFields].sort())
+      && authorityFields.every(key => value[key] && Number.isSafeInteger(value[key].bytes) && value[key].bytes > 0)),
+    'Complete nonempty modern authority pin groups required');
     need(config.selector.path === 'data/ownership-selection.json' && typeof config.effective_release_id === 'string'
       && config.effective_release_id.startsWith('geography:'), 'Original selected baseline and explicit effective release required');
     const selection = reader.json(config.selector), hook = selection.additive_release;
@@ -514,7 +522,7 @@ export function composeAuthorities(config, reader) {
     const assets = sidecar.logical_asset_map;
     need(assets && same(Object.keys(assets).sort(), ['base_manifest', 'ledger', 'owner_roster', 'patch']), 'Complete prior logical assets required');
     let inputBytes = [config.selector, sidecarPin, assets.base_manifest, sidecar.authority_registry, assets.ledger, assets.patch, sidecar.runtime_envelope,
-      config.rule_preimage, config.source_authority, config.ledger, config.native_patch].reduce((n, p) => n + p.bytes, 0);
+      ...authorities.flatMap(value => authorityFields.map(key => value[key]))].reduce((n, p) => n + p.bytes, 0);
     // Parsing, literal row copies, interval union and encoded products share the
     // same preparation allowance. Reserve their carry before opening large bodies.
     const checkCarry = (outputBytes = 0) => {
@@ -527,7 +535,6 @@ export function composeAuthorities(config, reader) {
     const priorRegistry = reader.json(sidecar.authority_registry), priorLedger = reader.json(assets.ledger);
     const priorPatch = reader.json(assets.patch), wrapped = reader.json(sidecar.runtime_envelope);
     const envelope = wrapped.additiveRelease ?? wrapped;
-    const constructed = reader.json(config.ledger), candidate = reader.json(config.native_patch);
     need(envelope.version === 2 && envelope.kind === 'retained-native-base-plus-delta-v2', 'Existing v2 runtime envelope required');
     for (const [role, pin] of Object.entries(assets)) {
       const declared = envelope[role];
@@ -537,54 +544,65 @@ export function composeAuthorities(config, reader) {
     }
     need(priorRegistry.version === 1 && priorRegistry.kind === 'retained-rule-authority-registry-v1' && priorLedger.version === 2,
       'Existing v2 cumulative registry/ledger required');
-    const binding = reader.json(config.source_authority), preimage = reader.json(config.rule_preimage);
-    // Literal metadata contract of constructAuthorityRegistry. Retained constructor
-    // results supply qualification; the final selected reader remains authoritative.
-    const rule = reader.pin(config.rule_preimage.commit, config.rule_preimage.path);
-    const authority = {policy_id: 'retained-source-literal-additions', policy_version: 1, rule_preimage: rule,
-      rule_sha256: rule.sha256, source_authority: reader.pin(config.source_authority.commit, config.source_authority.path)};
-    const entry = {authority_sha256: digest(jsonBytes(authority)), ...authority};
-    need(binding.version === 1 && binding.kind === 'source-target-native-custody-v1'
-      && same(Object.keys(binding).sort(), ['kind', 'native_patch', 'source_evidence', 'version'])
-      && same(preimage, {...binding, kind: 'source-target-native-rule-v1'}) && same(binding.native_patch, config.native_patch)
-      && entry.rule_sha256 === digest(jsonBytes(preimage)) && constructed.rule_sha256 === entry.rule_sha256 && unique(constructed.component_ids)
-      && same(constructed.component_ids, constructed.ledger_rows?.map(row => row.component_id)),
-    'Committed modern constructor scope/rule/patch differs');
-    inputBytes += binding.source_evidence.bytes; checkCarry();
-    const evidence = reader.json(binding.source_evidence), manifest = reader.json(assets.base_manifest);
+    const manifest = reader.json(assets.base_manifest);
     const contract = Object.fromEntries(['size', 'coordinateBits', 'method', 'native_latitudes', 'hierarchy_sha256', 'original_assets']
       .map(key => [key, manifest[key]]));
-    need(same(evidence.base_reference, envelope.base_reference) && same(evidence.native_contract, contract)
-      && assets.base_manifest.sha256 === selection.sha256 && assets.owner_roster.sha256 === manifest.original_assets?.bounds?.sha256,
-    'Modern source changes the selected native baseline/contract');
-    checkCarry();
     need(priorPatch.version === 2 && priorPatch.authority_registry_sha256 === sidecar.authority_registry.sha256
       && priorPatch.ledger_sha256 === assets.ledger.sha256 && same(priorPatch.base_reference, envelope.base_reference)
       && same(priorPatch.effective_reference, envelope.effective_reference), 'Prior cumulative patch bindings differ');
-    need(!priorRegistry.entries.some(old => old.authority_sha256 === entry.authority_sha256), 'Modern authority is already selected');
-    const registry = {...priorRegistry, entries: [...priorRegistry.entries, entry].sort((a, b) => a.authority_sha256.localeCompare(b.authority_sha256))};
+    const entries = [...priorRegistry.entries], addedRows = [], candidates = [];
+    const authorityIds = new Set(entries.map(entry => entry.authority_sha256));
     const oldIds = new Set(priorLedger.rows.map(row => row.component_id));
-    need(unique(evidence.targets?.map(target => target.id)), 'Complete original source-target roster required');
-    const targets = new Map();
-    for (const target of evidence.targets) {
-      const id = target.target_id ?? target.id, prior = targets.get(id);
-      need(target.source_receipt_sha256 === evidence.physical_evidence?.sha256
-        && (!prior || prior.pixelIndex === target.pixelIndex && prior.source_family === target.source_family
-          && same(prior.base_geometry, target.base_geometry)), 'Conflicting original source target/family/receipt');
-      targets.set(id, target);
+    for (const original of authorities) {
+      const constructed = reader.json(original.ledger), candidate = reader.json(original.native_patch);
+      const binding = reader.json(original.source_authority), preimage = reader.json(original.rule_preimage);
+      // Literal metadata contract of constructAuthorityRegistry. Retained constructor
+      // results supply qualification; the final selected reader remains authoritative.
+      const rule = reader.pin(original.rule_preimage.commit, original.rule_preimage.path);
+      const authority = {policy_id: 'retained-source-literal-additions', policy_version: 1, rule_preimage: rule,
+        rule_sha256: rule.sha256, source_authority: reader.pin(original.source_authority.commit, original.source_authority.path)};
+      const entry = {authority_sha256: digest(jsonBytes(authority)), ...authority};
+      need(binding.version === 1 && binding.kind === 'source-target-native-custody-v1'
+        && same(Object.keys(binding).sort(), ['kind', 'native_patch', 'source_evidence', 'version'])
+        && same(preimage, {...binding, kind: 'source-target-native-rule-v1'}) && same(binding.native_patch, original.native_patch)
+        && entry.rule_sha256 === digest(jsonBytes(preimage)) && constructed.rule_sha256 === entry.rule_sha256 && unique(constructed.component_ids)
+        && same(constructed.component_ids, constructed.ledger_rows?.map(row => row.component_id)),
+      'Committed modern constructor scope/rule/patch differs');
+      inputBytes += binding.source_evidence.bytes; checkCarry();
+      const evidence = reader.json(binding.source_evidence);
+      need(same(evidence.base_reference, envelope.base_reference) && same(evidence.native_contract, contract)
+        && assets.base_manifest.sha256 === selection.sha256 && assets.owner_roster.sha256 === manifest.original_assets?.bounds?.sha256,
+      'Modern source changes the selected native baseline/contract');
+      checkCarry();
+      need(!authorityIds.has(entry.authority_sha256), 'Modern authority is already selected or duplicated');
+      authorityIds.add(entry.authority_sha256);
+      entries.push(entry);
+      need(unique(evidence.targets?.map(target => target.id)), 'Complete original source-target roster required');
+      const targets = new Map();
+      for (const target of evidence.targets) {
+        const id = target.target_id ?? target.id, prior = targets.get(id);
+        need(target.source_receipt_sha256 === evidence.physical_evidence?.sha256
+          && (!prior || prior.pixelIndex === target.pixelIndex && prior.source_family === target.source_family
+            && same(prior.base_geometry, target.base_geometry)), 'Conflicting original source target/family/receipt');
+        targets.set(id, target);
+      }
+      const added = constructed.ledger_rows.map(row => {
+        need(row.representation === 'native-cells' && row.component_id === 'source-target:' + digest(jsonBytes({target_id: row.target_id,
+          evidence: binding.source_evidence.sha256})) && !oldIds.has(row.component_id)
+          && !Object.hasOwn(row, 'authority_sha256') && !Object.hasOwn(row, 'rule_sha256'), 'Foreign or duplicate modern component');
+        const target = targets.get(row.target_id);
+        need(target?.pixelIndex === row.pixelIndex && same(target.base_geometry, row.base_geometry)
+          && target.source_receipt_sha256 === evidence.physical_evidence?.sha256 && row.source_receipt_sha256 === target.source_receipt_sha256,
+        'Modern row changes the original source target/owner/receipt');
+        oldIds.add(row.component_id);
+        return {...row, authority_sha256: entry.authority_sha256, rule_sha256: entry.rule_sha256};
+      });
+      need(added.length === targets.size, 'Modern constructor omits an original source target');
+      addedRows.push(...added);
+      candidates.push({candidate, added});
     }
-    const added = constructed.ledger_rows.map(row => {
-      need(row.representation === 'native-cells' && row.component_id === 'source-target:' + digest(jsonBytes({target_id: row.target_id,
-        evidence: binding.source_evidence.sha256})) && !oldIds.has(row.component_id)
-        && !Object.hasOwn(row, 'authority_sha256') && !Object.hasOwn(row, 'rule_sha256'), 'Foreign or duplicate modern component');
-      const target = targets.get(row.target_id);
-      need(target?.pixelIndex === row.pixelIndex && same(target.base_geometry, row.base_geometry)
-        && target.source_receipt_sha256 === evidence.physical_evidence?.sha256 && row.source_receipt_sha256 === target.source_receipt_sha256,
-      'Modern row changes the original source target/owner/receipt');
-      return {...row, authority_sha256: entry.authority_sha256, rule_sha256: entry.rule_sha256};
-    });
-    need(added.length === targets.size, 'Modern constructor omits an original source target');
-    const rows = [...priorLedger.rows, ...added].sort((a, b) => a.component_id.localeCompare(b.component_id));
+    const registry = {...priorRegistry, entries: entries.sort((a, b) => a.authority_sha256.localeCompare(b.authority_sha256))};
+    const rows = [...priorLedger.rows, ...addedRows].sort((a, b) => a.component_id.localeCompare(b.component_id));
     const ledger = {...priorLedger, authority_registry_sha256: digest(jsonBytes(registry)), rows, scope_ids: rows.map(row => row.component_id)};
     compareVersionedRepairLedgers(priorLedger, ledger, {beforeRegistry: priorRegistry, afterRegistry: registry});
     need(priorLedger.rows.every(row => same(row, rows.find(next => next.component_id === row.component_id))), 'Literal inherited row/exception changed');
@@ -606,14 +624,15 @@ export function composeAuthorities(config, reader) {
       return [...byRow].sort((a, b) => a[0] - b[0]).map(([y, runs]) => {
         runs.sort((a, b) => a[0] - b[0]); const merged = [];
         for (const run of runs) {
-          const last = merged.at(-1); need(!last || run[0] >= last[1], 'Modern cells overlap the accepted cumulative patch');
+          const last = merged.at(-1); need(!last || run[0] >= last[1], 'Modern cells overlap the accepted cumulative patch or another original authority');
           if (last && last[1] === run[0] && last[2] === run[2]) last[1] = run[1]; else merged.push(run);
         }
         return {y, runs: merged};
       });
     };
-    need(same(union([candidate]), union(added.map(row => ({rows: row.native_rows})))), 'Modern ledger intervals differ from original patch');
-    const patchRows = union([priorPatch, candidate]);
+    for (const {candidate, added} of candidates)
+      need(same(union([candidate]), union(added.map(row => ({rows: row.native_rows})))), 'Modern ledger intervals differ from original patch');
+    const patchRows = union([priorPatch, ...candidates.map(value => value.candidate)]);
     const effective = {...envelope.effective_reference, id: config.effective_release_id,
       footprints_sha256: digest(jsonBytes({domain: 'worldatlas-effective-native-footprints:v2', base_reference: envelope.base_reference,
         authority_registry_sha256: ledger.authority_registry_sha256, ledger_sha256: digest(ledgerRaw), components: [...normalized.rows.values()]}))};
@@ -877,6 +896,139 @@ export function finalizeDelivery(config, reader) {
     'selected-delivery-expectations.json': orderedBytes(expectations)};
 }
 
+const sourceProducts = ['original-stage-inputs.json', 'cohort-intervals.json', 'cohort-config.json',
+  'source-qualification.json', 'execution-receipt.json'];
+function sourceBinding(raw) {
+  return {phase: 'source', config_sha256: digest(raw),
+    program_sha256: digest(fs.readFileSync(fileURLToPath(new URL('./qualify-source-cohort.py', import.meta.url)))),
+    entry_sha256: digest(fs.readFileSync(fileURLToPath(import.meta.url)))};
+}
+// Reuse complete local original output without repeating scientific operators.
+// This validates retained custody; it does not create new scientific authority.
+export function resumeSource(root, destination, config, binding, reader) {
+  const receipt = JSON.parse(ordinary(root, destination + '/preparation.json'));
+  need(receipt.version === 1 && same(receipt.binding, binding) &&
+    same(Object.keys(receipt.outputs ?? {}).sort(), [...sourceProducts].sort()), 'Source resume configuration/code/inventory differs');
+  const products = {};
+  for (const name of sourceProducts) {
+    const raw = ordinary(root, destination + '/' + name), pin = receipt.outputs[name];
+    need(pin.bytes === raw.length && pin.sha256 === digest(raw), 'Source resumed product changed: ' + name);
+    products[name] = raw;
+  }
+  need(Array.isArray(config.source?.inputs) && config.source.inputs.length > 0, 'Source resume needs original input inventory');
+  for (const pin of [...config.source.inputs, config.source.physical_reproducer]) reader.read({...pin, mode: '100644'});
+  const execution = JSON.parse(products['execution-receipt.json']), qualified = JSON.parse(products['source-qualification.json']);
+  need(execution.complete === true && execution.program?.sha256 === binding.program_sha256 &&
+    qualified.fresh_admission?.config_sha256 === digest(jsonBytes(config.source)), 'Source original execution binding differs');
+  need(Array.isArray(execution.outputs) && execution.outputs.length === 4 &&
+    same(execution.outputs.map(pin => pin.path).sort(), sourceProducts.filter(name => name !== 'execution-receipt.json')
+      .map(name => destination + '/' + name).sort()), 'Source original output roster differs');
+  for (const pin of execution.outputs) {
+    const raw = products[pin.path.slice(destination.length + 1)];
+    need(raw && raw.length === pin.bytes && digest(raw) === pin.sha256, 'Source original execution product differs');
+  }
+  return publish(root, destination, products, binding, true, reader.budget);
+}
+
+// The source probe has one data-configured scientific implementation. Admission
+// and exclusive publication stay in this existing delivery entry point.
+export async function sourceCohort(config, reader, root, destination) {
+  need(same(Object.keys(config).sort(), ['preparation_allowance', 'processing_allowance', 'runtime_inventory', 'source', 'version'])
+    && config.version === 1 && config.preparation_allowance && config.source?.version === 1,
+    'Explicit source configuration, runtime inventory and allowances required');
+  need(same(Object.keys(config.processing_allowance ?? {}).sort(), ['phaseBytes', 'rssBytes']), 'Explicit source processing allowance required');
+  const runtime = config.runtime_inventory;
+  need(runtime && same(Object.keys(runtime).sort(), ['files', 'python']) && Array.isArray(runtime.files)
+    && runtime.files.length > 0 && runtime.files.length <= 512 && unique(runtime.files.map(pin => pin.path))
+    && runtime.python?.bytes > 0 && runtime.files.some(pin => same(pin, runtime.python)), 'Complete pinned source runtime inventory required');
+  const {processingAllowance} = await import('./check-effective-geographic-regression.mjs');
+  const allowance = processingAllowance(config.processing_allowance);
+  let runtimeBytes = 0;
+  for (const pin of runtime.files) {
+    need(pin && same(Object.keys(pin).sort(), ['bytes', 'path', 'sha256']) && path.isAbsolute(pin.path)
+      && Number.isSafeInteger(pin.bytes) && pin.bytes >= 0 && hex(pin.sha256, 64), 'Ordinary installed runtime pin required');
+    runtimeBytes += pin.bytes;
+    need(Number.isSafeInteger(runtimeBytes) && runtimeBytes < allowance.phaseBytes, 'Runtime inventory exceeds source allowance');
+  }
+  const helper = fileURLToPath(new URL('./qualify-source-cohort.py', import.meta.url));
+  const helperRaw = fs.readFileSync(helper), sourceRaw = jsonBytes(config.source);
+  const entryRaw = fs.readFileSync(fileURLToPath(import.meta.url));
+  const executionReserve = helperRaw.length + entryRaw.length + sourceRaw.length + config.source.resources.output_bytes;
+  need(Number.isSafeInteger(executionReserve) && executionReserve > 0
+    && runtimeBytes + executionReserve < allowance.phaseBytes, 'Source execution/output reserve exceeds allowance');
+  const runtimeIdentity = pin => {
+    const resolved = fs.realpathSync(pin.path), before = fs.statSync(resolved);
+    need(before.isFile() && before.size === pin.bytes, 'Installed source runtime size differs');
+    const hash = createHash('sha256'), chunk = Buffer.alloc(1048576), fd = fs.openSync(resolved, 'r');
+    let bytes = 0;
+    try { for (let n; (n = fs.readSync(fd, chunk, 0, chunk.length, null));) { bytes += n; hash.update(chunk.subarray(0, n)); } }
+    finally { fs.closeSync(fd); }
+    const after = fs.statSync(resolved);
+    need(bytes === pin.bytes && hash.digest('hex') === pin.sha256 && fs.realpathSync(pin.path) === resolved
+      && ['dev', 'ino', 'size', 'mtimeMs', 'ctimeMs'].every(key => before[key] === after[key]), 'Installed source runtime identity differs');
+    return {path: pin.path, resolved, bytes, sha256: pin.sha256};
+  };
+  const identities = runtime.files.map(runtimeIdentity);
+  const stagingParent = '.cache/delivery-handoff';
+  admitDestination(root, stagingParent + '/source-staging', false);
+  fs.mkdirSync(path.join(root, stagingParent), {recursive: true});
+  const staging = fs.mkdtempSync(path.join(root, stagingParent, 'source-'));
+  try {
+    const sourceFile = path.join(staging, 'source-config.json'), admissionFile = path.join(staging, 'admission.json');
+    const admission = {version: 1, observed_unix_seconds: Date.now() / 1000, allowance,
+      runtime_inventory_bytes: runtimeBytes, execution_reserve_bytes: executionReserve,
+      program_sha256: digest(helperRaw), config_sha256: digest(sourceRaw), runtime_files: runtime.files};
+    fs.writeFileSync(sourceFile, sourceRaw, {flag: 'wx'});
+    fs.writeFileSync(admissionFile, jsonBytes(admission), {flag: 'wx'});
+    const output = path.join(staging, 'products'), started = performance.now();
+    // Python owns cooperative feature/input/time/output checks. This entry does
+    // not claim a hard deadline or process-tree supervisor it does not implement.
+    execFileSync(runtime.python.path, ['-I', '-B', helper, '--repo', root, '--config', sourceFile,
+      '--admission', admissionFile, '--output', output, '--publication-prefix', destination], {cwd: root, env: environment(),
+      stdio: ['ignore', 'ignore', 'pipe'], maxBuffer: 131072});
+    for (const pin of runtime.files) runtimeIdentity(pin);
+    need(fs.readFileSync(helper).equals(helperRaw), 'Source helper changed during execution');
+    const names = ['original-stage-inputs.json', 'cohort-intervals.json', 'cohort-config.json',
+      'source-qualification.json', 'execution-receipt.json'];
+    need(same(fs.readdirSync(output).sort(), [...names].sort()), 'Incomplete or foreign source output inventory');
+    const products = Object.fromEntries(names.map(name => [name, ordinary(root, path.relative(root, path.join(output, name)))]));
+    const total = Object.values(products).reduce((n, raw) => n + raw.length, 0);
+    need(total <= config.source.resources.output_bytes, 'Complete source output reserve exceeded');
+    return {products, observation: {elapsed_seconds: (performance.now() - started) / 1000, allowance,
+      runtime_inventory: identities, limits: ['Source checks are cooperative boundaries, not hard process-tree enforcement.',
+        'Source prerequisites are not physical, native, owner-zero or selected-output acceptance.']}};
+  } finally { fs.rmSync(staging, {recursive: true, force: true}); }
+}
+
+// Execute the existing modern constructor, rather than authoring a new country
+// wrapper. This is qualification, not the metadata-only compose phase.
+export async function nativeAuthority(config, reader, root) {
+  need(same(Object.keys(config).sort(), ['native_patch', 'preparation_allowance', 'source_evidence', 'version'])
+    && config.version === 1 && config.preparation_allowance, 'Explicit native-authority inputs and allowance required');
+  const flow = await import('./delivery-handoff-advance.mjs');
+  const inputs = {source_evidence: config.source_evidence, native_patch: config.native_patch};
+  for (const locator of Object.values(inputs)) flow.locate(reader, locator);
+  const authorityReader = flow.deliveryAuthorityReader(root, reader);
+  const started = performance.now(), result = flow.constructOriginalAuthority(authorityReader, inputs);
+  authorityReader.checkMemory();
+  need(Array.isArray(result.ledger_rows) && result.ledger_rows.length > 0
+    && same(result.component_ids, result.ledger_rows.map(row => row.component_id)), 'Complete modern constructor rows required');
+  const products = {...result.products, 'constructor-result.json': jsonBytes({version: 1,
+    kind: 'existing-source-target-native-constructor-result', inputs,
+    component_ids: result.component_ids, rule_sha256: result.rule_sha256, ledger_rows: result.ledger_rows,
+    limitations: result.limitations})};
+  const bytes = Object.values(products).reduce((n, raw) => n + raw.length, 0);
+  need(bytes <= authorityReader.outputBytes && Object.values(products).every(raw => raw.length <= 33554432),
+    'Native complete output exceeds existing reserve');
+  reader.budget.add({bytes});
+  return {products, observation: {elapsed_seconds: (performance.now() - started) / 1000,
+    charged_phase_bytes: authorityReader.used, allowance: authorityReader.allowance,
+    normalized_node_lifetime_peak_rss_bytes: process.resourceUsage().maxRSS * 1024,
+    qualified_cells: result.ledger_rows.reduce((n, row) => n + row.native_cells, 0),
+    limits: ['Original source/physical producers are not replayed.',
+      'Constructor qualification is not actual current-owner-zero or final selected-output acceptance.']}};
+}
+
 async function main(args) {
   const [phase, configFile, destination, ...flags] = args;
   if (phase === 'materialize') {
@@ -897,13 +1049,19 @@ async function main(args) {
     console.log(JSON.stringify({...publishComplete(), acquisition: result, acquisition_ms: performance.now() - started}));
     return;
   }
-  need(['requests', 'native-requests', 'retain', 'rebind-operating', 'rebind-certificate', 'compose', 'package', 'finalize', 'evidence'].includes(phase) && configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
-    'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|package|finalize|evidence CONFIG DESTINATION [--resume]');
+  need(['source', 'native-authority', 'requests', 'native-requests', 'retain', 'rebind-operating', 'rebind-certificate', 'compose', 'package', 'finalize', 'evidence'].includes(phase) && configFile && destination && flags.every(f => f === '--resume') && flags.length <= 1,
+    'Use prepare-delivery-handoff.mjs requests|native-requests|retain|rebind-operating|rebind-certificate|compose|package|finalize|evidence|source|native-authority CONFIG DESTINATION [--resume]');
   need(!process.execArgv.length && !process.env.NODE_OPTIONS?.trim() && !process.env.NODE_PATH?.trim(), 'Plain Node launch required');
   const root = fs.realpathSync(process.cwd()); admitDestination(root, destination, flags.includes('--resume'));
   const raw = ordinary(root, configFile), config = JSON.parse(raw), reader = pinReader(root, {allowance: config.preparation_allowance});
   reader.budget.add({bytes: raw.length}); need(config.version === 1, 'Versioned preparation config required');
-  let outputs;
+  const binding = phase === 'source' ? sourceBinding(raw) : {phase, config_sha256: digest(raw)};
+  if (phase === 'source' && flags.includes('--resume') && fs.existsSync(path.join(root, destination))) {
+    console.log(JSON.stringify(resumeSource(root, destination, config, binding, reader))); return;
+  }
+  let outputs, observation;
+  if (phase === 'source') { const result = await sourceCohort(config, reader, root, destination); outputs = result.products; observation = result.observation; }
+  if (phase === 'native-authority') { const result = await nativeAuthority(config, reader, root); outputs = result.products; observation = result.observation; }
   if (phase === 'requests') outputs = prepareRequests(config, reader);
   if (phase === 'native-requests') outputs = nativeRequests(config, reader);
   if (phase.startsWith('rebind-')) outputs = rebindCustody(config, reader, phase === 'rebind-certificate');
@@ -912,6 +1070,6 @@ async function main(args) {
   if (phase === 'package') outputs = packageProjection(config, reader);
   if (phase === 'finalize') outputs = finalizeDelivery(config, reader);
   if (phase === 'evidence') outputs = prepareEvidence(config, reader);
-  console.log(JSON.stringify(publish(root, destination, outputs, {phase, config_sha256: digest(raw)}, flags.includes('--resume'), reader.budget)));
+  console.log(JSON.stringify({...publish(root, destination, outputs, binding, flags.includes('--resume'), reader.budget), ...(observation ? {observation} : {})}));
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main(process.argv.slice(2)).catch(error => { console.error(error.message); process.exitCode = 1; });
